@@ -5,9 +5,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const SidebarDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -55,7 +54,7 @@ export class SidebarDemo extends Component {
                         <h3>Top Sidebar</h3>
                     </Sidebar>
 
-                    <Sidebar visible={this.state.visibleBottom} position="bottom" onHide={() => this.setState({ visibleBottom: false })}>
+                    <Sidebar visible={this.state.visibleBottom} position="bottom" onHide={() => this.setState({ visibleBottom: false })} modal={false} dismissable>
                         <h3>Bottom Sidebar</h3>
                     </Sidebar>
 
@@ -80,7 +79,7 @@ export class SidebarDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState } from 'react';
@@ -121,7 +120,7 @@ const SidebarDemo = () => {
                     <h3>Top Sidebar</h3>
                 </Sidebar>
 
-                <Sidebar visible={visibleBottom} position="bottom" onHide={() => setVisibleBottom(false)}>
+                <Sidebar visible={visibleBottom} position="bottom" onHide={() => setVisibleBottom(false)} modal={false} dismissable>
                     <h3>Bottom Sidebar</h3>
                 </Sidebar>
 
@@ -145,7 +144,7 @@ const SidebarDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState } from 'react';
@@ -186,7 +185,7 @@ const SidebarDemo = () => {
                     <h3>Top Sidebar</h3>
                 </Sidebar>
 
-                <Sidebar visible={visibleBottom} position="bottom" onHide={() => setVisibleBottom(false)}>
+                <Sidebar visible={visibleBottom} position="bottom" onHide={() => setVisibleBottom(false)} modal={false} dismissable>
                     <h3>Bottom Sidebar</h3>
                 </Sidebar>
 
@@ -210,7 +209,7 @@ const SidebarDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -254,7 +253,7 @@ const SidebarDemo = () => {
                     <h3>Top Sidebar</h3>
                 </Sidebar>
 
-                <Sidebar visible={visibleBottom} position="bottom" onHide={() => setVisibleBottom(false)}>
+                <Sidebar visible={visibleBottom} position="bottom" onHide={() => setVisibleBottom(false)} modal={false} dismissable>
                     <h3>Bottom Sidebar</h3>
                 </Sidebar>
 
@@ -278,77 +277,83 @@ const SidebarDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { Sidebar } from 'primereact/sidebar';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/sidebar/sidebar.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>Sidebar is used as a container and visibility is controlled with <i>visible</i> property.</p>
+                    <p>
+                        Sidebar is used as a container and visibility is controlled with <i>visible</i> property.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Sidebar visible={visible} onHide={() => setVisible(false)}>
     Content
 </Sidebar>
 
 <Button icon="pi pi-arrow-right" onClick={(e) => setVisible(true)}/>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Position</h5>
-                    <p>Sidebar can either be located on the left (default), right, top or bottom of the screen depending on the <i>position</i> property.</p>
+                    <p>
+                        Sidebar can either be located on the left (default), right, top or bottom of the screen depending on the <i>position</i> property.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Sidebar visible={visible} position="right" onHide={() => setVisible(false)}>
     Content
 </Sidebar>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Size</h5>
                     <p>Sidebar size can be changed using a fixed value or using one of the three predefined ones.</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Sidebar visible={visible} position="right" className="p-sidebar-sm" onHide={() => setVisible(false)}></Sidebar>
 <Sidebar visible={visible} position="right" className="p-sidebar-md" onHide={() => setVisible(false)}></Sidebar>
 <Sidebar visible={visible} position="right" className="p-sidebar-lg" onHide={() => setVisible(false)}></Sidebar>
 <Sidebar visible={visible} position="right" style={{width:'30em'}} onHide={() => setVisible(false)}></Sidebar>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Full Screen</h5>
                     <p>Full screen mode allows the sidebar to cover whole screen.</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Sidebar visible={visible} fullScreen onHide={() => setVisible(false)}}>
     Content
 </Sidebar>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Custom toolbar</h5>
-                    <p>Additional content can be provided using the <i>icons</i> property.</p>
+                    <p>
+                        Additional content can be provided using the <i>icons</i> property.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Sidebar visible={visibleCustomToolbar} onHide={() => setVisibleCustomToolbar(false)} icons={() => (
     <React.Fragment>
         <button className="p-sidebar-close p-link">
@@ -364,7 +369,7 @@ import { Sidebar } from 'primereact/sidebar';
     <Button type="button" onClick={(e) => setVisibleCustomToolbar(false)} label="Cancel" className="p-button-secondary"/>
 </Sidebar>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
                     <div className="doc-tablewrapper">
@@ -472,7 +477,9 @@ import { Sidebar } from 'primereact/sidebar';
                                     <td>appendTo</td>
                                     <td>DOM element | string</td>
                                     <td>document.body</td>
-                                    <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
+                                    <td>
+                                        DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>closeOnEscape</td>
@@ -484,7 +491,13 @@ import { Sidebar } from 'primereact/sidebar';
                                     <td>transitionOptions</td>
                                     <td>object</td>
                                     <td>null</td>
-                                    <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                    <td>
+                                        The properties of{' '}
+                                        <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">
+                                            CSSTransition
+                                        </a>{' '}
+                                        can be customized, except for "nodeRef" and "in" properties.
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -576,8 +589,7 @@ import { Sidebar } from 'primereact/sidebar';
                                 </tr>
                                 <tr>
                                     <td>p-sidebar-content</td>
-                                    <td>A content is displayed according to the sidebar position.
-                                        To use this style, a sidebar must be created inside that content using the appendTo property and this content must have position:"relative" style.</td>
+                                    <td>A content is displayed according to the sidebar position. To use this style, a sidebar must be created inside that content using the appendTo property and this content must have position:"relative" style.</td>
                                 </tr>
                                 <tr>
                                     <td>p-sidebar-mask</td>
@@ -589,81 +601,97 @@ import { Sidebar } from 'primereact/sidebar';
 
                     <h5>Accessibility</h5>
                     <DevelopmentSection>
-                    <h6>Screen Reader</h6>
-                    <p>Sidebar component uses <i>complementary</i> role by default, since any attribute is passed to the root element aria role can be changed depending on your use case and additional attributes like <i>aria-labelledby</i> can be added. 
-                    In addition <i>aria-modal</i> is added since focus is kept within the sidebar when opened.</p>
-                    <p>It is recommended to use a trigger component that can be accessed with keyboard such as a button, if not adding <i>tabIndex</i> would be necessary.</p>
-                    <p>Trigger element also requires <i>aria-expanded</i> and <i>aria-controls</i> to be handled explicitly.</p>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            Sidebar component uses <i>complementary</i> role by default, since any attribute is passed to the root element aria role can be changed depending on your use case and additional attributes like <i>aria-labelledby</i> can
+                            be added. In addition <i>aria-modal</i> is added since focus is kept within the sidebar when opened.
+                        </p>
+                        <p>
+                            It is recommended to use a trigger component that can be accessed with keyboard such as a button, if not adding <i>tabIndex</i> would be necessary.
+                        </p>
+                        <p>
+                            Trigger element also requires <i>aria-expanded</i> and <i>aria-controls</i> to be handled explicitly.
+                        </p>
 
-<CodeHighlight>
-{`
+                        <CodeHighlight>
+                            {`
 <Button icon="pi pi-arrow-right" onClick={(e) => setVisible(true)} aria-controls={visible ? 'sbar' : null} aria-expanded={visible ? true : false}/>
 
 <Sidebar id="sbar" visible={visible} onHide={() => setVisible(false)} role="region">
     Content
 </Sidebar>
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
-                    <h6>Overlay Keyboard Support</h6>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><i>tab</i></td>
-                                    <td>Moves focus to the next the focusable element within the sidebar.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>shift</i> + <i>tab</i></td>
-                                    <td>Moves focus to the previous the focusable element within the sidebar.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>escape</i></td>
-                                    <td>Closes the dialog if <i>closeOnEscape</i> is true.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                        <h6>Overlay Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the next the focusable element within the sidebar.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>shift</i> + <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the previous the focusable element within the sidebar.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>escape</i>
+                                        </td>
+                                        <td>
+                                            Closes the dialog if <i>closeOnEscape</i> is true.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
-                    <h6>Close Button Keyboard Support</h6>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><i>enter</i></td>
-                                    <td>Closes the sidebar.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>space</i></td>
-                                    <td>Closes the sidebar.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                        <h6>Close Button Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>Closes the sidebar.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>Closes the sidebar.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </DevelopmentSection>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'SidebarDemo', sources: sources })
-                }
+                {useLiveEditorTabs({ name: 'SidebarDemo', sources: sources })}
             </TabView>
         </div>
-    )
-})
+    );
+});
 
 export default SidebarDoc;

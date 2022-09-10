@@ -111,7 +111,8 @@ const ListBoxProps = [
         name: 'metaKeySelection',
         type: 'boolean',
         default: 'true',
-        description: 'Defines how multiple items can be selected, when true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.'
+        description:
+            'Defines how multiple items can be selected, when true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.'
     },
     {
         name: 'filter',
@@ -153,7 +154,7 @@ const ListBoxProps = [
         name: 'filterInputProps',
         type: 'object',
         default: 'undefined',
-        description: "Props for the filter input, any prop is passed implicity to the filter input element."
+        description: 'Props for the filter input, any prop is passed implicity to the filter input element.'
     },
     {
         name: 'tabIndex',

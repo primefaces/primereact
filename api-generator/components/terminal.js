@@ -31,8 +31,7 @@ const TerminalProps = [
     }
 ];
 
-const TerminalEvents = [
-];
+const TerminalEvents = [];
 
 const TerminalStyles = [
     {

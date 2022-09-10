@@ -7,20 +7,19 @@ import Head from 'next/head';
 import getConfig from 'next/config';
 
 const OrderListDemo = () => {
-
     const [products, setProducts] = useState([]);
     const productService = new ProductService();
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        productService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
         return (
             <div className="product-item">
                 <div className="image-container">
-                    <img src={`${contextPath}/images/product/${item.image}`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} />
+                    <img src={`${contextPath}/images/product/${item.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={item.name} />
                 </div>
                 <div className="product-list-detail">
                     <h5 className="mb-2">{item.name}</h5>
@@ -33,7 +32,7 @@ const OrderListDemo = () => {
                 </div>
             </div>
         );
-    }
+    };
 
     return (
         <div>
@@ -52,14 +51,13 @@ const OrderListDemo = () => {
 
             <div className="content-section implementation orderlist-demo">
                 <div className="card">
-                    <OrderList value={products} header="List of Products" dragdrop listStyle={{ height: 'auto' }} dataKey="id"
-                        itemTemplate={itemTemplate} onChange={(e) => setProducts(e.value)}></OrderList>
+                    <OrderList value={products} header="List of Products" dragdrop listStyle={{ height: 'auto' }} dataKey="id" itemTemplate={itemTemplate} onChange={(e) => setProducts(e.value)}></OrderList>
                 </div>
             </div>
 
             <OrderListDoc></OrderListDoc>
         </div>
     );
-}
+};
 
 export default OrderListDemo;

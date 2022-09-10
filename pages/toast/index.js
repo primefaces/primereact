@@ -6,7 +6,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const ToastDemo = () => {
-
     const toast = useRef(null);
     const toastTL = useRef(null);
     const toastBL = useRef(null);
@@ -15,39 +14,41 @@ const ToastDemo = () => {
 
     const showSuccess = () => {
         toast.current.show({ severity: 'success', summary: 'Success Message', detail: 'Message Content', life: 3000 });
-    }
+    };
 
     const showInfo = () => {
         toast.current.show({ severity: 'info', summary: 'Info Message', detail: 'Message Content', life: 3000 });
-    }
+    };
 
     const showWarn = () => {
         toast.current.show({ severity: 'warn', summary: 'Warn Message', detail: 'Message Content', life: 3000 });
-    }
+    };
 
     const showError = () => {
         toast.current.show({ severity: 'error', summary: 'Error Message', detail: 'Message Content', life: 3000 });
-    }
+    };
 
     const showTopLeft = () => {
         toastTL.current.show({ severity: 'info', summary: 'Info Message', detail: 'Message Content', life: 3000 });
-    }
+    };
 
     const showBottomLeft = () => {
         toastBL.current.show({ severity: 'warn', summary: 'Warn Message', detail: 'Message Content', life: 3000 });
-    }
+    };
 
     const showBottomRight = () => {
         toastBR.current.show({ severity: 'success', summary: 'Success Message', detail: 'Message Content', life: 3000 });
-    }
+    };
 
     const showSticky = () => {
         toast.current.show({ severity: 'info', summary: 'Sticky Message', detail: 'Message Content', sticky: true });
-    }
+    };
 
     const showConfirm = () => {
         toastBC.current.show({
-            severity: 'warn', sticky: true, content: (
+            severity: 'warn',
+            sticky: true,
+            content: (
                 <div className="flex flex-column" style={{ flex: '1' }}>
                     <div className="text-center">
                         <i className="pi pi-exclamation-triangle" style={{ fontSize: '3rem' }}></i>
@@ -65,7 +66,7 @@ const ToastDemo = () => {
                 </div>
             )
         });
-    }
+    };
 
     const showMultiple = () => {
         toast.current.show([
@@ -73,11 +74,11 @@ const ToastDemo = () => {
             { severity: 'info', summary: 'Message 2', detail: 'Message 2 Content', life: 3000 },
             { severity: 'info', summary: 'Message 3', detail: 'Message 3 Content', life: 3000 }
         ]);
-    }
+    };
 
     const clear = () => {
         toast.current.clear();
-    }
+    };
 
     return (
         <div>
@@ -126,7 +127,7 @@ const ToastDemo = () => {
 
             <ToastDoc />
         </div>
-    )
-}
+    );
+};
 
 export default ToastDemo;

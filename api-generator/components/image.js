@@ -57,7 +57,7 @@ const ImageStyles = [
     { name: 'p-image-mask', description: 'Preview overlay container.' },
     { name: 'p-image-toolbar', description: 'Transformation options container.' },
     { name: 'p-image-action', description: 'An element inside the toolbar.' },
-    { name: 'p-image-preview', description: 'Image element inside the preview overlay.' },
+    { name: 'p-image-preview', description: 'Image element inside the preview overlay.' }
 ];
 
 module.exports = {

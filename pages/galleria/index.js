@@ -6,15 +6,14 @@ import Head from 'next/head';
 import getConfig from 'next/config';
 
 const GalleriaDemo = () => {
-
     const [images, setImages] = useState(null);
 
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const galleriaService = new PhotoService();
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
-    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+        galleriaService.getImages().then((data) => setImages(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const responsiveOptions = [
         {
@@ -32,12 +31,12 @@ const GalleriaDemo = () => {
     ];
 
     const itemTemplate = (item) => {
-        return <img src={`${contextPath}/${item.itemImageSrc}`} alt={item.alt} style={{ width: '100%' }} />
-    }
+        return <img src={`${contextPath}/${item.itemImageSrc}`} alt={item.alt} style={{ width: '100%' }} />;
+    };
 
     const thumbnailTemplate = (item) => {
-        return <img src={`${contextPath}/${item.thumbnailImageSrc}`} alt={item.alt} />
-    }
+        return <img src={`${contextPath}/${item.thumbnailImageSrc}`} alt={item.alt} />;
+    };
 
     return (
         <div>
@@ -54,14 +53,13 @@ const GalleriaDemo = () => {
 
             <div className="content-section implementation">
                 <div className="card">
-                    <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
-                        item={itemTemplate} thumbnail={thumbnailTemplate} />
+                    <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }} item={itemTemplate} thumbnail={thumbnailTemplate} />
                 </div>
             </div>
 
             <GalleriaDoc />
         </div>
     );
-}
+};
 
 export default GalleriaDemo;

@@ -1,14 +1,13 @@
-import React, { memo } from 'react';
 import Link from 'next/link';
-import { TabView, TabPanel } from '../../lib/tabview/TabView';
-import { useLiveEditorTabs } from '../common/liveeditor';
+import React, { memo } from 'react';
+import { TabPanel, TabView } from '../../lib/tabview/TabView';
 import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
+import { useLiveEditorTabs } from '../common/liveeditor';
 
 const ButtonDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -205,7 +204,7 @@ export class ButtonDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState } from 'react';
@@ -394,7 +393,7 @@ const ButtonDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState } from 'react';
@@ -583,7 +582,7 @@ const ButtonDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <link rel="stylesheet" href="./ButtonDemo.css" />
@@ -774,8 +773,8 @@ const ButtonDemo = () => {
     )
 }
                 `
-            }
         }
+    };
 
     const extFiles = {
         'demo/ButtonDemo.css': {
@@ -939,70 +938,75 @@ const ButtonDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { Button } from 'primereact/button';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
                     <p>Button is created using the Button element.</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Button />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Label</h5>
-                    <p>Text of the button is defined using the <i>label</i> property.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Text of the button is defined using the <i>label</i> property.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Button label="Save" />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Icons</h5>
-                    <p>Icon on a button is specified with <i>icon</i> property and position is configured using <i>iconPos</i> attribute. Default
-                    icon position is "left" and alternative is "right". To display only an icon, leave label as undefined.</p>
+                    <p>
+                        Icon on a button is specified with <i>icon</i> property and position is configured using <i>iconPos</i> attribute. Default icon position is "left" and alternative is "right". To display only an icon, leave label as undefined.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Button label="Click" icon="pi pi-check" />
 <Button label="Click" icon="pi pi-check" iconPos="right" />
 <Button icon="pi pi-check" iconPos="right" />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
                     <h5>Loading</h5>
-                    <p>Loading on a button is specified with <i>loading</i> attribute and loading icon can be change with <i>loadingIcon</i> property. To display only a loading, leave label as undefined.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Loading on a button is specified with <i>loading</i> attribute and loading icon can be change with <i>loadingIcon</i> property. To display only a loading, leave label as undefined.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Button loading />
 <Button label="Submit" loading />
 <Button label="Submit" loading loadingIcon="pi pi-spin pi-sun" />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Events</h5>
                     <p>Events are defined with the standard notation.</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Button label="Click" onClick={handleClick} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Severity</h5>
                     <p>Different color options are available as severity levels.</p>
@@ -1015,8 +1019,8 @@ import { Button } from 'primereact/button';
                         <li>.p-button-danger</li>
                     </ul>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Button label="Primary" />
 <Button label="Secondary" className="p-button-secondary" />
 <Button label="Success" className="p-button-success" />
@@ -1024,15 +1028,15 @@ import { Button } from 'primereact/button';
 <Button label="Warning" className="p-button-warning" />
 <Button label="Danger" className="p-button-danger" />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Raised and Rounded Buttons</h5>
                     <p>A button can be raised by having "p-button-raised" style class and similarly borders can be made rounded using "p-button-rounded" class.</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Button label="Proceed" className="p-button-raised p-button-rounded" />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
                     <h5>Properties</h5>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
@@ -1088,6 +1092,18 @@ import { Button } from 'primereact/button';
                                     <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
                                 </tr>
                                 <tr>
+                                    <td>disabled</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>When present, it specifies that the element should be disabled.</td>
+                                </tr>
+                                <tr>
+                                    <td>visible</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>When present, it specifies that the element should be visible.</td>
+                                </tr>
+                                <tr>
                                     <td>loading</td>
                                     <td>boolean</td>
                                     <td>false</td>
@@ -1104,7 +1120,9 @@ import { Button } from 'primereact/button';
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
+                    </p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -1131,12 +1149,14 @@ import { Button } from 'primereact/button';
                     </div>
 
                     <h5>Accessibility</h5>
-                <DevelopmentSection>
-                    <h6>Screen Reader</h6>
-                    <p>Button component renders a native button element that implicitly includes any passed prop. Text to describe the button is defined with the <i>aria-label</i> prop, if not present <i>label</i> prop is used as the value. If the button
-                    is icon only or custom templating is used, it is recommended to use <i>aria-label</i> so that screen readers would be able to read the element properly.</p>
-<CodeHighlight>
-{`
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            Button component renders a native button element that implicitly includes any passed prop. Text to describe the button is defined with the <i>aria-label</i> prop, if not present <i>label</i> prop is used as the value. If
+                            the button is icon only or custom templating is used, it is recommended to use <i>aria-label</i> so that screen readers would be able to read the element properly.
+                        </p>
+                        <CodeHighlight>
+                            {`
 <Button icon="pi pi-check" aria-label="Submit" />
 
 <Button icon="pi pi-check" label="Submit" />
@@ -1146,43 +1166,47 @@ import { Button } from 'primereact/button';
     <span className="px-3">Youtube</span>
 </Button>
 `}
-</CodeHighlight>
-                    <h6>Keyboard Support</h6>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><i>tab</i></td>
-                                    <td>Moves focus to the button.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>enter</i></td>
-                                    <td>Activates the button.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>space</i></td>
-                                    <td>Activates the button.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </DevelopmentSection>
+                        </CodeHighlight>
+                        <h6>Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the button.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>Activates the button.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>Activates the button.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'ButtonDemo', sources: sources, extFiles: extFiles })
-                }
+                {useLiveEditorTabs({ name: 'ButtonDemo', sources: sources, extFiles: extFiles })}
             </TabView>
         </div>
-    )
-})
+    );
+});
 
 export default ButtonDoc;

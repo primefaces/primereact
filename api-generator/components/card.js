@@ -43,9 +43,7 @@ const CardProps = [
     }
 ];
 
-const CardEvents = [
-
-];
+const CardEvents = [];
 
 const CardStyles = [
     { name: 'p-card', description: 'Container element.' },

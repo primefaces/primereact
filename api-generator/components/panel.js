@@ -102,7 +102,7 @@ const PanelStyles = [
     { name: 'p-panel-title', description: 'Title text of panel.' },
     { name: 'p-panel-titlebar-toggler', description: 'Toggle icon.' },
     { name: 'p-panel-content', description: 'Content of panel.' }
-  ];
+];
 
 module.exports = {
     panel: {

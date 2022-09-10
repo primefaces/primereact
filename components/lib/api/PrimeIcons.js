@@ -91,7 +91,7 @@ export const PrimeIcons = Object.freeze({
     ENVELOPE: 'pi pi-envelope',
     EURO: 'pi pi-euro',
     EXCLAMATION_CIRCLE: 'pi pi-exclamation-circle',
-    EXCLAMATION_TRIANGLE : 'pi pi-exclamation-triangle',
+    EXCLAMATION_TRIANGLE: 'pi pi-exclamation-triangle',
     EXTERNAL_LINK: 'pi pi-external-link',
     EYE: 'pi pi-eye',
     EYE_SLASH: 'pi pi-eye-slash',

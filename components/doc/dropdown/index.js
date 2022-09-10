@@ -6,9 +6,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const DropdownDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -218,7 +217,7 @@ export class DropdownDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect, useRef } from 'react';
@@ -411,7 +410,7 @@ const DropdownDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect, useRef } from 'react';
@@ -604,7 +603,7 @@ const DropdownDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <link rel="stylesheet" href="./DropdownDemo.css" />
@@ -801,7 +800,7 @@ const DropdownDemo = () => {
 }
                 `
         }
-    }
+    };
 
     const extFiles = {
         'demo/DropdownDemo.css': {
@@ -815,35 +814,38 @@ const DropdownDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { Dropdown } from 'primereact/dropdown';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>SelectButton is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives
-                    of how to define the options property; One way is providing a collection of <i>SelectItem</i> instances having label-value pairs
-                    whereas other way is providing an array of arbitrary objects along with the <i>optionLabel</i> and <i>optionValue</i> properties to specify the label/value field pair. In addition,
-                    options can be simple primitive values such as a string array, in this case no optionLabel or optionValue is necessary.</p>
+                    <p>
+                        SelectButton is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives of how to define the options property; One way is providing a
+                        collection of <i>SelectItem</i> instances having label-value pairs whereas other way is providing an array of arbitrary objects along with the <i>optionLabel</i> and <i>optionValue</i> properties to specify the label/value
+                        field pair. In addition, options can be simple primitive values such as a string array, in this case no optionLabel or optionValue is necessary.
+                    </p>
 
-                    <p><b>Options as SelectItems</b></p>
-<CodeHighlight lang="js">
-{`
+                    <p>
+                        <b>Options as SelectItems</b>
+                    </p>
+                    <CodeHighlight lang="js">
+                        {`
 const citySelectItems = [
     {label: 'New York', value: 'NY'},
     {label: 'Rome', value: 'RM'},
@@ -852,17 +854,19 @@ const citySelectItems = [
     {label: 'Paris', value: 'PRS'}
 ];
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Dropdown value={city} options={citySelectItems} onChange={(e) => setCity(e.value)} placeholder="Select a City"/>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-                    <p><b>Options as any type</b></p>
-<CodeHighlight lang="js">
-{`
+                    <p>
+                        <b>Options as any type</b>
+                    </p>
+                    <CodeHighlight lang="js">
+                        {`
 const cities = [
     {name: 'New York', code: 'NY'},
     {name: 'Rome', code: 'RM'},
@@ -871,42 +875,48 @@ const cities = [
     {name: 'Paris', code: 'PRS'}
 ];
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Dropdown optionLabel="name" value={city} options={cities} onChange={(e) => setCity(e.value)} placeholder="Select a City"/>
 <Dropdown optionLabel="name" optionValue="code" value={city} options={cities} onChange={(e) => setCity(e.value)} placeholder="Select a City"/>
 `}
-</CodeHighlight>
-                    <p>When <i>optionValue</i> is not defined, value of an option refers to the option object itself.</p>
+                    </CodeHighlight>
+                    <p>
+                        When <i>optionValue</i> is not defined, value of an option refers to the option object itself.
+                    </p>
 
                     <h5>Placeholder</h5>
                     <p>Common pattern is providing an empty option as the placeholder when using native selects, however Dropdown has built-in support using the placeholder option so it is suggested to use it instead of creating an empty option.</p>
 
                     <h5>Filtering</h5>
-                    <p>Options can be filtered using an input field in the overlay by enabling the <i>filter</i> property. By default filtering is done against
-                        label of the items and <i>filterBy</i> property is available to choose one or more properties of the options. In addition <i>filterMatchMode</i> can be utilized
-                        to define the filtering algorithm, valid options are "contains" (default), "startsWith", "endsWith", "equals" and "notEquals".</p>
+                    <p>
+                        Options can be filtered using an input field in the overlay by enabling the <i>filter</i> property. By default filtering is done against label of the items and <i>filterBy</i> property is available to choose one or more
+                        properties of the options. In addition <i>filterMatchMode</i> can be utilized to define the filtering algorithm, valid options are "contains" (default), "startsWith", "endsWith", "equals" and "notEquals".
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Dropdown value={selectedCountry} options={countries} onChange={(e) => setSelectedCountry(e.value)} optionLabel="name" filter showClear filterBy="name"
     placeholder="Select a Country" itemTemplate={countryOptionTemplate} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Custom Content</h5>
-                    <p>Label of an option is used as the display text of an item by default, for custom content support define an <i>itemTemplate</i> function that gets the option instance as a parameter and returns the content. For custom filter support define a <i>filterTemplate</i> function that gets the option instance as a parameter and returns the content for the filter element.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Label of an option is used as the display text of an item by default, for custom content support define an <i>itemTemplate</i> function that gets the option instance as a parameter and returns the content. For custom filter
+                        support define a <i>filterTemplate</i> function that gets the option instance as a parameter and returns the content for the filter element.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Dropdown value={selectedCountry} options={countries} onChange={(e) => setSelectedCountry(e.value)} optionLabel="name" placeholder="Select a Country"
     valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} filter filterTemplate={filterTemplate}/>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 const [filterValue, setFilterValue] = useState('');
 const filterInputRef = useRef();
 
@@ -959,12 +969,14 @@ const myFilterFunction = (event, options) => {
     options.filter(event);
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Grouping</h5>
-                    <p>Options groups are specified with the <i>optionGroupLabel</i> and <i>optionGroupChildren</i> properties.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Options groups are specified with the <i>optionGroupLabel</i> and <i>optionGroupChildren</i> properties.
+                    </p>
+                    <CodeHighlight>
+                        {`
 const groupedCities = [
     {
         label: 'Germany', code: 'DE',
@@ -995,13 +1007,13 @@ const groupedCities = [
     }
 ];
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Dropdown value={selectedGroupedCity} options={groupedCities} onChange={e => setSelectedGroupedCity(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
                     <h5>SelectItem API</h5>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
@@ -1233,7 +1245,9 @@ const groupedCities = [
                                     <td>appendTo</td>
                                     <td>DOM element | string</td>
                                     <td>document.body</td>
-                                    <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
+                                    <td>
+                                        DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>tabIndex</td>
@@ -1323,7 +1337,13 @@ const groupedCities = [
                                     <td>transitionOptions</td>
                                     <td>object</td>
                                     <td>null</td>
-                                    <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                    <td>
+                                        The properties of{' '}
+                                        <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">
+                                            CSSTransition
+                                        </a>{' '}
+                                        can be customized, except for "nodeRef" and "in" properties.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>dropdownIcon</td>
@@ -1341,7 +1361,9 @@ const groupedCities = [
                                     <td>virtualScrollerOptions</td>
                                     <td>object</td>
                                     <td>null</td>
-                                    <td>Whether to use the virtualScroller feature. The properties of <Link href="/virtualscroller">VirtualScroller</Link> component can be used like an object in it.</td>
+                                    <td>
+                                        Whether to use the virtualScroller feature. The properties of <Link href="/virtualscroller">VirtualScroller</Link> component can be used like an object in it.
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1360,8 +1382,10 @@ const groupedCities = [
                             <tbody>
                                 <tr>
                                     <td>onChange</td>
-                                    <td>event.originalEvent: Original event <br />
-                                        event.value: Value of the checkbox </td>
+                                    <td>
+                                        event.originalEvent: Original event <br />
+                                        event.value: Value of the checkbox{' '}
+                                    </td>
                                     <td>Callback to invoke on value change</td>
                                 </tr>
                                 <tr>
@@ -1386,8 +1410,10 @@ const groupedCities = [
                                 </tr>
                                 <tr>
                                     <td>onFilter</td>
-                                    <td>event.originalEvent: Original event <br />
-                                        event.filter: Value of the filter input</td>
+                                    <td>
+                                        event.originalEvent: Original event <br />
+                                        event.filter: Value of the filter input
+                                    </td>
                                     <td>Callback to invoke when the value is filtered.</td>
                                 </tr>
                             </tbody>
@@ -1430,7 +1456,9 @@ const groupedCities = [
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
+                    </p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -1485,147 +1513,187 @@ const groupedCities = [
                     </div>
 
                     <h5>Accessibility</h5>
-                <DevelopmentSection>
-                    <h6>Screen Reader</h6>
-                    <p>Value to describe the component can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. The dropdown element has a <i>combobox</i> role
-                    in addition to <i>aria-haspopup</i> and <i>aria-expanded</i> attributes. If the editable option is enabled <i>aria-autocomplete</i> is also added.
-                    The relation between the combobox and the popup is created with <i>aria-controls</i> and <i>aria-activedescendant</i> attribute is used
-                    to instruct screen reader which option to read during keyboard navigation within the popup list.</p>
-                    <p>The popup list has an id that refers to the <i>aria-controls</i> attribute of the <i>combobox</i> element and uses <i>listbox</i> as the role. Each list item has an <i>option</i> role, an id to match the <i>aria-activedescendant</i> of the input element along with <i>aria-label</i>, <i>aria-selected</i> and <i>aria-disabled</i> attributes.</p>
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            Value to describe the component can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. The dropdown element has a <i>combobox</i> role in addition to <i>aria-haspopup</i> and <i>aria-expanded</i>{' '}
+                            attributes. If the editable option is enabled <i>aria-autocomplete</i> is also added. The relation between the combobox and the popup is created with <i>aria-controls</i> and <i>aria-activedescendant</i> attribute is used
+                            to instruct screen reader which option to read during keyboard navigation within the popup list.
+                        </p>
+                        <p>
+                            The popup list has an id that refers to the <i>aria-controls</i> attribute of the <i>combobox</i> element and uses <i>listbox</i> as the role. Each list item has an <i>option</i> role, an id to match the{' '}
+                            <i>aria-activedescendant</i> of the input element along with <i>aria-label</i>, <i>aria-selected</i> and <i>aria-disabled</i> attributes.
+                        </p>
 
-                    <p>If filtering is enabled, <i>filterInputProps</i> can be defined to give <i>aria-*</i> props to the filter input element.</p>
-<CodeHighlight>
-{`
+                        <p>
+                            If filtering is enabled, <i>filterInputProps</i> can be defined to give <i>aria-*</i> props to the filter input element.
+                        </p>
+                        <CodeHighlight>
+                            {`
 <span id="dd1">Options</span>
 <Dropdown aria-labelledby="dd1" />
 
 <Dropdown aria-label="Options" />
 `}
-</CodeHighlight>
-                    <h6>Closed State Keyboard Support</h6>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><i>tab</i></td>
-                                    <td>Moves focus to the dropdown element.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>space</i></td>
-                                    <td>Opens the popup and moves visual focus to the selected option, if there is none then first option receives the focus.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>down arrow</i></td>
-                                    <td>Opens the popup and moves visual focus to the selected option, if there is none then first option receives the focus.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>up arrow</i></td>
-                                    <td>Opens the popup and moves visual focus to the selected option, if there is none then last option receives the focus.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                        </CodeHighlight>
+                        <h6>Closed State Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the dropdown element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>Opens the popup and moves visual focus to the selected option, if there is none then first option receives the focus.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>down arrow</i>
+                                        </td>
+                                        <td>Opens the popup and moves visual focus to the selected option, if there is none then first option receives the focus.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>up arrow</i>
+                                        </td>
+                                        <td>Opens the popup and moves visual focus to the selected option, if there is none then last option receives the focus.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
-                    <h6>Popup Keyboard Support</h6>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td><i>tab</i></td>
-                                    <td>Moves focus to the next focusable element in the popup, if there is none then first focusable element receives the focus.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>shift</i> + <i>tab</i></td>
-                                    <td>Moves focus to the previous focusable element in the popup, if there is none then last focusable element receives the focus.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>enter</i></td>
-                                    <td>Selects the focused option and closes the popup.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>space</i></td>
-                                    <td>Selects the focused option and closes the popup.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>escape</i></td>
-                                    <td>Closes the popup, moves focus to the dropdown element.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>down arrow</i></td>
-                                    <td>Moves focus to the next option, if there is none then visual focus does not change.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>up arrow</i></td>
-                                    <td>Moves focus to the previous option, if there is none then visual focus does not change.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>right arrow</i></td>
-                                    <td>If the dropdown is editable, removes the visual focus from the current option and moves input cursor to one character left.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>left arrow</i></td>
-                                    <td>If the dropdown is editable, removes the visual focus from the current option and moves input cursor to one character right.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>home</i></td>
-                                    <td>If the dropdown is editable, moves input cursor at the end, if not then moves focus to the first option.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>end</i></td>
-                                    <td>If the dropdown is editable, moves input cursor at the beginning, if not then moves focus to the last option.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>any printable character</i></td>
-                                    <td>Moves focus to the option whose label starts with the characters being typed if dropdown is not editable.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                        <h6>Popup Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the next focusable element in the popup, if there is none then first focusable element receives the focus.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>shift</i> + <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the previous focusable element in the popup, if there is none then last focusable element receives the focus.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>Selects the focused option and closes the popup.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>Selects the focused option and closes the popup.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>escape</i>
+                                        </td>
+                                        <td>Closes the popup, moves focus to the dropdown element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>down arrow</i>
+                                        </td>
+                                        <td>Moves focus to the next option, if there is none then visual focus does not change.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>up arrow</i>
+                                        </td>
+                                        <td>Moves focus to the previous option, if there is none then visual focus does not change.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>right arrow</i>
+                                        </td>
+                                        <td>If the dropdown is editable, removes the visual focus from the current option and moves input cursor to one character left.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>left arrow</i>
+                                        </td>
+                                        <td>If the dropdown is editable, removes the visual focus from the current option and moves input cursor to one character right.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>home</i>
+                                        </td>
+                                        <td>If the dropdown is editable, moves input cursor at the end, if not then moves focus to the first option.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>end</i>
+                                        </td>
+                                        <td>If the dropdown is editable, moves input cursor at the beginning, if not then moves focus to the last option.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>any printable character</i>
+                                        </td>
+                                        <td>Moves focus to the option whose label starts with the characters being typed if dropdown is not editable.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
-                    <h6>Filter Input Keyboard Support</h6>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><i>enter</i></td>
-                                    <td>Closes the popup and moves focus to the dropdown element.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>escape</i></td>
-                                    <td>Closes the popup and moves focus to the dropdown element.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </DevelopmentSection>
+                        <h6>Filter Input Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>Closes the popup and moves focus to the dropdown element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>escape</i>
+                                        </td>
+                                        <td>Closes the popup and moves focus to the dropdown element.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'DropdownDemo', sources: sources, extFiles: extFiles })
-                }
+                {useLiveEditorTabs({ name: 'DropdownDemo', sources: sources, extFiles: extFiles })}
             </TabView>
         </div>
-    )
-})
+    );
+});
 
 export default DropdownDoc;

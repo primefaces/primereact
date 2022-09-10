@@ -7,10 +7,10 @@ import Head from 'next/head';
 import getConfig from 'next/config';
 
 const MegaMenuDemo = () => {
-
     const items = [
         {
-            label: 'Videos', icon: 'pi pi-fw pi-video',
+            label: 'Videos',
+            icon: 'pi pi-fw pi-video',
             items: [
                 [
                     {
@@ -35,7 +35,8 @@ const MegaMenuDemo = () => {
             ]
         },
         {
-            label: 'Users', icon: 'pi pi-fw pi-users',
+            label: 'Users',
+            icon: 'pi pi-fw pi-users',
             items: [
                 [
                     {
@@ -45,7 +46,7 @@ const MegaMenuDemo = () => {
                     {
                         label: 'User 2',
                         items: [{ label: 'User 2.1' }, { label: 'User 2.2' }]
-                    },
+                    }
                 ],
                 [
                     {
@@ -70,7 +71,8 @@ const MegaMenuDemo = () => {
             ]
         },
         {
-            label: 'Events', icon: 'pi pi-fw pi-calendar',
+            label: 'Events',
+            icon: 'pi pi-fw pi-calendar',
             items: [
                 [
                     {
@@ -95,7 +97,8 @@ const MegaMenuDemo = () => {
             ]
         },
         {
-            label: 'Settings', icon: 'pi pi-fw pi-cog',
+            label: 'Settings',
+            icon: 'pi pi-fw pi-cog',
             items: [
                 [
                     {
@@ -122,8 +125,8 @@ const MegaMenuDemo = () => {
     ];
 
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
-    const start = <img alt="logo" src={`${contextPath}/images/logo.png`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40"></img>;
-    const end = <InputText placeholder="Search" type="text" style={{width: '12rem'}} />;
+    const start = <img alt="logo" src={`${contextPath}/images/logo.png`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} height="40"></img>;
+    const end = <InputText placeholder="Search" type="text" style={{ width: '12rem' }} />;
 
     return (
         <div>
@@ -155,6 +158,6 @@ const MegaMenuDemo = () => {
             <MegaMenuDoc />
         </div>
     );
-}
+};
 
 export default MegaMenuDemo;

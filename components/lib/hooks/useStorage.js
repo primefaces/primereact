@@ -11,7 +11,6 @@ import { useEventListener } from './useEventListener';
  * @returns a stateful value, and a function to update it.
  */
 export const useStorage = (initialValue, key, storage = 'local') => {
-
     // Since the local storage API isn't available in server-rendering environments,
     // we check that typeof window !== 'undefined' to make SSR and SSG work properly.
     const storageAvailable = typeof window !== 'undefined';
@@ -19,7 +18,9 @@ export const useStorage = (initialValue, key, storage = 'local') => {
     // subscribe to window storage event so changes in one tab to a stored value
     // are properly reflected in all tabs
     const [bindWindowStorageListener, unbindWindowStorageListener] = useEventListener({
-        target: 'window', type: 'storage', listener: event => {
+        target: 'window',
+        type: 'storage',
+        listener: (event) => {
             const area = storage === 'local' ? window.localStorage : window.sessionStorage;
             if (event.storageArea === area && event.key === key) {
                 setStoredValue(event.newValue || undefined);
@@ -32,9 +33,7 @@ export const useStorage = (initialValue, key, storage = 'local') => {
             return initialValue;
         }
         try {
-            const item = storage === 'local' ?
-                window.localStorage.getItem(key) :
-                window.sessionStorage.getItem(key);
+            const item = storage === 'local' ? window.localStorage.getItem(key) : window.sessionStorage.getItem(key);
             return item ? JSON.parse(item) : initialValue;
         } catch (error) {
             // If error also return initialValue
@@ -49,9 +48,7 @@ export const useStorage = (initialValue, key, storage = 'local') => {
             setStoredValue(valueToStore);
             if (storageAvailable) {
                 const serializedValue = JSON.stringify(valueToStore);
-                storage === 'local' ?
-                   window.localStorage.setItem(key, serializedValue) :
-                   window.sessionStorage.setItem(key, serializedValue);
+                storage === 'local' ? window.localStorage.setItem(key, serializedValue) : window.sessionStorage.setItem(key, serializedValue);
             }
         } catch (error) {
             throw new Error(`PrimeReact useStorage: Failed to serialize the value at key: ${key}`);
@@ -64,7 +61,7 @@ export const useStorage = (initialValue, key, storage = 'local') => {
     }, []);
 
     return [storedValue, setValue];
-}
+};
 
 /**
  * Hook to wrap around useState that stores the value in the browser local storage.
@@ -75,7 +72,7 @@ export const useStorage = (initialValue, key, storage = 'local') => {
  */
 export const useLocalStorage = (initialValue, key) => {
     return useStorage(initialValue, key, 'local');
-}
+};
 
 /**
  * Hook to wrap around useState that stores the value in the browser session storage.
@@ -86,5 +83,5 @@ export const useLocalStorage = (initialValue, key) => {
  */
 export const useSessionStorage = (initialValue, key) => {
     return useStorage(initialValue, key, 'session');
-}
+};
 /* eslint-enable */

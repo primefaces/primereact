@@ -1,18 +1,17 @@
-import React from "react";
+import React from 'react';
 import { Skeleton } from '../../components/lib/skeleton/Skeleton';
 import { DataTable } from '../../components/lib/datatable/DataTable';
 import { Column } from '../../components/lib/column/Column';
 import SkeletonDoc from '../../components/doc/skeleton';
-import { DocActions } from "../../components/doc/common/docactions";
+import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const SkeletonDemo = () => {
-
     const products = Array.from({ length: 5 });
 
     const bodyTemplate = () => {
-        return <Skeleton></Skeleton>
-    }
+        return <Skeleton></Skeleton>;
+    };
 
     return (
         <div>
@@ -143,11 +142,10 @@ const SkeletonDemo = () => {
                         <Column field="quantity" header="Quantity" style={{ width: '25%' }} body={bodyTemplate}></Column>
                     </DataTable>
                 </div>
-
             </div>
             <SkeletonDoc />
         </div>
     );
-}
+};
 
 export default SkeletonDemo;

@@ -1,14 +1,8 @@
-const ColumnGroupProps = [
+const ColumnGroupProps = [];
 
-];
+const ColumnGroupEvents = [];
 
-const ColumnGroupEvents = [
-
-];
-
-const ColumnGroupStyles = [
-
-];
+const ColumnGroupStyles = [];
 
 module.exports = {
     columngroup: {

@@ -84,6 +84,12 @@ const TreeSelectProps = [
         description: 'Defines the selection mode, valid values "single", "multiple", and "checkbox".'
     },
     {
+        name: 'expandedKeys',
+        type: 'array',
+        default: 'null',
+        description: 'An array of keys to represent the state of the tree expansion state in controlled mode.'
+    },
+    {
         name: 'panelClassName',
         type: 'string',
         default: 'null',
@@ -117,7 +123,8 @@ const TreeSelectProps = [
         name: 'metaKeySelection',
         type: 'boolean',
         default: 'true',
-        description: 'Defines how multiple items can be selected, when true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.'
+        description:
+            'Defines how multiple items can be selected, when true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.'
     },
     {
         name: 'valueTemplate',
@@ -229,6 +236,22 @@ const TreeSelectEvents = [
                 name: 'event.value',
                 type: 'any',
                 description: 'Selected node key(s).'
+            }
+        ]
+    },
+    {
+        name: 'onToggle',
+        description: 'Callback to invoke when a node is toggled.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.node',
+                type: 'any',
+                description: 'Toggled node instance.'
             }
         ]
     },

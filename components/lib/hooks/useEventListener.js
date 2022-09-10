@@ -16,23 +16,22 @@ export const useEventListener = ({ target = 'document', type, listener, options,
         }
 
         if (!listenerRef.current && targetRef.current) {
-            listenerRef.current = event => listener && listener(event);
+            listenerRef.current = (event) => listener && listener(event);
             targetRef.current.addEventListener(type, listenerRef.current, options);
         }
-    }
+    };
 
     const unbind = () => {
         if (listenerRef.current) {
             targetRef.current.removeEventListener(type, listenerRef.current, options);
             listenerRef.current = null;
         }
-    }
+    };
 
     React.useEffect(() => {
         if (when) {
             targetRef.current = DomHandler.getTargetElement(target);
-        }
-        else {
+        } else {
             unbind();
             targetRef.current = null;
         }
@@ -50,5 +49,5 @@ export const useEventListener = ({ target = 'document', type, listener, options,
     });
 
     return [bind, unbind];
-}
+};
 /* eslint-enable */

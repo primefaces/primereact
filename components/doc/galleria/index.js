@@ -6,9 +6,8 @@ import { useLiveEditorTabs } from '../common/liveeditor';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const GalleriaDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -52,10 +51,10 @@ export class GalleriaDemo extends Component {
         );
     }
             `
-    },
-    'hooks': {
-        tabName: 'Hooks Source',
-        content: `
+        },
+        hooks: {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import { PhotoService } from '../service/PhotoService';
 import { Galleria } from 'primereact/galleria';
@@ -102,10 +101,10 @@ const GalleriaDemo = () => {
     );
 }
             `
-    },
-    'ts': {
-        tabName: 'TS Source',
-        content: `
+        },
+        ts: {
+            tabName: 'TS Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import { PhotoService } from '../service/PhotoService';
 import { Galleria } from 'primereact/galleria';
@@ -152,14 +151,14 @@ const GalleriaDemo = () => {
     );
 }
             `
-    },
-    'browser': {
-        tabName: 'Browser Source',
-        imports: `
+        },
+        browser: {
+            tabName: 'Browser Source',
+            imports: `
         <script src="./PhotoService.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/galleria/galleria.min.js"></script>`,
-        content: `
+            content: `
 const { useEffect, useState, useRef } = React;
 const { Galleria } = primereact.galleria;
 
@@ -206,38 +205,38 @@ const GalleriaDemo = () => {
     );
 }
             `
-    }
-}
+        }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { Galleria } from 'primereact/galleria';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/galleria/galleria.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
                     <p>Galleria requires a value as an array of objects and can either be used as a Controlled or Uncontrolled component.</p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Galleria value={images} item={itemTemplate} thumbnail={thumbnailTemplate}></Galleria>
 `}
-</CodeHighlight>
-<CodeHighlight lang="js">
-{`
+                    </CodeHighlight>
+                    <CodeHighlight lang="js">
+                        {`
 const itemTemplate = (item) => {
     // custom item content
 }
@@ -246,29 +245,32 @@ const thumbnailTemplate = (item) => {
     // custom thumbnail content
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Items per page</h5>
-                    <p>Number of items per page is defined using the <i>numVisible</i> property.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Number of items per page is defined using the <i>numVisible</i> property.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Galleria value={images} item={itemTemplate} thumbnail={thumbnailTemplate}
     numVisible={5}></Galleria>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Responsive</h5>
-                    <p>For responsive design, <i>numVisible</i> can be defined using the <i>responsiveOptions</i> property that should be an array of
-                    objects whose breakpoint defines the max-width to apply the settings.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        For responsive design, <i>numVisible</i> can be defined using the <i>responsiveOptions</i> property that should be an array of objects whose breakpoint defines the max-width to apply the settings.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Galleria value={images} item={itemTemplate} thumbnail={thumbnailTemplate}
     numVisible={5} responsiveOptions={responsiveOptions}></Galleria>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 const responsiveOptions = [
     {
         breakpoint: '1024px',
@@ -284,37 +286,43 @@ const responsiveOptions = [
     }
 ];
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Header and Footer</h5>
-                    <p>Custom content projection is available using the <i>header</i> and <i>footer</i> properties.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Custom content projection is available using the <i>header</i> and <i>footer</i> properties.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Galleria value={images} item={itemTemplate} thumbnail={thumbnailTemplate}
     header={<h1>Header</h1>}></Galleria>
 
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Controlled vs Uncontrolled</h5>
-                    <p>In controlled mode, <i>activeIndex</i> and <i>onItemChange</i> properties need to be defined to control the first visible item.</p>
+                    <p>
+                        In controlled mode, <i>activeIndex</i> and <i>onItemChange</i> properties need to be defined to control the first visible item.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Galleria value={images} item={itemTemplate} thumbnail={thumbnailTemplate}
     activeIndex={activeIndex} onItemChange={(e) => setActiveIndex(e.index)}></Galleria>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Uncontrolled</h5>
-                    <p>In uncontrolled mode, no additional properties are required. Initial item can be provided using the <i>activeItemIndex</i> property in uncontrolled mode however it is evaluated at initial rendering and ignored in further updates. If you programmatically
-                        need to update the first visible item index, prefer to use the component as controlled.</p>
+                    <p>
+                        In uncontrolled mode, no additional properties are required. Initial item can be provided using the <i>activeItemIndex</i> property in uncontrolled mode however it is evaluated at initial rendering and ignored in further
+                        updates. If you programmatically need to update the first visible item index, prefer to use the component as controlled.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Galleria value={images} item={itemTemplate} thumbnail={thumbnailTemplate}></Galleria>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
                     <div className="doc-tablewrapper">
@@ -500,7 +508,13 @@ const responsiveOptions = [
                                     <td>transitionOptions</td>
                                     <td>object</td>
                                     <td>null</td>
-                                    <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                    <td>
+                                        The properties of{' '}
+                                        <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">
+                                            CSSTransition
+                                        </a>{' '}
+                                        can be customized, except for "nodeRef" and "in" properties.
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -510,11 +524,11 @@ const responsiveOptions = [
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Parameters</th>
-                                <th>Description</th>
-                            </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <tr>
@@ -541,10 +555,10 @@ const responsiveOptions = [
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Element</th>
-                            </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <tr>
@@ -590,19 +604,29 @@ const responsiveOptions = [
                     <h5>Accessibility</h5>
                     <DevelopmentSection>
                         <h6>Screen Reader</h6>
-                        <p>Galleria uses <i>region</i> role and since any attribute is passed to the main container element, attributes such as <i>aria-label</i> and <i>aria-roledescription</i> can be used as well. The slides container has <i>aria-live</i> attribute 
-                        set as "polite" if galleria is not in autoplay mode, otherwise "off" would be the value in autoplay.</p>
+                        <p>
+                            Galleria uses <i>region</i> role and since any attribute is passed to the main container element, attributes such as <i>aria-label</i> and <i>aria-roledescription</i> can be used as well. The slides container has{' '}
+                            <i>aria-live</i> attribute set as "polite" if galleria is not in autoplay mode, otherwise "off" would be the value in autoplay.
+                        </p>
 
-                        <p>A slide has a <i>group</i> role with an aria-label that refers to the <i>aria.slideNumber</i> property of the <Link href="/locale">locale</Link> API. Similarly <i>aria.slide</i> is used as the <i>aria-roledescription</i> of the item.
-                        Inactive slides are hidden from the readers with <i>aria-hidden</i>.</p>
+                        <p>
+                            A slide has a <i>group</i> role with an aria-label that refers to the <i>aria.slideNumber</i> property of the <Link href="/locale">locale</Link> API. Similarly <i>aria.slide</i> is used as the <i>aria-roledescription</i>{' '}
+                            of the item. Inactive slides are hidden from the readers with <i>aria-hidden</i>.
+                        </p>
 
-                        <p>Next and Previous navigators are button elements with <i>aria-label</i> attributes referring to the <i>aria.nextPageLabel</i> and <i>aria.firstPageLabel</i> properties of the <Link href="/locale">locale</Link> API by default respectively, 
-                        you may still use your own aria roles and attributes as any valid attribute is passed to the button elements implicitly by using <i>nextButtonProps</i> and <i>prevButtonProps</i>.</p>
+                        <p>
+                            Next and Previous navigators are button elements with <i>aria-label</i> attributes referring to the <i>aria.nextPageLabel</i> and <i>aria.firstPageLabel</i> properties of the <Link href="/locale">locale</Link> API by
+                            default respectively, you may still use your own aria roles and attributes as any valid attribute is passed to the button elements implicitly by using <i>nextButtonProps</i> and <i>prevButtonProps</i>.
+                        </p>
 
-                        <p>Quick navigation elements and thumnbails follow the tab pattern. They are placed inside an element with a <i>tablist</i> role whereas each item has a <i>tab</i> role with <i>aria-selected</i> and <i>aria-controls</i> attributes.
-                        The <i>aria-label</i> attribute of a quick navigation item refers to the <i>aria.pageLabel</i>  of the <Link href="/locale">locale</Link> API. Current page is marked with <i>aria-current</i>.</p>
+                        <p>
+                            Quick navigation elements and thumnbails follow the tab pattern. They are placed inside an element with a <i>tablist</i> role whereas each item has a <i>tab</i> role with <i>aria-selected</i> and <i>aria-controls</i>{' '}
+                            attributes. The <i>aria-label</i> attribute of a quick navigation item refers to the <i>aria.pageLabel</i> of the <Link href="/locale">locale</Link> API. Current page is marked with <i>aria-current</i>.
+                        </p>
 
-                        <p>In full screen mode, modal element uses <i>dialog</i> role with <i>aria-modal</i> enabled. The close button retrieves <i>aria-label</i> from the <i>aria.close</i> property of the <Link href="/locale">locale</Link> API.</p>
+                        <p>
+                            In full screen mode, modal element uses <i>dialog</i> role with <i>aria-modal</i> enabled. The close button retrieves <i>aria-label</i> from the <i>aria.close</i> property of the <Link href="/locale">locale</Link> API.
+                        </p>
 
                         <h6>Next/Prev Keyboard Support</h6>
                         <div className="doc-tablewrapper">
@@ -615,15 +639,21 @@ const responsiveOptions = [
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><i>tab</i></td>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
                                         <td>Moves focus through interactive elements in the carousel.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>enter</i></td>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
                                         <td>Activates navigation.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>space</i></td>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
                                         <td>Activates navigation.</td>
                                     </tr>
                                 </tbody>
@@ -641,31 +671,45 @@ const responsiveOptions = [
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><i>tab</i></td>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
                                         <td>Moves focus through the active slide link.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>enter</i></td>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
                                         <td>Activates the focused slide link.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>space</i></td>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
                                         <td>Activates the focused slide link.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>right arrow</i></td>
+                                        <td>
+                                            <i>right arrow</i>
+                                        </td>
                                         <td>Moves focus to the next slide link.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>left arrow</i></td>
+                                        <td>
+                                            <i>left arrow</i>
+                                        </td>
                                         <td>Moves focus to the previous slide link.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>home</i></td>
+                                        <td>
+                                            <i>home</i>
+                                        </td>
                                         <td>Moves focus to the first slide link.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>end</i></td>
+                                        <td>
+                                            <i>end</i>
+                                        </td>
                                         <td>Moves focus to the last slide link.</td>
                                     </tr>
                                 </tbody>
@@ -676,12 +720,10 @@ const responsiveOptions = [
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
-                {
-                    useLiveEditorTabs({ name: 'GalleriaDemo', sources: sources, service: 'PhotoService', data: 'photos' })
-                }
+                {useLiveEditorTabs({ name: 'GalleriaDemo', sources: sources, service: 'PhotoService', data: 'photos' })}
             </TabView>
         </div>
     );
-})
+});
 
 export default GalleriaDoc;

@@ -1,8 +1,7 @@
 import DomHandler from './DomHandler';
 
 export default class ConnectedOverlayScrollHandler {
-
-    constructor(element, listener = () => { }) {
+    constructor(element, listener = () => {}) {
         this.element = element;
         this.listener = listener;
     }

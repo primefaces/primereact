@@ -6,7 +6,6 @@ import Head from 'next/head';
 import getConfig from 'next/config';
 
 const ChipDemo = () => {
-
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     return (
@@ -63,6 +62,6 @@ const ChipDemo = () => {
             <ChipDoc />
         </div>
     );
-}
+};
 
 export default ChipDemo;

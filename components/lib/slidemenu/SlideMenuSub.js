@@ -28,28 +28,31 @@ export const SlideMenuSub = React.memo((props) => {
             setActiveItemState(item);
             props.onForward();
         }
-    }
+    };
 
     const createSeparator = (index) => {
         const key = 'separator_' + index;
 
-        return <li key={key} className="p-menu-separator"></li>
-    }
+        return <li key={key} className="p-menu-separator"></li>;
+    };
 
     const createSubmenu = (item, index) => {
-        const shouldRender = renderSubMenu[createKey(item, index)]
+        const shouldRender = renderSubMenu[createKey(item, index)];
         if (item.items && shouldRender) {
-            return <SlideMenuSub menuProps={props.menuProps} model={item.items} index={props.index + 1} menuWidth={props.menuWidth} effectDuration={props.effectDuration} onForward={props.onForward} parentActive={item === activeItemState} />
+            return <SlideMenuSub menuProps={props.menuProps} model={item.items} index={props.index + 1} menuWidth={props.menuWidth} effectDuration={props.effectDuration} onForward={props.onForward} parentActive={item === activeItemState} />;
         }
 
         return null;
-    }
+    };
 
     const createKey = (item, index) => {
-        return  item.label + '_' + index;
-    }
+        return item.label + '_' + index;
+    };
 
     const createMenuitem = (item, index) => {
+        if (item.visible === false) {
+            return null;
+        }
         const key = createKey(item, index);
         const active = activeItemState === item;
         const className = classNames('p-menuitem', { 'p-menuitem-active': active, 'p-disabled': item.disabled }, item.className);
@@ -87,20 +90,20 @@ export const SlideMenuSub = React.memo((props) => {
                 {content}
                 {submenu}
             </li>
-        )
-    }
+        );
+    };
 
     const createItem = (item, index) => {
         return item.separator ? createSeparator(index) : createMenuitem(item, index);
-    }
+    };
 
     const createItems = () => {
         return props.model ? props.model.map(createItem) : null;
-    }
+    };
 
     const style = {
         width: props.menuWidth + 'px',
-        left: props.root ? (-1 * props.level * props.menuWidth) + 'px' : props.menuWidth + 'px',
+        left: props.root ? -1 * props.level * props.menuWidth + 'px' : props.menuWidth + 'px',
         transitionProperty: props.root ? 'left' : 'none',
         transitionDuration: props.effectDuration + 'ms',
         transitionTimingFunction: props.easing
@@ -116,7 +119,7 @@ export const SlideMenuSub = React.memo((props) => {
         <ul className={className} style={style}>
             {items}
         </ul>
-    )
+    );
 });
 
 SlideMenuSub.displayName = 'SlideMenuSub';

@@ -9,23 +9,28 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const TreeTableTemplatingDemo = () => {
-
     const [nodes, setNodes] = useState([]);
     const nodeservice = new NodeService();
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+        nodeservice.getTreeTableNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const actionTemplate = (node, column) => {
-        return <div>
-            <Button type="button" icon="pi pi-search" className="p-button-success" style={{ marginRight: '.5em' }}></Button>
-            <Button type="button" icon="pi pi-pencil" className="p-button-warning"></Button>
-        </div>;
-    }
+        return (
+            <div>
+                <Button type="button" icon="pi pi-search" className="p-button-success" style={{ marginRight: '.5em' }}></Button>
+                <Button type="button" icon="pi pi-pencil" className="p-button-warning"></Button>
+            </div>
+        );
+    };
 
-    const header = "File Viewer";
-    const footer = <div style={{ textAlign: 'left' }}><Button icon="pi pi-refresh" tooltip="Reload" /></div>;
+    const header = 'File Viewer';
+    const footer = (
+        <div style={{ textAlign: 'left' }}>
+            <Button icon="pi pi-refresh" tooltip="Reload" />
+        </div>
+    );
 
     return (
         <div>
@@ -35,7 +40,9 @@ const TreeTableTemplatingDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>TreeTable <span>Templating</span></h1>
+                    <h1>
+                        TreeTable <span>Templating</span>
+                    </h1>
                     <p>Custom content at header, body and footer sections are supported via templating.</p>
                 </div>
 
@@ -55,15 +62,14 @@ const TreeTableTemplatingDemo = () => {
 
             <TreeTableTemplatingDemoDoc />
         </div>
-    )
-}
+    );
+};
 
 export default TreeTableTemplatingDemo;
 
 const TreeTableTemplatingDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -114,7 +120,7 @@ export class TreeTableTemplatingDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -156,7 +162,7 @@ const TreeTableTemplatingDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -198,7 +204,7 @@ const TreeTableTemplatingDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="./NodeService.js"></script>
@@ -247,15 +253,11 @@ const TreeTableTemplatingDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'TreeTableTemplatingDemo', sources: sources, service: 'NodeService', data: 'treetablenodes' })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'TreeTableTemplatingDemo', sources: sources, service: 'NodeService', data: 'treetablenodes' })}</TabView>
         </div>
-    )
-})
+    );
+});

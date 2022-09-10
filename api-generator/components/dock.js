@@ -31,9 +31,7 @@ const DockProps = [
     }
 ];
 
-const DockEvents = [
-
-];
+const DockEvents = [];
 
 const DockStyles = [
     { name: 'p-dock', description: 'Container element.' },

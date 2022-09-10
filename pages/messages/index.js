@@ -23,9 +23,11 @@ const MessagesDemo = () => {
         ]);
 
         msgs3.current.show({
-            severity: 'info', sticky: true, content: (
+            severity: 'info',
+            sticky: true,
+            content: (
                 <React.Fragment>
-                    <img alt="logo" src={`${contextPath}/images/logo.png`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" />
+                    <img alt="logo" src={`${contextPath}/images/logo.png`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} width="32" />
                     <div className="ml-2">Always bet on Prime.</div>
                 </React.Fragment>
             )
@@ -39,11 +41,11 @@ const MessagesDemo = () => {
             { severity: 'warn', summary: 'Warning', detail: 'Message Content', sticky: true },
             { severity: 'error', summary: 'Error', detail: 'Message Content', sticky: true }
         ]);
-    }
+    };
 
     const clearMessages = () => {
         msgs2.current.clear();
-    }
+    };
 
     return (
         <div>
@@ -92,12 +94,16 @@ const MessagesDemo = () => {
 
                     <h5>Validation Message</h5>
                     <div className="formgroup-inline mb-2">
-                        <label htmlFor="username1" className="p-sr-only">Username</label>
+                        <label htmlFor="username1" className="p-sr-only">
+                            Username
+                        </label>
                         <InputText id="username1" placeholder="Username" className="p-invalid mr-2" />
                         <Message severity="error" text="Username is required" />
                     </div>
                     <div className="formgroup-inline">
-                        <label htmlFor="email" className="p-sr-only">email</label>
+                        <label htmlFor="email" className="p-sr-only">
+                            email
+                        </label>
                         <InputText id="email" placeholder="Email" className="p-invalid mr-2" />
                         <Message severity="error" />
                     </div>
@@ -106,14 +112,16 @@ const MessagesDemo = () => {
                     <div className="field p-fluid">
                         <label htmlFor="username2">Username</label>
                         <InputText id="username2" aria-describedby="username-help" className="p-invalid mr-2" />
-                        <small id="username-help" className="p-error">Username is not available.</small>
+                        <small id="username-help" className="p-error">
+                            Username is not available.
+                        </small>
                     </div>
                 </div>
             </div>
 
             <MessagesDoc></MessagesDoc>
         </div>
-    )
-}
+    );
+};
 
 export default MessagesDemo;

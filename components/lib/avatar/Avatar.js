@@ -6,17 +6,15 @@ export const Avatar = React.forwardRef((props, ref) => {
 
     const createContent = () => {
         if (props.image) {
-            return <img src={props.image} alt={props.imageAlt} onError={props.onImageError}></img>
-        }
-        else if (props.label) {
-            return <span className="p-avatar-text">{props.label}</span>
-        }
-        else if (props.icon) {
+            return <img src={props.image} alt={props.imageAlt} onError={props.onImageError}></img>;
+        } else if (props.label) {
+            return <span className="p-avatar-text">{props.label}</span>;
+        } else if (props.icon) {
             return IconUtils.getJSXIcon(props.icon, { className: 'p-avatar-icon' }, { props });
         }
 
         return null;
-    }
+    };
 
     React.useImperativeHandle(ref, () => ({
         props,
@@ -24,13 +22,17 @@ export const Avatar = React.forwardRef((props, ref) => {
     }));
 
     const otherProps = ObjectUtils.findDiffKeys(props, Avatar.defaultProps);
-    const containerClassName = classNames('p-avatar p-component', {
-        'p-avatar-image': props.image != null,
-        'p-avatar-circle': props.shape === 'circle',
-        'p-avatar-lg': props.size === 'large',
-        'p-avatar-xl': props.size === 'xlarge',
-        'p-avatar-clickable': !!props.onClick
-    }, props.className);
+    const containerClassName = classNames(
+        'p-avatar p-component',
+        {
+            'p-avatar-image': props.image != null,
+            'p-avatar-circle': props.shape === 'circle',
+            'p-avatar-lg': props.size === 'large',
+            'p-avatar-xl': props.size === 'xlarge',
+            'p-avatar-clickable': !!props.onClick
+        },
+        props.className
+    );
 
     const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : createContent();
 
@@ -39,7 +41,7 @@ export const Avatar = React.forwardRef((props, ref) => {
             {content}
             {props.children}
         </div>
-    )
+    );
 });
 
 Avatar.displayName = 'Avatar';
@@ -55,4 +57,4 @@ Avatar.defaultProps = {
     template: null,
     imageAlt: 'avatar',
     onImageError: null
-}
+};

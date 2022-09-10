@@ -17,16 +17,16 @@ const TreeSelectionDemo = () => {
     const nodeService = new NodeService();
 
     useEffect(() => {
-        nodeService.getTreeNodes().then(data => setNodes(data));
+        nodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onNodeSelect = (node) => {
         toast.current.show({ severity: 'success', summary: 'Node Selected', detail: node.label, life: 3000 });
-    }
+    };
 
     const onNodeUnselect = (node) => {
         toast.current.show({ severity: 'success', summary: 'Node Unselected', detail: node.label, life: 3000 });
-    }
+    };
 
     return (
         <div>
@@ -36,7 +36,9 @@ const TreeSelectionDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>Tree <span>Selection</span></h1>
+                    <h1>
+                        Tree <span>Selection</span>
+                    </h1>
                     <p>Tree supports "single", "multiple" and "checkbox" as selection modes.</p>
                 </div>
 
@@ -47,29 +49,28 @@ const TreeSelectionDemo = () => {
                 <Toast ref={toast} />
                 <div className="card">
                     <h5>Single Selection</h5>
-                    <Tree value={nodes} selectionMode="single" selectionKeys={selectedKey} onSelectionChange={e => setSelectedKey(e.value)} onSelect={onNodeSelect} onUnselect={onNodeUnselect} />
+                    <Tree value={nodes} selectionMode="single" selectionKeys={selectedKey} onSelectionChange={(e) => setSelectedKey(e.value)} onSelect={onNodeSelect} onUnselect={onNodeUnselect} />
 
                     <h5>Multiple Selection with MetaKey</h5>
-                    <Tree value={nodes} selectionMode="multiple" selectionKeys={selectedKeys1} onSelectionChange={e => setSelectedKeys1(e.value)} />
+                    <Tree value={nodes} selectionMode="multiple" selectionKeys={selectedKeys1} onSelectionChange={(e) => setSelectedKeys1(e.value)} />
 
                     <h5>Multiple Selection without MetaKey</h5>
-                    <Tree value={nodes} selectionMode="multiple" metaKeySelection={false} selectionKeys={selectedKeys2} onSelectionChange={e => setSelectedKeys2(e.value)} />
+                    <Tree value={nodes} selectionMode="multiple" metaKeySelection={false} selectionKeys={selectedKeys2} onSelectionChange={(e) => setSelectedKeys2(e.value)} />
 
                     <h5>Checkbox Selection</h5>
-                    <Tree value={nodes} selectionMode="checkbox" selectionKeys={selectedKeys3} onSelectionChange={e => setSelectedKeys3(e.value)} />
+                    <Tree value={nodes} selectionMode="checkbox" selectionKeys={selectedKeys3} onSelectionChange={(e) => setSelectedKeys3(e.value)} />
                 </div>
             </div>
             <TreeSelectionDemoDoc />
         </div>
-    )
-}
+    );
+};
 
 export default TreeSelectionDemo;
 
 export const TreeSelectionDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -129,7 +130,7 @@ export class TreeSelectionDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect, useRef } from 'react';
@@ -179,7 +180,7 @@ const TreeSelectionDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect, useRef } from 'react';
@@ -229,7 +230,7 @@ const TreeSelectionDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="./NodeService.js"></script>
@@ -285,15 +286,11 @@ const TreeSelectionDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'TreeSelectionDemo', sources: sources, service: 'NodeService', data: 'treenodes' })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'TreeSelectionDemo', sources: sources, service: 'NodeService', data: 'treenodes' })}</TabView>
         </div>
     );
-})
+});

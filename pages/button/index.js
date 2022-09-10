@@ -1,11 +1,10 @@
+import Head from 'next/head';
 import React, { useState } from 'react';
-import { Button } from '../../components/lib/button/Button';
 import ButtonDoc from '../../components/doc/button';
 import { DocActions } from '../../components/doc/common/docactions';
-import Head from 'next/head';
+import { Button } from '../../components/lib/button/Button';
 
 const ButtonDemo = () => {
-
     const [loading1, setLoading1] = useState(false);
     const [loading2, setLoading2] = useState(false);
 
@@ -15,7 +14,7 @@ const ButtonDemo = () => {
         setTimeout(() => {
             setLoading1(false);
         }, 2000);
-    }
+    };
 
     const onLoadingClick2 = () => {
         setLoading2(true);
@@ -23,7 +22,7 @@ const ButtonDemo = () => {
         setTimeout(() => {
             setLoading2(false);
         }, 2000);
-    }
+    };
 
     return (
         <div>
@@ -199,7 +198,7 @@ const ButtonDemo = () => {
 
             <ButtonDoc></ButtonDoc>
         </div>
-    )
-}
+    );
+};
 
 export default ButtonDemo;

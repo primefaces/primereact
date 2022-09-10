@@ -59,7 +59,7 @@ const BlockUIEvents = [
         name: 'onUnblocked',
         description: 'Fired when the element gets unblocked.',
         arguments: []
-    },
+    }
 ];
 
 const BlockUIStyles = [

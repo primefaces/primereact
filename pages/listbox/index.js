@@ -6,7 +6,6 @@ import Head from 'next/head';
 import getConfig from 'next/config';
 
 const ListBoxDemo = () => {
-
     const [selectedCity, setSelectedCity] = useState(null);
     const [selectedCountries, setSelectedCountries] = useState(null);
     const [selectedGroupedCity, setSelectedGroupedCity] = useState(null);
@@ -36,7 +35,8 @@ const ListBoxDemo = () => {
 
     const groupedCities = [
         {
-            label: 'Germany', code: 'DE',
+            label: 'Germany',
+            code: 'DE',
             items: [
                 { label: 'Berlin', value: 'Berlin' },
                 { label: 'Frankfurt', value: 'Frankfurt' },
@@ -45,7 +45,8 @@ const ListBoxDemo = () => {
             ]
         },
         {
-            label: 'USA', code: 'US',
+            label: 'USA',
+            code: 'US',
             items: [
                 { label: 'Chicago', value: 'Chicago' },
                 { label: 'Los Angeles', value: 'Los Angeles' },
@@ -54,7 +55,8 @@ const ListBoxDemo = () => {
             ]
         },
         {
-            label: 'Japan', code: 'JP',
+            label: 'Japan',
+            code: 'JP',
             items: [
                 { label: 'Kyoto', value: 'Kyoto' },
                 { label: 'Osaka', value: 'Osaka' },
@@ -69,20 +71,30 @@ const ListBoxDemo = () => {
     const countryTemplate = (option) => {
         return (
             <div className="country-item">
-                <img alt={option.name} src={`${contextPath}/images/flag/flag_placeholder.png`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={`flag flag-${option.code.toLowerCase()}`} />
+                <img
+                    alt={option.name}
+                    src={`${contextPath}/images/flag/flag_placeholder.png`}
+                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                    className={`flag flag-${option.code.toLowerCase()}`}
+                />
                 <div>{option.name}</div>
             </div>
         );
-    }
+    };
 
     const groupedItemTemplate = (option) => {
         return (
             <div className="flex align-items-center country-item">
-                <img alt={option.name} src={`${contextPath}/images/flag/flag_placeholder.png`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={`flag flag-${option.code.toLowerCase()}`} />
+                <img
+                    alt={option.name}
+                    src={`${contextPath}/images/flag/flag_placeholder.png`}
+                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                    className={`flag flag-${option.code.toLowerCase()}`}
+                />
                 <div>{option.label}</div>
             </div>
         );
-    }
+    };
 
     return (
         <div>
@@ -106,12 +118,31 @@ const ListBoxDemo = () => {
                     <ListBox value={selectedCity} options={cities} onChange={(e) => setSelectedCity(e.value)} optionLabel="name" style={{ width: '15rem' }} />
 
                     <h5>Grouped</h5>
-                    <ListBox value={selectedGroupedCity} options={groupedCities} onChange={(e) => setSelectedGroupedCity(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
-                        optionGroupTemplate={groupedItemTemplate} style={{ width: '15rem' }} listStyle={{ maxHeight: '250px' }} />
+                    <ListBox
+                        value={selectedGroupedCity}
+                        options={groupedCities}
+                        onChange={(e) => setSelectedGroupedCity(e.value)}
+                        optionLabel="label"
+                        optionGroupLabel="label"
+                        optionGroupChildren="items"
+                        optionGroupTemplate={groupedItemTemplate}
+                        style={{ width: '15rem' }}
+                        listStyle={{ maxHeight: '250px' }}
+                    />
 
                     <h5>Advanced with Templating, Filtering and Multiple Selection</h5>
-                    <ListBox value={selectedCountries} options={countries} onChange={(e) => setSelectedCountries(e.value)} multiple filter optionLabel="name" filterPlaceholder="Search countries"
-                        itemTemplate={countryTemplate} style={{ width: '15rem' }} listStyle={{ maxHeight: '250px' }} />
+                    <ListBox
+                        value={selectedCountries}
+                        options={countries}
+                        onChange={(e) => setSelectedCountries(e.value)}
+                        multiple
+                        filter
+                        optionLabel="name"
+                        filterPlaceholder="Search countries"
+                        itemTemplate={countryTemplate}
+                        style={{ width: '15rem' }}
+                        listStyle={{ maxHeight: '250px' }}
+                    />
 
                     <h5>Virtual Scroll (100000 Items)</h5>
                     <ListBox value={selectedItem} options={items} virtualScrollerOptions={{ itemSize: 38 }} onChange={(e) => setSelectedItem(e.value)} style={{ width: '15rem' }} listStyle={{ height: '250px' }} />
@@ -121,6 +152,6 @@ const ListBoxDemo = () => {
             <ListBoxDoc />
         </div>
     );
-}
+};
 
 export default ListBoxDemo;

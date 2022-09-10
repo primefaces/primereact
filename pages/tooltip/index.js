@@ -1,17 +1,16 @@
+import getConfig from 'next/config';
+import Head from 'next/head';
 import React, { useState } from 'react';
-import { InputText } from '../../components/lib/inputtext/InputText';
+import { DocActions } from '../../components/doc/common/docactions';
+import TooltipDoc from '../../components/doc/tooltip';
+import { Badge } from '../../components/lib/badge/Badge';
 import { Button } from '../../components/lib/button/Button';
-import { Tooltip } from '../../components/lib/tooltip/Tooltip';
+import { InputText } from '../../components/lib/inputtext/InputText';
 import { Knob } from '../../components/lib/knob/Knob';
 import { Slider } from '../../components/lib/slider/Slider';
-import { Badge } from '../../components/lib/badge/Badge';
-import TooltipDoc from '../../components/doc/tooltip';
-import { DocActions } from '../../components/doc/common/docactions';
-import Head from 'next/head';
-import getConfig from 'next/config';
+import { Tooltip } from '../../components/lib/tooltip/Tooltip';
 
 const TooltipDemo = () => {
-
     const [saveBtnTooltipText, setSaveBtnTooltipText] = useState('Click to proceed');
     const [knobValue, setKnobValue] = useState(60);
     const [sliderValue, setSliderValue] = useState(20);
@@ -70,7 +69,14 @@ const TooltipDemo = () => {
                         <Button type="button" label="Save" icon="pi pi-check" tooltip="Save" tooltipOptions={{ position: 'bottom', mouseTrack: true, mouseTrackTop: 15 }} />
 
                         <Tooltip target=".logo" mouseTrack mouseTrackLeft={10} />
-                        <img className="logo ml-2" alt="logo" src={`${contextPath}/images/logo.png`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} data-pr-tooltip="PrimeReact-Logo" height="80px" />
+                        <img
+                            className="logo ml-2"
+                            alt="logo"
+                            src={`${contextPath}/images/logo.png`}
+                            onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                            data-pr-tooltip="PrimeReact-Logo"
+                            height="80px"
+                        />
                     </div>
 
                     <h5>AutoHide</h5>
@@ -90,7 +96,7 @@ const TooltipDemo = () => {
                     <h5>Template</h5>
                     <div className="flex align-items-center">
                         <Tooltip target=".custom-tooltip-btn">
-                            <img alt="logo" src={`${contextPath}/images/logo.png`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} data-pr-tooltip="PrimeReact-Logo" height="80px" />
+                            <img alt="logo" src={`${contextPath}/images/logo.png`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} data-pr-tooltip="PrimeReact-Logo" height="80px" />
                         </Tooltip>
 
                         <Button className="custom-tooltip-btn" type="button" label="Save" icon="pi pi-check" />
@@ -110,7 +116,14 @@ const TooltipDemo = () => {
                     <div className="flex align-items-center">
                         <Tooltip target=".custom-target-icon" />
 
-                        <i className="custom-target-icon pi pi-envelope p-text-secondary p-overlay-badge" data-pr-tooltip="No notifications" data-pr-position="right" data-pr-at="right+5 top" data-pr-my="left center-2" style={{ fontSize: '2rem', cursor: 'pointer' }}>
+                        <i
+                            className="custom-target-icon pi pi-envelope p-text-secondary p-overlay-badge"
+                            data-pr-tooltip="No notifications"
+                            data-pr-position="right"
+                            data-pr-at="right+5 top"
+                            data-pr-my="left center-2"
+                            style={{ fontSize: '2rem', cursor: 'pointer' }}
+                        >
                             <Badge severity="danger"></Badge>
                         </i>
                     </div>
@@ -132,7 +145,7 @@ const TooltipDemo = () => {
 
             <TooltipDoc />
         </div>
-    )
-}
+    );
+};
 
 export default TooltipDemo;

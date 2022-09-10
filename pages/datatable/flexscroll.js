@@ -8,14 +8,12 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const DataTableFlexScrollDemo = () => {
-
     const [customers, setCustomers] = useState([]);
     const customerService = new CustomerService();
 
     useEffect(() => {
-        customerService.getCustomersLarge().then(data => setCustomers(data));
+        customerService.getCustomersLarge().then((data) => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
 
     return (
         <div>
@@ -25,7 +23,9 @@ const DataTableFlexScrollDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>DataTable <span>Flex Scroll</span></h1>
+                    <h1>
+                        DataTable <span>Flex Scroll</span>
+                    </h1>
                     <p></p>
                 </div>
 
@@ -46,14 +46,12 @@ const DataTableFlexScrollDemo = () => {
             <DataTableBasicDemoDoc></DataTableBasicDemoDoc>
         </div>
     );
-}
+};
 
 export default DataTableFlexScrollDemo;
-;
 const DataTableBasicDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -93,7 +91,7 @@ export class DataTableFlexScrollDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -125,7 +123,7 @@ const DataTableFlexScrollDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -158,7 +156,7 @@ const DataTableFlexScrollDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="./CustomerService.js"></script>
@@ -198,15 +196,11 @@ const DataTableFlexScrollDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'DataTableFlexScrollDemo', sources: sources, service: 'CustomerService', data: 'customers-large' })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'DataTableFlexScrollDemo', sources: sources, service: 'CustomerService', data: 'customers-large' })}</TabView>
         </div>
-    )
-})
+    );
+});

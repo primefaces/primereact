@@ -19,7 +19,7 @@ export const ContextMenuSub = React.memo((props) => {
             return;
         }
         setActiveItemState(item);
-    }
+    };
 
     const onItemClick = (event, item) => {
         if (item.disabled) {
@@ -41,46 +41,48 @@ export const ContextMenuSub = React.memo((props) => {
         if (!item.items) {
             props.onLeafClick(event);
         }
-    }
+    };
 
     const position = () => {
         const parentItem = submenuRef.current.parentElement;
-        const containerOffset = DomHandler.getOffset(submenuRef.current.parentElement)
+        const containerOffset = DomHandler.getOffset(submenuRef.current.parentElement);
         const viewport = DomHandler.getViewport();
         const sublistWidth = submenuRef.current.offsetParent ? submenuRef.current.offsetWidth : DomHandler.getHiddenElementOuterWidth(submenuRef.current);
         const itemOuterWidth = DomHandler.getOuterWidth(parentItem.children[0]);
 
         submenuRef.current.style.top = '0px';
 
-        if ((parseInt(containerOffset.left, 10) + itemOuterWidth + sublistWidth) > (viewport.width - DomHandler.calculateScrollbarWidth())) {
+        if (parseInt(containerOffset.left, 10) + itemOuterWidth + sublistWidth > viewport.width - DomHandler.calculateScrollbarWidth()) {
             submenuRef.current.style.left = -1 * sublistWidth + 'px';
-        }
-        else {
+        } else {
             submenuRef.current.style.left = itemOuterWidth + 'px';
         }
-    }
+    };
 
     const onEnter = () => {
         position();
-    }
+    };
 
     useUpdateEffect(() => {
         active && position();
     });
 
     const createSeparator = (index) => {
-        return <li key={'separator_' + index} className="p-menu-separator" role="separator"></li>
-    }
+        return <li key={'separator_' + index} className="p-menu-separator" role="separator"></li>;
+    };
 
     const createSubmenu = (item) => {
         if (item.items) {
-            return <ContextMenuSub menuProps={props.menuProps} model={item.items} resetMenu={item !== activeItemState} onLeafClick={props.onLeafClick} />
+            return <ContextMenuSub menuProps={props.menuProps} model={item.items} resetMenu={item !== activeItemState} onLeafClick={props.onLeafClick} />;
         }
 
         return null;
-    }
+    };
 
     const createMenuItem = (item, index) => {
+        if (item.visible === false) {
+            return null;
+        }
         const active = activeItemState === item;
         const key = item.label + '_' + index;
         const className = classNames('p-menuitem', { 'p-menuitem-active': active }, item.className);
@@ -92,8 +94,7 @@ export const ContextMenuSub = React.memo((props) => {
         const submenuIcon = item.items && <span className={submenuIconClassName}></span>;
         const submenu = createSubmenu(item);
         let content = (
-            <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => onItemClick(event, item, index)} role="menuitem"
-                aria-haspopup={item.items != null} aria-disabled={item.disabled}>
+            <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => onItemClick(event, item, index)} role="menuitem" aria-haspopup={item.items != null} aria-disabled={item.disabled}>
                 {icon}
                 {label}
                 {submenuIcon}
@@ -121,16 +122,16 @@ export const ContextMenuSub = React.memo((props) => {
                 {content}
                 {submenu}
             </li>
-        )
-    }
+        );
+    };
 
     const createItem = (item, index) => {
         return item.separator ? createSeparator(index) : createMenuItem(item, index);
-    }
+    };
 
     const createMenu = () => {
         return props.model ? props.model.map(createItem) : null;
-    }
+    };
 
     const className = classNames({
         'p-submenu-list': !props.root
@@ -143,7 +144,7 @@ export const ContextMenuSub = React.memo((props) => {
                 {submenu}
             </ul>
         </CSSTransition>
-    )
+    );
 });
 
 ContextMenuSub.displayName = 'ContextMenuSub';

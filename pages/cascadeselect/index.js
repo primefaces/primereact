@@ -30,8 +30,7 @@ const CascadeSelectDemo = () => {
                         { cname: 'Brisbane', code: 'A-BR' },
                         { cname: 'Townsville', code: 'A-TO' }
                     ]
-                },
-
+                }
             ]
         },
         {
@@ -51,8 +50,7 @@ const CascadeSelectDemo = () => {
                         { cname: 'Ottawa', code: 'C-OT' },
                         { cname: 'Toronto', code: 'C-TO' }
                     ]
-                },
-
+                }
             ]
         },
         {
@@ -91,14 +89,20 @@ const CascadeSelectDemo = () => {
     const countryOptionTemplate = (option) => {
         return (
             <div className="country-item">
-                {option.states && <img alt={option.name} src={`${contextPath}/images/flag/flag_placeholder.png`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'}
-                    className={`flag flag-${option.code.toLowerCase()}`} />}
+                {option.states && (
+                    <img
+                        alt={option.name}
+                        src={`${contextPath}/images/flag/flag_placeholder.png`}
+                        onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                        className={`flag flag-${option.code.toLowerCase()}`}
+                    />
+                )}
                 {option.cities && <i className="pi pi-compass mr-2" />}
                 {option.cname && <i className="pi pi-map-marker mr-2" />}
                 <span>{option.cname || option.name}</span>
             </div>
         );
-    }
+    };
 
     return (
         <div>
@@ -117,18 +121,35 @@ const CascadeSelectDemo = () => {
             <div className="content-section implementation">
                 <div className="card">
                     <h5>Basic</h5>
-                    <CascadeSelect value={selectedCity1} options={countries} optionLabel={"cname"} optionGroupLabel={"name"} optionGroupChildren={['states', 'cities']}
-                        style={{ minWidth: '14rem' }} placeholder={"Select a City"} onChange={event => setSelectedCity1(event.value)} />
+                    <CascadeSelect
+                        value={selectedCity1}
+                        options={countries}
+                        optionLabel={'cname'}
+                        optionGroupLabel={'name'}
+                        optionGroupChildren={['states', 'cities']}
+                        style={{ minWidth: '14rem' }}
+                        placeholder={'Select a City'}
+                        onChange={(event) => setSelectedCity1(event.value)}
+                    />
 
                     <h5>Templating</h5>
-                    <CascadeSelect value={selectedCity2} options={countries} optionLabel={"cname"} optionGroupLabel={"name"} optionGroupChildren={['states', 'cities']}
-                        style={{ minWidth: '14rem' }} placeholder={"Select a City"} onChange={event => setSelectedCity2(event.value)} itemTemplate={countryOptionTemplate} />
+                    <CascadeSelect
+                        value={selectedCity2}
+                        options={countries}
+                        optionLabel={'cname'}
+                        optionGroupLabel={'name'}
+                        optionGroupChildren={['states', 'cities']}
+                        style={{ minWidth: '14rem' }}
+                        placeholder={'Select a City'}
+                        onChange={(event) => setSelectedCity2(event.value)}
+                        itemTemplate={countryOptionTemplate}
+                    />
                 </div>
             </div>
 
             <CascadeSelectDoc />
         </div>
-    )
-}
+    );
+};
 
 export default CascadeSelectDemo;

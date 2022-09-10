@@ -6,9 +6,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const InputMaskDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -70,7 +69,7 @@ export class InputMaskDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState } from 'react';
@@ -124,7 +123,7 @@ const InputMaskDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState } from 'react';
@@ -178,7 +177,7 @@ const InputMaskDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -235,7 +234,7 @@ const InputMaskDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
@@ -257,7 +256,9 @@ import { InputMask } from 'primereact/inputmask';
                     </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>InputMask is used as a controlled component with <i>value</i> and <i>onChange</i> properties.</p>
+                    <p>
+                        InputMask is used as a controlled component with <i>value</i> and <i>onChange</i> properties.
+                    </p>
 
                     <CodeHighlight>
                         {`
@@ -269,15 +270,9 @@ import { InputMask } from 'primereact/inputmask';
                     <p>Mask format can be a combination of the the following built-in definitions.</p>
 
                     <ul>
-                        <li>
-                            a - Alpha character (A-Z,a-z)
-                        </li>
-                        <li>
-                            9 - Numeric character (0-9)
-                        </li>
-                        <li>
-                            * - Alpha numberic character (A-Z,a-z,0-9)
-                        </li>
+                        <li>a - Alpha character (A-Z,a-z)</li>
+                        <li>9 - Numeric character (0-9)</li>
+                        <li>* - Alpha numberic character (A-Z,a-z,0-9)</li>
                     </ul>
 
                     <CodeHighlight>
@@ -287,7 +282,9 @@ import { InputMask } from 'primereact/inputmask';
                     </CodeHighlight>
 
                     <h5>SlotChar</h5>
-                    <p>Underscore is the default placeholder for a mask and this can be customized using <i>slotChart</i> option.</p>
+                    <p>
+                        Underscore is the default placeholder for a mask and this can be customized using <i>slotChart</i> option.
+                    </p>
 
                     <CodeHighlight>
                         {`
@@ -296,10 +293,10 @@ import { InputMask } from 'primereact/inputmask';
                     </CodeHighlight>
 
                     <h5>Optional Values</h5>
-                    <p>If the input does not complete the mask definition, it is cleared by default.
-                        Use <i>autoClear</i> property to control this behavior. In addition, certain part of
-                        a mask can be made optional by using ? symbol where anything after the question
-                        mark becomes optional.</p>
+                    <p>
+                        If the input does not complete the mask definition, it is cleared by default. Use <i>autoClear</i> property to control this behavior. In addition, certain part of a mask can be made optional by using ? symbol where anything
+                        after the question mark becomes optional.
+                    </p>
 
                     <CodeHighlight>
                         {`
@@ -461,14 +458,19 @@ import { InputMask } from 'primereact/inputmask';
                                 </tr>
                                 <tr>
                                     <td>onComplete</td>
-                                    <td>event: Browser event<br />
-                                        value: New value of the component</td>
+                                    <td>
+                                        event: Browser event
+                                        <br />
+                                        value: New value of the component
+                                    </td>
                                     <td>Callback to invoke on when user completes the mask pattern.</td>
                                 </tr>
                                 <tr>
                                     <td>onChange</td>
-                                    <td>originalEvent: Browser event <br />
-                                        value: New value of the component</td>
+                                    <td>
+                                        originalEvent: Browser event <br />
+                                        value: New value of the component
+                                    </td>
                                     <td>Callback to invoke on value change.</td>
                                 </tr>
                             </tbody>
@@ -476,7 +478,9 @@ import { InputMask } from 'primereact/inputmask';
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.
+                    </p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -499,11 +503,14 @@ import { InputMask } from 'primereact/inputmask';
                     </div>
 
                     <h5>Accessibility</h5>
-                <DevelopmentSection>
-                    <h6>Screen Reader</h6>
-                    <p>InputMask component renders a native input element that implicitly includes any passed prop. Value to describe the component can either be provided via <i>label</i> tag combined with <i>id</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props.</p>
-<CodeHighlight>
-{`
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            InputMask component renders a native input element that implicitly includes any passed prop. Value to describe the component can either be provided via <i>label</i> tag combined with <i>id</i> prop or using{' '}
+                            <i>aria-labelledby</i>, <i>aria-label</i> props.
+                        </p>
+                        <CodeHighlight>
+                            {`
 <label htmlFor="date">Date</label>
 <InputMask id="date" />
 
@@ -512,35 +519,35 @@ import { InputMask } from 'primereact/inputmask';
 
 <InputMask aria-label="Age" />
 `}
-</CodeHighlight>
-                    <h6>Keyboard Support</h6>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><i>tab</i></td>
-                                    <td>Moves focus to the input.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </DevelopmentSection>
+                        </CodeHighlight>
+                        <h6>Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the input.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'InputMaskDemo', sources: sources })
-                }
+                {useLiveEditorTabs({ name: 'InputMaskDemo', sources: sources })}
             </TabView>
         </div>
     );
-})
+});
 
 export default InputMaskDoc;

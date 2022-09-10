@@ -8,23 +8,20 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const TreeTableDemo = () => {
-
     const [nodes, setNodes] = useState([]);
     const [expandedKeys, setExpandedKeys] = useState({});
     const nodeservice = new NodeService();
 
     const toggleApplications = () => {
         let _expandedKeys = { ...expandedKeys };
-        if (_expandedKeys['0'])
-            delete _expandedKeys['0'];
-        else
-            _expandedKeys['0'] = true;
+        if (_expandedKeys['0']) delete _expandedKeys['0'];
+        else _expandedKeys['0'] = true;
 
         setExpandedKeys(_expandedKeys);
-    }
+    };
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+        nodeservice.getTreeTableNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
@@ -55,8 +52,7 @@ const TreeTableDemo = () => {
                 <div className="card">
                     <h5>Programmatic</h5>
                     <Button onClick={toggleApplications} label="Toggle Applications" />
-                    <TreeTable value={nodes} expandedKeys={expandedKeys}
-                        onToggle={e => setExpandedKeys(e.value)} style={{ marginTop: '.5em' }}>
+                    <TreeTable value={nodes} expandedKeys={expandedKeys} onToggle={(e) => setExpandedKeys(e.value)} style={{ marginTop: '.5em' }}>
                         <Column field="name" header="Name" expander></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -66,7 +62,7 @@ const TreeTableDemo = () => {
 
             <TreeTableDoc />
         </div>
-    )
-}
+    );
+};
 
 export default TreeTableDemo;

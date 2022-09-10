@@ -15,10 +15,9 @@ export const ListBoxHeader = React.memo((props) => {
                 value: event.target.value
             });
         }
-    }
+    };
 
     const createHeader = () => {
-
         let content = (
             <div className="p-listbox-filter-container">
                 <InputText type="text" value={props.filter} onChange={onFilter} className="p-listbox-filter" disabled={props.disabled} placeholder={props.filterPlaceholder} {...props.filterInputProps} />
@@ -33,26 +32,18 @@ export const ListBoxHeader = React.memo((props) => {
                 filterOptions: filterOptions,
                 filterInputChange: onFilter,
                 filterIconClassName: 'p-dropdown-filter-icon pi pi-search',
-                props,
+                props
             };
 
             content = ObjectUtils.getJSXElement(props.filterTemplate, defaultContentOptions);
-        } 
+        }
 
-        return (
-            <div className="p-listbox-header">
-                {content}
-            </div>
-        );
-    }
+        return <div className="p-listbox-header">{content}</div>;
+    };
 
     const content = createHeader();
 
-    return (
-        <>
-            {content}
-        </>
-    )
+    return <>{content}</>;
 });
 
 ListBoxHeader.displayName = 'ListBoxHeader';

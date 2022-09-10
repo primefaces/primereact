@@ -25,13 +25,9 @@ const SplitterPanelProps = [
     }
 ];
 
-const SplitterPanelEvents = [
+const SplitterPanelEvents = [];
 
-];
-
-const SplitterPanelStyles = [
-
-];
+const SplitterPanelStyles = [];
 
 module.exports = {
     splitterpanel: {

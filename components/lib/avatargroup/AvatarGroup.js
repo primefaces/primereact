@@ -15,7 +15,7 @@ export const AvatarGroup = React.forwardRef((props, ref) => {
         <div ref={elementRef} className={className} style={props.style} {...otherProps}>
             {props.children}
         </div>
-    )
+    );
 });
 
 AvatarGroup.displayName = 'AvatarGroup';
@@ -23,4 +23,4 @@ AvatarGroup.defaultProps = {
     __TYPE: 'AvatarGroup',
     style: null,
     className: null
-}
+};

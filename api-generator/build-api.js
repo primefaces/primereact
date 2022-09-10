@@ -16,7 +16,7 @@ const library = {
 const fileModules = {};
 
 const files = fs.readdirSync(componentPath);
-files.forEach(file => {
+files.forEach((file) => {
     const { name } = path.parse(file);
 
     fileModules[name] = require(`./components//${name}`);
@@ -49,7 +49,7 @@ const createWebTypes = (component) => {
     webTypes.tags.push(tag);
 };
 
-Object.keys(fileModules).forEach(p => {
+Object.keys(fileModules).forEach((p) => {
     createWebTypes(fileModules[p][p]);
 });
 const webTypesJson = JSON.stringify(webTypes, null, 4);

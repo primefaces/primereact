@@ -5,9 +5,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const MentionDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -148,7 +147,7 @@ export class MentionDemo extends Component {
 
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -275,7 +274,7 @@ const MentionDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -402,7 +401,7 @@ const MentionDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="./CustomerService.js"></script>
@@ -533,38 +532,40 @@ const MentionDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { Mention } from 'primereact/mention';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/mention/mention.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>Mention is used as a controlled component with <i>suggestions</i> and <i>onSearch</i> properties.</p>
+                    <p>
+                        Mention is used as a controlled component with <i>suggestions</i> and <i>onSearch</i> properties.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Mention suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people" />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 const customers = // datasource
 
 const onSearch = (event) => {
@@ -586,17 +587,17 @@ const onSearch = (event) => {
     }, 250);
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Trigger</h5>
                     <p>It is used to define the expected keyword/s in the input field to mention someone or something.</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Mention trigger="@" suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people" />
 
 <Mention trigger={['@', '#']} suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people" />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
                     <p>InputTextarea passes any attribute to the underlying textarea element, additional attributes are as follows;</p>
@@ -723,7 +724,13 @@ const onSearch = (event) => {
                                     <td>transitionOptions</td>
                                     <td>object</td>
                                     <td>null</td>
-                                    <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                    <td>
+                                        The properties of{' '}
+                                        <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">
+                                            CSSTransition
+                                        </a>{' '}
+                                        can be customized, except for "nodeRef" and "in" properties.
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -767,14 +774,17 @@ const onSearch = (event) => {
                                 </tr>
                                 <tr>
                                     <td>onSearch</td>
-                                    <td>event.originalEvent: Browser event <br />
+                                    <td>
+                                        event.originalEvent: Browser event <br />
                                         event.trigger: Current trigger keyword.
                                     </td>
                                     <td>Callback to invoke when search. </td>
                                 </tr>
                                 <tr>
                                     <td>onSelect</td>
-                                    <td>event.originalEvent: Browser event<br />
+                                    <td>
+                                        event.originalEvent: Browser event
+                                        <br />
                                         event.suggestion: Selected item
                                     </td>
                                     <td>Callback to invoke when selection changes.</td>
@@ -820,14 +830,19 @@ const onSearch = (event) => {
                     </div>
 
                     <h5>Accessibility</h5>
-                <DevelopmentSection>
-                    <h6>Screen Reader</h6>
-                    <p>Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props. The input element has <i>combobox</i> role
-                    in addition to <i>aria-autocomplete</i>, <i>aria-haspopup</i> and <i>aria-expanded</i> attributes. The relation between the input and the popup is created with <i>aria-controls</i> and <i>aria-activedescendant</i> attribute is used
-                    to instruct screen reader which option to read during keyboard navigation within the popup list.</p>
-                    <p>The popup list has an id that refers to the <i>aria-controls</i> attribute of the input element and uses <i>listbox</i> as the role. Each list item has <i>option</i> role and an id to match the <i>aria-activedescendant</i> of the input element.</p>
-<CodeHighlight>
-{`
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props. The input element has <i>combobox</i> role in addition
+                            to <i>aria-autocomplete</i>, <i>aria-haspopup</i> and <i>aria-expanded</i> attributes. The relation between the input and the popup is created with <i>aria-controls</i> and <i>aria-activedescendant</i> attribute is used to
+                            instruct screen reader which option to read during keyboard navigation within the popup list.
+                        </p>
+                        <p>
+                            The popup list has an id that refers to the <i>aria-controls</i> attribute of the input element and uses <i>listbox</i> as the role. Each list item has <i>option</i> role and an id to match the <i>aria-activedescendant</i>{' '}
+                            of the input element.
+                        </p>
+                        <CodeHighlight>
+                            {`
 <label htmlFor="men1">Username</label>
 <Mention inputId="men1" />
 
@@ -836,60 +851,70 @@ const onSearch = (event) => {
 
 <Mention aria-label="City" />
 `}
-</CodeHighlight>
-                    <h6>Keyboard Support</h6>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><i>tab</i></td>
-                                    <td>Moves focus to the input element when popup is not visible.
-                                        If the popup is open and an item is highlighted then popup gets closed, item gets selected and focus moves to the next focusable element.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>up arrow</i></td>
-                                    <td>Highlights the previous item if popup is visible.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>down arrow</i></td>
-                                    <td>Highlights the next item if popup is visible.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>enter</i></td>
-                                    <td>Selects the highlighted item and closes the popup if popup is visible.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>home</i></td>
-                                    <td>Highlights the first item if popup is visible.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>end</i></td>
-                                    <td>Highlights the last item if popup is visible.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>escape</i></td>
-                                    <td>Hides the popup.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </DevelopmentSection>
+                        </CodeHighlight>
+                        <h6>Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the input element when popup is not visible. If the popup is open and an item is highlighted then popup gets closed, item gets selected and focus moves to the next focusable element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>up arrow</i>
+                                        </td>
+                                        <td>Highlights the previous item if popup is visible.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>down arrow</i>
+                                        </td>
+                                        <td>Highlights the next item if popup is visible.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>Selects the highlighted item and closes the popup if popup is visible.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>home</i>
+                                        </td>
+                                        <td>Highlights the first item if popup is visible.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>end</i>
+                                        </td>
+                                        <td>Highlights the last item if popup is visible.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>escape</i>
+                                        </td>
+                                        <td>Hides the popup.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
-
                 </TabPanel>
-                {
-                    useLiveEditorTabs({ name: 'MentionDemo', sources: sources, service: 'CustomerService', data: 'customers-small' })
-                }
+                {useLiveEditorTabs({ name: 'MentionDemo', sources: sources, service: 'CustomerService', data: 'customers-small' })}
             </TabView>
         </div>
-    )
-})
+    );
+});
 
 export default MentionDoc;

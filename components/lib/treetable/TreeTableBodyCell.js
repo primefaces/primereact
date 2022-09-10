@@ -12,7 +12,8 @@ export const TreeTableBodyCell = (props) => {
     const tabIndexTimeout = React.useRef(null);
 
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
-        type: 'click', listener: (e) => {
+        type: 'click',
+        listener: (e) => {
             if (!selfClick.current && isOutsideClicked(e.target)) {
                 switchCellToViewMode(e);
             }
@@ -37,17 +38,17 @@ export const TreeTableBodyCell = (props) => {
 
             OverlayService.on('overlay-click', overlayEventListener.current);
         }
-    }
+    };
 
     const onKeyDown = (event) => {
         if (event.which === 13 || event.which === 9) {
             switchCellToViewMode(event);
         }
-    }
+    };
 
     const isOutsideClicked = (target) => {
         return elementRef.current && !(elementRef.current.isSameNode(target) || elementRef.current.contains(target));
-    }
+    };
 
     const closeCell = () => {
         /* When using the 'tab' key, the focus event of the next cell is not called in IE. */
@@ -57,11 +58,11 @@ export const TreeTableBodyCell = (props) => {
             OverlayService.off('overlay-click', overlayEventListener.current);
             overlayEventListener = null;
         }, 1);
-    }
+    };
 
     const onEditorFocus = (event) => {
         onClick(event);
-    }
+    };
 
     const switchCellToViewMode = (event) => {
         if (props.cellEditValidator) {
@@ -73,11 +74,10 @@ export const TreeTableBodyCell = (props) => {
             if (valid) {
                 closeCell();
             }
-        }
-        else {
+        } else {
             closeCell();
         }
-    }
+    };
 
     React.useEffect(() => {
         if (elementRef.current && props.editor) {
@@ -90,8 +90,7 @@ export const TreeTableBodyCell = (props) => {
                 }
 
                 keyHelperRef.current.tabIndex = -1;
-            }
-            else {
+            } else {
                 tabIndexTimeout.current = setTimeout(() => {
                     if (keyHelperRef.current) {
                         keyHelperRef.current.setAttribute('tabindex', 0);
@@ -112,24 +111,23 @@ export const TreeTableBodyCell = (props) => {
         'p-editable-column': props.editor,
         'p-cell-editing': props.editor ? editingState : false
     });
-    const style = props.bodyStyle || props.style
+    const style = props.bodyStyle || props.style;
     let content;
 
     if (editingState) {
-        if (props.editor)
-            content = ObjectUtils.getJSXElement(props.editor, { node: props.node, rowData: props.node.data, value: ObjectUtils.resolveFieldData(props.node.data, props.field), field: props.field, rowIndex: props.rowIndex, props });
-        else
-            throw new Error("Editor is not found on column.");
-    }
-    else {
-        if (props.body)
-            content = ObjectUtils.getJSXElement(props.body, props.node, { field: props.field, rowIndex: props.rowIndex, props });
-        else
-            content = ObjectUtils.resolveFieldData(props.node.data, props.field);
+        if (props.editor) content = ObjectUtils.getJSXElement(props.editor, { node: props.node, rowData: props.node.data, value: ObjectUtils.resolveFieldData(props.node.data, props.field), field: props.field, rowIndex: props.rowIndex, props });
+        else throw new Error('Editor is not found on column.');
+    } else {
+        if (props.body) content = ObjectUtils.getJSXElement(props.body, props.node, { field: props.field, rowIndex: props.rowIndex, props });
+        else content = ObjectUtils.resolveFieldData(props.node.data, props.field);
     }
 
     /* eslint-disable */
-    const editorKeyHelper = props.editor && <a tabIndex={0} ref={keyHelperRef} className="p-cell-editor-key-helper p-hidden-accessible" onFocus={onEditorFocus}><span></span></a>;
+    const editorKeyHelper = props.editor && (
+        <a tabIndex={0} ref={keyHelperRef} className="p-cell-editor-key-helper p-hidden-accessible" onFocus={onEditorFocus}>
+            <span></span>
+        </a>
+    );
     /* eslint-enable */
 
     return (
@@ -138,7 +136,7 @@ export const TreeTableBodyCell = (props) => {
             {editorKeyHelper}
             {content}
         </td>
-    )
-}
+    );
+};
 
 TreeTableBodyCell.displayName = 'TreeTableBodyCell';

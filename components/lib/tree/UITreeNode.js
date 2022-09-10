@@ -18,7 +18,7 @@ export const UITreeNode = React.memo((props) => {
         });
 
         invokeToggleEvents(event, true);
-    }
+    };
 
     const collapse = (event) => {
         let expandedKeys = { ...props.expandedKeys };
@@ -30,7 +30,7 @@ export const UITreeNode = React.memo((props) => {
         });
 
         invokeToggleEvents(event, false);
-    }
+    };
 
     const onTogglerClick = (event) => {
         if (props.disabled) {
@@ -41,7 +41,7 @@ export const UITreeNode = React.memo((props) => {
 
         event.preventDefault();
         event.stopPropagation();
-    }
+    };
 
     const invokeToggleEvents = (event, isExpanded) => {
         if (isExpanded) {
@@ -51,8 +51,7 @@ export const UITreeNode = React.memo((props) => {
                     node: props.node
                 });
             }
-        }
-        else {
+        } else {
             if (props.onCollapse) {
                 props.onCollapse({
                     originalEvent: event,
@@ -60,7 +59,7 @@ export const UITreeNode = React.memo((props) => {
                 });
             }
         }
-    }
+    };
 
     const onNodeKeyDown = (event) => {
         if (props.disabled) {
@@ -79,8 +78,7 @@ export const UITreeNode = React.memo((props) => {
                 const listElement = nodeElement.children[1];
                 if (listElement) {
                     focusNode(listElement.children[0]);
-                }
-                else {
+                } else {
                     let nextNodeElement = nodeElement.nextElementSibling;
                     while (nextNodeElement) {
                         if (!DomHandler.hasClass(nextNodeElement, 'p-treenode-droppoint')) {
@@ -91,8 +89,7 @@ export const UITreeNode = React.memo((props) => {
 
                     if (nextNodeElement) {
                         focusNode(nextNodeElement);
-                    }
-                    else {
+                    } else {
                         const nextSiblingAncestor = findNextSiblingOfAncestor(nodeElement);
                         nextSiblingAncestor && focusNode(nextSiblingAncestor);
                     }
@@ -105,8 +102,7 @@ export const UITreeNode = React.memo((props) => {
             case 38:
                 if (nodeElement.previousElementSibling) {
                     focusNode(findLastVisibleDescendant(nodeElement.previousElementSibling));
-                }
-                else {
+                } else {
                     const parentNodeElement = getParentNodeElement(nodeElement);
                     parentNodeElement && focusNode(parentNodeElement);
                 }
@@ -142,32 +138,31 @@ export const UITreeNode = React.memo((props) => {
                 //no op
                 break;
         }
-    }
+    };
 
     const findNextSiblingOfAncestor = (nodeElement) => {
         const parentNodeElement = getParentNodeElement(nodeElement);
-        return parentNodeElement ? (parentNodeElement.nextElementSibling || findNextSiblingOfAncestor(parentNodeElement)) : null;
-    }
+        return parentNodeElement ? parentNodeElement.nextElementSibling || findNextSiblingOfAncestor(parentNodeElement) : null;
+    };
 
     const findLastVisibleDescendant = (nodeElement) => {
         const childrenListElement = nodeElement.children[1];
         if (childrenListElement) {
             const lastChildElement = childrenListElement.children[childrenListElement.children.length - 1];
             return findLastVisibleDescendant(lastChildElement);
-        }
-        else {
+        } else {
             return nodeElement;
         }
-    }
+    };
 
     const getParentNodeElement = (nodeElement) => {
         const parentNodeElement = nodeElement.parentElement.parentElement;
         return DomHandler.hasClass(parentNodeElement, 'p-treenode') ? parentNodeElement : null;
-    }
+    };
 
     const focusNode = (element) => {
         element && element.children[0] && element.children[0].focus();
-    }
+    };
 
     const onClick = (event) => {
         if (props.onClick) {
@@ -190,10 +185,8 @@ export const UITreeNode = React.memo((props) => {
                 selectionKeys = props.selectionKeys ? { ...props.selectionKeys } : {};
 
                 if (checked) {
-                    if (props.propagateSelectionDown)
-                        propagateDown(props.node, false, selectionKeys);
-                    else
-                        delete selectionKeys[props.node.key];
+                    if (props.propagateSelectionDown) propagateDown(props.node, false, selectionKeys);
+                    else delete selectionKeys[props.node.key];
 
                     if (props.propagateSelectionUp && props.onPropagateUp) {
                         props.onPropagateUp({
@@ -209,12 +202,9 @@ export const UITreeNode = React.memo((props) => {
                             node: props.node
                         });
                     }
-                }
-                else {
-                    if (props.propagateSelectionDown)
-                        propagateDown(props.node, true, selectionKeys);
-                    else
-                        selectionKeys[props.node.key] = { checked: true };
+                } else {
+                    if (props.propagateSelectionDown) propagateDown(props.node, true, selectionKeys);
+                    else selectionKeys[props.node.key] = { checked: true };
 
                     if (props.propagateSelectionUp && props.onPropagateUp) {
                         props.onPropagateUp({
@@ -231,19 +221,17 @@ export const UITreeNode = React.memo((props) => {
                         });
                     }
                 }
-            }
-            else {
+            } else {
                 const selected = isSelected();
                 const metaSelection = nodeTouched.current ? false : props.metaKeySelection;
 
                 if (metaSelection) {
-                    let metaKey = (event.metaKey || event.ctrlKey);
+                    let metaKey = event.metaKey || event.ctrlKey;
 
                     if (selected && metaKey) {
                         if (isSingleSelectionMode()) {
                             selectionKeys = null;
-                        }
-                        else {
+                        } else {
                             selectionKeys = { ...props.selectionKeys };
                             delete selectionKeys[props.node.key];
                         }
@@ -254,13 +242,11 @@ export const UITreeNode = React.memo((props) => {
                                 node: props.node
                             });
                         }
-                    }
-                    else {
+                    } else {
                         if (isSingleSelectionMode()) {
                             selectionKeys = props.node.key;
-                        }
-                        else if (isMultipleSelectionMode()) {
-                            selectionKeys = !metaKey ? {} : (props.selectionKeys ? { ...props.selectionKeys } : {});
+                        } else if (isMultipleSelectionMode()) {
+                            selectionKeys = !metaKey ? {} : props.selectionKeys ? { ...props.selectionKeys } : {};
                             selectionKeys[props.node.key] = true;
                         }
 
@@ -271,8 +257,7 @@ export const UITreeNode = React.memo((props) => {
                             });
                         }
                     }
-                }
-                else {
+                } else {
                     if (isSingleSelectionMode()) {
                         if (selected) {
                             selectionKeys = null;
@@ -283,8 +268,7 @@ export const UITreeNode = React.memo((props) => {
                                     node: props.node
                                 });
                             }
-                        }
-                        else {
+                        } else {
                             selectionKeys = props.node.key;
 
                             if (props.onSelect) {
@@ -294,8 +278,7 @@ export const UITreeNode = React.memo((props) => {
                                 });
                             }
                         }
-                    }
-                    else {
+                    } else {
                         if (selected) {
                             selectionKeys = { ...props.selectionKeys };
                             delete selectionKeys[props.node.key];
@@ -306,8 +289,7 @@ export const UITreeNode = React.memo((props) => {
                                     node: props.node
                                 });
                             }
-                        }
-                        else {
+                        } else {
                             selectionKeys = props.selectionKeys ? { ...props.selectionKeys } : {};
                             selectionKeys[props.node.key] = true;
 
@@ -326,21 +308,21 @@ export const UITreeNode = React.memo((props) => {
                 props.onSelectionChange({
                     originalEvent: event,
                     value: selectionKeys
-                })
+                });
             }
         }
 
         nodeTouched.current = false;
-    }
+    };
 
     const onDoubleClick = (event) => {
         if (props.onDoubleClick) {
             props.onDoubleClick({
                 originalEvent: event,
                 node: props.node
-            })
+            });
         }
-    }
+    };
 
     const onRightClick = (event) => {
         if (props.disabled) {
@@ -353,7 +335,7 @@ export const UITreeNode = React.memo((props) => {
             props.onContextMenuSelectionChange({
                 originalEvent: event,
                 value: props.node.key
-            })
+            });
         }
 
         if (props.onContextMenu) {
@@ -362,7 +344,7 @@ export const UITreeNode = React.memo((props) => {
                 node: props.node
             });
         }
-    }
+    };
 
     const propagateUp = (event) => {
         let check = event.check;
@@ -371,74 +353,65 @@ export const UITreeNode = React.memo((props) => {
         let childPartialSelected = false;
 
         for (let child of props.node.children) {
-            if (selectionKeys[child.key] && selectionKeys[child.key].checked)
-                checkedChildCount++;
-            else if (selectionKeys[child.key] && selectionKeys[child.key].partialChecked)
-                childPartialSelected = true;
+            if (selectionKeys[child.key] && selectionKeys[child.key].checked) checkedChildCount++;
+            else if (selectionKeys[child.key] && selectionKeys[child.key].partialChecked) childPartialSelected = true;
         }
 
         if (check && checkedChildCount === props.node.children.length) {
             selectionKeys[props.node.key] = { checked: true, partialChecked: false };
-        }
-        else {
+        } else {
             if (!check) {
                 delete selectionKeys[props.node.key];
             }
 
-            if (childPartialSelected || (checkedChildCount > 0 && checkedChildCount !== props.node.children.length))
-                selectionKeys[props.node.key] = { checked: false, partialChecked: true };
-            else
-                delete selectionKeys[props.node.key];
+            if (childPartialSelected || (checkedChildCount > 0 && checkedChildCount !== props.node.children.length)) selectionKeys[props.node.key] = { checked: false, partialChecked: true };
+            else delete selectionKeys[props.node.key];
         }
 
         if (props.propagateSelectionUp && props.onPropagateUp) {
             props.onPropagateUp(event);
         }
-    }
+    };
 
     const propagateDown = (node, check, selectionKeys) => {
-        if (check)
-            selectionKeys[node.key] = { checked: true, partialChecked: false };
-        else
-            delete selectionKeys[node.key];
+        if (check) selectionKeys[node.key] = { checked: true, partialChecked: false };
+        else delete selectionKeys[node.key];
 
         if (node.children && node.children.length) {
             for (let i = 0; i < node.children.length; i++) {
                 propagateDown(node.children[i], check, selectionKeys);
             }
         }
-    }
+    };
 
     const isSelected = () => {
-        if (props.selectionMode && props.selectionKeys)
-            return isSingleSelectionMode() ? props.selectionKeys === props.node.key : props.selectionKeys[props.node.key] !== undefined;
-        else
-            return false;
-    }
+        if (props.selectionMode && props.selectionKeys) return isSingleSelectionMode() ? props.selectionKeys === props.node.key : props.selectionKeys[props.node.key] !== undefined;
+        else return false;
+    };
 
     const isChecked = () => {
         return props.selectionKeys ? props.selectionKeys[props.node.key] && props.selectionKeys[props.node.key].checked : false;
-    }
+    };
 
     const isPartialChecked = () => {
         return props.selectionKeys ? props.selectionKeys[props.node.key] && props.selectionKeys[props.node.key].partialChecked : false;
-    }
+    };
 
     const isSingleSelectionMode = () => {
         return props.selectionMode && props.selectionMode === 'single';
-    }
+    };
 
     const isMultipleSelectionMode = () => {
         return props.selectionMode && props.selectionMode === 'multiple';
-    }
+    };
 
     const isCheckboxSelectionMode = () => {
         return props.selectionMode && props.selectionMode === 'checkbox';
-    }
+    };
 
     const onTouchEnd = () => {
         nodeTouched.current = true;
-    }
+    };
 
     const onDropPoint = (event, position) => {
         event.preventDefault();
@@ -457,26 +430,26 @@ export const UITreeNode = React.memo((props) => {
                 });
             }
         }
-    }
+    };
 
     const onDropPointDragOver = (event) => {
         if (event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase()) {
             event.dataTransfer.dropEffect = 'move';
             event.preventDefault();
         }
-    }
+    };
 
     const onDropPointDragEnter = (event) => {
         if (event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase()) {
             DomHandler.addClass(event.target, 'p-treenode-droppoint-active');
         }
-    }
+    };
 
     const onDropPointDragLeave = (event) => {
         if (event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase()) {
             DomHandler.removeClass(event.target, 'p-treenode-droppoint-active');
         }
-    }
+    };
 
     const onDrop = (event) => {
         if (props.dragdropScope && props.node.droppable !== false) {
@@ -492,7 +465,7 @@ export const UITreeNode = React.memo((props) => {
                 });
             }
         }
-    }
+    };
 
     const onDragOver = (event) => {
         if (event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase() && props.node.droppable !== false) {
@@ -500,13 +473,13 @@ export const UITreeNode = React.memo((props) => {
             event.preventDefault();
             event.stopPropagation();
         }
-    }
+    };
 
     const onDragEnter = (event) => {
         if (event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase() && props.node.droppable !== false) {
             DomHandler.addClass(contentRef.current, 'p-treenode-dragover');
         }
-    }
+    };
 
     const onDragLeave = (event) => {
         if (event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase() && props.node.droppable !== false) {
@@ -515,10 +488,10 @@ export const UITreeNode = React.memo((props) => {
                 DomHandler.removeClass(contentRef.current, 'p-treenode-dragover');
             }
         }
-    }
+    };
 
     const onDragStart = (event) => {
-        event.dataTransfer.setData("text", props.dragdropScope);
+        event.dataTransfer.setData('text', props.dragdropScope);
         event.dataTransfer.setData(props.dragdropScope, props.dragdropScope);
 
         if (props.onDragStart) {
@@ -528,7 +501,7 @@ export const UITreeNode = React.memo((props) => {
                 index: props.index
             });
         }
-    }
+    };
 
     const onDragEnd = (event) => {
         if (props.onDragEnd) {
@@ -536,14 +509,10 @@ export const UITreeNode = React.memo((props) => {
                 originalEvent: event
             });
         }
-    }
+    };
 
     const createLabel = () => {
-        let content = (
-            <span className="p-treenode-label">
-                {props.node.label}
-            </span>
-        );
+        let content = <span className="p-treenode-label">{props.node.label}</span>;
 
         if (props.nodeTemplate) {
             const defaultContentOptions = {
@@ -558,7 +527,7 @@ export const UITreeNode = React.memo((props) => {
         }
 
         return content;
-    }
+    };
 
     const createCheckbox = () => {
         if (isCheckboxSelectionMode() && props.node.selectable !== false) {
@@ -573,11 +542,11 @@ export const UITreeNode = React.memo((props) => {
                         <span className={icon}></span>
                     </div>
                 </div>
-            )
+            );
         }
 
         return null;
-    }
+    };
 
     const createIcon = () => {
         const icon = props.node.icon || (expanded ? props.node.expandedIcon : props.node.collapsedIcon);
@@ -585,11 +554,11 @@ export const UITreeNode = React.memo((props) => {
         if (icon) {
             const className = classNames('p-treenode-icon', icon);
 
-            return <span className={className}></span>
+            return <span className={className}></span>;
         }
 
         return null;
-    }
+    };
 
     const createToggler = () => {
         const iconClassName = classNames('p-tree-toggler-icon pi pi-fw', { 'pi-chevron-right': !expanded, 'pi-chevron-down': expanded });
@@ -614,26 +583,23 @@ export const UITreeNode = React.memo((props) => {
         }
 
         return content;
-    }
+    };
 
     const createDropPoint = (position) => {
         if (props.dragdropScope) {
-            return (
-                <li className="p-treenode-droppoint" onDrop={event => onDropPoint(event, position)} onDragOver={onDropPointDragOver}
-                    onDragEnter={onDropPointDragEnter} onDragLeave={onDropPointDragLeave}></li>
-            )
+            return <li className="p-treenode-droppoint" onDrop={(event) => onDropPoint(event, position)} onDragOver={onDropPointDragOver} onDragEnter={onDropPointDragEnter} onDragLeave={onDropPointDragLeave}></li>;
         }
 
         return null;
-    }
+    };
 
     const createContent = () => {
         const selected = isSelected();
         const checked = isChecked();
         const className = classNames('p-treenode-content', props.node.className, {
-            'p-treenode-selectable': (props.selectionMode && props.node.selectable !== false),
+            'p-treenode-selectable': props.selectionMode && props.node.selectable !== false,
             'p-highlight': isCheckboxSelectionMode() ? checked : selected,
-            'p-highlight-contextmenu': (props.contextMenuSelectionKey && props.contextMenuSelectionKey === props.node.key),
+            'p-highlight-contextmenu': props.contextMenuSelectionKey && props.contextMenuSelectionKey === props.node.key,
             'p-disabled': props.disabled
         });
         const toggler = createToggler();
@@ -643,47 +609,94 @@ export const UITreeNode = React.memo((props) => {
         const tabIndex = props.disabled ? undefined : 0;
 
         return (
-            <div ref={contentRef} className={className} style={props.node.style} onClick={onClick} onDoubleClick={onDoubleClick}
-                onContextMenu={onRightClick} onTouchEnd={onTouchEnd} draggable={props.dragdropScope && props.node.draggable !== false && !props.disabled}
-                onDrop={onDrop} onDragOver={onDragOver} onDragEnter={onDragEnter} onDragLeave={onDragLeave}
-                onDragStart={onDragStart} onDragEnd={onDragEnd} tabIndex={tabIndex} onKeyDown={onNodeKeyDown}
-                role="treeitem" aria-posinset={props.index + 1} aria-expanded={expanded} aria-selected={checked || selected}>
+            <div
+                ref={contentRef}
+                className={className}
+                style={props.node.style}
+                onClick={onClick}
+                onDoubleClick={onDoubleClick}
+                onContextMenu={onRightClick}
+                onTouchEnd={onTouchEnd}
+                draggable={props.dragdropScope && props.node.draggable !== false && !props.disabled}
+                onDrop={onDrop}
+                onDragOver={onDragOver}
+                onDragEnter={onDragEnter}
+                onDragLeave={onDragLeave}
+                onDragStart={onDragStart}
+                onDragEnd={onDragEnd}
+                tabIndex={tabIndex}
+                onKeyDown={onNodeKeyDown}
+                role="treeitem"
+                aria-posinset={props.index + 1}
+                aria-expanded={expanded}
+                aria-selected={checked || selected}
+            >
                 {toggler}
                 {checkbox}
                 {icon}
                 {label}
             </div>
-        )
-    }
+        );
+    };
 
     const createChildren = () => {
         if (ObjectUtils.isNotEmpty(props.node.children) && expanded) {
             return (
                 <ul className="p-treenode-children" role="group">
-                    {
-                        props.node.children.map((childNode, index) => {
-                            return (
-                                <UITreeNode key={childNode.key || childNode.label} node={childNode} parent={props.node} index={index} last={index === props.node.children.length - 1} path={props.path + '-' + index} disabled={props.disabled}
-                                    selectionMode={props.selectionMode} selectionKeys={props.selectionKeys} onSelectionChange={props.onSelectionChange} metaKeySelection={props.metaKeySelection}
-                                    propagateSelectionDown={props.propagateSelectionDown} propagateSelectionUp={props.propagateSelectionUp}
-                                    contextMenuSelectionKey={props.contextMenuSelectionKey} onContextMenuSelectionChange={props.onContextMenuSelectionChange} onContextMenu={props.onContextMenu}
-                                    onExpand={props.onExpand} onCollapse={props.onCollapse} onSelect={props.onSelect} onUnselect={props.onUnselect} onClick={props.onClick} onDoubleClick={props.onDoubleClick}
-                                    expandedKeys={props.expandedKeys} onToggle={props.onToggle} onPropagateUp={propagateUp} nodeTemplate={props.nodeTemplate} togglerTemplate={props.togglerTemplate} isNodeLeaf={props.isNodeLeaf}
-                                    dragdropScope={props.dragdropScope} onDragStart={props.onDragStart} onDragEnd={props.onDragEnd} onDrop={props.onDrop} onDropPoint={props.onDropPoint} />
-                            )
-                        })
-                    }
+                    {props.node.children.map((childNode, index) => {
+                        return (
+                            <UITreeNode
+                                key={childNode.key || childNode.label}
+                                node={childNode}
+                                parent={props.node}
+                                index={index}
+                                last={index === props.node.children.length - 1}
+                                path={props.path + '-' + index}
+                                disabled={props.disabled}
+                                selectionMode={props.selectionMode}
+                                selectionKeys={props.selectionKeys}
+                                onSelectionChange={props.onSelectionChange}
+                                metaKeySelection={props.metaKeySelection}
+                                propagateSelectionDown={props.propagateSelectionDown}
+                                propagateSelectionUp={props.propagateSelectionUp}
+                                contextMenuSelectionKey={props.contextMenuSelectionKey}
+                                onContextMenuSelectionChange={props.onContextMenuSelectionChange}
+                                onContextMenu={props.onContextMenu}
+                                onExpand={props.onExpand}
+                                onCollapse={props.onCollapse}
+                                onSelect={props.onSelect}
+                                onUnselect={props.onUnselect}
+                                onClick={props.onClick}
+                                onDoubleClick={props.onDoubleClick}
+                                expandedKeys={props.expandedKeys}
+                                onToggle={props.onToggle}
+                                onPropagateUp={propagateUp}
+                                nodeTemplate={props.nodeTemplate}
+                                togglerTemplate={props.togglerTemplate}
+                                isNodeLeaf={props.isNodeLeaf}
+                                dragdropScope={props.dragdropScope}
+                                onDragStart={props.onDragStart}
+                                onDragEnd={props.onDragEnd}
+                                onDrop={props.onDrop}
+                                onDropPoint={props.onDropPoint}
+                            />
+                        );
+                    })}
                 </ul>
-            )
+            );
         }
 
         return null;
-    }
+    };
 
     const createNode = () => {
-        const className = classNames('p-treenode', {
-            'p-treenode-leaf': isLeaf
-        }, props.node.className)
+        const className = classNames(
+            'p-treenode',
+            {
+                'p-treenode-leaf': isLeaf
+            },
+            props.node.className
+        );
         const content = createContent();
         const children = createChildren();
 
@@ -692,8 +705,8 @@ export const UITreeNode = React.memo((props) => {
                 {content}
                 {children}
             </li>
-        )
-    }
+        );
+    };
 
     const node = createNode();
 
@@ -707,7 +720,7 @@ export const UITreeNode = React.memo((props) => {
                 {node}
                 {afterDropPoint}
             </>
-        )
+        );
     }
 
     return node;

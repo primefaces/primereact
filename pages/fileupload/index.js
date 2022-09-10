@@ -11,7 +11,6 @@ import Head from 'next/head';
 import getConfig from 'next/config';
 
 const FileUploadDemo = () => {
-
     const [totalSize, setTotalSize] = useState(0);
     const toast = useRef(null);
     const fileUploadRef = useRef(null);
@@ -19,44 +18,44 @@ const FileUploadDemo = () => {
 
     const onUpload = () => {
         toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' });
-    }
+    };
 
     const onTemplateSelect = (e) => {
         let _totalSize = totalSize;
         let files = e.files;
-        Object.keys(files).forEach(key => {
-            _totalSize += (files[key].size || 0);
+        Object.keys(files).forEach((key) => {
+            _totalSize += files[key].size || 0;
         });
 
         setTotalSize(_totalSize);
-    }
+    };
 
     const onTemplateUpload = (e) => {
         let _totalSize = 0;
-        e.files.forEach(file => {
-            _totalSize += (file.size || 0);
+        e.files.forEach((file) => {
+            _totalSize += file.size || 0;
         });
 
         setTotalSize(_totalSize);
         toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' });
-    }
+    };
 
     const onTemplateRemove = (file, callback) => {
         setTotalSize(totalSize - file.size);
         callback();
-    }
+    };
 
     const onTemplateClear = () => {
         setTotalSize(0);
-    }
+    };
 
     const onBasicUpload = () => {
         toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
-    }
+    };
 
     const onBasicUploadAuto = () => {
         toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode' });
-    }
+    };
 
     const headerTemplate = (options) => {
         const { className, chooseButton, uploadButton, cancelButton } = options;
@@ -71,7 +70,7 @@ const FileUploadDemo = () => {
                 <ProgressBar value={value} displayValueTemplate={() => `${formatedValue} / 1 MB`} style={{ width: '300px', height: '20px', marginLeft: 'auto' }}></ProgressBar>
             </div>
         );
-    }
+    };
 
     const itemTemplate = (file, props) => {
         return (
@@ -86,30 +85,32 @@ const FileUploadDemo = () => {
                 <Tag value={props.formatSize} severity="warning" className="px-3 py-2" />
                 <Button type="button" icon="pi pi-times" className="p-button-outlined p-button-rounded p-button-danger ml-auto" onClick={() => onTemplateRemove(file, props.onRemove)} />
             </div>
-        )
-    }
+        );
+    };
 
     const emptyTemplate = () => {
         return (
             <div className="flex align-items-center flex-column">
-                <i className="pi pi-image mt-3 p-5" style={{ 'fontSize': '5em', borderRadius: '50%', backgroundColor: 'var(--surface-b)', color: 'var(--surface-d)' }}></i>
-                <span style={{ 'fontSize': '1.2em', color: 'var(--text-color-secondary)' }} className="my-5">Drag and Drop Image Here</span>
+                <i className="pi pi-image mt-3 p-5" style={{ fontSize: '5em', borderRadius: '50%', backgroundColor: 'var(--surface-b)', color: 'var(--surface-d)' }}></i>
+                <span style={{ fontSize: '1.2em', color: 'var(--text-color-secondary)' }} className="my-5">
+                    Drag and Drop Image Here
+                </span>
             </div>
-        )
-    }
+        );
+    };
 
     const customBase64Uploader = async (event) => {
-        // convert file to base64 encoded 
+        // convert file to base64 encoded
         const file = event.files[0];
         const reader = new FileReader();
-        let blob = await fetch(file.objectURL).then(r => r.blob()); //blob:url
-        reader.readAsDataURL(blob); 
+        let blob = await fetch(file.objectURL).then((r) => r.blob()); //blob:url
+        reader.readAsDataURL(blob);
         reader.onloadend = function () {
             const base64data = reader.result;
             // eslint-disable-next-line no-console
             console.log(base64data);
-        }
-    }
+        };
+    };
 
     const chooseOptions = { icon: 'pi pi-fw pi-images', iconOnly: true, className: 'custom-choose-btn p-button-rounded p-button-outlined' };
     const uploadOptions = { icon: 'pi pi-fw pi-cloud-upload', iconOnly: true, className: 'custom-upload-btn p-button-success p-button-rounded p-button-outlined' };
@@ -138,14 +139,27 @@ const FileUploadDemo = () => {
 
                 <div className="card">
                     <h5>Advanced</h5>
-                    <FileUpload name="demo[]" url={uploadPath} onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000}
-                        emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
+                    <FileUpload name="demo[]" url={uploadPath} onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
 
                     <h5>Template</h5>
-                    <FileUpload ref={fileUploadRef} name="demo[]" url={uploadPath} multiple accept="image/*" maxFileSize={1000000}
-                        onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
-                        headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate}
-                        chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
+                    <FileUpload
+                        ref={fileUploadRef}
+                        name="demo[]"
+                        url={uploadPath}
+                        multiple
+                        accept="image/*"
+                        maxFileSize={1000000}
+                        onUpload={onTemplateUpload}
+                        onSelect={onTemplateSelect}
+                        onError={onTemplateClear}
+                        onClear={onTemplateClear}
+                        headerTemplate={headerTemplate}
+                        itemTemplate={itemTemplate}
+                        emptyTemplate={emptyTemplate}
+                        chooseOptions={chooseOptions}
+                        uploadOptions={uploadOptions}
+                        cancelOptions={cancelOptions}
+                    />
 
                     <h5>Basic</h5>
                     <FileUpload mode="basic" name="demo[]" url={uploadPath} accept="image/*" maxFileSize={1000000} onUpload={onBasicUpload} />
@@ -160,7 +174,7 @@ const FileUploadDemo = () => {
 
             <FileUploadDoc />
         </div>
-    )
-}
+    );
+};
 
 export default FileUploadDemo;

@@ -42,6 +42,18 @@ const ButtonProps = [
         description: 'Configuration of the tooltip, refer to the tooltip documentation for more information.'
     },
     {
+        name: 'disabled',
+        type: 'boolean',
+        default: 'false',
+        description: 'When present, it specifies that the element should be disabled.'
+    },
+    {
+        name: 'visible',
+        type: 'boolean',
+        default: 'true',
+        description: 'When present, it specifies that the element should be visible.'
+    },
+    {
         name: 'loading',
         type: 'boolean',
         default: 'false',
@@ -55,9 +67,7 @@ const ButtonProps = [
     }
 ];
 
-const ButtonEvents = [
-
-];
+const ButtonEvents = [];
 
 const ButtonStyles = [
     { name: 'p-button', description: 'Button element' },
