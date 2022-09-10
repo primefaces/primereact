@@ -1,9 +1,9 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import PrimeReact, { localeOption } from '../api/Api';
+import { Button } from '../button/Button';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 
 export const Sidebar = React.forwardRef((props, ref) => {
@@ -146,12 +146,8 @@ export const Sidebar = React.forwardRef((props, ref) => {
 
     const createCloseIcon = () => {
         if (props.showCloseIcon) {
-            return (
-                <button type="button" ref={closeIconRef} className="p-sidebar-close p-sidebar-icon p-link" onClick={onClose} aria-label={props.ariaCloseLabel}>
-                    <span className="p-sidebar-close-icon pi pi-times" />
-                    <Ripple />
-                </button>
-            );
+            const ariaLabel = props.ariaCloseLabel || localeOption('close');
+            return <Button ref={closeIconRef} type="button" className="p-sidebar-close p-sidebar-icon p-link" icon="p-sidebar-close-icon pi pi-times" onClick={onClose} aria-label={ariaLabel} />;
         }
 
         return null;
@@ -223,7 +219,7 @@ Sidebar.defaultProps = {
     baseZIndex: 0,
     dismissable: true,
     showCloseIcon: true,
-    ariaCloseLabel: 'close',
+    ariaCloseLabel: null,
     closeOnEscape: true,
     icons: null,
     modal: true,
