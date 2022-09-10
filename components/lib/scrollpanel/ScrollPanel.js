@@ -86,10 +86,10 @@ export const ScrollPanel = React.forwardRef((props, ref) => {
     }
 
     const onDocumentMouseMove = (event) => {
-        if (isXBarClicked) {
+        if (isXBarClicked.current) {
             onMouseMoveForXBar(event);
         }
-        else if (isYBarClicked) {
+        else if (isYBarClicked.current) {
             onMouseMoveForYBar(event);
         }
         else {
@@ -109,7 +109,7 @@ export const ScrollPanel = React.forwardRef((props, ref) => {
 
     const onMouseMoveForYBar = (event) => {
         const deltaY = event.pageY - lastPageY.current;
-        lastPageY.current = e.pageY;
+        lastPageY.current = event.pageY;
 
         frame.current = window.requestAnimationFrame(() => {
             contentRef.current.scrollTop += deltaY / scrollYRatio.current;
