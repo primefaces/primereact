@@ -1,8 +1,8 @@
 import * as React from 'react';
 import PrimeReact, { localeOption } from '../api/Api';
+import { Button } from '../button/Button';
 import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
-import { Ripple } from '../ripple/Ripple';
 import { Tree } from '../tree/Tree';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { TreeSelectPanel } from './TreeSelectPanel';
@@ -467,12 +467,7 @@ export const TreeSelect = React.memo(
 
         const createHeader = () => {
             const filterElement = createFilterElement();
-            const closeElement = (
-                <button type="button" className="p-treeselect-close p-link" onClick={hide}>
-                    <span className="p-treeselect-close-icon pi pi-times"></span>
-                    <Ripple />
-                </button>
-            );
+            const closeElement = <Button type="button" className="p-treeselect-close p-link" icon="p-treeselect-close-icon pi pi-times" onClick={hide} aria-label={localeOption('close')} />;
             const content = (
                 <div className="p-treeselect-header">
                     {filterElement}

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import PrimeReact, { localeOption } from '../api/Api';
+import { Button } from '../button/Button';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
@@ -407,12 +408,8 @@ export const Dialog = React.forwardRef((props, ref) => {
 
     const createCloseIcon = () => {
         if (props.closable) {
-            return (
-                <button ref={closeRef} type="button" className="p-dialog-header-icon p-dialog-header-close p-link" aria-label={props.ariaCloseIconLabel} onClick={onClose}>
-                    <span className="p-dialog-header-close-icon pi pi-times"></span>
-                    <Ripple />
-                </button>
-            );
+            const ariaLabel = props.ariaCloseIconLabel || localeOption('close');
+            return <Button ref={closeRef} type="button" className="p-dialog-header-icon p-dialog-header-close p-link" icon="p-dialog-header-close-icon pi pi-times" onClick={onClose} aria-label={ariaLabel} />;
         }
 
         return null;
@@ -576,7 +573,7 @@ Dialog.defaultProps = {
     maximizable: false,
     blockScroll: false,
     icons: null,
-    ariaCloseIconLabel: 'Close',
+    ariaCloseIconLabel: null,
     focusOnShow: true,
     minX: 0,
     minY: 0,

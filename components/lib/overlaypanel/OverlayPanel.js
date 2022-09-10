@@ -1,10 +1,10 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import PrimeReact, { localeOption } from '../api/Api';
+import { Button } from '../button/Button';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
 
 export const OverlayPanel = React.forwardRef((props, ref) => {
@@ -184,12 +184,8 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
 
     const createCloseIcon = () => {
         if (props.showCloseIcon) {
-            return (
-                <button type="button" className="p-overlaypanel-close p-link" onClick={onCloseClick} aria-label={props.ariaCloseLabel}>
-                    <span className="p-overlaypanel-close-icon pi pi-times"></span>
-                    <Ripple />
-                </button>
-            );
+            const ariaLabel = props.ariaCloseLabel || localeOption('close');
+            return <Button type="button" className="p-overlaypanel-close p-link" icon="p-overlaypanel-close-icon pi pi-times" onClick={onCloseClick} aria-label={ariaLabel} />;
         }
 
         return null;
@@ -238,7 +234,7 @@ OverlayPanel.defaultProps = {
     className: null,
     appendTo: null,
     breakpoints: null,
-    ariaCloseLabel: 'close',
+    ariaCloseLabel: null,
     transitionOptions: null,
     onShow: null,
     onHide: null

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
-import { classNames, ObjectUtils, DomHandler } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { DropdownItem } from './DropdownItem';
 
@@ -93,7 +93,8 @@ export const DropdownPanel = React.memo(
 
         const createFilterClearIcon = () => {
             if (props.showFilterClear && props.filterValue) {
-                return <i className="p-dropdown-filter-clear-icon pi pi-times" onClick={() => props.onFilterClearIconClick(() => DomHandler.focus(filterInputRef.current))}></i>;
+                const ariaLabel = localeOption('clear');
+                return <i className="p-dropdown-filter-clear-icon pi pi-times" aria-label={ariaLabel} onClick={() => props.onFilterClearIconClick(() => DomHandler.focus(filterInputRef.current))}></i>;
             }
 
             return null;
