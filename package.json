@@ -12,7 +12,7 @@
         "build:check": "npm run lint && npm run format:check && npm run type:check && npm run security:check",
         "security:check": "npm audit --production --audit-level high",
         "format": "prettier --write \"{components,pages,service,api-generator}/**/*.{js,ts,tsx}\"",
-        "format:check": "prettier --check \"**/*.{js,ts,tsx}\"",
+        "format:check": "prettier --check \"{components,pages,service,api-generator}/**/*.{js,ts,tsx}\"",
         "lint": "next lint --max-warnings=0",
         "lint:fix": "next lint --fix",
         "type:check": "tsc"
