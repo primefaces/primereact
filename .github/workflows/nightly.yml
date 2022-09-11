@@ -12,7 +12,7 @@ jobs:
     if: github.repository == 'primefaces/primereact' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     name: Node ${{ matrix.node-version }}
-    
+
     strategy:
       matrix:
         node-version: [16.x, 18.x]
@@ -29,4 +29,4 @@ jobs:
     - name: Build
       run: |
         npm install
-        npm run build-lib
+        npm run build:lib

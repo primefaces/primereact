@@ -4,17 +4,18 @@
     "version": "8.5.1-SNAPSHOT",
     "scripts": {
         "dev": "next dev",
-        "build": "next build && next export",
-        "build-lib": "NODE_ENV=production INPUT_DIR=components/lib/ OUTPUT_DIR=dist/ npm run build-package",
-        "build-package": "npm run build-check && rollup -c && gulp build-resources && npm run build-api",
-        "build-api": "node ./api-generator/build-api.js",
-        "build-check": "npm run lint && npm run format-check && npm run type-check && npm run security-check",
-        "security-check": "npm audit --production --audit-level high",
-        "format-check": "prettier --check \"{components,pages,service,api-generator}/**/*.{js,ts,tsx}\"",
-        "format": "prettier --write \"{components,pages,service,api-generator}/**/*.{js,ts,tsx}\"",
         "start": "next start",
+        "build": "next build && next export",
+        "build:lib": "NODE_ENV=production INPUT_DIR=components/lib/ OUTPUT_DIR=dist/ npm run build:package",
+        "build:package": "npm run build:check && rollup -c && gulp build-resources && npm run build:api",
+        "build:api": "node ./api-generator/build-api.js",
+        "build:check": "npm run lint && npm run format:check && npm run type:check && npm run security:check",
+        "security:check": "npm audit --production --audit-level high",
+        "format": "prettier --write \"{components,pages,service,api-generator}/**/*.{js,ts,tsx}\"",
+        "format:check": "prettier --check \"**/*.{js,ts,tsx}\"",
         "lint": "next lint --max-warnings=0",
-        "type-check": "tsc"
+        "lint:fix": "next lint --fix",
+        "type:check": "tsc"
     },
     "dependencies": {
         "chart.js": "3.9.1",
