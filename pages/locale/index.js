@@ -1,6 +1,6 @@
+import Head from 'next/head';
 import React from 'react';
 import { CodeHighlight } from '../../components/doc/common/codehighlight';
-import Head from 'next/head';
 
 const LocaleDemo = () => {
     return (
@@ -156,6 +156,10 @@ locale('es');
                                 <td>No Filter</td>
                             </tr>
                             <tr>
+                                <td>filter</td>
+                                <td>Filter</td>
+                            </tr>
+                            <tr>
                                 <td>lt</td>
                                 <td>Less than</td>
                             </tr>
@@ -236,6 +240,10 @@ locale('es');
                                 <td>Cancel</td>
                             </tr>
                             <tr>
+                                <td>close</td>
+                                <td>Close</td>
+                            </tr>
+                            <tr>
                                 <td>dayNames</td>
                                 <td>['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']</td>
                             </tr>
@@ -293,7 +301,47 @@ locale('es');
                             </tr>
                             <tr>
                                 <td>emptyMessage</td>
-                                <td>No results found'</td>
+                                <td>No results found</td>
+                            </tr>
+                            <tr>
+                                <td>aria.trueLabel</td>
+                                <td>True</td>
+                            </tr>
+                            <tr>
+                                <td>aria.falseLabel</td>
+                                <td>False</td>
+                            </tr>
+                            <tr>
+                                <td>aria.nullLabel</td>
+                                <td>Not Selected</td>
+                            </tr>
+                            <tr>
+                                <td>aria.pageLabel</td>
+                                <td>Page</td>
+                            </tr>
+                            <tr>
+                                <td>aria.firstPageLabel</td>
+                                <td>First Page</td>
+                            </tr>
+                            <tr>
+                                <td>aria.lastPageLabel</td>
+                                <td>Last Page</td>
+                            </tr>
+                            <tr>
+                                <td>aria.nextPageLabel</td>
+                                <td>Next Page</td>
+                            </tr>
+                            <tr>
+                                <td>aria.previousPageLabel</td>
+                                <td>Previous Page</td>
+                            </tr>
+                            <tr>
+                                <td>aria.selectLabel</td>
+                                <td>Select</td>
+                            </tr>
+                            <tr>
+                                <td>aria.unselectLabel</td>
+                                <td>Unselect</td>
                             </tr>
                         </tbody>
                     </table>
