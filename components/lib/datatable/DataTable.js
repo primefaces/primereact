@@ -932,7 +932,8 @@ export const DataTable = React.forwardRef((props, ref) => {
         const value1 = ObjectUtils.resolveFieldData(data1, multiSortMeta[index].field);
         const value2 = ObjectUtils.resolveFieldData(data2, multiSortMeta[index].field);
 
-        if (value1 === value2) {
+        // check if they are equal handling dates and locales
+        if (ObjectUtils.compare(value1, value2, PrimeReact.locale) === 0) {
             return multiSortMeta.length - 1 > index ? multisortField(data1, data2, multiSortMeta, index + 1) : 0;
         }
 
