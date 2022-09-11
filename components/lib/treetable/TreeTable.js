@@ -178,7 +178,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
                 const sortField = getSortField();
                 const value1 = ObjectUtils.resolveFieldData(node1.data, sortField);
                 const value2 = ObjectUtils.resolveFieldData(node2.data, sortField);
-                return ObjectUtils.sort(value1, value2, getSortOrder(), PrimeReact.locale, PrimeReact.nullSortOrder);
+                return compareValuesOnSort(value1, value2, getSortOrder());
             });
 
             for (let i = 0; i < value.length; i++) {
@@ -216,21 +216,17 @@ export const TreeTable = React.forwardRef((props, ref) => {
     const multisortField = (node1, node2, multiSortMeta, index) => {
         const value1 = ObjectUtils.resolveFieldData(node1.data, multiSortMeta[index].field);
         const value2 = ObjectUtils.resolveFieldData(node2.data, multiSortMeta[index].field);
-        let result = null;
 
-        if (value1 == null && value2 != null) result = -1;
-        else if (value1 != null && value2 == null) result = 1;
-        else if (value1 == null && value2 == null) result = 0;
-        else {
-            if (value1 === value2) {
-                return multiSortMeta.length - 1 > index ? multisortField(node1, node2, multiSortMeta, index + 1) : 0;
-            } else {
-                if ((typeof value1 === 'string' || value1 instanceof String) && (typeof value2 === 'string' || value2 instanceof String)) return multiSortMeta[index].order * value1.localeCompare(value2, PrimeReact.locale, { numeric: true });
-                else result = value1 < value2 ? -1 : 1;
-            }
+        // check if they are equal handling dates and locales
+        if (ObjectUtils.compare(value1, value2, PrimeReact.locale) === 0) {
+            return multiSortMeta.length - 1 > index ? multisortField(node1, node2, multiSortMeta, index + 1) : 0;
         }
 
-        return multiSortMeta[index].order * result;
+        return compareValuesOnSort(value1, value2, multiSortMeta[index].order);
+    };
+
+    const compareValuesOnSort = (value1, value2, order) => {
+        return ObjectUtils.sort(value1, value2, order, PrimeReact.locale, PrimeReact.nullSortOrder);
     };
 
     const filter = (value, field, mode) => {
