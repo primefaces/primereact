@@ -9,7 +9,9 @@ permissions:
 
 jobs:
   add-comment:
-    if: github.event.label.name == 'Resolution&#58; Help Wanted'
+    env:
+      HELP_LABEL: 'Resolution: Help Wanted'
+    if: github.event.label.name == $HELP_LABEL
     runs-on: ubuntu-latest
     permissions:
       issues: write
