@@ -1,4 +1,5 @@
 name: Label issues and PRs
+
 on:
   issues:
     types: [opened,reopened]
