@@ -1,9 +1,9 @@
-import React, { memo } from 'react';
 import Link from 'next/link';
-import { TabView, TabPanel } from '../../lib/tabview/TabView';
-import { useLiveEditorTabs } from '../common/liveeditor';
+import React, { memo } from 'react';
+import { TabPanel, TabView } from '../../lib/tabview/TabView';
 import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
+import { useLiveEditorTabs } from '../common/liveeditor';
 
 const PasswordDoc = memo(() => {
     const sources = {
@@ -253,6 +253,10 @@ import { Password } from 'primereact/password';
 <Password value={value} onChange={(e) => setValue(e.target.value)} />
 `}
                     </CodeHighlight>
+                    <h5>KeyFilter</h5>
+                    <p>
+                        Password has built-in key filtering support to block certain keys, refer to <Link href="/keyfilter">keyfilter</Link> page for more information.
+                    </p>
 
                     <h5>Properties</h5>
                     <p>Password accepts all valid properties of an input element in addition the the custom properties below.</p>
@@ -407,6 +411,12 @@ import { Password } from 'primereact/password';
                                     <td>string</td>
                                     <td>null</td>
                                     <td>Inline style of the overlay panel element.</td>
+                                </tr>
+                                <tr>
+                                    <td>keyfilter</td>
+                                    <td>string/regex</td>
+                                    <td>null</td>
+                                    <td>Format definition of the keys to block.</td>
                                 </tr>
                                 <tr>
                                     <td>transitionOptions</td>
