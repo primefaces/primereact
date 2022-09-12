@@ -430,7 +430,7 @@ export const AutoComplete = React.memo(
 
         useUpdateEffect(() => {
             if (searchingState) {
-                ObjectUtils.isNotEmpty(props.suggestions) ? show() : props.showEmptyMessage ? show() : hide();
+                ObjectUtils.isNotEmpty(props.suggestions) || props.showEmptyMessage ? show() : hide();
                 setSearchingState(false);
             }
         }, [props.suggestions]);
