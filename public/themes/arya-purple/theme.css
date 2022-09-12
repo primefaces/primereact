@@ -1438,6 +1438,15 @@
 .p-password-panel .p-password-meter .p-password-strength.strong {
   background: #C5E1A5;
 }
+.p-password-panel .p-password-info.weak {
+  color: #F48FB1;
+}
+.p-password-panel .p-password-info.medium {
+  color: #FFE082;
+}
+.p-password-panel .p-password-info.strong {
+  color: #C5E1A5;
+}
 
 .p-radiobutton {
   width: 20px;
