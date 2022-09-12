@@ -1,7 +1,7 @@
 name: Stale Issues and PRs
 on:
   schedule:
-    - cron: '29 8 * * *'
+    - cron: '0 0 * * *'
 permissions:
   contents: read
 
