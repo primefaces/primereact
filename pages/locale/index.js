@@ -343,6 +343,14 @@ locale('es');
                                 <td>aria.unselectLabel</td>
                                 <td>Unselect</td>
                             </tr>
+                            <tr>
+                                <td>aria.expandLabel</td>
+                                <td>Expand</td>
+                            </tr>
+                            <tr>
+                                <td>aria.collapseLabel</td>
+                                <td>Collapse</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
