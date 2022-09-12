@@ -86,8 +86,7 @@ export const ScrollPanel = React.forwardRef((props, ref) => {
     const onDocumentMouseMove = (event) => {
         if (isXBarClicked.current) {
             onMouseMoveForXBar(event);
-        }
-        else if (isYBarClicked.current) {
+        } else if (isYBarClicked.current) {
             onMouseMoveForYBar(event);
         } else {
             onMouseMoveForXBar(event);
