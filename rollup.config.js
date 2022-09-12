@@ -217,6 +217,10 @@ function addComponent() {
         });
 }
 
+function addTypeScript() {
+    fs.copyFileSync(path.resolve(process.env.INPUT_DIR + 'index.d.ts'), path.resolve(process.env.OUTPUT_DIR + 'primereact.d.ts'));
+}
+
 function addPrimeReact() {
     const input = process.env.INPUT_DIR + 'primereact.all.js';
     const output = process.env.OUTPUT_DIR + 'primereact.all';
@@ -225,6 +229,7 @@ function addPrimeReact() {
 }
 
 addComponent();
+addTypeScript();
 addPrimeReact();
 addCore();
 
