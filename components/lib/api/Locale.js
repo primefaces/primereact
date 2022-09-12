@@ -56,7 +56,9 @@ let locales = {
             nextPageLabel: 'Next Page',
             previousPageLabel: 'Previous Page',
             selectLabel: 'Select',
-            unselectLabel: 'Unselect'
+            unselectLabel: 'Unselect',
+            expandLabel: 'Expand',
+            collapseLabel: 'Collapse'
         }
     }
 };

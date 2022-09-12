@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
+import { Button } from '../button/Button';
 import { useEventListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
@@ -524,6 +525,9 @@ export const BodyCell = React.memo((props) => {
         } else if (expander) {
             const iconClassName = classNames('p-row-toggler-icon', props.expanded ? props.expandedRowIcon : props.collapsedRowIcon);
             const ariaControls = `${props.tableSelector}_content_${props.rowIndex}_expanded`;
+            const ariaLabelField = props.selectionAriaLabel || props.tableProps.dataKey;
+            const ariaLabelText = ObjectUtils.resolveFieldData(props.rowData, ariaLabelField);
+            const label = `${props.expanded ? ariaLabel('collapseLabel') : ariaLabel('expandLabel')} ${ariaLabelText}`;
             const expanderProps = {
                 onClick: onRowToggle,
                 className: 'p-row-toggler p-link',
@@ -531,10 +535,7 @@ export const BodyCell = React.memo((props) => {
             };
 
             content = (
-                <button className={expanderProps.className} onClick={expanderProps.onClick} type="button" aria-expanded={props.expanded} aria-controls={ariaControls} tabIndex={props.tabIndex}>
-                    <span className={expanderProps.iconClassName}></span>
-                    <Ripple />
-                </button>
+                <Button className={expanderProps.className} onClick={expanderProps.onClick} type="button" icon={expanderProps.iconClassName} aria-expanded={props.expanded} aria-controls={ariaControls} tabIndex={props.tabIndex} ariaLabel={label} />
             );
 
             if (body) {
