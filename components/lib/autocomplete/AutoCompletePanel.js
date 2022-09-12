@@ -29,6 +29,7 @@ export const AutoCompletePanel = React.memo(
 
         const createItem = (suggestion, index, scrollerOptions = {}) => {
             const style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
+
             if (props.optionGroupLabel) {
                 const content = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, suggestion, index) : props.getOptionGroupLabel(suggestion);
                 const childrenContent = createGroupChildren(suggestion, index, style);
@@ -44,7 +45,6 @@ export const AutoCompletePanel = React.memo(
                 );
             } else {
                 const content = props.itemTemplate ? ObjectUtils.getJSXElement(props.itemTemplate, suggestion, index) : props.field ? ObjectUtils.resolveFieldData(suggestion, props.field) : suggestion;
-
                 return (
                     <li key={index} role="option" aria-selected={props.selectedItem === suggestion} className="p-autocomplete-item" style={style} onClick={(e) => props.onItemClick(e, suggestion)}>
                         {content}
@@ -59,6 +59,13 @@ export const AutoCompletePanel = React.memo(
         };
 
         const createContent = () => {
+            if (props.showEmptyMessage && ObjectUtils.isEmpty(props.suggestions)) {
+                return (
+                    <ul className="p-autocomplete-items">
+                        <li className="p-autocomplete-item">{props.emptyMessage}</li>
+                    </ul>
+                );
+            }
             if (props.virtualScrollerOptions) {
                 const virtualScrollerProps = {
                     ...props.virtualScrollerOptions,
@@ -82,7 +89,6 @@ export const AutoCompletePanel = React.memo(
                 return <VirtualScroller ref={props.virtualScrollerRef} {...virtualScrollerProps} />;
             } else {
                 const items = createItems();
-
                 return (
                     <ul className="p-autocomplete-items" role="listbox" id={props.listId}>
                         {items}
