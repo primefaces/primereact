@@ -30,6 +30,11 @@
         "react components",
         "responsive components"
     ],
+    "unpkg": "primereact.all.min.js",
+    "jsdelivr": "primereact.all.min.js",
+    "main": "primereact.all.min.js",
+	"module": "primereact.all.esm.min.js",
+	"types": "primereact.d.ts",
     "peerDependencies": {
         "@types/react": "^17.0.0 || ^18.0.0",
         "react": "^17.0.0 || ^18.0.0",
@@ -47,7 +52,5 @@
     },
     "sideEffects": [
         "**/*.css"
-    ],
-    "unpkg": "primereact.all.min.js",
-    "jsdelivr": "primereact.all.min.js"
+    ]
 }
