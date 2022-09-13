@@ -39,26 +39,36 @@ export const TabView = React.forwardRef((props, ref) => {
     };
 
     const onTabHeaderClose = (event, index) => {
+        event.preventDefault();
+
+        // give caller a chance to stop the selection
+        if (props.onBeforeTabClose && props.onBeforeTabClose({ originalEvent: event, index }) === false) {
+            return;
+        }
+
         setHiddenTabsState([...hiddenTabsState, index]);
 
         if (props.onTabClose) {
             props.onTabClose({ originalEvent: event, index });
         }
-
-        event.preventDefault();
     };
 
     const onTabHeaderClick = (event, tab, index) => {
+        if (event) {
+            event.preventDefault();
+        }
+
         if (!tab.props.disabled) {
+            // give caller a chance to stop the selection
+            if (props.onBeforeTabChange && props.onBeforeTabChange({ originalEvent: event, index }) === false) {
+                return;
+            }
+
             if (props.onTabChange) props.onTabChange({ originalEvent: event, index });
             else setActiveIndexState(index);
         }
 
         updateScrollBar(index);
-
-        if (event) {
-            event.preventDefault();
-        }
     };
 
     const onKeyDown = (event, tab, index) => {
@@ -291,18 +301,18 @@ export const TabView = React.forwardRef((props, ref) => {
 TabPanel.displayName = 'TabPanel';
 TabPanel.defaultProps = {
     __TYPE: 'TabPanel',
+    className: null,
+    closable: false,
+    contentClassName: null,
+    contentStyle: null,
+    disabled: false,
     header: null,
+    headerClassName: null,
+    headerStyle: null,
     headerTemplate: null,
     leftIcon: null,
     rightIcon: null,
-    closable: false,
-    disabled: false,
-    style: null,
-    className: null,
-    headerStyle: null,
-    headerClassName: null,
-    contentStyle: null,
-    contentClassName: null
+    style: null
 };
 
 TabView.displayName = 'TabView';
@@ -310,12 +320,14 @@ TabView.defaultProps = {
     __TYPE: 'TabView',
     id: null,
     activeIndex: 0,
-    style: null,
     className: null,
-    renderActiveOnly: true,
+    onBeforeTabChange: null,
+    onBeforeTabClose: null,
     onTabChange: null,
     onTabClose: null,
-    scrollable: false,
+    panelContainerClassName: null,
     panelContainerStyle: null,
-    panelContainerClassName: null
+    renderActiveOnly: true,
+    scrollable: false,
+    style: null
 };

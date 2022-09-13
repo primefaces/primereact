@@ -46,13 +46,15 @@ interface TabViewTabCloseParams {
 
 export interface TabViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     activeIndex?: number;
+    children?: React.ReactNode;
+    panelContainerClassName?: string;
+    panelContainerStyle?: object;
     renderActiveOnly?: boolean;
     scrollable?: boolean;
-    panelContainerStyle?: object;
-    panelContainerClassName?: string;
+    onBeforeTabChange?(e: TabViewTabChangeParams): void;
+    onBeforeTabClose?(e: TabViewTabCloseParams): void;
     onTabChange?(e: TabViewTabChangeParams): void;
     onTabClose?(e: TabViewTabCloseParams): void;
-    children?: React.ReactNode;
 }
 
 // tslint:disable-next-line:max-classes-per-file

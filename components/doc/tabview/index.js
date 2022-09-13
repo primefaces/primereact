@@ -1,9 +1,9 @@
-import React, { memo } from 'react';
 import Link from 'next/link';
-import { TabView, TabPanel } from '../../lib/tabview/TabView';
-import { useLiveEditorTabs } from '../common/liveeditor';
+import React, { memo } from 'react';
+import { TabPanel, TabView } from '../../lib/tabview/TabView';
 import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
+import { useLiveEditorTabs } from '../common/liveeditor';
 
 const TabViewDoc = memo(() => {
     const sources = {
@@ -1120,12 +1120,36 @@ template: (options) => {
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>onBeforeTabChange</td>
+                                    <td>
+                                        event.originalEvent: Browser event <br />
+                                        event.index: Index of the selected tab
+                                    </td>
+                                    <td>Callback to invoke before an active tab is changed. Return false to prevent tab from changing.</td>
+                                </tr>
+                                <tr>
+                                    <td>onBeforeTabClose</td>
+                                    <td>
+                                        event.originalEvent: Browser event <br />
+                                        event.index: Index of the selected tab
+                                    </td>
+                                    <td>Callback to invoke before an active tab is close. Return false to prevent tab from closing.</td>
+                                </tr>
+                                <tr>
                                     <td>onTabChange</td>
                                     <td>
                                         event.originalEvent: Browser event <br />
                                         event.index: Index of the selected tab
                                     </td>
                                     <td>Callback to invoke when an active tab is changed.</td>
+                                </tr>
+                                <tr>
+                                    <td>onTabClose</td>
+                                    <td>
+                                        event.originalEvent: Browser event <br />
+                                        event.index: Index of the selected tab
+                                    </td>
+                                    <td>Callback to invoke when an active tab is closed.</td>
                                 </tr>
                             </tbody>
                         </table>
