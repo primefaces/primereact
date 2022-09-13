@@ -48,6 +48,7 @@ export default function MyApp({ Component }) {
             const item = {
                 hiddenNews: announcement.current.id
             };
+
             setStoredNews(item);
         },
         onThemeChange: (newTheme, dark) => {
