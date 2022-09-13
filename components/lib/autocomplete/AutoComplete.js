@@ -673,7 +673,7 @@ AutoComplete.defaultProps = {
     size: null,
     appendTo: null,
     showEmptyMessage: false,
-    emptyMessage: 'No results found.',
+    emptyMessage: null,
     tabIndex: null,
     autoFocus: false,
     tooltip: null,
