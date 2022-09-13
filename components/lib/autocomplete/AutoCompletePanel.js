@@ -1,5 +1,5 @@
 import * as React from 'react';
-import  { localeOption } from '../api/Api';
+import { localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
@@ -47,6 +47,7 @@ export const AutoCompletePanel = React.memo(
                 );
             } else {
                 const content = props.itemTemplate ? ObjectUtils.getJSXElement(props.itemTemplate, suggestion, index) : props.field ? ObjectUtils.resolveFieldData(suggestion, props.field) : suggestion;
+
                 return (
                     <li key={index} role="option" aria-selected={props.selectedItem === suggestion} className="p-autocomplete-item" style={style} onClick={(e) => props.onItemClick(e, suggestion)}>
                         {content}
@@ -62,13 +63,15 @@ export const AutoCompletePanel = React.memo(
 
         const createContent = () => {
             if (props.showEmptyMessage && ObjectUtils.isEmpty(props.suggestions)) {
-                const emptyMessage = props.emptyMessage || localeOptions('emptyMessage');
+                const emptyMessage = props.emptyMessage || localeOption('emptyMessage');
+
                 return (
                     <ul className="p-autocomplete-items">
                         <li className="p-autocomplete-item">{emptyMessage}</li>
                     </ul>
                 );
             }
+
             if (props.virtualScrollerOptions) {
                 const virtualScrollerProps = {
                     ...props.virtualScrollerOptions,
@@ -92,6 +95,7 @@ export const AutoCompletePanel = React.memo(
                 return <VirtualScroller ref={props.virtualScrollerRef} {...virtualScrollerProps} />;
             } else {
                 const items = createItems();
+
                 return (
                     <ul className="p-autocomplete-items" role="listbox" id={props.listId}>
                         {items}
