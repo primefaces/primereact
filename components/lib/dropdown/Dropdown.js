@@ -40,12 +40,15 @@ export const Dropdown = React.memo(
 
                 if (props.optionGroupLabel) {
                     let filteredGroups = [];
+
                     for (let optgroup of props.options) {
                         let filteredSubOptions = FilterService.filter(getOptionGroupChildren(optgroup), searchFields, filterValue, props.filterMatchMode, props.filterLocale);
+
                         if (filteredSubOptions && filteredSubOptions.length) {
                             filteredGroups.push({ ...optgroup, ...{ items: filteredSubOptions } });
                         }
                     }
+
                     return filteredGroups;
                 } else {
                     return FilterService.filter(props.options, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
@@ -87,6 +90,7 @@ export const Dropdown = React.memo(
             if (props.onBlur) {
                 setTimeout(() => {
                     const currentValue = inputRef.current ? inputRef.current.value : undefined;
+
                     props.onBlur({
                         originalEvent: event.originalEvent,
                         value: currentValue,
@@ -214,11 +218,13 @@ export const Dropdown = React.memo(
 
         const findNextOptionInList = (list, index) => {
             const i = index + 1;
+
             if (i === list.length) {
                 return null;
             }
 
             const option = list[i];
+
             return isOptionDisabled(option) ? findNextOptionInList(i) : option;
         };
 
@@ -242,11 +248,13 @@ export const Dropdown = React.memo(
 
         const findPrevOptionInList = (list, index) => {
             const i = index - 1;
+
             if (i < 0) {
                 return null;
             }
 
             const option = list[i];
+
             return isOptionDisabled(option) ? findPrevOption(i) : option;
         };
 
@@ -256,6 +264,7 @@ export const Dropdown = React.memo(
             }
 
             const char = event.key;
+
             if (char === 'Shift' || char === 'Control' || char === 'Alt') {
                 return;
             }
@@ -268,6 +277,7 @@ export const Dropdown = React.memo(
             if (searchValue.current) {
                 const searchIndex = getSelectedOptionIndex();
                 const newOption = props.optionGroupLabel ? searchOptionInGroup(searchIndex) : searchOption(searchIndex + 1);
+
                 if (newOption) {
                     selectItem({
                         originalEvent: event,
@@ -292,6 +302,7 @@ export const Dropdown = React.memo(
         const searchOptionInRange = (start, end) => {
             for (let i = start; i < end; i++) {
                 const opt = visibleOptions[i];
+
                 if (matchesSearchValue(opt)) {
                     return opt;
                 }
@@ -305,6 +316,7 @@ export const Dropdown = React.memo(
 
             for (let i = searchIndex.group; i < visibleOptions.length; i++) {
                 let groupOptions = getOptionGroupChildren(visibleOptions[i]);
+
                 for (let j = searchIndex.group === i ? searchIndex.option + 1 : 0; j < groupOptions.length; j++) {
                     if (matchesSearchValue(groupOptions[j])) {
                         return groupOptions[j];
@@ -314,6 +326,7 @@ export const Dropdown = React.memo(
 
             for (let i = 0; i <= searchIndex.group; i++) {
                 let groupOptions = getOptionGroupChildren(visibleOptions[i]);
+
                 for (let j = 0; j < (searchIndex.group === i ? searchIndex.option : groupOptions.length); j++) {
                     if (matchesSearchValue(groupOptions[j])) {
                         return groupOptions[j];
@@ -326,10 +339,13 @@ export const Dropdown = React.memo(
 
         const matchesSearchValue = (option) => {
             let label = getOptionLabel(option);
+
             if (!label) {
                 return false;
             }
+
             label = label.toLocaleLowerCase(props.filterLocale);
+
             return label.startsWith(searchValue.current.toLocaleLowerCase(props.filterLocale));
         };
 
@@ -435,6 +451,7 @@ export const Dropdown = React.memo(
                 if (props.optionGroupLabel) {
                     for (let i = 0; i < options.length; i++) {
                         let selectedOptionIndex = findOptionIndexInList(props.value, getOptionGroupChildren(options[i]));
+
                         if (selectedOptionIndex !== -1) {
                             return { group: i, option: selectedOptionIndex };
                         }
@@ -453,6 +470,7 @@ export const Dropdown = React.memo(
 
         const findOptionIndexInList = (value, list) => {
             const key = equalityKey();
+
             return list.findIndex((item) => ObjectUtils.equals(value, getOptionValue(item), key));
         };
 
@@ -501,6 +519,7 @@ export const Dropdown = React.memo(
 
         const scrollInView = () => {
             const highlightItem = DomHandler.findSingle(overlayRef.current, 'li.p-highlight');
+
             if (highlightItem && highlightItem.scrollIntoView) {
                 highlightItem.scrollIntoView({ block: 'nearest', inline: 'nearest' });
             }
@@ -548,6 +567,7 @@ export const Dropdown = React.memo(
             if (props.editable && inputRef.current) {
                 const label = selectedOption ? getOptionLabel(selectedOption) : null;
                 const value = label || props.value || '';
+
                 inputRef.current.value = value;
             }
         };
@@ -596,6 +616,7 @@ export const Dropdown = React.memo(
             }
 
             updateInputField();
+
             if (inputRef.current) {
                 inputRef.current.selectedIndex = 1;
             }
@@ -610,6 +631,7 @@ export const Dropdown = React.memo(
 
             if (selectedOption) {
                 const optionValue = getOptionValue(selectedOption);
+
                 option = {
                     value: typeof optionValue === 'object' ? props.options.findIndex((o) => o === optionValue) : optionValue,
                     label: getOptionLabel(selectedOption)
@@ -694,9 +716,10 @@ export const Dropdown = React.memo(
 
         const createDropdownIcon = () => {
             const iconClassName = classNames('p-dropdown-trigger-icon p-clickable', props.dropdownIcon);
+            const ariaLabel = props.placeholder || props.ariaLabel;
 
             return (
-                <div className="p-dropdown-trigger" role="button" aria-haspopup="listbox" aria-expanded={overlayVisibleState}>
+                <div className="p-dropdown-trigger" role="button" aria-haspopup="listbox" aria-expanded={overlayVisibleState} aria-label={ariaLabel}>
                     <span className={iconClassName}></span>
                 </div>
             );

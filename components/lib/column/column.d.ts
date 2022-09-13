@@ -54,11 +54,12 @@ interface ColumnBodyExpanderOptions {
     onClick?(e: any): void;
     className?: string;
     iconClassName?: string;
-    element?: React.ReactNode;
+    element?: JSX.Element;
 }
 
 interface ColumnBodyRowEditorOptions {
-    editing: boolean;
+    editing?: boolean;
+    element?: JSX.Element;
     onSaveClick?(e: any): void;
     saveClassName?: string;
     saveIconClassName?: string;

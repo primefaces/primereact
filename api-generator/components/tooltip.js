@@ -57,7 +57,7 @@ const TooltipProps = [
         name: 'event',
         type: 'string',
         default: 'hover',
-        description: 'Event to show the tooltip, valid values are hover and focus.'
+        description: 'Event to show the tooltip, valid values are hover, focus, and both.'
     },
     {
         name: 'showEvent',

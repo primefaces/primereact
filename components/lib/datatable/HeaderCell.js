@@ -42,6 +42,7 @@ export const HeaderCell = React.memo((props) => {
             sortOrder = sorted ? props.sortOrder : 0;
         } else if (props.sortMode === 'multiple') {
             metaIndex = getMultiSortMetaIndex();
+
             if (metaIndex > -1) {
                 sorted = true;
                 sortOrder = props.multiSortMeta[metaIndex].order;
@@ -54,6 +55,7 @@ export const HeaderCell = React.memo((props) => {
     const getAriaSort = ({ sorted, sortOrder }) => {
         if (getColumnProp('sortable')) {
             const sortIcon = sorted ? (sortOrder < 0 ? 'pi-sort-amount-down' : 'pi-sort-amount-up-alt') : 'pi-sort-alt';
+
             if (sortIcon === 'pi-sort-amount-down') return 'descending';
             else if (sortIcon === 'pi-sort-amount-up-alt') return 'ascending';
             else return 'none';
@@ -66,30 +68,38 @@ export const HeaderCell = React.memo((props) => {
         if (getColumnProp('frozen')) {
             let styleObject = { ...styleObjectState };
             let align = getColumnProp('alignFrozen');
+
             if (align === 'right') {
                 let right = 0;
                 let next = elementRef.current.nextElementSibling;
+
                 if (next) {
                     right = DomHandler.getOuterWidth(next) + parseFloat(next.style.right || 0);
                 }
+
                 styleObject['right'] = right + 'px';
             } else {
                 let left = 0;
                 let prev = elementRef.current.previousElementSibling;
+
                 if (prev) {
                     left = DomHandler.getOuterWidth(prev) + parseFloat(prev.style.left || 0);
                 }
+
                 styleObject['left'] = left + 'px';
             }
 
             let filterRow = elementRef.current.parentElement.nextElementSibling;
+
             if (filterRow) {
                 let index = DomHandler.index(elementRef.current);
+
                 filterRow.children[index].style.left = styleObject['left'];
                 filterRow.children[index].style.right = styleObject['right'];
             }
 
             const isSameStyle = styleObjectState['left'] === styleObject['left'] && styleObjectState['right'] === styleObject['right'];
+
             !isSameStyle && setStyleObjectState(styleObject);
         }
     };
@@ -103,6 +113,7 @@ export const HeaderCell = React.memo((props) => {
     const onClick = (event) => {
         if (!isSortableDisabled()) {
             let targetNode = event.target;
+
             if (
                 DomHandler.hasClass(targetNode, 'p-sortable-column') ||
                 DomHandler.hasClass(targetNode, 'p-column-title') ||

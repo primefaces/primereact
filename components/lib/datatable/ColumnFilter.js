@@ -36,6 +36,7 @@ export const ColumnFilter = React.memo((props) => {
 
     const hasFilter = () => {
         if (!filterStoreModel || !filterModel) return false;
+
         return filterStoreModel.operator
             ? !isFilterBlank(filterModel.constraints[0].value) && filterStoreModel.constraints[0].value !== filterModel.constraints[0].value
             : !isFilterBlank(filterModel.value) && filterStoreModel.value !== filterModel.value;
@@ -120,6 +121,7 @@ export const ColumnFilter = React.memo((props) => {
         const filterClearCallback = getColumnProp('onFilterClear');
         const defaultConstraint = getDefaultConstraint();
         let filters = { ...props.filters };
+
         if (filters[field].operator) {
             filters[field].constraints.splice(1);
             filters[field].operator = defaultConstraint.operator;
@@ -157,12 +159,14 @@ export const ColumnFilter = React.memo((props) => {
             case 'ArrowDown':
                 if (overlayVisibleState) {
                     const focusable = DomHandler.getFirstFocusableElement(overlayRef.current);
+
                     focusable && focusable.focus();
                     event.preventDefault();
                 } else if (event.altKey) {
                     setOverlayVisibleState(true);
                     event.preventDefault();
                 }
+
                 break;
 
             default:
@@ -197,6 +201,7 @@ export const ColumnFilter = React.memo((props) => {
     const onRowMatchModeChange = (matchMode) => {
         const filterMatchModeChangeCallback = getColumnProp('onFilterMatchModeChange');
         let filters = { ...props.filters };
+
         filters[field].matchMode = matchMode;
 
         filterMatchModeChangeCallback && filterMatchModeChangeCallback({ field, matchMode });
@@ -211,6 +216,7 @@ export const ColumnFilter = React.memo((props) => {
         switch (event.key) {
             case 'ArrowDown':
                 const nextItem = findNextItem(item);
+
                 if (nextItem) {
                     item.removeAttribute('tabindex');
                     nextItem.tabIndex = 0;
@@ -222,6 +228,7 @@ export const ColumnFilter = React.memo((props) => {
 
             case 'ArrowUp':
                 const prevItem = findPrevItem(item);
+
                 if (prevItem) {
                     item.removeAttribute('tabindex');
                     prevItem.tabIndex = 0;
@@ -246,10 +253,12 @@ export const ColumnFilter = React.memo((props) => {
         const filterOperationChangeCallback = getColumnProp('onFilterOperatorChange');
         let value = e.value;
         let filters = { ...props.filters };
+
         filters[field].operator = value;
         props.onFilterChange(filters);
 
         filterOperationChangeCallback && filterOperationChangeCallback({ field, operator: value });
+
         if (!getColumnProp('showApplyButton')) {
             props.onFilterApply();
         }
@@ -258,6 +267,7 @@ export const ColumnFilter = React.memo((props) => {
     const onMenuMatchModeChange = (value, index) => {
         const filterMatchModeChangeCallback = getColumnProp('onFilterMatchModeChange');
         let filters = { ...props.filters };
+
         filters[field].constraints[index].matchMode = value;
         props.onFilterChange(filters);
         filterMatchModeChangeCallback && filterMatchModeChangeCallback({ field, matchMode: value, index: index });
@@ -272,6 +282,7 @@ export const ColumnFilter = React.memo((props) => {
         const defaultConstraint = getDefaultConstraint();
         let filters = { ...props.filters };
         let newConstraint = { value: null, matchMode: defaultConstraint.matchMode };
+
         filters[field].constraints.push(newConstraint);
         filterConstraintAddCallback && filterConstraintAddCallback({ field, constraint: newConstraint });
         props.onFilterChange(filters);
@@ -285,6 +296,7 @@ export const ColumnFilter = React.memo((props) => {
         const filterConstraintRemoveCallback = getColumnProp('onFilterConstraintRemove');
         let filters = { ...props.filters };
         let removedConstraint = filters[field].constraints.splice(index, 1);
+
         filterConstraintRemoveCallback && filterConstraintRemoveCallback({ field, constraint: removedConstraint });
         props.onFilterChange(filters);
 
@@ -331,6 +343,7 @@ export const ColumnFilter = React.memo((props) => {
                 selfClick.current = true;
             }
         };
+
         OverlayService.on('overlay-click', overlayEventListener.current);
     };
 
@@ -366,6 +379,10 @@ export const ColumnFilter = React.memo((props) => {
             { label: localeOption('matchAll'), value: FilterOperator.AND },
             { label: localeOption('matchAny'), value: FilterOperator.OR }
         ];
+    };
+
+    const filterLabel = () => {
+        return localeOption('filter');
     };
 
     const noFilterLabel = () => {
@@ -450,12 +467,9 @@ export const ColumnFilter = React.memo((props) => {
                 'p-column-filter-menu-button-open': overlayVisibleState,
                 'p-column-filter-menu-button-active': hasFilter()
             });
+            const label = filterLabel();
 
-            return (
-                <button ref={iconRef} type="button" className={className} aria-haspopup aria-expanded={overlayVisibleState} onClick={toggleMenu} onKeyDown={onToggleButtonKeyDown}>
-                    <span className="pi pi-filter-icon pi-filter"></span>
-                </button>
-            );
+            return <Button ref={iconRef} type="button" icon="pi pi-filter-icon pi-filter" className={className} aria-haspopup aria-expanded={overlayVisibleState} onClick={toggleMenu} onKeyDown={onToggleButtonKeyDown} aria-label={label} />;
         }
 
         return null;
@@ -466,12 +480,9 @@ export const ColumnFilter = React.memo((props) => {
             const className = classNames('p-column-filter-clear-button p-link', {
                 'p-hidden-space': !hasRowFilter()
             });
+            const clearLabel = clearButtonLabel();
 
-            return (
-                <button className={className} type="button" onClick={clearFilter}>
-                    <span className="pi pi-filter-slash"></span>
-                </button>
-            );
+            return <Button ref={iconRef} type="button" icon="pi pi-filter-slash" className={className} onClick={clearFilter} aria-label={clearLabel} />;
         }
 
         return null;

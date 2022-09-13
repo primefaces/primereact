@@ -58,6 +58,7 @@ export const FullCalendar = React.memo(
                 if (!ObjectUtils.equals(prevOptions, props.options)) {
                     for (let prop in props.options) {
                         let optionValue = props.options[prop];
+
                         config.current[prop] = optionValue;
                         calendar.current.setOption(prop, optionValue);
                     }

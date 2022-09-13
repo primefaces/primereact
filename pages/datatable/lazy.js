@@ -70,6 +70,7 @@ const DataTableLazyDemo = () => {
 
     const onSelectionChange = (event) => {
         const value = event.value;
+
         setSelectedCustomers(value);
         setSelectAll(value.length === totalRecords);
     };

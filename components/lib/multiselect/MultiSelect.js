@@ -69,6 +69,7 @@ export const MultiSelect = React.memo(
                 //down
                 case 40:
                     const nextItem = findNextItem(listItem);
+
                     nextItem && nextItem.focus();
                     originalEvent.preventDefault();
                     break;
@@ -76,6 +77,7 @@ export const MultiSelect = React.memo(
                 //up
                 case 38:
                     const prevItem = findPrevItem(listItem);
+
                     prevItem && prevItem.focus();
                     originalEvent.preventDefault();
                     break;
@@ -100,11 +102,13 @@ export const MultiSelect = React.memo(
 
         const findNextItem = (item) => {
             const nextItem = item.nextElementSibling;
+
             return nextItem ? (DomHandler.hasClass(nextItem, 'p-disabled') || DomHandler.hasClass(nextItem, 'p-multiselect-item-group') ? findNextItem(nextItem) : nextItem) : null;
         };
 
         const findPrevItem = (item) => {
             const prevItem = item.previousElementSibling;
+
             return prevItem ? (DomHandler.hasClass(prevItem, 'p-disabled') || DomHandler.hasClass(prevItem, 'p-multiselect-item-group') ? findPrevItem(prevItem) : prevItem) : null;
         };
 
@@ -124,6 +128,7 @@ export const MultiSelect = React.memo(
                         show();
                         event.preventDefault();
                     }
+
                     break;
 
                 //space
@@ -141,11 +146,13 @@ export const MultiSelect = React.memo(
                 case 9:
                     if (overlayVisibleState) {
                         const firstFocusableElement = DomHandler.getFirstFocusableElement(overlayRef.current);
+
                         if (firstFocusableElement) {
                             firstFocusableElement.focus();
                             event.preventDefault();
                         }
                     }
+
                     break;
 
                 default:
@@ -164,6 +171,7 @@ export const MultiSelect = React.memo(
 
                     if (visibleOptions) {
                         const selectedOptions = visibleOptions.filter((option) => isOptionDisabled(option) && isSelected(option));
+
                         value = selectedOptions.map((option) => getOptionValue(option));
                     }
                 } else if (visibleOptions) {
@@ -207,6 +215,7 @@ export const MultiSelect = React.memo(
 
         const onFilterInputChange = (event) => {
             const filter = event.query;
+
             setFilterState(filter);
 
             if (props.onFilter) {
@@ -224,6 +233,7 @@ export const MultiSelect = React.memo(
 
         const scrollInView = () => {
             const highlightItem = DomHandler.findSingle(overlayRef.current, 'li.p-highlight');
+
             if (highlightItem && highlightItem.scrollIntoView) {
                 highlightItem.scrollIntoView({ block: 'nearest', inline: 'nearest' });
             }
@@ -287,6 +297,7 @@ export const MultiSelect = React.memo(
                 if (props.optionGroupLabel) {
                     let groupIndex = 0;
                     const optionIndex = props.options.findIndex((optionGroup, i) => (groupIndex = i) && findOptionIndexInList(props.value, getOptionGroupChildren(optionGroup)) !== -1);
+
                     return optionIndex !== -1 ? { group: groupIndex, option: optionIndex } : -1;
                 } else {
                     return findOptionIndexInList(props.value, props.options);
@@ -313,10 +324,12 @@ export const MultiSelect = React.memo(
 
         const getLabelByValue = (val) => {
             let option;
+
             if (props.options) {
                 if (props.optionGroupLabel) {
                     for (let optionGroup of props.options) {
                         option = findOptionByValue(val, getOptionGroupChildren(optionGroup));
+
                         if (option) {
                             break;
                         }
@@ -356,6 +369,7 @@ export const MultiSelect = React.memo(
                 if (props.optionGroupLabel) {
                     for (let optionGroup of options) {
                         const visibleOptionsGroupChildren = getOptionGroupChildren(optionGroup).filter((option) => !isOptionDisabled(option));
+
                         return !visibleOptionsGroupChildren.some((option) => !isSelected(option));
                     }
                 } else {
@@ -373,6 +387,7 @@ export const MultiSelect = React.memo(
         const getOptionValue = (option) => {
             if (props.optionValue) {
                 const data = ObjectUtils.resolveFieldData(option, props.optionValue);
+
                 return data !== null ? data : option;
             }
 
@@ -419,6 +434,7 @@ export const MultiSelect = React.memo(
 
         const getSelectedItemsLabel = () => {
             const pattern = /{(.*?)}/;
+
             if (pattern.test(props.selectedItemsLabel)) {
                 return props.selectedItemsLabel.replace(props.selectedItemsLabel.match(pattern)[0], props.value.length + '');
             }
@@ -483,12 +499,15 @@ export const MultiSelect = React.memo(
 
                 if (props.optionGroupLabel) {
                     let filteredGroups = [];
+
                     for (let optgroup of props.options) {
                         let filteredSubOptions = FilterService.filter(getOptionGroupChildren(optgroup), searchFields, filterValue, props.filterMatchMode, props.filterLocale);
+
                         if (filteredSubOptions && filteredSubOptions.length) {
                             filteredGroups.push({ ...optgroup, ...{ [props.optionGroupChildren]: filteredSubOptions } });
                         }
                     }
+
                     return filteredGroups;
                 } else {
                     return FilterService.filter(props.options, searchFields, filterValue, props.filterMatchMode, props.filterLocale);

@@ -1,6 +1,7 @@
 import * as React from 'react';
+import { localeOption } from '../api/Api';
+import { Button } from '../button/Button';
 import { useTimeout } from '../hooks/Hooks';
-import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils } from '../utils/Utils';
 
 export const UIMessage = React.memo(
@@ -31,12 +32,9 @@ export const UIMessage = React.memo(
 
         const createCloseIcon = () => {
             if (closable !== false) {
-                return (
-                    <button type="button" className="p-message-close p-link" onClick={onClose}>
-                        <i className="p-message-close-icon pi pi-times"></i>
-                        <Ripple />
-                    </button>
-                );
+                const ariaLabel = localeOption('close');
+
+                return <Button type="button" className="p-message-close p-link" icon="p-message-close-icon pi pi-times" onClick={onClose} aria-label={ariaLabel} />;
             }
 
             return null;
@@ -45,6 +43,7 @@ export const UIMessage = React.memo(
         const createMessage = () => {
             if (props.message) {
                 let iconValue = icon;
+
                 if (!iconValue) {
                     iconValue = classNames('pi', {
                         'pi-info-circle': severity === 'info',
@@ -53,6 +52,7 @@ export const UIMessage = React.memo(
                         'pi-check': severity === 'success'
                     });
                 }
+
                 const iconContent = IconUtils.getJSXIcon(iconValue, { className: 'p-message-icon' }, { props });
 
                 return (

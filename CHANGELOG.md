@@ -1,5 +1,44 @@
 # Changelog
 
+## [8.5.0](https://github.com/primefaces/primereact/tree/8.5.0) (2022-09-07)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/8.4.0...8.5.0)
+
+**Implemented New Features and Enhancements:**
+
+- Tooltip: Both 'focus' and 'hover' events cannot be set at the same time [\#3241](https://github.com/primefaces/primereact/issues/3241)
+- Carousel : Add new showIndicators/showNavigators attributes [\#3232](https://github.com/primefaces/primereact/issues/3232)
+- Checkbox/RadioButton: No support for selecting option with keyboard [\#3221](https://github.com/primefaces/primereact/issues/3221)
+- Rating: Add icon templates [\#3219](https://github.com/primefaces/primereact/issues/3219)
+- Message: Override Icon using icon attribute [\#3196](https://github.com/primefaces/primereact/issues/3196)
+- Button: Add visible property to remove from DOM [\#3193](https://github.com/primefaces/primereact/issues/3193)
+- Keyfilter: refactor to use event.key [\#3189](https://github.com/primefaces/primereact/issues/3189)
+- Add prettier to standardize formatting [\#3188](https://github.com/primefaces/primereact/issues/3188)
+- FileUpload: Access to files in the FileUpload Component [\#3174](https://github.com/primefaces/primereact/issues/3174)
+- MenuModel property for visibility like in Vue [\#3169](https://github.com/primefaces/primereact/issues/3169)
+- TreeSelect: Add collapseAll and expandAll methods [\#2964](https://github.com/primefaces/primereact/issues/2964)
+
+**Fixed bugs:**
+
+- Column: ColumnBodyRowEditorOptions type is missing "element" in type definition [\#3245](https://github.com/primefaces/primereact/issues/3245)
+- ConfirmPopup: dismissable property not working [\#3233](https://github.com/primefaces/primereact/issues/3233)
+- Split Button throws error when expanding the menu.  [\#3228](https://github.com/primefaces/primereact/issues/3228)
+- RadioButton/Checkbox: label no longer works to select item [\#3220](https://github.com/primefaces/primereact/issues/3220)
+- Toast: Allow us to specify our own ids for each ToastMessage [\#3209](https://github.com/primefaces/primereact/issues/3209)
+- ConfirmPopup: Сomponent is not hidden when using the hide function [\#3202](https://github.com/primefaces/primereact/issues/3202)
+- ConfirmDialog and ConfirmPopup: onHide event bug [\#3197](https://github.com/primefaces/primereact/issues/3197)
+- Calendar: monthpicker disabled using min/max [\#3192](https://github.com/primefaces/primereact/issues/3192)
+- Menubar: hide menu if no items in model [\#3190](https://github.com/primefaces/primereact/issues/3190)
+- Dialog: Responsive breakpoints no longer working [\#3184](https://github.com/primefaces/primereact/issues/3184)
+- Animation of the floating label doesn't work in Chips  [\#3181](https://github.com/primefaces/primereact/issues/3181)
+- Dropdown: Unmounting focused dropdown throws TypeError [\#3179](https://github.com/primefaces/primereact/issues/3179)
+- InputTextarea: wrong ref type [\#3172](https://github.com/primefaces/primereact/issues/3172)
+- Dialog: blockScroll not working [\#3166](https://github.com/primefaces/primereact/issues/3166)
+- Dialog: Flickering [\#3122](https://github.com/primefaces/primereact/issues/3122)
+- AutoComplete: shows "\[object Object\]" if value object instance is not one of suggestions [\#1392](https://github.com/primefaces/primereact/issues/1392)
+- Messages: Add content to TypeScript [\#3246](https://github.com/primefaces/primereact/issues/3246)
+- FileUpload: Fix TypeScript FileUploadSelectParams [\#3235](https://github.com/primefaces/primereact/issues/3235)
+
 ## [8.4.0](https://github.com/primefaces/primereact/tree/8.4.0) (2022-08-22)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/8.3.0...8.4.0)

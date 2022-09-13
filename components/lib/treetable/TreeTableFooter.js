@@ -25,6 +25,7 @@ export const TreeTableFooter = React.memo((props) => {
     const createColumns = (columns) => {
         if (columns) {
             const headerCells = columns.map(createFooterCell);
+
             return <tr>{headerCells}</tr>;
         } else {
             return null;

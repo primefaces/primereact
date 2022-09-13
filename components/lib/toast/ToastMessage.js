@@ -1,6 +1,7 @@
 import * as React from 'react';
+import { localeOption } from '../api/Locale';
+import { Button } from '../button/Button';
 import { useTimeout } from '../hooks/Hooks';
-import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const ToastMessage = React.memo(
@@ -8,12 +9,13 @@ export const ToastMessage = React.memo(
         const messageInfo = props.messageInfo;
         const { severity, content, summary, detail, closable, life, sticky, className: _className, style, contentClassName: _contentClassName, contentStyle } = messageInfo.message;
 
+        const [focused, setFocused] = React.useState(false);
         const [clearTimer] = useTimeout(
             () => {
                 onClose();
             },
             life || 3000,
-            !sticky
+            !sticky && !focused
         );
 
         const onClose = () => {
@@ -27,14 +29,38 @@ export const ToastMessage = React.memo(
             }
         };
 
+        const onMouseEnter = (event) => {
+            props.onMouseEnter && props.onMouseEnter(event);
+
+            // do not continue if the user has canceled the event
+            if (event.defaultPrevented) {
+                return;
+            }
+
+            // stop timer while user has focused message
+            if (!sticky) {
+                clearTimer();
+                setFocused(true);
+            }
+        };
+
+        const onMouseLeave = (event) => {
+            props.onMouseLeave && props.onMouseLeave(event);
+
+            // do not continue if the user has canceled the event
+            if (event.defaultPrevented) {
+                return;
+            }
+
+            // restart timer when user has left message
+            if (!sticky) {
+                setFocused(false);
+            }
+        };
+
         const createCloseIcon = () => {
             if (closable !== false) {
-                return (
-                    <button type="button" className="p-toast-icon-close p-link" onClick={onClose}>
-                        <span className="p-toast-icon-close-icon pi pi-times"></span>
-                        <Ripple />
-                    </button>
-                );
+                return <Button type="button" className="p-toast-icon-close p-link" icon="p-toast-icon-close-icon pi pi-times" onClick={onClose} aria-label={localeOption('close')} />;
             }
 
             return null;
@@ -78,7 +104,7 @@ export const ToastMessage = React.memo(
         const closeIcon = createCloseIcon();
 
         return (
-            <div ref={ref} className={className} style={style} role="alert" aria-live="assertive" aria-atomic="true" onClick={onClick}>
+            <div ref={ref} className={className} style={style} role="alert" aria-live="assertive" aria-atomic="true" onClick={onClick} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
                 <div className={contentClassName} style={contentStyle}>
                     {message}
                     {closeIcon}

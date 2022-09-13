@@ -15,6 +15,7 @@ export default function Menu(props) {
 
     const toggleSubmenu = (name) => {
         let _activeSubmenus = { ...activeSubmenus };
+
         _activeSubmenus[name] = _activeSubmenus[name] ? false : true;
         setActiveSubmenus(_activeSubmenus);
     };
@@ -29,6 +30,7 @@ export default function Menu(props) {
 
     const renderBadge = (item) => {
         const badge = item.badge;
+
         if (badge) {
             return <span className={classNames('layout-menu-badge p-tag p-tag-rounded ml-2 uppercase', { [`${badge}`]: true, 'p-tag-success': badge === 'new', 'p-tag-info': badge === 'updated' })}>{badge}</span>;
         }
@@ -77,6 +79,7 @@ export default function Menu(props) {
                     <ul role="menu">
                         {item.children.map((item, index) => {
                             const link = renderLink(item);
+
                             return (
                                 <li role="menuitem" key={`menuitem_${submenuKey}_${index}`}>
                                     {link}
@@ -147,8 +150,10 @@ export default function Menu(props) {
         } else if (MenuData.data) {
             const searchVal = event.target.value && event.target.value.toLowerCase();
             let _filteredMenu = [];
+
             for (let item of MenuData.data) {
                 let copyItem = { ...item };
+
                 if (isFilterMatched(copyItem, searchVal) || findFilteredItems(copyItem, searchVal)) {
                     _filteredMenu.push(copyItem);
                 }
@@ -161,11 +166,15 @@ export default function Menu(props) {
     const findFilteredItems = (item, searchVal) => {
         if (item) {
             let matched = false;
+
             if (item.children) {
                 let childItems = [...item.children];
+
                 item.children = [];
+
                 for (let childItem of childItems) {
                     let copyChildItem = { ...childItem };
+
                     if (isFilterMatched(copyChildItem, searchVal)) {
                         matched = true;
                         item.children.push(copyChildItem);
@@ -182,6 +191,7 @@ export default function Menu(props) {
 
     const isFilterMatched = (item, searchVal) => {
         let matched = false;
+
         if (onFilterOnOptions(item, searchVal, ['name', 'meta', 'badge'])) {
             matched = true;
         }

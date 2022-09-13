@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useRef, memo } from 'react';
-import { DataTable } from '../../components/lib/datatable/DataTable';
-import { Column } from '../../components/lib/column/Column';
-import { TabView } from '../../components/lib/tabview/TabView';
-import { useLiveEditorTabs } from '../../components/doc/common/liveeditor';
-import { ProductService } from '../../service/ProductService';
-import { Toast } from '../../components/lib/toast/Toast';
-import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
+import React, { memo, useEffect, useRef, useState } from 'react';
+import { DocActions } from '../../components/doc/common/docactions';
+import { useLiveEditorTabs } from '../../components/doc/common/liveeditor';
+import { Column } from '../../components/lib/column/Column';
+import { DataTable } from '../../components/lib/datatable/DataTable';
+import { TabView } from '../../components/lib/tabview/TabView';
+import { Toast } from '../../components/lib/toast/Toast';
+import { ProductService } from '../../service/ProductService';
 
 const DataTableSelectionDemo = () => {
     const [products, setProducts] = useState([]);
@@ -32,6 +32,7 @@ const DataTableSelectionDemo = () => {
 
     useEffect(() => {
         const productService = new ProductService();
+
         productService.getProductsSmall().then((data) => setProducts(data));
     }, []);
 
@@ -57,6 +58,7 @@ const DataTableSelectionDemo = () => {
 
     const isSelectable = (value, field) => {
         let isSelectable = true;
+
         switch (field) {
             case 'quantity':
                 isSelectable = value > 10;
@@ -69,16 +71,19 @@ const DataTableSelectionDemo = () => {
             default:
                 break;
         }
+
         return isSelectable;
     };
 
     const isRowSelectable = (event) => {
         const data = event.data;
+
         return isSelectable(data.quantity, 'quantity');
     };
 
     const isCellSelectable = (event) => {
         const data = event.data;
+
         return isSelectable(data.value, data.field);
     };
 
@@ -88,6 +93,7 @@ const DataTableSelectionDemo = () => {
 
     const cellClassName = (value, options) => {
         const { field } = options.column.props;
+
         return isSelectable(value, field) ? '' : 'p-disabled';
     };
 
@@ -237,7 +243,7 @@ const DataTableSelectionDemo = () => {
                     <p>Single selection can also be handled using radio buttons and rows by enabling the selectionMode property of column as "single".</p>
 
                     <h6>Row and RadioButton Selection</h6>
-                    <DataTable value={products} selection={selectedProduct5} onSelectionChange={(e) => setSelectedProduct5(e.value)} dataKey="id" responsiveLayout="scroll">
+                    <DataTable value={products} selection={selectedProduct5} onSelectionChange={(e) => setSelectedProduct5(e.value)} dataKey="id" responsiveLayout="scroll" selectionAriaLabel="name">
                         <Column selectionMode="single" headerStyle={{ width: '3em' }}></Column>
                         <Column field="code" header="Code"></Column>
                         <Column field="name" header="Name"></Column>
@@ -246,7 +252,7 @@ const DataTableSelectionDemo = () => {
                     </DataTable>
 
                     <h6>RadioButton-Only Selection</h6>
-                    <DataTable value={products} selectionMode="radiobutton" selection={selectedProduct6} onSelectionChange={(e) => setSelectedProduct6(e.value)} dataKey="id" responsiveLayout="scroll">
+                    <DataTable value={products} selectionMode="radiobutton" selection={selectedProduct6} onSelectionChange={(e) => setSelectedProduct6(e.value)} dataKey="id" responsiveLayout="scroll" selectionAriaLabel="name">
                         <Column selectionMode="single" headerStyle={{ width: '3em' }}></Column>
                         <Column field="code" header="Code"></Column>
                         <Column field="name" header="Name"></Column>
@@ -259,7 +265,7 @@ const DataTableSelectionDemo = () => {
                     <h5>Checkbox</h5>
 
                     <h6>Row and Checkbox Selection</h6>
-                    <DataTable value={products} selection={selectedProducts7} onSelectionChange={(e) => setSelectedProducts7(e.value)} dataKey="id" responsiveLayout="scroll">
+                    <DataTable value={products} selection={selectedProducts7} onSelectionChange={(e) => setSelectedProducts7(e.value)} dataKey="id" responsiveLayout="scroll" selectionAriaLabel="name">
                         <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
                         <Column field="code" header="Code"></Column>
                         <Column field="name" header="Name"></Column>
@@ -268,7 +274,7 @@ const DataTableSelectionDemo = () => {
                     </DataTable>
 
                     <h6>Checkbox-Only Selection</h6>
-                    <DataTable value={products} selectionMode="checkbox" selection={selectedProducts8} onSelectionChange={(e) => setSelectedProducts8(e.value)} dataKey="id" responsiveLayout="scroll">
+                    <DataTable value={products} selectionMode="checkbox" selection={selectedProducts8} onSelectionChange={(e) => setSelectedProducts8(e.value)} dataKey="id" responsiveLayout="scroll" selectionAriaLabel="name">
                         <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
                         <Column field="code" header="Code"></Column>
                         <Column field="name" header="Name"></Column>

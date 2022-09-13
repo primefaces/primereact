@@ -35,6 +35,7 @@ const TreeLazyDemo = () => {
 
             setTimeout(() => {
                 let node = { ...event.node };
+
                 node.children = [];
 
                 for (let i = 0; i < 3; i++) {
@@ -45,6 +46,7 @@ const TreeLazyDemo = () => {
                 }
 
                 let value = [...nodes];
+
                 value[parseInt(event.node.key, 10)] = node;
                 setNodes(value);
                 setLoading(false);

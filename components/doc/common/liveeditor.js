@@ -69,6 +69,7 @@ export const useLiveEditorTabs = (props) => {
             }
 
             const lang = key.indexOf('.css') !== -1 ? 'css' : 'js';
+
             return (
                 <CodeHighlight key={`${key}_${i}`} lang={lang}>
                     {`
@@ -106,6 +107,7 @@ export const useLiveEditorTabs = (props) => {
 
     if (props.service) {
         const serviceArr = props.service.replace(/\s/g, '').split(',');
+
         serviceArr.forEach((s, i) => {
             tabs.push(
                 <TabPanel key={`${s}_${i}`} header={`${s}.js`}>
@@ -118,6 +120,7 @@ export const useLiveEditorTabs = (props) => {
 
     if (props.data) {
         const dataArr = props.data.replace(/\s/g, '').split(',');
+
         dataArr.forEach((d, i) => {
             tabs.push(
                 <TabPanel key={`${d}_${i}`} header={`${d}.json`}>
@@ -139,9 +142,11 @@ export const useLiveEditor = () => {
         let isBrowser = sourceType === 'browser';
         let _extFiles = !!props.extFiles ? { ...props.extFiles } : {};
         let extIndexCSS = _extFiles['index.css'] || '';
+
         delete _extFiles['index.css'];
 
         let extFiles = {};
+
         Object.entries(_extFiles).forEach(([k, v]) => (extFiles[`${rootPath}${k}`] = v));
 
         const dependencies = pkg ? pkg.dependencies : {};
@@ -383,9 +388,11 @@ ${extIndexCSS}
 
     const getSandboxParameters = (sourceType) => {
         let { name, sources, dependencies } = props;
+
         if (!sources[sourceType]) {
             return null;
         }
+
         let extension = '.js';
         let serviceExtension = extension;
         let extDependencies = dependencies || {};
@@ -460,6 +467,7 @@ ${extIndexCSS}
 
         if (props.service) {
             const serviceArr = props.service.replace(/\s/g, '').split(',');
+
             serviceArr.forEach((s) => {
                 const path = `${rootPath}${sourceType === 'browser' ? 'demo' : 'service'}/${s}${serviceExtension}`;
                 const content = sourceType === 'browser' ? services[s].replace('export class', 'class') : services[s];
@@ -472,6 +480,7 @@ ${extIndexCSS}
 
         if (props.data) {
             const dataArr = props.data.replace(/\s/g, '').split(',');
+
             dataArr.forEach((d) => {
                 const path = `${sourceType === 'browser' ? 'demo' : 'public'}/data/${d}.json`;
                 const content = data[d];
@@ -488,10 +497,13 @@ ${extIndexCSS}
     return {
         postSandboxParameters(sourceType, toast) {
             const sandboxParameters = getSandboxParameters(sourceType);
+
             if (!sandboxParameters) {
                 toast.current.show({ severity: 'warn', summary: 'Not Available', detail: 'That code sandbox demonstration is not available!' });
+
                 return;
             }
+
             fetch('https://codesandbox.io/api/v1/sandboxes/define?json=1', {
                 method: 'POST',
                 headers: {

@@ -15,6 +15,7 @@ const loadGoogleMaps = (callback) => {
 
     if (!existingScript) {
         const script = document.createElement('script');
+
         script.src = 'https://maps.google.com/maps/api/js?key=AIzaSyA6Ar0UymhiklJBzEPLKKn2QHwbjdz3XV0';
         script.id = 'googleMaps';
         script.async = true;
@@ -37,6 +38,7 @@ const removeGoogleMaps = () => {
 
         const head = document.getElementsByTagName('head')[0];
         const scripts = head.getElementsByTagName('script');
+
         for (let i = 0; i < scripts.length; i++) {
             let script = scripts[i];
             let src = script.src;
@@ -79,6 +81,7 @@ const GMapDemo = () => {
 
         if (isMarker) {
             let title = event.overlay.getTitle();
+
             infoWindow.current = infoWindow.current || new google.maps.InfoWindow();
             infoWindow.setContent('<div>' + title + '</div>');
             infoWindow.open(event.map, event.overlay);

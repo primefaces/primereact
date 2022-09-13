@@ -477,6 +477,12 @@ messages.current.show({severity: 'success', summary: 'Success Message', detail: 
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Unique id of the message.</td>
+                                </tr>
+                                <tr>
                                     <td>severity</td>
                                     <td>string</td>
                                     <td>null</td>
@@ -517,6 +523,12 @@ messages.current.show({severity: 'success', summary: 'Success Message', detail: 
                                     <td>number</td>
                                     <td>3000</td>
                                     <td>Delay in milliseconds to close the message automatically.</td>
+                                </tr>
+                                <tr>
+                                    <td>icon</td>
+                                    <td>IconType</td>
+                                    <td>Defaults to severiy icon</td>
+                                    <td>Defines the icon to display.</td>
                                 </tr>
                             </tbody>
                         </table>

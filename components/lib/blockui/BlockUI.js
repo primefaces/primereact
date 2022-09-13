@@ -40,6 +40,7 @@ export const BlockUI = React.forwardRef((props, ref) => {
 
         if (props.autoZIndex) {
             const key = props.fullScreen ? 'modal' : 'overlay';
+
             ZIndexUtils.set(key, maskRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex[key]);
         }
 

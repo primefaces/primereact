@@ -11,21 +11,27 @@ export default function Config(props) {
     const [active, setActive] = useState(false);
     const [scale, setScale] = useState(14);
     const [scales, setScales] = useState([12, 13, 14, 15, 16]);
+
     const toggleConfigurator = () => {
         setActive((prevActive) => !prevActive);
     };
+
     const hideConfigurator = () => {
         setActive(false);
     };
+
     const onThemeChange = (theme, dark) => {
         props.onThemeChange({ theme, dark });
     };
+
     const decrementScale = () => {
         setScale((prevScale) => --prevScale);
     };
+
     const incrementScale = () => {
         setScale((prevScale) => ++prevScale);
     };
+
     const bindOutsideClickListener = () => {
         if (!outsideClickListener.current) {
             outsideClickListener.current = (event) => {
@@ -33,18 +39,22 @@ export default function Config(props) {
                     hideConfigurator();
                 }
             };
+
             document.addEventListener('click', outsideClickListener.current);
         }
     };
+
     const unbindOutsideClickListener = () => {
         if (outsideClickListener.current) {
             document.removeEventListener('click', outsideClickListener.current);
             outsideClickListener.current = null;
         }
     };
+
     const isOutsideClicked = (event) => {
         return !(element.current.isSameNode(event.target) || element.current.contains(event.target));
     };
+
     const element = useRef();
     const outsideClickListener = useRef();
 

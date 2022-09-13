@@ -1,6 +1,5 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
-import { ariaLabel } from '../api/Api';
+import PrimeReact, { ariaLabel } from '../api/Api';
 import { Button } from '../button/Button';
 import { useMountEffect, usePrevious, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { classNames, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
@@ -53,6 +52,7 @@ export const Carousel = React.memo(
 
         const step = (dir, page) => {
             let totalShiftedItems = totalShiftedItemsState;
+
             if (page != null) {
                 totalShiftedItems = numScrollState * page * -1;
 
@@ -63,12 +63,14 @@ export const Carousel = React.memo(
                 isRemainingItemsAdded.current = false;
             } else {
                 totalShiftedItems += numScrollState * dir;
+
                 if (isRemainingItemsAdded.current) {
                     totalShiftedItems += remainingItems.current - numScrollState * dir;
                     isRemainingItemsAdded.current = false;
                 }
 
                 const originalShiftedItems = isCircular ? totalShiftedItems + numVisibleState : totalShiftedItems;
+
                 page = Math.abs(Math.floor(originalShiftedItems / numScrollState));
             }
 
@@ -148,6 +150,7 @@ export const Carousel = React.memo(
             }
 
             allowAutoplay.current = false;
+
             if (e.cancelable) {
                 e.preventDefault();
             }
@@ -159,6 +162,7 @@ export const Carousel = React.memo(
             }
 
             allowAutoplay.current = false;
+
             if (e.cancelable) {
                 e.preventDefault();
             }
@@ -252,6 +256,7 @@ export const Carousel = React.memo(
                 responsiveOptions.current.sort((data1, data2) => {
                     const value1 = data1.breakpoint;
                     const value2 = data2.breakpoint;
+
                     return ObjectUtils.sort(value1, value2, -1, PrimeReact.locale, PrimeReact.nullSortOrder);
                 });
 
@@ -306,6 +311,7 @@ export const Carousel = React.memo(
                 remainingItems.current = (props.value.length - numVisibleState) % numScrollState;
 
                 let page = currentPage;
+
                 if (totalIndicators !== 0 && page >= totalIndicators) {
                     page = totalIndicators - 1;
 
@@ -321,6 +327,7 @@ export const Carousel = React.memo(
                 }
 
                 totalShiftedItems = page * numScrollState * -1;
+
                 if (isCircular) {
                     totalShiftedItems -= numVisibleState;
                 }
@@ -345,6 +352,7 @@ export const Carousel = React.memo(
                     totalShiftedItems = -1 * numVisibleState;
                 } else if (totalShiftedItems === 0) {
                     totalShiftedItems = -1 * props.value.length;
+
                     if (remainingItems.current > 0) {
                         isRemainingItemsAdded.current = true;
                     }
@@ -461,29 +469,37 @@ export const Carousel = React.memo(
         };
 
         const createBackwardNavigator = () => {
-            const isDisabled = (!circular || (props.value && props.value.length < numVisibleState)) && currentPage === 0;
-            const className = classNames('p-carousel-prev p-link', {
-                'p-disabled': isDisabled
-            });
-            const iconClassName = classNames('p-carousel-prev-icon pi', {
-                'pi-chevron-left': !isVertical,
-                'pi-chevron-up': isVertical
-            });
+            if (props.showNavigators) {
+                const isDisabled = (!circular || (props.value && props.value.length < numVisibleState)) && currentPage === 0;
+                const className = classNames('p-carousel-prev p-link', {
+                    'p-disabled': isDisabled
+                });
+                const iconClassName = classNames('p-carousel-prev-icon pi', {
+                    'pi-chevron-left': !isVertical,
+                    'pi-chevron-up': isVertical
+                });
 
-            return <Button type="button" className={className} icon={iconClassName} onClick={navBackward} disabled={isDisabled} aria-label={ariaLabel('previousPageLabel')} />;
+                return <Button type="button" className={className} icon={iconClassName} onClick={navBackward} disabled={isDisabled} aria-label={ariaLabel('previousPageLabel')} />;
+            }
+
+            return null;
         };
 
         const createForwardNavigator = () => {
-            const isDisabled = (!circular || (props.value && props.value.length < numVisibleState)) && (currentPage === totalIndicators - 1 || totalIndicators === 0);
-            const className = classNames('p-carousel-next p-link', {
-                'p-disabled': isDisabled
-            });
-            const iconClassName = classNames('p-carousel-next-icon pi', {
-                'pi-chevron-right': !isVertical,
-                'pi-chevron-down': isVertical
-            });
+            if (props.showNavigators) {
+                const isDisabled = (!circular || (props.value && props.value.length < numVisibleState)) && (currentPage === totalIndicators - 1 || totalIndicators === 0);
+                const className = classNames('p-carousel-next p-link', {
+                    'p-disabled': isDisabled
+                });
+                const iconClassName = classNames('p-carousel-next-icon pi', {
+                    'pi-chevron-right': !isVertical,
+                    'pi-chevron-down': isVertical
+                });
 
-            return <Button type="button" className={className} icon={iconClassName} onClick={navForward} disabled={isDisabled} aria-label={ariaLabel('nextPageLabel')} />;
+                return <Button type="button" className={className} icon={iconClassName} onClick={navForward} disabled={isDisabled} aria-label={ariaLabel('nextPageLabel')} />;
+            }
+
+            return null;
         };
 
         const createIndicator = (index) => {
@@ -501,14 +517,18 @@ export const Carousel = React.memo(
         };
 
         const createIndicators = () => {
-            const className = classNames('p-carousel-indicators p-reset', props.indicatorsContentClassName);
-            let indicators = [];
+            if (props.showIndicators) {
+                const className = classNames('p-carousel-indicators p-reset', props.indicatorsContentClassName);
+                let indicators = [];
 
-            for (let i = 0; i < totalIndicators; i++) {
-                indicators.push(createIndicator(i));
+                for (let i = 0; i < totalIndicators; i++) {
+                    indicators.push(createIndicator(i));
+                }
+
+                return <ul className={className}>{indicators}</ul>;
             }
 
-            return <ul className={className}>{indicators}</ul>;
+            return null;
         };
 
         const otherProps = ObjectUtils.findDiffKeys(props, Carousel.defaultProps);
@@ -553,6 +573,8 @@ Carousel.defaultProps = {
     className: null,
     itemTemplate: null,
     circular: false,
+    showIndicators: true,
+    showNavigators: true,
     autoplayInterval: 0,
     numVisible: 1,
     numScroll: 1,

@@ -130,6 +130,7 @@ const DataTableStateDemo = () => {
     const onGlobalFilterChange = (event, filtersKey) => {
         const value = event.target.value;
         let filters = { ...filtersMap[filtersKey].value };
+
         filters['global'].value = value;
 
         filtersMap[filtersKey].callback(filters);

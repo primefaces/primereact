@@ -11,6 +11,7 @@ const TreeTablePageDemo = () => {
 
     useEffect(() => {
         let files = [];
+
         for (let i = 0; i < 50; i++) {
             let node = {
                 key: i,

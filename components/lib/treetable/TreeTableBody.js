@@ -9,6 +9,7 @@ export const TreeTableBody = React.memo((props) => {
 
     const flattenizeTree = (nodes) => {
         let rows = [];
+
         nodes = nodes || props.value;
 
         for (let node of nodes) {
@@ -35,6 +36,7 @@ export const TreeTableBody = React.memo((props) => {
         }
 
         const targetNode = event.target.nodeName;
+
         if (targetNode === 'INPUT' || targetNode === 'BUTTON' || targetNode === 'A' || DomHandler.hasClass(event.target, 'p-clickable')) {
             return;
         }
@@ -58,6 +60,7 @@ export const TreeTableBody = React.memo((props) => {
 
                 for (let i = rangeStart; i <= rangeEnd; i++) {
                     const rowKey = flatKeys[i];
+
                     selectionKeys[rowKey] = true;
                 }
             } else {
@@ -195,6 +198,7 @@ export const TreeTableBody = React.memo((props) => {
 
             for (let i = startIndex; i < endIndex; i++) {
                 let rowData = props.value[i];
+
                 if (rowData) rows.push(createRow(props.value[i]));
                 else break;
             }

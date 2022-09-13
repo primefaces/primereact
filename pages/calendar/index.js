@@ -32,10 +32,12 @@ const CalendarDemo = () => {
     const [dates2, setDates2] = useState(null);
 
     let minDate = new Date();
+
     minDate.setMonth(prevMonth);
     minDate.setFullYear(prevYear);
 
     let maxDate = new Date();
+
     maxDate.setMonth(nextMonth);
     maxDate.setFullYear(nextYear);
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import PrimeReact, { localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useUnmountEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
@@ -42,6 +42,7 @@ export const Image = React.memo(
 
         const onDownload = () => {
             const { alt: name, src } = props;
+
             DomHandler.saveAs({ name, src });
             previewClick.current = true;
         };
@@ -130,7 +131,7 @@ export const Image = React.memo(
                         <button className="p-image-action p-link" onClick={zoomIn} type="button" disabled={zoomDisabled}>
                             <i className="pi pi-search-plus"></i>
                         </button>
-                        <button className="p-image-action p-link" type="button">
+                        <button className="p-image-action p-link" type="button" aria-label={localeOption('close')}>
                             <i className="pi pi-times"></i>
                         </button>
                     </div>

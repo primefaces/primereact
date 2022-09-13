@@ -14,6 +14,7 @@ export const TabMenu = React.memo(
         const itemClick = (event, item, index) => {
             if (item.disabled) {
                 event.preventDefault();
+
                 return;
             }
 
@@ -63,6 +64,7 @@ export const TabMenu = React.memo(
             if (item.visible === false) {
                 return null;
             }
+
             const { className: _className, style, disabled, icon: _icon, label: _label, template, url, target } = item;
             const key = _label + '_' + index;
             const active = isSelected(index);

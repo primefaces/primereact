@@ -71,6 +71,7 @@ const GalleriaAdvancedDemo = () => {
 
     const openFullScreen = () => {
         let elem = document.querySelector('.custom-galleria');
+
         if (elem.requestFullscreen) {
             elem.requestFullscreen();
         } else if (elem.mozRequestFullScreen) {

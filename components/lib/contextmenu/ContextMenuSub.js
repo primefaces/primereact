@@ -16,14 +16,17 @@ export const ContextMenuSub = React.memo((props) => {
     const onItemMouseEnter = (event, item) => {
         if (item.disabled) {
             event.preventDefault();
+
             return;
         }
+
         setActiveItemState(item);
     };
 
     const onItemClick = (event, item) => {
         if (item.disabled) {
             event.preventDefault();
+
             return;
         }
 
@@ -83,6 +86,7 @@ export const ContextMenuSub = React.memo((props) => {
         if (item.visible === false) {
             return null;
         }
+
         const active = activeItemState === item;
         const key = item.label + '_' + index;
         const className = classNames('p-menuitem', { 'p-menuitem-active': active }, item.className);

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import PrimeReact, { localeOption } from '../api/Api';
+import { Button } from '../button/Button';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
@@ -39,6 +40,7 @@ export const Dialog = React.forwardRef((props, ref) => {
     const focus = () => {
         let activeElement = document.activeElement;
         let isActiveElementInDialog = activeElement && dialogRef.current && dialogRef.current.contains(activeElement);
+
         if (!isActiveElementInDialog && props.closable && props.showHeader) {
             closeRef.current.focus();
         }
@@ -66,37 +68,42 @@ export const Dialog = React.forwardRef((props, ref) => {
     };
 
     const onKeyDown = (event) => {
-        let currentTarget = event.currentTarget;
+        const currentTarget = event.currentTarget;
 
-        if (currentTarget && currentTarget.primeDialogParams) {
-            let params = currentTarget.primeDialogParams;
-            let paramLength = params.length;
-            let dialogId = params[paramLength - 1] ? params[paramLength - 1].id : undefined;
+        if (!currentTarget || !currentTarget.primeDialogParams) {
+            return;
+        }
 
-            if (dialogId === idState && props.closeOnEscape) {
-                let dialog = document.getElementById(dialogId);
+        const params = currentTarget.primeDialogParams;
+        const paramLength = params.length;
+        const dialogId = params[paramLength - 1] ? params[paramLength - 1].id : undefined;
 
-                if (event.which === 27) {
-                    onClose(event);
-                    event.stopImmediatePropagation();
+        if (dialogId !== idState) {
+            return;
+        }
 
-                    params.splice(paramLength - 1, 1);
-                } else if (event.which === 9) {
-                    event.preventDefault();
-                    let focusableElements = DomHandler.getFocusableElements(dialog);
-                    if (focusableElements && focusableElements.length > 0) {
-                        if (!document.activeElement) {
-                            focusableElements[0].focus();
-                        } else {
-                            let focusedIndex = focusableElements.indexOf(document.activeElement);
-                            if (event.shiftKey) {
-                                if (focusedIndex === -1 || focusedIndex === 0) focusableElements[focusableElements.length - 1].focus();
-                                else focusableElements[focusedIndex - 1].focus();
-                            } else {
-                                if (focusedIndex === -1 || focusedIndex === focusableElements.length - 1) focusableElements[0].focus();
-                                else focusableElements[focusedIndex + 1].focus();
-                            }
-                        }
+        const dialog = document.getElementById(dialogId);
+
+        if (props.closable && props.closeOnEscape && event.key === 'Escape') {
+            onClose(event);
+            event.stopImmediatePropagation();
+            params.splice(paramLength - 1, 1);
+        } else if (event.key === 'Tab') {
+            event.preventDefault();
+            const focusableElements = DomHandler.getFocusableElements(dialog);
+
+            if (focusableElements && focusableElements.length > 0) {
+                if (!document.activeElement) {
+                    focusableElements[0].focus();
+                } else {
+                    const focusedIndex = focusableElements.indexOf(document.activeElement);
+
+                    if (event.shiftKey) {
+                        if (focusedIndex === -1 || focusedIndex === 0) focusableElements[focusableElements.length - 1].focus();
+                        else focusableElements[focusedIndex - 1].focus();
+                    } else {
+                        if (focusedIndex === -1 || focusedIndex === focusableElements.length - 1) focusableElements[0].focus();
+                        else focusableElements[focusedIndex + 1].focus();
                     }
                 }
             }
@@ -177,6 +184,7 @@ export const Dialog = React.forwardRef((props, ref) => {
         !viewport && (viewport = DomHandler.getViewport());
 
         const val = parseInt(value);
+
         if (/^(\d+|(\.\d+))(\.\d+)?%$/.test(value)) {
             return val * (viewport[property] / 100);
         }
@@ -260,6 +268,7 @@ export const Dialog = React.forwardRef((props, ref) => {
         if (props.modal) {
             DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
         }
+
         if (props.blockScroll) {
             DomHandler.removeClass(document.body, 'p-overflow-hidden');
         }
@@ -285,6 +294,7 @@ export const Dialog = React.forwardRef((props, ref) => {
 
         if (props.modal) {
             let hasBlockScroll = document.primeDialogParams && document.primeDialogParams.some((param) => param.hasBlockScroll);
+
             if (hasBlockScroll) {
                 DomHandler.removeClass(document.body, 'p-overflow-hidden');
             }
@@ -304,12 +314,10 @@ export const Dialog = React.forwardRef((props, ref) => {
             bindDocumentResizeEndListener();
         }
 
-        if (props.closable) {
-            bindDocumentKeyDownListener();
+        bindDocumentKeyDownListener();
+        const newParam = { id: idState, hasBlockScroll: props.blockScroll };
 
-            const newParam = { id: idState, hasBlockScroll: props.blockScroll };
-            document.primeDialogParams = document.primeDialogParams ? [...document.primeDialogParams, newParam] : [newParam];
-        }
+        document.primeDialogParams = document.primeDialogParams ? [...document.primeDialogParams, newParam] : [newParam];
     };
 
     const unbindGlobalListeners = () => {
@@ -327,6 +335,7 @@ export const Dialog = React.forwardRef((props, ref) => {
             styleElement.current = DomHandler.createInlineStyle(PrimeReact.nonce);
 
             let innerHTML = '';
+
             for (let breakpoint in props.breakpoints) {
                 innerHTML += `
                     @media screen and (max-width: ${breakpoint}) {
@@ -344,12 +353,14 @@ export const Dialog = React.forwardRef((props, ref) => {
     const changeScrollOnMaximizable = () => {
         if (!props.blockScroll) {
             let funcName = maximized ? 'addClass' : 'removeClass';
+
             DomHandler[funcName](document.body, 'p-overflow-hidden');
         }
     };
 
     useMountEffect(() => {
         const unqiueId = UniqueComponentId();
+
         if (!idState) {
             setIdState(unqiueId);
         }
@@ -407,12 +418,9 @@ export const Dialog = React.forwardRef((props, ref) => {
 
     const createCloseIcon = () => {
         if (props.closable) {
-            return (
-                <button ref={closeRef} type="button" className="p-dialog-header-icon p-dialog-header-close p-link" aria-label={props.ariaCloseIconLabel} onClick={onClose}>
-                    <span className="p-dialog-header-close-icon pi pi-times"></span>
-                    <Ripple />
-                </button>
-            );
+            const ariaLabel = props.ariaCloseIconLabel || localeOption('close');
+
+            return <Button ref={closeRef} type="button" className="p-dialog-header-icon p-dialog-header-close p-link" icon="p-dialog-header-close-icon pi pi-times" onClick={onClose} aria-label={ariaLabel} />;
         }
 
         return null;
@@ -576,7 +584,7 @@ Dialog.defaultProps = {
     maximizable: false,
     blockScroll: false,
     icons: null,
-    ariaCloseIconLabel: 'Close',
+    ariaCloseIconLabel: null,
     focusOnShow: true,
     minX: 0,
     minY: 0,

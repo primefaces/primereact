@@ -15,6 +15,7 @@ const AccordionDemo = () => {
             _activeIndex.push(itemIndex);
         } else {
             const index = _activeIndex.indexOf(itemIndex);
+
             if (index === -1) {
                 _activeIndex.push(itemIndex);
             } else {

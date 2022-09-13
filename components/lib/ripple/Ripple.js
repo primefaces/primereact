@@ -30,8 +30,10 @@ export const Ripple = React.memo(
             }
 
             DomHandler.removeClass(inkRef.current, 'p-ink-active');
+
             if (!DomHandler.getHeight(inkRef.current) && !DomHandler.getWidth(inkRef.current)) {
                 let d = Math.max(DomHandler.getOuterWidth(targetRef.current), DomHandler.getOuterHeight(targetRef.current));
+
                 inkRef.current.style.height = d + 'px';
                 inkRef.current.style.width = d + 'px';
             }

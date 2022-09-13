@@ -78,6 +78,7 @@ const DataTableCrudDemo = () => {
         if (product.name.trim()) {
             let _products = [...products];
             let _product = { ...product };
+
             if (product.id) {
                 const index = findIndexById(product.id);
 
@@ -108,6 +109,7 @@ const DataTableCrudDemo = () => {
 
     const deleteProduct = () => {
         let _products = products.filter((val) => val.id !== product.id);
+
         setProducts(_products);
         setDeleteProductDialog(false);
         setProduct(emptyProduct);
@@ -116,6 +118,7 @@ const DataTableCrudDemo = () => {
 
     const findIndexById = (id) => {
         let index = -1;
+
         for (let i = 0; i < products.length; i++) {
             if (products[i].id === id) {
                 index = i;
@@ -129,21 +132,25 @@ const DataTableCrudDemo = () => {
     const createId = () => {
         let id = '';
         let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
         for (let i = 0; i < 5; i++) {
             id += chars.charAt(Math.floor(Math.random() * chars.length));
         }
+
         return id;
     };
 
     const importCSV = (e) => {
         const file = e.files[0];
         const reader = new FileReader();
+
         reader.onload = (e) => {
             const csv = e.target.result;
             const data = csv.split('\\n');
 
             // Prepare DataTable
             const cols = data[0].replace(/['"]+/g, '').split(',');
+
             data.shift();
 
             const importedData = data.map((d) => {
@@ -152,10 +159,12 @@ const DataTableCrudDemo = () => {
                     c = c === 'Status' ? 'inventoryStatus' : c === 'Reviews' ? 'rating' : c.toLowerCase();
                     obj[c] = d[i].replace(/['"]+/g, '');
                     (c === 'price' || c === 'rating') && (obj[c] = parseFloat(obj[c]));
+
                     return obj;
                 }, {});
 
                 processedData['id'] = createId();
+
                 return processedData;
             });
 
@@ -177,6 +186,7 @@ const DataTableCrudDemo = () => {
 
     const deleteSelectedProducts = () => {
         let _products = products.filter((val) => !selectedProducts.includes(val));
+
         setProducts(_products);
         setDeleteProductsDialog(false);
         setSelectedProducts(null);
@@ -185,6 +195,7 @@ const DataTableCrudDemo = () => {
 
     const onCategoryChange = (e) => {
         let _product = { ...product };
+
         _product['category'] = e.value;
         setProduct(_product);
     };
@@ -192,6 +203,7 @@ const DataTableCrudDemo = () => {
     const onInputChange = (e, name) => {
         const val = (e.target && e.target.value) || '';
         let _product = { ...product };
+
         _product[`${name}`] = val;
 
         setProduct(_product);
@@ -200,6 +212,7 @@ const DataTableCrudDemo = () => {
     const onInputNumberChange = (e, name) => {
         const val = e.value || 0;
         let _product = { ...product };
+
         _product[`${name}`] = val;
 
         setProduct(_product);

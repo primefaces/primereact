@@ -22,8 +22,10 @@ export default function MyApp({ Component }) {
                     announcement.current = data;
 
                     const itemString = localStorage.getItem(storageKey);
+
                     if (itemString) {
                         const item = JSON.parse(itemString);
+
                         if (item.hiddenNews && item.hiddenNews !== data.id) {
                             setNewsActive(true);
                         }

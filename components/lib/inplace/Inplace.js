@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { localeOption } from '../api/Api';
 import { Button } from '../button/Button';
 import { classNames, ObjectUtils } from '../utils/Utils';
 
@@ -65,7 +66,7 @@ export const Inplace = React.forwardRef((props, ref) => {
 
     const createCloseButton = () => {
         if (props.closable) {
-            return <Button type="button" className="p-inplace-content-close" icon="pi pi-times" onClick={close} />;
+            return <Button type="button" className="p-inplace-content-close" icon="pi pi-times" onClick={close} ariaLabel={localeOption('close')} />;
         }
 
         return null;

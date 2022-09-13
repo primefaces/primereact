@@ -8,6 +8,7 @@ export const ProgressBar = React.memo(
         const createLabel = () => {
             if (props.showValue && props.value != null) {
                 const label = props.displayValueTemplate ? props.displayValueTemplate(props.value) : props.value + props.unit;
+
                 return <div className="p-progressbar-label">{label}</div>;
             }
 

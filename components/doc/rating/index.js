@@ -1,9 +1,9 @@
-import React, { memo } from 'react';
 import Link from 'next/link';
-import { TabView, TabPanel } from '../../lib/tabview/TabView';
-import { useLiveEditorTabs } from '../common/liveeditor';
+import React, { memo } from 'react';
+import { TabPanel, TabView } from '../../lib/tabview/TabView';
 import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
+import { useLiveEditorTabs } from '../common/liveeditor';
 
 const RatingDoc = memo(() => {
     const sources = {
@@ -20,7 +20,8 @@ export class RatingDemo extends Component {
 
         this.state = {
             val1: null,
-            val2: null
+            val2: null,
+            val3: null
         };
     }
 
@@ -29,16 +30,35 @@ export class RatingDemo extends Component {
             <div>
                 <div className="card">
                     <h5>Basic {this.state.val1}</h5>
-                    <Rating value={this.state.val1} onChange={(e) => this.setState({val1: e.value})} />
+                    <Rating value={this.state.val1} onChange={(e) => this.setState({ val1: e.value })} />
 
                     <h5>Without Cancel</h5>
-                    <Rating value={this.state.val2} cancel={false} onChange={(e) => this.setState({val2: e.value})} />
+                    <Rating value={this.state.val2} cancel={false} onChange={(e) => this.setState({ val2: e.value })} />
 
                     <h5>ReadOnly</h5>
                     <Rating value={5} readOnly stars={10} cancel={false} />
 
                     <h5>Disabled</h5>
                     <Rating value={8} disabled stars={10} />
+
+                    <h5>Template</h5>
+                    <Rating
+                        value={this.state.val3}
+                        onChange={(e) => this.setState({ val3: e.value })}
+                        cancelIcon={
+                            <img src={\`images/rating/cancel.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-cancel-image" width="25px" height="25px" />
+                        }
+                        onIcon={
+                            <img
+                                src={\`images/rating/custom-icon-active.png\`}
+                                onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                                alt="custom-image-active"
+                                width="25px"
+                                height="25px"
+                            />
+                        }
+                        offIcon={<img src={\`images/rating/custom-icon.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image" width="25px" height="25px" />}
+                    />
                 </div>
             </div>
         )
@@ -55,6 +75,7 @@ import { Rating } from 'primereact/rating';
 const RatingDemo = () => {
     const [val1, setVal1] = useState(null);
     const [val2, setVal2] = useState(null);
+    const [val3, setVal3] = useState(null);
 
     return (
         <div>
@@ -70,6 +91,25 @@ const RatingDemo = () => {
 
                 <h5>Disabled</h5>
                 <Rating value={8} disabled stars={10} />
+
+                <h5>Template</h5>
+                <Rating
+                    value={val3}
+                    onChange={(e) => setVal3(e.value)}
+                    cancelIcon={
+                        <img src={\`images/rating/cancel.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-cancel-image" width="25px" height="25px" />
+                    }
+                    onIcon={
+                        <img
+                            src={\`images/rating/custom-icon-active.png\`}
+                            onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                            alt="custom-image-active"
+                            width="25px"
+                            height="25px"
+                        />
+                    }
+                    offIcon={<img src={\`images/rating/custom-icon.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image" width="25px" height="25px" />}
+                />
             </div>
         </div>
     )
@@ -85,6 +125,7 @@ import { Rating } from 'primereact/rating';
 const RatingDemo = () => {
     const [val1, setVal1] = useState(null);
     const [val2, setVal2] = useState(null);
+    const [val3, setVal3] = useState(null);
 
     return (
         <div>
@@ -100,6 +141,25 @@ const RatingDemo = () => {
 
                 <h5>Disabled</h5>
                 <Rating value={8} disabled stars={10} />
+
+                <h5>Template</h5>
+                <Rating
+                    value={val3}
+                    onChange={(e) => setVal3(e.value)}
+                    cancelIcon={
+                        <img src={\`images/rating/cancel.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-cancel-image" width="25px" height="25px" />
+                    }
+                    onIcon={
+                        <img
+                            src={\`images/rating/custom-icon-active.png\`}
+                            onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                            alt="custom-image-active"
+                            width="25px"
+                            height="25px"
+                        />
+                    }
+                    offIcon={<img src={\`images/rating/custom-icon.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image" width="25px" height="25px" />}
+                />
             </div>
         </div>
     )
@@ -118,6 +178,7 @@ const { Rating } = primereact.rating;
 const RatingDemo = () => {
     const [val1, setVal1] = useState(null);
     const [val2, setVal2] = useState(null);
+    const [val3, setVal3] = useState(null);
 
     return (
         <div>
@@ -133,6 +194,25 @@ const RatingDemo = () => {
 
                 <h5>Disabled</h5>
                 <Rating value={8} disabled stars={10} />
+
+                <h5>Template</h5>
+                <Rating
+                    value={val3}
+                    onChange={(e) => setVal3(e.value)}
+                    cancelIcon={
+                        <img src={\`images/rating/cancel.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-cancel-image" width="25px" height="25px" />
+                    }
+                    onIcon={
+                        <img
+                            src={\`images/rating/custom-icon-active.png\`}
+                            onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                            alt="custom-image-active"
+                            width="25px"
+                            height="25px"
+                        />
+                    }
+                    offIcon={<img src={\`images/rating/custom-icon.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image" width="25px" height="25px" />}
+                />
             </div>
         </div>
     )
@@ -189,7 +269,18 @@ import { Rating } from 'primereact/rating';
 
                     <CodeHighlight>
                         {`
-<Rating value={value} onChange={(e) => setValue(e.value)} cancel={5} />
+<Rating value={value} onChange={(e) => setValue(e.value)} cancel={false} />
+`}
+                    </CodeHighlight>
+
+                    <h5>Custom Icons</h5>
+                    <p>
+                        Custom icons are used to override the default icons with <i>onIcon</i>, <i>offIcon</i> and <i>cancelIcon</i> properties.
+                    </p>
+
+                    <CodeHighlight>
+                        {`
+<Rating value={value} onIcon="pi pi-circle-fill" offIcon="pi-circle" onChange={(e) => setValue(e.value)} />
 `}
                     </CodeHighlight>
 
@@ -231,6 +322,18 @@ import { Rating } from 'primereact/rating';
                                     <td>When present, changing the value is not possible.</td>
                                 </tr>
                                 <tr>
+                                    <td>style</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Inline style of the component.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>ClassName of the component.</td>
+                                </tr>
+                                <tr>
                                     <td>stars</td>
                                     <td>number</td>
                                     <td>5</td>
@@ -243,16 +346,40 @@ import { Rating } from 'primereact/rating';
                                     <td>When specified a cancel icon is displayed to allow removing the value.</td>
                                 </tr>
                                 <tr>
-                                    <td>style</td>
-                                    <td>object</td>
-                                    <td>null</td>
-                                    <td>Inline style of the component.</td>
+                                    <td>cancelIcon</td>
+                                    <td>string</td>
+                                    <td>pi pi-ban</td>
+                                    <td>ClassName of the cancel icon component.</td>
                                 </tr>
                                 <tr>
-                                    <td>className</td>
-                                    <td>string</td>
+                                    <td>cancelIconProps</td>
+                                    <td>object</td>
                                     <td>null</td>
-                                    <td>ClassName of the component.</td>
+                                    <td>Properties of the cancel icon.</td>
+                                </tr>
+                                <tr>
+                                    <td>onIcon</td>
+                                    <td>string</td>
+                                    <td>pi pi-star-fill</td>
+                                    <td>ClassName of the on icon component.</td>
+                                </tr>
+                                <tr>
+                                    <td>offIcon</td>
+                                    <td>string</td>
+                                    <td>pi pi-star</td>
+                                    <td>ClassName of the off icon component.</td>
+                                </tr>
+                                <tr>
+                                    <td>onIconProps</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Properties of the on icon.</td>
+                                </tr>
+                                <tr>
+                                    <td>offIconProps</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Properties of the off icon.</td>
                                 </tr>
                                 <tr>
                                     <td>tooltip</td>
@@ -309,16 +436,16 @@ import { Rating } from 'primereact/rating';
                                     <td>Container element</td>
                                 </tr>
                                 <tr>
-                                    <td>p-rating-star</td>
-                                    <td>Star element</td>
+                                    <td>p-rating-item</td>
+                                    <td>Each item element</td>
                                 </tr>
                                 <tr>
-                                    <td>p-rating-star-on</td>
-                                    <td>Selected star element.</td>
+                                    <td>p-rating-item-active</td>
+                                    <td>Selected item elements.</td>
                                 </tr>
                                 <tr>
-                                    <td>p-rating-cancel</td>
-                                    <td>Cancel icon.</td>
+                                    <td>p-rating-cancel-item</td>
+                                    <td>Cancel item element.</td>
                                 </tr>
                             </tbody>
                         </table>

@@ -5,8 +5,10 @@ export default class DomHandler {
             let style = getComputedStyle(el);
 
             width += parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+
             return width;
         }
+
         return 0;
     }
 
@@ -16,8 +18,10 @@ export default class DomHandler {
             let style = getComputedStyle(el);
 
             width -= parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+
             return width;
         }
+
         return 0;
     }
 
@@ -27,11 +31,13 @@ export default class DomHandler {
 
     static getWindowScrollTop() {
         let doc = document.documentElement;
+
         return (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
     }
 
     static getWindowScrollLeft() {
         let doc = document.documentElement;
+
         return (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0);
     }
 
@@ -41,11 +47,13 @@ export default class DomHandler {
 
             if (margin) {
                 let style = getComputedStyle(el);
+
                 width += parseFloat(style.marginLeft) + parseFloat(style.marginRight);
             }
 
             return width;
         }
+
         return 0;
     }
 
@@ -55,11 +63,13 @@ export default class DomHandler {
 
             if (margin) {
                 let style = getComputedStyle(el);
+
                 height += parseFloat(style.marginTop) + parseFloat(style.marginBottom);
             }
 
             return height;
         }
+
         return 0;
     }
 
@@ -69,11 +79,13 @@ export default class DomHandler {
 
             if (margin) {
                 let style = getComputedStyle(el);
+
                 height += parseFloat(style.marginTop) + parseFloat(style.marginBottom);
             }
 
             return height;
         }
+
         return 0;
     }
 
@@ -83,11 +95,13 @@ export default class DomHandler {
 
             if (margin) {
                 let style = getComputedStyle(el);
+
                 width += parseFloat(style.marginLeft) + parseFloat(style.marginRight);
             }
 
             return width;
         }
+
         return 0;
     }
 
@@ -122,11 +136,13 @@ export default class DomHandler {
         if (element) {
             let children = element.parentNode.childNodes;
             let num = 0;
+
             for (let i = 0; i < children.length; i++) {
                 if (children[i] === element) return num;
                 if (children[i].nodeType === 1) num++;
             }
         }
+
         return -1;
     }
 
@@ -134,11 +150,13 @@ export default class DomHandler {
         if (element && className) {
             if (element.classList) {
                 let styles = className.split(' ');
+
                 for (let i = 0; i < styles.length; i++) {
                     element.classList.add(styles[i]);
                 }
             } else {
                 let styles = className.split(' ');
+
                 for (let i = 0; i < styles.length; i++) {
                     element.className += ' ' + styles[i];
                 }
@@ -150,11 +168,13 @@ export default class DomHandler {
         if (element && className) {
             if (element.classList) {
                 let styles = className.split(' ');
+
                 for (let i = 0; i < styles.length; i++) {
                     element.classList.remove(styles[i]);
                 }
             } else {
                 let styles = className.split(' ');
+
                 for (let i = 0; i < styles.length; i++) {
                     element.className = element.className.replace(new RegExp('(^|\\b)' + styles[i].split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
                 }
@@ -181,6 +201,7 @@ export default class DomHandler {
             if (element.classList) return element.classList.contains(className);
             else return new RegExp('(^| )' + className + '( |$)', 'gi').test(element.className);
         }
+
         return false;
     }
 
@@ -192,6 +213,7 @@ export default class DomHandler {
         if (element) {
             return element.querySelector(selector);
         }
+
         return null;
     }
 
@@ -204,6 +226,7 @@ export default class DomHandler {
 
             return height;
         }
+
         return 0;
     }
 
@@ -216,6 +239,7 @@ export default class DomHandler {
 
             return width;
         }
+
         return 0;
     }
 
@@ -245,6 +269,7 @@ export default class DomHandler {
 
             if (targetOffset.top + targetOuterHeight + elementOuterHeight > viewport.height) {
                 top = targetOffset.top + windowScrollTop - elementOuterHeight;
+
                 if (top < 0) {
                     top = windowScrollTop;
                 }
@@ -273,6 +298,7 @@ export default class DomHandler {
 
             if (targetOffset.top + targetHeight + elementDimensions.height > viewport.height) {
                 top = -1 * elementDimensions.height;
+
                 if (targetOffset.top + top < 0) {
                     top = -1 * targetOffset.top;
                 }
@@ -323,10 +349,12 @@ export default class DomHandler {
             const myOffset = {
                 left: () => {
                     const totalOffset = position.my.offsetX + position.at.offsetX;
+
                     return totalOffset + targetOffset.left + (position.my.x === 'left' ? 0 : -1 * (position.my.x === 'center' ? this.getOuterWidth(element) / 2 : this.getOuterWidth(element)));
                 },
                 top: () => {
                     const totalOffset = position.my.offsetY + position.at.offsetY;
+
                     return totalOffset + targetOffset.top + (position.my.y === 'top' ? 0 : -1 * (position.my.y === 'center' ? this.getOuterHeight(element) / 2 : this.getOuterHeight(element)));
                 }
             };
@@ -338,6 +366,7 @@ export default class DomHandler {
                 left: function () {
                     const left = myOffset.left();
                     const scrollLeft = DomHandler.getWindowScrollLeft();
+
                     element.style.left = left + scrollLeft + 'px';
 
                     if (this.count.x === 2) {
@@ -356,6 +385,7 @@ export default class DomHandler {
                 right: function () {
                     const left = myOffset.left() + DomHandler.getOuterWidth(target);
                     const scrollLeft = DomHandler.getWindowScrollLeft();
+
                     element.style.left = left + scrollLeft + 'px';
 
                     if (this.count.x === 2) {
@@ -375,6 +405,7 @@ export default class DomHandler {
                 top: function () {
                     const top = myOffset.top();
                     const scrollTop = DomHandler.getWindowScrollTop();
+
                     element.style.top = top + scrollTop + 'px';
 
                     if (this.count.y === 2) {
@@ -394,6 +425,7 @@ export default class DomHandler {
                 bottom: function () {
                     const top = myOffset.top() + DomHandler.getOuterHeight(target);
                     const scrollTop = DomHandler.getWindowScrollTop();
+
                     element.style.top = top + scrollTop + 'px';
 
                     if (this.count.y === 2) {
@@ -413,6 +445,7 @@ export default class DomHandler {
                 center: function (axis) {
                     if (axis === 'y') {
                         const top = myOffset.top() + DomHandler.getOuterHeight(target) / 2;
+
                         element.style.top = top + DomHandler.getWindowScrollTop() + 'px';
 
                         if (top < 0) {
@@ -422,6 +455,7 @@ export default class DomHandler {
                         }
                     } else {
                         const left = myOffset.left() + DomHandler.getOuterWidth(target) / 2;
+
                         element.style.left = left + DomHandler.getWindowScrollLeft() + 'px';
 
                         if (left < 0) {
@@ -474,8 +508,10 @@ export default class DomHandler {
         if (element) {
             let parents = this.getParents(element);
             const overflowRegex = /(auto|scroll)/;
+
             const overflowCheck = (node) => {
                 let styleDeclaration = node ? getComputedStyle(node) : null;
+
                 return (
                     styleDeclaration && (overflowRegex.test(styleDeclaration.getPropertyValue('overflow')) || overflowRegex.test(styleDeclaration.getPropertyValue('overflowX')) || overflowRegex.test(styleDeclaration.getPropertyValue('overflowY')))
                 );
@@ -483,10 +519,13 @@ export default class DomHandler {
 
             for (let parent of parents) {
                 let scrollSelectors = parent.nodeType === 1 && parent.dataset['scrollselectors'];
+
                 if (scrollSelectors) {
                     let selectors = scrollSelectors.split(',');
+
                     for (let selector of selectors) {
                         let el = this.findSingle(parent, selector);
+
                         if (el && overflowCheck(el)) {
                             scrollableParents.push(el);
                         }
@@ -507,11 +546,13 @@ export default class DomHandler {
             element.style.visibility = 'hidden';
             element.style.display = 'block';
             let elementHeight = element.offsetHeight;
+
             element.style.display = 'none';
             element.style.visibility = 'visible';
 
             return elementHeight;
         }
+
         return 0;
     }
 
@@ -520,16 +561,19 @@ export default class DomHandler {
             element.style.visibility = 'hidden';
             element.style.display = 'block';
             let elementWidth = element.offsetWidth;
+
             element.style.display = 'none';
             element.style.visibility = 'visible';
 
             return elementWidth;
         }
+
         return 0;
     }
 
     static getHiddenElementDimensions(element) {
         let dimensions = {};
+
         if (element) {
             element.style.visibility = 'hidden';
             element.style.display = 'block';
@@ -538,6 +582,7 @@ export default class DomHandler {
             element.style.display = 'none';
             element.style.visibility = 'visible';
         }
+
         return dimensions;
     }
 
@@ -547,6 +592,7 @@ export default class DomHandler {
 
             let last = +new Date();
             let opacity = 0;
+
             let tick = function () {
                 opacity = +element.style.opacity + (new Date().getTime() - last) / duration;
                 element.style.opacity = opacity;
@@ -654,15 +700,18 @@ export default class DomHandler {
     static calculateScrollbarWidth(el) {
         if (el) {
             let style = getComputedStyle(el);
+
             return el.offsetWidth - el.clientWidth - parseFloat(style.borderLeftWidth) - parseFloat(style.borderRightWidth);
         } else {
             if (this.calculatedScrollbarWidth != null) return this.calculatedScrollbarWidth;
 
             let scrollDiv = document.createElement('div');
+
             scrollDiv.className = 'p-scrollbar-measure';
             document.body.appendChild(scrollDiv);
 
             let scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+
             document.body.removeChild(scrollDiv);
 
             this.calculatedScrollbarWidth = scrollbarWidth;
@@ -674,6 +723,7 @@ export default class DomHandler {
     static getBrowser() {
         if (!this.browser) {
             let matched = this.resolveUserAgent();
+
             this.browser = {};
 
             if (matched.browser) {
@@ -727,6 +777,7 @@ export default class DomHandler {
         );
 
         let visibleFocusableElements = [];
+
         for (let focusableElement of focusableElements) {
             if (getComputedStyle(focusableElement).display !== 'none' && getComputedStyle(focusableElement).visibility !== 'hidden') visibleFocusableElements.push(focusableElement);
         }
@@ -736,11 +787,13 @@ export default class DomHandler {
 
     static getFirstFocusableElement(element, selector) {
         const focusableElements = DomHandler.getFocusableElements(element, selector);
+
         return focusableElements.length > 0 ? focusableElements[0] : null;
     }
 
     static getLastFocusableElement(element, selector) {
         const focusableElements = DomHandler.getFocusableElements(element, selector);
+
         return focusableElements.length > 0 ? focusableElements[focusableElements.length - 1] : null;
     }
 
@@ -752,6 +805,7 @@ export default class DomHandler {
      */
     static focus(el, scrollTo) {
         const preventScroll = scrollTo === undefined ? true : !scrollTo;
+
         el && document.activeElement !== el && el.focus({ preventScroll });
     }
 
@@ -759,6 +813,7 @@ export default class DomHandler {
         if (el) {
             let style = getComputedStyle(el);
             let ghostDiv = document.createElement('div');
+
             ghostDiv.style.position = 'absolute';
             ghostDiv.style.top = '0px';
             ghostDiv.style.left = '0px';
@@ -775,10 +830,12 @@ export default class DomHandler {
             ghostDiv.innerHTML = prevText.replace(/\r\n|\r|\n/g, '<br />');
 
             let ghostSpan = document.createElement('span');
+
             ghostSpan.textContent = currentText;
             ghostDiv.appendChild(ghostSpan);
 
             let text = document.createTextNode(nextText);
+
             ghostDiv.appendChild(text);
             document.body.appendChild(ghostDiv);
 
@@ -841,6 +898,7 @@ export default class DomHandler {
             navigator.msSaveOrOpenBlob(blob, filename + '.csv');
         } else {
             const isDownloaded = DomHandler.saveAs({ name: filename + '.csv', src: URL.createObjectURL(blob) });
+
             if (!isDownloaded) {
                 csv = 'data:text/csv;charset=utf-8,' + csv;
                 window.open(encodeURI(csv));
@@ -851,6 +909,7 @@ export default class DomHandler {
     static saveAs(file) {
         if (file) {
             let link = document.createElement('a');
+
             if (link.download !== undefined) {
                 const { name, src } = file;
 
@@ -870,6 +929,7 @@ export default class DomHandler {
 
     static createInlineStyle(nonce) {
         let styleElement = document.createElement('style');
+
         try {
             if (!nonce) {
                 nonce = process.env.REACT_APP_CSS_NONCE;
@@ -880,6 +940,7 @@ export default class DomHandler {
 
         nonce && styleElement.setAttribute('nonce', nonce);
         document.head.appendChild(styleElement);
+
         return styleElement;
     }
 
@@ -890,8 +951,10 @@ export default class DomHandler {
             } catch (error) {
                 // style element may have already been removed in a fast refresh
             }
+
             styleElement = null;
         }
+
         return styleElement;
     }
 
@@ -907,6 +970,7 @@ export default class DomHandler {
         } else {
             const isFunction = (obj) => !!(obj && obj.constructor && obj.call && obj.apply);
             const element = isFunction(target) ? target() : target;
+
             return (element && element.nodeType === 9) || this.isExist(element) ? element : null;
         }
     }
@@ -919,10 +983,13 @@ export default class DomHandler {
 
         rv = [];
         attrs = node.attributes;
+
         for (index = 0; index < attrs.length; ++index) {
             rv.push(attrs[index].nodeName);
         }
+
         rv.sort();
+
         return rv;
     }
 
@@ -939,6 +1006,7 @@ export default class DomHandler {
         // Compare attributes without order sensitivity
         attrs1 = DomHandler.getAttributeNames(elm1);
         attrs2 = DomHandler.getAttributeNames(elm2);
+
         if (attrs1.join(',') !== attrs2.join(',')) {
             // console.log("Found nodes with different sets of attributes; not equiv");
             return false;
@@ -949,10 +1017,12 @@ export default class DomHandler {
         // (onclick="...")
         for (let index = 0; index < attrs1.length; ++index) {
             name = attrs1[index];
+
             if (name === 'style') {
                 const astyle = elm1.style;
                 const bstyle = elm2.style;
                 const rexDigitsOnly = /^\d+$/;
+
                 for (const key of Object.keys(astyle)) {
                     if (!rexDigitsOnly.test(key) && astyle[key] !== bstyle[key]) {
                         // Not equivalent, stop
@@ -974,6 +1044,7 @@ export default class DomHandler {
                 // display("Found nodes of different types; not equiv");
                 return false;
             }
+
             if (node1.nodeType === 1) {
                 // Element
                 if (!DomHandler.isEqualElement(node1, node2)) {
@@ -984,6 +1055,7 @@ export default class DomHandler {
                 return false;
             }
         }
+
         if (node1 || node2) {
             // One of the elements had more nodes than the other
             // console.log("Found more children of one element than the other; not equivalent");

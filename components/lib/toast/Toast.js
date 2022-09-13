@@ -16,25 +16,39 @@ export const Toast = React.memo(
 
         const show = (value) => {
             if (value) {
-                let messages;
-
-                if (Array.isArray(value)) {
-                    const multipleMessages = value.reduce((acc, message) => {
-                        acc.push({ _pId: messageIdx++, message });
-
-                        return acc;
-                    }, []);
-
-                    messages = messagesState ? [...messagesState, ...multipleMessages] : multipleMessages;
-                } else {
-                    const message = { _pId: messageIdx++, message: value };
-                    messages = messagesState ? [...messagesState, message] : [message];
-                }
+                const messages = assignIdentifiers(value, true);
 
                 messagesState.length === 0 && ZIndexUtils.set('toast', containerRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['toast']);
-
                 setMessagesState(messages);
             }
+        };
+
+        const assignIdentifiers = (value, copy) => {
+            let messages;
+
+            if (Array.isArray(value)) {
+                const multipleMessages = value.reduce((acc, message) => {
+                    acc.push({ _pId: messageIdx++, message });
+
+                    return acc;
+                }, []);
+
+                if (copy) {
+                    messages = messagesState ? [...messagesState, ...multipleMessages] : multipleMessages;
+                } else {
+                    messages = multipleMessages;
+                }
+            } else {
+                const message = { _pId: messageIdx++, message: value };
+
+                if (copy) {
+                    messages = messagesState ? [...messagesState, message] : [message];
+                } else {
+                    messages = [message];
+                }
+            }
+
+            return messages;
         };
 
         const clear = () => {
@@ -43,12 +57,14 @@ export const Toast = React.memo(
         };
 
         const replace = (value) => {
-            const replaced = Array.isArray(value) ? value : [value];
+            const replaced = assignIdentifiers(value, false);
+
             setMessagesState(replaced);
         };
 
         const onClose = (messageInfo) => {
             const messages = messagesState.filter((msg) => msg._pId !== messageInfo._pId);
+
             setMessagesState(messages);
 
             props.onRemove && props.onRemove(messageInfo.message);
@@ -88,7 +104,7 @@ export const Toast = React.memo(
 
                             return (
                                 <CSSTransition nodeRef={messageRef} key={messageInfo._pId} classNames="p-toast-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} onEntered={onEntered} onExited={onExited} options={props.transitionOptions}>
-                                    <ToastMessage ref={messageRef} messageInfo={messageInfo} onClick={props.onClick} onClose={onClose} />
+                                    <ToastMessage ref={messageRef} messageInfo={messageInfo} onClick={props.onClick} onClose={onClose} onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave} />
                                 </CSSTransition>
                             );
                         })}
@@ -116,5 +132,7 @@ Toast.defaultProps = {
     onClick: null,
     onRemove: null,
     onShow: null,
-    onHide: null
+    onHide: null,
+    onMouseEnter: null,
+    onMouseLeave: null
 };

@@ -61,6 +61,7 @@ const AutoCompleteDemo = () => {
     const searchCountry = (event) => {
         setTimeout(() => {
             let _filteredCountries;
+
             if (!event.query.trim().length) {
                 _filteredCountries = [...countries];
             } else {
@@ -79,6 +80,7 @@ const AutoCompleteDemo = () => {
 
         for (let country of groupedCities) {
             let filteredItems = country.items.filter((item) => item.label.toLowerCase().indexOf(query.toLowerCase()) !== -1);
+
             if (filteredItems && filteredItems.length) {
                 _filteredCities.push({ ...country, ...{ items: filteredItems } });
             }
@@ -94,6 +96,7 @@ const AutoCompleteDemo = () => {
 
         for (let i = 0; i < items.length; i++) {
             let item = items[i];
+
             if (item.label.toLowerCase().indexOf(query.toLowerCase()) === 0) {
                 _filteredItems.push(item);
             }
@@ -174,10 +177,21 @@ const AutoCompleteDemo = () => {
                         itemTemplate={itemTemplate}
                         onChange={(e) => setSelectedCountry2(e.value)}
                         aria-label="Countries"
+                        dropdownAriaLabel="Select Country"
                     />
 
                     <h5>Virtual Scroll (100000 Items)</h5>
-                    <AutoComplete value={selectedItem} suggestions={filteredItems} completeMethod={searchItems} virtualScrollerOptions={{ itemSize: 38 }} field="label" dropdown onChange={(e) => setSelectedItem(e.value)} aria-label="Items" />
+                    <AutoComplete
+                        value={selectedItem}
+                        suggestions={filteredItems}
+                        completeMethod={searchItems}
+                        virtualScrollerOptions={{ itemSize: 38 }}
+                        field="label"
+                        dropdown
+                        onChange={(e) => setSelectedItem(e.value)}
+                        aria-label="Items"
+                        dropdownAriaLabel="Select Item"
+                    />
 
                     <h5>Multiple</h5>
                     <span className="p-fluid">

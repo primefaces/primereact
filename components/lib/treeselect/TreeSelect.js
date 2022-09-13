@@ -1,8 +1,8 @@
 import * as React from 'react';
 import PrimeReact, { localeOption } from '../api/Api';
+import { Button } from '../button/Button';
 import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
-import { Ripple } from '../ripple/Ripple';
 import { Tree } from '../tree/Tree';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { TreeSelectPanel } from './TreeSelectPanel';
@@ -119,6 +119,7 @@ export const TreeSelect = React.memo(
                     if (!overlayVisibleState && event.altKey) {
                         show();
                     }
+
                     break;
 
                 //space
@@ -127,6 +128,7 @@ export const TreeSelect = React.memo(
                         show();
                         event.preventDefault();
                     }
+
                     break;
 
                 //enter and escape
@@ -136,6 +138,7 @@ export const TreeSelect = React.memo(
                         hide();
                         event.preventDefault();
                     }
+
                     break;
 
                 //tab
@@ -208,6 +211,7 @@ export const TreeSelect = React.memo(
 
         const scrollInView = () => {
             const highlightItem = DomHandler.findSingle(overlayRef.current, '.p-treenode-content.p-highlight');
+
             if (highlightItem && highlightItem.scrollIntoView) {
                 highlightItem.scrollIntoView({ block: 'nearest', inline: 'start' });
             }
@@ -269,6 +273,7 @@ export const TreeSelect = React.memo(
         const expandPath = (path) => {
             if (path.length > 0) {
                 let expandedKeys = { ...(expandedKeysState || {}) };
+
                 for (let key of path) {
                     expandedKeys[key] = true;
                 }
@@ -279,8 +284,10 @@ export const TreeSelect = React.memo(
 
         const getSelectedNodes = () => {
             let selectedNodes = [];
+
             if (ObjectUtils.isNotEmpty(props.value) && props.options) {
                 const keys = isSingleSelectionMode ? { [`${props.value}`]: true } : { ...props.value };
+
                 findSelectedNodes(null, keys, selectedNodes);
             }
 
@@ -467,12 +474,7 @@ export const TreeSelect = React.memo(
 
         const createHeader = () => {
             const filterElement = createFilterElement();
-            const closeElement = (
-                <button type="button" className="p-treeselect-close p-link" onClick={hide}>
-                    <span className="p-treeselect-close-icon pi pi-times"></span>
-                    <Ripple />
-                </button>
-            );
+            const closeElement = <Button type="button" className="p-treeselect-close p-link" icon="p-treeselect-close-icon pi pi-times" onClick={hide} aria-label={localeOption('close')} />;
             const content = (
                 <div className="p-treeselect-header">
                     {filterElement}

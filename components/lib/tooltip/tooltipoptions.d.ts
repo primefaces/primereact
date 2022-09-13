@@ -2,7 +2,7 @@ import * as React from 'react';
 
 type TooltipPositionType = 'top' | 'bottom' | 'left' | 'right';
 
-type TooltipEventType = 'hover' | 'focus';
+type TooltipEventType = 'hover' | 'focus' | 'both';
 
 type TooltipAppendToType = 'self' | HTMLElement | undefined | null;
 

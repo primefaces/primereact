@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Ripple } from '../ripple/Ripple';
+import { ariaLabel } from '../api/Api';
+import { Button } from '../button/Button';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const UITreeNode = React.memo((props) => {
@@ -10,6 +11,7 @@ export const UITreeNode = React.memo((props) => {
 
     const expand = (event) => {
         let expandedKeys = props.expandedKeys ? { ...props.expandedKeys } : {};
+
         expandedKeys[props.node.key] = true;
 
         props.onToggle({
@@ -22,6 +24,7 @@ export const UITreeNode = React.memo((props) => {
 
     const collapse = (event) => {
         let expandedKeys = { ...props.expandedKeys };
+
         delete expandedKeys[props.node.key];
 
         props.onToggle({
@@ -76,14 +79,17 @@ export const UITreeNode = React.memo((props) => {
             //down arrow
             case 40:
                 const listElement = nodeElement.children[1];
+
                 if (listElement) {
                     focusNode(listElement.children[0]);
                 } else {
                     let nextNodeElement = nodeElement.nextElementSibling;
+
                     while (nextNodeElement) {
                         if (!DomHandler.hasClass(nextNodeElement, 'p-treenode-droppoint')) {
                             break;
                         }
+
                         nextNodeElement = nextNodeElement.nextElementSibling;
                     }
 
@@ -91,6 +97,7 @@ export const UITreeNode = React.memo((props) => {
                         focusNode(nextNodeElement);
                     } else {
                         const nextSiblingAncestor = findNextSiblingOfAncestor(nodeElement);
+
                         nextSiblingAncestor && focusNode(nextSiblingAncestor);
                     }
                 }
@@ -104,6 +111,7 @@ export const UITreeNode = React.memo((props) => {
                     focusNode(findLastVisibleDescendant(nodeElement.previousElementSibling));
                 } else {
                     const parentNodeElement = getParentNodeElement(nodeElement);
+
                     parentNodeElement && focusNode(parentNodeElement);
                 }
 
@@ -142,13 +150,16 @@ export const UITreeNode = React.memo((props) => {
 
     const findNextSiblingOfAncestor = (nodeElement) => {
         const parentNodeElement = getParentNodeElement(nodeElement);
+
         return parentNodeElement ? parentNodeElement.nextElementSibling || findNextSiblingOfAncestor(parentNodeElement) : null;
     };
 
     const findLastVisibleDescendant = (nodeElement) => {
         const childrenListElement = nodeElement.children[1];
+
         if (childrenListElement) {
             const lastChildElement = childrenListElement.children[childrenListElement.children.length - 1];
+
             return findLastVisibleDescendant(lastChildElement);
         } else {
             return nodeElement;
@@ -157,6 +168,7 @@ export const UITreeNode = React.memo((props) => {
 
     const getParentNodeElement = (nodeElement) => {
         const parentNodeElement = nodeElement.parentElement.parentElement;
+
         return DomHandler.hasClass(parentNodeElement, 'p-treenode') ? parentNodeElement : null;
     };
 
@@ -173,6 +185,7 @@ export const UITreeNode = React.memo((props) => {
         }
 
         const targetNode = event.target.nodeName;
+
         if (props.disabled || targetNode === 'INPUT' || targetNode === 'BUTTON' || targetNode === 'A' || DomHandler.hasClass(event.target, 'p-clickable')) {
             return;
         }
@@ -182,6 +195,7 @@ export const UITreeNode = React.memo((props) => {
 
             if (isCheckboxSelectionMode()) {
                 const checked = isChecked();
+
                 selectionKeys = props.selectionKeys ? { ...props.selectionKeys } : {};
 
                 if (checked) {
@@ -484,6 +498,7 @@ export const UITreeNode = React.memo((props) => {
     const onDragLeave = (event) => {
         if (event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase() && props.node.droppable !== false) {
             let rect = event.currentTarget.getBoundingClientRect();
+
             if (event.nativeEvent.x > rect.left + rect.width || event.nativeEvent.x < rect.left || event.nativeEvent.y >= Math.floor(rect.top + rect.height) || event.nativeEvent.y < rect.top) {
                 DomHandler.removeClass(contentRef.current, 'p-treenode-dragover');
             }
@@ -561,13 +576,9 @@ export const UITreeNode = React.memo((props) => {
     };
 
     const createToggler = () => {
+        const label = expanded ? ariaLabel('collapseLabel') : ariaLabel('expandLabel');
         const iconClassName = classNames('p-tree-toggler-icon pi pi-fw', { 'pi-chevron-right': !expanded, 'pi-chevron-down': expanded });
-        let content = (
-            <button type="button" className="p-tree-toggler p-link" tabIndex={-1} onClick={onTogglerClick}>
-                <span className={iconClassName}></span>
-                <Ripple />
-            </button>
-        );
+        let content = <Button type="button" className="p-tree-toggler p-link" tabIndex={-1} onClick={onTogglerClick} icon={iconClassName} ariaLabel={label} />;
 
         if (props.togglerTemplate) {
             const defaultContentOptions = {

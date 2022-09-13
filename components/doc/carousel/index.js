@@ -1,9 +1,9 @@
-import React, { memo } from 'react';
 import Link from 'next/link';
-import { TabView, TabPanel } from '../../lib/tabview/TabView';
-import { useLiveEditorTabs } from '../common/liveeditor';
+import React, { memo } from 'react';
+import { TabPanel, TabView } from '../../lib/tabview/TabView';
 import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
+import { useLiveEditorTabs } from '../common/liveeditor';
 
 const CarouselDoc = memo(() => {
     const sources = {
@@ -542,6 +542,24 @@ const responsiveOptions = [
                                     <td>function</td>
                                     <td>null</td>
                                     <td>Function that gets an item in the value and returns the content for it.</td>
+                                </tr>
+                                <tr>
+                                    <td>circular</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Defines if scrolling would be infinite.</td>
+                                </tr>
+                                <tr>
+                                    <td>showIndicators</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>Whether to display indicator container.</td>
+                                </tr>
+                                <tr>
+                                    <td>showNavigators</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>Whether to display navigation buttons in container.</td>
                                 </tr>
                                 <tr>
                                     <td>circular</td>

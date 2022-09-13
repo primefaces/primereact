@@ -30,6 +30,7 @@ const DataTableContextMenuDemo = () => {
 
     const deleteProduct = (product) => {
         let _products = [...products];
+
         _products = _products.filter((p) => p.id !== product.id);
 
         toast.current.show({ severity: 'error', summary: 'Product Deleted', detail: product.name });

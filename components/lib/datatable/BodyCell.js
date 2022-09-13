@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { ariaLabel } from '../api/Api';
+import { Button } from '../button/Button';
 import { useEventListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
@@ -83,6 +85,7 @@ export const BodyCell = React.memo((props) => {
 
     const getCellCallbackParams = (event) => {
         const params = getCellParams();
+
         return {
             originalEvent: event,
             ...params
@@ -138,6 +141,7 @@ export const BodyCell = React.memo((props) => {
         }
 
         let valid = true;
+
         if (cellEditValidator) {
             valid = cellEditValidator(params);
         }
@@ -191,6 +195,7 @@ export const BodyCell = React.memo((props) => {
         tabindexTimeout.current = setTimeout(() => {
             if (editingState) {
                 const focusableEl = props.editMode === 'cell' ? DomHandler.getFirstFocusableElement(elementRef.current, ':not(.p-cell-editor-key-helper)') : DomHandler.findSingle(elementRef.current, '.p-row-editor-save');
+
                 focusableEl && focusableEl.focus();
             }
 
@@ -202,6 +207,7 @@ export const BodyCell = React.memo((props) => {
         clearTimeout(initFocusTimeout.current);
         initFocusTimeout.current = setTimeout(() => {
             const focusableEl = props.editMode === 'row' ? DomHandler.findSingle(elementRef.current, '.p-row-editor-init') : null;
+
             focusableEl && focusableEl.focus();
         }, 1);
     };
@@ -210,29 +216,36 @@ export const BodyCell = React.memo((props) => {
         if (getColumnProp('frozen')) {
             let styleObject = { ...styleObjectState };
             let align = getColumnProp('alignFrozen');
+
             if (align === 'right') {
                 let right = 0;
                 let next = elementRef.current.nextElementSibling;
+
                 if (next) {
                     right = DomHandler.getOuterWidth(next) + parseFloat(next.style.right || 0);
                 }
+
                 styleObject['right'] = right + 'px';
             } else {
                 let left = 0;
                 let prev = elementRef.current.previousElementSibling;
+
                 if (prev) {
                     left = DomHandler.getOuterWidth(prev) + parseFloat(prev.style.left || 0);
                 }
+
                 styleObject['left'] = left + 'px';
             }
 
             const isSameStyle = styleObjectState['left'] === styleObject['left'] && styleObjectState['right'] === styleObject['right'];
+
             !isSameStyle && setStyleObjectState(styleObject);
         }
     };
 
     const editorCallback = (val) => {
         let editingRowData = { ...editingRowDataState };
+
         editingRowData[field] = val;
 
         setEditingRowDataState(editingRowData);
@@ -284,11 +297,13 @@ export const BodyCell = React.memo((props) => {
 
     const onMouseDown = (event) => {
         const params = getCellCallbackParams(event);
+
         props.onMouseDown && props.onMouseDown(params);
     };
 
     const onMouseUp = (event) => {
         const params = getCellCallbackParams(event);
+
         props.onMouseUp && props.onMouseUp(params);
     };
 
@@ -312,6 +327,7 @@ export const BodyCell = React.memo((props) => {
                 //left arrow
                 case 37:
                     let prevCell = findPrevSelectableCell(cell);
+
                     if (prevCell) {
                         changeTabIndex(cell, prevCell);
                         prevCell.focus();
@@ -323,6 +339,7 @@ export const BodyCell = React.memo((props) => {
                 //right arrow
                 case 39:
                     let nextCell = findNextSelectableCell(cell);
+
                     if (nextCell) {
                         changeTabIndex(cell, nextCell);
                         nextCell.focus();
@@ -334,6 +351,7 @@ export const BodyCell = React.memo((props) => {
                 //up arrow
                 case 38:
                     let upCell = findUpSelectableCell(cell);
+
                     if (upCell) {
                         changeTabIndex(cell, upCell);
                         upCell.focus();
@@ -345,6 +363,7 @@ export const BodyCell = React.memo((props) => {
                 //down arrow
                 case 40:
                     let downCell = findDownSelectableCell(cell);
+
                     if (downCell) {
                         changeTabIndex(cell, downCell);
                         downCell.focus();
@@ -359,6 +378,7 @@ export const BodyCell = React.memo((props) => {
                         onClick(event);
                         event.preventDefault();
                     }
+
                     break;
 
                 //space
@@ -367,6 +387,7 @@ export const BodyCell = React.memo((props) => {
                         onClick(event);
                         event.preventDefault();
                     }
+
                     break;
 
                 default:
@@ -504,19 +525,31 @@ export const BodyCell = React.memo((props) => {
 
         if (selectionMode) {
             const showSelection = props.showSelectionElement ? props.showSelectionElement(props.rowData, { rowIndex: props.rowIndex, props: props.tableProps }) : true;
+            let label;
+
+            if (showSelection) {
+                const ariaLabelField = props.selectionAriaLabel || props.tableProps.dataKey;
+                const ariaLabelText = ObjectUtils.resolveFieldData(props.rowData, ariaLabelField);
+
+                label = `${props.selected ? ariaLabel('unselectLabel') : ariaLabel('selectLabel')} ${ariaLabelText}`;
+            }
 
             content = showSelection && (
                 <>
-                    {selectionMode === 'single' && <RowRadioButton checked={props.selected} onChange={onRadioChange} tabIndex={props.tabIndex} tableSelector={props.tableSelector} />}
-                    {selectionMode === 'multiple' && <RowCheckbox checked={props.selected} onChange={onCheckboxChange} tabIndex={props.tabIndex} />}
+                    {selectionMode === 'single' && <RowRadioButton checked={props.selected} onChange={onRadioChange} tabIndex={props.tabIndex} tableSelector={props.tableSelector} ariaLabel={label} />}
+                    {selectionMode === 'multiple' && <RowCheckbox checked={props.selected} onChange={onCheckboxChange} tabIndex={props.tabIndex} ariaLabel={label} />}
                 </>
             );
         } else if (rowReorder) {
             const showReorder = props.showRowReorderElement ? props.showRowReorderElement(props.rowData, { rowIndex: props.rowIndex, props: props.tableProps }) : true;
+
             content = showReorder && <i className={classNames('p-datatable-reorderablerow-handle', getColumnProp('rowReorderIcon'))}></i>;
         } else if (expander) {
             const iconClassName = classNames('p-row-toggler-icon', props.expanded ? props.expandedRowIcon : props.collapsedRowIcon);
             const ariaControls = `${props.tableSelector}_content_${props.rowIndex}_expanded`;
+            const ariaLabelField = props.selectionAriaLabel || props.tableProps.dataKey;
+            const ariaLabelText = ObjectUtils.resolveFieldData(props.rowData, ariaLabelField);
+            const label = `${props.expanded ? ariaLabel('collapseLabel') : ariaLabel('expandLabel')} ${ariaLabelText}`;
             const expanderProps = {
                 onClick: onRowToggle,
                 className: 'p-row-toggler p-link',
@@ -524,10 +557,7 @@ export const BodyCell = React.memo((props) => {
             };
 
             content = (
-                <button className={expanderProps.className} onClick={expanderProps.onClick} type="button" aria-expanded={props.expanded} aria-controls={ariaControls} tabIndex={props.tabIndex}>
-                    <span className={expanderProps.iconClassName}></span>
-                    <Ripple />
-                </button>
+                <Button className={expanderProps.className} onClick={expanderProps.onClick} type="button" icon={expanderProps.iconClassName} aria-expanded={props.expanded} aria-controls={ariaControls} tabIndex={props.tabIndex} ariaLabel={label} />
             );
 
             if (body) {
