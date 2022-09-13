@@ -1,4 +1,5 @@
 import * as React from 'react';
+import  { localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
@@ -60,9 +61,10 @@ export const AutoCompletePanel = React.memo(
 
         const createContent = () => {
             if (props.showEmptyMessage && ObjectUtils.isEmpty(props.suggestions)) {
+                const emptyMessage = props.emptyMessage || localeOptions('emptyMessage');
                 return (
                     <ul className="p-autocomplete-items">
-                        <li className="p-autocomplete-item">{props.emptyMessage}</li>
+                        <li className="p-autocomplete-item">{emptyMessage}</li>
                     </ul>
                 );
             }
