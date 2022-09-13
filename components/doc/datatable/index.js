@@ -3301,7 +3301,7 @@ export const DataTableStateDemo = () => {
                                     <td>rowExpansionTemplate</td>
                                     <td>function</td>
                                     <td>null</td>
-                                    <td>Function that receives the row data as the parameter and returns the expanded row content.</td>
+                                    <td>Function that receives the row data as the parameter and returns the expanded row content. You can override the rendering of the content by setting options.customRendering = true.</td>
                                 </tr>
                                 <tr>
                                     <td>expandedRows</td>
