@@ -857,6 +857,18 @@ itemTemplate(item) {
                                     <td>Specifies if multiple values can be selected.</td>
                                 </tr>
                                 <tr>
+                                    <td>showEmptyMessage</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Whether to show the empty message or not.</td>
+                                </tr>
+                                <tr>
+                                    <td>emptyMessage</td>
+                                    <td>string</td>
+                                    <td>No results found.</td>
+                                    <td>Text to display when there is no data. Defaults to global value in i18n translation configuration.</td>
+                                </tr>
+                                <tr>
                                     <td>minLength</td>
                                     <td>number</td>
                                     <td>1</td>
