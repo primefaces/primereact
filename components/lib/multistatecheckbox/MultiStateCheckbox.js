@@ -22,6 +22,7 @@ export const MultiStateCheckbox = React.memo(
 
         const getOptionAriaLabel = (option) => {
             const ariaField = props.optionLabel || props.optionValue;
+
             return ariaField ? ObjectUtils.resolveFieldData(option, ariaField) : option;
         };
 

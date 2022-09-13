@@ -132,6 +132,7 @@ const FloatLabelDemo = () => {
             let results = countries.filter((country) => {
                 return country.name.toLowerCase().startsWith(event.query.toLowerCase());
             });
+
             setFilteredCountries(results);
         }, 250);
     };

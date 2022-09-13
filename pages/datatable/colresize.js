@@ -71,6 +71,7 @@ const DataTableColResizeDemo = () => {
         </div>
     );
 };
+
 export default DataTableColResizeDemo;
 
 export const DataTableColResizeDemoDoc = memo(() => {

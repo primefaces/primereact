@@ -135,6 +135,7 @@ const MultiSelectDemo = () => {
     const panelFooterTemplate = () => {
         const selectedItems = selectedCountries;
         const length = selectedItems ? selectedItems.length : 0;
+
         return (
             <div className="py-2 px-3">
                 <b>{length}</b> item{length > 1 ? 's' : ''} selected.

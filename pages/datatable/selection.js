@@ -32,6 +32,7 @@ const DataTableSelectionDemo = () => {
 
     useEffect(() => {
         const productService = new ProductService();
+
         productService.getProductsSmall().then((data) => setProducts(data));
     }, []);
 
@@ -57,6 +58,7 @@ const DataTableSelectionDemo = () => {
 
     const isSelectable = (value, field) => {
         let isSelectable = true;
+
         switch (field) {
             case 'quantity':
                 isSelectable = value > 10;
@@ -69,16 +71,19 @@ const DataTableSelectionDemo = () => {
             default:
                 break;
         }
+
         return isSelectable;
     };
 
     const isRowSelectable = (event) => {
         const data = event.data;
+
         return isSelectable(data.quantity, 'quantity');
     };
 
     const isCellSelectable = (event) => {
         const data = event.data;
+
         return isSelectable(data.value, data.field);
     };
 
@@ -88,6 +93,7 @@ const DataTableSelectionDemo = () => {
 
     const cellClassName = (value, options) => {
         const { field } = options.column.props;
+
         return isSelectable(value, field) ? '' : 'p-disabled';
     };
 

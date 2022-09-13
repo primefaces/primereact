@@ -15,6 +15,7 @@ export const MultiSelectPanel = React.memo(
             props.onEnter(() => {
                 if (virtualScrollerRef.current) {
                     const selectedIndex = props.getSelectedOptionIndex();
+
                     if (selectedIndex !== -1) {
                         setTimeout(() => virtualScrollerRef.current.scrollToIndex(selectedIndex), 0);
                     }
@@ -96,6 +97,7 @@ export const MultiSelectPanel = React.memo(
 
         const createItem = (option, index, scrollerOptions = {}) => {
             const style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
+
             if (props.optionGroupLabel) {
                 const groupContent = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, option, index) : props.getOptionGroupLabel(option);
                 const groupChildrenContent = createGroupChildren(option, style);

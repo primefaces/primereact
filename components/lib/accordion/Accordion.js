@@ -21,12 +21,14 @@ export const Accordion = React.forwardRef((props, ref) => {
 
             if (props.multiple) {
                 const indexes = activeIndex || [];
+
                 newActiveIndex = selected ? indexes.filter((i) => i !== index) : [...indexes, index];
             } else {
                 newActiveIndex = selected ? null : index;
             }
 
             const callback = selected ? props.onTabClose : props.onTabOpen;
+
             callback && callback({ originalEvent: event, index: index });
 
             if (props.onTabChange) {

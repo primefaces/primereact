@@ -24,6 +24,7 @@ export const TreeTableRow = React.memo((props) => {
 
     const expand = (event) => {
         let expandedKeys = props.expandedKeys ? { ...props.expandedKeys } : {};
+
         expandedKeys[props.node.key] = true;
 
         props.onToggle({
@@ -36,6 +37,7 @@ export const TreeTableRow = React.memo((props) => {
 
     const collapse = (event) => {
         let expandedKeys = { ...props.expandedKeys };
+
         delete expandedKeys[props.node.key];
 
         props.onToggle({
@@ -202,6 +204,7 @@ export const TreeTableRow = React.memo((props) => {
                 //down arrow
                 case 40:
                     const nextRow = rowElement.nextElementSibling;
+
                     if (nextRow) {
                         nextRow.focus();
                     }
@@ -212,6 +215,7 @@ export const TreeTableRow = React.memo((props) => {
                 //up arrow
                 case 38:
                     const previousRow = rowElement.previousElementSibling;
+
                     if (previousRow) {
                         previousRow.focus();
                     }
@@ -355,6 +359,7 @@ export const TreeTableRow = React.memo((props) => {
 
     if (props.rowClassName) {
         let rowClassName = props.rowClassName(props.node);
+
         className = { ...className, ...rowClassName };
     }
 

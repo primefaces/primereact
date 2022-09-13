@@ -41,6 +41,7 @@ export const Password = React.memo(
         const updateLabels = () => {
             if (meterState) {
                 let label = null;
+
                 switch (meterState.strength) {
                     case 'weak':
                         label = weakLabel;
@@ -249,6 +250,7 @@ export const Password = React.memo(
 
                     content = ObjectUtils.getJSXElement(props.icon, defaultIconOptions);
                 }
+
                 return content;
             }
 

@@ -79,45 +79,54 @@ export const PickList = React.memo(
             const { originalEvent, source, target, direction } = event;
 
             let selectedValue = [];
+
             switch (direction) {
                 case 'toTarget':
                     selectedValue = sourceSelection;
+
                     if (props.onMoveToTarget) {
                         props.onMoveToTarget({
                             originalEvent,
                             value: selectedValue
                         });
                     }
+
                     break;
 
                 case 'allToTarget':
                     selectedValue = props.source;
+
                     if (props.onMoveAllToTarget) {
                         props.onMoveAllToTarget({
                             originalEvent,
                             value: selectedValue
                         });
                     }
+
                     break;
 
                 case 'toSource':
                     selectedValue = targetSelection;
+
                     if (props.onMoveToSource) {
                         props.onMoveToSource({
                             originalEvent,
                             value: selectedValue
                         });
                     }
+
                     break;
 
                 case 'allToSource':
                     selectedValue = props.target;
+
                     if (props.onMoveAllToSource) {
                         props.onMoveAllToSource({
                             originalEvent,
                             value: selectedValue
                         });
                     }
+
                     break;
 
                 default:
@@ -131,6 +140,7 @@ export const PickList = React.memo(
 
         const scrollInView = (listContainer, direction = 1) => {
             let selectedItems = listContainer.getElementsByClassName('p-highlight');
+
             if (ObjectUtils.isNotEmpty(selectedItems)) {
                 DomHandler.scrollInView(listContainer, direction === -1 ? selectedItems[0] : selectedItems[selectedItems.length - 1]);
             }
@@ -164,16 +174,19 @@ export const PickList = React.memo(
 
         const getVisibleList = (list, type) => {
             const [filteredValue, filterCallback] = type === 'source' ? [sourceFilteredValue, filterSource] : [targetFilteredValue, filterTarget];
+
             return hasFilterBy && ObjectUtils.isNotEmpty(filteredValue) ? filterCallback(filteredValue) : list;
         };
 
         const filterSource = (value = '') => {
             const filteredValue = value.trim().toLocaleLowerCase(props.filterLocale);
+
             return filter(props.source, filteredValue);
         };
 
         const filterTarget = (value = '') => {
             const filteredValue = value.trim().toLocaleLowerCase(props.filterLocale);
+
             return filter(props.target, filteredValue);
         };
 

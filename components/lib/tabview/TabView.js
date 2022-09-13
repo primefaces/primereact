@@ -136,6 +136,7 @@ export const TabView = React.forwardRef((props, ref) => {
     useUpdateEffect(() => {
         if (ObjectUtils.isNotEmpty(hiddenTabsState)) {
             const tabInfo = findVisibleActiveTab(hiddenTabsState[hiddenTabsState.length - 1]);
+
             tabInfo && onTabHeaderClick(null, tabInfo.tab, tabInfo.index);
         }
     }, [hiddenTabsState]);

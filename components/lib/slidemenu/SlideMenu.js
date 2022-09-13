@@ -64,6 +64,7 @@ export const SlideMenu = React.memo(
             if (props.autoZIndex) {
                 ZIndexUtils.set('menu', menuRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['menu']);
             }
+
             DomHandler.absolutePosition(menuRef.current, targetRef.current);
         };
 

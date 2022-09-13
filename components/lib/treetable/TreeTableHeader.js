@@ -8,6 +8,7 @@ export const TreeTableHeader = React.memo((props) => {
     const onHeaderClick = (event, column) => {
         if (column.props.sortable) {
             const targetNode = event.target;
+
             if (
                 DomHandler.hasClass(targetNode, 'p-sortable-column') ||
                 DomHandler.hasClass(targetNode, 'p-column-title') ||
@@ -105,6 +106,7 @@ export const TreeTableHeader = React.memo((props) => {
             }
 
             let filterValue = e.target.value;
+
             filterTimeout.current = setTimeout(() => {
                 props.onFilter({
                     value: filterValue,
@@ -131,6 +133,7 @@ export const TreeTableHeader = React.memo((props) => {
     const getAriaSort = (column, sorted, sortOrder) => {
         if (column.props.sortable) {
             let sortIcon = sorted ? (sortOrder < 0 ? 'pi-sort-down' : 'pi-sort-up') : 'pi-sort';
+
             if (sortIcon === 'pi-sort-down') return 'descending';
             else if (sortIcon === 'pi-sort-up') return 'ascending';
             else return 'none';

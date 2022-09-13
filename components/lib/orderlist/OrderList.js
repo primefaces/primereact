@@ -33,6 +33,7 @@ export const OrderList = React.memo(
                 //down
                 case 40:
                     const nextItem = findNextItem(listItem);
+
                     nextItem && nextItem.focus();
                     originalEvent.preventDefault();
                     break;
@@ -40,6 +41,7 @@ export const OrderList = React.memo(
                 //up
                 case 38:
                     const prevItem = findPrevItem(listItem);
+
                     prevItem && prevItem.focus();
                     originalEvent.preventDefault();
                     break;
@@ -57,6 +59,7 @@ export const OrderList = React.memo(
 
         const onFilter = (event) => {
             let _filterValue = event.target.value;
+
             setFilterValueState(_filterValue);
 
             if (props.onFilter) {
@@ -89,6 +92,7 @@ export const OrderList = React.memo(
             if (hasFilter) {
                 const filterValue = filterValueState.trim().toLocaleLowerCase(props.filterLocale);
                 const searchFields = props.filterBy ? props.filterBy.split(',') : [];
+
                 return FilterService.filter(props.value, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
             }
 
@@ -97,11 +101,13 @@ export const OrderList = React.memo(
 
         const findNextItem = (item) => {
             const nextItem = item.nextElementSibling;
+
             return nextItem ? (!DomHandler.hasClass(nextItem, 'p-orderlist-item') ? findNextItem(nextItem) : nextItem) : null;
         };
 
         const findPrevItem = (item) => {
             const prevItem = item.previousElementSibling;
+
             return prevItem ? (!DomHandler.hasClass(prevItem, 'p-orderlist-item') ? findPrevItem(prevItem) : prevItem) : null;
         };
 

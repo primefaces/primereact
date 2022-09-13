@@ -82,6 +82,7 @@ function updateLocaleOption(key, value, locale) {
 
 function updateLocaleOptions(options, locale) {
     const _locale = locale || PrimeReact.locale;
+
     locales[_locale] = { ...locales[_locale], ...options };
 }
 
@@ -107,6 +108,7 @@ function ariaLabel(key) {
 
 function localeOptions(locale) {
     const _locale = locale || PrimeReact.locale;
+
     return locales[_locale];
 }
 

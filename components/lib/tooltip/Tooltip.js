@@ -72,10 +72,12 @@ export const Tooltip = React.memo(
                 hideEvents = ['mouseleave'];
             } else {
                 const event = getTargetOption(target, 'event') || props.event;
+
                 if (event === 'focus') {
                     showEvents = ['focus'];
                     hideEvents = ['blur'];
                 }
+
                 if (event === 'both') {
                     showEvents = ['focus', 'mouseenter'];
                     hideEvents = ['blur', 'mouseleave'];
@@ -153,6 +155,7 @@ export const Tooltip = React.memo(
             } else {
                 // #2653 give the callback a chance to return false and not continue with display
                 const success = sendCallback(props.onBeforeShow, { originalEvent: e, target: currentTargetRef.current });
+
                 if (success) {
                     applyDelay('showDelay', () => {
                         setVisibleState(true);
@@ -167,6 +170,7 @@ export const Tooltip = React.memo(
 
             if (visibleState) {
                 const success = sendCallback(props.onBeforeHide, { originalEvent: e, target: currentTargetRef.current });
+
                 if (success) {
                     applyDelay('hideDelay', () => {
                         if (!isAutoHide() && allowHide.current === false) {
@@ -277,6 +281,7 @@ export const Tooltip = React.memo(
             if (target) {
                 const { showEvents, hideEvents } = getEvents(target);
                 const currentTarget = getTarget(target);
+
                 showEvents.forEach((event) => currentTarget.addEventListener(event, show));
                 hideEvents.forEach((event) => currentTarget.addEventListener(event, hide));
             }
@@ -286,6 +291,7 @@ export const Tooltip = React.memo(
             if (target) {
                 const { showEvents, hideEvents } = getEvents(target);
                 const currentTarget = getTarget(target);
+
                 showEvents.forEach((event) => currentTarget.removeEventListener(event, show));
                 hideEvents.forEach((event) => currentTarget.removeEventListener(event, hide));
             }
@@ -295,17 +301,21 @@ export const Tooltip = React.memo(
             clearTimeouts();
 
             const delay = getTargetOption(currentTargetRef.current, delayProp.toLowerCase()) || props[delayProp];
+
             !!delay ? (timeouts.current[`${delayProp}`] = setTimeout(() => callback(), delay)) : callback();
         };
 
         const sendCallback = (callback, ...params) => {
             if (callback) {
                 let result = callback(...params);
+
                 if (result === undefined) {
                     result = true;
                 }
+
                 return result;
             }
+
             return true;
         };
 
@@ -318,9 +328,11 @@ export const Tooltip = React.memo(
                 if (isShowOnDisabled(target)) {
                     if (!target.hasWrapper) {
                         const wrapper = document.createElement('span');
+
                         target.parentNode.insertBefore(wrapper, target);
                         wrapper.appendChild(target);
                         target.hasWrapper = true;
+
                         return wrapper;
                     } else {
                         return target.parentElement;
@@ -358,6 +370,7 @@ export const Tooltip = React.memo(
                 } else {
                     const setEvent = (target) => {
                         let element = DomHandler.find(document, target);
+
                         element.forEach((el) => {
                             operation(el);
                         });
@@ -396,6 +409,7 @@ export const Tooltip = React.memo(
             if (visibleState) {
                 const position = getPosition(currentTargetRef.current);
                 const classname = getTargetOption(currentTargetRef.current, 'classname');
+
                 setPositionState(position);
                 setClassNameState(classname);
                 updateTooltipState(position);

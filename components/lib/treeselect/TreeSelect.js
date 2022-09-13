@@ -119,6 +119,7 @@ export const TreeSelect = React.memo(
                     if (!overlayVisibleState && event.altKey) {
                         show();
                     }
+
                     break;
 
                 //space
@@ -127,6 +128,7 @@ export const TreeSelect = React.memo(
                         show();
                         event.preventDefault();
                     }
+
                     break;
 
                 //enter and escape
@@ -136,6 +138,7 @@ export const TreeSelect = React.memo(
                         hide();
                         event.preventDefault();
                     }
+
                     break;
 
                 //tab
@@ -208,6 +211,7 @@ export const TreeSelect = React.memo(
 
         const scrollInView = () => {
             const highlightItem = DomHandler.findSingle(overlayRef.current, '.p-treenode-content.p-highlight');
+
             if (highlightItem && highlightItem.scrollIntoView) {
                 highlightItem.scrollIntoView({ block: 'nearest', inline: 'start' });
             }
@@ -269,6 +273,7 @@ export const TreeSelect = React.memo(
         const expandPath = (path) => {
             if (path.length > 0) {
                 let expandedKeys = { ...(expandedKeysState || {}) };
+
                 for (let key of path) {
                     expandedKeys[key] = true;
                 }
@@ -279,8 +284,10 @@ export const TreeSelect = React.memo(
 
         const getSelectedNodes = () => {
             let selectedNodes = [];
+
             if (ObjectUtils.isNotEmpty(props.value) && props.options) {
                 const keys = isSingleSelectionMode ? { [`${props.value}`]: true } : { ...props.value };
+
                 findSelectedNodes(null, keys, selectedNodes);
             }
 

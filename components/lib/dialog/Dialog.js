@@ -40,6 +40,7 @@ export const Dialog = React.forwardRef((props, ref) => {
     const focus = () => {
         let activeElement = document.activeElement;
         let isActiveElementInDialog = activeElement && dialogRef.current && dialogRef.current.contains(activeElement);
+
         if (!isActiveElementInDialog && props.closable && props.showHeader) {
             closeRef.current.focus();
         }
@@ -90,11 +91,13 @@ export const Dialog = React.forwardRef((props, ref) => {
         } else if (event.key === 'Tab') {
             event.preventDefault();
             const focusableElements = DomHandler.getFocusableElements(dialog);
+
             if (focusableElements && focusableElements.length > 0) {
                 if (!document.activeElement) {
                     focusableElements[0].focus();
                 } else {
                     const focusedIndex = focusableElements.indexOf(document.activeElement);
+
                     if (event.shiftKey) {
                         if (focusedIndex === -1 || focusedIndex === 0) focusableElements[focusableElements.length - 1].focus();
                         else focusableElements[focusedIndex - 1].focus();
@@ -181,6 +184,7 @@ export const Dialog = React.forwardRef((props, ref) => {
         !viewport && (viewport = DomHandler.getViewport());
 
         const val = parseInt(value);
+
         if (/^(\d+|(\.\d+))(\.\d+)?%$/.test(value)) {
             return val * (viewport[property] / 100);
         }
@@ -264,6 +268,7 @@ export const Dialog = React.forwardRef((props, ref) => {
         if (props.modal) {
             DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
         }
+
         if (props.blockScroll) {
             DomHandler.removeClass(document.body, 'p-overflow-hidden');
         }
@@ -289,6 +294,7 @@ export const Dialog = React.forwardRef((props, ref) => {
 
         if (props.modal) {
             let hasBlockScroll = document.primeDialogParams && document.primeDialogParams.some((param) => param.hasBlockScroll);
+
             if (hasBlockScroll) {
                 DomHandler.removeClass(document.body, 'p-overflow-hidden');
             }
@@ -310,6 +316,7 @@ export const Dialog = React.forwardRef((props, ref) => {
 
         bindDocumentKeyDownListener();
         const newParam = { id: idState, hasBlockScroll: props.blockScroll };
+
         document.primeDialogParams = document.primeDialogParams ? [...document.primeDialogParams, newParam] : [newParam];
     };
 
@@ -328,6 +335,7 @@ export const Dialog = React.forwardRef((props, ref) => {
             styleElement.current = DomHandler.createInlineStyle(PrimeReact.nonce);
 
             let innerHTML = '';
+
             for (let breakpoint in props.breakpoints) {
                 innerHTML += `
                     @media screen and (max-width: ${breakpoint}) {
@@ -345,12 +353,14 @@ export const Dialog = React.forwardRef((props, ref) => {
     const changeScrollOnMaximizable = () => {
         if (!props.blockScroll) {
             let funcName = maximized ? 'addClass' : 'removeClass';
+
             DomHandler[funcName](document.body, 'p-overflow-hidden');
         }
     };
 
     useMountEffect(() => {
         const unqiueId = UniqueComponentId();
+
         if (!idState) {
             setIdState(unqiueId);
         }
@@ -409,6 +419,7 @@ export const Dialog = React.forwardRef((props, ref) => {
     const createCloseIcon = () => {
         if (props.closable) {
             const ariaLabel = props.ariaCloseIconLabel || localeOption('close');
+
             return <Button ref={closeRef} type="button" className="p-dialog-header-icon p-dialog-header-close p-link" icon="p-dialog-header-close-icon pi pi-times" onClick={onClose} aria-label={ariaLabel} />;
         }
 

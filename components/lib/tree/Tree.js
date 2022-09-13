@@ -130,6 +130,7 @@ export const Tree = React.memo(
 
         const validateDropNode = (dragPath, dropPath) => {
             let _validateDrop = validateDrop(dragPath, dropPath);
+
             if (_validateDrop) {
                 //child dropped on parent
                 if (dragPath.indexOf('-') > 0 && dragPath.substring(0, dragPath.lastIndexOf('-')) === dropPath) {
@@ -144,6 +145,7 @@ export const Tree = React.memo(
 
         const validateDropPoint = (event) => {
             let _validateDrop = validateDrop(dragState.current.path, event.path);
+
             if (_validateDrop) {
                 //child dropped to next sibling's drop point
                 if (event.position === -1 && areSiblings(dragState.current.path, event.path) && dragState.current.index + 1 === event.index) {
@@ -172,6 +174,7 @@ export const Tree = React.memo(
                     return nextSearchRoot;
                 } else {
                     path.shift();
+
                     return findNode(nextSearchRoot, path);
                 }
             }
@@ -219,9 +222,11 @@ export const Tree = React.memo(
                 const searchFields = props.filterBy.split(',');
                 const filterText = filteredValue.toLocaleLowerCase(props.filterLocale);
                 const isStrictMode = props.filterMode === 'strict';
+
                 for (let node of props.value) {
                     let copyNode = { ...node };
                     let paramsWithoutNode = { searchFields, filterText, isStrictMode };
+
                     if (
                         (isStrictMode && (findFilteredNodes(copyNode, paramsWithoutNode) || isFilterMatched(copyNode, paramsWithoutNode))) ||
                         (!isStrictMode && (isFilterMatched(copyNode, paramsWithoutNode) || findFilteredNodes(copyNode, paramsWithoutNode)))
@@ -237,11 +242,15 @@ export const Tree = React.memo(
         const findFilteredNodes = (node, paramsWithoutNode) => {
             if (node) {
                 let matched = false;
+
                 if (node.children) {
                     let childNodes = [...node.children];
+
                     node.children = [];
+
                     for (let childNode of childNodes) {
                         let copyChildNode = { ...childNode };
+
                         if (isFilterMatched(copyChildNode, paramsWithoutNode)) {
                             matched = true;
                             node.children.push(copyChildNode);
@@ -251,6 +260,7 @@ export const Tree = React.memo(
 
                 if (matched) {
                     node.expanded = true;
+
                     return true;
                 }
             }
@@ -258,8 +268,10 @@ export const Tree = React.memo(
 
         const isFilterMatched = (node, { searchFields, filterText, isStrictMode }) => {
             let matched = false;
+
             for (let field of searchFields) {
                 let fieldValue = String(ObjectUtils.resolveFieldData(node, field)).toLocaleLowerCase(props.filterLocale);
+
                 if (fieldValue.indexOf(filterText) > -1) {
                     matched = true;
                 }

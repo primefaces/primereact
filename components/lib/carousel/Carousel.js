@@ -52,6 +52,7 @@ export const Carousel = React.memo(
 
         const step = (dir, page) => {
             let totalShiftedItems = totalShiftedItemsState;
+
             if (page != null) {
                 totalShiftedItems = numScrollState * page * -1;
 
@@ -62,12 +63,14 @@ export const Carousel = React.memo(
                 isRemainingItemsAdded.current = false;
             } else {
                 totalShiftedItems += numScrollState * dir;
+
                 if (isRemainingItemsAdded.current) {
                     totalShiftedItems += remainingItems.current - numScrollState * dir;
                     isRemainingItemsAdded.current = false;
                 }
 
                 const originalShiftedItems = isCircular ? totalShiftedItems + numVisibleState : totalShiftedItems;
+
                 page = Math.abs(Math.floor(originalShiftedItems / numScrollState));
             }
 
@@ -147,6 +150,7 @@ export const Carousel = React.memo(
             }
 
             allowAutoplay.current = false;
+
             if (e.cancelable) {
                 e.preventDefault();
             }
@@ -158,6 +162,7 @@ export const Carousel = React.memo(
             }
 
             allowAutoplay.current = false;
+
             if (e.cancelable) {
                 e.preventDefault();
             }
@@ -251,6 +256,7 @@ export const Carousel = React.memo(
                 responsiveOptions.current.sort((data1, data2) => {
                     const value1 = data1.breakpoint;
                     const value2 = data2.breakpoint;
+
                     return ObjectUtils.sort(value1, value2, -1, PrimeReact.locale, PrimeReact.nullSortOrder);
                 });
 
@@ -305,6 +311,7 @@ export const Carousel = React.memo(
                 remainingItems.current = (props.value.length - numVisibleState) % numScrollState;
 
                 let page = currentPage;
+
                 if (totalIndicators !== 0 && page >= totalIndicators) {
                     page = totalIndicators - 1;
 
@@ -320,6 +327,7 @@ export const Carousel = React.memo(
                 }
 
                 totalShiftedItems = page * numScrollState * -1;
+
                 if (isCircular) {
                     totalShiftedItems -= numVisibleState;
                 }
@@ -344,6 +352,7 @@ export const Carousel = React.memo(
                     totalShiftedItems = -1 * numVisibleState;
                 } else if (totalShiftedItems === 0) {
                     totalShiftedItems = -1 * props.value.length;
+
                     if (remainingItems.current > 0) {
                         isRemainingItemsAdded.current = true;
                     }

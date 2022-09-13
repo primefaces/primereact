@@ -17,6 +17,7 @@ const TreeTableSortDemo = () => {
             setNodes1(data);
 
             let _nodes2 = data;
+
             _nodes2.push({
                 data: {
                     name: 'Documents',

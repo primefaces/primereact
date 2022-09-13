@@ -42,6 +42,7 @@ export const Image = React.memo(
 
         const onDownload = () => {
             const { alt: name, src } = props;
+
             DomHandler.saveAs({ name, src });
             previewClick.current = true;
         };

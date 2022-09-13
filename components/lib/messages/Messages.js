@@ -31,9 +31,11 @@ export const Messages = React.memo(
 
         const assignIdentifiers = (value, copy) => {
             let messages;
+
             if (Array.isArray(value)) {
                 for (let i = 0; i < value.length; i++) {
                     value[i].id = messageIdx++;
+
                     if (copy) {
                         messages = [...messagesState, ...value];
                     } else {
@@ -42,12 +44,14 @@ export const Messages = React.memo(
                 }
             } else {
                 value.id = messageIdx++;
+
                 if (copy) {
                     messages = messagesState ? [...messagesState, value] : [value];
                 } else {
                     messages = [value];
                 }
             }
+
             return messages;
         };
 
@@ -57,6 +61,7 @@ export const Messages = React.memo(
 
         const replace = (value) => {
             const replaced = assignIdentifiers(value, false);
+
             setMessagesState(replaced);
         };
 

@@ -279,6 +279,7 @@ const DockDemo = () => {
 
         const nodeService = new NodeService();
         const galleriaService = new PhotoService();
+
         galleriaService.getImages().then((data) => setImages(data));
         nodeService.getTreeNodes().then((data) => setNodes(data));
 

@@ -23,6 +23,7 @@ const FileUploadDemo = () => {
     const onTemplateSelect = (e) => {
         let _totalSize = totalSize;
         let files = e.files;
+
         Object.keys(files).forEach((key) => {
             _totalSize += files[key].size || 0;
         });
@@ -32,6 +33,7 @@ const FileUploadDemo = () => {
 
     const onTemplateUpload = (e) => {
         let _totalSize = 0;
+
         e.files.forEach((file) => {
             _totalSize += file.size || 0;
         });
@@ -104,9 +106,12 @@ const FileUploadDemo = () => {
         const file = event.files[0];
         const reader = new FileReader();
         let blob = await fetch(file.objectURL).then((r) => r.blob()); //blob:url
+
         reader.readAsDataURL(blob);
+
         reader.onloadend = function () {
             const base64data = reader.result;
+
             // eslint-disable-next-line no-console
             console.log(base64data);
         };

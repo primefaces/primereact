@@ -55,12 +55,16 @@ const DataTableEditDemo = () => {
 
     const isPositiveInteger = (val) => {
         let str = String(val);
+
         str = str.trim();
+
         if (!str) {
             return false;
         }
+
         str = str.replace(/^0+/, '') || '0';
         let n = Math.floor(Number(str));
+
         return n !== Infinity && String(n) === str && n >= 0;
     };
 
@@ -121,6 +125,7 @@ const DataTableEditDemo = () => {
 
     const setActiveRowIndex = (index) => {
         let _editingRows = { ...editingRows, ...{ [`${products3[index].id}`]: true } };
+
         setEditingRows(_editingRows);
     };
 

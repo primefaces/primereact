@@ -62,6 +62,7 @@ export const Rating = React.memo(
                 const className = classNames('p-rating-item', { 'p-rating-item-active': active });
                 const icon = active ? { type: props.onIcon, props: props.onIconProps } : { type: props.offIcon, props: props.offIconProps };
                 const content = IconUtils.getJSXIcon(icon.type, { className: 'p-rating-icon', ...icon.props }, { props });
+
                 return (
                     <div key={value} className={className} tabIndex={tabIndex} onClick={(e) => rate(e, value)} onKeyDown={(e) => onStarKeyDown(e, value)}>
                         {content}
@@ -73,6 +74,7 @@ export const Rating = React.memo(
         const createCancelIcon = () => {
             if (props.cancel) {
                 const content = IconUtils.getJSXIcon(props.cancelIcon, { className: 'p-rating-icon p-rating-cancel', ...props.cancelIconProps }, { props });
+
                 return (
                     <div className="p-rating-item p-rating-cancel-item" onClick={clear} tabIndex={tabIndex} onKeyDown={onCancelKeyDown}>
                         {content}

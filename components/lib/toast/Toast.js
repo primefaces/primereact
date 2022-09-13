@@ -17,6 +17,7 @@ export const Toast = React.memo(
         const show = (value) => {
             if (value) {
                 const messages = assignIdentifiers(value, true);
+
                 messagesState.length === 0 && ZIndexUtils.set('toast', containerRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['toast']);
                 setMessagesState(messages);
             }
@@ -24,6 +25,7 @@ export const Toast = React.memo(
 
         const assignIdentifiers = (value, copy) => {
             let messages;
+
             if (Array.isArray(value)) {
                 const multipleMessages = value.reduce((acc, message) => {
                     acc.push({ _pId: messageIdx++, message });
@@ -38,12 +40,14 @@ export const Toast = React.memo(
                 }
             } else {
                 const message = { _pId: messageIdx++, message: value };
+
                 if (copy) {
                     messages = messagesState ? [...messagesState, message] : [message];
                 } else {
                     messages = [message];
                 }
             }
+
             return messages;
         };
 
@@ -54,11 +58,13 @@ export const Toast = React.memo(
 
         const replace = (value) => {
             const replaced = assignIdentifiers(value, false);
+
             setMessagesState(replaced);
         };
 
         const onClose = (messageInfo) => {
             const messages = messagesState.filter((msg) => msg._pId !== messageInfo._pId);
+
             setMessagesState(messages);
 
             props.onRemove && props.onRemove(messageInfo.message);

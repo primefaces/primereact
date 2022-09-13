@@ -128,6 +128,7 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
             if (containerOffset.left < targetOffset.left) {
                 arrowLeft = targetOffset.left - containerOffset.left;
             }
+
             overlayRef.current.style.setProperty('--overlayArrowLeft', `${arrowLeft}px`);
 
             if (containerOffset.top < targetOffset.top) {
@@ -141,6 +142,7 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
             styleElement.current = DomHandler.createInlineStyle(PrimeReact.nonce);
 
             let innerHTML = '';
+
             for (let breakpoint in props.breakpoints) {
                 innerHTML += `
                     @media screen and (max-width: ${breakpoint}) {
@@ -185,6 +187,7 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
     const createCloseIcon = () => {
         if (props.showCloseIcon) {
             const ariaLabel = props.ariaCloseLabel || localeOption('close');
+
             return <Button type="button" className="p-overlaypanel-close p-link" icon="p-overlaypanel-close-icon pi pi-times" onClick={onCloseClick} aria-label={ariaLabel} />;
         }
 

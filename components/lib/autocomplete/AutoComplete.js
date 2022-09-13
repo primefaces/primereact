@@ -44,6 +44,7 @@ export const AutoComplete = React.memo(
             }
 
             const query = event.target.value;
+
             if (!props.multiple) {
                 updateModel(event, query);
             }
@@ -85,8 +86,10 @@ export const AutoComplete = React.memo(
         const selectItem = (event, option, preventInputFocus) => {
             if (props.multiple) {
                 inputRef.current.value = '';
+
                 if (!isSelected(option)) {
                     const newValue = props.value ? [...props.value, option] : [option];
+
                     updateModel(event, newValue);
                 }
             } else {
@@ -112,6 +115,7 @@ export const AutoComplete = React.memo(
             if (selectedItem && selectedItem.current === value) {
                 return;
             }
+
             if (props.onChange) {
                 props.onChange({
                     originalEvent: event,
@@ -135,9 +139,11 @@ export const AutoComplete = React.memo(
                     return value;
                 } else if (props.selectedItemTemplate) {
                     const resolvedFieldData = ObjectUtils.getJSXElement(props.selectedItemTemplate, value);
+
                     return resolvedFieldData ? resolvedFieldData : value;
                 } else if (props.field) {
                     const resolvedFieldData = ObjectUtils.resolveFieldData(value, props.field);
+
                     return resolvedFieldData !== null && resolvedFieldData !== undefined ? resolvedFieldData : value;
                 } else {
                     return value;
@@ -168,6 +174,7 @@ export const AutoComplete = React.memo(
         const onOverlayEntering = () => {
             if (props.autoHighlight && props.suggestions && props.suggestions.length) {
                 const element = getScrollableElement().firstChild.firstChild;
+
                 DomHandler.addClass(element, 'p-highlight');
             }
         };
@@ -189,6 +196,7 @@ export const AutoComplete = React.memo(
 
         const alignOverlay = () => {
             const target = props.multiple ? multiContainerRef.current : inputRef.current;
+
             DomHandler.alignOverlay(overlayRef.current, target, props.appendTo || PrimeReact.appendTo);
         };
 
@@ -218,6 +226,7 @@ export const AutoComplete = React.memo(
         const removeItem = (event, index) => {
             const removedValue = props.value[index];
             const newValue = props.value.filter((_, i) => index !== i);
+
             updateModel(event, newValue);
 
             if (props.onUnselect) {
@@ -237,6 +246,7 @@ export const AutoComplete = React.memo(
                     case 40:
                         if (highlightItem) {
                             let nextElement = findNextItem(highlightItem);
+
                             if (nextElement) {
                                 DomHandler.addClass(nextElement, 'p-highlight');
                                 DomHandler.removeClass(highlightItem, 'p-highlight');
@@ -244,6 +254,7 @@ export const AutoComplete = React.memo(
                             }
                         } else {
                             highlightItem = DomHandler.findSingle(overlayRef.current, 'li');
+
                             if (DomHandler.hasClass(highlightItem, 'p-autocomplete-item-group')) {
                                 highlightItem = findNextItem(highlightItem);
                             }
@@ -260,6 +271,7 @@ export const AutoComplete = React.memo(
                     case 38:
                         if (highlightItem) {
                             let previousElement = findPrevItem(highlightItem);
+
                             if (previousElement) {
                                 DomHandler.addClass(previousElement, 'p-highlight');
                                 DomHandler.removeClass(highlightItem, 'p-highlight');
@@ -317,6 +329,7 @@ export const AutoComplete = React.memo(
                                 });
                             }
                         }
+
                         break;
 
                     default:
@@ -328,6 +341,7 @@ export const AutoComplete = React.memo(
         const selectHighlightItem = (event, item) => {
             if (props.optionGroupLabel) {
                 const optionGroup = props.suggestions[item.dataset.group];
+
                 selectItem(event, getOptionGroupChildren(optionGroup)[item.dataset.index]);
             } else {
                 selectItem(event, props.suggestions[DomHandler.index(item)]);
@@ -355,6 +369,7 @@ export const AutoComplete = React.memo(
             const inputValue = event.target.value.trim();
             const item = (props.suggestions || []).find((it) => {
                 const value = props.field ? ObjectUtils.resolveFieldData(it, props.field) : it;
+
                 return value && inputValue === value.trim();
             });
 
@@ -506,6 +521,7 @@ export const AutoComplete = React.memo(
             if (ObjectUtils.isNotEmpty(props.value)) {
                 return props.value.map((val, index) => {
                     const key = index + 'multi-item';
+
                     return (
                         <li key={key} className="p-autocomplete-token p-highlight">
                             <span className="p-autocomplete-token-label">{formatValue(val)}</span>
@@ -571,6 +587,7 @@ export const AutoComplete = React.memo(
         const createDropdown = () => {
             if (props.dropdown) {
                 const ariaLabel = props.dropdownAriaLabel || props.placeholder || localeOption('choose');
+
                 return <Button type="button" icon={props.dropdownIcon} className="p-autocomplete-dropdown" disabled={props.disabled} onClick={onDropdownClick} aria-label={ariaLabel} />;
             }
 

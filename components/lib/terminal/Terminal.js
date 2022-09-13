@@ -22,6 +22,7 @@ export const Terminal = React.memo(
 
         const onInputKeyDown = (e) => {
             const code = e.which || e.keyCode;
+
             switch (code) {
                 //up
                 case 38:
@@ -32,6 +33,7 @@ export const Terminal = React.memo(
                         setIndexState(prevIndex);
                         setCommandTextState(command.text);
                     }
+
                     break;
 
                 //enter
@@ -64,6 +66,7 @@ export const Terminal = React.memo(
             const response = (res) => {
                 if (commandsState && commandsState.length > 0) {
                     let commands = [...commandsState];
+
                     commands[commands.length - 1].response = res;
 
                     setCommandsState(commands);

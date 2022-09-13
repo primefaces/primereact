@@ -130,7 +130,9 @@ export const DataTable = React.forwardRef((props, ref) => {
         if (!ignoreReorderable && props.reorderableColumns && columnOrderState) {
             let orderedColumns = columnOrderState.reduce((arr, columnKey) => {
                 const column = findColumnByKey(columns, columnKey);
+
                 column && arr.push(column);
+
                 return arr;
             }, []);
 
@@ -165,12 +167,14 @@ export const DataTable = React.forwardRef((props, ref) => {
         }
 
         const sortField = getSortField();
+
         if (sortField) {
             state.sortField = sortField;
             state.sortOrder = getSortOrder();
         }
 
         const multiSortMeta = getMultiSortMeta();
+
         if (multiSortMeta) {
             state.multiSortMeta = multiSortMeta;
         }
@@ -201,6 +205,7 @@ export const DataTable = React.forwardRef((props, ref) => {
             }
         } else {
             const storage = getStorage();
+
             if (ObjectUtils.isNotEmpty(state)) {
                 storage.setItem(props.stateKey, JSON.stringify(state));
             }
@@ -230,6 +235,7 @@ export const DataTable = React.forwardRef((props, ref) => {
             const storage = getStorage();
             const stateString = storage.getItem(props.stateKey);
             const dateFormat = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/;
+
             const reviver = function (key, value) {
                 return typeof value === 'string' && dateFormat.test(value) ? new Date(value) : value;
             };
@@ -336,6 +342,7 @@ export const DataTable = React.forwardRef((props, ref) => {
     const saveColumnWidths = (state) => {
         let widths = [];
         let headers = DomHandler.find(elementRef.current, '.p-datatable-thead > tr > th');
+
         headers.forEach((header) => widths.push(DomHandler.getOuterWidth(header)));
         state.columnWidths = widths.join(',');
 
@@ -358,8 +365,10 @@ export const DataTable = React.forwardRef((props, ref) => {
                 createStyleElement();
 
                 let innerHTML = '';
+
                 widths.forEach((width, index) => {
                     let style = props.scrollable ? `flex: 1 1 ${width}px !important` : `width: ${width}px !important`;
+
                     innerHTML += `
                         .p-datatable[${attributeSelectorState}] .p-datatable-thead > tr > th:nth-child(${index + 1}),
                         .p-datatable[${attributeSelectorState}] .p-datatable-tbody > tr > td:nth-child(${index + 1}),
@@ -379,10 +388,12 @@ export const DataTable = React.forwardRef((props, ref) => {
             return element;
         } else {
             let parent = element.parentElement;
+
             while (parent.nodeName !== 'TH') {
                 parent = parent.parentElement;
                 if (!parent) break;
             }
+
             return parent;
         }
     };
@@ -421,6 +432,7 @@ export const DataTable = React.forwardRef((props, ref) => {
     const getSelectionModeInColumn = (columns) => {
         if (columns) {
             const col = columns.find((c) => !!c.props.selectionMode);
+
             return col ? col.props.selectionMode : null;
         }
 
@@ -445,6 +457,7 @@ export const DataTable = React.forwardRef((props, ref) => {
             meta['fields'].push(field);
         } else if (meta) {
             const fields = meta['fields'].filter((f) => f !== field);
+
             !fields.length ? delete editingMeta[editingKey] : (meta['fields'] = fields);
         }
 
@@ -460,6 +473,7 @@ export const DataTable = React.forwardRef((props, ref) => {
     const onColumnResizeStart = (e) => {
         const { originalEvent: event, column } = e;
         const containerLeft = DomHandler.getOffset(elementRef.current).left;
+
         resizeColumn.current = column;
         resizeColumnElement.current = event.currentTarget.parentElement;
         columnResizing.current = true;
@@ -495,14 +509,17 @@ export const DataTable = React.forwardRef((props, ref) => {
                 }
             } else if (props.columnResizeMode === 'expand') {
                 const tableWidth = tableRef.current.offsetWidth + delta + 'px';
+
                 const updateTableWidth = (el) => {
                     !!el && (el.style.width = el.style.minWidth = tableWidth);
                 };
+
                 updateTableWidth(tableRef.current);
 
                 if (!isVirtualScrollerDisabled()) {
                     updateTableWidth(bodyRef.current);
                     updateTableWidth(frozenBodyRef.current);
+
                     if (wrapperRef.current) {
                         updateTableWidth(DomHandler.findSingle(wrapperRef.current, '.p-virtualscroller-content'));
                     }
@@ -536,15 +553,18 @@ export const DataTable = React.forwardRef((props, ref) => {
         let widths = [];
         let colIndex = DomHandler.index(resizeColumnElement.current);
         let headers = DomHandler.find(tableRef.current, '.p-datatable-thead > tr > th');
+
         headers.forEach((header) => widths.push(DomHandler.getOuterWidth(header)));
 
         destroyStyleElement();
         createStyleElement();
 
         let innerHTML = '';
+
         widths.forEach((width, index) => {
             let colWidth = index === colIndex ? newColumnWidth : nextColumnWidth && index === colIndex + 1 ? nextColumnWidth : width;
             let style = props.scrollable ? `flex: 1 1 ${colWidth}px !important` : `width: ${colWidth}px !important`;
+
             innerHTML += `
                 .p-datatable[${attributeSelectorState}] .p-datatable-thead > tr > th:nth-child(${index + 1}),
                 .p-datatable[${attributeSelectorState}] .p-datatable-tbody > tr > td:nth-child(${index + 1}),
@@ -610,6 +630,7 @@ export const DataTable = React.forwardRef((props, ref) => {
 
         if (columnResizing.current) {
             event.preventDefault();
+
             return;
         }
 
@@ -624,6 +645,7 @@ export const DataTable = React.forwardRef((props, ref) => {
     const onColumnHeaderDragOver = (e) => {
         const { originalEvent: event, column } = e;
         const dropHeader = findParentHeader(event.currentTarget);
+
         if (props.reorderableColumns && draggedColumnElement.current && dropHeader && !getColumnProp(column, 'frozen')) {
             event.preventDefault();
 
@@ -666,10 +688,12 @@ export const DataTable = React.forwardRef((props, ref) => {
         const { originalEvent: event, column } = e;
 
         event.preventDefault();
+
         if (draggedColumnElement.current) {
             let dragIndex = DomHandler.index(draggedColumnElement.current);
             let dropIndex = DomHandler.index(findParentHeader(event.currentTarget));
             let allowDrop = dragIndex !== dropIndex;
+
             if (allowDrop && ((dropIndex - dragIndex === 1 && dropPosition.current === -1) || (dragIndex - dropIndex === 1 && dropPosition.current === 1))) {
                 allowDrop = false;
             }
@@ -797,9 +821,11 @@ export const DataTable = React.forwardRef((props, ref) => {
 
         if (props.sortMode === 'multiple') {
             let metaKey = event.metaKey || event.ctrlKey;
+
             multiSortMeta = [...getMultiSortMeta()];
 
             const sortMeta = multiSortMeta.find((sortMeta) => sortMeta.field === sortField);
+
             sortOrder = sortMeta ? getCalculatedSortOrder(sortMeta.order) : sortOrder;
 
             const newMetaData = { field: sortField, order: sortOrder };
@@ -817,6 +843,7 @@ export const DataTable = React.forwardRef((props, ref) => {
             };
         } else {
             sortOrder = getSortField() === sortField ? getCalculatedSortOrder(getSortOrder()) : sortOrder;
+
             if (props.removableSort) {
                 sortField = sortOrder ? sortField : null;
             }
@@ -901,6 +928,7 @@ export const DataTable = React.forwardRef((props, ref) => {
         if (props.groupRowsBy && (groupRowsSortMetaState || (multiSortMeta.length && props.groupRowsBy === multiSortMeta[0].field))) {
             let groupRowsSortMeta = groupRowsSortMetaState;
             const firstSortMeta = multiSortMeta[0];
+
             if (!groupRowsSortMeta) {
                 groupRowsSortMeta = firstSortMeta;
                 setGroupRowsSortMetaState(groupRowsSortMeta);
@@ -974,6 +1002,7 @@ export const DataTable = React.forwardRef((props, ref) => {
 
         let isGlobalFilter = filters['global'] || props.globalFilter;
         let globalFilterFieldsArray;
+
         if (isGlobalFilter) {
             globalFilterFieldsArray = props.globalFilterFields || columns.filter((col) => !col.props.excludeGlobalFilter).map((col) => col.props.filterField || col.props.field);
         }
@@ -992,6 +1021,7 @@ export const DataTable = React.forwardRef((props, ref) => {
                     if (filterMeta.operator) {
                         for (let j = 0; j < filterMeta.constraints.length; j++) {
                             let filterConstraint = filterMeta.constraints[j];
+
                             localMatch = executeLocalFilter(filterField, data[i], filterConstraint, j);
 
                             if ((filterMeta.operator === FilterOperator.OR && localMatch) || (filterMeta.operator === FilterOperator.AND && !localMatch)) {
@@ -1013,6 +1043,7 @@ export const DataTable = React.forwardRef((props, ref) => {
                     let globalFilterField = globalFilterFieldsArray[j];
                     let matchMode = filters['global'] ? filters['global'].matchMode : FilterMatchMode.CONTAINS;
                     let value = filters['global'] ? filters['global'].value : props.globalFilter;
+
                     globalMatch = FilterService.filters[matchMode](ObjectUtils.resolveFieldData(data[i], globalFilterField), value, props.filterLocale);
 
                     if (globalMatch) {
@@ -1022,6 +1053,7 @@ export const DataTable = React.forwardRef((props, ref) => {
             }
 
             let matches;
+
             if (isGlobalFilter) {
                 matches = localFiltered ? localFiltered && localMatch && globalMatch : globalMatch;
             } else {
@@ -1126,6 +1158,7 @@ export const DataTable = React.forwardRef((props, ref) => {
     const resetScroll = () => {
         if (wrapperRef.current) {
             const scrollableContainer = !isVirtualScrollerDisabled() ? DomHandler.findSingle(wrapperRef.current, '.p-virtualscroller') : wrapperRef.current;
+
             scrollableContainer.scrollTo(0, 0);
         }
     };
@@ -1137,6 +1170,7 @@ export const DataTable = React.forwardRef((props, ref) => {
         if (columns) {
             columnOrder = columns.reduce((orders, col) => {
                 orders.push(col.props.columnKey || col.props.field);
+
                 return orders;
             }, []);
         }
@@ -1246,6 +1280,7 @@ export const DataTable = React.forwardRef((props, ref) => {
     const dataToRender = (data) => {
         if (data && props.paginator) {
             const first = props.lazy ? 0 : getFirst();
+
             return data.slice(first, first + getRows());
         }
 
@@ -1338,6 +1373,7 @@ export const DataTable = React.forwardRef((props, ref) => {
     const createHeader = () => {
         if (props.header) {
             const content = ObjectUtils.getJSXElement(props.header, { props });
+
             return <div className="p-datatable-header">{content}</div>;
         }
 
@@ -1577,6 +1613,7 @@ export const DataTable = React.forwardRef((props, ref) => {
                             tableRef.current = el;
                             options.spacerRef && options.spacerRef(el);
                         };
+
                         const tableClassName = classNames('p-datatable-table', props.tableClassName);
                         const tableHeader = createTableHeader(options, empty);
                         const tableBody = createTableBody(options, selectionModeInColumn, empty, _isVirtualScrollerDisabled);
@@ -1598,6 +1635,7 @@ export const DataTable = React.forwardRef((props, ref) => {
     const createFooter = () => {
         if (props.footer) {
             const content = ObjectUtils.getJSXElement(props.footer, { props });
+
             return <div className="p-datatable-footer">{content}</div>;
         }
 
@@ -1653,6 +1691,7 @@ export const DataTable = React.forwardRef((props, ref) => {
     const createReorderIndicators = () => {
         if (props.reorderableColumns) {
             const style = { position: 'absolute', display: 'none' };
+
             return (
                 <>
                     <span ref={reorderIndicatorUpRef} className="pi pi-arrow-down p-datatable-reorder-indicator-up" style={style}></span>

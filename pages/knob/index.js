@@ -21,6 +21,7 @@ const KnobDemo = () => {
 
     const increment = () => {
         const value = value10 + 1;
+
         setValue10(value);
         setDisabledIncrementBtn(value === 100);
         setDisabledDecrementBtn(false);
@@ -28,6 +29,7 @@ const KnobDemo = () => {
 
     const decrement = () => {
         const value = value10 - 1;
+
         setValue10(value);
         setDisabledIncrementBtn(false);
         setDisabledDecrementBtn(value === 0);

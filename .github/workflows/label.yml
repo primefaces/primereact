@@ -1,4 +1,4 @@
-name: Label issues and PRs
+name: Label To Issues and PRs
 
 on:
   issues:

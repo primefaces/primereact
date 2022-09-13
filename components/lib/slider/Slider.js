@@ -105,6 +105,7 @@ export const Slider = React.memo(
 
         const updateDomData = () => {
             const rect = elementRef.current.getBoundingClientRect();
+
             initX.current = rect.left + DomHandler.getWindowScrollLeft();
             initY.current = rect.top + DomHandler.getWindowScrollTop();
             barWidth.current = elementRef.current.offsetWidth;

@@ -26,6 +26,7 @@ const DataTableColTogglerDemo = () => {
     const onColumnToggle = (event) => {
         let selectedColumns = event.value;
         let orderedSelectedColumns = columns.filter((col) => selectedColumns.some((sCol) => sCol.field === col.field));
+
         setSelectedColumns(orderedSelectedColumns);
     };
 

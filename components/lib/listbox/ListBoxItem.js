@@ -30,6 +30,7 @@ export const ListBoxItem = React.memo((props) => {
             //down
             case 40:
                 const nextItem = findNextItem(item);
+
                 nextItem && nextItem.focus();
 
                 event.preventDefault();
@@ -38,6 +39,7 @@ export const ListBoxItem = React.memo((props) => {
             //up
             case 38:
                 const prevItem = findPrevItem(item);
+
                 prevItem && prevItem.focus();
 
                 event.preventDefault();
@@ -56,11 +58,13 @@ export const ListBoxItem = React.memo((props) => {
 
     const findNextItem = (item) => {
         const nextItem = item.nextElementSibling;
+
         return nextItem ? (DomHandler.hasClass(nextItem, 'p-disabled') || DomHandler.hasClass(nextItem, 'p-listbox-item-group') ? findNextItem(nextItem) : nextItem) : null;
     };
 
     const findPrevItem = (item) => {
         const prevItem = item.previousElementSibling;
+
         return prevItem ? (DomHandler.hasClass(prevItem, 'p-disabled') || DomHandler.hasClass(prevItem, 'p-listbox-item-group') ? findPrevItem(prevItem) : prevItem) : null;
     };
 

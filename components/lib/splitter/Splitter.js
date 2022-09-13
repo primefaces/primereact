@@ -87,6 +87,7 @@ export const Splitter = React.memo(
             if (stateString) {
                 panelSizes.current = JSON.parse(stateString);
                 let children = [...elementRef.current.children].filter((child) => DomHandler.hasClass(child, 'p-splitter-panel'));
+
                 children.forEach((child, i) => {
                     child.style.flexBasis = 'calc(' + panelSizes.current[i] + '% - ' + (props.children.length - 1) * props.gutterSize + 'px)';
                 });
@@ -101,6 +102,7 @@ export const Splitter = React.memo(
             gutterRef.current = gutterRefs.current[index];
             let pageX = event.type === 'touchstart' ? event.touches[0].pageX : event.pageX;
             let pageY = event.type === 'touchstart' ? event.touches[0].pageY : event.pageY;
+
             size.current = props.layout === 'horizontal' ? DomHandler.getWidth(elementRef.current) : DomHandler.getHeight(elementRef.current);
             dragging.current = true;
             startPos.current = props.layout === 'horizontal' ? pageX : pageY;
@@ -178,6 +180,7 @@ export const Splitter = React.memo(
 
         React.useEffect(() => {
             let panelElements = [...elementRef.current.children].filter((child) => DomHandler.hasClass(child, 'p-splitter-panel'));
+
             panelElements.map((panelElement) => {
                 if (panelElement.childNodes && ObjectUtils.isNotEmpty(DomHandler.find(panelElement, '.p-splitter'))) {
                     DomHandler.addClass(panelElement, 'p-splitter-panel-nested');
@@ -186,6 +189,7 @@ export const Splitter = React.memo(
 
             if (props.children && props.children.length) {
                 let initialized = false;
+
                 if (isStateful && !mounted.current) {
                     initialized = restoreState();
                 }
@@ -196,8 +200,10 @@ export const Splitter = React.memo(
                     props.children.map((panel, i) => {
                         let panelInitialSize = panel.props && panel.props.size ? panel.props.size : null;
                         let panelSize = panelInitialSize || 100 / props.children.length;
+
                         _panelSizes[i] = panelSize;
                         panelElements[i].style.flexBasis = 'calc(' + panelSize + '% - ' + (props.children.length - 1) * props.gutterSize + 'px)';
+
                         return _panelSizes;
                     });
 

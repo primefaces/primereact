@@ -19,6 +19,7 @@ const TreeTableEditDemo = () => {
     const onEditorValueChange = (options, value) => {
         let newNodes = JSON.parse(JSON.stringify(nodes));
         let editedNode = findNodeByKey(newNodes, options.node.key);
+
         editedNode.data[options.field] = value;
 
         setNodes(newNodes);
@@ -30,6 +31,7 @@ const TreeTableEditDemo = () => {
 
         while (path.length) {
             let list = node ? node.children : nodes;
+
             node = list[parseInt(path[0], 10)];
             path.shift();
         }

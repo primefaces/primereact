@@ -22,6 +22,7 @@ export const SplitButtonItem = React.memo((props) => {
         if (props.menuitem.visible === false) {
             return null;
         }
+
         const { disabled, icon: _icon, label: _label, template, url, target } = props.menuitem;
         const className = classNames('p-menuitem-link', { 'p-disabled': disabled });
         const iconClassName = classNames('p-menuitem-icon', _icon);

@@ -61,6 +61,7 @@ const AutoCompleteDemo = () => {
     const searchCountry = (event) => {
         setTimeout(() => {
             let _filteredCountries;
+
             if (!event.query.trim().length) {
                 _filteredCountries = [...countries];
             } else {
@@ -79,6 +80,7 @@ const AutoCompleteDemo = () => {
 
         for (let country of groupedCities) {
             let filteredItems = country.items.filter((item) => item.label.toLowerCase().indexOf(query.toLowerCase()) !== -1);
+
             if (filteredItems && filteredItems.length) {
                 _filteredCities.push({ ...country, ...{ items: filteredItems } });
             }
@@ -94,6 +96,7 @@ const AutoCompleteDemo = () => {
 
         for (let i = 0; i < items.length; i++) {
             let item = items[i];
+
             if (item.label.toLowerCase().indexOf(query.toLowerCase()) === 0) {
                 _filteredItems.push(item);
             }

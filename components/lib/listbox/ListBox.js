@@ -18,6 +18,7 @@ export const ListBox = React.memo(
 
         const onOptionSelect = (event) => {
             const option = event.option;
+
             if (props.disabled || isOptionDisabled(option)) {
                 return;
             }
@@ -107,6 +108,7 @@ export const ListBox = React.memo(
             virtualScrollerRef.current && virtualScrollerRef.current.scrollToIndex(0);
 
             const { originalEvent, value } = event;
+
             if (props.onFilterValueChange) {
                 props.onFilterValueChange({
                     originalEvent,
@@ -147,6 +149,7 @@ export const ListBox = React.memo(
                 if (props.optionGroupLabel) {
                     for (let i = 0; i < visibleOptions.length; i++) {
                         let selectedOptionIndex = findOptionIndexInList(props.value, getOptionGroupChildren(visibleOptions[i]));
+
                         if (selectedOptionIndex !== -1) {
                             return { group: i, option: selectedOptionIndex };
                         }
@@ -165,12 +168,14 @@ export const ListBox = React.memo(
 
         const findOptionIndexInList = (value, list) => {
             const key = equalityKey();
+
             return list.findIndex((item) => ObjectUtils.equals(value, getOptionValue(item), key));
         };
 
         const isSelected = (option) => {
             const optionValue = getOptionValue(option);
             const key = equalityKey();
+
             return props.multiple && props.value ? props.value.some((val) => ObjectUtils.equals(val, optionValue, key)) : ObjectUtils.equals(props.value, optionValue, key);
         };
 
@@ -220,12 +225,15 @@ export const ListBox = React.memo(
 
                 if (props.optionGroupLabel) {
                     let filteredGroups = [];
+
                     for (let optgroup of props.options) {
                         let filteredSubOptions = FilterService.filter(getOptionGroupChildren(optgroup), searchFields, filterValue, props.filterMatchMode, props.filterLocale);
+
                         if (filteredSubOptions && filteredSubOptions.length) {
                             filteredGroups.push({ ...optgroup, ...{ items: filteredSubOptions } });
                         }
                     }
+
                     return filteredGroups;
                 } else {
                     return FilterService.filter(props.options, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
@@ -238,6 +246,7 @@ export const ListBox = React.memo(
         const scrollToSelectedIndex = () => {
             if (virtualScrollerRef.current) {
                 const selectedIndex = getSelectedOptionIndex();
+
                 if (selectedIndex !== -1) {
                     setTimeout(() => virtualScrollerRef.current.scrollToIndex(selectedIndex), 0);
                 }
@@ -296,6 +305,7 @@ export const ListBox = React.memo(
 
         const createItem = (option, index, scrollerOptions = {}) => {
             const style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
+
             if (props.optionGroupLabel) {
                 const groupContent = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, option, index) : getOptionGroupLabel(option);
                 const groupChildrenContent = createGroupChildren(option, style);

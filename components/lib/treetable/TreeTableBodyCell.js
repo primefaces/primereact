@@ -82,8 +82,10 @@ export const TreeTableBodyCell = (props) => {
     React.useEffect(() => {
         if (elementRef.current && props.editor) {
             clearTimeout(tabIndexTimeout.current);
+
             if (editingState) {
                 let focusable = DomHandler.findSingle(elementRef.current, 'input');
+
                 if (focusable && document.activeElement !== focusable && !focusable.hasAttribute('data-isCellEditing')) {
                     focusable.setAttribute('data-isCellEditing', true);
                     focusable.focus();

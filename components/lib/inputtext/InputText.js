@@ -17,6 +17,7 @@ export const InputText = React.memo(
 
         const onInput = (event) => {
             let validatePattern = true;
+
             if (props.keyfilter && props.validateOnly) {
                 validatePattern = KeyFilter.validate(event, props.keyfilter);
             }
@@ -25,6 +26,7 @@ export const InputText = React.memo(
 
             if (!props.onChange) {
                 const target = event.target;
+
                 ObjectUtils.isNotEmpty(target.value) ? DomHandler.addClass(target, 'p-filled') : DomHandler.removeClass(target, 'p-filled');
             }
         };

@@ -48,6 +48,7 @@ export const InputNumber = React.memo(
             numberFormat.current = new Intl.NumberFormat(props.locale, getOptions());
             const numerals = [...new Intl.NumberFormat(props.locale, { useGrouping: false }).format(9876543210)].reverse();
             const index = new Map(numerals.map((d, i) => [d, i]));
+
             _numeral.current = new RegExp(`[${numerals.join('')}]`, 'g');
             _group.current = getGroupingExpression();
             _minusSign.current = getMinusSignExpression();
@@ -64,17 +65,21 @@ export const InputNumber = React.memo(
 
         const getDecimalExpression = () => {
             const formatter = new Intl.NumberFormat(props.locale, { ...getOptions(), useGrouping: false });
+
             return new RegExp(`[${formatter.format(1.1).replace(_currency.current, '').trim().replace(_numeral.current, '')}]`, 'g');
         };
 
         const getGroupingExpression = () => {
             const formatter = new Intl.NumberFormat(props.locale, { useGrouping: true });
+
             groupChar.current = formatter.format(1000000).trim().replace(_numeral.current, '').charAt(0);
+
             return new RegExp(`[${groupChar.current}]`, 'g');
         };
 
         const getMinusSignExpression = () => {
             const formatter = new Intl.NumberFormat(props.locale, { useGrouping: false });
+
             return new RegExp(`[${formatter.format(-1).trim().replace(_numeral.current, '')}]`, 'g');
         };
 
@@ -87,6 +92,7 @@ export const InputNumber = React.memo(
                     minimumFractionDigits: 0,
                     maximumFractionDigits: 0
                 });
+
                 return new RegExp(`[${formatter.format(1).replace(/\s/g, '').replace(_numeral.current, '').replace(_group.current, '')}]`, 'g');
             }
 
@@ -98,6 +104,7 @@ export const InputNumber = React.memo(
                 prefixChar.current = props.prefix;
             } else {
                 const formatter = new Intl.NumberFormat(props.locale, { style: props.mode, currency: props.currency, currencyDisplay: props.currencyDisplay });
+
                 prefixChar.current = formatter.format(1).split('1')[0];
             }
 
@@ -115,6 +122,7 @@ export const InputNumber = React.memo(
                     minimumFractionDigits: 0,
                     maximumFractionDigits: 0
                 });
+
                 suffixChar.current = formatter.format(1).split('1')[1];
             }
 
@@ -131,6 +139,7 @@ export const InputNumber = React.memo(
                 if (props.format) {
                     let formatter = new Intl.NumberFormat(props.locale, getOptions());
                     let _formattedValue = formatter.format(value);
+
                     if (props.prefix) {
                         _formattedValue = props.prefix + _formattedValue;
                     }
@@ -166,6 +175,7 @@ export const InputNumber = React.memo(
                     return filteredText;
 
                 let parsedValue = +filteredText;
+
                 return isNaN(parsedValue) ? null : parsedValue;
             }
 
@@ -298,6 +308,7 @@ export const InputNumber = React.memo(
             if (isSpecialChar.current) {
                 event.target.value = lastValue.current;
             }
+
             isSpecialChar.current = false;
         };
 
@@ -307,8 +318,10 @@ export const InputNumber = React.memo(
             }
 
             lastValue.current = event.target.value;
+
             if (event.shiftKey || event.altKey) {
                 isSpecialChar.current = true;
+
                 return;
             }
 
@@ -339,6 +352,7 @@ export const InputNumber = React.memo(
                     if (!isNumeralChar(inputValue.charAt(selectionStart - 1))) {
                         event.preventDefault();
                     }
+
                     break;
 
                 //right
@@ -346,6 +360,7 @@ export const InputNumber = React.memo(
                     if (!isNumeralChar(inputValue.charAt(selectionStart))) {
                         event.preventDefault();
                     }
+
                     break;
 
                 //enter and tab
@@ -381,6 +396,7 @@ export const InputNumber = React.memo(
                                 }
                             } else if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
                                 const insertedText = isDecimalMode() && (props.minFractionDigits || 0) < decimalLength ? '' : '0';
+
                                 newValueStr = inputValue.slice(0, selectionStart - 1) + insertedText + inputValue.slice(selectionStart);
                             } else if (decimalCharIndexWithoutPrefix === 1) {
                                 newValueStr = inputValue.slice(0, selectionStart - 1) + '0' + inputValue.slice(selectionStart);
@@ -422,6 +438,7 @@ export const InputNumber = React.memo(
                                 }
                             } else if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
                                 const insertedText = isDecimalMode() && (props.minFractionDigits || 0) < decimalLength ? '' : '0';
+
                                 newValueStr = inputValue.slice(0, selectionStart) + insertedText + inputValue.slice(selectionStart + 1);
                             } else if (decimalCharIndexWithoutPrefix === 1) {
                                 newValueStr = inputValue.slice(0, selectionStart) + '0' + inputValue.slice(selectionStart + 1);
@@ -436,6 +453,7 @@ export const InputNumber = React.memo(
                         newValueStr = deleteRange(inputValue, selectionStart, selectionEnd);
                         updateValue(event, newValueStr, null, 'delete-range');
                     }
+
                     break;
 
                 default:
@@ -476,8 +494,10 @@ export const InputNumber = React.memo(
             }
 
             let data = (event.clipboardData || window['clipboardData']).getData('Text');
+
             if (data) {
                 let filteredData = parseValue(data);
+
                 if (filteredData != null) {
                     insert(event, filteredData.toString());
                 }
@@ -491,6 +511,7 @@ export const InputNumber = React.memo(
         const isMinusSign = (char) => {
             if (_minusSign.current.test(char) || char === '-') {
                 _minusSign.current.lastIndex = 0;
+
                 return true;
             }
 
@@ -500,6 +521,7 @@ export const InputNumber = React.memo(
         const isDecimalSign = (char) => {
             if (_decimal.current.test(char)) {
                 _decimal.current.lastIndex = 0;
+
                 return true;
             }
 
@@ -512,10 +534,12 @@ export const InputNumber = React.memo(
 
         const getDecimalCharIndexes = (val) => {
             const decimalCharIndex = val.search(_decimal.current);
+
             _decimal.current.lastIndex = 0;
 
             const filteredVal = val.replace(_prefix.current, '').trim().replace(/\s/g, '').replace(_currency.current, '');
             const decimalCharIndexWithoutPrefix = filteredVal.search(_decimal.current);
+
             _decimal.current.lastIndex = 0;
 
             return { decimalCharIndex, decimalCharIndexWithoutPrefix };
@@ -523,12 +547,16 @@ export const InputNumber = React.memo(
 
         const getCharIndexes = (val) => {
             const decimalCharIndex = val.search(_decimal.current);
+
             _decimal.current.lastIndex = 0;
             const minusCharIndex = val.search(_minusSign.current);
+
             _minusSign.current.lastIndex = 0;
             const suffixCharIndex = val.search(_suffix.current);
+
             _suffix.current.lastIndex = 0;
             const currencyCharIndex = val.search(_currency.current);
+
             _currency.current.lastIndex = 0;
 
             return { decimalCharIndex, minusCharIndex, suffixCharIndex, currencyCharIndex };
@@ -536,7 +564,9 @@ export const InputNumber = React.memo(
 
         const insert = (event, text, sign = { isDecimalSign: false, isMinusSign: false }) => {
             const minusCharIndexOnText = text.search(_minusSign.current);
+
             _minusSign.current.lastIndex = 0;
+
             if (!allowMinusSign() && minusCharIndexOnText !== -1) {
                 return;
             }
@@ -550,6 +580,7 @@ export const InputNumber = React.memo(
             if (sign.isMinusSign) {
                 if (selectionStart === 0) {
                     newValueStr = inputValue;
+
                     if (minusCharIndex === -1 || selectionEnd !== 0) {
                         newValueStr = insertText(inputValue, text, 0, selectionEnd);
                     }
@@ -589,7 +620,9 @@ export const InputNumber = React.memo(
 
             if (textSplit.length === 2) {
                 const decimalCharIndex = value.slice(start, end).search(_decimal.current);
+
                 _decimal.current.lastIndex = 0;
+
                 return decimalCharIndex > 0 ? value.slice(0, start) + formatValue(text) + value.slice(end) : value || formatValue(text);
             } else if (end - start === value.length) {
                 return formatValue(text);
@@ -621,18 +654,22 @@ export const InputNumber = React.memo(
 
             // remove prefix
             let prefixLength = (prefixChar.current || '').length;
+
             inputValue = inputValue.replace(_prefix.current, '');
             selectionStart = selectionStart - prefixLength;
 
             let char = inputValue.charAt(selectionStart);
+
             if (isNumeralChar(char)) {
                 return selectionStart + prefixLength;
             }
 
             //left
             let i = selectionStart - 1;
+
             while (i >= 0) {
                 char = inputValue.charAt(i);
+
                 if (isNumeralChar(char)) {
                     index = i + prefixLength;
                     break;
@@ -645,8 +682,10 @@ export const InputNumber = React.memo(
                 inputRef.current.setSelectionRange(index + 1, index + 1);
             } else {
                 i = selectionStart;
+
                 while (i < valueLength) {
                     char = inputValue.charAt(i);
+
                     if (isNumeralChar(char)) {
                         index = i + prefixLength;
                         break;
@@ -670,6 +709,7 @@ export const InputNumber = React.memo(
         const isNumeralChar = (char) => {
             if (char.length === 1 && (_numeral.current.test(char) || _decimal.current.test(char) || _group.current.test(char) || _minusSign.current.test(char))) {
                 resetRegex();
+
                 return true;
             } else {
                 return false;
@@ -715,6 +755,7 @@ export const InputNumber = React.memo(
 
             if (newValue != null) {
                 let parsedCurrentValue = typeof currentValue === 'string' ? parseValue(currentValue) : currentValue;
+
                 return newValue !== parsedCurrentValue;
             }
 
@@ -754,10 +795,12 @@ export const InputNumber = React.memo(
                 inputEl.setSelectionRange(0, 0);
                 const index = initCursor();
                 const selectionEnd = index + insertedValueStr.length;
+
                 inputEl.setSelectionRange(selectionEnd, selectionEnd);
             } else {
                 let selectionStart = inputEl.selectionStart;
                 let selectionEnd = inputEl.selectionEnd;
+
                 inputEl.value = newValue;
                 let newLength = newValue.length;
 
@@ -766,10 +809,12 @@ export const InputNumber = React.memo(
                     const startValueStr = startValue !== null ? startValue.toString() : '';
                     const startExpr = startValueStr.split('').join(`(${groupChar.current})?`);
                     const sRegex = new RegExp(startExpr, 'g');
+
                     sRegex.test(newValue);
 
                     const tExpr = insertedValueStr.split('').join(`(${groupChar.current})?`);
                     const tRegex = new RegExp(tExpr, 'g');
+
                     tRegex.test(newValue.slice(sRegex.lastIndex));
 
                     selectionEnd = sRegex.lastIndex + tRegex.lastIndex;
@@ -796,6 +841,7 @@ export const InputNumber = React.memo(
                     inputEl.setSelectionRange(0, 0);
                     const index = initCursor();
                     const selectionEnd = index + insertedValueStr.length + 1;
+
                     inputEl.setSelectionRange(selectionEnd, selectionEnd);
                 } else {
                     selectionEnd = selectionEnd + (newLength - currentLength);
@@ -826,6 +872,7 @@ export const InputNumber = React.memo(
         const concatValues = (val1, val2) => {
             if (val1 && val2) {
                 let decimalCharIndex = val2.search(_decimal.current);
+
                 _decimal.current.lastIndex = 0;
 
                 return decimalCharIndex !== -1 ? val1.split(_decimal.current)[0] + val2.slice(decimalCharIndex) : val1;
@@ -872,8 +919,10 @@ export const InputNumber = React.memo(
 
             if (inputRef.current) {
                 let currentValue = inputRef.current.value;
+
                 if (isValueChanged(currentValue, props.value)) {
                     let newValue = validateValue(parseValue(currentValue));
+
                     updateInputValue(newValue);
                     updateModel(event, newValue);
                 }
@@ -890,6 +939,7 @@ export const InputNumber = React.memo(
 
         const changeValue = () => {
             const newValue = validateValue(props.value);
+
             updateInputValue(newValue);
 
             if (props.value !== null && props.value !== newValue) {
@@ -916,6 +966,7 @@ export const InputNumber = React.memo(
             constructParser();
 
             const newValue = validateValue(props.value);
+
             if (props.value !== null && props.value !== newValue) {
                 updateModel(null, newValue);
             }

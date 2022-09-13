@@ -39,19 +39,23 @@ const DataTableExportDemo = () => {
     const importCSV = (e) => {
         const file = e.files[0];
         const reader = new FileReader();
+
         reader.onload = (e) => {
             const csv = e.target.result;
             const data = csv.split('\n');
 
             // Prepare DataTable
             const cols = data[0].replace(/['"]+/g, '').split(',');
+
             data.shift();
 
             let _importedCols = cols.map((col) => ({ field: col, header: toCapitalize(col.replace(/['"]+/g, '')) }));
             let _importedData = data.map((d) => {
                 d = d.split(',');
+
                 return cols.reduce((obj, c, i) => {
                     obj[c] = d[i].replace(/['"]+/g, '');
+
                     return obj;
                 }, {});
             });
@@ -68,6 +72,7 @@ const DataTableExportDemo = () => {
 
         import('xlsx').then((xlsx) => {
             const reader = new FileReader();
+
             reader.onload = (e) => {
                 const wb = xlsx.read(e.target.result, { type: 'array' });
                 const wsname = wb.SheetNames[0];
@@ -76,12 +81,14 @@ const DataTableExportDemo = () => {
 
                 // Prepare DataTable
                 const cols = data[0];
+
                 data.shift();
 
                 let _importedCols = cols.map((col) => ({ field: col, header: toCapitalize(col) }));
                 let _importedData = data.map((d) => {
                     return cols.reduce((obj, c, i) => {
                         obj[c] = d[i];
+
                         return obj;
                     }, {});
                 });
@@ -102,6 +109,7 @@ const DataTableExportDemo = () => {
         import('jspdf').then((jsPDF) => {
             import('jspdf-autotable').then(() => {
                 const doc = new jsPDF.default(0, 0);
+
                 doc.autoTable(exportColumns, products);
                 doc.save('products.pdf');
             });
@@ -116,6 +124,7 @@ const DataTableExportDemo = () => {
                 bookType: 'xlsx',
                 type: 'array'
             });
+
             saveAsExcelFile(excelBuffer, 'products');
         });
     };
@@ -147,6 +156,7 @@ const DataTableExportDemo = () => {
     const onImportSelectionChange = (e) => {
         setSelectedImportedData(e.value);
         const detail = e.value.map((d) => Object.values(d)[0]).join(', ');
+
         toast.current.show({ severity: 'info', summary: 'Data Selected', detail, life: 3000 });
     };
 

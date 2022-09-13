@@ -27,6 +27,7 @@ const TreeContextMenuDemo = () => {
             icon: 'pi pi-cog',
             command: () => {
                 let _expandedKeys = { ...expandedKeys };
+
                 if (_expandedKeys[selectedNodeKey]) delete _expandedKeys[selectedNodeKey];
                 else _expandedKeys[selectedNodeKey] = true;
 

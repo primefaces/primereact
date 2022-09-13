@@ -52,6 +52,7 @@ export const Sidebar = React.forwardRef((props, ref) => {
     const focus = () => {
         const activeElement = document.activeElement;
         const isActiveElementInDialog = activeElement && sidebarRef && sidebarRef.current.contains(activeElement);
+
         if (!isActiveElementInDialog && props.showCloseIcon) {
             closeIconRef.current.focus();
         }
@@ -147,6 +148,7 @@ export const Sidebar = React.forwardRef((props, ref) => {
     const createCloseIcon = () => {
         if (props.showCloseIcon) {
             const ariaLabel = props.ariaCloseLabel || localeOption('close');
+
             return <Button ref={closeIconRef} type="button" className="p-sidebar-close p-sidebar-icon p-link" icon="p-sidebar-close-icon pi pi-times" onClick={onClose} aria-label={ariaLabel} />;
         }
 

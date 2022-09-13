@@ -15,6 +15,7 @@ const TreeTableColTogglerDemo = () => {
     ];
 
     let colOptions = [];
+
     for (let col of columns) {
         colOptions.push({ label: col.header, value: col });
     }

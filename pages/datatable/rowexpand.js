@@ -22,6 +22,7 @@ const DataTableRowExpansionDemo = () => {
     useEffect(() => {
         if (isMounted.current) {
             const summary = expandedRows !== null ? 'All Rows Expanded' : 'All Rows Collapsed';
+
             toast.current.show({ severity: 'success', summary: `${summary}`, life: 3000 });
         }
     }, [expandedRows]);
@@ -41,6 +42,7 @@ const DataTableRowExpansionDemo = () => {
 
     const expandAll = () => {
         let _expandedRows = {};
+
         products.forEach((p) => (_expandedRows[`${p.id}`] = true));
 
         setExpandedRows(_expandedRows);

@@ -30,6 +30,7 @@ export const Paginator = React.memo(
 
             //check when approaching to last page
             let delta = props.pageLinkSize - (end - start + 1);
+
             start = Math.max(0, start - delta);
 
             return [start, end];
@@ -92,6 +93,7 @@ export const Paginator = React.memo(
 
         const onRowsChange = (event) => {
             const rows = event.value;
+
             rppChanged.current = rows !== props.rows;
 
             changePage(0, rows);
@@ -106,6 +108,7 @@ export const Paginator = React.memo(
             if (!rppChanged.current) {
                 changePage(0, props.rows);
             }
+
             rppChanged.current = false;
         }, [props.rows]);
 
@@ -179,6 +182,7 @@ export const Paginator = React.memo(
                     return template.layout
                         ? template.layout.split(' ').map((value) => {
                               const key = value.trim();
+
                               return createElement(key, template[key]);
                           })
                         : Object.entries(template).map(([key, _template]) => {

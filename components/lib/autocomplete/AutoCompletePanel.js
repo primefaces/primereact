@@ -13,6 +13,7 @@ export const AutoCompletePanel = React.memo(
 
         const createGroupChildren = (optionGroup, i, style) => {
             const groupChildren = props.getOptionGroupChildren(optionGroup);
+
             return groupChildren.map((item, j) => {
                 const key = i + '_' + j;
                 const selected = props.selectedItem === item;
@@ -29,6 +30,7 @@ export const AutoCompletePanel = React.memo(
 
         const createItem = (suggestion, index, scrollerOptions = {}) => {
             const style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
+
             if (props.optionGroupLabel) {
                 const content = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, suggestion, index) : props.getOptionGroupLabel(suggestion);
                 const childrenContent = createGroupChildren(suggestion, index, style);
