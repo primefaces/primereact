@@ -206,6 +206,7 @@ interface DataTableRowReorderParams {
 
 interface DataTableRowExpansionTemplate {
     index: number;
+    customRendering: boolean;
 }
 
 interface DataTableRowClassNameOptions {

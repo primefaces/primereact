@@ -903,14 +903,22 @@ export const TableBody = React.memo(
 
         const createExpansion = (rowData, index, expanded, colSpan) => {
             if (expanded && !(isSubheaderGrouping && props.expandableRowGroups)) {
-                const content = ObjectUtils.getJSXElement(props.rowExpansionTemplate, rowData, { index });
                 const id = `${props.tableSelector}_content_${index}_expanded`;
+                const options = { index, customRendering: false };
+                let content = ObjectUtils.getJSXElement(props.rowExpansionTemplate, rowData, options);
 
-                return (
-                    <tr id={id} className="p-datatable-row-expansion" role="row">
+                // check if the user wants complete control of the rendering
+                if (!options.customRendering) {
+                    content = (
                         <td role="cell" colSpan={colSpan}>
                             {content}
                         </td>
+                    );
+                }
+
+                return (
+                    <tr id={id} className="p-datatable-row-expansion" role="row">
+                        {content}
                     </tr>
                 );
             }
