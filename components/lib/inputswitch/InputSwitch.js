@@ -60,6 +60,7 @@ export const InputSwitch = React.memo(
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = ObjectUtils.findDiffKeys(props, InputSwitch.defaultProps);
+        const dataProps = ObjectUtils.reduceKeys(otherProps, 'data');
         const className = classNames(
             'p-inputswitch p-component',
             {
@@ -89,6 +90,7 @@ export const InputSwitch = React.memo(
                             aria-checked={checked}
                             aria-labelledby={props['aria-labelledby']}
                             aria-label={props['aria-label']}
+                            {...dataProps}
                         />
                     </div>
                     <span className="p-inputswitch-slider"></span>
@@ -102,22 +104,22 @@ export const InputSwitch = React.memo(
 InputSwitch.displayName = 'InputSwitch';
 InputSwitch.defaultProps = {
     __TYPE: 'InputSwitch',
-    id: null,
-    inputRef: null,
-    style: null,
-    className: null,
-    inputId: null,
-    name: null,
-    tabIndex: null,
-    checked: false,
-    trueValue: true,
-    falseValue: false,
-    disabled: false,
-    tooltip: null,
-    tooltipOptions: null,
     'aria-label': null,
     'aria-labelledby': null,
+    checked: false,
+    className: null,
+    disabled: false,
+    falseValue: false,
+    id: null,
+    inputId: null,
+    inputRef: null,
+    name: null,
+    onBlur: null,
     onChange: null,
     onFocus: null,
-    onBlur: null
+    style: null,
+    tabIndex: null,
+    tooltip: null,
+    tooltipOptions: null,
+    trueValue: true
 };

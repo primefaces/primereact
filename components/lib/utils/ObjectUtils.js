@@ -99,6 +99,30 @@ export default class ObjectUtils {
             }, {});
     }
 
+    /**
+     * Removes keys from a JSON object that start with a string such as "data" to get all "data-id" type properties.
+     *
+     * @param {any} obj the JSON object to reduce
+     * @param {string} startsWith the string to check if the property starts with this key
+     * @returns the JSON object containing only the key/values that match the startsWith string
+     */
+    static reduceKeys(obj, startsWith) {
+        const result = {};
+
+        if (!obj || !startsWith) {
+            return result;
+        }
+
+        Object.keys(obj)
+            .filter((key) => key.startsWith(startsWith))
+            .forEach(function (key) {
+                result[key] = obj[key];
+                delete obj[key];
+            });
+
+        return result;
+    }
+
     static reorderArray(value, from, to) {
         let target;
 
