@@ -228,8 +228,8 @@ export const Chips = React.memo(
                         onPaste={onPaste}
                         onFocus={onFocus}
                         onBlur={onBlur}
-                        aria-labelledby={props.ariaLabelledBy}
                         readOnly={props.readOnly}
+                        {...ariaProps}
                     />
                 </li>
             );
@@ -257,6 +257,7 @@ export const Chips = React.memo(
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = ObjectUtils.findDiffKeys(props, Chips.defaultProps);
+        const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-chips p-component p-inputwrapper',
             {
