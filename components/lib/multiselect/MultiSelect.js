@@ -567,7 +567,8 @@ export const MultiSelect = React.memo(
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = ObjectUtils.findDiffKeys(props, MultiSelect.defaultProps);
-        const dataProps = ObjectUtils.reduceKeys(otherProps, 'data');
+        const dataProps = ObjectUtils.reduceKeys(otherProps, DomHandler.DATA_PROPS);
+        const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-multiselect p-component p-inputwrapper',
             {
@@ -597,10 +598,10 @@ export const MultiSelect = React.memo(
                             onBlur={onBlur}
                             onKeyDown={onKeyDown}
                             role="listbox"
-                            aria-labelledby={props.ariaLabelledBy}
                             aria-expanded={overlayVisibleState}
                             disabled={props.disabled}
                             tabIndex={props.tabIndex}
+                            {...ariaProps}
                             {...dataProps}
                         />
                     </div>

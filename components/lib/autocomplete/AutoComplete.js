@@ -492,8 +492,6 @@ export const AutoComplete = React.memo(
                     aria-controls={ariaControls}
                     aria-haspopup="listbox"
                     aria-expanded={overlayVisibleState}
-                    aria-labelledby={props['aria-labelledby']}
-                    aria-label={props['aria-label']}
                     className={className}
                     style={props.inputStyle}
                     autoComplete="off"
@@ -513,6 +511,7 @@ export const AutoComplete = React.memo(
                     onContextMenu={props.onContextMenu}
                     onClick={props.onClick}
                     onDoubleClick={props.onDblClick}
+                    {...ariaProps}
                     {...dataProps}
                 />
             );
@@ -550,8 +549,6 @@ export const AutoComplete = React.memo(
                         aria-controls={ariaControls}
                         aria-haspopup="listbox"
                         aria-expanded={overlayVisibleState}
-                        aria-labelledby={props['aria-labelledby']}
-                        aria-label={props['aria-label']}
                         autoComplete="off"
                         tabIndex={props.tabIndex}
                         onChange={onInputChange}
@@ -565,6 +562,7 @@ export const AutoComplete = React.memo(
                         onKeyPress={props.onKeyPress}
                         onFocus={onMultiInputFocus}
                         onBlur={onMultiInputBlur}
+                        {...ariaProps}
                         {...dataProps}
                     />
                 </li>
@@ -611,7 +609,8 @@ export const AutoComplete = React.memo(
         const listId = idState + '_list';
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = ObjectUtils.findDiffKeys(props, AutoComplete.defaultProps);
-        const dataProps = ObjectUtils.reduceKeys(otherProps, 'data');
+        const dataProps = ObjectUtils.reduceKeys(otherProps, DomHandler.DATA_PROPS);
+        const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-autocomplete p-component p-inputwrapper',
             {
@@ -660,8 +659,6 @@ AutoComplete.displayName = 'AutoComplete';
 AutoComplete.defaultProps = {
     __TYPE: 'AutoComplete',
     id: null,
-    'aria-label': null,
-    'aria-labelledby': null,
     appendTo: null,
     autoFocus: false,
     autoHighlight: false,

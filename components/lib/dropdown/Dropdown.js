@@ -661,8 +661,7 @@ export const Dropdown = React.memo(
                         onKeyDown={onInputKeyDown}
                         disabled={props.disabled}
                         tabIndex={props.tabIndex}
-                        aria-label={props.ariaLabel}
-                        aria-labelledby={props.ariaLabelledBy}
+                        {...ariaProps}
                     />
                 </div>
             );
@@ -686,9 +685,8 @@ export const Dropdown = React.memo(
                         onInput={onEditableInputChange}
                         onFocus={onEditableInputFocus}
                         onBlur={onInputBlur}
-                        aria-label={props.ariaLabel}
-                        aria-labelledby={props.ariaLabelledBy}
                         aria-haspopup="listbox"
+                        {...ariaProps}
                     />
                 );
             } else {
@@ -730,7 +728,8 @@ export const Dropdown = React.memo(
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = ObjectUtils.findDiffKeys(props, Dropdown.defaultProps);
-        const dataProps = ObjectUtils.reduceKeys(otherProps, 'data');
+        const dataProps = ObjectUtils.reduceKeys(otherProps, DomHandler.DATA_PROPS);
+        const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-dropdown p-component p-inputwrapper',
             {

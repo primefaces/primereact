@@ -424,21 +424,7 @@ export const Mention = React.memo(
 
         return (
             <div ref={elementRef} id={props.id} className={className} style={props.style}>
-                <InputTextarea
-                    ref={inputRef}
-                    id={props.inputId}
-                    aria-labelledby={props['aria-labelledby']}
-                    aria-label={props['aria-label']}
-                    className={inputClassName}
-                    style={props.inputStyle}
-                    {...inputProps}
-                    onFocus={onFocus}
-                    onBlur={onBlur}
-                    onKeyDown={onKeyDown}
-                    onInput={onInput}
-                    onKeyUp={onKeyUp}
-                    onChange={onChange}
-                />
+                <InputTextarea ref={inputRef} id={props.inputId} className={inputClassName} style={props.inputStyle} {...inputProps} onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown} onInput={onInput} onKeyUp={onKeyUp} onChange={onChange} />
                 {panel}
             </div>
         );
@@ -448,33 +434,31 @@ export const Mention = React.memo(
 Mention.displayName = 'Mention';
 Mention.defaultProps = {
     __TYPE: 'Mention',
+    autoHighlight: true,
+    className: null,
+    delay: 0,
+    field: null,
+    footerTemplate: null,
+    headerTemplate: null,
     id: null,
+    inputClassName: null,
     inputId: null,
     inputRef: null,
-    style: null,
-    className: null,
-    trigger: '@',
-    suggestions: null,
-    field: null,
     inputStyle: null,
-    inputClassName: null,
+    itemTemplate: null,
     panelClassName: null,
     panelStyle: null,
     scrollHeight: '200px',
-    autoHighlight: true,
-    delay: 0,
-    headerTemplate: null,
-    footerTemplate: null,
-    itemTemplate: null,
-    'aria-label': null,
-    'aria-labelledby': null,
+    style: null,
+    suggestions: null,
     transitionOptions: null,
+    trigger: '@',
+    onBlur: null,
     onChange: null,
+    onFocus: null,
+    onHide: null,
     onInput: null,
     onSearch: null,
     onSelect: null,
-    onFocus: null,
-    onBlur: null,
-    onShow: null,
-    onHide: null
+    onShow: null
 };

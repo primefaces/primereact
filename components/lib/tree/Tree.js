@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { UITreeNode } from './UITreeNode';
 
 export const Tree = React.memo(
@@ -349,7 +349,7 @@ export const Tree = React.memo(
                 const contentClass = classNames('p-tree-container', props.contentClassName);
 
                 return (
-                    <ul className={contentClass} role="tree" aria-label={props.ariaLabel} aria-labelledby={props.ariaLabelledBy} style={props.contentStyle}>
+                    <ul className={contentClass} role="tree" style={props.contentStyle} {...ariaProps}>
                         {rootNodes}
                     </ul>
                 );
@@ -446,6 +446,7 @@ export const Tree = React.memo(
         };
 
         const otherProps = ObjectUtils.findDiffKeys(props, Tree.defaultProps);
+        const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames('p-tree p-component', props.className, {
             'p-tree-selectable': props.selectionMode,
             'p-tree-loading': props.loading,

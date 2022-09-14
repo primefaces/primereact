@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FilterService } from '../api/Api';
 import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { ListBoxHeader } from './ListBoxHeader';
 import { ListBoxItem } from './ListBoxItem';
@@ -358,7 +358,7 @@ export const ListBox = React.memo(
                             const className = classNames('p-listbox-list', option.className);
 
                             return (
-                                <ul ref={option.contentRef} className={className} role="listbox" aria-multiselectable={props.multiple} aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}>
+                                <ul ref={option.contentRef} className={className} role="listbox" aria-multiselectable={props.multiple} {...ariaProps}>
                                     {option.children}
                                 </ul>
                             );
@@ -371,7 +371,7 @@ export const ListBox = React.memo(
                 const items = createItems();
 
                 return (
-                    <ul className="p-listbox-list" role="listbox" aria-multiselectable={props.multiple} aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}>
+                    <ul className="p-listbox-list" role="listbox" aria-multiselectable={props.multiple} {...ariaProps}>
                         {items}
                     </ul>
                 );
@@ -382,6 +382,7 @@ export const ListBox = React.memo(
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = ObjectUtils.findDiffKeys(props, ListBox.defaultProps);
+        const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-listbox p-component',
             {
@@ -440,8 +441,6 @@ ListBox.defaultProps = {
     tabIndex: 0,
     tooltip: null,
     tooltipOptions: null,
-    'aria-label': null,
-    'aria-labelledby': null,
     onChange: null,
     onFilterValueChange: null
 };

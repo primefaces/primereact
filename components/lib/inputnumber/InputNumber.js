@@ -1017,7 +1017,7 @@ export const InputNumber = React.memo(
                     aria-valuemin={props.min}
                     aria-valuemax={props.max}
                     aria-valuenow={props.value}
-                    aria-labelledby={props.ariaLabelledBy}
+                    {...ariaProps}
                     {...dataProps}
                 />
             );
@@ -1106,7 +1106,8 @@ export const InputNumber = React.memo(
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = ObjectUtils.findDiffKeys(props, InputNumber.defaultProps);
-        const dataProps = ObjectUtils.reduceKeys(otherProps, 'data');
+        const dataProps = ObjectUtils.reduceKeys(otherProps, DomHandler.DATA_PROPS);
+        const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-inputnumber p-component p-inputwrapper',
             {

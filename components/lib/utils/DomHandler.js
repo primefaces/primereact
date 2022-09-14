@@ -1,4 +1,13 @@
 export default class DomHandler {
+    /**
+     * All data- properties like data-test-id
+     */
+    static DATA_PROPS = ['data-'];
+    /**
+     * All ARIA properties like aria-label and focus-target for https://www.npmjs.com/package/@q42/floating-focus-a11y
+     */
+    static ARIA_PROPS = ['aria', 'focus-target'];
+
     static innerWidth(el) {
         if (el) {
             let width = el.offsetWidth;

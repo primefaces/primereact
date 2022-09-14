@@ -348,8 +348,7 @@ export const TreeSelect = React.memo(
                         onKeyDown={onInputKeyDown}
                         disabled={props.disabled}
                         tabIndex={props.tabIndex}
-                        aria-label={props.ariaLabel}
-                        aria-labelledby={props.ariaLabelledBy}
+                        {...ariaProps}
                     />
                 </div>
             );
@@ -507,6 +506,7 @@ export const TreeSelect = React.memo(
         const selectedNodes = getSelectedNodes();
 
         const otherProps = ObjectUtils.findDiffKeys(props, TreeSelect.defaultProps);
+        const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-treeselect p-component p-inputwrapper',
             {

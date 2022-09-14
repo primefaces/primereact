@@ -229,7 +229,7 @@ export const CascadeSelect = React.memo(
                         onKeyDown={onInputKeyDown}
                         tabIndex={props.tabIndex}
                         aria-haspopup="listbox"
-                        aria-labelledby={props.ariaLabelledBy}
+                        {...ariaProps}
                     />
                 </div>
             );
@@ -299,7 +299,6 @@ export const CascadeSelect = React.memo(
         };
 
         const createElement = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, CascadeSelect.defaultProps);
             const className = classNames(
                 'p-cascadeselect p-component p-inputwrapper',
                 {
@@ -326,6 +325,9 @@ export const CascadeSelect = React.memo(
             );
         };
 
+        const otherProps = ObjectUtils.findDiffKeys(props, CascadeSelect.defaultProps);
+        const dataProps = ObjectUtils.reduceKeys(otherProps, DomHandler.DATA_PROPS);
+        const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const element = createElement();
 
         return element;
