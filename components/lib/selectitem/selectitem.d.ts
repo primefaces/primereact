@@ -1,6 +1,6 @@
 import { IconType } from '../utils';
 
-export type SelectItemOptionsType = SelectItem[] | any[];
+export type SelectItemOptionsType<TOption> = SelectItem[] | TOption[];
 
 export interface SelectItem {
     label?: string;
@@ -10,3 +10,7 @@ export interface SelectItem {
     title?: string;
     disabled?: boolean;
 }
+
+export type NestedKeyOf<ObjectType> = {
+    [Key in keyof ObjectType & (string | number)]: ObjectType extends any[] ? 'length' : ObjectType[Key] extends object ? `${Key}` | `${Key}.${NestedKeyOf<ObjectType[Key]>}` : `${Key}`;
+}[keyof ObjectType & (string | number)];

@@ -20,7 +20,7 @@ export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.I
     className?: string;
     value?: any;
     name?: string;
-    options?: SelectItemOptionsType;
+    options?: SelectItemOptionsType<any>;
     optionLabel?: string;
     optionValue?: string;
     optionGroupLabel?: string;
