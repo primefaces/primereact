@@ -13,7 +13,7 @@ interface EditorSelectionChangeParams {
     source: string;
 }
 
-export interface EditorProps extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+export interface EditorProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     id?: string;
     value?: string;
     style?: object;
