@@ -16,7 +16,7 @@ interface RatingChangeParams {
     target: RatingChangeTargetOptions;
 }
 
-export interface RatingProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange'> {
+export interface RatingProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
     value?: number;
     disabled?: boolean;
     readOnly?: boolean;
