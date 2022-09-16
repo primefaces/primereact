@@ -610,7 +610,7 @@ export const BodyCell = React.memo((props) => {
                 rowEditorProps['element'] = content;
                 content = ObjectUtils.getJSXElement(body, props.rowData, { column: props.column, field: field, rowIndex: props.rowIndex, frozenRow: props.frozenRow, props: props.tableProps, rowEditor: rowEditorProps });
             }
-        } else if (body && !editingState) {
+        } else if (body && (!editingState || !editor)) {
             content = body ? ObjectUtils.getJSXElement(body, props.rowData, { column: props.column, field: field, rowIndex: props.rowIndex, frozenRow: props.frozenRow, props: props.tableProps }) : value;
         } else if (editor && editingState) {
             content = ObjectUtils.getJSXElement(editor, {
