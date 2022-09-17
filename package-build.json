@@ -34,6 +34,8 @@
     "jsdelivr": "primereact.all.min.js",
     "main": "primereact.all.min.js",
     "module": "primereact.all.esm.min.js",
+    "web-types": "web-types.json",
+    "types": "index.d.ts",
     "peerDependencies": {
         "@types/react": "^17.0.0 || ^18.0.0",
         "react": "^17.0.0 || ^18.0.0",
