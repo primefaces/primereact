@@ -1,77 +1,33 @@
 import * as React from 'react';
-import { NestedKeyOf, SelectItemOptionsType } from '../selectitem/selectitem';
+import { SelectItemOptionsType } from '../selectitem/selectitem';
 import TooltipOptions from '../tooltip/tooltipoptions';
 import { VirtualScrollerProps, VirtualScroller } from '../virtualscroller';
 
-type ListBoxOptionGroupTemplateType<TOption> = React.ReactNode | ((option: TOption, index: number) => React.ReactNode);
+type ListBoxOptionGroupTemplateType = React.ReactNode | ((option: any, index: number) => React.ReactNode);
 
-type ListBoxItemTemplateType<TOption> = React.ReactNode | ((option: TOption) => React.ReactNode);
+type ListBoxItemTemplateType = React.ReactNode | ((option: any) => React.ReactNode);
 
 type ListBoxFilterTemplateType = React.ReactNode | ((options: ListBoxFilterOptions) => React.ReactNode);
 
-type ListBoxOptionDisabledType<TOption> = string | ((option: TOption) => boolean);
+type ListBoxOptionDisabledType = string | ((option: any) => boolean);
 
-type ListBoxValueType<TOption, TValue, TMultiple, TGroupLabel, TGroupChildren> = TMultiple extends undefined
-    ? TGroupLabel extends undefined
-        ? TValue extends undefined
-            ? TOption extends { value: any }
-                ? TOption['value']
-                : TOption
-            : TValue extends keyof TOption
-            ? TOption[TValue]
-            : any
-        : TGroupChildren extends keyof TOption
-        ? TValue extends undefined
-            ? TOption[TGroupChildren] extends { value: any }[]
-                ? TOption[TGroupChildren][0]['value']
-                : TOption[TGroupChildren] extends any[]
-                ? TOption[TGroupChildren][0]
-                : any
-            : TOption[TGroupChildren] extends any[]
-            ? TValue extends keyof TOption[TGroupChildren][0]
-                ? TOption[TGroupChildren][0][TValue]
-                : any
-            : any
-        : any
-    : TGroupLabel extends undefined
-    ? TValue extends undefined
-        ? TOption extends { value: any }
-            ? TOption['value'][]
-            : TOption[]
-        : TValue extends keyof TOption
-        ? TOption[TValue][]
-        : any[]
-    : TGroupChildren extends keyof TOption
-    ? TValue extends undefined
-        ? TOption[TGroupChildren] extends { value: any }[]
-            ? TOption[TGroupChildren][0]['value'][]
-            : TOption[TGroupChildren] extends any[]
-            ? TOption[TGroupChildren][0]
-            : any[]
-        : TOption[TGroupChildren] extends any[]
-        ? TValue extends keyof TOption[TGroupChildren][0]
-            ? TOption[TGroupChildren][0][TValue][]
-            : any[]
-        : any[]
-    : any[];
-
-interface ListBoxChangeTargetOptions<TOption> {
+interface ListBoxChangeTargetOptions {
     name: string;
     id: string;
-    value: TOption;
+    value: any;
 }
 
-interface ListBoxChangeParams<TOption, TValue, TMultiple, TGroupLabel, TGroupChildren> {
+interface ListBoxChangeParams {
     originalEvent: React.SyntheticEvent;
-    value: ListBoxValueType<TOption, TValue, TMultiple, TGroupLabel, TGroupChildren>;
+    value: any;
     stopPropagation(): void;
     preventDefault(): void;
-    target: ListBoxChangeTargetOptions<TOption>;
+    target: ListBoxChangeTargetOptions;
 }
 
-interface ListBoxFilterValueChangeParams<TOption> {
+interface ListBoxFilterValueChangeParams {
     originalEvent: React.SyntheticEvent;
-    value: TOption;
+    value: any;
 }
 
 interface ListBoxFilterOptions {
@@ -79,24 +35,23 @@ interface ListBoxFilterOptions {
     reset?: () => void;
 }
 
-export interface ListBoxProps<TOption, TValue = undefined, TMultiple = undefined, TGroupLabel = undefined, TGroupChildren = undefined>
-    extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'multiple' | 'value' | 'onChange' | 'ref'> {
-    value?: ReadonlyArray<string> | ListBoxValueType<TOption, TValue, TMultiple, TGroupLabel, TGroupChildren>;
-    options?: SelectItemOptionsType<TOption>;
-    optionLabel?: NestedKeyOf<TOption> | Omit<NestedKeyOf<TOption>, string>;
-    optionValue?: TValue | Omit<TValue, string>;
-    optionDisabled?: ListBoxOptionDisabledType<TOption>;
-    optionGroupLabel?: TGroupLabel | Omit<NestedKeyOf<TGroupLabel>, string>;
-    optionGroupChildren?: TGroupChildren | Omit<NestedKeyOf<TGroupChildren>, string>;
-    optionGroupTemplate?: ListBoxOptionGroupTemplateType<TOption>;
-    itemTemplate?: ListBoxItemTemplateType<TOption>;
+export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
+    value?: any;
+    options?: SelectItemOptionsType;
+    optionLabel?: string;
+    optionValue?: string;
+    optionDisabled?: ListBoxOptionDisabledType;
+    optionGroupLabel?: string;
+    optionGroupChildren?: string;
+    optionGroupTemplate?: ListBoxOptionGroupTemplateType;
+    itemTemplate?: ListBoxItemTemplateType;
     filterTemplate?: ListBoxFilterTemplateType;
     listStyle?: object;
     listClassName?: string;
     virtualScrollerOptions?: VirtualScrollerProps;
     disabled?: boolean;
-    dataKey?: NestedKeyOf<TOption> | Omit<NestedKeyOf<TOption>, string>;
-    multiple?: TMultiple;
+    dataKey?: string;
+    multiple?: boolean;
     metaKeySelection?: boolean;
     filter?: boolean;
     filterBy?: string;
@@ -108,18 +63,12 @@ export interface ListBoxProps<TOption, TValue = undefined, TMultiple = undefined
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
-    onChange?(e: ListBoxChangeParams<TOption, TValue, TMultiple, TGroupLabel, TGroupChildren>): void;
-    onFilterValueChange?(e: ListBoxFilterValueChangeParams<TOption>): void;
+    onChange?(e: ListBoxChangeParams): void;
+    onFilterValueChange?(e: ListBoxFilterValueChangeParams): void;
     children?: React.ReactNode;
 }
 
-export declare class ListBox<
-    TOption,
-    TValue extends NestedKeyOf<TOption> | undefined = undefined,
-    TMultiple = undefined,
-    TGroupLabel extends NestedKeyOf<TOption> | undefined = undefined,
-    TGroupChildren extends NestedKeyOf<TOption> | undefined = undefined
-> extends React.Component<ListBoxProps<TOption, TValue, TMultiple, TGroupLabel, TGroupChildren>, any> {
+export declare class ListBox extends React.Component<ListBoxProps, any> {
     public getElement(): HTMLDivElement;
     public getVirtualScroller(): VirtualScroller;
 }

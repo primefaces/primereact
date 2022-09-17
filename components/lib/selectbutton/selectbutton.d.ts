@@ -1,59 +1,42 @@
-import { NestedKeyOf } from './../selectitem/selectitem.d';
 import * as React from 'react';
-import { SelectItemOptionsType } from '../selectitem/selectitem';
 import TooltipOptions from '../tooltip/tooltipoptions';
+import { SelectItemOptionsType } from '../selectitem/selectitem';
 
-type SelectButtonOptionDisabledType<TOption> = string | ((option: TOption) => boolean);
+type SelectButtonOptionDisabledType = string | ((option: any) => boolean);
 
-interface SelectButtonChangeTargetOptions<TOption> {
+interface SelectButtonChangeTargetOptions {
     name: string;
     id: string;
-    value: TOption;
+    value: any;
 }
 
-type SelectButtonValue<TOption, TValue, TMultiple> = TMultiple extends undefined
-    ? TValue extends undefined
-        ? TOption extends { value: any }
-            ? TOption['value']
-            : TOption
-        : TValue extends keyof TOption
-        ? TOption[TValue]
-        : any
-    : TValue extends undefined
-    ? TOption extends { value: any }
-        ? TOption['value'][]
-        : TOption[]
-    : TValue extends keyof TOption
-    ? TOption[TValue][]
-    : any[];
-
-interface SelectButtonChangeParams<TOption, TValue, TMultiple> {
+interface SelectButtonChangeParams {
     originalEvent: React.SyntheticEvent;
-    value: SelectButtonValue<TOption, TValue, TMultiple>;
+    value: any;
     stopPropagation(): void;
     preventDefault(): void;
-    target: SelectButtonChangeTargetOptions<TOption>;
+    target: SelectButtonChangeTargetOptions;
 }
 
-export interface SelectButtonProps<TOption, TValue = undefined, TMultiple = undefined> extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'value' | 'multiple' | 'unselectable' | 'onChange' | 'ref'> {
-    value?: string | number | ReadonlyArray<string> | ReadonlyArray<number> | SelectButtonValue<TOption, TValue, TMultiple> | ReadonlyArray<TOption> | undefined;
-    options?: SelectItemOptionsType<TOption>;
-    optionLabel?: NestedKeyOf<TOption> | Omit<NestedKeyOf<TOption>, string>;
-    optionValue?: TValue | Omit<TValue, string>;
-    optionDisabled?: SelectButtonOptionDisabledType<TOption>;
+export interface SelectButtonProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'unselectable' | 'onChange' | 'ref'> {
+    value?: any;
+    options?: SelectItemOptionsType;
+    optionLabel?: string;
+    optionValue?: string;
+    optionDisabled?: SelectButtonOptionDisabledType;
     tabIndex?: number;
-    multiple?: TMultiple;
+    multiple?: boolean;
     unselectable?: boolean;
     disabled?: boolean;
-    dataKey?: NestedKeyOf<TOption> | Omit<NestedKeyOf<TOption>, string>;
+    dataKey?: string;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
-    itemTemplate?(option: TOption): React.ReactNode;
-    onChange?(e: SelectButtonChangeParams<TOption, TValue, TMultiple>): void;
+    itemTemplate?(option: any): React.ReactNode;
+    onChange?(e: SelectButtonChangeParams): void;
     children?: React.ReactNode;
 }
 
-export declare class SelectButton<TOption, TValue extends NestedKeyOf<TOption> | undefined = undefined, TMultiple = undefined> extends React.Component<SelectButtonProps<TOption, TValue, TMultiple>, any> {
+export declare class SelectButton extends React.Component<SelectButtonProps, any> {
     public getElement(): HTMLDivElement;
 }
