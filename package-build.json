@@ -33,6 +33,7 @@
     "unpkg": "primereact.all.min.js",
     "jsdelivr": "primereact.all.min.js",
     "main": "primereact.all.min.js",
+    "module": "primereact.all.esm.min.js",
     "web-types": "web-types.json",
     "types": "index.d.ts",
     "peerDependencies": {

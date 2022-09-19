@@ -13,7 +13,7 @@ export const Messages = React.memo(
 
         const show = (value) => {
             if (value) {
-                const messages = assignIdentifiers(value, true);
+                let messages = assignIdentifiers(value, true);
 
                 if (Array.isArray(value)) {
                     for (let i = 0; i < value.length; i++) {
