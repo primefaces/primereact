@@ -261,10 +261,6 @@ dependencies: {
                                 <td>Quill.js</td>
                             </tr>
                             <tr>
-                                <td>FullCalendar*</td>
-                                <td>FullCalendar 4.0 Alpha.2+</td>
-                            </tr>
-                            <tr>
                                 <td>DataView</td>
                                 <td>PrimeFlex</td>
                             </tr>
