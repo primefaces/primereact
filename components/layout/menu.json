@@ -114,7 +114,8 @@
                 {
                     "name": "Figma",
                     "to": "/uikit",
-                    "meta": ["figma"]
+                    "meta": ["figma"],
+                    "badge": "new"
                 }
             ]
         },
@@ -164,7 +165,7 @@
             "meta": ["primeicons"],
             "children": [
                 {
-                    "name": "Icons v6.0",
+                    "name": "Icons v6",
                     "to": "/icons",
                     "meta": ["icons"],
                     "badge": "new"
