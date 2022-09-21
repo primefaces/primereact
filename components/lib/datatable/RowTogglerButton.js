@@ -14,7 +14,7 @@ export const RowTogglerButton = React.memo((props) => {
     const iconClassName = classNames('p-row-toggler-icon', props.expanded ? props.expandedRowIcon : props.collapsedRowIcon);
     const label = props.expanded ? ariaLabel('collapseLabel') : ariaLabel('expandLabel');
 
-    return <Button className="p-row-toggler p-link" onClick={onClick} type="button" icon={iconClassName} tabIndex={props.tabIndex} ariaLabel={label} />;
+    return <Button className="p-row-toggler p-link" onClick={onClick} type="button" icon={iconClassName} tabIndex={props.tabIndex} aria-label={label} />;
 });
 
 RowTogglerButton.displayName = 'RowTogglerButton';

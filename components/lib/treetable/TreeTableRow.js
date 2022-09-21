@@ -272,7 +272,7 @@ export const TreeTableRow = React.memo((props) => {
         const iconClassName = classNames('p-treetable-toggler-icon pi pi-fw', { 'pi-chevron-right': !expanded, 'pi-chevron-down': expanded });
         const style = { marginLeft: props.level * 16 + 'px', visibility: props.node.leaf === false || (props.node.children && props.node.children.length) ? 'visible' : 'hidden' };
 
-        return <Button type="button" className="p-treetable-toggler p-link p-unselectable-text" style={style} tabIndex={-1} onClick={onTogglerClick} icon={iconClassName} ariaLabel={label} />;
+        return <Button type="button" className="p-treetable-toggler p-link p-unselectable-text" style={style} tabIndex={-1} onClick={onTogglerClick} icon={iconClassName} aria-label={label} />;
     };
 
     const createCheckbox = () => {

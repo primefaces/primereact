@@ -87,5 +87,6 @@ Button.defaultProps = {
     tooltipOptions: null,
     disabled: false,
     loading: false,
-    loadingIcon: 'pi pi-spinner pi-spin'
+    loadingIcon: 'pi pi-spinner pi-spin',
+    visible: true
 };
