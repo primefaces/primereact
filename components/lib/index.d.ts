@@ -34,7 +34,6 @@ export * from './dropdown/dropdown';
 export * from './editor/editor';
 export * from './fieldset/fieldset';
 export * from './fileupload/fileupload';
-export * from './fullcalendar/fullcalendar';
 export * from './galleria/galleria';
 export * from './gmap/gmap';
 export * from './hooks/hooks';
