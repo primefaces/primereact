@@ -1886,8 +1886,10 @@ multiSortMeta.push({field: 'name', order: -1});
                     <CodeHighlight lang="js">
                         {`
 const mysort = (event) => {
+    //event.data = Data
     //event.field = Field to sort
     //event.order = Sort order
+    //event.multiSortMeta = An array of SortMeta objects to sort the data by default in multiple sort mode.
 }
 `}
                     </CodeHighlight>
