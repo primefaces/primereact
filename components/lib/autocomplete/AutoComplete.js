@@ -588,7 +588,7 @@ export const AutoComplete = React.memo(
             if (props.dropdown) {
                 const ariaLabel = props.dropdownAriaLabel || props.placeholder || localeOption('choose');
 
-                return <Button type="button" icon={props.dropdownIcon} className="p-autocomplete-dropdown" disabled={props.disabled} onClick={onDropdownClick} aria-label={ariaLabel} />;
+                return <Button ariaButton icon={props.dropdownIcon} className="p-autocomplete-dropdown" disabled={props.disabled} onClick={onDropdownClick} aria-label={ariaLabel} />;
             }
 
             return null;

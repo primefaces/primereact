@@ -217,7 +217,7 @@ export const SpeedDial = React.memo(
                 [`${props.hideIcon}`]: visible && !!props.hideIcon
             });
             const icon = IconUtils.getJSXIcon(showIconVisible ? props.showIcon : hideIconVisible ? props.hideIcon : null, undefined, { props });
-            const content = <Button type="button" style={props.buttonStyle} className={className} icon={icon} onClick={onClick} disabled={props.disabled} aria-label={props['aria-label']} />;
+            const content = <Button ariaButton style={props.buttonStyle} className={className} icon={icon} onClick={onClick} disabled={props.disabled} aria-label={props['aria-label']} />;
 
             if (props.buttonTemplate) {
                 const defaultContentOptions = {

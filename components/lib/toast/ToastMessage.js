@@ -60,7 +60,7 @@ export const ToastMessage = React.memo(
 
         const createCloseIcon = () => {
             if (closable !== false) {
-                return <Button type="button" className="p-toast-icon-close p-link" icon="p-toast-icon-close-icon pi pi-times" onClick={onClose} aria-label={localeOption('close')} />;
+                return <Button ariaButton className="p-toast-icon-close p-link" icon="p-toast-icon-close-icon pi pi-times" onClick={onClose} aria-label={localeOption('close')} />;
             }
 
             return null;

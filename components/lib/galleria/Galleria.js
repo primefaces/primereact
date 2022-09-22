@@ -148,7 +148,7 @@ export const Galleria = React.memo(
                 indicatorPosClassName
             );
 
-            const closeIcon = props.fullScreen && <Button type="button" className="p-galleria-close p-link" icon="p-galleria-close-icon pi pi-times" onClick={hide} aria-label={localeOption('close')} />;
+            const closeIcon = props.fullScreen && <Button ariaButton className="p-galleria-close p-link" icon="p-galleria-close-icon pi pi-times" onClick={hide} aria-label={localeOption('close')} />;
 
             const header = createHeader();
             const footer = createFooter();

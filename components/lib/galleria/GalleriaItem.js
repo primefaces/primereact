@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { ariaLabel } from '../api/Api';
+import { Button } from '../button/Button';
 import { useMountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames } from '../utils/Utils';
@@ -85,12 +87,7 @@ export const GalleriaItem = React.memo(
                     'p-disabled': isDisabled
                 });
 
-                return (
-                    <button type="button" className={buttonClassName} onClick={navBackward} disabled={isDisabled}>
-                        <span className="p-galleria-item-prev-icon pi pi-chevron-left"></span>
-                        <Ripple />
-                    </button>
-                );
+                return <Button ariaButton className={buttonClassName} icon="p-galleria-item-prev-icon pi pi-chevron-left" onClick={navBackward} disabled={isDisabled} aria-label={ariaLabel('previousPageLabel')} />;
             }
 
             return null;
@@ -103,12 +100,7 @@ export const GalleriaItem = React.memo(
                     'p-disabled': isDisabled
                 });
 
-                return (
-                    <button type="button" className={buttonClassName} onClick={navForward} disabled={isDisabled}>
-                        <span className="p-galleria-item-next-icon pi pi-chevron-right"></span>
-                        <Ripple />
-                    </button>
-                );
+                return <Button ariaButton className={buttonClassName} icon="p-galleria-item-next-icon pi pi-chevron-right" onClick={navForward} disabled={isDisabled} aria-label={ariaLabel('previousPageLabel')} />;
             }
 
             return null;

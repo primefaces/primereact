@@ -34,7 +34,7 @@ export const UIMessage = React.memo(
             if (closable !== false) {
                 const ariaLabel = localeOption('close');
 
-                return <Button type="button" className="p-message-close p-link" icon="p-message-close-icon pi pi-times" onClick={onClose} aria-label={ariaLabel} />;
+                return <Button ariaButton className="p-message-close p-link" icon="p-message-close-icon pi pi-times" onClick={onClose} aria-label={ariaLabel} />;
             }
 
             return null;

@@ -62,7 +62,7 @@ export const MultiSelectHeader = React.memo((props) => {
 
     const filterElement = createFilterElement();
     const checkboxElement = props.showSelectAll && <Checkbox checked={props.selectAll} onChange={onSelectAll} role="checkbox" aria-checked={props.selectAll} />;
-    const closeElement = <Button type="button" className="p-multiselect-close p-link" icon="p-multiselect-close-icon pi pi-times" onClick={props.onClose} aria-label={localeOption('close')} />;
+    const closeElement = <Button ariaButton className="p-multiselect-close p-link" icon="p-multiselect-close-icon pi pi-times" onClick={props.onClose} aria-label={localeOption('close')} />;
     const element = (
         <div className="p-multiselect-header">
             {checkboxElement}

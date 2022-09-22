@@ -17,15 +17,21 @@ export const Button = React.memo(
 
         const createIcon = () => {
             const icon = props.loading ? props.loadingIcon : props.icon;
-            const className = classNames('p-button-icon p-c', {
-                'p-button-loading-icon': props.loading,
-                [`p-button-icon-${props.iconPos}`]: props.label
-            });
+            const className = props.ariaButton
+                ? ''
+                : classNames('p-button-icon p-c', {
+                      'p-button-loading-icon': props.loading,
+                      [`p-button-icon-${props.iconPos}`]: props.label
+                  });
 
             return IconUtils.getJSXIcon(icon, { className }, { props });
         };
 
         const createLabel = () => {
+            if (props.ariaButton) {
+                return null;
+            }
+
             if (props.label) {
                 return <span className="p-button-label p-c">{props.label}</span>;
             }
@@ -46,14 +52,18 @@ export const Button = React.memo(
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const disabled = props.disabled || props.loading;
         const otherProps = ObjectUtils.findDiffKeys(props, Button.defaultProps);
-        const className = classNames('p-button p-component', props.className, {
-            'p-button-icon-only': (props.icon || (props.loading && props.loadingIcon)) && !props.label,
-            'p-button-vertical': (props.iconPos === 'top' || props.iconPos === 'bottom') && props.label,
-            'p-disabled': disabled,
-            'p-button-loading': props.loading,
-            'p-button-loading-label-only': props.loading && !props.icon && props.label,
-            [`p-button-loading-${props.iconPos}`]: props.loading && props.loadingIcon && props.label
-        });
+        const className = props.ariaButton
+            ? props.className
+            : classNames('p-button p-component', props.className, {
+                  'p-button-icon-only': (props.icon || (props.loading && props.loadingIcon)) && !props.label,
+                  'p-button-vertical': (props.iconPos === 'top' || props.iconPos === 'bottom') && props.label,
+                  'p-disabled': disabled,
+                  'p-button-loading': props.loading,
+                  'p-button-loading-label-only': props.loading && !props.icon && props.label,
+                  [`p-button-loading-${props.iconPos}`]: props.loading && props.loadingIcon && props.label
+              });
+
+        props.ariaButton ? (otherProps['type'] = 'button') : null;
 
         const icon = createIcon();
         const label = createLabel();
@@ -78,15 +88,16 @@ export const Button = React.memo(
 Button.displayName = 'Button';
 Button.defaultProps = {
     __TYPE: 'Button',
-    label: null,
-    icon: null,
-    iconPos: 'left',
+    ariaButton: false,
     badge: null,
     badgeClassName: null,
-    tooltip: null,
-    tooltipOptions: null,
     disabled: false,
+    icon: null,
+    iconPos: 'left',
+    label: null,
     loading: false,
     loadingIcon: 'pi pi-spinner pi-spin',
+    tooltip: null,
+    tooltipOptions: null,
     visible: true
 };

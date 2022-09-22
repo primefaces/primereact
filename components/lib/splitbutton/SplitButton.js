@@ -192,5 +192,6 @@ SplitButton.defaultProps = {
     dropdownIcon: 'pi pi-chevron-down',
     onClick: null,
     onShow: null,
-    onHide: null
+    onHide: null,
+    visible: true
 };

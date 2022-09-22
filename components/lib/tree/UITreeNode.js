@@ -578,7 +578,7 @@ export const UITreeNode = React.memo((props) => {
     const createToggler = () => {
         const label = expanded ? ariaLabel('collapseLabel') : ariaLabel('expandLabel');
         const iconClassName = classNames('p-tree-toggler-icon pi pi-fw', { 'pi-chevron-right': !expanded, 'pi-chevron-down': expanded });
-        let content = <Button type="button" className="p-tree-toggler p-link" tabIndex={-1} onClick={onTogglerClick} icon={iconClassName} aria-label={label} />;
+        let content = <Button ariaButton className="p-tree-toggler p-link" tabIndex={-1} onClick={onTogglerClick} icon={iconClassName} aria-label={label} />;
 
         if (props.togglerTemplate) {
             const defaultContentOptions = {

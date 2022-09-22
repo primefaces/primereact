@@ -420,7 +420,7 @@ export const Dialog = React.forwardRef((props, ref) => {
         if (props.closable) {
             const ariaLabel = props.ariaCloseIconLabel || localeOption('close');
 
-            return <Button ref={closeRef} type="button" className="p-dialog-header-icon p-dialog-header-close p-link" icon="p-dialog-header-close-icon pi pi-times" onClick={onClose} aria-label={ariaLabel} />;
+            return <Button ref={closeRef} ariaButton className="p-dialog-header-icon p-dialog-header-close p-link" icon="p-dialog-header-close-icon pi pi-times" onClick={onClose} aria-label={ariaLabel} />;
         }
 
         return null;

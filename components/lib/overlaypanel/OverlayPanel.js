@@ -188,7 +188,7 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
         if (props.showCloseIcon) {
             const ariaLabel = props.ariaCloseLabel || localeOption('close');
 
-            return <Button type="button" className="p-overlaypanel-close p-link" icon="p-overlaypanel-close-icon pi pi-times" onClick={onCloseClick} aria-label={ariaLabel} />;
+            return <Button ariaButton className="p-overlaypanel-close p-link" icon="p-overlaypanel-close-icon pi pi-times" onClick={onCloseClick} aria-label={ariaLabel} />;
         }
 
         return null;

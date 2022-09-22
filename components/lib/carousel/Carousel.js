@@ -479,7 +479,7 @@ export const Carousel = React.memo(
                     'pi-chevron-up': isVertical
                 });
 
-                return <Button type="button" className={className} icon={iconClassName} onClick={navBackward} disabled={isDisabled} aria-label={ariaLabel('previousPageLabel')} />;
+                return <Button ariaButton className={className} icon={iconClassName} onClick={navBackward} disabled={isDisabled} aria-label={ariaLabel('previousPageLabel')} />;
             }
 
             return null;
@@ -496,7 +496,7 @@ export const Carousel = React.memo(
                     'pi-chevron-down': isVertical
                 });
 
-                return <Button type="button" className={className} icon={iconClassName} onClick={navForward} disabled={isDisabled} aria-label={ariaLabel('nextPageLabel')} />;
+                return <Button ariaButton className={className} icon={iconClassName} onClick={navForward} disabled={isDisabled} aria-label={ariaLabel('nextPageLabel')} />;
             }
 
             return null;
@@ -511,7 +511,7 @@ export const Carousel = React.memo(
 
             return (
                 <li key={key} className={className}>
-                    <Button type="button" className="p-link" onClick={(e) => onDotClick(e, index)} aria-label={`${ariaLabel('pageLabel')} ${index + 1}`} />
+                    <Button ariaButton className="p-link" onClick={(e) => onDotClick(e, index)} aria-label={`${ariaLabel('pageLabel')} ${index + 1}`} />
                 </li>
             );
         };

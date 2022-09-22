@@ -469,7 +469,7 @@ export const ColumnFilter = React.memo((props) => {
             });
             const label = filterLabel();
 
-            return <Button ref={iconRef} type="button" icon="pi pi-filter-icon pi-filter" className={className} aria-haspopup aria-expanded={overlayVisibleState} onClick={toggleMenu} onKeyDown={onToggleButtonKeyDown} aria-label={label} />;
+            return <Button ref={iconRef} ariaButton icon="pi pi-filter-icon pi-filter" className={className} aria-haspopup aria-expanded={overlayVisibleState} onClick={toggleMenu} onKeyDown={onToggleButtonKeyDown} aria-label={label} />;
         }
 
         return null;
@@ -482,7 +482,7 @@ export const ColumnFilter = React.memo((props) => {
             });
             const clearLabel = clearButtonLabel();
 
-            return <Button ref={iconRef} type="button" icon="pi pi-filter-slash" className={className} onClick={clearFilter} aria-label={clearLabel} />;
+            return <Button ref={iconRef} ariaButton icon="pi pi-filter-slash" className={className} onClick={clearFilter} aria-label={clearLabel} />;
         }
 
         return null;
@@ -546,7 +546,7 @@ export const ColumnFilter = React.memo((props) => {
         if (showRemoveIcon()) {
             const removeRuleLabel = removeRuleButtonLabel();
 
-            return <Button type="button" icon="pi pi-trash" className="p-column-filter-remove-button p-button-text p-button-danger p-button-sm" onClick={() => removeConstraint(index)} label={removeRuleLabel} />;
+            return <Button ariaButton icon="pi pi-trash" className="p-column-filter-remove-button p-button-text p-button-danger p-button-sm" onClick={() => removeConstraint(index)} label={removeRuleLabel} />;
         }
 
         return null;

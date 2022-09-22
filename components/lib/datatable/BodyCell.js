@@ -557,7 +557,7 @@ export const BodyCell = React.memo((props) => {
             };
 
             content = (
-                <Button className={expanderProps.className} onClick={expanderProps.onClick} type="button" icon={expanderProps.iconClassName} aria-expanded={props.expanded} aria-controls={ariaControls} tabIndex={props.tabIndex} aria-label={label} />
+                <Button className={expanderProps.className} onClick={expanderProps.onClick} ariaButton icon={expanderProps.iconClassName} aria-expanded={props.expanded} aria-controls={ariaControls} tabIndex={props.tabIndex} aria-label={label} />
             );
 
             if (body) {

@@ -149,7 +149,7 @@ export const Sidebar = React.forwardRef((props, ref) => {
         if (props.showCloseIcon) {
             const ariaLabel = props.ariaCloseLabel || localeOption('close');
 
-            return <Button ref={closeIconRef} type="button" className="p-sidebar-close p-sidebar-icon p-link" icon="p-sidebar-close-icon pi pi-times" onClick={onClose} aria-label={ariaLabel} />;
+            return <Button ref={closeIconRef} ariaButton className="p-sidebar-close p-sidebar-icon p-link" icon="p-sidebar-close-icon pi pi-times" onClick={onClose} aria-label={ariaLabel} />;
         }
 
         return null;

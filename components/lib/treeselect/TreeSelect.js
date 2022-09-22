@@ -473,7 +473,7 @@ export const TreeSelect = React.memo(
 
         const createHeader = () => {
             const filterElement = createFilterElement();
-            const closeElement = <Button type="button" className="p-treeselect-close p-link" icon="p-treeselect-close-icon pi pi-times" onClick={hide} aria-label={localeOption('close')} />;
+            const closeElement = <Button ariaButton className="p-treeselect-close p-link" icon="p-treeselect-close-icon pi pi-times" onClick={hide} aria-label={localeOption('close')} />;
             const content = (
                 <div className="p-treeselect-header">
                     {filterElement}
