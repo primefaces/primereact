@@ -3233,9 +3233,7 @@ export const DataTableStateDemo = () => {
                                     <td>selectionAriaLabel</td>
                                     <td>string</td>
                                     <td>null</td>
-                                    <td>
-                                        A field property from the row to add "Select {field}" and "Unselect {field}" ARIA labels to checkbox/radio buttons.
-                                    </td>
+                                    <td>A field property from the row to add "Select &#123;field&#125;" and "Unselect &#123;field&#125;" ARIA labels to checkbox/radio buttons.</td>
                                 </tr>
                                 <tr>
                                     <td>contextMenuSelection</td>
