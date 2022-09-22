@@ -817,7 +817,7 @@ export const DataTable = React.forwardRef((props, ref) => {
 
         columnSortable.current = column.props.sortable;
         columnSortFunction.current = column.props.sortFunction;
-        columnField.current = column.props.sortField;
+        columnField.current = sortField;
 
         if (props.sortMode === 'multiple') {
             let metaKey = event.metaKey || event.ctrlKey;
@@ -911,7 +911,7 @@ export const DataTable = React.forwardRef((props, ref) => {
         let value = [...data];
 
         if (columnSortable.current && columnSortFunction.current) {
-            value = columnSortFunction.current({ rowData: value, field: field, order: order });
+            value = columnSortFunction.current({ data, field, order });
         } else {
             value.sort((data1, data2) => {
                 const value1 = ObjectUtils.resolveFieldData(data1, field);
@@ -944,9 +944,9 @@ export const DataTable = React.forwardRef((props, ref) => {
         if (columnSortable.current && columnSortFunction.current) {
             const meta = multiSortMeta.find((meta) => meta.field === columnField.current);
             const field = columnField.current;
-            const order = meta ? meta.order : defaultSortOrder;
+            const order = meta ? meta.order : props.defaultSortOrder;
 
-            value = columnSortFunction.current({ rowData: value, field: field, order: order });
+            value = columnSortFunction.current({ data, field, order, multiSortMeta });
         } else {
             value.sort((data1, data2) => {
                 return multisortField(data1, data2, multiSortMeta, 0);

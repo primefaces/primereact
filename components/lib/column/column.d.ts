@@ -117,10 +117,14 @@ interface ColumnEventParams {
     columnProps: ColumnProps;
 }
 
-interface ColumnSortParams {
-    rowData: any;
+interface ColumnSortMetaData {
     field: string;
     order: ColumnSortOrderType;
+}
+
+interface ColumnSortParams extends ColumnSortMetaData {
+    data: any;
+    multiSortMeta?: ColumnSortMetaData[];
 }
 
 interface ColumnFilterMetaData {
