@@ -67,6 +67,7 @@ body:
               - Hydrogen
               - Relay
               - Preact
+              - Qwik
       validations:
           required: true
     - type: input
