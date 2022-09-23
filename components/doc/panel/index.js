@@ -132,11 +132,11 @@ const PanelDemo = () => {
             tabName: 'TS Source',
             content: `
 import React from 'react';
-import { Panel } from 'primereact/panel';
+import { Panel, PanelHeaderTemplateOptions } from 'primereact/panel';
 import { Ripple } from 'primereact/ripple';
 
 const PanelDemo = () => {
-    const template = (options) => {
+    const template = (options: PanelHeaderTemplateOptions) => {
         const toggleIcon = options.collapsed ? 'pi pi-chevron-down' : 'pi pi-chevron-up';
         const className = \`\${options.className} justify-content-start\`;
         const titleClassName = \`\${options.titleClassName} pl-1\`;
