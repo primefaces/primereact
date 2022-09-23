@@ -1,5 +1,55 @@
 # Changelog
 
+## [8.6.0](https://github.com/primefaces/primereact/tree/8.6.0) (2022-09-23)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/8.5.0...8.6.0)
+
+**Breaking Changes:**
+
+- Add data and multiSortMeta options to sortFunction on DataTable [\#3352](https://github.com/primefaces/primereact/issues/3352)
+- FullCalendar: Remove [\#3344](https://github.com/primefaces/primereact/issues/3344)
+
+**Implemented New Features and Enhancements:**
+
+- PrimeIcons: Update to v6 [\#3347](https://github.com/primefaces/primereact/issues/3347)
+- Knob/Rating/TriStateCheckbox: Ref Type Incompatibility [\#3334](https://github.com/primefaces/primereact/issues/3334)
+- Datatable: Add Typescript SortOrder constants [\#3327](https://github.com/primefaces/primereact/issues/3327)
+- InputNumber: missing data attribute [\#3321](https://github.com/primefaces/primereact/issues/3321)
+- Dropdown: Support aria-describedby [\#3319](https://github.com/primefaces/primereact/issues/3319)
+- TabView: Add 'beforeTabClose' event  [\#3312](https://github.com/primefaces/primereact/issues/3312)
+- Datatable: Remove Expanded 'td' element returned with 'tr' [\#3310](https://github.com/primefaces/primereact/issues/3310)
+- ARIA: Standardize expand/collapse labels [\#3292](https://github.com/primefaces/primereact/issues/3292)
+- Password: Add KeyFilter [\#3290](https://github.com/primefaces/primereact/issues/3290)
+- TypeScript: Add index.d.ts to main libary [\#3288](https://github.com/primefaces/primereact/issues/3288)
+- ARIA: Standardize close/clear button labels [\#3280](https://github.com/primefaces/primereact/issues/3280)
+- Strange logging when linting [\#3277](https://github.com/primefaces/primereact/issues/3277)
+- AutoComplete: Accessibility Improvement [\#3275](https://github.com/primefaces/primereact/issues/3275)
+- Toast: Pause / resume timeout if hovered [\#3272](https://github.com/primefaces/primereact/issues/3272)
+- Accordion: No id causes remounting of AccordionTabs. [\#3270](https://github.com/primefaces/primereact/issues/3270)
+- DataTable: Aria-label issues [\#3263](https://github.com/primefaces/primereact/issues/3263)
+- TabView: allow aria-label attribute for scrollable buttons [\#3259](https://github.com/primefaces/primereact/issues/3259)
+- SpeedDial: allow aria-label attribute [\#3254](https://github.com/primefaces/primereact/issues/3254)
+- AutoComplete: Add EmptyMessage property [\#3244](https://github.com/primefaces/primereact/issues/3244)
+- Password: Add same color to label of password info [\#2913](https://github.com/primefaces/primereact/issues/2913)
+- TreeTable/DataTable: Callback similar to onFilter for global search [\#2028](https://github.com/primefaces/primereact/issues/2028)
+- Additional props for keyboard helpers \(input components with "hidden accessible" elements\) [\#1852](https://github.com/primefaces/primereact/issues/1852)
+- DataTable RowCheckbox/RowRadioButton input lacks title, label or aria attributes [\#1178](https://github.com/primefaces/primereact/issues/1178)
+- Allow aria-label and aria-labelledby attributes on all input components. [\#839](https://github.com/primefaces/primereact/issues/839)
+
+**Fixed bugs:**
+
+- SortFunction throws a exception on DataTable [\#3353](https://github.com/primefaces/primereact/issues/3353)
+- DataTable: error occurs when the field corresponding to the column is an Map, and the editor is not specified [\#3332](https://github.com/primefaces/primereact/issues/3332)
+- Dialog: Restore dialog size after maximize it close dialog keeping modal background active [\#3331](https://github.com/primefaces/primereact/issues/3331)
+- Editor: Ref Type Incompatibility [\#3329](https://github.com/primefaces/primereact/issues/3329)
+- Calendar: viewStateChanged minor bug [\#3315](https://github.com/primefaces/primereact/issues/3315)
+- DataTable: Multiple sorting with Date field as first sort [\#3284](https://github.com/primefaces/primereact/issues/3284)
+- Calendar \> When set two times value, calendar view is not updated [\#3258](https://github.com/primefaces/primereact/issues/3258)
+- Dialog: Focus trap issue with multiple dialogs [\#3256](https://github.com/primefaces/primereact/issues/3256)
+- InputTextarea: wrong ref type [\#3252](https://github.com/primefaces/primereact/issues/3252)
+- Toast/Messages: Replace method is broken in 8.5.0 [\#3250](https://github.com/primefaces/primereact/issues/3250)
+- ScrollPanel: Cannot scroll inside dialog [\#3171](https://github.com/primefaces/primereact/issues/3171)
+
 ## [8.5.0](https://github.com/primefaces/primereact/tree/8.5.0) (2022-09-07)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/8.4.0...8.5.0)
