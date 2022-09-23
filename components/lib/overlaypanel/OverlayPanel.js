@@ -1,10 +1,10 @@
 import * as React from 'react';
 import PrimeReact, { localeOption } from '../api/Api';
-import { Button } from '../button/Button';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
+import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
 
 export const OverlayPanel = React.forwardRef((props, ref) => {
@@ -188,7 +188,12 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
         if (props.showCloseIcon) {
             const ariaLabel = props.ariaCloseLabel || localeOption('close');
 
-            return <Button type="button" className="p-overlaypanel-close p-link" icon="p-overlaypanel-close-icon pi pi-times" onClick={onCloseClick} aria-label={ariaLabel} />;
+            return (
+                <button type="button" className="p-overlaypanel-close p-link" onClick={onCloseClick} aria-label={ariaLabel}>
+                    <span className="p-overlaypanel-close-icon pi pi-times" aria-hidden="true"></span>
+                    <Ripple />
+                </button>
+            );
         }
 
         return null;

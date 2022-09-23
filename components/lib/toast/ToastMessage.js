@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { localeOption } from '../api/Locale';
-import { Button } from '../button/Button';
 import { useTimeout } from '../hooks/Hooks';
+import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const ToastMessage = React.memo(
@@ -60,7 +60,12 @@ export const ToastMessage = React.memo(
 
         const createCloseIcon = () => {
             if (closable !== false) {
-                return <Button type="button" className="p-toast-icon-close p-link" icon="p-toast-icon-close-icon pi pi-times" onClick={onClose} aria-label={localeOption('close')} />;
+                return (
+                    <button type="button" className="p-toast-icon-close p-link" onClick={onClose} aria-label={localeOption('close')}>
+                        <span className="p-toast-icon-close-icon pi pi-times" aria-hidden="true"></span>
+                        <Ripple />
+                    </button>
+                );
             }
 
             return null;

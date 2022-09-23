@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
-import { Button } from '../button/Button';
+import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const UITreeNode = React.memo((props) => {
@@ -578,7 +578,12 @@ export const UITreeNode = React.memo((props) => {
     const createToggler = () => {
         const label = expanded ? ariaLabel('collapseLabel') : ariaLabel('expandLabel');
         const iconClassName = classNames('p-tree-toggler-icon pi pi-fw', { 'pi-chevron-right': !expanded, 'pi-chevron-down': expanded });
-        let content = <Button type="button" className="p-tree-toggler p-link" tabIndex={-1} onClick={onTogglerClick} icon={iconClassName} aria-label={label} />;
+        let content = (
+            <button type="button" className="p-tree-toggler p-link" tabIndex={-1} onClick={onTogglerClick} aria-label={label}>
+                <span className={iconClassName} aria-hidden="true"></span>
+                <Ripple />
+            </button>
+        );
 
         if (props.togglerTemplate) {
             const defaultContentOptions = {

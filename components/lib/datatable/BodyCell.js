@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
-import { Button } from '../button/Button';
 import { useEventListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
@@ -557,7 +556,10 @@ export const BodyCell = React.memo((props) => {
             };
 
             content = (
-                <Button className={expanderProps.className} onClick={expanderProps.onClick} type="button" icon={expanderProps.iconClassName} aria-expanded={props.expanded} aria-controls={ariaControls} tabIndex={props.tabIndex} aria-label={label} />
+                <button className={expanderProps.className} onClick={expanderProps.onClick} type="button" aria-expanded={props.expanded} aria-controls={ariaControls} tabIndex={props.tabIndex} aria-label={label}>
+                    <span className={expanderProps.iconClassName} aria-hidden="true"></span>
+                    <Ripple />
+                </button>
             );
 
             if (body) {

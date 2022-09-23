@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
-import { Button } from '../button/Button';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
@@ -261,7 +260,12 @@ export const TabView = React.forwardRef((props, ref) => {
 
     const createPrevButton = () => {
         if (props.scrollable && !backwardIsDisabledState) {
-            return <Button ref={prevBtnRef} type="button" className="p-tabview-nav-prev p-tabview-nav-btn p-link" icon="pi pi-chevron-left" onClick={navBackward} aria-label={ariaLabel('previousPageLabel')} />;
+            return (
+                <button ref={prevBtnRef} className="p-tabview-nav-prev p-tabview-nav-btn p-link" onClick={navBackward} type="button" aria-label={ariaLabel('previousPageLabel')}>
+                    <span className="pi pi-chevron-left"></span>
+                    <Ripple />
+                </button>
+            );
         }
 
         return null;
@@ -269,7 +273,12 @@ export const TabView = React.forwardRef((props, ref) => {
 
     const createNextButton = () => {
         if (props.scrollable && !forwardIsDisabledState) {
-            return <Button ref={nextBtnRef} type="button" className="p-tabview-nav-next p-tabview-nav-btn p-link" icon="pi pi-chevron-right" onClick={navForward} aria-label={ariaLabel('nextPageLabel')} />;
+            return (
+                <button ref={nextBtnRef} className="p-tabview-nav-next p-tabview-nav-btn p-link" onClick={navForward} type="button" aria-label={ariaLabel('nextPageLabel')}>
+                    <span className="pi pi-chevron-right" aria-hidden="true"></span>
+                    <Ripple />
+                </button>
+            );
         }
     };
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { localeOption } from '../api/Api';
-import { Button } from '../button/Button';
 import { useTimeout } from '../hooks/Hooks';
+import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils } from '../utils/Utils';
 
 export const UIMessage = React.memo(
@@ -34,7 +34,12 @@ export const UIMessage = React.memo(
             if (closable !== false) {
                 const ariaLabel = localeOption('close');
 
-                return <Button type="button" className="p-message-close p-link" icon="p-message-close-icon pi pi-times" onClick={onClose} aria-label={ariaLabel} />;
+                return (
+                    <button type="button" className="p-message-close p-link" aria-label={ariaLabel} onClick={onClose}>
+                        <i className="p-message-close-icon pi pi-times" aria-hidden="true"></i>
+                        <Ripple />
+                    </button>
+                );
             }
 
             return null;

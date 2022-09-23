@@ -7,6 +7,7 @@ import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/
 import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
+import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 
 export const ColumnFilter = React.memo((props) => {
@@ -469,7 +470,12 @@ export const ColumnFilter = React.memo((props) => {
             });
             const label = filterLabel();
 
-            return <Button ref={iconRef} type="button" icon="pi pi-filter-icon pi-filter" className={className} aria-haspopup aria-expanded={overlayVisibleState} onClick={toggleMenu} onKeyDown={onToggleButtonKeyDown} aria-label={label} />;
+            return (
+                <button ref={iconRef} type="button" className={className} aria-haspopup aria-expanded={overlayVisibleState} onClick={toggleMenu} onKeyDown={onToggleButtonKeyDown} aria-label={label}>
+                    <span className="pi pi-filter-icon pi-filter" aria-hidden="true"></span>
+                    <Ripple />
+                </button>
+            );
         }
 
         return null;
@@ -482,7 +488,12 @@ export const ColumnFilter = React.memo((props) => {
             });
             const clearLabel = clearButtonLabel();
 
-            return <Button ref={iconRef} type="button" icon="pi pi-filter-slash" className={className} onClick={clearFilter} aria-label={clearLabel} />;
+            return (
+                <button className={className} type="button" onClick={clearFilter} aria-label={clearLabel}>
+                    <span className="pi pi-filter-slash" aria-hidden="true"></span>
+                    <Ripple />
+                </button>
+            );
         }
 
         return null;

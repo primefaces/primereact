@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
-import { Button } from '../button/Button';
+import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler } from '../utils/Utils';
 import { TreeTableBodyCell } from './TreeTableBodyCell';
 
@@ -272,7 +272,12 @@ export const TreeTableRow = React.memo((props) => {
         const iconClassName = classNames('p-treetable-toggler-icon pi pi-fw', { 'pi-chevron-right': !expanded, 'pi-chevron-down': expanded });
         const style = { marginLeft: props.level * 16 + 'px', visibility: props.node.leaf === false || (props.node.children && props.node.children.length) ? 'visible' : 'hidden' };
 
-        return <Button type="button" className="p-treetable-toggler p-link p-unselectable-text" style={style} tabIndex={-1} onClick={onTogglerClick} icon={iconClassName} aria-label={label} />;
+        return (
+            <button type="button" className="p-treetable-toggler p-link p-unselectable-text" onClick={onTogglerClick} tabIndex={-1} style={style} aria-label={label}>
+                <i className={iconClassName} aria-hidden="true"></i>
+                <Ripple />
+            </button>
+        );
     };
 
     const createCheckbox = () => {
