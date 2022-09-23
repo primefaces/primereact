@@ -232,7 +232,7 @@ primereact/resources/themes/rhea/theme.css
 dependencies: {
     "react": "^17.0.0 || ^18.0.0",
     "react-dom": "^17.0.0 || ^18.0.0"
-    "primeicons": "^5.0.0"
+    "primeicons": "^5.0.0 || ^6.0.0"
 }
 `}
                 </CodeHighlight>
