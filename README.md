@@ -61,7 +61,7 @@ In addition, components require PrimeIcons for icons and react-transition-group 
 dependencies: {
     "react": "^17.0.0 || ^18.0.0",
     "react-dom": "^17.0.0 || ^18.0.0",
-    "primeicons": "^5.0.0"
+    "primeicons": "^5.0.0 || ^6.0.0"
 }
 ```
 
@@ -74,10 +74,7 @@ Here is the list of components with 3rd party dependencies.
 | Charts | Charts.js 3.x |
 | GMap | Google Maps |
 | Editor | Quill.js |
-| FullCalendar* | FullCalendar 4.0 Alpha.2+
 | DataView | PrimeFlex |
-
-<sub>*Deprecated since v6.4.0</sup>
 
 ## Styles
 The css dependencies are as follows, note that you may change the theme with another one of your choice.
