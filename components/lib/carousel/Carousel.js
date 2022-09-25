@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PrimeReact, { ariaLabel } from '../api/Api';
-import { Button } from '../button/Button';
 import { useMountEffect, usePrevious, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 
 const CarouselItem = React.memo((props) => {
@@ -479,7 +479,12 @@ export const Carousel = React.memo(
                     'pi-chevron-up': isVertical
                 });
 
-                return <Button type="button" className={className} icon={iconClassName} onClick={navBackward} disabled={isDisabled} aria-label={ariaLabel('previousPageLabel')} />;
+                return (
+                    <button type="button" className={className} onClick={navBackward} disabled={isDisabled} aria-label={ariaLabel('previousPageLabel')}>
+                        <span className={iconClassName}></span>
+                        <Ripple />
+                    </button>
+                );
             }
 
             return null;
@@ -496,7 +501,12 @@ export const Carousel = React.memo(
                     'pi-chevron-down': isVertical
                 });
 
-                return <Button type="button" className={className} icon={iconClassName} onClick={navForward} disabled={isDisabled} aria-label={ariaLabel('nextPageLabel')} />;
+                return (
+                    <button type="button" className={className} onClick={navForward} disabled={isDisabled} aria-label={ariaLabel('nextPageLabel')}>
+                        <span className={iconClassName}></span>
+                        <Ripple />
+                    </button>
+                );
             }
 
             return null;
@@ -511,7 +521,9 @@ export const Carousel = React.memo(
 
             return (
                 <li key={key} className={className}>
-                    <Button type="button" className="p-link" onClick={(e) => onDotClick(e, index)} aria-label={`${ariaLabel('pageLabel')} ${index + 1}`} />
+                    <button type="button" className="p-link" onClick={(e) => onDotClick(e, index)} aria-label={`${ariaLabel('pageLabel')} ${index + 1}`}>
+                        <Ripple />
+                    </button>
                 </li>
             );
         };
