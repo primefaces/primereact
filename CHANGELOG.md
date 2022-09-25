@@ -1,5 +1,13 @@
 # Changelog
 
+## [8.6.1](https://github.com/primefaces/primereact/tree/8.6.1) (2022-09-25)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/8.6.0...8.6.1)
+
+**Fixed bugs:**
+
+- Material Theme breaks in some components [\#3364](https://github.com/primefaces/primereact/issues/3364)
+
 ## [8.6.0](https://github.com/primefaces/primereact/tree/8.6.0) (2022-09-23)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/8.5.0...8.6.0)
