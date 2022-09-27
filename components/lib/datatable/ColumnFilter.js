@@ -38,9 +38,7 @@ export const ColumnFilter = React.memo((props) => {
     const hasFilter = () => {
         if (!filterStoreModel || !filterModel) return false;
 
-        return filterStoreModel.operator
-            ? !isFilterBlank(filterModel.constraints[0].value) && filterStoreModel.constraints[0].value !== filterModel.constraints[0].value
-            : !isFilterBlank(filterModel.value) && filterStoreModel.value !== filterModel.value;
+        return filterStoreModel.operator ? !isFilterBlank(filterModel.constraints[0].value) : !isFilterBlank(filterModel.value);
     };
 
     const hasRowFilter = () => {
