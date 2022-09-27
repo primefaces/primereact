@@ -23,13 +23,13 @@ export const ToastMessage = React.memo(
             props.onClose && props.onClose(messageInfo);
         };
 
-        const onClick = (event) => {
+        const onClick = event => {
             if (props.onClick && !(DomHandler.hasClass(event.target, 'p-toast-icon-close') || DomHandler.hasClass(event.target, 'p-toast-icon-close-icon'))) {
                 props.onClick(messageInfo.message);
             }
         };
 
-        const onMouseEnter = (event) => {
+        const onMouseEnter = event => {
             props.onMouseEnter && props.onMouseEnter(event);
 
             // do not continue if the user has canceled the event
@@ -44,7 +44,7 @@ export const ToastMessage = React.memo(
             }
         };
 
-        const onMouseLeave = (event) => {
+        const onMouseLeave = event => {
             props.onMouseLeave && props.onMouseLeave(event);
 
             // do not continue if the user has canceled the event
@@ -61,10 +61,12 @@ export const ToastMessage = React.memo(
         const createCloseIcon = () => {
             if (closable !== false) {
                 return (
-                    <button type="button" className="p-toast-icon-close p-link" onClick={onClose} aria-label={localeOption('close')}>
-                        <span className="p-toast-icon-close-icon pi pi-times" aria-hidden="true"></span>
-                        <Ripple />
-                    </button>
+                    <div>
+                        <button type="button" className="p-toast-icon-close p-link" onClick={onClose} aria-label={localeOption('close')}>
+                            <span className="p-toast-icon-close-icon pi pi-times" aria-hidden="true"></span>
+                            <Ripple />
+                        </button>
+                    </div>
                 );
             }
 
