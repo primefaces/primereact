@@ -1374,6 +1374,18 @@ export const DataTableDemo = () => {
                                     <td>Style class of the header.</td>
                                 </tr>
                                 <tr>
+                                    <td>headerTooltip</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Content of the header tooltip.</td>
+                                </tr>
+                                <tr>
+                                    <td>headerTooltipOptions</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Configuration of the header tooltip, refer to the tooltip documentation for more information.</td>
+                                </tr>
+                                <tr>
                                     <td>bodyStyle</td>
                                     <td>object</td>
                                     <td>null</td>

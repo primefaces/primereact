@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { usePrevious } from '../hooks/Hooks';
+import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { ColumnFilter } from './ColumnFilter';
 import { HeaderCheckbox } from './HeaderCheckbox';
@@ -287,31 +288,37 @@ export const HeaderCell = React.memo((props) => {
         const colSpan = getColumnProp('colSpan');
         const rowSpan = getColumnProp('rowSpan');
         const ariaSort = getAriaSort(sortMeta);
+        const headerTooltip = getColumnProp('headerTooltip');
+        const hasTooltip = ObjectUtils.isNotEmpty(headerTooltip);
+        const headerTooltipOptions = getColumnProp('headerTooltipOptions');
 
         const resizer = createResizer();
         const header = createHeader(sortMeta);
 
         return (
-            <th
-                ref={elementRef}
-                style={style}
-                className={className}
-                tabIndex={tabIndex}
-                role="columnheader"
-                onClick={onClick}
-                onKeyDown={onKeyDown}
-                onMouseDown={onMouseDown}
-                onDragStart={onDragStart}
-                onDragOver={onDragOver}
-                onDragLeave={onDragLeave}
-                onDrop={onDrop}
-                colSpan={colSpan}
-                rowSpan={rowSpan}
-                aria-sort={ariaSort}
-            >
-                {resizer}
-                {header}
-            </th>
+            <>
+                <th
+                    ref={elementRef}
+                    style={style}
+                    className={className}
+                    tabIndex={tabIndex}
+                    role="columnheader"
+                    onClick={onClick}
+                    onKeyDown={onKeyDown}
+                    onMouseDown={onMouseDown}
+                    onDragStart={onDragStart}
+                    onDragOver={onDragOver}
+                    onDragLeave={onDragLeave}
+                    onDrop={onDrop}
+                    colSpan={colSpan}
+                    rowSpan={rowSpan}
+                    aria-sort={ariaSort}
+                >
+                    {resizer}
+                    {header}
+                </th>
+                {hasTooltip && <Tooltip target={elementRef} content={headerTooltip} {...headerTooltipOptions} />}
+            </>
         );
     };
 
