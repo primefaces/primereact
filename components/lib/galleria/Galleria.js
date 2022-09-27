@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import PrimeReact, { localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useInterval, useUnmountEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
