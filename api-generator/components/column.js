@@ -150,6 +150,18 @@ const ColumnProps = [
         description: 'Style class of the header.'
     },
     {
+        name: 'headerTooltip',
+        type: 'any',
+        default: 'null',
+        description: 'Content of the header tooltip.'
+    },
+    {
+        name: 'headerTooltipOptions',
+        type: 'object',
+        default: 'null',
+        description: 'Configuration of the header tooltip, refer to the tooltip documentation for more information.'
+    },
+    {
         name: 'bodyStyle',
         type: 'object',
         default: 'null',
