@@ -61,10 +61,12 @@ export const ToastMessage = React.memo(
         const createCloseIcon = () => {
             if (closable !== false) {
                 return (
-                    <button type="button" className="p-toast-icon-close p-link" onClick={onClose} aria-label={localeOption('close')}>
-                        <span className="p-toast-icon-close-icon pi pi-times" aria-hidden="true"></span>
-                        <Ripple />
-                    </button>
+                    <div>
+                        <button type="button" className="p-toast-icon-close p-link" onClick={onClose} aria-label={localeOption('close')}>
+                            <span className="p-toast-icon-close-icon pi pi-times" aria-hidden="true"></span>
+                            <Ripple />
+                        </button>
+                    </div>
                 );
             }
 
