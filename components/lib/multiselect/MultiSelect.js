@@ -567,7 +567,6 @@ export const MultiSelect = React.memo(
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = ObjectUtils.findDiffKeys(props, MultiSelect.defaultProps);
-        const dataProps = ObjectUtils.reduceKeys(otherProps, DomHandler.DATA_PROPS);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-multiselect p-component p-inputwrapper',
@@ -602,7 +601,6 @@ export const MultiSelect = React.memo(
                             disabled={props.disabled}
                             tabIndex={props.tabIndex}
                             {...ariaProps}
-                            {...dataProps}
                         />
                     </div>
                     {label}

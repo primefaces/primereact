@@ -77,7 +77,6 @@ export const RadioButton = React.memo(
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = ObjectUtils.findDiffKeys(props, RadioButton.defaultProps);
-        const dataProps = ObjectUtils.reduceKeys(otherProps, DomHandler.DATA_PROPS);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-radiobutton p-component',
@@ -111,7 +110,6 @@ export const RadioButton = React.memo(
                             required={props.required}
                             tabIndex={props.tabIndex}
                             {...ariaProps}
-                            {...dataProps}
                         />
                     </div>
                     <div className={boxClassName}>
