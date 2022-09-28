@@ -633,6 +633,7 @@ export const DataTable = React.forwardRef((props, ref) => {
 
             return;
         }
+        if (!props.reorderableColumns) return;
 
         colReorderIconWidth.current = DomHandler.getHiddenElementOuterWidth(reorderIndicatorUpRef.current);
         colReorderIconHeight.current = DomHandler.getHiddenElementOuterHeight(reorderIndicatorUpRef.current);
