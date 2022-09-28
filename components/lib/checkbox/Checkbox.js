@@ -75,7 +75,6 @@ export const Checkbox = React.memo(
         const checked = isChecked();
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = ObjectUtils.findDiffKeys(props, Checkbox.defaultProps);
-        const dataProps = ObjectUtils.reduceKeys(otherProps, DomHandler.DATA_PROPS);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-checkbox p-component',
@@ -111,7 +110,6 @@ export const Checkbox = React.memo(
                             readOnly={props.readOnly}
                             required={props.required}
                             {...ariaProps}
-                            {...dataProps}
                         />
                     </div>
                     <div className={boxClass}>{icon}</div>

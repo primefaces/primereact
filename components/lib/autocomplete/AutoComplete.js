@@ -512,7 +512,6 @@ export const AutoComplete = React.memo(
                     onClick={props.onClick}
                     onDoubleClick={props.onDblClick}
                     {...ariaProps}
-                    {...dataProps}
                 />
             );
         };
@@ -563,7 +562,6 @@ export const AutoComplete = React.memo(
                         onFocus={onMultiInputFocus}
                         onBlur={onMultiInputBlur}
                         {...ariaProps}
-                        {...dataProps}
                     />
                 </li>
             );
@@ -609,7 +607,6 @@ export const AutoComplete = React.memo(
         const listId = idState + '_list';
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = ObjectUtils.findDiffKeys(props, AutoComplete.defaultProps);
-        const dataProps = ObjectUtils.reduceKeys(otherProps, DomHandler.DATA_PROPS);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-autocomplete p-component p-inputwrapper',

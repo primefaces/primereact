@@ -60,7 +60,6 @@ export const InputSwitch = React.memo(
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = ObjectUtils.findDiffKeys(props, InputSwitch.defaultProps);
-        const dataProps = ObjectUtils.reduceKeys(otherProps, DomHandler.DATA_PROPS);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-inputswitch p-component',
@@ -90,7 +89,6 @@ export const InputSwitch = React.memo(
                             tabIndex={props.tabIndex}
                             aria-checked={checked}
                             {...ariaProps}
-                            {...dataProps}
                         />
                     </div>
                     <span className="p-inputswitch-slider"></span>

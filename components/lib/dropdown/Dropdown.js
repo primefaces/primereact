@@ -640,7 +640,7 @@ export const Dropdown = React.memo(
 
             return (
                 <div className="p-hidden-accessible p-dropdown-hidden-select">
-                    <select ref={inputRef} required={props.required} defaultValue={option.value} name={props.name} tabIndex={-1} aria-hidden="true" {...dataProps}>
+                    <select ref={inputRef} required={props.required} defaultValue={option.value} name={props.name} tabIndex={-1} aria-hidden="true">
                         <option value={option.value}>{option.label}</option>
                     </select>
                 </div>
@@ -728,7 +728,6 @@ export const Dropdown = React.memo(
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = ObjectUtils.findDiffKeys(props, Dropdown.defaultProps);
-        const dataProps = ObjectUtils.reduceKeys(otherProps, DomHandler.DATA_PROPS);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-dropdown p-component p-inputwrapper',
