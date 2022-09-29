@@ -366,14 +366,17 @@ export interface DataTableProps extends Omit<React.DetailedHTMLProps<React.Input
 }
 
 export declare class DataTable extends React.Component<DataTableProps, any> {
-    public reset(): void;
-    public resetScroll(): void;
+    public clearState(): void;
+    public closeEditingCell(): void;
     public exportCSV(options?: { selectionOnly: boolean }): void;
     public filter<T>(value: T, field: string, mode: DataTableFilterMatchModeType, index?: number): void;
+    public reset(): void;
     public resetColumnOrder(): void;
-    public closeEditingCell(): void;
+    public resetScroll(): void;
+    public restoreColumnWidths(): void;
+    public restoreState(): void;
     public restoreTableState(state: any): void;
-    public clearState(): void;
+    public saveState(): void;
     public getElement(): HTMLDivElement;
     public getTable(): HTMLTableElement;
     public getVirtualScroller(): VirtualScroller;

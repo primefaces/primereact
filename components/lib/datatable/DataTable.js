@@ -1345,14 +1345,17 @@ export const DataTable = React.forwardRef((props, ref) => {
 
     React.useImperativeHandle(ref, () => ({
         props,
-        reset,
-        resetScroll,
+        clearState,
+        closeEditingCell,
         exportCSV,
         filter,
+        reset,
         resetColumnOrder,
-        closeEditingCell,
+        resetScroll,
+        restoreColumnWidths,
+        restoreState,
         restoreTableState,
-        clearState,
+        saveState,
         getElement: () => elementRef.current,
         getTable: () => tableRef.current,
         getVirtualScroller: () => virtualScrollerRef.current
