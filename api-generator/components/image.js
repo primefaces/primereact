@@ -6,6 +6,18 @@ const ImageProps = [
         description: 'Controls the preview functionality.'
     },
     {
+        name: 'src',
+        type: 'string',
+        default: 'null',
+        description: 'Specifies the path to the image.'
+    },
+    {
+        name: 'previewSrc',
+        type: 'string',
+        default: 'null',
+        description: 'Preview image that may be different than "src" image.'
+    },
+    {
         name: 'downloadable',
         type: 'boolean',
         default: 'false',
