@@ -47,7 +47,7 @@ export const Button = React.memo(
         const disabled = props.disabled || props.loading;
         const otherProps = ObjectUtils.findDiffKeys(props, Button.defaultProps);
         const className = classNames('p-button p-component', props.className, {
-            'p-button-icon-only': (props.icon || (props.loading && props.loadingIcon)) && !props.label,
+            'p-button-icon-only': (props.icon || (props.loading && props.loadingIcon)) && !props.label && !props.children,
             'p-button-vertical': (props.iconPos === 'top' || props.iconPos === 'bottom') && props.label,
             'p-disabled': disabled,
             'p-button-loading': props.loading,
