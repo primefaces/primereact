@@ -1,9 +1,9 @@
-import React, { memo } from 'react';
 import Link from 'next/link';
-import { TabView, TabPanel } from '../../lib/tabview/TabView';
-import { useLiveEditorTabs } from '../common/liveeditor';
+import React, { memo } from 'react';
+import { TabPanel, TabView } from '../../lib/tabview/TabView';
 import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
+import { useLiveEditorTabs } from '../common/liveeditor';
 
 const ImageDoc = memo(() => {
     const sources = {
@@ -22,9 +22,12 @@ export class ImageDemo extends Component {
                     <h5>Basic</h5>
                     <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="250" />
 
-                    <h5>Preview</h5>
+
+                    <h5>Preview and Zoom</h5>
                     <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="250" preview />
-                </div>
+
+                    <h5>Thumbnail</h5>
+                    <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" previewSrc="https://www.primefaces.org/wp-content/uploads/2020/05/small.png" alt="Image" width="80" height="60" preview />
             </div>
         )
     }
@@ -45,8 +48,11 @@ const ImageDemo = () => {
                 <h5>Basic</h5>
                 <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="250" />
 
-                <h5>Preview</h5>
+                <h5>Preview and Zoom</h5>
                 <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="250" preview />
+
+                <h5>Thumbnail</h5>
+                <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" previewSrc="https://www.primefaces.org/wp-content/uploads/2020/05/small.png" alt="Image" width="80" height="60" preview />
             </div>
         </div>
     )
@@ -67,8 +73,11 @@ const ImageDemo = () => {
                 <h5>Basic</h5>
                 <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="250" />
 
-                <h5>Preview</h5>
+                <h5>Preview and Zoom</h5>
                 <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="250" preview />
+
+                <h5>Thumbnail</h5>
+                <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" previewSrc="https://www.primefaces.org/wp-content/uploads/2020/05/small.png" alt="Image" width="80" height="60" preview />
             </div>
         </div>
     )
@@ -92,8 +101,11 @@ const ImageDemo = () => {
                 <h5>Basic</h5>
                 <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="250" />
 
-                <h5>Preview</h5>
+                <h5>Preview and Zoom</h5>
                 <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="250" preview />
+
+                <h5>Thumbnail</h5>
+                <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" previewSrc="https://www.primefaces.org/wp-content/uploads/2020/05/small.png" alt="Image" width="80" height="60" preview />
             </div>
         </div>
     )
@@ -135,6 +147,11 @@ import { Image } from 'primereact/image';
                     <h5>Preview</h5>
                     <p>Preview mode displays a modal layer when the image is clicked that provides transformation options such as rotating and zooming.</p>
 
+                    <h5>Thumbnail</h5>
+                    <p>
+                        Allow different images or sizes for source and preview images using <i>previewSrc</i> property.
+                    </p>
+
                     <h5>Templating</h5>
                     <p>
                         An eye icon is displayed by default when the image is hovered in preview mode. Use the<i>template</i>prop for custom content.
@@ -160,10 +177,22 @@ import { Image } from 'primereact/image';
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>src</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Specifies the path to the image.</td>
+                                </tr>
+                                <tr>
                                     <td>preview</td>
                                     <td>boolean</td>
                                     <td>false</td>
                                     <td>Controls the preview functionality.</td>
+                                </tr>
+                                <tr>
+                                    <td>previewSrc</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Preview image that may be different than "src" image.</td>
                                 </tr>
                                 <tr>
                                     <td>downloadable</td>

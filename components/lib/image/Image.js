@@ -17,7 +17,7 @@ export const Image = React.memo(
         const previewRef = React.useRef(null);
         const previewClick = React.useRef(false);
 
-        const onImageClick = () => {
+        const show = () => {
             if (props.preview) {
                 setMaskVisibleState(true);
                 setTimeout(() => {
@@ -26,11 +26,7 @@ export const Image = React.memo(
             }
         };
 
-        const onPreviewImageClick = () => {
-            previewClick.current = true;
-        };
-
-        const onMaskClick = () => {
+        const hide = () => {
             if (!previewClick.current) {
                 setPreviewVisibleState(false);
                 setRotateState(0);
@@ -38,6 +34,10 @@ export const Image = React.memo(
             }
 
             previewClick.current = false;
+        };
+
+        const onPreviewImageClick = () => {
+            previewClick.current = true;
         };
 
         const onDownload = () => {
@@ -96,7 +96,7 @@ export const Image = React.memo(
         const createPreview = () => {
             if (props.preview) {
                 return (
-                    <div className="p-image-preview-indicator" onClick={onImageClick}>
+                    <div className="p-image-preview-indicator" onClick={show}>
                         {content}
                     </div>
                 );
@@ -112,7 +112,7 @@ export const Image = React.memo(
             // const rotateClassName = 'p-image-preview-rotate-' + rotateScale;
 
             return (
-                <div ref={maskRef} className="p-image-mask p-component-overlay p-component-overlay-enter" onClick={onMaskClick}>
+                <div ref={maskRef} className="p-image-mask p-component-overlay p-component-overlay-enter" onClick={hide}>
                     <div className="p-image-toolbar">
                         {downloadable && (
                             <button className="p-image-action p-link" onClick={onDownload} type="button">
@@ -148,7 +148,7 @@ export const Image = React.memo(
                         onExited={onExited}
                     >
                         <div ref={previewRef}>
-                            <img src={props.src} className="p-image-preview" style={imagePreviewStyle} onClick={onPreviewImageClick} alt={props.alt} />
+                            <img src={props.previewSrc || props.src} className="p-image-preview" style={imagePreviewStyle} onClick={onPreviewImageClick} alt={props.alt} />
                         </div>
                     </CSSTransition>
                 </div>
@@ -157,6 +157,8 @@ export const Image = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            show,
+            hide,
             getElement: () => elementRef.current,
             getImage: () => imageRef.current
         }));
@@ -169,7 +171,7 @@ export const Image = React.memo(
         const element = createElement();
         const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : <i className="p-image-preview-icon pi pi-eye"></i>;
         const preview = createPreview();
-        const image = <img ref={imageRef} src={src} className={props.imageClassName} width={width} height={height} style={props.imageStyle} alt={alt} onError={props.onError} />;
+        const image = props.src && <img ref={imageRef} src={src} className={props.imageClassName} width={width} height={height} style={props.imageStyle} alt={alt} onError={props.onError} />;
 
         return (
             <span ref={elementRef} className={containerClassName} {...otherProps}>
@@ -184,15 +186,16 @@ export const Image = React.memo(
 Image.displayName = 'Image';
 Image.defaultProps = {
     __TYPE: 'Image',
-    preview: false,
+    alt: null,
     className: null,
     downloadable: false,
-    imageStyle: null,
-    imageClassName: null,
-    template: null,
-    src: null,
-    alt: null,
-    width: null,
     height: null,
-    onError: null
+    imageClassName: null,
+    imageStyle: null,
+    onError: null,
+    preview: false,
+    previewSrc: null,
+    src: null,
+    template: null,
+    width: null
 };

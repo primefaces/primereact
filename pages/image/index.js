@@ -1,10 +1,10 @@
-import React from 'react';
-import { Image } from '../../components/lib/image/Image';
-import Link from 'next/link';
-import ImageDoc from '../../components/doc/image';
-import { DocActions } from '../../components/doc/common/docactions';
-import Head from 'next/head';
 import getConfig from 'next/config';
+import Head from 'next/head';
+import Link from 'next/link';
+import React from 'react';
+import { DocActions } from '../../components/doc/common/docactions';
+import ImageDoc from '../../components/doc/image';
+import { Image } from '../../components/lib/image/Image';
 
 const ImageDemo = () => {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
@@ -32,8 +32,11 @@ const ImageDemo = () => {
                     <h5>Basic</h5>
                     <Image src={`${contextPath}/images/galleria/galleria7.jpg`} alt="Image" width="250" />
 
-                    <h5>Preview</h5>
-                    <Image src={`${contextPath}/images/galleria/galleria11.jpg`} alt="Image" width="250" preview />
+                    <h5>Preview and Zoom</h5>
+                    <Image src={`${contextPath}/images/galleria/galleria12.jpg`} alt="Image" width="250" preview />
+
+                    <h5>Thumbnail</h5>
+                    <Image src={`${contextPath}/images/galleria/galleria14s.jpg`} previewSrc={`${contextPath}/images/galleria/galleria14.jpg`} alt="Image" width="80" height="60" preview />
                 </div>
             </div>
 
