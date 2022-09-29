@@ -1997,6 +1997,10 @@ export const Calendar = React.memo(
         };
 
         const formatDateTime = (date) => {
+            if (props.formatDateTime) {
+                return props.formatDateTime(date);
+            }
+
             let formattedValue = null;
 
             if (date) {
@@ -2173,6 +2177,10 @@ export const Calendar = React.memo(
         };
 
         const parseDateTime = (text) => {
+            if (props.parseDateTime) {
+                return props.parseDateTime(text);
+            }
+
             let date;
             let parts = text.split(' ');
 

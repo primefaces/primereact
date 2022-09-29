@@ -1,9 +1,9 @@
-import React, { memo } from 'react';
 import Link from 'next/link';
-import { TabView, TabPanel } from '../../lib/tabview/TabView';
-import { useLiveEditorTabs } from '../common/liveeditor';
+import React, { memo } from 'react';
+import { TabPanel, TabView } from '../../lib/tabview/TabView';
 import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
+import { useLiveEditorTabs } from '../common/liveeditor';
 
 const CalendarDoc = memo(() => {
     const sources = {
@@ -1222,6 +1222,12 @@ const monthNavigatorTemplate = (options) => {
                                     <td>Function that gets a date information and returns the cell content in datepicker.</td>
                                 </tr>
                                 <tr>
+                                    <td>decadeTempate</td>
+                                    <td>function</td>
+                                    <td>null</td>
+                                    <td>Function that gets a navigator information and returns the decade selections in the panel.</td>
+                                </tr>
+                                <tr>
                                     <td>monthNavigatorTemplate</td>
                                     <td>function</td>
                                     <td>null</td>
@@ -1232,6 +1238,18 @@ const monthNavigatorTemplate = (options) => {
                                     <td>function</td>
                                     <td>null</td>
                                     <td>Function that gets a navigator information and returns the novigator in header.</td>
+                                </tr>
+                                <tr>
+                                    <td>formatDateTime</td>
+                                    <td>function</td>
+                                    <td>null</td>
+                                    <td>Function for overriding default behavior that formats a Date to the string representation.</td>
+                                </tr>
+                                <tr>
+                                    <td>parseDateTime</td>
+                                    <td>function</td>
+                                    <td>null</td>
+                                    <td>Function for overriding default behavior that parses text into the Date.</td>
                                 </tr>
                                 <tr>
                                     <td>transitionOptions</td>

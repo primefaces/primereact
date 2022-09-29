@@ -360,6 +360,12 @@ const CalendarProps = [
         description: 'Function that gets a date information and returns the cell content in datepicker.'
     },
     {
+        name: 'decadeTempate',
+        type: 'function',
+        default: 'null',
+        description: 'Function that gets a navigator information and returns the decade selections in the panel.'
+    },
+    {
         name: 'monthNavigatorTemplate',
         type: 'function',
         default: 'null',
@@ -369,13 +375,25 @@ const CalendarProps = [
         name: 'yearNavigatorTemplate',
         type: 'function',
         default: 'null',
-        description: 'Function that gets a navigator information and returns the novigator in header.'
+        description: 'Function that gets a navigator information and returns the navigator in header.'
     },
     {
         name: 'transitionOptions',
         type: 'object',
         default: 'null',
         description: 'The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.'
+    },
+    {
+        name: 'formatDateTime',
+        type: 'function',
+        default: 'null',
+        description: 'Function for overriding default behavior that formats a Date to the string representation.'
+    },
+    {
+        name: 'parseDateTime',
+        type: 'function',
+        default: 'null',
+        description: 'Function for overriding default behavior that parses text into the Date.'
     }
 ];
 
