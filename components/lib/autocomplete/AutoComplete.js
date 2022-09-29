@@ -467,6 +467,8 @@ export const AutoComplete = React.memo(
         React.useImperativeHandle(ref, () => ({
             props,
             search,
+            show,
+            hide,
             getElement: () => elementRef.current,
             getOverlay: () => overlayRef.current,
             getInput: () => inputRef.current,
