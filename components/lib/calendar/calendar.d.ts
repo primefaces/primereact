@@ -137,6 +137,8 @@ export interface CalendarProps {
     visible?: boolean;
     yearNavigator?: boolean;
     yearRange?: string;
+    formatDateTime?(date: Date): string;
+    parseDateTime?(text: string): Date;
     dateTemplate?(e: CalendarDateTemplateParams): React.ReactNode;
     decadeTempate?(yearValues: number[]): React.ReactNode;
     footerTemplate?(): React.ReactNode;
