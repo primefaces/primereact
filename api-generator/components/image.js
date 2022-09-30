@@ -12,10 +12,10 @@ const ImageProps = [
         description: 'Specifies the path to the image.'
     },
     {
-        name: 'previewSrc',
+        name: 'zoomSrc',
         type: 'string',
         default: 'null',
-        description: 'Preview image that may be different than "src" image.'
+        description: 'Zoomed image that may be different than "src" image.'
     },
     {
         name: 'downloadable',
