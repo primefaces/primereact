@@ -5,16 +5,17 @@ import { IconType } from '../utils';
 type AccordionTabHeaderTemplateType = React.ReactNode | ((props: AccordionTabProps) => React.ReactNode);
 
 interface AccordionTabProps {
-    header?: React.ReactNode;
-    disabled?: boolean;
-    style?: object;
-    className?: string;
-    headerStyle?: object;
-    headerClassName?: string;
-    headerTemplate?: AccordionTabHeaderTemplateType;
-    contentStyle?: object;
-    contentClassName?: string;
     children?: React.ReactNode;
+    className?: string;
+    contentClassName?: string;
+    contentStyle?: object;
+    disabled?: boolean;
+    header?: React.ReactNode;
+    headerClassName?: string;
+    headerStyle?: object;
+    headerTemplate?: AccordionTabHeaderTemplateType;
+    style?: object;
+    tabIndex: number;
 }
 
 export declare class AccordionTab extends React.Component<AccordionTabProps, any> {}
