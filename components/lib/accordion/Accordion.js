@@ -76,7 +76,7 @@ export const Accordion = React.forwardRef((props, ref) => {
         );
         const headerId = idState + '_header_' + index;
         const ariaControls = idState + '_content_' + index;
-        const tabIndex = tab.props.disabled ? -1 : null;
+        const tabIndex = tab.props.disabled ? -1 : tab.props.tabIndex;
         const header = tab.props.headerTemplate ? ObjectUtils.getJSXElement(tab.props.headerTemplate, tab.props) : <span className="p-accordion-header-text">{tab.props.header}</span>;
         const icon = IconUtils.getJSXIcon(selected ? props.collapseIcon : props.expandIcon, { className: 'p-accordion-toggle-icon' }, { props, selected });
         const label = selected ? ariaLabel('collapseLabel') : ariaLabel('expandLabel');
@@ -147,15 +147,16 @@ export const Accordion = React.forwardRef((props, ref) => {
 AccordionTab.displayName = 'AccordionTab';
 AccordionTab.defaultProps = {
     __TYPE: 'AccordionTab',
-    header: null,
-    disabled: false,
-    style: null,
     className: null,
-    headerStyle: null,
-    headerClassName: null,
-    headerTemplate: null,
+    contentClassName: null,
     contentStyle: null,
-    contentClassName: null
+    disabled: false,
+    header: null,
+    headerClassName: null,
+    headerStyle: null,
+    headerTemplate: null,
+    style: null,
+    tabIndex: 0
 };
 
 Accordion.displayName = 'Accordion';
