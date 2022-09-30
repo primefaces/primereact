@@ -27,7 +27,7 @@ export class ImageDemo extends Component {
                     <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="250" preview />
 
                     <h5>Thumbnail</h5>
-                    <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" previewSrc="https://www.primefaces.org/wp-content/uploads/2020/05/small.png" alt="Image" width="80" height="60" preview />
+                    <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" zoomSrc="https://www.primefaces.org/wp-content/uploads/2020/05/small.png" alt="Image" width="80" height="60" preview />
             </div>
         )
     }
@@ -52,7 +52,7 @@ const ImageDemo = () => {
                 <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="250" preview />
 
                 <h5>Thumbnail</h5>
-                <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" previewSrc="https://www.primefaces.org/wp-content/uploads/2020/05/small.png" alt="Image" width="80" height="60" preview />
+                <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" zoomSrc="https://www.primefaces.org/wp-content/uploads/2020/05/small.png" alt="Image" width="80" height="60" preview />
             </div>
         </div>
     )
@@ -77,7 +77,7 @@ const ImageDemo = () => {
                 <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="250" preview />
 
                 <h5>Thumbnail</h5>
-                <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" previewSrc="https://www.primefaces.org/wp-content/uploads/2020/05/small.png" alt="Image" width="80" height="60" preview />
+                <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" zoomSrc="https://www.primefaces.org/wp-content/uploads/2020/05/small.png" alt="Image" width="80" height="60" preview />
             </div>
         </div>
     )
@@ -105,7 +105,7 @@ const ImageDemo = () => {
                 <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="250" preview />
 
                 <h5>Thumbnail</h5>
-                <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" previewSrc="https://www.primefaces.org/wp-content/uploads/2020/05/small.png" alt="Image" width="80" height="60" preview />
+                <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" zoomSrc="https://www.primefaces.org/wp-content/uploads/2020/05/small.png" alt="Image" width="80" height="60" preview />
             </div>
         </div>
     )
@@ -149,7 +149,7 @@ import { Image } from 'primereact/image';
 
                     <h5>Thumbnail</h5>
                     <p>
-                        Allow different images or sizes for source and preview images using <i>previewSrc</i> property.
+                        Allow different images or sizes for source and preview images using <i>zoomSrc</i> property.
                     </p>
 
                     <h5>Templating</h5>
@@ -189,10 +189,10 @@ import { Image } from 'primereact/image';
                                     <td>Controls the preview functionality.</td>
                                 </tr>
                                 <tr>
-                                    <td>previewSrc</td>
+                                    <td>zoomSrc</td>
                                     <td>string</td>
                                     <td>null</td>
-                                    <td>Preview image that may be different than "src" image.</td>
+                                    <td>Zoomed image that may be different than "src" image.</td>
                                 </tr>
                                 <tr>
                                     <td>downloadable</td>

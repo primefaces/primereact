@@ -148,7 +148,7 @@ export const Image = React.memo(
                         onExited={onExited}
                     >
                         <div ref={previewRef}>
-                            <img src={props.previewSrc || props.src} className="p-image-preview" style={imagePreviewStyle} onClick={onPreviewImageClick} alt={props.alt} />
+                            <img src={props.zoomSrc || props.src} className="p-image-preview" style={imagePreviewStyle} onClick={onPreviewImageClick} alt={props.alt} />
                         </div>
                     </CSSTransition>
                 </div>
@@ -194,7 +194,7 @@ Image.defaultProps = {
     imageStyle: null,
     onError: null,
     preview: false,
-    previewSrc: null,
+    zoomSrc: null,
     src: null,
     template: null,
     width: null

@@ -36,7 +36,7 @@ const ImageDemo = () => {
                     <Image src={`${contextPath}/images/galleria/galleria12.jpg`} alt="Image" width="250" preview />
 
                     <h5>Thumbnail</h5>
-                    <Image src={`${contextPath}/images/galleria/galleria14s.jpg`} previewSrc={`${contextPath}/images/galleria/galleria14.jpg`} alt="Image" width="80" height="60" preview />
+                    <Image src={`${contextPath}/images/galleria/galleria14s.jpg`} zoomSrc={`${contextPath}/images/galleria/galleria14.jpg`} alt="Image" width="80" height="60" preview />
                 </div>
             </div>
 
