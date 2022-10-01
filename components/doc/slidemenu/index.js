@@ -1,9 +1,9 @@
-import React, { memo } from 'react';
 import Link from 'next/link';
-import { TabView, TabPanel } from '../../lib/tabview/TabView';
-import { useLiveEditorTabs } from '../common/liveeditor';
+import React, { memo } from 'react';
+import { TabPanel, TabView } from '../../lib/tabview/TabView';
 import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
+import { useLiveEditorTabs } from '../common/liveeditor';
 
 const SlideMenuDoc = memo(() => {
     const sources = {
@@ -961,6 +961,16 @@ const items = [
                                     <td>hide</td>
                                     <td>event: Browser event</td>
                                     <td>Hides the popup menu.</td>
+                                </tr>
+                                <tr>
+                                    <td>navigateForward</td>
+                                    <td>void</td>
+                                    <td>Navigates the slide menu forward.</td>
+                                </tr>
+                                <tr>
+                                    <td>navigateBack</td>
+                                    <td>void</td>
+                                    <td>Navigates the slide menu backwards.</td>
                                 </tr>
                             </tbody>
                         </table>
