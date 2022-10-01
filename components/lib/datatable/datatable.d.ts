@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Column } from '../column';
+import { Column, ColumnFilterMatchModeType } from '../column';
 import { PaginatorTemplate } from '../paginator';
 import { VirtualScroller, VirtualScrollerProps } from '../virtualscroller/virtualscroller';
 
@@ -268,6 +268,7 @@ export interface DataTableProps extends Omit<React.DetailedHTMLProps<React.Input
     frozenWidth?: string;
     globalFilter?: DataTableGlobalFilterType;
     globalFilterFields?: string[];
+    globalFilterMatchMode?: ColumnFilterMatchModeType;
     groupRowsBy?: string;
     header?: DataTableHeaderTemplateType;
     headerColumnGroup?: React.ReactNode;
