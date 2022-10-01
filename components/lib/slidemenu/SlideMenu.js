@@ -95,6 +95,8 @@ export const SlideMenu = React.memo(
             toggle,
             show,
             hide,
+            navigateForward,
+            navigateBack,
             getElement: () => menuRef.current
         }));
 
@@ -157,20 +159,20 @@ export const SlideMenu = React.memo(
 SlideMenu.displayName = 'SlideMenu';
 SlideMenu.defaultProps = {
     __TYPE: 'SlideMenu',
-    id: null,
-    model: null,
-    popup: false,
-    style: null,
+    appendTo: null,
+    autoZIndex: true,
+    backLabel: 'Back',
+    baseZIndex: 0,
     className: null,
     easing: 'ease-out',
     effectDuration: 250,
-    backLabel: 'Back',
+    id: null,
     menuWidth: 190,
-    viewportHeight: 175,
-    autoZIndex: true,
-    baseZIndex: 0,
-    appendTo: null,
-    transitionOptions: null,
+    model: null,
+    onHide: null,
     onShow: null,
-    onHide: null
+    popup: false,
+    style: null,
+    transitionOptions: null,
+    viewportHeight: 175
 };
