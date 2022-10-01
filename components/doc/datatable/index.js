@@ -3354,12 +3354,6 @@ export const DataTableStateDemo = () => {
                                     <td>An array of FilterMetadata objects to provide external filters.</td>
                                 </tr>
                                 <tr>
-                                    <td>globalFilter</td>
-                                    <td>any</td>
-                                    <td>null</td>
-                                    <td>Value of the global filter to use in filtering.</td>
-                                </tr>
-                                <tr>
                                     <td>filterDelay</td>
                                     <td>number</td>
                                     <td>300</td>
@@ -3578,10 +3572,22 @@ export const DataTableStateDemo = () => {
                                     <td>Icon of the row toggler to display the row as collapsed.</td>
                                 </tr>
                                 <tr>
+                                    <td>globalFilter</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Value of the global filter to use in filtering.</td>
+                                </tr>
+                                <tr>
                                     <td>globalFilterFields</td>
                                     <td>string[]</td>
                                     <td>null</td>
                                     <td>Define fields to be filtered globally.</td>
+                                </tr>
+                                <tr>
+                                    <td>globalFilterMatchMode</td>
+                                    <td>string</td>
+                                    <td>contains</td>
+                                    <td>Defines filterMatchMode; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "lt", "lte", "gt", "gte" and "custom".</td>
                                 </tr>
                                 <tr>
                                     <td>showSelectionElement</td>
