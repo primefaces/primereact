@@ -86,6 +86,10 @@ export const SlideMenu = React.memo(
             setLevelState(0);
         }, [props.model]);
 
+        useUpdateEffect(() => {
+            props.onNavigate && props.onNavigate({ level: levelState });
+        }, [levelState]);
+
         useUnmountEffect(() => {
             ZIndexUtils.clear(menuRef.current);
         });
@@ -97,6 +101,7 @@ export const SlideMenu = React.memo(
             hide,
             navigateForward,
             navigateBack,
+            setLevelState,
             getElement: () => menuRef.current
         }));
 
@@ -171,6 +176,7 @@ SlideMenu.defaultProps = {
     model: null,
     onHide: null,
     onShow: null,
+    onNavigate: null,
     popup: false,
     style: null,
     transitionOptions: null,

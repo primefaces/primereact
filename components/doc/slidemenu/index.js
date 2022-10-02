@@ -972,6 +972,11 @@ const items = [
                                     <td>void</td>
                                     <td>Navigates the slide menu backwards.</td>
                                 </tr>
+                                <tr>
+                                    <td>setLevelState</td>
+                                    <td>level: Number of the menu to set</td>
+                                    <td>Navigates the slide menu to this specific level.</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -989,13 +994,18 @@ const items = [
                             <tbody>
                                 <tr>
                                     <td>onShow</td>
-                                    <td>event: Browser event </td>
+                                    <td>event: Browser event</td>
                                     <td>Callback to invoke when a popup menu is shown.</td>
                                 </tr>
                                 <tr>
                                     <td>onHide</td>
-                                    <td>event: Browser event </td>
+                                    <td>event: Browser event</td>
                                     <td>Callback to invoke when a popup menu is hidden.</td>
+                                </tr>
+                                <tr>
+                                    <td>onNavigate</td>
+                                    <td>level: number</td>
+                                    <td>Callback to invoke when a menu is navigated to.</td>
                                 </tr>
                             </tbody>
                         </table>
