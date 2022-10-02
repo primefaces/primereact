@@ -11,12 +11,29 @@ permissions:
 jobs:
   verify_linked_issue:
     runs-on: ubuntu-latest
+    env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
     permissions:
       issues: write
       pull-requests: write
     steps:
-      - name: Dependabot issue for PRs
-        uses: goatandsheep/dependabot-issue-action@v1.0.1
+      - name: Checks if Dependabot PR
+        if: ${{github.event_name != 'pull_request'}}
+        run: echo "no dependabot"
+      - uses: actions/checkout@v2
+        if: ${{github.event.pull_request.user.login  == 'dependabot[bot]' || github.event.pull_request.user.login  == 'app/dependabot' || github.event.pull_request.user.login  == 'app/dependabot-preview'}}
+        
+      - name: Open issue if Dependabot PR
+        if: ${{github.event.pull_request.user.login  == 'dependabot[bot]' || github.event.pull_request.user.login  == 'app/dependabot' || github.event.pull_request.user.login  == 'app/dependabot-preview'}}
+        env:
+          pr_title: ${{github.event.pull_request.title}}
+          pr_number: ${{github.event.pull_request.number}}
+          pr_url: ${{github.event.pull_request.url}}
+        run: |
+          title="Dependabot PR $pr_title opened"
+          body="Dependabot has opened PR #$pr_number
+          Link: $pr_url"
+          gh issue create --title "$title" --body "$body"  
       - name: Verify Linked Issue
         uses: hattan/verify-linked-issue-action@v1.1.5
         env:
