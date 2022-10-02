@@ -51,7 +51,7 @@
         "@types/react-dom": "^18.0.6",
         "@types/react-transition-group": "^4.4.5",
         "@typescript-eslint/eslint-plugin": "^5.37.0",
-        "eslint": "8.23.1",
+        "eslint": "8.24.0",
         "eslint-config-next": "12.3.0",
         "eslint-config-prettier": "^8.5.0",
         "gulp": "^4.0.2",
