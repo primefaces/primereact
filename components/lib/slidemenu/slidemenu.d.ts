@@ -4,6 +4,10 @@ import { MenuItem } from '../menuitem';
 
 type SlideMenuAppendToType = 'self' | HTMLElement | undefined | null;
 
+interface SlideMenuNavigateParams {
+    level: number;
+}
+
 export interface SlideMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     appendTo?: SlideMenuAppendToType;
     autoZIndex?: boolean;
@@ -19,12 +23,14 @@ export interface SlideMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLA
     viewportHeight?: number;
     onShow?(e: React.SyntheticEvent): void;
     onHide?(e: React.SyntheticEvent): void;
+    onNavigate?(e: SlideMenuNavigateParams): void;
 }
 
 export declare class SlideMenu extends React.Component<SlideMenuProps, any> {
     public show(event: React.SyntheticEvent): void;
     public hide(event: React.SyntheticEvent): void;
     public toggle(event: React.SyntheticEvent): void;
+    public setLevelState(level: number): void;
     public navigateForward(): void;
     public navigateBack(): void;
     public getElement(): HTMLDivElement;

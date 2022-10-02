@@ -107,6 +107,17 @@ const SlideMenuEvents = [
                 description: 'Browser event'
             }
         ]
+    },
+    {
+        name: 'onNavigate',
+        description: 'Callback to invoke when a menu is navigated to.',
+        arguments: [
+            {
+                name: 'event.level',
+                type: 'number',
+                description: 'The menu level navigated to'
+            }
+        ]
     }
 ];
 
