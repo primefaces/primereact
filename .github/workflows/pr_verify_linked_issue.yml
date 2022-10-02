@@ -15,6 +15,8 @@ jobs:
       issues: write
       pull-requests: write
     steps:
+      - name: Dependabot issue for PRs
+        uses: goatandsheep/dependabot-issue-action@v1.0.1
       - name: Verify Linked Issue
         uses: hattan/verify-linked-issue-action@v1.1.5
         env:
