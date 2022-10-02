@@ -280,7 +280,14 @@ export const TableBody = React.memo(
             DomHandler.clearSelection();
             rangeRowIndex.current = allowCellSelection() ? event.rowIndex : event.index;
             let selectionInRange = selectRange(event);
-            let selection = isMultipleSelection() ? [...new Set([...(props.selection || []), ...selectionInRange])] : selectionInRange;
+            let selection = selectionInRange;
+
+            if (isMultipleSelection()) {
+                const currentSelection = new Set([...(props.selection || [])]);
+                const newSelection = [...selectionInRange].filter((x) => !currentSelection.has(x));
+
+                selection = [...new Set([...newSelection])];
+            }
 
             if (props.onSelectionChange && selection !== props.selection) {
                 props.onSelectionChange({
@@ -357,6 +364,7 @@ export const TableBody = React.memo(
             for (let i = rowRangeStart; i <= rowRangeEnd; i++) {
                 let rowData = value[i];
                 let columns = props.columns;
+                let rowIndex = props.paginator ? i + props.first : i;
 
                 for (let j = cellRangeStart; j <= cellRangeEnd; j++) {
                     let field = columns[j].props.field;
@@ -365,7 +373,7 @@ export const TableBody = React.memo(
                         value,
                         field,
                         rowData,
-                        rowIndex: i,
+                        rowIndex: rowIndex,
                         cellIndex: j,
                         selected: true
                     };
