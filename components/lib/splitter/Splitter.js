@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { DomHandler, classNames, ObjectUtils } from '../utils/Utils';
-import { useEventListener } from '../hooks/Hooks';
+import { useEventListener, useMountEffect } from '../hooks/Hooks';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const SplitterPanel = () => {};
 
@@ -178,7 +178,11 @@ export const Splitter = React.memo(
             getElement: () => elementRef.current
         }));
 
-        React.useEffect(() => {
+        useMountEffect(() => {
+            if (mounted.current) {
+                return;
+            }
+
             let panelElements = [...elementRef.current.children].filter((child) => DomHandler.hasClass(child, 'p-splitter-panel'));
 
             panelElements.map((panelElement) => {
@@ -190,7 +194,7 @@ export const Splitter = React.memo(
             if (props.children && props.children.length) {
                 let initialized = false;
 
-                if (isStateful && !mounted.current) {
+                if (isStateful) {
                     initialized = restoreState();
                 }
 
@@ -209,7 +213,7 @@ export const Splitter = React.memo(
 
                     panelSizes.current = _panelSizes;
 
-                    mounted.current && saveState();
+                    saveState();
                 }
             }
 
@@ -263,21 +267,21 @@ export const Splitter = React.memo(
 SplitterPanel.displayName = 'SplitterPanel';
 SplitterPanel.defaultProps = {
     __TYPE: 'SplitterPanel',
-    size: null,
+    className: null,
     minSize: null,
-    style: null,
-    className: null
+    size: null,
+    style: null
 };
 
 Splitter.displayName = 'Splitter';
 Splitter.defaultProps = {
     __TYPE: 'Splitter',
-    id: null,
     className: null,
-    style: null,
-    layout: 'horizontal',
     gutterSize: 4,
+    id: null,
+    layout: 'horizontal',
+    onResizeEnd: null,
     stateKey: null,
     stateStorage: 'session',
-    onResizeEnd: null
+    style: null
 };
