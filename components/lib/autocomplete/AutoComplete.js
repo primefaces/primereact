@@ -551,6 +551,7 @@ export const AutoComplete = React.memo(
                         aria-haspopup="listbox"
                         aria-expanded={overlayVisibleState}
                         autoComplete="off"
+                        readOnly={props.readOnly}
                         tabIndex={props.tabIndex}
                         onChange={onInputChange}
                         id={props.inputId}
