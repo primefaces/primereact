@@ -763,7 +763,15 @@ export const InputNumber = React.memo(
         };
 
         const validateValue = (value) => {
-            if (value === '-' || value == null) {
+            if (value === '-') {
+                return null;
+            }
+
+            return validateValueByLimit(value);
+        };
+
+        const validateValueByLimit = (value) => {
+            if (ObjectUtils.isEmpty(value)) {
                 return null;
             }
 
@@ -938,9 +946,9 @@ export const InputNumber = React.memo(
         };
 
         const changeValue = () => {
-            const newValue = validateValue(props.value);
+            updateInputValue(validateValueByLimit(props.value));
 
-            updateInputValue(newValue);
+            const newValue = validateValue(props.value);
 
             if (props.value !== null && props.value !== newValue) {
                 updateModel(null, newValue);
