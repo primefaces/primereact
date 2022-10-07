@@ -25,6 +25,7 @@ export const ProgressBar = React.memo(
                     <div className="p-progressbar-value p-progressbar-value-animate" style={{ width: props.value + '%', display: 'block', backgroundColor: props.color }}>
                         {props.showValue && (
                             <div className={`p-progressbar-label`} style={{ display: props.value != null && props.value !== 0 ? 'flex' : 'none' }}>
+                                {' '}
                                 {label}
                             </div>
                         )}
