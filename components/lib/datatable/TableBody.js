@@ -279,8 +279,7 @@ export const TableBody = React.memo(
         const onRangeSelection = (event, type) => {
             DomHandler.clearSelection();
             rangeRowIndex.current = allowCellSelection() ? event.rowIndex : event.index;
-            let selectionInRange = selectRange(event);
-            let selection = isMultipleSelection() ? [...new Set([...(props.selection || []), ...selectionInRange])] : selectionInRange;
+            const selection = selectRange(event);
 
             if (props.onSelectionChange && selection !== props.selection) {
                 props.onSelectionChange({
