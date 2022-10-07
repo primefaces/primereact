@@ -291,13 +291,15 @@ export const Dialog = React.forwardRef((props, ref) => {
     const disableDocumentSettings = () => {
         unbindGlobalListeners();
 
-        if (props.modal) {
-            let hasBlockScroll = document.primeDialogParams && document.primeDialogParams.some((param) => param.hasBlockScroll);
+        const isMaximized = props.maximizable && maximized;
 
-            if (hasBlockScroll) {
+        if (props.modal) {
+            const hasBlockScroll = document.primeDialogParams && document.primeDialogParams.some((param) => param.hasBlockScroll);
+
+            if (hasBlockScroll || isMaximized) {
                 DomHandler.removeClass(document.body, 'p-overflow-hidden');
             }
-        } else if (props.blockScroll || (props.maximizable && maximized)) {
+        } else if (props.blockScroll || isMaximized) {
             DomHandler.removeClass(document.body, 'p-overflow-hidden');
         }
     };
@@ -560,49 +562,49 @@ export const Dialog = React.forwardRef((props, ref) => {
 Dialog.displayName = 'Dialog';
 Dialog.defaultProps = {
     __TYPE: 'Dialog',
-    id: null,
-    header: null,
-    footer: null,
-    visible: false,
-    position: 'center',
-    draggable: true,
-    resizable: true,
-    modal: true,
-    onHide: null,
-    onShow: null,
-    headerStyle: null,
-    headerClassName: null,
-    contentStyle: null,
-    contentClassName: null,
-    closeOnEscape: true,
-    dismissableMask: false,
-    rtl: false,
-    closable: true,
-    style: null,
-    className: null,
-    maskStyle: null,
-    maskClassName: null,
-    showHeader: true,
     appendTo: null,
-    baseZIndex: 0,
-    maximizable: false,
-    blockScroll: false,
-    icons: null,
     ariaCloseIconLabel: null,
+    baseZIndex: 0,
+    blockScroll: false,
+    breakpoints: null,
+    className: null,
+    closable: true,
+    closeOnEscape: true,
+    contentClassName: null,
+    contentStyle: null,
+    dismissableMask: false,
+    draggable: true,
     focusOnShow: true,
+    footer: null,
+    header: null,
+    headerClassName: null,
+    headerStyle: null,
+    icons: null,
+    id: null,
+    keepInViewport: true,
+    maskClassName: null,
+    maskStyle: null,
+    maximizable: false,
+    maximized: false,
     minX: 0,
     minY: 0,
-    keepInViewport: true,
-    maximized: false,
-    breakpoints: null,
-    transitionOptions: null,
-    onMaximize: null,
-    onDragStart: null,
+    modal: true,
+    onClick: null,
     onDrag: null,
     onDragEnd: null,
-    onResizeStart: null,
+    onDragStart: null,
+    onHide: null,
+    onMaskClick: null,
+    onMaximize: null,
     onResize: null,
     onResizeEnd: null,
-    onClick: null,
-    onMaskClick: null
+    onResizeStart: null,
+    onShow: null,
+    position: 'center',
+    resizable: true,
+    rtl: false,
+    showHeader: true,
+    style: null,
+    transitionOptions: null,
+    visible: false
 };
