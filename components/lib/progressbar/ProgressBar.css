@@ -9,6 +9,10 @@
     position: absolute;
     display: none;
     border: 0 none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
 
 .p-progressbar-determinate .p-progressbar-value-animate {
