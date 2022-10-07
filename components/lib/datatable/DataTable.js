@@ -976,10 +976,10 @@ export const DataTable = React.forwardRef((props, ref) => {
         setD_filtersState(filters);
     };
 
-    const onFilterApply = () => {
+    const onFilterApply = (filtersToApply) => {
         clearTimeout(filterTimeout.current);
         filterTimeout.current = setTimeout(() => {
-            let filters = cloneFilters(d_filtersState);
+            const filters = cloneFilters(filtersToApply || d_filtersState);
 
             if (props.onFilter) {
                 props.onFilter(createEvent({ filters }));
@@ -1130,7 +1130,7 @@ export const DataTable = React.forwardRef((props, ref) => {
         props.filterDisplay === 'menu' && meta && meta.operator ? (filters[field].constraints[index] = constraint) : (filters[field] = constraint);
 
         setD_filtersState(filters);
-        onFilterApply();
+        onFilterApply(filters);
     };
 
     const reset = () => {
@@ -1333,7 +1333,7 @@ export const DataTable = React.forwardRef((props, ref) => {
 
     useUpdateEffect(() => {
         if (props.globalFilter) {
-            filter(props.globalFilter, 'global', 'contains');
+            filter(props.globalFilter, 'global', props.globalFilterMatchMode);
         }
     }, [props.globalFilter]);
 
