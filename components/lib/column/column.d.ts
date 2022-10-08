@@ -7,6 +7,8 @@ type ColumnBodyType = React.ReactNode | ((data: any, options: ColumnBodyOptions)
 
 type ColumnBodyClassType = string | ((data: any, options: ColumnBodyOptions) => string);
 
+type ColumnExpanderType = boolean | ((data: any, options: ColumnBodyOptions) => boolean);
+
 type ColumnFooterType = React.ReactNode | ((options: ColumnFooterOptions) => React.ReactNode);
 
 type ColumnEditorType = React.ReactNode | ((options: ColumnEditorOptions) => React.ReactNode);
@@ -196,7 +198,7 @@ export interface ColumnProps {
     dataType?: ColumnDataType;
     editor?: ColumnEditorType;
     excludeGlobalFilter?: boolean;
-    expander?: boolean;
+    expander?: ColumnExpanderType;
     exportable?: boolean;
     field?: string;
     filter?: boolean;
