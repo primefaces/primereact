@@ -510,7 +510,8 @@ export const BodyCell = React.memo((props) => {
         const align = getColumnProp('align');
         const value = resolveFieldData();
         const cellClassName = ObjectUtils.getPropValue(props.cellClassName, value, { props: props.tableProps, rowData: props.rowData, column: props.column });
-        const className = classNames(getColumnProp('bodyClassName'), getColumnProp('className'), cellClassName, {
+        const bodyClassName = ObjectUtils.getPropValue(getColumnProp('bodyClassName'), props.rowData, { column: props.column, field: field, rowIndex: props.rowIndex, frozenRow: props.frozenRow, props: props.tableProps });
+        const className = classNames(bodyClassName, getColumnProp('className'), cellClassName, {
             'p-selection-column': selectionMode !== null,
             'p-editable-column': editor,
             'p-cell-editing': editor && editingState,

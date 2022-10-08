@@ -5,6 +5,8 @@ type ColumnHeaderType = React.ReactNode | ((options: ColumnHeaderOptions) => Rea
 
 type ColumnBodyType = React.ReactNode | ((data: any, options: ColumnBodyOptions) => React.ReactNode);
 
+type ColumnBodyClassType = string | ((data: any, options: ColumnBodyOptions) => string);
+
 type ColumnFooterType = React.ReactNode | ((options: ColumnFooterOptions) => React.ReactNode);
 
 type ColumnEditorType = React.ReactNode | ((options: ColumnEditorOptions) => React.ReactNode);
@@ -184,7 +186,7 @@ export interface ColumnProps {
     alignFrozen?: ColumnAlignFrozenType;
     alignHeader?: ColumnAlignType;
     body?: ColumnBodyType;
-    bodyClassName?: string;
+    bodyClassName?: ColumnBodyClassType;
     bodyStyle?: object;
     cellEditValidatorEvent?: string;
     children?: React.ReactNode;

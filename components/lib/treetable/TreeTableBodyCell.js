@@ -109,7 +109,8 @@ export const TreeTableBodyCell = (props) => {
         }
     });
 
-    const className = classNames(props.bodyClassName || props.className, {
+    const bodyClassName = ObjectUtils.getPropValue(props.bodyClassName, props.node.data, { field: props.field, rowIndex: props.rowIndex, props: props });
+    const className = classNames(bodyClassName || props.className, {
         'p-editable-column': props.editor,
         'p-cell-editing': props.editor ? editingState : false
     });

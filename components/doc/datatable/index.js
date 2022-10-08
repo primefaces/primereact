@@ -1110,6 +1110,18 @@ export const DataTableDemo = () => {
                                     <td>Body content of the column.</td>
                                 </tr>
                                 <tr>
+                                    <td>bodyStyle</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Inline style of the body.</td>
+                                </tr>
+                                <tr>
+                                    <td>bodyClassName</td>
+                                    <td>string | function</td>
+                                    <td>null</td>
+                                    <td>Style class of the body. If using a function must return a string.</td>
+                                </tr>
+                                <tr>
                                     <td>footer</td>
                                     <td>any</td>
                                     <td>null</td>
@@ -1384,18 +1396,6 @@ export const DataTableDemo = () => {
                                     <td>object</td>
                                     <td>null</td>
                                     <td>Configuration of the header tooltip, refer to the tooltip documentation for more information.</td>
-                                </tr>
-                                <tr>
-                                    <td>bodyStyle</td>
-                                    <td>object</td>
-                                    <td>null</td>
-                                    <td>Inline style of the body.</td>
-                                </tr>
-                                <tr>
-                                    <td>bodyClassName</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Style class of the body.</td>
                                 </tr>
                                 <tr>
                                     <td>footerStyle</td>
