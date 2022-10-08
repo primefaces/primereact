@@ -8,19 +8,19 @@ interface DataScrollerLazyLoadParams {
 }
 
 export interface DataScrollerProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
-    value?: any[];
-    rows?: number;
-    inline?: boolean;
-    scrollHeight?: string;
-    loader?: boolean;
     buffer?: number;
-    header?: React.ReactNode;
-    footer?: React.ReactNode;
-    lazy?: boolean;
-    emptyMessage?: DataScrollerEmptyMessageType;
-    onLazyLoad?(e: DataScrollerLazyLoadParams): void;
-    itemTemplate?(item: any): React.ReactNode;
     children?: React.ReactNode;
+    emptyMessage?: DataScrollerEmptyMessageType;
+    footer?: React.ReactNode;
+    header?: React.ReactNode;
+    inline?: boolean;
+    lazy?: boolean;
+    loader?: boolean;
+    rows?: number;
+    scrollHeight?: string;
+    value?: any[];
+    itemTemplate?(item: any): React.ReactNode;
+    onLazyLoad?(e: DataScrollerLazyLoadParams): void;
 }
 
 export declare class DataScroller extends React.Component<DataScrollerProps, any> {
