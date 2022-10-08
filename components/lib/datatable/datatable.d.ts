@@ -315,10 +315,10 @@ export interface DataTableProps extends Omit<React.DetailedHTMLProps<React.Input
     stateKey?: string;
     stateStorage?: DataTableStateStorageType;
     stripedRows?: boolean;
-    style?: object;
+    style?: React.CSSProperties;
     tabIndex?: number;
     tableClassName?: string;
-    tableStyle?: object;
+    tableStyle?: React.CSSProperties;
     totalRecords?: number;
     virtualScrollerOptions?: VirtualScrollerProps;
     cellClassName?(value: any, options: DataTableCellClassNameOptions): object | string;

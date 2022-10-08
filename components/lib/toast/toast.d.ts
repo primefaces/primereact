@@ -18,9 +18,9 @@ export interface ToastMessage {
     sticky?: boolean;
     life?: number;
     className?: string;
-    style?: object;
+    style?: React.CSSProperties;
     contentClassName?: string;
-    contentStyle?: object;
+    contentStyle?: React.CSSProperties;
 }
 
 export interface ToastProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {

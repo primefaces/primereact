@@ -13,7 +13,7 @@ interface TooltipEventParams {
 
 export default interface TooltipOptions {
     className?: string;
-    style?: object;
+    style?: React.CSSProperties;
     appendTo?: TooltipAppendToType;
     position?: TooltipPositionType;
     my?: string;

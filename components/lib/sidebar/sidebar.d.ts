@@ -8,7 +8,7 @@ type SidebarTemplateType = React.ReactNode | ((props: SidebarProps) => React.Rea
 type SidebarAppendToType = 'self' | HTMLElement | undefined | null;
 
 export interface SidebarProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
-    maskStyle?: object;
+    maskStyle?: React.CSSProperties;
     maskClassName?: string;
     visible?: boolean;
     position?: SidebarPositionType;

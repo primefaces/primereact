@@ -6,7 +6,7 @@ export default interface TreeNode {
     data?: any;
     icon?: IconType<TreeNode>;
     children?: TreeNode[];
-    style?: object;
+    style?: React.CSSProperties;
     className?: string;
     droppable?: boolean;
     draggable?: boolean;

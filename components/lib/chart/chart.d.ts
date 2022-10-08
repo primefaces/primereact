@@ -8,7 +8,7 @@ export interface ChartProps {
     plugins?: any[];
     width?: string;
     height?: string;
-    style?: object;
+    style?: React.CSSProperties;
     className?: string;
     children?: React.ReactNode;
 }

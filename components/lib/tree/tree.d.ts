@@ -116,9 +116,9 @@ export interface TreeProps {
     selectionKeys?: TreeSelectionKeys;
     contextMenuSelectionKey?: string;
     expandedKeys?: TreeExpandedKeysType;
-    style?: object;
+    style?: React.CSSProperties;
     className?: string;
-    contentStyle?: object;
+    contentStyle?: React.CSSProperties;
     contentClassName?: string;
     metaKeySelection?: boolean;
     propagateSelectionUp?: boolean;

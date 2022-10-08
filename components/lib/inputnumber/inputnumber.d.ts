@@ -56,7 +56,7 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
     size?: number;
     inputId?: string;
     autoFocus?: boolean;
-    inputStyle?: object;
+    inputStyle?: React.CSSProperties;
     inputClassName?: string;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;

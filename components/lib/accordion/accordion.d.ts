@@ -8,13 +8,13 @@ interface AccordionTabProps {
     children?: React.ReactNode;
     className?: string;
     contentClassName?: string;
-    contentStyle?: object;
+    contentStyle?: React.CSSProperties;
     disabled?: boolean;
     header?: React.ReactNode;
     headerClassName?: string;
-    headerStyle?: object;
+    headerStyle?: React.CSSProperties;
     headerTemplate?: AccordionTabHeaderTemplateType;
-    style?: object;
+    style?: React.CSSProperties;
     tabIndex: number;
 }
 

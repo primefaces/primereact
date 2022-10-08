@@ -23,11 +23,11 @@ export interface TabPanelProps {
     rightIcon?: string;
     disabled?: boolean;
     closable?: boolean;
-    style?: object;
+    style?: React.CSSProperties;
     className?: string;
-    headerStyle?: object;
+    headerStyle?: React.CSSProperties;
     headerClassName?: string;
-    contentStyle?: object;
+    contentStyle?: React.CSSProperties;
     contentClassName?: string;
     children?: React.ReactNode;
 }
@@ -48,7 +48,7 @@ export interface TabViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
     activeIndex?: number;
     children?: React.ReactNode;
     panelContainerClassName?: string;
-    panelContainerStyle?: object;
+    panelContainerStyle?: React.CSSProperties;
     renderActiveOnly?: boolean;
     scrollable?: boolean;
     onBeforeTabChange?(e: TabViewTabChangeParams): void;

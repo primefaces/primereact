@@ -152,10 +152,10 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
     sortMode?: TreeTableSortModeType;
     sortOrder?: TreeTableSortOrderType;
     stripedRows?: boolean;
-    style?: object;
+    style?: React.CSSProperties;
     tabIndex?: number;
     tableClassName?: string;
-    tableStyle?: object;
+    tableStyle?: React.CSSProperties;
     totalRecords?: number;
     value?: TreeNode[];
     onColReorder?(e: TreeTableColReorderParams): void;

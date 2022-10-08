@@ -39,10 +39,10 @@ export interface MentionProps extends Omit<React.DetailedHTMLProps<React.Textare
     inputClassName?: string;
     inputId?: string;
     inputRef?: React.Ref<HTMLInputElement>;
-    inputStyle?: object;
+    inputStyle?: React.CSSProperties;
     itemTemplate?: MentionItemTemplateType;
     panelClassName?: string;
-    panelStyle?: object;
+    panelStyle?: React.CSSProperties;
     scrollHeight?: string;
     suggestions?: any[];
     transitionOptions?: CSSTransitionProps;

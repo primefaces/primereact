@@ -91,7 +91,7 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
     ariaLabel?: string;
     ariaLabelledBy?: string;
     selectionMode?: TreeSelectSelectionModeType;
-    panelStyle?: object;
+    panelStyle?: React.CSSProperties;
     panelClassName?: string;
     appendTo?: TreeSelectAppendToType;
     emptyMessage?: string;

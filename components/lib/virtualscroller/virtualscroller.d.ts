@@ -95,7 +95,7 @@ interface VirtualScrollerLazyParams extends VirtualScrollerChangeParams {}
 
 export interface VirtualScrollerProps {
     id?: string;
-    style?: object;
+    style?: React.CSSProperties;
     className?: string;
     items?: VirtualScrollerItemsType;
     itemSize?: VirtualScrollerItemSizeType;
