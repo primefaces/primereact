@@ -501,7 +501,6 @@ export const BodyCell = React.memo((props) => {
         const tabIndex = getTabIndex(cellSelected);
         const selectionMode = getColumnProp('selectionMode');
         const rowReorder = getColumnProp('rowReorder');
-        const expander = getColumnProp('expander');
         const rowEditor = getColumnProp('rowEditor');
         const header = getColumnProp('header');
         const body = getColumnProp('body');
@@ -509,8 +508,10 @@ export const BodyCell = React.memo((props) => {
         const frozen = getColumnProp('frozen');
         const align = getColumnProp('align');
         const value = resolveFieldData();
-        const cellClassName = ObjectUtils.getPropValue(props.cellClassName, value, { props: props.tableProps, rowData: props.rowData, column: props.column });
-        const bodyClassName = ObjectUtils.getPropValue(getColumnProp('bodyClassName'), props.rowData, { column: props.column, field: field, rowIndex: props.rowIndex, frozenRow: props.frozenRow, props: props.tableProps });
+        const columnBodyOptions = { column: props.column, field: field, rowIndex: props.rowIndex, frozenRow: props.frozenRow, props: props.tableProps };
+        const expander = ObjectUtils.getPropValue(getColumnProp('expander'), props.rowData, columnBodyOptions);
+        const cellClassName = ObjectUtils.getPropValue(props.cellClassName, value, columnBodyOptions);
+        const bodyClassName = ObjectUtils.getPropValue(getColumnProp('bodyClassName'), props.rowData, columnBodyOptions);
         const className = classNames(bodyClassName, getColumnProp('className'), cellClassName, {
             'p-selection-column': selectionMode !== null,
             'p-editable-column': editor,
