@@ -46,7 +46,7 @@ export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHT
     optionGroupTemplate?: ListBoxOptionGroupTemplateType;
     itemTemplate?: ListBoxItemTemplateType;
     filterTemplate?: ListBoxFilterTemplateType;
-    listStyle?: object;
+    listStyle?: React.CSSProperties;
     listClassName?: string;
     virtualScrollerOptions?: VirtualScrollerProps;
     disabled?: boolean;

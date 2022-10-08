@@ -27,10 +27,10 @@ export interface SpeedDialProps extends Omit<React.DetailedHTMLProps<React.HTMLA
     mask?: boolean;
     disabled?: boolean;
     hideOnClickOutside?: boolean;
-    buttonStyle?: object;
+    buttonStyle?: React.CSSProperties;
     buttonClassName?: string;
     buttonTemplate?: SpeedDialButtonTemplateType;
-    maskStyle?: object;
+    maskStyle?: React.CSSProperties;
     maskClassName?: string;
     showIcon?: IconType<SpeedDialProps>;
     hideIcon?: IconType<SpeedDialProps>;

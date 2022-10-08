@@ -64,7 +64,7 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.In
     inputClassName?: string;
     inputId?: string;
     inputRef?: React.Ref<HTMLInputElement>;
-    inputStyle?: object;
+    inputStyle?: React.CSSProperties;
     itemTemplate?: AutoCompleteItemTemplateType;
     maxLength?: number;
     minLength?: number;
@@ -74,7 +74,7 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.In
     optionGroupLabel?: string;
     optionGroupTemplate?: AutoCompleteOptionGroupTemplateType;
     panelClassName?: string;
-    panelStyle?: object;
+    panelStyle?: React.CSSProperties;
     placeholder?: string;
     readOnly?: boolean;
     removeIcon?: IconType<AutoCompleteProps>;
@@ -82,7 +82,7 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.In
     selectedItemTemplate?: AutoCompleteSelectedItemTemplateType;
     showEmptyMessage?: boolean;
     size?: number;
-    style?: object;
+    style?: React.CSSProperties;
     suggestions?: any[];
     tabIndex?: number;
     tooltip?: string;

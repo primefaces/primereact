@@ -59,7 +59,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
     valueTemplate?: DropdownValueTemplateType;
     filterTemplate?: DropdownFilterTemplateType;
     itemTemplate?: DropdownItemTemplateType;
-    style?: object;
+    style?: React.CSSProperties;
     className?: string;
     virtualScrollerOptions?: VirtualScrollerProps;
     scrollHeight?: string;
@@ -81,7 +81,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
     resetFilterOnHide?: boolean;
     showFilterClear?: boolean;
     panelClassName?: string;
-    panelStyle?: object;
+    panelStyle?: React.CSSProperties;
     dataKey?: string;
     inputId?: string;
     showClear?: boolean;

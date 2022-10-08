@@ -92,7 +92,7 @@ export interface CalendarProps {
     inputClassName?: string;
     inputId?: string;
     inputRef?: React.Ref<HTMLInputElement>;
-    inputStyle?: object;
+    inputStyle?: React.CSSProperties;
     keepInvalid?: boolean;
     locale?: string;
     mask?: string;
@@ -103,7 +103,7 @@ export interface CalendarProps {
     name?: string;
     numberOfMonths?: number;
     panelClassName?: string;
-    panelStyle?: object;
+    panelStyle?: React.CSSProperties;
     placeholder?: string;
     readOnlyInput?: boolean;
     required?: boolean;
@@ -123,7 +123,7 @@ export interface CalendarProps {
     stepMillisec?: number;
     stepMinute?: number;
     stepSecond?: number;
-    style?: object;
+    style?: React.CSSProperties;
     tabIndex?: number;
     timeOnly?: boolean;
     todayButtonClassName?: string;

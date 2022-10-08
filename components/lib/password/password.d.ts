@@ -24,7 +24,7 @@ type PasswordAppendToType = 'self' | HTMLElement | undefined | null;
 export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onInput' | 'ref'> {
     inputId?: string;
     inputRef?: React.Ref<HTMLInputElement>;
-    inputStyle?: object;
+    inputStyle?: React.CSSProperties;
     inputClassName?: string;
     promptLabel?: string;
     weakLabel?: string;
@@ -42,7 +42,7 @@ export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputH
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     keyfilter?: KeyFilterType;
-    panelStyle?: object;
+    panelStyle?: React.CSSProperties;
     panelClassName?: string;
     transitionOptions?: CSSTransitionProps;
     onInput?(event: React.FormEvent<HTMLInputElement>, validatePattern: boolean): void;

@@ -8,7 +8,7 @@ interface FileUploadOptionsType {
     icon?: IconType<FileUploadProps>;
     iconOnly?: boolean;
     className?: string;
-    style?: object;
+    style?: React.CSSProperties;
 }
 
 interface FileUploadHeaderTemplateOptions {
@@ -93,7 +93,7 @@ interface FileUploadProps {
     maxFileSize?: number;
     invalidFileSizeMessageSummary?: string;
     invalidFileSizeMessageDetail?: string;
-    style?: object;
+    style?: React.CSSProperties;
     className?: string;
     withCredentials?: boolean;
     previewWidth?: number;
@@ -105,9 +105,9 @@ interface FileUploadProps {
     cancelOptions?: FileUploadOptionsType;
     customUpload?: boolean;
     headerClassName?: string;
-    headerStyle?: object;
+    headerStyle?: React.CSSProperties;
     contentClassName?: string;
-    contentStyle?: object;
+    contentStyle?: React.CSSProperties;
     headerTemplate?: FileUploadHeaderTemplateType;
     itemTemplate?: FileUploadItemTemplateType;
     emptyTemplate?: FileUploadEmptyTemplateType;

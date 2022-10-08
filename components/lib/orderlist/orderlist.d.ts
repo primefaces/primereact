@@ -15,7 +15,7 @@ interface OrderListFilterOptions {
 export interface OrderListProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
     value?: any[];
     header?: React.ReactNode;
-    listStyle?: object;
+    listStyle?: React.CSSProperties;
     dragdrop?: boolean;
     dataKey?: string;
     filter?: boolean;
