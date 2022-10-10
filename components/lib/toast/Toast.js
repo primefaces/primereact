@@ -14,20 +14,20 @@ export const Toast = React.memo(
         const [messagesState, setMessagesState] = React.useState([]);
         const containerRef = React.useRef(null);
 
-        const show = (value) => {
-            if (value) {
-                const messages = assignIdentifiers(value, true);
+        const show = (messageInfo) => {
+            if (messageInfo) {
+                const messages = assignIdentifiers(messageInfo, true);
 
                 messagesState.length === 0 && ZIndexUtils.set('toast', containerRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['toast']);
                 setMessagesState(messages);
             }
         };
 
-        const assignIdentifiers = (value, copy) => {
+        const assignIdentifiers = (messageInfo, copy) => {
             let messages;
 
-            if (Array.isArray(value)) {
-                const multipleMessages = value.reduce((acc, message) => {
+            if (Array.isArray(messageInfo)) {
+                const multipleMessages = messageInfo.reduce((acc, message) => {
                     acc.push({ _pId: messageIdx++, message });
 
                     return acc;
@@ -39,7 +39,7 @@ export const Toast = React.memo(
                     messages = multipleMessages;
                 }
             } else {
-                const message = { _pId: messageIdx++, message: value };
+                const message = { _pId: messageIdx++, message: messageInfo };
 
                 if (copy) {
                     messages = messagesState ? [...messagesState, message] : [message];
@@ -56,18 +56,22 @@ export const Toast = React.memo(
             setMessagesState([]);
         };
 
-        const replace = (value) => {
-            const replaced = assignIdentifiers(value, false);
+        const replace = (messageInfo) => {
+            const replaced = assignIdentifiers(messageInfo, false);
 
             setMessagesState(replaced);
         };
 
-        const onClose = (messageInfo) => {
+        const remove = (messageInfo) => {
             const messages = messagesState.filter((msg) => msg._pId !== messageInfo._pId);
 
             setMessagesState(messages);
 
             props.onRemove && props.onRemove(messageInfo.message);
+        };
+
+        const onClose = (messageInfo) => {
+            remove(messageInfo);
         };
 
         const onEntered = () => {
@@ -88,6 +92,7 @@ export const Toast = React.memo(
             props,
             show,
             replace,
+            remove,
             clear,
             getElement: () => containerRef.current
         }));
