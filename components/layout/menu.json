@@ -38,7 +38,8 @@
                 {
                     "name": "PRO Support",
                     "to": "/support",
-                    "meta": ["pro support"]
+                    "meta": ["pro support"],
+                    "badge": "new"
                 }
             ]
         },
