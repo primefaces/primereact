@@ -92,6 +92,14 @@ export const Editor = React.memo(
                     }
                 }
 
+                if (props.maxLength) {
+                    const length = quill.current.getLength();
+
+                    if (length > props.maxLength) {
+                        quill.current.deleteText(props.maxLength, length);
+                    }
+                }
+
                 if (props.onTextChange) {
                     props.onTextChange({
                         htmlValue: html,
@@ -213,5 +221,6 @@ Editor.defaultProps = {
     headerTemplate: null,
     onTextChange: null,
     onSelectionChange: null,
-    onLoad: null
+    onLoad: null,
+    maxLength: null
 };

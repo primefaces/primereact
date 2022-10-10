@@ -1,9 +1,9 @@
-import React, { memo } from 'react';
 import Link from 'next/link';
-import { TabView, TabPanel } from '../../lib/tabview/TabView';
-import { useLiveEditorTabs } from '../common/liveeditor';
+import React, { memo } from 'react';
+import { TabPanel, TabView } from '../../lib/tabview/TabView';
 import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
+import { useLiveEditorTabs } from '../common/liveeditor';
 
 const EditorDoc = memo(() => {
     const sources = {
@@ -286,6 +286,12 @@ const header = (
                                     <td>any</td>
                                     <td>null</td>
                                     <td>Style and modules of the toolbar.</td>
+                                </tr>
+                                <tr>
+                                    <td>maxLength</td>
+                                    <td>number</td>
+                                    <td>null</td>
+                                    <td>Maximum number of characters the editor will accept.</td>
                                 </tr>
                             </tbody>
                         </table>
