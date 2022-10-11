@@ -119,7 +119,15 @@ interface ColumnFilterElementTemplateOptions {
 
 interface ColumnEventParams {
     originalEvent: React.SyntheticEvent;
-    columnProps: ColumnProps;
+    value: any;
+    field: string;
+    rowData: any;
+    rowIndex: number;
+    cellIndex: number;
+    selected: boolean;
+    column: Column;
+    newRowData: any;
+    newValue: any;
 }
 
 interface ColumnSortMetaData {
