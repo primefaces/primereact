@@ -314,7 +314,12 @@ export const DataTable = React.forwardRef((props, ref) => {
             if (props.resizableColumns) {
                 columnWidthsState.current = restoredState.columnWidths;
                 tableWidthState.current = restoredState.tableWidth;
-                restoreColumnWidths();
+
+                const isCustom = props.customRestoreState && isCustomStateStorage();
+
+                if (!isCustom) {
+                    restoreColumnWidths();
+                }
             }
 
             if (props.reorderableColumns) {
