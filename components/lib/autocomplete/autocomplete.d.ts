@@ -55,6 +55,7 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.In
     delay?: number;
     disabled?: boolean;
     dropdown?: boolean;
+    dropdownAriaLabel?: string;
     dropdownAutoFocus?: boolean;
     dropdownIcon?: IconType<AutoCompleteProps>;
     dropdownMode?: string;
