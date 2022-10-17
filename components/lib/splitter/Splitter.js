@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEventListener, useMountEffect } from '../hooks/Hooks';
+import { useEventListener } from '../hooks/Hooks';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const SplitterPanel = () => {};
@@ -18,7 +18,6 @@ export const Splitter = React.memo(
         const nextPanelSize = React.useRef(null);
         const prevPanelIndex = React.useRef(null);
         const panelSizes = React.useRef(null);
-        const mounted = React.useRef(false);
         const isStateful = props.stateKey != null;
 
         const [bindDocumentMouseMoveListener, unbindDocumentMouseMoveListener] = useEventListener({ type: 'mousemove', listener: (event) => onResize(event) });
@@ -178,12 +177,8 @@ export const Splitter = React.memo(
             getElement: () => elementRef.current
         }));
 
-        useMountEffect(() => {
-            if (mounted.current) {
-                return;
-            }
-
-            let panelElements = [...elementRef.current.children].filter((child) => DomHandler.hasClass(child, 'p-splitter-panel'));
+        React.useEffect(() => {
+            const panelElements = [...elementRef.current.children].filter((child) => DomHandler.hasClass(child, 'p-splitter-panel'));
 
             panelElements.map((panelElement) => {
                 if (panelElement.childNodes && ObjectUtils.isNotEmpty(DomHandler.find(panelElement, '.p-splitter'))) {
@@ -192,13 +187,7 @@ export const Splitter = React.memo(
             });
 
             if (props.children && props.children.length) {
-                let initialized = false;
-
-                if (isStateful) {
-                    initialized = restoreState();
-                }
-
-                if (!initialized) {
+                if (!stateFul || !restoreState()) {
                     let _panelSizes = [];
 
                     props.children.map((panel, i) => {
@@ -216,9 +205,7 @@ export const Splitter = React.memo(
                     saveState();
                 }
             }
-
-            mounted.current = true;
-        });
+        }, [props.stateKey, props.stateStorage]);
 
         const createPanel = (panel, index) => {
             const otherProps = ObjectUtils.findDiffKeys(panel.props, SplitterPanel.defaultProps);
