@@ -15,10 +15,15 @@ export const Splitter = React.memo(
         const prevPanelElement = React.useRef(null);
         const nextPanelElement = React.useRef(null);
         const prevPanelSize = React.useRef(null);
+        const prevPanelSizeNew = React.useRef(null);
         const nextPanelSize = React.useRef(null);
+        const nextPanelSizeNew = React.useRef(null);
         const prevPanelIndex = React.useRef(null);
-        const panelSizes = React.useRef(null);
+        const [panelSizes, setPanelSizes] = React.useState([]);
         const isStateful = props.stateKey != null;
+        const childrenLength = props.children && props.children.length;
+
+        const panelSize = (sizes, index) => (index in sizes) ? sizes[index] : (props.children[index].props.size || 100 / childrenLength);
 
         const [bindDocumentMouseMoveListener, unbindDocumentMouseMoveListener] = useEventListener({ type: 'mousemove', listener: (event) => onResize(event) });
         const [bindDocumentMouseUpListener, unbindDocumentMouseUpListener] = useEventListener({
@@ -40,6 +45,9 @@ export const Splitter = React.memo(
         };
 
         const validateResize = (newPrevPanelSize, newNextPanelSize) => {
+            if (newPrevPanelSize > 100 || newPrevPanelSize < 0) return false;
+            if (newNextPanelSize > 100 || newNextPanelSize < 0) return false;
+
             if (props.children[prevPanelIndex.current].props && props.children[prevPanelIndex.current].props.minSize && props.children[prevPanelIndex.current].props.minSize > newPrevPanelSize) {
                 return false;
             }
@@ -58,11 +66,13 @@ export const Splitter = React.memo(
             prevPanelElement.current = null;
             nextPanelElement.current = null;
             prevPanelSize.current = null;
+            prevPanelSizeNew.current = null;
             nextPanelSize.current = null;
+            nextPanelSizeNew.current = null;
             prevPanelIndex.current = null;
         };
 
-        const getStorage = () => {
+        const getStorage = React.useCallback(() => {
             switch (props.stateStorage) {
                 case 'local':
                     return window.localStorage;
@@ -73,29 +83,17 @@ export const Splitter = React.memo(
                 default:
                     throw new Error(props.stateStorage + ' is not a valid value for the state storage, supported values are "local" and "session".');
             }
+        }, [props.stateStorage]);
+
+        const saveState = sizes => {
+            getStorage().setItem(props.stateKey, JSON.stringify(sizes));
         };
 
-        const saveState = () => {
-            getStorage().setItem(props.stateKey, JSON.stringify(panelSizes.current));
-        };
+        const restoreState = React.useCallback(() => {
+            const stateString = getStorage().getItem(props.stateKey);
 
-        const restoreState = () => {
-            const storage = getStorage();
-            const stateString = storage.getItem(props.stateKey);
-
-            if (stateString) {
-                panelSizes.current = JSON.parse(stateString);
-                let children = [...elementRef.current.children].filter((child) => DomHandler.hasClass(child, 'p-splitter-panel'));
-
-                children.forEach((child, i) => {
-                    child.style.flexBasis = 'calc(' + panelSizes.current[i] + '% - ' + (props.children.length - 1) * props.gutterSize + 'px)';
-                });
-
-                return true;
-            }
-
-            return false;
-        };
+            if (stateString) setPanelSizes(JSON.parse(stateString));
+        }, [getStorage, props.stateKey]);
 
         const onResizeStart = (event, index) => {
             gutterRef.current = gutterRefs.current[index];
@@ -108,7 +106,9 @@ export const Splitter = React.memo(
             prevPanelElement.current = gutterRef.current.previousElementSibling;
             nextPanelElement.current = gutterRef.current.nextElementSibling;
             prevPanelSize.current = (100 * (props.layout === 'horizontal' ? DomHandler.getOuterWidth(prevPanelElement.current, true) : DomHandler.getOuterHeight(prevPanelElement.current, true))) / size.current;
+            prevPanelSizeNew.current = prevPanelSize.current;
             nextPanelSize.current = (100 * (props.layout === 'horizontal' ? DomHandler.getOuterWidth(nextPanelElement.current, true) : DomHandler.getOuterHeight(nextPanelElement.current, true))) / size.current;
+            nextPanelSizeNew.current = nextPanelSize.current;
             prevPanelIndex.current = index;
             DomHandler.addClass(gutterRef.current, 'p-splitter-gutter-resizing');
             DomHandler.addClass(elementRef.current, 'p-splitter-resizing');
@@ -126,24 +126,32 @@ export const Splitter = React.memo(
             let newNextPanelSize = nextPanelSize.current - newPos;
 
             if (validateResize(newPrevPanelSize, newNextPanelSize)) {
+                prevPanelSizeNew.current = newPrevPanelSize;
+                nextPanelSizeNew.current = newNextPanelSize;
                 prevPanelElement.current.style.flexBasis = 'calc(' + newPrevPanelSize + '% - ' + (props.children.length - 1) * props.gutterSize + 'px)';
                 nextPanelElement.current.style.flexBasis = 'calc(' + newNextPanelSize + '% - ' + (props.children.length - 1) * props.gutterSize + 'px)';
-                panelSizes.current[prevPanelIndex.current] = newPrevPanelSize;
-                panelSizes.current[prevPanelIndex.current + 1] = newNextPanelSize;
             }
         };
 
         const onResizeEnd = (event) => {
-            if (isStateful) {
-                saveState();
-            }
+            setPanelSizes(prev => {
+                const sizes = [];
 
-            if (props.onResizeEnd) {
-                props.onResizeEnd({
-                    originalEvent: event,
-                    sizes: panelSizes.current
-                });
-            }
+                for (const index = 0; index < props.children.length; index++) sizes[index] = panelSize(prev, index);
+                sizes[prevPanelIndex.current] = prevPanelSizeNew.current;
+                sizes[prevPanelIndex.current + 1] = nextPanelSizeNew.current;
+
+                if (props.onResizeEnd) {
+                    props.onResizeEnd({
+                        originalEvent: event,
+                        sizes
+                    });
+                }
+
+                if (isStateful) saveState(sizes);
+
+                return sizes;
+            });
 
             DomHandler.removeClass(gutterRef.current, 'p-splitter-gutter-resizing');
             DomHandler.removeClass(elementRef.current, 'p-splitter-resizing');
@@ -185,27 +193,11 @@ export const Splitter = React.memo(
                     DomHandler.addClass(panelElement, 'p-splitter-panel-nested');
                 }
             });
+        }, []);
 
-            if (props.children && props.children.length) {
-                if (!stateFul || !restoreState()) {
-                    let _panelSizes = [];
-
-                    props.children.map((panel, i) => {
-                        let panelInitialSize = panel.props && panel.props.size ? panel.props.size : null;
-                        let panelSize = panelInitialSize || 100 / props.children.length;
-
-                        _panelSizes[i] = panelSize;
-                        panelElements[i].style.flexBasis = 'calc(' + panelSize + '% - ' + (props.children.length - 1) * props.gutterSize + 'px)';
-
-                        return _panelSizes;
-                    });
-
-                    panelSizes.current = _panelSizes;
-
-                    saveState();
-                }
-            }
-        }, [props.stateKey, props.stateStorage]);
+        React.useEffect(() => {
+            if (isStateful) restoreState();
+        }, [restoreState, isStateful]);
 
         const createPanel = (panel, index) => {
             const otherProps = ObjectUtils.findDiffKeys(panel.props, SplitterPanel.defaultProps);
@@ -225,9 +217,11 @@ export const Splitter = React.memo(
                 </div>
             );
 
+            const flexBasis = 'calc(' + panelSize(panelSizes, index) + '% - ' + (childrenLength - 1) * props.gutterSize + 'px)';
+
             return (
                 <React.Fragment>
-                    <div key={index} className={panelClassName} style={panel.props.style} {...otherProps}>
+                    <div key={index} className={panelClassName} style={{...panel.props.style, flexBasis}} {...otherProps}>
                         {panel.props.children}
                     </div>
                     {gutter}
