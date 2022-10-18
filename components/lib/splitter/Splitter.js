@@ -23,7 +23,7 @@ export const Splitter = React.memo(
         const isStateful = props.stateKey != null;
         const childrenLength = props.children && props.children.length;
 
-        const panelSize = (sizes, index) => (index in sizes) ? sizes[index] : (props.children[index].props.size || 100 / childrenLength);
+        const panelSize = (sizes, index) => (index in sizes ? sizes[index] : (props.children[index].props.size || 100) / childrenLength);
 
         const [bindDocumentMouseMoveListener, unbindDocumentMouseMoveListener] = useEventListener({ type: 'mousemove', listener: (event) => onResize(event) });
         const [bindDocumentMouseUpListener, unbindDocumentMouseUpListener] = useEventListener({
@@ -85,7 +85,7 @@ export const Splitter = React.memo(
             }
         }, [props.stateStorage]);
 
-        const saveState = sizes => {
+        const saveState = (sizes) => {
             getStorage().setItem(props.stateKey, JSON.stringify(sizes));
         };
 
@@ -134,7 +134,7 @@ export const Splitter = React.memo(
         };
 
         const onResizeEnd = (event) => {
-            setPanelSizes(prev => {
+            setPanelSizes((prev) => {
                 const sizes = [];
 
                 for (const index = 0; index < props.children.length; index++) sizes[index] = panelSize(prev, index);
@@ -221,7 +221,7 @@ export const Splitter = React.memo(
 
             return (
                 <React.Fragment>
-                    <div key={index} className={panelClassName} style={{...panel.props.style, flexBasis}} {...otherProps}>
+                    <div key={index} className={panelClassName} style={{ ...panel.props.style, flexBasis }} {...otherProps}>
                         {panel.props.children}
                     </div>
                     {gutter}
