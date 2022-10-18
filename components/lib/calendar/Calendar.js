@@ -2489,7 +2489,7 @@ export const Calendar = React.memo(
         }, [props.onViewDateChange, props.value]);
 
         useUpdateEffect(() => {
-            if (previousValue !== props.value && (!viewStateChanged.current || !visible)) {
+            if (previousValue !== props.value && (!viewStateChanged.current || visible)) {
                 updateInputfield(props.value);
             }
         }, [props.value, visible]);
