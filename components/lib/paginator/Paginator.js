@@ -106,7 +106,7 @@ export const Paginator = React.memo(
 
         useUpdateEffect(() => {
             if (!rppChanged.current) {
-                changePage(0, props.rows);
+                changePage(props.first, props.rows);
             }
 
             rppChanged.current = false;
