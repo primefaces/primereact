@@ -6,6 +6,7 @@ interface TabPanelHeaderTemplateOptions {
     className: string;
     titleClassName: string;
     onClick(event: React.MouseEvent<HTMLElement>): void;
+    onKeyDown(event: React.KeyboardEvent<HTMLElement>): void;
     leftIconElement: JSX.Element;
     titleElement: JSX.Element;
     rightIconElement: JSX.Element;

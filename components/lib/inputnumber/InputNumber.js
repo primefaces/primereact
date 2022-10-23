@@ -432,7 +432,7 @@ export const InputNumber = React.memo(
                                 _decimal.current.lastIndex = 0;
 
                                 if (decimalLength) {
-                                    $refs.input.$el.setSelectionRange(selectionStart + 1, selectionStart + 1);
+                                    inputRef.current.setSelectionRange(selectionStart + 1, selectionStart + 1);
                                 } else {
                                     newValueStr = inputValue.slice(0, selectionStart) + inputValue.slice(selectionStart + 1);
                                 }

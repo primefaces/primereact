@@ -667,6 +667,7 @@ AutoComplete.defaultProps = {
     delay: 300,
     disabled: false,
     dropdown: false,
+    dropdownAriaLabel: null,
     dropdownAutoFocus: true,
     dropdownIcon: 'pi pi-chevron-down',
     dropdownMode: 'blank',

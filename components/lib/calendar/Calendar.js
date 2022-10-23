@@ -2489,7 +2489,7 @@ export const Calendar = React.memo(
         }, [props.onViewDateChange, props.value]);
 
         useUpdateEffect(() => {
-            if (previousValue !== props.value && (!viewStateChanged.current || !visible)) {
+            if (previousValue !== props.value && (!viewStateChanged.current || visible)) {
                 updateInputfield(props.value);
             }
         }, [props.value, visible]);
@@ -3200,7 +3200,7 @@ export const Calendar = React.memo(
                     <div className="p-yearpicker">
                         {yearPickerValues().map((y, i) => {
                             return (
-                                <span onClick={(event) => onYearSelect(event, y)} key={`year${i + 1}`} className={classNames('p-yearpicker-year', { 'p-highlight': isYearSelected(y) })}>
+                                <span onClick={(event) => onYearSelect(event, y)} key={`year${i + 1}`} className={classNames('p-yearpicker-year', { 'p-highlight': isYearSelected(y), 'p-disabled': !isSelectable(0, 0, y) })}>
                                     {y}
                                 </span>
                             );
