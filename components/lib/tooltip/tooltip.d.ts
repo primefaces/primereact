@@ -16,4 +16,6 @@ export declare class Tooltip extends React.Component<TooltipProps, any> {
     public unloadTargetEvents(target: HTMLElement): void;
     public getElement(): HTMLElement;
     public getTarget(): HTMLElement | null;
+    public show(e?: TooltipEventParams): null;
+    public hide(e?: TooltipEventParams): null;
 }
