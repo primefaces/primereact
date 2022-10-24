@@ -125,7 +125,7 @@ interface PaginatorJumpToPageInputOptions {
 }
 
 interface PaginatorTemplateOptions {
-    layout: string;
+    layout?: string;
     FirstPageLink?: PaginatorFirstPageLinkType;
     PrevPageLink?: PaginatorPrevPageLinkType;
     PageLinks?: PaginatorPageLinksType;
