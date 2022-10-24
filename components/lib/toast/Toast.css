@@ -1,6 +1,5 @@
 .p-toast {
     position: fixed;
-    width: 25rem;
 }
 
 .p-toast-message-content {
@@ -17,40 +16,40 @@
 }
 
 .p-toast-top-right {
-	top: 20px;
-	right: 20px;
+    top: 20px;
+    right: 20px;
 }
 
 .p-toast-top-left {
-	top: 20px;
-	left: 20px;
+    top: 20px;
+    left: 20px;
 }
 
 .p-toast-bottom-left {
-	bottom: 20px;
-	left: 20px;
+    bottom: 20px;
+    left: 20px;
 }
 
 .p-toast-bottom-right {
-	bottom: 20px;
-	right: 20px;
+    bottom: 20px;
+    right: 20px;
 }
 
 .p-toast-top-center {
-	top: 20px;
+    top: 20px;
     left: 50%;
     transform: translateX(-50%);
 }
 
 .p-toast-bottom-center {
-	bottom: 20px;
-	left: 50%;
+    bottom: 20px;
+    left: 50%;
     transform: translateX(-50%);
 }
 
 .p-toast-center {
-	left: 50%;
-	top: 50%;
+    left: 50%;
+    top: 50%;
     min-width: 20vw;
     transform: translate(-50%, -50%);
 }
@@ -64,7 +63,7 @@
 }
 
 .p-toast-icon-close.p-link {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 /* Animations */
@@ -76,7 +75,7 @@
 .p-toast-message-enter-active {
     opacity: 1;
     transform: translateY(0);
-    transition: transform .3s, opacity .3s;
+    transition: transform 0.3s, opacity 0.3s;
 }
 
 .p-toast-message-enter-done {
@@ -93,5 +92,16 @@
     max-height: 0;
     margin-bottom: 0;
     overflow: hidden;
-    transition: max-height .45s cubic-bezier(0, 1, 0, 1), opacity .3s, margin-bottom .3s;
+    transition: max-height 0.45s cubic-bezier(0, 1, 0, 1), opacity 0.3s, margin-bottom 0.3s;
+}
+
+@media only screen and (max-width: 600px) {
+    .p-toast {
+        min-width: 10rem;
+    }
+}
+@media only screen and (min-width: 600px) {
+    .p-toast {
+        width: 25rem;
+    }
 }
