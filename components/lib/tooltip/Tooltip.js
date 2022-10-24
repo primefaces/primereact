@@ -452,6 +452,8 @@ export const Tooltip = React.memo(
             updateTargetEvents,
             loadTargetEvents,
             unloadTargetEvents,
+            show,
+            hide,
             getElement: () => elementRef.current,
             getTarget: () => currentTargetRef.current
         }));
