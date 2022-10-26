@@ -1,5 +1,69 @@
 # Changelog
 
+## [8.7.0](https://github.com/primefaces/primereact/tree/8.7.0)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/8.6.1...8.7.0)
+
+**Implemented New Features and Enhancements:**
+
+- Paginator: `PaginatorTemplateOptions` interface elements should be optional \(TypeScript\) [\#3503](https://github.com/primefaces/primereact/issues/3503)
+- Tooltip: programmatic control show/hide [\#3500](https://github.com/primefaces/primereact/issues/3500)
+- Button: Ripple animation missing on touch down [\#3497](https://github.com/primefaces/primereact/issues/3497)
+- Calendar : Does not detection changes value in footer template [\#3484](https://github.com/primefaces/primereact/issues/3484)
+- Splitter: Non optimal handling of splitter sizing [\#3483](https://github.com/primefaces/primereact/issues/3483)
+- Core: Add Jest unit tests [\#3477](https://github.com/primefaces/primereact/issues/3477)
+- Toast: Delete Toast by Id [\#3455](https://github.com/primefaces/primereact/issues/3455)
+- Editor: respect maxLength property [\#3454](https://github.com/primefaces/primereact/issues/3454)
+- Implement the new PRO Support Page [\#3449](https://github.com/primefaces/primereact/issues/3449)
+- TypeScript: All `style` declarations should be ` React.CSSProperties` [\#3440](https://github.com/primefaces/primereact/issues/3440)
+- Progressbar: Dynamic ProgressBar [\#3433](https://github.com/primefaces/primereact/issues/3433)
+- MultiSelect: Allow primitives in filter [\#3420](https://github.com/primefaces/primereact/issues/3420)
+- SlideMenu: Pass information about levelState [\#3407](https://github.com/primefaces/primereact/issues/3407)
+- SlideMenu: Issue with scrollbar [\#3398](https://github.com/primefaces/primereact/issues/3398)
+- SlideMenu: Add navigateBack to ref [\#3397](https://github.com/primefaces/primereact/issues/3397)
+- Image: Allow `zoomSrc` different than `src` [\#3390](https://github.com/primefaces/primereact/issues/3390)
+- Autocomplete: show\(\) and hide\(\) missing in ref [\#3387](https://github.com/primefaces/primereact/issues/3387)
+- DataTable: Expose restoreColumnWidths+ in ref [\#3384](https://github.com/primefaces/primereact/issues/3384)
+- Calendar: Overwrite formatDateTime and parseDateTime functions [\#3381](https://github.com/primefaces/primereact/issues/3381)
+- Data Attribute: Fix \#3321 [\#3378](https://github.com/primefaces/primereact/issues/3378)
+- DataTable: crash during third party drag and drop handling [\#3376](https://github.com/primefaces/primereact/issues/3376)
+- Filters: Allow filters on primitive arrays [\#3375](https://github.com/primefaces/primereact/issues/3375)
+- Column: Add tooltip to header [\#3368](https://github.com/primefaces/primereact/issues/3368)
+- Paginator: RowsPerPageDropdown fix ARIA label [\#3365](https://github.com/primefaces/primereact/issues/3365)
+- Toast: Pin a specific message on User Click [\#3260](https://github.com/primefaces/primereact/issues/3260)
+- Column: bodyClassName could accept a function with the corresponding DataTable value as a param, returning a string [\#3215](https://github.com/primefaces/primereact/issues/3215)
+- DataTable: Custom expander according to the rowData [\#2918](https://github.com/primefaces/primereact/issues/2918)
+- DataTable/TreeTable: global filter customization [\#1450](https://github.com/primefaces/primereact/issues/1450)
+- Calendar using locale date format [\#993](https://github.com/primefaces/primereact/issues/993)
+- Support custom date format function for the input element [\#852](https://github.com/primefaces/primereact/issues/852)
+
+**Fixed bugs:**
+
+- CONTRIBUTING: Fix forum URL  [\#3492](https://github.com/primefaces/primereact/issues/3492)
+- DataTable: in controlled pagination mode onPage always called initially with first=0 [\#3489](https://github.com/primefaces/primereact/issues/3489)
+- Calendar: Year selection ignores maxDate [\#3488](https://github.com/primefaces/primereact/issues/3488)
+- TabView: Missing onKeyDown in header template [\#3479](https://github.com/primefaces/primereact/issues/3479)
+- Column: onCellEditComplete incorrect Typescript def [\#3469](https://github.com/primefaces/primereact/issues/3469)
+- AutoComplete: Missing dropdownAriaLabel property [\#3467](https://github.com/primefaces/primereact/issues/3467)
+- Mention: Some properties doesn't exist on type [\#3461](https://github.com/primefaces/primereact/issues/3461)
+- Button: getElement is undefined [\#3453](https://github.com/primefaces/primereact/issues/3453)
+- Dialog - Maximizable [\#3432](https://github.com/primefaces/primereact/issues/3432)
+- DataTable: Filter is not matching using globalFilter attribute [\#3430](https://github.com/primefaces/primereact/issues/3430)
+- InputNumber: Typing the minus sign at the start of the number does not work the first time [\#3426](https://github.com/primefaces/primereact/issues/3426)
+- Autocomplete: readOnly not working when 'multiple' prop is set [\#3423](https://github.com/primefaces/primereact/issues/3423)
+- Mention: Some properties doesn't exist on type [\#3419](https://github.com/primefaces/primereact/issues/3419)
+- Splitter state is not saved in StrictMode [\#3413](https://github.com/primefaces/primereact/issues/3413)
+- Dock: Showcase example broken [\#3393](https://github.com/primefaces/primereact/issues/3393)
+- Datatable: onSelectionChange event returns wrong rowIndex with shiftKey selection [\#3388](https://github.com/primefaces/primereact/issues/3388)
+- Button: bad rendering for button with icon and children [\#3382](https://github.com/primefaces/primereact/issues/3382)
+- DataTable: custom filter icon is not updating [\#3373](https://github.com/primefaces/primereact/issues/3373)
+- Gallaria: localeOption is not defined. Bug introduced in 8.6.0 [\#3370](https://github.com/primefaces/primereact/issues/3370)
+- Toast: Close button decreases as size increases [\#3116](https://github.com/primefaces/primereact/issues/3116)
+- Datatable: globalFilter option triggered with old value [\#2996](https://github.com/primefaces/primereact/issues/2996)
+- DataScroller: "first" is always 0 on OnLazyLoad [\#2987](https://github.com/primefaces/primereact/issues/2987)
+- AccordionTab: keyboard navigation not working when inside a Dialog [\#2864](https://github.com/primefaces/primereact/issues/2864)
+- InputNumber: delete numbers with decimal mode - bug [\#2677](https://github.com/primefaces/primereact/issues/2677)
+
 ## [8.6.1](https://github.com/primefaces/primereact/tree/8.6.1) (2022-09-25)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/8.6.0...8.6.1)
@@ -7,6 +71,7 @@
 **Fixed bugs:**
 
 - Material Theme breaks in some components [\#3364](https://github.com/primefaces/primereact/issues/3364)
+- TreeTable filter behavior is not consistent between global and local filtering when using filterMatchMode `contains` [\#1288](https://github.com/primefaces/primereact/issues/1288)
 
 ## [8.6.0](https://github.com/primefaces/primereact/tree/8.6.0) (2022-09-23)
 
