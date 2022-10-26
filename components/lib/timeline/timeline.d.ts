@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-type TimelineAlignType = 'left' | 'right' | 'alternate';
+type TimelineAlignType = 'left' | 'right' | 'top' | 'bottom' | 'alternate';
 
 type TimelineLayoutType = 'vertical' | 'horizontal';
 
