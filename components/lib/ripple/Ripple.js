@@ -7,7 +7,6 @@ export const Ripple = React.memo(
     React.forwardRef(() => {
         const inkRef = React.useRef(null);
         const targetRef = React.useRef(null);
-        const isTouchable = DomHandler.isTouchDevice();
 
         const getTarget = () => {
             return inkRef.current && inkRef.current.parentElement;
@@ -16,14 +15,14 @@ export const Ripple = React.memo(
         const bindEvents = () => {
             if (targetRef.current) {
                 targetRef.current.addEventListener('mousedown', onMouseDown);
-                isTouchable && targetRef.current.addEventListener('touchstart', onTouchStart);
+                DomHandler.isTouchDevice() && targetRef.current.addEventListener('touchstart', onTouchStart);
             }
         };
 
         const unbindEvents = () => {
             if (targetRef.current) {
                 targetRef.current.removeEventListener('mousedown', onMouseDown);
-                isTouchable && targetRef.current.removeEventListener('touchstart', onTouchStart);
+                DomHandler.isTouchDevice() && targetRef.current.removeEventListener('touchstart', onTouchStart);
             }
         };
 
