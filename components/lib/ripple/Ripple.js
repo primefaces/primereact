@@ -28,7 +28,7 @@ export const Ripple = React.memo(
         };
 
         const onTouchStart = (event) => {
-            this.onMouseDown(event);
+            onMouseDown(event);
             event.preventDefault();
         };
 
