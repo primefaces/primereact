@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
-import Head from 'next/head';
 import getConfig from 'next/config';
+import React from 'react';
 
 const SupportPage = () => {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
@@ -14,7 +13,7 @@ const SupportPage = () => {
                     <i className="pi pi-github absolute text-200" style={{ bottom: '-50px', right: '-50px', fontSize: '200px', transform: 'rotateX(45deg) rotateY(0deg) rotateZ(-45deg)' }}></i>
                     <div className="text-xl text-900 font-semibold mb-3 relative">Community Support</div>
                     <p className="m-0 line-height-3 relative">
-                        <a href="https://forum.primefaces.org/viewforum.php?f=35" className="font-bold hover:underline text-primary">
+                        <a href="https://forum.primefaces.org/viewforum.php?f=57" className="font-bold hover:underline text-primary">
                             Forum
                         </a>{' '}
                         and{' '}
@@ -28,8 +27,8 @@ const SupportPage = () => {
                 <div className="card m-0 xl:w-9 text-white bg-cover" style={{ backgroundImage: 'url(/images/support/card-pro.jpg)' }}>
                     <div className="text-xl font-semibold mb-3">PRO Support</div>
                     <p className="m-0 line-height-3">
-                        With PRO support, it's easy to support, tune and add features to PrimeNG as if it were an in- house library. PRO is a term based commercial support service. With the exclusive services of PRO account, it is no longer needed to
-                        post questions in community forum and issue reports to community issue tracker at GitHub. A JIRA account will be created to the customer by PrimeTek, this account can be shared between any number of users within your
+                        With PRO support, it's easy to support, tune and add features to PrimeReact as if it were an in- house library. PRO is a term based commercial support service. With the exclusive services of PRO account, it is no longer needed
+                        to post questions in community forum and issue reports to community issue tracker at GitHub. A JIRA account will be created to the customer by PrimeTek, this account can be shared between any number of users within your
                         organization.
                     </p>
                 </div>
@@ -63,7 +62,7 @@ const SupportPage = () => {
                         <div className="text-xl text-900 font-semibold mb-3">Standard</div>
                         <p className="m-0 line-height-3 mb-3 text-secondary">1 Year Subscription</p>
                         <a
-                            href="mailto:primeng@primetek.com.tr"
+                            href="mailto:primereact@primetek.com.tr"
                             className="flex align-items-center justify-content-center border-1 bg-indigo-500 border-round block p-3 mb-4 hover:bg-indigo-600 transition-all transition-duration-300 text-white font-medium"
                         >
                             Get a Quote
@@ -95,7 +94,7 @@ const SupportPage = () => {
                         <div className="text-xl text-900 font-semibold mb-3">Premium</div>
                         <p className="m-0 line-height-3 mb-3 text-secondary">1 Year Subscription</p>
                         <a
-                            href="mailto:primeng@primetek.com.tr"
+                            href="mailto:primereact@primetek.com.tr"
                             className="flex align-items-center justify-content-center border-1 bg-indigo-500 border-round block p-3 mb-4 hover:bg-indigo-600 transition-all transition-duration-300 text-white font-medium"
                         >
                             Get a Quote
@@ -131,7 +130,7 @@ const SupportPage = () => {
                         <div className="text-xl text-900 font-semibold mb-3">Enterprise</div>
                         <p className="m-0 line-height-3 mb-3 text-secondary">1 Year Subscription</p>
                         <a
-                            href="mailto:primeng@primetek.com.tr"
+                            href="mailto:primereact@primetek.com.tr"
                             className="flex align-items-center justify-content-center border-1 bg-indigo-500 border-round block p-3 mb-4 hover:bg-indigo-600 transition-all transition-duration-300 text-white font-medium"
                         >
                             Get a Quote
