@@ -15,7 +15,7 @@ interface AccordionTabProps {
     headerStyle?: React.CSSProperties;
     headerTemplate?: AccordionTabHeaderTemplateType;
     style?: React.CSSProperties;
-    tabIndex: number;
+    tabIndex?: number;
 }
 
 export declare class AccordionTab extends React.Component<AccordionTabProps, any> {}
