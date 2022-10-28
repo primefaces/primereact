@@ -2489,8 +2489,18 @@ export const Calendar = React.memo(
         }, [props.onViewDateChange, props.value]);
 
         useUpdateEffect(() => {
-            if (previousValue !== props.value && (!viewStateChanged.current || visible)) {
-                updateInputfield(props.value);
+            const newDate = props.value;
+
+            if (previousValue !== newDate) {
+                updateInputfield(newDate);
+
+                // #3516 view date not updated when value set programatically
+                if (!visible && newDate) {
+                    validateDate(newDate);
+                    setViewDateState(newDate);
+                    setCurrentMonth(newDate.getMonth());
+                    setCurrentYear(newDate.getFullYear());
+                }
             }
         }, [props.value, visible]);
 
