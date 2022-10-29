@@ -45,7 +45,7 @@
         "@rollup/plugin-babel": "^6.0.0",
         "@rollup/plugin-commonjs": "^23.0.2",
         "@rollup/plugin-node-resolve": "^14.1.0",
-        "@rollup/plugin-replace": "^4.0.0",
+        "@rollup/plugin-replace": "^5.0.1",
         "@types/node": "^18.11.7",
         "@types/react": "^18.0.18",
         "@types/react-dom": "^18.0.6",
