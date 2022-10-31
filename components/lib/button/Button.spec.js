@@ -1,6 +1,6 @@
+import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
 import { Button } from './Button';
-import '@testing-library/jest-dom';
 
 describe('Button', () => {
     test('when visible is false Button return null', () => {
@@ -15,7 +15,7 @@ describe('Button', () => {
         expect(container.getElementsByClassName('p-button').length).toBe(1);
     });
 
-    test('when visible is false Button return null', () => {
+    test('when iconPos is bottom Button is vertical', () => {
         const { container } = render(<Button label={'test'} iconPos={'bottom'} visible={true} />);
 
         expect(container.getElementsByClassName('p-button-vertical').length).toBe(1);
@@ -34,7 +34,7 @@ describe('Button', () => {
         expect(container.getElementsByClassName('p-badge').length).toBe(1);
     });
 
-    test('when badge is true it renders Button with badge', () => {
+    test('when badge is null it renders Button without badge', () => {
         const { container } = render(<Button />);
 
         expect(container.getElementsByClassName('p-badge').length).toBe(0);
@@ -54,29 +54,29 @@ describe('Button', () => {
 
     test('when label is true it renders Button with default aria label', () => {
         const { container } = render(<Button />);
-        const hasAreaLabel = container.getElementsByClassName('p-button')[0].getAttribute('aria-label');
+        const hasAriaLabel = container.getElementsByClassName('p-button')[0].getAttribute('aria-label');
 
-        expect(hasAreaLabel).toBe(null);
+        expect(hasAriaLabel).toBe(null);
     });
 
     test('when aria-label prop is not exist aria-label prop should be equal to label prop ', () => {
         const { container } = render(<Button label={'test'} />);
-        const getAreaLabel = container.getElementsByClassName('p-button')[0].getAttribute('aria-label');
+        const getAriaLabel = container.getElementsByClassName('p-button')[0].getAttribute('aria-label');
 
-        expect(getAreaLabel).toBe('test');
+        expect(getAriaLabel).toBe('test');
     });
 
     test('when label prop is not exist label prop should be equal to aria-label prop', () => {
         const { container } = render(<Button aria-label={'test'} />);
-        const getAreaLabel = container.getElementsByClassName('p-button')[0].getAttribute('aria-label');
+        const getAriaLabel = container.getElementsByClassName('p-button')[0].getAttribute('aria-label');
 
-        expect(getAreaLabel).toBe('test');
+        expect(getAriaLabel).toBe('test');
     });
     //
-    test('....', () => {
+    test('when using badge and label the aria-label should contain both values', () => {
         const { container } = render(<Button label={'test'} badge={'lost'} />);
-        const getAreaLabel = container.getElementsByClassName('p-button')[0].getAttribute('aria-label');
+        const getAriaLabel = container.getElementsByClassName('p-button')[0].getAttribute('aria-label');
 
-        expect(getAreaLabel).toBe('test lost');
+        expect(getAriaLabel).toBe('test lost');
     });
 });
