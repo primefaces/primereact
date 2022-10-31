@@ -23,7 +23,7 @@ export const Splitter = React.memo(
         const isStateful = props.stateKey != null;
         const childrenLength = props.children && props.children.length;
 
-        const panelSize = (sizes, index) => (index in sizes ? sizes[index] : (props.children[index].props.size || 100) / childrenLength);
+        const panelSize = (sizes, index) => (index in sizes ? sizes[index] : (props.children[index].props.size || 100 / childrenLength));
 
         const [bindDocumentMouseMoveListener, unbindDocumentMouseMoveListener] = useEventListener({ type: 'mousemove', listener: (event) => onResize(event) });
         const [bindDocumentMouseUpListener, unbindDocumentMouseUpListener] = useEventListener({
