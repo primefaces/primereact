@@ -1,5 +1,5 @@
 {
-    "plugins": ["@typescript-eslint"],
+    "plugins": ["@typescript-eslint", "jest-dom"],
     "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended", "prettier"],
     "rules": {
         "@next/next/no-img-element": "off",
