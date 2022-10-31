@@ -137,7 +137,7 @@ export const Splitter = React.memo(
             setPanelSizes((prev) => {
                 const sizes = [];
 
-                for (const index = 0; index < props.children.length; index++) sizes[index] = panelSize(prev, index);
+                for (let index = 0; index < props.children.length; index++) sizes[index] = panelSize(prev, index);
                 sizes[prevPanelIndex.current] = prevPanelSizeNew.current;
                 sizes[prevPanelIndex.current + 1] = nextPanelSizeNew.current;
 
