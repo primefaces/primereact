@@ -27,11 +27,28 @@ export const Ripple = React.memo(
         };
 
         const onTouchStart = (event) => {
-            onMouseDown(event);
-            event.preventDefault();
+            isTouching.current = true;
+            const offset = DomHandler.getOffset(targetRef.current);
+            const offsetX = event.targetTouches[0].pageX - offset.left + document.body.scrollTop - DomHandler.getWidth(inkRef.current) / 2;
+            const offsetY = event.targetTouches[0].pageY - offset.top + document.body.scrollLeft - DomHandler.getHeight(inkRef.current) / 2;
+
+            activateRipple(offsetX, offsetY);
         };
 
         const onMouseDown = (event) => {
+            if (DomHandler.isTouchDevice()) {
+                // already started ripple with onTouchStart
+                return;
+            }
+
+            const offset = DomHandler.getOffset(targetRef.current);
+            const offsetX = event.pageX - offset.left + document.body.scrollTop - DomHandler.getWidth(inkRef.current) / 2;
+            const offsetY = event.pageY - offset.top + document.body.scrollLeft - DomHandler.getHeight(inkRef.current) / 2;
+
+            activateRipple(offsetX, offsetY);
+        };
+
+        const activateRipple = (offsetX, offsetY) => {
             if (!inkRef.current || getComputedStyle(inkRef.current, null).display === 'none') {
                 return;
             }
@@ -45,12 +62,8 @@ export const Ripple = React.memo(
                 inkRef.current.style.width = d + 'px';
             }
 
-            const offset = DomHandler.getOffset(targetRef.current);
-            const x = event.pageX - offset.left + document.body.scrollTop - DomHandler.getWidth(inkRef.current) / 2;
-            const y = event.pageY - offset.top + document.body.scrollLeft - DomHandler.getHeight(inkRef.current) / 2;
-
-            inkRef.current.style.top = y + 'px';
-            inkRef.current.style.left = x + 'px';
+            inkRef.current.style.top = offsetY + 'px';
+            inkRef.current.style.left = offsetX + 'px';
             DomHandler.addClass(inkRef.current, 'p-ink-active');
         };
 
