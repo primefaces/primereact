@@ -631,6 +631,8 @@ export const BodyCell = React.memo((props) => {
             content = value;
         }
 
+        content = typeof content == 'boolean' ? content.toString() : content;
+
         if (!isRowEditor && editor) {
             /* eslint-disable */
             editorKeyHelper = (
