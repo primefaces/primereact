@@ -8,12 +8,12 @@ export interface ImageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
     imageClassName?: string;
     imageStyle?: string;
     preview?: boolean;
-    zoomSrc?: string;
     src?: string;
     template?: any;
     width?: string;
-    onShow?(): void;
+    zoomSrc?: string;
     onHide?(): void;
+    onShow?(): void;
 }
 
 export declare class Image extends React.Component<ImageProps, any> {
