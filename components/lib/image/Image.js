@@ -193,9 +193,11 @@ Image.defaultProps = {
     imageClassName: null,
     imageStyle: null,
     onError: null,
+    onHide: null,
+    onShow: null,
     preview: false,
-    zoomSrc: null,
     src: null,
     template: null,
-    width: null
+    width: null,
+    zoomSrc: null
 };
