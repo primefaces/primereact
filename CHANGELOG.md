@@ -1,5 +1,27 @@
 # Changelog
 
+## [8.7.1](https://github.com/primefaces/primereact/tree/8.7.1)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/8.7.0...8.7.1)
+
+**Implemented New Features and Enhancements:**
+
+- Image: Update default properties [\#3536](https://github.com/primefaces/primereact/issues/3536)
+- Button: Add test specifications [\#3533](https://github.com/primefaces/primereact/issues/3533)
+- Remove index.d.ts from primereact library [\#3513](https://github.com/primefaces/primereact/issues/3513)
+- Timeline: Add missing type of align as enum. [\#3509](https://github.com/primefaces/primereact/issues/3509)
+
+**Fixed bugs:**
+
+- Splitter: widths provided to SplitterPanel.size are not correctly applied [\#3534](https://github.com/primefaces/primereact/issues/3534)
+- Datatable doesn't render boolean values. [\#3529](https://github.com/primefaces/primereact/issues/3529)
+- Splitter: esm build throws TypeError due to improper use of const in a for loop [\#3527](https://github.com/primefaces/primereact/issues/3527)
+- Ripple: ripple start point is not init in mobile env [\#3526](https://github.com/primefaces/primereact/issues/3526)
+- Calendar: Inconsistent behaviour around viewDate and changed value. [\#3516](https://github.com/primefaces/primereact/issues/3516)
+- Calendar: Value does not update on external change [\#3515](https://github.com/primefaces/primereact/issues/3515)
+- tabIndex prop can be optional on Accordion [\#3512](https://github.com/primefaces/primereact/issues/3512)
+- Toast:  non-responsive toast [\#3498](https://github.com/primefaces/primereact/issues/3498)
+
 ## [8.7.0](https://github.com/primefaces/primereact/tree/8.7.0)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/8.6.1...8.7.0)
