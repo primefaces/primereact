@@ -2496,10 +2496,27 @@ export const Calendar = React.memo(
 
                 // #3516 view date not updated when value set programatically
                 if (!visible && newDate) {
-                    validateDate(newDate);
-                    setViewDateState(newDate);
-                    setCurrentMonth(newDate.getMonth());
-                    setCurrentYear(newDate.getFullYear());
+                    let viewDate = newDate;
+
+                    if (isMultipleSelection()) {
+                        if (newDate.length) {
+                            viewDate = newDate[newDate.length - 1];
+                        }
+                    } else if (isRangeSelection()) {
+                        if (newDate.length) {
+                            let startDate = newDate[0];
+                            let endDate = newDate[1];
+
+                            viewDate = endDate || startDate;
+                        }
+                    }
+
+                    if (viewDate) {
+                        validateDate(viewDate);
+                        setViewDateState(viewDate);
+                        setCurrentMonth(viewDate.getMonth());
+                        setCurrentYear(viewDate.getFullYear());
+                    }
                 }
             }
         }, [props.value, visible]);
