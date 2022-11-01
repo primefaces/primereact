@@ -230,10 +230,9 @@ export const TreeTableHeader = React.memo((props) => {
             const resizer = createResizer(column);
 
             return (
-                <>
+                <React.Fragment key={column.columnKey || column.field || options.index}>
                     <th
                         ref={headerCellRef}
-                        key={column.columnKey || column.field || options.index}
                         className={className}
                         style={column.props.headerStyle || column.props.style}
                         tabIndex={column.props.sortable ? props.tabIndex : null}
@@ -255,7 +254,7 @@ export const TreeTableHeader = React.memo((props) => {
                         {filterElement}
                     </th>
                     {hasTooltip && <Tooltip target={headerCellRef} content={headerTooltip} {...column.props.headerTooltipOptions} />}
-                </>
+                </React.Fragment>
             );
         }
     };
