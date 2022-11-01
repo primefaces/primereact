@@ -1,8 +1,7 @@
 .p-toast {
     position: fixed;
-    width: 100%;
+    width: calc(100% - var(--toast-indent, 0px));
     max-width: 25rem;
-    padding-left: 2rem;
 }
 
 .p-toast-message-content {
@@ -19,21 +18,25 @@
 }
 
 .p-toast-top-right {
+    --toast-indent: 20px;
     top: 20px;
     right: 20px;
 }
 
 .p-toast-top-left {
+    --toast-indent: 20px;
     top: 20px;
     left: 20px;
 }
 
 .p-toast-bottom-left {
+    --toast-indent: 20px;
     bottom: 20px;
     left: 20px;
 }
 
 .p-toast-bottom-right {
+    --toast-indent: 20px;
     bottom: 20px;
     right: 20px;
 }
