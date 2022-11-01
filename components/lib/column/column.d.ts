@@ -208,6 +208,7 @@ export interface ColumnProps {
     excludeGlobalFilter?: boolean;
     expander?: ColumnExpanderType;
     exportable?: boolean;
+    exportField?: string;
     field?: string;
     filter?: boolean;
     filterApply?: ColumnFilterApplyType;
