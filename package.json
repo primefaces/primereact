@@ -20,6 +20,7 @@
         "test:check": "jest --watchAll=false --coverage"
     },
     "dependencies": {
+        "@testing-library/user-event": "^14.4.3",
         "chart.js": "3.9.1",
         "file-saver": "2.0.5",
         "final-form": "^4.20.7",
