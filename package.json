@@ -34,14 +34,14 @@
         "react": "17.0.2",
         "react-dom": "17.0.2",
         "react-final-form": "^6.5.9",
-        "react-hook-form": "^7.39.0",
+        "react-hook-form": "^7.39.1",
         "react-transition-group": "^4.4.5",
         "xlsx": "0.18.5"
     },
     "devDependencies": {
         "@babel/plugin-proposal-class-properties": "^7.18.6",
-        "@babel/plugin-transform-runtime": "^7.18.10",
-        "@babel/preset-env": "^7.19.3",
+        "@babel/plugin-transform-runtime": "^7.19.6",
+        "@babel/preset-env": "^7.19.4",
         "@babel/preset-react": "^7.18.6",
         "@rollup/plugin-alias": "^4.0.2",
         "@rollup/plugin-babel": "^6.0.2",
@@ -50,14 +50,14 @@
         "@rollup/plugin-replace": "^5.0.1",
         "@testing-library/jest-dom": "^5.16.5",
         "@testing-library/react": "^12.1.2",
-        "@types/node": "^18.11.7",
-        "@types/react": "^18.0.18",
-        "@types/react-dom": "^18.0.6",
+        "@testing-library/user-event": "^14.4.3",
+        "@types/node": "^18.11.9",
+        "@types/react": "^18.0.24",
+        "@types/react-dom": "^18.0.8",
         "@types/react-transition-group": "^4.4.5",
         "@typescript-eslint/eslint-plugin": "^5.42.0",
-        "@testing-library/user-event": "^14.4.3",
         "eslint": "8.26.0",
-        "eslint-config-next": "13.0.0",
+        "eslint-config-next": "13.0.1",
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-jest-dom": "^4.0.2",
         "gulp": "^4.0.2",
@@ -73,6 +73,6 @@
         "rollup-plugin-postcss": "^4.0.0",
         "rollup-plugin-terser": "^7.0.2",
         "sass": "^1.55.0",
-        "typescript": "^4.8.3"
+        "typescript": "^4.8.4"
     }
 }
