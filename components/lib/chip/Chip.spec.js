@@ -27,16 +27,18 @@ describe('Chip', () => {
     test('when icon is property it returns with icon class', () => {
         const { container } = render(<Chip icon={'pi pi-check'} />);
 
-        const wrapper = container.getElementsByClassName('p-chip-icon');
-
-        expect(wrapper.length).toBe(1);
+        const icon = container.getElementsByClassName('p-chip-icon');
+        const iconClass = icon[0].getAttribute('class');
+        
+        expect(iconClass).toBe('p-chip-icon pi pi-check');
     });
 
     test('when label is property it returns with label class', () => {
         const { container } = render(<Chip label={'test'} />);
 
         const label = container.getElementsByClassName('p-chip-text');
+        const spanTextContent = label[0].textContent;
 
-        expect(label.length).toBe(1);
+        expect(spanTextContent).toBe('test');
     });
 });
