@@ -60,6 +60,8 @@ export default class ObjectUtils {
         if (data && Object.keys(data).length && field) {
             if (this.isFunction(field)) {
                 return field(data);
+            } else if (ObjectUtils.isNotEmpty(data[field])) {
+                return data[field];
             } else if (field.indexOf('.') === -1) {
                 return data[field];
             } else {
