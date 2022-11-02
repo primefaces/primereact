@@ -1961,10 +1961,10 @@ export const Calendar = React.memo(
 
             let formattedValue = '';
 
-            if (value instanceof Date) {
+            if (value) {
                 try {
                     if (isSingleSelection()) {
-                        formattedValue = isValidDate(value) ? formatDateTime(value) : '';
+                        formattedValue = isValidDate(value) ? formatDateTime(value) : props.keepInvalid ? value : '';
                     } else if (isMultipleSelection()) {
                         for (let i = 0; i < value.length; i++) {
                             let selectedValue = value[i];
@@ -1991,8 +1991,6 @@ export const Calendar = React.memo(
                 } catch (err) {
                     formattedValue = value;
                 }
-            } else if (props.keepInvalid) {
-                formattedValue = value;
             }
 
             inputRef.current.value = formattedValue;
