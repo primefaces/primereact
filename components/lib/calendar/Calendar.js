@@ -118,7 +118,7 @@ export const Calendar = React.memo(
                 }
             } catch (err) {
                 //invalid date
-                const value = props.keepInvalid ? rawValue : null;
+                const value = props.keepInvalid ? event.value : null;
 
                 updateModel(event, value);
             }
