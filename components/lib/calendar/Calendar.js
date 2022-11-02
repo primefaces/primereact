@@ -118,7 +118,7 @@ export const Calendar = React.memo(
                 }
             } catch (err) {
                 //invalid date
-                const value = props.keepInvalid ? event.value : null;
+                const value = props.keepInvalid ? rawValue : null;
 
                 updateModel(event, value);
             }
@@ -1961,7 +1961,7 @@ export const Calendar = React.memo(
 
             let formattedValue = '';
 
-            if (value) {
+            if (value instanceof Date) {
                 try {
                     if (isSingleSelection()) {
                         formattedValue = isValidDate(value) ? formatDateTime(value) : '';
@@ -1991,6 +1991,8 @@ export const Calendar = React.memo(
                 } catch (err) {
                     formattedValue = value;
                 }
+            } else if (props.keepInvalid) {
+                formattedValue = value;
             }
 
             inputRef.current.value = formattedValue;
@@ -2511,7 +2513,7 @@ export const Calendar = React.memo(
                         }
                     }
 
-                    if (viewDate) {
+                    if (viewDate instanceof Date) {
                         validateDate(viewDate);
                         setViewDateState(viewDate);
                         setCurrentMonth(viewDate.getMonth());
