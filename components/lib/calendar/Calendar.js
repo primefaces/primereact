@@ -1964,7 +1964,7 @@ export const Calendar = React.memo(
             if (value) {
                 try {
                     if (isSingleSelection()) {
-                        formattedValue = isValidDate(value) ? formatDateTime(value) : '';
+                        formattedValue = isValidDate(value) ? formatDateTime(value) : props.keepInvalid ? value : '';
                     } else if (isMultipleSelection()) {
                         for (let i = 0; i < value.length; i++) {
                             let selectedValue = value[i];
@@ -2511,7 +2511,7 @@ export const Calendar = React.memo(
                         }
                     }
 
-                    if (viewDate) {
+                    if (viewDate instanceof Date) {
                         validateDate(viewDate);
                         setViewDateState(viewDate);
                         setCurrentMonth(viewDate.getMonth());
