@@ -387,14 +387,12 @@ export const Tooltip = React.memo(
             }
         };
 
-        React.useEffect(() => {
+        useMountEffect(() => {
+            loadTargetEvents();
+
             if (visibleState && currentTargetRef.current && isDisabled(currentTargetRef.current)) {
                 hide();
             }
-        });
-
-        useMountEffect(() => {
-            loadTargetEvents();
         });
 
         useUpdateEffect(() => {
