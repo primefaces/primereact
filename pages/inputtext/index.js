@@ -55,7 +55,7 @@ const InputTextDemo = () => {
             label: 'Help Text',
             component: HelpTextDoc
         },
-        ,{
+        {
             id: 'invalid',
             label: 'Invalid',
             component: InvalidDoc

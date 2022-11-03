@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { InputText } from "../../lib/inputtext/InputText";
+import { InputTextarea } from "../../lib/inputtextarea/InputTextarea";
 import { DocSectionText } from "../common/docsectiontext";
 import { DocSectionCode } from "../common/docsectioncode";
 
@@ -8,36 +8,29 @@ export function GettingStartedDoc(props) {
 
     const code = {
         basic: `
-<InputText value={value} onChange={(e) => setValue(e.target.value)} />
-<span className="ml-2">{value}</span>
+<InputTextarea value={value} onChange={(e) => setValue(e.target.value)} rows={5} cols={30} />
         `,
         javascript: `
 import { useState } from "react";
-import { InputText } from "primereact/inputtext";
+import { InputTextarea } from "primereact/inputtextarea";
 
 export default function GettingStartedDemo() {
     const [value, setValue] = useState('');
 
     return (
-        <>
-            <InputText value={value} onChange={(e) => setValue(e.target.value)} />
-            <span className="ml-2">{value}</span>
-        </>
+        <InputTextarea value={value} onChange={(e) => setValue(e.target.value)} rows={5} cols={30} />
     )
 }
         `,
         typescript: `
 import { useState } from "react";
-import { InputText } from "primereact/inputtext";
+import { InputTextarea } from "primereact/inputtextarea";
 
 export default function GettingStartedDemo() {
     const [value, setValue] = useState<string>('');
 
     return (
-        <>
-            <InputText value={value} onChange={(e) => setValue(e.target.value)} />
-            <span className="ml-2">{value}</span>
-        </>
+        <InputTextarea value={value} onChange={(e) => setValue(e.target.value)} rows={5} cols={30} />
     )
 }
         `
@@ -46,11 +39,10 @@ export default function GettingStartedDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                InputText is used as a controlled input with <i>value</i> and <i>onChange</i> properties.
+                Textarea is used as a controlled input with <i>value</i> and <i>onChange</i> properties.
             </DocSectionText>
             <div className="card">
-                <InputText value={value} onChange={(e) => setValue(e.target.value)} />
-                <span className="ml-2">{value}</span>
+                <InputTextarea value={value} onChange={(e) => setValue(e.target.value)} rows={5} cols={30} />
             </div>
             <DocSectionCode code={code} />
         </>

@@ -8,7 +8,7 @@ export function ApiDoc(props) {
         <>
             <DocSectionText {...props}></DocSectionText>
             <h3>Properties</h3>
-            <p>InputText passes any valid attribute to the underlying input element, additional attributes are as follows.</p>
+            <p>InputTextarea passes any attribute to the underlying textarea element, additional attributes are as follows.</p>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -21,16 +21,10 @@ export function ApiDoc(props) {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>keyfilter</td>
-                            <td>string/regex</td>
-                            <td>null</td>
-                            <td>Format definition of the keys to block.</td>
-                        </tr>
-                        <tr>
-                            <td>validateOnly</td>
+                            <td>autoResize</td>
                             <td>boolean</td>
                             <td>false</td>
-                            <td>When enabled, instead of blocking keys, input is validated internally to test against the regular expression.</td>
+                            <td>When present, height of textarea changes as being typed.</td>
                         </tr>
                         <tr>
                             <td>tooltip</td>
@@ -62,8 +56,8 @@ export function ApiDoc(props) {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>p-inputtext</td>
-                            <td>Input element</td>
+                            <td>p-inputtextarea</td>
+                            <td>Textarea element</td>
                         </tr>
                     </tbody>
                 </table>
@@ -73,20 +67,21 @@ export function ApiDoc(props) {
             <DevelopmentSection>
                 <h4>Screen Reader</h4>
                 <p>
-                    InputText component renders a native input element that implicitly includes any passed prop. Value to describe the component can either be provided via <i>label</i> tag combined with <i>id</i> prop or using{' '}
+                    InputTextarea component renders a native textarea element that implicitly includes any passed prop. Value to describe the component can either be provided via <i>label</i> tag combined with <i>id</i> prop or using{' '}
                     <i>aria-labelledby</i>, <i>aria-label</i> props.
                 </p>
                 <CodeHighlight>
                     {`
-<label htmlFor="firstname">Firstname</label>
-<InputText id="firstname" />
+<label htmlFor="address1">Address 1</label>
+<InputTextarea id="address1" />
 
-<span id="lastname">Lastname</span>
-<InputText aria-labelledby="lastname" />
+<span id="address2">Address 2</span>
+<InputTextarea aria-labelledby="address2" />
 
-<InputText aria-label="Age"/>
+<InputTextarea aria-label="Address Details"/>
 `}
                 </CodeHighlight>
+
                 <h4>Keyboard Support</h4>
                 <div className="doc-tablewrapper">
                     <table className="doc-table">
@@ -108,7 +103,7 @@ export function ApiDoc(props) {
                 </div>
             </DevelopmentSection>
 
-            <h3>Dependencies</h3>
+            <h4>Dependencies</h4>
             <p>None.</p>
         </>
     )
