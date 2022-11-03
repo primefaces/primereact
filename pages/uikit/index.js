@@ -119,8 +119,8 @@ const UIKitPage = (props) => {
 
                 <div className="card mb-5" style={{ 'border-radius': '50px' }}>
                     <div className="text-900 font-bold text-5xl mb-4 text-center">Pricing</div>
-                    <div class="mb-2 text-center line-height-3">Choose the right plan for your business. Whether you are an individual or a member of a team, UI Kit is available for affordable prices.</div>
-                    <a href="https://www.primefaces.org/uikit/licenses" class="mb-6 text-primary-500 no-underline hover:underline text-center block">
+                    <div className="mb-2 text-center line-height-3">Choose the right plan for your business. Whether you are an individual or a member of a team, UI Kit is available for affordable prices.</div>
+                    <a href="https://www.primefaces.org/uikit/licenses" className="mb-6 text-primary-500 no-underline hover:underline text-center block">
                         View License Details
                     </a>
 
