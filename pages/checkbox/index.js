@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ImportDoc } from '../../components/doc/checkbox/importdoc';
-import { GettingStartedDoc } from '../../components/doc/checkbox/gettingstarteddoc';
+import { BasicDoc } from '../../components/doc/checkbox/basicdoc';
 import { GroupDoc } from '../../components/doc/checkbox/groupdoc';
 import { DisabledDoc } from '../../components/doc/checkbox/disableddoc';
 import { ApiDoc } from '../../components/doc/checkbox/apidoc';
@@ -16,9 +16,9 @@ const CheckboxDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'gettingstarted',
-            label: 'Getting Started',
-            component: GettingStartedDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
             id: 'group',

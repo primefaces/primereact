@@ -3,7 +3,7 @@ import { InputText } from "../../lib/inputtext/InputText";
 import { DocSectionText } from "../common/docsectiontext";
 import { DocSectionCode } from "../common/docsectioncode";
 
-export function GettingStartedDoc(props) {
+export function BasicDoc(props) {
     const [value, setValue] = useState('');
 
     const code = {
@@ -15,7 +15,7 @@ export function GettingStartedDoc(props) {
 import { useState } from "react";
 import { InputText } from "primereact/inputtext";
 
-export default function GettingStartedDemo() {
+export default function BasicDemo() {
     const [value, setValue] = useState('');
 
     return (
@@ -30,7 +30,7 @@ export default function GettingStartedDemo() {
 import { useState } from "react";
 import { InputText } from "primereact/inputtext";
 
-export default function GettingStartedDemo() {
+export default function BasicDemo() {
     const [value, setValue] = useState<string>('');
 
     return (

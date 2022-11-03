@@ -3,7 +3,7 @@ import { Checkbox } from "../../lib/checkbox/Checkbox";
 import { DocSectionText } from "../common/docsectiontext";
 import { DocSectionCode } from "../common/docsectioncode";
 
-export function GettingStartedDoc(props) {
+export function BasicDoc(props) {
     const [checked, setChecked] = useState(false);
 
     const code = {
@@ -14,7 +14,7 @@ export function GettingStartedDoc(props) {
 import { useState } from "react";
 import { Checkbox } from "primereact/checkbox";
 
-export default function GettingStartedDemo() {
+export default function BasicDemo() {
     const [checked, setChecked] = useState(false);
 
     return (
@@ -26,7 +26,7 @@ export default function GettingStartedDemo() {
 import { useState } from "react";
 import { Checkbox } from "primereact/checkbox";
 
-export default function GettingStartedDemo() {
+export default function BasicDemo() {
     const [checked, setChecked] = useState<boolean>(false);
 
     return (

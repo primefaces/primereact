@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { DocSections } from '../../components/doc/common/docsections';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { ImportDoc } from '../../components/doc/inputtextarea/importdoc';
-import { GettingStartedDoc } from '../../components/doc/inputtextarea/gettingstarteddoc';
+import { BasicDoc } from '../../components/doc/inputtextarea/basicdoc';
 import { AutoResizeDoc } from '../../components/doc/inputtextarea/autoresizedoc';
 import { FloatLabelDoc } from '../../components/doc/inputtextarea/floatlabeldoc';
 import { DisabledDoc } from '../../components/doc/inputtextarea/disableddoc';
@@ -17,9 +17,9 @@ const InputTextareaDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'gettingstarted',
-            label: 'Getting Started',
-            component: GettingStartedDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
             id: 'autoresize',

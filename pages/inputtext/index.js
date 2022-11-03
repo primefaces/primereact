@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { GettingStartedDoc } from '../../components/doc/inputtext/gettingstarteddoc';
+import { BasicDoc } from '../../components/doc/inputtext/basicdoc';
 import { FloatLabelDoc } from '../../components/doc/inputtext/floatlabeldoc';
 import { IconsDoc } from '../../components/doc/inputtext/iconsdoc';
 import { HelpTextDoc } from '../../components/doc/inputtext/helptextdoc';
@@ -21,9 +21,9 @@ const InputTextDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'gettingstarted',
-            label: 'Getting Started',
-            component: GettingStartedDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
             id: 'floatlabel',
