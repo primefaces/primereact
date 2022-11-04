@@ -317,7 +317,7 @@ export function ApiDoc(props) {
                     </table>
                 </div>
             </DevelopmentSection>
-            
+
             <h4>Dependencies</h4>
             <p>None.</p>
         </>
