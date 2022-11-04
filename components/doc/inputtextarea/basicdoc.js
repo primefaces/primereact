@@ -30,7 +30,7 @@ export default function BasicDemo() {
     const [value, setValue] = useState<string>('');
 
     return (
-        <InputTextarea value={value} onChange={(e) => setValue(e.target.value)} rows={5} cols={30} />
+        <InputTextarea value={value} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setValue(e.target.value)} rows={5} cols={30} />
     )
 }
         `

@@ -1,44 +1,44 @@
 import { useState } from 'react';
-import { InputText } from '../../lib/inputtext/InputText';
+import { Chips } from '../../lib/chips/Chips';
 import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
 
 export function FloatLabelDoc(props) {
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState([]);
 
     const code = {
         basic: `
 <span className="p-float-label">
-    <InputText id="username" value={value} onChange={(e) => setValue(e.target.value)} />
-    <label htmlFor="username">Username</label>
+    <Chips id="chips" value={value} onChange={(e) => setValue(e.value)} />
+    <label htmlFor="chips">Username</label>
 </span>
         `,
         javascript: `
 import { useState } from "react";
-import { InputText } from "primereact/inputtext";
+import { Chips } from "primereact/chips";
 
 export default function FloatLabelDemo() {
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState([]);
 
     return (
         <span className="p-float-label">
-            <InputText id="username" value={value} onChange={(e) => setValue(e.target.value)} />
-            <label htmlFor="username">Username</label>
+            <Chips id="chips" value={value} onChange={(e) => setValue(e.value)} />
+            <label htmlFor="chips">Username</label>
         </span>
     )
 }
         `,
         typescript: `
 import { useState } from "react";
-import { InputText } from "primereact/inputtext";
+import { Chips } from "primereact/chips";
 
 export default function FloatLabelDemo() {
-    const [value, setValue] = useState<string>('');
+    const [value, setValue] = useState<string>([]);
 
     return (
         <span className="p-float-label">
-            <InputText id="username" value={value} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)} />
-            <label htmlFor="username">Username</label>
+            <Chips id="chips" value={value} onChange={(e: ChipsChangeParams) => setValue(e.value)} />
+            <label htmlFor="chips">Username</label>
         </span>
     )
 }
@@ -50,10 +50,10 @@ export default function FloatLabelDemo() {
             <DocSectionText {...props}>
                 A floating label is implemented by wrapping the input and the label inside a container having <i>.p-float-label</i> style class.
             </DocSectionText>
-            <div className="card flex justify-content-center">
+            <div className="card p-fluid">
                 <span className="p-float-label">
-                    <InputText id="username" value={value} onChange={(e) => setValue(e.target.value)} />
-                    <label htmlFor="username">Username</label>
+                    <Chips id="chips" value={value} onChange={(e) => setValue(e.value)} />
+                    <label htmlFor="chips">Username</label>
                 </span>
             </div>
             <DocSectionCode code={code} />

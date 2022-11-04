@@ -1,16 +1,61 @@
-import getConfig from 'next/config';
 import Head from 'next/head';
 import React, { useState } from 'react';
 import { DocActions } from '../../components/doc/common/docactions';
-import RatingDoc from '../../components/doc/rating';
-import { Rating } from '../../components/lib/rating/Rating';
+import { DocSections } from '../../components/doc/common/docsections';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { ImportDoc } from '../../components/doc/rating/importdoc';
+import { BasicDoc } from '../../components/doc/rating/basicdoc';
+import { WithoutCancelDoc } from '../../components/doc/rating/withoutcanceldoc';
+import { ReadOnlyDoc } from '../../components/doc/rating/readonlydoc';
+import { DisabledDoc } from '../../components/doc/rating/disableddoc';
+import { TemplateDoc } from '../../components/doc/rating/templatedoc';
+import { ApiDoc } from '../../components/doc/rating/apidoc';
+import { NumberOfStarsDoc } from '../../components/doc/rating/numberofstarsdoc';
 
 const RatingDemo = () => {
-    const [val1, setVal1] = useState(null);
-    const [val2, setVal2] = useState(null);
-    const [val3, setVal3] = useState(null);
-
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'withoutcancel',
+            label: 'Without Cancel',
+            component: WithoutCancelDoc
+        },
+        {
+            id: 'readonly',
+            label: 'Read Only',
+            component: ReadOnlyDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
+        },
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'numberofstars',
+            label: 'Number of Stars',
+            component: NumberOfStarsDoc
+        },
+        {
+            id: 'api',
+            label: 'API',
+            type: 'api',
+            component: ApiDoc
+        }
+    ];
 
     return (
         <div>
@@ -27,42 +72,10 @@ const RatingDemo = () => {
                 <DocActions github="rating/index.js" />
             </div>
 
-            <div className="content-section implementation">
-                <div className="card">
-                    <h5>Basic {val1}</h5>
-                    <Rating value={val1} onChange={(e) => setVal1(e.value)} />
-
-                    <h5>Without Cancel</h5>
-                    <Rating value={val2} cancel={false} onChange={(e) => setVal2(e.value)} />
-
-                    <h5>ReadOnly</h5>
-                    <Rating value={5} readOnly stars={10} cancel={false} />
-
-                    <h5>Disabled</h5>
-                    <Rating value={8} disabled stars={10} />
-
-                    <h5>Template</h5>
-                    <Rating
-                        value={val3}
-                        onChange={(e) => setVal3(e.value)}
-                        cancelIcon={
-                            <img src={`${contextPath}/images/rating/cancel.png`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-cancel-image" width="25px" height="25px" />
-                        }
-                        onIcon={
-                            <img
-                                src={`${contextPath}/images/rating/custom-icon-active.png`}
-                                onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
-                                alt="custom-image-active"
-                                width="25px"
-                                height="25px"
-                            />
-                        }
-                        offIcon={<img src={`${contextPath}/images/rating/custom-icon.png`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image" width="25px" height="25px" />}
-                    />
-                </div>
+            <div className="content-section doc">
+                <DocSections docs={docs} />
+                <DocSectionNav docs={docs} />
             </div>
-
-            <RatingDoc />
         </div>
     );
 };
