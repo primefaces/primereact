@@ -84,6 +84,12 @@ const AutoCompleteProps = [
         description: 'Specifies if multiple values can be selected.'
     },
     {
+        name: 'selectionLimit',
+        type: 'number',
+        default: 'null',
+        description: 'Number of maximum options that can be selected.'
+    },
+    {
         name: 'minLength',
         type: 'number',
         default: '1',

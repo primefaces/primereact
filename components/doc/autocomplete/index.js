@@ -857,6 +857,12 @@ itemTemplate(item) {
                                     <td>Specifies if multiple values can be selected.</td>
                                 </tr>
                                 <tr>
+                                    <td>selectionLimit</td>
+                                    <td>number</td>
+                                    <td>null</td>
+                                    <td>Number of maximum options that can be selected.</td>
+                                </tr>
+                                <tr>
                                     <td>showEmptyMessage</td>
                                     <td>boolean</td>
                                     <td>false</td>
