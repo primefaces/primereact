@@ -1,36 +1,36 @@
 import { useState } from 'react';
-import { InputText } from '../../lib/inputtext/InputText';
+import { Editor } from '../../lib/editor/Editor';
 import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
 
 export function BasicDoc(props) {
-    const [value, setValue] = useState('');
+    const [text, setText] = useState('');
 
     const code = {
         basic: `
-<InputText value={value} onChange={(e) => setValue(e.target.value)} />
+<Editor style={{ height: '320px' }} value={text} onTextChange={(e) => setText(e.htmlValue)} />
         `,
         javascript: `
 import { useState } from "react";
-import { InputText } from "primereact/inputtext";
+import { Editor } from "primereact/editor";
 
 export default function BasicDemo() {
     const [value, setValue] = useState('');
 
     return (
-        <InputText value={value} onChange={(e) => setValue(e.target.value)} />
+        <Editor style={{ height: '320px' }} value={text} onTextChange={(e) => setText(e.htmlValue)} />
     )
 }
         `,
         typescript: `
 import { useState } from "react";
-import { InputText } from "primereact/inputtext";
+import { Editor } from "primereact/editor";
 
 export default function BasicDemo() {
     const [value, setValue] = useState<string>('');
 
     return (
-        <InputText value={value} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)} />
+        <Editor style={{ height: '320px' }} value={text} onTextChange={(e: EditorTextChangeParams) => setText(e.htmlValue)} />
     )
 }
         `
@@ -39,10 +39,10 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                InputText is used as a controlled input with <i>value</i> and <i>onChange</i> properties.
+                Editor is used as a controlled component with <i>value</i> and <i>onTextChange</i> properties.
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <InputText value={value} onChange={(e) => setValue(e.target.value)} />
+            <div className="card">
+                <Editor style={{ height: '320px' }} value={text} onTextChange={(e) => setText(e.htmlValue)} />
             </div>
             <DocSectionCode code={code} />
         </>

@@ -37,7 +37,7 @@ export default function FloatLabelDemo() {
 
     return (
         <span className="p-float-label">
-            <InputText id="username" value={value} onChange={(e) => setValue(e.target.value)} />
+            <InputText id="username" value={value} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)} />
             <label htmlFor="username">Username</label>
         </span>
     )
