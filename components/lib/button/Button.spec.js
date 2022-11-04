@@ -153,6 +153,7 @@ describe('Button', () => {
         fireEvent.click(button);
 
         // Assert
+        expect(button).toBeDisabled();
         expect(clickOn).toHaveBeenCalledTimes(0);
     });
 });

@@ -61,7 +61,9 @@ export const KeyFilter = {
         let value = e.target.value,
             validatePattern = true;
 
-        if (value && !keyfilter.test(value)) {
+        const regex = this.getRegex(keyfilter);
+
+        if (value && !regex.test(value)) {
             validatePattern = false;
         }
 
