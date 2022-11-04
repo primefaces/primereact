@@ -195,7 +195,7 @@ const AutoCompleteDemo = () => {
 
                     <h5>Multiple</h5>
                     <span className="p-fluid">
-                        <AutoComplete value={selectedCountries} suggestions={filteredCountries} completeMethod={searchCountry} field="name" multiple onChange={(e) => setSelectedCountries(e.value)} aria-label="Countries" selectionLimit={3} />
+                        <AutoComplete value={selectedCountries} suggestions={filteredCountries} completeMethod={searchCountry} field="name" multiple onChange={(e) => setSelectedCountries(e.value)} aria-label="Countries" />
                     </span>
                 </div>
             </div>

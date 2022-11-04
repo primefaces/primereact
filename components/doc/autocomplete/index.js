@@ -661,6 +661,14 @@ render() {
 <AutoComplete multiple value={selectedCountry} suggestions={filteredCountries} completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)} />
 `}
                     </CodeHighlight>
+                    <p>
+                        The number of values selectable can be restricted using the <i>selectionLimit</i> property.
+                    </p>
+                    <CodeHighlight>
+                        {`
+<AutoComplete multiple selectionLimit={3} value={selectedCountry} suggestions={filteredCountries} completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)} />
+`}
+                    </CodeHighlight>
 
                     <h5>Objects</h5>
                     <p>
