@@ -1,10 +1,66 @@
 import React, { useState } from 'react';
-import { Chips } from '../../components/lib/chips/Chips';
-import ChipsDoc from '../../components/doc/chips';
-import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
+import { ImportDoc } from '../../components/doc/chips/importdoc';
+import { BasicDoc } from '../../components/doc/chips/basicdoc';
+import { FloatLabelDoc } from '../../components/doc/chips/floatlabeldoc';
+import { InvalidDoc } from '../../components/doc/chips/invaliddoc';
+import { DisabledDoc } from '../../components/doc/chips/disableddoc';
+import { SeparatorDoc } from '../../components/doc/chips/separatordoc';
+import { TemplateDoc } from '../../components/doc/chips/templatedoc';
+import { KeyFilterDoc } from '../../components/doc/chips/keyfilterdoc';
+import { ApiDoc } from '../../components/doc/chips/apidoc';
 
 const ChipsDemo = () => {
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'floatlabel',
+            label: 'Float Label',
+            component: FloatLabelDoc
+        },
+        {
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
+        },
+        {
+            id: 'separator',
+            label: 'Separator',
+            component: SeparatorDoc
+        },
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'keyfilter',
+            label: 'Key Filter',
+            component: KeyFilterDoc
+        },
+        {
+            id: 'apidoc',
+            label: 'API',
+            component: ApiDoc
+        }
+    ];
+
     const [values1, setValues1] = useState([]);
     const [values2, setValues2] = useState([]);
     const [values3, setValues3] = useState([]);
@@ -24,28 +80,18 @@ const ChipsDemo = () => {
                 <title>React Chips Component</title>
                 <meta name="description" content="Chips is used to enter multiple values on an input field." />
             </Head>
+
             <div className="content-section introduction">
                 <div className="feature-intro">
                     <h1>Chips</h1>
                     <p>Chips is used to enter multiple values on an input field.</p>
                 </div>
-                <DocActions github="chips/index.js" />
             </div>
 
-            <div className="content-section implementation p-fluid">
-                <div className="card p-fluid">
-                    <h5>Basic</h5>
-                    <Chips value={values1} onChange={(e) => setValues1(e.value)} />
-
-                    <h5>Comma Separator</h5>
-                    <Chips value={values2} onChange={(e) => setValues2(e.value)} separator="," />
-
-                    <h5>Template</h5>
-                    <Chips value={values3} onChange={(e) => setValues3(e.value)} max={5} itemTemplate={customChip}></Chips>
-                </div>
+            <div className="content-section doc">
+                <DocSections docs={docs} />
+                <DocSectionNav docs={docs} />
             </div>
-
-            <ChipsDoc />
         </div>
     );
 };
