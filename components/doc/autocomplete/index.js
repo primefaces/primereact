@@ -654,15 +654,8 @@ render() {
 
                     <h5>Multiple Mode</h5>
                     <p>
-                        Multiple mode is enabled using <i>multiple</i> property used to select more than one value from the autocomplete. In this case, value reference should be an array.
-                    </p>
-                    <CodeHighlight>
-                        {`
-<AutoComplete multiple value={selectedCountry} suggestions={filteredCountries} completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)} />
-`}
-                    </CodeHighlight>
-                    <p>
-                        The number of values selectable can be restricted using the <i>selectionLimit</i> property.
+                        Multiple mode is enabled using <i>multiple</i> property used to select more than one value from the autocomplete. In this case, value reference should be an array. The number of values selectable can be restricted using the{' '}
+                        <i>selectionLimit</i> property.
                     </p>
                     <CodeHighlight>
                         {`
