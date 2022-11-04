@@ -3,9 +3,11 @@ import TooltipOptions from '../tooltip/tooltipoptions';
 
 export interface InputTextareaProps extends Omit<React.DetailedHTMLProps<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>, 'ref'> {
     autoResize?: boolean;
+    children?: React.ReactNode;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    children?: React.ReactNode;
 }
 
-export declare class InputTextarea extends React.Component<InputTextareaProps, any> {}
+export declare class InputTextarea extends React.Component<InputTextareaProps, any> {
+    value?: string;
+}
