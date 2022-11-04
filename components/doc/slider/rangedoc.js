@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { Slider } from "../../lib/slider/Slider";
-import { DocSectionText } from "../common/docsectiontext";
-import { DocSectionCode } from "../common/docsectioncode";
+import { useState } from 'react';
+import { Slider } from '../../lib/slider/Slider';
+import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '../common/docsectioncode';
 
 export function RangeDoc(props) {
-    const [value, setValue] = useState([20,80]);
+    const [value, setValue] = useState([20, 80]);
 
     const code = {
         basic: `
@@ -46,5 +46,5 @@ export default function RangeDemo() {
             </div>
             <DocSectionCode code={code} />
         </>
-    )
+    );
 }

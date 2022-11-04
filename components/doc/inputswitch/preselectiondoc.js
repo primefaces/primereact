@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { InputSwitch } from "../../lib/inputswitch/InputSwitch";
-import { DocSectionText } from "../common/docsectiontext";
-import { DocSectionCode } from "../common/docsectioncode";
+import { useState } from 'react';
+import { InputSwitch } from '../../lib/inputswitch/InputSwitch';
+import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '../common/docsectioncode';
 
 export function PreselectionDoc(props) {
     const [checked, setChecked] = useState(true);
@@ -46,5 +46,5 @@ export default function PreselectionDemo() {
             </div>
             <DocSectionCode code={code} />
         </>
-    )
+    );
 }

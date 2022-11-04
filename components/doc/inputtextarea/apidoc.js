@@ -1,7 +1,7 @@
-import Link from "next/link";
-import { CodeHighlight } from "../common/codehighlight";
-import { DevelopmentSection } from "../common/developmentsection";
-import { DocSectionText } from "../common/docsectiontext";
+import Link from 'next/link';
+import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function ApiDoc(props) {
     return (
@@ -106,5 +106,5 @@ export function ApiDoc(props) {
             <h4>Dependencies</h4>
             <p>None.</p>
         </>
-    )
+    );
 }

@@ -33,7 +33,7 @@ const InputTextDemo = () => {
         {
             id: 'icons',
             label: 'Icons',
-            component: IconsDoc 
+            component: IconsDoc
         },
         {
             id: 'keyfilter',
@@ -74,7 +74,7 @@ const InputTextDemo = () => {
                 <title>React InputText Component</title>
                 <meta name="description" content="InputText is an extension to standard input element with theming and keyfiltering." />
             </Head>
-            
+
             <div className="content-section introduction">
                 <div className="feature-intro">
                     <h1>InputText</h1>

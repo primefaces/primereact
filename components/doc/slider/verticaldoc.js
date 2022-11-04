@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { Slider } from "../../lib/slider/Slider";
-import { DocSectionText } from "../common/docsectiontext";
-import { DocSectionCode } from "../common/docsectioncode";
+import { useState } from 'react';
+import { Slider } from '../../lib/slider/Slider';
+import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '../common/docsectioncode';
 
 export function VerticalDoc(props) {
     const [value, setValue] = useState(50);
@@ -46,5 +46,5 @@ export default function VerticalDemo() {
             </div>
             <DocSectionCode code={code} />
         </>
-    )
+    );
 }

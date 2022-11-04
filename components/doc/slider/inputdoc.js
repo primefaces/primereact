@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { Slider } from "../../lib/slider/Slider";
-import { InputText } from "../../lib/inputtext/InputText";
-import { DocSectionText } from "../common/docsectiontext";
-import { DocSectionCode } from "../common/docsectioncode";
+import { useState } from 'react';
+import { Slider } from '../../lib/slider/Slider';
+import { InputText } from '../../lib/inputtext/InputText';
+import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '../common/docsectioncode';
 
 export function InputDoc(props) {
     const [value, setValue] = useState(50);
@@ -50,9 +50,7 @@ export default function InputDemo() {
 
     return (
         <>
-            <DocSectionText {...props}>
-                Slider can be connected to an input field using two-way binding.
-            </DocSectionText>
+            <DocSectionText {...props}>Slider can be connected to an input field using two-way binding.</DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="w-14rem">
                     <InputText value={value} onChange={(e) => setValue(e.target.value)} className="w-full" />
@@ -61,5 +59,5 @@ export default function InputDemo() {
             </div>
             <DocSectionCode code={code} />
         </>
-    )
+    );
 }

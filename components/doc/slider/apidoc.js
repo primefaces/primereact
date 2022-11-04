@@ -1,7 +1,7 @@
-import Link from "next/link";
-import { CodeHighlight } from "../common/codehighlight";
-import { DevelopmentSection } from "../common/developmentsection";
-import { DocSectionText } from "../common/docsectiontext";
+import Link from 'next/link';
+import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function ApiDoc(props) {
     return (
@@ -156,8 +156,8 @@ export function ApiDoc(props) {
             <DevelopmentSection>
                 <h4>Screen Reader</h4>
                 <p>
-                    Slider element component uses <i>slider</i> role on the handle in addition to the <i>aria-orientation</i>, <i>aria-valuemin</i>, <i>aria-valuemax</i> and <i>aria-valuenow</i> attributes. Value to describe the component can
-                    be defined using
+                    Slider element component uses <i>slider</i> role on the handle in addition to the <i>aria-orientation</i>, <i>aria-valuemin</i>, <i>aria-valuemax</i> and <i>aria-valuenow</i> attributes. Value to describe the component can be
+                    defined using
                     <i>aria-labelledby</i> and <i>aria-label</i> props.
                 </p>
                 <CodeHighlight>
@@ -230,9 +230,9 @@ export function ApiDoc(props) {
                     </table>
                 </div>
             </DevelopmentSection>
-            
+
             <h4>Dependencies</h4>
             <p>None.</p>
         </>
-    )
+    );
 }

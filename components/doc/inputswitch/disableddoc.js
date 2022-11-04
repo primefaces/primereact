@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { InputSwitch } from "../../lib/inputswitch/InputSwitch";
-import { DocSectionText } from "../common/docsectiontext";
-import { DocSectionCode } from "../common/docsectioncode";
+import { useState } from 'react';
+import { InputSwitch } from '../../lib/inputswitch/InputSwitch';
+import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '../common/docsectioncode';
 
 export function DisabledDoc(props) {
     const code = {
@@ -40,5 +40,5 @@ export default function DisabledDemo() {
             </div>
             <DocSectionCode code={code} />
         </>
-    )
+    );
 }

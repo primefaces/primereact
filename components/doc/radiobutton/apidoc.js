@@ -1,7 +1,7 @@
-import Link from "next/link";
-import { CodeHighlight } from "../common/codehighlight";
-import { DevelopmentSection } from "../common/developmentsection";
-import { DocSectionText } from "../common/docsectiontext";
+import Link from 'next/link';
+import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function ApiDoc(props) {
     return (
@@ -151,8 +151,8 @@ export function ApiDoc(props) {
             <DevelopmentSection>
                 <h4>Screen Reader</h4>
                 <p>
-                    RadioButton component uses a hidden native radio button element internally that is only visible to screen readers. Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i>{' '}
-                    prop or using <i>aria-labelledby</i>, <i>aria-label</i> props.
+                    RadioButton component uses a hidden native radio button element internally that is only visible to screen readers. Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or
+                    using <i>aria-labelledby</i>, <i>aria-label</i> props.
                 </p>
                 <CodeHighlight>
                     {`
@@ -212,5 +212,5 @@ export function ApiDoc(props) {
             <h4>Dependencies</h4>
             <p>None.</p>
         </>
-    )
+    );
 }

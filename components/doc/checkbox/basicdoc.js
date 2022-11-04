@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { Checkbox } from "../../lib/checkbox/Checkbox";
-import { DocSectionText } from "../common/docsectiontext";
-import { DocSectionCode } from "../common/docsectioncode";
+import { useState } from 'react';
+import { Checkbox } from '../../lib/checkbox/Checkbox';
+import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '../common/docsectioncode';
 
 export function BasicDoc(props) {
     const [checked, setChecked] = useState(false);
@@ -42,9 +42,9 @@ export default function BasicDemo() {
                 Checkbox is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Checkbox onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
+                <Checkbox onChange={(e) => setChecked(e.checked)} checked={checked}></Checkbox>
             </div>
             <DocSectionCode code={code} />
         </>
-    )
+    );
 }
