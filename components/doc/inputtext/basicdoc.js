@@ -9,7 +9,6 @@ export function BasicDoc(props) {
     const code = {
         basic: `
 <InputText value={value} onChange={(e) => setValue(e.target.value)} />
-<span className="ml-2">{value}</span>
         `,
         javascript: `
 import { useState } from "react";
