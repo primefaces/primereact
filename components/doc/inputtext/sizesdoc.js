@@ -1,6 +1,6 @@
-import { InputText } from "../../lib/inputtext/InputText";
-import { DocSectionText } from "../common/docsectiontext";
-import { DocSectionCode } from "../common/docsectioncode";
+import { InputText } from '../../lib/inputtext/InputText';
+import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '../common/docsectioncode';
 
 export function SizesDoc(props) {
     const code = {
@@ -51,5 +51,5 @@ export default function SizesDemo() {
             </div>
             <DocSectionCode code={code} />
         </>
-    )
+    );
 }

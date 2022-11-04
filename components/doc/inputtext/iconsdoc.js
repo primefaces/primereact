@@ -1,6 +1,6 @@
-import { InputText } from "../../lib/inputtext/InputText";
-import { DocSectionText } from "../common/docsectiontext";
-import { DocSectionCode } from "../common/docsectioncode";
+import { InputText } from '../../lib/inputtext/InputText';
+import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '../common/docsectioncode';
 
 export function IconsDoc(props) {
     const code = {
@@ -75,5 +75,5 @@ export default function IconsDemo() {
             </div>
             <DocSectionCode code={code} />
         </>
-    )
+    );
 }

@@ -1,6 +1,6 @@
-import { InputText } from "../../lib/inputtext/InputText";
-import { DocSectionCode } from "../common/docsectioncode";
-import { DocSectionText } from "../common/docsectiontext";
+import { InputText } from '../../lib/inputtext/InputText';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function HelpTextDoc(props) {
     const code = {
@@ -58,16 +58,12 @@ export default function HelpTextDemo() {
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="flex flex-column gap-2">
-                    <label htmlFor="username">
-                        Username
-                    </label>
+                    <label htmlFor="username">Username</label>
                     <InputText id="username" aria-describedby="username-help" />
-                    <small id="username-help">
-                        Enter your username to reset your password.
-                    </small>
+                    <small id="username-help">Enter your username to reset your password.</small>
                 </div>
             </div>
             <DocSectionCode code={code} />
         </>
-    )
+    );
 }

@@ -1,7 +1,7 @@
-import Link from "next/link";
-import { CodeHighlight } from "../common/codehighlight";
-import { DevelopmentSection } from "../common/developmentsection";
-import { DocSectionText } from "../common/docsectiontext";
+import Link from 'next/link';
+import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function ApiDoc(props) {
     return (
@@ -73,8 +73,8 @@ export function ApiDoc(props) {
             <DevelopmentSection>
                 <h4>Screen Reader</h4>
                 <p>
-                    InputText component renders a native input element that implicitly includes any passed prop. Value to describe the component can either be provided via <i>label</i> tag combined with <i>id</i> prop or using{' '}
-                    <i>aria-labelledby</i>, <i>aria-label</i> props.
+                    InputText component renders a native input element that implicitly includes any passed prop. Value to describe the component can either be provided via <i>label</i> tag combined with <i>id</i> prop or using <i>aria-labelledby</i>,{' '}
+                    <i>aria-label</i> props.
                 </p>
                 <CodeHighlight>
                     {`
@@ -111,5 +111,5 @@ export function ApiDoc(props) {
             <h3>Dependencies</h3>
             <p>None.</p>
         </>
-    )
+    );
 }

@@ -1,7 +1,7 @@
-import Link from "next/link";
-import { CodeHighlight } from "../common/codehighlight";
-import { DevelopmentSection } from "../common/developmentsection";
-import { DocSectionText } from "../common/docsectiontext";
+import Link from 'next/link';
+import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function ApiDoc(props) {
     return (
@@ -155,7 +155,9 @@ export function ApiDoc(props) {
             </div>
 
             <h3>Styling</h3>
-            <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
+            <p>
+                Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.
+            </p>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -185,8 +187,8 @@ export function ApiDoc(props) {
             <DevelopmentSection>
                 <h4>Screen Reader</h4>
                 <p>
-                    Checkbox component uses a hidden native checkbox element internally that is only visible to screen readers. Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or
-                    using <i>aria-labelledby</i>, <i>aria-label</i> props.
+                    Checkbox component uses a hidden native checkbox element internally that is only visible to screen readers. Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or using{' '}
+                    <i>aria-labelledby</i>, <i>aria-label</i> props.
                 </p>
                 <CodeHighlight>
                     {`
@@ -225,9 +227,9 @@ export function ApiDoc(props) {
                     </table>
                 </div>
             </DevelopmentSection>
-            
+
             <h5>Dependencies</h5>
             <p>None.</p>
         </>
-    )
+    );
 }

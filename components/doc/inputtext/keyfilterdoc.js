@@ -1,7 +1,7 @@
-import Link from "next/link";
-import { InputText } from "../../lib/inputtext/InputText";
-import { DocSectionText } from "../common/docsectiontext";
-import { DocSectionCode } from "../common/docsectioncode";
+import Link from 'next/link';
+import { InputText } from '../../lib/inputtext/InputText';
+import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '../common/docsectioncode';
 
 export function KeyFilterDoc(props) {
     const code = {
@@ -38,5 +38,5 @@ export default function KeyFilterDemo() {
             </div>
             <DocSectionCode code={code} />
         </>
-    )
+    );
 }

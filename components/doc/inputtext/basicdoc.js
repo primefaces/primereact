@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { InputText } from "../../lib/inputtext/InputText";
-import { DocSectionText } from "../common/docsectiontext";
-import { DocSectionCode } from "../common/docsectioncode";
+import { useState } from 'react';
+import { InputText } from '../../lib/inputtext/InputText';
+import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '../common/docsectioncode';
 
 export function BasicDoc(props) {
     const [value, setValue] = useState('');
@@ -46,5 +46,5 @@ export default function BasicDemo() {
             </div>
             <DocSectionCode code={code} />
         </>
-    )
+    );
 }

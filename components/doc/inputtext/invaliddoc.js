@@ -1,6 +1,6 @@
-import { InputText } from "../../lib/inputtext/InputText";
-import { DocSectionText } from "../common/docsectiontext";
-import { DocSectionCode } from "../common/docsectioncode";
+import { InputText } from '../../lib/inputtext/InputText';
+import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '../common/docsectioncode';
 
 export function InvalidDoc(props) {
     const code = {
@@ -50,7 +50,7 @@ export default function InvalidDemo() {
 }
         `
     };
-    
+
     return (
         <>
             <DocSectionText {...props}>
@@ -58,9 +58,7 @@ export default function InvalidDemo() {
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="flex flex-column gap-2">
-                    <label htmlFor="username">
-                        Username
-                    </label>
+                    <label htmlFor="username">Username</label>
                     <InputText id="username" aria-describedby="username-help" className="p-invalid" />
                     <small id="username-help" className="p-error">
                         Username is not available.
@@ -69,5 +67,5 @@ export default function InvalidDemo() {
             </div>
             <DocSectionCode code={code} />
         </>
-    )
+    );
 }

@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { Slider } from "../../lib/slider/Slider";
-import { DocSectionText } from "../common/docsectiontext";
-import { DocSectionCode } from "../common/docsectioncode";
+import { useState } from 'react';
+import { Slider } from '../../lib/slider/Slider';
+import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '../common/docsectioncode';
 
 export function StepDoc(props) {
     const [value, setValue] = useState(20);
@@ -46,5 +46,5 @@ export default function StepDemo() {
             </div>
             <DocSectionCode code={code} />
         </>
-    )
+    );
 }

@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { InputTextarea } from "../../lib/inputtextarea/InputTextarea";
-import { DocSectionText } from "../common/docsectiontext";
-import { DocSectionCode } from "../common/docsectioncode";
+import { useState } from 'react';
+import { InputTextarea } from '../../lib/inputtextarea/InputTextarea';
+import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '../common/docsectioncode';
 
 export function FloatLabelDoc(props) {
     const [value, setValue] = useState('');
@@ -62,5 +62,5 @@ export default function FloatLabelDemo() {
             </div>
             <DocSectionCode code={code} />
         </>
-    )
+    );
 }

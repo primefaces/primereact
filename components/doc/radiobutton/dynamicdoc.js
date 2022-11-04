@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { RadioButton } from "../../lib/radiobutton/RadioButton";
-import { DocSectionText } from "../common/docsectiontext";
-import { DocSectionCode } from "../common/docsectioncode";
+import { useState } from 'react';
+import { RadioButton } from '../../lib/radiobutton/RadioButton';
+import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '../common/docsectioncode';
 
 export function DynamicDoc(props) {
     const categories = [
@@ -88,16 +88,16 @@ export default function DynamicDemo() {
 
     return (
         <>
-            <DocSectionText {...props}>
-                RadioButtons can be generated using a list of values.
-            </DocSectionText>
+            <DocSectionText {...props}>RadioButtons can be generated using a list of values.</DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="flex flex-column gap-3">
                     {categories.map((category) => {
                         return (
                             <div key={category.key} className="flex align-items-center">
                                 <RadioButton inputId={category.key} name="category" value={category} onChange={(e) => setSelectedCategory(e.value)} checked={selectedCategory.key === category.key} />
-                                <label htmlFor={category.key} className="ml-2">{category.name}</label>
+                                <label htmlFor={category.key} className="ml-2">
+                                    {category.name}
+                                </label>
                             </div>
                         );
                     })}
@@ -105,5 +105,5 @@ export default function DynamicDemo() {
             </div>
             <DocSectionCode code={code} />
         </>
-    )
+    );
 }

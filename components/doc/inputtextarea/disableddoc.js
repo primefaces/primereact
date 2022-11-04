@@ -1,6 +1,6 @@
-import { InputTextarea } from "../../lib/inputtextarea/InputTextarea";
-import { DocSectionText } from "../common/docsectiontext";
-import { DocSectionCode } from "../common/docsectioncode";
+import { InputTextarea } from '../../lib/inputtextarea/InputTextarea';
+import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '../common/docsectioncode';
 
 export function DisabledDoc(props) {
     const code = {
@@ -33,9 +33,9 @@ export default function DisabledDemo() {
                 <i>disabled</i> prop prevents a textarea from being editable.
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <InputTextarea disabled rows={5} cols={30} value="Disabled"/>
+                <InputTextarea disabled rows={5} cols={30} value="Disabled" />
             </div>
             <DocSectionCode code={code} />
         </>
-    )
+    );
 }
