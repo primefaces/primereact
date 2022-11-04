@@ -3,12 +3,12 @@ import { render } from '@testing-library/react';
 import { Divider } from './Divider';
 
 describe('Divider', () => {
-    test('when tpe has not any property it returns with default class', () => {
+    test('when component has no properties it returns with default class', () => {
         // Arrange
         const { container } = render(<Divider />);
 
         // Act + Assert
-        expect(container.getElementsByClassName('p-divider p-component p-divider-horizontal').length).toBe(1);
+        expect(container).toHaveClass('p-divider p-component p-divider-horizontal');
     });
     test('when layout and align as property it returns with class', () => {
         // Arrange
@@ -61,21 +61,21 @@ describe('Divider', () => {
         expect(container.getElementsByClassName('p-divider p-component p-divider-vertical p-divider-bottom').length).toBe(1);
     });
 
-    test('when type has not any property it returns with default class', () => {
+    test('when type has no property it returns with the default class', () => {
         // Arrange
         const { container } = render(<Divider />);
 
         // Act + Assert
         expect(container.getElementsByClassName('p-divider p-component p-divider-solid').length).toBe(1);
     });
-    test('when type as property it returns with class', () => {
+    test('when type is dashed it is styled as a dashed line', () => {
         // Arrange
         const { container } = render(<Divider type={'dashed'} />);
 
         // Act + Assert
         expect(container.getElementsByClassName('p-divider p-component p-divider-dashed').length).toBe(1);
     });
-    test('when type as property it returns with class', () => {
+    test('when type is dotted is is styled as a dotted line', () => {
         // Arrange
         const { container } = render(<Divider type={'dotted'} />);
 
