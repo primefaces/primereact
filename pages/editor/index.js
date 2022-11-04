@@ -36,7 +36,7 @@ const EditorDemo = () => {
             component: ApiDoc
         }
     ];
-   
+
     return (
         <div>
             <Head>

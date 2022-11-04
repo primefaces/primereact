@@ -1,12 +1,38 @@
-import React, { useState } from 'react';
-import { ToggleButton } from '../../components/lib/togglebutton/ToggleButton';
 import ToggleButtonDoc from '../../components/doc/togglebutton';
 import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
+import { DocSections } from '../../components/doc/common/docsections';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { BasicDemo } from '../../components/doc/togglebutton/basicdoc';
+import { CustomizedDoc } from '../../components/doc/togglebutton/customizeddoc';
+import { ApiDoc } from '../../components/doc/togglebutton/apidoc';
+import { ImportDoc } from '../../components/doc/togglebutton/importdoc';
+
 const ToggleButtonDemo = () => {
-    const [checked1, setChecked1] = useState(false);
-    const [checked2, setChecked2] = useState(false);
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDemo
+        },
+        {
+            id: 'customized',
+            label: 'Customized',
+            component: CustomizedDoc
+        },
+        {
+            id: 'api',
+            label: 'API',
+            type: 'api',
+            component: ApiDoc
+        }
+    ];
 
     return (
         <div>
@@ -23,17 +49,10 @@ const ToggleButtonDemo = () => {
                 <DocActions github="togglebutton/index.js" />
             </div>
 
-            <div className="content-section implementation">
-                <div className="card">
-                    <h5>Basic</h5>
-                    <ToggleButton checked={checked1} onChange={(e) => setChecked1(e.value)} onIcon="pi pi-check" offIcon="pi pi-times" className="w-full sm:w-10rem" aria-label="Confirmation" />
-
-                    <h5>Customized</h5>
-                    <ToggleButton checked={checked2} onChange={(e) => setChecked2(e.value)} onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times" className="w-full sm:w-10rem" aria-label="Confirmation" />
-                </div>
+            <div className="content-section doc">
+                <DocSections docs={docs} />
+                <DocSectionNav docs={docs} />
             </div>
-
-            <ToggleButtonDoc />
         </div>
     );
 };
