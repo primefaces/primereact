@@ -8,7 +8,7 @@ describe('Divider', () => {
         const { container } = render(<Divider />);
 
         // Act + Assert
-        expect(container).toHaveClass('p-divider p-component p-divider-horizontal');
+        expect(container.getElementsByClassName('p-divider p-component p-divider-horizontal p-divider-solid p-divider-left').length).toBe(1);
     });
     test('when layout and align as property it returns with class', () => {
         // Arrange
