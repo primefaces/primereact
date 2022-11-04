@@ -54,7 +54,7 @@ export default function FloatLabelDemo() {
             <DocSectionText {...props}>
                 A floating label is implemented by wrapping the textarea and the label inside a container having <i>.p-float-label</i> style class.
             </DocSectionText>
-            <div className="card">
+            <div className="card flex justify-content-center">
                 <span className="p-float-label">
                     <InputTextarea value={value} onChange={(e) => setValue(e.target.value)} rows={5} cols={30} />
                     <label htmlFor="username">Username</label>

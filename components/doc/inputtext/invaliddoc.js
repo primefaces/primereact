@@ -5,25 +5,27 @@ import { DocSectionCode } from "../common/docsectioncode";
 export function InvalidDoc(props) {
     const code = {
         basic: `
-<label htmlFor="username" className="block">
-    Username
-</label>
-<InputText id="username" aria-describedby="username-help" className="p-invalid block" />
-<small id="username-help" className="p-error block">
-    Username is not available.
-</small>
+<div className="flex flex-column gap-2">
+    <label htmlFor="username">
+        Username
+    </label>
+    <InputText id="username" aria-describedby="username-help" className="p-invalid" />
+    <small id="username-help" className="p-error">
+        Username is not available.
+    </small>
+</div>
         `,
         javascript: `
 import { InputText } from "primereact/inputtext";
 
 export default function InvalidDemo() {
     return (
-        <div className="card flex flex-column align-items-start gap-2">
-            <label htmlFor="username" className="block">
+        <div className="flex flex-column gap-2">
+            <label htmlFor="username">
                 Username
             </label>
-            <InputText id="username" aria-describedby="username-help" className="p-invalid block" />
-            <small id="username-help" className="p-error block">
+            <InputText id="username" aria-describedby="username-help" className="p-invalid" />
+            <small id="username-help" className="p-error">
                 Username is not available.
             </small>
         </div>
@@ -35,12 +37,12 @@ import { InputText } from "primereact/inputtext";
 
 export default function InvalidDemo() {
     return (
-        <div className="card flex flex-column align-items-start gap-2">
-            <label htmlFor="username" className="block">
+        <div className="flex flex-column gap-2">
+            <label htmlFor="username">
                 Username
             </label>
-            <InputText id="username" aria-describedby="username-help" className="p-invalid block" />
-            <small id="username-help" className="p-error block">
+            <InputText id="username" aria-describedby="username-help" className="p-invalid" />
+            <small id="username-help" className="p-error">
                 Username is not available.
             </small>
         </div>
@@ -54,14 +56,16 @@ export default function InvalidDemo() {
             <DocSectionText {...props}>
                 Applying <i>p-invalid</i> class to an input element indicates a failed validation.
             </DocSectionText>
-            <div className="card flex flex-column align-items-start gap-2">
-                <label htmlFor="username" className="block">
-                    Username
-                </label>
-                <InputText id="username" aria-describedby="username-help" className="p-invalid block" />
-                <small id="username-help" className="p-error block">
-                    Username is not available.
-                </small>
+            <div className="card flex justify-content-center">
+                <div className="flex flex-column gap-2">
+                    <label htmlFor="username">
+                        Username
+                    </label>
+                    <InputText id="username" aria-describedby="username-help" className="p-invalid" />
+                    <small id="username-help" className="p-error">
+                        Username is not available.
+                    </small>
+                </div>
             </div>
             <DocSectionCode code={code} />
         </>

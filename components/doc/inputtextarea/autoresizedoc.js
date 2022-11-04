@@ -41,7 +41,7 @@ export default function AutoResizeDemo() {
             <DocSectionText {...props}>
                 In auto resize mode, textarea grows instead of displaying a scrollbar.
             </DocSectionText>
-            <div className="card">
+            <div className="card flex justify-content-center">
                 <InputTextarea rows={5} cols={30} value={value} onChange={(e) => setValue(event.target.value)} autoResize />
             </div>
             <DocSectionCode code={code} />

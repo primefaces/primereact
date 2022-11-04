@@ -36,23 +36,23 @@ export default function GroupDemo() {
 
     return (
         <div className="flex flex-wrap gap-3">
-        <div className="flex align-items-center">
-            <RadioButton inputId="ingredient1" name="pizza" value="Cheese" onChange={(e) => setIngredient(e.value)} checked={ingredient === 'Cheese'} />
-            <label htmlFor="ingredient1" className="ml-2">Cheese</label>
+            <div className="flex align-items-center">
+                <RadioButton inputId="ingredient1" name="pizza" value="Cheese" onChange={(e) => setIngredient(e.value)} checked={ingredient === 'Cheese'} />
+                <label htmlFor="ingredient1" className="ml-2">Cheese</label>
+            </div>
+            <div className="flex align-items-center">
+                <RadioButton inputId="ingredient2" name="pizza" value="Mushroom" onChange={(e) => setIngredient(e.value)} checked={ingredient === 'Mushroom'} />
+                <label htmlFor="ingredient2" className="ml-2">Mushroom</label>
+            </div>
+            <div className="flex align-items-center">
+                <RadioButton inputId="ingredient3" name="pizza" value="Pepper" onChange={(e) => setIngredient(e.value)} checked={ingredient === 'Pepper'} />
+                <label htmlFor="ingredient3" className="ml-2">Pepper</label>
+            </div>
+            <div className="flex align-items-center">
+                <RadioButton inputId="ingredient4" name="pizza" value="Onion" onChange={(e) => setIngredient(e.value)} checked={ingredient === 'Onion'} />
+                <label htmlFor="ingredient4" className="ml-2">Onion</label>
+            </div>
         </div>
-        <div className="flex align-items-center">
-            <RadioButton inputId="ingredient2" name="pizza" value="Mushroom" onChange={(e) => setIngredient(e.value)} checked={ingredient === 'Mushroom'} />
-            <label htmlFor="ingredient2" className="ml-2">Mushroom</label>
-        </div>
-        <div className="flex align-items-center">
-            <RadioButton inputId="ingredient3" name="pizza" value="Pepper" onChange={(e) => setIngredient(e.value)} checked={ingredient === 'Pepper'} />
-            <label htmlFor="ingredient3" className="ml-2">Pepper</label>
-        </div>
-        <div className="flex align-items-center">
-            <RadioButton inputId="ingredient4" name="pizza" value="Onion" onChange={(e) => setIngredient(e.value)} checked={ingredient === 'Onion'} />
-            <label htmlFor="ingredient4" className="ml-2">Onion</label>
-        </div>
-    </div>
     );
 }
         `,
@@ -65,23 +65,23 @@ export default function GroupDemo() {
 
     return (
         <div className="flex flex-wrap gap-3">
-        <div className="flex align-items-center">
-            <RadioButton inputId="ingredient1" name="pizza" value="Cheese" onChange={(e: RadioButtonChangeParams) => setIngredient(e.value)} checked={ingredient === 'Cheese'} />
-            <label htmlFor="ingredient1" className="ml-2">Cheese</label>
+            <div className="flex align-items-center">
+                <RadioButton inputId="ingredient1" name="pizza" value="Cheese" onChange={(e) => setIngredient(e.value)} checked={ingredient === 'Cheese'} />
+                <label htmlFor="ingredient1" className="ml-2">Cheese</label>
+            </div>
+            <div className="flex align-items-center">
+                <RadioButton inputId="ingredient2" name="pizza" value="Mushroom" onChange={(e) => setIngredient(e.value)} checked={ingredient === 'Mushroom'} />
+                <label htmlFor="ingredient2" className="ml-2">Mushroom</label>
+            </div>
+            <div className="flex align-items-center">
+                <RadioButton inputId="ingredient3" name="pizza" value="Pepper" onChange={(e) => setIngredient(e.value)} checked={ingredient === 'Pepper'} />
+                <label htmlFor="ingredient3" className="ml-2">Pepper</label>
+            </div>
+            <div className="flex align-items-center">
+                <RadioButton inputId="ingredient4" name="pizza" value="Onion" onChange={(e) => setIngredient(e.value)} checked={ingredient === 'Onion'} />
+                <label htmlFor="ingredient4" className="ml-2">Onion</label>
+            </div>
         </div>
-        <div className="flex align-items-center">
-            <RadioButton inputId="ingredient2" name="pizza" value="Mushroom" onChange={(e: RadioButtonChangeParams) => setIngredient(e.value)} checked={ingredient === 'Mushroom'} />
-            <label htmlFor="ingredient2" className="ml-2">Mushroom</label>
-        </div>
-        <div className="flex align-items-center">
-            <RadioButton inputId="ingredient3" name="pizza" value="Pepper" onChange={(e: RadioButtonChangeParams) => setIngredient(e.value)} checked={ingredient === 'Pepper'} />
-            <label htmlFor="ingredient3" className="ml-2">Pepper</label>
-        </div>
-        <div className="flex align-items-center">
-            <RadioButton inputId="ingredient4" name="pizza" value="Onion" onChange={(e: RadioButtonChangeParams) => setIngredient(e.value)} checked={ingredient === 'Onion'} />
-            <label htmlFor="ingredient4" className="ml-2">Onion</label>
-        </div>
-    </div>
     );
 }
         `
@@ -92,22 +92,24 @@ export default function GroupDemo() {
             <DocSectionText {...props}>
                 RadioButton is used as a controlled input with <i>value</i>, <i>checked</i> and <i>onChange</i> properties. Multiple radiobuttons can be grouped together.
             </DocSectionText>
-            <div className="card flex flex-wrap gap-3">
-                <div className="flex align-items-center">
-                    <RadioButton inputId="ingredient1" name="pizza" value="Cheese" onChange={(e) => setIngredient(e.value)} checked={ingredient === 'Cheese'} />
-                    <label htmlFor="ingredient1" className="ml-2">Cheese</label>
-                </div>
-                <div className="flex align-items-center">
-                    <RadioButton inputId="ingredient2" name="pizza" value="Mushroom" onChange={(e) => setIngredient(e.value)} checked={ingredient === 'Mushroom'} />
-                    <label htmlFor="ingredient2" className="ml-2">Mushroom</label>
-                </div>
-                <div className="flex align-items-center">
-                    <RadioButton inputId="ingredient3" name="pizza" value="Pepper" onChange={(e) => setIngredient(e.value)} checked={ingredient === 'Pepper'} />
-                    <label htmlFor="ingredient3" className="ml-2">Pepper</label>
-                </div>
-                <div className="flex align-items-center">
-                    <RadioButton inputId="ingredient4" name="pizza" value="Onion" onChange={(e) => setIngredient(e.value)} checked={ingredient === 'Onion'} />
-                    <label htmlFor="ingredient4" className="ml-2">Onion</label>
+            <div className="card flex justify-content-center">
+                <div className="flex flex-wrap gap-3">
+                    <div className="flex align-items-center">
+                        <RadioButton inputId="ingredient1" name="pizza" value="Cheese" onChange={(e) => setIngredient(e.value)} checked={ingredient === 'Cheese'} />
+                        <label htmlFor="ingredient1" className="ml-2">Cheese</label>
+                    </div>
+                    <div className="flex align-items-center">
+                        <RadioButton inputId="ingredient2" name="pizza" value="Mushroom" onChange={(e) => setIngredient(e.value)} checked={ingredient === 'Mushroom'} />
+                        <label htmlFor="ingredient2" className="ml-2">Mushroom</label>
+                    </div>
+                    <div className="flex align-items-center">
+                        <RadioButton inputId="ingredient3" name="pizza" value="Pepper" onChange={(e) => setIngredient(e.value)} checked={ingredient === 'Pepper'} />
+                        <label htmlFor="ingredient3" className="ml-2">Pepper</label>
+                    </div>
+                    <div className="flex align-items-center">
+                        <RadioButton inputId="ingredient4" name="pizza" value="Onion" onChange={(e) => setIngredient(e.value)} checked={ingredient === 'Onion'} />
+                        <label htmlFor="ingredient4" className="ml-2">Onion</label>
+                    </div>
                 </div>
             </div>
             <DocSectionCode code={code} />

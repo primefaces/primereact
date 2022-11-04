@@ -14,10 +14,10 @@ import { InputText } from "primereact/inputtext";
 
 export default function SizesDemo() {
     return (
-        <div className="card flex flex-column gap-2">
-            <InputText type="text" className="p-inputtext-sm block mb-2" placeholder="Small" />
-            <InputText type="text" className="block mb-2" placeholder="Normal" />
-            <InputText type="text" className="p-inputtext-lg block" placeholder="Large" />
+        <div className="flex flex-column gap-3">
+            <InputText type="text" className="p-inputtext-sm" placeholder="Small" />
+            <InputText type="text" className="block" placeholder="Normal" />
+            <InputText type="text" className="p-inputtext-lg" placeholder="Large" />
         </div>
     )
 }
@@ -27,10 +27,10 @@ import { InputText } from "primereact/inputtext";
 
 export default function SizesDemo() {
     return (
-        <div className="card flex flex-column gap-2">
-            <InputText type="text" className="p-inputtext-sm block mb-2" placeholder="Small" />
-            <InputText type="text" className="block mb-2" placeholder="Normal" />
-            <InputText type="text" className="p-inputtext-lg block" placeholder="Large" />
+        <div className="flex flex-column gap-3">
+            <InputText type="text" className="p-inputtext-sm" placeholder="Small" />
+            <InputText type="text" className="block" placeholder="Normal" />
+            <InputText type="text" className="p-inputtext-lg" placeholder="Large" />
         </div>
     )
 }
@@ -42,10 +42,12 @@ export default function SizesDemo() {
             <DocSectionText {...props}>
                 Apply <i>p-input-sm</i> to reduce the size of the input element or <i>p-input-lg</i> to enlarge them.
             </DocSectionText>
-            <div className="card flex flex-column gap-2">
-                <InputText type="text" className="p-inputtext-sm" placeholder="Small" />
-                <InputText type="text" className="block" placeholder="Normal" />
-                <InputText type="text" className="p-inputtext-lg" placeholder="Large" />
+            <div className="card flex justify-content-center">
+                <div className="flex flex-column gap-3">
+                    <InputText type="text" className="p-inputtext-sm" placeholder="Small" />
+                    <InputText type="text" className="block" placeholder="Normal" />
+                    <InputText type="text" className="p-inputtext-lg" placeholder="Large" />
+                </div>
             </div>
             <DocSectionCode code={code} />
         </>

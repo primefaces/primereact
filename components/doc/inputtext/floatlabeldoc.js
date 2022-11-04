@@ -21,12 +21,10 @@ export default function FloatLabelDemo() {
     const [value, setValue] = useState('');
 
     return (
-        <div>
-            <span className="p-float-label">
-                <InputText id="username" value={value} onChange={(e) => setValue(e.target.value)} />
-                <label htmlFor="username">Username</label>
-            </span>
-        </div>
+        <span className="p-float-label">
+            <InputText id="username" value={value} onChange={(e) => setValue(e.target.value)} />
+            <label htmlFor="username">Username</label>
+        </span>
     )
 }
         `,
@@ -38,12 +36,10 @@ export default function FloatLabelDemo() {
     const [value, setValue] = useState<string>('');
 
     return (
-        <div>
-            <span className="p-float-label">
-                <InputText id="username" value={value} onChange={(e) => setValue(e.target.value)} />
-                <label htmlFor="username">Username</label>
-            </span>
-        </div>
+        <span className="p-float-label">
+            <InputText id="username" value={value} onChange={(e) => setValue(e.target.value)} />
+            <label htmlFor="username">Username</label>
+        </span>
     )
 }
         `
@@ -54,7 +50,7 @@ export default function FloatLabelDemo() {
             <DocSectionText {...props}>
                 A floating label is implemented by wrapping the input and the label inside a container having <i>.p-float-label</i> style class.
             </DocSectionText>
-            <div className="card">
+            <div className="card flex justify-content-center">
                 <span className="p-float-label">
                     <InputText id="username" value={value} onChange={(e) => setValue(e.target.value)} />
                     <label htmlFor="username">Username</label>

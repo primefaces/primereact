@@ -122,15 +122,17 @@ export default function DynamicDemo() {
             <DocSectionText {...props}>
                 Checkboxes can be generated using a list of values.
             </DocSectionText>
-            <div className="card flex flex-column gap-3">
-                {categories.map((category) => {
-                    return (
-                        <div key={category.key} className="flex align-items-center">
-                            <Checkbox inputId={category.key} name="category" value={category} onChange={onCategoryChange} checked={selectedCategories.some((item) => item.key === category.key)} />
-                            <label htmlFor={category.key} className="ml-2">{category.name}</label>
-                        </div>
-                    );
-                })}
+            <div className="card flex justify-content-center">
+                <div className="flex flex-column gap-3">
+                    {categories.map((category) => {
+                        return (
+                            <div key={category.key} className="flex align-items-center">
+                                <Checkbox inputId={category.key} name="category" value={category} onChange={onCategoryChange} checked={selectedCategories.some((item) => item.key === category.key)} />
+                                <label htmlFor={category.key} className="ml-2">{category.name}</label>
+                            </div>
+                        );
+                    })}
+                </div>
             </div>
             <DocSectionCode code={code} />
         </>

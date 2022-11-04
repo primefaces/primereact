@@ -5,25 +5,27 @@ import { DocSectionText } from "../common/docsectiontext";
 export function HelpTextDoc(props) {
     const code = {
         basic: `
-<label htmlFor="username" className="block">
-    Username
-</label>
-<InputText id="username" aria-describedby="username-help" className="block" />
-<small id="username-help" className="block">
-    Enter your username to reset your password.
-</small>
+<div className="flex flex-column gap-2">
+    <label htmlFor="username">
+        Username
+    </label>
+    <InputText id="username" aria-describedby="username-help" />
+    <small id="username-help">
+        Enter your username to reset your password.
+    </small>
+</div>
         `,
         javascript: `
 import { InputText } from "primereact/inputtext";
 
 export default function HelpTextDemo() {
     return (
-        <div className="card flex flex-column align-items-start gap-2">
-            <label htmlFor="username" className="block">
+        <div className="flex flex-column gap-2">
+            <label htmlFor="username">
                 Username
             </label>
-            <InputText id="username" aria-describedby="username-help" className="block" />
-            <small id="username-help" className="block">
+            <InputText id="username" aria-describedby="username-help" />
+            <small id="username-help">
                 Enter your username to reset your password.
             </small>
         </div>
@@ -35,12 +37,12 @@ import { InputText } from "primereact/inputtext";
 
 export default function HelpTextDemo() {
     return (
-        <div className="card flex flex-column align-items-start gap-2">
-            <label htmlFor="username" className="block">
+        <div className="flex flex-column gap-2">
+            <label htmlFor="username">
                 Username
             </label>
-            <InputText id="username" aria-describedby="username-help" className="block" />
-            <small id="username-help" className="block">
+            <InputText id="username" aria-describedby="username-help" />
+            <small id="username-help">
                 Enter your username to reset your password.
             </small>
         </div>
@@ -54,14 +56,16 @@ export default function HelpTextDemo() {
             <DocSectionText {...props}>
                 An advisory text can be defined with the semantic <i>small</i> tag.
             </DocSectionText>
-            <div className="card flex flex-column align-items-start gap-2">
-                <label htmlFor="username" className="block">
-                    Username
-                </label>
-                <InputText id="username" aria-describedby="username-help" className="block" />
-                <small id="username-help" className="block">
-                    Enter your username to reset your password.
-                </small>
+            <div className="card flex justify-content-center">
+                <div className="flex flex-column gap-2">
+                    <label htmlFor="username">
+                        Username
+                    </label>
+                    <InputText id="username" aria-describedby="username-help" />
+                    <small id="username-help">
+                        Enter your username to reset your password.
+                    </small>
+                </div>
             </div>
             <DocSectionCode code={code} />
         </>

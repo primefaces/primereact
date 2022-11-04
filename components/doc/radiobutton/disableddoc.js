@@ -32,7 +32,7 @@ export default function DisabledDemo() {
             <DocSectionText {...props}>
                 <i>disabled</i> prop prevents an input from being editable.
             </DocSectionText>
-            <div className="card">
+            <div className="card flex justify-content-center">
                 <RadioButton checked disabled></RadioButton>
             </div>
             <DocSectionCode code={code} />

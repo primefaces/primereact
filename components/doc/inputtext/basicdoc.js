@@ -19,10 +19,7 @@ export default function BasicDemo() {
     const [value, setValue] = useState('');
 
     return (
-        <>
-            <InputText value={value} onChange={(e) => setValue(e.target.value)} />
-            <span className="ml-2">{value}</span>
-        </>
+        <InputText value={value} onChange={(e) => setValue(e.target.value)} />
     )
 }
         `,
@@ -34,10 +31,7 @@ export default function BasicDemo() {
     const [value, setValue] = useState<string>('');
 
     return (
-        <>
-            <InputText value={value} onChange={(e) => setValue(e.target.value)} />
-            <span className="ml-2">{value}</span>
-        </>
+        <InputText value={value} onChange={(e) => setValue(e.target.value)} />
     )
 }
         `
@@ -48,9 +42,8 @@ export default function BasicDemo() {
             <DocSectionText {...props}>
                 InputText is used as a controlled input with <i>value</i> and <i>onChange</i> properties.
             </DocSectionText>
-            <div className="card">
+            <div className="card flex justify-content-center">
                 <InputText value={value} onChange={(e) => setValue(e.target.value)} />
-                <span className="ml-2">{value}</span>
             </div>
             <DocSectionCode code={code} />
         </>

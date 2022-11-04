@@ -20,17 +20,17 @@ import { InputText } from "primereact/inputtext";
 
 export default function IconsDemo() {
     return (
-        <>
-            <span className="p-input-icon-left mr-3">
+        <div className="flex flex-wrap gap-3">
+            <span className="p-input-icon-left">
                 <i className="pi pi-search" />
-                <InputText />
+                <InputText placeholder="Search" />
             </span>
 
             <span className="p-input-icon-right">
                 <i className="pi pi-spin pi-spinner" />
                 <InputText />
             </span>
-        </>
+        </div>
     )
 }
         `,
@@ -39,17 +39,17 @@ import { InputText } from "primereact/inputtext";
 
 export default function IconsDemo() {
     return (
-        <>
-            <span className="p-input-icon-left mr-3">
+        <div className="flex flex-wrap gap-3">
+            <span className="p-input-icon-left">
                 <i className="pi pi-search" />
-                <InputText />
+                <InputText placeholder="Search" />
             </span>
 
             <span className="p-input-icon-right">
                 <i className="pi pi-spin pi-spinner" />
                 <InputText />
             </span>
-        </>
+        </div>
     )
 }
         `
@@ -60,16 +60,18 @@ export default function IconsDemo() {
             <DocSectionText {...props}>
                 Icons can be placed inside an input element by wrapping both the input and the icon with an element that has either <i>.p-input-icon-left</i> or <i>p-input-icon-right</i> class.
             </DocSectionText>
-            <div className="card">
-                <span className="p-input-icon-left mr-3">
-                    <i className="pi pi-search" />
-                    <InputText placeholder="Search" />
-                </span>
+            <div className="card flex justify-content-center">
+                <div className="flex flex-wrap gap-3">
+                    <span className="p-input-icon-left">
+                        <i className="pi pi-search" />
+                        <InputText placeholder="Search" />
+                    </span>
 
-                <span className="p-input-icon-right">
-                    <i className="pi pi-spin pi-spinner" />
-                    <InputText />
-                </span>
+                    <span className="p-input-icon-right">
+                        <i className="pi pi-spin pi-spinner" />
+                        <InputText />
+                    </span>
+                </div>
             </div>
             <DocSectionCode code={code} />
         </>
