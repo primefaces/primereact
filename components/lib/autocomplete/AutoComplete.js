@@ -88,9 +88,12 @@ export const AutoComplete = React.memo(
                 inputRef.current.value = '';
 
                 if (!isSelected(option)) {
-                    const newValue = props.value ? [...props.value, option] : [option];
+                    // allows empty value/selectionlimit and within sectionlimit
+                    if (!props.value || !props.selectionLimit || props.value.length < props.selectionLimit) {
+                        const newValue = props.value ? [...props.value, option] : [option];
 
-                    updateModel(event, newValue);
+                        updateModel(event, newValue);
+                    }
                 }
             } else {
                 updateInputField(option);
@@ -708,6 +711,7 @@ AutoComplete.defaultProps = {
     removeIcon: 'pi pi-times-circle',
     scrollHeight: '200px',
     selectedItemTemplate: null,
+    selectionLimit: null,
     showEmptyMessage: false,
     size: null,
     style: null,
