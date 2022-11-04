@@ -30,7 +30,7 @@ export default function BasicDemo() {
     const [value, setValue] = useState<string>('');
 
     return (
-        <InputText value={value} onChange={(e) => setValue(e.target.value)} />
+        <InputText value={value} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)} />
     )
 }
         `
