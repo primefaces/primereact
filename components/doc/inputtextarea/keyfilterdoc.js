@@ -6,14 +6,14 @@ import { DocSectionText } from '../common/docsectiontext';
 export function KeyFilterDoc(props) {
     const code = {
         basic: `
-<InputTextarea keyfilter="int" placeholder="Integers" />
+<InputTextarea keyfilter="int" placeholder="Integers" rows={5} cols={30} />
         `,
         javascript: `
 import { InputTextarea } from "primereact/inputtextarea";
 
 export default function KeyFilterDemo() {
     return (
-        <InputTextarea keyfilter="int" placeholder="Integers" rows={2} cols={30}/>
+        <InputTextarea keyfilter="int" placeholder="Integers" rows={5} cols={30}/>
     )
 }
         `,
@@ -22,7 +22,7 @@ import { InputTextarea } from "primereact/inputtextarea";
 
 export default function KeyFilterDemo() {
     return (
-        <InputTextarea keyfilter="int" placeholder="Integers" rows={2} cols={30}/>
+        <InputTextarea keyfilter="int" placeholder="Integers" rows={5} cols={30}/>
     )
 }
         `
@@ -34,7 +34,7 @@ export default function KeyFilterDemo() {
                 InputTextarea has built-in key filtering support to block certain keys, refer to <Link href="/keyfilter">keyfilter</Link> page for more information.
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <InputTextarea keyfilter="int" placeholder="Integers" rows={2} cols={30} />
+                <InputTextarea keyfilter="int" placeholder="Integers" rows={5} cols={30} />
             </div>
             <DocSectionCode code={code} />
         </>
