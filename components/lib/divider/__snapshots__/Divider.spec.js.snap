@@ -1,0 +1,118 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Divider Snapshot check snapshots: dashed 1`] = `
+<div>
+  <div
+    class="p-divider p-component p-divider-horizontal p-divider-dashed p-divider-left"
+    role="separator"
+  >
+    <div
+      class="p-divider-content"
+    />
+  </div>
+</div>
+`;
+
+exports[`Divider Snapshot check snapshots: default 1`] = `
+<div>
+  <div
+    class="p-divider p-component p-divider-horizontal p-divider-solid p-divider-left"
+    role="separator"
+  >
+    <div
+      class="p-divider-content"
+    />
+  </div>
+</div>
+`;
+
+exports[`Divider Snapshot check snapshots: dotted 1`] = `
+<div>
+  <div
+    class="p-divider p-component p-divider-horizontal p-divider-dotted p-divider-left"
+    role="separator"
+  >
+    <div
+      class="p-divider-content"
+    />
+  </div>
+</div>
+`;
+
+exports[`Divider Snapshot check snapshots: horizontal center 1`] = `
+<div>
+  <div
+    class="p-divider p-component p-divider-horizontal p-divider-solid p-divider-center"
+    role="separator"
+  >
+    <div
+      class="p-divider-content"
+    />
+  </div>
+</div>
+`;
+
+exports[`Divider Snapshot check snapshots: horizontal left 1`] = `
+<div>
+  <div
+    class="p-divider p-component p-divider-horizontal p-divider-solid p-divider-left"
+    role="separator"
+  >
+    <div
+      class="p-divider-content"
+    />
+  </div>
+</div>
+`;
+
+exports[`Divider Snapshot check snapshots: horizontal right 1`] = `
+<div>
+  <div
+    class="p-divider p-component p-divider-horizontal p-divider-solid p-divider-right"
+    role="separator"
+  >
+    <div
+      class="p-divider-content"
+    />
+  </div>
+</div>
+`;
+
+exports[`Divider Snapshot check snapshots: vertical bottom 1`] = `
+<div>
+  <div
+    class="p-divider p-component p-divider-vertical p-divider-solid p-divider-bottom"
+    role="separator"
+  >
+    <div
+      class="p-divider-content"
+    />
+  </div>
+</div>
+`;
+
+exports[`Divider Snapshot check snapshots: vertical center 1`] = `
+<div>
+  <div
+    class="p-divider p-component p-divider-vertical p-divider-solid p-divider-center"
+    role="separator"
+  >
+    <div
+      class="p-divider-content"
+    />
+  </div>
+</div>
+`;
+
+exports[`Divider Snapshot check snapshots: vertical top 1`] = `
+<div>
+  <div
+    class="p-divider p-component p-divider-vertical p-divider-solid p-divider-top"
+    role="separator"
+  >
+    <div
+      class="p-divider-content"
+    />
+  </div>
+</div>
+`;
