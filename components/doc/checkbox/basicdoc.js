@@ -39,7 +39,7 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                Checkbox is used as a controlled input with <i>value</i> and <i>onChange</i> properties.
+                Checkbox is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.
             </DocSectionText>
             <div className="card">
                 <Checkbox onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
