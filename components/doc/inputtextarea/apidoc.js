@@ -27,6 +27,12 @@ export function ApiDoc(props) {
                             <td>When present, height of textarea changes as being typed.</td>
                         </tr>
                         <tr>
+                            <td>keyfilter</td>
+                            <td>string/regex</td>
+                            <td>null</td>
+                            <td>Format definition of the keys to block.</td>
+                        </tr>
+                        <tr>
                             <td>tooltip</td>
                             <td>any</td>
                             <td>null</td>
