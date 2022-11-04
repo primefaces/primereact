@@ -4,7 +4,7 @@ export function DocSectionNav(props) {
             <ul className="list-none p-0 m-0 sticky" style={{ top: '7rem' }}>
                 {props.docs.map((doc) => (
                     <li key={doc.label}>
-                        <button className="p-link block p-1 text-color hover:text-primary" onClick={() => document.getElementById(doc.id).parentElement.scrollIntoView({ block: 'b', behavior: 'smooth' })}>
+                        <button className="p-link block p-1 text-color hover:text-primary" onClick={() => document.getElementById(doc.id).parentElement.scrollIntoView({ block: 'center', behavior: 'smooth' })}>
                             {doc.label}
                         </button>
                     </li>
