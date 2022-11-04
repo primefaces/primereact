@@ -654,11 +654,12 @@ render() {
 
                     <h5>Multiple Mode</h5>
                     <p>
-                        Multiple mode is enabled using <i>multiple</i> property used to select more than one value from the autocomplete. In this case, value reference should be an array.
+                        Multiple mode is enabled using <i>multiple</i> property used to select more than one value from the autocomplete. In this case, value reference should be an array. The number of values selectable can be restricted using the{' '}
+                        <i>selectionLimit</i> property.
                     </p>
                     <CodeHighlight>
                         {`
-<AutoComplete multiple value={selectedCountry} suggestions={filteredCountries} completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)} />
+<AutoComplete multiple selectionLimit={3} value={selectedCountry} suggestions={filteredCountries} completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)} />
 `}
                     </CodeHighlight>
 
@@ -855,6 +856,12 @@ itemTemplate(item) {
                                     <td>boolean</td>
                                     <td>false</td>
                                     <td>Specifies if multiple values can be selected.</td>
+                                </tr>
+                                <tr>
+                                    <td>selectionLimit</td>
+                                    <td>number</td>
+                                    <td>null</td>
+                                    <td>Number of maximum options that can be selected.</td>
                                 </tr>
                                 <tr>
                                     <td>showEmptyMessage</td>

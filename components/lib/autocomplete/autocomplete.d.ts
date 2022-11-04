@@ -70,6 +70,7 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.In
     maxLength?: number;
     minLength?: number;
     multiple?: boolean;
+    selectionLimit?: number;
     name?: string;
     optionGroupChildren?: string;
     optionGroupLabel?: string;
