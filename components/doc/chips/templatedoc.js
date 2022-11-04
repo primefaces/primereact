@@ -67,7 +67,7 @@ export default function TemplateDemo() {
                 A chip is customized using <i>itemTemplate</i> function where value is passed to return JSX.
             </DocSectionText>
             <div className="card p-fluid">
-                <Chips value={value} onChange={(e) => setValue(e.value)} itemTemplate={customChip}/>
+                <Chips value={value} onChange={(e) => setValue(e.value)} itemTemplate={customChip} />
             </div>
             <DocSectionCode code={code} />
         </>
