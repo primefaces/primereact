@@ -14,7 +14,7 @@ export function AutoResizeDoc(props) {
 import { useState } from "react";
 import { InputTextarea } from "primereact/inputtextarea";
 
-export default function GettingStartedDemo() {
+export default function AutoResizeDemo() {
     const [value, setValue] = useState('');
 
     return (
@@ -26,7 +26,7 @@ export default function GettingStartedDemo() {
 import { useState } from "react";
 import { InputTextarea } from "primereact/inputtextarea";
 
-export default function GettingStartedDemo() {
+export default function AutoResizeDemo() {
     const [value, setValue] = useState<string>('');
 
     return (

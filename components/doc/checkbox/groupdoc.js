@@ -82,11 +82,6 @@ export default function GroupDemo() {
 import { useState } from "react";
 import { Checkbox } from "primereact/checkbox";
 
-interface Category {
-    name: string; 
-    key: string;
-}
-
 export default function GroupDemo() {
     const [ingredients, setIngredients] = useState<string[]>([]);
 

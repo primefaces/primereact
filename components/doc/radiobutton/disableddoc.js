@@ -1,27 +1,27 @@
-import { InputTextarea } from "../../lib/inputtextarea/InputTextarea";
+import { RadioButton } from "../../lib/radiobutton/RadioButton";
 import { DocSectionText } from "../common/docsectiontext";
 import { DocSectionCode } from "../common/docsectioncode";
 
 export function DisabledDoc(props) {
     const code = {
         basic: `
-<InputTextarea disabled rows={5} cols={30} />
+<RadioButton checked disabled></RadioButton>
         `,
         javascript: `
-import { InputTextarea } from "primereact/inputtextarea";
+import { RadioButton } from "primereact/radiobutton";
 
 export default function DisabledDemo() {
     return (
-        <InputTextarea disabled rows={5} cols={30} value="Disabled" />
+        <Checkbox checked disabled></Checkbox>
     )
 }
         `,
         typescript: `
-import { InputTextarea } from "primereact/inputtextarea";
+import { RadioButton } from "primereact/radiobutton";
 
 export default function DisabledDemo() {
     return (
-        <InputTextarea disabled rows={5} cols={30} value="Disabled" />
+        <RadioButton checked disabled></RadioButton>
     )
 }
         `
@@ -30,10 +30,10 @@ export default function DisabledDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <i>disabled</i> prop prevents a textarea from being editable.
+                <i>disabled</i> prop prevents an input from being editable.
             </DocSectionText>
             <div className="card">
-                <InputTextarea disabled rows={5} cols={30} value="Disabled"/>
+                <RadioButton checked disabled></RadioButton>
             </div>
             <DocSectionCode code={code} />
         </>

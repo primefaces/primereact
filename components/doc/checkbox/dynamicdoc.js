@@ -10,7 +10,7 @@ export function DynamicDoc(props) {
         { name: 'Production', key: 'P' },
         { name: 'Research', key: 'R' }
     ];
-    const [selectedCategories, setSelectedCategories] = useState([]);
+    const [selectedCategories, setSelectedCategories] = useState([categories[1]]);
 
     const onCategoryChange = (e) => {
         let _selectedCategories = [...selectedCategories];
@@ -38,14 +38,14 @@ export function DynamicDoc(props) {
 import { useState } from "react";
 import { Checkbox } from "primereact/checkbox";
 
-export default function GroupDemo() {
+export default function DynamicDemo() {
     const categories = [
         { name: 'Accounting', key: 'A' },
         { name: 'Marketing', key: 'M' },
         { name: 'Production', key: 'P' },
         { name: 'Research', key: 'R' }
     ];
-    const [selectedCategories, setSelectedCategories] = useState([]);
+    const [selectedCategories, setSelectedCategories] = useState([categories[1]]);
 
     const onCategoryChange = (e) => {
         let _selectedCategories = [...selectedCategories];
@@ -81,14 +81,14 @@ interface Category {
     key: string;
 }
 
-export default function GroupDemo() {
+export default function DynamicDemo() {
     const categories: Category[] = [
         { name: 'Accounting', key: 'A' },
         { name: 'Marketing', key: 'M' },
         { name: 'Production', key: 'P' },
         { name: 'Research', key: 'R' }
     ];
-    const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
+    const [selectedCategories, setSelectedCategories] = useState<Category[]>([categories[1]]);
 
     const onCategoryChange = (e: CheckboxChangeParams) => {
         let _selectedCategories = [...selectedCategories];

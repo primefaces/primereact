@@ -47,13 +47,13 @@ const CheckboxDemo = () => {
         <div>
             <Head>
                 <title>React Checkbox Component</title>
-                <meta name="description" content="Checkbox is an extension to standard checkbox element with skinning capabilities." />
+                <meta name="description" content="Checkbox is an extension to standard checkbox element with theming." />
             </Head>
 
             <div className="content-section introduction">
                 <div className="feature-intro">
                     <h1>Checkbox</h1>
-                    <p>Checkbox is an extension to standard checkbox element with skinning capabilities.</p>
+                    <p>Checkbox is an extension to standard checkbox element with theming.</p>
                 </div>
             </div>
 
