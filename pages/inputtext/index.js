@@ -2,16 +2,16 @@ import React from 'react';
 import Head from 'next/head';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
+import { ImportDoc } from '../../components/doc/inputtext/importdoc';
 import { BasicDoc } from '../../components/doc/inputtext/basicdoc';
 import { FloatLabelDoc } from '../../components/doc/inputtext/floatlabeldoc';
 import { IconsDoc } from '../../components/doc/inputtext/iconsdoc';
+import { KeyFilterDoc } from '../../components/doc/inputtext/keyfilterdoc';
+import { SizesDoc } from '../../components/doc/inputtext/sizesdoc';
 import { HelpTextDoc } from '../../components/doc/inputtext/helptextdoc';
 import { InvalidDoc } from '../../components/doc/inputtext/invaliddoc';
-import { ApiDoc } from '../../components/doc/inputtext/apidoc';
-import { KeyFilterDoc } from '../../components/doc/inputtext/keyfilterdoc';
 import { DisabledDoc } from '../../components/doc/inputtext/disableddoc';
-import { SizesDoc } from '../../components/doc/inputtext/sizesdoc';
-import { ImportDoc } from '../../components/doc/inputtext/importdoc';
+import { ApiDoc } from '../../components/doc/inputtext/apidoc';
 
 const InputTextDemo = () => {
     const docs = [
@@ -41,11 +41,6 @@ const InputTextDemo = () => {
             component: KeyFilterDoc
         },
         {
-            id: 'disabled',
-            label: 'Disabled',
-            component: DisabledDoc
-        },
-        {
             id: 'sizes',
             label: 'Sizes',
             component: SizesDoc
@@ -59,6 +54,11 @@ const InputTextDemo = () => {
             id: 'invalid',
             label: 'Invalid',
             component: InvalidDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
         },
         {
             id: 'api',
