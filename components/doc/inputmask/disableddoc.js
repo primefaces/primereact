@@ -33,7 +33,7 @@ export default function DisabledDemo() {
                 <i>disabled</i> prop prevents an input from being editable.
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <InputMask mask="99-999999"  placeholder="99-999999" disabled />
+                <InputMask mask="99-999999" placeholder="99-999999" disabled />
             </div>
             <DocSectionCode code={code} />
         </>

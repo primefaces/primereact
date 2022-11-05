@@ -20,7 +20,6 @@ export default function BasicDemo() {
 
     return (
         <ToggleButton checked={checked} onChange={(e) => setChecked(e.value)} />
-
     );
 }
         `,
@@ -33,8 +32,6 @@ export default function BasicDemo() {
 
     return (
         <ToggleButton checked={checked} onChange={(e : ToggleButtonChangeParams) => setChecked(e.value)} />
-
-
     );
 }
         `

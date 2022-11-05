@@ -20,7 +20,6 @@ export default function NumberOfStarsDoc() {
 
     return (
         <Rating value={val} onChange={(e) => setValue(e.val)} stars={5} />
-
     );
 }
         `,

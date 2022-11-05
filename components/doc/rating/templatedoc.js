@@ -61,7 +61,7 @@ offIcon={<img src={"{contextPath}/images/rating/custom-icon.png"} onError={(e) =
 import { useState } from "react";
 import { Rating } from "primereact/rating";
 
-const [val, setVal] = useState(null);
+const [val, setVal] = useState<any>(null);
 
 export default function TemplateDoc() {
 

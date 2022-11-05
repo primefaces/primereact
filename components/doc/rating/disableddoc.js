@@ -5,7 +5,7 @@ import { DocSectionCode } from '../common/docsectioncode';
 export function DisabledDoc(props) {
     const code = {
         basic: `
-        <Rating value={8} disabled stars={10} />
+<Rating value={8} disabled stars={10} />
         `,
         javascript: `
 import { useState } from "react";

@@ -1,7 +1,5 @@
-import ToggleButtonDoc from '../../components/doc/togglebutton';
-import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
-
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSections } from '../../components/doc/common/docsections';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { BasicDemo } from '../../components/doc/togglebutton/basicdoc';

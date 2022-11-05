@@ -33,7 +33,7 @@ export default function InvalidDemo() {
                 Applying <i>p-invalid</i> class to an input element indicates a failed validation.
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <InputMask mask="99-999999"  placeholder="99-999999" className="p-invalid"/>
+                <InputMask mask="99-999999" placeholder="99-999999" className="p-invalid" />
             </div>
             <DocSectionCode code={code} />
         </>

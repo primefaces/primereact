@@ -20,7 +20,6 @@ export default function WithoutCancelDoc() {
 
     return (
           <Rating value={val} cancel={false} onChange={(e) => setVal(e.value)} />
-
     );
 }
         `,
