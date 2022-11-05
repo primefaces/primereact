@@ -1,11 +1,36 @@
-import React, { useState } from 'react';
-import { TriStateCheckbox } from '../../components/lib/tristatecheckbox/TriStateCheckbox';
-import TriStateCheckboxDoc from '../../components/doc/tristatecheckbox';
-import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
+import { DocActions } from '../../components/doc/common/docactions';
+import { DocSections } from '../../components/doc/common/docsections';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { BasicDemo } from '../../components/doc/tristatecheckbox/basicdemo';
+import { DisabledDoc } from '../../components/doc/tristatecheckbox/disableddoc';
+import { ImportDoc } from '../../components/doc/tristatecheckbox/importdoc';
+import { ApiDoc } from '../../components/doc/tristatecheckbox/apidoc';
 
 const TriStateCheckboxDemo = () => {
-    const [value, setValue] = useState(null);
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDemo
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
+        },
+        {
+            id: 'api',
+            label: 'API',
+            type: 'api',
+            component: ApiDoc
+        }
+    ];
 
     return (
         <div>
@@ -21,17 +46,10 @@ const TriStateCheckboxDemo = () => {
 
                 <DocActions github="tristatecheckbox/index.js" />
             </div>
-
-            <div className="content-section implementation">
-                <div className="card">
-                    <div className="field-checkbox m-0">
-                        <TriStateCheckbox value={value} onChange={(e) => setValue(e.value)} aria-label="Terms Accepted" />
-                        <label>{String(value)}</label>
-                    </div>
-                </div>
+            <div className="content-section doc">
+                <DocSections docs={docs} />
+                <DocSectionNav docs={docs} />
             </div>
-
-            <TriStateCheckboxDoc />
         </div>
     );
 };
