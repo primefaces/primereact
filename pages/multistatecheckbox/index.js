@@ -1,15 +1,35 @@
-import React, { useState } from 'react';
-import { MultiStateCheckbox } from '../../components/lib/multistatecheckbox/MultiStateCheckbox';
-import MultiStateCheckboxDoc from '../../components/doc/multistatecheckbox';
-import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
+import { DocActions } from '../../components/doc/common/docactions';
+import { DocSections } from '../../components/doc/common/docsections';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { BasicDoc } from '../../components/doc/multistatecheckbox/basicdoc';
+import { DisabledDoc } from '../../components/doc/multistatecheckbox/disableddoc';
+import { ImportDoc } from '../../components/doc/multistatecheckbox/importdoc';
+import { ApiDoc } from '../../components/doc/multistatecheckbox/apidoc';
 
 const MultiStateCheckboxDemo = () => {
-    const [value, setValue] = useState('public');
-    const options = [
-        { value: 'public', icon: 'pi pi-globe' },
-        { value: 'protected', icon: 'pi pi-lock-open' },
-        { value: 'private', icon: 'pi pi-lock' }
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
+        },
+        {
+            id: 'api',
+            label: 'API',
+            type: 'api',
+            component: ApiDoc
+        }
     ];
 
     return (
@@ -27,16 +47,10 @@ const MultiStateCheckboxDemo = () => {
                 <DocActions github="multistatecheckbox/index.js" />
             </div>
 
-            <div className="content-section implementation">
-                <div className="card">
-                    <div className="field-checkbox m-0">
-                        <MultiStateCheckbox value={value} options={options} optionValue="value" onChange={(e) => setValue(e.value)} aria-label="Access Type" />
-                        <label>{value}</label>
-                    </div>
-                </div>
+            <div className="content-section doc">
+                <DocSections docs={docs} />
+                <DocSectionNav docs={docs} />
             </div>
-
-            <MultiStateCheckboxDoc />
         </div>
     );
 };

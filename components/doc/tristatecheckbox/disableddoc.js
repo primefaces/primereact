@@ -15,7 +15,7 @@ export function DisabledDoc(props) {
 import { useState } from "react";
 import { TriStateCheckbox } from 'primereact/tristatecheckbox';
 
-export default function BasicDemo() {
+export default function DisabledDoc() {
     const [value, setValue] = useState(null);
 
     return (
@@ -27,7 +27,7 @@ export default function BasicDemo() {
 import { useState } from "react";
 import { TriStateCheckbox } from 'primereact/tristatecheckbox';
 
-export default function BasicDemo() {
+export default function DisabledDoc() {
     const [value, setValue] = useState<any>(null);
 
     return (

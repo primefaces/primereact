@@ -200,13 +200,13 @@ export function ApiDoc(props) {
 
             <h3>Accessibility</h3>
             <DevelopmentSection>
-                <h6>Screen Reader</h6>
+                <h4>Screen Reader</h4>
                 <p>
                     Specification does not cover a color picker <a href="https://github.com/w3c/aria/issues/930">yet</a> and using a semantic native color picker is not consistent across browsers so currently component is not compatible with screen
                     readers. In the upcoming versions, text fields will be introduced below the slider section to be able to pick a color using accessible text boxes in hsl, rgba and hex formats.
                 </p>
 
-                <h6>Closed State Keyboard Support of Popup ColorPicker</h6>
+                <h4>Closed State Keyboard Support of Popup ColorPicker</h4>
                 <div className="doc-tablewrapper">
                     <table className="doc-table">
                         <thead>
@@ -232,7 +232,7 @@ export function ApiDoc(props) {
                     </table>
                 </div>
 
-                <h6>Popup Keyboard Support</h6>
+                <h4>Popup Keyboard Support</h4>
                 <div className="doc-tablewrapper">
                     <table className="doc-table">
                         <thead>
@@ -264,7 +264,7 @@ export function ApiDoc(props) {
                     </table>
                 </div>
 
-                <h6>Color Picker Slider</h6>
+                <h4>Color Picker Slider</h4>
                 <div className="doc-tablewrapper">
                     <table className="doc-table">
                         <thead>
@@ -284,7 +284,7 @@ export function ApiDoc(props) {
                     </table>
                 </div>
 
-                <h6>Hue Slider</h6>
+                <h4>Hue Slider</h4>
                 <div className="doc-tablewrapper">
                     <table className="doc-table">
                         <thead>

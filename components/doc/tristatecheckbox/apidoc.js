@@ -7,7 +7,7 @@ export function ApiDoc(props) {
     return (
         <>
             <DocSectionText {...props}></DocSectionText>
-            <h5>Properties</h5>
+            <h3>Properties</h3>
             <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
@@ -78,7 +78,7 @@ export function ApiDoc(props) {
                 </table>
             </div>
 
-            <h5>Events</h5>
+            <h3>Events</h3>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -101,7 +101,7 @@ export function ApiDoc(props) {
                 </table>
             </div>
 
-            <h5>Styling</h5>
+            <h3>Styling</h3>
             <p>
                 Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.
             </p>
@@ -134,9 +134,9 @@ export function ApiDoc(props) {
                 </table>
             </div>
 
-            <h5>Accessibility</h5>
+            <h3>Accessibility</h3>
             <DevelopmentSection>
-                <h6>Screen Reader</h6>
+                <h4>Screen Reader</h4>
                 <p>
                     TriStateCheckbox component uses an element with <i>checkbox</i> role. Value to describe the component can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. Component adds an element with
                     <i>aria-live</i> attribute that is only visible to screen readers to read the value displayed. Values to read are defined with the <i>trueLabel</i>, <i>falseLabel</i> and <i>nullLabel</i> keys of the <i>aria</i>
@@ -150,7 +150,7 @@ export function ApiDoc(props) {
 <TriStateCheckbox aria-label="Remember Me" />
 `}
                 </CodeHighlight>
-                <h6>Keyboard Support</h6>
+                <h4>Keyboard Support</h4>
                 <div className="doc-tablewrapper">
                     <table className="doc-table">
                         <thead>
@@ -182,7 +182,7 @@ export function ApiDoc(props) {
                     </table>
                 </div>
             </DevelopmentSection>
-            <h5>Dependencies</h5>
+            <h3>Dependencies</h3>
             <p>None.</p>
         </>
     );

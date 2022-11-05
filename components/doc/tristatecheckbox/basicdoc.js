@@ -3,7 +3,7 @@ import { TriStateCheckbox } from '../../lib/tristatecheckbox/TriStateCheckbox';
 import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
 
-export function BasicDemo(props) {
+export function BasicDoc(props) {
     const [value, setValue] = useState(null);
 
     const code = {
@@ -15,7 +15,7 @@ export function BasicDemo(props) {
 import { useState } from "react";
 import { TriStateCheckbox } from 'primereact/tristatecheckbox';
 
-export default function BasicDemo() {
+export default function BasicDoc() {
     const [value, setValue] = useState(null);
 
     return (
@@ -27,7 +27,7 @@ export default function BasicDemo() {
 import { useState } from "react";
 import { TriStateCheckbox } from 'primereact/tristatecheckbox';
 
-export default function BasicDemo() {
+export default function BasicDoc() {
     const [value, setValue] = useState<any>(null);
 
     return (

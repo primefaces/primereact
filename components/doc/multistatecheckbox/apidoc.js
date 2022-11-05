@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 import { DocSectionText } from '../common/docsectiontext';
 
@@ -27,81 +28,75 @@ export function ApiDoc(props) {
                         </tr>
                         <tr>
                             <td>value</td>
-                            <td>number</td>
+                            <td>any</td>
                             <td>null</td>
-                            <td>Value of the rating.</td>
+                            <td>Value of the MultiStateCheckbox.</td>
                         </tr>
                         <tr>
-                            <td>disabled</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>When present, it specifies that the element should be disabled.</td>
+                            <td>options</td>
+                            <td>array</td>
+                            <td>null</td>
+                            <td>An array to display as the available options.</td>
                         </tr>
                         <tr>
-                            <td>readOnly</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>When present, changing the value is not possible.</td>
+                            <td>optionValue</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Property name to use as the value of an option, defaults to the option itself when not defined.</td>
+                        </tr>
+                        <tr>
+                            <td>optionLabel</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Property name to refer to the option label, used by screen readers only. Defaults to optionValue.</td>
+                        </tr>
+                        <tr>
+                            <td>iconTemplate</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>Template of icon for the selected option.</td>
+                        </tr>
+                        <tr>
+                            <td>dataKey</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>A property to uniquely match the value in options for better performance.</td>
                         </tr>
                         <tr>
                             <td>style</td>
-                            <td>object</td>
+                            <td>string</td>
                             <td>null</td>
-                            <td>Inline style of the component.</td>
+                            <td>Inline style of the element.</td>
                         </tr>
                         <tr>
                             <td>className</td>
                             <td>string</td>
                             <td>null</td>
-                            <td>ClassName of the component.</td>
+                            <td>Style class of the element.</td>
                         </tr>
                         <tr>
-                            <td>stars</td>
+                            <td>disabled</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When present, it specifies that the element value cannot be altered.</td>
+                        </tr>
+                        <tr>
+                            <td>readOnly</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When present, it specifies that the value cannot be changed.</td>
+                        </tr>
+                        <tr>
+                            <td>tabIndex</td>
                             <td>number</td>
-                            <td>5</td>
-                            <td>Number of stars.</td>
+                            <td>null</td>
+                            <td>Index of the element in tabbing order.</td>
                         </tr>
                         <tr>
-                            <td>cancel</td>
+                            <td>empty</td>
                             <td>boolean</td>
                             <td>true</td>
-                            <td>When specified a cancel icon is displayed to allow removing the value.</td>
-                        </tr>
-                        <tr>
-                            <td>cancelIcon</td>
-                            <td>string</td>
-                            <td>pi pi-ban</td>
-                            <td>ClassName of the cancel icon component.</td>
-                        </tr>
-                        <tr>
-                            <td>cancelIconProps</td>
-                            <td>object</td>
-                            <td>null</td>
-                            <td>Properties of the cancel icon.</td>
-                        </tr>
-                        <tr>
-                            <td>onIcon</td>
-                            <td>string</td>
-                            <td>pi pi-star-fill</td>
-                            <td>ClassName of the on icon component.</td>
-                        </tr>
-                        <tr>
-                            <td>offIcon</td>
-                            <td>string</td>
-                            <td>pi pi-star</td>
-                            <td>ClassName of the off icon component.</td>
-                        </tr>
-                        <tr>
-                            <td>onIconProps</td>
-                            <td>object</td>
-                            <td>null</td>
-                            <td>Properties of the on icon.</td>
-                        </tr>
-                        <tr>
-                            <td>offIconProps</td>
-                            <td>object</td>
-                            <td>null</td>
-                            <td>Properties of the off icon.</td>
+                            <td>If false, the empty state is skipped in the chekbox.</td>
                         </tr>
                         <tr>
                             <td>tooltip</td>
@@ -134,16 +129,18 @@ export function ApiDoc(props) {
                             <td>onChange</td>
                             <td>
                                 event.originalEvent: Browser event <br />
-                                event.value: selected value
+                                event.value: Current Value
                             </td>
-                            <td>Callback to invoke on value change.</td>
+                            <td>Callback to invoke on value change</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
             <h3>Styling</h3>
-            <p>Following is the list of structural style classes</p>
+            <p>
+                Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.
+            </p>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -154,20 +151,20 @@ export function ApiDoc(props) {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>p-rating</td>
+                            <td>p-chkbox</td>
                             <td>Container element</td>
                         </tr>
                         <tr>
-                            <td>p-rating-item</td>
-                            <td>Each item element</td>
+                            <td>p-multistatechkbox</td>
+                            <td>Container element</td>
                         </tr>
                         <tr>
-                            <td>p-rating-item-active</td>
-                            <td>Selected item elements.</td>
+                            <td>p-chkbox-box</td>
+                            <td>Container of icon.</td>
                         </tr>
                         <tr>
-                            <td>p-rating-cancel-item</td>
-                            <td>Cancel item element.</td>
+                            <td>p-chkbox-icon</td>
+                            <td>Icon element.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -177,12 +174,20 @@ export function ApiDoc(props) {
             <DevelopmentSection>
                 <h4>Screen Reader</h4>
                 <p>
-                    Rating component internally uses radio buttons that are only visible to screen readers. The value to read for item is retrieved from the <Link href="/locale">locale</Link> API via <i>star</i> and <i>stars</i> of the <i>aria</i>{' '}
-                    property.
+                    MultiStateCheckbox component uses an element with <i>checkbox</i> role. Value to describe the component can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. Component adds an element with
+                    <i>aria-live</i> attribute that is only visible to screen readers to read the value displayed. Values to read are defined with the <i>optionLabel</i> property that defaults to <i>optionValue</i> if not defined. Unchecked state
+                    label on the other hand is retrieved from <i>nullLabel</i> key of the <i>aria</i> property from the <Link href="/locale">locale</Link> API. This is an example of a custom accessibility implementation as there is no one to one
+                    mapping between the component design and the WCAG specification.
                 </p>
+                <CodeHighlight>
+                    {`
+<span id="chkbox1">Access Type</span>
+<MultiStateCheckbox aria-labelledby="chkbox1" />
 
+<TriStateCheckbox aria-label="Access Type" />
+`}
+                </CodeHighlight>
                 <h4>Keyboard Support</h4>
-                <p>Keyboard interaction is derived from the native browser handling of radio buttons in a group.</p>
                 <div className="doc-tablewrapper">
                     <table className="doc-table">
                         <thead>
@@ -196,31 +201,13 @@ export function ApiDoc(props) {
                                 <td>
                                     <i>tab</i>
                                 </td>
-                                <td>Moves focus to the star representing the value, if there is none then first star receives the focus.</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span className="inline-flex flex-column">
-                                        <i className="mb-1">left arrow</i>
-                                        <i>up arrow</i>
-                                    </span>
-                                </td>
-                                <td>Moves focus to the previous star, if there is none then last radio button receives the focus.</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span className="inline-flex flex-column">
-                                        <i className="mb-1">right arrow</i>
-                                        <i>down arrow</i>
-                                    </span>
-                                </td>
-                                <td>Moves focus to the next star, if there is none then first star receives the focus.</td>
+                                <td>Moves focus to the checkbox.</td>
                             </tr>
                             <tr>
                                 <td>
                                     <i>space</i>
                                 </td>
-                                <td>If the focused star does not represent the value, changes the value to the star value.</td>
+                                <td>Toggles between the values.</td>
                             </tr>
                         </tbody>
                     </table>

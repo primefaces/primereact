@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { DocActions } from '../../components/doc/common/docactions';
 import { DocSections } from '../../components/doc/common/docsections';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { BasicDemo } from '../../components/doc/tristatecheckbox/basicdemo';
+import { BasicDoc } from '../../components/doc/tristatecheckbox/basicdoc';
 import { DisabledDoc } from '../../components/doc/tristatecheckbox/disableddoc';
 import { ImportDoc } from '../../components/doc/tristatecheckbox/importdoc';
 import { ApiDoc } from '../../components/doc/tristatecheckbox/apidoc';
@@ -17,7 +17,7 @@ const TriStateCheckboxDemo = () => {
         {
             id: 'basic',
             label: 'Basic',
-            component: BasicDemo
+            component: BasicDoc
         },
         {
             id: 'disabled',
