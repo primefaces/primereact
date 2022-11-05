@@ -8,7 +8,7 @@ describe('Button', () => {
         const { container } = render(<Button label={'test'} visible={false} />);
 
         // Act + Assert
-        expect(container.getElementsByClassName('p-button').length).toBe(0);
+        expect(container).toMatchSnapshot();
     });
 
     test('when visible is true Button render correctly', () => {
@@ -16,7 +16,7 @@ describe('Button', () => {
         const { container } = render(<Button label={'test'} visible={true} />);
 
         // Act + Assert
-        expect(container.getElementsByClassName('p-button').length).toBe(1);
+        expect(container).toMatchSnapshot();
     });
 
     test('when iconPos is bottom Button is vertical', () => {
@@ -24,7 +24,7 @@ describe('Button', () => {
         const { container } = render(<Button label={'test'} iconPos={'bottom'} visible={true} />);
 
         // Act + Assert
-        expect(container.getElementsByClassName('p-button-vertical').length).toBe(1);
+        expect(container).toMatchSnapshot();
     });
 
     test('when label is empty it returns empty button', async () => {
@@ -32,9 +32,7 @@ describe('Button', () => {
         const { container } = render(<Button visible={true} />);
 
         // Act + Assert
-        const button = container.getElementsByClassName('p-button-label p-c');
-
-        expect(button[0].innerHTML).toBe('&nbsp;');
+        expect(container).toMatchSnapshot();
     });
 
     test('when badge is true it renders Button with badge', () => {
@@ -42,7 +40,7 @@ describe('Button', () => {
         const { container } = render(<Button badge={'test'} />);
 
         // Act + Assert
-        expect(container.getElementsByClassName('p-badge').length).toBe(1);
+        expect(container).toMatchSnapshot();
     });
 
     test('when badge is null it renders Button without badge', () => {
@@ -50,7 +48,7 @@ describe('Button', () => {
         const { container } = render(<Button />);
 
         // Act + Assert
-        expect(container.getElementsByClassName('p-badge').length).toBe(0);
+        expect(container).toMatchSnapshot();
     });
 
     test('when click the button if loading is true it renders Button with loading icon', () => {
@@ -58,7 +56,7 @@ describe('Button', () => {
         const { container } = render(<Button loading={'test'} />);
 
         // Act + Assert
-        expect(container.getElementsByClassName('p-button-icon').length).toBe(1);
+        expect(container).toMatchSnapshot();
     });
 
     test('when click the button if loading is false it renders Button without loading icon', () => {
@@ -66,7 +64,7 @@ describe('Button', () => {
         const { container } = render(<Button />);
 
         // Act + Assert
-        expect(container.getElementsByClassName('p-button-loading-icon').length).toBe(0);
+        expect(container).toMatchSnapshot();
     });
 
     test('when label is true it renders Button with default aria label', () => {
@@ -74,9 +72,7 @@ describe('Button', () => {
         const { container } = render(<Button />);
 
         // Act + Assert
-        const hasAriaLabel = container.getElementsByClassName('p-button')[0].getAttribute('aria-label');
-
-        expect(hasAriaLabel).toBe(null);
+        expect(container).toMatchSnapshot();
     });
 
     test('when aria-label prop is not exist aria-label prop should be equal to label prop ', () => {
@@ -84,9 +80,7 @@ describe('Button', () => {
         const { container } = render(<Button label={'test'} />);
 
         // Act + Assert
-        const getAriaLabel = container.getElementsByClassName('p-button')[0].getAttribute('aria-label');
-
-        expect(getAriaLabel).toBe('test');
+        expect(container).toMatchSnapshot();
     });
 
     test('when label prop is not exist label prop should be equal to aria-label prop', () => {
@@ -94,9 +88,7 @@ describe('Button', () => {
         const { container } = render(<Button aria-label={'test'} />);
 
         // Act + Assert
-        const getAriaLabel = container.getElementsByClassName('p-button')[0].getAttribute('aria-label');
-
-        expect(getAriaLabel).toBe('test');
+        expect(container).toMatchSnapshot();
     });
 
     test('when using badge and label the aria-label should contain both values', () => {
@@ -104,9 +96,7 @@ describe('Button', () => {
         const { container } = render(<Button label={'test'} badge={'lost'} />);
 
         // Act + Assert
-        const getAriaLabel = container.getElementsByClassName('p-button')[0].getAttribute('aria-label');
-
-        expect(getAriaLabel).toBe('test lost');
+        expect(container).toMatchSnapshot();
     });
 
     test('when using tooltip make sure the tooltip is rendered', async () => {
@@ -140,6 +130,7 @@ describe('Button', () => {
         fireEvent.click(button);
 
         // Assert
+        expect(button).toBeEnabled();
         expect(clickOn).toHaveBeenCalledTimes(1);
     });
 

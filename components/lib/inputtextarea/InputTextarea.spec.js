@@ -4,18 +4,18 @@ import userEvent from '@testing-library/user-event';
 import { InputTextarea } from './InputTextarea';
 
 describe('InputTextarea', () => {
-    test('when textarea is enabled then textarea accepts data entry and have filled state', () => {
+    test('when textarea is enabled then textarea accepts data entry and have filled state', async () => {
         // Arrange
         const { container } = render(<InputTextarea />);
         const input = container.getElementsByTagName('textarea')[0];
 
         // Act
-        fireEvent.input(input, { target: { value: 'abc' } });
+        await userEvent.type(input, 'abc');
 
         // Act
         expect(input).toBeEnabled();
-        expect(input).toHaveClass('p-inputtextarea p-inputtext p-component p-filled');
         expect(input).toHaveValue('abc');
+        expect(container).toMatchSnapshot();
     });
     test('when textarea is is autosizing and has rows and columns it is rendered correctly', () => {
         // Arrange
@@ -27,12 +27,10 @@ describe('InputTextarea', () => {
         fireEvent.blur(input);
 
         // Act and Assert
-        expect(input).toHaveClass('p-inputtextarea p-inputtext p-component p-inputtextarea-resizable');
-        expect(input.getAttribute('rows')).toBe('3');
-        expect(input.getAttribute('cols')).toBe('12');
         expect(blurOn).toHaveBeenCalledTimes(1);
+        expect(container).toMatchSnapshot();
     });
-    test('when input is blank it should not have filled state', () => {
+    test('when input is blank it should not have filled state', async () => {
         // Arrange
         const { container } = render(<InputTextarea disabled={false} />);
         const input = container.getElementsByTagName('textarea')[0];
@@ -42,34 +40,31 @@ describe('InputTextarea', () => {
 
         // Act
         expect(input).toBeEnabled();
-        expect(input).toHaveClass('p-inputtextarea p-inputtext p-component');
         expect(input).not.toHaveClass('p-filled');
-        expect(input).toHaveValue('');
+        expect(container).toMatchSnapshot();
     });
-    test('when input is is set for validation only', () => {
+    test('when input is is set for validation only', async () => {
         // Arrange
         const { container } = render(<InputTextarea validateOnly keyfilter={`alpha`} />);
         const input = container.getElementsByTagName('textarea')[0];
 
         // Act
-        fireEvent.input(input, { target: { value: 'def' } });
+        await userEvent.type(input, 'def');
 
         // Act
-        expect(input).toBeEnabled();
-        expect(input).toHaveClass('p-inputtextarea p-inputtext p-component');
-        expect(input).toHaveValue('def');
+        expect(container).toMatchSnapshot();
     });
-    test('when input is disabled it should render as disabled', () => {
+    test('when input is disabled it should render as disabled', async () => {
         // Arrange
         const { container } = render(<InputTextarea disabled />);
         const input = container.getElementsByTagName('textarea')[0];
 
         // Act
-        fireEvent.input(input, { target: { value: '23' } });
+        await userEvent.type(input, '123');
 
         // Act
         expect(input).toBeDisabled();
-        expect(input).toHaveClass('p-inputtextarea p-inputtext p-component p-disabled');
+        expect(container).toMatchSnapshot();
     });
     test('when input is using keyfilter for integers accept integer input', async () => {
         // Arrange

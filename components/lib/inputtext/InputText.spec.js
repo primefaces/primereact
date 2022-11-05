@@ -14,8 +14,8 @@ describe('InputText', () => {
 
         // Act
         expect(input).toBeEnabled();
-        expect(input).toHaveClass('p-inputtext p-component p-filled');
         expect(input).toHaveValue('abc');
+        expect(container).toMatchSnapshot();
     });
     test('when input is blank it should not have filled state', () => {
         // Arrange
@@ -27,9 +27,9 @@ describe('InputText', () => {
 
         // Act
         expect(input).toBeEnabled();
-        expect(input).toHaveClass('p-inputtext p-component');
         expect(input).not.toHaveClass('p-filled');
         expect(input).toHaveValue('');
+        expect(container).toMatchSnapshot();
     });
     test('when input is is set for validation only', () => {
         // Arrange
@@ -40,21 +40,21 @@ describe('InputText', () => {
         fireEvent.input(input, { target: { value: 'def' } });
 
         // Act
-        expect(input).toBeEnabled();
-        expect(input).toHaveClass('p-inputtext p-component');
+        expect(container).toMatchSnapshot();
         expect(input).toHaveValue('def');
     });
-    test('when input is disabled it should render as disabled', () => {
+    test('when input is disabled it should render as disabled', async () => {
         // Arrange
         const { container } = render(<InputText disabled />);
         const input = container.getElementsByTagName('input')[0];
 
         // Act
-        fireEvent.input(input, { target: { value: '23' } });
+        await userEvent.type(input, '123');
 
         // Act
         expect(input).toBeDisabled();
-        expect(input).toHaveClass('p-inputtext p-component p-disabled');
+        expect(input).toHaveValue('');
+        expect(container).toMatchSnapshot();
     });
     test('when input is using keyfilter for integers accept integer input', async () => {
         // Arrange
