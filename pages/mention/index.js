@@ -1,105 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import { Mention } from '../../components/lib/mention/Mention';
-import { CustomerService } from '../../service/CustomerService';
-import MentionDoc from '../../components/doc/mention';
-import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
+import { DocActions } from '../../components/doc/common/docactions';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
+import { ApiDoc } from '../../components/doc/mention/apidoc';
+import { ImportDoc } from '../../components/doc/mention/importdoc';
+import { BasicDoc } from '../../components/doc/mention/basicdoc';
+import { MultipleDoc } from '../../components/doc/mention/multipledoc';
+import { AutoDoc } from '../../components/doc/mention/autodoc';
 
 const MentionDemo = () => {
-    const [customers, setCustomers] = useState([]);
-    const [suggestions, setSuggestions] = useState([]);
-    const [multipleSuggestions, setMultipleSuggestions] = useState([]);
-
-    const tagSuggestions = ['primereact', 'primefaces', 'primeng', 'primevue'];
-    const customerservice = new CustomerService();
-
-    useEffect(() => {
-        customerservice.getCustomersSmall().then((data) => {
-            data.forEach((d) => (d['nickname'] = `${d.name.replace(/\s+/g, '').toLowerCase()}_${d.id}`));
-            setCustomers(data);
-        });
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const onSearch = (event) => {
-        //in a real application, make a request to a remote url with the query and return suggestions, for demo we filter at client side
-        setTimeout(() => {
-            const query = event.query;
-            let suggestions;
-
-            if (!query.trim().length) {
-                suggestions = [...customers];
-            } else {
-                suggestions = customers.filter((customer) => {
-                    return customer.nickname.toLowerCase().startsWith(query.toLowerCase());
-                });
-            }
-
-            setSuggestions(suggestions);
-        }, 250);
-    };
-
-    const onMultipleSearch = (event) => {
-        const trigger = event.trigger;
-
-        if (trigger === '@') {
-            //in a real application, make a request to a remote url with the query and return suggestions, for demo we filter at client side
-            setTimeout(() => {
-                const query = event.query;
-                let suggestions;
-
-                if (!query.trim().length) {
-                    suggestions = [...customers];
-                } else {
-                    suggestions = customers.filter((customer) => {
-                        return customer.nickname.toLowerCase().startsWith(query.toLowerCase());
-                    });
-                }
-
-                setMultipleSuggestions(suggestions);
-            }, 250);
-        } else if (trigger === '#') {
-            setTimeout(() => {
-                const query = event.query;
-                let suggestions;
-
-                if (!query.trim().length) {
-                    suggestions = [...tagSuggestions];
-                } else {
-                    suggestions = tagSuggestions.filter((tag) => {
-                        return tag.toLowerCase().startsWith(query.toLowerCase());
-                    });
-                }
-
-                setMultipleSuggestions(suggestions);
-            }, 250);
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'auto',
+            label: 'Auto Resize',
+            component: AutoDoc
+        },
+        {
+            id: 'multiple',
+            label: 'Multiple Trigger',
+            component: MultipleDoc
+        },
+        {
+            id: 'apidoc',
+            label: 'API',
+            component: ApiDoc
         }
-    };
-
-    const itemTemplate = (suggestion) => {
-        const src = 'images/avatar/' + suggestion.representative.image;
-
-        return (
-            <div className="flex align-items-center">
-                <img alt={suggestion.name} src={src} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} width="32" style={{ verticalAlign: 'middle' }} />
-                <span className="flex flex-column ml-2">
-                    {suggestion.name}
-                    <small style={{ fontSize: '.75rem', color: 'var(--text-secondary-color)' }}>@{suggestion.nickname}</small>
-                </span>
-            </div>
-        );
-    };
-
-    const multipleItemTemplate = (suggestion, options) => {
-        const trigger = options.trigger;
-
-        if (trigger === '@' && suggestion.nickname) {
-            return itemTemplate(suggestion);
-        } else if (trigger === '#' && !suggestion.nickname) {
-            return <span>{suggestion}</span>;
-        }
-
-        return null;
-    };
+    ];
 
     return (
         <div>
@@ -116,7 +52,7 @@ const MentionDemo = () => {
                 <DocActions github="mention/index.js" />
             </div>
 
-            <div className="content-section implementation">
+            {/* <div className="content-section implementation">
                 <div className="card">
                     <h5>Basic</h5>
                     <Mention suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people" rows={5} cols={40} itemTemplate={itemTemplate} />
@@ -136,9 +72,12 @@ const MentionDemo = () => {
                         cols={40}
                     />
                 </div>
-            </div>
+            </div> */}
 
-            <MentionDoc />
+            <div className="content-section doc multiselect-demo">
+                <DocSections docs={docs} />
+                <DocSectionNav docs={docs} />
+            </div>
         </div>
     );
 };

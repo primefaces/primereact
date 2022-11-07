@@ -33,7 +33,6 @@ export default function FilterDoc() {
 
     return (
         <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)} filter placeholder="Select Items"></TreeSelect>
-        
     );
 }
         `,
