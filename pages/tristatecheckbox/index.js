@@ -27,7 +27,6 @@ const TriStateCheckboxDemo = () => {
         {
             id: 'api',
             label: 'API',
-            type: 'api',
             component: ApiDoc
         }
     ];
