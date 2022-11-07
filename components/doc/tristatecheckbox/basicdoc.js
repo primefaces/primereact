@@ -42,8 +42,8 @@ export default function BasicDoc() {
             <DocSectionText {...props}>
                 TriStateCheckbox is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <div style={{ marginRight: '0.5rem', lineHeight: '1' }}>
+            <div className="card flex justify-content-center align-items-center">
+                <div className="mr-2">
                     <TriStateCheckbox value={value} onChange={(e) => setValue(e.value)} />
                 </div>
                 <label>{String(value)}</label>

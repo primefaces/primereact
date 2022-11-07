@@ -42,8 +42,8 @@ export default function DisabledDoc() {
             <DocSectionText {...props}>
                 With <i>disabled</i> it specifies that the element value cannot be altered.
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <div style={{ marginRight: '0.5rem', lineHeight: '1' }}>
+            <div className="card flex justify-content-center align-items-center">
+                <div className="mr-2">
                     <TriStateCheckbox disabled value={value} onChange={(e) => setValue(e.value)} />
                 </div>
                 <label>{String(value)}</label>
