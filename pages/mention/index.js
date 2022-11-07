@@ -52,28 +52,6 @@ const MentionDemo = () => {
                 <DocActions github="mention/index.js" />
             </div>
 
-            {/* <div className="content-section implementation">
-                <div className="card">
-                    <h5>Basic</h5>
-                    <Mention suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people" rows={5} cols={40} itemTemplate={itemTemplate} />
-
-                    <h5>Auto Resize</h5>
-                    <Mention suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people" rows={5} cols={40} autoResize itemTemplate={itemTemplate} />
-
-                    <h5>Multiple Trigger</h5>
-                    <Mention
-                        trigger={['@', '#']}
-                        suggestions={multipleSuggestions}
-                        onSearch={onMultipleSearch}
-                        field={['nickname']}
-                        placeholder="Please enter @ to mention people, # to mention tag"
-                        itemTemplate={multipleItemTemplate}
-                        rows={5}
-                        cols={40}
-                    />
-                </div>
-            </div> */}
-
             <div className="content-section doc multiselect-demo">
                 <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
