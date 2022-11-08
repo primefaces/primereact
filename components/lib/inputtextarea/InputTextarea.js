@@ -131,5 +131,6 @@ InputTextarea.defaultProps = {
     onKeyUp: null,
     onPaste: null,
     tooltip: null,
-    tooltipOptions: null
+    tooltipOptions: null,
+    validateOnly: false
 };
