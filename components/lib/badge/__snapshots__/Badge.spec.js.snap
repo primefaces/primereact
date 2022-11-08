@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Badge check snapshots: default 1`] = `
+<div>
+  <span
+    class="p-badge p-component p-badge-dot"
+  />
+</div>
+`;
+
+exports[`Badge check snapshots: severity danger 1`] = `
+<div>
+  <span
+    class="p-badge p-component p-badge-dot p-badge-danger"
+  />
+</div>
+`;
+
+exports[`Badge check snapshots: severity info 1`] = `
+<div>
+  <span
+    class="p-badge p-component p-badge-dot p-badge-info"
+  />
+</div>
+`;
+
+exports[`Badge check snapshots: severity invalid 1`] = `
+<div>
+  <span
+    class="p-badge p-component p-badge-dot p-badge-invalid"
+  />
+</div>
+`;
+
+exports[`Badge check snapshots: severity success 1`] = `
+<div>
+  <span
+    class="p-badge p-component p-badge-dot p-badge-success"
+  />
+</div>
+`;
+
+exports[`Badge check snapshots: severity warning 1`] = `
+<div>
+  <span
+    class="p-badge p-component p-badge-dot p-badge-warning"
+  />
+</div>
+`;
+
+exports[`Badge check snapshots: size invalid 1`] = `
+<div>
+  <span
+    class="p-badge p-component p-badge-dot"
+  />
+</div>
+`;
+
+exports[`Badge check snapshots: size large 1`] = `
+<div>
+  <span
+    class="p-badge p-component p-badge-dot p-badge-lg"
+  />
+</div>
+`;
+
+exports[`Badge check snapshots: size xlarge 1`] = `
+<div>
+  <span
+    class="p-badge p-component p-badge-dot p-badge-xl"
+  />
+</div>
+`;
+
+exports[`Badge check snapshots: value 1`] = `
+<div>
+  <span
+    class="p-badge p-component"
+  >
+    22
+  </span>
+</div>
+`;
