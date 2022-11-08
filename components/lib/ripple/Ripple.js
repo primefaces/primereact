@@ -27,7 +27,6 @@ export const Ripple = React.memo(
         };
 
         const onTouchStart = (event) => {
-            isTouching.current = true;
             const offset = DomHandler.getOffset(targetRef.current);
             const offsetX = event.targetTouches[0].pageX - offset.left + document.body.scrollTop - DomHandler.getWidth(inkRef.current) / 2;
             const offsetY = event.targetTouches[0].pageY - offset.top + document.body.scrollLeft - DomHandler.getHeight(inkRef.current) / 2;
