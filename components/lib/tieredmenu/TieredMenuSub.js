@@ -72,7 +72,7 @@ export const TieredMenuSub = React.memo((props) => {
         }
 
         if (!item.items) {
-            onLeafClick();
+            onLeafClick(event);
         }
     };
 
@@ -136,9 +136,10 @@ export const TieredMenuSub = React.memo((props) => {
         return prevItem ? (DomHandler.hasClass(prevItem, 'p-disabled') || !DomHandler.hasClass(prevItem, 'p-menuitem') ? findPrevItem(prevItem) : prevItem) : null;
     };
 
-    const onLeafClick = () => {
+    const onLeafClick = (event) => {
         setActiveItemState(null);
-        props.onLeafClick && props.onLeafClick();
+        props.onLeafClick && props.onLeafClick(event);
+        props.onHide && props.onHide(event);
     };
 
     useMountEffect(() => {
