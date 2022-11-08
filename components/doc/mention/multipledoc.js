@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
 import { Mention } from '../../lib/mention/Mention';
 import { DocSectionText } from '../common/docsectiontext';
