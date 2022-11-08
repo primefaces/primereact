@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Chip check snapshots: default 1`] = `
+<div>
+  <div
+    class="p-chip p-component"
+  />
+</div>
+`;
+
+exports[`Chip check snapshots: icon 1`] = `
+<div>
+  <div
+    class="p-chip p-component"
+  >
+    <span
+      class="p-chip-icon pi pi-check"
+    />
+  </div>
+</div>
+`;
+
+exports[`Chip check snapshots: image 1`] = `
+<div>
+  <div
+    class="p-chip p-component p-chip-image"
+  >
+    <img
+      alt="chip"
+      src="http://google.com/my.png"
+    />
+  </div>
+</div>
+`;
+
+exports[`Chip check snapshots: image and alt 1`] = `
+<div>
+  <div
+    class="p-chip p-component p-chip-image"
+  >
+    <img
+      alt="jest"
+      src="http://google.com/my.png"
+    />
+  </div>
+</div>
+`;
+
+exports[`Chip check snapshots: label 1`] = `
+<div>
+  <div
+    class="p-chip p-component"
+  >
+    <span
+      class="p-chip-text"
+    >
+      jest
+    </span>
+  </div>
+</div>
+`;
