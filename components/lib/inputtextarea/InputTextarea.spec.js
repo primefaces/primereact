@@ -40,7 +40,6 @@ describe('InputTextarea', () => {
 
         // Act
         expect(input).toBeEnabled();
-        expect(input).not.toHaveClass('p-filled');
         expect(container).toMatchSnapshot();
     });
     test('when input is is set for validation only', async () => {

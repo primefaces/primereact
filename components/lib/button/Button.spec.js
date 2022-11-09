@@ -2,103 +2,21 @@ import '@testing-library/jest-dom';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { Button } from './Button';
 
+import { snapshot } from '../../test';
+
 describe('Button', () => {
-    test('when visible is false Button return null', () => {
-        // Arrange
-        const { container } = render(<Button label={'test'} visible={false} />);
-
-        // Act + Assert
-        expect(container).toMatchSnapshot();
-    });
-
-    test('when visible is true Button render correctly', () => {
-        // Arrange
-        const { container } = render(<Button label={'test'} visible={true} />);
-
-        // Act + Assert
-        expect(container).toMatchSnapshot();
-    });
-
-    test('when iconPos is bottom Button is vertical', () => {
-        // Arrange
-        const { container } = render(<Button label={'test'} iconPos={'bottom'} visible={true} />);
-
-        // Act + Assert
-        expect(container).toMatchSnapshot();
-    });
-
-    test('when label is empty it returns empty button', async () => {
-        // Arrange
-        const { container } = render(<Button visible={true} />);
-
-        // Act + Assert
-        expect(container).toMatchSnapshot();
-    });
-
-    test('when badge is true it renders Button with badge', () => {
-        // Arrange
-        const { container } = render(<Button badge={'test'} />);
-
-        // Act + Assert
-        expect(container).toMatchSnapshot();
-    });
-
-    test('when badge is null it renders Button without badge', () => {
-        // Arrange
-        const { container } = render(<Button />);
-
-        // Act + Assert
-        expect(container).toMatchSnapshot();
-    });
-
-    test('when click the button if loading is true it renders Button with loading icon', () => {
-        // Arrange
-        const { container } = render(<Button loading={'test'} />);
-
-        // Act + Assert
-        expect(container).toMatchSnapshot();
-    });
-
-    test('when click the button if loading is false it renders Button without loading icon', () => {
-        // Arrange
-        const { container } = render(<Button />);
-
-        // Act + Assert
-        expect(container).toMatchSnapshot();
-    });
-
-    test('when label is true it renders Button with default aria label', () => {
-        // Arrange
-        const { container } = render(<Button />);
-
-        // Act + Assert
-        expect(container).toMatchSnapshot();
-    });
-
-    test('when aria-label prop is not exist aria-label prop should be equal to label prop ', () => {
-        // Arrange
-        const { container } = render(<Button label={'test'} />);
-
-        // Act + Assert
-        expect(container).toMatchSnapshot();
-    });
-
-    test('when label prop is not exist label prop should be equal to aria-label prop', () => {
-        // Arrange
-        const { container } = render(<Button aria-label={'test'} />);
-
-        // Act + Assert
-        expect(container).toMatchSnapshot();
-    });
-
-    test('when using badge and label the aria-label should contain both values', () => {
-        // Arrange
-        const { container } = render(<Button label={'test'} badge={'lost'} />);
-
-        // Act + Assert
-        expect(container).toMatchSnapshot();
-    });
-
+    snapshot(<Button label={'test'} visible={false} />, 'when visible is false Button return null');
+    snapshot(<Button label={'test'} visible={true} />, 'when visible is true Button render correctly');
+    snapshot(<Button label={'test'} iconPos={'bottom'} visible={true} />, 'when iconPos is bottom Button is vertical');
+    snapshot(<Button visible={true} />, 'when label is empty it returns empty button');
+    snapshot(<Button badge={'test'} />, 'when badge is true it renders Button with badge');
+    snapshot(<Button />, 'when badge is null it renders Button without badge');
+    snapshot(<Button loading={'test'} />, 'when click the button if loading is true it renders Button with loading icon');
+    snapshot(<Button />, 'when click the button if loading is false it renders Button without loading icon');
+    snapshot(<Button />, 'when label is true it renders Button with default aria label');
+    snapshot(<Button label={'test'} />, 'when aria-label prop is not exist aria-label prop should be equal to label prop ');
+    snapshot(<Button aria-label={'test'} />, 'when label prop is not exist label prop should be equal to aria-label prop');
+    snapshot(<Button label={'test'} badge={'lost'} />, 'when using badge and label the aria-label should contain both values');
     test('when using tooltip make sure the tooltip is rendered', async () => {
         // Arrange
         const { container } = render(<Button label={'test'} tooltip="Jest Tooltip" />);

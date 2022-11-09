@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Badge check snapshots: default 1`] = `
+exports[`Badge default 1`] = `
 <div>
   <span
     class="p-badge p-component p-badge-dot"
@@ -8,7 +8,7 @@ exports[`Badge check snapshots: default 1`] = `
 </div>
 `;
 
-exports[`Badge check snapshots: severity danger 1`] = `
+exports[`Badge severity danger 1`] = `
 <div>
   <span
     class="p-badge p-component p-badge-dot p-badge-danger"
@@ -16,7 +16,7 @@ exports[`Badge check snapshots: severity danger 1`] = `
 </div>
 `;
 
-exports[`Badge check snapshots: severity info 1`] = `
+exports[`Badge severity info 1`] = `
 <div>
   <span
     class="p-badge p-component p-badge-dot p-badge-info"
@@ -24,7 +24,7 @@ exports[`Badge check snapshots: severity info 1`] = `
 </div>
 `;
 
-exports[`Badge check snapshots: severity invalid 1`] = `
+exports[`Badge severity invalid 1`] = `
 <div>
   <span
     class="p-badge p-component p-badge-dot p-badge-invalid"
@@ -32,7 +32,7 @@ exports[`Badge check snapshots: severity invalid 1`] = `
 </div>
 `;
 
-exports[`Badge check snapshots: severity success 1`] = `
+exports[`Badge severity success 1`] = `
 <div>
   <span
     class="p-badge p-component p-badge-dot p-badge-success"
@@ -40,7 +40,7 @@ exports[`Badge check snapshots: severity success 1`] = `
 </div>
 `;
 
-exports[`Badge check snapshots: severity warning 1`] = `
+exports[`Badge severity warning 1`] = `
 <div>
   <span
     class="p-badge p-component p-badge-dot p-badge-warning"
@@ -48,7 +48,7 @@ exports[`Badge check snapshots: severity warning 1`] = `
 </div>
 `;
 
-exports[`Badge check snapshots: size invalid 1`] = `
+exports[`Badge size invalid 1`] = `
 <div>
   <span
     class="p-badge p-component p-badge-dot"
@@ -56,7 +56,7 @@ exports[`Badge check snapshots: size invalid 1`] = `
 </div>
 `;
 
-exports[`Badge check snapshots: size large 1`] = `
+exports[`Badge size large 1`] = `
 <div>
   <span
     class="p-badge p-component p-badge-dot p-badge-lg"
@@ -64,7 +64,7 @@ exports[`Badge check snapshots: size large 1`] = `
 </div>
 `;
 
-exports[`Badge check snapshots: size xlarge 1`] = `
+exports[`Badge size xlarge 1`] = `
 <div>
   <span
     class="p-badge p-component p-badge-dot p-badge-xl"
@@ -72,7 +72,7 @@ exports[`Badge check snapshots: size xlarge 1`] = `
 </div>
 `;
 
-exports[`Badge check snapshots: value 1`] = `
+exports[`Badge value 1`] = `
 <div>
   <span
     class="p-badge p-component"

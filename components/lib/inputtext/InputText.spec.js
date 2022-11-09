@@ -27,7 +27,6 @@ describe('InputText', () => {
 
         // Act
         expect(input).toBeEnabled();
-        expect(input).not.toHaveClass('p-filled');
         expect(input).toHaveValue('');
         expect(container).toMatchSnapshot();
     });
