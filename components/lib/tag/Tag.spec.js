@@ -3,7 +3,7 @@ import { Tag } from './Tag';
 
 import { snapshot } from '../../test';
 
-describe('Divider', () => {
+describe('Tag', () => {
     snapshot(<Tag />, 'default');
     snapshot(<Tag value={`jest`} />, 'value');
     snapshot(<Tag severity="success" />, 'sevrity success');
@@ -16,6 +16,6 @@ describe('Divider', () => {
         <Tag>
             <div>hello</div>
         </Tag>,
-        'children'
+        'templating'
     );
 });

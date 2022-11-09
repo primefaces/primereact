@@ -1,6 +1,100 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Divider children 1`] = `
+exports[`Tag default 1`] = `
+<div>
+  <span
+    class="p-tag p-component"
+  >
+    <span
+      class="p-tag-value"
+    />
+    <span />
+  </span>
+</div>
+`;
+
+exports[`Tag icon 1`] = `
+<div>
+  <span
+    class="p-tag p-component"
+  >
+    <span
+      class="p-tag-icon pi pi-check"
+    />
+    <span
+      class="p-tag-value"
+    />
+    <span />
+  </span>
+</div>
+`;
+
+exports[`Tag rounded 1`] = `
+<div>
+  <span
+    class="p-tag p-component p-tag-rounded"
+  >
+    <span
+      class="p-tag-value"
+    />
+    <span />
+  </span>
+</div>
+`;
+
+exports[`Tag sevrity danger 1`] = `
+<div>
+  <span
+    class="p-tag p-component p-tag-danger"
+  >
+    <span
+      class="p-tag-value"
+    />
+    <span />
+  </span>
+</div>
+`;
+
+exports[`Tag sevrity info 1`] = `
+<div>
+  <span
+    class="p-tag p-component p-tag-info"
+  >
+    <span
+      class="p-tag-value"
+    />
+    <span />
+  </span>
+</div>
+`;
+
+exports[`Tag sevrity success 1`] = `
+<div>
+  <span
+    class="p-tag p-component p-tag-success"
+  >
+    <span
+      class="p-tag-value"
+    />
+    <span />
+  </span>
+</div>
+`;
+
+exports[`Tag sevrity warning 1`] = `
+<div>
+  <span
+    class="p-tag p-component p-tag-warning"
+  >
+    <span
+      class="p-tag-value"
+    />
+    <span />
+  </span>
+</div>
+`;
+
+exports[`Tag templating 1`] = `
 <div>
   <span
     class="p-tag p-component"
@@ -17,101 +111,7 @@ exports[`Divider children 1`] = `
 </div>
 `;
 
-exports[`Divider default 1`] = `
-<div>
-  <span
-    class="p-tag p-component"
-  >
-    <span
-      class="p-tag-value"
-    />
-    <span />
-  </span>
-</div>
-`;
-
-exports[`Divider icon 1`] = `
-<div>
-  <span
-    class="p-tag p-component"
-  >
-    <span
-      class="p-tag-icon pi pi-check"
-    />
-    <span
-      class="p-tag-value"
-    />
-    <span />
-  </span>
-</div>
-`;
-
-exports[`Divider rounded 1`] = `
-<div>
-  <span
-    class="p-tag p-component p-tag-rounded"
-  >
-    <span
-      class="p-tag-value"
-    />
-    <span />
-  </span>
-</div>
-`;
-
-exports[`Divider sevrity danger 1`] = `
-<div>
-  <span
-    class="p-tag p-component p-tag-danger"
-  >
-    <span
-      class="p-tag-value"
-    />
-    <span />
-  </span>
-</div>
-`;
-
-exports[`Divider sevrity info 1`] = `
-<div>
-  <span
-    class="p-tag p-component p-tag-info"
-  >
-    <span
-      class="p-tag-value"
-    />
-    <span />
-  </span>
-</div>
-`;
-
-exports[`Divider sevrity success 1`] = `
-<div>
-  <span
-    class="p-tag p-component p-tag-success"
-  >
-    <span
-      class="p-tag-value"
-    />
-    <span />
-  </span>
-</div>
-`;
-
-exports[`Divider sevrity warning 1`] = `
-<div>
-  <span
-    class="p-tag p-component p-tag-warning"
-  >
-    <span
-      class="p-tag-value"
-    />
-    <span />
-  </span>
-</div>
-`;
-
-exports[`Divider value 1`] = `
+exports[`Tag value 1`] = `
 <div>
   <span
     class="p-tag p-component"
