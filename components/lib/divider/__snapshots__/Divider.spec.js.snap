@@ -1,19 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Divider Snapshot check snapshots: dashed 1`] = `
-<div>
-  <div
-    class="p-divider p-component p-divider-horizontal p-divider-dashed p-divider-left"
-    role="separator"
-  >
-    <div
-      class="p-divider-content"
-    />
-  </div>
-</div>
-`;
-
-exports[`Divider Snapshot check snapshots: default 1`] = `
+exports[`Divider default 1`] = `
 <div>
   <div
     class="p-divider p-component p-divider-horizontal p-divider-solid p-divider-left"
@@ -26,20 +13,7 @@ exports[`Divider Snapshot check snapshots: default 1`] = `
 </div>
 `;
 
-exports[`Divider Snapshot check snapshots: dotted 1`] = `
-<div>
-  <div
-    class="p-divider p-component p-divider-horizontal p-divider-dotted p-divider-left"
-    role="separator"
-  >
-    <div
-      class="p-divider-content"
-    />
-  </div>
-</div>
-`;
-
-exports[`Divider Snapshot check snapshots: horizontal center 1`] = `
+exports[`Divider horizontal center 1`] = `
 <div>
   <div
     class="p-divider p-component p-divider-horizontal p-divider-solid p-divider-center"
@@ -52,7 +26,7 @@ exports[`Divider Snapshot check snapshots: horizontal center 1`] = `
 </div>
 `;
 
-exports[`Divider Snapshot check snapshots: horizontal left 1`] = `
+exports[`Divider horizontal left 1`] = `
 <div>
   <div
     class="p-divider p-component p-divider-horizontal p-divider-solid p-divider-left"
@@ -65,7 +39,7 @@ exports[`Divider Snapshot check snapshots: horizontal left 1`] = `
 </div>
 `;
 
-exports[`Divider Snapshot check snapshots: horizontal right 1`] = `
+exports[`Divider horizontal right 1`] = `
 <div>
   <div
     class="p-divider p-component p-divider-horizontal p-divider-solid p-divider-right"
@@ -78,7 +52,33 @@ exports[`Divider Snapshot check snapshots: horizontal right 1`] = `
 </div>
 `;
 
-exports[`Divider Snapshot check snapshots: vertical bottom 1`] = `
+exports[`Divider type dashed 1`] = `
+<div>
+  <div
+    class="p-divider p-component p-divider-horizontal p-divider-dashed p-divider-left"
+    role="separator"
+  >
+    <div
+      class="p-divider-content"
+    />
+  </div>
+</div>
+`;
+
+exports[`Divider type dotted 1`] = `
+<div>
+  <div
+    class="p-divider p-component p-divider-horizontal p-divider-dotted p-divider-left"
+    role="separator"
+  >
+    <div
+      class="p-divider-content"
+    />
+  </div>
+</div>
+`;
+
+exports[`Divider vertical bottom 1`] = `
 <div>
   <div
     class="p-divider p-component p-divider-vertical p-divider-solid p-divider-bottom"
@@ -91,7 +91,7 @@ exports[`Divider Snapshot check snapshots: vertical bottom 1`] = `
 </div>
 `;
 
-exports[`Divider Snapshot check snapshots: vertical center 1`] = `
+exports[`Divider vertical center 1`] = `
 <div>
   <div
     class="p-divider p-component p-divider-vertical p-divider-solid p-divider-center"
@@ -104,7 +104,7 @@ exports[`Divider Snapshot check snapshots: vertical center 1`] = `
 </div>
 `;
 
-exports[`Divider Snapshot check snapshots: vertical top 1`] = `
+exports[`Divider vertical top 1`] = `
 <div>
   <div
     class="p-divider p-component p-divider-vertical p-divider-solid p-divider-top"
