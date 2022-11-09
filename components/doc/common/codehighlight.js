@@ -5,7 +5,7 @@ export function CodeHighlight(props) {
     const languageClassName = `language-${props.lang || 'jsx'}`;
 
     useEffect(() => {
-        window.Prism.highlightElement(codeElement.current);
+        window.Prism?.highlightElement(codeElement.current);
     }, []);
 
     return (

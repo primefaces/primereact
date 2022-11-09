@@ -1,0 +1,1147 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Page content snapshot 1`] = `
+HTMLCollection [
+  <div
+    class="content-section implementation button-demo"
+  >
+    <div
+      class="card"
+    >
+      <h5>
+        Basic
+      </h5>
+      <button
+        aria-label="Submit"
+        class="p-button p-component"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Submit
+        </span>
+      </button>
+      <button
+        aria-label="Disabled"
+        class="p-button p-component p-disabled"
+        disabled=""
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Disabled
+        </span>
+      </button>
+      <button
+        aria-label="Link"
+        class="p-button p-component p-button-link"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Link
+        </span>
+      </button>
+      <h5>
+        Icons
+      </h5>
+      <button
+        aria-label="Submit"
+        class="p-button p-component p-button-icon-only"
+      >
+        <span
+          class="p-button-icon p-c pi pi-check"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+           
+        </span>
+      </button>
+      <button
+        aria-label="Submit"
+        class="p-button p-component"
+      >
+        <span
+          class="p-button-icon p-c p-button-icon-left pi pi-check"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+          Submit
+        </span>
+      </button>
+      <button
+        aria-label="Submit"
+        class="p-button p-component"
+      >
+        <span
+          class="p-button-icon p-c p-button-icon-right pi pi-check"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+          Submit
+        </span>
+      </button>
+      <h5>
+        Loading
+      </h5>
+      <button
+        class="p-button p-component p-button-icon-only p-disabled p-button-loading"
+        disabled=""
+      >
+        <span
+          class="p-button-icon p-c p-button-loading-icon pi pi-spinner pi-spin"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+           
+        </span>
+      </button>
+      <button
+        aria-label="Submit"
+        class="p-button p-component p-disabled p-button-loading p-button-loading-label-only p-button-loading-left"
+        disabled=""
+      >
+        <span
+          class="p-button-icon p-c p-button-loading-icon p-button-icon-left pi pi-spinner pi-spin"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+          Submit
+        </span>
+      </button>
+      <button
+        aria-label="Submit"
+        class="p-button p-component p-disabled p-button-loading p-button-loading-label-only p-button-loading-right"
+        disabled=""
+      >
+        <span
+          class="p-button-icon p-c p-button-loading-icon p-button-icon-right pi pi-spinner pi-spin"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+          Submit
+        </span>
+      </button>
+      <button
+        aria-label="Submit"
+        class="p-button p-component"
+      >
+        <span
+          class="p-button-icon p-c p-button-icon-left pi pi-check"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+          Submit
+        </span>
+      </button>
+      <button
+        aria-label="Submit"
+        class="p-button p-component"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Submit
+        </span>
+      </button>
+      <h5>
+        Severities
+      </h5>
+      <button
+        aria-label="Primary"
+        class="p-button p-component"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Primary
+        </span>
+      </button>
+      <button
+        aria-label="Secondary"
+        class="p-button p-component p-button-secondary"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Secondary
+        </span>
+      </button>
+      <button
+        aria-label="Success"
+        class="p-button p-component p-button-success"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Success
+        </span>
+      </button>
+      <button
+        aria-label="Info"
+        class="p-button p-component p-button-info"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Info
+        </span>
+      </button>
+      <button
+        aria-label="Warning"
+        class="p-button p-component p-button-warning"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Warning
+        </span>
+      </button>
+      <button
+        aria-label="Help"
+        class="p-button p-component p-button-help"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Help
+        </span>
+      </button>
+      <button
+        aria-label="Danger"
+        class="p-button p-component p-button-danger"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Danger
+        </span>
+      </button>
+      <h5>
+        Raised Buttons
+      </h5>
+      <button
+        aria-label="Primary"
+        class="p-button p-component p-button-raised"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Primary
+        </span>
+      </button>
+      <button
+        aria-label="Secondary"
+        class="p-button p-component p-button-raised p-button-secondary"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Secondary
+        </span>
+      </button>
+      <button
+        aria-label="Success"
+        class="p-button p-component p-button-raised p-button-success"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Success
+        </span>
+      </button>
+      <button
+        aria-label="Info"
+        class="p-button p-component p-button-raised p-button-info"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Info
+        </span>
+      </button>
+      <button
+        aria-label="Warning"
+        class="p-button p-component p-button-raised p-button-warning"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Warning
+        </span>
+      </button>
+      <button
+        aria-label="Help"
+        class="p-button p-component p-button-raised p-button-help"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Help
+        </span>
+      </button>
+      <button
+        aria-label="Danger"
+        class="p-button p-component p-button-raised p-button-danger"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Danger
+        </span>
+      </button>
+      <h5>
+        Rounded Buttons
+      </h5>
+      <button
+        aria-label="Primary"
+        class="p-button p-component p-button-rounded"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Primary
+        </span>
+      </button>
+      <button
+        aria-label="Secondary"
+        class="p-button p-component p-button-rounded p-button-secondary"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Secondary
+        </span>
+      </button>
+      <button
+        aria-label="Success"
+        class="p-button p-component p-button-rounded p-button-success"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Success
+        </span>
+      </button>
+      <button
+        aria-label="Info"
+        class="p-button p-component p-button-rounded p-button-info"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Info
+        </span>
+      </button>
+      <button
+        aria-label="Warning"
+        class="p-button p-component p-button-rounded p-button-warning"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Warning
+        </span>
+      </button>
+      <button
+        aria-label="Help"
+        class="p-button p-component p-button-rounded p-button-help"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Help
+        </span>
+      </button>
+      <button
+        aria-label="Danger"
+        class="p-button p-component p-button-rounded p-button-danger"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Danger
+        </span>
+      </button>
+      <h5>
+        Text Buttons
+      </h5>
+      <button
+        aria-label="Primary"
+        class="p-button p-component p-button-text"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Primary
+        </span>
+      </button>
+      <button
+        aria-label="Secondary"
+        class="p-button p-component p-button-secondary p-button-text"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Secondary
+        </span>
+      </button>
+      <button
+        aria-label="Success"
+        class="p-button p-component p-button-success p-button-text"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Success
+        </span>
+      </button>
+      <button
+        aria-label="Info"
+        class="p-button p-component p-button-info p-button-text"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Info
+        </span>
+      </button>
+      <button
+        aria-label="Warning"
+        class="p-button p-component p-button-warning p-button-text"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Warning
+        </span>
+      </button>
+      <button
+        aria-label="Help"
+        class="p-button p-component p-button-help p-button-text"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Help
+        </span>
+      </button>
+      <button
+        aria-label="Danger"
+        class="p-button p-component p-button-danger p-button-text"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Danger
+        </span>
+      </button>
+      <button
+        aria-label="Plain"
+        class="p-button p-component p-button-text p-button-plain"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Plain
+        </span>
+      </button>
+      <h5>
+        Raised Text Buttons
+      </h5>
+      <button
+        aria-label="Primary"
+        class="p-button p-component p-button-raised p-button-text"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Primary
+        </span>
+      </button>
+      <button
+        aria-label="Secondary"
+        class="p-button p-component p-button-raised p-button-secondary p-button-text"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Secondary
+        </span>
+      </button>
+      <button
+        aria-label="Success"
+        class="p-button p-component p-button-raised p-button-success p-button-text"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Success
+        </span>
+      </button>
+      <button
+        aria-label="Info"
+        class="p-button p-component p-button-raised p-button-info p-button-text"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Info
+        </span>
+      </button>
+      <button
+        aria-label="Warning"
+        class="p-button p-component p-button-raised p-button-warning p-button-text"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Warning
+        </span>
+      </button>
+      <button
+        aria-label="Help"
+        class="p-button p-component p-button-raised p-button-help p-button-text"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Help
+        </span>
+      </button>
+      <button
+        aria-label="Danger"
+        class="p-button p-component p-button-raised p-button-danger p-button-text"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Danger
+        </span>
+      </button>
+      <button
+        aria-label="Plain"
+        class="p-button p-component p-button-raised p-button-text p-button-plain"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Plain
+        </span>
+      </button>
+      <h5>
+        Outlined Buttons
+      </h5>
+      <button
+        aria-label="Primary"
+        class="p-button p-component p-button-outlined"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Primary
+        </span>
+      </button>
+      <button
+        aria-label="Secondary"
+        class="p-button p-component p-button-outlined p-button-secondary"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Secondary
+        </span>
+      </button>
+      <button
+        aria-label="Success"
+        class="p-button p-component p-button-outlined p-button-success"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Success
+        </span>
+      </button>
+      <button
+        aria-label="Info"
+        class="p-button p-component p-button-outlined p-button-info"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Info
+        </span>
+      </button>
+      <button
+        aria-label="Warning"
+        class="p-button p-component p-button-outlined p-button-warning"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Warning
+        </span>
+      </button>
+      <button
+        aria-label="Help"
+        class="p-button p-component p-button-outlined p-button-help"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Help
+        </span>
+      </button>
+      <button
+        aria-label="Danger"
+        class="p-button p-component p-button-outlined p-button-danger"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Danger
+        </span>
+      </button>
+      <h5>
+        Rounded Icon Buttons
+      </h5>
+      <button
+        aria-label="Bookmark"
+        class="p-button p-component p-button-rounded p-button-secondary p-button-icon-only"
+      >
+        <span
+          class="p-button-icon p-c pi pi-bookmark"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+           
+        </span>
+      </button>
+      <button
+        aria-label="Search"
+        class="p-button p-component p-button-rounded p-button-success p-button-icon-only"
+      >
+        <span
+          class="p-button-icon p-c pi pi-search"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+           
+        </span>
+      </button>
+      <button
+        aria-label="User"
+        class="p-button p-component p-button-rounded p-button-info p-button-icon-only"
+      >
+        <span
+          class="p-button-icon p-c pi pi-user"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+           
+        </span>
+      </button>
+      <button
+        aria-label="Notification"
+        class="p-button p-component p-button-rounded p-button-warning p-button-icon-only"
+      >
+        <span
+          class="p-button-icon p-c pi pi-bell"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+           
+        </span>
+      </button>
+      <button
+        aria-label="Favorite"
+        class="p-button p-component p-button-rounded p-button-help p-button-icon-only"
+      >
+        <span
+          class="p-button-icon p-c pi pi-heart"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+           
+        </span>
+      </button>
+      <button
+        aria-label="Cancel"
+        class="p-button p-component p-button-rounded p-button-danger p-button-icon-only"
+      >
+        <span
+          class="p-button-icon p-c pi pi-times"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+           
+        </span>
+      </button>
+      <button
+        aria-label="Filter"
+        class="p-button p-component p-button-rounded p-button-icon-only"
+      >
+        <span
+          class="p-button-icon p-c pi pi-check"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+           
+        </span>
+      </button>
+      <h5>
+        Rounded Text Icon Buttons
+      </h5>
+      <button
+        aria-label="Submit"
+        class="p-button p-component p-button-rounded p-button-text p-button-icon-only"
+      >
+        <span
+          class="p-button-icon p-c pi pi-check"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+           
+        </span>
+      </button>
+      <button
+        aria-label="Bookmark"
+        class="p-button p-component p-button-rounded p-button-secondary p-button-text p-button-icon-only"
+      >
+        <span
+          class="p-button-icon p-c pi pi-bookmark"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+           
+        </span>
+      </button>
+      <button
+        aria-label="Search"
+        class="p-button p-component p-button-rounded p-button-success p-button-text p-button-icon-only"
+      >
+        <span
+          class="p-button-icon p-c pi pi-search"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+           
+        </span>
+      </button>
+      <button
+        aria-label="User"
+        class="p-button p-component p-button-rounded p-button-info p-button-text p-button-icon-only"
+      >
+        <span
+          class="p-button-icon p-c pi pi-user"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+           
+        </span>
+      </button>
+      <button
+        aria-label="Notification"
+        class="p-button p-component p-button-rounded p-button-warning p-button-text p-button-icon-only"
+      >
+        <span
+          class="p-button-icon p-c pi pi-bell"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+           
+        </span>
+      </button>
+      <button
+        aria-label="Favorite"
+        class="p-button p-component p-button-rounded p-button-help p-button-text p-button-icon-only"
+      >
+        <span
+          class="p-button-icon p-c pi pi-heart"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+           
+        </span>
+      </button>
+      <button
+        aria-label="Cancel"
+        class="p-button p-component p-button-rounded p-button-danger p-button-text p-button-icon-only"
+      >
+        <span
+          class="p-button-icon p-c pi pi-times"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+           
+        </span>
+      </button>
+      <button
+        aria-label="Filter"
+        class="p-button p-component p-button-rounded p-button-text p-button-plain p-button-icon-only"
+      >
+        <span
+          class="p-button-icon p-c pi pi-filter"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+           
+        </span>
+      </button>
+      <h5>
+        Rounded and Outlined Icon Buttons
+      </h5>
+      <button
+        aria-label="Submit"
+        class="p-button p-component p-button-rounded p-button-outlined p-button-icon-only"
+      >
+        <span
+          class="p-button-icon p-c pi pi-check"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+           
+        </span>
+      </button>
+      <button
+        aria-label="Bookmark"
+        class="p-button p-component p-button-rounded p-button-secondary p-button-outlined p-button-icon-only"
+      >
+        <span
+          class="p-button-icon p-c pi pi-bookmark"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+           
+        </span>
+      </button>
+      <button
+        aria-label="Search"
+        class="p-button p-component p-button-rounded p-button-success p-button-outlined p-button-icon-only"
+      >
+        <span
+          class="p-button-icon p-c pi pi-search"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+           
+        </span>
+      </button>
+      <button
+        aria-label="User"
+        class="p-button p-component p-button-rounded p-button-info p-button-outlined p-button-icon-only"
+      >
+        <span
+          class="p-button-icon p-c pi pi-user"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+           
+        </span>
+      </button>
+      <button
+        aria-label="Notification"
+        class="p-button p-component p-button-rounded p-button-warning p-button-outlined p-button-icon-only"
+      >
+        <span
+          class="p-button-icon p-c pi pi-bell"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+           
+        </span>
+      </button>
+      <button
+        aria-label="Favorite"
+        class="p-button p-component p-button-rounded p-button-help p-button-outlined p-button-icon-only"
+      >
+        <span
+          class="p-button-icon p-c pi pi-heart"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+           
+        </span>
+      </button>
+      <button
+        aria-label="Cancel"
+        class="p-button p-component p-button-rounded p-button-danger p-button-outlined p-button-icon-only"
+      >
+        <span
+          class="p-button-icon p-c pi pi-times"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+           
+        </span>
+      </button>
+      <h5>
+        Badges
+      </h5>
+      <button
+        aria-label="Emails 8"
+        class="p-button p-component"
+        type="button"
+      >
+        <span
+          class="p-button-label p-c"
+        >
+          Emails
+        </span>
+        <span
+          class="p-badge"
+        >
+          8
+        </span>
+      </button>
+      <button
+        aria-label="Messages 8"
+        class="p-button p-component p-button-warning"
+        type="button"
+      >
+        <span
+          class="p-button-icon p-c p-button-icon-left pi pi-users"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+          Messages
+        </span>
+        <span
+          class="p-badge p-badge-danger"
+        >
+          8
+        </span>
+      </button>
+      <h5>
+        Button Set
+      </h5>
+      <span
+        class="p-buttonset"
+      >
+        <button
+          aria-label="Save"
+          class="p-button p-component"
+        >
+          <span
+            class="p-button-icon p-c p-button-icon-left pi pi-check"
+          />
+          <span
+            class="p-button-label p-c"
+          >
+            Save
+          </span>
+        </button>
+        <button
+          aria-label="Delete"
+          class="p-button p-component"
+        >
+          <span
+            class="p-button-icon p-c p-button-icon-left pi pi-trash"
+          />
+          <span
+            class="p-button-label p-c"
+          >
+            Delete
+          </span>
+        </button>
+        <button
+          aria-label="Cancel"
+          class="p-button p-component"
+        >
+          <span
+            class="p-button-icon p-c p-button-icon-left pi pi-times"
+          />
+          <span
+            class="p-button-label p-c"
+          >
+            Cancel
+          </span>
+        </button>
+      </span>
+      <h5>
+        Sizes
+      </h5>
+      <button
+        aria-label="Small"
+        class="p-button p-component p-button-sm"
+      >
+        <span
+          class="p-button-icon p-c p-button-icon-left pi pi-check"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+          Small
+        </span>
+      </button>
+      <button
+        aria-label="Normal"
+        class="p-button p-component p-button"
+      >
+        <span
+          class="p-button-icon p-c p-button-icon-left pi pi-check"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+          Normal
+        </span>
+      </button>
+      <button
+        aria-label="Large"
+        class="p-button p-component p-button-lg"
+      >
+        <span
+          class="p-button-icon p-c p-button-icon-left pi pi-check"
+        />
+        <span
+          class="p-button-label p-c"
+        >
+          Large
+        </span>
+      </button>
+      <h5>
+        Template
+      </h5>
+      <div
+        class="template"
+      >
+        <button
+          aria-label="Google"
+          class="p-button p-component google p-0"
+        >
+          <i
+            class="pi pi-google px-2"
+          />
+          <span
+            class="px-3"
+          >
+            Google
+          </span>
+        </button>
+        <button
+          aria-label="Youtube"
+          class="p-button p-component youtube p-0"
+        >
+          <i
+            class="pi pi-youtube px-2"
+          />
+          <span
+            class="px-3"
+          >
+            Youtube
+          </span>
+        </button>
+        <button
+          aria-label="Vimeo"
+          class="p-button p-component vimeo p-0"
+        >
+          <i
+            class="pi pi-vimeo px-2"
+          />
+          <span
+            class="px-3"
+          >
+            Vimeo
+          </span>
+        </button>
+        <button
+          aria-label="Facebook"
+          class="p-button p-component facebook p-0"
+        >
+          <i
+            class="pi pi-facebook px-2"
+          />
+          <span
+            class="px-3"
+          >
+            Facebook
+          </span>
+        </button>
+        <button
+          aria-label="Twitter"
+          class="p-button p-component twitter p-0"
+        >
+          <i
+            class="pi pi-twitter px-2"
+          />
+          <span
+            class="px-3"
+          >
+            Twitter
+          </span>
+        </button>
+        <button
+          aria-label="Slack"
+          class="p-button p-component slack p-0"
+        >
+          <i
+            class="pi pi-slack px-2"
+          />
+          <span
+            class="px-3"
+          >
+            Slack
+          </span>
+        </button>
+        <button
+          aria-label="Amazon"
+          class="p-button p-component amazon p-0"
+        >
+          <i
+            class="pi pi-amazon px-2"
+          />
+          <span
+            class="px-3"
+          >
+            Amazon
+          </span>
+        </button>
+        <button
+          aria-label="Discord"
+          class="p-button p-component discord p-0"
+        >
+          <i
+            class="pi pi-discord px-2"
+          />
+          <span
+            class="px-3"
+          >
+            Discord
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>,
+]
+`;
