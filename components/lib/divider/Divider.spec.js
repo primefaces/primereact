@@ -1,19 +1,16 @@
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
 import { Divider } from './Divider';
 
-const snapshot = (props, name) => expect(render(<Divider {...props} />).container).toMatchSnapshot(name);
+import { snapshot } from '../../test';
 
-describe('Divider Snapshot', () => {
-    test('check snapshots', () => {
-        snapshot({}, 'default');
-        snapshot({ layout: 'horizontal', align: 'left' }, 'horizontal left');
-        snapshot({ layout: 'horizontal', align: 'right' }, 'horizontal right');
-        snapshot({ layout: 'horizontal', align: 'center' }, 'horizontal center');
-        snapshot({ layout: 'vertical', align: 'center' }, 'vertical center');
-        snapshot({ layout: 'vertical', align: 'top' }, 'vertical top');
-        snapshot({ layout: 'vertical', align: 'bottom' }, 'vertical bottom');
-        snapshot({ type: 'dashed' }, 'dashed');
-        snapshot({ type: 'dotted' }, 'dotted');
-    });
+describe('Divider', () => {
+    snapshot(<Divider />, 'default');
+    snapshot(<Divider layout="horizontal" align="left" />, 'horizontal left');
+    snapshot(<Divider layout="horizontal" align="right" />, 'horizontal right');
+    snapshot(<Divider layout="horizontal" align="center" />, 'horizontal center');
+    snapshot(<Divider layout="vertical" align="center" />, 'vertical center');
+    snapshot(<Divider layout="vertical" align="top" />, 'vertical top');
+    snapshot(<Divider layout="vertical" align="bottom" />, 'vertical bottom');
+    snapshot(<Divider type="dashed" />, 'type dashed');
+    snapshot(<Divider type="dotted" />, 'type dotted');
 });
