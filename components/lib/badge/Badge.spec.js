@@ -1,5 +1,4 @@
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
 import { Badge } from './Badge';
 
 import { snapshot } from '../../test';

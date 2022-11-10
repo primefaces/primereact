@@ -1,0 +1,336 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Panel default 1`] = `
+<div>
+  <div
+    class="p-panel p-component"
+  >
+    <div
+      aria-hidden="false"
+      aria-labelledby="pr_id_1_header"
+      class="p-toggleable-content"
+      id="pr_id_1_content"
+      role="region"
+    >
+      <div
+        class="p-panel-content"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Panel header 1`] = `
+<div>
+  <div
+    class="p-panel p-component"
+    id="Panel"
+  >
+    <div
+      class="p-panel-header"
+    >
+      <span
+        class="p-panel-title"
+        id="Panel_header"
+      >
+        Simple Panel
+      </span>
+      <div
+        class="p-panel-icons"
+      />
+    </div>
+    <div
+      aria-hidden="false"
+      aria-labelledby="Panel_header"
+      class="p-toggleable-content"
+      id="Panel_content"
+      role="region"
+    >
+      <div
+        class="p-panel-content"
+      >
+        Content
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Panel headerTemplate 1`] = `
+<div>
+  <div
+    class="p-panel p-component p-panel-toggleable"
+  >
+    <div
+      class="p-panel-header justify-content-start"
+    >
+      <button
+        class="p-panel-header-icon p-panel-toggler p-link"
+      >
+        <span
+          class="pi pi-chevron-up"
+        />
+      </button>
+      <span
+        class="p-panel-title pl-1"
+      >
+        Header
+      </span>
+    </div>
+    <div
+      aria-labelledby="pr_id_2_header"
+      class="p-toggleable-content"
+      id="pr_id_2_content"
+      role="region"
+    >
+      <div
+        class="p-panel-content"
+      >
+        Content
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Panel when Panel is toggleable it must expand and collapse: expandable-closed 1`] = `
+<div>
+  <div
+    class="p-panel p-component p-panel-toggleable"
+  >
+    <div
+      class="p-panel-header"
+    >
+      <span
+        class="p-panel-title"
+        id="pr_id_4_header"
+      >
+        Expand/Collapse
+      </span>
+      <div
+        class="p-panel-icons"
+      >
+        <button
+          aria-controls="pr_id_4_content"
+          aria-expanded="false"
+          class="p-panel-header-icon p-panel-toggler p-link"
+          id="pr_id_4_label"
+          role="tab"
+        >
+          <span
+            class="pi pi-plus"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      aria-hidden="true"
+      aria-labelledby="pr_id_4_header"
+      class="p-toggleable-content p-toggleable-content-exit p-toggleable-content-exit-active"
+      id="pr_id_4_content"
+      role="region"
+    >
+      <div
+        class="p-panel-content"
+      >
+        <p>
+          Lorem ipsum dolor sit amet
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Panel when Panel is toggleable it must expand and collapse: expandable-open 1`] = `
+<div>
+  <div
+    class="p-panel p-component p-panel-toggleable"
+  >
+    <div
+      class="p-panel-header"
+    >
+      <span
+        class="p-panel-title"
+        id="pr_id_4_header"
+      >
+        Expand/Collapse
+      </span>
+      <div
+        class="p-panel-icons"
+      >
+        <button
+          aria-controls="pr_id_4_content"
+          aria-expanded="true"
+          class="p-panel-header-icon p-panel-toggler p-link"
+          id="pr_id_4_label"
+          role="tab"
+        >
+          <span
+            class="pi pi-minus"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      aria-labelledby="pr_id_4_header"
+      class="p-toggleable-content"
+      id="pr_id_4_content"
+      role="region"
+    >
+      <div
+        class="p-panel-content"
+      >
+        <p>
+          Lorem ipsum dolor sit amet
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Panel when Panel is toggleable it must expand and collapse: expandable-open 2`] = `
+<div>
+  <div
+    class="p-panel p-component p-panel-toggleable"
+  >
+    <div
+      class="p-panel-header"
+    >
+      <span
+        class="p-panel-title"
+        id="pr_id_4_header"
+      >
+        Expand/Collapse
+      </span>
+      <div
+        class="p-panel-icons"
+      >
+        <button
+          aria-controls="pr_id_4_content"
+          aria-expanded="true"
+          class="p-panel-header-icon p-panel-toggler p-link"
+          id="pr_id_4_label"
+          role="tab"
+        >
+          <span
+            class="pi pi-minus"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      aria-hidden="false"
+      aria-labelledby="pr_id_4_header"
+      class="p-toggleable-content p-toggleable-content-enter p-toggleable-content-enter-active"
+      id="pr_id_4_content"
+      role="region"
+    >
+      <div
+        class="p-panel-content"
+      >
+        <p>
+          Lorem ipsum dolor sit amet
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Panel when Panel is toggleable it will toggle when clicked: toggleable-closed 1`] = `
+<div>
+  <div
+    class="p-panel p-component p-panel-toggleable"
+  >
+    <div
+      class="p-panel-header"
+    >
+      <span
+        class="p-panel-title"
+        id="pr_id_3_header"
+      >
+        Toggleable
+      </span>
+      <div
+        class="p-panel-icons"
+      >
+        <button
+          aria-controls="pr_id_3_content"
+          aria-expanded="true"
+          class="p-panel-header-icon p-panel-toggler p-link"
+          id="pr_id_3_label"
+          role="tab"
+        >
+          <span
+            class="pi pi-minus"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      aria-labelledby="pr_id_3_header"
+      class="p-toggleable-content"
+      id="pr_id_3_content"
+      role="region"
+    >
+      <div
+        class="p-panel-content"
+      >
+        <p>
+          Lorem ipsum dolor sit amet
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Panel when Panel is toggleable it will toggle when clicked: toggleable-open 1`] = `
+<div>
+  <div
+    class="p-panel p-component p-panel-toggleable"
+  >
+    <div
+      class="p-panel-header"
+    >
+      <span
+        class="p-panel-title"
+        id="pr_id_3_header"
+      >
+        Toggleable
+      </span>
+      <div
+        class="p-panel-icons"
+      >
+        <button
+          aria-controls="pr_id_3_content"
+          aria-expanded="true"
+          class="p-panel-header-icon p-panel-toggler p-link"
+          id="pr_id_3_label"
+          role="tab"
+        >
+          <span
+            class="pi pi-minus"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      aria-labelledby="pr_id_3_header"
+      class="p-toggleable-content"
+      id="pr_id_3_content"
+      role="region"
+    >
+      <div
+        class="p-panel-content"
+      >
+        <p>
+          Lorem ipsum dolor sit amet
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
