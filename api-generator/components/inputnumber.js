@@ -208,6 +208,12 @@ const InputNumberProps = [
         description: 'Size of the input field.'
     },
     {
+        name: 'maxLength',
+        type: 'number',
+        default: 'null',
+        description: 'Maximum number of character allows in the input field.'
+    },
+    {
         name: 'style',
         type: 'string',
         default: 'null',

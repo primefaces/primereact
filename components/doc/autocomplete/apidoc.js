@@ -205,7 +205,7 @@ export function ApiDoc(props) {
                             <td>When present, it specifies that the component should be disabled.</td>
                         </tr>
                         <tr>
-                            <td>maxlength</td>
+                            <td>maxLength</td>
                             <td>number</td>
                             <td>null</td>
                             <td>Maximum number of character allows in the input field.</td>

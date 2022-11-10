@@ -199,6 +199,10 @@ export const InputNumber = React.memo(
                 let currentValue = parseValue(inputRef.current.value) || 0;
                 let newValue = validateValue(currentValue + step);
 
+                if (props.maxLength && props.maxLength < formatValue(newValue).length) {
+                    return;
+                }
+
                 // touch devices trigger the keyboard to display because of setSelectionRange
                 !DomHandler.isTouchDevice() && updateInput(newValue, null, 'spin');
                 updateModel(event, newValue);
@@ -809,6 +813,10 @@ export const InputNumber = React.memo(
                 let selectionStart = inputEl.selectionStart;
                 let selectionEnd = inputEl.selectionEnd;
 
+                if (props.maxLength && props.maxLength < newValue.length) {
+                    return;
+                }
+
                 inputEl.value = newValue;
                 let newLength = newValue.length;
 
@@ -1168,6 +1176,7 @@ InputNumber.defaultProps = {
     localeMatcher: undefined,
     max: null,
     maxFractionDigits: undefined,
+    maxLength: null,
     min: null,
     minFractionDigits: undefined,
     mode: 'decimal',
