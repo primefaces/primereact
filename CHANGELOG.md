@@ -1,5 +1,37 @@
 # Changelog
 
+## [8.7.2](https://github.com/primefaces/primereact/tree/8.7.2) (2022-11-10)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/8.7.1...8.7.2)
+
+**Implemented New Features and Enhancements:**
+
+- Skeleton: Jest test [\#3603](https://github.com/primefaces/primereact/issues/3603)
+- Avatar/AvatarGroup: Jest test [\#3601](https://github.com/primefaces/primereact/issues/3601)
+- Tag: Jest test [\#3599](https://github.com/primefaces/primereact/issues/3599)
+- InputNumber: Add maxLength Property [\#3595](https://github.com/primefaces/primereact/issues/3595)
+- InputTextarea: Jest Tests [\#3582](https://github.com/primefaces/primereact/issues/3582)
+- InputText: Jest tests [\#3580](https://github.com/primefaces/primereact/issues/3580)
+- Divider: Add jest unit testing to the Divider component [\#3577](https://github.com/primefaces/primereact/issues/3577)
+- InputTextArea: Add KeyFilter [\#3575](https://github.com/primefaces/primereact/issues/3575)
+- InputText/InputTextArea: Typescript won't allow setting `value` [\#3573](https://github.com/primefaces/primereact/issues/3573)
+- Tooltip: Add Jest testing [\#3569](https://github.com/primefaces/primereact/issues/3569)
+- Badge: Add jest unit testing to the Badge component [\#3567](https://github.com/primefaces/primereact/issues/3567)
+- Chip: Add test specifications [\#3557](https://github.com/primefaces/primereact/issues/3557)
+- Column: exportField missing from TypeScript parameters [\#3540](https://github.com/primefaces/primereact/issues/3540)
+- Autocomplete: add selectionLimit [\#2949](https://github.com/primefaces/primereact/issues/2949)
+
+**Fixed bugs:**
+
+- Ripple: Uncaught ReferenceError: isTouching is not defined [\#3593](https://github.com/primefaces/primereact/issues/3593)
+- TieredMenu: Close menu on selection \(like PrimeVue\) [\#3590](https://github.com/primefaces/primereact/issues/3590)
+- Calendar : `keepInvalid` no longer works [\#3559](https://github.com/primefaces/primereact/issues/3559)
+- DataTable : column name with dot [\#3548](https://github.com/primefaces/primereact/issues/3548)
+- Splitter: Error with only 1 panel [\#3546](https://github.com/primefaces/primereact/issues/3546)
+- Calendar: Setting value in range mode  [\#3545](https://github.com/primefaces/primereact/issues/3545)
+- TreeTableHeader: Warning: Each child in a list should have a unique "key" prop. [\#3543](https://github.com/primefaces/primereact/issues/3543)
+- Calendar: Changing a value removes the entire value [\#2927](https://github.com/primefaces/primereact/issues/2927)
+
 ## [8.7.1](https://github.com/primefaces/primereact/tree/8.7.1)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/8.7.0...8.7.1)
