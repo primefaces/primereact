@@ -162,7 +162,7 @@ const AutoCompleteProps = [
         description: 'When present, it specifies that the component should be disabled.'
     },
     {
-        name: 'maxlength',
+        name: 'maxLength',
         type: 'number',
         default: 'null',
         description: 'Maximum number of character allows in the input field.'

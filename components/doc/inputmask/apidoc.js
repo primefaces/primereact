@@ -87,7 +87,7 @@ export function ApiDoc(props) {
                             <td>Size of the input field.</td>
                         </tr>
                         <tr>
-                            <td>maxlength</td>
+                            <td>maxLength</td>
                             <td>number</td>
                             <td>null</td>
                             <td>Maximum number of character allows in the input field.</td>

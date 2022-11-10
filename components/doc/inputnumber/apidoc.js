@@ -240,6 +240,12 @@ export function ApiDoc(props) {
                             <td>Size of the input field.</td>
                         </tr>
                         <tr>
+                            <td>maxLength</td>
+                            <td>number</td>
+                            <td>null</td>
+                            <td>Maximum number of character allows in the input field.</td>
+                        </tr>
+                        <tr>
                             <td>style</td>
                             <td>string</td>
                             <td>null</td>
