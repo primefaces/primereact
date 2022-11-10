@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { Button } from './Button';
-
 import { snapshot } from '../../test';
+import PrimeReact from '../api/PrimeReact';
+import { Button } from './Button';
 
 describe('Button', () => {
     snapshot(<Button label={'test'} visible={false} />, 'when visible is false Button return null');
@@ -17,6 +17,12 @@ describe('Button', () => {
     snapshot(<Button label={'test'} />, 'when aria-label prop is not exist aria-label prop should be equal to label prop ');
     snapshot(<Button aria-label={'test'} />, 'when label prop is not exist label prop should be equal to aria-label prop');
     snapshot(<Button label={'test'} badge={'lost'} />, 'when using badge and label the aria-label should contain both values');
+    snapshot(
+        <>
+            <Button label={'test'} badge={'lost'} />
+        </>,
+        'when using badge and label the aria-label should contain both values'
+    );
     test('when using tooltip make sure the tooltip is rendered', async () => {
         // Arrange
         const { container } = render(<Button label={'test'} tooltip="Jest Tooltip" />);
@@ -51,7 +57,6 @@ describe('Button', () => {
         expect(button).toBeEnabled();
         expect(clickOn).toHaveBeenCalledTimes(1);
     });
-
     test('when button is disabled the click event should not fire', () => {
         // Arrange
         const clickOn = jest.fn();
@@ -64,5 +69,21 @@ describe('Button', () => {
         // Assert
         expect(button).toBeDisabled();
         expect(clickOn).toHaveBeenCalledTimes(0);
+    });
+    test('when Ripple is enabled button should have ripple effect', () => {
+        // Arrange
+        const clickOn = jest.fn();
+
+        PrimeReact.ripple = true;
+        const { container } = render(<Button onClick={clickOn} />);
+        const button = container.getElementsByClassName('p-button')[0];
+
+        // Act
+        fireEvent.click(button);
+
+        // Assert
+        expect(button).toBeEnabled();
+        expect(clickOn).toHaveBeenCalledTimes(1);
+        expect(container).toMatchSnapshot();
     });
 });
