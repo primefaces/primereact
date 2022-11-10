@@ -6,12 +6,13 @@ import '../styles/demo/demo.scss';
 import Layout from '../components/layout/layout';
 import { useEffect, useRef, useState } from 'react';
 import fetchNews from '../service/NewsService';
+import { useStorage } from '../components/lib/hooks/useStorage';
 
 export default function MyApp({ Component }) {
     const [dark, setDark] = useState(false);
-    const [theme, setTheme] = useState('lara-light-indigo');
+    const [theme, setTheme] = useStorage('lara-light-indigo', 'primereact-showcase-theme');
+    const [storedNews, setStoredNews] = useStorage('', 'primereact-news');
     const [newsActive, setNewsActive] = useState(false);
-    const storageKey = 'primereact';
     const announcement = useRef(null);
 
     useEffect(() => {
@@ -48,7 +49,7 @@ export default function MyApp({ Component }) {
                 hiddenNews: announcement.current.id
             };
 
-            localStorage.setItem(storageKey, JSON.stringify(item));
+            setStoredNews(item);
         },
         onThemeChange: (newTheme, dark) => {
             setDark(dark);
