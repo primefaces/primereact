@@ -1,11 +1,50 @@
 import React, { useState } from 'react';
-import { Password } from '../../components/lib/password/Password';
 import { Divider } from '../../components/lib/divider/Divider';
-import PasswordDoc from '../../components/doc/password';
 import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
+import { ImportDoc } from '../../components/doc/password/importdoc';
+import { BasicDoc } from '../../components/doc/password/basicdoc';
+import { PasswordMeter } from '../../components/doc/password/passwordmeterdoc';
+import { ShowPassword } from '../../components/doc/password/showpassworddoc';
+import { Templating } from '../../components/doc/password/templatingdoc';
+import { ApiDoc } from '../../components/doc/password/apidoc';
 
 const PasswordDemo = () => {
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'passwordmeterdoc',
+            label: 'Password Meter',
+            component: PasswordMeter
+        },
+        {
+            id: 'showpassword',
+            label: 'Show Password',
+            component: ShowPassword
+        },
+        {
+            id: 'templating',
+            label: 'Templating',
+            component: Templating
+        },
+        {
+            id: 'api',
+            label: 'API',
+            component: ApiDoc
+        }
+    ];
+
     const [value1, setValue1] = useState('');
     const [value2, setValue2] = useState('');
     const [value3, setValue3] = useState('');
@@ -39,24 +78,10 @@ const PasswordDemo = () => {
 
                 <DocActions github="password/index.js" />
             </div>
-
-            <div className="content-section implementation">
-                <div className="card">
-                    <h5>Basic</h5>
-                    <Password value={value1} onChange={(e) => setValue1(e.target.value)} feedback={false} />
-
-                    <h5>Password Meter</h5>
-                    <Password value={value2} onChange={(e) => setValue2(e.target.value)} />
-
-                    <h5>Show Password</h5>
-                    <Password value={value3} onChange={(e) => setValue3(e.target.value)} toggleMask />
-
-                    <h5>Templating</h5>
-                    <Password value={value4} onChange={(e) => setValue4(e.target.value)} header={header} footer={footer} />
-                </div>
+            <div className="content-section doc">
+                <DocSections docs={docs} />
+                <DocSectionNav docs={docs} />
             </div>
-
-            <PasswordDoc />
         </div>
     );
 };

@@ -28,7 +28,7 @@ export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputH
     checked?: any;
     trueValue?: any;
     falseValue?: any;
-    style?: object;
+    style?: React.CSSProperties;
     className?: string;
     disabled?: boolean;
     required?: boolean;

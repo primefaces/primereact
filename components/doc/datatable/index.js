@@ -1,9 +1,9 @@
-import React, { memo } from 'react';
 import Link from 'next/link';
-import { TabView, TabPanel } from '../../lib/tabview/TabView';
-import { useLiveEditorTabs } from '../common/liveeditor';
+import React, { memo } from 'react';
+import { TabPanel, TabView } from '../../lib/tabview/TabView';
 import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
+import { useLiveEditorTabs } from '../common/liveeditor';
 
 const DataTableDoc = memo(() => {
     const sources = {
@@ -229,7 +229,7 @@ export class DataTableDemo extends Component {
                         filters={this.state.filters} filterDisplay="menu" loading={this.state.loading} responsiveLayout="scroll"
                         globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']} emptyMessage="No customers found."
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
-                        <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
+                        <Column selectionMode="multiple" selectionAriaLabel="name" headerStyle={{ width: '3em' }}></Column>
                         <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name" style={{ minWidth: '14rem' }} />
                         <Column field="country.name" header="Country" sortable filterField="country.name" style={{ minWidth: '14rem' }} body={this.countryBodyTemplate} filter filterPlaceholder="Search by country" />
                         <Column header="Agent" sortable sortField="representative.name" filterField="representative" showFilterMatchModes={false} filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '14rem' }} body={this.representativeBodyTemplate}
@@ -448,7 +448,7 @@ const DataTableDemo = () => {
                     filters={filters} filterDisplay="menu" loading={loading} responsiveLayout="scroll"
                     globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']} emptyMessage="No customers found."
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
-                    <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
+                    <Column selectionMode="multiple" selectionAriaLabel="name" headerStyle={{ width: '3em' }}></Column>
                     <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name" style={{ minWidth: '14rem' }} />
                     <Column field="country.name" header="Country" sortable filterField="country.name" style={{ minWidth: '14rem' }} body={countryBodyTemplate} filter filterPlaceholder="Search by country" />
                     <Column header="Agent" sortable sortField="representative.name" filterField="representative" showFilterMatchModes={false} filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '14rem' }} body={representativeBodyTemplate}
@@ -666,7 +666,7 @@ const DataTableDemo = () => {
                     filters={filters} filterDisplay="menu" loading={loading} responsiveLayout="scroll"
                     globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']} emptyMessage="No customers found."
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
-                    <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
+                    <Column selectionMode="multiple" selectionAriaLabel="name" headerStyle={{ width: '3em' }}></Column>
                     <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name" style={{ minWidth: '14rem' }} />
                     <Column field="country.name" header="Country" sortable filterField="country.name" style={{ minWidth: '14rem' }} body={countryBodyTemplate} filter filterPlaceholder="Search by country" />
                     <Column header="Agent" sortable sortField="representative.name" filterField="representative" showFilterMatchModes={false} filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '14rem' }} body={representativeBodyTemplate}
@@ -892,7 +892,7 @@ const DataTableDemo = () => {
                     filters={filters} filterDisplay="menu" loading={loading} responsiveLayout="scroll"
                     globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']} emptyMessage="No customers found."
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
-                    <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
+                    <Column selectionMode="multiple" selectionAriaLabel="name" headerStyle={{ width: '3em' }}></Column>
                     <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name" style={{ minWidth: '14rem' }} />
                     <Column field="country.name" header="Country" sortable filterField="country.name" style={{ minWidth: '14rem' }} body={countryBodyTemplate} filter filterPlaceholder="Search by country" />
                     <Column header="Agent" sortable sortField="representative.name" filterField="representative" showFilterMatchModes={false} filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '14rem' }} body={representativeBodyTemplate}
@@ -1108,6 +1108,18 @@ export const DataTableDemo = () => {
                                     <td>any</td>
                                     <td>null</td>
                                     <td>Body content of the column.</td>
+                                </tr>
+                                <tr>
+                                    <td>bodyStyle</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Inline style of the body.</td>
+                                </tr>
+                                <tr>
+                                    <td>bodyClassName</td>
+                                    <td>string | function</td>
+                                    <td>null</td>
+                                    <td>Style class of the body. If using a function must return a string.</td>
                                 </tr>
                                 <tr>
                                     <td>footer</td>
@@ -1374,16 +1386,16 @@ export const DataTableDemo = () => {
                                     <td>Style class of the header.</td>
                                 </tr>
                                 <tr>
-                                    <td>bodyStyle</td>
-                                    <td>object</td>
+                                    <td>headerTooltip</td>
+                                    <td>any</td>
                                     <td>null</td>
-                                    <td>Inline style of the body.</td>
+                                    <td>Content of the header tooltip.</td>
                                 </tr>
                                 <tr>
-                                    <td>bodyClassName</td>
-                                    <td>string</td>
+                                    <td>headerTooltipOptions</td>
+                                    <td>object</td>
                                     <td>null</td>
-                                    <td>Style class of the body.</td>
+                                    <td>Configuration of the header tooltip, refer to the tooltip documentation for more information.</td>
                                 </tr>
                                 <tr>
                                     <td>footerStyle</td>
@@ -1886,8 +1898,10 @@ multiSortMeta.push({field: 'name', order: -1});
                     <CodeHighlight lang="js">
                         {`
 const mysort = (event) => {
+    //event.data = Data
     //event.field = Field to sort
     //event.order = Sort order
+    //event.multiSortMeta = An array of SortMeta objects to sort the data by default in multiple sort mode.
 }
 `}
                     </CodeHighlight>
@@ -3230,6 +3244,12 @@ export const DataTableStateDemo = () => {
                                     <td>Selected row in single mode or an array of values in multiple mode.</td>
                                 </tr>
                                 <tr>
+                                    <td>selectionAriaLabel</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>A field property from the row to add "Select &#123;field&#125;" and "Unselect &#123;field&#125;" ARIA labels to checkbox/radio buttons.</td>
+                                </tr>
+                                <tr>
                                     <td>contextMenuSelection</td>
                                     <td>any</td>
                                     <td>null</td>
@@ -3293,7 +3313,7 @@ export const DataTableStateDemo = () => {
                                     <td>rowExpansionTemplate</td>
                                     <td>function</td>
                                     <td>null</td>
-                                    <td>Function that receives the row data as the parameter and returns the expanded row content.</td>
+                                    <td>Function that receives the row data as the parameter and returns the expanded row content. You can override the rendering of the content by setting options.customRendering = true.</td>
                                 </tr>
                                 <tr>
                                     <td>expandedRows</td>
@@ -3332,12 +3352,6 @@ export const DataTableStateDemo = () => {
                                     <td>array</td>
                                     <td>null</td>
                                     <td>An array of FilterMetadata objects to provide external filters.</td>
-                                </tr>
-                                <tr>
-                                    <td>globalFilter</td>
-                                    <td>any</td>
-                                    <td>null</td>
-                                    <td>Value of the global filter to use in filtering.</td>
                                 </tr>
                                 <tr>
                                     <td>filterDelay</td>
@@ -3558,10 +3572,22 @@ export const DataTableStateDemo = () => {
                                     <td>Icon of the row toggler to display the row as collapsed.</td>
                                 </tr>
                                 <tr>
+                                    <td>globalFilter</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Value of the global filter to use in filtering.</td>
+                                </tr>
+                                <tr>
                                     <td>globalFilterFields</td>
                                     <td>string[]</td>
                                     <td>null</td>
                                     <td>Define fields to be filtered globally.</td>
+                                </tr>
+                                <tr>
+                                    <td>globalFilterMatchMode</td>
+                                    <td>string</td>
+                                    <td>contains</td>
+                                    <td>Defines filterMatchMode; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "lt", "lte", "gt", "gte" and "custom".</td>
                                 </tr>
                                 <tr>
                                     <td>showSelectionElement</td>

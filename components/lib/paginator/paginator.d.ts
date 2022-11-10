@@ -125,15 +125,15 @@ interface PaginatorJumpToPageInputOptions {
 }
 
 interface PaginatorTemplateOptions {
-    layout: string;
-    FirstPageLink: PaginatorFirstPageLinkType;
-    PrevPageLink: PaginatorPrevPageLinkType;
-    PageLinks: PaginatorPageLinksType;
-    NextPageLink: PaginatorNextPageLinkType;
-    LastPageLink: PaginatorLastPageLinkType;
-    RowsPerPageDropdown: PaginatorRowsPerPageDropdownType;
-    CurrentPageReport: PaginatorCurrentPageReportType;
-    JumpToPageInput: PaginatorJumpToPageInputType;
+    layout?: string;
+    FirstPageLink?: PaginatorFirstPageLinkType;
+    PrevPageLink?: PaginatorPrevPageLinkType;
+    PageLinks?: PaginatorPageLinksType;
+    NextPageLink?: PaginatorNextPageLinkType;
+    LastPageLink?: PaginatorLastPageLinkType;
+    RowsPerPageDropdown?: PaginatorRowsPerPageDropdownType;
+    CurrentPageReport?: PaginatorCurrentPageReportType;
+    JumpToPageInput?: PaginatorJumpToPageInputType;
 }
 
 export type PaginatorTemplate = string | PaginatorTemplateOptions;

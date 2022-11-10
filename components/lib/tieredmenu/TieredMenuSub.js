@@ -33,6 +33,7 @@ export const TieredMenuSub = React.memo((props) => {
     const onItemMouseEnter = (event, item) => {
         if (item.disabled) {
             event.preventDefault();
+
             return;
         }
 
@@ -48,6 +49,7 @@ export const TieredMenuSub = React.memo((props) => {
     const onItemClick = (event, item) => {
         if (item.disabled) {
             event.preventDefault();
+
             return;
         }
 
@@ -70,7 +72,7 @@ export const TieredMenuSub = React.memo((props) => {
         }
 
         if (!item.items) {
-            onLeafClick();
+            onLeafClick(event);
         }
     };
 
@@ -81,6 +83,7 @@ export const TieredMenuSub = React.memo((props) => {
             //down
             case 40:
                 const nextItem = findNextItem(listItem);
+
                 nextItem && nextItem.children[0].focus();
                 event.preventDefault();
                 break;
@@ -88,6 +91,7 @@ export const TieredMenuSub = React.memo((props) => {
             //up
             case 38:
                 const prevItem = findPrevItem(listItem);
+
                 prevItem && prevItem.children[0].focus();
                 event.preventDefault();
                 break;
@@ -122,17 +126,20 @@ export const TieredMenuSub = React.memo((props) => {
 
     const findNextItem = (item) => {
         const nextItem = item.nextElementSibling;
+
         return nextItem ? (DomHandler.hasClass(nextItem, 'p-disabled') || !DomHandler.hasClass(nextItem, 'p-menuitem') ? findNextItem(nextItem) : nextItem) : null;
     };
 
     const findPrevItem = (item) => {
         const prevItem = item.previousElementSibling;
+
         return prevItem ? (DomHandler.hasClass(prevItem, 'p-disabled') || !DomHandler.hasClass(prevItem, 'p-menuitem') ? findPrevItem(prevItem) : prevItem) : null;
     };
 
-    const onLeafClick = () => {
+    const onLeafClick = (event) => {
         setActiveItemState(null);
-        props.onLeafClick && props.onLeafClick();
+        props.onLeafClick && props.onLeafClick(event);
+        props.onHide && props.onHide(event);
     };
 
     useMountEffect(() => {
@@ -167,6 +174,7 @@ export const TieredMenuSub = React.memo((props) => {
         if (item.visible === false) {
             return null;
         }
+
         const { id, className: _className, style, disabled, icon: _icon, label: _label, items, target, url, template } = item;
         const key = _label + '_' + index;
         const active = activeItemState === item;

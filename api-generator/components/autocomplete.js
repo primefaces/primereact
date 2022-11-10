@@ -84,6 +84,12 @@ const AutoCompleteProps = [
         description: 'Specifies if multiple values can be selected.'
     },
     {
+        name: 'selectionLimit',
+        type: 'number',
+        default: 'null',
+        description: 'Number of maximum options that can be selected.'
+    },
+    {
         name: 'minLength',
         type: 'number',
         default: '1',
@@ -156,7 +162,7 @@ const AutoCompleteProps = [
         description: 'When present, it specifies that the component should be disabled.'
     },
     {
-        name: 'maxlength',
+        name: 'maxLength',
         type: 'number',
         default: 'null',
         description: 'Maximum number of character allows in the input field.'
@@ -232,6 +238,12 @@ const AutoCompleteProps = [
         type: 'string',
         default: 'pi pi-chevron-down',
         description: 'Icon class of the dropdown icon.'
+    },
+    {
+        name: 'dropdownAriaLabel',
+        type: 'string',
+        default: 'null',
+        description: 'ARIA label for the dropdown button. Defaults to placeholder then Locale "choose" label.'
     },
     {
         name: 'virtualScrollerOptions',

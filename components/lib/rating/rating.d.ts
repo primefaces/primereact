@@ -1,5 +1,6 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
+import { IconType } from '../utils';
 
 interface RatingChangeTargetOptions {
     name: string;
@@ -15,7 +16,7 @@ interface RatingChangeParams {
     target: RatingChangeTargetOptions;
 }
 
-export interface RatingProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange'> {
+export interface RatingProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
     value?: number;
     disabled?: boolean;
     readOnly?: boolean;
@@ -25,6 +26,12 @@ export interface RatingProps extends Omit<React.DetailedHTMLProps<React.InputHTM
     tooltipOptions?: TooltipOptions;
     onChange?(e: RatingChangeParams): void;
     children?: React.ReactNode;
+    onIcon?: IconType<RatingProps>;
+    offIcon?: IconType<RatingProps>;
+    cancelIcon?: IconType<RatingProps>;
+    cancelIconProps?: React.HTMLAttributes<HTMLSpanElement>;
+    onIconProps?: React.HTMLAttributes<HTMLSpanElement>;
+    offIconProps?: React.HTMLAttributes<HTMLSpanElement>;
 }
 
 export declare class Rating extends React.Component<RatingProps, any> {

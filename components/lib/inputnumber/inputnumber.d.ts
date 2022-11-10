@@ -47,6 +47,7 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
     step?: number;
     min?: number;
     max?: number;
+    maxLength?: number;
     disabled?: boolean;
     required?: boolean;
     tabIndex?: number;
@@ -56,7 +57,7 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
     size?: number;
     inputId?: string;
     autoFocus?: boolean;
-    inputStyle?: object;
+    inputStyle?: React.CSSProperties;
     inputClassName?: string;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;

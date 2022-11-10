@@ -184,6 +184,7 @@ function addCore() {
                 Object.entries(core).forEach(([filePath, value]) => {
                     const code = ALIAS_COMPONENT_ENTRIES.reduce((val, entry) => {
                         const name = entry.replacement.replace('primereact/', '');
+
                         val += value[name] + '\n';
 
                         return val;
@@ -207,6 +208,7 @@ function addComponent() {
         .forEach(({ name: folderName }) => {
             fs.readdirSync(path.resolve(__dirname, process.env.INPUT_DIR + folderName)).forEach((file) => {
                 let name = file.split(/(.js)$/)[0].toLowerCase();
+
                 if (name === folderName) {
                     const input = process.env.INPUT_DIR + folderName + '/' + file;
                     const output = process.env.OUTPUT_DIR + folderName + '/' + name;

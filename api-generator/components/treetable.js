@@ -283,6 +283,12 @@ const TreeTableProps = [
         description: 'Value of the global filter to use in filtering.'
     },
     {
+        name: 'globalFilterMatchMode',
+        type: 'string',
+        default: 'contains',
+        description: 'Defines filterMatchMode; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "lt", "lte", "gt", "gte" and "custom".'
+    },
+    {
         name: 'filterMode',
         type: 'string',
         default: 'lenient',

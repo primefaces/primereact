@@ -86,10 +86,10 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
     optionGroupChildren?: string;
     optionGroupTemplate?: MultiSelectOptionGroupTemplateType;
     display?: MultiSelectDisplayType;
-    style?: object;
+    style?: React.CSSProperties;
     className?: string;
     panelClassName?: string;
-    panelStyle?: object;
+    panelStyle?: React.CSSProperties;
     virtualScrollerOptions?: VirtualScrollerProps;
     scrollHeight?: string;
     placeholder?: string;

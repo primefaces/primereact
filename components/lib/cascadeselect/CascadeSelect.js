@@ -47,6 +47,7 @@ export const CascadeSelect = React.memo(
 
         const getOptionLabel = (option) => {
             const label = props.optionLabel ? ObjectUtils.resolveFieldData(option, props.optionLabel) : option;
+
             return label || option;
         };
 
@@ -64,9 +65,11 @@ export const CascadeSelect = React.memo(
 
         const updateSelectionPath = () => {
             let path;
+
             if (props.value != null && props.options) {
                 for (let option of props.options) {
                     path = findModelOptionInGroup(option, 0);
+
                     if (path) {
                         break;
                     }
@@ -79,10 +82,13 @@ export const CascadeSelect = React.memo(
         const findModelOptionInGroup = (option, level) => {
             if (isOptionGroup(option, level)) {
                 let selectedOption;
+
                 for (let childOption of getOptionGroupChildren(option, level)) {
                     selectedOption = findModelOptionInGroup(childOption, level + 1);
+
                     if (selectedOption) {
                         selectedOption.unshift(option);
+
                         return selectedOption;
                     }
                 }
@@ -121,6 +127,7 @@ export const CascadeSelect = React.memo(
                     } else if (event.altKey && props.options && props.options.length) {
                         show();
                     }
+
                     event.preventDefault();
                     break;
 
@@ -222,7 +229,7 @@ export const CascadeSelect = React.memo(
                         onKeyDown={onInputKeyDown}
                         tabIndex={props.tabIndex}
                         aria-haspopup="listbox"
-                        aria-labelledby={props.ariaLabelledBy}
+                        {...ariaProps}
                     />
                 </div>
             );
@@ -292,7 +299,6 @@ export const CascadeSelect = React.memo(
         };
 
         const createElement = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, CascadeSelect.defaultProps);
             const className = classNames(
                 'p-cascadeselect p-component p-inputwrapper',
                 {
@@ -319,6 +325,9 @@ export const CascadeSelect = React.memo(
             );
         };
 
+        const otherProps = ObjectUtils.findDiffKeys(props, CascadeSelect.defaultProps);
+        const dataProps = ObjectUtils.reduceKeys(otherProps, DomHandler.DATA_PROPS);
+        const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const element = createElement();
 
         return element;

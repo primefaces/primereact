@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 export interface RowProps {
-    style?: object;
+    style?: React.CSSProperties;
     className?: string;
     children?: React.ReactNode;
 }

@@ -14,6 +14,7 @@ const TreeTableDemo = () => {
 
     const toggleApplications = () => {
         let _expandedKeys = { ...expandedKeys };
+
         if (_expandedKeys['0']) delete _expandedKeys['0'];
         else _expandedKeys['0'] = true;
 

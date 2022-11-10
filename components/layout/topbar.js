@@ -8,15 +8,19 @@ import getConfig from 'next/config';
 export default function Topbar(props) {
     const [activeMenuIndex, setActiveMenuIndex] = useState(null);
     const [versions, setVersions] = useState([]);
+
     const onMenuButtonClick = () => {
         props.onMenuButtonClick();
     };
+
     const resetMenuActive = () => {
         setActiveMenuIndex(null);
     };
+
     const toggleMenu = (index) => {
         setActiveMenuIndex((prevActiveMenuIndex) => (prevActiveMenuIndex === index ? null : index));
     };
+
     const bindOutsideClickListener = () => {
         if (!outsideClickListener.current) {
             outsideClickListener.current = (event) => {
@@ -24,22 +28,27 @@ export default function Topbar(props) {
                     setActiveMenuIndex(null);
                 }
             };
+
             document.addEventListener('click', outsideClickListener.current);
         }
     };
+
     const unbindOutsideClickListener = () => {
         if (outsideClickListener.current) {
             document.removeEventListener('click', outsideClickListener.current);
             outsideClickListener.current = null;
         }
     };
+
     const isOutsideTopbarMenuClicked = (event) => {
         return !(topbarMenu.current.isSameNode(event.target) || topbarMenu.current.contains(event.target));
     };
+
     const onThemeChange = (theme, dark) => {
         props.onThemeChange({ theme, dark });
         resetMenuActive();
     };
+
     useEffect(() => {
         if (activeMenuIndex == null) unbindOutsideClickListener();
         else bindOutsideClickListener();
@@ -55,6 +64,7 @@ export default function Topbar(props) {
 
     const containerElement = useRef(null);
     const scrollListener = useRef();
+
     const bindScrollListener = () => {
         scrollListener.current = () => {
             if (containerElement && containerElement.current) {
@@ -62,6 +72,7 @@ export default function Topbar(props) {
                 else containerElement.current.classList.remove('layout-topbar-sticky');
             }
         };
+
         window.addEventListener('scroll', scrollListener.current);
     };
 
@@ -74,6 +85,7 @@ export default function Topbar(props) {
 
     useEffect(() => {
         bindScrollListener();
+
         return function unbind() {
             unbindScrollListener();
         };

@@ -50,6 +50,7 @@ export const Chips = React.memo(
 
                 if (props.allowDuplicate || values.indexOf(item) === -1) {
                     let allowAddition = true;
+
                     if (props.onAdd) {
                         allowAddition = props.onAdd({
                             originalEvent: event,
@@ -87,6 +88,7 @@ export const Chips = React.memo(
                     if (inputRef.current.value.length === 0 && values.length > 0) {
                         removeItem(event, values.length - 1);
                     }
+
                     break;
 
                 //enter
@@ -94,17 +96,20 @@ export const Chips = React.memo(
                     if (inputValue && inputValue.trim().length && (!props.max || props.max > values.length)) {
                         addItem(event, inputValue, true);
                     }
+
                     break;
 
                 default:
                     if (props.keyfilter) {
                         KeyFilter.onKeyPress(event, props.keyfilter);
                     }
+
                     if (isMaxedOut()) {
                         event.preventDefault();
                     } else if (props.separator === ',' && event.which === 188) {
                         addItem(event, inputValue, true);
                     }
+
                     break;
             }
         };
@@ -139,6 +144,7 @@ export const Chips = React.memo(
                 if (pastedData) {
                     let values = props.value || [];
                     let pastedValues = pastedData.split(props.separator);
+
                     pastedValues = pastedValues.filter((val) => (props.allowDuplicate || values.indexOf(val) === -1) && val.trim().length);
                     values = [...values, ...pastedValues];
 
@@ -161,6 +167,7 @@ export const Chips = React.memo(
                     addItem(event, inputValue, true);
                 }
             }
+
             setFocusedState(false);
             props.onBlur && props.onBlur(event);
         };
@@ -221,8 +228,8 @@ export const Chips = React.memo(
                         onPaste={onPaste}
                         onFocus={onFocus}
                         onBlur={onBlur}
-                        aria-labelledby={props.ariaLabelledBy}
                         readOnly={props.readOnly}
+                        {...ariaProps}
                     />
                 </li>
             );
@@ -250,6 +257,7 @@ export const Chips = React.memo(
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = ObjectUtils.findDiffKeys(props, Chips.defaultProps);
+        const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-chips p-component p-inputwrapper',
             {

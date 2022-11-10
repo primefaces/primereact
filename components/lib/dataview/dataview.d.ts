@@ -24,7 +24,7 @@ interface DataViewLayoutOptionsChangeParams {
 export interface DataViewLayoutOptionsProps {
     id?: string;
     layout?: DataViewLayoutType;
-    style?: object;
+    style?: React.CSSProperties;
     className?: string;
     onChange(e: DataViewLayoutOptionsChangeParams): void;
     children?: React.ReactNode;

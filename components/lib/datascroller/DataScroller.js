@@ -120,7 +120,10 @@ export const DataScroller = React.memo(
             if (props.value) {
                 value.current = props.value;
 
-                first.current = 0;
+                if (!props.lazy) {
+                    first.current = 0;
+                }
+
                 dataToRender.current = [];
                 handleDataChange();
             }

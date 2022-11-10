@@ -1,8 +1,13 @@
 import * as React from 'react';
+import TooltipOptions from '../tooltip/tooltipoptions';
 
 type ColumnHeaderType = React.ReactNode | ((options: ColumnHeaderOptions) => React.ReactNode);
 
 type ColumnBodyType = React.ReactNode | ((data: any, options: ColumnBodyOptions) => React.ReactNode);
+
+type ColumnBodyClassType = string | ((data: any, options: ColumnBodyOptions) => string);
+
+type ColumnExpanderType = boolean | ((data: any, options: ColumnBodyOptions) => boolean);
 
 type ColumnFooterType = React.ReactNode | ((options: ColumnFooterOptions) => React.ReactNode);
 
@@ -54,11 +59,12 @@ interface ColumnBodyExpanderOptions {
     onClick?(e: any): void;
     className?: string;
     iconClassName?: string;
-    element?: React.ReactNode;
+    element?: JSX.Element;
 }
 
 interface ColumnBodyRowEditorOptions {
-    editing: boolean;
+    editing?: boolean;
+    element?: JSX.Element;
     onSaveClick?(e: any): void;
     saveClassName?: string;
     saveIconClassName?: string;
@@ -113,13 +119,25 @@ interface ColumnFilterElementTemplateOptions {
 
 interface ColumnEventParams {
     originalEvent: React.SyntheticEvent;
-    columnProps: ColumnProps;
+    value: any;
+    field: string;
+    rowData: any;
+    rowIndex: number;
+    cellIndex: number;
+    selected: boolean;
+    column: Column;
+    newRowData: any;
+    newValue: any;
 }
 
-interface ColumnSortParams {
-    rowData: any;
+interface ColumnSortMetaData {
     field: string;
     order: ColumnSortOrderType;
+}
+
+interface ColumnSortParams extends ColumnSortMetaData {
+    data: any;
+    multiSortMeta?: ColumnSortMetaData[];
 }
 
 interface ColumnFilterMetaData {
@@ -174,80 +192,83 @@ interface ColumnFilterMatchModeOptions {
 }
 
 export interface ColumnProps {
-    columnKey?: string;
-    field?: string;
-    sortField?: string;
-    filterField?: string;
-    header?: ColumnHeaderType;
+    align?: ColumnAlignType;
+    alignFrozen?: ColumnAlignFrozenType;
+    alignHeader?: ColumnAlignType;
     body?: ColumnBodyType;
-    footer?: ColumnFooterType;
-    sortable?: boolean;
-    sortableDisabled?: boolean;
+    bodyClassName?: ColumnBodyClassType;
+    bodyStyle?: React.CSSProperties;
+    cellEditValidatorEvent?: string;
+    children?: React.ReactNode;
+    className?: string;
+    colSpan?: number;
+    columnKey?: string;
     dataType?: ColumnDataType;
+    editor?: ColumnEditorType;
+    excludeGlobalFilter?: boolean;
+    expander?: ColumnExpanderType;
+    exportable?: boolean;
+    exportField?: string;
+    field?: string;
     filter?: boolean;
+    filterApply?: ColumnFilterApplyType;
+    filterClear?: ColumnFilterClearType;
+    filterElement?: ColumnFilterElementType;
+    filterField?: string;
+    filterFooter?: ColumnFilterFooterType;
+    filterHeader?: ColumnFilterHeaderType;
+    filterHeaderClassName?: string;
+    filterHeaderStyle?: React.CSSProperties;
     filterMatchMode?: ColumnFilterMatchModeType;
+    filterMatchModeOptions?: ColumnFilterMatchModeOptions[];
+    filterMaxLength?: number;
+    filterMenuClassName?: string;
+    filterMenuStyle?: React.CSSProperties;
     filterPlaceholder?: string;
     filterType?: string;
-    filterMaxLength?: number;
-    filterElement?: ColumnFilterElementType;
-    filterHeaderStyle?: object;
-    filterHeaderClassName?: string;
-    showFilterMenu?: boolean;
-    showFilterOperator?: boolean;
-    showClearButton?: boolean;
-    showApplyButton?: boolean;
-    showFilterMatchModes?: boolean;
-    showFilterMenuOptions?: boolean;
-    showAddButton?: boolean;
-    filterMatchModeOptions?: ColumnFilterMatchModeOptions[];
-    maxConstraints?: number;
-    filterMenuClassName?: string;
-    filterMenuStyle?: object;
-    align?: ColumnAlignType;
-    alignHeader?: ColumnAlignType;
-    alignFrozen?: ColumnAlignFrozenType;
-    hidden?: boolean;
-    onFilterClear?(): void;
-    onFilterApplyClick?(e: ColumnFilterApplyClickParams): void;
-    onFilterMatchModeChange?(e: ColumnFilterMatchModeChangeParams): void;
-    onFilterOperatorChange?(e: ColumnFilterOperatorChangeParams): void;
-    onFilterConstraintAdd?(e: ColumnFilterConstraintAddParams): void;
-    onFilterConstraintRemove?(e: ColumnFilterConstraintRemoveParams): void;
-    filterClear?: ColumnFilterClearType;
-    filterApply?: ColumnFilterApplyType;
-    filterHeader?: ColumnFilterHeaderType;
-    filterFooter?: ColumnFilterFooterType;
-    style?: object;
-    className?: string;
-    headerStyle?: object;
-    headerClassName?: string;
-    bodyStyle?: object;
-    bodyClassName?: string;
-    footerStyle?: object;
+    footer?: ColumnFooterType;
     footerClassName?: string;
-    expander?: boolean;
+    footerStyle?: React.CSSProperties;
     frozen?: boolean;
-    selectionMode?: ColumnSelectionModeType;
-    colSpan?: number;
-    rowSpan?: number;
-    rowReorder?: boolean;
-    rowReorderIcon?: string;
-    cellEditValidatorEvent?: string;
-    rowEditor?: boolean;
-    exportable?: boolean;
+    header?: ColumnHeaderType;
+    headerClassName?: string;
+    headerStyle?: React.CSSProperties;
+    headerTooltip?: string;
+    headerTooltipOptions?: TooltipOptions;
+    hidden?: boolean;
+    maxConstraints?: number;
     reorderable?: boolean;
     resizeable?: boolean;
-    excludeGlobalFilter?: boolean;
-    onCellEditInit?(e: ColumnEventParams): void;
-    onCellEditComplete?(e: ColumnEventParams): void;
-    onCellEditCancel?(e: ColumnEventParams): void;
-    sortFunction?(e: ColumnSortParams): void;
-    filterFunction?(value: any, filter: any, filterLocale: string, params: ColumnFilterParams): void;
-    editor?: ColumnEditorType;
+    rowEditor?: boolean;
+    rowReorder?: boolean;
+    rowReorderIcon?: string;
+    rowSpan?: number;
+    selectionMode?: ColumnSelectionModeType;
+    showAddButton?: boolean;
+    showApplyButton?: boolean;
+    showClearButton?: boolean;
+    showFilterMatchModes?: boolean;
+    showFilterMenu?: boolean;
+    showFilterMenuOptions?: boolean;
+    showFilterOperator?: boolean;
+    sortField?: string;
+    sortable?: boolean;
+    sortableDisabled?: boolean;
+    style?: React.CSSProperties;
     cellEditValidator?(e: ColumnEventParams): boolean;
+    filterFunction?(value: any, filter: any, filterLocale: string, params: ColumnFilterParams): void;
     onBeforeCellEditHide?(e: ColumnEventParams): void;
     onBeforeCellEditShow?(e: ColumnEventParams): void;
-    children?: React.ReactNode;
+    onCellEditCancel?(e: ColumnEventParams): void;
+    onCellEditComplete?(e: ColumnEventParams): void;
+    onCellEditInit?(e: ColumnEventParams): void;
+    onFilterApplyClick?(e: ColumnFilterApplyClickParams): void;
+    onFilterClear?(): void;
+    onFilterConstraintAdd?(e: ColumnFilterConstraintAddParams): void;
+    onFilterConstraintRemove?(e: ColumnFilterConstraintRemoveParams): void;
+    onFilterMatchModeChange?(e: ColumnFilterMatchModeChangeParams): void;
+    onFilterOperatorChange?(e: ColumnFilterOperatorChangeParams): void;
+    sortFunction?(e: ColumnSortParams): void;
 }
 
 export declare class Column extends React.Component<ColumnProps, any> {}

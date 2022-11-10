@@ -27,24 +27,31 @@ export default function Layout(props) {
     const maskClassName = classNames('layout-mask', {
         'layout-mask-active': sidebarActive
     });
+
     const onMenuButtonClick = () => {
         setSidebarActive(true);
     };
+
     const onMenuItemClick = () => {
         setSidebarActive(false);
     };
+
     const onMaskClick = () => {
         setSidebarActive(false);
     };
+
     const onThemeChange = (event) => {
         if (event.theme.startsWith('md')) {
             setRipple(true);
         }
+
         props.onThemeChange(event.theme, event.dark);
     };
+
     const onInputStyleChange = (value) => {
         setInputStyle(value);
     };
+
     const onRippleChange = (value) => {
         setRipple(value);
     };

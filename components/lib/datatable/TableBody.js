@@ -143,6 +143,7 @@ export const TableBody = React.memo(
 
         const getVirtualScrollerOption = (option, options) => {
             options = options || props.virtualScrollerOptions;
+
             return options ? options[option] : null;
         };
 
@@ -165,8 +166,10 @@ export const TableBody = React.memo(
         const shouldRenderRowGroupHeader = (value, rowData, i) => {
             const currentRowFieldData = ObjectUtils.resolveFieldData(rowData, props.groupRowsBy);
             const prevRowData = value[i - 1];
+
             if (prevRowData) {
                 const previousRowFieldData = ObjectUtils.resolveFieldData(prevRowData, props.groupRowsBy);
+
                 return currentRowFieldData !== previousRowFieldData;
             } else {
                 return true;
@@ -179,8 +182,10 @@ export const TableBody = React.memo(
             } else {
                 const currentRowFieldData = ObjectUtils.resolveFieldData(rowData, props.groupRowsBy);
                 const nextRowData = value[i + 1];
+
                 if (nextRowData) {
                     const nextRowFieldData = ObjectUtils.resolveFieldData(nextRowData, props.groupRowsBy);
+
                     return currentRowFieldData !== nextRowFieldData;
                 } else {
                     return true;
@@ -195,6 +200,7 @@ export const TableBody = React.memo(
         const updateFrozenRowGroupHeaderStickyPosition = () => {
             const tableHeaderHeight = DomHandler.getOuterHeight(elementRef.current.previousElementSibling);
             const top = tableHeaderHeight + 'px';
+
             if (rowGroupHeaderStyleObjectState.top !== top) {
                 setRowGroupHeaderStyleObjectState({ top });
             }
@@ -202,6 +208,7 @@ export const TableBody = React.memo(
 
         const updateVirtualScrollerPosition = () => {
             const tableHeaderHeight = DomHandler.getOuterHeight(elementRef.current.previousElementSibling);
+
             elementRef.current.style.top = (elementRef.current.style.top || 0) + tableHeaderHeight + 'px';
         };
 
@@ -245,6 +252,7 @@ export const TableBody = React.memo(
             if (selected) {
                 if (toggleable) {
                     let selectionIndex = findIndex(selection, data);
+
                     selection = props.selection.filter((val, i) => i !== selectionIndex);
                     onUnselect({ originalEvent, data, type });
                 } else if (selection.length) {
@@ -271,8 +279,7 @@ export const TableBody = React.memo(
         const onRangeSelection = (event, type) => {
             DomHandler.clearSelection();
             rangeRowIndex.current = allowCellSelection() ? event.rowIndex : event.index;
-            let selectionInRange = selectRange(event);
-            let selection = isMultipleSelection() ? [...new Set([...(props.selection || []), ...selectionInRange])] : selectionInRange;
+            const selection = selectRange(event);
 
             if (props.onSelectionChange && selection !== props.selection) {
                 props.onSelectionChange({
@@ -315,6 +322,7 @@ export const TableBody = React.memo(
 
             for (let i = rowRangeStart; i <= rowRangeEnd; i++) {
                 let rangeRowData = value[i];
+
                 if (!isSelectable({ data: rangeRowData, index: i })) {
                     continue;
                 }
@@ -331,6 +339,7 @@ export const TableBody = React.memo(
             let cellRangeStart,
                 cellRangeEnd,
                 cellIndex = event.cellIndex;
+
             if (cellIndex > anchorCellIndex.current) {
                 cellRangeStart = anchorCellIndex.current;
                 cellRangeEnd = cellIndex;
@@ -347,6 +356,7 @@ export const TableBody = React.memo(
             for (let i = rowRangeStart; i <= rowRangeEnd; i++) {
                 let rowData = value[i];
                 let columns = props.columns;
+                let rowIndex = props.paginator ? i + props.first : i;
 
                 for (let j = cellRangeStart; j <= cellRangeEnd; j++) {
                     let field = columns[j].props.field;
@@ -355,7 +365,7 @@ export const TableBody = React.memo(
                         value,
                         field,
                         rowData,
-                        rowIndex: i,
+                        rowIndex,
                         cellIndex: j,
                         selected: true
                     };
@@ -402,9 +412,11 @@ export const TableBody = React.memo(
             if (!allowCellSelection() && props.selectionAutoFocus) {
                 if (isCheckboxSelectionModeInColumn) {
                     const checkbox = DomHandler.findSingle(target, 'td.p-selection-column .p-checkbox-box');
+
                     checkbox && checkbox.focus();
                 } else if (isRadioSelectionModeInColumn) {
                     const radio = DomHandler.findSingle(target, 'td.p-selection-column input[type="radio"]');
+
                     radio && radio.focus();
                 }
             }
@@ -439,6 +451,7 @@ export const TableBody = React.memo(
                     onRangeSelection(event, 'row');
                 } else {
                     const toggleable = isRadioSelectionModeInColumn || isCheckboxSelectionModeInColumn || allowMetaKeySelection(event);
+
                     anchorRowIndex.current = event.index;
                     rangeRowIndex.current = event.index;
                     anchorRowFirst.current = props.first;
@@ -460,6 +473,7 @@ export const TableBody = React.memo(
 
         const onRowDoubleClick = (e) => {
             const { originalEvent: event } = e;
+
             if (DomHandler.isClickable(event.target)) {
                 return;
             }
@@ -511,6 +525,7 @@ export const TableBody = React.memo(
 
         const onRowMouseUp = (event) => {
             const isSameRow = event.index === anchorRowIndex.current;
+
             if (allowRowDrag(event) && !isSameRow) {
                 onRangeSelection(event, 'row');
             }
@@ -523,30 +538,36 @@ export const TableBody = React.memo(
 
             if (hasDataKey) {
                 let dataKeyValue = String(ObjectUtils.resolveFieldData(event.data, dataKey));
+
                 expandedRows = props.expandedRows ? { ...props.expandedRows } : {};
 
                 if (expandedRows[dataKeyValue] != null) {
                     delete expandedRows[dataKeyValue];
+
                     if (props.onRowCollapse) {
                         props.onRowCollapse({ originalEvent: event, data: event.data });
                     }
                 } else {
                     expandedRows[dataKeyValue] = true;
+
                     if (props.onRowExpand) {
                         props.onRowExpand({ originalEvent: event, data: event.data });
                     }
                 }
             } else {
                 let expandedRowIndex = findIndex(props.expandedRows, event.data);
+
                 expandedRows = props.expandedRows ? [...props.expandedRows] : [];
 
                 if (expandedRowIndex !== -1) {
                     expandedRows = expandedRows.filter((_, i) => i !== expandedRowIndex);
+
                     if (props.onRowCollapse) {
                         props.onRowCollapse({ originalEvent: event, data: event.data });
                     }
                 } else {
                     expandedRows.push(event.data);
+
                     if (props.onRowExpand) {
                         props.onRowExpand({ originalEvent: event, data: event.data });
                     }
@@ -562,6 +583,7 @@ export const TableBody = React.memo(
 
         const onRowDragStart = (e) => {
             const { originalEvent: event, index } = e;
+
             if (allowRowDrag(event)) {
                 rowDragging.current = true;
                 draggedRowIndex.current = index;
@@ -625,6 +647,7 @@ export const TableBody = React.memo(
             if (droppedRowIndex.current != null) {
                 let dropIndex = draggedRowIndex.current > droppedRowIndex.current ? droppedRowIndex.current : droppedRowIndex.current === 0 ? 0 : droppedRowIndex.current - 1;
                 let val = [...props.value];
+
                 ObjectUtils.reorderArray(val, draggedRowIndex.current, dropIndex);
 
                 if (props.onRowReorder) {
@@ -688,6 +711,7 @@ export const TableBody = React.memo(
                 } else {
                     let toggleable = allowMetaKeySelection(event);
                     let { originalEvent, ...data } = event;
+
                     anchorRowIndex.current = event.rowIndex;
                     rangeRowIndex.current = event.rowIndex;
                     anchorRowFirst.current = props.first;
@@ -718,6 +742,7 @@ export const TableBody = React.memo(
 
         const onCellMouseUp = (event) => {
             const isSameCell = event.rowIndex === anchorRowIndex.current && event.cellIndex === anchorCellIndex.current;
+
             if (allowCellDrag(event) && !isSameCell) {
                 onRangeSelection(event, 'cell');
             }
@@ -878,14 +903,22 @@ export const TableBody = React.memo(
 
         const createExpansion = (rowData, index, expanded, colSpan) => {
             if (expanded && !(isSubheaderGrouping && props.expandableRowGroups)) {
-                const content = ObjectUtils.getJSXElement(props.rowExpansionTemplate, rowData, { index });
                 const id = `${props.tableSelector}_content_${index}_expanded`;
+                const options = { index, customRendering: false };
+                let content = ObjectUtils.getJSXElement(props.rowExpansionTemplate, rowData, options);
 
-                return (
-                    <tr id={id} className="p-datatable-row-expansion" role="row">
+                // check if the user wants complete control of the rendering
+                if (!options.customRendering) {
+                    content = (
                         <td role="cell" colSpan={colSpan}>
                             {content}
                         </td>
+                    );
+                }
+
+                return (
+                    <tr id={id} className="p-datatable-row-expansion" role="row">
+                        {content}
                     </tr>
                 );
             }

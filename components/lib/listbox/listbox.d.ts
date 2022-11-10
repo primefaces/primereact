@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { SelectItemOptionsType } from '../selectitem/selectitem';
 import TooltipOptions from '../tooltip/tooltipoptions';
-import { VirtualScrollerProps, VirtualScroller } from '../virtualscroller';
+import { VirtualScroller, VirtualScrollerProps } from '../virtualscroller';
 
 type ListBoxOptionGroupTemplateType = React.ReactNode | ((option: any, index: number) => React.ReactNode);
 
 type ListBoxItemTemplateType = React.ReactNode | ((option: any) => React.ReactNode);
 
-type ListBoxFilterTemplateType = React.ReactNode | ((options: ListBoxFilterOptions) => React.ReactNode);
+type ListBoxFilterTemplateType = React.ReactNode | ((options: ListBoxFilterTemplateOptions) => React.ReactNode);
 
 type ListBoxOptionDisabledType = string | ((option: any) => boolean);
 
@@ -30,42 +30,55 @@ interface ListBoxFilterValueChangeParams {
     value: any;
 }
 
+interface ListBoxFilterTemplateOptions {
+    className: string;
+    disabled?: boolean;
+    element: HTMLDivElement;
+    filter?: string;
+    filterIconClassName: string;
+    filterInputChange?: React.ChangeEvent<HTMLInputElement>;
+    filterInputProps?: any;
+    filterOptions?: ListBoxFilterOptions;
+    filterPlaceholder?: string;
+    filterTemplate?: ListBoxFilterTemplateType;
+}
+
 interface ListBoxFilterOptions {
-    filter?: (event?: KeyboardEvent) => void;
+    filter?: (event?: React.ChangeEvent<HTMLInputElement>) => void;
     reset?: () => void;
 }
 
 export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
-    value?: any;
-    options?: SelectItemOptionsType;
-    optionLabel?: string;
-    optionValue?: string;
-    optionDisabled?: ListBoxOptionDisabledType;
-    optionGroupLabel?: string;
-    optionGroupChildren?: string;
-    optionGroupTemplate?: ListBoxOptionGroupTemplateType;
-    itemTemplate?: ListBoxItemTemplateType;
-    filterTemplate?: ListBoxFilterTemplateType;
-    listStyle?: object;
-    listClassName?: string;
-    virtualScrollerOptions?: VirtualScrollerProps;
-    disabled?: boolean;
+    ariaLabelledBy?: string;
+    children?: React.ReactNode;
     dataKey?: string;
-    multiple?: boolean;
-    metaKeySelection?: boolean;
+    disabled?: boolean;
     filter?: boolean;
     filterBy?: string;
-    filterValue?: string;
+    filterInputProps?: any;
+    filterLocale?: string;
     filterMatchMode?: string;
     filterPlaceholder?: string;
-    filterLocale?: string;
-    filterInputProps?: any;
+    filterTemplate?: ListBoxFilterTemplateType;
+    filterValue?: string;
+    itemTemplate?: ListBoxItemTemplateType;
+    listClassName?: string;
+    listStyle?: React.CSSProperties;
+    metaKeySelection?: boolean;
+    multiple?: boolean;
+    optionDisabled?: ListBoxOptionDisabledType;
+    optionGroupChildren?: string;
+    optionGroupLabel?: string;
+    optionGroupTemplate?: ListBoxOptionGroupTemplateType;
+    optionLabel?: string;
+    optionValue?: string;
+    options?: SelectItemOptionsType;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    ariaLabelledBy?: string;
+    value?: any;
+    virtualScrollerOptions?: VirtualScrollerProps;
     onChange?(e: ListBoxChangeParams): void;
     onFilterValueChange?(e: ListBoxFilterValueChangeParams): void;
-    children?: React.ReactNode;
 }
 
 export declare class ListBox extends React.Component<ListBoxProps, any> {

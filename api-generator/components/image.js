@@ -6,6 +6,18 @@ const ImageProps = [
         description: 'Controls the preview functionality.'
     },
     {
+        name: 'src',
+        type: 'string',
+        default: 'null',
+        description: 'Specifies the path to the image.'
+    },
+    {
+        name: 'zoomSrc',
+        type: 'string',
+        default: 'null',
+        description: 'Zoomed image that may be different than "src" image.'
+    },
+    {
         name: 'downloadable',
         type: 'boolean',
         default: 'false',

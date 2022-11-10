@@ -44,6 +44,7 @@ const DataTableColGroupDemo = () => {
 
     const lastYearTotal = () => {
         let total = 0;
+
         for (let sale of sales) {
             total += sale.lastYearProfit;
         }
@@ -53,6 +54,7 @@ const DataTableColGroupDemo = () => {
 
     const thisYearTotal = () => {
         let total = 0;
+
         for (let sale of sales) {
             total += sale.thisYearProfit;
         }
@@ -88,6 +90,7 @@ const DataTableColGroupDemo = () => {
             </Row>
         </ColumnGroup>
     );
+
     return (
         <div>
             <Head>

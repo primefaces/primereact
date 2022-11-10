@@ -19,6 +19,8 @@ export interface CarouselProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
     footer?: React.ReactNode;
     itemTemplate?(item: any): React.ReactNode;
     circular?: boolean;
+    showNavigators?: boolean;
+    showIndicators?: boolean;
     autoplayInterval?: number;
     numVisible?: number;
     numScroll?: number;

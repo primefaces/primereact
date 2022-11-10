@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { FilterService } from '../api/Api';
+import PrimeReact, { FilterMatchMode, FilterService } from '../api/Api';
 import { useEventListener } from '../hooks/Hooks';
 import { Paginator } from '../paginator/Paginator';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
@@ -82,10 +82,12 @@ export const TreeTable = React.forwardRef((props, ref) => {
 
         if (props.sortMode === 'multiple') {
             const metaKey = event.originalEvent.metaKey || event.originalEvent.ctrlKey;
+
             multiSortMeta = [...getMultiSortMeta()];
 
             if (multiSortMeta && multiSortMeta instanceof Array) {
                 const sortMeta = multiSortMeta.find((sortMeta) => sortMeta.field === sortField);
+
                 sortOrder = sortMeta ? getCalculatedSortOrder(sortMeta.order) : sortOrder;
             }
 
@@ -133,6 +135,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
 
     const addSortMeta = (meta, multiSortMeta) => {
         let index = -1;
+
         for (let i = 0; i < multiSortMeta.length; i++) {
             if (multiSortMeta[i].field === meta.field) {
                 index = i;
@@ -146,6 +149,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
 
     const removeSortMeta = (meta, multiSortMeta) => {
         let index = -1;
+
         for (let i = 0; i < multiSortMeta.length; i++) {
             if (multiSortMeta[i].field === meta.field) {
                 index = i;
@@ -169,7 +173,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
 
         if (columnSortable.current && columnSortable.current === 'custom' && columnSortFunction.current) {
             value = columnSortFunction.current({
-                rowData: value,
+                data,
                 field: getSortField(),
                 order: getSortOrder()
             });
@@ -178,7 +182,8 @@ export const TreeTable = React.forwardRef((props, ref) => {
                 const sortField = getSortField();
                 const value1 = ObjectUtils.resolveFieldData(node1.data, sortField);
                 const value2 = ObjectUtils.resolveFieldData(node2.data, sortField);
-                return ObjectUtils.sort(value1, value2, getSortOrder(), PrimeReact.locale, PrimeReact.nullSortOrder);
+
+                return compareValuesOnSort(value1, value2, getSortOrder());
             });
 
             for (let i = 0; i < value.length; i++) {
@@ -200,6 +205,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
 
     const sortMultipleNodes = (data, multiSortMeta) => {
         let value = [...data];
+
         value.sort((node1, node2) => {
             return multisortField(node1, node2, multiSortMeta, 0);
         });
@@ -216,21 +222,17 @@ export const TreeTable = React.forwardRef((props, ref) => {
     const multisortField = (node1, node2, multiSortMeta, index) => {
         const value1 = ObjectUtils.resolveFieldData(node1.data, multiSortMeta[index].field);
         const value2 = ObjectUtils.resolveFieldData(node2.data, multiSortMeta[index].field);
-        let result = null;
 
-        if (value1 == null && value2 != null) result = -1;
-        else if (value1 != null && value2 == null) result = 1;
-        else if (value1 == null && value2 == null) result = 0;
-        else {
-            if (value1 === value2) {
-                return multiSortMeta.length - 1 > index ? multisortField(node1, node2, multiSortMeta, index + 1) : 0;
-            } else {
-                if ((typeof value1 === 'string' || value1 instanceof String) && (typeof value2 === 'string' || value2 instanceof String)) return multiSortMeta[index].order * value1.localeCompare(value2, PrimeReact.locale, { numeric: true });
-                else result = value1 < value2 ? -1 : 1;
-            }
+        // check if they are equal handling dates and locales
+        if (ObjectUtils.compare(value1, value2, PrimeReact.locale) === 0) {
+            return multiSortMeta.length - 1 > index ? multisortField(node1, node2, multiSortMeta, index + 1) : 0;
         }
 
-        return multiSortMeta[index].order * result;
+        return compareValuesOnSort(value1, value2, multiSortMeta[index].order);
+    };
+
+    const compareValuesOnSort = (value1, value2, order) => {
+        return ObjectUtils.sort(value1, value2, order, PrimeReact.locale, PrimeReact.nullSortOrder);
     };
 
     const filter = (value, field, mode) => {
@@ -267,11 +269,13 @@ export const TreeTable = React.forwardRef((props, ref) => {
             if ((typeof filter === 'string' && filter.trim().length === 0) || (filter instanceof Array && filter.length === 0)) return true;
             else return false;
         }
+
         return true;
     };
 
     const onColumnResizeStart = (event) => {
         let containerLeft = DomHandler.getOffset(elementRef.current).left;
+
         resizeColumn.current = event.columnEl;
         resizeColumnProps.current = event.column;
         columnResizing.current = true;
@@ -282,6 +286,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
 
     const onColumnResize = (event) => {
         let containerLeft = DomHandler.getOffset(elementRef.current).left;
+
         DomHandler.addClass(elementRef.current, 'p-unselectable-text');
         resizerHelperRef.current.style.height = elementRef.current.offsetHeight + 'px';
         resizerHelperRef.current.style.top = 0 + 'px';
@@ -314,6 +319,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
                         resizeColGroup(scrollableFooterTable, resizeColumnIndex, newColumnWidth, nextColumnWidth);
                     } else {
                         resizeColumn.current.style.width = newColumnWidth + 'px';
+
                         if (nextColumn) {
                             nextColumn.style.width = nextColumnWidth + 'px';
                         }
@@ -325,11 +331,14 @@ export const TreeTable = React.forwardRef((props, ref) => {
                     let scrollableBodyTable = DomHandler.findSingle(scrollableView, 'table.p-treetable-scrollable-body-table');
                     let scrollableHeaderTable = DomHandler.findSingle(scrollableView, 'table.p-treetable-scrollable-header-table');
                     let scrollableFooterTable = DomHandler.findSingle(scrollableView, 'table.p-treetable-scrollable-footer-table');
+
                     scrollableBodyTable.style.width = scrollableBodyTable.offsetWidth + delta + 'px';
                     scrollableHeaderTable.style.width = scrollableHeaderTable.offsetWidth + delta + 'px';
+
                     if (scrollableFooterTable) {
                         scrollableFooterTable.style.width = scrollableHeaderTable.offsetWidth + delta + 'px';
                     }
+
                     let resizeColumnIndex = DomHandler.index(resizeColumn.current);
 
                     resizeColGroup(scrollableHeaderTable, resizeColumnIndex, newColumnWidth, null);
@@ -361,6 +370,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
     const findParentScrollableView = (column) => {
         if (column) {
             let parent = column.parentElement;
+
             while (parent && !DomHandler.hasClass(parent, 'p-treetable-scrollable-view')) {
                 parent = parent.parentElement;
             }
@@ -378,6 +388,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
             if (colGroup) {
                 let col = colGroup.children[resizeColumnIndex];
                 let nextCol = col.nextElementSibling;
+
                 col.style.width = newColumnWidth + 'px';
 
                 if (nextCol && nextColumnWidth) {
@@ -404,6 +415,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
 
         if (columnResizing.current) {
             event.preventDefault();
+
             return;
         }
 
@@ -418,6 +430,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
     const onColumnDragOver = (e) => {
         const event = e.originalEvent;
         const dropHeader = findParentHeader(event.currentTarget);
+
         if (props.reorderableColumns && draggedColumnEl.current && dropHeader) {
             event.preventDefault();
             let containerOffset = DomHandler.getOffset(elementRef.current);
@@ -449,6 +462,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
 
     const onColumnDragLeave = (e) => {
         const event = e.originalEvent;
+
         if (props.reorderableColumns && draggedColumnEl.current) {
             event.preventDefault();
             reorderIndicatorUpRef.current.style.display = 'none';
@@ -460,10 +474,12 @@ export const TreeTable = React.forwardRef((props, ref) => {
         const { originalEvent: event, column } = e;
 
         event.preventDefault();
+
         if (draggedColumnEl.current) {
             let dragIndex = DomHandler.index(draggedColumnEl.current);
             let dropIndex = DomHandler.index(findParentHeader(event.currentTarget));
             let allowDrop = dragIndex !== dropIndex;
+
             if (allowDrop && ((dropIndex - dragIndex === 1 && dropPosition.current === -1) || (dragIndex - dropIndex === 1 && dropPosition.current === 1))) {
                 allowDrop = false;
             }
@@ -485,6 +501,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
                 ObjectUtils.reorderArray(columns, dragColIndex, dropColIndex);
 
                 let columnOrder = [];
+
                 for (let column of columns) {
                     columnOrder.push(column.props.columnKey || column.props.field);
                 }
@@ -513,10 +530,12 @@ export const TreeTable = React.forwardRef((props, ref) => {
             return element;
         } else {
             let parent = element.parentElement;
+
             while (parent.nodeName !== 'TH') {
                 parent = parent.parentElement;
                 if (!parent) break;
             }
+
             return parent;
         }
     };
@@ -553,6 +572,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
         if (columns && columns.length) {
             for (let i = 0; i < columns.length; i++) {
                 let child = columns[i];
+
                 if (child.props.columnKey === key || child.props.field === key) {
                     return child;
                 }
@@ -568,8 +588,10 @@ export const TreeTable = React.forwardRef((props, ref) => {
         if (columns && columns.length) {
             if (props.reorderableColumns && columnOrderState) {
                 let orderedColumns = [];
+
                 for (let columnKey of columnOrderState) {
                     let column = findColumnByKey(columns, columnKey);
+
                     if (column) {
                         orderedColumns.push(column);
                     }
@@ -651,6 +673,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
                 //local
                 if (filterMeta) {
                     let filterMatchMode = filterMeta.matchMode || col.props.filterMatchMode || 'startsWith';
+
                     filterValue = filterMeta.value;
                     filterConstraint = filterMatchMode === 'custom' ? col.props.filterFunction : FilterService.filters[filterMatchMode];
                     options = {
@@ -665,6 +688,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
                     };
 
                     paramsWithoutNode = { filterField, filterValue, filterConstraint, isStrictMode, options };
+
                     if (
                         (isStrictMode && !(findFilteredNodes(copyNode, paramsWithoutNode) || isFilterMatched(copyNode, paramsWithoutNode))) ||
                         (!isStrictMode && !(isFilterMatched(copyNode, paramsWithoutNode) || findFilteredNodes(copyNode, paramsWithoutNode)))
@@ -680,9 +704,11 @@ export const TreeTable = React.forwardRef((props, ref) => {
                 //global
                 if (props.globalFilter && !globalMatch) {
                     let copyNodeForGlobal = { ...copyNode };
+
                     filterValue = props.globalFilter;
-                    filterConstraint = FilterService.filters['contains'];
+                    filterConstraint = FilterService.filters[props.globalFilterMatchMode];
                     paramsWithoutNode = { filterField, filterValue, filterConstraint, isStrictMode };
+
                     if (
                         (isStrictMode && (findFilteredNodes(copyNodeForGlobal, paramsWithoutNode) || isFilterMatched(copyNodeForGlobal, paramsWithoutNode))) ||
                         (!isStrictMode && (isFilterMatched(copyNodeForGlobal, paramsWithoutNode) || findFilteredNodes(copyNodeForGlobal, paramsWithoutNode)))
@@ -694,6 +720,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
             }
 
             let matches = localMatch;
+
             if (props.globalFilter) {
                 matches = localMatch && globalMatch;
             }
@@ -709,11 +736,15 @@ export const TreeTable = React.forwardRef((props, ref) => {
     const findFilteredNodes = (node, paramsWithoutNode) => {
         if (node) {
             let matched = false;
+
             if (node.children) {
                 let childNodes = [...node.children];
+
                 node.children = [];
+
                 for (let childNode of childNodes) {
                     let copyChildNode = { ...childNode };
+
                     if (isFilterMatched(copyChildNode, paramsWithoutNode)) {
                         matched = true;
                         node.children.push(copyChildNode);
@@ -730,6 +761,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
     const isFilterMatched = (node, { filterField, filterValue, filterConstraint, isStrictMode, options }) => {
         let matched = false;
         let dataFieldValue = ObjectUtils.resolveFieldData(node.data, filterField);
+
         if (filterConstraint(dataFieldValue, filterValue, props.filterLocale, options)) {
             matched = true;
         }
@@ -875,6 +907,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
         const frozenColumns = getFrozenColumns(columns);
         const scrollableColumns = frozenColumns ? getScrollableColumns(columns) : columns;
         let frozenView, scrollableView;
+
         if (frozenColumns) {
             frozenView = createScrollableView(value, frozenColumns, true, props.frozenHeaderColumnGroup, props.frozenFooterColumnGroup);
         }
@@ -971,79 +1004,80 @@ export const TreeTable = React.forwardRef((props, ref) => {
 TreeTable.displayName = 'TreeTable';
 TreeTable.defaultProps = {
     __TYPE: 'TreeTable',
-    id: null,
-    value: null,
-    header: null,
-    footer: null,
-    style: null,
-    className: null,
-    tableStyle: null,
-    tableClassName: null,
-    expandedKeys: null,
-    paginator: false,
-    paginatorPosition: 'bottom',
     alwaysShowPaginator: true,
-    paginatorClassName: null,
-    paginatorTemplate: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
-    paginatorLeft: null,
-    paginatorRight: null,
-    paginatorDropdownAppendTo: null,
-    pageLinkSize: 5,
-    rowsPerPageOptions: null,
-    currentPageReportTemplate: '({currentPage} of {totalPages})',
-    first: null,
-    rows: null,
-    totalRecords: null,
-    lazy: false,
-    sortField: null,
-    sortOrder: null,
-    multiSortMeta: null,
-    sortMode: 'single',
-    defaultSortOrder: 1,
-    removableSort: false,
-    selectionMode: null,
-    selectionKeys: null,
-    contextMenuSelectionKey: null,
-    metaKeySelection: true,
-    selectOnEdit: true,
-    propagateSelectionUp: true,
-    propagateSelectionDown: true,
     autoLayout: false,
-    rowClassName: null,
-    loading: false,
-    loadingIcon: 'pi pi-spinner',
-    tabIndex: 0,
-    scrollable: false,
-    scrollHeight: null,
-    reorderableColumns: false,
-    headerColumnGroup: null,
-    footerColumnGroup: null,
-    frozenHeaderColumnGroup: null,
-    frozenFooterColumnGroup: null,
-    frozenWidth: null,
-    resizableColumns: false,
+    className: null,
     columnResizeMode: 'fit',
+    contextMenuSelectionKey: null,
+    currentPageReportTemplate: '({currentPage} of {totalPages})',
+    defaultSortOrder: 1,
     emptyMessage: null,
-    filters: null,
-    globalFilter: null,
-    filterMode: 'lenient',
+    expandedKeys: null,
     filterDelay: 300,
     filterLocale: undefined,
-    rowHover: false,
-    showGridlines: false,
-    stripedRows: false,
-    onFilter: null,
-    onExpand: null,
-    onCollapse: null,
-    onToggle: null,
-    onPage: null,
-    onSort: null,
-    onSelect: null,
-    onUnselect: null,
-    onRowClick: null,
-    onSelectionChange: null,
-    onContextMenuSelectionChange: null,
-    onColumnResizeEnd: null,
+    filterMode: 'lenient',
+    filters: null,
+    first: null,
+    footer: null,
+    footerColumnGroup: null,
+    frozenFooterColumnGroup: null,
+    frozenHeaderColumnGroup: null,
+    frozenWidth: null,
+    globalFilter: null,
+    globalFilterMatchMode: FilterMatchMode.CONTAINS,
+    header: null,
+    headerColumnGroup: null,
+    id: null,
+    lazy: false,
+    loading: false,
+    loadingIcon: 'pi pi-spinner',
+    metaKeySelection: true,
+    multiSortMeta: null,
     onColReorder: null,
-    onContextMenu: null
+    onCollapse: null,
+    onColumnResizeEnd: null,
+    onContextMenu: null,
+    onContextMenuSelectionChange: null,
+    onExpand: null,
+    onFilter: null,
+    onPage: null,
+    onRowClick: null,
+    onSelect: null,
+    onSelectionChange: null,
+    onSort: null,
+    onToggle: null,
+    onUnselect: null,
+    pageLinkSize: 5,
+    paginator: false,
+    paginatorClassName: null,
+    paginatorDropdownAppendTo: null,
+    paginatorLeft: null,
+    paginatorPosition: 'bottom',
+    paginatorRight: null,
+    paginatorTemplate: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
+    propagateSelectionDown: true,
+    propagateSelectionUp: true,
+    removableSort: false,
+    reorderableColumns: false,
+    resizableColumns: false,
+    rowClassName: null,
+    rowHover: false,
+    rows: null,
+    rowsPerPageOptions: null,
+    scrollHeight: null,
+    scrollable: false,
+    selectOnEdit: true,
+    selectionKeys: null,
+    selectionMode: null,
+    showGridlines: false,
+    sortField: null,
+    sortMode: 'single',
+    sortOrder: null,
+    stripedRows: false,
+    style: null,
+    tabIndex: 0,
+    tableClassName: null,
+    tableStyle: null,
+    totalRecords: null,
+    value: null
 };

@@ -27,7 +27,7 @@ export interface MenuItem {
     visible?: boolean;
     target?: string;
     separator?: boolean;
-    style?: object;
+    style?: React.CSSProperties;
     className?: string;
     command?(e: MenuItemCommandParams): void;
     template?: MenuItemTemplateType;

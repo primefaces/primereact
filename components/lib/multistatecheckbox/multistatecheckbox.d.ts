@@ -8,7 +8,7 @@ type MultiStateCheckboxIconTemplateType = React.ReactNode | ((options: MultiStat
 
 interface MultiStateCheckboxOption {
     icon: IconType<MultiStateCheckboxProps>;
-    style: object;
+    style: React.CSSProperties;
     className: string;
     [key: string]: any;
 }

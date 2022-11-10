@@ -1,37 +1,77 @@
-import React, { useState } from 'react';
-import { Knob } from '../../components/lib/knob/Knob';
-import { DocActions } from '../../components/doc/common/docactions';
-import KnobDoc from '../../components/doc/knob';
-import { Button } from '../../components/lib/button/Button';
 import Head from 'next/head';
+import { DocActions } from '../../components/doc/common/docactions';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
+import { BasicDoc } from '../../components/doc/knob/basicdoc';
+import { ReadOnlyDoc } from '../../components/doc/knob/readonlydoc';
+import { DisabledDoc } from '../../components/doc/knob/disableddoc';
+import { MinMaxDoc } from '../../components/doc/knob/minmaxdoc';
+import { StepDoc } from '../../components/doc/knob/stepdoc';
+import { TemplateDoc } from '../../components/doc/knob/templatedoc';
+import { ImportDoc } from '../../components/doc/knob/importdoc';
+import { StrokeDoc } from '../../components/doc/knob/strokedoc';
+import { SizeDoc } from '../../components/doc/knob/sizedoc';
+import { ColorDoc } from '../../components/doc/knob/colordoc';
+import { ReactiveDoc } from '../../components/doc/knob/reactivedoc';
 
 const KnobDemo = () => {
-    const [value1, setValue1] = useState(0);
-    const [value2, setValue2] = useState(50);
-    const [value3, setValue3] = useState(75);
-    const [value4, setValue4] = useState(10);
-    const [value5, setValue5] = useState(40);
-    const [value6, setValue6] = useState(60);
-    const [value7, setValue7] = useState(40);
-    const [value8, setValue8] = useState(60);
-    const [value9, setValue9] = useState(50);
-    const [value10, setValue10] = useState(0);
-    const [disabledIncrementBtn, setDisabledIncrementBtn] = useState(false);
-    const [disabledDecrementBtn, setDisabledDecrementBtn] = useState(true);
-
-    const increment = () => {
-        const value = value10 + 1;
-        setValue10(value);
-        setDisabledIncrementBtn(value === 100);
-        setDisabledDecrementBtn(false);
-    };
-
-    const decrement = () => {
-        const value = value10 - 1;
-        setValue10(value);
-        setDisabledIncrementBtn(false);
-        setDisabledDecrementBtn(value === 0);
-    };
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'readonly',
+            label: 'Readonly',
+            component: ReadOnlyDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
+        },
+        {
+            id: 'minmax',
+            label: 'Min/Max',
+            component: MinMaxDoc
+        },
+        {
+            id: 'step',
+            label: 'Step',
+            component: StepDoc
+        },
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'stroke',
+            label: 'Stroke',
+            component: StrokeDoc
+        },
+        {
+            id: 'size',
+            label: 'Size',
+            component: SizeDoc
+        },
+        {
+            id: 'color',
+            label: 'Color',
+            component: ColorDoc
+        },
+        {
+            id: 'reactive',
+            label: 'Reactive Knob',
+            component: ReactiveDoc
+        }
+    ];
 
     return (
         <div>
@@ -48,7 +88,12 @@ const KnobDemo = () => {
                 <DocActions github="konb/index.js" />
             </div>
 
-            <div className="content-section implementation">
+            <div className="content-section doc">
+                <DocSections docs={docs} />
+                <DocSectionNav docs={docs} />
+            </div>
+
+            {/* <div className="content-section implementation">
                 <div className="card">
                     <div className="grid formgrid text-center">
                         <div className="field col-12 md:col-4">
@@ -98,7 +143,7 @@ const KnobDemo = () => {
                 </div>
             </div>
 
-            <KnobDoc />
+            <KnobDoc /> */}
         </div>
     );
 };

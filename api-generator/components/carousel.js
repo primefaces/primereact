@@ -54,6 +54,18 @@ const CarouselProps = [
         description: 'Defines if scrolling would be infinite.'
     },
     {
+        name: 'showIndicators',
+        type: 'boolean',
+        default: 'true',
+        description: 'Whether to display indicator container.'
+    },
+    {
+        name: 'showNavigators',
+        type: 'boolean',
+        default: 'true',
+        description: 'Whether to display navigation buttons in container.'
+    },
+    {
         name: 'autoplayInterval',
         type: 'number',
         default: 'null',

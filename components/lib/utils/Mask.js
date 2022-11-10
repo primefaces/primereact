@@ -26,6 +26,7 @@ export function mask(el, options) {
         if (typeof first === 'number') {
             begin = first;
             end = typeof last === 'number' ? last : begin;
+
             if (el.setSelectionRange) {
                 el.setSelectionRange(begin, end);
             } else if (el['createTextRange']) {
@@ -63,6 +64,7 @@ export function mask(el, options) {
         if (i < options.slotChar.length) {
             return options.slotChar.charAt(i);
         }
+
         return options.slotChar.charAt(0);
     };
 
@@ -72,11 +74,13 @@ export function mask(el, options) {
 
     const seekNext = (pos) => {
         while (++pos < len && !tests[pos]);
+
         return pos;
     };
 
     const seekPrev = (pos) => {
         while (--pos >= 0 && !tests[pos]);
+
         return pos;
     };
 
@@ -99,6 +103,7 @@ export function mask(el, options) {
                 j = seekNext(j);
             }
         }
+
         writeBuffer();
         caret(Math.max(firstNonMaskPos, begin));
     };
@@ -111,6 +116,7 @@ export function mask(el, options) {
                 j = seekNext(i);
                 t = buffer[i];
                 buffer[i] = c;
+
                 if (j < len && tests[j].test(t)) {
                     c = t;
                 } else {
@@ -123,13 +129,16 @@ export function mask(el, options) {
     const handleAndroidInput = (e) => {
         let curVal = el.value;
         let pos = caret();
+
         if (oldVal && oldVal.length && oldVal.length > curVal.length) {
             // a deletion or backspace happened
             checkVal(true);
             while (pos.begin > 0 && !tests[pos.begin - 1]) pos.begin--;
+
             if (pos.begin === 0) {
                 while (pos.begin < firstNonMaskPos && !tests[pos.begin]) pos.begin++;
             }
+
             caret(pos.begin, pos.begin);
         } else {
             checkVal(true);
@@ -153,6 +162,7 @@ export function mask(el, options) {
 
         if (el.value !== focusText) {
             let event = document.createEvent('HTMLEvents');
+
             event.initEvent('change', true, false);
             el.dispatchEvent(event);
         }
@@ -168,6 +178,7 @@ export function mask(el, options) {
             begin,
             end;
         let iPhone = /iphone/i.test(DomHandler.getUserAgent());
+
         oldVal = el.value;
 
         //backspace, delete, and escape get special treatment
@@ -221,8 +232,10 @@ export function mask(el, options) {
             }
 
             p = seekNext(pos.begin - 1);
+
             if (p < len) {
                 c = String.fromCharCode(k);
+
                 if (tests[p].test(c)) {
                     shiftR(p);
 
@@ -240,11 +253,13 @@ export function mask(el, options) {
                     } else {
                         caret(next);
                     }
+
                     if (pos.begin <= lastRequiredNonMaskPos) {
                         completed = isCompleted();
                     }
                 }
             }
+
             e.preventDefault();
         }
 
@@ -260,6 +275,7 @@ export function mask(el, options) {
 
     const clearBuffer = (start, end) => {
         let i;
+
         for (i = start; i < end && i < len; i++) {
             if (tests[i]) {
                 buffer[i] = getPlaceholder(i);
@@ -282,14 +298,17 @@ export function mask(el, options) {
         for (i = 0, pos = 0; i < len; i++) {
             if (tests[i]) {
                 buffer[i] = getPlaceholder(i);
+
                 while (pos++ < test.length) {
                     c = test.charAt(pos - 1);
+
                     if (tests[i].test(c)) {
                         buffer[i] = c;
                         lastMatch = i;
                         break;
                     }
                 }
+
                 if (pos > test.length) {
                     clearBuffer(i + 1, len);
                     break;
@@ -298,6 +317,7 @@ export function mask(el, options) {
                 if (buffer[i] === test.charAt(pos)) {
                     pos++;
                 }
+
                 if (i < partialPosition) {
                     lastMatch = i;
                 }
@@ -321,6 +341,7 @@ export function mask(el, options) {
             writeBuffer();
             el.value = el.value.substring(0, lastMatch + 1);
         }
+
         return partialPosition ? i : firstNonMaskPos;
     };
 
@@ -340,7 +361,9 @@ export function mask(el, options) {
             if (el !== document.activeElement) {
                 return;
             }
+
             writeBuffer();
+
             if (pos === options.mask.replace('?', '').length) {
                 caret(0, pos);
             } else {
@@ -364,8 +387,10 @@ export function mask(el, options) {
         }
 
         let pos = checkVal(true);
+
         caret(pos);
         updateModel(e);
+
         if (options.onComplete && isCompleted()) {
             options.onComplete({
                 originalEvent: e,
@@ -376,8 +401,10 @@ export function mask(el, options) {
 
     const getUnmaskedValue = () => {
         let unmaskedBuffer = [];
+
         for (let i = 0; i < buffer.length; i++) {
             let c = buffer[i];
+
             if (tests[i] && c !== getPlaceholder(i)) {
                 unmaskedBuffer.push(c);
             }
@@ -389,6 +416,7 @@ export function mask(el, options) {
     const updateModel = (e) => {
         if (options.onChange) {
             let val = getValue().replace(options.slotChar, '');
+
             options.onChange({
                 originalEvent: e,
                 value: defaultBuffer !== val ? val : ''
@@ -426,19 +454,24 @@ export function mask(el, options) {
         };
 
         let ua = DomHandler.getUserAgent();
+
         androidChrome = /chrome/i.test(ua) && /android/i.test(ua);
 
         let maskTokens = options.mask.split('');
+
         for (let i = 0; i < maskTokens.length; i++) {
             let c = maskTokens[i];
+
             if (c === '?') {
                 len--;
                 partialPosition = i;
             } else if (defs[c]) {
                 tests.push(new RegExp(defs[c]));
+
                 if (firstNonMaskPos === null) {
                     firstNonMaskPos = tests.length - 1;
                 }
+
                 if (i < partialPosition) {
                     lastRequiredNonMaskPos = tests.length - 1;
                 }
@@ -448,8 +481,10 @@ export function mask(el, options) {
         }
 
         buffer = [];
+
         for (let i = 0; i < maskTokens.length; i++) {
             let c = maskTokens[i];
+
             if (c !== '?') {
                 if (defs[c]) buffer.push(getPlaceholder(i));
                 else buffer.push(c);

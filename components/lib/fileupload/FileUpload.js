@@ -55,6 +55,7 @@ export const FileUpload = React.memo(
             if (bytes === 0) {
                 return '0 B';
             }
+
             let k = 1000,
                 dm = 3,
                 sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
@@ -70,11 +71,13 @@ export const FileUpload = React.memo(
             }
 
             let currentFiles = [];
+
             if (props.multiple) {
                 currentFiles = filesState ? [...filesState] : [];
             }
 
             let selectedFiles = event.dataTransfer ? event.dataTransfer.files : event.target.files;
+
             for (let i = 0; i < selectedFiles.length; i++) {
                 let file = selectedFiles[i];
 
@@ -82,6 +85,7 @@ export const FileUpload = React.memo(
                     if (isImage(file)) {
                         file.objectURL = window.URL.createObjectURL(file);
                     }
+
                     currentFiles.push(file);
                 }
             }
@@ -130,6 +134,7 @@ export const FileUpload = React.memo(
 
         const upload = (files) => {
             files = files || filesState;
+
             if (files && files.nativeEvent) {
                 files = filesState;
             }
@@ -167,6 +172,7 @@ export const FileUpload = React.memo(
                 xhr.upload.addEventListener('progress', (event) => {
                     if (event.lengthComputable) {
                         const progress = Math.round((event.loaded * 100) / event.total);
+
                         setProgressState(progress);
 
                         if (props.onProgress) {
@@ -321,6 +327,7 @@ export const FileUpload = React.memo(
             const label = iconOnly ? <span className={labelClassName} dangerouslySetInnerHTML={{ __html: '&nbsp;' }} /> : <span className={labelClassName}>{chooseButtonLabel}</span>;
             const input = <input ref={fileInputRef} type="file" onChange={onFileSelect} multiple={props.multiple} accept={props.accept} disabled={chooseDisabled} />;
             const icon = IconUtils.getJSXIcon(_icon || 'pi pi-fw pi-plus', { className: 'p-button-icon p-button-icon-left p-clickable' }, { props });
+
             return (
                 <span className={chooseClassName} style={style} onClick={choose} onKeyDown={onKeyDown} onFocus={onFocus} onBlur={onBlur} tabIndex={0}>
                     {input}

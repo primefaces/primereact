@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Chip default 1`] = `
+<div>
+  <div
+    class="p-chip p-component"
+  />
+</div>
+`;
+
+exports[`Chip icon 1`] = `
+<div>
+  <div
+    class="p-chip p-component"
+  >
+    <span
+      class="p-chip-icon pi pi-check"
+    />
+  </div>
+</div>
+`;
+
+exports[`Chip image 1`] = `
+<div>
+  <div
+    class="p-chip p-component p-chip-image"
+  >
+    <img
+      alt="chip"
+      src="http://google.com/my.png"
+    />
+  </div>
+</div>
+`;
+
+exports[`Chip image and alt 1`] = `
+<div>
+  <div
+    class="p-chip p-component p-chip-image"
+  >
+    <img
+      alt="jest"
+      src="http://google.com/my.png"
+    />
+  </div>
+</div>
+`;
+
+exports[`Chip label 1`] = `
+<div>
+  <div
+    class="p-chip p-component"
+  >
+    <span
+      class="p-chip-text"
+    >
+      jest
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Chip when removable is true it returns with remove icon: after remove 1`] = `<div />`;
+
+exports[`Chip when removable is true it returns with remove icon: before remove 1`] = `
+<div>
+  <div
+    class="p-chip p-component"
+  >
+    <span
+      class="p-chip-remove-icon pi pi-times-circle"
+      tabindex="0"
+    />
+  </div>
+</div>
+`;
+
+exports[`Chip when removable is true the chip is removed when ENTER is pressed: after remove 1`] = `<div />`;
+
+exports[`Chip when removable is true the chip is removed when ENTER is pressed: before remove 1`] = `
+<div>
+  <div
+    class="p-chip p-component"
+  >
+    <span
+      class="p-chip-remove-icon pi pi-times-circle"
+      tabindex="0"
+    />
+  </div>
+</div>
+`;

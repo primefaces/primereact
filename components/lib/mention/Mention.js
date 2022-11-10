@@ -69,6 +69,7 @@ export const Mention = React.memo(
             const { key, index } = triggerState;
             const value = inputRef.current.value;
             const position = DomHandler.getCursorOffset(inputRef.current, value.substring(0, index - 1), value.substring(index), key);
+
             overlayRef.current.style.transformOrigin = 'top';
             overlayRef.current.style.left = `calc(${position.left}px + 1rem)`;
             overlayRef.current.style.top = `calc(${position.top}px + 1.2rem)`;
@@ -106,6 +107,7 @@ export const Mention = React.memo(
         const getLatestTrigger = (value, start) => {
             if (Array.isArray(props.trigger)) {
                 let latestTrigger = {};
+
                 props.trigger.forEach((t) => {
                     const index = value.substring(0, start).lastIndexOf(t);
 
@@ -138,6 +140,7 @@ export const Mention = React.memo(
 
             if (key === ' ') {
                 hide();
+
                 return;
             }
 
@@ -145,6 +148,7 @@ export const Mention = React.memo(
 
             if (currentTrigger && currentTrigger.index > -1) {
                 const query = value.substring(currentTrigger.index, selectionStart);
+
                 timeout.current = setTimeout(() => {
                     search(event, query, currentTrigger);
                 }, props.delay);
@@ -172,6 +176,7 @@ export const Mention = React.memo(
 
             if (currentText.trim() !== selectedText) {
                 let diff = 0;
+
                 while (diff < selectedText.length) {
                     const s_c = selectedText.charAt(diff);
                     const c_c = currentText.charAt(diff);
@@ -188,6 +193,7 @@ export const Mention = React.memo(
             }
 
             const cursorStart = triggerState.index + selectedText.length + 1;
+
             inputRef.current.setSelectionRange(cursorStart, cursorStart);
 
             hide();
@@ -198,6 +204,7 @@ export const Mention = React.memo(
         const formatValue = (value) => {
             if (value) {
                 const field = Array.isArray(props.field) ? props.field[props.trigger.findIndex((f) => f === triggerState.key)] : props.field;
+
                 return field ? ObjectUtils.resolveFieldData(value, field) : value;
             }
 
@@ -247,6 +254,7 @@ export const Mention = React.memo(
                     case 40:
                         if (highlightItem) {
                             let nextElement = highlightItem.nextElementSibling;
+
                             if (nextElement) {
                                 DomHandler.addClass(nextElement, 'p-highlight');
                                 DomHandler.removeClass(highlightItem, 'p-highlight');
@@ -254,6 +262,7 @@ export const Mention = React.memo(
                             }
                         } else {
                             highlightItem = DomHandler.findSingle(overlayRef.current, 'li');
+
                             if (highlightItem) {
                                 DomHandler.addClass(highlightItem, 'p-highlight');
                             }
@@ -266,6 +275,7 @@ export const Mention = React.memo(
                     case 38:
                         if (highlightItem) {
                             let previousElement = highlightItem.previousElementSibling;
+
                             if (previousElement) {
                                 DomHandler.addClass(previousElement, 'p-highlight');
                                 DomHandler.removeClass(highlightItem, 'p-highlight');
@@ -280,6 +290,7 @@ export const Mention = React.memo(
                     case 8:
                         const { value, selectionStart } = event.target;
                         const key = value.substring(selectionStart - 1, selectionStart);
+
                         if (key === triggerState.key) {
                             hide();
                         }
@@ -413,21 +424,7 @@ export const Mention = React.memo(
 
         return (
             <div ref={elementRef} id={props.id} className={className} style={props.style}>
-                <InputTextarea
-                    ref={inputRef}
-                    id={props.inputId}
-                    aria-labelledby={props['aria-labelledby']}
-                    aria-label={props['aria-label']}
-                    className={inputClassName}
-                    style={props.inputStyle}
-                    {...inputProps}
-                    onFocus={onFocus}
-                    onBlur={onBlur}
-                    onKeyDown={onKeyDown}
-                    onInput={onInput}
-                    onKeyUp={onKeyUp}
-                    onChange={onChange}
-                />
+                <InputTextarea ref={inputRef} id={props.inputId} className={inputClassName} style={props.inputStyle} {...inputProps} onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown} onInput={onInput} onKeyUp={onKeyUp} onChange={onChange} />
                 {panel}
             </div>
         );
@@ -437,33 +434,31 @@ export const Mention = React.memo(
 Mention.displayName = 'Mention';
 Mention.defaultProps = {
     __TYPE: 'Mention',
+    autoHighlight: true,
+    className: null,
+    delay: 0,
+    field: null,
+    footerTemplate: null,
+    headerTemplate: null,
     id: null,
+    inputClassName: null,
     inputId: null,
     inputRef: null,
-    style: null,
-    className: null,
-    trigger: '@',
-    suggestions: null,
-    field: null,
     inputStyle: null,
-    inputClassName: null,
+    itemTemplate: null,
     panelClassName: null,
     panelStyle: null,
     scrollHeight: '200px',
-    autoHighlight: true,
-    delay: 0,
-    headerTemplate: null,
-    footerTemplate: null,
-    itemTemplate: null,
-    'aria-label': null,
-    'aria-labelledby': null,
+    style: null,
+    suggestions: null,
     transitionOptions: null,
+    trigger: '@',
+    onBlur: null,
     onChange: null,
+    onFocus: null,
+    onHide: null,
     onInput: null,
     onSearch: null,
     onSelect: null,
-    onFocus: null,
-    onBlur: null,
-    onShow: null,
-    onHide: null
+    onShow: null
 };

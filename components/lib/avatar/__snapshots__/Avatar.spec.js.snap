@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Avatar badge 1`] = `
+<div>
+  <div
+    class="p-avatar p-component p-avatar-image p-avatar-xl"
+  >
+    <img
+      alt="avatar"
+      src="user.png"
+    />
+    <span
+      class="p-badge p-component p-badge-no-gutter p-badge-danger"
+    >
+      4
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Avatar default 1`] = `
+<div>
+  <div
+    class="p-avatar p-component"
+  />
+</div>
+`;
+
+exports[`Avatar icon 1`] = `
+<div>
+  <div
+    class="p-avatar p-component"
+  >
+    <span
+      class="p-avatar-icon pi pi-search"
+    />
+  </div>
+</div>
+`;
+
+exports[`Avatar image 1`] = `
+<div>
+  <div
+    class="p-avatar p-component p-avatar-image"
+  >
+    <img
+      alt="avatar"
+      src="user.png"
+    />
+  </div>
+</div>
+`;
+
+exports[`Avatar label 1`] = `
+<div>
+  <div
+    class="p-avatar p-component"
+  >
+    <span
+      class="p-avatar-text"
+    >
+      P
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Avatar shape cirle 1`] = `
+<div>
+  <div
+    class="p-avatar p-component"
+  />
+</div>
+`;
+
+exports[`Avatar shape square 1`] = `
+<div>
+  <div
+    class="p-avatar p-component"
+  />
+</div>
+`;
+
+exports[`Avatar size large 1`] = `
+<div>
+  <div
+    class="p-avatar p-component p-avatar-lg"
+  />
+</div>
+`;
+
+exports[`Avatar size xlarge 1`] = `
+<div>
+  <div
+    class="p-avatar p-component p-avatar-xl"
+  />
+</div>
+`;
+
+exports[`Avatar templating 1`] = `
+<div>
+  <div
+    class="p-avatar p-component"
+  >
+    Content
+  </div>
+</div>
+`;

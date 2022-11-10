@@ -26,12 +26,14 @@ const PrimeReactChart = React.memo(
                 options: props.options,
                 plugins: props.plugins
             };
+
             if (ChartJS) {
                 // GitHub #3059 loaded by script only
                 chartRef.current = new ChartJS(canvasRef.current, configuration);
             } else {
                 import('chart.js/auto').then((module) => {
                     destroyChart();
+
                     if (module) {
                         if (module.default) {
                             // WebPack

@@ -12,6 +12,7 @@ export const Message = React.memo(
 
             const text = ObjectUtils.getJSXElement(props.text, props);
             let iconValue = props.icon;
+
             if (!iconValue) {
                 iconValue = classNames('pi', {
                     'pi-info-circle': props.severity === 'info',
@@ -20,6 +21,7 @@ export const Message = React.memo(
                     'pi-check': props.severity === 'success'
                 });
             }
+
             const icon = IconUtils.getJSXIcon(iconValue, { className: 'p-inline-message-icon' }, { props });
 
             return (

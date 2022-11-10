@@ -74,6 +74,7 @@ export const Editor = React.memo(
                 let firstChild = contentRef.current.children[0];
                 let html = firstChild ? firstChild.innerHTML : null;
                 let text = quill.current.getText();
+
                 if (html === '<p><br></p>') {
                     html = null;
                 }
@@ -82,10 +83,20 @@ export const Editor = React.memo(
                 if (source === 'api') {
                     const htmlValue = contentRef.current.children[0];
                     const editorValue = document.createElement('div');
+
                     editorValue.innerHTML = props.value || '';
+
                     // this is necessary because Quill rearranged style elements
                     if (DomHandler.isEqualElement(htmlValue, editorValue)) {
                         return;
+                    }
+                }
+
+                if (props.maxLength) {
+                    const length = quill.current.getLength();
+
+                    if (length > props.maxLength) {
+                        quill.current.deleteText(props.maxLength, length);
                     }
                 }
 
@@ -210,5 +221,6 @@ Editor.defaultProps = {
     headerTemplate: null,
     onTextChange: null,
     onSelectionChange: null,
-    onLoad: null
+    onLoad: null,
+    maxLength: null
 };

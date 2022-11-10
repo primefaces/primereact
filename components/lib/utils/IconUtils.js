@@ -9,6 +9,7 @@ export default class IconUtils {
         if (icon !== null) {
             const iconType = typeof icon;
             const className = classNames(iconProps.className, iconType === 'string' && icon);
+
             content = <span {...iconProps} className={className}></span>;
 
             if (iconType !== 'string') {

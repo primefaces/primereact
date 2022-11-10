@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Tooltip } from '../tooltip/Tooltip';
 import { ariaLabel } from '../api/Api';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { Tooltip } from '../tooltip/Tooltip';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const TriStateCheckbox = React.memo(
     React.forwardRef((props, ref) => {
@@ -16,6 +16,7 @@ export const TriStateCheckbox = React.memo(
 
         const toggle = (event) => {
             let newValue;
+
             if (props.value === null || props.value === undefined) newValue = true;
             else if (props.value === true) newValue = false;
             else if (props.value === false) newValue = null;
@@ -57,6 +58,7 @@ export const TriStateCheckbox = React.memo(
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = ObjectUtils.findDiffKeys(props, TriStateCheckbox.defaultProps);
+        const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames('p-tristatecheckbox p-checkbox p-component', props.className);
         const boxClassName = classNames('p-checkbox-box', {
             'p-highlight': (props.value || !props.value) && props.value !== null,
@@ -73,17 +75,7 @@ export const TriStateCheckbox = React.memo(
         return (
             <>
                 <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick}>
-                    <div
-                        className={boxClassName}
-                        tabIndex={props.tabIndex}
-                        onFocus={onFocus}
-                        onBlur={onBlur}
-                        onKeyDown={onKeyDown}
-                        role="checkbox"
-                        aria-checked={ariaChecked}
-                        aria-labelledby={props['aria-labelledby']}
-                        aria-label={props['aria-label']}
-                    >
+                    <div className={boxClassName} tabIndex={props.tabIndex} onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown} role="checkbox" aria-checked={ariaChecked} {...ariaProps}>
                         <span className={iconClassName}></span>
                     </div>
                     {focusedState && (
@@ -108,8 +100,6 @@ TriStateCheckbox.defaultProps = {
     disabled: false,
     readOnly: false,
     tabIndex: '0',
-    'aria-label': null,
-    'aria-labelledby': null,
     tooltip: null,
     tooltipOptions: null,
     onChange: null

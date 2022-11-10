@@ -35,10 +35,10 @@ export interface PickListProps {
     target?: any[];
     sourceHeader?: React.ReactNode;
     targetHeader?: React.ReactNode;
-    style?: object;
+    style?: React.CSSProperties;
     className?: string;
-    sourceStyle?: object;
-    targetStyle?: object;
+    sourceStyle?: React.CSSProperties;
+    targetStyle?: React.CSSProperties;
     sourceSelection?: any;
     targetSelection?: any;
     showSourceControls?: boolean;

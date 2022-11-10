@@ -40,16 +40,20 @@ export const Captcha = React.memo(
 
         const addRecaptchaScript = () => {
             recaptchaScript.current = null;
+
             if (!window.grecaptcha) {
                 let head = document.head || document.getElementsByTagName('head')[0];
                 let script = document.createElement('script');
+
                 script.src = 'https://www.google.com/recaptcha/api.js?render=explicit';
                 script.async = true;
                 script.defer = true;
+
                 script.onload = () => {
                     if (!window.grecaptcha) {
                         // eslint-disable-next-line no-console
                         console.warn('Recaptcha is not loaded');
+
                         return;
                     }
 
@@ -57,6 +61,7 @@ export const Captcha = React.memo(
                         init();
                     });
                 };
+
                 recaptchaScript.current = script;
 
                 head.appendChild(recaptchaScript.current);

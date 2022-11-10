@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { InputText } from '../inputtext/InputText';
-import { classNames, DomHandler } from '../utils/Utils';
+import { Tooltip } from '../tooltip/Tooltip';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const TreeTableHeader = React.memo((props) => {
     const filterTimeout = React.useRef(null);
@@ -8,6 +9,7 @@ export const TreeTableHeader = React.memo((props) => {
     const onHeaderClick = (event, column) => {
         if (column.props.sortable) {
             const targetNode = event.target;
+
             if (
                 DomHandler.hasClass(targetNode, 'p-sortable-column') ||
                 DomHandler.hasClass(targetNode, 'p-column-title') ||
@@ -105,6 +107,7 @@ export const TreeTableHeader = React.memo((props) => {
             }
 
             let filterValue = e.target.value;
+
             filterTimeout.current = setTimeout(() => {
                 props.onFilter({
                     value: filterValue,
@@ -131,6 +134,7 @@ export const TreeTableHeader = React.memo((props) => {
     const getAriaSort = (column, sorted, sortOrder) => {
         if (column.props.sortable) {
             let sortIcon = sorted ? (sortOrder < 0 ? 'pi-sort-down' : 'pi-sort-up') : 'pi-sort';
+
             if (sortIcon === 'pi-sort-down') return 'descending';
             else if (sortIcon === 'pi-sort-up') return 'ascending';
             else return 'none';
@@ -199,6 +203,7 @@ export const TreeTableHeader = React.memo((props) => {
                 </th>
             );
         } else {
+            const headerCellRef = React.createRef(null);
             const sortMetaDataIndex = getMultiSortMetaDataIndex(column);
             const multiSortMetaData = sortMetaDataIndex !== -1 ? props.multiSortMeta[sortMetaDataIndex] : null;
             const singleSorted = column.props.field === props.sortField;
@@ -219,31 +224,37 @@ export const TreeTableHeader = React.memo((props) => {
                 'p-resizable-column': props.resizableColumns && getColumnProp(column, 'resizeable')
             });
 
+            const headerTooltip = column.props.headerTooltip;
+            const hasTooltip = ObjectUtils.isNotEmpty(headerTooltip);
+
             const resizer = createResizer(column);
 
             return (
-                <th
-                    key={column.columnKey || column.field || options.index}
-                    className={className}
-                    style={column.props.headerStyle || column.props.style}
-                    tabIndex={column.props.sortable ? props.tabIndex : null}
-                    onClick={(e) => onHeaderClick(e, column)}
-                    onMouseDown={(e) => onHeaderMouseDown(e, column)}
-                    onKeyDown={(e) => onHeaderKeyDown(e, column)}
-                    rowSpan={column.props.rowSpan}
-                    colSpan={column.props.colSpan}
-                    aria-sort={ariaSortData}
-                    onDragStart={(e) => onDragStart(e, column)}
-                    onDragOver={(e) => onDragOver(e, column)}
-                    onDragLeave={(e) => onDragLeave(e, column)}
-                    onDrop={(e) => onDrop(e, column)}
-                >
-                    {resizer}
-                    <span className="p-column-title">{column.props.header}</span>
-                    {sortIconElement}
-                    {sortBadge}
-                    {filterElement}
-                </th>
+                <React.Fragment key={column.columnKey || column.field || options.index}>
+                    <th
+                        ref={headerCellRef}
+                        className={className}
+                        style={column.props.headerStyle || column.props.style}
+                        tabIndex={column.props.sortable ? props.tabIndex : null}
+                        onClick={(e) => onHeaderClick(e, column)}
+                        onMouseDown={(e) => onHeaderMouseDown(e, column)}
+                        onKeyDown={(e) => onHeaderKeyDown(e, column)}
+                        rowSpan={column.props.rowSpan}
+                        colSpan={column.props.colSpan}
+                        aria-sort={ariaSortData}
+                        onDragStart={(e) => onDragStart(e, column)}
+                        onDragOver={(e) => onDragOver(e, column)}
+                        onDragLeave={(e) => onDragLeave(e, column)}
+                        onDrop={(e) => onDrop(e, column)}
+                    >
+                        {resizer}
+                        <span className="p-column-title">{column.props.header}</span>
+                        {sortIconElement}
+                        {sortBadge}
+                        {filterElement}
+                    </th>
+                    {hasTooltip && <Tooltip target={headerCellRef} content={headerTooltip} {...column.props.headerTooltipOptions} />}
+                </React.Fragment>
             );
         }
     };

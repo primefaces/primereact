@@ -1,17 +1,18 @@
 import * as React from 'react';
+import { ariaLabel } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
 import { classNames, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 
 export const AccordionTab = () => {};
 
+const shouldUseTab = (tab) => tab && tab.props.__TYPE === 'AccordionTab';
+
 export const Accordion = React.forwardRef((props, ref) => {
     const [idState, setIdState] = React.useState(props.id);
     const [activeIndexState, setActiveIndexState] = React.useState(props.activeIndex);
     const elementRef = React.useRef(null);
     const activeIndex = props.onTabChange ? props.activeIndex : activeIndexState;
-
-    const shouldUseTab = (tab) => tab && tab.props.__TYPE === 'AccordionTab';
 
     const onTabHeaderClick = (event, tab, index) => {
         if (!tab.props.disabled) {
@@ -20,12 +21,14 @@ export const Accordion = React.forwardRef((props, ref) => {
 
             if (props.multiple) {
                 const indexes = activeIndex || [];
+
                 newActiveIndex = selected ? indexes.filter((i) => i !== index) : [...indexes, index];
             } else {
                 newActiveIndex = selected ? null : index;
             }
 
             const callback = selected ? props.onTabClose : props.onTabOpen;
+
             callback && callback({ originalEvent: event, index: index });
 
             if (props.onTabChange) {
@@ -56,6 +59,10 @@ export const Accordion = React.forwardRef((props, ref) => {
         }
     });
 
+    if (!idState) {
+        return null;
+    }
+
     const createTabHeader = (tab, selected, index) => {
         const style = { ...(tab.props.style || {}), ...(tab.props.headerStyle || {}) };
         const className = classNames(
@@ -69,13 +76,14 @@ export const Accordion = React.forwardRef((props, ref) => {
         );
         const headerId = idState + '_header_' + index;
         const ariaControls = idState + '_content_' + index;
-        const tabIndex = tab.props.disabled ? -1 : null;
+        const tabIndex = tab.props.disabled ? -1 : tab.props.tabIndex;
         const header = tab.props.headerTemplate ? ObjectUtils.getJSXElement(tab.props.headerTemplate, tab.props) : <span className="p-accordion-header-text">{tab.props.header}</span>;
         const icon = IconUtils.getJSXIcon(selected ? props.collapseIcon : props.expandIcon, { className: 'p-accordion-toggle-icon' }, { props, selected });
+        const label = selected ? ariaLabel('collapseLabel') : ariaLabel('expandLabel');
 
         return (
             <div className={className} style={style}>
-                <a href={'#' + ariaControls} id={headerId} className="p-accordion-header-link" aria-controls={ariaControls} role="tab" aria-expanded={selected} onClick={(e) => onTabHeaderClick(e, tab, index)} tabIndex={tabIndex}>
+                <a href={'#' + ariaControls} id={headerId} className="p-accordion-header-link" aria-controls={ariaControls} role="tab" aria-expanded={selected} onClick={(e) => onTabHeaderClick(e, tab, index)} tabIndex={tabIndex} aria-label={label}>
                     {icon}
                     {header}
                 </a>
@@ -139,15 +147,16 @@ export const Accordion = React.forwardRef((props, ref) => {
 AccordionTab.displayName = 'AccordionTab';
 AccordionTab.defaultProps = {
     __TYPE: 'AccordionTab',
-    header: null,
-    disabled: false,
-    style: null,
     className: null,
-    headerStyle: null,
-    headerClassName: null,
-    headerTemplate: null,
+    contentClassName: null,
     contentStyle: null,
-    contentClassName: null
+    disabled: false,
+    header: null,
+    headerClassName: null,
+    headerStyle: null,
+    headerTemplate: null,
+    style: null,
+    tabIndex: 0
 };
 
 Accordion.displayName = 'Accordion';

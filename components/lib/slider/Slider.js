@@ -105,6 +105,7 @@ export const Slider = React.memo(
 
         const updateDomData = () => {
             const rect = elementRef.current.getBoundingClientRect();
+
             initX.current = rect.left + DomHandler.getWindowScrollLeft();
             initY.current = rect.top + DomHandler.getWindowScrollTop();
             barWidth.current = elementRef.current.offsetWidth;
@@ -197,9 +198,8 @@ export const Slider = React.memo(
                     aria-valuemin={props.min}
                     aria-valuemax={props.max}
                     aria-valuenow={leftValue || bottomValue}
-                    aria-labelledby={props['aria-labelledby']}
-                    aria-label={props['aria-label']}
                     aria-orientation={props.orientation}
+                    {...ariaProps}
                 ></span>
             );
         };
@@ -244,6 +244,7 @@ export const Slider = React.memo(
         }));
 
         const otherProps = ObjectUtils.findDiffKeys(props, Slider.defaultProps);
+        const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames('p-slider p-component', props.className, {
             'p-disabled': props.disabled,
             'p-slider-horizontal': horizontal,
@@ -274,7 +275,5 @@ Slider.defaultProps = {
     disabled: false,
     tabIndex: 0,
     onChange: null,
-    onSlideEnd: null,
-    'aria-label': null,
-    'aria-labelledby': null
+    onSlideEnd: null
 };

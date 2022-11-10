@@ -24,6 +24,7 @@ export const SelectButtonItem = React.memo((props) => {
 
     const onKeyDown = (event) => {
         const keyCode = event.which;
+
         if (keyCode === 32) {
             onClick(event);
             event.preventDefault();

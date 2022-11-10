@@ -19,6 +19,7 @@ export const PanelMenu = React.memo(
                     return props.model.filter((item) => item.expanded);
                 } else {
                     let activeItem = null;
+
                     props.model.forEach((item) => {
                         if (item.expanded) {
                             if (!activeItem) activeItem = item;
@@ -36,6 +37,7 @@ export const PanelMenu = React.memo(
         const onItemClick = (event, item) => {
             if (item.disabled) {
                 event.preventDefault();
+
                 return;
             }
 
@@ -96,6 +98,7 @@ export const PanelMenu = React.memo(
             if (item.visible === false) {
                 return null;
             }
+
             const key = item.label + '_' + index;
             const active = isItemActive(item);
             const className = classNames('p-panelmenu-panel', item.className);

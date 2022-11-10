@@ -13,6 +13,7 @@ const TreeDemo = () => {
 
     const expandAll = () => {
         let _expandedKeys = {};
+
         for (let node of nodes) {
             expandNode(node, _expandedKeys);
         }

@@ -29,6 +29,7 @@ const ThemeSection = (props) => {
 
     const changeTheme = (name, color) => {
         let newTheme = name + '-' + (props.dark ? 'dark' : 'light') + '-' + color;
+
         props.onThemeChange(newTheme);
     };
 
@@ -42,6 +43,7 @@ const ThemeSection = (props) => {
     const getCustomers = (data) => {
         return [...(data || [])].map((d) => {
             d.date = new Date(d.date);
+
             return d;
         });
     };
@@ -61,6 +63,7 @@ const ThemeSection = (props) => {
     const onGlobalFilterChange = (e) => {
         const value = e.target.value;
         let _filters = { ...filters };
+
         _filters['global'].value = value;
 
         setFilters(_filters);
@@ -96,6 +99,7 @@ const ThemeSection = (props) => {
 
     const representativeBodyTemplate = (rowData) => {
         const representative = rowData.representative;
+
         return (
             <React.Fragment>
                 <img

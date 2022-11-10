@@ -20,6 +20,7 @@ const ProgressBarDemo = () => {
 
     useEffect(() => {
         let val = value1;
+
         interval.current = setInterval(() => {
             val += Math.floor(Math.random() * 10) + 1;
 

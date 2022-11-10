@@ -6,6 +6,7 @@ interface TabPanelHeaderTemplateOptions {
     className: string;
     titleClassName: string;
     onClick(event: React.MouseEvent<HTMLElement>): void;
+    onKeyDown(event: React.KeyboardEvent<HTMLElement>): void;
     leftIconElement: JSX.Element;
     titleElement: JSX.Element;
     rightIconElement: JSX.Element;
@@ -23,11 +24,11 @@ export interface TabPanelProps {
     rightIcon?: string;
     disabled?: boolean;
     closable?: boolean;
-    style?: object;
+    style?: React.CSSProperties;
     className?: string;
-    headerStyle?: object;
+    headerStyle?: React.CSSProperties;
     headerClassName?: string;
-    contentStyle?: object;
+    contentStyle?: React.CSSProperties;
     contentClassName?: string;
     children?: React.ReactNode;
 }
@@ -46,13 +47,15 @@ interface TabViewTabCloseParams {
 
 export interface TabViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     activeIndex?: number;
+    children?: React.ReactNode;
+    panelContainerClassName?: string;
+    panelContainerStyle?: React.CSSProperties;
     renderActiveOnly?: boolean;
     scrollable?: boolean;
-    panelContainerStyle?: object;
-    panelContainerClassName?: string;
+    onBeforeTabChange?(e: TabViewTabChangeParams): void;
+    onBeforeTabClose?(e: TabViewTabCloseParams): void;
     onTabChange?(e: TabViewTabChangeParams): void;
     onTabClose?(e: TabViewTabCloseParams): void;
-    children?: React.ReactNode;
 }
 
 // tslint:disable-next-line:max-classes-per-file

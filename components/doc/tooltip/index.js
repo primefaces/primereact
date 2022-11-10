@@ -1,8 +1,8 @@
 import React, { memo } from 'react';
-import { TabView, TabPanel } from '../../lib/tabview/TabView';
-import { useLiveEditorTabs } from '../common/liveeditor';
+import { TabPanel, TabView } from '../../lib/tabview/TabView';
 import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
+import { useLiveEditorTabs } from '../common/liveeditor';
 
 const TooltipDoc = memo(() => {
     const sources = {
@@ -581,7 +581,7 @@ import { Tooltip } from 'primereact/tooltip';
                     </CodeHighlight>
 
                     <h5>Events</h5>
-                    <p>Tooltip gets displayed on hover event of its target by default, other option is the focus event to display and blur to hide.</p>
+                    <p>Tooltip gets displayed on hover event of its target by default, other option is the focus event to display and blur to hide. You can set it to 'both' to allow for both hover and focus events.</p>
                     <CodeHighlight>
                         {`
 <InputText type="text" placeholder="Right" tooltip="Enter your username" tooltipOptions={{event: 'focus'}}/>
@@ -679,7 +679,7 @@ import { Tooltip } from 'primereact/tooltip';
                                     <td>event</td>
                                     <td>string</td>
                                     <td>hover</td>
-                                    <td>Event to show the tooltip, valid values are hover and focus.</td>
+                                    <td>Event to show the tooltip, valid values are hover, focus, and both.</td>
                                 </tr>
                                 <tr>
                                     <td>showEvent</td>

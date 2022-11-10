@@ -19,6 +19,7 @@ export const MenubarSub = React.memo(
         const onItemMouseEnter = (event, item) => {
             if (item.disabled || props.mobileActive) {
                 event.preventDefault();
+
                 return;
             }
 
@@ -34,6 +35,7 @@ export const MenubarSub = React.memo(
         const onItemClick = (event, item) => {
             if (item.disabled) {
                 event.preventDefault();
+
                 return;
             }
 
@@ -74,6 +76,7 @@ export const MenubarSub = React.memo(
                 case 39:
                     if (props.root) {
                         const nextItem = findNextItem(listItem);
+
                         nextItem && nextItem.children[0].focus();
                     } else {
                         item.items && expandSubmenu(item, listItem);
@@ -124,21 +127,25 @@ export const MenubarSub = React.memo(
 
         const navigateToNextItem = (listItem) => {
             const nextItem = findNextItem(listItem);
+
             nextItem && nextItem.children[0].focus();
         };
 
         const navigateToPrevItem = (listItem) => {
             const prevItem = findPrevItem(listItem);
+
             prevItem && prevItem.children[0].focus();
         };
 
         const findNextItem = (item) => {
             const nextItem = item.nextElementSibling;
+
             return nextItem ? (DomHandler.hasClass(nextItem, 'p-disabled') || !DomHandler.hasClass(nextItem, 'p-menuitem') ? findNextItem(nextItem) : nextItem) : null;
         };
 
         const findPrevItem = (item) => {
             const prevItem = item.previousElementSibling;
+
             return prevItem ? (DomHandler.hasClass(prevItem, 'p-disabled') || !DomHandler.hasClass(prevItem, 'p-menuitem') ? findPrevItem(prevItem) : prevItem) : null;
         };
 
@@ -173,6 +180,7 @@ export const MenubarSub = React.memo(
             if (item.visible === false) {
                 return null;
             }
+
             const key = item.label + '_' + index;
             const className = classNames('p-menuitem', { 'p-menuitem-active': activeItemState === item }, item.className);
             const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });

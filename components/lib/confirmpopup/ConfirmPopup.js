@@ -85,6 +85,7 @@ export const ConfirmPopup = React.memo(
             setVisibleState(false);
             OverlayService.off('overlay-click', overlayEventListener.current);
             overlayEventListener.current = null;
+
             if (result) {
                 callbackFromProp('onHide', result);
             }
@@ -125,6 +126,7 @@ export const ConfirmPopup = React.memo(
                 if (containerOffset.left < targetOffset.left) {
                     arrowLeft = targetOffset.left - containerOffset.left;
                 }
+
                 overlayRef.current.style.setProperty('--overlayArrowLeft', `${arrowLeft}px`);
 
                 if (containerOffset.top < targetOffset.top) {

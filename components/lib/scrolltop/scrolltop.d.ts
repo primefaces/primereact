@@ -12,7 +12,7 @@ export interface ScrollTopProps {
     icon?: IconType<ScrollTopProps>;
     behavior?: ScrollTopScrollBehavior;
     className?: string;
-    style?: object;
+    style?: React.CSSProperties;
     transitionOptions?: CSSTransitionProps;
     onShow?(): void;
     onHide?(): void;

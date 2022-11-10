@@ -39,8 +39,56 @@ const TabViewProps = [
 
 const TabViewEvents = [
     {
+        name: 'onBeforeTabChange',
+        description: 'Callback to invoke before an active tab is changed. Return false to prevent tab from changing.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.index',
+                type: 'number',
+                description: 'Index of the selected tab'
+            }
+        ]
+    },
+    {
+        name: 'onBeforeTabClose',
+        description: 'Callback to invoke before an active tab is close. Return false to prevent tab from closing.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.index',
+                type: 'number',
+                description: 'Index of the selected tab'
+            }
+        ]
+    },
+    {
         name: 'onTabChange',
         description: 'Callback to invoke when an active tab is changed.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.index',
+                type: 'number',
+                description: 'Index of the selected tab'
+            }
+        ]
+    },
+    {
+        name: 'onTabClose',
+        description: 'Callback to invoke when an active tab is close.',
         arguments: [
             {
                 name: 'event.originalEvent',

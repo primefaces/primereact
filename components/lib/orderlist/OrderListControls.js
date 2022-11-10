@@ -14,6 +14,7 @@ export const OrderListControls = React.memo((props) => {
                 if (selectedItemIndex !== 0) {
                     const movedItem = value[selectedItemIndex];
                     const temp = value[selectedItemIndex - 1];
+
                     value[selectedItemIndex - 1] = movedItem;
                     value[selectedItemIndex] = temp;
                 } else {
@@ -41,6 +42,7 @@ export const OrderListControls = React.memo((props) => {
 
                 if (selectedItemIndex !== 0) {
                     const movedItem = value.splice(selectedItemIndex, 1)[0];
+
                     value.unshift(movedItem);
                 } else {
                     break;
@@ -68,6 +70,7 @@ export const OrderListControls = React.memo((props) => {
                 if (selectedItemIndex !== value.length - 1) {
                     const movedItem = value[selectedItemIndex];
                     const temp = value[selectedItemIndex + 1];
+
                     value[selectedItemIndex + 1] = movedItem;
                     value[selectedItemIndex] = temp;
                 } else {
@@ -95,6 +98,7 @@ export const OrderListControls = React.memo((props) => {
 
                 if (selectedItemIndex !== value.length - 1) {
                     const movedItem = value.splice(selectedItemIndex, 1)[0];
+
                     value.push(movedItem);
                 } else {
                     break;

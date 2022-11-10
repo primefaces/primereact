@@ -318,6 +318,12 @@ export declare enum FilterOperator {
     OR = 'or'
 }
 
+export declare enum SortOrder {
+    DESC = -1,
+    UNSORTED = 0,
+    ASC = 1
+}
+
 export declare namespace FilterService {
     export function filter(value: any, fields: string[], filterValue: any, filterMatchMode: string, filterLocale?: string): any[];
     export const filters: {

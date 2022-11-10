@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Ripple when Ripple is enabled, button should have ripple effect on desktop device 1`] = `
+<div>
+  <button
+    class="p-button p-component"
+  >
+    <span
+      class="p-button-label p-c"
+    >
+       
+    </span>
+    <span
+      class="p-ink p-ink-active"
+      role="presentation"
+      style="height: 0px; width: 0px;"
+    />
+  </button>
+</div>
+`;
+
+exports[`Ripple when Ripple is enabled, button should have ripple effect on touch device 1`] = `
+<div>
+  <button
+    class="p-button p-component"
+  >
+    <span
+      class="p-button-label p-c"
+    >
+       
+    </span>
+    <span
+      class="p-ink p-ink-active"
+      role="presentation"
+      style="height: 0px; width: 0px;"
+    />
+  </button>
+</div>
+`;

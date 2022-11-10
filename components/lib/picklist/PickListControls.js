@@ -18,6 +18,7 @@ export const PickListControls = React.memo((props) => {
                 if (selectedItemIndex !== 0) {
                     const movedItem = list[selectedItemIndex];
                     const temp = list[selectedItemIndex - 1];
+
                     list[selectedItemIndex - 1] = movedItem;
                     list[selectedItemIndex] = temp;
                 } else {
@@ -47,6 +48,7 @@ export const PickListControls = React.memo((props) => {
 
                 if (selectedItemIndex !== 0) {
                     const movedItem = list.splice(selectedItemIndex, 1)[0];
+
                     list.unshift(movedItem);
                 } else {
                     break;
@@ -76,6 +78,7 @@ export const PickListControls = React.memo((props) => {
                 if (selectedItemIndex !== list.length - 1) {
                     const movedItem = list[selectedItemIndex];
                     const temp = list[selectedItemIndex + 1];
+
                     list[selectedItemIndex + 1] = movedItem;
                     list[selectedItemIndex] = temp;
                 } else {
@@ -105,6 +108,7 @@ export const PickListControls = React.memo((props) => {
 
                 if (selectedItemIndex !== list.length - 1) {
                     const movedItem = list.splice(selectedItemIndex, 1)[0];
+
                     list.push(movedItem);
                 } else {
                     break;

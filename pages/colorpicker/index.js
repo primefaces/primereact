@@ -1,12 +1,41 @@
-import React, { useState } from 'react';
-import { ColorPicker } from '../../components/lib/colorpicker/ColorPicker';
-import ColorPickerDoc from '../../components/doc/colorpicker';
-import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
+import { DocActions } from '../../components/doc/common/docactions';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
+import { ApiDoc } from '../../components/doc/colorpicker/apidoc';
+import { ImportDoc } from '../../components/doc/colorpicker/importdoc';
+import { InlineDoc } from '../../components/doc/colorpicker/inlinedoc';
+import { FormatDoc } from '../../components/doc/colorpicker/formatdoc';
+import { OverlayDoc } from '../../components/doc/colorpicker/overlaydoc';
 
 const ColorPickerDemo = () => {
-    const [color1, setColor1] = useState(null);
-    const [color2, setColor2] = useState('1976D2');
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'inline',
+            label: 'Inline',
+            component: InlineDoc
+        },
+        {
+            id: 'overlay',
+            label: 'Overlay',
+            component: OverlayDoc
+        },
+        {
+            id: 'format',
+            label: 'Format',
+            component: FormatDoc
+        },
+        {
+            id: 'api',
+            label: 'API',
+            component: ApiDoc
+        }
+    ];
 
     return (
         <div>
@@ -21,18 +50,10 @@ const ColorPickerDemo = () => {
                 </div>
                 <DocActions github="colorpicker/index.js" />
             </div>
-
-            <div className="content-section implementation">
-                <div className="card">
-                    <h5>Inline</h5>
-                    <ColorPicker value={color1} onChange={(e) => setColor1(e.value)} inline></ColorPicker>
-
-                    <h5>Overlay</h5>
-                    <ColorPicker value={color2} onChange={(e) => setColor2(e.value)}></ColorPicker>
-                </div>
+            <div className="content-section doc">
+                <DocSections docs={docs} />
+                <DocSectionNav docs={docs} />
             </div>
-
-            <ColorPickerDoc />
         </div>
     );
 };

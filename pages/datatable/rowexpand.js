@@ -1,15 +1,15 @@
-import React, { useState, useEffect, useRef, memo } from 'react';
-import { DataTable } from '../../components/lib/datatable/DataTable';
-import { Column } from '../../components/lib/column/Column';
-import { TabView } from '../../components/lib/tabview/TabView';
-import { useLiveEditorTabs } from '../../components/doc/common/liveeditor';
-import { ProductService } from '../../service/ProductService';
-import { Rating } from '../../components/lib/rating//Rating';
-import { Button } from '../../components/lib/button/Button';
-import { Toast } from '../../components/lib/toast/Toast';
-import { DocActions } from '../../components/doc/common/docactions';
-import Head from 'next/head';
 import getConfig from 'next/config';
+import Head from 'next/head';
+import React, { memo, useEffect, useRef, useState } from 'react';
+import { DocActions } from '../../components/doc/common/docactions';
+import { useLiveEditorTabs } from '../../components/doc/common/liveeditor';
+import { Button } from '../../components/lib/button/Button';
+import { Column } from '../../components/lib/column/Column';
+import { DataTable } from '../../components/lib/datatable/DataTable';
+import { Rating } from '../../components/lib/rating//Rating';
+import { TabView } from '../../components/lib/tabview/TabView';
+import { Toast } from '../../components/lib/toast/Toast';
+import { ProductService } from '../../service/ProductService';
 
 const DataTableRowExpansionDemo = () => {
     const [products, setProducts] = useState([]);
@@ -22,6 +22,7 @@ const DataTableRowExpansionDemo = () => {
     useEffect(() => {
         if (isMounted.current) {
             const summary = expandedRows !== null ? 'All Rows Expanded' : 'All Rows Collapsed';
+
             toast.current.show({ severity: 'success', summary: `${summary}`, life: 3000 });
         }
     }, [expandedRows]);
@@ -41,6 +42,7 @@ const DataTableRowExpansionDemo = () => {
 
     const expandAll = () => {
         let _expandedRows = {};
+
         products.forEach((p) => (_expandedRows[`${p.id}`] = true));
 
         setExpandedRows(_expandedRows);
@@ -80,6 +82,10 @@ const DataTableRowExpansionDemo = () => {
 
     const statusBodyTemplate = (rowData) => {
         return <span className={`product-badge status-${rowData.inventoryStatus.toLowerCase()}`}>{rowData.inventoryStatus}</span>;
+    };
+
+    const allowExpansion = (rowData) => {
+        return rowData.orders.length > 0;
     };
 
     const rowExpansionTemplate = (data) => {
@@ -137,7 +143,7 @@ const DataTableRowExpansionDemo = () => {
                         dataKey="id"
                         header={header}
                     >
-                        <Column expander style={{ width: '3em' }} />
+                        <Column expander={allowExpansion} style={{ width: '3em' }} />
                         <Column field="name" header="Name" sortable />
                         <Column header="Image" body={imageBodyTemplate} />
                         <Column field="price" header="Price" sortable body={priceBodyTemplate} />
@@ -257,6 +263,10 @@ export class DataTableRowExpansionDemo extends Component {
         return <span className={\`product-badge status-\${rowData.inventoryStatus.toLowerCase()}\`}>{rowData.inventoryStatus}</span>;
     }
 
+    allowExpansion(rowData) {
+        return rowData.orders.length > 0;
+    };
+
     rowExpansionTemplate(data) {
         return (
             <div className="orders-subtable">
@@ -289,7 +299,7 @@ export class DataTableRowExpansionDemo extends Component {
                     <DataTable value={this.state.products} expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({ expandedRows: e.data })}
                         onRowExpand={this.onRowExpand} onRowCollapse={this.onRowCollapse} responsiveLayout="scroll"
                         rowExpansionTemplate={this.rowExpansionTemplate} dataKey="id" header={header}>
-                        <Column expander style={{ width: '3em' }} />
+                        <Column expander={allowExpansion} style={{ width: '3em' }} />
                         <Column field="name" header="Name" sortable />
                         <Column header="Image" body={this.imageBodyTemplate} />
                         <Column field="price" header="Price" sortable body={this.priceBodyTemplate} />
@@ -386,6 +396,10 @@ const DataTableRowExpansionDemo = () => {
         return <span className={\`product-badge status-\${rowData.inventoryStatus.toLowerCase()}\`}>{rowData.inventoryStatus}</span>;
     }
 
+    const allowExpansion = (rowData) => {
+        return rowData.orders.length > 0;
+    };
+
     const rowExpansionTemplate = (data) => {
         return (
             <div className="orders-subtable">
@@ -417,7 +431,7 @@ const DataTableRowExpansionDemo = () => {
                 <DataTable value={products} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
                     onRowExpand={onRowExpand} onRowCollapse={onRowCollapse} responsiveLayout="scroll"
                     rowExpansionTemplate={rowExpansionTemplate} dataKey="id" header={header}>
-                    <Column expander style={{ width: '3em' }} />
+                    <Column expander={allowExpansion} style={{ width: '3em' }} />
                     <Column field="name" header="Name" sortable />
                     <Column header="Image" body={imageBodyTemplate} />
                     <Column field="price" header="Price" sortable body={priceBodyTemplate} />
@@ -513,6 +527,10 @@ const DataTableRowExpansionDemo = () => {
         return <span className={\`product-badge status-\${rowData.inventoryStatus.toLowerCase()}\`}>{rowData.inventoryStatus}</span>;
     }
 
+    const allowExpansion = (rowData) => {
+        return rowData.orders.length > 0;
+    };
+
     const rowExpansionTemplate = (data) => {
         return (
             <div className="orders-subtable">
@@ -544,7 +562,7 @@ const DataTableRowExpansionDemo = () => {
                 <DataTable value={products} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
                     onRowExpand={onRowExpand} onRowCollapse={onRowCollapse} responsiveLayout="scroll"
                     rowExpansionTemplate={rowExpansionTemplate} dataKey="id" header={header}>
-                    <Column expander style={{ width: '3em' }} />
+                    <Column expander={allowExpansion} style={{ width: '3em' }} />
                     <Column field="name" header="Name" sortable />
                     <Column header="Image" body={imageBodyTemplate} />
                     <Column field="price" header="Price" sortable body={priceBodyTemplate} />
@@ -652,6 +670,10 @@ const DataTableRowExpansionDemo = () => {
         return <span className={\`product-badge status-\${rowData.inventoryStatus.toLowerCase()}\`}>{rowData.inventoryStatus}</span>;
     }
 
+    const allowExpansion = (rowData) => {
+        return rowData.orders.length > 0;
+    };
+
     const rowExpansionTemplate = (data) => {
         return (
             <div className="orders-subtable">
@@ -683,7 +705,7 @@ const DataTableRowExpansionDemo = () => {
                 <DataTable value={products} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
                     onRowExpand={onRowExpand} onRowCollapse={onRowCollapse} responsiveLayout="scroll"
                     rowExpansionTemplate={rowExpansionTemplate} dataKey="id" header={header}>
-                    <Column expander style={{ width: '3em' }} />
+                    <Column expander={allowExpansion} style={{ width: '3em' }} />
                     <Column field="name" header="Name" sortable />
                     <Column header="Image" body={imageBodyTemplate} />
                     <Column field="price" header="Price" sortable body={priceBodyTemplate} />

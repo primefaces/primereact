@@ -68,6 +68,7 @@ const DataTableFilterDemo = () => {
     const getCustomers = (data) => {
         return [...(data || [])].map((d) => {
             d.date = new Date(d.date);
+
             return d;
         });
     };
@@ -91,6 +92,7 @@ const DataTableFilterDemo = () => {
     const onGlobalFilterChange1 = (e) => {
         const value = e.target.value;
         let _filters1 = { ...filters1 };
+
         _filters1['global'].value = value;
 
         setFilters1(_filters1);
@@ -100,6 +102,7 @@ const DataTableFilterDemo = () => {
     const onGlobalFilterChange2 = (e) => {
         const value = e.target.value;
         let _filters2 = { ...filters2 };
+
         _filters2['global'].value = value;
 
         setFilters2(_filters2);
@@ -173,6 +176,7 @@ const DataTableFilterDemo = () => {
 
     const representativeBodyTemplate = (rowData) => {
         const representative = rowData.representative;
+
         return (
             <React.Fragment>
                 <img

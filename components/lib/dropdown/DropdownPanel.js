@@ -2,7 +2,7 @@ import * as React from 'react';
 import { localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
-import { classNames, ObjectUtils, DomHandler } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { DropdownItem } from './DropdownItem';
 
@@ -20,6 +20,7 @@ export const DropdownPanel = React.memo(
             props.onEnter(() => {
                 if (virtualScrollerRef.current) {
                     const selectedIndex = props.getSelectedOptionIndex();
+
                     if (selectedIndex !== -1) {
                         setTimeout(() => virtualScrollerRef.current.scrollToIndex(selectedIndex), 0);
                     }
@@ -42,6 +43,7 @@ export const DropdownPanel = React.memo(
 
         const createGroupChildren = (optionGroup, style) => {
             const groupChildren = props.getOptionGroupChildren(optionGroup);
+
             return groupChildren.map((option, j) => {
                 const optionLabel = props.getOptionLabel(option);
                 const optionKey = j + '_' + props.getOptionRenderKey(option);
@@ -59,6 +61,7 @@ export const DropdownPanel = React.memo(
 
         const createItem = (option, index, scrollerOptions = {}) => {
             const style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
+
             if (props.optionGroupLabel) {
                 const groupContent = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, option, index) : props.getOptionGroupLabel(option);
                 const groupChildrenContent = createGroupChildren(option, style);
@@ -93,7 +96,9 @@ export const DropdownPanel = React.memo(
 
         const createFilterClearIcon = () => {
             if (props.showFilterClear && props.filterValue) {
-                return <i className="p-dropdown-filter-clear-icon pi pi-times" onClick={() => props.onFilterClearIconClick(() => DomHandler.focus(filterInputRef.current))}></i>;
+                const ariaLabel = localeOption('clear');
+
+                return <i className="p-dropdown-filter-clear-icon pi pi-times" aria-label={ariaLabel} onClick={() => props.onFilterClearIconClick(() => DomHandler.focus(filterInputRef.current))}></i>;
             }
 
             return null;

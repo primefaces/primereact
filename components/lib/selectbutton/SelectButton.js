@@ -13,6 +13,7 @@ export const SelectButton = React.memo(
             }
 
             let selected = isSelected(event.option);
+
             if (selected && !props.unselectable) {
                 return;
             }
@@ -22,6 +23,7 @@ export const SelectButton = React.memo(
 
             if (props.multiple) {
                 let currentValue = props.value ? [...props.value] : [];
+
                 newValue = selected ? currentValue.filter((val) => !ObjectUtils.equals(val, optionValue, props.dataKey)) : [...currentValue, optionValue];
             } else {
                 newValue = selected ? null : optionValue;

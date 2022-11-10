@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import PrimeReact, { localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
@@ -52,6 +52,7 @@ export const Sidebar = React.forwardRef((props, ref) => {
     const focus = () => {
         const activeElement = document.activeElement;
         const isActiveElementInDialog = activeElement && sidebarRef && sidebarRef.current.contains(activeElement);
+
         if (!isActiveElementInDialog && props.showCloseIcon) {
             closeIconRef.current.focus();
         }
@@ -146,9 +147,11 @@ export const Sidebar = React.forwardRef((props, ref) => {
 
     const createCloseIcon = () => {
         if (props.showCloseIcon) {
+            const ariaLabel = props.ariaCloseLabel || localeOption('close');
+
             return (
-                <button type="button" ref={closeIconRef} className="p-sidebar-close p-sidebar-icon p-link" onClick={onClose} aria-label={props.ariaCloseLabel}>
-                    <span className="p-sidebar-close-icon pi pi-times" />
+                <button type="button" ref={closeIconRef} className="p-sidebar-close p-sidebar-icon p-link" onClick={onClose} aria-label={ariaLabel}>
+                    <span className="p-sidebar-close-icon pi pi-times" aria-hidden="true" />
                     <Ripple />
                 </button>
             );
@@ -223,7 +226,7 @@ Sidebar.defaultProps = {
     baseZIndex: 0,
     dismissable: true,
     showCloseIcon: true,
-    ariaCloseLabel: 'close',
+    ariaCloseLabel: null,
     closeOnEscape: true,
     icons: null,
     modal: true,

@@ -19,8 +19,10 @@ export const RadioButton = React.memo(
                 const inputClicked = e.target === inputRef.current;
                 const isInputToggled = inputClicked && e.target.checked !== checked;
                 const isRadioToggled = radioClicked && !e.target.checked;
+
                 if (isInputToggled || isRadioToggled) {
                     const value = !checked;
+
                     props.onChange({
                         originalEvent: e,
                         value: props.value,
@@ -75,6 +77,7 @@ export const RadioButton = React.memo(
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = ObjectUtils.findDiffKeys(props, RadioButton.defaultProps);
+        const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-radiobutton p-component',
             {
@@ -100,14 +103,13 @@ export const RadioButton = React.memo(
                             type="radio"
                             name={props.name}
                             defaultChecked={props.checked}
-                            aria-labelledby={props['aria-labelledby']}
-                            aria-label={props['aria-label']}
                             onFocus={onFocus}
                             onBlur={onBlur}
                             onKeyDown={onKeyDown}
                             disabled={props.disabled}
                             required={props.required}
                             tabIndex={props.tabIndex}
+                            {...ariaProps}
                         />
                     </div>
                     <div className={boxClassName}>
@@ -136,7 +138,5 @@ RadioButton.defaultProps = {
     tabIndex: null,
     tooltip: null,
     tooltipOptions: null,
-    'aria-label': null,
-    'aria-labelledby': null,
     onChange: null
 };

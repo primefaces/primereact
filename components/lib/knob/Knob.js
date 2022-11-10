@@ -43,6 +43,7 @@ export const Knob = React.memo(
                     const touch = event.targetTouches.item(0);
                     const offsetX = touch.clientX - rect.left;
                     const offsetY = touch.clientY - rect.top;
+
                     updateValue(offsetX, offsetY);
                     event.preventDefault();
                 }
@@ -97,11 +98,13 @@ export const Knob = React.memo(
             const dy = props.size / 2 - offsetY;
             const angle = Math.atan2(dy, dx);
             const start = -Math.PI / 2 - Math.PI / 6;
+
             updateModel(angle, start);
         };
 
         const updateModel = (angle, start) => {
             let mappedValue;
+
             if (angle > maxRadians) mappedValue = mapRange(angle, minRadians, maxRadians, props.min, props.max);
             else if (angle < start) mappedValue = mapRange(angle + 2 * Math.PI, minRadians, maxRadians, props.min, props.max);
             else return;

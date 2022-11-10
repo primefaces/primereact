@@ -41,6 +41,7 @@ export const Password = React.memo(
         const updateLabels = () => {
             if (meterState) {
                 let label = null;
+
                 switch (meterState.strength) {
                     case 'weak':
                         label = weakLabel;
@@ -268,7 +269,7 @@ export const Password = React.memo(
                     <div className="p-password-meter">
                         <div className={`p-password-strength ${strength}`} style={{ width }}></div>
                     </div>
-                    <div className="p-password-info">{infoTextState}</div>
+                    <div className={`p-password-info ${strength}`}>{infoTextState}</div>
                 </>
             );
 

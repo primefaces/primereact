@@ -4,6 +4,7 @@ export default function EventBus() {
     return {
         on(type, handler) {
             let handlers = allHandlers.get(type);
+
             if (!handlers) handlers = [handler];
             else handlers.push(handler);
 
@@ -11,10 +12,12 @@ export default function EventBus() {
         },
         off(type, handler) {
             let handlers = allHandlers.get(type);
+
             handlers && handlers.splice(handlers.indexOf(handler) >>> 0, 1);
         },
         emit(type, evt) {
             let handlers = allHandlers.get(type);
+
             handlers && handlers.slice().forEach((handler) => handler(evt));
         }
     };

@@ -1,9 +1,9 @@
-import React, { memo } from 'react';
 import Link from 'next/link';
-import { TabView, TabPanel } from '../../lib/tabview/TabView';
-import { useLiveEditorTabs } from '../common/liveeditor';
+import React, { memo } from 'react';
+import { TabPanel, TabView } from '../../lib/tabview/TabView';
 import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
+import { useLiveEditorTabs } from '../common/liveeditor';
 
 const TreeTableDoc = memo(() => {
     const sources = {
@@ -2429,6 +2429,12 @@ export const TreeTableResponsiveDemo = () => {
                                     <td>any</td>
                                     <td>null</td>
                                     <td>Value of the global filter to use in filtering.</td>
+                                </tr>
+                                <tr>
+                                    <td>globalFilterMatchMode</td>
+                                    <td>string</td>
+                                    <td>contains</td>
+                                    <td>Defines filterMatchMode; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "lt", "lte", "gt", "gte" and "custom".</td>
                                 </tr>
                                 <tr>
                                     <td>filterMode</td>

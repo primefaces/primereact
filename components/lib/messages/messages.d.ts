@@ -9,6 +9,7 @@ type MessagesMessageType = MessagesMessage | MessagesMessage[];
 export interface MessagesMessage {
     id?: string;
     severity?: MessagesSeverityType;
+    content?: React.ReactNode;
     summary?: React.ReactNode;
     detail?: React.ReactNode;
     closable?: boolean;

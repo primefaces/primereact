@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import PrimeReact, { localeOption } from '../api/Api';
 import { Button } from '../button/Button';
 import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputText } from '../inputtext/InputText';
@@ -44,6 +44,7 @@ export const AutoComplete = React.memo(
             }
 
             const query = event.target.value;
+
             if (!props.multiple) {
                 updateModel(event, query);
             }
@@ -85,9 +86,14 @@ export const AutoComplete = React.memo(
         const selectItem = (event, option, preventInputFocus) => {
             if (props.multiple) {
                 inputRef.current.value = '';
+
                 if (!isSelected(option)) {
-                    const newValue = props.value ? [...props.value, option] : [option];
-                    updateModel(event, newValue);
+                    // allows empty value/selectionlimit and within sectionlimit
+                    if (!props.value || !props.selectionLimit || props.value.length < props.selectionLimit) {
+                        const newValue = props.value ? [...props.value, option] : [option];
+
+                        updateModel(event, newValue);
+                    }
                 }
             } else {
                 updateInputField(option);
@@ -112,6 +118,7 @@ export const AutoComplete = React.memo(
             if (selectedItem && selectedItem.current === value) {
                 return;
             }
+
             if (props.onChange) {
                 props.onChange({
                     originalEvent: event,
@@ -135,9 +142,11 @@ export const AutoComplete = React.memo(
                     return value;
                 } else if (props.selectedItemTemplate) {
                     const resolvedFieldData = ObjectUtils.getJSXElement(props.selectedItemTemplate, value);
+
                     return resolvedFieldData ? resolvedFieldData : value;
                 } else if (props.field) {
                     const resolvedFieldData = ObjectUtils.resolveFieldData(value, props.field);
+
                     return resolvedFieldData !== null && resolvedFieldData !== undefined ? resolvedFieldData : value;
                 } else {
                     return value;
@@ -168,6 +177,7 @@ export const AutoComplete = React.memo(
         const onOverlayEntering = () => {
             if (props.autoHighlight && props.suggestions && props.suggestions.length) {
                 const element = getScrollableElement().firstChild.firstChild;
+
                 DomHandler.addClass(element, 'p-highlight');
             }
         };
@@ -189,6 +199,7 @@ export const AutoComplete = React.memo(
 
         const alignOverlay = () => {
             const target = props.multiple ? multiContainerRef.current : inputRef.current;
+
             DomHandler.alignOverlay(overlayRef.current, target, props.appendTo || PrimeReact.appendTo);
         };
 
@@ -218,6 +229,7 @@ export const AutoComplete = React.memo(
         const removeItem = (event, index) => {
             const removedValue = props.value[index];
             const newValue = props.value.filter((_, i) => index !== i);
+
             updateModel(event, newValue);
 
             if (props.onUnselect) {
@@ -237,6 +249,7 @@ export const AutoComplete = React.memo(
                     case 40:
                         if (highlightItem) {
                             let nextElement = findNextItem(highlightItem);
+
                             if (nextElement) {
                                 DomHandler.addClass(nextElement, 'p-highlight');
                                 DomHandler.removeClass(highlightItem, 'p-highlight');
@@ -244,6 +257,7 @@ export const AutoComplete = React.memo(
                             }
                         } else {
                             highlightItem = DomHandler.findSingle(overlayRef.current, 'li');
+
                             if (DomHandler.hasClass(highlightItem, 'p-autocomplete-item-group')) {
                                 highlightItem = findNextItem(highlightItem);
                             }
@@ -260,6 +274,7 @@ export const AutoComplete = React.memo(
                     case 38:
                         if (highlightItem) {
                             let previousElement = findPrevItem(highlightItem);
+
                             if (previousElement) {
                                 DomHandler.addClass(previousElement, 'p-highlight');
                                 DomHandler.removeClass(highlightItem, 'p-highlight');
@@ -317,6 +332,7 @@ export const AutoComplete = React.memo(
                                 });
                             }
                         }
+
                         break;
 
                     default:
@@ -328,6 +344,7 @@ export const AutoComplete = React.memo(
         const selectHighlightItem = (event, item) => {
             if (props.optionGroupLabel) {
                 const optionGroup = props.suggestions[item.dataset.group];
+
                 selectItem(event, getOptionGroupChildren(optionGroup)[item.dataset.index]);
             } else {
                 selectItem(event, props.suggestions[DomHandler.index(item)]);
@@ -355,6 +372,7 @@ export const AutoComplete = React.memo(
             const inputValue = event.target.value.trim();
             const item = (props.suggestions || []).find((it) => {
                 const value = props.field ? ObjectUtils.resolveFieldData(it, props.field) : it;
+
                 return value && inputValue === value.trim();
             });
 
@@ -430,7 +448,7 @@ export const AutoComplete = React.memo(
 
         useUpdateEffect(() => {
             if (searchingState) {
-                ObjectUtils.isNotEmpty(props.suggestions) ? show() : hide();
+                ObjectUtils.isNotEmpty(props.suggestions) || props.showEmptyMessage ? show() : hide();
                 setSearchingState(false);
             }
         }, [props.suggestions]);
@@ -452,6 +470,8 @@ export const AutoComplete = React.memo(
         React.useImperativeHandle(ref, () => ({
             props,
             search,
+            show,
+            hide,
             getElement: () => elementRef.current,
             getOverlay: () => overlayRef.current,
             getInput: () => inputRef.current,
@@ -477,8 +497,6 @@ export const AutoComplete = React.memo(
                     aria-controls={ariaControls}
                     aria-haspopup="listbox"
                     aria-expanded={overlayVisibleState}
-                    aria-labelledby={props['aria-labelledby']}
-                    aria-label={props['aria-label']}
                     className={className}
                     style={props.inputStyle}
                     autoComplete="off"
@@ -498,6 +516,7 @@ export const AutoComplete = React.memo(
                     onContextMenu={props.onContextMenu}
                     onClick={props.onClick}
                     onDoubleClick={props.onDblClick}
+                    {...ariaProps}
                 />
             );
         };
@@ -506,6 +525,7 @@ export const AutoComplete = React.memo(
             if (ObjectUtils.isNotEmpty(props.value)) {
                 return props.value.map((val, index) => {
                     const key = index + 'multi-item';
+
                     return (
                         <li key={key} className="p-autocomplete-token p-highlight">
                             <span className="p-autocomplete-token-label">{formatValue(val)}</span>
@@ -533,9 +553,8 @@ export const AutoComplete = React.memo(
                         aria-controls={ariaControls}
                         aria-haspopup="listbox"
                         aria-expanded={overlayVisibleState}
-                        aria-labelledby={props['aria-labelledby']}
-                        aria-label={props['aria-label']}
                         autoComplete="off"
+                        readOnly={props.readOnly}
                         tabIndex={props.tabIndex}
                         onChange={onInputChange}
                         id={props.inputId}
@@ -548,6 +567,7 @@ export const AutoComplete = React.memo(
                         onKeyPress={props.onKeyPress}
                         onFocus={onMultiInputFocus}
                         onBlur={onMultiInputBlur}
+                        {...ariaProps}
                     />
                 </li>
             );
@@ -570,7 +590,9 @@ export const AutoComplete = React.memo(
 
         const createDropdown = () => {
             if (props.dropdown) {
-                return <Button type="button" icon={props.dropdownIcon} className="p-autocomplete-dropdown" disabled={props.disabled} onClick={onDropdownClick} />;
+                const ariaLabel = props.dropdownAriaLabel || props.placeholder || localeOption('choose');
+
+                return <Button type="button" icon={props.dropdownIcon} className="p-autocomplete-dropdown" disabled={props.disabled} onClick={onDropdownClick} aria-label={ariaLabel} />;
             }
 
             return null;
@@ -591,6 +613,7 @@ export const AutoComplete = React.memo(
         const listId = idState + '_list';
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = ObjectUtils.findDiffKeys(props, AutoComplete.defaultProps);
+        const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-autocomplete p-component p-inputwrapper',
             {
@@ -639,63 +662,65 @@ AutoComplete.displayName = 'AutoComplete';
 AutoComplete.defaultProps = {
     __TYPE: 'AutoComplete',
     id: null,
-    inputRef: null,
-    value: null,
-    name: null,
-    type: 'text',
-    suggestions: null,
-    field: null,
-    optionGroupLabel: null,
-    optionGroupChildren: null,
-    optionGroupTemplate: null,
-    forceSelection: false,
+    appendTo: null,
+    autoFocus: false,
     autoHighlight: false,
-    virtualScrollerOptions: null,
-    scrollHeight: '200px',
-    dropdown: false,
-    dropdownMode: 'blank',
-    dropdownAutoFocus: true,
-    multiple: false,
-    minLength: 1,
-    delay: 300,
-    style: null,
     className: null,
-    inputId: null,
-    inputStyle: null,
+    completeMethod: null,
+    delay: 300,
+    disabled: false,
+    dropdown: false,
+    dropdownAriaLabel: null,
+    dropdownAutoFocus: true,
+    dropdownIcon: 'pi pi-chevron-down',
+    dropdownMode: 'blank',
+    emptyMessage: null,
+    field: null,
+    forceSelection: false,
     inputClassName: null,
+    inputId: null,
+    inputRef: null,
+    inputStyle: null,
+    itemTemplate: null,
+    maxLength: null,
+    minLength: 1,
+    multiple: false,
+    name: null,
+    onBlur: null,
+    onChange: null,
+    onClear: null,
+    onClick: null,
+    onContextMenu: null,
+    onDblClick: null,
+    onDropdownClick: null,
+    onFocus: null,
+    onHide: null,
+    onKeyPress: null,
+    onKeyUp: null,
+    onMouseDown: null,
+    onSelect: null,
+    onShow: null,
+    onUnselect: null,
+    optionGroupChildren: null,
+    optionGroupLabel: null,
+    optionGroupTemplate: null,
     panelClassName: null,
     panelStyle: null,
     placeholder: null,
     readOnly: false,
-    disabled: false,
-    maxLength: null,
+    removeIcon: 'pi pi-times-circle',
+    scrollHeight: '200px',
+    selectedItemTemplate: null,
+    selectionLimit: null,
+    showEmptyMessage: false,
     size: null,
-    appendTo: null,
+    style: null,
+    suggestions: null,
     tabIndex: null,
-    autoFocus: false,
     tooltip: null,
     tooltipOptions: null,
-    completeMethod: null,
-    itemTemplate: null,
-    selectedItemTemplate: null,
     transitionOptions: null,
-    dropdownIcon: 'pi pi-chevron-down',
-    removeIcon: 'pi pi-times-circle',
-    'aria-label': null,
-    'aria-labelledby': null,
-    onChange: null,
-    onFocus: null,
-    onBlur: null,
-    onSelect: null,
-    onUnselect: null,
-    onDropdownClick: null,
-    onClick: null,
-    onDblClick: null,
-    onMouseDown: null,
-    onKeyUp: null,
-    onKeyPress: null,
-    onContextMenu: null,
-    onClear: null,
-    onShow: null,
-    onHide: null
+    type: 'text',
+    value: null,
+    virtualScrollerOptions: null
 };

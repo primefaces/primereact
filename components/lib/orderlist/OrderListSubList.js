@@ -19,6 +19,7 @@ export const OrderListSubList = React.memo((props) => {
     const onDragStart = (event, index) => {
         dragging.current = true;
         draggedItemIndex.current = index;
+
         if (props.dragdropScope) {
             event.dataTransfer.setData('text', 'orderlist');
         }
@@ -40,6 +41,7 @@ export const OrderListSubList = React.memo((props) => {
     const onDrop = (event) => {
         let dropIndex = draggedItemIndex.current > dragOverItemIndex.current ? dragOverItemIndex.current : dragOverItemIndex.current === 0 ? 0 : dragOverItemIndex.current - 1;
         let value = [...props.value];
+
         ObjectUtils.reorderArray(value, draggedItemIndex.current, dropIndex);
         dragOverItemIndex.current = null;
         DomHandler.removeClass(event.target, 'p-orderlist-droppoint-highlight');

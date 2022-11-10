@@ -10,6 +10,7 @@ export const OrganizationChart = React.memo(
         const onNodeClick = (event, node) => {
             if (props.selectionMode) {
                 const target = event.target;
+
                 if (node.selectable === false || !DomHandler.hasClass(target, 'p-node-toggler') || !DomHandler.hasClass(target, 'p-node-toggler-icon')) {
                     return;
                 }

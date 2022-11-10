@@ -198,6 +198,12 @@ const DataTableProps = [
         description: 'Selected row in single mode or an array of values in multiple mode.'
     },
     {
+        name: 'selectionAriaLabel',
+        type: 'string',
+        default: 'null',
+        description: 'A field property from the row to add "Select {field}" and "Unselect {field}" ARIA labels to checkbox/radio buttons.'
+    },
+    {
         name: 'contextMenuSelection',
         type: 'any',
         default: 'null',
@@ -311,6 +317,12 @@ const DataTableProps = [
         type: 'any',
         default: 'null',
         description: 'Value of the global filter to use in filtering.'
+    },
+    {
+        name: 'globalFilterMatchMode',
+        type: 'string',
+        default: 'contains',
+        description: 'Defines filterMatchMode; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "lt", "lte", "gt", "gte" and "custom".'
     },
     {
         name: 'filterDelay',

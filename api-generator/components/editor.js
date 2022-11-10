@@ -52,6 +52,12 @@ const EditorProps = [
         type: 'any',
         default: 'null',
         description: 'Style and modules of the toolbar.'
+    },
+    {
+        name: 'maxLength',
+        type: 'number',
+        default: 'null',
+        description: 'Maximum number of characters the editor will accept.'
     }
 ];
 

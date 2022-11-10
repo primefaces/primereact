@@ -36,12 +36,14 @@ export const ScrollPanel = React.forwardRef((props, ref) => {
         const totalWidth = contentRef.current.scrollWidth;
         const ownWidth = contentRef.current.clientWidth;
         const bottom = (containerRef.current.clientHeight - xBarRef.current.clientHeight) * -1;
+
         scrollXRatio.current = ownWidth / totalWidth;
 
         // vertical scroll
         const totalHeight = contentRef.current.scrollHeight;
         const ownHeight = contentRef.current.clientHeight;
         const right = (containerRef.current.clientWidth - yBarRef.current.clientWidth) * -1;
+
         scrollYRatio.current = ownHeight / totalHeight;
 
         frame.current = window.requestAnimationFrame(() => {
@@ -84,9 +86,9 @@ export const ScrollPanel = React.forwardRef((props, ref) => {
     };
 
     const onDocumentMouseMove = (event) => {
-        if (isXBarClicked) {
+        if (isXBarClicked.current) {
             onMouseMoveForXBar(event);
-        } else if (isYBarClicked) {
+        } else if (isYBarClicked.current) {
             onMouseMoveForYBar(event);
         } else {
             onMouseMoveForXBar(event);
@@ -96,6 +98,7 @@ export const ScrollPanel = React.forwardRef((props, ref) => {
 
     const onMouseMoveForXBar = (event) => {
         const deltaX = event.pageX - lastPageX.current;
+
         lastPageX.current = event.pageX;
 
         frame.current = window.requestAnimationFrame(() => {
@@ -105,7 +108,8 @@ export const ScrollPanel = React.forwardRef((props, ref) => {
 
     const onMouseMoveForYBar = (event) => {
         const deltaY = event.pageY - lastPageY.current;
-        lastPageY.current = e.pageY;
+
+        lastPageY.current = event.pageY;
 
         frame.current = window.requestAnimationFrame(() => {
             contentRef.current.scrollTop += deltaY / scrollYRatio.current;
