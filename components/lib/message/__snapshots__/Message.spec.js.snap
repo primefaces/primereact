@@ -1,0 +1,142 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Message content 1`] = `
+<div>
+  <div
+    aria-live="polite"
+    class="p-inline-message p-component p-inline-message-info p-inline-message-icon-only"
+    role="alert"
+  >
+    <span>
+      Test
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Message default 1`] = `
+<div>
+  <div
+    aria-live="polite"
+    class="p-inline-message p-component p-inline-message-info p-inline-message-icon-only"
+    role="alert"
+  >
+    <span
+      class="p-inline-message-icon pi pi-info-circle"
+    />
+    <span
+      class="p-inline-message-text"
+    />
+  </div>
+</div>
+`;
+
+exports[`Message icon 1`] = `
+<div>
+  <div
+    aria-live="polite"
+    class="p-inline-message p-component p-inline-message-info p-inline-message-icon-only"
+    role="alert"
+  >
+    <span
+      class="p-inline-message-icon pi pi-check"
+    />
+    <span
+      class="p-inline-message-text"
+    />
+  </div>
+</div>
+`;
+
+exports[`Message severity error 1`] = `
+<div>
+  <div
+    aria-live="polite"
+    class="p-inline-message p-component p-inline-message-error"
+    role="alert"
+  >
+    <span
+      class="p-inline-message-icon pi pi-times-circle"
+    />
+    <span
+      class="p-inline-message-text"
+    >
+      Jest
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Message severity info 1`] = `
+<div>
+  <div
+    aria-live="polite"
+    class="p-inline-message p-component p-inline-message-info"
+    role="alert"
+  >
+    <span
+      class="p-inline-message-icon pi pi-info-circle"
+    />
+    <span
+      class="p-inline-message-text"
+    >
+      Jest
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Message severity success 1`] = `
+<div>
+  <div
+    aria-live="polite"
+    class="p-inline-message p-component p-inline-message-success"
+    role="alert"
+  >
+    <span
+      class="p-inline-message-icon pi pi-check"
+    />
+    <span
+      class="p-inline-message-text"
+    >
+      Jest
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Message severity warn 1`] = `
+<div>
+  <div
+    aria-live="polite"
+    class="p-inline-message p-component p-inline-message-warn"
+    role="alert"
+  >
+    <span
+      class="p-inline-message-icon pi pi-exclamation-triangle"
+    />
+    <span
+      class="p-inline-message-text"
+    >
+      Jest
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Message templating 1`] = `
+<div>
+  <div
+    aria-live="polite"
+    class="p-inline-message p-component p-inline-message-info p-inline-message-icon-only"
+    role="alert"
+  >
+    <span
+      class="p-inline-message-icon pi pi-info-circle"
+    />
+    <span
+      class="p-inline-message-text"
+    />
+  </div>
+</div>
+`;
