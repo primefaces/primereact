@@ -87,6 +87,10 @@ export default class ObjectUtils {
         return !!(obj && obj.constructor && obj.call && obj.apply);
     }
 
+    static isLetter(char) {
+        return char && (char.toUpperCase() != char.toLowerCase() || char.codePointAt(0) > 127);
+    }
+
     static findDiffKeys(obj1, obj2) {
         if (!obj1 || !obj2) {
             return {};

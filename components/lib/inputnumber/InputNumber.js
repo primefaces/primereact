@@ -229,7 +229,6 @@ export const InputNumber = React.memo(
         const onUpButtonTouchEnd = () => {
             if (!props.disabled && !props.readOnly) {
                 clearTimer();
-                event.preventDefault();
             }
         };
 
@@ -267,7 +266,6 @@ export const InputNumber = React.memo(
         const onDownButtonTouchEnd = () => {
             if (!props.disabled && !props.readOnly) {
                 clearTimer();
-                event.preventDefault();
             }
         };
 
@@ -631,7 +629,9 @@ export const InputNumber = React.memo(
             } else if (end - start === value.length) {
                 return formatValue(text);
             } else if (start === 0) {
-                return text + value.slice(end);
+                const suffix = ObjectUtils.isLetter(value[end]) ? end - 1 : end;
+
+                return text + value.slice(suffix);
             } else if (end === value.length) {
                 return value.slice(0, start) + text;
             } else {
