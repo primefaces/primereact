@@ -11,8 +11,9 @@ exports[`Button when Ripple is enabled button should have ripple effect 1`] = `
        
     </span>
     <span
-      class="p-ink"
+      class="p-ink p-ink-active"
       role="presentation"
+      style="height: 0px; width: 0px;"
     />
   </button>
 </div>

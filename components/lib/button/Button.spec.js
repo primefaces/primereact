@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { snapshot } from '../../test';
 import PrimeReact from '../api/PrimeReact';
 import { Button } from './Button';
@@ -44,33 +45,33 @@ describe('Button', () => {
         expect(screen.queryByText(tooltipText)).toBeNull();
     });
 
-    test('when button is clicked ensure onClick is fired', () => {
+    test('when button is clicked ensure onClick is fired', async () => {
         // Arrange
         const clickOn = jest.fn();
         const { container } = render(<Button onClick={clickOn} />);
         const button = container.getElementsByClassName('p-button')[0];
 
         // Act
-        fireEvent.click(button);
+        await userEvent.click(button);
 
         // Assert
         expect(button).toBeEnabled();
         expect(clickOn).toHaveBeenCalledTimes(1);
     });
-    test('when button is disabled the click event should not fire', () => {
+    test('when button is disabled the click event should not fire', async () => {
         // Arrange
         const clickOn = jest.fn();
         const { container } = render(<Button onClick={clickOn} disabled />);
         const button = container.getElementsByClassName('p-button')[0];
 
         // Act
-        fireEvent.click(button);
+        await userEvent.click(button);
 
         // Assert
         expect(button).toBeDisabled();
         expect(clickOn).toHaveBeenCalledTimes(0);
     });
-    test('when Ripple is enabled button should have ripple effect', () => {
+    test('when Ripple is enabled button should have ripple effect', async () => {
         // Arrange
         const clickOn = jest.fn();
 
@@ -79,7 +80,7 @@ describe('Button', () => {
         const button = container.getElementsByClassName('p-button')[0];
 
         // Act
-        fireEvent.click(button);
+        await userEvent.click(button);
 
         // Assert
         expect(button).toBeEnabled();
