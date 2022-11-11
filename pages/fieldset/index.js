@@ -1,10 +1,36 @@
-import React from 'react';
-import { Fieldset } from '../../components/lib/fieldset/Fieldset';
-import FieldsetDoc from '../../components/doc/fieldset';
-import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
+import { DocActions } from '../../components/doc/common/docactions';
+import { ImportDoc } from '../../components/doc/fieldset/importdoc';
+import { ApiDoc } from '../../components/doc/fieldset/apidoc';
+import { RegularDoc } from '../../components/doc/fieldset/regulardoc';
+import { ToggleableDoc } from '../../components/doc/fieldset/toggleabledoc';
 
 const FieldsetDemo = () => {
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'regular',
+            label: 'Regular',
+            component: RegularDoc
+        },
+        {
+            id: 'toggleable',
+            label: 'Toggleable',
+            component: ToggleableDoc
+        },
+        {
+            id: 'api',
+            label: 'API',
+            component: ApiDoc
+        }
+    ];
+
     return (
         <div>
             <Head>
@@ -19,29 +45,10 @@ const FieldsetDemo = () => {
                 <DocActions github="fieldset/index.js" />
             </div>
 
-            <div className="content-section implementation">
-                <div className="card">
-                    <h5>Regular</h5>
-                    <Fieldset legend="Header">
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                            laborum.
-                        </p>
-                    </Fieldset>
-
-                    <h5>Toggleable</h5>
-                    <Fieldset legend="Header" toggleable>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                            laborum.
-                        </p>
-                    </Fieldset>
-                </div>
+            <div className="content-section doc">
+                <DocSections docs={docs} />
+                <DocSectionNav docs={docs} />
             </div>
-
-            <FieldsetDoc />
         </div>
     );
 };
