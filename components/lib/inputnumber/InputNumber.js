@@ -928,6 +928,13 @@ export const InputNumber = React.memo(
         const onInputFocus = (event) => {
             setFocusedState(true);
             props.onFocus && props.onFocus(event);
+
+            if ((props.suffix || props.currency || props.prefix) && inputRef.current) {
+                // GitHub #1866 Cursor must be placed before/after symbol or arrow keys don't work
+                const selectionEnd = initCursor();
+
+                inputRef.current.setSelectionRange(selectionEnd, selectionEnd);
+            }
         };
 
         const onInputBlur = (event) => {
