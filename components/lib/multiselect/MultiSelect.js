@@ -385,6 +385,10 @@ export const MultiSelect = React.memo(
         };
 
         const getOptionValue = (option) => {
+            if (props.useOptionAsValue) {
+                return option;
+            }
+
             if (props.optionValue) {
                 const data = ObjectUtils.resolveFieldData(option, props.optionValue);
 
@@ -419,7 +423,7 @@ export const MultiSelect = React.memo(
         };
 
         const isOptionValueUsed = (option) => {
-            return props.optionValue || (option && option['value'] !== undefined);
+            return (!props.useOptionAsValue && props.optionValue) || (option && option['value'] !== undefined);
         };
 
         const checkValidity = () => {
@@ -700,6 +704,7 @@ MultiSelect.defaultProps = {
     tooltip: null,
     tooltipOptions: null,
     transitionOptions: null,
+    useOptionAsValue: false,
     value: null,
     virtualScrollerOptions: null
 };

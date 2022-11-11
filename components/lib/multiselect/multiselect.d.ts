@@ -131,6 +131,7 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
     onFilter?(e: MultiSelectFilterParams): void;
     onSelectAll?(e: MultiSelectAllParams): void;
     children?: React.ReactNode;
+    useOptionAsValue?: boolean;
 }
 
 export declare class MultiSelect extends React.Component<MultiSelectProps, any> {
