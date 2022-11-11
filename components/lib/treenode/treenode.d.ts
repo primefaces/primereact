@@ -1,7 +1,7 @@
 import { IconType } from '../utils';
 
 export default interface TreeNode {
-    id?: string
+    id?: string;
     key?: string | number;
     label?: string;
     data?: any;
