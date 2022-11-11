@@ -1,10 +1,42 @@
-import React from 'react';
-import { Splitter, SplitterPanel } from '../../components/lib/splitter/Splitter';
-import SplitterDoc from '../../components/doc/splitter';
-import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
+import { DocActions } from '../../components/doc/common/docactions';
+import { ImportDoc } from '../../components/doc/splitter/importdoc';
+import { HorizontalDoc } from '../../components/doc/splitter/horizontaldoc';
+import { VerticalDoc } from '../../components/doc/splitter/verticaldoc';
+import { NestedDoc } from '../../components/doc/splitter/nesteddoc';
+import { ApiDoc } from '../../components/doc/splitter/apidoc';
 
 const SplitterDemo = () => {
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'horizontal',
+            label: 'Horizontal',
+            component: HorizontalDoc
+        },
+        {
+            id: 'vertical',
+            label: 'Vertical',
+            component: VerticalDoc
+        },
+        {
+            id: 'nested',
+            label: 'Nested',
+            component: NestedDoc
+        },
+        {
+            id: 'api',
+            label: 'API',
+            component: ApiDoc
+        }
+    ];
+
     return (
         <div>
             <Head>
@@ -19,51 +51,10 @@ const SplitterDemo = () => {
                 <DocActions github="splitter/index.js" />
             </div>
 
-            <div className="content-section implementation">
-                <div className="card">
-                    <h5>Horizontal</h5>
-                    <Splitter style={{ height: '300px' }} className="mb-5">
-                        <SplitterPanel className="flex align-items-center justify-content-center">Panel 1</SplitterPanel>
-                        <SplitterPanel className="flex align-items-center justify-content-center">Panel 2</SplitterPanel>
-                    </Splitter>
-                </div>
-
-                <div className="card">
-                    <h5>Vertical</h5>
-                    <Splitter style={{ height: '300px' }} layout="vertical">
-                        <SplitterPanel className="flex align-items-center justify-content-center">Panel 1</SplitterPanel>
-                        <SplitterPanel className="flex align-items-center justify-content-center">Panel 2</SplitterPanel>
-                    </Splitter>
-                </div>
-
-                <div className="card">
-                    <h5>Nested</h5>
-                    <Splitter style={{ height: '300px' }}>
-                        <SplitterPanel className="flex align-items-center justify-content-center" size={20} minSize={10}>
-                            Panel 1
-                        </SplitterPanel>
-                        <SplitterPanel size={80}>
-                            <Splitter layout="vertical">
-                                <SplitterPanel className="flex align-items-center justify-content-center" size={15}>
-                                    Panel 2
-                                </SplitterPanel>
-                                <SplitterPanel size={85}>
-                                    <Splitter>
-                                        <SplitterPanel className="flex align-items-center justify-content-center" size={20}>
-                                            Panel 3
-                                        </SplitterPanel>
-                                        <SplitterPanel className="flex align-items-center justify-content-center" size={80}>
-                                            Panel 4
-                                        </SplitterPanel>
-                                    </Splitter>
-                                </SplitterPanel>
-                            </Splitter>
-                        </SplitterPanel>
-                    </Splitter>
-                </div>
+            <div className="content-section doc">
+                <DocSections docs={docs} />
+                <DocSectionNav docs={docs} />
             </div>
-
-            <SplitterDoc />
         </div>
     );
 };
