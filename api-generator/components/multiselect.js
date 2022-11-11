@@ -280,6 +280,12 @@ const MultiSelectProps = [
         type: 'boolean',
         default: 'false',
         description: 'Whether all data is selected.'
+    },
+    {
+        name: 'useOptionAsValue',
+        type: 'boolean',
+        default: 'false',
+        description: 'Defaults to the option itself as the value of an option. Overrides the optionValue prop.'
     }
 ];
 
