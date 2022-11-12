@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { InputNumber } from '../../lib/inputnumber/InputNumber';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function VerticalDoc(props) {
     const [value, setValue] = useState(50);
@@ -28,7 +28,7 @@ export default function VerticalDoc() {
         `,
         typescript: `
 import { useState } from "react";
-import { InputNumber } from 'primereact/inputnumber';
+import { InputNumber, InputNumberValueChangeParams } from 'primereact/inputnumber';
 
 export default function VerticalDoc() {
     const [value, setValue] = useState<number>(50);

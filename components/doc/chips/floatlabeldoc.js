@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Chips } from '../../lib/chips/Chips';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function FloatLabelDoc(props) {
     const [value, setValue] = useState([]);
@@ -30,10 +30,10 @@ export default function FloatLabelDemo() {
         `,
         typescript: `
 import { useState } from "react";
-import { Chips } from "primereact/chips";
+import { Chips, ChipsChangeParams } from "primereact/chips";
 
 export default function FloatLabelDemo() {
-    const [value, setValue] = useState<string>([]);
+    const [value, setValue] = useState<string[]>([]);
 
     return (
         <span className="p-float-label">

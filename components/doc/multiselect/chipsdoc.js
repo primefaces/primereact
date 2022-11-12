@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { MultiSelect } from '../../lib/multiselect/MultiSelect';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function ChipsDoc(props) {
     const [selectedCities, setSelectedCities] = useState(null);
@@ -38,7 +38,7 @@ export default function ChipsDoc() {
         `,
         typescript: `
 import { useState } from "react";
-import { MultiSelect } from 'primereact/multiselect';
+import { MultiSelect, MultiSelectChangeParams } from 'primereact/multiselect';
 
 export default function ChipsDoc() {
     const [selectedCities, setSelectedCities] = useState<any>(null);

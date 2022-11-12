@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Chips } from '../../lib/chips/Chips';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function SeparatorDoc(props) {
     const [value, setValue] = useState([]);
@@ -24,10 +24,10 @@ export default function SeparatorDemo() {
         `,
         typescript: `
 import { useState } from "react";
-import { Chips } from "primereact/chips";
+import { Chips, ChipsChangeParams } from "primereact/chips";
 
 export default function SeparatorDemo() {
-    const [value, setValue] = useState<string>([]);
+    const [value, setValue] = useState<string[]>([]);
 
     return (
         <Chips value={value} onChange={(e: ChipsChangeParams) => setValue(e.value)} separator="," />

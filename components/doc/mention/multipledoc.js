@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from 'react';
-import { Mention } from '../../lib/mention/Mention';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
+import { useEffect, useState } from 'react';
 import { CustomerService } from '../../../service/CustomerService';
+import { Mention } from '../../lib/mention/Mention';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function MultipleDoc(props) {
     const [customers, setCustomers] = useState([]);
@@ -149,7 +149,7 @@ export default function MultipleDoc() {
         `,
         typescript: `
 import { useState, useEffect } from "react";
-import { Mention } from 'primereact/mention';
+import { Mention, MentionSearchParams, MentionItemTemplateOptions } from 'primereact/mention';
 import { CustomerService } from '../../../service/CustomerService';
 
 export default function MultipleDoc() {
@@ -165,7 +165,7 @@ export default function MultipleDoc() {
         });
     }, [])
 
-    const onMultipleSearch = (event) => {
+    const onMultipleSearch = (event: MentionSearchParams) => {
         const trigger = event.trigger;
 
         if (trigger === '@') {
@@ -205,7 +205,7 @@ export default function MultipleDoc() {
         }
     }
 
-    const multipleItemTemplate = (suggestion, options) => {
+    const multipleItemTemplate = (suggestion: any, options: MentionItemTemplateOptions) => {
         const trigger = options.trigger;
 
         if (trigger === '@' && suggestion.nickname) {

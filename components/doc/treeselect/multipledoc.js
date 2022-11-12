@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { TreeSelect } from '../../lib/treeselect/TreeSelect';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
+import React, { useEffect, useState } from 'react';
 import { NodeService } from '../../../service/NodeService';
+import { TreeSelect } from '../../lib/treeselect/TreeSelect';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function MultipleDoc(props) {
     const [nodes, setNodes] = useState(null);
@@ -38,11 +38,11 @@ export default function MultipleDoc() {
         `,
         typescript: `
 import { useState, useEffect } from "react";
-import { TreeSelect } from 'primereact/treeselect';
+import { TreeSelect, TreeSelectChangeParams } from 'primereact/treeselect';
 import { NodeService } from '../../../service/NodeService';
 
 export default function MultipleDoc() {
-    const [nodes, setNodes] = useState<any>(null);
+    const [nodes, setNodes] = useState<any[]>(null);
     const [selectedNodeKeys, setSelectedNodeKeys] = useState<any>(null);
     const nodeService = new NodeService();
 

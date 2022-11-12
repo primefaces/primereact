@@ -1,11 +1,11 @@
-import { useState, useRef } from 'react';
-import { DeferredContent } from '../../lib/deferredcontent/DeferredContent';
-import { DataTable } from '../../lib/datatable/DataTable';
-import { Column } from '../../lib/column/Column';
-import { Toast } from '../../lib/toast/Toast';
+import { useRef, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
-import { DocSectionText } from '../common/docsectiontext';
+import { Column } from '../../lib/column/Column';
+import { DataTable } from '../../lib/datatable/DataTable';
+import { DeferredContent } from '../../lib/deferredcontent/DeferredContent';
+import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function DeferredContentDoc(props) {
     const toast = useRef(null);
@@ -93,7 +93,7 @@ import { Toast } from 'primereact/toast';
 import { ProductService } from '../service/ProductService';
 
 export default function DeferredContentDoc() {
-    const toast = useRef(null);
+    const toast = useRef<Toast>(null);
     const [products, setProducts] = useState(null);
     const productService = new ProductService();
 

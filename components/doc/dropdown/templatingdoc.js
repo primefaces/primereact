@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Dropdown } from '../../lib/dropdown/Dropdown';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function TemplatingDoc(props) {
     const [selectedCountry, setSelectedCountry] = useState(null);
@@ -104,7 +104,7 @@ export default function TemplatingDoc() {
         `,
         typescript: `
 import { useState } from "react";
-import { Dropdown } from 'primereact/dropdown';
+import { Dropdown, DropdownChangeParams, DropdownProps } from 'primereact/dropdown';
 
 export default function TemplatingDoc() {
     const [selectedCountry, setSelectedCountry] = useState<any | null>(null);
@@ -122,11 +122,11 @@ export default function TemplatingDoc() {
         { name: 'United States', code: 'US' }
     ];
 
-    const onCountryChange = (e) => {
+    const onCountryChange = (e: DropdownChangeParams) => {
         setSelectedCountry(e.value);
     }
 
-    const selectedCountryTemplate = (option, props) => {
+    const selectedCountryTemplate = (option: any, props: DropdownProps) => {
         if (option) {
             return (
                 <div className="country-item country-item-value">
@@ -142,7 +142,7 @@ export default function TemplatingDoc() {
         );
     }
 
-    const countryOptionTemplate = (option) => {
+    const countryOptionTemplate = (option: any) => {
         return (
             <div className="country-item">
                 <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />

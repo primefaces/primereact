@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { SelectButton } from '../../lib/selectbutton/SelectButton';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function CustomContentDoc(props) {
     const [value, setValue] = useState(null);
@@ -45,10 +45,10 @@ export default function CustomContentDoc() {
         `,
         typescript: `
 import { useState } from "react";
-import { SelectButton } from 'primereact/selectbutton';
+import { SelectButton, SelectButtonChangeParams } from 'primereact/selectbutton';
 
 export default function CustomContentDoc() {
-    const [value, setValue] = useState(null);
+    const [value, setValue] = useState<string>(null);
     const justifyOptions = [
         {icon: 'pi pi-align-left', value: 'left'},
         {icon: 'pi pi-align-right', value: 'Right'},

@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import { AutoComplete } from '../../lib/autocomplete/AutoComplete';
+import { useEffect, useState } from 'react';
 import { CountryService } from '../../../service/CountryService';
-import { DocSectionText } from '../common/docsectiontext';
+import { AutoComplete } from '../../lib/autocomplete/AutoComplete';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function TemplatingDoc(props) {
     const [countries, setCountries] = useState([]);
@@ -89,7 +89,7 @@ export default function TemplatingDoc() {
         `,
         typescript: `
 import { useState, useEffect } from 'react';
-import { AutoComplete } from 'primereact/autocomplete';
+import { AutoComplete, AutoCompleteCompleteMethodParams, AutoCompleteChangeParams } from 'primereact/autocomplete';
 import { CountryService } from '../../../service/CountryService';
 
 export default function TemplatingDoc() {
@@ -102,7 +102,7 @@ export default function TemplatingDoc() {
         countryservice.getCountries().then((data) => setCountries(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const searchCountry = (event) => {
+    const searchCountry = (event: AutoCompleteCompleteMethodParams) => {
         setTimeout(() => {
             let _filteredCountries;
 

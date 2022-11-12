@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Knob } from '../../lib/knob/Knob';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const [value, setValue] = useState(0);
@@ -24,7 +24,7 @@ export default function BasicDoc() {
         `,
         typescript: `
 import { useState } from "react";
-import { Knob } from 'primereact/knob';
+import { Knob, KnobChangeParams } from 'primereact/knob';
 
 export default function BasicDoc() {
     const [value, setValue] = useState<number>(0);

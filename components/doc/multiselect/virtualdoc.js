@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { MultiSelect } from '../../lib/multiselect/MultiSelect';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function VirtualDoc(props) {
     const [selectAll, setSelectAll] = useState(false);
@@ -28,11 +28,11 @@ export default function VirtualDoc() {
         `,
         typescript: `
 import { useState } from "react";
-import { MultiSelect } from 'primereact/multiselect';
+import { MultiSelect, MultiSelectChangeParams } from 'primereact/multiselect';
 
 export default function VirtualDoc() {
     const [selectAll, setSelectAll] = useState<any>(false);
-    const [selectedItems, setSelectedItems] = useState(null);
+    const [selectedItems, setSelectedItems] = useState<any[]>(null);
     const [items] = useState(Array.from({ length: 100000 }).map((_, i) => ({ label: "Item #\${i}\", value: i })));
 
     return (

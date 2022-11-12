@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ListBox } from '../../lib/listbox/ListBox';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function AdvancedDoc(props) {
     const [selectedCountries, setSelectedCountries] = useState(null);
@@ -67,7 +67,7 @@ export default function AdvancedDoc() {
         `,
         typescript: `
 import { useState } from "react";
-import { ListBox } from 'primereact/listbox';
+import { ListBox, ListBoxChangeParams } from 'primereact/listbox';
 
 export default function AdvancedDoc() {
     const [selectedCountries, setSelectedCountries] = useState<any>(null);
@@ -84,7 +84,7 @@ export default function AdvancedDoc() {
         { name: 'United States', code: 'US' }
     ];
 
-    const countryTemplate = (option) => {
+    const countryTemplate = (option: any) => {
         return (
             <div className="country-item">
                 <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />

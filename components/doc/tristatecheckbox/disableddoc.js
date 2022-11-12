@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { TriStateCheckbox } from '../../lib/tristatecheckbox/TriStateCheckbox';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function DisabledDoc(props) {
     const [value, setValue] = useState('Disabled');
@@ -25,10 +25,10 @@ export default function DisabledDoc() {
         `,
         typescript: `
 import { useState } from "react";
-import { TriStateCheckbox } from 'primereact/tristatecheckbox';
+import { TriStateCheckbox, TriStateCheckboxChangeParams } from 'primereact/tristatecheckbox';
 
 export default function DisabledDoc() {
-    const [value, setValue] = useState<any>(null);
+    const [value, setValue] = useState<boolean | undefined | null>(null);
 
     return (
         <TriStateCheckbox disabled value={value} onChange={(e : TriStateCheckboxChangeParams) => setValue(e.value)} />

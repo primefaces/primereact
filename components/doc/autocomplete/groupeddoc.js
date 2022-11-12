@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import { AutoComplete } from '../../lib/autocomplete/AutoComplete';
+import { useEffect, useState } from 'react';
 import { CountryService } from '../../../service/CountryService';
-import { DocSectionText } from '../common/docsectiontext';
+import { AutoComplete } from '../../lib/autocomplete/AutoComplete';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function GroupedDoc(props) {
     const [countries, setCountries] = useState([]);
@@ -154,7 +154,7 @@ export default function GroupedDoc() {
         `,
         typescript: `
 import { useState } from "react";
-import { AutoComplete } from 'primereact/autocomplete';
+import { AutoComplete, AutoCompleteCompleteMethodParams } from 'primereact/autocomplete';
 import { CountryService } from '../../../service/CountryService';
 
 export default function GroupedDoc() {
@@ -200,7 +200,7 @@ export default function GroupedDoc() {
         countryservice.getCountries().then((data) => setCountries(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const searchCity = (event) => {
+    const searchCity = (event: AutoCompleteCompleteMethodParams) => {
         let query = event.query;
         let _filteredCities = [];
 
@@ -223,7 +223,7 @@ export default function GroupedDoc() {
             </div>
         );
     };
-    
+
     return (
         <AutoComplete value={selectedCity} suggestions={filteredCities} completeMethod={searchCity} field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} onChange={(e : AutoCompleteChangeParams) => setSelectedCity(e.value)} aria-label="Cities"/>
     )

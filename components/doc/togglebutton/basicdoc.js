@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ToggleButton } from '../../lib/togglebutton/ToggleButton';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDemo(props) {
     const [checked, setChecked] = useState(false);
@@ -25,7 +25,7 @@ export default function BasicDemo() {
         `,
         typescript: `
 import { useState } from "react";
-import { ToggleButton } from 'primereact/togglebutton';
+import { ToggleButton, ToggleButtonChangeParams } from 'primereact/togglebutton';
 
 export default function BasicDemo() {
     const [checked, setChecked] = useState<boolean>(false);

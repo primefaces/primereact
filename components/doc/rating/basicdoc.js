@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Rating } from '../../lib/rating/Rating';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
-    const [val, setVal] = useState(false);
+    const [val, setVal] = useState(null);
 
     const code = {
         basic: `
@@ -15,7 +15,7 @@ import { useState } from "react";
 import { Rating } from "primereact/rating";
 
 export default function BasicDemo() {
-    const [val, setVal] = useState(false);
+    const [val, setVal] = useState(null);
 
     return (
         <Rating value={val} onChange={(e) => setVal(e.value)} />
@@ -25,10 +25,10 @@ export default function BasicDemo() {
         `,
         typescript: `
 import { useState } from "react";
-import { Rating } from "primereact/rating";
+import { Rating, RatingChangeParams } from "primereact/rating";
 
 export default function BasicDemo() {
-    const [val, setVal] = useState<boolean>(false);
+    const [val, setVal] = useState<number>(0);
 
     return (
         <Rating value={val} onChange={(e : RatingChangeParams) => setVal1(e.value)} />

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { InputMask } from '../../lib/inputmask/InputMask';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function SlotCharDoc(props) {
     const [value, setValue] = useState('');
@@ -24,7 +24,7 @@ export default function SlotCharDemo() {
         `,
         typescript: `
 import { useState } from "react";
-import { InputMask } from "primereact/inputmask";
+import { InputMask, InputMaskChangeParams } from "primereact/inputmask";
 
 export default function SlotCharDemo() {
     const [value, setValue] = useState<string>('');

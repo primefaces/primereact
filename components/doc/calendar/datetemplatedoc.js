@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Calendar } from '../../lib/calendar/Calendar';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function DateTemplateDoc(props) {
     const [date, setDate] = useState(null);
@@ -42,12 +42,12 @@ export default function DateTemplateDoc() {
         `,
         typescript: `
 import { useState } from "react";
-import { Calendar } from 'primereact/calendar';
+import { Calendar, CalendarChangeParams } from 'primereact/calendar';
 
 export default function DateTemplateDoc() {
-    const [date, setDate] = useState<any | null>(null);
-    
-    const dateTemplate = (date) => {
+    const [date, setDate] = useState<Date | null>(null);
+
+    const dateTemplate = (date: Date) => {
         if (date.day > 10 && date.day < 15) {
             return (
                 <strong style={{ textDecoration: 'line-through' }}>{date.day}</strong>

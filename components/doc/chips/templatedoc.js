@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Chips } from '../../lib/chips/Chips';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function TemplateDoc(props) {
     const [value, setValue] = useState([]);
@@ -41,10 +41,10 @@ export default function TemplateDemo() {
         `,
         typescript: `
 import { useState } from "react";
-import { Chips } from "primereact/chips";
+import { Chips, ChipsChangeParams } from "primereact/chips";
 
 export default function TemplateDemo() {
-    const [value, setValue] = useState<string>([]);
+    const [value, setValue] = useState<string[]>([]);
     const customChip = (item: any) => {
         return (
             <div>

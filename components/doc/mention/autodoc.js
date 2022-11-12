@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from 'react';
-import { Mention } from '../../lib/mention/Mention';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
+import { useEffect, useState } from 'react';
 import { CustomerService } from '../../../service/CustomerService';
+import { Mention } from '../../lib/mention/Mention';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function AutoDoc(props) {
     const [customers, setCustomers] = useState([]);
@@ -110,7 +110,7 @@ export default function AutoDoc() {
         `,
         typescript: `
 import { useState, useEffect } from "react";
-import { Mention } from 'primereact/mention';
+import { Mention, MentionSearchParams } from 'primereact/mention';
 import { CustomerService } from '../../../service/CustomerService';
 
 export default function AutoDoc() {
@@ -125,7 +125,7 @@ export default function AutoDoc() {
         });
     }, [])
 
-    const onSearch = (event) => {
+    const onSearch = (event: MentionSearchParams) => {
         //in a real application, make a request to a remote url with the query and return suggestions, for demo we filter at client side
         setTimeout(() => {
             const query = event.query;
@@ -144,7 +144,7 @@ export default function AutoDoc() {
         }, 250);
     }
 
-    const itemTemplate = (suggestion) => {
+    const itemTemplate = (suggestion: any) => {
         const src = 'images/avatar/' + suggestion.representative.image;
 
         return (

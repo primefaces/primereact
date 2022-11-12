@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Password } from '../../lib/password/Password';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
 import { Divider } from '../../lib/divider/Divider';
+import { Password } from '../../lib/password/Password';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function Templating(props) {
     const [value, setValue] = useState('');
@@ -54,7 +54,7 @@ import { useState } from "react";
 import { Password } from 'primereact/password';
 
 export default function Templating() {
-    const [value, setValue] = useState<any>('');
+    const [value, setValue] = useState<string>('');
     const header = <h6>Pick a password</h6>;
     const footer = (
         <React.Fragment>

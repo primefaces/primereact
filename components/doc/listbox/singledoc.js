@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ListBox } from '../../lib/listbox/ListBox';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function SingleDoc(props) {
     const [selectedCity, setSelectedCity] = useState(null);
@@ -38,7 +38,7 @@ export default function SingleDoc() {
         `,
         typescript: `
 import { useState } from "react";
-import { ListBox } from 'primereact/listbox';
+import { ListBox, ListBoxChangeParams } from 'primereact/listbox';
 
 export default function SingleDoc() {
     const [selectedCity, setSelectedCity] = useState<any>(null);
@@ -51,7 +51,7 @@ export default function SingleDoc() {
     ];
 
     return (
-        <ListBox value={selectedCity} options={cities} onChange={(e) => setSelectedCity(e.value)} optionLabel="name" style={{ width: '15rem' }} />
+        <ListBox value={selectedCity} options={cities} onChange={(e: ListBoxChangeParams) => setSelectedCity(e.value)} optionLabel="name" style={{ width: '15rem' }} />
     )
 }
         `

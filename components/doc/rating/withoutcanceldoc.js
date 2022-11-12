@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Rating } from '../../lib/rating/Rating';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function WithoutCancelDoc(props) {
     const [val, setVal] = useState(true);
@@ -16,7 +16,7 @@ import { useState } from "react";
 import { Rating } from "primereact/rating";
 
 export default function WithoutCancelDoc() {
-    const [val, setVal] = useState(true);
+    const [val, setVal] = useState(null);
 
     return (
           <Rating value={val} cancel={false} onChange={(e) => setVal(e.value)} />
@@ -25,10 +25,10 @@ export default function WithoutCancelDoc() {
         `,
         typescript: `
 import { useState } from "react";
-import { Rating } from "primereact/rating";
+import { Rating, RatingChangeParams } from "primereact/rating";
 
 export default function WithoutCancelDoc() {
-    const [val, setVal] = useState<boolean>(true);
+    const [val, setVal] = useState<number>(0);
 
     return (
           <Rating value={val} cancel={false} onChange={(e: RatingChangeParams) => setVal(e.value)} />

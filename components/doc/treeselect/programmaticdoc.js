@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { TreeSelect } from '../../lib/treeselect/TreeSelect';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
-import { Button } from '../../lib/button/Button';
+import React, { useEffect, useState } from 'react';
 import { NodeService } from '../../../service/NodeService';
+import { Button } from '../../lib/button/Button';
+import { TreeSelect } from '../../lib/treeselect/TreeSelect';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function ProgrammaticDoc(props) {
     const [nodes, setNodes] = useState(null);
@@ -92,12 +92,12 @@ export default function ProgrammaticDoc() {
         `,
         typescript: `
 import { useState, useEffect } from "react";
-import { TreeSelect } from 'primereact/treeselect';
+import { TreeSelect, TreeSelectChangeParams, TreeSelectExpandedParams } from 'primereact/treeselect';
 import { Button } from '../../lib/button/Button';
 import { NodeService } from '../../../service/NodeService';
 
 export default function ProgrammaticDoc() {
-    const [nodes, setNodes] = useState<any>(null);
+    const [nodes, setNodes] = useState<any[]>(null);
     const [selectedNodeKeys, setSelectedNodeKeys] = useState<any>(null);
     const [expandedKeys, setExpandedKeys] = useState<any>({});
     const nodeService = new NodeService();

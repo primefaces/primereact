@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Calendar } from '../../lib/calendar/Calendar';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function MinMaxDoc(props) {
     let today = new Date();
@@ -52,7 +52,7 @@ export default function MinMaxDoc() {
 
     maxDate.setMonth(nextMonth);
     maxDate.setFullYear(nextYear);
-    
+
     return (
         <Calendar id="minmax" value={date} onChange={(e) => setDate(e.value)} minDate={minDate} maxDate={maxDate} readOnlyInput />
     )
@@ -60,7 +60,7 @@ export default function MinMaxDoc() {
         `,
         typescript: `
 import { useState } from "react";
-import { Calendar } from 'primereact/calendar';
+import { Calendar, CalendarChangeParams } from 'primereact/calendar';
 
 export default function MinMaxDoc() {
     let today = new Date();
@@ -71,7 +71,7 @@ export default function MinMaxDoc() {
     let nextMonth = month === 11 ? 0 : month + 1;
     let nextYear = nextMonth === 0 ? year + 1 : year;
 
-    const [date, setDate] = useState<any | null>(null);
+    const [date, setDate] = useState<Date | null>(null);
 
     let minDate = new Date();
 
@@ -84,7 +84,7 @@ export default function MinMaxDoc() {
     maxDate.setFullYear(nextYear);
 
     return (
-        <Calendar id="minmax" value={date} onChange={(e) => setDate(e.value)} minDate={minDate} maxDate={maxDate} readOnlyInput />
+        <Calendar id="minmax" value={date} onChange={(e: CalendarChangeParams) => setDate(e.value)} minDate={minDate} maxDate={maxDate} readOnlyInput />
     )
 }
         `

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ColorPicker } from '../../lib/colorpicker/ColorPicker';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function InlineDoc(props) {
     const [color, setColor] = useState(null);
@@ -25,13 +25,13 @@ export default function BasicDemo() {
         `,
         typescript: `
 import { useState } from "react";
-import { ColorPicker } from 'primereact/colorpicker';
+import { ColorPicker, ColorPickerChangeParams } from 'primereact/colorpicker';
 
 export default function BasicDemo() {
     const [color, setColor] = useState<any>(null);
 
     return (
-        <ColorPicker value={color} onChange={(e) => setColor(e.value)} inline />
+        <ColorPicker value={color} onChange={(e: ColorPickerChangeParams) => setColor(e.value)} inline />
     )
 }
         `

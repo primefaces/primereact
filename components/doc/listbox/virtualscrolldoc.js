@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ListBox } from '../../lib/listbox/ListBox';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function VirtualScrollDoc(props) {
     const [selectedItem, setSelectedItem] = useState(null);
@@ -26,14 +26,14 @@ export default function VirtualScrollDoc() {
         `,
         typescript: `
 import { useState } from "react";
-import { ListBox } from 'primereact/listbox';
+import { ListBox, ListBoxChangeParams } from 'primereact/listbox';
 
 export default function VirtualScrollDoc() {
     const [selectedItem, setSelectedItem] = useState<any>(null);
     const items = Array.from({ length: 100000 }).map((_, i) => ({ label: \`Item #\${i}\`, value: i }));
 
     return (
-        <ListBox value={selectedItem} options={items} virtualScrollerOptions={{ itemSize: 38 }} onChange={(e) => setSelectedItem(e.value)} style={{ width: '15rem' }} listStyle={{ height: '250px' }}/>
+        <ListBox value={selectedItem} options={items} virtualScrollerOptions={{ itemSize: 38 }} onChange={(e: ListBoxChangeParams) => setSelectedItem(e.value)} style={{ width: '15rem' }} listStyle={{ height: '250px' }}/>
     )
 }
         `

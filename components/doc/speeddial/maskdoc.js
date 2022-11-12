@@ -1,8 +1,8 @@
 import { useRef } from 'react';
 import { SpeedDial } from '../../lib/speeddial/SpeedDial';
 import { Toast } from '../../lib/toast/Toast';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function MaskDoc(props) {
     const toast = useRef(null);
@@ -108,27 +108,27 @@ import { SpeedDial } from 'primereact/speeddial';
 import { Toast } from 'primereact/toast';
 
 export default function MaskDoc() {
-    const toast = useRef(null);
+    const toast = useRef<Toast>(null);
     const items = [
         {
             label: 'Add',
             icon: 'pi pi-pencil',
             command: () => {
-                toast.current.show({ severity: 'info', summary: 'Add', detail: 'Data Added' });
+                toast.current?.show({ severity: 'info', summary: 'Add', detail: 'Data Added' });
             }
         },
         {
             label: 'Update',
             icon: 'pi pi-refresh',
             command: () => {
-                toast.current.show({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
+                toast.current?.show({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
             }
         },
         {
             label: 'Delete',
             icon: 'pi pi-trash',
             command: () => {
-                toast.current.show({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
+                toast.current?.show({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
             }
         },
         {

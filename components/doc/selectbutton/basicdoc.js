@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { SelectButton } from '../../lib/selectbutton/SelectButton';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const [value, setValue] = useState('Off');
@@ -27,10 +27,10 @@ export default function BasicDoc() {
         `,
         typescript: `
 import { useState } from "react";
-import { SelectButton } from 'primereact/selectbutton';
+import { SelectButton, SelectButtonChangeParams } from 'primereact/selectbutton';
 
 export default function BasicDoc() {
-    const [value, setValue] = useState('Off');
+    const [value, setValue] = useState<string>('Off');
     const options = ['Off', 'On'];
 
     return (

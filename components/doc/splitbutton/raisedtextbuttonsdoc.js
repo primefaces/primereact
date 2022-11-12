@@ -1,8 +1,8 @@
 import { useRef } from 'react';
 import { SplitButton } from '../../lib/splitbutton/SplitButton';
 import { Toast } from '../../lib/toast/Toast';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function RaisedTextButtonsDoc(props) {
     const toast = useRef(null);
@@ -78,7 +78,7 @@ export default function RaisedTextButtonsDoc() {
             }
         }
     ]
-    
+
     return (
         <div>
             <Toast ref={toast}></Toast>
@@ -100,20 +100,20 @@ import { SplitButton } from 'primereact/splitbutton';
 import { Toast } from 'primereact/toast';
 
 export default function RaisedTextButtonsDoc() {
-    const toast = useRef(null);
+    const toast = useRef<Toast>(null);
     const items = [
         {
             label: 'Update',
             icon: 'pi pi-refresh',
             command: (e) => {
-                toast.current.show({severity:'success', summary:'Updated', detail:'Data Updated'});
+                toast.current?.show({severity:'success', summary:'Updated', detail:'Data Updated'});
             }
         },
         {
             label: 'Delete',
             icon: 'pi pi-times',
             command: (e) => {
-                toast.current.show({ severity: 'success', summary: 'Delete', detail: 'Data Deleted' });
+                toast.current?.show({ severity: 'success', summary: 'Delete', detail: 'Data Deleted' });
             }
         },
         {

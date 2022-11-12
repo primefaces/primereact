@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Knob } from '../../lib/knob/Knob';
 import { Button } from '../../lib/button/button';
-import { DocSectionText } from '../common/docsectiontext';
+import { Knob } from '../../lib/knob/Knob';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function ReactiveDoc(props) {
     const [value2, setValue2] = useState(0);

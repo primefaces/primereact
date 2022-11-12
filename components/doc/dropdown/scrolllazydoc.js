@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Dropdown } from '../../lib/dropdown/Dropdown';
 import { Skeleton } from '../../lib/skeleton/Skeleton';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function ScrollLazyDoc(props) {
     const [lazyItems, setLazyItems] = useState([]);
@@ -92,8 +92,9 @@ export default function ScrollLazyDoc() {
         `,
         typescript: `
 import { useState, useEffect, useRef } from 'react';
-import { Dropdown } from 'primereact/dropdown';
+import { Dropdown, DropdownChangeParams } from 'primereact/dropdown';
 import { Skeleton } from 'primereact/skeleton';
+import { VirtualScrollerLazyParams } from 'primereact/virtualscroller';
 
 export default function ScrollLazyDoc() {
     const [lazyItems, setLazyItems] = useState<any | null>([]);
@@ -106,11 +107,11 @@ export default function ScrollLazyDoc() {
         setLazyLoading(false);
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const onLazyItemChange = (e) => {
+    const onLazyItemChange = (e: DropdownChangeParams) => {
         setSelectedItem(e.value);
     };
 
-    const onLazyLoad = (event) => {
+    const onLazyLoad = (event: VirtualScrollerLazyParams) => {
         setLazyLoading(true);
 
         if (loadLazyTimeout) {
