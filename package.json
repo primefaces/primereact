@@ -74,5 +74,8 @@
         "rollup-plugin-terser": "^7.0.2",
         "sass": "^1.55.0",
         "typescript": "^4.8.4"
+    },
+    "engines": {
+        "node": ">=16"
     }
 }
