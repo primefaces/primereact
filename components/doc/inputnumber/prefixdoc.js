@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { InputNumber } from '../../lib/inputnumber/InputNumber';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function PrefixDoc(props) {
     const [value1, setValue1] = useState(20);
@@ -48,7 +48,7 @@ export default function PrefixDoc() {
         `,
         typescript: `
 import { useState } from "react";
-import { InputNumber } from 'primereact/inputnumber';
+import { InputNumber, InputNumberValueChangeParams } from 'primereact/inputnumber';
 
 export default function PrefixDoc() {
     const [value1, setValue1] = useState<number>(20);

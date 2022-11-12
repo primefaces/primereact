@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { InputNumber } from '../../lib/inputnumber/InputNumber';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function NumeralsDoc(props) {
     const [value1, setValue1] = useState(42723);
@@ -42,13 +42,13 @@ export default function NumeralsDoc() {
         <div className="field col-12 md:col-3">
             <label htmlFor="minmax">Min-Max Boundaries</label>
             <InputNumber inputId="minmax" value={value4} onValueChange={(e) => setValue4(e.value)} mode="decimal" min={0} max={100} />
-        </div> 
+        </div>
     )
 }
         `,
         typescript: `
 import { useState } from "react";
-import { InputNumber } from 'primereact/inputnumber';
+import { InputNumber, InputNumberValueChangeParams } from 'primereact/inputnumber';
 
 export default function NumeralsDoc() {
     const [value1, setValue1] = useState<number>(42723);
@@ -72,7 +72,7 @@ export default function NumeralsDoc() {
         <div className="field col-12 md:col-3">
             <label htmlFor="minmax">Min-Max Boundaries</label>
             <InputNumber inputId="minmax" value={value4} onValueChange={(e : InputNumberValueChangeParams) => setValue4(e.value)} mode="decimal" min={0} max={100} />
-        </div> 
+        </div>
     )
 }
         `

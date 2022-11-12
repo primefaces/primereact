@@ -1,8 +1,8 @@
 import getConfig from 'next/config';
 import { useState } from 'react';
 import { Rating } from '../../lib/rating/Rating';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function TemplateDoc(props) {
     const [val, setVal] = useState(null);
@@ -59,9 +59,9 @@ offIcon={<img src={"{contextPath}/images/rating/custom-icon.png"} onError={(e) =
         `,
         typescript: `
 import { useState } from "react";
-import { Rating } from "primereact/rating";
+import { Rating, RatingChangeParams } from "primereact/rating";
 
-const [val, setVal] = useState<any>(null);
+const [val, setVal] = useState<number>(0);
 
 export default function TemplateDoc() {
 

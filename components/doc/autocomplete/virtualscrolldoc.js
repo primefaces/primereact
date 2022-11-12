@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import { AutoComplete } from '../../lib/autocomplete/AutoComplete';
+import { useEffect, useState } from 'react';
 import { CountryService } from '../../../service/CountryService';
-import { DocSectionText } from '../common/docsectiontext';
+import { AutoComplete } from '../../lib/autocomplete/AutoComplete';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function VirtualScrollDoc(props) {
     const [countries, setCountries] = useState([]);
@@ -77,7 +77,7 @@ export default function VirtualScrollDoc() {
         `,
         typescript: `
 import { useState, useEffect } from 'react';
-import { AutoComplete } from 'primereact/autocomplete';
+import { AutoComplete, AutoCompleteCompleteMethodParams, AutoCompleteChangeParams } from 'primereact/autocomplete';
 import { CountryService } from '../../../service/CountryService';
 
 export default function VirtualScrollDoc() {
@@ -92,7 +92,7 @@ export default function VirtualScrollDoc() {
 
     const items = Array.from({ length: 100000 }).map((_, i) => ({ label: \`Item #\${i}\`, value: i }));
 
-    const searchItems = (event) => {
+    const searchItems = (event: AutoCompleteCompleteMethodParams) => {
         //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
         let query = event.query;
         let _filteredItems = [];

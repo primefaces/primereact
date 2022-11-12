@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Calendar } from '../../lib/calendar/Calendar';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function Time12Doc(props) {
     const [date, setDate] = useState(null);
@@ -26,10 +26,10 @@ export default function Time12Doc() {
         `,
         typescript: `
 import { useState } from "react";
-import { Calendar } from 'primereact/calendar';
+import { Calendar, CalendarChangeParams } from 'primereact/calendar';
 
 export default function Time12Doc() {
-    const [date, setDate] = useState<any | null>(null);
+    const [date, setDate] = useState<Date | null>(null);
 
     return (
         <Calendar id="time12" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} timeOnly hourFormat="12" />

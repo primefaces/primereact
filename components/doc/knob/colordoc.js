@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Knob } from '../../lib/knob/Knob';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function ColorDoc(props) {
     const [value, setValue] = useState(50);
@@ -24,7 +24,7 @@ export default function ColorDoc() {
         `,
         typescript: `
 import { useState } from 'react';
-import { Knob } from 'primereact/knob';
+import { Knob, KnobChangeParams } from 'primereact/knob';
 
 export default function ColorDoc() {
     const [value, setValue] = useState<number>(50);

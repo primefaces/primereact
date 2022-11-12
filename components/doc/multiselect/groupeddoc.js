@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { MultiSelect } from '../../lib/multiselect/MultiSelect';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function GroupedDoc(props) {
     const [selectedGroupedCities, setSelectedGroupedCities] = useState(null);
@@ -95,7 +95,7 @@ export default function GroupedDoc() {
         `,
         typescript: `
 import { useState } from "react";
-import { MultiSelect } from 'primereact/multiselect';
+import { MultiSelect, MultiSelectChangeParams } from 'primereact/multiselect';
 
 export default function GroupedDoc() {
     const [selectedCities, setSelectedCities] = useState<any>(null);

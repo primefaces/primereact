@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Knob } from '../../lib/knob/Knob';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function TemplateDoc(props) {
     const [value, setValue] = useState(60);
@@ -25,7 +25,7 @@ export default function TemplateDoc() {
         `,
         typescript: `
 import { useState } from 'react';
-import { Knob } from 'primereact/knob';
+import { Knob, KnobChangeParams } from 'primereact/knob';
 
 export default function TemplateDoc() {
     const [value, setValue] = useState<number>(60);

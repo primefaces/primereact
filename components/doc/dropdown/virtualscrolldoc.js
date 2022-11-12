@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Dropdown } from '../../lib/dropdown/Dropdown';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function VirtualScrollDoc(props) {
     const [selectedItem, setSelectedItem] = useState(null);
@@ -34,13 +34,13 @@ export default function VirtualScrollDoc() {
         `,
         typescript: `
 import { useState } from "react";
-import { Dropdown } from 'primereact/dropdown';
+import { Dropdown, DropdownChangeParams } from 'primereact/dropdown';
 
 export default function VirtualScrollDoc() {
       const [selectedItem, setSelectedItem] = useState<any | null>(null);
       const items = Array.from({ length: 100000 }).map((_, i) => ({ label: \`Item #\${i}\`, value: i }));
 
-      const onItemChange = (e) => {
+      const onItemChange = (e: DropdownChangeParams) => {
         setSelectedItem(e.value)
     }
 

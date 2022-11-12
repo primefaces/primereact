@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Slider } from '../../lib/slider/Slider';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function RangeDoc(props) {
     const [value, setValue] = useState([20, 80]);
@@ -24,7 +24,7 @@ export default function RangeDemo() {
         `,
         typescript: `
 import { useState } from "react";
-import { Slider } from "primereact/slider";
+import { Slider, SliderChangeParams } from "primereact/slider";
 
 export default function RangeDemo() {
     const [value, setValue] = useState<number[]>([20,80]);

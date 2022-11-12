@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Calendar } from '../../lib/calendar/Calendar';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function DisabledDoc(props) {
     const [date, setDate] = useState(null);
@@ -29,10 +29,10 @@ export default function DisabledDoc() {
         `,
         typescript: `
 import { useState } from "react";
-import { Calendar } from 'primereact/calendar';
+import { Calendar, CalendarChangeParams } from 'primereact/calendar';
 
 export default function DisabledDoc() {
-    const [date, setDate] = useState<any | null>(null);
+    const [date, setDate] = useState<Date | null>(null);
 
     return (
         <Calendar id="disableddays" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} disabledDates={invalidDates} disabledDays={[0, 6]} readOnlyInput />

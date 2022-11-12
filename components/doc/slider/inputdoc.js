@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Slider } from '../../lib/slider/Slider';
 import { InputText } from '../../lib/inputtext/InputText';
-import { DocSectionText } from '../common/docsectiontext';
+import { Slider } from '../../lib/slider/Slider';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function InputDoc(props) {
     const [value, setValue] = useState(50);
@@ -32,7 +32,7 @@ export default function InputDemo() {
         `,
         typescript: `
 import { useState } from "react";
-import { Slider } from "primereact/slider";
+import { Slider, SliderChangeParams } from "primereact/slider";
 import { InputText } from "primereact/inputtext";
 
 export default function InputDemo() {

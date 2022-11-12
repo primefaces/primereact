@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Dropdown } from '../../lib/dropdown/Dropdown';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function GroupedDoc(props) {
     const [selectedGroupedCity, setSelectedGroupedCity] = useState(null);
@@ -147,11 +147,11 @@ export default function GroupedDoc() {
         }
     ];
 
-    const onGroupedCityChange = (e) => {
+    const onGroupedCityChange = (e: DropdownChangeParams) => {
         setSelectedGroupedCity(e.value);
     }
 
-    const groupedItemTemplate = (option) => {
+    const groupedItemTemplate = (option: any) => {
         return (
             <div className="flex align-items-center country-item">
                 <img alt={option.label} src="images/flag/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />

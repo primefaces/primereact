@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Dropdown } from '../../lib/dropdown/Dropdown';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const [selectedCity, setSelectedCity] = useState(null);
@@ -46,7 +46,7 @@ export default function BasicDemo() {
         `,
         typescript: `
 import { useState } from "react";
-import { Dropdown } from 'primereact/dropdown';
+import { Dropdown, DropdownChangeParams } from 'primereact/dropdown';
 
 export default function BasicDemo() {
     const [selectedCity, setSelectedCity] = useState<any | null>(null);
@@ -58,7 +58,7 @@ export default function BasicDemo() {
         { name: 'Paris', code: 'PRS' }
     ];
 
-    const onCityChange = (e) => {
+    const onCityChange = (e: DropdownChangeParams) => {
         setSelectedCity(e.value);
     }
 

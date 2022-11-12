@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { InputMask } from '../../lib/inputmask/InputMask';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function FloatLabelDoc(props) {
     const [value, setValue] = useState('');
@@ -30,7 +30,7 @@ export default function FloatLabelDemo() {
         `,
         typescript: `
 import { useState } from "react";
-import { InputMask } from "primereact/inputmask";
+import { InputMask, InputMaskChangeParams } from "primereact/inputmask";
 
 export default function FloatLabelDemo() {
     const [value, setValue] = useState<string>('');

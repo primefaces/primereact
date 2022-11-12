@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { MultiSelect } from '../../lib/multiselect/MultiSelect';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function AdvancedDoc(props) {
     const [selectedCountries, setSelectedCountries] = useState(null);
@@ -61,7 +61,7 @@ import { MultiSelect } from 'primereact/multiselect';
 
 export default function AdvanceDoc() {
     const [selectedCountries, setSelectedCountries] = useState(null);
-    
+
     const countries = [
         { name: 'Australia', code: 'AU' },
         { name: 'Brazil', code: 'BR' },
@@ -100,7 +100,7 @@ export default function AdvanceDoc() {
     const panelFooterTemplate = () => {
         const selectedItems = selectedCountries;
         const length = selectedItems ? selectedItems.length : 0;
-    
+
         return (
             <div className="py-2 px-3">
                 <b>{length}</b> item{length > 1 ? 's' : ''} selected.
@@ -116,7 +116,7 @@ export default function AdvanceDoc() {
         `,
         typescript: `
 import { useState } from "react";
-import { MultiSelect } from 'primereact/multiselect';
+import { MultiSelect, MultiSelectChangeParams } from 'primereact/multiselect';
 
 export default function AdvanceDoc() {
     const [selectedCountries, setSelectedCountries] = useState<any>(null);
@@ -134,7 +134,7 @@ export default function AdvanceDoc() {
         { name: 'United States', code: 'US' }
     ];
 
-    const countryTemplate = (option) => {
+    const countryTemplate = (option: any) => {
         return (
             <div className="country-item">
                 <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${item.code.toLowerCase()}\`} />
@@ -143,7 +143,7 @@ export default function AdvanceDoc() {
         );
     };
 
-    const selectedCountriesTemplate = (option) => {
+    const selectedCountriesTemplate = (option: any) => {
         if (option) {
             return (
                 <div className="country-item country-item-value">
@@ -159,7 +159,7 @@ export default function AdvanceDoc() {
     const panelFooterTemplate = () => {
         const selectedItems = selectedCountries;
         const length = selectedItems ? selectedItems.length : 0;
-    
+
         return (
             <div className="py-2 px-3">
                 <b>{length}</b> item{length > 1 ? 's' : ''} selected.

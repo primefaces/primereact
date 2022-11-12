@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Calendar } from '../../lib/calendar/Calendar';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function MonthPickerDoc(props) {
     const [date, setDate] = useState(null);
@@ -24,10 +24,10 @@ export default function MonthPickerDoc() {
         `,
         typescript: `
 import { useState } from "react";
-import { Calendar } from 'primereact/calendar';
+import { Calendar, CalendarChangeParams } from 'primereact/calendar';
 
 export default function MonthPickerDoc() {
-    const [date, setDate] = useState<any | null>(null);
+    const [date, setDate] = useState<Date | null>(null);
 
     return (
         <Calendar id="monthpicker" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} view="month" dateFormat="mm/yy" />

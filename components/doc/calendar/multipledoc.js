@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Calendar } from '../../lib/calendar/Calendar';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function MultipleDoc(props) {
     const [dates, setDates] = useState(null);
@@ -15,7 +15,7 @@ import { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
 export default function MultipleDoc() {
-    const [dates, setDates] = useState(null);
+    const [dates, setDates] = useState<Date(null);
 
     return (
         <Calendar id="multiple" value={dates} onChange={(e) => setDates(e.value)} selectionMode="multiple" readOnlyInput />
@@ -24,10 +24,10 @@ export default function MultipleDoc() {
         `,
         typescript: `
 import { useState } from "react";
-import { Calendar } from 'primereact/calendar';
+import { Calendar, CalendarChangeParams } from 'primereact/calendar';
 
 export default function MultipleDoc() {
-    const [dates, setDates] = useState<any | null>(null);
+    const [dates, setDates] = useState<Date | null>(null);
 
     return (
         <Calendar id="multiple" value={dates} onChange={(e : CalendarChangeParams) => setDates(e.value)} selectionMode="multiple" readOnlyInput />

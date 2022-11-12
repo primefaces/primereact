@@ -1,8 +1,8 @@
-import { useState, useRef, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { MultiSelect } from '../../lib/multiselect/MultiSelect';
 import { Skeleton } from '../../lib/skeleton/skeleton';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function VirtualLazyDoc(props) {
     const [lazyItems, setLazyItems] = useState([]);
@@ -70,17 +70,17 @@ export default function VirtualLazyDoc() {
         `,
         typescript: `
 import { useState } from "react";
-import { MultiSelect, SelectItemOptionsType } from 'primereact/multiselect';
+import { MultiSelect, SelectItemOptionsType, MultiSelectChangeParams } from 'primereact/multiselect';
 import { Skeleton } from '../../lib/skeleton/skeleton';
 
 export default function VirtualLazyDoc() {
     const [lazyItems, setLazyItems] = useState<SelectItemOptionsType>([]);
     const [lazyLoading, setLazyLoading] = useState<boolean>(false);
     const [selectedItems, setSelectedItems] = useState<SelectItemOptionsType>([]);
-    const loadLazyTimeout = useRef(null);
+    const loadLazyTimeout = useRef<number>(null);
 
     return (
-        <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e) => setSelectedItems2(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 43, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
+        <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e: MultiSelectChangeParams) => setSelectedItems2(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 43, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
             return (
                 <div className="flex align-items-center p-2" style={{ height: '43px' }}>
                     <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ColorPicker } from '../../lib/colorpicker/ColorPicker';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function OverlayDoc(props) {
     const [color, setColor] = useState('1976D2');
@@ -25,13 +25,13 @@ export default function BasicDemo() {
         `,
         typescript: `
 import { useState } from "react";
-import { ColorPicker } from 'primereact/colorpicker';
+import { ColorPicker, ColorPickerChangeParams } from 'primereact/colorpicker';
 
 export default function BasicDemo() {
-    const [color, setColor] = useState<any>('1976D2');
+    const [color, setColor] = useState<string>('1976D2');
 
     return (
-        <ColorPicker value={color} onChange={(e) => setColor(e.value)} />
+        <ColorPicker value={color} onChange={(e: ColorPickerChangeParams) => setColor(e.value)} />
     )
 }
         `

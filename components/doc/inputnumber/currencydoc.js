@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { InputNumber } from '../../lib/inputnumber/InputNumber';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function CurrencyDoc(props) {
     const [value1, setValue1] = useState(1500);
@@ -49,7 +49,7 @@ export default function CurrencyDoc() {
         `,
         typescript: `
 import { useState } from "react";
-import { InputNumber } from 'primereact/inputnumber';
+import { InputNumber, InputNumberValueChangeParams } from 'primereact/inputnumber';
 
 export default function CurrencyDoc() {
     const [value1, setValue1] = useState<number>(1500);

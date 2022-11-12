@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Password } from '../../lib/password/Password';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const [value, setValue] = useState('');
@@ -27,7 +27,7 @@ import { useState } from "react";
 import { Password } from 'primereact/password';
 
 export default function BasicDemo() {
-    const [value, setValue] = useState<any>('');
+    const [value, setValue] = useState<string>('');
 
     return (
         <Password value={value} onChange={(e : ChangeEventHandler) => setValue(e.target.value)} feedback={false} />

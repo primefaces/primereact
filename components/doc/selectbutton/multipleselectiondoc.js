@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { SelectButton } from '../../lib/selectbutton/SelectButton';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function MultipleSelectionDoc(props) {
     const [value, setValue] = useState(null);
@@ -34,10 +34,10 @@ export default function MultipleSelectionDoc() {
         `,
         typescript: `
 import { useState } from "react";
-import { SelectButton } from 'primereact/selectbutton';
+import { SelectButton, SelectButtonChangeParams } from 'primereact/selectbutton';
 
 export default function MultipleSelectionDoc() {
-    const [value, setValue] = useState(null);
+    const [value, setValue] = useState<string>(null);
     const paymentOptions = [
         {name: 'Option 1', value: 1},
         {name: 'Option 2', value: 2},

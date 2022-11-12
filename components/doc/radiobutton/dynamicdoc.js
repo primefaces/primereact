@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { RadioButton } from '../../lib/radiobutton/RadioButton';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function DynamicDoc(props) {
     const categories = [
@@ -54,10 +54,10 @@ export default function DynamicDemo() {
         `,
         typescript: `
 import { useState } from "react";
-import { RadioButton } from "primereact/radiobutton";
+import { RadioButton, RadioButtonChangeParams } from "primereact/radiobutton";
 
 interface Category {
-    name: string; 
+    name: string;
     key: string;
 }
 
@@ -75,7 +75,7 @@ export default function DynamicDemo() {
             {categories.map((category) => {
                 return (
                     <div key={category.key} className="flex align-items-center">
-                        <RadioButton inputId={category.key} name="category" value={category} onChange={(e) => setSelectedCategory(e.value)} checked={selectedCategory.key === category.key} />
+                        <RadioButton inputId={category.key} name="category" value={category} onChange={(e: RadioButtonChangeParams) => setSelectedCategory(e.value)} checked={selectedCategory.key === category.key} />
                         <label htmlFor={category.key} className="ml-2">{category.name}</label>
                     </div>
                 );
