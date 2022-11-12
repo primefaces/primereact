@@ -42,6 +42,18 @@ export function snapshot(element, name) {
 }
 
 /**
+ * Run a single snapshot test of the parent element.
+ *
+ * @param {*} element the element to render
+ * @param {*} name the name of the test
+ */
+export function snapshotParent(element, name) {
+    test(name, () => {
+        expect(render(element).container.parentElement).toMatchSnapshot();
+    });
+}
+
+/**
  * Sets the browser user agent so it can simulate browsers. If its IOS adds touch setting to allow DomUtils.isTouchDevice.
  *
  * @param {*} name the name of the user agent.

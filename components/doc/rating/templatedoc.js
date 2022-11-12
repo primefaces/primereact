@@ -11,49 +11,30 @@ export function TemplateDoc(props) {
     const code = {
         basic: `
 <Rating
-value={val}
-onChange={(e) => setVal(e.val)}
-cancelIcon={
-    <img src={"{contextPath}/images/rating/cancel.png"} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-cancel-image" width="25px" height="25px" />
-}
-onIcon={
-    <img
-src={"{contextPath}/images/rating/custom-icon-active.png"}
-onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
-alt="custom-image-active"
-width="25px"
-height="25px"
-    />
-}
-offIcon={<img src={"{contextPath}/images/rating/custom-icon.png"} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image" width="25px" height="25px" />}
-    />
+    value={val}
+    onChange={(e) => setVal(e.value)}
+    cancelIcon={<img src={'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-cancel-image" width="25px" height="25px" />}
+    onIcon={<img src={'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image-active" width="25px" height="25px" />}
+    offIcon={<img src={'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image" width="25px" height="25px" />}
+/>
 `,
         javascript: `
 import { useState } from "react";
 import { Rating } from "primereact/rating";
 
-const [val, setVal] = useState(null);
-
 export default function TemplateDoc() {
+    const [val, setVal] = useState(null);
 
     return (
-<Rating
-value={val}
-onChange={(e) => setVal(e.val)}
-cancelIcon={
-    <img src={"{contextPath}/images/rating/cancel.png"} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-cancel-image" width="25px" height="25px" />
-}
-onIcon={
-<img
-src={"{contextPath}/images/rating/custom-icon-active.png"}
-onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
-alt="custom-image-active"
-width="25px"
-height="25px"
-    />
-}
-offIcon={<img src={"{contextPath}/images/rating/custom-icon.png"} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image" width="25px" height="25px" />}
-    />
+        <Rating
+        value={val}
+        onChange={(e) => setVal(e.value)}
+        cancelIcon={<img src={'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-cancel-image" width="25px" height="25px" />}
+        onIcon={
+            <img src={'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image-active" width="25px" height="25px" />
+        }
+        offIcon={<img src={'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image" width="25px" height="25px" />}
+        />
     );
 }
         `,
@@ -61,28 +42,19 @@ offIcon={<img src={"{contextPath}/images/rating/custom-icon.png"} onError={(e) =
 import { useState } from "react";
 import { Rating, RatingChangeParams } from "primereact/rating";
 
-const [val, setVal] = useState<number>(0);
-
 export default function TemplateDoc() {
+    const [val, setVal] = useState<number>(0);
 
     return (
-<Rating
-value={val}
-onChange={(e : RatingChangeParams) => setVal(e.val)}
-cancelIcon={
-    <img src={"{contextPath}/images/rating/cancel.png"} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-cancel-image" width="25px" height="25px" />
-}
-onIcon={
-<img
-src={"{contextPath}/images/rating/custom-icon-active.png"}
-onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
-alt="custom-image-active"
-width="25px"
-height="25px"
-    />
-}
-offIcon={<img src={"{contextPath}/images/rating/custom-icon.png"} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image" width="25px" height="25px" />}
-    />
+        <Rating
+        value={val}
+        onChange={(e) => setVal(e.value)}
+        cancelIcon={<img src={'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-cancel-image" width="25px" height="25px" />}
+        onIcon={
+            <img src={'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image-active" width="25px" height="25px" />
+        }
+        offIcon={<img src={'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image" width="25px" height="25px" />}
+        />
     );
 }
     `
