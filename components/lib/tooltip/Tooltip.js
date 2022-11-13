@@ -128,7 +128,7 @@ export const Tooltip = React.memo(
                     elementRef.current.style.pointerEvents = 'none';
                 }
 
-                if (isMouseTrack(currentTargetRef.current) && !containerSize.current) {
+                if ((isMouseTrack(currentTargetRef.current) || position == 'mouse') && !containerSize.current) {
                     containerSize.current = {
                         width: DomHandler.getOuterWidth(elementRef.current),
                         height: DomHandler.getOuterHeight(elementRef.current)
@@ -192,7 +192,7 @@ export const Tooltip = React.memo(
                 top = 0,
                 currentPosition = position || positionState;
 
-            if (isMouseTrack(target) && coordinate) {
+            if ((isMouseTrack(target) || currentPosition == 'mouse') && coordinate) {
                 const _containerSize = {
                     width: DomHandler.getOuterWidth(elementRef.current),
                     height: DomHandler.getOuterHeight(elementRef.current)
@@ -209,6 +209,7 @@ export const Tooltip = React.memo(
                         top -= _containerSize.height / 2 - mouseTrackTop;
                         break;
                     case 'right':
+                    case 'mouse':
                         left += mouseTrackLeft;
                         top -= _containerSize.height / 2 - mouseTrackTop;
                         break;
@@ -491,31 +492,31 @@ export const Tooltip = React.memo(
 Tooltip.displayName = 'Tooltip';
 Tooltip.defaultProps = {
     __TYPE: 'Tooltip',
-    id: null,
-    target: null,
-    content: null,
-    disabled: false,
-    className: null,
-    style: null,
     appendTo: null,
-    position: 'right',
-    my: null,
     at: null,
-    event: null,
-    showEvent: 'mouseenter',
-    hideEvent: 'mouseleave',
+    autoHide: true,
     autoZIndex: true,
     baseZIndex: 0,
-    mouseTrack: false,
-    mouseTrackTop: 5,
-    mouseTrackLeft: 5,
-    showDelay: 0,
-    updateDelay: 0,
+    className: null,
+    content: null,
+    disabled: false,
+    event: null,
     hideDelay: 0,
-    autoHide: true,
-    showOnDisabled: false,
-    onBeforeShow: null,
+    hideEvent: 'mouseleave',
+    id: null,
+    mouseTrack: false,
+    mouseTrackLeft: 5,
+    mouseTrackTop: 5,
+    my: null,
     onBeforeHide: null,
+    onBeforeShow: null,
+    onHide: null,
     onShow: null,
-    onHide: null
+    position: 'right',
+    showDelay: 0,
+    showEvent: 'mouseenter',
+    showOnDisabled: false,
+    style: null,
+    target: null,
+    updateDelay: 0
 };

@@ -36,17 +36,20 @@ const TooltipDemo = () => {
                 <div className="card">
                     <h5>Positions</h5>
                     <div className="grid p-fluid">
-                        <div className="col-12 md:col-3">
+                        <div className="col-12 md:col-2">
                             <InputText type="text" placeholder="Right" tooltip="Enter your username" />
                         </div>
-                        <div className="col-12 md:col-3">
+                        <div className="col-12 md:col-2">
                             <InputText type="text" placeholder="Top" tooltip="Enter your username" tooltipOptions={{ position: 'top' }} />
                         </div>
-                        <div className="col-12 md:col-3">
+                        <div className="col-12 md:col-2">
                             <InputText type="text" placeholder="Bottom" tooltip="Enter your username" tooltipOptions={{ position: 'bottom' }} />
                         </div>
-                        <div className="col-12 md:col-3">
+                        <div className="col-12 md:col-2">
                             <InputText type="text" placeholder="Left" tooltip="Enter your username" tooltipOptions={{ position: 'left' }} />
+                        </div>
+                        <div className="col-12 md:col-2">
+                            <InputText type="text" placeholder="Mouse" tooltip="Enter your username" tooltipOptions={{ position: 'mouse' }} />
                         </div>
                     </div>
 

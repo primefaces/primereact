@@ -36,17 +36,20 @@ export class TooltipDemo extends Component {
                 <div className="card">
                     <h5>Positions</h5>
                     <div className="grid p-fluid">
-                        <div className="col-12 md:col-3">
+                        <div className="col-12 md:col-2">
                             <InputText type="text" placeholder="Right" tooltip="Enter your username" />
                         </div>
-                        <div className="col-12 md:col-3">
+                        <div className="col-12 md:col-2">
                             <InputText type="text" placeholder="Top" tooltip="Enter your username" tooltipOptions={{position: 'top'}} />
                         </div>
-                        <div className="col-12 md:col-3">
+                        <div className="col-12 md:col-2">
                             <InputText type="text" placeholder="Bottom" tooltip="Enter your username" tooltipOptions={{position: 'bottom'}} />
                         </div>
-                        <div className="col-12 md:col-3">
+                        <div className="col-12 md:col-2">
                             <InputText type="text" placeholder="Left" tooltip="Enter your username" tooltipOptions={{position: 'left'}} />
+                        </div>
+                        <div className="col-12 md:col-2">
+                            <InputText type="text" placeholder="Mouse" tooltip="Enter your username" tooltipOptions={{position: 'mouse'}} />
                         </div>
                     </div>
 
@@ -155,18 +158,21 @@ const TooltipDemo = () => {
             <div className="card">
                 <h5>Positions</h5>
                 <div className="grid p-fluid">
-                    <div className="col-12 md:col-3">
-                        <InputText type="text" placeholder="Right" tooltip="Enter your username" />
-                    </div>
-                    <div className="col-12 md:col-3">
-                        <InputText type="text" placeholder="Top" tooltip="Enter your username" tooltipOptions={{position: 'top'}} />
-                    </div>
-                    <div className="col-12 md:col-3">
-                        <InputText type="text" placeholder="Bottom" tooltip="Enter your username" tooltipOptions={{position: 'bottom'}} />
-                    </div>
-                    <div className="col-12 md:col-3">
-                        <InputText type="text" placeholder="Left" tooltip="Enter your username" tooltipOptions={{position: 'left'}} />
-                    </div>
+                        <div className="col-12 md:col-2">
+                            <InputText type="text" placeholder="Right" tooltip="Enter your username" />
+                        </div>
+                        <div className="col-12 md:col-2">
+                            <InputText type="text" placeholder="Top" tooltip="Enter your username" tooltipOptions={{position: 'top'}} />
+                        </div>
+                        <div className="col-12 md:col-2">
+                            <InputText type="text" placeholder="Bottom" tooltip="Enter your username" tooltipOptions={{position: 'bottom'}} />
+                        </div>
+                        <div className="col-12 md:col-2">
+                            <InputText type="text" placeholder="Left" tooltip="Enter your username" tooltipOptions={{position: 'left'}} />
+                        </div>
+                        <div className="col-12 md:col-2">
+                            <InputText type="text" placeholder="Mouse" tooltip="Enter your username" tooltipOptions={{position: 'mouse'}} />
+                        </div>
                 </div>
 
                 <h5>Focus and Blur</h5>
@@ -273,18 +279,21 @@ const TooltipDemo = () => {
             <div className="card">
                 <h5>Positions</h5>
                 <div className="grid p-fluid">
-                    <div className="col-12 md:col-3">
-                        <InputText type="text" placeholder="Right" tooltip="Enter your username" />
-                    </div>
-                    <div className="col-12 md:col-3">
-                        <InputText type="text" placeholder="Top" tooltip="Enter your username" tooltipOptions={{position: 'top'}} />
-                    </div>
-                    <div className="col-12 md:col-3">
-                        <InputText type="text" placeholder="Bottom" tooltip="Enter your username" tooltipOptions={{position: 'bottom'}} />
-                    </div>
-                    <div className="col-12 md:col-3">
-                        <InputText type="text" placeholder="Left" tooltip="Enter your username" tooltipOptions={{position: 'left'}} />
-                    </div>
+                        <div className="col-12 md:col-2">
+                            <InputText type="text" placeholder="Right" tooltip="Enter your username" />
+                        </div>
+                        <div className="col-12 md:col-2">
+                            <InputText type="text" placeholder="Top" tooltip="Enter your username" tooltipOptions={{position: 'top'}} />
+                        </div>
+                        <div className="col-12 md:col-2">
+                            <InputText type="text" placeholder="Bottom" tooltip="Enter your username" tooltipOptions={{position: 'bottom'}} />
+                        </div>
+                        <div className="col-12 md:col-2">
+                            <InputText type="text" placeholder="Left" tooltip="Enter your username" tooltipOptions={{position: 'left'}} />
+                        </div>
+                        <div className="col-12 md:col-2">
+                            <InputText type="text" placeholder="Mouse" tooltip="Enter your username" tooltipOptions={{position: 'mouse'}} />
+                        </div>
                 </div>
 
                 <h5>Focus and Blur</h5>
@@ -401,18 +410,21 @@ const TooltipDemo = () => {
             <div className="card">
                 <h5>Positions</h5>
                 <div className="grid p-fluid">
-                    <div className="col-12 md:col-3">
-                        <InputText type="text" placeholder="Right" tooltip="Enter your username" />
-                    </div>
-                    <div className="col-12 md:col-3">
-                        <InputText type="text" placeholder="Top" tooltip="Enter your username" tooltipOptions={{position: 'top'}} />
-                    </div>
-                    <div className="col-12 md:col-3">
-                        <InputText type="text" placeholder="Bottom" tooltip="Enter your username" tooltipOptions={{position: 'bottom'}} />
-                    </div>
-                    <div className="col-12 md:col-3">
-                        <InputText type="text" placeholder="Left" tooltip="Enter your username" tooltipOptions={{position: 'left'}} />
-                    </div>
+                        <div className="col-12 md:col-2">
+                            <InputText type="text" placeholder="Right" tooltip="Enter your username" />
+                        </div>
+                        <div className="col-12 md:col-2">
+                            <InputText type="text" placeholder="Top" tooltip="Enter your username" tooltipOptions={{position: 'top'}} />
+                        </div>
+                        <div className="col-12 md:col-2">
+                            <InputText type="text" placeholder="Bottom" tooltip="Enter your username" tooltipOptions={{position: 'bottom'}} />
+                        </div>
+                        <div className="col-12 md:col-2">
+                            <InputText type="text" placeholder="Left" tooltip="Enter your username" tooltipOptions={{position: 'left'}} />
+                        </div>
+                        <div className="col-12 md:col-2">
+                            <InputText type="text" placeholder="Mouse" tooltip="Enter your username" tooltipOptions={{position: 'mouse'}} />
+                        </div>
                 </div>
 
                 <h5>Focus and Blur</h5>
@@ -661,7 +673,7 @@ import { Tooltip } from 'primereact/tooltip';
                                     <td>position</td>
                                     <td>string</td>
                                     <td>right</td>
-                                    <td>Position of the tooltip, valid values are right, left, top and bottom.</td>
+                                    <td>Position of the tooltip, valid values are mouse, right, left, top and bottom.</td>
                                 </tr>
                                 <tr>
                                     <td>my</td>
