@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import * as React from 'react';
 import { InputTextarea } from './InputTextarea';
 
 describe('InputTextarea', () => {
@@ -120,5 +121,21 @@ describe('InputTextarea', () => {
         // Act
         expect(input).toHaveValue('');
         expect(pasteOn).toHaveBeenCalledTimes(1);
+    });
+    test('when input is using onInput make sure it is called', async () => {
+        // Arrange
+        const inputOn = jest.fn();
+        const ref = React.createRef();
+        const { container } = render(<InputTextarea ref={ref} onInput={inputOn} />);
+        const input = container.getElementsByTagName('textarea')[0];
+
+        // Act
+        ref.current.value = 'Jest testing value';
+        input.focus();
+        await userEvent.paste(' abc');
+
+        // Assert
+        expect(input).toHaveValue('Jest testing value abc');
+        expect(inputOn).toHaveBeenCalledTimes(1);
     });
 });
