@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-type TooltipPositionType = 'top' | 'bottom' | 'left' | 'right';
+type TooltipPositionType = 'top' | 'bottom' | 'left' | 'right' | 'mouse';
 
 type TooltipEventType = 'hover' | 'focus' | 'both';
 
@@ -12,26 +12,26 @@ interface TooltipEventParams {
 }
 
 export default interface TooltipOptions {
-    className?: string;
-    style?: React.CSSProperties;
     appendTo?: TooltipAppendToType;
-    position?: TooltipPositionType;
-    my?: string;
     at?: string;
-    event?: TooltipEventType;
-    showEvent?: string;
-    hideEvent?: string;
+    autoHide?: boolean;
     autoZIndex?: boolean;
     baseZIndex?: number;
-    mouseTrack?: boolean;
-    mouseTrackTop?: number;
-    mouseTrackLeft?: number;
-    showDelay?: number;
-    updateDelay?: number;
-    hideDelay?: number;
-    autoHide?: boolean;
+    className?: string;
     disabled?: boolean;
+    event?: TooltipEventType;
+    hideDelay?: number;
+    hideEvent?: string;
+    mouseTrack?: boolean;
+    mouseTrackLeft?: number;
+    mouseTrackTop?: number;
+    my?: string;
+    position?: TooltipPositionType;
+    showDelay?: number;
+    showEvent?: string;
     showOnDisabled?: boolean;
+    style?: React.CSSProperties;
+    updateDelay?: number;
     onBeforeShow?(e: TooltipEventParams): void;
     onBeforeHide?(e: TooltipEventParams): void;
     onShow?(e: TooltipEventParams): void;
