@@ -11,15 +11,17 @@ type CalendarIconPosType = 'left' | 'right';
 
 type CalendarEventType = React.SyntheticEvent | undefined | null;
 
+type CalendarValueType = Date | Date[] | string | undefined | null;
+
 interface CalendarChangeTargetOptions {
     name: string;
     id: string;
-    value: Date | Date[] | undefined | null;
+    value: CalendarValueType;
 }
 
 interface CalendarChangeParams {
     originalEvent: React.SyntheticEvent;
-    value: Date | Date[] | undefined;
+    value: CalendarValueType;
     stopPropagation(): void;
     preventDefault(): void;
     target: CalendarChangeTargetOptions;
@@ -37,7 +39,7 @@ interface CalendarViewChangeParams {
 
 interface CalendarSelectParams {
     originalEvent: React.SyntheticEvent;
-    value: Date | Date[];
+    value: CalendarValueType;
 }
 
 interface CalendarDateTemplateParams {
@@ -131,7 +133,7 @@ export interface CalendarProps {
     tooltipOptions?: TooltipOptions;
     touchUI?: boolean;
     transitionOptions?: CSSTransitionProps;
-    value?: Date | Date[];
+    value?: CalendarValueType;
     view?: string;
     viewDate?: Date;
     visible?: boolean;
