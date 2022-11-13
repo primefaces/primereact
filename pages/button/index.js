@@ -19,6 +19,7 @@ import { BadgesDoc } from '../../components/doc/button/badgesdoc';
 import { ButtonSetDoc } from '../../components/doc/button/buttonsetdoc';
 import { SizesDoc } from '../../components/doc/button/sizesdoc';
 import { TemplateDoc } from '../../components/doc/button/templatedoc';
+import { ApiDoc } from '../../components/doc/button/apidoc';
 
 const ButtonDemo = () => {
     const docs = [
@@ -106,6 +107,11 @@ const ButtonDemo = () => {
             id: 'template',
             label: 'Template',
             component: TemplateDoc
+        },
+        {
+            id: 'api',
+            label: 'API',
+            component: ApiDoc
         }
     ];
 
