@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { InputTextarea } from '../../lib/inputtextarea/InputTextarea';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function AutoResizeDoc(props) {
     const [value, setValue] = useState('');
@@ -40,7 +40,7 @@ export default function AutoResizeDemo() {
         <>
             <DocSectionText {...props}>In auto resize mode, textarea grows instead of displaying a scrollbar.</DocSectionText>
             <div className="card flex justify-content-center">
-                <InputTextarea rows={5} cols={30} value={value} onChange={(e) => setValue(event.target.value)} autoResize />
+                <InputTextarea rows={5} cols={30} value={value} onChange={(e) => setValue(e.target.value)} autoResize />
             </div>
             <DocSectionCode code={code} />
         </>
