@@ -10,6 +10,4 @@ export interface InputTextareaProps extends Omit<React.DetailedHTMLProps<React.T
     tooltipOptions?: TooltipOptions;
 }
 
-export declare class InputTextarea extends React.Component<InputTextareaProps, any> {
-    value?: string;
-}
+export declare const InputTextarea: React.ForwardRefExoticComponent<InputTextareaProps & React.RefAttributes<HTMLTextAreaElement>>;
