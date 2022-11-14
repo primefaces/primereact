@@ -1,9 +1,9 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
+import { Button } from '../../lib/button/Button';
 import { ConfirmDialog, confirmDialog } from '../../lib/confirmdialog/ConfirmDialog';
 import { Toast } from '../../lib/toast/Toast';
-import { Button } from '../../lib/button/Button';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function PositionDoc(props) {
     const toast = useRef(null);
@@ -91,14 +91,14 @@ import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
 
 export default function PositionDoc() {
-    const toast = useRef(null);
-    
+    const toast = useRef<Toast>(null);
+
     const accept = () => {
-        toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
+        toast.current?.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
     }
 
     const reject = () => {
-        toast.current.show({ severity: 'warn', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
+        toast.current?.show({ severity: 'warn', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
     }
 
     const confirmPosition = (position) => {
