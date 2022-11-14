@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button } from '../../lib/button/Button';
-import { classNames } from '../../lib/utils/utils';
+import { classNames } from '../../lib/utils/Utils';
 import { CodeHighlight } from './codehighlight';
 
 export function DocSectionCode(props) {
