@@ -115,7 +115,7 @@ export const MultiStateCheckbox = React.memo(
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = ObjectUtils.findDiffKeys(props, MultiStateCheckbox.defaultProps);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
-        const className = classNames('p-multistatecheckbox p-checkbox p-component', props.className);
+        const className = classNames('p-multistatecheckbox p-checkbox p-component', props.className, { 'p-checkbox-disabled': props.disabled });
         const boxClassName = classNames(
             'p-checkbox-box',
             {

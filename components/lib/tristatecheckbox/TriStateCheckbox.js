@@ -59,7 +59,7 @@ export const TriStateCheckbox = React.memo(
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = ObjectUtils.findDiffKeys(props, TriStateCheckbox.defaultProps);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
-        const className = classNames('p-tristatecheckbox p-checkbox p-component', props.className);
+        const className = classNames('p-tristatecheckbox p-checkbox p-component', props.className, { 'p-checkbox-disabled': props.disabled });
         const boxClassName = classNames('p-checkbox-box', {
             'p-highlight': (props.value || !props.value) && props.value !== null,
             'p-disabled': props.disabled,
