@@ -52,6 +52,22 @@
     left: 0;
 }
 
+.p-multiselect-inline.p-multiselect-panel {
+    border: none;
+    position: initial;
+    background: none;
+    box-shadow: none;
+}
+
+.p-multiselect-inline.p-multiselect-panel .p-multiselect-items {
+    padding: 0;
+}
+
+.p-multiselect-flex.p-multiselect-panel .p-multiselect-items {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .p-multiselect-items-wrapper {
     overflow: auto;
 }

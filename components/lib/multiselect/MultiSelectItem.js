@@ -29,6 +29,7 @@ export const MultiSelectItem = React.memo((props) => {
             'p-highlight': props.selected,
             'p-disabled': props.disabled
         },
+        props.className,
         props.option.className
     );
     const checkboxClassName = classNames('p-checkbox-box', {

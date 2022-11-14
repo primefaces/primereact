@@ -84,6 +84,7 @@ export const MultiSelectPanel = React.memo(
                         onKeyDown={props.onOptionKeyDown}
                         tabIndex={tabIndex}
                         disabled={disabled}
+                        className={props.itemClassName}
                     />
                 );
             });
@@ -130,6 +131,7 @@ export const MultiSelectPanel = React.memo(
                         onKeyDown={props.onOptionKeyDown}
                         tabIndex={tabIndex}
                         disabled={disabled}
+                        className={props.itemClassName}
                     />
                 );
             }
@@ -188,6 +190,8 @@ export const MultiSelectPanel = React.memo(
             const panelClassName = classNames(
                 'p-multiselect-panel p-component',
                 {
+                    'p-multiselect-inline': props.inline,
+                    'p-multiselect-flex': props.flex,
                     'p-multiselect-limited': !allowOptionSelect
                 },
                 props.panelClassName
@@ -195,6 +199,15 @@ export const MultiSelectPanel = React.memo(
             const header = createHeader();
             const content = createContent();
             const footer = createFooter();
+
+            if (props.inline) {
+                return (
+                    <div ref={ref} className={panelClassName} style={props.panelStyle} onClick={props.onClick}>
+                        {content}
+                        {footer}
+                    </div>
+                );
+            }
 
             return (
                 <CSSTransition
@@ -219,6 +232,8 @@ export const MultiSelectPanel = React.memo(
         };
 
         const element = createElement();
+
+        if (props.inline) return element;
 
         return <Portal element={element} appendTo={props.appendTo} />;
     })
