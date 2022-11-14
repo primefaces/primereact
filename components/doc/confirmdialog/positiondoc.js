@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { Button } from '../../lib/button/Button';
-import { ConfirmDialog, confirmDialog } from '../../lib/confirmdialog/ConfirmDialog';
+import { confirmDialog } from '../../lib/confirmdialog/ConfirmDialog';
 import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
@@ -143,7 +143,6 @@ export default function PositionDoc() {
                 There are two ways to display confirm dialog. One of them is to use the confirmDialog method and the other is to use the <i>&lt;ConfirmDialog&gt;</i> tag. These independently create dialog element. It supports the same properties in
                 both.
             </DocSectionText>
-            <ConfirmDialog />
 
             <div className="card ">
                 <div className="col-12">

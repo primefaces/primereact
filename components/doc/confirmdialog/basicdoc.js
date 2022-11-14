@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { Button } from '../../lib/button/Button';
-import { ConfirmDialog, confirmDialog } from '../../lib/confirmdialog/ConfirmDialog';
+import { confirmDialog } from '../../lib/confirmdialog/ConfirmDialog';
 import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
@@ -144,7 +144,6 @@ const reject = () => {
             <DocSectionText {...props}>ConfirmDialog is used as a container and visibility is managed with visible property where onHide event is required to update the visibility state.</DocSectionText>
             <div className="card flex justify-content-center">
                 <Toast ref={toast} />
-                <ConfirmDialog />
                 <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
                 <Button onClick={confirm2} icon="pi pi-times" label="Delete"></Button>
             </div>

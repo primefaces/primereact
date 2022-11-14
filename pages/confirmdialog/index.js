@@ -1,12 +1,13 @@
 import Head from 'next/head';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
+import { ApiDoc } from '../../components/doc/confirmdialog/apidoc';
 import { BasicDoc } from '../../components/doc/confirmdialog/basicdoc';
+import { ImportDoc } from '../../components/doc/confirmdialog/importdoc';
 import { PositionDoc } from '../../components/doc/confirmdialog/positiondoc';
 import { UsingConfirmDialogDoc } from '../../components/doc/confirmdialog/usingdoc';
-import { ApiDoc } from '../../components/doc/confirmdialog/apidoc';
-import { ImportDoc } from '../../components/doc/confirmdialog/importdoc';
+import { ConfirmDialog } from '../../components/lib/confirmdialog/ConfirmDialog';
 
 const ConfirmDialogDemo = () => {
     const docs = [
@@ -56,6 +57,7 @@ const ConfirmDialogDemo = () => {
             <div className="content-section doc">
                 <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
+                <ConfirmDialog />
             </div>
         </div>
     );
