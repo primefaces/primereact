@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { MultiSelect } from '../../lib/multiselect/MultiSelect';
-import { Skeleton } from '../../lib/skeleton/skeleton';
+import { Skeleton } from '../../lib/skeleton/Skeleton';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
