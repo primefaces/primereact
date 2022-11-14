@@ -1,9 +1,9 @@
-import { useState, useRef } from 'react';
-import { ConfirmDialog, confirmDialog } from '../../lib/confirmdialog/ConfirmDialog';
-import { Toast } from '../../lib/toast/Toast';
+import { useRef, useState } from 'react';
 import { Button } from '../../lib/button/Button';
-import { DocSectionText } from '../common/docsectiontext';
+import { ConfirmDialog } from '../../lib/confirmdialog/ConfirmDialog';
+import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function UsingConfirmDialogDoc(props) {
     const [visible, setVisible] = useState(false);
@@ -62,14 +62,14 @@ import { Button } from '../../lib/button/Button';
 
 export default function UsingConfirmDialogDoc() {
     const [visible, setVisible] = useState(false);
-    const toast = useRef(null);
+    const toast = useRef<Toast>(null);
 
     const accept = () => {
-        toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
+        toast.current?.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
     }
 
     const reject = () => {
-        toast.current.show({ severity: 'warn', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
+        toast.current?.show({ severity: 'warn', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
     }
 
     return (

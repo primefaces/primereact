@@ -1,7 +1,7 @@
 import React from 'react';
-import { Toolbar } from '../../lib/toolbar/Toolbar';
 import { Button } from '../../lib/button/Button';
 import { SplitButton } from '../../lib/splitbutton/SplitButton';
+import { Toolbar } from '../../lib/toolbar/Toolbar';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
@@ -52,7 +52,7 @@ export function ToolbarDoc(props) {
 <Toolbar left={leftContents} right={rightContents} />
         `,
         javascript: `
-import React from 'react';        
+import React from 'react';
 import { Toolbar } from 'primereact/toolbar';
 import { Button } from 'primereact/button';
 import { SplitButton } from 'primereact/splitbutton';
@@ -107,11 +107,12 @@ export default function ToolbarDoc() {
 import React from 'react';
 import { Toolbar } from 'primereact/toolbar';
 import { Button } from 'primereact/button';
+import { MenuItem } from 'primereact/menuitem';
 import { SplitButton } from 'primereact/splitbutton';
 
 export default function ToolbarDoc() {
 
-    const items = [
+    const items: MenuItem[] = [
         {
             label: 'Update',
             icon: 'pi pi-refresh'

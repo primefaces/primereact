@@ -1,6 +1,6 @@
-import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { Avatar } from '../../lib/avatar/Avatar';
 import { SplitButton } from '../../lib/splitbutton/SplitButton';
+import { TabPanel, TabView } from '../../lib/tabview/TabView';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
@@ -99,12 +99,12 @@ export default function CustomHeaderDoc() {
 }
         `,
         typescript: `
-import { TabView, TabPanel } from 'primereact/tabview';
+import { TabView, TabPanel, TabPanelHeaderTemplateOptions } from 'primereact/tabview';
 import { SplitButton } from 'primereact/splitbutton';
 import { Avatar } from 'primereact/avatar';
 
 export default function CustomHeaderDoc() {
-    const tabHeaderITemplate = (options) => {
+    const tabHeaderITemplate = (options: TabPanelHeaderTemplateOptions) => {
         return (
             <button type="button" onClick={options.onClick} className={options.className}>
                 <i className="pi pi-prime mr-2" />
@@ -113,7 +113,7 @@ export default function CustomHeaderDoc() {
         );
     };
 
-    const tabHeaderIITemplate = (options) => {
+    const tabHeaderIITemplate = (options: TabPanelHeaderTemplateOptions) => {
         return (
             <div className="flex align-items-center px-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
                 <Avatar image="images/avatar/amyelsner.png" onImageError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} shape="circle" className="mx-2" />
@@ -122,7 +122,7 @@ export default function CustomHeaderDoc() {
         )
     };
 
-    const tabHeaderIIITemplate = (options) => {
+    const tabHeaderIIITemplate = (options: TabPanelHeaderTemplateOptions) => {
         const items = [
             { label: 'Update', icon: 'pi pi-refresh' },
             { label: 'Delete', icon: 'pi pi-times' },
