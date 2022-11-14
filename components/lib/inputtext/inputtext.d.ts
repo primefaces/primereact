@@ -11,6 +11,4 @@ export interface InputTextProps extends Omit<React.DetailedHTMLProps<React.Input
     onInput?(event: React.FormEvent<HTMLInputElement>, validatePattern: boolean): void;
 }
 
-export declare class InputText extends React.Component<InputTextProps, any> {
-    //value?: string;
-}
+export declare const InputText: React.ForwardRefExoticComponent<InputTextProps & React.RefAttributes<HTMLInputElement>>;
