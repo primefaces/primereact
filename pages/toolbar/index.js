@@ -1,61 +1,29 @@
-import React from 'react';
-import { Toolbar } from '../../components/lib/toolbar/Toolbar';
-import { Button } from '../../components/lib/button/Button';
-import { SplitButton } from '../../components/lib/splitbutton/SplitButton';
-import ToolbarDoc from '../../components/doc/toolbar';
-import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
-import Link from 'next/link';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
+import { DocActions } from '../../components/doc/common/docactions';
+import { ImportDoc } from '../../components/doc/toolbar/importdoc';
+import { ToolbarDoc } from '../../components/doc/toolbar/toolbardoc';
+import { ApiDoc } from '../../components/doc/toolbar/apidoc';
 
 const ToolbarDemo = () => {
-    const items = [
+    const docs = [
         {
-            label: 'Update',
-            icon: 'pi pi-refresh'
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
         },
         {
-            label: 'Delete',
-            icon: 'pi pi-times'
+            id: 'toolbar',
+            label: 'Toolbar',
+            component: ToolbarDoc
         },
         {
-            label: 'React Website',
-            icon: 'pi pi-external-link',
-            command: () => {
-                window.location.href = 'https://reactjs.org/';
-            }
-        },
-        {
-            label: 'Upload',
-            icon: 'pi pi-upload',
-            template: (item, options) => {
-                return (
-                    <Link href="/fileupload">
-                        <a className={options.className} target={item.target}>
-                            <span className="p-menuitem-icon pi pi-upload"></span>
-                            <span className="p-menuitem-text">{item.label}</span>
-                        </a>
-                    </Link>
-                );
-            }
+            id: 'api',
+            label: 'API',
+            component: ApiDoc
         }
     ];
-
-    const leftContents = (
-        <React.Fragment>
-            <Button label="New" icon="pi pi-plus" className="mr-2" />
-            <Button label="Upload" icon="pi pi-upload" className="p-button-success" />
-            <i className="pi pi-bars p-toolbar-separator mr-2" />
-            <SplitButton label="Save" icon="pi pi-check" model={items} className="p-button-warning"></SplitButton>
-        </React.Fragment>
-    );
-
-    const rightContents = (
-        <React.Fragment>
-            <Button icon="pi pi-search" className="mr-2" />
-            <Button icon="pi pi-calendar" className="p-button-success mr-2" />
-            <Button icon="pi pi-times" className="p-button-danger" />
-        </React.Fragment>
-    );
 
     return (
         <div>
@@ -71,11 +39,10 @@ const ToolbarDemo = () => {
                 <DocActions github="toolbar/index.js" />
             </div>
 
-            <div className="content-section implementation">
-                <Toolbar left={leftContents} right={rightContents} />
+            <div className="content-section doc">
+                <DocSections docs={docs} />
+                <DocSectionNav docs={docs} />
             </div>
-
-            <ToolbarDoc />
         </div>
     );
 };
