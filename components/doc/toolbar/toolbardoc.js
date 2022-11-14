@@ -160,7 +160,7 @@ export default function ToolbarDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Tabview element consists of one or more TabPanel elements and can either be used as a Controlled or Uncontrolled component. </DocSectionText>
+            <DocSectionText {...props}>Toolbar provides left and right templates to place content at these sections.</DocSectionText>
             <div className="card ">
                 <Toolbar left={leftContents} right={rightContents} />
             </div>
