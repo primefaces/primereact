@@ -48,4 +48,26 @@ describe('Splitter', () => {
         </>,
         'Nested'
     );
+    snapshot(
+        <>
+            <Splitter style={{ height: '300px' }} layout="vertical">
+                <SplitterPanel size={5}>Panel 1</SplitterPanel>
+            </Splitter>
+        </>,
+        'Single Panel with size'
+    );
+    snapshot(
+        <>
+            <Splitter style={{ height: '300px' }} layout="vertical">
+                <SplitterPanel>Panel 1</SplitterPanel>
+            </Splitter>
+        </>,
+        'Single Panel without size'
+    );
+    snapshot(
+        <>
+            <Splitter style={{ height: '300px' }} layout="vertical"></Splitter>
+        </>,
+        'Without panels'
+    );
 });
