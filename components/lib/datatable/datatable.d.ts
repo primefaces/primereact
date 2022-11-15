@@ -54,6 +54,7 @@ interface DataTableFooterTemplateOptions extends DataTableHeaderTemplateOptions 
 interface DataTableRowGroupHeaderTemplateOptions {
     index: number;
     props: DataTableProps;
+    customRendering: boolean;
 }
 
 interface DataTableRowGroupFooterTemplateOptions extends DataTableRowGroupHeaderTemplateOptions {

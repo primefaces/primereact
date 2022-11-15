@@ -813,14 +813,22 @@ export const TableBody = React.memo(
             if (isSubheaderGrouping && shouldRenderRowGroupHeader(props.value, rowData, index - props.first)) {
                 const style = rowGroupHeaderStyle();
                 const toggler = props.expandableRowGroups && <RowTogglerButton onClick={onRowToggle} rowData={rowData} expanded={expanded} expandedRowIcon={props.expandedRowIcon} collapsedRowIcon={props.collapsedRowIcon} />;
-                const content = ObjectUtils.getJSXElement(props.rowGroupHeaderTemplate, rowData, { index, props: props.tableProps });
+                const options = { index, index, props: props.tableProps, customRendering: false };
+                let content = ObjectUtils.getJSXElement(props.rowGroupHeaderTemplate, rowData, options);
 
-                return (
-                    <tr className="p-rowgroup-header" style={style} role="row">
+                // check if the user wants complete control of the rendering
+                if (!options.customRendering) {
+                    content = (
                         <td colSpan={colSpan}>
                             {toggler}
                             <span className="p-rowgroup-header-name">{content}</span>
                         </td>
+                    );
+                }
+
+                return (
+                    <tr className="p-rowgroup-header" style={style} role="row">
+                        {content}
                     </tr>
                 );
             }
