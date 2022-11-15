@@ -82,13 +82,13 @@ export default function WithoutModalDoc() {
         `,
         typescript: `
 import { useState } from "react";
-import { Dialog } from 'primereact/dialog';
+import { Dialog, DialogPositionType } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 
 export default function WithoutModalDoc() {
     const [displayModal, setDisplayModal] = useState(false);
 
-    const onClick = (name, position) => {
+    const onClick = (name: string, position: DialogPositionType) => {
         setDisplayModal(true);
 
         if (position) {
@@ -96,11 +96,11 @@ export default function WithoutModalDoc() {
         }
     };
 
-    const onHide = (name) => {
+    const onHide = (name: string) => {
         setDisplayModal(false);
     };
 
-    const renderFooter = (name) => {
+    const renderFooter = (name: string) => {
         return (
             <div>
                 <Button label="No" icon="pi pi-times" onClick={() => onHide(name)} className="p-button-text" />

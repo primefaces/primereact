@@ -58,7 +58,7 @@ export function PositionDoc(props) {
         `,
         javascript: `
 import { useState } from "react";
-import { Dialog } from 'primereact/dialog';
+import { Dialog, DialogPositionType } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 
 export default function PositionDoc() {
@@ -69,7 +69,7 @@ export default function PositionDoc() {
         displayPosition: setDisplayPosition
     };
 
-    const onClick = (name, position) => {
+    const onClick = (name: string, position: DialogPositionType) => {
         dialogFuncMap[\`\${name}\`](true);
 
         if (position) {
@@ -77,11 +77,11 @@ export default function PositionDoc() {
         }
     };
 
-    const onHide = (name) => {
+    const onHide = (name: string) => {
         dialogFuncMap[\`\${name}\`](true);
     };
 
-    const renderFooter = (name) => {
+    const renderFooter = (name: string) => {
         return (
             <div>
                 <Button label="No" icon="pi pi-times" onClick={() => onHide(name)} className="p-button-text" />

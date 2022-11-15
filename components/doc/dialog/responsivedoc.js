@@ -40,13 +40,13 @@ export function ResponsiveDoc(props) {
         `,
         javascript: `
 import { useState } from "react";
-import { Dialog } from 'primereact/dialog';
+import { Dialog, DialogPositionType } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 
 export default function ResponsiveDoc() {
     const [displayModal, setDisplayModal] = useState(false);
 
-    const onClick = (name, position) => {
+    const onClick = (name: string, position: DialogPositionType) => {
         setDisplayResponsive(true);
 
         if (position) {
@@ -54,11 +54,11 @@ export default function ResponsiveDoc() {
         }
     };
 
-    const onHide = (name) => {
+    const onHide = (name: string) => {
         setDisplayResponsive(false);
     };
 
-    const renderFooter = (name) => {
+    const renderFooter = (name: string) => {
         return (
             <div>
                 <Button label="No" icon="pi pi-times" onClick={() => onHide(name)} className="p-button-text" />

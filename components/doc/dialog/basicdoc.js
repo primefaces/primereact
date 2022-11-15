@@ -58,7 +58,7 @@ import { Dialog } from 'primereact/dialog';
 
 export default function BasicDoc() {
     const [displayBasic, setDisplayBasic] = useState(false);
-        
+
     const dialogFuncMap = {
        'displayBasic': setDisplayBasic,
     }
@@ -103,16 +103,16 @@ export default function BasicDoc() {
         typescript: `
 import { useState } from "react";
 import { Button } from 'primereact/button';
-import { Dialog } from 'primereact/dialog';
+import { Dialog, DialogPositionType } from 'primereact/dialog';
 
 export default function BasicDoc() {
     const [displayBasic, setDisplayBasic] = useState<boolean>(false);
-        
+
     const dialogFuncMap = {
        'displayBasic': setDisplayBasic,
     }
 
-    const onClick = (name, position) => {
+    const onClick = (name: string, position: DialogPositionType) => {
         dialogFuncMap[\`\${name}\`](true);
 
         if (position) {
@@ -120,7 +120,7 @@ export default function BasicDoc() {
         }
     }
 
-    const renderFooter = (name) => {
+    const renderFooter = (name: string) => {
         return (
             <div>
                 <Button label="No" icon="pi pi-times" onClick={() => onHide(name)} className="p-button-text" />
