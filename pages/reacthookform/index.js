@@ -1,19 +1,19 @@
+import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import { InputText } from '../../components/lib/inputtext/InputText';
+import { Controller, useForm } from 'react-hook-form';
+import { DocActions } from '../../components/doc/common/docactions';
+import { useLiveEditorTabs } from '../../components/doc/common/liveeditor';
 import { Button } from '../../components/lib/button/Button';
-import { Dropdown } from '../../components/lib/dropdown/Dropdown';
 import { Calendar } from '../../components/lib/calendar/Calendar';
-import { Password } from '../../components/lib/password/Password';
 import { Checkbox } from '../../components/lib/checkbox/Checkbox';
 import { Dialog } from '../../components/lib/dialog/Dialog';
 import { Divider } from '../../components/lib/divider/Divider';
+import { Dropdown } from '../../components/lib/dropdown/Dropdown';
+import { InputText } from '../../components/lib/inputtext/InputText';
+import { Password } from '../../components/lib/password/Password';
 import { TabView } from '../../components/lib/tabview/TabView';
-import { CountryService } from '../../service/CountryService';
 import { classNames } from '../../components/lib/utils/ClassNames';
-import { useLiveEditorTabs } from '../../components/doc/common/liveeditor';
-import { DocActions } from '../../components/doc/common/docactions';
-import Head from 'next/head';
+import { CountryService } from '../../service/CountryService';
 
 const ReactHookFormDemo = () => {
     const [countries, setCountries] = useState([]);
@@ -108,7 +108,7 @@ const ReactHookFormDemo = () => {
                                         name="name"
                                         control={control}
                                         rules={{ required: 'Name is required.' }}
-                                        render={({ field, fieldState }) => <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />}
+                                        render={({ field, fieldState }) => <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.error })} />}
                                     />
                                     <label htmlFor="name" className={classNames({ 'p-error': errors.name })}>
                                         Name*
@@ -123,7 +123,7 @@ const ReactHookFormDemo = () => {
                                         name="email"
                                         control={control}
                                         rules={{ required: 'Email is required.', pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, message: 'Invalid email address. E.g. example@email.com' } }}
-                                        render={({ field, fieldState }) => <InputText id={field.name} {...field} className={classNames({ 'p-invalid': fieldState.invalid })} />}
+                                        render={({ field, fieldState }) => <InputText id={field.name} {...field} className={classNames({ 'p-invalid': fieldState.error })} />}
                                     />
                                     <label htmlFor="email" className={classNames({ 'p-error': !!errors.email })}>
                                         Email*
@@ -137,7 +137,7 @@ const ReactHookFormDemo = () => {
                                         name="password"
                                         control={control}
                                         rules={{ required: 'Password is required.' }}
-                                        render={({ field, fieldState }) => <Password id={field.name} {...field} toggleMask className={classNames({ 'p-invalid': fieldState.invalid })} header={passwordHeader} footer={passwordFooter} />}
+                                        render={({ field, fieldState }) => <Password id={field.name} {...field} inputRef={field.ref} className={classNames({ 'p-invalid': fieldState.error })} header={passwordHeader} footer={passwordFooter} />}
                                     />
                                     <label htmlFor="password" className={classNames({ 'p-error': errors.password })}>
                                         Password*
@@ -162,7 +162,7 @@ const ReactHookFormDemo = () => {
                                     name="accept"
                                     control={control}
                                     rules={{ required: true }}
-                                    render={({ field, fieldState }) => <Checkbox inputId={field.name} onChange={(e) => field.onChange(e.checked)} checked={field.value} className={classNames({ 'p-invalid': fieldState.invalid })} />}
+                                    render={({ field, fieldState }) => <Checkbox inputId={field.name} onChange={(e) => field.onChange(e.checked)} checked={field.value} className={classNames({ 'p-invalid': fieldState.error })} />}
                                 />
                                 <label htmlFor="accept" className={classNames({ 'p-error': errors.accept })}>
                                     I agree to the terms and conditions*
@@ -264,7 +264,7 @@ export const ReactHookFormDemo = () => {
                         <div className="field">
                             <span className="p-float-label">
                                 <Controller name="name" control={control} rules={{ required: 'Name is required.' }} render={({ field, fieldState }) => (
-                                    <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                    <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.error })} />
                                 )} />
                                 <label htmlFor="name" className={classNames({ 'p-error': errors.name })}>Name*</label>
                             </span>
@@ -276,7 +276,7 @@ export const ReactHookFormDemo = () => {
                                 <Controller name="email" control={control}
                                     rules={{ required: 'Email is required.', pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$/i, message: 'Invalid email address. E.g. example@email.com' }}}
                                     render={({ field, fieldState }) => (
-                                        <InputText id={field.name} {...field} className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                        <InputText id={field.name} {...field} className={classNames({ 'p-invalid': fieldState.error })} />
                                 )} />
                                 <label htmlFor="email" className={classNames({ 'p-error': !!errors.email })}>Email*</label>
                             </span>
@@ -285,7 +285,7 @@ export const ReactHookFormDemo = () => {
                         <div className="field">
                             <span className="p-float-label">
                                 <Controller name="password" control={control} rules={{ required: 'Password is required.' }} render={({ field, fieldState }) => (
-                                    <Password id={field.name} {...field} toggleMask className={classNames({ 'p-invalid': fieldState.invalid })} header={passwordHeader} footer={passwordFooter} />
+                                    <Password id={field.name} {...field} inputRef={field.ref} toggleMask className={classNames({ 'p-invalid': fieldState.error })} header={passwordHeader} footer={passwordFooter} />
                                 )} />
                                 <label htmlFor="password" className={classNames({ 'p-error': errors.password })}>Password*</label>
                             </span>
@@ -309,7 +309,7 @@ export const ReactHookFormDemo = () => {
                         </div>
                         <div className="field-checkbox">
                             <Controller name="accept" control={control} rules={{ required: true }} render={({ field, fieldState }) => (
-                                <Checkbox inputId={field.name} onChange={(e) => field.onChange(e.checked)} checked={field.value} className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                <Checkbox inputId={field.name} onChange={(e) => field.onChange(e.checked)} checked={field.value} className={classNames({ 'p-invalid': fieldState.error })} />
                             )} />
                             <label htmlFor="accept" className={classNames({ 'p-error': errors.accept })}>I agree to the terms and conditions*</label>
                         </div>
@@ -405,7 +405,7 @@ export const ReactHookFormDemo = () => {
                         <div className="field">
                             <span className="p-float-label">
                                 <Controller name="name" control={control} rules={{ required: 'Name is required.' }} render={({ field, fieldState }) => (
-                                    <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                    <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.error })} />
                                 )} />
                                 <label htmlFor="name" className={classNames({ 'p-error': errors.name })}>Name*</label>
                             </span>
@@ -417,7 +417,7 @@ export const ReactHookFormDemo = () => {
                                 <Controller name="email" control={control}
                                     rules={{ required: 'Email is required.', pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$/i, message: 'Invalid email address. E.g. example@email.com' }}}
                                     render={({ field, fieldState }) => (
-                                        <InputText id={field.name} {...field} className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                        <InputText id={field.name} {...field} className={classNames({ 'p-invalid': fieldState.error })} />
                                 )} />
                                 <label htmlFor="email" className={classNames({ 'p-error': !!errors.email })}>Email*</label>
                             </span>
@@ -426,7 +426,7 @@ export const ReactHookFormDemo = () => {
                         <div className="field">
                             <span className="p-float-label">
                                 <Controller name="password" control={control} rules={{ required: 'Password is required.' }} render={({ field, fieldState }) => (
-                                    <Password id={field.name} {...field} toggleMask className={classNames({ 'p-invalid': fieldState.invalid })} header={passwordHeader} footer={passwordFooter} />
+                                    <Password id={field.name} {...field} inputRef={field.ref} toggleMask className={classNames({ 'p-invalid': fieldState.error })} header={passwordHeader} footer={passwordFooter} />
                                 )} />
                                 <label htmlFor="password" className={classNames({ 'p-error': errors.password })}>Password*</label>
                             </span>
@@ -450,7 +450,7 @@ export const ReactHookFormDemo = () => {
                         </div>
                         <div className="field-checkbox">
                             <Controller name="accept" control={control} rules={{ required: true }} render={({ field, fieldState }) => (
-                                <Checkbox inputId={field.name} onChange={(e) => field.onChange(e.checked)} checked={field.value} className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                <Checkbox inputId={field.name} onChange={(e) => field.onChange(e.checked)} checked={field.value} className={classNames({ 'p-invalid': fieldState.error })} />
                             )} />
                             <label htmlFor="accept" className={classNames({ 'p-error': errors.accept })}>I agree to the terms and conditions*</label>
                         </div>
