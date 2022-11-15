@@ -77,7 +77,7 @@ export function DocSectionCode(props) {
             )}
             {codeMode !== 'basic' && codeLang === 'typescript' && (
                 <div>
-                    <CodeHighlight>{props.code.typescript}</CodeHighlight>
+                    <CodeHighlight lang={'tsx'}>{props.code.typescript}</CodeHighlight>
                 </div>
             )}
         </div>
