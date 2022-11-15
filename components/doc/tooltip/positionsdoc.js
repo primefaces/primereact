@@ -1,5 +1,4 @@
 import { InputText } from '../../lib/inputtext/InputText';
-import { Tooltip } from '../../lib/tooltip/Tooltip';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
@@ -10,6 +9,7 @@ export function PositionsDoc(props) {
 <InputText type="text" placeholder="Top" tooltip="Enter your username" tooltipOptions={{position: 'top'}} />
 <InputText type="text" placeholder="Bottom" tooltip="Enter your username" tooltipOptions={{position: 'bottom'}} />
 <InputText type="text" placeholder="Left" tooltip="Enter your username" tooltipOptions={{position: 'left'}} />
+<InputText type="text" placeholder="Mouse" tooltip="Enter your username" tooltipOptions={{position: 'mouse'}} />
 
         `,
         javascript: `
@@ -20,17 +20,20 @@ export default function PositionsDoc() {
 
     return (
         <div>
-            <div className="col-12 md:col-3">
+            <div className="col-12 md:col-2">
                 <InputText type="text" placeholder="Right" tooltip="Enter your username" />
             </div>
-            <div className="col-12 md:col-3">
+            <div className="col-12 md:col-2">
                 <InputText type="text" placeholder="Top" tooltip="Enter your username" tooltipOptions={{position: 'top'}} />
             </div>
-            <div className="col-12 md:col-3">
+            <div className="col-12 md:col-2">
                 <InputText type="text" placeholder="Bottom" tooltip="Enter your username" tooltipOptions={{position: 'bottom'}} />
             </div>
-            <div className="col-12 md:col-3">
+            <div className="col-12 md:col-2">
                 <InputText type="text" placeholder="Left" tooltip="Enter your username" tooltipOptions={{position: 'left'}} />
+            </div>
+            <div className="col-12 md:col-2">
+                <InputText type="text" placeholder="Mouse" tooltip="Enter your username" tooltipOptions={{position: 'mouse'}} />
             </div>
         </div>
     );
@@ -44,17 +47,20 @@ export default function PositionsDoc() {
 
     return (
         <div>
-            <div className="col-12 md:col-3">
+            <div className="col-12 md:col-2">
                 <InputText type="text" placeholder="Right" tooltip="Enter your username" />
             </div>
-            <div className="col-12 md:col-3">
+            <div className="col-12 md:col-2">
                 <InputText type="text" placeholder="Top" tooltip="Enter your username" tooltipOptions={{position: 'top'}} />
             </div>
-            <div className="col-12 md:col-3">
+            <div className="col-12 md:col-2">
                 <InputText type="text" placeholder="Bottom" tooltip="Enter your username" tooltipOptions={{position: 'bottom'}} />
             </div>
-            <div className="col-12 md:col-3">
+            <div className="col-12 md:col-2">
                 <InputText type="text" placeholder="Left" tooltip="Enter your username" tooltipOptions={{position: 'left'}} />
+            </div>
+            <div className="col-12 md:col-2">
+                <InputText type="text" placeholder="Mouse" tooltip="Enter your username" tooltipOptions={{position: 'mouse'}} />
             </div>
         </div>
     );
@@ -65,21 +71,24 @@ export default function PositionsDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                There are four choices to position the tooltip, default value is "right" and alternatives are "top", "bottom", "left". Position is specified using <i>tooltipOptions</i> property.
+                There are five choices to position the tooltip, default value is "right" and alternatives are "top", "bottom", "left", "mouse". Position is specified using <i>tooltipOptions</i> property.
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="grid p-fluid">
-                    <div className="col-12 md:col-3">
+                    <div className="col-12 md:col-2">
                         <InputText type="text" placeholder="Right" tooltip="Enter your username" />
                     </div>
-                    <div className="col-12 md:col-3">
+                    <div className="col-12 md:col-2">
                         <InputText type="text" placeholder="Top" tooltip="Enter your username" tooltipOptions={{ position: 'top' }} />
                     </div>
-                    <div className="col-12 md:col-3">
+                    <div className="col-12 md:col-2">
                         <InputText type="text" placeholder="Bottom" tooltip="Enter your username" tooltipOptions={{ position: 'bottom' }} />
                     </div>
-                    <div className="col-12 md:col-3">
+                    <div className="col-12 md:col-2">
                         <InputText type="text" placeholder="Left" tooltip="Enter your username" tooltipOptions={{ position: 'left' }} />
+                    </div>
+                    <div className="col-12 md:col-2">
+                        <InputText type="text" placeholder="Mouse" tooltip="Enter your username" tooltipOptions={{ position: 'mouse' }} />
                     </div>
                 </div>
             </div>

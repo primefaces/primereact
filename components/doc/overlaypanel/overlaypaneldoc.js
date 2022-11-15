@@ -1,10 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
-import { Button } from '../../lib/button/Button';
-import { Toast } from '../../lib/toast/Toast';
-import { OverlayPanel } from '../../lib/overlaypanel/OverlayPanel';
-import { DataTable } from '../../lib/datatable/DataTable';
-import { Column } from '../../lib/column/Column';
+import { useEffect, useRef, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
+import { Button } from '../../lib/button/Button';
+import { Column } from '../../lib/column/Column';
+import { DataTable } from '../../lib/datatable/DataTable';
+import { OverlayPanel } from '../../lib/overlaypanel/OverlayPanel';
+import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
@@ -124,12 +124,12 @@ import { OverlayPanel } from 'primereact/overlaypanel';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 import { Column } from 'primereact/column';
-import { DataTable } from 'primereact/datatable';
+import { DataTable, DataTableSelectionChangeParams } from 'primereact/datatable';
 import { ProductService } from '../service/ProductService';
 
 export default function OverlayPanelDoc() {
-    const [products, setProducts] = useState(null);
-    const [selectedProduct, setSelectedProduct] = useState(null);
+    const [products, setProducts] = useState<Product[]>(null);
+    const [selectedProduct, setSelectedProduct] = useState<Product>(null);
     const productService = new ProductService();
     const op = useRef<OverlayPanel>(null);
     const toast = useRef<Toast>(null);
@@ -140,26 +140,26 @@ export default function OverlayPanelDoc() {
             op.current.hide();
             toast.current.show({ severity: 'info', summary: 'Product Selected', detail: selectedProduct.name, life: 3000 });
         }
-    }, [selectedProduct]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [selectedProduct]);
 
     useEffect(() => {
         isMounted.current = true;
         productService.getProductsSmall().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     const formatCurrency = (value) => {
         return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
     };
 
-    const onProductSelect = (e) => {
+    const onProductSelect = (e: DataTableSelectionChangeParams) => {
         setSelectedProduct(e.value);
     };
 
-    const imageBody = (rowData) => {
+    const imageBody = (rowData: Product) => {
         return <img src={\`images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />
     };
 
-    const priceBody = (rowData) => {
+    const priceBody = (rowData: Product) => {
         return formatCurrency(rowData.price);
     };
 
