@@ -8,7 +8,7 @@ exports[`Splitter Nested 1`] = `
   >
     <div
       class="p-splitter-panel flex align-items-center justify-content-center"
-      style="flex-basis: calc(10% - 4px);"
+      style="flex-basis: calc(20% - 4px);"
     >
       Panel 1
     </div>
@@ -22,14 +22,14 @@ exports[`Splitter Nested 1`] = `
     </div>
     <div
       class="p-splitter-panel p-splitter-panel-nested"
-      style="flex-basis: calc(40% - 4px);"
+      style="flex-basis: calc(80% - 4px);"
     >
       <div
         class="p-splitter p-component p-splitter-vertical"
       >
         <div
           class="p-splitter-panel flex align-items-center justify-content-center"
-          style="flex-basis: calc(7.5% - 4px);"
+          style="flex-basis: calc(15% - 4px);"
         >
           Panel 2
         </div>
@@ -43,14 +43,14 @@ exports[`Splitter Nested 1`] = `
         </div>
         <div
           class="p-splitter-panel p-splitter-panel-nested"
-          style="flex-basis: calc(42.5% - 4px);"
+          style="flex-basis: calc(85% - 4px);"
         >
           <div
             class="p-splitter p-component p-splitter-horizontal"
           >
             <div
               class="p-splitter-panel flex align-items-center justify-content-center"
-              style="flex-basis: calc(10% - 4px);"
+              style="flex-basis: calc(20% - 4px);"
             >
               Panel 3
             </div>
@@ -64,13 +64,61 @@ exports[`Splitter Nested 1`] = `
             </div>
             <div
               class="p-splitter-panel flex align-items-center justify-content-center"
-              style="flex-basis: calc(40% - 4px);"
+              style="flex-basis: calc(80% - 4px);"
             >
               Panel 4
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Splitter Single Panel with size 1`] = `
+<div>
+  <div
+    class="p-splitter p-component p-splitter-vertical"
+    style="height: 300px;"
+  >
+    <div
+      class="p-splitter-panel"
+      style="flex-basis: calc(5% - 0px);"
+    >
+      Panel 1
+    </div>
+    <div
+      class="p-splitter-gutter"
+      style="height: 4px;"
+    >
+      <div
+        class="p-splitter-gutter-handle"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Splitter Single Panel without size 1`] = `
+<div>
+  <div
+    class="p-splitter p-component p-splitter-vertical"
+    style="height: 300px;"
+  >
+    <div
+      class="p-splitter-panel"
+      style="flex-basis: calc(100% - 0px);"
+    >
+      Panel 1
+    </div>
+    <div
+      class="p-splitter-gutter"
+      style="height: 4px;"
+    >
+      <div
+        class="p-splitter-gutter-handle"
+      />
     </div>
   </div>
 </div>
@@ -133,5 +181,14 @@ exports[`Splitter Vertical layout 1`] = `
       Panel 2
     </div>
   </div>
+</div>
+`;
+
+exports[`Splitter Without panels 1`] = `
+<div>
+  <div
+    class="p-splitter p-component p-splitter-vertical"
+    style="height: 300px;"
+  />
 </div>
 `;
