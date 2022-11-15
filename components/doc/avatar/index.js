@@ -1,9 +1,9 @@
-import React, { memo } from 'react';
 import Link from 'next/link';
-import { TabView, TabPanel } from '../../lib/tabview/TabView';
-import { useLiveEditorTabs } from '../common/liveeditor';
+import React, { memo } from 'react';
+import { TabPanel, TabView } from '../../lib/tabview/TabView';
 import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
+import { useLiveEditorTabs } from '../common/liveeditor';
 
 const AvatarDoc = memo(() => {
     const sources = {
@@ -102,10 +102,11 @@ export class AvatarDemo extends Component {
 
                     <div className="col-12 md:col-4">
                         <div className="card">
-                            <h5>Image - Badge</h5>
-                            <Avatar className="p-overlay-badge" image="demo/images/organization/walter.jpg" size="xlarge">
-                                <Badge value="4" severity="danger" />
-                            </Avatar>
+                            <h5>Gravatar, Letter Avatar, Fallback</h5>
+                            <Avatar id="gravatar" image=""https://www.gravatar.com/avatar/05dfd4b41340d09cae045235eb0893c3?d=mp" className="mr-2" size="xlarge" />
+                            <Avatar id="letter-avatar" image="https://ui-avatars.com/api/?name=Optimus+Prime&color=ffffff&background=ff9900" className="mr-2" size="xlarge" />
+                            <Avatar id="fallback-label" image="invalid1.jpg" label="P" className="mr-2" size="xlarge" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
+                            <Avatar id="fallback-url" image="invalid2.jpg" imageFallback="https://ui-avatars.com/api/?name=Fall+Back" className="mr-2" size="xlarge" />
                         </div>
                     </div>
                 </div>
@@ -209,11 +210,12 @@ export const AvatarDemo = () => {
 
                 <div className="col-12 md:col-4">
                     <div className="card">
-                        <h5>Image - Badge</h5>
-                        <Avatar className="p-overlay-badge" image="images/organization/walter.jpg" size="xlarge">
-                            <Badge value="4" severity="danger" />
-                        </Avatar>
-                    </div>
+                        <h5>Gravatar, Letter Avatar, Fallback</h5>
+                        <Avatar id="gravatar" image=""https://www.gravatar.com/avatar/05dfd4b41340d09cae045235eb0893c3?d=mp" className="mr-2" size="xlarge" />
+                        <Avatar id="letter-avatar" image="https://ui-avatars.com/api/?name=Optimus+Prime&color=ffffff&background=ff9900" className="mr-2" size="xlarge" />
+                        <Avatar id="fallback-label" image="invalid1.jpg" label="P" className="mr-2" size="xlarge" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
+                        <Avatar id="fallback-url" image="invalid2.jpg" imageFallback="https://ui-avatars.com/api/?name=Fall+Back" className="mr-2" size="xlarge" />
+                   </div>
                 </div>
             </div>
         </div>
@@ -315,11 +317,12 @@ export const AvatarDemo = () => {
 
                 <div className="col-12 md:col-4">
                     <div className="card">
-                        <h5>Image - Badge</h5>
-                        <Avatar className="p-overlay-badge" image="images/organization/walter.jpg" size="xlarge">
-                            <Badge value="4" severity="danger" />
-                        </Avatar>
-                    </div>
+                        <h5>Gravatar, Letter Avatar, Fallback</h5>
+                        <Avatar id="gravatar" image=""https://www.gravatar.com/avatar/05dfd4b41340d09cae045235eb0893c3?d=mp" className="mr-2" size="xlarge" />
+                        <Avatar id="letter-avatar" image="https://ui-avatars.com/api/?name=Optimus+Prime&color=ffffff&background=ff9900" className="mr-2" size="xlarge" />
+                        <Avatar id="fallback-label" image="invalid1.jpg" label="P" className="mr-2" size="xlarge" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
+                        <Avatar id="fallback-url" image="invalid2.jpg" imageFallback="https://ui-avatars.com/api/?name=Fall+Back" className="mr-2" size="xlarge" />
+                   </div>
                 </div>
             </div>
         </div>
@@ -426,11 +429,12 @@ const AvatarDemo = () => {
 
                 <div className="col-12 md:col-4">
                     <div className="card">
-                        <h5>Image - Badge</h5>
-                        <Avatar className="p-overlay-badge" image="images/organization/walter.jpg" size="xlarge">
-                            <Badge value="4" severity="danger" />
-                        </Avatar>
-                    </div>
+                        <h5>Gravatar, Letter Avatar, Fallback</h5>
+                        <Avatar id="gravatar" image=""https://www.gravatar.com/avatar/05dfd4b41340d09cae045235eb0893c3?d=mp" className="mr-2" size="xlarge" />
+                        <Avatar id="letter-avatar" image="https://ui-avatars.com/api/?name=Optimus+Prime&color=ffffff&background=ff9900" className="mr-2" size="xlarge" />
+                        <Avatar id="fallback-label" image="invalid1.jpg" label="P" className="mr-2" size="xlarge" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
+                        <Avatar id="fallback-url" image="invalid2.jpg" imageFallback="https://ui-avatars.com/api/?name=Fall+Back" className="mr-2" size="xlarge" />
+                   </div>
                 </div>
             </div>
         </div>
@@ -555,6 +559,18 @@ import { AvatarGroup } from 'primereact/avatargroup';
                                     <td>Defines the image to display.</td>
                                 </tr>
                                 <tr>
+                                    <td>imageAlt</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>It specifies an alternate text for an image, if the image cannot be displayed.</td>
+                                </tr>
+                                <tr>
+                                    <td>imageFallback</td>
+                                    <td>string</td>
+                                    <td>default</td>
+                                    <td>Defines a fallback image or URL if the main image fails to load. If "default" will fallback to label then icon.</td>
+                                </tr>
+                                <tr>
                                     <td>size</td>
                                     <td>string</td>
                                     <td>null</td>
@@ -571,12 +587,6 @@ import { AvatarGroup } from 'primereact/avatargroup';
                                     <td>any</td>
                                     <td>null</td>
                                     <td>Template of the content.</td>
-                                </tr>
-                                <tr>
-                                    <td>imageAlt</td>
-                                    <td>any</td>
-                                    <td>null</td>
-                                    <td>It specifies an alternate text for an image, if the image cannot be displayed.</td>
                                 </tr>
                             </tbody>
                         </table>

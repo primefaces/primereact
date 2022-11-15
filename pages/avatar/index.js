@@ -1,11 +1,11 @@
+import getConfig from 'next/config';
+import Head from 'next/head';
 import React from 'react';
+import AvatarDoc from '../../components/doc/avatar';
+import { DocActions } from '../../components/doc/common/docactions';
 import { Avatar } from '../../components/lib/avatar/Avatar';
 import { AvatarGroup } from '../../components/lib/avatargroup/AvatarGroup';
 import { Badge } from '../../components/lib/badge/Badge';
-import AvatarDoc from '../../components/doc/avatar';
-import { DocActions } from '../../components/doc/common/docactions';
-import Head from 'next/head';
-import getConfig from 'next/config';
 
 const AvatarDemo = () => {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
@@ -109,10 +109,13 @@ const AvatarDemo = () => {
 
                     <div className="col-12 md:col-4">
                         <div className="card">
-                            <h5>Image - Badge</h5>
-                            <Avatar className="p-overlay-badge" image={`${contextPath}/images/organization/walter.jpg`} size="xlarge">
-                                <Badge value="4" severity="danger" />
-                            </Avatar>
+                            <h5>Gravatar, Letter Avatar, Fallback</h5>
+                            <div className="flex align-content-center">
+                                <Avatar id="gravatar" image={`https://www.gravatar.com/avatar/05dfd4b41340d09cae045235eb0893c3?d=mp`} className="flex align-items-center justify-content-center mr-2" size="xlarge" />
+                                <Avatar id="letter-avatar" image={`https://ui-avatars.com/api/?name=Optimus+Prime&color=ffffff&background=ff9900`} className="flex align-items-center justify-content-center mr-2" size="xlarge" />
+                                <Avatar id="fallback-label" image={`invalid1.jpg`} label="P" className="flex align-items-center justify-content-center mr-2" size="xlarge" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
+                                <Avatar id="fallback-url" image={`invalid2.jpg`} imageFallback={`https://ui-avatars.com/api/?name=Fall+Back`} className="flex align-items-center justify-content-center mr-2" size="xlarge" />
+                            </div>
                         </div>
                     </div>
                 </div>
