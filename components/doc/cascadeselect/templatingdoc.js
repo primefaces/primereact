@@ -301,7 +301,9 @@ export default function TemplatingDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Content of an item can be customized with the <i>itemTemplate</i> prop.
+                <p>
+                    Content of an item can be customized with the <i>itemTemplate</i> prop.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <CascadeSelect

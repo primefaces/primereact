@@ -265,8 +265,10 @@ export default function BasicDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                CascadeSelect requires a value to bind and a collection of arbitrary objects with a nested hierarchy. <i>optionGroupLabelis</i> used for the text of a category and <i>optionGroupChildren</i> is to define the children of the category.
-                Note that order of the <i>optionGroupChildrenmatters</i> and it should correspond to the data hierarchy.
+                <p>
+                    CascadeSelect requires a value to bind and a collection of arbitrary objects with a nested hierarchy. <i>optionGroupLabelis</i> used for the text of a category and <i>optionGroupChildren</i> is to define the children of the
+                    category. Note that order of the <i>optionGroupChildrenmatters</i> and it should correspond to the data hierarchy.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <CascadeSelect
