@@ -575,6 +575,8 @@ export const ColorPicker = React.memo(
                         appendTo={props.appendTo}
                         inline={props.inline}
                         disabled={props.disabled}
+                        panelStyle={props.panelStyle}
+                        panelClassName={props.panelClassName}
                         onClick={onPanelClick}
                         in={props.inline || overlayVisibleState}
                         onEnter={onOverlayEnter}
@@ -595,22 +597,24 @@ export const ColorPicker = React.memo(
 ColorPicker.displayName = 'ColorPicker';
 ColorPicker.defaultProps = {
     __TYPE: 'ColorPicker',
-    id: null,
-    inputRef: null,
-    value: null,
-    style: null,
+    appendTo: null,
     className: null,
     defaultColor: 'ff0000',
-    inline: false,
-    format: 'hex',
-    appendTo: null,
     disabled: false,
-    tabIndex: null,
+    format: 'hex',
+    id: null,
+    inline: false,
     inputId: null,
+    inputRef: null,
+    onChange: null,
+    onHide: null,
+    onShow: null,
+    panelClassName: null,
+    panelStyle: null,
+    style: null,
+    tabIndex: null,
     tooltip: null,
     tooltipOptions: null,
     transitionOptions: null,
-    onChange: null,
-    onShow: null,
-    onHide: null
+    value: null
 };

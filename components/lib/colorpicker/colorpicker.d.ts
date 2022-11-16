@@ -1,6 +1,6 @@
 import * as React from 'react';
-import TooltipOptions from '../tooltip/tooltipoptions';
 import { CSSTransitionProps } from '../csstransition';
+import TooltipOptions from '../tooltip/tooltipoptions';
 
 type ColorPickerAppendToType = 'self' | HTMLElement | undefined | null;
 
@@ -34,20 +34,22 @@ interface ColorPickerChangeParams {
 }
 
 export interface ColorPickerProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onChange' | 'value' | 'ref'> {
-    inputRef?: React.Ref<HTMLInputElement>;
-    value?: ColorPickerValueType;
-    defaultColor?: string;
-    inline?: boolean;
-    format?: string;
     appendTo?: ColorPickerAppendToType;
+    children?: React.ReactNode;
+    defaultColor?: string;
+    format?: string;
+    inline?: boolean;
     inputId?: string;
+    inputRef?: React.Ref<HTMLInputElement>;
+    panelClassName?: string | undefined;
+    panelStyle?: React.CSSProperties | undefined;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     transitionOptions?: CSSTransitionProps;
+    value?: ColorPickerValueType;
     onChange?(e: ColorPickerChangeParams): void;
     onShow?(): void;
     onHide?(): void;
-    children?: React.ReactNode;
 }
 
 export declare class ColorPicker extends React.Component<ColorPickerProps, any> {
