@@ -77,8 +77,10 @@ export default function MaskDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                Mask format can be a combination of the the following definitions; <i>a</i> for alphabetic characters, <i>9</i> for numeric characters and * for alphanumberic characters. In addition, formatting characters like <i>(</i> , <i>)</i> ,{' '}
-                <i>-</i> are also accepted.
+                <p>
+                    Mask format can be a combination of the the following definitions; <i>a</i> for alphabetic characters, <i>9</i> for numeric characters and * for alphanumberic characters. In addition, formatting characters like <i>(</i> , <i>)</i>{' '}
+                    , <i>-</i> are also accepted.
+                </p>
             </DocSectionText>
             <div className="card">
                 <div className="p-fluid flex flex-column lg:flex-row gap-3">

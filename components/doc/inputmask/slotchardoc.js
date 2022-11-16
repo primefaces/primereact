@@ -39,7 +39,9 @@ export default function SlotCharDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                Default placeholder for a mask is underscore and it can be customized using <i>slotChart</i> option.
+                <p>
+                    Default placeholder for a mask is underscore and it can be customized using <i>slotChart</i> option.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <InputMask value={value} onChange={(e) => setValue(e.target.value)} mask="99/99/9999" placeholder="99/99/9999" slotChar="mm/dd/yyyy" />

@@ -39,7 +39,9 @@ export default function OptionalDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                When the input does not complete the mask definition, it is cleared by default. Use <i>autoClear</i> property to control this behavior. In addition, <i>?</i> is used to mark anything after the question mark optional.
+                <p>
+                    When the input does not complete the mask definition, it is cleared by default. Use <i>autoClear</i> property to control this behavior. In addition, <i>?</i> is used to mark anything after the question mark optional.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <InputMask value={value} onChange={(e) => setValue(e.target.value)} mask="(999) 999-9999? x999" placeholder="(999) 999-9999? x999" />
