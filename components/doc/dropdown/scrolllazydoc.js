@@ -141,7 +141,9 @@ export default function ScrollLazyDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Virtual Scroll (100000 Items) and Lazy</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Virtual Scroll (100000 Items) and Lazy</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <Dropdown
                     value={selectedItem}

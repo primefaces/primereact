@@ -171,7 +171,9 @@ export default function GroupedDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Options groups are specified with the <i>optionGroupLabel</i> and <i>optionGroupChildren</i> properties.
+                <p>
+                    Options groups are specified with the <i>optionGroupLabel</i> and <i>optionGroupChildren</i> properties.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Dropdown value={selectedGroupedCity} options={groupedCities} onChange={onGroupedCityChange} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} />

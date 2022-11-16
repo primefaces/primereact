@@ -161,8 +161,10 @@ export default function TemplatingDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Label of an option is used as the display text of an item by default, for custom content support define an <i>itemTemplate</i> function that gets the option instance as a parameter and returns the content. For custom filter support
-                define a <i>filterTemplate</i> function that gets the option instance as a parameter and returns the content for the filter element.
+                <p>
+                    Label of an option is used as the display text of an item by default, for custom content support define an <i>itemTemplate</i> function that gets the option instance as a parameter and returns the content. For custom filter
+                    support define a <i>filterTemplate</i> function that gets the option instance as a parameter and returns the content for the filter element.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Dropdown
