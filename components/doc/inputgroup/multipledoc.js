@@ -56,7 +56,9 @@ export default function MultipleDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Multiple Addons</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Multiple Addons</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="grid p-fluid">
                     <div className="p-inputgroup">

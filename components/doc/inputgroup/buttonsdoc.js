@@ -80,7 +80,9 @@ export default function ButtonDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Multiple Addons</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Button Addons</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="grid p-fluid">
                     <div className="col-12 md:col-4">

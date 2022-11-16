@@ -64,7 +64,9 @@ export default function AddonsDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Addons</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Addons</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="col-12 md:col-4">
                     <div className="p-inputgroup">
