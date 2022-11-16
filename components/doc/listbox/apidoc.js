@@ -68,6 +68,18 @@ export function ApiDoc(props) {
                             <td>Property name or getter function that refers to the children options of option group.</td>
                         </tr>
                         <tr>
+                            <td>emptyMessage</td>
+                            <td>string</td>
+                            <td>No results found</td>
+                            <td>Text to display when there are no options available.</td>
+                        </tr>
+                        <tr>
+                            <td>emptyFilterMessage</td>
+                            <td>any</td>
+                            <td>No results found</td>
+                            <td>Template to display when filtering does not return any results.</td>
+                        </tr>
+                        <tr>
                             <td>itemTemplate</td>
                             <td>any</td>
                             <td>null</td>

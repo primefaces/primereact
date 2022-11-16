@@ -9,6 +9,10 @@ type ListBoxItemTemplateType = React.ReactNode | ((option: any) => React.ReactNo
 
 type ListBoxFilterTemplateType = React.ReactNode | ((options: ListBoxFilterTemplateOptions) => React.ReactNode);
 
+type ListBoxEmptyMessageType = React.ReactNode | ((props: ListBoxProps) => React.ReactNode);
+
+type ListBoxEmptyFilterMessageType = React.ReactNode | ((props: ListBoxProps) => React.ReactNode);
+
 type ListBoxOptionDisabledType = string | ((option: any) => boolean);
 
 interface ListBoxChangeTargetOptions {
@@ -53,6 +57,8 @@ export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHT
     children?: React.ReactNode;
     dataKey?: string;
     disabled?: boolean;
+    emptyMessage?: ListBoxEmptyMessageType;
+    emptyFilterMessage?: ListBoxEmptyFilterMessageType;
     filter?: boolean;
     filterBy?: string;
     filterInputProps?: any;
