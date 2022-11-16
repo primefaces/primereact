@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FilterService } from '../api/Api';
+import { FilterService, localeOption } from '../api/Api';
 import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
@@ -343,7 +343,19 @@ export const ListBox = React.memo(
         };
 
         const createItems = () => {
-            return visibleOptions ? visibleOptions.map(createItem) : null;
+            if (ObjectUtils.isNotEmpty(visibleOptions)) {
+                return visibleOptions.map(createItem);
+            } else if (hasFilter) {
+                return createEmptyMessage(props.emptyFilterMessage, true);
+            }
+
+            return createEmptyMessage(props.emptyMessage);
+        };
+
+        const createEmptyMessage = (emptyMessage, isFilter) => {
+            const message = ObjectUtils.getJSXElement(emptyMessage, props) || localeOption(isFilter ? 'emptyFilterMessage' : 'emptyMessage');
+
+            return <li className="p-listbox-empty-message">{message}</li>;
         };
 
         const createList = () => {
@@ -411,36 +423,38 @@ export const ListBox = React.memo(
 ListBox.displayName = 'ListBox';
 ListBox.defaultProps = {
     __TYPE: 'ListBox',
-    id: null,
-    value: null,
-    options: null,
-    optionLabel: null,
-    optionValue: null,
-    optionDisabled: null,
-    optionGroupLabel: null,
-    optionGroupChildren: null,
-    optionGroupTemplate: null,
-    itemTemplate: null,
-    style: null,
-    listStyle: null,
-    listClassName: null,
     className: null,
-    virtualScrollerOptions: null,
-    disabled: null,
     dataKey: null,
-    multiple: false,
-    metaKeySelection: false,
+    disabled: null,
+    emptyFilterMessage: null,
+    emptyMessage: null,
     filter: false,
-    filterTemplate: null,
     filterBy: null,
-    filterValue: null,
+    filterInputProps: null,
+    filterLocale: undefined,
     filterMatchMode: 'contains',
     filterPlaceholder: null,
-    filterLocale: undefined,
-    filterInputProps: null,
+    filterTemplate: null,
+    filterValue: null,
+    id: null,
+    itemTemplate: null,
+    listClassName: null,
+    listStyle: null,
+    metaKeySelection: false,
+    multiple: false,
+    onChange: null,
+    onFilterValueChange: null,
+    optionDisabled: null,
+    optionGroupChildren: null,
+    optionGroupLabel: null,
+    optionGroupTemplate: null,
+    optionLabel: null,
+    optionValue: null,
+    options: null,
+    style: null,
     tabIndex: 0,
     tooltip: null,
     tooltipOptions: null,
-    onChange: null,
-    onFilterValueChange: null
+    value: null,
+    virtualScrollerOptions: null
 };
