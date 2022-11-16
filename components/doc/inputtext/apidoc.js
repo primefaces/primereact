@@ -73,12 +73,11 @@ export function ApiDoc(props) {
             </DocSubSection>
 
             <DocSubSection id="accessibility" label="Accessibility">
-
                 <DevelopmentSection>
                     <h4>Screen Reader</h4>
                     <p>
-                        InputText component renders a native input element that implicitly includes any passed prop. Value to describe the component can either be provided via <i>label</i> tag combined with <i>id</i> prop or using <i>aria-labelledby</i>,{' '}
-                        <i>aria-label</i> props.
+                        InputText component renders a native input element that implicitly includes any passed prop. Value to describe the component can either be provided via <i>label</i> tag combined with <i>id</i> prop or using{' '}
+                        <i>aria-labelledby</i>, <i>aria-label</i> props.
                     </p>
                     <CodeHighlight>
                         {`

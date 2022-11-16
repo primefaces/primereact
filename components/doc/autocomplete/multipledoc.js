@@ -10,6 +10,7 @@ export function MultipleDoc(props) {
     const [filteredCountries, setFilteredCountries] = useState(null);
 
     const countryservice = new CountryService();
+
     const search = (event) => {
         // Timeout to emulate a network connection
         setTimeout(() => {
@@ -17,8 +18,7 @@ export function MultipleDoc(props) {
 
             if (!event.query.trim().length) {
                 _filteredCountries = [...countries];
-            } 
-            else {
+            } else {
                 _filteredCountries = countries.filter((country) => {
                     return country.name.toLowerCase().startsWith(event.query.toLowerCase());
                 });
@@ -26,7 +26,7 @@ export function MultipleDoc(props) {
 
             setFilteredCountries(_filteredCountries);
         }, 250);
-    }
+    };
 
     useEffect(() => {
         countryservice.getCountries().then((data) => setCountries(data));
@@ -39,7 +39,7 @@ export function MultipleDoc(props) {
                 ...
             ]
         */
-    }, []);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const code = {
         basic: `
@@ -147,8 +147,10 @@ export default function MultipleDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                Multiple mode is enabled using <i>multiple</i> property used to select more than one value from the autocomplete. 
-                In this case, value reference should be an array. The number of values selectable can be restricted using the <i>selectionLimit</i> property.
+                <p>
+                    Multiple mode is enabled using <i>multiple</i> property used to select more than one value from the autocomplete. In this case, value reference should be an array. The number of values selectable can be restricted using the{' '}
+                    <i>selectionLimit</i> property.
+                </p>
             </DocSectionText>
             <div className="card p-fluid">
                 <AutoComplete field="name" multiple value={selectedCountries} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountries(e.value)} />

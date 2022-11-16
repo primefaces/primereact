@@ -54,7 +54,9 @@ export default function InvalidDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Applying <i>p-invalid</i> class to an input element indicates a failed validation.</p>
+                <p>
+                    Applying <i>p-invalid</i> class to an input element indicates a failed validation.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="flex flex-column gap-2">

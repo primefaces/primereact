@@ -12,6 +12,7 @@ export function TemplateDoc(props) {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     const countryservice = new CountryService();
+
     const search = (event) => {
         // Timeout to emulate a network connection
         setTimeout(() => {
@@ -19,8 +20,7 @@ export function TemplateDoc(props) {
 
             if (!event.query.trim().length) {
                 _filteredCountries = [...countries];
-            } 
-            else {
+            } else {
                 _filteredCountries = countries.filter((country) => {
                     return country.name.toLowerCase().startsWith(event.query.toLowerCase());
                 });
@@ -28,7 +28,7 @@ export function TemplateDoc(props) {
 
             setFilteredCountries(_filteredCountries);
         }, 250);
-    }
+    };
 
     const itemTemplate = (item) => {
         return (
@@ -38,7 +38,7 @@ export function TemplateDoc(props) {
                     src={`${contextPath}/images/flag/flag_placeholder.png`}
                     onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
                     className={`flag flag-${item.code.toLowerCase()} mr-2`}
-                    style={{width: '18px'}}
+                    style={{ width: '18px' }}
                 />
                 <div>{item.name}</div>
             </div>
@@ -56,7 +56,7 @@ export function TemplateDoc(props) {
                 ...
             ]
         */
-    }, []);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const code = {
         basic: `
@@ -194,8 +194,10 @@ export default function TemplateDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                Custom content can be displayed as an option using <i>itemTemplate</i> property that references a function with a suggestion option as a parameter and returns an element. 
-                Similarly <i>selectedItemTemplate</i> property is available to customize the chips in multiple mode using the same approach. Note that <i>selectedItemTemplate</i> is only available in multiple mode at the moment.
+                <p>
+                    Custom content can be displayed as an option using <i>itemTemplate</i> property that references a function with a suggestion option as a parameter and returns an element. Similarly <i>selectedItemTemplate</i> property is available
+                    to customize the chips in multiple mode using the same approach. Note that <i>selectedItemTemplate</i> is only available in multiple mode at the moment.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />

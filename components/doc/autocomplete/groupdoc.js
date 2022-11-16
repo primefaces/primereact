@@ -49,7 +49,7 @@ export function GroupDoc(props) {
                     src={`${contextPath}/images/flag/flag_placeholder.png`}
                     onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
                     className={`flag flag-${item.code.toLowerCase()} mr-2`}
-                    style={{width: '18px'}}
+                    style={{ width: '18px' }}
                 />
                 <div>{item.label}</div>
             </div>
@@ -69,7 +69,7 @@ export function GroupDoc(props) {
         }
 
         setFilteredCities(_filteredCities);
-    }
+    };
 
     const code = {
         basic: `
@@ -244,11 +244,22 @@ export default function GroupDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                Options groups are specified with the <i>optionGroupLabel</i> and <i>optionGroupChildren</i> properties.
+                <p>
+                    Options groups are specified with the <i>optionGroupLabel</i> and <i>optionGroupChildren</i> properties.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <AutoComplete value={selectedCity} onChange={(e) => setSelectedCity(e.value)} suggestions={filteredCities} completeMethod={search} 
-                        field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} placeholder="Hint: type 'a'"/>
+                <AutoComplete
+                    value={selectedCity}
+                    onChange={(e) => setSelectedCity(e.value)}
+                    suggestions={filteredCities}
+                    completeMethod={search}
+                    field="label"
+                    optionGroupLabel="label"
+                    optionGroupChildren="items"
+                    optionGroupTemplate={groupedItemTemplate}
+                    placeholder="Hint: type 'a'"
+                />
             </div>
             <DocSectionCode code={code} />
         </>

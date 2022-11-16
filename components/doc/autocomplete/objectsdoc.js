@@ -10,6 +10,7 @@ export function ObjectsDoc(props) {
     const [filteredCountries, setFilteredCountries] = useState(null);
 
     const countryservice = new CountryService();
+
     const search = (event) => {
         // Timeout to emulate a network connection
         setTimeout(() => {
@@ -17,8 +18,7 @@ export function ObjectsDoc(props) {
 
             if (!event.query.trim().length) {
                 _filteredCountries = [...countries];
-            } 
-            else {
+            } else {
                 _filteredCountries = countries.filter((country) => {
                     return country.name.toLowerCase().startsWith(event.query.toLowerCase());
                 });
@@ -26,7 +26,7 @@ export function ObjectsDoc(props) {
 
             setFilteredCountries(_filteredCountries);
         }, 250);
-    }
+    };
 
     useEffect(() => {
         countryservice.getCountries().then((data) => setCountries(data));
@@ -39,7 +39,7 @@ export function ObjectsDoc(props) {
                 ...
             ]
         */
-    }, []);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const code = {
         basic: `
@@ -147,9 +147,10 @@ export default function ObjectDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                AutoComplete can work with objects using the <i>field</i> property that defines the label to display as a suggestion. 
-                The value passed to the model would still be the object instance of a suggestion. 
-                Here is an example with a Country object that has name and code fields such as <i>&#123;name: "United States", code:"USA"&#125;</i>.
+                <p>
+                    AutoComplete can work with objects using the <i>field</i> property that defines the label to display as a suggestion. The value passed to the model would still be the object instance of a suggestion. Here is an example with a
+                    Country object that has name and code fields such as <i>&#123;name: "United States", code:"USA"&#125;</i>.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} />

@@ -8,8 +8,8 @@ export function ForceSelectionDoc(props) {
     const [items, setItems] = useState([]);
 
     const search = (event) => {
-        setItems([...Array(10).keys()].map(item => event.query + '-' + item));
-    }
+        setItems([...Array(10).keys()].map((item) => event.query + '-' + item));
+    };
 
     const code = {
         basic: `
@@ -54,8 +54,10 @@ export default function ForceSelectionDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                ForceSelection mode validates the manual input to check whether it also exists in the suggestions list, if not the input value is cleared to make sure the value passed to the model is always one of the suggestions. Simply
-                        enable <i>forceSelection</i> to enforce that input is always from the suggestion list.
+                <p>
+                    ForceSelection mode validates the manual input to check whether it also exists in the suggestions list, if not the input value is cleared to make sure the value passed to the model is always one of the suggestions. Simply enable{' '}
+                    <i>forceSelection</i> to enforce that input is always from the suggestion list.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e) => setValue(e.value)} forceSelection />

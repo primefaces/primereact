@@ -9,8 +9,9 @@ export function DropdownDoc(props) {
 
     const search = (event) => {
         let _items = [...Array(10).keys()];
-        setItems(event.query ? [...Array(10).keys()].map(item => event.query + '-' + item) : _items);
-    }
+
+        setItems(event.query ? [...Array(10).keys()].map((item) => event.query + '-' + item) : _items);
+    };
 
     const code = {
         basic: `
@@ -57,8 +58,10 @@ export default function DropdownDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                Enabling <i>dropdown</i> property displays a button next to the input field where click behavior of the button is defined using <i>dropdownMode</i> property that takes <strong>blank</strong> or <strong>current</strong> as possible 
-                values.  <strong>blank</strong> is the default mode to send a query with an empty string whereas <strong>current</strong> setting sends a query with the current value of the input.
+                <p>
+                    Enabling <i>dropdown</i> property displays a button next to the input field where click behavior of the button is defined using <i>dropdownMode</i> property that takes <strong>blank</strong> or <strong>current</strong> as possible
+                    values. <strong>blank</strong> is the default mode to send a query with an empty string whereas <strong>current</strong> setting sends a query with the current value of the input.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e) => setValue(e.value)} dropdown />

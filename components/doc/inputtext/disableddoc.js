@@ -30,7 +30,9 @@ export default function DisabledDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p><i>disabled</i> prop prevents an input from being editable.</p>
+                <p>
+                    <i>disabled</i> prop prevents an input from being editable.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <InputText disabled placeholder="Disabled" />

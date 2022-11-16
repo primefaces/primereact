@@ -40,7 +40,9 @@ export default function SizesDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Apply <i>p-input-sm</i> to reduce the size of the input element or <i>p-input-lg</i> to enlarge them.</p>
+                <p>
+                    Apply <i>p-input-sm</i> to reduce the size of the input element or <i>p-input-lg</i> to enlarge them.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="flex flex-column gap-3">
