@@ -197,6 +197,14 @@ export const ColumnFilter = React.memo((props) => {
         }
     };
 
+    const onInputKeydown = (event, _index) => {
+        if (event.key === 'Enter') {
+            if (!getColumnProp('showApplyButton') || props.display === 'menu') {
+                applyFilter();
+            }
+        }
+    };
+
     const onRowMatchModeChange = (matchMode) => {
         const filterMatchModeChangeCallback = getColumnProp('onFilterMatchModeChange');
         let filters = { ...props.filters };
@@ -442,7 +450,15 @@ export const ColumnFilter = React.memo((props) => {
         return getColumnProp('filterElement') ? (
             ObjectUtils.getJSXElement(getColumnProp('filterElement'), { field, index, filterModel: model, value, filterApplyCallback, filterCallback })
         ) : (
-            <InputText type={getColumnProp('filterType')} value={value || ''} onChange={(e) => onInputChange(e, index)} className="p-column-filter" placeholder={getColumnProp('filterPlaceholder')} maxLength={getColumnProp('filterMaxLength')} />
+            <InputText
+                type={getColumnProp('filterType')}
+                value={value || ''}
+                onChange={(e) => onInputChange(e, index)}
+                onKeyDown={(e) => onInputKeydown(e, index)}
+                className="p-column-filter"
+                placeholder={getColumnProp('filterPlaceholder')}
+                maxLength={getColumnProp('filterMaxLength')}
+            />
         );
     };
 
