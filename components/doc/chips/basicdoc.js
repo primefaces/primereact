@@ -39,7 +39,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                Chips requires an array as its <i>value</i> and <i>onChange</i> callback to update the model.
+                <p>
+                    Chips requires an array as its <i>value</i> and <i>onChange</i> callback to update the model.
+                </p>
             </DocSectionText>
             <div className="card p-fluid">
                 <Chips value={value} onChange={(e) => setValue(e.value)} />

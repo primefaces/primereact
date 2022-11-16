@@ -30,7 +30,9 @@ export default function InvalidDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                Applying <i>p-invalid</i> class to an input element indicates a failed validation.
+                <p>
+                    Applying <i>p-invalid</i> class to an input element indicates a failed validation.
+                </p>
             </DocSectionText>
             <div className="card p-fluid">
                 <Chips className="p-invalid" />

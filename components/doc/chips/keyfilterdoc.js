@@ -40,7 +40,9 @@ export default function KeyFilterDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                Chips has built-in key filtering support to block certain keys, refer to <Link href="/keyfilter">keyfilter</Link> page for more information.
+                <p>
+                    Chips has built-in key filtering support to block certain keys, refer to <Link href="/keyfilter">keyfilter</Link> page for more information.
+                </p>
             </DocSectionText>
             <div className="card p-fluid">
                 <Chips value={value} onChange={(e) => setValue(e.value)} keyfilter="int" />

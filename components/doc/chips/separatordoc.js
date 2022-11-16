@@ -39,7 +39,9 @@ export default function SeparatorDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                A new chip is added when <i>enter</i> key is pressed, <i>separator</i> property allows definining an additional key. Currently only valid value is <i>,</i> to create a new item when comma key is pressed.
+                <p>
+                    A new chip is added when <i>enter</i> key is pressed, <i>separator</i> property allows definining an additional key. Currently only valid value is <i>,</i> to create a new item when comma key is pressed.
+                </p>
             </DocSectionText>
             <div className="card p-fluid">
                 <Chips value={value} onChange={(e) => setValue(e.value)} separator="," />
