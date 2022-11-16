@@ -14,7 +14,7 @@ export const Dropdown = React.memo(
         const elementRef = React.useRef(null);
         const overlayRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
-        const focusInputRef = React.useRef(null);
+        const focusInputRef = React.useRef(props.focusInputRef);
         const searchTimeout = React.useRef(null);
         const searchValue = React.useRef(null);
         const currentSearchChar = React.useRef(null);
@@ -590,7 +590,8 @@ export const Dropdown = React.memo(
 
         React.useEffect(() => {
             ObjectUtils.combinedRefs(inputRef, props.inputRef);
-        }, [inputRef, props.inputRef]);
+            ObjectUtils.combinedRefs(focusInputRef, props.focusInputRef);
+        }, [inputRef, props.inputRef, focusInputRef, props.focusInputRef]);
 
         useMountEffect(() => {
             if (props.autoFocus) {
@@ -809,6 +810,7 @@ Dropdown.defaultProps = {
     filterMatchMode: 'contains',
     filterPlaceholder: null,
     filterTemplate: null,
+    focusInputRef: null,
     id: null,
     inputId: null,
     inputRef: null,
