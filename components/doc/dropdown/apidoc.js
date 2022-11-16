@@ -246,6 +246,12 @@ export function ApiDoc(props) {
                                 <td>Identifier of the focusable input.</td>
                             </tr>
                             <tr>
+                                <td>focusInputRef</td>
+                                <td>Ref</td>
+                                <td>null</td>
+                                <td>Ref of the focusable input.</td>
+                            </tr>
+                            <tr>
                                 <td>showClear</td>
                                 <td>boolean</td>
                                 <td>false</td>
