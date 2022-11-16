@@ -40,7 +40,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                ColorPicker is used as a controlled input component with <i>value</i> and <i>onChange</i> properties.
+                <p>
+                    ColorPicker is used as a controlled input component with <i>value</i> and <i>onChange</i> properties.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <ColorPicker value={color} onChange={(e) => setColor(e.value)} inline />
