@@ -47,11 +47,6 @@ const InputTextareaDemo = () => {
             id: 'disabled',
             label: 'Disabled',
             component: DisabledDoc
-        },
-        {
-            id: 'apidoc',
-            label: 'API',
-            component: ApiDoc
         }
     ];
 

@@ -61,10 +61,23 @@ const InputTextDemo = () => {
             component: DisabledDoc
         },
         {
-            id: 'api',
+            id: 'apidoc',
             label: 'API',
-            type: 'api',
-            component: ApiDoc
+            component: ApiDoc,
+            children: [
+                {
+                    id: 'properties',
+                    label: 'Properties'
+                },
+                {
+                    id: 'styling',
+                    label: 'Styling'
+                },
+                {
+                    id: 'accessibility',
+                    label: 'Accessibility'
+                }
+            ]
         }
     ];
 
