@@ -39,7 +39,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                Editor is used as a controlled component with <i>value</i> and <i>onTextChange</i> properties.
+                <p>
+                    Editor is used as a controlled component with <i>value</i> and <i>onTextChange</i> properties.
+                </p>
             </DocSectionText>
             <div className="card">
                 <Editor style={{ height: '320px' }} value={text} onTextChange={(e) => setText(e.htmlValue)} />

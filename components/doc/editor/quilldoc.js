@@ -11,7 +11,9 @@ npm install quill
     return (
         <>
             <DocSectionText {...props}>
-                Editor uses <a href="https://quilljs.com/">QuillJS</a> editor so it needs to be installed as a dependency.
+                <p>
+                    Editor uses <a href="https://quilljs.com/">QuillJS</a> editor so it needs to be installed as a dependency.
+                </p>
             </DocSectionText>
             <DocSectionCode code={code} hideToggleCode hideCodeSandbox />
         </>
