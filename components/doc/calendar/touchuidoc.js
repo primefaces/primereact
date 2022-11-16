@@ -38,7 +38,9 @@ export default function TouchUIDoc() {
 
     return (
         <>
-            <DocSectionText {...props}> When enabled, calendar overlay is displayed as optimized for touch devices.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>When enabled, calendar overlay is displayed as optimized for touch devices.</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <Calendar id="touchUI" value={date} onChange={(e) => setDate(e.value)} touchUI />
             </div>

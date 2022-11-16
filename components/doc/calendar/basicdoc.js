@@ -39,7 +39,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                Calendar is used a controlled input component with <i>value</i> and <i>onChange</i> properties.
+                <p>
+                    Calendar is used a controlled input component with <i>value</i> and <i>onChange</i> properties.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Calendar id="basic" value={date} onChange={(e) => setDate(e.value)} />

@@ -39,7 +39,9 @@ export default function DateFormatDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Default date format is "mm/dd/yy" which can be customized using the <i>dateFormat</i> property.
+                <p>
+                    Default date format is "mm/dd/yy" which can be customized using the <i>dateFormat</i> property.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Calendar id="basic" value={date} onChange={(e) => setDate(e.value)} dateFormat="mm-dd-yy" />

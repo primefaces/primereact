@@ -40,7 +40,9 @@ export default function InlineDoc() {
 
     return (
         <>
-            <DocSectionText {...props}> Calendar is displayed in a popup by default whereas inline property needs to be enabled for inline mode. </DocSectionText>
+            <DocSectionText {...props}>
+                <p>Calendar is displayed in a popup by default whereas inline property needs to be enabled for inline mode. </p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <Calendar value={date} onChange={(e) => setDate(e.value)} inline showWeek />
             </div>

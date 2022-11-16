@@ -66,7 +66,9 @@ export default function DateTemplateDoc() {
 
     return (
         <>
-            <DocSectionText {...props}> Function that gets a date information and returns the cell content in datepicker.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Function that gets a date information and returns the cell content in datepicker.</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <Calendar id="datetemplate" value={date} onChange={(e) => setDate(e.value)} dateTemplate={dateTemplate} />
             </div>

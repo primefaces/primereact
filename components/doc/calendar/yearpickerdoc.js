@@ -38,7 +38,9 @@ export default function YearPickerDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Datepicker element in year view.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Datepicker element in year view.</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <Calendar id="yearpicker" value={date} onChange={(e) => setDate(e.value)} view="year" dateFormat="yy" />
             </div>

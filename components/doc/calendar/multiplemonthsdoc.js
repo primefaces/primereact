@@ -38,7 +38,9 @@ export default function MultipleMonthsDoc() {
 
     return (
         <>
-            <DocSectionText {...props}> Number of months to display. </DocSectionText>
+            <DocSectionText {...props}>
+                <p>Number of months to display. </p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <Calendar id="multiplemonths" value={date} onChange={(e) => setDate(e.value)} numberOfMonths={3} />
             </div>

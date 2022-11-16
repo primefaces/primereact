@@ -38,7 +38,9 @@ export default function MonthPickerDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Datepicker element in month view.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Datepicker element in month view.</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <Calendar id="monthpicker" value={date} onChange={(e) => setDate(e.value)} view="month" dateFormat="mm/yy" />
             </div>

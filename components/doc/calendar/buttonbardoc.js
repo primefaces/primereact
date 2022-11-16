@@ -38,7 +38,9 @@ export default function ButtonBarDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Whether to display today and clear buttons at the footer</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Whether to display today and clear buttons at the footer</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <Calendar id="buttonbar" value={date} onChange={(e) => setDate(e.value)} showButtonBar />
             </div>

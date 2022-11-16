@@ -40,7 +40,9 @@ export default function Time12Doc() {
 
     return (
         <>
-            <DocSectionText {...props}>Whether to display timepicker.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Whether to display timepicker.</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <Calendar id="time12" value={date} onChange={(e) => setDate(e.value)} timeOnly hourFormat="12" />
             </div>

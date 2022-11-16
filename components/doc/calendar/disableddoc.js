@@ -44,7 +44,9 @@ export default function DisabledDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Calendar is used a controlled input component with <i>value</i> and <i>onChange</i> properties.
+                <p>
+                    Calendar is used a controlled input component with <i>value</i> and <i>onChange</i> properties.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Calendar id="disableddays" value={date} onChange={(e) => setDate(e.value)} disabledDates={invalidDates} disabledDays={[0, 6]} readOnlyInput />

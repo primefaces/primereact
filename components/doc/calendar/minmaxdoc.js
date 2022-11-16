@@ -92,7 +92,9 @@ export default function MinMaxDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>When specified, prevents entering the date manually with keyboard. The minimum selectable date. The maximum selectable date.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>When specified, prevents entering the date manually with keyboard. The minimum selectable date. The maximum selectable date.</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <Calendar id="minmax" value={date} onChange={(e) => setDate(e.value)} minDate={minDate} maxDate={maxDate} readOnlyInput />
             </div>
