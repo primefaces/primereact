@@ -3,7 +3,7 @@ import { AutoComplete } from '../../lib/autocomplete/AutoComplete';
 import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
 
-export function BasicDoc(props) {
+export function ForceSelectionDoc(props) {
     const [value, setValue] = useState('');
     const [items, setItems] = useState([]);
 
@@ -13,13 +13,13 @@ export function BasicDoc(props) {
 
     const code = {
         basic: `
-<AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e) => setValue(e.value)}  />
+<AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e) => setValue(e.value)} forceSelection />
         `,
         javascript: `
 import { useState } from "react";
 import { AutoComplete } from "primereact/autocomplete";
 
-export default function BasicDemo() {
+export default function ForceSelectionDemo() {
     const [value, setValue] = useState('');
     const [items, setItems] = useState([]);
 
@@ -28,7 +28,7 @@ export default function BasicDemo() {
     }
 
     return (
-        <AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e) => setValue(e.value)}  />
+        <AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e) => setValue(e.value)} forceSelection />
     )
 }
         `,
@@ -36,7 +36,7 @@ export default function BasicDemo() {
 import { useState } from "react";
 import { AutoComplete } from "primereact/autocomplete";
 
-export default function BasicDemo() {
+export default function ForceSelectionDemo() {
     const [value, setValue] = useState<string>('');
     const [items, setItems] = useState<string[]>([]);
 
@@ -45,7 +45,7 @@ export default function BasicDemo() {
     }
 
     return (
-        <AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e: AutoCompleteChangeParams) => setValue(e.value)}  />
+        <AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e: AutoCompleteChangeParams) => setValue(e.value)} forceSelection />
     )
 }
         `
@@ -54,10 +54,11 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                AutoComplete is used as a controlled component with <i>value</i> and <i>onChange</i> properties. In addition, <i>suggestions</i> and a <i>completeMethod</i> are required to query the results.
+                ForceSelection mode validates the manual input to check whether it also exists in the suggestions list, if not the input value is cleared to make sure the value passed to the model is always one of the suggestions. Simply
+                        enable <i>forceSelection</i> to enforce that input is always from the suggestion list.
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e) => setValue(e.value)}  />
+                <AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e) => setValue(e.value)} forceSelection />
             </div>
             <DocSectionCode code={code} />
         </>

@@ -4,9 +4,9 @@ import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
 import { CountryService } from '../../../service/CountryService';
 
-export function MultipleDoc(props) {
+export function ObjectsDoc(props) {
     const [countries, setCountries] = useState([]);
-    const [selectedCountries, setSelectedCountries] = useState(null);
+    const [selectedCountry, setSelectedCountry] = useState(null);
     const [filteredCountries, setFilteredCountries] = useState(null);
 
     const countryservice = new CountryService();
@@ -43,15 +43,15 @@ export function MultipleDoc(props) {
 
     const code = {
         basic: `
-<AutoComplete field="name" multiple value={selectedCountries} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountries(e.value)} />
+<AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} />
         `,
         javascript: `
 import { useEffect, useState } from 'react';
 import { AutoComplete } from "primereact/autocomplete";
 
-export default function MultipleDemo() {
+export default function ObjectDemo() {
     const [countries, setCountries] = useState([]);
-    const [selectedCountries, setSelectedCountries] = useState(null);
+    const [selectedCountry, setSelectedCountry] = useState(null);
     const [filteredCountries, setFilteredCountries] = useState(null);
 
     const countryservice = new CountryService();
@@ -87,7 +87,7 @@ export default function MultipleDemo() {
     }, []);
 
     return (
-        <AutoComplete field="name" multiple value={selectedCountries} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountries(e.value)} />
+        <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} />
     )
 }
         `,
@@ -100,9 +100,9 @@ interface Country {
     code: string;
 }
 
-export default function MultipleDemo() {
+export default function ObjectDemo() {
     const [countries, setCountries] = useState<Country[]>([]);
-    const [selectedCountries, setSelectedCountries] = useState<Country>(null);
+    const [selectedCountry, setSelectedCountry] = useState<Country>(null);
     const [filteredCountries, setFilteredCountries] = useState<Country[]>(null);
 
     const countryservice = new CountryService();
@@ -138,7 +138,7 @@ export default function MultipleDemo() {
     }, []);
 
     return (
-        <AutoComplete field="name" multiple value={selectedCountries} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountries(e.value)} />
+        <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e: AutoCompleteChangeParams) => setSelectedCountry(e.value)} />
     )
 }
         `
@@ -147,11 +147,12 @@ export default function MultipleDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                Multiple mode is enabled using <i>multiple</i> property used to select more than one value from the autocomplete. 
-                In this case, value reference should be an array. The number of values selectable can be restricted using the <i>selectionLimit</i> property.
+                AutoComplete can work with objects using the <i>field</i> property that defines the label to display as a suggestion. 
+                The value passed to the model would still be the object instance of a suggestion. 
+                Here is an example with a Country object that has name and code fields such as <i>&#123;name: "United States", code:"USA"&#125;</i>.
             </DocSectionText>
-            <div className="card p-fluid">
-                <AutoComplete field="name" multiple value={selectedCountries} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountries(e.value)} />
+            <div className="card flex justify-content-center">
+                <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} />
             </div>
             <DocSectionCode code={code} />
         </>

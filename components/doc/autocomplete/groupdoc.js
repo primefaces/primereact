@@ -1,15 +1,12 @@
-import { useEffect, useState } from 'react';
-import { CountryService } from '../../../service/CountryService';
+import { useState } from 'react';
+import getConfig from 'next/config';
 import { AutoComplete } from '../../lib/autocomplete/AutoComplete';
-import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '../common/docsectioncode';
 
-export function GroupedDoc(props) {
-    const [countries, setCountries] = useState([]);
+export function GroupDoc(props) {
     const [selectedCity, setSelectedCity] = useState(null);
     const [filteredCities, setFilteredCities] = useState(null);
-    const countryservice = new CountryService();
-
     const groupedCities = [
         {
             label: 'Germany',
@@ -42,12 +39,24 @@ export function GroupedDoc(props) {
             ]
         }
     ];
+    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
-    useEffect(() => {
-        countryservice.getCountries().then((data) => setCountries(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    const groupedItemTemplate = (item) => {
+        return (
+            <div className="flex align-items-center">
+                <img
+                    alt={item.label}
+                    src={`${contextPath}/images/flag/flag_placeholder.png`}
+                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                    className={`flag flag-${item.code.toLowerCase()} mr-2`}
+                    style={{width: '18px'}}
+                />
+                <div>{item.label}</div>
+            </div>
+        );
+    };
 
-    const searchCity = (event) => {
+    const search = (event) => {
         let query = event.query;
         let _filteredCities = [];
 
@@ -60,32 +69,20 @@ export function GroupedDoc(props) {
         }
 
         setFilteredCities(_filteredCities);
-    };
-
-    const groupedItemTemplate = (item) => {
-        return (
-            <div className="flex align-items-center country-item">
-                <img alt={item.name} src={`images/flag/flag_placeholder.png`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} className={`flag flag-${item.code.toLowerCase()}`} />
-                <div>{item.label}</div>
-            </div>
-        );
-    };
+    }
 
     const code = {
         basic: `
-<AutoComplete value={selectedCity} suggestions={filteredCities} completeMethod={searchCity} field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} onChange={(e) => setSelectedCity(e.value)} aria-label="Cities"/>
+<AutoComplete value={selectedCity} onChange={(e) => setSelectedCity(e.value)} suggestions={filteredCities} completeMethod={search} 
+        field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} placeholder="Hint: type 'a'" />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
-import { AutoComplete } from 'primereact/autocomplete';
-import { CountryService } from '../../../service/CountryService';
+import { useState } from 'react';
+import { AutoComplete } from "primereact/autocomplete";
 
-export default function GroupedDoc() {
-    const [countries, setCountries] = useState([]);
+export default function GroupDemo() {
     const [selectedCity, setSelectedCity] = useState(null);
     const [filteredCities, setFilteredCities] = useState(null);
-    const countryservice = new CountryService();
-
     const groupedCities = [
         {
             label: 'Germany',
@@ -119,11 +116,22 @@ export default function GroupedDoc() {
         }
     ];
 
-    useEffect(() => {
-        countryservice.getCountries().then((data) => setCountries(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    const groupedItemTemplate = (item) => {
+        return (
+            <div className="flex align-items-center">
+                <img
+                    alt={item.label}
+                    src={\`/images/flag/flag_placeholder.png\`}
+                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                    className={\`flag flag-\${item.code.toLowerCase()} mr-2\`}
+                    style={{width: '18px'}}
+                />
+                <div>{item.label}</div>
+            </div>
+        );
+    };
 
-    const searchCity = (event) => {
+    const search = (event) => {
         let query = event.query;
         let _filteredCities = [];
 
@@ -136,34 +144,33 @@ export default function GroupedDoc() {
         }
 
         setFilteredCities(_filteredCities);
-    };
-
-    const groupedItemTemplate = (item) => {
-        return (
-            <div className="flex align-items-center country-item">
-                <img alt={item.name} src={\`images/flag/flag_placeholder.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} className={\`flag flag-\${item.code.toLowerCase()}\`} />
-                <div>{item.label}</div>
-            </div>
-        );
-    };
+    }
 
     return (
-        <AutoComplete value={selectedCity} suggestions={filteredCities} completeMethod={searchCity} field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} onChange={(e) => setSelectedCity(e.value)} aria-label="Cities"/>
+        <AutoComplete value={selectedCity} onChange={(e) => setSelectedCity(e.value)} suggestions={filteredCities} completeMethod={search} 
+            field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} placeholder="Hint: type 'a'" />
     )
 }
         `,
         typescript: `
-import { useState } from "react";
-import { AutoComplete, AutoCompleteCompleteMethodParams } from 'primereact/autocomplete';
-import { CountryService } from '../../../service/CountryService';
+import { useState } from 'react';
+import { AutoComplete } from "primereact/autocomplete";
 
-export default function GroupedDoc() {
-    const [countries, setCountries] = useState([]);
-    const [selectedCity, setSelectedCity] = useState(null);
-    const [filteredCities, setFilteredCities] = useState(null);
-    const countryservice = new CountryService();
+interface City {
+    label: string;
+    value: string;
+}
 
-    const groupedCities = [
+interface Country {
+    label: string;
+    code: string;
+    items: City[];
+}
+
+export default function GroupDemo() {
+    const [selectedCity, setSelectedCity] = useState<City>(null);
+    const [filteredCities, setFilteredCities] = useState<City[]>(null);
+    const groupedCities: <Country[]> = [
         {
             label: 'Germany',
             code: 'DE',
@@ -196,11 +203,22 @@ export default function GroupedDoc() {
         }
     ];
 
-    useEffect(() => {
-        countryservice.getCountries().then((data) => setCountries(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    const groupedItemTemplate = (item: Country) => {
+        return (
+            <div className="flex align-items-center">
+                <img
+                    alt={item.label}
+                    src={\`/images/flag/flag_placeholder.png\`}
+                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                    className={\`flag flag-\${item.code.toLowerCase()} mr-2\`}
+                    style={{width: '18px'}}
+                />
+                <div>{item.label}</div>
+            </div>
+        );
+    };
 
-    const searchCity = (event: AutoCompleteCompleteMethodParams) => {
+    const search = (event: AutoCompleteCompleteMethodParams) => {
         let query = event.query;
         let _filteredCities = [];
 
@@ -213,19 +231,11 @@ export default function GroupedDoc() {
         }
 
         setFilteredCities(_filteredCities);
-    };
-
-    const groupedItemTemplate = (item) => {
-        return (
-            <div className="flex align-items-center country-item">
-                <img alt={item.name} src={\`images/flag/flag_placeholder.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} className={\`flag flag-\${item.code.toLowerCase()}\`} />
-                <div>{item.label}</div>
-            </div>
-        );
-    };
+    }
 
     return (
-        <AutoComplete value={selectedCity} suggestions={filteredCities} completeMethod={searchCity} field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} onChange={(e : AutoCompleteChangeParams) => setSelectedCity(e.value)} aria-label="Cities"/>
+        <AutoComplete value={selectedCity} onChange={(e: AutoCompleteChangeParams) => setSelectedCity(e.value)} suggestions={filteredCities} completeMethod={search} 
+            field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} placeholder="Hint: type 'a'" />
     )
 }
         `
@@ -237,17 +247,8 @@ export default function GroupedDoc() {
                 Options groups are specified with the <i>optionGroupLabel</i> and <i>optionGroupChildren</i> properties.
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <AutoComplete
-                    value={selectedCity}
-                    suggestions={filteredCities}
-                    completeMethod={searchCity}
-                    field="label"
-                    optionGroupLabel="label"
-                    optionGroupChildren="items"
-                    optionGroupTemplate={groupedItemTemplate}
-                    onChange={(e) => setSelectedCity(e.value)}
-                    aria-label="Cities"
-                />
+                <AutoComplete value={selectedCity} onChange={(e) => setSelectedCity(e.value)} suggestions={filteredCities} completeMethod={search} 
+                        field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} placeholder="Hint: type 'a'"/>
             </div>
             <DocSectionCode code={code} />
         </>

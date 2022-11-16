@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
+import getConfig from 'next/config';
 import { AutoComplete } from '../../lib/autocomplete/AutoComplete';
 import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
 import { CountryService } from '../../../service/CountryService';
 
-export function MultipleDoc(props) {
+export function TemplateDoc(props) {
     const [countries, setCountries] = useState([]);
-    const [selectedCountries, setSelectedCountries] = useState(null);
+    const [selectedCountry, setSelectedCountry] = useState(null);
     const [filteredCountries, setFilteredCountries] = useState(null);
+    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     const countryservice = new CountryService();
     const search = (event) => {
@@ -27,6 +29,21 @@ export function MultipleDoc(props) {
             setFilteredCountries(_filteredCountries);
         }, 250);
     }
+
+    const itemTemplate = (item) => {
+        return (
+            <div className="flex align-items-center">
+                <img
+                    alt={item.name}
+                    src={`${contextPath}/images/flag/flag_placeholder.png`}
+                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                    className={`flag flag-${item.code.toLowerCase()} mr-2`}
+                    style={{width: '18px'}}
+                />
+                <div>{item.name}</div>
+            </div>
+        );
+    };
 
     useEffect(() => {
         countryservice.getCountries().then((data) => setCountries(data));
@@ -43,15 +60,15 @@ export function MultipleDoc(props) {
 
     const code = {
         basic: `
-<AutoComplete field="name" multiple value={selectedCountries} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountries(e.value)} />
+<AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
         `,
         javascript: `
 import { useEffect, useState } from 'react';
 import { AutoComplete } from "primereact/autocomplete";
 
-export default function MultipleDemo() {
+export default function TemplateDemo() {
     const [countries, setCountries] = useState([]);
-    const [selectedCountries, setSelectedCountries] = useState(null);
+    const [selectedCountry, setSelectedCountry] = useState(null);
     const [filteredCountries, setFilteredCountries] = useState(null);
 
     const countryservice = new CountryService();
@@ -73,6 +90,21 @@ export default function MultipleDemo() {
         }, 250);
     }
 
+    const itemTemplate = (item) => {
+        return (
+            <div className="flex align-items-center">
+                <img
+                    alt={item.name}
+                    src={\`/images/flag/flag_placeholder.png\`}
+                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                    className={\`flag flag-\${item.code.toLowerCase()} mr-2\`}
+                    style={{width: '18px'}}
+                />
+                <div>{item.name}</div>
+            </div>
+        );
+    };
+
     useEffect(() => {
         countryservice.getCountries().then((data) => setCountries(data));
         /*
@@ -87,7 +119,7 @@ export default function MultipleDemo() {
     }, []);
 
     return (
-        <AutoComplete field="name" multiple value={selectedCountries} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountries(e.value)} />
+        <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
     )
 }
         `,
@@ -100,9 +132,9 @@ interface Country {
     code: string;
 }
 
-export default function MultipleDemo() {
+export default function TemplateDemo() {
     const [countries, setCountries] = useState<Country[]>([]);
-    const [selectedCountries, setSelectedCountries] = useState<Country>(null);
+    const [selectedCountry, setSelectedCountry] = useState<Country>(null);
     const [filteredCountries, setFilteredCountries] = useState<Country[]>(null);
 
     const countryservice = new CountryService();
@@ -124,6 +156,21 @@ export default function MultipleDemo() {
         }, 250);
     }
 
+    const itemTemplate = (item: Country) => {
+        return (
+            <div className="flex align-items-center">
+                <img
+                    alt={item.name}
+                    src={\`/images/flag/flag_placeholder.png\`}
+                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                    className={\`flag flag-\${item.code.toLowerCase()} mr-2\`}
+                    style={{width: '18px'}}
+                />
+                <div>{item.name}</div>
+            </div>
+        );
+    };
+
     useEffect(() => {
         countryservice.getCountries().then((data) => setCountries(data));
         /*
@@ -138,7 +185,7 @@ export default function MultipleDemo() {
     }, []);
 
     return (
-        <AutoComplete field="name" multiple value={selectedCountries} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountries(e.value)} />
+        <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e: AutoCompleteChangeParams) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
     )
 }
         `
@@ -147,11 +194,11 @@ export default function MultipleDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                Multiple mode is enabled using <i>multiple</i> property used to select more than one value from the autocomplete. 
-                In this case, value reference should be an array. The number of values selectable can be restricted using the <i>selectionLimit</i> property.
+                Custom content can be displayed as an option using <i>itemTemplate</i> property that references a function with a suggestion option as a parameter and returns an element. 
+                Similarly <i>selectedItemTemplate</i> property is available to customize the chips in multiple mode using the same approach. Note that <i>selectedItemTemplate</i> is only available in multiple mode at the moment.
             </DocSectionText>
-            <div className="card p-fluid">
-                <AutoComplete field="name" multiple value={selectedCountries} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountries(e.value)} />
+            <div className="card flex justify-content-center">
+                <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
             </div>
             <DocSectionCode code={code} />
         </>

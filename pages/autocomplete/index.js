@@ -1,12 +1,15 @@
-import React from 'react';
+import getConfig from 'next/config';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/autocomplete/importdoc';
 import { BasicDoc } from '../../components/doc/autocomplete/basicdoc';
-import { GroupedDoc } from '../../components/doc/autocomplete/groupeddoc';
-import { TemplatingDoc } from '../../components/doc/autocomplete/templatingdoc';
+import { DropdownDoc } from '../../components/doc/autocomplete/dropdowndoc';
+import { ObjectsDoc } from '../../components/doc/autocomplete/objectsdoc';
+import { TemplateDoc } from '../../components/doc/autocomplete/templatedoc';
+import { GroupDoc } from '../../components/doc/autocomplete/groupdoc';
+import { ForceSelectionDoc } from '../../components/doc/autocomplete/forceselectiondoc';
 import { VirtualScrollDoc } from '../../components/doc/autocomplete/virtualscrolldoc';
 import { MultipleDoc } from '../../components/doc/autocomplete/multipledoc';
 import { ApiDoc } from '../../components/doc/autocomplete/apidoc';
@@ -24,18 +27,33 @@ const AutoCompleteDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'grouped',
-            label: 'Grouped',
-            component: GroupedDoc
+            id: 'dropdown',
+            label: 'Dropdown',
+            component: DropdownDoc
         },
         {
-            id: 'templating',
-            label: 'Dropdown, Templating and Force Selection',
-            component: TemplatingDoc
+            id: 'objects',
+            label: 'Objects',
+            component: ObjectsDoc
+        },
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'group',
+            label: 'Group',
+            component: GroupDoc
+        },
+        {
+            id: 'forceselection',
+            label: 'Force Selection',
+            component: ForceSelectionDoc
         },
         {
             id: 'virtualscroll',
-            label: 'Virtual Scroll (100000 Items)',
+            label: 'Virtual Scroll',
             component: VirtualScrollDoc
         },
         {
@@ -44,7 +62,7 @@ const AutoCompleteDemo = () => {
             component: MultipleDoc
         },
         {
-            id: 'api',
+            id: 'apidoc',
             label: 'API',
             component: ApiDoc
         }
@@ -61,7 +79,6 @@ const AutoCompleteDemo = () => {
                     <h1>AutoComplete</h1>
                     <p>AutoComplete is an input component that provides real-time suggestions when being typed.</p>
                 </div>
-                <DocActions github="autocomplete/index.js" />
             </div>
 
             <div className="content-section doc">

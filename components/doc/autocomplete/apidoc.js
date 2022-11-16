@@ -8,11 +8,7 @@ export function ApiDoc(props) {
         <>
             <DocSectionText {...props}></DocSectionText>
             <h3>Properties</h3>
-            <p>
-                Standard HTMLSpanElement properties are passed to the wrapping div element.
-                <br />
-                In addition the component uses these properties:
-            </p>
+            <p></p>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -205,7 +201,7 @@ export function ApiDoc(props) {
                             <td>When present, it specifies that the component should be disabled.</td>
                         </tr>
                         <tr>
-                            <td>maxLength</td>
+                            <td>maxlength</td>
                             <td>number</td>
                             <td>null</td>
                             <td>Maximum number of character allows in the input field.</td>
@@ -465,16 +461,16 @@ export function ApiDoc(props) {
             <DevelopmentSection>
                 <h4>Screen Reader</h4>
                 <p>
-                    Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props. The input element has <i>combobox</i> role in addition to{' '}
-                    <i>aria-autocomplete</i>, <i>aria-haspopup</i> and <i>aria-expanded</i> attributes. The relation between the input and the popup is created with <i>aria-controls</i> and <i>aria-activedescendant</i> attribute is used to instruct
-                    screen reader which option to read during keyboard navigation within the popup list.
+                    Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props. The input element has <i>combobox</i> role in addition
+                    to <i>aria-autocomplete</i>, <i>aria-haspopup</i> and <i>aria-expanded</i> attributes. The relation between the input and the popup is created with <i>aria-controls</i> and <i>aria-activedescendant</i> attribute is used to
+                    instruct screen reader which option to read during keyboard navigation within the popup list.
                 </p>
                 <p>
                     In multiple mode, chip list uses <i>listbox</i> role with <i>aria-orientation</i> set to horizontal whereas each chip has the <i>option</i> role with <i>aria-label</i> set to the label of the chip.
                 </p>
                 <p>
-                    The popup list has an id that refers to the <i>aria-controls</i> attribute of the input element and uses <i>listbox</i> as the role. Each list item has <i>option</i> role and an id to match the <i>aria-activedescendant</i> of the
-                    input element.
+                    The popup list has an id that refers to the <i>aria-controls</i> attribute of the input element and uses <i>listbox</i> as the role. Each list item has <i>option</i> role and an id to match the <i>aria-activedescendant</i>{' '}
+                    of the input element.
                 </p>
                 <CodeHighlight>
                     {`
@@ -601,9 +597,6 @@ export function ApiDoc(props) {
                     </table>
                 </div>
             </DevelopmentSection>
-
-            <h3>Dependencies</h3>
-            <p>None.</p>
         </>
     );
 }
