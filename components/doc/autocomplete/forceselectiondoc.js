@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { AutoComplete } from '../../lib/autocomplete/AutoComplete';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function ForceSelectionDoc(props) {
     const [value, setValue] = useState('');
@@ -34,7 +34,7 @@ export default function ForceSelectionDemo() {
         `,
         typescript: `
 import { useState } from "react";
-import { AutoComplete } from "primereact/autocomplete";
+import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
 
 export default function ForceSelectionDemo() {
     const [value, setValue] = useState<string>('');

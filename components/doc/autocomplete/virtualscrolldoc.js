@@ -1,8 +1,8 @@
-import { useState } from 'react';
 import Link from 'next/link';
+import { useState } from 'react';
 import { AutoComplete } from '../../lib/autocomplete/AutoComplete';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function VirtualScrollDoc(props) {
     const [selectedItem, setSelectedItem] = useState(null);
@@ -27,7 +27,7 @@ export function VirtualScrollDoc(props) {
 
     const code = {
         basic: `
-<AutoComplete value={selectedItem} suggestions={filteredItems} completeMethod={searchItems} 
+<AutoComplete value={selectedItem} suggestions={filteredItems} completeMethod={searchItems}
     virtualScrollerOptions={{ itemSize: 38 }} field="label" dropdown onChange={(e) => setSelectedItem(e.value)} />
         `,
         javascript: `
@@ -55,14 +55,14 @@ export default function VirtualScrollerDemo() {
     }
 
     return (
-        <AutoComplete value={selectedItem} suggestions={filteredItems} completeMethod={searchItems} 
+        <AutoComplete value={selectedItem} suggestions={filteredItems} completeMethod={searchItems}
             virtualScrollerOptions={{ itemSize: 38 }} field="label" dropdown onChange={(e) => setSelectedItem(e.value)} />
     )
 }
         `,
         typescript: `
 import { useState } from "react";
-import { AutoComplete } from "primereact/autocomplete";
+import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
 
 interface Item {
     label: string;
@@ -90,7 +90,7 @@ export default function VirtualScrollerDemo() {
     }
 
     return (
-        <AutoComplete value={selectedItem} suggestions={filteredItems} completeMethod={searchItems} 
+        <AutoComplete value={selectedItem} suggestions={filteredItems} completeMethod={searchItems}
             virtualScrollerOptions={{ itemSize: 38 }} field="label" dropdown onChange={(e: AutoCompleteChangeParams) => setSelectedItem(e.value)} />
     )
 }

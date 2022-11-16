@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { AutoComplete } from '../../lib/autocomplete/AutoComplete';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
 import { CountryService } from '../../../service/CountryService';
+import { AutoComplete } from '../../lib/autocomplete/AutoComplete';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function MultipleDoc(props) {
     const [countries, setCountries] = useState([]);
@@ -32,10 +32,10 @@ export function MultipleDoc(props) {
         countryservice.getCountries().then((data) => setCountries(data));
         /*
             Countries is an array of objects with name, code pairs;
-            [ 
+            [
                 ...
-                {"name": "United Kingdom", "code": "UK"}, 
-                {"name": "United States", "code": "USA"},  
+                {"name": "United Kingdom", "code": "UK"},
+                {"name": "United States", "code": "USA"},
                 ...
             ]
         */
@@ -62,7 +62,7 @@ export default function MultipleDemo() {
 
             if (!event.query.trim().length) {
                 _filteredCountries = [...countries];
-            } 
+            }
             else {
                 _filteredCountries = countries.filter((country) => {
                     return country.name.toLowerCase().startsWith(event.query.toLowerCase());
@@ -77,10 +77,10 @@ export default function MultipleDemo() {
         countryservice.getCountries().then((data) => setCountries(data));
         /*
             Countries is an array of objects with a name and a code;
-            [ 
+            [
                 ...
-                {"name": "United Kingdom", "code": "UK"}, 
-                {"name": "United States", "code": "USA"},  
+                {"name": "United Kingdom", "code": "UK"},
+                {"name": "United States", "code": "USA"},
                 ...
             ]
         */
@@ -93,7 +93,7 @@ export default function MultipleDemo() {
         `,
         typescript: `
 import { useEffect, useState } from 'react';
-import { AutoComplete } from "primereact/autocomplete";
+import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
 
 interface Country {
     name: string;
@@ -113,7 +113,7 @@ export default function MultipleDemo() {
 
             if (!event.query.trim().length) {
                 _filteredCountries = [...countries];
-            } 
+            }
             else {
                 _filteredCountries = countries.filter((country) => {
                     return country.name.toLowerCase().startsWith(event.query.toLowerCase());
@@ -128,10 +128,10 @@ export default function MultipleDemo() {
         countryservice.getCountries().then((data) => setCountries(data));
         /*
             Countries is an array of objects with a name and a code;
-            [ 
+            [
                 ...
-                {"name": "United Kingdom", "code": "UK"}, 
-                {"name": "United States", "code": "USA"},  
+                {"name": "United Kingdom", "code": "UK"},
+                {"name": "United States", "code": "USA"},
                 ...
             ]
         */
