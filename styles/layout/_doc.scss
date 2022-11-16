@@ -36,7 +36,7 @@
     .doc-section-description {
         font-size: 1.125rem;
         
-        > i {
+        i {
             background-color: var(--primary-100);
             color: var(--primary-900);
             border-radius: 6px;
@@ -46,7 +46,7 @@
             font-style: normal;
         }
 
-        > a {
+        a {
             color: var(--primary-color);
             font-weight: 600;
 

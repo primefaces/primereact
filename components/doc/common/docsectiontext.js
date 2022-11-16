@@ -12,7 +12,7 @@ export function DocSectionText(props) {
                     <a id={props.id}>#</a>
                 </Link>
             </h2>
-            {props.children && <p className="doc-section-description">{props.children}</p>}
+            <div className="doc-section-description">{props.children}</div>
         </>
     );
 }

@@ -54,7 +54,7 @@ export default function HelpTextDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                An advisory text can be defined with the semantic <i>small</i> tag.
+                <p>An advisory text can be defined with the semantic <i>small</i> tag.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="flex flex-column gap-2">

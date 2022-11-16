@@ -58,7 +58,7 @@ export default function IconsDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                Icons can be placed inside an input element by wrapping both the input and the icon with an element that has either <i>.p-input-icon-left</i> or <i>p-input-icon-right</i> class.
+                <p>Icons can be placed inside an input element by wrapping both the input and the icon with an element that has either <i>.p-input-icon-left</i> or <i>p-input-icon-right</i> class.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="flex flex-wrap gap-3">

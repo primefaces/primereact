@@ -31,7 +31,7 @@ export default function KeyFilterDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                InputText has built-in key filtering support to block certain keys, refer to <Link href="/keyfilter">keyfilter</Link> page for more information.
+                <p>InputText has built-in key filtering support to block certain keys, refer to <Link href="/keyfilter">keyfilter</Link> page for more information.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <InputText keyfilter="int" placeholder="Integers" />
