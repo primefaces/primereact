@@ -1,8 +1,8 @@
-import { useState } from 'react';
 import getConfig from 'next/config';
+import { useState } from 'react';
 import { AutoComplete } from '../../lib/autocomplete/AutoComplete';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function GroupDoc(props) {
     const [selectedCity, setSelectedCity] = useState(null);
@@ -73,7 +73,7 @@ export function GroupDoc(props) {
 
     const code = {
         basic: `
-<AutoComplete value={selectedCity} onChange={(e) => setSelectedCity(e.value)} suggestions={filteredCities} completeMethod={search} 
+<AutoComplete value={selectedCity} onChange={(e) => setSelectedCity(e.value)} suggestions={filteredCities} completeMethod={search}
         field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} placeholder="Hint: type 'a'" />
         `,
         javascript: `
@@ -147,14 +147,14 @@ export default function GroupDemo() {
     }
 
     return (
-        <AutoComplete value={selectedCity} onChange={(e) => setSelectedCity(e.value)} suggestions={filteredCities} completeMethod={search} 
+        <AutoComplete value={selectedCity} onChange={(e) => setSelectedCity(e.value)} suggestions={filteredCities} completeMethod={search}
             field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} placeholder="Hint: type 'a'" />
     )
 }
         `,
         typescript: `
 import { useState } from 'react';
-import { AutoComplete } from "primereact/autocomplete";
+import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
 
 interface City {
     label: string;
@@ -234,7 +234,7 @@ export default function GroupDemo() {
     }
 
     return (
-        <AutoComplete value={selectedCity} onChange={(e: AutoCompleteChangeParams) => setSelectedCity(e.value)} suggestions={filteredCities} completeMethod={search} 
+        <AutoComplete value={selectedCity} onChange={(e: AutoCompleteChangeParams) => setSelectedCity(e.value)} suggestions={filteredCities} completeMethod={search}
             field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} placeholder="Hint: type 'a'" />
     )
 }
