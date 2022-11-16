@@ -120,7 +120,9 @@ export default function GroupDemo() {
 
     return (
         <>
-            <DocSectionText {...props}>Multiple checkboxes can be grouped together.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Multiple checkboxes can be grouped together.</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="flex flex-wrap gap-3">
                     <div className="flex align-items-center">

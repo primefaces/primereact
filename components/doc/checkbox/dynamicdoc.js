@@ -119,7 +119,9 @@ export default function DynamicDemo() {
 
     return (
         <>
-            <DocSectionText {...props}>Checkboxes can be generated using a list of values.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Checkboxes can be generated using a list of values.</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="flex flex-column gap-3">
                     {categories.map((category) => {

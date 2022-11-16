@@ -14,7 +14,7 @@ export function BasicDoc(props) {
 import { useState } from "react";
 import { Checkbox } from "primereact/checkbox";
 
-export default function BasicDemo() {
+export default function BasicDoc() {
     const [checked, setChecked] = useState(false);
 
     return (
@@ -26,7 +26,7 @@ export default function BasicDemo() {
 import { useState } from "react";
 import { Checkbox } from "primereact/checkbox";
 
-export default function BasicDemo() {
+export default function BasicDoc() {
     const [checked, setChecked] = useState<boolean>(false);
 
     return (
@@ -39,7 +39,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                Checkbox is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.
+                <p>
+                    Checkbox is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Checkbox onChange={(e) => setChecked(e.checked)} checked={checked}></Checkbox>
