@@ -31,7 +31,7 @@ export function ApiDoc(props) {
                         </tr>
                         <tr>
                             <td>style</td>
-                            <td>string</td>
+                            <td>CSSProperties</td>
                             <td>null</td>
                             <td>Inline style of the component.</td>
                         </tr>
@@ -84,6 +84,18 @@ export function ApiDoc(props) {
                             <td>string</td>
                             <td>null</td>
                             <td>Identifier of the focus input to match a label defined for the dropdown.</td>
+                        </tr>
+                        <tr>
+                            <td>panelStyle</td>
+                            <td>CSSProperties</td>
+                            <td>null</td>
+                            <td>Inline style of the overlay panel.</td>
+                        </tr>
+                        <tr>
+                            <td>panelClassName</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Style class of the overlay panel.</td>
                         </tr>
                         <tr>
                             <td>tooltip</td>

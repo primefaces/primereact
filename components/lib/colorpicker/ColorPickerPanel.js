@@ -5,7 +5,7 @@ import { classNames } from '../utils/Utils';
 
 export const ColorPickerPanel = React.forwardRef((props, ref) => {
     const createElement = () => {
-        const className = classNames('p-colorpicker-panel', {
+        const className = classNames('p-colorpicker-panel', props.panelClassName, {
             'p-colorpicker-overlay-panel': !props.inline,
             'p-disabled': props.disabled
         });
@@ -23,7 +23,7 @@ export const ColorPickerPanel = React.forwardRef((props, ref) => {
                 onExit={props.onExit}
                 onExited={props.onExited}
             >
-                <div ref={ref} className={className} onClick={props.onClick}>
+                <div ref={ref} className={className} style={props.panelStyle} onClick={props.onClick}>
                     {props.children}
                 </div>
             </CSSTransition>
