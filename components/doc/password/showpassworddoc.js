@@ -39,7 +39,9 @@ export default function ShowPassword() {
     return (
         <>
             <DocSectionText {...props}>
-                With <i>toggleMask</i> property it shows an icon to display the password as plain text.
+                <p>
+                    With <i>toggleMask</i> property it shows an icon to display the password as plain text.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Password value={value} onChange={(e) => setValue(e.target.value)} toggleMask />

@@ -63,7 +63,21 @@ const KeyFilterDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            component: ApiDoc,
+            children: [
+                {
+                    id: 'builtin',
+                    label: 'Built-in Filters'
+                },
+                {
+                    id: 'custom',
+                    label: 'Custom Filter'
+                },
+                {
+                    id: 'accessibility',
+                    label: 'Accessibility'
+                }
+            ]
         }
     ];
 

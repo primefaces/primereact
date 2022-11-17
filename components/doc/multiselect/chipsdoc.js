@@ -60,7 +60,9 @@ export default function ChipsDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Used mode to display the selected items as chips.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Used mode to display the selected items as chips.</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <MultiSelect value={selectedCities} options={cities} onChange={(e) => setSelectedCities(e.value)} optionLabel="name" placeholder="Select a City" display="chip" />
             </div>

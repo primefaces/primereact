@@ -69,8 +69,10 @@ export default function CustomContentDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Options support templating using the <i>itemTemplate</i> property that references a function to render the content. Notice the usage of optionLabel, although it is not rendered visually, it is still required to be used as the list
-                key.
+                <p>
+                    Options support templating using the <i>itemTemplate</i> property that references a function to render the content. Notice the usage of optionLabel, although it is not rendered visually, it is still required to be used as the list
+                    key.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <SelectButton value={value} options={justifyOptions} onChange={(e) => setValue(e.value)} itemTemplate={justifyTemplate} optionLabel="value" />

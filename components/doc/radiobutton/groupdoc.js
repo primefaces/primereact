@@ -90,7 +90,9 @@ export default function GroupDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                RadioButton is used as a controlled input with <i>value</i>, <i>checked</i> and <i>onChange</i> properties. Multiple radiobuttons can be grouped together.
+                <p>
+                    RadioButton is used as a controlled input with <i>value</i>, <i>checked</i> and <i>onChange</i> properties. Multiple radiobuttons can be grouped together.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="flex flex-wrap gap-3">

@@ -38,7 +38,9 @@ export default function BlockSpaceDoc() {
 
     return (
         <>
-            <DocSectionText {...props}> Block space key </DocSectionText>
+            <DocSectionText {...props}>
+                <p>Block space key</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="grid p-fluid gap-2">
                     <label htmlFor="spaceblock">Block space key</label>

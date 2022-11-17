@@ -168,7 +168,9 @@ export default function BasicDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Mention is used as a controlled component with <i>suggestions</i> and <i>onSearch</i> properties.
+                <p>
+                    Mention is used as a controlled component with <i>suggestions</i> and <i>onSearch</i> properties.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Mention suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people" rows={5} cols={40} itemTemplate={itemTemplate} />

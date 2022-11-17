@@ -88,7 +88,9 @@ export default function DynamicDemo() {
 
     return (
         <>
-            <DocSectionText {...props}>RadioButtons can be generated using a list of values.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>RadioButtons can be generated using a list of values.</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="flex flex-column gap-3">
                     {categories.map((category) => {

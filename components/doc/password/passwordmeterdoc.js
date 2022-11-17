@@ -39,7 +39,9 @@ export default function PasswordMeter() {
     return (
         <>
             <DocSectionText {...props}>
-                Without <i>feedback</i> property it shows the strength indicator.
+                <p>
+                    Without <i>feedback</i> property it shows the strength indicator.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Password value={value} onChange={(e) => setValue(e.target.value)} />

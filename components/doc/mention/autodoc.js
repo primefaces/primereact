@@ -168,7 +168,9 @@ export default function AutoDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                InputMask is used as a controlled input with <i>value</i> and <i>onChange</i> properties, <i>mask</i> property is required to define the mask of the input.
+                <p>
+                    InputMask is used as a controlled input with <i>value</i> and <i>onChange</i> properties, <i>mask</i> property is required to define the mask of the input.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Mention suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people" rows={5} cols={40} autoResize itemTemplate={itemTemplate} />

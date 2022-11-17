@@ -34,7 +34,9 @@ export default function DisabledDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                When present, it specifies that the element should be <i>disabled</i>.
+                <p>
+                    When present, it specifies that the element should be <i>disabled</i>.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Rating value={8} disabled stars={10} />

@@ -34,7 +34,9 @@ export default function ReadOnlyDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Changing the value is not possible with <i>readonly</i> property.
+                <p>
+                    Changing the value is not possible with <i>readonly</i> property.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Rating value={5} readOnly stars={10} cancel={false} />

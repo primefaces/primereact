@@ -39,7 +39,9 @@ export default function VerticalDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                Default layout of slider is horizontal, use <i>orientation</i> property for the alternative vertical mode.
+                <p>
+                    Default layout of slider is horizontal, use <i>orientation</i> property for the alternative vertical mode.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Slider value={value} onChange={(e) => setValue(e.value)} orientation="vertical" />

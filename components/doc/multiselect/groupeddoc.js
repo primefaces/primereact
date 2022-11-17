@@ -140,7 +140,9 @@ export default function GroupedDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Used mode to display the selected items as chips.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Used mode to display the selected items as chips.</p>
+            </DocSectionText>
             <div className="card flex justify-content-center align-items-center">
                 <MultiSelect
                     value={selectedGroupedCities}

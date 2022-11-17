@@ -50,7 +50,9 @@ export default function InputDemo() {
 
     return (
         <>
-            <DocSectionText {...props}>Slider can be connected to an input field using two-way binding.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Slider can be connected to an input field using two-way binding.</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="w-14rem">
                     <InputText value={value} onChange={(e) => setValue(e.target.value)} className="w-full" />

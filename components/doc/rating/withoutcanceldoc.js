@@ -40,7 +40,9 @@ export default function WithoutCancelDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                A cancel icon is displayed to reset the value by default, set <i>cancel</i> as false to remove this option.
+                <p>
+                    A cancel icon is displayed to reset the value by default, set <i>cancel</i> as false to remove this option.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Rating value={val} cancel={false} onChange={(e) => setVal(e.value)} />

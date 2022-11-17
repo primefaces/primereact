@@ -38,7 +38,9 @@ export default function IntegersDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Integers</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Integers</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="grid p-fluid gap-2">
                     <label htmlFor="integer">Integers</label>

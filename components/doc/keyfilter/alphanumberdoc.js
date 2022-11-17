@@ -38,7 +38,9 @@ export default function AlphanumbericDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Alphanumberic</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Alphanumberic</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="grid p-fluid gap-2">
                     <label htmlFor="alphanum">Alphanumberic</label>

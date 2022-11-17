@@ -39,7 +39,9 @@ export default function StepDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                Size of each movement is defined with the <i>step</i> property.
+                <p>
+                    Size of each movement is defined with the <i>step</i> property.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Slider value={value} onChange={(e) => setValue(e.value)} className="w-14rem" step={20} />

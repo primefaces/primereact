@@ -104,7 +104,9 @@ export default function AdvancedDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Options groups are specified with the <i>optionGroupLabel</i> and <i>optionGroupChildren</i> properties.
+                <p>
+                    Options groups are specified with the <i>optionGroupLabel</i> and <i>optionGroupChildren</i> properties.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <ListBox value={selectedCountries} options={countries} onChange={(e) => setSelectedCountries(e.value)} multiple filter optionLabel="name" itemTemplate={countryTemplate} style={{ width: '15rem' }} listStyle={{ maxHeight: '250px' }} />

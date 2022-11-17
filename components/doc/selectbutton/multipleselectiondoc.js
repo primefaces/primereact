@@ -53,7 +53,9 @@ export default function MultipleSelectionDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                SelectButton allows selecting only one item by default and setting <i>multiple</i> option enables choosing more than one item. In multiple case, model property should be an array.
+                <p>
+                    SelectButton allows selecting only one item by default and setting <i>multiple</i> option enables choosing more than one item. In multiple case, model property should be an array.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <SelectButton value={value} options={paymentOptions} onChange={(e) => setValue(e.value)} optionLabel="name" multiple />

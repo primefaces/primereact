@@ -33,7 +33,25 @@ const SelectButtonDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            component: ApiDoc,
+            children: [
+                {
+                    id: 'selectitem',
+                    label: 'SelectItem API'
+                },
+                {
+                    id: 'properties',
+                    label: 'Properties'
+                },
+                {
+                    id: 'events',
+                    label: 'Events'
+                },
+                {
+                    id: 'accessibility',
+                    label: 'Accessibility'
+                }
+            ]
         }
     ];
 

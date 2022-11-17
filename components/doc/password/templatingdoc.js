@@ -78,7 +78,9 @@ export default function Templating() {
 
     return (
         <>
-            <DocSectionText {...props}>Format definition of the keys to block.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Format definition of the keys to block.</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <Password value={value} onChange={(e) => setValue(e.target.value)} header={header} footer={footer} />
             </div>

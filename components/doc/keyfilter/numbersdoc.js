@@ -38,7 +38,9 @@ export default function NumbersDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Numbers</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Numbers</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="grid p-fluid gap-2">
                     <label htmlFor="numbers">Numbers</label>

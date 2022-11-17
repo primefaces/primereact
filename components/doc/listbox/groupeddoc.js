@@ -113,7 +113,9 @@ export default function GroupedDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Property name or getter function to use as the label of an option group.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Property name or getter function to use as the label of an option group.</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <ListBox
                     value={selectedGroupedCity}

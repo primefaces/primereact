@@ -51,7 +51,29 @@ const MultiSelectDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            component: ApiDoc,
+            children: [
+                {
+                    id: 'properties',
+                    label: 'Properties'
+                },
+                {
+                    id: 'events',
+                    label: 'Events'
+                },
+                {
+                    id: 'methods',
+                    label: 'Methods'
+                },
+                {
+                    id: 'styling',
+                    label: 'Styling'
+                },
+                {
+                    id: 'accessibility',
+                    label: 'Accessibility'
+                }
+            ]
         }
     ];
 

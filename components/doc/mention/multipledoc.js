@@ -228,7 +228,9 @@ export default function MultipleDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>It is used to define the expected keyword/s in the input field to mention someone or something.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>It is used to define the expected keyword/s in the input field to mention someone or something.</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <Mention
                     trigger={['@', '#']}

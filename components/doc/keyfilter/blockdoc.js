@@ -38,7 +38,9 @@ export default function BlockDoc() {
 
     return (
         <>
-            <DocSectionText {...props}> Block {`< > * !`} </DocSectionText>
+            <DocSectionText {...props}>
+                <p>Block {`< > * !`} </p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="grid p-fluid gap-2">
                     <label htmlFor="block">Block {`< > * !`}</label>

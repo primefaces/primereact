@@ -38,7 +38,9 @@ export default function HexDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Hex</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Hex</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="grid p-fluid gap-2">
                     <label htmlFor="hex">Hex</label>

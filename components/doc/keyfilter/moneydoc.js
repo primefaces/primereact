@@ -38,7 +38,9 @@ export default function MoneyDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Money</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Money</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="grid p-fluid gap-2">
                     <label htmlFor="money">Money</label>

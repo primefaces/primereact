@@ -177,7 +177,9 @@ export default function AdvanceDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Template of the panel header.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Template of the panel header.</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <MultiSelect
                     value={selectedCountries}

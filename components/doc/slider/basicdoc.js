@@ -39,7 +39,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                Slider is used as a controlled input with <i>value</i> and <i>onChange</i> properties.
+                <p>
+                    Slider is used as a controlled input with <i>value</i> and <i>onChange</i> properties.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Slider value={value} onChange={(e) => setValue(e.value)} className="w-14rem" />

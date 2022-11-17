@@ -42,7 +42,9 @@ export default function VirtualScrollDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Whether to use the virtualScroller feature. The properties of <i>VirtualScroller</i> component can be used like an object in it.
+                <p>
+                    Whether to use the virtualScroller feature. The properties of <i>VirtualScroller</i> component can be used like an object in it.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <ListBox value={selectedItem} options={items} virtualScrollerOptions={{ itemSize: 38 }} onChange={(e) => setSelectedItem(e.value)} style={{ width: '15rem' }} listStyle={{ height: '250px' }} />

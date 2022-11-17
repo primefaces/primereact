@@ -63,7 +63,9 @@ export default function TemplateDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Custom icons are used to override the default icons with <i>onIcon</i>, <i>offIcon</i> and <i>cancelIcon</i> properties.
+                <p>
+                    Custom icons are used to override the default icons with <i>onIcon</i>, <i>offIcon</i> and <i>cancelIcon</i> properties.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Rating

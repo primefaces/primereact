@@ -39,7 +39,9 @@ export default function RangeDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                Range slider provides two handles to define two values. Enable <i>range</i> property and bind an array to implement a range slider.
+                <p>
+                    Range slider provides two handles to define two values. Enable <i>range</i> property and bind an array to implement a range slider.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Slider value={value} onChange={(e) => setValue(e.value)} range className="w-14rem" />

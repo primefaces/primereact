@@ -38,7 +38,9 @@ export default function AlpahbeticDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Alphabetic</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Alphabetic</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="grid p-fluid gap-2">
                     <label htmlFor="alpha">Alphabetic</label>

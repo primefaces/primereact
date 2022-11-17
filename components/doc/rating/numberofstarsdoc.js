@@ -40,7 +40,9 @@ export default function NumberOfStarsDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Number of stars to display is defined with <i>stars</i> property, default is 5.
+                <p>
+                    Number of stars to display is defined with <i>stars</i> property, default is 5.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Rating value={val} onChange={(e) => setVal(e.value)} stars={5} />

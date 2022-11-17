@@ -95,7 +95,9 @@ export default function VirtualLazyDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Whether to use the virtualScroller feature. The properties of <i>VirtualScroller</i> component can be used like an object in it.
+                <p>
+                    Whether to use the virtualScroller feature. The properties of <i>VirtualScroller</i> component can be used like an object in it.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <MultiSelect

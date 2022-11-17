@@ -39,7 +39,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                Password is used as a controlled component with <i>value</i> and <i>onChange</i> properties.
+                <p>
+                    Password is used as a controlled component with <i>value</i> and <i>onChange</i> properties.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Password value={value} onChange={(e) => setValue(e.target.value)} feedback={false} />
