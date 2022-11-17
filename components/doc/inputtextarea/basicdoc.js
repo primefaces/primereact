@@ -39,7 +39,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                Textarea is used as a controlled input with <i>value</i> and <i>onChange</i> properties.
+                <p>
+                    Textarea is used as a controlled input with <i>value</i> and <i>onChange</i> properties.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <InputTextarea value={value} onChange={(e) => setValue(e.target.value)} rows={5} cols={30} />

@@ -52,7 +52,9 @@ export default function FloatLabelDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                A floating label is implemented by wrapping the textarea and the label inside a container having <i>.p-float-label</i> style class.
+                <p>
+                    A floating label is implemented by wrapping the textarea and the label inside a container having <i>.p-float-label</i> style class.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <span className="p-float-label">

@@ -30,7 +30,9 @@ export default function DisabledDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <i>disabled</i> prop prevents a textarea from being editable.
+                <p>
+                    <i>disabled</i> prop prevents a textarea from being editable.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <InputTextarea disabled rows={5} cols={30} value="Disabled" />
