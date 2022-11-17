@@ -159,7 +159,9 @@ export default function TransitionDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Transition Duration, Icon and No Rotate Animation</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Transition Duration, Icon and No Rotate Animation</p>
+            </DocSectionText>
             <div className="card">
                 <div className="speeddial-delay-demo" style={{ position: 'relative', height: '350px' }}>
                     <Toast ref={toast} />

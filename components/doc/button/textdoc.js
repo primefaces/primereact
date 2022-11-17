@@ -52,7 +52,9 @@ export default function TextButtonsDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Text Button</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Text Button</p>
+            </DocSectionText>
             <div className="card flex flex-column lg:flex-row align-items-center justify-content-center">
                 <Button label="Primary" className="p-button-text" />
                 <Button label="Secondary" className="p-button-secondary p-button-text" />

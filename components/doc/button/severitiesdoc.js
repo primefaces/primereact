@@ -49,7 +49,9 @@ export default function SeveritiesDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Different color options are available as severity levels. .p-button-secondary .p-button-success .p-button-info .p-button-warning .p-button-danger</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Different color options are available as severity levels. .p-button-secondary .p-button-success .p-button-info .p-button-warning .p-button-danger</p>
+            </DocSectionText>
             <div className="card flex flex-column lg:flex-row align-items-center justify-content-center">
                 <Button label="Primary" />
                 <Button label="Secondary" className="p-button-secondary" />

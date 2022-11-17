@@ -183,7 +183,9 @@ export default function CircleDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Circle, Semi-Circle and Quarter-Circle</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Circle, Semi-Circle and Quarter-Circle</p>
+            </DocSectionText>
             <div className="card">
                 <div className="speeddial-circle-demo" style={{ position: 'relative', height: '500px' }}>
                     <Toast ref={toast} />

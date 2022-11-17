@@ -149,7 +149,9 @@ export default function BasicDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                SplitButton has a default command button and a collection of additional options defined by the <i>model</i> property.
+                <p>
+                    SplitButton has a default command button and a collection of additional options defined by the <i>model</i> property.
+                </p>
             </DocSectionText>
             <div className="card">
                 <Toast ref={toast}></Toast>

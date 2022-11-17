@@ -38,7 +38,9 @@ export default function IconsDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Icon on a button is specified with <i>icon</i> property and position is configured using <i>iconPos</i> attribute. Default icon position is "left" and alternative is "right". To display only an icon, leave label as undefined.
+                <p>
+                    Icon on a button is specified with <i>icon</i> property and position is configured using <i>iconPos</i> attribute. Default icon position is "left" and alternative is "right". To display only an icon, leave label as undefined.
+                </p>
             </DocSectionText>
             <div className="card flex flex-column lg:flex-row align-items-center justify-content-center">
                 <Button icon="pi pi-check" />

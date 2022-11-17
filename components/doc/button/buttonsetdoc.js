@@ -37,7 +37,9 @@ export default function ButtonSetDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Button Set</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Button Set</p>
+            </DocSectionText>
             <div className="card flex flex-column lg:flex-row align-items-center justify-content-center p-buttonset">
                 <Button label="Save" icon="pi pi-check" />
                 <Button label="Delete" icon="pi pi-trash" />

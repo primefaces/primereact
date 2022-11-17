@@ -34,7 +34,9 @@ export default function BadgesDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Badges</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Badges</p>
+            </DocSectionText>
             <div className="card flex flex-column lg:flex-row align-items-center justify-content-center">
                 <Button type="button" label="Emails" badge="8" />
                 <Button type="button" label="Messages" icon="pi pi-users" className="p-button-warning" badge="8" badgeClassName="p-badge-danger" />

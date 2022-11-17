@@ -49,7 +49,9 @@ export default function RaisedButtonsDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>A button can be raised by having "p-button-raised" style class and similarly borders can be made rounded using "p-button-rounded" class.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>A button can be raised by having "p-button-raised" style class and similarly borders can be made rounded using "p-button-rounded" class.</p>
+            </DocSectionText>
             <div className="card flex flex-column lg:flex-row align-items-center justify-content-center">
                 <Button label="Primary" className="p-button-raised" />
                 <Button label="Secondary" className="p-button-raised p-button-secondary" />

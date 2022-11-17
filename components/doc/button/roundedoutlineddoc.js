@@ -49,7 +49,9 @@ export default function RoundedOutlinedButtonsDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Rounded and Outlined Icon Buttons</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Rounded and Outlined Icon Buttons</p>
+            </DocSectionText>
             <div className="card flex align-items-center justify-content-center">
                 <Button icon="pi pi-check" className="p-button-rounded p-button-outlined" aria-label="Submit" />
                 <Button icon="pi pi-bookmark" className="p-button-rounded p-button-secondary p-button-outlined" aria-label="Bookmark" />

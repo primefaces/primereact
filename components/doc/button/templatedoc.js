@@ -104,7 +104,9 @@ export default function TemplateDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Template</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Template</p>
+            </DocSectionText>
             <div className="card template">
                 <Button className="google p-0" aria-label="Google">
                     <i className="pi pi-google px-2"></i>

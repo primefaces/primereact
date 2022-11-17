@@ -148,7 +148,9 @@ export default function SeveritiesDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Severities </DocSectionText>
+            <DocSectionText {...props}>
+                <p>Severities</p>
+            </DocSectionText>
             <div className="card">
                 <Toast ref={toast}></Toast>
                 <SplitButton label="Primary" model={items} className="mr-2 mb-2"></SplitButton>

@@ -159,7 +159,9 @@ export default function MaskDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Mask</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Mask</p>
+            </DocSectionText>
             <div className="card">
                 <div className="speeddial-mask-demo" style={{ position: 'relative', height: '350px' }}>
                     <Toast ref={toast} />

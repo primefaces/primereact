@@ -150,7 +150,9 @@ export default function TextButtonsDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Text Buttons </DocSectionText>
+            <DocSectionText {...props}>
+                <p>Text Buttons</p>
+            </DocSectionText>
             <div className="card">
                 <Toast ref={toast}></Toast>
                 <SplitButton label="Primary" model={items} className="p-button-text mr-2 mb-2"></SplitButton>

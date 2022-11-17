@@ -49,7 +49,9 @@ export default function OutlinedButtonsDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Outlined Buttons</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Outlined Buttons</p>
+            </DocSectionText>
             <div className="card flex flex-column lg:flex-row align-items-center justify-content-center">
                 <Button label="Primary" className="p-button-outlined" />
                 <Button label="Secondary" className="p-button-outlined p-button-secondary" />

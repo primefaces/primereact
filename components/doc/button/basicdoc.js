@@ -37,7 +37,9 @@ export default function BasicDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Button is created using the Button element. </DocSectionText>
+            <DocSectionText {...props}>
+                <p>Button is created using the Button element. </p>
+            </DocSectionText>
             <div className="card flex flex-column lg:flex-row align-items-center justify-content-center">
                 <Button label="Submit" aria-label="Submit" />
                 <Button label="Disabled" disabled />

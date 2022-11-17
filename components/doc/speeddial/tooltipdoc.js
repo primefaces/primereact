@@ -174,7 +174,9 @@ export default function TooltipDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Tooltip</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Tooltip</p>
+            </DocSectionText>
             <div className="card">
                 <div className="speeddial-tooltip-demo" style={{ position: 'relative', height: '350px' }}>
                     <Toast ref={toast} />

@@ -49,7 +49,9 @@ export default function RoundedIconButtonsDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Rounded Icon Buttons</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Rounded Icon Buttons</p>
+            </DocSectionText>
             <div className="card flex align-items-center justify-content-center">
                 <Button icon="pi pi-bookmark" className="p-button-rounded p-button-secondary" aria-label="Bookmark" />
                 <Button icon="pi pi-search" className="p-button-rounded p-button-success" aria-label="Search" />

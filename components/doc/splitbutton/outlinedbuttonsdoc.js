@@ -148,7 +148,9 @@ export default function OutlinedButtonsDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Outlined Buttons</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Outlined Buttons</p>
+            </DocSectionText>
             <div className="card">
                 <Toast ref={toast}></Toast>
                 <SplitButton label="Primary" model={items} className="p-button-outlined mr-2 mb-2"></SplitButton>

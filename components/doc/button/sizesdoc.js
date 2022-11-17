@@ -37,7 +37,9 @@ export default function SizesDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Sizes</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Sizes</p>
+            </DocSectionText>
             <div className="card flex flex-column lg:flex-row align-items-center justify-content-center">
                 <Button label="Small" icon="pi pi-check" className="p-button-sm" />
                 <Button label="Normal" icon="pi pi-check" className="p-button" />

@@ -169,8 +169,10 @@ export default function LinearDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                When pressed, a floating action button can display multiple primary actions that can be performed on a page. It has a collection of additional options defined by the <i>model</i> property. SpeedDial's position is calculated according
-                to the container element with the position type style.
+                <p>
+                    When pressed, a floating action button can display multiple primary actions that can be performed on a page. It has a collection of additional options defined by the <i>model</i> property. SpeedDial's position is calculated
+                    according to the container element with the position type style.
+                </p>
             </DocSectionText>
             <div className="card">
                 <div className="speeddial-linear-demo" style={{ position: 'relative', height: '500px' }}>

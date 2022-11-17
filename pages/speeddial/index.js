@@ -45,7 +45,37 @@ const SpeedDialDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            component: ApiDoc,
+            children: [
+                {
+                    id: 'menumodelapi',
+                    label: 'MenuModel API'
+                },
+                {
+                    id: 'type',
+                    label: 'Type'
+                },
+                {
+                    id: 'direction',
+                    label: 'Direction'
+                },
+                {
+                    id: 'properties',
+                    label: 'Properties'
+                },
+                {
+                    id: 'events',
+                    label: 'Events'
+                },
+                {
+                    id: 'styling',
+                    label: 'Styling'
+                },
+                {
+                    id: 'accessibility',
+                    label: 'Accessibility'
+                }
+            ]
         }
     ];
 

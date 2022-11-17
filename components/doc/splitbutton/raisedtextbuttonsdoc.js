@@ -150,7 +150,9 @@ export default function RaisedTextButtonsDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Raised Text Buttons</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Raised Text Buttons</p>
+            </DocSectionText>
             <div className="card">
                 <Toast ref={toast}></Toast>
                 <SplitButton label="Primary" model={items} className="p-button-raised p-button-text mr-2 mb-2"></SplitButton>

@@ -148,7 +148,9 @@ export default function RoundedButtonsDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Rounded Buttons </DocSectionText>
+            <DocSectionText {...props}>
+                <p>Rounded Buttons</p>
+            </DocSectionText>
             <div className="card">
                 <Toast ref={toast}></Toast>
                 <SplitButton label="Primary" model={items} className="p-button-rounded mr-2 mb-2"></SplitButton>

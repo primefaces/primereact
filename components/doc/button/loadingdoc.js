@@ -99,7 +99,9 @@ export default function LoadingDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Loading on a button is specified with <i>loading</i> attribute and loading icon can be change with <i>loadingIcon</i> property. To display only a loading, leave label as undefined.
+                <p>
+                    Loading on a button is specified with <i>loading</i> attribute and loading icon can be change with <i>loadingIcon</i> property. To display only a loading, leave label as undefined.
+                </p>
             </DocSectionText>
             <div className="card flex flex-column lg:flex-row align-items-center justify-content-center">
                 <Button label="Submit" loading />

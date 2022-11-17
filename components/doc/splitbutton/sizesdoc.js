@@ -140,7 +140,9 @@ export default function SizesDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Outlined Buttons</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Outlined Buttons</p>
+            </DocSectionText>
             <div className="card">
                 <Toast ref={toast}></Toast>
                 <SplitButton label="Small" model={items} className="p-button-sm mr-2 mb-2" />

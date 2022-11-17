@@ -52,7 +52,9 @@ export default function RaisedTextButtonsDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Raised Text Button</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Raised Text Button</p>
+            </DocSectionText>
             <div className="card flex flex-column lg:flex-row align-items-center justify-content-center">
                 <Button label="Primary" className="p-button-raised p-button-text" />
                 <Button label="Secondary" className="p-button-raised p-button-secondary p-button-text" />
