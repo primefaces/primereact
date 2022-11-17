@@ -82,8 +82,10 @@ export default function CurrencyDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                The currency to use in currency formatting. Possible values are the <i>ISO 4217 currency codes,</i> such as "USD" for the US dollar, "EUR" for the euro, or "CNY" for the Chinese RMB. There is no default value; if the style is
-                "currency", the currency property must be provided.
+                <p>
+                    The currency to use in currency formatting. Possible values are the <i>ISO 4217 currency codes,</i> such as "USD" for the US dollar, "EUR" for the euro, or "CNY" for the Chinese RMB. There is no default value; if the style is
+                    "currency", the currency property must be provided.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center p-fluid">
                 <div className="field col-12 md:col-3">

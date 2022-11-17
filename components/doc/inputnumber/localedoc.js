@@ -82,7 +82,9 @@ export default function LocaleDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <i>locale option</i> is available to set the localization information such as grouping and decimal symbols where default value is the browser locale. Locales are defined per <i>BCP Language Tag.</i>
+                <p>
+                    <i>locale option</i> is available to set the localization information such as grouping and decimal symbols where default value is the browser locale. Locales are defined per <i>BCP Language Tag.</i>
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center p-fluid">
                 <div className="field col-12 md:col-3">

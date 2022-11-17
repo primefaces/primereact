@@ -81,7 +81,9 @@ export default function NumeralsDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                InputNumber is used as a controlled input with <i>value</i> and <i>onValueChange</i> properties. Component always provides a number type although formatting on the input is a string.
+                <p>
+                    InputNumber is used as a controlled input with <i>value</i> and <i>onValueChange</i> properties. Component always provides a number type although formatting on the input is a string.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center p-fluid ">
                 <div className="field col-12 md:col-3">

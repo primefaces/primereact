@@ -46,8 +46,10 @@ export default function VerticalDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Spinner buttons is enabled using the <i>showButtons</i> options and layout is defined with the <i>buttonLayout</i>. Default value is "stacked" whereas "horizontal" and "stacked" are alternatives. Note that even there are no buttons,
-                up and down arrow keys can be used to spin the values with keyboard.
+                <p>
+                    Spinner buttons is enabled using the <i>showButtons</i> options and layout is defined with the <i>buttonLayout</i>. Default value is "stacked" whereas "horizontal" and "stacked" are alternatives. Note that even there are no
+                    buttons, up and down arrow keys can be used to spin the values with keyboard.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="field">

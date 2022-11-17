@@ -81,7 +81,9 @@ export default function PrefixDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Custom texts e.g. units can be placed before or after the input section with the <i>prefix</i> and <i>suffix</i> properties.
+                <p>
+                    Custom texts e.g. units can be placed before or after the input section with the <i>prefix</i> and <i>suffix</i> properties.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center p-fluid">
                 <div className="field col-12 md:col-3">
