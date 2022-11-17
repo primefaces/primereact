@@ -54,7 +54,9 @@ export default function BasicDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                MultiStateCheckbox is used as a controlled input with <i>value</i>, <i>options</i> and <i>onChange</i> properties. The <i>optionValue</i> field refers to the value of each option.
+                <p>
+                    MultiStateCheckbox is used as a controlled input with <i>value</i>, <i>options</i> and <i>onChange</i> properties. The <i>optionValue</i> field refers to the value of each option.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <div style={{ marginRight: '0.5rem', lineHeight: '1' }}>

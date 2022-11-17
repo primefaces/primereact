@@ -40,7 +40,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                Icons and Labels can be customized using <i>onLabel</i>, <i>offLabel</i>, <i>onIcon</i> and <i>offIcon</i> properties.
+                <p>
+                    Icons and Labels can be customized using <i>onLabel</i>, <i>offLabel</i>, <i>onIcon</i> and <i>offIcon</i> properties.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <ToggleButton onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times" checked={checked} onChange={(e) => setChecked(e.value)} />

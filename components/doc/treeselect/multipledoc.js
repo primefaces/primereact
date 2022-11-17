@@ -60,9 +60,11 @@ export default function MultipleDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                TreeSelect supports "single", "multiple" and "checkbox" selection modes. Define <i>selectionMode</i>, <i>value</i> and <i>onChange</i> properties to control the selection. In single mode, selectionKeys should be a single value whereas
-                in multiple or checkbox modes an object is required. By default in multiple selection mode, metaKey is necessary to add to existing selections however this can be configured with <i>metaKeySelection</i> property. Note that in touch
-                enabled devices, Tree does not require metaKey.
+                <p>
+                    TreeSelect supports "single", "multiple" and "checkbox" selection modes. Define <i>selectionMode</i>, <i>value</i> and <i>onChange</i> properties to control the selection. In single mode, selectionKeys should be a single value
+                    whereas in multiple or checkbox modes an object is required. By default in multiple selection mode, metaKey is necessary to add to existing selections however this can be configured with <i>metaKeySelection</i> property. Note that
+                    in touch enabled devices, Tree does not require metaKey.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <TreeSelect value={selectedNodeKeys} options={nodes} onChange={(e) => setSelectedNodeKeys(e.value)} selectionMode="multiple" metaKeySelection={false} placeholder="Select Items"></TreeSelect>

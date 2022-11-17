@@ -61,7 +61,9 @@ export default function BasicDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                TreeSelect component requires an array of TreeNode objects as its <i>options</i> and keys of the nodes as its value.
+                <p>
+                    TreeSelect component requires an array of TreeNode objects as its <i>options</i> and keys of the nodes as its value.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)} placeholder="Select Item"></TreeSelect>

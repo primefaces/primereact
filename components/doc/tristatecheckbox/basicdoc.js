@@ -40,7 +40,9 @@ export default function BasicDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                TriStateCheckbox is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.
+                <p>
+                    TriStateCheckbox is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center align-items-center">
                 <div className="mr-2">

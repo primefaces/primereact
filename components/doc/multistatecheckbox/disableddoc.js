@@ -54,7 +54,9 @@ export default function DisabledDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                With <i>disabled</i> it specifies that the element value cannot be altered.
+                <p>
+                    With <i>disabled</i> it specifies that the element value cannot be altered.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <div style={{ marginRight: '0.5rem', lineHeight: '1' }}>

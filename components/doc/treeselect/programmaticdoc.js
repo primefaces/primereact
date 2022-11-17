@@ -129,8 +129,10 @@ export default function ProgrammaticDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Label of an option is used as the display text of an item by default, for custom content support define a <i>valueTemplate</i> that gets the selected nodes as a parameter. For custom filter support define a <i>filterTemplate</i>{' '}
-                function that gets the option instance as a parameter and returns the content for the filter element. In addition <i>header</i>, <i>footer</i> and <i>emptyMessage</i> templates are provided for further customization.
+                <p>
+                    Label of an option is used as the display text of an item by default, for custom content support define a <i>valueTemplate</i> that gets the selected nodes as a parameter. For custom filter support define a <i>filterTemplate</i>
+                    function that gets the option instance as a parameter and returns the content for the filter element. In addition <i>header</i>, <i>footer</i> and <i>emptyMessage</i> templates are provided for further customization.
+                </p>
             </DocSectionText>
             <div className="card flex flex-column align-items-center justify-content-center">
                 <TreeSelect

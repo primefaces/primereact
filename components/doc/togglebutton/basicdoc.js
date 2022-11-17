@@ -40,7 +40,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                Rating is used a controlled input component with <i>value</i> and <i>onChange</i> properties.
+                <p>
+                    Rating is used a controlled input component with <i>value</i> and <i>onChange</i> properties.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <ToggleButton checked={checked} onChange={(e) => setChecked(e.value)} />

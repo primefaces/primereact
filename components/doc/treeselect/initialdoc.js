@@ -60,8 +60,10 @@ export default function InitialDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Value passed to and from the TreeSelect via the value property should be a an object with key-value pairs where key is the node key and value is a boolean to indicate selection. On the other hand in "checkbox" mode, instead of a
-                boolean, value should be an object that has "checked" and "partialChecked" properties to represent the checked state of a node. Best way to clarify it is prepopulating a TreeSelect with an existing value.
+                <p>
+                    Value passed to and from the TreeSelect via the value property should be a an object with key-value pairs where key is the node key and value is a boolean to indicate selection. On the other hand in "checkbox" mode, instead of a
+                    boolean, value should be an object that has "checked" and "partialChecked" properties to represent the checked state of a node. Best way to clarify it is prepopulating a TreeSelect with an existing value.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)} placeholder="Select Item"></TreeSelect>

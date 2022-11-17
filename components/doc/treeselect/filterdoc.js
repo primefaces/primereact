@@ -60,9 +60,11 @@ export default function FilterDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Filtering is enabled by setting the <i>filter</i> property to true, by default label property of a node is used to compare against the value in the text field, in order to customize which field(s) should be used during search define{' '}
-                <i>filterBy</i> property. In addition <i>filterMode</i> specifies the filtering strategy. In lenient mode when the query matches a node, children of the node are not searched further as all descendants of the node are included. On the
-                other hand, in strict mode when the query matches a node, filtering continues on all descendants.
+                <p>
+                    Filtering is enabled by setting the <i>filter</i> property to true, by default label property of a node is used to compare against the value in the text field, in order to customize which field(s) should be used during search
+                    define <i>filterBy</i> property. In addition <i>filterMode</i> specifies the filtering strategy. In lenient mode when the query matches a node, children of the node are not searched further as all descendants of the node are
+                    included. On the other hand, in strict mode when the query matches a node, filtering continues on all descendants.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)} filter placeholder="Select Items"></TreeSelect>
