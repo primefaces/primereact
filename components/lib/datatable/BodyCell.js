@@ -463,13 +463,14 @@ export const BodyCell = React.memo((props) => {
         }
     }, [props.editingMeta]);
 
-    useUpdateEffect(() => {
+    React.useEffect(() => {
         if (props.editMode === 'cell' || props.editMode === 'row') {
             const callbackParams = getCellCallbackParams();
             const params = { ...callbackParams, editing: editingState, editingKey };
 
             props.onEditingMetaChange(params);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [editingState]);
 
     useUnmountEffect(() => {
