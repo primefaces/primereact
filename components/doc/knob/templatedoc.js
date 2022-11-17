@@ -39,7 +39,9 @@ export default function TemplateDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Template string of the value.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Template string of the value.</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <Knob value={value} valueTemplate={'{value}%'} onChange={(e) => setValue(e.value)} />
             </div>

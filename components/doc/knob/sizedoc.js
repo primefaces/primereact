@@ -38,7 +38,9 @@ export default function SizeDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Size of the component in pixels.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Size of the component in pixels.</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <Knob value={value} size={200} onChange={(e) => setValue(e.value)} />
             </div>

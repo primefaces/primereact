@@ -39,7 +39,9 @@ export default function ColorDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <i>textColor</i> <i>rangeColor</i> <i>valueColor</i>
+                <p>
+                    <i>textColor</i> <i>rangeColor</i> <i>valueColor</i>
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Knob value={value} valueColor={'SlateGray'} rangeColor={'MediumTurquoise'} onChange={(e) => setValue(e.value)} />

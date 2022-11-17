@@ -105,7 +105,9 @@ export default function ReactiveDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Reactive Knob</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Reactive Knob</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="text-center">
                     <Knob value={value2} size={150} readOnly />

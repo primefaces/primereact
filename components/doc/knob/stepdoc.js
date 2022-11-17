@@ -39,7 +39,9 @@ export default function StepDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Step factor is 1 by default and can be customized with step option.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Step factor is 1 by default and can be customized with step option.</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <Knob value={value} step={40} onChange={(e) => setValue(value)} />
             </div>

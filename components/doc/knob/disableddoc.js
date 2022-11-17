@@ -38,7 +38,9 @@ export default function DisabledDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>When present, it specifies that the component value cannot be edited.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>When present, it specifies that the component value cannot be edited.</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <Knob value={value} disabled />
             </div>

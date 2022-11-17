@@ -41,7 +41,9 @@ export default function StrokeDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Width of the knob stroke.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Width of the knob stroke.</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <Knob value={value} strokeWidth={5} onChange={(e) => setValue(e.value)} />
             </div>

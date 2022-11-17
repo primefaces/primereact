@@ -13,6 +13,7 @@ import { StrokeDoc } from '../../components/doc/knob/strokedoc';
 import { SizeDoc } from '../../components/doc/knob/sizedoc';
 import { ColorDoc } from '../../components/doc/knob/colordoc';
 import { ReactiveDoc } from '../../components/doc/knob/reactivedoc';
+import { ApiDoc } from '../../components/doc/knob/apidoc';
 
 const KnobDemo = () => {
     const docs = [
@@ -70,6 +71,29 @@ const KnobDemo = () => {
             id: 'reactive',
             label: 'Reactive Knob',
             component: ReactiveDoc
+        },
+        {
+            id: 'api',
+            label: 'API',
+            component: ApiDoc,
+            children: [
+                {
+                    id: 'properties',
+                    label: 'Properties'
+                },
+                {
+                    id: 'events',
+                    label: 'Events'
+                },
+                {
+                    id: 'styling',
+                    label: 'Styling'
+                },
+                {
+                    id: 'accessibility',
+                    label: 'Accessibility'
+                }
+            ]
         }
     ];
 
