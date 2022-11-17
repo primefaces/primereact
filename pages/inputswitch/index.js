@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import Head from 'next/head';
 import { DocSections } from '../../components/doc/common/docsections';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
@@ -34,7 +33,25 @@ const InputSwitchDemo = () => {
             id: 'api',
             label: 'API',
             type: 'api',
-            component: ApiDoc
+            component: ApiDoc,
+            children: [
+                {
+                    id: 'properties',
+                    label: 'Properties'
+                },
+                {
+                    id: 'events',
+                    label: 'Events'
+                },
+                {
+                    id: 'styling',
+                    label: 'Styling'
+                },
+                {
+                    id: 'accessibility',
+                    label: 'Accessibility'
+                }
+            ]
         }
     ];
 

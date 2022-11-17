@@ -39,7 +39,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                InputSwitch is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.
+                <p>
+                    InputSwitch is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />
