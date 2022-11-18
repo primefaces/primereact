@@ -66,7 +66,9 @@ export default function CustomHeaderDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Custom Header Doc</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Custom Header Doc</p>
+            </DocSectionText>
             <div className="card">
                 <Accordion className="accordion-custom" activeIndex={0}>
                     <AccordionTab

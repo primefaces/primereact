@@ -72,7 +72,9 @@ export default function MultipleDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                By default only one tab at a time can be active, enabling <i>multiple</i> property changes this behavior to allow multiple tabs be active at the same time.
+                <p>
+                    By default only one tab at a time can be active, enabling <i>multiple</i> property changes this behavior to allow multiple tabs be active at the same time.
+                </p>
             </DocSectionText>
             <div className="card">
                 <Accordion multiple activeIndex={[0]}>

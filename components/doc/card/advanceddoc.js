@@ -65,7 +65,9 @@ export default function AdvancedDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Title text of the card is provided using the title property whereas subTitle property is available for additional information about the card. Both of these properties accept JSX as well. </DocSectionText>
+            <DocSectionText {...props}>
+                <p>Title text of the card is provided using the title property whereas subTitle property is available for additional information about the card. Both of these properties accept JSX as well. </p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <Card title="Advanced Card" subTitle="Subtitle" style={{ width: '25em' }} footer={footer} header={header}>
                     <p className="m-0 line-height-3">

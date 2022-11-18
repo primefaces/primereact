@@ -54,7 +54,9 @@ export default function BasicDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Divider has two orientations defined with the <i>layout</i> property, default is "horizontal" and the alternative is "vertical".
+                <p>
+                    Divider has two orientations defined with the <i>layout</i> property, default is "horizontal" and the alternative is "vertical".
+                </p>
             </DocSectionText>
             <div className="card">
                 <p>

@@ -61,7 +61,9 @@ export default function HeaderIconDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>headerIcon</DocSectionText>
+            <DocSectionText {...props}>
+                <p>HeaderIcon</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <TabView className="tabview-header-icon">
                     <TabPanel header="Header I" leftIcon="pi pi-calendar">

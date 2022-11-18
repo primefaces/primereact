@@ -153,7 +153,9 @@ export default function CustomHeaderDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>CustomHeaderDoc</DocSectionText>
+            <DocSectionText {...props}>
+                <p>CustomHeaderDoc</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <TabView>
                     <TabPanel header="Header I" headerTemplate={tabHeaderITemplate}>

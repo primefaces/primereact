@@ -61,7 +61,9 @@ export default function DefaultDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Tabview element consists of one or more TabPanel elements and can either be used as a Controlled or Uncontrolled component. </DocSectionText>
+            <DocSectionText {...props}>
+                <p>Tabview element consists of one or more TabPanel elements and can either be used as a Controlled or Uncontrolled component. </p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <TabView>
                     <TabPanel header="Header I">

@@ -160,7 +160,9 @@ export default function ToolbarDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Toolbar provides left and right templates to place content at these sections.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Toolbar provides left and right templates to place content at these sections.</p>
+            </DocSectionText>
             <div className="card ">
                 <Toolbar left={leftContents} right={rightContents} />
             </div>

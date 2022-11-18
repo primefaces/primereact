@@ -103,8 +103,10 @@ export default function ContentDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Any content placed inside is rendered within the boundaries of the divider. In addition, location of the content is configured with the <i>align</i> property. In horizontal layout, alignment options are "left", "center" and "right"
-                whereas vertical mode supports "top", "center" and "bottom".
+                <p>
+                    Any content placed inside is rendered within the boundaries of the divider. In addition, location of the content is configured with the <i>align</i> property. In horizontal layout, alignment options are "left", "center" and
+                    "right" whereas vertical mode supports "top", "center" and "bottom".
+                </p>
             </DocSectionText>
             <div className="card">
                 <p>

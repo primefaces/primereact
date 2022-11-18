@@ -87,8 +87,10 @@ export default function ProgrammaticDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                In uncontrolled mode, no additional properties are required. Initial active tab can be provided using the <i>activeIndex</i> property in uncontrolled mode however it is evaluated at initial rendering and ignored in further updates. If
-                you programmatically need to update the active tab, prefer to use the component as controlled.
+                <p>
+                    In uncontrolled mode, no additional properties are required. Initial active tab can be provided using the <i>activeIndex</i> property in uncontrolled mode however it is evaluated at initial rendering and ignored in further
+                    updates. If you programmatically need to update the active tab, prefer to use the component as controlled.
+                </p>
             </DocSectionText>
             <div className="card ">
                 <div className="pt-2 pb-4">

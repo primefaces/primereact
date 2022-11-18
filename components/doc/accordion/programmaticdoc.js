@@ -145,7 +145,9 @@ export default function ProgrammaticDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Programmatic</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Programmatic</p>
+            </DocSectionText>
             <div className="card">
                 <div className="pt-2 pb-4">
                     <Button icon={activeIndex && activeIndex.some((index) => index === 0) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 1st" onClick={() => onClick(0)} className="p-button-text" />

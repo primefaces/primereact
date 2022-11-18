@@ -145,7 +145,9 @@ export default function ScrollDemo() {
 
     return (
         <>
-            <DocSectionText {...props}>ScrollPanel is defined using dimensions for the scrollable viewport.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>ScrollPanel is defined using dimensions for the scrollable viewport.</p>
+            </DocSectionText>
             <div className="scrollpanel-demo">
                 <div className="card">
                     <div className="grid">

@@ -40,7 +40,9 @@ export default function HorizontalDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Splitter requires two SplitterPanel components to wrap.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Splitter requires two SplitterPanel components to wrap.</p>
+            </DocSectionText>
             <div className="card">
                 <Splitter style={{ height: '300px' }} className="mb-5">
                     <SplitterPanel className="flex align-items-center justify-content-center">Panel 1</SplitterPanel>

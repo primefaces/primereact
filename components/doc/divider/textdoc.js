@@ -82,7 +82,9 @@ export default function TextDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Style of the border is configured with the <i>type</i> property and supports 3 values; default is "solid" and other possibilities are "dashed" and "dotted".
+                <p>
+                    Style of the border is configured with the <i>type</i> property and supports 3 values; default is "solid" and other possibilities are "dashed" and "dotted".
+                </p>
             </DocSectionText>
             <div className="card">
                 <p>

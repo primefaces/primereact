@@ -94,7 +94,9 @@ export default function NestedDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Splitters can be combined to create advanced layouts.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Splitters can be combined to create advanced layouts.</p>
+            </DocSectionText>
             <div className="card">
                 <Splitter style={{ height: '300px' }}>
                     <SplitterPanel className="flex align-items-center justify-content-center" size={20} minSize={10}>

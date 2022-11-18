@@ -47,8 +47,10 @@ export default function ToggleableDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Content of the panel can be expanded and collapsed using <i>toggleable</i> option. A toggleable panel can either be used as a Controlled or Uncontrolled component. In controlled mode, <i>collapsed</i> and <i>onToggle</i> properties
-                needs to be defined to control the collapsed state.
+                <p>
+                    Content of the panel can be expanded and collapsed using <i>toggleable</i> option. A toggleable panel can either be used as a Controlled or Uncontrolled component. In controlled mode, <i>collapsed</i> and <i>onToggle</i>{' '}
+                    properties needs to be defined to control the collapsed state.
+                </p>
             </DocSectionText>
             <div className="card">
                 <Panel header="Header" toggleable>

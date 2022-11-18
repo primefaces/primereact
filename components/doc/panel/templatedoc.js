@@ -96,7 +96,9 @@ export default function TemplateDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                The header element is fully customizable on Panel. To make special header, an object can be given to the <i>headerTemplate</i> property as below.
+                <p>
+                    The header element is fully customizable on Panel. To make special header, an object can be given to the <i>headerTemplate</i> property as below.
+                </p>
             </DocSectionText>
             <div className="card">
                 <Panel headerTemplate={template} toggleable>

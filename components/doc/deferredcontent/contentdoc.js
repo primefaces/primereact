@@ -131,7 +131,9 @@ export default function DeferredContentDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>DeferredContent is used as a wrapper element of its content. </DocSectionText>
+            <DocSectionText {...props}>
+                <p>DeferredContent is used as a wrapper element of its content.</p>
+            </DocSectionText>
             <div className="card">
                 <div style={{ height: '800px' }}>Scroll down to lazy load an image and the DataTable which initiates a query that is not executed on initial page load to speed up load performance.</div>
                 <Toast ref={toast} />

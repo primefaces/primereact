@@ -73,7 +73,9 @@ export default function ScrollableDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>In controlled mode, activeIndex and onTabChange properties need to be defined to control the state.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>In controlled mode, activeIndex and onTabChange properties need to be defined to control the state.</p>
+            </DocSectionText>
             <div className="card ">
                 <div className="py-2">
                     <Button onClick={() => setActiveIndex(0)} className="p-button-text mr-1" label="Activate 1st" />

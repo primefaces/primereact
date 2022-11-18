@@ -33,7 +33,29 @@ const SplitterDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            component: ApiDoc,
+            children: [
+                {
+                    id: 'propertiesofsplitterpanel',
+                    label: 'Properties of SplitterPanel'
+                },
+                {
+                    id: 'propertiesofsplitter',
+                    label: 'Properties of Splitter'
+                },
+                {
+                    id: 'eventsofsplitter',
+                    label: 'Events of Splitter'
+                },
+                {
+                    id: 'styling',
+                    label: 'Styling'
+                },
+                {
+                    id: 'accessibility',
+                    label: 'Accessibility'
+                }
+            ]
         }
     ];
 

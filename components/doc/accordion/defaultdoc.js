@@ -66,7 +66,9 @@ export default function DefaultDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Accordion element consists of one or more AccordionTab elements and can either be used as a Controlled or Uncontrolled component.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Accordion element consists of one or more AccordionTab elements and can either be used as a Controlled or Uncontrolled component.</p>
+            </DocSectionText>
             <div className="card">
                 <Accordion activeIndex={0}>
                     <AccordionTab header="Header I">

@@ -64,7 +64,9 @@ export default function DisabledDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>In controlled mode, activeIndex and onTabChange properties need to be defined to control the state.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>In controlled mode, activeIndex and onTabChange properties need to be defined to control the state.</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <TabView>
                     <TabPanel header="Header I">

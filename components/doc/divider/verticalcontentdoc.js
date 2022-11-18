@@ -104,7 +104,9 @@ export default function VerticalContentDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Vertical divider is enabled by setting the <i>layout</i> property as "vertical".
+                <p>
+                    Vertical divider is enabled by setting the <i>layout</i> property as "vertical".
+                </p>
             </DocSectionText>
             <div className="card">
                 <div className="grid">

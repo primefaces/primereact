@@ -41,7 +41,9 @@ export default function VerticalDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Default orientation is configured with the <i>layout</i> property and default is the "horizontal" whereas other alternative is the "vertical".
+                <p>
+                    Default orientation is configured with the <i>layout</i> property and default is the "horizontal" whereas other alternative is the "vertical".
+                </p>
             </DocSectionText>
             <div className="card">
                 <Splitter style={{ height: '300px' }} layout="vertical">

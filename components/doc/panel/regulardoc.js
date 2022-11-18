@@ -47,7 +47,9 @@ export default function RegularDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Panel is a container component that accepts content as its children. <i>header</i> propery also can be used to provide custom content as JSX.
+                <p>
+                    Panel is a container component that accepts content as its children. <i>header</i> propery also can be used to provide custom content as JSX.
+                </p>
             </DocSectionText>
             <div className="card">
                 <Panel header="Header">

@@ -38,7 +38,9 @@ export default function RegularDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Panel is a container component that accepts content as its children. Instead of simple strings, <i>property</i> legend also can be used to provide custom content as JSX.
+                <p>
+                    Panel is a container component that accepts content as its children. Instead of simple strings, <i>property</i> legend also can be used to provide custom content as JSX.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Fieldset legend="Header">

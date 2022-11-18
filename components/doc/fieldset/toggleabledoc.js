@@ -38,8 +38,10 @@ export default function ToggleableDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Content of the fieldset can be expanded and collapsed using <i>toggleable</i> option. A toggleable fieldset can either be used as a Controlled or Uncontrolled component. In controlled mode, <i>collapsed</i> and <i>onToggle</i>{' '}
-                properties need to be defined to control the collapsed state.
+                <p>
+                    Content of the fieldset can be expanded and collapsed using <i>toggleable</i> option. A toggleable fieldset can either be used as a Controlled or Uncontrolled component. In controlled mode, <i>collapsed</i> and <i>onToggle</i>{' '}
+                    properties need to be defined to control the collapsed state.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Fieldset legend="Header" toggleable>

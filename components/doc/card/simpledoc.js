@@ -37,7 +37,9 @@ export default function SimpleDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Card is used as a container. </DocSectionText>
+            <DocSectionText {...props}>
+                <p>Card is used as a container.</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <Card title="Simple Card" style={{ width: '25rem', marginBottom: '2em' }}>
                     <p className="m-0 line-height-3">
