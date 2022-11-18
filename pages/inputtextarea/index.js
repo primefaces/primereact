@@ -2,14 +2,15 @@ import Head from 'next/head';
 import React from 'react';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ImportDoc } from '../../components/doc/inputtextarea/importdoc';
-import { BasicDoc } from '../../components/doc/inputtextarea/basicdoc';
-import { AutoResizeDoc } from '../../components/doc/inputtextarea/autoresizedoc';
-import { KeyFilterDoc } from '../../components/doc/inputtextarea/keyfilterdoc';
-import { FloatLabelDoc } from '../../components/doc/inputtextarea/floatlabeldoc';
-import { InvalidDoc } from '../../components/doc/inputtextarea/invaliddoc';
-import { DisabledDoc } from '../../components/doc/inputtextarea/disableddoc';
 import { ApiDoc } from '../../components/doc/inputtextarea/apidoc';
+import { AutoResizeDoc } from '../../components/doc/inputtextarea/autoresizedoc';
+import { BasicDoc } from '../../components/doc/inputtextarea/basicdoc';
+import { DisabledDoc } from '../../components/doc/inputtextarea/disableddoc';
+import { FloatLabelDoc } from '../../components/doc/inputtextarea/floatlabeldoc';
+import { ImportDoc } from '../../components/doc/inputtextarea/importdoc';
+import { InvalidDoc } from '../../components/doc/inputtextarea/invaliddoc';
+import { KeyFilterDoc } from '../../components/doc/inputtextarea/keyfilterdoc';
+import { ValidationDoc } from '../../components/doc/inputtextarea/validationdoc';
 
 const InputTextareaDemo = () => {
     const docs = [
@@ -47,6 +48,11 @@ const InputTextareaDemo = () => {
             id: 'disabled',
             label: 'Disabled',
             component: DisabledDoc
+        },
+        {
+            id: 'validation',
+            label: 'Validation',
+            component: ValidationDoc
         },
         {
             id: 'api',

@@ -1,15 +1,16 @@
 import Head from 'next/head';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/dropdown/importdoc';
 import { ApiDoc } from '../../components/doc/dropdown/apidoc';
 import { BasicDoc } from '../../components/doc/dropdown/basicdoc';
 import { EditableDoc } from '../../components/doc/dropdown/editabledoc';
 import { GroupedDoc } from '../../components/doc/dropdown/groupeddoc';
-import { TemplatingDoc } from '../../components/doc/dropdown/templatingdoc';
-import { VirtualScrollDoc } from '../../components/doc/dropdown/virtualscrolldoc';
+import { ImportDoc } from '../../components/doc/dropdown/importdoc';
 import { ScrollLazyDoc } from '../../components/doc/dropdown/scrolllazydoc';
+import { TemplatingDoc } from '../../components/doc/dropdown/templatingdoc';
+import { ValidationDoc } from '../../components/doc/dropdown/validationdoc';
+import { VirtualScrollDoc } from '../../components/doc/dropdown/virtualscrolldoc';
 
 const DropdownDemo = () => {
     const docs = [
@@ -47,6 +48,11 @@ const DropdownDemo = () => {
             id: 'scrolllazy',
             label: 'Virtual Scroll (100000 Items) and Lazy',
             component: ScrollLazyDoc
+        },
+        {
+            id: 'validation',
+            label: 'Validation',
+            component: ValidationDoc
         },
         {
             id: 'api',

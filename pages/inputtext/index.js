@@ -1,17 +1,18 @@
-import React from 'react';
 import Head from 'next/head';
+import React from 'react';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ImportDoc } from '../../components/doc/inputtext/importdoc';
+import { ApiDoc } from '../../components/doc/inputtext/apidoc';
 import { BasicDoc } from '../../components/doc/inputtext/basicdoc';
+import { DisabledDoc } from '../../components/doc/inputtext/disableddoc';
 import { FloatLabelDoc } from '../../components/doc/inputtext/floatlabeldoc';
+import { HelpTextDoc } from '../../components/doc/inputtext/helptextdoc';
 import { IconsDoc } from '../../components/doc/inputtext/iconsdoc';
+import { ImportDoc } from '../../components/doc/inputtext/importdoc';
+import { InvalidDoc } from '../../components/doc/inputtext/invaliddoc';
 import { KeyFilterDoc } from '../../components/doc/inputtext/keyfilterdoc';
 import { SizesDoc } from '../../components/doc/inputtext/sizesdoc';
-import { HelpTextDoc } from '../../components/doc/inputtext/helptextdoc';
-import { InvalidDoc } from '../../components/doc/inputtext/invaliddoc';
-import { DisabledDoc } from '../../components/doc/inputtext/disableddoc';
-import { ApiDoc } from '../../components/doc/inputtext/apidoc';
+import { ValidationDoc } from '../../components/doc/inputtext/validationdoc';
 
 const InputTextDemo = () => {
     const docs = [
@@ -59,6 +60,11 @@ const InputTextDemo = () => {
             id: 'disabled',
             label: 'Disabled',
             component: DisabledDoc
+        },
+        {
+            id: 'validation',
+            label: 'Validation',
+            component: ValidationDoc
         },
         {
             id: 'apidoc',

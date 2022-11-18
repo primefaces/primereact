@@ -1,7 +1,7 @@
 import Head from 'next/head';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
 import { ApiDoc } from '../../components/doc/inputnumber/apidoc';
 import { ButtonsDoc } from '../../components/doc/inputnumber/buttonsdoc';
 import { CurrencyDoc } from '../../components/doc/inputnumber/currencydoc';
@@ -9,6 +9,7 @@ import { ImportDoc } from '../../components/doc/inputnumber/importdoc';
 import { LocaleDoc } from '../../components/doc/inputnumber/localedoc';
 import { NumeralsDoc } from '../../components/doc/inputnumber/numberalsdoc';
 import { PrefixDoc } from '../../components/doc/inputnumber/prefixdoc';
+import { ValidationDoc } from '../../components/doc/inputnumber/validationdoc';
 import { VerticalDoc } from '../../components/doc/inputnumber/verticaldoc';
 
 const InputNumberDemo = () => {
@@ -47,6 +48,11 @@ const InputNumberDemo = () => {
             id: 'vertical',
             label: 'Vertical',
             component: VerticalDoc
+        },
+        {
+            id: 'validation',
+            label: 'Validation',
+            component: ValidationDoc
         },
         {
             id: 'api',
