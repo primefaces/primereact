@@ -1,38 +1,51 @@
-import React, { useState, useRef } from 'react';
-import { Steps } from '../../components/lib/steps/Steps';
-import { Toast } from '../../components/lib/toast/Toast';
-import StepsDoc from '../../components/doc/steps';
-import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
+import { DocActions } from '../../components/doc/common/docactions';
+import { ImportDoc } from '../../components/doc/steps/importdoc';
+import { BasicDoc } from '../../components/doc/steps/basicdoc';
+import { InteractiveDoc } from '../../components/doc/steps/interactivedoc';
+import { ApiDoc } from '../../components/doc/steps/apidoc';
 
 const StepsDemo = () => {
-    const [activeIndex, setActiveIndex] = useState(1);
-    const toast = useRef(null);
-
-    const items = [
+    const docs = [
         {
-            label: 'Personal',
-            command: (event) => {
-                toast.current.show({ severity: 'info', summary: 'First Step', detail: event.item.label });
-            }
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
         },
         {
-            label: 'Seat',
-            command: (event) => {
-                toast.current.show({ severity: 'info', summary: 'Seat Selection', detail: event.item.label });
-            }
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
-            label: 'Payment',
-            command: (event) => {
-                toast.current.show({ severity: 'info', summary: 'Pay with CC', detail: event.item.label });
-            }
+            id: 'interactive',
+            label: 'Interactive',
+            component: InteractiveDoc
         },
         {
-            label: 'Confirmation',
-            command: (event) => {
-                toast.current.show({ severity: 'info', summary: 'Last Step', detail: event.item.label });
-            }
+            id: 'api',
+            label: 'API',
+            component: ApiDoc,
+            children: [
+                {
+                    id: 'properties',
+                    label: 'Properties'
+                },
+                {
+                    id: 'events',
+                    label: 'Events'
+                },
+                {
+                    id: 'styling',
+                    label: 'Styling'
+                },
+                {
+                    id: 'accessibility',
+                    label: 'Accessibility'
+                }
+            ]
         }
     ];
 
@@ -50,19 +63,10 @@ const StepsDemo = () => {
                 <DocActions github="steps/index.js" />
             </div>
 
-            <div className="content-section implementation steps-demo">
-                <Toast ref={toast}></Toast>
-
-                <div className="card">
-                    <h5>Basic</h5>
-                    <Steps model={items} />
-
-                    <h5>Interactive</h5>
-                    <Steps model={items} activeIndex={activeIndex} onSelect={(e) => setActiveIndex(e.index)} readOnly={false} />
-                </div>
+            <div className="content-section doc steps-demo">
+                <DocSections docs={docs} />
+                <DocSectionNav docs={docs} />
             </div>
-
-            <StepsDoc />
         </div>
     );
 };
