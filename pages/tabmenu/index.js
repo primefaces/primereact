@@ -1,19 +1,52 @@
-import React, { useState } from 'react';
-import { TabMenu } from '../../components/lib/tabmenu/TabMenu';
-import { Button } from '../../components/lib/button/Button';
-import TabMenuDoc from '../../components/doc/tabmenu';
-import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
+import { DocActions } from '../../components/doc/common/docactions';
+import { ImportDoc } from '../../components/doc/tabmenu/importdoc';
+import { DefaultDoc } from '../../components/doc/tabmenu/defaultdoc';
+import { ProgrammaticDoc } from '../../components/doc/tabmenu/programmaticdoc';
+import { ApiDoc } from '../../components/doc/tabmenu/apidoc';
 
 const TabMenuDemo = () => {
-    const [activeIndex, setActiveIndex] = useState(3);
-
-    const items = [
-        { label: 'Home', icon: 'pi pi-fw pi-home' },
-        { label: 'Calendar', icon: 'pi pi-fw pi-calendar' },
-        { label: 'Edit', icon: 'pi pi-fw pi-pencil' },
-        { label: 'Documentation', icon: 'pi pi-fw pi-file' },
-        { label: 'Settings', icon: 'pi pi-fw pi-cog' }
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'default',
+            label: 'Default',
+            component: DefaultDoc
+        },
+        {
+            id: 'Programmatic',
+            label: 'Programmatic',
+            component: ProgrammaticDoc
+        },
+        {
+            id: 'api',
+            label: 'API',
+            component: ApiDoc,
+            children: [
+                {
+                    id: 'properties',
+                    label: 'Properties'
+                },
+                {
+                    id: 'events',
+                    label: 'Events'
+                },
+                {
+                    id: 'styling',
+                    label: 'Styling'
+                },
+                {
+                    id: 'accessibility',
+                    label: 'Accessibility'
+                }
+            ]
+        }
     ];
 
     return (
@@ -30,25 +63,10 @@ const TabMenuDemo = () => {
                 <DocActions github="tabmenu/index.js" />
             </div>
 
-            <div className="content-section implementation">
-                <div className="card">
-                    <h5>Default</h5>
-                    <TabMenu model={items} />
-                </div>
-
-                <div className="card">
-                    <h5>Programmatic</h5>
-                    <div className="pt-2 pb-4">
-                        <Button onClick={() => setActiveIndex(0)} className="p-button-text" label="Activate 1st" />
-                        <Button onClick={() => setActiveIndex(1)} className="p-button-text" label="Activate 2nd" />
-                        <Button onClick={() => setActiveIndex(2)} className="p-button-text" label="Activate 3rd" />
-                    </div>
-
-                    <TabMenu model={items} activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)} />
-                </div>
+            <div className="content-section doc">
+                <DocSections docs={docs} />
+                <DocSectionNav docs={docs} />
             </div>
-
-            <TabMenuDoc />
         </div>
     );
 };
