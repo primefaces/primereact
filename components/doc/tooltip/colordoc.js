@@ -62,7 +62,9 @@ export default function ColorDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Color</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Color</p>
+            </DocSectionText>
             <div className="card flex align-items-center flex-wrap">
                 <Button label="Blue" className="p-button-secondary p-button-outlined mr-3 mb-2" tooltip="Blue" tooltipOptions={{ className: 'blue-tooltip', position: 'top' }} />
                 <Button label="Green" className="p-button-secondary p-button-outlined mr-3 mb-2" tooltip="Green" tooltipOptions={{ className: 'green-tooltip', position: 'top' }} />

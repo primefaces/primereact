@@ -144,8 +144,10 @@ export default function BasicDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                There are two ways to display confirm popup. One of them is to use the confirmPopup method and the other is to use the <i>&lt;ConfirmPopup&gt;</i> tag. These independently create popup element. It supports the same properties in both.
-                target property is mandatory to align the popup to its caller.
+                <p>
+                    There are two ways to display confirm popup. One of them is to use the confirmPopup method and the other is to use the <i>&lt;ConfirmPopup&gt;</i> tag. These independently create popup element. It supports the same properties in
+                    both. target property is mandatory to align the popup to its caller.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Toast ref={toast} />

@@ -71,7 +71,9 @@ export default function PositionsDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                There are five choices to position the tooltip, default value is "right" and alternatives are "top", "bottom", "left", "mouse". Position is specified using <i>tooltipOptions</i> property.
+                <p>
+                    There are five choices to position the tooltip, default value is "right" and alternatives are "top", "bottom", "left", "mouse". Position is specified using <i>tooltipOptions</i> property.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="grid p-fluid">

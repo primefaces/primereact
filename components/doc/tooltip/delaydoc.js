@@ -39,7 +39,9 @@ export default function DelayDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Tooltip is displayed or hidden instantly by default however you may add delays using <i>showDelay</i> and <i>hideDelay</i> properties which accept a number value in terms of milliseconds.
+                <p>
+                    Tooltip is displayed or hidden instantly by default however you may add delays using <i>showDelay</i> and <i>hideDelay</i> properties which accept a number value in terms of milliseconds.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <InputText type="text" placeholder="Right" tooltip="Enter your username" tooltipOptions={{ showDelay: 1000, hideDelay: 300 }} />

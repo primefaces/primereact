@@ -50,7 +50,9 @@ export default function TargetDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Target</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Target</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <Tooltip target=".custom-target-icon" />
 

@@ -91,7 +91,9 @@ export default function PositionDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Sidebar can either be located on the left (default), right, top or bottom of the screen depending on the <i>position</i> property.
+                <p>
+                    Sidebar can either be located on the left (default), right, top or bottom of the screen depending on the <i>position</i> property.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Sidebar visible={visibleRight} position="right" onHide={() => setVisibleRight(false)}>

@@ -127,8 +127,10 @@ export default function ResponsiveDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Dialog width can be adjusted per screen size with the <i>breakpoints</i> option. In example below, default width is set to 50vw and below 961px, width would be 75vw and finally below 641px width becomes 100%. The value of{' '}
-                <i>breakpoints</i> should be an object literal whose keys are the maximum screen sizes and values are the widths per screen.{' '}
+                <p>
+                    Dialog width can be adjusted per screen size with the <i>breakpoints</i> option. In example below, default width is set to 50vw and below 961px, width would be 75vw and finally below 641px width becomes 100%. The value of{' '}
+                    <i>breakpoints</i> should be an object literal whose keys are the maximum screen sizes and values are the widths per screen.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center dialog-demo">
                 <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayResponsive')} />

@@ -140,8 +140,10 @@ export default function PositionDoc() {
         <>
             <Toast ref={toast} />
             <DocSectionText {...props}>
-                There are two ways to display confirm dialog. One of them is to use the confirmDialog method and the other is to use the <i>&lt;ConfirmDialog&gt;</i> tag. These independently create dialog element. It supports the same properties in
-                both.
+                <p>
+                    There are two ways to display confirm dialog. One of them is to use the confirmDialog method and the other is to use the <i>&lt;ConfirmDialog&gt;</i> tag. These independently create dialog element. It supports the same properties
+                    in both.
+                </p>
             </DocSectionText>
 
             <div className="card ">

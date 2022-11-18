@@ -71,7 +71,9 @@ export default function AutoHideDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>AutoHide</DocSectionText>
+            <DocSectionText {...props}>
+                <p>AutoHide</p>
+            </DocSectionText>
             <div className="card flex align-items-center justify-content-center">
                 <Button type="button" label="Save" icon="pi pi-check" tooltip="Save (autoHide: true)" />
 

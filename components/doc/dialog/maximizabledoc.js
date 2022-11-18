@@ -117,7 +117,9 @@ export default function MaximizableDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Maximizable </DocSectionText>
+            <DocSectionText {...props}>
+                <p>Maximizable</p>
+            </DocSectionText>
             <div className="card flex justify-content-center dialog-demo">
                 <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayMaximizable')} />
                 <Dialog header="Header" visible={displayMaximizable} maximizable modal style={{ width: '50vw' }} footer={renderFooter('displayMaximizable')} onHide={() => onHide('displayMaximizable')}>

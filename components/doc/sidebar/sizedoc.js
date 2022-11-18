@@ -54,7 +54,9 @@ export default function SizeDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Sidebar size can be changed using a fixed value or using one of the three predefined ones. </DocSectionText>
+            <DocSectionText {...props}>
+                <p>Sidebar size can be changed using a fixed value or using one of the three predefined ones.</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <Sidebar visible={visibleLeft} position="left" style={{ width: '20em' }} onHide={() => setVisibleLeft(false)}>
                     <h3>Sidebar Size</h3>

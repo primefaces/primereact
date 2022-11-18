@@ -55,7 +55,9 @@ export default function BasicDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Sidebar is used as a container and visibility is controlled with <i>visible</i> property.
+                <p>
+                    Sidebar is used as a container and visibility is controlled with <i>visible</i> property.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Sidebar visible={visibleLeft} onHide={() => setVisibleLeft(false)}>

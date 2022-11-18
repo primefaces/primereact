@@ -154,7 +154,9 @@ export default function BasicDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Dialog is used as a container and visibility is managed with <i>visible</i> property where <i>onHide</i> event is required to update the visibility state.
+                <p>
+                    Dialog is used as a container and visibility is managed with <i>visible</i> property where <i>onHide</i> event is required to update the visibility state.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center dialog-demo">
                 <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayBasic')} />

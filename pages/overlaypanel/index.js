@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/multiselect/apidoc';
+import { ApiDoc } from '../../components/doc/overlaypanel/apidoc';
 import { ImportDoc } from '../../components/doc/overlaypanel/importdoc';
 import { OverlayPanelDoc } from '../../components/doc/overlaypanel/overlaypaneldoc';
 
@@ -21,7 +21,29 @@ const OverlayPanelDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            component: ApiDoc,
+            children: [
+                {
+                    id: 'properties',
+                    label: 'Properties'
+                },
+                {
+                    id: 'events',
+                    label: 'Events'
+                },
+                {
+                    id: 'methods',
+                    label: 'Methods'
+                },
+                {
+                    id: 'styling',
+                    label: 'Styling'
+                },
+                {
+                    id: 'accessibility',
+                    label: 'Accessibility'
+                }
+            ]
         }
     ];
 

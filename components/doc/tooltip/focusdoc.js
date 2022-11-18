@@ -34,7 +34,9 @@ export default function FocusDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Focus and Blur </DocSectionText>
+            <DocSectionText {...props}>
+                <p>Focus and Blur</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <InputText type="text" placeholder="Focus" tooltip="Enter your username" tooltipOptions={{ event: 'focus' }} />
             </div>

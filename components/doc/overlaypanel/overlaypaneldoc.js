@@ -184,7 +184,9 @@ export default function OverlayPanelDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>OverlayPanel is accessed via its reference where visibility is controlled using toggle, show and hide methods.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>OverlayPanel is accessed via its reference where visibility is controlled using toggle, show and hide methods.</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="card">
                     <Toast ref={toast} />

@@ -50,7 +50,9 @@ export default function TemplateDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Template </DocSectionText>
+            <DocSectionText {...props}>
+                <p>Template</p>
+            </DocSectionText>
             <div className="card flex align-items-center justify-content-center">
                 <Tooltip target=".custom-tooltip-btn">
                     <img alt="logo" src="showcase/images/logo.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} data-pr-tooltip="PrimeReact-Logo" height="80px" />

@@ -54,7 +54,9 @@ export default function FullScreenDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Full screen mode allows the sidebar to cover whole screen.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Full screen mode allows the sidebar to cover whole screen.</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <Sidebar visible={visibleFullScreen} fullScreen onHide={() => setVisibleFullScreen(false)}>
                     <h3>Full Screen Sidebar</h3>

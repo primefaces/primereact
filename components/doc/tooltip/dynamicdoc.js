@@ -75,7 +75,9 @@ export default function DynamicDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Tooltip gets displayed on hover event of its target by default, other option is the focus event to display and blur to hide. You can set it to 'both' to allow for both hover and focus events. </DocSectionText>
+            <DocSectionText {...props}>
+                <p>Tooltip gets displayed on hover event of its target by default, other option is the focus event to display and blur to hide. You can set it to 'both' to allow for both hover and focus events. </p>
+            </DocSectionText>
             <div className="card flex align-items-center justify-content-center">
                 <Button type="button" label="Save" icon="pi pi-check" tooltip={saveBtnTooltipText} onClick={() => setSaveBtnTooltipText('Completed')} />
 

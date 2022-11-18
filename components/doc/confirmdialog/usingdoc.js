@@ -87,7 +87,9 @@ export default function UsingConfirmDialogDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>ConfirmDialog is used as a container and visibility is managed with visible property where onHide event is required to update the visibility state.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>ConfirmDialog is used as a container and visibility is managed with visible property where onHide event is required to update the visibility state.</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <Toast ref={toast} />
                 <ConfirmDialog visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?" header="Confirmation" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />

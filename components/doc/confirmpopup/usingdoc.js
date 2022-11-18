@@ -85,7 +85,9 @@ export default function UsingConfirmPopupDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                ConfirmPopup is used as a container and visibility is managed with <i>visible</i> property where <i>onHide</i> event is required to update the visibility state.
+                <p>
+                    ConfirmPopup is used as a container and visibility is managed with <i>visible</i> property where <i>onHide</i> event is required to update the visibility state.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Toast ref={toast} />

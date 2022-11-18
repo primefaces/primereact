@@ -47,7 +47,9 @@ export default function MouseTrackDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>MouseTrack</DocSectionText>
+            <DocSectionText {...props}>
+                <p>MouseTrack</p>
+            </DocSectionText>
             <div className="card flex align-items-center justify-content-center">
                 <Button type="button" label="Save" icon="pi pi-check" tooltip="Save" tooltipOptions={{ position: 'bottom', mouseTrack: true, mouseTrackTop: 15 }} />
 

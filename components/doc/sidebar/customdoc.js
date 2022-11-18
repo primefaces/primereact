@@ -88,7 +88,9 @@ export default function CustomDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Additional content can be provided using the <i>icons</i> property.
+                <p>
+                    Additional content can be provided using the <i>icons</i> property.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Sidebar visible={visibleCustomToolbar} onHide={() => setVisibleCustomToolbar(false)} icons={customIcons}>

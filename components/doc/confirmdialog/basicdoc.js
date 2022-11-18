@@ -141,7 +141,9 @@ const reject = () => {
 
     return (
         <>
-            <DocSectionText {...props}>ConfirmDialog is used as a container and visibility is managed with visible property where onHide event is required to update the visibility state.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>ConfirmDialog is used as a container and visibility is managed with visible property where onHide event is required to update the visibility state.</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <Toast ref={toast} />
                 <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>

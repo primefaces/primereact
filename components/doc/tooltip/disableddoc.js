@@ -53,8 +53,10 @@ export default function DisabledDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                By default disabled elements like <i>button</i> do not trigger user interactions. So for such issues, a disabled element is usually wrapped with an html element like span and the Tooltip wrapper is set to the element. If this
-                operation is requested by the Tooltip component, the <i>showOnDisabled</i> property can be used. This is an optional use.{' '}
+                <p>
+                    By default disabled elements like <i>button</i> do not trigger user interactions. So for such issues, a disabled element is usually wrapped with an html element like span and the Tooltip wrapper is set to the element. If this
+                    operation is requested by the Tooltip component, the <i>showOnDisabled</i> property can be used. This is an optional use.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Tooltip target=".disabled-button" />

@@ -182,7 +182,9 @@ export default function PositionDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Position </DocSectionText>
+            <DocSectionText {...props}>
+                <p>Position</p>
+            </DocSectionText>
             <div className="card flex justify-content-center dialog-demo">
                 <div className="grid flex-column">
                     <div className="col">

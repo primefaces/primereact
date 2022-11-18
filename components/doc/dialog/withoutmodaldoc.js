@@ -127,7 +127,9 @@ export default function WithoutModalDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                The confirmPopup method returns an object incudes <i>hide</i> and <i>show</i> methods. The component can be shown or hidden by using this object at any time.
+                <p>
+                    The confirmPopup method returns an object incudes <i>hide</i> and <i>show</i> methods. The component can be shown or hidden by using this object at any time.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center dialog-demo">
                 <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayModal')} />
