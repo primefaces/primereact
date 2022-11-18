@@ -344,7 +344,7 @@ export const BodyRow = React.memo((props) => {
 
     const rowClassName = ObjectUtils.getPropValue(props.rowClassName, props.rowData, { props: props.tableProps });
     const className = classNames(rowClassName, {
-        'p-highlight': !props.allowCellSelection && props.selected,
+        'p-highlight': (!props.allowCellSelection && props.selected) || props.contextMenuSelected,
         'p-highlight-contextmenu': props.contextMenuSelected,
         'p-selectable-row': props.allowRowSelection && props.isSelectable({ data: props.rowData, index: props.index }),
         'p-row-odd': props.index % 2 !== 0
