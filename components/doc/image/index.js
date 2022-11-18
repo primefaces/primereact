@@ -202,7 +202,7 @@ import { Image } from 'primereact/image';
                                 </tr>
                                 <tr>
                                     <td>imageStyle</td>
-                                    <td>any</td>
+                                    <td>React.CSSProperties</td>
                                     <td>null</td>
                                     <td>Inline style of the image element.</td>
                                 </tr>
