@@ -73,7 +73,7 @@ export default function ValidationDemo() {
                     )}
                 />
             </div>
-            <Button label="Save" type="submit" icon="pi pi-check" />
+            <Button label="Submit" type="submit" icon="pi pi-check" />
         </form>
     )
 }
@@ -118,7 +118,7 @@ export default function InvalidDemo() {
                     )}
                 />
             </div>
-            <Button label="Save" type="submit" icon="pi pi-check" />
+            <Button label="Submit" type="submit" icon="pi pi-check" />
         </form>
     )
 }
@@ -151,7 +151,7 @@ export default function InvalidDemo() {
                                 )}
                             />
                         </div>
-                        <Button label="Save" type="submit" icon="pi pi-check" />
+                        <Button label="Submit" type="submit" icon="pi pi-check" />
                     </form>
                 </div>
             </div>

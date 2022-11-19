@@ -1,33 +1,32 @@
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Button } from '../../lib/button/Button';
-import { Password } from '../../lib/password/Password';
+import { TriStateCheckbox } from '../../lib/tristatecheckbox/TriStateCheckbox';
 import { classNames } from '../../lib/utils/Utils';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function ValidationDoc(props) {
     const [formData, setFormData] = useState({});
-    const defaultValues = { password: '' };
+    const defaultValues = { accept: '' };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
 
     const onSubmit = (data) => {
         setFormData(data);
-        form.reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>;
+        return errors[name] && <small className="p-error ml-2">{errors[name].message}</small>;
     };
 
     const code = {
         basic: `
-<Controller name="password"  control={form.control} rules={{ required: 'Password is required.'}}
+<Controller name="accept"  control={form.control} rules={{ required: 'Accept is required.'}}
     render={({ field, fieldState }) => (
         <>
-            <label htmlFor={field.name} className={classNames({ 'p-error': errors.name })}>Password*</label>
-            <Password id={field.name} {...field} inputRef={field.ref} className={classNames({ 'p-invalid': fieldState.error })} feedback={false} />
+            <label htmlFor={field.name} className={classNames({ 'p-error': errors.name })}>Accept*</label>
+            <TriStateCheckbox id={field.name} {...field} className={classNames('mr-2', { 'p-invalid': fieldState.error })} />
             {getFormErrorMessage(field.name)}
         </>
     )}
@@ -37,37 +36,36 @@ export function ValidationDoc(props) {
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Button } from '../../lib/button/Button';
-import { Password } from "primereact/password";
+import { TriStateCheckbox } from "primereact/tristatecheckbox";
 import { classNames } from '../../lib/utils/Utils';
 
 export default function ValidationDemo() {
     const [formData, setFormData] = useState({});
-    const defaultValues = {password: ''};
+    const defaultValues = {accept: ''};
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
 
     const onSubmit = (data) => {
         setFormData(data);
-        form.reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>
+        return errors[name] && <small className="p-error ml-2">{errors[name].message}</small>
     };
 
     return (
         <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
             <div className="field">
                 <Controller
-                    name="password"
+                    name="accept"
                     control={form.control}
-                    rules={{ required: 'Password is required.' }}
+                    rules={{ required: 'Accept is required.' }}
                     render={({ field, fieldState }) => (
                         <>
-                            <label htmlFor={field.name} className={classNames({ 'p-error': errors.password })}>
-                                Password*
+                            <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.accept })}>
+                                Accept*
                             </label>
-                            <Password id={field.name} {...field} inputRef={field.ref} className={classNames({ 'p-invalid': fieldState.error })} feedback={false} />
+                            <TriStateCheckbox id={field.name} {...field} className={classNames({ 'p-invalid': fieldState.error })} />
                             {getFormErrorMessage(field.name)}
                         </>
                     )}
@@ -82,37 +80,36 @@ export default function ValidationDemo() {
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Button } from '../../lib/button/Button';
-import { Password } from "primereact/password";
+import { TriStateCheckbox } from "primereact/tristatecheckbox";
 import { classNames } from '../../lib/utils/Utils';
 
 export default function InvalidDemo() {
     const [formData, setFormData] = useState<any>({});
-    const defaultValues = {password: ''};
+    const defaultValues = {accept: ''};
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
 
     const onSubmit = (data: any) => {
         setFormData(data);
-        form.reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>
+        return errors[name] && <small className="p-error ml-2">{errors[name].message}</small>
     };
 
     return (
         <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
             <div className="field">
                 <Controller
-                    name="password"
+                    name="accept"
                     control={form.control}
-                    rules={{ required: 'Password is required.' }}
+                    rules={{ required: 'Accept is required.' }}
                     render={({ field, fieldState }) => (
                         <>
-                            <label htmlFor={field.name} className={classNames({ 'p-error': errors.password })}>
-                                Password*
+                            <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.accept })}>
+                                Accept*
                             </label>
-                            <Password id={field.name} {...field} inputRef={field.ref} className={classNames({ 'p-invalid': fieldState.error })} feedback={false} />
+                            <TriStateCheckbox id={field.name} {...field} className={classNames({ 'p-invalid': fieldState.error })} />
                             {getFormErrorMessage(field.name)}
                         </>
                     )}
@@ -137,15 +134,15 @@ export default function InvalidDemo() {
                     <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
                         <div className="field">
                             <Controller
-                                name="password"
+                                name="accept"
                                 control={form.control}
-                                rules={{ required: 'Password is required.' }}
+                                rules={{ required: 'Accept is required.' }}
                                 render={({ field, fieldState }) => (
                                     <>
-                                        <label htmlFor={field.name} className={classNames({ 'p-error': errors.password })}>
-                                            Password*
+                                        <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.accept })}>
+                                            Accept*
                                         </label>
-                                        <Password id={field.name} {...field} inputRef={field.ref} className={classNames({ 'p-invalid': fieldState.error })} feedback={false} />
+                                        <TriStateCheckbox id={field.name} {...field} className={classNames({ 'p-invalid': fieldState.error })} />
                                         {getFormErrorMessage(field.name)}
                                     </>
                                 )}
