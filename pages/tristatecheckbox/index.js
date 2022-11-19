@@ -1,11 +1,12 @@
 import Head from 'next/head';
 import { DocActions } from '../../components/doc/common/docactions';
-import { DocSections } from '../../components/doc/common/docsections';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
+import { ApiDoc } from '../../components/doc/tristatecheckbox/apidoc';
 import { BasicDoc } from '../../components/doc/tristatecheckbox/basicdoc';
 import { DisabledDoc } from '../../components/doc/tristatecheckbox/disableddoc';
 import { ImportDoc } from '../../components/doc/tristatecheckbox/importdoc';
-import { ApiDoc } from '../../components/doc/tristatecheckbox/apidoc';
+import { ValidationDoc } from '../../components/doc/tristatecheckbox/validationdoc';
 
 const TriStateCheckboxDemo = () => {
     const docs = [
@@ -23,6 +24,11 @@ const TriStateCheckboxDemo = () => {
             id: 'disabled',
             label: 'Disabled',
             component: DisabledDoc
+        },
+        {
+            id: 'validation',
+            label: 'Validation',
+            component: ValidationDoc
         },
         {
             id: 'api',

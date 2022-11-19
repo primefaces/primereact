@@ -1,13 +1,14 @@
-import React from 'react';
 import Head from 'next/head';
+import React from 'react';
+import { ApiDoc } from '../../components/doc/checkbox/apidoc';
+import { BasicDoc } from '../../components/doc/checkbox/basicdoc';
+import { DisabledDoc } from '../../components/doc/checkbox/disableddoc';
+import { DynamicDoc } from '../../components/doc/checkbox/dynamicdoc';
+import { GroupDoc } from '../../components/doc/checkbox/groupdoc';
+import { ImportDoc } from '../../components/doc/checkbox/importdoc';
+import { ValidationDoc } from '../../components/doc/checkbox/validationdoc';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ImportDoc } from '../../components/doc/checkbox/importdoc';
-import { BasicDoc } from '../../components/doc/checkbox/basicdoc';
-import { GroupDoc } from '../../components/doc/checkbox/groupdoc';
-import { DynamicDoc } from '../../components/doc/checkbox/dynamicdoc';
-import { DisabledDoc } from '../../components/doc/checkbox/disableddoc';
-import { ApiDoc } from '../../components/doc/checkbox/apidoc';
 
 const CheckboxDemo = () => {
     const docs = [
@@ -35,6 +36,11 @@ const CheckboxDemo = () => {
             id: 'disabled',
             label: 'Disabled',
             component: DisabledDoc
+        },
+        {
+            id: 'validation',
+            label: 'Validation',
+            component: ValidationDoc
         },
         {
             id: 'apidoc',

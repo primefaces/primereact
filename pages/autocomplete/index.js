@@ -1,18 +1,18 @@
-import getConfig from 'next/config';
-import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ImportDoc } from '../../components/doc/autocomplete/importdoc';
+import React from 'react';
+import { ApiDoc } from '../../components/doc/autocomplete/apidoc';
 import { BasicDoc } from '../../components/doc/autocomplete/basicdoc';
 import { DropdownDoc } from '../../components/doc/autocomplete/dropdowndoc';
+import { ForceSelectionDoc } from '../../components/doc/autocomplete/forceselectiondoc';
+import { GroupDoc } from '../../components/doc/autocomplete/groupdoc';
+import { ImportDoc } from '../../components/doc/autocomplete/importdoc';
+import { MultipleDoc } from '../../components/doc/autocomplete/multipledoc';
 import { ObjectsDoc } from '../../components/doc/autocomplete/objectsdoc';
 import { TemplateDoc } from '../../components/doc/autocomplete/templatedoc';
-import { GroupDoc } from '../../components/doc/autocomplete/groupdoc';
-import { ForceSelectionDoc } from '../../components/doc/autocomplete/forceselectiondoc';
+import { ValidationDoc } from '../../components/doc/autocomplete/validationdoc';
 import { VirtualScrollDoc } from '../../components/doc/autocomplete/virtualscrolldoc';
-import { MultipleDoc } from '../../components/doc/autocomplete/multipledoc';
-import { ApiDoc } from '../../components/doc/autocomplete/apidoc';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
 
 const AutoCompleteDemo = () => {
     const docs = [
@@ -60,6 +60,11 @@ const AutoCompleteDemo = () => {
             id: 'multiple',
             label: 'Multiple',
             component: MultipleDoc
+        },
+        {
+            id: 'validation',
+            label: 'Validation',
+            component: ValidationDoc
         },
         {
             id: 'apidoc',

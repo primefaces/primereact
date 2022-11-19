@@ -1,16 +1,17 @@
-import React from 'react';
 import Head from 'next/head';
+import React from 'react';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ImportDoc } from '../../components/doc/inputmask/importdoc';
+import { ApiDoc } from '../../components/doc/inputmask/apidoc';
 import { BasicDoc } from '../../components/doc/inputmask/basicdoc';
+import { DisabledDoc } from '../../components/doc/inputmask/disableddoc';
+import { FloatLabelDoc } from '../../components/doc/inputmask/floatlabeldoc';
+import { ImportDoc } from '../../components/doc/inputmask/importdoc';
+import { InvalidDoc } from '../../components/doc/inputmask/invaliddoc';
 import { MaskDoc } from '../../components/doc/inputmask/maskdoc';
 import { OptionalDoc } from '../../components/doc/inputmask/optionaldoc';
 import { SlotCharDoc } from '../../components/doc/inputmask/slotchardoc';
-import { FloatLabelDoc } from '../../components/doc/inputmask/floatlabeldoc';
-import { InvalidDoc } from '../../components/doc/inputmask/invaliddoc';
-import { DisabledDoc } from '../../components/doc/inputmask/disableddoc';
-import { ApiDoc } from '../../components/doc/inputmask/apidoc';
+import { ValidationDoc } from '../../components/doc/inputmask/validationdoc';
 
 const InputMaskDemo = () => {
     const docs = [
@@ -53,6 +54,11 @@ const InputMaskDemo = () => {
             id: 'disabled',
             label: 'Disabled',
             component: DisabledDoc
+        },
+        {
+            id: 'validation',
+            label: 'Validation',
+            component: ValidationDoc
         },
         {
             id: 'api',

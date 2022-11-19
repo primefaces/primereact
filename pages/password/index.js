@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
-import { Divider } from '../../components/lib/divider/Divider';
-import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
+import React, { useState } from 'react';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ImportDoc } from '../../components/doc/password/importdoc';
+import { ApiDoc } from '../../components/doc/password/apidoc';
 import { BasicDoc } from '../../components/doc/password/basicdoc';
+import { ImportDoc } from '../../components/doc/password/importdoc';
 import { PasswordMeter } from '../../components/doc/password/passwordmeterdoc';
 import { ShowPassword } from '../../components/doc/password/showpassworddoc';
 import { Templating } from '../../components/doc/password/templatingdoc';
-import { ApiDoc } from '../../components/doc/password/apidoc';
+import { ValidationDoc } from '../../components/doc/password/validationdoc';
+import { Divider } from '../../components/lib/divider/Divider';
 
 const PasswordDemo = () => {
     const docs = [
@@ -37,6 +38,11 @@ const PasswordDemo = () => {
             id: 'templating',
             label: 'Templating',
             component: Templating
+        },
+        {
+            id: 'validation',
+            label: 'Validation',
+            component: ValidationDoc
         },
         {
             id: 'api',
