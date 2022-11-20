@@ -1,8 +1,8 @@
 import { useRef } from 'react';
-import { Toast } from '../../lib/toast/Toast';
 import { Button } from '../../lib/button/Button';
-import { DocSectionText } from '../common/docsectiontext';
+import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function PositionDoc(props) {
     const toastTL = useRef(null);
@@ -70,22 +70,22 @@ import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
 export default function PositionDoc() {
-    const toastTL = useRef(null);
-    const toastBL = useRef(null);
-    const toastBR = useRef(null);
+    const toastTL = useRef<Toast>(null);
+    const toastBL = useRef<Toast>(null);
+    const toastBR = useRef<Toast>(null);
 
     const showTopLeft = () => {
-        toastTL.current.show({ severity: 'info', summary: 'Info Message', detail: 'Message Content', life: 3000 });
+        toastTL.current?.show({ severity: 'info', summary: 'Info Message', detail: 'Message Content', life: 3000 });
     };
 
     const showBottomLeft = () => {
-        toastBL.current.show({ severity: 'warn', summary: 'Warn Message', detail: 'Message Content', life: 3000 });
+        toastBL.current?.show({ severity: 'warn', summary: 'Warn Message', detail: 'Message Content', life: 3000 });
     };
 
     const showBottomRight = () => {
-        toastBR.current.show({ severity: 'success', summary: 'Success Message', detail: 'Message Content', life: 3000 });
+        toastBR.current?.show({ severity: 'success', summary: 'Success Message', detail: 'Message Content', life: 3000 });
     };
-    
+
     return (
         <div>
             <Toast ref={toastTL} position="top-left" />

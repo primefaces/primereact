@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Messages } from '../../lib/messages/Messages';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function SeveritiesDoc(props) {
     const msgs1 = useRef(null);
@@ -45,10 +45,10 @@ import { useEffect, useRef } from 'react';
 import { Messages } from 'primereact/messages';
 
 export default function SeveritiesDoc() {
-    const msgs1 = useRef(null);
+    const msgs1 = useRef<Messages>(null);
 
     useEffect(() => {
-        msgs1.current.show([
+        msgs1.current?.show([
             { severity: 'success', summary: 'Success', detail: 'Message Content', sticky: true },
             { severity: 'info', summary: 'Info', detail: 'Message Content', sticky: true },
             { severity: 'warn', summary: 'Warning', detail: 'Message Content', sticky: true },

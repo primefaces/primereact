@@ -1,8 +1,8 @@
 import { useRef } from 'react';
-import { Toast } from '../../lib/toast/Toast';
 import { Button } from '../../lib/button/Button';
-import { DocSectionText } from '../common/docsectiontext';
+import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function OptionsDoc(props) {
     const toast = useRef(null);
@@ -60,10 +60,10 @@ import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
 export default function OptionsDoc() {
-    const toast = useRef(null);
+    const toast = useRef<Toast>(null);
 
     const showSticky = () => {
-        toast.current.show({ severity: 'info', summary: 'Sticky Message', detail: 'Message Content', sticky: true });
+        toast.current?.show({ severity: 'info', summary: 'Sticky Message', detail: 'Message Content', sticky: true });
     };
 
     const showMultiple = () => {
@@ -73,7 +73,7 @@ export default function OptionsDoc() {
             { severity: 'info', summary: 'Message 3', detail: 'Message 3 Content', life: 3000 }
         ]);
     };
-    
+
     return (
         <div>
             <Toast ref={toast} />

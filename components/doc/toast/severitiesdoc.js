@@ -1,8 +1,8 @@
 import { useRef } from 'react';
-import { Toast } from '../../lib/toast/Toast';
 import { Button } from '../../lib/button/Button';
-import { DocSectionText } from '../common/docsectiontext';
+import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function SeveritiesDoc(props) {
     const toast = useRef(null);
@@ -72,24 +72,24 @@ import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
 export default function SeveritiesDoc() {
-    const toast = useRef(null);
+    const toast = useRef<Toast>(null);
 
     const showSuccess = () => {
-        toast.current.show({severity:'success', summary: 'Success Message', detail:'Message Content', life: 3000});
+        toast.current?.show({severity:'success', summary: 'Success Message', detail:'Message Content', life: 3000});
     }
 
     const showInfo = () => {
-        toast.current.show({severity:'info', summary: 'Info Message', detail:'Message Content', life: 3000});
+        toast.current?.show({severity:'info', summary: 'Info Message', detail:'Message Content', life: 3000});
     }
 
     const showWarn = () => {
-        toast.current.show({severity:'warn', summary: 'Warn Message', detail:'Message Content', life: 3000});
+        toast.current?.show({severity:'warn', summary: 'Warn Message', detail:'Message Content', life: 3000});
     }
 
     const showError = () => {
-        toast.current.show({severity:'error', summary: 'Error Message', detail:'Message Content', life: 3000});
+        toast.current?.show({severity:'error', summary: 'Error Message', detail:'Message Content', life: 3000});
     }
-    
+
     return (
         <div>
             <Toast ref={toast} />

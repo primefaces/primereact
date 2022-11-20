@@ -1,4 +1,7 @@
-import React, { useRef, useState, useEffect } from 'react';
+import getConfig from 'next/config';
+import React, { useEffect, useRef, useState } from 'react';
+import { NodeService } from '../../../service/NodeService';
+import { PhotoService } from '../../../service/PhotoService';
 import PrimeReact from '../../lib/api/Api';
 import { Dialog } from '../../lib/dialog/Dialog';
 import { Dock } from '../../lib/dock/Dock';
@@ -9,11 +12,8 @@ import { TerminalService } from '../../lib/terminalservice/TerminalService';
 import { Toast } from '../../lib/toast/Toast';
 import { Tooltip } from '../../lib/tooltip/Tooltip';
 import { Tree } from '../../lib/tree/Tree';
-import { NodeService } from '../../../service/NodeService';
-import { PhotoService } from '../../../service/PhotoService';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
-import getConfig from 'next/config';
 
 export function AdvanceDoc(props) {
     const [displayTerminal, setDisplayTerminal] = useState(false);
@@ -618,6 +618,7 @@ import { Galleria } from 'primereact/galleria';
 import { Toast } from 'primereact/toast';
 import { Tree } from 'primereact/tree';
 import { Menubar } from 'primereact/menubar';
+import { MenuItem } from 'primereact/menuitem';
 import { NodeService } from '../service/NodeService';
 import { PhotoService } from '../service/PhotoService';
 
@@ -626,16 +627,16 @@ export default function AdvanceDoc() {
     const [displayFinder, setDisplayFinder] = useState(false);
     const [images, setImages] = useState(null);
     const [nodes, setNodes] = useState(null);
-    const toast = useRef(null);
-    const toast2 = useRef(null);
-    const galleria = useRef(null);
+    const toast = useRef<Toast>(null);
+    const toast2 = useRef<Toast>(null);
+    const galleria = useRef<Galleria>(null);
 
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     const imgErrorPath = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png';
     const imgPath = contextPath + '/images/dock';
 
-    const dockItems = [
+    const dockItems: MenuItem[] = [
         {
             label: 'Finder',
             icon: () => <img alt="Finder" src={\`\${imgPath}/finder.svg\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
@@ -684,7 +685,7 @@ export default function AdvanceDoc() {
         }
     ];
 
-    const menubarItems = [
+    const menubarItems : MenuItem[] = [
         {
             label: 'Finder',
             className: 'menubar-root'
@@ -826,7 +827,7 @@ export default function AdvanceDoc() {
         return <img src={item.itemImageSrc} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
     };
 
-    const commandHandler = (text) => {
+    const commandHandler = (text: string) => {
         let response;
         let argsIndex = text.indexOf(' ');
         let command = argsIndex !== -1 ? text.substring(0, argsIndex) : text;

@@ -1,8 +1,8 @@
+import getConfig from 'next/config';
 import React, { useEffect, useRef } from 'react';
 import { Messages } from '../../lib/messages/Messages';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
-import getConfig from 'next/config';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function StaticDoc(props) {
     const msgs1 = useRef(null);
@@ -53,10 +53,10 @@ import React, { useEffect, useRef } from 'react';
 import { Messages } from 'primereact/messages';
 
 export default function StaticDoc() {
-    const msgs1 = useRef(null);
+    const msgs1 = useRef<Messages>(null);
 
     useEffect(() => {
-        msgs1.current.show({
+        msgs1.current?.show({
             severity: 'info', sticky: true, content: (
                 <React.Fragment>
                     <img alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" />

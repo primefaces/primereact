@@ -1,8 +1,8 @@
 import { useRef } from 'react';
-import { Toast } from '../../lib/toast/Toast';
 import { Button } from '../../lib/button/Button';
-import { DocSectionText } from '../common/docsectiontext';
+import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function ClearDoc(props) {
     const toast = useRef(null);
@@ -42,12 +42,12 @@ import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
 export default function ClearDoc() {
-    const toast = useRef(null);
+    const toast = useRef<Toast>(null);
 
     const clear = () => {
-        toast.current.clear();
+        toast.current?.clear();
     }
-    
+
     return (
         <div>
             <Toast ref={toast} />
