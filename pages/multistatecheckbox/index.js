@@ -1,11 +1,12 @@
 import Head from 'next/head';
 import { DocActions } from '../../components/doc/common/docactions';
-import { DocSections } from '../../components/doc/common/docsections';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
+import { ApiDoc } from '../../components/doc/multistatecheckbox/apidoc';
 import { BasicDoc } from '../../components/doc/multistatecheckbox/basicdoc';
 import { DisabledDoc } from '../../components/doc/multistatecheckbox/disableddoc';
 import { ImportDoc } from '../../components/doc/multistatecheckbox/importdoc';
-import { ApiDoc } from '../../components/doc/multistatecheckbox/apidoc';
+import { ValidationDoc } from '../../components/doc/multistatecheckbox/validationdoc';
 
 const MultiStateCheckboxDemo = () => {
     const docs = [
@@ -23,6 +24,11 @@ const MultiStateCheckboxDemo = () => {
             id: 'disabled',
             label: 'Disabled',
             component: DisabledDoc
+        },
+        {
+            id: 'validation',
+            label: 'Validation',
+            component: ValidationDoc
         },
         {
             id: 'api',

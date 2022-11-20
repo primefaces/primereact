@@ -26,7 +26,7 @@ export function ValidationDoc(props) {
     render={({ field, fieldState }) => (
         <>
             <label htmlFor={field.name} className={classNames({ 'p-error': errors.name })}>Birth Date*</label>
-            <Calendar id={field.name} {...field} inputRef={field.ref} dateFormat="dd/mm/yy" className={classNames({ 'p-invalid': fieldState.error })} />
+            <Calendar id={field.name} value={field.value} inputRef={field.ref} onChange={field.onChange} dateFormat="dd/mm/yy" className={classNames({ 'p-invalid': fieldState.error })} />
             {getFormErrorMessage(field.name)}
         </>
     )}
@@ -65,7 +65,7 @@ export default function ValidationDemo() {
                             <label htmlFor={field.name} className={classNames({ 'p-error': errors.birthdate })}>
                                 Birth Date*
                             </label>
-                            <Calendar id={field.name} {...field} inputRef={field.ref} dateFormat="dd/mm/yy" className={classNames({ 'p-invalid': fieldState.error })} />
+                            <Calendar id={field.name} value={field.value} inputRef={field.ref} onChange={field.onChange} dateFormat="dd/mm/yy" className={classNames({ 'p-invalid': fieldState.error })} />
                             {getFormErrorMessage(field.name)}
                         </>
                     )}
@@ -109,7 +109,7 @@ export default function InvalidDemo() {
                             <label htmlFor={field.name} className={classNames({ 'p-error': errors.birthdate })}>
                                 Birth Date*
                             </label>
-                            <Calendar id={field.name} {...field} inputRef={field.ref} dateFormat="dd/mm/yy" className={classNames({ 'p-invalid': fieldState.error })} />
+                            <Calendar id={field.name} value={field.value} inputRef={field.ref} onChange={field.onChange} dateFormat="dd/mm/yy" className={classNames({ 'p-invalid': fieldState.error })} />
                             {getFormErrorMessage(field.name)}
                         </>
                     )}
@@ -142,7 +142,7 @@ export default function InvalidDemo() {
                                         <label htmlFor={field.name} className={classNames({ 'p-error': errors.birthdate })}>
                                             Birth Date*
                                         </label>
-                                        <Calendar id={field.name} {...field} inputRef={field.ref} dateFormat="dd/mm/yy" className={classNames({ 'p-invalid': fieldState.error })} />
+                                        <Calendar id={field.name} value={field.value} inputRef={field.ref} onChange={field.onChange} dateFormat="dd/mm/yy" className={classNames({ 'p-invalid': fieldState.error })} />
                                         {getFormErrorMessage(field.name)}
                                     </>
                                 )}
