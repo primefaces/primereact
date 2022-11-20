@@ -1,8 +1,8 @@
 import { useRef } from 'react';
-import { Toast } from '../../lib/toast/Toast';
 import { Button } from '../../lib/button/Button';
-import { DocSectionText } from '../common/docsectiontext';
+import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function CustomDoc(props) {
     const toastBC = useRef(null);
@@ -78,10 +78,10 @@ import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
 export default function CustomDoc() {
-    const toastBC = useRef(null);
+    const toastBC = useRef<Toast>(null);
 
     const showConfirm = () => {
-        toastBC.current.show({ severity: 'warn', sticky: true, content: (
+        toastBC.current?.show({ severity: 'warn', sticky: true, content: (
             <div className="flex flex-column" style={{flex: '1'}}>
                 <div className="text-center">
                     <i className="pi pi-exclamation-triangle" style={{fontSize: '3rem'}}></i>
@@ -99,7 +99,7 @@ export default function CustomDoc() {
             </div>
         ) });
     }
-    
+
     return (
         <div>
             <Toast ref={toastBC} position="bottom-center" />

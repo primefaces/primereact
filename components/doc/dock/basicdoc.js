@@ -68,9 +68,10 @@ export default function BasicDoc() {
         `,
         typescript: `
 import { Dock } from 'primereact/dock';
+import { MenuItem } from 'primereact/menuitem';
 
 export default function BasicDoc() {
-    const dockBasicItems = [
+    const dockBasicItems: MenuteItem[] = [
         {
             label: 'Finder',
             icon: () => <img alt="Finder" src={\`\${imgPath}/finder.svg\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
