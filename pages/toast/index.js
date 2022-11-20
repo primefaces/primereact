@@ -1,84 +1,103 @@
-import React, { useRef } from 'react';
-import { Toast } from '../../components/lib/toast/Toast';
-import { Button } from '../../components/lib/button/Button';
-import ToastDoc from '../../components/doc/toast';
-import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
+import { DocActions } from '../../components/doc/common/docactions';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
+import { ImportDoc } from '../../components/doc/toast/importdoc';
+import { SeveritiesDoc } from '../../components/doc/toast/severitiesdoc';
+import { PositionDoc } from '../../components/doc/toast/positiondoc';
+import { OptionsDoc } from '../../components/doc/toast/optionsdoc';
+import { ClearDoc } from '../../components/doc/toast/cleardoc';
+import { CustomDoc } from '../../components/doc/toast/customdoc';
+import { ApiDoc } from '../../components/doc/toast/apidoc';
 
 const ToastDemo = () => {
-    const toast = useRef(null);
-    const toastTL = useRef(null);
-    const toastBL = useRef(null);
-    const toastBR = useRef(null);
-    const toastBC = useRef(null);
-
-    const showSuccess = () => {
-        toast.current.show({ severity: 'success', summary: 'Success Message', detail: 'Message Content', life: 3000 });
-    };
-
-    const showInfo = () => {
-        toast.current.show({ severity: 'info', summary: 'Info Message', detail: 'Message Content', life: 3000 });
-    };
-
-    const showWarn = () => {
-        toast.current.show({ severity: 'warn', summary: 'Warn Message', detail: 'Message Content', life: 3000 });
-    };
-
-    const showError = () => {
-        toast.current.show({ severity: 'error', summary: 'Error Message', detail: 'Message Content', life: 3000 });
-    };
-
-    const showTopLeft = () => {
-        toastTL.current.show({ severity: 'info', summary: 'Info Message', detail: 'Message Content', life: 3000 });
-    };
-
-    const showBottomLeft = () => {
-        toastBL.current.show({ severity: 'warn', summary: 'Warn Message', detail: 'Message Content', life: 3000 });
-    };
-
-    const showBottomRight = () => {
-        toastBR.current.show({ severity: 'success', summary: 'Success Message', detail: 'Message Content', life: 3000 });
-    };
-
-    const showSticky = () => {
-        toast.current.show({ severity: 'info', summary: 'Sticky Message', detail: 'Message Content', sticky: true });
-    };
-
-    const showConfirm = () => {
-        toastBC.current.show({
-            severity: 'warn',
-            sticky: true,
-            content: (
-                <div className="flex flex-column" style={{ flex: '1' }}>
-                    <div className="text-center">
-                        <i className="pi pi-exclamation-triangle" style={{ fontSize: '3rem' }}></i>
-                        <h4>Are you sure?</h4>
-                        <p>Confirm to proceed</p>
-                    </div>
-                    <div className="grid p-fluid">
-                        <div className="col-6">
-                            <Button type="button" label="Yes" className="p-button-success" />
-                        </div>
-                        <div className="col-6">
-                            <Button type="button" label="No" className="p-button-secondary" />
-                        </div>
-                    </div>
-                </div>
-            )
-        });
-    };
-
-    const showMultiple = () => {
-        toast.current.show([
-            { severity: 'info', summary: 'Message 1', detail: 'Message 1 Content', life: 3000 },
-            { severity: 'info', summary: 'Message 2', detail: 'Message 2 Content', life: 3000 },
-            { severity: 'info', summary: 'Message 3', detail: 'Message 3 Content', life: 3000 }
-        ]);
-    };
-
-    const clear = () => {
-        toast.current.clear();
-    };
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'severities',
+            label: 'Severities',
+            component: SeveritiesDoc
+        },
+        {
+            id: 'position',
+            label: 'Position',
+            component: PositionDoc
+        },
+        {
+            id: 'options',
+            label: 'Options',
+            component: OptionsDoc
+        },
+        {
+            id: 'clear',
+            label: 'Clear',
+            component: ClearDoc
+        },
+        {
+            id: 'custom',
+            label: 'Custom',
+            component: CustomDoc
+        },
+        {
+            id: 'api',
+            label: 'API',
+            component: ApiDoc,
+            children: [
+                {
+                    id: 'messageapi',
+                    label: 'Message API'
+                },
+                {
+                    id: 'severitiesapi',
+                    label: 'Severities'
+                },
+                {
+                    id: 'showingmessages',
+                    label: 'Showing Messages'
+                },
+                {
+                    id: 'closable',
+                    label: 'Closable'
+                },
+                {
+                    id: 'sticky',
+                    label: 'Sticky'
+                },
+                {
+                    id: 'positionapi',
+                    label: 'Position'
+                },
+                {
+                    id: 'clearingmessages',
+                    label: 'Clearing Messages'
+                },
+                {
+                    id: 'replacingmessages',
+                    label: 'Replacing Messages'
+                },
+                {
+                    id: 'properties',
+                    label: 'Properties'
+                },
+                {
+                    id: 'event',
+                    label: 'Events'
+                },
+                {
+                    id: 'styling',
+                    label: 'Styling'
+                },
+                {
+                    id: 'accessibility',
+                    label: 'Accessibility'
+                }
+            ]
+        }
+    ];
 
     return (
         <div>
@@ -94,38 +113,10 @@ const ToastDemo = () => {
                 <DocActions github="toast/index.js" />
             </div>
 
-            <div className="content-section implementation">
-                <Toast ref={toast} />
-                <Toast ref={toastTL} position="top-left" />
-                <Toast ref={toastBL} position="bottom-left" />
-                <Toast ref={toastBR} position="bottom-right" />
-                <Toast ref={toastBC} position="bottom-center" />
-
-                <div className="card toast-demo">
-                    <h5>Severities</h5>
-                    <Button label="Success" className="p-button-success" onClick={showSuccess} />
-                    <Button label="Info" className="p-button-info" onClick={showInfo} />
-                    <Button label="Warn" className="p-button-warning" onClick={showWarn} />
-                    <Button label="Error" className="p-button-danger" onClick={showError} />
-
-                    <h5>Positions</h5>
-                    <Button label="Top Left" className="mr-2" onClick={showTopLeft} />
-                    <Button label="Bottom Left" className="p-button-warning" onClick={showBottomLeft} />
-                    <Button label="Bottom Right" className="p-button-success" onClick={showBottomRight} />
-
-                    <h5>Options</h5>
-                    <Button onClick={showMultiple} label="Multiple" className="p-button-warning" />
-                    <Button onClick={showSticky} label="Sticky" />
-
-                    <h5>Clear</h5>
-                    <Button onClick={clear} label="Clear" />
-
-                    <h5>Custom</h5>
-                    <Button type="button" onClick={showConfirm} label="Confirm" className="ui-button-warning" />
-                </div>
+            <div className="content-section doc">
+                <DocSections docs={docs} />
+                <DocSectionNav docs={docs} />
             </div>
-
-            <ToastDoc />
         </div>
     );
 };

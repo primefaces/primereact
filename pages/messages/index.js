@@ -123,7 +123,7 @@ const MessagesDemo = () => {
                 <DocActions github="messages/index.js" />
             </div>
 
-            <div className="content-section doc multiselect-demo">
+            <div className="content-section doc">
                 <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>
