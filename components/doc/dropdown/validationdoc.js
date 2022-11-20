@@ -35,7 +35,8 @@ export function ValidationDoc(props) {
             <label htmlFor={field.name} className={classNames({ 'p-error': errors.name })}>City*</label>
             <Dropdown
                     id={field.name}
-                    {...field}
+                    value={field.value}
+                    onChange={field.onChange}
                     focusInputRef={field.ref}
                     options={cities}
                     optionLabel="name"
@@ -123,7 +124,7 @@ export default function InvalidDemo() {
                             <label htmlFor={field.name} className={classNames({ 'p-error': errors.city })}>
                                 City*
                             </label>
-                            <Dropdown id={field.name} {...field} focusInputRef={field.ref} options={cities} optionLabel="name" placeholder="Select a City" className={classNames({ 'p-invalid': fieldState.error })} />
+                            <Dropdown id={field.name} value={field.value} onChange={field.onChange} focusInputRef={field.ref} options={cities} optionLabel="name" placeholder="Select a City" className={classNames({ 'p-invalid': fieldState.error })} />
                             {getFormErrorMessage(field.name)}
                         </>
                     )}
@@ -156,7 +157,16 @@ export default function InvalidDemo() {
                                         <label htmlFor={field.name} className={classNames({ 'p-error': errors.city })}>
                                             City*
                                         </label>
-                                        <Dropdown id={field.name} {...field} focusInputRef={field.ref} options={cities} optionLabel="name" placeholder="Select a City" className={classNames({ 'p-invalid': fieldState.error })} />
+                                        <Dropdown
+                                            id={field.name}
+                                            value={field.value}
+                                            onChange={field.onChange}
+                                            focusInputRef={field.ref}
+                                            options={cities}
+                                            optionLabel="name"
+                                            placeholder="Select a City"
+                                            className={classNames({ 'p-invalid': fieldState.error })}
+                                        />
                                         {getFormErrorMessage(field.name)}
                                     </>
                                 )}

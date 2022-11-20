@@ -31,7 +31,7 @@ export function ValidationDoc(props) {
     render={({ field, fieldState }) => (
         <>
             <label htmlFor={field.name} className={classNames({ 'p-error': errors.name })}>Search*</label>
-            <AutoComplete id={field.name} {...field} inputRef={field.ref} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': fieldState.error })} />
+            <AutoComplete id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': fieldState.error })} />
             {getFormErrorMessage(field.name)}
         </>
     )}
@@ -75,7 +75,7 @@ export default function ValidationDemo() {
                             <label htmlFor={field.name} className={classNames({ 'p-error': errors.search })}>
                                 Search*
                             </label>
-                            <AutoComplete id={field.name} {...field} inputRef={field.ref} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': fieldState.error })} />
+                            <AutoComplete id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': fieldState.error })} />
                             {getFormErrorMessage(field.name)}
                         </>
                     )}
@@ -124,7 +124,7 @@ export default function InvalidDemo() {
                             <label htmlFor={field.name} className={classNames({ 'p-error': errors.search })}>
                                 Search*
                             </label>
-                            <AutoComplete id={field.name} {...field} inputRef={field.ref} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': fieldState.error })} />
+                            <AutoComplete id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': fieldState.error })} />
                             {getFormErrorMessage(field.name)}
                         </>
                     )}
@@ -157,7 +157,7 @@ export default function InvalidDemo() {
                                         <label htmlFor={field.name} className={classNames({ 'p-error': errors.search })}>
                                             Search*
                                         </label>
-                                        <AutoComplete id={field.name} {...field} inputRef={field.ref} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': fieldState.error })} />
+                                        <AutoComplete id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': fieldState.error })} />
                                         {getFormErrorMessage(field.name)}
                                     </>
                                 )}

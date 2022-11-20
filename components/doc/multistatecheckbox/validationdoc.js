@@ -1,16 +1,22 @@
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Button } from '../../lib/button/Button';
-import { Checkbox } from '../../lib/checkbox/Checkbox';
+import { MultiStateCheckbox } from '../../lib/multistatecheckbox/MultiStateCheckbox';
 import { classNames } from '../../lib/utils/Utils';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function ValidationDoc(props) {
     const [formData, setFormData] = useState({});
-    const defaultValues = { accept: '' };
+    const defaultValues = { level: '' };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
+
+    const options = [
+        { value: 'public', icon: 'pi pi-globe' },
+        { value: 'protected', icon: 'pi pi-lock-open' },
+        { value: 'private', icon: 'pi pi-lock' }
+    ];
 
     const onSubmit = (data) => {
         setFormData(data);
@@ -22,11 +28,11 @@ export function ValidationDoc(props) {
 
     const code = {
         basic: `
-<Controller name="accept"  control={form.control} rules={{ required: 'Accept is required.'}}
+<Controller name="level"  control={form.control} rules={{ required: 'Level is required.'}}
     render={({ field, fieldState }) => (
         <>
-            <label htmlFor={field.name} className={classNames('mr-2',{ 'p-error': errors.name })}>Accept*</label>
-            <Checkbox inputId={field.name} value={field.value} onChange={field.onBlur} inputRef={field.ref} checked={field.value} className={classNames({ 'p-invalid': fieldState.error })} />
+            <label htmlFor={field.name} className={classNames({ 'p-error': errors.name })}>Level*</label>
+            <MultiStateCheckbox id={field.name} value={field.value} onChange={field.onChange} options={options} optionValue="value" className={classNames({ 'p-invalid': fieldState.error })} />
             {getFormErrorMessage(field.name)}
         </>
     )}
@@ -36,14 +42,20 @@ export function ValidationDoc(props) {
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Button } from '../../lib/button/Button';
-import { Checkbox } from "primereact/checkbox";
+import { MultiStateCheckbox } from "primereact/multistatecheckbox";
 import { classNames } from '../../lib/utils/Utils';
 
 export default function ValidationDemo() {
     const [formData, setFormData] = useState({});
-    const defaultValues = {accept: ''};
+    const defaultValues = {level: ''};
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
+
+    const options = [
+        { value: 'public', icon: 'pi pi-globe' },
+        { value: 'protected', icon: 'pi pi-lock-open' },
+        { value: 'private', icon: 'pi pi-lock' }
+    ];
 
     const onSubmit = (data) => {
         setFormData(data);
@@ -57,15 +69,15 @@ export default function ValidationDemo() {
         <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
             <div className="field">
                 <Controller
-                    name="accept"
+                    name="level"
                     control={form.control}
-                    rules={{ required: 'Accept is required.' }}
+                    rules={{ required: 'Level is required.' }}
                     render={({ field, fieldState }) => (
                         <>
-                            <label htmlFor={field.name} className={classNames('mr-2',{ 'p-error': errors.accept })}>
-                                Accept*
+                            <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.level })}>
+                                Level*
                             </label>
-                            <Checkbox inputId={field.name} value={field.value} onChange={field.onBlur} inputRef={field.ref} checked={field.value} className={classNames({ 'p-invalid': fieldState.error })} />
+                            <MultiStateCheckbox id={field.name} value={field.value} onChange={field.onChange} options={options} optionValue="value" className={classNames({ 'p-invalid': fieldState.error })} />
                             {getFormErrorMessage(field.name)}
                         </>
                     )}
@@ -80,20 +92,26 @@ export default function ValidationDemo() {
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Button } from '../../lib/button/Button';
-import { Checkbox } from "primereact/checkbox";
+import { MultiStateCheckbox } from "primereact/multistatecheckbox";
 import { classNames } from '../../lib/utils/Utils';
 
 export default function InvalidDemo() {
     const [formData, setFormData] = useState<any>({});
-    const defaultValues = {accept: ''};
+    const defaultValues = {level: ''};
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
+
+    const options = [
+        { value: 'public', icon: 'pi pi-globe' },
+        { value: 'protected', icon: 'pi pi-lock-open' },
+        { value: 'private', icon: 'pi pi-lock' }
+    ];
 
     const onSubmit = (data: any) => {
         setFormData(data);
     };
 
-    const getFormErrorMessage = (name) => {
+    const getFormErrorMessage = (name: string) => {
         return errors[name] && <small className="p-error ml-2">{errors[name].message}</small>
     };
 
@@ -101,15 +119,15 @@ export default function InvalidDemo() {
         <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
             <div className="field">
                 <Controller
-                    name="accept"
+                    name="level"
                     control={form.control}
-                    rules={{ required: 'Accept is required.' }}
+                    rules={{ required: 'Level is required.' }}
                     render={({ field, fieldState }) => (
                         <>
-                            <label htmlFor={field.name} className={classNames('mr-2',{ 'p-error': errors.accept })}>
-                                Accept*
+                            <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.level })}>
+                                Level*
                             </label>
-                            <Checkbox inputId={field.name} value={field.value} onChange={field.onBlur} inputRef={field.ref} checked={field.value} className={classNames({ 'p-invalid': fieldState.error })} />
+                            <MultiStateCheckbox id={field.name} value={field.value} onChange={field.onChange} options={options} optionValue="value" className={classNames({ 'p-invalid': fieldState.error })} />
                             {getFormErrorMessage(field.name)}
                         </>
                     )}
@@ -134,15 +152,15 @@ export default function InvalidDemo() {
                     <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
                         <div className="field">
                             <Controller
-                                name="accept"
+                                name="level"
                                 control={form.control}
-                                rules={{ required: 'Accept is required.' }}
+                                rules={{ required: 'Level is required.' }}
                                 render={({ field, fieldState }) => (
                                     <>
-                                        <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.accept })}>
-                                            Accept*
+                                        <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.level })}>
+                                            Level*
                                         </label>
-                                        <Checkbox inputId={field.name} value={field.value} onChange={field.onBlur} inputRef={field.ref} checked={field.value} className={classNames({ 'p-invalid': fieldState.error })} />
+                                        <MultiStateCheckbox id={field.name} value={field.value} onChange={field.onChange} options={options} optionValue="value" className={classNames({ 'p-invalid': fieldState.error })} />
                                         {getFormErrorMessage(field.name)}
                                     </>
                                 )}
@@ -152,7 +170,6 @@ export default function InvalidDemo() {
                     </form>
                 </div>
             </div>
-
             <DocSectionCode code={code} />
         </>
     );

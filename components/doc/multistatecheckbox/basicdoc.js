@@ -20,7 +20,7 @@ import { useState } from "react";
 import { MultiStateCheckbox } from 'primereact/multistatecheckbox';
 
 export default function BasicDoc() {
-    const [value, setValue] = useState('public');s
+    const [value, setValue] = useState('public');
     const options = [
         { value: 'public', icon: 'pi pi-globe' },
         { value: 'protected', icon: 'pi pi-lock-open' },
