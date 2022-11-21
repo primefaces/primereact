@@ -63,9 +63,9 @@ export function ValidationDoc(props) {
         javascript: `
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Button } from '../../lib/button/Button';
+import { Button } from 'primereact/button';
+import { classNames } from 'primereact/utils';
 import { RadioButton } from "primereact/radiobutton";
-import { classNames } from '../../lib/utils/Utils';
 
 export default function ValidationDemo() {
     const [formData, setFormData] = useState({});
@@ -131,9 +131,9 @@ export default function ValidationDemo() {
         typescript: `
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Button } from '../../lib/button/Button';
+import { Button } from 'primereact/button';
+import { classNames } from 'primereact/utils';
 import { RadioButton } from "primereact/radiobutton";
-import { classNames } from '../../lib/utils/Utils';
 
 export default function InvalidDemo() {
     const [formData, setFormData] = useState<any>({});
@@ -145,7 +145,7 @@ export default function InvalidDemo() {
         setFormData(data);
     };
 
-    const getFormErrorMessage = (name) => {
+    const getFormErrorMessage = (name: string) => {
         return errors[name] && <small className="p-error">{errors[name].message}</small>
     };
 
