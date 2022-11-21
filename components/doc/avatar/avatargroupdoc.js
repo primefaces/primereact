@@ -71,16 +71,18 @@ export default function AvatarGroupDoc() {
             <DocSectionText {...props}>
                 <p>Avatar has three built-in display modes; "label", "icon" and "image".</p>
             </DocSectionText>
-            <div className="card">
-                <h5>Avatar Group</h5>
-                <AvatarGroup className="mb-3">
-                    <Avatar image={`${contextPath}/images/avatar/amyelsner.png`} size="large" shape="circle" />
-                    <Avatar image={`${contextPath}/images/avatar/asiyajavayant.png`} size="large" shape="circle" />
-                    <Avatar image={`${contextPath}/images/avatar/onyamalimba.png`} size="large" shape="circle" />
-                    <Avatar image={`${contextPath}/images/avatar/ionibowcher.png`} size="large" shape="circle" />
-                    <Avatar image={`${contextPath}/images/avatar/xuxuefeng.png`} size="large" shape="circle" />
-                    <Avatar label="+2" shape="circle" size="large" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
-                </AvatarGroup>
+            <div className="card flex justify-content-center">
+                <div>
+                    <h5>Avatar Group</h5>
+                    <AvatarGroup className="mb-3">
+                        <Avatar image={`${contextPath}/images/avatar/amyelsner.png`} size="large" shape="circle" />
+                        <Avatar image={`${contextPath}/images/avatar/asiyajavayant.png`} size="large" shape="circle" />
+                        <Avatar image={`${contextPath}/images/avatar/onyamalimba.png`} size="large" shape="circle" />
+                        <Avatar image={`${contextPath}/images/avatar/ionibowcher.png`} size="large" shape="circle" />
+                        <Avatar image={`${contextPath}/images/avatar/xuxuefeng.png`} size="large" shape="circle" />
+                        <Avatar label="+2" shape="circle" size="large" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
+                    </AvatarGroup>
+                </div>
             </div>
             <DocSectionCode code={code} />
         </>

@@ -29,30 +29,24 @@ export default function LabelDoc() {
     return (
         <div className="grid">
             <div className="col-12 md:col-4">
-                <div className="card">
-                    <h5>Label</h5>
-                    <Avatar label="P" className="mr-2" size="xlarge" />
-                    <Avatar label="V" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
-                    <Avatar label="U" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
-                </div>
+                <h5>Label</h5>
+                <Avatar label="P" className="mr-2" size="xlarge" />
+                <Avatar label="V" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
+                <Avatar label="U" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
             </div>
 
             <div className="col-12 md:col-4">
-                <div className="card">
-                    <h5>Label - Circle</h5>
-                    <Avatar label="P" className="mr-2" size="xlarge" shape="circle" />
-                    <Avatar label="V" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} shape="circle" />
-                    <Avatar label="U" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
-                </div>
+                <h5>Label - Circle</h5>
+                <Avatar label="P" className="mr-2" size="xlarge" shape="circle" />
+                <Avatar label="V" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} shape="circle" />
+                <Avatar label="U" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
             </div>
 
             <div className="col-12 md:col-4">
-                <div className="card">
-                    <h5>Label - Badge</h5>
-                    <Avatar label="U" size="xlarge" className="p-overlay-badge" style={{ backgroundColor: '#4caf4f', color: '#ffffff' }}>
-                        <Badge value="4" />
-                    </Avatar>
-                </div>
+                <h5>Label - Badge</h5>
+                <Avatar label="U" size="xlarge" className="p-overlay-badge" style={{ backgroundColor: '#4caf4f', color: '#ffffff' }}>
+                    <Badge value="4" />
+                </Avatar>
             </div>
         </div>
         )
@@ -67,30 +61,24 @@ export default function LabelDoc() {
     return (
         <div className="grid">
             <div className="col-12 md:col-4">
-                <div className="card">
-                    <h5>Label</h5>
-                    <Avatar label="P" className="mr-2" size="xlarge" />
-                    <Avatar label="V" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
-                    <Avatar label="U" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
-                </div>
+                <h5>Label</h5>
+                <Avatar label="P" className="mr-2" size="xlarge" />
+                <Avatar label="V" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
+                <Avatar label="U" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
             </div>
 
             <div className="col-12 md:col-4">
-                <div className="card">
-                    <h5>Label - Circle</h5>
-                    <Avatar label="P" className="mr-2" size="xlarge" shape="circle" />
-                    <Avatar label="V" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} shape="circle" />
-                    <Avatar label="U" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
-                </div>
+                <h5>Label - Circle</h5>
+                <Avatar label="P" className="mr-2" size="xlarge" shape="circle" />
+                <Avatar label="V" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} shape="circle" />
+                <Avatar label="U" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
             </div>
 
             <div className="col-12 md:col-4">
-                <div className="card">
-                    <h5>Label - Badge</h5>
-                    <Avatar label="U" size="xlarge" className="p-overlay-badge" style={{ backgroundColor: '#4caf4f', color: '#ffffff' }}>
-                        <Badge value="4" />
-                    </Avatar>
-                </div>
+                <h5>Label - Badge</h5>
+                <Avatar label="U" size="xlarge" className="p-overlay-badge" style={{ backgroundColor: '#4caf4f', color: '#ffffff' }}>
+                    <Badge value="4" />
+                </Avatar>
             </div>
         </div>
         )
@@ -104,32 +92,26 @@ export default function LabelDoc() {
                 <p>Avatar has three built-in display modes; "label", "icon" and "image".</p>
             </DocSectionText>
             <div className="card">
-                <div className="grid flex flex-row justify-content-center align-items-center">
+                <div className="grid">
                     <div className="col-12 md:col-4">
-                        <div className="card">
-                            <h5>Label</h5>
-                            <Avatar label="P" className="mr-2" size="xlarge" />
-                            <Avatar label="V" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
-                            <Avatar label="U" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
-                        </div>
+                        <h5>Label</h5>
+                        <Avatar label="P" className="mr-2" size="xlarge" />
+                        <Avatar label="V" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
+                        <Avatar label="U" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
                     </div>
 
                     <div className="col-12 md:col-4">
-                        <div className="card">
-                            <h5>Label - Circle</h5>
-                            <Avatar label="P" className="mr-2" size="xlarge" shape="circle" />
-                            <Avatar label="V" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} shape="circle" />
-                            <Avatar label="U" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
-                        </div>
+                        <h5>Label - Circle</h5>
+                        <Avatar label="P" className="mr-2" size="xlarge" shape="circle" />
+                        <Avatar label="V" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} shape="circle" />
+                        <Avatar label="U" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
                     </div>
 
                     <div className="col-12 md:col-4">
-                        <div className="card">
-                            <h5>Label - Badge</h5>
-                            <Avatar label="U" size="xlarge" className="p-overlay-badge" style={{ backgroundColor: '#4caf4f', color: '#ffffff' }}>
-                                <Badge value="4" />
-                            </Avatar>
-                        </div>
+                        <h5>Label - Badge</h5>
+                        <Avatar label="U" size="xlarge" className="p-overlay-badge" style={{ backgroundColor: '#4caf4f', color: '#ffffff' }}>
+                            <Badge value="4" />
+                        </Avatar>
                     </div>
                 </div>
             </div>

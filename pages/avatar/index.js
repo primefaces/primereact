@@ -8,7 +8,6 @@ import { IconDoc } from '../../components/doc/avatar/icondoc';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ImageDoc } from '../../components/doc/avatar/imagedoc';
-import { TemplatingDoc } from '../../components/doc/avatar/templatingdoc';
 import { AvatarGroupDoc } from '../../components/doc/avatar/avatargroupdoc';
 
 const AvatarDemo = () => {
@@ -37,11 +36,6 @@ const AvatarDemo = () => {
             id: 'avatargroup',
             label: 'AvatarGroup',
             component: AvatarGroupDoc
-        },
-        {
-            id: 'templating',
-            label: 'Templating',
-            component: TemplatingDoc
         },
         {
             id: 'apidoc',
