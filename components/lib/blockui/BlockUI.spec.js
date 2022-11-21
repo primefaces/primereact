@@ -66,4 +66,10 @@ describe('BlockUI', () => {
         // Assert
         expect(container.parentElement).toMatchSnapshot('unblocked-event-fullscreen');
     });
+    snapshotParent(
+        <BlockUI blocked={true} className="block-jest" style={{ cursor: 'move' }} containerClassName="container-jest" containerStyle={{ cursor: 'pointer' }}>
+            <Panel>style + class</Panel>
+        </BlockUI>,
+        'container style and className'
+    );
 });
