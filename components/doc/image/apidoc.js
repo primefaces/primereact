@@ -56,6 +56,12 @@ export function ApiDoc(props) {
                                 <td>null</td>
                                 <td>Style class of the image element.</td>
                             </tr>
+                            <tr>
+                                <td>template</td>
+                                <td>any</td>
+                                <td>null</td>
+                                <td>Changing the default icon when the image is hovered in preview mode.</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

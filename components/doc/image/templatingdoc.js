@@ -25,7 +25,7 @@ export default function TemplatingDoc() {
 import { Image } from 'primereact/image';
 
 export default function TemplatingDoc() {
-const icon = (<i className='pi pi-check'></i>)
+    const icon = (<i className='pi pi-check'></i>)
 
     return (
         <Image src="/images/galleria/galleria12.jpg" zoomSrc="images/galleria/galleria12.jpg" template={icon} alt="Image" preview width="100"  />
