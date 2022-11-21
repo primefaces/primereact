@@ -142,6 +142,41 @@ exports[`BlockUI block panel 1`] = `
 </body>
 `;
 
+exports[`BlockUI container style and className 1`] = `
+<body
+  class=""
+>
+  <div>
+    <div
+      class="p-blockui-container container-jest"
+      style="cursor: pointer;"
+    >
+      <div
+        class="p-panel p-component"
+      >
+        <div
+          aria-hidden="false"
+          aria-labelledby="pr_id_4_header"
+          class="p-toggleable-content"
+          id="pr_id_4_content"
+          role="region"
+        >
+          <div
+            class="p-panel-content"
+          >
+            style + class
+          </div>
+        </div>
+      </div>
+      <div
+        class="p-blockui p-component-overlay p-component-overlay-enter block-jest"
+        style="cursor: move; z-index: 4205;"
+      />
+    </div>
+  </div>
+</body>
+`;
+
 exports[`BlockUI unblock panel 1`] = `
 <body
   class=""

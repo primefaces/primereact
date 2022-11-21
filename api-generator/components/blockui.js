@@ -42,6 +42,18 @@ const BlockUIProps = [
         description: 'Inline style of the element.'
     },
     {
+        name: 'containerClassName',
+        type: 'string',
+        default: 'null',
+        description: 'Style class of the container element.'
+    },
+    {
+        name: 'containerStyle',
+        type: 'React.CSSProperties',
+        default: 'null',
+        description: 'Inline style of the container element.'
+    },
+    {
         name: 'template',
         type: 'any',
         default: 'null',

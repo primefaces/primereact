@@ -1,9 +1,9 @@
-import React, { memo } from 'react';
 import Link from 'next/link';
-import { TabView, TabPanel } from '../../lib/tabview/TabView';
-import { useLiveEditorTabs } from '../common/liveeditor';
+import React, { memo } from 'react';
+import { TabPanel, TabView } from '../../lib/tabview/TabView';
 import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
+import { useLiveEditorTabs } from '../common/liveeditor';
 
 const BlockUIDoc = memo(() => {
     const sources = {
@@ -436,6 +436,18 @@ export const BlockUIDemo = () => {
                                     <td>object</td>
                                     <td>null</td>
                                     <td>Inline style of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>containerClassName</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the container element.</td>
+                                </tr>
+                                <tr>
+                                    <td>containerStyle</td>
+                                    <td>React.CSSProperties</td>
+                                    <td>null</td>
+                                    <td>Inline style of the container element.</td>
                                 </tr>
                                 <tr>
                                     <td>template</td>
