@@ -1,6 +1,6 @@
 async function fetchPricing() {
     try {
-        const response = await fetch('https://www.primefaces.org/cdn/pricing.json', { cache: 'no-store' });
+        const response = await fetch('https://www.primefaces.org/cdn/pricing/uikit.json', { cache: 'no-store' });
 
         return response.json();
     } catch {
