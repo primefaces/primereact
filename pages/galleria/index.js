@@ -1,42 +1,46 @@
-import React, { useState, useEffect } from 'react';
-import { PhotoService } from '../../service/PhotoService';
-import { Galleria } from '../../components/lib/galleria/Galleria';
-import GalleriaDoc from '../../components/doc/galleria';
 import Head from 'next/head';
-import getConfig from 'next/config';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
+import { ImportDoc } from '../../components/doc/galleria/importdoc';
+import { GaleriaDemo } from '../../components/doc/galleria/galeriademo';
+import { ApiDoc } from '../../components/doc/galleria/apidoc';
 
 const GalleriaDemo = () => {
-    const [images, setImages] = useState(null);
-
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
-    const galleriaService = new PhotoService();
-
-    useEffect(() => {
-        galleriaService.getImages().then((data) => setImages(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const responsiveOptions = [
+    const docs = [
         {
-            breakpoint: '1024px',
-            numVisible: 5
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
         },
         {
-            breakpoint: '768px',
-            numVisible: 3
+            id: 'galeriademo',
+            label: 'Galeria',
+            component: GaleriaDemo
         },
         {
-            breakpoint: '560px',
-            numVisible: 1
+            id: 'api',
+            label: 'API',
+            component: ApiDoc,
+            children: [
+                {
+                    id: 'properties',
+                    label: 'Properties'
+                },
+                {
+                    id: 'events',
+                    label: 'Events'
+                },
+                {
+                    id: 'styling',
+                    label: 'Styling'
+                },
+                {
+                    id: 'accessibility',
+                    label: 'Accessibility'
+                }
+            ]
         }
     ];
-
-    const itemTemplate = (item) => {
-        return <img src={`${contextPath}/${item.itemImageSrc}`} alt={item.alt} style={{ width: '100%' }} />;
-    };
-
-    const thumbnailTemplate = (item) => {
-        return <img src={`${contextPath}/${item.thumbnailImageSrc}`} alt={item.alt} />;
-    };
 
     return (
         <div>
@@ -50,14 +54,10 @@ const GalleriaDemo = () => {
                     <p>Galleria is a content gallery component.</p>
                 </div>
             </div>
-
-            <div className="content-section implementation">
-                <div className="card">
-                    <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }} item={itemTemplate} thumbnail={thumbnailTemplate} />
-                </div>
+            <div className="content-section doc button-demo">
+                <DocSections docs={docs} />
+                <DocSectionNav docs={docs} />
             </div>
-
-            <GalleriaDoc />
         </div>
     );
 };
