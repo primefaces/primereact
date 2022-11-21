@@ -1,16 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { NodeService } from '../../../service/NodeService';
 import { Button } from '../../lib/button/Button';
-import { Checkbox } from '../../lib/checkbox/Checkbox';
+import { TreeSelect } from '../../lib/treeselect/TreeSelect';
 import { classNames } from '../../lib/utils/Utils';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function ValidationDoc(props) {
     const [formData, setFormData] = useState({});
-    const defaultValues = { accept: '' };
+    const [nodes, setNodes] = useState(null);
+    const defaultValues = { node: null };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
+    const nodeService = new NodeService();
+
+    useEffect(() => {
+        nodeService.getTreeNodes().then((data) => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onSubmit = (data) => {
         setFormData(data);
@@ -22,11 +29,11 @@ export function ValidationDoc(props) {
 
     const code = {
         basic: `
-<Controller name="accept"  control={form.control} rules={{ required: 'Accept is required.'}}
+<Controller name="node"  control={form.control} rules={{ required: 'Node is required.'}}
     render={({ field, fieldState }) => (
         <>
-            <label htmlFor={field.name} className={classNames('mr-2',{ 'p-error': errors.name })}>Accept*</label>
-            <Checkbox inputId={field.name} value={field.value} onChange={field.onBlur} inputRef={field.ref} checked={field.value} className={classNames({ 'p-invalid': fieldState.error })} />
+            <label htmlFor={field.name} className={classNames({ 'p-error': errors.name })}>Node*</label>
+            <TreeSelect id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} options={nodes} placeholder="Select Item" className={classNames({ 'p-invalid': fieldState.error })} />
             {getFormErrorMessage(field.name)}
         </>
     )}
@@ -37,13 +44,19 @@ import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
-import { Checkbox } from "primereact/checkbox";
+import { TreeSelect } from "primereact/treeselect";
 
 export default function ValidationDemo() {
     const [formData, setFormData] = useState({});
-    const defaultValues = {accept: ''};
+    const [nodes, setNodes] = useState(null);
+    const defaultValues = { node: null };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
+    const nodeService = new NodeService();
+
+    useEffect(() => {
+        nodeService.getTreeNodes().then((data) => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onSubmit = (data) => {
         setFormData(data);
@@ -57,15 +70,15 @@ export default function ValidationDemo() {
         <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
             <div className="field">
                 <Controller
-                    name="accept"
+                    name="node"
                     control={form.control}
-                    rules={{ required: 'Accept is required.' }}
+                    rules={{ required: 'Node is required.' }}
                     render={({ field, fieldState }) => (
                         <>
-                            <label htmlFor={field.name} className={classNames('mr-2',{ 'p-error': errors.accept })}>
-                                Accept*
+                            <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.node })}>
+                                Node*
                             </label>
-                            <Checkbox inputId={field.name} value={field.value} onChange={field.onBlur} inputRef={field.ref} checked={field.value} className={classNames({ 'p-invalid': fieldState.error })} />
+                            <TreeSelect id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} options={nodes} placeholder="Select Item" className={classNames({ 'p-invalid': fieldState.error })} />
                             {getFormErrorMessage(field.name)}
                         </>
                     )}
@@ -80,20 +93,26 @@ export default function ValidationDemo() {
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Button } from 'primereact/button';
+import { TreeSelect } from "primereact/treeselect";
 import { classNames } from 'primereact/utils';
-import { Checkbox } from "primereact/checkbox";
 
 export default function InvalidDemo() {
     const [formData, setFormData] = useState<any>({});
-    const defaultValues = {accept: ''};
+    const [nodes, setNodes] = useState<any[]>(null);
+    const defaultValues = { node: null };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
+    const nodeService = new NodeService();
+
+    useEffect(() => {
+        nodeService.getTreeNodes().then((data) => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onSubmit = (data: any) => {
         setFormData(data);
     };
 
-    const getFormErrorMessage = (name: string) => {
+    const getFormErrorMessage = (name) => {
         return errors[name] && <small className="p-error ml-2">{errors[name].message}</small>
     };
 
@@ -101,15 +120,15 @@ export default function InvalidDemo() {
         <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
             <div className="field">
                 <Controller
-                    name="accept"
+                    name="node"
                     control={form.control}
-                    rules={{ required: 'Accept is required.' }}
+                    rules={{ required: 'Node is required.' }}
                     render={({ field, fieldState }) => (
                         <>
-                            <label htmlFor={field.name} className={classNames('mr-2',{ 'p-error': errors.accept })}>
-                                Accept*
+                            <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.node })}>
+                                Node*
                             </label>
-                            <Checkbox inputId={field.name} value={field.value} onChange={field.onBlur} inputRef={field.ref} checked={field.value} className={classNames({ 'p-invalid': fieldState.error })} />
+                            <TreeSelect id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} options={nodes} placeholder="Select Item" className={classNames({ 'p-invalid': fieldState.error })} />
                             {getFormErrorMessage(field.name)}
                         </>
                     )}
@@ -134,15 +153,15 @@ export default function InvalidDemo() {
                     <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
                         <div className="field">
                             <Controller
-                                name="accept"
+                                name="node"
                                 control={form.control}
-                                rules={{ required: 'Accept is required.' }}
+                                rules={{ required: 'Node is required.' }}
                                 render={({ field, fieldState }) => (
                                     <>
-                                        <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.accept })}>
-                                            Accept*
+                                        <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.node })}>
+                                            Node*
                                         </label>
-                                        <Checkbox inputId={field.name} value={field.value} onChange={field.onBlur} inputRef={field.ref} checked={field.value} className={classNames({ 'p-invalid': fieldState.error })} />
+                                        <TreeSelect id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} options={nodes} placeholder="Select Item" className={classNames({ 'p-invalid': fieldState.error })} />
                                         {getFormErrorMessage(field.name)}
                                     </>
                                 )}
@@ -152,7 +171,6 @@ export default function InvalidDemo() {
                     </form>
                 </div>
             </div>
-
             <DocSectionCode code={code} />
         </>
     );

@@ -1,14 +1,15 @@
 import Head from 'next/head';
 import { DocActions } from '../../components/doc/common/docactions';
-import { DocSections } from '../../components/doc/common/docsections';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
+import { ApiDoc } from '../../components/doc/treeselect/apidoc';
 import { BasicDoc } from '../../components/doc/treeselect/basicdoc';
-import { MultipleDoc } from '../../components/doc/treeselect/multipledoc';
 import { CheckDoc } from '../../components/doc/treeselect/checkdoc';
 import { FilterDoc } from '../../components/doc/treeselect/filterdoc';
 import { InitialDoc } from '../../components/doc/treeselect/initialdoc';
+import { MultipleDoc } from '../../components/doc/treeselect/multipledoc';
 import { ProgrammaticDoc } from '../../components/doc/treeselect/programmaticdoc';
-import { ApiDoc } from '../../components/doc/treeselect/apidoc';
+import { ValidationDoc } from '../../components/doc/treeselect/validationdoc';
 
 const TreeSelectDemo = () => {
     const docs = [
@@ -41,6 +42,11 @@ const TreeSelectDemo = () => {
             id: 'programmatic',
             label: 'Programmatic Control',
             component: ProgrammaticDoc
+        },
+        {
+            id: 'validation',
+            label: 'Validation',
+            component: ValidationDoc
         },
         {
             id: 'api',

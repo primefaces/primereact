@@ -68,9 +68,9 @@ export function ValidationDoc(props) {
         javascript: `
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Button } from '../../lib/button/Button';
+import { Button } from 'primereact/button';
+import { classNames } from 'primereact/utils';
 import { InputNumber } from "primereact/inputnumber";
-import { classNames } from '../../lib/utils/Utils';
 
 export default function ValidationDemo() {
     const [formData, setFormData] = useState({});
@@ -142,9 +142,9 @@ export default function ValidationDemo() {
         typescript: `
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Button } from '../../lib/button/Button';
+import { Button } from 'primereact/button';
+import { classNames } from 'primereact/utils';
 import { InputNumber } from "primereact/inputnumber";
-import { classNames } from '../../lib/utils/Utils';
 
 export default function InvalidDemo() {
     const [formData, setFormData] = useState<any>({});

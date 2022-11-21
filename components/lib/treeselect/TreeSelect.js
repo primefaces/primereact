@@ -16,7 +16,7 @@ export const TreeSelect = React.memo(
         const elementRef = React.useRef(null);
         const overlayRef = React.useRef(null);
         const filterInputRef = React.useRef(null);
-        const focusInputRef = React.useRef(null);
+        const focusInputRef = React.useRef(props.inputRef);
         const triggerRef = React.useRef(null);
         const selfChange = React.useRef(null);
         const expandedKeys = props.onToggle ? props.expandedKeys : expandedKeysState;
@@ -299,6 +299,10 @@ export const TreeSelect = React.memo(
             getElement: () => elementRef.current
         }));
 
+        React.useEffect(() => {
+            ObjectUtils.combinedRefs(focusInputRef, props.inputRef);
+        }, [focusInputRef, props.inputRef]);
+
         useMountEffect(() => {
             updateTreeState();
         });
@@ -531,7 +535,7 @@ export const TreeSelect = React.memo(
         const footer = createFooter();
 
         return (
-            <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps} onClick={onClick}>
+            <div ref={elementRef} className={className} style={props.style} {...otherProps} onClick={onClick}>
                 {keyboardHelper}
                 {labelElement}
                 {dropdownIcon}
@@ -561,47 +565,47 @@ export const TreeSelect = React.memo(
 TreeSelect.displayName = 'TreeSelect';
 TreeSelect.defaultProps = {
     __TYPE: 'TreeSelect',
-    id: null,
-    value: null,
-    name: null,
-    style: null,
-    className: null,
-    disabled: false,
-    options: null,
-    scrollHeight: '400px',
-    placeholder: null,
-    tabIndex: null,
-    inputId: null,
+    appendTo: null,
     ariaLabel: null,
     ariaLabelledBy: null,
-    selectionMode: 'single',
-    expandedKeys: null,
-    panelStyle: null,
-    panelClassName: null,
-    appendTo: null,
-    emptyMessage: null,
+    className: null,
+    disabled: false,
     display: 'comma',
-    metaKeySelection: true,
-    valueTemplate: null,
-    panelHeaderTemplate: null,
-    panelFooterTemplate: null,
-    transitionOptions: null,
     dropdownIcon: 'pi pi-chevron-down',
+    emptyMessage: null,
+    expandedKeys: null,
     filter: false,
-    filterTemplate: null,
-    filterValue: null,
     filterBy: 'label',
+    filterInputAutoFocus: true,
+    filterLocale: undefined,
     filterMode: 'lenient',
     filterPlaceholder: null,
-    filterLocale: undefined,
-    filterInputAutoFocus: true,
-    resetFilterOnHide: false,
-    onShow: null,
-    onHide: null,
+    filterTemplate: null,
+    filterValue: null,
+    inputId: null,
+    inputRef: null,
+    metaKeySelection: true,
+    name: null,
     onChange: null,
+    onFilterValueChange: null,
+    onHide: null,
+    onNodeCollapse: null,
+    onNodeExpand: null,
     onNodeSelect: null,
     onNodeUnselect: null,
-    onNodeExpand: null,
-    onNodeCollapse: null,
-    onFilterValueChange: null
+    onShow: null,
+    options: null,
+    panelClassName: null,
+    panelFooterTemplate: null,
+    panelHeaderTemplate: null,
+    panelStyle: null,
+    placeholder: null,
+    resetFilterOnHide: false,
+    scrollHeight: '400px',
+    selectionMode: 'single',
+    style: null,
+    tabIndex: null,
+    transitionOptions: null,
+    value: null,
+    valueTemplate: null
 };
