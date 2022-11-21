@@ -1,60 +1,71 @@
-import React, { useState, useEffect } from 'react';
-import { Carousel } from '../../components/lib/carousel/Carousel';
-import { Button } from '../../components/lib/button/Button';
-import CarouselDoc from '../../components/doc/carousel';
-import { ProductService } from '../../service/ProductService';
-import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
-import getConfig from 'next/config';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
+import { DocActions } from '../../components/doc/common/docactions';
+import { ImportDoc } from '../../components/doc/carousel/importdoc';
+import { BasicDoc } from '../../components/doc/carousel/basicdoc';
+import { ApiDoc } from '../../components/doc/carousel/apidoc';
+import { CircularDoc } from '../../components/doc/carousel/circulardoc';
+import { VerticalDoc } from '../../components/doc/carousel/verticaldoc';
+import { NumScrollDoc } from '../../components/doc/carousel/numscrolldoc';
+import { ResponsiveOptionsDoc } from '../../components/doc/carousel/responsivedoc';
 
 const CarouselDemo = () => {
-    const [products, setProducts] = useState([]);
-    const responsiveOptions = [
+    const docs = [
         {
-            breakpoint: '1024px',
-            numVisible: 3,
-            numScroll: 3
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
         },
         {
-            breakpoint: '600px',
-            numVisible: 2,
-            numScroll: 2
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
-            breakpoint: '480px',
-            numVisible: 1,
-            numScroll: 1
+            id: 'circular',
+            label: 'Circular',
+            component: CircularDoc
+        },
+        {
+            id: 'vertical',
+            label: 'Vertical',
+            component: VerticalDoc
+        },
+        {
+            id: 'numscroll',
+            label: 'NumScroll',
+            component: NumScrollDoc
+        },
+        {
+            id: 'responsive',
+            label: 'ResponsiveOptions',
+            component: ResponsiveOptionsDoc
+        },
+        {
+            id: 'api',
+            label: 'API',
+            component: ApiDoc,
+            children: [
+                {
+                    id: 'properties',
+                    label: 'Properties'
+                },
+                {
+                    id: 'events',
+                    label: 'Events'
+                },
+                {
+                    id: 'styling',
+                    label: 'Styling'
+                },
+                {
+                    id: 'accessibility',
+                    label: 'Accessibility'
+                }
+            ]
         }
     ];
-
-    const productService = new ProductService();
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
-
-    useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const productTemplate = (product) => {
-        return (
-            <div className="product-item">
-                <div className="product-item-content">
-                    <div className="mb-3">
-                        <img src={`${contextPath}/images/product/${product.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={product.name} className="product-image" />
-                    </div>
-                    <div>
-                        <h4 className="mb-1">{product.name}</h4>
-                        <h6 className="mt-0 mb-3">${product.price}</h6>
-                        <span className={`product-badge status-${product.inventoryStatus.toLowerCase()}`}>{product.inventoryStatus}</span>
-                        <div className="car-buttons mt-5">
-                            <Button icon="pi pi-search" className="p-button p-button-rounded mr-2" />
-                            <Button icon="pi pi-star-fill" className="p-button-success p-button-rounded mr-2" />
-                            <Button icon="pi pi-cog" className="p-button-help p-button-rounded" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-    };
 
     return (
         <div>
@@ -70,31 +81,10 @@ const CarouselDemo = () => {
                 <DocActions github="carousel/index.js" />
             </div>
 
-            <div className="content-section implementation carousel-demo">
-                <div className="card">
-                    <Carousel value={products} numVisible={3} numScroll={3} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} header={<h5>Basic</h5>} />
-                </div>
-
-                <div className="card">
-                    <Carousel
-                        value={products}
-                        numVisible={3}
-                        numScroll={1}
-                        responsiveOptions={responsiveOptions}
-                        className="custom-carousel"
-                        circular
-                        autoplayInterval={3000}
-                        itemTemplate={productTemplate}
-                        header={<h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>}
-                    />
-                </div>
-
-                <div className="card">
-                    <Carousel value={products} numVisible={1} numScroll={1} orientation="vertical" verticalViewPortHeight="360px" itemTemplate={productTemplate} header={<h5>Vertical</h5>} style={{ maxWidth: '400px', marginTop: '2em' }} />
-                </div>
+            <div className="content-section doc carousel-demo">
+                <DocSections docs={docs} />
+                <DocSectionNav docs={docs} />
             </div>
-
-            <CarouselDoc />
         </div>
     );
 };
