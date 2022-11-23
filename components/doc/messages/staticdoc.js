@@ -36,7 +36,7 @@ export default function StaticDoc() {
         msgs1.current.show({
             severity: 'info', sticky: true, content: (
                 <React.Fragment>
-                    <img alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" />
+                    <img alt="logo" src="images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" />
                     <div className="ml-2">Always bet on Prime.</div>
                 </React.Fragment>
             )
@@ -59,7 +59,7 @@ export default function StaticDoc() {
         msgs1.current?.show({
             severity: 'info', sticky: true, content: (
                 <React.Fragment>
-                    <img alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" />
+                    <img alt="logo" src="images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" />
                     <div className="ml-2">Always bet on Prime.</div>
                 </React.Fragment>
             )
