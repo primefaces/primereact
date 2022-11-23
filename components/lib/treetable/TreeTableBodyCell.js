@@ -56,7 +56,7 @@ export const TreeTableBodyCell = (props) => {
             setEditingState(false);
             unbindDocumentClickListener();
             OverlayService.off('overlay-click', overlayEventListener.current);
-            overlayEventListener = null;
+            overlayEventListener.current = null;
         }, 1);
     };
 
