@@ -43,8 +43,9 @@ export const Button = React.memo(
             return null;
         };
 
-        const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const disabled = props.disabled || props.loading;
+        const showTooltip = !disabled || (props.tooltipOptions && props.tooltipOptions.showOnDisabled);
+        const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip) && showTooltip;
         const otherProps = ObjectUtils.findDiffKeys(props, Button.defaultProps);
         const className = classNames('p-button p-component', props.className, {
             'p-button-icon-only': (props.icon || (props.loading && props.loadingIcon)) && !props.label && !props.children,
