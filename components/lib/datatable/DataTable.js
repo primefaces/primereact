@@ -1329,7 +1329,7 @@ export const DataTable = React.forwardRef((props, ref) => {
         if (props.responsiveLayout === 'stack' && !props.scrollable) {
             createResponsiveStyle();
         }
-    }, [props.responsiveLayout]);
+    }, [props.responsiveLayout, props.scrollable]);
 
     useUpdateEffect(() => {
         if (props.globalFilter) {
