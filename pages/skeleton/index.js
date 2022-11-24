@@ -8,6 +8,7 @@ import { ShapesDoc } from '../../components/doc/skeleton/shapesdoc';
 import { ListDoc } from '../../components/doc/skeleton/listdoc';
 import { CardDoc } from '../../components/doc/skeleton/carddoc';
 import { DataTableDoc } from '../../components/doc/skeleton/datatabledoc';
+import { DocActions } from '../../components/doc/common/docactions';
 
 const SkeletonDemo = () => {
     const docs = [
@@ -73,6 +74,7 @@ const SkeletonDemo = () => {
                     <h1>Skeleton</h1>
                     <p>Skeleton is a placeholder to display instead of the actual content.</p>
                 </div>
+                <DocActions github="skeleton/index.js" />
             </div>
 
             <div className="content-section doc">

@@ -7,6 +7,7 @@ import { BasicDoc } from '../../components/doc/chip/basicdoc';
 import { IconDoc } from '../../components/doc/chip/icondoc';
 import { ImageDoc } from '../../components/doc/chip/imagedoc';
 import { StylingDoc } from '../../components/doc/chip/stylingdoc';
+import { DocActions } from '../../components/doc/common/docactions';
 
 const ChipDemo = () => {
     const docs = [
@@ -71,6 +72,7 @@ const ChipDemo = () => {
                     <h1>Chip</h1>
                     <p>Chip represents entities using icons, labels and images.</p>
                 </div>
+                <DocActions github="chip/index.js" />
             </div>
 
             <div className="content-section doc">

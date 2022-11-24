@@ -6,6 +6,7 @@ import { ApiDoc } from '../../components/doc/ripple/apidoc';
 import { ImportDoc } from '../../components/doc/ripple/importdoc';
 import { DefaultDoc } from '../../components/doc/ripple/defaultdoc';
 import { CustomDoc } from '../../components/doc/ripple/stylingdoc';
+import { DocActions } from '../../components/doc/common/docactions';
 
 const RippleDemo = () => {
     const docs = [
@@ -53,6 +54,7 @@ const RippleDemo = () => {
                     <h1>Ripple</h1>
                     <p>Ripple component adds ripple effect to the host element.</p>
                 </div>
+                <DocActions github="ripple/index.js" />
             </div>
 
             <div className="content-section doc ripple-demo">

@@ -51,7 +51,7 @@ const TerminalDemo = () => {
                     <h1>Terminal</h1>
                     <p>Terminal is a text based user interface.</p>
                 </div>
-                <DocActions github="avatar/index.js" />
+                <DocActions github="terminal/index.js" />
             </div>
             <div className="content-section doc terminal-demo">
                 <DocSections docs={docs} />

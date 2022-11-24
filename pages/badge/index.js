@@ -8,6 +8,7 @@ import { NumbersDoc } from '../../components/doc/badge/numbersdoc';
 import { ButtonDoc } from '../../components/doc/badge/buttondoc';
 import { PositionedDoc } from '../../components/doc/badge/positioneddoc';
 import { SizesDoc } from '../../components/doc/badge/sizesdoc';
+import { DocActions } from '../../components/doc/common/docactions';
 
 const BadgeDemo = () => {
     const docs = [
@@ -73,6 +74,7 @@ const BadgeDemo = () => {
                     <h1>Badge</h1>
                     <p>Badge is a small status indicator for another element.</p>
                 </div>
+                <DocActions github="badge/index.js" />
             </div>
 
             <div className="content-section doc">

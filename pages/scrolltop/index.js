@@ -5,6 +5,7 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/scrolltop/apidoc';
 import { WindowDoc } from '../../components/doc/scrolltop/windowdoc';
 import { ElementDoc } from '../../components/doc/scrolltop/elementdoc';
+import { DocActions } from '../../components/doc/common/docactions';
 
 const ScrollTopDemo = () => {
     const docs = [
@@ -55,6 +56,7 @@ const ScrollTopDemo = () => {
                     <h1>ScrollTop</h1>
                     <p>ScrollTop gets displayed after a certain scroll position and used to navigates to the top of the page quickly.</p>
                 </div>
+                <DocActions github="scrolltop/index.js" />
             </div>
 
             <div className="content-section doc">

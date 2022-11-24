@@ -6,6 +6,7 @@ import { ApiDoc } from '../../components/doc/inplace/apidoc';
 import { InputDoc } from '../../components/doc/inplace/inputdoc';
 import { ImageDoc } from '../../components/doc/inplace/imagedoc';
 import { LazyDoc } from '../../components/doc/inplace/lazydoc';
+import { DocActions } from '../../components/doc/common/docactions';
 
 const ChipDemo = () => {
     const docs = [
@@ -61,6 +62,7 @@ const ChipDemo = () => {
                     <h1>Inplace</h1>
                     <p>Inplace provides an easy to do editing and display at the same time where clicking the output displays the actual content.</p>
                 </div>
+                <DocActions github="inplace/index.js" />
             </div>
 
             <div className="content-section doc">

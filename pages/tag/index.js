@@ -67,7 +67,7 @@ const TerminalDemo = () => {
                     <h1>Tag</h1>
                     <p>Tag component is used to categorize content.</p>
                 </div>
-                <DocActions github="avatar/index.js" />
+                <DocActions github="tag/index.js" />
             </div>
             <div className="content-section doc">
                 <DocSections docs={docs} />

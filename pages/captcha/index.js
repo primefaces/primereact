@@ -5,6 +5,7 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/captcha/apidoc';
 import { ImportDoc } from '../../components/doc/captcha/importdoc';
 import { CaptchaDoc } from '../../components/doc/captcha/captchadoc';
+import { DocActions } from '../../components/doc/common/docactions';
 
 const CaptchaDemo = () => {
     const docs = [
@@ -59,6 +60,7 @@ const CaptchaDemo = () => {
                     <h1>Captcha</h1>
                     <p>Captcha is a form validation component based on Recaptcha.</p>
                 </div>
+                <DocActions github="captcha/index.js" />
             </div>
 
             <div className="content-section doc">

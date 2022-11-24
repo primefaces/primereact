@@ -8,6 +8,7 @@ import { DynamicDoc } from '../../components/doc/progressbar/dynamicdoc';
 import { StaticDoc } from '../../components/doc/progressbar/staticdoc';
 import { CustomDisplayValueDoc } from '../../components/doc/progressbar/customdisplayvaluedoc';
 import { IndeterminateDoc } from '../../components/doc/progressbar/indeterminatedoc';
+import { DocActions } from '../../components/doc/common/docactions';
 
 const ProgressBarDemo = () => {
     const docs = [
@@ -69,6 +70,7 @@ const ProgressBarDemo = () => {
                     <h1>ProgressBar</h1>
                     <p>ProgressBar is a process status indicator.</p>
                 </div>
+                <DocActions github="progressbar/index.js" />
             </div>
 
             <div className="content-section doc">
