@@ -1,38 +1,70 @@
-import React from 'react';
-import { ProgressSpinner } from '../../components/lib/progressspinner/ProgressSpinner';
-import ProgressSpinnerDoc from '../../components/doc/progressspinner';
-import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
+import React from 'react';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
+import { ApiDoc } from '../../components/doc/skeleton/apidoc';
+import { ImportDoc } from '../../components/doc/progressspinner/importdoc';
+import { BasicDemo } from '../../components/doc/progressspinner/basicdoc';
+import { CustomDemo } from '../../components/doc/progressspinner/customdoc';
 
-const ProgressSpinnerDemo = () => {
+const SkeletonDemo = () => {
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDemo
+        },
+        {
+            id: 'custom',
+            label: 'Custom',
+            component: CustomDemo
+        },
+        {
+            id: 'api',
+            label: 'API',
+            component: ApiDoc,
+            children: [
+                {
+                    id: 'properties',
+                    label: 'Properties'
+                },
+                {
+                    id: 'styling',
+                    label: 'Styling'
+                },
+                {
+                    id: 'accessibility',
+                    label: 'Accessibility'
+                }
+            ]
+        }
+    ];
+
     return (
         <div>
             <Head>
                 <title>React ProgressSpinner Component</title>
                 <meta name="description" content="ProgressSpinner is a process status indicator." />
             </Head>
+
             <div className="content-section introduction">
                 <div className="feature-intro">
                     <h1>ProgressSpinner</h1>
                     <p>ProgressSpinner is a process status indicator.</p>
                 </div>
-
-                <DocActions github="progressspinner/index.js" />
             </div>
 
-            <div className="content-section implementation">
-                <div className="card">
-                    <h5>Basic</h5>
-                    <ProgressSpinner />
-
-                    <h5>Custom</h5>
-                    <ProgressSpinner style={{ width: '50px', height: '50px' }} strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s" />
-                </div>
+            <div className="content-section doc">
+                <DocSections docs={docs} />
+                <DocSectionNav docs={docs} />
             </div>
-
-            <ProgressSpinnerDoc />
         </div>
     );
 };
 
-export default ProgressSpinnerDemo;
+export default SkeletonDemo;

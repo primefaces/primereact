@@ -1,35 +1,35 @@
 import React from 'react';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
-import { ProgressBar } from '../../lib/progressbar/ProgressBar';
+import { ProgressSpinner } from '../../lib/progressspinner/ProgressSpinner';
 
-export function StaticDemo(props) {
+export function BasicDemo(props) {
     const code = {
         basic: `
-<ProgressBar value={50}></ProgressBar>
+<ProgressSpinner />
         `,
         javascript: `
 import React from 'react';
-import { ProgressBar } from 'primereact/progressbar';
+import { ProgressSpinner } from 'primereact/progressspinner';
 
-export const StaticDemo = () => {
+export const BasicDemo = () => {
 
     return (
         <div className="card">
-            <ProgressBar value={50}></ProgressBar>
+            <ProgressSpinner />
         </div>
     );
 }
         `,
         typescript: `
 import React from 'react';
-import { ProgressBar } from 'primereact/progressbar';
+import { ProgressSpinner } from 'primereact/progressspinner';
 
-export const StaticDemo = () => {
+export const BasicDemo = () => {
 
     return (
         <div className="card">
-            <ProgressBar value={50}></ProgressBar>
+            <ProgressSpinner />
         </div>
     );
 }
@@ -39,10 +39,10 @@ export const StaticDemo = () => {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Static Demo Content.</p>
+                <p>Basic Demo Content.</p>
             </DocSectionText>
             <div className="card">
-                <ProgressBar value={50}></ProgressBar>
+                <ProgressSpinner />
             </div>
             <DocSectionCode code={code} />
         </>
