@@ -2,7 +2,7 @@ import Head from 'next/head';
 import React from 'react';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/skeleton/apidoc';
+import { ApiDoc } from '../../components/doc/progressspinner/apidoc';
 import { ImportDoc } from '../../components/doc/progressspinner/importdoc';
 import { BasicDemo } from '../../components/doc/progressspinner/basicdoc';
 import { CustomDemo } from '../../components/doc/progressspinner/customdoc';
