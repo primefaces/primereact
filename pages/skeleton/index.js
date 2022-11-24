@@ -2,7 +2,7 @@ import Head from 'next/head';
 import React from 'react';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/inputmask/apidoc';
+import { ApiDoc } from '../../components/doc/skeleton/apidoc';
 import { ImportDoc } from '../../components/doc/skeleton/importdoc';
 import { ShapesDemo } from '../../components/doc/skeleton/shapesdoc';
 import { ListDemo } from '../../components/doc/skeleton/listdoc';
