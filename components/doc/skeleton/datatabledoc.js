@@ -5,7 +5,7 @@ import { Skeleton } from '../../lib/skeleton/Skeleton';
 import { DataTable } from '../../lib/datatable/DataTable';
 import { Column } from '../../lib/column/Column';
 
-export function DataTableDemo(props) {
+export function DataTableDoc(props) {
     const products = Array.from({ length: 5 });
 
     const bodyTemplate = () => {
@@ -27,7 +27,7 @@ import { Skeleton } from 'primereact/skeleton';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 
-export const DataTableDemo = () => {
+export const DataTableDoc = () => {
     const products = Array.from({ length: 5 });
 
     const bodyTemplate = () => {
@@ -52,7 +52,7 @@ import { Skeleton } from 'primereact/skeleton';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 
-export const DataTableDemo = () => {
+export const DataTableDoc = () => {
 
     interface Product {
         length: number

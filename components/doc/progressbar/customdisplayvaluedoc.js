@@ -3,7 +3,7 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 import { ProgressBar } from '../../lib/progressbar/ProgressBar';
 
-export function CustomDisplayValueDemo(props) {
+export function CustomDisplayValueDoc(props) {
     const displayValueTemplate = (value) => {
         return (
             <React.Fragment>
@@ -20,7 +20,7 @@ export function CustomDisplayValueDemo(props) {
 import React from 'react';
 import { ProgressBar } from 'primereact/progressbar';
 
-export const CustomDisplayValueDemo = () => {
+export const CustomDisplayValueDoc = () => {
 
     const displayValueTemplate = (value) => {
         return (
@@ -41,7 +41,7 @@ export const CustomDisplayValueDemo = () => {
 import React from 'react';
 import { ProgressBar } from 'primereact/progressbar';
 
-export const CustomDisplayValueDemo = () => {
+export const CustomDisplayValueDoc = () => {
 
     const displayValueTemplate = (value) => {
         return (

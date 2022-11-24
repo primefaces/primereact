@@ -3,7 +3,7 @@ import { DocSectionText } from '../common/docsectiontext';
 import { Chip } from '../../../components/lib/chip/Chip';
 import getConfig from 'next/config';
 
-export function StylingDemo(props) {
+export function StylingDoc(props) {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     const code = {
@@ -17,7 +17,7 @@ export function StylingDemo(props) {
 import React from 'react';
 import { Chip } from 'primereact/chip';
 
-export const StylingDemo = () => {
+export const StylingDoc = () => {
 
     return (
         <div className="card flex flex-wrap gap-2">
@@ -33,7 +33,7 @@ export const StylingDemo = () => {
 import React from 'react';
 import { Chip } from 'primereact/chip';
 
-export const StylingDemo = () => {
+export const StylingDoc = () => {
 
     return (
         <div className="card flex flex-wrap gap-2">

@@ -4,7 +4,7 @@ import { DocSectionText } from '../common/docsectiontext';
 import { ScrollPanel } from '../../lib/scrollpanel/ScrollPanel';
 import { ScrollTop } from '../../lib/scrolltop/ScrollTop';
 
-export function ElementDemo(props) {
+export function ElementDoc(props) {
     const code = {
         basic: `
 <ScrollPanel style={{width: '250px', height: '200px'}}>
@@ -28,7 +28,7 @@ export function ElementDemo(props) {
 import { ScrollTop } from 'primereact/scrolltop';
 import { ScrollPanel } from 'primereact/scrollpanel';
 
-export const ElementDemo = () => {
+export const ElementDoc = () => {
 
     return (
         <ScrollPanel style={{width: '250px', height: '200px'}}>
@@ -54,7 +54,7 @@ export const ElementDemo = () => {
 import { ScrollTop } from 'primereact/scrolltop';
 import { ScrollPanel } from 'primereact/scrollpanel';
 
-export const ElementDemo = () => {
+export const ElementDoc = () => {
 
     return (
         <ScrollPanel style={{width: '250px', height: '200px'}}>

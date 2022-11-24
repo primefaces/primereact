@@ -5,7 +5,7 @@ import { BlockUI } from '../../../components/lib/blockui/BlockUI';
 import { Panel } from '../../../components/lib/panel/Panel';
 import { Button } from '../../../components/lib/button/Button';
 
-export function PanelDemo(props) {
+export function PanelDoc(props) {
     const [blockedPanel, setBlockedPanel] = useState(false);
 
     const blockPanel = () => {
@@ -36,7 +36,7 @@ import { BlockUI } from 'primereact/blockui';
 import { Panel } from 'primereact/panel';
 import { Button } from 'primereact/button';
 
-export const PanelDemo = () => {
+export const PanelDoc = () => {
     const [blockedPanel, setBlockedPanel] = useState(false);
 
     const blockPanel = () => {
@@ -72,7 +72,7 @@ import { BlockUI } from 'primereact/blockui';
 import { Panel } from 'primereact/panel';
 import { Button } from 'primereact/button';
 
-export const PanelDemo = () => {
+export const PanelDoc = () => {
     const [blockedPanel, setBlockedPanel] = useState<boolean>(false);
 
     function blockPanel(): void {

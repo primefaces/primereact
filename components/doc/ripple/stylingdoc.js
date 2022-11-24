@@ -3,7 +3,7 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 import { Ripple } from '../../lib/ripple/Ripple';
 
-export function CustomDemo(props) {
+export function CustomDoc(props) {
     const code = {
         basic: `
 <div className="card styled-box-green p-ripple">
@@ -23,7 +23,7 @@ export function CustomDemo(props) {
 import React from 'react';
 import { Ripple } from 'primereact/ripple';
 
-export const CustomDemo = () => {
+export const CustomDoc = () => {
 
     return (
         <div className="card-container flex">
@@ -47,7 +47,7 @@ export const CustomDemo = () => {
 import React from 'react';
 import { Ripple } from 'primereact/ripple';
 
-export const CustomDemo = () => {
+export const CustomDoc = () => {
 
     return (
         <div className="card-container flex">

@@ -6,7 +6,7 @@ import { DataTable } from '../../../components/lib/datatable/DataTable';
 import { Column } from '../../../components/lib/column/Column';
 import { ProductService } from '../../../service/ProductService';
 
-export function LazyDemo(props) {
+export function LazyDoc(props) {
     const [products, setProducts] = useState([]);
     const productService = new ProductService();
 
@@ -37,7 +37,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ProductService } from '../service/ProductService';
 
-export const LazyDemo = () => {
+export const LazyDoc = () => {
     const [products, setProducts] = useState([]);
     const productService = new ProductService();
 
@@ -69,7 +69,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ProductService } from '../service/ProductService';
 
-export const LazyDemo = () => {
+export const LazyDoc = () => {
     const [products, setProducts] = useState<any[]>([]);
     const productService = new ProductService();
 

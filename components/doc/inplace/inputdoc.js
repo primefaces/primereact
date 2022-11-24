@@ -4,7 +4,7 @@ import { DocSectionText } from '../common/docsectiontext';
 import { Inplace, InplaceDisplay, InplaceContent } from '../../../components/lib/inplace/Inplace';
 import { InputText } from '../../../components/lib/inputtext/InputText';
 
-export function InputDemo(props) {
+export function InputDoc(props) {
     const [text, setText] = useState('');
 
     const code = {
@@ -21,7 +21,7 @@ import React, { useState } from 'react';
 import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace';
 import { InputText } from 'primereact/inputtext';
 
-export const InputDemo = () => {
+export const InputDoc = () => {
     const [text, setText] = useState('');
 
     return (
@@ -41,7 +41,7 @@ import React, { useState } from 'react';
 import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace';
 import { InputText } from 'primereact/inputtext';
 
-export const InputDemo = () => {
+export const InputDoc = () => {
     const [text, setText] = useState<string>('');
 
     return (

@@ -3,7 +3,7 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 import { ProgressSpinner } from '../../lib/progressspinner/ProgressSpinner';
 
-export function BasicDemo(props) {
+export function BasicDoc(props) {
     const code = {
         basic: `
 <ProgressSpinner />
@@ -12,7 +12,7 @@ export function BasicDemo(props) {
 import React from 'react';
 import { ProgressSpinner } from 'primereact/progressspinner';
 
-export const BasicDemo = () => {
+export const BasicDoc = () => {
 
     return (
         <div className="card">
@@ -25,7 +25,7 @@ export const BasicDemo = () => {
 import React from 'react';
 import { ProgressSpinner } from 'primereact/progressspinner';
 
-export const BasicDemo = () => {
+export const BasicDoc = () => {
 
     return (
         <div className="card">

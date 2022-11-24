@@ -4,7 +4,7 @@ import { DocSectionText } from '../common/docsectiontext';
 import { BlockUI } from '../../../components/lib/blockui/BlockUI';
 import { Button } from '../../../components/lib/button/Button';
 
-export function DocumentDemo(props) {
+export function DocumentDoc(props) {
     const [blockedDocument, setBlockedDocument] = useState(false);
 
     const blockDocument = () => {
@@ -30,7 +30,7 @@ import { BlockUI } from 'primereact/blockui';
 import { Panel } from 'primereact/panel';
 import { Button } from 'primereact/button';
 
-export const DocumentDemo = () => {
+export const DocumentDoc = () => {
     const [blockedDocument, setBlockedDocument] = useState(false);
 
     const blockDocument = () => {
@@ -51,7 +51,7 @@ import { BlockUI } from 'primereact/blockui';
 import { Panel } from 'primereact/panel';
 import { Button } from 'primereact/button';
 
-export const DocumentDemo = () => {
+export const DocumentDoc = () => {
     const [blockedDocument, setBlockedDocument] = useState<boolean>(false);
 
     function blockDocument(): void {

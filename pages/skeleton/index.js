@@ -4,10 +4,10 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/skeleton/apidoc';
 import { ImportDoc } from '../../components/doc/skeleton/importdoc';
-import { ShapesDemo } from '../../components/doc/skeleton/shapesdoc';
-import { ListDemo } from '../../components/doc/skeleton/listdoc';
-import { CardDemo } from '../../components/doc/skeleton/carddoc';
-import { DataTableDemo } from '../../components/doc/skeleton/datatabledoc';
+import { ShapesDoc } from '../../components/doc/skeleton/shapesdoc';
+import { ListDoc } from '../../components/doc/skeleton/listdoc';
+import { CardDoc } from '../../components/doc/skeleton/carddoc';
+import { DataTableDoc } from '../../components/doc/skeleton/datatabledoc';
 
 const SkeletonDemo = () => {
     const docs = [
@@ -19,22 +19,22 @@ const SkeletonDemo = () => {
         {
             id: 'shapes',
             label: 'Shapes',
-            component: ShapesDemo
+            component: ShapesDoc
         },
         {
             id: 'card',
             label: 'Card',
-            component: CardDemo
+            component: CardDoc
         },
         {
             id: 'list',
             label: 'List',
-            component: ListDemo
+            component: ListDoc
         },
         {
             id: 'datatable',
             label: 'DataTable',
-            component: DataTableDemo
+            component: DataTableDoc
         },
         {
             id: 'api',

@@ -2,7 +2,7 @@ import { Badge } from '../../lib/badge/Badge';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function SizesDemo(props) {
+export function SizesDoc(props) {
     const code = {
         basic: `
 <Badge value="6" className="mr-2" size="xlarge" severity="success"></Badge>
@@ -13,7 +13,7 @@ export function SizesDemo(props) {
 import React from 'react';
 import { Badge } from 'primereact/badge';
 
-export const SizesDemo = () => {
+export const SizesDoc = () => {
 
     return (
         <div className="card flex justify-content-center align-items-end">
@@ -28,7 +28,7 @@ export const SizesDemo = () => {
 import React from 'react';
 import { Badge } from 'primereact/badge';
 
-export const SizesDemo = () => {
+export const SizesDoc = () => {
 
     return (
         <div className="card flex justify-content-center align-items-end">

@@ -2,7 +2,7 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 import { Chip } from '../../../components/lib/chip/Chip';
 
-export function IconDemo(props) {
+export function IconDoc(props) {
     const code = {
         basic: `
 <Chip label="Apple" icon="pi pi-apple" className="mr-2" />
@@ -14,7 +14,7 @@ export function IconDemo(props) {
 import React from 'react';
 import { Chip } from 'primereact/chip';
 
-export const IconDemo = () => {
+export const IconDoc = () => {
 
     return (
         <div className="card flex flex-wrap gap-2">
@@ -30,7 +30,7 @@ export const IconDemo = () => {
 import React from 'react';
 import { Chip } from 'primereact/chip';
 
-export const IconDemo = () => {
+export const IconDoc = () => {
 
     return (
         <div className="card flex flex-wrap gap-2">

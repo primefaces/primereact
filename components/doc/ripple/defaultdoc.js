@@ -3,7 +3,7 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 import { Ripple } from '../../lib/ripple/Ripple';
 
-export function DefaultDemo(props) {
+export function DefaultDoc(props) {
     const code = {
         basic: `
 <div className="card primary-box p-ripple">
@@ -15,7 +15,7 @@ export function DefaultDemo(props) {
 import React from 'react';
 import { ProgressSpinner } from 'primereact/progressspinner';
 
-export const DefaultDemo = () => {
+export const DefaultDoc = () => {
 
     return (
         <div className="card">
@@ -31,7 +31,7 @@ export const DefaultDemo = () => {
 import React from 'react';
 import { ProgressSpinner } from 'primereact/progressspinner';
 
-export const DefaultDemo = () => {
+export const DefaultDoc = () => {
 
     return (
         <div className="card">

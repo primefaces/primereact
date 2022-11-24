@@ -3,7 +3,7 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 import { Skeleton } from '../../../components/lib/skeleton/Skeleton';
 
-export function ShapesDemo(props) {
+export function ShapesDoc(props) {
     const code = {
         basic: `
 <h5>Rectangle</h5>
@@ -36,7 +36,7 @@ export function ShapesDemo(props) {
 import React from 'react';
 import { Skeleton } from 'primereact/skeleton';
 
-export const ShapesDemo = () => {
+export const ShapesDoc = () => {
 
     return (
         <div className="card">
@@ -84,7 +84,7 @@ export const ShapesDemo = () => {
 import React from 'react';
 import { Skeleton } from 'primereact/skeleton';
 
-export const ShapesDemo = () => {
+export const ShapesDoc = () => {
 
     return (
         <div className="card">

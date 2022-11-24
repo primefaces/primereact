@@ -3,7 +3,7 @@ import { DocSectionText } from '../common/docsectiontext';
 import { BlockUI } from '../../../components/lib/blockui/BlockUI';
 import { Panel } from '../../../components/lib/panel/Panel';
 
-export function BasicDemo(props) {
+export function BasicDoc(props) {
     const code = {
         basic: `
 <BlockUI>
@@ -21,7 +21,7 @@ import React from 'react';
 import { BlockUI } from 'primereact/blockui';
 import { Panel } from 'primereact/panel';
 
-export const BasicDemo = () => {
+export const BasicDoc = () => {
 
     return (
         <div className="card">
@@ -43,7 +43,7 @@ import React from 'react';
 import { BlockUI } from 'primereact/blockui';
 import { Panel } from 'primereact/panel';
 
-export const BasicDemo = () => {
+export const BasicDoc = () => {
 
     return (
         <div className="card">

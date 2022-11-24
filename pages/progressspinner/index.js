@@ -4,8 +4,8 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/progressspinner/apidoc';
 import { ImportDoc } from '../../components/doc/progressspinner/importdoc';
-import { BasicDemo } from '../../components/doc/progressspinner/basicdoc';
-import { CustomDemo } from '../../components/doc/progressspinner/customdoc';
+import { BasicDoc } from '../../components/doc/progressspinner/basicdoc';
+import { CustomDoc } from '../../components/doc/progressspinner/customdoc';
 
 const SkeletonDemo = () => {
     const docs = [
@@ -17,12 +17,12 @@ const SkeletonDemo = () => {
         {
             id: 'basic',
             label: 'Basic',
-            component: BasicDemo
+            component: BasicDoc
         },
         {
             id: 'custom',
             label: 'Custom',
-            component: CustomDemo
+            component: CustomDoc
         },
         {
             id: 'api',

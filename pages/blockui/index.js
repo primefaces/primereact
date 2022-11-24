@@ -4,10 +4,10 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/blockui/apidoc';
 import { ImportDoc } from '../../components/doc/blockui/importdoc';
-import { BasicDemo } from '../../components/doc/blockui/basicdoc';
-import { PanelDemo } from '../../components/doc/blockui/paneldoc';
-import { TemplateDemo } from '../../components/doc/blockui/templatedoc';
-import { DocumentDemo } from '../../components/doc/blockui/documentdoc';
+import { BasicDoc } from '../../components/doc/blockui/basicdoc';
+import { PanelDoc } from '../../components/doc/blockui/paneldoc';
+import { TemplateDoc } from '../../components/doc/blockui/templatedoc';
+import { DocumentDoc } from '../../components/doc/blockui/documentdoc';
 
 const BlockUIDemo = () => {
     const docs = [
@@ -19,22 +19,22 @@ const BlockUIDemo = () => {
         {
             id: 'basic',
             label: 'Basic',
-            component: BasicDemo
+            component: BasicDoc
         },
         {
             id: 'document',
             label: 'Document',
-            component: DocumentDemo
+            component: DocumentDoc
         },
         {
             id: 'panel',
             label: 'Panel',
-            component: PanelDemo
+            component: PanelDoc
         },
         {
             id: 'template',
             label: 'Template',
-            component: TemplateDemo
+            component: TemplateDoc
         },
         {
             id: 'api',

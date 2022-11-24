@@ -3,7 +3,7 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 import { Skeleton } from '../../lib/skeleton/Skeleton';
 
-export function ListDemo(props) {
+export function ListDoc(props) {
     const code = {
         basic: `
 <Skeleton shape="circle" size="4rem" className="mr-2" />
@@ -23,7 +23,7 @@ export function ListDemo(props) {
 import React from 'react';
 import { Skeleton } from 'primereact/skeleton';
 
-export const ListDemo = () => {
+export const ListDoc = () => {
 
     return (
         <div className="card">
@@ -75,7 +75,7 @@ export const ListDemo = () => {
 import React from 'react';
 import { Skeleton } from 'primereact/skeleton';
 
-export const ListDemo = () => {
+export const ListDoc = () => {
 
     return (
         <div className="card">

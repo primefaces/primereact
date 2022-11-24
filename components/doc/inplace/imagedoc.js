@@ -4,7 +4,7 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 import { Inplace, InplaceDisplay, InplaceContent } from '../../../components/lib/inplace/Inplace';
 
-export function ImageDemo(props) {
+export function ImageDoc(props) {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     const code = {
@@ -25,7 +25,7 @@ export function ImageDemo(props) {
 import React from 'react';
 import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace';
 
-export const ImageDemo = () => {
+export const ImageDoc = () => {
 
     return (
         <Inplace>
@@ -46,7 +46,7 @@ export const ImageDemo = () => {
 import React from 'react';
 import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace';
 
-export const ImageDemo = () => {
+export const ImageDoc = () => {
 
     return (
         <Inplace>

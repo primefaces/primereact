@@ -3,7 +3,7 @@ import { Button } from '../../lib/button/Button';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function ButtonDemo(props) {
+export function ButtonDoc(props) {
     const code = {
         basic: `
 <Button type="button" label="Emails" className="mr-2"><Badge value="8" ></Badge></Button>
@@ -14,7 +14,7 @@ import React from 'react';
 import { Button } from 'primereact/button';
 import { Badge } from 'primereact/badge';
 
-export const ButtonDemo = () => {
+export const ButtonDoc = () => {
 
     return (
         <div className="card flex justify-content-center">
@@ -29,7 +29,7 @@ import React from 'react';
 import { Button } from 'primereact/button';
 import { Badge } from 'primereact/badge';
 
-export const ButtonDemo = () => {
+export const ButtonDoc = () => {
 
     return (
         <div className="card flex justify-content-center">

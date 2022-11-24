@@ -2,7 +2,7 @@ import { Badge } from '../../lib/badge/Badge';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function PositionedDemo(props) {
+export function PositionedDoc(props) {
     const code = {
         basic: `
 <i className="pi pi-bell mr-4 p-text-secondary p-overlay-badge" style={{ fontSize: '2rem' }}><Badge value="2" ></Badge></i>
@@ -13,7 +13,7 @@ export function PositionedDemo(props) {
 import React from 'react';
 import { Badge } from 'primereact/badge';
 
-export const PositionedDemo = () => {
+export const PositionedDoc = () => {
 
     return (
         <div className="card flex justify-content-center">
@@ -28,7 +28,7 @@ export const PositionedDemo = () => {
 import React from 'react';
 import { Badge } from 'primereact/badge';
 
-export const PositionedDemo = () => {
+export const PositionedDoc = () => {
 
     return (
         <div className="card flex justify-content-center">

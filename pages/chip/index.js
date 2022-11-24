@@ -3,32 +3,32 @@ import React from 'react';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/chip/apidoc';
-import { BasicDemo } from '../../components/doc/chip/basicdoc';
-import { IconDemo } from '../../components/doc/chip/icondoc';
-import { ImageDemo } from '../../components/doc/chip/imagedoc';
-import { StylingDemo } from '../../components/doc/chip/stylingdoc';
+import { BasicDoc } from '../../components/doc/chip/basicdoc';
+import { IconDoc } from '../../components/doc/chip/icondoc';
+import { ImageDoc } from '../../components/doc/chip/imagedoc';
+import { StylingDoc } from '../../components/doc/chip/stylingdoc';
 
 const ChipDemo = () => {
     const docs = [
         {
             id: 'basic',
             label: 'Basic',
-            component: BasicDemo
+            component: BasicDoc
         },
         {
             id: 'icon',
             label: 'Icon',
-            component: IconDemo
+            component: IconDoc
         },
         {
             id: 'image',
             label: 'Image',
-            component: ImageDemo
+            component: ImageDoc
         },
         {
             id: 'styling',
             label: 'Styling',
-            component: StylingDemo
+            component: StylingDoc
         },
         {
             id: 'api',

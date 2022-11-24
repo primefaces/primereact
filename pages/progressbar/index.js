@@ -4,10 +4,10 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/progressbar/apidoc';
 import { ImportDoc } from '../../components/doc/progressbar/importdoc';
-import { DynamicDemo } from '../../components/doc/progressbar/dynamicdoc';
-import { StaticDemo } from '../../components/doc/progressbar/staticdoc';
-import { CustomDisplayValueDemo } from '../../components/doc/progressbar/customdisplayvaluedoc';
-import { IndeterminateDemo } from '../../components/doc/progressbar/indeterminatedoc';
+import { DynamicDoc } from '../../components/doc/progressbar/dynamicdoc';
+import { StaticDoc } from '../../components/doc/progressbar/staticdoc';
+import { CustomDisplayValueDoc } from '../../components/doc/progressbar/customdisplayvaluedoc';
+import { IndeterminateDoc } from '../../components/doc/progressbar/indeterminatedoc';
 
 const ProgressBarDemo = () => {
     const docs = [
@@ -19,22 +19,22 @@ const ProgressBarDemo = () => {
         {
             id: 'dynamic',
             label: 'Dynamic',
-            component: DynamicDemo
+            component: DynamicDoc
         },
         {
             id: 'static',
             label: 'Static',
-            component: StaticDemo
+            component: StaticDoc
         },
         {
             id: 'customdisplayvalue',
             label: 'Custom display value',
-            component: CustomDisplayValueDemo
+            component: CustomDisplayValueDoc
         },
         {
             id: 'indeterminate',
             label: 'Indeterminate',
-            component: IndeterminateDemo
+            component: IndeterminateDoc
         },
         {
             id: 'api',

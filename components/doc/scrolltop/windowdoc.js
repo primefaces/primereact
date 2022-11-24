@@ -3,7 +3,7 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 import { ScrollTop } from '../../lib/scrolltop/ScrollTop';
 
-export function WindowDemo(props) {
+export function WindowDoc(props) {
     const code = {
         basic: `
 <ScrollTop />
@@ -11,7 +11,7 @@ export function WindowDemo(props) {
         javascript: `
 import { ScrollTop } from 'primereact/scrolltop';
 
-export const WindowDemo = () => {
+export const WindowDoc = () => {
 
     return (
         <div className="card">
@@ -23,7 +23,7 @@ export const WindowDemo = () => {
         typescript: `
 import { ScrollTop } from 'primereact/scrolltop';
 
-export const WindowDemo = () => {
+export const WindowDoc = () => {
 
     return (
         <div className="card">

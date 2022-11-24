@@ -4,8 +4,8 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/ripple/apidoc';
 import { ImportDoc } from '../../components/doc/ripple/importdoc';
-import { DefaultDemo } from '../../components/doc/ripple/defaultdoc';
-import { CustomDemo } from '../../components/doc/ripple/stylingdoc';
+import { DefaultDoc } from '../../components/doc/ripple/defaultdoc';
+import { CustomDoc } from '../../components/doc/ripple/stylingdoc';
 
 const RippleDemo = () => {
     const docs = [
@@ -17,12 +17,12 @@ const RippleDemo = () => {
         {
             id: 'default',
             label: 'Default',
-            component: DefaultDemo
+            component: DefaultDoc
         },
         {
             id: 'custom',
             label: 'Custom',
-            component: CustomDemo
+            component: CustomDoc
         },
         {
             id: 'api',

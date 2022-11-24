@@ -3,26 +3,26 @@ import React from 'react';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/inplace/apidoc';
-import { InputDemo } from '../../components/doc/inplace/inputdoc';
-import { ImageDemo } from '../../components/doc/inplace/imagedoc';
-import { LazyDemo } from '../../components/doc/inplace/lazydoc';
+import { InputDoc } from '../../components/doc/inplace/inputdoc';
+import { ImageDoc } from '../../components/doc/inplace/imagedoc';
+import { LazyDoc } from '../../components/doc/inplace/lazydoc';
 
 const ChipDemo = () => {
     const docs = [
         {
             id: 'basic',
             label: 'Basic',
-            component: InputDemo
+            component: InputDoc
         },
         {
             id: 'image',
             label: 'Image',
-            component: ImageDemo
+            component: ImageDoc
         },
         {
             id: 'lazy',
             label: 'Lazy',
-            component: LazyDemo
+            component: LazyDoc
         },
         {
             id: 'api',

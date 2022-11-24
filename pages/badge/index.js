@@ -4,10 +4,10 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/badge/apidoc';
 import { ImportDoc } from '../../components/doc/badge/importdoc';
-import { NumbersDemo } from '../../components/doc/badge/numbersdoc';
-import { ButtonDemo } from '../../components/doc/badge/buttondoc';
-import { PositionedDemo } from '../../components/doc/badge/positioneddoc';
-import { SizesDemo } from '../../components/doc/badge/sizesdoc';
+import { NumbersDoc } from '../../components/doc/badge/numbersdoc';
+import { ButtonDoc } from '../../components/doc/badge/buttondoc';
+import { PositionedDoc } from '../../components/doc/badge/positioneddoc';
+import { SizesDoc } from '../../components/doc/badge/sizesdoc';
 
 const BadgeDemo = () => {
     const docs = [
@@ -19,22 +19,22 @@ const BadgeDemo = () => {
         {
             id: 'numbers',
             label: 'Numbers',
-            component: NumbersDemo
+            component: NumbersDoc
         },
         {
             id: 'sizes',
             label: 'Sizes',
-            component: SizesDemo
+            component: SizesDoc
         },
         {
             id: 'button',
             label: 'Button',
-            component: ButtonDemo
+            component: ButtonDoc
         },
         {
             id: 'positioned',
             label: 'Positioned',
-            component: PositionedDemo
+            component: PositionedDoc
         },
         {
             id: 'api',

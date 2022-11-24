@@ -2,9 +2,8 @@ import React from 'react';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 import { ProgressBar } from '../../lib/progressbar/ProgressBar';
-import { Toast } from '../../lib/toast/Toast';
 
-export function IndeterminateDemo(props) {
+export function IndeterminateDoc(props) {
     const code = {
         basic: `
 <ProgressBar mode="indeterminate" style={{ height: '6px' }}></ProgressBar>
@@ -13,7 +12,7 @@ export function IndeterminateDemo(props) {
 import React from 'react';
 import { ProgressBar } from 'primereact/progressbar';
 
-export const IndeterminateDemo = () => {
+export const IndeterminateDoc = () => {
 
     return (
         <div className="card">
@@ -26,7 +25,7 @@ export const IndeterminateDemo = () => {
 import React from 'react';
 import { ProgressBar } from 'primereact/progressbar';
 
-export const IndeterminateDemo = () => {
+export const IndeterminateDoc = () => {
 
     return (
         <div className="card">
