@@ -891,44 +891,9 @@
             "meta": ["chart"],
             "children": [
                 {
-                    "name": "ChartModel",
+                    "name": "Charts",
                     "to": "/chart",
                     "meta": ["chartdemo", "chartmodel"]
-                },
-                {
-                    "name": "Pie",
-                    "to": "/chart/pie",
-                    "meta": ["piechart"]
-                },
-                {
-                    "name": "Doughnut",
-                    "to": "/chart/doughnut",
-                    "meta": ["doughnutchart"]
-                },
-                {
-                    "name": "Bar",
-                    "to": "/chart/bar",
-                    "meta": ["barchart"]
-                },
-                {
-                    "name": "Line",
-                    "to": "/chart/line",
-                    "meta": ["linechart"]
-                },
-                {
-                    "name": "PolarArea",
-                    "to": "/chart/polararea",
-                    "meta": ["polarareachart"]
-                },
-                {
-                    "name": "Radar",
-                    "to": "/chart/radar",
-                    "meta": ["radarchart"]
-                },
-                {
-                    "name": "Combo",
-                    "to": "/chart/combo",
-                    "meta": ["combochart"]
                 }
             ]
         },
