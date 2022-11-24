@@ -1,5 +1,3 @@
-import Link from 'next/link';
-import { DevelopmentSection } from '../common/developmentsection';
 import { DocSectionText } from '../common/docsectiontext';
 import { DocSubSection } from '../common/docsubsection';
 

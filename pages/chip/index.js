@@ -3,6 +3,7 @@ import React from 'react';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/chip/apidoc';
+import { ImportDoc } from '../../components/doc/chip/importdoc';
 import { BasicDoc } from '../../components/doc/chip/basicdoc';
 import { IconDoc } from '../../components/doc/chip/icondoc';
 import { ImageDoc } from '../../components/doc/chip/imagedoc';
@@ -11,6 +12,11 @@ import { DocActions } from '../../components/doc/common/docactions';
 
 const ChipDemo = () => {
     const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
         {
             id: 'basic',
             label: 'Basic',

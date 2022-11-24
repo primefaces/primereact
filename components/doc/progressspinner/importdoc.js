@@ -4,7 +4,7 @@ import { DocSectionCode } from '../common/docsectioncode';
 export function ImportDoc(props) {
     const code = {
         basic: `
-import { ProgressBar } from 'primereact/progressbar';
+import { ProgressSpinner } from 'primereact/progressspinner';
         `
     };
 

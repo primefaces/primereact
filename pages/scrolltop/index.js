@@ -3,12 +3,18 @@ import React from 'react';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/scrolltop/apidoc';
+import { ImportDoc } from '../../components/doc/scrolltop/importdoc';
 import { WindowDoc } from '../../components/doc/scrolltop/windowdoc';
 import { ElementDoc } from '../../components/doc/scrolltop/elementdoc';
 import { DocActions } from '../../components/doc/common/docactions';
 
 const ScrollTopDemo = () => {
     const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
         {
             id: 'basic',
             label: 'Basic',

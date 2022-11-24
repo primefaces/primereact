@@ -4,7 +4,7 @@ import { DocSectionCode } from '../common/docsectioncode';
 export function ImportDoc(props) {
     const code = {
         basic: `
-import { Terminal } from 'primereact/terminal';
+import { StyleClass } from 'primereact/styleclass';
         `
     };
 
