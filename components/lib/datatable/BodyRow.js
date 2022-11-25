@@ -105,6 +105,14 @@ export const BodyRow = React.memo((props) => {
         props.onRowRightClick({ originalEvent: event, data: props.rowData, index: props.index });
     };
 
+    const onMouseEnter = (event) => {
+        props.onRowMouseEnter({ originalEvent: event, data: props.rowData, index: props.index });
+    };
+
+    const onMouseLeave = (event) => {
+        props.onRowMouseLeave({ originalEvent: event, data: props.rowData, index: props.index });
+    };
+
     const onTouchEnd = (event) => {
         props.onRowTouchEnd(event);
     };
@@ -361,6 +369,8 @@ export const BodyRow = React.memo((props) => {
             style={style}
             onMouseDown={onMouseDown}
             onMouseUp={onMouseUp}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
             onClick={onClick}
             onDoubleClick={onDoubleClick}
             onContextMenu={onRightClick}
