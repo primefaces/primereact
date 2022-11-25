@@ -1,8 +1,10 @@
 .p-overlaypanel {
     position: absolute;
     margin-top: 10px;
+    /* Github #3122: Prevent animation flickering */
+    top: -9999px;
+    left: -9999px;
 }
-
 
 .p-overlaypanel-flipped {
     margin-top: 0;

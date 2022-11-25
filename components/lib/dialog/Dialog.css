@@ -29,6 +29,11 @@
     position: relative;
 }
 
+/* Github #3122: Prevent animation flickering */
+.p-dialog:not([class*='p-dialog-']) {
+    display: none;
+}
+
 .p-dialog-content {
     overflow-y: auto;
     flex-grow: 1;
