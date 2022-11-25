@@ -28,6 +28,11 @@
     position: relative;
 }
 
+/* Github #3122: Prevent animation flickering */
+.p-sidebar:not([class*="p-sidebar-"]){
+    display: none;
+}
+
 .p-sidebar-content {
     overflow-y: auto;
     flex-grow: 1;

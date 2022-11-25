@@ -511,7 +511,8 @@ export const Dialog = React.forwardRef((props, ref) => {
         const otherProps = ObjectUtils.findDiffKeys(props, Dialog.defaultProps);
         const className = classNames('p-dialog p-component', props.className, {
             'p-dialog-rtl': props.rtl,
-            'p-dialog-maximized': maximized
+            'p-dialog-maximized': maximized,
+            'p-dialog-default': !maximized
         });
         const maskClassName = classNames(
             'p-dialog-mask',
