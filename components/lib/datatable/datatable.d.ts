@@ -147,10 +147,12 @@ interface DataTableRowEventParams {
     data: any;
 }
 
-interface DataTableRowClickEventParams extends Omit<DataTableRowEventParams, 'originalEvent'> {
+interface DataTableRowMouseEventParams extends Omit<DataTableRowEventParams, 'originalEvent'> {
     originalEvent: React.MouseEvent<HTMLElement>;
     index: number;
 }
+
+interface DataTableRowClickEventParams extends DataTableRowMouseEventParams {}
 
 interface DataTableCellClickEventParams {
     originalEvent: React.MouseEvent<HTMLElement>;
@@ -349,6 +351,8 @@ export interface DataTableProps extends Omit<React.DetailedHTMLProps<React.Input
     onRowEditInit?(e: DataTableRowEditParams): void;
     onRowEditSave?(e: DataTableRowEditSaveParams): void;
     onRowExpand?(e: DataTableRowEventParams): void;
+    onRowMouseEnter?(e: DataTableRowMouseEventParams): void;
+    onRowMouseLeave?(e: DataTableRowMouseEventParams): void;
     onRowReorder?(e: DataTableRowReorderParams): void;
     onRowSelect?(e: DataTableSelectParams): void;
     onRowToggle?(e: DataTableRowToggleParams): void;

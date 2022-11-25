@@ -505,6 +505,14 @@ export const TableBody = React.memo(
             }
         };
 
+        const onRowMouseEnter = (event) => {
+            props.onRowMouseEnter && props.onRowMouseEnter(event);
+        };
+
+        const onRowMouseLeave = (event) => {
+            props.onRowMouseLeave && props.onRowMouseLeave(event);
+        };
+
         const onRowTouchEnd = () => {
             rowTouched.current = true;
         };
@@ -857,6 +865,8 @@ export const TableBody = React.memo(
                         onRowClick={onRowClick}
                         onRowDoubleClick={onRowDoubleClick}
                         onRowRightClick={onRowRightClick}
+                        onRowMouseEnter={onRowMouseEnter}
+                        onRowMouseLeave={onRowMouseLeave}
                         tabIndex={props.tabIndex}
                         isSelectable={isSelectable}
                         onRowTouchEnd={onRowTouchEnd}

@@ -3748,6 +3748,24 @@ export const DataTableStateDemo = () => {
                                     <td>Callback to invoke when a row is double clicked.</td>
                                 </tr>
                                 <tr>
+                                    <td>onRowMouseEnter</td>
+                                    <td>
+                                        event.originalEvent: Browser event <br />
+                                        event.data: Clicked row data <br />
+                                        event.index: Clicked row data index
+                                    </td>
+                                    <td>Callback to invoke when a row is hovered with mouse.</td>
+                                </tr>
+                                <tr>
+                                    <td>onRowMouseLeave</td>
+                                    <td>
+                                        event.originalEvent: Browser event <br />
+                                        event.data: Clicked row data <br />
+                                        event.index: Clicked row data index
+                                    </td>
+                                    <td>Callback to invoke when a row is navigated away from with mouse.</td>
+                                </tr>
+                                <tr>
                                     <td>onRowSelect</td>
                                     <td>
                                         event.originalEvent: Browser event. <br />

@@ -781,6 +781,48 @@ const DataTableEvents = [
         ]
     },
     {
+        name: 'onRowMouseEnter',
+        description: 'Callback to invoke when a row is mouse hovered.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event.'
+            },
+            {
+                name: 'event.data',
+                type: 'any',
+                description: 'Clicked row data'
+            },
+            {
+                name: 'event.index',
+                type: 'number',
+                description: 'Clicked row data index'
+            }
+        ]
+    },
+    {
+        name: 'onRowMouseLeave',
+        description: 'Callback to invoke when a row is moused out.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event.'
+            },
+            {
+                name: 'event.data',
+                type: 'any',
+                description: 'Clicked row data'
+            },
+            {
+                name: 'event.index',
+                type: 'number',
+                description: 'Clicked row data index'
+            }
+        ]
+    },
+    {
         name: 'onRowSelect',
         description: 'Callback to invoke when a row is unselected.',
         arguments: [

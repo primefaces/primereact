@@ -1452,6 +1452,8 @@ export const DataTable = React.forwardRef((props, ref) => {
                 tabIndex={props.tabIndex}
                 onRowClick={props.onRowClick}
                 onRowDoubleClick={props.onRowDoubleClick}
+                onRowMouseEnter={props.onRowMouseEnter}
+                onRowMouseLeave={props.onRowMouseLeave}
                 onCellClick={props.onCellClick}
                 selection={props.selection}
                 onSelectionChange={props.onSelectionChange}
@@ -1524,6 +1526,8 @@ export const DataTable = React.forwardRef((props, ref) => {
                 tabIndex={props.tabIndex}
                 onRowClick={props.onRowClick}
                 onRowDoubleClick={props.onRowDoubleClick}
+                onRowMouseEnter={props.onRowMouseEnter}
+                onRowMouseLeave={props.onRowMouseLeave}
                 onCellClick={props.onCellClick}
                 selection={props.selection}
                 onSelectionChange={props.onSelectionChange}
@@ -1828,6 +1832,8 @@ DataTable.defaultProps = {
     onFilter: null,
     onPage: null,
     onRowClick: null,
+    onRowMouseEnter: null,
+    onRowMouseLeave: null,
     onRowCollapse: null,
     onRowDoubleClick: null,
     onRowEditCancel: null,
