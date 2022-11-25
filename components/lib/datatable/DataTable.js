@@ -1313,8 +1313,14 @@ export const DataTable = React.forwardRef((props, ref) => {
     }, [attributeSelectorState]);
 
     useUpdateEffect(() => {
-        setFiltersState(cloneFilters(props.filters));
+        const filters = cloneFilters(props.filters);
+
+        setFiltersState(filters);
         setD_filtersState(cloneFilters(props.filters));
+
+        if (props.onValueChange) {
+            props.onValueChange(processedData({ filters }));
+        }
     }, [props.filters]);
 
     useUpdateEffect(() => {
