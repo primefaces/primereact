@@ -100,6 +100,12 @@ export function ApiDoc(props) {
                                 <td>Inline style of the overlay panel element.</td>
                             </tr>
                             <tr>
+                                <td>overlayVisible</td>
+                                <td>boolean</td>
+                                <td>false</td>
+                                <td>Specifies the visibility of the overlay panel.</td>
+                            </tr>
+                            <tr>
                                 <td>scrollHeight</td>
                                 <td>string</td>
                                 <td>200px</td>

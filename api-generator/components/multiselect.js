@@ -286,6 +286,12 @@ const MultiSelectProps = [
         type: 'boolean',
         default: 'false',
         description: 'Defaults to the option itself as the value of an option. Overrides the optionValue prop.'
+    },
+    {
+        name: 'overlayVisible',
+        type: 'boolean',
+        default: 'false',
+        description: 'Specifies the visibility of the overlay panel.'
     }
 ];
 
