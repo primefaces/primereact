@@ -214,6 +214,12 @@ export function ApiDoc(props) {
                                 <td>Function that gets the option and returns the content for it.</td>
                             </tr>
                             <tr>
+                                <td>itemClassName</td>
+                                <td>string</td>
+                                <td>bull</td>
+                                <td>Style class of the items.</td>
+                            </tr>
+                            <tr>
                                 <td>filterTemplate</td>
                                 <td>any</td>
                                 <td>null</td>
@@ -324,6 +330,18 @@ export function ApiDoc(props) {
                                 <td>boolean</td>
                                 <td>false</td>
                                 <td>Whether all data is selected.</td>
+                            </tr>
+                            <tr>
+                                <td>inline</td>
+                                <td>boolean</td>
+                                <td>false</td>
+                                <td>Render the items panel inline.</td>
+                            </tr>
+                            <tr>
+                                <td>flex</td>
+                                <td>boolean</td>
+                                <td>false</td>
+                                <td>Use flex layout for the items panel.</td>
                             </tr>
                         </tbody>
                     </table>
