@@ -90,9 +90,12 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
     filterPlaceholder?: string;
     filterTemplate?: MultiSelectFilterTemplateType;
     fixedPlaceholder?: boolean;
+    flex?: boolean;
     id?: string;
+    inline?: boolean;
     inputId?: string;
     inputRef?: React.Ref<HTMLSelectElement>;
+    itemClassName?: string;
     itemTemplate?: MultiSelectItemTemplateType;
     maxSelectedLabels?: number;
     name?: string;

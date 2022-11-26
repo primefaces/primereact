@@ -10,7 +10,7 @@ export const MultiSelect = React.memo(
     React.forwardRef((props, ref) => {
         const [filterState, setFilterState] = React.useState('');
         const [focusedState, setFocusedState] = React.useState(false);
-        const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
+        const [overlayVisibleState, setOverlayVisibleState] = React.useState(props.inline);
         const elementRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
         const labelRef = React.useRef(null);
@@ -113,7 +113,7 @@ export const MultiSelect = React.memo(
         };
 
         const onClick = (event) => {
-            if (!props.disabled && !isPanelClicked(event) && !DomHandler.hasClass(event.target, 'p-multiselect-token-icon') && !isClearClicked(event)) {
+            if (!props.inline && !props.disabled && !isPanelClicked(event) && !DomHandler.hasClass(event.target, 'p-multiselect-token-icon') && !isClearClicked(event)) {
                 overlayVisibleState ? hide() : show();
                 DomHandler.focus(inputRef.current);
                 event.preventDefault();
@@ -124,6 +124,8 @@ export const MultiSelect = React.memo(
             switch (event.which) {
                 //down
                 case 40:
+                    if (props.inline) break;
+
                     if (!overlayVisibleState && event.altKey) {
                         show();
                         event.preventDefault();
@@ -133,12 +135,14 @@ export const MultiSelect = React.memo(
 
                 //space
                 case 32:
+                    if (props.inline) break;
                     overlayVisibleState ? hide() : show();
                     event.preventDefault();
                     break;
 
                 //escape
                 case 27:
+                    if (props.inline) break;
                     hide();
                     break;
 
@@ -590,8 +594,8 @@ export const MultiSelect = React.memo(
             },
             props.className
         );
-        const label = createLabel();
-        const clearIcon = createClearIcon();
+        const label = !props.inline && createLabel();
+        const clearIcon = !props.inline && createClearIcon();
 
         return (
             <>
@@ -613,9 +617,13 @@ export const MultiSelect = React.memo(
                             {...ariaProps}
                         />
                     </div>
-                    {label}
-                    {clearIcon}
-                    <div className="p-multiselect-trigger">{IconUtils.getJSXIcon(props.dropdownIcon, { className: 'p-multiselect-trigger-icon p-c' }, { props })}</div>
+                    {!props.inline && (
+                        <>
+                            {label}
+                            {clearIcon}
+                            <div className="p-multiselect-trigger">{IconUtils.getJSXIcon(props.dropdownIcon, { className: 'p-multiselect-trigger-icon p-c' }, { props })}</div>
+                        </>
+                    )}
                     <MultiSelectPanel
                         ref={overlayRef}
                         visibleOptions={visibleOptions}
@@ -671,9 +679,12 @@ MultiSelect.defaultProps = {
     filterPlaceholder: null,
     filterTemplate: null,
     fixedPlaceholder: false,
+    flex: false,
     id: null,
+    inline: false,
     inputId: null,
     inputRef: null,
+    itemClassName: null,
     itemTemplate: null,
     maxSelectedLabels: null,
     name: null,
