@@ -22,6 +22,18 @@ interface ResizeEventOptions {
     listener?(event: Event): void;
 }
 
+interface DraggableOptions {
+    targetRef: React.Ref<HTMLElement>;
+    handleRef: React.Ref<HTMLElement>;
+    onDrag?(e: React.DragEvent<HTMLElement>): void;
+    onDragEnd?(e: React.DragEvent<HTMLElement>): void;
+    onDragStart?(e: React.DragEvent<HTMLElement>): void;
+    enabled: true;
+    keepInViewport: false;
+    rectLimits?: DOMRect;
+}
+
+export declare function useDraggable(options: DraggableOptions): any;
 export declare function usePrevious(value: any): any;
 export declare function useMountEffect(effect: React.EffectCallback): void;
 export declare function useUpdateEffect(effect: React.EffectCallback, deps?: React.DependencyList): void;
