@@ -538,6 +538,12 @@ export const MultiSelect = React.memo(
             ObjectUtils.combinedRefs(inputRef, props.inputRef);
         }, [inputRef, props.inputRef]);
 
+        React.useEffect(() => {
+            setTimeout(() => {
+                props.overlayVisible ? show() : hide();
+            }, 100);
+        }, [props.overlayVisible]);
+
         useUpdateEffect(() => {
             if (overlayVisibleState && hasFilter) {
                 alignOverlay();
@@ -696,6 +702,7 @@ MultiSelect.defaultProps = {
     optionLabel: null,
     optionValue: null,
     options: null,
+    overlayVisible: false,
     panelClassName: null,
     panelFooterTemplate: null,
     panelHeaderTemplate: null,
