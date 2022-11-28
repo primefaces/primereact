@@ -224,16 +224,20 @@ export default class ObjectUtils {
 
     static sort(value1, value2, order = 1, locale, nullSortOrder = 1) {
         const result = ObjectUtils.compare(value1, value2, locale, order);
+        let finalSortOrder = order;
+
         // nullSortOrder == 1 means Excel like sort nulls at bottom
-        const finalSortOrder = nullSortOrder === 1 ? order : nullSortOrder;
+        if (ObjectUtils.isEmpty(value1) || ObjectUtils.isEmpty(value2)) {
+            finalSortOrder = nullSortOrder === 1 ? order : nullSortOrder;
+        }
 
         return finalSortOrder * result;
     }
 
     static compare(value1, value2, locale, order = 1) {
         let result = -1;
-        const emptyValue1 = this.isEmpty(value1);
-        const emptyValue2 = this.isEmpty(value2);
+        const emptyValue1 = ObjectUtils.isEmpty(value1);
+        const emptyValue2 = ObjectUtils.isEmpty(value2);
 
         if (emptyValue1 && emptyValue2) result = 0;
         else if (emptyValue1) result = order;
