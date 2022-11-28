@@ -149,6 +149,19 @@ export const useDraggable = ({ targetRef, handleRef, onDragStart, onDragEnd, onD
         }
     }, [targetRef, handleRef, dragging]);
 
+    const resetState = useCallback(() => {
+        setDelta({ x: 0, y: 0 });
+        setPrevious({ x: 0, y: 0 });
+        initial.current = { x: 0, y: 0 };
+    }, [setDelta, setPrevious]);
+
+    /**
+     * Reset when disabled
+     */
+    useEffect(() => {
+        !enabled && resetState();
+    }, [resetState, enabled]);
+
     const calculateDelta = ({ x, y, limits }) => {
         if (!limits) {
             return { x, y };
@@ -161,11 +174,6 @@ export const useDraggable = ({ targetRef, handleRef, onDragStart, onDragEnd, onD
             y: Math.min(Math.max(y, minY), maxY)
         };
     };
-
-    const resetState = useCallback(() => {
-        setDelta({ x: 0, y: 0 });
-        setPrevious({ x: 0, y: 0 });
-    }, [setDelta, setPrevious]);
 
     return { dragging, delta, resetState };
 };
