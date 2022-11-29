@@ -2,7 +2,7 @@ import * as React from 'react';
 import { localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { MultiSelectHeader } from './MultiSelectHeader';
 import { MultiSelectItem } from './MultiSelectItem';
@@ -10,6 +10,7 @@ import { MultiSelectItem } from './MultiSelectItem';
 export const MultiSelectPanel = React.memo(
     React.forwardRef((props, ref) => {
         const virtualScrollerRef = React.useRef(null);
+        const filterInputRef = React.useRef(null);
 
         const onEnter = () => {
             props.onEnter(() => {
@@ -19,6 +20,14 @@ export const MultiSelectPanel = React.memo(
                     if (selectedIndex !== -1) {
                         setTimeout(() => virtualScrollerRef.current.scrollToIndex(selectedIndex), 0);
                     }
+                }
+            });
+        };
+
+        const onEntered = () => {
+            props.onEntered(() => {
+                if (props.filter && props.filterInputAutoFocus) {
+                    DomHandler.focus(filterInputRef.current, false);
                 }
             });
         };
@@ -39,6 +48,7 @@ export const MultiSelectPanel = React.memo(
             return (
                 <MultiSelectHeader
                     filter={props.filter}
+                    filterRef={filterInputRef}
                     filterValue={props.filterValue}
                     filterTemplate={props.filterTemplate}
                     onFilter={onFilterInputChange}
@@ -218,7 +228,7 @@ export const MultiSelectPanel = React.memo(
                     options={props.transitionOptions}
                     unmountOnExit
                     onEnter={onEnter}
-                    onEntered={props.onEntered}
+                    onEntered={onEntered}
                     onExit={props.onExit}
                     onExited={props.onExited}
                 >

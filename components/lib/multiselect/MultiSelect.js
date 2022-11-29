@@ -258,7 +258,8 @@ export const MultiSelect = React.memo(
             callback && callback();
         };
 
-        const onOverlayEntered = () => {
+        const onOverlayEntered = (callback) => {
+            callback && callback();
             bindOverlayListener();
             props.onShow && props.onShow();
         };
@@ -674,6 +675,7 @@ MultiSelect.defaultProps = {
     emptyFilterMessage: null,
     filter: false,
     filterBy: null,
+    filterInputAutoFocus: true,
     filterLocale: undefined,
     filterMatchMode: 'contains',
     filterPlaceholder: null,
