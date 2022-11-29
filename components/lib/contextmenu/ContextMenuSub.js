@@ -52,8 +52,13 @@ export const ContextMenuSub = React.memo((props) => {
         const viewport = DomHandler.getViewport();
         const sublistWidth = submenuRef.current.offsetParent ? submenuRef.current.offsetWidth : DomHandler.getHiddenElementOuterWidth(submenuRef.current);
         const itemOuterWidth = DomHandler.getOuterWidth(parentItem.children[0]);
+        const top = parseInt(containerOffset.top, 10) + submenuRef.current.offsetHeight;
 
-        submenuRef.current.style.top = '0px';
+        if (top > viewport.height) {
+            submenuRef.current.style.top = viewport.height - top + 'px';
+        } else {
+            submenuRef.current.style.top = '0px';
+        }
 
         if (parseInt(containerOffset.left, 10) + itemOuterWidth + sublistWidth > viewport.width - DomHandler.calculateScrollbarWidth()) {
             submenuRef.current.style.left = -1 * sublistWidth + 'px';
