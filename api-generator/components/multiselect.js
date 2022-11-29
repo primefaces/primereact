@@ -132,6 +132,12 @@ const MultiSelectProps = [
         description: 'When specified, displays an input field to filter the items on keyup.'
     },
     {
+        name: 'filterInputAutoFocus',
+        type: 'boolean',
+        default: 'true',
+        description: 'When the panel is opened, it specifies that the filter input should focus automatically.'
+    },
+    {
         name: 'filterBy',
         type: 'string',
         default: 'label',
