@@ -85,7 +85,6 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
     emptyFilterMessage?: MultiSelectEmptyFilterMessageType;
     filter?: boolean;
     filterBy?: string;
-    filterInputAutoFocus?: boolean;
     filterLocale?: string;
     filterMatchMode?: string;
     filterPlaceholder?: string;
