@@ -1,44 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import { PickList } from '../../components/lib/picklist/PickList';
-import { ProductService } from '../../service/ProductService';
-import PickListDoc from '../../components/doc/picklist';
-import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
-import getConfig from 'next/config';
+import React from 'react';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
+import { DocActions } from '../../components/doc/common/docactions';
+import { ApiDoc } from '../../components/doc/picklist/apidoc';
+import { ImportDoc } from '../../components/doc/picklist/importdoc';
+import { PickListDoc } from '../../components/doc/picklist/picklistdoc';
 
 const PickListDemo = () => {
-    const [source, setSource] = useState([]);
-    const [target, setTarget] = useState([]);
-    const productService = new ProductService();
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
-
-    useEffect(() => {
-        productService.getProductsSmall().then((data) => setSource(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const onChange = (event) => {
-        setSource(event.source);
-        setTarget(event.target);
-    };
-
-    const itemTemplate = (item) => {
-        return (
-            <div className="product-item">
-                <div className="image-container">
-                    <img src={`${contextPath}/images/product/${item.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={item.name} />
-                </div>
-                <div className="product-list-detail">
-                    <h5 className="mb-2">{item.name}</h5>
-                    <i className="pi pi-tag product-category-icon"></i>
-                    <span className="product-category">{item.category}</span>
-                </div>
-                <div className="product-list-action">
-                    <h6 className="mb-2">${item.price}</h6>
-                    <span className={`product-badge status-${item.inventoryStatus.toLowerCase()}`}>{item.inventoryStatus}</span>
-                </div>
-            </div>
-        );
-    };
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'picklist',
+            label: 'PickList',
+            component: PickListDoc
+        },
+        {
+            id: 'apidoc',
+            label: 'API',
+            component: ApiDoc,
+            children: [
+                {
+                    id: 'properties',
+                    label: 'Properties'
+                },
+                {
+                    id: 'events',
+                    label: 'Events'
+                },
+                {
+                    id: 'styling',
+                    label: 'Styling'
+                },
+                {
+                    id: 'accessibility',
+                    label: 'Accessibility'
+                }
+            ]
+        }
+    ];
 
     return (
         <div>
@@ -55,25 +59,10 @@ const PickListDemo = () => {
                 <DocActions github="picklist/index.js" />
             </div>
 
-            <div className="content-section implementation picklist-demo">
-                <div className="card">
-                    <PickList
-                        source={source}
-                        target={target}
-                        itemTemplate={itemTemplate}
-                        sourceHeader="Available"
-                        targetHeader="Selected"
-                        sourceStyle={{ height: '342px' }}
-                        targetStyle={{ height: '342px' }}
-                        onChange={onChange}
-                        filterBy="name"
-                        sourceFilterPlaceholder="Search by name"
-                        targetFilterPlaceholder="Search by name"
-                    />
-                </div>
+            <div className="content-section doc picklist-demo">
+                <DocSections docs={docs} />
+                <DocSectionNav docs={docs} />
             </div>
-
-            <PickListDoc />
         </div>
     );
 };
