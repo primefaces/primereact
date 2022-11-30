@@ -34,6 +34,12 @@ const PrimeReactChart = React.memo(
                 import('chart.js/auto').then((module) => {
                     destroyChart();
 
+                    // In case that the Chart component has been unmounted during asynchronous loading of ChartJS,
+                    // the canvasRef will not be available anymore, and no Chart should be created.
+                    if (!canvasRef.current) {
+                        return;
+                    }
+
                     if (module) {
                         if (module.default) {
                             // WebPack
