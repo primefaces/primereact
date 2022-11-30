@@ -39,6 +39,7 @@ const PrimeReactChart = React.memo(
                     if (!canvasRef.current) {
                         return;
                     }
+
                     if (module) {
                         if (module.default) {
                             // WebPack
