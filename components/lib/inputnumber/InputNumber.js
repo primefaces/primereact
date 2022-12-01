@@ -891,7 +891,7 @@ export const InputNumber = React.memo(
 
                 _decimal.current.lastIndex = 0;
 
-                return decimalCharIndex !== -1 ? replaceSuffix(val1.split(_decimal.current)[0]) + val2.slice(decimalCharIndex) : val1;
+                return decimalCharIndex !== -1 ? val1.split(_decimal.current)[0] + val2.slice(decimalCharIndex) : val1;
             }
 
             return val1;
@@ -902,15 +902,11 @@ export const InputNumber = React.memo(
                 const valueSplit = value.split(_decimal.current);
 
                 if (valueSplit.length === 2) {
-                    return replaceSuffix(valueSplit[1]).length;
+                    return valueSplit[1].replace(_suffix.current, '').trim().replace(/\s/g, '').replace(_currency.current, '').length;
                 }
             }
 
             return 0;
-        };
-
-        const replaceSuffix = (value) => {
-            return value ? value.replace(_suffix.current, '').trim().replace(/\s/g, '').replace(_currency.current, '') : value;
         };
 
         const updateModel = (event, value) => {
