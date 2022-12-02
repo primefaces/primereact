@@ -529,24 +529,8 @@
                 },
                 {
                     "name": "DataScroller",
-                    "meta": ["datascroller"],
-                    "children": [
-                        {
-                            "name": "Window",
-                            "to": "/datascroller",
-                            "meta": ["window"]
-                        },
-                        {
-                            "name": "Inline",
-                            "to": "/datascroller/inline",
-                            "meta": ["inline"]
-                        },
-                        {
-                            "name": "Loader",
-                            "to": "/datascroller/loader",
-                            "meta": ["loader"]
-                        }
-                    ]
+                    "to": "/datascroller",
+                    "meta": ["datascroller"]
                 },
                 {
                     "name": "VirtualScroller",
@@ -580,49 +564,8 @@
                 },
                 {
                     "name": "Tree",
-                    "meta": ["tree"],
-                    "children": [
-                        {
-                            "name": "Documentation",
-                            "to": "/tree",
-                            "meta": ["documentation"]
-                        },
-                        {
-                            "name": "Selection",
-                            "to": "/tree/selection",
-                            "meta": ["selection"]
-                        },
-                        {
-                            "name": "Events",
-                            "to": "/tree/events",
-                            "meta": ["events"]
-                        },
-                        {
-                            "name": "Lazy",
-                            "to": "/tree/lazy",
-                            "meta": ["lazy"]
-                        },
-                        {
-                            "name": "Templating",
-                            "to": "/tree/templating",
-                            "meta": ["templating"]
-                        },
-                        {
-                            "name": "DragDrop",
-                            "to": "/tree/dragdrop",
-                            "meta": ["dragdrop"]
-                        },
-                        {
-                            "name": "ContextMenu",
-                            "to": "/tree/contextmenu",
-                            "meta": ["contextmenu"]
-                        },
-                        {
-                            "name": "Filter",
-                            "to": "/tree/filter",
-                            "meta": ["filter"]
-                        }
-                    ]
+                    "to": "/tree",
+                    "meta": ["tree"]
                 },
                 {
                     "name": "TreeTable",
