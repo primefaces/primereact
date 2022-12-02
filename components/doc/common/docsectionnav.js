@@ -5,7 +5,7 @@ export function DocSectionNav(props) {
         <div className="w-12rem px-3 hidden xl:block" style={{ flexGrow: 0, flexShrink: 0, flexBasis: 'auto' }}>
             <ul className="list-none p-0 m-0 sticky" style={{ top: '7rem' }}>
                 {props.docs.map((doc) => (
-                    <li className="doc-external-link" key={doc.label}>
+                    <li key={doc.label}>
                         {doc.to ? (
                             <Link href={doc.to}>
                                 <a target={'_blank'} className="flex doc-external-link p-link block p-1 text-color hover:text-primary">
