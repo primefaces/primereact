@@ -55,6 +55,28 @@
             }
         }
     }
+
+        .doc-external-link {
+            display: flex;
+            align-items: center;
+                > i {
+                    color: var(--primary-color);
+                    opacity: .7;
+                    margin-left: .5rem;
+                    display: none;
+                    transition: opacity .3s, colors .3s;
+                }
+            
+            &:hover {
+                > i {
+                display: block;
+    
+                &:hover {
+                    opacity: 1;
+                }
+                }
+            }
+        }
 }
 
 .doc-section-code-tooltip .p-tooltip-text {
