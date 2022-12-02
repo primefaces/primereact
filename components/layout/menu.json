@@ -786,59 +786,8 @@
                 },
                 {
                     "name": "Galleria",
-                    "meta": ["galleria"],
-                    "children": [
-                        {
-                            "name": "Documentation",
-                            "to": "/galleria",
-                            "meta": ["documentation"]
-                        },
-                        {
-                            "name": "Programmatic",
-                            "to": "/galleria/programmatic",
-                            "meta": ["programmatic"]
-                        },
-                        {
-                            "name": "Indicator",
-                            "to": "/galleria/indicator",
-                            "meta": ["indicator"]
-                        },
-                        {
-                            "name": "Thumbnail",
-                            "to": "/galleria/thumbnail",
-                            "meta": ["thumbnail"]
-                        },
-                        {
-                            "name": "Navigator",
-                            "to": "/galleria/navigator",
-                            "meta": ["navigator"]
-                        },
-                        {
-                            "name": "Responsive",
-                            "to": "/galleria/responsive",
-                            "meta": ["responsive"]
-                        },
-                        {
-                            "name": "FullScreen",
-                            "to": "/galleria/fullscreen",
-                            "meta": ["fullscreen"]
-                        },
-                        {
-                            "name": "AutoPlay",
-                            "to": "/galleria/autoplay",
-                            "meta": ["autoplay"]
-                        },
-                        {
-                            "name": "Caption",
-                            "to": "/galleria/caption",
-                            "meta": ["caption"]
-                        },
-                        {
-                            "name": "Advanced",
-                            "to": "/galleria/advanced",
-                            "meta": ["advanced"]
-                        }
-                    ]
+                    "to": "/galleria",
+                    "meta": ["galleria"]
                 },
                 {
                     "name": "Image",

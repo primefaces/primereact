@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
-import { Button } from '../../../lib/button/Button';
-import { Galleria } from '../../../lib/galleria/Galleria';
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { PhotoService } from '../../../../service/PhotoService';
-import { classNames } from '../../../lib/utils/Utils';
+import { Button } from '../../lib/button/Button';
+import { Galleria } from '../../lib/galleria/Galleria';
+import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '../common/docsectioncode';
+import { PhotoService } from '../../../service/PhotoService';
+import { classNames } from '../../lib/utils/Utils';
 import getConfig from 'next/config';
 
 export function AdvancedDoc(props) {

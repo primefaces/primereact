@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Button } from '../../../lib/button/Button';
-import { Galleria } from '../../../lib/galleria/Galleria';
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { PhotoService } from '../../../../service/PhotoService';
+import { Button } from '../../lib/button/Button';
+import { Galleria } from '../../lib/galleria/Galleria';
+import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '../common/docsectioncode';
+import { PhotoService } from '../../../service/PhotoService';
 import getConfig from 'next/config';
 
 export function ProgrammaticDoc(props) {

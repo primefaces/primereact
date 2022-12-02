@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Galleria } from '../../../lib/galleria/Galleria';
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { PhotoService } from '../../../../service/PhotoService';
+import { useState, useEffect, useRef } from 'react';
+import { Galleria } from '../../lib/galleria/Galleria';
+import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '../common/docsectioncode';
+import { PhotoService } from '../../../service/PhotoService';
 import getConfig from 'next/config';
 
-export function CaptionDoc(props) {
+export function AutoPlayDemoDoc(props) {
     const [images, setImages] = useState(null);
     const galleriaService = new PhotoService();
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
@@ -37,28 +37,18 @@ export function CaptionDoc(props) {
         return <img src={`${contextPath}/${item.thumbnailImageSrc}`} alt={item.alt} style={{ display: 'block' }} />;
     };
 
-    const caption = (item) => {
-        return (
-            <React.Fragment>
-                <h4 className="mb-2">{item.title}</h4>
-                <p>{item.alt}</p>
-            </React.Fragment>
-        );
-    };
-
     const code = {
         basic: `
-<Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5}
-    item={itemTemplate} thumbnail={thumbnailTemplate}
-    caption={caption} style={{ maxWidth: '640px' }} />
+<Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
+    item={itemTemplate} thumbnail={thumbnailTemplate} circular autoPlay transitionInterval={2000} />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Galleria } from 'primereact/galleria';
 import { PhotoService } from '../service/PhotoService';
 
-export default function CaptionDoc() {
-    const [images, setImages] = useState(null);
+export default function AutoPlayDemoDoc() {
+    const [images, setImages] = useState(null)
     const galleriaService = new PhotoService();
 
     const responsiveOptions = [
@@ -88,29 +78,19 @@ export default function CaptionDoc() {
         return <img src={item.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.alt} style={{ display: 'block' }} />;
     }
 
-    const caption = (item) => {
-        return (
-            <React.Fragment>
-                <h4 className="mb-2">{item.title}</h4>
-                <p>{item.alt}</p>
-            </React.Fragment>
-        );
-    }
-
     return (
-        <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5}
-            item={itemTemplate} thumbnail={thumbnailTemplate}
-            caption={caption} style={{ maxWidth: '640px' }} />
+        <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
+            item={itemTemplate} thumbnail={thumbnailTemplate} circular autoPlay transitionInterval={2000} />
     )
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Galleria } from 'primereact/galleria';
 import { PhotoService } from '../service/PhotoService';
 
-export default function CaptionDoc() {
-    const [images, setImages] = useState(null);
+export default function AutoPlayDemoDoc() {
+    const [images, setImages] = useState(null)
     const galleriaService = new PhotoService();
 
     const responsiveOptions = [
@@ -139,20 +119,10 @@ export default function CaptionDoc() {
     const thumbnailTemplate = (item) => {
         return <img src={item.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.alt} style={{ display: 'block' }} />;
     }
-
-    const caption = (item) => {
-        return (
-            <React.Fragment>
-                <h4 className="mb-2">{item.title}</h4>
-                <p>{item.alt}</p>
-            </React.Fragment>
-        );
-    }
     
     return (
-        <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5}
-            item={itemTemplate} thumbnail={thumbnailTemplate}
-            caption={caption} style={{ maxWidth: '640px' }} />
+        <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
+            item={itemTemplate} thumbnail={thumbnailTemplate} circular autoPlay transitionInterval={2000} />
     )
 }
         `
@@ -161,10 +131,10 @@ export default function CaptionDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Caption</p>
+                <p>AutoPlay</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} item={itemTemplate} thumbnail={thumbnailTemplate} caption={caption} style={{ maxWidth: '640px' }} />
+                <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }} item={itemTemplate} thumbnail={thumbnailTemplate} circular autoPlay transitionInterval={2000} />
             </div>
             <DocSectionCode code={code} />
         </>

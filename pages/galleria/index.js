@@ -4,6 +4,11 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { ImportDoc } from '../../components/doc/galleria/importdoc';
 import { GaleriaDemo } from '../../components/doc/galleria/galeriademo';
 import { ApiDoc } from '../../components/doc/galleria/apidoc';
+import { ProgrammaticDoc } from '../../components/doc/galleria/programmaticdoc';
+import { ResponsiveDoc } from '../../components/doc/galleria/responsivedoc';
+import { AutoPlayDemoDoc } from '../../components/doc/galleria/autoplaydoc';
+import { CaptionDoc } from '../../components/doc/galleria/captiondoc';
+import { AdvancedDoc } from '../../components/doc/galleria/advanceddoc';
 
 const GalleriaDemo = () => {
     const docs = [
@@ -14,8 +19,49 @@ const GalleriaDemo = () => {
         },
         {
             id: 'galeriademo',
-            label: 'Galeria',
+            label: 'Basic',
             component: GaleriaDemo
+        },
+        {
+            id: 'programmatic',
+            label: 'Programmatic',
+            component: ProgrammaticDoc
+        },
+        {
+            label: 'Indicator',
+            to: '/galleria/indicator'
+        },
+        {
+            label: 'Thumbnail',
+            to: '/galleria/thumbnail'
+        },
+        {
+            label: 'Navigator',
+            to: '/galleria/navigator'
+        },
+        {
+            id: 'responsive',
+            label: 'Responsive',
+            component: ResponsiveDoc
+        },
+        {
+            label: 'FullScreen',
+            to: '/galleria/fullscreen'
+        },
+        {
+            id: 'autoplay',
+            label: 'AutoPlay',
+            component: AutoPlayDemoDoc
+        },
+        {
+            id: 'caption',
+            label: 'Caption',
+            component: CaptionDoc
+        },
+        {
+            id: 'advanced',
+            label: 'Advanced',
+            component: AdvancedDoc
         },
         {
             id: 'api',
