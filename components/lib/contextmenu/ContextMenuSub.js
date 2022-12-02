@@ -48,11 +48,11 @@ export const ContextMenuSub = React.memo((props) => {
 
     const position = () => {
         const parentItem = submenuRef.current.parentElement;
-        const containerOffset = DomHandler.getOffset(submenuRef.current.parentElement);
+        const containerOffset = DomHandler.getOffset(parentItem);
         const viewport = DomHandler.getViewport();
         const sublistWidth = submenuRef.current.offsetParent ? submenuRef.current.offsetWidth : DomHandler.getHiddenElementOuterWidth(submenuRef.current);
         const itemOuterWidth = DomHandler.getOuterWidth(parentItem.children[0]);
-        const top = parseInt(containerOffset.top, 10) + submenuRef.current.offsetHeight;
+        const top = parseInt(containerOffset.top, 10) + submenuRef.current.offsetHeight - DomHandler.getWindowScrollTop();
 
         if (top > viewport.height) {
             submenuRef.current.style.top = viewport.height - top + 'px';
