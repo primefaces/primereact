@@ -341,23 +341,13 @@
             ]
         },
         {
-            "name": "Validation",
-            "meta": ["validation"],
+            "name": "Integration",
+            "meta": ["integration"],
             "children": [
                 {
-                    "name": "Formik",
-                    "to": "/formik",
-                    "meta": ["formik", "validation"]
-                },
-                {
-                    "name": "React Hook Form",
-                    "to": "/reacthookform",
-                    "meta": ["react hook form", "validation"]
-                },
-                {
-                    "name": "React Final Form",
-                    "to": "/reactfinalform",
-                    "meta": ["react final form", "validation"]
+                    "name": "Form Libraries",
+                    "to": "/formlibraries",
+                    "meta": ["formlibraries"]
                 }
             ]
         },
