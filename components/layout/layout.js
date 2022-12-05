@@ -61,7 +61,9 @@ export default function Layout(props) {
         else document.body.classList.remove('blocked-scroll');
     }, [sidebarActive]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    PrimeReact.ripple = true;
+    useEffect(() => {
+        PrimeReact.ripple = ripple;
+    }, [ripple]);
 
     return (
         <div className={wrapperClassName}>
