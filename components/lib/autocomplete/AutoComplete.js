@@ -457,6 +457,10 @@ export const AutoComplete = React.memo(
             if (inputRef.current && !props.multiple) {
                 updateInputField(props.value);
             }
+
+            if (overlayVisibleState) {
+                alignOverlay();
+            }
         });
 
         useUnmountEffect(() => {
