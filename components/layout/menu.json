@@ -516,14 +516,9 @@
                     "meta": ["dataview"],
                     "children": [
                         {
-                            "name": "Documentation",
+                            "name": "DataViews",
                             "to": "/dataview",
-                            "meta": ["documentation"]
-                        },
-                        {
-                            "name": "Lazy",
-                            "to": "/dataview/lazy",
-                            "meta": ["lazy"]
+                            "meta": ["dataviews"]
                         }
                     ]
                 },
