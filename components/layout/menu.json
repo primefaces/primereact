@@ -18,6 +18,12 @@
                     "name": "Locale",
                     "to": "/locale",
                     "meta": ["i18N", "locale", "translate", "internationalization"]
+                },
+                {
+                    "name": "Roadmap",
+                    "to": "/roadmap",
+                    "meta": ["roadmap", "strategy", "blueprint", "plan", "goal", "objective"],
+                    "badge": "new"
                 }
             ]
         },
