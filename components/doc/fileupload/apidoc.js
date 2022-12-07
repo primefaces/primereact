@@ -1,6 +1,4 @@
 import Link from 'next/link';
-import { CodeHighlight } from '../common/codehighlight';
-import { DevelopmentSection } from '../common/developmentsection';
 import { DocSectionText } from '../common/docsectiontext';
 import { DocSubSection } from '../common/docsubsection';
 
@@ -331,6 +329,16 @@ export function ApiDoc(props) {
                                 <td>clear</td>
                                 <td>-</td>
                                 <td>Clears the files list.</td>
+                            </tr>
+                            <tr>
+                                <td>getFiles</td>
+                                <td>-</td>
+                                <td>Gets the current files list.</td>
+                            </tr>
+                            <tr>
+                                <td>setFiles</td>
+                                <td>File[]</td>
+                                <td>Sets the current files list.</td>
                             </tr>
                         </tbody>
                     </table>
