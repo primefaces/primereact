@@ -119,12 +119,12 @@ import 'primeicons/primeicons.css';
 `}
                 </CodeHighlight>
 
-                <ul>
-                    <li><i className="pi pi-fw pi-star-fill" style={{ fontSize: '2em' }}></i></li>
-                    <li><i className="pi pi-fw pi-star-fill" style={{ fontSize: '2em' }}></i></li>
-                    <li><i className="pi pi-fw pi-star-fill" style={{ fontSize: '2em' }}></i></li>
-                    <li><i className="pi pi-fw pi-star" style={{ fontSize: '2em' }}></i></li>
-                    <li><i className="pi pi-fw pi-star" style={{ fontSize: '2em' }}></i></li>
+                <ul className="list-none p-0">
+                    <li className="inline"><i className="pi pi-fw pi-star-fill" style={{ fontSize: '2em' }}></i></li>
+                    <li className="inline"><i className="pi pi-fw pi-star-fill" style={{ fontSize: '2em' }}></i></li>
+                    <li className="inline"><i className="pi pi-fw pi-star-fill" style={{ fontSize: '2em' }}></i></li>
+                    <li className="inline"><i className="pi pi-fw pi-star-fill" style={{ fontSize: '2em' }}></i></li>
+                    <li className="inline"><i className="pi pi-fw pi-star" style={{ fontSize: '2em' }}></i></li>
                 </ul>
 
                 <h5>Constants</h5>
