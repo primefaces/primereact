@@ -110,7 +110,7 @@ export const Menu = React.memo(
 
         const onEnter = () => {
             ZIndexUtils.set('menu', menuRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['menu']);
-            DomHandler.absolutePosition(menuRef.current, targetRef.current);
+            DomHandler.absolutePosition(menuRef.current, targetRef.current, props.popupAlignment);
         };
 
         const onEntered = () => {
@@ -270,15 +270,16 @@ export const Menu = React.memo(
 Menu.displayName = 'Menu';
 Menu.defaultProps = {
     __TYPE: 'Menu',
-    id: null,
-    model: null,
-    popup: false,
-    style: null,
-    className: null,
+    appendTo: null,
     autoZIndex: true,
     baseZIndex: 0,
-    appendTo: null,
-    transitionOptions: null,
+    className: null,
+    id: null,
+    model: null,
+    onHide: null,
     onShow: null,
-    onHide: null
+    popup: false,
+    popupAlignment: 'left',
+    style: null,
+    transitionOptions: null
 };

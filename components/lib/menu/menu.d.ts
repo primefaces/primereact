@@ -1,19 +1,22 @@
 import * as React from 'react';
-import { MenuItem } from '../menuitem';
 import { CSSTransitionProps } from '../csstransition';
+import { MenuItem } from '../menuitem';
 
 type MenuAppendToType = 'self' | HTMLElement | undefined | null;
 
+type MenuAlignmentType = 'left' | 'right';
+
 export interface MenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
-    model?: MenuItem[];
-    popup?: boolean;
+    appendTo?: MenuAppendToType;
     autoZIndex?: boolean;
     baseZIndex?: number;
-    appendTo?: MenuAppendToType;
-    transitionOptions?: CSSTransitionProps;
-    onShow?(e: React.SyntheticEvent): void;
-    onHide?(e: React.SyntheticEvent): void;
     children?: React.ReactNode;
+    model?: MenuItem[];
+    popup?: boolean;
+    popupAlignment?: MenuAlignmentType;
+    transitionOptions?: CSSTransitionProps;
+    onHide?(e: React.SyntheticEvent): void;
+    onShow?(e: React.SyntheticEvent): void;
 }
 
 export declare class Menu extends React.Component<MenuProps, any> {

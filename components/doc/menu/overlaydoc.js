@@ -6,7 +6,8 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function OverlayDoc(props) {
-    const menu = useRef(null);
+    const menuLeft = useRef(null);
+    const menuRight = useRef(null);
     const toast = useRef(null);
     const items = [
         {
@@ -32,7 +33,7 @@ export function OverlayDoc(props) {
             label: 'Navigate',
             items: [
                 {
-                    label: 'React Website',
+                    label: 'React Docs Website',
                     icon: 'pi pi-external-link',
                     url: 'https://reactjs.org/'
                 },
@@ -48,9 +49,11 @@ export function OverlayDoc(props) {
     ];
     const code = {
         basic: `
-<Toast ref={toast}></Toast>
-<Menu model={items} popup ref={menu} id="popup_menu" />
-<Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)} aria-controls="popup_menu" aria-haspopup />      
+<Toast ref={toast} />
+<Menu model={items} popup ref={menuLeft} id="popup_menu_left" />
+<Button label="Show Left" icon="pi pi-align-left" className="mr-2" onClick={(event) => menuLeft.current.toggle(event)} aria-controls="popup_menu_left" aria-haspopup />
+<Menu model={items} popup ref={menuRight} id="popup_menu_right" popupAlignment="right" />
+<Button label="Show Right" icon="pi pi-align-right" className="mr-2" onClick={(event) => menuRight.current.toggle(event)} aria-controls="popup_menu_right" aria-haspopup />
 `,
         javascript: `
 import { useRef } from 'react';
@@ -59,7 +62,8 @@ import { Menu } from 'primereact/menu';
 import { Toast } from 'primereact/toast';
 
 export default function OverlayDoc() {
-    const menu = useRef(null);
+    const menuLeft = useRef(null);
+    const menuRight = useRef(null);
     const toast = useRef(null);
     const items = [
         {
@@ -85,7 +89,7 @@ export default function OverlayDoc() {
             label: 'Navigate',
             items: [
                 {
-                    label: 'React Website',
+                    label: 'React Docs Website',
                     icon: 'pi pi-external-link',
                     url: 'https://reactjs.org/'
                 },
@@ -103,8 +107,10 @@ export default function OverlayDoc() {
     return (
         <div>
             <Toast ref={toast}></Toast>
-            <Menu model={items} popup ref={menu} id="popup_menu" />
-            <Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)} aria-controls="popup_menu" aria-haspopup />
+            <Menu model={items} popup ref={menuLeft} id="popup_menu_left" />
+            <Button label="Show Left" icon="pi pi-align-left" className="mr-2" onClick={(event) => menuLeft.current.toggle(event)} aria-controls="popup_menu_left" aria-haspopup />
+            <Menu model={items} popup ref={menuRight} id="popup_menu_right" popupAlignment="right" />
+            <Button label="Show Right" icon="pi pi-align-right" className="mr-2" onClick={(event) => menuRight.current.toggle(event)} aria-controls="popup_menu_right" aria-haspopup />
         </div>
     )
 }
@@ -116,9 +122,10 @@ import { Menu } from 'primereact/menu';
 import { Toast } from 'primereact/toast';
 
 export default function OverlayDoc() {
-    const menu = useRef(null);
+    const menuLeft = useRef<Menu>(null);
+    const menuRight = useRef<Menu>(null);
     const toast = useRef<Toast>(null);
-    const items = [
+    const items: MenuItem[] = [
         {
             label: 'Options',
             items: [
@@ -142,7 +149,7 @@ export default function OverlayDoc() {
             label: 'Navigate',
             items: [
                 {
-                    label: 'React Website',
+                    label: 'React Docs Website',
                     icon: 'pi pi-external-link',
                     url: 'https://reactjs.org/'
                 },
@@ -160,8 +167,10 @@ export default function OverlayDoc() {
     return (
         <div>
             <Toast ref={toast}></Toast>
-            <Menu model={items} popup ref={menu} id="popup_menu" />
-            <Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)} aria-controls="popup_menu" aria-haspopup />
+            <Menu model={items} popup ref={menuLeft} id="popup_menu_left" />
+            <Button label="Show Left" icon="pi pi-align-left" className="mr-2" onClick={(event) => menuLeft.current.toggle(event)} aria-controls="popup_menu_left" aria-haspopup />
+            <Menu model={items} popup ref={menuRight} id="popup_menu_right" popupAlignment="right" />
+            <Button label="Show Right" icon="pi pi-align-right" className="mr-2" onClick={(event) => menuRight.current.toggle(event)} aria-controls="popup_menu_right" aria-haspopup />
         </div>
     )
 }
@@ -171,12 +180,17 @@ export default function OverlayDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Menu is inline by default whereas popup mode is supported by enabling popup property and calling toggle method with an event of the target.</p>
+                <p>
+                    Menu is inline by default whereas popup mode is supported by enabling popup property and calling toggle method with an event of the target. The <i>popupAlignment</i> property allows you to control how the overlay is aligned with
+                    its target.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Toast ref={toast}></Toast>
-                <Menu model={items} popup ref={menu} id="popup_menu" />
-                <Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)} aria-controls="popup_menu" aria-haspopup />
+                <Menu model={items} popup ref={menuLeft} id="popup_menu_left" />
+                <Button label="Show Left" icon="pi pi-align-left" className="mr-2" onClick={(event) => menuLeft.current.toggle(event)} aria-controls="popup_menu_left" aria-haspopup />
+                <Menu model={items} popup ref={menuRight} id="popup_menu_right" popupAlignment="right" />
+                <Button label="Show Right" icon="pi pi-align-right" className="mr-2" onClick={(event) => menuRight.current.toggle(event)} aria-controls="popup_menu_right" aria-haspopup />
             </div>
             <DocSectionCode code={code} />
         </>

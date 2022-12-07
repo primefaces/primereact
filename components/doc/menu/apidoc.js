@@ -38,6 +38,12 @@ export function ApiDoc(props) {
                                 <td>Defines if menu would displayed as a popup.</td>
                             </tr>
                             <tr>
+                                <td>popupAlignment</td>
+                                <td>string</td>
+                                <td>left</td>
+                                <td>In popup mode determines how the overlay is aligned with its target. Values either 'left' or 'right'.</td>
+                            </tr>
+                            <tr>
                                 <td>style</td>
                                 <td>string</td>
                                 <td>null</td>
