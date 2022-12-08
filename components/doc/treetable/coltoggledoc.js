@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from '../../lib/treetable/TreeTable';
-import { Column } from '../../lib/column/column';
+import { Column } from '../../lib/column/Column';
 import { MultiSelect } from '../../lib/multiselect/MultiSelect';
 import { NodeService } from '../../../service/NodeService';
 import { DocSectionCode } from '../common/docsectioncode';
