@@ -553,6 +553,13 @@ export default function Topbar(props) {
                                 PREMIUM ADMIN TEMPLATES
                             </li>
                             <li role="none">
+                                <a href="https://www.primefaces.org/layouts/apollo-react" role="menuitem" rel="noopener noreferrer" target="_blank">
+                                    <img src={`${contextPath}/images/layouts/themeswitcher-apollo.svg`} alt="Apollo" />
+                                    <span>Apollo</span>
+                                    <Badge value="New" severity="success"></Badge>
+                                </a>
+                            </li>
+                            <li role="none">
                                 <a href="https://www.primefaces.org/layouts/atlantis-react" role="menuitem" rel="noopener noreferrer" target="_blank">
                                     <img src={`${contextPath}/images/layouts/themeswitcher-atlantis.svg`} alt="Atlantis" />
                                     <span>Atlantis</span>
@@ -609,13 +616,6 @@ export default function Topbar(props) {
                                 <a href="https://www.primefaces.org/layouts/babylon-react" role="menuitem" rel="noopener noreferrer" target="_blank">
                                     <img src={`${contextPath}/images/layouts/themeswitcher-babylon.png`} alt="Babylon" />
                                     <span>Babylon</span>
-                                </a>
-                            </li>
-                            <li role="none">
-                                <a href="https://www.primefaces.org/layouts/apollo-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                    <img src={`${contextPath}/images/layouts/themeswitcher-apollo.png`} alt="Apollo" />
-                                    <span>Apollo</span>
-                                    <Badge value="Dark Mode" severity="warning"></Badge>
                                 </a>
                             </li>
                         </ul>
