@@ -230,7 +230,9 @@ export const Menu = React.memo(
                 const className = classNames(
                     'p-menu p-component',
                     {
-                        'p-menu-overlay': props.popup
+                        'p-menu-overlay': props.popup,
+                        'p-input-filled': PrimeReact.inputStyle === 'filled',
+                        'p-ripple-disabled': PrimeReact.ripple === false
                     },
                     props.className
                 );

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { localeOption } from '../api/Api';
+import PrimeReact, { localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
@@ -202,7 +202,9 @@ export const MultiSelectPanel = React.memo(
                 {
                     'p-multiselect-inline': props.inline,
                     'p-multiselect-flex': props.flex,
-                    'p-multiselect-limited': !allowOptionSelect
+                    'p-multiselect-limited': !allowOptionSelect,
+                    'p-input-filled': PrimeReact.inputStyle === 'filled',
+                    'p-ripple-disabled': PrimeReact.ripple === false
                 },
                 props.panelClassName
             );

@@ -142,7 +142,9 @@ export const Galleria = React.memo(
                 {
                     'p-galleria-fullscreen': props.fullScreen,
                     'p-galleria-indicator-onitem': props.showIndicatorsOnItem,
-                    'p-galleria-item-nav-onhover': props.showItemNavigatorsOnHover && !props.fullScreen
+                    'p-galleria-item-nav-onhover': props.showItemNavigatorsOnHover && !props.fullScreen,
+                    'p-input-filled': PrimeReact.inputStyle === 'filled',
+                    'p-ripple-disabled': PrimeReact.ripple === false
                 },
                 thumbnailsPosClassName,
                 indicatorPosClassName
