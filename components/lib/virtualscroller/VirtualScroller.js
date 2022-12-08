@@ -46,6 +46,7 @@ export const VirtualScroller = React.memo(
 
             if (both) {
                 const newFirst = { rows: calculateFirst(index[0], numToleratedItems[0]), cols: calculateFirst(index[1], numToleratedItems[1]) };
+
                 if (newFirst.rows !== firstState.rows || newFirst.cols !== firstState.cols) {
                     scrollToItem(calculateCoord(newFirst.cols, props.itemSize[1]), calculateCoord(newFirst.rows, props.itemSize[0]));
                 }
@@ -75,6 +76,7 @@ export const VirtualScroller = React.memo(
                     } else {
                         if (viewport.first - first > index) {
                             const pos = (viewport.first - 1) * props.itemSize;
+
                             horizontal ? scrollToItem(pos, 0) : scrollToItem(0, pos);
                         }
                     }
@@ -88,6 +90,7 @@ export const VirtualScroller = React.memo(
                     } else {
                         if (viewport.last - first <= index + 1) {
                             const pos = (viewport.first + 1) * props.itemSize;
+
                             horizontal ? scrollToItem(pos, 0) : scrollToItem(0, pos);
                         }
                     }
@@ -123,6 +126,7 @@ export const VirtualScroller = React.memo(
                     lastInViewport = { rows: firstInViewport.rows + numItemsInViewportState.rows, cols: firstInViewport.cols + numItemsInViewportState.cols };
                 } else {
                     const scrollPos = horizontal ? scrollLeft : scrollTop;
+
                     firstInViewport = calculateFirstInViewport(scrollPos, props.itemSize);
                     lastInViewport = firstInViewport + numItemsInViewportState;
                 }
@@ -243,6 +247,7 @@ export const VirtualScroller = React.memo(
             if (contentRef.current) {
                 const first = pos ? pos.first : firstState;
                 const calculateTranslateVal = (_first, _size) => _first * _size;
+
                 const setTransform = (_x = 0, _y = 0) => {
                     stickyRef.current && (stickyRef.current.style.top = `-${_y}px`);
                     contentRef.current.style.transform = `translate3d(${_x}px, ${_y}px, 0)`;
@@ -252,6 +257,7 @@ export const VirtualScroller = React.memo(
                     setTransform(calculateTranslateVal(first.cols, props.itemSize[1]), calculateTranslateVal(first.rows, props.itemSize[0]));
                 } else {
                     const translateVal = calculateTranslateVal(first, props.itemSize);
+
                     horizontal ? setTransform(translateVal, 0) : setTransform(0, translateVal);
                 }
             }
@@ -262,13 +268,16 @@ export const VirtualScroller = React.memo(
             const contentPos = getContentPosition();
             const calculateScrollPos = (_pos, _cpos) => (_pos ? (_pos > _cpos ? _pos - _cpos : _pos) : 0);
             const calculateCurrentIndex = (_pos, _size) => Math.floor(_pos / (_size || _pos));
+
             const calculateTriggerIndex = (_currentIndex, _first, _last, _num, _numT, _isScrollDownOrRight) => {
                 return _currentIndex <= _numT ? _numT : _isScrollDownOrRight ? _last - _num - _numT : _first + _numT - 1;
             };
+
             const calculateFirst = (_currentIndex, _triggerIndex, _first, _last, _num, _numT, _isScrollDownOrRight) => {
                 if (_currentIndex <= _numT) return 0;
                 else return Math.max(0, _isScrollDownOrRight ? (_currentIndex < _triggerIndex ? _first : _currentIndex - _numT) : _currentIndex > _triggerIndex ? _first : _currentIndex - 2 * _numT);
             };
+
             const calculateLast = (_currentIndex, _first, _last, _num, _numT, _isCols) => {
                 let lastValue = _first + _num + 2 * _numT;
 
@@ -357,6 +366,7 @@ export const VirtualScroller = React.memo(
 
                 if (!loadingState && props.showLoader) {
                     const { isRangeChanged: changed } = onScrollPositionChange(event);
+
                     changed && setLoadingState(true);
                 }
 
@@ -475,6 +485,7 @@ export const VirtualScroller = React.memo(
             }
 
             let loading = loadingState;
+
             if (props.lazy && prevLoading !== props.loading && props.loading !== loadingState) {
                 setLoadingState(props.loading);
                 loading = props.loading;

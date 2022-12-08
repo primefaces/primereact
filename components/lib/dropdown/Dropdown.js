@@ -14,7 +14,7 @@ export const Dropdown = React.memo(
         const elementRef = React.useRef(null);
         const overlayRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
-        const focusInputRef = React.useRef(null);
+        const focusInputRef = React.useRef(props.focusInputRef);
         const searchTimeout = React.useRef(null);
         const searchValue = React.useRef(null);
         const currentSearchChar = React.useRef(null);
@@ -40,12 +40,15 @@ export const Dropdown = React.memo(
 
                 if (props.optionGroupLabel) {
                     let filteredGroups = [];
+
                     for (let optgroup of props.options) {
                         let filteredSubOptions = FilterService.filter(getOptionGroupChildren(optgroup), searchFields, filterValue, props.filterMatchMode, props.filterLocale);
+
                         if (filteredSubOptions && filteredSubOptions.length) {
                             filteredGroups.push({ ...optgroup, ...{ items: filteredSubOptions } });
                         }
                     }
+
                     return filteredGroups;
                 } else {
                     return FilterService.filter(props.options, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
@@ -87,6 +90,7 @@ export const Dropdown = React.memo(
             if (props.onBlur) {
                 setTimeout(() => {
                     const currentValue = inputRef.current ? inputRef.current.value : undefined;
+
                     props.onBlur({
                         originalEvent: event.originalEvent,
                         value: currentValue,
@@ -214,11 +218,13 @@ export const Dropdown = React.memo(
 
         const findNextOptionInList = (list, index) => {
             const i = index + 1;
+
             if (i === list.length) {
                 return null;
             }
 
             const option = list[i];
+
             return isOptionDisabled(option) ? findNextOptionInList(i) : option;
         };
 
@@ -242,11 +248,13 @@ export const Dropdown = React.memo(
 
         const findPrevOptionInList = (list, index) => {
             const i = index - 1;
+
             if (i < 0) {
                 return null;
             }
 
             const option = list[i];
+
             return isOptionDisabled(option) ? findPrevOption(i) : option;
         };
 
@@ -256,6 +264,7 @@ export const Dropdown = React.memo(
             }
 
             const char = event.key;
+
             if (char === 'Shift' || char === 'Control' || char === 'Alt') {
                 return;
             }
@@ -268,6 +277,7 @@ export const Dropdown = React.memo(
             if (searchValue.current) {
                 const searchIndex = getSelectedOptionIndex();
                 const newOption = props.optionGroupLabel ? searchOptionInGroup(searchIndex) : searchOption(searchIndex + 1);
+
                 if (newOption) {
                     selectItem({
                         originalEvent: event,
@@ -292,6 +302,7 @@ export const Dropdown = React.memo(
         const searchOptionInRange = (start, end) => {
             for (let i = start; i < end; i++) {
                 const opt = visibleOptions[i];
+
                 if (matchesSearchValue(opt)) {
                     return opt;
                 }
@@ -305,6 +316,7 @@ export const Dropdown = React.memo(
 
             for (let i = searchIndex.group; i < visibleOptions.length; i++) {
                 let groupOptions = getOptionGroupChildren(visibleOptions[i]);
+
                 for (let j = searchIndex.group === i ? searchIndex.option + 1 : 0; j < groupOptions.length; j++) {
                     if (matchesSearchValue(groupOptions[j])) {
                         return groupOptions[j];
@@ -314,6 +326,7 @@ export const Dropdown = React.memo(
 
             for (let i = 0; i <= searchIndex.group; i++) {
                 let groupOptions = getOptionGroupChildren(visibleOptions[i]);
+
                 for (let j = 0; j < (searchIndex.group === i ? searchIndex.option : groupOptions.length); j++) {
                     if (matchesSearchValue(groupOptions[j])) {
                         return groupOptions[j];
@@ -326,10 +339,13 @@ export const Dropdown = React.memo(
 
         const matchesSearchValue = (option) => {
             let label = getOptionLabel(option);
+
             if (!label) {
                 return false;
             }
+
             label = label.toLocaleLowerCase(props.filterLocale);
+
             return label.startsWith(searchValue.current.toLocaleLowerCase(props.filterLocale));
         };
 
@@ -435,6 +451,7 @@ export const Dropdown = React.memo(
                 if (props.optionGroupLabel) {
                     for (let i = 0; i < options.length; i++) {
                         let selectedOptionIndex = findOptionIndexInList(props.value, getOptionGroupChildren(options[i]));
+
                         if (selectedOptionIndex !== -1) {
                             return { group: i, option: selectedOptionIndex };
                         }
@@ -453,6 +470,7 @@ export const Dropdown = React.memo(
 
         const findOptionIndexInList = (value, list) => {
             const key = equalityKey();
+
             return list.findIndex((item) => ObjectUtils.equals(value, getOptionValue(item), key));
         };
 
@@ -501,6 +519,7 @@ export const Dropdown = React.memo(
 
         const scrollInView = () => {
             const highlightItem = DomHandler.findSingle(overlayRef.current, 'li.p-highlight');
+
             if (highlightItem && highlightItem.scrollIntoView) {
                 highlightItem.scrollIntoView({ block: 'nearest', inline: 'nearest' });
             }
@@ -548,6 +567,7 @@ export const Dropdown = React.memo(
             if (props.editable && inputRef.current) {
                 const label = selectedOption ? getOptionLabel(selectedOption) : null;
                 const value = label || props.value || '';
+
                 inputRef.current.value = value;
             }
         };
@@ -570,7 +590,8 @@ export const Dropdown = React.memo(
 
         React.useEffect(() => {
             ObjectUtils.combinedRefs(inputRef, props.inputRef);
-        }, [inputRef, props.inputRef]);
+            ObjectUtils.combinedRefs(focusInputRef, props.focusInputRef);
+        }, [inputRef, props.inputRef, focusInputRef, props.focusInputRef]);
 
         useMountEffect(() => {
             if (props.autoFocus) {
@@ -585,10 +606,10 @@ export const Dropdown = React.memo(
         }, [overlayVisibleState, props.value]);
 
         useUpdateEffect(() => {
-            if (overlayVisibleState && props.filter) {
+            if (overlayVisibleState && filterState && props.filter) {
                 alignOverlay();
             }
-        }, [overlayVisibleState, props.filter]);
+        }, [overlayVisibleState, filterState, props.filter]);
 
         useUpdateEffect(() => {
             if (filterState && (!props.options || props.options.length === 0)) {
@@ -596,6 +617,7 @@ export const Dropdown = React.memo(
             }
 
             updateInputField();
+
             if (inputRef.current) {
                 inputRef.current.selectedIndex = 1;
             }
@@ -610,6 +632,7 @@ export const Dropdown = React.memo(
 
             if (selectedOption) {
                 const optionValue = getOptionValue(selectedOption);
+
                 option = {
                     value: typeof optionValue === 'object' ? props.options.findIndex((o) => o === optionValue) : optionValue,
                     label: getOptionLabel(selectedOption)
@@ -639,8 +662,7 @@ export const Dropdown = React.memo(
                         onKeyDown={onInputKeyDown}
                         disabled={props.disabled}
                         tabIndex={props.tabIndex}
-                        aria-label={props.ariaLabel}
-                        aria-labelledby={props.ariaLabelledBy}
+                        {...ariaProps}
                     />
                 </div>
             );
@@ -664,9 +686,8 @@ export const Dropdown = React.memo(
                         onInput={onEditableInputChange}
                         onFocus={onEditableInputFocus}
                         onBlur={onInputBlur}
-                        aria-label={props.ariaLabel}
-                        aria-labelledby={props.ariaLabelledBy}
                         aria-haspopup="listbox"
+                        {...ariaProps}
                     />
                 );
             } else {
@@ -694,9 +715,10 @@ export const Dropdown = React.memo(
 
         const createDropdownIcon = () => {
             const iconClassName = classNames('p-dropdown-trigger-icon p-clickable', props.dropdownIcon);
+            const ariaLabel = props.placeholder || props.ariaLabel;
 
             return (
-                <div className="p-dropdown-trigger" role="button" aria-haspopup="listbox" aria-expanded={overlayVisibleState}>
+                <div className="p-dropdown-trigger" role="button" aria-haspopup="listbox" aria-expanded={overlayVisibleState} aria-label={ariaLabel}>
                     <span className={iconClassName}></span>
                 </div>
             );
@@ -707,6 +729,7 @@ export const Dropdown = React.memo(
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = ObjectUtils.findDiffKeys(props, Dropdown.defaultProps);
+        const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-dropdown p-component p-inputwrapper',
             {
@@ -769,60 +792,61 @@ export const Dropdown = React.memo(
 Dropdown.displayName = 'Dropdown';
 Dropdown.defaultProps = {
     __TYPE: 'Dropdown',
-    id: null,
-    inputRef: null,
-    name: null,
-    value: null,
-    options: null,
-    optionLabel: null,
-    optionValue: null,
-    optionDisabled: null,
-    optionGroupLabel: null,
-    optionGroupChildren: null,
-    optionGroupTemplate: null,
-    filterTemplate: null,
-    valueTemplate: null,
-    itemTemplate: null,
-    style: null,
-    className: null,
-    virtualScrollerOptions: null,
-    scrollHeight: '200px',
-    filter: false,
-    filterBy: null,
-    filterMatchMode: 'contains',
-    filterPlaceholder: null,
-    filterLocale: undefined,
-    emptyMessage: null,
-    emptyFilterMessage: null,
-    editable: false,
-    placeholder: null,
-    required: false,
-    disabled: false,
     appendTo: null,
-    tabIndex: null,
-    autoFocus: false,
-    filterInputAutoFocus: true,
-    resetFilterOnHide: false,
-    showFilterClear: false,
-    panelClassName: null,
-    panelStyle: null,
-    dataKey: null,
-    inputId: null,
-    showClear: false,
-    maxLength: null,
-    tooltip: null,
-    tooltipOptions: null,
     ariaLabel: null,
     ariaLabelledBy: null,
-    transitionOptions: null,
+    autoFocus: false,
+    className: null,
+    dataKey: null,
+    disabled: false,
     dropdownIcon: 'pi pi-chevron-down',
-    showOnFocus: false,
-    onChange: null,
-    onFocus: null,
+    editable: false,
+    emptyFilterMessage: null,
+    emptyMessage: null,
+    filter: false,
+    filterBy: null,
+    filterInputAutoFocus: true,
+    filterLocale: undefined,
+    filterMatchMode: 'contains',
+    filterPlaceholder: null,
+    filterTemplate: null,
+    focusInputRef: null,
+    id: null,
+    inputId: null,
+    inputRef: null,
+    itemTemplate: null,
+    maxLength: null,
+    name: null,
     onBlur: null,
-    onMouseDown: null,
+    onChange: null,
     onContextMenu: null,
-    onShow: null,
+    onFilter: null,
+    onFocus: null,
     onHide: null,
-    onFilter: null
+    onMouseDown: null,
+    onShow: null,
+    optionDisabled: null,
+    optionGroupChildren: null,
+    optionGroupLabel: null,
+    optionGroupTemplate: null,
+    optionLabel: null,
+    optionValue: null,
+    options: null,
+    panelClassName: null,
+    panelStyle: null,
+    placeholder: null,
+    required: false,
+    resetFilterOnHide: false,
+    scrollHeight: '200px',
+    showClear: false,
+    showFilterClear: false,
+    showOnFocus: false,
+    style: null,
+    tabIndex: null,
+    tooltip: null,
+    tooltipOptions: null,
+    transitionOptions: null,
+    value: null,
+    valueTemplate: null,
+    virtualScrollerOptions: null
 };

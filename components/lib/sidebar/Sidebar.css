@@ -16,11 +16,6 @@
     display: flex;
 }
 
-/* Github #3122: Prevent animation flickering */
-.p-sidebar:not([class*="p-sidebar-"]){
-    display: none;
-}
-
 .p-sidebar-mask.p-component-overlay {
     pointer-events: auto;
 }
@@ -31,6 +26,11 @@
     pointer-events: auto;
     transform: translate3d(0px, 0px, 0px);
     position: relative;
+}
+
+/* Github #3122: Prevent animation flickering */
+.p-sidebar:not([class*="p-sidebar-"]){
+    display: none;
 }
 
 .p-sidebar-content {

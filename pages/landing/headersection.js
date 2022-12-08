@@ -8,12 +8,15 @@ const HeaderSection = (props) => {
     const [menuActive, setMenuActive] = useState(false);
     const colorSchemeIcon = classNames('pi', { 'pi-sun': props.dark, 'pi-moon': !props.dark });
     const containerElement = useRef(null);
+
     const changeColorScheme = () => {
         props.onToggleColorScheme();
     };
+
     const headerClassName = classNames('landing-header pad-section', { 'landing-header-active': menuActive });
 
     const scrollListener = useRef();
+
     const bindScrollListener = () => {
         scrollListener.current = () => {
             if (containerElement && containerElement.current) {
@@ -21,6 +24,7 @@ const HeaderSection = (props) => {
                 else containerElement.current.classList.remove('landing-header-sticky');
             }
         };
+
         window.addEventListener('scroll', scrollListener.current);
     };
 
@@ -33,6 +37,7 @@ const HeaderSection = (props) => {
 
     useEffect(() => {
         bindScrollListener();
+
         return function unbind() {
             unbindScrollListener();
         };

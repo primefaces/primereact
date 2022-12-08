@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ariaLabel } from '../api/Api';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
@@ -37,26 +38,36 @@ export const TabView = React.forwardRef((props, ref) => {
     };
 
     const onTabHeaderClose = (event, index) => {
+        event.preventDefault();
+
+        // give caller a chance to stop the selection
+        if (props.onBeforeTabClose && props.onBeforeTabClose({ originalEvent: event, index }) === false) {
+            return;
+        }
+
         setHiddenTabsState([...hiddenTabsState, index]);
 
         if (props.onTabClose) {
             props.onTabClose({ originalEvent: event, index });
         }
-
-        event.preventDefault();
     };
 
     const onTabHeaderClick = (event, tab, index) => {
+        if (event) {
+            event.preventDefault();
+        }
+
         if (!tab.props.disabled) {
+            // give caller a chance to stop the selection
+            if (props.onBeforeTabChange && props.onBeforeTabChange({ originalEvent: event, index }) === false) {
+                return;
+            }
+
             if (props.onTabChange) props.onTabChange({ originalEvent: event, index });
             else setActiveIndexState(index);
         }
 
         updateScrollBar(index);
-
-        if (event) {
-            event.preventDefault();
-        }
     };
 
     const onKeyDown = (event, tab, index) => {
@@ -134,6 +145,7 @@ export const TabView = React.forwardRef((props, ref) => {
     useUpdateEffect(() => {
         if (ObjectUtils.isNotEmpty(hiddenTabsState)) {
             const tabInfo = findVisibleActiveTab(hiddenTabsState[hiddenTabsState.length - 1]);
+
             tabInfo && onTabHeaderClick(null, tabInfo.tab, tabInfo.index);
         }
     }, [hiddenTabsState]);
@@ -249,7 +261,7 @@ export const TabView = React.forwardRef((props, ref) => {
     const createPrevButton = () => {
         if (props.scrollable && !backwardIsDisabledState) {
             return (
-                <button ref={prevBtnRef} className="p-tabview-nav-prev p-tabview-nav-btn p-link" onClick={navBackward} type="button">
+                <button ref={prevBtnRef} className="p-tabview-nav-prev p-tabview-nav-btn p-link" onClick={navBackward} type="button" aria-label={ariaLabel('previousPageLabel')}>
                     <span className="pi pi-chevron-left"></span>
                     <Ripple />
                 </button>
@@ -262,8 +274,8 @@ export const TabView = React.forwardRef((props, ref) => {
     const createNextButton = () => {
         if (props.scrollable && !forwardIsDisabledState) {
             return (
-                <button ref={nextBtnRef} className="p-tabview-nav-next p-tabview-nav-btn p-link" onClick={navForward} type="button">
-                    <span className="pi pi-chevron-right"></span>
+                <button ref={nextBtnRef} className="p-tabview-nav-next p-tabview-nav-btn p-link" onClick={navForward} type="button" aria-label={ariaLabel('nextPageLabel')}>
+                    <span className="pi pi-chevron-right" aria-hidden="true"></span>
                     <Ripple />
                 </button>
             );
@@ -298,18 +310,18 @@ export const TabView = React.forwardRef((props, ref) => {
 TabPanel.displayName = 'TabPanel';
 TabPanel.defaultProps = {
     __TYPE: 'TabPanel',
+    className: null,
+    closable: false,
+    contentClassName: null,
+    contentStyle: null,
+    disabled: false,
     header: null,
+    headerClassName: null,
+    headerStyle: null,
     headerTemplate: null,
     leftIcon: null,
     rightIcon: null,
-    closable: false,
-    disabled: false,
-    style: null,
-    className: null,
-    headerStyle: null,
-    headerClassName: null,
-    contentStyle: null,
-    contentClassName: null
+    style: null
 };
 
 TabView.displayName = 'TabView';
@@ -317,12 +329,14 @@ TabView.defaultProps = {
     __TYPE: 'TabView',
     id: null,
     activeIndex: 0,
-    style: null,
     className: null,
-    renderActiveOnly: true,
+    onBeforeTabChange: null,
+    onBeforeTabClose: null,
     onTabChange: null,
     onTabClose: null,
-    scrollable: false,
+    panelContainerClassName: null,
     panelContainerStyle: null,
-    panelContainerClassName: null
+    renderActiveOnly: true,
+    scrollable: false,
+    style: null
 };

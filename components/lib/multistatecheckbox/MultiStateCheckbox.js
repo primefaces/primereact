@@ -1,8 +1,8 @@
 import * as React from 'react';
+import { ariaLabel } from '../api/Api';
 import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { ariaLabel } from '../api/Api';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const MultiStateCheckbox = React.memo(
     React.forwardRef((props, ref) => {
@@ -22,6 +22,7 @@ export const MultiStateCheckbox = React.memo(
 
         const getOptionAriaLabel = (option) => {
             const ariaField = props.optionLabel || props.optionValue;
+
             return ariaField ? ObjectUtils.resolveFieldData(option, ariaField) : option;
         };
 
@@ -113,7 +114,8 @@ export const MultiStateCheckbox = React.memo(
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = ObjectUtils.findDiffKeys(props, MultiStateCheckbox.defaultProps);
-        const className = classNames('p-multistatecheckbox p-checkbox p-component', props.className);
+        const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
+        const className = classNames('p-multistatecheckbox p-checkbox p-component', props.className, { 'p-checkbox-disabled': props.disabled });
         const boxClassName = classNames(
             'p-checkbox-box',
             {
@@ -130,18 +132,7 @@ export const MultiStateCheckbox = React.memo(
         return (
             <>
                 <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick}>
-                    <div
-                        className={boxClassName}
-                        style={selectedOption && selectedOption.style}
-                        tabIndex={props.tabIndex}
-                        onFocus={onFocus}
-                        onBlur={onBlur}
-                        onKeyDown={onKeyDown}
-                        role="checkbox"
-                        aria-checked={ariaChecked}
-                        aria-labelledby={props['aria-labelledby']}
-                        aria-label={props['aria-label']}
-                    >
+                    <div className={boxClassName} style={selectedOption && selectedOption.style} tabIndex={props.tabIndex} onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown} role="checkbox" aria-checked={ariaChecked} {...ariaProps}>
                         {icon}
                     </div>
                     {focusedState && (
@@ -172,8 +163,6 @@ MultiStateCheckbox.defaultProps = {
     readOnly: false,
     empty: true,
     tabIndex: '0',
-    'aria-label': null,
-    'aria-labelledby': null,
     tooltip: null,
     tooltipOptions: null,
     onChange: null

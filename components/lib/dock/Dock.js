@@ -27,6 +27,7 @@ export const Dock = React.memo(
             if (item.visible === false) {
                 return null;
             }
+
             const { disabled, icon: _icon, label, template, url, target } = item;
             const className = classNames('p-dock-item', {
                 'p-dock-item-second-prev': currentIndexState - 2 === index,
@@ -73,6 +74,7 @@ export const Dock = React.memo(
         const createHeader = () => {
             if (props.header) {
                 const header = ObjectUtils.getJSXElement(props.header, { props });
+
                 return <div className="p-dock-header">{header}</div>;
             }
 
@@ -92,6 +94,7 @@ export const Dock = React.memo(
         const createFooter = () => {
             if (props.footer) {
                 const footer = ObjectUtils.getJSXElement(props.footer, { props });
+
                 return <div className="p-dock-footer">{footer}</div>;
             }
 

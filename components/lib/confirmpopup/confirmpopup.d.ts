@@ -32,7 +32,7 @@ export interface ConfirmPopupProps {
     rejectClassName?: string;
     acceptClassName?: string;
     className?: string;
-    style?: object;
+    style?: React.CSSProperties;
     appendTo?: ConfirmPopupAppendToType;
     dismissable?: boolean;
     footer?: ConfirmPopupTemplateType;

@@ -1,13 +1,67 @@
-import React from 'react';
-import { Image } from '../../components/lib/image/Image';
-import Link from 'next/link';
-import ImageDoc from '../../components/doc/image';
-import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
-import getConfig from 'next/config';
+import Link from 'next/link';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
+import { DocActions } from '../../components/doc/common/docactions';
+import { ImportDoc } from '../../components/doc/image/importdoc';
+import { BasicDoc } from '../../components/doc/image/basicdoc';
+import { PreviewDoc } from '../../components/doc/image/previewdoc';
+import { ThumbnailDoc } from '../../components/doc/image/thumbnaildoc';
+import { TemplatingDoc } from '../../components/doc/image/templatingdoc';
+import { ApiDoc } from '../../components/doc/image/apidoc';
 
 const ImageDemo = () => {
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
+    // const contextPath = getConfig().publicRuntimeConfig.contextPath;
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'preview',
+            label: 'Preview and Zoom',
+            component: PreviewDoc
+        },
+        {
+            id: 'thumbnail',
+            label: 'Thumbnail',
+            component: ThumbnailDoc
+        },
+        {
+            id: 'templating',
+            label: 'Templating',
+            component: TemplatingDoc
+        },
+        {
+            id: 'api',
+            label: 'API',
+            component: ApiDoc,
+            children: [
+                {
+                    id: 'properties',
+                    label: 'Properties'
+                },
+                {
+                    id: 'events',
+                    label: 'Events'
+                },
+                {
+                    id: 'styling',
+                    label: 'Styling'
+                },
+                {
+                    id: 'accessibility',
+                    label: 'Accessibility'
+                }
+            ]
+        }
+    ];
 
     return (
         <div>
@@ -27,17 +81,25 @@ const ImageDemo = () => {
                 <DocActions github="image/index.js" />
             </div>
 
-            <div className="content-section implementation">
+            {/* <div className="content-section implementation">
                 <div className="card">
                     <h5>Basic</h5>
                     <Image src={`${contextPath}/images/galleria/galleria7.jpg`} alt="Image" width="250" />
 
-                    <h5>Preview</h5>
-                    <Image src={`${contextPath}/images/galleria/galleria11.jpg`} alt="Image" width="250" preview />
+                    <h5>Preview and Zoom</h5>
+                    <Image src={`${contextPath}/images/galleria/galleria12.jpg`} alt="Image" width="250" preview />
+
+                    <h5>Thumbnail</h5>
+                    <Image src={`${contextPath}/images/galleria/galleria14s.jpg`} zoomSrc={`${contextPath}/images/galleria/galleria14.jpg`} alt="Image" width="80" height="60" preview />
                 </div>
             </div>
 
-            <ImageDoc></ImageDoc>
+            <ImageDoc></ImageDoc> */}
+
+            <div className="content-section doc button-demo">
+                <DocSections docs={docs} />
+                <DocSectionNav docs={docs} />
+            </div>
         </div>
     );
 };

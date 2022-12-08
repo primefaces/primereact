@@ -33,6 +33,7 @@ export const Menu = React.memo(
         const onItemClick = (event, item) => {
             if (item.disabled) {
                 event.preventDefault();
+
                 return;
             }
 
@@ -59,6 +60,7 @@ export const Menu = React.memo(
                 //down
                 case 40:
                     const nextItem = findNextItem(listItem);
+
                     nextItem && nextItem.children[0].focus();
                     event.preventDefault();
                     break;
@@ -66,6 +68,7 @@ export const Menu = React.memo(
                 //up
                 case 38:
                     const prevItem = findPrevItem(listItem);
+
                     prevItem && prevItem.children[0].focus();
                     event.preventDefault();
                     break;
@@ -77,11 +80,13 @@ export const Menu = React.memo(
 
         const findNextItem = (item) => {
             const nextItem = item.nextElementSibling;
+
             return nextItem ? (DomHandler.hasClass(nextItem, 'p-disabled') || !DomHandler.hasClass(nextItem, 'p-menuitem') ? findNextItem(nextItem) : nextItem) : null;
         };
 
         const findPrevItem = (item) => {
             const prevItem = item.previousElementSibling;
+
             return prevItem ? (DomHandler.hasClass(prevItem, 'p-disabled') || !DomHandler.hasClass(prevItem, 'p-menuitem') ? findPrevItem(prevItem) : prevItem) : null;
         };
 
@@ -165,6 +170,7 @@ export const Menu = React.memo(
             if (item.visible === false) {
                 return null;
             }
+
             const className = classNames('p-menuitem', item.className);
             const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
             const iconClassName = classNames('p-menuitem-icon', item.icon);
@@ -224,7 +230,9 @@ export const Menu = React.memo(
                 const className = classNames(
                     'p-menu p-component',
                     {
-                        'p-menu-overlay': props.popup
+                        'p-menu-overlay': props.popup,
+                        'p-input-filled': PrimeReact.inputStyle === 'filled',
+                        'p-ripple-disabled': PrimeReact.ripple === false
                     },
                     props.className
                 );

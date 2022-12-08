@@ -75,6 +75,28 @@ const ToastEvents = [
         name: 'onHide',
         description: 'Callback to invoke when message becomes hidden.',
         arguments: []
+    },
+    {
+        name: 'onMouseEnter',
+        description: 'Callback to invoke when a message gets focus with mouse.',
+        arguments: [
+            {
+                name: 'event',
+                type: 'MouseEvent',
+                description: 'Mouse Event'
+            }
+        ]
+    },
+    {
+        name: 'onMouseLeave',
+        description: 'Callback to invoke when a message loses focus with mouse.',
+        arguments: [
+            {
+                name: 'event',
+                type: 'MouseEvent',
+                description: 'Mouse Event'
+            }
+        ]
     }
 ];
 

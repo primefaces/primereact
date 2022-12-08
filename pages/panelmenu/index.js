@@ -1,122 +1,39 @@
-import React from 'react';
-import { PanelMenu } from '../../components/lib/panelmenu/PanelMenu';
-import PanelMenuDoc from '../../components/doc/panelmenu';
-import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
+import { DocActions } from '../../components/doc/common/docactions';
+import { PanelMenuDoc } from '../../components/doc/panelmenu/panelmenu';
+import { ImportDoc } from '../../components/doc/panelmenu/importdoc';
+import { ApiDoc } from '../../components/doc/panelmenu/apidoc';
 
 const PanelMenuDemo = () => {
-    const items = [
+    const docs = [
         {
-            label: 'File',
-            icon: 'pi pi-fw pi-file',
-            items: [
-                {
-                    label: 'New',
-                    icon: 'pi pi-fw pi-plus',
-                    items: [
-                        {
-                            label: 'Bookmark',
-                            icon: 'pi pi-fw pi-bookmark'
-                        },
-                        {
-                            label: 'Video',
-                            icon: 'pi pi-fw pi-video'
-                        }
-                    ]
-                },
-                {
-                    label: 'Delete',
-                    icon: 'pi pi-fw pi-trash'
-                },
-                {
-                    label: 'Export',
-                    icon: 'pi pi-fw pi-external-link'
-                }
-            ]
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
         },
         {
-            label: 'Edit',
-            icon: 'pi pi-fw pi-pencil',
-            items: [
-                {
-                    label: 'Left',
-                    icon: 'pi pi-fw pi-align-left'
-                },
-                {
-                    label: 'Right',
-                    icon: 'pi pi-fw pi-align-right'
-                },
-                {
-                    label: 'Center',
-                    icon: 'pi pi-fw pi-align-center'
-                },
-                {
-                    label: 'Justify',
-                    icon: 'pi pi-fw pi-align-justify'
-                }
-            ]
+            id: 'panelmenu',
+            label: 'PanelMenu',
+            component: PanelMenuDoc
         },
         {
-            label: 'Users',
-            icon: 'pi pi-fw pi-user',
-            items: [
+            id: 'api',
+            label: 'API',
+            component: ApiDoc,
+            children: [
                 {
-                    label: 'New',
-                    icon: 'pi pi-fw pi-user-plus'
+                    id: 'properties',
+                    label: 'Properties'
                 },
                 {
-                    label: 'Delete',
-                    icon: 'pi pi-fw pi-user-minus'
+                    id: 'styling',
+                    label: 'Styling'
                 },
                 {
-                    label: 'Search',
-                    icon: 'pi pi-fw pi-users',
-                    items: [
-                        {
-                            label: 'Filter',
-                            icon: 'pi pi-fw pi-filter',
-                            items: [
-                                {
-                                    label: 'Print',
-                                    icon: 'pi pi-fw pi-print'
-                                }
-                            ]
-                        },
-                        {
-                            icon: 'pi pi-fw pi-bars',
-                            label: 'List'
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            label: 'Events',
-            icon: 'pi pi-fw pi-calendar',
-            items: [
-                {
-                    label: 'Edit',
-                    icon: 'pi pi-fw pi-pencil',
-                    items: [
-                        {
-                            label: 'Save',
-                            icon: 'pi pi-fw pi-calendar-plus'
-                        },
-                        {
-                            label: 'Delete',
-                            icon: 'pi pi-fw pi-calendar-minus'
-                        }
-                    ]
-                },
-                {
-                    label: 'Archieve',
-                    icon: 'pi pi-fw pi-calendar-times',
-                    items: [
-                        {
-                            label: 'Remove',
-                            icon: 'pi pi-fw pi-calendar-minus'
-                        }
-                    ]
+                    id: 'accessibility',
+                    label: 'Accessibility'
                 }
             ]
         }
@@ -136,13 +53,10 @@ const PanelMenuDemo = () => {
                 <DocActions github="panelmenu/index.js" />
             </div>
 
-            <div className="content-section implementation">
-                <div className="card">
-                    <PanelMenu model={items} style={{ width: '22rem' }} />
-                </div>
+            <div className="content-section doc">
+                <DocSections docs={docs} />
+                <DocSectionNav docs={docs} />
             </div>
-
-            <PanelMenuDoc />
         </div>
     );
 };

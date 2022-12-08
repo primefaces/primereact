@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { Ripple } from '../ripple/Ripple';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import PrimeReact from '../api/Api';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { Ripple } from '../ripple/Ripple';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const CascadeSelectSub = React.memo((props) => {
     const [activeOptionState, setActiveOptionState] = React.useState(null);
@@ -30,17 +31,21 @@ export const CascadeSelectSub = React.memo((props) => {
             case 'Down':
             case 'ArrowDown':
                 const nextItem = findNextItem(listItem);
+
                 if (nextItem) {
                     nextItem.children[0].focus();
                 }
+
                 break;
 
             case 'Up':
             case 'ArrowUp':
                 const prevItem = findPrevItem(listItem);
+
                 if (prevItem) {
                     prevItem.children[0].focus();
                 }
+
                 break;
 
             case 'Right':
@@ -52,6 +57,7 @@ export const CascadeSelectSub = React.memo((props) => {
                         setActiveOptionState(option);
                     }
                 }
+
                 break;
 
             case 'Left':
@@ -59,9 +65,11 @@ export const CascadeSelectSub = React.memo((props) => {
                 setActiveOptionState(null);
 
                 const parentList = event.currentTarget.parentElement.parentElement.previousElementSibling;
+
                 if (parentList) {
                     parentList.focus();
                 }
+
                 break;
 
             case 'Enter':
@@ -74,6 +82,7 @@ export const CascadeSelectSub = React.memo((props) => {
                     props.onPanelHide();
                     event.preventDefault();
                 }
+
                 break;
 
             default:
@@ -85,11 +94,13 @@ export const CascadeSelectSub = React.memo((props) => {
 
     const findNextItem = (item) => {
         const nextItem = item.nextElementSibling;
+
         return nextItem ? (DomHandler.hasClass(nextItem, 'p-disabled') || !DomHandler.hasClass(nextItem, 'p-cascadeselect-item') ? findNextItem(nextItem) : nextItem) : null;
     };
 
     const findPrevItem = (item) => {
         const prevItem = item.previousElementSibling;
+
         return prevItem ? (DomHandler.hasClass(prevItem, 'p-disabled') || !DomHandler.hasClass(prevItem, 'p-cascadeselect-item') ? findPrevItem(prevItem) : prevItem) : null;
     };
 
@@ -144,6 +155,7 @@ export const CascadeSelectSub = React.memo((props) => {
     useMountEffect(() => {
         if (props.selectionPath && props.options && !props.dirty) {
             const activeOption = props.options.find((o) => props.selectionPath.includes(o));
+
             activeOption && setActiveOptionState(activeOption);
         }
 
@@ -215,7 +227,10 @@ export const CascadeSelectSub = React.memo((props) => {
         return props.options ? props.options.map(createOption) : null;
     };
 
-    const className = classNames('p-cascadeselect-panel p-cascadeselect-items', props.className);
+    const className = classNames('p-cascadeselect-panel p-cascadeselect-items', props.className, {
+        'p-input-filled': PrimeReact.inputStyle === 'filled',
+        'p-ripple-disabled': PrimeReact.ripple === false
+    });
     const submenu = createMenu();
 
     return (

@@ -1,42 +1,212 @@
-import React, { useState, useEffect } from 'react';
-import { PhotoService } from '../../service/PhotoService';
-import { Galleria } from '../../components/lib/galleria/Galleria';
-import GalleriaDoc from '../../components/doc/galleria';
 import Head from 'next/head';
-import getConfig from 'next/config';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
+import { ImportDoc } from '../../components/doc/galleria/importdoc';
+import { GaleriaDemo } from '../../components/doc/galleria/galeriademo';
+import { ApiDoc } from '../../components/doc/galleria/apidoc';
+import { ProgrammaticDoc } from '../../components/doc/galleria/programmaticdoc';
+import { ResponsiveDoc } from '../../components/doc/galleria/responsivedoc';
+import { AutoPlayDemoDoc } from '../../components/doc/galleria/autoplaydoc';
+import { CaptionDoc } from '../../components/doc/galleria/captiondoc';
+import { AdvancedDoc } from '../../components/doc/galleria/advanceddoc';
+import { ClickEventDoc } from '../../components/doc/galleria/indicator/clickevent';
+import { HoverEventDoc } from '../../components/doc/galleria/indicator/hoverevent';
+import { InsideContentDoc } from '../../components/doc/galleria/indicator/insidecontent';
+import { PositionTopDoc } from '../../components/doc/galleria/indicator/positiontop';
+import { PositionLeftDoc } from '../../components/doc/galleria/indicator/positionleft';
+import { PositionRightDoc } from '../../components/doc/galleria/indicator/positionright';
+import { IndicatorTemplateDoc } from '../../components/doc/galleria/indicator/template';
+import { WithThumbnailsDoc } from '../../components/doc/galleria/fullscreen/withthumbnails';
+import { WithoutThumbnailsDoc } from '../../components/doc/galleria/fullscreen/withoutthumbnails';
+import { CustomContentDoc } from '../../components/doc/galleria/fullscreen/custom';
+import { PositionedRightDoc } from '../../components/doc/galleria/thumbnail/right';
+import { PositionedTopDoc } from '../../components/doc/galleria/thumbnail/top';
+import { PositionedBottomDoc } from '../../components/doc/galleria/thumbnail/bottom';
+import { PositionedLeftDoc } from '../../components/doc/galleria/thumbnail/left';
+import { ItemThumbnailsDoc } from '../../components/doc/galleria/navigator/itemthumbnails';
+import { ItemWithoutThumbnailsDoc } from '../../components/doc/galleria/navigator/itemwithouthumbnails';
+import { ItemHoverDoc } from '../../components/doc/galleria/navigator/hover';
+import { IndicatorsDoc } from '../../components/doc/galleria/navigator/indicators';
 
 const GalleriaDemo = () => {
-    const [images, setImages] = useState(null);
-
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
-    const galleriaService = new PhotoService();
-
-    useEffect(() => {
-        galleriaService.getImages().then((data) => setImages(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const responsiveOptions = [
+    const docs = [
         {
-            breakpoint: '1024px',
-            numVisible: 5
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
         },
         {
-            breakpoint: '768px',
-            numVisible: 3
+            id: 'galeriademo',
+            label: 'Basic',
+            component: GaleriaDemo
         },
         {
-            breakpoint: '560px',
-            numVisible: 1
+            id: 'programmatic',
+            label: 'Programmatic',
+            component: ProgrammaticDoc
+        },
+        {
+            id: 'indicator',
+            label: 'Indicator',
+            description: 'Indicators allow quick navigation between the items.',
+            children: [
+                {
+                    id: 'indciatorclickevent',
+                    label: 'Indicators with Click Event',
+                    component: ClickEventDoc
+                },
+                {
+                    id: 'indciatorhoverevent',
+                    label: 'Indicators with Hover Event',
+                    component: HoverEventDoc
+                },
+                {
+                    id: 'indciatorinsidecontent',
+                    label: 'Inside Content',
+                    component: InsideContentDoc
+                },
+                {
+                    id: 'indciatorpositiontop',
+                    label: 'Positioned at Top',
+                    component: PositionTopDoc
+                },
+                {
+                    id: 'indciatorpositionleft',
+                    label: 'Positioned at Left',
+                    component: PositionLeftDoc
+                },
+                {
+                    id: 'indciatorpositionright',
+                    label: 'Positioned at Right',
+                    component: PositionRightDoc
+                },
+                {
+                    id: 'indciatortemplate',
+                    label: 'Indicator Template',
+                    component: IndicatorTemplateDoc
+                }
+            ]
+        },
+        {
+            id: 'thumbnail',
+            label: 'Thumbnail',
+            description: 'Thumbnails represent a smaller version of the actual content.',
+            children: [
+                {
+                    id: 'thumbnailpositionbottom',
+                    label: 'Positioned at Bottom',
+                    component: PositionedBottomDoc
+                },
+                {
+                    id: 'thumbnailpositionleft',
+                    label: 'Positioned at Left',
+                    component: PositionedLeftDoc
+                },
+                {
+                    id: 'thumbnailpositionright',
+                    label: 'Positioned at Right',
+                    component: PositionedRightDoc
+                },
+                {
+                    id: 'thumbnailpositiontop',
+                    label: 'Positioned at Top',
+                    component: PositionedTopDoc
+                }
+            ]
+        },
+        {
+            id: 'responsive',
+            label: 'Responsive',
+            component: ResponsiveDoc
+        },
+        {
+            id: 'fullscreen',
+            label: 'Full Screen',
+            description: 'In fullscreen mode content covers the whole page over a mask.',
+            children: [
+                {
+                    id: 'fullscreenwiththumbnail',
+                    label: 'With Thumbnails',
+                    component: WithThumbnailsDoc
+                },
+                {
+                    id: 'fullscreenwithoutthumnails',
+                    label: 'Without Thumbnails',
+                    component: WithoutThumbnailsDoc
+                },
+                {
+                    id: 'fullscreencustom',
+                    label: 'Custom Content',
+                    component: CustomContentDoc
+                }
+            ]
+        },
+        {
+            id: 'navigator',
+            label: 'Navigator',
+            description: 'Combining item navigators, thumbnails and indicators provide various UI alternatives.',
+            children: [
+                {
+                    id: 'itemthumbnails',
+                    label: 'Item Navigators and Thumbnails',
+                    component: ItemThumbnailsDoc
+                },
+                {
+                    id: 'itemwithouthumbnails',
+                    label: 'Item Navigators without Thumbnails',
+                    component: ItemWithoutThumbnailsDoc
+                },
+                {
+                    id: 'itemhover',
+                    label: 'Item Navigators on Hover',
+                    component: ItemHoverDoc
+                },
+                {
+                    id: 'indicators',
+                    label: 'Item Navigators and Indicators',
+                    component: IndicatorsDoc
+                }
+            ]
+        },
+        {
+            id: 'autoplay',
+            label: 'AutoPlay',
+            component: AutoPlayDemoDoc
+        },
+        {
+            id: 'caption',
+            label: 'Caption',
+            component: CaptionDoc
+        },
+        {
+            id: 'advanced',
+            label: 'Advanced',
+            component: AdvancedDoc
+        },
+        {
+            id: 'api',
+            label: 'API',
+            component: ApiDoc,
+            children: [
+                {
+                    id: 'properties',
+                    label: 'Properties'
+                },
+                {
+                    id: 'events',
+                    label: 'Events'
+                },
+                {
+                    id: 'styling',
+                    label: 'Styling'
+                },
+                {
+                    id: 'accessibility',
+                    label: 'Accessibility'
+                }
+            ]
         }
     ];
-
-    const itemTemplate = (item) => {
-        return <img src={`${contextPath}/${item.itemImageSrc}`} alt={item.alt} style={{ width: '100%' }} />;
-    };
-
-    const thumbnailTemplate = (item) => {
-        return <img src={`${contextPath}/${item.thumbnailImageSrc}`} alt={item.alt} />;
-    };
 
     return (
         <div>
@@ -50,14 +220,10 @@ const GalleriaDemo = () => {
                     <p>Galleria is a content gallery component.</p>
                 </div>
             </div>
-
-            <div className="content-section implementation">
-                <div className="card">
-                    <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }} item={itemTemplate} thumbnail={thumbnailTemplate} />
-                </div>
+            <div className="content-section doc galleria-demo">
+                <DocSections docs={docs} />
+                <DocSectionNav docs={docs} />
             </div>
-
-            <GalleriaDoc />
         </div>
     );
 };

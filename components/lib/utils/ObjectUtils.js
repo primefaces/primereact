@@ -18,6 +18,7 @@ export default class ObjectUtils {
                 length = a.length;
                 if (length !== b.length) return false;
                 for (i = length; i-- !== 0; ) if (!this.deepEquals(a[i], b[i])) return false;
+
                 return true;
             }
 
@@ -25,15 +26,18 @@ export default class ObjectUtils {
 
             let dateA = a instanceof Date,
                 dateB = b instanceof Date;
+
             if (dateA !== dateB) return false;
             if (dateA && dateB) return a.getTime() === b.getTime();
 
             let regexpA = a instanceof RegExp,
                 regexpB = b instanceof RegExp;
+
             if (regexpA !== regexpB) return false;
             if (regexpA && regexpB) return a.toString() === b.toString();
 
             let keys = Object.keys(a);
+
             length = keys.length;
 
             if (length !== Object.keys(b).length) return false;
@@ -56,17 +60,22 @@ export default class ObjectUtils {
         if (data && Object.keys(data).length && field) {
             if (this.isFunction(field)) {
                 return field(data);
+            } else if (ObjectUtils.isNotEmpty(data[field])) {
+                return data[field];
             } else if (field.indexOf('.') === -1) {
                 return data[field];
             } else {
                 let fields = field.split('.');
                 let value = data;
+
                 for (var i = 0, len = fields.length; i < len; ++i) {
                     if (value == null) {
                         return null;
                     }
+
                     value = value[fields[i]];
                 }
+
                 return value;
             }
         } else {
@@ -78,6 +87,10 @@ export default class ObjectUtils {
         return !!(obj && obj.constructor && obj.call && obj.apply);
     }
 
+    static isLetter(char) {
+        return char && (char.toUpperCase() != char.toLowerCase() || char.codePointAt(0) > 127);
+    }
+
     static findDiffKeys(obj1, obj2) {
         if (!obj1 || !obj2) {
             return {};
@@ -87,19 +100,47 @@ export default class ObjectUtils {
             .filter((key) => !obj2.hasOwnProperty(key))
             .reduce((result, current) => {
                 result[current] = obj1[current];
+
                 return result;
             }, {});
     }
 
+    /**
+     * Removes keys from a JSON object that start with a string such as "data" to get all "data-id" type properties.
+     *
+     * @param {any} obj the JSON object to reduce
+     * @param {string[]} startsWiths the string(s) to check if the property starts with this key
+     * @returns the JSON object containing only the key/values that match the startsWith string
+     */
+    static reduceKeys(obj, startsWiths) {
+        const result = {};
+
+        if (!obj || !startsWiths || startsWiths.length === 0) {
+            return result;
+        }
+
+        Object.keys(obj)
+            .filter((key) => startsWiths.some((value) => key.startsWith(value)))
+            .forEach(function (key) {
+                result[key] = obj[key];
+                delete obj[key];
+            });
+
+        return result;
+    }
+
     static reorderArray(value, from, to) {
         let target;
+
         if (value && from !== to) {
             if (to >= value.length) {
                 target = to - value.length;
+
                 while (target-- + 1) {
                     value.push(undefined);
                 }
             }
+
             value.splice(to, 0, value.splice(from, 1)[0]);
         }
     }
@@ -118,9 +159,11 @@ export default class ObjectUtils {
 
     static getPropValue(obj, ...params) {
         let methodParams = params;
+
         if (params && params.length === 1) {
             methodParams = params[0];
         }
+
         return this.isFunction(obj) ? obj(...methodParams) : obj;
     }
 
@@ -180,10 +223,21 @@ export default class ObjectUtils {
     }
 
     static sort(value1, value2, order = 1, locale, nullSortOrder = 1) {
-        let result = null;
+        const result = ObjectUtils.compare(value1, value2, locale, order);
+        let finalSortOrder = order;
 
-        const emptyValue1 = this.isEmpty(value1);
-        const emptyValue2 = this.isEmpty(value2);
+        // nullSortOrder == 1 means Excel like sort nulls at bottom
+        if (ObjectUtils.isEmpty(value1) || ObjectUtils.isEmpty(value2)) {
+            finalSortOrder = nullSortOrder === 1 ? order : nullSortOrder;
+        }
+
+        return finalSortOrder * result;
+    }
+
+    static compare(value1, value2, locale, order = 1) {
+        let result = -1;
+        const emptyValue1 = ObjectUtils.isEmpty(value1);
+        const emptyValue2 = ObjectUtils.isEmpty(value2);
 
         if (emptyValue1 && emptyValue2) result = 0;
         else if (emptyValue1) result = order;
@@ -191,8 +245,6 @@ export default class ObjectUtils {
         else if (typeof value1 === 'string' && typeof value2 === 'string') result = value1.localeCompare(value2, locale, { numeric: true });
         else result = value1 < value2 ? -1 : value1 > value2 ? 1 : 0;
 
-        // nullSortOrder == 1 means Excel like sort nulls at bottom
-        const finalSortOrder = nullSortOrder === 1 ? order : nullSortOrder;
-        return finalSortOrder * result;
+        return result;
     }
 }

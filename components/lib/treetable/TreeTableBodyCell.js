@@ -56,7 +56,7 @@ export const TreeTableBodyCell = (props) => {
             setEditingState(false);
             unbindDocumentClickListener();
             OverlayService.off('overlay-click', overlayEventListener.current);
-            overlayEventListener = null;
+            overlayEventListener.current = null;
         }, 1);
     };
 
@@ -82,8 +82,10 @@ export const TreeTableBodyCell = (props) => {
     React.useEffect(() => {
         if (elementRef.current && props.editor) {
             clearTimeout(tabIndexTimeout.current);
+
             if (editingState) {
                 let focusable = DomHandler.findSingle(elementRef.current, 'input');
+
                 if (focusable && document.activeElement !== focusable && !focusable.hasAttribute('data-isCellEditing')) {
                     focusable.setAttribute('data-isCellEditing', true);
                     focusable.focus();
@@ -107,7 +109,8 @@ export const TreeTableBodyCell = (props) => {
         }
     });
 
-    const className = classNames(props.bodyClassName || props.className, {
+    const bodyClassName = ObjectUtils.getPropValue(props.bodyClassName, props.node.data, { field: props.field, rowIndex: props.rowIndex, props: props });
+    const className = classNames(bodyClassName || props.className, {
         'p-editable-column': props.editor,
         'p-cell-editing': props.editor ? editingState : false
     });

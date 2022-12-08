@@ -12,9 +12,13 @@ export const Checkbox = React.memo(
         const onClick = (event) => {
             if (!props.disabled && !props.readOnly && props.onChange) {
                 const checked = isChecked();
+                const checkboxClicked = event.target instanceof HTMLDivElement || event.target instanceof HTMLSpanElement;
+                const isInputToggled = event.target === inputRef.current;
+                const isCheckboxToggled = checkboxClicked && event.target.checked !== checked;
 
-                if (inputRef.current.checked === checked) {
+                if (isInputToggled || isCheckboxToggled) {
                     const value = checked ? props.falseValue : props.trueValue;
+
                     props.onChange({
                         originalEvent: event,
                         value: props.value,
@@ -29,7 +33,6 @@ export const Checkbox = React.memo(
                             checked: value
                         }
                     });
-                    inputRef.current.checked = !checked;
                 }
 
                 DomHandler.focus(inputRef.current);
@@ -43,6 +46,12 @@ export const Checkbox = React.memo(
 
         const onBlur = () => {
             setFocusedState(false);
+        };
+
+        const onKeyDown = (event) => {
+            if (event.code === 'Space') {
+                onClick(event);
+            }
         };
 
         const isChecked = () => {
@@ -66,6 +75,7 @@ export const Checkbox = React.memo(
         const checked = isChecked();
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = ObjectUtils.findDiffKeys(props, Checkbox.defaultProps);
+        const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-checkbox p-component',
             {
@@ -93,13 +103,13 @@ export const Checkbox = React.memo(
                             name={props.name}
                             tabIndex={props.tabIndex}
                             defaultChecked={checked}
-                            aria-labelledby={props['aria-labelledby']}
-                            aria-label={props['aria-label']}
                             onFocus={onFocus}
                             onBlur={onBlur}
+                            onKeyDown={onKeyDown}
                             disabled={props.disabled}
                             readOnly={props.readOnly}
                             required={props.required}
+                            {...ariaProps}
                         />
                     </div>
                     <div className={boxClass}>{icon}</div>
@@ -130,8 +140,6 @@ Checkbox.defaultProps = {
     icon: 'pi pi-check',
     tooltip: null,
     tooltipOptions: null,
-    'aria-label': null,
-    'aria-labelledby': null,
     onChange: null,
     onMouseDown: null,
     onContextMenu: null

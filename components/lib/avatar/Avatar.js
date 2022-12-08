@@ -3,10 +3,11 @@ import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const Avatar = React.forwardRef((props, ref) => {
     const elementRef = React.useRef(null);
+    const [imageFailed, setImageFailed] = React.useState(false);
 
     const createContent = () => {
-        if (props.image) {
-            return <img src={props.image} alt={props.imageAlt} onError={props.onImageError}></img>;
+        if (props.image && !imageFailed) {
+            return <img src={props.image} alt={props.imageAlt} onError={onImageError}></img>;
         } else if (props.label) {
             return <span className="p-avatar-text">{props.label}</span>;
         } else if (props.icon) {
@@ -14,6 +15,21 @@ export const Avatar = React.forwardRef((props, ref) => {
         }
 
         return null;
+    };
+
+    const onImageError = (event) => {
+        if (props.imageFallback === 'default') {
+            if (!props.onImageError) {
+                // fallback to label or icon
+                setImageFailed(true);
+                event.target.src = null;
+            }
+        } else {
+            // try fallback as an image
+            event.target.src = props.imageFallback;
+        }
+
+        props.onImageError && props.onImageError(event);
     };
 
     React.useImperativeHandle(ref, () => ({
@@ -25,7 +41,7 @@ export const Avatar = React.forwardRef((props, ref) => {
     const containerClassName = classNames(
         'p-avatar p-component',
         {
-            'p-avatar-image': props.image != null,
+            'p-avatar-image': props.image !== null && !imageFailed,
             'p-avatar-circle': props.shape === 'circle',
             'p-avatar-lg': props.size === 'large',
             'p-avatar-xl': props.size === 'xlarge',
@@ -47,14 +63,15 @@ export const Avatar = React.forwardRef((props, ref) => {
 Avatar.displayName = 'Avatar';
 Avatar.defaultProps = {
     __TYPE: 'Avatar',
-    label: null,
+    className: null,
     icon: null,
     image: null,
-    size: 'normal',
-    shape: 'square',
-    style: null,
-    className: null,
-    template: null,
     imageAlt: 'avatar',
-    onImageError: null
+    imageFallback: 'default',
+    label: null,
+    onImageError: null,
+    shape: 'square',
+    size: 'normal',
+    style: null,
+    template: null
 };

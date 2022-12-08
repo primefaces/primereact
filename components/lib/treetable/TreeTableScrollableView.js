@@ -15,6 +15,7 @@ export const TreeTableScrollableView = React.memo((props) => {
         if (props.scrollHeight) {
             if (props.scrollHeight.indexOf('%') !== -1) {
                 let datatableContainer = findDataTableContainer(elementRef.current);
+
                 scrollBodyRef.current.style.visibility = 'hidden';
                 scrollBodyRef.current.style.height = '100px'; //temporary height to calculate static height
                 let containerHeight = DomHandler.getOuterHeight(datatableContainer);
@@ -34,6 +35,7 @@ export const TreeTableScrollableView = React.memo((props) => {
     const findDataTableContainer = (element) => {
         if (element) {
             let el = element;
+
             while (el && !DomHandler.hasClass(el, 'p-treetable')) {
                 el = el.parentElement;
             }
@@ -51,11 +53,13 @@ export const TreeTableScrollableView = React.memo((props) => {
     const onBodyScroll = () => {
         let frozenView = elementRef.current.previousElementSibling;
         let frozenScrollBody;
+
         if (frozenView) {
             frozenScrollBody = DomHandler.findSingle(frozenView, '.p-treetable-scrollable-body');
         }
 
         scrollHeaderBoxRef.current.style.marginLeft = -1 * scrollBodyRef.current.scrollLeft + 'px';
+
         if (scrollFooterBoxRef.current) {
             scrollFooterBoxRef.current.style.marginLeft = -1 * scrollBodyRef.current.scrollLeft + 'px';
         }
@@ -70,6 +74,7 @@ export const TreeTableScrollableView = React.memo((props) => {
             const scrollBarWidth = DomHandler.calculateScrollbarWidth();
 
             scrollHeaderBoxRef.current.style.marginRight = scrollBarWidth + 'px';
+
             if (scrollFooterBoxRef.current) {
                 scrollFooterBoxRef.current.style.marginRight = scrollBarWidth + 'px';
             }

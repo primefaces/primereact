@@ -121,7 +121,7 @@ export declare function UniqueComponentId(prefix?: string): string;
 
 export declare namespace ZIndexUtils {
     export function get(el?: HTMLElement): number;
-    export function set(key: string, el: HTMLElement, baseZIndex?: number): void;
+    export function set(key: string, el: HTMLElement, autoZIndex?: boolean, baseZIndex?: number): void;
     export function clear(el: HTMLElement): void;
     export function getBase(key: string): number;
     export function getCurrent(key: string): number;

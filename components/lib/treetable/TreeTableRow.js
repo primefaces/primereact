@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ariaLabel } from '../api/Api';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler } from '../utils/Utils';
 import { TreeTableBodyCell } from './TreeTableBodyCell';
@@ -23,6 +24,7 @@ export const TreeTableRow = React.memo((props) => {
 
     const expand = (event) => {
         let expandedKeys = props.expandedKeys ? { ...props.expandedKeys } : {};
+
         expandedKeys[props.node.key] = true;
 
         props.onToggle({
@@ -35,6 +37,7 @@ export const TreeTableRow = React.memo((props) => {
 
     const collapse = (event) => {
         let expandedKeys = { ...props.expandedKeys };
+
         delete expandedKeys[props.node.key];
 
         props.onToggle({
@@ -201,6 +204,7 @@ export const TreeTableRow = React.memo((props) => {
                 //down arrow
                 case 40:
                     const nextRow = rowElement.nextElementSibling;
+
                     if (nextRow) {
                         nextRow.focus();
                     }
@@ -211,6 +215,7 @@ export const TreeTableRow = React.memo((props) => {
                 //up arrow
                 case 38:
                     const previousRow = rowElement.previousElementSibling;
+
                     if (previousRow) {
                         previousRow.focus();
                     }
@@ -263,12 +268,13 @@ export const TreeTableRow = React.memo((props) => {
     };
 
     const createToggler = () => {
+        const label = expanded ? ariaLabel('collapseLabel') : ariaLabel('expandLabel');
         const iconClassName = classNames('p-treetable-toggler-icon pi pi-fw', { 'pi-chevron-right': !expanded, 'pi-chevron-down': expanded });
         const style = { marginLeft: props.level * 16 + 'px', visibility: props.node.leaf === false || (props.node.children && props.node.children.length) ? 'visible' : 'hidden' };
 
         return (
-            <button type="button" className="p-treetable-toggler p-link p-unselectable-text" onClick={onTogglerClick} tabIndex={-1} style={style}>
-                <i className={iconClassName}></i>
+            <button type="button" className="p-treetable-toggler p-link p-unselectable-text" onClick={onTogglerClick} tabIndex={-1} style={style} aria-label={label}>
+                <i className={iconClassName} aria-hidden="true"></i>
                 <Ripple />
             </button>
         );
@@ -358,6 +364,7 @@ export const TreeTableRow = React.memo((props) => {
 
     if (props.rowClassName) {
         let rowClassName = props.rowClassName(props.node);
+
         className = { ...className, ...rowClassName };
     }
 

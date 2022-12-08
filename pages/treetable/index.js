@@ -1,28 +1,138 @@
-import React, { useState, useEffect } from 'react';
-import { TreeTable } from '../../components/lib/treetable/TreeTable';
-import { Column } from '../../components/lib/column/Column';
-import { Button } from '../../components/lib/button/Button';
-import { NodeService } from '../../service/NodeService';
-import TreeTableDoc from '../../components/doc/treetable';
-import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
+import React from 'react';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
+import { DocActions } from '../../components/doc/common/docactions';
+import { ApiDoc } from '../../components/doc/treetable/apidoc';
+import { PaginatorDoc } from '../../components/doc/treetable/paginatordoc';
+import { TemplatingDoc } from '../../components/doc/treetable/templatingdoc';
+import { ImportDoc } from '../../components/doc/treetable/importdoc';
+import { BasicDoc } from '../../components/doc/treetable/basicdoc';
+import { ProgrammaticDoc } from '../../components/doc/treetable/programmaticdoc';
+import { ColGroupDoc } from '../../components/doc/treetable/colgroupdoc';
+import { LazyDoc } from '../../components/doc/treetable/lazydoc';
+import { EditDoc } from '../../components/doc/treetable/editdoc';
+import { ReorderDoc } from '../../components/doc/treetable/reorderdoc';
+import { ColToggleDoc } from '../../components/doc/treetable/coltoggledoc';
+import { StyleDoc } from '../../components/doc/treetable/styledoc';
+import { ContextMenuDoc } from '../../components/doc/treetable/contextmenudoc';
+import { ResponsiveDoc } from '../../components/doc/treetable/responsivedoc';
 
 const TreeTableDemo = () => {
-    const [nodes, setNodes] = useState([]);
-    const [expandedKeys, setExpandedKeys] = useState({});
-    const nodeservice = new NodeService();
-
-    const toggleApplications = () => {
-        let _expandedKeys = { ...expandedKeys };
-        if (_expandedKeys['0']) delete _expandedKeys['0'];
-        else _expandedKeys['0'] = true;
-
-        setExpandedKeys(_expandedKeys);
-    };
-
-    useEffect(() => {
-        nodeservice.getTreeTableNodes().then((data) => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'programmatic',
+            label: 'Programmatic',
+            component: ProgrammaticDoc
+        },
+        {
+            id: 'templating',
+            label: 'Templating',
+            component: TemplatingDoc
+        },
+        {
+            id: 'paginator',
+            label: 'Paginator',
+            component: PaginatorDoc
+        },
+        {
+            label: 'Sort',
+            to: '/treetable/sort'
+        },
+        {
+            label: 'Filter',
+            to: '/treetable/filter'
+        },
+        {
+            id: 'colgroup',
+            label: 'ColGroup',
+            component: ColGroupDoc
+        },
+        {
+            id: 'lazy',
+            label: 'Lazy',
+            component: LazyDoc
+        },
+        {
+            id: 'edit',
+            label: 'Edit',
+            component: EditDoc
+        },
+        {
+            label: 'Scroll',
+            to: '/treetable/scroll'
+        },
+        {
+            label: 'Resize',
+            to: '/treetable/resize'
+        },
+        {
+            id: 'reorder',
+            label: 'Reorder',
+            component: ReorderDoc
+        },
+        {
+            id: 'coltoggle',
+            label: 'ColToggle',
+            component: ColToggleDoc
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'contextmenu',
+            label: 'ContextMenu',
+            component: ContextMenuDoc
+        },
+        {
+            id: 'responsive',
+            label: 'Responsive',
+            component: ResponsiveDoc
+        },
+        {
+            id: 'apidoc',
+            label: 'API',
+            component: ApiDoc,
+            children: [
+                {
+                    id: 'treenodeapi',
+                    label: 'TreeNode API'
+                },
+                {
+                    id: 'columncomponent',
+                    label: 'Column Component'
+                },
+                {
+                    id: 'properties',
+                    label: 'Properties'
+                },
+                {
+                    id: 'events',
+                    label: 'Events'
+                },
+                {
+                    id: 'styling',
+                    label: 'Styling'
+                },
+                {
+                    id: 'accessibility',
+                    label: 'Accessibility'
+                }
+            ]
+        }
+    ];
 
     return (
         <div>
@@ -30,6 +140,7 @@ const TreeTableDemo = () => {
                 <title>React TreeTable Component</title>
                 <meta name="description" content="TreeTable is used to display hierarchical data in tabular format." />
             </Head>
+
             <div className="content-section introduction">
                 <div className="feature-intro">
                     <h1>TreeTable</h1>
@@ -39,28 +150,10 @@ const TreeTableDemo = () => {
                 <DocActions github="treetable/index.js" />
             </div>
 
-            <div className="content-section implementation">
-                <div className="card">
-                    <h5>Basic</h5>
-                    <TreeTable value={nodes}>
-                        <Column field="name" header="Name" expander></Column>
-                        <Column field="size" header="Size"></Column>
-                        <Column field="type" header="Type"></Column>
-                    </TreeTable>
-                </div>
-
-                <div className="card">
-                    <h5>Programmatic</h5>
-                    <Button onClick={toggleApplications} label="Toggle Applications" />
-                    <TreeTable value={nodes} expandedKeys={expandedKeys} onToggle={(e) => setExpandedKeys(e.value)} style={{ marginTop: '.5em' }}>
-                        <Column field="name" header="Name" expander></Column>
-                        <Column field="size" header="Size"></Column>
-                        <Column field="type" header="Type"></Column>
-                    </TreeTable>
-                </div>
+            <div className="content-section doc">
+                <DocSections docs={docs} />
+                <DocSectionNav docs={docs} />
             </div>
-
-            <TreeTableDoc />
         </div>
     );
 };

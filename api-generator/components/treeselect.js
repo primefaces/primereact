@@ -19,7 +19,7 @@ const TreeSelectProps = [
     },
     {
         name: 'style',
-        type: 'object',
+        type: 'React.CSSProperties',
         default: 'null',
         description: 'Inline style of the component.'
     },

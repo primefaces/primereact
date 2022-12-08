@@ -20,6 +20,7 @@ export const TableHeader = React.memo((props) => {
         if (isSingleSort || (isMultipleSort && props.onSortChange)) {
             let sortableDisabledFields = [];
             let allSortableDisabled = false;
+
             props.columns.forEach((column) => {
                 if (column.props.sortableDisabled) {
                     sortableDisabledFields.push(column.props.sortField || column.props.field);

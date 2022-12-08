@@ -31,6 +31,7 @@ export const InputMask = React.memo(
             if (typeof first === 'number') {
                 begin = first;
                 end = typeof last === 'number' ? last : begin;
+
                 if (inputEl.setSelectionRange) {
                     inputEl.setSelectionRange(begin, end);
                 } else if (inputEl['createTextRange']) {
@@ -69,6 +70,7 @@ export const InputMask = React.memo(
                 if (i < props.slotChar.length) {
                     return props.slotChar.charAt(i);
                 }
+
                 return props.slotChar.charAt(0);
             },
             [props.slotChar]
@@ -80,11 +82,13 @@ export const InputMask = React.memo(
 
         const seekNext = (pos) => {
             while (++pos < len.current && !tests.current[pos]);
+
             return pos;
         };
 
         const seekPrev = (pos) => {
             while (--pos >= 0 && !tests.current[pos]);
+
             return pos;
         };
 
@@ -107,6 +111,7 @@ export const InputMask = React.memo(
                     j = seekNext(j);
                 }
             }
+
             writeBuffer();
             caret(Math.max(firstNonMaskPos.current, begin));
         };
@@ -119,6 +124,7 @@ export const InputMask = React.memo(
                     j = seekNext(i);
                     t = buffer.current[i];
                     buffer.current[i] = c;
+
                     if (j < len.current && tests.current[j].test(t)) {
                         c = t;
                     } else {
@@ -131,13 +137,16 @@ export const InputMask = React.memo(
         const handleAndroidInput = (e) => {
             let curVal = elementRef.current.value;
             let pos = caret();
+
             if (oldVal.current.length && oldVal.current.length > curVal.length) {
                 // a deletion or backspace happened
                 checkVal(true);
                 while (pos.begin > 0 && !tests.current[pos.begin - 1]) pos.begin--;
+
                 if (pos.begin === 0) {
                     while (pos.begin < firstNonMaskPos.current && !tests.current[pos.begin]) pos.begin++;
                 }
+
                 caret(pos.begin, pos.begin);
             } else {
                 checkVal(true);
@@ -152,6 +161,7 @@ export const InputMask = React.memo(
                     value: getValue()
                 });
             }
+
             updateModel(e);
         };
 
@@ -165,6 +175,7 @@ export const InputMask = React.memo(
 
             if (elementRef.current.value !== focusText.current) {
                 let event = document.createEvent('HTMLEvents');
+
                 event.initEvent('change', true, false);
                 elementRef.current.dispatchEvent(event);
             }
@@ -180,6 +191,7 @@ export const InputMask = React.memo(
                 begin,
                 end;
             let iPhone = /iphone/i.test(DomHandler.getUserAgent());
+
             oldVal.current = elementRef.current.value;
 
             //backspace, delete, and escape get special treatment
@@ -233,8 +245,10 @@ export const InputMask = React.memo(
                 }
 
                 p = seekNext(pos.begin - 1);
+
                 if (p < len.current) {
                     c = String.fromCharCode(k);
+
                     if (tests.current[p].test(c)) {
                         shiftR(p);
 
@@ -252,11 +266,13 @@ export const InputMask = React.memo(
                         } else {
                             caret(next);
                         }
+
                         if (pos.begin <= lastRequiredNonMaskPos.current) {
                             completed = isCompleted();
                         }
                     }
                 }
+
                 e.preventDefault();
             }
 
@@ -272,6 +288,7 @@ export const InputMask = React.memo(
 
         const clearBuffer = (start, end) => {
             let i;
+
             for (i = start; i < end && i < len.current; i++) {
                 if (tests.current[i]) {
                     buffer.current[i] = getPlaceholder(i);
@@ -295,14 +312,17 @@ export const InputMask = React.memo(
             for (i = 0, pos = 0; i < len.current; i++) {
                 if (tests.current[i]) {
                     buffer.current[i] = getPlaceholder(i);
+
                     while (pos++ < test.length) {
                         c = test.charAt(pos - 1);
+
                         if (tests.current[i].test(c)) {
                             buffer.current[i] = c;
                             lastMatch = i;
                             break;
                         }
                     }
+
                     if (pos > test.length) {
                         clearBuffer(i + 1, len.current);
                         break;
@@ -311,11 +331,13 @@ export const InputMask = React.memo(
                     if (buffer.current[i] === test.charAt(pos)) {
                         pos++;
                     }
+
                     if (i < partialPosition.current) {
                         lastMatch = i;
                     }
                 }
             }
+
             if (allow) {
                 writeBuffer();
             } else if (lastMatch + 1 < partialPosition.current) {
@@ -333,6 +355,7 @@ export const InputMask = React.memo(
                 writeBuffer();
                 elementRef.current.value = elementRef.current.value.substring(0, lastMatch + 1);
             }
+
             return partialPosition.current ? i : firstNonMaskPos.current;
         };
 
@@ -354,12 +377,15 @@ export const InputMask = React.memo(
                 if (elementRef.current !== document.activeElement) {
                     return;
                 }
+
                 writeBuffer();
+
                 if (pos === props.mask.replace('?', '').length) {
                     caret(0, pos);
                 } else {
                     caret(pos);
                 }
+
                 updateFilledState();
             }, 10);
 
@@ -376,8 +402,10 @@ export const InputMask = React.memo(
             }
 
             let pos = checkVal(true);
+
             caret(pos);
             updateModel(e);
+
             if (props.onComplete && isCompleted()) {
                 props.onComplete({
                     originalEvent: e,
@@ -388,8 +416,10 @@ export const InputMask = React.memo(
 
         const getUnmaskedValue = React.useCallback(() => {
             let unmaskedBuffer = [];
+
             for (let i = 0; i < buffer.current.length; i++) {
                 let c = buffer.current[i];
+
                 if (tests.current[i] && c !== getPlaceholder(i)) {
                     unmaskedBuffer.push(c);
                 }
@@ -401,6 +431,7 @@ export const InputMask = React.memo(
         const updateModel = (e) => {
             if (props.onChange) {
                 let val = props.unmask ? getUnmaskedValue() : e && e.target.value;
+
                 props.onChange({
                     originalEvent: e,
                     value: defaultBuffer.current !== val ? val : '',
@@ -433,6 +464,7 @@ export const InputMask = React.memo(
                     setTimeout(() => {
                         if (elementRef.current) {
                             writeBuffer();
+
                             return checkVal(allow);
                         }
                     }, 10);
@@ -463,19 +495,24 @@ export const InputMask = React.memo(
                 };
 
                 let ua = DomHandler.getUserAgent();
+
                 androidChrome.current = /chrome/i.test(ua) && /android/i.test(ua);
 
                 let maskTokens = props.mask.split('');
+
                 for (let i = 0; i < maskTokens.length; i++) {
                     let c = maskTokens[i];
+
                     if (c === '?') {
                         len.current--;
                         partialPosition.current = i;
                     } else if (defs[c]) {
                         tests.current.push(new RegExp(defs[c]));
+
                         if (firstNonMaskPos.current === null) {
                             firstNonMaskPos.current = tests.current.length - 1;
                         }
+
                         if (i < partialPosition.current) {
                             lastRequiredNonMaskPos.current = tests.current.length - 1;
                         }
@@ -485,13 +522,16 @@ export const InputMask = React.memo(
                 }
 
                 buffer.current = [];
+
                 for (let i = 0; i < maskTokens.length; i++) {
                     let c = maskTokens[i];
+
                     if (c !== '?') {
                         if (defs[c]) buffer.current.push(getPlaceholder(i));
                         else buffer.current.push(c);
                     }
                 }
+
                 defaultBuffer.current = buffer.current.join('');
             }
         };
@@ -513,6 +553,7 @@ export const InputMask = React.memo(
         useUpdateEffect(() => {
             init();
             caret(updateValue(true));
+
             if (props.unmask) {
                 updateModel();
             }

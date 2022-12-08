@@ -1442,6 +1442,15 @@
 .p-password-panel .p-password-meter .p-password-strength.strong {
   background: #AED581;
 }
+.p-password-panel .p-password-info.weak {
+  color: #E57373;
+}
+.p-password-panel .p-password-info.medium {
+  color: #FFB74D;
+}
+.p-password-panel .p-password-info.strong {
+  color: #AED581;
+}
 
 .p-radiobutton {
   width: 20px;
@@ -1504,34 +1513,33 @@
   border-color: #212529;
 }
 
-.p-rating .p-rating-icon {
+.p-rating {
+  gap: 0.5rem;
+}
+.p-rating .p-rating-item .p-rating-icon {
   color: #dedede;
-  margin-left: 0.5rem;
   transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
   font-size: 1.143rem;
 }
-.p-rating .p-rating-icon.p-rating-cancel {
+.p-rating .p-rating-item .p-rating-icon.p-rating-cancel {
   color: #e4018d;
 }
-.p-rating .p-rating-icon:focus {
+.p-rating .p-rating-item:focus {
   outline: 0 none;
   outline-offset: 0;
   box-shadow: 0 0 0 0.1rem white;
 }
-.p-rating .p-rating-icon:first-child {
-  margin-left: 0;
-}
-.p-rating .p-rating-icon.pi-star-fill {
+.p-rating .p-rating-item.p-rating-item-active .p-rating-icon {
   color: #F48FB1;
 }
-.p-rating:not(.p-disabled):not(.p-readonly) .p-rating-icon:hover {
+.p-rating:not(.p-disabled):not(.p-readonly) .p-rating-item:hover .p-rating-icon {
   color: #F48FB1;
 }
-.p-rating:not(.p-disabled):not(.p-readonly) .p-rating-icon.p-rating-cancel:hover {
+.p-rating:not(.p-disabled):not(.p-readonly) .p-rating-item:hover .p-rating-icon.p-rating-cancel {
   color: #b5019f;
 }
 
-.p-highlight .p-rating .p-rating-icon {
+.p-highlight .p-rating .p-rating-item.p-rating-item-active .p-rating-icon {
   color: #212529;
 }
 

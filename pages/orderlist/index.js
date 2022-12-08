@@ -1,38 +1,69 @@
-import React, { useState, useEffect } from 'react';
-import { OrderList } from '../../components/lib/orderlist/OrderList';
-import { ProductService } from '../../service/ProductService';
-import OrderListDoc from '../../components/doc/orderlist';
-import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
-import getConfig from 'next/config';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
+import { DocActions } from '../../components/doc/common/docactions';
+import { ApiDoc } from '../../components/doc/orderlist/apidoc';
+import { ImportDoc } from '../../components/doc/orderlist/importdoc';
+import { TemplateDoc } from '../../components/doc/orderlist/templatedoc';
+import { BasicDoc } from '../../components/doc/orderlist/basicdoc';
+import { FilterDoc } from '../../components/doc/orderlist/filterdoc';
+import { DragDropDoc } from '../../components/doc/orderlist/dragdropdoc';
 
 const OrderListDemo = () => {
-    const [products, setProducts] = useState([]);
-    const productService = new ProductService();
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
-
-    useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const itemTemplate = (item) => {
-        return (
-            <div className="product-item">
-                <div className="image-container">
-                    <img src={`${contextPath}/images/product/${item.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={item.name} />
-                </div>
-                <div className="product-list-detail">
-                    <h5 className="mb-2">{item.name}</h5>
-                    <i className="pi pi-tag product-category-icon"></i>
-                    <span className="product-category">{item.category}</span>
-                </div>
-                <div className="product-list-action">
-                    <h6 className="mb-2">${item.price}</h6>
-                    <span className={`product-badge status-${item.inventoryStatus.toLowerCase()}`}>{item.inventoryStatus}</span>
-                </div>
-            </div>
-        );
-    };
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'filter',
+            label: 'Filter',
+            component: FilterDoc
+        },
+        {
+            id: 'dragdrop',
+            label: 'DragDrop',
+            component: DragDropDoc
+        },
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'api',
+            label: 'API',
+            component: ApiDoc,
+            children: [
+                {
+                    id: 'properties',
+                    label: 'Properties'
+                },
+                {
+                    id: 'events',
+                    label: 'Styling'
+                },
+                {
+                    id: 'methods',
+                    label: 'Methods'
+                },
+                {
+                    id: 'styling',
+                    label: 'Styling'
+                },
+                {
+                    id: 'accessibility',
+                    label: 'Accessibility'
+                }
+            ]
+        }
+    ];
 
     return (
         <div>
@@ -50,12 +81,11 @@ const OrderListDemo = () => {
             </div>
 
             <div className="content-section implementation orderlist-demo">
-                <div className="card">
-                    <OrderList value={products} header="List of Products" dragdrop listStyle={{ height: 'auto' }} dataKey="id" itemTemplate={itemTemplate} onChange={(e) => setProducts(e.value)}></OrderList>
+                <div className="content-section doc">
+                    <DocSections docs={docs} />
+                    <DocSectionNav docs={docs} />
                 </div>
             </div>
-
-            <OrderListDoc></OrderListDoc>
         </div>
     );
 };

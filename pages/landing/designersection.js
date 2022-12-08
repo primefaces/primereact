@@ -51,6 +51,7 @@ const DesignerSection = (props) => {
 
     const onCheckboxChange = (e) => {
         let _checkboxValue = [...checkboxValue];
+
         if (e.checked) _checkboxValue.push(e.value);
         else _checkboxValue.splice(_checkboxValue.indexOf(e.value), 1);
 

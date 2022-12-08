@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PrimeReact, { localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
@@ -13,6 +14,7 @@ export const AutoCompletePanel = React.memo(
 
         const createGroupChildren = (optionGroup, i, style) => {
             const groupChildren = props.getOptionGroupChildren(optionGroup);
+
             return groupChildren.map((item, j) => {
                 const key = i + '_' + j;
                 const selected = props.selectedItem === item;
@@ -29,6 +31,7 @@ export const AutoCompletePanel = React.memo(
 
         const createItem = (suggestion, index, scrollerOptions = {}) => {
             const style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
+
             if (props.optionGroupLabel) {
                 const content = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, suggestion, index) : props.getOptionGroupLabel(suggestion);
                 const childrenContent = createGroupChildren(suggestion, index, style);
@@ -59,6 +62,16 @@ export const AutoCompletePanel = React.memo(
         };
 
         const createContent = () => {
+            if (props.showEmptyMessage && ObjectUtils.isEmpty(props.suggestions)) {
+                const emptyMessage = props.emptyMessage || localeOption('emptyMessage');
+
+                return (
+                    <ul className="p-autocomplete-items">
+                        <li className="p-autocomplete-item">{emptyMessage}</li>
+                    </ul>
+                );
+            }
+
             if (props.virtualScrollerOptions) {
                 const virtualScrollerProps = {
                     ...props.virtualScrollerOptions,
@@ -92,7 +105,10 @@ export const AutoCompletePanel = React.memo(
         };
 
         const createElement = () => {
-            const className = classNames('p-autocomplete-panel p-component', props.panelClassName);
+            const className = classNames('p-autocomplete-panel p-component', props.panelClassName, {
+                'p-input-filled': PrimeReact.inputStyle === 'filled',
+                'p-ripple-disabled': PrimeReact.ripple === false
+            });
             const style = { maxHeight: props.scrollHeight, ...(props.panelStyle || {}) };
             const content = createContent();
 

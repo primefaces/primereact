@@ -91,6 +91,7 @@ export const DataView = React.memo(
                 value.sort((data1, data2) => {
                     let value1 = ObjectUtils.resolveFieldData(data1, props.sortField);
                     let value2 = ObjectUtils.resolveFieldData(data2, props.sortField);
+
                     return ObjectUtils.sort(value1, value2, props.sortOrder, PrimeReact.locale, PrimeReact.nullSortOrder);
                 });
 
@@ -166,8 +167,10 @@ export const DataView = React.memo(
 
                     for (let i = currentFirst; i < last; i++) {
                         const val = value[i];
+
                         val && items.push(<DataViewItem key={getItemRenderKey(value) || i} template={props.itemTemplate} layout={props.layout} item={val} />);
                     }
+
                     return items;
                 }
 

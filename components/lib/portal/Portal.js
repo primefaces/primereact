@@ -23,8 +23,10 @@ export const Portal = React.memo((props) => {
     });
 
     const element = props.element || props.children;
+
     if (element && mountedState) {
         const appendTo = props.appendTo || PrimeReact.appendTo || document.body;
+
         return appendTo === 'self' ? element : ReactDOM.createPortal(element, appendTo);
     }
 

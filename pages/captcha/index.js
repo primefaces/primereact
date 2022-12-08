@@ -1,16 +1,52 @@
-import React, { useRef } from 'react';
-import { Captcha } from '../../components/lib/captcha/Captcha';
-import { Toast } from '../../components/lib/toast/Toast';
-import CaptchaDoc from '../../components/doc/captcha';
-import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
+import React from 'react';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
+import { ApiDoc } from '../../components/doc/captcha/apidoc';
+import { ImportDoc } from '../../components/doc/captcha/importdoc';
+import { CaptchaDoc } from '../../components/doc/captcha/captchadoc';
+import { DocActions } from '../../components/doc/common/docactions';
 
-const CaptchaDemo = (props) => {
-    const toast = useRef(null);
-
-    const showResponse = () => {
-        toast.current.show({ severity: 'info', summary: 'Success', detail: 'User Responded' });
-    };
+const CaptchaDemo = () => {
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'captcha',
+            label: 'Captcha',
+            component: CaptchaDoc
+        },
+        {
+            id: 'api',
+            label: 'API',
+            component: ApiDoc,
+            children: [
+                {
+                    id: 'verification',
+                    label: 'Verification'
+                },
+                {
+                    id: 'properties',
+                    label: 'Properties'
+                },
+                {
+                    id: 'events',
+                    label: 'Events'
+                },
+                {
+                    id: 'methods',
+                    label: 'Methods'
+                },
+                {
+                    id: 'accessibility',
+                    label: 'Accessibility'
+                }
+            ]
+        }
+    ];
 
     return (
         <div>
@@ -18,24 +54,19 @@ const CaptchaDemo = (props) => {
                 <title>React Captcha Component</title>
                 <meta name="description" content="Captcha is a form validation component based on Recaptcha." />
             </Head>
+
             <div className="content-section introduction">
                 <div className="feature-intro">
                     <h1>Captcha</h1>
                     <p>Captcha is a form validation component based on Recaptcha.</p>
                 </div>
-
                 <DocActions github="captcha/index.js" />
             </div>
 
-            <div className="content-section implementation">
-                <Toast ref={toast}></Toast>
-
-                <div className="card">
-                    <Captcha siteKey="YOUR_SITE_KEY" onResponse={showResponse} />
-                </div>
+            <div className="content-section doc">
+                <DocSections docs={docs} />
+                <DocSectionNav docs={docs} />
             </div>
-
-            <CaptchaDoc />
         </div>
     );
 };

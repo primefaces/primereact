@@ -25,7 +25,7 @@ const TreeTableProps = [
     },
     {
         name: 'style',
-        type: 'object',
+        type: 'React.CSSProperties',
         default: 'null',
         description: 'Inline style of the component.'
     },
@@ -281,6 +281,12 @@ const TreeTableProps = [
         type: 'any',
         default: 'null',
         description: 'Value of the global filter to use in filtering.'
+    },
+    {
+        name: 'globalFilterMatchMode',
+        type: 'string',
+        default: 'contains',
+        description: 'Defines filterMatchMode; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "lt", "lte", "gt", "gte" and "custom".'
     },
     {
         name: 'filterMode',

@@ -16,14 +16,17 @@ export const ContextMenuSub = React.memo((props) => {
     const onItemMouseEnter = (event, item) => {
         if (item.disabled) {
             event.preventDefault();
+
             return;
         }
+
         setActiveItemState(item);
     };
 
     const onItemClick = (event, item) => {
         if (item.disabled) {
             event.preventDefault();
+
             return;
         }
 
@@ -45,12 +48,17 @@ export const ContextMenuSub = React.memo((props) => {
 
     const position = () => {
         const parentItem = submenuRef.current.parentElement;
-        const containerOffset = DomHandler.getOffset(submenuRef.current.parentElement);
+        const containerOffset = DomHandler.getOffset(parentItem);
         const viewport = DomHandler.getViewport();
         const sublistWidth = submenuRef.current.offsetParent ? submenuRef.current.offsetWidth : DomHandler.getHiddenElementOuterWidth(submenuRef.current);
         const itemOuterWidth = DomHandler.getOuterWidth(parentItem.children[0]);
+        const top = parseInt(containerOffset.top, 10) + submenuRef.current.offsetHeight - DomHandler.getWindowScrollTop();
 
-        submenuRef.current.style.top = '0px';
+        if (top > viewport.height) {
+            submenuRef.current.style.top = viewport.height - top + 'px';
+        } else {
+            submenuRef.current.style.top = '0px';
+        }
 
         if (parseInt(containerOffset.left, 10) + itemOuterWidth + sublistWidth > viewport.width - DomHandler.calculateScrollbarWidth()) {
             submenuRef.current.style.left = -1 * sublistWidth + 'px';
@@ -83,6 +91,7 @@ export const ContextMenuSub = React.memo((props) => {
         if (item.visible === false) {
             return null;
         }
+
         const active = activeItemState === item;
         const key = item.label + '_' + index;
         const className = classNames('p-menuitem', { 'p-menuitem-active': active }, item.className);

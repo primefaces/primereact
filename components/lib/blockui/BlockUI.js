@@ -40,6 +40,7 @@ export const BlockUI = React.forwardRef((props, ref) => {
 
         if (props.autoZIndex) {
             const key = props.fullScreen ? 'modal' : 'overlay';
+
             ZIndexUtils.set(key, maskRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex[key]);
         }
 
@@ -94,9 +95,10 @@ export const BlockUI = React.forwardRef((props, ref) => {
 
     const otherProps = ObjectUtils.findDiffKeys(props, BlockUI.defaultProps);
     const mask = createMask();
+    const className = classNames('p-blockui-container', props.containerClassName);
 
     return (
-        <div id={props.id} ref={elementRef} className="p-blockui-container" {...otherProps}>
+        <div id={props.id} ref={elementRef} className={className} style={props.containerStyle} {...otherProps}>
             {props.children}
             {mask}
         </div>
@@ -106,14 +108,16 @@ export const BlockUI = React.forwardRef((props, ref) => {
 BlockUI.displayName = 'BlockUI';
 BlockUI.defaultProps = {
     __TYPE: 'BlockUI',
-    id: null,
-    blocked: false,
-    fullScreen: false,
-    baseZIndex: 0,
     autoZIndex: true,
-    style: null,
+    baseZIndex: 0,
+    blocked: false,
     className: null,
-    template: null,
+    containerClassName: null,
+    containerStyle: null,
+    fullScreen: false,
+    id: null,
     onBlocked: null,
-    onUnblocked: null
+    onUnblocked: null,
+    style: null,
+    template: null
 };

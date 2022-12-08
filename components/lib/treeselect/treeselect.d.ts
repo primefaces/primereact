@@ -81,47 +81,48 @@ interface TreeSelectFilterOptions {
 }
 
 export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'value' | 'ref'> {
-    value?: TreeSelectSelectionKeys;
-    name?: string;
-    disabled?: boolean;
-    options?: TreeNode[];
-    scrollHeight?: string;
-    placeholder?: string;
-    inputId?: string;
+    appendTo?: TreeSelectAppendToType;
     ariaLabel?: string;
     ariaLabelledBy?: string;
-    selectionMode?: TreeSelectSelectionModeType;
-    panelStyle?: object;
-    panelClassName?: string;
-    appendTo?: TreeSelectAppendToType;
+    children?: React.ReactNode;
+    disabled?: boolean;
+    display?: TreeSelectDisplayType;
+    dropdownIcon?: string;
     emptyMessage?: string;
     expandedKeys?: TreeSelectExpandedKeysType;
-    display?: TreeSelectDisplayType;
-    metaKeySelection?: boolean;
-    valueTemplate?: TreeSelectValueTemplateType;
-    panelHeaderTemplate?: TreeSelectPanelHeaderTemplateType;
-    panelFooterTemplate?: TreeSelectPanelFooterTemplateType;
-    filterTemplate?: TreeSelectFilterTemplateType;
-    transitionOptions?: CSSTransitionProps;
-    dropdownIcon?: string;
     filter?: boolean;
-    filterValue?: string;
     filterBy?: string;
+    filterInputAutoFocus?: boolean;
+    filterLocale?: string;
     filterMode?: TreeSelectFilterModeType;
     filterPlaceholder?: string;
-    filterLocale?: string;
-    filterInputAutoFocus?: boolean;
+    filterTemplate?: TreeSelectFilterTemplateType;
+    filterValue?: string;
+    inputId?: string;
+    inputRef?: React.Ref<HTMLInputElement>;
+    metaKeySelection?: boolean;
+    name?: string;
+    options?: TreeNode[];
+    panelClassName?: string;
+    panelFooterTemplate?: TreeSelectPanelFooterTemplateType;
+    panelHeaderTemplate?: TreeSelectPanelHeaderTemplateType;
+    panelStyle?: React.CSSProperties;
+    placeholder?: string;
     resetFilterOnHide?: boolean;
-    onShow?(): void;
-    onHide?(): void;
+    scrollHeight?: string;
+    selectionMode?: TreeSelectSelectionModeType;
+    transitionOptions?: CSSTransitionProps;
+    value?: TreeSelectSelectionKeys;
+    valueTemplate?: TreeSelectValueTemplateType;
     onChange?(e: TreeSelectChangeParams): void;
-    onToggle?(e: TreeSelectExpandedParams): void;
+    onFilterValueChange?(e: TreeSelectFilterValueChangeParams): void;
+    onHide?(): void;
+    onNodeCollapse?(e: TreeSelectEventNodeParams): void;
+    onNodeExpand?(e: TreeSelectEventNodeParams): void;
     onNodeSelect?(e: TreeSelectEventNodeParams): void;
     onNodeUnselect?(e: TreeSelectEventNodeParams): void;
-    onNodeExpand?(e: TreeSelectEventNodeParams): void;
-    onNodeCollapse?(e: TreeSelectEventNodeParams): void;
-    onFilterValueChange?(e: TreeSelectFilterValueChangeParams): void;
-    children?: React.ReactNode;
+    onShow?(): void;
+    onToggle?(e: TreeSelectExpandedParams): void;
 }
 
 export declare class TreeSelect extends React.Component<TreeSelectProps, any> {

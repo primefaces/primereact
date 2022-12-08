@@ -41,6 +41,7 @@ export const Password = React.memo(
         const updateLabels = () => {
             if (meterState) {
                 let label = null;
+
                 switch (meterState.strength) {
                     case 'weak':
                         label = weakLabel;
@@ -257,7 +258,10 @@ export const Password = React.memo(
         };
 
         const createPanel = () => {
-            const panelClassName = classNames('p-password-panel p-component', props.panelClassName);
+            const panelClassName = classNames('p-password-panel p-component', props.panelClassName, {
+                'p-input-filled': PrimeReact.inputStyle === 'filled',
+                'p-ripple-disabled': PrimeReact.ripple === false
+            });
             const { strength, width } = meterState || { strength: '', width: '0%' };
             const header = ObjectUtils.getJSXElement(props.header, props);
             const footer = ObjectUtils.getJSXElement(props.footer, props);
@@ -268,7 +272,7 @@ export const Password = React.memo(
                     <div className="p-password-meter">
                         <div className={`p-password-strength ${strength}`} style={{ width }}></div>
                     </div>
-                    <div className="p-password-info">{infoTextState}</div>
+                    <div className={`p-password-info ${strength}`}>{infoTextState}</div>
                 </>
             );
 

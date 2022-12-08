@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
-import { Button } from '../button/Button';
+import { Ripple } from '../ripple/Ripple';
 import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const PageLinks = React.memo((props) => {
@@ -29,9 +29,10 @@ export const PageLinks = React.memo((props) => {
             });
 
             let element = (
-                <Button type="button" className={className} onClick={(e) => onPageLinkClick(e, pageLink)} aria-label={`${ariaLabel('pageLabel')} ${pageLink + 1}`}>
+                <button type="button" className={className} onClick={(e) => onPageLinkClick(e, pageLink)} aria-label={`${ariaLabel('pageLabel')} ${pageLink + 1}`}>
                     {pageLink}
-                </Button>
+                    <Ripple />
+                </button>
             );
 
             if (props.template) {

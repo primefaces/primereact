@@ -94,7 +94,7 @@ import { Button } from 'primereact/button';
     <link rel="stylesheet" href="https://unpkg.com/primeicons/primeicons.css" />
     <link rel="stylesheet" href="https://unpkg.com/primereact/resources/themes/lara-light-indigo/theme.css" />
     <link rel="stylesheet" href="https://unpkg.com/primereact/resources/primereact.min.css" />
-    <link rel="stylesheet" href="https://unpkg.com/primeflex@2.0.0/primeflex.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/primeflex@3.2.1/primeflex.min.css" />
 
     <!-- Dependencies -->
     <script src="https://unpkg.com/react/umd/react.production.min.js"></script>
@@ -232,7 +232,7 @@ primereact/resources/themes/rhea/theme.css
 dependencies: {
     "react": "^17.0.0 || ^18.0.0",
     "react-dom": "^17.0.0 || ^18.0.0"
-    "primeicons": "^5.0.0"
+    "primeicons": "^5.0.0 || ^6.0.0"
 }
 `}
                 </CodeHighlight>
@@ -259,10 +259,6 @@ dependencies: {
                             <tr>
                                 <td>Editor</td>
                                 <td>Quill.js</td>
-                            </tr>
-                            <tr>
-                                <td>FullCalendar*</td>
-                                <td>FullCalendar 4.0 Alpha.2+</td>
                             </tr>
                             <tr>
                                 <td>DataView</td>

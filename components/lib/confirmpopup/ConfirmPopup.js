@@ -43,7 +43,7 @@ export const ConfirmPopup = React.memo(
             overlay: overlayRef,
             listener: (event, { type, valid }) => {
                 if (valid) {
-                    type === 'outside' ? !isPanelClicked.current && hide() : hide();
+                    type === 'outside' ? props.dismissable && !isPanelClicked.current && hide() : hide();
                 }
 
                 isPanelClicked.current = false;
@@ -85,6 +85,7 @@ export const ConfirmPopup = React.memo(
             setVisibleState(false);
             OverlayService.off('overlay-click', overlayEventListener.current);
             overlayEventListener.current = null;
+
             if (result) {
                 callbackFromProp('onHide', result);
             }
@@ -125,6 +126,7 @@ export const ConfirmPopup = React.memo(
                 if (containerOffset.left < targetOffset.left) {
                     arrowLeft = targetOffset.left - containerOffset.left;
                 }
+
                 overlayRef.current.style.setProperty('--overlayArrowLeft', `${arrowLeft}px`);
 
                 if (containerOffset.top < targetOffset.top) {
@@ -239,7 +241,10 @@ export const ConfirmPopup = React.memo(
 
         const createElement = () => {
             const otherProps = ObjectUtils.findDiffKeys(props, ConfirmPopup.defaultProps);
-            const className = classNames('p-confirm-popup p-component', getPropValue('className'));
+            const className = classNames('p-confirm-popup p-component', getPropValue('className'), {
+                'p-input-filled': PrimeReact.inputStyle === 'filled',
+                'p-ripple-disabled': PrimeReact.ripple === false
+            });
             const content = createContent();
             const footer = createFooter();
 

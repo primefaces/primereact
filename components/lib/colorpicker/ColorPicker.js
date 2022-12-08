@@ -77,6 +77,7 @@ export const ColorPicker = React.memo(
 
         const pickHue = (event) => {
             const top = hueViewRef.current.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0);
+
             hsbValue.current = validateHSB({
                 h: Math.floor((360 * (150 - Math.max(0, Math.min(150, (event.pageY || event.changedTouches[0].pageY) - top)))) / 150),
                 s: 100,
@@ -143,6 +144,7 @@ export const ColorPicker = React.memo(
             const left = rect.left + document.body.scrollLeft;
             const saturation = Math.floor((100 * Math.max(0, Math.min(150, (event.pageX || event.changedTouches[0].pageX) - left))) / 150);
             const brightness = Math.floor((100 * (150 - Math.max(0, Math.min(150, (event.pageY || event.changedTouches[0].pageY) - top)))) / 150);
+
             hsbValue.current = validateHSB({
                 h: hsbValue.current.h,
                 s: saturation,
@@ -328,19 +330,24 @@ export const ColorPicker = React.memo(
 
         const validateHEX = (hex) => {
             let len = 6 - hex.length;
+
             if (len > 0) {
                 let o = [];
+
                 for (let i = 0; i < len; i++) {
                     o.push('0');
                 }
+
                 o.push(hex);
                 hex = o.join('');
             }
+
             return hex;
         };
 
         const HEXtoRGB = (hex) => {
             const hexValue = parseInt(hex.indexOf('#') > -1 ? hex.substring(1) : hex, 16);
+
             return { r: hexValue >> 16, g: (hexValue & 0x00ff00) >> 8, b: hexValue & 0x0000ff };
         };
 
@@ -357,8 +364,10 @@ export const ColorPicker = React.memo(
             let min = Math.min(rgb.r, rgb.g, rgb.b);
             let max = Math.max(rgb.r, rgb.g, rgb.b);
             let delta = max - min;
+
             hsb.b = max;
             hsb.s = max !== 0 ? (255 * delta) / max : 0;
+
             if (hsb.s !== 0) {
                 if (rgb.r === max) {
                     hsb.h = (rgb.g - rgb.b) / delta;
@@ -370,12 +379,16 @@ export const ColorPicker = React.memo(
             } else {
                 hsb.h = -1;
             }
+
             hsb.h *= 60;
+
             if (hsb.h < 0) {
                 hsb.h += 360;
             }
+
             hsb.s *= 100 / 255;
             hsb.b *= 100 / 255;
+
             return hsb;
         };
 
@@ -388,6 +401,7 @@ export const ColorPicker = React.memo(
             let h = Math.round(hsb.h);
             let s = Math.round((hsb.s * 255) / 100);
             let v = Math.round((hsb.b * 255) / 100);
+
             if (s === 0) {
                 rgb = {
                     r: v,
@@ -398,7 +412,9 @@ export const ColorPicker = React.memo(
                 let t1 = v;
                 let t2 = ((255 - s) * v) / 255;
                 let t3 = ((t1 - t2) * (h % 60)) / 60;
+
                 if (h === 360) h = 0;
+
                 if (h < 60) {
                     rgb.r = t1;
                     rgb.b = t2;
@@ -429,6 +445,7 @@ export const ColorPicker = React.memo(
                     rgb.b = 0;
                 }
             }
+
             return { r: Math.round(rgb.r), g: Math.round(rgb.g), b: Math.round(rgb.b) };
         };
 
@@ -558,6 +575,8 @@ export const ColorPicker = React.memo(
                         appendTo={props.appendTo}
                         inline={props.inline}
                         disabled={props.disabled}
+                        panelStyle={props.panelStyle}
+                        panelClassName={props.panelClassName}
                         onClick={onPanelClick}
                         in={props.inline || overlayVisibleState}
                         onEnter={onOverlayEnter}
@@ -578,22 +597,24 @@ export const ColorPicker = React.memo(
 ColorPicker.displayName = 'ColorPicker';
 ColorPicker.defaultProps = {
     __TYPE: 'ColorPicker',
-    id: null,
-    inputRef: null,
-    value: null,
-    style: null,
+    appendTo: null,
     className: null,
     defaultColor: 'ff0000',
-    inline: false,
-    format: 'hex',
-    appendTo: null,
     disabled: false,
-    tabIndex: null,
+    format: 'hex',
+    id: null,
+    inline: false,
     inputId: null,
+    inputRef: null,
+    onChange: null,
+    onHide: null,
+    onShow: null,
+    panelClassName: null,
+    panelStyle: null,
+    style: null,
+    tabIndex: null,
     tooltip: null,
     tooltipOptions: null,
     transitionOptions: null,
-    onChange: null,
-    onShow: null,
-    onHide: null
+    value: null
 };

@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { FilterService } from '../api/Api';
+import { FilterService, localeOption } from '../api/Api';
 import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { ListBoxHeader } from './ListBoxHeader';
 import { ListBoxItem } from './ListBoxItem';
@@ -18,6 +18,7 @@ export const ListBox = React.memo(
 
         const onOptionSelect = (event) => {
             const option = event.option;
+
             if (props.disabled || isOptionDisabled(option)) {
                 return;
             }
@@ -107,6 +108,7 @@ export const ListBox = React.memo(
             virtualScrollerRef.current && virtualScrollerRef.current.scrollToIndex(0);
 
             const { originalEvent, value } = event;
+
             if (props.onFilterValueChange) {
                 props.onFilterValueChange({
                     originalEvent,
@@ -147,6 +149,7 @@ export const ListBox = React.memo(
                 if (props.optionGroupLabel) {
                     for (let i = 0; i < visibleOptions.length; i++) {
                         let selectedOptionIndex = findOptionIndexInList(props.value, getOptionGroupChildren(visibleOptions[i]));
+
                         if (selectedOptionIndex !== -1) {
                             return { group: i, option: selectedOptionIndex };
                         }
@@ -165,12 +168,14 @@ export const ListBox = React.memo(
 
         const findOptionIndexInList = (value, list) => {
             const key = equalityKey();
+
             return list.findIndex((item) => ObjectUtils.equals(value, getOptionValue(item), key));
         };
 
         const isSelected = (option) => {
             const optionValue = getOptionValue(option);
             const key = equalityKey();
+
             return props.multiple && props.value ? props.value.some((val) => ObjectUtils.equals(val, optionValue, key)) : ObjectUtils.equals(props.value, optionValue, key);
         };
 
@@ -220,12 +225,15 @@ export const ListBox = React.memo(
 
                 if (props.optionGroupLabel) {
                     let filteredGroups = [];
+
                     for (let optgroup of props.options) {
                         let filteredSubOptions = FilterService.filter(getOptionGroupChildren(optgroup), searchFields, filterValue, props.filterMatchMode, props.filterLocale);
+
                         if (filteredSubOptions && filteredSubOptions.length) {
                             filteredGroups.push({ ...optgroup, ...{ items: filteredSubOptions } });
                         }
                     }
+
                     return filteredGroups;
                 } else {
                     return FilterService.filter(props.options, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
@@ -238,6 +246,7 @@ export const ListBox = React.memo(
         const scrollToSelectedIndex = () => {
             if (virtualScrollerRef.current) {
                 const selectedIndex = getSelectedOptionIndex();
+
                 if (selectedIndex !== -1) {
                     setTimeout(() => virtualScrollerRef.current.scrollToIndex(selectedIndex), 0);
                 }
@@ -296,6 +305,7 @@ export const ListBox = React.memo(
 
         const createItem = (option, index, scrollerOptions = {}) => {
             const style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
+
             if (props.optionGroupLabel) {
                 const groupContent = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, option, index) : getOptionGroupLabel(option);
                 const groupChildrenContent = createGroupChildren(option, style);
@@ -333,7 +343,19 @@ export const ListBox = React.memo(
         };
 
         const createItems = () => {
-            return visibleOptions ? visibleOptions.map(createItem) : null;
+            if (ObjectUtils.isNotEmpty(visibleOptions)) {
+                return visibleOptions.map(createItem);
+            } else if (hasFilter) {
+                return createEmptyMessage(props.emptyFilterMessage, true);
+            }
+
+            return createEmptyMessage(props.emptyMessage);
+        };
+
+        const createEmptyMessage = (emptyMessage, isFilter) => {
+            const message = ObjectUtils.getJSXElement(emptyMessage, props) || localeOption(isFilter ? 'emptyFilterMessage' : 'emptyMessage');
+
+            return <li className="p-listbox-empty-message">{message}</li>;
         };
 
         const createList = () => {
@@ -348,7 +370,7 @@ export const ListBox = React.memo(
                             const className = classNames('p-listbox-list', option.className);
 
                             return (
-                                <ul ref={option.contentRef} className={className} role="listbox" aria-multiselectable={props.multiple} aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}>
+                                <ul ref={option.contentRef} className={className} role="listbox" aria-multiselectable={props.multiple} {...ariaProps}>
                                     {option.children}
                                 </ul>
                             );
@@ -361,7 +383,7 @@ export const ListBox = React.memo(
                 const items = createItems();
 
                 return (
-                    <ul className="p-listbox-list" role="listbox" aria-multiselectable={props.multiple} aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}>
+                    <ul className="p-listbox-list" role="listbox" aria-multiselectable={props.multiple} {...ariaProps}>
                         {items}
                     </ul>
                 );
@@ -372,6 +394,7 @@ export const ListBox = React.memo(
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = ObjectUtils.findDiffKeys(props, ListBox.defaultProps);
+        const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-listbox p-component',
             {
@@ -400,38 +423,38 @@ export const ListBox = React.memo(
 ListBox.displayName = 'ListBox';
 ListBox.defaultProps = {
     __TYPE: 'ListBox',
-    id: null,
-    value: null,
-    options: null,
-    optionLabel: null,
-    optionValue: null,
-    optionDisabled: null,
-    optionGroupLabel: null,
-    optionGroupChildren: null,
-    optionGroupTemplate: null,
-    itemTemplate: null,
-    style: null,
-    listStyle: null,
-    listClassName: null,
     className: null,
-    virtualScrollerOptions: null,
-    disabled: null,
     dataKey: null,
-    multiple: false,
-    metaKeySelection: false,
+    disabled: null,
+    emptyFilterMessage: null,
+    emptyMessage: null,
     filter: false,
-    filterTemplate: null,
     filterBy: null,
-    filterValue: null,
+    filterInputProps: null,
+    filterLocale: undefined,
     filterMatchMode: 'contains',
     filterPlaceholder: null,
-    filterLocale: undefined,
-    filterInputProps: null,
+    filterTemplate: null,
+    filterValue: null,
+    id: null,
+    itemTemplate: null,
+    listClassName: null,
+    listStyle: null,
+    metaKeySelection: false,
+    multiple: false,
+    onChange: null,
+    onFilterValueChange: null,
+    optionDisabled: null,
+    optionGroupChildren: null,
+    optionGroupLabel: null,
+    optionGroupTemplate: null,
+    optionLabel: null,
+    optionValue: null,
+    options: null,
+    style: null,
     tabIndex: 0,
     tooltip: null,
     tooltipOptions: null,
-    'aria-label': null,
-    'aria-labelledby': null,
-    onChange: null,
-    onFilterValueChange: null
+    value: null,
+    virtualScrollerOptions: null
 };

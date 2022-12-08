@@ -19,9 +19,11 @@ export default function Home(props) {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const [tableTheme, setTableTheme] = useState('lara-light-indigo');
     const rootClassName = classNames('landing', { 'landing-light': !props.dark, 'landing-dark': props.dark, 'landing-news-active': props.newsActive });
+
     const toggleColorScheme = () => {
         const darkMode = !props.dark;
         const newTheme = darkMode ? 'lara-dark-indigo' : 'lara-light-indigo';
+
         props.onThemeChange(newTheme, darkMode);
     };
 

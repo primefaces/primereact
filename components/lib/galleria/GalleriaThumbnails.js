@@ -105,6 +105,7 @@ export const GalleriaThumbnails = React.memo(
 
             let prevItemIndex = props.activeItemIndex !== 0 ? props.activeItemIndex - 1 : 0;
             let diff = prevItemIndex + totalShiftedItemsState;
+
             if (numVisibleState - diff - 1 > getMedianItemIndex() && (-1 * totalShiftedItemsState !== 0 || props.circular)) {
                 step(1);
             }
@@ -122,6 +123,7 @@ export const GalleriaThumbnails = React.memo(
             stopSlideShow();
 
             let nextItemIndex = props.activeItemIndex + 1;
+
             if (nextItemIndex + totalShiftedItemsState > getMedianItemIndex() && (-1 * totalShiftedItemsState < getTotalPageNumber() - 1 || props.circular)) {
                 step(-1);
             }
@@ -139,16 +141,20 @@ export const GalleriaThumbnails = React.memo(
             stopSlideShow();
 
             let selectedItemIndex = event.index;
+
             if (selectedItemIndex !== props.activeItemIndex) {
                 const diff = selectedItemIndex + totalShiftedItemsState;
                 let dir = 0;
+
                 if (selectedItemIndex < props.activeItemIndex) {
                     dir = numVisibleState - diff - 1 - getMedianItemIndex();
+
                     if (dir > 0 && -1 * totalShiftedItemsState !== 0) {
                         step(dir);
                     }
                 } else {
                     dir = getMedianItemIndex() - diff;
+
                     if (dir < 0 && -1 * totalShiftedItemsState < getTotalPageNumber() - 1) {
                         step(dir);
                     }
@@ -222,6 +228,7 @@ export const GalleriaThumbnails = React.memo(
                 responsiveOptions.current.sort((data1, data2) => {
                     const value1 = data1.breakpoint;
                     const value2 = data2.breakpoint;
+
                     return ObjectUtils.sort(value1, value2, -1, PrimeReact.locale, PrimeReact.nullSortOrder);
                 });
 

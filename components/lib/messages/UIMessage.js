@@ -1,11 +1,12 @@
 import * as React from 'react';
+import { localeOption } from '../api/Api';
 import { useTimeout } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames } from '../utils/Utils';
+import { classNames, IconUtils } from '../utils/Utils';
 
 export const UIMessage = React.memo(
     React.forwardRef((props, ref) => {
-        const { severity, content, summary, detail, closable, life, sticky } = props.message;
+        const { severity, content, summary, detail, closable, life, sticky, icon } = props.message;
 
         const [clearTimer] = useTimeout(
             () => {
@@ -31,9 +32,11 @@ export const UIMessage = React.memo(
 
         const createCloseIcon = () => {
             if (closable !== false) {
+                const ariaLabel = localeOption('close');
+
                 return (
-                    <button type="button" className="p-message-close p-link" onClick={onClose}>
-                        <i className="p-message-close-icon pi pi-times"></i>
+                    <button type="button" className="p-message-close p-link" aria-label={ariaLabel} onClick={onClose}>
+                        <i className="p-message-close-icon pi pi-times" aria-hidden="true"></i>
                         <Ripple />
                     </button>
                 );
@@ -44,17 +47,23 @@ export const UIMessage = React.memo(
 
         const createMessage = () => {
             if (props.message) {
-                const icon = classNames('p-message-icon pi ', {
-                    'pi-info-circle': severity === 'info',
-                    'pi-check': severity === 'success',
-                    'pi-exclamation-triangle': severity === 'warn',
-                    'pi-times-circle': severity === 'error'
-                });
+                let iconValue = icon;
+
+                if (!iconValue) {
+                    iconValue = classNames('pi', {
+                        'pi-info-circle': severity === 'info',
+                        'pi-exclamation-triangle': severity === 'warn',
+                        'pi-times-circle': severity === 'error',
+                        'pi-check': severity === 'success'
+                    });
+                }
+
+                const iconContent = IconUtils.getJSXIcon(iconValue, { className: 'p-message-icon' }, { props });
 
                 return (
                     content || (
                         <>
-                            <span className={icon}></span>
+                            {iconContent}
                             <span className="p-message-summary">{summary}</span>
                             <span className="p-message-detail">{detail}</span>
                         </>

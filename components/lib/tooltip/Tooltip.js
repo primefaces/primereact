@@ -64,21 +64,27 @@ export const Tooltip = React.memo(
         };
 
         const getEvents = (target) => {
-            let showEvent = getTargetOption(target, 'showevent') || props.showEvent;
-            let hideEvent = getTargetOption(target, 'hideevent') || props.hideEvent;
+            let showEvents = [getTargetOption(target, 'showevent') || props.showEvent];
+            let hideEvents = [getTargetOption(target, 'hideevent') || props.hideEvent];
 
             if (isMouseTrack(target)) {
-                showEvent = 'mousemove';
-                hideEvent = 'mouseleave';
+                showEvents = ['mousemove'];
+                hideEvents = ['mouseleave'];
             } else {
                 const event = getTargetOption(target, 'event') || props.event;
+
                 if (event === 'focus') {
-                    showEvent = 'focus';
-                    hideEvent = 'blur';
+                    showEvents = ['focus'];
+                    hideEvents = ['blur'];
+                }
+
+                if (event === 'both') {
+                    showEvents = ['focus', 'mouseenter'];
+                    hideEvents = ['blur', 'mouseleave'];
                 }
             }
 
-            return { showEvent, hideEvent };
+            return { showEvents, hideEvents };
         };
 
         const getPosition = (target) => {
@@ -122,7 +128,7 @@ export const Tooltip = React.memo(
                     elementRef.current.style.pointerEvents = 'none';
                 }
 
-                if (isMouseTrack(currentTargetRef.current) && !containerSize.current) {
+                if ((isMouseTrack(currentTargetRef.current) || position == 'mouse') && !containerSize.current) {
                     containerSize.current = {
                         width: DomHandler.getOuterWidth(elementRef.current),
                         height: DomHandler.getOuterHeight(elementRef.current)
@@ -149,6 +155,7 @@ export const Tooltip = React.memo(
             } else {
                 // #2653 give the callback a chance to return false and not continue with display
                 const success = sendCallback(props.onBeforeShow, { originalEvent: e, target: currentTargetRef.current });
+
                 if (success) {
                     applyDelay('showDelay', () => {
                         setVisibleState(true);
@@ -163,6 +170,7 @@ export const Tooltip = React.memo(
 
             if (visibleState) {
                 const success = sendCallback(props.onBeforeHide, { originalEvent: e, target: currentTargetRef.current });
+
                 if (success) {
                     applyDelay('hideDelay', () => {
                         if (!isAutoHide() && allowHide.current === false) {
@@ -184,7 +192,7 @@ export const Tooltip = React.memo(
                 top = 0,
                 currentPosition = position || positionState;
 
-            if (isMouseTrack(target) && coordinate) {
+            if ((isMouseTrack(target) || currentPosition == 'mouse') && coordinate) {
                 const _containerSize = {
                     width: DomHandler.getOuterWidth(elementRef.current),
                     height: DomHandler.getOuterHeight(elementRef.current)
@@ -201,6 +209,7 @@ export const Tooltip = React.memo(
                         top -= _containerSize.height / 2 - mouseTrackTop;
                         break;
                     case 'right':
+                    case 'mouse':
                         left += mouseTrackLeft;
                         top -= _containerSize.height / 2 - mouseTrackTop;
                         break;
@@ -271,19 +280,21 @@ export const Tooltip = React.memo(
 
         const bindTargetEvent = (target) => {
             if (target) {
-                const { showEvent, hideEvent } = getEvents(target);
+                const { showEvents, hideEvents } = getEvents(target);
                 const currentTarget = getTarget(target);
-                currentTarget.addEventListener(showEvent, show);
-                currentTarget.addEventListener(hideEvent, hide);
+
+                showEvents.forEach((event) => currentTarget.addEventListener(event, show));
+                hideEvents.forEach((event) => currentTarget.addEventListener(event, hide));
             }
         };
 
         const unbindTargetEvent = (target) => {
             if (target) {
-                const { showEvent, hideEvent } = getEvents(target);
+                const { showEvents, hideEvents } = getEvents(target);
                 const currentTarget = getTarget(target);
-                currentTarget.removeEventListener(showEvent, show);
-                currentTarget.removeEventListener(hideEvent, hide);
+
+                showEvents.forEach((event) => currentTarget.removeEventListener(event, show));
+                hideEvents.forEach((event) => currentTarget.removeEventListener(event, hide));
             }
         };
 
@@ -291,17 +302,21 @@ export const Tooltip = React.memo(
             clearTimeouts();
 
             const delay = getTargetOption(currentTargetRef.current, delayProp.toLowerCase()) || props[delayProp];
+
             !!delay ? (timeouts.current[`${delayProp}`] = setTimeout(() => callback(), delay)) : callback();
         };
 
         const sendCallback = (callback, ...params) => {
             if (callback) {
                 let result = callback(...params);
+
                 if (result === undefined) {
                     result = true;
                 }
+
                 return result;
             }
+
             return true;
         };
 
@@ -314,9 +329,11 @@ export const Tooltip = React.memo(
                 if (isShowOnDisabled(target)) {
                     if (!target.hasWrapper) {
                         const wrapper = document.createElement('span');
+
                         target.parentNode.insertBefore(wrapper, target);
                         wrapper.appendChild(target);
                         target.hasWrapper = true;
+
                         return wrapper;
                     } else {
                         return target.parentElement;
@@ -354,6 +371,7 @@ export const Tooltip = React.memo(
                 } else {
                     const setEvent = (target) => {
                         let element = DomHandler.find(document, target);
+
                         element.forEach((el) => {
                             operation(el);
                         });
@@ -370,14 +388,12 @@ export const Tooltip = React.memo(
             }
         };
 
-        React.useEffect(() => {
+        useMountEffect(() => {
+            loadTargetEvents();
+
             if (visibleState && currentTargetRef.current && isDisabled(currentTargetRef.current)) {
                 hide();
             }
-        });
-
-        useMountEffect(() => {
-            loadTargetEvents();
         });
 
         useUpdateEffect(() => {
@@ -392,6 +408,7 @@ export const Tooltip = React.memo(
             if (visibleState) {
                 const position = getPosition(currentTargetRef.current);
                 const classname = getTargetOption(currentTargetRef.current, 'classname');
+
                 setPositionState(position);
                 setClassNameState(classname);
                 updateTooltipState(position);
@@ -434,6 +451,8 @@ export const Tooltip = React.memo(
             updateTargetEvents,
             loadTargetEvents,
             unloadTargetEvents,
+            show,
+            hide,
             getElement: () => elementRef.current,
             getTarget: () => currentTargetRef.current
         }));
@@ -473,31 +492,31 @@ export const Tooltip = React.memo(
 Tooltip.displayName = 'Tooltip';
 Tooltip.defaultProps = {
     __TYPE: 'Tooltip',
-    id: null,
-    target: null,
-    content: null,
-    disabled: false,
-    className: null,
-    style: null,
     appendTo: null,
-    position: 'right',
-    my: null,
     at: null,
-    event: null,
-    showEvent: 'mouseenter',
-    hideEvent: 'mouseleave',
+    autoHide: true,
     autoZIndex: true,
     baseZIndex: 0,
-    mouseTrack: false,
-    mouseTrackTop: 5,
-    mouseTrackLeft: 5,
-    showDelay: 0,
-    updateDelay: 0,
+    className: null,
+    content: null,
+    disabled: false,
+    event: null,
     hideDelay: 0,
-    autoHide: true,
-    showOnDisabled: false,
-    onBeforeShow: null,
+    hideEvent: 'mouseleave',
+    id: null,
+    mouseTrack: false,
+    mouseTrackLeft: 5,
+    mouseTrackTop: 5,
+    my: null,
     onBeforeHide: null,
+    onBeforeShow: null,
+    onHide: null,
     onShow: null,
-    onHide: null
+    position: 'right',
+    showDelay: 0,
+    showEvent: 'mouseenter',
+    showOnDisabled: false,
+    style: null,
+    target: null,
+    updateDelay: 0
 };

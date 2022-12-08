@@ -9,6 +9,7 @@ let locales = {
         equals: 'Equals',
         notEquals: 'Not equals',
         noFilter: 'No Filter',
+        filter: 'Filter',
         lt: 'Less than',
         lte: 'Less than or equal to',
         gt: 'Greater than',
@@ -19,6 +20,7 @@ let locales = {
         dateAfter: 'Date is after',
         custom: 'Custom',
         clear: 'Clear',
+        close: 'Close',
         apply: 'Apply',
         matchAll: 'Match All',
         matchAny: 'Match Any',
@@ -52,7 +54,11 @@ let locales = {
             firstPageLabel: 'First Page',
             lastPageLabel: 'Last Page',
             nextPageLabel: 'Next Page',
-            previousPageLabel: 'Previous Page'
+            previousPageLabel: 'Previous Page',
+            selectLabel: 'Select',
+            unselectLabel: 'Unselect',
+            expandLabel: 'Expand',
+            collapseLabel: 'Collapse'
         }
     }
 };
@@ -76,6 +82,7 @@ function updateLocaleOption(key, value, locale) {
 
 function updateLocaleOptions(options, locale) {
     const _locale = locale || PrimeReact.locale;
+
     locales[_locale] = { ...locales[_locale], ...options };
 }
 
@@ -101,6 +108,7 @@ function ariaLabel(key) {
 
 function localeOptions(locale) {
     const _locale = locale || PrimeReact.locale;
+
     return locales[_locale];
 }
 

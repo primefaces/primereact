@@ -55,6 +55,7 @@ export const SpeedDial = React.memo(
 
         const calculateTransitionDelay = (index) => {
             const length = props.model.length;
+
             return (visible ? index : length - index - 1) * props.transitionDelay;
         };
 
@@ -77,6 +78,7 @@ export const SpeedDial = React.memo(
                     const step = Math.PI / (length - 1);
                     const x = `calc(${radius * Math.cos(step * index)}px + var(--item-diff-x, 0px))`;
                     const y = `calc(${radius * Math.sin(step * index)}px + var(--item-diff-y, 0px))`;
+
                     if (direction === 'up') {
                         return { left: x, bottom: y };
                     } else if (direction === 'down') {
@@ -91,6 +93,7 @@ export const SpeedDial = React.memo(
                     const step = Math.PI / (2 * (length - 1));
                     const x = `calc(${radius * Math.cos(step * index)}px + var(--item-diff-x, 0px))`;
                     const y = `calc(${radius * Math.sin(step * index)}px + var(--item-diff-y, 0px))`;
+
                     if (direction === 'up-left') {
                         return { right: x, bottom: y };
                     } else if (direction === 'up-right') {
@@ -124,6 +127,7 @@ export const SpeedDial = React.memo(
                 if (button && firstItem) {
                     const wDiff = Math.abs(button.offsetWidth - firstItem.offsetWidth);
                     const hDiff = Math.abs(button.offsetHeight - firstItem.offsetHeight);
+
                     listRef.current.style.setProperty('--item-diff-x', `${wDiff / 2}px`);
                     listRef.current.style.setProperty('--item-diff-y', `${hDiff / 2}px`);
                 }
@@ -151,6 +155,7 @@ export const SpeedDial = React.memo(
             if (item.visible === false) {
                 return null;
             }
+
             const style = getItemStyle(index);
             const { disabled, icon: _icon, label, template, url, target } = item;
             const contentClassName = classNames('p-speeddial-action', { 'p-disabled': disabled });
@@ -212,7 +217,7 @@ export const SpeedDial = React.memo(
                 [`${props.hideIcon}`]: visible && !!props.hideIcon
             });
             const icon = IconUtils.getJSXIcon(showIconVisible ? props.showIcon : hideIconVisible ? props.hideIcon : null, undefined, { props });
-            const content = <Button type="button" style={props.buttonStyle} className={className} icon={icon} onClick={onClick} disabled={props.disabled} />;
+            const content = <Button type="button" style={props.buttonStyle} className={className} icon={icon} onClick={onClick} disabled={props.disabled} aria-label={props['aria-label']} />;
 
             if (props.buttonTemplate) {
                 const defaultContentOptions = {
@@ -290,6 +295,7 @@ SpeedDial.defaultProps = {
     buttonStyle: null,
     buttonClassName: null,
     buttonTemplate: null,
+    'aria-label': null,
     maskStyle: null,
     maskClassName: null,
     showIcon: 'pi pi-plus',

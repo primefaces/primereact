@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { localeOption } from '../api/Api';
+import PrimeReact, { localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { MultiSelectHeader } from './MultiSelectHeader';
 import { MultiSelectItem } from './MultiSelectItem';
@@ -10,14 +10,24 @@ import { MultiSelectItem } from './MultiSelectItem';
 export const MultiSelectPanel = React.memo(
     React.forwardRef((props, ref) => {
         const virtualScrollerRef = React.useRef(null);
+        const filterInputRef = React.useRef(null);
 
         const onEnter = () => {
             props.onEnter(() => {
                 if (virtualScrollerRef.current) {
                     const selectedIndex = props.getSelectedOptionIndex();
+
                     if (selectedIndex !== -1) {
                         setTimeout(() => virtualScrollerRef.current.scrollToIndex(selectedIndex), 0);
                     }
+                }
+            });
+        };
+
+        const onEntered = () => {
+            props.onEntered(() => {
+                if (props.filter && filterInputRef.current) {
+                    DomHandler.focus(filterInputRef.current, false);
                 }
             });
         };
@@ -38,6 +48,7 @@ export const MultiSelectPanel = React.memo(
             return (
                 <MultiSelectHeader
                     filter={props.filter}
+                    filterRef={filterInputRef}
                     filterValue={props.filterValue}
                     filterTemplate={props.filterTemplate}
                     onFilter={onFilterInputChange}
@@ -83,6 +94,7 @@ export const MultiSelectPanel = React.memo(
                         onKeyDown={props.onOptionKeyDown}
                         tabIndex={tabIndex}
                         disabled={disabled}
+                        className={props.itemClassName}
                     />
                 );
             });
@@ -96,6 +108,7 @@ export const MultiSelectPanel = React.memo(
 
         const createItem = (option, index, scrollerOptions = {}) => {
             const style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
+
             if (props.optionGroupLabel) {
                 const groupContent = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, option, index) : props.getOptionGroupLabel(option);
                 const groupChildrenContent = createGroupChildren(option, style);
@@ -128,6 +141,7 @@ export const MultiSelectPanel = React.memo(
                         onKeyDown={props.onOptionKeyDown}
                         tabIndex={tabIndex}
                         disabled={disabled}
+                        className={props.itemClassName}
                     />
                 );
             }
@@ -186,13 +200,26 @@ export const MultiSelectPanel = React.memo(
             const panelClassName = classNames(
                 'p-multiselect-panel p-component',
                 {
-                    'p-multiselect-limited': !allowOptionSelect
+                    'p-multiselect-inline': props.inline,
+                    'p-multiselect-flex': props.flex,
+                    'p-multiselect-limited': !allowOptionSelect,
+                    'p-input-filled': PrimeReact.inputStyle === 'filled',
+                    'p-ripple-disabled': PrimeReact.ripple === false
                 },
                 props.panelClassName
             );
             const header = createHeader();
             const content = createContent();
             const footer = createFooter();
+
+            if (props.inline) {
+                return (
+                    <div ref={ref} className={panelClassName} style={props.panelStyle} onClick={props.onClick}>
+                        {content}
+                        {footer}
+                    </div>
+                );
+            }
 
             return (
                 <CSSTransition
@@ -203,7 +230,7 @@ export const MultiSelectPanel = React.memo(
                     options={props.transitionOptions}
                     unmountOnExit
                     onEnter={onEnter}
-                    onEntered={props.onEntered}
+                    onEntered={onEntered}
                     onExit={props.onExit}
                     onExited={props.onExited}
                 >
@@ -217,6 +244,8 @@ export const MultiSelectPanel = React.memo(
         };
 
         const element = createElement();
+
+        if (props.inline) return element;
 
         return <Portal element={element} appendTo={props.appendTo} />;
     })

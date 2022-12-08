@@ -23,6 +23,7 @@ export const PickListSubList = React.memo(
                     if (!metaKey) {
                         selection.length = 0;
                     }
+
                     selection.push(item);
                 }
             } else {
@@ -46,6 +47,7 @@ export const PickListSubList = React.memo(
                 //down
                 case 40:
                     const nextItem = findNextItem(listItem);
+
                     nextItem && nextItem.focus();
                     originalEvent.preventDefault();
                     break;
@@ -53,6 +55,7 @@ export const PickListSubList = React.memo(
                 //up
                 case 38:
                     const prevItem = findPrevItem(listItem);
+
                     prevItem && prevItem.focus();
                     originalEvent.preventDefault();
                     break;
@@ -70,11 +73,13 @@ export const PickListSubList = React.memo(
 
         const findNextItem = (item) => {
             const nextItem = item.nextElementSibling;
+
             return nextItem ? (!DomHandler.hasClass(nextItem, 'p-picklist-item') ? findNextItem(nextItem) : nextItem) : null;
         };
 
         const findPrevItem = (item) => {
             const prevItem = item.previousElementSibling;
+
             return prevItem ? (!DomHandler.hasClass(prevItem, 'p-picklist-item') ? findPrevItem(prevItem) : prevItem) : null;
         };
 
@@ -158,6 +163,7 @@ export const PickListSubList = React.memo(
         const createList = () => {
             const items = createItems();
             const className = classNames('p-picklist-list', props.listClassName);
+
             return (
                 <ul className={className} style={props.style} role="listbox" aria-multiselectable>
                     {items}

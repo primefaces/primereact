@@ -79,10 +79,10 @@ const TemplateSection = (props) => {
                         style={
                             props.dark
                                 ? {
-                                      backgroundImage: `url("${contextPath}/images/landing-new/templates/apollo-dark.jpeg")`
+                                      backgroundImage: `url("${contextPath}/images/landing-new/templates/apollo-dark.jpg")`
                                   }
                                 : {
-                                      backgroundImage: `url("${contextPath}/images/landing-new/templates/apollo-light.jpeg")`
+                                      backgroundImage: `url("${contextPath}/images/landing-new/templates/apollo-light.jpg")`
                                   }
                         }
                     >

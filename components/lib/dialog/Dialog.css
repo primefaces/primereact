@@ -16,11 +16,6 @@
     display: flex;
 }
 
-/* Github #3122: Prevent animation flickering */
-.p-dialog:not([class*='p-dialog-']) {
-    display: none;
-}
-
 .p-dialog-mask.p-component-overlay {
     pointer-events: auto;
 }
@@ -32,6 +27,11 @@
     max-height: 90%;
     transform: scale(1);
     position: relative;
+}
+
+/* Github #3122: Prevent animation flickering */
+.p-dialog:not([class*='p-dialog-']) {
+    display: none;
 }
 
 .p-dialog-content {
@@ -163,6 +163,7 @@
 .p-dialog-maximized {
     transition: none;
     transform: none;
+    margin: 0 !important;
     width: 100vw !important;
     height: 100vh !important;
     max-height: 100%;

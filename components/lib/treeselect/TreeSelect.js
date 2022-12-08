@@ -16,7 +16,7 @@ export const TreeSelect = React.memo(
         const elementRef = React.useRef(null);
         const overlayRef = React.useRef(null);
         const filterInputRef = React.useRef(null);
-        const focusInputRef = React.useRef(null);
+        const focusInputRef = React.useRef(props.inputRef);
         const triggerRef = React.useRef(null);
         const selfChange = React.useRef(null);
         const expandedKeys = props.onToggle ? props.expandedKeys : expandedKeysState;
@@ -119,6 +119,7 @@ export const TreeSelect = React.memo(
                     if (!overlayVisibleState && event.altKey) {
                         show();
                     }
+
                     break;
 
                 //space
@@ -127,6 +128,7 @@ export const TreeSelect = React.memo(
                         show();
                         event.preventDefault();
                     }
+
                     break;
 
                 //enter and escape
@@ -136,6 +138,7 @@ export const TreeSelect = React.memo(
                         hide();
                         event.preventDefault();
                     }
+
                     break;
 
                 //tab
@@ -208,6 +211,7 @@ export const TreeSelect = React.memo(
 
         const scrollInView = () => {
             const highlightItem = DomHandler.findSingle(overlayRef.current, '.p-treenode-content.p-highlight');
+
             if (highlightItem && highlightItem.scrollIntoView) {
                 highlightItem.scrollIntoView({ block: 'nearest', inline: 'start' });
             }
@@ -269,6 +273,7 @@ export const TreeSelect = React.memo(
         const expandPath = (path) => {
             if (path.length > 0) {
                 let expandedKeys = { ...(expandedKeysState || {}) };
+
                 for (let key of path) {
                     expandedKeys[key] = true;
                 }
@@ -279,8 +284,10 @@ export const TreeSelect = React.memo(
 
         const getSelectedNodes = () => {
             let selectedNodes = [];
+
             if (ObjectUtils.isNotEmpty(props.value) && props.options) {
                 const keys = isSingleSelectionMode ? { [`${props.value}`]: true } : { ...props.value };
+
                 findSelectedNodes(null, keys, selectedNodes);
             }
 
@@ -291,6 +298,10 @@ export const TreeSelect = React.memo(
             props,
             getElement: () => elementRef.current
         }));
+
+        React.useEffect(() => {
+            ObjectUtils.combinedRefs(focusInputRef, props.inputRef);
+        }, [focusInputRef, props.inputRef]);
 
         useMountEffect(() => {
             updateTreeState();
@@ -341,8 +352,7 @@ export const TreeSelect = React.memo(
                         onKeyDown={onInputKeyDown}
                         disabled={props.disabled}
                         tabIndex={props.tabIndex}
-                        aria-label={props.ariaLabel}
-                        aria-labelledby={props.ariaLabelledBy}
+                        {...ariaProps}
                     />
                 </div>
             );
@@ -468,8 +478,8 @@ export const TreeSelect = React.memo(
         const createHeader = () => {
             const filterElement = createFilterElement();
             const closeElement = (
-                <button type="button" className="p-treeselect-close p-link" onClick={hide}>
-                    <span className="p-treeselect-close-icon pi pi-times"></span>
+                <button type="button" className="p-treeselect-close p-link" onClick={hide} aria-label={localeOption('close')}>
+                    <span className="p-treeselect-close-icon pi pi-times" aria-hidden="true"></span>
                     <Ripple />
                 </button>
             );
@@ -505,6 +515,7 @@ export const TreeSelect = React.memo(
         const selectedNodes = getSelectedNodes();
 
         const otherProps = ObjectUtils.findDiffKeys(props, TreeSelect.defaultProps);
+        const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-treeselect p-component p-inputwrapper',
             {
@@ -524,7 +535,7 @@ export const TreeSelect = React.memo(
         const footer = createFooter();
 
         return (
-            <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps} onClick={onClick}>
+            <div ref={elementRef} className={className} style={props.style} {...otherProps} onClick={onClick}>
                 {keyboardHelper}
                 {labelElement}
                 {dropdownIcon}
@@ -554,47 +565,47 @@ export const TreeSelect = React.memo(
 TreeSelect.displayName = 'TreeSelect';
 TreeSelect.defaultProps = {
     __TYPE: 'TreeSelect',
-    id: null,
-    value: null,
-    name: null,
-    style: null,
-    className: null,
-    disabled: false,
-    options: null,
-    scrollHeight: '400px',
-    placeholder: null,
-    tabIndex: null,
-    inputId: null,
+    appendTo: null,
     ariaLabel: null,
     ariaLabelledBy: null,
-    selectionMode: 'single',
-    expandedKeys: null,
-    panelStyle: null,
-    panelClassName: null,
-    appendTo: null,
-    emptyMessage: null,
+    className: null,
+    disabled: false,
     display: 'comma',
-    metaKeySelection: true,
-    valueTemplate: null,
-    panelHeaderTemplate: null,
-    panelFooterTemplate: null,
-    transitionOptions: null,
     dropdownIcon: 'pi pi-chevron-down',
+    emptyMessage: null,
+    expandedKeys: null,
     filter: false,
-    filterTemplate: null,
-    filterValue: null,
     filterBy: 'label',
+    filterInputAutoFocus: true,
+    filterLocale: undefined,
     filterMode: 'lenient',
     filterPlaceholder: null,
-    filterLocale: undefined,
-    filterInputAutoFocus: true,
-    resetFilterOnHide: false,
-    onShow: null,
-    onHide: null,
+    filterTemplate: null,
+    filterValue: null,
+    inputId: null,
+    inputRef: null,
+    metaKeySelection: true,
+    name: null,
     onChange: null,
+    onFilterValueChange: null,
+    onHide: null,
+    onNodeCollapse: null,
+    onNodeExpand: null,
     onNodeSelect: null,
     onNodeUnselect: null,
-    onNodeExpand: null,
-    onNodeCollapse: null,
-    onFilterValueChange: null
+    onShow: null,
+    options: null,
+    panelClassName: null,
+    panelFooterTemplate: null,
+    panelHeaderTemplate: null,
+    panelStyle: null,
+    placeholder: null,
+    resetFilterOnHide: false,
+    scrollHeight: '400px',
+    selectionMode: 'single',
+    style: null,
+    tabIndex: null,
+    transitionOptions: null,
+    value: null,
+    valueTemplate: null
 };

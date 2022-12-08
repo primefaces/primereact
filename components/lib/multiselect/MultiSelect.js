@@ -10,7 +10,7 @@ export const MultiSelect = React.memo(
     React.forwardRef((props, ref) => {
         const [filterState, setFilterState] = React.useState('');
         const [focusedState, setFocusedState] = React.useState(false);
-        const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
+        const [overlayVisibleState, setOverlayVisibleState] = React.useState(props.inline);
         const elementRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
         const labelRef = React.useRef(null);
@@ -69,6 +69,7 @@ export const MultiSelect = React.memo(
                 //down
                 case 40:
                     const nextItem = findNextItem(listItem);
+
                     nextItem && nextItem.focus();
                     originalEvent.preventDefault();
                     break;
@@ -76,6 +77,7 @@ export const MultiSelect = React.memo(
                 //up
                 case 38:
                     const prevItem = findPrevItem(listItem);
+
                     prevItem && prevItem.focus();
                     originalEvent.preventDefault();
                     break;
@@ -100,16 +102,18 @@ export const MultiSelect = React.memo(
 
         const findNextItem = (item) => {
             const nextItem = item.nextElementSibling;
+
             return nextItem ? (DomHandler.hasClass(nextItem, 'p-disabled') || DomHandler.hasClass(nextItem, 'p-multiselect-item-group') ? findNextItem(nextItem) : nextItem) : null;
         };
 
         const findPrevItem = (item) => {
             const prevItem = item.previousElementSibling;
+
             return prevItem ? (DomHandler.hasClass(prevItem, 'p-disabled') || DomHandler.hasClass(prevItem, 'p-multiselect-item-group') ? findPrevItem(prevItem) : prevItem) : null;
         };
 
         const onClick = (event) => {
-            if (!props.disabled && !isPanelClicked(event) && !DomHandler.hasClass(event.target, 'p-multiselect-token-icon') && !isClearClicked(event)) {
+            if (!props.inline && !props.disabled && !isPanelClicked(event) && !DomHandler.hasClass(event.target, 'p-multiselect-token-icon') && !isClearClicked(event)) {
                 overlayVisibleState ? hide() : show();
                 DomHandler.focus(inputRef.current);
                 event.preventDefault();
@@ -120,20 +124,25 @@ export const MultiSelect = React.memo(
             switch (event.which) {
                 //down
                 case 40:
+                    if (props.inline) break;
+
                     if (!overlayVisibleState && event.altKey) {
                         show();
                         event.preventDefault();
                     }
+
                     break;
 
                 //space
                 case 32:
+                    if (props.inline) break;
                     overlayVisibleState ? hide() : show();
                     event.preventDefault();
                     break;
 
                 //escape
                 case 27:
+                    if (props.inline) break;
                     hide();
                     break;
 
@@ -141,11 +150,13 @@ export const MultiSelect = React.memo(
                 case 9:
                     if (overlayVisibleState) {
                         const firstFocusableElement = DomHandler.getFirstFocusableElement(overlayRef.current);
+
                         if (firstFocusableElement) {
                             firstFocusableElement.focus();
                             event.preventDefault();
                         }
                     }
+
                     break;
 
                 default:
@@ -164,6 +175,7 @@ export const MultiSelect = React.memo(
 
                     if (visibleOptions) {
                         const selectedOptions = visibleOptions.filter((option) => isOptionDisabled(option) && isSelected(option));
+
                         value = selectedOptions.map((option) => getOptionValue(option));
                     }
                 } else if (visibleOptions) {
@@ -207,6 +219,7 @@ export const MultiSelect = React.memo(
 
         const onFilterInputChange = (event) => {
             const filter = event.query;
+
             setFilterState(filter);
 
             if (props.onFilter) {
@@ -224,6 +237,7 @@ export const MultiSelect = React.memo(
 
         const scrollInView = () => {
             const highlightItem = DomHandler.findSingle(overlayRef.current, 'li.p-highlight');
+
             if (highlightItem && highlightItem.scrollIntoView) {
                 highlightItem.scrollIntoView({ block: 'nearest', inline: 'nearest' });
             }
@@ -244,7 +258,8 @@ export const MultiSelect = React.memo(
             callback && callback();
         };
 
-        const onOverlayEntered = () => {
+        const onOverlayEntered = (callback) => {
+            callback && callback();
             bindOverlayListener();
             props.onShow && props.onShow();
         };
@@ -287,6 +302,7 @@ export const MultiSelect = React.memo(
                 if (props.optionGroupLabel) {
                     let groupIndex = 0;
                     const optionIndex = props.options.findIndex((optionGroup, i) => (groupIndex = i) && findOptionIndexInList(props.value, getOptionGroupChildren(optionGroup)) !== -1);
+
                     return optionIndex !== -1 ? { group: groupIndex, option: optionIndex } : -1;
                 } else {
                     return findOptionIndexInList(props.value, props.options);
@@ -313,10 +329,12 @@ export const MultiSelect = React.memo(
 
         const getLabelByValue = (val) => {
             let option;
+
             if (props.options) {
                 if (props.optionGroupLabel) {
                     for (let optionGroup of props.options) {
                         option = findOptionByValue(val, getOptionGroupChildren(optionGroup));
+
                         if (option) {
                             break;
                         }
@@ -356,6 +374,7 @@ export const MultiSelect = React.memo(
                 if (props.optionGroupLabel) {
                     for (let optionGroup of options) {
                         const visibleOptionsGroupChildren = getOptionGroupChildren(optionGroup).filter((option) => !isOptionDisabled(option));
+
                         return !visibleOptionsGroupChildren.some((option) => !isSelected(option));
                     }
                 } else {
@@ -371,8 +390,13 @@ export const MultiSelect = React.memo(
         };
 
         const getOptionValue = (option) => {
+            if (props.useOptionAsValue) {
+                return option;
+            }
+
             if (props.optionValue) {
                 const data = ObjectUtils.resolveFieldData(option, props.optionValue);
+
                 return data !== null ? data : option;
             }
 
@@ -404,7 +428,7 @@ export const MultiSelect = React.memo(
         };
 
         const isOptionValueUsed = (option) => {
-            return props.optionValue || (option && option['value'] !== undefined);
+            return (!props.useOptionAsValue && props.optionValue) || (option && option['value'] !== undefined);
         };
 
         const checkValidity = () => {
@@ -419,6 +443,7 @@ export const MultiSelect = React.memo(
 
         const getSelectedItemsLabel = () => {
             const pattern = /{(.*?)}/;
+
             if (pattern.test(props.selectedItemsLabel)) {
                 return props.selectedItemsLabel.replace(props.selectedItemsLabel.match(pattern)[0], props.value.length + '');
             }
@@ -483,12 +508,15 @@ export const MultiSelect = React.memo(
 
                 if (props.optionGroupLabel) {
                     let filteredGroups = [];
+
                     for (let optgroup of props.options) {
                         let filteredSubOptions = FilterService.filter(getOptionGroupChildren(optgroup), searchFields, filterValue, props.filterMatchMode, props.filterLocale);
+
                         if (filteredSubOptions && filteredSubOptions.length) {
                             filteredGroups.push({ ...optgroup, ...{ [props.optionGroupChildren]: filteredSubOptions } });
                         }
                     }
+
                     return filteredGroups;
                 } else {
                     return FilterService.filter(props.options, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
@@ -510,6 +538,12 @@ export const MultiSelect = React.memo(
         React.useEffect(() => {
             ObjectUtils.combinedRefs(inputRef, props.inputRef);
         }, [inputRef, props.inputRef]);
+
+        React.useEffect(() => {
+            setTimeout(() => {
+                props.overlayVisible ? show() : hide();
+            }, 100);
+        }, [props.overlayVisible]);
 
         useUpdateEffect(() => {
             if (overlayVisibleState && hasFilter) {
@@ -548,6 +582,7 @@ export const MultiSelect = React.memo(
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = ObjectUtils.findDiffKeys(props, MultiSelect.defaultProps);
+        const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-multiselect p-component p-inputwrapper',
             {
@@ -560,8 +595,8 @@ export const MultiSelect = React.memo(
             },
             props.className
         );
-        const label = createLabel();
-        const clearIcon = createClearIcon();
+        const label = !props.inline && createLabel();
+        const clearIcon = !props.inline && createClearIcon();
 
         return (
             <>
@@ -577,15 +612,19 @@ export const MultiSelect = React.memo(
                             onBlur={onBlur}
                             onKeyDown={onKeyDown}
                             role="listbox"
-                            aria-labelledby={props.ariaLabelledBy}
                             aria-expanded={overlayVisibleState}
                             disabled={props.disabled}
                             tabIndex={props.tabIndex}
+                            {...ariaProps}
                         />
                     </div>
-                    {label}
-                    {clearIcon}
-                    <div className="p-multiselect-trigger">{IconUtils.getJSXIcon(props.dropdownIcon, { className: 'p-multiselect-trigger-icon p-c' }, { props })}</div>
+                    {!props.inline && (
+                        <>
+                            {label}
+                            {clearIcon}
+                            <div className="p-multiselect-trigger">{IconUtils.getJSXIcon(props.dropdownIcon, { className: 'p-multiselect-trigger-icon p-c' }, { props })}</div>
+                        </>
+                    )}
                     <MultiSelectPanel
                         ref={overlayRef}
                         visibleOptions={visibleOptions}
@@ -626,60 +665,65 @@ export const MultiSelect = React.memo(
 MultiSelect.displayName = 'MultiSelect';
 MultiSelect.defaultProps = {
     __TYPE: 'MultiSelect',
-    id: null,
-    inputRef: null,
-    name: null,
-    value: null,
-    options: null,
-    optionLabel: null,
-    optionValue: null,
-    optionDisabled: null,
-    optionGroupLabel: null,
-    optionGroupChildren: null,
-    optionGroupTemplate: null,
-    filterTemplate: null,
-    display: 'comma',
-    style: null,
+    appendTo: null,
+    ariaLabelledBy: null,
     className: null,
-    panelClassName: null,
-    panelStyle: null,
-    virtualScrollerOptions: null,
-    scrollHeight: '200px',
-    placeholder: null,
-    fixedPlaceholder: false,
+    dataKey: null,
     disabled: false,
-    showClear: false,
+    display: 'comma',
+    dropdownIcon: 'pi pi-chevron-down',
+    emptyFilterMessage: null,
     filter: false,
     filterBy: null,
+    filterLocale: undefined,
     filterMatchMode: 'contains',
     filterPlaceholder: null,
-    filterLocale: undefined,
-    emptyFilterMessage: null,
-    resetFilterOnHide: false,
-    tabIndex: 0,
-    dataKey: null,
+    filterTemplate: null,
+    fixedPlaceholder: false,
+    flex: false,
+    id: null,
+    inline: false,
     inputId: null,
-    appendTo: null,
+    inputRef: null,
+    itemClassName: null,
+    itemTemplate: null,
+    maxSelectedLabels: null,
+    name: null,
+    onBlur: null,
+    onChange: null,
+    onFilter: null,
+    onFocus: null,
+    onHide: null,
+    onSelectAll: null,
+    onShow: null,
+    optionDisabled: null,
+    optionGroupChildren: null,
+    optionGroupLabel: null,
+    optionGroupTemplate: null,
+    optionLabel: null,
+    optionValue: null,
+    options: null,
+    overlayVisible: false,
+    panelClassName: null,
+    panelFooterTemplate: null,
+    panelHeaderTemplate: null,
+    panelStyle: null,
+    placeholder: null,
+    removeIcon: 'pi pi-times-circle',
+    resetFilterOnHide: false,
+    scrollHeight: '200px',
+    selectAll: false,
+    selectedItemTemplate: null,
+    selectedItemsLabel: '{0} items selected',
+    selectionLimit: null,
+    showClear: false,
+    showSelectAll: true,
+    style: null,
+    tabIndex: 0,
     tooltip: null,
     tooltipOptions: null,
-    maxSelectedLabels: null,
-    selectionLimit: null,
-    selectedItemsLabel: '{0} items selected',
-    ariaLabelledBy: null,
-    itemTemplate: null,
-    selectedItemTemplate: null,
-    panelHeaderTemplate: null,
-    panelFooterTemplate: null,
     transitionOptions: null,
-    dropdownIcon: 'pi pi-chevron-down',
-    removeIcon: 'pi pi-times-circle',
-    showSelectAll: true,
-    selectAll: false,
-    onChange: null,
-    onFocus: null,
-    onBlur: null,
-    onShow: null,
-    onHide: null,
-    onFilter: null,
-    onSelectAll: null
+    useOptionAsValue: false,
+    value: null,
+    virtualScrollerOptions: null
 };

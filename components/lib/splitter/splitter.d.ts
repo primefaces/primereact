@@ -12,7 +12,7 @@ interface SplitterResizeEndParams {
 interface SplitterPanelProps {
     size?: number;
     minSize?: number;
-    style?: object;
+    style?: React.CSSProperties;
     className?: string;
     children?: React.ReactNode;
 }

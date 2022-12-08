@@ -11,14 +11,17 @@ export const StyleClass = React.forwardRef((props, ref) => {
         type: 'animationend',
         listener: () => {
             DomHandler.removeClass(targetRef.current, props.enterActiveClassName);
+
             if (props.enterToClassName) {
                 DomHandler.addClass(targetRef.current, props.enterToClassName);
             }
+
             unbindTargetEnterListener();
 
             if (props.enterActiveClassName === 'slidedown') {
                 targetRef.current.style.maxHeight = '';
             }
+
             animating.current = false;
         }
     });
@@ -27,9 +30,11 @@ export const StyleClass = React.forwardRef((props, ref) => {
         type: 'animationend',
         listener: () => {
             DomHandler.removeClass(targetRef.current, props.leaveActiveClassName);
+
             if (props.leaveToClassName) {
                 DomHandler.addClass(targetRef.current, props.leaveToClassName);
             }
+
             unbindTargetLeaveListener();
             animating.current = false;
         }
@@ -75,6 +80,7 @@ export const StyleClass = React.forwardRef((props, ref) => {
                 }
 
                 DomHandler.addClass(targetRef.current, props.enterActiveClassName);
+
                 if (props.enterClassName) {
                     DomHandler.removeClass(targetRef.current, props.enterClassName);
                 }
@@ -99,6 +105,7 @@ export const StyleClass = React.forwardRef((props, ref) => {
             if (!animating.current) {
                 animating.current = true;
                 DomHandler.addClass(targetRef.current, props.leaveActiveClassName);
+
                 if (props.leaveClassName) {
                     DomHandler.removeClass(targetRef.current, props.leaveClassName);
                 }

@@ -5,16 +5,17 @@ import { IconType } from '../utils';
 type AccordionTabHeaderTemplateType = React.ReactNode | ((props: AccordionTabProps) => React.ReactNode);
 
 interface AccordionTabProps {
-    header?: React.ReactNode;
-    disabled?: boolean;
-    style?: object;
-    className?: string;
-    headerStyle?: object;
-    headerClassName?: string;
-    headerTemplate?: AccordionTabHeaderTemplateType;
-    contentStyle?: object;
-    contentClassName?: string;
     children?: React.ReactNode;
+    className?: string;
+    contentClassName?: string;
+    contentStyle?: React.CSSProperties;
+    disabled?: boolean;
+    header?: React.ReactNode;
+    headerClassName?: string;
+    headerStyle?: React.CSSProperties;
+    headerTemplate?: AccordionTabHeaderTemplateType;
+    style?: React.CSSProperties;
+    tabIndex?: number;
 }
 
 export declare class AccordionTab extends React.Component<AccordionTabProps, any> {}
@@ -23,7 +24,7 @@ type AccordionActiveIndexType = number | number[] | undefined | null;
 
 interface AccordionEventParams {
     originalEvent: React.MouseEvent<HTMLElement>;
-    index: number;
+    index: number | number[];
 }
 
 export interface AccordionProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {

@@ -1,12 +1,59 @@
-import React, { useState } from 'react';
-import { InputSwitch } from '../../components/lib/inputswitch/InputSwitch';
-import InputSwitchDoc from '../../components/doc/inputswitch';
-import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
+import { DocSections } from '../../components/doc/common/docsections';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { ImportDoc } from '../../components/doc/inputswitch/importdoc';
+import { BasicDoc } from '../../components/doc/inputswitch/basicdoc';
+import { PreselectionDoc } from '../../components/doc/inputswitch/preselectiondoc';
+import { DisabledDoc } from '../../components/doc/inputswitch/disableddoc';
+import { ApiDoc } from '../../components/doc/inputswitch/apidoc';
 
 const InputSwitchDemo = () => {
-    const [checked1, setChecked1] = useState(false);
-    const [checked2, setChecked2] = useState(true);
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'preselection',
+            label: 'Preselection',
+            component: PreselectionDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
+        },
+        {
+            id: 'api',
+            label: 'API',
+            type: 'api',
+            component: ApiDoc,
+            children: [
+                {
+                    id: 'properties',
+                    label: 'Properties'
+                },
+                {
+                    id: 'events',
+                    label: 'Events'
+                },
+                {
+                    id: 'styling',
+                    label: 'Styling'
+                },
+                {
+                    id: 'accessibility',
+                    label: 'Accessibility'
+                }
+            ]
+        }
+    ];
 
     return (
         <div>
@@ -19,20 +66,12 @@ const InputSwitchDemo = () => {
                     <h1>InputSwitch</h1>
                     <p>InputSwitch is used to select a boolean value.</p>
                 </div>
-                <DocActions github="inputswitch/index.js" />
             </div>
 
-            <div className="content-section implementation">
-                <div className="card">
-                    <h5>Basic</h5>
-                    <InputSwitch checked={checked1} onChange={(e) => setChecked1(e.value)} />
-
-                    <h5>Preselection</h5>
-                    <InputSwitch checked={checked2} onChange={(e) => setChecked2(e.value)} />
-                </div>
+            <div className="content-section doc">
+                <DocSections docs={docs} />
+                <DocSectionNav docs={docs} />
             </div>
-
-            <InputSwitchDoc></InputSwitchDoc>
         </div>
     );
 };

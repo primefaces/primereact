@@ -1,29 +1,47 @@
-import React, { useState, useRef } from 'react';
-import { DeferredContent } from '../../components/lib/deferredcontent/DeferredContent';
-import { DataTable } from '../../components/lib/datatable/DataTable';
-import { Column } from '../../components/lib/column/Column';
-import { Toast } from '../../components/lib/toast/Toast';
-import DeferredContentDoc from '../../components/doc/deferredcontent';
-import { ProductService } from '../../service/ProductService';
-import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
-import getConfig from 'next/config';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
+import { DocActions } from '../../components/doc/common/docactions';
+import { ImportDoc } from '../../components/doc/deferredcontent/importdoc';
+import { DeferredContentDoc } from '../../components/doc/deferredcontent/contentdoc';
+import { ApiDoc } from '../../components/doc/deferredcontent/apidoc';
 
 const DeferredContentDemo = () => {
-    const toast = useRef(null);
-    const [products, setProducts] = useState(null);
-    const productService = new ProductService();
-
-    const onImageLoad = () => {
-        toast.current.show({ severity: 'success', summary: 'Image Initialized', detail: 'Scroll down to load the datatable' });
-    };
-
-    const onDataLoad = () => {
-        productService.getProductsSmall().then((data) => setProducts(data));
-        toast.current.show({ severity: 'success', summary: 'Data Initialized', detail: 'Render Completed' });
-    };
-
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'deferredcontent',
+            label: 'DeferredContent',
+            component: DeferredContentDoc
+        },
+        {
+            id: 'Api',
+            label: 'API',
+            component: ApiDoc,
+            children: [
+                {
+                    id: 'properties',
+                    label: 'Properties'
+                },
+                {
+                    id: 'events',
+                    label: 'Events'
+                },
+                {
+                    id: 'styling',
+                    label: 'Styling'
+                },
+                {
+                    id: 'accessibility',
+                    label: 'Accessibility'
+                }
+            ]
+        }
+    ];
 
     return (
         <div>
@@ -39,30 +57,10 @@ const DeferredContentDemo = () => {
                 <DocActions github="deferredcontent/index.js" />
             </div>
 
-            <div className="content-section implementation">
-                <Toast ref={toast} />
-
-                <div className="card">
-                    <div style={{ height: '800px' }}>Scroll down to lazy load an image and the DataTable which initiates a query that is not executed on initial page load to speed up load performance.</div>
-
-                    <DeferredContent onLoad={onImageLoad}>
-                        <img src={`${contextPath}/images/galleria/galleria1.jpg`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="Prime" />
-                    </DeferredContent>
-
-                    <div style={{ height: '500px' }}></div>
-
-                    <DeferredContent onLoad={onDataLoad}>
-                        <DataTable value={products}>
-                            <Column field="code" header="Code"></Column>
-                            <Column field="name" header="Name"></Column>
-                            <Column field="category" header="Category"></Column>
-                            <Column field="quantity" header="Quantity"></Column>
-                        </DataTable>
-                    </DeferredContent>
-                </div>
+            <div className="content-section doc">
+                <DocSections docs={docs} />
+                <DocSectionNav docs={docs} />
             </div>
-
-            <DeferredContentDoc />
         </div>
     );
 };

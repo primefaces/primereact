@@ -39,7 +39,7 @@ export const RowRadioButton = React.memo((props) => {
     return (
         <div className={className}>
             <div className="p-hidden-accessible">
-                <input name={name} ref={inputRef} type="radio" checked={props.checked} onFocus={onFocus} onBlur={onBlur} onChange={onChange} onKeyDown={onKeyDown} />
+                <input name={name} ref={inputRef} type="radio" checked={props.checked} onFocus={onFocus} onBlur={onBlur} onChange={onChange} onKeyDown={onKeyDown} aria-label={props.ariaLabel} />
             </div>
             <div className={boxClassName} onClick={onClick} role="radio" aria-checked={props.checked}>
                 <div className="p-radiobutton-icon"></div>

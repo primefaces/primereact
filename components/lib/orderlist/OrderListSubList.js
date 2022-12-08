@@ -19,6 +19,7 @@ export const OrderListSubList = React.memo((props) => {
     const onDragStart = (event, index) => {
         dragging.current = true;
         draggedItemIndex.current = index;
+
         if (props.dragdropScope) {
             event.dataTransfer.setData('text', 'orderlist');
         }
@@ -40,6 +41,7 @@ export const OrderListSubList = React.memo((props) => {
     const onDrop = (event) => {
         let dropIndex = draggedItemIndex.current > dragOverItemIndex.current ? dragOverItemIndex.current : dragOverItemIndex.current === 0 ? 0 : dragOverItemIndex.current - 1;
         let value = [...props.value];
+
         ObjectUtils.reorderArray(value, draggedItemIndex.current, dropIndex);
         dragOverItemIndex.current = null;
         DomHandler.removeClass(event.target, 'p-orderlist-droppoint-highlight');
@@ -90,8 +92,13 @@ export const OrderListSubList = React.memo((props) => {
                 const key = JSON.stringify(item);
 
                 if (props.dragdrop) {
-                    let items = [
-                        createDropPoint(i, key + '_droppoint'),
+                    let items = [];
+
+                    if (i === 0) {
+                        items.push(createDropPoint(item, i, key + '_droppoint_start'));
+                    }
+
+                    items.push(
                         <li
                             key={key}
                             className={itemClassName}
@@ -107,11 +114,9 @@ export const OrderListSubList = React.memo((props) => {
                             {content}
                             <Ripple />
                         </li>
-                    ];
+                    );
 
-                    if (i === props.value.length - 1) {
-                        items.push(createDropPoint(item, i, key + '_droppoint_end'));
-                    }
+                    items.push(createDropPoint(i, key + '_droppoint'));
 
                     return items;
                 } else {

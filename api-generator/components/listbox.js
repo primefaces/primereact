@@ -60,6 +60,18 @@ const ListBoxProps = [
         description: 'Custom template for the filter element.'
     },
     {
+        name: 'emptyMessage',
+        type: 'string',
+        default: 'No results found',
+        description: 'Text to display when there are no options available.'
+    },
+    {
+        name: 'emptyFilterMessage',
+        type: 'any',
+        default: 'No results found',
+        description: 'Template to display when filtering does not return any results.'
+    },
+    {
         name: 'optionGroupTemplate',
         type: 'any',
         default: 'null',

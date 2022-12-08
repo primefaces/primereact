@@ -15,7 +15,7 @@ export interface SplitButtonProps extends Omit<React.DetailedHTMLProps<React.HTM
     disabled?: boolean;
     visible?: boolean;
     buttonClassName?: string;
-    menuStyle?: object;
+    menuStyle?: React.CSSProperties;
     menuClassName?: string;
     menuButtonClassName?: string;
     buttonProps?: any;

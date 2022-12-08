@@ -21,6 +21,7 @@ export const MegaMenu = React.memo(
         const onLeafClick = (event, item) => {
             if (item.disabled) {
                 event.preventDefault();
+
                 return;
             }
 
@@ -41,6 +42,7 @@ export const MegaMenu = React.memo(
         const onCategoryMouseEnter = (event, item) => {
             if (item.disabled) {
                 event.preventDefault();
+
                 return;
             }
 
@@ -52,6 +54,7 @@ export const MegaMenu = React.memo(
         const onCategoryClick = (event, item) => {
             if (item.disabled) {
                 event.preventDefault();
+
                 return;
             }
 
@@ -118,21 +121,25 @@ export const MegaMenu = React.memo(
 
         const findNextItem = (item) => {
             const nextItem = item.nextElementSibling;
+
             return nextItem ? (DomHandler.hasClass(nextItem, 'p-disabled') || !DomHandler.hasClass(nextItem, 'p-menuitem') ? findNextItem(nextItem) : nextItem) : null;
         };
 
         const findPrevItem = (item) => {
             const prevItem = item.previousElementSibling;
+
             return prevItem ? (DomHandler.hasClass(prevItem, 'p-disabled') || !DomHandler.hasClass(prevItem, 'p-menuitem') ? findPrevItem(prevItem) : prevItem) : null;
         };
 
         const navigateToNextItem = (listItem) => {
             const nextItem = findNextItem(listItem);
+
             nextItem && nextItem.children[0].focus();
         };
 
         const navigateToPrevItem = (listItem) => {
             const prevItem = findPrevItem(listItem);
+
             prevItem && prevItem.children[0].focus();
         };
 
@@ -192,6 +199,7 @@ export const MegaMenu = React.memo(
 
         const createSeparator = (index) => {
             const key = 'separator_' + index;
+
             return <li key={key} className="p-menu-separator" role="separator"></li>;
         };
 
@@ -212,6 +220,7 @@ export const MegaMenu = React.memo(
             if (item.visible === false) {
                 return null;
             }
+
             if (item.separator) {
                 return createSeparator(index);
             } else {

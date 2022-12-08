@@ -9,15 +9,20 @@ export const RadioButton = React.memo(
         const inputRef = React.useRef(props.inputRef);
 
         const select = (e) => {
-            inputRef.current.checked = true;
             onClick(e);
         };
 
         const onClick = (e) => {
             if (!props.disabled && props.onChange) {
                 const checked = props.checked;
-                if (inputRef.current.checked === checked) {
+                const radioClicked = e.target instanceof HTMLDivElement;
+                const inputClicked = e.target === inputRef.current;
+                const isInputToggled = inputClicked && e.target.checked !== checked;
+                const isRadioToggled = radioClicked && (DomHandler.hasClass(elementRef.current, 'p-radiobutton-checked') === checked ? !checked : false);
+
+                if (isInputToggled || isRadioToggled) {
                     const value = !checked;
+
                     props.onChange({
                         originalEvent: e,
                         value: props.value,
@@ -32,7 +37,10 @@ export const RadioButton = React.memo(
                             checked: value
                         }
                     });
-                    inputRef.current.checked = value;
+
+                    if (isRadioToggled) {
+                        inputRef.current.checked = value;
+                    }
                 }
 
                 DomHandler.focus(inputRef.current);
@@ -46,6 +54,12 @@ export const RadioButton = React.memo(
 
         const onBlur = () => {
             setFocusedState(false);
+        };
+
+        const onKeyDown = (event) => {
+            if (event.code === 'Space') {
+                onClick(event);
+            }
         };
 
         React.useEffect(() => {
@@ -67,6 +81,7 @@ export const RadioButton = React.memo(
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = ObjectUtils.findDiffKeys(props, RadioButton.defaultProps);
+        const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-radiobutton p-component',
             {
@@ -92,13 +107,13 @@ export const RadioButton = React.memo(
                             type="radio"
                             name={props.name}
                             defaultChecked={props.checked}
-                            aria-labelledby={props['aria-labelledby']}
-                            aria-label={props['aria-label']}
                             onFocus={onFocus}
                             onBlur={onBlur}
+                            onKeyDown={onKeyDown}
                             disabled={props.disabled}
                             required={props.required}
                             tabIndex={props.tabIndex}
+                            {...ariaProps}
                         />
                     </div>
                     <div className={boxClassName}>
@@ -127,7 +142,5 @@ RadioButton.defaultProps = {
     tabIndex: null,
     tooltip: null,
     tooltipOptions: null,
-    'aria-label': null,
-    'aria-labelledby': null,
     onChange: null
 };

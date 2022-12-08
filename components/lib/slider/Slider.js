@@ -12,7 +12,7 @@ export const Slider = React.memo(
         const initY = React.useRef(0);
         const barWidth = React.useRef(0);
         const barHeight = React.useRef(0);
-        const value = props.range ? props.value || [0, 100] : props.value || 0;
+        const value = props.range ? props.value || [props.min, props.max] : props.value || 0;
         const horizontal = props.orientation === 'horizontal';
         const vertical = props.orientation === 'vertical';
 
@@ -105,6 +105,7 @@ export const Slider = React.memo(
 
         const updateDomData = () => {
             const rect = elementRef.current.getBoundingClientRect();
+
             initX.current = rect.left + DomHandler.getWindowScrollLeft();
             initY.current = rect.top + DomHandler.getWindowScrollTop();
             barWidth.current = elementRef.current.offsetWidth;
@@ -197,16 +198,16 @@ export const Slider = React.memo(
                     aria-valuemin={props.min}
                     aria-valuemax={props.max}
                     aria-valuenow={leftValue || bottomValue}
-                    aria-labelledby={props['aria-labelledby']}
-                    aria-label={props['aria-label']}
                     aria-orientation={props.orientation}
+                    {...ariaProps}
                 ></span>
             );
         };
 
         const createRangeSlider = () => {
-            const handleValueStart = ((value[0] < props.min ? 0 : value[0] - props.min) * 100) / (props.max - props.min);
-            const handleValueEnd = ((value[1] > props.max ? 100 : value[1] - props.min) * 100) / (props.max - props.min);
+            const handleValueStart = ((value[0] < props.min ? props.min : value[0] - props.min) * 100) / (props.max - props.min);
+            const handleValueEnd = ((value[1] > props.max ? props.max : value[1] - props.min) * 100) / (props.max - props.min);
+
             const rangeStartHandle = horizontal ? createHandle(handleValueStart, null, 0) : createHandle(null, handleValueStart, 0);
             const rangeEndHandle = horizontal ? createHandle(handleValueEnd, null, 1) : createHandle(null, handleValueEnd, 1);
             const rangeStyle = horizontal ? { left: handleValueStart + '%', width: handleValueEnd - handleValueStart + '%' } : { bottom: handleValueStart + '%', height: handleValueEnd - handleValueStart + '%' };
@@ -223,8 +224,8 @@ export const Slider = React.memo(
         const createSingleSlider = () => {
             let handleValue;
 
-            if (value < props.min) handleValue = 0;
-            else if (value > props.max) handleValue = 100;
+            if (value < props.min) handleValue = props.min;
+            else if (value > props.max) handleValue = props.max;
             else handleValue = ((value - props.min) * 100) / (props.max - props.min);
 
             const rangeStyle = horizontal ? { width: handleValue + '%' } : { height: handleValue + '%' };
@@ -244,6 +245,7 @@ export const Slider = React.memo(
         }));
 
         const otherProps = ObjectUtils.findDiffKeys(props, Slider.defaultProps);
+        const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames('p-slider p-component', props.className, {
             'p-disabled': props.disabled,
             'p-slider-horizontal': horizontal,
@@ -274,7 +276,5 @@ Slider.defaultProps = {
     disabled: false,
     tabIndex: 0,
     onChange: null,
-    onSlideEnd: null,
-    'aria-label': null,
-    'aria-labelledby': null
+    onSlideEnd: null
 };

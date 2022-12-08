@@ -13,7 +13,7 @@ const ColorPickerProps = [
     },
     {
         name: 'style',
-        type: 'string',
+        type: 'CSSProperties',
         default: 'null',
         description: 'Inline style of the component.'
     },
@@ -70,6 +70,18 @@ const ColorPickerProps = [
         type: 'any',
         default: 'null',
         description: 'Content of the tooltip.'
+    },
+    {
+        name: 'panelStyle',
+        type: 'CSSProperties',
+        default: 'null',
+        description: 'Inline style of the overlay panel.'
+    },
+    {
+        name: 'panelClassName',
+        type: 'string',
+        default: 'null',
+        description: 'Style class of the overlay panel.'
     },
     {
         name: 'tooltipOptions',

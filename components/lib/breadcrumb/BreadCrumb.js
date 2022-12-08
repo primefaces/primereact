@@ -8,6 +8,7 @@ export const BreadCrumb = React.memo(
         const itemClick = (event, item) => {
             if (item.disabled) {
                 event.preventDefault();
+
                 return;
             }
 
@@ -30,6 +31,7 @@ export const BreadCrumb = React.memo(
                 if (home.visible === false) {
                     return null;
                 }
+
                 const { icon: _icon, target, url, disabled, style, className: _className, template } = home;
                 const className = classNames('p-breadcrumb-home', { 'p-disabled': disabled }, _className);
                 const icon = IconUtils.getJSXIcon(_icon, { className: 'p-menuitem-icon' }, { props });
@@ -70,6 +72,7 @@ export const BreadCrumb = React.memo(
             if (item.visible === false) {
                 return null;
             }
+
             const className = classNames(item.className, { 'p-disabled': item.disabled });
             const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
             let content = (
@@ -103,6 +106,7 @@ export const BreadCrumb = React.memo(
                     if (item.visible === false) {
                         return null;
                     }
+
                     const menuitem = createMenuitem(item);
                     const separator = index === props.model.length - 1 ? null : createSeparator();
                     const key = item.label + '_' + index;

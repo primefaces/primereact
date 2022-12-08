@@ -155,8 +155,8 @@ import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
 const MenuDemo = () => {
-    const menu = useRef(null);
-    const toast = useRef(null);
+    const menu = useRef<Menu>(null);
+    const toast = useRef<Toast>(null);
     const items = [
         {
             label: 'Options',

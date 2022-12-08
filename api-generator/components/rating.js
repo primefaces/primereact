@@ -24,6 +24,18 @@ const RatingProps = [
         description: 'When present, changing the value is not possible.'
     },
     {
+        name: 'style',
+        type: 'React.CSSProperties',
+        default: 'null',
+        description: 'Inline style of the component.'
+    },
+    {
+        name: 'className',
+        type: 'string',
+        default: 'null',
+        description: 'ClassName of the component.'
+    },
+    {
         name: 'stars',
         type: 'number',
         default: '5',
@@ -36,16 +48,40 @@ const RatingProps = [
         description: 'When specified a cancel icon is displayed to allow removing the value.'
     },
     {
-        name: 'style',
-        type: 'object',
-        default: 'null',
-        description: 'Inline style of the component.'
+        name: 'cancelIcon',
+        type: 'string',
+        default: 'pi pi-ban',
+        description: 'ClassName of the cancel icon component.'
     },
     {
-        name: 'className',
-        type: 'string',
+        name: 'cancelIconProps',
+        type: 'object',
         default: 'null',
-        description: 'ClassName of the component.'
+        description: 'Properties of the cancel icon.'
+    },
+    {
+        name: 'onIcon',
+        type: 'string',
+        default: 'pi pi-star-fill',
+        description: 'ClassName of the icon on component.'
+    },
+    {
+        name: 'offIcon',
+        type: 'string',
+        default: 'pi pi-star',
+        description: 'ClassName of the icon off component.'
+    },
+    {
+        name: 'onIconProps',
+        type: 'object',
+        default: 'null',
+        description: 'Properties of the on icon.'
+    },
+    {
+        name: 'offIconProps',
+        type: 'object',
+        default: 'null',
+        description: 'Properties of the off icon.'
     },
     {
         name: 'tooltip',

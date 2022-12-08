@@ -27,11 +27,13 @@ export const KeyFilter = {
         }
 
         const isPrintableKey = e.key.length === 1;
+
         if (!isPrintableKey) {
             return;
         }
 
         const regex = this.getRegex(keyfilter);
+
         if (!regex.test(e.key)) {
             e.preventDefault();
         }
@@ -49,6 +51,7 @@ export const KeyFilter = {
         [...clipboard].forEach((c) => {
             if (!regex.test(c)) {
                 e.preventDefault();
+
                 return false;
             }
         });
@@ -58,7 +61,9 @@ export const KeyFilter = {
         let value = e.target.value,
             validatePattern = true;
 
-        if (value && !keyfilter.test(value)) {
+        const regex = this.getRegex(keyfilter);
+
+        if (value && !regex.test(value)) {
             validatePattern = false;
         }
 

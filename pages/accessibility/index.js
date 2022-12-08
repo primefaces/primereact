@@ -207,7 +207,7 @@ const AccessibilityPage = () => {
                 <CodeHighlight>
                     {`
 <div className="fancy-checkbox">
-    {checked && <i class="checked-icon"></i>}
+    {checked && <i className="checked-icon"></i>}
 </div>
 `}
                 </CodeHighlight>
@@ -220,7 +220,7 @@ const AccessibilityPage = () => {
 <span id="chk-label">Remember Me</span>
 <div className="fancy-checkbox" role="checkbox" aria-checked="false" tabindex="0" aria-labelledby="chk-label"
     onClick="() => toggle()" onKeyDown="(e) => e.keyCode === 32 && toggle()">
-    {checked && <i class="checked-icon"></i>}
+    {checked && <i className="checked-icon"></i>}
 </div>
 `}
                 </CodeHighlight>
@@ -236,7 +236,7 @@ const AccessibilityPage = () => {
 <div className="fancy-checkbox" onClick="() => toggle()">
     <input className="p-sr-only" type="checkbox" id="chkbox" onFocus="() => updateParentVisuals()" onBlur="() => updateParentVisuals()"
         onKeyDown="(e) => e.keyCode === 32 && updateParentVisuals()">
-    {checked && <i class="checked-icon"></i>}
+    {checked && <i className="checked-icon"></i>}
 </div>
 `}
                 </CodeHighlight>

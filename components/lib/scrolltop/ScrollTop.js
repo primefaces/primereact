@@ -30,6 +30,7 @@ export const ScrollTop = React.memo(
 
         const onClick = () => {
             const scrollElement = props.target === 'window' ? window : helperRef.current.parentElement;
+
             scrollElement.scroll({
                 top: 0,
                 behavior: props.behavior

@@ -58,6 +58,7 @@ export const BodyRow = React.memo((props) => {
             return false;
         } else if (props.rowGroupMode && props.rowGroupMode === 'rowspan' && isGrouped(column)) {
             let prevRowData = value[i - 1];
+
             if (prevRowData) {
                 const currentRowFieldData = ObjectUtils.resolveFieldData(value[i], getColumnProp(column, 'field'));
                 const previousRowFieldData = ObjectUtils.resolveFieldData(prevRowData, getColumnProp(column, 'field'));
@@ -78,6 +79,7 @@ export const BodyRow = React.memo((props) => {
             while (currentRowFieldData === nextRowFieldData) {
                 groupRowSpan++;
                 let nextRowData = value[++index];
+
                 if (nextRowData) {
                     nextRowFieldData = ObjectUtils.resolveFieldData(nextRowData, getColumnProp(column, 'field'));
                 } else {
@@ -103,6 +105,14 @@ export const BodyRow = React.memo((props) => {
         props.onRowRightClick({ originalEvent: event, data: props.rowData, index: props.index });
     };
 
+    const onMouseEnter = (event) => {
+        props.onRowMouseEnter({ originalEvent: event, data: props.rowData, index: props.index });
+    };
+
+    const onMouseLeave = (event) => {
+        props.onRowMouseLeave({ originalEvent: event, data: props.rowData, index: props.index });
+    };
+
     const onTouchEnd = (event) => {
         props.onRowTouchEnd(event);
     };
@@ -115,6 +125,7 @@ export const BodyRow = React.memo((props) => {
                 //down arrow
                 case 40:
                     let nextRow = findNextSelectableRow(row);
+
                     if (nextRow) {
                         changeTabIndex(row, nextRow);
                         nextRow.focus();
@@ -126,6 +137,7 @@ export const BodyRow = React.memo((props) => {
                 //up arrow
                 case 38:
                     let prevRow = findPrevSelectableRow(row);
+
                     if (prevRow) {
                         changeTabIndex(row, prevRow);
                         prevRow.focus();
@@ -140,6 +152,7 @@ export const BodyRow = React.memo((props) => {
                         onClick(event);
                         event.preventDefault();
                     }
+
                     break;
 
                 //space
@@ -148,6 +161,7 @@ export const BodyRow = React.memo((props) => {
                         onClick(event);
                         event.preventDefault();
                     }
+
                     break;
 
                 default:
@@ -193,18 +207,21 @@ export const BodyRow = React.memo((props) => {
 
             if (dataKey) {
                 let dataKeyValue = String(ObjectUtils.resolveFieldData(data, dataKey));
+
                 editingRows = props.editingRows ? { ...props.editingRows } : {};
 
                 if (!isEditing) {
                     delete editingRows[dataKeyValue];
                     // if the key value was changed, stop editing for the new key value too
                     let newDataKeyValue = String(ObjectUtils.resolveFieldData(newData, dataKey));
+
                     delete editingRows[newDataKeyValue];
                 } else {
                     editingRows[dataKeyValue] = true;
                 }
             } else {
                 let editingRowIndex = findIndex(props.editingRows, data);
+
                 editingRows = props.editingRows ? [...props.editingRows] : [];
 
                 if (editingRowIndex !== -1) editingRows = editingRows.filter((val, i) => i !== editingRowIndex);
@@ -304,6 +321,7 @@ export const BodyRow = React.memo((props) => {
                         onEditingMetaChange={props.onEditingMetaChange}
                         onRowToggle={props.onRowToggle}
                         selection={props.selection}
+                        selectionAriaLabel={props.tableProps.selectionAriaLabel}
                         allowCellSelection={props.allowCellSelection}
                         compareSelectionBy={props.compareSelectionBy}
                         selectOnEdit={props.selectOnEdit}
@@ -334,7 +352,7 @@ export const BodyRow = React.memo((props) => {
 
     const rowClassName = ObjectUtils.getPropValue(props.rowClassName, props.rowData, { props: props.tableProps });
     const className = classNames(rowClassName, {
-        'p-highlight': !props.allowCellSelection && props.selected,
+        'p-highlight': (!props.allowCellSelection && props.selected) || props.contextMenuSelected,
         'p-highlight-contextmenu': props.contextMenuSelected,
         'p-selectable-row': props.allowRowSelection && props.isSelectable({ data: props.rowData, index: props.index }),
         'p-row-odd': props.index % 2 !== 0
@@ -351,6 +369,8 @@ export const BodyRow = React.memo((props) => {
             style={style}
             onMouseDown={onMouseDown}
             onMouseUp={onMouseUp}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
             onClick={onClick}
             onDoubleClick={onDoubleClick}
             onContextMenu={onRightClick}

@@ -102,8 +102,14 @@ const PasswordProps = [
         description: 'Configuration of the tooltip, refer to the tooltip documentation for more information.'
     },
     {
+        name: 'keyfilter',
+        type: 'string/regex',
+        default: 'null',
+        description: 'Format definition of the keys to block.'
+    },
+    {
         name: 'style',
-        type: 'object',
+        type: 'React.CSSProperties',
         default: 'null',
         description: 'Inline style of the element.'
     },

@@ -1,0 +1,111 @@
+import { useState } from 'react';
+import { RadioButton } from '../../lib/radiobutton/RadioButton';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
+
+export function DynamicDoc(props) {
+    const categories = [
+        { name: 'Accounting', key: 'A' },
+        { name: 'Marketing', key: 'M' },
+        { name: 'Production', key: 'P' },
+        { name: 'Research', key: 'R' }
+    ];
+    const [selectedCategory, setSelectedCategory] = useState(categories[1]);
+
+    const code = {
+        basic: `
+<div className="flex flex-col gap-3">
+    {categories.map((category) => {
+        return (
+            <div key={category.key} className="flex align-items-center">
+                <RadioButton inputId={category.key} name="category" value={category} onChange={(e) => setSelectedCategory(e.value)} checked={selectedCategory.key === category.key} />
+                <label htmlFor={category.key} className="ml-2">{category.name}</label>
+            </div>
+        );
+    })}
+</div>
+        `,
+        javascript: `
+import { useState } from "react";
+import { RadioButton } from "primereact/radiobutton";
+
+export default function DynamicDemo() {
+    const categories = [
+        { name: 'Accounting', key: 'A' },
+        { name: 'Marketing', key: 'M' },
+        { name: 'Production', key: 'P' },
+        { name: 'Research', key: 'R' }
+    ];
+    const [selectedCategory, setSelectedCategory] = useState(categories[1]);
+
+    return (
+        <div className="flex flex-column gap-3">
+            {categories.map((category) => {
+                return (
+                    <div key={category.key} className="flex align-items-center">
+                        <RadioButton inputId={category.key} name="category" value={category} onChange={(e) => setSelectedCategory(e.value)} checked={selectedCategory.key === category.key} />
+                        <label htmlFor={category.key} className="ml-2">{category.name}</label>
+                    </div>
+                );
+            })}
+        </div>
+    );
+}
+        `,
+        typescript: `
+import { useState } from "react";
+import { RadioButton, RadioButtonChangeParams } from "primereact/radiobutton";
+
+interface Category {
+    name: string;
+    key: string;
+}
+
+export default function DynamicDemo() {
+    const categories = [
+        { name: 'Accounting', key: 'A' },
+        { name: 'Marketing', key: 'M' },
+        { name: 'Production', key: 'P' },
+        { name: 'Research', key: 'R' }
+    ];
+    const [selectedCategory, setSelectedCategory] = useState<Category>(categories[1]);
+
+    return (
+        <div className="flex flex-column gap-3">
+            {categories.map((category) => {
+                return (
+                    <div key={category.key} className="flex align-items-center">
+                        <RadioButton inputId={category.key} name="category" value={category} onChange={(e: RadioButtonChangeParams) => setSelectedCategory(e.value)} checked={selectedCategory.key === category.key} />
+                        <label htmlFor={category.key} className="ml-2">{category.name}</label>
+                    </div>
+                );
+            })}
+        </div>
+    );
+}
+        `
+    };
+
+    return (
+        <>
+            <DocSectionText {...props}>
+                <p>RadioButtons can be generated using a list of values.</p>
+            </DocSectionText>
+            <div className="card flex justify-content-center">
+                <div className="flex flex-column gap-3">
+                    {categories.map((category) => {
+                        return (
+                            <div key={category.key} className="flex align-items-center">
+                                <RadioButton inputId={category.key} name="category" value={category} onChange={(e) => setSelectedCategory(e.value)} checked={selectedCategory.key === category.key} />
+                                <label htmlFor={category.key} className="ml-2">
+                                    {category.name}
+                                </label>
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
+            <DocSectionCode code={code} />
+        </>
+    );
+}

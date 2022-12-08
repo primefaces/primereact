@@ -64,6 +64,7 @@ export const SlideMenu = React.memo(
             if (props.autoZIndex) {
                 ZIndexUtils.set('menu', menuRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['menu']);
             }
+
             DomHandler.absolutePosition(menuRef.current, targetRef.current);
         };
 
@@ -85,6 +86,10 @@ export const SlideMenu = React.memo(
             setLevelState(0);
         }, [props.model]);
 
+        useUpdateEffect(() => {
+            props.onNavigate && props.onNavigate({ level: levelState });
+        }, [levelState]);
+
         useUnmountEffect(() => {
             ZIndexUtils.clear(menuRef.current);
         });
@@ -94,6 +99,9 @@ export const SlideMenu = React.memo(
             toggle,
             show,
             hide,
+            navigateForward,
+            navigateBack,
+            setLevelState,
             getElement: () => menuRef.current
         }));
 
@@ -156,20 +164,21 @@ export const SlideMenu = React.memo(
 SlideMenu.displayName = 'SlideMenu';
 SlideMenu.defaultProps = {
     __TYPE: 'SlideMenu',
-    id: null,
-    model: null,
-    popup: false,
-    style: null,
+    appendTo: null,
+    autoZIndex: true,
+    backLabel: 'Back',
+    baseZIndex: 0,
     className: null,
     easing: 'ease-out',
     effectDuration: 250,
-    backLabel: 'Back',
+    id: null,
     menuWidth: 190,
-    viewportHeight: 175,
-    autoZIndex: true,
-    baseZIndex: 0,
-    appendTo: null,
-    transitionOptions: null,
+    model: null,
+    onHide: null,
     onShow: null,
-    onHide: null
+    onNavigate: null,
+    popup: false,
+    style: null,
+    transitionOptions: null,
+    viewportHeight: 175
 };

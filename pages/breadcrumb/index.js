@@ -1,13 +1,44 @@
-import React from 'react';
-import { BreadCrumb } from '../../components/lib/breadcrumb/BreadCrumb';
-import BreadCrumbDoc from '../../components/doc/breadcrumb';
-import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
+import { DocActions } from '../../components/doc/common/docactions';
+import { ImportDoc } from '../../components/doc/breadcrumb/importdoc';
+import { DefaultDoc } from '../../components/doc/breadcrumb/basicdoc';
+import { ApiDoc } from '../../components/doc/breadcrumb/apipdoc';
 
 const BreadCrumbDemo = () => {
-    const items = [{ label: 'Computer' }, { label: 'Notebook' }, { label: 'Accessories' }, { label: 'Backpacks' }, { label: 'Item' }];
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'Default',
+            label: 'Default',
+            component: DefaultDoc
+        },
 
-    const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact/showcase' };
+        {
+            id: 'api',
+            label: 'API',
+            component: ApiDoc,
+            children: [
+                {
+                    id: 'properties',
+                    label: 'Properties'
+                },
+                {
+                    id: 'styling',
+                    label: 'Styling'
+                },
+                {
+                    id: 'accessibility',
+                    label: 'Accessibility'
+                }
+            ]
+        }
+    ];
 
     return (
         <div>
@@ -23,13 +54,10 @@ const BreadCrumbDemo = () => {
                 <DocActions github="breadcrumb/index.js" />
             </div>
 
-            <div className="content-section implementation">
-                <div className="card">
-                    <BreadCrumb model={items} home={home} />
-                </div>
+            <div className="content-section doc">
+                <DocSections docs={docs} />
+                <DocSectionNav docs={docs} />
             </div>
-
-            <BreadCrumbDoc />
         </div>
     );
 };

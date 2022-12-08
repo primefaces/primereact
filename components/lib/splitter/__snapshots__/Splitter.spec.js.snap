@@ -1,0 +1,194 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Splitter Nested 1`] = `
+<div>
+  <div
+    class="p-splitter p-component p-splitter-horizontal"
+    style="height: 300px;"
+  >
+    <div
+      class="p-splitter-panel flex align-items-center justify-content-center"
+      style="flex-basis: calc(20% - 4px);"
+    >
+      Panel 1
+    </div>
+    <div
+      class="p-splitter-gutter"
+      style="width: 4px;"
+    >
+      <div
+        class="p-splitter-gutter-handle"
+      />
+    </div>
+    <div
+      class="p-splitter-panel p-splitter-panel-nested"
+      style="flex-basis: calc(80% - 4px);"
+    >
+      <div
+        class="p-splitter p-component p-splitter-vertical"
+      >
+        <div
+          class="p-splitter-panel flex align-items-center justify-content-center"
+          style="flex-basis: calc(15% - 4px);"
+        >
+          Panel 2
+        </div>
+        <div
+          class="p-splitter-gutter"
+          style="height: 4px;"
+        >
+          <div
+            class="p-splitter-gutter-handle"
+          />
+        </div>
+        <div
+          class="p-splitter-panel p-splitter-panel-nested"
+          style="flex-basis: calc(85% - 4px);"
+        >
+          <div
+            class="p-splitter p-component p-splitter-horizontal"
+          >
+            <div
+              class="p-splitter-panel flex align-items-center justify-content-center"
+              style="flex-basis: calc(20% - 4px);"
+            >
+              Panel 3
+            </div>
+            <div
+              class="p-splitter-gutter"
+              style="width: 4px;"
+            >
+              <div
+                class="p-splitter-gutter-handle"
+              />
+            </div>
+            <div
+              class="p-splitter-panel flex align-items-center justify-content-center"
+              style="flex-basis: calc(80% - 4px);"
+            >
+              Panel 4
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Splitter Single Panel with size 1`] = `
+<div>
+  <div
+    class="p-splitter p-component p-splitter-vertical"
+    style="height: 300px;"
+  >
+    <div
+      class="p-splitter-panel"
+      style="flex-basis: calc(5% - 0px);"
+    >
+      Panel 1
+    </div>
+    <div
+      class="p-splitter-gutter"
+      style="height: 4px;"
+    >
+      <div
+        class="p-splitter-gutter-handle"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Splitter Single Panel without size 1`] = `
+<div>
+  <div
+    class="p-splitter p-component p-splitter-vertical"
+    style="height: 300px;"
+  >
+    <div
+      class="p-splitter-panel"
+      style="flex-basis: calc(100% - 0px);"
+    >
+      Panel 1
+    </div>
+    <div
+      class="p-splitter-gutter"
+      style="height: 4px;"
+    >
+      <div
+        class="p-splitter-gutter-handle"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Splitter Splitter requires two SplitterPanel components to wrap. 1`] = `
+<div>
+  <div
+    class="p-splitter p-component p-splitter-horizontal mb-5"
+    style="height: 300px;"
+  >
+    <div
+      class="p-splitter-panel flex align-items-center justify-content-center"
+      style="flex-basis: calc(50% - 4px);"
+    >
+      Panel 1
+    </div>
+    <div
+      class="p-splitter-gutter"
+      style="width: 4px;"
+    >
+      <div
+        class="p-splitter-gutter-handle"
+      />
+    </div>
+    <div
+      class="p-splitter-panel flex align-items-center justify-content-center"
+      style="flex-basis: calc(50% - 4px);"
+    >
+      Panel 2
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Splitter Vertical layout 1`] = `
+<div>
+  <div
+    class="p-splitter p-component p-splitter-vertical"
+    style="height: 300px;"
+  >
+    <div
+      class="p-splitter-panel"
+      style="flex-basis: calc(50% - 4px);"
+    >
+      Panel 1
+    </div>
+    <div
+      class="p-splitter-gutter"
+      style="height: 4px;"
+    >
+      <div
+        class="p-splitter-gutter-handle"
+      />
+    </div>
+    <div
+      class="p-splitter-panel"
+      style="flex-basis: calc(50% - 4px);"
+    >
+      Panel 2
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Splitter Without panels 1`] = `
+<div>
+  <div
+    class="p-splitter p-component p-splitter-vertical"
+    style="height: 300px;"
+  />
+</div>
+`;

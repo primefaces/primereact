@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 
 export default function Analytics() {
     const router = useRouter();
+
     const handleRouteChange = (url) => {
         window.gtag('config', process.env.NEXT_PUBLIC_GA_ID, {
             page_path: url
@@ -12,6 +13,7 @@ export default function Analytics() {
 
     useEffect(() => {
         router.events.on('routeChangeComplete', handleRouteChange);
+
         return () => {
             router.events.off('routeChangeComplete', handleRouteChange);
         };

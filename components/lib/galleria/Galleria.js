@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import PrimeReact, { localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useInterval, useUnmountEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
@@ -142,15 +142,17 @@ export const Galleria = React.memo(
                 {
                     'p-galleria-fullscreen': props.fullScreen,
                     'p-galleria-indicator-onitem': props.showIndicatorsOnItem,
-                    'p-galleria-item-nav-onhover': props.showItemNavigatorsOnHover && !props.fullScreen
+                    'p-galleria-item-nav-onhover': props.showItemNavigatorsOnHover && !props.fullScreen,
+                    'p-input-filled': PrimeReact.inputStyle === 'filled',
+                    'p-ripple-disabled': PrimeReact.ripple === false
                 },
                 thumbnailsPosClassName,
                 indicatorPosClassName
             );
 
             const closeIcon = props.fullScreen && (
-                <button type="button" className="p-galleria-close p-link" onClick={hide}>
-                    <span className="p-galleria-close-icon pi pi-times"></span>
+                <button type="button" className="p-galleria-close p-link" aria-label={localeOption('close')} onClick={hide}>
+                    <span className="p-galleria-close-icon pi pi-times" aria-hidden="true"></span>
                     <Ripple />
                 </button>
             );

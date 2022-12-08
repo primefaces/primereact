@@ -13,7 +13,7 @@ export const Messages = React.memo(
 
         const show = (value) => {
             if (value) {
-                let messages;
+                let messages = assignIdentifiers(value, true);
 
                 if (Array.isArray(value)) {
                     for (let i = 0; i < value.length; i++) {
@@ -29,12 +29,39 @@ export const Messages = React.memo(
             }
         };
 
+        const assignIdentifiers = (value, copy) => {
+            let messages;
+
+            if (Array.isArray(value)) {
+                for (let i = 0; i < value.length; i++) {
+                    value[i].id = messageIdx++;
+
+                    if (copy) {
+                        messages = [...messagesState, ...value];
+                    } else {
+                        messages = value;
+                    }
+                }
+            } else {
+                value.id = messageIdx++;
+
+                if (copy) {
+                    messages = messagesState ? [...messagesState, value] : [value];
+                } else {
+                    messages = [value];
+                }
+            }
+
+            return messages;
+        };
+
         const clear = () => {
             setMessagesState([]);
         };
 
         const replace = (value) => {
-            const replaced = Array.isArray(value) ? value : [value];
+            const replaced = assignIdentifiers(value, false);
+
             setMessagesState(replaced);
         };
 
@@ -56,15 +83,16 @@ export const Messages = React.memo(
         return (
             <div id={props.id} ref={elementRef} className={props.className} style={props.style} {...otherProps}>
                 <TransitionGroup>
-                    {messagesState.map((message) => {
-                        const messageRef = React.createRef();
+                    {messagesState &&
+                        messagesState.map((message) => {
+                            const messageRef = React.createRef();
 
-                        return (
-                            <CSSTransition nodeRef={messageRef} key={message.id} classNames="p-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} options={props.transitionOptions}>
-                                <UIMessage ref={messageRef} message={message} onClick={props.onClick} onClose={onClose} />
-                            </CSSTransition>
-                        );
-                    })}
+                            return (
+                                <CSSTransition nodeRef={messageRef} key={message.id} classNames="p-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} options={props.transitionOptions}>
+                                    <UIMessage ref={messageRef} message={message} onClick={props.onClick} onClose={onClose} />
+                                </CSSTransition>
+                            );
+                        })}
                 </TransitionGroup>
             </div>
         );

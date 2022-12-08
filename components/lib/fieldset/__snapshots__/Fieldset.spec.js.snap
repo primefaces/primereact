@@ -1,0 +1,272 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Fieldset default 1`] = `
+<div>
+  <fieldset
+    class="p-fieldset p-component"
+    id="pr_id_1"
+  >
+    <div
+      aria-hidden="false"
+      aria-labelledby="pr_id_1_header"
+      class="p-toggleable-content"
+      id="pr_id_1_content"
+      role="region"
+    >
+      <div
+        class="p-fieldset-content"
+      />
+    </div>
+  </fieldset>
+</div>
+`;
+
+exports[`Fieldset legend 1`] = `
+<div>
+  <fieldset
+    class="p-fieldset p-component"
+    id="fieldset"
+  >
+    <legend
+      class="p-fieldset-legend p-unselectable-text"
+    >
+      <span
+        class="p-fieldset-legend-text"
+        id="fieldset_header"
+      >
+        Simple Fieldset
+      </span>
+    </legend>
+    <div
+      aria-hidden="false"
+      aria-labelledby="fieldset_header"
+      class="p-toggleable-content"
+      id="fieldset_content"
+      role="region"
+    >
+      <div
+        class="p-fieldset-content"
+      >
+        Content
+      </div>
+    </div>
+  </fieldset>
+</div>
+`;
+
+exports[`Fieldset when Fieldset is toggleable it must expand and collapse: expandable-closed 1`] = `
+<div>
+  <fieldset
+    class="p-fieldset p-component p-fieldset-toggleable"
+    id="pr_id_3"
+  >
+    <legend
+      class="p-fieldset-legend p-unselectable-text"
+    >
+      <a
+        aria-controls="pr_id_3_content"
+        aria-expanded="false"
+        href="#pr_id_3_content"
+        id="pr_id_3_header"
+      >
+        <span
+          class="p-fieldset-toggler pi pi-plus"
+        />
+        <span
+          class="p-fieldset-legend-text"
+        >
+          Expand/Collapse
+        </span>
+      </a>
+    </legend>
+    <div
+      aria-hidden="true"
+      aria-labelledby="pr_id_3_header"
+      class="p-toggleable-content p-toggleable-content-exit p-toggleable-content-exit-active"
+      id="pr_id_3_content"
+      role="region"
+    >
+      <div
+        class="p-fieldset-content"
+      >
+        <p>
+          Lorem ipsum dolor sit amet
+        </p>
+      </div>
+    </div>
+  </fieldset>
+</div>
+`;
+
+exports[`Fieldset when Fieldset is toggleable it must expand and collapse: expandable-open 1`] = `
+<div>
+  <fieldset
+    class="p-fieldset p-component p-fieldset-toggleable"
+    id="pr_id_3"
+  >
+    <legend
+      class="p-fieldset-legend p-unselectable-text"
+    >
+      <a
+        aria-controls="pr_id_3_content"
+        aria-expanded="true"
+        href="#pr_id_3_content"
+        id="pr_id_3_header"
+      >
+        <span
+          class="p-fieldset-toggler pi pi-minus"
+        />
+        <span
+          class="p-fieldset-legend-text"
+        >
+          Expand/Collapse
+        </span>
+      </a>
+    </legend>
+    <div
+      aria-labelledby="pr_id_3_header"
+      class="p-toggleable-content"
+      id="pr_id_3_content"
+      role="region"
+    >
+      <div
+        class="p-fieldset-content"
+      >
+        <p>
+          Lorem ipsum dolor sit amet
+        </p>
+      </div>
+    </div>
+  </fieldset>
+</div>
+`;
+
+exports[`Fieldset when Fieldset is toggleable it must expand and collapse: expandable-open 2`] = `
+<div>
+  <fieldset
+    class="p-fieldset p-component p-fieldset-toggleable"
+    id="pr_id_3"
+  >
+    <legend
+      class="p-fieldset-legend p-unselectable-text"
+    >
+      <a
+        aria-controls="pr_id_3_content"
+        aria-expanded="true"
+        href="#pr_id_3_content"
+        id="pr_id_3_header"
+      >
+        <span
+          class="p-fieldset-toggler pi pi-minus"
+        />
+        <span
+          class="p-fieldset-legend-text"
+        >
+          Expand/Collapse
+        </span>
+      </a>
+    </legend>
+    <div
+      aria-hidden="false"
+      aria-labelledby="pr_id_3_header"
+      class="p-toggleable-content p-toggleable-content-enter p-toggleable-content-enter-active"
+      id="pr_id_3_content"
+      role="region"
+    >
+      <div
+        class="p-fieldset-content"
+      >
+        <p>
+          Lorem ipsum dolor sit amet
+        </p>
+      </div>
+    </div>
+  </fieldset>
+</div>
+`;
+
+exports[`Fieldset when Fieldset is toggleable it will toggle when clicked: toggleable-closed 1`] = `
+<div>
+  <fieldset
+    class="p-fieldset p-component p-fieldset-toggleable"
+    id="pr_id_2"
+  >
+    <legend
+      class="p-fieldset-legend p-unselectable-text"
+    >
+      <a
+        aria-controls="pr_id_2_content"
+        aria-expanded="true"
+        href="#pr_id_2_content"
+        id="pr_id_2_header"
+      >
+        <span
+          class="p-fieldset-toggler pi pi-minus"
+        />
+        <span
+          class="p-fieldset-legend-text"
+        >
+          Toggleable
+        </span>
+      </a>
+    </legend>
+    <div
+      aria-labelledby="pr_id_2_header"
+      class="p-toggleable-content"
+      id="pr_id_2_content"
+      role="region"
+    >
+      <div
+        class="p-fieldset-content"
+      >
+        <p>
+          Lorem ipsum dolor sit amet
+        </p>
+      </div>
+    </div>
+  </fieldset>
+</div>
+`;
+
+exports[`Fieldset when Fieldset is toggleable it will toggle when clicked: toggleable-open 1`] = `
+<div>
+  <fieldset
+    class="p-fieldset p-component p-fieldset-toggleable"
+    id="pr_id_2"
+  >
+    <legend
+      class="p-fieldset-legend p-unselectable-text"
+    >
+      <a
+        aria-controls="pr_id_2_content"
+        aria-expanded="true"
+        href="#pr_id_2_content"
+        id="pr_id_2_header"
+      >
+        <span
+          class="p-fieldset-toggler pi pi-minus"
+        />
+        <span
+          class="p-fieldset-legend-text"
+        >
+          Toggleable
+        </span>
+      </a>
+    </legend>
+    <div
+      aria-labelledby="pr_id_2_header"
+      class="p-toggleable-content"
+      id="pr_id_2_content"
+      role="region"
+    >
+      <div
+        class="p-fieldset-content"
+      >
+        <p>
+          Lorem ipsum dolor sit amet
+        </p>
+      </div>
+    </div>
+  </fieldset>
+</div>
+`;

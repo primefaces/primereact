@@ -25,7 +25,7 @@ const DataTableProps = [
     },
     {
         name: 'style',
-        type: 'object',
+        type: 'React.CSSProperties',
         default: 'null',
         description: 'Inline style of the component.'
     },
@@ -198,6 +198,12 @@ const DataTableProps = [
         description: 'Selected row in single mode or an array of values in multiple mode.'
     },
     {
+        name: 'selectionAriaLabel',
+        type: 'string',
+        default: 'null',
+        description: 'A field property from the row to add "Select {field}" and "Unselect {field}" ARIA labels to checkbox/radio buttons.'
+    },
+    {
         name: 'contextMenuSelection',
         type: 'any',
         default: 'null',
@@ -311,6 +317,12 @@ const DataTableProps = [
         type: 'any',
         default: 'null',
         description: 'Value of the global filter to use in filtering.'
+    },
+    {
+        name: 'globalFilterMatchMode',
+        type: 'string',
+        default: 'contains',
+        description: 'Defines filterMatchMode; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "lt", "lte", "gt", "gte" and "custom".'
     },
     {
         name: 'filterDelay',
@@ -750,6 +762,48 @@ const DataTableEvents = [
     {
         name: 'onRowDoubleClick',
         description: 'Callback to invoke when a row is double clicked.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event.'
+            },
+            {
+                name: 'event.data',
+                type: 'any',
+                description: 'Clicked row data'
+            },
+            {
+                name: 'event.index',
+                type: 'number',
+                description: 'Clicked row data index'
+            }
+        ]
+    },
+    {
+        name: 'onRowMouseEnter',
+        description: 'Callback to invoke when a row is mouse hovered.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event.'
+            },
+            {
+                name: 'event.data',
+                type: 'any',
+                description: 'Clicked row data'
+            },
+            {
+                name: 'event.index',
+                type: 'number',
+                description: 'Clicked row data index'
+            }
+        ]
+    },
+    {
+        name: 'onRowMouseLeave',
+        description: 'Callback to invoke when a row is moused out.',
         arguments: [
             {
                 name: 'event.originalEvent',
