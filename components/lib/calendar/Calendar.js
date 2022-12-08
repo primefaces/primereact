@@ -3253,7 +3253,9 @@ export const Calendar = React.memo(
             'p-datepicker-timeonly': props.timeOnly,
             'p-datepicker-multiple-month': props.numberOfMonths > 1,
             'p-datepicker-monthpicker': currentView === 'month',
-            'p-datepicker-touch-ui': props.touchUI
+            'p-datepicker-touch-ui': props.touchUI,
+            'p-input-filled': PrimeReact.inputStyle === 'filled',
+            'p-ripple-disabled': PrimeReact.ripple === false
         });
         const content = createContent();
         const datePicker = createDatePicker();

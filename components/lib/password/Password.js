@@ -258,7 +258,10 @@ export const Password = React.memo(
         };
 
         const createPanel = () => {
-            const panelClassName = classNames('p-password-panel p-component', props.panelClassName);
+            const panelClassName = classNames('p-password-panel p-component', props.panelClassName, {
+                'p-input-filled': PrimeReact.inputStyle === 'filled',
+                'p-ripple-disabled': PrimeReact.ripple === false
+            });
             const { strength, width } = meterState || { strength: '', width: '0%' };
             const header = ObjectUtils.getJSXElement(props.header, props);
             const footer = ObjectUtils.getJSXElement(props.footer, props);

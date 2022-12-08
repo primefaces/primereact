@@ -99,7 +99,10 @@ export const Toast = React.memo(
 
         const createElement = () => {
             const otherProps = ObjectUtils.findDiffKeys(props, Toast.defaultProps);
-            const className = classNames('p-toast p-component p-toast-' + props.position, props.className);
+            const className = classNames('p-toast p-component p-toast-' + props.position, props.className, {
+                'p-input-filled': PrimeReact.inputStyle === 'filled',
+                'p-ripple-disabled': PrimeReact.ripple === false
+            });
 
             return (
                 <div ref={containerRef} id={props.id} className={className} style={props.style} {...otherProps}>

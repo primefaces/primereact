@@ -241,7 +241,10 @@ export const ConfirmPopup = React.memo(
 
         const createElement = () => {
             const otherProps = ObjectUtils.findDiffKeys(props, ConfirmPopup.defaultProps);
-            const className = classNames('p-confirm-popup p-component', getPropValue('className'));
+            const className = classNames('p-confirm-popup p-component', getPropValue('className'), {
+                'p-input-filled': PrimeReact.inputStyle === 'filled',
+                'p-ripple-disabled': PrimeReact.ripple === false
+            });
             const content = createContent();
             const footer = createFooter();
 
