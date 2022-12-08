@@ -422,7 +422,7 @@ export const DataTable = React.forwardRef((props, ref) => {
             return props.selectAll;
         } else {
             const data = props.selectionPageOnly ? dataToRender(processedData) : processedData;
-            const val = props.frozenValue ? [...props.frozenValue, ...data] : data;
+            const val = ObjectUtils.isNotEmpty(props.frozenValue) ? [...props.frozenValue, ...data] : data;
             const selectableVal = getSelectableData(val);
 
             return selectableVal && props.selection && selectableVal.every((sv) => props.selection.some((s) => isEquals(s, sv)));
@@ -607,7 +607,7 @@ export const DataTable = React.forwardRef((props, ref) => {
             let selection = props.selectionPageOnly && props.selection ? props.selection.filter((s) => !data.some((d) => isEquals(s, d))) : [];
 
             if (checked) {
-                selection = props.frozenValue ? [...selection, ...props.frozenValue, ...data] : [...selection, ...data];
+                selection = ObjectUtils.isNotEmpty(props.frozenValue) ? [...selection, ...props.frozenValue, ...data] : [...selection, ...data];
                 selection = getSelectableData(selection);
 
                 props.onAllRowsSelect && props.onAllRowsSelect({ originalEvent, data: selection, type: 'all' });
@@ -1442,7 +1442,7 @@ export const DataTable = React.forwardRef((props, ref) => {
         const first = getFirst();
         const { rows, columns, contentRef, className, itemSize } = options;
 
-        const frozenBody = props.frozenValue && (
+        const frozenBody = ObjectUtils.isNotEmpty(props.frozenValue) && (
             <TableBody
                 ref={frozenBodyRef}
                 value={props.frozenValue}
