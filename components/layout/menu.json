@@ -18,6 +18,12 @@
                     "name": "Locale",
                     "to": "/locale",
                     "meta": ["i18N", "locale", "translate", "internationalization"]
+                },
+                {
+                    "name": "Roadmap",
+                    "to": "/roadmap",
+                    "meta": ["roadmap", "strategy", "blueprint", "plan", "goal", "objective"],
+                    "badge": "new"
                 }
             ]
         },
@@ -341,23 +347,13 @@
             ]
         },
         {
-            "name": "Validation",
-            "meta": ["validation"],
+            "name": "Integration",
+            "meta": ["integration"],
             "children": [
                 {
-                    "name": "Formik",
-                    "to": "/formik",
-                    "meta": ["formik", "validation"]
-                },
-                {
-                    "name": "React Hook Form",
-                    "to": "/reacthookform",
-                    "meta": ["react hook form", "validation"]
-                },
-                {
-                    "name": "React Final Form",
-                    "to": "/reactfinalform",
-                    "meta": ["react final form", "validation"]
+                    "name": "Form Libraries",
+                    "to": "/formlibraries",
+                    "meta": ["formlibraries"]
                 }
             ]
         },
@@ -368,185 +364,23 @@
                 {
                     "name": "DataTable",
                     "meta": ["datatable"],
-                    "children": [
-                        {
-                            "name": "Documentation",
-                            "to": "/datatable",
-                            "meta": ["documentation"]
-                        },
-                        {
-                            "name": "Basic",
-                            "to": "/datatable/basic",
-                            "meta": ["basic"]
-                        },
-                        {
-                            "name": "Dynamic",
-                            "to": "/datatable/dynamiccolumns",
-                            "meta": ["dynamic"]
-                        },
-                        {
-                            "name": "Templating",
-                            "to": "/datatable/templating",
-                            "meta": ["templating"]
-                        },
-                        {
-                            "name": "Size",
-                            "to": "/datatable/size",
-                            "meta": ["size"]
-                        },
-                        {
-                            "name": "GridLines",
-                            "to": "/datatable/gridlines",
-                            "meta": ["grid lines"]
-                        },
-                        {
-                            "name": "Striped",
-                            "to": "/datatable/striped",
-                            "meta": ["striped"]
-                        },
-                        {
-                            "name": "Paginator",
-                            "to": "/datatable/paginator",
-                            "meta": ["paginator"]
-                        },
-                        {
-                            "name": "Sort",
-                            "to": "/datatable/sort",
-                            "meta": ["sort"]
-                        },
-                        {
-                            "name": "Filter",
-                            "to": "/datatable/filter",
-                            "meta": ["filter"]
-                        },
-                        {
-                            "name": "Selection",
-                            "to": "/datatable/selection",
-                            "meta": ["selection"]
-                        },
-                        {
-                            "name": "Edit",
-                            "to": "/datatable/edit",
-                            "meta": ["edit"]
-                        },
-                        {
-                            "name": "Lazy",
-                            "to": "/datatable/lazy",
-                            "meta": ["lazy"]
-                        },
-                        {
-                            "name": "Scroll",
-                            "to": "/datatable/scroll",
-                            "meta": ["scroll"]
-                        },
-                        {
-                            "name": "FlexScroll",
-                            "to": "/datatable/flexscroll",
-                            "meta": ["flexscroll"]
-                        },
-                        {
-                            "name": "VirtualScroll",
-                            "to": "/datatable/virtualscroll",
-                            "meta": ["virtualscroll"]
-                        },
-                        {
-                            "name": "ColGroup",
-                            "to": "/datatable/colgroup",
-                            "meta": ["colgroup"]
-                        },
-                        {
-                            "name": "RowGroup",
-                            "to": "/datatable/rowgroup",
-                            "meta": ["rowgroup"]
-                        },
-                        {
-                            "name": "Expand",
-                            "to": "/datatable/rowexpand",
-                            "meta": ["expand"]
-                        },
-                        {
-                            "name": "Responsive",
-                            "to": "/datatable/responsive",
-                            "meta": ["responsive"]
-                        },
-                        {
-                            "name": "Style",
-                            "to": "/datatable/style",
-                            "meta": ["style"]
-                        },
-                        {
-                            "name": "ColResize",
-                            "to": "/datatable/colresize",
-                            "meta": ["colresize"]
-                        },
-                        {
-                            "name": "Reorder",
-                            "to": "/datatable/reorder",
-                            "meta": ["reorder"]
-                        },
-                        {
-                            "name": "ColToggle",
-                            "to": "/datatable/coltoggle",
-                            "meta": ["coltoggle"]
-                        },
-                        {
-                            "name": "Import/Export",
-                            "to": "/datatable/export",
-                            "meta": ["export", "import"]
-                        },
-                        {
-                            "name": "ContextMenu",
-                            "to": "/datatable/contextmenu",
-                            "meta": ["contextmenu"]
-                        },
-                        {
-                            "name": "State",
-                            "to": "/datatable/state",
-                            "meta": ["state"]
-                        },
-                        {
-                            "name": "Crud",
-                            "to": "/datatable/crud",
-                            "meta": ["crud"]
-                        }
-                    ]
+                    "to": "/datatable"
                 },
                 {
                     "name": "DataView",
                     "meta": ["dataview"],
                     "children": [
                         {
-                            "name": "Documentation",
+                            "name": "DataViews",
                             "to": "/dataview",
-                            "meta": ["documentation"]
-                        },
-                        {
-                            "name": "Lazy",
-                            "to": "/dataview/lazy",
-                            "meta": ["lazy"]
+                            "meta": ["dataviews"]
                         }
                     ]
                 },
                 {
                     "name": "DataScroller",
-                    "meta": ["datascroller"],
-                    "children": [
-                        {
-                            "name": "Window",
-                            "to": "/datascroller",
-                            "meta": ["window"]
-                        },
-                        {
-                            "name": "Inline",
-                            "to": "/datascroller/inline",
-                            "meta": ["inline"]
-                        },
-                        {
-                            "name": "Loader",
-                            "to": "/datascroller/loader",
-                            "meta": ["loader"]
-                        }
-                    ]
+                    "to": "/datascroller",
+                    "meta": ["datascroller"]
                 },
                 {
                     "name": "VirtualScroller",
@@ -580,135 +414,13 @@
                 },
                 {
                     "name": "Tree",
-                    "meta": ["tree"],
-                    "children": [
-                        {
-                            "name": "Documentation",
-                            "to": "/tree",
-                            "meta": ["documentation"]
-                        },
-                        {
-                            "name": "Selection",
-                            "to": "/tree/selection",
-                            "meta": ["selection"]
-                        },
-                        {
-                            "name": "Events",
-                            "to": "/tree/events",
-                            "meta": ["events"]
-                        },
-                        {
-                            "name": "Lazy",
-                            "to": "/tree/lazy",
-                            "meta": ["lazy"]
-                        },
-                        {
-                            "name": "Templating",
-                            "to": "/tree/templating",
-                            "meta": ["templating"]
-                        },
-                        {
-                            "name": "DragDrop",
-                            "to": "/tree/dragdrop",
-                            "meta": ["dragdrop"]
-                        },
-                        {
-                            "name": "ContextMenu",
-                            "to": "/tree/contextmenu",
-                            "meta": ["contextmenu"]
-                        },
-                        {
-                            "name": "Filter",
-                            "to": "/tree/filter",
-                            "meta": ["filter"]
-                        }
-                    ]
+                    "to": "/tree",
+                    "meta": ["tree"]
                 },
                 {
                     "name": "TreeTable",
-                    "meta": ["treetable"],
-                    "children": [
-                        {
-                            "name": "Documentation",
-                            "to": "/treetable",
-                            "meta": ["documentation"]
-                        },
-                        {
-                            "name": "Templating",
-                            "to": "/treetable/templating",
-                            "meta": ["templating"]
-                        },
-                        {
-                            "name": "Paginator",
-                            "to": "/treetable/page",
-                            "meta": ["page", "paginator"]
-                        },
-                        {
-                            "name": "Sort",
-                            "to": "/treetable/sort",
-                            "meta": ["sort"]
-                        },
-                        {
-                            "name": "Filter",
-                            "to": "/treetable/filter",
-                            "meta": ["filter"]
-                        },
-                        {
-                            "name": "Selection",
-                            "to": "/treetable/selection",
-                            "meta": ["selection"]
-                        },
-                        {
-                            "name": "ColGroup",
-                            "to": "/treetable/colgroup",
-                            "meta": ["colgroup"]
-                        },
-                        {
-                            "name": "Lazy",
-                            "to": "/treetable/lazy",
-                            "meta": ["lazy"]
-                        },
-                        {
-                            "name": "Edit",
-                            "to": "/treetable/edit",
-                            "meta": ["edit"]
-                        },
-                        {
-                            "name": "Scroll",
-                            "to": "/treetable/scroll",
-                            "meta": ["scroll"]
-                        },
-                        {
-                            "name": "Resize",
-                            "to": "/treetable/resize",
-                            "meta": ["resize"]
-                        },
-                        {
-                            "name": "Reorder",
-                            "to": "/treetable/reorder",
-                            "meta": ["reorder"]
-                        },
-                        {
-                            "name": "ColToggle",
-                            "to": "/treetable/toggle",
-                            "meta": ["coltoggle"]
-                        },
-                        {
-                            "name": "Style",
-                            "to": "/treetable/style",
-                            "meta": ["style"]
-                        },
-                        {
-                            "name": "ContextMenu",
-                            "to": "/treetable/contextmenu",
-                            "meta": ["contextmenu"]
-                        },
-                        {
-                            "name": "Responsive",
-                            "to": "/treetable/responsive",
-                            "meta": ["responsive"]
-                        }
-                    ]
+                    "to": "/treetable",
+                    "meta": ["treetable"]
                 },
                 {
                     "name": "Timeline",
@@ -924,59 +636,8 @@
                 },
                 {
                     "name": "Galleria",
-                    "meta": ["galleria"],
-                    "children": [
-                        {
-                            "name": "Documentation",
-                            "to": "/galleria",
-                            "meta": ["documentation"]
-                        },
-                        {
-                            "name": "Programmatic",
-                            "to": "/galleria/programmatic",
-                            "meta": ["programmatic"]
-                        },
-                        {
-                            "name": "Indicator",
-                            "to": "/galleria/indicator",
-                            "meta": ["indicator"]
-                        },
-                        {
-                            "name": "Thumbnail",
-                            "to": "/galleria/thumbnail",
-                            "meta": ["thumbnail"]
-                        },
-                        {
-                            "name": "Navigator",
-                            "to": "/galleria/navigator",
-                            "meta": ["navigator"]
-                        },
-                        {
-                            "name": "Responsive",
-                            "to": "/galleria/responsive",
-                            "meta": ["responsive"]
-                        },
-                        {
-                            "name": "FullScreen",
-                            "to": "/galleria/fullscreen",
-                            "meta": ["fullscreen"]
-                        },
-                        {
-                            "name": "AutoPlay",
-                            "to": "/galleria/autoplay",
-                            "meta": ["autoplay"]
-                        },
-                        {
-                            "name": "Caption",
-                            "to": "/galleria/caption",
-                            "meta": ["caption"]
-                        },
-                        {
-                            "name": "Advanced",
-                            "to": "/galleria/advanced",
-                            "meta": ["advanced"]
-                        }
-                    ]
+                    "to": "/galleria",
+                    "meta": ["galleria"]
                 },
                 {
                     "name": "Image",

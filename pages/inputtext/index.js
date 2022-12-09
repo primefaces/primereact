@@ -2,6 +2,7 @@ import Head from 'next/head';
 import React from 'react';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
+import { DocActions } from '../../components/doc/common/docactions';
 import { ApiDoc } from '../../components/doc/inputtext/apidoc';
 import { BasicDoc } from '../../components/doc/inputtext/basicdoc';
 import { DisabledDoc } from '../../components/doc/inputtext/disableddoc';
@@ -99,6 +100,7 @@ const InputTextDemo = () => {
                     <h1>InputText</h1>
                     <p>InputText is an extension to standard input element with theming and keyfiltering.</p>
                 </div>
+                <DocActions github="inputtext/index.js" />
             </div>
 
             <div className="content-section doc">

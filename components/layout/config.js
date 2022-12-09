@@ -447,11 +447,14 @@ export default function Config(props) {
                             </div>
                         </div>
 
-                        <h4>Premium Create-React-App Templates</h4>
-                        <p>
-                            Beautifully crafted premium <a href="https://github.com/facebookincubator/create-react-app">create-react-app</a> application templates by the PrimeTek design team.
-                        </p>
+                        <h4>Premium Templates</h4>
+                        <p>Beautifully created premium application templates.</p>
                         <div className="grid premium-themes">
+                            <div className="col-12 md:col-6">
+                                <a href="https://www.primefaces.org/layouts/apollo-react" rel="noopener noreferrer" target="_blank">
+                                    <img alt="Apollo" src={`${contextPath}/images/layouts/apollo-nextjs.jpg`} />
+                                </a>
+                            </div>
                             <div className="col-12 md:col-6">
                                 <a href="https://www.primefaces.org/sakai-react" rel="noopener noreferrer" target="_blank">
                                     <img alt="Sakai" src={`${contextPath}/images/layouts/sakai-react.jpg`} />
@@ -495,11 +498,6 @@ export default function Config(props) {
                             <div className="col-12 md:col-6">
                                 <a href="https://www.primefaces.org/layouts/avalon-react" rel="noopener noreferrer" target="_blank">
                                     <img alt="Avalon" src={`${contextPath}/images/layouts/avalon-react.jpg`} />
-                                </a>
-                            </div>
-                            <div className="col-12 md:col-6">
-                                <a href="https://www.primefaces.org/layouts/apollo-react" rel="noopener noreferrer" target="_blank">
-                                    <img alt="Apollo" src={`${contextPath}/images/layouts/apollo-react.jpg`} />
                                 </a>
                             </div>
                             <div className="col-12 md:col-6">

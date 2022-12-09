@@ -24,7 +24,7 @@ type AccordionActiveIndexType = number | number[] | undefined | null;
 
 interface AccordionEventParams {
     originalEvent: React.MouseEvent<HTMLElement>;
-    index: number;
+    index: number | number[];
 }
 
 export interface AccordionProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {

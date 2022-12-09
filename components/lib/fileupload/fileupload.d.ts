@@ -135,4 +135,5 @@ export declare class FileUpload extends React.Component<FileUploadProps, any> {
     public getElement(): HTMLElement;
     public getInput(): HTMLInputElement;
     public getFiles(): File[];
+    public setFiles(files: File[]): void;
 }

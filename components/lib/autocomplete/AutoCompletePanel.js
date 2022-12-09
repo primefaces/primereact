@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { localeOption } from '../api/Api';
+import PrimeReact, { localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
@@ -105,7 +105,10 @@ export const AutoCompletePanel = React.memo(
         };
 
         const createElement = () => {
-            const className = classNames('p-autocomplete-panel p-component', props.panelClassName);
+            const className = classNames('p-autocomplete-panel p-component', props.panelClassName, {
+                'p-input-filled': PrimeReact.inputStyle === 'filled',
+                'p-ripple-disabled': PrimeReact.ripple === false
+            });
             const style = { maxHeight: props.scrollHeight, ...(props.panelStyle || {}) };
             const content = createContent();
 

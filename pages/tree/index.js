@@ -1,43 +1,99 @@
-import React, { useState, useEffect } from 'react';
-import { Tree } from '../../components/lib/tree/Tree';
-import { Button } from '../../components/lib/button/Button';
-import { NodeService } from '../../service/NodeService';
-import TreeDoc from '../../components/doc/tree';
-import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
+import { DocActions } from '../../components/doc/common/docactions';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
+import { ImportDoc } from '../../components/doc/tree/importdoc';
+import { ApiDoc } from '../../components/doc/tree/apidoc';
+import { BasicDoc } from '../../components/doc/tree/basicdoc';
+import { ProgrammaticDoc } from '../../components/doc/tree/programmaticdoc';
+import { TreeEventsDoc } from '../../components/doc/tree/eventsdoc';
+import { LazyDoc } from '../../components/doc/tree/lazydoc';
+import { TemplatingDoc } from '../../components/doc/tree/templatingdoc';
+import { DragAndDropDoc } from '../../components/doc/tree/draganddropdoc';
+import { ContextMenuDoc } from '../../components/doc/tree/contextmenudoc';
 
 const TreeDemo = () => {
-    const [nodes, setNodes] = useState(null);
-    const [expandedKeys, setExpandedKeys] = useState({});
-    const nodeService = new NodeService();
-
-    const expandAll = () => {
-        let _expandedKeys = {};
-
-        for (let node of nodes) {
-            expandNode(node, _expandedKeys);
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'programmatic',
+            label: 'Programmatic',
+            component: ProgrammaticDoc
+        },
+        {
+            label: 'Selection',
+            to: '/tree/selection'
+        },
+        {
+            id: 'events',
+            label: 'Events',
+            component: TreeEventsDoc
+        },
+        {
+            id: 'lazy',
+            label: 'Lazy',
+            component: LazyDoc
+        },
+        {
+            id: 'templating',
+            label: 'Templating',
+            component: TemplatingDoc
+        },
+        {
+            id: 'draganddrop',
+            label: 'Drag and Drop',
+            component: DragAndDropDoc
+        },
+        {
+            id: 'contextmenu',
+            label: 'ContextMenu',
+            component: ContextMenuDoc
+        },
+        {
+            label: 'Filter',
+            to: '/tree/filter'
+        },
+        {
+            id: 'api',
+            label: 'API',
+            component: ApiDoc,
+            children: [
+                {
+                    id: 'treenodeapi',
+                    label: 'TreeNode API'
+                },
+                {
+                    id: 'properties',
+                    label: 'Properties'
+                },
+                {
+                    id: 'event',
+                    label: 'Events'
+                },
+                {
+                    id: 'methods',
+                    label: 'Methods'
+                },
+                {
+                    id: 'styling',
+                    label: 'Styling'
+                },
+                {
+                    id: 'accessibility',
+                    label: 'Accessibility'
+                }
+            ]
         }
-
-        setExpandedKeys(_expandedKeys);
-    };
-
-    const collapseAll = () => {
-        setExpandedKeys({});
-    };
-
-    const expandNode = (node, _expandedKeys) => {
-        if (node.children && node.children.length) {
-            _expandedKeys[node.key] = true;
-
-            for (let child of node.children) {
-                expandNode(child, _expandedKeys);
-            }
-        }
-    };
-
-    useEffect(() => {
-        nodeService.getTreeNodes().then((data) => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    ];
 
     return (
         <div>
@@ -54,21 +110,10 @@ const TreeDemo = () => {
                 <DocActions github="tree/index.js" />
             </div>
 
-            <div className="content-section implementation">
-                <div className="card">
-                    <h5>Basic</h5>
-                    <Tree value={nodes} />
-
-                    <h5>Programmatic Control</h5>
-                    <div className="mb-4">
-                        <Button type="button" icon="pi pi-plus" label="Expand All" onClick={expandAll} className="mr-2" />
-                        <Button type="button" icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
-                    </div>
-                    <Tree value={nodes} expandedKeys={expandedKeys} onToggle={(e) => setExpandedKeys(e.value)} />
-                </div>
+            <div className="content-section doc">
+                <DocSections docs={docs} />
+                <DocSectionNav docs={docs} />
             </div>
-
-            <TreeDoc />
         </div>
     );
 };

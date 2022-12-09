@@ -111,6 +111,32 @@ import 'primeicons/primeicons.css';
 
                 <i className="pi pi-spin pi-spinner" style={{ fontSize: '2em' }}></i>
 
+                <h5>Fixed Width</h5>
+                <p>Use the pi-fw class to set icons to a standard width to ensure vertical alignment in a list or navigation menu.</p>
+                <CodeHighlight>
+                    {`
+<i className="pi pi-fw pi-star" style={{'fontSize': '2em'}}></i>
+`}
+                </CodeHighlight>
+
+                <ul className="list-none p-0">
+                    <li className="inline">
+                        <i className="pi pi-fw pi-star-fill" style={{ fontSize: '2em' }}></i>
+                    </li>
+                    <li className="inline">
+                        <i className="pi pi-fw pi-star-fill" style={{ fontSize: '2em' }}></i>
+                    </li>
+                    <li className="inline">
+                        <i className="pi pi-fw pi-star-fill" style={{ fontSize: '2em' }}></i>
+                    </li>
+                    <li className="inline">
+                        <i className="pi pi-fw pi-star-fill" style={{ fontSize: '2em' }}></i>
+                    </li>
+                    <li className="inline">
+                        <i className="pi pi-fw pi-star" style={{ fontSize: '2em' }}></i>
+                    </li>
+                </ul>
+
                 <h5>Constants</h5>
                 <p>PrimeIcons constants API is provided to easily choose an icon e.g. when defining a menu model.</p>
 

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PrimeReact from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 import { classNames } from '../utils/Utils';
@@ -7,7 +8,9 @@ export const ColorPickerPanel = React.forwardRef((props, ref) => {
     const createElement = () => {
         const className = classNames('p-colorpicker-panel', props.panelClassName, {
             'p-colorpicker-overlay-panel': !props.inline,
-            'p-disabled': props.disabled
+            'p-disabled': props.disabled,
+            'p-input-filled': PrimeReact.inputStyle === 'filled',
+            'p-ripple-disabled': PrimeReact.ripple === false
         });
 
         return (

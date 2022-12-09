@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { localeOption } from '../api/Api';
+import PrimeReact, { localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
@@ -185,7 +185,10 @@ export const DropdownPanel = React.memo(
         };
 
         const createElement = () => {
-            const className = classNames('p-dropdown-panel p-component', props.panelClassName);
+            const className = classNames('p-dropdown-panel p-component', props.panelClassName, {
+                'p-input-filled': PrimeReact.inputStyle === 'filled',
+                'p-ripple-disabled': PrimeReact.ripple === false
+            });
             const filter = createFilter();
             const content = createContent();
 

@@ -446,7 +446,9 @@ export const Dialog = React.forwardRef((props, ref) => {
         const className = classNames('p-dialog p-component', props.className, {
             'p-dialog-rtl': props.rtl,
             'p-dialog-maximized': maximized,
-            'p-dialog-default': !maximized
+            'p-dialog-default': !maximized,
+            'p-input-filled': PrimeReact.inputStyle === 'filled',
+            'p-ripple-disabled': PrimeReact.ripple === false
         });
         const maskClassName = classNames(
             'p-dialog-mask',

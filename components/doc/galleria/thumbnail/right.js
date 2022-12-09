@@ -115,9 +115,6 @@ export default function PositionedRightDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>
-                <p>Positioned at Right</p>
-            </DocSectionText>
             <div className="card flex justify-content-center">
                 <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={4} thumbnailsPosition="right" style={{ maxWidth: '640px' }} item={itemTemplate} thumbnail={thumbnailTemplate} />
             </div>

@@ -83,15 +83,16 @@ export const Messages = React.memo(
         return (
             <div id={props.id} ref={elementRef} className={props.className} style={props.style} {...otherProps}>
                 <TransitionGroup>
-                    {messagesState.map((message) => {
-                        const messageRef = React.createRef();
+                    {messagesState &&
+                        messagesState.map((message) => {
+                            const messageRef = React.createRef();
 
-                        return (
-                            <CSSTransition nodeRef={messageRef} key={message.id} classNames="p-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} options={props.transitionOptions}>
-                                <UIMessage ref={messageRef} message={message} onClick={props.onClick} onClose={onClose} />
-                            </CSSTransition>
-                        );
-                    })}
+                            return (
+                                <CSSTransition nodeRef={messageRef} key={message.id} classNames="p-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} options={props.transitionOptions}>
+                                    <UIMessage ref={messageRef} message={message} onClick={props.onClick} onClose={onClose} />
+                                </CSSTransition>
+                            );
+                        })}
                 </TransitionGroup>
             </div>
         );

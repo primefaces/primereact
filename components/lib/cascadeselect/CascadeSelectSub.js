@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { Ripple } from '../ripple/Ripple';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import PrimeReact from '../api/Api';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { Ripple } from '../ripple/Ripple';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const CascadeSelectSub = React.memo((props) => {
     const [activeOptionState, setActiveOptionState] = React.useState(null);
@@ -226,7 +227,10 @@ export const CascadeSelectSub = React.memo((props) => {
         return props.options ? props.options.map(createOption) : null;
     };
 
-    const className = classNames('p-cascadeselect-panel p-cascadeselect-items', props.className);
+    const className = classNames('p-cascadeselect-panel p-cascadeselect-items', props.className, {
+        'p-input-filled': PrimeReact.inputStyle === 'filled',
+        'p-ripple-disabled': PrimeReact.ripple === false
+    });
     const submenu = createMenu();
 
     return (

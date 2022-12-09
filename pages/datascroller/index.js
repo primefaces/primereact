@@ -1,41 +1,59 @@
-import React, { useState, useEffect } from 'react';
-import { DataScroller } from '../../components/lib/datascroller/DataScroller';
-import { Button } from '../../components/lib/button/Button';
-import { Rating } from '../../components/lib/rating/Rating';
-import { ProductService } from '../../service/ProductService';
-import DataScrollerDoc from '../../components/doc/datascroller';
-import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
-import getConfig from 'next/config';
+import { DocActions } from '../../components/doc/common/docactions';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
+import { ApiDoc } from '../../components/doc/datascroller/apidoc';
+import { BasicDoc } from '../../components/doc/datascroller/basicdoc';
+import { ImportDoc } from '../../components/doc/datascroller/importdoc';
+import { InlineDataScrollerDoc } from '../../components/doc/datascroller/inlinedoc';
+import { LoaderDataScrollerDoc } from '../../components/doc/datascroller/loaderdoc';
 
 const DataScrollerDemo = () => {
-    const [products, setProducts] = useState([]);
-    const productService = new ProductService();
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
-
-    useEffect(() => {
-        productService.getProducts().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const itemTemplate = (data) => {
-        return (
-            <div className="product-item">
-                <img src={`${contextPath}/images/product/${data.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={data.name} />
-                <div className="product-detail">
-                    <div className="product-name">{data.name}</div>
-                    <div className="product-description">{data.description}</div>
-                    <Rating value={data.rating} readOnly cancel={false}></Rating>
-                    <i className="pi pi-tag product-category-icon"></i>
-                    <span className="product-category">{data.category}</span>
-                </div>
-                <div className="product-action">
-                    <span className="product-price">${data.price}</span>
-                    <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
-                    <span className={`product-badge status-${data.inventoryStatus.toLowerCase()}`}>{data.inventoryStatus}</span>
-                </div>
-            </div>
-        );
-    };
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'inline',
+            label: 'Inline',
+            component: InlineDataScrollerDoc
+        },
+        {
+            id: 'loader',
+            label: 'Loader',
+            component: LoaderDataScrollerDoc
+        },
+        {
+            id: 'api',
+            label: 'API',
+            component: ApiDoc,
+            children: [
+                {
+                    id: 'properties',
+                    label: 'Properties'
+                },
+                {
+                    id: 'events',
+                    label: 'Events'
+                },
+                {
+                    id: 'styling',
+                    label: 'Styling'
+                },
+                {
+                    id: 'accessibility',
+                    label: 'Accessibility'
+                }
+            ]
+        }
+    ];
 
     return (
         <div>
@@ -52,14 +70,9 @@ const DataScrollerDemo = () => {
                 <DocActions github="datascroller/index.js" />
             </div>
 
-            <div className="content-section implementation">Demo is at the bottom of this page.</div>
-
-            <DataScrollerDoc />
-
-            <div className="content-section implementation datascroller-demo">
-                <div className="card">
-                    <DataScroller value={products} itemTemplate={itemTemplate} rows={5} buffer={0.4} header="List of Products" />
-                </div>
+            <div className="content-section doc datascroller-demo">
+                <DocSections docs={docs} />
+                <DocSectionNav docs={docs} />
             </div>
         </div>
     );

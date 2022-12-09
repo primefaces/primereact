@@ -606,10 +606,10 @@ export const Dropdown = React.memo(
         }, [overlayVisibleState, props.value]);
 
         useUpdateEffect(() => {
-            if (overlayVisibleState && props.filter) {
+            if (overlayVisibleState && filterState && props.filter) {
                 alignOverlay();
             }
-        }, [overlayVisibleState, props.filter]);
+        }, [overlayVisibleState, filterState, props.filter]);
 
         useUpdateEffect(() => {
             if (filterState && (!props.options || props.options.length === 0)) {

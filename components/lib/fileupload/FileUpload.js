@@ -331,7 +331,8 @@ export const FileUpload = React.memo(
             onFileSelect,
             getInput: () => fileInputRef.current,
             getContent: () => contentRef.current,
-            getFiles: () => filesState
+            getFiles: () => filesState,
+            setFiles: (files) => setFilesState(files || [])
         }));
 
         const createChooseButton = () => {

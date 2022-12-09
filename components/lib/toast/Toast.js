@@ -99,20 +99,24 @@ export const Toast = React.memo(
 
         const createElement = () => {
             const otherProps = ObjectUtils.findDiffKeys(props, Toast.defaultProps);
-            const className = classNames('p-toast p-component p-toast-' + props.position, props.className);
+            const className = classNames('p-toast p-component p-toast-' + props.position, props.className, {
+                'p-input-filled': PrimeReact.inputStyle === 'filled',
+                'p-ripple-disabled': PrimeReact.ripple === false
+            });
 
             return (
                 <div ref={containerRef} id={props.id} className={className} style={props.style} {...otherProps}>
                     <TransitionGroup>
-                        {messagesState.map((messageInfo) => {
-                            const messageRef = React.createRef();
+                        {messagesState &&
+                            messagesState.map((messageInfo) => {
+                                const messageRef = React.createRef();
 
-                            return (
-                                <CSSTransition nodeRef={messageRef} key={messageInfo._pId} classNames="p-toast-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} onEntered={onEntered} onExited={onExited} options={props.transitionOptions}>
-                                    <ToastMessage ref={messageRef} messageInfo={messageInfo} onClick={props.onClick} onClose={onClose} onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave} />
-                                </CSSTransition>
-                            );
-                        })}
+                                return (
+                                    <CSSTransition nodeRef={messageRef} key={messageInfo._pId} classNames="p-toast-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} onEntered={onEntered} onExited={onExited} options={props.transitionOptions}>
+                                        <ToastMessage ref={messageRef} messageInfo={messageInfo} onClick={props.onClick} onClose={onClose} onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave} />
+                                    </CSSTransition>
+                                );
+                            })}
                     </TransitionGroup>
                 </div>
             );
