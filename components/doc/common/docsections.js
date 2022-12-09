@@ -47,21 +47,23 @@ export function DocSections(props) {
                                 <DocSectionText id={doc.id} label={doc.label}>
                                     {doc.description}
                                 </DocSectionText>
-                                <div className="card flex flex-column gap-3 justify-content-center">
+                                <div className="mt-3 flex flex-column justify-content-center">
                                     <div className="flex flex-row justify-content-center align-items-center flex-wrap">
-                                        {doc.options.map((option) => {
-                                            const id = option.id;
-                                            const label = option.label;
+                                        <div className="card flex flex-wrap justify-content-center align-items-center w-full gap-3">
+                                            {doc.options.map((option) => {
+                                                const id = option.id;
+                                                const label = option.label;
 
-                                            return (
-                                                <div className="mr-4 flex justify-content-center align-items-center" key={label}>
-                                                    <RadioButton inputId={id} value={label} onChange={onRadioButtonChange} checked={selectedOption === label} />
-                                                    <label htmlFor={id} className="ml-2">
-                                                        {label}
-                                                    </label>
-                                                </div>
-                                            );
-                                        })}
+                                                return (
+                                                    <div className="mr-4" key={label}>
+                                                        <RadioButton inputId={id} value={label} onChange={onRadioButtonChange} checked={selectedOption === label} />
+                                                        <label htmlFor={id} className="ml-2">
+                                                            {label}
+                                                        </label>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
                                     </div>
                                     {doc.options.map((option) => {
                                         const Component = option.component;
