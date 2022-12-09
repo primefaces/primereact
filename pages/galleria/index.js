@@ -91,7 +91,7 @@ const GalleriaDemo = () => {
             id: 'thumbnail',
             label: 'Thumbnail',
             description: 'Thumbnails represent a smaller version of the actual content.',
-            children: [
+            options: [
                 {
                     id: 'thumbnailpositionbottom',
                     label: 'Positioned at Bottom',

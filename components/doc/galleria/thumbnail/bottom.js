@@ -129,9 +129,6 @@ export default function PositionedBottomDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>
-                <p>Positioned at Bottom</p>
-            </DocSectionText>
             <div className="card flex justify-content-center">
                 <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }} item={itemTemplate} thumbnail={thumbnailTemplate} />
             </div>

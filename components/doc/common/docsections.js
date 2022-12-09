@@ -1,9 +1,16 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+import { RadioButton } from '../../lib/radiobutton/RadioButton';
+import React, { useState } from 'react';
+import { DocSectionText } from './docsectiontext';
 
 export function DocSections(props) {
+    const [selectedOption, setSelectedOption] = useState(null);
     const router = useRouter();
+
+    const onRadioButtonChange = (e) => {
+        setSelectedOption(e.value);
+    };
 
     return (
         <div className="doc-main">
@@ -34,6 +41,35 @@ export function DocSections(props) {
                                     return <Component id={id} key={label} label={label} />;
                                 })}
                             </React.Fragment>
+                        )}
+                        {doc.options && !doc.component && (
+                            <>
+                                <DocSectionText id={doc.id} label={doc.label}>
+                                    {doc.description}
+                                </DocSectionText>
+                                <div className="card flex flex-column gap-3 justify-content-center">
+                                    <div className="flex flex-row justify-content-center align-items-center flex-wrap">
+                                        {doc.options.map((option) => {
+                                            const id = option.id;
+                                            const label = option.label;
+
+                                            return (
+                                                <div className="mr-4 flex justify-content-center align-items-center" key={label}>
+                                                    <RadioButton inputId={id} value={label} onChange={onRadioButtonChange} checked={selectedOption === label} />
+                                                    <label htmlFor={id} className="ml-2">
+                                                        {label}
+                                                    </label>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                    {doc.options.map((option) => {
+                                        const Component = option.component;
+
+                                        return selectedOption === option.label ? <Component key={option.label} id={option.id} label={option.label} /> : null;
+                                    })}
+                                </div>
+                            </>
                         )}
                     </section>
                 );
