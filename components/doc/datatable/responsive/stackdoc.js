@@ -111,9 +111,6 @@ const StackDoc = () => {
 
     return (
         <>
-            <DocSectionText {...props}>
-                <p>Stack demo content.</p>
-            </DocSectionText>
             <div className="card">
                 <DataTable value={products} header="Stack" responsiveLayout="stack" breakpoint="960px">
                     <Column field="code" header="Code" />

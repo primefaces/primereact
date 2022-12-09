@@ -78,9 +78,6 @@ const LargeTableDoc = () => {
 
     return (
         <>
-            <DocSectionText {...props}>
-                <p>DataTable requires a collection to display along with column components for the representation of the data.</p>
-            </DocSectionText>
             <div className="card">
                 <DataTable value={products} header="Large Table" size="large" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>

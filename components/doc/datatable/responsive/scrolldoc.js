@@ -111,9 +111,6 @@ const ScrollDoc = () => {
 
     return (
         <>
-            <DocSectionText {...props}>
-                <p>Scroll demo content.</p>
-            </DocSectionText>
             <div className="card">
                 <DataTable value={products} header="Scroll" responsiveLayout="scroll">
                     <Column field="code" header="Code" />

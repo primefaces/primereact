@@ -78,9 +78,6 @@ const SmallTableDoc = () => {
 
     return (
         <>
-            <DocSectionText {...props}>
-                <p>DataTable requires a collection to display along with column components for the representation of the data.</p>
-            </DocSectionText>
             <div className="card">
                 <DataTable value={products} header="Small Table" size="small" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>

@@ -88,7 +88,7 @@ const DataTableDemo = () => {
             id: 'size',
             label: 'Size',
             description: 'In addition to a regular table, alternatives with alternative sizes are available.',
-            children: [
+            options: [
                 {
                     id: 'smalltable',
                     label: 'Small Table',
@@ -347,7 +347,7 @@ const DataTableDemo = () => {
             id: 'responsive',
             label: 'Responsive',
             description: 'DataTable responsive layout can be achieved in two ways; first approach is displaying a horizontal scrollbar for smaller screens and second one is defining a breakpoint to display the cells of a row as stacked.',
-            children: [
+            options: [
                 {
                     id: 'scroll',
                     label: 'Scroll',
