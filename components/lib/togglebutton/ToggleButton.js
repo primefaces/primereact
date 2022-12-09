@@ -53,7 +53,7 @@ export const ToggleButton = React.memo(
         }));
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const tabIndex = !props.disabled && props.tabIndex;
+        const tabIndex = (!props.disabled && props.tabIndex) || -1;
         const otherProps = ObjectUtils.findDiffKeys(props, ToggleButton.defaultProps);
         const className = classNames(
             'p-button p-togglebutton p-component',
