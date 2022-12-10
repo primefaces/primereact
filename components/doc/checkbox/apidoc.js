@@ -47,7 +47,7 @@ export function ApiDoc(props) {
                             </tr>
                             <tr>
                                 <td>checked</td>
-                                <td>boolean</td>
+                                <td>any</td>
                                 <td>false</td>
                                 <td>Specifies whether a checkbox should be checked or not.</td>
                             </tr>
