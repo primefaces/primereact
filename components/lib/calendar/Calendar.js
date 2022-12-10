@@ -2956,7 +2956,7 @@ export const Calendar = React.memo(
 
         const createMinutePicker = () => {
             const currentTime = getCurrentDateTime();
-            const minute = currentTime.getMinutes();
+            const minute = doStepMinute(currentTime.getMinutes());
             const minuteDisplay = minute < 10 ? '0' + minute : minute;
 
             return (
