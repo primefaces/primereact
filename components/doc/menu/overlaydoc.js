@@ -50,7 +50,7 @@ export function OverlayDoc(props) {
         basic: `
 <Toast ref={toast}></Toast>
 <Menu model={items} popup ref={menu} id="popup_menu" />
-<Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)} aria-controls="popup_menu" aria-haspopup />      
+<Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)} aria-controls="popup_menu" aria-haspopup />
 `,
         javascript: `
 import { useRef } from 'react';
@@ -113,12 +113,13 @@ export default function OverlayDoc() {
 import { useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Menu } from 'primereact/menu';
+import { MenuItem } from 'primereact/menuitem';
 import { Toast } from 'primereact/toast';
 
 export default function OverlayDoc() {
-    const menu = useRef(null);
+    const menu = useRef<Menu>(null);
     const toast = useRef<Toast>(null);
-    const items = [
+    const items: MenuItem[] = [
         {
             label: 'Options',
             items: [
@@ -161,7 +162,7 @@ export default function OverlayDoc() {
         <div>
             <Toast ref={toast}></Toast>
             <Menu model={items} popup ref={menu} id="popup_menu" />
-            <Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)} aria-controls="popup_menu" aria-haspopup />
+            <Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current?.toggle(event)} aria-controls="popup_menu" aria-haspopup />
         </div>
     )
 }

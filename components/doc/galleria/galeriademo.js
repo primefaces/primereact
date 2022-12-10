@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
-import { Galleria } from '../../lib/galleria/Galleria';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
-import { PhotoService } from '../../../service/PhotoService';
 import getConfig from 'next/config';
+import { useEffect, useState } from 'react';
+import { PhotoService } from '../../../service/PhotoService';
+import { Galleria } from '../../lib/galleria/Galleria';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function GaleriaDemo(props) {
     const [images, setImages] = useState(null);
@@ -87,7 +87,7 @@ export default function GaleriaDemo() {
         `,
         typescript: `
 import { useState, useEffect } from 'react';
-import { Galleria } from 'primereact/galleria';
+import { Galleria, GalleriaResponsiveOptions } from 'primereact/galleria';
 import { PhotoService } from '../service/PhotoService';
 
 export default function GaleriaDemo() {
@@ -98,7 +98,7 @@ export default function GaleriaDemo() {
         galleriaService.getImages().then(data => setImages(data));
     }, [])
 
-    const responsiveOptions = [
+    const responsiveOptions: GalleriaResponsiveOptions[] = [
         {
             breakpoint: '1024px',
             numVisible: 5
@@ -113,11 +113,11 @@ export default function GaleriaDemo() {
         }
     ];
 
-    const itemTemplate = (item) => {
+    const itemTemplate = (item: any) => {
         return <img src={\`images/\${item.itemImageSrc}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.alt} style={{ width: '100%' }} />
     }
 
-    const thumbnailTemplate = (item) => {
+    const thumbnailTemplate = (item: any) => {
         return <img src={\`images/\${item.thumbnailImageSrc}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.alt} />
     }
 

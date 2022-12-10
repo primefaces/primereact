@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { DataTable } from '../../../lib/datatable/DataTable';
-import { Column } from '../../../lib/column/Column';
+import React, { useEffect, useState } from 'react';
 import { CustomerService } from '../../../../service/CustomerService';
+import { Button } from '../../../lib/button/Button';
+import { Column } from '../../../lib/column/Column';
+import { DataTable } from '../../../lib/datatable/DataTable';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
-import { Button } from '../../../lib/button/Button';
 
 export function ScrollFrozenRowsDoc(props) {
     const [lockedCustomers, setLockedCustomers] = useState([]);
@@ -68,11 +68,12 @@ export function ScrollFrozenRowsDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={customers} scrollable scrollHeight="400px" loading={loading}>
+<DataTable value={unlockedCustomers} frozenValue={lockedCustomers} scrollable scrollHeight="400px" loading={loading}>
     <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
     <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
     <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
     <Column field="status" header="Status" style={{ minWidth: '200px' }}></Column>
+    <Column style={{ flex: '0 0 4rem' }} body={lockTemplate}></Column>
 </DataTable>
         `,
         javascript: `
@@ -90,7 +91,7 @@ const ScrollFrozenRowsDoc = () => {
 
     useEffect(() => {
         setLoading(true);
-        
+
         customerService.getCustomersMedium().then((data) => {
             setUnlockedCustomers(data);
         });
@@ -170,7 +171,7 @@ const ScrollFrozenRowsDoc = () => {
 
     useEffect(() => {
         setLoading(true);
-        
+
         customerService.getCustomersMedium().then((data) => {
             setUnlockedCustomers(data);
         });
