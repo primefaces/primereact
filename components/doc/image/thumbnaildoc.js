@@ -1,14 +1,14 @@
-import { Image } from '../../lib/image/Image';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
 import getConfig from 'next/config';
+import { Image } from '../../lib/image/Image';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function ThumbnailDoc(props) {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     const code = {
         basic: `
-<Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" zoomSrc="https://www.primefaces.org/wp-content/uploads/2020/05/small.png" alt="Image" width="80" height="60" preview />
+<Image src="https://www.primefaces.org/wp-content/uploads/2020/05/small.png" zoomSrc="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="80" height="60" preview />
         `,
         javascript: `
 import { Image } from 'primereact/image';
@@ -16,7 +16,7 @@ import { Image } from 'primereact/image';
 export default function ThumbnailDoc() {
 
     return (
-        <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" zoomSrc="https://www.primefaces.org/wp-content/uploads/2020/05/small.png" alt="Image" width="80" height="60" preview />
+        <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/small.png" zoomSrc="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="80" height="60" preview />
     )
 }
         `,
@@ -26,7 +26,7 @@ import { Image } from 'primereact/image';
 export default function ThumbnailDoc() {
 
     return (
-        <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" zoomSrc="https://www.primefaces.org/wp-content/uploads/2020/05/small.png" alt="Image" width="80" height="60" preview />
+        <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/small.png" zoomSrc="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="80" height="60" preview />
     )
 }
         `
