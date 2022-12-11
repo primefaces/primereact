@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { DataTable } from '../../../lib/datatable/DataTable';
-import { Column } from '../../../lib/column/Column';
+import { useEffect, useState } from 'react';
 import { ProductService } from '../../../../service/ProductService';
+import { Column } from '../../../lib/column/Column';
+import { DataTable } from '../../../lib/datatable/DataTable';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 
@@ -13,7 +13,7 @@ export function SingleDoc(props) {
     useEffect(() => {
         const productService = new ProductService();
 
-        productService.getProductsSmall().then((data) => setProducts(data));
+        productService.getProductsMini().then((data) => setProducts(data));
     }, []);
 
     const code = {
@@ -49,7 +49,7 @@ const SingleDoc = () => {
     useEffect(() => {
         const productService = new ProductService();
 
-        productService.getProductsSmall().then(data => setProducts(data));
+        productService.getProductsMini().then(data => setProducts(data));
     },[]);
 
     return (
@@ -89,7 +89,7 @@ const SingleDoc = () => {
     useEffect(() => {
         const productService = new ProductService();
 
-        productService.getProductsSmall().then(data => setProducts(data));
+        productService.getProductsMini().then(data => setProducts(data));
     },[]);
 
     return (

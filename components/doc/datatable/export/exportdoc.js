@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ProductService } from '../../../../service/ProductService';
+import { Button } from '../../../lib/button/Button';
+import { Column } from '../../../lib/column/Column';
+import { DataTable } from '../../../lib/datatable/DataTable';
+import { Tooltip } from '../../../lib/tooltip/Tooltip';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
-import { DataTable } from '../../../lib/datatable/DataTable';
-import { Column } from '../../../lib/column/Column';
-import { Tooltip } from '../../../lib/tooltip/Tooltip';
-import { Button } from '../../../lib/button/Button';
 
 export function ExportDoc(props) {
     const [products, setProducts] = useState([]);
@@ -23,7 +23,7 @@ export function ExportDoc(props) {
     const exportColumns = cols.map((col) => ({ title: col.header, dataKey: col.field }));
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data));
+        productService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onSelectionChange = (e) => {
@@ -115,7 +115,7 @@ export const ExportDoc = () => {
     const exportColumns = cols.map(col => ({ title: col.header, dataKey: col.field }));
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data));
+        productService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 
@@ -177,7 +177,7 @@ export const ExportDoc = () => {
     return (
         <div className="card">
             <Tooltip target=".export-buttons>button" position="bottom" />
-        
+
             <DataTable ref={(el) => { this.dt = el; }} value={this.state.products} header={header} dataKey="id" responsiveLayout="scroll"
                 selectionMode="multiple" selection={this.state.selectedProducts} onSelectionChange={this.onSelectionChange}>
                 {
@@ -212,7 +212,7 @@ export const ExportDoc = () => {
     const exportColumns = cols.map(col => ({ title: col.header, dataKey: col.field }));
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data));
+        productService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 

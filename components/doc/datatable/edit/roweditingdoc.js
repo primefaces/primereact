@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
-import { DataTable } from '../../../lib/datatable/DataTable';
-import { Column } from '../../../lib/column/Column';
+import { useEffect, useState } from 'react';
 import { ProductService } from '../../../../service/ProductService';
+import { Column } from '../../../lib/column/Column';
+import { DataTable } from '../../../lib/datatable/DataTable';
+import { Dropdown } from '../../../lib/dropdown/Dropdown';
+import { InputNumber } from '../../../lib/inputnumber/InputNumber';
+import { InputText } from '../../../lib/inputtext/InputText';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
-import { InputText } from '../../../lib/inputtext/InputText';
-import { InputNumber } from '../../../lib/inputnumber/InputNumber';
-import { Dropdown } from '../../../lib/dropdown/Dropdown';
 
 export function RowEditingDoc(props) {
     const [products, setProducts] = useState(null);
@@ -20,7 +20,7 @@ export function RowEditingDoc(props) {
     const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data));
+        productService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const getStatusLabel = (status) => {
@@ -112,7 +112,7 @@ const RowEditingDoc = () => {
     const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data));
+        productService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const getStatusLabel = (status) => {
@@ -201,7 +201,7 @@ const RowEditingDoc = () => {
     const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data));
+        productService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const getStatusLabel = (status) => {

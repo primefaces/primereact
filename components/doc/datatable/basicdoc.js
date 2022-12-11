@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { DataTable } from '../../lib/datatable/DataTable';
-import { Column } from '../../lib/column/Column';
+import { useEffect, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
+import { Column } from '../../lib/column/Column';
+import { DataTable } from '../../lib/datatable/DataTable';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
@@ -10,7 +10,7 @@ export function BasicDoc(props) {
     const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProducts().then((data) => setProducts(data));
+        productService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const code = {
@@ -33,7 +33,7 @@ const BasicDoc = () => {
     const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        productService.getProductsMini().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
@@ -61,7 +61,7 @@ const BasicDoc = () => {
     const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        productService.getProductsMini().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (

@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { DataTable } from '../../lib/datatable/DataTable';
-import { Column } from '../../lib/column/Column';
+import React, { useEffect, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
+import { Column } from '../../lib/column/Column';
+import { DataTable } from '../../lib/datatable/DataTable';
+import { classNames } from '../../lib/utils/Utils';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
-import { classNames } from '../../lib/utils/Utils';
+import styles from './DataTable.module.css';
 
 export function StyleDoc(props) {
     const [products, setProducts] = useState([]);
@@ -15,6 +16,10 @@ export function StyleDoc(props) {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const rowClass = (data) => {
+        if (!styles) {
+            return;
+        }
+
         return {
             'row-accessories': data.category === 'Accessories'
         };
@@ -22,9 +27,9 @@ export function StyleDoc(props) {
 
     const stockBodyTemplate = (rowData) => {
         const stockClassName = classNames({
-            outofstock: rowData.quantity === 0,
-            lowstock: rowData.quantity > 0 && rowData.quantity < 10,
-            instock: rowData.quantity > 10
+            'outofstock x': rowData.quantity === 0,
+            'lowstock x': rowData.quantity > 0 && rowData.quantity < 10,
+            'instock x': rowData.quantity > 10
         });
 
         return <div className={stockClassName}>{rowData.quantity}</div>;
@@ -32,13 +37,11 @@ export function StyleDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={products} header="Stack" responsiveLayout="stack" breakpoint="960px">
-    <Column field="code" header="Code" />
-    <Column field="name" header="Name" />
-    <Column field="category" header="Category" />
-    <Column field="quantity" header="Quantity" />
-    <Column field="inventoryStatus" header="Status" body={statusTemplate} />
-    <Column field="rating" header="Rating" body={ratingTemplate} />
+<DataTable value={products} className="datatable-style-demo" rowClassName={rowClass} responsiveLayout="scroll">
+        <Column field="code" header="Code"></Column>
+        <Column field="name" header="Name"></Column>
+        <Column field="category" header="Category"></Column>
+        <Column field="quantity" header="Quantity" body={stockBodyTemplate}></Column>
 </DataTable>
         `,
         javascript: `
@@ -80,7 +83,7 @@ const StyleDoc = () => {
     return (
         <div className="datatable-style-demo">
             <div className="card">
-                <DataTable value={products} rowClassName={rowClass} responsiveLayout="scroll">
+                <DataTable value={products} className="datatable-style-demo" rowClassName={rowClass} responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -130,7 +133,7 @@ const StyleDoc = () => {
     return (
         <div className="datatable-style-demo">
             <div className="card">
-                <DataTable value={products} rowClassName={rowClass} responsiveLayout="scroll">
+                <DataTable value={products} className="datatable-style-demo" rowClassName={rowClass} responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -149,7 +152,7 @@ const StyleDoc = () => {
                 <p>Particular rows and cells can be styled based on data.</p>
             </DocSectionText>
             <div className="card">
-                <DataTable value={products} rowClassName={rowClass} responsiveLayout="scroll">
+                <DataTable value={products} className="datatable-style-demo" rowClassName={rowClass} responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>

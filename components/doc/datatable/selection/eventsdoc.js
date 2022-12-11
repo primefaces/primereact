@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
-import { DataTable } from '../../../lib/datatable/DataTable';
-import { Column } from '../../../lib/column/Column';
-import { Toast } from '../../../lib/toast/Toast';
+import { useEffect, useRef, useState } from 'react';
 import { ProductService } from '../../../../service/ProductService';
+import { Column } from '../../../lib/column/Column';
+import { DataTable } from '../../../lib/datatable/DataTable';
+import { Toast } from '../../../lib/toast/Toast';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 
@@ -35,7 +35,7 @@ export function EventsDoc(props) {
     useEffect(() => {
         const productService = new ProductService();
 
-        productService.getProductsSmall().then((data) => setProducts(data));
+        productService.getProductsMini().then((data) => setProducts(data));
     }, []);
 
     const code = {
@@ -72,7 +72,7 @@ const EventsDoc = () => {
     useEffect(() => {
         const productService = new ProductService();
 
-        productService.getProductsSmall().then(data => setProducts(data));
+        productService.getProductsMini().then(data => setProducts(data));
     },[]);
 
     return (
@@ -139,7 +139,7 @@ const EventsDoc = () => {
     useEffect(() => {
         const productService = new ProductService();
 
-        productService.getProductsSmall().then(data => setProducts(data));
+        productService.getProductsMini().then(data => setProducts(data));
     },[]);
 
     return (
