@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { DataTable } from '../../../lib/datatable/DataTable';
-import { Column } from '../../../lib/column/Column';
+import { useEffect, useState } from 'react';
 import { ProductService } from '../../../../service/ProductService';
+import { Column } from '../../../lib/column/Column';
+import { DataTable } from '../../../lib/datatable/DataTable';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 
@@ -14,7 +14,7 @@ export function ControlledSelectionDoc(props) {
     useEffect(() => {
         const productService = new ProductService();
 
-        productService.getProductsSmall().then((data) => setProducts(data));
+        productService.getProductsMini().then((data) => setProducts(data));
     }, []);
 
     const isSelectable = (value, field) => {
@@ -106,7 +106,7 @@ const ControlledSelectionDoc = () => {
     useEffect(() => {
         const productService = new ProductService();
 
-        productService.getProductsSmall().then(data => setProducts(data));
+        productService.getProductsMini().then(data => setProducts(data));
     },[]);
 
         const isSelectable = (value, field) => {
@@ -154,7 +154,7 @@ const ControlledSelectionDoc = () => {
                 <Column field="category" header="Category"></Column>
                 <Column field="quantity" header="Quantity"></Column>
             </DataTable>
-            
+
             <h6>Cell Selection</h6>
             <DataTable value={products} selectionMode="multiple" dragSelection cellSelection selection={selectedProducts2} onSelectionChange={e => setSelectedProducts2(e.value)} dataKey="id" responsiveLayout="scroll"
                 isDataSelectable={isCellSelectable} cellClassName={cellClassName}>
@@ -163,7 +163,7 @@ const ControlledSelectionDoc = () => {
                 <Column field="category" header="Category"></Column>
                 <Column field="quantity" header="Quantity"></Column>
             </DataTable>
-            
+
             <h6>Checkbox Selection</h6>
             <DataTable value={products} selection={selectedProducts3} onSelectionChange={e => setSelectedProducts3(e.value)} dataKey="id" responsiveLayout="scroll"
                 isDataSelectable={isRowSelectable} rowClassName={rowClassName}>
@@ -194,7 +194,7 @@ const ControlledSelectionDoc = () => {
     useEffect(() => {
         const productService = new ProductService();
 
-        productService.getProductsSmall().then(data => setProducts(data));
+        productService.getProductsMini().then(data => setProducts(data));
     },[]);
 
         const isSelectable = (value, field) => {

@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { DataTable } from '../../lib/datatable/DataTable';
-import { Column } from '../../lib/column/Column';
+import { useEffect, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
+import { Column } from '../../lib/column/Column';
+import { DataTable } from '../../lib/datatable/DataTable';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
@@ -17,7 +17,7 @@ export function DynamicDoc(props) {
     const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data));
+        productService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const dynamicColumns = columns.map((col, i) => {
@@ -48,7 +48,7 @@ const DynamicDoc = () => {
     const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        productService.getProductsMini().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const dynamicColumns = columns.map((col,i) => {
@@ -79,11 +79,11 @@ const DynamicDoc = () => {
         {field: 'name', header: 'Name'},
         {field: 'category', header: 'Category'},
         {field: 'quantity', header: 'Quantity'}
-    ];  
-    const productService = new ProductService();    
+    ];
+    const productService = new ProductService();
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps  
+        productService.getProductsMini().then(data => setProducts(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
     const dynamicColumns = columns.map((col,i) => {
         return <Column key={col.field} field={col.field} header={col.header} />;
     });

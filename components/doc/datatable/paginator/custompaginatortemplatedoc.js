@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { DataTable } from '../../../lib/datatable/DataTable';
-import { Column } from '../../../lib/column/Column';
+import React, { useEffect, useState } from 'react';
 import { CustomerService } from '../../../../service/CustomerService';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
-import { classNames } from '../../../lib/utils/Utils';
-import { Ripple } from '../../../lib/ripple/Ripple';
+import { Column } from '../../../lib/column/Column';
+import { DataTable } from '../../../lib/datatable/DataTable';
 import { Dropdown } from '../../../lib/dropdown/Dropdown';
 import { InputText } from '../../../lib/inputtext/InputText';
+import { Ripple } from '../../../lib/ripple/Ripple';
+import { classNames } from '../../../lib/utils/Utils';
+import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function CustomPaginatorTemplateDoc(props) {
     const [customers1, setCustomers1] = useState([]);
     const [customers2, setCustomers2] = useState([]);
     const [first1, setFirst1] = useState(0);
-    const [rows1, setRows1] = useState(10);
+    const [rows1, setRows1] = useState(5);
     const [first2, setFirst2] = useState(0);
-    const [rows2, setRows2] = useState(10);
+    const [rows2, setRows2] = useState(5);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageInputTooltip, setPageInputTooltip] = useState("Press 'Enter' key to go to this page.");
 
@@ -94,6 +94,7 @@ export function CustomPaginatorTemplateDoc(props) {
         },
         RowsPerPageDropdown: (options) => {
             const dropdownOptions = [
+                { label: 5, value: 5 },
                 { label: 10, value: 10 },
                 { label: 20, value: 20 },
                 { label: 50, value: 50 },
@@ -114,6 +115,7 @@ export function CustomPaginatorTemplateDoc(props) {
         layout: 'RowsPerPageDropdown CurrentPageReport PrevPageLink NextPageLink',
         RowsPerPageDropdown: (options) => {
             const dropdownOptions = [
+                { label: 5, value: 5 },
                 { label: 10, value: 10 },
                 { label: 20, value: 20 },
                 { label: 50, value: 50 }
@@ -145,7 +147,7 @@ export function CustomPaginatorTemplateDoc(props) {
     <Column field="company" header="Company" style={{ width: '25%' }}></Column>
     <Column field="representative.name" header="Representative" style={{ width: '25%' }}></Column>
 </DataTable>
-    
+
 <DataTable value={customers2} paginator paginatorTemplate={template2} first={first2} rows={rows2} onPage={onCustomPage2}
     paginatorClassName="justify-content-end" className="mt-6" responsiveLayout="scroll">
     <Column field="name" header="Name" style={{ width: '25%' }}></Column>
@@ -168,9 +170,9 @@ const CustomPaginatorTemplateDoc = () => {
     const [customers1, setCustomers1] = useState([]);
     const [customers2, setCustomers2] = useState([]);
     const [first1, setFirst1] = useState(0);
-    const [rows1, setRows1] = useState(10);
+    const [rows1, setRows1] = useState(5);
     const [first2, setFirst2] = useState(0);
-    const [rows2, setRows2] = useState(10);
+    const [rows2, setRows2] = useState(5);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageInputTooltip, setPageInputTooltip] = useState('Press \\'Enter\\' key to go to this page.');
 
@@ -245,6 +247,7 @@ const CustomPaginatorTemplateDoc = () => {
         },
         'RowsPerPageDropdown': (options) => {
             const dropdownOptions = [
+                { label: 5, value: 5 },
                 { label: 10, value: 10 },
                 { label: 20, value: 20 },
                 { label: 50, value: 50 },
@@ -266,6 +269,7 @@ const CustomPaginatorTemplateDoc = () => {
         layout: 'RowsPerPageDropdown CurrentPageReport PrevPageLink NextPageLink',
         'RowsPerPageDropdown': (options) => {
             const dropdownOptions = [
+                { label: 5, value: 5 },
                 { label: 10, value: 10 },
                 { label: 20, value: 20 },
                 { label: 50, value: 50 }
@@ -295,7 +299,7 @@ const CustomPaginatorTemplateDoc = () => {
                 <Column field="company" header="Company" style={{ width: '25%' }}></Column>
                 <Column field="representative.name" header="Representative" style={{ width: '25%' }}></Column>
             </DataTable>
-                
+
             <DataTable value={customers2} paginator paginatorTemplate={template2} first={first2} rows={rows2} onPage={onCustomPage2}
                 paginatorClassName="justify-content-end" className="mt-6" responsiveLayout="scroll">
                 <Column field="name" header="Name" style={{ width: '25%' }}></Column>
@@ -321,9 +325,9 @@ const CustomPaginatorTemplateDoc = () => {
     const [customers1, setCustomers1] = useState([]);
     const [customers2, setCustomers2] = useState([]);
     const [first1, setFirst1] = useState(0);
-    const [rows1, setRows1] = useState(10);
+    const [rows1, setRows1] = useState(5);
     const [first2, setFirst2] = useState(0);
-    const [rows2, setRows2] = useState(10);
+    const [rows2, setRows2] = useState(5);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageInputTooltip, setPageInputTooltip] = useState('Press \\'Enter\\' key to go to this page.');
 
@@ -398,6 +402,7 @@ const CustomPaginatorTemplateDoc = () => {
         },
         'RowsPerPageDropdown': (options) => {
             const dropdownOptions = [
+                { label: 5, value: 5 },
                 { label: 10, value: 10 },
                 { label: 20, value: 20 },
                 { label: 50, value: 50 },
@@ -419,6 +424,7 @@ const CustomPaginatorTemplateDoc = () => {
         layout: 'RowsPerPageDropdown CurrentPageReport PrevPageLink NextPageLink',
         'RowsPerPageDropdown': (options) => {
             const dropdownOptions = [
+                { label: 5, value: 5 },
                 { label: 10, value: 10 },
                 { label: 20, value: 20 },
                 { label: 50, value: 50 }

@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import { DataTable } from '../../../lib/datatable/DataTable';
-import { Column } from '../../../lib/column/Column';
+import { useEffect, useState } from 'react';
 import { CustomerService } from '../../../../service/CustomerService';
+import { Button } from '../../../lib/button/Button';
+import { Column } from '../../../lib/column/Column';
+import { DataTable } from '../../../lib/datatable/DataTable';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
-import { Button } from '../../../lib/button/Button';
 
 export function PaginatorBasicDoc(props) {
     const [customers, setCustomers] = useState([]);
@@ -112,8 +112,8 @@ const PaginatorBasicDoc = () => {
                     responsiveLayout="scroll"
                     paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
-                    rows={10}
-                    rowsPerPageOptions={[10, 20, 50]}
+                    rows={5}
+                    rowsPerPageOptions={[5, 10, 20, 50]}
                     paginatorLeft={paginatorLeft}
                     paginatorRight={paginatorRight}
                 >

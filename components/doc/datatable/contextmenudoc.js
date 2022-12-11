@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { DataTable } from '../../lib/datatable/DataTable';
-import { Column } from '../../lib/column/Column';
+import React, { useEffect, useRef, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
+import { Column } from '../../lib/column/Column';
+import { ContextMenu } from '../../lib/contextmenu/ContextMenu';
+import { DataTable } from '../../lib/datatable/DataTable';
+import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
-import { Toast } from '../../lib/toast/Toast';
-import { ContextMenu } from '../../lib/contextmenu/ContextMenu';
 
 export function ContextMenuDoc(props) {
     const [products, setProducts] = useState([]);
@@ -19,7 +19,7 @@ export function ContextMenuDoc(props) {
     const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data));
+        productService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const viewProduct = (product) => {
@@ -76,7 +76,7 @@ const ContextMenuDoc = () => {
     const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        productService.getProductsMini().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const viewProduct = (product) => {
@@ -139,7 +139,7 @@ const ContextMenuDoc = () => {
     const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        productService.getProductsMini().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const viewProduct = (product) => {

@@ -1,66 +1,66 @@
 import Head from 'next/head';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/datatable/importdoc';
-import { BasicDoc } from '../../components/doc/datatable/basicdoc';
-import { PaginatorBasicDoc } from '../../components/doc/datatable/paginator/basicdoc';
-import { DynamicDoc } from '../../components/doc/datatable/dynamiccolumnsdoc';
-import { TemplatingDoc } from '../../components/doc/datatable/templatingdoc';
-import { GridLinesDoc } from '../../components/doc/datatable/gridlinesdoc';
-import { StripedDoc } from '../../components/doc/datatable/stripeddoc';
 import { ApiDoc } from '../../components/doc/datatable/apidoc';
-import { LazyDoc } from '../../components/doc/datatable/lazydoc';
-import { FlexScrollDoc } from '../../components/doc/datatable/flexscrolldoc';
+import { BasicDoc } from '../../components/doc/datatable/basicdoc';
 import { ColGroupDoc } from '../../components/doc/datatable/colgroupdoc';
-import { RowExpandDoc } from '../../components/doc/datatable/rowexpanddoc';
-import { StyleDoc } from '../../components/doc/datatable/styledoc';
-import { ReorderDoc } from '../../components/doc/datatable/reorderdoc';
+import { ChooseResizableColumnsDoc } from '../../components/doc/datatable/colresize/chooseresizablecolumnsdoc';
+import { ExpandModeDoc } from '../../components/doc/datatable/colresize/expandmodedoc';
+import { FitModeDoc } from '../../components/doc/datatable/colresize/fitmodedoc';
 import { ColToggleDoc } from '../../components/doc/datatable/coltoggledoc';
 import { ContextMenuDoc } from '../../components/doc/datatable/contextmenudoc';
 import { CrudDoc } from '../../components/doc/datatable/cruddoc';
-import { SmallTableDoc } from '../../components/doc/datatable/size/smalltabledoc';
-import { NormalTableDoc } from '../../components/doc/datatable/size/normaltabledoc';
-import { LargeTableDoc } from '../../components/doc/datatable/size/largetabledoc';
+import { DynamicDoc } from '../../components/doc/datatable/dynamiccolumnsdoc';
+import { CellEditingDoc } from '../../components/doc/datatable/edit/celleditingdoc';
+import { CellEditWithSortAndFilterDoc } from '../../components/doc/datatable/edit/celleditwithsortandfilterdoc';
+import { ProgrammaticDoc } from '../../components/doc/datatable/edit/programmaticdoc';
+import { RowEditingDoc } from '../../components/doc/datatable/edit/roweditingdoc';
+import { ExportDoc } from '../../components/doc/datatable/export/exportdoc';
+import { ExportImportDoc } from '../../components/doc/datatable/export/importdoc';
+import { FilterMenuDoc } from '../../components/doc/datatable/filter/filtermenudoc';
+import { FilterRowDoc } from '../../components/doc/datatable/filter/filterrowdoc';
+import { FlexScrollDoc } from '../../components/doc/datatable/flexscrolldoc';
+import { GridLinesDoc } from '../../components/doc/datatable/gridlinesdoc';
+import { ImportDoc } from '../../components/doc/datatable/importdoc';
+import { LazyDoc } from '../../components/doc/datatable/lazydoc';
+import { PaginatorBasicDoc } from '../../components/doc/datatable/paginator/basicdoc';
 import { CustomPaginatorTemplateDoc } from '../../components/doc/datatable/paginator/custompaginatortemplatedoc';
-import { SingleColumnDoc } from '../../components/doc/datatable/sort/singlecolumndoc';
+import { ReorderDoc } from '../../components/doc/datatable/reorderdoc';
+import { ScrollDoc } from '../../components/doc/datatable/responsive/scrolldoc';
+import { StackDoc } from '../../components/doc/datatable/responsive/stackdoc';
+import { RowExpandDoc } from '../../components/doc/datatable/rowexpanddoc';
+import { ExpandableRowGroupsDoc } from '../../components/doc/datatable/rowgroup/expandablerowgroupsdoc';
+import { RowSpanGroupingDoc } from '../../components/doc/datatable/rowgroup/rowspangroupingdoc';
+import { SubHeaderGroupingDoc } from '../../components/doc/datatable/rowgroup/subheadergroupingdoc';
+import { ScrollFlexibleDoc } from '../../components/doc/datatable/scroll/flexibledoc';
+import { ScrollFrozenColumnsDoc } from '../../components/doc/datatable/scroll/frozencolumnsdoc';
+import { ScrollFrozenRowsDoc } from '../../components/doc/datatable/scroll/frozenrowsdoc';
+import { ScrollHorizontalAndVerticalWithFooterDoc } from '../../components/doc/datatable/scroll/horizontalandverticalwithfooterdoc';
+import { ScrollSubHeaderGroupingDoc } from '../../components/doc/datatable/scroll/subheadergroupingdoc';
+import { ScrollVerticalDoc } from '../../components/doc/datatable/scroll/verticaldoc';
+import { CheckboxDoc } from '../../components/doc/datatable/selection/checkboxdoc';
+import { ControlledSelectionDoc } from '../../components/doc/datatable/selection/controlledselectiondoc';
+import { EventsDoc } from '../../components/doc/datatable/selection/eventsdoc';
+import { MultipleDoc } from '../../components/doc/datatable/selection/multipledoc';
+import { RadioButtonDoc } from '../../components/doc/datatable/selection/radiobuttondoc';
+import { SingleDoc } from '../../components/doc/datatable/selection/singledoc';
+import { LargeTableDoc } from '../../components/doc/datatable/size/largetabledoc';
+import { NormalTableDoc } from '../../components/doc/datatable/size/normaltabledoc';
+import { SmallTableDoc } from '../../components/doc/datatable/size/smalltabledoc';
 import { MultipleColumnsDoc } from '../../components/doc/datatable/sort/multiplecolumnsdoc';
 import { PresortDoc } from '../../components/doc/datatable/sort/presortdoc';
 import { RemovableSortDoc } from '../../components/doc/datatable/sort/removablesortdoc';
+import { SingleColumnDoc } from '../../components/doc/datatable/sort/singlecolumndoc';
 import { SortableDisabledDoc } from '../../components/doc/datatable/sort/sortabledisableddoc';
-import { FilterMenuDoc } from '../../components/doc/datatable/filter/filtermenudoc';
-import { FilterRowDoc } from '../../components/doc/datatable/filter/filterrowdoc';
-import { SingleDoc } from '../../components/doc/datatable/selection/singledoc';
-import { MultipleDoc } from '../../components/doc/datatable/selection/multipledoc';
-import { EventsDoc } from '../../components/doc/datatable/selection/eventsdoc';
-import { RadioButtonDoc } from '../../components/doc/datatable/selection/radiobuttondoc';
-import { CheckboxDoc } from '../../components/doc/datatable/selection/checkboxdoc';
-import { ControlledSelectionDoc } from '../../components/doc/datatable/selection/controlledselectiondoc';
-import { CellEditingDoc } from '../../components/doc/datatable/edit/celleditingdoc';
-import { RowEditingDoc } from '../../components/doc/datatable/edit/roweditingdoc';
-import { ProgrammaticDoc } from '../../components/doc/datatable/edit/programmaticdoc';
-import { CellEditWithSortAndFilterDoc } from '../../components/doc/datatable/edit/celleditwithsortandfilterdoc';
-import { ScrollVerticalDoc } from '../../components/doc/datatable/scroll/verticaldoc';
-import { ScrollFlexibleDoc } from '../../components/doc/datatable/scroll/flexibledoc';
-import { ScrollHorizontalAndVerticalWithFooterDoc } from '../../components/doc/datatable/scroll/horizontalandverticalwithfooterdoc';
-import { ScrollFrozenRowsDoc } from '../../components/doc/datatable/scroll/frozenrowsdoc';
-import { ScrollFrozenColumnsDoc } from '../../components/doc/datatable/scroll/frozencolumnsdoc';
-import { ScrollSubHeaderGroupingDoc } from '../../components/doc/datatable/scroll/subheadergroupingdoc';
-import { PreloadedDataDoc } from '../../components/doc/datatable/virtualscroll/preloadeddatadoc';
-import { LazyLoadingFromRemoteDataSourceDoc } from '../../components/doc/datatable/virtualscroll/lazyloadfromremotedatadoc';
-import { SubHeaderGroupingDoc } from '../../components/doc/datatable/rowgroup/subheadergroupingdoc';
-import { ExpandableRowGroupsDoc } from '../../components/doc/datatable/rowgroup/expandablerowgroupsdoc';
-import { RowSpanGroupingDoc } from '../../components/doc/datatable/rowgroup/rowspangroupingdoc';
-import { ScrollDoc } from '../../components/doc/datatable/responsive/scrolldoc';
-import { StackDoc } from '../../components/doc/datatable/responsive/stackdoc';
-import { FitModeDoc } from '../../components/doc/datatable/colresize/fitmodedoc';
-import { ExpandModeDoc } from '../../components/doc/datatable/colresize/expandmodedoc';
-import { ChooseResizableColumnsDoc } from '../../components/doc/datatable/colresize/chooseresizablecolumnsdoc';
-import { ExportImportDoc } from '../../components/doc/datatable/export/importdoc';
-import { ExportDoc } from '../../components/doc/datatable/export/exportdoc';
-import { SessionStorageDoc } from '../../components/doc/datatable/state/sessionstoragedoc';
-import { LocalStorageDoc } from '../../components/doc/datatable/state/localdoc';
 import { CustomStorageDoc } from '../../components/doc/datatable/state/customstoragedoc';
+import { LocalStorageDoc } from '../../components/doc/datatable/state/localdoc';
+import { SessionStorageDoc } from '../../components/doc/datatable/state/sessionstoragedoc';
+import { StripedDoc } from '../../components/doc/datatable/stripeddoc';
+import { StyleDoc } from '../../components/doc/datatable/styledoc';
+import { TemplatingDoc } from '../../components/doc/datatable/templatingdoc';
+import { LazyLoadingFromRemoteDataSourceDoc } from '../../components/doc/datatable/virtualscroll/lazyloadfromremotedatadoc';
+import { PreloadedDataDoc } from '../../components/doc/datatable/virtualscroll/preloadeddatadoc';
 
 const DataTableDemo = () => {
     const docs = [
@@ -117,9 +117,9 @@ const DataTableDemo = () => {
             component: StripedDoc
         },
         {
-            id: 'paginator',
-            label: 'Paginator',
-            description: 'Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the the number of page links to display.',
+            id: 'Sort',
+            label: 'Sort',
+            description: 'Enabling sortable property on a column is enough to make a column sortable. Multiple column sorting is enabled using sortMode property and used with metaKey.',
             children: [
                 {
                     id: 'singlecolumn',
@@ -149,9 +149,9 @@ const DataTableDemo = () => {
             ]
         },
         {
-            id: 'Sort',
-            label: 'Sort',
-            description: 'Enabling sortable property on a column is enough to make a column sortable. Multiple column sorting is enabled using sortMode property and used with metaKey.',
+            id: 'paginator',
+            label: 'Paginator',
+            description: 'Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the the number of page links to display.',
             children: [
                 {
                     id: 'sortbasic',
