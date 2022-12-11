@@ -39,7 +39,7 @@ export function PositionedTopDoc(props) {
     const code = {
         basic: `
 <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} thumbnailsPosition="top" style={{ maxWidth: '640px' }}
-    item={itemTemplate} thumbnail={thumbnailTemplate} 
+    item={itemTemplate} thumbnail={thumbnailTemplate} />
         `,
         javascript: `
 import { useState, useEffect } from 'react';
@@ -129,9 +129,6 @@ export default function PositionedTopDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>
-                <p>Positioned at Top</p>
-            </DocSectionText>
             <div className="card flex justify-content-center">
                 <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} thumbnailsPosition="top" style={{ maxWidth: '640px' }} item={itemTemplate} thumbnail={thumbnailTemplate} />
             </div>

@@ -89,7 +89,9 @@ export const TieredMenu = React.memo(
             const className = classNames(
                 'p-tieredmenu p-component',
                 {
-                    'p-tieredmenu-overlay': props.popup
+                    'p-tieredmenu-overlay': props.popup,
+                    'p-input-filled': PrimeReact.inputStyle === 'filled',
+                    'p-ripple-disabled': PrimeReact.ripple === false
                 },
                 props.className
             );

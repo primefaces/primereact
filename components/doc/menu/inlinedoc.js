@@ -47,7 +47,7 @@ export function InlineDoc(props) {
     const code = {
         basic: `
 <Toast ref={toast}></Toast>
-<Menu model={items} />        
+<Menu model={items} />
 `,
         javascript: `
 import { useRef } from 'react';
@@ -106,11 +106,12 @@ export default function InlineDoc() {
         typescript: `
 import { useRef } from 'react';
 import { Menu } from 'primereact/menu';
+import { MenuItem } from 'primereact/menuitem';
 import { Toast } from 'primereact/toast';
 
 export default function InlineDoc() {
     const toast = useRef<Toast>(null);
-    const items = [
+    const items: MenuItem[] = [
         {
             label: 'Options',
             items: [

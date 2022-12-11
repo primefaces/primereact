@@ -1,9 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
-import { Galleria } from '../../../lib/galleria/Galleria';
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { PhotoService } from '../../../../service/PhotoService';
 import getConfig from 'next/config';
+import { useEffect, useRef, useState } from 'react';
+import { PhotoService } from '../../../../service/PhotoService';
+import { Galleria } from '../../../lib/galleria/Galleria';
+import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function CustomContentDoc(props) {
     const [images, setImages] = useState(null);
@@ -122,16 +122,16 @@ export default function CustomContentDoc() {
         `,
         typescript: `
 import { useState, useEffect, useRef } from 'react';
-import { Galleria } from 'primereact/galleria';
+import { Galleria, GalleriaResponsiveOptions } from 'primereact/galleria';
 import { PhotoService } from '../service/PhotoService';
 
 export default function CustomContentDoc() {
     const [images, setImages] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
     const galleriaService = new PhotoService();
-    const galleria = useRef(null);
+    const galleria = useRef<Galleria>(null);
 
-    const responsiveOptions = [
+    const responsiveOptions: GalleriaResponsiveOptions[] = [
         {
             breakpoint: '1024px',
             numVisible: 5
@@ -157,7 +157,7 @@ export default function CustomContentDoc() {
     const thumbnailTemplate = (item) => {
         return <img src={item.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.alt} style={{ display: 'block' }} />;
     }
-    
+
     return (
         <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={7} style={{ maxWidth: '850px' }}
         activeIndex={activeIndex} onItemChange={(e) => setActiveIndex(e.index)}

@@ -166,7 +166,10 @@ export const Sidebar = React.forwardRef((props, ref) => {
 
     const createElement = () => {
         const otherProps = ObjectUtils.findDiffKeys(props, Sidebar.defaultProps);
-        const className = classNames('p-sidebar p-component', props.className);
+        const className = classNames('p-sidebar p-component', props.className, {
+            'p-input-filled': PrimeReact.inputStyle === 'filled',
+            'p-ripple-disabled': PrimeReact.ripple === false
+        });
         const maskClassName = classNames(
             'p-sidebar-mask',
             {

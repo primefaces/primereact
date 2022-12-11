@@ -201,7 +201,10 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
 
     const createElement = () => {
         const otherProps = ObjectUtils.findDiffKeys(props, OverlayPanel.defaultProps);
-        const className = classNames('p-overlaypanel p-component', props.className);
+        const className = classNames('p-overlaypanel p-component', props.className, {
+            'p-input-filled': PrimeReact.inputStyle === 'filled',
+            'p-ripple-disabled': PrimeReact.ripple === false
+        });
         const closeIcon = createCloseIcon();
 
         return (

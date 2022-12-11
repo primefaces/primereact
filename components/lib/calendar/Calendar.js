@@ -2915,8 +2915,12 @@ export const Calendar = React.memo(
         };
 
         const createHourPicker = () => {
-            let currentTime = getCurrentDateTime();
+            const currentTime = getCurrentDateTime();
+            const minute = doStepMinute(currentTime.getMinutes());
             let hour = currentTime.getHours();
+
+            // #3770 account for step minutes rolling to next hour
+            hour = minute > 59 ? hour + 1 : hour;
 
             if (props.hourFormat === '12') {
                 if (hour === 0) hour = 12;
@@ -2956,7 +2960,9 @@ export const Calendar = React.memo(
 
         const createMinutePicker = () => {
             const currentTime = getCurrentDateTime();
-            const minute = currentTime.getMinutes();
+            let minute = doStepMinute(currentTime.getMinutes());
+
+            minute = minute > 59 ? minute - 60 : minute;
             const minuteDisplay = minute < 10 ? '0' + minute : minute;
 
             return (
@@ -3253,7 +3259,9 @@ export const Calendar = React.memo(
             'p-datepicker-timeonly': props.timeOnly,
             'p-datepicker-multiple-month': props.numberOfMonths > 1,
             'p-datepicker-monthpicker': currentView === 'month',
-            'p-datepicker-touch-ui': props.touchUI
+            'p-datepicker-touch-ui': props.touchUI,
+            'p-input-filled': PrimeReact.inputStyle === 'filled',
+            'p-ripple-disabled': PrimeReact.ripple === false
         });
         const content = createContent();
         const datePicker = createDatePicker();

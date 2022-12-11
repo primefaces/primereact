@@ -173,7 +173,10 @@ export const ContextMenu = React.memo(
 
         const createContextMenu = () => {
             const otherProps = ObjectUtils.findDiffKeys(props, ContextMenu.defaultProps);
-            const className = classNames('p-contextmenu p-component', props.className);
+            const className = classNames('p-contextmenu p-component', props.className, {
+                'p-input-filled': PrimeReact.inputStyle === 'filled',
+                'p-ripple-disabled': PrimeReact.ripple === false
+            });
 
             return (
                 <CSSTransition
