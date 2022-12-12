@@ -1,12 +1,26 @@
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { classNames } from '../../lib/utils/Utils';
 
 export function DocSectionNav(props) {
+    const [overflow, setOverflow] = useState(false);
     const router = useRouter();
+    const ulRef = useRef(null);
+    const elementsRef = useRef(null);
+
+    useEffect(() => {
+        const ulHeight = ulRef.current.offsetHeight;
+        const elementsHeight = elementsRef.current.offsetHeight;
+
+        if (elementsHeight > ulHeight) {
+            setOverflow(true);
+        }
+    }, []);
 
     return (
-        <div className="w-12rem px-3 hidden xl:block" style={{ flexGrow: 0, flexShrink: 0, flexBasis: 'auto' }}>
-            <ul className="list-none p-0 m-0 sticky" style={{ top: '7rem' }}>
+        <ul ref={ulRef} className={classNames('sticky list-none p-0 m-0 hidden xl:block w-12rem px-3', { 'overflow-y-scroll': overflow })} style={{ top: '7rem', flexGrow: 0, flexShrink: 0, flexBasis: 'auto', height: 'calc(100vh - 15rem)' }}>
+            <div ref={elementsRef}>
                 {props.docs.map((doc) => (
                     <li key={doc.label}>
                         <Link href={router.basePath + router.pathname + '#' + doc.id}>
@@ -37,7 +51,7 @@ export function DocSectionNav(props) {
                         )}
                     </li>
                 ))}
-            </ul>
-        </div>
+            </div>
+        </ul>
     );
 }
