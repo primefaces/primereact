@@ -8,6 +8,17 @@ export function DocSectionNav(props) {
     const router = useRouter();
     const ulRef = useRef(null);
     const elementsRef = useRef(null);
+    const [activeTab, setActiveTab] = useState(0);
+
+    const onButtonClick = (doc, i) => {
+        if (doc.children) {
+            setActiveTab(i + '-' + '0');
+            document.getElementById(doc.children[0].id).parentElement.scrollIntoView({ block: 'center' });
+        } else {
+            setActiveTab(i);
+            document.getElementById(doc.id).parentElement.scrollIntoView({ block: 'center' });
+        }
+    };
 
     useEffect(() => {
         const ulHeight = ulRef.current.offsetHeight;
@@ -19,28 +30,31 @@ export function DocSectionNav(props) {
     }, []);
 
     return (
-        <ul ref={ulRef} className={classNames('sticky list-none p-0 m-0 hidden xl:block w-12rem px-3', { 'overflow-y-scroll': overflow })} style={{ top: '7rem', flexGrow: 0, flexShrink: 0, flexBasis: 'auto', height: 'calc(100vh - 15rem)' }}>
-            <div ref={elementsRef}>
-                {props.docs.map((doc) => (
-                    <li key={doc.label}>
+        <ul
+            ref={ulRef}
+            className={classNames('sticky list-none p-0 my-0 mx-3 hidden xl:block w-20rem px-3 flex-shrink-0 flex-grow-0', { 'overflow-y-scroll': overflow })}
+            style={{ top: '7rem', right: '0', flexBasis: 'auto', height: 'calc(100vh - 15rem)' }}
+        >
+            <div className="py-1" ref={elementsRef}>
+                {props.docs.map((doc, i) => (
+                    <li key={doc.label} className="flex flex-column">
                         <Link href={router.basePath + router.pathname + '#' + doc.id}>
-                            <button className="p-link block p-1 text-color hover:text-primary" onClick={() => document.getElementById(doc.id).parentElement.scrollIntoView({ block: 'center' })}>
-                                {doc.label}
-                            </button>
+                            <div className="flex">
+                                <div className={classNames('h-2rem flex align-items-center justify-content-center z-1', { 'border-left-2 border-primary': activeTab === i })}></div>
+                                <button className={classNames('flex flex-column p-link inline p-1 ml-2 hover:text-primary', { 'text-primary font-bold': activeTab === i, 'text-color': activeTab !== i })} onClick={() => onButtonClick(doc, i)}>
+                                    {doc.label}
+                                </button>
+                            </div>
                         </Link>
 
                         {doc.children && (
-                            <ul className="list-none m-0 py-0 pl-3">
-                                {doc.children.map((child) => {
+                            <ul className="flex-1 list-none m-0 py-0 pl-3" style={{ flexGrow: 1, flexShrink: 1, flexBasis: 'auto' }}>
+                                {doc.children.map((child, j) => {
                                     return (
-                                        <li key={child.label}>
+                                        <li className="flex" key={child.label}>
+                                            <div className={classNames('h-2rem flex align-items-center justify-content-center z-1', { 'border-left-2 border-primary': activeTab === i + '-' + j })}></div>
                                             <Link href={router.basePath + router.pathname + '#' + child.id}>
-                                                <button
-                                                    className="p-link block p-1 text-color text-sm hover:text-primary"
-                                                    onClick={() => {
-                                                        document.getElementById(child.id).parentElement.scrollIntoView({ block: 'center' });
-                                                    }}
-                                                >
+                                                <button className="flex p-link block p-1 ml-2 text-color text-sm hover:text-primary" onClick={() => onButtonClick(child, i + '-' + j)}>
                                                     {child.label}
                                                 </button>
                                             </Link>
