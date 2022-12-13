@@ -31,7 +31,7 @@ const MentionDemo = () => {
             component: MultipleDoc
         },
         {
-            id: 'apidoc',
+            id: 'api',
             label: 'API',
             component: ApiDoc,
             children: [

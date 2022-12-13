@@ -32,7 +32,7 @@ const TerminalDemo = () => {
             component: IconsDoc
         },
         {
-            id: 'apidoc',
+            id: 'api',
             label: 'API',
             component: ApiDoc,
             children: [

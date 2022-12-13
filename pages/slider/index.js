@@ -43,7 +43,7 @@ const SliderDemo = () => {
             component: VerticalDoc
         },
         {
-            id: 'apidoc',
+            id: 'api',
             label: 'API',
             component: ApiDoc,
             children: [

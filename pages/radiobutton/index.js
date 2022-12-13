@@ -37,7 +37,7 @@ const RadioButtonDemo = () => {
             component: ValidationDoc
         },
         {
-            id: 'apidoc',
+            id: 'api',
             label: 'API',
             component: ApiDoc,
             children: [

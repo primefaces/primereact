@@ -38,7 +38,7 @@ const TimelineDemo = () => {
             component: HorizontalDoc
         },
         {
-            id: 'apidoc',
+            id: 'api',
             label: 'API',
             component: ApiDoc,
             children: [

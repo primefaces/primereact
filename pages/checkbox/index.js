@@ -43,7 +43,7 @@ const CheckboxDemo = () => {
             component: ValidationDoc
         },
         {
-            id: 'apidoc',
+            id: 'api',
             label: 'API',
             component: ApiDoc,
             children: [

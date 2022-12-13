@@ -26,7 +26,7 @@ const StyleClassDemo = () => {
             component: AnimationsDoc
         },
         {
-            id: 'apidoc',
+            id: 'api',
             label: 'API',
             component: ApiDoc,
             children: [

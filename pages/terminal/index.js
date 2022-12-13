@@ -20,7 +20,7 @@ const TerminalDemo = () => {
             component: TerminalDoc
         },
         {
-            id: 'apidoc',
+            id: 'api',
             label: 'API',
             component: ApiDoc,
             children: [

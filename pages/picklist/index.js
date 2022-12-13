@@ -20,7 +20,7 @@ const PickListDemo = () => {
             component: PickListDoc
         },
         {
-            id: 'apidoc',
+            id: 'api',
             label: 'API',
             component: ApiDoc,
             children: [

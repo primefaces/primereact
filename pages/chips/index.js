@@ -55,7 +55,7 @@ const ChipsDemo = () => {
             component: KeyFilterDoc
         },
         {
-            id: 'apidoc',
+            id: 'api',
             label: 'API',
             component: ApiDoc,
             children: [

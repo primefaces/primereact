@@ -38,7 +38,7 @@ const AvatarDemo = () => {
             component: AvatarGroupDoc
         },
         {
-            id: 'apidoc',
+            id: 'api',
             label: 'API',
             component: ApiDoc,
             children: [

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { RadioButton } from '../../lib/radiobutton/RadioButton';
+import { DeferredContent } from '../../lib/deferredcontent/DeferredContent';
 import React, { useState } from 'react';
 import { DocSectionText } from './docsectiontext';
 
@@ -19,7 +20,7 @@ export function DocSections(props) {
 
                 return (
                     <section key={doc.label}>
-                        {doc.children ? (
+                        {doc.children && doc.id !== 'api' ? (
                             <div id={doc.id}>
                                 <h1 className="doc-section-label" id={doc.id}>
                                     {doc.label}
@@ -33,12 +34,15 @@ export function DocSections(props) {
                         {doc.component && <Comp id={doc.id} label={doc.label} />}
                         {doc.children && !doc.component && (
                             <React.Fragment>
-                                {doc.children.map((component) => {
-                                    const id = component.id;
-                                    const label = component.label;
-                                    const Component = component.component;
+                                {doc.children.map((comp, i) => {
+                                    const { id, label, component } = comp;
+                                    const Component = component;
 
-                                    return <Component id={id} key={label} label={label} />;
+                                    return (
+                                        <DeferredContent id={id} key={i}>
+                                            <Component id={id} key={label} label={label} />
+                                        </DeferredContent>
+                                    );
                                 })}
                             </React.Fragment>
                         )}
@@ -51,8 +55,7 @@ export function DocSections(props) {
                                     <div className="flex flex-row justify-content-center align-items-center flex-wrap">
                                         <div className="card flex flex-wrap justify-content-center align-items-center w-full gap-3">
                                             {doc.options.map((option) => {
-                                                const id = option.id;
-                                                const label = option.label;
+                                                const { id, label } = option;
 
                                                 return (
                                                     <div className="mr-4" key={label}>
@@ -65,10 +68,14 @@ export function DocSections(props) {
                                             })}
                                         </div>
                                     </div>
-                                    {doc.options.map((option) => {
+                                    {doc.options.map((option, i) => {
                                         const Component = option.component;
 
-                                        return selectedOption === option.label ? <Component key={option.label} id={option.id} label={option.label} /> : null;
+                                        return selectedOption === option.label ? (
+                                            <DeferredContent id={option.id} key={i}>
+                                                <Component key={option.label} id={option.id} label={option.label} />
+                                            </DeferredContent>
+                                        ) : null;
                                     })}
                                 </div>
                             </>

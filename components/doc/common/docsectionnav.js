@@ -8,14 +8,14 @@ export function DocSectionNav(props) {
     const router = useRouter();
     const ulRef = useRef(null);
     const elementsRef = useRef(null);
-    const [activeTab, setActiveTab] = useState(0);
+    const [activeTab, setActiveTab] = useState('');
 
-    const onButtonClick = (doc, i) => {
+    const onButtonClick = (doc) => {
         if (doc.children) {
-            setActiveTab(i + '-' + '0');
+            setActiveTab(doc.children[0].id);
             document.getElementById(doc.children[0].id).parentElement.scrollIntoView({ block: 'center' });
         } else {
-            setActiveTab(i);
+            setActiveTab(doc.id);
             document.getElementById(doc.id).parentElement.scrollIntoView({ block: 'center' });
         }
     };
@@ -27,7 +27,24 @@ export function DocSectionNav(props) {
         if (elementsHeight > ulHeight) {
             setOverflow(true);
         }
-    }, []);
+
+        const handleHashChange = (url) => {
+            const hash = url.split('#')[1];
+            const docWithId = props.docs.find((doc) => doc.id === hash);
+
+            if (docWithId && docWithId.children) {
+                setActiveTab(docWithId.children[0].id);
+            } else {
+                setActiveTab(hash);
+            }
+        };
+
+        router.events.on('hashChangeStart', handleHashChange);
+
+        return () => {
+            router.events.off('hashChangeStart', handleHashChange);
+        };
+    }, [props.docs, router.events]);
 
     return (
         <ul
@@ -40,8 +57,8 @@ export function DocSectionNav(props) {
                     <li key={doc.label} className="flex flex-column">
                         <Link href={router.basePath + router.pathname + '#' + doc.id}>
                             <div className="flex">
-                                <div className={classNames('h-2rem flex align-items-center justify-content-center z-1', { 'border-left-2 border-primary': activeTab === i })}></div>
-                                <button className={classNames('flex flex-column p-link inline p-1 ml-2 hover:text-primary', { 'text-primary font-bold': activeTab === i, 'text-color': activeTab !== i })} onClick={() => onButtonClick(doc, i)}>
+                                <div className={classNames('h-2rem flex align-items-center justify-content-center z-1', { 'border-left-2 border-primary': activeTab === doc.id })}></div>
+                                <button className={classNames('flex flex-column p-link inline p-1 ml-2 hover:text-primary', { 'text-primary font-bold': activeTab === doc.id, 'text-color': activeTab !== doc.id })} onClick={() => onButtonClick(doc)}>
                                     {doc.label}
                                 </button>
                             </div>
@@ -52,9 +69,9 @@ export function DocSectionNav(props) {
                                 {doc.children.map((child, j) => {
                                     return (
                                         <li className="flex" key={child.label}>
-                                            <div className={classNames('h-2rem flex align-items-center justify-content-center z-1', { 'border-left-2 border-primary': activeTab === i + '-' + j })}></div>
-                                            <Link href={router.basePath + router.pathname + '#' + child.id}>
-                                                <button className="flex p-link block p-1 ml-2 text-color text-sm hover:text-primary" onClick={() => onButtonClick(child, i + '-' + j)}>
+                                            <div className={classNames('h-2rem flex align-items-center justify-content-center z-1', { 'border-left-2 border-primary': activeTab === child.id })}></div>
+                                            <Link href={router.basePath + router.pathname + '#' + child.id} cancel>
+                                                <button className="flex p-link block p-1 ml-2 text-color text-sm hover:text-primary" onClick={() => onButtonClick(child)}>
                                                     {child.label}
                                                 </button>
                                             </Link>

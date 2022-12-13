@@ -117,7 +117,7 @@ const DataTableDemo = () => {
             component: StripedDoc
         },
         {
-            id: 'Sort',
+            id: 'sort',
             label: 'Sort',
             description: 'Enabling sortable property on a column is enough to make a column sortable. Multiple column sorting is enabled using sortMode property and used with metaKey.',
             children: [
@@ -236,7 +236,7 @@ const DataTableDemo = () => {
                     component: RowEditingDoc
                 },
                 {
-                    id: 'rowediting',
+                    id: 'programmatic',
                     label: 'Programmatic',
                     component: ProgrammaticDoc
                 },
@@ -399,12 +399,12 @@ const DataTableDemo = () => {
             component: ColToggleDoc
         },
         {
-            id: 'export',
+            id: 'datatableexport',
             label: 'Import/Export',
             description: 'DataTable can export its data to various formats',
             children: [
                 {
-                    id: 'import',
+                    id: 'importdoc',
                     label: 'Import',
                     component: ExportImportDoc
                 },

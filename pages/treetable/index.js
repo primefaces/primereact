@@ -17,6 +17,18 @@ import { ColToggleDoc } from '../../components/doc/treetable/coltoggledoc';
 import { StyleDoc } from '../../components/doc/treetable/styledoc';
 import { ContextMenuDoc } from '../../components/doc/treetable/contextmenudoc';
 import { ResponsiveDoc } from '../../components/doc/treetable/responsivedoc';
+import { LenientFilterDoc } from '../../components/doc/treetable/filter/lenientfilterdoc';
+import { StrictFilterDoc } from '../../components/doc/treetable/filter/strictfilterdoc';
+import { VerticalDoc } from '../../components/doc/treetable/scroll/verticaldoc';
+import { HorizontalDoc } from '../../components/doc/treetable/scroll/horizontaldoc';
+import { HorizontalAndVerticalDoc } from '../../components/doc/treetable/scroll/horizontalandverticaldoc';
+import { FrozenColumnsDoc } from '../../components/doc/treetable/scroll/frozencolsdoc';
+import { SingleDoc } from '../../components/doc/treetable/sort/singledoc';
+import { MultipleDoc } from '../../components/doc/treetable/sort/multipledoc';
+import { FitModeDoc } from '../../components/doc/treetable/resize/fitmodedoc';
+import { ExpandModeDoc } from '../../components/doc/treetable/resize/expandmodedoc';
+import { ScrollableDoc } from '../../components/doc/treetable/resize/scrollabledoc';
+import { ScrollableWithVariableWidthDoc } from '../../components/doc/treetable/resize/scrollablewithvariabledoc';
 
 const TreeTableDemo = () => {
     const docs = [
@@ -46,12 +58,39 @@ const TreeTableDemo = () => {
             component: PaginatorDoc
         },
         {
+            id: 'sort',
             label: 'Sort',
-            to: '/treetable/sort'
+            description: 'TreeTable supports both single column and multiple column sorting.',
+            children: [
+                {
+                    id: 'single',
+                    label: 'Single',
+                    component: SingleDoc
+                },
+                {
+                    id: 'multiple',
+                    label: 'Multiple',
+                    component: MultipleDoc
+                }
+            ]
         },
         {
+            id: 'filter',
             label: 'Filter',
-            to: '/treetable/filter'
+            description:
+                'Filtering is enabled by setting the filter property as true in column object. Default match mode is "startsWith" and this can be configured using filterMatchMode property of column object that also accepts "contains", "endsWith", "equals", "in" and "custom". An optional global filter feature is available to search all fields with a keyword. By default input fields are generated as filter elements and using templating any component can be used as a filter.',
+            children: [
+                {
+                    id: 'lenientfilter',
+                    label: 'Lenient Filter',
+                    component: LenientFilterDoc
+                },
+                {
+                    id: 'strictfilter',
+                    label: 'Strict Filter',
+                    component: StrictFilterDoc
+                }
+            ]
         },
         {
             id: 'colgroup',
@@ -69,12 +108,59 @@ const TreeTableDemo = () => {
             component: EditDoc
         },
         {
+            id: 'scroll',
             label: 'Scroll',
-            to: '/treetable/scroll'
+            description: 'Scrolling data is available horizontally, vertically or both with optional support for frozen columns.',
+            children: [
+                {
+                    id: 'vertical',
+                    label: 'Vertical',
+                    component: VerticalDoc
+                },
+                {
+                    id: 'horizontal',
+                    label: 'Horizontal',
+                    component: HorizontalDoc
+                },
+                {
+                    id: 'horizontalandvertical',
+                    label: 'Horizontal and Vertical',
+                    component: HorizontalAndVerticalDoc
+                },
+                {
+                    id: 'frozencolumns',
+                    label: 'Frozen Columns',
+                    component: FrozenColumnsDoc
+                }
+            ]
         },
         {
+            id: 'resize',
             label: 'Resize',
-            to: '/treetable/resize'
+            description:
+                'Columns can be resized using drag drop by setting the resizableColumns to true. There are two resize modes; "fit" and "expand". Fit is the default one and the overall table width does not change when a column is resized whereas in "expand" mode, table width also changes along with the column width.',
+            children: [
+                {
+                    id: 'fitmode',
+                    label: 'Fit Mode',
+                    component: FitModeDoc
+                },
+                {
+                    id: 'expandmode',
+                    label: 'Expand Mode',
+                    component: ExpandModeDoc
+                },
+                {
+                    id: 'scrollable',
+                    label: 'Scrollable',
+                    component: ScrollableDoc
+                },
+                {
+                    id: 'scrollablewithvariable',
+                    label: 'Scrollable with Variable Width',
+                    component: ScrollableWithVariableWidthDoc
+                }
+            ]
         },
         {
             id: 'reorder',
@@ -102,7 +188,7 @@ const TreeTableDemo = () => {
             component: ResponsiveDoc
         },
         {
-            id: 'apidoc',
+            id: 'api',
             label: 'API',
             component: ApiDoc,
             children: [

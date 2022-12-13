@@ -20,7 +20,7 @@ const GMapDemo = () => {
             component: GMapDoc
         },
         {
-            id: 'apidoc',
+            id: 'api',
             label: 'API',
             component: ApiDoc,
             children: [

@@ -6,7 +6,6 @@ import { ApiDoc } from '../../components/doc/multiselect/apidoc';
 import { ImportDoc } from '../../components/doc/multiselect/importdoc';
 import { BasicDoc } from '../../components/doc/multiselect/basicdoc';
 import { ChipsDoc } from '../../components/doc/multiselect/chipsdoc';
-import { InlineDoc } from '../../components/doc/multiselect/inlinedoc';
 import { GroupedDoc } from '../../components/doc/multiselect/groupeddoc';
 import { AdvancedDoc } from '../../components/doc/multiselect/advanceddoc';
 import { VirtualDoc } from '../../components/doc/multiselect/virtualdoc';
@@ -23,11 +22,6 @@ const MultiSelectDemo = () => {
             id: 'basic',
             label: 'Basic',
             component: BasicDoc
-        },
-        {
-            id: 'inline',
-            label: 'Inline, flex, itemClassName',
-            component: InlineDoc
         },
         {
             id: 'chips',
@@ -50,7 +44,7 @@ const MultiSelectDemo = () => {
             component: VirtualDoc
         },
         {
-            id: 'virtual',
+            id: 'virtuallazy',
             label: 'Virtual Scroll (100000 Items) and Lazy',
             component: VirtualLazyDoc
         },
