@@ -27,8 +27,7 @@ import { LazyDoc } from '../../components/doc/datatable/lazydoc';
 import { PaginatorBasicDoc } from '../../components/doc/datatable/paginator/basicdoc';
 import { CustomPaginatorTemplateDoc } from '../../components/doc/datatable/paginator/custompaginatortemplatedoc';
 import { ReorderDoc } from '../../components/doc/datatable/reorderdoc';
-import { ScrollDoc } from '../../components/doc/datatable/responsive/scrolldoc';
-import { StackDoc } from '../../components/doc/datatable/responsive/stackdoc';
+import { ResponsiveDoc } from '../../components/doc/datatable/responsivedoc';
 import { RowExpandDoc } from '../../components/doc/datatable/rowexpanddoc';
 import { ExpandableRowGroupsDoc } from '../../components/doc/datatable/rowgroup/expandablerowgroupsdoc';
 import { RowSpanGroupingDoc } from '../../components/doc/datatable/rowgroup/rowspangroupingdoc';
@@ -327,19 +326,7 @@ const DataTableDemo = () => {
         {
             id: 'responsive',
             label: 'Responsive',
-            description: 'DataTable responsive layout can be achieved in two ways; first approach is displaying a horizontal scrollbar for smaller screens and second one is defining a breakpoint to display the cells of a row as stacked.',
-            options: [
-                {
-                    id: 'scroll',
-                    label: 'Scroll',
-                    component: ScrollDoc
-                },
-                {
-                    id: 'stack',
-                    label: 'Stack',
-                    component: StackDoc
-                }
-            ]
+            component: ResponsiveDoc
         },
         {
             id: 'style',

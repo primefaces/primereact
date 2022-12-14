@@ -1,14 +1,21 @@
 import { useState, useEffect } from 'react';
-import { Galleria } from '../../../lib/galleria/Galleria';
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { PhotoService } from '../../../../service/PhotoService';
+import { Galleria } from '../../lib/galleria/Galleria';
+import { DocSectionCode } from '../common/docsectioncode';
+import { PhotoService } from '../../../service/PhotoService';
 import getConfig from 'next/config';
+import { RadioButton } from '../../lib/radiobutton/RadioButton';
+import { DocSectionText } from '../common/docsectiontext';
 
-export function PositionedRightDoc(props) {
+export function ThumbnailDoc(props) {
     const [images, setImages] = useState(null);
+    const [selectedOptionValue, setSelectedOptionValue] = useState('bottom');
+
     const galleriaService = new PhotoService();
     const responsiveOptions = [
+        {
+            breakpoint: '1024px',
+            numVisible: 5
+        },
         {
             breakpoint: '768px',
             numVisible: 3
@@ -32,20 +39,48 @@ export function PositionedRightDoc(props) {
         return <img src={`${contextPath}/${item.thumbnailImageSrc}`} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
     };
 
+    const onRadioButtonChange = (option) => {
+        setSelectedOptionValue(option.value);
+    };
+
+    const demoOptions = [
+        {
+            label: 'Bottom',
+            value: 'bottom'
+        },
+        {
+            label: 'Top',
+            value: 'top'
+        },
+        {
+            label: 'Left',
+            value: 'left'
+        },
+        {
+            label: 'Right',
+            value: 'right'
+        }
+    ];
+
     const code = {
         basic: `
-<Galleria value={images} responsiveOptions={responsiveOptions} numVisible={4} thumbnailsPosition="right" style={{ maxWidth: '640px' }}
-    item={itemTemplate} thumbnail={thumbnailTemplate} />
+<Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
+    item={itemTemplate} thumbnailsPosition="${selectedOptionValue}" thumbnail={thumbnailTemplate} />
         `,
         javascript: `
 import { useState, useEffect } from 'react';
 import { Galleria } from 'primereact/galleria';
 import { PhotoService } from '../service/PhotoService';
 
-export default function PositionedRightDoc() {
+export default function ThumbnailDoc() {
     const [images, setImages] = useState(null);
     const galleriaService = new PhotoService();
+
     const responsiveOptions = [
+        {
+            breakpoint: '1024px',
+            numVisible: 5
+        },
         {
             breakpoint: '768px',
             numVisible: 3
@@ -69,8 +104,8 @@ export default function PositionedRightDoc() {
     }
 
     return (
-        <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={4} thumbnailsPosition="right" style={{ maxWidth: '640px' }}
-            item={itemTemplate} thumbnail={thumbnailTemplate} />
+        <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
+            item={itemTemplate} thumbnailsPosition="${selectedOptionValue}" thumbnail={thumbnailTemplate} />
     )
 }
         `,
@@ -79,10 +114,15 @@ import { useState, useEffect } from 'react';
 import { Galleria } from 'primereact/galleria';
 import { PhotoService } from '../service/PhotoService';
 
-export default function PositionedRightDoc() {
+export default function ThumbnailDoc() {
     const [images, setImages] = useState(null);
     const galleriaService = new PhotoService();
+
     const responsiveOptions = [
+        {
+            breakpoint: '1024px',
+            numVisible: 5
+        },
         {
             breakpoint: '768px',
             numVisible: 3
@@ -106,8 +146,8 @@ export default function PositionedRightDoc() {
     }
 
     return (
-        <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={4} thumbnailsPosition="right" style={{ maxWidth: '640px' }}
-            item={itemTemplate} thumbnail={thumbnailTemplate} />
+        <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
+            item={itemTemplate} thumbnailsPosition="${selectedOptionValue}" thumbnail={thumbnailTemplate} />
     )
 }
         `
@@ -115,8 +155,27 @@ export default function PositionedRightDoc() {
 
     return (
         <>
-            <div className="card flex justify-content-center">
-                <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={4} thumbnailsPosition="right" style={{ maxWidth: '640px' }} item={itemTemplate} thumbnail={thumbnailTemplate} />
+            <DocSectionText {...props}>
+                <p>Thumbnails represent a smaller version of the actual content.</p>
+            </DocSectionText>
+            <div className="card mt-3 flex flex-column justify-content-center">
+                <div className="flex flex-row justify-content-center align-items-center flex-wrap">
+                    <div className="card flex flex-wrap justify-content-center align-items-center w-full gap-3">
+                        {demoOptions.map((option) => {
+                            const { value, label } = option;
+
+                            return (
+                                <div className="mr-4" key={label}>
+                                    <RadioButton value={label} onChange={() => onRadioButtonChange(option)} checked={selectedOptionValue === value} />
+                                    <label htmlFor={label} className="ml-2">
+                                        {label} Position
+                                    </label>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+                <Galleria style={{ maxWidth: '640px' }} value={images} responsiveOptions={responsiveOptions} numVisible={5} item={itemTemplate} thumbnailsPosition={selectedOptionValue} thumbnail={thumbnailTemplate} />
             </div>
             <DocSectionCode code={code} />
         </>

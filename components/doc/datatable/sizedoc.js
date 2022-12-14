@@ -8,15 +8,35 @@ import { DocSectionText } from '../common/docsectiontext';
 
 export function SizeDoc(props) {
     const [products, setProducts] = useState([]);
+    const [selectedOptionValue, setSelectedOptionValue] = useState('small');
+    const productService = new ProductService();
 
-    const [selectedOption, setSelectedOption] = useState({
-        label: 'Small',
-        size: 'small'
-    });
+    const onRadioButtonChange = (option) => {
+        setSelectedOptionValue(option.value);
+    };
+
+    useEffect(() => {
+        productService.getProductsMini().then((data) => setProducts(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const demoOptions = [
+        {
+            label: 'Small',
+            value: 'small'
+        },
+        {
+            label: 'Normal',
+            value: 'normal'
+        },
+        {
+            label: 'Large',
+            value: 'large'
+        }
+    ];
 
     const code = {
         basic: `
-<DataTable value={products} size="${selectedOption.size}" responsiveLayout="scroll">
+<DataTable value={products} size="${selectedOptionValue}" responsiveLayout="scroll">
     <Column field="code" header="Code"></Column>
     <Column field="name" header="Name"></Column>
     <Column field="category" header="Category"></Column>
@@ -29,7 +49,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ProductService } from '../service/ProductService';
 
-const NormalTableDoc = () => {
+const SmallTableDemo = () => {
     const [products, setProducts] = useState([]);
     const productService = new ProductService();
 
@@ -39,7 +59,7 @@ const NormalTableDoc = () => {
 
     return (
         <div className="card">
-            <DataTable value={products} size="${selectedOption.size}" responsiveLayout="scroll">
+            <DataTable value={products} size="${selectedOptionValue}" responsiveLayout="scroll">
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>
@@ -55,7 +75,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ProductService } from '../service/ProductService';
 
-const NormalTableDoc = () => {
+const SmallTableDemo = () => {
     const [products, setProducts] = useState([]);
     const productService = new ProductService();
 
@@ -65,7 +85,7 @@ const NormalTableDoc = () => {
 
     return (
         <div className="card">
-            <DataTable value={products} size="${selectedOption.size}" responsiveLayout="scroll">
+            <DataTable value={products} size="${selectedOptionValue}" responsiveLayout="scroll">
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>
@@ -77,31 +97,6 @@ const NormalTableDoc = () => {
             `
     };
 
-    const productService = new ProductService();
-
-    const onRadioButtonChange = (option) => {
-        setSelectedOption(option);
-    };
-
-    useEffect(() => {
-        productService.getProductsMini().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const demoOptions = [
-        {
-            label: 'Small',
-            size: 'small'
-        },
-        {
-            label: 'Normal',
-            size: 'normal'
-        },
-        {
-            label: 'Large',
-            size: 'large'
-        }
-    ];
-
     return (
         <>
             <DocSectionText {...props}>
@@ -111,20 +106,20 @@ const NormalTableDoc = () => {
                 <div className="flex flex-row justify-content-center align-items-center flex-wrap">
                     <div className="card flex flex-wrap justify-content-center align-items-center w-full gap-3">
                         {demoOptions.map((option) => {
-                            const { label } = option;
+                            const { value, label } = option;
 
                             return (
                                 <div className="mr-4" key={label}>
-                                    <RadioButton value={label} onChange={() => onRadioButtonChange(option)} checked={selectedOption.label === label} />
+                                    <RadioButton value={label} onChange={() => onRadioButtonChange(option)} checked={selectedOptionValue === value} />
                                     <label htmlFor={label} className="ml-2">
-                                        {label}
+                                        {label} Size
                                     </label>
                                 </div>
                             );
                         })}
                     </div>
                 </div>
-                <DataTable value={products} size={selectedOption.size} responsiveLayout="scroll">
+                <DataTable value={products} size={selectedOptionValue} responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>

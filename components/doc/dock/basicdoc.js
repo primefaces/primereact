@@ -1,9 +1,13 @@
 import getConfig from 'next/config';
 import { Dock } from '../../lib/dock/Dock';
+import { useEffect, useState } from 'react';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
+import { RadioButton } from '../../lib/radiobutton/RadioButton';
 
 export function BasicDoc(props) {
+    const [selectedOptionValue, setSelectedOptionValue] = useState('bottom');
+
     const dockBasicItems = [
         {
             label: 'Finder',
@@ -25,12 +29,32 @@ export function BasicDoc(props) {
     const imgPath = 'images/dock';
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
+    const onRadioButtonChange = (option) => {
+        setSelectedOptionValue(option.value);
+    };
+
+    const demoOptions = [
+        {
+            label: 'Bottom',
+            value: 'bottom'
+        },
+        {
+            label: 'Top',
+            value: 'top'
+        },
+        {
+            label: 'Left',
+            value: 'left'
+        },
+        {
+            label: 'Right',
+            value: 'right'
+        }
+    ];
+
     const code = {
         basic: `
-<Dock model={dockBasicItems} position="bottom" />
-<Dock model={dockBasicItems} position="top" />
-<Dock model={dockBasicItems} position="left" />
-<Dock model={dockBasicItems} position="right" />
+<Dock model={dockBasicItems} position="${selectedOptionValue}" />
 `,
         javascript: `
 import { Dock } from 'primereact/dock';
@@ -58,10 +82,7 @@ export default function BasicDoc() {
 
     return (
         <div className="dock-window">
-            <Dock model={dockBasicItems} position="bottom" />
-            <Dock model={dockBasicItems} position="top" />
-            <Dock model={dockBasicItems} position="left" />
-            <Dock model={dockBasicItems} position="right" />
+            <Dock model={dockBasicItems} position="${selectedOptionValue}" />
         </div>
     )
 }
@@ -93,10 +114,7 @@ export default function BasicDoc() {
 
     return (
         <div className="dock-window">
-            <Dock model={dockBasicItems} position="bottom" />
-            <Dock model={dockBasicItems} position="top" />
-            <Dock model={dockBasicItems} position="left" />
-            <Dock model={dockBasicItems} position="right" />
+            <Dock model={dockBasicItems} position="${selectedOptionValue}" />
         </div>
     )
 }
@@ -108,12 +126,25 @@ export default function BasicDoc() {
             <DocSectionText {...props}>
                 <p>Dock is a navigation component consisting of menuitems. It has a collection of additional options defined by the model property.</p>
             </DocSectionText>
-            <div className="card ">
+            <div className="card mt-3 flex flex-column justify-content-center">
+                <div className="flex flex-row justify-content-center align-items-center flex-wrap">
+                    <div className="card flex flex-wrap justify-content-center align-items-center w-full gap-3">
+                        {demoOptions.map((option) => {
+                            const { value, label } = option;
+
+                            return (
+                                <div className="mr-4" key={label}>
+                                    <RadioButton value={label} onChange={() => onRadioButtonChange(option)} checked={selectedOptionValue === value} />
+                                    <label htmlFor={label} className="ml-2">
+                                        {label} Size
+                                    </label>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
                 <div className="dock-window" style={{ backgroundImage: `url(${contextPath}/images/dock/window.jpg)` }}>
-                    <Dock model={dockBasicItems} position="bottom" />
-                    <Dock model={dockBasicItems} position="top" />
-                    <Dock model={dockBasicItems} position="left" />
-                    <Dock model={dockBasicItems} position="right" />
+                    <Dock model={dockBasicItems} position={selectedOptionValue} />
                 </div>
             </div>
             <DocSectionCode code={code} />

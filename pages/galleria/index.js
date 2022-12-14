@@ -19,14 +19,11 @@ import { IndicatorTemplateDoc } from '../../components/doc/galleria/indicator/te
 import { WithThumbnailsDoc } from '../../components/doc/galleria/fullscreen/withthumbnails';
 import { WithoutThumbnailsDoc } from '../../components/doc/galleria/fullscreen/withoutthumbnails';
 import { CustomContentDoc } from '../../components/doc/galleria/fullscreen/custom';
-import { PositionedRightDoc } from '../../components/doc/galleria/thumbnail/right';
-import { PositionedTopDoc } from '../../components/doc/galleria/thumbnail/top';
-import { PositionedBottomDoc } from '../../components/doc/galleria/thumbnail/bottom';
-import { PositionedLeftDoc } from '../../components/doc/galleria/thumbnail/left';
 import { ItemThumbnailsDoc } from '../../components/doc/galleria/navigator/itemthumbnails';
 import { ItemWithoutThumbnailsDoc } from '../../components/doc/galleria/navigator/itemwithouthumbnails';
 import { ItemHoverDoc } from '../../components/doc/galleria/navigator/hover';
 import { IndicatorsDoc } from '../../components/doc/galleria/navigator/indicators';
+import { ThumbnailDoc } from '../../components/doc/galleria/thumbnaildoc';
 
 const GalleriaDemo = () => {
     const docs = [
@@ -90,29 +87,7 @@ const GalleriaDemo = () => {
         {
             id: 'thumbnail',
             label: 'Thumbnail',
-            description: 'Thumbnails represent a smaller version of the actual content.',
-            options: [
-                {
-                    id: 'thumbnailpositionbottom',
-                    label: 'Positioned at Bottom',
-                    component: PositionedBottomDoc
-                },
-                {
-                    id: 'thumbnailpositionleft',
-                    label: 'Positioned at Left',
-                    component: PositionedLeftDoc
-                },
-                {
-                    id: 'thumbnailpositionright',
-                    label: 'Positioned at Right',
-                    component: PositionedRightDoc
-                },
-                {
-                    id: 'thumbnailpositiontop',
-                    label: 'Positioned at Top',
-                    component: PositionedTopDoc
-                }
-            ]
+            component: ThumbnailDoc
         },
         {
             id: 'responsive',
