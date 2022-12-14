@@ -4,10 +4,7 @@ import { useRouter } from 'next/router';
 import { classNames } from '../../lib/utils/Utils';
 
 export function DocSectionNav(props) {
-    const [overflow, setOverflow] = useState(false);
     const router = useRouter();
-    const ulRef = useRef(null);
-    const elementsRef = useRef(null);
     const [activeTab, setActiveTab] = useState('');
 
     const onButtonClick = (doc) => {
@@ -21,13 +18,6 @@ export function DocSectionNav(props) {
     };
 
     useEffect(() => {
-        const ulHeight = ulRef.current.offsetHeight;
-        const elementsHeight = elementsRef.current.offsetHeight;
-
-        if (elementsHeight > ulHeight) {
-            setOverflow(true);
-        }
-
         const handleHashChange = (url) => {
             const hash = url.split('#')[1];
             const docWithId = props.docs.find((doc) => doc.id === hash);
@@ -47,12 +37,8 @@ export function DocSectionNav(props) {
     }, [props.docs, router.events]);
 
     return (
-        <ul
-            ref={ulRef}
-            className={classNames('sticky list-none p-0 my-0 mx-3 hidden xl:block w-20rem px-3 flex-shrink-0 flex-grow-0', { 'overflow-y-scroll': overflow })}
-            style={{ top: '7rem', right: '0', flexBasis: 'auto', height: 'calc(100vh - 15rem)' }}
-        >
-            <div className="py-1" ref={elementsRef}>
+        <ul className={classNames('sticky list-none p-0 my-0 mx-3 hidden xl:block w-20rem px-3 flex-shrink-0 flex-grow-0 overflow-y-auto')} style={{ top: '7rem', right: '0', flexBasis: 'auto', height: 'calc(100vh - 15rem)' }}>
+            <div className="py-1">
                 {props.docs.map((doc, i) => (
                     <li key={doc.label} className="flex flex-column">
                         <Link href={router.basePath + router.pathname + '#' + doc.id}>
