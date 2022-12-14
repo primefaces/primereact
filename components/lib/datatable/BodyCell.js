@@ -250,7 +250,11 @@ export const BodyCell = React.memo((props) => {
         setEditingRowDataState(editingRowData);
 
         // update editing meta for complete methods on row mode
-        props.editingMeta[editingKey].data[field] = val;
+        const currentData = getEditingRowData();
+
+        if (currentData) {
+            currentData[field] = val;
+        }
     };
 
     const onClick = (event) => {
