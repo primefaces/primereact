@@ -45,9 +45,7 @@ import { EventsDoc } from '../../components/doc/datatable/selection/eventsdoc';
 import { MultipleDoc } from '../../components/doc/datatable/selection/multipledoc';
 import { RadioButtonDoc } from '../../components/doc/datatable/selection/radiobuttondoc';
 import { SingleDoc } from '../../components/doc/datatable/selection/singledoc';
-import { LargeTableDoc } from '../../components/doc/datatable/size/largetabledoc';
-import { NormalTableDoc } from '../../components/doc/datatable/size/normaltabledoc';
-import { SmallTableDoc } from '../../components/doc/datatable/size/smalltabledoc';
+import { SizeDoc } from '../../components/doc/datatable/sizedoc';
 import { MultipleColumnsDoc } from '../../components/doc/datatable/sort/multiplecolumnsdoc';
 import { PresortDoc } from '../../components/doc/datatable/sort/presortdoc';
 import { RemovableSortDoc } from '../../components/doc/datatable/sort/removablesortdoc';
@@ -87,24 +85,7 @@ const DataTableDemo = () => {
         {
             id: 'size',
             label: 'Size',
-            description: 'In addition to a regular table, alternatives with alternative sizes are available.',
-            options: [
-                {
-                    id: 'smalltable',
-                    label: 'Small Table',
-                    component: SmallTableDoc
-                },
-                {
-                    id: 'normaltable',
-                    label: 'Normal Table',
-                    component: NormalTableDoc
-                },
-                {
-                    id: 'largetable',
-                    label: 'Large Table',
-                    component: LargeTableDoc
-                }
-            ]
+            component: SizeDoc
         },
         {
             id: 'gridlines',
