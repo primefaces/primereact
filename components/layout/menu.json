@@ -369,13 +369,7 @@
                 {
                     "name": "DataView",
                     "meta": ["dataview"],
-                    "children": [
-                        {
-                            "name": "DataViews",
-                            "to": "/dataview",
-                            "meta": ["dataviews"]
-                        }
-                    ]
+                    "to": "/dataview"
                 },
                 {
                     "name": "DataScroller",
