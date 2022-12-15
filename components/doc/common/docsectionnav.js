@@ -10,10 +10,10 @@ export function DocSectionNav(props) {
     const onButtonClick = (doc) => {
         if (doc.children && doc.id === 'api') {
             setActiveTab(doc.children[0].id);
-            document.getElementById(doc.children[0].id).parentElement.scrollIntoView({ block: 'center' });
+            document.getElementById(doc.children[0].id).parentElement.scrollIntoView({ block: 'start', inline: 'nearest', offset: { top: 140 } });
         } else {
             setActiveTab(doc.id);
-            document.getElementById(doc.id).parentElement.scrollIntoView({ block: 'center' });
+            document.getElementById(doc.id).parentElement.scrollIntoView({ block: 'start', inline: 'nearest', offset: { top: 140 } });
         }
     };
 
@@ -38,21 +38,24 @@ export function DocSectionNav(props) {
 
     useEffect(() => {
         const sections = document.querySelectorAll('section');
+        const topbarEl = document.getElementsByClassName('layout-topbar')[0];
 
         const onScroll = (event) => {
-            event.preventDefault();
             sections.forEach((section) => {
-                if (window.scrollY >= section.offsetTop && window.scrollY < section.offsetTop + section.offsetHeight) {
-                    section.querySelectorAll('.doc-section-label')[0].querySelector('a');
+                const sectionLabelEl = section.querySelectorAll('.doc-section-label');
+                const scrolledToSection = window.scrollY >= section.offsetTop - topbarEl.clientHeight - 20 && window.scrollY < section.offsetTop + section.offsetHeight - topbarEl.clientHeight - 20;
 
-                    if (section.querySelectorAll('.doc-section-label').length > 1) {
-                        section.querySelectorAll('.doc-section-label').forEach((child) => {
-                            if (window.scrollY >= child.offsetTop && window.scrollY < child.offsetTop + child.offsetHeight) {
+                if (scrolledToSection) {
+                    sectionLabelEl[0].querySelector('a');
+
+                    if (sectionLabelEl.length > 1) {
+                        sectionLabelEl.forEach((child) => {
+                            if (window.scrollY >= child.offsetTop - topbarEl.clientHeight - 20 && window.scrollY < child.offsetTop + child.offsetHeight - topbarEl.clientHeight - 20) {
                                 setActiveTab(child.querySelector('a').getAttribute('id'));
                             }
                         });
                     } else {
-                        setActiveTab(section.querySelectorAll('.doc-section-label')[0].querySelector('a').getAttribute('id'));
+                        setActiveTab(sectionLabelEl[0].querySelector('a').getAttribute('id'));
                     }
                 }
             });
@@ -66,27 +69,28 @@ export function DocSectionNav(props) {
     }, []);
 
     return (
-        <ul className={classNames('sticky list-none p-0 my-0 mx-3 hidden xl:block w-20rem px-3 flex-shrink-0 flex-grow-0 overflow-y-auto')} style={{ top: '7rem', right: '0', flexBasis: 'auto', height: 'calc(100vh - 15rem)' }}>
-            <div className="py-1">
-                {props.docs.map((doc) => (
-                    <li key={doc.label} className="flex flex-column">
-                        <Link href={router.basePath + router.pathname + '#' + (doc.id === 'api' ? doc.children[0].id : doc.id)}>
-                            <div className="flex">
-                                <div className={classNames('h-2rem flex align-items-center justify-content-center z-1', { 'border-left-2 border-primary': activeTab === doc.id })}></div>
-                                <button className={classNames('flex flex-column p-link inline p-1 ml-2 hover:text-primary', { 'text-primary font-bold': activeTab === doc.id, 'text-color': activeTab !== doc.id })} onClick={() => onButtonClick(doc)}>
+        <ul className={classNames('hidden xl:block', 'doc-section-nav')}>
+            {props.docs.map((doc) => {
+                const hash = doc.id === 'api' && doc.children ? doc.children[0].id : doc.id;
+
+                return (
+                    <React.Fragment key={doc.label}>
+                        <li key={doc.label} className={classNames('navbar-item', { 'active-navbar-item': activeTab === doc.id })}>
+                            <Link href={router.basePath + router.pathname + '#' + hash}>
+                                <button className="p-link" onClick={() => onButtonClick(doc)}>
                                     {doc.label}
                                 </button>
-                            </div>
-                        </Link>
-
+                            </Link>
+                        </li>
                         {doc.children && (
-                            <ul className="flex-1 list-none m-0 py-0 pl-3" style={{ flexGrow: 1, flexShrink: 1, flexBasis: 'auto' }}>
+                            <ul>
                                 {doc.children.map((child) => {
+                                    const hash = child.id;
+
                                     return (
-                                        <li className="flex" key={child.label}>
-                                            <div className={classNames('h-2rem flex align-items-center justify-content-center z-1', { 'border-left-2 border-primary': activeTab === child.id })}></div>
-                                            <Link href={router.basePath + router.pathname + '#' + child.id} cancel>
-                                                <button className="flex p-link block p-1 ml-2 text-color text-sm hover:text-primary" onClick={() => onButtonClick(child)}>
+                                        <li key={child.label} className={classNames('navbar-child-item', { 'active-navbar-child-item': activeTab === child.id })}>
+                                            <Link href={router.basePath + router.pathname + '#' + hash}>
+                                                <button className="p-link" onClick={() => onButtonClick(child)}>
                                                     {child.label}
                                                 </button>
                                             </Link>
@@ -95,9 +99,9 @@ export function DocSectionNav(props) {
                                 })}
                             </ul>
                         )}
-                    </li>
-                ))}
-            </div>
+                    </React.Fragment>
+                );
+            })}
         </ul>
     );
 }
