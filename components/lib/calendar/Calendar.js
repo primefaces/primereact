@@ -2642,7 +2642,7 @@ export const Calendar = React.memo(
             );
         };
 
-        const createTitleYearElement = () => {
+        const createTitleYearElement = (metaYear) => {
             if (props.yearNavigator) {
                 let yearOptions = [];
                 const years = props.yearRange.split(':');
@@ -2684,10 +2684,12 @@ export const Calendar = React.memo(
                 return content;
             }
 
+            const displayYear = props.inline ? metaYear : currentYear;
+
             return (
                 currentView !== 'year' && (
                     <button className="p-datepicker-year p-link" onClick={switchToYearView} disabled={switchViewButtonDisabled()}>
-                        {currentYear}
+                        {displayYear}
                     </button>
                 )
             );
