@@ -11,7 +11,7 @@ import { Chip } from 'primereact/chip';
     return (
         <>
             <DocSectionText {...props}></DocSectionText>
-            <DocSectionCode code={code} hideToggleCode hideCodeSandbox />
+            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
         </>
     );
 }

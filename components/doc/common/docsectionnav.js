@@ -40,7 +40,7 @@ export function DocSectionNav(props) {
         const sections = document.querySelectorAll('section');
         const topbarEl = document.getElementsByClassName('layout-topbar')[0];
 
-        const onScroll = (event) => {
+        const onScroll = () => {
             sections.forEach((section) => {
                 const sectionLabelEl = section.querySelectorAll('.doc-section-label');
                 const scrolledToSection = window.scrollY >= section.offsetTop - topbarEl.clientHeight - 20 && window.scrollY < section.offsetTop + section.offsetHeight - topbarEl.clientHeight - 20;
@@ -90,7 +90,7 @@ export function DocSectionNav(props) {
                                     return (
                                         <li key={child.label} className={classNames('navbar-child-item', { 'active-navbar-child-item': activeTab === child.id })}>
                                             <Link href={router.basePath + router.pathname + '#' + hash}>
-                                                <button className="p-link" onClick={() => onButtonClick(child)}>
+                                                <button className="p-link" onClick={(event) => onButtonClick(child)}>
                                                     {child.label}
                                                 </button>
                                             </Link>
