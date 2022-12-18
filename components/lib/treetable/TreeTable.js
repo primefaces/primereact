@@ -2,7 +2,7 @@ import * as React from 'react';
 import PrimeReact, { FilterMatchMode, FilterService } from '../api/Api';
 import { useEventListener } from '../hooks/Hooks';
 import { Paginator } from '../paginator/Paginator';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 import { TreeTableBody } from './TreeTableBody';
 import { TreeTableFooter } from './TreeTableFooter';
 import { TreeTableHeader } from './TreeTableHeader';
@@ -18,6 +18,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
     const [filtersState, setFiltersState] = React.useState(props.filters);
     const [columnOrderState, setColumnOrderState] = React.useState([]);
     const elementRef = React.useRef(null);
+    const tableRef = React.useRef(null);
     const resizerHelperRef = React.useRef(null);
     const reorderIndicatorUpRef = React.useRef(null);
     const reorderIndicatorDownRef = React.useRef(null);
@@ -345,7 +346,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
                     resizeColGroup(scrollableBodyTable, resizeColumnIndex, newColumnWidth, null);
                     resizeColGroup(scrollableFooterTable, resizeColumnIndex, newColumnWidth, null);
                 } else {
-                    table.style.width = table.offsetWidth + delta + 'px';
+                    tableRef.current.style.width = tableRef.current.offsetWidth + delta + 'px';
                     resizeColumn.current.style.width = newColumnWidth + 'px';
                 }
             }
@@ -930,7 +931,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
 
         return (
             <div className="p-treetable-wrapper">
-                <table style={props.tableStyle} className={props.tableClassName}>
+                <table ref={tableRef} style={props.tableStyle} className={props.tableClassName}>
                     {header}
                     {footer}
                     {body}
