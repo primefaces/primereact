@@ -39,35 +39,15 @@ export function DocSectionCode(props) {
                             label="TS"
                             onClick={() => setCodeLang('typescript')}
                         ></Button>
+                        {props.code.css ? (
+                            <Button
+                                className={classNames('p-button-rounded p-button-text p-button-plain h-2rem w-2rem p-0 inline-flex align-items-center justify-content-center', { 'doc-section-code-active text-primary': codeLang === 'css' })}
+                                label="CSS"
+                                onClick={() => setCodeLang('css')}
+                            ></Button>
+                        ) : null}
                     </>
                 )}
-                {codeMode !== 'basic' && props.extFiles && <Divider layout="vertical" className="mx-1 py-1" />}
-
-                {codeMode !== 'basic' && props.extFiles && !props.hideToggleCode && (
-                    <div className="flex relative px-2 py-1 align-items-center max-w-10rem xl:max-w-17rem overflow-auto">
-                        <div className="flex justify-content-end">
-                            {props.extFiles &&
-                                props.extFiles.map((extFile, i) => {
-                                    const { fileName } = extFile;
-
-                                    return (
-                                        <React.Fragment key={i}>
-                                            <Button
-                                                className={classNames('p-button p-button-text p-button-plain h-2rem p-1 flex align-items-center justify-content-center', {
-                                                    'doc-section-code-active text-primary border-none': codeLang === fileName,
-                                                    'mr-2': props.extFiles.length > 1 && i !== props.extFiles.length - 1
-                                                })}
-                                                label={fileName}
-                                                onClick={() => onExtFileClick(extFile)}
-                                            ></Button>
-                                        </React.Fragment>
-                                    );
-                                })}
-                        </div>
-                    </div>
-                )}
-
-                {codeMode !== 'basic' && props.extFiles && <Divider layout="vertical" className="mx-1 py-1" />}
 
                 {!props.hideToggleCode && (
                     <Button
@@ -130,9 +110,9 @@ export function DocSectionCode(props) {
                     <CodeHighlight lang={'tsx'}>{props.code.typescript}</CodeHighlight>
                 </div>
             )}
-            {codeMode !== 'basic' && selectedExtFile && codeLang === selectedExtFile.fileName && (
+            {codeMode !== 'basic' && codeLang === 'css' && (
                 <div>
-                    <CodeHighlight lang={selectedExtFile.lang}>{selectedExtFile.content}</CodeHighlight>
+                    <CodeHighlight lang={'css'}>{props.code.css}</CodeHighlight>
                 </div>
             )}
         </div>

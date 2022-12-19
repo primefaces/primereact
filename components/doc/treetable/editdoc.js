@@ -23,21 +23,6 @@ export function EditDoc(props) {
         setNodes(newNodes);
     };
 
-    const extFiles = [
-        {
-            fileName: 'TreeTableDemo.css',
-            lang: 'css',
-            content: `
-/* TreeTableDemo.css */
-
-.treetable-editing-demo .p-treetable .p-treetable-tbody > tr > td.p-cell-editing {
-    padding-top: 0;
-    padding-bottom: 0;
-}
-            `
-        }
-    ];
-
     const findNodeByKey = (nodes, key) => {
         let path = key.split('-');
         let node;
@@ -222,7 +207,16 @@ const EditDoc = () => {
         </div>
     );
 }
-        `
+        `,
+
+        css: `
+    /* TreeTableDemo.css */
+    
+    .treetable-editing-demo .p-treetable .p-treetable-tbody > tr > td.p-cell-editing {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+                `
     };
 
     return (
@@ -237,7 +231,7 @@ const EditDoc = () => {
                     <Column field="type" header="Type" editor={typeEditor} style={{ height: '3.5em' }}></Column>
                 </TreeTable>
             </div>
-            <DocSectionCode code={code} extFiles={extFiles} />
+            <DocSectionCode code={code} />
         </>
     );
 }
