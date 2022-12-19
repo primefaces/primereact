@@ -7,7 +7,6 @@ import { CodeHighlight } from './codehighlight';
 export function DocSectionCode(props) {
     const [codeMode, setCodeMode] = useState('basic');
     const [codeLang, setCodeLang] = useState('javascript');
-    const [selectedExtFile, setSelectedExtFile] = useState({});
 
     const toggleCodeMode = () => {
         setCodeMode(codeMode === 'basic' ? 'javascript' : 'basic');
@@ -17,11 +16,6 @@ export function DocSectionCode(props) {
         const codeToCopy = codeMode === 'basic' ? props.code.basic : props.code.full;
 
         await navigator.clipboard.writeText(codeToCopy);
-    };
-
-    const onExtFileClick = (extFile) => {
-        setCodeLang(extFile.fileName);
-        setSelectedExtFile(extFile);
     };
 
     return (
