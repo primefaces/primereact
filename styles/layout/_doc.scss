@@ -54,6 +54,10 @@
                 text-decoration: underline;
             }
         }
+        &.main{
+            margin-bottom: 1rem;
+        }
+        
     }
 }
 
@@ -140,9 +144,9 @@
 }
 
 .doc-section-code {
-    div{
+    div {
         &::-webkit-scrollbar {
-           display: none;
+          width: 5px;
           }
 
     }

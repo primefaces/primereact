@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { classNames } from '../../lib/utils/Utils';
 
 export function DocSectionText(props) {
     const router = useRouter();
