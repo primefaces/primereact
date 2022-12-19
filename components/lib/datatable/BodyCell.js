@@ -3,7 +3,7 @@ import { ariaLabel } from '../api/Api';
 import { useEventListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 import { RowCheckbox } from './RowCheckbox';
 import { RowRadioButton } from './RowRadioButton';
 
@@ -218,7 +218,7 @@ export const BodyCell = React.memo((props) => {
 
             if (align === 'right') {
                 let right = 0;
-                let next = elementRef.current.nextElementSibling;
+                let next = elementRef.current && elementRef.current.nextElementSibling;
 
                 if (next) {
                     right = DomHandler.getOuterWidth(next) + parseFloat(next.style.right || 0);
@@ -227,7 +227,7 @@ export const BodyCell = React.memo((props) => {
                 styleObject['right'] = right + 'px';
             } else {
                 let left = 0;
-                let prev = elementRef.current.previousElementSibling;
+                let prev = elementRef.current && elementRef.current.previousElementSibling;
 
                 if (prev) {
                     left = DomHandler.getOuterWidth(prev) + parseFloat(prev.style.left || 0);
