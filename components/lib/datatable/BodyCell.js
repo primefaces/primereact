@@ -51,7 +51,7 @@ export const BodyCell = React.memo((props) => {
     };
 
     const equals = (selectedCell) => {
-        return (selectedCell.rowIndex === props.rowIndex || equalsData(selectedCell.rowData)) && (selectedCell.field === field || selectedCell.cellIndex === props.index);
+        return selectedCell && (selectedCell.rowIndex === props.rowIndex || equalsData(selectedCell.rowData)) && (selectedCell.field === field || selectedCell.cellIndex === props.index);
     };
 
     const isOutsideClicked = (target) => {
