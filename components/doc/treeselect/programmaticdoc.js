@@ -49,6 +49,7 @@ onToggle={(e) => setExpandedKeys(e.value)}
 onChange={(e) => setSelectedNodeKeys(e.value)}
 display="chip"
 selectionMode="checkbox"
+className="md:w-20rem w-full"
 placeholder="Select Items"
 ></TreeSelect>
 <div className="mb-4 mt-2">
@@ -73,20 +74,23 @@ export default function ProgrammaticDoc() {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <TreeSelect
-        value={selectedNodeKeys}
-        options={nodes}
-        expandedKeys={expandedKeys}
-        onToggle={(e) => setExpandedKeys(e.value)}
-        onChange={(e) => setSelectedNodeKeys(e.value)}
-        display="chip"
-        selectionMode="checkbox"
-        placeholder="Select Items"
-    ></TreeSelect>
-    <div className="mb-4 mt-2">
-        <Button type="button" icon="pi pi-plus" label="Expand All" onClick={expandAll} className="mr-2" />
-        <Button type="button" icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
-    </div>
+        <div className="card flex flex-column align-items-center justify-content-center">
+            <TreeSelect
+                value={selectedNodeKeys}
+                options={nodes}
+                expandedKeys={expandedKeys}
+                onToggle={(e : TreeSelectExpandedParams) => setExpandedKeys(e.value)}
+                onChange={(e : TreeSelectChangeParams) => setSelectedNodeKeys(e.value)}
+                display="chip"
+                selectionMode="checkbox"
+                className="md:w-20rem w-full"
+                placeholder="Select Items"
+            ></TreeSelect>
+            <div className="mb-4 mt-2">
+                <Button type="button" icon="pi pi-plus" label="Expand All" onClick={expandAll} className="mr-2" />
+                <Button type="button" icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
+            </div>
+        </div>
     );
 }
         `,
@@ -107,19 +111,22 @@ export default function ProgrammaticDoc() {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
+    <div className="card flex flex-column align-items-center justify-content-center">
         <TreeSelect
-        value={selectedNodeKeys}
-        options={nodes}
-        expandedKeys={expandedKeys}
-        onToggle={(e : TreeSelectExpandedParams) => setExpandedKeys(e.value)}
-        onChange={(e : TreeSelectChangeParams) => setSelectedNodeKeys(e.value)}
-        display="chip"
-        selectionMode="checkbox"
-        placeholder="Select Items"
-    ></TreeSelect>
-    <div className="mb-4 mt-2">
-        <Button type="button" icon="pi pi-plus" label="Expand All" onClick={expandAll} className="mr-2" />
-        <Button type="button" icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
+            value={selectedNodeKeys}
+            options={nodes}
+            expandedKeys={expandedKeys}
+            onToggle={(e : TreeSelectExpandedParams) => setExpandedKeys(e.value)}
+            onChange={(e : TreeSelectChangeParams) => setSelectedNodeKeys(e.value)}
+            display="chip"
+            selectionMode="checkbox"
+            className="md:w-20rem w-full"
+            placeholder="Select Items"
+        ></TreeSelect>
+        <div className="mb-4 mt-2">
+            <Button type="button" icon="pi pi-plus" label="Expand All" onClick={expandAll} className="mr-2" />
+            <Button type="button" icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
+        </div>
     </div>
     );
 }
@@ -143,6 +150,7 @@ export default function ProgrammaticDoc() {
                     onChange={(e) => setSelectedNodeKeys(e.value)}
                     display="chip"
                     selectionMode="checkbox"
+                    className="md:w-20rem w-full"
                     placeholder="Select Items"
                 ></TreeSelect>
                 <div className="mb-4 mt-2">

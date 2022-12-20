@@ -53,6 +53,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
 import { Dropdown } from "primereact/dropdown";
+import './DropdownDemo.css';
 
 export default function ValidationDemo() {
     const [formData, setFormData] = useState({});
@@ -69,25 +70,29 @@ export default function ValidationDemo() {
     };
 
     return (
-        <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
-            <div className="field">
-                <Controller
-                    name="city"
-                    control={form.control}
-                    rules={{ required: 'City is required.' }}
-                    render={({ field, fieldState }) => (
-                        <>
-                            <label htmlFor={field.name} className={classNames({ 'p-error': errors.city })}>
-                                City*
-                            </label>
-                            <Dropdown id={field.name} {...field} focusInputRef={field.ref} options={cities} optionLabel="name" placeholder="Select a City" className={classNames({ 'p-invalid': fieldState.error })} />
-                            {getFormErrorMessage(field.name)}
-                        </>
-                    )}
-                />
+        <div className="card flex justify-content-center dropdown-demo">
+            <div className="flex flex-column gap-2">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
+                    <div className="field">
+                        <Controller
+                            name="city"
+                            control={form.control}
+                            rules={{ required: 'City is required.' }}
+                            render={({ field, fieldState }) => (
+                                <>
+                                    <label htmlFor={field.name} className={classNames({ 'p-error': errors.city })}>
+                                        City*
+                                    </label>
+                                    <Dropdown id={field.name} value={field.value} onChange={field.onChange} focusInputRef={field.ref} options={cities} optionLabel="name" placeholder="Select a City" className={classNames({ 'p-invalid': fieldState.error })} />
+                                    {getFormErrorMessage(field.name)}
+                                </>
+                            )}
+                        />
+                    </div>
+                    <Button label="Submit" type="submit" icon="pi pi-check" />
+                </form>
             </div>
-            <Button label="Submit" type="submit" icon="pi pi-check" />
-        </form>
+        </div>
     )
 }
         `,
@@ -97,6 +102,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
 import { Dropdown } from "primereact/dropdown";
+import './DropdownDemo.css';
 
 export default function InvalidDemo() {
     const [formData, setFormData] = useState<any>({});
@@ -113,26 +119,37 @@ export default function InvalidDemo() {
     };
 
     return (
-        <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
-            <div className="field">
-                <Controller
-                    name="city"
-                    control={form.control}
-                    rules={{ required: 'City is required.' }}
-                    render={({ field, fieldState }) => (
-                        <>
-                            <label htmlFor={field.name} className={classNames({ 'p-error': errors.city })}>
-                                City*
-                            </label>
-                            <Dropdown id={field.name} value={field.value} onChange={field.onChange} focusInputRef={field.ref} options={cities} optionLabel="name" placeholder="Select a City" className={classNames({ 'p-invalid': fieldState.error })} />
-                            {getFormErrorMessage(field.name)}
-                        </>
-                    )}
-                />
+        <div className="card flex justify-content-center dropdown-demo">
+            <div className="flex flex-column gap-2">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
+                    <div className="field">
+                        <Controller
+                            name="city"
+                            control={form.control}
+                            rules={{ required: 'City is required.' }}
+                            render={({ field, fieldState }) => (
+                                <>
+                                    <label htmlFor={field.name} className={classNames({ 'p-error': errors.city })}>
+                                        City*
+                                    </label>
+                                    <Dropdown id={field.name} value={field.value} onChange={field.onChange} focusInputRef={field.ref} options={cities} optionLabel="name" placeholder="Select a City" className={classNames({ 'p-invalid': fieldState.error })} />
+                                    {getFormErrorMessage(field.name)}
+                                </>
+                            )}
+                        />
+                    </div>
+                    <Button label="Submit" type="submit" icon="pi pi-check" />
+                </form>
             </div>
-            <Button label="Submit" type="submit" icon="pi pi-check" />
-        </form>
+        </div>
     )
+}
+        `,
+        css: `
+/* DropdownDemo.css */
+
+.dropdown-demo .p-dropdown {
+    width: 14rem;
 }
         `
     };
@@ -144,7 +161,7 @@ export default function InvalidDemo() {
                     <a href="https://react-hook-form.com/">React Hook Form</a> is the most popular React library for form validation. The field will be highlighted and receive focus on validation failure.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
+            <div className="card flex justify-content-center dropdown-demo">
                 <div className="flex flex-column gap-2">
                     <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
                         <div className="field">

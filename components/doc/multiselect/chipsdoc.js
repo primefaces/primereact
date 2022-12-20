@@ -20,6 +20,7 @@ export function ChipsDoc(props) {
         javascript: `
 import { useState } from "react";
 import { MultiSelect } from 'primereact/multiselect';
+import './MultiSelectDemo.css';
 
 export default function ChipsDoc() {
     const [selectedCities, setSelectedCities] = useState(null);
@@ -32,13 +33,16 @@ export default function ChipsDoc() {
     ];
 
     return (
-        <MultiSelect value={selectedCities} options={cities} onChange={(e) => setSelectedCities(e.value)} optionLabel="name" placeholder="Select a City" display="chip" />
+        <div className="card flex justify-content-center multiselect-demo">
+            <MultiSelect value={selectedCities} options={cities} onChange={(e) => setSelectedCities(e.value)} optionLabel="name" placeholder="Select a City" display="chip" />
+        </div>
     );
 }
         `,
         typescript: `
 import { useState } from "react";
 import { MultiSelect, MultiSelectChangeParams } from 'primereact/multiselect';
+import './MultiSelectDemo.css';
 
 export default function ChipsDoc() {
     const [selectedCities, setSelectedCities] = useState<any>(null);
@@ -51,9 +55,35 @@ export default function ChipsDoc() {
     ];
 
     return (
-        <MultiSelect value={selectedCities} options={cities} onChange={(e : MultiSelectChangeParams) => setSelectedCities(e.value)} optionLabel="name" placeholder="Select a City" display="chip" />
-
+        <div className="card flex justify-content-center multiselect-demo">
+            <MultiSelect value={selectedCities} options={cities} onChange={(e : MultiSelectChangeParams) => setSelectedCities(e.value)} optionLabel="name" placeholder="Select a City" display="chip" />
+        </div>
     );
+}
+        `,
+        css: `
+/* MultiSelectDemo.css */
+
+.multiselect-demo .p-multiselect {
+    min-width: 15rem;
+}
+
+.multiselect-demo .multiselect-custom .p-multiselect-label:not(.p-placeholder):not(.p-multiselect-items-label) {
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+}
+
+.multiselect-demo .multiselect-custom .country-item-value {
+    padding: .25rem .5rem;
+    border-radius: 3px;
+    display: inline-flex;
+    margin-right: .5rem;
+    background-color: var(--primary-color);
+    color: var(--primary-color-text);
+}
+
+.multiselect-demo .multiselect-custom .country-item-value img.flag {
+    width: 17px;
 }
         `
     };
@@ -63,7 +93,7 @@ export default function ChipsDoc() {
             <DocSectionText {...props}>
                 <p>Used mode to display the selected items as chips.</p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
+            <div className="card flex justify-content-center multiselect-demo">
                 <MultiSelect value={selectedCities} options={cities} onChange={(e) => setSelectedCities(e.value)} optionLabel="name" placeholder="Select a City" display="chip" />
             </div>
             <DocSectionCode code={code} />

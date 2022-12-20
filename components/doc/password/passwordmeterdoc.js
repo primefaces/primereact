@@ -8,7 +8,7 @@ export function PasswordMeter(props) {
 
     const code = {
         basic: `
-<Password value={value} onChange={(e) => setValue(e.target.value)} />
+<Password value={value} onChange={(e) => setValue(e.target.value)} inputClassName="w-15rem" />
         `,
         javascript: `
 import { useState } from "react";
@@ -18,7 +18,9 @@ export default function PasswordMeter() {
     const [value, setValue] = useState('');
 
     return (
-        <Password value={value} onChange={(e) => setValue(e.target.value)} />
+        <div className="card flex justify-content-center">
+            <Password value={value} onChange={(e) => setValue(e.target.value)} inputClassName="w-15rem" />
+        </div>
     )
 }
         `,
@@ -30,7 +32,9 @@ export default function PasswordMeter() {
     const [value, setValue] = useState<string>('');
 
     return (
-        <Password value={value} onChange={(e : ChangeEventHandler) => setValue(e.target.value)} />
+        <div className="card flex justify-content-center">
+            <Password value={value} onChange={(e : ChangeEventHandler) => setValue(e.target.value)} />
+        </div>
     )
 }
         `
@@ -44,7 +48,7 @@ export default function PasswordMeter() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Password value={value} onChange={(e) => setValue(e.target.value)} />
+                <Password value={value} onChange={(e) => setValue(e.target.value)} inputClassName="w-15rem" />
             </div>
             <DocSectionCode code={code} />
         </>

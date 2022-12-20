@@ -48,6 +48,7 @@ export function ScrollLazyDoc(props) {
 import { useState, useEffect, useRef } from 'react';
 import { Dropdown } from 'primereact/dropdown';
 import { Skeleton } from 'primereact/skeleton';
+import './DropdownDemo.css';
 
 export default function ScrollLazyDoc() {
     const [lazyItems, setLazyItems] = useState([]);
@@ -86,7 +87,9 @@ export default function ScrollLazyDoc() {
     };
 
     return (
-        <Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 38 }} placeholder="Select Item"/>
+        <div className="card flex justify-content-center dropdown-demo">
+            <Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 38 }} placeholder="Select Item"/>
+        </div>
     )
 }
         `,
@@ -95,6 +98,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Dropdown, DropdownChangeParams } from 'primereact/dropdown';
 import { Skeleton } from 'primereact/skeleton';
 import { VirtualScrollerLazyParams } from 'primereact/virtualscroller';
+import './DropdownDemo.css';
 
 export default function ScrollLazyDoc() {
     const [lazyItems, setLazyItems] = useState<any | null>([]);
@@ -133,8 +137,21 @@ export default function ScrollLazyDoc() {
     };
 
     return (
-        <Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 38 }} placeholder="Select Item"/>
+        <div className="card flex justify-content-center dropdown-demo">
+            <Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 38 }} placeholder="Select Item"/>
+        </div>
     )
+}
+        `,
+        css: `
+/* DropdownDemo.css */
+
+.dropdown-demo .p-dropdown {
+    width: 14rem;
+}
+
+.dropdown-demo .country-item-value img.flag {
+    width: 17px;
 }
         `
     };
@@ -144,7 +161,7 @@ export default function ScrollLazyDoc() {
             <DocSectionText {...props}>
                 <p>Virtual Scroll (100000 Items) and Lazy</p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
+            <div className="card flex justify-content-center dropdown-demo">
                 <Dropdown
                     value={selectedItem}
                     options={lazyItems}

@@ -18,6 +18,7 @@ export function VirtualScrollDoc(props) {
         javascript: `
 import { useState } from "react";
 import { Dropdown } from 'primereact/dropdown';
+import './DropdownDemo.css';
 
 export default function VirtualScrollDoc() {
       const [selectedItem, setSelectedItem] = useState(null);
@@ -28,13 +29,16 @@ export default function VirtualScrollDoc() {
     }
 
     return (
-        <Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 38 }} placeholder="Select Item"/>
+        <div className="card flex justify-content-center dropdown-demo">
+            <Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 38 }} placeholder="Select Item"/>
+        </div>
     )
 }
         `,
         typescript: `
 import { useState } from "react";
 import { Dropdown, DropdownChangeParams } from 'primereact/dropdown';
+import './DropdownDemo.css';
 
 export default function VirtualScrollDoc() {
       const [selectedItem, setSelectedItem] = useState<any | null>(null);
@@ -45,8 +49,17 @@ export default function VirtualScrollDoc() {
     }
 
     return (
-        <Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 38 }} placeholder="Select Item"/>
+        <div className="card flex justify-content-center dropdown-demo">
+            <Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 38 }} placeholder="Select Item"/>
+        </div>
     )
+}
+        `,
+        css: `
+/* DropdownDemo.css */
+
+.dropdown-demo .p-dropdown {
+    width: 14rem;
 }
         `
     };
@@ -58,7 +71,7 @@ export default function VirtualScrollDoc() {
                     Whether to use the virtualScroller feature. The properties of <i>VirtualScroller</i> component can be used like an object in it.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
+            <div className="card flex justify-content-center dropdown-demo">
                 <Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 38 }} placeholder="Select Item" />
             </div>
             <DocSectionCode code={code} />

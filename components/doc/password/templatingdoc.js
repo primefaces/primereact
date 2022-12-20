@@ -22,7 +22,7 @@ export function Templating(props) {
 
     const code = {
         basic: `
-<Password value={value} onChange={(e) => setValue(e.target.value)} header={header} footer={footer} />
+<Password value={value} onChange={(e) => setValue(e.target.value)} inputClassName="w-15rem" header={header} footer={footer} />
         `,
         javascript: `
 import { useState } from "react";
@@ -45,7 +45,9 @@ export default function Templating() {
     );
 
     return (
-        <Password value={value} onChange={(e) => setValue(e.target.value)} header={header} footer={footer} />
+        <div className="card flex justify-content-center">
+            <Password value={value} onChange={(e) => setValue(e.target.value)} header={header} footer={footer} />
+        </div>
     )
 }
         `,
@@ -70,7 +72,9 @@ export default function Templating() {
     );
 
     return (
-        <Password value={value} onChange={(e : ChangeEventHandler) => setValue(e.target.value)} header={header} footer={footer} />
+        <div className="card flex justify-content-center">
+            <Password value={value} onChange={(e : ChangeEventHandler) => setValue(e.target.value)} header={header} footer={footer} />
+        </div>
     )
 }
         `
@@ -82,7 +86,7 @@ export default function Templating() {
                 <p>Format definition of the keys to block.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Password value={value} onChange={(e) => setValue(e.target.value)} header={header} footer={footer} />
+                <Password value={value} onChange={(e) => setValue(e.target.value)} inputClassName="w-15rem" header={header} footer={footer} />
             </div>
             <DocSectionCode code={code} />
         </>

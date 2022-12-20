@@ -15,7 +15,7 @@ export function BasicDoc(props) {
 
     const code = {
         basic: `
-<TreeSelect value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)} placeholder="Select Item"></TreeSelect>
+<TreeSelect value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)} className="md:w-20rem w-full" placeholder="Select Item"></TreeSelect>
 
         `,
         javascript: `
@@ -33,7 +33,9 @@ export default function BasicDoc() {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)} placeholder="Select Item"></TreeSelect>
+        <div className="card flex justify-content-center">
+            <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e : TreeSelectChangeParams) => setSelectedNodeKey(e.value)} className="md:w-20rem w-full" placeholder="Select Item"></TreeSelect>
+        </div>
     );
 }
         `,
@@ -52,7 +54,9 @@ export default function BasicDoc() {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e : TreeSelectChangeParams) => setSelectedNodeKey(e.value)} placeholder="Select Item"></TreeSelect>
+        <div className="card flex justify-content-center">
+            <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e : TreeSelectChangeParams) => setSelectedNodeKey(e.value)} className="md:w-20rem w-full" placeholder="Select Item"></TreeSelect>
+        </div>
     );
 }
         `
@@ -66,7 +70,7 @@ export default function BasicDoc() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)} placeholder="Select Item"></TreeSelect>
+                <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)} className="md:w-20rem w-full" placeholder="Select Item"></TreeSelect>
             </div>
             <DocSectionCode code={code} />
         </>

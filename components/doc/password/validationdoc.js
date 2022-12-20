@@ -27,7 +27,7 @@ export function ValidationDoc(props) {
     render={({ field, fieldState }) => (
         <>
             <label htmlFor={field.name} className={classNames({ 'p-error': errors.name })}>Password*</label>
-            <Password id={field.name} {...field} inputRef={field.ref} className={classNames({ 'p-invalid': fieldState.error })} feedback={false} />
+            <Password id={field.name} {...field} inputRef={field.ref} inputClassName="w-15rem" className={classNames({ 'p-invalid': fieldState.error })} feedback={false} />
             {getFormErrorMessage(field.name)}
         </>
     )}
@@ -56,25 +56,29 @@ export default function ValidationDemo() {
     };
 
     return (
-        <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
-            <div className="field">
-                <Controller
-                    name="password"
-                    control={form.control}
-                    rules={{ required: 'Password is required.' }}
-                    render={({ field, fieldState }) => (
-                        <>
-                            <label htmlFor={field.name} className={classNames({ 'p-error': errors.password })}>
-                                Password*
-                            </label>
-                            <Password id={field.name} {...field} inputRef={field.ref} className={classNames({ 'p-invalid': fieldState.error })} feedback={false} />
-                            {getFormErrorMessage(field.name)}
-                        </>
-                    )}
-                />
+        <div className="card flex justify-content-center">
+            <div className="flex flex-column gap-2">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
+                    <div className="field">
+                        <Controller
+                            name="password"
+                            control={form.control}
+                            rules={{ required: 'Password is required.' }}
+                            render={({ field, fieldState }) => (
+                                <>
+                                    <label htmlFor={field.name} className={classNames({ 'p-error': errors.password })}>
+                                        Password*
+                                    </label>
+                                    <Password id={field.name} {...field} inputRef={field.ref} inputClassName="w-15rem" className={classNames({ 'p-invalid': fieldState.error })} feedback={false} />
+                                    {getFormErrorMessage(field.name)}
+                                </>
+                            )}
+                        />
+                    </div>
+                    <Button label="Submit" type="submit" icon="pi pi-check" />
+                </form>
             </div>
-            <Button label="Submit" type="submit" icon="pi pi-check" />
-        </form>
+        </div>
     )
 }
         `,
@@ -101,25 +105,29 @@ export default function InvalidDemo() {
     };
 
     return (
-        <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
-            <div className="field">
-                <Controller
-                    name="password"
-                    control={form.control}
-                    rules={{ required: 'Password is required.' }}
-                    render={({ field, fieldState }) => (
-                        <>
-                            <label htmlFor={field.name} className={classNames({ 'p-error': errors.password })}>
-                                Password*
-                            </label>
-                            <Password id={field.name} {...field} inputRef={field.ref} className={classNames({ 'p-invalid': fieldState.error })} feedback={false} />
-                            {getFormErrorMessage(field.name)}
-                        </>
-                    )}
-                />
+        <div className="card flex justify-content-center">
+            <div className="flex flex-column gap-2">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
+                    <div className="field">
+                        <Controller
+                            name="password"
+                            control={form.control}
+                            rules={{ required: 'Password is required.' }}
+                            render={({ field, fieldState }) => (
+                                <>
+                                    <label htmlFor={field.name} className={classNames({ 'p-error': errors.password })}>
+                                        Password*
+                                    </label>
+                                    <Password id={field.name} {...field} inputRef={field.ref} inputClassName="w-15rem" className={classNames({ 'p-invalid': fieldState.error })} feedback={false} />
+                                    {getFormErrorMessage(field.name)}
+                                </>
+                            )}
+                        />
+                    </div>
+                    <Button label="Submit" type="submit" icon="pi pi-check" />
+                </form>
             </div>
-            <Button label="Submit" type="submit" icon="pi pi-check" />
-        </form>
+        </div>
     )
 }
         `
@@ -145,7 +153,7 @@ export default function InvalidDemo() {
                                         <label htmlFor={field.name} className={classNames({ 'p-error': errors.password })}>
                                             Password*
                                         </label>
-                                        <Password id={field.name} {...field} inputRef={field.ref} className={classNames({ 'p-invalid': fieldState.error })} feedback={false} />
+                                        <Password id={field.name} {...field} inputRef={field.ref} inputClassName="w-15rem" className={classNames({ 'p-invalid': fieldState.error })} feedback={false} />
                                         {getFormErrorMessage(field.name)}
                                     </>
                                 )}

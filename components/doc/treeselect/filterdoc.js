@@ -15,7 +15,7 @@ export function FilterDoc(props) {
 
     const code = {
         basic: `
-<TreeSelect value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)} filter placeholder="Select Items"></TreeSelect>
+<TreeSelect value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)} filter className="md:w-20rem w-full" placeholder="Select Items"></TreeSelect>
         `,
         javascript: `
 import { useState, useEffect } from "react";
@@ -32,7 +32,9 @@ export default function FilterDoc() {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)} filter placeholder="Select Items"></TreeSelect>
+        <div className="card flex justify-content-center">
+            <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e : TreeSelectChangeParams) => setSelectedNodeKey(e.value)} filter className="md:w-20rem w-full" placeholder="Select Items"></TreeSelect>
+        </div>   
     );
 }
         `,
@@ -51,7 +53,9 @@ export default function FilterDoc() {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e : TreeSelectChangeParams) => setSelectedNodeKey(e.value)} filter placeholder="Select Items"></TreeSelect>
+        <div className="card flex justify-content-center">
+            <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e : TreeSelectChangeParams) => setSelectedNodeKey(e.value)} filter className="md:w-20rem w-full" placeholder="Select Items"></TreeSelect>
+        </div>
     );
 }
         `
@@ -67,7 +71,7 @@ export default function FilterDoc() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)} filter placeholder="Select Items"></TreeSelect>
+                <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)} filter className="md:w-20rem w-full" placeholder="Select Items"></TreeSelect>
             </div>
             <DocSectionCode code={code} />
         </>

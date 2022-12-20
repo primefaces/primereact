@@ -33,7 +33,7 @@ const ChipDemo = () => {
             component: ImageDoc
         },
         {
-            id: 'styling',
+            id: 'stylingdoc',
             label: 'Styling',
             component: StylingDoc
         },

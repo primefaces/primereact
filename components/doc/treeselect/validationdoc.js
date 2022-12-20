@@ -67,25 +67,29 @@ export default function ValidationDemo() {
     };
 
     return (
-        <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
-            <div className="field">
-                <Controller
-                    name="node"
-                    control={form.control}
-                    rules={{ required: 'Node is required.' }}
-                    render={({ field, fieldState }) => (
-                        <>
-                            <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.node })}>
-                                Node*
-                            </label>
-                            <TreeSelect id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} options={nodes} placeholder="Select Item" className={classNames({ 'p-invalid': fieldState.error })} />
-                            {getFormErrorMessage(field.name)}
-                        </>
-                    )}
-                />
+        <div className="card flex justify-content-center">
+            <div className="flex flex-column gap-2 md:w-20rem w-full">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
+                    <div className="field">
+                        <Controller
+                            name="node"
+                            control={form.control}
+                            rules={{ required: 'Node is required.' }}
+                            render={({ field, fieldState }) => (
+                                <>
+                                    <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.node })}>
+                                        Node*
+                                    </label>
+                                    <TreeSelect id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} options={nodes} placeholder="Select Item" className={classNames({ 'p-invalid': fieldState.error })} />
+                                    {getFormErrorMessage(field.name)}
+                                </>
+                            )}
+                        />
+                    </div>
+                    <Button label="Submit" type="submit" icon="pi pi-check" />
+                </form>
             </div>
-            <Button label="Submit" type="submit" icon="pi pi-check" />
-        </form>
+        </div>
     )
 }
         `,
@@ -117,25 +121,29 @@ export default function InvalidDemo() {
     };
 
     return (
-        <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
-            <div className="field">
-                <Controller
-                    name="node"
-                    control={form.control}
-                    rules={{ required: 'Node is required.' }}
-                    render={({ field, fieldState }) => (
-                        <>
-                            <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.node })}>
-                                Node*
-                            </label>
-                            <TreeSelect id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} options={nodes} placeholder="Select Item" className={classNames({ 'p-invalid': fieldState.error })} />
-                            {getFormErrorMessage(field.name)}
-                        </>
-                    )}
-                />
+        <div className="card flex justify-content-center">
+            <div className="flex flex-column gap-2 md:w-20rem w-full">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
+                    <div className="field">
+                        <Controller
+                            name="node"
+                            control={form.control}
+                            rules={{ required: 'Node is required.' }}
+                            render={({ field, fieldState }) => (
+                                <>
+                                    <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.node })}>
+                                        Node*
+                                    </label>
+                                    <TreeSelect id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} options={nodes} placeholder="Select Item" className={classNames({ 'p-invalid': fieldState.error })} />
+                                    {getFormErrorMessage(field.name)}
+                                </>
+                            )}
+                        />
+                    </div>
+                    <Button label="Submit" type="submit" icon="pi pi-check" />
+                </form>
             </div>
-            <Button label="Submit" type="submit" icon="pi pi-check" />
-        </form>
+        </div>
     )
 }
         `
@@ -149,7 +157,7 @@ export default function InvalidDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <div className="flex flex-column gap-2">
+                <div className="flex flex-column gap-2 md:w-20rem w-full">
                     <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
                         <div className="field">
                             <Controller

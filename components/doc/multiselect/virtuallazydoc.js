@@ -50,6 +50,7 @@ export function VirtualLazyDoc(props) {
 import { useState } from "react";
 import { MultiSelect, SelectItemOptionsType } from 'primereact/multiselect';
 import { Skeleton } from '../../lib/skeleton/skeleton';
+import './MultiSelectDemo.css';
 
 export default function VirtualLazyDoc() {
     const [lazyItems, setLazyItems] = useState([]);
@@ -58,13 +59,15 @@ export default function VirtualLazyDoc() {
     const loadLazyTimeout = useRef(null);
 
     return (
-        <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e) => setSelectedItems2(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 43, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
-            return (
-                <div className="flex align-items-center p-2" style={{ height: '43px' }}>
-                    <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />
-                </div>
-            )}
-        }} maxSelectedLabels={3} placeholder="Select Item" showSelectAll={false}/>
+        <div className="card flex justify-content-center multiselect-demo">
+            <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e) => setSelectedItems2(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 43, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
+                return (
+                    <div className="flex align-items-center p-2" style={{ height: '43px' }}>
+                        <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />
+                    </div>
+                )}
+            }} maxSelectedLabels={3} placeholder="Select Item" showSelectAll={false}/>
+        </div>
     );
 }
         `,
@@ -72,6 +75,7 @@ export default function VirtualLazyDoc() {
 import { useState } from "react";
 import { MultiSelect, SelectItemOptionsType, MultiSelectChangeParams } from 'primereact/multiselect';
 import { Skeleton } from '../../lib/skeleton/skeleton';
+import './MultiSelectDemo.css';
 
 export default function VirtualLazyDoc() {
     const [lazyItems, setLazyItems] = useState<SelectItemOptionsType>([]);
@@ -80,14 +84,41 @@ export default function VirtualLazyDoc() {
     const loadLazyTimeout = useRef<number>(null);
 
     return (
-        <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e: MultiSelectChangeParams) => setSelectedItems2(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 43, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
-            return (
-                <div className="flex align-items-center p-2" style={{ height: '43px' }}>
-                    <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />
-                </div>
-            )}
-        }} maxSelectedLabels={3} placeholder="Select Item" showSelectAll={false}/>
+        <div className="card flex justify-content-center multiselect-demo">
+            <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e: MultiSelectChangeParams) => setSelectedItems2(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 43, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
+                return (
+                    <div className="flex align-items-center p-2" style={{ height: '43px' }}>
+                        <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />
+                    </div>
+                )}
+            }} maxSelectedLabels={3} placeholder="Select Item" showSelectAll={false}/>
+        </div>
     );
+}
+        `,
+        css: `
+/* MultiSelectDemo.css */
+
+.multiselect-demo .p-multiselect {
+    min-width: 15rem;
+}
+
+.multiselect-demo .multiselect-custom .p-multiselect-label:not(.p-placeholder):not(.p-multiselect-items-label) {
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+}
+
+.multiselect-demo .multiselect-custom .country-item-value {
+    padding: .25rem .5rem;
+    border-radius: 3px;
+    display: inline-flex;
+    margin-right: .5rem;
+    background-color: var(--primary-color);
+    color: var(--primary-color-text);
+}
+
+.multiselect-demo .multiselect-custom .country-item-value img.flag {
+    width: 17px;
 }
         `
     };
@@ -99,7 +130,7 @@ export default function VirtualLazyDoc() {
                     Whether to use the virtualScroller feature. The properties of <i>VirtualScroller</i> component can be used like an object in it.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
+            <div className="card flex justify-content-center multiselect-demo">
                 <MultiSelect
                     value={selectedItems}
                     options={lazyItems}
