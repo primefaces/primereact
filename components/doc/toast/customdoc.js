@@ -117,8 +117,8 @@ export default function CustomDoc() {
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Toast ref={toastBC} position="bottom-center" />
-                <div className="toast-demo">
-                    <Button type="button" onClick={showConfirm} label="Confirm" className="ui-button-warning" />
+                <div>
+                    <Button type="button" onClick={showConfirm} label="Confirm" className="ui-button-warning md:w-auto md:mr-1 w-full mb-1" />
                 </div>
             </div>
             <DocSectionCode code={code} />

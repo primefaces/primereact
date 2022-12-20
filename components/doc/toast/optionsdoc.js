@@ -92,9 +92,9 @@ export default function OptionsDoc() {
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Toast ref={toast} />
-                <div className=" toast-demo">
-                    <Button onClick={showMultiple} label="Multiple" className="p-button-warning" />
-                    <Button onClick={showSticky} label="Sticky" />
+                <div>
+                    <Button onClick={showMultiple} label="Multiple" className="p-button-warning md:w-auto md:mr-1 w-full mb-1" />
+                    <Button onClick={showSticky} label="Sticky" className="md:w-auto md:mr-1 w-full mb-1" />
                 </div>
             </div>
             <DocSectionCode code={code} />

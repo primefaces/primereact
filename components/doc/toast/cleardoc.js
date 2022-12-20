@@ -65,8 +65,8 @@ export default function ClearDoc() {
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Toast ref={toast} />
-                <div className="toast-demo">
-                    <Button onClick={clear} label="Clear" />
+                <div>
+                    <Button onClick={clear} label="Clear" className="md:w-auto md:mr-1 w-full mb-1" />
                 </div>
             </div>
             <DocSectionCode code={code} />
