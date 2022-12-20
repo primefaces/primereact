@@ -126,5 +126,6 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
 }
 
 export declare class TreeSelect extends React.Component<TreeSelectProps, any> {
+    public focus(): void;
     public getElement(): HTMLDivElement;
 }

@@ -52,6 +52,7 @@ export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputH
 }
 
 export declare class Password extends React.Component<PasswordProps, any> {
+    public focus(): void;
     public getElement(): HTMLDivElement;
     public getInput(): typeof InputText;
     public getOverlay(): HTMLElement;

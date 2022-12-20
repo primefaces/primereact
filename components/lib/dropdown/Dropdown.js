@@ -3,7 +3,7 @@ import PrimeReact, { FilterService } from '../api/Api';
 import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 import { DropdownPanel } from './DropdownPanel';
 
 export const Dropdown = React.memo(
@@ -582,6 +582,7 @@ export const Dropdown = React.memo(
             props,
             show,
             hide,
+            focus: () => DomHandler.focus(focusInputRef.current),
             getElement: () => elementRef.current,
             getOverlay: () => overlayRef.current,
             getInput: () => inputRef.current,

@@ -4,7 +4,7 @@ import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect }
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
 import { Tree } from '../tree/Tree';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 import { TreeSelectPanel } from './TreeSelectPanel';
 
 export const TreeSelect = React.memo(
@@ -296,6 +296,7 @@ export const TreeSelect = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            focus: () => DomHandler.focus(focusInputRef.current),
             getElement: () => elementRef.current
         }));
 

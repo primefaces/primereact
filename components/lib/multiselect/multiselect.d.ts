@@ -141,6 +141,7 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
 export declare class MultiSelect extends React.Component<MultiSelectProps, any> {
     public show(): void;
     public hide(): void;
+    public focus(): void;
     public getElement(): HTMLDivElement;
     public getInput(): HTMLInputElement;
     public getOverlay(): HTMLElement;

@@ -114,6 +114,7 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.In
 export declare class AutoComplete extends React.Component<AutoCompleteProps, any> {
     public show(): void;
     public hide(): void;
+    public focus(): void;
     public search(event: React.SyntheticEvent, query: string, source: AutoCompleteSourceType): void;
     public getElement(): HTMLSpanElement;
     public getInput(): HTMLInputElement;

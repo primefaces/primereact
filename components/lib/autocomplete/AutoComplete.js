@@ -5,7 +5,7 @@ import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect }
 import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
 import { AutoCompletePanel } from './AutoCompletePanel';
 
 export const AutoComplete = React.memo(
@@ -476,6 +476,7 @@ export const AutoComplete = React.memo(
             search,
             show,
             hide,
+            focus: () => DomHandler.focus(inputRef.current),
             getElement: () => elementRef.current,
             getOverlay: () => overlayRef.current,
             getInput: () => inputRef.current,

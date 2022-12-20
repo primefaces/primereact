@@ -49,4 +49,5 @@ export declare class CascadeSelect extends React.Component<CascadeSelectProps, a
     public getInput(): HTMLInputElement;
     public getOverlay(): HTMLElement;
     public getLabel(): HTMLSpanElement;
+    public focus(): void;
 }

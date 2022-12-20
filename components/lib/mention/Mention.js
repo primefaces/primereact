@@ -6,7 +6,7 @@ import { InputTextarea } from '../inputtextarea/InputTextarea';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 
 export const Mention = React.memo(
     React.forwardRef((props, ref) => {
@@ -325,6 +325,7 @@ export const Mention = React.memo(
             props,
             show,
             hide,
+            focus: () => DomHandler.focus(inputRef.current),
             getElement: () => elementRef.current,
             getOverlay: () => overlayRef.current,
             getInput: () => inputRef.current
