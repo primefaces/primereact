@@ -1,6 +1,6 @@
 import getConfig from 'next/config';
 import { Dock } from '../../lib/dock/Dock';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 import { RadioButton } from '../../lib/radiobutton/RadioButton';
@@ -58,6 +58,7 @@ export function BasicDoc(props) {
 `,
         javascript: `
 import { Dock } from 'primereact/dock';
+import './DockDemo.css';
 
 export default function BasicDoc() {
     const dockBasicItems = [
@@ -90,6 +91,7 @@ export default function BasicDoc() {
         typescript: `
 import { Dock } from 'primereact/dock';
 import { MenuItem } from 'primereact/menuitem';
+import './DockDemo.css';
 
 export default function BasicDoc() {
     const dockBasicItems: MenuteItem[] = [
@@ -118,7 +120,120 @@ export default function BasicDoc() {
         </div>
     )
 }
-        `
+        `,
+        css: `
+/* DockDemo.css */
+
+.dock-demo {
+    .dock-window {
+        width: 100%;
+        height: 450px;
+        position: relative;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .p-dock {
+        z-index: 1000;
+    }
+
+    .dock-advanced {
+        .p-dialog-mask,
+        .p-galleria-mask,
+        .p-galleria-mask .p-galleria-item-nav,
+        .p-toast {
+            position: absolute;
+        }
+
+        .p-dialog {
+            .p-dialog-header {
+                padding: .2rem;
+            }
+
+            .p-dialog-content {
+                padding: 0;
+            }
+
+            p {
+                margin-top: 0;
+            }
+
+            .p-terminal {
+                background-color: #212121;
+                color: #ffffff;
+                border: 0 none;
+                min-height: 18rem;
+                height: 100%;
+
+                .p-terminal-command {
+                    color: #80CBC4;
+                }
+
+                .p-terminal-prompt {
+                    color: #FFD54F;
+                }
+
+                .p-terminal-response {
+                    color: #9FA8DA;
+                }
+            }
+
+            .p-tree {
+                height: 100%;
+                border-radius: 0;
+                border-left-width: 0;
+                border-right-width: 0;
+                border-bottom-width: 0;
+            }
+        }
+
+        .p-toast {
+            top: 20px;
+        }
+    }
+
+    .p-menubar {
+        padding-top: 0;
+        padding-bottom: 0;
+        border-radius: 0;
+
+        .menubar-root {
+            font-weight: bold;
+            padding: 0 1rem;
+        }
+
+        .p-menuitem-link {
+            padding: 0.5rem .75rem;
+        }
+
+        .p-menubar-root-list > .p-menuitem > .p-menuitem-link {
+            padding: 0.5rem .75rem;
+
+            > .p-submenu-icon {
+                display: none;
+            }
+        }
+
+        .p-menubar-end {
+            span, i {
+                padding: 0 .75rem;
+            }
+        }
+    }
+}
+
+.dark-tooltip {
+    .p-tooltip {
+        .p-tooltip-arrow {
+            border-top-color: var(--surface-900);
+        }
+
+        .p-tooltip-text {
+            background-color: var(--surface-900);
+        }
+    }
+}    
+    `
     };
 
     return (
