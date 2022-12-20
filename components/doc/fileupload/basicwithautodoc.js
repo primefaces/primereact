@@ -32,8 +32,10 @@ export default function BasicWithAuto() {
     };
     
     return (
-        <Toast ref={toast}></Toast>
-        <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUploadAuto} auto chooseLabel="Browse" />
+        <div className="card">
+            <Toast ref={toast}></Toast>
+            <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUploadAuto} auto chooseLabel="Browse" />
+        </div>
     )
 }
         `,
@@ -50,11 +52,20 @@ export default function BasicWithAuto() {
     };
     
     return (
-        <Toast ref={toast}></Toast>
-        <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUploadAuto} auto chooseLabel="Browse" />
+        <div className="card">
+            <Toast ref={toast}></Toast>
+            <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUploadAuto} auto chooseLabel="Browse" />
+        </div>
     )
 }
-        `
+        `,
+        php: `
+/* public/upload.php */
+
+<?php
+header ("Access-Control-Allow-Origin: *");
+echo '<p>Fake Upload Process</p>'; ?>
+    `
     };
 
     return (

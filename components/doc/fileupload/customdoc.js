@@ -45,7 +45,9 @@ export default function CustomDoc() {
     };
 
     return (
-        <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" customUpload uploadHandler={customBase64Uploader} />
+        <div className="card">
+            <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" customUpload uploadHandler={customBase64Uploader} />
+        </div>
     )
 }
         `,
@@ -68,7 +70,9 @@ export default function CustomDoc() {
     };
 
     return (
-        <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" customUpload uploadHandler={customBase64Uploader} />
+        <div className="card">
+            <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" customUpload uploadHandler={customBase64Uploader} />
+        </div>
     )
 }
         `

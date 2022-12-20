@@ -40,6 +40,13 @@ export function DocSectionCode(props) {
                                 onClick={() => setCodeLang('css')}
                             ></Button>
                         ) : null}
+                        {props.code.php ? (
+                            <Button
+                                className={classNames('p-button-rounded p-button-text p-button-plain h-2rem w-2rem p-0 inline-flex align-items-center justify-content-center', { 'doc-section-code-active text-primary': codeLang === 'php' })}
+                                label="PHP"
+                                onClick={() => setCodeLang('php')}
+                            ></Button>
+                        ) : null}
                     </>
                 )}
 
@@ -107,6 +114,11 @@ export function DocSectionCode(props) {
             {codeMode !== 'basic' && codeLang === 'css' && (
                 <div>
                     <CodeHighlight lang={'css'}>{props.code.css}</CodeHighlight>
+                </div>
+            )}
+            {codeMode !== 'basic' && codeLang === 'php' && (
+                <div>
+                    <CodeHighlight lang={'php'}>{props.code.php}</CodeHighlight>
                 </div>
             )}
         </div>
