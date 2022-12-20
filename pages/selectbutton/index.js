@@ -1,12 +1,13 @@
 import Head from 'next/head';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/selectbutton/importdoc';
-import { BasicDoc } from '../../components/doc/selectbutton/basicdoc';
-import { MultipleSelectionDoc } from '../../components/doc/selectbutton/multipleselectiondoc';
-import { CustomContentDoc } from '../../components/doc/selectbutton/customcontentdoc';
 import { ApiDoc } from '../../components/doc/selectbutton/apidoc';
+import { BasicDoc } from '../../components/doc/selectbutton/basicdoc';
+import { CustomContentDoc } from '../../components/doc/selectbutton/customcontentdoc';
+import { ImportDoc } from '../../components/doc/selectbutton/importdoc';
+import { MultipleSelectionDoc } from '../../components/doc/selectbutton/multipleselectiondoc';
+import { ValidationDoc } from '../../components/doc/selectbutton/validationdoc';
 
 const SelectButtonDemo = () => {
     const docs = [
@@ -29,6 +30,11 @@ const SelectButtonDemo = () => {
             id: 'customcontentdoc',
             label: 'Custom Content',
             component: CustomContentDoc
+        },
+        {
+            id: 'validation',
+            label: 'Validation',
+            component: ValidationDoc
         },
         {
             id: 'api',
