@@ -20,7 +20,7 @@ export const BodyCell = React.memo((props) => {
 
     const getColumnProp = (prop) => (props.column ? props.column.props[prop] : null);
     const field = getColumnProp('field') || `field_${props.index}`;
-    const editingKey = props.dataKey ? props.rowData[props.dataKey] || props.rowIndex : props.rowIndex;
+    const editingKey = props.dataKey ? (props.rowData && props.rowData[props.dataKey]) || props.rowIndex : props.rowIndex;
 
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
         type: 'click',
