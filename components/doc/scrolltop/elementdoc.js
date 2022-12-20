@@ -21,7 +21,7 @@ export function ElementDoc(props) {
         Eget egestas purus viverra accumsan in nisl nisi. Suscipit adipiscing bibendum est ultricies integer.
         Mattis aliquam faucibus purus in massa tempor nec.
     </p>
-    <ScrollTop target="parent" threshold={100} className="custom-scrolltop" icon="pi pi-arrow-up" />
+    <ScrollTop target="parent" threshold={100} className="w-2rem h-2rem border-round-md bg-primary" icon="pi pi-arrow-up text-base" />
 </ScrollPanel>
         `,
         javascript: `
@@ -45,7 +45,7 @@ export const ElementDoc = () => {
                 Eget egestas purus viverra accumsan in nisl nisi. Suscipit adipiscing bibendum est ultricies integer.
                 Mattis aliquam faucibus purus in massa tempor nec.
             </p>
-            <ScrollTop target="parent" threshold={100} className="custom-scrolltop" icon="pi pi-arrow-up" />
+            <ScrollTop target="parent" threshold={100} className="w-2rem h-2rem border-round-md bg-primary" icon="pi pi-arrow-up text-base" />
         </ScrollPanel>
     );
 }
@@ -71,7 +71,7 @@ export const ElementDoc = () => {
                 Eget egestas purus viverra accumsan in nisl nisi. Suscipit adipiscing bibendum est ultricies integer.
                 Mattis aliquam faucibus purus in massa tempor nec.
             </p>
-            <ScrollTop target="parent" threshold={100} className="custom-scrolltop" icon="pi pi-arrow-up" />
+            <ScrollTop target="parent" threshold={100} className="w-2rem h-2rem border-round-md bg-primary" icon="pi pi-arrow-up text-base" />
         </ScrollPanel>
     );
 }
@@ -93,7 +93,7 @@ export const ElementDoc = () => {
                         nisl purus. Cursus sit amet dictum sit amet. Tristique senectus et netus et malesuada fames ac turpis egestas. Et tortor consequat id porta nibh venenatis cras sed. Diam maecenas ultricies mi eget mauris. Eget egestas purus
                         viverra accumsan in nisl nisi. Suscipit adipiscing bibendum est ultricies integer. Mattis aliquam faucibus purus in massa tempor nec.
                     </p>
-                    <ScrollTop target="parent" threshold={100} className="custom-scrolltop" icon="pi pi-arrow-up" />
+                    <ScrollTop target="parent" threshold={100} className="w-2rem h-2rem border-round-md bg-primary" icon="pi pi-arrow-up text-base" />
                 </ScrollPanel>
             </div>
             <DocSectionCode code={code} />

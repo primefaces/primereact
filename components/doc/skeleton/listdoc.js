@@ -27,8 +27,8 @@ export const ListDoc = () => {
 
     return (
         <div className="card">
-            <div className="custom-skeleton p-4">
-                <ul className="m-0 p-0">
+            <div className="border-round-sm border-solid border-1 surface-border p-4">
+                <ul className="m-0 p-0 list-none">
                     <li className="mb-3">
                         <div className="flex">
                             <Skeleton shape="circle" size="4rem" className="mr-2"></Skeleton>
@@ -79,8 +79,8 @@ export const ListDoc = () => {
 
     return (
         <div className="card">
-            <div className="custom-skeleton p-4">
-                <ul className="m-0 p-0">
+            <div className="border-round-sm border-solid border-1 surface-border p-4">
+                <ul className="m-0 p-0 list-none">
                     <li className="mb-3">
                         <div className="flex">
                             <Skeleton shape="circle" size="4rem" className="mr-2"></Skeleton>
@@ -131,8 +131,8 @@ export const ListDoc = () => {
                 <p>List Demo Content.</p>
             </DocSectionText>
             <div className="card">
-                <div className="custom-skeleton p-4">
-                    <ul className="m-0 p-0">
+                <div className="border-round-sm border-solid border-1 surface-border p-4">
+                    <ul className="m-0 p-0 list-none">
                         <li className="mb-3">
                             <div className="flex">
                                 <Skeleton shape="circle" size="4rem" className="mr-2"></Skeleton>

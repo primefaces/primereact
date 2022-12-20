@@ -18,10 +18,10 @@ export function PanelDoc(props) {
 
     const code = {
         basic: `
-<Button type="button" label="Block" onClick={blockPanel} />
+<Button type="button" className='mr-2' label="Block" onClick={blockPanel} />
 <Button type="button" label="Unblock" onClick={unblockPanel} />
 <BlockUI blocked={blockedPanel}>
-    <Panel header="Blockable Panel" style={{ marginTop: '20px' }}>
+    <Panel header="Blockable Panel" className='mt-4'>
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
             consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
@@ -50,11 +50,11 @@ export const PanelDoc = () => {
     return (
         <div className="card flex flex-column">
         <div className="flex flex-row flex-wrap mb-2 gap-2">
-            <Button type="button" label="Block" onClick={blockPanel} />
+            <Button type="button" className='mr-2' label="Block" onClick={blockPanel} />
             <Button type="button" label="Unblock" onClick={unblockPanel} />
         </div>
         <BlockUI blocked={blockedPanel}>
-            <Panel header="Blockable Panel" style={{ marginTop: '20px' }}>
+            <Panel header="Blockable Panel" className='mt-4'>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                     consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
@@ -86,11 +86,11 @@ export const PanelDoc = () => {
     return (
         <div className="card flex flex-column">
         <div className="flex flex-row flex-wrap mb-2 gap-2">
-            <Button type="button" label="Block" onClick={blockPanel} />
+            <Button type="button" className='mr-2' label="Block" onClick={blockPanel} />
             <Button type="button" label="Unblock" onClick={unblockPanel} />
         </div>
         <BlockUI blocked={blockedPanel}>
-            <Panel header="Blockable Panel" style={{ marginTop: '20px' }}>
+            <Panel header="Blockable Panel" className='mt-4'>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                     consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
@@ -111,11 +111,11 @@ export const PanelDoc = () => {
             </DocSectionText>
             <div className="card flex flex-column">
                 <div className="flex flex-row flex-wrap mb-2">
-                    <Button type="button" label="Block" onClick={blockPanel} />
+                    <Button type="button" className="mr-2" label="Block" onClick={blockPanel} />
                     <Button type="button" label="Unblock" onClick={unblockPanel} />
                 </div>
                 <BlockUI blocked={blockedPanel}>
-                    <Panel header="Blockable Panel" style={{ marginTop: '20px' }}>
+                    <Panel header="Blockable Panel" className="mt-4">
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                             consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est

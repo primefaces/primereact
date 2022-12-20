@@ -77,7 +77,7 @@ const BlockUIDemo = () => {
                 <DocActions github="blockui/index.js" />
             </div>
 
-            <div className="content-section doc blockui-demo">
+            <div className="content-section doc">
                 <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>

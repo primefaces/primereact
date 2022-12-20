@@ -59,7 +59,7 @@ const StyleClassDemo = () => {
                 </div>
                 <DocActions github="styleclass/index.js" />
             </div>
-            <div className="content-section doc ">
+            <div className="content-section doc">
                 <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>

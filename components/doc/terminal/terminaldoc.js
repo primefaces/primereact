@@ -55,6 +55,7 @@ export function TerminalDoc(props) {
 import React from 'react';
 import { Terminal } from 'primereact/terminal';
 import { TerminalService } from 'primereact/terminalservice';
+import './TerminalDemo.css'
 
 export const TerminalDoc = () => {
 
@@ -114,6 +115,7 @@ export const TerminalDoc = () => {
 import React from 'react';
 import { Terminal } from 'primereact/terminal';
 import { TerminalService } from 'primereact/terminalservice';
+import './TerminalDemo.css'
 
 export const TerminalDoc = () => {
 
@@ -168,7 +170,32 @@ export const TerminalDoc = () => {
         </div>
     );
 }
-        `
+        `,
+
+        css: `
+.terminal-demo {
+    p {
+        margin-top: 0;
+    }
+
+    .p-terminal {
+        background-color: #212121;
+        color: #ffffff;
+
+        .p-terminal-command {
+            color: #80CBC4;
+        }
+
+        .p-terminal-prompt {
+            color: #FFD54F;
+        }
+
+        .p-terminal-response {
+            color: #9FA8DA;
+        }
+    }
+}
+    `
     };
 
     return (
