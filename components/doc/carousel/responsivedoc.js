@@ -112,7 +112,9 @@ export default function ResponsiveOptionsDoc() {
     };
 
     return (
-        <Carousel value={products} numScroll={1} numVisible={3} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} header={<h5>Basic</h5>} />
+        <div className="card">
+            <Carousel value={products} numScroll={1} numVisible={3} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} header={<h5>Basic</h5>} />
+        </div>
     )
 }
         `,
@@ -170,7 +172,9 @@ export default function ResponsiveOptionsDoc() {
     };
     
     return (
-        <Carousel value={products} numScroll={1} numVisible={3} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} header={<h5>Basic</h5>} />
+        <div className="card">
+            <Carousel value={products} numScroll={1} numVisible={3} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} header={<h5>Basic</h5>} />
+        </div>
     )
 }
         `

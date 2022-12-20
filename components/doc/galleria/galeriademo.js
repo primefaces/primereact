@@ -80,8 +80,10 @@ export default function GaleriaDemo() {
     }
 
     return (
-        <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
-        item={itemTemplate} thumbnail={thumbnailTemplate} />
+        <div className="card flex justify-content-center">
+            <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
+            item={itemTemplate} thumbnail={thumbnailTemplate} />
+        </div>
     )
 }
         `,
@@ -122,8 +124,10 @@ export default function GaleriaDemo() {
     }
 
     return (
-        <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
-        item={itemTemplate} thumbnail={thumbnailTemplate} />
+        <div className="card flex justify-content-center">
+            <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
+            item={itemTemplate} thumbnail={thumbnailTemplate} />
+        </div>
     )
 }
         `
@@ -131,9 +135,7 @@ export default function GaleriaDemo() {
 
     return (
         <>
-            <DocSectionText {...props}>
-                <p></p>
-            </DocSectionText>
+            <DocSectionText {...props}></DocSectionText>
             <div className="card flex justify-content-center">
                 <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }} item={itemTemplate} thumbnail={thumbnailTemplate} />
             </div>

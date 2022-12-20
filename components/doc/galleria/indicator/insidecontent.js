@@ -72,8 +72,10 @@ export default function InsideContentDoc() {
     };
 
     return (
-        <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
-            showThumbnails={false} showIndicators changeItemOnIndicatorHover showIndicatorsOnItem item={itemTemplate} />
+        <div className="card flex justify-content-center">
+            <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
+                showThumbnails={false} showIndicators changeItemOnIndicatorHover showIndicatorsOnItem item={itemTemplate} />
+        </div>
     )
 }
         `,
@@ -111,8 +113,10 @@ export default function InsideContentDoc() {
     };
     
     return (
-        <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
-            showThumbnails={false} showIndicators changeItemOnIndicatorHover showIndicatorsOnItem item={itemTemplate} />
+        <div className="card flex justify-content-center">
+            <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
+                showThumbnails={false} showIndicators changeItemOnIndicatorHover showIndicatorsOnItem item={itemTemplate} />
+        </div>
     )
 }
         `

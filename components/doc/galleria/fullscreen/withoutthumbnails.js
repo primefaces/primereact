@@ -85,7 +85,7 @@ export default function WithoutThumbnailsDoc() {
     }
 
     return (
-        <div>
+        <div className="card flex justify-content-center">
             <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={7} style={{ maxWidth: '850px' }}
                 circular fullScreen showItemNavigators showThumbnails={false} item={itemTemplate} thumbnail={thumbnailTemplate} />
 
@@ -133,7 +133,7 @@ export default function WithoutThumbnailsDoc() {
     }
     
     return (
-        <div>
+        <div className="card flex justify-content-center">
             <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={7} style={{ maxWidth: '850px' }}
                 circular fullScreen showItemNavigators showThumbnails={false} item={itemTemplate} thumbnail={thumbnailTemplate} />
 

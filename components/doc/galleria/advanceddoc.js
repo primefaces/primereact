@@ -185,6 +185,7 @@ import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
 import { classNames } from 'primereact/utils';
 import { PhotoService } from '../service/PhotoService';
+import './GalleriaAdvancedDemo.css';
 
 export default function AdvancedDoc() {
     const [images, setImages] = useState(null);
@@ -365,6 +366,7 @@ import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
 import { classNames } from 'primereact/utils';
 import { PhotoService } from '../service/PhotoService';
+import './GalleriaAdvancedDemo.css';
 
 export default function AdvancedDoc() {
     const [images, setImages] = useState(null);
@@ -538,7 +540,87 @@ export default function AdvancedDoc() {
             style={{ maxWidth: '640px' }} className={galleriaClassName} />
     )
 }
-        `
+        `,
+
+        css: `
+/* GalleriaAdvancedDemo.css */
+
+.galleria-demo {
+    .custom-indicator-galleria {
+        .indicator-text {
+            color: #e9ecef;
+            cursor: pointer;
+        }
+
+        .p-highlight {
+            .indicator-text {
+                color: var(--primary-color);
+            }
+        }
+    }
+
+    .custom-galleria {
+        &.fullscreen {
+            display: flex;
+            flex-direction: column;
+
+            .p-galleria-content {
+                flex-grow: 1;
+                justify-content: center;
+            }
+        }
+
+        .p-galleria-content {
+            position: relative;
+        }
+
+        .p-galleria-thumbnail-wrapper {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        .p-galleria-thumbnail-items-container {
+            width: 100%;
+        }
+
+        .custom-galleria-footer {
+            display: flex;
+            align-items: center;
+            background-color: rgba(0, 0, 0, .9);
+            color: #ffffff;
+
+            > button {
+                background-color: transparent;
+                color: #ffffff;
+                border: 0 none;
+                border-radius: 0;
+                margin: .2rem 0;
+
+                &.fullscreen-button {
+                    margin-left: auto;
+                }
+
+                &:hover {
+                    background-color: rgba(255, 255, 255, 0.1);
+                }
+            }
+        }
+
+        .title-container {
+            > span {
+                font-size: .9rem;
+                padding-left: .829rem;
+
+                &.title {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
+    `
     };
 
     return (

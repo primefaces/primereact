@@ -17,7 +17,9 @@ export default function TemplatingDoc() {
     const icon = (<i className='pi pi-check'></i>)
 
     return (
-        <Image src="/images/galleria/galleria12.jpg" zoomSrc="images/galleria/galleria12.jpg" template={icon} alt="Image" preview width="100"  />
+        <div className="card flex justify-content-center">
+            <Image src="/images/galleria/galleria12.jpg" zoomSrc="images/galleria/galleria12.jpg" template={icon} alt="Image" preview width="100"  />
+        </div>
     )
 }
         `,
@@ -28,7 +30,9 @@ export default function TemplatingDoc() {
     const icon = (<i className='pi pi-check'></i>)
 
     return (
-        <Image src="/images/galleria/galleria12.jpg" zoomSrc="images/galleria/galleria12.jpg" template={icon} alt="Image" preview width="100"  />
+        <div className="card flex justify-content-center">
+            <Image src="/images/galleria/galleria12.jpg" zoomSrc="images/galleria/galleria12.jpg" template={icon} alt="Image" preview width="100"  />
+        </div>
     )
 }
         `

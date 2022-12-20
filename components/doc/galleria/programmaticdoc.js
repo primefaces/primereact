@@ -105,13 +105,15 @@ export default function ProgrammaticDoc() {
     }
 
     return (
-        <div className="py-2">
-            <Button icon="pi pi-minus" onClick={prev} className="p-button-secondary" />
-            <Button icon="pi pi-plus" onClick={next} className="p-button-secondary ml-2" />
-        </div>
+        <div className="card flex flex-column justify-content-center align-items-center">
+            <div className="py-2">
+                <Button icon="pi pi-minus" onClick={prev} className="p-button-secondary" />
+                <Button icon="pi pi-plus" onClick={next} className="p-button-secondary ml-2" />
+            </div>
 
-        <Galleria value={images} activeIndex={activeIndex} onItemChange={(e) => setActiveIndex(e.index)} responsiveOptions={responsiveOptions} numVisible={5}
-            item={itemTemplate} thumbnail={thumbnailTemplate} style={{ maxWidth: '640px' }} />
+            <Galleria value={images} activeIndex={activeIndex} onItemChange={(e) => setActiveIndex(e.index)} responsiveOptions={responsiveOptions} numVisible={5}
+                item={itemTemplate} thumbnail={thumbnailTemplate} style={{ maxWidth: '640px' }} />
+        </div>
     )
 }
         `,
@@ -163,13 +165,14 @@ export default function ProgrammaticDoc() {
     }
 
     return (
-        <div className="py-2">
-            <Button icon="pi pi-minus" onClick={prev} className="p-button-secondary" />
-            <Button icon="pi pi-plus" onClick={next} className="p-button-secondary ml-2" />
+        <div className="card flex flex-column justify-content-center align-items-center">
+            <div className="py-2">
+                <Button icon="pi pi-minus" onClick={prev} className="p-button-secondary" />
+                <Button icon="pi pi-plus" onClick={next} className="p-button-secondary ml-2" />
+            </div>
+            <Galleria value={images} activeIndex={activeIndex} onItemChange={(e) => setActiveIndex(e.index)} responsiveOptions={responsiveOptions} numVisible={5}
+                item={itemTemplate} thumbnail={thumbnailTemplate} style={{ maxWidth: '640px' }} />
         </div>
-
-        <Galleria value={images} activeIndex={activeIndex} onItemChange={(e) => setActiveIndex(e.index)} responsiveOptions={responsiveOptions} numVisible={5}
-            item={itemTemplate} thumbnail={thumbnailTemplate} style={{ maxWidth: '640px' }} />
     )
 }
         `

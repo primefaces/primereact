@@ -104,8 +104,10 @@ export default function ThumbnailDoc() {
     }
 
     return (
-        <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
-            item={itemTemplate} thumbnailsPosition="${selectedOptionValue}" thumbnail={thumbnailTemplate} />
+        <div className="card flex flex-wrap justify-content-center align-items-center w-full gap-3">
+            <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
+                item={itemTemplate} thumbnailsPosition="${selectedOptionValue}" thumbnail={thumbnailTemplate} />
+        </div>
     )
 }
         `,
@@ -146,8 +148,10 @@ export default function ThumbnailDoc() {
     }
 
     return (
-        <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
-            item={itemTemplate} thumbnailsPosition="${selectedOptionValue}" thumbnail={thumbnailTemplate} />
+        <div className="card flex flex-wrap justify-content-center align-items-center w-full gap-3">
+            <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
+                item={itemTemplate} thumbnailsPosition="${selectedOptionValue}" thumbnail={thumbnailTemplate} />
+        </div>
     )
 }
         `

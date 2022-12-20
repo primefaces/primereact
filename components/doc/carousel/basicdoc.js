@@ -112,7 +112,9 @@ export default function BasicDoc() {
     };
 
     return (
-        <Carousel value={products} numVisible={3} numScroll={3} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} header={<h5>Basic</h5>} />
+        <div className="card">
+            <Carousel value={products} numVisible={3} numScroll={3} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} header={<h5>Basic</h5>} />
+        </div>
     )
 }
         `,
@@ -170,7 +172,9 @@ export default function BasicDoc() {
     };
     
     return (
-        <Carousel value={products} numVisible={3} numScroll={3} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} header={<h5>Basic</h5>} />
+        <div className="card">
+            <Carousel value={products} numVisible={3} numScroll={3} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} header={<h5>Basic</h5>} />
+        </div>
     )
 }
         `

@@ -98,24 +98,24 @@ export default function CustomContentDoc() {
     }
 
     return (
-        <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={7} style={{ maxWidth: '850px' }}
-        activeIndex={activeIndex} onItemChange={(e) => setActiveIndex(e.index)}
-        circular fullScreen showItemNavigators showThumbnails={false} item={itemTemplate} thumbnail={thumbnailTemplate} />
-
-        <div className="grid" style={{ maxWidth: '400px' }}>
-            {
-                images && images.map((image, index) => {
-                    let imgEl = <img src={image.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={image.alt} style={{ cursor: 'pointer' }} onClick={
-                        () => {setActiveIndex(index); galleria.current.show()}
-                    } />
-
-                    return (
-                        <div className="col-3" key={index}>
-                            {imgEl}
-                        </div>
-                    )
-                })
-            }
+        <div className="card flex justify-content-center">
+            <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={7} style={{ maxWidth: '850px' }}
+            activeIndex={activeIndex} onItemChange={(e) => setActiveIndex(e.index)}
+            circular fullScreen showItemNavigators showThumbnails={false} item={itemTemplate} thumbnail={thumbnailTemplate} />
+            <div className="grid" style={{ maxWidth: '400px' }}>
+                {
+                    images && images.map((image, index) => {
+                        let imgEl = <img src={image.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={image.alt} style={{ cursor: 'pointer' }} onClick={
+                            () => {setActiveIndex(index); galleria.current.show()}
+                        } />
+                        return (
+                            <div className="col-3" key={index}>
+                                {imgEl}
+                            </div>
+                        )
+                    })
+                }
+            </div>
         </div>
     )
 }
@@ -159,24 +159,24 @@ export default function CustomContentDoc() {
     }
 
     return (
-        <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={7} style={{ maxWidth: '850px' }}
-        activeIndex={activeIndex} onItemChange={(e) => setActiveIndex(e.index)}
-        circular fullScreen showItemNavigators showThumbnails={false} item={itemTemplate} thumbnail={thumbnailTemplate} />
-
-        <div className="grid" style={{ maxWidth: '400px' }}>
-            {
-                images && images.map((image, index) => {
-                    let imgEl = <img src={image.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={image.alt} style={{ cursor: 'pointer' }} onClick={
-                        () => {setActiveIndex(index); galleria.current.show()}
-                    } />
-
-                    return (
-                        <div className="col-3" key={index}>
-                            {imgEl}
-                        </div>
-                    )
-                })
-            }
+        <div className="card flex justify-content-center">
+            <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={7} style={{ maxWidth: '850px' }}
+            activeIndex={activeIndex} onItemChange={(e) => setActiveIndex(e.index)}
+            circular fullScreen showItemNavigators showThumbnails={false} item={itemTemplate} thumbnail={thumbnailTemplate} />
+            <div className="grid" style={{ maxWidth: '400px' }}>
+                {
+                    images && images.map((image, index) => {
+                        let imgEl = <img src={image.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={image.alt} style={{ cursor: 'pointer' }} onClick={
+                            () => {setActiveIndex(index); galleria.current.show()}
+                        } />
+                        return (
+                            <div className="col-3" key={index}>
+                                {imgEl}
+                            </div>
+                        )
+                    })
+                }
+            </div>
         </div>
     )
 }

@@ -16,7 +16,9 @@ import { Image } from 'primereact/image';
 export default function BasicDoc() {
 
     return (
-        <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="250" />
+        <div className="card flex justify-content-center">
+            <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="250" />
+        </div>
     )
 }
         `,
@@ -26,7 +28,9 @@ import { Image } from 'primereact/image';
 export default function BasicDoc() {
 
     return (
-        <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="250" />
+        <div className="card flex justify-content-center">
+            <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="250" />
+        </div>
     )
 }
         `

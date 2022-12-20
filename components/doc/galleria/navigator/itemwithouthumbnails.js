@@ -81,8 +81,10 @@ const thumbnailTemplate = (item) => {
 }
 
     return (
-        <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} circular style={{ maxWidth: '640px' }}
-            showItemNavigators showThumbnails={false} item={itemTemplate} thumbnail={thumbnailTemplate} />    
+        <div className="card flex justify-content-center">
+            <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} circular style={{ maxWidth: '640px' }}
+                showItemNavigators showThumbnails={false} item={itemTemplate} thumbnail={thumbnailTemplate} />
+        </div>   
     )
 }
         `,
@@ -124,8 +126,10 @@ const thumbnailTemplate = (item) => {
 }
 
     return (
-        <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} circular style={{ maxWidth: '640px' }}
-            showItemNavigators showThumbnails={false} item={itemTemplate} thumbnail={thumbnailTemplate} />     
+        <div className="card flex justify-content-center">
+            <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} circular style={{ maxWidth: '640px' }}
+                showItemNavigators showThumbnails={false} item={itemTemplate} thumbnail={thumbnailTemplate} />
+        </div>    
     )
 }
         `
