@@ -37,7 +37,7 @@ export function OverlayPanelDoc(props) {
     };
 
     const imageBody = (rowData) => {
-        return <img src={`images/product/${rowData.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={rowData.image} className="product-image" />;
+        return <img src={`images/product/${rowData.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={rowData.image} className="w-4rem shadow-1" />;
     };
 
     const priceBody = (rowData) => {
@@ -47,8 +47,8 @@ export function OverlayPanelDoc(props) {
     const code = {
         basic: `
 <Toast ref={toast} />
-<Button type="button" icon="pi pi-search" label={selectedProduct ? selectedProduct.name : 'Select a Product'} onClick={(e) => op.current.toggle(e)} aria-haspopup aria-controls="overlay_panel" className="select-product-button" />
-<OverlayPanel ref={op} showCloseIcon id="overlay_panel" style={{ width: '450px' }} className="overlaypanel-demo">
+<Button style={{ minWidth: '15rem' }} type="button" icon="pi pi-search" label={selectedProduct ? selectedProduct.name : 'Select a Product'} onClick={(e) => op.current.toggle(e)} aria-haspopup aria-controls="overlay_panel" />
+<OverlayPanel ref={op} showCloseIcon id="overlay_panel" style={{ width: '450px' }} >
     <DataTable value={products} selectionMode="single" paginator rows={5} selection={selectedProduct} onSelectionChange={onProductSelect}>
         <Column field="name" header="Name" sortable />
         <Column header="Image" body={imageBody} />
@@ -94,7 +94,7 @@ export default function OverlayPanelDoc() {
     };
 
     const imageBody = (rowData) => {
-        return <img src={\`images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />
+        return <img src={\`images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="w-4rem shadow-1" />
     };
 
     const priceBody = (rowData) => {
@@ -104,9 +104,9 @@ export default function OverlayPanelDoc() {
     return (
         <div>
             <Toast ref={toast} />
-            <Button type="button" icon="pi pi-search" label={selectedProduct ? selectedProduct.name : 'Select a Product'} onClick={(e) => op.current.toggle(e)} aria-haspopup aria-controls="overlay_panel" className="select-product-button" />
+            <Button style={{ minWidth: '15rem' }} type="button" icon="pi pi-search" label={selectedProduct ? selectedProduct.name : 'Select a Product'} onClick={(e) => op.current.toggle(e)} aria-haspopup aria-controls="overlay_panel" />
 
-            <OverlayPanel ref={op} showCloseIcon id="overlay_panel" style={{ width: '450px' }} className="overlaypanel-demo">
+            <OverlayPanel ref={op} showCloseIcon id="overlay_panel" style={{ width: '450px' }}>
                 <DataTable value={products} selectionMode="single" paginator rows={5} selection={selectedProduct} onSelectionChange={onProductSelect}>
                     <Column field="name" header="Name" sortable />
                     <Column header="Image" body={imageBody} />
@@ -156,7 +156,7 @@ export default function OverlayPanelDoc() {
     };
 
     const imageBody = (rowData: Product) => {
-        return <img src={\`images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />
+        return <img src={\`images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="w-4rem shadow-1" />
     };
 
     const priceBody = (rowData: Product) => {
@@ -166,9 +166,9 @@ export default function OverlayPanelDoc() {
     return (
         <div>
             <Toast ref={toast} />
-            <Button type="button" icon="pi pi-search" label={selectedProduct ? selectedProduct.name : 'Select a Product'} onClick={(e) => op.current.toggle(e)} aria-haspopup aria-controls="overlay_panel" className="select-product-button" />
+            <Button style={{ minWidth: '15rem' }} type="button" icon="pi pi-search" label={selectedProduct ? selectedProduct.name : 'Select a Product'} onClick={(e) => op.current.toggle(e)} aria-haspopup aria-controls="overlay_panel" />
 
-            <OverlayPanel ref={op} showCloseIcon id="overlay_panel" style={{ width: '450px' }} className="overlaypanel-demo">
+            <OverlayPanel ref={op} showCloseIcon id="overlay_panel" style={{ width: '450px' }}>
                 <DataTable value={products} selectionMode="single" paginator rows={5} selection={selectedProduct} onSelectionChange={onProductSelect}>
                     <Column field="name" header="Name" sortable />
                     <Column header="Image" body={imageBody} />
@@ -190,12 +190,12 @@ export default function OverlayPanelDoc() {
             <div className="card flex justify-content-center">
                 <div className="card">
                     <Toast ref={toast} />
-                    <Button type="button" icon="pi pi-search" label={selectedProduct ? selectedProduct.name : 'Select a Product'} onClick={(e) => op.current.toggle(e)} aria-haspopup aria-controls="overlay_panel" className="select-product-button" />
+                    <Button style={{ minWidth: '15rem' }} type="button" icon="pi pi-search" label={selectedProduct ? selectedProduct.name : 'Select a Product'} onClick={(e) => op.current.toggle(e)} aria-haspopup aria-controls="overlay_panel" />
 
-                    <OverlayPanel ref={op} showCloseIcon id="overlay_panel" style={{ width: '450px' }} className="overlaypanel-demo">
+                    <OverlayPanel ref={op} showCloseIcon id="overlay_panel" style={{ width: '450px' }}>
                         <DataTable value={products} selectionMode="single" paginator rows={5} selection={selectedProduct} onSelectionChange={onProductSelect}>
                             <Column field="name" header="Name" sortable />
-                            <Column header="Image" body={imageBody} />
+                            <Column header="Image" body={imageBody} style={{ width: 'px' }} />
                             <Column field="price" header="Price" sortable body={priceBody} />
                         </DataTable>
                     </OverlayPanel>

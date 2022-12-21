@@ -30,7 +30,7 @@ export function ResponsiveDoc(props) {
 
     const code = {
         basic: `
-<Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayResponsive')} />
+<Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayResponsive')} className="mr-2 mb-2 line-height-3" style={{ minWidth: "10rem" }}/>
 <Dialog header="Header" visible={displayResponsive} onHide={() => onHide('displayResponsive')} breakpoints={{ '960px': '75vw' }} style={{ width: '50vw' }} footer={renderFooter('displayResponsive')}>
     <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -69,7 +69,7 @@ export default function ResponsiveDoc() {
 
     return (
         <div>
-            <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayResponsive')} />
+            <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayResponsive')} className="mr-2 mb-2 line-height-3" style={{ minWidth: "10rem" }}/>
             <Dialog header="Header" visible={displayResponsive} onHide={() => onHide('displayResponsive')} breakpoints={{ '960px': '75vw' }} style={{ width: '50vw' }} footer={renderFooter('displayResponsive')}>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -111,7 +111,7 @@ export default function ResponsiveDoc() {
 
     return (
         <div>
-            <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayResponsive')} />
+            <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayResponsive')} className="mr-2 mb-2 line-height-3" style={{ minWidth: "10rem" }}/>
             <Dialog header="Header" visible={displayResponsive} onHide={() => onHide('displayResponsive')} breakpoints={{ '960px': '75vw' }} style={{ width: '50vw' }} footer={renderFooter('displayResponsive')}>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -132,8 +132,8 @@ export default function ResponsiveDoc() {
                     <i>breakpoints</i> should be an object literal whose keys are the maximum screen sizes and values are the widths per screen.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center dialog-demo">
-                <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayResponsive')} />
+            <div className="card flex justify-content-center ">
+                <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayResponsive')} className="mr-2 mb-2 line-height-3" style={{ minWidth: '10rem' }} />
                 <Dialog header="Header" visible={displayResponsive} onHide={() => onHide('displayResponsive')} breakpoints={{ '960px': '75vw' }} style={{ width: '50vw' }} footer={renderFooter('displayResponsive')}>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo

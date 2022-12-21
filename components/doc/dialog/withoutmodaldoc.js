@@ -26,7 +26,7 @@ export function WithoutModalDoc(props) {
 
     const code = {
         basic: `
-<Button label="Show" icon="pi pi-external-link" onClick={() => onClick()} />
+<Button label="Show" icon="pi pi-external-link" onClick={() => onClick()} className="mr-2 mb-2 line-height-3" style={{ minWidth: "10rem" }}/>
 <Dialog header="Header" visible={visible} modal={false} style={{ width: '50vw' }} footer={renderFooter()} onHide={() => onHide()}>
     <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -61,7 +61,7 @@ export default function WithoutModalDoc() {
 
     return (
         <div>
-            <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayModal')} />
+            <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayModal')} className="mr-2 mb-2 line-height-3" style={{ minWidth: "10rem" }}/>
             <Dialog header="Header" visible={visible} modal={false} style={{ width: '50vw' }} footer={renderFooter('displayModal')} onHide={() => onHide('displayModal')}>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -99,7 +99,7 @@ export default function WithoutModalDoc() {
 
     return (
         <div>
-            <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayModal')} />
+            <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayModal')} className="mr-2 mb-2 line-height-3" style={{ minWidth: "10rem" }}/>
             <Dialog header="Header" visible={visible} modal={false} style={{ width: '50vw' }} footer={renderFooter('displayModal')} onHide={() => onHide('displayModal')}>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -119,8 +119,8 @@ export default function WithoutModalDoc() {
                     The confirmPopup method returns an object incudes <i>hide</i> and <i>show</i> methods. The component can be shown or hidden by using this object at any time.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center dialog-demo">
-                <Button label="Show" icon="pi pi-external-link" onClick={() => onClick()} />
+            <div className="card flex justify-content-center">
+                <Button label="Show" icon="pi pi-external-link" onClick={() => onClick()} className="mr-2 mb-2 line-height-3" style={{ minWidth: '10rem' }} />
                 <Dialog header="Header" visible={visible} modal={false} style={{ width: '50vw' }} footer={renderFooter()} onHide={() => onHide()}>
                     <p className="m-0">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo

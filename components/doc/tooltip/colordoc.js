@@ -57,7 +57,65 @@ export default function ColorDoc() {
         </div>
     );
 }
-        `
+        `,
+        css: `
+/* TooltipDemo.css */
+
+.blue-tooltip.p-tooltip .p-tooltip-arrow {
+    border-top-color: var(--blue-500);
+}
+.blue-tooltip.p-tooltip .p-tooltip-text {
+    background-color: var(--blue-500);
+}
+.green-tooltip.p-tooltip .p-tooltip-arrow {
+    border-top-color: var(--green-500);
+}
+.green-tooltip.p-tooltip .p-tooltip-text {
+    background-color: var(--green-500);
+}
+.yellow-tooltip.p-tooltip .p-tooltip-arrow {
+    border-top-color: var(--yellow-500);
+}
+.yellow-tooltip.p-tooltip .p-tooltip-text {
+    background-color: var(--yellow-500);
+}
+.cyan-tooltip.p-tooltip .p-tooltip-arrow {
+    border-top-color: var(--cyan-500);
+}
+.cyan-tooltip.p-tooltip .p-tooltip-text {
+    background-color: var(--cyan-500);
+}
+.pink-tooltip.p-tooltip .p-tooltip-arrow {
+    border-top-color: var(--pink-500);
+}
+.pink-tooltip.p-tooltip .p-tooltip-text {
+    background-color: var(--pink-500);
+}
+.indigo-tooltip.p-tooltip .p-tooltip-arrow {
+    border-top-color: var(--indigo-500);
+}
+.indigo-tooltip.p-tooltip .p-tooltip-text {
+    background-color: var(--indigo-500);
+}
+.teal-tooltip.p-tooltip .p-tooltip-arrow {
+    border-top-color: var(--teal-500);
+}
+.teal-tooltip.p-tooltip .p-tooltip-text {
+    background-color: var(--teal-500);
+}
+.bluegray-tooltip.p-tooltip .p-tooltip-arrow {
+    border-top-color: var(--bluegray-500);
+}
+.bluegray-tooltip.p-tooltip .p-tooltip-text {
+    background-color: var(--bluegray-500);
+}
+.purple-tooltip.p-tooltip .p-tooltip-arrow {
+    border-top-color: var(--purple-500);
+}
+.purple-tooltip.p-tooltip .p-tooltip-text {
+    background-color: var(--purple-500);
+}
+    `
     };
 
     return (
