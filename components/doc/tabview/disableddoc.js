@@ -20,6 +20,7 @@ export function DisabledDoc(props) {
         `,
         javascript: `
 import { TabView, TabPanel } from 'primereact/tabview';
+import './TabViewDemo.css';
 
 export default function DisabledDoc() {
 
@@ -41,6 +42,7 @@ export default function DisabledDoc() {
         `,
         typescript: `
 import { TabView, TabPanel } from 'primereact/tabview';
+import './TabViewDemo.css';
 
 export default function DisabledDoc() {
 
@@ -59,7 +61,15 @@ export default function DisabledDoc() {
         </TabView>
     )
 }
-        `
+        `,
+        css: `
+/* TabViewDemo.css */
+
+.tabview-demo .p-tabview p {
+    line-height: 1.5;
+    margin: 0;
+}
+`
     };
 
     return (

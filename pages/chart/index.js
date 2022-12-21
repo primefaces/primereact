@@ -136,7 +136,7 @@ const ChartDemo = () => {
                 <DocActions github="chart/index.js" />
             </div>
 
-            <div className="content-section doc button-demo">
+            <div className="content-section doc">
                 <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 import { SelectButtonItem } from './SelectButtonItem';
 
 export const SelectButton = React.memo(
@@ -90,9 +90,16 @@ export const SelectButton = React.memo(
             return null;
         };
 
+        const focus = () => {
+            const firstFocusableElement = DomHandler.getFirstFocusableElement(elementRef.current);
+
+            firstFocusableElement && firstFocusableElement.focus();
+        };
+
         React.useImperativeHandle(ref, () => ({
             props,
-            getElement: () => elementRef.current
+            getElement: () => elementRef.current,
+            focus
         }));
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);

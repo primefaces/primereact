@@ -37,23 +37,25 @@ export function PositionDoc(props) {
         basic: `
 <div className="grid flex-column">
     <div className="col">
-        <Button label="Left" icon="pi pi-arrow-right" onClick={() => onClick('displayPosition', 'left')} className="p-button-help" />
-        <Button label="Right" icon="pi pi-arrow-left" onClick={() => onClick('displayPosition', 'right')} className="p-button-help" />
+        <Button label="Left" icon="pi pi-arrow-right" onClick={() => onClick('displayPosition', 'left')} className="p-button-help mr-2 mb-2 line-height-3" style={{minWidth:"10rem"}} />
+        <Button label="Right" icon="pi pi-arrow-left" onClick={() => onClick('displayPosition', 'right')} className="p-button-help mr-2 mb-2 line-height-3" style={{minWidth:"10rem"}} />
     </div>
     <div className="col">
-        <Button label="TopLeft" icon="pi pi-arrow-down-right" onClick={() => onClick('displayPosition', 'top-left')} className="p-button-warning" />
-        <Button label="Top" icon="pi pi-arrow-down" onClick={() => onClick('displayPosition', 'top')} className="p-button-warning" />
-        <Button label="TopRight" icon="pi pi-arrow-down-left" onClick={() => onClick('displayPosition', 'top-right')} className="p-button-warning" />
+        <Button label="TopLeft" icon="pi pi-arrow-down-right" onClick={() => onClick('displayPosition', 'top-left')} className="p-button-warning mr-2 mb-2 line-height-3" style={{minWidth:"10rem"}}/>
+        <Button label="Top" icon="pi pi-arrow-down" onClick={() => onClick('displayPosition', 'top')} className="p-button-warning mr-2 mb-2 line-height-3"  style={{minWidth:"10rem"}}/>
+        <Button label="TopRight" icon="pi pi-arrow-down-left" onClick={() => onClick('displayPosition', 'top-right')} className="p-button-warning mr-2 mb-2 line-height-3" style={{minWidth:"10rem"}}/>
     </div>
     <div className="col">
-        <Button label="BottomLeft" icon="pi pi-arrow-up-right" onClick={() => onClick('displayPosition', 'bottom-left')} className="p-button-success" />
-        <Button label="Bottom" icon="pi pi-arrow-up" onClick={() => onClick('displayPosition', 'bottom')} className="p-button-success" />
-        <Button label="BottomRight" icon="pi pi-arrow-up-left" onClick={() => onClick('displayPosition', 'bottom-right')} className="p-button-success" />
+        <Button label="BottomLeft" icon="pi pi-arrow-up-right" onClick={() => onClick('displayPosition', 'bottom-left')} className="p-button-success mr-2 mb-2 line-height-3" style={{minWidth:"10rem"}}/>
+        <Button label="Bottom" icon="pi pi-arrow-up" onClick={() => onClick('displayPosition', 'bottom')} className="p-button-success mr-2 mb-2 line-height-3" style={{minWidth:"10rem"}}/>
+        <Button label="BottomRight" icon="pi pi-arrow-up-left" onClick={() => onClick('displayPosition', 'bottom-right')} className="p-button-success mr-2 mr-2 mb-2 line-height-3" style={{minWidth:"10rem"}} />
     </div>
 </div>
-
 <Dialog header="Header" visible={displayPosition} position={position} modal style={{ width: '50vw' }} footer={renderFooter('displayPosition')} onHide={() => onHide('displayPosition')} draggable={false} resizable={false}>
-    <p className="m-0"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+    <p className="m-0">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
 </Dialog>
         `,
         javascript: `
@@ -93,18 +95,18 @@ export default function PositionDoc() {
     return (
         <div className="grid flex-column">
             <div className="col">
-                <Button label="Left" icon="pi pi-arrow-right" onClick={() => onClick('displayPosition', 'left')} className="p-button-help" />
-                <Button label="Right" icon="pi pi-arrow-left" onClick={() => onClick('displayPosition', 'right')} className="p-button-help" />
+                <Button label="Left" icon="pi pi-arrow-right" onClick={() => onClick('displayPosition', 'left')} className="p-button-help mr-2 mb-2 line-height-3" style={{minWidth:"10rem"}} />
+                <Button label="Right" icon="pi pi-arrow-left" onClick={() => onClick('displayPosition', 'right')} className="p-button-help mr-2 mb-2 line-height-3" style={{minWidth:"10rem"}} />
             </div>
             <div className="col">
-                <Button label="TopLeft" icon="pi pi-arrow-down-right" onClick={() => onClick('displayPosition', 'top-left')} className="p-button-warning" />
-                <Button label="Top" icon="pi pi-arrow-down" onClick={() => onClick('displayPosition', 'top')} className="p-button-warning" />
-                <Button label="TopRight" icon="pi pi-arrow-down-left" onClick={() => onClick('displayPosition', 'top-right')} className="p-button-warning" />
+                <Button label="TopLeft" icon="pi pi-arrow-down-right" onClick={() => onClick('displayPosition', 'top-left')} className="p-button-warning mr-2 mb-2 line-height-3" style={{minWidth:"10rem"}}/>
+                <Button label="Top" icon="pi pi-arrow-down" onClick={() => onClick('displayPosition', 'top')} className="p-button-warning mr-2 mb-2 line-height-3"  style={{minWidth:"10rem"}}/>
+                <Button label="TopRight" icon="pi pi-arrow-down-left" onClick={() => onClick('displayPosition', 'top-right')} className="p-button-warning mr-2 mb-2 line-height-3" style={{minWidth:"10rem"}}/>
             </div>
             <div className="col">
-                <Button label="BottomLeft" icon="pi pi-arrow-up-right" onClick={() => onClick('displayPosition', 'bottom-left')} className="p-button-success" />
-                <Button label="Bottom" icon="pi pi-arrow-up" onClick={() => onClick('displayPosition', 'bottom')} className="p-button-success" />
-                <Button label="BottomRight" icon="pi pi-arrow-up-left" onClick={() => onClick('displayPosition', 'bottom-right')} className="p-button-success" />
+                <Button label="BottomLeft" icon="pi pi-arrow-up-right" onClick={() => onClick('displayPosition', 'bottom-left')} className="p-button-success mr-2 mb-2 line-height-3" style={{minWidth:"10rem"}}/>
+                <Button label="Bottom" icon="pi pi-arrow-up" onClick={() => onClick('displayPosition', 'bottom')} className="p-button-success mr-2 mb-2 line-height-3" style={{minWidth:"10rem"}}/>
+                <Button label="BottomRight" icon="pi pi-arrow-up-left" onClick={() => onClick('displayPosition', 'bottom-right')} className="p-button-success mr-2 mr-2 mb-2 line-height-3" style={{minWidth:"10rem"}} />
             </div>
         </div>
 
@@ -154,18 +156,18 @@ export default function PositionDoc() {
     return (
         <div className="grid flex-column">
             <div className="col">
-                <Button label="Left" icon="pi pi-arrow-right" onClick={() => onClick('displayPosition', 'left')} className="p-button-help" />
-                <Button label="Right" icon="pi pi-arrow-left" onClick={() => onClick('displayPosition', 'right')} className="p-button-help" />
+                <Button label="Left" icon="pi pi-arrow-right" onClick={() => onClick('displayPosition', 'left')} className="p-button-help mr-2 mb-2 line-height-3" style={{minWidth:"10rem"}} />
+                <Button label="Right" icon="pi pi-arrow-left" onClick={() => onClick('displayPosition', 'right')} className="p-button-help mr-2 mb-2 line-height-3" style={{minWidth:"10rem"}} />
             </div>
             <div className="col">
-                <Button label="TopLeft" icon="pi pi-arrow-down-right" onClick={() => onClick('displayPosition', 'top-left')} className="p-button-warning" />
-                <Button label="Top" icon="pi pi-arrow-down" onClick={() => onClick('displayPosition', 'top')} className="p-button-warning" />
-                <Button label="TopRight" icon="pi pi-arrow-down-left" onClick={() => onClick('displayPosition', 'top-right')} className="p-button-warning" />
+                <Button label="TopLeft" icon="pi pi-arrow-down-right" onClick={() => onClick('displayPosition', 'top-left')} className="p-button-warning mr-2 mb-2 line-height-3" style={{minWidth:"10rem"}}/>
+                <Button label="Top" icon="pi pi-arrow-down" onClick={() => onClick('displayPosition', 'top')} className="p-button-warning mr-2 mb-2 line-height-3"  style={{minWidth:"10rem"}}/>
+                <Button label="TopRight" icon="pi pi-arrow-down-left" onClick={() => onClick('displayPosition', 'top-right')} className="p-button-warning mr-2 mb-2 line-height-3" style={{minWidth:"10rem"}}/>
             </div>
             <div className="col">
-                <Button label="BottomLeft" icon="pi pi-arrow-up-right" onClick={() => onClick('displayPosition', 'bottom-left')} className="p-button-success" />
-                <Button label="Bottom" icon="pi pi-arrow-up" onClick={() => onClick('displayPosition', 'bottom')} className="p-button-success" />
-                <Button label="BottomRight" icon="pi pi-arrow-up-left" onClick={() => onClick('displayPosition', 'bottom-right')} className="p-button-success" />
+                <Button label="BottomLeft" icon="pi pi-arrow-up-right" onClick={() => onClick('displayPosition', 'bottom-left')} className="p-button-success mr-2 mb-2 line-height-3" style={{minWidth:"10rem"}}/>
+                <Button label="Bottom" icon="pi pi-arrow-up" onClick={() => onClick('displayPosition', 'bottom')} className="p-button-success mr-2 mb-2 line-height-3" style={{minWidth:"10rem"}}/>
+                <Button label="BottomRight" icon="pi pi-arrow-up-left" onClick={() => onClick('displayPosition', 'bottom-right')} className="p-button-success mr-2 mr-2 mb-2 line-height-3" style={{minWidth:"10rem"}} />
             </div>
         </div>
 
@@ -185,21 +187,21 @@ export default function PositionDoc() {
             <DocSectionText {...props}>
                 <p>Position</p>
             </DocSectionText>
-            <div className="card flex justify-content-center dialog-demo">
+            <div className="card flex justify-content-center">
                 <div className="grid flex-column">
                     <div className="col">
-                        <Button label="Left" icon="pi pi-arrow-right" onClick={() => onClick('displayPosition', 'left')} className="p-button-help" />
-                        <Button label="Right" icon="pi pi-arrow-left" onClick={() => onClick('displayPosition', 'right')} className="p-button-help" />
+                        <Button label="Left" icon="pi pi-arrow-right" onClick={() => onClick('displayPosition', 'left')} className="p-button-help mr-2 mb-2 line-height-3" style={{ minWidth: '10rem' }} />
+                        <Button label="Right" icon="pi pi-arrow-left" onClick={() => onClick('displayPosition', 'right')} className="p-button-help mr-2 mb-2 line-height-3" style={{ minWidth: '10rem' }} />
                     </div>
                     <div className="col">
-                        <Button label="TopLeft" icon="pi pi-arrow-down-right" onClick={() => onClick('displayPosition', 'top-left')} className="p-button-warning" />
-                        <Button label="Top" icon="pi pi-arrow-down" onClick={() => onClick('displayPosition', 'top')} className="p-button-warning" />
-                        <Button label="TopRight" icon="pi pi-arrow-down-left" onClick={() => onClick('displayPosition', 'top-right')} className="p-button-warning" />
+                        <Button label="TopLeft" icon="pi pi-arrow-down-right" onClick={() => onClick('displayPosition', 'top-left')} className="p-button-warning mr-2 mb-2 line-height-3" style={{ minWidth: '10rem' }} />
+                        <Button label="Top" icon="pi pi-arrow-down" onClick={() => onClick('displayPosition', 'top')} className="p-button-warning mr-2 mb-2 line-height-3" style={{ minWidth: '10rem' }} />
+                        <Button label="TopRight" icon="pi pi-arrow-down-left" onClick={() => onClick('displayPosition', 'top-right')} className="p-button-warning mr-2 mb-2 line-height-3" style={{ minWidth: '10rem' }} />
                     </div>
                     <div className="col">
-                        <Button label="BottomLeft" icon="pi pi-arrow-up-right" onClick={() => onClick('displayPosition', 'bottom-left')} className="p-button-success" />
-                        <Button label="Bottom" icon="pi pi-arrow-up" onClick={() => onClick('displayPosition', 'bottom')} className="p-button-success" />
-                        <Button label="BottomRight" icon="pi pi-arrow-up-left" onClick={() => onClick('displayPosition', 'bottom-right')} className="p-button-success" />
+                        <Button label="BottomLeft" icon="pi pi-arrow-up-right" onClick={() => onClick('displayPosition', 'bottom-left')} className="p-button-success mr-2 mb-2 line-height-3" style={{ minWidth: '10rem' }} />
+                        <Button label="Bottom" icon="pi pi-arrow-up" onClick={() => onClick('displayPosition', 'bottom')} className="p-button-success mr-2 mb-2 line-height-3" style={{ minWidth: '10rem' }} />
+                        <Button label="BottomRight" icon="pi pi-arrow-up-left" onClick={() => onClick('displayPosition', 'bottom-right')} className="p-button-success mr-2 mr-2 mb-2 line-height-3" style={{ minWidth: '10rem' }} />
                     </div>
                 </div>
 

@@ -19,6 +19,7 @@ export function ClosableDoc(props) {
         `,
         javascript: `
 import { TabView, TabPanel } from 'primereact/tabview';
+import './TabViewDemo.css';
 
 export default function ClosableDoc() {
 
@@ -39,6 +40,7 @@ export default function ClosableDoc() {
         `,
         typescript: `
 import { TabView, TabPanel } from 'primereact/tabview';
+import './TabViewDemo.css';
 
 export default function ClosableDoc() {
 
@@ -56,7 +58,15 @@ export default function ClosableDoc() {
         </TabView>
     )
 }
-        `
+        `,
+        css: `
+/* TabViewDemo.css */
+
+.tabview-demo .p-tabview p {
+    line-height: 1.5;
+    margin: 0;
+}
+`
     };
 
     return (

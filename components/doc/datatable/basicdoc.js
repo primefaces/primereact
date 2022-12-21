@@ -26,9 +26,9 @@ export function BasicDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
-const BasicDoc = () => {
+export default function BasicDemo() {
     const [products, setProducts] = useState([]);
     const productService = new ProductService();
 
@@ -54,9 +54,9 @@ const BasicDoc = () => {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
-const BasicDoc = () => {
+export default function BasicDemo() {
     const [products, setProducts] = useState([]);
     const productService = new ProductService();
 
@@ -93,7 +93,13 @@ const BasicDoc = () => {
                     <Column field="quantity" header="Quantity"></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode
+                code={code}
+                service={['ProductService']}
+                data={['products-mini']}
+                title="PrimeReact DataTable Demo"
+                description="DataTable requires a collection to display along with column components for the representation of the data."
+            />
         </>
     );
 }

@@ -124,19 +124,17 @@ export default function BasicDoc() {
         css: `
 /* DockDemo.css */
 
-.dock-demo {
-    .dock-window {
-        width: 100%;
-        height: 450px;
-        position: relative;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-
-    .p-dock {
-        z-index: 1000;
-    }
-}    
+.dock-demo .dock-window {
+    width: 100%;
+    height: 450px;
+    position: relative;
+    background-image: url('../../assets/images/dock/window.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.dock-demo .p-dock {
+    z-index: 1000;
+}  
     `
     };
 

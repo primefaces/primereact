@@ -81,22 +81,7 @@ const ImageDemo = () => {
                 <DocActions github="image/index.js" />
             </div>
 
-            {/* <div className="content-section implementation">
-                <div className="card">
-                    <h5>Basic</h5>
-                    <Image src={`${contextPath}/images/galleria/galleria7.jpg`} alt="Image" width="250" />
-
-                    <h5>Preview and Zoom</h5>
-                    <Image src={`${contextPath}/images/galleria/galleria12.jpg`} alt="Image" width="250" preview />
-
-                    <h5>Thumbnail</h5>
-                    <Image src={`${contextPath}/images/galleria/galleria14s.jpg`} zoomSrc={`${contextPath}/images/galleria/galleria14.jpg`} alt="Image" width="80" height="60" preview />
-                </div>
-            </div>
-
-            <ImageDoc></ImageDoc> */}
-
-            <div className="content-section doc button-demo">
+            <div className="content-section doc">
                 <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>
