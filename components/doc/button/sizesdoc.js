@@ -11,27 +11,50 @@ export function SizesDoc(props) {
         `,
         javascript: `
 import { Button } from 'primereact/button';
+import './ButtonDemo.css';
 
 export default function SizesDoc() {
 
     return (
-        <Button label="Small" icon="pi pi-check" className="p-button-sm" />
-        <Button label="Normal" icon="pi pi-check" className="p-button" />
-        <Button label="Large" icon="pi pi-check" className="p-button-lg" />
+        <div className="card flex flex-column lg:flex-row align-items-center justify-content-center button-demo">
+            <Button label="Small" icon="pi pi-check" className="p-button-sm" />
+            <Button label="Normal" icon="pi pi-check" className="p-button" />
+            <Button label="Large" icon="pi pi-check" className="p-button-lg" />
+        </div>
     )
 }
         `,
         typescript: `
 import { Button } from 'primereact/button';
+import './ButtonDemo.css';
 
 export default function SizesDoc() {
 
     return (
-        <Button label="Small" icon="pi pi-check" className="p-button-sm" />
-        <Button label="Normal" icon="pi pi-check" className="p-button" />
-        <Button label="Large" icon="pi pi-check" className="p-button-lg" />
+        <div className="card flex flex-column lg:flex-row align-items-center justify-content-center button-demo">
+            <Button label="Small" icon="pi pi-check" className="p-button-sm" />
+            <Button label="Normal" icon="pi pi-check" className="p-button" />
+            <Button label="Large" icon="pi pi-check" className="p-button-lg" />
+        </div>
     )
 }
+        `,
+        css: `
+/* ButtonDemo.css */
+
+.button-demo .p-button {
+    margin-right: 0.5rem;
+}
+
+@media screen and (max-width: 960px) {
+    .button-demo .p-button {
+        margin-bottom: 0.5rem;
+    }
+    .button-demo .p-button:not(.p-button-icon-only) {
+        display: flex;
+        width: 100%;
+    }
+}         
         `
     };
 

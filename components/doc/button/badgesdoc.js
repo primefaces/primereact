@@ -10,25 +10,48 @@ export function BadgesDoc(props) {
         `,
         javascript: `
 import { Button } from 'primereact/button';
+import './ButtonDemo.css';
 
 export default function BadgesDoc() {
 
     return (
-        <Button type="button" label="Emails" badge="8" />
-        <Button type="button" label="Messages" icon="pi pi-users" className="p-button-warning" badge="8" badgeClassName="p-badge-danger" />
+        <div className="card flex flex-column lg:flex-row align-items-center justify-content-center button-demo">
+            <Button type="button" label="Emails" badge="8" />
+            <Button type="button" label="Messages" icon="pi pi-users" className="p-button-warning" badge="8" badgeClassName="p-badge-danger" />
+        </div>
     )
 }
         `,
         typescript: `
 import { Button } from 'primereact/button';
+import './ButtonDemo.css';
 
 export default function BadgesDoc() {
 
     return (
-        <Button type="button" label="Emails" badge="8" />
-        <Button type="button" label="Messages" icon="pi pi-users" className="p-button-warning" badge="8" badgeClassName="p-badge-danger" />
+        <div className="card flex flex-column lg:flex-row align-items-center justify-content-center button-demo">
+            <Button type="button" label="Emails" badge="8" />
+            <Button type="button" label="Messages" icon="pi pi-users" className="p-button-warning" badge="8" badgeClassName="p-badge-danger" />
+        </div>
     )
 }
+        `,
+        css: `
+/* ButtonDemo.css */
+
+.button-demo .p-button {
+    margin-right: 0.5rem;
+}
+
+@media screen and (max-width: 960px) {
+    .button-demo .p-button {
+        margin-bottom: 0.5rem;
+    }
+    .button-demo .p-button:not(.p-button-icon-only) {
+        display: flex;
+        width: 100%;
+    }
+}                
         `
     };
 

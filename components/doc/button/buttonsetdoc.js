@@ -11,27 +11,60 @@ export function ButtonSetDoc(props) {
         `,
         javascript: `
 import { Button } from 'primereact/button';
+import './ButtonDemo.css';
 
 export default function ButtonSetDoc() {
 
     return (
-        <Button label="Save" icon="pi pi-check" />
-        <Button label="Delete" icon="pi pi-trash" />
-        <Button label="Cancel" icon="pi pi-times" />
+        <div className="card flex flex-column lg:flex-row align-items-center justify-content-center">
+            <span className="p-buttonset">
+                <Button label="Save" icon="pi pi-check" />
+                <Button label="Delete" icon="pi pi-trash" />
+                <Button label="Cancel" icon="pi pi-times" />
+            </span>
+        </div>
     )
 }
         `,
         typescript: `
 import { Button } from 'primereact/button';
+import './ButtonDemo.css';
 
 export default function ButtonSetDoc() {
 
     return (
-        <Button label="Save" icon="pi pi-check" />
-        <Button label="Delete" icon="pi pi-trash" />
-        <Button label="Cancel" icon="pi pi-times" />
+        <div className="card flex flex-column lg:flex-row align-items-center justify-content-center">
+            <span className="p-buttonset">
+                <Button label="Save" icon="pi pi-check" />
+                <Button label="Delete" icon="pi pi-trash" />
+                <Button label="Cancel" icon="pi pi-times" />
+            </span>
+        </div>
     )
 }
+        `,
+        css: `
+/* ButtonDemo.css */
+
+.button-demo .p-button {
+    margin-right: 0.5rem;
+}
+.button-demo .p-buttonset .p-button {
+    margin-right: 0;
+}
+
+@media screen and (max-width: 960px) {
+    .button-demo .p-button {
+        margin-bottom: 0.5rem;
+    }
+    .button-demo .p-button:not(.p-button-icon-only) {
+        display: flex;
+        width: 100%;
+    }
+    .button-demo .p-buttonset .p-button {
+        margin-bottom: 0;
+    }
+}         
         `
     };
 
@@ -40,10 +73,12 @@ export default function ButtonSetDoc() {
             <DocSectionText {...props}>
                 <p>Button Set</p>
             </DocSectionText>
-            <div className="card flex flex-column lg:flex-row align-items-center justify-content-center p-buttonset">
-                <Button label="Save" icon="pi pi-check" />
-                <Button label="Delete" icon="pi pi-trash" />
-                <Button label="Cancel" icon="pi pi-times" />
+            <div className="card flex flex-column lg:flex-row align-items-center justify-content-center">
+                <span className="p-buttonset">
+                    <Button label="Save" icon="pi pi-check" />
+                    <Button label="Delete" icon="pi pi-trash" />
+                    <Button label="Cancel" icon="pi pi-times" />
+                </span>
             </div>
             <DocSectionCode code={code} />
         </>
