@@ -15,35 +15,61 @@ export function RaisedButtonsDoc(props) {
         `,
         javascript: `
 import { Button } from 'primereact/button';
+import './ButtonDemo.css';
 
 export default function RaisedButtonsDoc() {
 
     return (
-        <Button label="Primary" className="p-button-raised" />
-        <Button label="Secondary" className="p-button-raised p-button-secondary" />
-        <Button label="Success" className="p-button-raised p-button-success" />
-        <Button label="Info" className="p-button-raised p-button-info" />
-        <Button label="Warning" className="p-button-raised p-button-warning" />
-        <Button label="Help" className="p-button-raised p-button-help" />
-        <Button label="Danger" className="p-button-raised p-button-danger" />
+        <div className="card flex flex-column lg:flex-row align-items-center justify-content-center button-demo">
+            <Button label="Primary" className="p-button-raised" />
+            <Button label="Secondary" className="p-button-raised p-button-secondary" />
+            <Button label="Success" className="p-button-raised p-button-success" />
+            <Button label="Info" className="p-button-raised p-button-info" />
+            <Button label="Warning" className="p-button-raised p-button-warning" />
+            <Button label="Help" className="p-button-raised p-button-help" />
+            <Button label="Danger" className="p-button-raised p-button-danger" />
+        </div>
     )
 }
         `,
         typescript: `
 import { Button } from 'primereact/button';
+import './ButtonDemo.css';
 
 export default function RaisedButtonsDoc() {
 
     return (
-        <Button label="Primary" className="p-button-raised" />
-        <Button label="Secondary" className="p-button-raised p-button-secondary" />
-        <Button label="Success" className="p-button-raised p-button-success" />
-        <Button label="Info" className="p-button-raised p-button-info" />
-        <Button label="Warning" className="p-button-raised p-button-warning" />
-        <Button label="Help" className="p-button-raised p-button-help" />
-        <Button label="Danger" className="p-button-raised p-button-danger" />
+        <div className="card flex flex-column lg:flex-row align-items-center justify-content-center button-demo">
+            <Button label="Primary" className="p-button-raised" />
+            <Button label="Secondary" className="p-button-raised p-button-secondary" />
+            <Button label="Success" className="p-button-raised p-button-success" />
+            <Button label="Info" className="p-button-raised p-button-info" />
+            <Button label="Warning" className="p-button-raised p-button-warning" />
+            <Button label="Help" className="p-button-raised p-button-help" />
+            <Button label="Danger" className="p-button-raised p-button-danger" />
+        </div>
     )
 }
+        `,
+        css: `
+/* ButtonDemo.css */
+
+.button-demo .p-button {
+    margin-right: 0.5rem;
+}
+.button-demo .p-buttonset .p-button {
+    margin-right: 0;
+}
+
+@media screen and (max-width: 960px) {
+    .button-demo .p-button {
+        margin-bottom: 0.5rem;
+    }
+    .button-demo .p-button:not(.p-button-icon-only) {
+        display: flex;
+        width: 100%;
+    }
+}         
         `
     };
 

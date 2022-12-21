@@ -173,27 +173,21 @@ export const TerminalDoc = () => {
         `,
 
         css: `
-.terminal-demo {
-    p {
-        margin-top: 0;
-    }
-
-    .p-terminal {
-        background-color: #212121;
-        color: #ffffff;
-
-        .p-terminal-command {
-            color: #80CBC4;
-        }
-
-        .p-terminal-prompt {
-            color: #FFD54F;
-        }
-
-        .p-terminal-response {
-            color: #9FA8DA;
-        }
-    }
+.terminal-demo p {
+    margin-top: 0;
+}
+.terminal-demo .p-terminal {
+    background-color: #212121;
+    color: #fff;
+}
+.terminal-demo .p-terminal .p-terminal-command {
+    color: #80cbc4;
+}
+.terminal-demo .p-terminal .p-terminal-prompt {
+    color: #ffd54f;
+}
+.terminal-demo .p-terminal .p-terminal-response {
+    color: #9fa8da;
 }
     `
     };

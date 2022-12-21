@@ -917,114 +917,81 @@ export default function AdvanceDoc() {
 }
         `,
         css: `
-.dock-demo {
-    .dock-window {
-        width: 100%;
-        height: 450px;
-        position: relative;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-
-    .p-dock {
-        z-index: 1000;
-    }
-
-    .dock-advanced {
-        .p-dialog-mask,
-        .p-galleria-mask,
-        .p-galleria-mask .p-galleria-item-nav,
-        .p-toast {
-            position: absolute;
-        }
-
-        .p-dialog {
-            .p-dialog-header {
-                padding: .2rem;
-            }
-
-            .p-dialog-content {
-                padding: 0;
-            }
-
-            p {
-                margin-top: 0;
-            }
-
-            .p-terminal {
-                background-color: #212121;
-                color: #ffffff;
-                border: 0 none;
-                min-height: 18rem;
-                height: 100%;
-
-                .p-terminal-command {
-                    color: #80CBC4;
-                }
-
-                .p-terminal-prompt {
-                    color: #FFD54F;
-                }
-
-                .p-terminal-response {
-                    color: #9FA8DA;
-                }
-            }
-
-            .p-tree {
-                height: 100%;
-                border-radius: 0;
-                border-left-width: 0;
-                border-right-width: 0;
-                border-bottom-width: 0;
-            }
-        }
-
-        .p-toast {
-            top: 20px;
-        }
-    }
-
-    .p-menubar {
-        padding-top: 0;
-        padding-bottom: 0;
-        border-radius: 0;
-
-        .menubar-root {
-            font-weight: bold;
-            padding: 0 1rem;
-        }
-
-        .p-menuitem-link {
-            padding: 0.5rem .75rem;
-        }
-
-        .p-menubar-root-list > .p-menuitem > .p-menuitem-link {
-            padding: 0.5rem .75rem;
-
-            > .p-submenu-icon {
-                display: none;
-            }
-        }
-
-        .p-menubar-end {
-            span, i {
-                padding: 0 .75rem;
-            }
-        }
-    }
+.dock-demo .dock-window {
+    width: 100%;
+    height: 450px;
+    position: relative;
+    background-image: url('../../assets/images/dock/window.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
-
-.dark-tooltip {
-    .p-tooltip {
-        .p-tooltip-arrow {
-            border-top-color: var(--surface-900);
-        }
-
-        .p-tooltip-text {
-            background-color: var(--surface-900);
-        }
-    }
+.dock-demo .p-dock {
+    z-index: 1000;
+}
+.dock-demo .dock-advanced .p-dialog-mask, .dock-demo .dock-advanced .p-galleria-mask, .dock-demo .dock-advanced .p-galleria-mask .p-galleria-item-nav, .dock-demo .dock-advanced .p-toast {
+    position: absolute;
+}
+.dock-demo .dock-advanced .p-dialog .p-dialog-header {
+    padding: 0.2rem;
+}
+.dock-demo .dock-advanced .p-dialog .p-dialog-content {
+    padding: 0;
+}
+.dock-demo .dock-advanced .p-dialog p {
+    margin-top: 0;
+}
+.dock-demo .dock-advanced .p-dialog .p-terminal {
+    background-color: #212121;
+    color: #fff;
+    border: 0 none;
+    min-height: 18rem;
+    height: 100%;
+}
+.dock-demo .dock-advanced .p-dialog .p-terminal .p-terminal-command {
+    color: #80cbc4;
+}
+.dock-demo .dock-advanced .p-dialog .p-terminal .p-terminal-prompt {
+    color: #ffd54f;
+}
+.dock-demo .dock-advanced .p-dialog .p-terminal .p-terminal-response {
+    color: #9fa8da;
+}
+.dock-demo .dock-advanced .p-dialog .p-tree {
+    height: 100%;
+    border-radius: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+}
+.dock-demo .dock-advanced .p-toast {
+    top: 20px;
+}
+.dock-demo .p-menubar {
+    padding-top: 0;
+    padding-bottom: 0;
+    border-radius: 0;
+}
+.dock-demo .p-menubar .menubar-root {
+    font-weight: bold;
+    padding: 0 1rem;
+}
+.dock-demo .p-menubar .p-menuitem-link {
+    padding: 0.5rem 0.75rem;
+}
+.dock-demo .p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link {
+    padding: 0.5rem 0.75rem;
+}
+.dock-demo .p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link > .p-submenu-icon {
+    display: none;
+}
+.dock-demo .p-menubar .p-menubar-end span, .dock-demo .p-menubar .p-menubar-end i {
+    padding: 0 0.75rem;
+}
+.dark-tooltip .p-tooltip .p-tooltip-arrow {
+    border-top-color: var(--surface-900);
+}
+.dark-tooltip .p-tooltip .p-tooltip-text {
+    background-color: var(--surface-900);
 }
     `
     };
