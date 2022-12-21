@@ -26,7 +26,7 @@ export function BasicDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 export default function BasicDemo() {
     const [products, setProducts] = useState([]);
@@ -54,7 +54,7 @@ export default function BasicDemo() {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 export default function BasicDemo() {
     const [products, setProducts] = useState([]);

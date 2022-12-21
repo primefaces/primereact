@@ -1,4 +1,5 @@
 import sdk from '@stackblitz/sdk';
+import { data, services } from './data';
 import { getCRA } from './templates';
 
 const useCodeSandbox = (props) => {
@@ -16,6 +17,22 @@ const useCodeSandbox = (props) => {
         files[sourceFileName] = {
             content
         };
+
+        if (props.service) {
+            props.service.forEach((name) => {
+                files[`${path}service/${name}${fileExtension}`] = {
+                    content: services[name]
+                };
+            });
+        }
+
+        if (props.data) {
+            props.data.forEach((name) => {
+                files[`public/data/${name}.json`] = {
+                    content: data[name]
+                };
+            });
+        }
 
         files['sandbox.config.json'] = {
             content: {
@@ -63,6 +80,22 @@ const useStackBlitz = (props) => {
         files[sourceFileName] = {
             content
         };
+
+        if (props.service) {
+            props.service.forEach((name) => {
+                files[`${path}service/${name}${fileExtension}`] = {
+                    content: services[name]
+                };
+            });
+        }
+
+        if (props.data) {
+            props.data.forEach((name) => {
+                files[`public/data/${name}.json`] = {
+                    content: data[name]
+                };
+            });
+        }
 
         return { files, dependencies, sourceFileName };
     };
