@@ -71,6 +71,7 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
 }
 
 export declare class InputNumber extends React.Component<InputNumberProps, any> {
+    public focus(): void;
     public getFormatter(): any;
     public getElement(): HTMLSpanElement;
     public getInput(): typeof InputText;

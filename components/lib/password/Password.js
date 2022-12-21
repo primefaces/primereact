@@ -5,7 +5,7 @@ import { useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 
 export const Password = React.memo(
     React.forwardRef((props, ref) => {
@@ -208,6 +208,7 @@ export const Password = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            focus: () => DomHandler.focus(inputRef.current),
             getElement: () => elementRef.current,
             getOverlay: () => overlayRef.current,
             getInput: () => inputRef.current

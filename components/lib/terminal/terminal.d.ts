@@ -7,5 +7,6 @@ export interface TerminalProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
 }
 
 export declare class Terminal extends React.Component<TerminalProps, any> {
+    public focus(): void;
     public getElement(): HTMLDivElement;
 }

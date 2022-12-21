@@ -4,7 +4,7 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 import { CascadeSelectSub } from './CascadeSelectSub';
 
 export const CascadeSelect = React.memo(
@@ -196,7 +196,8 @@ export const CascadeSelect = React.memo(
             getElement: () => elementRef.current,
             getOverlay: () => overlayRef.current,
             getInput: () => inputRef.current,
-            getLabel: () => labelRef.current
+            getLabel: () => labelRef.current,
+            focus: () => DomHandler.focus(inputRef.current)
         }));
 
         React.useEffect(() => {

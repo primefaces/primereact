@@ -29,6 +29,7 @@ export interface EditorProps extends Omit<React.DetailedHTMLProps<React.InputHTM
 }
 
 export declare class Editor extends React.Component<EditorProps, any> {
+    public focus(): void;
     public getQuill(): any;
     public getElement(): HTMLDivElement;
     public getContent(): HTMLDivElement;

@@ -5,7 +5,7 @@ import { useMountEffect, useOverlayListener, usePrevious, useUnmountEffect, useU
 import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, mask, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mask } from '../utils/Utils';
 import { CalendarPanel } from './CalendarPanel';
 
 export const Calendar = React.memo(
@@ -2548,6 +2548,7 @@ export const Calendar = React.memo(
             getCurrentDateTime,
             getViewDate,
             updateViewDate,
+            focus: () => DomHandler.focus(inputRef.current),
             getElement: () => elementRef.current,
             getOverlay: () => overlayRef.current,
             getInput: () => inputRef.current

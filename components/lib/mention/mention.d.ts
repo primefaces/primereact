@@ -58,6 +58,7 @@ export interface MentionProps extends Omit<React.DetailedHTMLProps<React.Textare
 }
 
 export declare class Mention extends React.Component<MentionProps, any> {
+    public focus(): void;
     public getElement(): HTMLDivElement;
     public getInput(): typeof InputTextarea;
     public getOverlay(): HTMLElement;

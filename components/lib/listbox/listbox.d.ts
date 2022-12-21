@@ -88,6 +88,7 @@ export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHT
 }
 
 export declare class ListBox extends React.Component<ListBoxProps, any> {
+    public focus(): void;
     public getElement(): HTMLDivElement;
     public getVirtualScroller(): VirtualScroller;
 }

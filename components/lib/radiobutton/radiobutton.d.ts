@@ -33,6 +33,7 @@ export interface RadioButtonProps extends Omit<React.DetailedHTMLProps<React.Inp
 }
 
 export declare class RadioButton extends React.Component<RadioButtonProps, any> {
+    public focus(): void;
     public select(e?: React.SyntheticEvent): void;
     public getElement(): HTMLDivElement;
     public getInput(): HTMLInputElement;

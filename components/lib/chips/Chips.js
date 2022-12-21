@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 
 export const Chips = React.memo(
     React.forwardRef((props, ref) => {
@@ -185,6 +185,7 @@ export const Chips = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            focus: () => DomHandler.focus(inputRef.current),
             getElement: () => elementRef.current,
             getInput: () => inputRef.current
         }));

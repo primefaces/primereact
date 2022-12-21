@@ -39,5 +39,6 @@ export interface InputMaskProps extends Omit<InputTextProps, 'onChange'> {
 }
 
 export declare class InputMask extends React.Component<InputMaskProps, any> {
+    public focus(): void;
     public getElement(): typeof InputText;
 }

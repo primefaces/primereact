@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 
 export const ToggleButton = React.memo(
     React.forwardRef((props, ref) => {
@@ -49,6 +49,7 @@ export const ToggleButton = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            focus: () => DomHandler.focusFirstElement(elementRef.current),
             getElement: () => elementRef.current
         }));
 

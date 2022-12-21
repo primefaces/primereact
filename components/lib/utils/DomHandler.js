@@ -818,6 +818,22 @@ export default class DomHandler {
         el && document.activeElement !== el && el.focus({ preventScroll });
     }
 
+    /**
+     * Focus the first focusable element if it does not already have focus.
+     *
+     * @param {HTMLElement} el a HTML element
+     * @param {boolean} scrollTo flag to control whether to scroll to the element, false by default
+     * @return {HTMLElement | undefined} the first focusable HTML element found
+     */
+    static focusFirstElement(el, scrollTo) {
+        if (!el) return;
+        const firstFocusableElement = DomHandler.getFirstFocusableElement(el);
+
+        firstFocusableElement && DomHandler.focus(firstFocusableElement, scrollTo);
+
+        return firstFocusableElement;
+    }
+
     static getCursorOffset(el, prevText, nextText, currentText) {
         if (el) {
             let style = getComputedStyle(el);

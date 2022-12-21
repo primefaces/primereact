@@ -90,16 +90,10 @@ export const SelectButton = React.memo(
             return null;
         };
 
-        const focus = () => {
-            const firstFocusableElement = DomHandler.getFirstFocusableElement(elementRef.current);
-
-            firstFocusableElement && firstFocusableElement.focus();
-        };
-
         React.useImperativeHandle(ref, () => ({
             props,
-            getElement: () => elementRef.current,
-            focus
+            focus: () => DomHandler.focusFirstElement(elementRef.current),
+            getElement: () => elementRef.current
         }));
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
