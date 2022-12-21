@@ -44,7 +44,7 @@ export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputH
 }
 
 export declare class Checkbox extends React.Component<CheckboxProps, any> {
+    public focus(): void;
     public getElement(): HTMLDivElement;
     public getInput(): HTMLInputElement;
-    public focus(): void;
 }

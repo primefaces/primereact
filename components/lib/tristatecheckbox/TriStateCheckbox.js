@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 
 export const TriStateCheckbox = React.memo(
     React.forwardRef((props, ref) => {
@@ -51,8 +51,16 @@ export const TriStateCheckbox = React.memo(
             }
         };
 
+        const focus = () => {
+            const firstFocusableElement = DomHandler.getFirstFocusableElement(elementRef.current);
+
+            firstFocusableElement && firstFocusableElement.focus();
+            onFocus();
+        };
+
         React.useImperativeHandle(ref, () => ({
             props,
+            focus,
             getElement: () => elementRef.current
         }));
 

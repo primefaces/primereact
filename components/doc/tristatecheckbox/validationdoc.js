@@ -26,7 +26,7 @@ export function ValidationDoc(props) {
     render={({ field, fieldState }) => (
         <>
             <label htmlFor={field.name} className={classNames({ 'p-error': errors.name })}>Accept*</label>
-            <TriStateCheckbox id={field.name} value={field.value} onChange={field.onChange}  className={classNames({ 'p-invalid': fieldState.error })} />
+            <TriStateCheckbox id={field.name} value={field.value} onChange={field.onChange} ref={field.ref} className={classNames({ 'p-invalid': fieldState.error })} />
             {getFormErrorMessage(field.name)}
         </>
     )}
@@ -65,7 +65,7 @@ export default function ValidationDemo() {
                             <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.accept })}>
                                 Accept*
                             </label>
-                            <TriStateCheckbox id={field.name} value={field.value} onChange={field.onChange}  className={classNames({ 'p-invalid': fieldState.error })} />
+                            <TriStateCheckbox id={field.name} value={field.value} onChange={field.onChange} ref={field.ref} className={classNames({ 'p-invalid': fieldState.error })} />
                             {getFormErrorMessage(field.name)}
                         </>
                     )}
@@ -109,7 +109,7 @@ export default function InvalidDemo() {
                             <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.accept })}>
                                 Accept*
                             </label>
-                            <TriStateCheckbox id={field.name} value={field.value} onChange={field.onChange}  className={classNames({ 'p-invalid': fieldState.error })} />
+                            <TriStateCheckbox id={field.name} value={field.value} onChange={field.onChange} ref={field.ref} className={classNames({ 'p-invalid': fieldState.error })} />
                             {getFormErrorMessage(field.name)}
                         </>
                     )}
@@ -142,7 +142,7 @@ export default function InvalidDemo() {
                                         <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.accept })}>
                                             Accept*
                                         </label>
-                                        <TriStateCheckbox id={field.name} value={field.value} onChange={field.onChange} className={classNames({ 'p-invalid': fieldState.error })} />
+                                        <TriStateCheckbox id={field.name} value={field.value} ref={field.ref} onChange={field.onChange} className={classNames({ 'p-invalid': fieldState.error })} />
                                         {getFormErrorMessage(field.name)}
                                     </>
                                 )}

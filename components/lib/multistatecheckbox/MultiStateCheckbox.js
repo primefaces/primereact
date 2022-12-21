@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 
 export const MultiStateCheckbox = React.memo(
     React.forwardRef((props, ref) => {
@@ -80,6 +80,7 @@ export const MultiStateCheckbox = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            focus: () => setFocusedState(true),
             getElement: () => elementRef.current
         }));
 

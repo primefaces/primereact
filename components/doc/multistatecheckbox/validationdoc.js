@@ -32,7 +32,7 @@ export function ValidationDoc(props) {
     render={({ field, fieldState }) => (
         <>
             <label htmlFor={field.name} className={classNames({ 'p-error': errors.name })}>Level*</label>
-            <MultiStateCheckbox id={field.name} value={field.value} onChange={field.onChange} options={options} optionValue="value" className={classNames({ 'p-invalid': fieldState.error })} />
+            <MultiStateCheckbox id={field.name} value={field.value} onChange={field.onChange} ref={field.ref} options={options} optionValue="value" className={classNames({ 'p-invalid': fieldState.error })} />
             {getFormErrorMessage(field.name)}
         </>
     )}
@@ -77,7 +77,7 @@ export default function ValidationDemo() {
                             <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.level })}>
                                 Level*
                             </label>
-                            <MultiStateCheckbox id={field.name} value={field.value} onChange={field.onChange} options={options} optionValue="value" className={classNames({ 'p-invalid': fieldState.error })} />
+                            <MultiStateCheckbox id={field.name} value={field.value} ref={field.ref} onChange={field.onChange} options={options} optionValue="value" className={classNames({ 'p-invalid': fieldState.error })} />
                             {getFormErrorMessage(field.name)}
                         </>
                     )}
@@ -127,7 +127,7 @@ export default function InvalidDemo() {
                             <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.level })}>
                                 Level*
                             </label>
-                            <MultiStateCheckbox id={field.name} value={field.value} onChange={field.onChange} options={options} optionValue="value" className={classNames({ 'p-invalid': fieldState.error })} />
+                            <MultiStateCheckbox id={field.name} value={field.value} ref={field.ref} onChange={field.onChange} options={options} optionValue="value" className={classNames({ 'p-invalid': fieldState.error })} />
                             {getFormErrorMessage(field.name)}
                         </>
                     )}
@@ -160,7 +160,7 @@ export default function InvalidDemo() {
                                         <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.level })}>
                                             Level*
                                         </label>
-                                        <MultiStateCheckbox id={field.name} value={field.value} onChange={field.onChange} options={options} optionValue="value" className={classNames({ 'p-invalid': fieldState.error })} />
+                                        <MultiStateCheckbox id={field.name} value={field.value} ref={field.ref} onChange={field.onChange} options={options} optionValue="value" className={classNames({ 'p-invalid': fieldState.error })} />
                                         {getFormErrorMessage(field.name)}
                                     </>
                                 )}

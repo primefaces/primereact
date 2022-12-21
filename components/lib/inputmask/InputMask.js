@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputText } from '../inputtext/InputText';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 
 export const InputMask = React.memo(
     React.forwardRef((props, ref) => {
@@ -538,6 +538,7 @@ export const InputMask = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            focus: () => DomHandler.focus(elementRef.current),
             getElement: () => elementRef.current
         }));
 

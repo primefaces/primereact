@@ -1,6 +1,6 @@
 import * as React from 'react';
-import TooltipOptions from '../tooltip/tooltipoptions';
 import { KeyFilterType } from '../keyfilter';
+import TooltipOptions from '../tooltip/tooltipoptions';
 
 type ChipsRemovableType = boolean | ((options: ChipsRemovableOptions) => boolean);
 
@@ -59,6 +59,7 @@ export interface ChipsProps extends Omit<React.DetailedHTMLProps<React.InputHTML
 }
 
 export declare class Chips extends React.Component<ChipsProps, any> {
+    public focus(): void;
     public getElement(): HTMLDivElement;
     public getInput(): HTMLInputElement;
 }
