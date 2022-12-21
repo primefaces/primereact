@@ -1,4 +1,44 @@
 const services = {
+    CarService: `
+export class CarService {
+    brands = ['Vapid', 'Carson', 'Kitano', 'Dabver', 'Ibex', 'Morello', 'Akira', 'Titan', 'Dover', 'Norma'];
+
+    colors = ['Black', 'White', 'Red', 'Blue', 'Silver', 'Green', 'Yellow'];
+
+    generateCar(id) {
+        return {
+            id,
+            vin: this.generateVin(),
+            brand: this.generateBrand(),
+            color: this.generateColor(),
+            year: this.generateYear()
+        };
+    }
+
+    generateVin() {
+        let text = '';
+        let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+        for (let i = 0; i < 5; i++) {
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+        }
+
+        return text;
+    }
+
+    generateBrand() {
+        return this.brands[Math.floor(Math.random() * Math.floor(10))];
+    }
+
+    generateColor() {
+        return this.colors[Math.floor(Math.random() * Math.floor(7))];
+    }
+
+    generateYear() {
+        return 2000 + Math.floor(Math.random() * Math.floor(19));
+    }
+}
+    `,
     CountryService: `
 export class CountryService {
 
@@ -72,6 +112,10 @@ export class PhotoService {
     ProductService: `
 export class ProductService {
 
+    getProductsMini() {
+        return fetch('data/products-mini.json').then(res => res.json()).then(d => d.data);
+    }
+
     getProductsSmall() {
         return fetch('data/products-small.json').then(res => res.json()).then(d => d.data);
     }
@@ -82,47 +126,6 @@ export class ProductService {
 
     getProductsWithOrdersSmall() {
         return fetch('data/products-orders-small.json').then(res => res.json()).then(d => d.data);
-    }
-}
-    `,
-    CarService: `
-export class CarService {
-
-    brands = ['Vapid', 'Carson', 'Kitano', 'Dabver', 'Ibex', 'Morello', 'Akira', 'Titan', 'Dover', 'Norma'];
-
-    colors = ['Black', 'White', 'Red', 'Blue', 'Silver', 'Green', 'Yellow'];
-
-    generateCar(id) {
-        return {
-            id,
-            vin: this.generateVin(),
-            brand: this.generateBrand(),
-            color: this.generateColor(),
-            year: this.generateYear()
-        }
-    }
-
-    generateVin() {
-        let text = "";
-        let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-        for (let i = 0; i < 5; i++) {
-            text += possible.charAt(Math.floor(Math.random() * possible.length));
-        }
-
-        return text;
-    }
-
-    generateBrand() {
-        return this.brands[Math.floor(Math.random() * Math.floor(10))];
-    }
-
-    generateColor() {
-        return this.colors[Math.floor(Math.random() * Math.floor(7))];
-    }
-
-    generateYear() {
-        return 2000 + Math.floor(Math.random() * Math.floor(19));
     }
 }
     `
@@ -13565,6 +13568,15 @@ const data = {
         {"id": "1027","code": "acvx872gc","name": "Yellow Earbuds","description": "Product Description","image": "yellow-earbuds.jpg","price": 89,"category": "Electronics","quantity": 35,"inventoryStatus": "INSTOCK","rating": 3},
         {"id": "1028","code": "tx125ck42","name": "Yoga Mat","description": "Product Description","image": "yoga-mat.jpg","price": 20,"category": "Fitness","quantity": 15,"inventoryStatus": "INSTOCK","rating": 5},
         {"id": "1029","code": "gwuby345v","name": "Yoga Set","description": "Product Description","image": "yoga-set.jpg","price": 20,"category": "Fitness","quantity": 25,"inventoryStatus": "INSTOCK","rating": 8}
+    ]
+}
+    `,
+    'products-mini': `
+{
+    "data": [
+        {"id": "1000","code": "f230fh0g3","name": "Bamboo Watch","description": "Product Description","image": "bamboo-watch.jpg","price": 65,"category": "Accessories","quantity": 24,"inventoryStatus": "INSTOCK","rating": 5},
+        {"id": "1001","code": "nvklal433","name": "Black Watch","description": "Product Description","image": "black-watch.jpg","price": 72,"category": "Accessories","quantity": 61,"inventoryStatus": "INSTOCK","rating": 4},
+        {"id": "1002","code": "zz21cz3c1","name": "Blue Band","description": "Product Description","image": "blue-band.jpg","price": 79,"category": "Fitness","quantity": 2,"inventoryStatus": "LOWSTOCK","rating": 3}
     ]
 }
     `,
