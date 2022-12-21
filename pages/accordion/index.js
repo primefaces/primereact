@@ -78,7 +78,7 @@ const AccordionDemo = () => {
                 </div>
                 <DocActions github="accordion/index.js" />
             </div>
-            <div className="content-section doc accordion-demo">
+            <div className="content-section doc ">
                 <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>

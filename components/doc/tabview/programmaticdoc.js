@@ -30,6 +30,7 @@ export function ProgrammaticDoc(props) {
 import { useState } from 'react';
 import { TabView, TabPanel } from 'primereact/tabview';
 import { Button } from 'primereact/button';
+import './TabViewDemo.css';
 
 export default function ProgrammaticDoc() {
     const [activeIndex, setActiveIndex] = useState(1);
@@ -58,6 +59,7 @@ export default function ProgrammaticDoc() {
 import { useState } from 'react';
 import { TabView, TabPanel } from 'primereact/tabview';
 import { Button } from 'primereact/button';
+import './TabViewDemo.css';
 
 export default function ProgrammaticDoc() {
     const [activeIndex, setActiveIndex] = useState(1);
@@ -81,7 +83,15 @@ export default function ProgrammaticDoc() {
         </TabView>
     )
 }
-        `
+        `,
+        css: `
+/* TabViewDemo.css */
+
+.tabview-demo .p-tabview p {
+    line-height: 1.5;
+    margin: 0;
+}
+`
     };
 
     return (

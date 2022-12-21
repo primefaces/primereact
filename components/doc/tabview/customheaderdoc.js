@@ -51,6 +51,7 @@ export function CustomHeaderDoc(props) {
 import { TabView, TabPanel } from 'primereact/tabview';
 import { SplitButton } from 'primereact/splitbutton';
 import { Avatar } from 'primereact/avatar';
+import './TabViewDemo.css';
 
 export default function CustomHeaderDoc() {
     const tabHeaderITemplate = (options) => {
@@ -102,6 +103,7 @@ export default function CustomHeaderDoc() {
 import { TabView, TabPanel, TabPanelHeaderTemplateOptions } from 'primereact/tabview';
 import { SplitButton } from 'primereact/splitbutton';
 import { Avatar } from 'primereact/avatar';
+import './TabViewDemo.css';
 
 export default function CustomHeaderDoc() {
     const tabHeaderITemplate = (options: TabPanelHeaderTemplateOptions) => {
@@ -148,7 +150,15 @@ export default function CustomHeaderDoc() {
         </TabView>
     )
 }
-        `
+        `,
+        css: `
+/* TabViewDemo.css */
+
+.tabview-demo .p-tabview p {
+    line-height: 1.5;
+    margin: 0;
+}
+`
     };
 
     return (
