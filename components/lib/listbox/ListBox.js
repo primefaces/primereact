@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FilterService, localeOption } from '../api/Api';
 import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { ListBoxHeader } from './ListBoxHeader';
 import { ListBoxItem } from './ListBoxItem';
@@ -255,6 +255,7 @@ export const ListBox = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            focus: () => DomHandler.focusFirstElement(elementRef.current),
             getElement: () => elementRef.current,
             getVirtualScroller: () => virtualScrollerRef.current
         }));

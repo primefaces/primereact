@@ -80,7 +80,7 @@ export const MultiStateCheckbox = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
-            focus: () => setFocusedState(true),
+            focus: () => DomHandler.focusFirstElement(elementRef.current),
             getElement: () => elementRef.current
         }));
 

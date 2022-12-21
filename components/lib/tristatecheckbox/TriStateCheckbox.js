@@ -51,16 +51,9 @@ export const TriStateCheckbox = React.memo(
             }
         };
 
-        const focus = () => {
-            const firstFocusableElement = DomHandler.getFirstFocusableElement(elementRef.current);
-
-            firstFocusableElement && firstFocusableElement.focus();
-            onFocus();
-        };
-
         React.useImperativeHandle(ref, () => ({
             props,
-            focus,
+            focus: () => DomHandler.focusFirstElement(elementRef.current),
             getElement: () => elementRef.current
         }));
 
