@@ -1,4 +1,5 @@
 import pkg from '../../../../package.json';
+import { data, services } from './data';
 
 const PrimeReact = {
     version: '^8.0.0', // latest
@@ -24,11 +25,13 @@ const ts_dependencies = {
 };
 
 // create-react-app -> https://create-react-app.dev/
-const getCRA = (template = 'javascript', title = 'PrimeReact Demo', description = '') => {
+const getCRA = (props = {}, template = 'javascript') => {
     const path = 'src/';
+    const { code: sources, title = 'PrimeReact Demo', description = '' } = props;
     const isTypeScript = template === 'typescript';
     const dependencies = isTypeScript ? { ...ts_dependencies, ...core_dependencies, 'react-scripts': '5.0.1' } : { ...core_dependencies, 'react-scripts': '5.0.1' };
     const fileExtension = isTypeScript ? '.tsx' : '.js';
+    const sourceFileName = `${path}demo${fileExtension}`;
     const files = {
         'package.json': {
             content: {
@@ -96,8 +99,27 @@ body {
         <div id="root"></div>
     </body>
 </html>`
+        },
+        [`${sourceFileName}`]: {
+            content: sources[template]
         }
     };
+
+    if (props.service) {
+        props.service.forEach((name) => {
+            files[`${path}service/${name}${fileExtension}`] = {
+                content: services[name]
+            };
+        });
+    }
+
+    if (props.data) {
+        props.data.forEach((name) => {
+            files[`public/data/${name}.json`] = {
+                content: data[name]
+            };
+        });
+    }
 
     isTypeScript &&
         (files['tsconfig.json'] = {
@@ -131,7 +153,7 @@ body {
         `
         });
 
-    return { path, fileExtension, files, dependencies };
+    return { files, dependencies, sourceFileName };
 };
 
 export { getCRA };

@@ -1,38 +1,9 @@
 import sdk from '@stackblitz/sdk';
-import { data, services } from './data';
 import { getCRA } from './templates';
 
 const useCodeSandbox = (props) => {
     const getSandboxParameters = (sourceType) => {
-        const { code: sources, title, description } = props;
-        const content = sources[sourceType];
-
-        if (!content) {
-            return null;
-        }
-
-        const { path, fileExtension, files, dependencies } = getCRA(sourceType, title, description);
-        const sourceFileName = `${path}demo${fileExtension}`;
-
-        files[sourceFileName] = {
-            content
-        };
-
-        if (props.service) {
-            props.service.forEach((name) => {
-                files[`${path}service/${name}${fileExtension}`] = {
-                    content: services[name]
-                };
-            });
-        }
-
-        if (props.data) {
-            props.data.forEach((name) => {
-                files[`public/data/${name}.json`] = {
-                    content: data[name]
-                };
-            });
-        }
+        const { files, dependencies, sourceFileName } = getCRA(props, sourceType);
 
         files['sandbox.config.json'] = {
             content: {
@@ -66,39 +37,7 @@ const useCodeSandbox = (props) => {
 };
 
 const useStackBlitz = (props) => {
-    const getStackBlitzParameters = (sourceType) => {
-        const { code: sources, title, description } = props;
-        const content = sources[sourceType];
-
-        if (!content) {
-            return null;
-        }
-
-        const { path, fileExtension, files, dependencies } = getCRA(sourceType, title, description);
-        const sourceFileName = `${path}demo${fileExtension}`;
-
-        files[sourceFileName] = {
-            content
-        };
-
-        if (props.service) {
-            props.service.forEach((name) => {
-                files[`${path}service/${name}${fileExtension}`] = {
-                    content: services[name]
-                };
-            });
-        }
-
-        if (props.data) {
-            props.data.forEach((name) => {
-                files[`public/data/${name}.json`] = {
-                    content: data[name]
-                };
-            });
-        }
-
-        return { files, dependencies, sourceFileName };
-    };
+    const getStackBlitzParameters = (sourceType) => getCRA(props, sourceType);
 
     return (sourceType, errorCallback) => {
         const stackBlitzParameters = getStackBlitzParameters(sourceType);
