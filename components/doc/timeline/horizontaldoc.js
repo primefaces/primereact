@@ -16,12 +16,13 @@ export function HorizontalDoc(props) {
         `,
         javascript: `
 import { Timeline } from 'primereact/timeline';
+import './TimelineDemo.css';
 
 export default function HorizontalDoc() {
     const events = ['2020', '2021', '2022', '2023'];
         
     return (
-        <div className="card">
+        <div className="card timeline-demo">
             <h6>Top Align</h6>
             <Timeline value={events} layout="horizontal" align="top" content={(item) => item} />
         
@@ -36,12 +37,13 @@ export default function HorizontalDoc() {
         `,
         typescript: `
 import { Timeline } from 'primereact/timeline';
+import './TimelineDemo.css';
 
 export default function HorizontalDoc() {
     const events = ['2020', '2021', '2022', '2023'];
 
     return (
-        <div className="card">
+        <div className="card timeline-demo">
             <h6>Top Align</h6>
             <Timeline value={events} layout="horizontal" align="top" content={(item) => item} />
 
@@ -53,7 +55,30 @@ export default function HorizontalDoc() {
     </div>
     )
 }
-        `
+        `,
+        css: `
+/* TimelineDemo.css */
+
+.timeline-demo .p-timeline-event-content,
+.timeline-demo .p-timeline-event-opposite {
+    line-height: 1;
+}
+
+@media screen and (max-width: 960px) {
+    .timeline-demo .customized-timeline .p-timeline-event:nth-child(even) {
+        flex-direction: row !important;
+    }
+    .timeline-demo .customized-timeline .p-timeline-event:nth-child(even) .p-timeline-event-content {
+        text-align: left !important;
+    }
+    .timeline-demo .customized-timeline .p-timeline-event-opposite {
+        flex: 0;
+    }
+    .timeline-demo .customized-timeline .p-card {
+        margin-top: 1rem;
+    }
+}
+    `
     };
 
     return (

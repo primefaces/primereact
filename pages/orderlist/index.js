@@ -80,7 +80,7 @@ const OrderListDemo = () => {
                 <DocActions github="orderlist/index.js" />
             </div>
 
-            <div className="content-section implementation orderlist-demo">
+            <div className="content-section implementation">
                 <div className="content-section doc">
                     <DocSections docs={docs} />
                     <DocSectionNav docs={docs} />

@@ -106,6 +106,24 @@ const ResponsiveDoc = () => {
         </div>
     );
 }
+        `,
+        css: `
+/* TreeTableDemo.css */
+
+.treetable-responsive-demo .sm-visible {
+    display: none;
+}
+
+@media screen and (max-width: 40em) {
+    .treetable-responsive-demo .sm-invisible {
+        display: none;
+    }
+
+    .treetable-responsive-demo .sm-visible {
+        display: inline;
+        margin-right: .5rem;
+    }
+}
         `
     };
 

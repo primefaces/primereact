@@ -70,7 +70,7 @@ const PaginatorDemo = () => {
                 <DocActions github="paginator/index.js" />
             </div>
 
-            <div className="content-section doc paginator-demo">
+            <div className="content-section doc">
                 <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>

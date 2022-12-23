@@ -16,6 +16,7 @@ export function OppositeContentDoc(props) {
         `,
         javascript: `
 import { Timeline } from 'primereact/timeline';
+import './TimelineDemo.css';
 
 export default function OppositeContentDoc() {
         const events = [
@@ -26,7 +27,7 @@ export default function OppositeContentDoc() {
     ];
         
     return (
-        <div className="card">
+        <div className="card timeline-demo">
             <Timeline value={events} opposite={(item) => item.status} content={(item) => <small className="p-text-secondary">{item.date}</small>} />
         </div>
     )
@@ -34,6 +35,7 @@ export default function OppositeContentDoc() {
         `,
         typescript: `
 import { Timeline } from 'primereact/timeline';
+import './TimelineDemo.css';
 
 export default function OppositeContentDoc() {
         const events = [
@@ -44,12 +46,35 @@ export default function OppositeContentDoc() {
     ];
 
     return (
-        <div className="card">
+        <div className="card timeline-demo">
             <Timeline value={events} opposite={(item) => item.status} content={(item) => <small className="p-text-secondary">{item.date}</small>} />
         </div>
     )
 }
-        `
+        `,
+        css: `
+/* TimelineDemo.css */
+
+.timeline-demo .p-timeline-event-content,
+.timeline-demo .p-timeline-event-opposite {
+    line-height: 1;
+}
+
+@media screen and (max-width: 960px) {
+    .timeline-demo .customized-timeline .p-timeline-event:nth-child(even) {
+        flex-direction: row !important;
+    }
+    .timeline-demo .customized-timeline .p-timeline-event:nth-child(even) .p-timeline-event-content {
+        text-align: left !important;
+    }
+    .timeline-demo .customized-timeline .p-timeline-event-opposite {
+        flex: 0;
+    }
+    .timeline-demo .customized-timeline .p-card {
+        margin-top: 1rem;
+    }
+}
+    `
     };
 
     return (

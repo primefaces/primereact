@@ -59,7 +59,7 @@ const PickListDemo = () => {
                 <DocActions github="picklist/index.js" />
             </div>
 
-            <div className="content-section doc picklist-demo">
+            <div className="content-section doc">
                 <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>

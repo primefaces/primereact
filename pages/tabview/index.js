@@ -101,7 +101,7 @@ const TabViewDemo = () => {
                 <DocActions github="tabview/index.js" />
             </div>
 
-            <div className="content-section doc">
+            <div className="content-section doc dataview-demo">
                 <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>

@@ -20,7 +20,7 @@ export function ContentDoc(props) {
 leftContent={leftContent} rightContent={rightContent}
 template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator
 
-<div className="image-gallery">
+<div className="p-3 text-center">
     <img alt={contentFirst} src={\`images/nature/nature\${contentFirst + 1}.jpg\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} />
 </div>
         `,
@@ -44,7 +44,7 @@ export default function ContentDoc() {
         leftContent={leftContent} rightContent={rightContent}
         template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator>
 
-        <div className="image-gallery">
+        <div className="p-3 text-center">
             <img alt={contentFirst} src={\`images/nature/nature\${contentFirst + 1}.jpg\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} />
         </div>
     )
@@ -70,7 +70,7 @@ export default function ContentDoc() {
         leftContent={leftContent} rightContent={rightContent}
         template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator>
 
-        <div className="image-gallery">
+        <div className="p-3 text-center">
             <img alt={contentFirst} src={\`images/nature/nature\${contentFirst + 1}.jpg\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} />
         </div>
     )
@@ -94,7 +94,7 @@ export default function ContentDoc() {
                     template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
                 ></Paginator>
 
-                <div className="image-gallery">
+                <div className="p-3 text-center">
                     <img alt={contentFirst} src={`images/nature/nature${contentFirst + 1}.jpg`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} />
                 </div>
             </div>

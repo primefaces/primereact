@@ -17,7 +17,7 @@ export function CustomizedDoc(props) {
 
     const customizedMarker = (item) => {
         return (
-            <span className="custom-marker shadow-1" style={{ backgroundColor: item.color }}>
+            <span className="flex w-2rem h-2rem align-items-center justify-content-center text-white border-circle z-1 shadow-1" style={{ backgroundColor: item.color }}>
                 <i className={item.icon}></i>
             </span>
         );
@@ -44,6 +44,7 @@ export function CustomizedDoc(props) {
 import { Timeline } from 'primereact/timeline';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
+import './TimelineDemo.css';
 
 export default function CustomizedDoc() {
         const events = [
@@ -55,7 +56,7 @@ export default function CustomizedDoc() {
 
     const customizedMarker = (item) => {
         return (
-            <span className="custom-marker shadow-1" style={{ backgroundColor: item.color }}>
+            <span className="flex w-2rem h-2rem align-items-center justify-content-center text-white border-circle z-1 shadow-1" style={{ backgroundColor: item.color }}>
                 <i className={item.icon}></i>
             </span>
         );
@@ -73,7 +74,7 @@ export default function CustomizedDoc() {
     };
         
     return (
-        <div className="card">
+        <div className="card timeline-demo">
             <h5>Customized</h5>
             <Timeline value={events} align="alternate" className="customized-timeline" marker={customizedMarker} content={customizedContent} />
         </div>
@@ -84,6 +85,7 @@ export default function CustomizedDoc() {
 import { Timeline } from 'primereact/timeline';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
+import './TimelineDemo.css';
 
 export default function CustomizedDoc() {
         const events = [
@@ -95,7 +97,7 @@ export default function CustomizedDoc() {
 
     const customizedMarker = (item) => {
         return (
-            <span className="custom-marker shadow-1" style={{ backgroundColor: item.color }}>
+            <span className="flex w-2rem h-2rem align-items-center justify-content-center text-white border-circle z-1 shadow-1" style={{ backgroundColor: item.color }}>
                 <i className={item.icon}></i>
             </span>
         );
@@ -112,15 +114,37 @@ export default function CustomizedDoc() {
         );
     };
 
-
     return (
-        <div className="card">
+        <div className="card timeline-demo">
             <h5>Customized</h5>
             <Timeline value={events} align="alternate" className="customized-timeline" marker={customizedMarker} content={customizedContent} />
         </div>
     )
 }
-        `
+        `,
+        css: `
+/* TimelineDemo.css */
+
+.timeline-demo .p-timeline-event-content,
+.timeline-demo .p-timeline-event-opposite {
+    line-height: 1;
+}
+
+@media screen and (max-width: 960px) {
+    .timeline-demo .customized-timeline .p-timeline-event:nth-child(even) {
+        flex-direction: row !important;
+    }
+    .timeline-demo .customized-timeline .p-timeline-event:nth-child(even) .p-timeline-event-content {
+        text-align: left !important;
+    }
+    .timeline-demo .customized-timeline .p-timeline-event-opposite {
+        flex: 0;
+    }
+    .timeline-demo .customized-timeline .p-card {
+        margin-top: 1rem;
+    }
+}
+    `
     };
 
     return (

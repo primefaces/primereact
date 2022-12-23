@@ -84,7 +84,7 @@ const DataViewDemo = () => {
                 <DocActions github="dataview/index.js" />
             </div>
 
-            <div className="content-section doc dataview-demo">
+            <div className="content-section doc">
                 <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>
