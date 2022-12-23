@@ -175,6 +175,20 @@ const TemplatingDoc = () => {
             </div>
         </div>
     );
+        `,
+        css: `
+/* DataTableDemo.css */
+
+.datatable-templating-demo .table-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.datatable-templating-demo .product-image {
+    width: 100px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
         `
     };
 

@@ -249,6 +249,14 @@ const CellEditingDoc = () => {
         </div>
     );
 }
+        `,
+        css: `
+/* DataTableDemo.css */
+
+.datatable-editing-demo .editable-cells-table td.p-cell-editing {
+    padding-top: 0;
+    padding-bottom: 0;
+}
         `
     };
 

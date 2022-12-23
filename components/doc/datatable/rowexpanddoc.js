@@ -67,7 +67,7 @@ export function RowExpandDoc(props) {
     };
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={`${contextPath}/images/product/${rowData.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={rowData.image} className="product-image" />;
+        return <img src={`${contextPath}/images/product/${rowData.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={rowData.image} className="shadow-1 w-full" />;
     };
 
     const priceBodyTemplate = (rowData) => {
@@ -88,7 +88,7 @@ export function RowExpandDoc(props) {
 
     const rowExpansionTemplate = (data) => {
         return (
-            <div className="orders-subtable">
+            <div className="p-3">
                 <h5>Orders for {data.name}</h5>
                 <DataTable value={data.orders} responsiveLayout="scroll">
                     <Column field="id" header="Id" sortable></Column>
@@ -188,7 +188,7 @@ const RowExpandDoc = () => {
     }
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={\`images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />;
+        return <img src={\`images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="shadow-1 w-full" />;
     }
 
     const priceBodyTemplate = (rowData) => {
@@ -209,7 +209,7 @@ const RowExpandDoc = () => {
 
     const rowExpansionTemplate = (data) => {
         return (
-            <div className="orders-subtable">
+            <div className="p-3">
                 <h5>Orders for {data.name}</h5>
                 <DataTable value={data.orders} responsiveLayout="scroll">
                     <Column field="id" header="Id" sortable></Column>
@@ -231,7 +231,7 @@ const RowExpandDoc = () => {
     );
 
     return (
-        <div className="card datatable-rowexpansion-demo">
+        <div className="card">
         <Toast ref={toast} />
         <DataTable value={products} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
             onRowExpand={onRowExpand} onRowCollapse={onRowCollapse} responsiveLayout="scroll"
@@ -313,7 +313,7 @@ const RowExpandDoc = () => {
     }
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={\`images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />;
+        return <img src={\`images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="shadow-1 w-full" />;
     }
 
     const priceBodyTemplate = (rowData) => {
@@ -334,7 +334,7 @@ const RowExpandDoc = () => {
 
     const rowExpansionTemplate = (data) => {
         return (
-            <div className="orders-subtable">
+            <div className="p-3">
                 <h5>Orders for {data.name}</h5>
                 <DataTable value={data.orders} responsiveLayout="scroll">
                     <Column field="id" header="Id" sortable></Column>
@@ -356,7 +356,7 @@ const RowExpandDoc = () => {
     );
 
     return (
-        <div className="card datatable-rowexpansion-demo">
+        <div className="card">
             <Toast ref={toast} />
             <DataTable value={products} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
                 onRowExpand={onRowExpand} onRowCollapse={onRowCollapse} responsiveLayout="scroll"
@@ -380,7 +380,7 @@ const RowExpandDoc = () => {
             <DocSectionText {...props}>
                 <p>A row can be expanded to display extra content.</p>
             </DocSectionText>
-            <div className="card datatable-rowexpansion-demo">
+            <div className="card">
                 <Toast ref={toast} />
                 <DataTable
                     value={products}

@@ -82,6 +82,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { CustomerService } from '../service/CustomerService';
+import './DataTableDemo.css';
 
 const ScrollFrozenRowsDoc = () => {
     const [lockedCustomers, setLockedCustomers] = useState([]);
@@ -162,6 +163,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { CustomerService } from '../service/CustomerService';
+import './DataTableDemo.css';
 
 const ScrollFrozenRowsDoc = () => {
     const [lockedCustomers, setLockedCustomers] = useState([]);
@@ -234,6 +236,16 @@ const ScrollFrozenRowsDoc = () => {
             </DataTable>
         </div>
     );
+}
+        `,
+        css: `
+/* DataTableDemo.css */
+.datatable-scroll-demo .p-datatable-frozen-tbody {
+    font-weight: bold;
+}
+
+.datatable-scroll-demo .p-datatable-scrollable .p-frozen-column {
+    font-weight: bold;
 }
         `
     };

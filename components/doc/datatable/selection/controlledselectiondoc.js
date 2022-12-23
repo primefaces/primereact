@@ -146,7 +146,7 @@ const ControlledSelectionDoc = () => {
     }
 
     return (
-        <div className="card datatable-selection-demo">
+        <div className="card">
             <DataTable value={products} selectionMode="multiple" dragSelection selection={selectedProducts1} onSelectionChange={e => setSelectedProducts1(e.value)} dataKey="id" responsiveLayout="scroll"
                 isDataSelectable={isRowSelectable} rowClassName={rowClassName}>
                 <Column field="code" header="Code"></Column>
@@ -234,7 +234,7 @@ const ControlledSelectionDoc = () => {
     }
 
     return (
-        <div className="card datatable-selection-demo">
+        <div className="card">
             <DataTable value={products} selectionMode="multiple" dragSelection selection={selectedProducts1} onSelectionChange={e => setSelectedProducts1(e.value)} dataKey="id" responsiveLayout="scroll"
                 isDataSelectable={isRowSelectable} rowClassName={rowClassName}>
                 <Column field="code" header="Code"></Column>

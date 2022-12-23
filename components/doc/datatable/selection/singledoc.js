@@ -53,7 +53,7 @@ const SingleDoc = () => {
     },[]);
 
     return (
-        <div className="card datatable-selection-demo">
+        <div className="card">
             <h6>Row Selection</h6>
             <DataTable value={products} selectionMode="single" selection={selectedProduct1} onSelectionChange={e => setSelectedProduct1(e.value)} dataKey="id" responsiveLayout="scroll">
                 <Column field="code" header="Code"></Column>
@@ -93,7 +93,7 @@ const SingleDoc = () => {
     },[]);
 
     return (
-        <div className="card datatable-selection-demo">
+        <div className="card">
             <h6>Row Selection</h6>
             <DataTable value={products} selectionMode="single" selection={selectedProduct1} onSelectionChange={e => setSelectedProduct1(e.value)} dataKey="id" responsiveLayout="scroll">
                 <Column field="code" header="Code"></Column>

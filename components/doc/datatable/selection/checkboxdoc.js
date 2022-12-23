@@ -69,7 +69,7 @@ const CheckboxDoc = () => {
     },[]);
 
     return (
-        <div className="card datatable-selection-demo">
+        <div className="card">
             <h6>Row and Checkbox Selection</h6>
             <DataTable value={products} selection={selectedProducts1} onSelectionChange={e => setSelectedProducts1(e.value)} dataKey="id" responsiveLayout="scroll">
                 <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
@@ -122,7 +122,7 @@ const CheckboxDoc = () => {
     },[]);
 
     return (
-        <div className="card datatable-selection-demo">
+        <div className="card">
             <h6>Row and Checkbox Selection</h6>
             <DataTable value={products} selection={selectedProducts1} onSelectionChange={e => setSelectedProducts1(e.value)} dataKey="id" responsiveLayout="scroll">
                 <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>

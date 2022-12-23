@@ -444,22 +444,24 @@ const FilterMenuDoc = () => {
     const header = renderHeader();
 
     return (
-        <div className="card">
-            <DataTable value={customers} paginator className="p-datatable-customers" showGridlines rows={10}
-                dataKey="id" filters={filters} filterDisplay="menu" loading={loading} responsiveLayout="scroll"
-                globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']} header={header} emptyMessage="No customers found.">
-                <Column field="name" header="Name" filter filterPlaceholder="Search by name" style={{ minWidth: '12rem' }} />
-                <Column header="Country" filterField="country.name" style={{ minWidth: '12rem' }} body={countryBodyTemplate} filter filterPlaceholder="Search by country"
-                    filterClear={filterClearTemplate} filterApply={filterApplyTemplate} filterFooter={filterFooterTemplate} />
-                <Column header="Agent" filterField="representative" showFilterMatchModes={false} filterMenuStyle={{ width: '14rem'}} style={{ minWidth: '14rem' }} body={representativeBodyTemplate}
-                    filter filterElement={representativeFilterTemplate} />
-                <Column header="Date" filterField="date" dataType="date" style={{ minWidth: '10rem' }} body={dateBodyTemplate}
-                    filter filterElement={dateFilterTemplate} />
-                <Column header="Balance" filterField="balance" dataType="numeric" style={{ minWidth: '10rem' }} body={balanceBodyTemplate} filter filterElement={balanceFilterTemplate} />
-                <Column field="status" header="Status" filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '12rem' }} body={statusBodyTemplate} filter filterElement={statusFilterTemplate} />
-                <Column field="activity" header="Activity" showFilterMatchModes={false} style={{ minWidth: '12rem' }} body={activityBodyTemplate} filter filterElement={activityFilterTemplate} />
-                <Column field="verified" header="Verified" dataType="boolean" bodyClassName="text-center" style={{ minWidth: '8rem' }} body={verifiedBodyTemplate} filter filterElement={verifiedFilterTemplate} />
-            </DataTable>
+        <div className="datatable-filter-demo">
+            <div className="card datatable-demo">
+                <DataTable value={customers} paginator className="p-datatable-customers" showGridlines rows={10}
+                    dataKey="id" filters={filters} filterDisplay="menu" loading={loading} responsiveLayout="scroll"
+                    globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']} header={header} emptyMessage="No customers found.">
+                    <Column field="name" header="Name" filter filterPlaceholder="Search by name" style={{ minWidth: '12rem' }} />
+                    <Column header="Country" filterField="country.name" style={{ minWidth: '12rem' }} body={countryBodyTemplate} filter filterPlaceholder="Search by country"
+                        filterClear={filterClearTemplate} filterApply={filterApplyTemplate} filterFooter={filterFooterTemplate} />
+                    <Column header="Agent" filterField="representative" showFilterMatchModes={false} filterMenuStyle={{ width: '14rem'}} style={{ minWidth: '14rem' }} body={representativeBodyTemplate}
+                        filter filterElement={representativeFilterTemplate} />
+                    <Column header="Date" filterField="date" dataType="date" style={{ minWidth: '10rem' }} body={dateBodyTemplate}
+                        filter filterElement={dateFilterTemplate} />
+                    <Column header="Balance" filterField="balance" dataType="numeric" style={{ minWidth: '10rem' }} body={balanceBodyTemplate} filter filterElement={balanceFilterTemplate} />
+                    <Column field="status" header="Status" filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '12rem' }} body={statusBodyTemplate} filter filterElement={statusFilterTemplate} />
+                    <Column field="activity" header="Activity" showFilterMatchModes={false} style={{ minWidth: '12rem' }} body={activityBodyTemplate} filter filterElement={activityFilterTemplate} />
+                    <Column field="verified" header="Verified" dataType="boolean" bodyClassName="text-center" style={{ minWidth: '8rem' }} body={verifiedBodyTemplate} filter filterElement={verifiedFilterTemplate} />
+                </DataTable>
+            </div>
         </div>
     );
 }
@@ -670,24 +672,63 @@ const FilterMenuDoc = () => {
     const header = renderHeader();
 
     return (
-        <div className="card">
-            <DataTable value={customers} paginator className="p-datatable-customers" showGridlines rows={10}
-                dataKey="id" filters={filters} filterDisplay="menu" loading={loading} responsiveLayout="scroll"
-                globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']} header={header} emptyMessage="No customers found.">
-                <Column field="name" header="Name" filter filterPlaceholder="Search by name" style={{ minWidth: '12rem' }} />
-                <Column header="Country" filterField="country.name" style={{ minWidth: '12rem' }} body={countryBodyTemplate} filter filterPlaceholder="Search by country"
-                    filterClear={filterClearTemplate} filterApply={filterApplyTemplate} filterFooter={filterFooterTemplate} />
-                <Column header="Agent" filterField="representative" showFilterMatchModes={false} filterMenuStyle={{ width: '14rem'}} style={{ minWidth: '14rem' }} body={representativeBodyTemplate}
-                    filter filterElement={representativeFilterTemplate} />
-                <Column header="Date" filterField="date" dataType="date" style={{ minWidth: '10rem' }} body={dateBodyTemplate}
-                    filter filterElement={dateFilterTemplate} />
-                <Column header="Balance" filterField="balance" dataType="numeric" style={{ minWidth: '10rem' }} body={balanceBodyTemplate} filter filterElement={balanceFilterTemplate} />
-                <Column field="status" header="Status" filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '12rem' }} body={statusBodyTemplate} filter filterElement={statusFilterTemplate} />
-                <Column field="activity" header="Activity" showFilterMatchModes={false} style={{ minWidth: '12rem' }} body={activityBodyTemplate} filter filterElement={activityFilterTemplate} />
-                <Column field="verified" header="Verified" dataType="boolean" bodyClassName="text-center" style={{ minWidth: '8rem' }} body={verifiedBodyTemplate} filter filterElement={verifiedFilterTemplate} />
-            </DataTable>
+        <div className="datatable-filter-demo">
+            <div className="card datatable-demo">
+                <DataTable value={customers} paginator className="p-datatable-customers" showGridlines rows={10}
+                    dataKey="id" filters={filters} filterDisplay="menu" loading={loading} responsiveLayout="scroll"
+                    globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']} header={header} emptyMessage="No customers found.">
+                    <Column field="name" header="Name" filter filterPlaceholder="Search by name" style={{ minWidth: '12rem' }} />
+                    <Column header="Country" filterField="country.name" style={{ minWidth: '12rem' }} body={countryBodyTemplate} filter filterPlaceholder="Search by country"
+                        filterClear={filterClearTemplate} filterApply={filterApplyTemplate} filterFooter={filterFooterTemplate} />
+                    <Column header="Agent" filterField="representative" showFilterMatchModes={false} filterMenuStyle={{ width: '14rem'}} style={{ minWidth: '14rem' }} body={representativeBodyTemplate}
+                        filter filterElement={representativeFilterTemplate} />
+                    <Column header="Date" filterField="date" dataType="date" style={{ minWidth: '10rem' }} body={dateBodyTemplate}
+                        filter filterElement={dateFilterTemplate} />
+                    <Column header="Balance" filterField="balance" dataType="numeric" style={{ minWidth: '10rem' }} body={balanceBodyTemplate} filter filterElement={balanceFilterTemplate} />
+                    <Column field="status" header="Status" filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '12rem' }} body={statusBodyTemplate} filter filterElement={statusFilterTemplate} />
+                    <Column field="activity" header="Activity" showFilterMatchModes={false} style={{ minWidth: '12rem' }} body={activityBodyTemplate} filter filterElement={activityFilterTemplate} />
+                    <Column field="verified" header="Verified" dataType="boolean" bodyClassName="text-center" style={{ minWidth: '8rem' }} body={verifiedBodyTemplate} filter filterElement={verifiedFilterTemplate} />
+                </DataTable>
+            </div>
         </div>
     );
+}
+        `,
+        css: `
+/* DataTableDemo.css */
+
+.datatable-filter-demo .p-paginator .p-paginator-current {
+    margin-left: auto;
+}
+.datatable-filter-demo .p-progressbar {
+    height: 0.5rem;
+    background-color: #d8dadc;
+}
+.datatable-filter-demo .p-progressbar .p-progressbar-value {
+    background-color: #607d8b;
+}
+.datatable-filter-demo .p-datepicker {
+    min-width: 25rem;
+}
+.datatable-filter-demo .p-datepicker td {
+    font-weight: 400;
+}
+.datatable-filter-demo .p-datatable.p-datatable-customers .p-datatable-header {
+    padding: 1rem;
+    text-align: left;
+    font-size: 1.5rem;
+}
+.datatable-filter-demo .p-datatable.p-datatable-customers .p-paginator {
+    padding: 1rem;
+}
+.datatable-filter-demo .p-datatable.p-datatable-customers .p-datatable-thead > tr > th {
+    text-align: left;
+}
+.datatable-filter-demo .p-datatable.p-datatable-customers .p-datatable-tbody > tr > td {
+    cursor: auto;
+}
+.datatable-filter-demo .p-datatable.p-datatable-customers .p-dropdown-label:not(.p-placeholder) {
+    text-transform: uppercase;
 }
         `
     };

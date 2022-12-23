@@ -94,7 +94,7 @@ const MultipleDoc = () => {
     },[]);
 
     return (
-        <div className="card datatable-selection-demo">
+        <div className="card">
             <h6>Row Selection with MetaKey</h6>
             <DataTable value={products} selectionMode="multiple" selection={selectedProducts1} onSelectionChange={e => setSelectedProducts1(e.value)} dataKey="id" responsiveLayout="scroll">
                 <Column field="code" header="Code"></Column>
@@ -170,7 +170,7 @@ const MultipleDoc = () => {
     },[]);
 
     return (
-        <div className="card datatable-selection-demo">
+        <div className="card">
             <h6>Row Selection with MetaKey</h6>
             <DataTable value={products} selectionMode="multiple" selection={selectedProducts1} onSelectionChange={e => setSelectedProducts1(e.value)} dataKey="id" responsiveLayout="scroll">
                 <Column field="code" header="Code"></Column>

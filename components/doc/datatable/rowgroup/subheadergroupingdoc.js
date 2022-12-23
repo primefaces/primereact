@@ -237,6 +237,22 @@ const SubHeaderGroupingDoc = () => {
         </div>
     );
 }
+        `,
+        css: `
+/* DataTableDemo.css */
+
+.datatable-rowgroup-demo .p-rowgroup-footer td {
+    font-weight: 700;
+}
+
+.datatable-rowgroup-demo .p-rowgroup-header span {
+    font-weight: 700;
+}
+
+.datatable-rowgroup-demo .p-rowgroup-header .p-row-toggler {
+    vertical-align: middle;
+    margin-right: .25rem;
+}
         `
     };
 

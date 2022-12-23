@@ -56,7 +56,7 @@ const RadioButtonDoc = () => {
     },[]);
 
     return (
-        <div className="card datatable-selection-demo">
+        <div className="card">
             <h6>Row and RadioButton Selection</h6>
             <DataTable value={products} selection={selectedProduct1} onSelectionChange={e => setSelectedProduct1(e.value)} dataKey="id" responsiveLayout="scroll">
                 <Column selectionMode="single" headerStyle={{width: '3em'}}></Column>
@@ -98,7 +98,7 @@ const RadioButtonDoc = () => {
     },[]);
 
     return (
-        <div className="card datatable-selection-demo">
+        <div className="card">
             <h6>Row and RadioButton Selection</h6>
             <DataTable value={products} selection={selectedProduct1} onSelectionChange={e => setSelectedProduct1(e.value)} dataKey="id" responsiveLayout="scroll">
                 <Column selectionMode="single" headerStyle={{width: '3em'}}></Column>

@@ -76,7 +76,7 @@ const EventsDoc = () => {
     },[]);
 
     return (
-        <div className="card datatable-selection-demo">
+        <div className="card">
             <Toast ref={toast} />
             <h6>Row Selection</h6>
             <p>onRowSelect and onRowUnselects are available as selection events.</p>
@@ -143,7 +143,7 @@ const EventsDoc = () => {
     },[]);
 
     return (
-        <div className="card datatable-selection-demo">
+        <div className="card">
             <Toast ref={toast} />
             <h6>Row Selection</h6>
             <p>onRowSelect and onRowUnselects are available as selection events.</p>
