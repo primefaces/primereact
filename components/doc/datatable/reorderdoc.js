@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { DataTable } from '../../lib/datatable/DataTable';
-import { Column } from '../../lib/column/Column';
-import { Toast } from '../../lib/toast/Toast';
+import React, { useEffect, useRef, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
+import { Column } from '../../lib/column/Column';
+import { DataTable } from '../../lib/datatable/DataTable';
+import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
@@ -37,7 +37,7 @@ export function ReorderDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={products} reorderableColumns reorderableRows onRowReorder={onRowReorder} onColReorder={onColReorder} responsiveLayout="scroll">
+<DataTable value={products} reorderableColumns reorderableRows onRowReorder={onRowReorder} onColReorder={onColReorder} responsiveLayout="scroll" paginator rows={5}>
     <Column rowReorder style={{width: '3em'}} />
     {dynamicColumns}
 </DataTable>
@@ -83,7 +83,7 @@ const ReorderDoc = () => {
             <Toast ref={toast}></Toast>
 
             <div className="card">
-                <DataTable value={products} reorderableColumns reorderableRows onRowReorder={onRowReorder} onColReorder={onColReorder} responsiveLayout="scroll">
+                <DataTable value={products} reorderableColumns reorderableRows onRowReorder={onRowReorder} onColReorder={onColReorder} responsiveLayout="scroll" paginator rows={5}>
                     <Column rowReorder style={{width: '3em'}} />
                     {dynamicColumns}
                 </DataTable>
@@ -133,7 +133,7 @@ const ReorderDoc = () => {
             <Toast ref={toast}></Toast>
 
             <div className="card">
-                <DataTable value={products} reorderableColumns reorderableRows onRowReorder={onRowReorder} onColReorder={onColReorder} responsiveLayout="scroll">
+                <DataTable value={products} reorderableColumns reorderableRows onRowReorder={onRowReorder} onColReorder={onColReorder} responsiveLayout="scroll" paginator rows={5}>
                     <Column rowReorder style={{width: '3em'}} />
                     {dynamicColumns}
                 </DataTable>
@@ -151,7 +151,7 @@ const ReorderDoc = () => {
             </DocSectionText>
             <div className="card">
                 <Toast ref={toast}></Toast>
-                <DataTable value={products} reorderableColumns reorderableRows onRowReorder={onRowReorder} onColReorder={onColReorder} responsiveLayout="scroll">
+                <DataTable value={products} reorderableColumns reorderableRows onRowReorder={onRowReorder} onColReorder={onColReorder} responsiveLayout="scroll" paginator rows={5}>
                     <Column rowReorder style={{ width: '3em' }} />
                     {dynamicColumns}
                 </DataTable>

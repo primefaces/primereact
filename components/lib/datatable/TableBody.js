@@ -654,7 +654,7 @@ export const TableBody = React.memo(
 
             if (droppedRowIndex.current != null) {
                 let dropIndex = draggedRowIndex.current > droppedRowIndex.current ? droppedRowIndex.current : droppedRowIndex.current === 0 ? 0 : droppedRowIndex.current - 1;
-                let val = [...props.value];
+                let val = [...props.tableProps.value];
 
                 ObjectUtils.reorderArray(val, draggedRowIndex.current, dropIndex);
 
@@ -663,7 +663,7 @@ export const TableBody = React.memo(
                         originalEvent: event,
                         value: val,
                         dragIndex: draggedRowIndex.current,
-                        dropIndex: droppedRowIndex.current
+                        dropIndex: dropIndex
                     });
                 }
             }
