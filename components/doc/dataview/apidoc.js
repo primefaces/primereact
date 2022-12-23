@@ -37,7 +37,7 @@ export function ApiDoc(props) {
                                 <td>dataKey</td>
                                 <td>string</td>
                                 <td>null</td>
-                                <td>A property to uniquely identify an item.</td>
+                                <td>Name of the field that uniquely identifies a record in the data. Should be a unique business key to prevent re-rendering.</td>
                             </tr>
                             <tr>
                                 <td>style</td>

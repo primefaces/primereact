@@ -1,8 +1,7 @@
-import { CodeHighlight } from '../common/codehighlight';
+import Link from 'next/link';
 import { DevelopmentSection } from '../common/developmentsection';
 import { DocSectionText } from '../common/docsectiontext';
 import { DocSubSection } from '../common/docsubsection';
-import Link from 'next/link';
 
 export function ApiDoc(props) {
     return (
@@ -46,10 +45,28 @@ export function ApiDoc(props) {
                                 <td>Orientation of the timeline, valid values are "vertical" and "horizontal".</td>
                             </tr>
                             <tr>
+                                <td>content</td>
+                                <td>any</td>
+                                <td>null</td>
+                                <td>Template of the content.</td>
+                            </tr>
+                            <tr>
+                                <td>marker</td>
+                                <td>any</td>
+                                <td>null</td>
+                                <td>Template content allows placing a custom event marker instead of the default one.</td>
+                            </tr>
+                            <tr>
+                                <td>opposite</td>
+                                <td>any</td>
+                                <td>null</td>
+                                <td>Template content to be placed at the other side of the bar.</td>
+                            </tr>
+                            <tr>
                                 <td>dataKey</td>
                                 <td>string</td>
                                 <td>null</td>
-                                <td>Name of the field that uniquely identifies the a record in the data.</td>
+                                <td>Name of the field that uniquely identifies a record in the data. Should be a unique business key to prevent re-rendering.</td>
                             </tr>
                             <tr>
                                 <td>style</td>
