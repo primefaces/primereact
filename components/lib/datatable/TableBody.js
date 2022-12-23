@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { localeOption } from '../api/Api';
 import { useMountEffect, usePrevious, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 import { BodyRow } from './BodyRow';
 import { RowTogglerButton } from './RowTogglerButton';
 
@@ -160,7 +160,7 @@ export const TableBody = React.memo(
         };
 
         const getRowKey = (rowData, index) => {
-            return props.dataKey ? ObjectUtils.resolveFieldData(rowData, props.dataKey) + '_' + index : index;
+            return props.dataKey ? ObjectUtils.resolveFieldData(rowData, props.dataKey) : index;
         };
 
         const shouldRenderRowGroupHeader = (value, rowData, i) => {
