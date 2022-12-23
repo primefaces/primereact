@@ -4,7 +4,7 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 
 export const Sidebar = React.forwardRef((props, ref) => {
     const [maskVisibleState, setMaskVisibleState] = React.useState(false);
@@ -139,6 +139,17 @@ export const Sidebar = React.forwardRef((props, ref) => {
             setVisibleState(true);
         }
     }, [maskVisibleState]);
+
+    useUpdateEffect(() => {
+        // #3811 if dismissible state is toggled while open we must unregister and re-regisetr
+        if (visibleState) {
+            unbindDocumentClickListener();
+
+            if (props.dismissable && !props.modal) {
+                bindDocumentClickListener();
+            }
+        }
+    }, [props.dismissable, props.modal, visibleState]);
 
     useUnmountEffect(() => {
         disableDocumentSettings();
