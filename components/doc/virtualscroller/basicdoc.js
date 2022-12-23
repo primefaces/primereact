@@ -49,6 +49,7 @@ export function BasicDoc(props) {
 import { useState } 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { classNames } from 'primereact/utils';
+import './VirtualScrollerDemo.css';
 
 export default function BasicDoc() {
     const [basicItems] = useState(Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`));
@@ -86,7 +87,7 @@ export default function BasicDoc() {
     };
 
     return ( 
-        <div>
+        <div className="card virtualscroller-demo">
             <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} />
             <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} orientation="horizontal" />
             <VirtualScroller items={multiItems} itemSize={[50, 100]} itemTemplate={multiItemTemplate} orientation="both" />
@@ -98,6 +99,7 @@ export default function BasicDoc() {
 import { useState } 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { classNames } from 'primereact/utils';
+import './VirtualScrollerDemo.css';
 
 export default function BasicDoc() {
     const [basicItems] = useState(Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`));
@@ -135,14 +137,46 @@ export default function BasicDoc() {
     };
 
     return (
-        <div>
+        <div className="card virtualscroller-demo">
             <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} />
             <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} orientation="horizontal" />
             <VirtualScroller items={multiItems} itemSize={[50, 100]} itemTemplate={multiItemTemplate} orientation="both" />
         </div>
     )
 }
-        `
+        `,
+        css: `
+/* VirtualScrollerDemo.css */
+
+.virtualscroller-demo .scroll-item {
+    display: flex;
+    align-items: center;
+}
+
+.virtualscroller-demo .custom-scroll-item {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.virtualscroller-demo .odd {
+    background-color: var(--surface-b);
+}
+
+.virtualscroller-demo .p-virtualscroller {
+    height: 200px;
+    width: 200px;
+    border: 1px solid var(--surface-d);
+}
+
+.virtualscroller-demo .p-horizontal-scroll .p-virtualscroller-content {
+    display: flex;
+    flex-direction: row;
+}
+
+.virtualscroller-demo .p-horizontal-scroll .scroll-item {
+    writing-mode: vertical-lr;
+}
+    `
     };
 
     return (

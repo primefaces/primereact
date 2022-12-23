@@ -56,6 +56,7 @@ export function LazyDoc(props) {
 import { useState, useEffect, useRef } 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { classNames } from 'primereact/utils';
+import './VirtualScrollerDemo.css';
 
 export default function LazyDoc() {
     const [lazyItems, setLazyItems] = useState([]);
@@ -102,14 +103,17 @@ export default function LazyDoc() {
     };
 
     return ( 
+        <div className="card virtualscroller-demo">
             <VirtualScroller items={lazyItems} itemSize={50} itemTemplate={basicItemTemplate} lazy onLazyLoad={onLazyLoad} showLoader loading={lazyLoading} />
-    );
+        </div>
+        );
 }
         `,
         typescript: `
 import { useState, useEffect, useRef } 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { classNames } from 'primereact/utils';
+import './VirtualScrollerDemo.css';
 
 export default function LazyDoc() {
     const [lazyItems, setLazyItems] = useState([]);
@@ -156,10 +160,44 @@ export default function LazyDoc() {
     };
 
     return (
+        <div className="card virtualscroller-demo">
             <VirtualScroller items={lazyItems} itemSize={50} itemTemplate={basicItemTemplate} lazy onLazyLoad={onLazyLoad} showLoader loading={lazyLoading} />
-    )
+        </div>
+        )
 }
-        `
+        `,
+        css: `
+/* VirtualScrollerDemo.css */
+
+.virtualscroller-demo .scroll-item {
+    display: flex;
+    align-items: center;
+}
+
+.virtualscroller-demo .custom-scroll-item {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.virtualscroller-demo .odd {
+    background-color: var(--surface-b);
+}
+
+.virtualscroller-demo .p-virtualscroller {
+    height: 200px;
+    width: 200px;
+    border: 1px solid var(--surface-d);
+}
+
+.virtualscroller-demo .p-horizontal-scroll .p-virtualscroller-content {
+    display: flex;
+    flex-direction: row;
+}
+
+.virtualscroller-demo .p-horizontal-scroll .scroll-item {
+    writing-mode: vertical-lr;
+}
+    `
     };
 
     return (

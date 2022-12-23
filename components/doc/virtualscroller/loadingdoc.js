@@ -43,6 +43,7 @@ import { useState } 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { Skeleton } from 'primereact/skeleton';
 import { classNames } from 'primereact/utils';
+import './VirtualScrollerDemo.css';
 
 export default function LoadingDoc() {
     const [basicItems] = useState(Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`));
@@ -69,7 +70,7 @@ export default function LoadingDoc() {
     }
 
     return ( 
-        <div>
+        <div className="card virtualscroller-demo">
             <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} showLoader delay={250}/>
             <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} showLoader delay={250} loadingTemplate={basicLoadingTemplate} />
         </div>
@@ -81,6 +82,7 @@ import { useState } 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { Skeleton } from 'primereact/skeleton';
 import { classNames } from 'primereact/utils';
+import './VirtualScrollerDemo.css';
 
 export default function LoadingDoc() {
     const [basicItems] = useState(Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`));
@@ -107,13 +109,45 @@ export default function LoadingDoc() {
     }
 
     return (
-        <div>
+        <div className="card virtualscroller-demo">
             <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} showLoader delay={250}/>
             <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} showLoader delay={250} loadingTemplate={basicLoadingTemplate} />
         </div>
     )
 }
-        `
+        `,
+        css: `
+/* VirtualScrollerDemo.css */
+
+.virtualscroller-demo .scroll-item {
+    display: flex;
+    align-items: center;
+}
+
+.virtualscroller-demo .custom-scroll-item {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.virtualscroller-demo .odd {
+    background-color: var(--surface-b);
+}
+
+.virtualscroller-demo .p-virtualscroller {
+    height: 200px;
+    width: 200px;
+    border: 1px solid var(--surface-d);
+}
+
+.virtualscroller-demo .p-horizontal-scroll .p-virtualscroller-content {
+    display: flex;
+    flex-direction: row;
+}
+
+.virtualscroller-demo .p-horizontal-scroll .scroll-item {
+    writing-mode: vertical-lr;
+}
+    `
     };
 
     return (
