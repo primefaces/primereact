@@ -2,7 +2,7 @@ import * as React from 'react';
 import PrimeReact, { FilterMatchMode, FilterOperator, FilterService } from '../api/Api';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Paginator } from '../paginator/Paginator';
-import { classNames, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { DomHandler, ObjectUtils, UniqueComponentId, classNames } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { TableBody } from './TableBody';
 import { TableFooter } from './TableFooter';
@@ -1015,6 +1015,10 @@ export const DataTable = React.forwardRef((props, ref) => {
             let localFiltered = false;
 
             for (let prop in filters) {
+                if (prop === 'null') {
+                    continue;
+                }
+
                 if (Object.prototype.hasOwnProperty.call(filters, prop) && prop !== 'global') {
                     localFiltered = true;
                     let filterField = prop;
@@ -1340,8 +1344,11 @@ export const DataTable = React.forwardRef((props, ref) => {
     useUpdateEffect(() => {
         if (props.globalFilter) {
             filter(props.globalFilter, 'global', props.globalFilterMatchMode);
+        } else {
+            // #3819 was filtering but now reset filter state
+            setFiltersState(props.filters);
         }
-    }, [props.globalFilter]);
+    }, [props.globalFilter, props.globalFilterMatchMode]);
 
     useUnmountEffect(() => {
         unbindColumnResizeEvents();
