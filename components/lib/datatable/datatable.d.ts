@@ -218,7 +218,11 @@ interface DataTableRowClassNameOptions<TValue extends DataTableValueArray> {
 
 interface DataTableCellClassNameOptions<TValue extends DataTableValueArray> {
     props: DataTableProps<TValue>;
+<<<<<<< HEAD
     rowData: DataTableRowSelection<TValue>;
+=======
+    rowData: any;
+>>>>>>> 5b0bfd02b55b9532a37e0c26eb91434eca329065
     column: Column;
 }
 
