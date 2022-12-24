@@ -8,7 +8,7 @@ export function ScrollDelayDoc(props) {
     const [basicItems] = useState(Array.from({ length: 100000 }).map((_, i) => `Item #${i}`));
 
     const basicItemTemplate = (item, options) => {
-        const className = classNames('scroll-item p-2', {
+        const className = classNames('flex align-items-center p-2', {
             odd: options.odd
         });
         const style = options.props.orientation === 'horizontal' ? { width: '50px' } : { height: '50px' };
@@ -36,7 +36,7 @@ export default function ScrollDelayDoc() {
     const [basicItems] = useState(Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`));
 
     const basicItemTemplate = (item, options) => {
-        const className = classNames('scroll-item p-2', {
+        const className = classNames('flex align-items-center p-2', {
             'odd': options.odd
         });
         const style = options.props.orientation === 'horizontal' ? { width: '50px' } : { height: '50px' };
@@ -63,7 +63,7 @@ export default function ScrollDelayDoc() {
     const [basicItems] = useState(Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`));
 
     const basicItemTemplate = (item, options) => {
-        const className = classNames('scroll-item p-2', {
+        const className = classNames('flex align-items-center p-2', {
             'odd': options.odd
         });
         const style = options.props.orientation === 'horizontal' ? { width: '50px' } : { height: '50px' };
@@ -83,16 +83,6 @@ export default function ScrollDelayDoc() {
         css: `
 /* VirtualScrollerDemo.css */
 
-.virtualscroller-demo .scroll-item {
-    display: flex;
-    align-items: center;
-}
-
-.virtualscroller-demo .custom-scroll-item {
-    flex-direction: column;
-    align-items: stretch;
-}
-
 .virtualscroller-demo .odd {
     background-color: var(--surface-b);
 }
@@ -106,10 +96,6 @@ export default function ScrollDelayDoc() {
 .virtualscroller-demo .p-horizontal-scroll .p-virtualscroller-content {
     display: flex;
     flex-direction: row;
-}
-
-.virtualscroller-demo .p-horizontal-scroll .scroll-item {
-    writing-mode: vertical-lr;
 }
     `
     };

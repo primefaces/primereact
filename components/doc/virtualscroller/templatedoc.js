@@ -10,7 +10,7 @@ export function TemplateDoc(props) {
 
     const itemTemplate = (item, options) => {
         const { index, count, first, last, even, odd } = options;
-        const className = classNames('custom-scroll-item scroll-item', {
+        const className = classNames('flex flex-column', {
             odd: odd
         });
 
@@ -28,7 +28,7 @@ export function TemplateDoc(props) {
     };
 
     const loadingTemplate = (options) => {
-        const className = classNames('custom-scroll-item scroll-item', {
+        const className = classNames('flex flex-column', {
             odd: options.odd
         });
 
@@ -75,7 +75,7 @@ export default function TemplateDoc() {
 
     const itemTemplate = (item, options) => {
         const { index, count, first, last, even, odd } = options;
-        const className = classNames('custom-scroll-item scroll-item', {
+        const className = classNames('flex flex-column', {
             odd: odd
         });
 
@@ -93,7 +93,7 @@ export default function TemplateDoc() {
     };
 
     const loadingTemplate = (options) => {
-        const className = classNames('custom-scroll-item scroll-item', {
+        const className = classNames('flex flex-column', {
             odd: options.odd
         });
 
@@ -143,7 +143,7 @@ export default function TemplateDoc() {
 
     const itemTemplate = (item, options) => {
         const { index, count, first, last, even, odd } = options;
-        const className = classNames('custom-scroll-item scroll-item', {
+        const className = classNames('flex flex-column', {
             odd: odd
         });
 
@@ -161,7 +161,7 @@ export default function TemplateDoc() {
     };
 
     const loadingTemplate = (options) => {
-        const className = classNames('custom-scroll-item scroll-item', {
+        const className = classNames('flex flex-column', {
             odd: options.odd
         });
 
@@ -202,16 +202,6 @@ export default function TemplateDoc() {
         css: `
 /* VirtualScrollerDemo.css */
 
-.virtualscroller-demo .scroll-item {
-    display: flex;
-    align-items: center;
-}
-
-.virtualscroller-demo .custom-scroll-item {
-    flex-direction: column;
-    align-items: stretch;
-}
-
 .virtualscroller-demo .odd {
     background-color: var(--surface-b);
 }
@@ -225,10 +215,6 @@ export default function TemplateDoc() {
 .virtualscroller-demo .p-horizontal-scroll .p-virtualscroller-content {
     display: flex;
     flex-direction: row;
-}
-
-.virtualscroller-demo .p-horizontal-scroll .scroll-item {
-    writing-mode: vertical-lr;
 }
     `
     };

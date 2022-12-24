@@ -9,7 +9,7 @@ export function BasicDoc(props) {
     const [multiItems] = useState(Array.from({ length: 1000 }).map((_, i) => Array.from({ length: 1000 }).map((_j, j) => `Item #${i}_${j}`)));
 
     const basicItemTemplate = (item, options) => {
-        const className = classNames('scroll-item p-2', {
+        const className = classNames('scroll-item flex align-items-center p-2', {
             odd: options.odd
         });
         const style = options.props.orientation === 'horizontal' ? { width: '50px' } : { height: '50px' };
@@ -22,7 +22,7 @@ export function BasicDoc(props) {
     };
 
     const multiItemTemplate = (items, options) => {
-        const className = classNames('scroll-item p-2', {
+        const className = classNames('flex align-items-center p-2', {
             odd: options.odd
         });
 
@@ -56,7 +56,7 @@ export default function BasicDoc() {
     const [multiItems] = useState(Array.from({ length: 1000 }).map((_, i) => Array.from({ length: 1000 }).map((_j, j) => \`Item #\${i}_\${j}\`)));
 
     const basicItemTemplate = (item, options) => {
-        const className = classNames('scroll-item p-2', {
+        const className = classNames('flex align-items-center p-2', {
             odd: options.odd
         });
         const style = options.props.orientation === 'horizontal' ? { width: '50px' } : { height: '50px' };
@@ -69,7 +69,7 @@ export default function BasicDoc() {
     };
 
     const multiItemTemplate = (items, options) => {
-        const className = classNames('scroll-item p-2', {
+        const className = classNames('flex align-items-center p-2', {
             odd: options.odd
         });
 
@@ -106,7 +106,7 @@ export default function BasicDoc() {
     const [multiItems] = useState(Array.from({ length: 1000 }).map((_, i) => Array.from({ length: 1000 }).map((_j, j) => \`Item #\${i}_\${j}\`)));
 
     const basicItemTemplate = (item, options) => {
-        const className = classNames('scroll-item p-2', {
+        const className = classNames('flex align-items-center p-2', {
             odd: options.odd
         });
         const style = options.props.orientation === 'horizontal' ? { width: '50px' } : { height: '50px' };
@@ -119,7 +119,7 @@ export default function BasicDoc() {
     };
 
     const multiItemTemplate = (items, options) => {
-        const className = classNames('scroll-item p-2', {
+        const className = classNames('flex align-items-center p-2', {
             odd: options.odd
         });
 
@@ -147,16 +147,6 @@ export default function BasicDoc() {
         `,
         css: `
 /* VirtualScrollerDemo.css */
-
-.virtualscroller-demo .scroll-item {
-    display: flex;
-    align-items: center;
-}
-
-.virtualscroller-demo .custom-scroll-item {
-    flex-direction: column;
-    align-items: stretch;
-}
 
 .virtualscroller-demo .odd {
     background-color: var(--surface-b);
