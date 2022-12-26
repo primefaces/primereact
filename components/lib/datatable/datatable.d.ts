@@ -1,15 +1,15 @@
 import * as React from 'react';
-import { Column, ColumnFilterMatchModeType } from '../column';
+import { Column, ColumnFilterMatchModeType, ColumnProps } from '../column';
 import { PaginatorTemplate } from '../paginator';
 import { VirtualScroller, VirtualScrollerProps } from '../virtualscroller/virtualscroller';
 
-type DataTableHeaderTemplateType = React.ReactNode | ((options: DataTableHeaderTemplateOptions) => React.ReactNode);
+type DataTableHeaderTemplateType<TValue extends DataTableValues> = React.ReactNode | ((options: DataTableHeaderTemplateOptions<TValue>) => React.ReactNode);
 
-type DataTableFooterTemplateType = React.ReactNode | ((options: DataTableFooterTemplateOptions) => React.ReactNode);
+type DataTableFooterTemplateType<TValue extends DataTableValues> = React.ReactNode | ((options: DataTableFooterTemplateOptions<TValue>) => React.ReactNode);
 
-type DataTableRowGroupHeaderTemplateType = React.ReactNode | ((data: any, options: DataTableRowGroupHeaderTemplateOptions) => React.ReactNode);
+type DataTableRowGroupHeaderTemplateType<TValue extends DataTableValues> = React.ReactNode | ((data: DataTableValue, options: DataTableRowGroupHeaderTemplateOptions<TValue>) => React.ReactNode);
 
-type DataTableRowGroupFooterTemplateType = React.ReactNode | ((data: any, options: DataTableRowGroupFooterTemplateOptions) => React.ReactNode);
+type DataTableRowGroupFooterTemplateType<TValue extends DataTableValues> = React.ReactNode | ((data: DataTableValue, options: DataTableRowGroupFooterTemplateOptions<TValue>) => React.ReactNode);
 
 type DataTablePaginatorPositionType = 'top' | 'bottom' | 'both';
 
@@ -45,19 +45,19 @@ type DataTableSizeType = 'small' | 'normal' | 'large';
 
 type DataTableScrollDirectionType = 'vertical' | 'horizontal' | 'both';
 
-interface DataTableHeaderTemplateOptions {
-    props: DataTableProps;
+interface DataTableHeaderTemplateOptions<TValue extends DataTableValues> {
+    props: DataTableProps<TValue>;
 }
 
-interface DataTableFooterTemplateOptions extends DataTableHeaderTemplateOptions {}
+interface DataTableFooterTemplateOptions<TValue extends DataTableValues> extends DataTableHeaderTemplateOptions<TValue> {}
 
-interface DataTableRowGroupHeaderTemplateOptions {
+interface DataTableRowGroupHeaderTemplateOptions<TValue extends DataTableValues> {
     index: number;
-    props: DataTableProps;
+    props: DataTableProps<TValue>;
     customRendering: boolean;
 }
 
-interface DataTableRowGroupFooterTemplateOptions extends DataTableRowGroupHeaderTemplateOptions {
+interface DataTableRowGroupFooterTemplateOptions<T extends DataTableValues> extends DataTableRowGroupHeaderTemplateOptions<T> {
     colSpan: number;
 }
 
@@ -126,13 +126,13 @@ interface DataTablePFSEvent extends DataTablePageParams, DataTableSortParams, Da
 }
 
 interface DataTableDataSelectableParams {
-    data: any;
+    data: DataTableValues;
     index: number;
 }
 
-interface DataTableSelectionChangeParams {
+interface DataTableSelectionChangeParams<TValue extends DataTableValues> {
     originalEvent: React.SyntheticEvent;
-    value: any;
+    value: DataTableSelection<TValue>;
     type?: string;
     [key: string]: any;
 }
@@ -144,7 +144,7 @@ interface DataTableSelectAllChangeParams {
 
 interface DataTableRowEventParams {
     originalEvent: React.SyntheticEvent;
-    data: any;
+    data: DataTableValue;
 }
 
 interface DataTableRowMouseEventParams extends Omit<DataTableRowEventParams, 'originalEvent'> {
@@ -158,7 +158,7 @@ interface DataTableCellClickEventParams {
     originalEvent: React.MouseEvent<HTMLElement>;
     value: any;
     field: string;
-    rowData: any;
+    rowData: DataTableValue;
     rowIndex: number;
     cellIndex: number;
     selected: boolean;
@@ -173,7 +173,7 @@ interface DataTableRowEditSaveParams extends DataTableRowEditParams {
 }
 
 interface DataTableRowEditCompleteParams extends DataTableRowEventParams {
-    newData: any;
+    newData: DataTableValue;
     field: string;
     index: number;
 }
@@ -189,7 +189,7 @@ interface DataTableUnselectParams extends DataTableSelectParams {}
 interface DataTableExportFunctionParams {
     data: any;
     field: string;
-    rowData: any;
+    rowData: DataTableValue;
     column: Column;
 }
 
@@ -202,7 +202,7 @@ interface DataTableColReorderParams {
 
 interface DataTableRowReorderParams {
     originalEvent: React.DragEvent<HTMLElement>;
-    value: any;
+    value: DataTableValues;
     dragIndex: number;
     dropIndex: number;
 }
@@ -212,33 +212,58 @@ interface DataTableRowExpansionTemplate {
     customRendering: boolean;
 }
 
-interface DataTableRowClassNameOptions {
-    props: DataTableProps;
+interface DataTableRowClassNameOptions<TValue extends DataTableValues> {
+    props: DataTableProps<TValue>;
 }
 
-interface DataTableCellClassNameOptions {
-    props: DataTableProps;
-    rowData: any;
+interface DataTableCellClassNameOptions<TValue extends DataTableValues> {
+    props: DataTableProps<TValue>;
     column: Column;
-}
-
-interface DataTableShowSelectionElementOptions {
+    field: string;
+    frozenRow: boolean;
     rowIndex: number;
-    props: DataTableProps;
 }
 
-interface DataTableShowRowReorderElementOptions {
+interface DataTableShowSelectionElementOptions<TValue extends DataTableValues> {
     rowIndex: number;
-    props: DataTableProps;
+    props: DataTableProps<TValue>;
 }
 
-interface DataTableRowEditValidatorOptions {
-    props: DataTableProps;
+interface DataTableShowRowReorderElementOptions<TValue extends DataTableValues> {
+    rowIndex: number;
+    props: DataTableProps<TValue>;
 }
 
-export interface DataTableProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'size' | 'onContextMenu' | 'ref'> {
+interface DataTableRowEditValidatorOptions<TValue extends DataTableValues> {
+    props: DataTableProps<TValue>;
+}
+
+interface DataTableValue extends Record<string, any> {}
+
+interface DataTableValues extends Array<DataTableValue> {}
+
+type DataTableRowSelection<TValue extends DataTableValues> = {
+    [K in keyof TValue]: TValue[K];
+};
+
+type DataTableRowSelections<TValue extends DataTableValues> = DataTableRowSelection<TValue>[];
+
+type DataTableCellSelection<TValue extends DataTableValues> = {
+    cellIndex: number;
+    column: Column;
+    field: string;
+    props: ColumnProps;
+    rowData: DataTableRowSelection<TValue>;
+    rowIndex: number;
+    selected: boolean;
+    value: TValue[keyof TValue];
+};
+
+type DataTableSelection<TValue extends DataTableValues> = DataTableRowSelection<TValue> | DataTableRowSelections<TValue> | DataTableCellSelection<TValue>;
+
+export interface DataTableProps<TValue extends DataTableValues> extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'size' | 'onContextMenu' | 'ref' | 'value'> {
     id?: string;
-    value?: any[];
+    value?: TValue;
     alwaysShowPaginator?: boolean;
     autoLayout?: boolean;
     breakpoint?: string;
@@ -265,15 +290,15 @@ export interface DataTableProps extends Omit<React.DetailedHTMLProps<React.Input
     filterLocale?: string;
     filters?: DataTableFilterMeta;
     first?: number;
-    footer?: DataTableFooterTemplateType;
+    footer?: DataTableFooterTemplateType<TValue>;
     footerColumnGroup?: React.ReactNode;
-    frozenValue?: any[];
+    frozenValue?: DataTableRowSelection<TValue>[];
     frozenWidth?: string;
     globalFilter?: DataTableGlobalFilterType;
     globalFilterFields?: string[];
     globalFilterMatchMode?: ColumnFilterMatchModeType;
     groupRowsBy?: string;
-    header?: DataTableHeaderTemplateType;
+    header?: DataTableHeaderTemplateType<TValue>;
     headerColumnGroup?: React.ReactNode;
     lazy?: boolean;
     loading?: boolean;
@@ -293,8 +318,8 @@ export interface DataTableProps extends Omit<React.DetailedHTMLProps<React.Input
     reorderableRows?: boolean;
     resizableColumns?: boolean;
     responsiveLayout?: DataTableResponsiveLayoutType;
-    rowGroupFooterTemplate?: DataTableRowGroupFooterTemplateType;
-    rowGroupHeaderTemplate?: DataTableRowGroupHeaderTemplateType;
+    rowGroupFooterTemplate?: DataTableRowGroupFooterTemplateType<TValue>;
+    rowGroupHeaderTemplate?: DataTableRowGroupHeaderTemplateType<TValue>;
     rowGroupMode?: string;
     rowHover?: boolean;
     rows?: number;
@@ -304,7 +329,7 @@ export interface DataTableProps extends Omit<React.DetailedHTMLProps<React.Input
     scrollable?: boolean;
     selectAll?: boolean;
     selectOnEdit?: boolean;
-    selection?: any | any[];
+    selection?: DataTableSelection<TValue>;
     selectionAutoFocus?: boolean;
     selectionAriaLabel?: string;
     selectionMode?: DataTableSelectionModeType;
@@ -324,7 +349,7 @@ export interface DataTableProps extends Omit<React.DetailedHTMLProps<React.Input
     tableStyle?: React.CSSProperties;
     totalRecords?: number;
     virtualScrollerOptions?: VirtualScrollerProps;
-    cellClassName?(value: any, options: DataTableCellClassNameOptions): object | string;
+    cellClassName?(value: any, options: DataTableCellClassNameOptions<TValue>): object | string;
     customRestoreState?(): object;
     customSaveState?(state: object): void;
     exportFunction?(e: DataTableExportFunctionParams): any;
@@ -339,7 +364,7 @@ export interface DataTableProps extends Omit<React.DetailedHTMLProps<React.Input
     onColumnResizerClick?(e: DataTableColumnResizerClickParams): void;
     onColumnResizerDoubleClick?(e: DataTableColumnResizerClickParams): void;
     onContextMenu?(e: DataTableRowEventParams): void;
-    onContextMenuSelectionChange?(e: DataTableSelectionChangeParams): void;
+    onContextMenuSelectionChange?(e: DataTableSelectionChangeParams<TValue>): void;
     onFilter?(e: DataTablePFSEvent): void;
     onPage?(e: DataTablePFSEvent): void;
     onRowClick?(e: DataTableRowClickEventParams): void;
@@ -358,20 +383,20 @@ export interface DataTableProps extends Omit<React.DetailedHTMLProps<React.Input
     onRowToggle?(e: DataTableRowToggleParams): void;
     onRowUnselect?(e: DataTableUnselectParams): void;
     onSelectAllChange?(e: DataTableSelectAllChangeParams): void;
-    onSelectionChange?(e: DataTableSelectionChangeParams): void;
+    onSelectionChange?(e: DataTableSelectionChangeParams<TValue>): void;
     onSort?(e: DataTablePFSEvent): void;
     onStateRestore?(state: object): void;
     onStateSave?(state: object): void;
-    onValueChange?(value: any[]): void;
-    rowClassName?(data: any, options: DataTableRowClassNameOptions): object | string;
-    rowEditValidator?(data: any, options: DataTableRowEditValidatorOptions): boolean;
-    rowExpansionTemplate?(data: any, options: DataTableRowExpansionTemplate): React.ReactNode;
-    showRowReorderElement?(data: any, options: DataTableShowRowReorderElementOptions): boolean | undefined | null;
-    showSelectionElement?(data: any, options: DataTableShowSelectionElementOptions): boolean | undefined | null;
+    onValueChange?(value: DataTableValues): void;
+    rowClassName?(data: DataTableValue, options: DataTableRowClassNameOptions<TValue>): object | string;
+    rowEditValidator?(data: DataTableValue, options: DataTableRowEditValidatorOptions<TValue>): boolean;
+    rowExpansionTemplate?(data: DataTableValue, options: DataTableRowExpansionTemplate): React.ReactNode;
+    showRowReorderElement?(data: DataTableValue, options: DataTableShowRowReorderElementOptions<TValue>): boolean | undefined | null;
+    showSelectionElement?(data: DataTableValue, options: DataTableShowSelectionElementOptions<TValue>): boolean | undefined | null;
     children?: React.ReactNode;
 }
 
-export declare class DataTable extends React.Component<DataTableProps, any> {
+export declare class DataTable<TValue extends DataTableValues> extends React.Component<DataTableProps<TValue>, any> {
     public clearState(): void;
     public closeEditingCell(): void;
     public exportCSV(options?: { selectionOnly: boolean }): void;
