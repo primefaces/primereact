@@ -32,13 +32,6 @@ export function DocSectionCode(props) {
                             label="TS"
                             onClick={() => setCodeLang('typescript')}
                         ></Button>
-                        {props.code.css ? (
-                            <Button
-                                className={classNames('p-button-rounded p-button-text p-button-plain h-2rem w-2rem p-0 inline-flex align-items-center justify-content-center', { 'doc-section-code-active text-primary': codeLang === 'css' })}
-                                label="CSS"
-                                onClick={() => setCodeLang('css')}
-                            ></Button>
-                        ) : null}
                         {props.code.php ? (
                             <Button
                                 className={classNames('p-button-rounded p-button-text p-button-plain h-2rem w-2rem p-0 inline-flex align-items-center justify-content-center', { 'doc-section-code-active text-primary': codeLang === 'php' })}
@@ -110,11 +103,6 @@ export function DocSectionCode(props) {
             {codeMode !== 'basic' && codeLang === 'typescript' && (
                 <div>
                     <CodeHighlight lang={'tsx'}>{props.code.typescript}</CodeHighlight>
-                </div>
-            )}
-            {codeMode !== 'basic' && codeLang === 'css' && (
-                <div>
-                    <CodeHighlight lang={'css'}>{props.code.css}</CodeHighlight>
                 </div>
             )}
             {codeMode !== 'basic' && codeLang === 'php' && (
