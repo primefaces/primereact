@@ -1,13 +1,11 @@
 import getConfig from 'next/config';
 
-export class EventService {
-    constructor() {
-        this.contextPath = getConfig().publicRuntimeConfig.contextPath;
-    }
+const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
+export const EventService = {
     getEvents() {
-        return fetch(this.contextPath + '/data/events.json')
+        return fetch(contextPath + '/data/events.json')
             .then((res) => res.json())
             .then((d) => d.data);
     }
-}
+};

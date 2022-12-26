@@ -12,9 +12,7 @@ export function ControlledSelectionDoc(props) {
     const [selectedProducts3, setSelectedProducts3] = useState(null);
 
     useEffect(() => {
-        const productService = new ProductService();
-
-        productService.getProductsMini().then((data) => setProducts(data));
+        ProductService.getProductsMini().then((data) => setProducts(data));
     }, []);
 
     const isSelectable = (value, field) => {
@@ -104,9 +102,9 @@ const ControlledSelectionDoc = () => {
     const [selectedProducts3, setSelectedProducts3] = useState(null);
 
     useEffect(() => {
-        const productService = new ProductService();
+        
 
-        productService.getProductsMini().then(data => setProducts(data));
+        ProductService.getProductsMini().then(data => setProducts(data));
     },[]);
 
         const isSelectable = (value, field) => {
@@ -192,9 +190,9 @@ const ControlledSelectionDoc = () => {
     const [selectedProducts3, setSelectedProducts3] = useState(null);
 
     useEffect(() => {
-        const productService = new ProductService();
+        
 
-        productService.getProductsMini().then(data => setProducts(data));
+        ProductService.getProductsMini().then(data => setProducts(data));
     },[]);
 
         const isSelectable = (value, field) => {

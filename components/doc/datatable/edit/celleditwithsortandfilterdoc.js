@@ -17,10 +17,8 @@ export function CellEditWithSortAndFilterDoc(props) {
         { field: 'price', header: 'Price' }
     ];
 
-    const productService = new ProductService();
-
     useEffect(() => {
-        productService.getProductsMini().then((data) => setProducts(data));
+        ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const isPositiveInteger = (val) => {
@@ -94,10 +92,10 @@ import './DataTableDemo.css';
 const CellEditWithSortAndFilterDoc = () => {
     const [products, setProducts] = useState(null);
 
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsMini().then((data) => setProducts(data));
+        ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const isPositiveInteger = (val) => {
@@ -176,10 +174,10 @@ import './DataTableDemo.css';
 const CellEditWithSortAndFilterDoc = () => {
     const [products, setProducts] = useState(null);
 
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsMini().then((data) => setProducts(data));
+        ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const isPositiveInteger = (val) => {

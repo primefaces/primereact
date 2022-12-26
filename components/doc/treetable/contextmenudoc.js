@@ -35,10 +35,8 @@ export function ContextMenuDoc(props) {
         }
     ];
 
-    const nodeservice = new NodeService();
-
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then((data) => setNodes(data));
+        NodeService.getTreeTableNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const code = {
@@ -87,10 +85,10 @@ const menu = [
     }
 ];
 
-const nodeservice = new NodeService();
+
 
 useEffect(() => {
-    nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    NodeService.getTreeTableNodes().then(data => setNodes(data));
 }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
@@ -148,10 +146,10 @@ const menu = [
     }
 ];
 
-const nodeservice = new NodeService();
+
 
 useEffect(() => {
-    nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    NodeService.getTreeTableNodes().then(data => setNodes(data));
 }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (

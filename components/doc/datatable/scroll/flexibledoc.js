@@ -10,10 +10,9 @@ import { Dialog } from '../../../lib/dialog/Dialog';
 export function ScrollFlexibleDoc(props) {
     const [customers, setCustomers] = useState([]);
     const [dialogVisible, setDialogVisible] = useState(false);
-    const customerService = new CustomerService();
 
     useEffect(() => {
-        customerService.getCustomersLarge().then((data) => {
+        CustomerService.getCustomersLarge().then((data) => {
             setCustomers(data);
         });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -53,7 +52,7 @@ import { CustomerService } from '../service/CustomerService';
 const ScrollFlexibleDoc = () => {
 
     useEffect(() => {
-        customerService.getCustomersLarge().then((data) => {
+        CustomerService.getCustomersLarge().then((data) => {
             setCustomers(data);
         });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -96,7 +95,7 @@ import { CustomerService } from '../service/CustomerService';
 const ScrollFlexibleDoc = () => {
     
     useEffect(() => {
-        customerService.getCustomersLarge().then((data) => {
+        CustomerService.getCustomersLarge().then((data) => {
             setCustomers(data);
         });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps

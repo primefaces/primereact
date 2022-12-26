@@ -8,11 +8,11 @@ import { DocSectionText } from '../../common/docsectiontext';
 
 export function RowSpanGroupingDoc(props) {
     const [customers, setCustomers] = useState([]);
-    const customerService = new CustomerService();
+
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
-        customerService.getCustomersMedium().then((data) => setCustomers(data));
+        CustomerService.getCustomersMedium().then((data) => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const countryBodyTemplate = (rowData) => {
@@ -71,10 +71,10 @@ import './DataTableDemo.css';
 const RowSpanGroupingDoc = () => {
 
     const [customers, setCustomers] = useState([]);
-    const customerService = new CustomerService();
+    
 
     useEffect(() => {
-        customerService.getCustomersMedium().then(data => setCustomers(data));
+        CustomerService.getCustomersMedium().then(data => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const countryBodyTemplate = (rowData) => {
@@ -124,10 +124,10 @@ import './DataTableDemo.css';
 const RowSpanGroupingDoc = () => {
 
     const [customers, setCustomers] = useState([]);
-    const customerService = new CustomerService();
+    
 
     useEffect(() => {
-        customerService.getCustomersMedium().then(data => setCustomers(data));
+        CustomerService.getCustomersMedium().then(data => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const countryBodyTemplate = (rowData) => {

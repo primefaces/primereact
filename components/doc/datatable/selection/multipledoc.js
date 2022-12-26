@@ -15,9 +15,7 @@ export function MultipleDoc(props) {
     const [selectedProducts6, setSelectedProducts6] = useState(null);
 
     useEffect(() => {
-        const productService = new ProductService();
-
-        productService.getProductsMini().then((data) => setProducts(data));
+        ProductService.getProductsMini().then((data) => setProducts(data));
     }, []);
 
     const code = {
@@ -88,9 +86,9 @@ const MultipleDoc = () => {
     const [selectedProducts6, setSelectedProducts6] = useState(null);
 
     useEffect(() => {
-        const productService = new ProductService();
+        
 
-        productService.getProductsMini().then(data => setProducts(data));
+        ProductService.getProductsMini().then(data => setProducts(data));
     },[]);
 
     return (
@@ -164,9 +162,9 @@ const MultipleDoc = () => {
     const [selectedProducts6, setSelectedProducts6] = useState(null);
 
     useEffect(() => {
-        const productService = new ProductService();
+        
 
-        productService.getProductsMini().then(data => setProducts(data));
+        ProductService.getProductsMini().then(data => setProducts(data));
     },[]);
 
     return (

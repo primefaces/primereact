@@ -17,7 +17,7 @@ export function ReactHookFormDemo(props) {
     const [countries, setCountries] = useState([]);
     const [showMessage, setShowMessage] = useState(false);
     const [formData, setFormData] = useState({});
-    const countryservice = new CountryService();
+
     const defaultValues = {
         name: '',
         email: '',
@@ -28,7 +28,7 @@ export function ReactHookFormDemo(props) {
     };
 
     useEffect(() => {
-        countryservice.getCountries().then((data) => setCountries(data));
+        CountryService.getCountries().then((data) => setCountries(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const {
@@ -158,7 +158,7 @@ export default function ReactHookFormDemo() {
     const [countries, setCountries] = useState([]);
     const [showMessage, setShowMessage] = useState(false);
     const [formData, setFormData] = useState({});
-    const countryservice = new CountryService();
+    
     const defaultValues = {
         name: '',
         email: '',
@@ -169,7 +169,7 @@ export default function ReactHookFormDemo() {
     }
 
     useEffect(() => {
-        countryservice.getCountries().then(data => setCountries(data));
+        CountryService.getCountries().then(data => setCountries(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
@@ -295,7 +295,7 @@ export default function ReactHookFormDemo() {
     const [countries, setCountries] = useState([]);
     const [showMessage, setShowMessage] = useState(false);
     const [formData, setFormData] = useState({});
-    const countryservice = new CountryService();
+    
     const defaultValues = {
         name: '',
         email: '',
@@ -306,7 +306,7 @@ export default function ReactHookFormDemo() {
     }
 
     useEffect(() => {
-        countryservice.getCountries().then(data => setCountries(data));
+        CountryService.getCountries().then(data => setCountries(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });

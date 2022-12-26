@@ -8,11 +8,11 @@ import getConfig from 'next/config';
 
 export function VerticalDoc(props) {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
+
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
+        ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const productTemplate = (product) => {
@@ -50,10 +50,10 @@ import { ProductService } from '../service/ProductService';
 
 export default function VerticalDoc() {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
+        ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const productTemplate = (product) => {
@@ -94,10 +94,10 @@ import { ProductService } from '../service/ProductService';
 
 export default function VerticalDoc() {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
+        ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const productTemplate = (product) => {

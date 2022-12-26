@@ -7,10 +7,9 @@ import { DocSectionText } from '../../common/docsectiontext';
 
 export function FrozenColumnsDoc(props) {
     const [nodes, setNodes] = useState([]);
-    const nodeservice = new NodeService();
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then((data) => setNodes(data));
+        NodeService.getTreeTableNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const code = {
@@ -33,10 +32,10 @@ import { NodeService } from '../service/NodeService';
 
 const FrozenColumnsDoc = () => {
     const [nodes, setNodes] = useState([]);
-    const nodeservice = new NodeService();
+    
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+        NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
@@ -62,10 +61,10 @@ import { NodeService } from '../service/NodeService';
 
 const FrozenColumnsDoc = () => {
     const [nodes, setNodes] = useState([]);
-    const nodeservice = new NodeService();
+    
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+        NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (

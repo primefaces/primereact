@@ -8,10 +8,9 @@ import { DocSectionText } from '../../common/docsectiontext';
 export function SortableDisabledDoc(props) {
     const [products, setProducts] = useState([]);
     const [multiSortMeta, setMultiSortMeta] = useState([{ field: 'category', order: -1 }]);
-    const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data));
+        ProductService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const formatCurrency = (value) => {
@@ -41,10 +40,10 @@ import { ProductService } from '../service/ProductService';
 const SortableDisabledDoc = () => {
     const [products, setProducts] = useState([]);
     const [multiSortMeta, setMultiSortMeta] = useState([{ field: 'category', order: -1 }]);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        ProductService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const formatCurrency = (value) => {
@@ -78,10 +77,10 @@ import { ProductService } from '../service/ProductService';
 const SortableDisabledDoc = () => {
     const [products, setProducts] = useState([]);
     const [multiSortMeta, setMultiSortMeta] = useState([{ field: 'category', order: -1 }]);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        ProductService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const formatCurrency = (value) => {

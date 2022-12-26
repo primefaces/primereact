@@ -8,10 +8,9 @@ import { DocSectionText } from '../common/docsectiontext';
 
 export function EditDoc(props) {
     const [nodes, setNodes] = useState([]);
-    const nodeservice = new NodeService();
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then((data) => setNodes(data));
+        NodeService.getTreeTableNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onEditorValueChange = (options, value) => {
@@ -74,10 +73,10 @@ import './TreeTableDemo.css';
 
 const EditDoc = () => {
     const [nodes, setNodes] = useState([]);
-    const nodeservice = new NodeService();
+    
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+        NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onEditorValueChange = (options, value) => {
@@ -146,10 +145,10 @@ import './TreeTableDemo.css';
 
 const EditDoc = () => {
     const [nodes, setNodes] = useState([]);
-    const nodeservice = new NodeService();
+    
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+        NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onEditorValueChange = (options, value) => {

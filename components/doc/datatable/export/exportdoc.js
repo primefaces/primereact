@@ -11,7 +11,6 @@ export function ExportDoc(props) {
     const [products, setProducts] = useState([]);
     const [selectedProducts, setSelectedProducts] = useState([]);
     const dt = useRef(null);
-    const productService = new ProductService();
 
     const cols = [
         { field: 'code', header: 'Code' },
@@ -23,7 +22,7 @@ export function ExportDoc(props) {
     const exportColumns = cols.map((col) => ({ title: col.header, dataKey: col.field }));
 
     useEffect(() => {
-        productService.getProductsMini().then((data) => setProducts(data));
+        ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onSelectionChange = (e) => {
@@ -103,7 +102,7 @@ export const ExportDoc = () => {
     const [products, setProducts] = useState([]);
     const [selectedProducts, setSelectedProducts] = useState([]);
     const dt = useRef(null);
-    const productService = new ProductService();
+    
 
     const cols = [
         { field: 'code', header: 'Code' },
@@ -115,7 +114,7 @@ export const ExportDoc = () => {
     const exportColumns = cols.map(col => ({ title: col.header, dataKey: col.field }));
 
     useEffect(() => {
-        productService.getProductsMini().then((data) => setProducts(data));
+        ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 
@@ -200,7 +199,7 @@ export const ExportDoc = () => {
     const [products, setProducts] = useState([]);
     const [selectedProducts, setSelectedProducts] = useState([]);
     const dt = useRef(null);
-    const productService = new ProductService();
+    
 
     const cols = [
         { field: 'code', header: 'Code' },
@@ -212,7 +211,7 @@ export const ExportDoc = () => {
     const exportColumns = cols.map(col => ({ title: col.header, dataKey: col.field }));
 
     useEffect(() => {
-        productService.getProductsMini().then((data) => setProducts(data));
+        ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 

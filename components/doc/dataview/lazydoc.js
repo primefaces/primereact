@@ -15,7 +15,6 @@ export function LazyDataViewDoc(props) {
     const rows = useRef(6);
     const datasource = useRef(null);
     const isMounted = useRef(false);
-    const productService = new ProductService();
 
     useEffect(() => {
         if (isMounted.current) {
@@ -28,7 +27,7 @@ export function LazyDataViewDoc(props) {
     useEffect(() => {
         setTimeout(() => {
             isMounted.current = true;
-            productService.getProducts().then((data) => {
+            ProductService.getProducts().then((data) => {
                 datasource.current = data;
                 setTotalRecords(data.length);
                 setProducts(datasource.current.slice(0, rows.current));
@@ -145,7 +144,7 @@ export default function LazyDataViewDoc() {
     const rows = useRef(6);
     const datasource = useRef(null);
     const isMounted = useRef(false);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
         if (isMounted.current) {
@@ -158,7 +157,7 @@ export default function LazyDataViewDoc() {
     useEffect(() => {
         setTimeout(() => {
             isMounted.current = true;
-            productService.getProducts().then(data => {
+            ProductService.getProducts().then(data => {
                 datasource.current = data;
                 setTotalRecords(data.length);
                 setProducts(datasource.current.slice(0, rows.current));
@@ -280,7 +279,7 @@ export default function LazyDataViewDoc() {
     const rows = useRef(6);
     const datasource = useRef(null);
     const isMounted = useRef(false);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
         if (isMounted.current) {
@@ -293,7 +292,7 @@ export default function LazyDataViewDoc() {
     useEffect(() => {
         setTimeout(() => {
             isMounted.current = true;
-            productService.getProducts().then(data => {
+            ProductService.getProducts().then(data => {
                 datasource.current = data;
                 setTotalRecords(data.length);
                 setProducts(datasource.current.slice(0, rows.current));

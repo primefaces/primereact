@@ -16,10 +16,8 @@ export function ReorderDoc(props) {
         { field: 'quantity', header: 'Quantity' }
     ];
 
-    const productService = new ProductService();
-
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data));
+        ProductService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onColReorder = () => {
@@ -59,10 +57,10 @@ const ReorderDoc = () => {
         {field: 'quantity', header: 'Quantity'}
     ];
 
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        ProductService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onColReorder = () => {
@@ -109,10 +107,10 @@ const ReorderDoc = () => {
         {field: 'quantity', header: 'Quantity'}
     ];
 
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        ProductService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onColReorder = () => {

@@ -59,7 +59,7 @@ export default function Topbar(props) {
     }, [activeMenuIndex]); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
-        versionService.getVersions().then((data) => setVersions(data));
+        VersionService.getVersions().then((data) => setVersions(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const containerElement = useRef(null);
@@ -96,7 +96,7 @@ export default function Topbar(props) {
     const templatesOverlayRef = useRef();
     const versionsOverlayRef = useRef();
     const outsideClickListener = useRef();
-    const versionService = new VersionService();
+
     const logoMap = {
         'bootstrap4-light-blue': 'bootstrap4-light-blue.svg',
         'bootstrap4-light-purple': 'bootstrap4-light-purple.svg',

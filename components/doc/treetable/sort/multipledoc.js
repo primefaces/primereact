@@ -7,10 +7,9 @@ import { DocSectionText } from '../../common/docsectiontext';
 
 export function MultipleDoc(props) {
     const [nodes, setNodes] = useState([]);
-    const nodeservice = new NodeService();
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then((data) => {
+        NodeService.getTreeTableNodes().then((data) => {
             setNodes(data);
         });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -31,10 +30,10 @@ import { NodeService } from '../service/NodeService';
 
 const MultipleDoc = () => {
     const [nodes, setNodes] = useState([]);
-    const nodeservice = new NodeService();
+    
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then(data => {
+        NodeService.getTreeTableNodes().then(data => {
             let _nodes = data;
             _nodes.push({
                 data: {
@@ -67,10 +66,10 @@ import { NodeService } from '../service/NodeService';
 
 const MultipleDoc = () => {
     const [nodes, setNodes] = useState([]);
-    const nodeservice = new NodeService();
+    
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then(data => {
+        NodeService.getTreeTableNodes().then(data => {
             let _nodes = data;
             _nodes.push({
                 data: {

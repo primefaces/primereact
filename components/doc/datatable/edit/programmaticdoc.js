@@ -19,10 +19,8 @@ export function ProgrammaticDoc(props) {
         { label: 'Out of Stock', value: 'OUTOFSTOCK' }
     ];
 
-    const productService = new ProductService();
-
     useEffect(() => {
-        productService.getProductsMini().then((data) => setProducts(data));
+        ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const getStatusLabel = (status) => {
@@ -117,10 +115,10 @@ const ProgrammaticDoc = () => {
     const [products, setProducts] = useState(null);
     const [editingRows, setEditingRows] = useState({});
 
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsMini().then((data) => setProducts(data));
+        ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const statuses = [
@@ -226,10 +224,10 @@ const ProgrammaticDoc = () => {
     const [products, setProducts] = useState(null);
     const [editingRows, setEditingRows] = useState({});
 
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsMini().then((data) => setProducts(data));
+        ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const statuses = [

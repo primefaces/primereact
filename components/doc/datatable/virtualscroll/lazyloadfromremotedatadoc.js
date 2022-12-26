@@ -7,8 +7,7 @@ import { CarService } from '../../../../service/CarService';
 import { Skeleton } from '../../../lib/skeleton/Skeleton';
 
 export function LazyLoadingFromRemoteDataSourceDoc(props) {
-    const carService = new CarService();
-    const cars = Array.from({ length: 100000 }).map((_, i) => carService.generateCar(i + 1));
+    const cars = Array.from({ length: 100000 }).map((_, i) => CarService.generateCar(i + 1));
     const [virtualCars, setVirtualCars] = useState(Array.from({ length: 100000 }));
     const [lazyLoading, setLazyLoading] = useState(false);
     let loadLazyTimeout = null;
@@ -62,8 +61,8 @@ import { Skeleton } from 'primereact/skeleton';
 import { CarService } from '../service/CarService';
 
 const LazyLoadingFromRemoteDataSourceDoc = () => {
-    const carService = new CarService();
-    const cars = Array.from({ length: 100000 }).map((_, i) => carService.generateCar(i + 1));
+    
+    const cars = Array.from({ length: 100000 }).map((_, i) => CarService.generateCar(i + 1));
     const [virtualCars, setVirtualCars] = useState(Array.from({ length: 100000 }));
     const [lazyLoading, setLazyLoading] = useState(false);
     let loadLazyTimeout = null;
@@ -120,8 +119,8 @@ import { Skeleton } from 'primereact/skeleton';
 import { CarService } from '../service/CarService';
 
 const LazyLoadingFromRemoteDataSourceDoc = () => {
-    const carService = new CarService();
-    const cars = Array.from({ length: 100000 }).map((_, i) => carService.generateCar(i + 1));
+    
+    const cars = Array.from({ length: 100000 }).map((_, i) => CarService.generateCar(i + 1));
     const [virtualCars, setVirtualCars] = useState(Array.from({ length: 100000 }));
     const [lazyLoading, setLazyLoading] = useState(false);
     let loadLazyTimeout = null;

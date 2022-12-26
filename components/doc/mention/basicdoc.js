@@ -8,10 +8,9 @@ import { DocSectionText } from '../common/docsectiontext';
 export function BasicDoc(props) {
     const [customers, setCustomers] = useState([]);
     const [suggestions, setSuggestions] = useState([]);
-    const customerservice = new CustomerService();
 
     useEffect(() => {
-        customerservice.getCustomersSmall().then((data) => {
+        CustomerService.getCustomersSmall().then((data) => {
             data.forEach((d) => (d['nickname'] = `${d.name.replace(/\s+/g, '').toLowerCase()}_${d.id}`));
             setCustomers(data);
         });
@@ -61,10 +60,10 @@ import { CustomerService } from '../../../service/CustomerService';
 export default function BasicDoc() {
     const [customers, setCustomers] = useState([]);
     const [suggestions, setSuggestions] = useState([]);
-    const customerservice = new CustomerService();
+    
 
     useEffect(() => {
-        customerservice.getCustomersSmall().then(data => {
+        CustomerService.getCustomersSmall().then(data => {
             data.forEach(d => d['nickname'] = \`\${d.name.replace(/\\s+/g, '').toLowerCase()}_\${d.id}\`);
             setCustomers(data);
         });
@@ -116,10 +115,10 @@ import { CustomerService } from '../../../service/CustomerService';
 export default function BasicDoc() {
     const [customers, setCustomers] = useState<any>([]);
     const [suggestions, setSuggestions] = useState<any>([]);
-    const customerservice = new CustomerService();
+    
 
     useEffect(() => {
-        customerservice.getCustomersSmall().then(data => {
+        CustomerService.getCustomersSmall().then(data => {
             data.forEach(d => d['nickname'] = \`\${d.name.replace(/\\s+/g, '').toLowerCase()}_\${d.id}\`);
             setCustomers(data);
         });

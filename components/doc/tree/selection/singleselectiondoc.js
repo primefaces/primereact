@@ -9,10 +9,9 @@ export function SingleSelectionDoc(props) {
     const [nodes, setNodes] = useState(null);
     const [selectedKey, setSelectedKey] = useState(null);
     const toast = useRef(null);
-    const nodeService = new NodeService();
 
     useEffect(() => {
-        nodeService.getTreeNodes().then((data) => setNodes(data));
+        NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onNodeSelect = (node) => {
@@ -38,10 +37,10 @@ export default function SingleSelectionDoc() {
     const [nodes, setNodes] = useState(null);
     const [selectedKey, setSelectedKey] = useState(null);
     const toast = useRef(null);
-    const nodeService = new NodeService();
+    
 
     useEffect(() => {
-        nodeService.getTreeNodes().then(data => setNodes(data));
+        NodeService.getTreeNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onNodeSelect = (node) => {
@@ -68,10 +67,10 @@ export default function SingleSelectionDoc() {
     const [nodes, setNodes] = useState(null);
     const [selectedKey, setSelectedKey] = useState(null);
     const toast = useRef(null);
-    const nodeService = new NodeService();
+    
 
     useEffect(() => {
-        nodeService.getTreeNodes().then(data => setNodes(data));
+        NodeService.getTreeNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onNodeSelect = (node) => {

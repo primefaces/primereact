@@ -257,11 +257,8 @@ export function AdvanceDoc(props) {
     useEffect(() => {
         TerminalService.on('command', commandHandler);
 
-        const nodeService = new NodeService();
-        const galleriaService = new PhotoService();
-
-        galleriaService.getImages().then((data) => setImages(data));
-        nodeService.getTreeNodes().then((data) => setNodes(data));
+        PhotoService.getImages().then((data) => setImages(data));
+        NodeService.getTreeNodes().then((data) => setNodes(data));
 
         PrimeReact.appendTo = 'self';
 
@@ -559,11 +556,11 @@ export default function AdvanceDoc() {
     useEffect(() => {
         TerminalService.on('command', commandHandler);
 
-        const nodeService = new NodeService();
-        const galleriaService = new PhotoService();
+        
+        
 
-        galleriaService.getImages().then((data) => setImages(data));
-        nodeService.getTreeNodes().then((data) => setNodes(data));
+        PhotoService.getImages().then((data) => setImages(data));
+        NodeService.getTreeNodes().then((data) => setNodes(data));
 
         PrimeReact.appendTo = 'self';
 
@@ -864,11 +861,11 @@ export default function AdvanceDoc() {
     useEffect(() => {
         TerminalService.on('command', commandHandler);
 
-        const nodeService = new NodeService();
-        const galleriaService = new PhotoService();
+        
+        
 
-        galleriaService.getImages().then((data) => setImages(data));
-        nodeService.getTreeNodes().then((data) => setNodes(data));
+        PhotoService.getImages().then((data) => setImages(data));
+        NodeService.getTreeNodes().then((data) => setNodes(data));
 
         PrimeReact.appendTo = 'self';
 

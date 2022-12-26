@@ -33,9 +33,7 @@ export function EventsDoc(props) {
     };
 
     useEffect(() => {
-        const productService = new ProductService();
-
-        productService.getProductsMini().then((data) => setProducts(data));
+        ProductService.getProductsMini().then((data) => setProducts(data));
     }, []);
 
     const code = {
@@ -70,9 +68,9 @@ const EventsDoc = () => {
     const [selectedProduct2, setSelectedProduct2] = useState(null);
 
     useEffect(() => {
-        const productService = new ProductService();
+        
 
-        productService.getProductsMini().then(data => setProducts(data));
+        ProductService.getProductsMini().then(data => setProducts(data));
     },[]);
 
     return (
@@ -137,9 +135,9 @@ const EventsDoc = () => {
     }
 
     useEffect(() => {
-        const productService = new ProductService();
+        
 
-        productService.getProductsMini().then(data => setProducts(data));
+        ProductService.getProductsMini().then(data => setProducts(data));
     },[]);
 
     return (

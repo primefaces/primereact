@@ -32,10 +32,10 @@ import { ProductService } from '../service/ProductService';
 
 const ScrollDoc = () => {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        ProductService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const statusTemplate = (rowData) => {
@@ -69,10 +69,10 @@ import { ProductService } from '../service/ProductService';
 
 const ScrollDoc = () => {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        ProductService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const statusTemplate = (rowData) => {
@@ -99,8 +99,6 @@ const ScrollDoc = () => {
         `
     };
 
-    const productService = new ProductService();
-
     const statusTemplate = (rowData) => {
         return <span className={`product-badge status-${rowData.inventoryStatus ? rowData.inventoryStatus.toLowerCase() : ''}`}>{rowData.inventoryStatus}</span>;
     };
@@ -114,7 +112,7 @@ const ScrollDoc = () => {
     };
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data));
+        ProductService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const demoOptions = [

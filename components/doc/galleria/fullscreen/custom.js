@@ -8,7 +8,7 @@ import { DocSectionText } from '../../common/docsectiontext';
 export function CustomContentDoc(props) {
     const [images, setImages] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
-    const galleriaService = new PhotoService();
+
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const galleria = useRef(null);
 
@@ -28,7 +28,7 @@ export function CustomContentDoc(props) {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then((data) => setImages(data));
+        PhotoService.getImages().then((data) => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
@@ -67,7 +67,7 @@ import { PhotoService } from '../service/PhotoService';
 export default function CustomContentDoc() {
     const [images, setImages] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
-    const galleriaService = new PhotoService();
+    
     const galleria = useRef(null);
 
     const responsiveOptions = [
@@ -86,7 +86,7 @@ export default function CustomContentDoc() {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
@@ -128,7 +128,7 @@ import { PhotoService } from '../service/PhotoService';
 export default function CustomContentDoc() {
     const [images, setImages] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
-    const galleriaService = new PhotoService();
+    
     const galleria = useRef<Galleria>(null);
 
     const responsiveOptions: GalleriaResponsiveOptions[] = [
@@ -147,7 +147,7 @@ export default function CustomContentDoc() {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {

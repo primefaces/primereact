@@ -6,10 +6,9 @@ import { NodeService } from '../../../../service/NodeService';
 
 export function LenientFilterDoc(props) {
     const [nodes, setNodes] = useState(null);
-    const nodeService = new NodeService();
 
     useEffect(() => {
-        nodeService.getTreeNodes().then((data) => setNodes(data));
+        NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const code = {
@@ -23,10 +22,10 @@ import { NodeService } from '../service/NodeService';
 
 export default function LenientFilterDoc() {
     const [nodes, setNodes] = useState(null);
-    const nodeService = new NodeService();
+    
 
     useEffect(() => {
-        nodeService.getTreeNodes().then(data => setNodes(data));
+        NodeService.getTreeNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
@@ -41,10 +40,10 @@ import { NodeService } from '../service/NodeService';
 
 export default function LenientFilterDoc() {
     const [nodes, setNodes] = useState(null);
-    const nodeService = new NodeService();
+    
 
     useEffect(() => {
-        nodeService.getTreeNodes().then(data => setNodes(data));
+        NodeService.getTreeNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (

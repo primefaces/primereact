@@ -7,7 +7,7 @@ import getConfig from 'next/config';
 
 export function CaptionDoc(props) {
     const [images, setImages] = useState(null);
-    const galleriaService = new PhotoService();
+
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     const responsiveOptions = [
@@ -26,7 +26,7 @@ export function CaptionDoc(props) {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then((data) => setImages(data));
+        PhotoService.getImages().then((data) => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
@@ -59,7 +59,7 @@ import { PhotoService } from '../service/PhotoService';
 
 export default function CaptionDoc() {
     const [images, setImages] = useState(null);
-    const galleriaService = new PhotoService();
+    
 
     const responsiveOptions = [
         {
@@ -77,7 +77,7 @@ export default function CaptionDoc() {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
@@ -113,7 +113,7 @@ import { PhotoService } from '../service/PhotoService';
 
 export default function CaptionDoc() {
     const [images, setImages] = useState(null);
-    const galleriaService = new PhotoService();
+    
 
     const responsiveOptions = [
         {
@@ -131,7 +131,7 @@ export default function CaptionDoc() {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {

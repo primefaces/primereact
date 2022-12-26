@@ -9,10 +9,9 @@ export function MultipleDoc(props) {
     const [customers, setCustomers] = useState([]);
     const [multipleSuggestions, setMultipleSuggestions] = useState([]);
     const tagSuggestions = ['primereact', 'primefaces', 'primeng', 'primevue'];
-    const customerservice = new CustomerService();
 
     useEffect(() => {
-        customerservice.getCustomersSmall().then((data) => {
+        CustomerService.getCustomersSmall().then((data) => {
             data.forEach((d) => (d['nickname'] = `${d.name.replace(/\s+/g, '').toLowerCase()}_${d.id}`));
             setCustomers(data);
         });
@@ -80,10 +79,10 @@ export default function MultipleDoc() {
     const [customers, setCustomers] = useState([]);
     const [multipleSuggestions, setMultipleSuggestions]= useState([]);
     const tagSuggestions = ['primereact', 'primefaces', 'primeng', 'primevue'];
-    const customerservice = new CustomerService();
+    
 
     useEffect(() => {
-        customerservice.getCustomersSmall().then(data => {
+        CustomerService.getCustomersSmall().then(data => {
             data.forEach(d => d['nickname'] = \`\${d.name.replace(/\\s+/g, '').toLowerCase()}_\${d.id}\`);
             setCustomers(data);
         });
@@ -156,10 +155,10 @@ export default function MultipleDoc() {
     const [customers, setCustomers] = useState<any>([]);
     const [multipleSuggestions, setMultipleSuggestions]= useState<any>([]);
     const tagSuggestions = ['primereact', 'primefaces', 'primeng', 'primevue'];
-    const customerservice = new CustomerService();
+    
 
     useEffect(() => {
-        customerservice.getCustomersSmall().then(data => {
+        CustomerService.getCustomersSmall().then(data => {
             data.forEach(d => d['nickname'] = \`\${d.name.replace(/\\s+/g, '').toLowerCase()}_\${d.id}\`);
             setCustomers(data);
         });

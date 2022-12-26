@@ -9,10 +9,9 @@ import { DocSectionText } from '../common/docsectiontext';
 export function LoaderDataScrollerDoc(props) {
     const [products, setProducts] = useState([]);
     const ds = useRef(null);
-    const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProducts().then((data) => setProducts(data));
+        ProductService.getProducts().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (data) => {
@@ -51,10 +50,10 @@ import { ProductService } from '../service/ProductService';
 export default function LoaderDataScrollerDoc() {
     const [products, setProducts] = useState([]);
     const ds = useRef(null);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProducts().then((data) => setProducts(data));
+        ProductService.getProducts().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (data) => {
@@ -94,10 +93,10 @@ import { ProductService } from '../service/ProductService';
 export default function LoaderDataScrollerDoc() {
     const [products, setProducts] = useState([]);
     const ds = useRef(null);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProducts().then((data) => setProducts(data));
+        ProductService.getProducts().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (data) => {

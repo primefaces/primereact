@@ -7,10 +7,9 @@ import { DocSectionText } from '../../common/docsectiontext';
 
 export function SingleDoc(props) {
     const [nodes, setNodes] = useState([]);
-    const nodeservice = new NodeService();
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then((data) => {
+        NodeService.getTreeTableNodes().then((data) => {
             setNodes(data);
         });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -32,10 +31,10 @@ import { NodeService } from '../service/NodeService';
 const SingleDoc = () => {
     const [nodes, setNodes] = useState([]);
     const [nodes2, setNodes2] = useState([]);
-    const nodeservice = new NodeService();
+    
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then(data => {
+        NodeService.getTreeTableNodes().then(data => {
             setNodes(data);
         });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -60,10 +59,10 @@ import { NodeService } from '../service/NodeService';
 const SingleDoc = () => {
     const [nodes, setNodes] = useState([]);
     const [nodes2, setNodes2] = useState([]);
-    const nodeservice = new NodeService();
+    
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then(data => {
+        NodeService.getTreeTableNodes().then(data => {
             setNodes(data);
         });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps

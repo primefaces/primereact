@@ -7,10 +7,9 @@ import { DocSectionText } from '../common/docsectiontext';
 
 export function ResponsiveDoc(props) {
     const [nodes, setNodes] = useState([]);
-    const nodeservice = new NodeService();
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then((data) => setNodes(data));
+        NodeService.getTreeTableNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const nameTemplate = (node) => {
@@ -40,10 +39,10 @@ import './TreeTableDemo.css';
 
 const ResponsiveDoc = () => {
     const [nodes, setNodes] = useState([]);
-    const nodeservice = new NodeService();
+    
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+        NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const nameTemplate = (node) => {
@@ -78,10 +77,10 @@ import './TreeTableDemo.css';
 
 const ResponsiveDoc = () => {
     const [nodes, setNodes] = useState([]);
-    const nodeservice = new NodeService();
+    
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+        NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const nameTemplate = (node) => {

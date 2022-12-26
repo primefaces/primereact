@@ -7,7 +7,6 @@ import getConfig from 'next/config';
 
 export function PositionRightDoc(props) {
     const [images, setImages] = useState(null);
-    const galleriaService = new PhotoService();
 
     const responsiveOptions = [
         {
@@ -26,7 +25,7 @@ export function PositionRightDoc(props) {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
-        galleriaService.getImages().then((data) => setImages(data));
+        PhotoService.getImages().then((data) => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
@@ -46,7 +45,7 @@ import { PhotoService } from '../service/PhotoService';
 
 export default function PositionRightDoc() {
     const [images, setImages] = useState(null);
-    const galleriaService = new PhotoService();
+    
 
     const responsiveOptions = [
         {
@@ -65,7 +64,7 @@ export default function PositionRightDoc() {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
-        galleriaService.getImages().then((data) => setImages(data));
+        PhotoService.getImages().then((data) => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
@@ -87,7 +86,7 @@ import { PhotoService } from '../service/PhotoService';
 
 export default function PositionRightDoc() {
     const [images, setImages] = useState(null);
-    const galleriaService = new PhotoService();
+    
 
     const responsiveOptions = [
         {
@@ -106,7 +105,7 @@ export default function PositionRightDoc() {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
-        galleriaService.getImages().then((data) => setImages(data));
+        PhotoService.getImages().then((data) => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {

@@ -8,7 +8,7 @@ import getConfig from 'next/config';
 
 export function WithThumbnailsDoc(props) {
     const [images, setImages] = useState(null);
-    const galleriaService = new PhotoService();
+
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const galleria = useRef(null);
 
@@ -32,7 +32,7 @@ export function WithThumbnailsDoc(props) {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then((data) => setImages(data));
+        PhotoService.getImages().then((data) => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
@@ -57,7 +57,7 @@ import { PhotoService } from '../service/PhotoService';
 
 export default function WithThumbnailsDoc() {
     const [images, setImages] = useState(null);
-    const galleriaService = new PhotoService();
+    
     const galleria = useRef(null);
 
     const responsiveOptions = [
@@ -80,7 +80,7 @@ export default function WithThumbnailsDoc() {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
@@ -107,7 +107,7 @@ import { PhotoService } from '../service/PhotoService';
 
 export default function WithThumbnailsDoc() {
     const [images, setImages] = useState(null);
-    const galleriaService = new PhotoService();
+    
     const galleria = useRef(null);
 
     const responsiveOptions = [
@@ -130,7 +130,7 @@ export default function WithThumbnailsDoc() {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {

@@ -12,9 +12,7 @@ export function CheckboxDoc(props) {
     const [selectedProducts3, setSelectedProducts3] = useState(null);
 
     useEffect(() => {
-        const productService = new ProductService();
-
-        productService.getProductsMini().then((data) => setProducts(data));
+        ProductService.getProductsMini().then((data) => setProducts(data));
     }, []);
 
     const code = {
@@ -63,9 +61,9 @@ const CheckboxDoc = () => {
     const [selectedProducts3, setSelectedProducts3] = useState(null);
 
     useEffect(() => {
-        const productService = new ProductService();
+        
 
-        productService.getProductsMini().then(data => setProducts(data));
+        ProductService.getProductsMini().then(data => setProducts(data));
     },[]);
 
     return (
@@ -116,9 +114,9 @@ const CheckboxDoc = () => {
     const [selectedProducts3, setSelectedProducts3] = useState(null);
 
     useEffect(() => {
-        const productService = new ProductService();
+        
 
-        productService.getProductsMini().then(data => setProducts(data));
+        ProductService.getProductsMini().then(data => setProducts(data));
     },[]);
 
     return (

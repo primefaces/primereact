@@ -13,10 +13,9 @@ export function ValidationDoc(props) {
     const defaultValues = { node: null };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
-    const nodeService = new NodeService();
 
     useEffect(() => {
-        nodeService.getTreeNodes().then((data) => setNodes(data));
+        NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onSubmit = (data) => {
@@ -52,10 +51,10 @@ export default function ValidationDemo() {
     const defaultValues = { node: null };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
-    const nodeService = new NodeService();
+    
 
     useEffect(() => {
-        nodeService.getTreeNodes().then((data) => setNodes(data));
+        NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onSubmit = (data) => {
@@ -106,10 +105,10 @@ export default function InvalidDemo() {
     const defaultValues = { node: null };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
-    const nodeService = new NodeService();
+    
 
     useEffect(() => {
-        nodeService.getTreeNodes().then((data) => setNodes(data));
+        NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onSubmit = (data: any) => {

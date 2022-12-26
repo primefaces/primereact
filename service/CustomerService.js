@@ -1,33 +1,31 @@
 import getConfig from 'next/config';
 
-export class CustomerService {
-    constructor() {
-        this.contextPath = getConfig().publicRuntimeConfig.contextPath;
-    }
+const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
+export const CustomerService = {
     getCustomersSmall() {
-        return fetch(this.contextPath + '/data/customers-small.json')
+        return fetch(contextPath + '/data/customers-small.json')
             .then((res) => res.json())
             .then((d) => d.data);
-    }
+    },
 
     getCustomersMedium() {
-        return fetch(this.contextPath + '/data/customers-medium.json')
+        return fetch(contextPath + '/data/customers-medium.json')
             .then((res) => res.json())
             .then((d) => d.data);
-    }
+    },
 
     getCustomersLarge() {
-        return fetch(this.contextPath + '/data/customers-large.json')
+        return fetch(contextPath + '/data/customers-large.json')
             .then((res) => res.json())
             .then((d) => d.data);
-    }
+    },
 
     getCustomersXLarge() {
-        return fetch(this.contextPath + '/data/customers-xlarge.json')
+        return fetch(contextPath + '/data/customers-xlarge.json')
             .then((res) => res.json())
             .then((d) => d.data);
-    }
+    },
 
     getCustomers(params) {
         const queryParams = params
@@ -38,4 +36,4 @@ export class CustomerService {
 
         return fetch('https://www.primefaces.org/data/customers?' + queryParams).then((res) => res.json());
     }
-}
+};

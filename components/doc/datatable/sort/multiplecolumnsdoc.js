@@ -7,10 +7,9 @@ import { DocSectionText } from '../../common/docsectiontext';
 
 export function MultipleColumnsDoc(props) {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data));
+        ProductService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const formatCurrency = (value) => {
@@ -39,10 +38,10 @@ import { ProductService } from '../service/ProductService';
 
 const MultipleColumnsDoc = () => {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        ProductService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const formatCurrency = (value) => {
@@ -75,10 +74,10 @@ import { ProductService } from '../service/ProductService';
 
 const MultipleColumnsDoc = () => {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        ProductService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const formatCurrency = (value) => {

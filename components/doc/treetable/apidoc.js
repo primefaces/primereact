@@ -87,7 +87,7 @@ export const TreeTableDemo = () => {
 
     useEffect(() => {
         nodeservice = new NodeService();
-        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+        NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, [])
 
     let cols = [

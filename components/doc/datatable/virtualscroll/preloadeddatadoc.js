@@ -6,8 +6,7 @@ import { DocSectionText } from '../../common/docsectiontext';
 import { CarService } from '../../../../service/CarService';
 
 export function PreloadedDataDoc(props) {
-    const carService = new CarService();
-    const cars = Array.from({ length: 100000 }).map((_, i) => carService.generateCar(i + 1));
+    const cars = Array.from({ length: 100000 }).map((_, i) => CarService.generateCar(i + 1));
 
     const code = {
         basic: `
@@ -27,8 +26,8 @@ import { Skeleton } from 'primereact/skeleton';
 import { CarService } from '../service/CarService';
 
 const PreloadedDataDoc = () => {
-    const carService = new CarService();
-    const cars = Array.from({ length: 100000 }).map((_, i) => carService.generateCar(i + 1));
+    
+    const cars = Array.from({ length: 100000 }).map((_, i) => CarService.generateCar(i + 1));
 
     return (
         <div className="card">
@@ -51,8 +50,8 @@ import { Skeleton } from 'primereact/skeleton';
 import { CarService } from '../service/CarService';
 
 const PreloadedDataDoc = () => {
-    const carService = new CarService();
-    const cars = Array.from({ length: 100000 }).map((_, i) => carService.generateCar(i + 1));
+    
+    const cars = Array.from({ length: 100000 }).map((_, i) => CarService.generateCar(i + 1));
 
     return (
         <div className="card">

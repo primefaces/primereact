@@ -8,11 +8,11 @@ import { DocSectionText } from '../../common/docsectiontext';
 
 export function SubHeaderGroupingDoc(props) {
     const [customers, setCustomers] = useState([]);
-    const customerService = new CustomerService();
+
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
-        customerService.getCustomersMedium().then((data) => setCustomers(data));
+        CustomerService.getCustomersMedium().then((data) => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const headerTemplate = (data) => {
@@ -96,10 +96,10 @@ import './DataTableDemo.css';
 const SubHeaderGroupingDoc = () => {
 
     const [customers, setCustomers] = useState([]);
-    const customerService = new CustomerService();
+    
 
     useEffect(() => {
-        customerService.getCustomersMedium().then(data => setCustomers(data));
+        CustomerService.getCustomersMedium().then(data => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const headerTemplate = (data) => {
@@ -172,10 +172,10 @@ import './DataTableDemo.css';
 const SubHeaderGroupingDoc = () => {
 
     const [customers, setCustomers] = useState([]);
-    const customerService = new CustomerService();
+    
 
     useEffect(() => {
-        customerService.getCustomersMedium().then(data => setCustomers(data));
+        CustomerService.getCustomersMedium().then(data => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const headerTemplate = (data) => {

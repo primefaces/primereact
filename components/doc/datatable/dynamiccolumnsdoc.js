@@ -14,10 +14,8 @@ export function DynamicDoc(props) {
         { field: 'quantity', header: 'Quantity' }
     ];
 
-    const productService = new ProductService();
-
     useEffect(() => {
-        productService.getProductsMini().then((data) => setProducts(data));
+        ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const dynamicColumns = columns.map((col, i) => {
@@ -45,10 +43,10 @@ const DynamicDoc = () => {
         {field: 'quantity', header: 'Quantity'}
     ];
 
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsMini().then(data => setProducts(data));
+        ProductService.getProductsMini().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const dynamicColumns = columns.map((col,i) => {
@@ -80,9 +78,9 @@ const DynamicDoc = () => {
         {field: 'category', header: 'Category'},
         {field: 'quantity', header: 'Quantity'}
     ];
-    const productService = new ProductService();
+    
     useEffect(() => {
-        productService.getProductsMini().then(data => setProducts(data));
+        ProductService.getProductsMini().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
     const dynamicColumns = columns.map((col,i) => {
         return <Column key={col.field} field={col.field} header={col.header} />;

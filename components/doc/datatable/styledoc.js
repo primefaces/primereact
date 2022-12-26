@@ -8,10 +8,9 @@ import { DocSectionText } from '../common/docsectiontext';
 
 export function StyleDoc(props) {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data));
+        ProductService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const rowClass = (data) => {
@@ -49,10 +48,10 @@ import './DataTableDemo.css';
 
 const StyleDoc = () => {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        ProductService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const rowClass = (data) => {
@@ -97,10 +96,10 @@ import './DataTableDemo.css';
 
 const StyleDoc = () => {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        ProductService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const rowClass = (data) => {

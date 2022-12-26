@@ -13,7 +13,7 @@ export function AdvancedDoc(props) {
     const [showThumbnails, setShowThumbnails] = useState(false);
     const [isAutoPlayActive, setAutoPlayActive] = useState(true);
     const [isFullScreen, setFullScreen] = useState(false);
-    const galleriaService = new PhotoService();
+
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const galleria = useRef(null);
 
@@ -37,7 +37,7 @@ export function AdvancedDoc(props) {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then((data) => setImages(data));
+        PhotoService.getImages().then((data) => setImages(data));
         bindDocumentListeners();
 
         return () => unbindDocumentListeners();
@@ -193,7 +193,7 @@ export default function AdvancedDoc() {
     const [showThumbnails, setShowThumbnails] = useState(false);
     const [isAutoPlayActive, setAutoPlayActive] = useState(true);
     const [isFullScreen, setFullScreen] = useState(false);
-    const galleriaService = new PhotoService();
+    
     const galleria = useRef(null)
 
     const responsiveOptions = [
@@ -216,7 +216,7 @@ export default function AdvancedDoc() {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
         bindDocumentListeners();
 
         return () => unbindDocumentListeners();
@@ -374,7 +374,7 @@ export default function AdvancedDoc() {
     const [showThumbnails, setShowThumbnails] = useState(false);
     const [isAutoPlayActive, setAutoPlayActive] = useState(true);
     const [isFullScreen, setFullScreen] = useState(false);
-    const galleriaService = new PhotoService();
+    
     const galleria = useRef(null)
 
     const responsiveOptions = [
@@ -397,7 +397,7 @@ export default function AdvancedDoc() {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
         bindDocumentListeners();
 
         return () => unbindDocumentListeners();

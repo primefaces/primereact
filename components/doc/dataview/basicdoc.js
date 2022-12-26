@@ -18,10 +18,8 @@ export function BasicDoc(props) {
         { label: 'Price Low to High', value: 'price' }
     ];
 
-    const productService = new ProductService();
-
     useEffect(() => {
-        productService.getProducts().then((data) => setProducts(data));
+        ProductService.getProducts().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onSortChange = (event) => {
@@ -134,10 +132,10 @@ export default function BasicDoc() {
         { label: 'Price Low to High', value: 'price' }
     ];
 
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProducts().then((data) => setProducts(data));
+        ProductService.getProducts().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onSortChange = (event) => {
@@ -253,10 +251,10 @@ export default function BasicDoc() {
         { label: 'Price Low to High', value: 'price' }
     ];
 
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProducts().then((data) => setProducts(data));
+        ProductService.getProducts().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onSortChange = (event) => {

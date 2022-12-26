@@ -9,10 +9,9 @@ export function TreeEventsDoc(props) {
     const [nodes, setNodes] = useState([]);
     const [selectedNodeKey, setSelectedNodeKey] = useState(null);
     const toast = useRef(null);
-    const nodeService = new NodeService();
 
     useEffect(() => {
-        nodeService.getTreeNodes().then((data) => setNodes(data));
+        NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onExpand = (event) => {
@@ -47,10 +46,10 @@ export default function TreeEventsDoc() {
     const [nodes, setNodes] = useState([]);
     const [selectedNodeKey, setSelectedNodeKey] = useState(null);
     const toast = useRef(null);
-    const nodeService = new NodeService();
+    
 
     useEffect(() => {
-        nodeService.getTreeNodes().then((data) => setNodes(data));
+        NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onExpand = (event) => {
@@ -86,10 +85,10 @@ export default function TreeEventsDoc() {
     const [nodes, setNodes] = useState([]);
     const [selectedNodeKey, setSelectedNodeKey] = useState(null);
     const toast = useRef(null);
-    const nodeService = new NodeService();
+    
 
        useEffect(() => {
-        nodeService.getTreeNodes().then((data) => setNodes(data));
+        NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onExpand = (event) => {

@@ -8,10 +8,9 @@ import { DocSectionText } from '../../common/docsectiontext';
 export function SingleDoc(props) {
     const [nodes, setNodes] = useState([]);
     const [selectedNodeKey, setSelectedNodeKey] = useState([]);
-    const nodeservice = new NodeService();
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then((data) => setNodes(data));
+        NodeService.getTreeTableNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const code = {
@@ -31,10 +30,10 @@ import { NodeService } from '../service/NodeService';
 const SingleDoc = () => {
 const [nodes, setNodes] = useState([]);
 const [selectedNodeKey, setSelectedNodeKey] = useState([]);
-const nodeservice = new NodeService();
+
 
 useEffect(() => {
-    nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    NodeService.getTreeTableNodes().then(data => setNodes(data));
 }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 const onSelect = (event) => {
@@ -65,10 +64,10 @@ import { NodeService } from '../service/NodeService';
 const SingleDoc = () => {
 const [nodes, setNodes] = useState([]);
 const [selectedNodeKey, setSelectedNodeKey] = useState([]);
-const nodeservice = new NodeService();
+
 
 useEffect(() => {
-    nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    NodeService.getTreeTableNodes().then(data => setNodes(data));
 }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 const onSelect = (event) => {

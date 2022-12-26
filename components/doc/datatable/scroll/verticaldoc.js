@@ -8,12 +8,11 @@ import { DocSectionText } from '../../common/docsectiontext';
 export function ScrollVerticalDoc(props) {
     const [customers, setCustomers] = useState([]);
     const [loading, setLoading] = useState(false);
-    const customerService = new CustomerService();
 
     useEffect(() => {
         setLoading(true);
 
-        customerService.getCustomersLarge().then((data) => {
+        CustomerService.getCustomersLarge().then((data) => {
             setCustomers(data);
             setLoading(false);
         });
@@ -37,12 +36,12 @@ import { CustomerService } from '../service/CustomerService';
 const ScrollVerticalDoc = () => {
     const [customers, setCustomers] = useState([]);
     const [loading, setLoading] = useState(false);
-    const customerService = new CustomerService();
+    
 
     useEffect(() => {
         setLoading(true);
 
-        customerService.getCustomersLarge().then((data) => {
+        CustomerService.getCustomersLarge().then((data) => {
             setCustomers(data);
             setLoading(false);
         });
@@ -69,12 +68,12 @@ import { CustomerService } from '../service/CustomerService';
 const ScrollVerticalDoc = () => {
     const [customers, setCustomers] = useState([]);
     const [loading, setLoading] = useState(false);
-    const customerService = new CustomerService();
+    
 
     useEffect(() => {
         setLoading(true);
 
-        customerService.getCustomersLarge().then((data) => {
+        CustomerService.getCustomersLarge().then((data) => {
             setCustomers(data);
             setLoading(false);
         });

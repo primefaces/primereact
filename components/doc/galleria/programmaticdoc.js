@@ -9,7 +9,6 @@ import getConfig from 'next/config';
 export function ProgrammaticDoc(props) {
     const [images, setImages] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
-    const galleriaService = new PhotoService();
 
     const responsiveOptions = [
         {
@@ -28,7 +27,7 @@ export function ProgrammaticDoc(props) {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
-        galleriaService.getImages().then((data) => setImages(data));
+        PhotoService.getImages().then((data) => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const next = () => {
@@ -66,7 +65,7 @@ import { PhotoService } from '../service/PhotoService';
 export default function ProgrammaticDoc() {
     const [images, setImages] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0)
-    const galleriaService = new PhotoService();
+    
 
     const responsiveOptions = [
         {
@@ -84,7 +83,7 @@ export default function ProgrammaticDoc() {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const next = () => {
@@ -126,7 +125,7 @@ import { PhotoService } from '../service/PhotoService';
 export default function ProgrammaticDoc() {
     const [images, setImages] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0)
-    const galleriaService = new PhotoService();
+    
 
     const responsiveOptions = [
         {
@@ -144,7 +143,7 @@ export default function ProgrammaticDoc() {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const next = () => {

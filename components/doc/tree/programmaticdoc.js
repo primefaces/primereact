@@ -8,7 +8,6 @@ import { Button } from '../../lib/button/Button';
 export function ProgrammaticDoc(props) {
     const [nodes, setNodes] = useState(null);
     const [expandedKeys, setExpandedKeys] = useState({});
-    const nodeService = new NodeService();
 
     const expandAll = () => {
         let _expandedKeys = {};
@@ -35,7 +34,7 @@ export function ProgrammaticDoc(props) {
     };
 
     useEffect(() => {
-        nodeService.getTreeNodes().then((data) => setNodes(data));
+        NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const code = {
@@ -56,7 +55,7 @@ import { NodeService } from '../service/NodeService';
 export default function ProgrammaticDoc() {
     const [nodes, setNodes] = useState(null);
     const [expandedKeys, setExpandedKeys] = useState({});
-    const nodeService = new NodeService();
+    
 
     const expandAll = () => {
         let _expandedKeys = {};
@@ -83,7 +82,7 @@ export default function ProgrammaticDoc() {
     };
 
     useEffect(() => {
-        nodeService.getTreeNodes().then((data) => setNodes(data));
+        NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
     
     return (
@@ -105,7 +104,7 @@ import { NodeService } from '../service/NodeService';
 export default function ProgrammaticDoc() {
     const [nodes, setNodes] = useState(null);
     const [expandedKeys, setExpandedKeys] = useState({});
-    const nodeService = new NodeService();
+    
 
     const expandAll = () => {
         let _expandedKeys = {};
@@ -132,7 +131,7 @@ export default function ProgrammaticDoc() {
     };
 
     useEffect(() => {
-        nodeService.getTreeNodes().then((data) => setNodes(data));
+        NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (

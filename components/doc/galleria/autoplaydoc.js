@@ -7,7 +7,7 @@ import getConfig from 'next/config';
 
 export function AutoPlayDemoDoc(props) {
     const [images, setImages] = useState(null);
-    const galleriaService = new PhotoService();
+
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     const responsiveOptions = [
@@ -26,7 +26,7 @@ export function AutoPlayDemoDoc(props) {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then((data) => setImages(data));
+        PhotoService.getImages().then((data) => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
@@ -49,7 +49,7 @@ import { PhotoService } from '../service/PhotoService';
 
 export default function AutoPlayDemoDoc() {
     const [images, setImages] = useState(null)
-    const galleriaService = new PhotoService();
+    
 
     const responsiveOptions = [
         {
@@ -67,7 +67,7 @@ export default function AutoPlayDemoDoc() {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
@@ -93,7 +93,7 @@ import { PhotoService } from '../service/PhotoService';
 
 export default function AutoPlayDemoDoc() {
     const [images, setImages] = useState(null)
-    const galleriaService = new PhotoService();
+    
 
     const responsiveOptions = [
         {
@@ -111,7 +111,7 @@ export default function AutoPlayDemoDoc() {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {

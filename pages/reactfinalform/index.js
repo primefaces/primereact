@@ -19,10 +19,9 @@ const ReactFinalFormDemo = () => {
     const [countries, setCountries] = useState([]);
     const [showMessage, setShowMessage] = useState(false);
     const [formData, setFormData] = useState({});
-    const countryservice = new CountryService();
 
     useEffect(() => {
-        countryservice.getCountries().then((data) => setCountries(data));
+        CountryService.getCountries().then((data) => setCountries(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const validate = (data) => {
@@ -232,10 +231,10 @@ export const ReactFinalFormDemo = () => {
     const [countries, setCountries] = useState([]);
     const [showMessage, setShowMessage] = useState(false);
     const [formData, setFormData] = useState({});
-    const countryservice = new CountryService();
+    
 
     useEffect(() => {
-        countryservice.getCountries().then(data => setCountries(data));
+        CountryService.getCountries().then(data => setCountries(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const validate = (data) => {
@@ -389,10 +388,10 @@ export const ReactFinalFormDemo = () => {
     const [countries, setCountries] = useState([]);
     const [showMessage, setShowMessage] = useState(false);
     const [formData, setFormData] = useState({});
-    const countryservice = new CountryService();
+    
 
     useEffect(() => {
-        countryservice.getCountries().then(data => setCountries(data));
+        CountryService.getCountries().then(data => setCountries(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const validate = (data) => {

@@ -16,10 +16,9 @@ export function ContextMenuDoc(props) {
         { label: 'View', icon: 'pi pi-fw pi-search', command: () => viewProduct(selectedProduct) },
         { label: 'Delete', icon: 'pi pi-fw pi-times', command: () => deleteProduct(selectedProduct) }
     ];
-    const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProductsMini().then((data) => setProducts(data));
+        ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const viewProduct = (product) => {
@@ -73,10 +72,10 @@ const ContextMenuDoc = () => {
         {label: 'View', icon: 'pi pi-fw pi-search', command: () => viewProduct(selectedProduct)},
         {label: 'Delete', icon: 'pi pi-fw pi-times', command: () => deleteProduct(selectedProduct)}
     ];
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsMini().then(data => setProducts(data));
+        ProductService.getProductsMini().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const viewProduct = (product) => {
@@ -136,10 +135,10 @@ const ContextMenuDoc = () => {
         {label: 'View', icon: 'pi pi-fw pi-search', command: () => viewProduct(selectedProduct)},
         {label: 'Delete', icon: 'pi pi-fw pi-times', command: () => deleteProduct(selectedProduct)}
     ];
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsMini().then(data => setProducts(data));
+        ProductService.getProductsMini().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const viewProduct = (product) => {

@@ -10,12 +10,11 @@ export function ScrollFrozenColumnsDoc(props) {
     const [customers, setCustomers] = useState([]);
     const [loading, setLoading] = useState(false);
     const [balanceFrozen, setBalanceFrozen] = useState(false);
-    const customerService = new CustomerService();
 
     useEffect(() => {
         setLoading(true);
 
-        customerService.getCustomersLarge().then((data) => {
+        CustomerService.getCustomersLarge().then((data) => {
             setCustomers(data);
             setLoading(false);
         });
@@ -57,12 +56,12 @@ const ScrollFrozenColumnsDoc = () => {
     const [customers, setCustomers] = useState([]);
     const [loading, setLoading] = useState(false);
     const [balanceFrozen, setBalanceFrozen] = useState(false);
-    const customerService = new CustomerService();
+    
 
     useEffect(() => {
         setLoading(true);
 
-        customerService.getCustomersLarge().then((data) => {
+        CustomerService.getCustomersLarge().then((data) => {
             setCustomers(data);
             setLoading(false);
         });
@@ -108,12 +107,12 @@ const ScrollFrozenColumnsDoc = () => {
     const [customers, setCustomers] = useState([]);
     const [loading, setLoading] = useState(false);
     const [balanceFrozen, setBalanceFrozen] = useState(false);
-    const customerService = new CustomerService();
+    
 
     useEffect(() => {
         setLoading(true);
 
-        customerService.getCustomersLarge().then((data) => {
+        CustomerService.getCustomersLarge().then((data) => {
             setCustomers(data);
             setLoading(false);
         });

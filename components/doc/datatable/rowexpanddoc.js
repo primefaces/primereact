@@ -14,7 +14,7 @@ export function RowExpandDoc(props) {
     const [expandedRows, setExpandedRows] = useState(null);
     const toast = useRef(null);
     const isMounted = useRef(false);
-    const productService = new ProductService();
+
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
@@ -27,7 +27,7 @@ export function RowExpandDoc(props) {
 
     useEffect(() => {
         isMounted.current = true;
-        productService.getProductsWithOrdersSmall().then((data) => setProducts(data));
+        ProductService.getProductsWithOrdersSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onRowExpand = (event) => {
@@ -138,7 +138,7 @@ const RowExpandDoc = () => {
     const [expandedRows, setExpandedRows] = useState(null);
     const toast = useRef(null);
     const isMounted = useRef(false);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
         if (isMounted.current) {
@@ -149,7 +149,7 @@ const RowExpandDoc = () => {
 
     useEffect(() => {
         isMounted.current = true;
-        productService.getProductsWithOrdersSmall().then(data => setProducts(data));
+        ProductService.getProductsWithOrdersSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onRowExpand = (event) => {
@@ -263,7 +263,7 @@ const RowExpandDoc = () => {
     const [expandedRows, setExpandedRows] = useState(null);
     const toast = useRef(null);
     const isMounted = useRef(false);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
         if (isMounted.current) {
@@ -274,7 +274,7 @@ const RowExpandDoc = () => {
 
     useEffect(() => {
         isMounted.current = true;
-        productService.getProductsWithOrdersSmall().then(data => setProducts(data));
+        ProductService.getProductsWithOrdersSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onRowExpand = (event) => {

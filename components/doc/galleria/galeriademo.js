@@ -9,10 +9,9 @@ export function GaleriaDemo(props) {
     const [images, setImages] = useState(null);
 
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
-    const galleriaService = new PhotoService();
 
     useEffect(() => {
-        galleriaService.getImages().then((data) => setImages(data));
+        PhotoService.getImages().then((data) => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const responsiveOptions = [
@@ -50,10 +49,10 @@ import { PhotoService } from '../service/PhotoService';
 
 export default function GaleriaDemo() {
     const [images, setImages] = useState(null);
-    const galleriaService = new PhotoService();
+    
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
     }, [])
 
     const responsiveOptions = [
@@ -94,10 +93,10 @@ import { PhotoService } from '../service/PhotoService';
 
 export default function GaleriaDemo() {
     const [images, setImages] = useState(null);
-    const galleriaService = new PhotoService();
+    
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
     }, [])
 
     const responsiveOptions: GalleriaResponsiveOptions[] = [

@@ -1,17 +1,17 @@
-export class CarService {
-    brands = ['Vapid', 'Carson', 'Kitano', 'Dabver', 'Ibex', 'Morello', 'Akira', 'Titan', 'Dover', 'Norma'];
+export const CarService = {
+    brands: ['Vapid', 'Carson', 'Kitano', 'Dabver', 'Ibex', 'Morello', 'Akira', 'Titan', 'Dover', 'Norma'],
 
-    colors = ['Black', 'White', 'Red', 'Blue', 'Silver', 'Green', 'Yellow'];
+    colors: ['Black', 'White', 'Red', 'Blue', 'Silver', 'Green', 'Yellow'],
 
     generateCar(id) {
         return {
             id,
-            vin: this.generateVin(),
-            brand: this.generateBrand(),
-            color: this.generateColor(),
-            year: this.generateYear()
+            vin: generateVin(),
+            brand: generateBrand(),
+            color: generateColor(),
+            year: generateYear()
         };
-    }
+    },
 
     generateVin() {
         let text = '';
@@ -22,17 +22,17 @@ export class CarService {
         }
 
         return text;
-    }
+    },
 
     generateBrand() {
-        return this.brands[Math.floor(Math.random() * Math.floor(10))];
-    }
+        return brands[Math.floor(Math.random() * Math.floor(10))];
+    },
 
     generateColor() {
-        return this.colors[Math.floor(Math.random() * Math.floor(7))];
-    }
+        return colors[Math.floor(Math.random() * Math.floor(7))];
+    },
 
     generateYear() {
         return 2000 + Math.floor(Math.random() * Math.floor(19));
     }
-}
+};

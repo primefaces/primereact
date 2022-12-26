@@ -8,12 +8,12 @@ import { Button } from '../../lib/button/Button';
 
 export function TemplateDoc(props) {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
+
     const [filterValue, setFilterValue] = useState('');
     const filterInputRef = useRef();
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data));
+        ProductService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const filterTemplate = (options) => {
@@ -76,12 +76,12 @@ import { ProductService } from '../service/ProductService';
 
 export default function TemplateDoc() {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
+    
     const [filterValue, setFilterValue] = useState('');
     const filterInputRef = useRef();
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data));
+        ProductService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const filterTemplate = (options) => {
@@ -142,12 +142,12 @@ import { ProductService } from '../service/ProductService';
 
 export default function TemplateDoc() {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
+    
     const [filterValue, setFilterValue] = useState('');
     const filterInputRef = useRef();
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data));
+        ProductService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const filterTemplate = (options) => {

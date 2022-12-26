@@ -19,8 +19,6 @@ export function CustomPaginatorTemplateDoc(props) {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageInputTooltip, setPageInputTooltip] = useState("Press 'Enter' key to go to this page.");
 
-    const customerService = new CustomerService();
-
     const onCustomPage1 = (event) => {
         setFirst1(event.first);
         setRows1(event.rows);
@@ -52,8 +50,8 @@ export function CustomPaginatorTemplateDoc(props) {
     };
 
     useEffect(() => {
-        customerService.getCustomersLarge().then((data) => setCustomers1(data));
-        customerService.getCustomersLarge().then((data) => setCustomers2(data));
+        CustomerService.getCustomersLarge().then((data) => setCustomers1(data));
+        CustomerService.getCustomersLarge().then((data) => setCustomers2(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const template1 = {
@@ -176,7 +174,7 @@ const CustomPaginatorTemplateDoc = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageInputTooltip, setPageInputTooltip] = useState('Press \\'Enter\\' key to go to this page.');
 
-    const customerService = new CustomerService();
+    
 
     const onCustomPage1 = (event) => {
         setFirst1(event.first);
@@ -209,8 +207,8 @@ const CustomPaginatorTemplateDoc = () => {
     }
 
     useEffect(() => {
-        customerService.getCustomersLarge().then(data => setCustomers1(data));
-        customerService.getCustomersLarge().then(data => setCustomers2(data));
+        CustomerService.getCustomersLarge().then(data => setCustomers1(data));
+        CustomerService.getCustomersLarge().then(data => setCustomers2(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const template1 = {
@@ -331,7 +329,7 @@ const CustomPaginatorTemplateDoc = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageInputTooltip, setPageInputTooltip] = useState('Press \\'Enter\\' key to go to this page.');
 
-    const customerService = new CustomerService();
+    
 
     const onCustomPage1 = (event) => {
         setFirst1(event.first);
@@ -364,8 +362,8 @@ const CustomPaginatorTemplateDoc = () => {
     }
 
     useEffect(() => {
-        customerService.getCustomersLarge().then(data => setCustomers1(data));
-        customerService.getCustomersLarge().then(data => setCustomers2(data));
+        CustomerService.getCustomersLarge().then(data => setCustomers1(data));
+        CustomerService.getCustomersLarge().then(data => setCustomers2(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const template1 = {

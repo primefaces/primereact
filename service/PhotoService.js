@@ -1,13 +1,11 @@
 import getConfig from 'next/config';
 
-export class PhotoService {
-    constructor() {
-        this.contextPath = getConfig().publicRuntimeConfig.contextPath;
-    }
+const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
+export const PhotoService = {
     getImages() {
-        return fetch(this.contextPath + '/data/photos.json')
+        return fetch(contextPath + '/data/photos.json')
             .then((res) => res.json())
             .then((d) => d.data);
     }
-}
+};

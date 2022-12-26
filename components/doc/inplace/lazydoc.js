@@ -8,10 +8,9 @@ import { ProductService } from '../../../service/ProductService';
 
 export function LazyDoc(props) {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
 
     const onOpen = () => {
-        productService.getProductsSmall().then((data) => setProducts(data));
+        ProductService.getProductsSmall().then((data) => setProducts(data));
     };
 
     const code = {
@@ -39,10 +38,10 @@ import { ProductService } from '../service/ProductService';
 
 export const LazyDoc = () => {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
+    
 
     const onOpen = () => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        ProductService.getProductsSmall().then(data => setProducts(data));
     }
 
     return (
@@ -71,10 +70,10 @@ import { ProductService } from '../service/ProductService';
 
 export const LazyDoc = () => {
     const [products, setProducts] = useState<any[]>([]);
-    const productService = new ProductService();
+    
 
     function onOpen(): void {
-        productService.getProductsSmall().then(data => setProducts(data));
+        ProductService.getProductsSmall().then(data => setProducts(data));
     }
 
     return (

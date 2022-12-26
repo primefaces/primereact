@@ -39,11 +39,10 @@ export function FilterRowDoc(props) {
 
     const statuses = ['unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal'];
 
-    const customerService = new CustomerService();
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
-        customerService.getCustomersLarge().then((data) => {
+        CustomerService.getCustomersLarge().then((data) => {
             setCustomers(getCustomers(data));
             setLoading(false);
         });
@@ -216,10 +215,10 @@ const FilterRowDoc = () => {
         'unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal'
     ];
 
-    const customerService = new CustomerService();
+    
 
     useEffect(() => {
-        customerService.getCustomersLarge().then(data => { setCustomers(getCustomers(data)); setLoading(false) });
+        CustomerService.getCustomersLarge().then(data => { setCustomers(getCustomers(data)); setLoading(false) });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 
@@ -370,10 +369,10 @@ const FilterRowDoc = () => {
         'unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal'
     ];
 
-    const customerService = new CustomerService();
+    
 
     useEffect(() => {
-        customerService.getCustomersLarge().then(data => { setCustomers(getCustomers(data)); setLoading(false) });
+        CustomerService.getCustomersLarge().then(data => { setCustomers(getCustomers(data)); setLoading(false) });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 

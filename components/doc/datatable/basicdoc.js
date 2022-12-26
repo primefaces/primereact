@@ -7,10 +7,9 @@ import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProductsMini().then((data) => setProducts(data));
+        ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const code = {
@@ -30,10 +29,10 @@ import { ProductService } from './service/ProductService';
 
 export default function BasicDemo() {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsMini().then(data => setProducts(data));
+        ProductService.getProductsMini().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
@@ -58,10 +57,10 @@ import { ProductService } from './service/ProductService';
 
 export default function BasicDemo() {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsMini().then(data => setProducts(data));
+        ProductService.getProductsMini().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (

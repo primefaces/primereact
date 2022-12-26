@@ -40,11 +40,11 @@ export function CrudDoc(props) {
     const [globalFilter, setGlobalFilter] = useState(null);
     const toast = useRef(null);
     const dt = useRef(null);
-    const productService = new ProductService();
+
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
-        productService.getProducts().then((data) => setProducts(data));
+        ProductService.getProducts().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const formatCurrency = (value) => {
@@ -348,10 +348,10 @@ const [submitted, setSubmitted] = useState(false);
 const [globalFilter, setGlobalFilter] = useState(null);
 const toast = useRef(null);
 const dt = useRef(null);
-const productService = new ProductService();
+
 
 useEffect(() => {
-    productService.getProducts().then(data => setProducts(data));
+    ProductService.getProducts().then(data => setProducts(data));
 }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 const formatCurrency = (value) => {
@@ -711,10 +711,10 @@ const [submitted, setSubmitted] = useState(false);
 const [globalFilter, setGlobalFilter] = useState(null);
 const toast = useRef(null);
 const dt = useRef(null);
-const productService = new ProductService();
+
 
 useEffect(() => {
-    productService.getProducts().then(data => setProducts(data));
+    ProductService.getProducts().then(data => setProducts(data));
 }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 const formatCurrency = (value) => {

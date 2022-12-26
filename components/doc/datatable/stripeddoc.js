@@ -7,10 +7,9 @@ import { DocSectionText } from '../common/docsectiontext';
 
 export function StripedDoc(props) {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProductsMini().then((data) => setProducts(data));
+        ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const code = {
@@ -30,10 +29,10 @@ import { ProductService } from '../service/ProductService';
 
 const StripedDoc = () => {
     const [products, setProducts] = useState(null);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsMiniSmall().then(data => setProducts(data));
+        ProductService.getProductsMiniSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
@@ -56,10 +55,10 @@ import { ProductService } from '../service/ProductService';
 
 const StripedDoc = () => {
     const [products, setProducts] = useState(null);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsMiniSmall().then(data => setProducts(data));
+        ProductService.getProductsMiniSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (

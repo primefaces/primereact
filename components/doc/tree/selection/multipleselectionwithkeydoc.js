@@ -7,10 +7,9 @@ import { NodeService } from '../../../../service/NodeService';
 export function MultipleSelectionWithKeyDoc(props) {
     const [nodes, setNodes] = useState(null);
     const [selectedKey, setSelectedKey] = useState(null);
-    const nodeService = new NodeService();
 
     useEffect(() => {
-        nodeService.getTreeNodes().then((data) => setNodes(data));
+        NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const code = {
@@ -25,10 +24,10 @@ import { NodeService } from '../service/NodeService';
 export default function MultipleSelectionWithKeyDoc() {
     const [nodes, setNodes] = useState(null);
     const [selectedKey, setSelectedKey] = useState(null);
-    const nodeService = new NodeService();
+    
 
     useEffect(() => {
-        nodeService.getTreeNodes().then((data) => setNodes(data));
+        NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
@@ -44,10 +43,10 @@ import { NodeService } from '../service/NodeService';
 export default function MultipleSelectionWithKeyDoc() {
     const [nodes, setNodes] = useState(null);
     const [selectedKey, setSelectedKey] = useState(null);
-    const nodeService = new NodeService();
+    
 
     useEffect(() => {
-        nodeService.getTreeNodes().then((data) => setNodes(data));
+        NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (

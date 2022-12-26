@@ -8,10 +8,9 @@ import { DocSectionText } from '../common/docsectiontext';
 
 export function TemplatingDoc(props) {
     const [nodes, setNodes] = useState([]);
-    const nodeservice = new NodeService();
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then((data) => setNodes(data));
+        NodeService.getTreeTableNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const actionTemplate = () => {
@@ -48,10 +47,10 @@ import { NodeService } from '../service/NodeService';
 
 const TemplatingDoc = () => {
     const [nodes, setNodes] = useState([]);
-    const nodeservice = new NodeService();
+    
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+        NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
         const actionTemplate = () => {
@@ -103,10 +102,10 @@ import { NodeService } from '../service/NodeService';
 
 const TemplatingDoc = () => {
     const [nodes, setNodes] = useState([]);
-    const nodeservice = new NodeService();
+    
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+        NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
         const actionTemplate = () => {

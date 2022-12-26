@@ -11,7 +11,7 @@ import { DocSectionText } from '../common/docsectiontext';
 export function OverlayPanelDoc(props) {
     const [products, setProducts] = useState(null);
     const [selectedProduct, setSelectedProduct] = useState(null);
-    const productService = new ProductService();
+
     const op = useRef(null);
     const toast = useRef(null);
     const isMounted = useRef(false);
@@ -25,7 +25,7 @@ export function OverlayPanelDoc(props) {
 
     useEffect(() => {
         isMounted.current = true;
-        productService.getProductsSmall().then((data) => setProducts(data));
+        ProductService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const formatCurrency = (value) => {
@@ -68,7 +68,7 @@ import { ProductService } from '../service/ProductService';
 export default function OverlayPanelDoc() {
     const [products, setProducts] = useState(null);
     const [selectedProduct, setSelectedProduct] = useState(null);
-    const productService = new ProductService();
+    
     const op = useRef(null);
     const toast = useRef(null);
     const isMounted = useRef(false);
@@ -82,7 +82,7 @@ export default function OverlayPanelDoc() {
 
     useEffect(() => {
         isMounted.current = true;
-        productService.getProductsSmall().then((data) => setProducts(data));
+        ProductService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const formatCurrency = (value) => {
@@ -130,7 +130,7 @@ import { ProductService } from '../service/ProductService';
 export default function OverlayPanelDoc() {
     const [products, setProducts] = useState<Product[]>(null);
     const [selectedProduct, setSelectedProduct] = useState<Product>(null);
-    const productService = new ProductService();
+    
     const op = useRef<OverlayPanel>(null);
     const toast = useRef<Toast>(null);
     const isMounted = useRef(false);
@@ -144,7 +144,7 @@ export default function OverlayPanelDoc() {
 
     useEffect(() => {
         isMounted.current = true;
-        productService.getProductsSmall().then((data) => setProducts(data));
+        ProductService.getProductsSmall().then((data) => setProducts(data));
     }, []);
 
     const formatCurrency = (value) => {

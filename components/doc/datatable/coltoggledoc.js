@@ -15,10 +15,9 @@ export function ColToggleDoc(props) {
 
     const [selectedColumns, setSelectedColumns] = useState(columns);
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProductsMini().then((data) => setProducts(data));
+        ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onColumnToggle = (event) => {
@@ -61,10 +60,10 @@ const ColToggleDoc = () => {
 
     const [selectedColumns, setSelectedColumns] = useState(columns);
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsMini().then(data => setProducts(data));
+        ProductService.getProductsMini().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onColumnToggle = (event) => {
@@ -111,10 +110,10 @@ const ColToggleDoc = () => {
 
     const [selectedColumns, setSelectedColumns] = useState(columns);
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsMini().then(data => setProducts(data));
+        ProductService.getProductsMini().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onColumnToggle = (event) => {

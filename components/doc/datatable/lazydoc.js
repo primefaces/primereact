@@ -26,7 +26,6 @@ export function LazyDoc(props) {
         }
     });
 
-    const customerService = new CustomerService();
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     let loadLazyTimeout = null;
@@ -44,7 +43,7 @@ export function LazyDoc(props) {
 
         //imitate delay of a backend call
         loadLazyTimeout = setTimeout(() => {
-            customerService.getCustomers({ lazyEvent: JSON.stringify(lazyParams) }).then((data) => {
+            CustomerService.getCustomers({ lazyEvent: JSON.stringify(lazyParams) }).then((data) => {
                 setTotalRecords(data.totalRecords);
                 setCustomers(data.customers);
                 setLoading(false);
@@ -76,7 +75,7 @@ export function LazyDoc(props) {
         const selectAll = event.checked;
 
         if (selectAll) {
-            customerService.getCustomers().then((data) => {
+            CustomerService.getCustomers().then((data) => {
                 setSelectAll(true);
                 setSelectedCustomers(data.customers);
             });
@@ -159,7 +158,7 @@ const LazyDoc = () => {
         }
     });
 
-    const customerService = new CustomerService();
+    
 
     let loadLazyTimeout = null;
 
@@ -176,7 +175,7 @@ const LazyDoc = () => {
 
         //imitate delay of a backend call
         loadLazyTimeout = setTimeout(() => {
-            customerService.getCustomers({ lazyEvent: JSON.stringify(lazyParams) }).then(data => {
+            CustomerService.getCustomers({ lazyEvent: JSON.stringify(lazyParams) }).then(data => {
                 setTotalRecords(data.totalRecords);
                 setCustomers(data.customers);
                 setLoading(false);
@@ -207,7 +206,7 @@ const LazyDoc = () => {
         const selectAll = event.checked;
 
         if (selectAll) {
-            customerService.getCustomers().then(data => {
+            CustomerService.getCustomers().then(data => {
                 setSelectAll(true);
                 setSelectedCustomers(data.customers);
             });
@@ -284,7 +283,7 @@ const LazyDoc = () => {
         }
     });
 
-    const customerService = new CustomerService();
+    
 
     let loadLazyTimeout = null;
 
@@ -301,7 +300,7 @@ const LazyDoc = () => {
 
         //imitate delay of a backend call
         loadLazyTimeout = setTimeout(() => {
-            customerService.getCustomers({ lazyEvent: JSON.stringify(lazyParams) }).then(data => {
+            CustomerService.getCustomers({ lazyEvent: JSON.stringify(lazyParams) }).then(data => {
                 setTotalRecords(data.totalRecords);
                 setCustomers(data.customers);
                 setLoading(false);
@@ -332,7 +331,7 @@ const LazyDoc = () => {
         const selectAll = event.checked;
 
         if (selectAll) {
-            customerService.getCustomers().then(data => {
+            CustomerService.getCustomers().then(data => {
                 setSelectAll(true);
                 setSelectedCustomers(data.customers);
             });

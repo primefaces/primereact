@@ -7,7 +7,6 @@ import getConfig from 'next/config';
 
 export function HoverEventDoc(props) {
     const [images, setImages] = useState(null);
-    const galleriaService = new PhotoService();
 
     const responsiveOptions = [
         {
@@ -26,7 +25,7 @@ export function HoverEventDoc(props) {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
-        galleriaService.getImages().then((data) => setImages(data));
+        PhotoService.getImages().then((data) => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
@@ -45,7 +44,7 @@ import { PhotoService } from '../service/PhotoService';
 
 export default function HoverEventDoc() {
     const [images, setImages] = useState(null);
-    const galleriaService = new PhotoService();
+    
 
     const responsiveOptions = [
         {
@@ -64,7 +63,7 @@ export default function HoverEventDoc() {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
-        galleriaService.getImages().then((data) => setImages(data));
+        PhotoService.getImages().then((data) => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
@@ -86,7 +85,7 @@ import { PhotoService } from '../service/PhotoService';
 
 export default function HoverEventDoc() {
     const [images, setImages] = useState(null);
-    const galleriaService = new PhotoService();
+    
 
     const responsiveOptions = [
         {
@@ -105,7 +104,7 @@ export default function HoverEventDoc() {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
-        galleriaService.getImages().then((data) => setImages(data));
+        PhotoService.getImages().then((data) => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {

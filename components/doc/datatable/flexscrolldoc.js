@@ -7,10 +7,9 @@ import { DocSectionText } from '../common/docsectiontext';
 
 export function FlexScrollDoc(props) {
     const [customers, setCustomers] = useState([]);
-    const customerService = new CustomerService();
 
     useEffect(() => {
-        customerService.getCustomersLarge().then((data) => setCustomers(data));
+        CustomerService.getCustomersLarge().then((data) => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const code = {
@@ -31,10 +30,10 @@ import { CustomerService } from '../service/CustomerService';
 const FlexScrollDoc = () => {
 
     const [customers, setCustomers] = useState([]);
-    const customerService = new CustomerService();
+    
 
     useEffect(() => {
-        customerService.getCustomersLarge().then(data => setCustomers(data));
+        CustomerService.getCustomersLarge().then(data => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
@@ -60,10 +59,10 @@ import { CustomerService } from '../service/CustomerService';
 const FlexScrollDoc = () => {
 
     const [customers, setCustomers] = useState([]);
-    const customerService = new CustomerService();
+    
 
     useEffect(() => {
-        customerService.getCustomersLarge().then(data => setCustomers(data));
+        CustomerService.getCustomersLarge().then(data => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (

@@ -25,11 +25,11 @@ export function CircularDoc(props) {
             numScroll: 1
         }
     ];
-    const productService = new ProductService();
+
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
+        ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const productTemplate = (product) => {
@@ -84,10 +84,10 @@ export default function CircularDoc() {
             numScroll: 1
         }
     ];
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
+        ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const productTemplate = (product) => {
@@ -145,10 +145,10 @@ export default function CircularDoc() {
             numScroll: 1
         }
     ];
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
+        ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const productTemplate = (product) => {

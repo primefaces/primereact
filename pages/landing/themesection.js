@@ -25,7 +25,6 @@ const ThemeSection = (props) => {
     });
     const [globalFilterValue, setGlobalFilterValue] = useState('');
     const [loading, setLoading] = useState(true);
-    const customerService = new CustomerService();
 
     const changeTheme = (name, color) => {
         let newTheme = name + '-' + (props.dark ? 'dark' : 'light') + '-' + color;
@@ -34,7 +33,7 @@ const ThemeSection = (props) => {
     };
 
     useEffect(() => {
-        customerService.getCustomersLarge().then((data) => {
+        CustomerService.getCustomersLarge().then((data) => {
             setCustomers(getCustomers(data));
             setLoading(false);
         });

@@ -8,11 +8,11 @@ import getConfig from 'next/config';
 
 export function ScrollSubHeaderGroupingDoc(props) {
     const [customersGrouped, setCustomersGrouped] = useState(null);
-    const customerService = new CustomerService();
+
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
-        customerService.getCustomersMedium().then((data) => {
+        CustomerService.getCustomersMedium().then((data) => {
             setCustomersGrouped(data);
         });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -89,11 +89,11 @@ import { CustomerService } from '../service/CustomerService';
 
 const ScrollSubHeaderGroupingDoc = () => {
     const [customersGrouped, setCustomersGrouped] = useState(null);
-    const customerService = new CustomerService();
+    
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
-        customerService.getCustomersMedium().then((data) => {
+        CustomerService.getCustomersMedium().then((data) => {
             setCustomersGrouped(data);
         });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -161,11 +161,11 @@ import { CustomerService } from '../service/CustomerService';
 
 const ScrollSubHeaderGroupingDoc = () => {
     const [customersGrouped, setCustomersGrouped] = useState(null);
-    const customerService = new CustomerService();
+    
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
-        customerService.getCustomersMedium().then((data) => {
+        CustomerService.getCustomersMedium().then((data) => {
             setCustomersGrouped(data);
         });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps

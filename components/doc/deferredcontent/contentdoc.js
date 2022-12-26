@@ -10,14 +10,13 @@ import { DocSectionText } from '../common/docsectiontext';
 export function DeferredContentDoc(props) {
     const toast = useRef(null);
     const [products, setProducts] = useState(null);
-    const productService = new ProductService();
 
     const onImageLoad = () => {
         toast.current.show({ severity: 'success', summary: 'Image Initialized', detail: 'Scroll down to load the datatable' });
     };
 
     const onDataLoad = () => {
-        productService.getProductsSmall().then((data) => setProducts(data));
+        ProductService.getProductsSmall().then((data) => setProducts(data));
         toast.current.show({ severity: 'success', summary: 'Data Initialized', detail: 'Render Completed' });
     };
 
@@ -52,14 +51,14 @@ import { ProductService } from '../service/ProductService';
 export default function DeferredContentDoc() {
     const toast = useRef(null);
     const [products, setProducts] = useState(null);
-    const productService = new ProductService();
+    
 
     const onImageLoad = () => {
         toast.current.show({ severity: 'success', summary: 'Image Initialized', detail: 'Scroll down to load the datatable' });
     }
 
     const onDataLoad = () => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        ProductService.getProductsSmall().then(data => setProducts(data));
         toast.current.show({ severity: 'success', summary: 'Data Initialized', detail: 'Render Completed' });
     }
 
@@ -95,14 +94,14 @@ import { ProductService } from '../service/ProductService';
 export default function DeferredContentDoc() {
     const toast = useRef<Toast>(null);
     const [products, setProducts] = useState(null);
-    const productService = new ProductService();
+    
 
     const onImageLoad = () => {
         toast.current.show({ severity: 'success', summary: 'Image Initialized', detail: 'Scroll down to load the datatable' });
     }
 
     const onDataLoad = () => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        ProductService.getProductsSmall().then(data => setProducts(data));
         toast.current.show({ severity: 'success', summary: 'Data Initialized', detail: 'Render Completed' });
     }
 

@@ -9,10 +9,9 @@ import { DocSectionText } from '../../common/docsectiontext';
 export function LenientFilterDoc(props) {
     const [nodes, setNodes] = useState([]);
     const [globalFilter, setGlobalFilter] = useState(null);
-    const nodeservice = new NodeService();
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then((data) => setNodes(data));
+        NodeService.getTreeTableNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const getHeader = () => {
@@ -46,10 +45,10 @@ import { NodeService } from '../service/NodeService';
 const LenientFilterDoc = () => {
     const [nodes, setNodes] = useState([]);
     const [globalFilter, setGlobalFilter] = useState(null);
-    const nodeservice = new NodeService();
+    
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+        NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const getHeader = () => {
@@ -86,10 +85,10 @@ import { NodeService } from '../service/NodeService';
 const LenientFilterDoc = () => {
     const [nodes, setNodes] = useState([]);
     const [globalFilter, setGlobalFilter] = useState(null);
-    const nodeservice = new NodeService();
+    
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+        NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const getHeader = () => {

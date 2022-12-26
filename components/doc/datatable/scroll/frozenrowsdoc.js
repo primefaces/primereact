@@ -10,12 +10,11 @@ export function ScrollFrozenRowsDoc(props) {
     const [lockedCustomers, setLockedCustomers] = useState([]);
     const [unlockedCustomers, setUnlockedCustomers] = useState(null);
     const [loading, setLoading] = useState(false);
-    const customerService = new CustomerService();
 
     useEffect(() => {
         setLoading(true);
 
-        customerService.getCustomersMedium().then((data) => {
+        CustomerService.getCustomersMedium().then((data) => {
             setUnlockedCustomers(data);
         });
 
@@ -88,12 +87,12 @@ const ScrollFrozenRowsDoc = () => {
     const [lockedCustomers, setLockedCustomers] = useState([]);
     const [unlockedCustomers, setUnlockedCustomers] = useState(null);
     const [loading, setLoading] = useState(false);
-    const customerService = new CustomerService();
+    
 
     useEffect(() => {
         setLoading(true);
 
-        customerService.getCustomersMedium().then((data) => {
+        CustomerService.getCustomersMedium().then((data) => {
             setUnlockedCustomers(data);
         });
 
@@ -169,12 +168,12 @@ const ScrollFrozenRowsDoc = () => {
     const [lockedCustomers, setLockedCustomers] = useState([]);
     const [unlockedCustomers, setUnlockedCustomers] = useState(null);
     const [loading, setLoading] = useState(false);
-    const customerService = new CustomerService();
+    
 
     useEffect(() => {
         setLoading(true);
 
-        customerService.getCustomersMedium().then((data) => {
+        CustomerService.getCustomersMedium().then((data) => {
             setUnlockedCustomers(data);
         });
 

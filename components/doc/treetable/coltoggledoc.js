@@ -21,10 +21,8 @@ export function ColToggleDoc(props) {
     const [nodes, setNodes] = useState([]);
     const [cols, setCols] = useState(columns);
 
-    const nodeservice = new NodeService();
-
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then((data) => setNodes(data));
+        NodeService.getTreeTableNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onColumnToggle = (event) => {
@@ -69,10 +67,10 @@ const ColToggleDoc = () => {
     const [nodes, setNodes] = useState([]);
     const [cols, setCols] = useState(columns);
 
-    const nodeservice = new NodeService();
+    
 
     useEffect(() => {
-                nodeservice.getTreeTableNodes().then(data => setNodes(data));
+                NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onColumnToggle = (event) => {
@@ -123,10 +121,10 @@ const ColToggleDoc = () => {
     const [nodes, setNodes] = useState([]);
     const [cols, setCols] = useState(columns);
 
-    const nodeservice = new NodeService();
+    
 
     useEffect(() => {
-                nodeservice.getTreeTableNodes().then(data => setNodes(data));
+                NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onColumnToggle = (event) => {

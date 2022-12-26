@@ -9,10 +9,8 @@ import { DocSectionText } from '../../common/docsectiontext';
 export function PaginatorBasicDoc(props) {
     const [customers, setCustomers] = useState([]);
 
-    const customerService = new CustomerService();
-
     useEffect(() => {
-        customerService.getCustomersLarge().then((data) => setCustomers(data));
+        CustomerService.getCustomersLarge().then((data) => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const paginatorLeft = <Button type="button" icon="pi pi-refresh" className="p-button-text" />;
@@ -40,10 +38,10 @@ import { CustomerService } from '../service/CustomerService';
 const PaginatorBasicDoc = () => {
     const [customers, setCustomers] = useState([]);
 
-    const customerService = new CustomerService();
+    
 
     useEffect(() => {
-        customerService.getCustomersLarge().then((data) => setCustomers(data));
+        CustomerService.getCustomersLarge().then((data) => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const paginatorLeft = <Button type="button" icon="pi pi-refresh" className="p-button-text" />;
@@ -74,10 +72,10 @@ import { CustomerService } from '../service/CustomerService';
 const PaginatorBasicDoc = () => {
     const [customers, setCustomers] = useState([]);
 
-    const customerService = new CustomerService();
+    
 
     useEffect(() => {
-        customerService.getCustomersLarge().then((data) => setCustomers(data));
+        CustomerService.getCustomersLarge().then((data) => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const paginatorLeft = <Button type="button" icon="pi pi-refresh" className="p-button-text" />;

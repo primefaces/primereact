@@ -128,10 +128,10 @@ export const ExportImportDoc = () => {
     const [selectedImportedData, setSelectedImportedData] = useState([]);
     const [importedCols, setImportedCols] = useState([{ field: '', header: 'Header' }]);
     const toast = useRef(null);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        ProductService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const importCSV = (e) => {
@@ -244,10 +244,10 @@ export const ExportImportDoc = () => {
     const [selectedImportedData, setSelectedImportedData] = useState([]);
     const [importedCols, setImportedCols] = useState([{ field: '', header: 'Header' }]);
     const toast = useRef(null);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        ProductService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const importCSV = (e) => {

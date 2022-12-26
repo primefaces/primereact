@@ -10,10 +10,8 @@ export function PickListDoc(props) {
     const [source, setSource] = useState([]);
     const [target, setTarget] = useState([]);
 
-    const productService = new ProductService();
-
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setSource(data));
+        ProductService.getProductsSmall().then((data) => setSource(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onChange = (event) => {
@@ -59,10 +57,10 @@ import { ProductService } from '../service/ProductService';
 const PickListDemo = () => {
     const [source, setSource] = useState([]);
     const [target, setTarget] = useState([]);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setSource(data));
+        ProductService.getProductsSmall().then(data => setSource(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onChange = (event) => {
@@ -106,10 +104,10 @@ import { ProductService } from '../service/ProductService';
 const PickListDemo = () => {
     const [source, setSource] = useState([]);
     const [target, setTarget] = useState([]);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setSource(data));
+        ProductService.getProductsSmall().then(data => setSource(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onChange = (event) => {

@@ -34,11 +34,11 @@ export function CustomStorageDoc(props) {
         { name: 'XuXue Feng', image: 'xuxuefeng.png' }
     ];
     const statuses = ['unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal'];
-    const customerService = new CustomerService();
+
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
-        customerService.getCustomersMedium().then((data) => setCustomers(data));
+        CustomerService.getCustomersMedium().then((data) => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onCustomSaveState = (state) => {
@@ -173,10 +173,10 @@ const CustomStorageDoc = () => {
     const statuses = [
         'unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal'
     ];
-    const customerService = new CustomerService();
+    
 
     useEffect(() => {
-        customerService.getCustomersMedium().then(data => setCustomers(data));
+        CustomerService.getCustomersMedium().then(data => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onCustomSaveState = (state) => {
@@ -302,7 +302,7 @@ const CustomStorageDoc = () => {
     const statuses = [
         'unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal'
     ];
-    const customerService = new CustomerService();
+    
 
     const filtersMap = {
         'filters': { value: filters, callback: setFilters },
@@ -311,7 +311,7 @@ const CustomStorageDoc = () => {
     };
 
     useEffect(() => {
-        customerService.getCustomersMedium().then(data => setCustomers(data));
+        CustomerService.getCustomersMedium().then(data => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onCustomSaveState = (state) => {

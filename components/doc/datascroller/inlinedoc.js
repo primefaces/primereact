@@ -8,10 +8,9 @@ import { DocSectionText } from '../common/docsectiontext';
 
 export function InlineDataScrollerDoc(props) {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProducts().then((data) => setProducts(data));
+        ProductService.getProducts().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (data) => {
@@ -47,10 +46,10 @@ import { ProductService } from '../service/ProductService';
 
 export default function InlineDataScrollerDoc() {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProducts().then(data => setProducts(data));
+        ProductService.getProducts().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (data) => {
@@ -86,10 +85,10 @@ import { ProductService } from '../service/ProductService';
 
 export default function InlineDataScrollerDoc() {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProducts().then(data => setProducts(data));
+        ProductService.getProducts().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (data) => {

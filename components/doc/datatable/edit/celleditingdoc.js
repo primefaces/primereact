@@ -17,10 +17,8 @@ export function CellEditingDoc(props) {
         { field: 'price', header: 'Price' }
     ];
 
-    const productService = new ProductService();
-
     useEffect(() => {
-        productService.getProductsMini().then((data) => setProducts(data));
+        ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const isPositiveInteger = (val) => {
@@ -99,10 +97,10 @@ const CellEditingDoc = () => {
         { field: 'price', header: 'Price' }
     ];
 
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsMini().then((data) => setProducts(data));
+        ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const isPositiveInteger = (val) => {
@@ -184,10 +182,10 @@ const CellEditingDoc = () => {
         { field: 'price', header: 'Price' }
     ];
 
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsMini().then((data) => setProducts(data));
+        ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const isPositiveInteger = (val) => {
