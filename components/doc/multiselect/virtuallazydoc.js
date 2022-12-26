@@ -47,7 +47,7 @@ export function VirtualLazyDoc(props) {
 }} maxSelectedLabels={3} placeholder="Select Item" showSelectAll={false}/>
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { MultiSelect, SelectItemOptionsType } from 'primereact/multiselect';
 import { Skeleton } from '../../lib/skeleton/skeleton';
 import './MultiSelectDemo.css';
@@ -72,7 +72,7 @@ export default function VirtualLazyDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { MultiSelect, SelectItemOptionsType, MultiSelectChangeParams } from 'primereact/multiselect';
 import { Skeleton } from '../../lib/skeleton/skeleton';
 import './MultiSelectDemo.css';

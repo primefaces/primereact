@@ -13,6 +13,7 @@ export function MultipleDoc(props) {
 
         `,
         javascript: `
+import React from 'react'; 
 import { InputNumber } from 'primereact/inputnumber';
 
 export default function MultipleDoc() {
@@ -33,6 +34,7 @@ export default function MultipleDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { InputNumber } from 'primereact/inputnumber';
 
 export default function MultipleDoc() {

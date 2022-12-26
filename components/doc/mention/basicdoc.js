@@ -54,7 +54,7 @@ export function BasicDoc(props) {
 <Mention suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people"  rows={5} cols={40} itemTemplate={itemTemplate} />
         `,
         javascript: `
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Mention } from 'primereact/mention';
 import { CustomerService } from '../../../service/CustomerService';
 
@@ -109,7 +109,7 @@ export default function BasicDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Mention, MentionSearchParams } from 'primereact/mention';
 import { CustomerService } from '../../../service/CustomerService';
 

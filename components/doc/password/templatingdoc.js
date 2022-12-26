@@ -25,7 +25,7 @@ export function Templating(props) {
 <Password value={value} onChange={(e) => setValue(e.target.value)} inputClassName="w-15rem" header={header} footer={footer} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Password } from 'primereact/password';
 
 export default function Templating() {
@@ -52,7 +52,7 @@ export default function Templating() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Password } from 'primereact/password';
 
 export default function Templating() {

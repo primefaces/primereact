@@ -31,7 +31,7 @@ export function LoadingDoc(props) {
 <Button label="Submit" loading={loading2} onClick={onLoadingClick2} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button } from 'primereact/button';
 import './ButtonDemo.css';
 
@@ -66,7 +66,7 @@ export default function LoadingDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button } from 'primereact/button';
 import './ButtonDemo.css';
 

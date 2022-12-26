@@ -18,6 +18,7 @@ export function ClosableDoc(props) {
 </TabView>
         `,
         javascript: `
+import React from 'react'; 
 import { TabView, TabPanel } from 'primereact/tabview';
 import './TabViewDemo.css';
 
@@ -39,6 +40,7 @@ export default function ClosableDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { TabView, TabPanel } from 'primereact/tabview';
 import './TabViewDemo.css';
 

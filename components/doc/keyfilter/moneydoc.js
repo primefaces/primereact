@@ -9,6 +9,7 @@ export function MoneyDoc(props) {
 <InputText id="money" keyfilter="money" />
         `,
         javascript: `
+import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
 
 export default function MoneyDoc() {
@@ -22,6 +23,7 @@ export default function MoneyDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
 
 export default function MoneyDoc() {

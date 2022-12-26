@@ -11,7 +11,7 @@ export function MultipleDoc(props) {
 <Calendar id="multiple" value={dates} onChange={(e) => setDates(e.value)} selectionMode="multiple" readOnlyInput />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
 export default function MultipleDoc() {
@@ -23,7 +23,7 @@ export default function MultipleDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar, CalendarChangeParams } from 'primereact/calendar';
 
 export default function MultipleDoc() {

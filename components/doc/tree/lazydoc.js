@@ -64,7 +64,7 @@ export function LazyDoc(props) {
 <Tree value={nodes} onExpand={loadOnExpand} loading={loading} />
         `,
         javascript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Tree } from 'primereact/tree';
 
 export default function LazyDoc() {
@@ -129,7 +129,7 @@ export default function LazyDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Tree } from 'primereact/tree';
 
 export default function LazyDoc() {

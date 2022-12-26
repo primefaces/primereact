@@ -48,7 +48,7 @@ export function ResponsiveDoc(props) {
     item={itemTemplate} thumbnail={thumbnailTemplate} />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
 import { PhotoService } from '../service/PhotoService';
@@ -98,7 +98,7 @@ export default function ResponsiveDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
 import { PhotoService } from '../service/PhotoService';

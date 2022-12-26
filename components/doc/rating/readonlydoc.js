@@ -10,6 +10,7 @@ export function ReadOnlyDoc(props) {
 
         `,
         javascript: `
+import React from 'react'; 
 import { Rating } from "primereact/rating";
 
 export default function ReadOnlyDoc() {
@@ -20,6 +21,7 @@ export default function ReadOnlyDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Rating } from "primereact/rating";
 
 export default function ReadOnlyDoc() {

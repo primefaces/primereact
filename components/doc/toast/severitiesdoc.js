@@ -32,7 +32,7 @@ export function SeveritiesDoc(props) {
 <Button label="Error" className="p-button-danger" onClick={showError} />
         `,
         javascript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
@@ -67,7 +67,7 @@ export default function SeveritiesDoc() {
 }
         `,
         typescript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 

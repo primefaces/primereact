@@ -11,7 +11,7 @@ export function BasicDoc(props) {
 <Checkbox onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Checkbox } from "primereact/checkbox";
 
 export default function BasicDoc() {
@@ -23,7 +23,7 @@ export default function BasicDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Checkbox } from "primereact/checkbox";
 
 export default function BasicDoc() {

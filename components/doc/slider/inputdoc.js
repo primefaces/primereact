@@ -15,7 +15,7 @@ export function InputDoc(props) {
 </div>
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Slider } from "primereact/slider";
 import { InputText } from "primereact/inputtext";
 
@@ -31,7 +31,7 @@ export default function InputDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Slider, SliderChangeParams } from "primereact/slider";
 import { InputText } from "primereact/inputtext";
 

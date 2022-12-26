@@ -49,7 +49,7 @@ export function TemplatingDoc(props) {
 <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" filter showClear filterBy="name" placeholder="Select a Country" valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Dropdown } from 'primereact/dropdown';
 import './DropdownDemo.css';
 
@@ -106,7 +106,7 @@ export default function TemplatingDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Dropdown, DropdownChangeParams, DropdownProps } from 'primereact/dropdown';
 import './DropdownDemo.css';
 

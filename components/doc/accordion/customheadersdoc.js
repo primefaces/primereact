@@ -19,6 +19,7 @@ export function CustomHeaderDoc(props) {
 </Accordion>
         `,
         javascript: `
+import React from 'react';
 import { Accordion, AccordionTab } from 'primereact/accordion';
 import './AccordionDemo.css';
 
@@ -44,6 +45,7 @@ export default function CustomHeaderDoc() {
 }
         `,
         typescript: `
+import React from 'react';
 import { Accordion, AccordionTab } from 'primereact/accordion';
 import './AccordionDemo.css';
 

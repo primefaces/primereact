@@ -52,7 +52,7 @@ export function GroupedDoc(props) {
 <ListBox value={selectedGroupedCity} options={groupedCities} onChange={(e) => setSelectedGroupedCity(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} style={{ width: '15rem' }} listStyle={{ maxHeight: '250px' }}/>
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { ListBox } from 'primereact/listbox';
 
 export default function GroupedDoc() {
@@ -81,7 +81,7 @@ export default function GroupedDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { ListBox, ListBoxChangeParams } from 'primereact/listbox';
 
 export default function GroupedDoc() {

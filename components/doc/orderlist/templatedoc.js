@@ -69,7 +69,7 @@ export function TemplateDoc(props) {
 <OrderList value={products} header="List of Products" dataKey="id" itemTemplate={itemTemplate} filter filterBy="name" filterTemplate={filterTemplate}></OrderList>
         `,
         javascript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { OrderList } from 'primereact/orderlist';
 import { Button } from 'primereact/button';
 import { ProductService } from '../service/ProductService';
@@ -135,7 +135,7 @@ export default function TemplateDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { OrderList } from 'primereact/orderlist';
 import { Button } from 'primereact/button';
 import { ProductService } from '../service/ProductService';

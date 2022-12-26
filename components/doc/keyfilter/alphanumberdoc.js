@@ -9,6 +9,7 @@ export function AlphanumbericDoc(props) {
 <InputText id="alphanum" keyfilter="alphanum" />
         `,
         javascript: `
+import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
 
 export default function AlphanumbericDoc() {
@@ -22,6 +23,7 @@ export default function AlphanumbericDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
 
 export default function AlphanumbericDoc() {

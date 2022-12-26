@@ -19,7 +19,7 @@ export function DateTemplateDoc(props) {
 <Calendar id="datetemplate" value={date} onChange={(e) => setDate(e.value)} dateTemplate={dateTemplate} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
 export default function DateTemplateDoc() {
@@ -41,7 +41,7 @@ export default function DateTemplateDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar, CalendarChangeParams } from 'primereact/calendar';
 
 export default function DateTemplateDoc() {

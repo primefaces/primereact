@@ -11,7 +11,7 @@ export function DateFormatDoc(props) {
 <Calendar id="basic" value={date} onChange={(e) => setDate(e.value)} dateFormat="mm-dd-yy" />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
 export default function DateFormatDoc() {
@@ -23,7 +23,7 @@ export default function DateFormatDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar, CalendarChangeParams } from 'primereact/calendar';
 
 export default function DateFormatDoc() {

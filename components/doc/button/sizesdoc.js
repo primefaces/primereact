@@ -10,6 +10,7 @@ export function SizesDoc(props) {
 <Button label="Large" icon="pi pi-check" className="p-button-lg" />
         `,
         javascript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 import './ButtonDemo.css';
 
@@ -25,6 +26,7 @@ export default function SizesDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 import './ButtonDemo.css';
 

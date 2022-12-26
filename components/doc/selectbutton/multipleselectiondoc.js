@@ -17,7 +17,7 @@ export function MultipleSelectionDoc(props) {
 
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { SelectButton } from 'primereact/selectbutton';
 
 export default function MultipleSelectionDoc() {
@@ -33,7 +33,7 @@ export default function MultipleSelectionDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { SelectButton, SelectButtonChangeParams } from 'primereact/selectbutton';
 
 export default function MultipleSelectionDoc() {

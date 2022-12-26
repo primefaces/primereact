@@ -18,7 +18,7 @@ export function MultipleDoc(props) {
 <TreeSelect value={selectedNodeKeys} options={nodes} onChange={(e) => setSelectedNodeKeys(e.value)} className="md:w-20rem w-full" selectionMode="multiple" metaKeySelection={false} placeholder="Select Items"></TreeSelect>
         `,
         javascript: `
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { TreeSelect } from 'primereact/treeselect';
 import { NodeService } from '../../../service/NodeService';
 
@@ -39,7 +39,7 @@ export default function MultipleDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { TreeSelect, TreeSelectChangeParams } from 'primereact/treeselect';
 import { NodeService } from '../../../service/NodeService';
 

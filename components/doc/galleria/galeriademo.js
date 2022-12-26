@@ -44,7 +44,7 @@ export function GaleriaDemo(props) {
 item={itemTemplate} thumbnail={thumbnailTemplate} />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Galleria } from 'primereact/galleria';
 import { PhotoService } from '../service/PhotoService';
 
@@ -88,7 +88,7 @@ export default function GaleriaDemo() {
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Galleria, GalleriaResponsiveOptions } from 'primereact/galleria';
 import { PhotoService } from '../service/PhotoService';
 

@@ -16,6 +16,7 @@ export function DefaultDoc(props) {
 <TabMenu model={items} />
         `,
         javascript: `
+import React from 'react'; 
 import { TabMenu } from 'primereact/tabmenu';
 
 export default function DefaultDoc() {
@@ -33,6 +34,7 @@ export default function DefaultDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { TabMenu } from 'primereact/tabmenu';
 
 export default function DefaultDoc() {

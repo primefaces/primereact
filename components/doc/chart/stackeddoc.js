@@ -83,7 +83,7 @@ export function StackedBarDoc(props) {
 <Chart type="bar" data={chartData} options={chartOptions} />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
 export default function StackedBarDoc() {
@@ -167,7 +167,7 @@ export default function StackedBarDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
 export default function StackedBarDoc() {

@@ -56,7 +56,7 @@ export function AdvancedDoc(props) {
 <MultiSelect value={selectedCountries} options={countries} onChange={(e) => setSelectedCountries(e.value)} optionLabel="name" placeholder="Select Countries" filter className="multiselect-custom" itemTemplate={countryTemplate} selectedItemTemplate={selectedCountriesTemplate} panelFooterTemplate={panelFooterTemplate} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { MultiSelect } from 'primereact/multiselect';
 import './MultiSelectDemo.css';
 
@@ -118,7 +118,7 @@ export default function AdvanceDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { MultiSelect, MultiSelectChangeParams } from 'primereact/multiselect';
 import './MultiSelectDemo.css';
 

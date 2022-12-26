@@ -14,6 +14,7 @@ export function SeveritiesDoc(props) {
 <Button label="Danger" className="p-button-danger" />
         `,
         javascript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 import './ButtonDemo.css';
 
@@ -33,6 +34,7 @@ export default function SeveritiesDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 import './ButtonDemo.css';
 

@@ -128,6 +128,7 @@ export function TemplatingDoc(props) {
 <MegaMenu model={items} orientation="horizontal" start={start} end={end} />        
 `,
         javascript: `
+import React from 'react'; 
 import { MegaMenu } from 'primereact/megamenu';
 import { InputText } from 'primereact/inputtext';
 
@@ -253,6 +254,7 @@ export default function TemplatingDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { MegaMenu } from 'primereact/megamenu';
 import { InputText } from 'primereact/inputtext';
 

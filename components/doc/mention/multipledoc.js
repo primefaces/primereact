@@ -72,7 +72,7 @@ export function MultipleDoc(props) {
 <Mention suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people"  rows={5} cols={40} autoResize itemTemplate={itemTemplate} />
         `,
         javascript: `
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Mention } from 'primereact/mention';
 import { CustomerService } from '../../../service/CustomerService';
 
@@ -148,7 +148,7 @@ export default function MultipleDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Mention, MentionSearchParams, MentionItemTemplateOptions } from 'primereact/mention';
 import { CustomerService } from '../../../service/CustomerService';
 

@@ -23,7 +23,7 @@ export function TemplateDoc(props) {
 <Editor style={{ height: '320px' }} value={text} onTextChange={(e) => setText(e.htmlValue)} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Editor } from "primereact/editor";
 
 export default function TemplateDemo() {
@@ -45,7 +45,7 @@ export default function TemplateDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Editor } from "primereact/editor";
 
 export default function TemplateDemo() {

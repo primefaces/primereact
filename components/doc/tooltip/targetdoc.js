@@ -13,6 +13,7 @@ export function TargetDoc(props) {
 </i>
         `,
         javascript: `
+import React from 'react'; 
 import { Tooltip } from 'primereact/tooltip';
 import { Badge } from 'primereact/badge';
 
@@ -30,6 +31,7 @@ export default function TargetDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Tooltip } from 'primereact/tooltip';
 import { Badge } from 'primereact/badge';
 

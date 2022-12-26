@@ -8,6 +8,7 @@ export function InvalidDoc(props) {
 <InputTextarea rows={5} cols={30} className="p-invalid" />
         `,
         javascript: `
+import React from 'react'; 
 import { InputTextarea } from "primereact/inputtextarea";
 
 export default function InvalidDemo() {
@@ -17,6 +18,7 @@ export default function InvalidDemo() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { InputTextarea } from "primereact/inputtextarea";
 
 export default function InvalidDemo() {

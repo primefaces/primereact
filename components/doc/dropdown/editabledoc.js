@@ -22,7 +22,7 @@ export function EditableDoc(props) {
 <Dropdown value={selectedCity} options={cities} onChange={onCityChange} optionLabel="name" editable />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Dropdown } from 'primereact/dropdown';
 import './DropdownDemo.css';
 
@@ -48,7 +48,7 @@ export default function EditableDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Dropdown, DropdownChangeParams } from 'primereact/dropdown';
 import './DropdownDemo.css';
 

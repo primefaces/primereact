@@ -44,7 +44,7 @@ export function IndicatorsDoc(props) {
     showItemNavigators showThumbnails={false} showItemNavigatorsOnHover showIndicators item={itemTemplate} thumbnail={thumbnailTemplate} />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Galleria } from 'primereact/galleria';
 import { PhotoService } from '../service/PhotoService';
 
@@ -89,7 +89,7 @@ const thumbnailTemplate = (item) => {
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Galleria } from 'primereact/galleria';
 import { PhotoService } from '../service/PhotoService';
 

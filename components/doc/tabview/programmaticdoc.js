@@ -27,7 +27,7 @@ export function ProgrammaticDoc(props) {
 </TabView>
         `,
         javascript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { TabView, TabPanel } from 'primereact/tabview';
 import { Button } from 'primereact/button';
 import './TabViewDemo.css';
@@ -56,7 +56,7 @@ export default function ProgrammaticDoc() {
 }
         `,
         typescript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { TabView, TabPanel } from 'primereact/tabview';
 import { Button } from 'primereact/button';
 import './TabViewDemo.css';

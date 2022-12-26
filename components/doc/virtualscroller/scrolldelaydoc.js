@@ -27,7 +27,7 @@ export function ScrollDelayDoc(props) {
 <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} delay={250} />
         `,
         javascript: `
-import { useState } 'react';
+import React, { useState } 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { classNames } from 'primereact/utils';
 import './VirtualScrollerDemo.css';
@@ -54,7 +54,7 @@ export default function ScrollDelayDoc() {
 }
         `,
         typescript: `
-import { useState } 'react';
+import React, { useState } 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { classNames } from 'primereact/utils';
 import './VirtualScrollerDemo.css';

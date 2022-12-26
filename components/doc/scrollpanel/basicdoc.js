@@ -24,6 +24,7 @@ export function BasicDoc(props) {
 </div>
         `,
         javascript: `
+import React from 'react'; 
 import { ScrollPanel } from 'primereact/scrollpanel';
 import './ScrollPanelDemo.css';
 
@@ -51,6 +52,7 @@ export default function BasicDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { ScrollPanel } from 'primereact/scrollpanel';
 import './ScrollPanelDemo.css';
 

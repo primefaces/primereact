@@ -27,7 +27,7 @@ export function PositionDoc(props) {
 <Button icon="pi pi-arrow-up" onClick={() => setVisibleBottom(true)} className="mr-2" />
         `,
         javascript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Sidebar } from 'primereact/sidebar';
 import { Button } from 'primereact/button';
 
@@ -57,7 +57,7 @@ export default function PositionDoc() {
 }
         `,
         typescript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Sidebar } from 'primereact/sidebar';
 import { Button } from 'primereact/button';
 

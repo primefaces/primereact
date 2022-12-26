@@ -11,7 +11,7 @@ export function RangeDoc(props) {
 <Calendar id="range" value={dates} onChange={(e) => setDates(e.value)} selectionMode="range" readOnlyInput />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
 export default function RangeDoc() {
@@ -23,7 +23,7 @@ export default function RangeDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar, CalendarChangeParams } from 'primereact/calendar';
 
 export default function RangeDoc() {

@@ -10,6 +10,7 @@ export function SizesDoc(props) {
 <InputText type="text" className="p-inputtext-lg" placeholder="Large" />
         `,
         javascript: `
+import React from 'react'; 
 import { InputText } from "primereact/inputtext";
 
 export default function SizesDemo() {
@@ -23,6 +24,7 @@ export default function SizesDemo() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { InputText } from "primereact/inputtext";
 
 export default function SizesDemo() {

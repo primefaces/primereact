@@ -9,6 +9,7 @@ export function BlockSpaceDoc(props) {
 <InputText id="spaceblock" keyfilter={/[^\s]/} />
         `,
         javascript: `
+import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
 
 export default function BlockSpaceDoc() {
@@ -22,6 +23,7 @@ export default function BlockSpaceDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
 
 export default function BlockSpaceDoc() {

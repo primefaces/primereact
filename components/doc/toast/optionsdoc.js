@@ -26,7 +26,7 @@ export function OptionsDoc(props) {
 <Button onClick={showSticky} label="Sticky" />
         `,
         javascript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
@@ -55,7 +55,7 @@ export default function OptionsDoc() {
 }
         `,
         typescript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 

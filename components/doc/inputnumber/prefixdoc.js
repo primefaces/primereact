@@ -17,7 +17,7 @@ export function PrefixDoc(props) {
 <InputNumber inputId="temperature" value={value4} onValueChange={(e) => setValue4(e.value)} prefix="&uarr; " suffix="℃" min={0} max={40} />
 `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputNumber } from 'primereact/inputnumber';
 
 export default function PrefixDoc() {
@@ -47,7 +47,7 @@ export default function PrefixDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputNumber, InputNumberValueChangeParams } from 'primereact/inputnumber';
 
 export default function PrefixDoc() {

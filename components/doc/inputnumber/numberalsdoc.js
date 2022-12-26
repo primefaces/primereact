@@ -17,7 +17,7 @@ export function NumeralsDoc(props) {
 <InputNumber inputId="minmax" value={value4} onValueChange={(e) => setValue4(e.value)} mode="decimal" min={0} max={100} />
 `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputNumber } from 'primereact/inputnumber';
 
 export default function NumeralsDoc() {
@@ -47,7 +47,7 @@ export default function NumeralsDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputNumber, InputNumberValueChangeParams } from 'primereact/inputnumber';
 
 export default function NumeralsDoc() {

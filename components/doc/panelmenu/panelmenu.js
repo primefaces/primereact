@@ -124,6 +124,7 @@ export function PanelMenuDoc(props) {
 <PanelMenu model={items} style={{ width: '22rem' }}/>        
 `,
         javascript: `
+import React from 'react'; 
 import { PanelMenu } from 'primereact/panelmenu';
 
 export default function PanelMenuDoc() {
@@ -250,6 +251,7 @@ export default function PanelMenuDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { PanelMenu } from 'primereact/panelmenu';
 
 export default function PanelMenuDoc() {

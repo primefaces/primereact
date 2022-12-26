@@ -11,7 +11,7 @@ export function SlotCharDoc(props) {
 <InputMask value={value} onChange={(e) => setValue(e.target.value)} mask="99/99/9999" placeholder="99/99/9999" slotChar="mm/dd/yyyy />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputMask } from "primereact/inputmask";
 
 export default function SlotCharDemo() {
@@ -23,7 +23,7 @@ export default function SlotCharDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputMask, InputMaskChangeParams } from "primereact/inputmask";
 
 export default function SlotCharDemo() {

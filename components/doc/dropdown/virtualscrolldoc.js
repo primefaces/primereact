@@ -16,7 +16,7 @@ export function VirtualScrollDoc(props) {
 <Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 38 }} placeholder="Select Item"/>
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Dropdown } from 'primereact/dropdown';
 import './DropdownDemo.css';
 
@@ -36,7 +36,7 @@ export default function VirtualScrollDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Dropdown, DropdownChangeParams } from 'primereact/dropdown';
 import './DropdownDemo.css';
 

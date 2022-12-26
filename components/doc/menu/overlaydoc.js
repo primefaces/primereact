@@ -53,7 +53,7 @@ export function OverlayDoc(props) {
 <Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)} aria-controls="popup_menu" aria-haspopup />
 `,
         javascript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Menu } from 'primereact/menu';
 import { Toast } from 'primereact/toast';
@@ -110,7 +110,7 @@ export default function OverlayDoc() {
 }
         `,
         typescript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Menu } from 'primereact/menu';
 import { MenuItem } from 'primereact/menuitem';

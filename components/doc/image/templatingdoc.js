@@ -11,6 +11,7 @@ export function TemplatingDoc(props) {
 <Image src="/images/galleria/galleria12.jpg" zoomSrc="images/galleria/galleria12.jpg" template={icon} alt="Image" preview width="100"  />
         `,
         javascript: `
+import React from 'react'; 
 import { Image } from 'primereact/image';
 
 export default function TemplatingDoc() {
@@ -24,6 +25,7 @@ export default function TemplatingDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Image } from 'primereact/image';
 
 export default function TemplatingDoc() {

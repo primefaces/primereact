@@ -8,6 +8,7 @@ export function DisabledDoc(props) {
 <RadioButton checked disabled></RadioButton>
         `,
         javascript: `
+import React from 'react'; 
 import { RadioButton } from "primereact/radiobutton";
 
 export default function DisabledDemo() {
@@ -17,6 +18,7 @@ export default function DisabledDemo() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { RadioButton } from "primereact/radiobutton";
 
 export default function DisabledDemo() {

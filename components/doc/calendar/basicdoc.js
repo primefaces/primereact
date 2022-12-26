@@ -11,7 +11,7 @@ export function BasicDoc(props) {
 <Calendar id="basic" value={date} onChange={(e) => setDate(e.value)} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
 export default function BasicDemo() {
@@ -23,7 +23,7 @@ export default function BasicDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar, CalendarChangeParams } from 'primereact/calendar';
 
 export default function BasicDemo() {

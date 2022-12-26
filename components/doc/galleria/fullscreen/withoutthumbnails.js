@@ -47,7 +47,7 @@ export function WithoutThumbnailsDoc(props) {
 <Button label="Show" icon="pi pi-external-link" onClick={() => galleria.current.show()} />
         `,
         javascript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
 import { PhotoService } from '../service/PhotoService';
@@ -95,7 +95,7 @@ export default function WithoutThumbnailsDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
 import { PhotoService } from '../service/PhotoService';

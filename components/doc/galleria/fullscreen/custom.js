@@ -60,7 +60,7 @@ circular fullScreen showItemNavigators showThumbnails={false} item={itemTemplate
 </div>
         `,
         javascript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Galleria } from 'primereact/galleria';
 import { PhotoService } from '../service/PhotoService';
 
@@ -121,7 +121,7 @@ export default function CustomContentDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Galleria, GalleriaResponsiveOptions } from 'primereact/galleria';
 import { PhotoService } from '../service/PhotoService';
 

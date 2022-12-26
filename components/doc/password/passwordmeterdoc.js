@@ -11,7 +11,7 @@ export function PasswordMeter(props) {
 <Password value={value} onChange={(e) => setValue(e.target.value)} inputClassName="w-15rem" />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Password } from 'primereact/password';
 
 export default function PasswordMeter() {
@@ -25,7 +25,7 @@ export default function PasswordMeter() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Password } from 'primereact/password';
 
 export default function PasswordMeter() {

@@ -39,7 +39,7 @@ export function BasicDoc(props) {
 <DataScroller value={products} itemTemplate={itemTemplate} rows={5} buffer={0.4} header="List of Products" />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { Rating } from 'primereact/rating';
 import { DataScroller } from 'primereact/datascroller';
@@ -78,7 +78,7 @@ export default function BasicDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { Rating } from 'primereact/rating';
 import { DataScroller } from 'primereact/datascroller';

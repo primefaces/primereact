@@ -57,7 +57,7 @@ export function GroupedDoc(props) {
 
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Dropdown } from 'primereact/dropdown';
 import './DropdownDemo.css';
 
@@ -114,7 +114,7 @@ export default function GroupedDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Dropdown } from 'primereact/dropdown';
 import './DropdownDemo.css';
 

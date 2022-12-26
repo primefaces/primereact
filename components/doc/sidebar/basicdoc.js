@@ -15,7 +15,7 @@ export function BasicDoc(props) {
 <Button icon="pi pi-arrow-right" onClick={() => setVisibleLeft(true)} className="mr-2" />
         `,
         javascript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Sidebar } from 'primereact/sidebar';
 import { Button } from 'primereact/button';
 
@@ -33,7 +33,7 @@ export default function BasicDoc() {
 }
         `,
         typescript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Sidebar } from 'primereact/sidebar';
 import { Button } from 'primereact/button';
 

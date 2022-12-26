@@ -76,7 +76,7 @@ export function VerticalBarDoc(props) {
 <Chart type="bar" data={chartData} options={chartOptions} />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
 export default function VerticalBarDoc() {
@@ -153,7 +153,7 @@ export default function VerticalBarDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
 export default function VerticalBarDoc() {

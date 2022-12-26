@@ -39,7 +39,7 @@ export function LoadingDoc(props) {
 <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} showLoader delay={250} loadingTemplate={basicLoadingTemplate} />
         `,
         javascript: `
-import { useState } 'react';
+import React, { useState } 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { Skeleton } from 'primereact/skeleton';
 import { classNames } from 'primereact/utils';
@@ -78,7 +78,7 @@ export default function LoadingDoc() {
 }
         `,
         typescript: `
-import { useState } 'react';
+import React, { useState } 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { Skeleton } from 'primereact/skeleton';
 import { classNames } from 'primereact/utils';

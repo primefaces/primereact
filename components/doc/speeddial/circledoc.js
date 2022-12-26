@@ -58,7 +58,7 @@ export function CircleDoc(props) {
 <SpeedDial model={items} radius={120} direction="down-right" type="quarter-circle" buttonClassName="p-button-success" />
         `,
         javascript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Toast } from 'primereact/toast';
 
@@ -119,7 +119,7 @@ export default function CircleDoc() {
 }
         `,
         typescript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Toast } from 'primereact/toast';
 

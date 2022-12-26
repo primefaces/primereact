@@ -36,7 +36,7 @@ export function DynamicDoc(props) {
 <Messages ref={msgs1} />
         `,
         javascript: `
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Messages } from 'primereact/messages';
 
@@ -76,7 +76,7 @@ export default function DynamicDoc() {
 }
         `,
         typescript: `
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Messages } from 'primereact/messages';
 

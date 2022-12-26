@@ -19,7 +19,7 @@ export function BasicDoc(props) {
 <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUpload} />
         `,
         javascript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { Toast } from 'primereact/toast';
 import { FileUpload } from 'primereact/fileupload';
 
@@ -39,7 +39,7 @@ export default function BasicDoc() {
 }
         `,
         typescript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { Toast } from 'primereact/toast';
 import { FileUpload } from 'primereact/fileupload';
 

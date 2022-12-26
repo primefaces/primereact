@@ -43,7 +43,7 @@ export function AutoPlayDemoDoc(props) {
     item={itemTemplate} thumbnail={thumbnailTemplate} circular autoPlay transitionInterval={2000} />
         `,
         javascript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Galleria } from 'primereact/galleria';
 import { PhotoService } from '../service/PhotoService';
 
@@ -87,7 +87,7 @@ export default function AutoPlayDemoDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Galleria } from 'primereact/galleria';
 import { PhotoService } from '../service/PhotoService';
 

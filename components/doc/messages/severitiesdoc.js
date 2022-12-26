@@ -20,7 +20,7 @@ export function SeveritiesDoc(props) {
 <Messages ref={msgs1} />
         `,
         javascript: `
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Messages } from 'primereact/messages';
 
 export default function SeveritiesDoc() {
@@ -41,7 +41,7 @@ export default function SeveritiesDoc() {
 }
         `,
         typescript: `
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Messages } from 'primereact/messages';
 
 export default function SeveritiesDoc() {

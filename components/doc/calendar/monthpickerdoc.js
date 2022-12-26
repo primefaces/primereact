@@ -11,7 +11,7 @@ export function MonthPickerDoc(props) {
 <Calendar id="monthpicker" value={date} onChange={(e) => setDate(e.value)} view="month" dateFormat="mm/yy" />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
 export default function MonthPickerDoc() {
@@ -23,7 +23,7 @@ export default function MonthPickerDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar, CalendarChangeParams } from 'primereact/calendar';
 
 export default function MonthPickerDoc() {

@@ -138,6 +138,7 @@ export function OverlayDoc(props) {
 <TieredMenu model={items} />
         `,
         javascript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 import { TieredMenu } from 'primereact/tieredmenu';
 
@@ -149,6 +150,7 @@ export default function OverlayDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 import { TieredMenu } from 'primereact/tieredmenu';
 

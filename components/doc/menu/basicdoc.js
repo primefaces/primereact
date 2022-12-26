@@ -12,6 +12,7 @@ export function BasicDoc(props) {
 <Menu model={items} />
 `,
         javascript: `
+import React from 'react'; 
 import { Menu } from 'primereact/menu';
 
 export default function BasicDoc() {
@@ -26,6 +27,7 @@ export default function BasicDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Menu } from 'primereact/menu';
 import { MenuItem } from 'primereact/menuitem';
 

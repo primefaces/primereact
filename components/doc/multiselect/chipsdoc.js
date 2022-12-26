@@ -18,7 +18,7 @@ export function ChipsDoc(props) {
 <MultiSelect value={selectedCities} options={cities} onChange={(e) => setSelectedCities(e.value)} optionLabel="name" placeholder="Select a City" display="chip" />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { MultiSelect } from 'primereact/multiselect';
 import './MultiSelectDemo.css';
 
@@ -40,7 +40,7 @@ export default function ChipsDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { MultiSelect, MultiSelectChangeParams } from 'primereact/multiselect';
 import './MultiSelectDemo.css';
 

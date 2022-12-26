@@ -14,6 +14,7 @@ export function RoundedIconButtonsDoc(props) {
 <Button icon="pi pi-check" className="p-button-rounded" aria-label="Filter" />
         `,
         javascript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 
 export default function RoundedIconButtonsDoc() {
@@ -32,6 +33,7 @@ export default function RoundedIconButtonsDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 
 export default function RoundedIconButtonsDoc() {

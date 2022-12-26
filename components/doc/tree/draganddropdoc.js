@@ -17,7 +17,7 @@ export function DragAndDropDoc(props) {
 <Tree value={nodes} dragdropScope="demo" onDragDrop={event => setNodes(event.value)} />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Tree } from 'primereact/tree';
 import { NodeService } from '../service/NodeService';
 
@@ -35,7 +35,7 @@ export default function DragAndDropDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Tree } from 'primereact/tree';
 import { NodeService } from '../service/NodeService';
 

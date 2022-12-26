@@ -58,7 +58,7 @@ export function ProgrammaticDoc(props) {
     item={itemTemplate} thumbnail={thumbnailTemplate} style={{ maxWidth: '640px' }} />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
 import { PhotoService } from '../service/PhotoService';
@@ -118,7 +118,7 @@ export default function ProgrammaticDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
 import { PhotoService } from '../service/PhotoService';

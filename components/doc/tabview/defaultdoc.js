@@ -18,6 +18,7 @@ export function DefaultDoc(props) {
 </TabView>
         `,
         javascript: `
+import React from 'react'; 
 import { TabView, TabPanel } from 'primereact/tabview';
 import './TabViewDemo.css';
 
@@ -39,6 +40,7 @@ export default function DefaultDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { TabView, TabPanel } from 'primereact/tabview';
 import './TabViewDemo.css';
 

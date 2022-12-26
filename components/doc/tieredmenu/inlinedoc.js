@@ -135,6 +135,7 @@ export function InlineDoc(props) {
 <TieredMenu model={items} />
         `,
         javascript: `
+import React from 'react'; 
 import { TieredMenu } from 'primereact/tieredmenu';
 
 export default function InlineDoc() {
@@ -145,6 +146,7 @@ export default function InlineDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { TieredMenu } from 'primereact/tieredmenu';
 
 export default function InlineDoc() {

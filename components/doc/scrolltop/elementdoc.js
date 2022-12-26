@@ -25,6 +25,7 @@ export function ElementDoc(props) {
 </ScrollPanel>
         `,
         javascript: `
+import React from 'react'; 
 import { ScrollTop } from 'primereact/scrolltop';
 import { ScrollPanel } from 'primereact/scrollpanel';
 
@@ -51,6 +52,7 @@ export const ElementDoc = () => {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { ScrollTop } from 'primereact/scrolltop';
 import { ScrollPanel } from 'primereact/scrollpanel';
 

@@ -55,7 +55,7 @@ export function TooltipDoc(props) {
 <SpeedDial model={items} direction="up" className="speeddial-left" buttonClassName="p-button-help" />
         `,
         javascript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Tooltip } from 'primereact/tooltip';
 import { Toast } from 'primereact/toast';
@@ -113,7 +113,7 @@ export default function TooltipDoc() {
 }
         `,
         typescript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Tooltip } from 'primereact/tooltip';
 import { Toast } from 'primereact/toast';

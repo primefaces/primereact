@@ -15,6 +15,7 @@ export function TextButtonsDoc(props) {
 <Button label="Plain" className="p-button-text p-button-plain" />
         `,
         javascript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 
 export default function TextButtonsDoc() {
@@ -34,6 +35,7 @@ export default function TextButtonsDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 
 export default function TextButtonsDoc() {

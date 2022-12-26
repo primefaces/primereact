@@ -11,7 +11,7 @@ export function ShowPassword(props) {
 <Password value={value} onChange={(e) => setValue(e.target.value)} inputClassName="w-15rem" toggleMask />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Password } from 'primereact/password';
 
 export default function ShowPassword() {
@@ -25,7 +25,7 @@ export default function ShowPassword() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Password } from 'primereact/password';
 
 export default function ShowPassword() {

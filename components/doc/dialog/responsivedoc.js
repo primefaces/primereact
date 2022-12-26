@@ -39,7 +39,7 @@ export function ResponsiveDoc(props) {
 </Dialog>
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Dialog, DialogPositionType } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 
@@ -81,7 +81,7 @@ export default function ResponsiveDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 

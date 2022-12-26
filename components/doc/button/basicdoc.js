@@ -10,6 +10,7 @@ export function BasicDoc(props) {
 <Button label="Link" className="p-button-link" />
         `,
         javascript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 import './ButtonDemo.css';
 
@@ -25,6 +26,7 @@ export default function BasicDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 import './ButtonDemo.css';
 

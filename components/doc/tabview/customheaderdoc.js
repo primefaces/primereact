@@ -48,6 +48,7 @@ export function CustomHeaderDoc(props) {
 </TabView>
         `,
         javascript: `
+import React from 'react'; 
 import { TabView, TabPanel } from 'primereact/tabview';
 import { SplitButton } from 'primereact/splitbutton';
 import { Avatar } from 'primereact/avatar';
@@ -100,6 +101,7 @@ export default function CustomHeaderDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { TabView, TabPanel, TabPanelHeaderTemplateOptions } from 'primereact/tabview';
 import { SplitButton } from 'primereact/splitbutton';
 import { Avatar } from 'primereact/avatar';

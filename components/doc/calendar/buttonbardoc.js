@@ -11,7 +11,7 @@ export function ButtonBarDoc(props) {
 <Calendar id="buttonbar" value={date} onChange={(e) => setDate(e.value)} showButtonBar />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
 export default function ButtonBarDoc() {
@@ -23,7 +23,7 @@ export default function ButtonBarDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar, CalendarChangeParams } from 'primereact/calendar';
 
 export default function ButtonBarDoc() {

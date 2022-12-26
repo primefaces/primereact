@@ -53,7 +53,7 @@ export function ContextMenuDoc(props) {
 </div>
         `,
         javascript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Tree } from 'primereact/tree';
 import { ContextMenu } from 'primereact/contextmenu';
 import { Toast } from 'primereact/toast';
@@ -107,7 +107,7 @@ export default function ContextMenuDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Tree } from 'primereact/tree';
 import { ContextMenu } from 'primereact/contextmenu';
 import { Toast } from 'primereact/toast';

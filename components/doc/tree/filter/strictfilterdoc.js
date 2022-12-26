@@ -17,7 +17,7 @@ export function StrictFilterDoc(props) {
 <Tree value={nodes} filter filterMode="strict"></Tree>
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Tree } from 'primereact/tree';
 import { NodeService } from '../service/NodeService';
 
@@ -35,7 +35,7 @@ export default function StrictFilterDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Tree } from 'primereact/tree';
 import { NodeService } from '../service/NodeService';
 

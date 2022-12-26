@@ -20,6 +20,7 @@ export function MultipleDoc(props) {
 </Accordion>
         `,
         javascript: `
+import React from 'react';
 import { Accordion, AccordionTab } from 'primereact/accordion';
 import './AccordionDemo.css';
 
@@ -47,6 +48,7 @@ export default function MultipleDoc() {
 }
         `,
         typescript: `
+import React from 'react';
 import { Accordion, AccordionTab } from 'primereact/accordion';
 import './AccordionDemo.css';
 

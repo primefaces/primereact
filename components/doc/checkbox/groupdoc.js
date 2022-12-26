@@ -37,7 +37,7 @@ export function GroupDoc(props) {
 </div>
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Checkbox } from "primereact/checkbox";
 
 export default function GroupDemo() {
@@ -77,7 +77,7 @@ export default function GroupDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Checkbox } from "primereact/checkbox";
 
 export default function GroupDemo() {

@@ -43,7 +43,7 @@ export function OutlinedButtonsDoc(props) {
 <SplitButton label="Save" icon="pi pi-plus"  onClick={save} model={items}></SplitButton>
         `,
         javascript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { SplitButton } from 'primereact/splitbutton';
 import { Toast } from 'primereact/toast';
 
@@ -94,7 +94,7 @@ export default function OutlinedButtonsDoc() {
 }
         `,
         typescript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { SplitButton } from 'primereact/splitbutton';
 import { Toast } from 'primereact/toast';
 

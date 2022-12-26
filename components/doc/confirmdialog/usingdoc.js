@@ -26,7 +26,7 @@ export function UsingConfirmDialogDoc(props) {
 <Button onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />
         `,
         javascript: `
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { Toast } from 'primereact/toast';
 import { Button } from '../../lib/button/Button';
@@ -55,7 +55,7 @@ export default function UsingConfirmDialogDoc() {
 }
         `,
         typescript: `
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { Toast } from 'primereact/toast';
 import { Button } from '../../lib/button/Button';

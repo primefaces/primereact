@@ -11,6 +11,7 @@ export function BasicDoc(props) {
 <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="250" />
         `,
         javascript: `
+import React from 'react'; 
 import { Image } from 'primereact/image';
 
 export default function BasicDoc() {
@@ -23,6 +24,7 @@ export default function BasicDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Image } from 'primereact/image';
 
 export default function BasicDoc() {

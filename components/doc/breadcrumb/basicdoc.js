@@ -13,6 +13,7 @@ export function DefaultDoc(props) {
 <BreadCrumb model={items} home={home} />
         `,
         javascript: `
+import React from 'react'; 
 import { BreadCrumb } from 'primereact/breadcrumb';
 
 export default function DefaultDoc() {
@@ -32,6 +33,7 @@ export default function DefaultDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { BreadCrumb } from 'primereact/breadcrumb';
 
 export default function DefaultDoc() {

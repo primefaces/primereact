@@ -23,7 +23,7 @@ export function MaskDoc(props) {
 </div>
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputMask } from "primereact/inputmask";
 
 export default function MaskDemo() {
@@ -48,7 +48,7 @@ export default function MaskDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputMask } from "primereact/inputmask";
 
 export default function MaskDemo() {

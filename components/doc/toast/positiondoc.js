@@ -31,7 +31,7 @@ export function PositionDoc(props) {
 <Button label="Bottom Right" className="p-button-success" onClick={showBottomRight} />
         `,
         javascript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
@@ -65,7 +65,7 @@ export default function PositionDoc() {
 }
         `,
         typescript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 

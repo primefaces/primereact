@@ -22,6 +22,7 @@ export function AlignmentDoc(props) {
 <Timeline value={events} align="alternate" content={(item) => item.status} />
         `,
         javascript: `
+import React from 'react'; 
 import { Timeline } from 'primereact/timeline';
 import './TimelineDemo.css';
 
@@ -48,6 +49,7 @@ export default function AlignmentDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Timeline } from 'primereact/timeline';
 import './TimelineDemo.css';
 

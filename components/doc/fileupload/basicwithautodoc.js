@@ -20,7 +20,7 @@ export function BasicWithAuto(props) {
 
         `,
         javascript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { Toast } from 'primereact/toast';
 import { FileUpload } from 'primereact/fileupload';
 
@@ -40,7 +40,7 @@ export default function BasicWithAuto() {
 }
         `,
         typescript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { Toast } from 'primereact/toast';
 import { FileUpload } from 'primereact/fileupload';
 

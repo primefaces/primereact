@@ -53,7 +53,7 @@ export function GroupedDoc(props) {
 optionGroupTemplate={groupedItemTemplate} placeholder="Select Cities" />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { MultiSelect } from 'primereact/multiselect';
 import './MultiSelectDemo.css';
 
@@ -107,7 +107,7 @@ export default function GroupedDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { MultiSelect, MultiSelectChangeParams } from 'primereact/multiselect';
 import './MultiSelectDemo.css';
 

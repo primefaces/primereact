@@ -9,6 +9,7 @@ export function AlphabeticDoc(props) {
 <InputText id="alpha" keyfilter="alpha" />
         `,
         javascript: `
+import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
 
 export default function AlpahbeticDoc() {
@@ -22,6 +23,7 @@ export default function AlpahbeticDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
 
 export default function AlpahbeticDoc() {

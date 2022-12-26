@@ -22,7 +22,7 @@ export function BasicDoc(props) {
 <Dropdown value={selectedCity1} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Select a City" />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Dropdown } from 'primereact/dropdown';
 import './DropdownDemo.css';
 
@@ -48,7 +48,7 @@ export default function BasicDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Dropdown, DropdownChangeParams } from 'primereact/dropdown';
 import './DropdownDemo.css';
 

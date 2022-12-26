@@ -107,7 +107,7 @@ chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cance
 
         `,
         javascript: `
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Toast } from 'primereact/toast';
 import { FileUpload } from 'primereact/fileupload';
 import { ProgressBar } from 'primereact/progressbar';
@@ -214,7 +214,7 @@ export default function TemplateDoc() {
 }
         `,
         typescript: `
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Toast } from 'primereact/toast';
 import { FileUpload } from 'primereact/fileupload';
 import { ProgressBar } from 'primereact/progressbar';

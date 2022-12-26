@@ -124,6 +124,7 @@ export function HorizontalDoc(props) {
 <MegaMenu model={items} />        
 `,
         javascript: `
+import React from 'react'; 
 import { MegaMenu } from 'primereact/megamenu';
 
 export default function HorizontalDoc() {
@@ -246,6 +247,7 @@ export default function HorizontalDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { MegaMenu } from 'primereact/megamenu';
 
 export default function HorizontalDoc() {

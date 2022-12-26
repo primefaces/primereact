@@ -12,7 +12,7 @@ export function VirtualScrollDoc(props) {
 <ListBox value={selectedItem} options={items} virtualScrollerOptions={{ itemSize: 38 }} onChange={(e) => setSelectedItem(e.value)} style={{ width: '15rem' }} listStyle={{ height: '250px' }}/>
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { ListBox } from 'primereact/listbox';
 
 export default function VirtualScrollDoc() {
@@ -25,7 +25,7 @@ export default function VirtualScrollDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { ListBox, ListBoxChangeParams } from 'primereact/listbox';
 
 export default function VirtualScrollDoc() {

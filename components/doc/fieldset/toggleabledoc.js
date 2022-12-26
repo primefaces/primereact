@@ -10,6 +10,7 @@ export function ToggleableDoc(props) {
 </Fieldset>
         `,
         javascript: `
+import React from 'react'; 
 import { Fieldset } from 'primereact/fieldset';
 
 export default function ToggleableDoc() {
@@ -22,6 +23,7 @@ export default function ToggleableDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Fieldset } from 'primereact/fieldset';
 
 export default function ToggleableDoc() {

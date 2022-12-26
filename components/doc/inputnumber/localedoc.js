@@ -18,7 +18,7 @@ export function LocaleDoc(props) {
 
 `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputNumber } from 'primereact/inputnumber';
 
 export default function LocaleDoc() {
@@ -48,7 +48,7 @@ export default function LocaleDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputNumber, InputNumberValueChangeParams } from 'primereact/inputnumber';
 
 export default function LocaleDoc() {

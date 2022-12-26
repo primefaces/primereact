@@ -14,6 +14,7 @@ export function RoundedOutlinedButtonsDoc(props) {
 <Button icon="pi pi-times" className="p-button-rounded p-button-danger p-button-outlined" aria-label="Cancel" />
         `,
         javascript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 import './ButtonDemo.css';
 
@@ -33,6 +34,7 @@ export default function RoundedOutlinedButtonsDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 import './ButtonDemo.css';
 

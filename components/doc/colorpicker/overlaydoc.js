@@ -12,7 +12,7 @@ export function OverlayDoc(props) {
 
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { ColorPicker } from 'primereact/colorpicker';
 
 export default function BasicDemo() {
@@ -24,7 +24,7 @@ export default function BasicDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { ColorPicker, ColorPickerChangeParams } from 'primereact/colorpicker';
 
 export default function BasicDemo() {

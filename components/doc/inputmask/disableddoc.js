@@ -8,6 +8,7 @@ export function DisabledDoc(props) {
 <InputMask mask="99-999999" placeholder="99-999999" disabled/>
         `,
         javascript: `
+import React from 'react'; 
 import { InputMask } from "primereact/inputmask";
 
 export default function DisabledDemo() {
@@ -17,6 +18,7 @@ export default function DisabledDemo() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { InputMask } from "primereact/inputmask";
 
 export default function DisabledDemo() {

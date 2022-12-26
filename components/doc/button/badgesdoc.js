@@ -9,6 +9,7 @@ export function BadgesDoc(props) {
 <Button type="button" label="Messages" icon="pi pi-users" className="p-button-warning" badge="8" badgeClassName="p-badge-danger" />
         `,
         javascript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 import './ButtonDemo.css';
 
@@ -23,6 +24,7 @@ export default function BadgesDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 import './ButtonDemo.css';
 

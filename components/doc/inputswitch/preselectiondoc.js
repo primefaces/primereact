@@ -11,7 +11,7 @@ export function PreselectionDoc(props) {
 <InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputSwitch } from "primereact/inputswitch";
 
 export default function PreselectionDemo() {
@@ -23,7 +23,7 @@ export default function PreselectionDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputSwitch, InputSwitchChangeParams } from "primereact/inputswitch";
 
 export default function PreselectionDemo() {

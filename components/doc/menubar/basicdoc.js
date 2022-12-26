@@ -132,6 +132,7 @@ export function BasicDoc(props) {
 <Menubar model={items}/>    
 `,
         javascript: `
+import React from 'react'; 
 import { Menu } from 'primereact/menu';
 
 export default function BasicDoc() {
@@ -269,6 +270,7 @@ const items = [
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Menu } from 'primereact/menu';
 
 export default function BasicDoc() {

@@ -15,6 +15,7 @@ export function HorizontalDoc(props) {
 <Timeline value={events} layout="horizontal" align="alternate" content={(item) => item} opposite={<span>&nbsp;</span>} />
         `,
         javascript: `
+import React from 'react'; 
 import { Timeline } from 'primereact/timeline';
 import './TimelineDemo.css';
 
@@ -36,6 +37,7 @@ export default function HorizontalDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Timeline } from 'primereact/timeline';
 import './TimelineDemo.css';
 

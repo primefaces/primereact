@@ -29,7 +29,7 @@ export function SingleSelectionDoc(props) {
 <Tree value={nodes} selectionMode="single" selectionKeys={selectedKey} onSelectionChange={e => setSelectedKey(e.value)} onSelect={onNodeSelect} onUnselect={onNodeUnselect} />
         `,
         javascript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Tree } from 'primereact/tree';
 import { Toast } from 'primereact/toast';
 import { NodeService } from '../service/NodeService';
@@ -59,7 +59,7 @@ export default function SingleSelectionDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Tree } from 'primereact/tree';
 import { Toast } from 'primereact/toast';
 import { NodeService } from '../service/NodeService';

@@ -24,7 +24,7 @@ export function ProgrammaticDoc(props) {
 <TabMenu model={items} activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)} />
         `,
         javascript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from 'primereact/button';
 import { TabMenu } from 'primereact/tabmenu';
 
@@ -52,7 +52,7 @@ export default function ProgrammaticDoc() {
 }
         `,
         typescript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from 'primereact/button';
 import { TabMenu } from 'primereact/tabmenu';
 

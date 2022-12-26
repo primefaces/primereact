@@ -20,7 +20,7 @@ export function TemplateDoc(props) {
 <Chips value={value} onChange={(e) => setValue(e.value)} itemTemplate={customChip} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Chips } from "primereact/chips";
 
 export default function TemplateDemo() {
@@ -40,7 +40,7 @@ export default function TemplateDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Chips, ChipsChangeParams } from "primereact/chips";
 
 export default function TemplateDemo() {

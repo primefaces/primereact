@@ -82,7 +82,7 @@ export function LineStylesDoc(props) {
 <Chart type="line" data={chartData} options={chartOptions} />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
 export default function LineStylesDoc() {
@@ -165,7 +165,7 @@ export default function LineStylesDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
 export default function LineStylesDoc() {

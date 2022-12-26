@@ -41,7 +41,7 @@ export function FilterDoc(props) {
 <OrderList value={products} filter filterBy="name" itemTemplate={itemTemplate} header="Products" onChange={(e) => setProducts(e.value)} />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { OrderList } from 'primereact/orderlist';
 import { ProductService } from '../service/ProductService';
 
@@ -80,7 +80,7 @@ export default function FilterDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { OrderList } from 'primereact/orderlist';
 import { ProductService } from '../service/ProductService';
 

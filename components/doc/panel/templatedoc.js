@@ -30,6 +30,7 @@ export function TemplateDoc(props) {
 </Panel>
         `,
         javascript: `
+import React from 'react'; 
 import { Panel } from 'primereact/panel';
 import { Ripple } from 'primereact/ripple';
 
@@ -61,6 +62,7 @@ export default function TemplateDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Panel } from 'primereact/panel';
 import { Ripple } from 'primereact/ripple';
 

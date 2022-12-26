@@ -63,7 +63,7 @@ export function TemplateDoc(props) {
 <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
         `,
         javascript: `
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AutoComplete } from "primereact/autocomplete";
 
 export default function TemplateDemo() {
@@ -124,7 +124,7 @@ export default function TemplateDemo() {
 }
         `,
         typescript: `
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
 
 interface Country {

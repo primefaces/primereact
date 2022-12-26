@@ -12,7 +12,7 @@ export function NumberOfStarsDoc(props) {
 
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Rating } from "primereact/rating";
 
 export default function NumberOfStarsDoc() {
@@ -24,7 +24,7 @@ export default function NumberOfStarsDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Rating, RatingChangeParams } from "primereact/rating";
 
 export default function NumberOfStarsDoc() {

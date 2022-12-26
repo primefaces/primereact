@@ -41,6 +41,7 @@ export function CustomizedDoc(props) {
 <Timeline value={events} align="alternate" className="customized-timeline" marker={customizedMarker} content={customizedContent} />
         `,
         javascript: `
+import React from 'react'; 
 import { Timeline } from 'primereact/timeline';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
@@ -82,6 +83,7 @@ export default function CustomizedDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Timeline } from 'primereact/timeline';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';

@@ -46,7 +46,7 @@ export function MultipleDoc(props) {
 <AutoComplete field="name" multiple value={selectedCountries} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountries(e.value)} />
         `,
         javascript: `
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AutoComplete } from "primereact/autocomplete";
 
 export default function MultipleDemo() {
@@ -92,7 +92,7 @@ export default function MultipleDemo() {
 }
         `,
         typescript: `
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
 
 interface Country {

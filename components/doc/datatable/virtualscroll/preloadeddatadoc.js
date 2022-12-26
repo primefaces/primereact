@@ -20,6 +20,7 @@ export function PreloadedDataDoc(props) {
 </DataTable>
         `,
         javascript: `
+import React from 'react'; 
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Skeleton } from 'primereact/skeleton';
@@ -43,6 +44,7 @@ const PreloadedDataDoc = () => {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Skeleton } from 'primereact/skeleton';

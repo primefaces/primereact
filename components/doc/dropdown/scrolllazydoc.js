@@ -45,7 +45,7 @@ export function ScrollLazyDoc(props) {
 <Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 38 }} placeholder="Select Item"/>
         `,
         javascript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Dropdown } from 'primereact/dropdown';
 import { Skeleton } from 'primereact/skeleton';
 import './DropdownDemo.css';
@@ -94,7 +94,7 @@ export default function ScrollLazyDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Dropdown, DropdownChangeParams } from 'primereact/dropdown';
 import { Skeleton } from 'primereact/skeleton';
 import { VirtualScrollerLazyParams } from 'primereact/virtualscroller';

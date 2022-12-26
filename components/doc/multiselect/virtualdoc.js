@@ -13,7 +13,7 @@ export function VirtualDoc(props) {
 <MultiSelect value={selectedItems1} options={items} onChange={(e) => {setSelectedItems1(e.value); setSelectAll(e.value.length === items.length)}} selectAll={selectAll} onSelectAll={(e) => {setSelectedItems1(e.checked ? [] : items.map(item => item.value)); setSelectAll(!e.checked)}} virtualScrollerOptions={{ itemSize: 43 }} maxSelectedLabels={3} placeholder="Select Item"/>
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { MultiSelect } from 'primereact/multiselect';
 import './MultiSelectDemo.css';
 
@@ -30,7 +30,7 @@ export default function VirtualDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { MultiSelect, MultiSelectChangeParams } from 'primereact/multiselect';
 import './MultiSelectDemo.css';
 

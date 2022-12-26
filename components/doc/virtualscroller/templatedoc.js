@@ -64,7 +64,7 @@ export function TemplateDoc(props) {
 <VirtualScroller items={templateItems} itemSize={25 * 7} itemTemplate={itemTemplate} showLoader delay={250} loadingTemplate={loadingTemplate} />
         `,
         javascript: `
-import { useState } 'react';
+import React, { useState } 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { Skeleton } from 'primereact/skeleton';
 import { classNames } from 'primereact/utils';
@@ -132,7 +132,7 @@ export default function TemplateDoc() {
 }
         `,
         typescript: `
-import { useState } 'react';
+import React, { useState } 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { Skeleton } from 'primereact/skeleton';
 import { classNames } from 'primereact/utils';

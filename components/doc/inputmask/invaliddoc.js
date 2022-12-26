@@ -8,6 +8,7 @@ export function InvalidDoc(props) {
 <InputMask mask="99-999999" placeholder="99-999999" className="p-invalid"/>
         `,
         javascript: `
+import React from 'react'; 
 import { InputMask } from "primereact/inputmask";
 
 export default function InvalidDemo() {
@@ -17,6 +18,7 @@ export default function InvalidDemo() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { InputMask } from "primereact/inputmask";
 
 export default function InvalidDemo() {

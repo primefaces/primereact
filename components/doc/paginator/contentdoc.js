@@ -25,7 +25,7 @@ template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink
 </div>
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Paginator } from 'primereact/paginator';
 import { Button } from 'primereact/button';
 
@@ -51,7 +51,7 @@ export default function ContentDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Paginator } from 'primereact/paginator';
 import { Button } from 'primereact/button';
 

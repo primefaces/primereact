@@ -16,7 +16,7 @@ export function DisabledDoc(props) {
 
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
 export default function DisabledDoc() {
@@ -28,7 +28,7 @@ export default function DisabledDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar, CalendarChangeParams } from 'primereact/calendar';
 
 export default function DisabledDoc() {

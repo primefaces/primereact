@@ -18,7 +18,7 @@ export function InitialDoc(props) {
 <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)} className="md:w-20rem w-full" placeholder="Select Item"></TreeSelect>
         `,
         javascript: `
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { TreeSelect } from 'primereact/treeselect';
 import { NodeService } from '../../../service/NodeService';
 
@@ -39,7 +39,7 @@ export default function InitialDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { TreeSelect, TreeSelectChangeParams } from 'primereact/treeselect';
 import { NodeService } from '../../../service/NodeService';
 

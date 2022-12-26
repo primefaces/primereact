@@ -16,7 +16,7 @@ export function CheckboxDoc(props) {
 <span className="p-inputgroup-addon"><Checkbox checked={checked} onChange={(e) => setChecked(!checked)} /></span><InputText placeholder="Website"/><span className="p-inputgroup-addon"><RadioButton name="rb2" value="rb2" checked={radioValue === 'rb2'} onChange={(e) => setRadioValue(e.value)} /></span>
         `,
         javascript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { Checkbox } from 'primereact/checkbox';
 import { RadioButton } from 'primereact/radiobutton';
@@ -59,7 +59,7 @@ export default function CheckboxDoc() {
 }
         `,
         typescript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { Checkbox } from 'primereact/checkbox';
 import { RadioButton } from 'primereact/radiobutton';

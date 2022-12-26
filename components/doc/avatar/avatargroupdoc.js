@@ -21,6 +21,7 @@ export function AvatarGroupDoc(props) {
 
         `,
         javascript: `
+import React from 'react'; 
 import { Avatar } from 'primereact/avatar';
 import { AvatarGroup } from 'primereact/avatargroup';
 import { Badge } from 'primereact/badge';
@@ -43,6 +44,7 @@ export default function AvatarGroupDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Avatar } from 'primereact/avatar';
 import { AvatarGroup } from 'primereact/avatargroup';
 import { Badge } from 'primereact/badge';

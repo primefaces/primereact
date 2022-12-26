@@ -14,6 +14,7 @@ export function RaisedButtonsDoc(props) {
 <Button label="Danger" className="p-button-raised p-button-danger" />
         `,
         javascript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 import './ButtonDemo.css';
 
@@ -33,6 +34,7 @@ export default function RaisedButtonsDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 import './ButtonDemo.css';
 

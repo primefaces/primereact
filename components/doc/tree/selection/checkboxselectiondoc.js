@@ -18,7 +18,7 @@ export function CheckboxSelectionDoc(props) {
 <Tree value={nodes} selectionMode="checkbox" selectionKeys={selectedKey} onSelectionChange={(e) => setSelectedKey(e.value)} />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Tree } from 'primereact/tree';
 import { NodeService } from '../service/NodeService';
 
@@ -37,7 +37,7 @@ export default function CheckboxSelectionDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Tree } from 'primereact/tree';
 import { NodeService } from '../service/NodeService';
 

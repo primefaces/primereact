@@ -13,7 +13,7 @@ export function Time12Doc(props) {
 
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
 export default function Time12Doc() {
@@ -25,7 +25,7 @@ export default function Time12Doc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar, CalendarChangeParams } from 'primereact/calendar';
 
 export default function Time12Doc() {

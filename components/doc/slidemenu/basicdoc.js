@@ -134,6 +134,7 @@ export function BasicDoc(props) {
 <SlideMenu model={items} viewportHeight={220} menuWidth={175}></SlideMenu>
 `,
         javascript: `
+import React from 'react'; 
 import { SlideMenu } from 'primereact/slidemenu';
 
 export default function BasicDoc() {
@@ -274,6 +275,7 @@ export default function BasicDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { SlideMenu } from 'primereact/slidemenu';
 
 export default function BasicDoc() {

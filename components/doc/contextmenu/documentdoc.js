@@ -139,7 +139,7 @@ export function DocumentDoc(props) {
 </div>
 `,
         javascript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { ContextMenu } from 'primereact/contextmenu';
 
 export default function DocumentDoc() {
@@ -284,7 +284,7 @@ export default function DocumentDoc() {
 }
         `,
         typescript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { ContextMenu } from 'primereact/contextmenu';
 
 export default function DocumentDoc() {

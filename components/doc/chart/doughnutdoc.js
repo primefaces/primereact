@@ -42,7 +42,7 @@ export function DoughnutChartDoc(props) {
 <Chart type="doughnut" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
 export default function DoughnutChartDoc() {
@@ -85,7 +85,7 @@ export default function DoughnutChartDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
 export default function DoughnutChartDoc() {

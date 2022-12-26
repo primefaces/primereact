@@ -59,7 +59,7 @@ export function ResponsiveOptionsDoc(props) {
 <Carousel value={products} numScroll={1} numVisible={3} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} header={<h5>Basic</h5>} />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { Carousel } from 'primereact/carousel';
 import { ProductService } from '../service/ProductService';
@@ -119,7 +119,7 @@ export default function ResponsiveOptionsDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { Carousel } from 'primereact/carousel';
 import { ProductService } from '../service/ProductService';

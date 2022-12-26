@@ -57,7 +57,7 @@ export function OverlayPanelDoc(props) {
 </OverlayPanel>
         `,
         javascript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { OverlayPanel } from 'primereact/overlaypanel';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
@@ -119,7 +119,7 @@ export default function OverlayPanelDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { OverlayPanel } from 'primereact/overlaypanel';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';

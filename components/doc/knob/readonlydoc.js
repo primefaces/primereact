@@ -11,7 +11,7 @@ export function ReadOnlyDoc(props) {
 <Knob value={value} readOnly />
         `,
         javascript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Knob } from 'primereact/knob';
 
 export default function ReadOnlyDoc() {
@@ -23,7 +23,7 @@ export default function ReadOnlyDoc() {
 }
         `,
         typescript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Knob } from 'primereact/knob';
 
 export default function ReadOnlyDoc() {

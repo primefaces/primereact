@@ -20,7 +20,7 @@ export function AutoHideDoc(props) {
 <Button className="tooltip-button ml-2" type="button" label="Save" icon="pi pi-check" />
         `,
         javascript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Tooltip } from 'primereact/tooltip';
 import { Button } from 'primereact/button';
 
@@ -44,7 +44,7 @@ export default function AutoHideDoc() {
 }
         `,
         typescript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Tooltip } from 'primereact/tooltip';
 import { Button } from 'primereact/button';
 

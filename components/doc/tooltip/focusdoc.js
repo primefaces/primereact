@@ -9,6 +9,7 @@ export function FocusDoc(props) {
 <InputText type="text" placeholder="Focus" tooltip="Enter your username" tooltipOptions={{ event: 'focus' }} />
         `,
         javascript: `
+import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
 import { Tooltip } from 'primereact/tooltip';
 
@@ -20,6 +21,7 @@ export default function FocusDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
 import { Tooltip } from 'primereact/tooltip';
 

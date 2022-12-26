@@ -42,7 +42,7 @@ export function DeferredContentDoc(props) {
 </DeferredContent>
         `,
         javascript: `
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { DeferredContent } from 'primereact/deferredcontent';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -85,7 +85,7 @@ export default function DeferredContentDoc() {
 }
         `,
         typescript: `
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { DeferredContent } from 'primereact/deferredcontent';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';

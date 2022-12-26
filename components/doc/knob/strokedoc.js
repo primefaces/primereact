@@ -12,7 +12,7 @@ export function StrokeDoc(props) {
 
         `,
         javascript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Knob } from 'primereact/knob';
 
 export default function StrokeDoc() {
@@ -25,7 +25,7 @@ export default function StrokeDoc() {
 }
         `,
         typescript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Knob, KnobChangeParams } from 'primereact/knob';
 
 export default function StrokeDoc() {

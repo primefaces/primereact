@@ -27,6 +27,7 @@ export function CustomDoc(props) {
 <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" customUpload uploadHandler={customBase64Uploader} />
         `,
         javascript: `
+import React from 'react'; 
 import { FileUpload } from 'primereact/fileupload';
 
 export default function CustomDoc() {
@@ -52,6 +53,7 @@ export default function CustomDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { FileUpload } from 'primereact/fileupload';
 
 export default function CustomDoc() {

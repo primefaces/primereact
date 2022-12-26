@@ -9,6 +9,7 @@ export function WindowDoc(props) {
 <ScrollTop />
         `,
         javascript: `
+import React from 'react'; 
 import { ScrollTop } from 'primereact/scrolltop';
 
 export const WindowDoc = () => {
@@ -21,6 +22,7 @@ export const WindowDoc = () => {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { ScrollTop } from 'primereact/scrolltop';
 
 export const WindowDoc = () => {

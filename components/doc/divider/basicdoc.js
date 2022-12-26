@@ -14,6 +14,7 @@ export function BasicDoc(props) {
     <p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. Donec vel volutpat ipsum. Integer nunc magna, posuere ut tincidunt eget, egestas vitae sapien. Morbi dapibus luctus odio.</p>
         `,
         javascript: `
+import React from 'react'; 
 import { Divider } from 'primereact/divider';
 
 export default function BasicDoc() {
@@ -32,6 +33,7 @@ export default function BasicDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Divider } from 'primereact/divider';
 
 export default function BasicDoc() {

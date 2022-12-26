@@ -58,7 +58,7 @@ placeholder="Select Items"
 </div>
         `,
         javascript: `
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { TreeSelect } from 'primereact/treeselect';
 import { Button } from '../../lib/button/Button';
 import { NodeService } from '../../../service/NodeService';
@@ -95,7 +95,7 @@ export default function ProgrammaticDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { TreeSelect, TreeSelectChangeParams, TreeSelectExpandedParams } from 'primereact/treeselect';
 import { Button } from '../../lib/button/Button';
 import { NodeService } from '../../../service/NodeService';

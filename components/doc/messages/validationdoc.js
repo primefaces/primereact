@@ -22,6 +22,7 @@ export function ValidationDoc(props) {
 </div>
         `,
         javascript: `
+import React from 'react'; 
 import { Message } from 'primereact/message';
 import { InputText } from 'primereact/inputtext';
 
@@ -48,6 +49,7 @@ export default function ValidationDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Message } from 'primereact/message';
 import { InputText } from 'primereact/inputtext';
 

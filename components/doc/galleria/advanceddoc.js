@@ -180,7 +180,7 @@ export function AdvancedDoc(props) {
     style={{ maxWidth: '640px' }} className={galleriaClassName} />
         `,
         javascript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
 import { classNames } from 'primereact/utils';
@@ -361,7 +361,7 @@ export default function AdvancedDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
 import { classNames } from 'primereact/utils';

@@ -10,6 +10,7 @@ export function SimpleDoc(props) {
 </Card>
         `,
         javascript: `
+import React from 'react'; 
 import { Card } from 'primereact/card';
 
 export default function SimpleDoc() {
@@ -22,6 +23,7 @@ export default function SimpleDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Card } from 'primereact/card';
 
 export default function SimpleDoc() {

@@ -34,6 +34,7 @@ export function BasicDoc(props) {
 <Steps model={items} />
 `,
         javascript: `
+import React from 'react'; 
 import { Steps } from 'primereact/steps';
 
 export default function BasicDoc() {
@@ -70,6 +71,7 @@ export default function BasicDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Steps } from 'primereact/steps';
 
 export default function BasicDoc() {

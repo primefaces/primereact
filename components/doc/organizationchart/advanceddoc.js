@@ -104,7 +104,7 @@ export function AdvancedDoc(props) {
 <OrganizationChart value={data} nodeTemplate={nodeTemplate} selection={selection} selectionMode="multiple" onSelectionChange={event => setSelection(event.data)} className="company"></OrganizationChart>
         `,
         javascript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { OrganizationChart } from 'primereact/organizationchart';
 import './OrganizationChartDemo.css';
 
@@ -202,7 +202,7 @@ export default function AdvancedDoc() {
 }
         `,
         typescript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { OrganizationChart } from 'primereact/organizationchart';
 import './OrganizationChartDemo.css';
 

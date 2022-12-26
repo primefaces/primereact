@@ -31,7 +31,7 @@ export function VirtualScrollDoc(props) {
     virtualScrollerOptions={{ itemSize: 38 }} field="label" dropdown onChange={(e) => setSelectedItem(e.value)} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { AutoComplete } from "primereact/autocomplete";
 
 export default function VirtualScrollerDemo() {
@@ -61,7 +61,7 @@ export default function VirtualScrollerDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
 
 interface Item {

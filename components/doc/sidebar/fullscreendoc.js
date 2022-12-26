@@ -15,7 +15,7 @@ export function FullScreenDoc(props) {
 <Button icon="pi pi-th-large" onClick={() => setVisibleFullScreen(true)} className="mr-2" />
         `,
         javascript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Sidebar } from 'primereact/sidebar';
 import { Button } from 'primereact/button';
 
@@ -33,7 +33,7 @@ export default function FullScreenDoc() {
 }
         `,
         typescript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Sidebar } from 'primereact/sidebar';
 import { Button } from 'primereact/button';
 

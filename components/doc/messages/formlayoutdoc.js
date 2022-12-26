@@ -14,6 +14,7 @@ export function FormLayoutDoc(props) {
 </div>
         `,
         javascript: `
+import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
 
 export default function FormLayoutDoc() {
@@ -30,6 +31,7 @@ export default function FormLayoutDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
 
 export default function FormLayoutDoc() {

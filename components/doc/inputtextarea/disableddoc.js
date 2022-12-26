@@ -8,6 +8,7 @@ export function DisabledDoc(props) {
 <InputTextarea disabled rows={5} cols={30} />
         `,
         javascript: `
+import React from 'react'; 
 import { InputTextarea } from "primereact/inputtextarea";
 
 export default function DisabledDemo() {
@@ -17,6 +18,7 @@ export default function DisabledDemo() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { InputTextarea } from "primereact/inputtextarea";
 
 export default function DisabledDemo() {

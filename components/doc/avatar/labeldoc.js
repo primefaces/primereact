@@ -21,6 +21,7 @@ export function LabelDoc(props) {
 <Badge value="4" />
         `,
         javascript: `
+import React from 'react'; 
 import { Avatar } from 'primereact/avatar';
 import { Badge } from 'primereact/badge';
 
@@ -53,6 +54,7 @@ export default function LabelDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Avatar } from 'primereact/avatar';
 import { Badge } from 'primereact/badge';
 

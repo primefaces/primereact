@@ -38,7 +38,7 @@ export function TreeEventsDoc(props) {
 onExpand={onExpand} onCollapse={onCollapse} onSelect={onSelect} onUnselect={onUnselect} />
         `,
         javascript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Tree } from 'primereact/tree';
 import { Toast } from 'primereact/toast';
 import { NodeService } from '../service/NodeService';
@@ -77,7 +77,7 @@ export default function TreeEventsDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Tree } from 'primereact/tree';
 import { Toast } from 'primereact/toast';
 import { NodeService } from '../service/NodeService';

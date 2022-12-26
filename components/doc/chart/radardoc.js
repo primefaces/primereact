@@ -63,7 +63,7 @@ export function RadarDoc(props) {
 <Chart type="radar" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
 export default function RadarDoc() {
@@ -127,7 +127,7 @@ export default function RadarDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
 export default function RadarDoc() {

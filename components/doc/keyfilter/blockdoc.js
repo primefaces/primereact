@@ -9,6 +9,7 @@ export function BlockDoc(props) {
 <InputText id="block" keyfilter={/^[^<>*!]+$/}/>
         `,
         javascript: `
+import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
 
 export default function BlockDoc() {
@@ -22,6 +23,7 @@ export default function BlockDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
 
 export default function BlockDoc() {

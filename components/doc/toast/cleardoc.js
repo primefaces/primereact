@@ -17,7 +17,7 @@ export function ClearDoc(props) {
 <Button onClick={clear} label="Clear" />
         `,
         javascript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
@@ -37,7 +37,7 @@ export default function ClearDoc() {
 }
         `,
         typescript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 

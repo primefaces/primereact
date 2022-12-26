@@ -50,7 +50,7 @@ export function InlineDoc(props) {
 <Menu model={items} />
 `,
         javascript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { Menu } from 'primereact/menu';
 import { Toast } from 'primereact/toast';
 
@@ -104,7 +104,7 @@ export default function InlineDoc() {
 }
         `,
         typescript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { Menu } from 'primereact/menu';
 import { MenuItem } from 'primereact/menuitem';
 import { Toast } from 'primereact/toast';

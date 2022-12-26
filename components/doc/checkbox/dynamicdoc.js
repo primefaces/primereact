@@ -35,7 +35,7 @@ export function DynamicDoc(props) {
 </div>
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Checkbox } from "primereact/checkbox";
 
 export default function DynamicDemo() {
@@ -73,7 +73,7 @@ export default function DynamicDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Checkbox } from "primereact/checkbox";
 
 interface Category {

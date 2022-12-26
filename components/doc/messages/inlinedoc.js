@@ -11,6 +11,7 @@ export function InlineDoc(props) {
 <Message severity="error" text="Message Content" />
         `,
         javascript: `
+import React from 'react'; 
 import { Message } from 'primereact/message';
 
 export default function InlineDoc() {
@@ -34,6 +35,7 @@ export default function InlineDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Message } from 'primereact/message';
 
 export default function InlineDoc() {

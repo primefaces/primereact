@@ -18,6 +18,7 @@ export function AdvancedDoc(props) {
 </Card>
         `,
         javascript: `
+import React from 'react'; 
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 
@@ -40,6 +41,7 @@ export default function AdvancedDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 

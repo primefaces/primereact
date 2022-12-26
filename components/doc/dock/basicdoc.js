@@ -57,6 +57,7 @@ export function BasicDoc(props) {
 <Dock model={dockBasicItems} position="${selectedOptionValue}" />
 `,
         javascript: `
+import React from 'react'; 
 import { Dock } from 'primereact/dock';
 import './DockDemo.css';
 
@@ -89,6 +90,7 @@ export default function BasicDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Dock } from 'primereact/dock';
 import { MenuItem } from 'primereact/menuitem';
 import './DockDemo.css';

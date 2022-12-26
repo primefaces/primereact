@@ -53,7 +53,7 @@ export function LinearDoc(props) {
 <SpeedDial model={items} direction="right" />
         `,
         javascript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Toast } from 'primereact/toast';
 
@@ -109,7 +109,7 @@ export default function LinearDoc() {
 }
         `,
         typescript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Toast } from 'primereact/toast';
 

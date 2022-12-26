@@ -42,7 +42,7 @@ export function LoaderDataScrollerDoc(props) {
 <DataScroller ref={ds} value={products} itemTemplate={itemTemplate} rows={5} loader footer={footer} header="Click Load Button at Footer to Load More" />
         `,
         javascript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Rating } from 'primereact/rating';
 import { DataScroller } from 'primereact/datascroller';
@@ -85,7 +85,7 @@ export default function LoaderDataScrollerDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Rating } from 'primereact/rating';
 import { DataScroller } from 'primereact/datascroller';

@@ -134,6 +134,7 @@ export function EffectDoc(props) {
 <SlideMenu model={items} effectDuration={1000} easing="ease-in" viewportHeight={220} menuWidth={175} />
 `,
         javascript: `
+import React from 'react'; 
 import { SlideMenu } from 'primereact/slidemenu';
 
 export default function EffectDoc() {
@@ -274,6 +275,7 @@ export default function EffectDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { SlideMenu } from 'primereact/slidemenu';
 
 export default function EffectDoc() {

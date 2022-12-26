@@ -9,6 +9,7 @@ export function KeyFilterDoc(props) {
 <InputTextarea keyfilter="int" placeholder="Integers" rows={5} cols={30} />
         `,
         javascript: `
+import React from 'react'; 
 import { InputTextarea } from "primereact/inputtextarea";
 
 export default function KeyFilterDemo() {
@@ -18,6 +19,7 @@ export default function KeyFilterDemo() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { InputTextarea } from "primereact/inputtextarea";
 
 export default function KeyFilterDemo() {

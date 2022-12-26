@@ -24,6 +24,7 @@ export function ImageDoc(props) {
 <Avatar id="fallback-url" image={"invalid2.jpg"} imageFallback={"https://ui-avatars.com/api/?name=Fall+Back"} className="flex align-items-center justify-content-center mr-2" size="xlarge" />{' '}
         `,
         javascript: `
+import React from 'react'; 
 import { Avatar } from 'primereact/avatar';
 import { Badge } from 'primereact/badge';
 
@@ -63,6 +64,7 @@ export default function ImageDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Avatar } from 'primereact/avatar';
 import { Badge } from 'primereact/badge';
 

@@ -46,7 +46,7 @@ export function ObjectsDoc(props) {
 <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} />
         `,
         javascript: `
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AutoComplete } from "primereact/autocomplete";
 
 export default function ObjectDemo() {
@@ -92,7 +92,7 @@ export default function ObjectDemo() {
 }
         `,
         typescript: `
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
 
 interface Country {

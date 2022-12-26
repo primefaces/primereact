@@ -9,7 +9,7 @@ export function DisabledDoc(props) {
 <InputSwitch disabled />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputSwitch } from "primereact/inputswitch";
 
 export default function DisabledDemo() {
@@ -19,7 +19,7 @@ export default function DisabledDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputSwitch } from "primereact/inputswitch";
 
 export default function DisabledDemo() {

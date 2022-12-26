@@ -11,7 +11,7 @@ export function IconDoc(props) {
 <Calendar id="icon" value={date} onChange={(e) => setDate(e.value)} showIcon />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
 export default function IconDoc() {
@@ -23,7 +23,7 @@ export default function IconDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar, CalendarChangeParams } from 'primereact/calendar';
 
 export default function IconDoc() {

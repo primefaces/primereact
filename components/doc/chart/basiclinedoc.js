@@ -73,7 +73,7 @@ export function BasicLineDoc(props) {
 <Chart type="line" data={chartData} options={chartOptions} />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
 export default function BasicLineDoc() {
@@ -147,7 +147,7 @@ export default function BasicLineDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
 export default function BasicLineDoc() {

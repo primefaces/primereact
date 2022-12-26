@@ -46,7 +46,7 @@ export function BasicDoc(props) {
 <VirtualScroller items={multiItems} itemSize={[50, 100]} itemTemplate={multiItemTemplate} orientation="both" />
         `,
         javascript: `
-import { useState } 'react';
+import React, { useState } 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { classNames } from 'primereact/utils';
 import './VirtualScrollerDemo.css';
@@ -96,7 +96,7 @@ export default function BasicDoc() {
 }
         `,
         typescript: `
-import { useState } 'react';
+import React, { useState } 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { classNames } from 'primereact/utils';
 import './VirtualScrollerDemo.css';

@@ -10,6 +10,7 @@ export function ButtonSetDoc(props) {
 <Button label="Cancel" icon="pi pi-times" />
         `,
         javascript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 import './ButtonDemo.css';
 
@@ -27,6 +28,7 @@ export default function ButtonSetDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 import './ButtonDemo.css';
 

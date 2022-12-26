@@ -19,6 +19,7 @@ export function DefaultDoc(props) {
 
         `,
         javascript: `
+import React from 'react';
 import { Accordion, AccordionTab } from 'primereact/accordion';
 import './AccordionDemo.css';
 
@@ -44,6 +45,7 @@ export default function DefaultDoc() {
 }
         `,
         typescript: `
+import React from 'react';
 import { Accordion, AccordionTab } from 'primereact/accordion';
 import './AccordionDemo.css';
 

@@ -39,7 +39,7 @@ export function InsideContentDoc(props) {
     showThumbnails={false} showIndicators changeItemOnIndicatorHover showIndicatorsOnItem item={itemTemplate} />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Galleria } from 'primereact/galleria';
 import { PhotoService } from '../service/PhotoService';
 
@@ -80,7 +80,7 @@ export default function InsideContentDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Galleria } from 'primereact/galleria';
 import { PhotoService } from '../service/PhotoService';
 

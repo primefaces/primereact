@@ -102,7 +102,7 @@ export function MultiAxisBarDoc(props) {
 <Chart type="bar" data={chartData} options={chartOptions} />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
 export default function MultiAxisBarDoc() {
@@ -205,7 +205,7 @@ export default function MultiAxisBarDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
 export default function MultiAxisBarDoc() {

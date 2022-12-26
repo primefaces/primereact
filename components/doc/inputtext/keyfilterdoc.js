@@ -9,6 +9,7 @@ export function KeyFilterDoc(props) {
 <InputText keyfilter="int" placeholder="Integers" />
         `,
         javascript: `
+import React from 'react'; 
 import { InputText } from "primereact/inputtext";
 
 export default function KeyFilterDemo() {
@@ -18,6 +19,7 @@ export default function KeyFilterDemo() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { InputText } from "primereact/inputtext";
 
 export default function KeyFilterDemo() {

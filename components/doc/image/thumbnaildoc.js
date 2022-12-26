@@ -11,6 +11,7 @@ export function ThumbnailDoc(props) {
 <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/small.png" zoomSrc="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="80" height="60" preview />
         `,
         javascript: `
+import React from 'react'; 
 import { Image } from 'primereact/image';
 
 export default function ThumbnailDoc() {
@@ -23,6 +24,7 @@ export default function ThumbnailDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Image } from 'primereact/image';
 
 export default function ThumbnailDoc() {

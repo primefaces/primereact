@@ -19,7 +19,7 @@ export function BasicDoc(props) {
 
         `,
         javascript: `
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { TreeSelect } from 'primereact/treeselect';
 import { NodeService } from '../../../service/NodeService';
 
@@ -40,7 +40,7 @@ export default function BasicDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { TreeSelect, TreeSelectChangeParams } from 'primereact/treeselect';
 import { NodeService } from '../../../service/NodeService';
 

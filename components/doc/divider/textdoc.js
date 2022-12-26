@@ -24,6 +24,7 @@ export function TextDoc(props) {
 
         `,
         javascript: `
+import React from 'react'; 
 import { Divider } from 'primereact/divider';
 
 export default function TextDoc() {
@@ -51,6 +52,7 @@ export default function TextDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Divider } from 'primereact/divider';
 
 export default function TextDoc() {

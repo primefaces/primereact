@@ -48,7 +48,7 @@ export function ProgrammaticDoc(props) {
 <Tree value={nodes} expandedKeys={expandedKeys} onToggle={(e) => setExpandedKeys(e.value)} />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Tree } from 'primereact/tree';
 import { Button } from 'primereact/button';
 import { NodeService } from '../service/NodeService';
@@ -97,7 +97,7 @@ export default function ProgrammaticDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Tree } from 'primereact/tree';
 import { Button } from 'primereact/button';
 import { NodeService } from '../service/NodeService';

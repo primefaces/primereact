@@ -32,7 +32,7 @@ export function AdvancedDoc(props) {
 <ListBox value={selectedCountries} options={countries} onChange={(e) => setSelectedCountries(e.value)} multiple filter optionLabel="name" itemTemplate={countryTemplate} style={{ width: '15rem' }} listStyle={{ maxHeight: '250px' }} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { ListBox } from 'primereact/listbox';
 
 export default function AdvancedDoc() {
@@ -66,7 +66,7 @@ export default function AdvancedDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { ListBox, ListBoxChangeParams } from 'primereact/listbox';
 
 export default function AdvancedDoc() {

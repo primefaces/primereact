@@ -56,7 +56,7 @@ export function PolarAreaDoc(props) {
 <Chart type="polarArea" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
 export default function PolarAreaDoc() {
@@ -113,7 +113,7 @@ export default function PolarAreaDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
 export default function PolarAreaDoc() {

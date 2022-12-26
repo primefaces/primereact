@@ -41,7 +41,7 @@ export function DragDropDoc(props) {
 <OrderList value={products} itemTemplate={itemTemplate} dragdrop onChange={(e) => setProducts(e.value)}></OrderList>
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { OrderList } from 'primereact/orderlist';
 import { ProductService } from '../service/ProductService';
 
@@ -80,7 +80,7 @@ export default function DragDropDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { OrderList } from 'primereact/orderlist';
 import { ProductService } from '../service/ProductService';
 

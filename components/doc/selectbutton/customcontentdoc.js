@@ -22,7 +22,7 @@ export function CustomContentDoc(props) {
 
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { SelectButton } from 'primereact/selectbutton';
 
 export default function CustomContentDoc() {
@@ -44,7 +44,7 @@ export default function CustomContentDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { SelectButton, SelectButtonChangeParams } from 'primereact/selectbutton';
 
 export default function CustomContentDoc() {

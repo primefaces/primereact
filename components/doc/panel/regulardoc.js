@@ -13,6 +13,7 @@ export function RegularDoc(props) {
 </Panel>
         `,
         javascript: `
+import React from 'react'; 
 import { Panel } from 'primereact/panel';
 
 export default function RegularDoc() {
@@ -28,6 +29,7 @@ export default function RegularDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Panel } from 'primereact/panel';
 
 export default function RegularDoc() {

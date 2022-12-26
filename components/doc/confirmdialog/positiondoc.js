@@ -35,7 +35,7 @@ export function PositionDoc(props) {
 <Button onClick={confirm2} icon="pi pi-times" label="Delete"></Button>
         `,
         javascript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
@@ -85,7 +85,7 @@ export default function PositionDoc() {
 }
         `,
         typescript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';

@@ -12,7 +12,7 @@ export function KeyFilterDoc(props) {
 <Chips value={value} onChange={(e) => setValue(e.value)} keyfilter="int" />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Chips } from "primereact/chips";
 
 export default function KeyFilterDemo() {
@@ -24,7 +24,7 @@ export default function KeyFilterDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Chips, ChipsChangeParams } from "primereact/chips";
 
 export default function KeyFilterDemo() {

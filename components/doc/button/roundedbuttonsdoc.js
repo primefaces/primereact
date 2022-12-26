@@ -14,6 +14,7 @@ export function RoundedButtonsDoc(props) {
 <Button label="Danger" className="p-button-rounded p-button-danger" />
         `,
         javascript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 import './ButtonDemo.css';
 
@@ -33,6 +34,7 @@ export default function RoundedButtonsDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 import './ButtonDemo.css';
 

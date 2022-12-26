@@ -17,6 +17,7 @@ export function ColorDoc(props) {
  <Button label="Purple" className="p-button-secondary p-button-outlined mr-3 mb-2" tooltip="Purple" tooltipOptions={{ className: 'purple-tooltip', position: 'top' }} />
         `,
         javascript: `
+import React from 'react'; 
 import { Tooltip } from 'primereact/tooltip';
 import { Button } from 'primereact/button';
 
@@ -38,6 +39,7 @@ export default function ColorDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Tooltip } from 'primereact/tooltip';
 import { Button } from 'primereact/button';
 

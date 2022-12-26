@@ -15,6 +15,7 @@ export function RaisedTextButtonsDoc(props) {
 <Button label="Plain" className="p-button-raised p-button-text p-button-plain" />
         `,
         javascript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 import './ButtonDemo.css';
 
@@ -35,6 +36,7 @@ export default function RaisedTextButtonsDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 import './ButtonDemo.css';
 

@@ -15,6 +15,7 @@ export function OppositeContentDoc(props) {
 <Timeline value={events} opposite={(item) => item.status} content={(item) => <small className="p-text-secondary">{item.date}</small>} />
         `,
         javascript: `
+import React from 'react'; 
 import { Timeline } from 'primereact/timeline';
 import './TimelineDemo.css';
 
@@ -34,6 +35,7 @@ export default function OppositeContentDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Timeline } from 'primereact/timeline';
 import './TimelineDemo.css';
 

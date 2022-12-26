@@ -17,7 +17,7 @@ export function BasicDoc(props) {
 <Paginator first={basicFirst} rows={basicRows} totalRecords={120} rowsPerPageOptions={[10, 20, 30]} onPageChange={onBasicPageChange}></Paginator>
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Paginator } from 'primereact/paginator';
 
 export default function BasicDoc() {
@@ -35,7 +35,7 @@ export default function BasicDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Paginator } from 'primereact/paginator';
 
 export default function BasicDoc() {

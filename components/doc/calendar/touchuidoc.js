@@ -11,7 +11,7 @@ export function TouchUIDoc(props) {
 <Calendar id="touchUI" value={date} onChange={(e) => setDate(e.value)} touchUI />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
 export default function TouchUIDoc() {
@@ -23,7 +23,7 @@ export default function TouchUIDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar, CalendarChangeParams } from 'primereact/calendar';
 
 export default function TouchUIDoc() {

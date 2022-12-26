@@ -22,7 +22,7 @@ export function DynamicDoc(props) {
 <Slider className="slider ml-3" value={sliderValue} onChange={(e) => setSliderValue(e.value)} style={{ width: '14rem' }} />
         `,
         javascript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Tooltip } from 'primereact/tooltip';
 import { Slider } from 'primereact/slider';
 import { Knob } from 'primereact/knob';
@@ -47,7 +47,7 @@ export default function DynamicDoc() {
 }
         `,
         typescript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Tooltip } from 'primereact/tooltip';
 import { Slider } from 'primereact/slider';
 import { Knob } from 'primereact/knob';

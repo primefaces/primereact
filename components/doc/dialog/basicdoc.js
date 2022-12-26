@@ -52,7 +52,7 @@ export function BasicDoc(props) {
 </Dialog>
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 
@@ -101,7 +101,7 @@ export default function BasicDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button } from 'primereact/button';
 import { Dialog, DialogPositionType } from 'primereact/dialog';
 

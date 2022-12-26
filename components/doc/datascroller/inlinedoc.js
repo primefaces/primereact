@@ -39,7 +39,7 @@ export function InlineDataScrollerDoc(props) {
 <DataScroller value={products} itemTemplate={itemTemplate} rows={5} inline scrollHeight="500px" header="Scroll Down to Load More" />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { Rating } from 'primereact/rating';
 import { DataScroller } from 'primereact/datascroller';
@@ -78,7 +78,7 @@ export default function InlineDataScrollerDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { Rating } from 'primereact/rating';
 import { DataScroller } from 'primereact/datascroller';

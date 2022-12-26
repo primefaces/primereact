@@ -25,7 +25,7 @@ export function UsingConfirmPopupDoc(props) {
 <Button ref={buttonEl} onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />
         `,
         javascript: `
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
@@ -53,7 +53,7 @@ export default function UsingConfirmPopupDoc() {
 }
         `,
         typescript: `
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';

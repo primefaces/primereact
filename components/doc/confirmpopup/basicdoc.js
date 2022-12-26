@@ -45,7 +45,7 @@ export function BasicDoc(props) {
 <Button onClick={confirm2} icon="pi pi-times" label="Delete"></Button>
         `,
         javascript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { Toast } from 'primereact/toast';
 
@@ -92,7 +92,7 @@ export default function BasicDoc() {
 }
         `,
         typescript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { Toast } from 'primereact/toast';
 

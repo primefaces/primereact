@@ -11,7 +11,7 @@ export function BasicDoc(props) {
 <Chips value={value} onChange={(e) => setValue(e.value)} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Chips } from "primereact/chips";
 
 export default function BasicDemo() {
@@ -23,7 +23,7 @@ export default function BasicDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Chips } from "primereact/chips";
 
 export default function BasicDemo() {

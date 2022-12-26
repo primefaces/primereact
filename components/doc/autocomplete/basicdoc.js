@@ -16,7 +16,7 @@ export function BasicDoc(props) {
 <AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e) => setValue(e.value)}  />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { AutoComplete } from "primereact/autocomplete";
 
 export default function BasicDemo() {
@@ -33,7 +33,7 @@ export default function BasicDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
 
 export default function BasicDemo() {

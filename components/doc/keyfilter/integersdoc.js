@@ -9,6 +9,7 @@ export function IntegersDoc(props) {
 <InputText id="integer" keyfilter="int" />
         `,
         javascript: `
+import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
 
 export default function IntegersDoc() {
@@ -22,6 +23,7 @@ export default function IntegersDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
 
 export default function IntegersDoc() {

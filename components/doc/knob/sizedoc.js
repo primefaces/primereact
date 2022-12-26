@@ -11,7 +11,7 @@ export function SizeDoc(props) {
 <Knob value={value} size={200} onChange={(e) => setValue(e.value)} />
         `,
         javascript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Knob } from 'primereact/knob';
 
 export default function SizeDoc() {
@@ -23,7 +23,7 @@ export default function SizeDoc() {
 }
         `,
         typescript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Knob, KnobChangeParams } from 'primereact/knob';
 
 export default function SizeDoc() {

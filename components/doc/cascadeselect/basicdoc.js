@@ -85,7 +85,7 @@ export function BasicDoc(props) {
 <CascadeSelect value={selectedCity} options={countries} optionLabel={"cname"} optionGroupLabel={"name"} optionGroupChildren={['states', 'cities']} style={{minWidth: '14rem'}} placeholder={"Select a City"} onChange={event => setSelectedCity(event.value)}/>
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { CascadeSelect } from 'primereact/cascadeselect';
 
 export default function BasicDoc() {
@@ -173,7 +173,7 @@ export default function BasicDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { CascadeSelect } from 'primereact/cascadeselect';
 
 export default function BasicDoc() {

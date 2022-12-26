@@ -11,6 +11,7 @@ export function AddonsDoc(props) {
 <InputText placeholder="Website" />
         `,
         javascript: `
+import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
 
@@ -36,6 +37,7 @@ export default function AddonsDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
 

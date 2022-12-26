@@ -8,6 +8,7 @@ export function InvalidDoc(props) {
 <Chips className="p-invalid" />
         `,
         javascript: `
+import React from 'react'; 
 import { Chips } from "primereact/chips";
 
 export default function InvalidDemo() {
@@ -17,6 +18,7 @@ export default function InvalidDemo() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Chips } from "primereact/chips";
 
 export default function InvalidDemo() {

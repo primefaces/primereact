@@ -46,7 +46,7 @@ export function ProgrammaticDoc(props) {
 </Accordion>
         `,
         javascript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Accordion, AccordionTab } from 'primereact/accordion';
 import { Button } from 'primereact/button';
 import './AccordionDemo.css';
@@ -97,7 +97,7 @@ export default function ProgrammaticDoc() {
 }
         `,
         typescript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Accordion, AccordionTab } from 'primereact/accordion';
 import { Button } from 'primereact/button';
 import './AccordionDemo.css';

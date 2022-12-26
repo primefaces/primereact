@@ -16,7 +16,7 @@ export function ButtonsDoc(props) {
 <InputNumber inputId="vertical" value={value4} onValueChange={(e) => setValue4(e.value)} mode="decimal" showButtons buttonLayout="vertical" style={{width: '4rem'}} decrementButtonClassName="p-button-secondary" incrementButtonClassName="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" />
 `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputNumber } from 'primereact/inputnumber';
 
 export default function ButtonsDoc() {
@@ -47,7 +47,7 @@ export default function ButtonsDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputNumber, InputNumberValueChangeParams } from 'primereact/inputnumber';
 
 export default function ButtonsDoc() {

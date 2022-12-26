@@ -11,7 +11,7 @@ export function SeparatorDoc(props) {
 <Chips value={value} onChange={(e) => setValue(e.value)} separator="," />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Chips } from "primereact/chips";
 
 export default function SeparatorDemo() {
@@ -23,7 +23,7 @@ export default function SeparatorDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Chips, ChipsChangeParams } from "primereact/chips";
 
 export default function SeparatorDemo() {

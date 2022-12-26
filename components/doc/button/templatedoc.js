@@ -15,6 +15,7 @@ export function TemplateDoc(props) {
 <Button className="discord p-0" aria-label="Discord"><i className="pi pi-discord px-2"></i><span className="px-3">Discord</span></Button>
         `,
         javascript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 import './ButtonDemo.css';
 
@@ -61,6 +62,7 @@ export default function TemplateDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 import './ButtonDemo.css';
 

@@ -11,7 +11,7 @@ export function YearPickerDoc(props) {
 <Calendar id="yearpicker" value={date} onChange={(e) => setDate(e.value)} view="year" dateFormat="yy" />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
 export default function YearPickerDoc() {
@@ -23,7 +23,7 @@ export default function YearPickerDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar, CalendarChangeParams } from 'primereact/calendar';
 
 export default function YearPickerDoc() {

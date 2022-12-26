@@ -11,7 +11,7 @@ export function MultipleMonthsDoc(props) {
 <Calendar id="multiplemonths" value={date} onChange={(e) => setDate(e.value)} numberOfMonths={3}/>
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
 export default function MultipleMonthsDoc() {
@@ -23,7 +23,7 @@ export default function MultipleMonthsDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar, CalendarChangeParams } from 'primereact/calendar';
 
 export default function MultipleMonthsDoc() {

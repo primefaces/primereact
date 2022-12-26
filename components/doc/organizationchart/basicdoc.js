@@ -41,6 +41,7 @@ export function BasicDoc(props) {
 <OrganizationChart value={data}></OrganizationChart>
         `,
         javascript: `
+import React from 'react'; 
 import { OrganizationChart } from 'primereact/organizationchart';
 import './OrganizationChartDemo.css';
 
@@ -84,6 +85,7 @@ export default function BasicDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { OrganizationChart } from 'primereact/organizationchart';
 import './OrganizationChartDemo.css';
 

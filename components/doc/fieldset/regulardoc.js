@@ -10,6 +10,7 @@ export function RegularDoc(props) {
 </Fieldset>
         `,
         javascript: `
+import React from 'react'; 
 import { Fieldset } from 'primereact/fieldset';
 
 export default function RegularDoc() {
@@ -22,6 +23,7 @@ export default function RegularDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Fieldset } from 'primereact/fieldset';
 
 export default function RegularDoc() {

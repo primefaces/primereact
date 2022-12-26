@@ -10,6 +10,7 @@ export function IconsDoc(props) {
 <Button label="Submit" icon="pi pi-check" iconPos="right" />
         `,
         javascript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 import './ButtonDemo.css';
 
@@ -25,6 +26,7 @@ export default function IconsDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 import './ButtonDemo.css';
 
