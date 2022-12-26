@@ -8,10 +8,10 @@ import { DocSectionText } from '../common/docsectiontext';
 
 export function SizeDoc(props) {
     const [products, setProducts] = useState([]);
-    const [selectedOptionValue, setSelectedOptionValue] = useState('small');
+    const [selectedOption, setSelectedOption] = useState({ label: 'Small', value: 'small' });
 
     const onRadioButtonChange = (option) => {
-        setSelectedOptionValue(option.value);
+        setSelectedOption(option);
     };
 
     useEffect(() => {
@@ -35,7 +35,7 @@ export function SizeDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={products} size="${selectedOptionValue}" responsiveLayout="scroll">
+<DataTable value={products} size="${selectedOption.value}" responsiveLayout="scroll">
     <Column field="code" header="Code"></Column>
     <Column field="name" header="Name"></Column>
     <Column field="category" header="Category"></Column>
@@ -48,7 +48,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ProductService } from '../service/ProductService';
 
-const SmallTableDemo = () => {
+const ${selectedOption.label}TableDemo = () => {
     const [products, setProducts] = useState([]);
     
 
@@ -58,7 +58,7 @@ const SmallTableDemo = () => {
 
     return (
         <div className="card">
-            <DataTable value={products} size="${selectedOptionValue}" responsiveLayout="scroll">
+            <DataTable value={products} size="${selectedOption.value}" responsiveLayout="scroll">
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>
@@ -74,7 +74,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ProductService } from '../service/ProductService';
 
-const SmallTableDemo = () => {
+const ${selectedOption.label}TableDemo = () => {
     const [products, setProducts] = useState([]);
     
 
@@ -84,7 +84,7 @@ const SmallTableDemo = () => {
 
     return (
         <div className="card">
-            <DataTable value={products} size="${selectedOptionValue}" responsiveLayout="scroll">
+            <DataTable value={products} size="${selectedOption.value}" responsiveLayout="scroll">
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>
@@ -109,7 +109,7 @@ const SmallTableDemo = () => {
 
                             return (
                                 <div className="mr-4" key={label}>
-                                    <RadioButton value={label} onChange={() => onRadioButtonChange(option)} checked={selectedOptionValue === value} />
+                                    <RadioButton value={label} onChange={() => onRadioButtonChange(option)} checked={selectedOption.value === value} />
                                     <label htmlFor={label} className="ml-2">
                                         {label} Size
                                     </label>
@@ -118,7 +118,7 @@ const SmallTableDemo = () => {
                         })}
                     </div>
                 </div>
-                <DataTable value={products} size={selectedOptionValue} responsiveLayout="scroll">
+                <DataTable value={products} size={selectedOption.value} responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>

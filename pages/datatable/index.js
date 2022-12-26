@@ -10,7 +10,7 @@ import { ExpandModeDoc } from '../../components/doc/datatable/colresize/expandmo
 import { FitModeDoc } from '../../components/doc/datatable/colresize/fitmodedoc';
 import { ColToggleDoc } from '../../components/doc/datatable/coltoggledoc';
 import { ContextMenuDoc } from '../../components/doc/datatable/contextmenudoc';
-import { CrudDoc } from '../../components/doc/datatable/cruddoc';
+import { DatatableProductsDoc } from '../../components/doc/datatable/datatableproducts';
 import { DynamicDoc } from '../../components/doc/datatable/dynamiccolumnsdoc';
 import { CellEditingDoc } from '../../components/doc/datatable/edit/celleditingdoc';
 import { CellEditWithSortAndFilterDoc } from '../../components/doc/datatable/edit/celleditwithsortandfilterdoc';
@@ -32,6 +32,7 @@ import { RowExpandDoc } from '../../components/doc/datatable/rowexpanddoc';
 import { ExpandableRowGroupsDoc } from '../../components/doc/datatable/rowgroup/expandablerowgroupsdoc';
 import { RowSpanGroupingDoc } from '../../components/doc/datatable/rowgroup/rowspangroupingdoc';
 import { SubHeaderGroupingDoc } from '../../components/doc/datatable/rowgroup/subheadergroupingdoc';
+import { CustomersDoc } from '../../components/doc/datatable/samplesdoc';
 import { ScrollFlexibleDoc } from '../../components/doc/datatable/scroll/flexibledoc';
 import { ScrollFrozenColumnsDoc } from '../../components/doc/datatable/scroll/frozencolumnsdoc';
 import { ScrollFrozenRowsDoc } from '../../components/doc/datatable/scroll/frozenrowsdoc';
@@ -411,9 +412,20 @@ const DataTableDemo = () => {
             ]
         },
         {
-            id: 'crud',
-            label: 'Crud',
-            component: CrudDoc
+            id: 'samples',
+            label: 'Samples',
+            children: [
+                {
+                    id: 'customers',
+                    label: 'Customers',
+                    component: CustomersDoc
+                },
+                {
+                    id: 'dtproducts',
+                    label: 'Products',
+                    component: DatatableProductsDoc
+                }
+            ]
         },
         {
             id: 'api',

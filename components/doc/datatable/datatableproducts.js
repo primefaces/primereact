@@ -17,7 +17,7 @@ import { Toast } from '../../lib/toast/Toast';
 import { ProductService } from '../../../service/ProductService';
 import { classNames } from '../../lib/utils/Utils';
 
-export function CrudDoc(props) {
+export function DatatableProductsDoc(props) {
     let emptyProduct = {
         id: null,
         name: '',

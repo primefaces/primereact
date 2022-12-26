@@ -6,10 +6,10 @@ export const CarService = {
     generateCar(id) {
         return {
             id,
-            vin: generateVin(),
-            brand: generateBrand(),
-            color: generateColor(),
-            year: generateYear()
+            vin: this.generateVin(),
+            brand: this.generateBrand(),
+            color: this.generateColor(),
+            year: this.generateYear()
         };
     },
 
@@ -25,11 +25,11 @@ export const CarService = {
     },
 
     generateBrand() {
-        return brands[Math.floor(Math.random() * Math.floor(10))];
+        return this.brands[Math.floor(Math.random() * Math.floor(10))];
     },
 
     generateColor() {
-        return colors[Math.floor(Math.random() * Math.floor(7))];
+        return this.colors[Math.floor(Math.random() * Math.floor(7))];
     },
 
     generateYear() {
