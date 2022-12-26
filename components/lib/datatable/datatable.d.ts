@@ -158,7 +158,7 @@ interface DataTableCellClickEventParams {
     originalEvent: React.MouseEvent<HTMLElement>;
     value: any;
     field: string;
-    rowData: any;
+    rowData: DataTableValue;
     rowIndex: number;
     cellIndex: number;
     selected: boolean;
@@ -173,7 +173,7 @@ interface DataTableRowEditSaveParams extends DataTableRowEditParams {
 }
 
 interface DataTableRowEditCompleteParams extends DataTableRowEventParams {
-    newData: any;
+    newData: DataTableValue;
     field: string;
     index: number;
 }
@@ -187,9 +187,9 @@ interface DataTableSelectParams {
 interface DataTableUnselectParams extends DataTableSelectParams {}
 
 interface DataTableExportFunctionParams {
-    data: any;
+    data: DataTableValueArray;
     field: string;
-    rowData: any;
+    rowData: DataTableValue;
     column: Column;
 }
 
@@ -242,24 +242,24 @@ interface DataTableValue extends Record<string, any> {}
 
 interface DataTableValueArray extends Array<DataTableValue> {}
 
-type DataTableRowSelection<TValue extends DataTableValueArray> = {
+type DataTableRowData<TValue extends DataTableValueArray> = {
     [K in keyof TValue]: TValue[K];
 };
 
-type DataTableRowSelectionArray<TValue extends DataTableValueArray> = DataTableRowSelection<TValue>[];
+type DataTableRowDataArray<TValue extends DataTableValueArray> = DataTableRowData<TValue>[];
 
 type DataTableCellSelection<TValue extends DataTableValueArray> = {
     cellIndex: number;
     column: Column;
     field: string;
     props: ColumnProps;
-    rowData: DataTableRowSelection<TValue>;
+    rowData: DataTableRowData<TValue>;
     rowIndex: number;
     selected: boolean;
     value: TValue[keyof TValue];
 };
 
-type DataTableSelection<TValue extends DataTableValueArray> = DataTableRowSelection<TValue> | DataTableRowSelectionArray<TValue> | DataTableCellSelection<TValue>;
+type DataTableSelection<TValue extends DataTableValueArray> = DataTableRowData<TValue> | DataTableRowDataArray<TValue> | DataTableCellSelection<TValue>;
 
 export interface DataTableProps<TValue extends DataTableValueArray> extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'size' | 'onContextMenu' | 'ref' | 'value'> {
     id?: string;
@@ -279,11 +279,11 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     defaultSortOrder?: DataTableSortOrderType;
     dragSelection?: boolean;
     editMode?: string;
-    editingRows?: any[] | DataTableEditingRows;
+    editingRows?: DataTableValueArray | DataTableEditingRows;
     emptyMessage?: DataTableEmptyMessageType;
     expandableRowGroups?: boolean;
     expandedRowIcon?: string;
-    expandedRows?: any[] | DataTableExpandedRows;
+    expandedRows?: DataTableValueArray | DataTableExpandedRows;
     exportFilename?: string;
     filterDelay?: number;
     filterDisplay?: DataTableFilterDisplayType;
@@ -292,7 +292,7 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     first?: number;
     footer?: DataTableFooterTemplateType<TValue>;
     footerColumnGroup?: React.ReactNode;
-    frozenValue?: DataTableRowSelection<TValue>[];
+    frozenValue?: DataTableRowData<TValue>[];
     frozenWidth?: string;
     globalFilter?: DataTableGlobalFilterType;
     globalFilterFields?: string[];
@@ -388,11 +388,11 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     onStateRestore?(state: object): void;
     onStateSave?(state: object): void;
     onValueChange?(value: any[]): void;
-    rowClassName?(data: any, options: DataTableRowClassNameOptions<TValue>): object | string;
-    rowEditValidator?(data: any, options: DataTableRowEditValidatorOptions<TValue>): boolean;
-    rowExpansionTemplate?(data: any, options: DataTableRowExpansionTemplate): React.ReactNode;
-    showRowReorderElement?(data: any, options: DataTableShowRowReorderElementOptions<TValue>): boolean | undefined | null;
-    showSelectionElement?(data: any, options: DataTableShowSelectionElementOptions<TValue>): boolean | undefined | null;
+    rowClassName?(data: DataTableRowData<TValue>, options: DataTableRowClassNameOptions<TValue>): object | string;
+    rowEditValidator?(data: DataTableRowData<TValue>, options: DataTableRowEditValidatorOptions<TValue>): boolean;
+    rowExpansionTemplate?(data: DataTableRowData<TValue>, options: DataTableRowExpansionTemplate): React.ReactNode;
+    showRowReorderElement?(data: DataTableRowData<TValue>, options: DataTableShowRowReorderElementOptions<TValue>): boolean | undefined | null;
+    showSelectionElement?(data: DataTableRowData<TValue>, options: DataTableShowSelectionElementOptions<TValue>): boolean | undefined | null;
     children?: React.ReactNode;
 }
 
