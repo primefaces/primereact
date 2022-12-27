@@ -120,6 +120,7 @@ export default function InsideContentDoc() {
 }
         `,
         data: `
+/* PhotoService */
 {
     itemImageSrc: 'images/galleria/galleria1.jpg',
     thumbnailImageSrc: 'images/galleria/galleria1s.jpg',

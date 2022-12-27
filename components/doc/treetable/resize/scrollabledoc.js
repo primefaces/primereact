@@ -71,6 +71,7 @@ const ScrollableDoc = () => {
 }
         `,
         data: `
+/* NodeService */
 {
     key: '0',
     label: 'Documents',

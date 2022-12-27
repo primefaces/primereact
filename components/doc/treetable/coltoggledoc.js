@@ -155,6 +155,7 @@ const ColToggleDoc = () => {
 }
         `,
         data: `
+/* NodeService */
 {
     key: '0',
     label: 'Documents',

@@ -88,6 +88,7 @@ export default function SingleSelectionDoc() {
 }
         `,
         data: `
+/* NodeService */
 {
     key: '0',
     label: 'Documents',

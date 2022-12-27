@@ -147,6 +147,7 @@ export default function ResponsiveDoc() {
 }
         `,
         data: `
+/* PhotoService */
 {
     itemImageSrc: 'images/galleria/galleria1.jpg',
     thumbnailImageSrc: 'images/galleria/galleria1s.jpg',

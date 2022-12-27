@@ -101,6 +101,7 @@ const onUnselect = (event) => {
 }
         `,
         data: `
+/* NodeService */
 {
     key: '0',
     label: 'Documents',

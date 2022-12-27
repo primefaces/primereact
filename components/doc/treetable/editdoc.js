@@ -217,6 +217,7 @@ const EditDoc = () => {
     }
                 `,
         data: `
+/* NodeService */
 {
     key: '0',
     label: 'Documents',

@@ -103,6 +103,7 @@ useEffect(() => {
 }
         `,
         data: `
+/* NodeService */
 {
     key: '0',
     label: 'Documents',

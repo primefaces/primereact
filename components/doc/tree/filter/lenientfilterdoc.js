@@ -52,6 +52,7 @@ export default function LenientFilterDoc() {
 }
         `,
         data: `
+/* NodeService */
 {
     key: '0',
     label: 'Documents',

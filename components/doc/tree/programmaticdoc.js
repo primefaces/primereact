@@ -145,6 +145,7 @@ export default function ProgrammaticDoc() {
 }
         `,
         data: `
+/* NodeService */
 {
     key: '0',
     label: 'Documents',

@@ -179,6 +179,7 @@ export default function NumScrollDoc() {
 }
         `,
         data: `
+/* ProductService */        
 {
     id: '1000',
     code: 'f230fh0g3',

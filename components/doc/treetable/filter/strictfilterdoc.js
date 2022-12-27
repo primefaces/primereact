@@ -116,6 +116,7 @@ const StrictFilterDoc = () => {
 }
         `,
         data: `
+/* NodeService */
 {
     key: '0',
     label: 'Documents',

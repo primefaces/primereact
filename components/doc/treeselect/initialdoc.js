@@ -59,6 +59,7 @@ export default function InitialDoc() {
 }
         `,
         data: `
+/* NodeService */
 {
     key: '0',
     label: 'Documents',

@@ -59,6 +59,7 @@ export default function CheckDoc() {
 }
         `,
         data: `
+/* NodeService */
 {
     key: '0',
     label: 'Documents',

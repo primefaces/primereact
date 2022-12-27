@@ -52,6 +52,7 @@ export default function BasicDoc() {
 }
         `,
         data: `
+/* NodeService */
 {
     key: '0',
     label: 'Documents',

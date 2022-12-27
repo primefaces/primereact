@@ -125,6 +125,7 @@ const ResponsiveDoc = () => {
 }
         `,
         data: `
+/* NodeService */
 {
     key: '0',
     label: 'Documents',

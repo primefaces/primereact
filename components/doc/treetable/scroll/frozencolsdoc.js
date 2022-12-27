@@ -83,6 +83,7 @@ const FrozenColumnsDoc = () => {
 }
         `,
         data: `
+/* NodeService */
 {
     key: '0',
     label: 'Documents',

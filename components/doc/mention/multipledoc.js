@@ -224,6 +224,7 @@ export default function MultipleDoc() {
 }
         `,
         data: `
+/* CustomerService */ 
 {
     id: 1000,
     name: 'James Butt',

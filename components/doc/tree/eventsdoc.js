@@ -115,6 +115,7 @@ export default function TreeEventsDoc() {
 }
         `,
         data: `
+/* NodeService */
 {
     key: '0',
     label: 'Documents',

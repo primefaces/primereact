@@ -65,7 +65,18 @@ const PreloadedDataDoc = () => {
         </div>
     );
 }
-        `
+        `,
+        data: `
+/* CarService */
+
+{
+    id: 1
+    vin: tvACo,
+    brand: Norma,
+    color: Black,
+    year: 2002
+}
+`
     };
 
     return (

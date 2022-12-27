@@ -141,13 +141,11 @@ export default function ObjectDemo() {
 }
         `,
         data: `
-        {
-            "data": [
-                {"name": "United Kingdom", "code": "UK"},
-                {"name": "United States", "code": "USA"},
-                ...
-            ]
-        }
+ /* CountryService */
+
+{"name": "United Kingdom", "code": "UK"},
+{"name": "United States", "code": "USA"},
+...
                 `
     };
 

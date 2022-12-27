@@ -149,6 +149,7 @@ export default function InvalidDemo() {
 }
         `,
         data: `
+/* NodeService */
 {
     key: '0',
     label: 'Documents',

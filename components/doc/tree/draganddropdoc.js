@@ -52,6 +52,7 @@ export default function DragAndDropDoc() {
 }
         `,
         data: `
+/* NodeService */
 {
     key: '0',
     label: 'Documents',

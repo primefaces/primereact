@@ -731,6 +731,7 @@ const FilterMenuDoc = () => {
 }
         `,
         data: `
+/* CustomerService */ 
 {
     id: 1000,
     name: 'James Butt',

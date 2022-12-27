@@ -555,10 +555,6 @@ export default function AdvanceDoc() {
 
     useEffect(() => {
         TerminalService.on('command', commandHandler);
-
-        
-        
-
         PhotoService.getImages().then((data) => setImages(data));
         NodeService.getTreeNodes().then((data) => setNodes(data));
 
@@ -860,10 +856,6 @@ export default function AdvanceDoc() {
 
     useEffect(() => {
         TerminalService.on('command', commandHandler);
-
-        
-        
-
         PhotoService.getImages().then((data) => setImages(data));
         NodeService.getTreeNodes().then((data) => setNodes(data));
 
@@ -992,6 +984,8 @@ export default function AdvanceDoc() {
 }
     `,
         data: `
+
+/* NodeService */
 {
     key: '0',
     label: 'Documents',
@@ -1016,6 +1010,15 @@ export default function AdvanceDoc() {
             children: [{ key: '0-1-0', label: 'Invoices.txt', icon: 'pi pi-fw pi-file', data: 'Invoices for this month' }]
         }
     ]
+},
+...
+
+/* PhotoService */
+{
+    itemImageSrc: 'images/galleria/galleria1.jpg',
+    thumbnailImageSrc: 'images/galleria/galleria1s.jpg',
+    alt: 'Description for Image 1',
+    title: 'Title 1'
 },
 ...
 `

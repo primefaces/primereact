@@ -159,6 +159,7 @@ export default function ContextMenuDoc() {
 }
         `,
         data: `
+/* NodeService */
 {
     key: '0',
     label: 'Documents',

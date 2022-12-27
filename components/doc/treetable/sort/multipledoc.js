@@ -95,6 +95,7 @@ const MultipleDoc = () => {
 }
         `,
         data: `
+/* NodeService */
 {
     key: '0',
     label: 'Documents',

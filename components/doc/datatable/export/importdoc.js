@@ -353,6 +353,7 @@ header ("Access-Control-Allow-Origin: *");
 echo '<p>Fake Upload Process</p>'; ?>
         `,
         data: `
+/* ProductService */        
 {
     id: '1000',
     code: 'f230fh0g3',

@@ -163,6 +163,7 @@ export default function BasicDoc() {
 }
         `,
         data: `
+/* CustomerService */ 
 {
     id: 1000,
     name: 'James Butt',

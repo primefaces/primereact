@@ -176,6 +176,7 @@ export default function ProgrammaticDoc() {
 }
         `,
         data: `
+/* PhotoService */
 {
     itemImageSrc: 'images/galleria/galleria1.jpg',
     thumbnailImageSrc: 'images/galleria/galleria1s.jpg',

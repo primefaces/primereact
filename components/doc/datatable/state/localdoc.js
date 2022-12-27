@@ -386,6 +386,7 @@ const LocalStorageDoc = () => {
 }
         `,
         data: `
+/* CustomerService */ 
 {
     id: 1000,
     name: 'James Butt',

@@ -71,6 +71,7 @@ const ExpandModeDoc = () => {
 }
         `,
         data: `
+/* NodeService */
 {
     key: '0',
     label: 'Documents',

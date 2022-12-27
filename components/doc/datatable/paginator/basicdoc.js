@@ -97,6 +97,7 @@ const PaginatorBasicDoc = () => {
 }
         `,
         data: `
+/* CustomerService */ 
 {
     id: 1000,
     name: 'James Butt',

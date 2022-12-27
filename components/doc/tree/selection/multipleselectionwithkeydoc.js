@@ -55,6 +55,7 @@ export default function MultipleSelectionWithKeyDoc() {
 }
         `,
         data: `
+/* NodeService */
 {
     key: '0',
     label: 'Documents',
