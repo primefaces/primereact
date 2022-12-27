@@ -445,7 +445,16 @@ export default function FormikFormDemo() {
         </div>
     )
 }
-        `
+        `,
+        data: `
+        {
+            "data": [
+                {"name": "United Kingdom", "code": "UK"},
+                {"name": "United States", "code": "USA"},
+                ...
+            ]
+        }
+                `
     };
 
     return (

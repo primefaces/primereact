@@ -139,7 +139,16 @@ export default function MultipleDemo() {
         <AutoComplete field="name" multiple value={selectedCountries} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountries(e.value)} />
     )
 }
-        `
+        `,
+        data: `
+        {
+            "data": [
+                {"name": "United Kingdom", "code": "UK"},
+                {"name": "United States", "code": "USA"},
+                ...
+            ]
+        }
+                `
     };
 
     return (

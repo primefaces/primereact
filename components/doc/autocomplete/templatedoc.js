@@ -186,7 +186,16 @@ export default function TemplateDemo() {
         <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e: AutoCompleteChangeParams) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
     )
 }
-        `
+        `,
+        data: `
+        {
+            "data": [
+                {"name": "United Kingdom", "code": "UK"},
+                {"name": "United States", "code": "USA"},
+                ...
+            ]
+        }
+                `
     };
 
     return (

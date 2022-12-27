@@ -458,7 +458,16 @@ export default function ReactFinalFormDemo() {
         </div>    
     )
 }
-        `
+        `,
+        data: `
+        {
+            "data": [
+                {"name": "United Kingdom", "code": "UK"},
+                {"name": "United States", "code": "USA"},
+                ...
+            ]
+        }
+                `
     };
 
     return (

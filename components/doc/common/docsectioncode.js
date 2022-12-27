@@ -9,8 +9,13 @@ export function DocSectionCode(props) {
     const [codeLang, setCodeLang] = useState('javascript');
     const codeEditor = useCodeEditor(props);
 
-    const toggleCodeMode = () => {
-        setCodeMode(codeMode === 'basic' ? 'javascript' : 'basic');
+    const toggleCodeMode = (content) => {
+        setCodeMode(codeMode === 'basic' ? content : 'basic');
+    };
+
+    const onToggleData = () => {
+        toggleCodeMode('data');
+        setCodeLang('data');
     };
 
     const copyCode = async () => {
@@ -45,13 +50,23 @@ export function DocSectionCode(props) {
                 {!props.hideToggleCode && (
                     <Button
                         type="button"
-                        onClick={toggleCodeMode}
+                        onClick={() => toggleCodeMode('javascript')}
                         className="p-button-rounded p-button-text p-button-plain h-2rem w-2rem p-0 inline-flex align-items-center justify-content-center"
                         icon="pi pi-code"
                         tooltip="Toggle Full Code"
                         tooltipOptions={{ position: 'bottom', className: 'doc-section-code-tooltip' }}
                     ></Button>
                 )}
+                {!props.hideToggleCode && props.code.data ? (
+                    <Button
+                        type="button"
+                        onClick={onToggleData}
+                        className="p-button-rounded p-button-text p-button-plain h-2rem w-2rem p-0 inline-flex align-items-center justify-content-center"
+                        icon="pi pi-database"
+                        tooltip="View Data"
+                        tooltipOptions={{ position: 'bottom', className: 'doc-section-code-tooltip' }}
+                    ></Button>
+                ) : null}
                 {!props.hideCodeSandbox && (
                     <Button
                         type="button"
@@ -108,6 +123,11 @@ export function DocSectionCode(props) {
             {codeMode !== 'basic' && codeLang === 'php' && (
                 <div>
                     <CodeHighlight lang={'php'}>{props.code.php}</CodeHighlight>
+                </div>
+            )}
+            {codeMode !== 'basic' && codeLang === 'data' && (
+                <div>
+                    <CodeHighlight lang={'json'}>{props.code.data}</CodeHighlight>
                 </div>
             )}
         </div>
