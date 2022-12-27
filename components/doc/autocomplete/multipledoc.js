@@ -28,15 +28,6 @@ export function MultipleDoc(props) {
 
     useEffect(() => {
         CountryService.getCountries().then((data) => setCountries(data));
-        /*
-            Countries is an array of objects with name, code pairs;
-            [
-                ...
-                {"name": "United Kingdom", "code": "UK"},
-                {"name": "United States", "code": "USA"},
-                ...
-            ]
-        */
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const code = {
@@ -46,6 +37,7 @@ export function MultipleDoc(props) {
         javascript: `
 import React, { useEffect, useState } from 'react';
 import { AutoComplete } from "primereact/autocomplete";
+import { CountryService } from "./service/CountryService";
 
 export default function MultipleDemo() {
     const [countries, setCountries] = useState([]);
@@ -92,6 +84,7 @@ export default function MultipleDemo() {
         typescript: `
 import React, { useEffect, useState } from 'react';
 import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
+import { CountryService } from "./service/CountryService";
 
 interface Country {
     name: string;
@@ -162,7 +155,7 @@ export default function MultipleDemo() {
             <div className="card p-fluid">
                 <AutoComplete field="name" multiple value={selectedCountries} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountries(e.value)} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CountryService']} />
         </>
     );
 }

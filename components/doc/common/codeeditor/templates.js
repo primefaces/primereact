@@ -32,6 +32,16 @@ const getCRA = (props = {}, template = 'javascript') => {
     const dependencies = isTypeScript ? { ...ts_dependencies, ...core_dependencies, 'react-scripts': '5.0.1' } : { ...core_dependencies, 'react-scripts': '5.0.1' };
     const fileExtension = isTypeScript ? '.tsx' : '.js';
     const sourceFileName = `${path}demo${fileExtension}`;
+
+    let extFiles = {};
+
+    props.code.extFiles &&
+        Object.entries(props.code.extFiles).forEach(([key, value]) => {
+            extFiles[`${path + key}`] = {
+                content: value
+            };
+        });
+
     const files = {
         'package.json': {
             content: {
@@ -106,7 +116,8 @@ body {
         },
         [`${sourceFileName}`]: {
             content: sources[template]
-        }
+        },
+        ...extFiles
     };
 
     if (props.service) {
