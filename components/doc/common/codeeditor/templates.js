@@ -1,5 +1,5 @@
 import pkg from '../../../../package.json';
-import { data, services } from './data';
+import { services } from './services';
 
 const PrimeReact = {
     version: '^8.0.0', // latest
@@ -113,14 +113,6 @@ body {
         props.service.forEach((name) => {
             files[`${path}service/${name}${fileExtension}`] = {
                 content: services[name]
-            };
-        });
-    }
-
-    if (props.data) {
-        props.data.forEach((name) => {
-            files[`public/data/${name}.json`] = {
-                content: data[name]
             };
         });
     }

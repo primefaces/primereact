@@ -29,7 +29,7 @@ import { ProductService } from './service/ProductService';
 
 export default function BasicDemo() {
     const [products, setProducts] = useState([]);
-    
+
 
     useEffect(() => {
         ProductService.getProductsMini().then(data => setProducts(data));
@@ -57,7 +57,7 @@ import { ProductService } from './service/ProductService';
 
 export default function BasicDemo() {
     const [products, setProducts] = useState([]);
-    
+
 
     useEffect(() => {
         ProductService.getProductsMini().then(data => setProducts(data));
@@ -92,13 +92,7 @@ export default function BasicDemo() {
                     <Column field="quantity" header="Quantity"></Column>
                 </DataTable>
             </div>
-            <DocSectionCode
-                code={code}
-                service={['ProductService']}
-                data={['products-mini']}
-                title="PrimeReact DataTable Demo"
-                description="DataTable requires a collection to display along with column components for the representation of the data."
-            />
+            <DocSectionCode code={code} service={['ProductService']} title="PrimeReact DataTable Demo" description="DataTable requires a collection to display along with column components for the representation of the data." />
         </>
     );
 }
