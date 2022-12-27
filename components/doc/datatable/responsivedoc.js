@@ -12,6 +12,33 @@ export function ResponsiveDoc(props) {
 
     const [selectedOptionValue, setSelectedOptionValue] = useState('scroll');
 
+    const statusTemplate = (rowData) => {
+        return <span className={`product-badge status-${rowData.inventoryStatus ? rowData.inventoryStatus.toLowerCase() : ''}`}>{rowData.inventoryStatus}</span>;
+    };
+
+    const ratingTemplate = (rowData) => {
+        return <Rating value={rowData.rating} readOnly cancel={false} />;
+    };
+
+    const onRadioButtonChange = (option) => {
+        setSelectedOptionValue(option.value);
+    };
+
+    useEffect(() => {
+        ProductService.getProductsSmall().then((data) => setProducts(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const demoOptions = [
+        {
+            label: 'Scroll',
+            value: 'scroll'
+        },
+        {
+            label: 'Stack',
+            value: 'stack'
+        }
+    ];
+
     const code = {
         basic: `
 <DataTable value={products} responsiveLayout="${selectedOptionValue}">
@@ -96,35 +123,23 @@ const ScrollDoc = () => {
         </div>
     );
 }
+        `,
+        data: `
+{
+    id: '1000',
+    code: 'f230fh0g3',
+    name: 'Bamboo Watch',
+    description: 'Product Description',
+    image: 'bamboo-watch.jpg',
+    price: 65,
+    category: 'Accessories',
+    quantity: 24,
+    inventoryStatus: 'INSTOCK',
+    rating: 5
+},
+...
         `
     };
-
-    const statusTemplate = (rowData) => {
-        return <span className={`product-badge status-${rowData.inventoryStatus ? rowData.inventoryStatus.toLowerCase() : ''}`}>{rowData.inventoryStatus}</span>;
-    };
-
-    const ratingTemplate = (rowData) => {
-        return <Rating value={rowData.rating} readOnly cancel={false} />;
-    };
-
-    const onRadioButtonChange = (option) => {
-        setSelectedOptionValue(option.value);
-    };
-
-    useEffect(() => {
-        ProductService.getProductsSmall().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const demoOptions = [
-        {
-            label: 'Scroll',
-            value: 'scroll'
-        },
-        {
-            label: 'Stack',
-            value: 'stack'
-        }
-    ];
 
     return (
         <>
