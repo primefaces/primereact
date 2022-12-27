@@ -27,16 +27,16 @@ const ts_dependencies = {
 // create-react-app -> https://create-react-app.dev/
 const getCRA = (props = {}, template = 'javascript') => {
     const path = 'src/';
-    const { code: sources, title = 'PrimeReact Demo', description = '' } = props;
+    const { code: sources, title = 'PrimeReact Demo', description = '', dependencies: pDependencies = {} } = props;
     const isTypeScript = template === 'typescript';
-    const dependencies = isTypeScript ? { ...ts_dependencies, ...core_dependencies, 'react-scripts': '5.0.1' } : { ...core_dependencies, 'react-scripts': '5.0.1' };
+    const dependencies = { ...(isTypeScript ? ts_dependencies : {}), ...core_dependencies, ...pDependencies, 'react-scripts': '5.0.1' };
     const fileExtension = isTypeScript ? '.tsx' : '.js';
     const sourceFileName = `${path}demo${fileExtension}`;
 
     let extFiles = {};
 
-    props.code.extFiles &&
-        Object.entries(props.code.extFiles).forEach(([key, value]) => {
+    sources.extFiles &&
+        Object.entries(sources.extFiles).forEach(([key, value]) => {
             extFiles[`${path + key}`] = {
                 content: value
             };
