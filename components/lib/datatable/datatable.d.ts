@@ -125,8 +125,8 @@ interface DataTablePFSEvent extends DataTablePageParams, DataTableSortParams, Da
     [key: string]: any;
 }
 
-interface DataTableDataSelectableParams {
-    data: any;
+interface DataTableDataSelectableParams<TValue extends DataTableValueArray> {
+    data: DataTableRowDataArray<TValue>;
     index: number;
 }
 
@@ -144,7 +144,7 @@ interface DataTableSelectAllChangeParams {
 
 interface DataTableRowEventParams {
     originalEvent: React.SyntheticEvent;
-    data: any;
+    data: DataTableValue;
 }
 
 interface DataTableRowMouseEventParams extends Omit<DataTableRowEventParams, 'originalEvent'> {
@@ -154,11 +154,11 @@ interface DataTableRowMouseEventParams extends Omit<DataTableRowEventParams, 'or
 
 interface DataTableRowClickEventParams extends DataTableRowMouseEventParams {}
 
-interface DataTableCellClickEventParams {
+interface DataTableCellClickEventParams<TValue extends DataTableValueArray> {
     originalEvent: React.MouseEvent<HTMLElement>;
     value: any;
     field: string;
-    rowData: DataTableValue;
+    rowData: DataTableRowData<TValue>;
     rowIndex: number;
     cellIndex: number;
     selected: boolean;
@@ -186,10 +186,10 @@ interface DataTableSelectParams {
 
 interface DataTableUnselectParams extends DataTableSelectParams {}
 
-interface DataTableExportFunctionParams {
-    data: DataTableValueArray;
+interface DataTableExportFunctionParams<TValue extends DataTableValueArray> {
+    data: DataTableRowDataArray<TValue>;
     field: string;
-    rowData: DataTableValue;
+    rowData: DataTableRowData<TValue>;
     column: Column;
 }
 
@@ -200,9 +200,9 @@ interface DataTableColReorderParams {
     columns: React.ReactElement;
 }
 
-interface DataTableRowReorderParams {
+interface DataTableRowReorderParams<TValue extends DataTableValueArray> {
     originalEvent: React.DragEvent<HTMLElement>;
-    value: any;
+    value: DataTableRowDataArray<TValue>;
     dragIndex: number;
     dropIndex: number;
 }
@@ -292,7 +292,7 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     first?: number;
     footer?: DataTableFooterTemplateType<TValue>;
     footerColumnGroup?: React.ReactNode;
-    frozenValue?: DataTableRowData<TValue>[];
+    frozenValue?: DataTableRowDataArray<TValue>;
     frozenWidth?: string;
     globalFilter?: DataTableGlobalFilterType;
     globalFilterFields?: string[];
@@ -352,11 +352,11 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     cellClassName?(value: any, options: DataTableCellClassNameOptions<TValue>): object | string;
     customRestoreState?(): object;
     customSaveState?(state: object): void;
-    exportFunction?(e: DataTableExportFunctionParams): any;
-    isDataSelectable?(e: DataTableDataSelectableParams): boolean | undefined | null;
+    exportFunction?(e: DataTableExportFunctionParams<TValue>): any;
+    isDataSelectable?(e: DataTableDataSelectableParams<TValue>): boolean | undefined | null;
     onAllRowsSelect?(e: DataTableSelectParams): void;
     onAllRowsUnselect?(e: DataTableUnselectParams): void;
-    onCellClick?(e: DataTableCellClickEventParams): void;
+    onCellClick?(e: DataTableCellClickEventParams<TValue>): void;
     onCellSelect?(e: DataTableSelectParams): void;
     onCellUnselect?(e: DataTableUnselectParams): void;
     onColReorder?(e: DataTableColReorderParams): void;
@@ -378,7 +378,7 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     onRowExpand?(e: DataTableRowEventParams): void;
     onRowMouseEnter?(e: DataTableRowMouseEventParams): void;
     onRowMouseLeave?(e: DataTableRowMouseEventParams): void;
-    onRowReorder?(e: DataTableRowReorderParams): void;
+    onRowReorder?(e: DataTableRowReorderParams<TValue>): void;
     onRowSelect?(e: DataTableSelectParams): void;
     onRowToggle?(e: DataTableRowToggleParams): void;
     onRowUnselect?(e: DataTableUnselectParams): void;
@@ -387,7 +387,7 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     onSort?(e: DataTablePFSEvent): void;
     onStateRestore?(state: object): void;
     onStateSave?(state: object): void;
-    onValueChange?(value: any[]): void;
+    onValueChange?(value: DataTableRowDataArray<TValue>): void;
     rowClassName?(data: DataTableRowData<TValue>, options: DataTableRowClassNameOptions<TValue>): object | string;
     rowEditValidator?(data: DataTableRowData<TValue>, options: DataTableRowEditValidatorOptions<TValue>): boolean;
     rowExpansionTemplate?(data: DataTableRowData<TValue>, options: DataTableRowExpansionTemplate): React.ReactNode;
