@@ -88,7 +88,7 @@ export default function StrictFilterDoc() {
             <div className="card">
                 <Tree value={nodes} filter filterMode="strict"></Tree>
             </div>
-            <DocSectionCode code={code} service={['NodeService']}/>
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }

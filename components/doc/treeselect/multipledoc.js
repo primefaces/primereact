@@ -99,7 +99,7 @@ export default function MultipleDoc() {
             <div className="card flex justify-content-center">
                 <TreeSelect value={selectedNodeKeys} options={nodes} onChange={(e) => setSelectedNodeKeys(e.value)} className="md:w-20rem w-full" selectionMode="multiple" metaKeySelection={false} placeholder="Select Items"></TreeSelect>
             </div>
-            <DocSectionCode code={code} service={['NodeService']}/>
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }

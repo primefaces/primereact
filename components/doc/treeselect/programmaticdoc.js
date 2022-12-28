@@ -184,7 +184,7 @@ export default function ProgrammaticDoc() {
                     <Button type="button" icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
                 </div>
             </div>
-            <DocSectionCode code={code} service={['NodeService']}/>
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }

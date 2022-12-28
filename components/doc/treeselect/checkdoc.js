@@ -98,7 +98,7 @@ export default function CheckDoc() {
             <div className="card flex justify-content-center">
                 <TreeSelect value={selectedNodeKeys} options={nodes} onChange={(e) => setSelectedNodeKeys(e.value)} display="chip" selectionMode="checkbox" className="md:w-20rem w-full" placeholder="Select Items"></TreeSelect>
             </div>
-            <DocSectionCode code={code} service={['NodeService']}/>
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }

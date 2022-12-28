@@ -207,7 +207,7 @@ export default function InvalidDemo() {
                     </form>
                 </div>
             </div>
-            <DocSectionCode code={code} service={['NodeService']}/>
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }

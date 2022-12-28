@@ -143,12 +143,12 @@ const onUnselect = (event) => {
                 <p>TreeTable supports single, multiple and checkbox based selection modes.</p>
             </DocSectionText>
             <div className="card">
-            <Toast ref={toast}></Toast>
-                    <TreeTable value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={(e) => setSelectedNodeKey(e.value)} onSelect={onSelect} onUnselect={onUnselect}>
-                        <Column field="name" header="Name" expander></Column>
-                        <Column field="size" header="Size"></Column>
-                        <Column field="type" header="Type"></Column>
-                    </TreeTable>
+                <Toast ref={toast}></Toast>
+                <TreeTable value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={(e) => setSelectedNodeKey(e.value)} onSelect={onSelect} onUnselect={onUnselect}>
+                    <Column field="name" header="Name" expander></Column>
+                    <Column field="size" header="Size"></Column>
+                    <Column field="type" header="Type"></Column>
+                </TreeTable>
             </div>
             <DocSectionCode code={code} service={['NodeService']} />
         </>

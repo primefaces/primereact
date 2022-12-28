@@ -117,7 +117,7 @@ export default function ReorderDoc() {
                     <Column field="type" header="Type"></Column>
                 </TreeTable>
             </div>
-            <DocSectionCode code={code} service={['NodeService']}/>
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }

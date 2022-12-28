@@ -135,7 +135,7 @@ export default function MultipleDoc() {
                     <Column field="type" header="Type" sortable></Column>
                 </TreeTable>
             </div>
-            <DocSectionCode code={code} service={['NodeService']}/>
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }

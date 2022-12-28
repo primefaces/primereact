@@ -156,7 +156,7 @@ export default function LenientFilterDoc() {
                     <Column field="type" header="Type" filter filterPlaceholder="Filter by type"></Column>
                 </TreeTable>
             </div>
-            <DocSectionCode code={code} service={['NodeService']}/>
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }

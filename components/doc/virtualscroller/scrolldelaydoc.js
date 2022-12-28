@@ -113,12 +113,12 @@ export default function ScrollDelayDoc() {
                     <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} />
                 </div>
                 <div className="flex flex-column mr-3 mt-3">
-                <h5>150ms Delay</h5>
+                    <h5>150ms Delay</h5>
                     <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} delay={150} />
                 </div>
 
                 <div className="flex flex-column mr-3 mt-3">
-                <h5>250ms Delay</h5>
+                    <h5>250ms Delay</h5>
                     <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} delay={250} />
                 </div>
             </div>

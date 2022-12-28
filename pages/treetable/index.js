@@ -100,8 +100,7 @@ const TreeTableDemo = () => {
         {
             id: 'selection',
             label: 'Selection',
-            description:
-                'TreeTable supports single, multiple and checkbox based selection modes.',
+            description: 'TreeTable supports single, multiple and checkbox based selection modes.',
             children: [
                 {
                     id: 'singleselection',

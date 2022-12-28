@@ -91,7 +91,7 @@ export default function CheckboxSelectionDoc() {
             <div className="card">
                 <Tree value={nodes} selectionMode="checkbox" selectionKeys={selectedKey} onSelectionChange={(e) => setSelectedKey(e.value)} />
             </div>
-            <DocSectionCode code={code} service={['NodeService']}/>
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }

@@ -111,7 +111,7 @@ const HorizontalAndVerticalDoc() {
                     <Column field="type" header="Type" style={{ width: '350px' }}></Column>
                 </TreeTable>
             </div>
-            <DocSectionCode code={code} service={['NodeService']}/>
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }

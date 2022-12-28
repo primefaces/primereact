@@ -38,8 +38,7 @@ const TreeDemo = () => {
         {
             id: 'selection',
             label: 'Selection',
-            description:
-                'Tree supports "single", "multiple" and "checkbox" as selection modes.',
+            description: 'Tree supports "single", "multiple" and "checkbox" as selection modes.',
             children: [
                 {
                     id: 'singleselection',
@@ -91,8 +90,7 @@ const TreeDemo = () => {
         {
             id: 'filter',
             label: 'Filter',
-            description:
-                'Filtering updates the node based on the constraints.',
+            description: 'Filtering updates the node based on the constraints.',
             children: [
                 {
                     id: 'lenientfilter',

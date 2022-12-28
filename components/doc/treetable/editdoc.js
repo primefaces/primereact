@@ -206,14 +206,16 @@ export default function EditDoc() {
 }
         `,
 
-        extFiles: { 'TreeTableDemo.css': `
+        extFiles: {
+            'TreeTableDemo.css': `
 /* TreeTableDemo.css */
 
 .treetable-editing-demo .p-treetable .p-treetable-tbody > tr > td.p-cell-editing {
     padding-top: 0;
     padding-bottom: 0;
 }
-            `},
+            `
+        },
 
         data: `
 /* NodeService */
@@ -258,7 +260,7 @@ export default function EditDoc() {
                     <Column field="type" header="Type" editor={typeEditor} style={{ height: '3.5em' }}></Column>
                 </TreeTable>
             </div>
-            <DocSectionCode code={code} service={['NodeService']}/>
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }

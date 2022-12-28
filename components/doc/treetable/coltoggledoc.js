@@ -196,7 +196,7 @@ export default function ColToggleDoc() {
                     {_columns}
                 </TreeTable>
             </div>
-            <DocSectionCode code={code} service={['NodeService']}/>
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }

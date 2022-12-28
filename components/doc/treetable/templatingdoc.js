@@ -170,7 +170,7 @@ export default function TemplatingDoc() {
                     <Column body={actionTemplate} style={{ textAlign: 'center', width: '10rem' }} />
                 </TreeTable>
             </div>
-            <DocSectionCode code={code} service={['NodeService']}/>
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }

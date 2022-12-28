@@ -129,7 +129,7 @@ export default function SingleSelectionDoc() {
             <div className="card">
                 <Tree value={nodes} selectionMode="single" selectionKeys={selectedKey} onSelectionChange={(e) => setSelectedKey(e.value)} onSelect={onNodeSelect} onUnselect={onNodeUnselect} />
             </div>
-            <DocSectionCode code={code} service={['NodeService']}/>
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }

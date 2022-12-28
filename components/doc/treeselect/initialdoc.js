@@ -98,7 +98,7 @@ export default function InitialDoc() {
             <div className="card flex justify-content-center">
                 <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)} className="md:w-20rem w-full" placeholder="Select Item"></TreeSelect>
             </div>
-            <DocSectionCode code={code} service={['NodeService']}/>
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }

@@ -91,7 +91,7 @@ export default function MultipleSelectionWithoutKeyDoc() {
             <div className="card">
                 <Tree value={nodes} selectionMode="multiple" metaKeySelection={false} selectionKeys={selectedKey} onSelectionChange={(e) => setSelectedKey(e.value)} />
             </div>
-            <DocSectionCode code={code} service={['NodeService']}/>
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }

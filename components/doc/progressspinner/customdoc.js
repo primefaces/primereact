@@ -12,7 +12,7 @@ export function CustomDoc(props) {
 import React from 'react';
 import { ProgressSpinner } from 'primereact/progressspinner';
 
-export const CustomDoc = () => {
+export default function CustomDoc() {
 
     return (
         <div className="card">
@@ -25,7 +25,7 @@ export const CustomDoc = () => {
 import React from 'react';
 import { ProgressSpinner } from 'primereact/progressspinner';
 
-export const CustomDoc = () => {
+export default function CustomDoc() {
 
     return (
         <div className="card">

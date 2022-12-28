@@ -88,7 +88,7 @@ export default function BasicDoc() {
             <div className="card flex justify-content-center">
                 <Tree value={nodes} />
             </div>
-            <DocSectionCode code={code} service={['NodeService']}/>
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }

@@ -88,7 +88,7 @@ export default function DragAndDropDoc() {
             <div className="card">
                 <Tree value={nodes} dragdropScope="demo" onDragDrop={(event) => setNodes(event.value)} />
             </div>
-            <DocSectionCode code={code} service={['NodeService']}/>
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }
