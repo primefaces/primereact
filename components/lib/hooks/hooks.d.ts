@@ -27,6 +27,7 @@ export declare function useMountEffect(effect: React.EffectCallback): void;
 export declare function useUpdateEffect(effect: React.EffectCallback, deps?: React.DependencyList): void;
 export declare function useUnmountEffect(effect: React.EffectCallback): void;
 export declare function useEventListener(options: EventOptions): any[];
+export declare function useMediaQuery(query: string, initialValue?: boolean): boolean;
 export declare function useOverlayListener(options: OverlayEventOptions): any[];
 export declare function useOverlayScrollListener(options: EventOptions): any[];
 export declare function useResizeListener(options: ResizeEventOptions): any[];

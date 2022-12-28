@@ -1,13 +1,14 @@
-import { usePrevious } from './usePrevious';
-import { useMountEffect } from './useMountEffect';
-import { useUpdateEffect } from './useUpdateEffect';
-import { useUnmountEffect } from './useUnmountEffect';
 import { useEventListener } from './useEventListener';
+import { useInterval } from './useInterval';
+import { useMediaQuery } from './useMediaQuery';
+import { useMountEffect } from './useMountEffect';
 import { useOverlayListener } from './useOverlayListener';
 import { useOverlayScrollListener } from './useOverlayScrollListener';
+import { usePrevious } from './usePrevious';
 import { useResizeListener } from './useResizeListener';
-import { useInterval } from './useInterval';
-import { useStorage, useLocalStorage, useSessionStorage } from './useStorage';
+import { useLocalStorage, useSessionStorage, useStorage } from './useStorage';
 import { useTimeout } from './useTimeout';
+import { useUnmountEffect } from './useUnmountEffect';
+import { useUpdateEffect } from './useUpdateEffect';
 
-export { usePrevious, useMountEffect, useUpdateEffect, useUnmountEffect, useEventListener, useOverlayListener, useOverlayScrollListener, useResizeListener, useInterval, useStorage, useLocalStorage, useSessionStorage, useTimeout };
+export { usePrevious, useMediaQuery, useMountEffect, useUpdateEffect, useUnmountEffect, useEventListener, useOverlayListener, useOverlayScrollListener, useResizeListener, useInterval, useStorage, useLocalStorage, useSessionStorage, useTimeout };

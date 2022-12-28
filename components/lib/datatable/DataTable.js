@@ -1,6 +1,7 @@
 import * as React from 'react';
 import PrimeReact, { FilterMatchMode, FilterOperator, FilterService } from '../api/Api';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useMediaQuery } from '../hooks/useMediaQuery';
 import { Paginator } from '../paginator/Paginator';
 import { DomHandler, ObjectUtils, UniqueComponentId, classNames } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
@@ -15,12 +16,14 @@ export const DataTable = React.forwardRef((props, ref) => {
     const [sortOrderState, setSortOrderState] = React.useState(props.sortOrder);
     const [multiSortMetaState, setMultiSortMetaState] = React.useState(props.multiSortMeta);
     const [filtersState, setFiltersState] = React.useState(props.filters);
+    const [scrollableState, setScrollableState] = React.useState(props.scrollable);
     const [columnOrderState, setColumnOrderState] = React.useState([]);
     const [groupRowsSortMetaState, setGroupRowsSortMetaState] = React.useState(null);
     const [editingMetaState, setEditingMetaState] = React.useState({});
     const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
     const [d_rowsState, setD_rowsState] = React.useState(props.rows);
     const [d_filtersState, setD_filtersState] = React.useState({});
+    const matchesResponsiveBreakpoint = useMediaQuery(`(max-width: ${props.breakpoint})`);
     const elementRef = React.useRef(null);
     const tableRef = React.useRef(null);
     const wrapperRef = React.useRef(null);
@@ -81,7 +84,7 @@ export const DataTable = React.forwardRef((props, ref) => {
     };
 
     const isVirtualScrollerDisabled = () => {
-        return ObjectUtils.isEmpty(props.virtualScrollerOptions) || !props.scrollable;
+        return ObjectUtils.isEmpty(props.virtualScrollerOptions) || !scrollableState;
     };
 
     const isEquals = (data1, data2) => {
@@ -367,7 +370,7 @@ export const DataTable = React.forwardRef((props, ref) => {
                 let innerHTML = '';
 
                 widths.forEach((width, index) => {
-                    let style = props.scrollable ? `flex: 1 1 ${width}px !important` : `width: ${width}px !important`;
+                    let style = scrollableState ? `flex: 1 1 ${width}px !important` : `width: ${width}px !important`;
 
                     innerHTML += `
                         .p-datatable[${attributeSelectorState}] .p-datatable-thead > tr > th:nth-child(${index + 1}),
@@ -563,7 +566,7 @@ export const DataTable = React.forwardRef((props, ref) => {
 
         widths.forEach((width, index) => {
             let colWidth = index === colIndex ? newColumnWidth : nextColumnWidth && index === colIndex + 1 ? nextColumnWidth : width;
-            let style = props.scrollable ? `flex: 1 1 ${colWidth}px !important` : `width: ${colWidth}px !important`;
+            let style = scrollableState ? `flex: 1 1 ${colWidth}px !important` : `width: ${colWidth}px !important`;
 
             innerHTML += `
                 .p-datatable[${attributeSelectorState}] .p-datatable-thead > tr > th:nth-child(${index + 1}),
@@ -1309,14 +1312,6 @@ export const DataTable = React.forwardRef((props, ref) => {
     });
 
     useUpdateEffect(() => {
-        elementRef.current.setAttribute(attributeSelectorState, '');
-
-        if (props.responsiveLayout === 'stack' && !props.scrollable) {
-            createResponsiveStyle();
-        }
-    }, [attributeSelectorState]);
-
-    useUpdateEffect(() => {
         const filters = cloneFilters(props.filters);
 
         setFiltersState(filters);
@@ -1334,12 +1329,25 @@ export const DataTable = React.forwardRef((props, ref) => {
     });
 
     useUpdateEffect(() => {
+        elementRef.current.setAttribute(attributeSelectorState, '');
+
         destroyResponsiveStyle();
 
-        if (props.responsiveLayout === 'stack' && !props.scrollable) {
+        if (props.responsiveLayout === 'stack') {
             createResponsiveStyle();
         }
-    }, [props.responsiveLayout, props.scrollable]);
+    }, [props.responsiveLayout, attributeSelectorState]);
+
+    useUpdateEffect(() => {
+        let isScrollable = props.scrollable;
+
+        // #3693 disable scrolling if responsive stack breakpoint is hit
+        if (props.responsiveLayout === 'stack' && isScrollable) {
+            isScrollable = !matchesResponsiveBreakpoint;
+        }
+
+        setScrollableState(isScrollable);
+    }, [props.responsiveLayout, props.scrollable, matchesResponsiveBreakpoint]);
 
     useUpdateEffect(() => {
         if (props.globalFilter) {
@@ -1492,7 +1500,7 @@ export const DataTable = React.forwardRef((props, ref) => {
                 editingRows={props.editingRows}
                 onRowReorder={props.onRowReorder}
                 reorderableRows={props.reorderableRows}
-                scrollable={props.scrollable}
+                scrollable={scrollableState}
                 rowGroupMode={props.rowGroupMode}
                 groupRowsBy={props.groupRowsBy}
                 expandableRowGroups={props.expandableRowGroups}
@@ -1566,7 +1574,7 @@ export const DataTable = React.forwardRef((props, ref) => {
                 editingRows={props.editingRows}
                 onRowReorder={props.onRowReorder}
                 reorderableRows={props.reorderableRows}
-                scrollable={props.scrollable}
+                scrollable={scrollableState}
                 rowGroupMode={props.rowGroupMode}
                 groupRowsBy={props.groupRowsBy}
                 expandableRowGroups={props.expandableRowGroups}
@@ -1741,11 +1749,11 @@ export const DataTable = React.forwardRef((props, ref) => {
             'p-datatable-auto-layout': props.autoLayout,
             'p-datatable-resizable': props.resizableColumns,
             'p-datatable-resizable-fit': props.resizableColumns && props.columnResizeMode === 'fit',
-            'p-datatable-scrollable': props.scrollable,
-            'p-datatable-scrollable-vertical': props.scrollable && props.scrollDirection === 'vertical',
-            'p-datatable-scrollable-horizontal': props.scrollable && props.scrollDirection === 'horizontal',
-            'p-datatable-scrollable-both': props.scrollable && props.scrollDirection === 'both',
-            'p-datatable-flex-scrollable': props.scrollable && props.scrollHeight === 'flex',
+            'p-datatable-scrollable': scrollableState,
+            'p-datatable-scrollable-vertical': scrollableState && props.scrollDirection === 'vertical',
+            'p-datatable-scrollable-horizontal': scrollableState && props.scrollDirection === 'horizontal',
+            'p-datatable-scrollable-both': scrollableState && props.scrollDirection === 'both',
+            'p-datatable-flex-scrollable': scrollableState && props.scrollHeight === 'flex',
             'p-datatable-responsive-stack': props.responsiveLayout === 'stack',
             'p-datatable-responsive-scroll': props.responsiveLayout === 'scroll',
             'p-datatable-striped': props.stripedRows,
