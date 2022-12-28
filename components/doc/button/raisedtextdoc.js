@@ -56,7 +56,8 @@ export default function RaisedTextButtonsDoc() {
     )
 }
         `,
-        css: `
+        exitFiles: {
+            'ButtonDemo.css': `
 /* ButtonDemo.css */
 
 .button-demo .p-button {
@@ -71,8 +72,9 @@ export default function RaisedTextButtonsDoc() {
         display: flex;
         width: 100%;
     }
-}         
+}                
         `
+        }
     };
 
     return (

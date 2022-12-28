@@ -70,13 +70,15 @@ export default function CustomHeaderDoc() {
     )
 }
         `,
-        css: `
+        extFiles: {
+            'AccordionDemo.css': `
 /* AccordionDemo.css */
 
 .accordion-demo .p-accordion p {
 line-height: 1.5;
 margin: 0;}
     `
+        }
     };
 
     return (

@@ -54,7 +54,8 @@ export default function SeveritiesDoc() {
     )
 }
         `,
-        css: `
+        exitFiles: {
+            'ButtonDemo.css': `
 /* ButtonDemo.css */
 
 .button-demo .p-button {
@@ -69,8 +70,9 @@ export default function SeveritiesDoc() {
         display: flex;
         width: 100%;
     }
-}         
+}                
         `
+        }
     };
 
     return (

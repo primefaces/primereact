@@ -51,7 +51,8 @@ export default function RoundedIconButtonsDoc() {
     )
 }
         `,
-        css: `
+        exitFiles: {
+            'ButtonDemo.css': `
 /* ButtonDemo.css */
 
 .button-demo .p-button {
@@ -66,8 +67,9 @@ export default function RoundedIconButtonsDoc() {
         display: flex;
         width: 100%;
     }
-}         
+}                
         `
+        }
     };
 
     return (

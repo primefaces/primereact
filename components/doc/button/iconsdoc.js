@@ -41,7 +41,8 @@ export default function IconsDoc() {
     )
 }
         `,
-        css: `
+        exitFiles: {
+            'ButtonDemo.css': `
 /* ButtonDemo.css */
 
 .button-demo .p-button {
@@ -56,8 +57,9 @@ export default function IconsDoc() {
         display: flex;
         width: 100%;
     }
-}         
+}                
         `
+        }
     };
 
     return (

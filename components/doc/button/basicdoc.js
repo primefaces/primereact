@@ -41,7 +41,8 @@ export default function BasicDoc() {
     )
 }
         `,
-        css: `
+        exitFiles: {
+            'ButtonDemo.css': `
 /* ButtonDemo.css */
 
 .button-demo .p-button {
@@ -58,6 +59,7 @@ export default function BasicDoc() {
     }
 }                
         `
+        }
     };
 
     return (

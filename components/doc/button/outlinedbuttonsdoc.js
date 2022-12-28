@@ -53,7 +53,8 @@ export default function OutlinedButtonsDoc() {
     )
 }
         `,
-        css: `
+        exitFiles: {
+            'ButtonDemo.css': `
 /* ButtonDemo.css */
 
 .button-demo .p-button {
@@ -64,11 +65,13 @@ export default function OutlinedButtonsDoc() {
     .button-demo .p-button {
         margin-bottom: 0.5rem;
     }
-    .button-demo .p-buttonset .p-button {
-        margin-bottom: 0;
+    .button-demo .p-button:not(.p-button-icon-only) {
+        display: flex;
+        width: 100%;
     }
-}         
+}                
         `
+        }
     };
 
     return (

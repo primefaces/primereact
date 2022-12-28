@@ -45,15 +45,6 @@ export function TemplateDoc(props) {
 
     useEffect(() => {
         CountryService.getCountries().then((data) => setCountries(data));
-        /*
-            Countries is an array of objects with name, code pairs;
-            [
-                ...
-                {"name": "United Kingdom", "code": "UK"},
-                {"name": "United States", "code": "USA"},
-                ...
-            ]
-        */
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const code = {
@@ -63,6 +54,7 @@ export function TemplateDoc(props) {
         javascript: `
 import React, { useEffect, useState } from 'react';
 import { AutoComplete } from "primereact/autocomplete";
+import { CountryService } from './service/CountryService';
 
 export default function TemplateDemo() {
     const [countries, setCountries] = useState([]);
@@ -124,6 +116,7 @@ export default function TemplateDemo() {
         typescript: `
 import React, { useEffect, useState } from 'react';
 import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
+import { CountryService } from './service/CountryService';
 
 interface Country {
     name: string;
@@ -207,7 +200,7 @@ export default function TemplateDemo() {
             <div className="card flex justify-content-center">
                 <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CountryService']} />
         </>
     );
 }

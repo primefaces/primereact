@@ -38,7 +38,8 @@ export default function BadgesDoc() {
     )
 }
         `,
-        css: `
+        exitFiles: {
+            'ButtonDemo.css': `
 /* ButtonDemo.css */
 
 .button-demo .p-button {
@@ -55,6 +56,7 @@ export default function BadgesDoc() {
     }
 }                
         `
+        }
     };
 
     return (

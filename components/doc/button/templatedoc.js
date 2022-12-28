@@ -108,7 +108,8 @@ export default function TemplateDoc() {
     )
 }
         `,
-        css: `
+        exitFiles: {
+            'ButtonDemo.css': `
 /* ButtonDemo.css */
 
 .button-demo .p-button {
@@ -264,6 +265,7 @@ export default function TemplateDoc() {
     }
 }         
         `
+        }
     };
 
     return (

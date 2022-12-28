@@ -52,7 +52,26 @@ export default function RoundedOutlinedButtonsDoc() {
         </div>
     )
 }
+        `,
+        exitFiles: {
+            'ButtonDemo.css': `
+/* ButtonDemo.css */
+
+.button-demo .p-button {
+    margin-right: 0.5rem;
+}
+
+@media screen and (max-width: 960px) {
+    .button-demo .p-button {
+        margin-bottom: 0.5rem;
+    }
+    .button-demo .p-button:not(.p-button-icon-only) {
+        display: flex;
+        width: 100%;
+    }
+}                
         `
+        }
     };
 
     return (

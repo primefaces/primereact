@@ -45,9 +45,9 @@ export default function ButtonSetDoc() {
     )
 }
         `,
-        css: `
+        exitFiles: {
+            'ButtonDemo.css': `
 /* ButtonDemo.css */
-
 .button-demo .p-button {
     margin-right: 0.5rem;
 }
@@ -66,8 +66,9 @@ export default function ButtonSetDoc() {
     .button-demo .p-buttonset .p-button {
         margin-bottom: 0;
     }
-}         
+}                     
         `
+        }
     };
 
     return (
