@@ -40,14 +40,13 @@ onExpand={onExpand} onCollapse={onCollapse} onSelect={onSelect} onUnselect={onUn
 import React, { useState, useEffect, useRef } from 'react';
 import { Tree } from 'primereact/tree';
 import { Toast } from 'primereact/toast';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
 export default function TreeEventsDoc() {
     const [nodes, setNodes] = useState([]);
     const [selectedNodeKey, setSelectedNodeKey] = useState(null);
     const toast = useRef(null);
     
-
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -69,9 +68,11 @@ export default function TreeEventsDoc() {
     };
 
     return (
-        <Toast ref={toast} />
-        <Tree value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={e => setSelectedNodeKey(e.value)}
-            onExpand={onExpand} onCollapse={onCollapse} onSelect={onSelect} onUnselect={onUnselect} />
+        <div>
+            <Toast ref={toast} />
+            <Tree value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={e => setSelectedNodeKey(e.value)}
+                onExpand={onExpand} onCollapse={onCollapse} onSelect={onSelect} onUnselect={onUnselect} />
+        </div>
     )
 }
         `,
@@ -79,14 +80,13 @@ export default function TreeEventsDoc() {
 import React, { useState, useEffect, useRef } from 'react';
 import { Tree } from 'primereact/tree';
 import { Toast } from 'primereact/toast';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
 export default function TreeEventsDoc() {
     const [nodes, setNodes] = useState([]);
     const [selectedNodeKey, setSelectedNodeKey] = useState(null);
     const toast = useRef(null);
     
-
        useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -108,9 +108,11 @@ export default function TreeEventsDoc() {
     };
 
     return (
-        <Toast ref={toast} />
-        <Tree value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={e => setSelectedNodeKey(e.value)}
-            onExpand={onExpand} onCollapse={onCollapse} onSelect={onSelect} onUnselect={onUnselect} />
+        <div>
+            <Toast ref={toast} />
+            <Tree value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={e => setSelectedNodeKey(e.value)}
+                onExpand={onExpand} onCollapse={onCollapse} onSelect={onSelect} onUnselect={onUnselect} />
+        </div>
     )
 }
         `,
@@ -154,7 +156,7 @@ export default function TreeEventsDoc() {
             <div className="card">
                 <Tree value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={(e) => setSelectedNodeKey(e.value)} onExpand={onExpand} onCollapse={onCollapse} onSelect={onSelect} onUnselect={onUnselect} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']}/>
         </>
     );
 }

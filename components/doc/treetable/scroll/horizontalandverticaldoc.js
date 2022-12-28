@@ -24,12 +24,11 @@ export function HorizontalAndVerticalDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
-const HorizontalAndVerticalDoc = () => {
+export default function HorizontalAndVerticalDoc() {
     const [nodes, setNodes] = useState([]);
     
-
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -49,12 +48,11 @@ const HorizontalAndVerticalDoc = () => {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
-const HorizontalAndVerticalDoc = () => {
+const HorizontalAndVerticalDoc() {
     const [nodes, setNodes] = useState([]);
     
-
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -113,7 +111,7 @@ const HorizontalAndVerticalDoc = () => {
                     <Column field="type" header="Type" style={{ width: '350px' }}></Column>
                 </TreeTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']}/>
         </>
     );
 }

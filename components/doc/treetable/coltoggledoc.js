@@ -50,10 +50,10 @@ export function ColToggleDoc(props) {
 import React, {useState, useEffect} from 'react';
 import {TreeTable} from 'primereact/treetable';
 import {Column} from 'primereact/column';
-import {NodeService} from '../service/NodeService';
-import {MultiSelect} from 'primereact/multiselect';
+import { NodeService } from './service/NodeService';
+import { MultiSelect } from 'primereact/multiselect';
 
-const ColToggleDoc = () => {
+export default function ColToggleDoc() {
         let columns = [
     {field: 'size', header: 'Size' },
     {field: 'type', header: 'Type' }
@@ -104,10 +104,10 @@ const ColToggleDoc = () => {
 import React, {useState, useEffect} from 'react';
 import {TreeTable} from 'primereact/treetable';
 import {Column} from 'primereact/column';
-import {NodeService} from '../service/NodeService';
-import {MultiSelect} from 'primereact/multiselect';
+import { NodeService } from './service/NodeService';
+import { MultiSelect } from 'primereact/multiselect';
 
-const ColToggleDoc = () => {
+export default function ColToggleDoc() {
         let columns = [
     {field: 'size', header: 'Size' },
     {field: 'type', header: 'Type' }
@@ -196,7 +196,7 @@ const ColToggleDoc = () => {
                     {_columns}
                 </TreeTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']}/>
         </>
     );
 }

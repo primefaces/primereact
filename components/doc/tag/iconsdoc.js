@@ -16,7 +16,7 @@ export function IconsDoc(props) {
 import React from 'react';
 import { Tag } from 'primereact/tag';
 
-export const IconsDoc = () => {
+export default function IconsDoc() {
 
     return (
         <div className="card">
@@ -33,7 +33,7 @@ export const IconsDoc = () => {
 import React from 'react';
 import { Tag } from 'primereact/tag';
 
-export const IconsDoc = () => {
+export default function IconsDoc() {
 
     return (
         <div className="card">

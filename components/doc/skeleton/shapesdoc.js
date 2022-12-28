@@ -36,7 +36,7 @@ export function ShapesDoc(props) {
 import React from 'react';
 import { Skeleton } from 'primereact/skeleton';
 
-export const ShapesDoc = () => {
+export default function ShapesDoc() {
 
     return (
         <div className="card">
@@ -84,7 +84,7 @@ export const ShapesDoc = () => {
 import React from 'react';
 import { Skeleton } from 'primereact/skeleton';
 
-export const ShapesDoc = () => {
+export default function ShapesDoc() {
 
     return (
         <div className="card">

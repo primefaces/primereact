@@ -24,9 +24,9 @@ export function ReorderDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
-const ReorderDoc = () => {
+export default function ReorderDoc() {
     const [nodes, setNodes] = useState([]);
     
 
@@ -51,9 +51,9 @@ const ReorderDoc = () => {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
-const ReorderDoc = () => {
+export default function ReorderDoc() {
     const [nodes, setNodes] = useState([]);
     
 
@@ -117,7 +117,7 @@ const ReorderDoc = () => {
                     <Column field="type" header="Type"></Column>
                 </TreeTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']}/>
         </>
     );
 }

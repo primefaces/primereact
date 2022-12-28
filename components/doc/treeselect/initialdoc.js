@@ -19,13 +19,12 @@ export function InitialDoc(props) {
         javascript: `
 import React, { useState, useEffect } from "react";
 import { TreeSelect } from 'primereact/treeselect';
-import { NodeService } from '../../../service/NodeService';
+import { NodeService } from './service/NodeService';
 
 export default function InitialDoc() {
     const [nodes, setNodes] = useState(null);
     const [selectedNodeKey, setSelectedNodeKey] = useState('0-1');
     
-
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -40,13 +39,12 @@ export default function InitialDoc() {
         typescript: `
 import React, { useState, useEffect } from "react";
 import { TreeSelect, TreeSelectChangeParams } from 'primereact/treeselect';
-import { NodeService } from '../../../service/NodeService';
+import { NodeService } from './service/NodeService';
 
 export default function InitialDoc() {
     const [nodes, setNodes] = useState<any[]>(null);
     const [selectedNodeKey, setSelectedNodeKey] = useState<string>('0-1');
     
-
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -100,7 +98,7 @@ export default function InitialDoc() {
             <div className="card flex justify-content-center">
                 <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)} className="md:w-20rem w-full" placeholder="Select Item"></TreeSelect>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']}/>
         </>
     );
 }

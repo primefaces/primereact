@@ -13,7 +13,7 @@ import { RadioButton } from "primereact/radiobutton";
 
 export default function DisabledDemo() {
     return (
-        <Checkbox checked disabled></Checkbox>
+        <RadioButton checked disabled></RadioButton>
     )
 }
         `,

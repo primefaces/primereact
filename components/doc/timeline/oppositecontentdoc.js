@@ -54,7 +54,8 @@ export default function OppositeContentDoc() {
     )
 }
         `,
-        css: `
+        extFiles: {
+            'TimelineDemo.css': `
 /* TimelineDemo.css */
 
 .timeline-demo .p-timeline-event-content,
@@ -77,6 +78,7 @@ export default function OppositeContentDoc() {
     }
 }
     `
+        }
     };
 
     return (

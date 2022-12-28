@@ -206,7 +206,7 @@ import { Column } from 'primereact/column';
 import { ColumnGroup } from 'primereact/columngroup';
 import { Row } from 'primereact/row';
 
-const ColGroupDoc = () => {
+export default function ColGroupDoc () {
     const nodes = [
         {
             key: '0',
@@ -411,7 +411,7 @@ import { Column } from 'primereact/column';
 import { ColumnGroup } from 'primereact/columngroup';
 import { Row } from 'primereact/row';
 
-const ColGroupDoc = () => {
+export default function ColGroupDoc () {
     const nodes = [
         {
             key: '0',

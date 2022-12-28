@@ -24,7 +24,7 @@ import React from 'react';
 import { Ripple } from 'primereact/ripple';
 import './RippleDemo.css';
 
-export const CustomDoc = () => {
+export default function CustomDoc() {
 
     return (
         <div className="card flex justify-content-center gap-2">
@@ -49,7 +49,7 @@ import React from 'react';
 import { Ripple } from 'primereact/ripple';
 import './RippleDemo.css';
 
-export const CustomDoc = () => {
+export default function CustomDoc() {
 
     return (
         <div className="card flex justify-content-center gap-2">
@@ -70,7 +70,8 @@ export const CustomDoc = () => {
 }
         `,
 
-        css: `
+        extFiles: {
+            'RippleDemo.css': `
 /* RippleDemo.css */
 
 .card.styled-box-green .p-ink {
@@ -89,6 +90,7 @@ export const CustomDoc = () => {
     margin-right: 0;
 }
 `
+        }
     };
 
     return (

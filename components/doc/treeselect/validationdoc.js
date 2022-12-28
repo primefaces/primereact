@@ -44,7 +44,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
 import { TreeSelect } from "primereact/treeselect";
-import { NodeService } from '../../../service/NodeService';
+import { NodeService } from './service/NodeService';
 
 export default function ValidationDemo() {
     const [formData, setFormData] = useState({});
@@ -52,7 +52,6 @@ export default function ValidationDemo() {
     const defaultValues = { node: null };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
-    
 
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
@@ -99,7 +98,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { Button } from 'primereact/button';
 import { TreeSelect } from "primereact/treeselect";
 import { classNames } from 'primereact/utils';
-import { NodeService } from '../../../service/NodeService';
+import { NodeService } from './service/NodeService';
 
 export default function InvalidDemo() {
     const [formData, setFormData] = useState<any>({});
@@ -107,7 +106,6 @@ export default function InvalidDemo() {
     const defaultValues = { node: null };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
-    
 
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
@@ -209,7 +207,7 @@ export default function InvalidDemo() {
                     </form>
                 </div>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']}/>
         </>
     );
 }

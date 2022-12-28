@@ -79,7 +79,8 @@ export default function BasicDoc() {
     )
 }
         `,
-        css: `
+        extFiles: {
+            'ScrollPanelDemo.css': `
 /* ScrollPanelDemo.css */
 
 .scrollpanel-demo .p-scrollpanel p {
@@ -88,6 +89,7 @@ export default function BasicDoc() {
     margin: 0;
 }
 `
+        }
     };
 
     return (

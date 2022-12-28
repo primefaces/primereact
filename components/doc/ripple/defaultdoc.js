@@ -13,9 +13,10 @@ export function DefaultDoc(props) {
         `,
         javascript: `
 import React from 'react';
+import { Ripple } from 'primereact/ripple';
 import { ProgressSpinner } from 'primereact/progressspinner';
 
-export const DefaultDoc = () => {
+export default function DefaultDoc() {
 
     return (
         <div className="card card-container flex justify-content-center align-items-center">
@@ -29,9 +30,10 @@ export const DefaultDoc = () => {
         `,
         typescript: `
 import React from 'react';
+import { Ripple } from 'primereact/ripple';
 import { ProgressSpinner } from 'primereact/progressspinner';
 
-export const DefaultDoc = () => {
+export default function DefaultDoc() {
 
     return (
         <div className="card card-container flex justify-content-center align-items-center">

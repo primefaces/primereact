@@ -19,13 +19,12 @@ export function FilterDoc(props) {
         javascript: `
 import React, { useState, useEffect } from "react";
 import { TreeSelect } from 'primereact/treeselect';
-import { NodeService } from '../../../service/NodeService';
+import { NodeService } from './service/NodeService';
 
 export default function FilterDoc() {
     const [nodes, setNodes] = useState(null);
     const [selectedNodeKey, setSelectedNodeKey] = useState(null);
     
-
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -40,13 +39,12 @@ export default function FilterDoc() {
         typescript: `
 import React, { useState, useEffect } from "react";
 import { TreeSelect, TreeSelectChangeParams } from 'primereact/treeselect';
-import { NodeService } from '../../../service/NodeService';
+import { NodeService } from './service/NodeService';
 
 export default function FilterDoc() {
     const [nodes, setNodes] = useState<any[]>(null);
     const [selectedNodeKey, setSelectedNodeKey] = useState<any>(null);
     
-
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -101,7 +99,7 @@ export default function FilterDoc() {
             <div className="card flex justify-content-center">
                 <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)} filter className="md:w-20rem w-full" placeholder="Select Items"></TreeSelect>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }

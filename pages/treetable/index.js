@@ -29,6 +29,11 @@ import { FitModeDoc } from '../../components/doc/treetable/resize/fitmodedoc';
 import { ExpandModeDoc } from '../../components/doc/treetable/resize/expandmodedoc';
 import { ScrollableDoc } from '../../components/doc/treetable/resize/scrollabledoc';
 import { ScrollableWithVariableWidthDoc } from '../../components/doc/treetable/resize/scrollablewithvariabledoc';
+import { CheckboxDoc } from '../../components/doc/treetable/selection/checkboxdoc';
+import { EventsDoc } from '../../components/doc/treetable/selection/eventsdoc';
+import { MultipleSelectionDoc } from '../../components/doc/treetable/selection/multipledoc';
+import { MultipleWithMetaKeysDoc } from '../../components/doc/treetable/selection/multiplewithmetadoc';
+import { SingleSelectionDoc } from '../../components/doc/treetable/selection/singledoc';
 
 const TreeTableDemo = () => {
     const docs = [
@@ -89,6 +94,39 @@ const TreeTableDemo = () => {
                     id: 'strictfilter',
                     label: 'Strict Filter',
                     component: StrictFilterDoc
+                }
+            ]
+        },
+        {
+            id: 'selection',
+            label: 'Selection',
+            description:
+                'TreeTable supports single, multiple and checkbox based selection modes.',
+            children: [
+                {
+                    id: 'singleselection',
+                    label: 'Single',
+                    component: SingleSelectionDoc
+                },
+                {
+                    id: 'checkboxselection',
+                    label: 'Checkbox',
+                    component: CheckboxDoc
+                },
+                {
+                    id: 'eventselection',
+                    label: 'Events',
+                    component: EventsDoc
+                },
+                {
+                    id: 'multipleselection',
+                    label: 'Multiple ',
+                    component: MultipleSelectionDoc
+                },
+                {
+                    id: 'multiplewithmetakeys',
+                    label: 'Multiple With Meta Keys',
+                    component: MultipleWithMetaKeysDoc
                 }
             ]
         },

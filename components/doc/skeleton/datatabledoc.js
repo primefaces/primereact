@@ -27,7 +27,7 @@ import { Skeleton } from 'primereact/skeleton';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 
-export const DataTableDoc = () => {
+export default function DataTableDoc() {
     const products = Array.from({ length: 5 });
 
     const bodyTemplate = () => {
@@ -52,7 +52,7 @@ import { Skeleton } from 'primereact/skeleton';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 
-export const DataTableDoc = () => {
+export default function DataTableDoc() {
 
     interface Product {
         length: number

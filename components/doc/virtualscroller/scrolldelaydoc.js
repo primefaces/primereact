@@ -27,7 +27,7 @@ export function ScrollDelayDoc(props) {
 <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} delay={250} />
         `,
         javascript: `
-import React, { useState } 'react';
+import React, { useState } from 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { classNames } from 'primereact/utils';
 import './VirtualScrollerDemo.css';
@@ -54,7 +54,7 @@ export default function ScrollDelayDoc() {
 }
         `,
         typescript: `
-import React, { useState } 'react';
+import React, { useState } from 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { classNames } from 'primereact/utils';
 import './VirtualScrollerDemo.css';
@@ -80,7 +80,8 @@ export default function ScrollDelayDoc() {
     )
 }
         `,
-        css: `
+        extFiles: {
+            'VirtualScrollerDemo.css': `
 /* VirtualScrollerDemo.css */
 
 .virtualscroller-demo .odd {
@@ -98,6 +99,7 @@ export default function ScrollDelayDoc() {
     flex-direction: row;
 }
     `
+        }
     };
 
     return (
@@ -107,13 +109,16 @@ export default function ScrollDelayDoc() {
             </DocSectionText>
             <div className="card flex justify-content-center align-items-center flex-wrap">
                 <div className="flex flex-column mr-3 mt-3">
+                    <h5>0ms Delay</h5>
                     <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} />
                 </div>
                 <div className="flex flex-column mr-3 mt-3">
+                <h5>150ms Delay</h5>
                     <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} delay={150} />
                 </div>
 
                 <div className="flex flex-column mr-3 mt-3">
+                <h5>250ms Delay</h5>
                     <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} delay={250} />
                 </div>
             </div>

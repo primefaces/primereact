@@ -24,12 +24,11 @@ export function ScrollableWithVariableWidthDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
-const ScrollableWithVariableWidthDoc = () => {
+export default function ScrollableWithVariableWidthDoc() {
     const [nodes, setNodes] = useState([]);
     
-
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -49,12 +48,11 @@ const ScrollableWithVariableWidthDoc = () => {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
-const ScrollableWithVariableWidthDoc = () => {
+export default function ScrollableWithVariableWidthDoc() {
     const [nodes, setNodes] = useState([]);
     
-
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -113,7 +111,7 @@ const ScrollableWithVariableWidthDoc = () => {
                     <Column field="type" header="Type" style={{ width: '20%' }}></Column>
                 </TreeTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }

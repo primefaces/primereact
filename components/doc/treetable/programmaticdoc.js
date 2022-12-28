@@ -37,9 +37,9 @@ import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
-const ProgrammaticDoc = () => {
+export default function ProgrammaticDoc() {
 const [nodes, setNodes] = useState([]);
 const [expandedKeys, setExpandedKeys] = useState({});
 
@@ -72,12 +72,11 @@ import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
-const ProgrammaticDoc = () => {
+export default function ProgrammaticDoc() {
 const [nodes, setNodes] = useState([]);
 const [expandedKeys, setExpandedKeys] = useState({});
-
 
 const toggleApplications = () => {
     let _expandedKeys = { ...expandedKeys };
@@ -146,7 +145,7 @@ useEffect(() => {
                     <Column field="type" header="Type"></Column>
                 </TreeTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']}/>
         </>
     );
 }

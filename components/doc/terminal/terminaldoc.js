@@ -52,12 +52,12 @@ export function TerminalDoc(props) {
 <Terminal welcomeMessage="Welcome to PrimeReact" prompt="primereact $" />
         `,
         javascript: `
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Terminal } from 'primereact/terminal';
 import { TerminalService } from 'primereact/terminalservice';
 import './TerminalDemo.css'
 
-export const TerminalDoc = () => {
+export default function TerminalDoc() {
 
     const commandHandler = (text) => {
         let response;
@@ -112,12 +112,12 @@ export const TerminalDoc = () => {
 }
         `,
         typescript: `
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Terminal } from 'primereact/terminal';
 import { TerminalService } from 'primereact/terminalservice';
 import './TerminalDemo.css'
 
-export const TerminalDoc = () => {
+export default function TerminalDoc() {
 
     const commandHandler = (text: string) => {
         let response: string;
@@ -172,7 +172,9 @@ export const TerminalDoc = () => {
 }
         `,
 
-        css: `
+        extFiles: {
+            'TerminalDemo.css': `
+/* TerminalDemo.css */
 .terminal-demo p {
     margin-top: 0;
 }
@@ -190,6 +192,7 @@ export const TerminalDoc = () => {
     color: #9fa8da;
 }
     `
+        }
     };
 
     return (

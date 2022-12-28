@@ -26,13 +26,12 @@ export function SingleDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
-const SingleDoc = () => {
+export default function SingleDoc() {
     const [nodes, setNodes] = useState([]);
     const [nodes2, setNodes2] = useState([]);
     
-
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => {
             setNodes(data);
@@ -54,12 +53,11 @@ const SingleDoc = () => {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
-const SingleDoc = () => {
+export default function SingleDoc() {
     const [nodes, setNodes] = useState([]);
     const [nodes2, setNodes2] = useState([]);
-    
 
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => {
@@ -121,7 +119,7 @@ const SingleDoc = () => {
                     <Column field="type" header="Type" sortable></Column>
                 </TreeTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }

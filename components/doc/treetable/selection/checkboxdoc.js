@@ -25,12 +25,11 @@ export function CheckboxDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
-const CheckboxDoc = () => {
+export default function CheckboxDoc() {
     const [nodes, setNodes] = useState([]);
     const [selectedNodeKeys, setSelectedNodeKeys] = useState([]);
-    
 
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => setNodes(data));
@@ -51,12 +50,11 @@ const CheckboxDoc = () => {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
-const CheckboxDoc = () => {
+export default function CheckboxDoc() {
     const [nodes, setNodes] = useState([]);
     const [selectedNodeKeys, setSelectedNodeKeys] = useState([]);
-    
 
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => setNodes(data));
@@ -116,7 +114,7 @@ const CheckboxDoc = () => {
                     <Column field="type" header="Type"></Column>
                 </TreeTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }

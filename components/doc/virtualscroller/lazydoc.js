@@ -53,7 +53,7 @@ export function LazyDoc(props) {
 <VirtualScroller items={lazyItems} itemSize={50} itemTemplate={basicItemTemplate} lazy onLazyLoad={onLazyLoad} showLoader loading={lazyLoading} />
         `,
         javascript: `
-import React, { useState, useEffect, useRef } 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { classNames } from 'primereact/utils';
 import './VirtualScrollerDemo.css';
@@ -110,7 +110,7 @@ export default function LazyDoc() {
 }
         `,
         typescript: `
-import React, { useState, useEffect, useRef } 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { classNames } from 'primereact/utils';
 import './VirtualScrollerDemo.css';
@@ -166,7 +166,8 @@ export default function LazyDoc() {
         )
 }
         `,
-        css: `
+        extFiles: {
+            'VirtualScrollerDemo.css': `
 /* VirtualScrollerDemo.css */
 
 .virtualscroller-demo .odd {
@@ -184,6 +185,7 @@ export default function LazyDoc() {
     flex-direction: row;
 }
     `
+        }
     };
 
     return (

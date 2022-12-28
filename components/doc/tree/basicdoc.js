@@ -18,11 +18,10 @@ export function BasicDoc(props) {
         javascript: `
 import React, { useState, useEffect } from 'react';
 import { Tree } from 'primereact/tree';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
 export default function BasicDoc() {
     const [nodes, setNodes] = useState(null);
-    
     
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
@@ -36,12 +35,11 @@ export default function BasicDoc() {
         typescript: `
 import React, { useState, useEffect } from 'react';
 import { Tree } from 'primereact/tree';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
 export default function BasicDoc() {
     const [nodes, setNodes] = useState(null);
     
-
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -90,7 +88,7 @@ export default function BasicDoc() {
             <div className="card flex justify-content-center">
                 <Tree value={nodes} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']}/>
         </>
     );
 }

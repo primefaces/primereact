@@ -95,9 +95,11 @@ export default function MaskDoc() {
     ];
 
     return (
-        <div className="speeddial-mask-demo" style={{ position: 'relative', height: '350px' }}>
-            <Toast ref={toast} />
-            <SpeedDial model={items} direction="up" mask />
+        <div className="card">
+            <div className="speeddial-mask-demo" style={{ position: 'relative', height: '350px' }}>
+                <Toast ref={toast} />
+                <SpeedDial model={items} direction="up" mask />
+            </div>
         </div>
     )
 }
@@ -148,9 +150,11 @@ export default function MaskDoc() {
     ];
 
     return (
-        <div className="speeddial-mask-demo" style={{ position: 'relative', height: '350px' }}>
-            <Toast ref={toast} />
-            <SpeedDial model={items} direction="up" mask />
+        <div className="card">
+            <div className="speeddial-mask-demo" style={{ position: 'relative', height: '350px' }}>
+                <Toast ref={toast} />
+                <SpeedDial model={items} direction="up" mask />
+            </div>
         </div>
     )
 }

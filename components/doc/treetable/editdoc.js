@@ -68,13 +68,12 @@ import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 import './TreeTableDemo.css';
 
-const EditDoc = () => {
+export default function EditDoc() {
     const [nodes, setNodes] = useState([]);
     
-
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -140,13 +139,12 @@ import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 import './TreeTableDemo.css';
 
-const EditDoc = () => {
+export default function EditDoc() {
     const [nodes, setNodes] = useState([]);
     
-
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -208,14 +206,15 @@ const EditDoc = () => {
 }
         `,
 
-        css: `
-    /* TreeTableDemo.css */
-    
-    .treetable-editing-demo .p-treetable .p-treetable-tbody > tr > td.p-cell-editing {
-        padding-top: 0;
-        padding-bottom: 0;
-    }
-                `,
+        extFiles: { 'TreeTableDemo.css': `
+/* TreeTableDemo.css */
+
+.treetable-editing-demo .p-treetable .p-treetable-tbody > tr > td.p-cell-editing {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+            `},
+
         data: `
 /* NodeService */
 {
@@ -259,7 +258,7 @@ const EditDoc = () => {
                     <Column field="type" header="Type" editor={typeEditor} style={{ height: '3.5em' }}></Column>
                 </TreeTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']}/>
         </>
     );
 }

@@ -49,7 +49,7 @@ import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 
-const PaginatorDoc = () => {
+export default function PaginatorDoc() {
     const [nodes, setNodes] = useState([]);
 
     useEffect(() => {
@@ -98,7 +98,7 @@ import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 
-const PaginatorDoc = () => {
+export default function PaginatorDoc() {
     const [nodes, setNodes] = useState([]);
 
     useEffect(() => {

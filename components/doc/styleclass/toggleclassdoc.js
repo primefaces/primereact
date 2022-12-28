@@ -21,7 +21,7 @@ import { StyleClass } from 'primereact/styleclass';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 
-export const ToggleClassDoc = () => {
+export default function ToggleClassDoc() {
     const toggleBtnRef = useRef(null);
 
     return (
@@ -40,7 +40,7 @@ import { StyleClass } from 'primereact/styleclass';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 
-export const ToggleClassDoc = () => {
+export default function ToggleClassDoc() {
     const toggleBtnRef = useRef<Button>(null);
 
     return (

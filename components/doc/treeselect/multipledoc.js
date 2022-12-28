@@ -19,13 +19,12 @@ export function MultipleDoc(props) {
         javascript: `
 import React, { useState, useEffect } from "react";
 import { TreeSelect } from 'primereact/treeselect';
-import { NodeService } from '../../../service/NodeService';
+import { NodeService } from './service/NodeService';
 
 export default function MultipleDoc() {
     const [nodes, setNodes] = useState(null);
     const [selectedNodeKeys, setSelectedNodeKeys] = useState(null);
     
-
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -40,13 +39,12 @@ export default function MultipleDoc() {
         typescript: `
 import React, { useState, useEffect } from "react";
 import { TreeSelect, TreeSelectChangeParams } from 'primereact/treeselect';
-import { NodeService } from '../../../service/NodeService';
+import { NodeService } from './service/NodeService';
 
 export default function MultipleDoc() {
     const [nodes, setNodes] = useState<any[]>(null);
     const [selectedNodeKeys, setSelectedNodeKeys] = useState<any>(null);
     
-
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -101,7 +99,7 @@ export default function MultipleDoc() {
             <div className="card flex justify-content-center">
                 <TreeSelect value={selectedNodeKeys} options={nodes} onChange={(e) => setSelectedNodeKeys(e.value)} className="md:w-20rem w-full" selectionMode="multiple" metaKeySelection={false} placeholder="Select Items"></TreeSelect>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']}/>
         </>
     );
 }

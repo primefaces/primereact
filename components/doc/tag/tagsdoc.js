@@ -16,7 +16,7 @@ export function TagsDoc(props) {
 import React from 'react';
 import { Tag } from 'primereact/tag';
 
-export const TagsDoc = () => {
+export default function TagsDoc() {
 
     return (
         <div className="card">
@@ -33,7 +33,7 @@ export const TagsDoc = () => {
 import React from 'react';
 import { Tag } from 'primereact/tag';
 
-export const TagsDoc = () => {
+export default function TagsDoc() {
 
     return (
         <div className="card">

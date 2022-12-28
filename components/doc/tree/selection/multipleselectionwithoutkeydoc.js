@@ -19,13 +19,12 @@ export function MultipleSelectionWithoutKeyDoc(props) {
         javascript: `
 import React, { useState, useEffect } from 'react';
 import { Tree } from 'primereact/tree';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
 export default function MultipleSelectionWithoutKeyDoc() {
     const [nodes, setNodes] = useState(null);
     const [selectedKey, setSelectedKey] = useState(null);
     
-
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -38,12 +37,11 @@ export default function MultipleSelectionWithoutKeyDoc() {
         typescript: `
 import React, { useState, useEffect } from 'react';
 import { Tree } from 'primereact/tree';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
 export default function MultipleSelectionWithoutKeyDoc() {
     const [nodes, setNodes] = useState(null);
     const [selectedKey, setSelectedKey] = useState(null);
-    
 
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
@@ -93,7 +91,7 @@ export default function MultipleSelectionWithoutKeyDoc() {
             <div className="card">
                 <Tree value={nodes} selectionMode="multiple" metaKeySelection={false} selectionKeys={selectedKey} onSelectionChange={(e) => setSelectedKey(e.value)} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']}/>
         </>
     );
 }

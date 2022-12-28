@@ -50,13 +50,12 @@ export function ProgrammaticDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { Tree } from 'primereact/tree';
 import { Button } from 'primereact/button';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
 export default function ProgrammaticDoc() {
     const [nodes, setNodes] = useState(null);
     const [expandedKeys, setExpandedKeys] = useState({});
     
-
     const expandAll = () => {
         let _expandedKeys = {};
 
@@ -86,12 +85,14 @@ export default function ProgrammaticDoc() {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
     
     return (
-        <div className="mb-4">
-            <Button type="button" icon="pi pi-plus" label="Expand All" onClick={expandAll} className="mr-2" />
-            <Button type="button" icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
-        </div>
+        <div> 
+            <div className="mb-4">
+                <Button type="button" icon="pi pi-plus" label="Expand All" onClick={expandAll} className="mr-2" />
+                <Button type="button" icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
+            </div>
 
-        <Tree value={nodes} expandedKeys={expandedKeys} onToggle={(e) => setExpandedKeys(e.value)} />
+            <Tree value={nodes} expandedKeys={expandedKeys} onToggle={(e) => setExpandedKeys(e.value)} />
+        </div>
     )
 }
         `,
@@ -99,13 +100,12 @@ export default function ProgrammaticDoc() {
 import React, { useState, useEffect } from 'react';
 import { Tree } from 'primereact/tree';
 import { Button } from 'primereact/button';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
 export default function ProgrammaticDoc() {
     const [nodes, setNodes] = useState(null);
     const [expandedKeys, setExpandedKeys] = useState({});
     
-
     const expandAll = () => {
         let _expandedKeys = {};
 
@@ -135,12 +135,14 @@ export default function ProgrammaticDoc() {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <div className="mb-4">
-            <Button type="button" icon="pi pi-plus" label="Expand All" onClick={expandAll} className="mr-2" />
-            <Button type="button" icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
-        </div>
+        <div>
+            <div className="mb-4">
+                <Button type="button" icon="pi pi-plus" label="Expand All" onClick={expandAll} className="mr-2" />
+                <Button type="button" icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
+            </div>
 
-        <Tree value={nodes} expandedKeys={expandedKeys} onToggle={(e) => setExpandedKeys(e.value)} />
+            <Tree value={nodes} expandedKeys={expandedKeys} onToggle={(e) => setExpandedKeys(e.value)} />
+        </div>
     )
 }
         `,
@@ -188,7 +190,7 @@ export default function ProgrammaticDoc() {
 
                 <Tree value={nodes} expandedKeys={expandedKeys} onToggle={(e) => setExpandedKeys(e.value)} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']}/>
         </>
     );
 }

@@ -250,7 +250,7 @@ export default function InvalidDemo() {
                 />
             </form>
 
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} dependencies={{ 'react-hook-form': '^7.39.4' }}/>
         </>
     );
 }

@@ -16,7 +16,7 @@ export function PillsDoc(props) {
 import React from 'react';
 import { Tag } from 'primereact/tag';
 
-export const PillsDoc = () => {
+export default function PillsDoc() {
 
     return (
         <div className="card">
@@ -33,7 +33,7 @@ export const PillsDoc = () => {
 import React from 'react';
 import { Tag } from 'primereact/tag';
 
-export const PillsDoc = () => {
+export default function PillsDoc() {
 
     return (
         <div className="card">

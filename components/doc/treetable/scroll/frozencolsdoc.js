@@ -28,12 +28,11 @@ export function FrozenColumnsDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
-const FrozenColumnsDoc = () => {
+export default function FrozenColumnsDoc() {
     const [nodes, setNodes] = useState([]);
     
-
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -57,11 +56,10 @@ const FrozenColumnsDoc = () => {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
-const FrozenColumnsDoc = () => {
+export default function FrozenColumnsDoc() {
     const [nodes, setNodes] = useState([]);
-    
 
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => setNodes(data));
@@ -129,7 +127,7 @@ const FrozenColumnsDoc = () => {
                     <Column field="type" header="Type" style={{ width: '250px', height: '57px' }} columnKey="type_2"></Column>
                 </TreeTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']}/>
         </>
     );
 }

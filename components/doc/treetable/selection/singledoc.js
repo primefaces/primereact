@@ -5,7 +5,7 @@ import { NodeService } from '../../../../service/NodeService';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 
-export function SingleDoc(props) {
+export function SingleSelectionDoc(props) {
     const [nodes, setNodes] = useState([]);
     const [selectedNodeKey, setSelectedNodeKey] = useState([]);
 
@@ -25,12 +25,11 @@ export function SingleDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
-const SingleDoc = () => {
+export default function SingleSelectionDoc() {
 const [nodes, setNodes] = useState([]);
 const [selectedNodeKey, setSelectedNodeKey] = useState([]);
-
 
 useEffect(() => {
     NodeService.getTreeTableNodes().then(data => setNodes(data));
@@ -59,12 +58,11 @@ const onUnselect = (event) => {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
-const SingleDoc = () => {
+export default function SingleSelectionDoc() {
 const [nodes, setNodes] = useState([]);
 const [selectedNodeKey, setSelectedNodeKey] = useState([]);
-
 
 useEffect(() => {
     NodeService.getTreeTableNodes().then(data => setNodes(data));
@@ -132,7 +130,7 @@ const onUnselect = (event) => {
                     <Column field="type" header="Type"></Column>
                 </TreeTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']}/>
         </>
     );
 }

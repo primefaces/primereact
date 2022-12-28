@@ -31,14 +31,13 @@ export function SingleSelectionDoc(props) {
 import React, { useState, useEffect, useRef } from 'react';
 import { Tree } from 'primereact/tree';
 import { Toast } from 'primereact/toast';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
 export default function SingleSelectionDoc() {
     const [nodes, setNodes] = useState(null);
     const [selectedKey, setSelectedKey] = useState(null);
     const toast = useRef(null);
     
-
     useEffect(() => {
         NodeService.getTreeNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -52,8 +51,10 @@ export default function SingleSelectionDoc() {
     }
 
     return (
-        <Toast ref={toast} />
-        <Tree value={nodes} selectionMode="single" selectionKeys={selectedKey} onSelectionChange={e => setSelectedKey(e.value)} onSelect={onNodeSelect} onUnselect={onNodeUnselect} />
+        <div>
+            <Toast ref={toast} />
+            <Tree value={nodes} selectionMode="single" selectionKeys={selectedKey} onSelectionChange={e => setSelectedKey(e.value)} onSelect={onNodeSelect} onUnselect={onNodeUnselect} />
+        </div>
     )
 }
         `,
@@ -61,14 +62,13 @@ export default function SingleSelectionDoc() {
 import React, { useState, useEffect, useRef } from 'react';
 import { Tree } from 'primereact/tree';
 import { Toast } from 'primereact/toast';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
 export default function SingleSelectionDoc() {
     const [nodes, setNodes] = useState(null);
     const [selectedKey, setSelectedKey] = useState(null);
     const toast = useRef(null);
     
-
     useEffect(() => {
         NodeService.getTreeNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -82,8 +82,10 @@ export default function SingleSelectionDoc() {
     }
 
     return (
-        <Toast ref={toast} />
-        <Tree value={nodes} selectionMode="single" selectionKeys={selectedKey} onSelectionChange={e => setSelectedKey(e.value)} onSelect={onNodeSelect} onUnselect={onNodeUnselect} />
+        <div>
+            <Toast ref={toast} />
+            <Tree value={nodes} selectionMode="single" selectionKeys={selectedKey} onSelectionChange={e => setSelectedKey(e.value)} onSelect={onNodeSelect} onUnselect={onNodeUnselect} />
+        </div>
     )
 }
         `,
@@ -127,7 +129,7 @@ export default function SingleSelectionDoc() {
             <div className="card">
                 <Tree value={nodes} selectionMode="single" selectionKeys={selectedKey} onSelectionChange={(e) => setSelectedKey(e.value)} onSelect={onNodeSelect} onUnselect={onNodeUnselect} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']}/>
         </>
     );
 }

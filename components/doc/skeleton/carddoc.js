@@ -18,7 +18,7 @@ export function CardDoc(props) {
 import React from 'react';
 import { Skeleton } from 'primereact/skeleton';
 
-export const CardDoc = () => {
+export default function CardDoc() {
 
     return (
         <div className="card">
@@ -45,7 +45,7 @@ export const CardDoc = () => {
 import React from 'react';
 import { Skeleton } from 'primereact/skeleton';
 
-export const CardDoc = () => {
+export default function CardDoc() {
 
     return (
         <div className="card">

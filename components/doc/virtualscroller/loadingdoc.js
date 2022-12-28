@@ -39,7 +39,7 @@ export function LoadingDoc(props) {
 <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} showLoader delay={250} loadingTemplate={basicLoadingTemplate} />
         `,
         javascript: `
-import React, { useState } 'react';
+import React, { useState } from 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { Skeleton } from 'primereact/skeleton';
 import { classNames } from 'primereact/utils';
@@ -78,7 +78,7 @@ export default function LoadingDoc() {
 }
         `,
         typescript: `
-import React, { useState } 'react';
+import React, { useState } from 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { Skeleton } from 'primereact/skeleton';
 import { classNames } from 'primereact/utils';
@@ -116,7 +116,8 @@ export default function LoadingDoc() {
     )
 }
         `,
-        css: `
+        extFiles: {
+            'VirtualScrollerDemo.css': `
 /* VirtualScrollerDemo.css */
 
 .virtualscroller-demo .odd {
@@ -134,6 +135,7 @@ export default function LoadingDoc() {
     flex-direction: row;
 }
     `
+        }
     };
 
     return (

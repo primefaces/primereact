@@ -26,11 +26,10 @@ export function MultipleDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
-const MultipleDoc = () => {
+export default function MultipleDoc() {
     const [nodes, setNodes] = useState([]);
-    
 
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => {
@@ -62,11 +61,10 @@ const MultipleDoc = () => {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
-const MultipleDoc = () => {
+export default function MultipleDoc() {
     const [nodes, setNodes] = useState([]);
-    
 
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => {
@@ -137,7 +135,7 @@ const MultipleDoc = () => {
                     <Column field="type" header="Type" sortable></Column>
                 </TreeTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']}/>
         </>
     );
 }

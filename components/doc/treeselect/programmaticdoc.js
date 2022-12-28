@@ -60,14 +60,13 @@ placeholder="Select Items"
 import React, { useState, useEffect } from "react";
 import { TreeSelect } from 'primereact/treeselect';
 import { Button } from '../../lib/button/Button';
-import { NodeService } from '../../../service/NodeService';
+import { NodeService } from './service/NodeService';
 
 export default function ProgrammaticDoc() {
     const [nodes, setNodes] = useState(null);
     const [selectedNodeKeys, setSelectedNodeKeys] = useState(null);
     const [expandedKeys, setExpandedKeys] = useState({});
     
-
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -97,13 +96,12 @@ export default function ProgrammaticDoc() {
 import React, { useState, useEffect } from "react";
 import { TreeSelect, TreeSelectChangeParams, TreeSelectExpandedParams } from 'primereact/treeselect';
 import { Button } from '../../lib/button/Button';
-import { NodeService } from '../../../service/NodeService';
+import { NodeService } from './service/NodeService';
 
 export default function ProgrammaticDoc() {
     const [nodes, setNodes] = useState<any[]>(null);
     const [selectedNodeKeys, setSelectedNodeKeys] = useState<any>(null);
     const [expandedKeys, setExpandedKeys] = useState<any>({});
-    
 
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
@@ -186,7 +184,7 @@ export default function ProgrammaticDoc() {
                     <Button type="button" icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
                 </div>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']}/>
         </>
     );
 }

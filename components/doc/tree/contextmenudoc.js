@@ -55,7 +55,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Tree } from 'primereact/tree';
 import { ContextMenu } from 'primereact/contextmenu';
 import { Toast } from 'primereact/toast';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
 export default function ContextMenuDoc() {
     const [nodes, setNodes] = useState(null);
@@ -85,21 +85,19 @@ export default function ContextMenuDoc() {
         }
     ];
 
-    
-
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <Toast ref={toast} />
-
-        <ContextMenu model={menu} ref={cm} onHide={() => setSelectedNodeKey(null)} />
-
-        <div className="card">
-            <Tree value={nodes} expandedKeys={expandedKeys} onToggle={e => setExpandedKeys(e.value)}
-                contextMenuSelectionKey={selectedNodeKey} onContextMenuSelectionChange={event => setSelectedNodeKey(event.value)}
-                onContextMenu={event => cm.current.show(event.originalEvent)} />
+        <div>
+            <Toast ref={toast} />
+            <ContextMenu model={menu} ref={cm} onHide={() => setSelectedNodeKey(null)} />
+            <div className="card">
+                <Tree value={nodes} expandedKeys={expandedKeys} onToggle={e => setExpandedKeys(e.value)}
+                    contextMenuSelectionKey={selectedNodeKey} onContextMenuSelectionChange={event => setSelectedNodeKey(event.value)}
+                    onContextMenu={event => cm.current.show(event.originalEvent)} />
+            </div>
         </div>
     )
 }
@@ -109,7 +107,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Tree } from 'primereact/tree';
 import { ContextMenu } from 'primereact/contextmenu';
 import { Toast } from 'primereact/toast';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
 export default function ContextMenuDoc() {
     const [nodes, setNodes] = useState(null);
@@ -139,21 +137,19 @@ export default function ContextMenuDoc() {
         }
     ];
 
-    
-
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <Toast ref={toast} />
-
-        <ContextMenu model={menu} ref={cm} onHide={() => setSelectedNodeKey(null)} />
-
-        <div className="card">
-            <Tree value={nodes} expandedKeys={expandedKeys} onToggle={e => setExpandedKeys(e.value)}
-                contextMenuSelectionKey={selectedNodeKey} onContextMenuSelectionChange={event => setSelectedNodeKey(event.value)}
-                onContextMenu={event => cm.current.show(event.originalEvent)} />
+        <div>
+            <Toast ref={toast} />
+            <ContextMenu model={menu} ref={cm} onHide={() => setSelectedNodeKey(null)} />
+            <div className="card">
+                <Tree value={nodes} expandedKeys={expandedKeys} onToggle={e => setExpandedKeys(e.value)}
+                    contextMenuSelectionKey={selectedNodeKey} onContextMenuSelectionChange={event => setSelectedNodeKey(event.value)}
+                    onContextMenu={event => cm.current.show(event.originalEvent)} />
+            </div>
         </div>
     )
 }
@@ -210,7 +206,7 @@ export default function ContextMenuDoc() {
                     />
                 </div>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }

@@ -24,7 +24,7 @@ export function VerticalDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
 const VerticalDoc = () => {
     const [nodes, setNodes] = useState([]);
@@ -49,7 +49,7 @@ const VerticalDoc = () => {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
 const VerticalDoc = () => {
     const [nodes, setNodes] = useState([]);
@@ -113,7 +113,7 @@ const VerticalDoc = () => {
                     <Column field="type" header="Type"></Column>
                 </TreeTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']}/>
         </>
     );
 }

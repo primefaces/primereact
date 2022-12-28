@@ -98,12 +98,14 @@ export default function LinearDoc() {
     ];
 
     return (
-        <div className="speeddial-linear-demo" style={{ position: 'relative', height: '500px' }}>
-            <Toast ref={toast} />
-            <SpeedDial model={items} direction="up" />
-            <SpeedDial model={items} direction="down" />
-            <SpeedDial model={items} direction="left" />
-            <SpeedDial model={items} direction="right" />
+        <div className="card">
+            <div className="speeddial-linear-demo" style={{ position: 'relative', height: '500px' }}>
+                <Toast ref={toast} />
+                <SpeedDial model={items} direction="up" />
+                <SpeedDial model={items} direction="down" />
+                <SpeedDial model={items} direction="left" />
+                <SpeedDial model={items} direction="right" />
+            </div>
         </div>
     )
 }
@@ -154,12 +156,14 @@ export default function LinearDoc() {
     ];
 
     return (
-        <div className="speeddial-linear-demo" style={{ position: 'relative', height: '500px' }}>
-            <Toast ref={toast} />
-            <SpeedDial model={items} direction="up" />
-            <SpeedDial model={items} direction="down" />
-            <SpeedDial model={items} direction="left" />
-            <SpeedDial model={items} direction="right" />
+        <div className="card">
+            <div className="speeddial-linear-demo" style={{ position: 'relative', height: '500px' }}>
+                <Toast ref={toast} />
+                <SpeedDial model={items} direction="up" />
+                <SpeedDial model={items} direction="down" />
+                <SpeedDial model={items} direction="left" />
+                <SpeedDial model={items} direction="right" />
+            </div>
         </div>
     )
 }

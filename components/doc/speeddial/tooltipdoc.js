@@ -101,13 +101,15 @@ export default function TooltipDoc() {
     ];
 
     return (
-        <div className="speeddial-tooltip-demo" style={{ position: 'relative', height: '350px' }}>
-            <Toast ref={toast} />
-            <Tooltip target=".speeddial-tooltip-demo .speeddial-right .p-speeddial-action" position="left" />
-            <SpeedDial model={items} direction="up" className="speeddial-right" buttonClassName="p-button-danger" />
+        <div className="card">
+            <div className="speeddial-tooltip-demo" style={{ position: 'relative', height: '350px' }}>
+                <Toast ref={toast} />
+                <Tooltip target=".speeddial-tooltip-demo .speeddial-right .p-speeddial-action" position="left" />
+                <SpeedDial model={items} direction="up" className="speeddial-right" buttonClassName="p-button-danger" />
 
-            <Tooltip target=".speeddial-tooltip-demo .speeddial-left .p-speeddial-action" />
-            <SpeedDial model={items} direction="up" className="speeddial-left" buttonClassName="p-button-help" />
+                <Tooltip target=".speeddial-tooltip-demo .speeddial-left .p-speeddial-action" />
+                <SpeedDial model={items} direction="up" className="speeddial-left" buttonClassName="p-button-help" />
+            </div>
         </div>
     )
 }
@@ -159,13 +161,15 @@ export default function TooltipDoc() {
     ];
 
     return (
-        <div className="speeddial-tooltip-demo" style={{ position: 'relative', height: '350px' }}>
-            <Toast ref={toast} />
-            <Tooltip target=".speeddial-tooltip-demo .speeddial-right .p-speeddial-action" position="left" />
-            <SpeedDial model={items} direction="up" className="speeddial-right" buttonClassName="p-button-danger" />
+        <div className="card">
+            <div className="speeddial-tooltip-demo" style={{ position: 'relative', height: '350px' }}>
+                <Toast ref={toast} />
+                <Tooltip target=".speeddial-tooltip-demo .speeddial-right .p-speeddial-action" position="left" />
+                <SpeedDial model={items} direction="up" className="speeddial-right" buttonClassName="p-button-danger" />
 
-            <Tooltip target=".speeddial-tooltip-demo .speeddial-left .p-speeddial-action" />
-            <SpeedDial model={items} direction="up" className="speeddial-left" buttonClassName="p-button-help" />
+                <Tooltip target=".speeddial-tooltip-demo .speeddial-left .p-speeddial-action" />
+                <SpeedDial model={items} direction="up" className="speeddial-left" buttonClassName="p-button-help" />
+            </div>
         </div>
     )
 }

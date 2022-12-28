@@ -55,9 +55,9 @@ import { TreeTable } from 'primereact/treetable';
 import { ContextMenu } from 'primereact/contextmenu';
 import { Toast } from 'primereact/toast';
 import { Column } from 'primereact/column';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
-const ContextMenuDoc = () => {
+export default function ContextMenuDoc() {
 const [nodes, setNodes] = useState([]);
 const [expandedKeys, setExpandedKeys] = useState({});
 const [selectedNodeKey, setSelectedNodeKey] = useState(null);
@@ -116,9 +116,9 @@ import { TreeTable } from 'primereact/treetable';
 import { ContextMenu } from 'primereact/contextmenu';
 import { Toast } from 'primereact/toast';
 import { Column } from 'primereact/column';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
-const ContextMenuDoc = () => {
+export default function ContextMenuDoc() {
 const [nodes, setNodes] = useState([]);
 const [expandedKeys, setExpandedKeys] = useState({});
 const [selectedNodeKey, setSelectedNodeKey] = useState(null);
@@ -223,7 +223,7 @@ useEffect(() => {
                     <Column field="type" header="Type"></Column>
                 </TreeTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }

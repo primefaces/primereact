@@ -43,17 +43,16 @@ import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
-const TemplatingDoc = () => {
+export default function TemplatingDoc() {
     const [nodes, setNodes] = useState([]);
     
-
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-        const actionTemplate = () => {
+    const actionTemplate = () => {
         return (
             <div>
                 <Button type="button" icon="pi pi-search" className="p-button-success" style={{ marginRight: '.5em' }}></Button>
@@ -68,16 +67,6 @@ const TemplatingDoc = () => {
             <Button icon="pi pi-refresh" tooltip="Reload" />
         </div>
     );
-
-    const actionTemplate = (node, column) => {
-        return <div>
-            <Button type="button" icon="pi pi-search" className="p-button-success" style={{ marginRight: '.5em' }}></Button>
-            <Button type="button" icon="pi pi-pencil" className="p-button-warning"></Button>
-        </div>;
-    }
-
-    const header = "File Viewer";
-    const footer = <div style={{ textAlign: 'left' }}><Button icon="pi pi-refresh" tooltip="Reload" /></div>;
 
     return (
         <div>
@@ -98,17 +87,16 @@ import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
-const TemplatingDoc = () => {
+export default function TemplatingDoc() {
     const [nodes, setNodes] = useState([]);
     
-
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-        const actionTemplate = () => {
+    const actionTemplate = () => {
         return (
             <div>
                 <Button type="button" icon="pi pi-search" className="p-button-success" style={{ marginRight: '.5em' }}></Button>
@@ -123,16 +111,6 @@ const TemplatingDoc = () => {
             <Button icon="pi pi-refresh" tooltip="Reload" />
         </div>
     );
-
-    const actionTemplate = (node, column) => {
-        return <div>
-            <Button type="button" icon="pi pi-search" className="p-button-success" style={{ marginRight: '.5em' }}></Button>
-            <Button type="button" icon="pi pi-pencil" className="p-button-warning"></Button>
-        </div>;
-    }
-
-    const header = "File Viewer";
-    const footer = <div style={{ textAlign: 'left' }}><Button icon="pi pi-refresh" tooltip="Reload" /></div>;
 
     return (
         <div>
@@ -192,7 +170,7 @@ const TemplatingDoc = () => {
                     <Column body={actionTemplate} style={{ textAlign: 'center', width: '10rem' }} />
                 </TreeTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']}/>
         </>
     );
 }

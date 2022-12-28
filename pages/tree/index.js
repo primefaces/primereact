@@ -11,6 +11,12 @@ import { LazyDoc } from '../../components/doc/tree/lazydoc';
 import { TemplatingDoc } from '../../components/doc/tree/templatingdoc';
 import { DragAndDropDoc } from '../../components/doc/tree/draganddropdoc';
 import { ContextMenuDoc } from '../../components/doc/tree/contextmenudoc';
+import { LenientFilterDoc } from '../../components/doc/tree/filter/lenientfilterdoc';
+import { StrictFilterDoc } from '../../components/doc/tree/filter/strictfilterdoc';
+import { SingleSelectionDoc } from '../../components/doc/tree/selection/singleselectiondoc';
+import { MultipleSelectionWithKeyDoc } from '../../components/doc/tree/selection/multipleselectionwithkeydoc';
+import { MultipleSelectionWithoutKeyDoc } from '../../components/doc/tree/selection/multipleselectionwithoutkeydoc';
+import { CheckboxSelectionDoc } from '../../components/doc/tree/selection/checkboxselectiondoc';
 
 const TreeDemo = () => {
     const docs = [
@@ -30,8 +36,32 @@ const TreeDemo = () => {
             component: ProgrammaticDoc
         },
         {
+            id: 'selection',
             label: 'Selection',
-            to: '/tree/selection'
+            description:
+                'Tree supports "single", "multiple" and "checkbox" as selection modes.',
+            children: [
+                {
+                    id: 'singleselection',
+                    label: 'Single',
+                    component: SingleSelectionDoc
+                },
+                {
+                    id: 'multipleselectionwithkey',
+                    label: 'Multiple Selection with MetaKey',
+                    component: MultipleSelectionWithKeyDoc
+                },
+                {
+                    id: 'multipleselectionwithoutkey',
+                    label: 'Multiple Selection without MetaKey',
+                    component: MultipleSelectionWithoutKeyDoc
+                },
+                {
+                    id: 'checkboxselection',
+                    label: 'Checkbox',
+                    component: CheckboxSelectionDoc
+                }
+            ]
         },
         {
             id: 'events',
@@ -59,8 +89,22 @@ const TreeDemo = () => {
             component: ContextMenuDoc
         },
         {
+            id: 'filter',
             label: 'Filter',
-            to: '/tree/filter'
+            description:
+                'Filtering updates the node based on the constraints.',
+            children: [
+                {
+                    id: 'lenientfilter',
+                    label: 'Lenient Filter',
+                    component: LenientFilterDoc
+                },
+                {
+                    id: 'strictfilter',
+                    label: 'Strict Filter',
+                    component: StrictFilterDoc
+                }
+            ]
         },
         {
             id: 'api',

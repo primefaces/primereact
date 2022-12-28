@@ -60,7 +60,8 @@ export default function ColorDoc() {
     );
 }
         `,
-        css: `
+        extFiles: {
+            'TooltipDemo.css': `
 /* TooltipDemo.css */
 
 .blue-tooltip.p-tooltip .p-tooltip-arrow {
@@ -118,6 +119,7 @@ export default function ColorDoc() {
     background-color: var(--purple-500);
 }
     `
+        }
     };
 
     return (

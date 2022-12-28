@@ -18,12 +18,11 @@ export function StrictFilterDoc(props) {
         javascript: `
 import React, { useState, useEffect } from 'react';
 import { Tree } from 'primereact/tree';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
 export default function StrictFilterDoc() {
     const [nodes, setNodes] = useState(null);
     
-
     useEffect(() => {
         NodeService.getTreeNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -36,12 +35,11 @@ export default function StrictFilterDoc() {
         typescript: `
 import React, { useState, useEffect } from 'react';
 import { Tree } from 'primereact/tree';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
 export default function StrictFilterDoc() {
     const [nodes, setNodes] = useState(null);
     
-
     useEffect(() => {
         NodeService.getTreeNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -90,7 +88,7 @@ export default function StrictFilterDoc() {
             <div className="card">
                 <Tree value={nodes} filter filterMode="strict"></Tree>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']}/>
         </>
     );
 }

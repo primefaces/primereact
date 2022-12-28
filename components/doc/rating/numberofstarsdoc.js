@@ -8,7 +8,7 @@ export function NumberOfStarsDoc(props) {
 
     const code = {
         basic: `
-<Rating value={val} onChange={(e) => setValue(e.val)} stars={5} />
+<Rating value={val} onChange={(e) => setVal(e.val)} stars={5} />
 
         `,
         javascript: `
@@ -19,7 +19,7 @@ export default function NumberOfStarsDoc() {
     const [val, setVal] = useState(null);
 
     return (
-        <Rating value={val} onChange={(e) => setValue(e.val)} stars={5} />
+        <Rating value={val} onChange={(e) => setVal(e.value)} stars={5} />
     );
 }
         `,
@@ -31,7 +31,7 @@ export default function NumberOfStarsDoc() {
     const [val, setVal] = useState<number>(0);
 
     return (
-        <Rating value={val} onChange={(e : RatingChangeParams) => setValue(e.val)} stars={5} />
+        <Rating value={val} onChange={(e : RatingChangeParams) => setVal(e.value)} stars={5} />
     );
 }
         `

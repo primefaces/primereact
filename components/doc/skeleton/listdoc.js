@@ -23,7 +23,7 @@ export function ListDoc(props) {
 import React from 'react';
 import { Skeleton } from 'primereact/skeleton';
 
-export const ListDoc = () => {
+export default function ListDoc() {
 
     return (
         <div className="card">
@@ -75,7 +75,7 @@ export const ListDoc = () => {
 import React from 'react';
 import { Skeleton } from 'primereact/skeleton';
 
-export const ListDoc = () => {
+export default function ListDoc() {
 
     return (
         <div className="card">

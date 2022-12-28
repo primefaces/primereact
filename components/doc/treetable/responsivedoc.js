@@ -34,13 +34,12 @@ export function ResponsiveDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 import './TreeTableDemo.css';
 
-const ResponsiveDoc = () => {
+export default function ResponsiveDoc() {
     const [nodes, setNodes] = useState([]);
     
-
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -72,13 +71,12 @@ const ResponsiveDoc = () => {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 import './TreeTableDemo.css';
 
-const ResponsiveDoc = () => {
+export default function ResponsiveDoc() {
     const [nodes, setNodes] = useState([]);
     
-
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -106,7 +104,8 @@ const ResponsiveDoc = () => {
     );
 }
         `,
-        css: `
+        extFiles: {
+            'TreeTableDemo.css': `
 /* TreeTableDemo.css */
 
 .treetable-responsive-demo .sm-visible {
@@ -123,7 +122,8 @@ const ResponsiveDoc = () => {
         margin-right: .5rem;
     }
 }
-        `,
+        `
+        },
         data: `
 /* NodeService */
 {
@@ -167,7 +167,7 @@ const ResponsiveDoc = () => {
                     <Column field="type" header="Type" headerClassName="sm-invisible" bodyClassName="sm-invisible"></Column>
                 </TreeTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }

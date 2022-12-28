@@ -26,7 +26,7 @@ import { StyleClass } from 'primereact/styleclass';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 
-export const AnimationsDoc = () => {
+export default function AnimationsDoc() {
     const openBtnRef = useRef(null);
     const closeBtnRef = useRef(null);
 
@@ -53,7 +53,7 @@ import { StyleClass } from 'primereact/styleclass';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 
-export const AnimationsDoc = () => {
+export default function AnimationsDoc() {
     const openBtnRef = useRef<Button>(null);
     const closeBtnRef = useRef<Button>(null);
 

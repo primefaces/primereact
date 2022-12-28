@@ -95,9 +95,11 @@ export default function TransitionDoc() {
     ];
 
     return (
-        <div className="speeddial-delay-demo" style={{ position: 'relative', height: '350px' }}>
-            <Toast ref={toast} />
-            <SpeedDial model={items} direction="up" transitionDelay={80} showIcon="pi pi-bars" hideIcon="pi pi-times" buttonClassName="p-button-outlined" />
+        <div className="card">
+            <div className="speeddial-delay-demo" style={{ position: 'relative', height: '350px' }}>
+                <Toast ref={toast} />
+                <SpeedDial model={items} direction="up" transitionDelay={80} showIcon="pi pi-bars" hideIcon="pi pi-times" buttonClassName="p-button-outlined" />
+            </div>
         </div>
     )
 }
@@ -148,9 +150,11 @@ export default function TransitionDoc() {
     ];
 
     return (
-        <div className="speeddial-delay-demo" style={{ position: 'relative', height: '350px' }}>
-            <Toast ref={toast} />
-            <SpeedDial model={items} direction="up" transitionDelay={80} showIcon="pi pi-bars" hideIcon="pi pi-times" buttonClassName="p-button-outlined" />
+        <div className="card">
+            <div className="speeddial-delay-demo" style={{ position: 'relative', height: '350px' }}>
+                <Toast ref={toast} />
+                <SpeedDial model={items} direction="up" transitionDelay={80} showIcon="pi pi-bars" hideIcon="pi pi-times" buttonClassName="p-button-outlined" />
+            </div>
         </div>
     )
 }

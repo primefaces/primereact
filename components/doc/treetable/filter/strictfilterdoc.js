@@ -40,13 +40,12 @@ import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
-const StrictFilterDoc = () => {
+export default function StrictFilterDoc() {
     const [nodes, setNodes] = useState([]);
     const [globalFilter, setGlobalFilter] = useState(null);
     
-
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -80,13 +79,12 @@ import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
-const StrictFilterDoc = () => {
+export default function StrictFilterDoc() {
     const [nodes, setNodes] = useState([]);
     const [globalFilter, setGlobalFilter] = useState(null);
     
-
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -158,7 +156,7 @@ const StrictFilterDoc = () => {
                     <Column field="type" header="Type" filter filterPlaceholder="Filter by type"></Column>
                 </TreeTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']}/>
         </>
     );
 }
