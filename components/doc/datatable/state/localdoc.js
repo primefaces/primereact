@@ -137,7 +137,7 @@ import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { MultiSelect } from 'primereact/multiselect';
 import { Dropdown } from 'primereact/dropdown';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 const LocalStorageDoc = () => {
 
@@ -258,7 +258,7 @@ import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { MultiSelect } from 'primereact/multiselect';
 import { Dropdown } from 'primereact/dropdown';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 const LocalStorageDoc = () => {
 
@@ -447,7 +447,7 @@ const LocalStorageDoc = () => {
                     <Column field="status" header="Status" body={statusBodyTemplate} sortable filter filterElement={statusFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );
 }

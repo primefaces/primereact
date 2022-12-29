@@ -46,7 +46,7 @@ itemTemplate={productTemplate} header={<h5>Vertical</h5>} style={{maxWidth: '400
 import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { Carousel } from 'primereact/carousel';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 export default function VerticalDoc() {
     const [products, setProducts] = useState([]);
@@ -90,7 +90,7 @@ export default function VerticalDoc() {
 import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { Carousel } from 'primereact/carousel';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 export default function VerticalDoc() {
     const [products, setProducts] = useState([]);
@@ -156,7 +156,7 @@ export default function VerticalDoc() {
             <div className="card flex justify-content-center">
                 <Carousel value={products} numVisible={1} numScroll={1} orientation="vertical" verticalViewPortHeight="360px" itemTemplate={productTemplate} header={<h5>Vertical</h5>} style={{ maxWidth: '400px', marginTop: '2em' }} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

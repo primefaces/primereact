@@ -104,7 +104,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Toast } from 'primereact/toast';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 import './DataTableDemo.css';
 
 const ExpandableRowGroupsDoc = () => {
@@ -194,7 +194,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Toast } from 'primereact/toast';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 import './DataTableDemo.css';
 
 const ExpandableRowGroupsDoc = () => {
@@ -349,7 +349,7 @@ const ExpandableRowGroupsDoc = () => {
                     <Column field="date" header="Date"></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );
 }

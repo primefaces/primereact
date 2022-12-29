@@ -50,7 +50,7 @@ export function CheckboxDoc(props) {
 import React, { useEffect, useState } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
 const CheckboxDoc = () => {
@@ -103,7 +103,7 @@ const CheckboxDoc = () => {
 import React, { useEffect, useState } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
 const CheckboxDoc = () => {
@@ -203,7 +203,7 @@ const CheckboxDoc = () => {
                     <Column field="quantity" header="Quantity"></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

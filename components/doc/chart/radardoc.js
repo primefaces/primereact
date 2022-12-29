@@ -122,7 +122,9 @@ export default function RadarDoc() {
     }, []);
 
     return (
-        <Chart type="radar" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+        <div className="card flex justify-content-center">
+            <Chart type="radar" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+        </div>
     )
 }
         `,
@@ -186,7 +188,9 @@ export default function RadarDoc() {
     }, []);
     
     return (
-        <Chart type="radar" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+        <div className="card flex justify-content-center">
+            <Chart type="radar" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+        </div>
     )
 }
         `
@@ -200,7 +204,7 @@ export default function RadarDoc() {
             <div className="card flex justify-content-center">
                 <Chart type="radar" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} dependencies={{ 'chart.js': '3.9.1' }} />
         </>
     );
 }

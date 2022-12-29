@@ -25,7 +25,7 @@ export function StripedDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 const StripedDoc = () => {
     const [products, setProducts] = useState(null);
@@ -51,7 +51,7 @@ const StripedDoc = () => {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 const StripedDoc = () => {
     const [products, setProducts] = useState(null);
@@ -106,7 +106,7 @@ const StripedDoc = () => {
                     <Column field="quantity" header="Quantity"></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

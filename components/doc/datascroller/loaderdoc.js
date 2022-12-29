@@ -45,7 +45,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Rating } from 'primereact/rating';
 import { DataScroller } from 'primereact/datascroller';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 export default function LoaderDataScrollerDoc() {
     const [products, setProducts] = useState([]);
@@ -79,7 +79,9 @@ export default function LoaderDataScrollerDoc() {
     const footer = <Button type="text" icon="pi pi-plus" label="Load" onClick={() => ds.current.load()} />;
 
     return (
-        <DataScroller ref={ds} value={products} itemTemplate={itemTemplate} rows={5} loader footer={footer} header="Click Load Button at Footer to Load More" />
+        <div className="card">
+            <DataScroller ref={ds} value={products} itemTemplate={itemTemplate} rows={5} loader footer={footer} header="Click Load Button at Footer to Load More" />
+        </div>
     )
 }
         `,
@@ -88,7 +90,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Rating } from 'primereact/rating';
 import { DataScroller } from 'primereact/datascroller';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 export default function LoaderDataScrollerDoc() {
     const [products, setProducts] = useState([]);
@@ -122,7 +124,9 @@ export default function LoaderDataScrollerDoc() {
     const footer = <Button type="text" icon="pi pi-plus" label="Load" onClick={() => ds.current.load()} />;
 
     return (
-        <DataScroller ref={ds} value={products} itemTemplate={itemTemplate} rows={5} loader footer={footer} header="Click Load Button at Footer to Load More" />
+        <div className="card">
+            <DataScroller ref={ds} value={products} itemTemplate={itemTemplate} rows={5} loader footer={footer} header="Click Load Button at Footer to Load More" />
+        </div>
     )
 }
         `,
@@ -152,7 +156,7 @@ export default function LoaderDataScrollerDoc() {
             <div className="card">
                 <DataScroller ref={ds} value={products} itemTemplate={itemTemplate} rows={5} loader footer={footer} header="Click Load Button at Footer to Load More" />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

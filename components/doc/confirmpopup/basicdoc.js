@@ -82,7 +82,7 @@ export default function BasicDoc() {
     };
 
     return (
-        <div>
+        <div className="card flex justify-content-center">
             <Toast ref={toast} />
             <ConfirmPopup />
             <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
@@ -130,7 +130,7 @@ export default function BasicDoc() {
 
 
     return ( 
-        <div>
+        <div className="card flex justify-content-center">
             <Toast ref={toast} />
             <ConfirmPopup />
             <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>

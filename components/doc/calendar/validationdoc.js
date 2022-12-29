@@ -54,25 +54,27 @@ export default function ValidationDemo() {
     };
 
     return (
-        <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
-            <div className="field">
-                <Controller
-                    name="birthdate"
-                    control={form.control}
-                    rules={{ required: 'Birth Date is required.' }}
-                    render={({ field, fieldState }) => (
-                        <>
-                            <label htmlFor={field.name} className={classNames({ 'p-error': errors.birthdate })}>
-                                Birth Date*
-                            </label>
-                            <Calendar id={field.name} value={field.value} inputRef={field.ref} onChange={field.onChange} dateFormat="dd/mm/yy" className={classNames({ 'p-invalid': fieldState.error })} />
-                            {getFormErrorMessage(field.name)}
-                        </>
-                    )}
-                />
-            </div>
-            <Button label="Submit" type="submit" icon="pi pi-check" />
-        </form>
+        <div className="card flex justify-content-center">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
+                <div className="field">
+                    <Controller
+                        name="birthdate"
+                        control={form.control}
+                        rules={{ required: 'Birth Date is required.' }}
+                        render={({ field, fieldState }) => (
+                            <>
+                                <label htmlFor={field.name} className={classNames({ 'p-error': errors.birthdate })}>
+                                    Birth Date*
+                                </label>
+                                <Calendar id={field.name} value={field.value} inputRef={field.ref} onChange={field.onChange} dateFormat="dd/mm/yy" className={classNames({ 'p-invalid': fieldState.error })} />
+                                {getFormErrorMessage(field.name)}
+                            </>
+                        )}
+                    />
+                </div>
+                <Button label="Submit" type="submit" icon="pi pi-check" />
+            </form>
+        </div>
     )
 }
         `,
@@ -98,25 +100,27 @@ export default function InvalidDemo() {
     };
 
     return (
-        <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
-            <div className="field">
-                <Controller
-                    name="birthdate"
-                    control={form.control}
-                    rules={{ required: 'Birth Date is required.' }}
-                    render={({ field, fieldState }) => (
-                        <>
-                            <label htmlFor={field.name} className={classNames({ 'p-error': errors.birthdate })}>
-                                Birth Date*
-                            </label>
-                            <Calendar id={field.name} value={field.value} inputRef={field.ref} onChange={field.onChange} dateFormat="dd/mm/yy" className={classNames({ 'p-invalid': fieldState.error })} />
-                            {getFormErrorMessage(field.name)}
-                        </>
-                    )}
-                />
-            </div>
-            <Button label="Submit" type="submit" icon="pi pi-check" />
-        </form>
+        <div className="card flex justify-content-center">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
+                <div className="field">
+                    <Controller
+                        name="birthdate"
+                        control={form.control}
+                        rules={{ required: 'Birth Date is required.' }}
+                        render={({ field, fieldState }) => (
+                            <>
+                                <label htmlFor={field.name} className={classNames({ 'p-error': errors.birthdate })}>
+                                    Birth Date*
+                                </label>
+                                <Calendar id={field.name} value={field.value} inputRef={field.ref} onChange={field.onChange} dateFormat="dd/mm/yy" className={classNames({ 'p-invalid': fieldState.error })} />
+                                {getFormErrorMessage(field.name)}
+                            </>
+                        )}
+                    />
+                </div>
+                <Button label="Submit" type="submit" icon="pi pi-check" />
+            </form>
+        </div>
     )
 }
         `

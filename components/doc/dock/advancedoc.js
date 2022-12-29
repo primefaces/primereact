@@ -311,8 +311,8 @@ import { Galleria } from 'primereact/galleria';
 import { Toast } from 'primereact/toast';
 import { Tree } from 'primereact/tree';
 import { Menubar } from 'primereact/menubar';
-import { NodeService } from '../service/NodeService';
-import { PhotoService } from '../service/PhotoService';
+import { NodeService } from './service/NodeService';
+import { PhotoService } from './service/PhotoService';
 
 export default function AdvanceDoc() {
     const [displayTerminal, setDisplayTerminal] = useState(false);
@@ -612,8 +612,8 @@ import { Toast } from 'primereact/toast';
 import { Tree } from 'primereact/tree';
 import { Menubar } from 'primereact/menubar';
 import { MenuItem } from 'primereact/menuitem';
-import { NodeService } from '../service/NodeService';
-import { PhotoService } from '../service/PhotoService';
+import { NodeService } from './service/NodeService';
+import { PhotoService } from './service/PhotoService';
 
 export default function AdvanceDoc() {
     const [displayTerminal, setDisplayTerminal] = useState(false);

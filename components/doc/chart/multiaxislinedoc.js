@@ -178,7 +178,9 @@ export default function MultiAxisLineDoc() {
     }, []);
 
     return (
-        <Chart type="line" data={chartData} options={chartOptions} />
+        <div className="card">
+            <Chart type="line" data={chartData} options={chartOptions} />
+        </div>
     )
 }
         `,
@@ -270,7 +272,9 @@ export default function MultiAxisLineDoc() {
     }, []);
 
     return (
-        <Chart type="line" data={chartData} options={chartOptions} />
+        <div className="card">
+            <Chart type="line" data={chartData} options={chartOptions} />
+        </div>
     )
 }
         `
@@ -284,7 +288,7 @@ export default function MultiAxisLineDoc() {
             <div className="card">
                 <Chart type="line" data={chartData} options={chartOptions} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} dependencies={{ 'chart.js': '3.9.1' }} />
         </>
     );
 }

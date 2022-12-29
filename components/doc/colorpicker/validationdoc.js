@@ -54,25 +54,27 @@ export default function ValidationDemo() {
     };
 
     return (
-        <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
-            <div className="field">
-                <Controller
-                    name="color"
-                    control={form.control}
-                    rules={{ required: 'Color is required.' }}
-                    render={({ field, fieldState }) => (
-                        <>
-                            <label htmlFor={field.name} className={classNames({ 'p-error': errors.color })}>
-                                Color*
-                            </label>
-                            <ColorPicker id={field.name} {...field} inputRef={field.ref} className={classNames({ 'p-invalid': fieldState.error })} defaultColor="ffffff" />
-                            {getFormErrorMessage(field.name)}
-                        </>
-                    )}
-                />
-            </div>
-            <Button label="Submit" type="submit" icon="pi pi-check" />
-        </form>
+        <div className="card flex justify-content-center">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
+                <div className="field">
+                    <Controller
+                        name="color"
+                        control={form.control}
+                        rules={{ required: 'Color is required.' }}
+                        render={({ field, fieldState }) => (
+                            <>
+                                <label htmlFor={field.name} className={classNames({ 'p-error': errors.color })}>
+                                    Color*
+                                </label>
+                                <ColorPicker id={field.name} {...field} inputRef={field.ref} className={classNames({ 'p-invalid': fieldState.error })} defaultColor="ffffff" />
+                                {getFormErrorMessage(field.name)}
+                            </>
+                        )}
+                    />
+                </div>
+                <Button label="Submit" type="submit" icon="pi pi-check" />
+            </form>
+        </div>
     )
 }
         `,
@@ -98,25 +100,27 @@ export default function InvalidDemo() {
     };
 
     return (
-        <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
-            <div className="field">
-                <Controller
-                    name="color"
-                    control={form.control}
-                    rules={{ required: 'Color is required.' }}
-                    render={({ field, fieldState }) => (
-                        <>
-                            <label htmlFor={field.name} className={classNames({ 'p-error': errors.color })}>
-                                Color*
-                            </label>
-                            <ColorPicker id={field.name} {...field} inputRef={field.ref} className={classNames({ 'p-invalid': fieldState.error })} defaultColor="ffffff" />
-                            {getFormErrorMessage(field.name)}
-                        </>
-                    )}
-                />
-            </div>
-            <Button label="Submit" type="submit" icon="pi pi-check" />
-        </form>
+        <div className="card flex justify-content-center">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
+                <div className="field">
+                    <Controller
+                        name="color"
+                        control={form.control}
+                        rules={{ required: 'Color is required.' }}
+                        render={({ field, fieldState }) => (
+                            <>
+                                <label htmlFor={field.name} className={classNames({ 'p-error': errors.color })}>
+                                    Color*
+                                </label>
+                                <ColorPicker id={field.name} {...field} inputRef={field.ref} className={classNames({ 'p-invalid': fieldState.error })} defaultColor="ffffff" />
+                                {getFormErrorMessage(field.name)}
+                            </>
+                        )}
+                    />
+                </div>
+                <Button label="Submit" type="submit" icon="pi pi-check" />
+            </form>
+        </div>
     )
 }
         `

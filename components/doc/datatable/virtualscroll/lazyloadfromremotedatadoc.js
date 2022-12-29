@@ -58,7 +58,7 @@ import React, { useState } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Skeleton } from 'primereact/skeleton';
-import { CarService } from '../service/CarService';
+import { CarService } from './service/CarService';
 
 const LazyLoadingFromRemoteDataSourceDoc = () => {
     
@@ -116,7 +116,7 @@ import React, { useState } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Skeleton } from 'primereact/skeleton';
-import { CarService } from '../service/CarService';
+import { CarService } from './service/CarService';
 
 const LazyLoadingFromRemoteDataSourceDoc = () => {
     
@@ -196,7 +196,7 @@ const LazyLoadingFromRemoteDataSourceDoc = () => {
                     <Column field="color" header="Color" style={{ minWidth: '200px' }}></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CarService']} />
         </>
     );
 }

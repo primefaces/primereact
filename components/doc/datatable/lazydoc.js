@@ -134,7 +134,7 @@ export function LazyDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 const LazyDoc = () => {
 
@@ -259,7 +259,7 @@ const LazyDoc = () => {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 const LazyDoc = () => {
 
@@ -445,7 +445,7 @@ const LazyDoc = () => {
                     <Column field="representative.name" header="Representative" body={representativeBodyTemplate} filter filterPlaceholder="Search by representative" />
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );
 }

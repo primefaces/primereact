@@ -18,7 +18,9 @@ export default function ButtonBarDoc() {
     const [date, setDate] = useState(null);
 
     return (
-        <Calendar id="buttonbar" value={date} onChange={(e) => setDate(e.value)} showButtonBar />
+        <div className="card flex justify-content-center">
+            <Calendar id="buttonbar" value={date} onChange={(e) => setDate(e.value)} showButtonBar />
+        </div>
     )
 }
         `,
@@ -30,7 +32,9 @@ export default function ButtonBarDoc() {
     const [date, setDate] = useState<Date | null>(null);
 
     return (
-        <Calendar id="buttonbar" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} showButtonBar />
+        <div className="card flex justify-content-center">
+            <Calendar id="buttonbar" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} showButtonBar />
+        </div>
     )
 }
         `

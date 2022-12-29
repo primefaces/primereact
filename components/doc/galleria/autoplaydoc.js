@@ -45,7 +45,7 @@ export function AutoPlayDemoDoc(props) {
         javascript: `
 import React, { useState, useEffect, useRef } from 'react';
 import { Galleria } from 'primereact/galleria';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
 
 export default function AutoPlayDemoDoc() {
     const [images, setImages] = useState(null)
@@ -89,7 +89,7 @@ export default function AutoPlayDemoDoc() {
         typescript: `
 import React, { useState, useEffect, useRef } from 'react';
 import { Galleria } from 'primereact/galleria';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
 
 export default function AutoPlayDemoDoc() {
     const [images, setImages] = useState(null)

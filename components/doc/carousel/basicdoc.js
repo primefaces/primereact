@@ -62,7 +62,7 @@ export function BasicDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { Carousel } from 'primereact/carousel';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 export default function BasicDoc() {
     const [products, setProducts] = useState([]);
@@ -122,7 +122,7 @@ export default function BasicDoc() {
 import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { Carousel } from 'primereact/carousel';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 export default function BasicDoc() {
     const [products, setProducts] = useState([]);
@@ -204,7 +204,7 @@ export default function BasicDoc() {
             <div className="card">
                 <Carousel value={products} numVisible={3} numScroll={3} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} header={<h5>Basic</h5>} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

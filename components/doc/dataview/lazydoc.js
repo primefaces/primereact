@@ -131,7 +131,7 @@ export function LazyDataViewDoc(props) {
 import React, { useState, useEffect, useRef } from 'react';
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 import { Button } from 'primereact/button';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 import { Rating } from 'primereact/rating';
 import './DataViewDemo.css';
 
@@ -266,7 +266,7 @@ export default function LazyDataViewDoc() {
 import React, { useState, useEffect, useRef } from 'react';
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 import { Button } from 'primereact/button';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 import { Rating } from 'primereact/rating';
 import './DataViewDemo.css';
 

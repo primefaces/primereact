@@ -40,7 +40,7 @@ export function InsideContentDoc(props) {
         javascript: `
 import React, { useState, useEffect } from 'react';
 import { Galleria } from 'primereact/galleria';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
 
 export default function InsideContentDoc() {
     const [images, setImages] = useState(null);
@@ -81,7 +81,7 @@ export default function InsideContentDoc() {
         typescript: `
 import React, { useState, useEffect } from 'react';
 import { Galleria } from 'primereact/galleria';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
 
 export default function InsideContentDoc() {
     const [images, setImages] = useState(null);

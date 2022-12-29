@@ -44,7 +44,7 @@ export default function UsingConfirmDialogDoc() {
     }
 
     return (
-        <div>
+        <div className="card flex justify-content-center">
             <Toast ref={toast} />
             <ConfirmDialog />
             <ConfirmDialog visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?"
@@ -73,7 +73,7 @@ export default function UsingConfirmDialogDoc() {
     }
 
     return (
-        <div>
+        <div className="card flex justify-content-center">
             <Toast ref={toast} />
             <ConfirmDialog />
             <ConfirmDialog visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?"

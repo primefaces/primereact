@@ -54,7 +54,9 @@ export default function MinMaxDoc() {
     maxDate.setFullYear(nextYear);
 
     return (
-        <Calendar id="minmax" value={date} onChange={(e) => setDate(e.value)} minDate={minDate} maxDate={maxDate} readOnlyInput />
+        <div className="card flex justify-content-center">
+            <Calendar id="minmax" value={date} onChange={(e) => setDate(e.value)} minDate={minDate} maxDate={maxDate} readOnlyInput />
+        </div>
     )
 }
         `,
@@ -84,7 +86,9 @@ export default function MinMaxDoc() {
     maxDate.setFullYear(nextYear);
 
     return (
-        <Calendar id="minmax" value={date} onChange={(e: CalendarChangeParams) => setDate(e.value)} minDate={minDate} maxDate={maxDate} readOnlyInput />
+        <div className="card flex justify-content-center">
+            <Calendar id="minmax" value={date} onChange={(e: CalendarChangeParams) => setDate(e.value)} minDate={minDate} maxDate={maxDate} readOnlyInput />
+        </div>
     )
 }
         `

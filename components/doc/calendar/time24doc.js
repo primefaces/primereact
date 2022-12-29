@@ -19,7 +19,9 @@ export default function Time24Doc() {
     const [date, setDate] = useState(null);
 
     return (
-        <Calendar id="time24" value={date} onChange={(e) => setDate(e.value)} showTime showSeconds />
+        <div className="card flex justify-content-center">
+            <Calendar id="time24" value={date} onChange={(e) => setDate(e.value)} showTime showSeconds />
+        </div>
     )
 }
         `,
@@ -31,7 +33,9 @@ export default function Time24Doc() {
     const [date, setDate] = useState<Date | null>(null);
 
     return (
-        <Calendar id="time24" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} showTime showSeconds />
+        <div className="card flex justify-content-center">
+            <Calendar id="time24" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} showTime showSeconds />
+        </div>
     )
 }
         `

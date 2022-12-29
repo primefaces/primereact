@@ -33,7 +33,7 @@ import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 const PaginatorBasicDoc = () => {
     const [customers, setCustomers] = useState([]);
@@ -67,7 +67,7 @@ import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 const PaginatorBasicDoc = () => {
     const [customers, setCustomers] = useState([]);
@@ -143,7 +143,7 @@ const PaginatorBasicDoc = () => {
                     <Column field="representative.name" header="Representative" style={{ width: '25%' }}></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );
 }

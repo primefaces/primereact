@@ -162,7 +162,7 @@ import { Ripple } from 'primereact/ripple';
 import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import { classNames } from 'primereact/utils';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 const CustomPaginatorTemplateDoc = () => {
     const [customers1, setCustomers1] = useState([]);
@@ -317,7 +317,7 @@ import { Ripple } from 'primereact/ripple';
 import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import { classNames } from 'primereact/utils';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 const CustomPaginatorTemplateDoc = () => {
     const [customers1, setCustomers1] = useState([]);
@@ -508,7 +508,7 @@ const CustomPaginatorTemplateDoc = () => {
                     <Column field="representative.name" header="Representative" style={{ width: '25%' }}></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );
 }

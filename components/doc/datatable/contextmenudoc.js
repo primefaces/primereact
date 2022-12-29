@@ -61,7 +61,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ContextMenu } from 'primereact/contextmenu';
 import { Toast } from 'primereact/toast';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 const ContextMenuDoc = () => {
     const [products, setProducts] = useState([]);
@@ -124,7 +124,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ContextMenu } from 'primereact/contextmenu';
 import { Toast } from 'primereact/toast';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 const ContextMenuDoc = () => {
     const [products, setProducts] = useState([]);
@@ -215,7 +215,7 @@ const ContextMenuDoc = () => {
                     <Column field="price" header="Price" body={priceBodyTemplate} />
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

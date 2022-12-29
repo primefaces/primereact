@@ -139,7 +139,7 @@ import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { MultiSelect } from 'primereact/multiselect';
 import { Dropdown } from 'primereact/dropdown';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 const SessionStorageDoc = () => {
 
@@ -274,7 +274,7 @@ import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { MultiSelect } from 'primereact/multiselect';
 import { Dropdown } from 'primereact/dropdown';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 const SessionStorageDoc = () => {
 
@@ -463,7 +463,7 @@ const SessionStorageDoc = () => {
                     <Column field="status" header="Status" body={statusBodyTemplate} sortable filter filterElement={statusFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );
 }

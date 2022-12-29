@@ -200,7 +200,9 @@ export default function MultiAxisBarDoc() {
     }, []);
 
     return (
-        <Chart type="bar" data={chartData} options={chartOptions} />
+        <div className="card">
+            <Chart type="bar" data={chartData} options={chartOptions} />
+        </div>
     )
 }
         `,
@@ -303,7 +305,9 @@ export default function MultiAxisBarDoc() {
     }, []);
 
     return (
-        <Chart type="bar" data={chartData} options={chartOptions} />
+        <div className="card">
+            <Chart type="bar" data={chartData} options={chartOptions} />
+        </div>
     )
 }
         `
@@ -314,10 +318,10 @@ export default function MultiAxisBarDoc() {
             <DocSectionText {...props}>
                 <p>A bar chart or bar graph is a chart that presents grouped data with rectangular bars with lengths proportional to the values that they represent.</p>
             </DocSectionText>
-            <div className="card ">
+            <div className="card">
                 <Chart type="bar" data={chartData} options={chartOptions} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} dependencies={{ 'chart.js': '3.9.1' }} />
         </>
     );
 }

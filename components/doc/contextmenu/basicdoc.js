@@ -276,7 +276,7 @@ export default function BasicDoc() {
     ];
 
     return (
-        <div>
+        <div className="card flex justify-content-center">
             <ContextMenu model={items} ref={cm}></ContextMenu>
             <img src="images/nature/nature3.jpg" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="Logo" onContextMenu={(e) => cm.current.show(e)} />
         </div>
@@ -421,7 +421,7 @@ export default function BasicDoc() {
     ];
 
     return (
-        <div>
+        <div className="card flex justify-content-center">
             <ContextMenu model={items} ref={cm}></ContextMenu>
             <img src="images/nature/nature3.jpg" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="Logo" onContextMenu={(e) => cm.current.show(e)} />
         </div>

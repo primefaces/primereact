@@ -46,7 +46,7 @@ import { DeferredContent } from 'primereact/deferredcontent';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Toast } from 'primereact/toast';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 export default function DeferredContentDoc() {
     const toast = useRef(null);
@@ -89,7 +89,7 @@ import { DeferredContent } from 'primereact/deferredcontent';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Toast } from 'primereact/toast';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 export default function DeferredContentDoc() {
     const toast = useRef<Toast>(null);

@@ -79,7 +79,7 @@ import { ProgressBar } from 'primereact/progressbar';
 import { Calendar } from 'primereact/calendar';
 import { MultiSelect } from 'primereact/multiselect';
 import { Slider } from 'primereact/slider';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 import './DataTableDemo.css';
 
 const DataTableDemo = () => {
@@ -293,7 +293,7 @@ import { ProgressBar } from 'primereact/progressbar';
 import { Calendar } from 'primereact/calendar';
 import { MultiSelect } from 'primereact/multiselect';
 import { Slider } from 'primereact/slider';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 import './DataTableDemo.css';
 
 const DataTableDemo = () => {

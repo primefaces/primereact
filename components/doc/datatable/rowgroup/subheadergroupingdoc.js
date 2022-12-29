@@ -90,7 +90,7 @@ export function SubHeaderGroupingDoc(props) {
 import React, { useState, useEffect, useRef } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 import './DataTableDemo.css';
 
 const SubHeaderGroupingDoc = () => {
@@ -166,7 +166,7 @@ const SubHeaderGroupingDoc = () => {
 import React, { useState, useEffect, useRef } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 import './DataTableDemo.css';
 
 const SubHeaderGroupingDoc = () => {
@@ -304,7 +304,7 @@ const SubHeaderGroupingDoc = () => {
                     <Column field="date" header="Date" style={{ minWidth: '200px' }}></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );
 }

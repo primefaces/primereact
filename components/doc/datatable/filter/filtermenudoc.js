@@ -252,7 +252,7 @@ import { Calendar } from 'primereact/calendar';
 import { MultiSelect } from 'primereact/multiselect';
 import { Slider } from 'primereact/slider';
 import { TriStateCheckbox } from 'primereact/tristatecheckbox';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 import './DataTableDemo.css';
 
 const FilterMenuDoc = () => {
@@ -480,7 +480,7 @@ import { Calendar } from 'primereact/calendar';
 import { MultiSelect } from 'primereact/multiselect';
 import { Slider } from 'primereact/slider';
 import { TriStateCheckbox } from 'primereact/tristatecheckbox';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 import './DataTableDemo.css';
 
 const FilterMenuDoc = () => {
@@ -693,7 +693,8 @@ const FilterMenuDoc = () => {
     );
 }
         `,
-        css: `
+        extFiles: {
+            'DatatableDemo.css': `
 /* DataTableDemo.css */
 
 .datatable-filter-demo .p-paginator .p-paginator-current {
@@ -729,7 +730,8 @@ const FilterMenuDoc = () => {
 .datatable-filter-demo .p-datatable.p-datatable-customers .p-dropdown-label:not(.p-placeholder) {
     text-transform: uppercase;
 }
-        `,
+            `
+        },
         data: `
 /* CustomerService */ 
 {
@@ -804,7 +806,7 @@ const FilterMenuDoc = () => {
                     <Column field="verified" header="Verified" dataType="boolean" bodyClassName="text-center" style={{ minWidth: '8rem' }} body={verifiedBodyTemplate} filter filterElement={verifiedFilterTemplate} />
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );
 }

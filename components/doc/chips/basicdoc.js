@@ -18,7 +18,9 @@ export default function BasicDemo() {
     const [value, setValue] = useState([]);
 
     return (
-        <Chips value={value} onChange={(e) => setValue(e.value)} />
+        <div className="card p-fluid">
+            <Chips value={value} onChange={(e) => setValue(e.value)} />
+        </div>
     )
 }
         `,
@@ -30,7 +32,9 @@ export default function BasicDemo() {
     const [value, setValue] = useState<string[]>([]);
 
     return (
-        <Chips value={value} onChange={(e: ChipsChangeParams) => setValue(e.value)} />
+        <div className="card p-fluid">
+            <Chips value={value} onChange={(e: ChipsChangeParams) => setValue(e.value)} />
+        </div>
     )
 }
         `

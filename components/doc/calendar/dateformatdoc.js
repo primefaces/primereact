@@ -18,7 +18,9 @@ export default function DateFormatDoc() {
     const [date, setDate] = useState(null);
 
     return (
-        <Calendar id="basic" value={date} onChange={(e) => setDate(e.value)} dateFormat="mm-dd-yy" />
+        <div className="card flex justify-content-center">
+            <Calendar id="basic" value={date} onChange={(e) => setDate(e.value)} dateFormat="mm-dd-yy" />
+        </div>
     )
 }
         `,
@@ -30,7 +32,9 @@ export default function DateFormatDoc() {
     const [date, setDate] = useState<Date | null>(null);
 
     return (
-        <Calendar id="basic" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} dateFormat="mm-dd-yy" />
+        <div className="card flex justify-content-center">
+            <Calendar id="basic" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} dateFormat="mm-dd-yy" />
+        </div>
     )
 }
         `

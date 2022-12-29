@@ -32,7 +32,7 @@ export function DynamicDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 const DynamicDoc = () => {
     const [products, setProducts] = useState([]);
@@ -68,7 +68,7 @@ const DynamicDoc = () => {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 const DynamicDoc = () => {
     const [products, setProducts] = useState([]);
@@ -125,7 +125,7 @@ const DynamicDoc = () => {
                     {dynamicColumns}
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

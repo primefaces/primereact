@@ -43,7 +43,7 @@ import React, { useState, useEffect } from 'react';
 import { classNames } from 'primereact/utils';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
 const StyleDoc = () => {
@@ -91,7 +91,7 @@ import React, { useState, useEffect } from 'react';
 import { classNames } from 'primereact/utils';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
 const StyleDoc = () => {
@@ -165,7 +165,7 @@ const StyleDoc = () => {
                     <Column field="quantity" header="Quantity" body={stockBodyTemplate}></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

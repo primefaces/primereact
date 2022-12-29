@@ -20,7 +20,9 @@ export default function Time12Doc() {
     const [date, setDate] = useState(null);
 
     return (
-        <Calendar id="time12" value={date} onChange={(e) => setDate(e.value)} timeOnly hourFormat="12" />
+        <div className="card flex justify-content-center">
+            <Calendar id="time12" value={date} onChange={(e) => setDate(e.value)} timeOnly hourFormat="12" />
+        </div>
     )
 }
         `,
@@ -32,7 +34,9 @@ export default function Time12Doc() {
     const [date, setDate] = useState<Date | null>(null);
 
     return (
-        <Calendar id="time12" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} timeOnly hourFormat="12" />
+        <div className="card flex justify-content-center">
+            <Calendar id="time12" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} timeOnly hourFormat="12" />
+        </div>
     )
 }
         `

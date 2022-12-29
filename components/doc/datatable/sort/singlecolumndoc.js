@@ -34,7 +34,7 @@ export function SingleColumnDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 const SingleColumnDoc = () => {
     const [products, setProducts] = useState([]);
@@ -69,7 +69,7 @@ const SingleColumnDoc = () => {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 const SingleColumnDoc = () => {
     const [products, setProducts] = useState([]);
@@ -132,7 +132,7 @@ const SingleColumnDoc = () => {
                     <Column field="price" header="Price" body={priceBodyTemplate} sortable></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

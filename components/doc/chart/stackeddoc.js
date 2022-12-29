@@ -162,7 +162,9 @@ export default function StackedBarDoc() {
     }, []);
 
     return (
-        <Chart type="bar" data={chartData} options={chartOptions} />
+        <div className="card">
+            <Chart type="bar" data={chartData} options={chartOptions} />
+        </div>
     )
 }
         `,
@@ -246,7 +248,9 @@ export default function StackedBarDoc() {
     }, []);
 
     return (
-        <Chart type="bar" data={chartData} options={chartOptions} />
+        <div className="card">
+            <Chart type="bar" data={chartData} options={chartOptions} />
+        </div>
     )
 }
         `
@@ -260,7 +264,7 @@ export default function StackedBarDoc() {
             <div className="card ">
                 <Chart type="bar" data={chartData} options={chartOptions} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} dependencies={{ 'chart.js': '3.9.1' }} />
         </>
     );
 }

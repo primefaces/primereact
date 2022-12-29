@@ -18,7 +18,9 @@ export default function RangeDoc() {
     const [dates, setDates] = useState(null);
 
     return (
-        <Calendar id="range" value={dates} onChange={(e) => setDates(e.value)} selectionMode="range" readOnlyInput />
+        <div className="card flex justify-content-center">
+            <Calendar id="range" value={dates} onChange={(e) => setDates(e.value)} selectionMode="range" readOnlyInput />
+        </div>
     )
 }
         `,
@@ -30,7 +32,9 @@ export default function RangeDoc() {
     const [dates, setDates] = useState<Date | null>(null);
 
     return (
-        <Calendar id="range" value={dates} onChange={(e : CalendarChangeParams) => setDates(e.value)} selectionMode="range" readOnlyInput />
+        <div className="card flex justify-content-center">
+            <Calendar id="range" value={dates} onChange={(e : CalendarChangeParams) => setDates(e.value)} selectionMode="range" readOnlyInput />
+        </div>
 
     )
 }

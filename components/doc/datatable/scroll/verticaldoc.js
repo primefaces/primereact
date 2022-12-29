@@ -31,7 +31,7 @@ export function ScrollVerticalDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 const ScrollVerticalDoc = () => {
     const [customers, setCustomers] = useState([]);
@@ -63,7 +63,7 @@ const ScrollVerticalDoc = () => {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 const ScrollVerticalDoc = () => {
     const [customers, setCustomers] = useState([]);
@@ -128,7 +128,7 @@ const ScrollVerticalDoc = () => {
                     <Column field="status" header="Status" style={{ minWidth: '200px' }}></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );
 }

@@ -108,7 +108,7 @@ import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
 const ProgrammaticDoc = () => {
@@ -217,7 +217,7 @@ import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
 const ProgrammaticDoc = () => {
@@ -317,14 +317,16 @@ const ProgrammaticDoc = () => {
     );
 }
         `,
-        css: `
+        extFiles: {
+            'DatatableDemo.css': `
 /* DataTableDemo.css */
 
 .datatable-editing-demo .editable-cells-table td.p-cell-editing {
     padding-top: 0;
     padding-bottom: 0;
 }
-        `,
+            `
+        },
         data: `
 /* ProductService */        
 {
@@ -365,7 +367,7 @@ const ProgrammaticDoc = () => {
                     </DataTable>
                 </div>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

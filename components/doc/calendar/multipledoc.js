@@ -18,7 +18,9 @@ export default function MultipleDoc() {
     const [dates, setDates] = useState<Date(null);
 
     return (
-        <Calendar id="multiple" value={dates} onChange={(e) => setDates(e.value)} selectionMode="multiple" readOnlyInput />
+        <div className="card flex justify-content-center">
+            <Calendar id="multiple" value={dates} onChange={(e) => setDates(e.value)} selectionMode="multiple" readOnlyInput />
+        </div>
     )
 }
         `,
@@ -30,7 +32,9 @@ export default function MultipleDoc() {
     const [dates, setDates] = useState<Date | null>(null);
 
     return (
-        <Calendar id="multiple" value={dates} onChange={(e : CalendarChangeParams) => setDates(e.value)} selectionMode="multiple" readOnlyInput />
+        <div className="card flex justify-content-center">
+            <Calendar id="multiple" value={dates} onChange={(e : CalendarChangeParams) => setDates(e.value)} selectionMode="multiple" readOnlyInput />
+        </div>
     )
 }
         `

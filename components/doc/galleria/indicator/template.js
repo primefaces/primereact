@@ -45,7 +45,7 @@ export function IndicatorTemplateDoc(props) {
         javascript: `
 import React, { useState, useEffect } from 'react';
 import { Galleria } from 'primereact/galleria';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
 
 export default function IndicatorTemplateDoc() {
     const [images, setImages] = useState(null);
@@ -94,7 +94,7 @@ export default function IndicatorTemplateDoc() {
         typescript: `
 import React, { useState, useEffect } from 'react';
 import { Galleria } from 'primereact/galleria';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
 
 export default function IndicatorTemplateDoc() {
     const [images, setImages] = useState(null);

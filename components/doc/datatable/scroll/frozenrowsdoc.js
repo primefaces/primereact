@@ -80,7 +80,7 @@ import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 import './DataTableDemo.css';
 
 const ScrollFrozenRowsDoc = () => {
@@ -161,7 +161,7 @@ import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 import './DataTableDemo.css';
 
 const ScrollFrozenRowsDoc = () => {
@@ -285,7 +285,7 @@ const ScrollFrozenRowsDoc = () => {
                     <Column style={{ flex: '0 0 4rem' }} body={lockTemplate}></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );
 }

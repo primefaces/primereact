@@ -25,7 +25,7 @@ export function FlexScrollDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 const FlexScrollDoc = () => {
 
@@ -54,7 +54,7 @@ const FlexScrollDoc = () => {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 const FlexScrollDoc = () => {
 
@@ -117,7 +117,7 @@ const FlexScrollDoc = () => {
                     <Column field="status" header="Status"></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

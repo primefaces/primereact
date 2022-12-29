@@ -18,7 +18,9 @@ export default function MonthPickerDoc() {
     const [date, setDate] = useState(null);
 
     return (
-        <Calendar id="monthpicker" value={date} onChange={(e) => setDate(e.value)} view="month" dateFormat="mm/yy" />
+        <div className="card flex justify-content-center">
+            <Calendar id="monthpicker" value={date} onChange={(e) => setDate(e.value)} view="month" dateFormat="mm/yy" />
+        </div>
     )
 }
         `,
@@ -30,7 +32,9 @@ export default function MonthPickerDoc() {
     const [date, setDate] = useState<Date | null>(null);
 
     return (
-        <Calendar id="monthpicker" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} view="month" dateFormat="mm/yy" />
+        <div className="card flex justify-content-center">
+            <Calendar id="monthpicker" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} view="month" dateFormat="mm/yy" />
+        </div>
     )
 }
         `

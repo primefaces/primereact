@@ -23,7 +23,7 @@ import React from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Skeleton } from 'primereact/skeleton';
-import { CarService } from '../service/CarService';
+import { CarService } from './service/CarService';
 
 const PreloadedDataDoc = () => {
     
@@ -47,7 +47,7 @@ import React from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Skeleton } from 'primereact/skeleton';
-import { CarService } from '../service/CarService';
+import { CarService } from './service/CarService';
 
 const PreloadedDataDoc = () => {
     
@@ -93,7 +93,7 @@ const PreloadedDataDoc = () => {
                     <Column field="color" header="Color" style={{ minWidth: '200px' }}></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CarService']} />
         </>
     );
 }

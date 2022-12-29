@@ -50,7 +50,7 @@ export function WithoutThumbnailsDoc(props) {
 import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
 
 export default function WithoutThumbnailsDoc() {
     const [images, setImages] = useState(null);
@@ -98,7 +98,7 @@ export default function WithoutThumbnailsDoc() {
 import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
 
 export default function WithoutThumbnailsDoc() {
     const [images, setImages] = useState(null);

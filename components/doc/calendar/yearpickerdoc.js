@@ -18,7 +18,9 @@ export default function YearPickerDoc() {
     const [date, setDate] = useState(null);
 
     return (
-        <Calendar id="yearpicker" value={date} onChange={(e) => setDate(e.value)} view="year" dateFormat="yy" />
+        <div className="card flex justify-content-center">
+            <Calendar id="yearpicker" value={date} onChange={(e) => setDate(e.value)} view="year" dateFormat="yy" />
+        </div>
     )
 }
         `,
@@ -30,7 +32,9 @@ export default function YearPickerDoc() {
     const [date, setDate] = useState<Date | null>(null);
 
     return (
-        <Calendar id="yearpicker" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} view="year" dateFormat="yy" />
+        <div className="card flex justify-content-center">
+            <Calendar id="yearpicker" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} view="year" dateFormat="yy" />
+        </div>
     )
 }
         `

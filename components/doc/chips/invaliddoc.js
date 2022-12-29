@@ -13,7 +13,9 @@ import { Chips } from "primereact/chips";
 
 export default function InvalidDemo() {
     return (
-        <Chips className="p-invalid" />
+        <div className="card p-fluid">
+            <Chips className="p-invalid" />
+        </div>
     )
 }
         `,
@@ -23,7 +25,9 @@ import { Chips } from "primereact/chips";
 
 export default function InvalidDemo() {
     return (
-        <Chips className="p-invalid" />
+        <div className="card p-fluid">
+            <Chips className="p-invalid" />
+        </div>
     )
 }
         `

@@ -36,7 +36,9 @@ export default function DateTemplateDoc() {
     }
 
     return (
-        <Calendar id="datetemplate" value={date} onChange={(e) => setDate(e.value)} dateTemplate={dateTemplate} />
+        <div className="card flex justify-content-center">
+            <Calendar id="datetemplate" value={date} onChange={(e) => setDate(e.value)} dateTemplate={dateTemplate} />
+        </div>
     )
 }
         `,
@@ -58,7 +60,9 @@ export default function DateTemplateDoc() {
     }
 
     return (
-        <Calendar id="datetemplate" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} dateTemplate={dateTemplate} />
+        <div className="card flex justify-content-center">
+            <Calendar id="datetemplate" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} dateTemplate={dateTemplate} />
+        </div>
     )
 }
         `

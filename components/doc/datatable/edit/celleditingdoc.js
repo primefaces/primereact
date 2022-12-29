@@ -84,7 +84,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
 const CellEditingDoc = () => {
@@ -169,7 +169,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
 const CellEditingDoc = () => {
@@ -248,14 +248,16 @@ const CellEditingDoc = () => {
     );
 }
         `,
-        css: `
+        extFiles: {
+            'DatatableDemo.css': `
 /* DataTableDemo.css */
 
 .datatable-editing-demo .editable-cells-table td.p-cell-editing {
     padding-top: 0;
     padding-bottom: 0;
 }
-        `,
+            `
+        },
         data: `
 /* ProductService */        
 {
@@ -286,7 +288,7 @@ const CellEditingDoc = () => {
                     })}
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

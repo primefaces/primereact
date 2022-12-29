@@ -184,7 +184,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
 import { classNames } from 'primereact/utils';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
 import './GalleriaAdvancedDemo.css';
 
 export default function AdvancedDoc() {
@@ -365,7 +365,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
 import { classNames } from 'primereact/utils';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
 import './GalleriaAdvancedDemo.css';
 
 export default function AdvancedDoc() {

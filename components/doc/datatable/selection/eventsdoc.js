@@ -57,7 +57,7 @@ export function EventsDoc(props) {
 import React, { useEffect, useState } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 import { Toast } from 'primereact/toast';
 import './DataTableDemo.css';
 
@@ -103,7 +103,7 @@ const EventsDoc = () => {
 import React, { useEffect, useState } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 import { Toast } from 'primereact/toast';
 import './DataTableDemo.css';
 
@@ -219,7 +219,7 @@ const EventsDoc = () => {
                     <Column field="quantity" header="Quantity"></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

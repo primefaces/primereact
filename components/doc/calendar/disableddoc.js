@@ -23,7 +23,9 @@ export default function DisabledDoc() {
     const [date, setDate] = useState(null);
 
     return (
-        <Calendar id="disableddays" value={date} onChange={(e) => setDate(e.value)} disabledDates={invalidDates} disabledDays={[0, 6]} readOnlyInput />
+        <div className="card flex justify-content-center">
+            <Calendar id="disableddays" value={date} onChange={(e) => setDate(e.value)} disabledDates={invalidDates} disabledDays={[0, 6]} readOnlyInput />
+        </div>
     )
 }
         `,
@@ -35,7 +37,9 @@ export default function DisabledDoc() {
     const [date, setDate] = useState<Date | null>(null);
 
     return (
-        <Calendar id="disableddays" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} disabledDates={invalidDates} disabledDays={[0, 6]} readOnlyInput />
+        <div className="card flex justify-content-center">
+            <Calendar id="disableddays" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} disabledDates={invalidDates} disabledDays={[0, 6]} readOnlyInput />
+        </div>
     )
 }
         `

@@ -50,7 +50,7 @@ export function ResponsiveDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
 
 export default function ResponsiveDoc() {
     const [images, setImages] = useState(null);
@@ -100,7 +100,7 @@ export default function ResponsiveDoc() {
 import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
 
 export default function ResponsiveDoc() {
     const [images, setImages] = useState(null);

@@ -35,7 +35,9 @@ export default function TemplateDemo() {
     };
 
     return (
-        <Chips value={value} onChange={(e) => setValue(e.value)} itemTemplate={customChip} />
+        <div className="card p-fluid">
+            <Chips value={value} onChange={(e) => setValue(e.value)} itemTemplate={customChip} />
+        </div>
     )
 }
         `,
@@ -55,7 +57,9 @@ export default function TemplateDemo() {
     };
 
     return (
-        <Chips value={value} onChange={(e: ChipsChangeParams) => setValue(e.value)} itemTemplate={customChip} />
+        <div className="card p-fluid">
+            <Chips value={value} onChange={(e: ChipsChangeParams) => setValue(e.value)} itemTemplate={customChip} />
+        </div>
     )
 }
         `

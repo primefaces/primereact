@@ -108,7 +108,9 @@ export default function PolarAreaDoc() {
     }, []);
 
     return (
-        <Chart type="polarArea" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+        <div className="card flex justify-content-center">
+            <Chart type="polarArea" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+        </div>
     )
 }
         `,
@@ -165,7 +167,9 @@ export default function PolarAreaDoc() {
     }, []);
 
     return (
-        <Chart type="polarArea" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+        <div className="card flex justify-content-center">
+            <Chart type="polarArea" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+        </div>
     )
 }
         `
@@ -179,7 +183,7 @@ export default function PolarAreaDoc() {
             <div className="card flex justify-content-center">
                 <Chart type="polarArea" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} dependencies={{ 'chart.js': '3.9.1' }} />
         </>
     );
 }

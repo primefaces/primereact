@@ -60,7 +60,7 @@ export function ProgrammaticDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
 
 export default function ProgrammaticDoc() {
     const [images, setImages] = useState(null);
@@ -120,7 +120,7 @@ export default function ProgrammaticDoc() {
 import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
 
 export default function ProgrammaticDoc() {
     const [images, setImages] = useState(null);

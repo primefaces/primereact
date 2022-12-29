@@ -63,7 +63,7 @@ autoplayInterval={3000} itemTemplate={productTemplate} header={<h5>Circular, Aut
 import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { Carousel } from 'primereact/carousel';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 export default function CircularDoc() {
     const [products, setProducts] = useState([]);
@@ -124,7 +124,7 @@ export default function CircularDoc() {
 import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { Carousel } from 'primereact/carousel';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 export default function CircularDoc() {
     const [products, setProducts] = useState([]);
@@ -217,7 +217,7 @@ export default function CircularDoc() {
                     header={<h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>}
                 />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

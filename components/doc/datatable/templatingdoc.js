@@ -60,7 +60,7 @@ export function TemplatingDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 import { Button } from 'primereact/button';
 import { Rating } from 'primereact/rating';
 import './DataTableDemo.css';
@@ -120,7 +120,7 @@ const TemplatingDoc = () => {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 import { Button } from 'primereact/button';
 import { Rating } from 'primereact/rating';
 import './DataTableDemo.css';
@@ -223,7 +223,7 @@ const TemplatingDoc = () => {
                     <Column header="Status" body={statusBodyTemplate}></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

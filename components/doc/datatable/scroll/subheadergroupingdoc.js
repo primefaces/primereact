@@ -85,7 +85,7 @@ export function ScrollSubHeaderGroupingDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 const ScrollSubHeaderGroupingDoc = () => {
     const [customersGrouped, setCustomersGrouped] = useState(null);
@@ -157,7 +157,7 @@ const ScrollSubHeaderGroupingDoc = () => {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 const ScrollSubHeaderGroupingDoc = () => {
     const [customersGrouped, setCustomersGrouped] = useState(null);
@@ -274,7 +274,7 @@ const ScrollSubHeaderGroupingDoc = () => {
                     <Column field="date" header="Date" style={{ minWidth: '200px' }}></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );
 }

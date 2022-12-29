@@ -21,10 +21,12 @@ export default function FloatLabelDemo() {
     const [value, setValue] = useState([]);
 
     return (
-        <span className="p-float-label">
-            <Chips id="chips" value={value} onChange={(e) => setValue(e.value)} />
-            <label htmlFor="chips">Username</label>
-        </span>
+        <div className="card p-fluid">
+            <span className="p-float-label">
+                <Chips id="chips" value={value} onChange={(e) => setValue(e.value)} />
+                <label htmlFor="chips">Username</label>
+            </span>
+        </div>
     )
 }
         `,
@@ -36,10 +38,12 @@ export default function FloatLabelDemo() {
     const [value, setValue] = useState<string[]>([]);
 
     return (
-        <span className="p-float-label">
-            <Chips id="chips" value={value} onChange={(e: ChipsChangeParams) => setValue(e.value)} />
-            <label htmlFor="chips">Username</label>
-        </span>
+        <div className="card p-fluid">
+            <span className="p-float-label">
+                <Chips id="chips" value={value} onChange={(e: ChipsChangeParams) => setValue(e.value)} />
+                <label htmlFor="chips">Username</label>
+            </span>
+        </div>
     )
 }
         `

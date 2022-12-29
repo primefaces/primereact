@@ -63,7 +63,7 @@ export default function PositionDoc() {
     };
 
     return (
-        <div>
+        <div className="card">
             <Toast ref={toast} />
             <ConfirmDialog />
             <div className="col-12">
@@ -113,7 +113,7 @@ export default function PositionDoc() {
     };
 
     return (
-        <div>
+        <div className="card">
             <Toast ref={toast} />
             <ConfirmDialog />
             <div className="col-12">
@@ -146,7 +146,7 @@ export default function PositionDoc() {
                 </p>
             </DocSectionText>
 
-            <div className="card ">
+            <div className="card">
                 <div className="col-12">
                     <Button onClick={() => confirmPosition('left')} icon="pi pi-arrow-right" label="Left" className="p-button-help mr-2"></Button>
                     <Button onClick={() => confirmPosition('right')} icon="pi pi-arrow-left" label="Right" className="p-button-help"></Button>

@@ -19,7 +19,9 @@ export default function KeyFilterDemo() {
     const [value, setValue] = useState([]);
 
     return (
-        <Chips value={value} onChange={(e) => setValue(e.value)} keyfilter="int" />
+        <div className="card p-fluid">
+            <Chips value={value} onChange={(e) => setValue(e.value)} keyfilter="int" />
+        </div>
     )
 }
         `,
@@ -31,7 +33,9 @@ export default function KeyFilterDemo() {
     const [value, setValue] = useState<string[]>([]);
 
     return (
-        <Chips value={value} onChange={(e: ChipsChangeParams) => setValue(e.value)} keyfilter="int" />
+        <div className="card p-fluid">
+            <Chips value={value} onChange={(e: ChipsChangeParams) => setValue(e.value)} keyfilter="int" />
+        </div>
     )
 }
         `

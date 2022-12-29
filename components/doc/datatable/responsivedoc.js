@@ -55,7 +55,7 @@ import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Rating } from 'primereact/rating';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 const ScrollDoc = () => {
     const [products, setProducts] = useState([]);
@@ -92,7 +92,7 @@ import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Rating } from 'primereact/rating';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 const ScrollDoc = () => {
     const [products, setProducts] = useState([]);
@@ -173,7 +173,7 @@ const ScrollDoc = () => {
                     <Column field="rating" header="Rating" body={ratingTemplate} />
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

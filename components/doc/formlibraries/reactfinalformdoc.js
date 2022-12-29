@@ -163,7 +163,7 @@ import { Checkbox } from 'primereact/checkbox';
 import { Dialog } from 'primereact/dialog';
 import { Divider } from 'primereact/divider';
 import { classNames } from 'primereact/utils';
-import { CountryService } from '../service/CountryService';
+import { CountryService } from './service/CountryService';
 
 export default function ReactFinalFormDemo() {
     const [countries, setCountries] = useState([]);
@@ -317,7 +317,7 @@ import { Checkbox } from 'primereact/checkbox';
 import { Dialog } from 'primereact/dialog';
 import { Divider } from 'primereact/divider';
 import { classNames } from 'primereact/utils';
-import { CountryService } from '../service/CountryService';
+import { CountryService } from './service/CountryService';
 
 export default function ReactFinalFormDemo() {
     const [countries, setCountries] = useState([]);

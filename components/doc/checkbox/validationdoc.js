@@ -54,25 +54,27 @@ export default function ValidationDemo() {
     };
 
     return (
-        <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
-            <div className="field">
-                <Controller
-                    name="accept"
-                    control={form.control}
-                    rules={{ required: 'Accept is required.' }}
-                    render={({ field, fieldState }) => (
-                        <>
-                            <label htmlFor={field.name} className={classNames('mr-2',{ 'p-error': errors.accept })}>
-                                Accept*
-                            </label>
-                            <Checkbox inputId={field.name} value={field.value} onChange={field.onBlur} inputRef={field.ref} checked={field.value} className={classNames({ 'p-invalid': fieldState.error })} />
-                            {getFormErrorMessage(field.name)}
-                        </>
-                    )}
-                />
-            </div>
-            <Button label="Submit" type="submit" icon="pi pi-check" />
-        </form>
+        <div className="card flex justify-content-center">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
+                <div className="field">
+                    <Controller
+                        name="accept"
+                        control={form.control}
+                        rules={{ required: 'Accept is required.' }}
+                        render={({ field, fieldState }) => (
+                            <>
+                                <label htmlFor={field.name} className={classNames('mr-2',{ 'p-error': errors.accept })}>
+                                    Accept*
+                                </label>
+                                <Checkbox inputId={field.name} value={field.value} onChange={field.onBlur} inputRef={field.ref} checked={field.value} className={classNames({ 'p-invalid': fieldState.error })} />
+                                {getFormErrorMessage(field.name)}
+                            </>
+                        )}
+                    />
+                </div>
+                <Button label="Submit" type="submit" icon="pi pi-check" />
+            </form>
+        </div>
     )
 }
         `,
@@ -98,25 +100,27 @@ export default function InvalidDemo() {
     };
 
     return (
-        <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
-            <div className="field">
-                <Controller
-                    name="accept"
-                    control={form.control}
-                    rules={{ required: 'Accept is required.' }}
-                    render={({ field, fieldState }) => (
-                        <>
-                            <label htmlFor={field.name} className={classNames('mr-2',{ 'p-error': errors.accept })}>
-                                Accept*
-                            </label>
-                            <Checkbox inputId={field.name} value={field.value} onChange={field.onBlur} inputRef={field.ref} checked={field.value} className={classNames({ 'p-invalid': fieldState.error })} />
-                            {getFormErrorMessage(field.name)}
-                        </>
-                    )}
-                />
-            </div>
-            <Button label="Submit" type="submit" icon="pi pi-check" />
-        </form>
+        <div className="card flex justify-content-center">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
+                <div className="field">
+                    <Controller
+                        name="accept"
+                        control={form.control}
+                        rules={{ required: 'Accept is required.' }}
+                        render={({ field, fieldState }) => (
+                            <>
+                                <label htmlFor={field.name} className={classNames('mr-2',{ 'p-error': errors.accept })}>
+                                    Accept*
+                                </label>
+                                <Checkbox inputId={field.name} value={field.value} onChange={field.onBlur} inputRef={field.ref} checked={field.value} className={classNames({ 'p-invalid': fieldState.error })} />
+                                {getFormErrorMessage(field.name)}
+                            </>
+                        )}
+                    />
+                </div>
+                <Button label="Submit" type="submit" icon="pi pi-check" />
+            </form>
+        </div>
     )
 }
         `
@@ -153,7 +157,7 @@ export default function InvalidDemo() {
                 </div>
             </div>
 
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} dependencies={{ 'react-hook-form': '^7.39.4' }} />
         </>
     );
 }

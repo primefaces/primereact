@@ -193,7 +193,9 @@ export default function TemplatingDoc() {
     }
 
     return (
-        <CascadeSelect value={selectedCity} options={countries} optionLabel={"cname"} optionGroupLabel={"name"} optionGroupChildren={['states', 'cities']} style={{minWidth: '14rem'}} placeholder={"Select a City"} onChange={event => setSelectedCity(event.value)} itemTemplate={countryOptionTemplate}/>
+        <div className="card flex justify-content-center">
+            <CascadeSelect value={selectedCity} options={countries} optionLabel={"cname"} optionGroupLabel={"name"} optionGroupChildren={['states', 'cities']} style={{minWidth: '14rem'}} placeholder={"Select a City"} onChange={event => setSelectedCity(event.value)} itemTemplate={countryOptionTemplate}/>
+        </div>
     )
 }
         `,
@@ -292,7 +294,9 @@ export default function TemplatingDoc() {
         );
     }
     return (
-        <CascadeSelect value={selectedCity} options={countries} optionLabel={"cname"} optionGroupLabel={"name"} optionGroupChildren={['states', 'cities']} style={{minWidth: '14rem'}} placeholder={"Select a City"} onChange={event =>  setSelectedCity(event.value)}  itemTemplate={countryOptionTemplate}/>
+        <div className="card flex justify-content-center">
+            <CascadeSelect value={selectedCity} options={countries} optionLabel={"cname"} optionGroupLabel={"name"} optionGroupChildren={['states', 'cities']} style={{minWidth: '14rem'}} placeholder={"Select a City"} onChange={event =>  setSelectedCity(event.value)}  itemTemplate={countryOptionTemplate}/>
+        </div>
     )
 }
         `

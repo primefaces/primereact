@@ -13,7 +13,9 @@ import { Checkbox } from "primereact/checkbox";
 
 export default function DisabledDemo() {
     return (
-        <Checkbox checked disabled></Checkbox>
+        <div className="card flex justify-content-center">
+            <Checkbox checked disabled></Checkbox>
+        </div>
     )
 }
         `,
@@ -23,7 +25,9 @@ import { Checkbox } from "primereact/checkbox";
 
 export default function DisabledDemo() {
     return (
-        <Checkbox checked disabled></Checkbox>
+        <div className="card flex justify-content-center">
+            <Checkbox checked disabled></Checkbox>
+        </div>
     )
 }
         `

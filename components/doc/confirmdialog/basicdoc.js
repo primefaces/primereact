@@ -81,7 +81,7 @@ const reject = () => {
     };
 
     return (
-        <div>
+        <div className="card flex justify-content-center">
             <Toast ref={toast} />
             <ConfirmDialog />
             <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
@@ -128,7 +128,7 @@ const reject = () => {
     };
 
     return (
-        <div>
+        <div className="card flex justify-content-center">
             <Toast ref={toast} />
             <ConfirmDialog />
             <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>

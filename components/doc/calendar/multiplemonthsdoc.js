@@ -18,7 +18,9 @@ export default function MultipleMonthsDoc() {
     const [date, setDate] = useState(null);
 
     return (
-        <Calendar id="multiplemonths" value={date} onChange={(e) => setDate(e.value)} numberOfMonths={3}/>
+        <div className="card flex justify-content-center">
+            <Calendar id="multiplemonths" value={date} onChange={(e) => setDate(e.value)} numberOfMonths={3}/>
+        </div>
     )
 }
         `,
@@ -30,7 +32,9 @@ export default function MultipleMonthsDoc() {
     const [date, setDate] = useState<Date | null>(null);
 
     return (
-        <Calendar id="multiplemonths" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} numberOfMonths={3}/>
+        <div className="card flex justify-content-center">
+            <Calendar id="multiplemonths" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} numberOfMonths={3}/>
+        </div>
     )
 }
         `

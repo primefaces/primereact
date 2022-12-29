@@ -62,7 +62,7 @@ export function NumScrollDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { Carousel } from 'primereact/carousel';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 export default function NumScrollDoc() {
     const [products, setProducts] = useState([]);
@@ -122,7 +122,7 @@ export default function NumScrollDoc() {
 import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { Carousel } from 'primereact/carousel';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 export default function NumScrollDoc() {
     const [products, setProducts] = useState([]);
@@ -204,7 +204,7 @@ export default function NumScrollDoc() {
             <div className="card">
                 <Carousel value={products} numScroll={2} numVisible={3} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} header={<h5>Responsive Options</h5>} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

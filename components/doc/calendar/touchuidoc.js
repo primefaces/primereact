@@ -18,7 +18,9 @@ export default function TouchUIDoc() {
     const [date, setDate] = useState(null);
 
     return (
-        <Calendar id="touchUI" value={date} onChange={(e) => setDate(e.value)} touchUI />
+        <div className="card flex justify-content-center">
+            <Calendar id="touchUI" value={date} onChange={(e) => setDate(e.value)} touchUI />
+        </div>
     )
 }
         `,
@@ -30,7 +32,9 @@ export default function TouchUIDoc() {
     const [date, setDate] = useState<Date | null>(null);
 
     return (
-        <Calendar id="touchUI" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} touchUI />
+        <div className="card flex justify-content-center">
+            <Calendar id="touchUI" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} touchUI />
+        </div>
     )
 }
         `

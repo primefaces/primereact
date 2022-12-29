@@ -96,7 +96,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { Tooltip } from 'primereact/tooltip';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 export const ExportDoc = () => {
     const [products, setProducts] = useState([]);
@@ -193,7 +193,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { Tooltip } from 'primereact/tooltip';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 export const ExportDoc = () => {
     const [products, setProducts] = useState([]);
@@ -323,7 +323,7 @@ echo '<p>Fake Upload Process</p>'; ?>
                     ))}
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

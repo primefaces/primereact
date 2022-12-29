@@ -46,7 +46,7 @@ export function SizeDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 const ${selectedOption.label}TableDemo = () => {
     const [products, setProducts] = useState([]);
@@ -72,7 +72,7 @@ const ${selectedOption.label}TableDemo = () => {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 const ${selectedOption.label}TableDemo = () => {
     const [products, setProducts] = useState([]);
@@ -141,7 +141,7 @@ const ${selectedOption.label}TableDemo = () => {
                     <Column field="quantity" header="Quantity"></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

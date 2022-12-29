@@ -39,7 +39,7 @@ export function ScrollHorizontalAndVerticalWithFooterDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 const ScrollHorizontalAndVerticalWithFooterDoc = () => {
     const [customers, setCustomers] = useState([]);
@@ -79,7 +79,7 @@ const ScrollHorizontalAndVerticalWithFooterDoc = () => {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 const ScrollHorizontalAndVerticalWithFooterDoc = () => {
     const [customers, setCustomers] = useState([]);
@@ -157,7 +157,7 @@ const ScrollHorizontalAndVerticalWithFooterDoc = () => {
                     <Column field="representative.name" header="Representative" footer="Representative" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );
 }

@@ -44,7 +44,7 @@ export function ReorderDoc(props) {
 import React, { useState, useEffect, useRef } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 import { Toast } from 'primereact/toast';
 
 const ReorderDoc = () => {
@@ -94,7 +94,7 @@ const ReorderDoc = () => {
 import React, { useState, useEffect, useRef } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 import { Toast } from 'primereact/toast';
 
 const ReorderDoc = () => {
@@ -170,7 +170,7 @@ const ReorderDoc = () => {
                     {dynamicColumns}
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

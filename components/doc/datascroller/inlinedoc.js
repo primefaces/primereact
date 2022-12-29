@@ -42,7 +42,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { Rating } from 'primereact/rating';
 import { DataScroller } from 'primereact/datascroller';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 export default function InlineDataScrollerDoc() {
     const [products, setProducts] = useState([]);
@@ -72,7 +72,9 @@ export default function InlineDataScrollerDoc() {
     }    
 
     return (
-        <DataScroller value={products} itemTemplate={itemTemplate} rows={5} inline scrollHeight="500px" header="Scroll Down to Load More" />
+        <div className="card">
+            <DataScroller value={products} itemTemplate={itemTemplate} rows={5} inline scrollHeight="500px" header="Scroll Down to Load More" />
+        </div>
     )
 }
         `,
@@ -81,7 +83,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { Rating } from 'primereact/rating';
 import { DataScroller } from 'primereact/datascroller';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 export default function InlineDataScrollerDoc() {
     const [products, setProducts] = useState([]);
@@ -111,7 +113,9 @@ export default function InlineDataScrollerDoc() {
     }  
 
     return (
-        <DataScroller value={products} itemTemplate={itemTemplate} rows={5} inline scrollHeight="500px" header="Scroll Down to Load More" />
+        <div className="card">
+            <DataScroller value={products} itemTemplate={itemTemplate} rows={5} inline scrollHeight="500px" header="Scroll Down to Load More" />
+        </div>
     )
 }
         `,
@@ -141,7 +145,7 @@ export default function InlineDataScrollerDoc() {
             <div className="card">
                 <DataScroller value={products} itemTemplate={itemTemplate} rows={5} inline scrollHeight="500px" header="Scroll Down to Load More" />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

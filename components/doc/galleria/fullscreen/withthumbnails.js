@@ -53,7 +53,7 @@ export function WithThumbnailsDoc(props) {
 import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
 
 export default function WithThumbnailsDoc() {
     const [images, setImages] = useState(null);
@@ -103,7 +103,7 @@ export default function WithThumbnailsDoc() {
 import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
 
 export default function WithThumbnailsDoc() {
     const [images, setImages] = useState(null);

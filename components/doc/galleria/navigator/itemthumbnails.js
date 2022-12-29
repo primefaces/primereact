@@ -45,7 +45,7 @@ export function ItemThumbnailsDoc(props) {
         javascript: `
 import React, { useState, useEffect } from 'react';
 import { Galleria } from 'primereact/galleria';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
 
 export default function ItemThumbnailsDoc() {
     const [images, setImages] = useState(null)
@@ -90,7 +90,7 @@ const thumbnailTemplate = (item) => {
         typescript: `
 import React, { useState, useEffect } from 'react';
 import { Galleria } from 'primereact/galleria';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
 
 export default function ItemThumbnailsDoc() {
     const [images, setImages] = useState(null)

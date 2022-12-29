@@ -121,18 +121,12 @@ import { Button } from 'primereact/button';
 import { FileUpload } from 'primereact/fileupload';
 import { Tooltip } from 'primereact/tooltip';
 import { Toast } from 'primereact/toast';
-import { ProductService } from '../service/ProductService';
 
 export const ExportImportDoc = () => {
     const [importedData, setImportedData] = useState([]);
     const [selectedImportedData, setSelectedImportedData] = useState([]);
     const [importedCols, setImportedCols] = useState([{ field: '', header: 'Header' }]);
-    const toast = useRef(null);
-    
-
-    useEffect(() => {
-        ProductService.getProductsSmall().then(data => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    const toast = useRef(null);    
 
     const importCSV = (e) => {
         const file = e.files[0];
@@ -237,18 +231,12 @@ import { Button } from 'primereact/button';
 import { FileUpload } from 'primereact/fileupload';
 import { Tooltip } from 'primereact/tooltip';
 import { Toast } from 'primereact/toast';
-import { ProductService } from '../service/ProductService';
 
 export const ExportImportDoc = () => {
     const [importedData, setImportedData] = useState([]);
     const [selectedImportedData, setSelectedImportedData] = useState([]);
     const [importedCols, setImportedCols] = useState([{ field: '', header: 'Header' }]);
     const toast = useRef(null);
-    
-
-    useEffect(() => {
-        ProductService.getProductsSmall().then(data => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const importCSV = (e) => {
         const file = e.files[0];
@@ -351,22 +339,6 @@ export const ExportImportDoc = () => {
 <?php
 header ("Access-Control-Allow-Origin: *");
 echo '<p>Fake Upload Process</p>'; ?>
-        `,
-        data: `
-/* ProductService */        
-{
-    id: '1000',
-    code: 'f230fh0g3',
-    name: 'Bamboo Watch',
-    description: 'Product Description',
-    image: 'bamboo-watch.jpg',
-    price: 65,
-    category: 'Accessories',
-    quantity: 24,
-    inventoryStatus: 'INSTOCK',
-    rating: 5
-},
-...
         `
     };
 

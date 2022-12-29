@@ -183,7 +183,7 @@ import { Calendar } from 'primereact/calendar';
 import { MultiSelect } from 'primereact/multiselect';
 import { Slider } from 'primereact/slider';
 import { TriStateCheckbox } from 'primereact/tristatecheckbox';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 import './DataTableDemo.css';
 
 const FilterRowDoc = () => {
@@ -337,7 +337,7 @@ import { Calendar } from 'primereact/calendar';
 import { MultiSelect } from 'primereact/multiselect';
 import { Slider } from 'primereact/slider';
 import { TriStateCheckbox } from 'primereact/tristatecheckbox';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 import './DataTableDemo.css';
 
 const FilterRowDoc = () => {
@@ -476,7 +476,8 @@ const FilterRowDoc = () => {
     );
 }
         `,
-        css: `
+        extFiles: {
+            'DatatableDemo.css': `
 /* DataTableDemo.css */
 
 .datatable-filter-demo .p-paginator .p-paginator-current {
@@ -512,7 +513,8 @@ const FilterRowDoc = () => {
 .datatable-filter-demo .p-datatable.p-datatable-customers .p-dropdown-label:not(.p-placeholder) {
     text-transform: uppercase;
 }
-        `,
+        `
+        },
         data: `
 /* CustomerService */ 
 {
@@ -573,7 +575,7 @@ const FilterRowDoc = () => {
                     <Column field="verified" header="Verified" dataType="boolean" style={{ minWidth: '6rem' }} body={verifiedBodyTemplate} filter filterElement={verifiedRowFilterTemplate} />
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );
 }

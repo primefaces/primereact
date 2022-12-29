@@ -19,7 +19,9 @@ export default function BasicDemo() {
     const [color, setColor] = useState('6466f1');
 
     return (
-        <ColorPicker format="rgb" value={color} onChange={(e) => setColor(e.value)} />
+        <div className="card flex justify-content-center">
+            <ColorPicker format="rgb" value={color} onChange={(e) => setColor(e.value)} />
+        </div>
     )
 }
         `,
@@ -31,7 +33,9 @@ export default function BasicDemo() {
     const [color, setColor] = useState<string>('6466f1');
 
     return (
-        <ColorPicker format="rgb" value={color} onChange={(e: ColorPickerChangeParams) => setColor(e.value)} />
+        <div className="card flex justify-content-center">
+            <ColorPicker format="rgb" value={color} onChange={(e: ColorPickerChangeParams) => setColor(e.value)} />
+        </div>
     )
 }
         `

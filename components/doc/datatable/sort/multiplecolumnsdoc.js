@@ -34,7 +34,7 @@ export function MultipleColumnsDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 const MultipleColumnsDoc = () => {
     const [products, setProducts] = useState([]);
@@ -70,7 +70,7 @@ const MultipleColumnsDoc = () => {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 const MultipleColumnsDoc = () => {
     const [products, setProducts] = useState([]);
@@ -134,7 +134,7 @@ const MultipleColumnsDoc = () => {
                     <Column field="price" header="Price" body={priceBodyTemplate} sortable></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

@@ -79,7 +79,7 @@ export function ApiDoc(props) {
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
 export const TreeTableDemo = () => {
 

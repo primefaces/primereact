@@ -19,7 +19,9 @@ export default function InlineDoc() {
     const [date, setDate] = useState(null);
 
     return (
-        <Calendar value={date} onChange={(e) => setDate(e.value)} inline showWeek />
+        <div className="card flex justify-content-center">
+            <Calendar value={date} onChange={(e) => setDate(e.value)} inline showWeek />
+        </div>
 
     )
 }
@@ -32,7 +34,9 @@ export default function InlineDoc() {
     const [date, setDate] = useState<Date | null>(null);
 
     return (
-        <Calendar value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} inline showWeek />
+        <div className="card flex justify-content-center">
+            <Calendar value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} inline showWeek />
+        </div>
     )
 }
         `

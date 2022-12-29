@@ -18,7 +18,9 @@ export default function BasicDoc() {
     const [checked, setChecked] = useState(false);
 
     return (
-        <Checkbox onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
+        <div className="card flex justify-content-center">
+            <Checkbox onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
+        </div>
     )
 }
         `,
@@ -30,7 +32,9 @@ export default function BasicDoc() {
     const [checked, setChecked] = useState<boolean>(false);
 
     return (
-        <Checkbox onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
+        <div className="card flex justify-content-center">
+            <Checkbox onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
+        </div>
     )
 }
         `

@@ -18,7 +18,9 @@ export default function IconDoc() {
     const [date, setDate] = useState(null);
 
     return (
-        <Calendar id="icon" value={date} onChange={(e) => setDate(e.value)} showIcon />
+        <div className="card flex justify-content-center">
+            <Calendar id="icon" value={date} onChange={(e) => setDate(e.value)} showIcon />
+        </div>
     )
 }
         `,
@@ -30,7 +32,9 @@ export default function IconDoc() {
     const [date, setDate] = useState<Date | null>(null);
 
     return (
-        <Calendar id="icon" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} showIcon />
+        <div className="card flex justify-content-center">
+            <Calendar id="icon" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} showIcon />
+        </div>
     )
 }
         `
