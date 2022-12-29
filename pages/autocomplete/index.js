@@ -2,14 +2,18 @@ import Head from 'next/head';
 import React from 'react';
 import { ApiDoc } from '../../components/doc/autocomplete/apidoc';
 import { BasicDoc } from '../../components/doc/autocomplete/basicdoc';
+import { DisabledDoc } from '../../components/doc/autocomplete/disableddoc';
 import { DropdownDoc } from '../../components/doc/autocomplete/dropdowndoc';
+import { FloatlabelDoc } from '../../components/doc/autocomplete/floatlabeldoc';
 import { ForceSelectionDoc } from '../../components/doc/autocomplete/forceselectiondoc';
 import { GroupDoc } from '../../components/doc/autocomplete/groupdoc';
 import { ImportDoc } from '../../components/doc/autocomplete/importdoc';
+import { InvalidStateDoc } from '../../components/doc/autocomplete/invalidstatedoc';
 import { MultipleDoc } from '../../components/doc/autocomplete/multipledoc';
 import { ObjectsDoc } from '../../components/doc/autocomplete/objectsdoc';
 import { TemplateDoc } from '../../components/doc/autocomplete/templatedoc';
-import { ValidationDoc } from '../../components/doc/autocomplete/validationdoc';
+import { FormikDoc } from '../../components/doc/autocomplete/validation/formikdoc';
+import { HookFormDoc, ValidationDoc } from '../../components/doc/autocomplete/validation/hookformdoc';
 import { VirtualScrollDoc } from '../../components/doc/autocomplete/virtualscrolldoc';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
@@ -25,6 +29,21 @@ const AutoCompleteDemo = () => {
             id: 'basic',
             label: 'Basic',
             component: BasicDoc
+        },
+        {
+            id: 'floatlabel',
+            label: 'Float Label',
+            component: FloatlabelDoc
+        },
+        {
+            id: 'invalidstate',
+            label: 'Invalid State',
+            component: InvalidStateDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
         },
         {
             id: 'dropdown',
@@ -64,7 +83,19 @@ const AutoCompleteDemo = () => {
         {
             id: 'validation',
             label: 'Validation',
-            component: ValidationDoc
+            description: 'ToDo',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
         },
         {
             id: 'api',

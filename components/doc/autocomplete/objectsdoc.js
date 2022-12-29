@@ -46,6 +46,7 @@ export function ObjectsDoc(props) {
         javascript: `
 import React, { useEffect, useState } from 'react';
 import { AutoComplete } from "primereact/autocomplete";
+import { CountryService } from './service/CountryService';
 
 export default function ObjectDemo() {
     const [countries, setCountries] = useState([]);
@@ -92,6 +93,7 @@ export default function ObjectDemo() {
         typescript: `
 import React, { useEffect, useState } from 'react';
 import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
+import { CountryService } from './service/CountryService';
 
 interface Country {
     name: string;
@@ -160,7 +162,7 @@ export default function ObjectDemo() {
             <div className="card flex justify-content-center">
                 <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CountryService']} />
         </>
     );
 }

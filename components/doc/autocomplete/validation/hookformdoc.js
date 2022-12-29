@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { AutoComplete } from '../../lib/autocomplete/AutoComplete';
-import { Button } from '../../lib/button/Button';
-import { classNames } from '../../lib/utils/Utils';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { AutoComplete } from '../../../lib/autocomplete/AutoComplete';
+import { Button } from '../../../lib/button/Button';
+import { classNames } from '../../../lib/utils/Utils';
+import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
-export function ValidationDoc(props) {
+export function HookFormDoc(props) {
     const [formData, setFormData] = useState({});
     const [items, setItems] = useState([]);
     const defaultValues = { search: '' };
@@ -27,10 +27,10 @@ export function ValidationDoc(props) {
 
     const code = {
         basic: `
-<Controller name="search"  control={form.control} rules={{ required: 'Search is required.'}}
+<Controller name="value"  control={form.control} rules={{ required: 'Value is required.'}}
     render={({ field, fieldState }) => (
         <>
-            <label htmlFor={field.name} className={classNames({ 'p-error': errors.name })}>Search*</label>
+            <label htmlFor={field.name} className={classNames({ 'p-error': errors.name })}>Value</label>
             <AutoComplete id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': fieldState.error })} />
             {getFormErrorMessage(field.name)}
         </>
@@ -44,7 +44,7 @@ import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
 import { AutoComplete } from "primereact/autocomplete";
 
-export default function ValidationDemo() {
+export default function HookFormDoc() {
     const [formData, setFormData] = useState({});
     const [items, setItems] = useState([]);
     const defaultValues = { search: '' };
@@ -67,13 +67,13 @@ export default function ValidationDemo() {
         <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
             <div className="field">
                 <Controller
-                    name="search"
+                    name="value"
                     control={form.control}
-                    rules={{ required: 'Search is required.' }}
+                    rules={{ required: 'Value is required.' }}
                     render={({ field, fieldState }) => (
                         <>
                             <label htmlFor={field.name} className={classNames({ 'p-error': errors.search })}>
-                                Search*
+                                Value
                             </label>
                             <AutoComplete id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': fieldState.error })} />
                             {getFormErrorMessage(field.name)}
@@ -93,7 +93,7 @@ import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
 import { AutoComplete } from "primereact/autocomplete";
 
-export default function InvalidDemo() {
+export default function HookFormDoc() {
     const [formData, setFormData] = useState<any>({});
     const [items, setItems] = useState<any[]>([]);
     const defaultValues = { search: '' };
@@ -116,13 +116,13 @@ export default function InvalidDemo() {
         <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
             <div className="field">
                 <Controller
-                    name="search"
+                    name="value"
                     control={form.control}
-                    rules={{ required: 'Search is required.' }}
+                    rules={{ required: 'Value is required.' }}
                     render={({ field, fieldState }) => (
                         <>
                             <label htmlFor={field.name} className={classNames({ 'p-error': errors.search })}>
-                                Search*
+                                Value
                             </label>
                             <AutoComplete id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': fieldState.error })} />
                             {getFormErrorMessage(field.name)}
@@ -149,13 +149,13 @@ export default function InvalidDemo() {
                     <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
                         <div className="field">
                             <Controller
-                                name="search"
+                                name="value"
                                 control={form.control}
-                                rules={{ required: 'Search is required.' }}
+                                rules={{ required: 'Value is required.' }}
                                 render={({ field, fieldState }) => (
                                     <>
                                         <label htmlFor={field.name} className={classNames({ 'p-error': errors.search })}>
-                                            Search*
+                                            Value
                                         </label>
                                         <AutoComplete id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': fieldState.error })} />
                                         {getFormErrorMessage(field.name)}
@@ -167,7 +167,7 @@ export default function InvalidDemo() {
                     </form>
                 </div>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} dependencies={{ 'react-hook-form': '^7.39.4' }} />
         </>
     );
 }
