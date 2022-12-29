@@ -365,20 +365,16 @@ export const InputMask = React.memo(
             }
 
             focus.current = true;
-
-            clearTimeout(caretTimeoutId.current);
-            let pos;
-
             focusText.current = elementRef.current.value;
 
-            pos = checkVal();
+            clearTimeout(caretTimeoutId.current);
+
+            let pos = checkVal();
 
             caretTimeoutId.current = setTimeout(() => {
                 if (elementRef.current !== document.activeElement) {
                     return;
                 }
-
-                writeBuffer();
 
                 if (pos === props.mask.replace('?', '').length) {
                     caret(0, pos);
