@@ -73,7 +73,6 @@ import { PhotoService } from './service/PhotoService';
 
 export default function ThumbnailDoc() {
     const [images, setImages] = useState(null);
-    
 
     const responsiveOptions = [
         {
@@ -118,7 +117,6 @@ import { PhotoService } from './service/PhotoService';
 export default function ThumbnailDoc() {
     const [images, setImages] = useState(null);
     
-
     const responsiveOptions = [
         {
             breakpoint: '1024px',
@@ -190,7 +188,7 @@ export default function ThumbnailDoc() {
                 </div>
                 <Galleria style={{ maxWidth: '640px' }} value={images} responsiveOptions={responsiveOptions} numVisible={5} item={itemTemplate} thumbnailsPosition={selectedOptionValue} thumbnail={thumbnailTemplate} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['PhotoService']} />
         </>
     );
 }

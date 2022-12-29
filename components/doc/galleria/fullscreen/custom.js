@@ -238,7 +238,7 @@ export default function CustomContentDoc() {
                         })}
                 </div>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['PhotoService']} />
         </>
     );
 }

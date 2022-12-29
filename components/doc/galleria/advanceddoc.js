@@ -542,7 +542,8 @@ export default function AdvancedDoc() {
 }
         `,
 
-        css: `
+        extFiles: {
+            'GalleriaAdvancedDemo.css': `
 /* GalleriaAdvancedDemo.css */
 
 .galleria-demo {
@@ -620,7 +621,8 @@ export default function AdvancedDoc() {
         }
     }
 }
-    `,
+    `
+        },
         data: `
 /* PhotoService */
 {
@@ -659,7 +661,7 @@ export default function AdvancedDoc() {
                     className={galleriaClassName}
                 />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['PhotoService']} />
         </>
     );
 }

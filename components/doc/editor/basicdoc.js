@@ -15,7 +15,7 @@ import React, { useState } from "react";
 import { Editor } from "primereact/editor";
 
 export default function BasicDemo() {
-    const [value, setValue] = useState('');
+    const [text, setText] = useState('');
 
     return (
         <Editor style={{ height: '320px' }} value={text} onTextChange={(e) => setText(e.htmlValue)} />
@@ -27,7 +27,7 @@ import React, { useState } from "react";
 import { Editor } from "primereact/editor";
 
 export default function BasicDemo() {
-    const [value, setValue] = useState<string>('');
+    const [text, setText] = useState<string>('');
 
     return (
         <Editor style={{ height: '320px' }} value={text} onTextChange={(e: EditorTextChangeParams) => setText(e.htmlValue)} />

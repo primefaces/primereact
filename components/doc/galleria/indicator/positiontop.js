@@ -45,7 +45,6 @@ import { PhotoService } from './service/PhotoService';
 export default function PositionTopDoc() {
     const [images, setImages] = useState(null);
     
-
     const responsiveOptions = [
         {
             breakpoint: '1024px',
@@ -86,7 +85,6 @@ import { PhotoService } from './service/PhotoService';
 export default function PositionTopDoc() {
     const [images, setImages] = useState(null);
     
-
     const responsiveOptions = [
         {
             breakpoint: '1024px',
@@ -150,7 +148,7 @@ export default function PositionTopDoc() {
                     item={itemTemplate}
                 />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['PhotoService']} />
         </>
     );
 }

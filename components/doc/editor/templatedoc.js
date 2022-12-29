@@ -39,6 +39,8 @@ export default function TemplateDemo() {
         );
     };
 
+    const header = renderHeader();
+
     return (
         <Editor style={{ height: '320px' }} value={text} onTextChange={(e) => setText(e.htmlValue)} headerTemplate={header} />
     )
@@ -60,6 +62,8 @@ export default function TemplateDemo() {
             </span>
         );
     };
+
+    const header = renderHeader();
 
     return (
         <Editor style={{ height: '320px' }} value={text} onTextChange={(e: EditorTextChangeParams) => setText(e.htmlValue)} headerTemplate={header} />

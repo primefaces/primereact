@@ -50,7 +50,6 @@ import { PhotoService } from './service/PhotoService';
 export default function GaleriaDemo() {
     const [images, setImages] = useState(null);
     
-
     useEffect(() => {
         PhotoService.getImages().then(data => setImages(data));
     }, [])
@@ -94,7 +93,6 @@ import { PhotoService } from './service/PhotoService';
 export default function GaleriaDemo() {
     const [images, setImages] = useState(null);
     
-
     useEffect(() => {
         PhotoService.getImages().then(data => setImages(data));
     }, [])
@@ -148,7 +146,7 @@ export default function GaleriaDemo() {
             <div className="card flex justify-content-center">
                 <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }} item={itemTemplate} thumbnail={thumbnailTemplate} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['PhotoService']} />
         </>
     );
 }

@@ -162,7 +162,8 @@ export default function TemplatingDoc() {
     )
 }
         `,
-        css: `
+        extFiles: {
+            'DropdownDemo.css': `
 /* DropdownDemo.css */
 
 .dropdown-demo .p-dropdown {
@@ -173,6 +174,7 @@ export default function TemplatingDoc() {
     width: 17px;
 }
         `
+        }
     };
 
     return (

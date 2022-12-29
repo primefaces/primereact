@@ -60,6 +60,13 @@ export default function ValidationDemo() {
     const defaultValues = {city: ''};
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
+    const cities = [
+        { name: 'New York', code: 'NY' },
+        { name: 'Rome', code: 'RM' },
+        { name: 'London', code: 'LDN' },
+        { name: 'Istanbul', code: 'IST' },
+        { name: 'Paris', code: 'PRS' }
+    ];
 
     const onSubmit = (data) => {
         setFormData(data);
@@ -109,7 +116,14 @@ export default function InvalidDemo() {
     const defaultValues = {city: ''};
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
-
+    const cities = [
+        { name: 'New York', code: 'NY' },
+        { name: 'Rome', code: 'RM' },
+        { name: 'London', code: 'LDN' },
+        { name: 'Istanbul', code: 'IST' },
+        { name: 'Paris', code: 'PRS' }
+    ];
+    
     const onSubmit = (data: any) => {
         setFormData(data);
     };
@@ -145,13 +159,15 @@ export default function InvalidDemo() {
     )
 }
         `,
-        css: `
+        extFiles: {
+            'DropdownDemo.css': `
 /* DropdownDemo.css */
 
 .dropdown-demo .p-dropdown {
     width: 14rem;
 }
         `
+        }
     };
 
     return (
@@ -193,7 +209,7 @@ export default function InvalidDemo() {
                     </form>
                 </div>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} dependencies={{ 'react-hook-form': '^7.39.4' }} />
         </>
     );
 }

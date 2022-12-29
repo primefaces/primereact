@@ -50,7 +50,6 @@ import { PhotoService } from './service/PhotoService';
 export default function IndicatorTemplateDoc() {
     const [images, setImages] = useState(null);
     
-
     const responsiveOptions = [
         {
             breakpoint: '1024px',
@@ -99,7 +98,6 @@ import { PhotoService } from './service/PhotoService';
 export default function IndicatorTemplateDoc() {
     const [images, setImages] = useState(null);
     
-
     const responsiveOptions = [
         {
             breakpoint: '1024px',
@@ -173,7 +171,7 @@ export default function IndicatorTemplateDoc() {
                     indicator={indicatorTemplate}
                 />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['PhotoService']} />
         </>
     );
 }

@@ -73,7 +73,7 @@ export default function BasicDoc() {
         },
         {
             label: 'Photos',
-            icon: () => <img alt="Photos" src={\`\${imgPath}/photos.svg\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
+            icon: () => <img alt="Photos" src={${imgPath}/photos.svg\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
         },
         {
             label: 'Trash',
@@ -123,7 +123,8 @@ export default function BasicDoc() {
     )
 }
         `,
-        css: `
+        extFiles: {
+            'DockDemo.css': `
 /* DockDemo.css */
 
 .dock-demo .dock-window {
@@ -138,6 +139,7 @@ export default function BasicDoc() {
     z-index: 1000;
 }  
     `
+        }
     };
 
     return (

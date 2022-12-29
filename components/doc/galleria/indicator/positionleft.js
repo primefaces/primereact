@@ -45,7 +45,6 @@ import { PhotoService } from './service/PhotoService';
 export default function PositionLeftDoc() {
     const [images, setImages] = useState(null);
     
-
     const responsiveOptions = [
         {
             breakpoint: '1024px',
@@ -71,10 +70,9 @@ export default function PositionLeftDoc() {
     };
 
     return (
-        <div className="card flex justify-content-center>
-            <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
+        <div className="card flex justify-content-center">
+            <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }} />
         </div>
-        
     )
 }
         `,
@@ -86,7 +84,6 @@ import { PhotoService } from './service/PhotoService';
 export default function PositionLeftDoc() {
     const [images, setImages] = useState(null);
     
-
     const responsiveOptions = [
         {
             breakpoint: '1024px',
@@ -150,7 +147,7 @@ export default function PositionLeftDoc() {
                     item={itemTemplate}
                 />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['PhotoService']} />
         </>
     );
 }

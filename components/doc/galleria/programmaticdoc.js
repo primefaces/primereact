@@ -65,7 +65,6 @@ import { PhotoService } from './service/PhotoService';
 export default function ProgrammaticDoc() {
     const [images, setImages] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0)
-    
 
     const responsiveOptions = [
         {
@@ -126,7 +125,6 @@ export default function ProgrammaticDoc() {
     const [images, setImages] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0)
     
-
     const responsiveOptions = [
         {
             breakpoint: '1024px',
@@ -211,7 +209,7 @@ export default function ProgrammaticDoc() {
                     />
                 </div>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['PhotoService']} />
         </>
     );
 }

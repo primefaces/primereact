@@ -73,13 +73,15 @@ export default function EditableDoc() {
     )
 }
         `,
-        css: `
+        extFiles: {
+            'DropdownDemo.css': `
 /* DropdownDemo.css */
 
 .dropdown-demo .p-dropdown {
     width: 14rem;
 }
         `
+        }
     };
 
     return (

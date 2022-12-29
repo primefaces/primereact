@@ -164,7 +164,7 @@ const thumbnailTemplate = (item) => {
                     thumbnail={thumbnailTemplate}
                 />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['PhotoService']} />
         </>
     );
 }

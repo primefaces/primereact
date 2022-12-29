@@ -55,8 +55,6 @@ import { PhotoService } from './service/PhotoService';
 export default function ResponsiveDoc() {
     const [images, setImages] = useState(null);
 
-    
-
     const responsiveOptions = [
         {
             breakpoint: '1024px',
@@ -104,8 +102,6 @@ import { PhotoService } from './service/PhotoService';
 
 export default function ResponsiveDoc() {
     const [images, setImages] = useState(null);
-
-    
 
     const responsiveOptions = [
         {
@@ -168,7 +164,7 @@ export default function ResponsiveDoc() {
                     <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={7} circular style={{ maxWidth: '800px' }} item={itemTemplate} thumbnail={thumbnailTemplate} />
                 </div>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['PhotoService']} />
         </>
     );
 }

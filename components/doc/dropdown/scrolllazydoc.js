@@ -88,7 +88,16 @@ export default function ScrollLazyDoc() {
 
     return (
         <div className="card flex justify-content-center dropdown-demo">
-            <Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 38 }} placeholder="Select Item"/>
+        <Dropdown value={selectedItem} options={lazyItems} onChange={onLazyItemChange} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 38, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
+                return (
+                    <div className="flex align-items-center p-2" style={{ height: '38px' }}>
+                        <Skeleton width={options.even ? '60%' : '50%'} height="1rem" />
+                    </div>
+                );
+            }
+        }}
+        placeholder="Select Item"
+    />
         </div>
     )
 }
@@ -137,13 +146,24 @@ export default function ScrollLazyDoc() {
     };
 
     return (
-        <div className="card flex justify-content-center dropdown-demo">
-            <Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 38 }} placeholder="Select Item"/>
-        </div>
-    )
+        return (
+            <div className="card flex justify-content-center dropdown-demo">
+            <Dropdown value={selectedItem} options={lazyItems} onChange={onLazyItemChange} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 38, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
+                    return (
+                        <div className="flex align-items-center p-2" style={{ height: '38px' }}>
+                            <Skeleton width={options.even ? '60%' : '50%'} height="1rem" />
+                        </div>
+                    );
+                }
+            }}
+            placeholder="Select Item"
+        />
+            </div>
+        )
 }
         `,
-        css: `
+        extFiles: {
+            'DropdownDemo.css': `
 /* DropdownDemo.css */
 
 .dropdown-demo .p-dropdown {
@@ -154,6 +174,7 @@ export default function ScrollLazyDoc() {
     width: 17px;
 }
         `
+        }
     };
 
     return (

@@ -30,7 +30,7 @@ export default function VirtualScrollDoc() {
 
     return (
         <div className="card flex justify-content-center dropdown-demo">
-            <Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 38 }} placeholder="Select Item"/>
+            <Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 38 }} placeholder="Select Item" />
         </div>
     )
 }
@@ -55,13 +55,15 @@ export default function VirtualScrollDoc() {
     )
 }
         `,
-        css: `
+        extFiles: {
+            'DropdownDemo.css': `
 /* DropdownDemo.css */
 
 .dropdown-demo .p-dropdown {
     width: 14rem;
 }
         `
+        }
     };
 
     return (

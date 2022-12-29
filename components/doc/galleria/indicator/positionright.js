@@ -36,7 +36,6 @@ export function PositionRightDoc(props) {
         basic: `
 <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
     showThumbnails={false} showIndicators changeItemOnIndicatorHover showIndicatorsOnItem indicatorsPosition="right" item={itemTemplate} />
-
         `,
         javascript: `
 import React, { useState, useEffect } from 'react';
@@ -45,7 +44,6 @@ import { PhotoService } from './service/PhotoService';
 
 export default function PositionRightDoc() {
     const [images, setImages] = useState(null);
-    
 
     const responsiveOptions = [
         {
@@ -87,7 +85,6 @@ import { PhotoService } from './service/PhotoService';
 export default function PositionRightDoc() {
     const [images, setImages] = useState(null);
     
-
     const responsiveOptions = [
         {
             breakpoint: '1024px',
@@ -151,7 +148,7 @@ export default function PositionRightDoc() {
                     item={itemTemplate}
                 />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['PhotoService']} />
         </>
     );
 }

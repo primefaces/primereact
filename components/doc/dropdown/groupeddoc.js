@@ -170,7 +170,8 @@ export default function GroupedDoc() {
     )
 }
         `,
-        css: `
+        extFiles: {
+            'DropdownDemo.css': `
 /* DropdownDemo.css */
 
 .dropdown-demo .p-dropdown {
@@ -181,6 +182,7 @@ export default function GroupedDoc() {
     width: 17px;
 }
         `
+        }
     };
 
     return (

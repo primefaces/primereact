@@ -171,7 +171,7 @@ export default function WithThumbnailsDoc() {
 
                 <Button label="Show" icon="pi pi-external-link" onClick={() => galleria.current.show()} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['PhotoService']} />
         </>
     );
 }

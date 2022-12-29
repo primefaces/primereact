@@ -45,7 +45,6 @@ import { PhotoService } from './service/PhotoService';
 export default function HoverEventDoc() {
     const [images, setImages] = useState(null);
     
-
     const responsiveOptions = [
         {
             breakpoint: '1024px',
@@ -86,7 +85,6 @@ import { PhotoService } from './service/PhotoService';
 export default function HoverEventDoc() {
     const [images, setImages] = useState(null);
     
-
     const responsiveOptions = [
         {
             breakpoint: '1024px',
@@ -139,7 +137,7 @@ export default function HoverEventDoc() {
             <div className="card flex justify-content-center">
                 <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }} showThumbnails={false} showIndicators changeItemOnIndicatorHover item={itemTemplate} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['PhotoService']} />
         </>
     );
 }

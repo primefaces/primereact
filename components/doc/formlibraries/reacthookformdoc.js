@@ -519,7 +519,7 @@ export default function ReactHookFormDemo() {
                     </div>
                 </div>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CountryService']} dependencies={{ 'react-hook-form': '^7.39.4' }} />
         </>
     );
 }

@@ -19,7 +19,7 @@ export function BasicDoc(props) {
 
     const code = {
         basic: `
-<Dropdown value={selectedCity1} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Select a City" />
+<Dropdown value={selectedCity} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Select a City" />
         `,
         javascript: `
 import React, { useState } from "react";
@@ -42,7 +42,7 @@ export default function BasicDoc() {
 
     return (
         <div className="card flex justify-content-center dropdown-demo">
-            <Dropdown value={selectedCity1} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Select a City" />
+            <Dropdown value={selectedCity} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Select a City" />
         </div>
     )
 }
@@ -68,18 +68,20 @@ export default function BasicDoc() {
 
     return (
         <div className="card flex justify-content-center dropdown-demo">
-            <Dropdown value={selectedCity1} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Select a City" />
+            <Dropdown value={selectedCity} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Select a City" />
         </div>
     )
 }
         `,
-        css: `
+        extFiles: {
+            'DropdownDemo.css': `
 /* DropdownDemo.css */
 
 .dropdown-demo .p-dropdown {
     width: 14rem;
 }
         `
+        }
     };
 
     return (
