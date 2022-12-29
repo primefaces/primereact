@@ -8,7 +8,7 @@ export function ThumbnailDoc(props) {
 
     const code = {
         basic: `
-<Image src="https://www.primefaces.org/wp-content/uploads/2020/05/small.png" zoomSrc="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="80" height="60" preview />
+<Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" zoomSrc="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="80" height="60" preview />
         `,
         javascript: `
 import React from 'react'; 
@@ -18,7 +18,7 @@ export default function ThumbnailDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/small.png" zoomSrc="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="80" height="60" preview />
+            <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" zoomSrc="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="80" height="60" preview />
         </div>
     )
 }
@@ -31,7 +31,7 @@ export default function ThumbnailDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/small.png" zoomSrc="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="80" height="60" preview />
+            <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" zoomSrc="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="80" height="60" preview />
         </div>
     )
 }

@@ -65,27 +65,26 @@ export default function BasicDoc() {
     const dockBasicItems = [
         {
             label: 'Finder',
-            icon: () => <img alt="Finder" src={\`\${imgPath}/finder.svg\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
+            icon: () => <img alt="Finder" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />
         },
         {
             label: 'App Store',
-            icon: () => <img alt="App Store" src={\`\${imgPath}/appstore.svg\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
+            icon: () => <img alt="App Store" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />
         },
         {
             label: 'Photos',
-            icon: () => <img alt="Photos" src={${imgPath}/photos.svg\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
+            icon: () => <img alt="Photos" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />
         },
         {
             label: 'Trash',
-            icon: () => <img alt="trash" src={\`\${imgPath}/trash.png\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
+            icon: () => <img alt="trash" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />
         }
     ];
-    const imgPath = 'images/dock';
 
     return (
         <div className="dock-window">
             <Dock model={dockBasicItems} position="${selectedOptionValue}" />
-        </div>
+        </div>ß
     )
 }
         `,
@@ -99,22 +98,21 @@ export default function BasicDoc() {
     const dockBasicItems: MenuteItem[] = [
         {
             label: 'Finder',
-            icon: () => <img alt="Finder" src={\`\${imgPath}/finder.svg\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
+            icon: () => <img alt="Finder" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />
         },
         {
             label: 'App Store',
-            icon: () => <img alt="App Store" src={\`\${imgPath}/appstore.svg\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
+            icon: () => <img alt="App Store" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />
         },
         {
             label: 'Photos',
-            icon: () => <img alt="Photos" src={\`\${imgPath}/photos.svg\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
+            icon: () => <img alt="Photos" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />
         },
         {
             label: 'Trash',
-            icon: () => <img alt="trash" src={\`\${imgPath}/trash.png\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
+            icon: () => <img alt="trash" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />
         }
     ];
-    const imgPath = 'images/dock';
 
     return (
         <div className="dock-window">

@@ -8,7 +8,7 @@ export function TemplatingDoc(props) {
     const icon = <i className="pi pi-check"></i>;
     const code = {
         basic: `
-<Image src="/images/galleria/galleria12.jpg" zoomSrc="images/galleria/galleria12.jpg" template={icon} alt="Image" preview width="100"  />
+<Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" zoomSrc="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" template={icon} alt="Image" preview width="100"  />
         `,
         javascript: `
 import React from 'react'; 
@@ -19,7 +19,7 @@ export default function TemplatingDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <Image src="/images/galleria/galleria12.jpg" zoomSrc="images/galleria/galleria12.jpg" template={icon} alt="Image" preview width="100"  />
+            <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" zoomSrc="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" template={icon} alt="Image" preview width="100"  />
         </div>
     )
 }
@@ -33,7 +33,7 @@ export default function TemplatingDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <Image src="/images/galleria/galleria12.jpg" zoomSrc="images/galleria/galleria12.jpg" template={icon} alt="Image" preview width="100"  />
+            <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" zoomSrc="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" template={icon} alt="Image" preview width="100"  />
         </div>
     )
 }

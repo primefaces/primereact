@@ -21,10 +21,13 @@ export function CustomDoc(props) {
         `,
         javascript: `
 import React from 'react';
+import PrimeReact from 'primereact/api';
 import { Ripple } from 'primereact/ripple';
 import './RippleDemo.css';
 
 export default function CustomDoc() {
+
+    PrimeReact.ripple = true;
 
     return (
         <div className="card flex justify-content-center gap-2">
@@ -46,10 +49,13 @@ export default function CustomDoc() {
         `,
         typescript: `
 import React from 'react';
+import PrimeReact from 'primereact/api';
 import { Ripple } from 'primereact/ripple';
 import './RippleDemo.css';
 
 export default function CustomDoc() {
+
+    PrimeReact.ripple = true;
 
     return (
         <div className="card flex justify-content-center gap-2">

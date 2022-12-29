@@ -580,7 +580,7 @@ export default function ReactFinalFormDemo() {
                     </div>
                 </div>
             </div>
-            <DocSectionCode code={code} service={['CountryService']} />
+            <DocSectionCode code={code} service={['CountryService']} dependencies={{ 'final-form': '^4.20.7', 'react-final-form': '^6.5.9' }} />
         </>
     );
 }

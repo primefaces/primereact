@@ -538,7 +538,7 @@ export default function FormikFormDemo() {
                     </div>
                 </div>
             </div>
-            <DocSectionCode code={code} service={['CountryService']} />
+            <DocSectionCode code={code} service={['CountryService']} dependencies={{ formik: '^2.2.6' }} />
         </>
     );
 }

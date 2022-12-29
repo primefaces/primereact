@@ -82,7 +82,7 @@ export default function TemplateDemo() {
             <div className="card">
                 <Editor style={{ height: '320px' }} value={text} onTextChange={(e) => setText(e.htmlValue)} headerTemplate={header} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} dependencies={{ quill: '1.3.7' }}/>
         </>
     );
 }

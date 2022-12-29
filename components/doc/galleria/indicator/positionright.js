@@ -59,14 +59,13 @@ export default function PositionRightDoc() {
             numVisible: 1
         }
     ];
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
         PhotoService.getImages().then((data) => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
-        return <img src={item.itemImageSrc} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+        return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
     };
     
     return (
@@ -99,7 +98,6 @@ export default function PositionRightDoc() {
             numVisible: 1
         }
     ];
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
         PhotoService.getImages().then((data) => setImages(data));
