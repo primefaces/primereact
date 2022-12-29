@@ -365,9 +365,9 @@ export const InputMask = React.memo(
             }
 
             focus.current = true;
-            focusText.current = elementRef.current.value;
 
             clearTimeout(caretTimeoutId.current);
+            focusText.current = elementRef.current.value;
 
             let pos = checkVal();
 
