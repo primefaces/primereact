@@ -13,7 +13,7 @@ import { MultipleDoc } from '../../components/doc/autocomplete/multipledoc';
 import { ObjectsDoc } from '../../components/doc/autocomplete/objectsdoc';
 import { TemplateDoc } from '../../components/doc/autocomplete/templatedoc';
 import { FormikDoc } from '../../components/doc/autocomplete/validation/formikdoc';
-import { HookFormDoc, ValidationDoc } from '../../components/doc/autocomplete/validation/hookformdoc';
+import { HookFormDoc } from '../../components/doc/autocomplete/validation/hookformdoc';
 import { VirtualScrollDoc } from '../../components/doc/autocomplete/virtualscrolldoc';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
@@ -83,7 +83,7 @@ const AutoCompleteDemo = () => {
         {
             id: 'validation',
             label: 'Validation',
-            description: 'ToDo',
+            description: 'Validate using popular React validation libraries.',
             children: [
                 {
                     id: 'formik',

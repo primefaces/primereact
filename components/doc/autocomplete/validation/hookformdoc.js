@@ -9,7 +9,7 @@ import { DocSectionText } from '../../common/docsectiontext';
 export function HookFormDoc(props) {
     const [formData, setFormData] = useState({});
     const [items, setItems] = useState([]);
-    const defaultValues = { search: '' };
+    const defaultValues = { value: '' };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
 
@@ -30,7 +30,7 @@ export function HookFormDoc(props) {
 <Controller name="value"  control={form.control} rules={{ required: 'Value is required.'}}
     render={({ field, fieldState }) => (
         <>
-            <label htmlFor={field.name} className={classNames({ 'p-error': errors.name })}>Value</label>
+            <label htmlFor={field.name} className={classNames({ 'p-error': errors.value })}>Value</label>
             <AutoComplete id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': fieldState.error })} />
             {getFormErrorMessage(field.name)}
         </>
@@ -72,7 +72,7 @@ export default function HookFormDoc() {
                     rules={{ required: 'Value is required.' }}
                     render={({ field, fieldState }) => (
                         <>
-                            <label htmlFor={field.name} className={classNames({ 'p-error': errors.search })}>
+                            <label htmlFor={field.name} className={classNames({ 'p-error': errors.value })}>
                                 Value
                             </label>
                             <AutoComplete id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': fieldState.error })} />
@@ -121,7 +121,7 @@ export default function HookFormDoc() {
                     rules={{ required: 'Value is required.' }}
                     render={({ field, fieldState }) => (
                         <>
-                            <label htmlFor={field.name} className={classNames({ 'p-error': errors.search })}>
+                            <label htmlFor={field.name} className={classNames({ 'p-error': errors.value })}>
                                 Value
                             </label>
                             <AutoComplete id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': fieldState.error })} />
@@ -154,7 +154,7 @@ export default function HookFormDoc() {
                                 rules={{ required: 'Value is required.' }}
                                 render={({ field, fieldState }) => (
                                     <>
-                                        <label htmlFor={field.name} className={classNames({ 'p-error': errors.search })}>
+                                        <label htmlFor={field.name} className={classNames({ 'p-error': errors.value })}>
                                             Value
                                         </label>
                                         <AutoComplete id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': fieldState.error })} />
