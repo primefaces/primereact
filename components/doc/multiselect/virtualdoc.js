@@ -10,7 +10,7 @@ export function VirtualDoc(props) {
 
     const code = {
         basic: `
-<MultiSelect value={selectedItems1} options={items} onChange={(e) => {setSelectedItems1(e.value); setSelectAll(e.value.length === items.length)}} selectAll={selectAll} onSelectAll={(e) => {setSelectedItems1(e.checked ? [] : items.map(item => item.value)); setSelectAll(!e.checked)}} virtualScrollerOptions={{ itemSize: 43 }} maxSelectedLabels={3} placeholder="Select Item"/>
+<MultiSelect value={selectedItems} options={items} onChange={(e) => {setSelectedItems(e.value); setSelectAll(e.value.length === items.length)}} selectAll={selectAll} onSelectAll={(e) => {setSelectedItems(e.checked ? [] : items.map(item => item.value)); setSelectAll(!e.checked)}} virtualScrollerOptions={{ itemSize: 43 }} maxSelectedLabels={3} placeholder="Select Item"/>
         `,
         javascript: `
 import React, { useState } from "react";
@@ -20,11 +20,11 @@ import './MultiSelectDemo.css';
 export default function VirtualDoc() {
     const [selectAll, setSelectAll] = useState(false);
     const [selectedItems, setSelectedItems] = useState(null);
-    const [items] = useState(Array.from({ length: 100000 }).map((_, i) => ({ label: "Item #\${i}\", value: i })));
+    const [items] = useState(Array.from({ length: 100000 }).map((_, i) => ({ label: \`Item #\${i}\`, value: i })));
 
     return (
         <div className="card flex justify-content-center multiselect-demo">
-            <MultiSelect value={selectedItems1} options={items} onChange={(e) => {setSelectedItems1(e.value); setSelectAll(e.value.length === items.length)}} selectAll={selectAll} onSelectAll={(e) => {setSelectedItems1(e.checked ? [] : items.map(item => item.value)); setSelectAll(!e.checked)}} virtualScrollerOptions={{ itemSize: 43 }} maxSelectedLabels={3} placeholder="Select Item"/>        
+            <MultiSelect value={selectedItems} options={items} onChange={(e) => {setSelectedItems(e.value); setSelectAll(e.value.length === items.length)}} selectAll={selectAll} onSelectAll={(e) => {setSelectedItems(e.checked ? [] : items.map(item => item.value)); setSelectAll(!e.checked)}} virtualScrollerOptions={{ itemSize: 43 }} maxSelectedLabels={3} placeholder="Select Item"/>        
         </div>
     );
 }
@@ -37,16 +37,17 @@ import './MultiSelectDemo.css';
 export default function VirtualDoc() {
     const [selectAll, setSelectAll] = useState<any>(false);
     const [selectedItems, setSelectedItems] = useState<any[]>(null);
-    const [items] = useState(Array.from({ length: 100000 }).map((_, i) => ({ label: "Item #\${i}\", value: i })));
+    const [items] = useState(Array.from({ length: 100000 }).map((_, i) => ({ label: \`Item #\${i}\`, value: i })));
 
     return (
         <div className="card flex justify-content-center multiselect-demo">
-            <MultiSelect value={selectedItems1} options={items} onChange={(e : MultiSelectChangeParams) => {setSelectedItems1(e.value); setSelectAll(e.value.length === items.length)}} selectAll={selectAll} onSelectAll={(e) => {setSelectedItems1(e.checked ? [] : items.map(item => item.value)); setSelectAll(!e.checked)}} virtualScrollerOptions={{ itemSize: 43 }} maxSelectedLabels={3} placeholder="Select Item"/>
+            <MultiSelect value={selectedItems} options={items} onChange={(e : MultiSelectChangeParams) => {setSelectedItems(e.value); setSelectAll(e.value.length === items.length)}} selectAll={selectAll} onSelectAll={(e) => {setSelectedItems(e.checked ? [] : items.map(item => item.value)); setSelectAll(!e.checked)}} virtualScrollerOptions={{ itemSize: 43 }} maxSelectedLabels={3} placeholder="Select Item"/>
         </div>
     );
 }
         `,
-        css: `
+        extFiles: {
+            'MultiSelectDemo.css': `
 /* MultiSelectDemo.css */
 
 .multiselect-demo .p-multiselect {
@@ -71,6 +72,7 @@ export default function VirtualDoc() {
     width: 17px;
 }
         `
+        }
     };
 
     return (

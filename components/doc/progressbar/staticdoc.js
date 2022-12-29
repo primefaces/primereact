@@ -12,7 +12,7 @@ export function StaticDoc(props) {
 import React from 'react';
 import { ProgressBar } from 'primereact/progressbar';
 
-export const StaticDoc = () => {
+export default function StaticDoc() {
 
     return (
         <div className="card">
@@ -25,7 +25,7 @@ export const StaticDoc = () => {
 import React from 'react';
 import { ProgressBar } from 'primereact/progressbar';
 
-export const StaticDoc = () => {
+export default function StaticDoc() {
 
     return (
         <div className="card">

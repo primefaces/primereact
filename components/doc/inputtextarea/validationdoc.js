@@ -38,7 +38,7 @@ import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
-import { InputText } from "primereact/inputtext";
+import { InputTextarea } from "primereact/inputtextarea";
 
 export default function ValidationDemo() {
     const [formData, setFormData] = useState({});
@@ -83,7 +83,7 @@ import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
-import { InputText } from "primereact/inputtext";
+import { InputTextarea } from "primereact/inputtextarea";
 
 export default function InvalidDemo() {
     const [formData, setFormData] = useState<any>({});
@@ -155,7 +155,7 @@ export default function InvalidDemo() {
                     </form>
                 </div>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} dependencies={{ 'react-hook-form': '^7.39.4' }} />
         </>
     );
 }

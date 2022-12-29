@@ -34,12 +34,11 @@ import React, { useState } from 'react';
 import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
-export const LazyDoc = () => {
+export default function LazyDoc() {
     const [products, setProducts] = useState([]);
     
-
     const onOpen = () => {
         ProductService.getProductsSmall().then(data => setProducts(data));
     }
@@ -66,12 +65,11 @@ import React, { useState } from 'react';
 import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
-export const LazyDoc = () => {
+export default function LazyDoc() {
     const [products, setProducts] = useState<any[]>([]);
     
-
     function onOpen(): void {
         ProductService.getProductsSmall().then(data => setProducts(data));
     }
@@ -129,7 +127,7 @@ export const LazyDoc = () => {
                     </InplaceContent>
                 </Inplace>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

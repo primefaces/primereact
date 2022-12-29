@@ -40,12 +40,13 @@ export default function ContentDoc() {
     const rightContent = <Button type="button" icon="pi pi-search" />;
 
     return (
-        <Paginator first={contentFirst} rows={1} totalRecords={12} onPageChange={onContentPageChange}
-        leftContent={leftContent} rightContent={rightContent}
-        template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator>
-
-        <div className="p-3 text-center">
-            <img alt={contentFirst} src={\`images/nature/nature\${contentFirst + 1}.jpg\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} />
+        <div className="card">
+            <Paginator first={contentFirst} rows={1} totalRecords={12} onPageChange={onContentPageChange}
+            leftContent={leftContent} rightContent={rightContent}
+            template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator>
+            <div className="p-3 text-center">
+                <img alt={contentFirst} src={\`images/nature/nature\${contentFirst + 1}.jpg\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} />
+            </div>
         </div>
     )
 }
@@ -66,12 +67,13 @@ export default function ContentDoc() {
     const rightContent = <Button type="button" icon="pi pi-search" />;
 
     return (
-        <Paginator first={contentFirst} rows={1} totalRecords={12} onPageChange={onContentPageChange}
-        leftContent={leftContent} rightContent={rightContent}
-        template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator>
-
-        <div className="p-3 text-center">
-            <img alt={contentFirst} src={\`images/nature/nature\${contentFirst + 1}.jpg\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} />
+        <div className="card">
+            <Paginator first={contentFirst} rows={1} totalRecords={12} onPageChange={onContentPageChange}
+            leftContent={leftContent} rightContent={rightContent}
+            template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator>
+            <div className="p-3 text-center">
+                <img alt={contentFirst} src={\`images/nature/nature\${contentFirst + 1}.jpg\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} />
+            </div>
         </div>
     )
 }

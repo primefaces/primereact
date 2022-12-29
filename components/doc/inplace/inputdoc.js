@@ -21,7 +21,7 @@ import React, { useState } from 'react';
 import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace';
 import { InputText } from 'primereact/inputtext';
 
-export const InputDoc = () => {
+export default function InputDoc() {
     const [text, setText] = useState('');
 
     return (
@@ -41,7 +41,7 @@ import React, { useState } from 'react';
 import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace';
 import { InputText } from 'primereact/inputtext';
 
-export const InputDoc = () => {
+export default function InputDoc() {
     const [text, setText] = useState<string>('');
 
     return (

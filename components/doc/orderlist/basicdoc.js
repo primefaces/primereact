@@ -42,12 +42,11 @@ export function BasicDoc(props) {
         javascript: `
 import React, { useState, useEffect } from 'react';
 import { OrderList } from 'primereact/orderlist';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 export default function BasicDoc() {
     const [products, setProducts] = useState([]);
     
-
     useEffect(() => {
         ProductService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -81,12 +80,11 @@ export default function BasicDoc() {
         typescript: `
 import React, { useState, useEffect } from 'react';
 import { OrderList } from 'primereact/orderlist';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 export default function BasicDoc() {
     const [products, setProducts] = useState([]);
     
-
     useEffect(() => {
         ProductService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -145,7 +143,7 @@ export default function BasicDoc() {
             <div className="card">
                 <OrderList value={products} itemTemplate={itemTemplate} header="Products" onChange={(e) => setProducts(e.value)}></OrderList>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

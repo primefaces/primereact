@@ -128,7 +128,8 @@ export default function BasicDoc() {
     )
 }
         `,
-        css: `
+        extFiles: {
+            'OrganizationChartDemo.css': `
 /* OrganizationChartDemo.css */
 
 .organizationchart-demo .p-organizationchart .p-person {
@@ -169,6 +170,7 @@ export default function BasicDoc() {
     color: #ffffff;
 }
     `
+        }
     };
 
     return (

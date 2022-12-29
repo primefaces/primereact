@@ -299,7 +299,8 @@ export default function AdvancedDoc() {
     )
 }
         `,
-        css: `
+        extFiles: {
+            'OrganizationChartDemo.css': `
 /* OrganizationChartDemo.css */
 
 .organizationchart-demo .p-organizationchart .p-person {
@@ -340,6 +341,7 @@ export default function AdvancedDoc() {
     color: #ffffff;
 }
     `
+        }
     };
 
     return (

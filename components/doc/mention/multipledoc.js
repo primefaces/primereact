@@ -54,6 +54,20 @@ export function MultipleDoc(props) {
         }
     };
 
+    const itemTemplate = (suggestion) => {
+        const src = 'images/avatar/' + suggestion.representative.image;
+
+        return (
+            <div className="flex align-items-center">
+                <img alt={suggestion.name} src={src} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} width="32" style={{ verticalAlign: 'middle' }} />
+                <span className="flex flex-column ml-2">
+                    {suggestion.name}
+                    <small style={{ fontSize: '.75rem', color: 'var(--text-secondary-color)' }}>@{suggestion.nickname}</small>
+                </span>
+            </div>
+        );
+    };
+
     const multipleItemTemplate = (suggestion, options) => {
         const trigger = options.trigger;
 
@@ -73,7 +87,7 @@ export function MultipleDoc(props) {
         javascript: `
 import React, { useState, useEffect } from "react";
 import { Mention } from 'primereact/mention';
-import { CustomerService } from '../../../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 export default function MultipleDoc() {
     const [customers, setCustomers] = useState([]);
@@ -128,6 +142,20 @@ export default function MultipleDoc() {
         }
     }
 
+    const itemTemplate = (suggestion) => {
+        const src = 'images/avatar/' + suggestion.representative.image;
+        
+        return (
+            <div className="flex align-items-center">
+                <img alt={suggestion.name} src={src} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{verticalAlign: 'middle'}} />
+                <span className="flex flex-column ml-2">
+                    {suggestion.name}
+                    <small style={{ fontSize: '.75rem', color: 'var(--text-secondary-color)' }}>@{suggestion.nickname}</small>
+                </span>
+            </div>
+        );
+    }
+
     const multipleItemTemplate = (suggestion, options) => {
         const trigger = options.trigger;
 
@@ -142,14 +170,14 @@ export default function MultipleDoc() {
     }
 
     return (
-        <Mention suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people"  rows={5} cols={40} autoResize itemTemplate={itemTemplate} />
+        <Mention suggestions={multipleSuggestions} onSearch={onMultipleSearch} field="nickname" placeholder="Please enter @ to mention people"  rows={5} cols={40} autoResize itemTemplate={itemTemplate} />
     )
 }
         `,
         typescript: `
 import React, { useState, useEffect } from "react";
 import { Mention, MentionSearchParams, MentionItemTemplateOptions } from 'primereact/mention';
-import { CustomerService } from '../../../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 export default function MultipleDoc() {
     const [customers, setCustomers] = useState<any>([]);
@@ -204,6 +232,20 @@ export default function MultipleDoc() {
         }
     }
 
+    const itemTemplate = (suggestion) => {
+        const src = 'images/avatar/' + suggestion.representative.image;
+        
+        return (
+            <div className="flex align-items-center">
+                <img alt={suggestion.name} src={src} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{verticalAlign: 'middle'}} />
+                <span className="flex flex-column ml-2">
+                    {suggestion.name}
+                    <small style={{ fontSize: '.75rem', color: 'var(--text-secondary-color)' }}>@{suggestion.nickname}</small>
+                </span>
+            </div>
+        );
+    }
+
     const multipleItemTemplate = (suggestion: any, options: MentionItemTemplateOptions) => {
         const trigger = options.trigger;
 
@@ -218,7 +260,7 @@ export default function MultipleDoc() {
     }
 
     return (
-        <Mention suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people"  rows={5} cols={40} autoResize
+        <Mention suggestions={multipleSuggestions} onSearch={onMultipleSearch} field="nickname" placeholder="Please enter @ to mention people"  rows={5} cols={40} autoResize
         itemTemplate={itemTemplate} />
     )
 }
@@ -264,7 +306,7 @@ export default function MultipleDoc() {
                     cols={40}
                 />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );
 }

@@ -28,21 +28,23 @@ export default function LocaleDoc() {
     const [value4, setValue4] = useState(732762);
 
     return (
-        <div className="field col-12 md:col-3">
-            <label htmlFor="locale-user">User Locale</label>
-            <InputNumber inputId="locale-user" value={value1} onValueChange={(e) => setValue1(e.value)} mode="decimal" minFractionDigits={2} />
-        </div>
-        <div className="field col-12 md:col-3">
-            <label htmlFor="locale-us">United States Locale</label>
-            <InputNumber inputId="locale-us" value={value2} onValueChange={(e) => setValue2(e.value)} mode="decimal" locale="en-US" minFractionDigits={2} />
-        </div>
-        <div className="field col-12 md:col-3">
-            <label htmlFor="locale-german">German Locale</label>
-            <InputNumber inputId="locale-german" value={value3} onValueChange={(e) => setValue3(e.value)} mode="decimal" locale="de-DE" minFractionDigits={2} />
-        </div>
-        <div className="field col-12 md:col-3">
-            <label htmlFor="locale-indian">Indian Locale</label>
-            <InputNumber inputId="locale-indian" value={value4} onValueChange={(e) => setValue4(e.value)} mode="decimal" locale="en-IN" minFractionDigits={2} />
+        <div className="card flex justify-content-center p-fluid">
+            <div className="field col-12 md:col-3">
+                <label htmlFor="locale-user">User Locale</label>
+                <InputNumber inputId="locale-user" value={value1} onValueChange={(e) => setValue1(e.value)} mode="decimal" minFractionDigits={2} />
+            </div>
+            <div className="field col-12 md:col-3">
+                <label htmlFor="locale-us">United States Locale</label>
+                <InputNumber inputId="locale-us" value={value2} onValueChange={(e) => setValue2(e.value)} mode="decimal" locale="en-US" minFractionDigits={2} />
+            </div>
+            <div className="field col-12 md:col-3">
+                <label htmlFor="locale-german">German Locale</label>
+                <InputNumber inputId="locale-german" value={value3} onValueChange={(e) => setValue3(e.value)} mode="decimal" locale="de-DE" minFractionDigits={2} />
+            </div>
+            <div className="field col-12 md:col-3">
+                <label htmlFor="locale-indian">Indian Locale</label>
+                <InputNumber inputId="locale-indian" value={value4} onValueChange={(e) => setValue4(e.value)} mode="decimal" locale="en-IN" minFractionDigits={2} />
+            </div>
         </div>
     )
 }
@@ -58,21 +60,23 @@ export default function LocaleDoc() {
     const [value4, setValue4] = useState<number>(732762);
 
     return (
-        <div className="field col-12 md:col-3">
-            <label htmlFor="locale-user">User Locale</label>
-            <InputNumber inputId="locale-user" value={value1} onValueChange={(e : InputNumberValueChangeParams) => setValue1(e.value)} mode="decimal" minFractionDigits={2} />
-        </div>
-        <div className="field col-12 md:col-3">
-            <label htmlFor="locale-us">United States Locale</label>
-            <InputNumber inputId="locale-us" value={value2} onValueChange={(e : InputNumberValueChangeParams) => setValue2(e.value)} mode="decimal" locale="en-US" minFractionDigits={2} />
-        </div>
-        <div className="field col-12 md:col-3">
-            <label htmlFor="locale-german">German Locale</label>
-            <InputNumber inputId="locale-german" value={value3} onValueChange={(e : InputNumberValueChangeParams) => setValue3(e.value)} mode="decimal" locale="de-DE" minFractionDigits={2} />
-        </div>
-        <div className="field col-12 md:col-3">
-            <label htmlFor="locale-indian">Indian Locale</label>
-            <InputNumber inputId="locale-indian" value={value4} onValueChange={(e : InputNumberValueChangeParams) => setValue4(e.value)} mode="decimal" locale="en-IN" minFractionDigits={2} />
+        <div className="card flex justify-content-center p-fluid">
+            <div className="field col-12 md:col-3">
+                <label htmlFor="locale-user">User Locale</label>
+                <InputNumber inputId="locale-user" value={value1} onValueChange={(e : InputNumberValueChangeParams) => setValue1(e.value)} mode="decimal" minFractionDigits={2} />
+            </div>
+            <div className="field col-12 md:col-3">
+                <label htmlFor="locale-us">United States Locale</label>
+                <InputNumber inputId="locale-us" value={value2} onValueChange={(e : InputNumberValueChangeParams) => setValue2(e.value)} mode="decimal" locale="en-US" minFractionDigits={2} />
+            </div>
+            <div className="field col-12 md:col-3">
+                <label htmlFor="locale-german">German Locale</label>
+                <InputNumber inputId="locale-german" value={value3} onValueChange={(e : InputNumberValueChangeParams) => setValue3(e.value)} mode="decimal" locale="de-DE" minFractionDigits={2} />
+            </div>
+            <div className="field col-12 md:col-3">
+                <label htmlFor="locale-indian">Indian Locale</label>
+                <InputNumber inputId="locale-indian" value={value4} onValueChange={(e : InputNumberValueChangeParams) => setValue4(e.value)} mode="decimal" locale="en-IN" minFractionDigits={2} />
+            </div>
         </div>
     )
 }

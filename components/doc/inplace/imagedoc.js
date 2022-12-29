@@ -25,7 +25,7 @@ export function ImageDoc(props) {
 import React from 'react';
 import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace';
 
-export const ImageDoc = () => {
+export default function ImageDoc() {
 
     return (
         <Inplace>
@@ -46,7 +46,7 @@ export const ImageDoc = () => {
 import React from 'react';
 import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace';
 
-export const ImageDoc = () => {
+export default function ImageDoc() {
 
     return (
         <Inplace>

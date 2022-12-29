@@ -27,21 +27,23 @@ export default function NumeralsDoc() {
     const [value4, setValue4] = useState(50);
 
     return (
-        <div className="field col-12 md:col-3">
-            <label htmlFor="integeronly">Integer Only</label>
-            <InputNumber inputId="integeronly" value={value1} onValueChange={(e) => setValue1(e.value)} />
-        </div>
-        <div className="field col-12 md:col-3">
-            <label htmlFor="withoutgrouping">Without Grouping</label>
-            <InputNumber inputId="withoutgrouping" value={value2} onValueChange={(e) => setValue2(e.value)} mode="decimal" useGrouping={false} />
-        </div>
-        <div className="field col-12 md:col-3">
-            <label htmlFor="minmaxfraction">Min-Max Fraction Digits</label>
-            <InputNumber inputId="minmaxfraction" value={value3} onValueChange={(e) => setValue3(e.value)} mode="decimal" minFractionDigits={2} maxFractionDigits={5} />
-        </div>
-        <div className="field col-12 md:col-3">
-            <label htmlFor="minmax">Min-Max Boundaries</label>
-            <InputNumber inputId="minmax" value={value4} onValueChange={(e) => setValue4(e.value)} mode="decimal" min={0} max={100} />
+        <div className="card flex justify-content-center p-fluid">
+            <div className="field col-12 md:col-3">
+                <label htmlFor="integeronly">Integer Only</label>
+                <InputNumber inputId="integeronly" value={value1} onValueChange={(e) => setValue1(e.value)} />
+            </div>
+            <div className="field col-12 md:col-3">
+                <label htmlFor="withoutgrouping">Without Grouping</label>
+                <InputNumber inputId="withoutgrouping" value={value2} onValueChange={(e) => setValue2(e.value)} mode="decimal" useGrouping={false} />
+            </div>
+            <div className="field col-12 md:col-3">
+                <label htmlFor="minmaxfraction">Min-Max Fraction Digits</label>
+                <InputNumber inputId="minmaxfraction" value={value3} onValueChange={(e) => setValue3(e.value)} mode="decimal" minFractionDigits={2} maxFractionDigits={5} />
+            </div>
+            <div className="field col-12 md:col-3">
+                <label htmlFor="minmax">Min-Max Boundaries</label>
+                <InputNumber inputId="minmax" value={value4} onValueChange={(e) => setValue4(e.value)} mode="decimal" min={0} max={100} />
+            </div>
         </div>
     )
 }
@@ -57,21 +59,23 @@ export default function NumeralsDoc() {
     const [value4, setValue4] = useState<number>(50);
 
     return (
-        <div className="field col-12 md:col-3">
-            <label htmlFor="integeronly">Integer Only</label>
-            <InputNumber inputId="integeronly" value={value1} onValueChange={(e : InputNumberValueChangeParams) => setValue1(e.value)} />
-        </div>
-        <div className="field col-12 md:col-3">
-            <label htmlFor="withoutgrouping">Without Grouping</label>
-            <InputNumber inputId="withoutgrouping" value={value2} onValueChange={(e : InputNumberValueChangeParams) => setValue2(e.value)} mode="decimal" useGrouping={false} />
-        </div>
-        <div className="field col-12 md:col-3">
-            <label htmlFor="minmaxfraction">Min-Max Fraction Digits</label>
-            <InputNumber inputId="minmaxfraction" value={value3} onValueChange={(e : InputNumberValueChangeParams) => setValue3(e.value)} mode="decimal" minFractionDigits={2} maxFractionDigits={5} />
-        </div>
-        <div className="field col-12 md:col-3">
-            <label htmlFor="minmax">Min-Max Boundaries</label>
-            <InputNumber inputId="minmax" value={value4} onValueChange={(e : InputNumberValueChangeParams) => setValue4(e.value)} mode="decimal" min={0} max={100} />
+        <div className="card flex justify-content-center p-fluid">
+            <div className="field col-12 md:col-3">
+                <label htmlFor="integeronly">Integer Only</label>
+                <InputNumber inputId="integeronly" value={value1} onValueChange={(e : InputNumberValueChangeParams) => setValue1(e.value)} />
+            </div>
+            <div className="field col-12 md:col-3">
+                <label htmlFor="withoutgrouping">Without Grouping</label>
+                <InputNumber inputId="withoutgrouping" value={value2} onValueChange={(e : InputNumberValueChangeParams) => setValue2(e.value)} mode="decimal" useGrouping={false} />
+            </div>
+            <div className="field col-12 md:col-3">
+                <label htmlFor="minmaxfraction">Min-Max Fraction Digits</label>
+                <InputNumber inputId="minmaxfraction" value={value3} onValueChange={(e : InputNumberValueChangeParams) => setValue3(e.value)} mode="decimal" minFractionDigits={2} maxFractionDigits={5} />
+            </div>
+            <div className="field col-12 md:col-3">
+                <label htmlFor="minmax">Min-Max Boundaries</label>
+                <InputNumber inputId="minmax" value={value4} onValueChange={(e : InputNumberValueChangeParams) => setValue4(e.value)} mode="decimal" min={0} max={100} />
+            </div>
         </div>
     )
 }

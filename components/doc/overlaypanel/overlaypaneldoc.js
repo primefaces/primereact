@@ -63,7 +63,7 @@ import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 export default function OverlayPanelDoc() {
     const [products, setProducts] = useState(null);
@@ -125,7 +125,7 @@ import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 import { Column } from 'primereact/column';
 import { DataTable, DataTableSelectionChangeParams } from 'primereact/datatable';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 export default function OverlayPanelDoc() {
     const [products, setProducts] = useState<Product[]>(null);
@@ -217,7 +217,7 @@ export default function OverlayPanelDoc() {
                     </OverlayPanel>
                 </div>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

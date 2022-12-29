@@ -62,7 +62,6 @@ import './MultiSelectDemo.css';
 
 export default function AdvanceDoc() {
     const [selectedCountries, setSelectedCountries] = useState(null);
-
     const countries = [
         { name: 'Australia', code: 'AU' },
         { name: 'Brazil', code: 'BR' },
@@ -79,7 +78,7 @@ export default function AdvanceDoc() {
     const countryTemplate = (option) => {
         return (
             <div className="country-item">
-                <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${item.code.toLowerCase()}\`} />
+                <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} className={\`flag flag-\${item.code.toLowerCase()}\`} />
                 <div>{option.name}</div>
             </div>
         );
@@ -89,14 +88,14 @@ export default function AdvanceDoc() {
         if (option) {
             return (
                 <div className="country-item country-item-value">
-                    <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                    <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} className={\`flag flag-\${option.code.toLowerCase()}\`} />
                     <div>{option.name}</div>
                 </div>
             );
         }
 
-        return "Select Countries";
-    }
+        return 'Select Countries';
+    };
 
     const panelFooterTemplate = () => {
         const selectedItems = selectedCountries;
@@ -106,8 +105,8 @@ export default function AdvanceDoc() {
             <div className="py-2 px-3">
                 <b>{length}</b> item{length > 1 ? 's' : ''} selected.
             </div>
-            );
-    }
+        );
+    };
 
     return (
         <div className="card flex justify-content-center multiselect-demo">
@@ -123,8 +122,7 @@ import { MultiSelect, MultiSelectChangeParams } from 'primereact/multiselect';
 import './MultiSelectDemo.css';
 
 export default function AdvanceDoc() {
-    const [selectedCountries, setSelectedCountries] = useState<any>(null);
-
+    const [selectedCountries, setSelectedCountries] = useState(null);
     const countries = [
         { name: 'Australia', code: 'AU' },
         { name: 'Brazil', code: 'BR' },
@@ -138,27 +136,27 @@ export default function AdvanceDoc() {
         { name: 'United States', code: 'US' }
     ];
 
-    const countryTemplate = (option: any) => {
+    const countryTemplate = (option) => {
         return (
             <div className="country-item">
-                <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${item.code.toLowerCase()}\`} />
+                <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} className={\`flag flag-\${item.code.toLowerCase()}\`} />
                 <div>{option.name}</div>
             </div>
         );
     };
 
-    const selectedCountriesTemplate = (option: any) => {
+    const selectedCountriesTemplate = (option) => {
         if (option) {
             return (
                 <div className="country-item country-item-value">
-                    <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                    <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} className={\`flag flag-\${option.code.toLowerCase()}\`} />
                     <div>{option.name}</div>
                 </div>
             );
         }
 
-        return "Select Countries";
-    }
+        return 'Select Countries';
+    };
 
     const panelFooterTemplate = () => {
         const selectedItems = selectedCountries;
@@ -168,8 +166,8 @@ export default function AdvanceDoc() {
             <div className="py-2 px-3">
                 <b>{length}</b> item{length > 1 ? 's' : ''} selected.
             </div>
-            );
-    }
+        );
+    };
 
     return (
         <div className="card flex justify-content-center multiselect-demo">
@@ -179,7 +177,8 @@ export default function AdvanceDoc() {
     );
 }
         `,
-        css: `
+        extFiles: {
+            'MultiSelectDemo.css': `
 /* MultiSelectDemo.css */
 
 .multiselect-demo .p-multiselect {
@@ -204,6 +203,7 @@ export default function AdvanceDoc() {
     width: 17px;
 }
         `
+        }
     };
 
     return (

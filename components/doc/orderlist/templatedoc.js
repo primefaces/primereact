@@ -72,7 +72,8 @@ export function TemplateDoc(props) {
 import React, { useState, useEffect, useRef } from 'react';
 import { OrderList } from 'primereact/orderlist';
 import { Button } from 'primereact/button';
-import { ProductService } from '../service/ProductService';
+import { InputText } from 'primereact/inputtext';
+import { ProductService } from './service/ProductService';
 
 export default function TemplateDoc() {
     const [products, setProducts] = useState([]);
@@ -129,7 +130,7 @@ export default function TemplateDoc() {
     
     return (
         <div className="card">
-            <OrderList value={products} header="List of Products" dataKey="id" itemTemplate={itemTemplate} filter filterBy="name" filterTemplate={filterTemplate}></OrderList>
+            <OrderList value={products} onChange={(e) => setProducts(e.value)} header="List of Products" dataKey="id" itemTemplate={itemTemplate} filter filterBy="name" filterTemplate={filterTemplate}></OrderList>
         </div>
     )
 }
@@ -138,7 +139,8 @@ export default function TemplateDoc() {
 import React, { useState, useEffect, useRef } from 'react';
 import { OrderList } from 'primereact/orderlist';
 import { Button } from 'primereact/button';
-import { ProductService } from '../service/ProductService';
+import { InputText } from 'primereact/inputtext';
+import { ProductService } from './service/ProductService';
 
 export default function TemplateDoc() {
     const [products, setProducts] = useState([]);
@@ -195,7 +197,7 @@ export default function TemplateDoc() {
 
     return (
         <div className="card">
-            <OrderList value={products} header="List of Products" dataKey="id" itemTemplate={itemTemplate} filter filterBy="name" filterTemplate={filterTemplate}></OrderList>
+            <OrderList value={products} onChange={(e) => setProducts(e.value)} header="List of Products" dataKey="id" itemTemplate={itemTemplate} filter filterBy="name" filterTemplate={filterTemplate}></OrderList>
         </div>
     )
 }
@@ -224,9 +226,9 @@ export default function TemplateDoc() {
                 <p>OrderList requires an array as its value, a template for its content where each item in the array can be accessed inside the template and onChangecallback to update the value after reorder.</p>
             </DocSectionText>
             <div className="card">
-                <OrderList value={products} header="List of Products" dataKey="id" itemTemplate={itemTemplate} filter filterBy="name" filterTemplate={filterTemplate}></OrderList>
+                <OrderList value={products} onChange={(e) => setProducts(e.value)} header="List of Products" dataKey="id" itemTemplate={itemTemplate} filter filterBy="name" filterTemplate={filterTemplate}></OrderList>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

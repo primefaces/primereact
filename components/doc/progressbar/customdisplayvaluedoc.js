@@ -20,7 +20,7 @@ export function CustomDisplayValueDoc(props) {
 import React from 'react';
 import { ProgressBar } from 'primereact/progressbar';
 
-export const CustomDisplayValueDoc = () => {
+export default function CustomDisplayValueDoc() {
 
     const displayValueTemplate = (value) => {
         return (
@@ -41,7 +41,7 @@ export const CustomDisplayValueDoc = () => {
 import React from 'react';
 import { ProgressBar } from 'primereact/progressbar';
 
-export const CustomDisplayValueDoc = () => {
+export default function CustomDisplayValueDoc() {
 
     const displayValueTemplate = (value) => {
         return (

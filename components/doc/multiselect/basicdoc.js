@@ -62,7 +62,8 @@ export default function BasicDoc() {
     );
 }
         `,
-        css: `
+        extFiles: {
+            'MultiSelectDemo.css': `
 /* MultiSelectDemo.css */
 
 .multiselect-demo .p-multiselect {
@@ -87,6 +88,7 @@ export default function BasicDoc() {
     width: 17px;
 }
         `
+        }
     };
 
     return (

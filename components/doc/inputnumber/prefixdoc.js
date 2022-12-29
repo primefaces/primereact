@@ -27,21 +27,23 @@ export default function PrefixDoc() {
     const [value4, setValue4] = useState(20);
 
     return (
-        <div className="field col-12 md:col-3">
-            <label htmlFor="mile">Mile</label>
-            <InputNumber inputId="mile" value={value1} onValueChange={(e) => setValue1(e.value)} suffix=" mi" />
-        </div>
-        <div className="field col-12 md:col-3">
-            <label htmlFor="percent">Percent</label>
-            <InputNumber inputId="percent" value={value2} onValueChange={(e) => setValue2(e.value)} prefix="%" />
-        </div>
-        <div className="field col-12 md:col-3">
-            <label htmlFor="expiry">Expiry</label>
-            <InputNumber inputId="expiry" value={value3} onValueChange={(e) => setValue3(e.value)} prefix="Expires in " suffix=" days" />
-        </div>
-        <div className="field col-12 md:col-3">
-            <label htmlFor="temperature">Temperature</label>
-            <InputNumber inputId="temperature" value={value4} onValueChange={(e) => setValue4(e.value)} prefix="&uarr; " suffix="℃" min={0} max={40} />
+        <div className="card flex justify-content-center p-fluid">
+            <div className="field col-12 md:col-3">
+                <label htmlFor="mile">Mile</label>
+                <InputNumber inputId="mile" value={value1} onValueChange={(e) => setValue1(e.value)} suffix=" mi" />
+            </div>
+            <div className="field col-12 md:col-3">
+                <label htmlFor="percent">Percent</label>
+                <InputNumber inputId="percent" value={value2} onValueChange={(e) => setValue2(e.value)} prefix="%" />
+            </div>
+            <div className="field col-12 md:col-3">
+                <label htmlFor="expiry">Expiry</label>
+                <InputNumber inputId="expiry" value={value3} onValueChange={(e) => setValue3(e.value)} prefix="Expires in " suffix=" days" />
+            </div>
+            <div className="field col-12 md:col-3">
+                <label htmlFor="temperature">Temperature</label>
+                <InputNumber inputId="temperature" value={value4} onValueChange={(e) => setValue4(e.value)} prefix="&uarr; " suffix="℃" min={0} max={40} />
+            </div>
         </div>
     )
 }
@@ -57,21 +59,23 @@ export default function PrefixDoc() {
     const [value4, setValue4] = useState<number>(20);
 
     return (
-        <div className="field col-12 md:col-3">
-            <label htmlFor="mile">Mile</label>
-            <InputNumber inputId="mile" value={value1} onValueChange={(e : InputNumberValueChangeParams) => setValue1(e.value)} suffix=" mi" />
-        </div>
-        <div className="field col-12 md:col-3">
-            <label htmlFor="percent">Percent</label>
-            <InputNumber inputId="percent" value={value2} onValueChange={(e : InputNumberValueChangeParams) => setValue2(e.value)} prefix="%" />
-        </div>
-        <div className="field col-12 md:col-3">
-            <label htmlFor="expiry">Expiry</label>
-            <InputNumber inputId="expiry" value={value3} onValueChange={(e : InputNumberValueChangeParams) => setValue3(e.value)} prefix="Expires in " suffix=" days" />
-        </div>
-        <div className="field col-12 md:col-3">
-            <label htmlFor="temperature">Temperature</label>
-            <InputNumber inputId="temperature" value={value4} onValueChange={(e : InputNumberValueChangeParams) => setValue4(e.value)} prefix="&uarr; " suffix="℃" min={0} max={40} />
+        <div className="card flex justify-content-center p-fluid">
+            <div className="field col-12 md:col-3">
+                <label htmlFor="mile">Mile</label>
+                <InputNumber inputId="mile" value={value1} onValueChange={(e : InputNumberValueChangeParams) => setValue1(e.value)} suffix=" mi" />
+            </div>
+            <div className="field col-12 md:col-3">
+                <label htmlFor="percent">Percent</label>
+                <InputNumber inputId="percent" value={value2} onValueChange={(e : InputNumberValueChangeParams) => setValue2(e.value)} prefix="%" />
+            </div>
+            <div className="field col-12 md:col-3">
+                <label htmlFor="expiry">Expiry</label>
+                <InputNumber inputId="expiry" value={value3} onValueChange={(e : InputNumberValueChangeParams) => setValue3(e.value)} prefix="Expires in " suffix=" days" />
+            </div>
+            <div className="field col-12 md:col-3">
+                <label htmlFor="temperature">Temperature</label>
+                <InputNumber inputId="temperature" value={value4} onValueChange={(e : InputNumberValueChangeParams) => setValue4(e.value)} prefix="&uarr; " suffix="℃" min={0} max={40} />
+            </div>
         </div>
     )
 }

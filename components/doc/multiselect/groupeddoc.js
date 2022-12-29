@@ -58,7 +58,7 @@ import { MultiSelect } from 'primereact/multiselect';
 import './MultiSelectDemo.css';
 
 export default function GroupedDoc() {
-    const [selectedCities, setSelectedCities] = useState(null);
+    const [selectedGroupedCities, setSelectedGroupedCities] = useState(null);
     const groupedCities = [
         {
             label: 'Germany', code: 'DE',
@@ -112,7 +112,7 @@ import { MultiSelect, MultiSelectChangeParams } from 'primereact/multiselect';
 import './MultiSelectDemo.css';
 
 export default function GroupedDoc() {
-    const [selectedCities, setSelectedCities] = useState<any>(null);
+    const [selectedGroupedCities, setSelectedGroupedCities] = useState<any>(null);
     const groupedCities = [
         {
             label: 'Germany', code: 'DE',
@@ -160,7 +160,8 @@ export default function GroupedDoc() {
     );
 }
         `,
-        css: `
+        extFiles: {
+            'MultiSelectDemo.css': `
 /* MultiSelectDemo.css */
 
 .multiselect-demo .p-multiselect {
@@ -185,6 +186,7 @@ export default function GroupedDoc() {
     width: 17px;
 }
         `
+        }
     };
 
     return (

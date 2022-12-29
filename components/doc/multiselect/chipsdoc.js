@@ -61,7 +61,8 @@ export default function ChipsDoc() {
     );
 }
         `,
-        css: `
+        extFiles: {
+            'MultiSelectDemo.css': `
 /* MultiSelectDemo.css */
 
 .multiselect-demo .p-multiselect {
@@ -86,6 +87,7 @@ export default function ChipsDoc() {
     width: 17px;
 }
         `
+        }
     };
 
     return (

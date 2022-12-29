@@ -215,7 +215,8 @@ export default function CustomDoc() {
                 const first = currentPage ? options.rows * (page - 1) : 0;
 
                 setCustomFirst1(first);
-                setPageInputTooltip('Press \'Enter\' key to go to this page.');
+
+                setPageInputTooltip("Press \'Enter\' key to go to this page.");
             }
         }
     }
@@ -384,7 +385,7 @@ export default function CustomDoc() {
                 const first = currentPage ? options.rows * (page - 1) : 0;
 
                 setCustomFirst1(first);
-                setPageInputTooltip('Press \'Enter\' key to go to this page.');
+                setPageInputTooltip("Press \'Enter\' key to go to this page.");
             }
         }
     }

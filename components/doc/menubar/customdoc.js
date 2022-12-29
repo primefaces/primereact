@@ -137,7 +137,7 @@ export function CustomDoc(props) {
 `,
         javascript: `
 import React from 'react'; 
-import { Menu } from 'primereact/menu';
+import { Menubar } from 'primereact/menubar';
 import { InputText } from 'primereact/inputtext';
 
 export default function CustomDoc() {
@@ -279,7 +279,7 @@ const items = [
         `,
         typescript: `
 import React from 'react'; 
-import { Menu } from 'primereact/menu';
+import { Menubar } from 'primereact/menubar';
 import { InputText } from 'primereact/inputtext';
 
 export default function CustomDoc() {

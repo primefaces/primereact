@@ -27,6 +27,7 @@ export function Templating(props) {
         javascript: `
 import React, { useState } from "react";
 import { Password } from 'primereact/password';
+import { Divider } from 'primereact/divider';
 
 export default function Templating() {
     const [value, setValue] = useState('');
@@ -54,6 +55,7 @@ export default function Templating() {
         typescript: `
 import React, { useState } from "react";
 import { Password } from 'primereact/password';
+import { Divider } from 'primereact/divider';
 
 export default function Templating() {
     const [value, setValue] = useState<string>('');

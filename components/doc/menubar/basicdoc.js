@@ -129,7 +129,7 @@ export function BasicDoc(props) {
 
     const code = {
         basic: `
-<Menubar model={items}/>    
+<Menu model={items}/>    
 `,
         javascript: `
 import React from 'react'; 
@@ -265,7 +265,7 @@ const items = [
     ];
 
     return (
-        <Menubar model={items}/>
+        <Menu model={items}/>
     )
 }
         `,
@@ -403,7 +403,7 @@ const items = [
     ];
     
     return (
-        <Menubar model={items}/>
+        <Menu model={items}/>
     )
 }
         `

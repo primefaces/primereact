@@ -42,12 +42,11 @@ export function FilterDoc(props) {
         javascript: `
 import React, { useState, useEffect } from 'react';
 import { OrderList } from 'primereact/orderlist';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 export default function FilterDoc() {
     const [products, setProducts] = useState([]);
     
-
     useEffect(() => {
         ProductService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -81,12 +80,11 @@ export default function FilterDoc() {
         typescript: `
 import React, { useState, useEffect } from 'react';
 import { OrderList } from 'primereact/orderlist';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 export default function FilterDoc() {
     const [products, setProducts] = useState([]);
     
-
     useEffect(() => {
         ProductService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -146,7 +144,7 @@ export default function FilterDoc() {
             <div className="card">
                 <OrderList value={products} filter filterBy="name" itemTemplate={itemTemplate} header="Products" onChange={(e) => setProducts(e.value)} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

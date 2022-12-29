@@ -55,7 +55,7 @@ export function AutoDoc(props) {
         javascript: `
 import React, { useState, useEffect } from "react";
 import { Mention } from 'primereact/mention';
-import { CustomerService } from '../../../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 export default function AutoDoc() {
     const [customers, setCustomers] = useState([]);
@@ -110,7 +110,7 @@ export default function AutoDoc() {
         typescript: `
 import React, { useState, useEffect } from "react";
 import { Mention, MentionSearchParams } from 'primereact/mention';
-import { CustomerService } from '../../../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 export default function AutoDoc() {
     const [customers, setCustomers] = useState<any>([]);
@@ -196,7 +196,7 @@ export default function AutoDoc() {
             <div className="card flex justify-content-center">
                 <Mention suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people" rows={5} cols={40} autoResize itemTemplate={itemTemplate} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );
 }

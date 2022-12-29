@@ -12,7 +12,7 @@ export function IndeterminateDoc(props) {
 import React from 'react';
 import { ProgressBar } from 'primereact/progressbar';
 
-export const IndeterminateDoc = () => {
+export default function IndeterminateDoc() {
 
     return (
         <div className="card">
@@ -25,7 +25,7 @@ export const IndeterminateDoc = () => {
 import React from 'react';
 import { ProgressBar } from 'primereact/progressbar';
 
-export const IndeterminateDoc = () => {
+export default function IndeterminateDoc() {
 
     return (
         <div className="card">

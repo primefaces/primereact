@@ -41,7 +41,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { ProgressBar } from 'primereact/progressbar';
 import { Toast } from 'primereact/toast';
 
-export const DynamicDoc = () => {
+export default function DynamicDoc() {
     const [value1, setValue1] = useState(0);
     const toast = useRef(null);
     const interval = useRef(null);
@@ -82,7 +82,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { ProgressBar } from 'primereact/progressbar';
 import { Toast } from 'primereact/toast';
 
-export const DynamicDoc = () => {
+export default function DynamicDoc() {
     const [value1, setValue1] = useState<number>(0);
     const toast = useRef<Toast | null>(null);
     const interval = useRef<NodeJS.Timeout | null>(null);

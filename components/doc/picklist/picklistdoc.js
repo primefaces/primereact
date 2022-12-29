@@ -52,9 +52,9 @@ export function PickListDoc(props) {
         javascript: `
 import React, { useState, useEffect } from 'react';
 import { PickList } from 'primereact/picklist';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
-const PickListDemo = () => {
+export default function PickListDemo() {
     const [source, setSource] = useState([]);
     const [target, setTarget] = useState([]);
     
@@ -99,9 +99,9 @@ const PickListDemo = () => {
         typescript: `
 import React, { useState, useEffect } from 'react';
 import { PickList } from 'primereact/picklist';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
-const PickListDemo = () => {
+export default function PickListDemo() {
     const [source, setSource] = useState([]);
     const [target, setTarget] = useState([]);
     
@@ -181,7 +181,7 @@ const PickListDemo = () => {
                     targetFilterPlaceholder="Search by name"
                 />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

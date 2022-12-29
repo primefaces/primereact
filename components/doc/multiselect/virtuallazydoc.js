@@ -38,7 +38,7 @@ export function VirtualLazyDoc(props) {
 
     const code = {
         basic: `
-<MultiSelect value={selectedItems2} options={lazyItems} onChange={(e) => setSelectedItems2(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 43, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
+<MultiSelect value={selectedItems} options={lazyItems} onChange={(e) => setSelectedItems(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 43, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
     return (
         <div className="flex align-items-center p-2" style={{ height: '43px' }}>
             <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />
@@ -47,9 +47,9 @@ export function VirtualLazyDoc(props) {
 }} maxSelectedLabels={3} placeholder="Select Item" showSelectAll={false}/>
         `,
         javascript: `
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { MultiSelect, SelectItemOptionsType } from 'primereact/multiselect';
-import { Skeleton } from '../../lib/skeleton/skeleton';
+import { Skeleton } from 'primereact/skeleton/';
 import './MultiSelectDemo.css';
 
 export default function VirtualLazyDoc() {
@@ -58,9 +58,35 @@ export default function VirtualLazyDoc() {
     const [selectedItems, setSelectedItems] = useState(null);
     const loadLazyTimeout = useRef(null);
 
+    useEffect(() => {
+        setLazyItems(Array.from({ length: 100000 }));
+        setLazyLoading(false);
+    }, []);
+
+    const onLazyLoad = (event) => {
+        setLazyLoading(true);
+
+        if (loadLazyTimeout.current) {
+            clearTimeout(loadLazyTimeout.current);
+        }
+
+        //imitate delay of a backend call
+        loadLazyTimeout.current = setTimeout(() => {
+            const { first, last } = event;
+            const _lazyItems = [...lazyItems];
+
+            for (let i = first; i < last; i++) {
+                _lazyItems[i] = { label: \`Item #\${i}\`, value: i };
+            }
+
+            setLazyItems(_lazyItems);
+            setLazyLoading(false);
+        }, Math.random() * 1000 + 250);
+    };
+
     return (
         <div className="card flex justify-content-center multiselect-demo">
-            <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e) => setSelectedItems2(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 43, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
+            <MultiSelect value={selectedItems} options={lazyItems} onChange={(e) => setSelectedItems(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 43, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
                 return (
                     <div className="flex align-items-center p-2" style={{ height: '43px' }}>
                         <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />
@@ -72,9 +98,9 @@ export default function VirtualLazyDoc() {
 }
         `,
         typescript: `
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { MultiSelect, SelectItemOptionsType, MultiSelectChangeParams } from 'primereact/multiselect';
-import { Skeleton } from '../../lib/skeleton/skeleton';
+import { Skeleton } from 'primereact/skeleton/';
 import './MultiSelectDemo.css';
 
 export default function VirtualLazyDoc() {
@@ -83,9 +109,35 @@ export default function VirtualLazyDoc() {
     const [selectedItems, setSelectedItems] = useState<SelectItemOptionsType>([]);
     const loadLazyTimeout = useRef<number>(null);
 
+    useEffect(() => {
+        setLazyItems(Array.from({ length: 100000 }));
+        setLazyLoading(false);
+    }, []);
+
+    const onLazyLoad = (event) => {
+        setLazyLoading(true);
+
+        if (loadLazyTimeout.current) {
+            clearTimeout(loadLazyTimeout.current);
+        }
+
+        //imitate delay of a backend call
+        loadLazyTimeout.current = setTimeout(() => {
+            const { first, last } = event;
+            const _lazyItems = [...lazyItems];
+
+            for (let i = first; i < last; i++) {
+                _lazyItems[i] = { label: \`Item #\${i}\`, value: i };
+            }
+
+            setLazyItems(_lazyItems);
+            setLazyLoading(false);
+        }, Math.random() * 1000 + 250);
+    };
+
     return (
         <div className="card flex justify-content-center multiselect-demo">
-            <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e: MultiSelectChangeParams) => setSelectedItems2(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 43, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
+            <MultiSelect value={selectedItems} options={lazyItems} onChange={(e: MultiSelectChangeParams) => setSelectedItems(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 43, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
                 return (
                     <div className="flex align-items-center p-2" style={{ height: '43px' }}>
                         <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />
@@ -96,7 +148,8 @@ export default function VirtualLazyDoc() {
     );
 }
         `,
-        css: `
+        extFiles: {
+            'MultiSelectDemo.css': `
 /* MultiSelectDemo.css */
 
 .multiselect-demo .p-multiselect {
@@ -121,6 +174,7 @@ export default function VirtualLazyDoc() {
     width: 17px;
 }
         `
+        }
     };
 
     return (

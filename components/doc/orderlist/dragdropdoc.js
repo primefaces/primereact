@@ -42,12 +42,11 @@ export function DragDropDoc(props) {
         javascript: `
 import React, { useState, useEffect } from 'react';
 import { OrderList } from 'primereact/orderlist';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 export default function DragDropDoc() {
     const [products, setProducts] = useState([]);
     
-
     useEffect(() => {
         ProductService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -81,12 +80,11 @@ export default function DragDropDoc() {
         typescript: `
 import React, { useState, useEffect } from 'react';
 import { OrderList } from 'primereact/orderlist';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 export default function DragDropDoc() {
     const [products, setProducts] = useState([]);
     
-
     useEffect(() => {
         ProductService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -145,7 +143,7 @@ export default function DragDropDoc() {
             <div className="card">
                 <OrderList value={products} itemTemplate={itemTemplate} dragdrop onChange={(e) => setProducts(e.value)}></OrderList>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }
