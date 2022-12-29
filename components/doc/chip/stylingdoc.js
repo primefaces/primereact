@@ -17,7 +17,7 @@ export function StylingDoc(props) {
 import React from 'react';
 import { Chip } from 'primereact/chip';
 
-export const StylingDoc = () => {
+export default function StylingDoc() {
 
     return (
         <div className="card flex flex-wrap gap-2">
@@ -33,7 +33,7 @@ export const StylingDoc = () => {
 import React from 'react';
 import { Chip } from 'primereact/chip';
 
-export const StylingDoc = () => {
+export default function StylingDoc() {
 
     return (
         <div className="card flex flex-wrap gap-2">

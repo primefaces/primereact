@@ -13,7 +13,7 @@ export function SizesDoc(props) {
 import React from 'react';
 import { Badge } from 'primereact/badge';
 
-export const SizesDoc = () => {
+export default function SizesDoc() {
 
     return (
         <div className="card flex justify-content-center align-items-end">
@@ -28,7 +28,7 @@ export const SizesDoc = () => {
 import React from 'react';
 import { Badge } from 'primereact/badge';
 
-export const SizesDoc = () => {
+export default function SizesDoc() {
 
     return (
         <div className="card flex justify-content-center align-items-end">

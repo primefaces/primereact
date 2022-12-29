@@ -36,7 +36,7 @@ import { BlockUI } from 'primereact/blockui';
 import { Panel } from 'primereact/panel';
 import { Button } from 'primereact/button';
 
-export const TemplateDoc = () => {
+export default function TemplateDoc() {
     const [blockedPanel, setBlockedPanel] = useState(false);
 
     const blockPanel = () => {
@@ -72,7 +72,7 @@ import { BlockUI } from 'primereact/blockui';
 import { Panel } from 'primereact/panel';
 import { Button } from 'primereact/button';
 
-export const TemplateDoc = () => {
+export default function TemplateDoc() {
     const [blockedPanel, setBlockedPanel] = useState<boolean>(false);
 
     function blockPanel(): void {

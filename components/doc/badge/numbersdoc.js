@@ -15,7 +15,7 @@ export function NumbersDoc(props) {
 import React from 'react';
 import { Badge } from 'primereact/badge';
 
-export const NumbersDoc = () => {
+export default function NumbersDoc() {
 
     return (
         <div className="card flex justify-content-center">
@@ -32,7 +32,7 @@ export const NumbersDoc = () => {
 import React from 'react';
 import { Badge } from 'primereact/badge';
 
-export const NumbersDoc = () => {
+export default function NumbersDoc() {
 
     return (
         <div className="card flex justify-content-center">

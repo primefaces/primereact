@@ -14,7 +14,7 @@ export function BasicDoc(props) {
 import React from 'react';
 import { Chip } from 'primereact/chip';
 
-export const BasicDoc = () => {
+export default function BasicDoc() {
 
     return (
         <div className="card flex flex-wrap gap-2">
@@ -30,7 +30,7 @@ export const BasicDoc = () => {
 import React from 'react';
 import { Chip } from 'primereact/chip';
 
-export const BasicDoc = () => {
+export default function BasicDoc() {
 
     return (
         <div className="card flex flex-wrap gap-2">

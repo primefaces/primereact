@@ -21,7 +21,7 @@ import React, { useRef } from 'react';
 import { Ripple } from 'primereact/ripple';
 import { Captcha } from 'primereact/captcha';
 
-export const CaptchaDoc = () => {
+export default function CaptchaDoc() {
     const toast = useRef(null);
 
     const showResponse = () => {
@@ -41,7 +41,7 @@ import React, { useRef } from 'react';
 import { Ripple } from 'primereact/ripple';
 import { Captcha } from 'primereact/captcha';
 
-export const CaptchaDoc = () => {
+export default function CaptchaDoc() {
     const toast = useRef<Toast>(null);
 
     const showResponse = () => {

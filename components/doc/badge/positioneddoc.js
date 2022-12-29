@@ -13,7 +13,7 @@ export function PositionedDoc(props) {
 import React from 'react';
 import { Badge } from 'primereact/badge';
 
-export const PositionedDoc = () => {
+export default function PositionedDoc() {
 
     return (
         <div className="card flex justify-content-center">
@@ -28,7 +28,7 @@ export const PositionedDoc = () => {
 import React from 'react';
 import { Badge } from 'primereact/badge';
 
-export const PositionedDoc = () => {
+export default function PositionedDoc() {
 
     return (
         <div className="card flex justify-content-center">

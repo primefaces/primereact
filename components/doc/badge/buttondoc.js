@@ -14,7 +14,7 @@ import React from 'react';
 import { Button } from 'primereact/button';
 import { Badge } from 'primereact/badge';
 
-export const ButtonDoc = () => {
+export default function ButtonDoc() {
 
     return (
         <div className="card flex justify-content-center">
@@ -29,7 +29,7 @@ import React from 'react';
 import { Button } from 'primereact/button';
 import { Badge } from 'primereact/badge';
 
-export const ButtonDoc = () => {
+export default function ButtonDoc() {
 
     return (
         <div className="card flex justify-content-center">

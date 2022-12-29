@@ -14,7 +14,7 @@ export function IconDoc(props) {
 import React from 'react';
 import { Chip } from 'primereact/chip';
 
-export const IconDoc = () => {
+export default function IconDoc() {
 
     return (
         <div className="card flex flex-wrap gap-2">
@@ -30,7 +30,7 @@ export const IconDoc = () => {
 import React from 'react';
 import { Chip } from 'primereact/chip';
 
-export const IconDoc = () => {
+export default function IconDoc() {
 
     return (
         <div className="card flex flex-wrap gap-2">

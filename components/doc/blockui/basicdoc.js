@@ -21,7 +21,7 @@ import React from 'react';
 import { BlockUI } from 'primereact/blockui';
 import { Panel } from 'primereact/panel';
 
-export const BasicDoc = () => {
+export default function BasicDoc() {
 
     return (
         <div className="card">
@@ -43,7 +43,7 @@ import React from 'react';
 import { BlockUI } from 'primereact/blockui';
 import { Panel } from 'primereact/panel';
 
-export const BasicDoc = () => {
+export default function BasicDoc() {
 
     return (
         <div className="card">
