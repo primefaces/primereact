@@ -3,32 +3,27 @@ import { Calendar } from '../../lib/calendar/Calendar';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function DisabledDoc(props) {
+export function FloatLabelDoc(props) {
     const [date, setDate] = useState(null);
-
-    let today = new Date();
-
-    let invalidDates = [today];
 
     const code = {
         basic: `
-<Calendar id="disableddays" value={date} onChange={(e) => setDate(e.value)} disabledDates={invalidDates} disabledDays={[0, 6]} readOnlyInput />
-
+<Calendar id="calendar" value={date} onChange={(e) => setDate(e.date)} />
+<label htmlFor="calendar">Calendar</label>
         `,
         javascript: `
 import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
-export default function DisabledDoc() {
+export default function FloatLabelDoc() {
     const [date, setDate] = useState(null);
-
-    let today = new Date();
-
-    let invalidDates = [today];
 
     return (
         <div className="card flex justify-content-center">
-            <Calendar id="disableddays" value={date} onChange={(e) => setDate(e.value)} disabledDates={invalidDates} disabledDays={[0, 6]} readOnlyInput />
+            <span className="p-float-label">
+                <Calendar id="calendar" value={date} onChange={(e) => setDate(e.date)} />
+                <label htmlFor="calendar">Calendar</label>
+            </span>
         </div>
     )
 }
@@ -37,16 +32,15 @@ export default function DisabledDoc() {
 import React, { useState } from "react";
 import { Calendar, CalendarChangeParams } from 'primereact/calendar';
 
-export default function DisabledDoc() {
+export default function FloatLabelDoc() {
     const [date, setDate] = useState<Date | null>(null);
 
-    let today = new Date();
-
-    let invalidDates = [today];
-    
     return (
         <div className="card flex justify-content-center">
-            <Calendar id="disableddays" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} disabledDates={invalidDates} disabledDays={[0, 6]} readOnlyInput />
+            <span className="p-float-label">
+                <Calendar id="calendar" value={date} onChange={(e) => setDate(e.date)} />
+                <label htmlFor="calendar">Calendar</label>
+            </span>
         </div>
     )
 }
@@ -56,12 +50,13 @@ export default function DisabledDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    Calendar is used a controlled input component with <i>value</i> and <i>onChange</i> properties.
-                </p>
+                <p>ToDo</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Calendar id="disableddays" value={date} onChange={(e) => setDate(e.value)} disabledDates={invalidDates} disabledDays={[0, 6]} readOnlyInput />
+                <span className="p-float-label">
+                    <Calendar id="calendar" value={date} onChange={(e) => setDate(e.date)} />
+                    <label htmlFor="calendar">Calendar</label>
+                </span>
             </div>
             <DocSectionCode code={code} />
         </>

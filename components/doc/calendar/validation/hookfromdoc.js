@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Button } from '../../lib/button/Button';
-import { Calendar } from '../../lib/calendar/Calendar';
-import { classNames } from '../../lib/utils/Utils';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { Calendar } from '../../../lib/calendar/Calendar';
+import { Button } from '../../../lib/button/Button';
+import { classNames } from '../../../lib/utils/Utils';
+import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
-export function ValidationDoc(props) {
+export function HookFormDoc(props) {
     const [formData, setFormData] = useState({});
     const defaultValues = { birthdate: null };
     const form = useForm({ defaultValues });
@@ -25,7 +25,7 @@ export function ValidationDoc(props) {
 <Controller name="birthdate"  control={form.control} rules={{ required: 'Birth Date is required.'}}
     render={({ field, fieldState }) => (
         <>
-            <label htmlFor={field.name} className={classNames({ 'p-error': errors.name })}>Birth Date*</label>
+            <label htmlFor={field.name} className={classNames({ 'p-error': errors.name })}>Birth Date</label>
             <Calendar id={field.name} value={field.value} inputRef={field.ref} onChange={field.onChange} dateFormat="dd/mm/yy" className={classNames({ 'p-invalid': fieldState.error })} />
             {getFormErrorMessage(field.name)}
         </>
@@ -39,7 +39,7 @@ import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
 import { Calendar } from "primereact/calendar";
 
-export default function ValidationDemo() {
+export default function HookFormDoc() {
     const [formData, setFormData] = useState({});
     const defaultValues = {birthdate: ''};
     const form = useForm({ defaultValues });
@@ -64,7 +64,7 @@ export default function ValidationDemo() {
                         render={({ field, fieldState }) => (
                             <>
                                 <label htmlFor={field.name} className={classNames({ 'p-error': errors.birthdate })}>
-                                    Birth Date*
+                                    Birth Date
                                 </label>
                                 <Calendar id={field.name} value={field.value} inputRef={field.ref} onChange={field.onChange} dateFormat="dd/mm/yy" className={classNames({ 'p-invalid': fieldState.error })} />
                                 {getFormErrorMessage(field.name)}
@@ -85,7 +85,7 @@ import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
 import { Calendar } from "primereact/calendar";
 
-export default function InvalidDemo() {
+export default function HookFormDoc() {
     const [formData, setFormData] = useState<any>({});
     const defaultValues = {birthdate: ''};
     const form = useForm({ defaultValues });
@@ -110,7 +110,7 @@ export default function InvalidDemo() {
                         render={({ field, fieldState }) => (
                             <>
                                 <label htmlFor={field.name} className={classNames({ 'p-error': errors.birthdate })}>
-                                    Birth Date*
+                                    Birth Date
                                 </label>
                                 <Calendar id={field.name} value={field.value} inputRef={field.ref} onChange={field.onChange} dateFormat="dd/mm/yy" className={classNames({ 'p-invalid': fieldState.error })} />
                                 {getFormErrorMessage(field.name)}
@@ -144,7 +144,7 @@ export default function InvalidDemo() {
                                 render={({ field, fieldState }) => (
                                     <>
                                         <label htmlFor={field.name} className={classNames({ 'p-error': errors.birthdate })}>
-                                            Birth Date*
+                                            Birth Date
                                         </label>
                                         <Calendar id={field.name} value={field.value} inputRef={field.ref} onChange={field.onChange} dateFormat="dd/mm/yy" className={classNames({ 'p-invalid': fieldState.error })} />
                                         {getFormErrorMessage(field.name)}
@@ -156,7 +156,7 @@ export default function InvalidDemo() {
                     </form>
                 </div>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} dependencies={{ 'react-hook-form': '^7.39.4' }} />
         </>
     );
 }

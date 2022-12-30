@@ -5,9 +5,11 @@ import { ButtonBarDoc } from '../../components/doc/calendar/buttonbardoc';
 import { DateFormatDoc } from '../../components/doc/calendar/dateformatdoc';
 import { DateTemplateDoc } from '../../components/doc/calendar/datetemplatedoc';
 import { DisabledDoc } from '../../components/doc/calendar/disableddoc';
+import { FloatLabelDoc } from '../../components/doc/calendar/floatlabeldoc';
 import { IconDoc } from '../../components/doc/calendar/icondoc';
 import { ImportDoc } from '../../components/doc/calendar/importdoc';
 import { InlineDoc } from '../../components/doc/calendar/inlinedoc';
+import { InvalidStateDoc } from '../../components/doc/calendar/invaliddoc';
 import { MinMaxDoc } from '../../components/doc/calendar/minmaxdoc';
 import { MonthPickerDoc } from '../../components/doc/calendar/monthpickerdoc';
 import { MultipleDoc } from '../../components/doc/calendar/multipledoc';
@@ -16,7 +18,8 @@ import { RangeDoc } from '../../components/doc/calendar/rangedoc';
 import { Time12Doc } from '../../components/doc/calendar/time12doc';
 import { Time24Doc } from '../../components/doc/calendar/time24doc';
 import { TouchUIDoc } from '../../components/doc/calendar/touchuidoc';
-import { ValidationDoc } from '../../components/doc/calendar/validationdoc';
+import { FormikDoc } from '../../components/doc/calendar/validation/formikdoc';
+import { HookFormDoc } from '../../components/doc/calendar/validation/hookfromdoc';
 import { YearPickerDoc } from '../../components/doc/calendar/yearpickerdoc';
 import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
@@ -35,6 +38,21 @@ const CalendarDemo = () => {
             component: BasicDoc
         },
         {
+            id: 'floatlabel',
+            label: 'Float Label',
+            component: FloatLabelDoc
+        },
+        {
+            id: 'invalidstate',
+            label: 'Invalid State',
+            component: InvalidStateDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
+        },
+        {
             id: 'dateformat',
             label: 'Date Format',
             component: DateFormatDoc
@@ -48,11 +66,6 @@ const CalendarDemo = () => {
             id: 'minmax',
             label: 'Min / Max',
             component: MinMaxDoc
-        },
-        {
-            id: 'disabled',
-            label: 'Disabled',
-            component: DisabledDoc
         },
         {
             id: 'multiple',
@@ -90,8 +103,8 @@ const CalendarDemo = () => {
             component: YearPickerDoc
         },
         {
-            id: 'multiplemonth',
-            label: 'Multiple Month',
+            id: 'multiplemonths',
+            label: 'Multiple Months',
             component: MultipleMonthsDoc
         },
         {
@@ -112,7 +125,19 @@ const CalendarDemo = () => {
         {
             id: 'validation',
             label: 'Validation',
-            component: ValidationDoc
+            description: 'Validate using popular React validation libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
         },
         {
             id: 'api',
