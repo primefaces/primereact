@@ -56,6 +56,7 @@ export function LinearDoc(props) {
 import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Toast } from 'primereact/toast';
+import './SpeedDialDemo.css'
 
 export default function LinearDoc() {
     const toast = useRef(null);
@@ -114,6 +115,7 @@ export default function LinearDoc() {
 import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Toast } from 'primereact/toast';
+import './SpeedDialDemo.css'
 
 export default function LinearDoc() {
     const toast = useRef<Toast>(null);
@@ -167,7 +169,29 @@ export default function LinearDoc() {
         </div>
     )
 }
+        `,
+        extFiles: {
+            'SpeedDialDemo.css': `
+/* SpeedDialDemo.css */
+
+.speeddial-linear-demo .p-speeddial-direction-up {
+    left: calc(50% - 2rem);
+    bottom: 0;
+}
+.speeddial-linear-demo .p-speeddial-direction-down {
+    left: calc(50% - 2rem);
+    top: 0;
+}
+.speeddial-linear-demo .p-speeddial-direction-left {
+    right: 0;
+    top: calc(50% - 2rem);
+}
+.speeddial-linear-demo .p-speeddial-direction-right {
+    left: 0;
+    top: calc(50% - 2rem);
+}
         `
+        }
     };
 
     return (

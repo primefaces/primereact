@@ -59,6 +59,7 @@ import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Tooltip } from 'primereact/tooltip';
 import { Toast } from 'primereact/toast';
+import './SpeedDialDemo.css'
 
 export default function TooltipDoc() {
     const toast = useRef(null);
@@ -119,6 +120,7 @@ import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Tooltip } from 'primereact/tooltip';
 import { Toast } from 'primereact/toast';
+import './SpeedDialDemo.css'
 
 export default function TooltipDoc() {
     const toast = useRef<Toast>(null);
@@ -173,7 +175,21 @@ export default function TooltipDoc() {
         </div>
     )
 }
-        `
+        `,
+        extFiles: {
+            'SpeedDialDemo.css': `
+/* SpeedDialDemo.css */
+
+.speeddial-tooltip-demo .p-speeddial-direction-up.speeddial-left {
+    left: 0;
+    bottom: 0;
+}
+.speeddial-tooltip-demo .p-speeddial-direction-up.speeddial-right {
+    right: 0;
+    bottom: 0;
+}
+            `
+        }
     };
 
     return (

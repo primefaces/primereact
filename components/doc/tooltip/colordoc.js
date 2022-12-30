@@ -18,13 +18,12 @@ export function ColorDoc(props) {
         `,
         javascript: `
 import React from 'react'; 
-import { Tooltip } from 'primereact/tooltip';
 import { Button } from 'primereact/button';
-
+import './TooltipDemo.css'
 export default function ColorDoc() {
 
     return (
-        <div>
+        <div className="card flex align-items-center flex-wrap">
             <Button label="Blue" className="p-button-secondary p-button-outlined mr-3 mb-2" tooltip="Blue" tooltipOptions={{ className: 'blue-tooltip', position: 'top' }} />
             <Button label="Green" className="p-button-secondary p-button-outlined mr-3 mb-2" tooltip="Green" tooltipOptions={{ className: 'green-tooltip', position: 'top' }} />
             <Button label="Yellow" className="p-button-secondary p-button-outlined mr-3 mb-2" tooltip="Yellow" tooltipOptions={{ className: 'yellow-tooltip', position: 'top' }} />
@@ -40,13 +39,13 @@ export default function ColorDoc() {
         `,
         typescript: `
 import React from 'react'; 
-import { Tooltip } from 'primereact/tooltip';
 import { Button } from 'primereact/button';
+import './TooltipDemo.css'
 
 export default function ColorDoc() {
     
     return (
-        <div>
+        <div className="card flex align-items-center flex-wrap">
             <Button label="Blue" className="p-button-secondary p-button-outlined mr-3 mb-2" tooltip="Blue" tooltipOptions={{ className: 'blue-tooltip', position: 'top' }} />
             <Button label="Green" className="p-button-secondary p-button-outlined mr-3 mb-2" tooltip="Green" tooltipOptions={{ className: 'green-tooltip', position: 'top' }} />
             <Button label="Yellow" className="p-button-secondary p-button-outlined mr-3 mb-2" tooltip="Yellow" tooltipOptions={{ className: 'yellow-tooltip', position: 'top' }} />

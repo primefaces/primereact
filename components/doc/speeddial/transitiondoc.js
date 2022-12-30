@@ -53,6 +53,7 @@ export function TransitionDoc(props) {
 import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Toast } from 'primereact/toast';
+import './SpeedDialDemo.css'
 
 export default function TransitionDoc() {
     const toast = useRef(null);
@@ -108,6 +109,7 @@ export default function TransitionDoc() {
 import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Toast } from 'primereact/toast';
+import './SpeedDialDemo.css'
 
 export default function TransitionDoc() {
     const toast = useRef<Toast>(null);
@@ -158,7 +160,17 @@ export default function TransitionDoc() {
         </div>
     )
 }
-        `
+        `,
+        extFiles: {
+            'SpeedDialDemo.css': `
+/* SpeedDialDemo.css */
+
+.speeddial-delay-demo .p-speeddial-direction-up {
+    left: calc(50% - 2rem);
+    bottom: 0;
+}
+            `
+        }
     };
 
     return (

@@ -102,7 +102,7 @@ export default function TerminalDoc() {
     }, []);
 
     return (
-        <div className="card">
+        <div className="card terminal-demo">
             <p>
                 Enter "<strong>date</strong>" to display the current date, "<strong>greet {'{0}'}</strong>" for a message, "<strong>random</strong>" to get a random number and "<strong>clear</strong>" to clear all commands.
             </p>
@@ -162,7 +162,7 @@ export default function TerminalDoc() {
     }, []);
 
     return (
-        <div className="card">
+        <div className="card terminal-demo">
             <p>
                 Enter "<strong>date</strong>" to display the current date, "<strong>greet {'{0}'}</strong>" for a message, "<strong>random</strong>" to get a random number and "<strong>clear</strong>" to clear all commands.
             </p>

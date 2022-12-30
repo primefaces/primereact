@@ -54,25 +54,29 @@ export default function ValidationDemo() {
     };
 
     return (
-        <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
-            <div className="field">
-                <Controller
-                    name="accept"
-                    control={form.control}
-                    rules={{ required: 'Accept is required.' }}
-                    render={({ field, fieldState }) => (
-                        <>
-                            <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.accept })}>
-                                Accept*
-                            </label>
-                            <TriStateCheckbox id={field.name} value={field.value} onChange={field.onChange} ref={field.ref} className={classNames({ 'p-invalid': fieldState.error })} />
-                            {getFormErrorMessage(field.name)}
-                        </>
-                    )}
-                />
+        <div className="card flex justify-content-center">
+            <div className="flex flex-column gap-2">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
+                    <div className="field">
+                        <Controller
+                            name="accept"
+                            control={form.control}
+                            rules={{ required: 'Accept is required.' }}
+                            render={({ field, fieldState }) => (
+                                <>
+                                    <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.accept })}>
+                                        Accept*
+                                    </label>
+                                    <TriStateCheckbox id={field.name} value={field.value} ref={field.ref} onChange={field.onChange} className={classNames({ 'p-invalid': fieldState.error })} />
+                                    {getFormErrorMessage(field.name)}
+                                </>
+                            )}
+                        />
+                    </div>
+                    <Button label="Submit" type="submit" icon="pi pi-check" />
+                </form>
             </div>
-            <Button label="Submit" type="submit" icon="pi pi-check" />
-        </form>
+        </div>
     )
 }
         `,
@@ -98,25 +102,29 @@ export default function InvalidDemo() {
     };
 
     return (
-        <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
-            <div className="field">
-                <Controller
-                    name="accept"
-                    control={form.control}
-                    rules={{ required: 'Accept is required.' }}
-                    render={({ field, fieldState }) => (
-                        <>
-                            <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.accept })}>
-                                Accept*
-                            </label>
-                            <TriStateCheckbox id={field.name} value={field.value} onChange={field.onChange} ref={field.ref} className={classNames({ 'p-invalid': fieldState.error })} />
-                            {getFormErrorMessage(field.name)}
-                        </>
-                    )}
-                />
+        <div className="card flex justify-content-center">
+            <div className="flex flex-column gap-2">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
+                    <div className="field">
+                        <Controller
+                            name="accept"
+                            control={form.control}
+                            rules={{ required: 'Accept is required.' }}
+                            render={({ field, fieldState }) => (
+                                <>
+                                    <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.accept })}>
+                                        Accept*
+                                    </label>
+                                    <TriStateCheckbox id={field.name} value={field.value} ref={field.ref} onChange={field.onChange} className={classNames({ 'p-invalid': fieldState.error })} />
+                                    {getFormErrorMessage(field.name)}
+                                </>
+                            )}
+                        />
+                    </div>
+                    <Button label="Submit" type="submit" icon="pi pi-check" />
+                </form>
             </div>
-            <Button label="Submit" type="submit" icon="pi pi-check" />
-        </form>
+        </div>
     )
 }
         `

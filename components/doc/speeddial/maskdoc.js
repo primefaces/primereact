@@ -53,6 +53,7 @@ export function MaskDoc(props) {
 import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Toast } from 'primereact/toast';
+import './SpeedDialDemo.css'
 
 export default function MaskDoc() {
     const toast = useRef(null);
@@ -108,6 +109,7 @@ export default function MaskDoc() {
 import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Toast } from 'primereact/toast';
+import './SpeedDialDemo.css'
 
 export default function MaskDoc() {
     const toast = useRef<Toast>(null);
@@ -158,7 +160,17 @@ export default function MaskDoc() {
         </div>
     )
 }
-        `
+        `,
+        extFiles: {
+            'SpeedDialDemo.css': `
+/* SpeedDialDemo.css */
+
+.speeddial-mask-demo .p-speeddial-direction-up {
+    right: 0;
+    bottom: 0;
+}
+            `
+        }
     };
 
     return (

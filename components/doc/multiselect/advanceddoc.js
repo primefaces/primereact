@@ -77,8 +77,8 @@ export default function AdvanceDoc() {
 
     const countryTemplate = (option) => {
         return (
-            <div className="country-item">
-                <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} className={\`flag flag-\${item.code.toLowerCase()}\`} />
+            <div className="country-item flex">
+                <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} className={\`flag flag-\${option.code.toLowerCase()} h-1 w-1 mr-2\`} />
                 <div>{option.name}</div>
             </div>
         );
@@ -138,8 +138,8 @@ export default function AdvanceDoc() {
 
     const countryTemplate = (option) => {
         return (
-            <div className="country-item">
-                <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} className={\`flag flag-\${item.code.toLowerCase()}\`} />
+            <div className="country-item flex">
+                <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} className={\`flag flag-\${option.code.toLowerCase()} h-1 w-1 mr-2\`} />
                 <div>{option.name}</div>
             </div>
         );

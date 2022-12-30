@@ -61,6 +61,7 @@ export function CircleDoc(props) {
 import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Toast } from 'primereact/toast';
+import './SpeedDialDemo.css'
 
 export default function CircleDoc() {
     const toast = useRef(null);
@@ -103,19 +104,17 @@ export default function CircleDoc() {
     ];
 
     return (
-        <div className="card">
-            <div className="speeddial-circle-demo" style={{ position: 'relative', height: '500px' }}>
-                <Toast ref={toast} />
-                <SpeedDial model={items} radius={80} type="circle" buttonClassName="p-button-warning" />
-                <SpeedDial model={items} radius={80} direction="up" type="semi-circle" />
-                <SpeedDial model={items} radius={80} direction="down" type="semi-circle" />
-                <SpeedDial model={items} radius={80} direction="left" type="semi-circle" />
-                <SpeedDial model={items} radius={80} direction="right" type="semi-circle" />
-                <SpeedDial model={items} radius={120} direction="up-left" type="quarter-circle" buttonClassName="p-button-success" />
-                <SpeedDial model={items} radius={120} direction="up-right" type="quarter-circle" buttonClassName="p-button-success" />
-                <SpeedDial model={items} radius={120} direction="down-left" type="quarter-circle" buttonClassName="p-button-success" />
-                <SpeedDial model={items} radius={120} direction="down-right" type="quarter-circle" buttonClassName="p-button-success" />
-            </div>
+        <div className="card speeddial-circle-demo" style={{ position: 'relative', height: '500px' }}>
+            <Toast ref={toast} />
+            <SpeedDial model={items} radius={80} type="circle" buttonClassName="p-button-warning" />
+            <SpeedDial model={items} radius={80} direction="up" type="semi-circle" />
+            <SpeedDial model={items} radius={80} direction="down" type="semi-circle" />
+            <SpeedDial model={items} radius={80} direction="left" type="semi-circle" />
+            <SpeedDial model={items} radius={80} direction="right" type="semi-circle" />
+            <SpeedDial model={items} radius={120} direction="up-left" type="quarter-circle" buttonClassName="p-button-success" />
+            <SpeedDial model={items} radius={120} direction="up-right" type="quarter-circle" buttonClassName="p-button-success" />
+            <SpeedDial model={items} radius={120} direction="down-left" type="quarter-circle" buttonClassName="p-button-success" />
+            <SpeedDial model={items} radius={120} direction="down-right" type="quarter-circle" buttonClassName="p-button-success" />
         </div>
     )
 }
@@ -124,6 +123,7 @@ export default function CircleDoc() {
 import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Toast } from 'primereact/toast';
+import './SpeedDialDemo.css'
 
 export default function CircleDoc() {
     const toast = useRef<Toast>(null);
@@ -166,8 +166,71 @@ export default function CircleDoc() {
     ];
 
     return (
-        <div className="card">
-            <div className="speeddial-circle-demo" style={{ position: 'relative', height: '500px' }}>
+        <div className="card speeddial-circle-demo" style={{ position: 'relative', height: '500px' }}>
+            <Toast ref={toast} />
+            <SpeedDial model={items} radius={80} type="circle" buttonClassName="p-button-warning" />
+            <SpeedDial model={items} radius={80} direction="up" type="semi-circle" />
+            <SpeedDial model={items} radius={80} direction="down" type="semi-circle" />
+            <SpeedDial model={items} radius={80} direction="left" type="semi-circle" />
+            <SpeedDial model={items} radius={80} direction="right" type="semi-circle" />
+            <SpeedDial model={items} radius={120} direction="up-left" type="quarter-circle" buttonClassName="p-button-success" />
+            <SpeedDial model={items} radius={120} direction="up-right" type="quarter-circle" buttonClassName="p-button-success" />
+            <SpeedDial model={items} radius={120} direction="down-left" type="quarter-circle" buttonClassName="p-button-success" />
+            <SpeedDial model={items} radius={120} direction="down-right" type="quarter-circle" buttonClassName="p-button-success" />
+        </div>
+    )
+}
+        `,
+        extFiles: {
+            'SpeedDialDemo.css': `
+/* SpeedDialDemo.css */
+
+.speeddial-circle-demo .p-speeddial-circle {
+    top: calc(50% - 2rem);
+    left: calc(50% - 2rem);
+}
+.speeddial-circle-demo .p-speeddial-semi-circle.p-speeddial-direction-up {
+    left: calc(50% - 2rem);
+    bottom: 0;
+}
+.speeddial-circle-demo .p-speeddial-semi-circle.p-speeddial-direction-down {
+    left: calc(50% - 2rem);
+    top: 0;
+}
+.speeddial-circle-demo .p-speeddial-semi-circle.p-speeddial-direction-left {
+    right: 0;
+    top: calc(50% - 2rem);
+}
+.speeddial-circle-demo .p-speeddial-semi-circle.p-speeddial-direction-right {
+    left: 0;
+    top: calc(50% - 2rem);
+}
+.speeddial-circle-demo .p-speeddial-quarter-circle.p-speeddial-direction-up-left {
+    right: 0;
+    bottom: 0;
+}
+.speeddial-circle-demo .p-speeddial-quarter-circle.p-speeddial-direction-up-right {
+    left: 0;
+    bottom: 0;
+}
+.speeddial-circle-demo .p-speeddial-quarter-circle.p-speeddial-direction-down-left {
+    right: 0;
+    top: 0;
+}
+.speeddial-circle-demo .p-speeddial-quarter-circle.p-speeddial-direction-down-right {
+    left: 0;
+    top: 0;
+}
+        `
+        }
+    };
+
+    return (
+        <>
+            <DocSectionText {...props}>
+                <p>Circle, Semi-Circle and Quarter-Circle</p>
+            </DocSectionText>
+            <div className="card speeddial-circle-demo" style={{ position: 'relative', height: '500px' }}>
                 <Toast ref={toast} />
                 <SpeedDial model={items} radius={80} type="circle" buttonClassName="p-button-warning" />
                 <SpeedDial model={items} radius={80} direction="up" type="semi-circle" />
@@ -178,31 +241,6 @@ export default function CircleDoc() {
                 <SpeedDial model={items} radius={120} direction="up-right" type="quarter-circle" buttonClassName="p-button-success" />
                 <SpeedDial model={items} radius={120} direction="down-left" type="quarter-circle" buttonClassName="p-button-success" />
                 <SpeedDial model={items} radius={120} direction="down-right" type="quarter-circle" buttonClassName="p-button-success" />
-            </div>
-        </div>
-    )
-}
-        `
-    };
-
-    return (
-        <>
-            <DocSectionText {...props}>
-                <p>Circle, Semi-Circle and Quarter-Circle</p>
-            </DocSectionText>
-            <div className="card">
-                <div className="speeddial-circle-demo" style={{ position: 'relative', height: '500px' }}>
-                    <Toast ref={toast} />
-                    <SpeedDial model={items} radius={80} type="circle" buttonClassName="p-button-warning" />
-                    <SpeedDial model={items} radius={80} direction="up" type="semi-circle" />
-                    <SpeedDial model={items} radius={80} direction="down" type="semi-circle" />
-                    <SpeedDial model={items} radius={80} direction="left" type="semi-circle" />
-                    <SpeedDial model={items} radius={80} direction="right" type="semi-circle" />
-                    <SpeedDial model={items} radius={120} direction="up-left" type="quarter-circle" buttonClassName="p-button-success" />
-                    <SpeedDial model={items} radius={120} direction="up-right" type="quarter-circle" buttonClassName="p-button-success" />
-                    <SpeedDial model={items} radius={120} direction="down-left" type="quarter-circle" buttonClassName="p-button-success" />
-                    <SpeedDial model={items} radius={120} direction="down-right" type="quarter-circle" buttonClassName="p-button-success" />
-                </div>
             </div>
             <DocSectionCode code={code} />
         </>
