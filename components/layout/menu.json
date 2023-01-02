@@ -347,17 +347,6 @@
             ]
         },
         {
-            "name": "Integration",
-            "meta": ["integration"],
-            "children": [
-                {
-                    "name": "Form Libraries",
-                    "to": "/formlibraries",
-                    "meta": ["formlibraries"]
-                }
-            ]
-        },
-        {
             "name": "Data",
             "meta": ["data"],
             "children": [
