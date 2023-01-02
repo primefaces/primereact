@@ -82,17 +82,15 @@ export const Chips = React.memo(
                 return;
             }
 
-            switch (event.which) {
-                //backspace
-                case 8:
+            switch (event.code) {
+                case 'Backspace':
                     if (inputRef.current.value.length === 0 && values.length > 0) {
                         removeItem(event, values.length - 1);
                     }
 
                     break;
 
-                //enter
-                case 13:
+                case 'Enter':
                     if (inputValue && inputValue.trim().length && (!props.max || props.max > values.length)) {
                         addItem(event, inputValue, true);
                     }
@@ -106,7 +104,7 @@ export const Chips = React.memo(
 
                     if (isMaxedOut()) {
                         event.preventDefault();
-                    } else if (props.separator === ',' && event.which === 188) {
+                    } else if (props.separator === ',' && event.code === 'Comma') {
                         addItem(event, inputValue, true);
                     }
 
