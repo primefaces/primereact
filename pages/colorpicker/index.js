@@ -1,10 +1,12 @@
 import Head from 'next/head';
 import { ApiDoc } from '../../components/doc/colorpicker/apidoc';
+import { DisabledDoc } from '../../components/doc/colorpicker/disableddoc';
 import { FormatDoc } from '../../components/doc/colorpicker/formatdoc';
 import { ImportDoc } from '../../components/doc/colorpicker/importdoc';
 import { InlineDoc } from '../../components/doc/colorpicker/inlinedoc';
 import { OverlayDoc } from '../../components/doc/colorpicker/overlaydoc';
-import { ValidationDoc } from '../../components/doc/colorpicker/validationdoc';
+import { FormikDoc } from '../../components/doc/colorpicker/validation/formikdoc';
+import { HookFormDoc } from '../../components/doc/colorpicker/validation/hookformdoc';
 import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
@@ -32,9 +34,26 @@ const ColorPickerDemo = () => {
             component: FormatDoc
         },
         {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
+        },
+        {
             id: 'validation',
             label: 'Validation',
-            component: ValidationDoc
+            description: 'Validate using popular React validation libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
         },
         {
             id: 'api',
