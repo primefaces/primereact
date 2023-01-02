@@ -34,7 +34,7 @@
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "react-final-form": "^6.5.9",
-        "react-hook-form": "^7.39.4",
+        "react-hook-form": "^7.41.3",
         "react-transition-group": "^4.4.5",
         "xlsx": "0.18.5"
     },
