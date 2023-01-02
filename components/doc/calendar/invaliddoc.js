@@ -46,7 +46,8 @@ export default function InvalidStateDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>ToDo</p>
+                {/* TO DO: Add demo content. */}
+                <p></p>
             </DocSectionText>
             <div className="card flex flex-column justify-content-center align-items-center">
                 <div className="flex flex-column gap-2">

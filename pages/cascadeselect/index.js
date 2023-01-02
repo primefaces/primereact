@@ -6,7 +6,12 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/cascadeselect/importdoc';
 import { ApiDoc } from '../../components/doc/cascadeselect/apidoc';
 import { BasicDoc } from '../../components/doc/cascadeselect/basicdoc';
+import { FloatLabelDoc } from '../../components/doc/cascadeselect/floatlabeldoc';
+import { InvalidDoc } from '../../components/doc/cascadeselect/invaliddoc';
+import { DisabledDoc } from '../../components/doc/cascadeselect/disableddoc';
 import { TemplatingDoc } from '../../components/doc/cascadeselect/templatingdoc';
+import { FormikDoc } from '../../components/doc/cascadeselect/validation/formikdoc';
+import { HookFormDoc } from '../../components/doc/cascadeselect/validation/hookformdoc';
 
 const CascadeSelectDemo = () => {
     const docs = [
@@ -21,12 +26,44 @@ const CascadeSelectDemo = () => {
             component: BasicDoc
         },
         {
+            id: 'floatlabel',
+            label: 'Float Label',
+            component: FloatLabelDoc
+        },
+        {
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
+        },
+        {
+            id: 'validation',
+            label: 'Validation',
+            description: 'Validate using popular React validation libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
+        },
+        {
             id: 'templating',
             label: 'Templating',
             component: TemplatingDoc
         },
         {
-            id: 'Api',
+            id: 'api',
             label: 'API',
             component: ApiDoc,
             children: [

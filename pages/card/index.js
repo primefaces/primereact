@@ -25,7 +25,7 @@ const CardDemo = () => {
             component: AdvancedDoc
         },
         {
-            id: 'Api',
+            id: 'api',
             label: 'API',
             component: ApiDoc,
             children: [

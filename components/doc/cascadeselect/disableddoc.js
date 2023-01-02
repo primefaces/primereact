@@ -1,35 +1,34 @@
-import React from 'react';
-import { AutoComplete } from '../../lib/autocomplete/AutoComplete';
-import { DocSectionCode } from '../common/docsectioncode';
+import { CascadeSelect } from '../../lib/cascadeselect/CascadeSelect';
 import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '../common/docsectioncode';
 
 export function DisabledDoc(props) {
     const code = {
         basic: `
-<AutoComplete disabled placeholder="Disabled" />
+<CascadeSelect disabled placeholder="Disabled" style={{ minWidth: '14rem' }} />
         `,
         javascript: `
 import React from "react";
-import { AutoComplete } from "primereact/autocomplete";
+import { CascadeSelect } from 'primereact/cascadeselect';
 
 export default function DisabledDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <AutoComplete disabled placeholder="Disabled" />
+            <CascadeSelect disabled placeholder="Disabled" style={{ minWidth: '14rem' }} />
         </div>
     )
 }
         `,
         typescript: `
 import React from "react";
-import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
+import { CascadeSelect } from 'primereact/cascadeselect';
 
 export default function DisabledDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <AutoComplete disabled placeholder="Disabled" />
+            <CascadeSelect disabled placeholder="Disabled" style={{ minWidth: '14rem' }} />
         </div>
     )
 }
@@ -39,11 +38,13 @@ export default function DisabledDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                {/* TO DO: Add demo content. */}
-                <p></p>
+                {/* TO DO: Check the description. */}
+                <p>
+                    <i>disabled</i> prop prevents an input from being editable.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <AutoComplete disabled placeholder="Disabled" />
+                <CascadeSelect disabled placeholder="Disabled" style={{ minWidth: '14rem' }} />
             </div>
             <DocSectionCode code={code} />
         </>

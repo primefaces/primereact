@@ -108,7 +108,8 @@ export default function FloatLabelDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>ToDo</p>
+                {/* TO DO: Add demo content. */}
+                <p></p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <span className="p-float-label">

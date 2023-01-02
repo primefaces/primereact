@@ -54,8 +54,10 @@ export default function InvalidStateDoc() {
     
     return (
         <div className="card flex justify-content-center">
-            <label htmlFor="autocomplete">Invalid State</label>
-            <AutoComplete value={value} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setValue(e.value)} className="p-invalid" />
+            <div className="flex flex-column gap-2">
+                <label htmlFor="autocomplete">Invalid State</label>
+                <AutoComplete value={value} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setValue(e.value)} className="p-invalid" />
+            </div>
         </div>
     )
 }
@@ -86,8 +88,10 @@ export default function InvalidStateDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <label htmlFor="autocomplete">Invalid State</label>
-            <AutoComplete value={value} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setValue(e.value)} className="p-invalid" />
+            <div className="flex flex-column gap-2">
+                <label htmlFor="autocomplete">Invalid State</label>
+                <AutoComplete value={value} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setValue(e.value)} className="p-invalid" />
+            </div>
         </div>
     )
 }
@@ -104,9 +108,10 @@ export default function InvalidStateDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>ToDo</p>
+                {/* TO DO: Add demo content. */}
+                <p></p>
             </DocSectionText>
-            <div className="card fluid flex flex-column justify-content-center align-items-center">
+            <div className="card flex justify-content-center">
                 <div className="flex flex-column gap-2">
                     <label htmlFor="autocomplete">Invalid State</label>
                     <AutoComplete value={value} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setValue(e.value)} className="p-invalid" />

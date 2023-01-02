@@ -19,7 +19,7 @@ const DeferredContentDemo = () => {
             component: DeferredContentDoc
         },
         {
-            id: 'Api',
+            id: 'api',
             label: 'API',
             component: ApiDoc,
             children: [
