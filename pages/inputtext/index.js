@@ -13,7 +13,8 @@ import { ImportDoc } from '../../components/doc/inputtext/importdoc';
 import { InvalidDoc } from '../../components/doc/inputtext/invaliddoc';
 import { KeyFilterDoc } from '../../components/doc/inputtext/keyfilterdoc';
 import { SizesDoc } from '../../components/doc/inputtext/sizesdoc';
-import { ValidationDoc } from '../../components/doc/inputtext/validationdoc';
+import { FormikDoc } from '../../components/doc/inputtext/validation/formikdoc';
+import { HookFormDoc } from '../../components/doc/inputtext/validation/hookformdoc';
 
 const InputTextDemo = () => {
     const docs = [
@@ -65,7 +66,19 @@ const InputTextDemo = () => {
         {
             id: 'validation',
             label: 'Validation',
-            component: ValidationDoc
+            description: 'Validate using popular React validation libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
         },
         {
             id: 'api',
