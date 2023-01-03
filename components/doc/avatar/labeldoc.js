@@ -86,7 +86,9 @@ export default function LabelDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>A letter Avatar is defined with the <i>label</i> property.</p>
+                <p>
+                    A letter Avatar is defined with the <i>label</i> property.
+                </p>
             </DocSectionText>
             <div className="card">
                 <div className="flex flex-wrap gap-5">

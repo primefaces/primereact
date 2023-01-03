@@ -88,7 +88,9 @@ export default function ImageDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Use the <i>image</i> property to display an image as an Avatar.</p>
+                <p>
+                    Use the <i>image</i> property to display an image as an Avatar.
+                </p>
             </DocSectionText>
             <div className="card">
                 <div className="flex flex-wrap gap-5">
@@ -108,7 +110,7 @@ export default function ImageDoc() {
 
                     <div className="flex-auto">
                         <h5>Gravatar</h5>
-                        <Avatar image={"https://www.gravatar.com/avatar/05dfd4b41340d09cae045235eb0893c3?d=mp"} className="flex align-items-center justify-content-center mr-2" size="xlarge" />
+                        <Avatar image={'https://www.gravatar.com/avatar/05dfd4b41340d09cae045235eb0893c3?d=mp'} className="flex align-items-center justify-content-center mr-2" size="xlarge" />
                     </div>
                 </div>
             </div>

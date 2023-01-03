@@ -71,7 +71,7 @@ export const TabView = React.forwardRef((props, ref) => {
     };
 
     const onKeyDown = (event, tab, index) => {
-        if (event.code === 'Enter') {
+        if (event.key === 'Enter') {
             onTabHeaderClick(event, tab, index);
         }
     };

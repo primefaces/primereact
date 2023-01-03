@@ -60,7 +60,9 @@ export default function PositionDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>A Badge can be positioned at the top right corner of an element by adding <i>p-overlay-badge</i> style class to the element and embedding the badge inside.</p>
+                <p>
+                    A Badge can be positioned at the top right corner of an element by adding <i>p-overlay-badge</i> style class to the element and embedding the badge inside.
+                </p>
             </DocSectionText>
             <div className="card flex flex-wrap justify-content-center gap-4">
                 <i className="pi pi-bell p-overlay-badge" style={{ fontSize: '2rem' }}>
