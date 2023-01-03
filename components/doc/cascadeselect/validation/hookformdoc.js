@@ -121,6 +121,7 @@ export function HookFormDoc(props) {
          optionGroupChildren={['states', 'cities']} style={{ minWidth: '14rem' }} placeholder={'Select a City'}
          onChange={(e) => field.onChange(e.value)}/>)}
     />
+<Button type="submit" label="Submit" className="mt-2" />
         `,
         javascript: `
 import React, { useRef } from "react";

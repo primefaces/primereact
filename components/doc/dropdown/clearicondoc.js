@@ -3,7 +3,7 @@ import { Dropdown } from '../../lib/dropdown/Dropdown';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function TemplatingDoc(props) {
+export function ClearIconDoc(props) {
     const [selectedCountry, setSelectedCountry] = useState(null);
     const countries = [
         { name: 'Australia', code: 'AU' },
@@ -46,14 +46,14 @@ export function TemplatingDoc(props) {
 
     const code = {
         basic: `
-<Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" placeholder="Select a Country" valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
+<Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" showClear placeholder="Select a Country" valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
         `,
         javascript: `
 import React, { useState } from "react";
 import { Dropdown } from 'primereact/dropdown';
 import './DropdownDemo.css';
 
-export default function TemplatingDoc() {
+export default function ClearIconDoc() {
     const [selectedCountry, setSelectedCountry] = useState(null);
 
      const countries = [
@@ -100,7 +100,7 @@ export default function TemplatingDoc() {
 
     return (
         <div className="card flex justify-content-center dropdown-demo">
-            <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" placeholder="Select a Country" valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
+            <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" showClear placeholder="Select a Country" valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
         </div>    
     )
 }
@@ -110,7 +110,7 @@ import React, { useState } from "react";
 import { Dropdown, DropdownChangeParams, DropdownProps } from 'primereact/dropdown';
 import './DropdownDemo.css';
 
-export default function TemplatingDoc() {
+export default function ClearIconDoc() {
     const [selectedCountry, setSelectedCountry] = useState<any | null>(null);
 
      const countries = [
@@ -157,7 +157,7 @@ export default function TemplatingDoc() {
 
     return (
         <div className="card flex justify-content-center dropdown-demo">
-            <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" placeholder="Select a Country" valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
+            <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" showClear placeholder="Select a Country" valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
         </div>
     )
 }
@@ -184,7 +184,7 @@ export default function TemplatingDoc() {
                 <p></p>
             </DocSectionText>
             <div className="card flex justify-content-center dropdown-demo">
-                <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" placeholder="Select a Country" valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
+                <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" showClear placeholder="Select a Country" valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
             </div>
             <DocSectionCode code={code} />
         </>

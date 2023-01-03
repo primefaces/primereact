@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import { Dropdown } from '../../lib/dropdown/Dropdown';
-import { Skeleton } from '../../lib/skeleton/Skeleton';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { Dropdown } from '../../../lib/dropdown/Dropdown';
+import { Skeleton } from '../../../lib/skeleton/Skeleton';
+import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
-export function ScrollLazyDoc(props) {
+export function LazyDoc(props) {
     const [lazyItems, setLazyItems] = useState([]);
     const [lazyLoading, setLazyLoading] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
@@ -50,7 +50,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { Skeleton } from 'primereact/skeleton';
 import './DropdownDemo.css';
 
-export default function ScrollLazyDoc() {
+export default function LazyDoc() {
     const [lazyItems, setLazyItems] = useState([]);
     const [lazyLoading, setLazyLoading] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
@@ -109,7 +109,7 @@ import { Skeleton } from 'primereact/skeleton';
 import { VirtualScrollerLazyParams } from 'primereact/virtualscroller';
 import './DropdownDemo.css';
 
-export default function ScrollLazyDoc() {
+export default function LazyDoc() {
     const [lazyItems, setLazyItems] = useState<any | null>([]);
     const [lazyLoading, setLazyLoading] = useState<boolean>(false);
     const [selectedItem, setSelectedItem] = useState<any | null>(null);
@@ -180,7 +180,8 @@ export default function ScrollLazyDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Virtual Scroll (100000 Items) and Lazy</p>
+                {/* To Do:  */}
+                <p></p>
             </DocSectionText>
             <div className="card flex justify-content-center dropdown-demo">
                 <Dropdown

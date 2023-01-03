@@ -4,13 +4,19 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/dropdown/apidoc';
 import { BasicDoc } from '../../components/doc/dropdown/basicdoc';
+import { ClearIconDoc } from '../../components/doc/dropdown/clearicondoc';
+import { DisabledDoc } from '../../components/doc/dropdown/disableddoc';
 import { EditableDoc } from '../../components/doc/dropdown/editabledoc';
+import { FilterDoc } from '../../components/doc/dropdown/filterdoc';
+import { FloatLabelDoc } from '../../components/doc/dropdown/floatlabeldoc';
 import { GroupedDoc } from '../../components/doc/dropdown/groupeddoc';
 import { ImportDoc } from '../../components/doc/dropdown/importdoc';
-import { ScrollLazyDoc } from '../../components/doc/dropdown/scrolllazydoc';
+import { InvalidDoc } from '../../components/doc/dropdown/invaliddoc';
 import { TemplatingDoc } from '../../components/doc/dropdown/templatingdoc';
-import { ValidationDoc } from '../../components/doc/dropdown/validationdoc';
-import { VirtualScrollDoc } from '../../components/doc/dropdown/virtualscrolldoc';
+import { FormikDoc } from '../../components/doc/dropdown/validation/formikdoc';
+import { HookFormDoc } from '../../components/doc/dropdown/validation/hookformdoc';
+import { EagerDoc } from '../../components/doc/dropdown/virtualscroll/eagerdoc';
+import { LazyDoc } from '../../components/doc/dropdown/virtualscroll/lazydoc';
 
 const DropdownDemo = () => {
     const docs = [
@@ -35,25 +41,70 @@ const DropdownDemo = () => {
             component: GroupedDoc
         },
         {
-            id: 'Templating',
-            label: 'Advanced with Templating, Filtering and Clear Icon',
+            id: 'floatlabel',
+            label: 'Float Label',
+            component: FloatLabelDoc
+        },
+        {
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
+        },
+        {
+            id: 'templating',
+            label: 'Templating',
             component: TemplatingDoc
         },
         {
-            id: 'virtualscroll',
-            label: 'Virtual Scroll (100000 Items)',
-            component: VirtualScrollDoc
+            id: 'filter',
+            label: 'Filter',
+            component: FilterDoc
         },
         {
-            id: 'scrolllazy',
-            label: 'Virtual Scroll (100000 Items) and Lazy',
-            component: ScrollLazyDoc
+            id: 'clearicon',
+            label: 'Clear Icon',
+            component: ClearIconDoc
+        },
+        {
+            id: 'virtualscroll',
+            label: 'Virtual Scroll',
+            description: 'Whether to use the virtualScroller feature. The properties of VirtualScroller component can be used like an object in it.',
+            children: [
+                {
+                    id: 'eager',
+                    label: 'Eager',
+                    component: EagerDoc
+                },
+                {
+                    id: 'lazy',
+                    label: 'Lazy',
+                    component: LazyDoc
+                }
+            ]
         },
         {
             id: 'validation',
             label: 'Validation',
-            component: ValidationDoc
+            description: 'Validate using popular React validation libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
         },
+
         {
             id: 'api',
             label: 'API',

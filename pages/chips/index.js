@@ -11,6 +11,8 @@ import { SeparatorDoc } from '../../components/doc/chips/separatordoc';
 import { TemplateDoc } from '../../components/doc/chips/templatedoc';
 import { KeyFilterDoc } from '../../components/doc/chips/keyfilterdoc';
 import { ApiDoc } from '../../components/doc/chips/apidoc';
+import { FormikDoc } from '../../components/doc/chips/validation/formikdoc';
+import { HookFormDoc } from '../../components/doc/chips/validation/hookformdoc';
 
 const ChipsDemo = () => {
     const docs = [
@@ -48,6 +50,23 @@ const ChipsDemo = () => {
             id: 'template',
             label: 'Template',
             component: TemplateDoc
+        },
+        {
+            id: 'validation',
+            label: 'Validation',
+            description: 'Validate using popular React validation libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
         },
         {
             id: 'keyfilter',
