@@ -92,7 +92,7 @@ export default function IconDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    A font icon is displayed as an Avatar with the the <i>icon</i> property.
+                    A font icon is displayed as an Avatar with the <i>icon</i> property.
                 </p>
             </DocSectionText>
             <div className="card">

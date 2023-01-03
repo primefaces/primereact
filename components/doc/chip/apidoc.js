@@ -9,19 +9,6 @@ export function ApiDoc(props) {
         <>
             <DocSectionText {...props}></DocSectionText>
 
-            <DocSubSection id="templating" label="Templating">
-                <p>
-                    Content can easily be customized with the <i>template</i> property instead of using the built-in modes.
-                </p>
-
-                <CodeHighlight>
-                    {`
-<Chip template="Content" />
-<Chip template={<span>Content<span>} />
-<Chip template={(props) => <span>Content<span>} />
-`}
-                </CodeHighlight>
-            </DocSubSection>
             <DocSubSection id="properties" label="Properties">
                 <div className="doc-tablewrapper">
                     <table className="doc-table">

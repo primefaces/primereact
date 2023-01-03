@@ -8,6 +8,7 @@ import { BasicDoc } from '../../components/doc/chip/basicdoc';
 import { IconDoc } from '../../components/doc/chip/icondoc';
 import { ImageDoc } from '../../components/doc/chip/imagedoc';
 import { StylingDoc } from '../../components/doc/chip/stylingdoc';
+import { TemplateDoc } from '../../components/doc/chip/templatedoc';
 import { DocActions } from '../../components/doc/common/docactions';
 
 const ChipDemo = () => {
@@ -38,14 +39,15 @@ const ChipDemo = () => {
             component: StylingDoc
         },
         {
+            id: 'templatedoc',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
             children: [
-                {
-                    id: 'templating',
-                    label: 'Templating'
-                },
                 {
                     id: 'properties',
                     label: 'Properties'
