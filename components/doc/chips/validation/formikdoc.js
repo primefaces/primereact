@@ -36,14 +36,14 @@ export function FormikDoc(props) {
     const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error p-1"> </small>;
+        return isFormFieldValid(name) && <small className="p-error flex">{formik.errors[name]}</small>;
     };
 
     const code = {
         basic: `
 <Toast ref={toast} />
 <Chips id="chipArray" name="chipArray" value={ formik.values.chipArray } onChange={(e) => { formik.setFieldValue('chipArray', e.value) }}/>
-<Button type="submit" label="Submit" className="mt-2" />
+<Button type="submit" label="Submit" className="mt-2 w-3" />
         `,
         javascript: `
 import React, { useRef } from "react";
@@ -81,23 +81,25 @@ export default function FormikDoc() {
     const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldValid(name) && <small className="p-error flex">{formik.errors[name]}</small>;
     };
 
     return (
-        <div className="card flex justify-content-center">
-            <form onSubmit={formik.handleSubmit} className="p-fluid">
+        <div className="card">
+            <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center">
                 <Toast ref={toast} />
-                <Chips
-                    id="chipArray"
-                    name="chipArray"
-                    value={formik.values.chipArray}
-                    onChange={(e) => {
-                        formik.setFieldValue('chipArray', e.value);
-                    }}
-                />
+                <span>
+                    <Chips
+                        id="chipArray"
+                        name="chipArray"
+                        value={formik.values.chipArray}
+                        onChange={(e) => {
+                            formik.setFieldValue('chipArray', e.value);
+                        }}
+                    />
+                </span>
                 {getFormErrorMessage('chipArray')}
-                <Button type="submit" label="Submit" className="mt-2" />
+                <Button type="submit" label="Submit" className="mt-2 w-3" />
             </form>
         </div>
     )
@@ -139,23 +141,25 @@ export default function FormikDoc() {
     const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldValid(name) && <small className="p-error flex">{formik.errors[name]}</small>;
     };
 
     return (
-        <div className="card flex justify-content-center">
-            <form onSubmit={formik.handleSubmit} className="p-fluid">
+        <div className="card">
+            <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center">
                 <Toast ref={toast} />
-                <Chips
-                    id="chipArray"
-                    name="chipArray"
-                    value={formik.values.chipArray}
-                    onChange={(e) => {
-                        formik.setFieldValue('chipArray', e.value);
-                    }}
-                />
+                <span>
+                    <Chips
+                        id="chipArray"
+                        name="chipArray"
+                        value={formik.values.chipArray}
+                        onChange={(e) => {
+                            formik.setFieldValue('chipArray', e.value);
+                        }}
+                    />
+                </span>
                 {getFormErrorMessage('chipArray')}
-                <Button type="submit" label="Submit" className="mt-2" />
+                <Button type="submit" label="Submit" className="mt-2 w-3" />
             </form>
         </div>
     )
@@ -169,19 +173,21 @@ export default function FormikDoc() {
                 {/* TO DO: Add demo content. */}
                 <p></p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <form onSubmit={formik.handleSubmit} className="p-fluid">
+            <div className="card">
+                <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center">
                     <Toast ref={toast} />
-                    <Chips
-                        id="chipArray"
-                        name="chipArray"
-                        value={formik.values.chipArray}
-                        onChange={(e) => {
-                            formik.setFieldValue('chipArray', e.value);
-                        }}
-                    />
-                    {getFormErrorMessage('chipArray')}
-                    <Button type="submit" label="Submit" className="mt-2" />
+                    <span>
+                        <Chips
+                            id="chipArray"
+                            name="chipArray"
+                            value={formik.values.chipArray}
+                            onChange={(e) => {
+                                formik.setFieldValue('chipArray', e.value);
+                            }}
+                        />
+                        {getFormErrorMessage('chipArray')}
+                    </span>
+                    <Button type="submit" label="Submit" className="mt-2 w-3" />
                 </form>
             </div>
             <DocSectionCode code={code} dependencies={{ formik: '^2.2.6' }} />
