@@ -45,7 +45,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>A basic chip with a text is created with the <i>label</i> property. In addition when <i>removable</i> is added, a delete icon is displayed to remove a chip.</p>
+                <p>
+                    A basic chip with a text is created with the <i>label</i> property. In addition when <i>removable</i> is added, a delete icon is displayed to remove a chip.
+                </p>
             </DocSectionText>
             <div className="card flex flex-wrap gap-2">
                 <Chip label="Action" />

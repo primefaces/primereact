@@ -41,7 +41,8 @@ export default function AlpahbeticDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Alphabetic</p>
+                {/* TO DO: Add demo content. */}
+                <p></p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="grid p-fluid gap-2">

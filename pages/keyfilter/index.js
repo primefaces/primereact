@@ -8,8 +8,7 @@ import { MoneyDoc } from '../../components/doc/keyfilter/moneydoc';
 import { HexDoc } from '../../components/doc/keyfilter/hexdoc';
 import { AlphabeticDoc } from '../../components/doc/keyfilter/alphabeticdoc';
 import { AlphanumbericDoc } from '../../components/doc/keyfilter/alphanumberdoc';
-import { BlockDoc } from '../../components/doc/keyfilter/blockdoc';
-import { BlockSpaceDoc } from '../../components/doc/keyfilter/blockspacedoc';
+import { RegexDoc } from '../../components/doc/keyfilter/regexdoc';
 import { ApiDoc } from '../../components/doc/keyfilter/apidoc';
 import { ImportDoc } from '../../components/doc/keyfilter/importdoc';
 
@@ -51,14 +50,9 @@ const KeyFilterDemo = () => {
             component: AlphanumbericDoc
         },
         {
-            id: 'block',
-            label: 'Block < > * !',
-            component: BlockDoc
-        },
-        {
-            id: 'blockspace',
-            label: 'Block space key',
-            component: BlockSpaceDoc
+            id: 'regex',
+            label: 'Regex',
+            component: RegexDoc
         },
         {
             id: 'api',

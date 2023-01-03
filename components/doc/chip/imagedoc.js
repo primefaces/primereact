@@ -48,7 +48,9 @@ export default function ImageDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>The <i>image</i> property is used to display an image like an avatar.</p>
+                <p>
+                    The <i>image</i> property is used to display an image like an avatar.
+                </p>
             </DocSectionText>
             <div className="card flex flex-wrap gap-2">
                 <Chip label="Amy Elsner" image={`${contextPath}/images/avatar/amyelsner.png`} />

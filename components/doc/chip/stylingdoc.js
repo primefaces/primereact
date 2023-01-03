@@ -48,7 +48,9 @@ export default function StylingDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Chip colors can easily be customized with the <i>style</i> and <i>className</i> properties.</p>
+                <p>
+                    Chip colors can easily be customized with the <i>style</i> and <i>className</i> properties.
+                </p>
             </DocSectionText>
             <div className="card flex flex-wrap gap-2">
                 <Chip label="Action" className="bg-primary" />

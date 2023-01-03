@@ -45,7 +45,9 @@ export default function IconDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>A font icon next to the label can be displayed with the <i>icon</i> property.</p>
+                <p>
+                    A font icon next to the label can be displayed with the <i>icon</i> property.
+                </p>
             </DocSectionText>
             <div className="card flex flex-wrap gap-2">
                 <Chip label="Apple" icon="pi pi-apple" />
