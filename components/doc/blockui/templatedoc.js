@@ -83,7 +83,9 @@ export default function TemplateDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Custom content can be placed inside the modal layer using the <i>template</i> property.</p>
+                <p>
+                    Custom content can be placed inside the modal layer using the <i>template</i> property.
+                </p>
             </DocSectionText>
             <div className="card">
                 <div className="mb-3">
@@ -104,4 +106,3 @@ export default function TemplateDemo() {
         </>
     );
 }
-

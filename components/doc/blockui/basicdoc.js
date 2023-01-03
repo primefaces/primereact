@@ -83,7 +83,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>The element to block should be placed as a child of BlockUI and <i>blocked</i> property is required to control the state.</p>
+                <p>
+                    The element to block should be placed as a child of BlockUI and <i>blocked</i> property is required to control the state.
+                </p>
             </DocSectionText>
             <div className="card">
                 <div className="mb-3">

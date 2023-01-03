@@ -75,7 +75,9 @@ export default function DocumentDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Enabling <i>fullScreen</i> property controls the document.</p>
+                <p>
+                    Enabling <i>fullScreen</i> property controls the document.
+                </p>
             </DocSectionText>
             <div className="card">
                 <BlockUI blocked={blocked} fullScreen />
