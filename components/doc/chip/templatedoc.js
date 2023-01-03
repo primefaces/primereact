@@ -57,11 +57,11 @@ export default function TemplateDemo() {
     };
 
     return (
-        
-
         <>
             <DocSectionText {...props}>
-                <p>The <i>template</i> property allows displaying custom content inside a chip.</p>
+                <p>
+                    The <i>template</i> property allows displaying custom content inside a chip.
+                </p>
             </DocSectionText>
             <div className="card">
                 <Chip className="pl-0 pr-3" template={content} />
