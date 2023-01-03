@@ -82,7 +82,7 @@ export const Chips = React.memo(
                 return;
             }
 
-            switch (event.code) {
+            switch (event.key) {
                 case 'Backspace':
                     if (inputRef.current.value.length === 0 && values.length > 0) {
                         removeItem(event, values.length - 1);
@@ -104,7 +104,7 @@ export const Chips = React.memo(
 
                     if (isMaxedOut()) {
                         event.preventDefault();
-                    } else if (props.separator === ',' && event.code === 'Comma') {
+                    } else if (props.separator === ',' && event.key === ',') {
                         addItem(event, inputValue, true);
                     }
 
