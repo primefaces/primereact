@@ -9,8 +9,7 @@ export function AvatarGroupDoc(props) {
 
     const code = {
         basic: `
-<h5>Avatar Group</h5>
-<AvatarGroup className="mb-3">
+<AvatarGroup>
   <Avatar image="images/avatar/amyelsner.png" size="large" shape="circle" />
   <Avatar image="images/avatar/asiyajavayant.png" size="large" shape="circle" />
   <Avatar image="images/avatar/onyamalimba.png" size="large" shape="circle" />
@@ -29,9 +28,8 @@ import { Badge } from 'primereact/badge';
 export default function AvatarGroupDoc() {
 
     return (
-        <div className="card">
-            <h5>Avatar Group</h5>
-            <AvatarGroup className="mb-3">
+        <div className="card flex justify-content-center">
+            <AvatarGroup>
                 <Avatar image="images/avatar/amyelsner.png" size="large" shape="circle" />
                 <Avatar image="images/avatar/asiyajavayant.png" size="large" shape="circle" />
                 <Avatar image="images/avatar/onyamalimba.png" size="large" shape="circle" />
@@ -40,7 +38,7 @@ export default function AvatarGroupDoc() {
                 <Avatar label="+2" shape="circle" size="large" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
             </AvatarGroup>
         </div>
-        )
+    )
 }
         `,
         typescript: `
@@ -52,9 +50,8 @@ import { Badge } from 'primereact/badge';
 export default function AvatarGroupDoc() {
 
     return (
-        <div className="card">
-            <h5>Avatar Group</h5>
-            <AvatarGroup className="mb-3">
+        <div className="card flex justify-content-center">
+            <AvatarGroup>
                 <Avatar image="images/avatar/amyelsner.png" size="large" shape="circle" />
                 <Avatar image="images/avatar/asiyajavayant.png" size="large" shape="circle" />
                 <Avatar image="images/avatar/onyamalimba.png" size="large" shape="circle" />
@@ -63,7 +60,7 @@ export default function AvatarGroupDoc() {
                 <Avatar label="+2" shape="circle" size="large" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
             </AvatarGroup>
         </div>
-        )
+    )
 }
         `
     };
@@ -71,20 +68,17 @@ export default function AvatarGroupDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Avatar has three built-in display modes; "label", "icon" and "image".</p>
+                <p>Grouping is available by wrapping multiple Avatar components inside an AvatarGroup.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <div>
-                    <h5>Avatar Group</h5>
-                    <AvatarGroup className="mb-3">
-                        <Avatar image={`${contextPath}/images/avatar/amyelsner.png`} size="large" shape="circle" />
-                        <Avatar image={`${contextPath}/images/avatar/asiyajavayant.png`} size="large" shape="circle" />
-                        <Avatar image={`${contextPath}/images/avatar/onyamalimba.png`} size="large" shape="circle" />
-                        <Avatar image={`${contextPath}/images/avatar/ionibowcher.png`} size="large" shape="circle" />
-                        <Avatar image={`${contextPath}/images/avatar/xuxuefeng.png`} size="large" shape="circle" />
-                        <Avatar label="+2" shape="circle" size="large" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
-                    </AvatarGroup>
-                </div>
+                <AvatarGroup>
+                    <Avatar image={`${contextPath}/images/avatar/amyelsner.png`} size="large" shape="circle" />
+                    <Avatar image={`${contextPath}/images/avatar/asiyajavayant.png`} size="large" shape="circle" />
+                    <Avatar image={`${contextPath}/images/avatar/onyamalimba.png`} size="large" shape="circle" />
+                    <Avatar image={`${contextPath}/images/avatar/ionibowcher.png`} size="large" shape="circle" />
+                    <Avatar image={`${contextPath}/images/avatar/xuxuefeng.png`} size="large" shape="circle" />
+                    <Avatar label="+2" shape="circle" size="large" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
+                </AvatarGroup>
             </div>
             <DocSectionCode code={code} />
         </>
