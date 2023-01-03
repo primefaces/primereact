@@ -12,12 +12,12 @@ export function ImageDoc(props) {
 <Inplace>
     <InplaceDisplay>
         <span className="inline-flex align-items-center">
-            <span className="pi pi-search"></span>
+            <span className="pi pi-image"></span>
             <span className="ml-2">View Picture</span>
         </span>
     </InplaceDisplay>
     <InplaceContent>
-        <img alt="Nature" src="images/nature/nature1.jpg" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} />
+        <img alt="Nature" src="images/nature/nature1.jpg" />
     </InplaceContent>
 </Inplace>
         `,
@@ -25,13 +25,12 @@ export function ImageDoc(props) {
 import React from 'react';
 import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace';
 
-export default function ImageDoc() {
-
+export default function ImageDemo() {
     return (
         <Inplace>
             <InplaceDisplay>
                 <span className="inline-flex align-items-center">
-                    <span className="pi pi-search"></span>
+                    <span className="pi pi-image"></span>
                     <span className="ml-2">View Picture</span>
                 </span>
             </InplaceDisplay>
@@ -46,13 +45,12 @@ export default function ImageDoc() {
 import React from 'react';
 import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace';
 
-export default function ImageDoc() {
-
+export default function ImageDemo() {
     return (
         <Inplace>
             <InplaceDisplay>
                 <span className="inline-flex align-items-center">
-                    <span className="pi pi-search"></span>
+                    <span className="pi pi-image"></span>
                     <span className="ml-2">View Picture</span>
                 </span>
             </InplaceDisplay>
@@ -68,13 +66,13 @@ export default function ImageDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Image Demo Content.</p>
+                <p>Any content such as an image can be placed inside an Inplace.</p>
             </DocSectionText>
             <div className="card">
                 <Inplace>
                     <InplaceDisplay>
                         <span className="inline-flex align-items-center">
-                            <span className="pi pi-search"></span>
+                            <span className="pi pi-image"></span>
                             <span className="ml-2">View Picture</span>
                         </span>
                     </InplaceDisplay>

@@ -4,6 +4,7 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/inplace/apidoc';
 import { ImportDoc } from '../../components/doc/inplace/importdoc';
+import { BasicDoc } from '../../components/doc/inplace/basicdoc';
 import { InputDoc } from '../../components/doc/inplace/inputdoc';
 import { ImageDoc } from '../../components/doc/inplace/imagedoc';
 import { LazyDoc } from '../../components/doc/inplace/lazydoc';
@@ -19,6 +20,11 @@ const ChipDemo = () => {
         {
             id: 'basic',
             label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'input',
+            label: 'Input',
             component: InputDoc
         },
         {
