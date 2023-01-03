@@ -32,7 +32,7 @@ export function HookFormDoc(props) {
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>;
+        return errors[name] && <small className="p-error flex">{errors[name].message}</small>;
     };
 
     const code = {
@@ -81,17 +81,23 @@ export default function HookFormDoc() {
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>;
+        return errors[name] && <small className="p-error flex">{errors[name].message}</small>;
     };
 
     return (
-        <div className="card flex justify-content-center">
-            <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
+        <div className="card">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column align-items-center">
                 <Toast ref={toast} />
-                <Controller name="chipArray" control={control} rules={{ required: 'At least 1 chip required.' }} render={({ field }) => <Chips id={field.name} name="chipArray" value={field.value} onChange={(e) => field.onChange(e.value)} />} />
-
-                {getFormErrorMessage('chipArray')}
-                <Button type="submit" label="Submit" className="mt-2" />
+                <span>
+                    <Controller
+                        name="chipArray"
+                        control={control}
+                        rules={{ required: 'At least 1 chip required.' }}
+                        render={({ field }) => <Chips id={field.name} name="chipArray" value={field.value} onChange={(e) => field.onChange(e.value)} />}
+                    />
+                    {getFormErrorMessage('chipArray')}
+                </span>
+                <Button type="submit" label="Submit" className="mt-2 w-3" />
             </form>
         </div>
     )
@@ -131,17 +137,23 @@ export default function HookFormDoc() {
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>;
+        return errors[name] && <small className="p-error flex">{errors[name].message}</small>;
     };
 
     return (
-        <div className="card flex justify-content-center">
-            <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
+        <div className="card">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column align-items-center">
                 <Toast ref={toast} />
-                <Controller name="chipArray" control={control} rules={{ required: 'At least 1 chip required.' }} render={({ field }) => <Chips id={field.name} name="chipArray" value={field.value} onChange={(e) => field.onChange(e.value)} />} />
-
-                {getFormErrorMessage('chipArray')}
-                <Button type="submit" label="Submit" className="mt-2" />
+                <span>
+                    <Controller
+                        name="chipArray"
+                        control={control}
+                        rules={{ required: 'At least 1 chip required.' }}
+                        render={({ field }) => <Chips id={field.name} name="chipArray" value={field.value} onChange={(e) => field.onChange(e.value)} />}
+                    />
+                    {getFormErrorMessage('chipArray')}
+                </span>
+                <Button type="submit" label="Submit" className="mt-2 w-3" />
             </form>
         </div>
     )
@@ -155,13 +167,19 @@ export default function HookFormDoc() {
                 {/* TO DO: Add demo content. */}
                 <p></p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
+            <div className="card">
+                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column align-items-center">
                     <Toast ref={toast} />
-                    <Controller name="chipArray" control={control} rules={{ required: 'At least 1 chip required.' }} render={({ field }) => <Chips id={field.name} name="chipArray" value={field.value} onChange={(e) => field.onChange(e.value)} />} />
-
-                    {getFormErrorMessage('chipArray')}
-                    <Button type="submit" label="Submit" className="mt-2" />
+                    <span>
+                        <Controller
+                            name="chipArray"
+                            control={control}
+                            rules={{ required: 'At least 1 chip required.' }}
+                            render={({ field }) => <Chips id={field.name} name="chipArray" value={field.value} onChange={(e) => field.onChange(e.value)} />}
+                        />
+                        {getFormErrorMessage('chipArray')}
+                    </span>
+                    <Button type="submit" label="Submit" className="mt-2 w-3" />
                 </form>
             </div>
             <DocSectionCode code={code} dependencies={{ 'react-hook-form': '^7.39.4' }} />

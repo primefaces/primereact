@@ -7,6 +7,9 @@ import { QuillDoc } from '../../components/doc/editor/quilldoc';
 import { BasicDoc } from '../../components/doc/editor/basicdoc';
 import { TemplateDoc } from '../../components/doc/editor/templatedoc';
 import { ApiDoc } from '../../components/doc/editor/apidoc';
+import { FormikDoc } from '../../components/doc/editor/validation/formikdoc';
+import { HookFormDoc } from '../../components/doc/editor/validation/hookformdoc';
+import { ReadOnlyDoc } from '../../components/doc/editor/readonlydoc';
 
 const EditorDemo = () => {
     const docs = [
@@ -24,6 +27,28 @@ const EditorDemo = () => {
             id: 'basic',
             label: 'Basic',
             component: BasicDoc
+        },
+        {
+            id: 'readOnly',
+            label: 'ReadOnly',
+            component: ReadOnlyDoc
+        },
+        {
+            id: 'validation',
+            label: 'Validation',
+            description: 'Validate using popular React validation libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
         },
         {
             id: 'template',

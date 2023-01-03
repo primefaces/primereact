@@ -389,20 +389,22 @@ export default function FormikDoc() {
             <div className="card flex justify-content-center">
                 <form onSubmit={formik.handleSubmit} className="p-fluid">
                     <Toast ref={toast} />
-                    <CascadeSelect
-                        id="city"
-                        name="city"
-                        value={formik.values.city}
-                        options={countries}
-                        optionLabel={'cname'}
-                        optionGroupLabel={'name'}
-                        optionGroupChildren={['states', 'cities']}
-                        style={{ minWidth: '14rem' }}
-                        placeholder={'Select a City'}
-                        onChange={(e) => {
-                            formik.setFieldValue('city', e.value);
-                        }}
-                    />
+                    <span>
+                        <CascadeSelect
+                            id="city"
+                            name="city"
+                            value={formik.values.city}
+                            options={countries}
+                            optionLabel={'cname'}
+                            optionGroupLabel={'name'}
+                            optionGroupChildren={['states', 'cities']}
+                            style={{ minWidth: '14rem' }}
+                            placeholder={'Select a City'}
+                            onChange={(e) => {
+                                formik.setFieldValue('city', e.value);
+                            }}
+                        />
+                    </span>
                     {getFormErrorMessage('city')}
                     <Button type="submit" label="Submit" className="mt-2" />
                 </form>
