@@ -6,6 +6,8 @@ import { BasicDoc } from '../../components/doc/inputswitch/basicdoc';
 import { PreselectionDoc } from '../../components/doc/inputswitch/preselectiondoc';
 import { DisabledDoc } from '../../components/doc/inputswitch/disableddoc';
 import { ApiDoc } from '../../components/doc/inputswitch/apidoc';
+import { FormikDoc } from '../../components/doc/inputswitch/validation/formikdoc';
+import { HookFormDoc } from '../../components/doc/inputswitch/validation/hookformdoc';
 
 const InputSwitchDemo = () => {
     const docs = [
@@ -28,6 +30,23 @@ const InputSwitchDemo = () => {
             id: 'disabled',
             label: 'Disabled',
             component: DisabledDoc
+        },
+        {
+            id: 'validation',
+            label: 'Validation',
+            description: 'Validate using popular React validation libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
         },
         {
             id: 'api',

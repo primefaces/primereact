@@ -4,7 +4,7 @@ import { DocSectionText } from '../../common/docsectiontext';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { Button } from '../../../lib/button/Button';
 import { Toast } from '../../../lib/toast/Toast';
-import { Checkbox } from '../../../lib/checkbox/Checkbox';
+import { InputSwitch } from '../../../lib/inputswitch/InputSwitch';
 
 export function FormikDoc(props) {
     const toast = useRef(null);
@@ -16,13 +16,13 @@ export function FormikDoc(props) {
 
     const formik = useFormik({
         initialValues: {
-            checked: false
+            value: false
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.checked) {
-                errors.checked = 'Accept is required.';
+            if (!data.value) {
+                errors.value = 'Accept is required.';
             }
 
             return errors;
@@ -42,14 +42,14 @@ export function FormikDoc(props) {
     const code = {
         basic: `
 <Toast ref={toast} />
-<Checkbox id="checked" name="checked" checked={formik.values.checked} onChange={(e) => { formik.setFieldValue('checked', e.checked) }}></Checkbox>
+<InputSwitch id="value" name="value" checked={formik.values.value} onChange={(e) => {formik.setFieldValue('value', e.value)}}/>
 `,
         javascript: `
 import React, { useRef } from "react";
 import { useFormik } from 'formik';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
-import { Checkbox } from "primereact/checkbox";
+import { InputSwitch } from "primereact/inputswitch";
 
 export default function FormikDoc() {
     const toast = useRef(null);
@@ -61,13 +61,13 @@ export default function FormikDoc() {
 
     const formik = useFormik({
         initialValues: {
-            checked: false
+            value: false
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.checked) {
-                errors.checked = 'Accept is required.';
+            if (!data.value) {
+                errors.value = 'Accept is required.';
             }
 
             return errors;
@@ -89,17 +89,17 @@ export default function FormikDoc() {
             <div className="flex flex-column">
                 <form onSubmit={formik.handleSubmit} className="p-fluid justify-content-center">
                     <div className="mb-2">I've read and accept the terms & conditions.</div>
-                    <div className="flex align-items-center justify-content-center">
+                    <div className="flex align-items-center ">
                         <Toast ref={toast} />
-                        <Checkbox
-                            id="checked"
-                            name="checked"
-                            checked={formik.values.checked}
+                        <InputSwitch
+                            id="value"
+                            name="value"
+                            checked={formik.values.value}
                             onChange={(e) => {
-                                formik.setFieldValue('checked', e.checked);
+                                formik.setFieldValue('value', e.value);
                             }}
-                        ></Checkbox>
-                        {getFormErrorMessage('checked')}
+                        />
+                        {getFormErrorMessage('value')}
                     </div>
                     <Button type="submit" label="Submit" className="mt-2" />
                 </form>
@@ -113,7 +113,7 @@ import React, { useRef } from "react";
 import { useFormik } from 'formik';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
-import { Checkbox } from "primereact/checkbox";
+import { InputSwitch } from "primereact/inputswitch";
 
 export default function FormikDoc() {
     const toast = useRef(null);
@@ -125,13 +125,13 @@ export default function FormikDoc() {
 
     const formik = useFormik({
         initialValues: {
-            checked: false
+            value: false
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.checked) {
-                errors.checked = 'Accept is required.';
+            if (!data.value) {
+                errors.value = 'Accept is required.';
             }
 
             return errors;
@@ -153,17 +153,17 @@ export default function FormikDoc() {
             <div className="flex flex-column">
                 <form onSubmit={formik.handleSubmit} className="p-fluid justify-content-center">
                     <div className="mb-2">I've read and accept the terms & conditions.</div>
-                    <div className="flex align-items-center justify-content-center">
+                    <div className="flex align-items-center ">
                         <Toast ref={toast} />
-                        <Checkbox
-                            id="checked"
-                            name="checked"
-                            checked={formik.values.checked}
+                        <InputSwitch
+                            id="value"
+                            name="value"
+                            checked={formik.values.value}
                             onChange={(e) => {
-                                formik.setFieldValue('checked', e.checked);
+                                formik.setFieldValue('value', e.value);
                             }}
-                        ></Checkbox>
-                        {getFormErrorMessage('checked')}
+                        />
+                        {getFormErrorMessage('value')}
                     </div>
                     <Button type="submit" label="Submit" className="mt-2" />
                 </form>
@@ -184,17 +184,17 @@ export default function FormikDoc() {
                 <div className="flex flex-column">
                     <form onSubmit={formik.handleSubmit} className="p-fluid justify-content-center">
                         <div className="mb-2">I've read and accept the terms & conditions.</div>
-                        <div className="flex align-items-center justify-content-center">
+                        <div className="flex align-items-center ">
                             <Toast ref={toast} />
-                            <Checkbox
-                                id="checked"
-                                name="checked"
-                                checked={formik.values.checked}
+                            <InputSwitch
+                                id="value"
+                                name="value"
+                                checked={formik.values.value}
                                 onChange={(e) => {
-                                    formik.setFieldValue('checked', e.checked);
+                                    formik.setFieldValue('value', e.value);
                                 }}
-                            ></Checkbox>
-                            {getFormErrorMessage('checked')}
+                            />
+                            {getFormErrorMessage('value')}
                         </div>
                         <Button type="submit" label="Submit" className="mt-2" />
                     </form>
