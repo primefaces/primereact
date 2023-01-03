@@ -48,7 +48,9 @@ export default function SeverityDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Severity defines the color of the badge, possible values are <i>success</i>, <i>info</i>, <i>warning</i> and <i>danger</i> in addition to the default theme color.</p>
+                <p>
+                    Severity defines the color of the badge, possible values are <i>success</i>, <i>info</i>, <i>warning</i> and <i>danger</i> in addition to the default theme color.
+                </p>
             </DocSectionText>
             <div className="card flex flex-wrap justify-content-center gap-2">
                 <Badge value="2"></Badge>

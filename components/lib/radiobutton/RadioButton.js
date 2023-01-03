@@ -57,7 +57,7 @@ export const RadioButton = React.memo(
         };
 
         const onKeyDown = (event) => {
-            if (event.code === 'Space') {
+            if (event.code === 'Space' || event.key === ' ') { // event.key is for Android support
                 onClick(event);
             }
         };

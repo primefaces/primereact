@@ -91,7 +91,9 @@ export default function IconDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>A font icon is displayed as an Avatar with the the <i>icon</i> property.</p>
+                <p>
+                    A font icon is displayed as an Avatar with the the <i>icon</i> property.
+                </p>
             </DocSectionText>
             <div className="card">
                 <div className="flex flex-wrap gap-5">
