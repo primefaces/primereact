@@ -9,7 +9,7 @@ export function ApiDoc(props) {
         <>
             <DocSectionText {...props}></DocSectionText>
             <DocSubSection id="properties" label="Properties">
-                <p>Password accepts all valid properties of an input element in addition the the custom properties below.</p>
+                <p>Password accepts all valid properties of an input element in addition the custom properties below.</p>
 
                 <div className="doc-tablewrapper">
                     <table className="doc-table">

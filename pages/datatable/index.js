@@ -132,7 +132,7 @@ const DataTableDemo = () => {
         {
             id: 'paginator',
             label: 'Paginator',
-            description: 'Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the the number of page links to display.',
+            description: 'Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the number of page links to display.',
             children: [
                 {
                     id: 'sortbasic',

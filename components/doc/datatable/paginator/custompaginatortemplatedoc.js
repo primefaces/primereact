@@ -491,7 +491,7 @@ const CustomPaginatorTemplateDoc = () => {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the the number of page links to display.</p>
+                <p>Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the number of page links to display.</p>
             </DocSectionText>
             <div className="card">
                 <DataTable value={customers1} paginator paginatorTemplate={template1} first={first1} rows={rows1} onPage={onCustomPage1} responsiveLayout="scroll">

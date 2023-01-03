@@ -300,7 +300,7 @@
 - Editor: Explicit import of quill.js dependency doesn't allow for single pages with inline scripting [\#3097](https://github.com/primefaces/primereact/issues/3097)
 - Dropdown: Required attribute doesn't work [\#3092](https://github.com/primefaces/primereact/issues/3092)
 - TreeSelect: props.panelFooterTemplate doesn't work [\#3088](https://github.com/primefaces/primereact/issues/3088)
-- Tooltip: If the the mouse hover ends before showDelay is reached, then the tooltip won't go away. [\#3083](https://github.com/primefaces/primereact/issues/3083)
+- Tooltip: If the mouse hover ends before showDelay is reached, then the tooltip won't go away. [\#3083](https://github.com/primefaces/primereact/issues/3083)
 - Mention, InputText, InputTextArea and Password do not maintain p-filled properly [\#3081](https://github.com/primefaces/primereact/issues/3081)
 - StyleClass: Bug with "position: fixed" on chromium family only, firefox works OK [\#3080](https://github.com/primefaces/primereact/issues/3080)
 - OverlayPanel: Dismissable is ignored [\#3070](https://github.com/primefaces/primereact/issues/3070)

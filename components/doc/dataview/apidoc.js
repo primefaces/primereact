@@ -81,7 +81,7 @@ export function ApiDoc(props) {
 
             <DocSubSection id="paginator" label="Paginator">
                 <p>
-                    Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the the number of page links to display. Visit the <Link href="/paginator"> paginator</Link>{' '}
+                    Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the number of page links to display. Visit the <Link href="/paginator"> paginator</Link>{' '}
                     paginator component for more information about the available properties.
                 </p>
 
