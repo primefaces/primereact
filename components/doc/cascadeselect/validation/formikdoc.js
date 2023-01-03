@@ -117,6 +117,7 @@ export function FormikDoc(props) {
         basic: `
 <Toast ref={toast}></Toast>
 <CascadeSelect id="city" name="city value={formik.values.city} options={countries} optionLabel={"cname"} optionGroupLabel={"name"} optionGroupChildren={['states', 'cities']} style={{minWidth: '14rem'}} placeholder={"Select a City"} onChange={(e) => {formik.setFieldValue('city', e.value)}} />
+<Button type="submit" label="Submit" className="mt-2" />
         `,
         javascript: `
 import React, { useRef } from "react";
