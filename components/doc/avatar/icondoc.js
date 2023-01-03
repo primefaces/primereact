@@ -23,7 +23,7 @@ import React from 'react';
 import { Avatar } from 'primereact/avatar';
 import { Badge } from 'primereact/badge';
 
-export default function IconDoc() {
+export default function IconDemo() {
     return (
         <div className="card">
             <div className="flex flex-wrap gap-5">
@@ -57,7 +57,7 @@ import React from 'react';
 import { Avatar } from 'primereact/avatar';
 import { Badge } from 'primereact/badge';
 
-export default function IconDoc() {
+export default function IconDemo() {
     return (
         <div className="card">
             <div className="flex flex-wrap gap-5">

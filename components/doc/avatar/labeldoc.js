@@ -22,7 +22,7 @@ import React from 'react';
 import { Avatar } from 'primereact/avatar';
 import { Badge } from 'primereact/badge';
 
-export default function LabelDoc() {
+export default function LabelDemo() {
     return (
         <div className="flex flex-wrap gap-5">
             <div class="flex-auto">
@@ -54,7 +54,7 @@ import React from 'react';
 import { Avatar } from 'primereact/avatar';
 import { Badge } from 'primereact/badge';
 
-export default function LabelDoc() {
+export default function LabelDemo() {
     return (
         <div className="flex flex-wrap gap-5">
             <div class="flex-auto">

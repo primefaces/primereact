@@ -25,7 +25,7 @@ import { Avatar } from 'primereact/avatar';
 import { AvatarGroup } from 'primereact/avatargroup';
 import { Badge } from 'primereact/badge';
 
-export default function AvatarGroupDoc() {
+export default function AvatarGroupDemo() {
 
     return (
         <div className="card flex justify-content-center">
@@ -47,7 +47,7 @@ import { Avatar } from 'primereact/avatar';
 import { AvatarGroup } from 'primereact/avatargroup';
 import { Badge } from 'primereact/badge';
 
-export default function AvatarGroupDoc() {
+export default function AvatarGroupDemo() {
 
     return (
         <div className="card flex justify-content-center">
