@@ -49,7 +49,8 @@ export const Checkbox = React.memo(
         };
 
         const onKeyDown = (event) => {
-            if (event.code === 'Space' || event.key === ' ') { // event.key is for Android support
+            if (event.code === 'Space' || event.key === ' ') {
+                // event.key is for Android support
                 onClick(event);
             }
         };
