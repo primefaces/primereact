@@ -36,7 +36,7 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Text to display is defined with the <i>value</i>.</p>
+                <p>Text to display is defined with the <i>value</i> property.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Badge value="2"></Badge>
