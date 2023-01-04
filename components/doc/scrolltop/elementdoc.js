@@ -57,10 +57,12 @@ export default function ElementDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Setting the <i>target</i> property to <i>parent</i> binds ScrollTop to its parent element that has scrolling content.</p>
+                <p>
+                    Setting the <i>target</i> property to <i>parent</i> binds ScrollTop to its parent element that has scrolling content.
+                </p>
             </DocSectionText>
             <div className="card">
-                <div style={{ width: '250px', height: '200px', 'overflow': 'auto' }}>
+                <div style={{ width: '250px', height: '200px', overflow: 'auto' }}>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae et leo duis ut diam. Ultricies mi quis hendrerit dolor magna eget est lorem. Amet consectetur
                         adipiscing elit ut. Nam libero justo laoreet sit amet. Pharetra massa massa ultricies mi quis hendrerit dolor magna. Est ultricies integer quis auctor elit sed vulputate. Consequat ac felis donec et. Tellus orci ac auctor
