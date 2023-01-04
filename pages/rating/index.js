@@ -31,7 +31,7 @@ const RatingDemo = () => {
         },
         {
             id: 'readonly',
-            label: 'Read Only',
+            label: 'ReadOnly',
             component: ReadOnlyDoc
         },
         {
@@ -40,14 +40,14 @@ const RatingDemo = () => {
             component: DisabledDoc
         },
         {
-            id: 'template',
-            label: 'Template',
-            component: TemplateDoc
-        },
-        {
             id: 'numberofstars',
             label: 'Number of Stars',
             component: NumberOfStarsDoc
+        },
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
             id: 'api',
