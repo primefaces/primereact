@@ -203,11 +203,11 @@ export const InputNumber = React.memo(
                     return;
                 }
 
+                // #3913 onChange should be called before onValueChange
+                handleOnChange(event, currentValue, newValue);
                 // touch devices trigger the keyboard to display because of setSelectionRange
                 !DomHandler.isTouchDevice() && updateInput(newValue, null, 'spin');
                 updateModel(event, newValue);
-
-                handleOnChange(event, currentValue, newValue);
             }
         };
 
