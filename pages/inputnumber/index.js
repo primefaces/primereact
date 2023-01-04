@@ -5,10 +5,15 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/inputnumber/apidoc';
 import { ButtonsDoc } from '../../components/doc/inputnumber/buttonsdoc';
 import { CurrencyDoc } from '../../components/doc/inputnumber/currencydoc';
+import { DisabledDoc } from '../../components/doc/inputnumber/disableddoc';
+import { FloatLabelDoc } from '../../components/doc/inputnumber/floatlabeldoc';
 import { ImportDoc } from '../../components/doc/inputnumber/importdoc';
+import { InvalidDoc } from '../../components/doc/inputnumber/invaliddoc';
 import { LocaleDoc } from '../../components/doc/inputnumber/localedoc';
 import { NumeralsDoc } from '../../components/doc/inputnumber/numberalsdoc';
 import { PrefixDoc } from '../../components/doc/inputnumber/prefixdoc';
+import { FormikDoc } from '../../components/doc/inputnumber/validation/formikdoc';
+import { HookFormDoc } from '../../components/doc/inputnumber/validation/hookformdoc';
 import { ValidationDoc } from '../../components/doc/inputnumber/validationdoc';
 import { VerticalDoc } from '../../components/doc/inputnumber/verticaldoc';
 
@@ -18,6 +23,21 @@ const InputNumberDemo = () => {
             id: 'import',
             label: 'Import',
             component: ImportDoc
+        },
+        {
+            id: 'floatlabel',
+            label: 'Float Label',
+            component: FloatLabelDoc
+        },
+        {
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
         },
         {
             id: 'numerals',
@@ -52,7 +72,19 @@ const InputNumberDemo = () => {
         {
             id: 'validation',
             label: 'Validation',
-            component: ValidationDoc
+            description: 'Validate using popular React validation libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
         },
         {
             id: 'api',
