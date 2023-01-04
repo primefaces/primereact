@@ -10,7 +10,8 @@ import { FloatLabelDoc } from '../../components/doc/inputtextarea/floatlabeldoc'
 import { ImportDoc } from '../../components/doc/inputtextarea/importdoc';
 import { InvalidDoc } from '../../components/doc/inputtextarea/invaliddoc';
 import { KeyFilterDoc } from '../../components/doc/inputtextarea/keyfilterdoc';
-import { ValidationDoc } from '../../components/doc/inputtextarea/validationdoc';
+import { FormikDoc } from '../../components/doc/inputtextarea/validation/formikdoc';
+import { HookFormDoc } from '../../components/doc/inputtextarea/validation/hookformdoc';
 
 const InputTextareaDemo = () => {
     const docs = [
@@ -52,7 +53,19 @@ const InputTextareaDemo = () => {
         {
             id: 'validation',
             label: 'Validation',
-            component: ValidationDoc
+            description: 'Validate using popular React validation libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
         },
         {
             id: 'api',
