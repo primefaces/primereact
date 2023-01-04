@@ -106,9 +106,7 @@ export const Chips = React.memo(
                         event.preventDefault();
                     } else if (props.separator === ',') {
                         // GitHub #3885 Android Opera gives strange code 229 for comma
-                        const ANDROID_COMMA = 229;
-
-                        if (event.key === props.separator || event.which === ANDROID_COMMA) {
+                        if (event.key === props.separator || (DomHandler.isAndroid() && event.which === 229)) {
                             addItem(event, inputValue, true);
                         }
                     }
