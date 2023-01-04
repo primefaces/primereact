@@ -14,6 +14,8 @@ import { SizeDoc } from '../../components/doc/knob/sizedoc';
 import { ColorDoc } from '../../components/doc/knob/colordoc';
 import { ReactiveDoc } from '../../components/doc/knob/reactivedoc';
 import { ApiDoc } from '../../components/doc/knob/apidoc';
+import { FormikDoc } from '../../components/doc/knob/validation/formikdoc';
+import { HookFormDoc } from '../../components/doc/knob/validation/hookformdoc';
 
 const KnobDemo = () => {
     const docs = [
@@ -28,8 +30,8 @@ const KnobDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'readonly',
-            label: 'Readonly',
+            id: 'readOnly',
+            label: 'ReadOnly',
             component: ReadOnlyDoc
         },
         {
@@ -69,8 +71,25 @@ const KnobDemo = () => {
         },
         {
             id: 'reactive',
-            label: 'Reactive Knob',
+            label: 'Reactive',
             component: ReactiveDoc
+        },
+        {
+            id: 'validation',
+            label: 'Validation',
+            description: 'Validate using popular React validation libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
         },
         {
             id: 'api',

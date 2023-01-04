@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button } from '../../lib/button/button';
+import { Button } from '../../lib/button/Button';
 import { Knob } from '../../lib/knob/Knob';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
