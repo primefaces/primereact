@@ -3,7 +3,7 @@ import { ListBox } from '../../lib/listbox/ListBox';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function GroupedDoc(props) {
+export function GroupDoc(props) {
     const [selectedGroupedCity, setSelectedGroupedCity] = useState(null);
     const groupedCities = [
         {
@@ -55,7 +55,7 @@ export function GroupedDoc(props) {
 import React, { useState } from "react";
 import { ListBox } from 'primereact/listbox';
 
-export default function GroupedDoc() {
+export default function GroupDoc() {
     const [selectedGroupedCity, setSelectedGroupedCity] = useState(null);
     const groupedCities = [
         {
@@ -100,8 +100,10 @@ export default function GroupedDoc() {
     };
 
     return (
-        <ListBox value={selectedGroupedCity} options={groupedCities} onChange={(e) => setSelectedGroupedCity(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
-            optionGroupTemplate={groupedItemTemplate} style={{ width: '15rem' }} listStyle={{ maxHeight: '250px' }}/>
+        <div className="card flex justify-content-center">
+            <ListBox value={selectedGroupedCity} options={groupedCities} onChange={(e) => setSelectedGroupedCity(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
+                optionGroupTemplate={groupedItemTemplate} style={{ width: '15rem' }} listStyle={{ maxHeight: '250px' }}/>
+        </div>
     )
 }
         `,
@@ -109,7 +111,7 @@ export default function GroupedDoc() {
 import React, { useState } from "react";
 import { ListBox, ListBoxChangeParams } from 'primereact/listbox';
 
-export default function GroupedDoc() {
+export default function GroupDoc() {
     const [selectedGroupedCity, setSelectedGroupedCity] = useState(null);
     const groupedCities = [
         {
@@ -154,8 +156,10 @@ export default function GroupedDoc() {
     };
 
     return (
-        <ListBox value={selectedGroupedCity} options={groupedCities} onChange={(e: ListBoxChangeParams) => setSelectedGroupedCity(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
-            optionGroupTemplate={groupedItemTemplate} style={{ width: '15rem' }} listStyle={{ maxHeight: '250px' }}/>
+        <div className="card flex justify-content-center">
+            <ListBox value={selectedGroupedCity} options={groupedCities} onChange={(e: ListBoxChangeParams) => setSelectedGroupedCity(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
+                optionGroupTemplate={groupedItemTemplate} style={{ width: '15rem' }} listStyle={{ maxHeight: '250px' }}/>
+        </div>
     )
 }
         `
