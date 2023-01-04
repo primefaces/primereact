@@ -61,7 +61,9 @@ export default function InputDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Inplace can be used within a form to display a value as read only before making it editable. The <i>closable</i> property adds a close button next to the content to switch back to read only mode.</p>
+                <p>
+                    Inplace can be used within a form to display a value as read only before making it editable. The <i>closable</i> property adds a close button next to the content to switch back to read only mode.
+                </p>
             </DocSectionText>
             <div className="card">
                 <Inplace closable>

@@ -112,7 +112,9 @@ export default function LazyDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Using the <i>onOpen</i> event, data can be loaded in a lazy manner before displaying it in a table.</p>
+                <p>
+                    Using the <i>onOpen</i> event, data can be loaded in a lazy manner before displaying it in a table.
+                </p>
             </DocSectionText>
             <div className="card">
                 <Inplace onOpen={onOpen}>
