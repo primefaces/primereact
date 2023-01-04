@@ -11,7 +11,7 @@ export function FormikDoc(props) {
 
     const show = (data) => {
         // TO DO: Add detail content to the toast.
-        toast.current.show({ severity: 'success', summary: 'Submitted', detail: `${data.chipArray}` });
+        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
     };
 
     const formik = useFormik({
@@ -56,7 +56,7 @@ export default function FormikDoc() {
     const toast = useRef(null);
         
     const show = (data) => {
-        toast.current.show({ severity: 'success', summary: 'Submitted', detail: \`\${data.chipArray}\` });
+        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
     };
 
     const formik = useFormik({
@@ -116,7 +116,7 @@ export default function FormikDoc() {
     const toast = useRef(null);
         
     const show = (data) => {
-        toast.current.show({ severity: 'success', summary: 'Submitted', detail: \`\${data.chipArray}\` });
+        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
     };
 
     const formik = useFormik({

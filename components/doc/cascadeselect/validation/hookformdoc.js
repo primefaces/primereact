@@ -85,7 +85,7 @@ export function HookFormDoc(props) {
 
     const show = (data) => {
         // TO DO: Add detail content to the toast.
-        toast.current.show({ severity: 'success', summary: 'Submitted', detail: `${data.city.cname || 'No data found.'}` });
+        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
     };
 
     const defaultValues = {
@@ -209,7 +209,7 @@ export default function HookFormDoc() {
 
     const show = (data) => {
         // TO DO: Add detail content to the toast.
-        toast.current.show({ severity: 'success', summary: 'Submitted', detail: \`\${data.city.cname  || 'No data found.'}\` });
+        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
     };
 
     const defaultValues = {
@@ -353,7 +353,7 @@ export default function HookFormDoc() {
 
     const show = (data) => {
         // TO DO: Add detail content to the toast.
-        toast.current.show({ severity: 'success', summary: 'Submitted', detail: \`\${data.city.cname  || 'No data found.'}\` });
+        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
     };
 
     const defaultValues = {

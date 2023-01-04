@@ -11,7 +11,7 @@ export function FormikDoc(props) {
 
     const show = () => {
         // TO DO: Add detail content to the toast.
-        toast.current.show({ severity: 'success', summary: 'Submitted', detail: 'The blog is uploaded' });
+        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'The blog is uploaded' });
     };
 
     const renderHeader = () => {
@@ -70,7 +70,7 @@ export default function FormikDoc() {
 
     const show = () => {
         // TO DO: Add detail content to the toast.
-        toast.current.show({ severity: 'success', summary: 'Submitted', detail: 'The blog is uploaded' });
+        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'The blog is uploaded' });
     };
 
     const renderHeader = () => {
@@ -148,7 +148,7 @@ export default function FormikDoc() {
 
     const show = () => {
         // TO DO: Add detail content to the toast.
-        toast.current.show({ severity: 'success', summary: 'Submitted', detail: 'The blog is uploaded' });
+        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'The blog is uploaded' });
     };
 
     const renderHeader = () => {

@@ -11,7 +11,7 @@ export function FormikDoc(props) {
 
     const show = (data) => {
         // TO DO: Add detail content to the toast.
-        toast.current.show({ severity: 'success', summary: 'Submitted', detail: 'The form is successfully submitted.' });
+        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'The form is successfully submitted.' });
     };
 
     const formik = useFormik({
@@ -56,7 +56,7 @@ export default function FormikDoc() {
 
     const show = (data) => {
         // TO DO: Add detail content to the toast.
-        toast.current.show({ severity: 'success', summary: 'Submitted', detail: 'The form is successfully submitted.' });
+        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'The form is successfully submitted.' });
     };
 
     const formik = useFormik({
@@ -120,7 +120,7 @@ export default function FormikDoc() {
 
     const show = (data) => {
         // TO DO: Add detail content to the toast.
-        toast.current.show({ severity: 'success', summary: 'Submitted', detail: 'The form is successfully submitted.' });
+        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'The form is successfully submitted.' });
     };
 
     const formik = useFormik({

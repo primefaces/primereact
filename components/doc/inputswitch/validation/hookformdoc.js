@@ -12,7 +12,7 @@ export function HookFormDoc(props) {
 
     const show = () => {
         // TO DO: Add detail content to the toast.
-        toast.current.show({ severity: 'success', summary: 'Submitted', detail: 'The form is successfully submitted.' });
+        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'The form is successfully submitted.' });
     };
 
     const defaultValues = {
@@ -65,7 +65,7 @@ export default function HookFormDoc() {
 
     const show = () => {
         // TO DO: Add detail content to the toast.
-        toast.current.show({ severity: 'success', summary: 'Submitted', detail: 'The form is successfully submitted.' });
+        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'The form is successfully submitted.' });
     };
 
     const defaultValues = {
@@ -129,7 +129,7 @@ export default function HookFormDoc() {
 
     const show = () => {
         // TO DO: Add detail content to the toast.
-        toast.current.show({ severity: 'success', summary: 'Submitted', detail: 'The form is successfully submitted.' });
+        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'The form is successfully submitted.' });
     };
 
     const defaultValues = {
