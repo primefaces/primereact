@@ -1,21 +1,17 @@
-import { useState } from 'react';
 import { Editor } from '../../lib/editor/Editor';
 import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
 
 export function ReadOnlyDoc(props) {
-    const [text, setText] = useState('');
-
     const code = {
         basic: `
 <Editor style={{ height: '320px' }} value="ReadOnly Mode" readOnly />
         `,
         javascript: `
-import React, { useState } from "react";
+import React from "react";
 import { Editor } from "primereact/editor";
 
 export default function ReadOnlyDoc() {
-    const [text, setText] = useState('');
 
     return (
         <div className="card">
@@ -25,11 +21,10 @@ export default function ReadOnlyDoc() {
 }
         `,
         typescript: `
-import React, { useState } from "react";
+import React from "react";
 import { Editor } from "primereact/editor";
 
 export default function ReadOnlyDoc() {
-    const [text, setText] = useState<string>('');
 
     return (
         <div className="card">

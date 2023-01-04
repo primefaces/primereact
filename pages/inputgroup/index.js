@@ -5,35 +5,29 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { CheckboxDoc } from '../../components/doc/inputgroup/checkboxdoc';
 import { ButtonDoc } from '../../components/doc/inputgroup/buttonsdoc';
 import { MultipleDoc } from '../../components/doc/inputgroup/multipledoc';
-import { AddonsDoc } from '../../components/doc/inputgroup/addonsdoc';
-import { ApiDoc } from '../../components/doc/inputgroup/apidoc';
+import { BasicDoc } from '../../components/doc/inputgroup/basicdoc';
 
 const InputGroupDemo = () => {
     const docs = [
         {
-            id: 'addons',
-            label: 'Addons',
-            component: AddonsDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
             id: 'multiple',
-            label: 'Multiple Addons',
+            label: 'Multiple',
             component: MultipleDoc
         },
         {
             id: 'button',
-            label: 'Button Addons',
+            label: 'Button',
             component: ButtonDoc
         },
         {
             id: 'checkbox',
             label: 'Checkbox and RadioButton',
             component: CheckboxDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc
         }
     ];
 

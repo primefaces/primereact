@@ -3,7 +3,7 @@ import { InputText } from '../../lib/inputtext/InputText';
 import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
 
-export function AddonsDoc(props) {
+export function BasicDoc(props) {
     const code = {
         basic: `
 <InputText placeholder="Username" />
@@ -15,7 +15,7 @@ import React from 'react';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
 
-export default function AddonsDoc() {
+export default function BasicDoc() {
 
     return (
         <div className="card flex justify-content-center">
@@ -43,7 +43,7 @@ import React from 'react';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
 
-export default function AddonsDoc() {
+export default function BasicDoc() {
 
     return (
         <div className="card flex justify-content-center">
