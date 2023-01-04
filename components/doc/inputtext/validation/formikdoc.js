@@ -9,8 +9,7 @@ import { InputText } from '../../../lib/inputtext/InputText';
 export function FormikDoc(props) {
     const toast = useRef(null);
 
-    const show = (data) => {
-        // TO DO: Add detail content to the toast.
+    const show = () => {
         toast.current.show({ severity: 'success', summary: 'Saved', detail: 'Successfully submitted.' });
     };
 
@@ -55,8 +54,7 @@ import { Toast } from 'primereact/toast';
 export default function FormikDoc() {
     const toast = useRef(null);
 
-    const show = (data) => {
-        // TO DO: Add detail content to the toast.
+    const show = () => {
         toast.current.show({ severity: 'success', summary: 'Saved', detail: 'Successfully submitted.' });
     };
 
@@ -117,8 +115,7 @@ import { Toast } from 'primereact/toast';
 export default function FormikDoc() {
     const toast = useRef(null);
 
-    const show = (data) => {
-        // TO DO: Add detail content to the toast.
+    const show = () => {
         toast.current.show({ severity: 'success', summary: 'Saved', detail: 'Successfully submitted.' });
     };
 

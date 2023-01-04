@@ -38,7 +38,6 @@ export default function DisabledDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                {/* TO DO: Check the description. */}
                 <p>
                     <i>disabled</i> prop prevents an input from being editable.
                 </p>

@@ -9,8 +9,7 @@ import { Chips } from '../../../lib/chips/Chips';
 export function HookFormDoc(props) {
     const toast = useRef(null);
 
-    const show = (data) => {
-        // TO DO: Add detail content to the toast.
+    const show = () => {
         toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
     };
 
@@ -26,7 +25,7 @@ export function HookFormDoc(props) {
     } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
-        data.chipArray.length > 0 && show(data);
+        data.chipArray.length > 0 && show();
 
         reset();
     };
@@ -58,8 +57,7 @@ import { Toast } from 'primereact/toast';
 export default function HookFormDoc() {
     const toast = useRef(null);
 
-    const show = (data) => {
-        // TO DO: Add detail content to the toast.
+    const show = () => {
         toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
     };
 
@@ -75,7 +73,7 @@ export default function HookFormDoc() {
     } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
-        data.chipArray.length > 0 && show(data);
+        data.chipArray.length > 0 && show();
 
         reset();
     };
@@ -114,8 +112,7 @@ export default function HookFormDoc() {
     const [formData, setFormData] = useState({});
     const toast = useRef(null);
 
-    const show = (data) => {
-        // TO DO: Add detail content to the toast.
+    const show = () => {
         toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
     };
 
@@ -131,7 +128,7 @@ export default function HookFormDoc() {
     } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
-        data.chipArray.length > 0 && show(data);
+        data.chipArray.length > 0 && show();
 
         reset();
     };

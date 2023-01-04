@@ -3,7 +3,7 @@ import { MultiSelect } from '../../lib/multiselect/MultiSelect';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function VirtualDoc(props) {
+export function EagerDoc(props) {
     const [selectAll, setSelectAll] = useState(false);
     const [selectedItems, setSelectedItems] = useState(null);
     const [items] = useState(Array.from({ length: 100000 }).map((_, i) => ({ label: `Item #${i}`, value: i })));
@@ -17,7 +17,7 @@ import React, { useState } from "react";
 import { MultiSelect } from 'primereact/multiselect';
 import './MultiSelectDemo.css';
 
-export default function VirtualDoc() {
+export default function EagerDoc() {
     const [selectAll, setSelectAll] = useState(false);
     const [selectedItems, setSelectedItems] = useState(null);
     const [items] = useState(Array.from({ length: 100000 }).map((_, i) => ({ label: \`Item #\${i}\`, value: i })));
@@ -34,7 +34,7 @@ import React, { useState } from "react";
 import { MultiSelect, MultiSelectChangeParams } from 'primereact/multiselect';
 import './MultiSelectDemo.css';
 
-export default function VirtualDoc() {
+export default function EagerDoc() {
     const [selectAll, setSelectAll] = useState<any>(false);
     const [selectedItems, setSelectedItems] = useState<any[]>(null);
     const [items] = useState(Array.from({ length: 100000 }).map((_, i) => ({ label: \`Item #\${i}\`, value: i })));

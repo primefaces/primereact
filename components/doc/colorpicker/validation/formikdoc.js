@@ -9,8 +9,7 @@ import { ColorPicker } from '../../../lib/colorpicker/ColorPicker';
 export function FormikDoc(props) {
     const toast = useRef(null);
 
-    const show = (data) => {
-        // TO DO: Add detail content to the toast.
+    const show = () => {
         toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
     };
 
@@ -65,8 +64,7 @@ import { Toast } from 'primereact/toast';
 export default function FormikDoc() {
     const toast = useRef(null);
 
-    const show = (data) => {
-        // TO DO: Add detail content to the toast.
+    const show = () => {
         toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
     };
 
@@ -125,8 +123,7 @@ import { Toast } from 'primereact/toast';
 export default function FormikDoc() {
     const toast = useRef(null);
 
-    const show = (data) => {
-        // TO DO: Add detail content to the toast.
+    const show = () => {
         toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
     };
 

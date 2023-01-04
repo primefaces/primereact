@@ -9,8 +9,7 @@ import { InputSwitch } from '../../../lib/inputswitch/InputSwitch';
 export function FormikDoc(props) {
     const toast = useRef(null);
 
-    const show = (data) => {
-        // TO DO: Add detail content to the toast.
+    const show = () => {
         toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'The form is successfully submitted.' });
     };
 
@@ -54,8 +53,7 @@ import { InputSwitch } from "primereact/inputswitch";
 export default function FormikDoc() {
     const toast = useRef(null);
 
-    const show = (data) => {
-        // TO DO: Add detail content to the toast.
+    const show = () => {
         toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'The form is successfully submitted.' });
     };
 
@@ -118,8 +116,7 @@ import { InputSwitch } from "primereact/inputswitch";
 export default function FormikDoc() {
     const toast = useRef(null);
 
-    const show = (data) => {
-        // TO DO: Add detail content to the toast.
+    const show = () => {
         toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'The form is successfully submitted.' });
     };
 

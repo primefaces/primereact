@@ -4,7 +4,7 @@ import { Skeleton } from '../../lib/skeleton/Skeleton';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function VirtualLazyDoc(props) {
+export function LazyDoc(props) {
     const [lazyItems, setLazyItems] = useState([]);
     const [lazyLoading, setLazyLoading] = useState(false);
     const [selectedItems, setSelectedItems] = useState(null);
@@ -52,7 +52,7 @@ import { MultiSelect, SelectItemOptionsType } from 'primereact/multiselect';
 import { Skeleton } from 'primereact/skeleton/';
 import './MultiSelectDemo.css';
 
-export default function VirtualLazyDoc() {
+export default function LazyDoc() {
     const [lazyItems, setLazyItems] = useState([]);
     const [lazyLoading, setLazyLoading] = useState(false);
     const [selectedItems, setSelectedItems] = useState(null);
@@ -103,7 +103,7 @@ import { MultiSelect, SelectItemOptionsType, MultiSelectChangeParams } from 'pri
 import { Skeleton } from 'primereact/skeleton/';
 import './MultiSelectDemo.css';
 
-export default function VirtualLazyDoc() {
+export default function LazyDoc() {
     const [lazyItems, setLazyItems] = useState<SelectItemOptionsType>([]);
     const [lazyLoading, setLazyLoading] = useState<boolean>(false);
     const [selectedItems, setSelectedItems] = useState<SelectItemOptionsType>([]);

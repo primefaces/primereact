@@ -7,9 +7,15 @@ import { ImportDoc } from '../../components/doc/multiselect/importdoc';
 import { BasicDoc } from '../../components/doc/multiselect/basicdoc';
 import { ChipsDoc } from '../../components/doc/multiselect/chipsdoc';
 import { GroupedDoc } from '../../components/doc/multiselect/groupeddoc';
-import { AdvancedDoc } from '../../components/doc/multiselect/advanceddoc';
-import { VirtualDoc } from '../../components/doc/multiselect/virtualdoc';
-import { VirtualLazyDoc } from '../../components/doc/multiselect/virtuallazydoc';
+import { EagerDoc } from '../../components/doc/multiselect/eagerdoc';
+import { LazyDoc } from '../../components/doc/multiselect/lazydoc';
+import { FormikDoc } from '../../components/doc/multiselect/validation/formikdoc';
+import { HookFormDoc } from '../../components/doc/multiselect/validation/hookformdoc';
+import { InvalidDoc } from '../../components/doc/multiselect/invaliddoc';
+import { FloatLabelDoc } from '../../components/doc/multiselect/floatlabeldoc';
+import { TemplateDoc } from '../../components/doc/multiselect/templatedoc';
+import { FilterDoc } from '../../components/doc/multiselect/filterdoc';
+import { DisabledDoc } from '../../components/doc/multiselect/disableddoc';
 
 const MultiSelectDemo = () => {
     const docs = [
@@ -29,24 +35,69 @@ const MultiSelectDemo = () => {
             component: ChipsDoc
         },
         {
+            id: 'floatlabel',
+            label: 'Float Label',
+            component: FloatLabelDoc
+        },
+        {
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
+        },
+        {
             id: 'grouped',
             label: 'Grouped',
             component: GroupedDoc
         },
         {
-            id: 'advanced',
-            label: 'Advanced with Templating and Filtering',
-            component: AdvancedDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'filter',
+            label: 'Filter',
+            component: FilterDoc
         },
         {
             id: 'virtual',
-            label: 'Virtual Scroll (100000 Items)',
-            component: VirtualDoc
+            label: 'Virtual Scroll (100K Items)',
+            // TO DO: Add a description
+            description: '',
+            children: [
+                {
+                    id: 'eager',
+                    label: 'Eager',
+                    component: EagerDoc
+                },
+                {
+                    id: 'lazy',
+                    label: 'Lazy',
+                    component: LazyDoc
+                }
+            ]
         },
         {
-            id: 'virtuallazy',
-            label: 'Virtual Scroll (100000 Items) and Lazy',
-            component: VirtualLazyDoc
+            id: 'validation',
+            label: 'Validation',
+            description: 'Validate using popular React validation libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
         },
         {
             id: 'api',

@@ -16,8 +16,7 @@ export function HookFormDoc(props) {
         { name: 'Paris', code: 'PRS' }
     ];
 
-    const show = (data) => {
-        // TO DO: Add detail content to the toast.
+    const show = () => {
         toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
     };
 
@@ -33,7 +32,7 @@ export function HookFormDoc(props) {
     } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
-        data.city && show(data);
+        data.city && show();
 
         reset();
     };
@@ -68,8 +67,7 @@ export default function HookFormDoc() {
         { name: 'Paris', code: 'PRS' }
     ];
 
-    const show = (data) => {
-        // TO DO: Add detail content to the toast.
+    const show = () => {
         toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
     };
 
@@ -85,7 +83,7 @@ export default function HookFormDoc() {
     } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
-        data.city && show(data);
+        data.city && show();
 
         reset();
     };
@@ -128,8 +126,7 @@ export default function HookFormDoc() {
         { name: 'Paris', code: 'PRS' }
     ];
 
-    const show = (data) => {
-        // TO DO: Add detail content to the toast.
+    const show = () => {
         toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
     };
 
@@ -145,7 +142,7 @@ export default function HookFormDoc() {
     } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
-        data.city && show(data);
+        data.city && show();
 
         reset();
     };

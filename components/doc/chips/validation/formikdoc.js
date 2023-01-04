@@ -9,8 +9,7 @@ import { Chips } from '../../../lib/chips/Chips';
 export function FormikDoc(props) {
     const toast = useRef(null);
 
-    const show = (data) => {
-        // TO DO: Add detail content to the toast.
+    const show = () => {
         toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
     };
 

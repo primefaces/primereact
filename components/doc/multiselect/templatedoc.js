@@ -3,7 +3,7 @@ import { MultiSelect } from '../../lib/multiselect/MultiSelect';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function AdvancedDoc(props) {
+export function TemplateDoc(props) {
     const [selectedCountries, setSelectedCountries] = useState(null);
     const countries = [
         { name: 'Australia', code: 'AU' },
@@ -53,14 +53,14 @@ export function AdvancedDoc(props) {
 
     const code = {
         basic: `
-<MultiSelect value={selectedCountries} options={countries} onChange={(e) => setSelectedCountries(e.value)} optionLabel="name" placeholder="Select Countries" filter className="multiselect-custom" itemTemplate={countryTemplate} selectedItemTemplate={selectedCountriesTemplate} panelFooterTemplate={panelFooterTemplate} />
+<MultiSelect value={selectedCountries} options={countries} onChange={(e) => setSelectedCountries(e.value)} optionLabel="name" placeholder="Select Countries" className="multiselect-custom" itemTemplate={countryTemplate} selectedItemTemplate={selectedCountriesTemplate} panelFooterTemplate={panelFooterTemplate} />
         `,
         javascript: `
 import React, { useState } from "react";
 import { MultiSelect } from 'primereact/multiselect';
 import './MultiSelectDemo.css';
 
-export default function AdvanceDoc() {
+export default function TemplateDocs() {
     const [selectedCountries, setSelectedCountries] = useState(null);
     const countries = [
         { name: 'Australia', code: 'AU' },
@@ -121,7 +121,7 @@ import React, { useState } from "react";
 import { MultiSelect, MultiSelectChangeParams } from 'primereact/multiselect';
 import './MultiSelectDemo.css';
 
-export default function AdvanceDoc() {
+export default function TemplateDocs() {
     const [selectedCountries, setSelectedCountries] = useState(null);
     const countries = [
         { name: 'Australia', code: 'AU' },
@@ -218,7 +218,6 @@ export default function AdvanceDoc() {
                     onChange={(e) => setSelectedCountries(e.value)}
                     optionLabel="name"
                     placeholder="Select Countries"
-                    filter
                     className="multiselect-custom"
                     itemTemplate={countryTemplate}
                     selectedItemTemplate={selectedCountriesTemplate}

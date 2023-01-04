@@ -4,17 +4,24 @@ import { DocSectionText } from '../../common/docsectiontext';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { Button } from '../../../lib/button/Button';
 import { Toast } from '../../../lib/toast/Toast';
-import { ColorPicker } from '../../../lib/colorpicker/ColorPicker';
+import { MultiSelect } from '../../../lib/multiselect/MultiSelect';
 
 export function HookFormDoc(props) {
     const toast = useRef(null);
+    const cities = [
+        { name: 'New York', code: 'NY' },
+        { name: 'Rome', code: 'RM' },
+        { name: 'London', code: 'LDN' },
+        { name: 'Istanbul', code: 'IST' },
+        { name: 'Paris', code: 'PRS' }
+    ];
 
     const show = () => {
         toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
     };
 
     const defaultValues = {
-        color: ''
+        city: null
     };
 
     const {
@@ -25,7 +32,7 @@ export function HookFormDoc(props) {
     } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
-        data.color && show();
+        data.city && show();
 
         reset();
     };
@@ -36,30 +43,38 @@ export function HookFormDoc(props) {
 
     const code = {
         basic: `
-<form onSubmit={handleSubmit(onSubmit)} className="flex flex-column align-items-center justify-content-center">
-    <Toast ref={toast} />
-    <Controller name="color" control={control} rules={{ required: 'Color is required.' }} render={({ field }) => <ColorPicker name="color" control={control} value={field.color} onChange={(e) => field.onChange(e.value)} />} />
-    {getFormErrorMessage('color')}
-    <Button type="submit" label="Submit" className="mt-2" />
-</form>
+<Toast ref={toast} />
+<Controller
+    name="city"
+    control={control}
+    rules={{ required: 'City is required.' }}
+    render={({ field }) => <MultiSelect id={field.name} name="city" value={field.value} options={cities} onChange={(e) => field.onChange(e.value)} optionLabel="name" placeholder="Select a City" maxSelectedLabels={3} />}
+/>
+<Button type="submit" label="Submit" className="mt-2" />
         `,
         javascript: `
 import React, { useRef } from "react";
 import { useForm, Controller } from 'react-hook-form';
-import { ColorPicker } from 'primereact/colorpicker';
+import { MultiSelect } from 'primereact/multiselect';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
 export default function HookFormDoc() {
-    
     const toast = useRef(null);
+    const cities = [
+        { name: 'New York', code: 'NY' },
+        { name: 'Rome', code: 'RM' },
+        { name: 'London', code: 'LDN' },
+        { name: 'Istanbul', code: 'IST' },
+        { name: 'Paris', code: 'PRS' }
+    ];
 
     const show = () => {
         toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
     };
 
     const defaultValues = {
-        color: '22c55e'
+        city: null
     };
 
     const {
@@ -70,7 +85,7 @@ export default function HookFormDoc() {
     } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
-        data.color && show();
+        data.city && show();
 
         reset();
     };
@@ -81,10 +96,16 @@ export default function HookFormDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column align-items-center justify-content-center">
+            <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
                 <Toast ref={toast} />
-                <Controller name="color" control={control} rules={{ required: 'Color is required.' }} render={({ field }) => <ColorPicker name="color" control={control} value={field.color} onChange={(e) => field.onChange(e.value)} />} />
-                {getFormErrorMessage('color')}
+                <Controller
+                    name="city"
+                    control={control}
+                    rules={{ required: 'City is required.' }}
+                    render={({ field }) => <MultiSelect id={field.name} name="city" value={field.value} options={cities} onChange={(e) => field.onChange(e.value)} optionLabel="name" placeholder="Select a City" maxSelectedLabels={3} />}
+                />
+
+                {getFormErrorMessage('city')}
                 <Button type="submit" label="Submit" className="mt-2" />
             </form>
         </div>
@@ -94,20 +115,26 @@ export default function HookFormDoc() {
         typescript: `
 import React, { useRef } from "react";
 import { useForm, Controller } from 'react-hook-form';
-import { ColorPicker } from 'primereact/colorpicker';
+import { MultiSelect, MultiSelectChangeParams } from 'primereact/multiselect';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
 export default function HookFormDoc() {
-    
-    const toast = useRef(null);
+    const toast = useRef<Toast | null>(null);
+    const cities = [
+        { name: 'New York', code: 'NY' },
+        { name: 'Rome', code: 'RM' },
+        { name: 'London', code: 'LDN' },
+        { name: 'Istanbul', code: 'IST' },
+        { name: 'Paris', code: 'PRS' }
+    ];
 
     const show = () => {
         toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
     };
 
     const defaultValues = {
-        color: '22c55e'
+        city: null
     };
 
     const {
@@ -118,7 +145,7 @@ export default function HookFormDoc() {
     } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
-        data.color && show();
+        data.city && show();
 
         reset();
     };
@@ -129,10 +156,16 @@ export default function HookFormDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column align-items-center justify-content-center">
+            <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
                 <Toast ref={toast} />
-                <Controller name="color" control={control} rules={{ required: 'Color is required.' }} render={({ field }) => <ColorPicker name="color" control={control} value={field.color} onChange={(e) => field.onChange(e.value)} />} />
-                {getFormErrorMessage('color')}
+                <Controller
+                    name="city"
+                    control={control}
+                    rules={{ required: 'City is required.' }}
+                    render={({ field }) => <MultiSelect id={field.name} name="city" value={field.value} options={cities} onChange={(e: MultiSelectChangeParams) => field.onChange(e.value)} optionLabel="name" placeholder="Select a City" maxSelectedLabels={3} />}
+                />
+
+                {getFormErrorMessage('city')}
                 <Button type="submit" label="Submit" className="mt-2" />
             </form>
         </div>
@@ -148,10 +181,16 @@ export default function HookFormDoc() {
                 <p></p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column align-items-center justify-content-center">
+                <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
                     <Toast ref={toast} />
-                    <Controller name="color" control={control} rules={{ required: 'Color is required.' }} render={({ field }) => <ColorPicker name="color" control={control} value={field.color} onChange={(e) => field.onChange(e.value)} />} />
-                    {getFormErrorMessage('color')}
+                    <Controller
+                        name="city"
+                        control={control}
+                        rules={{ required: 'City is required.' }}
+                        render={({ field }) => <MultiSelect id={field.name} name="city" value={field.value} options={cities} onChange={(e) => field.onChange(e.value)} optionLabel="name" placeholder="Select a City" maxSelectedLabels={3} />}
+                    />
+
+                    {getFormErrorMessage('city')}
                     <Button type="submit" label="Submit" className="mt-2" />
                 </form>
             </div>
