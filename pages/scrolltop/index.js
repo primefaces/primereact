@@ -4,7 +4,7 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/scrolltop/apidoc';
 import { ImportDoc } from '../../components/doc/scrolltop/importdoc';
-import { WindowDoc } from '../../components/doc/scrolltop/windowdoc';
+import { BasicDoc } from '../../components/doc/scrolltop/basicdoc';
 import { ElementDoc } from '../../components/doc/scrolltop/elementdoc';
 import { DocActions } from '../../components/doc/common/docactions';
 
@@ -18,11 +18,11 @@ const ScrollTopDemo = () => {
         {
             id: 'basic',
             label: 'Basic',
-            component: WindowDoc
+            component: BasicDoc
         },
         {
-            id: 'image',
-            label: 'Image',
+            id: 'element',
+            label: 'Element',
             component: ElementDoc
         },
         {
