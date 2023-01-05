@@ -45,7 +45,7 @@ export default function ButtonSetDoc() {
     )
 }
         `,
-        exitFiles: {
+        extFiles: {
             'ButtonDemo.css': `
 /* ButtonDemo.css */
 .button-demo .p-button {

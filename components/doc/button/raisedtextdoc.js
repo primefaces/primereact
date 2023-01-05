@@ -56,7 +56,7 @@ export default function RaisedTextButtonsDoc() {
     )
 }
         `,
-        exitFiles: {
+        extFiles: {
             'ButtonDemo.css': `
 /* ButtonDemo.css */
 

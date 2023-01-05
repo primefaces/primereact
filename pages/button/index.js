@@ -20,6 +20,7 @@ import { ButtonSetDoc } from '../../components/doc/button/buttonsetdoc';
 import { SizesDoc } from '../../components/doc/button/sizesdoc';
 import { TemplateDoc } from '../../components/doc/button/templatedoc';
 import { ApiDoc } from '../../components/doc/button/apidoc';
+import { DisabledDoc } from '../../components/doc/button/disableddoc';
 
 const ButtonDemo = () => {
     const docs = [
@@ -49,43 +50,48 @@ const ButtonDemo = () => {
             component: SeveritiesDoc
         },
         {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
+        },
+        {
             id: 'raised',
-            label: 'Raised Buttons',
+            label: 'Raised',
             component: RaisedButtonsDoc
         },
         {
             id: 'rounded',
-            label: 'Rounded Buttons',
+            label: 'Rounded',
             component: RoundedButtonsDoc
         },
         {
             id: 'text',
-            label: 'Text Buttons',
+            label: 'Text',
             component: TextButtonsDoc
         },
         {
             id: 'raisedtext',
-            label: 'Raised Text Buttons',
+            label: 'Raised Text',
             component: RaisedTextButtonsDoc
         },
         {
             id: 'outlined',
-            label: 'Outlined Buttons',
+            label: 'Outlined',
             component: OutlinedButtonsDoc
         },
         {
             id: 'roundedicon',
-            label: 'Rounded Icon Buttons',
+            label: 'Rounded Icon',
             component: RoundedIconButtonsDoc
         },
         {
             id: 'roundedtexticon',
-            label: 'Rounded Text Icon Buttons',
+            label: 'Rounded Text Icon',
             component: RoundedTextIconButtonsDoc
         },
         {
             id: 'roundedoutlined',
-            label: 'Rounded and Outlined Icon Buttons',
+            label: 'Rounded and Outlined Icon',
             component: RoundedOutlinedButtonsDoc
         },
         {

@@ -54,7 +54,7 @@ export default function TextButtonsDoc() {
     )
 }
         `,
-        exitFiles: {
+        extFiles: {
             'ButtonDemo.css': `
 /* ButtonDemo.css */
 

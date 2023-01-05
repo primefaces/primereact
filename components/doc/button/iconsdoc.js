@@ -41,7 +41,7 @@ export default function IconsDoc() {
     )
 }
         `,
-        exitFiles: {
+        extFiles: {
             'ButtonDemo.css': `
 /* ButtonDemo.css */
 

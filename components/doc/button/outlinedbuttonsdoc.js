@@ -53,7 +53,7 @@ export default function OutlinedButtonsDoc() {
     )
 }
         `,
-        exitFiles: {
+        extFiles: {
             'ButtonDemo.css': `
 /* ButtonDemo.css */
 

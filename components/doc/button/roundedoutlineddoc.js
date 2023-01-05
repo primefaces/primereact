@@ -53,7 +53,7 @@ export default function RoundedOutlinedButtonsDoc() {
     )
 }
         `,
-        exitFiles: {
+        extFiles: {
             'ButtonDemo.css': `
 /* ButtonDemo.css */
 
