@@ -6,7 +6,9 @@ import { ApiDoc } from '../../components/doc/multistatecheckbox/apidoc';
 import { BasicDoc } from '../../components/doc/multistatecheckbox/basicdoc';
 import { DisabledDoc } from '../../components/doc/multistatecheckbox/disableddoc';
 import { ImportDoc } from '../../components/doc/multistatecheckbox/importdoc';
-import { ValidationDoc } from '../../components/doc/multistatecheckbox/validationdoc';
+import { InvalidDoc } from '../../components/doc/multistatecheckbox/invaliddoc';
+import { FormikDoc } from '../../components/doc/multistatecheckbox/validation/formikdoc';
+import { HookFormDoc } from '../../components/doc/multistatecheckbox/validation/hookformdoc';
 
 const MultiStateCheckboxDemo = () => {
     const docs = [
@@ -26,9 +28,26 @@ const MultiStateCheckboxDemo = () => {
             component: DisabledDoc
         },
         {
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
             id: 'validation',
             label: 'Validation',
-            component: ValidationDoc
+            description: 'Validate using popular React validation libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
         },
         {
             id: 'api',
