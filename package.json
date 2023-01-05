@@ -17,7 +17,8 @@
         "lint:fix": "next lint --fix",
         "type:check": "tsc",
         "test": "jest --watch --coverage",
-        "test:check": "jest --watchAll=false --coverage"
+        "test:check": "jest --watchAll=false --coverage",
+        "doc": "typedoc"
     },
     "dependencies": {
         "chart.js": "3.9.1",
@@ -74,6 +75,7 @@
         "rollup-plugin-postcss": "^4.0.0",
         "rollup-plugin-terser": "^7.0.2",
         "sass": "^1.56.1",
+        "typedoc": "^0.23.23",
         "typescript": "^4.9.4"
     },
     "engines": {
