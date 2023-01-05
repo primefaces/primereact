@@ -6,7 +6,9 @@ import { ApiDoc } from '../../components/doc/tristatecheckbox/apidoc';
 import { BasicDoc } from '../../components/doc/tristatecheckbox/basicdoc';
 import { DisabledDoc } from '../../components/doc/tristatecheckbox/disableddoc';
 import { ImportDoc } from '../../components/doc/tristatecheckbox/importdoc';
-import { ValidationDoc } from '../../components/doc/tristatecheckbox/validationdoc';
+import { InvalidDoc } from '../../components/doc/tristatecheckbox/invaliddoc';
+import { FormikDoc } from '../../components/doc/tristatecheckbox/validation/formikdoc';
+import { HookFormDoc } from '../../components/doc/tristatecheckbox/validation/hookformdoc';
 
 const TriStateCheckboxDemo = () => {
     const docs = [
@@ -26,9 +28,26 @@ const TriStateCheckboxDemo = () => {
             component: DisabledDoc
         },
         {
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
             id: 'validation',
             label: 'Validation',
-            component: ValidationDoc
+            description: 'Validate using popular React validation libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
         },
         {
             id: 'api',

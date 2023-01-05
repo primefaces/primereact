@@ -5,7 +5,7 @@ import { Mention } from '../../lib/mention/Mention';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function MultipleDoc(props) {
+export function TriggersDoc(props) {
     const [customers, setCustomers] = useState([]);
     const [multipleSuggestions, setMultipleSuggestions] = useState([]);
     const tagSuggestions = ['primereact', 'primefaces', 'primeng', 'primevue'];
@@ -89,7 +89,7 @@ import React, { useState, useEffect } from "react";
 import { Mention } from 'primereact/mention';
 import { CustomerService } from './service/CustomerService';
 
-export default function MultipleDoc() {
+export default function TriggersDoc() {
     const [customers, setCustomers] = useState([]);
     const [multipleSuggestions, setMultipleSuggestions]= useState([]);
     const tagSuggestions = ['primereact', 'primefaces', 'primeng', 'primevue'];
@@ -179,7 +179,7 @@ import React, { useState, useEffect } from "react";
 import { Mention, MentionSearchParams, MentionItemTemplateOptions } from 'primereact/mention';
 import { CustomerService } from './service/CustomerService';
 
-export default function MultipleDoc() {
+export default function TriggersDoc() {
     const [customers, setCustomers] = useState<any>([]);
     const [multipleSuggestions, setMultipleSuggestions]= useState<any>([]);
     const tagSuggestions = ['primereact', 'primefaces', 'primeng', 'primevue'];
