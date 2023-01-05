@@ -1,19 +1,26 @@
-import { useState } from 'react';
+import { useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Button } from '../../lib/button/Button';
-import { Password } from '../../lib/password/Password';
-import { classNames } from '../../lib/utils/Utils';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { Button } from '../../../lib/button/Button';
+import { Password } from '../../../lib/password/Password';
+import { classNames } from '../../../lib/utils/Utils';
+import { Toast } from '../../../lib/toast/Toast';
+import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
-export function ValidationDoc(props) {
-    const [formData, setFormData] = useState({});
+export function HookFormDoc(props) {
+    const toast = useRef(null);
+
+    const show = () => {
+        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+    };
+
     const defaultValues = { password: '' };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
 
     const onSubmit = (data) => {
-        setFormData(data);
+        data.password && show();
+
         form.reset();
     };
 
@@ -23,42 +30,56 @@ export function ValidationDoc(props) {
 
     const code = {
         basic: `
-<Controller name="password"  control={form.control} rules={{ required: 'Password is required.'}}
-    render={({ field, fieldState }) => (
-        <>
-            <label htmlFor={field.name} className={classNames({ 'p-error': errors.name })}>Password*</label>
-            <Password id={field.name} {...field} inputRef={field.ref} inputClassName="w-15rem" className={classNames({ 'p-invalid': fieldState.error })} feedback={false} />
-            {getFormErrorMessage(field.name)}
-        </>
-    )}
-/>
+<Toast ref={toast} />
+    <Controller
+        name="password"
+        control={form.control}
+        rules={{ required: 'Password is required.' }}
+        render={({ field, fieldState }) => (
+            <>
+                <label htmlFor={field.name} className={classNames({ 'p-error': errors.password })}>
+                    Password
+                </label>
+                <Password id={field.name} {...field} inputRef={field.ref} inputClassName="w-15rem" className={classNames({ 'p-invalid': fieldState.error })} feedback={false} />
+                {getFormErrorMessage(field.name)}
+            </>
+        )}
+    />
         `,
         javascript: `
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Button } from 'primereact/button';
+import { Toast } from 'primereact/toast';
 import { classNames } from 'primereact/utils';
 import { Password } from "primereact/password";
 
-export default function ValidationDemo() {
-    const [formData, setFormData] = useState({});
-    const defaultValues = {password: ''};
+export default function HookFormDoc() {
+    const toast = useRef(null);
+
+    const show = () => {
+        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+    };
+
+    const defaultValues = { password: '' };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
 
     const onSubmit = (data) => {
-        setFormData(data);
+        data.password && show();
+
         form.reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>
+        return errors[name] && <small className="p-error">{errors[name].message}</small>;
     };
 
     return (
         <div className="card flex justify-content-center">
             <div className="flex flex-column gap-2">
                 <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
+                    <Toast ref={toast} />
                     <div className="field">
                         <Controller
                             name="password"
@@ -67,7 +88,7 @@ export default function ValidationDemo() {
                             render={({ field, fieldState }) => (
                                 <>
                                     <label htmlFor={field.name} className={classNames({ 'p-error': errors.password })}>
-                                        Password*
+                                        Password
                                     </label>
                                     <Password id={field.name} {...field} inputRef={field.ref} inputClassName="w-15rem" className={classNames({ 'p-invalid': fieldState.error })} feedback={false} />
                                     {getFormErrorMessage(field.name)}
@@ -83,31 +104,39 @@ export default function ValidationDemo() {
 }
         `,
         typescript: `
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Button } from 'primereact/button';
+import { Toast } from 'primereact/toast';
 import { classNames } from 'primereact/utils';
 import { Password } from "primereact/password";
 
-export default function InvalidDemo() {
-    const [formData, setFormData] = useState<any>({});
-    const defaultValues = {password: ''};
+export default function HookFormDoc() {
+    const toast = useRef(null);
+
+    const show = () => {
+        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+    };
+
+    const defaultValues = { password: '' };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
 
-    const onSubmit = (data: any) => {
-        setFormData(data);
+    const onSubmit = (data) => {
+        data.password && show();
+
         form.reset();
     };
 
-    const getFormErrorMessage = (name: string) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>
+    const getFormErrorMessage = (name) => {
+        return errors[name] && <small className="p-error">{errors[name].message}</small>;
     };
 
     return (
         <div className="card flex justify-content-center">
             <div className="flex flex-column gap-2">
                 <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
+                    <Toast ref={toast} />
                     <div className="field">
                         <Controller
                             name="password"
@@ -116,7 +145,7 @@ export default function InvalidDemo() {
                             render={({ field, fieldState }) => (
                                 <>
                                     <label htmlFor={field.name} className={classNames({ 'p-error': errors.password })}>
-                                        Password*
+                                        Password
                                     </label>
                                     <Password id={field.name} {...field} inputRef={field.ref} inputClassName="w-15rem" className={classNames({ 'p-invalid': fieldState.error })} feedback={false} />
                                     {getFormErrorMessage(field.name)}
@@ -143,6 +172,7 @@ export default function InvalidDemo() {
             <div className="card flex justify-content-center">
                 <div className="flex flex-column gap-2">
                     <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
+                        <Toast ref={toast} />
                         <div className="field">
                             <Controller
                                 name="password"
@@ -151,7 +181,7 @@ export default function InvalidDemo() {
                                 render={({ field, fieldState }) => (
                                     <>
                                         <label htmlFor={field.name} className={classNames({ 'p-error': errors.password })}>
-                                            Password*
+                                            Password
                                         </label>
                                         <Password id={field.name} {...field} inputRef={field.ref} inputClassName="w-15rem" className={classNames({ 'p-invalid': fieldState.error })} feedback={false} />
                                         {getFormErrorMessage(field.name)}

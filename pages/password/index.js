@@ -5,11 +5,15 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/password/apidoc';
 import { BasicDoc } from '../../components/doc/password/basicdoc';
+import { DisabledDoc } from '../../components/doc/password/disableddoc';
+import { FloatLabelDoc } from '../../components/doc/password/floatlabeldoc';
 import { ImportDoc } from '../../components/doc/password/importdoc';
+import { InvalidDoc } from '../../components/doc/password/invaliddoc';
 import { PasswordMeter } from '../../components/doc/password/passwordmeterdoc';
 import { ShowPassword } from '../../components/doc/password/showpassworddoc';
 import { Templating } from '../../components/doc/password/templatingdoc';
-import { ValidationDoc } from '../../components/doc/password/validationdoc';
+import { FormikDoc } from '../../components/doc/password/validation/formikdoc';
+import { HookFormDoc } from '../../components/doc/password/validation/hookformdoc';
 import { Divider } from '../../components/lib/divider/Divider';
 
 const PasswordDemo = () => {
@@ -35,14 +39,41 @@ const PasswordDemo = () => {
             component: ShowPassword
         },
         {
-            id: 'templating',
-            label: 'Templating',
-            component: Templating
+            id: 'floatlabel',
+            label: 'Float Label',
+            component: FloatLabelDoc
+        },
+        {
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
         },
         {
             id: 'validation',
             label: 'Validation',
-            component: ValidationDoc
+            description: 'Validate using popular React validation libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
+        },
+        {
+            id: 'templating',
+            label: 'Templating',
+            component: Templating
         },
         {
             id: 'api',
