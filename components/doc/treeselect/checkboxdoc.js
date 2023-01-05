@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NodeService } from '../../../service/NodeService';
 import { TreeSelect } from '../../lib/treeselect/TreeSelect';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function InitialDoc(props) {
+export function CheckboxDoc(props) {
     const [nodes, setNodes] = useState(null);
-    const [selectedNodeKey, setSelectedNodeKey] = useState('0-1');
+    const [selectedNodeKeys, setSelectedNodeKeys] = useState(null);
 
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
@@ -14,16 +14,16 @@ export function InitialDoc(props) {
 
     const code = {
         basic: `
-<TreeSelect value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)} className="md:w-20rem w-full" placeholder="Select Item"></TreeSelect>
+<TreeSelect value={selectedNodeKeys} options={nodes} onChange={(e) => setSelectedNodeKeys(e.value)} display="chip" selectionMode="checkbox" className="md:w-20rem w-full" placeholder="Select Items"></TreeSelect>
         `,
         javascript: `
 import React, { useState, useEffect } from "react";
 import { TreeSelect } from 'primereact/treeselect';
 import { NodeService } from './service/NodeService';
 
-export default function InitialDoc() {
+export default function CheckboxDoc() {
     const [nodes, setNodes] = useState(null);
-    const [selectedNodeKey, setSelectedNodeKey] = useState('0-1');
+    const [selectedNodeKeys, setSelectedNodeKeys] = useState(null);
     
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
@@ -31,7 +31,7 @@ export default function InitialDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e : TreeSelectChangeParams) => setSelectedNodeKey(e.value)} className="md:w-20rem w-full" placeholder="Select Item"></TreeSelect>
+            <TreeSelect value={selectedNodeKeys} options={nodes} onChange={(e : TreeSelectChangeParams) => setSelectedNodeKeys(e.value)} display="chip" selectionMode="checkbox" className="md:w-20rem w-full" placeholder="Select Items"></TreeSelect>
         </div>    
     );
 }
@@ -41,9 +41,9 @@ import React, { useState, useEffect } from "react";
 import { TreeSelect, TreeSelectChangeParams } from 'primereact/treeselect';
 import { NodeService } from './service/NodeService';
 
-export default function InitialDoc() {
+export default function CheckboxDoc() {
     const [nodes, setNodes] = useState<any[]>(null);
-    const [selectedNodeKey, setSelectedNodeKey] = useState<string>('0-1');
+    const [selectedNodeKeys, setSelectedNodeKeys] = useState<any>(null);
     
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
@@ -51,7 +51,7 @@ export default function InitialDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e : TreeSelectChangeParams) => setSelectedNodeKey(e.value)} className="md:w-20rem w-full" placeholder="Select Item"></TreeSelect>
+            <TreeSelect value={selectedNodeKeys} options={nodes} onChange={(e : TreeSelectChangeParams) => setSelectedNodeKeys(e.value)} display="chip" selectionMode="checkbox" className="md:w-20rem w-full" placeholder="Select Items"></TreeSelect>
         </div>
     );
 }
@@ -96,7 +96,7 @@ export default function InitialDoc() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)} className="md:w-20rem w-full" placeholder="Select Item"></TreeSelect>
+                <TreeSelect value={selectedNodeKeys} options={nodes} onChange={(e) => setSelectedNodeKeys(e.value)} display="chip" selectionMode="checkbox" className="md:w-20rem w-full" placeholder="Select Items"></TreeSelect>
             </div>
             <DocSectionCode code={code} service={['NodeService']} />
         </>
