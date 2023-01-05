@@ -12,6 +12,8 @@ import { RaisedTextButtonsDoc } from '../../components/doc/splitbutton/raisedtex
 import { OutlinedButtonsDoc } from '../../components/doc/splitbutton/outlinedbuttonsdoc';
 import { SizesDoc } from '../../components/doc/splitbutton/sizesdoc';
 import { ApiDoc } from '../../components/doc/splitbutton/apidoc';
+import { LoadingDoc } from '../../components/doc/splitbutton/loadingdoc';
+import { DisabledDoc } from '../../components/doc/splitbutton/disableddoc';
 
 const SplitButtonDemo = () => {
     const docs = [
@@ -26,33 +28,43 @@ const SplitButtonDemo = () => {
             component: BasicDoc
         },
         {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
+        },
+        {
+            id: 'loading',
+            label: 'Loading',
+            component: LoadingDoc
+        },
+        {
             id: 'severities',
             label: 'Severities',
             component: SeveritiesDoc
         },
         {
             id: 'raisedbuttons',
-            label: 'Raised Buttons',
+            label: 'Raised',
             component: RaisedButtonsDoc
         },
         {
             id: 'roundedbuttons',
-            label: 'Rounded Buttons',
+            label: 'Rounded',
             component: RoundedButtonsDoc
         },
         {
             id: 'textbuttons',
-            label: 'Text Buttons',
+            label: 'Text',
             component: TextButtonsDoc
         },
         {
             id: 'raisedtextbuttons',
-            label: 'Raised Text Buttons',
+            label: 'Raised Text',
             component: RaisedTextButtonsDoc
         },
         {
             id: 'outlinedbuttons',
-            label: 'Outlined Buttons',
+            label: 'Outlined',
             component: OutlinedButtonsDoc
         },
         {
@@ -67,7 +79,7 @@ const SplitButtonDemo = () => {
             children: [
                 {
                     id: 'menumodelapi',
-                    label: 'MenuModel API'
+                    label: 'MenuModel'
                 },
                 {
                     id: 'severity',

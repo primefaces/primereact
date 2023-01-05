@@ -4,7 +4,7 @@ import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function SizesDoc(props) {
+export function LoadingDoc(props) {
     const toast = useRef(null);
     const items = [
         {
@@ -37,17 +37,21 @@ export function SizesDoc(props) {
         }
     ];
 
+    const save = () => {
+        toast.current.show({ severity: 'success', summary: 'Success', detail: 'Data Saved' });
+    };
+
     const code = {
         basic: `
 <Toast ref={toast}></Toast>
-<SplitButton label="Save" icon="pi pi-plus"  onClick={save} model={items}></SplitButton>
+<SplitButton label="Save" icon="pi pi-plus"  onClick={save} model={items} loading></SplitButton>
         `,
         javascript: `
 import React, { useRef } from 'react';
 import { SplitButton } from 'primereact/splitbutton';
 import { Toast } from 'primereact/toast';
 
-export default function SizesDoc() {
+export default function LoadingDoc() {
     const toast = useRef(null);
     const items = [
         {
@@ -79,12 +83,14 @@ export default function SizesDoc() {
         }
     ]
 
+    const save = () => {
+        toast.current.show({severity: 'success', summary: 'Success', detail: 'Data Saved'});
+    }
+
     return (
-        <div className="card flex align-items-center justify-content-center">
+        <div>
             <Toast ref={toast}></Toast>
-            <SplitButton label="Small" model={items} className="p-button-sm mr-2 mb-2" />
-            <SplitButton label="Normal" model={items} className="mr-2 mb-2" />
-            <SplitButton label="Large" model={items} className="p-button-lg mr-2 mb-2" />
+            <SplitButton label="Save" icon="pi pi-plus"  onClick={save} model={items} loading></SplitButton>
         </div>
     )
 }
@@ -94,7 +100,7 @@ import React, { useRef } from 'react';
 import { SplitButton } from 'primereact/splitbutton';
 import { Toast } from 'primereact/toast';
 
-export default function SizesDoc() {
+export default function LoadingDoc() {
     const toast = useRef<Toast>(null);
     const items = [
         {
@@ -126,12 +132,14 @@ export default function SizesDoc() {
         }
     ]
 
+    const save = () => {
+        toast.current?.show({severity: 'success', summary: 'Success', detail: 'Data Saved'});
+    }
+
     return (
-        <div className="card flex align-items-center justify-content-center">
+        <div>
             <Toast ref={toast}></Toast>
-            <SplitButton label="Small" model={items} className="p-button-sm mr-2 mb-2" />
-            <SplitButton label="Normal" model={items} className="mr-2 mb-2" />
-            <SplitButton label="Large" model={items} className="p-button-lg mr-2 mb-2" />
+            <SplitButton label="Save" icon="pi pi-plus"  onClick={save} model={items} loading></SplitButton>
         </div>
     )
 }
@@ -141,13 +149,12 @@ export default function SizesDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Outlined Buttons</p>
+                {/* TO DO: Add demo content. */}
+                <p></p>
             </DocSectionText>
-            <div className="card flex align-items-center justify-content-center">
+            <div className="card flex justify-content-center">
                 <Toast ref={toast}></Toast>
-                <SplitButton label="Small" model={items} className="p-button-sm mr-2 mb-2" />
-                <SplitButton label="Normal" model={items} className="mr-2 mb-2" />
-                <SplitButton label="Large" model={items} className="p-button-lg mr-2 mb-2" />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} loading></SplitButton>
             </div>
             <DocSectionCode code={code} />
         </>
