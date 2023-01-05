@@ -14,19 +14,6 @@ export function ApiDoc(props) {
                 </p>
             </DocSubSection>
 
-            <DocSubSection id="type" label="Type">
-                <p>
-                    SpeedDial has 4 types; <i>linear</i>, <i>circle</i>, <i>semi-circle</i> and <i>quarter-circle</i>.
-                </p>
-            </DocSubSection>
-
-            <DocSubSection id="direction" label="Direction">
-                <p>
-                    Specifies the opening direction of actions. For the <strong>linear</strong> and <strong>semi-circle</strong> types; <i>up</i>, <i>down</i>, <i>left</i> and <i>right</i>. For the <strong>quarter-circle</strong> type; <i>up-left</i>
-                    , <i>up-right</i>, <i>down-left</i> and <i>down-right</i>.
-                </p>
-            </DocSubSection>
-
             <DocSubSection id="properties" label="Properties">
                 <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
                 <div className="doc-tablewrapper">

@@ -4,7 +4,7 @@ import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function TransitionDoc(props) {
+export function CustomDoc(props) {
     const toast = useRef(null);
     const items = [
         {
@@ -55,7 +55,7 @@ import { SpeedDial } from 'primereact/speeddial';
 import { Toast } from 'primereact/toast';
 import './SpeedDialDemo.css'
 
-export default function TransitionDoc() {
+export default function CustomDoc() {
     const toast = useRef(null);
     const items = [
         {
@@ -111,7 +111,7 @@ import { SpeedDial } from 'primereact/speeddial';
 import { Toast } from 'primereact/toast';
 import './SpeedDialDemo.css'
 
-export default function TransitionDoc() {
+export default function CustomDoc() {
     const toast = useRef<Toast>(null);
     const items = [
         {
