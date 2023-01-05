@@ -5,9 +5,12 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/selectbutton/apidoc';
 import { BasicDoc } from '../../components/doc/selectbutton/basicdoc';
 import { CustomContentDoc } from '../../components/doc/selectbutton/customcontentdoc';
+import { DisabledDoc } from '../../components/doc/selectbutton/disableddoc';
 import { ImportDoc } from '../../components/doc/selectbutton/importdoc';
+import { InvalidDoc } from '../../components/doc/selectbutton/invaliddoc';
 import { MultipleSelectionDoc } from '../../components/doc/selectbutton/multipleselectiondoc';
-import { ValidationDoc } from '../../components/doc/selectbutton/validationdoc';
+import { FormikDoc } from '../../components/doc/selectbutton/validation/formikdoc';
+import { HookFormDoc } from '../../components/doc/selectbutton/validation/hookformdoc';
 
 const SelectButtonDemo = () => {
     const docs = [
@@ -22,19 +25,41 @@ const SelectButtonDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'multipleselectiondoc',
-            label: 'Multiple Selection',
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
+            id: 'deisabled',
+            label: 'Disabled',
+            component: DisabledDoc
+        },
+        {
+            id: 'multiple',
+            label: 'Multiple',
             component: MultipleSelectionDoc
         },
         {
-            id: 'customcontentdoc',
-            label: 'Custom Content',
+            id: 'template',
+            label: 'Template',
             component: CustomContentDoc
         },
         {
             id: 'validation',
             label: 'Validation',
-            component: ValidationDoc
+            description: 'Validate using popular React validation libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
         },
         {
             id: 'api',

@@ -1,21 +1,15 @@
 import { useRef } from 'react';
 import { useFormik } from 'formik';
-import { CascadeSelect } from '../../../lib/cascadeselect/CascadeSelect';
 import { DocSectionText } from '../../common/docsectiontext';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { Button } from '../../../lib/button/Button';
 import { Toast } from '../../../lib/toast/Toast';
-import { MultiSelect } from '../../../lib/multiselect/MultiSelect';
+import { SelectButton } from '../../../lib/selectbutton/SelectButton';
+import { classNames } from '../../../lib/utils/Utils';
 
 export function FormikDoc(props) {
     const toast = useRef(null);
-    const cities = [
-        { name: 'New York', code: 'NY' },
-        { name: 'Rome', code: 'RM' },
-        { name: 'London', code: 'LDN' },
-        { name: 'Istanbul', code: 'IST' },
-        { name: 'Paris', code: 'PRS' }
-    ];
+    const options = ['Off', 'On'];
 
     const show = () => {
         toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
@@ -23,13 +17,13 @@ export function FormikDoc(props) {
 
     const formik = useFormik({
         initialValues: {
-            city: null
+            engine: null
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.city) {
-                errors.city = 'City is required.';
+            if (!data.engine) {
+                errors.engine = 'Engine State is required.';
             }
 
             return errors;
@@ -48,48 +42,53 @@ export function FormikDoc(props) {
 
     const code = {
         basic: `
-<Toast ref={toast} />
-<MultiSelect id="city" name="city" options={cities} value={formik.values.city} onChange={(e) => { formik.setFieldValue('city', e.value) }} optionLabel="name" placeholder="Select a City" maxSelectedLabels={3} />
-<Button type="submit" label="Submit" className="mt-2" />
+<label htmlFor="engine" className={classNames('flex justify-content-center', { 'p-error': formik.errors.engine })}>
+    Engine State
+</label>
+<SelectButton
+    id="engine"
+    name="engine"
+    value={formik.values.engine}
+    options={options}
+    onChange={(e) => {
+        formik.setFieldValue('engine', e.value);
+    }}
+    className={classNames('flex justify-content-center', { 'p-invalid': formik.errors.engine })}
+/>
+<Button label="Submit" type="submit" icon="pi pi-check" />
         `,
         javascript: `
 import React, { useRef } from "react";
 import { useFormik } from 'formik';
-import { MultiSelect } from 'primereact/multiselect';
+import { SelectButton } from 'primereact/selectbutton';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
+import { classNames } from 'primereact/utils';
+
 
 export default function FormikDoc() {
     const toast = useRef(null);
-     const cities = [
-        { name: 'New York', code: 'NY' },
-        { name: 'Rome', code: 'RM' },
-        { name: 'London', code: 'LDN' },
-        { name: 'Istanbul', code: 'IST' },
-        { name: 'Paris', code: 'PRS' }
-    ];
+    const options = ['Off', 'On'];
 
-        
     const show = () => {
         toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
     };
 
     const formik = useFormik({
         initialValues: {
-            city: null
+            engine: null
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.city) {
-                errors.city = 'City is required.';
+            if (!data.engine) {
+                errors.engine = 'Engine State is required.';
             }
 
             return errors;
         },
         onSubmit: (data) => {
             data && show();
-
             formik.resetForm();
         }
     });
@@ -102,22 +101,23 @@ export default function FormikDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={formik.handleSubmit} className="flex flex-column">
+            <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
-                <MultiSelect
-                    id="city"
-                    name="city"
-                    options={cities}
-                    value={formik.values.city}
+                <label htmlFor="engine" className={classNames('flex justify-content-center', { 'p-error': formik.errors.engine })}>
+                    Engine State
+                </label>
+                <SelectButton
+                    id="engine"
+                    name="engine"
+                    value={formik.values.engine}
+                    options={options}
                     onChange={(e) => {
-                        formik.setFieldValue('city', e.value);
+                        formik.setFieldValue('engine', e.value);
                     }}
-                    optionLabel="name"
-                    placeholder="Select a City"
-                    maxSelectedLabels={3}
+                    className={classNames('flex justify-content-center', { 'p-invalid': formik.errors.engine })}
                 />
-                {getFormErrorMessage('city')}
-                <Button type="submit" label="Submit" className="mt-2" />
+                {getFormErrorMessage('engine')}
+                <Button label="Submit" type="submit" icon="pi pi-check" />
             </form>
         </div>
     )
@@ -126,41 +126,34 @@ export default function FormikDoc() {
         typescript: `
 import React, { useRef } from "react";
 import { useFormik } from 'formik';
-import { MultiSelect } from 'primereact/multiselect';
+import { SelectButton } from 'primereact/selectbutton';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
+import { classNames } from 'primereact/utils';
 
 export default function FormikDoc() {
-    const toast = useRef<Toast | null>(null);
-     const cities = [
-        { name: 'New York', code: 'NY' },
-        { name: 'Rome', code: 'RM' },
-        { name: 'London', code: 'LDN' },
-        { name: 'Istanbul', code: 'IST' },
-        { name: 'Paris', code: 'PRS' }
-    ];
+    const toast = useRef(null);
+    const options = ['Off', 'On'];
 
-        
     const show = () => {
         toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
     };
 
     const formik = useFormik({
         initialValues: {
-            city: null
+            engine: null
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.city) {
-                errors.city = 'City is required.';
+            if (!data.engine) {
+                errors.engine = 'Engine State is required.';
             }
 
             return errors;
         },
         onSubmit: (data) => {
             data && show();
-
             formik.resetForm();
         }
     });
@@ -173,22 +166,23 @@ export default function FormikDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={formik.handleSubmit} className="flex flex-column">
+            <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
-                <MultiSelect
-                    id="city"
-                    name="city"
-                    options={cities}
-                    value={formik.values.city}
+                <label htmlFor="engine" className={classNames('flex justify-content-center', { 'p-error': formik.errors.engine })}>
+                    Engine State
+                </label>
+                <SelectButton
+                    id="engine"
+                    name="engine"
+                    value={formik.values.engine}
+                    options={options}
                     onChange={(e) => {
-                        formik.setFieldValue('city', e.value);
+                        formik.setFieldValue('engine', e.value);
                     }}
-                    optionLabel="name"
-                    placeholder="Select a City"
-                    maxSelectedLabels={3}
+                    className={classNames('flex justify-content-center', { 'p-invalid': formik.errors.engine })}
                 />
-                {getFormErrorMessage('city')}
-                <Button type="submit" label="Submit" className="mt-2" />
+                {getFormErrorMessage('engine')}
+                <Button label="Submit" type="submit" icon="pi pi-check" />
             </form>
         </div>
     )
@@ -204,22 +198,23 @@ export default function FormikDoc() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <form onSubmit={formik.handleSubmit} className="flex flex-column">
+                <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                     <Toast ref={toast} />
-                    <MultiSelect
-                        id="city"
-                        name="city"
-                        options={cities}
-                        value={formik.values.city}
+                    <label htmlFor="engine" className={classNames('flex justify-content-center', { 'p-error': formik.errors.engine })}>
+                        Engine State
+                    </label>
+                    <SelectButton
+                        id="engine"
+                        name="engine"
+                        value={formik.values.engine}
+                        options={options}
                         onChange={(e) => {
-                            formik.setFieldValue('city', e.value);
+                            formik.setFieldValue('engine', e.value);
                         }}
-                        optionLabel="name"
-                        placeholder="Select a City"
-                        maxSelectedLabels={3}
+                        className={classNames('flex justify-content-center', { 'p-invalid': formik.errors.engine })}
                     />
-                    {getFormErrorMessage('city')}
-                    <Button type="submit" label="Submit" className="mt-2" />
+                    {getFormErrorMessage('engine')}
+                    <Button label="Submit" type="submit" icon="pi pi-check" />
                 </form>
             </div>
             <DocSectionCode code={code} dependencies={{ formik: '^2.2.6' }} />

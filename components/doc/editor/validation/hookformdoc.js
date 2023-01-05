@@ -10,7 +10,6 @@ export function HookFormDoc(props) {
     const toast = useRef(null);
 
     const show = () => {
-        // TO DO: Add detail content to the toast.
         toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'The blog is uploaded' });
     };
 

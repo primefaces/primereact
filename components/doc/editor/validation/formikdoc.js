@@ -219,8 +219,9 @@ export default function FormikDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                {/* TO DO: Add demo content. */}
-                <p></p>
+                <p>
+                    <a href="https://formik.org/">Formik</a> is a popular library for handling forms in React. The field will be highlighted and receive focus on validation failure.
+                </p>
             </DocSectionText>
             <div className="card">
                 <form onSubmit={formik.handleSubmit}>
