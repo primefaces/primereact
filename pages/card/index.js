@@ -16,12 +16,12 @@ const CardDemo = () => {
         },
         {
             id: 'simple',
-            label: 'Simple Card',
+            label: 'Simple',
             component: SimpleDoc
         },
         {
             id: 'advanced',
-            label: 'Advanced Card',
+            label: 'Advanced',
             component: AdvancedDoc
         },
         {
