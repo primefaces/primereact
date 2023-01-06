@@ -3,7 +3,6 @@ import { useFormik } from 'formik';
 import { DocSectionText } from '../../common/docsectiontext';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { Button } from '../../../lib/button/Button';
-
 import { Toast } from '../../../lib/toast/Toast';
 import { TriStateCheckbox } from '../../../lib/tristatecheckbox/TriStateCheckbox';
 import { classNames } from '../../../lib/utils/Utils';
@@ -17,19 +16,19 @@ export function FormikDoc(props) {
 
     const formik = useFormik({
         initialValues: {
-            value: 'null'
+            accept: null
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.value) {
-                errors.value = 'Accept is required.';
+            if (!data.accept || data.accept === 'null') {
+                errors.accept = 'Accept is required.';
             }
 
             return errors;
         },
         onSubmit: (data) => {
-            data && show(data);
+            data.accept && show();
             formik.resetForm();
         }
     });
@@ -37,20 +36,32 @@ export function FormikDoc(props) {
     const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error ml-1">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
     };
 
     const code = {
         basic: `
 <Toast ref={toast} />
-<InputSwitch id="value" name="value" checked={formik.values.value} onChange={(e) => {formik.setFieldValue('value', e.value)}}/>
+<TriStateCheckbox
+    id="accept"
+    name="accept"
+    value={formik.values.accept}
+    onChange={(e) => {
+        formik.setFieldValue('accept', e.value);
+    }}
+    className={classNames({ 'p-invalid': formik.errors.accept })}
+/>
+<div className="ml-2">* I've read and accept the terms & conditions.</div>
+{getFormErrorMessage('accept')}
+<Button type="submit" label="Submit" icon="pi pi-check" />
 `,
         javascript: `
 import React, { useRef } from "react";
 import { useFormik } from 'formik';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
-import { InputSwitch } from "primereact/inputswitch";
+import { classNames } from 'primereact/utils';
+import { TriStateCheckbox } from "primereact/tristatecheckbox";
 
 export default function FormikDoc() {
     const toast = useRef(null);
@@ -61,19 +72,19 @@ export default function FormikDoc() {
 
     const formik = useFormik({
         initialValues: {
-            value: false
+            accept: null
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.value) {
-                errors.value = 'Accept is required.';
+            if (!data.accept || data.accept === 'null') {
+                errors.accept = 'Accept is required.';
             }
 
             return errors;
         },
         onSubmit: (data) => {
-            data && show(data);
+            data.accept && show();
             formik.resetForm();
         }
     });
@@ -81,29 +92,28 @@ export default function FormikDoc() {
     const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error ml-1">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
     };
 
     return (
-        <div className="card flex justify-content-center">
-            <div className="flex flex-column">
-                <form onSubmit={formik.handleSubmit} className="p-fluid justify-content-center">
-                    <div className="mb-2">I've read and accept the terms & conditions.</div>
-                    <div className="flex align-items-center ">
-                        <Toast ref={toast} />
-                        <InputSwitch
-                            id="value"
-                            name="value"
-                            checked={formik.values.value}
-                            onChange={(e) => {
-                                formik.setFieldValue('value', e.value);
-                            }}
-                        />
-                        {getFormErrorMessage('value')}
-                    </div>
-                    <Button type="submit" label="Submit" className="mt-2" />
-                </form>
-            </div>
+        <div className="card flex flex-column align-items-center">
+            <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-start justify-content-center gap-2">
+                <Toast ref={toast} />
+                <div className="flex align-items-start">
+                    <TriStateCheckbox
+                        id="accept"
+                        name="accept"
+                        value={formik.values.accept}
+                        onChange={(e) => {
+                            formik.setFieldValue('accept', e.value);
+                        }}
+                        className={classNames({ 'p-invalid': formik.errors.accept })}
+                    />
+                    <div className="ml-2">* I've read and accept the terms & conditions.</div>
+                </div>
+                {getFormErrorMessage('accept')}
+                <Button type="submit" label="Submit" icon="pi pi-check" />
+            </form>
         </div>
     )
 }
@@ -113,30 +123,31 @@ import React, { useRef } from "react";
 import { useFormik } from 'formik';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
-import { InputSwitch } from "primereact/inputswitch";
+import { classNames } from 'primereact/utils';
+import { TriStateCheckbox } from "primereact/tristatecheckbox";
 
 export default function FormikDoc() {
-    const toast = useRef(null);
+    const toast = useRef<Toast | null>(null);
 
-    const show = () => {
+    const show = (): void => {
         toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'The form is successfully submitted.' });
     };
 
     const formik = useFormik({
         initialValues: {
-            value: false
+            accept: null
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.value) {
-                errors.value = 'Accept is required.';
+            if (!data.accept || data.accept === 'null') {
+                errors.accept = 'Accept is required.';
             }
 
             return errors;
         },
         onSubmit: (data) => {
-            data && show(data);
+            data.accept && show();
             formik.resetForm();
         }
     });
@@ -144,29 +155,28 @@ export default function FormikDoc() {
     const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error ml-1">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
     };
 
     return (
-        <div className="card flex justify-content-center">
-            <div className="flex flex-column">
-                <form onSubmit={formik.handleSubmit} className="p-fluid justify-content-center">
-                    <div className="mb-2">I've read and accept the terms & conditions.</div>
-                    <div className="flex align-items-center ">
-                        <Toast ref={toast} />
-                        <InputSwitch
-                            id="value"
-                            name="value"
-                            checked={formik.values.value}
-                            onChange={(e) => {
-                                formik.setFieldValue('value', e.value);
-                            }}
-                        />
-                        {getFormErrorMessage('value')}
-                    </div>
-                    <Button type="submit" label="Submit" className="mt-2" />
-                </form>
-            </div>
+        <div className="card flex flex-column align-items-center">
+            <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-start justify-content-center gap-2">
+                <Toast ref={toast} />
+                <div className="flex align-items-start">
+                    <TriStateCheckbox
+                        id="accept"
+                        name="accept"
+                        value={formik.values.accept}
+                        onChange={(e) => {
+                            formik.setFieldValue('accept', e.value);
+                        }}
+                        className={classNames({ 'p-invalid': formik.errors.accept })}
+                    />
+                    <div className="ml-2">* I've read and accept the terms & conditions.</div>
+                </div>
+                {getFormErrorMessage('accept')}
+                <Button type="submit" label="Submit" icon="pi pi-check" />
+            </form>
         </div>
     )
 }
@@ -179,26 +189,24 @@ export default function FormikDoc() {
                 {/* TO DO: Add demo content. */}
                 <p></p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <div className="flex flex-column">
-                    <form onSubmit={formik.handleSubmit} className="p-fluid justify-content-center">
-                        <div className="mb-2">I've read and accept the terms & conditions.</div>
-                        <div className="flex align-items-center ">
-                            <Toast ref={toast} />
-                            <TriStateCheckbox
-                                id="value"
-                                name="value"
-                                checked={formik.values.value}
-                                onChange={(e) => {
-                                    formik.setFieldValue('value', e.value);
-                                }}
-                            />
-
-                            {getFormErrorMessage('value')}
-                        </div>
-                        <Button type="submit" label="Submit" className="mt-2" />
-                    </form>
-                </div>
+            <div className="card flex flex-column align-items-center">
+                <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-start justify-content-center gap-2">
+                    <Toast ref={toast} />
+                    <div className="flex align-items-start">
+                        <TriStateCheckbox
+                            id="accept"
+                            name="accept"
+                            value={formik.values.accept}
+                            onChange={(e) => {
+                                formik.setFieldValue('accept', e.value);
+                            }}
+                            className={classNames({ 'p-invalid': formik.errors.accept })}
+                        />
+                        <div className="ml-2">* I've read and accept the terms & conditions.</div>
+                    </div>
+                    {getFormErrorMessage('accept')}
+                    <Button type="submit" label="Submit" icon="pi pi-check" />
+                </form>
             </div>
             <DocSectionCode code={code} dependencies={{ formik: '^2.2.6' }} />
         </>
