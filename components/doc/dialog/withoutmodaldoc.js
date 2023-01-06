@@ -40,7 +40,7 @@ import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 
 export default function WithoutModalDoc() {
-    const [visible, setVisible] = useState<boolean>(false);
+    const [visible, setVisible] = useState(false);
 
     const onClick = () => {
         setVisible(true);

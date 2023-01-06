@@ -44,7 +44,7 @@ import { Dialog, DialogPositionType } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 
 export default function ResponsiveDoc() {
-    const [displayModal, setDisplayModal] = useState(false);
+    const [displayResponsive, setDisplayResponsive] = useState(false);
 
     const onClick = (name: string, position: DialogPositionType) => {
         setDisplayResponsive(true);
@@ -86,7 +86,7 @@ import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 
 export default function ResponsiveDoc() {
-    const [displayModal, setDisplayModal] = useState<boolean>(false);
+    const [displayResponsive, setDisplayResponsive] = useState<boolean>(false);
 
     const onClick = (name, position) => {
         setDisplayResponsive(true);
