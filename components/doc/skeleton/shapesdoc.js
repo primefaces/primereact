@@ -131,7 +131,9 @@ export default function ShapesDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Various shapes and sizes can be created using styling properties like <i>shape</i>, <i>width</i>, <i>height</i>, <i>borderRadius</i> and <i>className</i>.</p>
+                <p>
+                    Various shapes and sizes can be created using styling properties like <i>shape</i>, <i>width</i>, <i>height</i>, <i>borderRadius</i> and <i>className</i>.
+                </p>
             </DocSectionText>
             <div className="card">
                 <div className="flex flex-wrap">

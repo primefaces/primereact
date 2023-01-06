@@ -61,7 +61,9 @@ export default function TemplateDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Custom content inside the ProgressBar is defined with the <i>displayValueTemplate</i> property.</p>
+                <p>
+                    Custom content inside the ProgressBar is defined with the <i>displayValueTemplate</i> property.
+                </p>
             </DocSectionText>
             <div className="card">
                 <ProgressBar value={40} displayValueTemplate={valueTemplate}></ProgressBar>

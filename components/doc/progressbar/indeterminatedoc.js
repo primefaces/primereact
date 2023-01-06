@@ -37,7 +37,9 @@ export default function IndeterminateDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>For progresses with no value to track, set the <i>mode</i> property to <i>indeterminate</i>.</p>
+                <p>
+                    For progresses with no value to track, set the <i>mode</i> property to <i>indeterminate</i>.
+                </p>
             </DocSectionText>
             <div className="card">
                 <ProgressBar mode="indeterminate" style={{ height: '6px' }}></ProgressBar>
