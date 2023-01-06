@@ -3,8 +3,9 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/breadcrumb/importdoc';
-import { DefaultDoc } from '../../components/doc/breadcrumb/basicdoc';
+import { BasicDoc } from '../../components/doc/breadcrumb/basicdoc';
 import { ApiDoc } from '../../components/doc/breadcrumb/apipdoc';
+import { TemplateDoc } from '../../components/doc/breadcrumb/templatedoc';
 
 const BreadCrumbDemo = () => {
     const docs = [
@@ -14,11 +15,15 @@ const BreadCrumbDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'Default',
-            label: 'Default',
-            component: DefaultDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
-
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
         {
             id: 'api',
             label: 'API',

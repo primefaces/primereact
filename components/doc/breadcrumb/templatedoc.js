@@ -2,8 +2,8 @@ import { BreadCrumb } from '../../lib/breadcrumb/BreadCrumb';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function BasicDoc(props) {
-    const items = [{ label: 'Computer' }, { label: 'Notebook' }, { label: 'Accessories' }, { label: 'Backpacks' }, { label: 'Item' }];
+export function TemplateDoc(props) {
+    const items = [{ className: ' pi pi-sitemap' }, { className: 'pi pi-book' }, { className: 'pi pi-wallet' }, { className: 'pi pi-shopping-bag' }, { className: 'pi pi-calculator' }];
 
     const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact/showcase' };
 
@@ -15,8 +15,8 @@ export function BasicDoc(props) {
 import React from 'react'; 
 import { BreadCrumb } from 'primereact/breadcrumb';
 
-export default function BasicDoc() {
-    const items = [{ label: 'Computer' }, { label: 'Notebook' }, { label: 'Accessories' }, { label: 'Backpacks' }, { label: 'Item' }];
+export default function TemplateDoc() {
+    const items = [{ className: ' pi pi-sitemap' }, { className: 'pi pi-book' }, { className: 'pi pi-wallet' }, { className: 'pi pi-shopping-bag' }, { className: 'pi pi-calculator' }];
 
     const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact/showcase' }
 
@@ -29,8 +29,8 @@ export default function BasicDoc() {
 import React from 'react'; 
 import { BreadCrumb } from 'primereact/breadcrumb';
 
-export default function BasicDoc() {
-    const items = [{ label: 'Computer' }, { label: 'Notebook' }, { label: 'Accessories' }, { label: 'Backpacks' }, { label: 'Item' }];
+export default function TemplateDoc() {
+    const items = [{ className: ' pi pi-sitemap' }, { className: 'pi pi-book' }, { className: 'pi pi-wallet' }, { className: 'pi pi-shopping-bag' }, { className: 'pi pi-calculator' }];
 
     const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact/showcase' }
 
@@ -44,7 +44,8 @@ export default function BasicDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>BreadCrumb requires a collection of menuitems as its model. </p>
+                {/* TO DO: Add demo content. */}
+                <p></p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <BreadCrumb model={items} home={home} />
