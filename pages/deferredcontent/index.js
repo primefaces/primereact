@@ -3,7 +3,8 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/deferredcontent/importdoc';
-import { DeferredContentDoc } from '../../components/doc/deferredcontent/contentdoc';
+import { BasicDoc } from '../../components/doc/deferredcontent/basicdoc';
+import { DataTableDoc } from '../../components/doc/deferredcontent/datatabledoc';
 import { ApiDoc } from '../../components/doc/deferredcontent/apidoc';
 
 const DeferredContentDemo = () => {
@@ -14,9 +15,14 @@ const DeferredContentDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'deferredcontent',
-            label: 'DeferredContent',
-            component: DeferredContentDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'datatable',
+            label: 'DataTable',
+            component: DataTableDoc
         },
         {
             id: 'api',
