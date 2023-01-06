@@ -586,7 +586,7 @@
             "meta": ["chart"],
             "children": [
                 {
-                    "name": "Charts",
+                    "name": "Chart",
                     "to": "/chart",
                     "meta": ["chartdemo", "chartmodel"]
                 }

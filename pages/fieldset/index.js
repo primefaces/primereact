@@ -4,8 +4,9 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/fieldset/importdoc';
 import { ApiDoc } from '../../components/doc/fieldset/apidoc';
-import { RegularDoc } from '../../components/doc/fieldset/regulardoc';
+import { BasicDoc } from '../../components/doc/fieldset/basicdoc';
 import { ToggleableDoc } from '../../components/doc/fieldset/toggleabledoc';
+import { TemplateDoc } from '../../components/doc/fieldset/templatedoc';
 
 const FieldsetDemo = () => {
     const docs = [
@@ -15,14 +16,19 @@ const FieldsetDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'regular',
-            label: 'Regular',
-            component: RegularDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
             id: 'toggleable',
             label: 'Toggleable',
             component: ToggleableDoc
+        },
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
             id: 'api',

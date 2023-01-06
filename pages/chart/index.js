@@ -32,7 +32,7 @@ const ChartDemo = () => {
             children: [
                 {
                     id: 'charttypes',
-                    label: 'Chart Types',
+                    label: 'Chart Types'
                 },
                 {
                     id: 'data',
@@ -41,7 +41,7 @@ const ChartDemo = () => {
                 {
                     id: 'options',
                     label: 'Options'
-                },
+                }
             ]
         },
         {
