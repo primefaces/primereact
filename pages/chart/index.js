@@ -16,6 +16,7 @@ import { PolarAreaDoc } from '../../components/doc/chart/polarareadoc';
 import { RadarDoc } from '../../components/doc/chart/radardoc';
 import { ComboDoc } from '../../components/doc/chart/combodoc';
 import { ApiDoc } from '../../components/doc/chart/apidoc';
+import { ModelDoc } from '../../components/doc/chart/modeldoc';
 
 const ChartDemo = () => {
     const docs = [
@@ -25,73 +26,13 @@ const ChartDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'pie',
-            label: 'Pie Chart',
-            component: PieChartDoc
-        },
-        {
-            id: 'doughnut',
-            label: 'Doughnut Chart',
-            component: DoughnutChartDoc
-        },
-        {
-            id: 'vertical',
-            label: 'Vertical Bar Chart',
-            component: VerticalBarDoc
-        },
-        {
-            id: 'horizontal',
-            label: 'Horizontal Bar Chart',
-            component: HorizontalBarDoc
-        },
-        {
-            id: 'multiaxis',
-            label: 'Multi Axis Bar Chart',
-            component: MultiAxisBarDoc
-        },
-        {
-            id: 'stacked',
-            label: 'Stacked Bar Chart',
-            component: StackedBarDoc
-        },
-        {
-            id: 'basicline',
-            label: 'Basic Line Chart',
-            component: BasicLineDoc
-        },
-        {
-            id: 'multiaxisline',
-            label: 'Multi Axis Line Chart',
-            component: MultiAxisLineDoc
-        },
-        {
-            id: 'linestyles',
-            label: 'Line Styles Chart',
-            component: LineStylesDoc
-        },
-        {
-            id: 'polararea',
-            label: 'Polar Area Chart',
-            component: PolarAreaDoc
-        },
-        {
-            id: 'radar',
-            label: 'Radar Chart',
-            component: RadarDoc
-        },
-        {
-            id: 'combo',
-            label: 'Combo Chart',
-            component: ComboDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
+            id: 'model',
+            label: 'Model',
+            component: ModelDoc,
             children: [
                 {
                     id: 'charttypes',
-                    label: 'Chart Types'
+                    label: 'Chart Types',
                 },
                 {
                     id: 'data',
@@ -101,6 +42,73 @@ const ChartDemo = () => {
                     id: 'options',
                     label: 'Options'
                 },
+            ]
+        },
+        {
+            id: 'pie',
+            label: 'Pie',
+            component: PieChartDoc
+        },
+        {
+            id: 'doughnut',
+            label: 'Doughnut',
+            component: DoughnutChartDoc
+        },
+        {
+            id: 'vertical',
+            label: 'Vertical Bar',
+            component: VerticalBarDoc
+        },
+        {
+            id: 'horizontal',
+            label: 'Horizontal Bar',
+            component: HorizontalBarDoc
+        },
+        {
+            id: 'multiaxis',
+            label: 'Multi Axis Bar',
+            component: MultiAxisBarDoc
+        },
+        {
+            id: 'stacked',
+            label: 'Stacked Bar',
+            component: StackedBarDoc
+        },
+        {
+            id: 'basicline',
+            label: 'Basic Line',
+            component: BasicLineDoc
+        },
+        {
+            id: 'multiaxisline',
+            label: 'Multi Axis Line',
+            component: MultiAxisLineDoc
+        },
+        {
+            id: 'linestyles',
+            label: 'Line Styles',
+            component: LineStylesDoc
+        },
+        {
+            id: 'polararea',
+            label: 'Polar Area',
+            component: PolarAreaDoc
+        },
+        {
+            id: 'radar',
+            label: 'Radar',
+            component: RadarDoc
+        },
+        {
+            id: 'combo',
+            label: 'Combo',
+            component: ComboDoc
+        },
+        {
+            id: 'api',
+            label: 'API',
+            component: ApiDoc,
+            children: [
                 {
                     id: 'properties',
                     label: 'Properties'
@@ -124,7 +132,7 @@ const ChartDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div>
-                    <h1>Charts</h1>
+                    <h1>Chart</h1>
                     <p>
                         Chart components are based on{' '}
                         <a style={{ color: 'black' }} href="http://www.chartjs.org/">
