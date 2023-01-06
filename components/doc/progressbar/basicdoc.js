@@ -37,7 +37,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>ProgressBar is used with the <i>value</i> property.</p>
+                <p>
+                    ProgressBar is used with the <i>value</i> property.
+                </p>
             </DocSectionText>
             <div className="card">
                 <ProgressBar value={50}></ProgressBar>
