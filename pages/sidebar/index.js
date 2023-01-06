@@ -5,7 +5,7 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { BasicDoc } from '../../components/doc/sidebar/basicdoc';
 import { ImportDoc } from '../../components/doc/sidebar/importdoc';
 import { PositionDoc } from '../../components/doc/sidebar/positiondoc';
-import { CustomDoc } from '../../components/doc/sidebar/customdoc';
+import { TemplateDoc } from '../../components/doc/sidebar/templatedoc';
 import { FullScreenDoc } from '../../components/doc/sidebar/fullscreendoc';
 import { ApiDoc } from '../../components/doc/sidebar/apidoc';
 import { SizeDoc } from '../../components/doc/sidebar/sizedoc';
@@ -38,9 +38,9 @@ const SidebarDemo = () => {
             component: FullScreenDoc
         },
         {
-            id: 'custom',
-            label: 'Custom',
-            component: CustomDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
             id: 'api',

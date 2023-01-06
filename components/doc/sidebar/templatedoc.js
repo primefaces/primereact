@@ -4,7 +4,7 @@ import { Button } from '../../lib/button/Button';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function CustomDoc(props) {
+export function TemplateDoc(props) {
     const [visibleCustomToolbar, setVisibleCustomToolbar] = useState(false);
 
     const customIcons = (
@@ -30,7 +30,7 @@ import React, { useState } from 'react';
 import { Sidebar } from 'primereact/sidebar';
 import { Button } from 'primereact/button';
 
-export default function CustomDoc() {
+export default function TemplateDoc() {
     const [visibleCustomToolbar, setVisibleCustomToolbar] = useState(false);
 
     const customIcons = (
@@ -59,7 +59,7 @@ import React, { useState } from 'react';
 import { Sidebar } from 'primereact/sidebar';
 import { Button } from 'primereact/button';
 
-export default function CustomDoc() {
+export default function TemplateDoc() {
     const [visibleCustomToolbar, setVisibleCustomToolbar] = useState(false);
 
     const customIcons = (
