@@ -5,8 +5,8 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/progressbar/apidoc';
 import { ImportDoc } from '../../components/doc/progressbar/importdoc';
 import { DynamicDoc } from '../../components/doc/progressbar/dynamicdoc';
-import { StaticDoc } from '../../components/doc/progressbar/staticdoc';
-import { CustomDisplayValueDoc } from '../../components/doc/progressbar/customdisplayvaluedoc';
+import { BasicDoc } from '../../components/doc/progressbar/basicdoc';
+import { TemplateDoc } from '../../components/doc/progressbar/templatedoc';
 import { IndeterminateDoc } from '../../components/doc/progressbar/indeterminatedoc';
 import { DocActions } from '../../components/doc/common/docactions';
 
@@ -18,19 +18,19 @@ const ProgressBarDemo = () => {
             component: ImportDoc
         },
         {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
             id: 'dynamic',
             label: 'Dynamic',
             component: DynamicDoc
         },
         {
-            id: 'static',
-            label: 'Static',
-            component: StaticDoc
-        },
-        {
-            id: 'customdisplayvalue',
-            label: 'Custom display value',
-            component: CustomDisplayValueDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
             id: 'indeterminate',

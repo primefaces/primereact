@@ -3,7 +3,7 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 import { ProgressBar } from '../../lib/progressbar/ProgressBar';
 
-export function StaticDoc(props) {
+export function BasicDoc(props) {
     const code = {
         basic: `
 <ProgressBar value={50}></ProgressBar>
@@ -12,8 +12,7 @@ export function StaticDoc(props) {
 import React from 'react';
 import { ProgressBar } from 'primereact/progressbar';
 
-export default function StaticDoc() {
-
+export default function BasicDemo() {
     return (
         <div className="card">
             <ProgressBar value={50}></ProgressBar>
@@ -25,8 +24,7 @@ export default function StaticDoc() {
 import React from 'react';
 import { ProgressBar } from 'primereact/progressbar';
 
-export default function StaticDoc() {
-
+export default function BasicDemo() {
     return (
         <div className="card">
             <ProgressBar value={50}></ProgressBar>
@@ -39,7 +37,7 @@ export default function StaticDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Static Demo Content.</p>
+                <p>ProgressBar is used with the <i>value</i> property.</p>
             </DocSectionText>
             <div className="card">
                 <ProgressBar value={50}></ProgressBar>

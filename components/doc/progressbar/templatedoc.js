@@ -3,8 +3,8 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 import { ProgressBar } from '../../lib/progressbar/ProgressBar';
 
-export function CustomDisplayValueDoc(props) {
-    const displayValueTemplate = (value) => {
+export function TemplateDoc(props) {
+    const valueTemplate = (value) => {
         return (
             <React.Fragment>
                 {value}/<b>100</b>
@@ -14,15 +14,14 @@ export function CustomDisplayValueDoc(props) {
 
     const code = {
         basic: `
-<ProgressBar value={40} displayValueTemplate={displayValueTemplate}></ProgressBar>
+<ProgressBar value={40} displayValueTemplate={valueTemplate}></ProgressBar>
         `,
         javascript: `
 import React from 'react';
 import { ProgressBar } from 'primereact/progressbar';
 
-export default function CustomDisplayValueDoc() {
-
-    const displayValueTemplate = (value) => {
+export default function TemplateDemo() {
+    const valueTemplate = (value) => {
         return (
             <React.Fragment>
                 {value}/<b>100</b>
@@ -32,7 +31,7 @@ export default function CustomDisplayValueDoc() {
 
     return (
         <div className="card">
-            <ProgressBar value={40} displayValueTemplate={displayValueTemplate}></ProgressBar>
+            <ProgressBar value={40} displayValueTemplate={valueTemplate}></ProgressBar>
         </div>
     );
 }
@@ -41,9 +40,8 @@ export default function CustomDisplayValueDoc() {
 import React from 'react';
 import { ProgressBar } from 'primereact/progressbar';
 
-export default function CustomDisplayValueDoc() {
-
-    const displayValueTemplate = (value) => {
+export default function TemplateDemo() {
+    const valueTemplate = (value) => {
         return (
             <React.Fragment>
                 {value}/<b>100</b>
@@ -53,7 +51,7 @@ export default function CustomDisplayValueDoc() {
 
     return (
         <div className="card">
-            <ProgressBar value={40} displayValueTemplate={displayValueTemplate}></ProgressBar>
+            <ProgressBar value={40} displayValueTemplate={valueTemplate}></ProgressBar>
         </div>
     );
 }
@@ -63,10 +61,10 @@ export default function CustomDisplayValueDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Custom Display Value Demo Content.</p>
+                <p>Custom content inside the ProgressBar is defined with the <i>displayValueTemplate</i> property.</p>
             </DocSectionText>
             <div className="card">
-                <ProgressBar value={40} displayValueTemplate={displayValueTemplate}></ProgressBar>
+                <ProgressBar value={40} displayValueTemplate={valueTemplate}></ProgressBar>
             </div>
             <DocSectionCode code={code} />
         </>
