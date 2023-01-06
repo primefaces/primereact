@@ -60,8 +60,8 @@ const TabViewDemo = () => {
             component: ApiDoc,
             children: [
                 {
-                    id: 'propertiesfortabpanel',
-                    label: 'Properties For TabPanel / TabView'
+                    id: 'properties',
+                    label: 'Properties'
                 },
                 {
                     id: 'events',

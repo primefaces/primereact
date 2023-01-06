@@ -36,12 +36,8 @@ const SplitterDemo = () => {
             component: ApiDoc,
             children: [
                 {
-                    id: 'propertiesofsplitterpanel',
-                    label: 'Properties of SplitterPanel'
-                },
-                {
-                    id: 'propertiesofsplitter',
-                    label: 'Properties of Splitter'
+                    id: 'properties',
+                    label: 'Properties'
                 },
                 {
                     id: 'eventsofsplitter',

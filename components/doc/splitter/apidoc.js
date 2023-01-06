@@ -6,7 +6,7 @@ export function ApiDoc(props) {
     return (
         <>
             <DocSectionText {...props}></DocSectionText>
-            <DocSubSection id="propertiesofsplitterpanel" label="Properties of SplitterPanel">
+            <DocSubSection id="properties" label="Properties">
                 <p>Any property as style and class are passed to the main container element. Following are the additional properties to configure the component.</p>
                 <div className="doc-tablewrapper">
                     <table className="doc-table">
@@ -43,24 +43,6 @@ export function ApiDoc(props) {
                                 <td>null</td>
                                 <td>ClassName of the component.</td>
                             </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </DocSubSection>
-
-            <DocSubSection id="propertiesofsplitter" label="Properties of Splitter">
-                <p>Any property as style and class are passed to the main container element. Following are the additional properties to configure the component.</p>
-                <div className="doc-tablewrapper">
-                    <table className="doc-table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Default</th>
-                                <th>Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
                             <tr>
                                 <td>id</td>
                                 <td>string</td>

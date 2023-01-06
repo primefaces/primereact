@@ -7,7 +7,7 @@ export function ApiDoc(props) {
     return (
         <>
             <DocSectionText {...props}></DocSectionText>
-            <DocSubSection id="propertiesfortabpanel" label="Properties For TabPanel / TabView">
+            <DocSubSection id="properties" label="Properties">
                 <div className="doc-tablewrapper">
                     <table className="doc-table">
                         <thead>
