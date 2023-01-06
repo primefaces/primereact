@@ -45,7 +45,7 @@ export const Captcha = React.memo(
                 let head = document.head || document.getElementsByTagName('head')[0];
                 let script = document.createElement('script');
 
-                script.src = 'https://www.google.com/recaptcha/api.js?render=explicit';
+                script.src = props.sourceUrl;
                 script.async = true;
                 script.defer = true;
 
@@ -103,12 +103,13 @@ Captcha.displayName = 'Captcha';
 Captcha.defaultProps = {
     __TYPE: 'Captcha',
     id: null,
-    siteKey: null,
-    theme: 'light',
-    type: 'image',
-    size: 'normal',
-    tabIndex: 0,
     language: 'en',
+    onExpire: null,
     onResponse: null,
-    onExpire: null
+    siteKey: null,
+    size: 'normal',
+    sourceUrl: 'https://www.google.com/recaptcha/api.js?render=explicit',
+    tabIndex: 0,
+    theme: 'light',
+    type: 'image'
 };
