@@ -24,7 +24,7 @@ const DividerDemo = () => {
         },
         {
             id: 'text',
-            label: 'Text with Dashed Style',
+            label: 'Text with Dashed',
             component: TextDoc
         },
         {
