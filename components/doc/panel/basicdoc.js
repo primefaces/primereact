@@ -2,7 +2,7 @@ import { Panel } from '../../lib/panel/Panel';
 import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
 
-export function RegularDoc(props) {
+export function BasicDoc(props) {
     const code = {
         basic: `
 <Panel header="Header">
@@ -16,7 +16,7 @@ export function RegularDoc(props) {
 import React from 'react'; 
 import { Panel } from 'primereact/panel';
 
-export default function RegularDoc() {
+export default function BasicDoc() {
 
     return (
         <Panel header="Header">
@@ -32,7 +32,7 @@ export default function RegularDoc() {
 import React from 'react'; 
 import { Panel } from 'primereact/panel';
 
-export default function RegularDoc() {
+export default function BasicDoc() {
 
     return (
         <Panel header="Header">

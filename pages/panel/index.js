@@ -3,7 +3,7 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/panel/importdoc';
-import { RegularDoc } from '../../components/doc/panel/regulardoc';
+import { BasicDoc } from '../../components/doc/panel/basicdoc';
 import { ToggleableDoc } from '../../components/doc/panel/toggleabledoc';
 import { TemplateDoc } from '../../components/doc/panel/templatedoc';
 import { ApiDoc } from '../../components/doc/panel/apidoc';
@@ -16,9 +16,9 @@ const PanelDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'regular',
-            label: 'Regular',
-            component: RegularDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
             id: 'toggleable',
