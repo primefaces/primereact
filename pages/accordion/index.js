@@ -3,10 +3,10 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/accordion/importdoc';
-import { DefaultDoc } from '../../components/doc/accordion/defaultdoc';
+import { BasicDoc } from '../../components/doc/accordion/basicdoc';
 import { MultipleDoc } from '../../components/doc/accordion/multipledoc';
-import { ProgrammaticDoc } from '../../components/doc/accordion/programmaticdoc';
-import { CustomHeaderDoc } from '../../components/doc/accordion/customheadersdoc';
+import { ControlledDoc } from '../../components/doc/accordion/controlleddoc';
+import { TemplateDoc } from '../../components/doc/accordion/templatedoc';
 import { ApiDoc } from '../../components/doc/accordion/apidoc';
 
 const AccordionDemo = () => {
@@ -17,9 +17,9 @@ const AccordionDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'default',
-            label: 'Default',
-            component: DefaultDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
             id: 'multiple',
@@ -27,14 +27,14 @@ const AccordionDemo = () => {
             component: MultipleDoc
         },
         {
-            id: 'programmatic',
-            label: 'Programmatic',
-            component: ProgrammaticDoc
+            id: 'controlled',
+            label: 'Controlled',
+            component: ControlledDoc
         },
         {
-            id: 'customheader',
-            label: 'Custom Header',
-            component: CustomHeaderDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
             id: 'api',
