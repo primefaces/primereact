@@ -7,7 +7,7 @@ afterEach(() => {
     jest.restoreAllMocks();
 });
 
-const checkParametersNullOrUndefined = filterType => {
+const checkParametersNullOrUndefined = (filterType) => {
     it('When value parameter is undefined', () => {
         expect(filters[filterType]('value', undefined)).toBeTruthy();
     });
@@ -94,7 +94,7 @@ describe('FilterService', () => {
 
     describe('notEquals filter test', () => {
         it('When filter parameter is undefined', () => {
-            expect(filters.notEquals('value', undefined)).toBeFalsy();
+            expect(filters.notEquals('value', undefined)).toBeTruthy();
         });
 
         it('When value parameter is undefined', () => {
