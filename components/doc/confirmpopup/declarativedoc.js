@@ -5,7 +5,7 @@ import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function UsingConfirmPopupDoc(props) {
+export function DeclarativeDoc(props) {
     const [visible, setVisible] = useState(false);
     const toast = useRef(null);
     const buttonEl = useRef(null);
@@ -30,7 +30,7 @@ import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
-export default function UsingConfirmPopupDoc() {
+export default function DeclarativeDoc() {
     const [visible, setVisible] = useState(false);
     const toast = useRef(null);
     const buttonEl = useRef(null);
@@ -58,7 +58,7 @@ import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
-export default function UsingConfirmPopupDoc() {
+export default function DeclarativeDoc() {
     const [visible, setVisible] = useState(false);
     const toast = useRef<Toast>(null);
     const buttonEl = useRef(null);

@@ -147,7 +147,7 @@ const reject = () => {
             <div className="card flex justify-content-center">
                 <Toast ref={toast} />
                 <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
-                <Button onClick={confirm2} icon="pi pi-times" label="Delete"></Button>
+                <Button onClick={confirm2} icon="pi pi-times" label="Delete" className="p-button-danger p-button-outlined"></Button>
             </div>
             <DocSectionCode code={code} />
         </>

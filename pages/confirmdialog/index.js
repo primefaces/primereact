@@ -6,7 +6,7 @@ import { ApiDoc } from '../../components/doc/confirmdialog/apidoc';
 import { BasicDoc } from '../../components/doc/confirmdialog/basicdoc';
 import { ImportDoc } from '../../components/doc/confirmdialog/importdoc';
 import { PositionDoc } from '../../components/doc/confirmdialog/positiondoc';
-import { UsingConfirmDialogDoc } from '../../components/doc/confirmdialog/usingdoc';
+import { DeclarativeDoc } from '../../components/doc/confirmdialog/declarativedoc';
 import { ConfirmDialog } from '../../components/lib/confirmdialog/ConfirmDialog';
 
 const ConfirmDialogDemo = () => {
@@ -27,9 +27,9 @@ const ConfirmDialogDemo = () => {
             component: PositionDoc
         },
         {
-            id: 'using',
-            label: 'Using ConfirmDialog tag',
-            component: UsingConfirmDialogDoc
+            id: 'declarative',
+            label: 'Declarative',
+            component: DeclarativeDoc
         },
         {
             id: 'api',

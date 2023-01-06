@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
-import { UsingConfirmPopupDoc } from '../../components/doc/confirmpopup/usingdoc';
+import { DeclarativeDoc } from '../../components/doc/confirmpopup/declarativedoc';
 import { BasicDoc } from '../../components/doc/confirmpopup/basicdoc';
 import { ImportDoc } from '../../components/doc/confirmpopup/importdoc';
 import { ApiDoc } from '../../components/doc/confirmpopup/apidoc';
@@ -20,9 +20,9 @@ const ConfirmPopupDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'using',
-            label: 'Using ConfirmPopup tag',
-            component: UsingConfirmPopupDoc
+            id: 'declarative',
+            label: 'Declarative',
+            component: DeclarativeDoc
         },
         {
             id: 'api',

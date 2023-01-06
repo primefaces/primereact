@@ -5,7 +5,7 @@ import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function UsingConfirmDialogDoc(props) {
+export function DeclarativeDoc(props) {
     const [visible, setVisible] = useState(false);
     const toast = useRef(null);
 
@@ -31,7 +31,7 @@ import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { Toast } from 'primereact/toast';
 import { Button } from '../../lib/button/Button';
 
-export default function UsingConfirmDialogDoc() {
+export default function DeclarativeDoc() {
     const [visible, setVisible] = useState(false);
     const toast = useRef(null);
 
@@ -60,7 +60,7 @@ import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { Toast } from 'primereact/toast';
 import { Button } from '../../lib/button/Button';
 
-export default function UsingConfirmDialogDoc() {
+export default function DeclarativeDoc() {
     const [visible, setVisible] = useState(false);
     const toast = useRef<Toast>(null);
 
