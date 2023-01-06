@@ -11,7 +11,7 @@ import { AutoHideDoc } from '../../components/doc/tooltip/autohidedoc';
 import { TemplateDoc } from '../../components/doc/tooltip/templatedoc';
 import { DisabledDoc } from '../../components/doc/tooltip/disableddoc';
 import { TargetDoc } from '../../components/doc/tooltip/targetdoc';
-import { ColorDoc } from '../../components/doc/tooltip/colordoc';
+import { ColoredDoc } from '../../components/doc/tooltip/coloreddoc';
 import { DelayDoc } from '../../components/doc/tooltip/delaydoc';
 import { ApiDoc } from '../../components/doc/tooltip/apidoc';
 
@@ -34,17 +34,17 @@ const TooltipDemo = () => {
         },
         {
             id: 'dynamic',
-            label: 'Dynamic Tooltip',
+            label: 'Dynamic',
             component: DynamicDoc
         },
         {
             id: 'mousetrack',
-            label: 'MouseTrack',
+            label: 'Mouse Track',
             component: MouseTrackDoc
         },
         {
             id: 'autohide',
-            label: 'AutoHide',
+            label: 'Auto Hide',
             component: AutoHideDoc
         },
         {
@@ -68,9 +68,9 @@ const TooltipDemo = () => {
             component: DelayDoc
         },
         {
-            id: 'color',
-            label: 'Color',
-            component: ColorDoc
+            id: 'colored',
+            label: 'Colored',
+            component: ColoredDoc
         },
         {
             id: 'api',

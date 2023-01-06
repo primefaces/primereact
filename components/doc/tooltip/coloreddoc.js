@@ -3,7 +3,7 @@ import { Button } from '../../lib/button/Button';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function ColorDoc(props) {
+export function ColoredDoc(props) {
     const code = {
         basic: `
  <Button label="Blue" className="p-button-secondary p-button-outlined mr-3 mb-2" tooltip="Blue" tooltipOptions={{ className: 'blue-tooltip', position: 'top' }} />
@@ -20,7 +20,7 @@ export function ColorDoc(props) {
 import React from 'react'; 
 import { Button } from 'primereact/button';
 import './TooltipDemo.css'
-export default function ColorDoc() {
+export default function ColoredDoc() {
 
     return (
         <div className="card flex align-items-center flex-wrap">
@@ -42,7 +42,7 @@ import React from 'react';
 import { Button } from 'primereact/button';
 import './TooltipDemo.css'
 
-export default function ColorDoc() {
+export default function ColoredDoc() {
     
     return (
         <div className="card flex align-items-center flex-wrap">
