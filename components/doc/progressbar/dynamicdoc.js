@@ -85,7 +85,7 @@ import { Toast } from 'primereact/toast';
 export default function DynamicDemo() {
     const [value, setValue] = useState<number>(0);
     const toast = useRef<Toast | null>(null);
-    const interval = useRef<NodeJS.Timeout | null>(null);
+    const interval = useRef<number | null>(null);
 
     useEffect(() => {
         let _val = value;
