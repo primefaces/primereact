@@ -3,7 +3,21 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function TemplateDoc(props) {
-    const items = [{ className: ' pi pi-sitemap' }, { className: 'pi pi-book' }, { className: 'pi pi-wallet' }, { className: 'pi pi-shopping-bag' }, { className: 'pi pi-calculator' }];
+    const iconItemTemplate = (item) => {
+        return (
+            <a className="p-menuitem-link">
+                <span className={item.item}></span>
+            </a>
+        );
+    };
+
+    const items = [
+        { item: ' pi pi-sitemap', template: iconItemTemplate },
+        { item: 'pi pi-book', template: iconItemTemplate },
+        { item: 'pi pi-wallet', template: iconItemTemplate },
+        { item: 'pi pi-shopping-bag', template: iconItemTemplate },
+        { item: 'pi pi-calculator', template: iconItemTemplate }
+    ];
 
     const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact/showcase' };
 
@@ -16,9 +30,23 @@ import React from 'react';
 import { BreadCrumb } from 'primereact/breadcrumb';
 
 export default function TemplateDoc() {
-    const items = [{ className: ' pi pi-sitemap' }, { className: 'pi pi-book' }, { className: 'pi pi-wallet' }, { className: 'pi pi-shopping-bag' }, { className: 'pi pi-calculator' }];
+    const iconItemTemplate = (item) => {
+        return (
+            <a className="p-menuitem-link">
+                <span className={item.item}></span>
+            </a>
+        );
+    };
 
-    const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact/showcase' }
+    const items = [
+        { item: ' pi pi-sitemap', template: iconItemTemplate },
+        { item: 'pi pi-book', template: iconItemTemplate },
+        { item: 'pi pi-wallet', template: iconItemTemplate },
+        { item: 'pi pi-shopping-bag', template: iconItemTemplate },
+        { item: 'pi pi-calculator', template: iconItemTemplate }
+    ];
+
+    const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact/showcase' };
 
     return (
         <BreadCrumb model={items} home={home} />
@@ -30,10 +58,24 @@ import React from 'react';
 import { BreadCrumb } from 'primereact/breadcrumb';
 
 export default function TemplateDoc() {
-    const items = [{ className: ' pi pi-sitemap' }, { className: 'pi pi-book' }, { className: 'pi pi-wallet' }, { className: 'pi pi-shopping-bag' }, { className: 'pi pi-calculator' }];
+    const iconItemTemplate = (item) => {
+        return (
+            <a className="p-menuitem-link">
+                <span className={item.item}></span>
+            </a>
+        );
+    };
 
-    const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact/showcase' }
+    const items = [
+        { item: ' pi pi-sitemap', template: iconItemTemplate },
+        { item: 'pi pi-book', template: iconItemTemplate },
+        { item: 'pi pi-wallet', template: iconItemTemplate },
+        { item: 'pi pi-shopping-bag', template: iconItemTemplate },
+        { item: 'pi pi-calculator', template: iconItemTemplate }
+    ];
 
+    const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact/showcase' };
+    
     return (
         <BreadCrumb model={items} home={home} />
     )
