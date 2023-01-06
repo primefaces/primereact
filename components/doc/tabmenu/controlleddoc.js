@@ -4,7 +4,7 @@ import { TabMenu } from '../../lib/tabmenu/TabMenu';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function ProgrammaticDoc(props) {
+export function ControlledDoc(props) {
     const [activeIndex, setActiveIndex] = useState(3);
     const items = [
         { label: 'Home', icon: 'pi pi-fw pi-home' },
@@ -28,7 +28,7 @@ import React, { useState } from 'react';
 import { Button } from 'primereact/button';
 import { TabMenu } from 'primereact/tabmenu';
 
-export default function ProgrammaticDoc() {
+export default function ControlledDoc() {
     const [activeIndex, setActiveIndex] = useState(3);
     const items = [
         {label: 'Home', icon: 'pi pi-fw pi-home'},
@@ -56,7 +56,7 @@ import React, { useState } from 'react';
 import { Button } from 'primereact/button';
 import { TabMenu } from 'primereact/tabmenu';
 
-export default function ProgrammaticDoc() {
+export default function ControlledDoc() {
     const [activeIndex, setActiveIndex] = useState(3);
     const items = [
         {label: 'Home', icon: 'pi pi-fw pi-home'},

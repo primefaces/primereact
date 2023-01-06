@@ -3,8 +3,8 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/tabmenu/importdoc';
-import { DefaultDoc } from '../../components/doc/tabmenu/defaultdoc';
-import { ProgrammaticDoc } from '../../components/doc/tabmenu/programmaticdoc';
+import { BasicDoc } from '../../components/doc/tabmenu/basicdoc';
+import { ControlledDoc } from '../../components/doc/tabmenu/controlleddoc';
 import { ApiDoc } from '../../components/doc/tabmenu/apidoc';
 
 const TabMenuDemo = () => {
@@ -15,14 +15,14 @@ const TabMenuDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'default',
-            label: 'Default',
-            component: DefaultDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
-            id: 'Programmatic',
-            label: 'Programmatic',
-            component: ProgrammaticDoc
+            id: 'controlled',
+            label: 'Controlled',
+            component: ControlledDoc
         },
         {
             id: 'api',

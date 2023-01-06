@@ -2,7 +2,7 @@ import { TabMenu } from '../../lib/tabmenu/TabMenu';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function DefaultDoc(props) {
+export function BasicDoc(props) {
     const items = [
         { label: 'Home', icon: 'pi pi-fw pi-home' },
         { label: 'Calendar', icon: 'pi pi-fw pi-calendar' },
@@ -19,7 +19,7 @@ export function DefaultDoc(props) {
 import React from 'react'; 
 import { TabMenu } from 'primereact/tabmenu';
 
-export default function DefaultDoc() {
+export default function BasicDoc() {
     const items = [
         {label: 'Home', icon: 'pi pi-fw pi-home'},
         {label: 'Calendar', icon: 'pi pi-fw pi-calendar'},
@@ -37,7 +37,7 @@ export default function DefaultDoc() {
 import React from 'react'; 
 import { TabMenu } from 'primereact/tabmenu';
 
-export default function DefaultDoc() {
+export default function BasicDoc() {
     const items = [
         {label: 'Home', icon: 'pi pi-fw pi-home'},
         {label: 'Calendar', icon: 'pi pi-fw pi-calendar'},
