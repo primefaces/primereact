@@ -5,7 +5,7 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 import getConfig from 'next/config';
 
-export function BasicWithAuto(props) {
+export function AutoDoc(props) {
     const toast = useRef(null);
     const uploadPath = getConfig().publicRuntimeConfig.uploadPath;
 
@@ -24,7 +24,7 @@ import React, { useRef } from 'react';
 import { Toast } from 'primereact/toast';
 import { FileUpload } from 'primereact/fileupload';
 
-export default function BasicWithAuto() {
+export default function AutoDoc() {
     const toast = useRef(null);
 
     const onBasicUploadAuto = () => {
@@ -44,7 +44,7 @@ import React, { useRef } from 'react';
 import { Toast } from 'primereact/toast';
 import { FileUpload } from 'primereact/fileupload';
 
-export default function BasicWithAuto() {
+export default function AutoDoc() {
     const toast = useRef(null);
 
     const onBasicUploadAuto = () => {

@@ -3,7 +3,7 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 import getConfig from 'next/config';
 
-export function CustomDoc(props) {
+export function CustomUploadDoc(props) {
     const uploadPath = getConfig().publicRuntimeConfig.uploadPath;
 
     const customBase64Uploader = async (event) => {
@@ -30,7 +30,7 @@ export function CustomDoc(props) {
 import React from 'react'; 
 import { FileUpload } from 'primereact/fileupload';
 
-export default function CustomDoc() {
+export default function CustomUploadDoc() {
 
     const customBase64Uploader = async (event) => {
         // convert file to base64 encoded
@@ -56,7 +56,7 @@ export default function CustomDoc() {
 import React from 'react'; 
 import { FileUpload } from 'primereact/fileupload';
 
-export default function CustomDoc() {
+export default function CustomUploadDoc() {
 
     const customBase64Uploader = async (event) => {
         // convert file to base64 encoded

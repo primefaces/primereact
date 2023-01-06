@@ -5,8 +5,8 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { AdvancedDoc } from '../../components/doc/fileupload/advanceddoc';
 import { ApiDoc } from '../../components/doc/fileupload/apidoc';
 import { BasicDoc } from '../../components/doc/fileupload/basicdoc';
-import { BasicWithAuto } from '../../components/doc/fileupload/basicwithautodoc';
-import { CustomDoc } from '../../components/doc/fileupload/customdoc';
+import { AutoDoc } from '../../components/doc/fileupload/autodoc';
+import { CustomUploadDoc } from '../../components/doc/fileupload/customuploaddoc';
 import { ImportDoc } from '../../components/doc/fileupload/importdoc';
 import { TemplateDoc } from '../../components/doc/fileupload/templatedoc';
 
@@ -16,6 +16,16 @@ const FileUploadDemo = () => {
             id: 'import',
             label: 'Import',
             component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'auto',
+            label: 'Auto',
+            component: AutoDoc
         },
         {
             id: 'advanced',
@@ -28,19 +38,9 @@ const FileUploadDemo = () => {
             component: TemplateDoc
         },
         {
-            id: 'basic',
-            label: 'Basic',
-            component: BasicDoc
-        },
-        {
-            id: 'basicwithauto',
-            label: 'Basic with Auto',
-            component: BasicWithAuto
-        },
-        {
             id: 'custom',
-            label: 'Custom (base64 encoded)',
-            component: CustomDoc
+            label: 'Custom Upload',
+            component: CustomUploadDoc
         },
 
         {
