@@ -58,13 +58,17 @@ export function FormikDoc(props) {
 
     const formik = useFormik({
         initialValues: {
-            description: null
+            mention: ''
         },
         validate: (data) => {
+            const hasMentionedCustomersNickname = customers.some((customer) => {
+                return data.mention && data.mention.includes('@' + customer.nickname);
+            });
+
             let errors = {};
 
-            if (!data.description) {
-                errors.description = 'Mention is required.';
+            if (!data.mention || !hasMentionedCustomersNickname) {
+                errors.mention = 'Mention is required.';
             }
 
             return errors;
@@ -84,47 +88,96 @@ export function FormikDoc(props) {
     const code = {
         basic: `
 <Toast ref={toast} />
-<label htmlFor="description" className={classNames({ 'p-error': isFormFieldValid('description') })}>
-    Description*
-</label>
-<InputTextarea
-    id="description"
-    name="description"
+<Mention
+    id="mention"
+    name="mention"
+    field="nickname"
+    onSearch={onSearch}
+    placeholder="Please enter @ to mention people"
     rows={5}
-    cols={30}
-    className={classNames({ 'p-invalid': isFormFieldValid('description') })}
-    value={formik.values.description}
+    cols={40}
+    suggestions={suggestions}
+    itemTemplate={itemTemplate}
+    className={classNames({ 'p-invalid': isFormFieldValid('mention') })}
+    value={formik.values.mention}
     onChange={(e) => {
-        formik.setFieldValue('description', e.target.value);
+        formik.setFieldValue('mention', e.target.value);
     }}
 />
+{getFormErrorMessage('mention')}
 <Button label="Submit" type="submit" icon="pi pi-check mt-2" />
         `,
         javascript: `
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useFormik } from 'formik';
-import { InputTextarea } from 'primereact/inputtextarea';
 import { Button } from 'primereact/button';
-import { classNames } from 'primereact/utils';
+import { CustomerService } from './service/CustomerService';
 import { Toast } from 'primereact/toast';
+import { classNames } from 'primereact/utils';
+import { Mention } from "primereact/mention";
 
 
 export default function FormikDoc() {
     const toast = useRef(null);
-        
+    const [customers, setCustomers] = useState([]);
+    const [suggestions, setSuggestions] = useState([]);
+
+    useEffect(() => {
+        CustomerService.getCustomersSmall().then((data) => {
+            data.forEach((d) => (d['nickname'] = \`$\{d.name.replace(/\s+/g, '').toLowerCase()}_\${d.id}\`));
+            setCustomers(data);
+        });
+    }, []);
+
+    const onSearch = (event) => {
+        //in a real application, make a request to a remote url with the query and return suggestions, for demo we filter at client side
+        setTimeout(() => {
+            const query = event.query;
+            let suggestions;
+
+            if (!query.trim().length) {
+                suggestions = [...customers];
+            } else {
+                suggestions = customers.filter((customer) => {
+                    return customer.nickname.toLowerCase().startsWith(query.toLowerCase());
+                });
+            }
+
+            setSuggestions(suggestions);
+        }, 250);
+    };
+
+    const itemTemplate = (suggestion) => {
+        const src = 'images/avatar/' + suggestion.representative.image;
+
+        return (
+            <div className="flex align-items-center">
+                <img alt={suggestion.name} src={src} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} width="32" style={{ verticalAlign: 'middle' }} />
+                <span className="flex flex-column ml-2">
+                    {suggestion.name}
+                    <small style={{ fontSize: '.75rem', color: 'var(--text-secondary-color)' }}>@{suggestion.nickname}</small>
+                </span>
+            </div>
+        );
+    };
+
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: "Thank you, we have received your submission." });
+        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
     };
 
     const formik = useFormik({
         initialValues: {
-            description: ''
+            mention: ''
         },
         validate: (data) => {
+            const hasMentionedCustomersNickname = customers.some((customer) => {
+                return data.mention && data.mention.includes('@' + customer.nickname);
+            });
+
             let errors = {};
 
-            if (!data.description) {
-                errors.description = 'Description is required.';
+            if (!data.mention || !hasMentionedCustomersNickname) {
+                errors.mention = 'Mention is required.';
             }
 
             return errors;
@@ -147,21 +200,24 @@ export default function FormikDoc() {
                 <Toast ref={toast} />
                 <div className="field">
                     <div className="flex flex-column">
-                        <label htmlFor="description" className={classNames({ 'p-error': isFormFieldValid('description') })}>
-                            Description*
-                        </label>
-                        <InputTextarea
-                            id="description"
-                            name="description"
+                        <Mention
+                            id="mention"
+                            name="mention"
+                            field="nickname"
+                            onSearch={onSearch}
+                            placeholder="Please enter @ to mention people"
                             rows={5}
-                            cols={30}
-                            className={classNames({ 'p-invalid': isFormFieldValid('description') })}
-                            value={formik.values.description}
+                            cols={40}
+                            suggestions={suggestions}
+                            itemTemplate={itemTemplate}
+                            className={classNames({ 'p-invalid': isFormFieldValid('mention') })}
+                            value={formik.values.mention}
                             onChange={(e) => {
-                                formik.setFieldValue('description', e.target.value);
+                                formik.setFieldValue('mention', e.target.value);
                             }}
                         />
-                        {getFormErrorMessage('description')}
+
+                        {getFormErrorMessage('mention')}
                     </div>
                 </div>
                 <Button label="Submit" type="submit" icon="pi pi-check mt-2" />
@@ -171,29 +227,75 @@ export default function FormikDoc() {
 }
         `,
         typescript: `
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useFormik } from 'formik';
-import { InputTextarea } from 'primereact/inputtextarea';
 import { Button } from 'primereact/button';
-import { classNames } from 'primereact/utils';
+import { CustomerService } from './service/CustomerService';
 import { Toast } from 'primereact/toast';
+import { classNames } from 'primereact/utils';
+import { Mention } from "primereact/mention";
 
 export default function FormikDoc() {
-    const toast = useRef<any>(null);
-        
-    const show = ():void => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: "Thank you, we have received your submission." });
+    const toast = useRef<Toast | null>(null);
+    const [customers, setCustomers] = useState<any[] | []>([]);
+    const [suggestions, setSuggestions] = useState<any[] | []>([]);
+
+    useEffect(() => {
+        CustomerService.getCustomersSmall().then((data) => {
+            data.forEach((d) => (d['nickname'] = \`$\{d.name.replace(/\s+/g, '').toLowerCase()}_\${d.id}\`));
+            setCustomers(data);
+        });
+    }, []);
+
+    const onSearch = (event) => {
+        //in a real application, make a request to a remote url with the query and return suggestions, for demo we filter at client side
+        setTimeout(() => {
+            const query = event.query;
+            let suggestions;
+
+            if (!query.trim().length) {
+                suggestions = [...customers];
+            } else {
+                suggestions = customers.filter((customer) => {
+                    return customer.nickname.toLowerCase().startsWith(query.toLowerCase());
+                });
+            }
+
+            setSuggestions(suggestions);
+        }, 250);
+    };
+
+    const itemTemplate = (suggestion) => {
+        const src = 'images/avatar/' + suggestion.representative.image;
+
+        return (
+            <div className="flex align-items-center">
+                <img alt={suggestion.name} src={src} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} width="32" style={{ verticalAlign: 'middle' }} />
+                <span className="flex flex-column ml-2">
+                    {suggestion.name}
+                    <small style={{ fontSize: '.75rem', color: 'var(--text-secondary-color)' }}>@{suggestion.nickname}</small>
+                </span>
+            </div>
+        );
+    };
+
+    const show = () => {
+        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
     };
 
     const formik = useFormik({
         initialValues: {
-            description: ''
+            mention: ''
         },
         validate: (data) => {
+            const hasMentionedCustomersNickname = customers.some((customer) => {
+                return data.mention && data.mention.includes('@' + customer.nickname);
+            });
+
             let errors = {};
 
-            if (!data.description) {
-                errors.description = 'Description is required.';
+            if (!data.mention || !hasMentionedCustomersNickname) {
+                errors.mention = 'Mention is required.';
             }
 
             return errors;
@@ -216,21 +318,24 @@ export default function FormikDoc() {
                 <Toast ref={toast} />
                 <div className="field">
                     <div className="flex flex-column">
-                        <label htmlFor="description" className={classNames({ 'p-error': isFormFieldValid('description') })}>
-                            Description*
-                        </label>
-                        <InputTextarea
-                            id="description"
-                            name="description"
+                        <Mention
+                            id="mention"
+                            name="mention"
+                            field="nickname"
+                            onSearch={onSearch}
+                            placeholder="Please enter @ to mention people"
                             rows={5}
-                            cols={30}
-                            className={classNames({ 'p-invalid': isFormFieldValid('description') })}
-                            value={formik.values.description}
+                            cols={40}
+                            suggestions={suggestions}
+                            itemTemplate={itemTemplate}
+                            className={classNames({ 'p-invalid': isFormFieldValid('mention') })}
+                            value={formik.values.mention}
                             onChange={(e) => {
-                                formik.setFieldValue('description', e.target.value);
+                                formik.setFieldValue('mention', e.target.value);
                             }}
                         />
-                        {getFormErrorMessage('description')}
+
+                        {getFormErrorMessage('mention')}
                     </div>
                 </div>
                 <Button label="Submit" type="submit" icon="pi pi-check mt-2" />
@@ -252,12 +357,9 @@ export default function FormikDoc() {
                     <Toast ref={toast} />
                     <div className="field">
                         <div className="flex flex-column">
-                            <label htmlFor="description" className={classNames({ 'p-error': isFormFieldValid('description') })}>
-                                Please enter @ to mention people
-                            </label>
                             <Mention
-                                id="description"
-                                name="description"
+                                id="mention"
+                                name="mention"
                                 field="nickname"
                                 onSearch={onSearch}
                                 placeholder="Please enter @ to mention people"
@@ -265,20 +367,20 @@ export default function FormikDoc() {
                                 cols={40}
                                 suggestions={suggestions}
                                 itemTemplate={itemTemplate}
-                                className={classNames({ 'p-invalid': isFormFieldValid('description') })}
-                                value={formik.values.description}
+                                className={classNames({ 'p-invalid': isFormFieldValid('mention') })}
+                                value={formik.values.mention}
                                 onChange={(e) => {
-                                    formik.setFieldValue('description', e.target.value);
+                                    formik.setFieldValue('mention', e.target.value);
                                 }}
                             />
 
-                            {getFormErrorMessage('description')}
+                            {getFormErrorMessage('mention')}
                         </div>
                     </div>
                     <Button label="Submit" type="submit" icon="pi pi-check mt-2" />
                 </form>
             </div>
-            <DocSectionCode code={code} dependencies={{ formik: '^2.2.6' }} />
+            <DocSectionCode code={code} service={['CustomerService']} dependencies={{ formik: '^2.2.6' }} />
         </>
     );
 }

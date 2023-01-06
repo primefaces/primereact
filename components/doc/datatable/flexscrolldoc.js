@@ -117,7 +117,7 @@ const FlexScrollDoc = () => {
                     <Column field="status" header="Status"></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} service={['ProductService']} />
+            <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );
 }
