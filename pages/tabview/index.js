@@ -3,11 +3,11 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ImportDoc } from '../../components/doc/tabview/importdoc';
-import { DefaultDoc } from '../../components/doc/tabview/defaultdoc';
-import { ProgrammaticDoc } from '../../components/doc/tabview/programmaticdoc';
+import { BasicDoc } from '../../components/doc/tabview/basicdoc';
+import { ControlledDoc } from '../../components/doc/tabview/controlleddoc';
 import { DisabledDoc } from '../../components/doc/tabview/disableddoc';
 import { HeaderIconDoc } from '../../components/doc/tabview/headericondoc';
-import { CustomHeaderDoc } from '../../components/doc/tabview/customheaderdoc';
+import { TemplateDoc } from '../../components/doc/tabview/templatedoc';
 import { ClosableDoc } from '../../components/doc/tabview/closabledoc';
 import { ScrollableDoc } from '../../components/doc/tabview/scrollabledoc';
 import { ApiDoc } from '../../components/doc/tabview/apidoc';
@@ -20,14 +20,14 @@ const TabViewDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'default',
-            label: 'Default',
-            component: DefaultDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
-            id: 'programmatic',
-            label: 'Programmatic',
-            component: ProgrammaticDoc
+            id: 'controlled',
+            label: 'Controlled',
+            component: ControlledDoc
         },
         {
             id: 'disabled',
@@ -40,9 +40,9 @@ const TabViewDemo = () => {
             component: HeaderIconDoc
         },
         {
-            id: 'customheader',
-            label: 'Custom Headers',
-            component: CustomHeaderDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
             id: 'slosable',
@@ -61,11 +61,7 @@ const TabViewDemo = () => {
             children: [
                 {
                     id: 'propertiesfortabpanel',
-                    label: 'Properties For TabPanel'
-                },
-                {
-                    id: 'propertiesfortabview',
-                    label: 'Properties For TabView'
+                    label: 'Properties For TabPanel / TabView'
                 },
                 {
                     id: 'events',

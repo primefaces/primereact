@@ -2,7 +2,7 @@ import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function DefaultDoc(props) {
+export function BasicDoc(props) {
     const code = {
         basic: `
 <TabView>
@@ -22,7 +22,7 @@ import React from 'react';
 import { TabView, TabPanel } from 'primereact/tabview';
 import './TabViewDemo.css';
 
-export default function DefaultDoc() {
+export default function BasicDoc() {
 
     return (
         <div className="card">
@@ -46,7 +46,7 @@ import React from 'react';
 import { TabView, TabPanel } from 'primereact/tabview';
 import './TabViewDemo.css';
 
-export default function DefaultDoc() {
+export default function BasicDoc() {
 
     return (
         <div className="card">
