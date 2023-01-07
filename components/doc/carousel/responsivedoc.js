@@ -199,7 +199,8 @@ export default function ResponsiveDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Responsive Options</p>
+                {/* TO DO: Add demo content. */}
+                <p></p>
             </DocSectionText>
             <div className="card">
                 <Carousel value={products} numScroll={1} numVisible={3} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} header={<h5>Basic</h5>} />

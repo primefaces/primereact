@@ -3,12 +3,13 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ImportDoc } from '../../components/doc/toast/importdoc';
+import { ApiDoc } from '../../components/doc/toast/apidoc';
 import { SeveritiesDoc } from '../../components/doc/toast/severitiesdoc';
 import { PositionDoc } from '../../components/doc/toast/positiondoc';
-import { OptionsDoc } from '../../components/doc/toast/optionsdoc';
-import { ClearDoc } from '../../components/doc/toast/cleardoc';
-import { CustomDoc } from '../../components/doc/toast/customdoc';
-import { ApiDoc } from '../../components/doc/toast/apidoc';
+import { TemplateDoc } from '../../components/doc/toast/templatedoc';
+import { StickyDoc } from '../../components/doc/toast/stickydoc';
+import { MultipleDoc } from '../../components/doc/toast/multipledoc';
+import { BasicDoc } from '../../components/doc/toast/basicdoc';
 
 const ToastDemo = () => {
     const docs = [
@@ -16,6 +17,11 @@ const ToastDemo = () => {
             id: 'import',
             label: 'Import',
             component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
             id: 'severities',
@@ -28,19 +34,19 @@ const ToastDemo = () => {
             component: PositionDoc
         },
         {
-            id: 'options',
-            label: 'Options',
-            component: OptionsDoc
+            id: 'multiple',
+            label: 'Multiple',
+            component: MultipleDoc
         },
         {
-            id: 'clear',
-            label: 'Clear',
-            component: ClearDoc
+            id: 'stickydoc',
+            label: 'Sticky',
+            component: StickyDoc
         },
         {
-            id: 'custom',
-            label: 'Custom',
-            component: CustomDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
             id: 'api',
