@@ -2,9 +2,10 @@ import Head from 'next/head';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
-import { PanelMenuDoc } from '../../components/doc/panelmenu/panelmenu';
+import { BasicDoc } from '../../components/doc/panelmenu/basicdoc';
 import { ImportDoc } from '../../components/doc/panelmenu/importdoc';
 import { ApiDoc } from '../../components/doc/panelmenu/apidoc';
+import { ControlledDoc } from '../../components/doc/panelmenu/controlleddoc';
 
 const PanelMenuDemo = () => {
     const docs = [
@@ -14,9 +15,14 @@ const PanelMenuDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'panelmenu',
-            label: 'PanelMenu',
-            component: PanelMenuDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'controlled',
+            label: 'Controlled',
+            component: ControlledDoc
         },
         {
             id: 'api',

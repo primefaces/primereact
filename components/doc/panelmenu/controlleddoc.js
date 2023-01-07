@@ -2,7 +2,7 @@ import { PanelMenu } from '../../lib/panelmenu/PanelMenu';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function PanelMenuDoc(props) {
+export function ControlledDoc(props) {
     const items = [
         {
             label: 'File',
@@ -121,13 +121,13 @@ export function PanelMenuDoc(props) {
     ];
     const code = {
         basic: `
-<PanelMenu model={items} style={{ width: '22rem' }}/>        
+<PanelMenu multiple model={items} style={{ width: '22rem' }}/>        
 `,
         javascript: `
 import React from 'react'; 
 import { PanelMenu } from 'primereact/panelmenu';
 
-export default function PanelMenuDoc() {
+export default function ControlledDoc() {
     const items = [
         {
             label:'File',
@@ -246,7 +246,7 @@ export default function PanelMenuDoc() {
     ];
 
     return (
-        <PanelMenu model={items} style={{ width: '22rem' }}/>
+        <PanelMenu multiple model={items} style={{ width: '22rem' }}/>
     )
 }
         `,
@@ -254,7 +254,7 @@ export default function PanelMenuDoc() {
 import React from 'react'; 
 import { PanelMenu } from 'primereact/panelmenu';
 
-export default function PanelMenuDoc() {
+export default function ControlledDoc() {
     const items = [
         {
             label:'File',
@@ -372,7 +372,7 @@ export default function PanelMenuDoc() {
         }
     ];
     return (
-        <PanelMenu model={items} style={{ width: '22rem' }}/>
+        <PanelMenu multiple model={items} style={{ width: '22rem' }}/>
     )
 }
         `
@@ -381,10 +381,11 @@ export default function PanelMenuDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>PanelMenu requires a collection of menuitems as its model.</p>
+                {/* TO DO: Add demo content. */}
+                <p></p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <PanelMenu model={items} style={{ width: '22rem' }} />
+                <PanelMenu multiple model={items} style={{ width: '22rem' }} />
             </div>
             <DocSectionCode code={code} />
         </>
