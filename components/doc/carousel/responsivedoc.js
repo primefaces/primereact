@@ -6,7 +6,7 @@ import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
 import getConfig from 'next/config';
 
-export function ResponsiveOptionsDoc(props) {
+export function ResponsiveDoc(props) {
     const [products, setProducts] = useState([]);
     const responsiveOptions = [
         {
@@ -64,7 +64,7 @@ import { Button } from 'primereact/button';
 import { Carousel } from 'primereact/carousel';
 import { ProductService } from './service/ProductService';
 
-export default function ResponsiveOptionsDoc() {
+export default function ResponsiveDoc() {
     const [products, setProducts] = useState([]);
     const responsiveOptions = [
         {
@@ -124,7 +124,7 @@ import { Button } from 'primereact/button';
 import { Carousel } from 'primereact/carousel';
 import { ProductService } from './service/ProductService';
 
-export default function ResponsiveOptionsDoc() {
+export default function ResponsiveDoc() {
     const [products, setProducts] = useState([]);
     const responsiveOptions = [
         {

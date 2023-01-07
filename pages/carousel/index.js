@@ -8,7 +8,7 @@ import { ApiDoc } from '../../components/doc/carousel/apidoc';
 import { CircularDoc } from '../../components/doc/carousel/circulardoc';
 import { VerticalDoc } from '../../components/doc/carousel/verticaldoc';
 import { NumScrollDoc } from '../../components/doc/carousel/numscrolldoc';
-import { ResponsiveOptionsDoc } from '../../components/doc/carousel/responsivedoc';
+import { ResponsiveDoc } from '../../components/doc/carousel/responsivedoc';
 
 const CarouselDemo = () => {
     const docs = [
@@ -34,13 +34,13 @@ const CarouselDemo = () => {
         },
         {
             id: 'numscroll',
-            label: 'NumScroll',
+            label: 'Num Scroll',
             component: NumScrollDoc
         },
         {
             id: 'responsive',
-            label: 'ResponsiveOptions',
-            component: ResponsiveOptionsDoc
+            label: 'Responsive',
+            component: ResponsiveDoc
         },
         {
             id: 'api',
