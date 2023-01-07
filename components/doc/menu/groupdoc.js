@@ -4,7 +4,7 @@ import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function InlineDoc(props) {
+export function GroupDoc(props) {
     const toast = useRef(null);
     const items = [
         {
@@ -54,7 +54,7 @@ import React, { useRef } from 'react';
 import { Menu } from 'primereact/menu';
 import { Toast } from 'primereact/toast';
 
-export default function InlineDoc() {
+export default function GroupDoc() {
     const toast = useRef(null);
     const items = [
         {
@@ -109,7 +109,7 @@ import { Menu } from 'primereact/menu';
 import { MenuItem } from 'primereact/menuitem';
 import { Toast } from 'primereact/toast';
 
-export default function InlineDoc() {
+export default function GroupDoc() {
     const toast = useRef<Toast>(null);
     const items: MenuItem[] = [
         {

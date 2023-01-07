@@ -4,8 +4,8 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/menu/importdoc';
 import { BasicDoc } from '../../components/doc/menu/basicdoc';
-import { InlineDoc } from '../../components/doc/menu/inlinedoc';
-import { OverlayDoc } from '../../components/doc/menu/overlaydoc';
+import { GroupDoc } from '../../components/doc/menu/groupdoc';
+import { PopupDoc } from '../../components/doc/menu/popupdoc';
 import { ApiDoc } from '../../components/doc/menu/apidoc';
 
 const MenuDemo = () => {
@@ -21,14 +21,14 @@ const MenuDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'inline',
-            label: 'Inline',
-            component: InlineDoc
+            id: 'group',
+            label: 'Group',
+            component: GroupDoc
         },
         {
-            id: 'overlay',
-            label: 'Overlay',
-            component: OverlayDoc
+            id: 'popup',
+            label: 'Popup',
+            component: PopupDoc
         },
         {
             id: 'api',

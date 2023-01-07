@@ -5,7 +5,7 @@ import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function OverlayDoc(props) {
+export function PopupDoc(props) {
     const menu = useRef(null);
     const toast = useRef(null);
     const items = [
@@ -58,7 +58,7 @@ import { Button } from 'primereact/button';
 import { Menu } from 'primereact/menu';
 import { Toast } from 'primereact/toast';
 
-export default function OverlayDoc() {
+export default function PopupDoc() {
     const menu = useRef(null);
     const toast = useRef(null);
     const items = [
@@ -116,7 +116,7 @@ import { Menu } from 'primereact/menu';
 import { MenuItem } from 'primereact/menuitem';
 import { Toast } from 'primereact/toast';
 
-export default function OverlayDoc() {
+export default function PopupDoc() {
     const menu = useRef<Menu>(null);
     const toast = useRef<Toast>(null);
     const items: MenuItem[] = [
