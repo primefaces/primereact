@@ -1,9 +1,8 @@
 import { MegaMenu } from '../../lib/megamenu/MegaMenu';
-import { InputText } from '../../lib/inputtext/InputText';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function TemplatingDoc(props) {
+export function BasicDoc(props) {
     const items = [
         {
             label: 'Videos',
@@ -120,19 +119,15 @@ export function TemplatingDoc(props) {
             ]
         }
     ];
-    const start = <img alt="logo" src="images/logo.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} height="40" className="mr-2"></img>;
-    const end = <InputText placeholder="Search" type="text" style={{ width: '12rem' }} />;
-
     const code = {
         basic: `
-<MegaMenu model={items} orientation="horizontal" start={start} end={end} />        
+<MegaMenu model={items} />        
 `,
         javascript: `
 import React from 'react'; 
 import { MegaMenu } from 'primereact/megamenu';
-import { InputText } from 'primereact/inputtext';
 
-export default function TemplatingDoc() {
+export default function BasicDoc() {
     const items = [
         {
             label: 'Videos', icon: 'pi pi-fw pi-video',
@@ -245,20 +240,17 @@ export default function TemplatingDoc() {
             ]
         }
     ];
-    const start = <img alt="logo" src="images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="mr-2"></img>;
-    const end = <InputText placeholder="Search" type="text" style={{width: '12rem'}} />;
 
     return (
-        <MegaMenu model={items} orientation="horizontal" start={start} end={end} />
+        <MegaMenu model={items} />
     )
 }
         `,
         typescript: `
 import React from 'react'; 
 import { MegaMenu } from 'primereact/megamenu';
-import { InputText } from 'primereact/inputtext';
 
-export default function TemplatingDoc() {
+export default function BasicDoc() {
     const items = [
         {
             label: 'Videos', icon: 'pi pi-fw pi-video',
@@ -371,11 +363,9 @@ export default function TemplatingDoc() {
             ]
         }
     ];
-    const start = <img alt="logo" src="images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="mr-2"></img>;
-    const end = <InputText placeholder="Search" type="text" style={{width: '12rem'}} />;
 
     return (
-        <MegaMenu model={items} orientation="horizontal" start={start} end={end} />
+        <MegaMenu model={items} />
     )
 }
         `
@@ -384,10 +374,10 @@ export default function TemplatingDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>The megamenu can display custom content by using the "start" and "end" properties.</p>
+                <p>Default orientation is "horizontal" with "vertical" as the alternative.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <MegaMenu model={items} orientation="horizontal" start={start} end={end} />
+                <MegaMenu model={items} />
             </div>
             <DocSectionCode code={code} />
         </>
