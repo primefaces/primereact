@@ -9,17 +9,6 @@ export function ApiDoc(props) {
         <>
             <DocSectionText {...props}></DocSectionText>
 
-            <DocSubSection id="templating" label="Templating">
-                <p>Content can easily be added like a child element.</p>
-
-                <CodeHighlight>
-                    {`
-<Tag>
-Content
-</Tag>
-`}
-                </CodeHighlight>
-            </DocSubSection>
             <DocSubSection id="properties" label="Properties">
                 <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
                 <div className="doc-tablewrapper">
