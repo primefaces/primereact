@@ -37,7 +37,9 @@ export default function CustomDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>ProgressSpinner can be customized with styling property like <i>style</i>, <i>strokeWidth</i> and <i>fill</i>.</p>
+                <p>
+                    ProgressSpinner can be customized with styling property like <i>style</i>, <i>strokeWidth</i> and <i>fill</i>.
+                </p>
             </DocSectionText>
             <div className="card">
                 <ProgressSpinner style={{ width: '50px', height: '50px' }} strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s" />
