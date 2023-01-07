@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PrimeReact from '../api/Api';
-import { useOverlayScrollListener, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useMountEffect, useOverlayScrollListener, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 
@@ -388,17 +388,20 @@ export const Tooltip = React.memo(
             }
         };
 
-        React.useEffect(() => {
+        useMountEffect(() => {
             loadTargetEvents();
 
             if (visibleState && currentTargetRef.current && isDisabled(currentTargetRef.current)) {
                 hide();
             }
+        });
+
+        useUpdateEffect(() => {
+            loadTargetEvents();
 
             return () => {
                 unloadTargetEvents();
             };
-            // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [show, hide, props.target]);
 
         useUpdateEffect(() => {
