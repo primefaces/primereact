@@ -61,9 +61,9 @@ export default function TemplateDemo() {
                 <p>Children of the component are passed as the content for templating.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Tag style={{background: 'linear-gradient(-225deg,#AC32E4 0%,#7918F2 48%,#4801FF 100%)'}}>
+                <Tag style={{ background: 'linear-gradient(-225deg,#AC32E4 0%,#7918F2 48%,#4801FF 100%)' }}>
                     <div className="flex align-items-center gap-2">
-                        <img alt="Country" src={`${contextPath}/images/flag/flag_placeholder.png`} className="flag flag-it" style={{ width: '18px' }}/>
+                        <img alt="Country" src={`${contextPath}/images/flag/flag_placeholder.png`} className="flag flag-it" style={{ width: '18px' }} />
                         <span className="text-base">Italia</span>
                         <i className="pi pi-times text-xs"></i>
                     </div>

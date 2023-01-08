@@ -32,10 +32,8 @@ export function BasicDoc(props) {
                 break;
         }
 
-        if (response)
-            TerminalService.emit('response', response);
-        else
-            TerminalService.emit('clear');
+        if (response) TerminalService.emit('response', response);
+        else TerminalService.emit('clear');
     };
 
     useEffect(() => {
@@ -169,8 +167,10 @@ export default function TerminalDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Terminal is interacted with <i>TerminalService</i> api using <i>command</i>, <i>response</i> and <i>clear</i> events. The <i>command</i> event requires a callback to handle the commands, the <i>response</i>
-                emits the response of the command and emitting <i>clear</i> reset the terminal.</p>
+                <p>
+                    Terminal is interacted with <i>TerminalService</i> api using <i>command</i>, <i>response</i> and <i>clear</i> events. The <i>command</i> event requires a callback to handle the commands, the <i>response</i>
+                    emits the response of the command and emitting <i>clear</i> reset the terminal.
+                </p>
             </DocSectionText>
             <div className="card">
                 <p>

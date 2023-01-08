@@ -49,7 +49,9 @@ export default function IconDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>A font icon next to the value can be displayed with the <i>icon</i> property.</p>
+                <p>
+                    A font icon next to the value can be displayed with the <i>icon</i> property.
+                </p>
             </DocSectionText>
             <div className="card flex flex-wrap justify-content-center gap-2">
                 <Tag icon="pi pi-user" value="Primary"></Tag>

@@ -85,8 +85,10 @@ export default function AnimationsDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Classes to apply during enter and leave animations are specified using the <i>enterClassName</i>, <i>enterActiveClassName</i>, <i>enterToClassName</i>, <i>leaveClassName</i>, <i>leaveActiveClassName</i>,
-                <i>leaveToClassName</i> properties. In addition in case the target is an overlay, <i>hideOnOutsideClick</i> would be handy to hide the target if outside of the popup is clicked.</p>
+                <p>
+                    Classes to apply during enter and leave animations are specified using the <i>enterClassName</i>, <i>enterActiveClassName</i>, <i>enterToClassName</i>, <i>leaveClassName</i>, <i>leaveActiveClassName</i>,<i>leaveToClassName</i>{' '}
+                    properties. In addition in case the target is an overlay, <i>hideOnOutsideClick</i> would be handy to hide the target if outside of the popup is clicked.
+                </p>
             </DocSectionText>
             <div className="card flex flex-column align-items-center">
                 <div>

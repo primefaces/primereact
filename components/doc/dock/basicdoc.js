@@ -152,10 +152,10 @@ export default function BasicDoc() {
                             const { value, label } = option;
 
                             return (
-                                <div className="mr-4" key={label}>
+                                <div className="flex mr-4 align-items-center" key={label}>
                                     <RadioButton value={label} onChange={() => onRadioButtonChange(option)} checked={selectedOptionValue === value} />
                                     <label htmlFor={label} className="ml-2">
-                                        {label} Size
+                                        {label}
                                     </label>
                                 </div>
                             );

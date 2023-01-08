@@ -37,7 +37,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Label of the tag is defined with the <i>value</i> property.</p>
+                <p>
+                    Label of the tag is defined with the <i>value</i> property.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Tag value="New"></Tag>

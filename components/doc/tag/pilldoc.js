@@ -49,7 +49,9 @@ export default function PillDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Enabling <i>rounded</i>, displays a tag as a pill.</p>
+                <p>
+                    Enabling <i>rounded</i>, displays a tag as a pill.
+                </p>
             </DocSectionText>
             <div className="card flex flex-wrap justify-content-center gap-2">
                 <Tag value="Primary" rounded></Tag>
