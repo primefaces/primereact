@@ -5,7 +5,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/slidemenu/importdoc';
 import { BasicDoc } from '../../components/doc/slidemenu/basicdoc';
 import { PopupDoc } from '../../components/doc/slidemenu/popupdoc';
-import { EffectDoc } from '../../components/doc/slidemenu/effectdoc';
 import { ApiDoc } from '../../components/doc/slidemenu/apidoc';
 
 const SlideMenuDemo = () => {
@@ -24,11 +23,6 @@ const SlideMenuDemo = () => {
             id: 'popup',
             label: 'Popup',
             component: PopupDoc
-        },
-        {
-            id: 'effect',
-            label: 'Effect',
-            component: EffectDoc
         },
         {
             id: 'api',
