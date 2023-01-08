@@ -10,10 +10,9 @@ export function ToggleClassDoc(props) {
 
     const code = {
         basic: `
-<StyleClass nodeRef={toggleBtnRef} selector="@next" toggleClassName="p-disabled">
-    <Button ref={toggleBtnRef} label="Toggle p-disabled" />
-</StyleClass>
-<InputText className="block mt-3" />
+<StyleClass nodeRef={toggleBtnRef} selector="@next" toggleClassName="p-disabled" />
+<Button ref={toggleBtnRef} label="Toggle p-disabled" />
+<InputText />
         `,
         javascript: `
 import React, { useRef } from 'react';
@@ -25,11 +24,10 @@ export default function ToggleClassDoc() {
     const toggleBtnRef = useRef(null);
 
     return (
-        <div className="card">
-            <StyleClass nodeRef={toggleBtnRef} selector="@next" toggleClassName="p-disabled">
-                <Button ref={toggleBtnRef} label="Toggle p-disabled" />
-            </StyleClass>
-            <InputText className="block mt-3" />
+        <div className="card flex flex-column align-items-center gap-3">
+            <StyleClass nodeRef={toggleBtnRef} selector="@next" toggleClassName="p-disabled" />
+            <Button ref={toggleBtnRef} label="Toggle p-disabled" />
+            <InputText />
         </div>
     );
 }
@@ -44,11 +42,10 @@ export default function ToggleClassDoc() {
     const toggleBtnRef = useRef<Button>(null);
 
     return (
-        <div className="card">
-            <StyleClass nodeRef={toggleBtnRef} selector="@next" toggleClassName="p-disabled">
-                <Button ref={toggleBtnRef} label="Toggle p-disabled" />
-            </StyleClass>
-            <InputText className="block mt-3" />
+        <div className="card flex flex-column align-items-center gap-3">
+            <StyleClass nodeRef={toggleBtnRef} selector="@next" toggleClassName="p-disabled" />
+            <Button ref={toggleBtnRef} label="Toggle p-disabled" />
+            <InputText />
         </div>
     );
 }
@@ -58,13 +55,13 @@ export default function ToggleClassDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Toggle Class Demo Content.</p>
+                <p><i>StyleClass</i> is bind to the element that triggers the click event with the <i>nodeRef</i> property that points to the <i>ref</i> of the element. The target element to change the styling
+                is defined with the <i>selector</i> property that accepts any valid CSS selector or keywords including <i>@next</i>, <i>prev</i>, <i>parent</i>, <i>grandparent</i></p>
             </DocSectionText>
-            <div className="card">
-                <StyleClass nodeRef={toggleBtnRef} selector="@next" toggleClassName="p-disabled">
-                    <Button ref={toggleBtnRef} label="Toggle p-disabled" />
-                </StyleClass>
-                <InputText className="block mt-3" />
+            <div className="card flex flex-column align-items-center gap-3">
+                <StyleClass nodeRef={toggleBtnRef} selector="@next" toggleClassName="p-disabled" />
+                <Button ref={toggleBtnRef} label="Toggle p-disabled" />
+                <InputText />
             </div>
             <DocSectionCode code={code} />
         </>
