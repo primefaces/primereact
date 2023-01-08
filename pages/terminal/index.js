@@ -5,7 +5,7 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/terminal/apidoc';
 import { ImportDoc } from '../../components/doc/terminal/importdoc';
-import { TerminalDoc } from '../../components/doc/terminal/terminaldoc';
+import { BasicDoc } from '../../components/doc/terminal/basicdoc';
 
 const TerminalDemo = () => {
     const docs = [
@@ -15,9 +15,9 @@ const TerminalDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'terminal',
-            label: 'Terminal',
-            component: TerminalDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
             id: 'api',
@@ -53,7 +53,7 @@ const TerminalDemo = () => {
                 </div>
                 <DocActions github="terminal/index.js" />
             </div>
-            <div className="content-section doc terminal-demo">
+            <div className="content-section doc terminal-demos">
                 <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>
