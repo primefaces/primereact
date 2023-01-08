@@ -21,7 +21,7 @@ const ContextMenuDemo = () => {
         },
         {
             id: 'document',
-            label: 'Document Menu',
+            label: 'Document',
             component: DocumentDoc
         },
         {
