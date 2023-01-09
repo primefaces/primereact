@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import React from 'react';
+import { StylingDoc } from '../../components/doc/accordion/stylingdoc';
 import { ApiDoc } from '../../components/doc/autocomplete/apidoc';
 import { BasicDoc } from '../../components/doc/autocomplete/basicdoc';
 import { DisabledDoc } from '../../components/doc/autocomplete/disableddoc';
@@ -11,6 +12,7 @@ import { ImportDoc } from '../../components/doc/autocomplete/importdoc';
 import { InvalidStateDoc } from '../../components/doc/autocomplete/invalidstatedoc';
 import { MultipleDoc } from '../../components/doc/autocomplete/multipledoc';
 import { ObjectsDoc } from '../../components/doc/autocomplete/objectsdoc';
+import { AccessibilityDoc } from '../../components/doc/autocomplete/accessibilitydoc';
 import { TemplateDoc } from '../../components/doc/autocomplete/templatedoc';
 import { FormikDoc } from '../../components/doc/autocomplete/validation/formikdoc';
 import { HookFormDoc } from '../../components/doc/autocomplete/validation/hookformdoc';
@@ -98,6 +100,16 @@ const AutoCompleteDemo = () => {
             ]
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -109,14 +121,6 @@ const AutoCompleteDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

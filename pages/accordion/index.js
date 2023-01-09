@@ -7,6 +7,8 @@ import { BasicDoc } from '../../components/doc/accordion/basicdoc';
 import { MultipleDoc } from '../../components/doc/accordion/multipledoc';
 import { ControlledDoc } from '../../components/doc/accordion/controlleddoc';
 import { TemplateDoc } from '../../components/doc/accordion/templatedoc';
+import { AccessibilityDoc } from '../../components/doc/accordion/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/accordion/stylingdoc';
 import { ApiDoc } from '../../components/doc/accordion/apidoc';
 
 const AccordionDemo = () => {
@@ -37,6 +39,16 @@ const AccordionDemo = () => {
             component: TemplateDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -52,14 +64,6 @@ const AccordionDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

@@ -9,6 +9,9 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ImageDoc } from '../../components/doc/avatar/imagedoc';
 import { AvatarGroupDoc } from '../../components/doc/avatar/avatargroupdoc';
+import { StylingAvatarGroupDoc } from '../../components/doc/avatar/stylingavatargroupdoc';
+import { AccessibilityDoc } from '../../components/doc/avatar/accessibilitydoc';
+import { StylingAvatarDoc } from '../../components/doc/avatar/stylingavatardoc';
 
 const AvatarDemo = () => {
     const docs = [
@@ -38,6 +41,21 @@ const AvatarDemo = () => {
             component: AvatarGroupDoc
         },
         {
+            id: 'stylingofavatar',
+            label: 'Styling of Avatar',
+            component: StylingAvatarDoc
+        },
+        {
+            id: 'stylingofavatargroup',
+            label: 'Styling of Avatar Group',
+            component: StylingAvatarGroupDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -53,18 +71,6 @@ const AvatarDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'stylingofavatar',
-                    label: 'Styling of Avatar'
-                },
-                {
-                    id: 'stylingofavatargroup',
-                    label: 'Styling of AvatarGroup'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }
