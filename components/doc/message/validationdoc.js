@@ -7,10 +7,10 @@ export function ValidationDoc(props) {
     const code = {
         basic: `
 <div className="formgroup-inline mb-2">
-    <label htmlFor="username1" className="p-sr-only">
+    <label htmlFor="username" className="p-sr-only">
         Username
     </label>
-    <InputText id="username1" placeholder="Username" className="p-invalid mr-2" />
+    <InputText id="username" placeholder="Username" className="p-invalid mr-2" />
     <Message severity="error" text="Username is required" />
 </div>
 <div className="formgroup-inline">
@@ -31,10 +31,10 @@ export default function ValidationDoc() {
     return (
         <div>
             <div className="formgroup-inline mb-2">
-                <label htmlFor="username1" className="p-sr-only">
+                <label htmlFor="username" className="p-sr-only">
                     Username
                 </label>
-                <InputText id="username1" placeholder="Username" className="p-invalid mr-2" />
+                <InputText id="username" placeholder="Username" className="p-invalid mr-2" />
                 <Message severity="error" text="Username is required" />
             </div>
             <div className="formgroup-inline">
@@ -58,10 +58,10 @@ export default function ValidationDoc() {
     return (
         <div>
             <div className="formgroup-inline mb-2">
-                <label htmlFor="username1" className="p-sr-only">
+                <label htmlFor="username" className="p-sr-only">
                     Username
                 </label>
-                <InputText id="username1" placeholder="Username" className="p-invalid mr-2" />
+                <InputText id="username" placeholder="Username" className="p-invalid mr-2" />
                 <Message severity="error" text="Username is required" />
             </div>
             <div className="formgroup-inline">
@@ -80,14 +80,15 @@ export default function ValidationDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Validation</p>
+                {/* TO DO: Add demo content. */}
+                <p></p>
             </DocSectionText>
             <div className="card">
                 <div className="formgroup-inline mb-2">
-                    <label htmlFor="username1" className="p-sr-only">
+                    <label htmlFor="username" className="p-sr-only">
                         Username
                     </label>
-                    <InputText id="username1" placeholder="Username" className="p-invalid mr-2" />
+                    <InputText id="username" placeholder="Username" className="p-invalid mr-2" />
                     <Message severity="error" text="Username is required" />
                 </div>
                 <div className="formgroup-inline">

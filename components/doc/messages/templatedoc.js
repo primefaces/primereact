@@ -4,12 +4,12 @@ import { Messages } from '../../lib/messages/Messages';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function StaticDoc(props) {
-    const msgs1 = useRef(null);
+export function TemplateDoc(props) {
+    const msgs = useRef(null);
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
-        msgs1.current.show({
+        msgs.current.show({
             severity: 'info',
             sticky: true,
             content: (
@@ -23,17 +23,29 @@ export function StaticDoc(props) {
 
     const code = {
         basic: `
-<Messages ref={msgs1} />
+useEffect(() => {
+    msgs.current.show({
+        severity: 'info',
+        sticky: true,
+        content: (
+            <React.Fragment>
+                <img alt="logo" src="images/logo.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} width="32" />
+                <div className="ml-2">Always bet on Prime.</div>
+            </React.Fragment>
+        )
+    });
+}, []); // eslint-disable-line react-hooks/exhaustive-deps
+<Messages ref={msgs} />
         `,
         javascript: `
 import React, { useEffect, useRef } from 'react';
 import { Messages } from 'primereact/messages';
 
-export default function StaticDoc() {
-    const msgs1 = useRef(null);
+export default function TemplateDoc() {
+    const msgs = useRef(null);
 
     useEffect(() => {
-        msgs1.current.show({
+        msgs.current.show({
             severity: 'info', sticky: true, content: (
                 <React.Fragment>
                     <img alt="logo" src="images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" />
@@ -44,7 +56,9 @@ export default function StaticDoc() {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <Messages ref={msgs1} />
+        <div className="card">
+            <Messages ref={msgs} />
+        </div>
     )
 }
         `,
@@ -52,11 +66,11 @@ export default function StaticDoc() {
 import React, { useEffect, useRef } from 'react';
 import { Messages } from 'primereact/messages';
 
-export default function StaticDoc() {
-    const msgs1 = useRef<Messages>(null);
+export default function TemplateDoc() {
+    const msgs = useRef<Messages>(null);
 
     useEffect(() => {
-        msgs1.current?.show({
+        msgs.current?.show({
             severity: 'info', sticky: true, content: (
                 <React.Fragment>
                     <img alt="logo" src="images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" />
@@ -67,7 +81,9 @@ export default function StaticDoc() {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <Messages ref={msgs1} />
+        <div className="card">
+            <Messages ref={msgs} />
+        </div>
     )
 }
         `
@@ -76,10 +92,11 @@ export default function StaticDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Static</p>
+                {/* TO DO: Add demo content. */}
+                <p></p>
             </DocSectionText>
             <div className="card">
-                <Messages ref={msgs1} />
+                <Messages ref={msgs} />
             </div>
             <DocSectionCode code={code} />
         </>

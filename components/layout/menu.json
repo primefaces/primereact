@@ -597,6 +597,11 @@
             "meta": ["message"],
             "children": [
                 {
+                    "name": "Message",
+                    "to": "/message",
+                    "meta": ["message"]
+                },
+                {
                     "name": "Messages",
                     "to": "/messages",
                     "meta": ["messages"]
