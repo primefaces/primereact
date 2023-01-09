@@ -67,6 +67,13 @@ export const Dropdown = React.memo(
                 return;
             }
 
+            props.onClick && props.onClick(event);
+
+            // do not continue if the user defined click wants to prevent it
+            if (event.defaultPrevented) {
+                return;
+            }
+
             if (DomHandler.hasClass(event.target, 'p-dropdown-clear-icon') || event.target.tagName === 'INPUT') {
                 return;
             } else if (!overlayRef.current || !(overlayRef.current && overlayRef.current.contains(event.target))) {
