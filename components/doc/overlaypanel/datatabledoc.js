@@ -1,3 +1,4 @@
+import getConfig from 'next/config';
 import { useEffect, useRef, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
 import { Button } from '../../lib/button/Button';
@@ -8,9 +9,23 @@ import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function OverlayPanelDoc(props) {
+export function DataTableDoc(props) {
     const [products, setProducts] = useState(null);
     const [selectedProduct, setSelectedProduct] = useState(null);
+    const contextPath = getConfig().publicRuntimeConfig.contextPath;
+
+    const product = selectedProduct && (
+        <div className="p-2">
+            <div className="relative">
+                <img src={contextPath + 'images/product/' + selectedProduct.image} alt={selectedProduct.name}></img>
+            </div>
+            <div className="flex align-items-center justify-content-between mt-3 mb-2">
+                <span className="text-900 font-medium text-xl">{selectedProduct.name}</span>
+                <span className="text-900 text-xl ml-3">{'$' + selectedProduct.price}</span>
+            </div>
+            <span className="text-600">{selectedProduct.category}</span>
+        </div>
+    );
 
     const op = useRef(null);
     const toast = useRef(null);
@@ -25,7 +40,10 @@ export function OverlayPanelDoc(props) {
 
     useEffect(() => {
         isMounted.current = true;
-        ProductService.getProductsSmall().then((data) => setProducts(data));
+        ProductService.getProductsSmall().then((data) => {
+            setProducts(data);
+            setSelectedProduct(data[0]);
+        });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const formatCurrency = (value) => {
@@ -48,6 +66,7 @@ export function OverlayPanelDoc(props) {
         basic: `
 <Toast ref={toast} />
 <Button style={{ minWidth: '15rem' }} type="button" icon="pi pi-search" label={selectedProduct ? selectedProduct.name : 'Select a Product'} onClick={(e) => op.current.toggle(e)} aria-haspopup aria-controls="overlay_panel" />
+{selectedProduct && product}
 <OverlayPanel ref={op} showCloseIcon id="overlay_panel" style={{ width: '450px' }} >
     <DataTable value={products} selectionMode="single" paginator rows={5} selection={selectedProduct} onSelectionChange={onProductSelect}>
         <Column field="name" header="Name" sortable />
@@ -65,9 +84,22 @@ import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
 import { ProductService } from './service/ProductService';
 
-export default function OverlayPanelDoc() {
+export default function DataTableDoc() {
     const [products, setProducts] = useState(null);
     const [selectedProduct, setSelectedProduct] = useState(null);
+
+    const product = selectedProduct && (
+        <div className="p-2">
+            <div className="relative">
+                <img src={'images/product/' + selectedProduct.image} alt={selectedProduct.name} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'}></img>
+            </div>
+            <div className="flex align-items-center justify-content-between mt-3 mb-2">
+                <span className="text-900 font-medium text-xl">{selectedProduct.name}</span>
+                <span className="text-900 text-xl ml-3">{'$' + selectedProduct.price}</span>
+            </div>
+            <span className="text-600">{selectedProduct.category}</span>
+        </div>
+    );
     
     const op = useRef(null);
     const toast = useRef(null);
@@ -105,7 +137,7 @@ export default function OverlayPanelDoc() {
         <div>
             <Toast ref={toast} />
             <Button style={{ minWidth: '15rem' }} type="button" icon="pi pi-search" label={selectedProduct ? selectedProduct.name : 'Select a Product'} onClick={(e) => op.current.toggle(e)} aria-haspopup aria-controls="overlay_panel" />
-
+            {selectedProduct && product}
             <OverlayPanel ref={op} showCloseIcon id="overlay_panel" style={{ width: '450px' }}>
                 <DataTable value={products} selectionMode="single" paginator rows={5} selection={selectedProduct} onSelectionChange={onProductSelect}>
                     <Column field="name" header="Name" sortable />
@@ -127,13 +159,26 @@ import { Column } from 'primereact/column';
 import { DataTable, DataTableSelectionChangeParams } from 'primereact/datatable';
 import { ProductService } from './service/ProductService';
 
-export default function OverlayPanelDoc() {
+export default function DataTableDoc() {
     const [products, setProducts] = useState<Product[]>(null);
     const [selectedProduct, setSelectedProduct] = useState<Product>(null);
     
     const op = useRef<OverlayPanel>(null);
     const toast = useRef<Toast>(null);
     const isMounted = useRef(false);
+
+    const product = selectedProduct && (
+        <div className="p-2">
+            <div className="relative">
+                <img src={'images/product/' + selectedProduct.image} alt={selectedProduct.name} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'}></img>
+            </div>
+            <div className="flex align-items-center justify-content-between mt-3 mb-2">
+                <span className="text-900 font-medium text-xl">{selectedProduct.name}</span>
+                <span className="text-900 text-xl ml-3">{'$' + selectedProduct.price}</span>
+            </div>
+            <span className="text-600">{selectedProduct.category}</span>
+        </div>
+    );
 
     useEffect(() => {
         if (isMounted.current && selectedProduct) {
@@ -167,7 +212,7 @@ export default function OverlayPanelDoc() {
         <div>
             <Toast ref={toast} />
             <Button style={{ minWidth: '15rem' }} type="button" icon="pi pi-search" label={selectedProduct ? selectedProduct.name : 'Select a Product'} onClick={(e) => op.current.toggle(e)} aria-haspopup aria-controls="overlay_panel" />
-
+            {selectedProduct && product}
             <OverlayPanel ref={op} showCloseIcon id="overlay_panel" style={{ width: '450px' }}>
                 <DataTable value={products} selectionMode="single" paginator rows={5} selection={selectedProduct} onSelectionChange={onProductSelect}>
                     <Column field="name" header="Name" sortable />
@@ -201,22 +246,22 @@ export default function OverlayPanelDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>OverlayPanel is accessed via its reference where visibility is controlled using toggle, show and hide methods.</p>
+                {/* TO DO: Add demo content. */}
+                <p></p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <div className="card">
-                    <Toast ref={toast} />
-                    <Button style={{ minWidth: '15rem' }} type="button" icon="pi pi-search" label={selectedProduct ? selectedProduct.name : 'Select a Product'} onClick={(e) => op.current.toggle(e)} aria-haspopup aria-controls="overlay_panel" />
-
-                    <OverlayPanel ref={op} showCloseIcon id="overlay_panel" style={{ width: '450px' }}>
-                        <DataTable value={products} selectionMode="single" paginator rows={5} selection={selectedProduct} onSelectionChange={onProductSelect}>
-                            <Column field="name" header="Name" sortable />
-                            <Column header="Image" body={imageBody} style={{ width: 'px' }} />
-                            <Column field="price" header="Price" sortable body={priceBody} />
-                        </DataTable>
-                    </OverlayPanel>
-                </div>
+            <div className="card flex flex-column align-items-center gap-2">
+                <Toast ref={toast} />
+                <Button style={{ minWidth: '10rem' }} type="button" icon="pi pi-search" label="Search" onClick={(e) => op.current.toggle(e)} aria-haspopup aria-controls="overlay_panel" />
+                {selectedProduct && product}
+                <OverlayPanel ref={op} showCloseIcon id="overlay_panel" style={{ width: '450px' }}>
+                    <DataTable value={products} selectionMode="single" paginator rows={5} selection={selectedProduct} onSelectionChange={onProductSelect}>
+                        <Column field="name" header="Name" sortable />
+                        <Column header="Image" body={imageBody} style={{ width: 'px' }} />
+                        <Column field="price" header="Price" sortable body={priceBody} />
+                    </DataTable>
+                </OverlayPanel>
             </div>
+
             <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
