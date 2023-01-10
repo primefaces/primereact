@@ -1,8 +1,8 @@
-import React from 'react';
-import Link from 'next/link';
-import { CodeHighlight } from '../../components/doc/common/codehighlight';
-import Head from 'next/head';
 import getConfig from 'next/config';
+import Head from 'next/head';
+import Link from 'next/link';
+import React from 'react';
+import { CodeHighlight } from '../../components/doc/common/codehighlight';
 
 const SetupPage = () => {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
@@ -127,8 +127,8 @@ import { Button } from 'primereact/button';
             );
         }
 
-        const rootElement = document.getElementById("root");
-        ReactDOM.render(<SliderDemo />, rootElement);
+        const rootEl = ReactDOM.createRoot(document.getElementById("root"));
+        rootEl.render(<SliderDemo />);
 
     </script>
 </body>
