@@ -214,7 +214,6 @@ export const InputNumber = React.memo(
         const onUpButtonTouchStart = (event) => {
             if (!props.disabled && !props.readOnly) {
                 repeat(event, null, 1);
-                event.preventDefault();
             }
         };
 
@@ -259,7 +258,6 @@ export const InputNumber = React.memo(
         const onDownButtonTouchStart = (event) => {
             if (!props.disabled && !props.readOnly) {
                 repeat(event, null, -1);
-                event.preventDefault();
             }
         };
 
