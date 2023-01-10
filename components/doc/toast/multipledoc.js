@@ -14,9 +14,9 @@ export function MultipleDoc(props) {
     const showMultiple = () => {
         toast.current.show([
             { severity: 'success', summary: 'Message 1', detail: 'Message 1 Content', life: 3000 },
-            { severity: 'info', summary: 'Message 2', detail: 'Message 2 Content', life: 3000 },
-            { severity: 'warn', summary: 'Message 3', detail: 'Message 3 Content', life: 3000 },
-            { severity: 'error', summary: 'Message 4', detail: 'Message 4 Content', life: 3000 }
+            { severity: 'info', summary: 'Message 2', detail: 'Message 2 Content', life: 3050 },
+            { severity: 'warn', summary: 'Message 3', detail: 'Message 3 Content', life: 3100 },
+            { severity: 'error', summary: 'Message 4', detail: 'Message 4 Content', life: 3150 }
         ]);
     };
 
@@ -40,10 +40,10 @@ export default function MultipleDoc() {
 
     const showMultiple = () => {
         toast.current.show([
-            { severity: 'info', summary: 'Message 1', detail: 'Message 1 Content', life: 3000 },
-            { severity: 'info', summary: 'Message 2', detail: 'Message 2 Content', life: 3000 },
-            { severity: 'warn', summary: 'Message 3', detail: 'Message 3 Content', life: 3000 },
-            { severity: 'error', summary: 'Message 4', detail: 'Message 4 Content', life: 3000 }
+            { severity: 'success', summary: 'Message 1', detail: 'Message 1 Content', life: 3000 },
+            { severity: 'info', summary: 'Message 2', detail: 'Message 2 Content', life: 3050 },
+            { severity: 'warn', summary: 'Message 3', detail: 'Message 3 Content', life: 3100 },
+            { severity: 'error', summary: 'Message 4', detail: 'Message 4 Content', life: 3150 }
         ]);
     };
 
@@ -70,10 +70,10 @@ export default function MultipleDoc() {
 
     const showMultiple = () => {
         toast.current.show([
-            { severity: 'info', summary: 'Message 1', detail: 'Message 1 Content', life: 3000 },
-            { severity: 'info', summary: 'Message 2', detail: 'Message 2 Content', life: 3000 },
-            { severity: 'warn', summary: 'Message 3', detail: 'Message 3 Content', life: 3000 },
-            { severity: 'error', summary: 'Message 4', detail: 'Message 4 Content', life: 3000 }
+            { severity: 'success', summary: 'Message 1', detail: 'Message 1 Content', life: 3000 },
+            { severity: 'info', summary: 'Message 2', detail: 'Message 2 Content', life: 3050 },
+            { severity: 'warn', summary: 'Message 3', detail: 'Message 3 Content', life: 3100 },
+            { severity: 'error', summary: 'Message 4', detail: 'Message 4 Content', life: 3150 }
         ]);
     };
 
