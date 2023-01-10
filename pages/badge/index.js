@@ -3,6 +3,8 @@ import React from 'react';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/badge/apidoc';
+import { AccessibilityDoc } from '../../components/doc/badge/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/badge/stylingdoc';
 import { ImportDoc } from '../../components/doc/badge/importdoc';
 import { BasicDoc } from '../../components/doc/badge/basicdoc';
 import { SeverityDoc } from '../../components/doc/badge/severitydoc';
@@ -44,6 +46,16 @@ const BadgeDemo = () => {
             component: ButtonDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -55,14 +67,6 @@ const BadgeDemo = () => {
                 {
                     id: 'properties',
                     label: 'Properties'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

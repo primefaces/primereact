@@ -4,6 +4,8 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/organizationchart/importdoc';
 import { ApiDoc } from '../../components/doc/organizationchart/apidoc';
+import { AccessibilityDoc } from '../../components/doc/organizationchart/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/organizationchart/stylingdoc';
 import { AdvancedDoc } from '../../components/doc/organizationchart/advanceddoc';
 import { BasicDoc } from '../../components/doc/organizationchart/basicdoc';
 
@@ -25,6 +27,16 @@ const OrganizationChartDemo = () => {
             component: AdvancedDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -36,14 +48,6 @@ const OrganizationChartDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

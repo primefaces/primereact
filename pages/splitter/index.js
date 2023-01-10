@@ -7,6 +7,8 @@ import { HorizontalDoc } from '../../components/doc/splitter/horizontaldoc';
 import { VerticalDoc } from '../../components/doc/splitter/verticaldoc';
 import { NestedDoc } from '../../components/doc/splitter/nesteddoc';
 import { ApiDoc } from '../../components/doc/splitter/apidoc';
+import { AccessibilityDoc } from '../../components/doc/splitter/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/splitter/stylingdoc';
 
 const SplitterDemo = () => {
     const docs = [
@@ -31,6 +33,16 @@ const SplitterDemo = () => {
             component: NestedDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -42,14 +54,6 @@ const SplitterDemo = () => {
                 {
                     id: 'eventsofsplitter',
                     label: 'Events of Splitter'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

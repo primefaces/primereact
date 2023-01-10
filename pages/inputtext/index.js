@@ -4,6 +4,8 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ApiDoc } from '../../components/doc/inputtext/apidoc';
+import { AccessibilityDoc } from '../../components/doc/inputtext/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/inputtext/stylingdoc';
 import { BasicDoc } from '../../components/doc/inputtext/basicdoc';
 import { DisabledDoc } from '../../components/doc/inputtext/disableddoc';
 import { FloatLabelDoc } from '../../components/doc/inputtext/floatlabeldoc';
@@ -81,6 +83,16 @@ const InputTextDemo = () => {
             ]
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -88,14 +100,6 @@ const InputTextDemo = () => {
                 {
                     id: 'properties',
                     label: 'Properties'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

@@ -6,6 +6,8 @@ import { ImportDoc } from '../../components/doc/card/importdoc';
 import { SimpleDoc } from '../../components/doc/card/simpledoc';
 import { AdvancedDoc } from '../../components/doc/card/advanceddoc';
 import { ApiDoc } from '../../components/doc/card/apidoc';
+import { AccessibilityDoc } from '../../components/doc/card/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/card/stylingdoc';
 
 const CardDemo = () => {
     const docs = [
@@ -25,6 +27,16 @@ const CardDemo = () => {
             component: AdvancedDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -32,14 +44,6 @@ const CardDemo = () => {
                 {
                     id: 'properties',
                     label: 'Properties'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

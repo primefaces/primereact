@@ -5,6 +5,8 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/carousel/importdoc';
 import { BasicDoc } from '../../components/doc/carousel/basicdoc';
 import { ApiDoc } from '../../components/doc/carousel/apidoc';
+import { AccessibilityDoc } from '../../components/doc/carousel/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/carousel/stylingdoc';
 import { CircularDoc } from '../../components/doc/carousel/circulardoc';
 import { VerticalDoc } from '../../components/doc/carousel/verticaldoc';
 import { NumScrollDoc } from '../../components/doc/carousel/numscrolldoc';
@@ -43,6 +45,16 @@ const CarouselDemo = () => {
             component: ResponsiveDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -54,14 +66,6 @@ const CarouselDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

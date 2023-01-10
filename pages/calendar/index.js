@@ -1,5 +1,7 @@
 import Head from 'next/head';
 import { ApiDoc } from '../../components/doc/calendar/apidoc';
+import { AccessibilityDoc } from '../../components/doc/calendar/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/calendar/stylingdoc';
 import { BasicDoc } from '../../components/doc/calendar/basicdoc';
 import { ButtonBarDoc } from '../../components/doc/calendar/buttonbardoc';
 import { DateFormatDoc } from '../../components/doc/calendar/dateformatdoc';
@@ -140,6 +142,16 @@ const CalendarDemo = () => {
             ]
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -151,14 +163,6 @@ const CalendarDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

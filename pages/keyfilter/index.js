@@ -10,6 +10,8 @@ import { AlphabeticDoc } from '../../components/doc/keyfilter/alphabeticdoc';
 import { AlphanumbericDoc } from '../../components/doc/keyfilter/alphanumberdoc';
 import { RegexDoc } from '../../components/doc/keyfilter/regexdoc';
 import { ApiDoc } from '../../components/doc/keyfilter/apidoc';
+import { AccessibilityDoc } from '../../components/doc/keyfilter/accessibilitydoc';
+
 import { ImportDoc } from '../../components/doc/keyfilter/importdoc';
 
 const KeyFilterDemo = () => {
@@ -55,6 +57,11 @@ const KeyFilterDemo = () => {
             component: RegexDoc
         },
         {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -66,10 +73,6 @@ const KeyFilterDemo = () => {
                 {
                     id: 'custom',
                     label: 'Custom Filter'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

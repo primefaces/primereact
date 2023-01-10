@@ -6,6 +6,8 @@ import { ImportDoc } from '../../components/doc/deferredcontent/importdoc';
 import { BasicDoc } from '../../components/doc/deferredcontent/basicdoc';
 import { DataTableDoc } from '../../components/doc/deferredcontent/datatabledoc';
 import { ApiDoc } from '../../components/doc/deferredcontent/apidoc';
+import { AccessibilityDoc } from '../../components/doc/deferredcontent/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/deferredcontent/stylingdoc';
 
 const DeferredContentDemo = () => {
     const docs = [
@@ -25,6 +27,16 @@ const DeferredContentDemo = () => {
             component: DataTableDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -36,14 +48,6 @@ const DeferredContentDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

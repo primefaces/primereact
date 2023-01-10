@@ -54,58 +54,6 @@ export function ApiDoc(props) {
                     </table>
                 </div>
             </DocSubSection>
-
-            <DocSubSection id="styling" label="Styling">
-                <p>
-                    Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
-                </p>
-                <div className="doc-tablewrapper">
-                    <table className="doc-table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Element</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>p-toolbar</td>
-                                <td>Main container element.</td>
-                            </tr>
-                            <tr>
-                                <td>p-toolbar-group-left</td>
-                                <td>Left content container.</td>
-                            </tr>
-                            <tr>
-                                <td>p-toolbar-group-right</td>
-                                <td>Right content container.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </DocSubSection>
-
-            <DocSubSection id="accessibility" label="Accessibility">
-                <DevelopmentSection>
-                    <h4>Screen Reader</h4>
-                    <p>
-                        Toolbar uses <i>toolbar</i> role to the root element, <i>aria-orientation</i> is not included as it defaults to "horizontal". Any valid attribute is passed to the root element so you may add additional properties like{' '}
-                        <i>aria-labelledby</i>
-                        to define the element if required.
-                    </p>
-
-                    <CodeHighlight>
-                        {`
-<Card role="region">
-    Content
-</Card>
-`}
-                    </CodeHighlight>
-
-                    <h3>Keyboard Support</h3>
-                    <p>Component does not include any interactive elements. Arbitrary content can be placed with templating and elements like buttons inside should follow the page tab sequence.</p>
-                </DevelopmentSection>
-            </DocSubSection>
         </>
     );
 }

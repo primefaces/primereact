@@ -8,6 +8,8 @@ import { PositionDoc } from '../../components/doc/sidebar/positiondoc';
 import { TemplateDoc } from '../../components/doc/sidebar/templatedoc';
 import { FullScreenDoc } from '../../components/doc/sidebar/fullscreendoc';
 import { ApiDoc } from '../../components/doc/sidebar/apidoc';
+import { AccessibilityDoc } from '../../components/doc/sidebar/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/sidebar/stylingdoc';
 import { SizeDoc } from '../../components/doc/sidebar/sizedoc';
 
 const SidebarDemo = () => {
@@ -43,6 +45,16 @@ const SidebarDemo = () => {
             component: TemplateDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -54,14 +66,6 @@ const SidebarDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

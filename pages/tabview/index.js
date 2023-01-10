@@ -11,6 +11,8 @@ import { TemplateDoc } from '../../components/doc/tabview/templatedoc';
 import { ClosableDoc } from '../../components/doc/tabview/closabledoc';
 import { ScrollableDoc } from '../../components/doc/tabview/scrollabledoc';
 import { ApiDoc } from '../../components/doc/tabview/apidoc';
+import { AccessibilityDoc } from '../../components/doc/tabview/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/tabview/stylingdoc';
 
 const TabViewDemo = () => {
     const docs = [
@@ -55,6 +57,16 @@ const TabViewDemo = () => {
             component: ScrollableDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -70,14 +82,6 @@ const TabViewDemo = () => {
                 {
                     id: 'methods',
                     label: 'Methods'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

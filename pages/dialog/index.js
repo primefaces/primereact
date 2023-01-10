@@ -10,6 +10,8 @@ import { ResponsiveDoc } from '../../components/doc/dialog/responsivedoc';
 import { MaximizableDoc } from '../../components/doc/dialog/maximizabledoc';
 import { PositionDoc } from '../../components/doc/dialog/positiondoc';
 import { ApiDoc } from '../../components/doc/dialog/apidoc';
+import { AccessibilityDoc } from '../../components/doc/dialog/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/dialog/stylingdoc';
 import { LengthyContentDoc } from '../../components/doc/dialog/lengthycontentdoc';
 
 const DialogDemo = () => {
@@ -55,6 +57,16 @@ const DialogDemo = () => {
             component: MaximizableDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -66,14 +78,6 @@ const DialogDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

@@ -16,6 +16,8 @@ import { PolarAreaDoc } from '../../components/doc/chart/polarareadoc';
 import { RadarDoc } from '../../components/doc/chart/radardoc';
 import { ComboDoc } from '../../components/doc/chart/combodoc';
 import { ApiDoc } from '../../components/doc/chart/apidoc';
+import { AccessibilityDoc } from '../../components/doc/chart/accessibilitydoc';
+
 import { ModelDoc } from '../../components/doc/chart/modeldoc';
 
 const ChartDemo = () => {
@@ -105,6 +107,11 @@ const ChartDemo = () => {
             component: ComboDoc
         },
         {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -116,10 +123,6 @@ const ChartDemo = () => {
                 {
                     id: 'methods',
                     label: 'Methods'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

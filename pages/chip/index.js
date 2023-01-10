@@ -3,6 +3,8 @@ import React from 'react';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/chip/apidoc';
+import { AccessibilityDoc } from '../../components/doc/chip/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/chip/stylingdoc';
 import { ImportDoc } from '../../components/doc/chip/importdoc';
 import { BasicDoc } from '../../components/doc/chip/basicdoc';
 import { IconDoc } from '../../components/doc/chip/icondoc';
@@ -44,6 +46,16 @@ const ChipDemo = () => {
             component: TemplateDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -55,14 +67,6 @@ const ChipDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

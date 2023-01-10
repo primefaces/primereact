@@ -4,6 +4,8 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ImportDoc } from '../../components/doc/toast/importdoc';
 import { ApiDoc } from '../../components/doc/toast/apidoc';
+import { AccessibilityDoc } from '../../components/doc/toast/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/toast/stylingdoc';
 import { SeveritiesDoc } from '../../components/doc/toast/severitiesdoc';
 import { PositionDoc } from '../../components/doc/toast/positiondoc';
 import { TemplateDoc } from '../../components/doc/toast/templatedoc';
@@ -49,6 +51,16 @@ const ToastDemo = () => {
             component: TemplateDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -92,14 +104,6 @@ const ToastDemo = () => {
                 {
                     id: 'event',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

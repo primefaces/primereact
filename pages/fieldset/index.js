@@ -4,6 +4,8 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/fieldset/importdoc';
 import { ApiDoc } from '../../components/doc/fieldset/apidoc';
+import { AccessibilityDoc } from '../../components/doc/fieldset/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/fieldset/stylingdoc';
 import { BasicDoc } from '../../components/doc/fieldset/basicdoc';
 import { ToggleableDoc } from '../../components/doc/fieldset/toggleabledoc';
 import { TemplateDoc } from '../../components/doc/fieldset/templatedoc';
@@ -31,6 +33,16 @@ const FieldsetDemo = () => {
             component: TemplateDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -42,14 +54,6 @@ const FieldsetDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

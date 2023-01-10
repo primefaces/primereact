@@ -14,6 +14,8 @@ import { TargetDoc } from '../../components/doc/tooltip/targetdoc';
 import { ColoredDoc } from '../../components/doc/tooltip/coloreddoc';
 import { DelayDoc } from '../../components/doc/tooltip/delaydoc';
 import { ApiDoc } from '../../components/doc/tooltip/apidoc';
+import { AccessibilityDoc } from '../../components/doc/tooltip/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/tooltip/stylingdoc';
 
 const TooltipDemo = () => {
     const docs = [
@@ -73,6 +75,16 @@ const TooltipDemo = () => {
             component: ColoredDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -100,14 +112,6 @@ const TooltipDemo = () => {
                 {
                     id: 'methods',
                     label: 'Methods'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

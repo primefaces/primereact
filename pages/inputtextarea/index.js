@@ -3,6 +3,8 @@ import React from 'react';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/inputtextarea/apidoc';
+import { AccessibilityDoc } from '../../components/doc/inputtextarea/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/inputtextarea/stylingdoc';
 import { AutoResizeDoc } from '../../components/doc/inputtextarea/autoresizedoc';
 import { BasicDoc } from '../../components/doc/inputtextarea/basicdoc';
 import { DisabledDoc } from '../../components/doc/inputtextarea/disableddoc';
@@ -68,6 +70,16 @@ const InputTextareaDemo = () => {
             ]
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -75,14 +87,6 @@ const InputTextareaDemo = () => {
                 {
                     id: 'properties',
                     label: 'Properties'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

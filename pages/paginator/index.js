@@ -3,6 +3,8 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ApiDoc } from '../../components/doc/paginator/apidoc';
+import { AccessibilityDoc } from '../../components/doc/paginator/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/paginator/stylingdoc';
 import { ImportDoc } from '../../components/doc/paginator/importdoc';
 import { BasicDoc } from '../../components/doc/paginator/basicdoc';
 import { CustomDoc } from '../../components/doc/paginator/customdoc';
@@ -31,6 +33,16 @@ const PaginatorDemo = () => {
             component: ContentDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -42,14 +54,6 @@ const PaginatorDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

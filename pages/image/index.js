@@ -9,6 +9,8 @@ import { PreviewDoc } from '../../components/doc/image/previewdoc';
 import { ThumbnailDoc } from '../../components/doc/image/thumbnaildoc';
 import { TemplatingDoc } from '../../components/doc/image/templatingdoc';
 import { ApiDoc } from '../../components/doc/image/apidoc';
+import { AccessibilityDoc } from '../../components/doc/image/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/image/stylingdoc';
 
 const ImageDemo = () => {
     // const contextPath = getConfig().publicRuntimeConfig.contextPath;
@@ -39,6 +41,16 @@ const ImageDemo = () => {
             component: TemplatingDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -50,14 +62,6 @@ const ImageDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

@@ -3,6 +3,8 @@ import React from 'react';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/progressbar/apidoc';
+import { AccessibilityDoc } from '../../components/doc/progressbar/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/progressbar/stylingdoc';
 import { ImportDoc } from '../../components/doc/progressbar/importdoc';
 import { DynamicDoc } from '../../components/doc/progressbar/dynamicdoc';
 import { BasicDoc } from '../../components/doc/progressbar/basicdoc';
@@ -38,6 +40,16 @@ const ProgressBarDemo = () => {
             component: IndeterminateDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -45,14 +57,6 @@ const ProgressBarDemo = () => {
                 {
                     id: 'properties',
                     label: 'Properties'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

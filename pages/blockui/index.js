@@ -3,6 +3,8 @@ import React from 'react';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/blockui/apidoc';
+import { AccessibilityDoc } from '../../components/doc/blockui/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/blockui/stylingdoc';
 import { ImportDoc } from '../../components/doc/blockui/importdoc';
 import { BasicDoc } from '../../components/doc/blockui/basicdoc';
 import { TemplateDoc } from '../../components/doc/blockui/templatedoc';
@@ -32,6 +34,16 @@ const BlockUIDemo = () => {
             component: TemplateDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -43,14 +55,6 @@ const BlockUIDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

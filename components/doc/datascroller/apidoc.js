@@ -126,55 +126,6 @@ export function ApiDoc(props) {
                     </table>
                 </div>
             </DocSubSection>
-
-            <DocSubSection id="styling" label="Styling">
-                <p>Following is the list of structural style classes</p>
-                <div className="doc-tablewrapper">
-                    <table className="doc-table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Element</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>p-datascroller</td>
-                                <td>Container element.</td>
-                            </tr>
-                            <tr>
-                                <td>p-datascroller-header</td>
-                                <td>Header section.</td>
-                            </tr>
-                            <tr>
-                                <td>p-datascroller-footer</td>
-                                <td>Footer section.</td>
-                            </tr>
-                            <tr>
-                                <td>p-datascroller-content</td>
-                                <td>Wrapper of item container.</td>
-                            </tr>
-                            <tr>
-                                <td>p-datascroller-list</td>
-                                <td>Item container element.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </DocSubSection>
-
-            <DocSubSection id="accessibility" label="Accessibility">
-                <DevelopmentSection>
-                    <h4>Screen Reader</h4>
-                    <p>
-                        DataScroller uses a semantic list element to list the items. No specific role is enforced, still you may use any aria role and attributes as any valid attribute is passed to the container element. List element can be also
-                        customized for accessibility using <i>listProps</i> property.
-                    </p>
-
-                    <h5>Keyboard Support</h5>
-                    <p>Component does not include any built-in interactive elements.</p>
-                </DevelopmentSection>
-            </DocSubSection>
         </>
     );
 }

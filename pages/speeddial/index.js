@@ -9,6 +9,8 @@ import { TooltipDoc } from '../../components/doc/speeddial/tooltipdoc';
 import { TransitionDoc } from '../../components/doc/speeddial/customdoc';
 import { MaskDoc } from '../../components/doc/speeddial/maskdoc';
 import { ApiDoc } from '../../components/doc/speeddial/apidoc';
+import { AccessibilityDoc } from '../../components/doc/speeddial/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/speeddial/stylingdoc';
 import { SemiCircleDoc } from '../../components/doc/speeddial/semicircledoc';
 import { QuarterCircleDoc } from '../../components/doc/speeddial/quartercircledoc';
 import { CustomDoc } from '../../components/doc/speeddial/customdoc';
@@ -56,6 +58,16 @@ const SpeedDialDemo = () => {
             component: CustomDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -71,14 +83,6 @@ const SpeedDialDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

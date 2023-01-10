@@ -4,6 +4,8 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ApiDoc } from '../../components/doc/picklist/apidoc';
+import { AccessibilityDoc } from '../../components/doc/picklist/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/picklist/stylingdoc';
 import { ImportDoc } from '../../components/doc/picklist/importdoc';
 import { PickListDoc } from '../../components/doc/picklist/picklistdoc';
 
@@ -20,6 +22,16 @@ const PickListDemo = () => {
             component: PickListDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -31,14 +43,6 @@ const PickListDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

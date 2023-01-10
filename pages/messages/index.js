@@ -7,6 +7,8 @@ import { SeveritiesDoc } from '../../components/doc/messages/severitiesdoc';
 import { DynamicDoc } from '../../components/doc/messages/dynamicdoc';
 import { TemplateDoc } from '../../components/doc/messages/templatedoc';
 import { ApiDoc } from '../../components/doc/messages/apidoc';
+import { AccessibilityDoc } from '../../components/doc/messages/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/messages/stylingdoc';
 import { BasicDoc } from '../../components/doc/messages/basicdoc';
 import { ClosableDoc } from '../../components/doc/messages/closeabledoc';
 import { StickyDoc } from '../../components/doc/messages/stickydoc';
@@ -49,6 +51,16 @@ const MessagesDemo = () => {
             component: TemplateDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -88,14 +100,6 @@ const MessagesDemo = () => {
                 {
                     id: 'event',
                     label: 'Events of Messages'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

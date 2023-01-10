@@ -3,6 +3,8 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/datatable/apidoc';
+import { AccessibilityDoc } from '../../components/doc/datatable/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/datatable/stylingdoc';
 import { BasicDoc } from '../../components/doc/datatable/basicdoc';
 import { ColGroupDoc } from '../../components/doc/datatable/colgroupdoc';
 import { ChooseResizableColumnsDoc } from '../../components/doc/datatable/colresize/chooseresizablecolumnsdoc';
@@ -428,6 +430,16 @@ const DataTableDemo = () => {
             ]
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -443,14 +455,6 @@ const DataTableDemo = () => {
                 {
                     id: 'methods',
                     label: 'Methods'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

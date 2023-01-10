@@ -5,6 +5,8 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/cascadeselect/importdoc';
 import { ApiDoc } from '../../components/doc/cascadeselect/apidoc';
+import { AccessibilityDoc } from '../../components/doc/cascadeselect/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/cascadeselect/stylingdoc';
 import { BasicDoc } from '../../components/doc/cascadeselect/basicdoc';
 import { FloatLabelDoc } from '../../components/doc/cascadeselect/floatlabeldoc';
 import { InvalidDoc } from '../../components/doc/cascadeselect/invaliddoc';
@@ -63,6 +65,16 @@ const CascadeSelectDemo = () => {
             component: TemplatingDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -74,14 +86,6 @@ const CascadeSelectDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

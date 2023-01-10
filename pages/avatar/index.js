@@ -4,6 +4,7 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/avatar/importdoc';
 import { LabelDoc } from '../../components/doc/avatar/labeldoc';
 import { ApiDoc } from '../../components/doc/avatar/apidoc';
+import { AccessibilityDoc } from '../../components/doc/avatar/accessibilitydoc';
 import { IconDoc } from '../../components/doc/avatar/icondoc';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';

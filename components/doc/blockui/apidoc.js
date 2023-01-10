@@ -110,44 +110,6 @@ export function ApiDoc(props) {
                     </table>
                 </div>
             </DocSubSection>
-            <DocSubSection id="styling" label="Styling">
-                <p>
-                    Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.
-                </p>
-                <div className="doc-tablewrapper">
-                    <table className="doc-table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Element</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>p-blockui</td>
-                                <td>Mask element.</td>
-                            </tr>
-                            <tr>
-                                <td>p-blockui-document</td>
-                                <td>Mask element in full screen mode.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </DocSubSection>
-
-            <DocSubSection id="accessibility" label="Accessibility">
-                <DevelopmentSection>
-                    <h4>Screen Reader</h4>
-                    <p>
-                        BlockUI manages <i>aria-busy</i> state attribute when the UI gets blocked and unblocked. Any valid attribute is passed to the root element so additional attributes like <i>role</i> and <i>aria-live</i> can be used to define
-                        live regions.
-                    </p>
-
-                    <h5>Keyboard Support</h5>
-                    <p>Component does not include any interactive elements.</p>
-                </DevelopmentSection>
-            </DocSubSection>
         </>
     );
 }

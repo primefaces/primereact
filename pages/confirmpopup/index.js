@@ -6,6 +6,8 @@ import { DeclarativeDoc } from '../../components/doc/confirmpopup/declarativedoc
 import { BasicDoc } from '../../components/doc/confirmpopup/basicdoc';
 import { ImportDoc } from '../../components/doc/confirmpopup/importdoc';
 import { ApiDoc } from '../../components/doc/confirmpopup/apidoc';
+import { AccessibilityDoc } from '../../components/doc/confirmpopup/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/confirmpopup/stylingdoc';
 
 const ConfirmPopupDemo = () => {
     const docs = [
@@ -25,6 +27,16 @@ const ConfirmPopupDemo = () => {
             component: DeclarativeDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -36,14 +48,6 @@ const ConfirmPopupDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

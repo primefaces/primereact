@@ -3,6 +3,8 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/mention/apidoc';
+import { AccessibilityDoc } from '../../components/doc/mention/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/mention/stylingdoc';
 import { ImportDoc } from '../../components/doc/mention/importdoc';
 import { BasicDoc } from '../../components/doc/mention/basicdoc';
 import { TriggersDoc } from '../../components/doc/mention/triggersdoc';
@@ -68,6 +70,16 @@ const MentionDemo = () => {
             ]
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -79,14 +91,6 @@ const MentionDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

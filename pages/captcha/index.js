@@ -3,6 +3,8 @@ import React from 'react';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/captcha/apidoc';
+import { AccessibilityDoc } from '../../components/doc/captcha/accessibilitydoc';
+
 import { ImportDoc } from '../../components/doc/captcha/importdoc';
 import { CaptchaDoc } from '../../components/doc/captcha/captchadoc';
 import { DocActions } from '../../components/doc/common/docactions';
@@ -18,6 +20,11 @@ const CaptchaDemo = () => {
             id: 'captcha',
             label: 'Captcha',
             component: CaptchaDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         },
         {
             id: 'api',
@@ -39,10 +46,6 @@ const CaptchaDemo = () => {
                 {
                     id: 'methods',
                     label: 'Methods'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

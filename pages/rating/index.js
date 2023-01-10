@@ -10,6 +10,8 @@ import { ReadOnlyDoc } from '../../components/doc/rating/readonlydoc';
 import { DisabledDoc } from '../../components/doc/rating/disableddoc';
 import { TemplateDoc } from '../../components/doc/rating/templatedoc';
 import { ApiDoc } from '../../components/doc/rating/apidoc';
+import { AccessibilityDoc } from '../../components/doc/rating/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/rating/stylingdoc';
 import { NumberOfStarsDoc } from '../../components/doc/rating/numberofstarsdoc';
 
 const RatingDemo = () => {
@@ -50,6 +52,16 @@ const RatingDemo = () => {
             component: TemplateDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             type: 'api',
@@ -62,14 +74,6 @@ const RatingDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

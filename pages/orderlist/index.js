@@ -3,6 +3,8 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ApiDoc } from '../../components/doc/orderlist/apidoc';
+import { AccessibilityDoc } from '../../components/doc/orderlist/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/orderlist/stylingdoc';
 import { ImportDoc } from '../../components/doc/orderlist/importdoc';
 import { TemplateDoc } from '../../components/doc/orderlist/templatedoc';
 import { BasicDoc } from '../../components/doc/orderlist/basicdoc';
@@ -37,6 +39,16 @@ const OrderListDemo = () => {
             component: TemplateDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -52,14 +64,6 @@ const OrderListDemo = () => {
                 {
                     id: 'methods',
                     label: 'Methods'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

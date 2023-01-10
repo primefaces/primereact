@@ -3,6 +3,8 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/listbox/apidoc';
+import { AccessibilityDoc } from '../../components/doc/listbox/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/listbox/stylingdoc';
 import { GroupDoc } from '../../components/doc/listbox/groupdoc';
 import { ImportDoc } from '../../components/doc/listbox/importdoc';
 import { SingleDoc } from '../../components/doc/listbox/singledoc';
@@ -80,6 +82,16 @@ const ListBoxDemo = () => {
             ]
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -91,14 +103,6 @@ const ListBoxDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

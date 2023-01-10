@@ -14,6 +14,8 @@ import { SizeDoc } from '../../components/doc/knob/sizedoc';
 import { ColorDoc } from '../../components/doc/knob/colordoc';
 import { ReactiveDoc } from '../../components/doc/knob/reactivedoc';
 import { ApiDoc } from '../../components/doc/knob/apidoc';
+import { AccessibilityDoc } from '../../components/doc/knob/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/knob/stylingdoc';
 import { FormikDoc } from '../../components/doc/knob/validation/formikdoc';
 import { HookFormDoc } from '../../components/doc/knob/validation/hookformdoc';
 
@@ -92,6 +94,16 @@ const KnobDemo = () => {
             ]
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -103,14 +115,6 @@ const KnobDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

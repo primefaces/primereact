@@ -20,6 +20,8 @@ import { ButtonSetDoc } from '../../components/doc/button/buttonsetdoc';
 import { SizesDoc } from '../../components/doc/button/sizesdoc';
 import { TemplateDoc } from '../../components/doc/button/templatedoc';
 import { ApiDoc } from '../../components/doc/button/apidoc';
+import { AccessibilityDoc } from '../../components/doc/button/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/button/stylingdoc';
 import { DisabledDoc } from '../../components/doc/button/disableddoc';
 
 const ButtonDemo = () => {
@@ -115,6 +117,16 @@ const ButtonDemo = () => {
             component: TemplateDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -122,14 +134,6 @@ const ButtonDemo = () => {
                 {
                     id: 'properties',
                     label: 'Properties'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

@@ -10,6 +10,8 @@ import { GroupDoc } from '../../components/doc/radiobutton/groupdoc';
 import { ImportDoc } from '../../components/doc/radiobutton/importdoc';
 import { InvalidDoc } from '../../components/doc/radiobutton/invaliddoc';
 import { HookFormDoc } from '../../components/doc/radiobutton/validation/hookformdoc';
+import { StylingDoc } from '../../components/doc/radiobutton/stylingdoc';
+import { AccessibilityDoc } from '../../components/doc/radiobutton/accessibilitydoc';
 
 const RadioButtonDemo = () => {
     const docs = [
@@ -56,6 +58,16 @@ const RadioButtonDemo = () => {
             ]
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -67,14 +79,6 @@ const RadioButtonDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

@@ -6,6 +6,8 @@ import { ImportDoc } from '../../components/doc/tabmenu/importdoc';
 import { BasicDoc } from '../../components/doc/tabmenu/basicdoc';
 import { ControlledDoc } from '../../components/doc/tabmenu/controlleddoc';
 import { ApiDoc } from '../../components/doc/tabmenu/apidoc';
+import { AccessibilityDoc } from '../../components/doc/tabmenu/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/tabmenu/stylingdoc';
 
 const TabMenuDemo = () => {
     const docs = [
@@ -25,6 +27,16 @@ const TabMenuDemo = () => {
             component: ControlledDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -36,14 +48,6 @@ const TabMenuDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

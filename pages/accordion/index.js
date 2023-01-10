@@ -10,6 +10,8 @@ import { TemplateDoc } from '../../components/doc/accordion/templatedoc';
 import { AccessibilityDoc } from '../../components/doc/accordion/accessibilitydoc';
 import { StylingDoc } from '../../components/doc/accordion/stylingdoc';
 import { ApiDoc } from '../../components/doc/accordion/apidoc';
+import { AccessibilityDoc } from '../../components/doc/accordion/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/accordion/stylingdoc';
 
 const AccordionDemo = () => {
     const docs = [

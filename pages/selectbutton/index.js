@@ -3,6 +3,8 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/selectbutton/apidoc';
+import { AccessibilityDoc } from '../../components/doc/selectbutton/accessibilitydoc';
+
 import { BasicDoc } from '../../components/doc/selectbutton/basicdoc';
 import { CustomContentDoc } from '../../components/doc/selectbutton/customcontentdoc';
 import { DisabledDoc } from '../../components/doc/selectbutton/disableddoc';
@@ -62,6 +64,11 @@ const SelectButtonDemo = () => {
             ]
         },
         {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -77,10 +84,6 @@ const SelectButtonDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

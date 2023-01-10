@@ -4,6 +4,8 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/password/apidoc';
+import { AccessibilityDoc } from '../../components/doc/password/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/password/stylingdoc';
 import { BasicDoc } from '../../components/doc/password/basicdoc';
 import { DisabledDoc } from '../../components/doc/password/disableddoc';
 import { FloatLabelDoc } from '../../components/doc/password/floatlabeldoc';
@@ -76,6 +78,16 @@ const PasswordDemo = () => {
             component: Templating
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -87,14 +99,6 @@ const PasswordDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

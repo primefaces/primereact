@@ -7,6 +7,8 @@ import { QuillDoc } from '../../components/doc/editor/quilldoc';
 import { BasicDoc } from '../../components/doc/editor/basicdoc';
 import { TemplateDoc } from '../../components/doc/editor/templatedoc';
 import { ApiDoc } from '../../components/doc/editor/apidoc';
+import { AccessibilityDoc } from '../../components/doc/editor/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/editor/stylingdoc';
 import { FormikDoc } from '../../components/doc/editor/validation/formikdoc';
 import { HookFormDoc } from '../../components/doc/editor/validation/hookformdoc';
 import { ReadOnlyDoc } from '../../components/doc/editor/readonlydoc';
@@ -56,6 +58,16 @@ const EditorDemo = () => {
             component: TemplateDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -67,14 +79,6 @@ const EditorDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

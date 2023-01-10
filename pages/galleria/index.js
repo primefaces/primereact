@@ -4,6 +4,8 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { ImportDoc } from '../../components/doc/galleria/importdoc';
 import { GaleriaDemo } from '../../components/doc/galleria/galeriademo';
 import { ApiDoc } from '../../components/doc/galleria/apidoc';
+import { AccessibilityDoc } from '../../components/doc/galleria/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/galleria/stylingdoc';
 import { ProgrammaticDoc } from '../../components/doc/galleria/programmaticdoc';
 import { ResponsiveDoc } from '../../components/doc/galleria/responsivedoc';
 import { AutoPlayDemoDoc } from '../../components/doc/galleria/autoplaydoc';
@@ -159,6 +161,16 @@ const GalleriaDemo = () => {
             component: AdvancedDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -170,14 +182,6 @@ const GalleriaDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

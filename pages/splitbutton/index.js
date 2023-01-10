@@ -12,6 +12,8 @@ import { RaisedTextButtonsDoc } from '../../components/doc/splitbutton/raisedtex
 import { OutlinedButtonsDoc } from '../../components/doc/splitbutton/outlinedbuttonsdoc';
 import { SizesDoc } from '../../components/doc/splitbutton/sizesdoc';
 import { ApiDoc } from '../../components/doc/splitbutton/apidoc';
+import { AccessibilityDoc } from '../../components/doc/splitbutton/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/splitbutton/stylingdoc';
 import { LoadingDoc } from '../../components/doc/splitbutton/loadingdoc';
 import { DisabledDoc } from '../../components/doc/splitbutton/disableddoc';
 
@@ -73,6 +75,16 @@ const SplitButtonDemo = () => {
             component: SizesDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -92,14 +104,6 @@ const SplitButtonDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

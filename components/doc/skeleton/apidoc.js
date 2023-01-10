@@ -61,48 +61,6 @@ export function ApiDoc(props) {
                     </table>
                 </div>
             </DocSubSection>
-            <DocSubSection id="styling" label="Styling">
-                <p>
-                    Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.
-                </p>
-                <div className="doc-tablewrapper">
-                    <table className="doc-table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Element</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>p-skeleton</td>
-                                <td>Container element.</td>
-                            </tr>
-                            <tr>
-                                <td>p-skeleton-circle</td>
-                                <td>Container element of a determinate progressbar.</td>
-                            </tr>
-                            <tr>
-                                <td>p-skeleton-none</td>
-                                <td>Container element of an indeterminate progressbar.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </DocSubSection>
-
-            <DocSubSection id="accessibility" label="Accessibility">
-                <DevelopmentSection>
-                    <h4>Screen Reader</h4>
-                    <p>
-                        Skeleton uses <i>aria-hidden</i> as "true" so that it gets ignored by screen readers, any valid attribute is passed to the root element so you may customize it further if required. If multiple skeletons are grouped inside a
-                        container, you may use <i>aria-busy</i> on the container element as well to indicate the loading process.
-                    </p>
-
-                    <h5>Keyboard Support</h5>
-                    <p>Component does not include any interactive elements.</p>
-                </DevelopmentSection>
-            </DocSubSection>
         </>
     );
 }

@@ -7,6 +7,8 @@ import { BasicDoc } from '../../components/doc/megamenu/basicdoc';
 import { VerticalDoc } from '../../components/doc/megamenu/verticaldoc';
 import { TemplateDoc } from '../../components/doc/megamenu/templatedoc';
 import { ApiDoc } from '../../components/doc/megamenu/apidoc';
+import { AccessibilityDoc } from '../../components/doc/megamenu/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/megamenu/stylingdoc';
 
 const MegaMenuDemo = () => {
     const docs = [
@@ -31,6 +33,16 @@ const MegaMenuDemo = () => {
             component: TemplateDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -38,14 +50,6 @@ const MegaMenuDemo = () => {
                 {
                     id: 'properties',
                     label: 'Properties'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

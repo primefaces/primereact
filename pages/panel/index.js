@@ -7,6 +7,8 @@ import { BasicDoc } from '../../components/doc/panel/basicdoc';
 import { ToggleableDoc } from '../../components/doc/panel/toggleabledoc';
 import { TemplateDoc } from '../../components/doc/panel/templatedoc';
 import { ApiDoc } from '../../components/doc/panel/apidoc';
+import { AccessibilityDoc } from '../../components/doc/panel/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/panel/stylingdoc';
 
 const PanelDemo = () => {
     const docs = [
@@ -31,6 +33,16 @@ const PanelDemo = () => {
             component: TemplateDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -42,14 +54,6 @@ const PanelDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

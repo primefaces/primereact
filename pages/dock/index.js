@@ -6,6 +6,8 @@ import { ImportDoc } from '../../components/doc/dock/importdoc';
 import { BasicDoc } from '../../components/doc/dock/basicdoc';
 import { AdvanceDoc } from '../../components/doc/dock/advancedoc';
 import { ApiDoc } from '../../components/doc/dock/apidoc';
+import { AccessibilityDoc } from '../../components/doc/dock/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/dock/stylingdoc';
 
 const DockDemo = () => {
     const docs = [
@@ -25,6 +27,16 @@ const DockDemo = () => {
             component: AdvanceDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -36,14 +48,6 @@ const DockDemo = () => {
                 {
                     id: 'properties',
                     label: 'Properties'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

@@ -6,6 +6,8 @@ import { ImportDoc } from '../../components/doc/slidemenu/importdoc';
 import { BasicDoc } from '../../components/doc/slidemenu/basicdoc';
 import { PopupDoc } from '../../components/doc/slidemenu/popupdoc';
 import { ApiDoc } from '../../components/doc/slidemenu/apidoc';
+import { AccessibilityDoc } from '../../components/doc/slidemenu/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/slidemenu/stylingdoc';
 
 const SlideMenuDemo = () => {
     const docs = [
@@ -25,6 +27,16 @@ const SlideMenuDemo = () => {
             component: PopupDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -40,14 +52,6 @@ const SlideMenuDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

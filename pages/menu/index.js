@@ -7,6 +7,8 @@ import { BasicDoc } from '../../components/doc/menu/basicdoc';
 import { GroupDoc } from '../../components/doc/menu/groupdoc';
 import { PopupDoc } from '../../components/doc/menu/popupdoc';
 import { ApiDoc } from '../../components/doc/menu/apidoc';
+import { AccessibilityDoc } from '../../components/doc/menu/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/menu/stylingdoc';
 
 const MenuDemo = () => {
     const docs = [
@@ -31,6 +33,16 @@ const MenuDemo = () => {
             component: PopupDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -46,14 +58,6 @@ const MenuDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

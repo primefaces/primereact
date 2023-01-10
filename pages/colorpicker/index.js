@@ -1,5 +1,7 @@
 import Head from 'next/head';
 import { ApiDoc } from '../../components/doc/colorpicker/apidoc';
+import { AccessibilityDoc } from '../../components/doc/colorpicker/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/colorpicker/stylingdoc';
 import { DisabledDoc } from '../../components/doc/colorpicker/disableddoc';
 import { FormatDoc } from '../../components/doc/colorpicker/formatdoc';
 import { ImportDoc } from '../../components/doc/colorpicker/importdoc';
@@ -56,6 +58,16 @@ const ColorPickerDemo = () => {
             ]
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -67,14 +79,6 @@ const ColorPickerDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

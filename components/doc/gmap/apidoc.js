@@ -173,16 +173,6 @@ return (
                     </table>
                 </div>
             </DocSubSection>
-            <DocSubSection id="styling" label="Styling">
-                <p>Component does not apply any styling.</p>
-            </DocSubSection>
-            <DocSubSection id="accessibility" label="Accessibility">
-                <DevelopmentSection>
-                    <p>
-                        Refer to the <a href="https://support.google.com/maps/answer/6396990?hl=en&co=GENIE.Platform%3DDesktop">Google Maps documentation</a> for more information about accessibility.
-                    </p>
-                </DevelopmentSection>
-            </DocSubSection>
         </>
     );
 }

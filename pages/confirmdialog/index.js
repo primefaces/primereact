@@ -3,6 +3,8 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/confirmdialog/apidoc';
+import { AccessibilityDoc } from '../../components/doc/confirmdialog/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/confirmdialog/stylingdoc';
 import { BasicDoc } from '../../components/doc/confirmdialog/basicdoc';
 import { ImportDoc } from '../../components/doc/confirmdialog/importdoc';
 import { PositionDoc } from '../../components/doc/confirmdialog/positiondoc';
@@ -32,6 +34,16 @@ const ConfirmDialogDemo = () => {
             component: DeclarativeDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -43,14 +55,6 @@ const ConfirmDialogDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

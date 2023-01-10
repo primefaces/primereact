@@ -5,6 +5,8 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { BasicDoc } from '../../components/doc/togglebutton/basicdoc';
 import { CustomizedDoc } from '../../components/doc/togglebutton/customizeddoc';
 import { ApiDoc } from '../../components/doc/togglebutton/apidoc';
+import { AccessibilityDoc } from '../../components/doc/togglebutton/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/togglebutton/stylingdoc';
 import { ImportDoc } from '../../components/doc/togglebutton/importdoc';
 import { FormikDoc } from '../../components/doc/togglebutton/validation/formikdoc';
 import { HookFormDoc } from '../../components/doc/togglebutton/validation/hookformdoc';
@@ -44,6 +46,16 @@ const ToggleButtonDemo = () => {
             ]
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             type: 'api',
@@ -56,14 +68,6 @@ const ToggleButtonDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

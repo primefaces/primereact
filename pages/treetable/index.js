@@ -4,6 +4,8 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ApiDoc } from '../../components/doc/treetable/apidoc';
+import { AccessibilityDoc } from '../../components/doc/treetable/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/treetable/stylingdoc';
 import { PaginatorDoc } from '../../components/doc/treetable/paginatordoc';
 import { TemplatingDoc } from '../../components/doc/treetable/templatingdoc';
 import { ImportDoc } from '../../components/doc/treetable/importdoc';
@@ -225,6 +227,16 @@ const TreeTableDemo = () => {
             component: ResponsiveDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -244,14 +256,6 @@ const TreeTableDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

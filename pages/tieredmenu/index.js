@@ -6,6 +6,8 @@ import { ImportDoc } from '../../components/doc/tieredmenu/importdoc';
 import { BasicDoc } from '../../components/doc/tieredmenu/basicdoc';
 import { PopupDoc } from '../../components/doc/tieredmenu/popupdoc';
 import { ApiDoc } from '../../components/doc/tieredmenu/apidoc';
+import { AccessibilityDoc } from '../../components/doc/tieredmenu/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/tieredmenu/stylingdoc';
 
 const TieredMenuDemo = () => {
     const docs = [
@@ -25,6 +27,16 @@ const TieredMenuDemo = () => {
             component: PopupDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -40,14 +52,6 @@ const TieredMenuDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

@@ -4,6 +4,8 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/tag/apidoc';
+import { AccessibilityDoc } from '../../components/doc/tag/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/tag/stylingdoc';
 import { ImportDoc } from '../../components/doc/tag/importdoc';
 import { BasicDoc } from '../../components/doc/tag/basicdoc';
 import { SeverityDoc } from '../../components/doc/tag/severitydoc';
@@ -44,6 +46,16 @@ const TerminalDemo = () => {
             component: TemplateDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -51,14 +63,6 @@ const TerminalDemo = () => {
                 {
                     id: 'properties',
                     label: 'Properties'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

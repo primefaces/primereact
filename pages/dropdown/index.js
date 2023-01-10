@@ -3,6 +3,8 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/dropdown/apidoc';
+import { AccessibilityDoc } from '../../components/doc/dropdown/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/dropdown/stylingdoc';
 import { BasicDoc } from '../../components/doc/dropdown/basicdoc';
 import { ClearIconDoc } from '../../components/doc/dropdown/clearicondoc';
 import { DisabledDoc } from '../../components/doc/dropdown/disableddoc';
@@ -106,6 +108,16 @@ const DropdownDemo = () => {
         },
 
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -121,14 +133,6 @@ const DropdownDemo = () => {
                 {
                     id: 'methods',
                     label: 'Methods'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

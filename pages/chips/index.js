@@ -11,6 +11,8 @@ import { SeparatorDoc } from '../../components/doc/chips/separatordoc';
 import { TemplateDoc } from '../../components/doc/chips/templatedoc';
 import { KeyFilterDoc } from '../../components/doc/chips/keyfilterdoc';
 import { ApiDoc } from '../../components/doc/chips/apidoc';
+import { AccessibilityDoc } from '../../components/doc/chips/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/chips/stylingdoc';
 import { FormikDoc } from '../../components/doc/chips/validation/formikdoc';
 import { HookFormDoc } from '../../components/doc/chips/validation/hookformdoc';
 
@@ -74,6 +76,16 @@ const ChipsDemo = () => {
             component: KeyFilterDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -85,14 +97,6 @@ const ChipsDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

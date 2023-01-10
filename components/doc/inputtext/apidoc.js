@@ -49,68 +49,6 @@ export function ApiDoc(props) {
                     </table>
                 </div>
             </DocSubSection>
-
-            <DocSubSection id="styling" label="Styling">
-                <p>
-                    Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.
-                </p>
-                <div className="doc-tablewrapper">
-                    <table className="doc-table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Element</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>p-inputtext</td>
-                                <td>Input element</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </DocSubSection>
-
-            <DocSubSection id="accessibility" label="Accessibility">
-                <DevelopmentSection>
-                    <h4>Screen Reader</h4>
-                    <p>
-                        InputText component renders a native input element that implicitly includes any passed prop. Value to describe the component can either be provided via <i>label</i> tag combined with <i>id</i> prop or using{' '}
-                        <i>aria-labelledby</i>, <i>aria-label</i> props.
-                    </p>
-                    <CodeHighlight>
-                        {`
-    <label htmlFor="firstname">Firstname</label>
-    <InputText id="firstname" />
-
-    <span id="lastname">Lastname</span>
-    <InputText aria-labelledby="lastname" />
-
-    <InputText aria-label="Age"/>
-    `}
-                    </CodeHighlight>
-                    <h4>Keyboard Support</h4>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <i>tab</i>
-                                    </td>
-                                    <td>Moves focus to the input.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </DevelopmentSection>
-            </DocSubSection>
         </>
     );
 }

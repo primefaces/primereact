@@ -4,6 +4,8 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AdvancedDoc } from '../../components/doc/fileupload/advanceddoc';
 import { ApiDoc } from '../../components/doc/fileupload/apidoc';
+
+import { StylingDoc } from '../../components/doc/fileupload/stylingdoc';
 import { BasicDoc } from '../../components/doc/fileupload/basicdoc';
 import { AutoDoc } from '../../components/doc/fileupload/autodoc';
 import { CustomUploadDoc } from '../../components/doc/fileupload/customuploaddoc';
@@ -44,6 +46,11 @@ const FileUploadDemo = () => {
         },
 
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -59,10 +66,6 @@ const FileUploadDemo = () => {
                 {
                     id: 'methods',
                     label: 'Methods'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
                 }
             ]
         }

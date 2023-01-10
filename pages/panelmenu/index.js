@@ -5,6 +5,8 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { BasicDoc } from '../../components/doc/panelmenu/basicdoc';
 import { ImportDoc } from '../../components/doc/panelmenu/importdoc';
 import { ApiDoc } from '../../components/doc/panelmenu/apidoc';
+import { AccessibilityDoc } from '../../components/doc/panelmenu/accessibilitydoc';
+import { StylingDoc } from '../../components/doc/panelmenu/stylingdoc';
 import { ControlledDoc } from '../../components/doc/panelmenu/controlleddoc';
 
 const PanelMenuDemo = () => {
@@ -25,6 +27,16 @@ const PanelMenuDemo = () => {
             component: ControlledDoc
         },
         {
+            id: 'styling',
+            label: 'Styling',
+            component: StylingDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -32,14 +44,6 @@ const PanelMenuDemo = () => {
                 {
                     id: 'properties',
                     label: 'Properties'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }
