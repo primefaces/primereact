@@ -384,6 +384,11 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     showSelectAll?: boolean | undefined;
     /**
+     * Label to display if showSelectAll is true
+     */
+    selectAllLabel?: string;
+
+    /**
      * Inline style of the element.
      */
     style?: React.CSSProperties | undefined;

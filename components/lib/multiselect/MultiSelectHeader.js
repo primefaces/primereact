@@ -3,7 +3,7 @@ import { localeOption } from '../api/Api';
 import { Checkbox } from '../checkbox/Checkbox';
 import { InputText } from '../inputtext/InputText';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 
 export const MultiSelectHeader = React.memo((props) => {
     const filterOptions = {
@@ -61,7 +61,17 @@ export const MultiSelectHeader = React.memo((props) => {
     };
 
     const filterElement = createFilterElement();
-    const checkboxElement = props.showSelectAll && <Checkbox checked={props.selectAll} onChange={onSelectAll} role="checkbox" aria-checked={props.selectAll} />;
+    const selectAllId = props.id ? props.id + '_selectall' : UniqueComponentId();
+    const checkboxElement = props.showSelectAll && (
+        <div>
+            <Checkbox id={selectAllId} checked={props.selectAll} onChange={onSelectAll} role="checkbox" aria-checked={props.selectAll} />
+            {props.showSelectAll && !props.filter && (
+                <label for={selectAllId} className="p-multiselect-select-all-label">
+                    {props.selectAllLabel}
+                </label>
+            )}
+        </div>
+    );
     const closeElement = (
         <button type="button" className="p-multiselect-close p-link" aria-label={localeOption('close')} onClick={props.onClose}>
             <span className="p-multiselect-close-icon pi pi-times" aria-hidden="true"></span>

@@ -47,6 +47,7 @@ export const MultiSelectPanel = React.memo(
         const createHeader = () => {
             return (
                 <MultiSelectHeader
+                    id={props.id}
                     filter={props.filter}
                     filterRef={filterInputRef}
                     filterValue={props.filterValue}
@@ -55,6 +56,7 @@ export const MultiSelectPanel = React.memo(
                     filterPlaceholder={props.filterPlaceholder}
                     onClose={props.onCloseClick}
                     showSelectAll={props.showSelectAll}
+                    selectAllLabel={props.selectAllLabel}
                     selectAll={props.isAllSelected()}
                     onSelectAll={props.onSelectAll}
                     template={props.panelHeaderTemplate}
