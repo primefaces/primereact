@@ -4,7 +4,7 @@
  *
  * [Live Demo](https://www.primefaces.org/primereact/autocomplete/)
  *
- * @module AutoComplete
+ * @module autocomplete
  *
  */
 import * as React from 'react';
@@ -122,7 +122,7 @@ interface AutoCompleteDropdownClickEvent {
  * @see {@link AutoCompleteProps.completeMethod}
  * @event
  */
-interface AutoCompleteCompleteMethodEvent {
+interface AutoCompleteCompleteEvent {
     /**
      * Browser event
      */
@@ -355,9 +355,9 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.HT
     virtualScrollerOptions?: VirtualScrollerProps | undefined;
     /**
      * Callback to invoke to search for suggestions.
-     * @param {AutoCompleteCompleteMethodEvent} event - Custom complete method event.
+     * @param {AutoCompleteCompleteEvent} event - Custom complete method event.
      */
-    completeMethod?(event: AutoCompleteCompleteMethodEvent): void;
+    completeMethod?(event: AutoCompleteCompleteEvent): void;
     /**
      * Callback to invoke when autocomplete loses focus.
      * @param {React.FocusEvent<HTMLInputElement>} event - Browser event.

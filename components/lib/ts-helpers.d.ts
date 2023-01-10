@@ -3,3 +3,9 @@ export declare type Numberish = number | string;
 export declare type Nullable<T = void> = T | null | undefined;
 //export declare type IconType<ParentProps> = React.ReactNode | ((options: IconOptions<ParentProps>) => React.ReactNode);
 //export declare type TemplateType<TOptions> = React.ReactNode | ((...TOptions: any) => React.ReactNode);
+
+export interface FormTarget {
+    name: string;
+    id: string;
+    value: any;
+}
