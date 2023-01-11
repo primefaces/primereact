@@ -6,7 +6,7 @@ import { ImportDoc } from '../../components/doc/contextmenu/importdoc';
 import { BasicDoc } from '../../components/doc/contextmenu/BasicDoc';
 import { ApiDoc } from '../../components/doc/contextmenu/apidoc';
 import { AccessibilityDoc } from '../../components/doc/contextmenu/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/contextmenu/stylingdoc';
+import { StyleDoc } from '../../components/doc/contextmenu/styledoc';
 import { DocumentDoc } from '../../components/doc/contextmenu/documentdoc';
 
 const ContextMenuDemo = () => {
@@ -28,8 +28,8 @@ const ContextMenuDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

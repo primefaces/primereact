@@ -7,7 +7,7 @@ import { BasicDoc } from '../../components/doc/steps/basicdoc';
 import { InteractiveDoc } from '../../components/doc/steps/interactivedoc';
 import { ApiDoc } from '../../components/doc/steps/apidoc';
 import { AccessibilityDoc } from '../../components/doc/steps/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/steps/stylingdoc';
+import { StyleDoc } from '../../components/doc/steps/styledoc';
 
 const StepsDemo = () => {
     const docs = [
@@ -28,8 +28,8 @@ const StepsDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

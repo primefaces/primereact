@@ -5,7 +5,7 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ApiDoc } from '../../components/doc/timeline/apidoc';
 import { AccessibilityDoc } from '../../components/doc/timeline/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/timeline/stylingdoc';
+import { StyleDoc } from '../../components/doc/timeline/styledoc';
 import { HorizontalDoc } from '../../components/doc/timeline/horizontaldoc';
 import { AlignmentDoc } from '../../components/doc/timeline/aligndoc';
 import { OppositeContentDoc } from '../../components/doc/timeline/oppositecontentdoc';
@@ -41,8 +41,8 @@ const TimelineDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

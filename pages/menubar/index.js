@@ -7,7 +7,7 @@ import { BasicDoc } from '../../components/doc/menubar/basicdoc';
 import { CustomDoc } from '../../components/doc/menubar/customdoc';
 import { ApiDoc } from '../../components/doc/menubar/apidoc';
 import { AccessibilityDoc } from '../../components/doc/menubar/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/menubar/stylingdoc';
+import { StyleDoc } from '../../components/doc/menubar/styledoc';
 
 const MenubarDemo = () => {
     const docs = [
@@ -28,8 +28,8 @@ const MenubarDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

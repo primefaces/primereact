@@ -4,7 +4,7 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/inplace/apidoc';
 import { AccessibilityDoc } from '../../components/doc/inplace/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/inplace/stylingdoc';
+import { StyleDoc } from '../../components/doc/inplace/styledoc';
 import { ImportDoc } from '../../components/doc/inplace/importdoc';
 import { BasicDoc } from '../../components/doc/inplace/basicdoc';
 import { InputDoc } from '../../components/doc/inplace/inputdoc';
@@ -41,8 +41,8 @@ const ChipDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

@@ -4,10 +4,10 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/ripple/apidoc';
 import { AccessibilityDoc } from '../../components/doc/ripple/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/ripple/stylingdoc';
+import { StyleDoc } from '../../components/doc/ripple/styledoc';
 import { ImportDoc } from '../../components/doc/ripple/importdoc';
 import { DefaultDoc } from '../../components/doc/ripple/defaultdoc';
-import { CustomDoc } from '../../components/doc/ripple/stylingdoc';
+import { CustomDoc } from '../../components/doc/ripple/styledoc';
 import { DocActions } from '../../components/doc/common/docactions';
 
 const RippleDemo = () => {
@@ -29,8 +29,8 @@ const RippleDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

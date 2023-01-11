@@ -4,7 +4,7 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/inputnumber/apidoc';
 import { AccessibilityDoc } from '../../components/doc/inputnumber/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/inputnumber/stylingdoc';
+import { StyleDoc } from '../../components/doc/inputnumber/styledoc';
 import { ButtonsDoc } from '../../components/doc/inputnumber/buttonsdoc';
 import { CurrencyDoc } from '../../components/doc/inputnumber/currencydoc';
 import { DisabledDoc } from '../../components/doc/inputnumber/disableddoc';
@@ -90,8 +90,8 @@ const InputNumberDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

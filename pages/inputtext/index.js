@@ -5,7 +5,7 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ApiDoc } from '../../components/doc/inputtext/apidoc';
 import { AccessibilityDoc } from '../../components/doc/inputtext/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/inputtext/stylingdoc';
+import { StyleDoc } from '../../components/doc/inputtext/styledoc';
 import { BasicDoc } from '../../components/doc/inputtext/basicdoc';
 import { DisabledDoc } from '../../components/doc/inputtext/disableddoc';
 import { FloatLabelDoc } from '../../components/doc/inputtext/floatlabeldoc';
@@ -84,8 +84,8 @@ const InputTextDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

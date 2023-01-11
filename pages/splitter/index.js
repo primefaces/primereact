@@ -8,7 +8,7 @@ import { VerticalDoc } from '../../components/doc/splitter/verticaldoc';
 import { NestedDoc } from '../../components/doc/splitter/nesteddoc';
 import { ApiDoc } from '../../components/doc/splitter/apidoc';
 import { AccessibilityDoc } from '../../components/doc/splitter/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/splitter/stylingdoc';
+import { StyleDoc } from '../../components/doc/splitter/styledoc';
 
 const SplitterDemo = () => {
     const docs = [
@@ -34,8 +34,8 @@ const SplitterDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

@@ -12,7 +12,7 @@ import { ClosableDoc } from '../../components/doc/tabview/closabledoc';
 import { ScrollableDoc } from '../../components/doc/tabview/scrollabledoc';
 import { ApiDoc } from '../../components/doc/tabview/apidoc';
 import { AccessibilityDoc } from '../../components/doc/tabview/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/tabview/stylingdoc';
+import { StyleDoc } from '../../components/doc/tabview/styledoc';
 
 const TabViewDemo = () => {
     const docs = [
@@ -58,8 +58,8 @@ const TabViewDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

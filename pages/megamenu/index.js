@@ -8,7 +8,7 @@ import { VerticalDoc } from '../../components/doc/megamenu/verticaldoc';
 import { TemplateDoc } from '../../components/doc/megamenu/templatedoc';
 import { ApiDoc } from '../../components/doc/megamenu/apidoc';
 import { AccessibilityDoc } from '../../components/doc/megamenu/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/megamenu/stylingdoc';
+import { StyleDoc } from '../../components/doc/megamenu/styledoc';
 
 const MegaMenuDemo = () => {
     const docs = [
@@ -34,8 +34,8 @@ const MegaMenuDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

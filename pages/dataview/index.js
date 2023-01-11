@@ -6,7 +6,7 @@ import { ImportDoc } from '../../components/doc/dataview/importdoc';
 import { BasicDoc } from '../../components/doc/dataview/basicdoc';
 import { ApiDoc } from '../../components/doc/dataview/apidoc';
 import { AccessibilityDoc } from '../../components/doc/dataview/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/dataview/stylingdoc';
+import { StyleDoc } from '../../components/doc/dataview/styledoc';
 import { LazyDataViewDoc } from '../../components/doc/dataview/lazydoc';
 
 const DataViewDemo = () => {
@@ -28,8 +28,8 @@ const DataViewDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

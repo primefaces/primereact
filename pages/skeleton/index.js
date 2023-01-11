@@ -4,7 +4,7 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/skeleton/apidoc';
 import { AccessibilityDoc } from '../../components/doc/skeleton/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/skeleton/stylingdoc';
+import { StyleDoc } from '../../components/doc/skeleton/styledoc';
 import { ImportDoc } from '../../components/doc/skeleton/importdoc';
 import { ShapesDoc } from '../../components/doc/skeleton/shapesdoc';
 import { ListDoc } from '../../components/doc/skeleton/listdoc';
@@ -41,8 +41,8 @@ const SkeletonDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

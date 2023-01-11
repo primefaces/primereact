@@ -6,7 +6,7 @@ import { ImportDoc } from '../../components/doc/toolbar/importdoc';
 import { ToolbarDoc } from '../../components/doc/toolbar/toolbardoc';
 import { ApiDoc } from '../../components/doc/toolbar/apidoc';
 import { AccessibilityDoc } from '../../components/doc/toolbar/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/toolbar/stylingdoc';
+import { StyleDoc } from '../../components/doc/toolbar/styledoc';
 
 const ToolbarDemo = () => {
     const docs = [
@@ -22,8 +22,8 @@ const ToolbarDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

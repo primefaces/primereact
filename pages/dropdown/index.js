@@ -4,7 +4,7 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/dropdown/apidoc';
 import { AccessibilityDoc } from '../../components/doc/dropdown/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/dropdown/stylingdoc';
+import { StyleDoc } from '../../components/doc/dropdown/styledoc';
 import { BasicDoc } from '../../components/doc/dropdown/basicdoc';
 import { ClearIconDoc } from '../../components/doc/dropdown/clearicondoc';
 import { DisabledDoc } from '../../components/doc/dropdown/disableddoc';
@@ -109,8 +109,8 @@ const DropdownDemo = () => {
 
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

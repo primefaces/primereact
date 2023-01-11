@@ -11,7 +11,7 @@ import { DisabledDoc } from '../../components/doc/rating/disableddoc';
 import { TemplateDoc } from '../../components/doc/rating/templatedoc';
 import { ApiDoc } from '../../components/doc/rating/apidoc';
 import { AccessibilityDoc } from '../../components/doc/rating/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/rating/stylingdoc';
+import { StyleDoc } from '../../components/doc/rating/styledoc';
 import { NumberOfStarsDoc } from '../../components/doc/rating/numberofstarsdoc';
 
 const RatingDemo = () => {
@@ -53,8 +53,8 @@ const RatingDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

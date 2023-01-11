@@ -5,7 +5,7 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/breadcrumb/importdoc';
 import { BasicDoc } from '../../components/doc/breadcrumb/basicdoc';
 import { ApiDoc } from '../../components/doc/breadcrumb/apidoc';
-import { StylingDoc } from '../../components/doc/breadcrumb/stylingdoc';
+import { StyleDoc } from '../../components/doc/breadcrumb/styledoc';
 import { AccessibilityDoc } from '../../components/doc/breadcrumb/accessibilitydoc';
 import { TemplateDoc } from '../../components/doc/breadcrumb/templatedoc';
 
@@ -28,8 +28,8 @@ const BreadCrumbDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

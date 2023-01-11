@@ -5,7 +5,7 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ApiDoc } from '../../components/doc/picklist/apidoc';
 import { AccessibilityDoc } from '../../components/doc/picklist/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/picklist/stylingdoc';
+import { StyleDoc } from '../../components/doc/picklist/styledoc';
 import { ImportDoc } from '../../components/doc/picklist/importdoc';
 import { PickListDoc } from '../../components/doc/picklist/picklistdoc';
 
@@ -23,8 +23,8 @@ const PickListDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

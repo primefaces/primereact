@@ -4,7 +4,7 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ApiDoc } from '../../components/doc/paginator/apidoc';
 import { AccessibilityDoc } from '../../components/doc/paginator/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/paginator/stylingdoc';
+import { StyleDoc } from '../../components/doc/paginator/styledoc';
 import { ImportDoc } from '../../components/doc/paginator/importdoc';
 import { BasicDoc } from '../../components/doc/paginator/basicdoc';
 import { CustomDoc } from '../../components/doc/paginator/customdoc';
@@ -34,8 +34,8 @@ const PaginatorDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

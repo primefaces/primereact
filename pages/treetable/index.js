@@ -5,7 +5,7 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ApiDoc } from '../../components/doc/treetable/apidoc';
 import { AccessibilityDoc } from '../../components/doc/treetable/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/treetable/stylingdoc';
+import { StyleDoc } from '../../components/doc/treetable/styledoc';
 import { PaginatorDoc } from '../../components/doc/treetable/paginatordoc';
 import { TemplatingDoc } from '../../components/doc/treetable/templatingdoc';
 import { ImportDoc } from '../../components/doc/treetable/importdoc';
@@ -16,7 +16,7 @@ import { LazyDoc } from '../../components/doc/treetable/lazydoc';
 import { EditDoc } from '../../components/doc/treetable/editdoc';
 import { ReorderDoc } from '../../components/doc/treetable/reorderdoc';
 import { ColToggleDoc } from '../../components/doc/treetable/coltoggledoc';
-import { StyleDoc } from '../../components/doc/treetable/styledoc';
+import { StyleDoc } from '../../components/doc/treetable/demo_styledoc';
 import { ContextMenuDoc } from '../../components/doc/treetable/contextmenudoc';
 import { ResponsiveDoc } from '../../components/doc/treetable/responsivedoc';
 import { LenientFilterDoc } from '../../components/doc/treetable/filter/lenientfilterdoc';
@@ -228,8 +228,8 @@ const TreeTableDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

@@ -5,7 +5,7 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/terminal/apidoc';
 import { AccessibilityDoc } from '../../components/doc/terminal/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/terminal/stylingdoc';
+import { StyleDoc } from '../../components/doc/terminal/styledoc';
 import { ImportDoc } from '../../components/doc/terminal/importdoc';
 import { BasicDoc } from '../../components/doc/terminal/basicdoc';
 
@@ -23,8 +23,8 @@ const TerminalDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

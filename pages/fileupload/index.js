@@ -5,7 +5,7 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { AdvancedDoc } from '../../components/doc/fileupload/advanceddoc';
 import { ApiDoc } from '../../components/doc/fileupload/apidoc';
 
-import { StylingDoc } from '../../components/doc/fileupload/stylingdoc';
+import { StyleDoc } from '../../components/doc/fileupload/styledoc';
 import { BasicDoc } from '../../components/doc/fileupload/basicdoc';
 import { AutoDoc } from '../../components/doc/fileupload/autodoc';
 import { CustomUploadDoc } from '../../components/doc/fileupload/customuploaddoc';
@@ -47,8 +47,8 @@ const FileUploadDemo = () => {
 
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'api',

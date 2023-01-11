@@ -5,7 +5,7 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/fieldset/importdoc';
 import { ApiDoc } from '../../components/doc/fieldset/apidoc';
 import { AccessibilityDoc } from '../../components/doc/fieldset/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/fieldset/stylingdoc';
+import { StyleDoc } from '../../components/doc/fieldset/styledoc';
 import { BasicDoc } from '../../components/doc/fieldset/basicdoc';
 import { ToggleableDoc } from '../../components/doc/fieldset/toggleabledoc';
 import { TemplateDoc } from '../../components/doc/fieldset/templatedoc';
@@ -34,8 +34,8 @@ const FieldsetDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

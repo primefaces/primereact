@@ -12,7 +12,7 @@ import { TemplateDoc } from '../../components/doc/chips/templatedoc';
 import { KeyFilterDoc } from '../../components/doc/chips/keyfilterdoc';
 import { ApiDoc } from '../../components/doc/chips/apidoc';
 import { AccessibilityDoc } from '../../components/doc/chips/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/chips/stylingdoc';
+import { StyleDoc } from '../../components/doc/chips/styledoc';
 import { FormikDoc } from '../../components/doc/chips/validation/formikdoc';
 import { HookFormDoc } from '../../components/doc/chips/validation/hookformdoc';
 
@@ -77,8 +77,8 @@ const ChipsDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

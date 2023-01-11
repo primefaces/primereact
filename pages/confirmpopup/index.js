@@ -7,7 +7,7 @@ import { BasicDoc } from '../../components/doc/confirmpopup/basicdoc';
 import { ImportDoc } from '../../components/doc/confirmpopup/importdoc';
 import { ApiDoc } from '../../components/doc/confirmpopup/apidoc';
 import { AccessibilityDoc } from '../../components/doc/confirmpopup/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/confirmpopup/stylingdoc';
+import { StyleDoc } from '../../components/doc/confirmpopup/styledoc';
 
 const ConfirmPopupDemo = () => {
     const docs = [
@@ -28,8 +28,8 @@ const ConfirmPopupDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

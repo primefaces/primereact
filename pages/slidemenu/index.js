@@ -7,7 +7,7 @@ import { BasicDoc } from '../../components/doc/slidemenu/basicdoc';
 import { PopupDoc } from '../../components/doc/slidemenu/popupdoc';
 import { ApiDoc } from '../../components/doc/slidemenu/apidoc';
 import { AccessibilityDoc } from '../../components/doc/slidemenu/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/slidemenu/stylingdoc';
+import { StyleDoc } from '../../components/doc/slidemenu/styledoc';
 
 const SlideMenuDemo = () => {
     const docs = [
@@ -28,8 +28,8 @@ const SlideMenuDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

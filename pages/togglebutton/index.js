@@ -6,7 +6,7 @@ import { BasicDoc } from '../../components/doc/togglebutton/basicdoc';
 import { CustomizedDoc } from '../../components/doc/togglebutton/customizeddoc';
 import { ApiDoc } from '../../components/doc/togglebutton/apidoc';
 import { AccessibilityDoc } from '../../components/doc/togglebutton/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/togglebutton/stylingdoc';
+import { StyleDoc } from '../../components/doc/togglebutton/styledoc';
 import { ImportDoc } from '../../components/doc/togglebutton/importdoc';
 import { FormikDoc } from '../../components/doc/togglebutton/validation/formikdoc';
 import { HookFormDoc } from '../../components/doc/togglebutton/validation/hookformdoc';
@@ -47,8 +47,8 @@ const ToggleButtonDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

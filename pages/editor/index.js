@@ -8,7 +8,7 @@ import { BasicDoc } from '../../components/doc/editor/basicdoc';
 import { TemplateDoc } from '../../components/doc/editor/templatedoc';
 import { ApiDoc } from '../../components/doc/editor/apidoc';
 import { AccessibilityDoc } from '../../components/doc/editor/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/editor/stylingdoc';
+import { StyleDoc } from '../../components/doc/editor/styledoc';
 import { FormikDoc } from '../../components/doc/editor/validation/formikdoc';
 import { HookFormDoc } from '../../components/doc/editor/validation/hookformdoc';
 import { ReadOnlyDoc } from '../../components/doc/editor/readonlydoc';
@@ -59,8 +59,8 @@ const EditorDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

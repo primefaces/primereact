@@ -4,7 +4,7 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/multiselect/apidoc';
 import { AccessibilityDoc } from '../../components/doc/multiselect/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/multiselect/stylingdoc';
+import { StyleDoc } from '../../components/doc/multiselect/styledoc';
 import { ImportDoc } from '../../components/doc/multiselect/importdoc';
 import { BasicDoc } from '../../components/doc/multiselect/basicdoc';
 import { ChipsDoc } from '../../components/doc/multiselect/chipsdoc';
@@ -103,8 +103,8 @@ const MultiSelectDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

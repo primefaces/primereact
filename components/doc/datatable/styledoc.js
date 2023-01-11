@@ -1,171 +1,106 @@
-import React, { useEffect, useState } from 'react';
-import { ProductService } from '../../../service/ProductService';
-import { Column } from '../../lib/column/Column';
-import { DataTable } from '../../lib/datatable/DataTable';
-import { classNames } from '../../lib/utils/Utils';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSubSection } from '../common/docsubsection';
+import Link from 'next/link';
 
-export function StyleDoc(props) {
-    const [products, setProducts] = useState([]);
-
-    useEffect(() => {
-        ProductService.getProductsSmall().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const rowClass = (data) => {
-        return {
-            'bg-black-alpha-10': data.category === 'Accessories'
-        };
-    };
-
-    const stockBodyTemplate = (rowData) => {
-        const stockClassName = classNames({
-            'text-red-400 line-through font-bold': rowData.quantity === 0,
-            'text-yellow-400 font-bold': rowData.quantity > 0 && rowData.quantity < 10,
-            'text-green-400 font-bold': rowData.quantity > 10
-        });
-
-        return <div className={stockClassName}>{rowData.quantity}</div>;
-    };
-
-    const code = {
-        basic: `
-<DataTable value={products} rowClassName={rowClass} responsiveLayout="scroll">
-        <Column field="code" header="Code"></Column>
-        <Column field="name" header="Name"></Column>
-        <Column field="category" header="Category"></Column>
-        <Column field="quantity" header="Quantity" body={stockBodyTemplate}></Column>
-</DataTable>
-        `,
-        javascript: `
-import React, { useState, useEffect } from 'react';
-import { classNames } from 'primereact/utils';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
-import { ProductService } from './service/ProductService';
-import './DataTableDemo.css';
-
-const StyleDoc = () => {
-    const [products, setProducts] = useState([]);
-    
-
-    useEffect(() => {
-        ProductService.getProductsSmall().then(data => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const rowClass = (data) => {
-        return {
-            'bg-black-alpha-10': data.category === 'Accessories'
-        }
-    }
-
-    const stockBodyTemplate = (rowData) => {
-        const stockClassName = classNames({
-            'text-red-400 line-through font-bold': rowData.quantity === 0,
-            'text-yellow-400 font-bold': rowData.quantity > 0 && rowData.quantity < 10,
-            'text-green-400 font-bold': rowData.quantity > 10
-        });
-
-        return (
-            <div className={stockClassName}>
-                {rowData.quantity}
-            </div>
-        );
-    }
-
-    return (
-        <div className="card">
-            <DataTable value={products} rowClassName={rowClass} responsiveLayout="scroll">
-                <Column field="code" header="Code"></Column>
-                <Column field="name" header="Name"></Column>
-                <Column field="category" header="Category"></Column>
-                <Column field="quantity" header="Quantity" body={stockBodyTemplate}></Column>
-            </DataTable>
-        </div>
-    );
-}
-        `,
-        typescript: `
-import React, { useState, useEffect } from 'react';
-import { classNames } from 'primereact/utils';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
-import { ProductService } from './service/ProductService';
-import './DataTableDemo.css';
-
-const StyleDoc = () => {
-    const [products, setProducts] = useState([]);
-    
-
-    useEffect(() => {
-        ProductService.getProductsSmall().then(data => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const rowClass = (data) => {
-        return {
-            'bg-black-alpha-10': data.category === 'Accessories'
-        }
-    }
-
-    const stockBodyTemplate = (rowData) => {
-        const stockClassName = classNames({
-            'text-red-400 line-through font-bold': rowData.quantity === 0,
-            'text-yellow-400 font-bold': rowData.quantity > 0 && rowData.quantity < 10,
-            'text-green-400 font-bold': rowData.quantity > 10
-        });
-
-        return (
-            <div className={stockClassName}>
-                {rowData.quantity}
-            </div>
-        );
-    }
-
-    return (
-        <div className="card">
-            <DataTable value={products} rowClassName={rowClass} responsiveLayout="scroll">
-                <Column field="code" header="Code"></Column>
-                <Column field="name" header="Name"></Column>
-                <Column field="category" header="Category"></Column>
-                <Column field="quantity" header="Quantity" body={stockBodyTemplate}></Column>
-            </DataTable>
-        </div>
-    );
-}
-        `,
-        data: `
-/* ProductService */        
-{
-    id: '1000',
-    code: 'f230fh0g3',
-    name: 'Bamboo Watch',
-    description: 'Product Description',
-    image: 'bamboo-watch.jpg',
-    price: 65,
-    category: 'Accessories',
-    quantity: 24,
-    inventoryStatus: 'INSTOCK',
-    rating: 5
-},
-...
-        `
-    };
-
+export function StyleDoc() {
     return (
         <>
-            <DocSectionText {...props}>
-                <p>Particular rows and cells can be styled based on data.</p>
-            </DocSectionText>
-            <div className="card">
-                <DataTable value={products} rowClassName={rowClass} responsiveLayout="scroll">
-                    <Column field="code" header="Code"></Column>
-                    <Column field="name" header="Name"></Column>
-                    <Column field="category" header="Category"></Column>
-                    <Column field="quantity" header="Quantity" body={stockBodyTemplate}></Column>
-                </DataTable>
-            </div>
-            <DocSectionCode code={code} service={['ProductService']} />
+            <DocSubSection id="styling" label="Styling">
+                <p>
+                    Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
+                </p>
+                <div className="doc-tablewrapper">
+                    <table className="doc-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Element</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>p-datatable</td>
+                                <td>Container element.</td>
+                            </tr>
+                            <tr>
+                                <td>p-datatable-scrollable</td>
+                                <td>Container element when table is scrollable.</td>
+                            </tr>
+                            <tr>
+                                <td>p-datatable-header</td>
+                                <td>Header section.</td>
+                            </tr>
+                            <tr>
+                                <td>p-datatable-footer</td>
+                                <td>Footer section.</td>
+                            </tr>
+                            <tr>
+                                <td>p-datatable-wrapper</td>
+                                <td>Wrapper of table element.</td>
+                            </tr>
+                            <tr>
+                                <td>p-datatable-table</td>
+                                <td>Table element.</td>
+                            </tr>
+                            <tr>
+                                <td>p-datatable-thead</td>
+                                <td>Table thead element.</td>
+                            </tr>
+                            <tr>
+                                <td>p-datatable-tbody</td>
+                                <td>Table tbody element.</td>
+                            </tr>
+                            <tr>
+                                <td>p-datatable-tfoot</td>
+                                <td>Table tfoot element.</td>
+                            </tr>
+                            <tr>
+                                <td>p-column-title</td>
+                                <td>Title of a column.</td>
+                            </tr>
+                            <tr>
+                                <td>p-sortable-column</td>
+                                <td>Sortable column header.</td>
+                            </tr>
+                            <tr>
+                                <td>p-frozen-column</td>
+                                <td>Frozen column header.</td>
+                            </tr>
+                            <tr>
+                                <td>p-rowgroup-header</td>
+                                <td>Header of a rowgroup.</td>
+                            </tr>
+                            <tr>
+                                <td>p-rowgroup-footer</td>
+                                <td>Footer of a rowgroup.</td>
+                            </tr>
+                            <tr>
+                                <td>p-datatable-row-expansion</td>
+                                <td>Expanded row content.</td>
+                            </tr>
+                            <tr>
+                                <td>p-row-toggler</td>
+                                <td>Toggle element for row expansion.</td>
+                            </tr>
+                            <tr>
+                                <td>p-datatable-emptymessage</td>
+                                <td>Cell containing the empty message.</td>
+                            </tr>
+                            <tr>
+                                <td>p-row-editor-init</td>
+                                <td>Pencil button of row editor.</td>
+                            </tr>
+                            <tr>
+                                <td>p-row-editor-init</td>
+                                <td>Save button of row editor.</td>
+                            </tr>
+                            <tr>
+                                <td>p-row-editor-init</td>
+                                <td>Cancel button of row editor.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </DocSubSection>
         </>
     );
 }

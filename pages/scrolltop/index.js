@@ -4,7 +4,7 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/scrolltop/apidoc';
 import { AccessibilityDoc } from '../../components/doc/scrolltop/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/scrolltop/stylingdoc';
+import { StyleDoc } from '../../components/doc/scrolltop/styledoc';
 import { ImportDoc } from '../../components/doc/scrolltop/importdoc';
 import { BasicDoc } from '../../components/doc/scrolltop/basicdoc';
 import { ElementDoc } from '../../components/doc/scrolltop/elementdoc';
@@ -29,8 +29,8 @@ const ScrollTopDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

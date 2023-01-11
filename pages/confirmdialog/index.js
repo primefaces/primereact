@@ -4,7 +4,7 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/confirmdialog/apidoc';
 import { AccessibilityDoc } from '../../components/doc/confirmdialog/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/confirmdialog/stylingdoc';
+import { StyleDoc } from '../../components/doc/confirmdialog/styledoc';
 import { BasicDoc } from '../../components/doc/confirmdialog/basicdoc';
 import { ImportDoc } from '../../components/doc/confirmdialog/importdoc';
 import { PositionDoc } from '../../components/doc/confirmdialog/positiondoc';
@@ -35,8 +35,8 @@ const ConfirmDialogDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

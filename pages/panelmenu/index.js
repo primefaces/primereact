@@ -6,7 +6,7 @@ import { BasicDoc } from '../../components/doc/panelmenu/basicdoc';
 import { ImportDoc } from '../../components/doc/panelmenu/importdoc';
 import { ApiDoc } from '../../components/doc/panelmenu/apidoc';
 import { AccessibilityDoc } from '../../components/doc/panelmenu/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/panelmenu/stylingdoc';
+import { StyleDoc } from '../../components/doc/panelmenu/styledoc';
 import { ControlledDoc } from '../../components/doc/panelmenu/controlleddoc';
 
 const PanelMenuDemo = () => {
@@ -28,8 +28,8 @@ const PanelMenuDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

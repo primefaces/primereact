@@ -6,7 +6,7 @@ import { ImportDoc } from '../../components/doc/carousel/importdoc';
 import { BasicDoc } from '../../components/doc/carousel/basicdoc';
 import { ApiDoc } from '../../components/doc/carousel/apidoc';
 import { AccessibilityDoc } from '../../components/doc/carousel/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/carousel/stylingdoc';
+import { StyleDoc } from '../../components/doc/carousel/styledoc';
 import { CircularDoc } from '../../components/doc/carousel/circulardoc';
 import { VerticalDoc } from '../../components/doc/carousel/verticaldoc';
 import { NumScrollDoc } from '../../components/doc/carousel/numscrolldoc';
@@ -46,8 +46,8 @@ const CarouselDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',
