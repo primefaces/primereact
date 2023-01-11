@@ -16,9 +16,9 @@ import * as React from 'react';
 export interface BadgeProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'ref'> {
     /**
      * Value to display inside the badge.
-     * @defaultValue null
+     *
      */
-    value?: null | any;
+    value?: any | null | undefined;
     /**
      * Severity type of the badge.
      * @defaultValue null

@@ -17,7 +17,7 @@ export interface ProgressBarProps extends Omit<React.DetailedHTMLProps<React.HTM
     /**
      * Current value of the progress.
      */
-    value?: string | number | undefined | null | undefined;
+    value?: string | number | null | undefined;
     /**
      * Show or hide progress bar value.
      * @defaultValue true

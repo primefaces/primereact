@@ -51,7 +51,7 @@ export interface BlockUIProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
     fullScreen?: boolean | undefined;
     /**
      * Template of mask.
-     * @defaultValue null
+     *
      */
     template?: React.ReactNode | ((props: BlockUIProps) => React.ReactNode) | null | undefined;
     /**

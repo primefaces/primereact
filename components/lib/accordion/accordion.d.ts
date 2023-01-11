@@ -8,22 +8,16 @@
  *
  * - {@link AccordionTab}
  *
- * @module Accordion
+ * @module accordion
  *
  */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
-import { Nullable } from '../ts-helpers';
 import { IconType } from '../utils';
 
 /**
- * Defines the valid types of headerTemplate property.
- * @see {@link AccordionTabProps.headerTemplate}
- */
-type AccordionTabHeaderTemplateType = React.ReactNode | ((props: AccordionTabProps) => React.ReactNode);
-
-/**
  * Defines valid properties in AccordionTab component.
+ * @group Properties
  */
 interface AccordionTabProps {
     /**
@@ -44,7 +38,7 @@ interface AccordionTabProps {
      */
     disabled?: boolean | undefined;
     /**
-     * Used to define the header of the tab
+     * Used to define the header of the tab.
      */
     header?: React.ReactNode | undefined;
     /**
@@ -56,10 +50,9 @@ interface AccordionTabProps {
      */
     headerStyle?: React.CSSProperties | undefined;
     /**
-     * Custom header template of the tab
-     * @type {AccordionTabHeaderTemplateType}
+     * Custom header template of the tab.
      */
-    headerTemplate?: AccordionTabHeaderTemplateType | undefined;
+    headerTemplate?: React.ReactNode | ((props: AccordionTabProps) => React.ReactNode);
     /**
      * Inline style of the tab header and content.
      */
@@ -78,14 +71,9 @@ interface AccordionTabProps {
 
 /**
  * AccordionTab is a helper component for Accordion.
+ * @group Component
  */
 export declare class AccordionTab extends React.Component<AccordionTabProps, any> {}
-
-/**
- * Defines the valid types of activeIndex property.
- * @see {@link AccordionProps.activeIndex}
- */
-type AccordionActiveIndexType = Nullable<number | number[]>;
 
 /**
  * Custom tab open event.
@@ -95,7 +83,6 @@ type AccordionActiveIndexType = Nullable<number | number[]>;
 export interface AccordionTabOpenEvent {
     /**
      * Browser mouse event.
-     * @type {React.MouseEvent<HTMLElement>}
      */
     originalEvent: React.MouseEvent<HTMLElement>;
     /**
@@ -120,7 +107,6 @@ export interface AccordionTabCloseEvent extends AccordionTabOpenEvent {}
 export interface AccordionTabChangeEvent {
     /**
      * Browser mouse event.
-     * @type {React.MouseEvent<HTMLElement>}
      */
     originalEvent: React.MouseEvent<HTMLElement>;
     /**
@@ -131,14 +117,14 @@ export interface AccordionTabChangeEvent {
 
 /**
  * Defines valid properties in Accordion component. In addition to these, all properties of HTMLDivElement can be used in this component.
+ * @group Properties
  */
 export interface AccordionProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     /**
      * Active index or indexes of the element. Use an array of numbers for multiple indexes.
      * The {@link multiple} prop must be set to true in order to specify multiple indexes.
-     * @type {AccordionActiveIndexType}
      */
-    activeIndex?: AccordionActiveIndexType | undefined;
+    activeIndex?: number | number[] | null | undefined;
     /**
      * When enabled, multiple tabs can be activated at the same time.
      * @defaultValue false
@@ -181,6 +167,9 @@ export interface AccordionProps extends Omit<React.DetailedHTMLProps<React.HTMLA
     children?: React.ReactNode | undefined;
 }
 
+/**
+ * @group Component
+ */
 // tslint:disable-next-line:max-classes-per-file
 export declare class Accordion extends React.Component<AccordionProps, any> {
     /**
