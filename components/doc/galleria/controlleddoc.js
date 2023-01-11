@@ -6,21 +6,21 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { PhotoService } from '../../../service/PhotoService';
 import getConfig from 'next/config';
 
-export function ProgrammaticDoc(props) {
+export function ControlledDoc(props) {
     const [images, setImages] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
 
     const responsiveOptions = [
         {
-            breakpoint: '1024px',
-            numVisible: 5
+            breakpoint: '991px',
+            numVisible: 4
         },
         {
-            breakpoint: '768px',
+            breakpoint: '767px',
             numVisible: 3
         },
         {
-            breakpoint: '560px',
+            breakpoint: '575px',
             numVisible: 1
         }
     ];
@@ -39,16 +39,16 @@ export function ProgrammaticDoc(props) {
     };
 
     const itemTemplate = (item) => {
-        return <img src={`${contextPath}/${item.itemImageSrc}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+        return <img src={`${contextPath}/${item.itemImageSrc}`} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
     };
 
     const thumbnailTemplate = (item) => {
-        return <img src={`${contextPath}/${item.thumbnailImageSrc}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={item.alt} style={{ display: 'block' }} />;
+        return <img src={`${contextPath}/${item.thumbnailImageSrc}`} alt={item.alt} style={{ display: 'block' }} />;
     };
 
     const code = {
         basic: `
-<div className="py-2">
+<div>
     <Button icon="pi pi-minus" onClick={prev} className="p-button-secondary" />
     <Button icon="pi pi-plus" onClick={next} className="p-button-secondary ml-2" />
 </div>
@@ -62,28 +62,28 @@ import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
 import { PhotoService } from './service/PhotoService';
 
-export default function ProgrammaticDoc() {
+export default function ControlledDemo() {
     const [images, setImages] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0)
 
     const responsiveOptions = [
         {
-            breakpoint: '1024px',
-            numVisible: 5
+            breakpoint: '991px',
+            numVisible: 4
         },
         {
-            breakpoint: '768px',
+            breakpoint: '767px',
             numVisible: 3
         },
         {
-            breakpoint: '560px',
+            breakpoint: '575px',
             numVisible: 1
         }
     ];
 
     useEffect(() => {
         PhotoService.getImages().then(data => setImages(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     const next = () => {
         setActiveIndex(prevState => (prevState === images.length - 1) ? 0 : prevState + 1)
@@ -91,26 +91,33 @@ export default function ProgrammaticDoc() {
 
     const prev = () => {
         setActiveIndex(prevState => (prevState === images.length + 1) ? 0 : prevState - 1)
-
     }
 
     const itemTemplate = (item) => {
-        return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+        return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
     }
 
     const thumbnailTemplate = (item) => {
-        return <img src={item.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.alt} style={{ display: 'block' }} />;
+        return <img src={item.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} alt={item.alt} style={{ display: 'block' }} />;
     }
 
     return (
-        <div className="card flex flex-column justify-content-center align-items-center">
-            <div className="py-2">
-                <Button icon="pi pi-minus" onClick={prev} className="p-button-secondary" />
+        <div className="card">
+            <div className="mb-3">
+                <Button icon="pi pi-minus" onClick={prev} />
                 <Button icon="pi pi-plus" onClick={next} className="p-button-secondary ml-2" />
             </div>
 
-            <Galleria value={images} activeIndex={activeIndex} onItemChange={(e) => setActiveIndex(e.index)} responsiveOptions={responsiveOptions} numVisible={5}
-                item={itemTemplate} thumbnail={thumbnailTemplate} style={{ maxWidth: '640px' }} />
+            <Galleria
+                value={images}
+                activeIndex={activeIndex}
+                onItemChange={(e) => setActiveIndex(e.index)}
+                responsiveOptions={responsiveOptions}
+                numVisible={5}
+                item={itemTemplate}
+                thumbnail={thumbnailTemplate}
+                style={{ maxWidth: '640px' }}
+            />
         </div>
     )
 }
@@ -121,28 +128,28 @@ import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
 import { PhotoService } from './service/PhotoService';
 
-export default function ProgrammaticDoc() {
+export default function ControlledDemo() {
     const [images, setImages] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0)
     
-    const responsiveOptions = [
+    const responsiveOptions: GalleriaResponsiveOptions[] = [
         {
-            breakpoint: '1024px',
-            numVisible: 5
+            breakpoint: '991px',
+            numVisible: 4
         },
         {
-            breakpoint: '768px',
+            breakpoint: '767px',
             numVisible: 3
         },
         {
-            breakpoint: '560px',
+            breakpoint: '575px',
             numVisible: 1
         }
     ];
 
     useEffect(() => {
         PhotoService.getImages().then(data => setImages(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     const next = () => {
         setActiveIndex(prevState => (prevState === images.length - 1) ? 0 : prevState + 1)
@@ -150,25 +157,33 @@ export default function ProgrammaticDoc() {
 
     const prev = () => {
         setActiveIndex(prevState => (prevState === images.length + 1) ? 0 : prevState - 1)
-
     }
 
     const itemTemplate = (item) => {
-        return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+        return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
     }
 
     const thumbnailTemplate = (item) => {
-        return <img src={item.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.alt} style={{ display: 'block' }} />;
+        return <img src={item.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} alt={item.alt} style={{ display: 'block' }} />;
     }
 
     return (
-        <div className="card flex flex-column justify-content-center align-items-center">
-            <div className="py-2">
-                <Button icon="pi pi-minus" onClick={prev} className="p-button-secondary" />
+        <div className="card">
+            <div className="mb-3">
+                <Button icon="pi pi-minus" onClick={prev} />
                 <Button icon="pi pi-plus" onClick={next} className="p-button-secondary ml-2" />
             </div>
-            <Galleria value={images} activeIndex={activeIndex} onItemChange={(e) => setActiveIndex(e.index)} responsiveOptions={responsiveOptions} numVisible={5}
-                item={itemTemplate} thumbnail={thumbnailTemplate} style={{ maxWidth: '640px' }} />
+
+            <Galleria
+                value={images}
+                activeIndex={activeIndex}
+                onItemChange={(e) => setActiveIndex(e.index)}
+                responsiveOptions={responsiveOptions}
+                numVisible={5}
+                item={itemTemplate}
+                thumbnail={thumbnailTemplate}
+                style={{ maxWidth: '640px' }}
+            />
         </div>
     )
 }
@@ -188,26 +203,24 @@ export default function ProgrammaticDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Programmatic Doc</p>
+                <p>Galleria can be controlled programmatically using a binding to <i>activeIndex</i> and <i>onItemChange</i> event to update the active index.</p>
             </DocSectionText>
-            <div className="card flex flex-column justify-content-center align-items-center">
-                <div>
-                    <div className="py-2 align-self-start">
-                        <Button icon="pi pi-minus" onClick={prev} className="p-button-secondary" />
-                        <Button icon="pi pi-plus" onClick={next} className="p-button-secondary ml-2" />
-                    </div>
-
-                    <Galleria
-                        value={images}
-                        activeIndex={activeIndex}
-                        onItemChange={(e) => setActiveIndex(e.index)}
-                        responsiveOptions={responsiveOptions}
-                        numVisible={5}
-                        item={itemTemplate}
-                        thumbnail={thumbnailTemplate}
-                        style={{ maxWidth: '640px' }}
-                    />
+            <div className="card">
+                <div className="mb-3">
+                    <Button icon="pi pi-minus" onClick={prev} />
+                    <Button icon="pi pi-plus" onClick={next} className="p-button-secondary ml-2" />
                 </div>
+
+                <Galleria
+                    value={images}
+                    activeIndex={activeIndex}
+                    onItemChange={(e) => setActiveIndex(e.index)}
+                    responsiveOptions={responsiveOptions}
+                    numVisible={5}
+                    item={itemTemplate}
+                    thumbnail={thumbnailTemplate}
+                    style={{ maxWidth: '640px' }}
+                />
             </div>
             <DocSectionCode code={code} service={['PhotoService']} />
         </>

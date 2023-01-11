@@ -2,11 +2,11 @@ import Head from 'next/head';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ImportDoc } from '../../components/doc/galleria/importdoc';
-import { GaleriaDemo } from '../../components/doc/galleria/galeriademo';
+import { BasicDoc } from '../../components/doc/galleria/basicdoc';
 import { ApiDoc } from '../../components/doc/galleria/apidoc';
 import { AccessibilityDoc } from '../../components/doc/galleria/accessibilitydoc';
 import { StyleDoc } from '../../components/doc/galleria/styledoc';
-import { ProgrammaticDoc } from '../../components/doc/galleria/programmaticdoc';
+import { ControlledDoc } from '../../components/doc/galleria/controlleddoc';
 import { ResponsiveDoc } from '../../components/doc/galleria/responsivedoc';
 import { AutoPlayDemoDoc } from '../../components/doc/galleria/autoplaydoc';
 import { CaptionDoc } from '../../components/doc/galleria/captiondoc';
@@ -35,14 +35,14 @@ const GalleriaDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'galeriademo',
+            id: 'basic',
             label: 'Basic',
-            component: GaleriaDemo
+            component: BasicDoc
         },
         {
-            id: 'programmatic',
-            label: 'Programmatic',
-            component: ProgrammaticDoc
+            id: 'controlled',
+            label: 'Controlled',
+            component: ControlledDoc
         },
         {
             id: 'indicator',
@@ -161,7 +161,7 @@ const GalleriaDemo = () => {
             component: AdvancedDoc
         },
         {
-            id: 'style',
+            id: 'styling',
             label: 'Style',
             component: StyleDoc
         },
