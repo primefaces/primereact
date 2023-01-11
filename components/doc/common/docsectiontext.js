@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 
 export function DocSectionText(props) {
     const router = useRouter();
-    const headerEl = props.level === 2 ? 'h3' : 'h2';
 
     return (
         <>
