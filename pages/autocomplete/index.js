@@ -1,9 +1,8 @@
 import Head from 'next/head';
 import React from 'react';
-import { StylingDoc } from '../../components/doc/accordion/stylingdoc';
 import { ApiDoc } from '../../components/doc/autocomplete/apidoc';
 import { AccessibilityDoc } from '../../components/doc/autocomplete/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/autocomplete/stylingdoc';
+import { StyleDoc } from '../../components/doc/autocomplete/styledoc';
 import { BasicDoc } from '../../components/doc/autocomplete/basicdoc';
 import { DisabledDoc } from '../../components/doc/autocomplete/disableddoc';
 import { DropdownDoc } from '../../components/doc/autocomplete/dropdowndoc';
@@ -103,8 +102,8 @@ const AutoCompleteDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

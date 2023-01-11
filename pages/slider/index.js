@@ -10,7 +10,7 @@ import { RangeDoc } from '../../components/doc/slider/rangedoc';
 import { VerticalDoc } from '../../components/doc/slider/verticaldoc';
 import { ApiDoc } from '../../components/doc/slider/apidoc';
 import { AccessibilityDoc } from '../../components/doc/slider/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/slider/stylingdoc';
+import { StyleDoc } from '../../components/doc/slider/styledoc';
 
 const SliderDemo = () => {
     const docs = [
@@ -46,8 +46,8 @@ const SliderDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

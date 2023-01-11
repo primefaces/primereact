@@ -13,7 +13,7 @@ import { OutlinedButtonsDoc } from '../../components/doc/splitbutton/outlinedbut
 import { SizesDoc } from '../../components/doc/splitbutton/sizesdoc';
 import { ApiDoc } from '../../components/doc/splitbutton/apidoc';
 import { AccessibilityDoc } from '../../components/doc/splitbutton/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/splitbutton/stylingdoc';
+import { StyleDoc } from '../../components/doc/splitbutton/styledoc';
 import { LoadingDoc } from '../../components/doc/splitbutton/loadingdoc';
 import { DisabledDoc } from '../../components/doc/splitbutton/disableddoc';
 
@@ -76,8 +76,8 @@ const SplitButtonDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

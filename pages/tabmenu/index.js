@@ -7,7 +7,7 @@ import { BasicDoc } from '../../components/doc/tabmenu/basicdoc';
 import { ControlledDoc } from '../../components/doc/tabmenu/controlleddoc';
 import { ApiDoc } from '../../components/doc/tabmenu/apidoc';
 import { AccessibilityDoc } from '../../components/doc/tabmenu/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/tabmenu/stylingdoc';
+import { StyleDoc } from '../../components/doc/tabmenu/styledoc';
 
 const TabMenuDemo = () => {
     const docs = [
@@ -28,8 +28,8 @@ const TabMenuDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

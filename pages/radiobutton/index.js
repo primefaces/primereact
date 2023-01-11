@@ -10,7 +10,7 @@ import { GroupDoc } from '../../components/doc/radiobutton/groupdoc';
 import { ImportDoc } from '../../components/doc/radiobutton/importdoc';
 import { InvalidDoc } from '../../components/doc/radiobutton/invaliddoc';
 import { HookFormDoc } from '../../components/doc/radiobutton/validation/hookformdoc';
-import { StylingDoc } from '../../components/doc/radiobutton/stylingdoc';
+import { StyleDoc } from '../../components/doc/radiobutton/styledoc';
 import { AccessibilityDoc } from '../../components/doc/radiobutton/accessibilitydoc';
 
 const RadioButtonDemo = () => {
@@ -59,8 +59,8 @@ const RadioButtonDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

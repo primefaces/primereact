@@ -11,7 +11,7 @@ import { MaximizableDoc } from '../../components/doc/dialog/maximizabledoc';
 import { PositionDoc } from '../../components/doc/dialog/positiondoc';
 import { ApiDoc } from '../../components/doc/dialog/apidoc';
 import { AccessibilityDoc } from '../../components/doc/dialog/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/dialog/stylingdoc';
+import { StyleDoc } from '../../components/doc/dialog/styledoc';
 import { LengthyContentDoc } from '../../components/doc/dialog/lengthycontentdoc';
 
 const DialogDemo = () => {
@@ -58,8 +58,8 @@ const DialogDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

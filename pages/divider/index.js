@@ -10,7 +10,7 @@ import { VerticalDoc } from '../../components/doc/divider/verticaldoc';
 import { VerticalContentDoc } from '../../components/doc/divider/verticalcontentdoc';
 import { ApiDoc } from '../../components/doc/divider/apidoc';
 import { AccessibilityDoc } from '../../components/doc/divider/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/divider/stylingdoc';
+import { StyleDoc } from '../../components/doc/divider/styledoc';
 
 const DividerDemo = () => {
     const docs = [
@@ -46,8 +46,8 @@ const DividerDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

@@ -4,7 +4,7 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/inputtextarea/apidoc';
 import { AccessibilityDoc } from '../../components/doc/inputtextarea/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/inputtextarea/stylingdoc';
+import { StyleDoc } from '../../components/doc/inputtextarea/styledoc';
 import { AutoResizeDoc } from '../../components/doc/inputtextarea/autoresizedoc';
 import { BasicDoc } from '../../components/doc/inputtextarea/basicdoc';
 import { DisabledDoc } from '../../components/doc/inputtextarea/disableddoc';
@@ -71,8 +71,8 @@ const InputTextareaDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

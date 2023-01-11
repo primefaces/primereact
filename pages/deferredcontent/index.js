@@ -7,7 +7,7 @@ import { BasicDoc } from '../../components/doc/deferredcontent/basicdoc';
 import { DataTableDoc } from '../../components/doc/deferredcontent/datatabledoc';
 import { ApiDoc } from '../../components/doc/deferredcontent/apidoc';
 import { AccessibilityDoc } from '../../components/doc/deferredcontent/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/deferredcontent/stylingdoc';
+import { StyleDoc } from '../../components/doc/deferredcontent/styledoc';
 
 const DeferredContentDemo = () => {
     const docs = [
@@ -28,8 +28,8 @@ const DeferredContentDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

@@ -8,7 +8,7 @@ import { GroupDoc } from '../../components/doc/menu/groupdoc';
 import { PopupDoc } from '../../components/doc/menu/popupdoc';
 import { ApiDoc } from '../../components/doc/menu/apidoc';
 import { AccessibilityDoc } from '../../components/doc/menu/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/menu/stylingdoc';
+import { StyleDoc } from '../../components/doc/menu/styledoc';
 
 const MenuDemo = () => {
     const docs = [
@@ -34,8 +34,8 @@ const MenuDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

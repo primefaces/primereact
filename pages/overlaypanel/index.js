@@ -4,7 +4,7 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/overlaypanel/apidoc';
 import { AccessibilityDoc } from '../../components/doc/overlaypanel/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/overlaypanel/stylingdoc';
+import { StyleDoc } from '../../components/doc/overlaypanel/styledoc';
 import { ImportDoc } from '../../components/doc/overlaypanel/importdoc';
 import { BasicDoc } from '../../components/doc/overlaypanel/basicdoc';
 import { DataTableDoc } from '../../components/doc/overlaypanel/datatabledoc';
@@ -28,8 +28,8 @@ const OverlayPanelDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

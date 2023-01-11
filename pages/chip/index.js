@@ -4,12 +4,12 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/chip/apidoc';
 import { AccessibilityDoc } from '../../components/doc/chip/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/chip/stylingdoc';
+import { StyleDoc } from '../../components/doc/chip/styledoc';
 import { ImportDoc } from '../../components/doc/chip/importdoc';
 import { BasicDoc } from '../../components/doc/chip/basicdoc';
 import { IconDoc } from '../../components/doc/chip/icondoc';
 import { ImageDoc } from '../../components/doc/chip/imagedoc';
-import { StylingDoc } from '../../components/doc/chip/stylingdoc';
+import { StyleDoc } from '../../components/doc/chip/styledoc';
 import { TemplateDoc } from '../../components/doc/chip/templatedoc';
 import { DocActions } from '../../components/doc/common/docactions';
 
@@ -47,8 +47,8 @@ const ChipDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

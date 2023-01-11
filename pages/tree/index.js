@@ -5,7 +5,7 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { ImportDoc } from '../../components/doc/tree/importdoc';
 import { ApiDoc } from '../../components/doc/tree/apidoc';
 import { AccessibilityDoc } from '../../components/doc/tree/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/tree/stylingdoc';
+import { StyleDoc } from '../../components/doc/tree/styledoc';
 import { BasicDoc } from '../../components/doc/tree/basicdoc';
 import { ProgrammaticDoc } from '../../components/doc/tree/programmaticdoc';
 import { TreeEventsDoc } from '../../components/doc/tree/eventsdoc';
@@ -108,8 +108,8 @@ const TreeDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

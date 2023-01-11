@@ -5,7 +5,7 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ApiDoc } from '../../components/doc/gmap/apidoc';
 import { AccessibilityDoc } from '../../components/doc/gmap/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/gmap/stylingdoc';
+import { StyleDoc } from '../../components/doc/gmap/styledoc';
 import { ImportDoc } from '../../components/doc/gmap/importdoc';
 import { GMapDoc } from '../../components/doc/gmap/gmapdoc';
 
@@ -23,8 +23,8 @@ const GMapDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

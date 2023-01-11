@@ -7,7 +7,7 @@ import { BasicDoc } from '../../components/doc/dock/basicdoc';
 import { AdvanceDoc } from '../../components/doc/dock/advancedoc';
 import { ApiDoc } from '../../components/doc/dock/apidoc';
 import { AccessibilityDoc } from '../../components/doc/dock/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/dock/stylingdoc';
+import { StyleDoc } from '../../components/doc/dock/styledoc';
 
 const DockDemo = () => {
     const docs = [
@@ -28,8 +28,8 @@ const DockDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

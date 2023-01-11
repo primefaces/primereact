@@ -8,7 +8,7 @@ import { DynamicDoc } from '../../components/doc/messages/dynamicdoc';
 import { TemplateDoc } from '../../components/doc/messages/templatedoc';
 import { ApiDoc } from '../../components/doc/messages/apidoc';
 import { AccessibilityDoc } from '../../components/doc/messages/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/messages/stylingdoc';
+import { StyleDoc } from '../../components/doc/messages/styledoc';
 import { BasicDoc } from '../../components/doc/messages/basicdoc';
 import { ClosableDoc } from '../../components/doc/messages/closeabledoc';
 import { StickyDoc } from '../../components/doc/messages/stickydoc';
@@ -52,8 +52,8 @@ const MessagesDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

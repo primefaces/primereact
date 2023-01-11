@@ -21,7 +21,7 @@ import { SizesDoc } from '../../components/doc/button/sizesdoc';
 import { TemplateDoc } from '../../components/doc/button/templatedoc';
 import { ApiDoc } from '../../components/doc/button/apidoc';
 import { AccessibilityDoc } from '../../components/doc/button/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/button/stylingdoc';
+import { StyleDoc } from '../../components/doc/button/styledoc';
 import { DisabledDoc } from '../../components/doc/button/disableddoc';
 
 const ButtonDemo = () => {
@@ -118,8 +118,8 @@ const ButtonDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

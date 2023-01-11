@@ -8,10 +8,9 @@ import { MultipleDoc } from '../../components/doc/accordion/multipledoc';
 import { ControlledDoc } from '../../components/doc/accordion/controlleddoc';
 import { TemplateDoc } from '../../components/doc/accordion/templatedoc';
 import { AccessibilityDoc } from '../../components/doc/accordion/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/accordion/stylingdoc';
 import { ApiDoc } from '../../components/doc/accordion/apidoc';
 import { AccessibilityDoc } from '../../components/doc/accordion/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/accordion/stylingdoc';
+import { StyleDoc } from '../../components/doc/accordion/styledoc';
 
 const AccordionDemo = () => {
     const docs = [
@@ -42,8 +41,8 @@ const AccordionDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

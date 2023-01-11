@@ -4,7 +4,7 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/multistatecheckbox/apidoc';
 import { AccessibilityDoc } from '../../components/doc/multistatecheckbox/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/multistatecheckbox/stylingdoc';
+import { StyleDoc } from '../../components/doc/multistatecheckbox/styledoc';
 import { BasicDoc } from '../../components/doc/multistatecheckbox/basicdoc';
 import { DisabledDoc } from '../../components/doc/multistatecheckbox/disableddoc';
 import { ImportDoc } from '../../components/doc/multistatecheckbox/importdoc';
@@ -53,8 +53,8 @@ const MultiStateCheckboxDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

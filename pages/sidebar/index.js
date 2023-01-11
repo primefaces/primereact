@@ -9,7 +9,7 @@ import { TemplateDoc } from '../../components/doc/sidebar/templatedoc';
 import { FullScreenDoc } from '../../components/doc/sidebar/fullscreendoc';
 import { ApiDoc } from '../../components/doc/sidebar/apidoc';
 import { AccessibilityDoc } from '../../components/doc/sidebar/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/sidebar/stylingdoc';
+import { StyleDoc } from '../../components/doc/sidebar/styledoc';
 import { SizeDoc } from '../../components/doc/sidebar/sizedoc';
 
 const SidebarDemo = () => {
@@ -46,8 +46,8 @@ const SidebarDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

@@ -4,7 +4,7 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/treeselect/apidoc';
 import { AccessibilityDoc } from '../../components/doc/treeselect/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/treeselect/stylingdoc';
+import { StyleDoc } from '../../components/doc/treeselect/styledoc';
 import { BasicDoc } from '../../components/doc/treeselect/basicdoc';
 import { CheckboxDoc } from '../../components/doc/treeselect/checkboxdoc';
 import { FilterDoc } from '../../components/doc/treeselect/filterdoc';
@@ -83,8 +83,8 @@ const TreeSelectDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

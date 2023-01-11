@@ -4,7 +4,7 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ApiDoc } from '../../components/doc/orderlist/apidoc';
 import { AccessibilityDoc } from '../../components/doc/orderlist/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/orderlist/stylingdoc';
+import { StyleDoc } from '../../components/doc/orderlist/styledoc';
 import { ImportDoc } from '../../components/doc/orderlist/importdoc';
 import { TemplateDoc } from '../../components/doc/orderlist/templatedoc';
 import { BasicDoc } from '../../components/doc/orderlist/basicdoc';
@@ -40,8 +40,8 @@ const OrderListDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

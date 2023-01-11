@@ -10,7 +10,7 @@ import { ThumbnailDoc } from '../../components/doc/image/thumbnaildoc';
 import { TemplatingDoc } from '../../components/doc/image/templatingdoc';
 import { ApiDoc } from '../../components/doc/image/apidoc';
 import { AccessibilityDoc } from '../../components/doc/image/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/image/stylingdoc';
+import { StyleDoc } from '../../components/doc/image/styledoc';
 
 const ImageDemo = () => {
     // const contextPath = getConfig().publicRuntimeConfig.contextPath;
@@ -42,8 +42,8 @@ const ImageDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

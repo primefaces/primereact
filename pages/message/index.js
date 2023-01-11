@@ -9,7 +9,7 @@ import { ValidationDoc } from '../../components/doc/message/validationdoc';
 import { FormLayoutDoc } from '../../components/doc/message/formlayoutdoc';
 import { ApiDoc } from '../../components/doc/message/apidoc';
 import { AccessibilityDoc } from '../../components/doc/message/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/message/stylingdoc';
+import { StyleDoc } from '../../components/doc/message/styledoc';
 import { BasicDoc } from '../../components/doc/message/basicdoc';
 
 const MessageDemo = () => {
@@ -46,8 +46,8 @@ const MessageDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

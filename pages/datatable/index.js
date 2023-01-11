@@ -4,7 +4,7 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/datatable/apidoc';
 import { AccessibilityDoc } from '../../components/doc/datatable/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/datatable/stylingdoc';
+import { StyleDoc } from '../../components/doc/datatable/styledoc';
 import { BasicDoc } from '../../components/doc/datatable/basicdoc';
 import { ColGroupDoc } from '../../components/doc/datatable/colgroupdoc';
 import { ChooseResizableColumnsDoc } from '../../components/doc/datatable/colresize/chooseresizablecolumnsdoc';
@@ -431,8 +431,8 @@ const DataTableDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

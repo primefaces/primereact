@@ -2,7 +2,7 @@ import Head from 'next/head';
 import React from 'react';
 import { ApiDoc } from '../../components/doc/checkbox/apidoc';
 import { AccessibilityDoc } from '../../components/doc/checkbox/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/checkbox/stylingdoc';
+import { StyleDoc } from '../../components/doc/checkbox/styledoc';
 import { BasicDoc } from '../../components/doc/checkbox/basicdoc';
 import { DisabledDoc } from '../../components/doc/checkbox/disableddoc';
 import { DynamicDoc } from '../../components/doc/checkbox/dynamicdoc';
@@ -65,8 +65,8 @@ const CheckboxDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

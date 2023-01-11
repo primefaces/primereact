@@ -4,7 +4,7 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/tristatecheckbox/apidoc';
 import { AccessibilityDoc } from '../../components/doc/tristatecheckbox/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/tristatecheckbox/stylingdoc';
+import { StyleDoc } from '../../components/doc/tristatecheckbox/styledoc';
 import { BasicDoc } from '../../components/doc/tristatecheckbox/basicdoc';
 import { DisabledDoc } from '../../components/doc/tristatecheckbox/disableddoc';
 import { ImportDoc } from '../../components/doc/tristatecheckbox/importdoc';
@@ -53,8 +53,8 @@ const TriStateCheckboxDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

@@ -7,7 +7,7 @@ import { PreselectionDoc } from '../../components/doc/inputswitch/preselectiondo
 import { DisabledDoc } from '../../components/doc/inputswitch/disableddoc';
 import { ApiDoc } from '../../components/doc/inputswitch/apidoc';
 import { AccessibilityDoc } from '../../components/doc/inputswitch/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/inputswitch/stylingdoc';
+import { StyleDoc } from '../../components/doc/inputswitch/styledoc';
 import { FormikDoc } from '../../components/doc/inputswitch/validation/formikdoc';
 import { HookFormDoc } from '../../components/doc/inputswitch/validation/hookformdoc';
 
@@ -52,8 +52,8 @@ const InputSwitchDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

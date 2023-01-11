@@ -6,7 +6,7 @@ import { ImportDoc } from '../../components/doc/virtualscroller/importdoc';
 import { BasicDoc } from '../../components/doc/virtualscroller/basicdoc';
 import { ApiDoc } from '../../components/doc/virtualscroller/apidoc';
 import { AccessibilityDoc } from '../../components/doc/virtualscroller/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/virtualscroller/stylingdoc';
+import { StyleDoc } from '../../components/doc/virtualscroller/styledoc';
 import { ScrollDelayDoc } from '../../components/doc/virtualscroller/scrolldelaydoc';
 import { LoadingDoc } from '../../components/doc/virtualscroller/loadingdoc';
 import { LazyDoc } from '../../components/doc/virtualscroller/lazydoc';
@@ -46,8 +46,8 @@ const VirtualScrollerDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

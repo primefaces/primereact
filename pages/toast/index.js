@@ -5,7 +5,7 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { ImportDoc } from '../../components/doc/toast/importdoc';
 import { ApiDoc } from '../../components/doc/toast/apidoc';
 import { AccessibilityDoc } from '../../components/doc/toast/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/toast/stylingdoc';
+import { StyleDoc } from '../../components/doc/toast/styledoc';
 import { SeveritiesDoc } from '../../components/doc/toast/severitiesdoc';
 import { PositionDoc } from '../../components/doc/toast/positiondoc';
 import { TemplateDoc } from '../../components/doc/toast/templatedoc';
@@ -52,8 +52,8 @@ const ToastDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',

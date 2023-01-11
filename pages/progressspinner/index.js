@@ -4,7 +4,7 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/progressspinner/apidoc';
 import { AccessibilityDoc } from '../../components/doc/progressspinner/accessibilitydoc';
-import { StylingDoc } from '../../components/doc/progressspinner/stylingdoc';
+import { StyleDoc } from '../../components/doc/progressspinner/styledoc';
 import { ImportDoc } from '../../components/doc/progressspinner/importdoc';
 import { BasicDoc } from '../../components/doc/progressspinner/basicdoc';
 import { CustomDoc } from '../../components/doc/progressspinner/customdoc';
@@ -29,8 +29,8 @@ const SkeletonDemo = () => {
         },
         {
             id: 'styling',
-            label: 'Styling',
-            component: StylingDoc
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',
