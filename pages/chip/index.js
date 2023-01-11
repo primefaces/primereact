@@ -46,7 +46,7 @@ const ChipDemo = () => {
             component: TemplateDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

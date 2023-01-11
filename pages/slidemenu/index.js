@@ -27,7 +27,7 @@ const SlideMenuDemo = () => {
             component: PopupDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

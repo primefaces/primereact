@@ -27,7 +27,7 @@ const ScrollPanelDemo = () => {
             component: CustomDemo
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

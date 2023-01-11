@@ -22,7 +22,7 @@ const TerminalDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

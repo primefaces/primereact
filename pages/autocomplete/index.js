@@ -13,7 +13,6 @@ import { ImportDoc } from '../../components/doc/autocomplete/importdoc';
 import { InvalidStateDoc } from '../../components/doc/autocomplete/invalidstatedoc';
 import { MultipleDoc } from '../../components/doc/autocomplete/multipledoc';
 import { ObjectsDoc } from '../../components/doc/autocomplete/objectsdoc';
-import { AccessibilityDoc } from '../../components/doc/autocomplete/accessibilitydoc';
 import { TemplateDoc } from '../../components/doc/autocomplete/templatedoc';
 import { FormikDoc } from '../../components/doc/autocomplete/validation/formikdoc';
 import { HookFormDoc } from '../../components/doc/autocomplete/validation/hookformdoc';
@@ -101,7 +100,7 @@ const AutoCompleteDemo = () => {
             ]
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

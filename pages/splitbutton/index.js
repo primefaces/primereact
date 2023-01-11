@@ -75,7 +75,7 @@ const SplitButtonDemo = () => {
             component: SizesDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

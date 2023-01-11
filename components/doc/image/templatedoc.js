@@ -6,7 +6,7 @@ import getConfig from 'next/config';
 export function TemplateDoc(props) {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const icon = <i className="pi pi-check"></i>;
-    
+
     const code = {
         basic: `
 <Image src="https://cdn.primefaces.org/images/placeholder.png" template={icon} alt="Image" preview />
@@ -44,7 +44,9 @@ export default function TemplateDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>An eye icon is displayed by default when the image is hovered in preview mode. Use the <i>template</i> prop for custom content.</p>
+                <p>
+                    An eye icon is displayed by default when the image is hovered in preview mode. Use the <i>template</i> prop for custom content.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Image src={`${contextPath}/images/galleria/galleria12.jpg`} template={icon} alt="Image" preview width="250" />

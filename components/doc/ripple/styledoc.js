@@ -1,11 +1,9 @@
-import { CodeHighlight } from '../common/codehighlight';
-import { DevelopmentSection } from '../common/developmentsection';
 import { DocSubSection } from '../common/docsubsection';
 
 export function StyleDoc() {
     return (
         <>
-            <DocSubSection id="styling" label="Styling">
+            <DocSubSection id="style" label="Style">
                 <div className="doc-tablewrapper">
                     <table className="doc-table">
                         <thead>

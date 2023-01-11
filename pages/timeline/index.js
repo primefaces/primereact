@@ -40,7 +40,7 @@ const TimelineDemo = () => {
             component: HorizontalDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

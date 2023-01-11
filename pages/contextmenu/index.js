@@ -27,7 +27,7 @@ const ContextMenuDemo = () => {
             component: DocumentDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

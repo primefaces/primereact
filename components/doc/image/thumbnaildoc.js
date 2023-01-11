@@ -39,7 +39,9 @@ export default function ThumbnailDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Use the <i>zoomSrc</i> to select a higher resolution image to display in preview mode.</p>
+                <p>
+                    Use the <i>zoomSrc</i> to select a higher resolution image to display in preview mode.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Image src={`${contextPath}/images/galleria/galleria14s.jpg`} zoomSrc={`${contextPath}/images/galleria/galleria14.jpg`} alt="Image" width="80" height="60" preview />

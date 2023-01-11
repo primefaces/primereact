@@ -45,7 +45,7 @@ const DividerDemo = () => {
             component: VerticalContentDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

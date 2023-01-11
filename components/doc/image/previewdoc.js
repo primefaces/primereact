@@ -39,7 +39,9 @@ export default function PreviewDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Enabling <i>preview</i> mode displays a modal layer when the image is clicked to provide transformation options such as rotating and zooming.</p>
+                <p>
+                    Enabling <i>preview</i> mode displays a modal layer when the image is clicked to provide transformation options such as rotating and zooming.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Image src={`${contextPath}/images/galleria/galleria10.jpg`} alt="Image" width="250" preview />

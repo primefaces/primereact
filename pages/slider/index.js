@@ -45,7 +45,7 @@ const SliderDemo = () => {
             component: VerticalDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

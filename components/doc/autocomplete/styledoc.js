@@ -5,7 +5,7 @@ import { DocSubSection } from '../common/docsubsection';
 export function StyleDoc() {
     return (
         <>
-            <DocSubSection id="styling" label="Styling">
+            <DocSubSection id="style" label="Style">
                 <DevelopmentSection>
                     <h4>Screen Reader</h4>
                     <p>

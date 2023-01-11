@@ -27,7 +27,7 @@ const StepsDemo = () => {
             component: InteractiveDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

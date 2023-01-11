@@ -33,7 +33,7 @@ const SplitterDemo = () => {
             component: NestedDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

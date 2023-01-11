@@ -27,7 +27,7 @@ const DataViewDemo = () => {
             component: LazyDataViewDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

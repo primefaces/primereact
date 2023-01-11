@@ -82,7 +82,7 @@ const ListBoxDemo = () => {
             ]
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

@@ -34,7 +34,7 @@ const ConfirmDialogDemo = () => {
             component: DeclarativeDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

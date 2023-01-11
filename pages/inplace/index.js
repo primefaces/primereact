@@ -40,7 +40,7 @@ const ChipDemo = () => {
             component: LazyDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

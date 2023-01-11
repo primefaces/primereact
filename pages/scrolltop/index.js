@@ -28,7 +28,7 @@ const ScrollTopDemo = () => {
             component: ElementDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

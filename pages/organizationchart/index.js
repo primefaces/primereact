@@ -27,7 +27,7 @@ const OrganizationChartDemo = () => {
             component: AdvancedDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

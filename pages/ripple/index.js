@@ -7,7 +7,7 @@ import { AccessibilityDoc } from '../../components/doc/ripple/accessibilitydoc';
 import { StyleDoc } from '../../components/doc/ripple/styledoc';
 import { ImportDoc } from '../../components/doc/ripple/importdoc';
 import { DefaultDoc } from '../../components/doc/ripple/defaultdoc';
-import { CustomDoc } from '../../components/doc/ripple/styledoc';
+import { CustomDoc } from '../../components/doc/ripple/customdoc';
 import { DocActions } from '../../components/doc/common/docactions';
 
 const RippleDemo = () => {
@@ -28,7 +28,7 @@ const RippleDemo = () => {
             component: CustomDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },
