@@ -10,17 +10,17 @@ export function CircularDoc(props) {
     const [products, setProducts] = useState([]);
     const responsiveOptions = [
         {
-            breakpoint: '1024px',
+            breakpoint: '1199px',
             numVisible: 3,
             numScroll: 3
         },
         {
-            breakpoint: '600px',
+            breakpoint: '991px',
             numVisible: 2,
             numScroll: 2
         },
         {
-            breakpoint: '480px',
+            breakpoint: '767px',
             numVisible: 1,
             numScroll: 1
         }
@@ -30,7 +30,7 @@ export function CircularDoc(props) {
 
     useEffect(() => {
         ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     const productTemplate = (product) => {
         return (
@@ -56,8 +56,8 @@ export function CircularDoc(props) {
 
     const code = {
         basic: `
-<Carousel value={products} numVisible={3} numScroll={1} responsiveOptions={responsiveOptions} className="custom-carousel" circular
-autoplayInterval={3000} itemTemplate={productTemplate} header={<h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>} />
+<Carousel value={products} numVisible={3} numScroll={3} responsiveOptions={responsiveOptions} className="custom-carousel" circular
+autoplayInterval={3000} itemTemplate={productTemplate} />
         `,
         javascript: `
 import React, { useState, useEffect } from 'react';
@@ -65,30 +65,29 @@ import { Button } from 'primereact/button';
 import { Carousel } from 'primereact/carousel';
 import { ProductService } from './service/ProductService';
 
-export default function CircularDoc() {
+export default function CircularDemo() {
     const [products, setProducts] = useState([]);
     const responsiveOptions = [
         {
-            breakpoint: '1024px',
+            breakpoint: '1199px',
             numVisible: 3,
             numScroll: 3
         },
         {
-            breakpoint: '600px',
+            breakpoint: '991px',
             numVisible: 2,
             numScroll: 2
         },
         {
-            breakpoint: '480px',
+            breakpoint: '767px',
             numVisible: 1,
             numScroll: 1
         }
     ];
-    
 
     useEffect(() => {
         ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     const productTemplate = (product) => {
         return (
@@ -114,8 +113,8 @@ export default function CircularDoc() {
 
     return (
         <div className="card">
-            <Carousel value={products} numVisible={3} numScroll={1} responsiveOptions={responsiveOptions} className="custom-carousel" circular
-            autoplayInterval={3000} itemTemplate={productTemplate} header={<h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>} />
+            <Carousel value={products} numVisible={3} numScroll={3} responsiveOptions={responsiveOptions} className="custom-carousel" circular
+            autoplayInterval={3000} itemTemplate={productTemplate} />
         </div>
     )
 }
@@ -126,30 +125,29 @@ import { Button } from 'primereact/button';
 import { Carousel } from 'primereact/carousel';
 import { ProductService } from './service/ProductService';
 
-export default function CircularDoc() {
+export default function CircularDemo() {
     const [products, setProducts] = useState([]);
     const responsiveOptions = [
         {
-            breakpoint: '1024px',
+            breakpoint: '1199px',
             numVisible: 3,
             numScroll: 3
         },
         {
-            breakpoint: '600px',
+            breakpoint: '991px',
             numVisible: 2,
             numScroll: 2
         },
         {
-            breakpoint: '480px',
+            breakpoint: '767px',
             numVisible: 1,
             numScroll: 1
         }
     ];
-    
 
     useEffect(() => {
         ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     const productTemplate = (product) => {
         return (
@@ -175,8 +173,8 @@ export default function CircularDoc() {
     
     return (
         <div className="card">
-            <Carousel value={products} numVisible={3} numScroll={1} responsiveOptions={responsiveOptions} className="custom-carousel" circular
-            autoplayInterval={3000} itemTemplate={productTemplate} header={<h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>} />
+            <Carousel value={products} numVisible={3} numScroll={3} responsiveOptions={responsiveOptions} className="custom-carousel" circular
+            autoplayInterval={3000} itemTemplate={productTemplate} />
         </div>
     )
 }
@@ -202,19 +200,18 @@ export default function CircularDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>When autoplayInterval is defined in milliseconds, items are scrolled automatically. In addition, for infinite scrolling circular property needs to be enabled. Note that in autoplay mode, circular is enabled by default.</p>
+                <p>When <i>autoplayInterval</i> is defined in milliseconds, items are scrolled automatically. In addition, for infinite scrolling <i>circular</i> property needs to be added which is enabled automatically in auto play mode.</p>
             </DocSectionText>
             <div className="card">
                 <Carousel
                     value={products}
                     numVisible={3}
-                    numScroll={1}
+                    numScroll={3}
                     responsiveOptions={responsiveOptions}
                     className="custom-carousel"
                     circular
                     autoplayInterval={3000}
                     itemTemplate={productTemplate}
-                    header={<h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>}
                 />
             </div>
             <DocSectionCode code={code} service={['ProductService']} />

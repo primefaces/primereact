@@ -30,11 +30,6 @@ const CarouselDemo = () => {
             component: CircularDoc
         },
         {
-            id: 'vertical',
-            label: 'Vertical',
-            component: VerticalDoc
-        },
-        {
             id: 'numscroll',
             label: 'Num Scroll',
             component: NumScrollDoc
@@ -43,6 +38,11 @@ const CarouselDemo = () => {
             id: 'responsive',
             label: 'Responsive',
             component: ResponsiveDoc
+        },
+        {
+            id: 'vertical',
+            label: 'Vertical',
+            component: VerticalDoc
         },
         {
             id: 'styling',

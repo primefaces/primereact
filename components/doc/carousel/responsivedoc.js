@@ -10,17 +10,17 @@ export function ResponsiveDoc(props) {
     const [products, setProducts] = useState([]);
     const responsiveOptions = [
         {
-            breakpoint: '1024px',
+            breakpoint: '1199px',
             numVisible: 3,
             numScroll: 3
         },
         {
-            breakpoint: '600px',
+            breakpoint: '991px',
             numVisible: 2,
             numScroll: 2
         },
         {
-            breakpoint: '480px',
+            breakpoint: '767px',
             numVisible: 1,
             numScroll: 1
         }
@@ -56,7 +56,7 @@ export function ResponsiveDoc(props) {
 
     const code = {
         basic: `
-<Carousel value={products} numScroll={1} numVisible={3} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} header={<h5>Basic</h5>} />
+<Carousel value={products} numScroll={1} numVisible={3} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} />
         `,
         javascript: `
 import React, { useState, useEffect } from 'react';
@@ -64,30 +64,29 @@ import { Button } from 'primereact/button';
 import { Carousel } from 'primereact/carousel';
 import { ProductService } from './service/ProductService';
 
-export default function ResponsiveDoc() {
+export default function ResponsiveDemo() {
     const [products, setProducts] = useState([]);
     const responsiveOptions = [
         {
-            breakpoint: '1024px',
+            breakpoint: '1199px',
             numVisible: 3,
             numScroll: 3
         },
         {
-            breakpoint: '600px',
+            breakpoint: '991px',
             numVisible: 2,
             numScroll: 2
         },
         {
-            breakpoint: '480px',
+            breakpoint: '767px',
             numVisible: 1,
             numScroll: 1
         }
     ];
     
-
     useEffect(() => {
         ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     const productTemplate = (product) => {
         return (
@@ -113,7 +112,7 @@ export default function ResponsiveDoc() {
 
     return (
         <div className="card">
-            <Carousel value={products} numScroll={1} numVisible={3} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} header={<h5>Basic</h5>} />
+            <Carousel value={products} numScroll={1} numVisible={3} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} />
         </div>
     )
 }
@@ -124,30 +123,29 @@ import { Button } from 'primereact/button';
 import { Carousel } from 'primereact/carousel';
 import { ProductService } from './service/ProductService';
 
-export default function ResponsiveDoc() {
+export default function ResponsiveDemo() {
     const [products, setProducts] = useState([]);
     const responsiveOptions = [
         {
-            breakpoint: '1024px',
+            breakpoint: '1199px',
             numVisible: 3,
             numScroll: 3
         },
         {
-            breakpoint: '600px',
+            breakpoint: '991px',
             numVisible: 2,
             numScroll: 2
         },
         {
-            breakpoint: '480px',
+            breakpoint: '767px',
             numVisible: 1,
             numScroll: 1
         }
     ];
     
-
     useEffect(() => {
         ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     const productTemplate = (product) => {
         return (
@@ -173,7 +171,7 @@ export default function ResponsiveDoc() {
     
     return (
         <div className="card">
-            <Carousel value={products} numScroll={1} numVisible={3} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} header={<h5>Basic</h5>} />
+            <Carousel value={products} numScroll={1} numVisible={3} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} />
         </div>
     )
 }
@@ -199,11 +197,11 @@ export default function ResponsiveDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                {/* TO DO: Add demo content. */}
-                <p></p>
+                <p>Carousel supports specific configuration per screen size with the <i>responsiveOptions</i> property that takes an array of objects where each object define the max-width <i>breakpoint</i>, <i>numVisible</i> for the number of 
+                items items per page and <i>numScroll</i> for number of items to scroll. When <i>responsiveOptions</i> is defined, the <i>numScroll</i> and <i>numVisible</i> properties of the Carousel are used as default when there is breakpoint that applies.</p>
             </DocSectionText>
             <div className="card">
-                <Carousel value={products} numScroll={1} numVisible={3} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} header={<h5>Basic</h5>} />
+                <Carousel value={products} numScroll={1} numVisible={3} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} />
             </div>
             <DocSectionCode code={code} service={['ProductService']} />
         </>
