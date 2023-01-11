@@ -10,10 +10,9 @@
 import * as React from 'react';
 
 /**
- * Defines valid properties in StyleClass component. In addition to these, all properties of HTMLElement can be used in this component.
+ * Defines valid properties in StyleClass component.
  * @group Properties
  */
-
 export interface StyleClassProps {
     /**
      * A React reference to DOM element that need to specify. Required.
@@ -73,8 +72,7 @@ export declare class StyleClass extends React.Component<StyleClassProps, any> {
      */
     public getElement(): HTMLElement;
     /**
-     * Used to get container element.
-     * @return {HTMLElement} Container element
+     * @todo Write the documentation.
      */
     public getTarget(): HTMLElement;
 }

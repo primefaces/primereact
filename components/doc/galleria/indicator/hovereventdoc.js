@@ -8,7 +8,7 @@ import getConfig from 'next/config';
 export function HoverEventDoc(props) {
     const [images, setImages] = useState(null);
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
-    
+
     useEffect(() => {
         PhotoService.getImages().then((data) => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -82,7 +82,9 @@ export default function HoverEventDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Indicators can be activated on hover instead of click if <i>changeItemOnIndicatorHover</i> is added.</p>
+                <p>
+                    Indicators can be activated on hover instead of click if <i>changeItemOnIndicatorHover</i> is added.
+                </p>
             </DocSectionText>
             <div className="card">
                 <Galleria value={images} style={{ maxWidth: '640px' }} changeItemOnIndicatorHover showThumbnails={false} showIndicators item={itemTemplate} />

@@ -10,7 +10,7 @@
 import * as React from 'react';
 
 /**
- * Defines valid properties in Ripple component. In addition to these, all properties of HTMLDivElement can be used in this component.
+ * Defines valid properties in Ripple component.
  * @group Properties
  */
 export interface RippleProps {
@@ -20,6 +20,7 @@ export interface RippleProps {
      */
     children?: React.ReactNode | undefined;
 }
+
 /**
  * @group Component
  */

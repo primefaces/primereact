@@ -33,6 +33,9 @@ export interface TerminalProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
  * @group Component
  */
 export declare class Terminal extends React.Component<TerminalProps, any> {
+    /**
+     * Used to focus the component.
+     */
     public focus(): void;
     /**
      * Used to get container element.

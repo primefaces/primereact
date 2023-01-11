@@ -30,7 +30,7 @@ export interface CaptchaProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
     onExpire?(): void;
     /**
      * The callback function to be executed when the user submits a successful CAPTCHA response.
-     * @param {any} response
+     * @todo Add param if neccessary
      */
     onResponse?(response: any): void;
     /**
@@ -64,7 +64,13 @@ export interface CaptchaProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
  * @group Component
  */
 export declare class Captcha extends React.Component<CaptchaProps, any> {
+    /**
+     * Resets the reCAPTCHA widget.
+     */
     public reset(): void;
+    /**
+     * Gets the response for the reCAPTCHA widget.
+     */
     public getResponse(): any;
     /**
      * Used to get container element.
