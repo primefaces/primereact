@@ -227,7 +227,7 @@ const TreeTableDemo = () => {
             component: ResponsiveDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

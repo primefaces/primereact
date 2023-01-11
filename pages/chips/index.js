@@ -76,7 +76,7 @@ const ChipsDemo = () => {
             component: KeyFilterDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

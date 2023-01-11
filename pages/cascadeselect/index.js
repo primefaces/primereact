@@ -65,7 +65,7 @@ const CascadeSelectDemo = () => {
             component: TemplatingDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

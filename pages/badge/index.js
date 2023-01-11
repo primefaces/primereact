@@ -46,7 +46,7 @@ const BadgeDemo = () => {
             component: ButtonDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

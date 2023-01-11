@@ -21,7 +21,7 @@ const ToolbarDemo = () => {
             component: ToolbarDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

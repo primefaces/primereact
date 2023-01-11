@@ -40,7 +40,7 @@ const ProgressBarDemo = () => {
             component: IndeterminateDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

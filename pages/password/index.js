@@ -78,7 +78,7 @@ const PasswordDemo = () => {
             component: Templating
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

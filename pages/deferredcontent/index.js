@@ -27,7 +27,7 @@ const DeferredContentDemo = () => {
             component: DataTableDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

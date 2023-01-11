@@ -75,7 +75,7 @@ const TooltipDemo = () => {
             component: ColoredDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

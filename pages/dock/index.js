@@ -27,7 +27,7 @@ const DockDemo = () => {
             component: AdvanceDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

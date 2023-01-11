@@ -33,7 +33,7 @@ const DataScrollerDemo = () => {
             component: LoaderDataScrollerDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

@@ -4,7 +4,7 @@ import Link from 'next/link';
 export function StyleDoc() {
     return (
         <>
-            <DocSubSection id="styling" label="Styling">
+            <DocSubSection id="style" label="Style">
                 <p>
                     Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
                 </p>

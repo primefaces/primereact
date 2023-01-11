@@ -40,7 +40,7 @@ const ImageDemo = () => {
             component: TemplateDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },
@@ -76,9 +76,7 @@ const ImageDemo = () => {
                 <div>
                     <div className="feature-intro">
                         <h1>Image</h1>
-                        <p>
-                            Displays a single image with preview and tranformation options.
-                        </p>
+                        <p>Displays a single image with preview and tranformation options.</p>
                     </div>
                 </div>
                 <DocActions github="image/index.js" />

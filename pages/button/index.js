@@ -117,7 +117,7 @@ const ButtonDemo = () => {
             component: TemplateDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

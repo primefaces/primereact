@@ -58,7 +58,7 @@ const SpeedDialDemo = () => {
             component: CustomDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

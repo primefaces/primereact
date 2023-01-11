@@ -33,7 +33,7 @@ const PaginatorDemo = () => {
             component: ContentDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

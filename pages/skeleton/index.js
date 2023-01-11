@@ -40,7 +40,7 @@ const SkeletonDemo = () => {
             component: DataTableDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

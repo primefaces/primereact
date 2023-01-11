@@ -94,7 +94,7 @@ const KnobDemo = () => {
             ]
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

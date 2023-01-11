@@ -22,7 +22,7 @@ const PickListDemo = () => {
             component: PickListDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },

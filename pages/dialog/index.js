@@ -57,7 +57,7 @@ const DialogDemo = () => {
             component: MaximizableDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },
