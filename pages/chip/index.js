@@ -9,7 +9,6 @@ import { ImportDoc } from '../../components/doc/chip/importdoc';
 import { BasicDoc } from '../../components/doc/chip/basicdoc';
 import { IconDoc } from '../../components/doc/chip/icondoc';
 import { ImageDoc } from '../../components/doc/chip/imagedoc';
-import { StyleDoc } from '../../components/doc/chip/styledoc';
 import { TemplateDoc } from '../../components/doc/chip/templatedoc';
 import { DocActions } from '../../components/doc/common/docactions';
 
@@ -34,11 +33,6 @@ const ChipDemo = () => {
             id: 'image',
             label: 'Image',
             component: ImageDoc
-        },
-        {
-            id: 'stylingdoc',
-            label: 'Styling',
-            component: StylingDoc
         },
         {
             id: 'templatedoc',

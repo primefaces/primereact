@@ -7,7 +7,6 @@ import { BasicDoc } from '../../components/doc/accordion/basicdoc';
 import { MultipleDoc } from '../../components/doc/accordion/multipledoc';
 import { ControlledDoc } from '../../components/doc/accordion/controlleddoc';
 import { TemplateDoc } from '../../components/doc/accordion/templatedoc';
-import { AccessibilityDoc } from '../../components/doc/accordion/accessibilitydoc';
 import { ApiDoc } from '../../components/doc/accordion/apidoc';
 import { AccessibilityDoc } from '../../components/doc/accordion/accessibilitydoc';
 import { StyleDoc } from '../../components/doc/accordion/styledoc';
