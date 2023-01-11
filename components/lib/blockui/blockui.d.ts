@@ -41,7 +41,6 @@ export interface BlockUIProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
     containerClassName?: string | undefined;
     /**
      * @todo Write the documentation.
-     *
      */
     containerStyle?: React.CSSProperties | undefined;
     /**
