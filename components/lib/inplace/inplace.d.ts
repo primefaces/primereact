@@ -4,6 +4,12 @@
  *
  * [Live Demo](https://www.primefaces.org/primereact/inplace)
  *
+ *  * Helper Components:
+ *
+ * - {@link InplaceDisplay}
+ *
+ * - {@link InplaceContent}
+ *
  * @module inplace
  *
  */
