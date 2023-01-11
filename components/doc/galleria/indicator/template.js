@@ -7,21 +7,6 @@ import getConfig from 'next/config';
 
 export function IndicatorTemplateDoc(props) {
     const [images, setImages] = useState(null);
-
-    const responsiveOptions = [
-        {
-            breakpoint: '1024px',
-            numVisible: 5
-        },
-        {
-            breakpoint: '768px',
-            numVisible: 3
-        },
-        {
-            breakpoint: '560px',
-            numVisible: 1
-        }
-    ];
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
@@ -33,58 +18,48 @@ export function IndicatorTemplateDoc(props) {
     };
 
     const indicatorTemplate = (index) => {
-        return <span className="indicator-text">{index + 1}</span>;
+        return <span style={{ color: '#ffffff', cursor: 'pointer'}}>{index + 1}</span>;
     };
 
     const code = {
         basic: `
-<Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }} className="custom-indicator-galleria"
-    showThumbnails={false} showIndicators changeItemOnIndicatorHover showIndicatorsOnItem indicatorsPosition="left" item={itemTemplate} indicator={indicatorTemplate} />
-
+<Galleria value={images} style={{ maxWidth: '640px' }} className="custom-indicator-galleria" showThumbnails={false} showIndicators changeItemOnIndicatorHover
+    showIndicatorsOnItem indicatorsPosition="left" item={itemTemplate} indicator={indicatorTemplate} />
         `,
         javascript: `
 import React, { useState, useEffect } from 'react';
 import { Galleria } from 'primereact/galleria';
 import { PhotoService } from './service/PhotoService';
 
-export default function IndicatorTemplateDoc() {
+export default function IndicatorTemplateDemo() {
     const [images, setImages] = useState(null);
-    
-    const responsiveOptions = [
-        {
-            breakpoint: '1024px',
-            numVisible: 5
-        },
-        {
-            breakpoint: '768px',
-            numVisible: 3
-        },
-        {
-            breakpoint: '560px',
-            numVisible: 1
-        }
-    ];
 
     useEffect(() => {
         PhotoService.getImages().then((data) => setImages(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     const itemTemplate = (item) => {
-        return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+        return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
     };
 
     const indicatorTemplate = (index) => {
-        return (
-            <span className="indicator-text">
-                {index + 1}
-            </span>
-        )
-    }
+        return <span style={{ color: '#ffffff', cursor: 'pointer'}}>{index + 1}</span>;
+    };
 
     return (
-        <div className="card flex justify-content-center">
-            <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }} className="custom-indicator-galleria"
-                showThumbnails={false} showIndicators changeItemOnIndicatorHover showIndicatorsOnItem indicatorsPosition="left" item={itemTemplate} indicator={indicatorTemplate} />
+        <div className="card">
+            <Galleria
+                value={images}
+                style={{ maxWidth: '640px' }}
+                className="custom-indicator-galleria"
+                showThumbnails={false}
+                showIndicators
+                changeItemOnIndicatorHover
+                showIndicatorsOnItem
+                indicatorsPosition="left"
+                item={itemTemplate}
+                indicator={indicatorTemplate}
+            />
         </div>
     )
 }
@@ -94,44 +69,35 @@ import React, { useState, useEffect } from 'react';
 import { Galleria } from 'primereact/galleria';
 import { PhotoService } from './service/PhotoService';
 
-export default function IndicatorTemplateDoc() {
+export default function IndicatorTemplateDemo() {
     const [images, setImages] = useState(null);
-    
-    const responsiveOptions = [
-        {
-            breakpoint: '1024px',
-            numVisible: 5
-        },
-        {
-            breakpoint: '768px',
-            numVisible: 3
-        },
-        {
-            breakpoint: '560px',
-            numVisible: 1
-        }
-    ];
 
     useEffect(() => {
         PhotoService.getImages().then((data) => setImages(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     const itemTemplate = (item) => {
-        return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+        return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
     };
 
     const indicatorTemplate = (index) => {
-        return (
-            <span className="indicator-text">
-                {index + 1}
-            </span>
-        )
-    }
+        return <span style={{ color: '#ffffff', cursor: 'pointer'}}>{index + 1}</span>;
+    };
     
     return (
-        <div className="card flex justify-content-center">
-            <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }} className="custom-indicator-galleria"
-                showThumbnails={false} showIndicators changeItemOnIndicatorHover showIndicatorsOnItem indicatorsPosition="left" item={itemTemplate} indicator={indicatorTemplate} />
+        <div className="card">
+            <Galleria
+                value={images}
+                style={{ maxWidth: '640px' }}
+                className="custom-indicator-galleria"
+                showThumbnails={false}
+                showIndicators
+                changeItemOnIndicatorHover
+                showIndicatorsOnItem
+                indicatorsPosition="left"
+                item={itemTemplate}
+                indicator={indicatorTemplate}
+            />
         </div>
     )
 }
@@ -151,15 +117,13 @@ export default function IndicatorTemplateDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Indicator Template</p>
+                <p>Indicator content can be customized with the <i>indicator</i> property that takes an index as a parameter and expects content.</p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
+            <div className="card">
                 <Galleria
                     value={images}
-                    responsiveOptions={responsiveOptions}
-                    numVisible={5}
                     style={{ maxWidth: '640px' }}
-                    className="custom-indicator-galleria"
+                    className="custom-indicator-gallerisa"
                     showThumbnails={false}
                     showIndicators
                     changeItemOnIndicatorHover

@@ -7,23 +7,8 @@ import getConfig from 'next/config';
 
 export function ClickEventDoc(props) {
     const [images, setImages] = useState(null);
-
-    const responsiveOptions = [
-        {
-            breakpoint: '1024px',
-            numVisible: 5
-        },
-        {
-            breakpoint: '768px',
-            numVisible: 3
-        },
-        {
-            breakpoint: '560px',
-            numVisible: 1
-        }
-    ];
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
-
+    
     useEffect(() => {
         PhotoService.getImages().then((data) => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -34,44 +19,27 @@ export function ClickEventDoc(props) {
 
     const code = {
         basic: `
-<Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
-    showThumbnails={false} showIndicators item={itemTemplate} />
+<Galleria value={images} style={{ maxWidth: '640px' }} showThumbnails={false} showIndicators item={itemTemplate} />
         `,
         javascript: `
 import React, { useState, useEffect } from 'react';
 import { Galleria } from 'primereact/galleria';
 import { PhotoService } from './service/PhotoService';
 
-export default function ClickEventDoc() {
+export default function ClickEventDemo() {
     const [images, setImages] = useState(null);
     
-    const responsiveOptions = [
-        {
-            breakpoint: '1024px',
-            numVisible: 5
-        },
-        {
-            breakpoint: '768px',
-            numVisible: 3
-        },
-        {
-            breakpoint: '560px',
-            numVisible: 1
-        }
-    ];
-
     useEffect(() => {
         PhotoService.getImages().then((data) => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
-        return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+        return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
     };
 
     return (
-        <div className="card flex justify-content-center">
-            <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
-            showThumbnails={false} showIndicators item={itemTemplate} />
+        <div className="card">
+            <Galleria value={images} style={{ maxWidth: '640px' }} showThumbnails={false} showIndicators item={itemTemplate} />
         </div>
     )
 }
@@ -81,36 +49,20 @@ import React, { useState, useEffect } from 'react';
 import { Galleria } from 'primereact/galleria';
 import { PhotoService } from './service/PhotoService';
 
-export default function ClickEventDoc() {
+export default function ClickEventDemo() {
     const [images, setImages] = useState(null);
-    
-    const responsiveOptions = [
-        {
-            breakpoint: '1024px',
-            numVisible: 5
-        },
-        {
-            breakpoint: '768px',
-            numVisible: 3
-        },
-        {
-            breakpoint: '560px',
-            numVisible: 1
-        }
-    ];
 
     useEffect(() => {
         PhotoService.getImages().then((data) => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
-        return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+        return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
     };
 
     return (
-        <div className="card flex justify-content-center">
-            <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
-            showThumbnails={false} showIndicators item={itemTemplate} />
+        <div className="card">
+            <Galleria value={images} style={{ maxWidth: '640px' }} showThumbnails={false} showIndicators item={itemTemplate} />
         </div>
     )
 }
@@ -130,10 +82,10 @@ export default function ClickEventDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Indicators with Click Event</p>
+                <p>Indicators are displayed at the bottom by enabling <i>showIndicators</i> property and interacted with the click event by default.</p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }} showThumbnails={false} showIndicators item={itemTemplate} />
+            <div className="card">
+                <Galleria value={images} style={{ maxWidth: '640px' }} showThumbnails={false} showIndicators item={itemTemplate} />
             </div>
             <DocSectionCode code={code} service={['PhotoService']} />
         </>

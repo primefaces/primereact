@@ -9,6 +9,7 @@ import getConfig from 'next/config';
 export function ControlledDoc(props) {
     const [images, setImages] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
+    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     const responsiveOptions = [
         {
@@ -24,7 +25,6 @@ export function ControlledDoc(props) {
             numVisible: 1
         }
     ];
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
         PhotoService.getImages().then((data) => setImages(data));

@@ -9,10 +9,6 @@ export function BasicDoc(props) {
     const [images, setImages] = useState(null);
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
-    useEffect(() => {
-        PhotoService.getImages().then((data) => setImages(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
     const responsiveOptions = [
         {
             breakpoint: '991px',
@@ -27,6 +23,10 @@ export function BasicDoc(props) {
             numVisible: 1
         }
     ];
+
+    useEffect(() => {
+        PhotoService.getImages().then((data) => setImages(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
         return <img src={`${contextPath}/${item.itemImageSrc}`} alt={item.alt} style={{ width: '100%' }} />;
@@ -48,11 +48,6 @@ import { PhotoService } from './service/PhotoService';
 
 export default function BasicDemo() {
     const [images, setImages] = useState(null);
-    
-    useEffect(() => {
-        PhotoService.getImages().then(data => setImages(data));
-    }, [])
-
     const responsiveOptions = [
         {
             breakpoint: '991px',
@@ -67,6 +62,10 @@ export default function BasicDemo() {
             numVisible: 1
         }
     ];
+
+    useEffect(() => {
+        PhotoService.getImages().then(data => setImages(data));
+    }, [])
 
     const itemTemplate = (item) => {
         return <img src={\`images/\${item.itemImageSrc}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/cdn/images/placeholder.png'} alt={item.alt} style={{ width: '100%' }} />
@@ -91,11 +90,6 @@ import { PhotoService } from './service/PhotoService';
 
 export default function BasicDemo() {
     const [images, setImages] = useState(null);
-    
-    useEffect(() => {
-        PhotoService.getImages().then(data => setImages(data));
-    }, [])
-
     const responsiveOptions: GalleriaResponsiveOptions[] = [
         {
             breakpoint: '991px',
@@ -110,6 +104,10 @@ export default function BasicDemo() {
             numVisible: 1
         }
     ];
+
+    useEffect(() => {
+        PhotoService.getImages().then(data => setImages(data));
+    }, []);
 
     const itemTemplate = (item: any) => {
         return <img src={\`images/\${item.itemImageSrc}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/cdn/images/placeholder.png'} alt={item.alt} style={{ width: '100%' }} />

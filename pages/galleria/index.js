@@ -13,10 +13,7 @@ import { CaptionDoc } from '../../components/doc/galleria/captiondoc';
 import { AdvancedDoc } from '../../components/doc/galleria/advanceddoc';
 import { ClickEventDoc } from '../../components/doc/galleria/indicator/clickevent';
 import { HoverEventDoc } from '../../components/doc/galleria/indicator/hoverevent';
-import { InsideContentDoc } from '../../components/doc/galleria/indicator/insidecontent';
-import { PositionTopDoc } from '../../components/doc/galleria/indicator/positiontop';
-import { PositionLeftDoc } from '../../components/doc/galleria/indicator/positionleft';
-import { PositionRightDoc } from '../../components/doc/galleria/indicator/positionright';
+import { PositionDoc } from '../../components/doc/galleria/indicator/position';
 import { IndicatorTemplateDoc } from '../../components/doc/galleria/indicator/template';
 import { WithThumbnailsDoc } from '../../components/doc/galleria/fullscreen/withthumbnails';
 import { WithoutThumbnailsDoc } from '../../components/doc/galleria/fullscreen/withoutthumbnails';
@@ -50,38 +47,23 @@ const GalleriaDemo = () => {
             description: 'Indicators allow quick navigation between the items.',
             children: [
                 {
-                    id: 'indciatorclickevent',
-                    label: 'Indicators with Click Event',
+                    id: 'indciatorbasic',
+                    label: 'Click Event',
                     component: ClickEventDoc
                 },
                 {
                     id: 'indciatorhoverevent',
-                    label: 'Indicators with Hover Event',
+                    label: 'Hover Event',
                     component: HoverEventDoc
                 },
                 {
-                    id: 'indciatorinsidecontent',
-                    label: 'Inside Content',
-                    component: InsideContentDoc
-                },
-                {
-                    id: 'indciatorpositiontop',
-                    label: 'Positioned at Top',
-                    component: PositionTopDoc
-                },
-                {
-                    id: 'indciatorpositionleft',
-                    label: 'Positioned at Left',
-                    component: PositionLeftDoc
-                },
-                {
-                    id: 'indciatorpositionright',
-                    label: 'Positioned at Right',
-                    component: PositionRightDoc
+                    id: 'indicatorposition',
+                    label: 'Position',
+                    component: PositionDoc
                 },
                 {
                     id: 'indciatortemplate',
-                    label: 'Indicator Template',
+                    label: 'Template',
                     component: IndicatorTemplateDoc
                 }
             ]
