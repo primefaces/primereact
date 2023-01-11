@@ -9,7 +9,7 @@ export function TemplateDoc(props) {
     
     const code = {
         basic: `
-<Image src="https://cdn.primefaces.org/images/placeholder.png" template={icon} alt="Image" preview />
+<Image src="https://www.primefaces.org/cdn/images/placeholder.png" template={icon} alt="Image" preview />
         `,
         javascript: `
 import React from 'react'; 
@@ -20,7 +20,7 @@ export default function TemplateDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <Image src="https://cdn.primefaces.org/images/placeholder.png" template={icon} alt="Image" preview />
+            <Image src="https://www.primefaces.org/cdn/images/placeholder.png" template={icon} alt="Image" preview />
         </div>
     )
 }
@@ -34,7 +34,7 @@ export default function TemplateDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <Image src="https://cdn.primefaces.org/images/placeholder.png" template={icon} alt="Image" preview />
+            <Image src="https://www.primefaces.org/cdn/images/placeholder.png" template={icon} alt="Image" preview />
         </div>
     )
 }

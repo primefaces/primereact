@@ -8,7 +8,7 @@ export function PreviewDoc(props) {
 
     const code = {
         basic: `
-<Image src="https://cdn.primefaces.org/images/placeholder.png" alt="Image" width="250" preview />
+<Image src="https://www.primefaces.org/cdn/images/placeholder.png" alt="Image" width="250" preview />
         `,
         javascript: `
 import React from 'react'; 
@@ -17,7 +17,7 @@ import { Image } from 'primereact/image';
 export default function PreviewDemo() {
     return (
         <div className="card flex justify-content-center">
-            <Image src="https://cdn.primefaces.org/images/placeholder.png" alt="Image" width="250" preview />
+            <Image src="https://www.primefaces.org/cdn/images/placeholder.png" alt="Image" width="250" preview />
         </div>
     )
 }
@@ -29,7 +29,7 @@ import { Image } from 'primereact/image';
 export default function PreviewDemo() {
     return (
         <div className="card flex justify-content-center">
-            <Image src="https://cdn.primefaces.org/images/placeholder.png" alt="Image" width="250" preview />
+            <Image src="https://www.primefaces.org/cdn/images/placeholder.png" alt="Image" width="250" preview />
         </div>
     )
 }

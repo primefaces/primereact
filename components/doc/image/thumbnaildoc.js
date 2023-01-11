@@ -8,7 +8,7 @@ export function ThumbnailDoc(props) {
 
     const code = {
         basic: `
-<Image src="https://cdn.primefaces.org/images/placeholder.png" zoomSrc="https://cdn.primefaces.org/images/placeholder-2x.png" alt="Image" width="80" height="60" preview />
+<Image src="https://www.primefaces.org/cdn/images/placeholder.png" zoomSrc="https://cdn.primefaces.org/images/placeholder-2x.png" alt="Image" width="80" height="60" preview />
         `,
         javascript: `
 import React from 'react'; 
@@ -17,7 +17,7 @@ import { Image } from 'primereact/image';
 export default function ThumbnailDemo() {
     return (
         <div className="card flex justify-content-center">
-            <Image src="https://cdn.primefaces.org/images/placeholder.png" zoomSrc="https://cdn.primefaces.org/images/placeholder-2x.png" alt="Image" width="80" height="60" preview />
+            <Image src="https://www.primefaces.org/cdn/images/placeholder.png" zoomSrc="https://cdn.primefaces.org/images/placeholder-2x.png" alt="Image" width="80" height="60" preview />
         </div>
     )
 }
@@ -29,7 +29,7 @@ import { Image } from 'primereact/image';
 export default function ThumbnailDemo() {
     return (
         <div className="card flex justify-content-center">
-            <Image src="https://cdn.primefaces.org/images/placeholder.png" zoomSrc="https://cdn.primefaces.org/images/placeholder-2x.png" alt="Image" width="80" height="60" preview />
+            <Image src="https://www.primefaces.org/cdn/images/placeholder.png" zoomSrc="https://cdn.primefaces.org/images/placeholder-2x.png" alt="Image" width="80" height="60" preview />
         </div>
     )
 }
