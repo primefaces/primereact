@@ -30,8 +30,8 @@ export function ResponsiveDoc(props) {
 
     const code = {
         basic: `
-<Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayResponsive')} />
-<Dialog header="Header" visible={displayResponsive} onHide={() => onHide('displayResponsive')} breakpoints={{ '960px': '75vw' }} style={{ width: '50vw' }} footer={renderFooter('displayResponsive')}>
+<Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayResponsive')} className="mr-2 mb-2 line-height-3" style={{ minWidth: "10rem" }}/>
+<Dialog header="Header" visible={displayResponsive} onHide={() => onHide('displayResponsive')} breakpoints={{ '960px': '75vw', '641px': '100vw' }} style={{ width: '50vw' }} footer={renderFooter('displayResponsive')}>
     <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
         consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -39,12 +39,12 @@ export function ResponsiveDoc(props) {
 </Dialog>
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Dialog, DialogPositionType } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 
 export default function ResponsiveDoc() {
-    const [displayModal, setDisplayModal] = useState(false);
+    const [displayResponsive, setDisplayResponsive] = useState(false);
 
     const onClick = (name: string, position: DialogPositionType) => {
         setDisplayResponsive(true);
@@ -69,8 +69,8 @@ export default function ResponsiveDoc() {
 
     return (
         <div>
-            <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayResponsive')} />
-            <Dialog header="Header" visible={displayResponsive} onHide={() => onHide('displayResponsive')} breakpoints={{ '960px': '75vw' }} style={{ width: '50vw' }} footer={renderFooter('displayResponsive')}>
+            <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayResponsive')} className="mr-2 mb-2 line-height-3" style={{ minWidth: "10rem" }}/>
+            <Dialog header="Header" visible={displayResponsive} onHide={() => onHide('displayResponsive')} breakpoints={{ '960px': '75vw', '641px': '100vw' }} style={{ width: '50vw' }} footer={renderFooter('displayResponsive')}>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                     consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -81,12 +81,12 @@ export default function ResponsiveDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 
 export default function ResponsiveDoc() {
-    const [displayModal, setDisplayModal] = useState<boolean>(false);
+    const [displayResponsive, setDisplayResponsive] = useState<boolean>(false);
 
     const onClick = (name, position) => {
         setDisplayResponsive(true);
@@ -111,8 +111,8 @@ export default function ResponsiveDoc() {
 
     return (
         <div>
-            <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayResponsive')} />
-            <Dialog header="Header" visible={displayResponsive} onHide={() => onHide('displayResponsive')} breakpoints={{ '960px': '75vw' }} style={{ width: '50vw' }} footer={renderFooter('displayResponsive')}>
+            <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayResponsive')} className="mr-2 mb-2 line-height-3" style={{ minWidth: "10rem" }}/>
+            <Dialog header="Header" visible={displayResponsive} onHide={() => onHide('displayResponsive')} breakpoints={{ '960px': '75vw', '641px': '100vw' }} style={{ width: '50vw' }} footer={renderFooter('displayResponsive')}>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                     consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -132,9 +132,9 @@ export default function ResponsiveDoc() {
                     <i>breakpoints</i> should be an object literal whose keys are the maximum screen sizes and values are the widths per screen.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center dialog-demo">
-                <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayResponsive')} />
-                <Dialog header="Header" visible={displayResponsive} onHide={() => onHide('displayResponsive')} breakpoints={{ '960px': '75vw' }} style={{ width: '50vw' }} footer={renderFooter('displayResponsive')}>
+            <div className="card flex justify-content-center ">
+                <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayResponsive')} className="mr-2 mb-2 line-height-3" style={{ minWidth: '10rem' }} />
+                <Dialog header="Header" visible={displayResponsive} onHide={() => onHide('displayResponsive')} breakpoints={{ '960px': '75vw', '641px': '100vw' }} style={{ width: '50vw' }} footer={renderFooter('displayResponsive')}>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                         consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.

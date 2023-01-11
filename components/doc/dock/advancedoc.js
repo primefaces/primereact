@@ -257,11 +257,8 @@ export function AdvanceDoc(props) {
     useEffect(() => {
         TerminalService.on('command', commandHandler);
 
-        const nodeService = new NodeService();
-        const galleriaService = new PhotoService();
-
-        galleriaService.getImages().then((data) => setImages(data));
-        nodeService.getTreeNodes().then((data) => setNodes(data));
+        PhotoService.getImages().then((data) => setImages(data));
+        NodeService.getTreeNodes().then((data) => setNodes(data));
 
         PrimeReact.appendTo = 'self';
 
@@ -292,10 +289,10 @@ export function AdvanceDoc(props) {
     <Toast ref={toast} />
     <Toast ref={toast2} position="top-center" />
     <Dock model={dockItems} />
-    <Dialog visible={displayTerminal} breakpoints={{ '960px': '50vw' }} style={{ width: '30vw' }} onHide={() => setDisplayTerminal(false)} maximizable blockScroll={false}>
+    <Dialog visible={displayTerminal} breakpoints={{ '960px': '50vw', '600px': '75vw' }} style={{ width: '30vw' }} onHide={() => setDisplayTerminal(false)} maximizable blockScroll={false}>
         <Terminal welcomeMessage="Welcome to PrimeReact (cmd: 'date', 'greet {0}', 'random' and 'clear')" prompt="primereact $" />
     </Dialog>
-    <Dialog visible={displayFinder} breakpoints={{ '960px': '50vw' }} style={{ width: '30vw', height: '18rem' }} onHide={() => setDisplayFinder(false)} maximizable blockScroll={false}>
+    <Dialog visible={displayFinder} breakpoints={{ '960px': '50vw', '600px': '75vw' }} style={{ width: '30vw', height: '18rem' }} onHide={() => setDisplayFinder(false)} maximizable blockScroll={false}>
         <Tree value={nodes} />
     </Dialog>
     <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={2} style={{ width: '400px' }}
@@ -314,8 +311,8 @@ import { Galleria } from 'primereact/galleria';
 import { Toast } from 'primereact/toast';
 import { Tree } from 'primereact/tree';
 import { Menubar } from 'primereact/menubar';
-import { NodeService } from '../service/NodeService';
-import { PhotoService } from '../service/PhotoService';
+import { NodeService } from './service/NodeService';
+import { PhotoService } from './service/PhotoService';
 
 export default function AdvanceDoc() {
     const [displayTerminal, setDisplayTerminal] = useState(false);
@@ -326,54 +323,51 @@ export default function AdvanceDoc() {
     const toast2 = useRef(null);
     const galleria = useRef(null);
 
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
-
     const imgErrorPath = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png';
-    const imgPath = contextPath + '/images/dock';
 
     const dockItems = [
         {
             label: 'Finder',
-            icon: () => <img alt="Finder" src={\`\${imgPath}/finder.svg\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
+            icon: () => <img alt="Finder" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />,
             command: () => {
                 setDisplayFinder(true);
             }
         },
         {
             label: 'Terminal',
-            icon: () => <img alt="Finder" src={\`\${imgPath}/terminal.svg\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
+            icon: () => <img alt="Finder" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />,
             command: () => {
                 setDisplayTerminal(true);
             }
         },
         {
             label: 'App Store',
-            icon: () => <img alt="App Store" src={\`\${imgPath}/appstore.svg\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
+            icon: () => <img alt="App Store" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />,
             command: () => {
                 toast2.current.show({ severity: 'error', summary: 'An unexpected error occurred while signing in.', detail: 'UNTRUSTED_CERT_TITLE' });
             }
         },
         {
             label: 'Safari',
-            icon: () => <img alt="Finder" src={\`\${imgPath}/safari.svg\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
+            icon: () => <img alt="Finder" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />,
             command: () => {
                 toast2.current.show({ severity: 'warn', summary: 'Safari has stopped working' });
             }
         },
         {
             label: 'Photos',
-            icon: () => <img alt="Photos" src={\`\${imgPath}/photos.svg\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
+            icon: () => <img alt="Photos" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />,
             command: () => {
                 galleria.current.show();
             }
         },
         {
             label: 'GitHub',
-            icon: () => <img alt="Settings" src={\`\${imgPath}/github.svg\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
+            icon: () => <img alt="Settings" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />
         },
         {
             label: 'Trash',
-            icon: () => <img alt="trash" src={\`\${imgPath}/trash.png\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
+            icon: () => <img alt="trash" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />,
             command: () => {
                 toast.current.show({ severity: 'info', summary: 'Empty Trash' });
             }
@@ -519,7 +513,7 @@ export default function AdvanceDoc() {
     ];
 
     const itemTemplate = (item) => {
-        return <img src={item.itemImageSrc} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+        return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
     };
 
     const commandHandler = (text) => {
@@ -558,12 +552,8 @@ export default function AdvanceDoc() {
 
     useEffect(() => {
         TerminalService.on('command', commandHandler);
-
-        const nodeService = new NodeService();
-        const galleriaService = new PhotoService();
-
-        galleriaService.getImages().then((data) => setImages(data));
-        nodeService.getTreeNodes().then((data) => setNodes(data));
+        PhotoService.getImages().then((data) => setImages(data));
+        NodeService.getTreeNodes().then((data) => setNodes(data));
 
         PrimeReact.appendTo = 'self';
 
@@ -588,20 +578,22 @@ export default function AdvanceDoc() {
     );
 
     return (
-        <Tooltip className="dark-tooltip" target=".dock-advanced .p-dock-action" my="center+15 bottom-15" at="center top" showDelay={150} />
-        <Menubar model={menubarItems} start={start} end={end} />
-        <div className="dock-window dock-advanced">
-            <Toast ref={toast} />
-            <Toast ref={toast2} position="top-center" />
-            <Dock model={dockItems} />
-            <Dialog visible={displayTerminal} breakpoints={{ '960px': '50vw' }} style={{ width: '30vw' }} onHide={() => setDisplayTerminal(false)} maximizable blockScroll={false}>
-                <Terminal welcomeMessage="Welcome to PrimeReact (cmd: 'date', 'greet {0}', 'random' and 'clear')" prompt="primereact $" />
-            </Dialog>
-            <Dialog visible={displayFinder} breakpoints={{ '960px': '50vw' }} style={{ width: '30vw', height: '18rem' }} onHide={() => setDisplayFinder(false)} maximizable blockScroll={false}>
-                <Tree value={nodes} />
-            </Dialog>
-            <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={2} style={{ width: '400px' }}
-                circular fullScreen showThumbnails={false} showItemNavigators item={itemTemplate} />
+        <div>
+            <Tooltip className="dark-tooltip" target=".dock-advanced .p-dock-action" my="center+15 bottom-15" at="center top" showDelay={150} />
+            <Menubar model={menubarItems} start={start} end={end} />
+            <div className="dock-window dock-advanced">
+                <Toast ref={toast} />
+                <Toast ref={toast2} position="top-center" />
+                <Dock model={dockItems} />
+                <Dialog visible={displayTerminal} breakpoints={{ '960px': '50vw', '600px': '75vw' }} style={{ width: '30vw' }} onHide={() => setDisplayTerminal(false)} maximizable blockScroll={false}>
+                    <Terminal welcomeMessage="Welcome to PrimeReact (cmd: 'date', 'greet {0}', 'random' and 'clear')" prompt="primereact $" />
+                </Dialog>
+                <Dialog visible={displayFinder} breakpoints={{ '960px': '50vw', '600px': '75vw' }} style={{ width: '30vw', height: '18rem' }} onHide={() => setDisplayFinder(false)} maximizable blockScroll={false}>
+                    <Tree value={nodes} />
+                </Dialog>
+                <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={2} style={{ width: '400px' }}
+                    circular fullScreen showThumbnails={false} showItemNavigators item={itemTemplate} />
+            </div>
         </div>
     )
 }
@@ -619,8 +611,8 @@ import { Toast } from 'primereact/toast';
 import { Tree } from 'primereact/tree';
 import { Menubar } from 'primereact/menubar';
 import { MenuItem } from 'primereact/menuitem';
-import { NodeService } from '../service/NodeService';
-import { PhotoService } from '../service/PhotoService';
+import { NodeService } from './service/NodeService';
+import { PhotoService } from './service/PhotoService';
 
 export default function AdvanceDoc() {
     const [displayTerminal, setDisplayTerminal] = useState(false);
@@ -631,54 +623,51 @@ export default function AdvanceDoc() {
     const toast2 = useRef<Toast>(null);
     const galleria = useRef<Galleria>(null);
 
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
-
     const imgErrorPath = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png';
-    const imgPath = contextPath + '/images/dock';
 
     const dockItems: MenuItem[] = [
         {
             label: 'Finder',
-            icon: () => <img alt="Finder" src={\`\${imgPath}/finder.svg\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
+            icon: () => <img alt="Finder" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />,
             command: () => {
                 setDisplayFinder(true);
             }
         },
         {
             label: 'Terminal',
-            icon: () => <img alt="Finder" src={\`\${imgPath}/terminal.svg\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
+            icon: () => <img alt="Finder" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />,
             command: () => {
                 setDisplayTerminal(true);
             }
         },
         {
             label: 'App Store',
-            icon: () => <img alt="App Store" src={\`\${imgPath}/appstore.svg\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
+            icon: () => <img alt="App Store" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />,
             command: () => {
                 toast2.current.show({ severity: 'error', summary: 'An unexpected error occurred while signing in.', detail: 'UNTRUSTED_CERT_TITLE' });
             }
         },
         {
             label: 'Safari',
-            icon: () => <img alt="Finder" src={\`\${imgPath}/safari.svg\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
+            icon: () => <img alt="Finder" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />,
             command: () => {
                 toast2.current.show({ severity: 'warn', summary: 'Safari has stopped working' });
             }
         },
         {
             label: 'Photos',
-            icon: () => <img alt="Photos" src={\`\${imgPath}/photos.svg\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
+            icon: () => <img alt="Photos" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />,
             command: () => {
                 galleria.current.show();
             }
         },
         {
             label: 'GitHub',
-            icon: () => <img alt="Settings" src={\`\${imgPath}/github.svg\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
+            icon: () => <img alt="Settings" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />
         },
         {
             label: 'Trash',
-            icon: () => <img alt="trash" src={\`\${imgPath}/trash.png\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
+            icon: () => <img alt="trash" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />,
             command: () => {
                 toast.current.show({ severity: 'info', summary: 'Empty Trash' });
             }
@@ -863,12 +852,8 @@ export default function AdvanceDoc() {
 
     useEffect(() => {
         TerminalService.on('command', commandHandler);
-
-        const nodeService = new NodeService();
-        const galleriaService = new PhotoService();
-
-        galleriaService.getImages().then((data) => setImages(data));
-        nodeService.getTreeNodes().then((data) => setNodes(data));
+        PhotoService.getImages().then((data) => setImages(data));
+        NodeService.getTreeNodes().then((data) => setNodes(data));
 
         PrimeReact.appendTo = 'self';
 
@@ -893,29 +878,148 @@ export default function AdvanceDoc() {
     );
 
     return (
-        <Tooltip className="dark-tooltip" target=".dock-advanced .p-dock-action" my="center+15 bottom-15" at="center top" showDelay={150} />
-
-        <Menubar model={menubarItems} start={start} end={end} />
-        <div className="dock-window dock-advanced">
-            <Toast ref={toast} />
-            <Toast ref={toast2} position="top-center" />
-
-            <Dock model={dockItems} />
-
-            <Dialog visible={displayTerminal} breakpoints={{ '960px': '50vw' }} style={{ width: '30vw' }} onHide={() => setDisplayTerminal(false)} maximizable blockScroll={false}>
-                <Terminal welcomeMessage="Welcome to PrimeReact (cmd: 'date', 'greet {0}', 'random' and 'clear')" prompt="primereact $" />
-            </Dialog>
-
-            <Dialog visible={displayFinder} breakpoints={{ '960px': '50vw' }} style={{ width: '30vw', height: '18rem' }} onHide={() => setDisplayFinder(false)} maximizable blockScroll={false}>
-                <Tree value={nodes} />
-            </Dialog>
-
-            <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={2} style={{ width: '400px' }}
-                circular fullScreen showThumbnails={false} showItemNavigators item={itemTemplate} />
+        <div>
+            <Tooltip className="dark-tooltip" target=".dock-advanced .p-dock-action" my="center+15 bottom-15" at="center top" showDelay={150} />
+            <Menubar model={menubarItems} start={start} end={end} />
+            <div className="dock-window dock-advanced">
+                <Toast ref={toast} />
+                <Toast ref={toast2} position="top-center" />
+                <Dock model={dockItems} />
+                <Dialog visible={displayTerminal} breakpoints={{ '960px': '50vw', '600px': '75vw' }} style={{ width: '30vw' }} onHide={() => setDisplayTerminal(false)} maximizable blockScroll={false}>
+                    <Terminal welcomeMessage="Welcome to PrimeReact (cmd: 'date', 'greet {0}', 'random' and 'clear')" prompt="primereact $" />
+                </Dialog>
+                <Dialog visible={displayFinder} breakpoints={{ '960px': '50vw', '600px': '75vw' }} style={{ width: '30vw', height: '18rem' }} onHide={() => setDisplayFinder(false)} maximizable blockScroll={false}>
+                    <Tree value={nodes} />
+                </Dialog>
+                <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={2} style={{ width: '400px' }}
+                    circular fullScreen showThumbnails={false} showItemNavigators item={itemTemplate} />
+            </div>
         </div>
     )
 }
-        `
+        `,
+        extFiles: {
+            'DataTableDemo.css': `
+/* DataTableDemo.css */
+
+.dock-demo .dock-window {
+    width: 100%;
+    height: 450px;
+    position: relative;
+    background-image: url('../../assets/images/dock/window.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.dock-demo .p-dock {
+    z-index: 1000;
+}
+.dock-demo .dock-advanced .p-dialog-mask, .dock-demo .dock-advanced .p-galleria-mask, .dock-demo .dock-advanced .p-galleria-mask .p-galleria-item-nav, .dock-demo .dock-advanced .p-toast {
+    position: absolute;
+}
+.dock-demo .dock-advanced .p-dialog .p-dialog-header {
+    padding: 0.2rem;
+}
+.dock-demo .dock-advanced .p-dialog .p-dialog-content {
+    padding: 0;
+}
+.dock-demo .dock-advanced .p-dialog p {
+    margin-top: 0;
+}
+.dock-demo .dock-advanced .p-dialog .p-terminal {
+    background-color: #212121;
+    color: #fff;
+    border: 0 none;
+    min-height: 18rem;
+    height: 100%;
+}
+.dock-demo .dock-advanced .p-dialog .p-terminal .p-terminal-command {
+    color: #80cbc4;
+}
+.dock-demo .dock-advanced .p-dialog .p-terminal .p-terminal-prompt {
+    color: #ffd54f;
+}
+.dock-demo .dock-advanced .p-dialog .p-terminal .p-terminal-response {
+    color: #9fa8da;
+}
+.dock-demo .dock-advanced .p-dialog .p-tree {
+    height: 100%;
+    border-radius: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+}
+.dock-demo .dock-advanced .p-toast {
+    top: 20px;
+}
+.dock-demo .p-menubar {
+    padding-top: 0;
+    padding-bottom: 0;
+    border-radius: 0;
+}
+.dock-demo .p-menubar .menubar-root {
+    font-weight: bold;
+    padding: 0 1rem;
+}
+.dock-demo .p-menubar .p-menuitem-link {
+    padding: 0.5rem 0.75rem;
+}
+.dock-demo .p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link {
+    padding: 0.5rem 0.75rem;
+}
+.dock-demo .p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link > .p-submenu-icon {
+    display: none;
+}
+.dock-demo .p-menubar .p-menubar-end span, .dock-demo .p-menubar .p-menubar-end i {
+    padding: 0 0.75rem;
+}
+.dark-tooltip .p-tooltip .p-tooltip-arrow {
+    border-top-color: var(--surface-900);
+}
+.dark-tooltip .p-tooltip .p-tooltip-text {
+    background-color: var(--surface-900);
+}
+    };
+    `,
+            data: `
+
+/* NodeService */
+{
+    key: '0',
+    label: 'Documents',
+    data: 'Documents Folder',
+    icon: 'pi pi-fw pi-inbox',
+    children: [
+        {
+            key: '0-0',
+            label: 'Work',
+            data: 'Work Folder',
+            icon: 'pi pi-fw pi-cog',
+            children: [
+                { key: '0-0-0', label: 'Expenses.doc', icon: 'pi pi-fw pi-file', data: 'Expenses Document' },
+                { key: '0-0-1', label: 'Resume.doc', icon: 'pi pi-fw pi-file', data: 'Resume Document' }
+            ]
+        },
+        {
+            key: '0-1',
+            label: 'Home',
+            data: 'Home Folder',
+            icon: 'pi pi-fw pi-home',
+            children: [{ key: '0-1-0', label: 'Invoices.txt', icon: 'pi pi-fw pi-file', data: 'Invoices for this month' }]
+        }
+    ]
+},
+...
+
+/* PhotoService */
+{
+    itemImageSrc: 'images/galleria/galleria1.jpg',
+    thumbnailImageSrc: 'images/galleria/galleria1s.jpg',
+    alt: 'Description for Image 1',
+    title: 'Title 1'
+},
+...
+`
+        }
     };
 
     return (
@@ -933,18 +1037,18 @@ export default function AdvanceDoc() {
 
                     <Dock model={dockItems} />
 
-                    <Dialog visible={displayTerminal} breakpoints={{ '960px': '50vw' }} style={{ width: '30vw' }} onHide={() => setDisplayTerminal(false)} maximizable blockScroll={false}>
+                    <Dialog visible={displayTerminal} breakpoints={{ '960px': '50vw', '600px': '75vw' }} style={{ width: '30vw' }} onHide={() => setDisplayTerminal(false)} maximizable blockScroll={false}>
                         <Terminal welcomeMessage="Welcome to PrimeReact (cmd: 'date', 'greet {0}', 'random' and 'clear')" prompt="primereact $" />
                     </Dialog>
 
-                    <Dialog visible={displayFinder} breakpoints={{ '960px': '50vw' }} style={{ width: '30vw', height: '18rem' }} onHide={() => setDisplayFinder(false)} maximizable blockScroll={false}>
+                    <Dialog visible={displayFinder} breakpoints={{ '960px': '50vw', '600px': '75vw' }} style={{ width: '30vw', height: '18rem' }} onHide={() => setDisplayFinder(false)} maximizable blockScroll={false}>
                         <Tree value={nodes} />
                     </Dialog>
 
                     <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={2} style={{ width: '400px' }} circular fullScreen showThumbnails={false} showItemNavigators item={itemTemplate} />
                 </div>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['PhotoService', 'NodeService']} />
         </>
     );
 }

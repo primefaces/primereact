@@ -9,9 +9,10 @@ export function BasicDoc(props) {
     ];
     const code = {
         basic: `
-<Menu model={items} />        
+<Menu model={items} />
 `,
         javascript: `
+import React from 'react'; 
 import { Menu } from 'primereact/menu';
 
 export default function BasicDoc() {
@@ -26,10 +27,12 @@ export default function BasicDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Menu } from 'primereact/menu';
+import { MenuItem } from 'primereact/menuitem';
 
 export default function BasicDoc() {
-    let items = [
+    let items: MenuItem[] = [
         {label: 'New', icon: 'pi pi-fw pi-plus'},
         {label: 'Delete', icon: 'pi pi-fw pi-trash'}
     ];

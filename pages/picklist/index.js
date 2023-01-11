@@ -4,6 +4,8 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ApiDoc } from '../../components/doc/picklist/apidoc';
+import { AccessibilityDoc } from '../../components/doc/picklist/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/picklist/styledoc';
 import { ImportDoc } from '../../components/doc/picklist/importdoc';
 import { PickListDoc } from '../../components/doc/picklist/picklistdoc';
 
@@ -20,7 +22,17 @@ const PickListDemo = () => {
             component: PickListDoc
         },
         {
-            id: 'apidoc',
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
+            id: 'api',
             label: 'API',
             component: ApiDoc,
             children: [
@@ -31,14 +43,6 @@ const PickListDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }
@@ -59,7 +63,7 @@ const PickListDemo = () => {
                 <DocActions github="picklist/index.js" />
             </div>
 
-            <div className="content-section doc picklist-demo">
+            <div className="content-section doc">
                 <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>

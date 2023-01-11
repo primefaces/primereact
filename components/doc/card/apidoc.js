@@ -66,69 +66,6 @@ export function ApiDoc(props) {
                     </table>
                 </div>
             </DocSubSection>
-
-            <DocSubSection id="styling" label="Styling">
-                <p>
-                    Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.
-                </p>
-                <div className="doc-tablewrapper">
-                    <table className="doc-table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Element</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>p-card</td>
-                                <td>Container element.</td>
-                            </tr>
-                            <tr>
-                                <td>p-card-title</td>
-                                <td>Title element.</td>
-                            </tr>
-                            <tr>
-                                <td>p-card-subtitle</td>
-                                <td>Subtitle element.</td>
-                            </tr>
-                            <tr>
-                                <td>p-card-content</td>
-                                <td>Content of the card.</td>
-                            </tr>
-                            <tr>
-                                <td>p-card-footer</td>
-                                <td>Footer of the card.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </DocSubSection>
-
-            <DocSubSection id="accessibility" label="Accessibility">
-                <DevelopmentSection>
-                    <h4>Screen Reader</h4>
-                    <p>
-                        A card can be utilized in many use cases as a result no role is enforced, in fact a role may not be necessary if the card is used for presentational purposes only. Any valid attribute is passed to the container element so if
-                        you require to use one of the{' '}
-                        <a href="https://www.w3.org/TR/wai-aria/#landmark" alt="Landmark Roles">
-                            landmark
-                        </a>
-                        roles like <i>region</i>, you may use the <i>role</i> property.
-                    </p>
-
-                    <CodeHighlight>
-                        {`
-<Card role="region">
-    Content
-</Card>
-`}
-                    </CodeHighlight>
-
-                    <h3>Keyboard Support</h3>
-                    <p>Component does not include any interactive elements.</p>
-                </DevelopmentSection>
-            </DocSubSection>
         </>
     );
 }

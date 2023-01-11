@@ -4,10 +4,11 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
 
 export const Dialog = React.forwardRef((props, ref) => {
-    const [idState, setIdState] = React.useState(props.id);
+    const uniqueId = props.id ? props.id : UniqueComponentId();
+    const [idState, setIdState] = React.useState(uniqueId);
     const [maskVisibleState, setMaskVisibleState] = React.useState(false);
     const [visibleState, setVisibleState] = React.useState(false);
     const [maximizedState, setMaximizedState] = React.useState(props.maximized);
@@ -22,7 +23,7 @@ export const Dialog = React.forwardRef((props, ref) => {
     const lastPageX = React.useRef(null);
     const lastPageY = React.useRef(null);
     const styleElement = React.useRef(null);
-    const attributeSelector = React.useRef('');
+    const attributeSelector = React.useRef(uniqueId);
     const maximized = props.onMaximize ? props.maximized : maximizedState;
 
     const [bindDocumentKeyDownListener, unbindDocumentKeyDownListener] = useEventListener({ type: 'keydown', listener: (event) => onKeyDown(event) });
@@ -332,23 +333,21 @@ export const Dialog = React.forwardRef((props, ref) => {
     };
 
     const createStyle = () => {
-        if (!styleElement.current) {
-            styleElement.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+        styleElement.current = DomHandler.createInlineStyle(PrimeReact.nonce);
 
-            let innerHTML = '';
+        let innerHTML = '';
 
-            for (let breakpoint in props.breakpoints) {
-                innerHTML += `
-                    @media screen and (max-width: ${breakpoint}) {
-                        .p-dialog[${attributeSelector.current}] {
-                            width: ${props.breakpoints[breakpoint]} !important;
-                        }
+        for (let breakpoint in props.breakpoints) {
+            innerHTML += `
+                @media screen and (max-width: ${breakpoint}) {
+                    .p-dialog[${attributeSelector.current}] {
+                        width: ${props.breakpoints[breakpoint]} !important;
                     }
-                `;
-            }
-
-            styleElement.current.innerHTML = innerHTML;
+                }
+            `;
         }
+
+        styleElement.current.innerHTML = innerHTML;
     };
 
     const changeScrollOnMaximizable = () => {
@@ -360,16 +359,6 @@ export const Dialog = React.forwardRef((props, ref) => {
     };
 
     useMountEffect(() => {
-        const unqiueId = UniqueComponentId();
-
-        if (!idState) {
-            setIdState(unqiueId);
-        }
-
-        if (!attributeSelector.current) {
-            attributeSelector.current = unqiueId;
-        }
-
         if (props.visible) {
             setMaskVisibleState(true);
         }

@@ -11,7 +11,7 @@ export function BasicDoc(props) {
 <Slider value={value} onChange={(e) => setValue(e.value)} className="w-14rem" />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Slider } from "primereact/slider";
 
 export default function BasicDemo() {
@@ -23,7 +23,7 @@ export default function BasicDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Slider, SliderChangeParams } from "primereact/slider";
 
 export default function BasicDemo() {

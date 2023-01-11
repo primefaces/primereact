@@ -2,9 +2,12 @@ import Head from 'next/head';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
-import { PanelMenuDoc } from '../../components/doc/panelmenu/panelmenu';
+import { BasicDoc } from '../../components/doc/panelmenu/basicdoc';
 import { ImportDoc } from '../../components/doc/panelmenu/importdoc';
 import { ApiDoc } from '../../components/doc/panelmenu/apidoc';
+import { AccessibilityDoc } from '../../components/doc/panelmenu/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/panelmenu/styledoc';
+import { ControlledDoc } from '../../components/doc/panelmenu/controlleddoc';
 
 const PanelMenuDemo = () => {
     const docs = [
@@ -14,9 +17,24 @@ const PanelMenuDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'panelmenu',
-            label: 'PanelMenu',
-            component: PanelMenuDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'controlled',
+            label: 'Controlled',
+            component: ControlledDoc
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         },
         {
             id: 'api',
@@ -26,14 +44,6 @@ const PanelMenuDemo = () => {
                 {
                     id: 'properties',
                     label: 'Properties'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

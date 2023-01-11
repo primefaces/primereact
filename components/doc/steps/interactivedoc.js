@@ -39,7 +39,7 @@ export function InteractiveDoc(props) {
 <Steps model={items} activeIndex={activeIndex} onSelect={(e) => setActiveIndex(e.index)} readOnly={false} />
 `,
         javascript: `
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { Steps } from 'primereact/steps';
 import { Toast } from 'primereact/toast';
 
@@ -82,7 +82,7 @@ export default function InteractiveDoc() {
 }
         `,
         typescript: `
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { Steps } from 'primereact/steps';
 import { Toast } from 'primereact/toast';
 

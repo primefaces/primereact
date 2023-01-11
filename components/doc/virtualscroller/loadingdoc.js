@@ -9,7 +9,7 @@ export function LoadingDoc(props) {
     const [basicItems] = useState(Array.from({ length: 100000 }).map((_, i) => `Item #${i}`));
 
     const basicItemTemplate = (item, options) => {
-        const className = classNames('scroll-item p-2', {
+        const className = classNames('flex align-items-center p-2', {
             odd: options.odd
         });
         const style = options.props.orientation === 'horizontal' ? { width: '50px' } : { height: '50px' };
@@ -22,7 +22,7 @@ export function LoadingDoc(props) {
     };
 
     const basicLoadingTemplate = (options) => {
-        const className = classNames('scroll-item p-2', {
+        const className = classNames('flex align-items-center p-2', {
             odd: options.odd
         });
 
@@ -39,16 +39,17 @@ export function LoadingDoc(props) {
 <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} showLoader delay={250} loadingTemplate={basicLoadingTemplate} />
         `,
         javascript: `
-import { useState } 'react';
+import React, { useState } from 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { Skeleton } from 'primereact/skeleton';
 import { classNames } from 'primereact/utils';
+import './VirtualScrollerDemo.css';
 
 export default function LoadingDoc() {
     const [basicItems] = useState(Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`));
 
     const basicItemTemplate = (item, options) => {
-        const className = classNames('scroll-item p-2', {
+        const className = classNames('flex align-items-center p-2', {
             'odd': options.odd
         });
         const style = options.props.orientation === 'horizontal' ? { width: '50px' } : { height: '50px' };
@@ -57,7 +58,7 @@ export default function LoadingDoc() {
     }
 
     const basicLoadingTemplate = (options) => {
-        const className = classNames('scroll-item p-2', {
+        const className = classNames('flex align-items-center p-2', {
             'odd': options.odd
         });
 
@@ -69,7 +70,7 @@ export default function LoadingDoc() {
     }
 
     return ( 
-        <div>
+        <div className="card virtualscroller-demo">
             <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} showLoader delay={250}/>
             <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} showLoader delay={250} loadingTemplate={basicLoadingTemplate} />
         </div>
@@ -77,16 +78,17 @@ export default function LoadingDoc() {
 }
         `,
         typescript: `
-import { useState } 'react';
+import React, { useState } from 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { Skeleton } from 'primereact/skeleton';
 import { classNames } from 'primereact/utils';
+import './VirtualScrollerDemo.css';
 
 export default function LoadingDoc() {
     const [basicItems] = useState(Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`));
 
     const basicItemTemplate = (item, options) => {
-        const className = classNames('scroll-item p-2', {
+        const className = classNames('flex align-items-center p-2', {
             'odd': options.odd
         });
         const style = options.props.orientation === 'horizontal' ? { width: '50px' } : { height: '50px' };
@@ -95,7 +97,7 @@ export default function LoadingDoc() {
     }
 
     const basicLoadingTemplate = (options) => {
-        const className = classNames('scroll-item p-2', {
+        const className = classNames('flex align-items-center p-2', {
             'odd': options.odd
         });
 
@@ -107,13 +109,33 @@ export default function LoadingDoc() {
     }
 
     return (
-        <div>
+        <div className="card virtualscroller-demo">
             <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} showLoader delay={250}/>
             <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} showLoader delay={250} loadingTemplate={basicLoadingTemplate} />
         </div>
     )
 }
-        `
+        `,
+        extFiles: {
+            'VirtualScrollerDemo.css': `
+/* VirtualScrollerDemo.css */
+
+.virtualscroller-demo .odd {
+    background-color: var(--surface-b);
+}
+
+.virtualscroller-demo .p-virtualscroller {
+    height: 200px;
+    width: 200px;
+    border: 1px solid var(--surface-d);
+}
+
+.virtualscroller-demo .p-horizontal-scroll .p-virtualscroller-content {
+    display: flex;
+    flex-direction: row;
+}
+    `
+        }
     };
 
     return (

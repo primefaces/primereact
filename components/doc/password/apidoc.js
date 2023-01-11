@@ -9,7 +9,7 @@ export function ApiDoc(props) {
         <>
             <DocSectionText {...props}></DocSectionText>
             <DocSubSection id="properties" label="Properties">
-                <p>Password accepts all valid properties of an input element in addition the the custom properties below.</p>
+                <p>Password accepts all valid properties of an input element in addition the custom properties below.</p>
 
                 <div className="doc-tablewrapper">
                     <table className="doc-table">
@@ -209,90 +209,6 @@ export function ApiDoc(props) {
                         </tbody>
                     </table>
                 </div>
-            </DocSubSection>
-
-            <DocSubSection id="styling" label="Styling">
-                <p>
-                    Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
-                </p>
-                <div className="doc-tablewrapper">
-                    <table className="doc-table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Element</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>p-password</td>
-                                <td>Container element</td>
-                            </tr>
-                            <tr>
-                                <td>p-password-input</td>
-                                <td>Input Element</td>
-                            </tr>
-                            <tr>
-                                <td>p-password-panel</td>
-                                <td>Container of password panel</td>
-                            </tr>
-                            <tr>
-                                <td>p-password-meter</td>
-                                <td>Meter element of password strength</td>
-                            </tr>
-                            <tr>
-                                <td>p-password-info</td>
-                                <td>Text to display strength</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </DocSubSection>
-
-            <DocSubSection id="accessibility" label="Accessibility">
-                <DevelopmentSection>
-                    <h4>Screen Reader</h4>
-                    <p>
-                        Value to describe the component can either be provided via <i>label</i> tag combined with <i>id</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props. Screen reader is notified about the changes to the strength of
-                        the password using a section that has <i>aria-live</i> while typing.
-                    </p>
-                    <CodeHighlight>
-                        {`
-<label htmlFor="pwd1">Password</label>
-<Password id="pwd1" />
-
-<span id="pwd2">Password</span>
-<Password aria-labelledby="pwd2" />
-
-<Password aria-label="Password"/>
-`}
-                    </CodeHighlight>
-                    <h4>Keyboard Support</h4>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <i>tab</i>
-                                    </td>
-                                    <td>Moves focus to the input.</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <i>escape</i>
-                                    </td>
-                                    <td>Hides the strength meter if open.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </DevelopmentSection>
             </DocSubSection>
         </>
     );

@@ -4,14 +4,14 @@ import { DocSectionCode } from '../common/docsectioncode';
 export function ImportDoc(props) {
     const code = {
         basic: `
-import { BreadCrumb } from 'primereact/breadcrumb';
+import { TieredMenu } from 'primereact/tieredmenu';
         `
     };
 
     return (
         <>
             <DocSectionText {...props}></DocSectionText>
-            <DocSectionCode code={code} hideToggleCode hideCodeSandbox />
+            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
         </>
     );
 }

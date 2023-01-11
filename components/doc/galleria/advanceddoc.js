@@ -13,7 +13,7 @@ export function AdvancedDoc(props) {
     const [showThumbnails, setShowThumbnails] = useState(false);
     const [isAutoPlayActive, setAutoPlayActive] = useState(true);
     const [isFullScreen, setFullScreen] = useState(false);
-    const galleriaService = new PhotoService();
+
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const galleria = useRef(null);
 
@@ -37,7 +37,7 @@ export function AdvancedDoc(props) {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then((data) => setImages(data));
+        PhotoService.getImages().then((data) => setImages(data));
         bindDocumentListeners();
 
         return () => unbindDocumentListeners();
@@ -180,11 +180,12 @@ export function AdvancedDoc(props) {
     style={{ maxWidth: '640px' }} className={galleriaClassName} />
         `,
         javascript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
 import { classNames } from 'primereact/utils';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
+import './GalleriaAdvancedDemo.css';
 
 export default function AdvancedDoc() {
     const [images, setImages] = useState(null);
@@ -192,7 +193,7 @@ export default function AdvancedDoc() {
     const [showThumbnails, setShowThumbnails] = useState(false);
     const [isAutoPlayActive, setAutoPlayActive] = useState(true);
     const [isFullScreen, setFullScreen] = useState(false);
-    const galleriaService = new PhotoService();
+    
     const galleria = useRef(null)
 
     const responsiveOptions = [
@@ -215,7 +216,7 @@ export default function AdvancedDoc() {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
         bindDocumentListeners();
 
         return () => unbindDocumentListeners();
@@ -360,11 +361,12 @@ export default function AdvancedDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
 import { classNames } from 'primereact/utils';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
+import './GalleriaAdvancedDemo.css';
 
 export default function AdvancedDoc() {
     const [images, setImages] = useState(null);
@@ -372,7 +374,7 @@ export default function AdvancedDoc() {
     const [showThumbnails, setShowThumbnails] = useState(false);
     const [isAutoPlayActive, setAutoPlayActive] = useState(true);
     const [isFullScreen, setFullScreen] = useState(false);
-    const galleriaService = new PhotoService();
+    
     const galleria = useRef(null)
 
     const responsiveOptions = [
@@ -395,7 +397,7 @@ export default function AdvancedDoc() {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
         bindDocumentListeners();
 
         return () => unbindDocumentListeners();
@@ -538,6 +540,98 @@ export default function AdvancedDoc() {
             style={{ maxWidth: '640px' }} className={galleriaClassName} />
     )
 }
+        `,
+
+        extFiles: {
+            'GalleriaAdvancedDemo.css': `
+/* GalleriaAdvancedDemo.css */
+
+.galleria-demo {
+    .custom-indicator-galleria {
+        .indicator-text {
+            color: #e9ecef;
+            cursor: pointer;
+        }
+
+        .p-highlight {
+            .indicator-text {
+                color: var(--primary-color);
+            }
+        }
+    }
+
+    .custom-galleria {
+        &.fullscreen {
+            display: flex;
+            flex-direction: column;
+
+            .p-galleria-content {
+                flex-grow: 1;
+                justify-content: center;
+            }
+        }
+
+        .p-galleria-content {
+            position: relative;
+        }
+
+        .p-galleria-thumbnail-wrapper {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        .p-galleria-thumbnail-items-container {
+            width: 100%;
+        }
+
+        .custom-galleria-footer {
+            display: flex;
+            align-items: center;
+            background-color: rgba(0, 0, 0, .9);
+            color: #ffffff;
+
+            > button {
+                background-color: transparent;
+                color: #ffffff;
+                border: 0 none;
+                border-radius: 0;
+                margin: .2rem 0;
+
+                &.fullscreen-button {
+                    margin-left: auto;
+                }
+
+                &:hover {
+                    background-color: rgba(255, 255, 255, 0.1);
+                }
+            }
+        }
+
+        .title-container {
+            > span {
+                font-size: .9rem;
+                padding-left: .829rem;
+
+                &.title {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
+    `
+        },
+        data: `
+/* PhotoService */
+{
+    itemImageSrc: 'images/galleria/galleria1.jpg',
+    thumbnailImageSrc: 'images/galleria/galleria1s.jpg',
+    alt: 'Description for Image 1',
+    title: 'Title 1'
+},
+...
         `
     };
 
@@ -567,7 +661,7 @@ export default function AdvancedDoc() {
                     className={galleriaClassName}
                 />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['PhotoService']} />
         </>
     );
 }

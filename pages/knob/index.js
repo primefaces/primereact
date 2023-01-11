@@ -14,6 +14,10 @@ import { SizeDoc } from '../../components/doc/knob/sizedoc';
 import { ColorDoc } from '../../components/doc/knob/colordoc';
 import { ReactiveDoc } from '../../components/doc/knob/reactivedoc';
 import { ApiDoc } from '../../components/doc/knob/apidoc';
+import { AccessibilityDoc } from '../../components/doc/knob/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/knob/styledoc';
+import { FormikDoc } from '../../components/doc/knob/validation/formikdoc';
+import { HookFormDoc } from '../../components/doc/knob/validation/hookformdoc';
 
 const KnobDemo = () => {
     const docs = [
@@ -28,8 +32,8 @@ const KnobDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'readonly',
-            label: 'Readonly',
+            id: 'readOnly',
+            label: 'ReadOnly',
             component: ReadOnlyDoc
         },
         {
@@ -69,8 +73,35 @@ const KnobDemo = () => {
         },
         {
             id: 'reactive',
-            label: 'Reactive Knob',
+            label: 'Reactive',
             component: ReactiveDoc
+        },
+        {
+            id: 'validation',
+            label: 'Validation',
+            description: 'Validate using popular React validation libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         },
         {
             id: 'api',
@@ -84,14 +115,6 @@ const KnobDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

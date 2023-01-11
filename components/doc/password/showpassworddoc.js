@@ -8,29 +8,33 @@ export function ShowPassword(props) {
 
     const code = {
         basic: `
-<Password value={value} onChange={(e) => setValue(e.target.value)} toggleMask />
+<Password value={value} onChange={(e) => setValue(e.target.value)} inputClassName="w-15rem" toggleMask />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Password } from 'primereact/password';
 
 export default function ShowPassword() {
     const [value, setValue] = useState('');
 
     return (
-        <Password value={value} onChange={(e) => setValue(e.target.value)} toggleMask />
+        <div className="card flex justify-content-center">
+            <Password value={value} onChange={(e) => setValue(e.target.value)} toggleMask />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Password } from 'primereact/password';
 
 export default function ShowPassword() {
     const [value, setValue] = useState<string>('');
 
     return (
-        <Password value={value} onChange={(e : ChangeEventHandler) => setValue(e.target.value)} toggleMask />
+        <div className="card flex justify-content-center">
+            <Password value={value} onChange={(e : ChangeEventHandler) => setValue(e.target.value)} toggleMask />
+        </div>
     )
 }
         `
@@ -44,7 +48,7 @@ export default function ShowPassword() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Password value={value} onChange={(e) => setValue(e.target.value)} toggleMask />
+                <Password value={value} onChange={(e) => setValue(e.target.value)} inputClassName="w-15rem" toggleMask />
             </div>
             <DocSectionCode code={code} />
         </>

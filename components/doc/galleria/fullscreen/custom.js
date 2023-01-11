@@ -1,14 +1,14 @@
-import { useState, useEffect, useRef } from 'react';
-import { Galleria } from '../../../lib/galleria/Galleria';
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { PhotoService } from '../../../../service/PhotoService';
 import getConfig from 'next/config';
+import { useEffect, useRef, useState } from 'react';
+import { PhotoService } from '../../../../service/PhotoService';
+import { Galleria } from '../../../lib/galleria/Galleria';
+import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function CustomContentDoc(props) {
     const [images, setImages] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
-    const galleriaService = new PhotoService();
+
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const galleria = useRef(null);
 
@@ -28,7 +28,7 @@ export function CustomContentDoc(props) {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then((data) => setImages(data));
+        PhotoService.getImages().then((data) => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
@@ -60,14 +60,14 @@ circular fullScreen showItemNavigators showThumbnails={false} item={itemTemplate
 </div>
         `,
         javascript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Galleria } from 'primereact/galleria';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
 
 export default function CustomContentDoc() {
     const [images, setImages] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
-    const galleriaService = new PhotoService();
+    
     const galleria = useRef(null);
 
     const responsiveOptions = [
@@ -86,7 +86,7 @@ export default function CustomContentDoc() {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
@@ -98,40 +98,40 @@ export default function CustomContentDoc() {
     }
 
     return (
-        <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={7} style={{ maxWidth: '850px' }}
-        activeIndex={activeIndex} onItemChange={(e) => setActiveIndex(e.index)}
-        circular fullScreen showItemNavigators showThumbnails={false} item={itemTemplate} thumbnail={thumbnailTemplate} />
-
-        <div className="grid" style={{ maxWidth: '400px' }}>
-            {
-                images && images.map((image, index) => {
-                    let imgEl = <img src={image.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={image.alt} style={{ cursor: 'pointer' }} onClick={
-                        () => {setActiveIndex(index); galleria.current.show()}
-                    } />
-
-                    return (
-                        <div className="col-3" key={index}>
-                            {imgEl}
-                        </div>
-                    )
-                })
-            }
+        <div className="card flex justify-content-center">
+            <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={7} style={{ maxWidth: '850px' }}
+            activeIndex={activeIndex} onItemChange={(e) => setActiveIndex(e.index)}
+            circular fullScreen showItemNavigators showThumbnails={false} item={itemTemplate} thumbnail={thumbnailTemplate} />
+            <div className="grid" style={{ maxWidth: '400px' }}>
+                {
+                    images && images.map((image, index) => {
+                        let imgEl = <img src={image.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={image.alt} style={{ cursor: 'pointer' }} onClick={
+                            () => {setActiveIndex(index); galleria.current.show()}
+                        } />
+                        return (
+                            <div className="col-3" key={index}>
+                                {imgEl}
+                            </div>
+                        )
+                    })
+                }
+            </div>
         </div>
     )
 }
         `,
         typescript: `
-import { useState, useEffect, useRef } from 'react';
-import { Galleria } from 'primereact/galleria';
-import { PhotoService } from '../service/PhotoService';
+import React, { useState, useEffect, useRef } from 'react';
+import { Galleria, GalleriaResponsiveOptions } from 'primereact/galleria';
+import { PhotoService } from './service/PhotoService';
 
 export default function CustomContentDoc() {
     const [images, setImages] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
-    const galleriaService = new PhotoService();
-    const galleria = useRef(null);
+    
+    const galleria = useRef<Galleria>(null);
 
-    const responsiveOptions = [
+    const responsiveOptions: GalleriaResponsiveOptions[] = [
         {
             breakpoint: '1024px',
             numVisible: 5
@@ -147,7 +147,7 @@ export default function CustomContentDoc() {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
@@ -157,29 +157,39 @@ export default function CustomContentDoc() {
     const thumbnailTemplate = (item) => {
         return <img src={item.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.alt} style={{ display: 'block' }} />;
     }
-    
+
     return (
-        <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={7} style={{ maxWidth: '850px' }}
-        activeIndex={activeIndex} onItemChange={(e) => setActiveIndex(e.index)}
-        circular fullScreen showItemNavigators showThumbnails={false} item={itemTemplate} thumbnail={thumbnailTemplate} />
-
-        <div className="grid" style={{ maxWidth: '400px' }}>
-            {
-                images && images.map((image, index) => {
-                    let imgEl = <img src={image.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={image.alt} style={{ cursor: 'pointer' }} onClick={
-                        () => {setActiveIndex(index); galleria.current.show()}
-                    } />
-
-                    return (
-                        <div className="col-3" key={index}>
-                            {imgEl}
-                        </div>
-                    )
-                })
-            }
+        <div className="card flex justify-content-center">
+            <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={7} style={{ maxWidth: '850px' }}
+            activeIndex={activeIndex} onItemChange={(e) => setActiveIndex(e.index)}
+            circular fullScreen showItemNavigators showThumbnails={false} item={itemTemplate} thumbnail={thumbnailTemplate} />
+            <div className="grid" style={{ maxWidth: '400px' }}>
+                {
+                    images && images.map((image, index) => {
+                        let imgEl = <img src={image.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={image.alt} style={{ cursor: 'pointer' }} onClick={
+                            () => {setActiveIndex(index); galleria.current.show()}
+                        } />
+                        return (
+                            <div className="col-3" key={index}>
+                                {imgEl}
+                            </div>
+                        )
+                    })
+                }
+            </div>
         </div>
     )
 }
+        `,
+        data: `
+/* PhotoService */
+{
+    itemImageSrc: 'images/galleria/galleria1.jpg',
+    thumbnailImageSrc: 'images/galleria/galleria1s.jpg',
+    alt: 'Description for Image 1',
+    title: 'Title 1'
+},
+...
         `
     };
 
@@ -228,7 +238,7 @@ export default function CustomContentDoc() {
                         })}
                 </div>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['PhotoService']} />
         </>
     );
 }

@@ -9,7 +9,6 @@ export function ProgrammaticDoc(props) {
     const [nodes, setNodes] = useState(null);
     const [selectedNodeKeys, setSelectedNodeKeys] = useState(null);
     const [expandedKeys, setExpandedKeys] = useState({});
-    const nodeService = new NodeService();
 
     const expandAll = () => {
         let _expandedKeys = {};
@@ -36,7 +35,7 @@ export function ProgrammaticDoc(props) {
     };
 
     useEffect(() => {
-        nodeService.getTreeNodes().then((data) => setNodes(data));
+        NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const code = {
@@ -49,6 +48,7 @@ onToggle={(e) => setExpandedKeys(e.value)}
 onChange={(e) => setSelectedNodeKeys(e.value)}
 display="chip"
 selectionMode="checkbox"
+className="md:w-20rem w-full"
 placeholder="Select Items"
 ></TreeSelect>
 <div className="mb-4 mt-2">
@@ -57,73 +57,106 @@ placeholder="Select Items"
 </div>
         `,
         javascript: `
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { TreeSelect } from 'primereact/treeselect';
 import { Button } from '../../lib/button/Button';
-import { NodeService } from '../../../service/NodeService';
+import { NodeService } from './service/NodeService';
 
 export default function ProgrammaticDoc() {
     const [nodes, setNodes] = useState(null);
     const [selectedNodeKeys, setSelectedNodeKeys] = useState(null);
     const [expandedKeys, setExpandedKeys] = useState({});
-    const nodeService = new NodeService();
-
+    
     useEffect(() => {
-        nodeService.getTreeNodes().then((data) => setNodes(data));
+        NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <TreeSelect
-        value={selectedNodeKeys}
-        options={nodes}
-        expandedKeys={expandedKeys}
-        onToggle={(e) => setExpandedKeys(e.value)}
-        onChange={(e) => setSelectedNodeKeys(e.value)}
-        display="chip"
-        selectionMode="checkbox"
-        placeholder="Select Items"
-    ></TreeSelect>
-    <div className="mb-4 mt-2">
-        <Button type="button" icon="pi pi-plus" label="Expand All" onClick={expandAll} className="mr-2" />
-        <Button type="button" icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
-    </div>
+        <div className="card flex flex-column align-items-center justify-content-center">
+            <TreeSelect
+                value={selectedNodeKeys}
+                options={nodes}
+                expandedKeys={expandedKeys}
+                onToggle={(e : TreeSelectExpandedParams) => setExpandedKeys(e.value)}
+                onChange={(e : TreeSelectChangeParams) => setSelectedNodeKeys(e.value)}
+                display="chip"
+                selectionMode="checkbox"
+                className="md:w-20rem w-full"
+                placeholder="Select Items"
+            ></TreeSelect>
+            <div className="mb-4 mt-2">
+                <Button type="button" icon="pi pi-plus" label="Expand All" onClick={expandAll} className="mr-2" />
+                <Button type="button" icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
+            </div>
+        </div>
     );
 }
         `,
         typescript: `
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { TreeSelect, TreeSelectChangeParams, TreeSelectExpandedParams } from 'primereact/treeselect';
 import { Button } from '../../lib/button/Button';
-import { NodeService } from '../../../service/NodeService';
+import { NodeService } from './service/NodeService';
 
 export default function ProgrammaticDoc() {
     const [nodes, setNodes] = useState<any[]>(null);
     const [selectedNodeKeys, setSelectedNodeKeys] = useState<any>(null);
     const [expandedKeys, setExpandedKeys] = useState<any>({});
-    const nodeService = new NodeService();
 
     useEffect(() => {
-        nodeService.getTreeNodes().then((data) => setNodes(data));
+        NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
+    <div className="card flex flex-column align-items-center justify-content-center">
         <TreeSelect
-        value={selectedNodeKeys}
-        options={nodes}
-        expandedKeys={expandedKeys}
-        onToggle={(e : TreeSelectExpandedParams) => setExpandedKeys(e.value)}
-        onChange={(e : TreeSelectChangeParams) => setSelectedNodeKeys(e.value)}
-        display="chip"
-        selectionMode="checkbox"
-        placeholder="Select Items"
-    ></TreeSelect>
-    <div className="mb-4 mt-2">
-        <Button type="button" icon="pi pi-plus" label="Expand All" onClick={expandAll} className="mr-2" />
-        <Button type="button" icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
+            value={selectedNodeKeys}
+            options={nodes}
+            expandedKeys={expandedKeys}
+            onToggle={(e : TreeSelectExpandedParams) => setExpandedKeys(e.value)}
+            onChange={(e : TreeSelectChangeParams) => setSelectedNodeKeys(e.value)}
+            display="chip"
+            selectionMode="checkbox"
+            className="md:w-20rem w-full"
+            placeholder="Select Items"
+        ></TreeSelect>
+        <div className="mb-4 mt-2">
+            <Button type="button" icon="pi pi-plus" label="Expand All" onClick={expandAll} className="mr-2" />
+            <Button type="button" icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
+        </div>
     </div>
     );
 }
-        `
+        `,
+        data: `
+/* NodeService */
+{
+    key: '0',
+    label: 'Documents',
+    data: 'Documents Folder',
+    icon: 'pi pi-fw pi-inbox',
+    children: [
+        {
+            key: '0-0',
+            label: 'Work',
+            data: 'Work Folder',
+            icon: 'pi pi-fw pi-cog',
+            children: [
+                { key: '0-0-0', label: 'Expenses.doc', icon: 'pi pi-fw pi-file', data: 'Expenses Document' },
+                { key: '0-0-1', label: 'Resume.doc', icon: 'pi pi-fw pi-file', data: 'Resume Document' }
+            ]
+        },
+        {
+            key: '0-1',
+            label: 'Home',
+            data: 'Home Folder',
+            icon: 'pi pi-fw pi-home',
+            children: [{ key: '0-1-0', label: 'Invoices.txt', icon: 'pi pi-fw pi-file', data: 'Invoices for this month' }]
+        }
+    ]
+},
+...
+`
     };
 
     return (
@@ -143,6 +176,7 @@ export default function ProgrammaticDoc() {
                     onChange={(e) => setSelectedNodeKeys(e.value)}
                     display="chip"
                     selectionMode="checkbox"
+                    className="md:w-20rem w-full"
                     placeholder="Select Items"
                 ></TreeSelect>
                 <div className="mb-4 mt-2">
@@ -150,7 +184,7 @@ export default function ProgrammaticDoc() {
                     <Button type="button" icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
                 </div>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }

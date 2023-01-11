@@ -5,8 +5,9 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/slidemenu/importdoc';
 import { BasicDoc } from '../../components/doc/slidemenu/basicdoc';
 import { PopupDoc } from '../../components/doc/slidemenu/popupdoc';
-import { EffectDoc } from '../../components/doc/slidemenu/effectdoc';
 import { ApiDoc } from '../../components/doc/slidemenu/apidoc';
+import { AccessibilityDoc } from '../../components/doc/slidemenu/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/slidemenu/styledoc';
 
 const SlideMenuDemo = () => {
     const docs = [
@@ -26,9 +27,14 @@ const SlideMenuDemo = () => {
             component: PopupDoc
         },
         {
-            id: 'effect',
-            label: 'Effect',
-            component: EffectDoc
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         },
         {
             id: 'api',
@@ -46,14 +52,6 @@ const SlideMenuDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

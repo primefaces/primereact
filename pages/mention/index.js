@@ -3,10 +3,17 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/mention/apidoc';
+import { AccessibilityDoc } from '../../components/doc/mention/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/mention/styledoc';
 import { ImportDoc } from '../../components/doc/mention/importdoc';
 import { BasicDoc } from '../../components/doc/mention/basicdoc';
-import { MultipleDoc } from '../../components/doc/mention/multipledoc';
+import { TriggersDoc } from '../../components/doc/mention/triggersdoc';
 import { AutoDoc } from '../../components/doc/mention/autodoc';
+import { FloatLabelDoc } from '../../components/doc/mention/floatlabeldoc';
+import { DisabledDoc } from '../../components/doc/mention/disableddoc';
+import { InvalidDoc } from '../../components/doc/mention/invaliddoc';
+import { FormikDoc } from '../../components/doc/mention/validation/formikdoc';
+import { HookFormDoc } from '../../components/doc/mention/validation/hookformdoc';
 
 const MentionDemo = () => {
     const docs = [
@@ -26,12 +33,54 @@ const MentionDemo = () => {
             component: AutoDoc
         },
         {
-            id: 'multiple',
-            label: 'Multiple Trigger',
-            component: MultipleDoc
+            id: 'floatlabel',
+            label: 'Float Label',
+            component: FloatLabelDoc
         },
         {
-            id: 'apidoc',
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
+        },
+        {
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
+            id: 'triggers',
+            label: 'Triggers',
+            component: TriggersDoc
+        },
+        {
+            id: 'validation',
+            label: 'Validation',
+            description: 'Validate using popular React validation libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
+            id: 'api',
             label: 'API',
             component: ApiDoc,
             children: [
@@ -42,14 +91,6 @@ const MentionDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

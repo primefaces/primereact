@@ -12,26 +12,30 @@ export function KeyFilterDoc(props) {
 <Chips value={value} onChange={(e) => setValue(e.value)} keyfilter="int" />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Chips } from "primereact/chips";
 
 export default function KeyFilterDemo() {
     const [value, setValue] = useState([]);
 
     return (
-        <Chips value={value} onChange={(e) => setValue(e.value)} keyfilter="int" />
+        <div className="card p-fluid">
+            <Chips value={value} onChange={(e) => setValue(e.value)} keyfilter="int" />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Chips, ChipsChangeParams } from "primereact/chips";
 
 export default function KeyFilterDemo() {
     const [value, setValue] = useState<string[]>([]);
 
     return (
-        <Chips value={value} onChange={(e: ChipsChangeParams) => setValue(e.value)} keyfilter="int" />
+        <div className="card p-fluid">
+            <Chips value={value} onChange={(e: ChipsChangeParams) => setValue(e.value)} keyfilter="int" />
+        </div>
     )
 }
         `

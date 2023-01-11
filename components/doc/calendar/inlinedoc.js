@@ -12,27 +12,31 @@ export function InlineDoc(props) {
 
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
 export default function InlineDoc() {
     const [date, setDate] = useState(null);
 
     return (
-        <Calendar value={date} onChange={(e) => setDate(e.value)} inline showWeek />
+        <div className="card flex justify-content-center">
+            <Calendar value={date} onChange={(e) => setDate(e.value)} inline showWeek />
+        </div>
 
     )
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar, CalendarChangeParams } from 'primereact/calendar';
 
 export default function InlineDoc() {
     const [date, setDate] = useState<Date | null>(null);
 
     return (
-        <Calendar value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} inline showWeek />
+        <div className="card flex justify-content-center">
+            <Calendar value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} inline showWeek />
+        </div>
     )
 }
         `

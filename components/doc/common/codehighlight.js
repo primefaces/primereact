@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { classNames } from '../../lib/utils/Utils';
 
 export function CodeHighlight(props) {
     const codeElement = useRef();
@@ -10,7 +11,7 @@ export function CodeHighlight(props) {
 
     return (
         <pre style={props.style}>
-            <code ref={codeElement} className={languageClassName}>
+            <code ref={codeElement} className={classNames(languageClassName, { 'pt-5': !props.import })}>
                 {props.children}&nbsp;
             </code>
         </pre>

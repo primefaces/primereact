@@ -121,18 +121,12 @@ import { Button } from 'primereact/button';
 import { FileUpload } from 'primereact/fileupload';
 import { Tooltip } from 'primereact/tooltip';
 import { Toast } from 'primereact/toast';
-import { ProductService } from '../service/ProductService';
 
 export const ExportImportDoc = () => {
     const [importedData, setImportedData] = useState([]);
     const [selectedImportedData, setSelectedImportedData] = useState([]);
     const [importedCols, setImportedCols] = useState([{ field: '', header: 'Header' }]);
-    const toast = useRef(null);
-    const productService = new ProductService();
-
-    useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    const toast = useRef(null);    
 
     const importCSV = (e) => {
         const file = e.files[0];
@@ -237,18 +231,12 @@ import { Button } from 'primereact/button';
 import { FileUpload } from 'primereact/fileupload';
 import { Tooltip } from 'primereact/tooltip';
 import { Toast } from 'primereact/toast';
-import { ProductService } from '../service/ProductService';
 
 export const ExportImportDoc = () => {
     const [importedData, setImportedData] = useState([]);
     const [selectedImportedData, setSelectedImportedData] = useState([]);
     const [importedCols, setImportedCols] = useState([{ field: '', header: 'Header' }]);
     const toast = useRef(null);
-    const productService = new ProductService();
-
-    useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const importCSV = (e) => {
         const file = e.files[0];
@@ -344,6 +332,13 @@ export const ExportImportDoc = () => {
          </div>
     );
 }
+        `,
+        php: `
+/* public/upload.php */
+
+<?php
+header ("Access-Control-Allow-Origin: *");
+echo '<p>Fake Upload Process</p>'; ?>
         `
     };
 

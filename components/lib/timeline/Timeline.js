@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { ObjectUtils, classNames } from '../utils/Utils';
 
 export const Timeline = React.memo(
     React.forwardRef((props, ref) => {
@@ -50,7 +50,7 @@ export const Timeline = React.memo(
         const events = createEvents();
 
         return (
-            <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
+            <div ref={elementRef} className={className} {...otherProps}>
                 {events}
             </div>
         );
@@ -60,14 +60,12 @@ export const Timeline = React.memo(
 Timeline.displayName = 'Timeline';
 Timeline.defaultProps = {
     __TYPE: 'Timeline',
-    id: null,
-    value: null,
     align: 'left',
-    layout: 'vertical',
-    dataKey: null,
     className: null,
-    style: null,
-    opposite: null,
+    content: null,
+    dataKey: null,
+    layout: 'vertical',
     marker: null,
-    content: null
+    opposite: null,
+    value: null
 };

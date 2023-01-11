@@ -11,26 +11,30 @@ export function TouchUIDoc(props) {
 <Calendar id="touchUI" value={date} onChange={(e) => setDate(e.value)} touchUI />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
 export default function TouchUIDoc() {
     const [date, setDate] = useState(null);
 
     return (
-        <Calendar id="touchUI" value={date} onChange={(e) => setDate(e.value)} touchUI />
+        <div className="card flex justify-content-center">
+            <Calendar id="touchUI" value={date} onChange={(e) => setDate(e.value)} touchUI />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar, CalendarChangeParams } from 'primereact/calendar';
 
 export default function TouchUIDoc() {
     const [date, setDate] = useState<Date | null>(null);
 
     return (
-        <Calendar id="touchUI" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} touchUI />
+        <div className="card flex justify-content-center">
+            <Calendar id="touchUI" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} touchUI />
+        </div>
     )
 }
         `

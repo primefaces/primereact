@@ -14,7 +14,7 @@ export function RowExpandDoc(props) {
     const [expandedRows, setExpandedRows] = useState(null);
     const toast = useRef(null);
     const isMounted = useRef(false);
-    const productService = new ProductService();
+
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
@@ -27,7 +27,7 @@ export function RowExpandDoc(props) {
 
     useEffect(() => {
         isMounted.current = true;
-        productService.getProductsWithOrdersSmall().then((data) => setProducts(data));
+        ProductService.getProductsWithOrdersSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onRowExpand = (event) => {
@@ -67,7 +67,7 @@ export function RowExpandDoc(props) {
     };
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={`${contextPath}/images/product/${rowData.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={rowData.image} className="product-image" />;
+        return <img src={`${contextPath}/images/product/${rowData.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={rowData.image} className="shadow-1 w-full" />;
     };
 
     const priceBodyTemplate = (rowData) => {
@@ -88,7 +88,7 @@ export function RowExpandDoc(props) {
 
     const rowExpansionTemplate = (data) => {
         return (
-            <div className="orders-subtable">
+            <div className="p-3">
                 <h5>Orders for {data.name}</h5>
                 <DataTable value={data.orders} responsiveLayout="scroll">
                     <Column field="id" header="Id" sortable></Column>
@@ -127,7 +127,7 @@ export function RowExpandDoc(props) {
 import React, { useState, useEffect, useRef } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 import { Rating } from 'primereact/rating';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
@@ -138,7 +138,7 @@ const RowExpandDoc = () => {
     const [expandedRows, setExpandedRows] = useState(null);
     const toast = useRef(null);
     const isMounted = useRef(false);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
         if (isMounted.current) {
@@ -149,7 +149,7 @@ const RowExpandDoc = () => {
 
     useEffect(() => {
         isMounted.current = true;
-        productService.getProductsWithOrdersSmall().then(data => setProducts(data));
+        ProductService.getProductsWithOrdersSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onRowExpand = (event) => {
@@ -188,7 +188,7 @@ const RowExpandDoc = () => {
     }
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={\`images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />;
+        return <img src={\`images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="shadow-1 w-full" />;
     }
 
     const priceBodyTemplate = (rowData) => {
@@ -209,7 +209,7 @@ const RowExpandDoc = () => {
 
     const rowExpansionTemplate = (data) => {
         return (
-            <div className="orders-subtable">
+            <div className="p-3">
                 <h5>Orders for {data.name}</h5>
                 <DataTable value={data.orders} responsiveLayout="scroll">
                     <Column field="id" header="Id" sortable></Column>
@@ -231,7 +231,7 @@ const RowExpandDoc = () => {
     );
 
     return (
-        <div className="card datatable-rowexpansion-demo">
+        <div className="card">
         <Toast ref={toast} />
         <DataTable value={products} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
             onRowExpand={onRowExpand} onRowCollapse={onRowCollapse} responsiveLayout="scroll"
@@ -252,7 +252,7 @@ const RowExpandDoc = () => {
 import React, { useState, useEffect, useRef } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 import { Rating } from 'primereact/rating';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
@@ -263,7 +263,7 @@ const RowExpandDoc = () => {
     const [expandedRows, setExpandedRows] = useState(null);
     const toast = useRef(null);
     const isMounted = useRef(false);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
         if (isMounted.current) {
@@ -274,7 +274,7 @@ const RowExpandDoc = () => {
 
     useEffect(() => {
         isMounted.current = true;
-        productService.getProductsWithOrdersSmall().then(data => setProducts(data));
+        ProductService.getProductsWithOrdersSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onRowExpand = (event) => {
@@ -313,7 +313,7 @@ const RowExpandDoc = () => {
     }
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={\`images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />;
+        return <img src={\`images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="shadow-1 w-full" />;
     }
 
     const priceBodyTemplate = (rowData) => {
@@ -334,7 +334,7 @@ const RowExpandDoc = () => {
 
     const rowExpansionTemplate = (data) => {
         return (
-            <div className="orders-subtable">
+            <div className="p-3">
                 <h5>Orders for {data.name}</h5>
                 <DataTable value={data.orders} responsiveLayout="scroll">
                     <Column field="id" header="Id" sortable></Column>
@@ -356,7 +356,7 @@ const RowExpandDoc = () => {
     );
 
     return (
-        <div className="card datatable-rowexpansion-demo">
+        <div className="card">
             <Toast ref={toast} />
             <DataTable value={products} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
                 onRowExpand={onRowExpand} onRowCollapse={onRowCollapse} responsiveLayout="scroll"
@@ -372,7 +372,22 @@ const RowExpandDoc = () => {
         </div>
     );
 }
-        `
+        `,
+        data: `
+        {
+            id: '1000',
+            code: 'f230fh0g3',
+            name: 'Bamboo Watch',
+            description: 'Product Description',
+            image: 'bamboo-watch.jpg',
+            price: 65,
+            category: 'Accessories',
+            quantity: 24,
+            inventoryStatus: 'INSTOCK',
+            rating: 5
+        },
+        ...
+                `
     };
 
     return (
@@ -380,7 +395,7 @@ const RowExpandDoc = () => {
             <DocSectionText {...props}>
                 <p>A row can be expanded to display extra content.</p>
             </DocSectionText>
-            <div className="card datatable-rowexpansion-demo">
+            <div className="card">
                 <Toast ref={toast} />
                 <DataTable
                     value={products}
@@ -402,7 +417,7 @@ const RowExpandDoc = () => {
                     <Column field="inventoryStatus" header="Status" sortable body={statusBodyTemplate} />
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

@@ -57,8 +57,9 @@ export function GroupedDoc(props) {
 
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Dropdown } from 'primereact/dropdown';
+import './DropdownDemo.css';
 
 export default function GroupedDoc() {
     const [selectedGroupedCity, setSelectedGroupedCity] = useState(null);
@@ -106,14 +107,16 @@ export default function GroupedDoc() {
     }
 
     return (
-        <Dropdown value={selectedGroupedCity} options={groupedCities} onChange={onGroupedCityChange} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} />
-
+        <div className="card flex justify-content-center dropdown-demo">
+            <Dropdown value={selectedGroupedCity} options={groupedCities} onChange={onGroupedCityChange} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Dropdown } from 'primereact/dropdown';
+import './DropdownDemo.css';
 
 export default function GroupedDoc() {
     const [selectedGroupedCity, setSelectedGroupedCity] = useState<any | null>(null);
@@ -161,11 +164,25 @@ export default function GroupedDoc() {
     }
 
     return (
-        <Dropdown value={selectedGroupedCity} options={groupedCities} onChange={onGroupedCityChange} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} />
-
+        <div className="card flex justify-content-center dropdown-demo">
+            <Dropdown value={selectedGroupedCity} options={groupedCities} onChange={onGroupedCityChange} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} />
+        </div>
     )
 }
+        `,
+        extFiles: {
+            'DropdownDemo.css': `
+/* DropdownDemo.css */
+
+.dropdown-demo .p-dropdown {
+    width: 14rem;
+}
+
+.dropdown-demo .country-item-value img.flag {
+    width: 17px;
+}
         `
+        }
     };
 
     return (
@@ -175,7 +192,7 @@ export default function GroupedDoc() {
                     Options groups are specified with the <i>optionGroupLabel</i> and <i>optionGroupChildren</i> properties.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
+            <div className="card flex justify-content-center dropdown-demo">
                 <Dropdown value={selectedGroupedCity} options={groupedCities} onChange={onGroupedCityChange} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} />
             </div>
             <DocSectionCode code={code} />

@@ -36,7 +36,7 @@ export function LazyDoc(props) {
     };
 
     const basicItemTemplate = (item, options) => {
-        const className = classNames('scroll-item p-2', {
+        const className = classNames('flex align-items-center p-2', {
             odd: options.odd
         });
         const style = options.props.orientation === 'horizontal' ? { width: '50px' } : { height: '50px' };
@@ -53,9 +53,10 @@ export function LazyDoc(props) {
 <VirtualScroller items={lazyItems} itemSize={50} itemTemplate={basicItemTemplate} lazy onLazyLoad={onLazyLoad} showLoader loading={lazyLoading} />
         `,
         javascript: `
-import { useState, useEffect, useRef } 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { classNames } from 'primereact/utils';
+import './VirtualScrollerDemo.css';
 
 export default function LazyDoc() {
     const [lazyItems, setLazyItems] = useState([]);
@@ -89,7 +90,7 @@ export default function LazyDoc() {
     };
 
     const basicItemTemplate = (item, options) => {
-        const className = classNames('scroll-item p-2', {
+        const className = classNames('flex align-items-center p-2', {
             odd: options.odd
         });
         const style = options.props.orientation === 'horizontal' ? { width: '50px' } : { height: '50px' };
@@ -102,14 +103,17 @@ export default function LazyDoc() {
     };
 
     return ( 
+        <div className="card virtualscroller-demo">
             <VirtualScroller items={lazyItems} itemSize={50} itemTemplate={basicItemTemplate} lazy onLazyLoad={onLazyLoad} showLoader loading={lazyLoading} />
-    );
+        </div>
+        );
 }
         `,
         typescript: `
-import { useState, useEffect, useRef } 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { classNames } from 'primereact/utils';
+import './VirtualScrollerDemo.css';
 
 export default function LazyDoc() {
     const [lazyItems, setLazyItems] = useState([]);
@@ -143,7 +147,7 @@ export default function LazyDoc() {
     };
 
     const basicItemTemplate = (item, options) => {
-        const className = classNames('scroll-item p-2', {
+        const className = classNames('flex align-items-center p-2', {
             odd: options.odd
         });
         const style = options.props.orientation === 'horizontal' ? { width: '50px' } : { height: '50px' };
@@ -156,10 +160,32 @@ export default function LazyDoc() {
     };
 
     return (
+        <div className="card virtualscroller-demo">
             <VirtualScroller items={lazyItems} itemSize={50} itemTemplate={basicItemTemplate} lazy onLazyLoad={onLazyLoad} showLoader loading={lazyLoading} />
-    )
+        </div>
+        )
 }
-        `
+        `,
+        extFiles: {
+            'VirtualScrollerDemo.css': `
+/* VirtualScrollerDemo.css */
+
+.virtualscroller-demo .odd {
+    background-color: var(--surface-b);
+}
+
+.virtualscroller-demo .p-virtualscroller {
+    height: 200px;
+    width: 200px;
+    border: 1px solid var(--surface-d);
+}
+
+.virtualscroller-demo .p-horizontal-scroll .p-virtualscroller-content {
+    display: flex;
+    flex-direction: row;
+}
+    `
+        }
     };
 
     return (

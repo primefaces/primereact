@@ -15,14 +15,14 @@ export function DynamicDoc(props) {
         basic: `
 <Button type="button" label="Save" icon="pi pi-check" tooltip={saveBtnTooltipText} onClick={() => setSaveBtnTooltipText('Completed')} />
 
-<Tooltip target=".knob" content={\`\${this.state.knobValue}%\`} />
+<Tooltip target=".knob" content={\`\${knobValue}%\`} />
 <Knob className="knob ml-3" value={knobValue} onChange={(e) => setKnobValue(e.value)} showValue={false} />
 
-<Tooltip target=".slider>.p-slider-handle" content={\`\${this.state.sliderValue}%\`} position="top" event="focus" />
+<Tooltip target=".slider>.p-slider-handle" content={\`\${sliderValue}%\`} position="top" event="focus" />
 <Slider className="slider ml-3" value={sliderValue} onChange={(e) => setSliderValue(e.value)} style={{ width: '14rem' }} />
         `,
         javascript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Tooltip } from 'primereact/tooltip';
 import { Slider } from 'primereact/slider';
 import { Knob } from 'primereact/knob';
@@ -37,17 +37,17 @@ export default function DynamicDoc() {
         <div>
             <Button type="button" label="Save" icon="pi pi-check" tooltip={saveBtnTooltipText} onClick={() => setSaveBtnTooltipText('Completed')} />
 
-            <Tooltip target=".knob" content={\`\${this.state.knobValue}%\`} />
+            <Tooltip target=".knob" content={\`\${knobValue}%\`} />
             <Knob className="knob ml-3" value={knobValue} onChange={(e) => setKnobValue(e.value)} showValue={false} />
 
-            <Tooltip target=".slider>.p-slider-handle" content={\`\${this.state.sliderValue}%\`} position="top" event="focus" />
+            <Tooltip target=".slider>.p-slider-handle" content={\`\${sliderValue}%\`} position="top" event="focus" />
             <Slider className="slider ml-3" value={sliderValue} onChange={(e) => setSliderValue(e.value)} style={{ width: '14rem' }} />
         </div>
     );
 }
         `,
         typescript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Tooltip } from 'primereact/tooltip';
 import { Slider } from 'primereact/slider';
 import { Knob } from 'primereact/knob';
@@ -62,10 +62,10 @@ export default function DynamicDoc() {
         <div>
             <Button type="button" label="Save" icon="pi pi-check" tooltip={saveBtnTooltipText} onClick={() => setSaveBtnTooltipText('Completed')} />
 
-            <Tooltip target=".knob" content={\`\${this.state.knobValue}%\`} />
+            <Tooltip target=".knob" content={\`\${knobValue}%\`} />
             <Knob className="knob ml-3" value={knobValue} onChange={(e) => setKnobValue(e.value)} showValue={false} />
 
-            <Tooltip target=".slider>.p-slider-handle" content={\`\${this.state.sliderValue}%\`} position="top" event="focus" />
+            <Tooltip target=".slider>.p-slider-handle" content={\`\${sliderValue}%\`} position="top" event="focus" />
             <Slider className="slider ml-3" value={sliderValue} onChange={(e) => setSliderValue(e.value)} style={{ width: '14rem' }} />
         </div>
     );

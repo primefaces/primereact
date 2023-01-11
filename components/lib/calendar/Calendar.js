@@ -5,7 +5,7 @@ import { useMountEffect, useOverlayListener, usePrevious, useUnmountEffect, useU
 import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, mask, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mask } from '../utils/Utils';
 import { CalendarPanel } from './CalendarPanel';
 
 export const Calendar = React.memo(
@@ -2548,6 +2548,7 @@ export const Calendar = React.memo(
             getCurrentDateTime,
             getViewDate,
             updateViewDate,
+            focus: () => DomHandler.focus(inputRef.current),
             getElement: () => elementRef.current,
             getOverlay: () => overlayRef.current,
             getInput: () => inputRef.current
@@ -2642,7 +2643,7 @@ export const Calendar = React.memo(
             );
         };
 
-        const createTitleYearElement = () => {
+        const createTitleYearElement = (metaYear) => {
             if (props.yearNavigator) {
                 let yearOptions = [];
                 const years = props.yearRange.split(':');
@@ -2684,10 +2685,12 @@ export const Calendar = React.memo(
                 return content;
             }
 
+            const displayYear = props.inline ? metaYear : currentYear;
+
             return (
                 currentView !== 'year' && (
                     <button className="p-datepicker-year p-link" onClick={switchToYearView} disabled={switchViewButtonDisabled()}>
-                        {currentYear}
+                        {displayYear}
                     </button>
                 )
             );
@@ -2915,8 +2918,12 @@ export const Calendar = React.memo(
         };
 
         const createHourPicker = () => {
-            let currentTime = getCurrentDateTime();
+            const currentTime = getCurrentDateTime();
+            const minute = doStepMinute(currentTime.getMinutes());
             let hour = currentTime.getHours();
+
+            // #3770 account for step minutes rolling to next hour
+            hour = minute > 59 ? hour + 1 : hour;
 
             if (props.hourFormat === '12') {
                 if (hour === 0) hour = 12;
@@ -2956,7 +2963,9 @@ export const Calendar = React.memo(
 
         const createMinutePicker = () => {
             const currentTime = getCurrentDateTime();
-            const minute = currentTime.getMinutes();
+            let minute = doStepMinute(currentTime.getMinutes());
+
+            minute = minute > 59 ? minute - 60 : minute;
             const minuteDisplay = minute < 10 ? '0' + minute : minute;
 
             return (
@@ -3311,6 +3320,7 @@ Calendar.defaultProps = {
     disabledDates: null,
     disabledDays: null,
     footerTemplate: null,
+    formatDateTime: null,
     headerTemplate: null,
     hideOnDateTimeSelect: false,
     hourFormat: '24',
@@ -3347,6 +3357,7 @@ Calendar.defaultProps = {
     onVisibleChange: null,
     panelClassName: null,
     panelStyle: null,
+    parseDateTime: null,
     placeholder: null,
     readOnlyInput: false,
     required: false,

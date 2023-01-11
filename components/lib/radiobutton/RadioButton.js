@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 
 export const RadioButton = React.memo(
     React.forwardRef((props, ref) => {
@@ -57,7 +57,8 @@ export const RadioButton = React.memo(
         };
 
         const onKeyDown = (event) => {
-            if (event.code === 'Space') {
+            if (event.code === 'Space' || event.key === ' ') {
+                // event.key is for Android support
                 onClick(event);
             }
         };
@@ -75,6 +76,7 @@ export const RadioButton = React.memo(
         React.useImperativeHandle(ref, () => ({
             props,
             select,
+            focus: () => DomHandler.focus(inputRef.current),
             getElement: () => elementRef.current,
             getInput: () => inputRef.current
         }));

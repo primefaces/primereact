@@ -6,6 +6,8 @@ import { ImportDoc } from '../../components/doc/steps/importdoc';
 import { BasicDoc } from '../../components/doc/steps/basicdoc';
 import { InteractiveDoc } from '../../components/doc/steps/interactivedoc';
 import { ApiDoc } from '../../components/doc/steps/apidoc';
+import { AccessibilityDoc } from '../../components/doc/steps/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/steps/styledoc';
 
 const StepsDemo = () => {
     const docs = [
@@ -25,6 +27,16 @@ const StepsDemo = () => {
             component: InteractiveDoc
         },
         {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -36,14 +48,6 @@ const StepsDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

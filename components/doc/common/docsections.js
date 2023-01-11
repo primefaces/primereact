@@ -1,6 +1,8 @@
+import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+import { DeferredContent } from '../../lib/deferredcontent/DeferredContent';
+import { classNames } from '../../lib/utils/Utils';
 
 export function DocSections(props) {
     const router = useRouter();
@@ -12,7 +14,7 @@ export function DocSections(props) {
 
                 return (
                     <section key={doc.label}>
-                        {doc.children ? (
+                        {doc.children && doc.id !== 'api' ? (
                             <div id={doc.id}>
                                 <h1 className="doc-section-label" id={doc.id}>
                                     {doc.label}
@@ -20,18 +22,21 @@ export function DocSections(props) {
                                         <a id={doc.id}>#</a>
                                     </Link>
                                 </h1>
-                                <div className="doc-section-description">{doc.description || 'Section Content'}</div>
+                                <div className={classNames('doc-section-description main')}>{doc.description || 'Section Content'}</div>
                             </div>
                         ) : null}
                         {doc.component && <Comp id={doc.id} label={doc.label} />}
                         {doc.children && !doc.component && (
                             <React.Fragment>
-                                {doc.children.map((component) => {
-                                    const id = component.id;
-                                    const label = component.label;
-                                    const Component = component.component;
+                                {doc.children.map((comp, i) => {
+                                    const { id, label, component } = comp;
+                                    const Component = component;
 
-                                    return <Component id={id} key={label} label={label} />;
+                                    return (
+                                        <DeferredContent id={id} key={i}>
+                                            <Component id={id} key={label} label={label} />
+                                        </DeferredContent>
+                                    );
                                 })}
                             </React.Fragment>
                         )}

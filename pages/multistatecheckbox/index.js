@@ -3,10 +3,14 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/multistatecheckbox/apidoc';
+import { AccessibilityDoc } from '../../components/doc/multistatecheckbox/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/multistatecheckbox/styledoc';
 import { BasicDoc } from '../../components/doc/multistatecheckbox/basicdoc';
 import { DisabledDoc } from '../../components/doc/multistatecheckbox/disableddoc';
 import { ImportDoc } from '../../components/doc/multistatecheckbox/importdoc';
-import { ValidationDoc } from '../../components/doc/multistatecheckbox/validationdoc';
+import { InvalidDoc } from '../../components/doc/multistatecheckbox/invaliddoc';
+import { FormikDoc } from '../../components/doc/multistatecheckbox/validation/formikdoc';
+import { HookFormDoc } from '../../components/doc/multistatecheckbox/validation/hookformdoc';
 
 const MultiStateCheckboxDemo = () => {
     const docs = [
@@ -26,9 +30,36 @@ const MultiStateCheckboxDemo = () => {
             component: DisabledDoc
         },
         {
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
             id: 'validation',
             label: 'Validation',
-            component: ValidationDoc
+            description: 'Validate using popular React validation libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         },
         {
             id: 'api',
@@ -47,14 +78,6 @@ const MultiStateCheckboxDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

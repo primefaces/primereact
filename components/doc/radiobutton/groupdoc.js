@@ -28,7 +28,7 @@ export function GroupDoc(props) {
 </div>
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { RadioButton } from "primereact/radiobutton";
 
 export default function GroupDemo() {
@@ -57,7 +57,7 @@ export default function GroupDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { RadioButton, RadioButtonChangeParams } from "primereact/radiobutton";
 
 export default function GroupDemo() {

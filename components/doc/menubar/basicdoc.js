@@ -129,9 +129,10 @@ export function BasicDoc(props) {
 
     const code = {
         basic: `
-<Menubar model={items}/>    
+<Menu model={items}/>    
 `,
         javascript: `
+import React from 'react'; 
 import { Menu } from 'primereact/menu';
 
 export default function BasicDoc() {
@@ -264,11 +265,12 @@ const items = [
     ];
 
     return (
-        <Menubar model={items}/>
+        <Menu model={items}/>
     )
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Menu } from 'primereact/menu';
 
 export default function BasicDoc() {
@@ -401,7 +403,7 @@ const items = [
     ];
     
     return (
-        <Menubar model={items}/>
+        <Menu model={items}/>
     )
 }
         `

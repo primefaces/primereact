@@ -8,11 +8,11 @@ import getConfig from 'next/config';
 
 export function ScrollSubHeaderGroupingDoc(props) {
     const [customersGrouped, setCustomersGrouped] = useState(null);
-    const customerService = new CustomerService();
+
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
-        customerService.getCustomersMedium().then((data) => {
+        CustomerService.getCustomersMedium().then((data) => {
             setCustomersGrouped(data);
         });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -85,15 +85,15 @@ export function ScrollSubHeaderGroupingDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 const ScrollSubHeaderGroupingDoc = () => {
     const [customersGrouped, setCustomersGrouped] = useState(null);
-    const customerService = new CustomerService();
+    
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
-        customerService.getCustomersMedium().then((data) => {
+        CustomerService.getCustomersMedium().then((data) => {
             setCustomersGrouped(data);
         });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -157,15 +157,15 @@ const ScrollSubHeaderGroupingDoc = () => {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 const ScrollSubHeaderGroupingDoc = () => {
     const [customersGrouped, setCustomersGrouped] = useState(null);
-    const customerService = new CustomerService();
+    
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
-        customerService.getCustomersMedium().then((data) => {
+        CustomerService.getCustomersMedium().then((data) => {
             setCustomersGrouped(data);
         });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -224,7 +224,29 @@ const ScrollSubHeaderGroupingDoc = () => {
         </div>
     );
 }
-        `
+        `,
+        data: `
+/* CustomerService */ 
+{
+    id: 1000,
+    name: 'James Butt',
+    country: {
+        name: 'Algeria',
+        code: 'dz'
+    },
+    company: 'Benton, John B Jr',
+    date: '2015-09-13',
+    status: 'unqualified',
+    verified: true,
+    activity: 17,
+    representative: {
+        name: 'Ioni Bowcher',
+        image: 'ionibowcher.png'
+    },
+    balance: 70663
+},
+...
+       `
     };
 
     return (
@@ -252,7 +274,7 @@ const ScrollSubHeaderGroupingDoc = () => {
                     <Column field="date" header="Date" style={{ minWidth: '200px' }}></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );
 }

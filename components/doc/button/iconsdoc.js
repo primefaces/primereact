@@ -10,29 +10,56 @@ export function IconsDoc(props) {
 <Button label="Submit" icon="pi pi-check" iconPos="right" />
         `,
         javascript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
+import './ButtonDemo.css';
 
 export default function IconsDoc() {
 
     return (
-        <Button icon="pi pi-check" />
-        <Button label="Submit" icon="pi pi-check" />
-        <Button label="Submit" icon="pi pi-check" iconPos="right" />
+        <div className="card flex flex-column lg:flex-row align-items-center justify-content-center button-demo">
+            <Button icon="pi pi-check" />
+            <Button label="Submit" icon="pi pi-check" />
+            <Button label="Submit" icon="pi pi-check" iconPos="right" />
+        </div>
     )
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
+import './ButtonDemo.css';
 
 export default function IconsDoc() {
 
     return (
-        <Button icon="pi pi-check" />
-        <Button label="Submit" icon="pi pi-check" />
-        <Button label="Submit" icon="pi pi-check" iconPos="right" />
+        <div className="card flex flex-column lg:flex-row align-items-center justify-content-center button-demo">
+            <Button icon="pi pi-check" />
+            <Button label="Submit" icon="pi pi-check" />
+            <Button label="Submit" icon="pi pi-check" iconPos="right" />
+        </div>
     )
 }
+        `,
+        extFiles: {
+            'ButtonDemo.css': `
+/* ButtonDemo.css */
+
+.button-demo .p-button {
+    margin-right: 0.5rem;
+}
+
+@media screen and (max-width: 960px) {
+    .button-demo .p-button {
+        margin-bottom: 0.5rem;
+    }
+    .button-demo .p-button:not(.p-button-icon-only) {
+        display: flex;
+        width: 100%;
+    }
+}                
         `
+        }
     };
 
     return (

@@ -9,6 +9,7 @@ export function HexDoc(props) {
 <InputText id="hex" keyfilter="hex" />
         `,
         javascript: `
+import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
 
 export default function HexDoc() {
@@ -22,6 +23,7 @@ export default function HexDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
 
 export default function HexDoc() {
@@ -39,7 +41,8 @@ export default function HexDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Hex</p>
+                {/* TO DO: Add demo content. */}
+                <p></p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="grid p-fluid gap-2">

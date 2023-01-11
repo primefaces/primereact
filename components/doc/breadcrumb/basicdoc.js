@@ -1,9 +1,8 @@
-import { useState } from 'react';
 import { BreadCrumb } from '../../lib/breadcrumb/BreadCrumb';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function DefaultDoc(props) {
+export function BasicDoc(props) {
     const items = [{ label: 'Computer' }, { label: 'Notebook' }, { label: 'Accessories' }, { label: 'Backpacks' }, { label: 'Item' }];
 
     const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact/showcase' };
@@ -13,16 +12,11 @@ export function DefaultDoc(props) {
 <BreadCrumb model={items} home={home} />
         `,
         javascript: `
+import React from 'react'; 
 import { BreadCrumb } from 'primereact/breadcrumb';
 
-export default function DefaultDoc() {
-    const items = [
-        {label: 'Computer'},
-        {label: 'Notebook'},
-        {label: 'Accessories'},
-        {label: 'Backpacks'},
-        {label: 'Item'}
-    ];
+export default function BasicDoc() {
+    const items = [{ label: 'Computer' }, { label: 'Notebook' }, { label: 'Accessories' }, { label: 'Backpacks' }, { label: 'Item' }];
 
     const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact/showcase' }
 
@@ -32,16 +26,11 @@ export default function DefaultDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { BreadCrumb } from 'primereact/breadcrumb';
 
-export default function DefaultDoc() {
-    const items = [
-        {label: 'Computer'},
-        {label: 'Notebook'},
-        {label: 'Accessories'},
-        {label: 'Backpacks'},
-        {label: 'Item'}
-    ];
+export default function BasicDoc() {
+    const items = [{ label: 'Computer' }, { label: 'Notebook' }, { label: 'Accessories' }, { label: 'Backpacks' }, { label: 'Item' }];
 
     const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact/showcase' }
 

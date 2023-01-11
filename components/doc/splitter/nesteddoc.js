@@ -29,6 +29,7 @@ export function NestedDoc(props) {
 </Splitter>
         `,
         javascript: `
+import React from 'react'; 
 import { Splitter, SplitterPanel } from 'primereact/splitter';
 
 export default function NestedDoc() {
@@ -60,6 +61,7 @@ export default function NestedDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Splitter, SplitterPanel } from 'primereact/splitter';
 
 export default function NestedDoc() {

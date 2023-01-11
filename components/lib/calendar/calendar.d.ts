@@ -164,6 +164,7 @@ export interface CalendarProps {
 export declare class Calendar extends React.Component<CalendarProps, any> {
     public show(): void;
     public hide(): void;
+    public focus(): void;
     public getCurrentDateTime(): Date | Date[];
     public getViewDate(): Date | Date[];
     public getElement(): HTMLSpanElement;

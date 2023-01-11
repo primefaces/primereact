@@ -10,12 +10,11 @@ export function ScrollFrozenColumnsDoc(props) {
     const [customers, setCustomers] = useState([]);
     const [loading, setLoading] = useState(false);
     const [balanceFrozen, setBalanceFrozen] = useState(false);
-    const customerService = new CustomerService();
 
     useEffect(() => {
         setLoading(true);
 
-        customerService.getCustomersLarge().then((data) => {
+        CustomerService.getCustomersLarge().then((data) => {
             setCustomers(data);
             setLoading(false);
         });
@@ -50,18 +49,19 @@ import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ToggleButton } from 'primereact/togglebutton';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
+import './DataTableDemo.css';
 
 const ScrollFrozenColumnsDoc = () => {
     const [customers, setCustomers] = useState([]);
     const [loading, setLoading] = useState(false);
     const [balanceFrozen, setBalanceFrozen] = useState(false);
-    const customerService = new CustomerService();
+    
 
     useEffect(() => {
         setLoading(true);
 
-        customerService.getCustomersLarge().then((data) => {
+        CustomerService.getCustomersLarge().then((data) => {
             setCustomers(data);
             setLoading(false);
         });
@@ -100,18 +100,19 @@ import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ToggleButton } from 'primereact/togglebutton';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
+import './DataTableDemo.css';
 
 const ScrollFrozenColumnsDoc = () => {
     const [customers, setCustomers] = useState([]);
     const [loading, setLoading] = useState(false);
     const [balanceFrozen, setBalanceFrozen] = useState(false);
-    const customerService = new CustomerService();
+    
 
     useEffect(() => {
         setLoading(true);
 
-        customerService.getCustomersLarge().then((data) => {
+        CustomerService.getCustomersLarge().then((data) => {
             setCustomers(data);
             setLoading(false);
         });
@@ -144,7 +145,39 @@ const ScrollFrozenColumnsDoc = () => {
         </div>
     );
 }
-        `
+        `,
+        css: `
+/* DataTableDemo.css */
+.datatable-scroll-demo .p-datatable-frozen-tbody {
+    font-weight: bold;
+}
+
+.datatable-scroll-demo .p-datatable-scrollable .p-frozen-column {
+    font-weight: bold;
+}
+        `,
+        data: `
+/* CustomerService */ 
+{
+    id: 1000,
+    name: 'James Butt',
+    country: {
+        name: 'Algeria',
+        code: 'dz'
+    },
+    company: 'Benton, John B Jr',
+    date: '2015-09-13',
+    status: 'unqualified',
+    verified: true,
+    activity: 17,
+    representative: {
+        name: 'Ioni Bowcher',
+        image: 'ionibowcher.png'
+    },
+    balance: 70663
+},
+...
+       `
     };
 
     return (
@@ -167,7 +200,7 @@ const ScrollFrozenColumnsDoc = () => {
                     <Column field="balance" header="Balance" body={balanceTemplate2} style={{ width: '120px' }} alignFrozen="right" frozen={balanceFrozen}></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );
 }

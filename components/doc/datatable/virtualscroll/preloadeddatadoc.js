@@ -6,8 +6,7 @@ import { DocSectionText } from '../../common/docsectiontext';
 import { CarService } from '../../../../service/CarService';
 
 export function PreloadedDataDoc(props) {
-    const carService = new CarService();
-    const cars = Array.from({ length: 100000 }).map((_, i) => carService.generateCar(i + 1));
+    const cars = Array.from({ length: 100000 }).map((_, i) => CarService.generateCar(i + 1));
 
     const code = {
         basic: `
@@ -20,14 +19,15 @@ export function PreloadedDataDoc(props) {
 </DataTable>
         `,
         javascript: `
+import React from 'react'; 
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Skeleton } from 'primereact/skeleton';
-import { CarService } from '../service/CarService';
+import { CarService } from './service/CarService';
 
 const PreloadedDataDoc = () => {
-    const carService = new CarService();
-    const cars = Array.from({ length: 100000 }).map((_, i) => carService.generateCar(i + 1));
+    
+    const cars = Array.from({ length: 100000 }).map((_, i) => CarService.generateCar(i + 1));
 
     return (
         <div className="card">
@@ -43,14 +43,15 @@ const PreloadedDataDoc = () => {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Skeleton } from 'primereact/skeleton';
-import { CarService } from '../service/CarService';
+import { CarService } from './service/CarService';
 
 const PreloadedDataDoc = () => {
-    const carService = new CarService();
-    const cars = Array.from({ length: 100000 }).map((_, i) => carService.generateCar(i + 1));
+    
+    const cars = Array.from({ length: 100000 }).map((_, i) => CarService.generateCar(i + 1));
 
     return (
         <div className="card">
@@ -64,7 +65,18 @@ const PreloadedDataDoc = () => {
         </div>
     );
 }
-        `
+        `,
+        data: `
+/* CarService */
+
+{
+    id: 1
+    vin: tvACo,
+    brand: Norma,
+    color: Black,
+    year: 2002
+}
+`
     };
 
     return (
@@ -81,7 +93,7 @@ const PreloadedDataDoc = () => {
                     <Column field="color" header="Color" style={{ minWidth: '200px' }}></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CarService']} />
         </>
     );
 }

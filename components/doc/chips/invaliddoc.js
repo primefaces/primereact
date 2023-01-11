@@ -8,20 +8,26 @@ export function InvalidDoc(props) {
 <Chips className="p-invalid" />
         `,
         javascript: `
+import React from 'react'; 
 import { Chips } from "primereact/chips";
 
 export default function InvalidDemo() {
     return (
-        <Chips className="p-invalid" />
+        <div className="card p-fluid">
+            <Chips className="p-invalid" />
+        </div>
     )
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Chips } from "primereact/chips";
 
 export default function InvalidDemo() {
     return (
-        <Chips className="p-invalid" />
+        <div className="card p-fluid">
+            <Chips className="p-invalid" />
+        </div>
     )
 }
         `

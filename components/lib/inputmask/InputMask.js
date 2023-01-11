@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputText } from '../inputtext/InputText';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 
 export const InputMask = React.memo(
     React.forwardRef((props, ref) => {
@@ -190,12 +190,11 @@ export const InputMask = React.memo(
                 pos,
                 begin,
                 end;
-            let iPhone = /iphone/i.test(DomHandler.getUserAgent());
 
             oldVal.current = elementRef.current.value;
 
             //backspace, delete, and escape get special treatment
-            if (k === 8 || k === 46 || (iPhone && k === 127)) {
+            if (k === 8 || k === 46 || (DomHandler.isIOS() && k === 127)) {
                 pos = caret();
                 begin = pos.begin;
                 end = pos.end;
@@ -256,7 +255,7 @@ export const InputMask = React.memo(
                         writeBuffer();
                         next = seekNext(p);
 
-                        if (/android/i.test(DomHandler.getUserAgent())) {
+                        if (DomHandler.isAndroid()) {
                             //Path for CSP Violation on FireFox OS 1.1
                             let proxy = () => {
                                 caret(next);
@@ -494,9 +493,7 @@ export const InputMask = React.memo(
                     '*': '[A-Za-z0-9]'
                 };
 
-                let ua = DomHandler.getUserAgent();
-
-                androidChrome.current = /chrome/i.test(ua) && /android/i.test(ua);
+                androidChrome.current = DomHandler.isChrome() && DomHandler.isAndroid();
 
                 let maskTokens = props.mask.split('');
 
@@ -538,6 +535,7 @@ export const InputMask = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            focus: () => DomHandler.focus(elementRef.current),
             getElement: () => elementRef.current
         }));
 

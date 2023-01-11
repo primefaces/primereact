@@ -16,6 +16,7 @@ export function InvalidDoc(props) {
 </div>
         `,
         javascript: `
+import React from 'react'; 
 import { InputText } from "primereact/inputtext";
 
 export default function InvalidDemo() {
@@ -33,6 +34,7 @@ export default function InvalidDemo() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { InputText } from "primereact/inputtext";
 
 export default function InvalidDemo() {

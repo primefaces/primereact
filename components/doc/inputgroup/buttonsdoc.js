@@ -11,7 +11,9 @@ export function ButtonDoc(props) {
 <Button icon="pi pi-check" className="p-button-success"/> <InputText placeholder="Vote"/> <Button icon="pi pi-times" className="p-button-danger"/>
         `,
         javascript: `
+import React from 'react'; 
 import { InputNumber } from 'primereact/inputnumber';
+import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 
 export default function ButtonDoc() {
@@ -44,7 +46,9 @@ export default function ButtonDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { InputNumber } from 'primereact/inputnumber';
+import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 
 export default function ButtonDoc() {

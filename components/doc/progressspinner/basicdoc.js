@@ -12,10 +12,9 @@ export function BasicDoc(props) {
 import React from 'react';
 import { ProgressSpinner } from 'primereact/progressspinner';
 
-export const BasicDoc = () => {
-
+export default function BasicDemo() {
     return (
-        <div className="card">
+        <div className="card flex justify-content-center">
             <ProgressSpinner />
         </div>
     );
@@ -25,10 +24,9 @@ export const BasicDoc = () => {
 import React from 'react';
 import { ProgressSpinner } from 'primereact/progressspinner';
 
-export const BasicDoc = () => {
-
+export default function BasicDemo() {
     return (
-        <div className="card">
+        <div className="card flex justify-content-center">
             <ProgressSpinner />
         </div>
     );
@@ -39,9 +37,9 @@ export const BasicDoc = () => {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Basic Demo Content.</p>
+                <p>An infinite spin animation is displayed by default.</p>
             </DocSectionText>
-            <div className="card">
+            <div className="card flex justify-content-center">
                 <ProgressSpinner />
             </div>
             <DocSectionCode code={code} />

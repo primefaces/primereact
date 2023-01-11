@@ -1,24 +1,77 @@
+/**
+ *
+ * ScrollTop is an input component that provides real-time suggestions when being typed.
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/scrolltop/)
+ *
+ * @module scrolltop
+ *
+ */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 import { IconType } from '../utils';
 
-type ScrollTopTargetType = 'window' | 'parent';
-
-type ScrollTopScrollBehavior = 'auto' | 'smooth';
-
+/**
+ * Defines valid properties in ScrollTop component.
+ * @group Properties
+ */
 export interface ScrollTopProps {
-    target?: ScrollTopTargetType;
+    /**
+     * Target of the ScrollTop, valid values are "window" and "parent".
+     * @defaultValue window
+     */
+    target?: 'window' | 'parent' | undefined;
+    /**
+     * Defines the threshold value of the vertical scroll position of the target to toggle the visibility.
+     * @defaultValue 400
+     */
     threshold?: number;
+    /**
+     * Icon to display.
+     * @defaultValue pi pi-chevron-up
+     */
     icon?: IconType<ScrollTopProps>;
-    behavior?: ScrollTopScrollBehavior;
-    className?: string;
+    /**
+     * Defines the scrolling behavior, "smooth" adds an animation and "auto" scrolls with a jump.
+     * @defaultValue smooth
+     */
+    behavior?: 'auto' | 'smooth' | undefined;
+    /**
+     * Style class of the component.
+     */
+    className?: string | undefined;
+    /**
+     * @todo Write the documentation
+     */
     style?: React.CSSProperties;
+    /**
+     * The properties of CSSTransitionProps can be customized, except for "nodeRef" and "in" properties.
+     * @defaultValue smooth
+     * @todo Add link for CSSTransitionProps
+     */
     transitionOptions?: CSSTransitionProps;
+    /**
+     * Callback to invoke when overlay panel becomes visible.
+     */
     onShow?(): void;
+    /**
+     * 	Callback to invoke when overlay becomes hidden.
+     */
     onHide?(): void;
-    children?: React.ReactNode;
+    /**
+     * Used to get the child elements of the component.
+     * @readonly
+     */
+    children?: React.ReactNode | undefined;
 }
 
+/**
+ * @group Component
+ */
 export declare class ScrollTop extends React.Component<ScrollTopProps, any> {
+    /**
+     * Used to get container element.
+     * @return {HTMLButtonElement} Container element
+     */
     public getElement(): HTMLButtonElement;
 }

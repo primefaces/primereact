@@ -9,8 +9,6 @@ export function MultipleDoc(props) {
     const [selectedCountries, setSelectedCountries] = useState(null);
     const [filteredCountries, setFilteredCountries] = useState(null);
 
-    const countryservice = new CountryService();
-
     const search = (event) => {
         // Timeout to emulate a network connection
         setTimeout(() => {
@@ -29,16 +27,7 @@ export function MultipleDoc(props) {
     };
 
     useEffect(() => {
-        countryservice.getCountries().then((data) => setCountries(data));
-        /*
-            Countries is an array of objects with name, code pairs;
-            [
-                ...
-                {"name": "United Kingdom", "code": "UK"},
-                {"name": "United States", "code": "USA"},
-                ...
-            ]
-        */
+        CountryService.getCountries().then((data) => setCountries(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const code = {
@@ -46,15 +35,16 @@ export function MultipleDoc(props) {
 <AutoComplete field="name" multiple value={selectedCountries} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountries(e.value)} />
         `,
         javascript: `
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AutoComplete } from "primereact/autocomplete";
+import { CountryService } from "./service/CountryService";
 
 export default function MultipleDemo() {
     const [countries, setCountries] = useState([]);
     const [selectedCountries, setSelectedCountries] = useState(null);
     const [filteredCountries, setFilteredCountries] = useState(null);
 
-    const countryservice = new CountryService();
+    
     const search = (event) => {
         // Timeout to emulate a network connection
         setTimeout(() => {
@@ -74,7 +64,7 @@ export default function MultipleDemo() {
     }
 
     useEffect(() => {
-        countryservice.getCountries().then((data) => setCountries(data));
+        CountryService.getCountries().then((data) => setCountries(data));
         /*
             Countries is an array of objects with a name and a code;
             [
@@ -92,8 +82,9 @@ export default function MultipleDemo() {
 }
         `,
         typescript: `
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
+import { CountryService } from "./service/CountryService";
 
 interface Country {
     name: string;
@@ -105,7 +96,7 @@ export default function MultipleDemo() {
     const [selectedCountries, setSelectedCountries] = useState<Country>(null);
     const [filteredCountries, setFilteredCountries] = useState<Country[]>(null);
 
-    const countryservice = new CountryService();
+    
     const search = (event: AutoCompleteCompleteMethodParams) => {
         // Timeout to emulate a network connection
         setTimeout(() => {
@@ -125,7 +116,7 @@ export default function MultipleDemo() {
     }
 
     useEffect(() => {
-        countryservice.getCountries().then((data) => setCountries(data));
+        CountryService.getCountries().then((data) => setCountries(data));
         /*
             Countries is an array of objects with a name and a code;
             [
@@ -141,7 +132,16 @@ export default function MultipleDemo() {
         <AutoComplete field="name" multiple value={selectedCountries} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountries(e.value)} />
     )
 }
-        `
+        `,
+        data: `
+        {
+            "data": [
+                {"name": "United Kingdom", "code": "UK"},
+                {"name": "United States", "code": "USA"},
+                ...
+            ]
+        }
+                `
     };
 
     return (
@@ -155,7 +155,7 @@ export default function MultipleDemo() {
             <div className="card p-fluid">
                 <AutoComplete field="name" multiple value={selectedCountries} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountries(e.value)} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CountryService']} />
         </>
     );
 }

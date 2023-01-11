@@ -3,10 +3,12 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/megamenu/importdoc';
-import { HorizontalDoc } from '../../components/doc/megamenu/horizontaldoc';
+import { BasicDoc } from '../../components/doc/megamenu/basicdoc';
 import { VerticalDoc } from '../../components/doc/megamenu/verticaldoc';
-import { TemplatingDoc } from '../../components/doc/megamenu/templatingdoc';
+import { TemplateDoc } from '../../components/doc/megamenu/templatedoc';
 import { ApiDoc } from '../../components/doc/megamenu/apidoc';
+import { AccessibilityDoc } from '../../components/doc/megamenu/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/megamenu/styledoc';
 
 const MegaMenuDemo = () => {
     const docs = [
@@ -16,9 +18,9 @@ const MegaMenuDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'horizontal',
-            label: 'Horizontal',
-            component: HorizontalDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
             id: 'Vertical',
@@ -26,9 +28,19 @@ const MegaMenuDemo = () => {
             component: VerticalDoc
         },
         {
-            id: 'templating',
-            label: 'Templating',
-            component: TemplatingDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         },
         {
             id: 'api',
@@ -38,14 +50,6 @@ const MegaMenuDemo = () => {
                 {
                     id: 'properties',
                     label: 'Properties'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

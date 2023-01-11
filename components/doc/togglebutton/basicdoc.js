@@ -3,7 +3,7 @@ import { ToggleButton } from '../../lib/togglebutton/ToggleButton';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function BasicDemo(props) {
+export function BasicDoc(props) {
     const [checked, setChecked] = useState(false);
 
     const code = {
@@ -12,10 +12,10 @@ export function BasicDemo(props) {
 
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { ToggleButton } from 'primereact/togglebutton';
 
-export default function BasicDemo() {
+export default function BasicDoc() {
     const [checked, setChecked] = useState(false);
 
     return (
@@ -24,10 +24,10 @@ export default function BasicDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { ToggleButton, ToggleButtonChangeParams } from 'primereact/togglebutton';
 
-export default function BasicDemo() {
+export default function BasicDoc() {
     const [checked, setChecked] = useState<boolean>(false);
 
     return (

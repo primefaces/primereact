@@ -1,12 +1,18 @@
 import Head from 'next/head';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/selectbutton/importdoc';
-import { BasicDoc } from '../../components/doc/selectbutton/basicdoc';
-import { MultipleSelectionDoc } from '../../components/doc/selectbutton/multipleselectiondoc';
-import { CustomContentDoc } from '../../components/doc/selectbutton/customcontentdoc';
 import { ApiDoc } from '../../components/doc/selectbutton/apidoc';
+import { AccessibilityDoc } from '../../components/doc/selectbutton/accessibilitydoc';
+
+import { BasicDoc } from '../../components/doc/selectbutton/basicdoc';
+import { CustomContentDoc } from '../../components/doc/selectbutton/customcontentdoc';
+import { DisabledDoc } from '../../components/doc/selectbutton/disableddoc';
+import { ImportDoc } from '../../components/doc/selectbutton/importdoc';
+import { InvalidDoc } from '../../components/doc/selectbutton/invaliddoc';
+import { MultipleSelectionDoc } from '../../components/doc/selectbutton/multipleselectiondoc';
+import { FormikDoc } from '../../components/doc/selectbutton/validation/formikdoc';
+import { HookFormDoc } from '../../components/doc/selectbutton/validation/hookformdoc';
 
 const SelectButtonDemo = () => {
     const docs = [
@@ -21,14 +27,46 @@ const SelectButtonDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'multipleselectiondoc',
-            label: 'Multiple Selection',
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
+            id: 'deisabled',
+            label: 'Disabled',
+            component: DisabledDoc
+        },
+        {
+            id: 'multiple',
+            label: 'Multiple',
             component: MultipleSelectionDoc
         },
         {
-            id: 'customcontentdoc',
-            label: 'Custom Content',
+            id: 'template',
+            label: 'Template',
             component: CustomContentDoc
+        },
+        {
+            id: 'validation',
+            label: 'Validation',
+            description: 'Validate using popular React validation libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         },
         {
             id: 'api',
@@ -46,10 +84,6 @@ const SelectButtonDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

@@ -18,7 +18,7 @@ export function CurrencyDoc(props) {
 
 `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputNumber } from 'primereact/inputnumber';
 
 export default function CurrencyDoc() {
@@ -28,27 +28,29 @@ export default function CurrencyDoc() {
     const [value4, setValue4] = useState(5002);
 
     return (
-        <div className="field col-12 md:col-3">
-            <label htmlFor="currency-us">United States</label>
-            <InputNumber inputId="currency-us" value={value1} onValueChange={(e) => setValue1(e.value)} mode="currency" currency="USD" locale="en-US" />
-        </div>
-        <div className="field col-12 md:col-3">
-            <label htmlFor="currency-germany">Germany</label>
-            <InputNumber inputId="currency-germany" value={value2} onValueChange={(e) => setValue2(e.value)} mode="currency" currency="EUR" locale="de-DE" />
-        </div>
-        <div className="field col-12 md:col-3">
-            <label htmlFor="currency-india">India</label>
-            <InputNumber inputId="currency-india" value={value3} onValueChange={(e) => setValue3(e.value)} mode="currency" currency="INR" currencyDisplay="code" locale="en-IN" />
-        </div>
-        <div className="field col-12 md:col-3">
-            <label htmlFor="currency-japan">Japan</label>
-            <InputNumber inputId="currency-japan" value={value4} onValueChange={(e) => setValue4(e.value)} mode="currency" currency="JPY" locale="jp-JP" />
+        <div className="card flex justify-content-center p-fluid">
+            <div className="field col-12 md:col-3">
+                <label htmlFor="currency-us">United States</label>
+                <InputNumber inputId="currency-us" value={value1} onValueChange={(e) => setValue1(e.value)} mode="currency" currency="USD" locale="en-US" />
+            </div>
+            <div className="field col-12 md:col-3">
+                <label htmlFor="currency-germany">Germany</label>
+                <InputNumber inputId="currency-germany" value={value2} onValueChange={(e) => setValue2(e.value)} mode="currency" currency="EUR" locale="de-DE" />
+            </div>
+            <div className="field col-12 md:col-3">
+                <label htmlFor="currency-india">India</label>
+                <InputNumber inputId="currency-india" value={value3} onValueChange={(e) => setValue3(e.value)} mode="currency" currency="INR" currencyDisplay="code" locale="en-IN" />
+            </div>
+            <div className="field col-12 md:col-3">
+                <label htmlFor="currency-japan">Japan</label>
+                <InputNumber inputId="currency-japan" value={value4} onValueChange={(e) => setValue4(e.value)} mode="currency" currency="JPY" locale="jp-JP" />
+            </div>
         </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputNumber, InputNumberValueChangeParams } from 'primereact/inputnumber';
 
 export default function CurrencyDoc() {
@@ -58,21 +60,23 @@ export default function CurrencyDoc() {
     const [value4, setValue4] = useState<number>(5002);
 
     return (
-        <div className="field col-12 md:col-3">
-            <label htmlFor="currency-us">United States</label>
-            <InputNumber inputId="currency-us" value={value1} onValueChange={(e : : InputNumberValueChangeParams) => setValue1(e.value)} mode="currency" currency="USD" locale="en-US" />
-        </div>
-        <div className="field col-12 md:col-3">
-            <label htmlFor="currency-germany">Germany</label>
-            <InputNumber inputId="currency-germany" value={value2} onValueChange={(e : : InputNumberValueChangeParams) => setValue2(e.value)} mode="currency" currency="EUR" locale="de-DE" />
-        </div>
-        <div className="field col-12 md:col-3">
-            <label htmlFor="currency-india">India</label>
-            <InputNumber inputId="currency-india" value={value3} onValueChange={(e : : InputNumberValueChangeParams) => setValue3(e.value)} mode="currency" currency="INR" currencyDisplay="code" locale="en-IN" />
-        </div>
-        <div className="field col-12 md:col-3">
-            <label htmlFor="currency-japan">Japan</label>
-            <InputNumber inputId="currency-japan" value={value4} onValueChange={(e : InputNumberValueChangeParams) => setValue4(e.value)} mode="currency" currency="JPY" locale="jp-JP" />
+        <div className="card flex justify-content-center p-fluid">
+            <div className="field col-12 md:col-3">
+                <label htmlFor="currency-us">United States</label>
+                <InputNumber inputId="currency-us" value={value1} onValueChange={(e : : InputNumberValueChangeParams) => setValue1(e.value)} mode="currency" currency="USD" locale="en-US" />
+            </div>
+            <div className="field col-12 md:col-3">
+                <label htmlFor="currency-germany">Germany</label>
+                <InputNumber inputId="currency-germany" value={value2} onValueChange={(e : : InputNumberValueChangeParams) => setValue2(e.value)} mode="currency" currency="EUR" locale="de-DE" />
+            </div>
+            <div className="field col-12 md:col-3">
+                <label htmlFor="currency-india">India</label>
+                <InputNumber inputId="currency-india" value={value3} onValueChange={(e : : InputNumberValueChangeParams) => setValue3(e.value)} mode="currency" currency="INR" currencyDisplay="code" locale="en-IN" />
+            </div>
+            <div className="field col-12 md:col-3">
+                <label htmlFor="currency-japan">Japan</label>
+                <InputNumber inputId="currency-japan" value={value4} onValueChange={(e : InputNumberValueChangeParams) => setValue4(e.value)} mode="currency" currency="JPY" locale="jp-JP" />
+            </div>
         </div>
     )
 }

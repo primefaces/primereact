@@ -11,26 +11,30 @@ export function ButtonBarDoc(props) {
 <Calendar id="buttonbar" value={date} onChange={(e) => setDate(e.value)} showButtonBar />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
 export default function ButtonBarDoc() {
     const [date, setDate] = useState(null);
 
     return (
-        <Calendar id="buttonbar" value={date} onChange={(e) => setDate(e.value)} showButtonBar />
+        <div className="card flex justify-content-center">
+            <Calendar id="buttonbar" value={date} onChange={(e) => setDate(e.value)} showButtonBar />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar, CalendarChangeParams } from 'primereact/calendar';
 
 export default function ButtonBarDoc() {
     const [date, setDate] = useState<Date | null>(null);
 
     return (
-        <Calendar id="buttonbar" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} showButtonBar />
+        <div className="card flex justify-content-center">
+            <Calendar id="buttonbar" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} showButtonBar />
+        </div>
     )
 }
         `

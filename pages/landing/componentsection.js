@@ -59,7 +59,7 @@ const ComponentSection = () => {
     const [dateValue, setDateValue] = useState(null);
     const [selectButtonValue, setSelectButtonValue] = useState(1);
     const [activeTabIndex, setActiveTabIndex] = useState(0);
-    const nodeService = new NodeService();
+
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const items = [
         { label: 'Home', icon: 'pi pi-fw pi-home' },
@@ -73,7 +73,7 @@ const ComponentSection = () => {
     ];
 
     useEffect(() => {
-        nodeService.getTreeNodes().then((data) => setNodes(data));
+        NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (

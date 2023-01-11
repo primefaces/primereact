@@ -4,9 +4,10 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/styleclass/apidoc';
+
 import { ImportDoc } from '../../components/doc/styleclass/importdoc';
 import { ToggleClassDoc } from '../../components/doc/styleclass/toggleclassdoc';
-import { AnimationsDoc } from '../../components/doc/styleclass/animationsdoc';
+import { AnimationDoc } from '../../components/doc/styleclass/animationdoc';
 
 const StyleClassDemo = () => {
     const docs = [
@@ -22,11 +23,11 @@ const StyleClassDemo = () => {
         },
         {
             id: 'animations',
-            label: 'Animations',
-            component: AnimationsDoc
+            label: 'Animation',
+            component: AnimationDoc
         },
         {
-            id: 'apidoc',
+            id: 'api',
             label: 'API',
             component: ApiDoc,
             children: [
@@ -59,7 +60,7 @@ const StyleClassDemo = () => {
                 </div>
                 <DocActions github="styleclass/index.js" />
             </div>
-            <div className="content-section doc styleclass-demo">
+            <div className="content-section doc">
                 <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>

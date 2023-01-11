@@ -11,7 +11,7 @@ export function StepDoc(props) {
 <Slider value={value} onChange={(e) => setValue(e.value)} className="w-14rem" step={20} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Slider } from "primereact/slider";
 
 export default function StepDemo() {
@@ -23,7 +23,7 @@ export default function StepDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Slider, SliderChangeParams } from "primereact/slider";
 
 export default function StepDemo() {

@@ -3,8 +3,11 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/deferredcontent/importdoc';
-import { DeferredContentDoc } from '../../components/doc/deferredcontent/contentdoc';
+import { BasicDoc } from '../../components/doc/deferredcontent/basicdoc';
+import { DataTableDoc } from '../../components/doc/deferredcontent/datatabledoc';
 import { ApiDoc } from '../../components/doc/deferredcontent/apidoc';
+import { AccessibilityDoc } from '../../components/doc/deferredcontent/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/deferredcontent/styledoc';
 
 const DeferredContentDemo = () => {
     const docs = [
@@ -14,12 +17,27 @@ const DeferredContentDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'deferredcontent',
-            label: 'DeferredContent',
-            component: DeferredContentDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
-            id: 'Api',
+            id: 'datatable',
+            label: 'DataTable',
+            component: DataTableDoc
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
+            id: 'api',
             label: 'API',
             component: ApiDoc,
             children: [
@@ -30,14 +48,6 @@ const DeferredContentDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

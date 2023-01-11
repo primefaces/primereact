@@ -11,26 +11,30 @@ export function BasicDoc(props) {
 <Chips value={value} onChange={(e) => setValue(e.value)} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Chips } from "primereact/chips";
 
 export default function BasicDemo() {
     const [value, setValue] = useState([]);
 
     return (
-        <Chips value={value} onChange={(e) => setValue(e.value)} />
+        <div className="card p-fluid">
+            <Chips value={value} onChange={(e) => setValue(e.value)} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Chips } from "primereact/chips";
 
 export default function BasicDemo() {
     const [value, setValue] = useState<string[]>([]);
 
     return (
-        <Chips value={value} onChange={(e: ChipsChangeParams) => setValue(e.value)} />
+        <div className="card p-fluid">
+            <Chips value={value} onChange={(e: ChipsChangeParams) => setValue(e.value)} />
+        </div>
     )
 }
         `

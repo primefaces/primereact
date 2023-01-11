@@ -9,6 +9,7 @@ export function DelayDoc(props) {
 <InputText type="text" placeholder="Right" tooltip="Enter your username" tooltipOptions={{showDelay: 1000, hideDelay: 300}}/>
         `,
         javascript: `
+import React from 'react'; 
 import { Tooltip } from 'primereact/tooltip';
 import { InputText } from 'primereact/inputtext';
 
@@ -22,6 +23,7 @@ export default function DelayDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Tooltip } from 'primereact/tooltip';
 import { InputText } from 'primereact/inputtext';
 

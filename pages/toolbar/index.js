@@ -5,6 +5,8 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/toolbar/importdoc';
 import { ToolbarDoc } from '../../components/doc/toolbar/toolbardoc';
 import { ApiDoc } from '../../components/doc/toolbar/apidoc';
+import { AccessibilityDoc } from '../../components/doc/toolbar/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/toolbar/styledoc';
 
 const ToolbarDemo = () => {
     const docs = [
@@ -19,6 +21,16 @@ const ToolbarDemo = () => {
             component: ToolbarDoc
         },
         {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -26,14 +38,6 @@ const ToolbarDemo = () => {
                 {
                     id: 'properties',
                     label: 'Properties'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

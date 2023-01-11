@@ -16,7 +16,7 @@ export function ForceSelectionDoc(props) {
 <AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e) => setValue(e.value)} forceSelection />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { AutoComplete } from "primereact/autocomplete";
 
 export default function ForceSelectionDemo() {
@@ -33,7 +33,7 @@ export default function ForceSelectionDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
 
 export default function ForceSelectionDemo() {

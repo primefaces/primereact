@@ -50,9 +50,10 @@ export function MaskDoc(props) {
 <SpeedDial model={items} direction="up" mask />
         `,
         javascript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Toast } from 'primereact/toast';
+import './SpeedDialDemo.css'
 
 export default function MaskDoc() {
     const toast = useRef(null);
@@ -95,17 +96,20 @@ export default function MaskDoc() {
     ];
 
     return (
-        <div className="speeddial-mask-demo" style={{ position: 'relative', height: '350px' }}>
-            <Toast ref={toast} />
-            <SpeedDial model={items} direction="up" mask />
+        <div className="card">
+            <div className="speeddial-mask-demo" style={{ position: 'relative', height: '350px' }}>
+                <Toast ref={toast} />
+                <SpeedDial model={items} direction="up" mask />
+            </div>
         </div>
     )
 }
         `,
         typescript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Toast } from 'primereact/toast';
+import './SpeedDialDemo.css'
 
 export default function MaskDoc() {
     const toast = useRef<Toast>(null);
@@ -148,13 +152,25 @@ export default function MaskDoc() {
     ];
 
     return (
-        <div className="speeddial-mask-demo" style={{ position: 'relative', height: '350px' }}>
-            <Toast ref={toast} />
-            <SpeedDial model={items} direction="up" mask />
+        <div className="card">
+            <div className="speeddial-mask-demo" style={{ position: 'relative', height: '350px' }}>
+                <Toast ref={toast} />
+                <SpeedDial model={items} direction="up" mask />
+            </div>
         </div>
     )
 }
-        `
+        `,
+        extFiles: {
+            'SpeedDialDemo.css': `
+/* SpeedDialDemo.css */
+
+.speeddial-mask-demo .p-speeddial-direction-up {
+    right: 0;
+    bottom: 0;
+}
+            `
+        }
     };
 
     return (

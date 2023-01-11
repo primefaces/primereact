@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useUpdateEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 
 export const Checkbox = React.memo(
     React.forwardRef((props, ref) => {
@@ -49,7 +49,8 @@ export const Checkbox = React.memo(
         };
 
         const onKeyDown = (event) => {
-            if (event.code === 'Space') {
+            if (event.code === 'Space' || event.key === ' ') {
+                // event.key is for Android support
                 onClick(event);
             }
         };
@@ -60,6 +61,7 @@ export const Checkbox = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            focus: () => DomHandler.focus(inputRef.current),
             getElement: () => elementRef.current,
             getInput: () => inputRef.current
         }));

@@ -7,7 +7,7 @@ import getConfig from 'next/config';
 
 export function AutoPlayDemoDoc(props) {
     const [images, setImages] = useState(null);
-    const galleriaService = new PhotoService();
+
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     const responsiveOptions = [
@@ -26,7 +26,7 @@ export function AutoPlayDemoDoc(props) {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then((data) => setImages(data));
+        PhotoService.getImages().then((data) => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
@@ -43,13 +43,13 @@ export function AutoPlayDemoDoc(props) {
     item={itemTemplate} thumbnail={thumbnailTemplate} circular autoPlay transitionInterval={2000} />
         `,
         javascript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Galleria } from 'primereact/galleria';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
 
 export default function AutoPlayDemoDoc() {
     const [images, setImages] = useState(null)
-    const galleriaService = new PhotoService();
+    
 
     const responsiveOptions = [
         {
@@ -67,7 +67,7 @@ export default function AutoPlayDemoDoc() {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
@@ -79,19 +79,21 @@ export default function AutoPlayDemoDoc() {
     }
 
     return (
-        <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
-            item={itemTemplate} thumbnail={thumbnailTemplate} circular autoPlay transitionInterval={2000} />
+        <div className="card flex justify-content-center">
+            <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
+                item={itemTemplate} thumbnail={thumbnailTemplate} circular autoPlay transitionInterval={2000} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Galleria } from 'primereact/galleria';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
 
 export default function AutoPlayDemoDoc() {
     const [images, setImages] = useState(null)
-    const galleriaService = new PhotoService();
+    
 
     const responsiveOptions = [
         {
@@ -109,7 +111,7 @@ export default function AutoPlayDemoDoc() {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
@@ -121,10 +123,22 @@ export default function AutoPlayDemoDoc() {
     }
     
     return (
-        <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
-            item={itemTemplate} thumbnail={thumbnailTemplate} circular autoPlay transitionInterval={2000} />
+        <div className="card flex justify-content-center">
+            <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
+                item={itemTemplate} thumbnail={thumbnailTemplate} circular autoPlay transitionInterval={2000} />
+        </div>
     )
 }
+        `,
+        data: `
+/* PhotoService */
+{
+    itemImageSrc: 'images/galleria/galleria1.jpg',
+    thumbnailImageSrc: 'images/galleria/galleria1s.jpg',
+    alt: 'Description for Image 1',
+    title: 'Title 1'
+},
+...
         `
     };
 
@@ -136,7 +150,7 @@ export default function AutoPlayDemoDoc() {
             <div className="card flex justify-content-center">
                 <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }} item={itemTemplate} thumbnail={thumbnailTemplate} circular autoPlay transitionInterval={2000} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['PhotoService']} />
         </>
     );
 }

@@ -43,7 +43,7 @@ export function SizesDoc(props) {
 <SplitButton label="Save" icon="pi pi-plus"  onClick={save} model={items}></SplitButton>
         `,
         javascript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { SplitButton } from 'primereact/splitbutton';
 import { Toast } from 'primereact/toast';
 
@@ -80,7 +80,7 @@ export default function SizesDoc() {
     ]
 
     return (
-        <div>
+        <div className="card flex align-items-center justify-content-center">
             <Toast ref={toast}></Toast>
             <SplitButton label="Small" model={items} className="p-button-sm mr-2 mb-2" />
             <SplitButton label="Normal" model={items} className="mr-2 mb-2" />
@@ -90,7 +90,7 @@ export default function SizesDoc() {
 }
         `,
         typescript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { SplitButton } from 'primereact/splitbutton';
 import { Toast } from 'primereact/toast';
 
@@ -127,7 +127,7 @@ export default function SizesDoc() {
     ]
 
     return (
-        <div>
+        <div className="card flex align-items-center justify-content-center">
             <Toast ref={toast}></Toast>
             <SplitButton label="Small" model={items} className="p-button-sm mr-2 mb-2" />
             <SplitButton label="Normal" model={items} className="mr-2 mb-2" />
@@ -143,7 +143,7 @@ export default function SizesDoc() {
             <DocSectionText {...props}>
                 <p>Outlined Buttons</p>
             </DocSectionText>
-            <div className="card">
+            <div className="card flex align-items-center justify-content-center">
                 <Toast ref={toast}></Toast>
                 <SplitButton label="Small" model={items} className="p-button-sm mr-2 mb-2" />
                 <SplitButton label="Normal" model={items} className="mr-2 mb-2" />

@@ -1,32 +1,36 @@
-import { Image } from '../../lib/image/Image';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
 import getConfig from 'next/config';
+import { Image } from '../../lib/image/Image';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function ThumbnailDoc(props) {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     const code = {
         basic: `
-<Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" zoomSrc="https://www.primefaces.org/wp-content/uploads/2020/05/small.png" alt="Image" width="80" height="60" preview />
+<Image src="https://www.primefaces.org/cdn/images/placeholder.png" zoomSrc="https://cdn.primefaces.org/images/placeholder-2x.png" alt="Image" width="80" height="60" preview />
         `,
         javascript: `
+import React from 'react'; 
 import { Image } from 'primereact/image';
 
-export default function ThumbnailDoc() {
-
+export default function ThumbnailDemo() {
     return (
-        <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" zoomSrc="https://www.primefaces.org/wp-content/uploads/2020/05/small.png" alt="Image" width="80" height="60" preview />
+        <div className="card flex justify-content-center">
+            <Image src="https://www.primefaces.org/cdn/images/placeholder.png" zoomSrc="https://cdn.primefaces.org/images/placeholder-2x.png" alt="Image" width="80" height="60" preview />
+        </div>
     )
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Image } from 'primereact/image';
 
-export default function ThumbnailDoc() {
-
+export default function ThumbnailDemo() {
     return (
-        <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" zoomSrc="https://www.primefaces.org/wp-content/uploads/2020/05/small.png" alt="Image" width="80" height="60" preview />
+        <div className="card flex justify-content-center">
+            <Image src="https://www.primefaces.org/cdn/images/placeholder.png" zoomSrc="https://cdn.primefaces.org/images/placeholder-2x.png" alt="Image" width="80" height="60" preview />
+        </div>
     )
 }
         `
@@ -36,7 +40,7 @@ export default function ThumbnailDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Allow different images or sizes for source and preview images using <i>zoomSrc</i> property.
+                    Use the <i>zoomSrc</i> to select a higher resolution image to display in preview mode.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">

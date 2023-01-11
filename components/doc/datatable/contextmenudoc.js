@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { DataTable } from '../../lib/datatable/DataTable';
-import { Column } from '../../lib/column/Column';
+import React, { useEffect, useRef, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
+import { Column } from '../../lib/column/Column';
+import { ContextMenu } from '../../lib/contextmenu/ContextMenu';
+import { DataTable } from '../../lib/datatable/DataTable';
+import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
-import { Toast } from '../../lib/toast/Toast';
-import { ContextMenu } from '../../lib/contextmenu/ContextMenu';
 
 export function ContextMenuDoc(props) {
     const [products, setProducts] = useState([]);
@@ -16,10 +16,9 @@ export function ContextMenuDoc(props) {
         { label: 'View', icon: 'pi pi-fw pi-search', command: () => viewProduct(selectedProduct) },
         { label: 'Delete', icon: 'pi pi-fw pi-times', command: () => deleteProduct(selectedProduct) }
     ];
-    const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data));
+        ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const viewProduct = (product) => {
@@ -62,7 +61,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ContextMenu } from 'primereact/contextmenu';
 import { Toast } from 'primereact/toast';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 const ContextMenuDoc = () => {
     const [products, setProducts] = useState([]);
@@ -73,10 +72,10 @@ const ContextMenuDoc = () => {
         {label: 'View', icon: 'pi pi-fw pi-search', command: () => viewProduct(selectedProduct)},
         {label: 'Delete', icon: 'pi pi-fw pi-times', command: () => deleteProduct(selectedProduct)}
     ];
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        ProductService.getProductsMini().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const viewProduct = (product) => {
@@ -125,7 +124,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ContextMenu } from 'primereact/contextmenu';
 import { Toast } from 'primereact/toast';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
 const ContextMenuDoc = () => {
     const [products, setProducts] = useState([]);
@@ -136,10 +135,10 @@ const ContextMenuDoc = () => {
         {label: 'View', icon: 'pi pi-fw pi-search', command: () => viewProduct(selectedProduct)},
         {label: 'Delete', icon: 'pi pi-fw pi-times', command: () => deleteProduct(selectedProduct)}
     ];
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        ProductService.getProductsMini().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const viewProduct = (product) => {
@@ -181,6 +180,22 @@ const ContextMenuDoc = () => {
         </div>
     );
 }
+        `,
+        data: `
+/* ProductService */        
+{
+    id: '1000',
+    code: 'f230fh0g3',
+    name: 'Bamboo Watch',
+    description: 'Product Description',
+    image: 'bamboo-watch.jpg',
+    price: 65,
+    category: 'Accessories',
+    quantity: 24,
+    inventoryStatus: 'INSTOCK',
+    rating: 5
+},
+...
         `
     };
 
@@ -200,7 +215,7 @@ const ContextMenuDoc = () => {
                     <Column field="price" header="Price" body={priceBodyTemplate} />
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

@@ -22,8 +22,9 @@ export function EditableDoc(props) {
 <Dropdown value={selectedCity} options={cities} onChange={onCityChange} optionLabel="name" editable />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Dropdown } from 'primereact/dropdown';
+import './DropdownDemo.css';
 
 export default function EditableDoc() {
     const [selectedCity, setSelectedCity] = useState(null);
@@ -40,13 +41,16 @@ export default function EditableDoc() {
     }
 
     return (
-        <Dropdown value={selectedCity} options={cities} onChange={onCityChange} optionLabel="name" editable />
+        <div className="card flex justify-content-center dropdown-demo">
+            <Dropdown value={selectedCity} options={cities} onChange={onCityChange} optionLabel="name" editable />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Dropdown, DropdownChangeParams } from 'primereact/dropdown';
+import './DropdownDemo.css';
 
 export default function EditableDoc() {
     const [selectedCity, setSelectedCity] = useState<any | null>(null);
@@ -63,10 +67,21 @@ export default function EditableDoc() {
     }
 
     return (
-        <Dropdown value={selectedCity} options={cities} onChange={onCityChange} optionLabel="name" editable />
+        <div className="card flex justify-content-center dropdown-demo">
+            <Dropdown value={selectedCity} options={cities} onChange={onCityChange} optionLabel="name" editable />
+        </div>
     )
 }
+        `,
+        extFiles: {
+            'DropdownDemo.css': `
+/* DropdownDemo.css */
+
+.dropdown-demo .p-dropdown {
+    width: 14rem;
+}
         `
+        }
     };
 
     return (
@@ -78,7 +93,7 @@ export default function EditableDoc() {
                     addition, options can be simple primitive values such as a string array, in this case no optionLabel or optionValue is necessary.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
+            <div className="card flex justify-content-center dropdown-demo">
                 <Dropdown value={selectedCity} options={cities} onChange={onCityChange} optionLabel="name" editable />
             </div>
             <DocSectionCode code={code} />

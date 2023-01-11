@@ -32,7 +32,7 @@ export function SeveritiesDoc(props) {
 <Button label="Error" className="p-button-danger" onClick={showError} />
         `,
         javascript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
@@ -67,7 +67,7 @@ export default function SeveritiesDoc() {
 }
         `,
         typescript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
@@ -113,11 +113,11 @@ export default function SeveritiesDoc() {
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Toast ref={toast} />
-                <div className="toast-demo">
-                    <Button label="Success" className="p-button-success" onClick={showSuccess} />
-                    <Button label="Info" className="p-button-info" onClick={showInfo} />
-                    <Button label="Warn" className="p-button-warning" onClick={showWarn} />
-                    <Button label="Error" className="p-button-danger" onClick={showError} />
+                <div>
+                    <Button label="Success" className="p-button-success md:w-auto md:mr-1 w-full mb-1" onClick={showSuccess} />
+                    <Button label="Info" className="p-button-info md:w-auto md:mr-1 w-full mb-1" onClick={showInfo} />
+                    <Button label="Warn" className="p-button-warning md:w-auto md:mr-1 w-full mb-1" onClick={showWarn} />
+                    <Button label="Error" className="p-button-danger md:w-auto md:mr-1 w-full mb-1" onClick={showError} />
                 </div>
             </div>
             <DocSectionCode code={code} />

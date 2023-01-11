@@ -16,7 +16,7 @@ export function DisabledDoc(props) {
 <MultiStateCheckbox disabled value={value} options={options} optionValue="value" onChange={(e) => setValue(e.value)} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { MultiStateCheckbox } from 'primereact/multistatecheckbox';
 
 export default function DisabledDoc() {
@@ -33,7 +33,7 @@ export default function DisabledDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { MultiStateCheckbox, MultiStateCheckboxChangeParams } from 'primereact/multistatecheckbox';
 
 export default function DisabledDoc() {

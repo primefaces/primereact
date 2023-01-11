@@ -26,7 +26,7 @@ export function DynamicDoc(props) {
 </div>
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { RadioButton } from "primereact/radiobutton";
 
 export default function DynamicDemo() {
@@ -53,7 +53,7 @@ export default function DynamicDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { RadioButton, RadioButtonChangeParams } from "primereact/radiobutton";
 
 interface Category {

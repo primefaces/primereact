@@ -5,10 +5,10 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function DynamicDoc(props) {
-    const msgs1 = useRef(null);
+    const msgs = useRef(null);
 
     useEffect(() => {
-        msgs1.current.show([
+        msgs.current.show([
             { severity: 'success', summary: 'Success', detail: 'Message Content', sticky: true },
             { severity: 'info', summary: 'Info', detail: 'Message Content', sticky: true },
             { severity: 'warn', summary: 'Warning', detail: 'Message Content', sticky: true },
@@ -17,7 +17,7 @@ export function DynamicDoc(props) {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const addMessages = () => {
-        msgs1.current.show([
+        msgs.current.show([
             { severity: 'success', summary: 'Success', detail: 'Message Content', sticky: true },
             { severity: 'info', summary: 'Info', detail: 'Message Content', sticky: true },
             { severity: 'warn', summary: 'Warning', detail: 'Message Content', sticky: true },
@@ -26,25 +26,25 @@ export function DynamicDoc(props) {
     };
 
     const clearMessages = () => {
-        msgs1.current.clear();
+        msgs.current.clear();
     };
 
     const code = {
         basic: `
 <Button type="button" onClick={addMessages} label="Show" className="mr-2" />
 <Button type="button" onClick={clearMessages} icon="pi pi-times" label="Clear" className="p-button-secondary" />
-<Messages ref={msgs1} />
+<Messages ref={msgs} />
         `,
         javascript: `
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Messages } from 'primereact/messages';
 
 export default function DynamicDoc() {
-    const msgs1 = useRef(null);
+    const msgs = useRef(null);
 
     useEffect(() => {
-        msgs1.current.show([
+        msgs.current.show([
             { severity: 'success', summary: 'Success', detail: 'Message Content', sticky: true },
             { severity: 'info', summary: 'Info', detail: 'Message Content', sticky: true },
             { severity: 'warn', summary: 'Warning', detail: 'Message Content', sticky: true },
@@ -53,7 +53,7 @@ export default function DynamicDoc() {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const addMessages = () => {
-        msgs1.current.show([
+        msgs.current.show([
             { severity: 'success', summary: 'Success', detail: 'Message Content', sticky: true },
             { severity: 'info', summary: 'Info', detail: 'Message Content', sticky: true },
             { severity: 'warn', summary: 'Warning', detail: 'Message Content', sticky: true },
@@ -62,7 +62,7 @@ export default function DynamicDoc() {
     };
 
     const clearMessages = () => {
-        msgs1.current.clear();
+        msgs.current.clear();
     };
 
     return (
@@ -70,21 +70,21 @@ export default function DynamicDoc() {
             <Button type="button" onClick={addMessages} label="Show" className="mr-2" />
             <Button type="button" onClick={clearMessages} icon="pi pi-times" label="Clear" className="p-button-secondary" />
 
-            <Messages ref={msgs1} />
+            <Messages ref={msgs} />
         </div>
     )
 }
         `,
         typescript: `
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Messages } from 'primereact/messages';
 
 export default function DynamicDoc() {
-    const msgs1 = useRef<Messages>(null);
+    const msgs = useRef<Messages>(null);
 
     useEffect(() => {
-        msgs1.current?.show([
+        msgs.current?.show([
             { severity: 'success', summary: 'Success', detail: 'Message Content', sticky: true },
             { severity: 'info', summary: 'Info', detail: 'Message Content', sticky: true },
             { severity: 'warn', summary: 'Warning', detail: 'Message Content', sticky: true },
@@ -93,7 +93,7 @@ export default function DynamicDoc() {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const addMessages = () => {
-        msgs1.current?.show([
+        msgs.current?.show([
             { severity: 'success', summary: 'Success', detail: 'Message Content', sticky: true },
             { severity: 'info', summary: 'Info', detail: 'Message Content', sticky: true },
             { severity: 'warn', summary: 'Warning', detail: 'Message Content', sticky: true },
@@ -102,7 +102,7 @@ export default function DynamicDoc() {
     };
 
     const clearMessages = () => {
-        msgs1.current?.clear();
+        msgs.current?.clear();
     };
 
     return (
@@ -110,7 +110,7 @@ export default function DynamicDoc() {
             <Button type="button" onClick={addMessages} label="Show" className="mr-2" />
             <Button type="button" onClick={clearMessages} icon="pi pi-times" label="Clear" className="p-button-secondary" />
 
-            <Messages ref={msgs1} />
+            <Messages ref={msgs} />
         </div>
     )
 }
@@ -120,13 +120,14 @@ export default function DynamicDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Dynamic</p>
+                {/* TO DO: Add demo content. */}
+                <p></p>
             </DocSectionText>
             <div className="card">
                 <Button type="button" onClick={addMessages} label="Show" className="mr-2" />
                 <Button type="button" onClick={clearMessages} icon="pi pi-times" label="Clear" className="p-button-secondary" />
 
-                <Messages ref={msgs1} />
+                <Messages ref={msgs} />
             </div>
             <DocSectionCode code={code} />
         </>

@@ -34,11 +34,11 @@ export function LocalStorageDoc(props) {
         { name: 'XuXue Feng', image: 'xuxuefeng.png' }
     ];
     const statuses = ['unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal'];
-    const customerService = new CustomerService();
+
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
-        customerService.getCustomersMedium().then((data) => setCustomers(data));
+        CustomerService.getCustomersMedium().then((data) => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const countryBodyTemplate = (rowData) => {
@@ -137,7 +137,7 @@ import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { MultiSelect } from 'primereact/multiselect';
 import { Dropdown } from 'primereact/dropdown';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 const LocalStorageDoc = () => {
 
@@ -164,11 +164,11 @@ const LocalStorageDoc = () => {
         { name: 'XuXue Feng', image: 'xuxuefeng.png' }
     ];
     const statuses = ['unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal'];
-    const customerService = new CustomerService();
+    
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
-        customerService.getCustomersMedium().then((data) => setCustomers(data));
+        CustomerService.getCustomersMedium().then((data) => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const countryBodyTemplate = (rowData) => {
@@ -258,7 +258,7 @@ import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { MultiSelect } from 'primereact/multiselect';
 import { Dropdown } from 'primereact/dropdown';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 const LocalStorageDoc = () => {
 
@@ -286,7 +286,7 @@ const LocalStorageDoc = () => {
     const statuses = [
         'unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal'
     ];
-    const customerService = new CustomerService();
+    
 
     const filtersMap = {
         'filters': { value: filters, callback: setFilters },
@@ -295,7 +295,7 @@ const LocalStorageDoc = () => {
     };
 
     useEffect(() => {
-        customerService.getCustomersMedium().then(data => setCustomers(data));
+        CustomerService.getCustomersMedium().then(data => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onCustomSaveState = (state) => {
@@ -384,7 +384,29 @@ const LocalStorageDoc = () => {
         </div>
     );
 }
-        `
+        `,
+        data: `
+/* CustomerService */ 
+{
+    id: 1000,
+    name: 'James Butt',
+    country: {
+        name: 'Algeria',
+        code: 'dz'
+    },
+    company: 'Benton, John B Jr',
+    date: '2015-09-13',
+    status: 'unqualified',
+    verified: true,
+    activity: 17,
+    representative: {
+        name: 'Ioni Bowcher',
+        image: 'ionibowcher.png'
+    },
+    balance: 70663
+},
+...
+       `
     };
 
     return (
@@ -425,7 +447,7 @@ const LocalStorageDoc = () => {
                     <Column field="status" header="Status" body={statusBodyTemplate} sortable filter filterElement={statusFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );
 }

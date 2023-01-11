@@ -6,9 +6,14 @@ import { ImportDoc } from '../../components/doc/speeddial/importdoc';
 import { LinearDoc } from '../../components/doc/speeddial/lineardoc';
 import { CircleDoc } from '../../components/doc/speeddial/circledoc';
 import { TooltipDoc } from '../../components/doc/speeddial/tooltipdoc';
-import { TransitionDoc } from '../../components/doc/speeddial/transitiondoc';
+import { TransitionDoc } from '../../components/doc/speeddial/customdoc';
 import { MaskDoc } from '../../components/doc/speeddial/maskdoc';
 import { ApiDoc } from '../../components/doc/speeddial/apidoc';
+import { AccessibilityDoc } from '../../components/doc/speeddial/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/speeddial/styledoc';
+import { SemiCircleDoc } from '../../components/doc/speeddial/semicircledoc';
+import { QuarterCircleDoc } from '../../components/doc/speeddial/quartercircledoc';
+import { CustomDoc } from '../../components/doc/speeddial/customdoc';
 
 const SpeedDialDemo = () => {
     const docs = [
@@ -24,8 +29,18 @@ const SpeedDialDemo = () => {
         },
         {
             id: 'circle',
-            label: 'Circle, Semi-Circle and Quarter-Circle',
+            label: 'Circle',
             component: CircleDoc
+        },
+        {
+            id: 'semicircle',
+            label: 'Semi Circle',
+            component: SemiCircleDoc
+        },
+        {
+            id: 'quartercircle',
+            label: 'Quarter Circle',
+            component: QuarterCircleDoc
         },
         {
             id: 'tooltip',
@@ -33,14 +48,24 @@ const SpeedDialDemo = () => {
             component: TooltipDoc
         },
         {
-            id: 'transition',
-            label: 'Transition Duration, Icon and No Rotate Animation',
-            component: TransitionDoc
-        },
-        {
             id: 'mask',
             label: 'Mask',
             component: MaskDoc
+        },
+        {
+            id: 'custom',
+            label: 'Custom',
+            component: CustomDoc
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         },
         {
             id: 'api',
@@ -49,15 +74,7 @@ const SpeedDialDemo = () => {
             children: [
                 {
                     id: 'menumodelapi',
-                    label: 'MenuModel API'
-                },
-                {
-                    id: 'type',
-                    label: 'Type'
-                },
-                {
-                    id: 'direction',
-                    label: 'Direction'
+                    label: 'MenuModel'
                 },
                 {
                     id: 'properties',
@@ -66,14 +83,6 @@ const SpeedDialDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

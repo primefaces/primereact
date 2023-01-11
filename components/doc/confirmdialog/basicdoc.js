@@ -45,7 +45,7 @@ export function BasicDoc(props) {
 <Button onClick={confirm2} icon="pi pi-times" label="Delete"></Button>
         `,
         javascript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { Toast } from 'primereact/toast';
 
@@ -81,7 +81,7 @@ const reject = () => {
     };
 
     return (
-        <div>
+        <div className="card flex justify-content-center">
             <Toast ref={toast} />
             <ConfirmDialog />
             <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
@@ -91,7 +91,7 @@ const reject = () => {
 }
         `,
         typescript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { Toast } from 'primereact/toast';
 
@@ -128,7 +128,7 @@ const reject = () => {
     };
 
     return (
-        <div>
+        <div className="card flex justify-content-center">
             <Toast ref={toast} />
             <ConfirmDialog />
             <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
@@ -147,7 +147,7 @@ const reject = () => {
             <div className="card flex justify-content-center">
                 <Toast ref={toast} />
                 <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
-                <Button onClick={confirm2} icon="pi pi-times" label="Delete"></Button>
+                <Button onClick={confirm2} icon="pi pi-times" label="Delete" className="p-button-danger p-button-outlined"></Button>
             </div>
             <DocSectionCode code={code} />
         </>

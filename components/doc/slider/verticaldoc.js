@@ -11,7 +11,7 @@ export function VerticalDoc(props) {
 <Slider value={value} onChange={(e) => setValue(e.value)} orientation="vertical" />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Slider } from "primereact/slider";
 
 export default function VerticalDemo() {
@@ -23,7 +23,7 @@ export default function VerticalDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Slider, SliderChangeParams } from "primereact/slider";
 
 export default function VerticalDemo() {

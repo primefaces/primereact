@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
-import { DataTable } from '../../../lib/datatable/DataTable';
-import { Column } from '../../../lib/column/Column';
+import { useEffect, useState } from 'react';
 import { ProductService } from '../../../../service/ProductService';
+import { Column } from '../../../lib/column/Column';
+import { DataTable } from '../../../lib/datatable/DataTable';
+import { InputNumber } from '../../../lib/inputnumber/InputNumber';
+import { InputText } from '../../../lib/inputtext/InputText';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
-import { InputText } from '../../../lib/inputtext/InputText';
-import { InputNumber } from '../../../lib/inputnumber/InputNumber';
 
 export function CellEditWithSortAndFilterDoc(props) {
     const [products, setProducts] = useState(null);
@@ -17,10 +17,8 @@ export function CellEditWithSortAndFilterDoc(props) {
         { field: 'price', header: 'Price' }
     ];
 
-    const productService = new ProductService();
-
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data));
+        ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const isPositiveInteger = (val) => {
@@ -88,16 +86,16 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
 const CellEditWithSortAndFilterDoc = () => {
     const [products, setProducts] = useState(null);
 
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data));
+        ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const isPositiveInteger = (val) => {
@@ -170,16 +168,16 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
 const CellEditWithSortAndFilterDoc = () => {
     const [products, setProducts] = useState(null);
 
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data));
+        ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const isPositiveInteger = (val) => {
@@ -245,6 +243,32 @@ const CellEditWithSortAndFilterDoc = () => {
         </div>
     );
 }
+        `,
+        extFiles: {
+            'DatatableDemo.css': `
+/* DataTableDemo.css */
+
+.datatable-editing-demo .editable-cells-table td.p-cell-editing {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+            `
+        },
+        data: `
+/* ProductService */        
+{
+    id: '1000',
+    code: 'f230fh0g3',
+    name: 'Bamboo Watch',
+    description: 'Product Description',
+    image: 'bamboo-watch.jpg',
+    price: 65,
+    category: 'Accessories',
+    quantity: 24,
+    inventoryStatus: 'INSTOCK',
+    rating: 5
+},
+...
         `
     };
 
@@ -262,7 +286,7 @@ const CellEditWithSortAndFilterDoc = () => {
                     })}
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

@@ -31,13 +31,13 @@ export function VirtualScrollDoc(props) {
     virtualScrollerOptions={{ itemSize: 38 }} field="label" dropdown onChange={(e) => setSelectedItem(e.value)} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { AutoComplete } from "primereact/autocomplete";
 
 export default function VirtualScrollerDemo() {
     const [selectedItem, setSelectedItem] = useState(null);
     const [filteredItems, setFilteredItems] = useState(null);
-    const items = Array.from({ length: 100000 }).map((_, i) => ({ label: \\\`Item #\${i}\\\`, value: i }));
+    const items = Array.from({ length: 100000 }).map((_, i) => ({ label: \`Item #\${i}\`, value: i }));
 
     const searchItems = (event) => {
         //in a real application, make a request to a remote url with the query and return filtered results, for demo purposes we filter at client side
@@ -61,7 +61,7 @@ export default function VirtualScrollerDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
 
 interface Item {
@@ -72,7 +72,7 @@ interface Item {
 export default function VirtualScrollerDemo() {
     const [selectedItem, setSelectedItem] = useState<Item>(null);
     const [filteredItems, setFilteredItems] = useState<Item[]>(null);
-    const items = Array.from({ length: 100000 }).map((_, i) => ({ label: \\\`Item #\${i}\\\`, value: i }));
+    const items = Array.from({ length: 100000 }).map((_, i) => ({ label: \`Item #\${i}\`, value: i }));
 
     const searchItems = (event: AutoCompleteCompleteMethodParams) => {
         //in a real application, make a request to a remote url with the query and return filtered results, for demo purposes we filter at client side

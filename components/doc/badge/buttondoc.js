@@ -6,20 +6,27 @@ import { DocSectionText } from '../common/docsectiontext';
 export function ButtonDoc(props) {
     const code = {
         basic: `
-<Button type="button" label="Emails" className="mr-2"><Badge value="8" ></Badge></Button>
-<Button type="button" label="Messages" icon="pi pi-users" className="p-button-warning"><Badge value="8" severity="danger" ></Badge></Button>
+<Button type="button" label="Emails">
+    <Badge value="8"></Badge>
+</Button>
+<Button type="button" label="Messages" icon="pi pi-users" className="p-button-warning">
+    <Badge value="8" severity="danger"></Badge>
+</Button>
             `,
         javascript: `
 import React from 'react';
 import { Button } from 'primereact/button';
 import { Badge } from 'primereact/badge';
 
-export const ButtonDoc = () => {
-
+export default function ButtonDemo() {
     return (
-        <div className="card flex justify-content-center">
-            <Button type="button" label="Emails" className="mr-2"><Badge value="8" ></Badge></Button>
-            <Button type="button" label="Messages" icon="pi pi-users" className="p-button-warning"><Badge value="8" severity="danger" ></Badge></Button>
+        <div className="card flex flex-wrap justify-content-center gap-2">
+            <Button type="button" label="Emails">
+                <Badge value="8"></Badge>
+            </Button>
+            <Button type="button" label="Messages" icon="pi pi-users" className="p-button-warning">
+                <Badge value="8" severity="danger"></Badge>
+            </Button>
         </div>
     );
 }
@@ -29,12 +36,15 @@ import React from 'react';
 import { Button } from 'primereact/button';
 import { Badge } from 'primereact/badge';
 
-export const ButtonDoc = () => {
-
+export default function ButtonDemo() {
     return (
-        <div className="card flex justify-content-center">
-            <Button type="button" label="Emails" className="mr-2"><Badge value="8" ></Badge></Button>
-            <Button type="button" label="Messages" icon="pi pi-users" className="p-button-warning"><Badge value="8" severity="danger" ></Badge></Button>
+        <div className="card flex flex-wrap justify-content-center gap-2">
+            <Button type="button" label="Emails">
+                <Badge value="8"></Badge>
+            </Button>
+            <Button type="button" label="Messages" icon="pi pi-users" className="p-button-warning">
+                <Badge value="8" severity="danger"></Badge>
+            </Button>
         </div>
     );
 }
@@ -44,10 +54,10 @@ export const ButtonDoc = () => {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Badge - Button Demo Content.</p>
+                <p>Buttons have built-in support for badges to display a badge inline.</p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <Button type="button" label="Emails" className="mr-2">
+            <div className="card flex flex-wrap justify-content-center gap-2">
+                <Button type="button" label="Emails">
                     <Badge value="8"></Badge>
                 </Button>
                 <Button type="button" label="Messages" icon="pi pi-users" className="p-button-warning">

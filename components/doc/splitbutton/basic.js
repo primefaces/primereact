@@ -47,7 +47,7 @@ export function BasicDoc(props) {
 <SplitButton label="Save" icon="pi pi-plus"  onClick={save} model={items}></SplitButton>
         `,
         javascript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { SplitButton } from 'primereact/splitbutton';
 import { Toast } from 'primereact/toast';
 
@@ -88,7 +88,7 @@ export default function BasicDoc() {
     }
 
     return (
-        <div>
+        <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
             <SplitButton label="Save" icon="pi pi-plus"  onClick={save} model={items}></SplitButton>
         </div>
@@ -96,7 +96,7 @@ export default function BasicDoc() {
 }
         `,
         typescript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { SplitButton } from 'primereact/splitbutton';
 import { Toast } from 'primereact/toast';
 
@@ -137,7 +137,7 @@ export default function BasicDoc() {
     }
 
     return (
-        <div>
+        <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
             <SplitButton label="Save" icon="pi pi-plus"  onClick={save} model={items}></SplitButton>
         </div>
@@ -153,7 +153,7 @@ export default function BasicDoc() {
                     SplitButton has a default command button and a collection of additional options defined by the <i>model</i> property.
                 </p>
             </DocSectionText>
-            <div className="card">
+            <div className="card flex justify-content-center">
                 <Toast ref={toast}></Toast>
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items}></SplitButton>
             </div>

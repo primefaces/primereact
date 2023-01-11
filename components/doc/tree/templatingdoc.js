@@ -43,6 +43,7 @@ export function TemplatingDoc(props) {
 <Tree value={nodes} nodeTemplate={nodeTemplate} />
         `,
         javascript: `
+import React from 'react'; 
 import { Tree } from 'primereact/tree';
 
 export default function TemplatingDoc() {
@@ -91,6 +92,7 @@ export default function TemplatingDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Tree } from 'primereact/tree';
 
 export default function TemplatingDoc() {

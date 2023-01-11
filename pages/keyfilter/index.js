@@ -8,9 +8,10 @@ import { MoneyDoc } from '../../components/doc/keyfilter/moneydoc';
 import { HexDoc } from '../../components/doc/keyfilter/hexdoc';
 import { AlphabeticDoc } from '../../components/doc/keyfilter/alphabeticdoc';
 import { AlphanumbericDoc } from '../../components/doc/keyfilter/alphanumberdoc';
-import { BlockDoc } from '../../components/doc/keyfilter/blockdoc';
-import { BlockSpaceDoc } from '../../components/doc/keyfilter/blockspacedoc';
+import { RegexDoc } from '../../components/doc/keyfilter/regexdoc';
 import { ApiDoc } from '../../components/doc/keyfilter/apidoc';
+import { AccessibilityDoc } from '../../components/doc/keyfilter/accessibilitydoc';
+
 import { ImportDoc } from '../../components/doc/keyfilter/importdoc';
 
 const KeyFilterDemo = () => {
@@ -51,14 +52,14 @@ const KeyFilterDemo = () => {
             component: AlphanumbericDoc
         },
         {
-            id: 'block',
-            label: 'Block < > * !',
-            component: BlockDoc
+            id: 'regex',
+            label: 'Regex',
+            component: RegexDoc
         },
         {
-            id: 'blockspace',
-            label: 'Block space key',
-            component: BlockSpaceDoc
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         },
         {
             id: 'api',
@@ -72,10 +73,6 @@ const KeyFilterDemo = () => {
                 {
                     id: 'custom',
                     label: 'Custom Filter'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

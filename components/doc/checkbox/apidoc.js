@@ -47,7 +47,7 @@ export function ApiDoc(props) {
                             </tr>
                             <tr>
                                 <td>checked</td>
-                                <td>boolean</td>
+                                <td>any</td>
                                 <td>false</td>
                                 <td>Specifies whether a checkbox should be checked or not.</td>
                             </tr>
@@ -155,82 +155,6 @@ export function ApiDoc(props) {
                         </tbody>
                     </table>
                 </div>
-            </DocSubSection>
-
-            <DocSubSection id="styling" label="Styling">
-                <p>
-                    Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.
-                </p>
-                <div className="doc-tablewrapper">
-                    <table className="doc-table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Element</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>p-checkbox</td>
-                                <td>Container element</td>
-                            </tr>
-                            <tr>
-                                <td>p-checkbox-box</td>
-                                <td>Container of icon.</td>
-                            </tr>
-                            <tr>
-                                <td>p-checkbox-icon</td>
-                                <td>Icon element.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </DocSubSection>
-
-            <DocSubSection id="accessibility" label="Accessibility">
-                <DevelopmentSection>
-                    <h4>Screen Reader</h4>
-                    <p>
-                        Checkbox component uses a hidden native checkbox element internally that is only visible to screen readers. Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or using{' '}
-                        <i>aria-labelledby</i>, <i>aria-label</i> props.
-                    </p>
-                    <CodeHighlight>
-                        {`
-<label htmlFor="chkbox1">Remember Me</label>
-<Checkbox inputId="chkbox1" />
-
-<span id="chkbox2">Remember Me</span>
-<Checkbox aria-labelledby="chkbox2" />
-
-<Checkbox aria-label="Remember Me" />
-`}
-                    </CodeHighlight>
-                    <h4>Keyboard Support</h4>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <i>tab</i>
-                                    </td>
-                                    <td>Moves focus to the checkbox.</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <i>space</i>
-                                    </td>
-                                    <td>Toggles the checked state.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </DevelopmentSection>
             </DocSubSection>
         </>
     );

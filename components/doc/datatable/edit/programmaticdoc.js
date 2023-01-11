@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react';
-import { DataTable } from '../../../lib/datatable/DataTable';
-import { Column } from '../../../lib/column/Column';
+import { useEffect, useState } from 'react';
 import { ProductService } from '../../../../service/ProductService';
+import { Button } from '../../../lib/button/Button';
+import { Column } from '../../../lib/column/Column';
+import { DataTable } from '../../../lib/datatable/DataTable';
+import { Dropdown } from '../../../lib/dropdown/Dropdown';
+import { InputNumber } from '../../../lib/inputnumber/InputNumber';
+import { InputText } from '../../../lib/inputtext/InputText';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
-import { InputText } from '../../../lib/inputtext/InputText';
-import { InputNumber } from '../../../lib/inputnumber/InputNumber';
-import { Dropdown } from '../../../lib/dropdown/Dropdown';
-import { Button } from '../../../lib/button/Button';
 
 export function ProgrammaticDoc(props) {
     const [products, setProducts] = useState(null);
@@ -19,10 +19,8 @@ export function ProgrammaticDoc(props) {
         { label: 'Out of Stock', value: 'OUTOFSTOCK' }
     ];
 
-    const productService = new ProductService();
-
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data));
+        ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const getStatusLabel = (status) => {
@@ -110,17 +108,17 @@ import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
 const ProgrammaticDoc = () => {
     const [products, setProducts] = useState(null);
     const [editingRows, setEditingRows] = useState({});
 
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data));
+        ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const statuses = [
@@ -219,17 +217,17 @@ import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
 const ProgrammaticDoc = () => {
     const [products, setProducts] = useState(null);
     const [editingRows, setEditingRows] = useState({});
 
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data));
+        ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const statuses = [
@@ -318,6 +316,32 @@ const ProgrammaticDoc = () => {
         </div>
     );
 }
+        `,
+        extFiles: {
+            'DatatableDemo.css': `
+/* DataTableDemo.css */
+
+.datatable-editing-demo .editable-cells-table td.p-cell-editing {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+            `
+        },
+        data: `
+/* ProductService */        
+{
+    id: '1000',
+    code: 'f230fh0g3',
+    name: 'Bamboo Watch',
+    description: 'Product Description',
+    image: 'bamboo-watch.jpg',
+    price: 65,
+    category: 'Accessories',
+    quantity: 24,
+    inventoryStatus: 'INSTOCK',
+    rating: 5
+},
+...
         `
     };
 
@@ -343,7 +367,7 @@ const ProgrammaticDoc = () => {
                     </DataTable>
                 </div>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

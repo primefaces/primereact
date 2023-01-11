@@ -3,11 +3,14 @@ import React from 'react';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/chip/apidoc';
+import { AccessibilityDoc } from '../../components/doc/chip/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/chip/styledoc';
 import { ImportDoc } from '../../components/doc/chip/importdoc';
 import { BasicDoc } from '../../components/doc/chip/basicdoc';
 import { IconDoc } from '../../components/doc/chip/icondoc';
 import { ImageDoc } from '../../components/doc/chip/imagedoc';
-import { StylingDoc } from '../../components/doc/chip/stylingdoc';
+import { StyleDoc } from '../../components/doc/chip/styledoc';
+import { TemplateDoc } from '../../components/doc/chip/templatedoc';
 import { DocActions } from '../../components/doc/common/docactions';
 
 const ChipDemo = () => {
@@ -33,9 +36,24 @@ const ChipDemo = () => {
             component: ImageDoc
         },
         {
-            id: 'styling',
+            id: 'stylingdoc',
             label: 'Styling',
             component: StylingDoc
+        },
+        {
+            id: 'templatedoc',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         },
         {
             id: 'api',
@@ -43,24 +61,12 @@ const ChipDemo = () => {
             component: ApiDoc,
             children: [
                 {
-                    id: 'templating',
-                    label: 'Templating'
-                },
-                {
                     id: 'properties',
                     label: 'Properties'
                 },
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

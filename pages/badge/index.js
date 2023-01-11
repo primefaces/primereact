@@ -3,11 +3,14 @@ import React from 'react';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/badge/apidoc';
+import { AccessibilityDoc } from '../../components/doc/badge/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/badge/styledoc';
 import { ImportDoc } from '../../components/doc/badge/importdoc';
-import { NumbersDoc } from '../../components/doc/badge/numbersdoc';
+import { BasicDoc } from '../../components/doc/badge/basicdoc';
+import { SeverityDoc } from '../../components/doc/badge/severitydoc';
 import { ButtonDoc } from '../../components/doc/badge/buttondoc';
-import { PositionedDoc } from '../../components/doc/badge/positioneddoc';
-import { SizesDoc } from '../../components/doc/badge/sizesdoc';
+import { PositionDoc } from '../../components/doc/badge/positiondoc';
+import { SizeDoc } from '../../components/doc/badge/sizedoc';
 import { DocActions } from '../../components/doc/common/docactions';
 
 const BadgeDemo = () => {
@@ -18,14 +21,24 @@ const BadgeDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'numbers',
-            label: 'Numbers',
-            component: NumbersDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
-            id: 'sizes',
-            label: 'Sizes',
-            component: SizesDoc
+            id: 'severity',
+            label: 'Severity',
+            component: SeverityDoc
+        },
+        {
+            id: 'size',
+            label: 'Size',
+            component: SizeDoc
+        },
+        {
+            id: 'positioned',
+            label: 'Position',
+            component: PositionDoc
         },
         {
             id: 'button',
@@ -33,9 +46,14 @@ const BadgeDemo = () => {
             component: ButtonDoc
         },
         {
-            id: 'positioned',
-            label: 'Positioned',
-            component: PositionedDoc
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         },
         {
             id: 'api',
@@ -49,14 +67,6 @@ const BadgeDemo = () => {
                 {
                     id: 'properties',
                     label: 'Properties'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

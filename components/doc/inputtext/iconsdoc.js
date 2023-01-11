@@ -16,6 +16,7 @@ export function IconsDoc(props) {
 </span>
         `,
         javascript: `
+import React from 'react'; 
 import { InputText } from "primereact/inputtext";
 
 export default function IconsDemo() {
@@ -35,6 +36,7 @@ export default function IconsDemo() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { InputText } from "primereact/inputtext";
 
 export default function IconsDemo() {

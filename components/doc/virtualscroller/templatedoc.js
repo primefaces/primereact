@@ -10,7 +10,7 @@ export function TemplateDoc(props) {
 
     const itemTemplate = (item, options) => {
         const { index, count, first, last, even, odd } = options;
-        const className = classNames('custom-scroll-item scroll-item', {
+        const className = classNames('flex flex-column', {
             odd: odd
         });
 
@@ -28,7 +28,7 @@ export function TemplateDoc(props) {
     };
 
     const loadingTemplate = (options) => {
-        const className = classNames('custom-scroll-item scroll-item', {
+        const className = classNames('flex flex-column', {
             odd: options.odd
         });
 
@@ -64,17 +64,18 @@ export function TemplateDoc(props) {
 <VirtualScroller items={templateItems} itemSize={25 * 7} itemTemplate={itemTemplate} showLoader delay={250} loadingTemplate={loadingTemplate} />
         `,
         javascript: `
-import { useState } 'react';
+import React, { useState } from 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { Skeleton } from 'primereact/skeleton';
 import { classNames } from 'primereact/utils';
+import './VirtualScrollerDemo.css';
 
 export default function TemplateDoc() {
     const [templateItems] = useState(Array.from({ length: 10000 }).map((_, i) => \`Item #\${i}\`));
 
     const itemTemplate = (item, options) => {
         const { index, count, first, last, even, odd } = options;
-        const className = classNames('custom-scroll-item scroll-item', {
+        const className = classNames('flex flex-column', {
             odd: odd
         });
 
@@ -92,7 +93,7 @@ export default function TemplateDoc() {
     };
 
     const loadingTemplate = (options) => {
-        const className = classNames('custom-scroll-item scroll-item', {
+        const className = classNames('flex flex-column', {
             odd: options.odd
         });
 
@@ -124,22 +125,25 @@ export default function TemplateDoc() {
     };
 
     return ( 
+        <div className="card virtualscroller-demo">
             <VirtualScroller items={templateItems} itemSize={25 * 7} itemTemplate={itemTemplate} showLoader delay={250} loadingTemplate={loadingTemplate} />
-    );
+        </div>
+        );
 }
         `,
         typescript: `
-import { useState } 'react';
+import React, { useState } from 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { Skeleton } from 'primereact/skeleton';
 import { classNames } from 'primereact/utils';
+import './VirtualScrollerDemo.css';
 
 export default function TemplateDoc() {
     const [templateItems] = useState(Array.from({ length: 10000 }).map((_, i) => \`Item #\${i}\`));
 
     const itemTemplate = (item, options) => {
         const { index, count, first, last, even, odd } = options;
-        const className = classNames('custom-scroll-item scroll-item', {
+        const className = classNames('flex flex-column', {
             odd: odd
         });
 
@@ -157,7 +161,7 @@ export default function TemplateDoc() {
     };
 
     const loadingTemplate = (options) => {
-        const className = classNames('custom-scroll-item scroll-item', {
+        const className = classNames('flex flex-column', {
             odd: options.odd
         });
 
@@ -189,10 +193,32 @@ export default function TemplateDoc() {
     };
 
     return (
+        <div className="card virtualscroller-demo">
             <VirtualScroller items={templateItems} itemSize={25 * 7} itemTemplate={itemTemplate} showLoader delay={250} loadingTemplate={loadingTemplate} />
-    )
+        </div>
+        )
 }
-        `
+        `,
+        extFiles: {
+            'VirtualScrollerDemo.css': `
+/* VirtualScrollerDemo.css */
+
+.virtualscroller-demo .odd {
+    background-color: var(--surface-b);
+}
+
+.virtualscroller-demo .p-virtualscroller {
+    height: 200px;
+    width: 200px;
+    border: 1px solid var(--surface-d);
+}
+
+.virtualscroller-demo .p-horizontal-scroll .p-virtualscroller-content {
+    display: flex;
+    flex-direction: row;
+}
+    `
+        }
     };
 
     return (

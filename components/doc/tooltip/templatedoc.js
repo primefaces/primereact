@@ -13,6 +13,7 @@ export function TemplateDoc(props) {
 <Button className="custom-tooltip-btn" type="button" label="Save" icon="pi pi-check" />
         `,
         javascript: `
+import React from 'react'; 
 import { Tooltip } from 'primereact/tooltip';
 import { Button } from 'primereact/button';
 
@@ -30,6 +31,7 @@ export default function TemplateDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Tooltip } from 'primereact/tooltip';
 import { Button } from 'primereact/button';
 

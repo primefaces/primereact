@@ -8,29 +8,33 @@ export function BasicDoc(props) {
 
     const code = {
         basic: `
-<Password value={value} onChange={(e) => setValue(e.target.value)} feedback={false} />
+<Password value={value} onChange={(e) => setValue(e.target.value)} inputClassName="w-15rem" feedback={false} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Password } from 'primereact/password';
 
 export default function BasicDemo() {
     const [value, setValue] = useState('');
 
     return (
-        <Password value={value} onChange={(e) => setValue(e.target.value)} feedback={false} />
+        <div className="card flex justify-content-center">
+            <Password value={value} onChange={(e) => setValue(e.target.value)} inputClassName="w-15rem" feedback={false} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Password } from 'primereact/password';
 
 export default function BasicDemo() {
     const [value, setValue] = useState<string>('');
 
     return (
-        <Password value={value} onChange={(e : ChangeEventHandler) => setValue(e.target.value)} feedback={false} />
+        <div className="card flex justify-content-center">
+            <Password value={value} onChange={(e : ChangeEventHandler) => setValue(e.target.value)} inputClassName="w-15rem" feedback={false} />
+        </div>
     )
 }
         `
@@ -44,7 +48,7 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Password value={value} onChange={(e) => setValue(e.target.value)} feedback={false} />
+                <Password value={value} onChange={(e) => setValue(e.target.value)} inputClassName="w-15rem" feedback={false} />
             </div>
             <DocSectionCode code={code} />
         </>

@@ -4,6 +4,8 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ApiDoc } from '../../components/doc/inputtext/apidoc';
+import { AccessibilityDoc } from '../../components/doc/inputtext/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/inputtext/styledoc';
 import { BasicDoc } from '../../components/doc/inputtext/basicdoc';
 import { DisabledDoc } from '../../components/doc/inputtext/disableddoc';
 import { FloatLabelDoc } from '../../components/doc/inputtext/floatlabeldoc';
@@ -13,7 +15,8 @@ import { ImportDoc } from '../../components/doc/inputtext/importdoc';
 import { InvalidDoc } from '../../components/doc/inputtext/invaliddoc';
 import { KeyFilterDoc } from '../../components/doc/inputtext/keyfilterdoc';
 import { SizesDoc } from '../../components/doc/inputtext/sizesdoc';
-import { ValidationDoc } from '../../components/doc/inputtext/validationdoc';
+import { FormikDoc } from '../../components/doc/inputtext/validation/formikdoc';
+import { HookFormDoc } from '../../components/doc/inputtext/validation/hookformdoc';
 
 const InputTextDemo = () => {
     const docs = [
@@ -65,24 +68,38 @@ const InputTextDemo = () => {
         {
             id: 'validation',
             label: 'Validation',
-            component: ValidationDoc
+            description: 'Validate using popular React validation libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
         },
         {
-            id: 'apidoc',
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
+            id: 'api',
             label: 'API',
             component: ApiDoc,
             children: [
                 {
                     id: 'properties',
                     label: 'Properties'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

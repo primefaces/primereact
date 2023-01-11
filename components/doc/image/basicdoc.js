@@ -8,25 +8,29 @@ export function BasicDoc(props) {
 
     const code = {
         basic: `
-<Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="250" />
+<Image src="https://www.primefaces.org/cdn/images/placeholder.png" alt="Image" width="250" />
         `,
         javascript: `
+import React from 'react'; 
 import { Image } from 'primereact/image';
 
-export default function BasicDoc() {
-
+export default function BasicDemo() {
     return (
-        <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="250" />
+        <div className="card flex justify-content-center">
+            <Image src="https://www.primefaces.org/cdn/images/placeholder.png" alt="Image" width="250" />
+        </div>
     )
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Image } from 'primereact/image';
 
-export default function BasicDoc() {
-
+export default function BasicDemo() {
     return (
-        <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="250" />
+        <div className="card flex justify-content-center">
+            <Image src="https://www.primefaces.org/cdn/images/placeholder.png alt="Image" width="250" />
+        </div>
     )
 }
         `
@@ -36,7 +40,7 @@ export default function BasicDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Image is used as the native <i>img</i> element and supports all properties that the native element has.
+                    Image is used similar to the standard <i>img</i> element.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">

@@ -82,6 +82,12 @@ const showResponse = (response) => {
                                 <td>en</td>
                                 <td>Language of the widget.</td>
                             </tr>
+                            <tr>
+                                <td>sourceUrl</td>
+                                <td>string</td>
+                                <td>https://www.google.com/recaptcha/api.js?render=explicit</td>
+                                <td>Source URL of the Captcha as some countries do not allow Google access.</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -135,18 +141,6 @@ const showResponse = (response) => {
                         </tbody>
                     </table>
                 </div>
-            </DocSubSection>
-
-            <DocSubSection id="accessibility" label="Accessibility">
-                <DevelopmentSection>
-                    <p>
-                        Refer to the{' '}
-                        <a alt="Recaptcha Accessibility " href="https://support.google.com/recaptcha/answer/6175971?hl=en">
-                            Recaptcha Accessibility
-                        </a>{' '}
-                        documentation for more information.
-                    </p>
-                </DevelopmentSection>
             </DocSubSection>
         </>
     );

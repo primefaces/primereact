@@ -91,7 +91,7 @@ export function MultiAxisLineDoc(props) {
 <Chart type="line" data={chartData} options={chartOptions} />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
 export default function MultiAxisLineDoc() {
@@ -178,12 +178,14 @@ export default function MultiAxisLineDoc() {
     }, []);
 
     return (
-        <Chart type="line" data={chartData} options={chartOptions} />
+        <div className="card">
+            <Chart type="line" data={chartData} options={chartOptions} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
 export default function MultiAxisLineDoc() {
@@ -270,7 +272,9 @@ export default function MultiAxisLineDoc() {
     }, []);
 
     return (
-        <Chart type="line" data={chartData} options={chartOptions} />
+        <div className="card">
+            <Chart type="line" data={chartData} options={chartOptions} />
+        </div>
     )
 }
         `
@@ -284,7 +288,7 @@ export default function MultiAxisLineDoc() {
             <div className="card">
                 <Chart type="line" data={chartData} options={chartOptions} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} dependencies={{ 'chart.js': '3.9.1' }} />
         </>
     );
 }

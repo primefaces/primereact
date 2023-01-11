@@ -11,8 +11,6 @@ export function TemplateDoc(props) {
     const [filteredCountries, setFilteredCountries] = useState(null);
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
-    const countryservice = new CountryService();
-
     const search = (event) => {
         // Timeout to emulate a network connection
         setTimeout(() => {
@@ -46,16 +44,7 @@ export function TemplateDoc(props) {
     };
 
     useEffect(() => {
-        countryservice.getCountries().then((data) => setCountries(data));
-        /*
-            Countries is an array of objects with name, code pairs;
-            [
-                ...
-                {"name": "United Kingdom", "code": "UK"},
-                {"name": "United States", "code": "USA"},
-                ...
-            ]
-        */
+        CountryService.getCountries().then((data) => setCountries(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const code = {
@@ -63,15 +52,16 @@ export function TemplateDoc(props) {
 <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
         `,
         javascript: `
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AutoComplete } from "primereact/autocomplete";
+import { CountryService } from './service/CountryService';
 
 export default function TemplateDemo() {
     const [countries, setCountries] = useState([]);
     const [selectedCountry, setSelectedCountry] = useState(null);
     const [filteredCountries, setFilteredCountries] = useState(null);
 
-    const countryservice = new CountryService();
+    
     const search = (event) => {
         // Timeout to emulate a network connection
         setTimeout(() => {
@@ -106,7 +96,7 @@ export default function TemplateDemo() {
     };
 
     useEffect(() => {
-        countryservice.getCountries().then((data) => setCountries(data));
+        CountryService.getCountries().then((data) => setCountries(data));
         /*
             Countries is an array of objects with a name and a code;
             [
@@ -124,8 +114,9 @@ export default function TemplateDemo() {
 }
         `,
         typescript: `
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
+import { CountryService } from './service/CountryService';
 
 interface Country {
     name: string;
@@ -137,7 +128,7 @@ export default function TemplateDemo() {
     const [selectedCountry, setSelectedCountry] = useState<Country>(null);
     const [filteredCountries, setFilteredCountries] = useState<Country[]>(null);
 
-    const countryservice = new CountryService();
+    
     const search = (event: AutoCompleteCompleteMethodParams) => {
         // Timeout to emulate a network connection
         setTimeout(() => {
@@ -172,7 +163,7 @@ export default function TemplateDemo() {
     };
 
     useEffect(() => {
-        countryservice.getCountries().then((data) => setCountries(data));
+        CountryService.getCountries().then((data) => setCountries(data));
         /*
             Countries is an array of objects with a name and a code;
             [
@@ -188,7 +179,14 @@ export default function TemplateDemo() {
         <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e: AutoCompleteChangeParams) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
     )
 }
-        `
+        `,
+        data: `
+ /* CountryService */
+
+{"name": "United Kingdom", "code": "UK"},
+{"name": "United States", "code": "USA"},
+...
+                `
     };
 
     return (
@@ -202,7 +200,7 @@ export default function TemplateDemo() {
             <div className="card flex justify-content-center">
                 <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CountryService']} />
         </>
     );
 }

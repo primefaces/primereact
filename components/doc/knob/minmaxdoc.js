@@ -11,7 +11,7 @@ export function MinMaxDoc(props) {
 <Knob value={value} min={-50} max={50} onChange={(e) =>  setValue(e.value)}/>
         `,
         javascript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Knob } from 'primereact/knob';
 
 export default function MinMaxDoc() {
@@ -23,7 +23,7 @@ export default function MinMaxDoc() {
 }
         `,
         typescript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Knob, KnobChangeParams } from 'primereact/knob';
 
 export default function MinMaxDoc() {

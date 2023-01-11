@@ -8,7 +8,7 @@ export function DisabledDoc(props) {
 <Rating value={8} disabled stars={10} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Rating } from "primereact/rating";
 
 export default function DisabledDoc() {
@@ -19,7 +19,7 @@ export default function DisabledDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Rating } from "primereact/rating";
 
 export default function DisabledDoc() {

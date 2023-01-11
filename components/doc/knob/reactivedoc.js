@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button } from '../../lib/button/button';
+import { Button } from '../../lib/button/Button';
 import { Knob } from '../../lib/knob/Knob';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
@@ -32,7 +32,7 @@ export function ReactiveDoc(props) {
 <Button label="Decrement" onClick={decrement} disabled={disabledDecrementBtn} />
         `,
         javascript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Knob } from 'primereact/knob';
 import { Button } from 'primereact/button';
 
@@ -67,7 +67,7 @@ export default function ReactiveDoc() {
 }
         `,
         typescript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Knob } from 'primereact/knob';
 import { Button } from 'primereact/button';
 

@@ -2,10 +2,12 @@ import Head from 'next/head';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
-import { UsingConfirmPopupDoc } from '../../components/doc/confirmpopup/usingdoc';
+import { DeclarativeDoc } from '../../components/doc/confirmpopup/declarativedoc';
 import { BasicDoc } from '../../components/doc/confirmpopup/basicdoc';
 import { ImportDoc } from '../../components/doc/confirmpopup/importdoc';
 import { ApiDoc } from '../../components/doc/confirmpopup/apidoc';
+import { AccessibilityDoc } from '../../components/doc/confirmpopup/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/confirmpopup/styledoc';
 
 const ConfirmPopupDemo = () => {
     const docs = [
@@ -20,9 +22,19 @@ const ConfirmPopupDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'using',
-            label: 'Using ConfirmPopup tag',
-            component: UsingConfirmPopupDoc
+            id: 'declarative',
+            label: 'Declarative',
+            component: DeclarativeDoc
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         },
         {
             id: 'api',
@@ -36,14 +48,6 @@ const ConfirmPopupDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

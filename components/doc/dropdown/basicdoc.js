@@ -19,13 +19,14 @@ export function BasicDoc(props) {
 
     const code = {
         basic: `
-<Dropdown value={selectedCity1} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Select a City" />
+<Dropdown value={selectedCity} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Select a City" />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Dropdown } from 'primereact/dropdown';
+import './DropdownDemo.css';
 
-export default function BasicDemo() {
+export default function BasicDoc() {
     const [selectedCity, setSelectedCity] = useState(null);
     const cities = [
         { name: 'New York', code: 'NY' },
@@ -40,15 +41,18 @@ export default function BasicDemo() {
     }
 
     return (
-        <Dropdown value={selectedCity1} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Select a City" />
+        <div className="card flex justify-content-center dropdown-demo">
+            <Dropdown value={selectedCity} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Select a City" />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Dropdown, DropdownChangeParams } from 'primereact/dropdown';
+import './DropdownDemo.css';
 
-export default function BasicDemo() {
+export default function BasicDoc() {
     const [selectedCity, setSelectedCity] = useState<any | null>(null);
     const cities = [
         { name: 'New York', code: 'NY' },
@@ -63,10 +67,21 @@ export default function BasicDemo() {
     }
 
     return (
-        <Dropdown value={selectedCity1} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Select a City" />
+        <div className="card flex justify-content-center dropdown-demo">
+            <Dropdown value={selectedCity} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Select a City" />
+        </div>
     )
 }
+        `,
+        extFiles: {
+            'DropdownDemo.css': `
+/* DropdownDemo.css */
+
+.dropdown-demo .p-dropdown {
+    width: 14rem;
+}
         `
+        }
     };
 
     return (
@@ -78,7 +93,7 @@ export default function BasicDemo() {
                     addition, options can be simple primitive values such as a string array, in this case no optionLabel or optionValue is necessary.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
+            <div className="card flex justify-content-center dropdown-demo">
                 <Dropdown value={selectedCity} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Select a City" />
             </div>
             <DocSectionCode code={code} />

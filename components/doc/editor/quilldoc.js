@@ -15,7 +15,7 @@ npm install quill
                     Editor uses <a href="https://quilljs.com/">QuillJS</a> editor so it needs to be installed as a dependency.
                 </p>
             </DocSectionText>
-            <DocSectionCode code={code} hideToggleCode hideCodeSandbox />
+            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
         </>
     );
 }

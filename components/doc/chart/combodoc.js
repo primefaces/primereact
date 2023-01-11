@@ -82,7 +82,7 @@ export function ComboDoc(props) {
 <Chart type="line" data={chartData} options={chartOptions} />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
 export default function ComboDoc() {
@@ -160,12 +160,14 @@ export default function ComboDoc() {
     }, []);
     
     return (
-        <Chart type="line" data={chartData} options={chartOptions} />
+        <div className="card">
+            <Chart type="line" data={chartData} options={chartOptions} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
 export default function ComboDoc() {
@@ -243,7 +245,9 @@ export default function ComboDoc() {
     }, []);
 
     return (
-        <Chart type="line" data={chartData} options={chartOptions} />
+        <div className="card">
+            <Chart type="line" data={chartData} options={chartOptions} />
+        </div>
     )
 }
         `
@@ -257,7 +261,7 @@ export default function ComboDoc() {
             <div className="card">
                 <Chart type="bar" data={chartData} options={chartOptions} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} dependencies={{ 'chart.js': '3.9.1' }} />
         </>
     );
 }

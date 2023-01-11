@@ -9,8 +9,6 @@ export function ObjectsDoc(props) {
     const [selectedCountry, setSelectedCountry] = useState(null);
     const [filteredCountries, setFilteredCountries] = useState(null);
 
-    const countryservice = new CountryService();
-
     const search = (event) => {
         // Timeout to emulate a network connection
         setTimeout(() => {
@@ -29,7 +27,7 @@ export function ObjectsDoc(props) {
     };
 
     useEffect(() => {
-        countryservice.getCountries().then((data) => setCountries(data));
+        CountryService.getCountries().then((data) => setCountries(data));
         /*
             Countries is an array of objects with name, code pairs;
             [
@@ -46,15 +44,16 @@ export function ObjectsDoc(props) {
 <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} />
         `,
         javascript: `
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AutoComplete } from "primereact/autocomplete";
+import { CountryService } from './service/CountryService';
 
 export default function ObjectDemo() {
     const [countries, setCountries] = useState([]);
     const [selectedCountry, setSelectedCountry] = useState(null);
     const [filteredCountries, setFilteredCountries] = useState(null);
 
-    const countryservice = new CountryService();
+    
     const search = (event) => {
         // Timeout to emulate a network connection
         setTimeout(() => {
@@ -74,7 +73,7 @@ export default function ObjectDemo() {
     }
 
     useEffect(() => {
-        countryservice.getCountries().then((data) => setCountries(data));
+        CountryService.getCountries().then((data) => setCountries(data));
         /*
             Countries is an array of objects with a name and a code;
             [
@@ -92,8 +91,9 @@ export default function ObjectDemo() {
 }
         `,
         typescript: `
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
+import { CountryService } from './service/CountryService';
 
 interface Country {
     name: string;
@@ -105,7 +105,7 @@ export default function ObjectDemo() {
     const [selectedCountry, setSelectedCountry] = useState<Country>(null);
     const [filteredCountries, setFilteredCountries] = useState<Country[]>(null);
 
-    const countryservice = new CountryService();
+    
     const search = (event: AutoCompleteCompleteMethodParams) => {
         // Timeout to emulate a network connection
         setTimeout(() => {
@@ -125,7 +125,7 @@ export default function ObjectDemo() {
     }
 
     useEffect(() => {
-        countryservice.getCountries().then((data) => setCountries(data));
+        CountryService.getCountries().then((data) => setCountries(data));
         /*
             Countries is an array of objects with a name and a code;
             [
@@ -141,7 +141,14 @@ export default function ObjectDemo() {
         <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e: AutoCompleteChangeParams) => setSelectedCountry(e.value)} />
     )
 }
-        `
+        `,
+        data: `
+ /* CountryService */
+
+{"name": "United Kingdom", "code": "UK"},
+{"name": "United States", "code": "USA"},
+...
+                `
     };
 
     return (
@@ -155,7 +162,7 @@ export default function ObjectDemo() {
             <div className="card flex justify-content-center">
                 <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CountryService']} />
         </>
     );
 }

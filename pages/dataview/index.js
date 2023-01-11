@@ -5,6 +5,8 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { ImportDoc } from '../../components/doc/dataview/importdoc';
 import { BasicDoc } from '../../components/doc/dataview/basicdoc';
 import { ApiDoc } from '../../components/doc/dataview/apidoc';
+import { AccessibilityDoc } from '../../components/doc/dataview/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/dataview/styledoc';
 import { LazyDataViewDoc } from '../../components/doc/dataview/lazydoc';
 
 const DataViewDemo = () => {
@@ -23,6 +25,16 @@ const DataViewDemo = () => {
             id: 'lazy',
             label: 'Lazy',
             component: LazyDataViewDoc
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         },
         {
             id: 'api',
@@ -56,14 +68,6 @@ const DataViewDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }
@@ -84,7 +88,7 @@ const DataViewDemo = () => {
                 <DocActions github="dataview/index.js" />
             </div>
 
-            <div className="content-section doc dataview-demo">
+            <div className="content-section doc">
                 <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>

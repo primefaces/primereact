@@ -83,7 +83,7 @@ export function StackedBarDoc(props) {
 <Chart type="bar" data={chartData} options={chartOptions} />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
 export default function StackedBarDoc() {
@@ -162,12 +162,14 @@ export default function StackedBarDoc() {
     }, []);
 
     return (
-        <Chart type="bar" data={chartData} options={chartOptions} />
+        <div className="card">
+            <Chart type="bar" data={chartData} options={chartOptions} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
 export default function StackedBarDoc() {
@@ -246,7 +248,9 @@ export default function StackedBarDoc() {
     }, []);
 
     return (
-        <Chart type="bar" data={chartData} options={chartOptions} />
+        <div className="card">
+            <Chart type="bar" data={chartData} options={chartOptions} />
+        </div>
     )
 }
         `
@@ -260,7 +264,7 @@ export default function StackedBarDoc() {
             <div className="card ">
                 <Chart type="bar" data={chartData} options={chartOptions} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} dependencies={{ 'chart.js': '3.9.1' }} />
         </>
     );
 }

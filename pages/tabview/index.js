@@ -3,14 +3,16 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ImportDoc } from '../../components/doc/tabview/importdoc';
-import { DefaultDoc } from '../../components/doc/tabview/defaultdoc';
-import { ProgrammaticDoc } from '../../components/doc/tabview/programmaticdoc';
+import { BasicDoc } from '../../components/doc/tabview/basicdoc';
+import { ControlledDoc } from '../../components/doc/tabview/controlleddoc';
 import { DisabledDoc } from '../../components/doc/tabview/disableddoc';
 import { HeaderIconDoc } from '../../components/doc/tabview/headericondoc';
-import { CustomHeaderDoc } from '../../components/doc/tabview/customheaderdoc';
+import { TemplateDoc } from '../../components/doc/tabview/templatedoc';
 import { ClosableDoc } from '../../components/doc/tabview/closabledoc';
 import { ScrollableDoc } from '../../components/doc/tabview/scrollabledoc';
 import { ApiDoc } from '../../components/doc/tabview/apidoc';
+import { AccessibilityDoc } from '../../components/doc/tabview/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/tabview/styledoc';
 
 const TabViewDemo = () => {
     const docs = [
@@ -20,14 +22,14 @@ const TabViewDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'default',
-            label: 'Default',
-            component: DefaultDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
-            id: 'programmatic',
-            label: 'Programmatic',
-            component: ProgrammaticDoc
+            id: 'controlled',
+            label: 'Controlled',
+            component: ControlledDoc
         },
         {
             id: 'disabled',
@@ -40,9 +42,9 @@ const TabViewDemo = () => {
             component: HeaderIconDoc
         },
         {
-            id: 'customheader',
-            label: 'Custom Headers',
-            component: CustomHeaderDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
             id: 'slosable',
@@ -55,17 +57,23 @@ const TabViewDemo = () => {
             component: ScrollableDoc
         },
         {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
             children: [
                 {
-                    id: 'propertiesfortabpanel',
-                    label: 'Properties For TabPanel'
-                },
-                {
-                    id: 'propertiesfortabview',
-                    label: 'Properties For TabView'
+                    id: 'properties',
+                    label: 'Properties'
                 },
                 {
                     id: 'events',
@@ -74,14 +82,6 @@ const TabViewDemo = () => {
                 {
                     id: 'methods',
                     label: 'Methods'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }
@@ -101,7 +101,7 @@ const TabViewDemo = () => {
                 <DocActions github="tabview/index.js" />
             </div>
 
-            <div className="content-section doc">
+            <div className="content-section doc dataview-demo">
                 <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>

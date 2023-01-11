@@ -7,7 +7,7 @@ export function ApiDoc(props) {
     return (
         <>
             <DocSectionText {...props}></DocSectionText>
-            <DocSubSection id="propertiesfortabpanel" label="Properties For TabPanel">
+            <DocSubSection id="properties" label="Properties">
                 <div className="doc-tablewrapper">
                     <table className="doc-table">
                         <thead>
@@ -91,23 +91,6 @@ export function ApiDoc(props) {
                                 <td>null</td>
                                 <td>Style class of the tab content.</td>
                             </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </DocSubSection>
-
-            <DocSubSection id="propertiesfortabview" label="Properties For TabView">
-                <div className="doc-tablewrapper">
-                    <table className="doc-table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Default</th>
-                                <th>Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
                             <tr>
                                 <td>id</td>
                                 <td>string</td>
@@ -228,111 +211,6 @@ export function ApiDoc(props) {
                         </tbody>
                     </table>
                 </div>
-            </DocSubSection>
-
-            <DocSubSection id="styling" label="Styling">
-                <p>
-                    Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
-                </p>
-                <div className="doc-tablewrapper">
-                    <table className="doc-table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Element</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>p-tabview</td>
-                                <td>Container element.</td>
-                            </tr>
-                            <tr>
-                                <td>p-tabview-nav</td>
-                                <td>Container of headers.</td>
-                            </tr>
-                            <tr>
-                                <td>p-tabview-selected</td>
-                                <td>Selected tab header.</td>
-                            </tr>
-                            <tr>
-                                <td>p-tabview-panels</td>
-                                <td>Container panels.</td>
-                            </tr>
-                            <tr>
-                                <td>p-tabview-panel</td>
-                                <td>Content of a tab.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </DocSubSection>
-
-            <DocSubSection id="accessibility" label="Accessibility">
-                <DevelopmentSection>
-                    <h4>Screen Reader</h4>
-                    <p>
-                        TabView container is defined with the <i>tablist</i> role, as any attribute is passed to the container element <i>aria-labelledby</i> can be optionally used to specify an element to describe the TabView. Each tab header has a{' '}
-                        <i>tab</i> role along with <i>aria-selected</i> state attribute and <i>aria-controls</i> to refer to the corresponding tab content element. The content element of each tab has <i>tabpanel</i> role, an id to match the
-                        <i>aria-controls</i> of the header and <i>aria-labelledby</i> reference to the header as the accessible name.
-                    </p>
-
-                    <h4>Tab Header Keyboard Support</h4>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <i>tab</i>
-                                    </td>
-                                    <td>Moves focus through the header.</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <i>enter</i>
-                                    </td>
-                                    <td>Activates the focused tab header.</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <i>space</i>
-                                    </td>
-                                    <td>Activates the focused tab header.</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <i>right arrow</i>
-                                    </td>
-                                    <td>Moves focus to the next header.</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <i>left arrow</i>
-                                    </td>
-                                    <td>Moves focus to the previous header.</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <i>home</i>
-                                    </td>
-                                    <td>Moves focus to the last header.</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <i>end</i>
-                                    </td>
-                                    <td>Moves focus to the first header.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </DevelopmentSection>
             </DocSubSection>
         </>
     );

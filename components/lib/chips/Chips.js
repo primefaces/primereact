@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 
 export const Chips = React.memo(
     React.forwardRef((props, ref) => {
@@ -82,17 +82,15 @@ export const Chips = React.memo(
                 return;
             }
 
-            switch (event.which) {
-                //backspace
-                case 8:
+            switch (event.key) {
+                case 'Backspace':
                     if (inputRef.current.value.length === 0 && values.length > 0) {
                         removeItem(event, values.length - 1);
                     }
 
                     break;
 
-                //enter
-                case 13:
+                case 'Enter':
                     if (inputValue && inputValue.trim().length && (!props.max || props.max > values.length)) {
                         addItem(event, inputValue, true);
                     }
@@ -106,8 +104,11 @@ export const Chips = React.memo(
 
                     if (isMaxedOut()) {
                         event.preventDefault();
-                    } else if (props.separator === ',' && event.which === 188) {
-                        addItem(event, inputValue, true);
+                    } else if (props.separator === ',') {
+                        // GitHub #3885 Android Opera gives strange code 229 for comma
+                        if (event.key === props.separator || (DomHandler.isAndroid() && event.which === 229)) {
+                            addItem(event, inputValue, true);
+                        }
                     }
 
                     break;
@@ -185,6 +186,7 @@ export const Chips = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            focus: () => DomHandler.focus(inputRef.current),
             getElement: () => elementRef.current,
             getInput: () => inputRef.current
         }));

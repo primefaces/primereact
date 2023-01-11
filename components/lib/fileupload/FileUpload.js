@@ -393,6 +393,7 @@ export const FileUpload = React.memo(
                     removeElement: removeButton,
                     formatSize: formatSize(file.size),
                     element: content,
+                    index: index,
                     props
                 };
 

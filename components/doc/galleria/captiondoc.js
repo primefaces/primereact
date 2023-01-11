@@ -7,7 +7,7 @@ import getConfig from 'next/config';
 
 export function CaptionDoc(props) {
     const [images, setImages] = useState(null);
-    const galleriaService = new PhotoService();
+
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     const responsiveOptions = [
@@ -26,7 +26,7 @@ export function CaptionDoc(props) {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then((data) => setImages(data));
+        PhotoService.getImages().then((data) => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
@@ -53,13 +53,13 @@ export function CaptionDoc(props) {
     caption={caption} style={{ maxWidth: '640px' }} />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Galleria } from 'primereact/galleria';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
 
 export default function CaptionDoc() {
     const [images, setImages] = useState(null);
-    const galleriaService = new PhotoService();
+    
 
     const responsiveOptions = [
         {
@@ -77,7 +77,7 @@ export default function CaptionDoc() {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
@@ -98,20 +98,22 @@ export default function CaptionDoc() {
     }
 
     return (
-        <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5}
-            item={itemTemplate} thumbnail={thumbnailTemplate}
-            caption={caption} style={{ maxWidth: '640px' }} />
+        <div className="card flex justify-content-center">
+            <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5}
+                item={itemTemplate} thumbnail={thumbnailTemplate}
+                caption={caption} style={{ maxWidth: '640px' }} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Galleria } from 'primereact/galleria';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
 
 export default function CaptionDoc() {
     const [images, setImages] = useState(null);
-    const galleriaService = new PhotoService();
+    
 
     const responsiveOptions = [
         {
@@ -129,7 +131,7 @@ export default function CaptionDoc() {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
@@ -150,11 +152,23 @@ export default function CaptionDoc() {
     }
     
     return (
-        <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5}
-            item={itemTemplate} thumbnail={thumbnailTemplate}
-            caption={caption} style={{ maxWidth: '640px' }} />
+        <div className="card flex justify-content-center">
+            <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5}
+                item={itemTemplate} thumbnail={thumbnailTemplate}
+                caption={caption} style={{ maxWidth: '640px' }} />
+        </div>
     )
 }
+        `,
+        data: `
+/* PhotoService */
+{
+    itemImageSrc: 'images/galleria/galleria1.jpg',
+    thumbnailImageSrc: 'images/galleria/galleria1s.jpg',
+    alt: 'Description for Image 1',
+    title: 'Title 1'
+},
+...
         `
     };
 
@@ -166,7 +180,7 @@ export default function CaptionDoc() {
             <div className="card flex justify-content-center">
                 <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} item={itemTemplate} thumbnail={thumbnailTemplate} caption={caption} style={{ maxWidth: '640px' }} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['PhotoService']} />
         </>
     );
 }

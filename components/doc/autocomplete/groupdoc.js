@@ -77,7 +77,7 @@ export function GroupDoc(props) {
         field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} placeholder="Hint: type 'a'" />
         `,
         javascript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { AutoComplete } from "primereact/autocomplete";
 
 export default function GroupDemo() {
@@ -153,7 +153,7 @@ export default function GroupDemo() {
 }
         `,
         typescript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
 
 interface City {

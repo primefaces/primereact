@@ -9,6 +9,8 @@ import { StepDoc } from '../../components/doc/slider/stepdoc';
 import { RangeDoc } from '../../components/doc/slider/rangedoc';
 import { VerticalDoc } from '../../components/doc/slider/verticaldoc';
 import { ApiDoc } from '../../components/doc/slider/apidoc';
+import { AccessibilityDoc } from '../../components/doc/slider/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/slider/styledoc';
 
 const SliderDemo = () => {
     const docs = [
@@ -43,7 +45,17 @@ const SliderDemo = () => {
             component: VerticalDoc
         },
         {
-            id: 'apidoc',
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
+            id: 'api',
             label: 'API',
             component: ApiDoc,
             children: [
@@ -54,14 +66,6 @@ const SliderDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

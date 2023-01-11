@@ -8,10 +8,9 @@ import { DocSectionText } from '../common/docsectiontext';
 export function BasicDoc(props) {
     const [customers, setCustomers] = useState([]);
     const [suggestions, setSuggestions] = useState([]);
-    const customerservice = new CustomerService();
 
     useEffect(() => {
-        customerservice.getCustomersSmall().then((data) => {
+        CustomerService.getCustomersSmall().then((data) => {
             data.forEach((d) => (d['nickname'] = `${d.name.replace(/\s+/g, '').toLowerCase()}_${d.id}`));
             setCustomers(data);
         });
@@ -54,17 +53,17 @@ export function BasicDoc(props) {
 <Mention suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people"  rows={5} cols={40} itemTemplate={itemTemplate} />
         `,
         javascript: `
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Mention } from 'primereact/mention';
-import { CustomerService } from '../../../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 export default function BasicDoc() {
     const [customers, setCustomers] = useState([]);
     const [suggestions, setSuggestions] = useState([]);
-    const customerservice = new CustomerService();
+    
 
     useEffect(() => {
-        customerservice.getCustomersSmall().then(data => {
+        CustomerService.getCustomersSmall().then(data => {
             data.forEach(d => d['nickname'] = \`\${d.name.replace(/\\s+/g, '').toLowerCase()}_\${d.id}\`);
             setCustomers(data);
         });
@@ -109,17 +108,17 @@ export default function BasicDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Mention, MentionSearchParams } from 'primereact/mention';
-import { CustomerService } from '../../../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 export default function BasicDoc() {
     const [customers, setCustomers] = useState<any>([]);
     const [suggestions, setSuggestions] = useState<any>([]);
-    const customerservice = new CustomerService();
+    
 
     useEffect(() => {
-        customerservice.getCustomersSmall().then(data => {
+        CustomerService.getCustomersSmall().then(data => {
             data.forEach(d => d['nickname'] = \`\${d.name.replace(/\\s+/g, '').toLowerCase()}_\${d.id}\`);
             setCustomers(data);
         });
@@ -162,7 +161,29 @@ export default function BasicDoc() {
         <Mention suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people"  rows={5} cols={40} itemTemplate={itemTemplate} />
     )
 }
-        `
+        `,
+        data: `
+/* CustomerService */ 
+{
+    id: 1000,
+    name: 'James Butt',
+    country: {
+        name: 'Algeria',
+        code: 'dz'
+    },
+    company: 'Benton, John B Jr',
+    date: '2015-09-13',
+    status: 'unqualified',
+    verified: true,
+    activity: 17,
+    representative: {
+        name: 'Ioni Bowcher',
+        image: 'ionibowcher.png'
+    },
+    balance: 70663
+},
+...
+       `
     };
 
     return (
@@ -175,7 +196,7 @@ export default function BasicDoc() {
             <div className="card flex justify-content-center">
                 <Mention suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people" rows={5} cols={40} itemTemplate={itemTemplate} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );
 }

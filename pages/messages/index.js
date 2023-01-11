@@ -5,11 +5,13 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { ImportDoc } from '../../components/doc/messages/importdoc';
 import { SeveritiesDoc } from '../../components/doc/messages/severitiesdoc';
 import { DynamicDoc } from '../../components/doc/messages/dynamicdoc';
-import { StaticDoc } from '../../components/doc/messages/staticdoc';
-import { InlineDoc } from '../../components/doc/messages/inlinedoc';
-import { ValidationDoc } from '../../components/doc/messages/validationdoc';
-import { FormLayoutDoc } from '../../components/doc/messages/formlayoutdoc';
+import { TemplateDoc } from '../../components/doc/messages/templatedoc';
 import { ApiDoc } from '../../components/doc/messages/apidoc';
+import { AccessibilityDoc } from '../../components/doc/messages/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/messages/styledoc';
+import { BasicDoc } from '../../components/doc/messages/basicdoc';
+import { ClosableDoc } from '../../components/doc/messages/closeabledoc';
+import { StickyDoc } from '../../components/doc/messages/stickydoc';
 
 const MessagesDemo = () => {
     const docs = [
@@ -17,6 +19,11 @@ const MessagesDemo = () => {
             id: 'import',
             label: 'Import',
             component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
             id: 'severities',
@@ -29,24 +36,29 @@ const MessagesDemo = () => {
             component: DynamicDoc
         },
         {
-            id: 'static',
-            label: 'Static Content',
-            component: StaticDoc
+            id: 'closabledoc',
+            label: 'Closable',
+            component: ClosableDoc
         },
         {
-            id: 'inline',
-            label: 'Inline Message',
-            component: InlineDoc
+            id: 'stickydoc',
+            label: 'Sticky',
+            component: StickyDoc
         },
         {
-            id: 'validation',
-            label: 'Validation',
-            component: ValidationDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
-            id: 'formlayout',
-            label: 'Form Layout',
-            component: FormLayoutDoc
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         },
         {
             id: 'api',
@@ -82,28 +94,12 @@ const MessagesDemo = () => {
                     label: 'Sticky'
                 },
                 {
-                    id: 'messagecomponent',
-                    label: 'Message Component'
-                },
-                {
-                    id: 'propertiesmessage',
-                    label: 'Properties of Message'
-                },
-                {
                     id: 'propertiesmessages',
                     label: 'Properties of Messages'
                 },
                 {
                     id: 'event',
                     label: 'Events of Messages'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

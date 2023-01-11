@@ -26,7 +26,6 @@ export function LazyDoc(props) {
         }
     });
 
-    const customerService = new CustomerService();
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     let loadLazyTimeout = null;
@@ -44,7 +43,7 @@ export function LazyDoc(props) {
 
         //imitate delay of a backend call
         loadLazyTimeout = setTimeout(() => {
-            customerService.getCustomers({ lazyEvent: JSON.stringify(lazyParams) }).then((data) => {
+            CustomerService.getCustomers({ lazyEvent: JSON.stringify(lazyParams) }).then((data) => {
                 setTotalRecords(data.totalRecords);
                 setCustomers(data.customers);
                 setLoading(false);
@@ -76,7 +75,7 @@ export function LazyDoc(props) {
         const selectAll = event.checked;
 
         if (selectAll) {
-            customerService.getCustomers().then((data) => {
+            CustomerService.getCustomers().then((data) => {
                 setSelectAll(true);
                 setSelectedCustomers(data.customers);
             });
@@ -135,7 +134,7 @@ export function LazyDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 const LazyDoc = () => {
 
@@ -159,7 +158,7 @@ const LazyDoc = () => {
         }
     });
 
-    const customerService = new CustomerService();
+    
 
     let loadLazyTimeout = null;
 
@@ -176,7 +175,7 @@ const LazyDoc = () => {
 
         //imitate delay of a backend call
         loadLazyTimeout = setTimeout(() => {
-            customerService.getCustomers({ lazyEvent: JSON.stringify(lazyParams) }).then(data => {
+            CustomerService.getCustomers({ lazyEvent: JSON.stringify(lazyParams) }).then(data => {
                 setTotalRecords(data.totalRecords);
                 setCustomers(data.customers);
                 setLoading(false);
@@ -207,7 +206,7 @@ const LazyDoc = () => {
         const selectAll = event.checked;
 
         if (selectAll) {
-            customerService.getCustomers().then(data => {
+            CustomerService.getCustomers().then(data => {
                 setSelectAll(true);
                 setSelectedCustomers(data.customers);
             });
@@ -260,7 +259,7 @@ const LazyDoc = () => {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 const LazyDoc = () => {
 
@@ -284,7 +283,7 @@ const LazyDoc = () => {
         }
     });
 
-    const customerService = new CustomerService();
+    
 
     let loadLazyTimeout = null;
 
@@ -301,7 +300,7 @@ const LazyDoc = () => {
 
         //imitate delay of a backend call
         loadLazyTimeout = setTimeout(() => {
-            customerService.getCustomers({ lazyEvent: JSON.stringify(lazyParams) }).then(data => {
+            CustomerService.getCustomers({ lazyEvent: JSON.stringify(lazyParams) }).then(data => {
                 setTotalRecords(data.totalRecords);
                 setCustomers(data.customers);
                 setLoading(false);
@@ -332,7 +331,7 @@ const LazyDoc = () => {
         const selectAll = event.checked;
 
         if (selectAll) {
-            customerService.getCustomers().then(data => {
+            CustomerService.getCustomers().then(data => {
                 setSelectAll(true);
                 setSelectedCustomers(data.customers);
             });
@@ -380,7 +379,29 @@ const LazyDoc = () => {
         </div>
     );
 }
-        `
+        `,
+        data: `
+/* CustomerService */ 
+{
+    id: 1000,
+    name: 'James Butt',
+    country: {
+        name: 'Algeria',
+        code: 'dz'
+    },
+    company: 'Benton, John B Jr',
+    date: '2015-09-13',
+    status: 'unqualified',
+    verified: true,
+    activity: 17,
+    representative: {
+        name: 'Ioni Bowcher',
+        image: 'ionibowcher.png'
+    },
+    balance: 70663
+},
+...
+       `
     };
 
     return (
@@ -424,7 +445,7 @@ const LazyDoc = () => {
                     <Column field="representative.name" header="Representative" body={representativeBodyTemplate} filter filterPlaceholder="Search by representative" />
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );
 }

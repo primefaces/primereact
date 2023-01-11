@@ -32,6 +32,7 @@ export function VerticalContentDoc(props) {
 </div>
         `,
         javascript: `
+import React from 'react'; 
 import { Divider } from 'primereact/divider';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
@@ -66,6 +67,7 @@ export default function VerticalContentDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Divider } from 'primereact/divider';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';

@@ -31,7 +31,7 @@ export function PositionDoc(props) {
 <Button label="Bottom Right" className="p-button-success" onClick={showBottomRight} />
         `,
         javascript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
@@ -65,7 +65,7 @@ export default function PositionDoc() {
 }
         `,
         typescript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
@@ -103,16 +103,17 @@ export default function PositionDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Position</p>
+                {/* TO DO: Add demo content. */}
+                <p></p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Toast ref={toastTL} position="top-left" />
                 <Toast ref={toastBL} position="bottom-left" />
                 <Toast ref={toastBR} position="bottom-right" />
-                <div className=" toast-demo">
-                    <Button label="Top Left" className="mr-2" onClick={showTopLeft} />
-                    <Button label="Bottom Left" className="p-button-warning" onClick={showBottomLeft} />
-                    <Button label="Bottom Right" className="p-button-success" onClick={showBottomRight} />
+                <div>
+                    <Button label="Top Left" className="mr-2 md:w-auto md:mr-1 w-full mb-1" onClick={showTopLeft} />
+                    <Button label="Bottom Left" className="p-button-warning md:w-auto md:mr-1 w-full mb-1" onClick={showBottomLeft} />
+                    <Button label="Bottom Right" className="p-button-success md:w-auto md:mr-1 w-full mb-1" onClick={showBottomRight} />
                 </div>
             </div>
             <DocSectionCode code={code} />

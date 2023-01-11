@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { InputText } from '../../lib/inputtext/InputText';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const [value, setValue] = useState('');
@@ -11,7 +11,7 @@ export function BasicDoc(props) {
 <InputText value={value} onChange={(e) => setValue(e.target.value)} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputText } from "primereact/inputtext";
 
 export default function BasicDemo() {
@@ -23,7 +23,7 @@ export default function BasicDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputText } from "primereact/inputtext";
 
 export default function BasicDemo() {
@@ -46,7 +46,7 @@ export default function BasicDemo() {
             <div className="card flex justify-content-center">
                 <InputText value={value} onChange={(e) => setValue(e.target.value)} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} title="PrimeReact InputText Demo" description="InputText is used as a controlled input with value and onChange properties." />
         </>
     );
 }

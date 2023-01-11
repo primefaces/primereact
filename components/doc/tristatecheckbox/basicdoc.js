@@ -12,7 +12,7 @@ export function BasicDoc(props) {
 
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { TriStateCheckbox } from 'primereact/tristatecheckbox';
 
 export default function BasicDoc() {
@@ -24,7 +24,7 @@ export default function BasicDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { TriStateCheckbox, TriStateCheckboxChangeParams } from 'primereact/tristatecheckbox';
 
 export default function BasicDoc() {

@@ -10,10 +10,8 @@ export function PickListDoc(props) {
     const [source, setSource] = useState([]);
     const [target, setTarget] = useState([]);
 
-    const productService = new ProductService();
-
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setSource(data));
+        ProductService.getProductsSmall().then((data) => setSource(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onChange = (event) => {
@@ -23,16 +21,21 @@ export function PickListDoc(props) {
 
     const itemTemplate = (item) => {
         return (
-            <div className="product-item">
-                <div className="image-container">
-                    <img src={`${contextPath}/images/product/${item.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={item.name} />
+            <div className="flex align-items-center p-2 w-full flex-wrap">
+                <div className="w-full text-center md:w-auto md:text-left">
+                    <img
+                        className="w-7rem md:w-5rem md:shadow-2 md:mr-3 mb-3 md:mb-auto"
+                        src={`${contextPath}/images/product/${item.image}`}
+                        onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                        alt={item.name}
+                    />
                 </div>
-                <div className="product-list-detail">
+                <div className="flex-1">
                     <h5 className="mb-2">{item.name}</h5>
-                    <i className="pi pi-tag product-category-icon"></i>
-                    <span className="product-category">{item.category}</span>
+                    <i className="pi pi-tag vertical-align-middle mr-2"></i>
+                    <span className="vertical-align-middle line-height-1">{item.category}</span>
                 </div>
-                <div className="product-list-action">
+                <div className="flex flex-column align-items-end">
                     <h6 className="mb-2">${item.price}</h6>
                     <span className={`product-badge status-${item.inventoryStatus.toLowerCase()}`}>{item.inventoryStatus}</span>
                 </div>
@@ -49,15 +52,15 @@ export function PickListDoc(props) {
         javascript: `
 import React, { useState, useEffect } from 'react';
 import { PickList } from 'primereact/picklist';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
-const PickListDemo = () => {
+export default function PickListDemo() {
     const [source, setSource] = useState([]);
     const [target, setTarget] = useState([]);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setSource(data));
+        ProductService.getProductsSmall().then(data => setSource(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onChange = (event) => {
@@ -67,16 +70,16 @@ const PickListDemo = () => {
 
     const itemTemplate = (item) => {
         return (
-            <div className="product-item">
-                <div className="image-container">
-                    <img src={\`images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} />
+            <div className="flex align-items-center p-2 w-full flex-wrap">
+                <div className="w-full text-center md:w-auto md:text-left">
+                    <img className='w-7rem md:w-5rem md:shadow-2 md:mr-3 mb-3 md:mb-auto' src={\`images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} />
                 </div>
-                <div className="product-list-detail">
+                <div className="flex-1">
                     <h5 className="mb-2">{item.name}</h5>
-                    <i className="pi pi-tag product-category-icon"></i>
-                    <span className="product-category">{item.category}</span>
+                    <i className="pi pi-tag vertical-align-middle mr-2"></i>
+                    <span className="vertical-align-middle line-height-1">{item.category}</span>
                 </div>
-                <div className="product-list-action">
+                <div className="flex flex-column align-items-end">
                     <h6 className="mb-2">\${item.price}</h6>
                     <span className={\`product-badge status-\${item.inventoryStatus.toLowerCase()}\`}>{item.inventoryStatus}</span>
                 </div>
@@ -96,15 +99,15 @@ const PickListDemo = () => {
         typescript: `
 import React, { useState, useEffect } from 'react';
 import { PickList } from 'primereact/picklist';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
-const PickListDemo = () => {
+export default function PickListDemo() {
     const [source, setSource] = useState([]);
     const [target, setTarget] = useState([]);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setSource(data));
+        ProductService.getProductsSmall().then(data => setSource(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onChange = (event) => {
@@ -114,16 +117,16 @@ const PickListDemo = () => {
 
     const itemTemplate = (item) => {
         return (
-            <div className="product-item">
-                <div className="image-container">
-                    <img src={\`images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} />
+            <div className="flex align-items-center p-2 w-full flex-wrap">
+                <div className="w-full text-center md:w-auto md:text-left">
+                    <img className='w-7rem md:w-5rem md:shadow-2 md:mr-3 mb-3 md:mb-auto' src={\`images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} />
                 </div>
-                <div className="product-list-detail">
+                <div className="flex-1">
                     <h5 className="mb-2">{item.name}</h5>
-                    <i className="pi pi-tag product-category-icon"></i>
-                    <span className="product-category">{item.category}</span>
+                    <i className="pi pi-tag vertical-align-middle mr-2"></i>
+                    <span className="vertical-align-middle line-height-1">{item.category}</span>
                 </div>
-                <div className="product-list-action">
+                <div className="flex flex-column align-items-end">
                     <h6 className="mb-2">\${item.price}</h6>
                     <span className={\`product-badge status-\${item.inventoryStatus.toLowerCase()}\`}>{item.inventoryStatus}</span>
                 </div>
@@ -139,6 +142,22 @@ const PickListDemo = () => {
         </div>
     );
 }
+        `,
+        data: `
+/* ProductService */        
+{
+    id: '1000',
+    code: 'f230fh0g3',
+    name: 'Bamboo Watch',
+    description: 'Product Description',
+    image: 'bamboo-watch.jpg',
+    price: 65,
+    category: 'Accessories',
+    quantity: 24,
+    inventoryStatus: 'INSTOCK',
+    rating: 5
+},
+...
         `
     };
 
@@ -162,7 +181,7 @@ const PickListDemo = () => {
                     targetFilterPlaceholder="Search by name"
                 />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

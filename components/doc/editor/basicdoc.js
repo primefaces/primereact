@@ -11,11 +11,11 @@ export function BasicDoc(props) {
 <Editor style={{ height: '320px' }} value={text} onTextChange={(e) => setText(e.htmlValue)} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Editor } from "primereact/editor";
 
 export default function BasicDemo() {
-    const [value, setValue] = useState('');
+    const [text, setText] = useState('');
 
     return (
         <Editor style={{ height: '320px' }} value={text} onTextChange={(e) => setText(e.htmlValue)} />
@@ -23,11 +23,11 @@ export default function BasicDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Editor } from "primereact/editor";
 
 export default function BasicDemo() {
-    const [value, setValue] = useState<string>('');
+    const [text, setText] = useState<string>('');
 
     return (
         <Editor style={{ height: '320px' }} value={text} onTextChange={(e: EditorTextChangeParams) => setText(e.htmlValue)} />
@@ -46,7 +46,7 @@ export default function BasicDemo() {
             <div className="card">
                 <Editor style={{ height: '320px' }} value={text} onTextChange={(e) => setText(e.htmlValue)} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} dependencies={{ quill: '1.3.7' }} />
         </>
     );
 }

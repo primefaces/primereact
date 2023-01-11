@@ -12,7 +12,7 @@ import { confirmDialog } from 'primereact/confirmdialog'; // To use confirmDialo
     return (
         <>
             <DocSectionText {...props}></DocSectionText>
-            <DocSectionCode code={code} hideToggleCode hideCodeSandbox />
+            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
         </>
     );
 }

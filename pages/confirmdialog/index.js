@@ -3,10 +3,12 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/confirmdialog/apidoc';
+import { AccessibilityDoc } from '../../components/doc/confirmdialog/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/confirmdialog/styledoc';
 import { BasicDoc } from '../../components/doc/confirmdialog/basicdoc';
 import { ImportDoc } from '../../components/doc/confirmdialog/importdoc';
 import { PositionDoc } from '../../components/doc/confirmdialog/positiondoc';
-import { UsingConfirmDialogDoc } from '../../components/doc/confirmdialog/usingdoc';
+import { DeclarativeDoc } from '../../components/doc/confirmdialog/declarativedoc';
 import { ConfirmDialog } from '../../components/lib/confirmdialog/ConfirmDialog';
 
 const ConfirmDialogDemo = () => {
@@ -27,9 +29,19 @@ const ConfirmDialogDemo = () => {
             component: PositionDoc
         },
         {
-            id: 'using',
-            label: 'Using ConfirmDialog tag',
-            component: UsingConfirmDialogDoc
+            id: 'declarative',
+            label: 'Declarative',
+            component: DeclarativeDoc
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         },
         {
             id: 'api',
@@ -43,14 +55,6 @@ const ConfirmDialogDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

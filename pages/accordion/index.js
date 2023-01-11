@@ -3,11 +3,14 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/accordion/importdoc';
-import { DefaultDoc } from '../../components/doc/accordion/defaultdoc';
+import { BasicDoc } from '../../components/doc/accordion/basicdoc';
 import { MultipleDoc } from '../../components/doc/accordion/multipledoc';
-import { ProgrammaticDoc } from '../../components/doc/accordion/programmaticdoc';
-import { CustomHeaderDoc } from '../../components/doc/accordion/customheadersdoc';
+import { ControlledDoc } from '../../components/doc/accordion/controlleddoc';
+import { TemplateDoc } from '../../components/doc/accordion/templatedoc';
+import { AccessibilityDoc } from '../../components/doc/accordion/accessibilitydoc';
 import { ApiDoc } from '../../components/doc/accordion/apidoc';
+import { AccessibilityDoc } from '../../components/doc/accordion/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/accordion/styledoc';
 
 const AccordionDemo = () => {
     const docs = [
@@ -17,9 +20,9 @@ const AccordionDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'default',
-            label: 'Default',
-            component: DefaultDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
             id: 'multiple',
@@ -27,14 +30,24 @@ const AccordionDemo = () => {
             component: MultipleDoc
         },
         {
-            id: 'programmatic',
-            label: 'Programmatic',
-            component: ProgrammaticDoc
+            id: 'controlled',
+            label: 'Controlled',
+            component: ControlledDoc
         },
         {
-            id: 'customheader',
-            label: 'Custom Header',
-            component: CustomHeaderDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         },
         {
             id: 'api',
@@ -52,14 +65,6 @@ const AccordionDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }
@@ -78,7 +83,7 @@ const AccordionDemo = () => {
                 </div>
                 <DocActions github="accordion/index.js" />
             </div>
-            <div className="content-section doc accordion-demo">
+            <div className="content-section doc ">
                 <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>

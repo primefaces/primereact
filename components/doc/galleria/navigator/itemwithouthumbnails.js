@@ -7,7 +7,6 @@ import getConfig from 'next/config';
 
 export function ItemWithoutThumbnailsDoc(props) {
     const [images, setImages] = useState(null);
-    const galleriaService = new PhotoService();
 
     const responsiveOptions = [
         {
@@ -25,7 +24,7 @@ export function ItemWithoutThumbnailsDoc(props) {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then((data) => setImages(data));
+        PhotoService.getImages().then((data) => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
@@ -44,13 +43,13 @@ export function ItemWithoutThumbnailsDoc(props) {
     showItemNavigators showThumbnails={false} item={itemTemplate} thumbnail={thumbnailTemplate} />  
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Galleria } from 'primereact/galleria';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
 
 export default function ItemWithoutThumbnailsDoc() {
     const [images, setImages] = useState(null)
-    const galleriaService = new PhotoService();
+    
 
     const responsiveOptions = [
         {
@@ -69,7 +68,7 @@ export default function ItemWithoutThumbnailsDoc() {
 
 
 useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
 }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 const itemTemplate = (item) => {
@@ -81,19 +80,21 @@ const thumbnailTemplate = (item) => {
 }
 
     return (
-        <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} circular style={{ maxWidth: '640px' }}
-            showItemNavigators showThumbnails={false} item={itemTemplate} thumbnail={thumbnailTemplate} />    
+        <div className="card flex justify-content-center">
+            <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} circular style={{ maxWidth: '640px' }}
+                showItemNavigators showThumbnails={false} item={itemTemplate} thumbnail={thumbnailTemplate} />
+        </div>   
     )
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Galleria } from 'primereact/galleria';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
 
 export default function ItemWithoutThumbnailsDoc() {
     const [images, setImages] = useState(null)
-    const galleriaService = new PhotoService();
+    
 
     const responsiveOptions = [
         {
@@ -112,7 +113,7 @@ export default function ItemWithoutThumbnailsDoc() {
 
 
 useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
 }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 const itemTemplate = (item) => {
@@ -124,10 +125,22 @@ const thumbnailTemplate = (item) => {
 }
 
     return (
-        <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} circular style={{ maxWidth: '640px' }}
-            showItemNavigators showThumbnails={false} item={itemTemplate} thumbnail={thumbnailTemplate} />     
+        <div className="card flex justify-content-center">
+            <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} circular style={{ maxWidth: '640px' }}
+                showItemNavigators showThumbnails={false} item={itemTemplate} thumbnail={thumbnailTemplate} />
+        </div>    
     )
 }
+        `,
+        data: `
+/* PhotoService */
+{
+    itemImageSrc: 'images/galleria/galleria1.jpg',
+    thumbnailImageSrc: 'images/galleria/galleria1s.jpg',
+    alt: 'Description for Image 1',
+    title: 'Title 1'
+},
+...
         `
     };
 
@@ -139,7 +152,7 @@ const thumbnailTemplate = (item) => {
             <div className="card flex justify-content-center">
                 <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} circular style={{ maxWidth: '640px' }} showItemNavigators showThumbnails={false} item={itemTemplate} thumbnail={thumbnailTemplate} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['PhotoService']} />
         </>
     );
 }

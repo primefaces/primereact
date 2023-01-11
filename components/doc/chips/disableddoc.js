@@ -8,20 +8,26 @@ export function DisabledDoc(props) {
 <Chips disabled placeholder="Disabled" />
         `,
         javascript: `
+import React from 'react'; 
 import { Chips } from "primereact/chips";
 
 export default function DisabledDemo() {
     return (
-        <Chips disabled placeholder="Disabled" />
+        <div className="card p-fluid">
+            <Chips disabled placeholder="Disabled" />
+        </div>
     )
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Chips } from "primereact/chips";
 
 export default function DisabledDemo() {
     return (
-        <Chips disabled placeholder="Disabled" />
+        <div className="card p-fluid">
+            <Chips disabled placeholder="Disabled" />
+        </div>
     )
 }
         `

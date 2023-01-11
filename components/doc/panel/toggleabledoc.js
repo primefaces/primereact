@@ -13,6 +13,7 @@ export function ToggleableDoc(props) {
 </Panel>
         `,
         javascript: `
+import React from 'react'; 
 import { Panel } from 'primereact/panel';
 
 export default function ToggleableDoc() {
@@ -28,6 +29,7 @@ export default function ToggleableDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Panel } from 'primereact/panel';
 
 export default function ToggleableDoc() {

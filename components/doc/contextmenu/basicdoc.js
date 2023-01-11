@@ -139,7 +139,7 @@ export function BasicDoc(props) {
 </div>  
 `,
         javascript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { ContextMenu } from 'primereact/contextmenu';
 
 export default function BasicDoc() {
@@ -276,7 +276,7 @@ export default function BasicDoc() {
     ];
 
     return (
-        <div>
+        <div className="card flex justify-content-center">
             <ContextMenu model={items} ref={cm}></ContextMenu>
             <img src="images/nature/nature3.jpg" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="Logo" onContextMenu={(e) => cm.current.show(e)} />
         </div>
@@ -284,7 +284,7 @@ export default function BasicDoc() {
 }
         `,
         typescript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { ContextMenu } from 'primereact/contextmenu';
 
 export default function BasicDoc() {
@@ -421,7 +421,7 @@ export default function BasicDoc() {
     ];
 
     return (
-        <div>
+        <div className="card flex justify-content-center">
             <ContextMenu model={items} ref={cm}></ContextMenu>
             <img src="images/nature/nature3.jpg" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="Logo" onContextMenu={(e) => cm.current.show(e)} />
         </div>

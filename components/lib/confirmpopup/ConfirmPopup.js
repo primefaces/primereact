@@ -43,7 +43,7 @@ export const ConfirmPopup = React.memo(
             overlay: overlayRef,
             listener: (event, { type, valid }) => {
                 if (valid) {
-                    type === 'outside' ? props.dismissable && !isPanelClicked.current && hide() : hide();
+                    type === 'outside' ? props.dismissable && !isPanelClicked.current && hide('hide') : hide('hide');
                 }
 
                 isPanelClicked.current = false;

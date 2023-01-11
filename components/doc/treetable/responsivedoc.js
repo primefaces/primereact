@@ -7,10 +7,9 @@ import { DocSectionText } from '../common/docsectiontext';
 
 export function ResponsiveDoc(props) {
     const [nodes, setNodes] = useState([]);
-    const nodeservice = new NodeService();
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then((data) => setNodes(data));
+        NodeService.getTreeTableNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const nameTemplate = (node) => {
@@ -35,15 +34,14 @@ export function ResponsiveDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 import './TreeTableDemo.css';
 
-const ResponsiveDoc = () => {
+export default function ResponsiveDoc() {
     const [nodes, setNodes] = useState([]);
-    const nodeservice = new NodeService();
-
+    
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+        NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const nameTemplate = (node) => {
@@ -73,15 +71,14 @@ const ResponsiveDoc = () => {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 import './TreeTableDemo.css';
 
-const ResponsiveDoc = () => {
+export default function ResponsiveDoc() {
     const [nodes, setNodes] = useState([]);
-    const nodeservice = new NodeService();
-
+    
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+        NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const nameTemplate = (node) => {
@@ -106,7 +103,56 @@ const ResponsiveDoc = () => {
         </div>
     );
 }
+        `,
+        extFiles: {
+            'TreeTableDemo.css': `
+/* TreeTableDemo.css */
+
+.treetable-responsive-demo .sm-visible {
+    display: none;
+}
+
+@media screen and (max-width: 40em) {
+    .treetable-responsive-demo .sm-invisible {
+        display: none;
+    }
+
+    .treetable-responsive-demo .sm-visible {
+        display: inline;
+        margin-right: .5rem;
+    }
+}
         `
+        },
+        data: `
+/* NodeService */
+{
+    key: '0',
+    label: 'Documents',
+    data: 'Documents Folder',
+    icon: 'pi pi-fw pi-inbox',
+    children: [
+        {
+            key: '0-0',
+            label: 'Work',
+            data: 'Work Folder',
+            icon: 'pi pi-fw pi-cog',
+            children: [
+                { key: '0-0-0', label: 'Expenses.doc', icon: 'pi pi-fw pi-file', data: 'Expenses Document' },
+                { key: '0-0-1', label: 'Resume.doc', icon: 'pi pi-fw pi-file', data: 'Resume Document' }
+            ]
+        },
+        {
+            key: '0-1',
+            label: 'Home',
+            data: 'Home Folder',
+            icon: 'pi pi-fw pi-home',
+            children: [{ key: '0-1-0', label: 'Invoices.txt', icon: 'pi pi-fw pi-file', data: 'Invoices for this month' }]
+        }
+    ]
+},
+...
+`
     };
 
     return (
@@ -121,7 +167,7 @@ const ResponsiveDoc = () => {
                     <Column field="type" header="Type" headerClassName="sm-invisible" bodyClassName="sm-invisible"></Column>
                 </TreeTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }

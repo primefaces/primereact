@@ -136,7 +136,8 @@ export function CustomDoc(props) {
 <Menubar model={items} start={start} end={end} />  
 `,
         javascript: `
-import { Menu } from 'primereact/menu';
+import React from 'react'; 
+import { Menubar } from 'primereact/menubar';
 import { InputText } from 'primereact/inputtext';
 
 export default function CustomDoc() {
@@ -277,7 +278,8 @@ const items = [
 }
         `,
         typescript: `
-import { Menu } from 'primereact/menu';
+import React from 'react'; 
+import { Menubar } from 'primereact/menubar';
 import { InputText } from 'primereact/inputtext';
 
 export default function CustomDoc() {

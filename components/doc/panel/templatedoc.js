@@ -6,8 +6,9 @@ import { DocSectionCode } from '../common/docsectioncode';
 export function TemplateDoc(props) {
     const template = (options) => {
         const toggleIcon = options.collapsed ? 'pi pi-chevron-down' : 'pi pi-chevron-up';
-        const className = `${options.className} justify-content-start`;
-        const titleClassName = `${options.titleClassName} pl-1`;
+        const className = `${options.className} justify-content-start text-primary `;
+        const titleClassName = `${options.titleClassName} pl-1 `;
+        const style = { fontSize: '1.3rem' };
 
         return (
             <div className={className}>
@@ -15,7 +16,9 @@ export function TemplateDoc(props) {
                     <span className={toggleIcon}></span>
                     <Ripple />
                 </button>
-                <span className={titleClassName}>Header</span>
+                <span className={titleClassName} style={style}>
+                    Header
+                </span>
             </div>
         );
     };
@@ -30,14 +33,16 @@ export function TemplateDoc(props) {
 </Panel>
         `,
         javascript: `
+import React from 'react'; 
 import { Panel } from 'primereact/panel';
 import { Ripple } from 'primereact/ripple';
 
 export default function TemplateDoc() {
     const template = (options) => {
         const toggleIcon = options.collapsed ? 'pi pi-chevron-down' : 'pi pi-chevron-up';
-        const className = \`\${options.className} justify-content-start\`;
+        const className = \`\${options.className} justify-content-start text-primary \`;
         const titleClassName = \`\${options.titleClassName} pl-1\`;
+        const style = { fontSize: '1.3rem' };
 
         return (
             <div className={className}>
@@ -45,7 +50,7 @@ export default function TemplateDoc() {
                     <span className={toggleIcon}></span>
                     <Ripple />
                 </button>
-                <span className={titleClassName}>Header</span>
+                <span className={titleClassName} style={style}>Header</span>
             </div>
         );
     };
@@ -61,14 +66,16 @@ export default function TemplateDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Panel } from 'primereact/panel';
 import { Ripple } from 'primereact/ripple';
 
 export default function TemplateDoc() {
     const template = (options) => {
         const toggleIcon = options.collapsed ? 'pi pi-chevron-down' : 'pi pi-chevron-up';
-        const className = \`\${options.className} justify-content-start\`;
+        const className = \`\${options.className} justify-content-start text-primary \`;
         const titleClassName = \`\${options.titleClassName} pl-1\`;
+        const style = { fontSize: '1.3rem' };
 
         return (
             <div className={className}>
@@ -76,7 +83,7 @@ export default function TemplateDoc() {
                     <span className={toggleIcon}></span>
                     <Ripple />
                 </button>
-                <span className={titleClassName}>Header</span>
+                <span className={titleClassName} style={style}>Header</span>
             </div>
         );
     };
@@ -96,9 +103,8 @@ export default function TemplateDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    The header element is fully customizable on Panel. To make special header, an object can be given to the <i>headerTemplate</i> property as below.
-                </p>
+                {/* TO DO: Add demo content. */}
+                <p></p>
             </DocSectionText>
             <div className="card">
                 <Panel headerTemplate={template} toggleable>

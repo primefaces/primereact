@@ -46,11 +46,12 @@ export function TemplatingDoc(props) {
 
     const code = {
         basic: `
-<Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" filter showClear filterBy="name" placeholder="Select a Country" valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
+<Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" placeholder="Select a Country" valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Dropdown } from 'primereact/dropdown';
+import './DropdownDemo.css';
 
 export default function TemplatingDoc() {
     const [selectedCountry, setSelectedCountry] = useState(null);
@@ -98,13 +99,16 @@ export default function TemplatingDoc() {
     }
 
     return (
-        <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" filter showClear filterBy="name" placeholder="Select a Country" valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
+        <div className="card flex justify-content-center dropdown-demo">
+            <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" placeholder="Select a Country" valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
+        </div>    
     )
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Dropdown, DropdownChangeParams, DropdownProps } from 'primereact/dropdown';
+import './DropdownDemo.css';
 
 export default function TemplatingDoc() {
     const [selectedCountry, setSelectedCountry] = useState<any | null>(null);
@@ -152,33 +156,35 @@ export default function TemplatingDoc() {
     }
 
     return (
-        <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" filter showClear filterBy="name" placeholder="Select a Country" valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
+        <div className="card flex justify-content-center dropdown-demo">
+            <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" placeholder="Select a Country" valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
+        </div>
     )
 }
+        `,
+        extFiles: {
+            'DropdownDemo.css': `
+/* DropdownDemo.css */
+
+.dropdown-demo .p-dropdown {
+    width: 14rem;
+}
+
+.dropdown-demo .country-item-value img.flag {
+    width: 17px;
+}
         `
+        }
     };
 
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    Label of an option is used as the display text of an item by default, for custom content support define an <i>itemTemplate</i> function that gets the option instance as a parameter and returns the content. For custom filter
-                    support define a <i>filterTemplate</i> function that gets the option instance as a parameter and returns the content for the filter element.
-                </p>
+                {/* TO DO: Add demo content. */}
+                <p></p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <Dropdown
-                    value={selectedCountry}
-                    options={countries}
-                    onChange={onCountryChange}
-                    optionLabel="name"
-                    filter
-                    showClear
-                    filterBy="name"
-                    placeholder="Select a Country"
-                    valueTemplate={selectedCountryTemplate}
-                    itemTemplate={countryOptionTemplate}
-                />
+            <div className="card flex justify-content-center dropdown-demo">
+                <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" placeholder="Select a Country" valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
             </div>
             <DocSectionCode code={code} />
         </>

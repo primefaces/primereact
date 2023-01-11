@@ -9,6 +9,7 @@ export function NumbersDoc(props) {
 <InputText id="numbers" keyfilter="num" />
         `,
         javascript: `
+import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
 
 export default function NumbersDoc() {
@@ -22,6 +23,7 @@ export default function NumbersDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
 
 export default function NumbersDoc() {
@@ -39,7 +41,8 @@ export default function NumbersDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Numbers</p>
+                {/* TO DO: Add demo content. */}
+                <p></p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="grid p-fluid gap-2">

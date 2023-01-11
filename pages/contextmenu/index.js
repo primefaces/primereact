@@ -5,6 +5,8 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/contextmenu/importdoc';
 import { BasicDoc } from '../../components/doc/contextmenu/BasicDoc';
 import { ApiDoc } from '../../components/doc/contextmenu/apidoc';
+import { AccessibilityDoc } from '../../components/doc/contextmenu/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/contextmenu/styledoc';
 import { DocumentDoc } from '../../components/doc/contextmenu/documentdoc';
 
 const ContextMenuDemo = () => {
@@ -21,8 +23,18 @@ const ContextMenuDemo = () => {
         },
         {
             id: 'document',
-            label: 'Document Menu',
+            label: 'Document',
             component: DocumentDoc
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         },
         {
             id: 'api',
@@ -40,14 +52,6 @@ const ContextMenuDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

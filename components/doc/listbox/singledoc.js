@@ -15,10 +15,10 @@ export function SingleDoc(props) {
 
     const code = {
         basic: `
-<ListBox value={selectedCity} options={cities} onChange={(e) => setSelectedCity(e.value)} optionLabel="name" style={{ width: '15rem' }} />
+<ListBox value={selectedCity} options={cities} onChange={(e: ListBoxChangeParams) => setSelectedCity(e.value)} optionLabel="name" style={{ width: '15rem' }} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { ListBox } from 'primereact/listbox';
 
 export default function SingleDoc() {
@@ -32,12 +32,14 @@ export default function SingleDoc() {
     ];
 
     return (
-        <ListBox value={selectedCity} options={cities} onChange={(e) => setSelectedCity(e.value)} optionLabel="name" style={{ width: '15rem' }} />
+        <div className="card flex justify-content-center">  
+            <ListBox value={selectedCity} options={cities} onChange={(e: ListBoxChangeParams) => setSelectedCity(e.value)} optionLabel="name" style={{ width: '15rem' }} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { ListBox, ListBoxChangeParams } from 'primereact/listbox';
 
 export default function SingleDoc() {
@@ -51,7 +53,9 @@ export default function SingleDoc() {
     ];
 
     return (
-        <ListBox value={selectedCity} options={cities} onChange={(e: ListBoxChangeParams) => setSelectedCity(e.value)} optionLabel="name" style={{ width: '15rem' }} />
+        <div className="card flex justify-content-center">  
+            <ListBox value={selectedCity} options={cities} onChange={(e: ListBoxChangeParams) => setSelectedCity(e.value)} optionLabel="name" style={{ width: '15rem' }} />
+        </div>
     )
 }
         `

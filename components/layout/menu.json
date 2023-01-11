@@ -347,17 +347,6 @@
             ]
         },
         {
-            "name": "Integration",
-            "meta": ["integration"],
-            "children": [
-                {
-                    "name": "Form Libraries",
-                    "to": "/formlibraries",
-                    "meta": ["formlibraries"]
-                }
-            ]
-        },
-        {
             "name": "Data",
             "meta": ["data"],
             "children": [
@@ -369,13 +358,7 @@
                 {
                     "name": "DataView",
                     "meta": ["dataview"],
-                    "children": [
-                        {
-                            "name": "DataViews",
-                            "to": "/dataview",
-                            "meta": ["dataviews"]
-                        }
-                    ]
+                    "to": "/dataview"
                 },
                 {
                     "name": "DataScroller",
@@ -603,7 +586,7 @@
             "meta": ["chart"],
             "children": [
                 {
-                    "name": "Charts",
+                    "name": "Chart",
                     "to": "/chart",
                     "meta": ["chartdemo", "chartmodel"]
                 }
@@ -613,6 +596,11 @@
             "name": "Messages",
             "meta": ["message"],
             "children": [
+                {
+                    "name": "Message",
+                    "to": "/message",
+                    "meta": ["message"]
+                },
                 {
                     "name": "Messages",
                     "to": "/messages",

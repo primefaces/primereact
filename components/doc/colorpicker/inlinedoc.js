@@ -12,26 +12,30 @@ export function InlineDoc(props) {
 
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { ColorPicker } from 'primereact/colorpicker';
 
 export default function BasicDemo() {
     const [color, setColor] = useState(null);
 
     return (
-        <ColorPicker value={color} onChange={(e) => setColor(e.value)} inline />
+        <div className="card flex justify-content-center">
+            <ColorPicker value={color} onChange={(e) => setColor(e.value)} inline />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { ColorPicker, ColorPickerChangeParams } from 'primereact/colorpicker';
 
 export default function BasicDemo() {
     const [color, setColor] = useState<any>(null);
 
     return (
-        <ColorPicker value={color} onChange={(e: ColorPickerChangeParams) => setColor(e.value)} inline />
+        <div className="card flex justify-content-center">
+            <ColorPicker value={color} onChange={(e: ColorPickerChangeParams) => setColor(e.value)} inline />
+        </div>
     )
 }
         `

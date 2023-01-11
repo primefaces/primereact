@@ -8,11 +8,10 @@ import getConfig from 'next/config';
 
 export function VerticalDoc(props) {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
+        ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const productTemplate = (product) => {
@@ -39,22 +38,20 @@ export function VerticalDoc(props) {
 
     const code = {
         basic: `
-<Carousel value={products} numVisible={1} numScroll={1} orientation="vertical" verticalViewPortHeight="360px"
-itemTemplate={productTemplate} header={<h5>Vertical</h5>} style={{maxWidth: '400px', marginTop: '2em'}} />
+<Carousel value={products} numVisible={1} numScroll={1} orientation="vertical" verticalViewPortHeight="360px" itemTemplate={productTemplate} />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { Carousel } from 'primereact/carousel';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
-export default function VerticalDoc() {
+export default function VerticalDemo() {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
-
+    
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
+    }, []);
 
     const productTemplate = (product) => {
         return (
@@ -79,24 +76,25 @@ export default function VerticalDoc() {
     };
 
     return (
-        <Carousel value={products} numVisible={1} numScroll={1} orientation="vertical" verticalViewPortHeight="360px"
-        itemTemplate={productTemplate} header={<h5>Vertical</h5>} style={{maxWidth: '400px', marginTop: '2em'}} />
+        <div className="card flex justify-content-center">
+            <Carousel value={products} numVisible={1} numScroll={1} orientation="vertical" verticalViewPortHeight="360px"
+            itemTemplate={productTemplate} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { Carousel } from 'primereact/carousel';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
-export default function VerticalDoc() {
+export default function VerticalDemo() {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
-
+    
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
+    }, []);
 
     const productTemplate = (product) => {
         return (
@@ -121,22 +119,42 @@ export default function VerticalDoc() {
     };
     
     return (
-        <Carousel value={products} numVisible={1} numScroll={1} orientation="vertical" verticalViewPortHeight="360px"
-        itemTemplate={productTemplate} header={<h5>Vertical</h5>} style={{maxWidth: '400px', marginTop: '2em'}} />
+        <div className="card flex justify-content-center">
+            <Carousel value={products} numVisible={1} numScroll={1} orientation="vertical" verticalViewPortHeight="360px"
+            itemTemplate={productTemplate} />
+        </div>
     )
 }
+        `,
+        data: `
+/* ProductService */        
+{
+    id: '1000',
+    code: 'f230fh0g3',
+    name: 'Bamboo Watch',
+    description: 'Product Description',
+    image: 'bamboo-watch.jpg',
+    price: 65,
+    category: 'Accessories',
+    quantity: 24,
+    inventoryStatus: 'INSTOCK',
+    rating: 5
+},
+...
         `
     };
 
     return (
         <>
             <DocSectionText {...props}>
-                <p>Vertical</p>
+                <p>
+                    To create a vertical Carousel, <i>orientation</i> needs to be set to <i>vertical</i> along with a <i>verticalViewPortHeight</i>.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Carousel value={products} numVisible={1} numScroll={1} orientation="vertical" verticalViewPortHeight="360px" itemTemplate={productTemplate} header={<h5>Vertical</h5>} style={{ maxWidth: '400px', marginTop: '2em' }} />
+                <Carousel value={products} numVisible={1} numScroll={1} orientation="vertical" verticalViewPortHeight="360px" itemTemplate={productTemplate} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

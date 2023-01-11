@@ -11,7 +11,7 @@ export function DisabledDoc(props) {
 <Knob value={value} disabled />
         `,
         javascript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Knob } from 'primereact/knob';
 
 export default function DisabledDoc() {
@@ -23,7 +23,7 @@ export default function DisabledDoc() {
 }
         `,
         typescript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Knob } from 'primereact/knob';
 
 export default function DisabledDoc() {

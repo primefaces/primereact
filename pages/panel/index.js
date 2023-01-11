@@ -3,10 +3,12 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/panel/importdoc';
-import { RegularDoc } from '../../components/doc/panel/regulardoc';
+import { BasicDoc } from '../../components/doc/panel/basicdoc';
 import { ToggleableDoc } from '../../components/doc/panel/toggleabledoc';
 import { TemplateDoc } from '../../components/doc/panel/templatedoc';
 import { ApiDoc } from '../../components/doc/panel/apidoc';
+import { AccessibilityDoc } from '../../components/doc/panel/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/panel/styledoc';
 
 const PanelDemo = () => {
     const docs = [
@@ -16,9 +18,9 @@ const PanelDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'regular',
-            label: 'Regular',
-            component: RegularDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
             id: 'toggleable',
@@ -29,6 +31,16 @@ const PanelDemo = () => {
             id: 'template',
             label: 'Template',
             component: TemplateDoc
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         },
         {
             id: 'api',
@@ -42,14 +54,6 @@ const PanelDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

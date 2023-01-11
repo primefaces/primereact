@@ -8,7 +8,7 @@ import getConfig from 'next/config';
 
 export function WithThumbnailsDoc(props) {
     const [images, setImages] = useState(null);
-    const galleriaService = new PhotoService();
+
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const galleria = useRef(null);
 
@@ -32,7 +32,7 @@ export function WithThumbnailsDoc(props) {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then((data) => setImages(data));
+        PhotoService.getImages().then((data) => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
@@ -50,14 +50,14 @@ export function WithThumbnailsDoc(props) {
 <Button label="Show" icon="pi pi-external-link" onClick={() => galleria.current.show()} />
         `,
         javascript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
 
 export default function WithThumbnailsDoc() {
     const [images, setImages] = useState(null);
-    const galleriaService = new PhotoService();
+    
     const galleria = useRef(null);
 
     const responsiveOptions = [
@@ -80,7 +80,7 @@ export default function WithThumbnailsDoc() {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
@@ -92,23 +92,22 @@ export default function WithThumbnailsDoc() {
     }
 
     return (
-        <div>
+        <div className="card flex justify-content-center">
             <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={9} style={{ maxWidth: '50%' }} circular fullScreen showItemNavigators item={itemTemplate} thumbnail={thumbnailTemplate} />
-
             <Button label="Show" icon="pi pi-external-link" onClick={() => galleria.current.show()} />
         </div>
     )
 }
         `,
         typescript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
 
 export default function WithThumbnailsDoc() {
     const [images, setImages] = useState(null);
-    const galleriaService = new PhotoService();
+    
     const galleria = useRef(null);
 
     const responsiveOptions = [
@@ -131,7 +130,7 @@ export default function WithThumbnailsDoc() {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
@@ -143,13 +142,22 @@ export default function WithThumbnailsDoc() {
     }
     
     return (
-        <div>
+        <div className="card flex justify-content-center">
             <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={9} style={{ maxWidth: '50%' }} circular fullScreen showItemNavigators item={itemTemplate} thumbnail={thumbnailTemplate} />
-
             <Button label="Show" icon="pi pi-external-link" onClick={() => galleria.current.show()} />
         </div>
     )
 }
+        `,
+        data: `
+/* PhotoService */
+{
+    itemImageSrc: 'images/galleria/galleria1.jpg',
+    thumbnailImageSrc: 'images/galleria/galleria1s.jpg',
+    alt: 'Description for Image 1',
+    title: 'Title 1'
+},
+...
         `
     };
 
@@ -163,7 +171,7 @@ export default function WithThumbnailsDoc() {
 
                 <Button label="Show" icon="pi pi-external-link" onClick={() => galleria.current.show()} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['PhotoService']} />
         </>
     );
 }

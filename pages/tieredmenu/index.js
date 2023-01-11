@@ -3,9 +3,11 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/tieredmenu/importdoc';
-import { InlineDoc } from '../../components/doc/tieredmenu/inlinedoc';
-import { OverlayDoc } from '../../components/doc/tieredmenu/overlaydoc';
+import { BasicDoc } from '../../components/doc/tieredmenu/basicdoc';
+import { PopupDoc } from '../../components/doc/tieredmenu/popupdoc';
 import { ApiDoc } from '../../components/doc/tieredmenu/apidoc';
+import { AccessibilityDoc } from '../../components/doc/tieredmenu/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/tieredmenu/styledoc';
 
 const TieredMenuDemo = () => {
     const docs = [
@@ -15,14 +17,24 @@ const TieredMenuDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'inline',
-            label: 'Inline',
-            component: InlineDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
-            id: 'overlay',
-            label: 'Overlay',
-            component: OverlayDoc
+            id: 'popup',
+            label: 'Popup',
+            component: PopupDoc
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         },
         {
             id: 'api',
@@ -40,14 +52,6 @@ const TieredMenuDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

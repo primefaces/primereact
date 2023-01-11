@@ -7,11 +7,12 @@ import { ImportDoc } from '../../components/doc/image/importdoc';
 import { BasicDoc } from '../../components/doc/image/basicdoc';
 import { PreviewDoc } from '../../components/doc/image/previewdoc';
 import { ThumbnailDoc } from '../../components/doc/image/thumbnaildoc';
-import { TemplatingDoc } from '../../components/doc/image/templatingdoc';
+import { TemplateDoc } from '../../components/doc/image/templatedoc';
 import { ApiDoc } from '../../components/doc/image/apidoc';
+import { AccessibilityDoc } from '../../components/doc/image/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/image/styledoc';
 
 const ImageDemo = () => {
-    // const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const docs = [
         {
             id: 'import',
@@ -25,7 +26,7 @@ const ImageDemo = () => {
         },
         {
             id: 'preview',
-            label: 'Preview and Zoom',
+            label: 'Preview',
             component: PreviewDoc
         },
         {
@@ -34,9 +35,19 @@ const ImageDemo = () => {
             component: ThumbnailDoc
         },
         {
-            id: 'templating',
-            label: 'Templating',
-            component: TemplatingDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         },
         {
             id: 'api',
@@ -50,14 +61,6 @@ const ImageDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }
@@ -67,36 +70,19 @@ const ImageDemo = () => {
         <div>
             <Head>
                 <title>React Image Component</title>
-                <meta name="description" content="Displays an image with preview and tranformation options." />
+                <meta name="description" content="Displays a single image with preview and tranformation options." />
             </Head>
             <div className="content-section introduction">
                 <div>
                     <div className="feature-intro">
                         <h1>Image</h1>
-                        <p>
-                            Displays an image with preview and tranformation options. For multiple image, see <Link href="/galleria">Galleria</Link>.
-                        </p>
+                        <p>Displays a single image with preview and tranformation options.</p>
                     </div>
                 </div>
                 <DocActions github="image/index.js" />
             </div>
 
-            {/* <div className="content-section implementation">
-                <div className="card">
-                    <h5>Basic</h5>
-                    <Image src={`${contextPath}/images/galleria/galleria7.jpg`} alt="Image" width="250" />
-
-                    <h5>Preview and Zoom</h5>
-                    <Image src={`${contextPath}/images/galleria/galleria12.jpg`} alt="Image" width="250" preview />
-
-                    <h5>Thumbnail</h5>
-                    <Image src={`${contextPath}/images/galleria/galleria14s.jpg`} zoomSrc={`${contextPath}/images/galleria/galleria14.jpg`} alt="Image" width="80" height="60" preview />
-                </div>
-            </div>
-
-            <ImageDoc></ImageDoc> */}
-
-            <div className="content-section doc button-demo">
+            <div className="content-section doc">
                 <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>

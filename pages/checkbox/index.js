@@ -1,12 +1,16 @@
 import Head from 'next/head';
 import React from 'react';
 import { ApiDoc } from '../../components/doc/checkbox/apidoc';
+import { AccessibilityDoc } from '../../components/doc/checkbox/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/checkbox/styledoc';
 import { BasicDoc } from '../../components/doc/checkbox/basicdoc';
 import { DisabledDoc } from '../../components/doc/checkbox/disableddoc';
 import { DynamicDoc } from '../../components/doc/checkbox/dynamicdoc';
 import { GroupDoc } from '../../components/doc/checkbox/groupdoc';
 import { ImportDoc } from '../../components/doc/checkbox/importdoc';
-import { ValidationDoc } from '../../components/doc/checkbox/validationdoc';
+import { InvalidDoc } from '../../components/doc/checkbox/invaliddoc';
+import { FormikDoc } from '../../components/doc/checkbox/validation/formikdoc';
+import { HookFormDoc, ValidationDoc } from '../../components/doc/checkbox/validation/hookformdoc';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 
@@ -33,6 +37,11 @@ const CheckboxDemo = () => {
             component: DynamicDoc
         },
         {
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
             id: 'disabled',
             label: 'Disabled',
             component: DisabledDoc
@@ -40,10 +49,32 @@ const CheckboxDemo = () => {
         {
             id: 'validation',
             label: 'Validation',
-            component: ValidationDoc
+            description: 'Validate using popular React validation libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
         },
         {
-            id: 'apidoc',
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
+            id: 'api',
             label: 'API',
             component: ApiDoc,
             children: [
@@ -54,14 +85,6 @@ const CheckboxDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

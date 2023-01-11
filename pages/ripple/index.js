@@ -3,9 +3,11 @@ import React from 'react';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/ripple/apidoc';
+import { AccessibilityDoc } from '../../components/doc/ripple/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/ripple/styledoc';
 import { ImportDoc } from '../../components/doc/ripple/importdoc';
 import { DefaultDoc } from '../../components/doc/ripple/defaultdoc';
-import { CustomDoc } from '../../components/doc/ripple/stylingdoc';
+import { CustomDoc } from '../../components/doc/ripple/customdoc';
 import { DocActions } from '../../components/doc/common/docactions';
 
 const RippleDemo = () => {
@@ -26,6 +28,16 @@ const RippleDemo = () => {
             component: CustomDoc
         },
         {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -33,10 +45,6 @@ const RippleDemo = () => {
                 {
                     id: 'styling',
                     label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

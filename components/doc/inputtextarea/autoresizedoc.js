@@ -11,7 +11,7 @@ export function AutoResizeDoc(props) {
 <InputTextarea value={value} onChange={(e) => setValue(e.target.value)} rows={5} cols={30} autoResize />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputTextarea } from "primereact/inputtextarea";
 
 export default function AutoResizeDemo() {
@@ -23,7 +23,7 @@ export default function AutoResizeDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputTextarea } from "primereact/inputtextarea";
 
 export default function AutoResizeDemo() {

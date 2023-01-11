@@ -13,7 +13,7 @@ export function CustomizedDoc(props) {
 
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { ToggleButton } from 'primereact/togglebutton';
 
 export default function BasicDemo() {
@@ -25,7 +25,7 @@ export default function BasicDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { ToggleButton, ToggleButtonChangeParams } from 'primereact/togglebutton';
 
 export default function BasicDemo() {

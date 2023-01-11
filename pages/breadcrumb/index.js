@@ -3,8 +3,11 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/breadcrumb/importdoc';
-import { DefaultDoc } from '../../components/doc/breadcrumb/basicdoc';
-import { ApiDoc } from '../../components/doc/breadcrumb/apipdoc';
+import { BasicDoc } from '../../components/doc/breadcrumb/basicdoc';
+import { ApiDoc } from '../../components/doc/breadcrumb/apidoc';
+import { StyleDoc } from '../../components/doc/breadcrumb/styledoc';
+import { AccessibilityDoc } from '../../components/doc/breadcrumb/accessibilitydoc';
+import { TemplateDoc } from '../../components/doc/breadcrumb/templatedoc';
 
 const BreadCrumbDemo = () => {
     const docs = [
@@ -14,11 +17,25 @@ const BreadCrumbDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'Default',
-            label: 'Default',
-            component: DefaultDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
-
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
         {
             id: 'api',
             label: 'API',
@@ -27,14 +44,6 @@ const BreadCrumbDemo = () => {
                 {
                     id: 'properties',
                     label: 'Properties'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

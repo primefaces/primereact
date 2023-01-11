@@ -3,6 +3,8 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ApiDoc } from '../../components/doc/paginator/apidoc';
+import { AccessibilityDoc } from '../../components/doc/paginator/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/paginator/styledoc';
 import { ImportDoc } from '../../components/doc/paginator/importdoc';
 import { BasicDoc } from '../../components/doc/paginator/basicdoc';
 import { CustomDoc } from '../../components/doc/paginator/customdoc';
@@ -31,6 +33,16 @@ const PaginatorDemo = () => {
             component: ContentDoc
         },
         {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -42,14 +54,6 @@ const PaginatorDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }
@@ -70,7 +74,7 @@ const PaginatorDemo = () => {
                 <DocActions github="paginator/index.js" />
             </div>
 
-            <div className="content-section doc paginator-demo">
+            <div className="content-section doc">
                 <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>

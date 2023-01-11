@@ -39,11 +39,10 @@ export function FilterRowDoc(props) {
 
     const statuses = ['unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal'];
 
-    const customerService = new CustomerService();
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
-        customerService.getCustomersLarge().then((data) => {
+        CustomerService.getCustomersLarge().then((data) => {
             setCustomers(getCustomers(data));
             setLoading(false);
         });
@@ -184,7 +183,7 @@ import { Calendar } from 'primereact/calendar';
 import { MultiSelect } from 'primereact/multiselect';
 import { Slider } from 'primereact/slider';
 import { TriStateCheckbox } from 'primereact/tristatecheckbox';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 import './DataTableDemo.css';
 
 const FilterRowDoc = () => {
@@ -216,10 +215,10 @@ const FilterRowDoc = () => {
         'unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal'
     ];
 
-    const customerService = new CustomerService();
+    
 
     useEffect(() => {
-        customerService.getCustomersLarge().then(data => { setCustomers(getCustomers(data)); setLoading(false) });
+        CustomerService.getCustomersLarge().then(data => { setCustomers(getCustomers(data)); setLoading(false) });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 
@@ -305,18 +304,20 @@ const FilterRowDoc = () => {
     const header = renderHeader();
 
     return (
-        <div className="card">
-            <p>Filters are displayed inline within a separate row.</p>
-            <DataTable value={customers} paginator className="p-datatable-customers" rows={10}
-                dataKey="id" filters={filters} filterDisplay="row" loading={loading} responsiveLayout="scroll"
-                globalFilterFields={['name', 'country.name', 'representative.name', 'status']} header={header} emptyMessage="No customers found.">
-                <Column field="name" header="Name" filter filterPlaceholder="Search by name" style={{ minWidth: '12rem' }} />
-                <Column header="Country" filterField="country.name" style={{ minWidth: '12rem' }} body={countryBodyTemplate} filter filterPlaceholder="Search by country" />
-                <Column header="Agent" filterField="representative" showFilterMenu={false} filterMenuStyle={{ width: '14rem'}} style={{ minWidth: '14rem' }} body={representativeBodyTemplate}
-                    filter filterElement={representativeRowFilterTemplate} />
-                <Column field="status" header="Status" showFilterMenu={false} filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '12rem' }} body={statusBodyTemplate} filter filterElement={statusRowFilterTemplate} />
-                <Column field="verified" header="Verified" dataType="boolean" style={{ minWidth: '6rem' }} body={verifiedBodyTemplate} filter filterElement={verifiedRowFilterTemplate} />
-            </DataTable>
+        <div className="datatable-filter-demo">
+            <div className="card">
+                <p>Filters are displayed inline within a separate row.</p>
+                <DataTable value={customers} paginator className="p-datatable-customers" rows={10}
+                    dataKey="id" filters={filters} filterDisplay="row" loading={loading} responsiveLayout="scroll"
+                    globalFilterFields={['name', 'country.name', 'representative.name', 'status']} header={header} emptyMessage="No customers found.">
+                    <Column field="name" header="Name" filter filterPlaceholder="Search by name" style={{ minWidth: '12rem' }} />
+                    <Column header="Country" filterField="country.name" style={{ minWidth: '12rem' }} body={countryBodyTemplate} filter filterPlaceholder="Search by country" />
+                    <Column header="Agent" filterField="representative" showFilterMenu={false} filterMenuStyle={{ width: '14rem'}} style={{ minWidth: '14rem' }} body={representativeBodyTemplate}
+                        filter filterElement={representativeRowFilterTemplate} />
+                    <Column field="status" header="Status" showFilterMenu={false} filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '12rem' }} body={statusBodyTemplate} filter filterElement={statusRowFilterTemplate} />
+                    <Column field="verified" header="Verified" dataType="boolean" style={{ minWidth: '6rem' }} body={verifiedBodyTemplate} filter filterElement={verifiedRowFilterTemplate} />
+                </DataTable>
+            </div>
         </div>
     );
 }
@@ -336,7 +337,7 @@ import { Calendar } from 'primereact/calendar';
 import { MultiSelect } from 'primereact/multiselect';
 import { Slider } from 'primereact/slider';
 import { TriStateCheckbox } from 'primereact/tristatecheckbox';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 import './DataTableDemo.css';
 
 const FilterRowDoc = () => {
@@ -368,10 +369,10 @@ const FilterRowDoc = () => {
         'unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal'
     ];
 
-    const customerService = new CustomerService();
+    
 
     useEffect(() => {
-        customerService.getCustomersLarge().then(data => { setCustomers(getCustomers(data)); setLoading(false) });
+        CustomerService.getCustomersLarge().then(data => { setCustomers(getCustomers(data)); setLoading(false) });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 
@@ -457,22 +458,85 @@ const FilterRowDoc = () => {
     const header = renderHeader();
 
     return (
-        <div className="card">
-            <p>Filters are displayed inline within a separate row.</p>
-            <DataTable value={customers} paginator className="p-datatable-customers" rows={10}
-                dataKey="id" filters={filters} filterDisplay="row" loading={loading} responsiveLayout="scroll"
-                globalFilterFields={['name', 'country.name', 'representative.name', 'status']} header={header} emptyMessage="No customers found.">
-                <Column field="name" header="Name" filter filterPlaceholder="Search by name" style={{ minWidth: '12rem' }} />
-                <Column header="Country" filterField="country.name" style={{ minWidth: '12rem' }} body={countryBodyTemplate} filter filterPlaceholder="Search by country" />
-                <Column header="Agent" filterField="representative" showFilterMenu={false} filterMenuStyle={{ width: '14rem'}} style={{ minWidth: '14rem' }} body={representativeBodyTemplate}
-                    filter filterElement={representativeRowFilterTemplate} />
-                <Column field="status" header="Status" showFilterMenu={false} filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '12rem' }} body={statusBodyTemplate} filter filterElement={statusRowFilterTemplate} />
-                <Column field="verified" header="Verified" dataType="boolean" style={{ minWidth: '6rem' }} body={verifiedBodyTemplate} filter filterElement={verifiedRowFilterTemplate} />
-            </DataTable>
+        <div className="datatable-filter-demo">
+            <div className="card">
+                <p>Filters are displayed inline within a separate row.</p>
+                <DataTable value={customers} paginator className="p-datatable-customers" rows={10}
+                    dataKey="id" filters={filters} filterDisplay="row" loading={loading} responsiveLayout="scroll"
+                    globalFilterFields={['name', 'country.name', 'representative.name', 'status']} header={header} emptyMessage="No customers found.">
+                    <Column field="name" header="Name" filter filterPlaceholder="Search by name" style={{ minWidth: '12rem' }} />
+                    <Column header="Country" filterField="country.name" style={{ minWidth: '12rem' }} body={countryBodyTemplate} filter filterPlaceholder="Search by country" />
+                    <Column header="Agent" filterField="representative" showFilterMenu={false} filterMenuStyle={{ width: '14rem'}} style={{ minWidth: '14rem' }} body={representativeBodyTemplate}
+                        filter filterElement={representativeRowFilterTemplate} />
+                    <Column field="status" header="Status" showFilterMenu={false} filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '12rem' }} body={statusBodyTemplate} filter filterElement={statusRowFilterTemplate} />
+                    <Column field="verified" header="Verified" dataType="boolean" style={{ minWidth: '6rem' }} body={verifiedBodyTemplate} filter filterElement={verifiedRowFilterTemplate} />
+                </DataTable>
+            </div>
         </div>
     );
 }
+        `,
+        extFiles: {
+            'DatatableDemo.css': `
+/* DataTableDemo.css */
+
+.datatable-filter-demo .p-paginator .p-paginator-current {
+    margin-left: auto;
+}
+.datatable-filter-demo .p-progressbar {
+    height: 0.5rem;
+    background-color: #d8dadc;
+}
+.datatable-filter-demo .p-progressbar .p-progressbar-value {
+    background-color: #607d8b;
+}
+.datatable-filter-demo .p-datepicker {
+    min-width: 25rem;
+}
+.datatable-filter-demo .p-datepicker td {
+    font-weight: 400;
+}
+.datatable-filter-demo .p-datatable.p-datatable-customers .p-datatable-header {
+    padding: 1rem;
+    text-align: left;
+    font-size: 1.5rem;
+}
+.datatable-filter-demo .p-datatable.p-datatable-customers .p-paginator {
+    padding: 1rem;
+}
+.datatable-filter-demo .p-datatable.p-datatable-customers .p-datatable-thead > tr > th {
+    text-align: left;
+}
+.datatable-filter-demo .p-datatable.p-datatable-customers .p-datatable-tbody > tr > td {
+    cursor: auto;
+}
+.datatable-filter-demo .p-datatable.p-datatable-customers .p-dropdown-label:not(.p-placeholder) {
+    text-transform: uppercase;
+}
         `
+        },
+        data: `
+/* CustomerService */ 
+{
+    id: 1000,
+    name: 'James Butt',
+    country: {
+        name: 'Algeria',
+        code: 'dz'
+    },
+    company: 'Benton, John B Jr',
+    date: '2015-09-13',
+    status: 'unqualified',
+    verified: true,
+    activity: 17,
+    representative: {
+        name: 'Ioni Bowcher',
+        image: 'ionibowcher.png'
+    },
+    balance: 70663
+},
+...
+       `
     };
 
     return (
@@ -511,7 +575,7 @@ const FilterRowDoc = () => {
                     <Column field="verified" header="Verified" dataType="boolean" style={{ minWidth: '6rem' }} body={verifiedBodyTemplate} filter filterElement={verifiedRowFilterTemplate} />
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );
 }

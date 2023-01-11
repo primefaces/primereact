@@ -6,6 +6,10 @@ import { BasicDoc } from '../../components/doc/inputswitch/basicdoc';
 import { PreselectionDoc } from '../../components/doc/inputswitch/preselectiondoc';
 import { DisabledDoc } from '../../components/doc/inputswitch/disableddoc';
 import { ApiDoc } from '../../components/doc/inputswitch/apidoc';
+import { AccessibilityDoc } from '../../components/doc/inputswitch/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/inputswitch/styledoc';
+import { FormikDoc } from '../../components/doc/inputswitch/validation/formikdoc';
+import { HookFormDoc } from '../../components/doc/inputswitch/validation/hookformdoc';
 
 const InputSwitchDemo = () => {
     const docs = [
@@ -30,6 +34,33 @@ const InputSwitchDemo = () => {
             component: DisabledDoc
         },
         {
+            id: 'validation',
+            label: 'Validation',
+            description: 'Validate using popular React validation libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             type: 'api',
@@ -42,14 +73,6 @@ const InputSwitchDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

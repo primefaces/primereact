@@ -8,12 +8,11 @@ import { DocSectionText } from '../../common/docsectiontext';
 export function ScrollVerticalDoc(props) {
     const [customers, setCustomers] = useState([]);
     const [loading, setLoading] = useState(false);
-    const customerService = new CustomerService();
 
     useEffect(() => {
         setLoading(true);
 
-        customerService.getCustomersLarge().then((data) => {
+        CustomerService.getCustomersLarge().then((data) => {
             setCustomers(data);
             setLoading(false);
         });
@@ -32,17 +31,17 @@ export function ScrollVerticalDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 const ScrollVerticalDoc = () => {
     const [customers, setCustomers] = useState([]);
     const [loading, setLoading] = useState(false);
-    const customerService = new CustomerService();
+    
 
     useEffect(() => {
         setLoading(true);
 
-        customerService.getCustomersLarge().then((data) => {
+        CustomerService.getCustomersLarge().then((data) => {
             setCustomers(data);
             setLoading(false);
         });
@@ -64,17 +63,17 @@ const ScrollVerticalDoc = () => {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 const ScrollVerticalDoc = () => {
     const [customers, setCustomers] = useState([]);
     const [loading, setLoading] = useState(false);
-    const customerService = new CustomerService();
+    
 
     useEffect(() => {
         setLoading(true);
 
-        customerService.getCustomersLarge().then((data) => {
+        CustomerService.getCustomersLarge().then((data) => {
             setCustomers(data);
             setLoading(false);
         });
@@ -91,7 +90,29 @@ const ScrollVerticalDoc = () => {
         </div>
     );
 }
-        `
+        `,
+        data: `
+/* CustomerService */ 
+{
+    id: 1000,
+    name: 'James Butt',
+    country: {
+        name: 'Algeria',
+        code: 'dz'
+    },
+    company: 'Benton, John B Jr',
+    date: '2015-09-13',
+    status: 'unqualified',
+    verified: true,
+    activity: 17,
+    representative: {
+        name: 'Ioni Bowcher',
+        image: 'ionibowcher.png'
+    },
+    balance: 70663
+},
+...
+       `
     };
 
     return (
@@ -107,7 +128,7 @@ const ScrollVerticalDoc = () => {
                     <Column field="status" header="Status" style={{ minWidth: '200px' }}></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );
 }

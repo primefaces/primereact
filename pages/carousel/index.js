@@ -5,10 +5,12 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/carousel/importdoc';
 import { BasicDoc } from '../../components/doc/carousel/basicdoc';
 import { ApiDoc } from '../../components/doc/carousel/apidoc';
+import { AccessibilityDoc } from '../../components/doc/carousel/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/carousel/styledoc';
 import { CircularDoc } from '../../components/doc/carousel/circulardoc';
 import { VerticalDoc } from '../../components/doc/carousel/verticaldoc';
 import { NumScrollDoc } from '../../components/doc/carousel/numscrolldoc';
-import { ResponsiveOptionsDoc } from '../../components/doc/carousel/responsivedoc';
+import { ResponsiveDoc } from '../../components/doc/carousel/responsivedoc';
 
 const CarouselDemo = () => {
     const docs = [
@@ -28,19 +30,29 @@ const CarouselDemo = () => {
             component: CircularDoc
         },
         {
+            id: 'numscroll',
+            label: 'Num Scroll',
+            component: NumScrollDoc
+        },
+        {
+            id: 'responsive',
+            label: 'Responsive',
+            component: ResponsiveDoc
+        },
+        {
             id: 'vertical',
             label: 'Vertical',
             component: VerticalDoc
         },
         {
-            id: 'numscroll',
-            label: 'NumScroll',
-            component: NumScrollDoc
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
         },
         {
-            id: 'responsive',
-            label: 'ResponsiveOptions',
-            component: ResponsiveOptionsDoc
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         },
         {
             id: 'api',
@@ -54,14 +66,6 @@ const CarouselDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

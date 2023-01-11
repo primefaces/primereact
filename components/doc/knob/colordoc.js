@@ -11,7 +11,7 @@ export function ColorDoc(props) {
 <Knob value={value} valueColor={"SlateGray"} rangeColor={"MediumTurquoise"} onChange={(e) => setValue(e.value)}/>
         `,
         javascript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Knob } from 'primereact/knob';
 
 export default function ColorDoc() {
@@ -23,7 +23,7 @@ export default function ColorDoc() {
 }
         `,
         typescript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Knob, KnobChangeParams } from 'primereact/knob';
 
 export default function ColorDoc() {

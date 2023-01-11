@@ -11,26 +11,30 @@ export function BasicDoc(props) {
 <Checkbox onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Checkbox } from "primereact/checkbox";
 
 export default function BasicDoc() {
     const [checked, setChecked] = useState(false);
 
     return (
-        <Checkbox onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
+        <div className="card flex justify-content-center">
+            <Checkbox onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Checkbox } from "primereact/checkbox";
 
 export default function BasicDoc() {
     const [checked, setChecked] = useState<boolean>(false);
 
     return (
-        <Checkbox onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
+        <div className="card flex justify-content-center">
+            <Checkbox onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
+        </div>
     )
 }
         `

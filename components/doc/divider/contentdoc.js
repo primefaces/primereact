@@ -31,6 +31,7 @@ export function ContentDoc(props) {
 
         `,
         javascript: `
+import React from 'react'; 
 import { Divider } from 'primereact/divider';
 import { Button } from 'primereact/button';
 
@@ -65,6 +66,7 @@ export default function ContentDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Divider } from 'primereact/divider';
 import { Button } from 'primereact/button';
 

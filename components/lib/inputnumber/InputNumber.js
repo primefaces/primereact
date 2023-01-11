@@ -3,7 +3,7 @@ import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputText } from '../inputtext/InputText';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 
 export const InputNumber = React.memo(
     React.forwardRef((props, ref) => {
@@ -203,18 +203,17 @@ export const InputNumber = React.memo(
                     return;
                 }
 
+                // #3913 onChange should be called before onValueChange
+                handleOnChange(event, currentValue, newValue);
                 // touch devices trigger the keyboard to display because of setSelectionRange
                 !DomHandler.isTouchDevice() && updateInput(newValue, null, 'spin');
                 updateModel(event, newValue);
-
-                handleOnChange(event, currentValue, newValue);
             }
         };
 
         const onUpButtonTouchStart = (event) => {
             if (!props.disabled && !props.readOnly) {
                 repeat(event, null, 1);
-                event.preventDefault();
             }
         };
 
@@ -259,7 +258,6 @@ export const InputNumber = React.memo(
         const onDownButtonTouchStart = (event) => {
             if (!props.disabled && !props.readOnly) {
                 repeat(event, null, -1);
-                event.preventDefault();
             }
         };
 
@@ -976,6 +974,7 @@ export const InputNumber = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            focus: () => DomHandler.focus(inputRef.current),
             getFormatter,
             getElement: () => elementRef.current,
             getInput: () => inputRef.current

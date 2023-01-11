@@ -8,15 +8,17 @@ export function DisabledDoc(props) {
 <RadioButton checked disabled></RadioButton>
         `,
         javascript: `
+import React from 'react'; 
 import { RadioButton } from "primereact/radiobutton";
 
 export default function DisabledDemo() {
     return (
-        <Checkbox checked disabled></Checkbox>
+        <RadioButton checked disabled></RadioButton>
     )
 }
         `,
         typescript: `
+import React from 'react'; 
 import { RadioButton } from "primereact/radiobutton";
 
 export default function DisabledDemo() {

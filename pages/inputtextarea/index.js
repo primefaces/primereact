@@ -3,6 +3,8 @@ import React from 'react';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/inputtextarea/apidoc';
+import { AccessibilityDoc } from '../../components/doc/inputtextarea/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/inputtextarea/styledoc';
 import { AutoResizeDoc } from '../../components/doc/inputtextarea/autoresizedoc';
 import { BasicDoc } from '../../components/doc/inputtextarea/basicdoc';
 import { DisabledDoc } from '../../components/doc/inputtextarea/disableddoc';
@@ -10,7 +12,8 @@ import { FloatLabelDoc } from '../../components/doc/inputtextarea/floatlabeldoc'
 import { ImportDoc } from '../../components/doc/inputtextarea/importdoc';
 import { InvalidDoc } from '../../components/doc/inputtextarea/invaliddoc';
 import { KeyFilterDoc } from '../../components/doc/inputtextarea/keyfilterdoc';
-import { ValidationDoc } from '../../components/doc/inputtextarea/validationdoc';
+import { FormikDoc } from '../../components/doc/inputtextarea/validation/formikdoc';
+import { HookFormDoc } from '../../components/doc/inputtextarea/validation/hookformdoc';
 
 const InputTextareaDemo = () => {
     const docs = [
@@ -52,7 +55,29 @@ const InputTextareaDemo = () => {
         {
             id: 'validation',
             label: 'Validation',
-            component: ValidationDoc
+            description: 'Validate using popular React validation libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         },
         {
             id: 'api',
@@ -62,14 +87,6 @@ const InputTextareaDemo = () => {
                 {
                     id: 'properties',
                     label: 'Properties'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

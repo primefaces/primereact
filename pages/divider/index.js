@@ -9,6 +9,8 @@ import { TextDoc } from '../../components/doc/divider/textdoc';
 import { VerticalDoc } from '../../components/doc/divider/verticaldoc';
 import { VerticalContentDoc } from '../../components/doc/divider/verticalcontentdoc';
 import { ApiDoc } from '../../components/doc/divider/apidoc';
+import { AccessibilityDoc } from '../../components/doc/divider/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/divider/styledoc';
 
 const DividerDemo = () => {
     const docs = [
@@ -24,7 +26,7 @@ const DividerDemo = () => {
         },
         {
             id: 'text',
-            label: 'Text with Dashed Style',
+            label: 'Text with Dashed',
             component: TextDoc
         },
         {
@@ -43,6 +45,16 @@ const DividerDemo = () => {
             component: VerticalContentDoc
         },
         {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -50,14 +62,6 @@ const DividerDemo = () => {
                 {
                     id: 'properties',
                     label: 'Properties'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

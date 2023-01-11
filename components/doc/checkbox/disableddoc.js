@@ -8,20 +8,26 @@ export function DisabledDoc(props) {
 <Checkbox checked disabled></Checkbox>
         `,
         javascript: `
+import React from 'react'; 
 import { Checkbox } from "primereact/checkbox";
 
 export default function DisabledDemo() {
     return (
-        <Checkbox checked disabled></Checkbox>
+        <div className="card flex justify-content-center">
+            <Checkbox checked disabled></Checkbox>
+        </div>
     )
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Checkbox } from "primereact/checkbox";
 
 export default function DisabledDemo() {
     return (
-        <Checkbox checked disabled></Checkbox>
+        <div className="card flex justify-content-center">
+            <Checkbox checked disabled></Checkbox>
+        </div>
     )
 }
         `

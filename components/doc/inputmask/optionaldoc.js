@@ -11,7 +11,7 @@ export function OptionalDoc(props) {
 <InputMask value={value} onChange={(e) => setValue(e.target.value)} mask="(999) 999-9999? x99999" placeholder="(999) 999-9999? x99999"  />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputMask } from "primereact/inputmask";
 
 export default function OptionalDemo() {
@@ -23,7 +23,7 @@ export default function OptionalDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputMask, InputMaskChangeParams} from "primereact/inputmask";
 
 export default function OptionalDemo() {

@@ -53,9 +53,10 @@ export function LinearDoc(props) {
 <SpeedDial model={items} direction="right" />
         `,
         javascript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Toast } from 'primereact/toast';
+import './SpeedDialDemo.css'
 
 export default function LinearDoc() {
     const toast = useRef(null);
@@ -98,20 +99,23 @@ export default function LinearDoc() {
     ];
 
     return (
-        <div className="speeddial-linear-demo" style={{ position: 'relative', height: '500px' }}>
-            <Toast ref={toast} />
-            <SpeedDial model={items} direction="up" />
-            <SpeedDial model={items} direction="down" />
-            <SpeedDial model={items} direction="left" />
-            <SpeedDial model={items} direction="right" />
+        <div className="card">
+            <div className="speeddial-linear-demo" style={{ position: 'relative', height: '500px' }}>
+                <Toast ref={toast} />
+                <SpeedDial model={items} direction="up" />
+                <SpeedDial model={items} direction="down" />
+                <SpeedDial model={items} direction="left" />
+                <SpeedDial model={items} direction="right" />
+            </div>
         </div>
     )
 }
         `,
         typescript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Toast } from 'primereact/toast';
+import './SpeedDialDemo.css'
 
 export default function LinearDoc() {
     const toast = useRef<Toast>(null);
@@ -154,16 +158,40 @@ export default function LinearDoc() {
     ];
 
     return (
-        <div className="speeddial-linear-demo" style={{ position: 'relative', height: '500px' }}>
-            <Toast ref={toast} />
-            <SpeedDial model={items} direction="up" />
-            <SpeedDial model={items} direction="down" />
-            <SpeedDial model={items} direction="left" />
-            <SpeedDial model={items} direction="right" />
+        <div className="card">
+            <div className="speeddial-linear-demo" style={{ position: 'relative', height: '500px' }}>
+                <Toast ref={toast} />
+                <SpeedDial model={items} direction="up" />
+                <SpeedDial model={items} direction="down" />
+                <SpeedDial model={items} direction="left" />
+                <SpeedDial model={items} direction="right" />
+            </div>
         </div>
     )
 }
+        `,
+        extFiles: {
+            'SpeedDialDemo.css': `
+/* SpeedDialDemo.css */
+
+.speeddial-linear-demo .p-speeddial-direction-up {
+    left: calc(50% - 2rem);
+    bottom: 0;
+}
+.speeddial-linear-demo .p-speeddial-direction-down {
+    left: calc(50% - 2rem);
+    top: 0;
+}
+.speeddial-linear-demo .p-speeddial-direction-left {
+    right: 0;
+    top: calc(50% - 2rem);
+}
+.speeddial-linear-demo .p-speeddial-direction-right {
+    left: 0;
+    top: calc(50% - 2rem);
+}
         `
+        }
     };
 
     return (

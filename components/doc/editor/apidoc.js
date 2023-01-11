@@ -138,45 +138,6 @@ export function ApiDoc(props) {
                     Refer to <a href="http://beta.quilljs.com/docs/api/#events">Quill documentation</a> for more information.
                 </p>
             </DocSubSection>
-
-            <DocSubSection id="styling" label="Styling">
-                <p>
-                    Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
-                </p>
-                <div className="doc-tablewrapper">
-                    <table className="doc-table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Element</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>p-editor-container</td>
-                                <td>Container element</td>
-                            </tr>
-                            <tr>
-                                <td>p-editor-toolbar</td>
-                                <td>Toolbar of the editor</td>
-                            </tr>
-                            <tr>
-                                <td>p-editor-content</td>
-                                <td>Editable area</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </DocSubSection>
-
-            <DocSubSection id="accessibility" label="Accessibility">
-                <DevelopmentSection>
-                    <p>
-                        Quill performs generally well in terms of accessibility. The elements in the toolbar can be tabbed and have the necessary ARIA roles/attributes for screen readers. One known limitation is the lack of arrow key support for{' '}
-                        <a href="https://github.com/quilljs/quill/issues/1031">dropdowns</a> in the toolbar that may be overcome with a custom toolbar.
-                    </p>
-                </DevelopmentSection>
-            </DocSubSection>
         </>
     );
 }

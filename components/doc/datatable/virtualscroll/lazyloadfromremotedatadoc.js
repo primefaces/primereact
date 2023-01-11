@@ -7,8 +7,7 @@ import { CarService } from '../../../../service/CarService';
 import { Skeleton } from '../../../lib/skeleton/Skeleton';
 
 export function LazyLoadingFromRemoteDataSourceDoc(props) {
-    const carService = new CarService();
-    const cars = Array.from({ length: 100000 }).map((_, i) => carService.generateCar(i + 1));
+    const cars = Array.from({ length: 100000 }).map((_, i) => CarService.generateCar(i + 1));
     const [virtualCars, setVirtualCars] = useState(Array.from({ length: 100000 }));
     const [lazyLoading, setLazyLoading] = useState(false);
     let loadLazyTimeout = null;
@@ -59,11 +58,11 @@ import React, { useState } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Skeleton } from 'primereact/skeleton';
-import { CarService } from '../service/CarService';
+import { CarService } from './service/CarService';
 
 const LazyLoadingFromRemoteDataSourceDoc = () => {
-    const carService = new CarService();
-    const cars = Array.from({ length: 100000 }).map((_, i) => carService.generateCar(i + 1));
+    
+    const cars = Array.from({ length: 100000 }).map((_, i) => CarService.generateCar(i + 1));
     const [virtualCars, setVirtualCars] = useState(Array.from({ length: 100000 }));
     const [lazyLoading, setLazyLoading] = useState(false);
     let loadLazyTimeout = null;
@@ -117,11 +116,11 @@ import React, { useState } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Skeleton } from 'primereact/skeleton';
-import { CarService } from '../service/CarService';
+import { CarService } from './service/CarService';
 
 const LazyLoadingFromRemoteDataSourceDoc = () => {
-    const carService = new CarService();
-    const cars = Array.from({ length: 100000 }).map((_, i) => carService.generateCar(i + 1));
+    
+    const cars = Array.from({ length: 100000 }).map((_, i) => CarService.generateCar(i + 1));
     const [virtualCars, setVirtualCars] = useState(Array.from({ length: 100000 }));
     const [lazyLoading, setLazyLoading] = useState(false);
     let loadLazyTimeout = null;
@@ -169,7 +168,18 @@ const LazyLoadingFromRemoteDataSourceDoc = () => {
         </div>
     );
 }
-        `
+        `,
+        data: `
+/* CarService */
+
+{
+    id: 1
+    vin: tvACo,
+    brand: Norma,
+    color: Black,
+    year: 2002
+}
+`
     };
 
     return (
@@ -186,7 +196,7 @@ const LazyLoadingFromRemoteDataSourceDoc = () => {
                     <Column field="color" header="Color" style={{ minWidth: '200px' }}></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CarService']} />
         </>
     );
 }

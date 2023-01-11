@@ -55,10 +55,11 @@ export function TooltipDoc(props) {
 <SpeedDial model={items} direction="up" className="speeddial-left" buttonClassName="p-button-help" />
         `,
         javascript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Tooltip } from 'primereact/tooltip';
 import { Toast } from 'primereact/toast';
+import './SpeedDialDemo.css'
 
 export default function TooltipDoc() {
     const toast = useRef(null);
@@ -101,22 +102,25 @@ export default function TooltipDoc() {
     ];
 
     return (
-        <div className="speeddial-tooltip-demo" style={{ position: 'relative', height: '350px' }}>
-            <Toast ref={toast} />
-            <Tooltip target=".speeddial-tooltip-demo .speeddial-right .p-speeddial-action" position="left" />
-            <SpeedDial model={items} direction="up" className="speeddial-right" buttonClassName="p-button-danger" />
+        <div className="card">
+            <div className="speeddial-tooltip-demo" style={{ position: 'relative', height: '350px' }}>
+                <Toast ref={toast} />
+                <Tooltip target=".speeddial-tooltip-demo .speeddial-right .p-speeddial-action" position="left" />
+                <SpeedDial model={items} direction="up" className="speeddial-right" buttonClassName="p-button-danger" />
 
-            <Tooltip target=".speeddial-tooltip-demo .speeddial-left .p-speeddial-action" />
-            <SpeedDial model={items} direction="up" className="speeddial-left" buttonClassName="p-button-help" />
+                <Tooltip target=".speeddial-tooltip-demo .speeddial-left .p-speeddial-action" />
+                <SpeedDial model={items} direction="up" className="speeddial-left" buttonClassName="p-button-help" />
+            </div>
         </div>
     )
 }
         `,
         typescript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Tooltip } from 'primereact/tooltip';
 import { Toast } from 'primereact/toast';
+import './SpeedDialDemo.css'
 
 export default function TooltipDoc() {
     const toast = useRef<Toast>(null);
@@ -159,17 +163,33 @@ export default function TooltipDoc() {
     ];
 
     return (
-        <div className="speeddial-tooltip-demo" style={{ position: 'relative', height: '350px' }}>
-            <Toast ref={toast} />
-            <Tooltip target=".speeddial-tooltip-demo .speeddial-right .p-speeddial-action" position="left" />
-            <SpeedDial model={items} direction="up" className="speeddial-right" buttonClassName="p-button-danger" />
+        <div className="card">
+            <div className="speeddial-tooltip-demo" style={{ position: 'relative', height: '350px' }}>
+                <Toast ref={toast} />
+                <Tooltip target=".speeddial-tooltip-demo .speeddial-right .p-speeddial-action" position="left" />
+                <SpeedDial model={items} direction="up" className="speeddial-right" buttonClassName="p-button-danger" />
 
-            <Tooltip target=".speeddial-tooltip-demo .speeddial-left .p-speeddial-action" />
-            <SpeedDial model={items} direction="up" className="speeddial-left" buttonClassName="p-button-help" />
+                <Tooltip target=".speeddial-tooltip-demo .speeddial-left .p-speeddial-action" />
+                <SpeedDial model={items} direction="up" className="speeddial-left" buttonClassName="p-button-help" />
+            </div>
         </div>
     )
 }
-        `
+        `,
+        extFiles: {
+            'SpeedDialDemo.css': `
+/* SpeedDialDemo.css */
+
+.speeddial-tooltip-demo .p-speeddial-direction-up.speeddial-left {
+    left: 0;
+    bottom: 0;
+}
+.speeddial-tooltip-demo .p-speeddial-direction-up.speeddial-right {
+    right: 0;
+    bottom: 0;
+}
+            `
+        }
     };
 
     return (

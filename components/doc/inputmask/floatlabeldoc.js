@@ -14,7 +14,7 @@ export function FloatLabelDoc(props) {
 </span>
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputMask } from "primereact/inputmask";
 
 export default function FloatLabelDemo() {
@@ -29,7 +29,7 @@ export default function FloatLabelDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputMask, InputMaskChangeParams } from "primereact/inputmask";
 
 export default function FloatLabelDemo() {

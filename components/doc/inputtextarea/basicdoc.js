@@ -11,7 +11,7 @@ export function BasicDoc(props) {
 <InputTextarea value={value} onChange={(e) => setValue(e.target.value)} rows={5} cols={30} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputTextarea } from "primereact/inputtextarea";
 
 export default function BasicDemo() {
@@ -23,7 +23,7 @@ export default function BasicDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputTextarea } from "primereact/inputtextarea";
 
 export default function BasicDemo() {

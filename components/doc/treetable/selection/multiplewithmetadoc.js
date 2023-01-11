@@ -8,10 +8,9 @@ import { DocSectionText } from '../../common/docsectiontext';
 export function MultipleWithMetaKeysDoc(props) {
     const [nodes, setNodes] = useState([]);
     const [selectedNodeKeys, setSelectedNodeKeys] = useState([]);
-    const nodeservice = new NodeService();
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then((data) => setNodes(data));
+        NodeService.getTreeTableNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const code = {
@@ -26,15 +25,14 @@ export function MultipleWithMetaKeysDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
-const MultipleWithMetaKeysDoc = () => {
+export default function MultipleWithMetaKeysDoc() {
 const [nodes, setNodes] = useState([]);
-const [selectedNodeKey, setSelectedNodeKey] = useState([]);
-const nodeservice = new NodeService();
+const [selectedNodeKeys, setSelectedNodeKeys] = useState([]);
 
 useEffect(() => {
-    nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    NodeService.getTreeTableNodes().then(data => setNodes(data));
 }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 const onSelect = (event) => {
@@ -60,15 +58,14 @@ const onUnselect = (event) => {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
-const MultipleWithMetaKeysDoc = () => {
+export default function MultipleWithMetaKeysDoc() {
 const [nodes, setNodes] = useState([]);
-const [selectedNodeKey, setSelectedNodeKey] = useState([]);
-const nodeservice = new NodeService();
+const [selectedNodeKeys, setSelectedNodeKeys] = useState([]);
 
 useEffect(() => {
-    nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    NodeService.getTreeTableNodes().then(data => setNodes(data));
 }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 const onSelect = (event) => {
@@ -89,7 +86,36 @@ const onUnselect = (event) => {
         </div>
     )
 }
-        `
+        `,
+        data: `
+/* NodeService */
+{
+    key: '0',
+    label: 'Documents',
+    data: 'Documents Folder',
+    icon: 'pi pi-fw pi-inbox',
+    children: [
+        {
+            key: '0-0',
+            label: 'Work',
+            data: 'Work Folder',
+            icon: 'pi pi-fw pi-cog',
+            children: [
+                { key: '0-0-0', label: 'Expenses.doc', icon: 'pi pi-fw pi-file', data: 'Expenses Document' },
+                { key: '0-0-1', label: 'Resume.doc', icon: 'pi pi-fw pi-file', data: 'Resume Document' }
+            ]
+        },
+        {
+            key: '0-1',
+            label: 'Home',
+            data: 'Home Folder',
+            icon: 'pi pi-fw pi-home',
+            children: [{ key: '0-1-0', label: 'Invoices.txt', icon: 'pi pi-fw pi-file', data: 'Invoices for this month' }]
+        }
+    ]
+},
+...
+`
     };
 
     return (
@@ -104,7 +130,7 @@ const onUnselect = (event) => {
                     <Column field="type" header="Type"></Column>
                 </TreeTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }

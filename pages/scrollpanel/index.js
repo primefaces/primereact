@@ -4,7 +4,10 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/scrollpanel/importdoc';
 import { ApiDoc } from '../../components/doc/scrollpanel/apidoc';
-import { ScrollDemo } from '../../components/doc/scrollpanel/scrolldemo';
+import { AccessibilityDoc } from '../../components/doc/scrollpanel/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/scrollpanel/styledoc';
+import { CustomDemo } from '../../components/doc/scrollpanel/scrolldemo';
+import { BasicDoc } from '../../components/doc/scrollpanel/basicdoc';
 
 const ScrollPanelDemo = () => {
     const docs = [
@@ -14,9 +17,24 @@ const ScrollPanelDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'scrollpanel',
-            label: 'ScrollPanel',
-            component: ScrollDemo
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'custom',
+            label: 'Custom',
+            component: CustomDemo
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         },
         {
             id: 'api',
@@ -30,14 +48,6 @@ const ScrollPanelDemo = () => {
                 {
                     id: 'methods',
                     label: 'Methods'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

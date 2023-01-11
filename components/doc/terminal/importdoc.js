@@ -5,13 +5,14 @@ export function ImportDoc(props) {
     const code = {
         basic: `
 import { Terminal } from 'primereact/terminal';
+import { TerminalService } from 'primereact/terminalservice';
         `
     };
 
     return (
         <>
             <DocSectionText {...props}></DocSectionText>
-            <DocSectionCode code={code} hideToggleCode hideCodeSandbox />
+            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
         </>
     );
 }

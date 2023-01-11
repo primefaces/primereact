@@ -42,7 +42,7 @@ export function DoughnutChartDoc(props) {
 <Chart type="doughnut" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
 export default function DoughnutChartDoc() {
@@ -80,12 +80,14 @@ export default function DoughnutChartDoc() {
     }, []);
 
     return (
-        <Chart type="doughnut" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+        <div className="card flex justify-content-center">
+            <Chart type="doughnut" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
 export default function DoughnutChartDoc() {
@@ -123,7 +125,9 @@ export default function DoughnutChartDoc() {
     }, []);
 
     return (
-        <Chart type="doughnut" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+        <div className="card flex justify-content-center">
+            <Chart type="doughnut" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+        </div>
     )
 }
         `
@@ -137,7 +141,7 @@ export default function DoughnutChartDoc() {
             <div className="card flex justify-content-center">
                 <Chart type="doughnut" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} dependencies={{ 'chart.js': '3.9.1' }} />
         </>
     );
 }

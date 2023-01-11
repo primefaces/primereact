@@ -13,10 +13,9 @@ export function ButtonsDoc(props) {
 <InputNumber inputId="stacked" value={value1} onValueChange={(e) => setValue1(e.value)} showButtons mode="currency" currency="USD" />
 <InputNumber inputId="horizontal" value={value2} onValueChange={(e) => setValue2(e.value)} showButtons buttonLayout="horizontal" step={0.25} decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" mode="currency" currency="EUR"/>
 <InputNumber inputId="minmax-buttons" value={value3} onValueChange={(e) => setValue3(e.value)} mode="decimal" showButtons min={0} max={100} />
-<InputNumber inputId="vertical" value={value4} onValueChange={(e) => setValue4(e.value)} mode="decimal" showButtons buttonLayout="vertical" style={{width: '4rem'}} decrementButtonClassName="p-button-secondary" incrementButtonClassName="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" />
 `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputNumber } from 'primereact/inputnumber';
 
 export default function ButtonsDoc() {
@@ -25,29 +24,25 @@ export default function ButtonsDoc() {
     const [value3, setValue3] = useState(25);
 
     return (
-        <div className="field col-12 md:col-3">
-            <label htmlFor="stacked">Stacked</label>
-            <InputNumber inputId="stacked" value={value1} onValueChange={(e) => setValue1(e.value)} showButtons mode="currency" currency="USD" />
-        </div>
-        <div className="field col-12 md:col-3">
-            <label htmlFor="horizontal">Horizontal with Step</label>
-            <InputNumber inputId="horizontal" value={value2} onValueChange={(e) => setValue2(e.value)} showButtons buttonLayout="horizontal" step={0.25} decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" mode="currency" currency="EUR"/>
-        </div>
-        <div className="field col-12 md:col-3">
-            <label htmlFor="minmax-buttons">Min-Max Boundaries</label>
-            <InputNumber inputId="minmax-buttons" value={value3} onValueChange={(e) => setValue3(e.value)} mode="decimal" showButtons min={0} max={100} />
-        </div>
-        <div className="grid">
+        <div className="card flex flex-column lg:flex-row align-items-center justify-content-center">
             <div className="field col-12 md:col-3">
-                <label htmlFor="vertical" style={{display: 'block'}}>Vertical</label>
-                <InputNumber inputId="vertical" value={value4} onValueChange={(e) => setValue4(e.value)} mode="decimal" showButtons buttonLayout="vertical" style={{width: '4rem'}} decrementButtonClassName="p-button-secondary" incrementButtonClassName="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" />
+                <label htmlFor="stacked">Stacked</label>
+                <InputNumber inputId="stacked" value={value1} onValueChange={(e) => setValue1(e.value)} showButtons mode="currency" currency="USD" />
+            </div>
+            <div className="field col-12 md:col-3">
+                <label htmlFor="horizontal">Horizontal with Step</label>
+                <InputNumber inputId="horizontal" value={value2} onValueChange={(e) => setValue2(e.value)} showButtons buttonLayout="horizontal" step={0.25} decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" mode="currency" currency="EUR"/>
+            </div>
+            <div className="field col-12 md:col-3">
+                <label htmlFor="minmax-buttons">Min-Max Boundaries</label>
+                <InputNumber inputId="minmax-buttons" value={value3} onValueChange={(e) => setValue3(e.value)} mode="decimal" showButtons min={0} max={100} />
             </div>
         </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputNumber, InputNumberValueChangeParams } from 'primereact/inputnumber';
 
 export default function ButtonsDoc() {
@@ -56,22 +51,18 @@ export default function ButtonsDoc() {
     const [value3, setValue3] = useState<number>(25);
 
     return (
-        <div className="field col-12 md:col-3">
-            <label htmlFor="stacked">Stacked</label>
-            <InputNumber inputId="stacked" value={value1} onValueChange={(e : InputNumberValueChangeParams) => setValue1(e.value)} showButtons mode="currency" currency="USD" />
-        </div>
-        <div className="field col-12 md:col-3">
-            <label htmlFor="horizontal">Horizontal with Step</label>
-            <InputNumber inputId="horizontal" value={value2} onValueChange={(e : InputNumberValueChangeParams) => setValue2(e.value)} showButtons buttonLayout="horizontal" step={0.25} decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" mode="currency" currency="EUR"/>
-        </div>
-        <div className="field col-12 md:col-3">
-            <label htmlFor="minmax-buttons">Min-Max Boundaries</label>
-            <InputNumber inputId="minmax-buttons" value={value3} onValueChange={(e : InputNumberValueChangeParams) => setValue3(e.value)} mode="decimal" showButtons min={0} max={100} />
-        </div>
-        <div className="grid">
+        <div className="card flex flex-column lg:flex-row align-items-center justify-content-center">
             <div className="field col-12 md:col-3">
-                <label htmlFor="vertical" style={{display: 'block'}}>Vertical</label>
-                <InputNumber inputId="vertical" value={value4} onValueChange={(e : InputNumberValueChangeParams) => setValue4(e.value)} mode="decimal" showButtons buttonLayout="vertical" style={{width: '4rem'}} decrementButtonClassName="p-button-secondary" incrementButtonClassName="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" />
+                <label htmlFor="stacked">Stacked</label>
+                <InputNumber inputId="stacked" value={value1} onValueChange={(e : InputNumberValueChangeParams) => setValue1(e.value)} showButtons mode="currency" currency="USD" />
+            </div>
+            <div className="field col-12 md:col-3">
+                <label htmlFor="horizontal">Horizontal with Step</label>
+                <InputNumber inputId="horizontal" value={value2} onValueChange={(e : InputNumberValueChangeParams) => setValue2(e.value)} showButtons buttonLayout="horizontal" step={0.25} decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" mode="currency" currency="EUR"/>
+            </div>
+            <div className="field col-12 md:col-3">
+                <label htmlFor="minmax-buttons">Min-Max Boundaries</label>
+                <InputNumber inputId="minmax-buttons" value={value3} onValueChange={(e : InputNumberValueChangeParams) => setValue3(e.value)} mode="decimal" showButtons min={0} max={100} />
             </div>
         </div>
     )
@@ -87,12 +78,12 @@ export default function ButtonsDoc() {
                     buttons, up and down arrow keys can be used to spin the values with keyboard.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <div className="field col-12 md:col-3 ">
+            <div className="card flex flex-column lg:flex-row align-items-center justify-content-center">
+                <div className="field">
                     <label htmlFor="stacked">Stacked</label>
                     <InputNumber inputId="stacked" value={value1} onValueChange={(e) => setValue1(e.value)} showButtons mode="currency" currency="USD" />
                 </div>
-                <div className="field col-12 md:col-3">
+                <div className="field ">
                     <label htmlFor="horizontal">Horizontal with Step</label>
                     <InputNumber
                         inputId="horizontal"
@@ -109,7 +100,7 @@ export default function ButtonsDoc() {
                         currency="EUR"
                     />
                 </div>
-                <div className="field col-12 md:col-3">
+                <div className="field ">
                     <label htmlFor="minmax-buttons">Min-Max Boundaries</label>
                     <InputNumber inputId="minmax-buttons" value={value3} onValueChange={(e) => setValue3(e.value)} mode="decimal" showButtons min={0} max={100} />
                 </div>

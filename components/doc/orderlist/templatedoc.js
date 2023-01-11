@@ -8,12 +8,12 @@ import { Button } from '../../lib/button/Button';
 
 export function TemplateDoc(props) {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
+
     const [filterValue, setFilterValue] = useState('');
     const filterInputRef = useRef();
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data));
+        ProductService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const filterTemplate = (options) => {
@@ -42,16 +42,21 @@ export function TemplateDoc(props) {
 
     const itemTemplate = (item) => {
         return (
-            <div className="product-item">
-                <div className="image-container">
-                    <img src={`images/product/${item.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={item.name} />
+            <div className="flex align-items-center p-2 w-full flex-wrap">
+                <div className="w-full text-center md:w-auto md:text-left">
+                    <img
+                        className="w-7rem md:w-5rem md:shadow-2 md:mr-3 mb-3 md:mb-auto"
+                        src={`images/product/${item.image}`}
+                        onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                        alt={item.name}
+                    />
                 </div>
-                <div className="product-list-detail">
+                <div className="flex-1">
                     <h5 className="mb-2">{item.name}</h5>
-                    <i className="pi pi-tag product-category-icon"></i>
-                    <span className="product-category">{item.category}</span>
+                    <i className="pi pi-tag vertical-align-middle mr-2"></i>
+                    <span className="vertical-align-middle line-height-1">{item.category}</span>
                 </div>
-                <div className="product-list-action">
+                <div className="flex flex-column align-items-end">
                     <h6 className="mb-2">${item.price}</h6>
                     <span className={`product-badge status-${item.inventoryStatus.toLowerCase()}`}>{item.inventoryStatus}</span>
                 </div>
@@ -64,19 +69,20 @@ export function TemplateDoc(props) {
 <OrderList value={products} header="List of Products" dataKey="id" itemTemplate={itemTemplate} filter filterBy="name" filterTemplate={filterTemplate}></OrderList>
         `,
         javascript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { OrderList } from 'primereact/orderlist';
 import { Button } from 'primereact/button';
-import { ProductService } from '../service/ProductService';
+import { InputText } from 'primereact/inputtext';
+import { ProductService } from './service/ProductService';
 
 export default function TemplateDoc() {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
+    
     const [filterValue, setFilterValue] = useState('');
     const filterInputRef = useRef();
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data));
+        ProductService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const filterTemplate = (options) => {
@@ -105,16 +111,16 @@ export default function TemplateDoc() {
 
     const itemTemplate = (item) => {
         return (
-            <div className="product-item">
-                <div className="image-container">
-                <img src={\`images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} />
+            <div className="flex align-items-center p-2 w-full flex-wrap">
+                <div className="w-full text-center md:w-auto md:text-left">
+                <img className='w-7rem md:w-5rem md:shadow-2 md:mr-3 mb-3 md:mb-auto' src={\`images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} />
                 </div>
-                <div className="product-list-detail">
+                <div className="flex-1">
                     <h5 className="mb-2">{item.name}</h5>
-                    <i className="pi pi-tag product-category-icon"></i>
-                    <span className="product-category">{item.category}</span>
+                    <i className="pi pi-tag vertical-align-middle mr-2"></i>
+                    <span className="vertical-align-middle line-height-1">{item.category}</span>
                 </div>
-                <div className="product-list-action">
+                <div className="flex flex-column align-items-end">
                 <h6 className="mb-2">\${item.price}</h6>
                 <span className={\`product-badge status-\${item.inventoryStatus.toLowerCase()}\`}>{item.inventoryStatus}</span>
                 </div>
@@ -123,24 +129,27 @@ export default function TemplateDoc() {
     };
     
     return (
-        <OrderList value={products} header="List of Products" dataKey="id" itemTemplate={itemTemplate} filter filterBy="name" filterTemplate={filterTemplate}></OrderList>
+        <div className="card">
+            <OrderList value={products} onChange={(e) => setProducts(e.value)} header="List of Products" dataKey="id" itemTemplate={itemTemplate} filter filterBy="name" filterTemplate={filterTemplate}></OrderList>
+        </div>
     )
 }
         `,
         typescript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { OrderList } from 'primereact/orderlist';
 import { Button } from 'primereact/button';
-import { ProductService } from '../service/ProductService';
+import { InputText } from 'primereact/inputtext';
+import { ProductService } from './service/ProductService';
 
 export default function TemplateDoc() {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
+    
     const [filterValue, setFilterValue] = useState('');
     const filterInputRef = useRef();
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data));
+        ProductService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const filterTemplate = (options) => {
@@ -169,16 +178,16 @@ export default function TemplateDoc() {
 
     const itemTemplate = (item) => {
         return (
-            <div className="product-item">
-                <div className="image-container">
-                <img src={\`images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} />
+            <div className="flex align-items-center p-2 w-full flex-wrap">
+                <div className="w-full text-center md:w-auto md:text-left">
+                <img className='w-7rem md:w-5rem md:shadow-2 md:mr-3 mb-3 md:mb-auto' src={\`images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} />
                 </div>
-                <div className="product-list-detail">
+                <div className="flex-1">
                     <h5 className="mb-2">{item.name}</h5>
-                    <i className="pi pi-tag product-category-icon"></i>
-                    <span className="product-category">{item.category}</span>
+                    <i className="pi pi-tag vertical-align-middle mr-2"></i>
+                    <span className="vertical-align-middle line-height-1">{item.category}</span>
                 </div>
-                <div className="product-list-action">
+                <div className="flex flex-column align-items-end">
                 <h6 className="mb-2">\${item.price}</h6>
                 <span className={\`product-badge status-\${item.inventoryStatus.toLowerCase()}\`}>{item.inventoryStatus}</span>
                 </div>
@@ -187,9 +196,27 @@ export default function TemplateDoc() {
     };
 
     return (
-        <OrderList value={products} header="List of Products" dataKey="id" itemTemplate={itemTemplate} filter filterBy="name" filterTemplate={filterTemplate}></OrderList>
+        <div className="card">
+            <OrderList value={products} onChange={(e) => setProducts(e.value)} header="List of Products" dataKey="id" itemTemplate={itemTemplate} filter filterBy="name" filterTemplate={filterTemplate}></OrderList>
+        </div>
     )
 }
+        `,
+        data: `
+/* ProductService */        
+{
+    id: '1000',
+    code: 'f230fh0g3',
+    name: 'Bamboo Watch',
+    description: 'Product Description',
+    image: 'bamboo-watch.jpg',
+    price: 65,
+    category: 'Accessories',
+    quantity: 24,
+    inventoryStatus: 'INSTOCK',
+    rating: 5
+},
+...
         `
     };
 
@@ -199,9 +226,9 @@ export default function TemplateDoc() {
                 <p>OrderList requires an array as its value, a template for its content where each item in the array can be accessed inside the template and onChangecallback to update the value after reorder.</p>
             </DocSectionText>
             <div className="card">
-                <OrderList value={products} header="List of Products" dataKey="id" itemTemplate={itemTemplate} filter filterBy="name" filterTemplate={filterTemplate}></OrderList>
+                <OrderList value={products} onChange={(e) => setProducts(e.value)} header="List of Products" dataKey="id" itemTemplate={itemTemplate} filter filterBy="name" filterTemplate={filterTemplate}></OrderList>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

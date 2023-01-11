@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { DataTable } from '../../../lib/datatable/DataTable';
-import { Column } from '../../../lib/column/Column';
+import { useEffect, useState } from 'react';
 import { ProductService } from '../../../../service/ProductService';
+import { Column } from '../../../lib/column/Column';
+import { DataTable } from '../../../lib/datatable/DataTable';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 
@@ -11,9 +11,7 @@ export function SingleDoc(props) {
     const [selectedProduct2, setSelectedProduct2] = useState(null);
 
     useEffect(() => {
-        const productService = new ProductService();
-
-        productService.getProductsSmall().then((data) => setProducts(data));
+        ProductService.getProductsMini().then((data) => setProducts(data));
     }, []);
 
     const code = {
@@ -37,7 +35,7 @@ export function SingleDoc(props) {
 import React, { useEffect, useState } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
 const SingleDoc = () => {
@@ -47,13 +45,13 @@ const SingleDoc = () => {
     const [selectedProduct2, setSelectedProduct2] = useState(null);
 
     useEffect(() => {
-        const productService = new ProductService();
+        
 
-        productService.getProductsSmall().then(data => setProducts(data));
+        ProductService.getProductsMini().then(data => setProducts(data));
     },[]);
 
     return (
-        <div className="card datatable-selection-demo">
+        <div className="card">
             <h6>Row Selection</h6>
             <DataTable value={products} selectionMode="single" selection={selectedProduct1} onSelectionChange={e => setSelectedProduct1(e.value)} dataKey="id" responsiveLayout="scroll">
                 <Column field="code" header="Code"></Column>
@@ -77,7 +75,7 @@ const SingleDoc = () => {
 import React, { useEffect, useState } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
 const SingleDoc = () => {
@@ -87,13 +85,13 @@ const SingleDoc = () => {
     const [selectedProduct2, setSelectedProduct2] = useState(null);
 
     useEffect(() => {
-        const productService = new ProductService();
+        
 
-        productService.getProductsSmall().then(data => setProducts(data));
+        ProductService.getProductsMini().then(data => setProducts(data));
     },[]);
 
     return (
-        <div className="card datatable-selection-demo">
+        <div className="card">
             <h6>Row Selection</h6>
             <DataTable value={products} selectionMode="single" selection={selectedProduct1} onSelectionChange={e => setSelectedProduct1(e.value)} dataKey="id" responsiveLayout="scroll">
                 <Column field="code" header="Code"></Column>
@@ -112,6 +110,22 @@ const SingleDoc = () => {
         </div>
     );
 }
+        `,
+        data: `
+/* ProductService */        
+{
+    id: '1000',
+    code: 'f230fh0g3',
+    name: 'Bamboo Watch',
+    description: 'Product Description',
+    image: 'bamboo-watch.jpg',
+    price: 65,
+    category: 'Accessories',
+    quantity: 24,
+    inventoryStatus: 'INSTOCK',
+    rating: 5
+},
+...
         `
     };
 
@@ -137,7 +151,7 @@ const SingleDoc = () => {
                     <Column field="quantity" header="Quantity"></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

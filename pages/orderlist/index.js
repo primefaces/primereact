@@ -3,6 +3,8 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ApiDoc } from '../../components/doc/orderlist/apidoc';
+import { AccessibilityDoc } from '../../components/doc/orderlist/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/orderlist/styledoc';
 import { ImportDoc } from '../../components/doc/orderlist/importdoc';
 import { TemplateDoc } from '../../components/doc/orderlist/templatedoc';
 import { BasicDoc } from '../../components/doc/orderlist/basicdoc';
@@ -37,6 +39,16 @@ const OrderListDemo = () => {
             component: TemplateDoc
         },
         {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -52,14 +64,6 @@ const OrderListDemo = () => {
                 {
                     id: 'methods',
                     label: 'Methods'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }
@@ -80,7 +84,7 @@ const OrderListDemo = () => {
                 <DocActions github="orderlist/index.js" />
             </div>
 
-            <div className="content-section implementation orderlist-demo">
+            <div className="content-section implementation">
                 <div className="content-section doc">
                     <DocSections docs={docs} />
                     <DocSectionNav docs={docs} />

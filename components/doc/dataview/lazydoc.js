@@ -15,7 +15,6 @@ export function LazyDataViewDoc(props) {
     const rows = useRef(6);
     const datasource = useRef(null);
     const isMounted = useRef(false);
-    const productService = new ProductService();
 
     useEffect(() => {
         if (isMounted.current) {
@@ -28,7 +27,7 @@ export function LazyDataViewDoc(props) {
     useEffect(() => {
         setTimeout(() => {
             isMounted.current = true;
-            productService.getProducts().then((data) => {
+            ProductService.getProducts().then((data) => {
                 datasource.current = data;
                 setTotalRecords(data.length);
                 setProducts(datasource.current.slice(0, rows.current));
@@ -55,19 +54,19 @@ export function LazyDataViewDoc(props) {
     const renderListItem = (data) => {
         return (
             <div className="col-12">
-                <div className="product-list-item">
-                    <img src={`images/product/${data.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={data.name} />
-                    <div className="product-list-detail">
-                        <div className="product-name">{data.name}</div>
-                        <div className="product-description">{data.description}</div>
-                        <Rating value={data.rating} readOnly cancel={false}></Rating>
-                        <i className="pi pi-tag product-category-icon"></i>
-                        <span className="product-category">{data.category}</span>
+                <div className="flex flex-column align-items-center p-3 w-full md:flex-row">
+                    <img className="md:w-11rem w-9 shadow-2 md:my-0 md:mr-5 mr-0 my-5" src={`images/product/${data.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={data.name} />
+                    <div className="text-center md:text-left md:flex-1">
+                        <div className="text-2xl font-bold">{data.name}</div>
+                        <div className="mb-3">{data.description}</div>
+                        <Rating className="mb-2" value={data.rating} readOnly cancel={false}></Rating>
+                        <i className="pi pi-tag vertical-align-middle mr-2"></i>
+                        <span className="vertical-align-middle font-semibold">{data.category}</span>
                     </div>
-                    <div className="product-list-action">
-                        <span className="product-price">${data.price}</span>
-                        <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
-                        <span className={`product-badge status-${data.inventoryStatus.toLowerCase()}`}>{data.inventoryStatus}</span>
+                    <div className="flex md:flex-column mt-5 justify-content-between align-items-center md:w-auto w-full">
+                        <span className="align-self-center text-2xl font-semibold mb-2 md:align-self-end">${data.price}</span>
+                        <Button className="mb-2" icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                        <span className={`md:w-full product-badge status-${data.inventoryStatus.toLowerCase()}`}>{data.inventoryStatus}</span>
                     </div>
                 </div>
             </div>
@@ -77,22 +76,22 @@ export function LazyDataViewDoc(props) {
     const renderGridItem = (data) => {
         return (
             <div className="col-12 md:col-4">
-                <div className="product-grid-item card">
-                    <div className="product-grid-item-top">
+                <div className="m-2 border-1 surface-border card">
+                    <div className="flex align-items-center justify-content-between">
                         <div>
-                            <i className="pi pi-tag product-category-icon"></i>
-                            <span className="product-category">{data.category}</span>
+                            <i className="pi pi-tag vertical-align-middle mr-2"></i>
+                            <span className="font-semibold vertical-align-middle">{data.category}</span>
                         </div>
                         <span className={`product-badge status-${data.inventoryStatus.toLowerCase()}`}>{data.inventoryStatus}</span>
                     </div>
-                    <div className="product-grid-item-content">
-                        <img src={`images/product/${data.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={data.name} />
-                        <div className="product-name">{data.name}</div>
-                        <div className="product-description">{data.description}</div>
-                        <Rating value={data.rating} readOnly cancel={false}></Rating>
+                    <div className="text-center">
+                        <img className="w-9 my-5 shadow-3" src={`images/product/${data.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={data.name} />
+                        <div className="text-2xl font-bold">{data.name}</div>
+                        <div className="mb-3">{data.description}</div>
+                        <Rating className="mb-2" value={data.rating} readOnly cancel={false}></Rating>
                     </div>
-                    <div className="product-grid-item-bottom">
-                        <span className="product-price">${data.price}</span>
+                    <div className="flex align-items-center justify-content-between">
+                        <span className="align-self-center text-2xl font-semibold mb-2 md:align-self-end">${data.price}</span>
                         <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
                     </div>
                 </div>
@@ -132,8 +131,9 @@ export function LazyDataViewDoc(props) {
 import React, { useState, useEffect, useRef } from 'react';
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 import { Button } from 'primereact/button';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 import { Rating } from 'primereact/rating';
+import './DataViewDemo.css';
 
 export default function LazyDataViewDoc() {
     const [products, setProducts] = useState(null);
@@ -144,7 +144,7 @@ export default function LazyDataViewDoc() {
     const rows = useRef(6);
     const datasource = useRef(null);
     const isMounted = useRef(false);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
         if (isMounted.current) {
@@ -157,7 +157,7 @@ export default function LazyDataViewDoc() {
     useEffect(() => {
         setTimeout(() => {
             isMounted.current = true;
-            productService.getProducts().then(data => {
+            ProductService.getProducts().then(data => {
                 datasource.current = data;
                 setTotalRecords(data.length);
                 setProducts(datasource.current.slice(0, rows.current));
@@ -180,22 +180,23 @@ export default function LazyDataViewDoc() {
             setLoading(false);
         }, 1000);
     }
+    
     const renderListItem = (data) => {
         return (
             <div className="col-12">
-                <div className="product-list-item">
-                <img src={\`images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
-                    <div className="product-list-detail">
-                        <div className="product-name">{data.name}</div>
-                        <div className="product-description">{data.description}</div>
-                        <Rating value={data.rating} readOnly cancel={false}></Rating>
-                        <i className="pi pi-tag product-category-icon"></i>
-                        <span className="product-category">{data.category}</span>
+                <div className="flex flex-column align-items-center p-3 w-full md:flex-row">
+                    <img className="md:w-11rem w-9 shadow-2 md:my-0 md:mr-5 mr-0 my-5" src={\`images/product/\${data.image}\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={data.name} />
+                    <div className="text-center md:text-left md:flex-1">
+                        <div className="text-2xl font-bold">{data.name}</div>
+                        <div className="mb-3">{data.description}</div>
+                        <Rating className="mb-2" value={data.rating} readOnly cancel={false}></Rating>
+                        <i className="pi pi-tag vertical-align-middle mr-2"></i>
+                        <span className="vertical-align-middle font-semibold">{data.category}</span>
                     </div>
-                    <div className="product-list-action">
-                    <span className="product-price">\${data.price}</span>
-                    <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
-                    <span className={\`product-badge status-\${data.inventoryStatus.toLowerCase()}\`}>{data.inventoryStatus}</span>
+                    <div className="flex md:flex-column mt-5 justify-content-between align-items-center md:w-auto w-full">
+                        <span className="align-self-center text-2xl font-semibold mb-2 md:align-self-end">\${data.price}</span>
+                        <Button className="mb-2" icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                        <span className={\`product-badge status-\${data.inventoryStatus.toLowerCase()}\` md:w-full}>{data.inventoryStatus}</span>
                     </div>
                 </div>
             </div>
@@ -205,22 +206,22 @@ export default function LazyDataViewDoc() {
     const renderGridItem = (data) => {
         return (
             <div className="col-12 md:col-4">
-                <div className="product-grid-item card">
-                    <div className="product-grid-item-top">
+                <div className="m-2 border-1 surface-border card">
+                    <div className="flex align-items-center justify-content-between">
                         <div>
-                            <i className="pi pi-tag product-category-icon"></i>
-                            <span className="product-category">{data.category}</span>
+                            <i className="pi pi-tag vertical-align-middle mr-2"></i>
+                            <span className="font-semibold vertical-align-middle">{data.category}</span>
                         </div>
                         <span className={\`product-badge status-\${data.inventoryStatus.toLowerCase()}\`}>{data.inventoryStatus}</span>
                     </div>
-                    <div className="product-grid-item-content">
-                    <img src={\`images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
-                    <div className="product-name">{data.name}</div>
-                    <div className="product-description">{data.description}</div>
-                    <Rating value={data.rating} readOnly cancel={false}></Rating>
+                    <div className="text-center">
+                        <img className="w-9 my-5 shadow-3" src={\`images/product/\${data.image}\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={data.name} />
+                        <div className="text-2xl font-bold">{data.name}</div>
+                        <div className="mb-3">{data.description}</div>
+                        <Rating className="mb-2" value={data.rating} readOnly cancel={false}></Rating>
                     </div>
-                    <div className="product-grid-item-bottom">
-                        <span className="product-price">\${data.price}</span>
+                    <div className="flex align-items-center justify-content-between">
+                        <span className="align-self-center text-2xl font-semibold mb-2 md:align-self-end">\${data.price}</span>
                         <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
                     </div>
                 </div>
@@ -255,16 +256,19 @@ export default function LazyDataViewDoc() {
     const header = renderHeader();
 
     return (
-        <DataView value={products} layout={layout} header={header} itemTemplate={itemTemplate} lazy paginator paginatorPosition={'both'} rows={rows.current} totalRecords={totalRecords} first={first} onPage={onPage} loading={loading} />
-    )
+        <div className="card dataview-demo">
+            <DataView value={products} layout={layout} header={header} itemTemplate={itemTemplate} lazy paginator paginatorPosition={'both'} rows={rows.current} totalRecords={totalRecords} first={first} onPage={onPage} loading={loading} />
+        </div>
+        )
 }
         `,
         typescript: `
 import React, { useState, useEffect, useRef } from 'react';
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 import { Button } from 'primereact/button';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 import { Rating } from 'primereact/rating';
+import './DataViewDemo.css';
 
 export default function LazyDataViewDoc() {
     const [products, setProducts] = useState(null);
@@ -275,7 +279,7 @@ export default function LazyDataViewDoc() {
     const rows = useRef(6);
     const datasource = useRef(null);
     const isMounted = useRef(false);
-    const productService = new ProductService();
+    
 
     useEffect(() => {
         if (isMounted.current) {
@@ -288,7 +292,7 @@ export default function LazyDataViewDoc() {
     useEffect(() => {
         setTimeout(() => {
             isMounted.current = true;
-            productService.getProducts().then(data => {
+            ProductService.getProducts().then(data => {
                 datasource.current = data;
                 setTotalRecords(data.length);
                 setProducts(datasource.current.slice(0, rows.current));
@@ -311,22 +315,23 @@ export default function LazyDataViewDoc() {
             setLoading(false);
         }, 1000);
     }
+    
     const renderListItem = (data) => {
         return (
             <div className="col-12">
-                <div className="product-list-item">
-                <img src={\`images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
-                    <div className="product-list-detail">
-                        <div className="product-name">{data.name}</div>
-                        <div className="product-description">{data.description}</div>
-                        <Rating value={data.rating} readOnly cancel={false}></Rating>
-                        <i className="pi pi-tag product-category-icon"></i>
-                        <span className="product-category">{data.category}</span>
+                <div className="flex flex-column align-items-center p-3 w-full md:flex-row">
+                    <img className="md:w-11rem w-9 shadow-2 md:my-0 md:mr-5 mr-0 my-5" src={\`images/product/\${data.image}\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={data.name} />
+                    <div className="text-center md:text-left md:flex-1">
+                        <div className="text-2xl font-bold">{data.name}</div>
+                        <div className="mb-3">{data.description}</div>
+                        <Rating className="mb-2" value={data.rating} readOnly cancel={false}></Rating>
+                        <i className="pi pi-tag vertical-align-middle mr-2"></i>
+                        <span className="vertical-align-middle font-semibold">{data.category}</span>
                     </div>
-                    <div className="product-list-action">
-                    <span className="product-price">\${data.price}</span>
-                    <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
-                    <span className={\`product-badge status-\${data.inventoryStatus.toLowerCase()}\`}>{data.inventoryStatus}</span>
+                    <div className="flex md:flex-column mt-5 justify-content-between align-items-center md:w-auto w-full">
+                        <span className="align-self-center text-2xl font-semibold mb-2 md:align-self-end">\${data.price}</span>
+                        <Button className="mb-2" icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                        <span className={\`product-badge status-\${data.inventoryStatus.toLowerCase()}\` md:w-full}>{data.inventoryStatus}</span>
                     </div>
                 </div>
             </div>
@@ -336,22 +341,22 @@ export default function LazyDataViewDoc() {
     const renderGridItem = (data) => {
         return (
             <div className="col-12 md:col-4">
-                <div className="product-grid-item card">
-                    <div className="product-grid-item-top">
+                <div className="m-2 border-1 surface-border card">
+                    <div className="flex align-items-center justify-content-between">
                         <div>
-                            <i className="pi pi-tag product-category-icon"></i>
-                            <span className="product-category">{data.category}</span>
+                            <i className="pi pi-tag vertical-align-middle mr-2"></i>
+                            <span className="font-semibold vertical-align-middle">{data.category}</span>
                         </div>
                         <span className={\`product-badge status-\${data.inventoryStatus.toLowerCase()}\`}>{data.inventoryStatus}</span>
                     </div>
-                    <div className="product-grid-item-content">
-                    <img src={\`images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
-                    <div className="product-name">{data.name}</div>
-                    <div className="product-description">{data.description}</div>
-                    <Rating value={data.rating} readOnly cancel={false}></Rating>
+                    <div className="text-center">
+                        <img className="w-9 my-5 shadow-3" src={\`images/product/\${data.image}\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={data.name} />
+                        <div className="text-2xl font-bold">{data.name}</div>
+                        <div className="mb-3">{data.description}</div>
+                        <Rating className="mb-2" value={data.rating} readOnly cancel={false}></Rating>
                     </div>
-                    <div className="product-grid-item-bottom">
-                        <span className="product-price">\${data.price}</span>
+                    <div className="flex align-items-center justify-content-between">
+                        <span className="align-self-center text-2xl font-semibold mb-2 md:align-self-end">\${data.price}</span>
                         <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
                     </div>
                 </div>
@@ -386,9 +391,35 @@ export default function LazyDataViewDoc() {
     const header = renderHeader();
 
     return (
-        <DataView value={products} layout={layout} header={header} itemTemplate={itemTemplate} lazy paginator paginatorPosition={'both'} rows={rows.current} totalRecords={totalRecords} first={first} onPage={onPage} loading={loading} />
+        <div className="card dataview-demo">
+            <DataView value={products} layout={layout} header={header} itemTemplate={itemTemplate} lazy paginator paginatorPosition={'both'} rows={rows.current} totalRecords={totalRecords} first={first} onPage={onPage} loading={loading} />
+        </div>
     )
 }
+        `,
+        css: `
+/* DataViewDemo.css */
+
+.dataview-demo .p-dropdown {
+    width: 14rem;
+    font-weight: normal;
+}
+        `,
+        data: `
+/* ProductService */        
+{
+    id: '1000',
+    code: 'f230fh0g3',
+    name: 'Bamboo Watch',
+    description: 'Product Description',
+    image: 'bamboo-watch.jpg',
+    price: 65,
+    category: 'Accessories',
+    quantity: 24,
+    inventoryStatus: 'INSTOCK',
+    rating: 5
+},
+...
         `
     };
 
@@ -401,7 +432,7 @@ export default function LazyDataViewDoc() {
                     records of totalRecords size although in reality they aren't as in lazy mode, only the records that are displayed on the current page exist.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
+            <div className="card">
                 <DataView value={products} layout={layout} header={header} itemTemplate={itemTemplate} lazy paginator paginatorPosition={'both'} rows={rows.current} totalRecords={totalRecords} first={first} onPage={onPage} loading={loading} />
             </div>
             <DocSectionCode code={code} />

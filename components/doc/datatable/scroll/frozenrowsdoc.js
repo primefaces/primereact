@@ -1,21 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { DataTable } from '../../../lib/datatable/DataTable';
-import { Column } from '../../../lib/column/Column';
+import React, { useEffect, useState } from 'react';
 import { CustomerService } from '../../../../service/CustomerService';
+import { Button } from '../../../lib/button/Button';
+import { Column } from '../../../lib/column/Column';
+import { DataTable } from '../../../lib/datatable/DataTable';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
-import { Button } from '../../../lib/button/Button';
 
 export function ScrollFrozenRowsDoc(props) {
     const [lockedCustomers, setLockedCustomers] = useState([]);
     const [unlockedCustomers, setUnlockedCustomers] = useState(null);
     const [loading, setLoading] = useState(false);
-    const customerService = new CustomerService();
 
     useEffect(() => {
         setLoading(true);
 
-        customerService.getCustomersMedium().then((data) => {
+        CustomerService.getCustomersMedium().then((data) => {
             setUnlockedCustomers(data);
         });
 
@@ -68,11 +67,12 @@ export function ScrollFrozenRowsDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={customers} scrollable scrollHeight="400px" loading={loading}>
+<DataTable value={unlockedCustomers} frozenValue={lockedCustomers} scrollable scrollHeight="400px" loading={loading}>
     <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
     <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
     <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
     <Column field="status" header="Status" style={{ minWidth: '200px' }}></Column>
+    <Column style={{ flex: '0 0 4rem' }} body={lockTemplate}></Column>
 </DataTable>
         `,
         javascript: `
@@ -80,18 +80,19 @@ import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
+import './DataTableDemo.css';
 
 const ScrollFrozenRowsDoc = () => {
     const [lockedCustomers, setLockedCustomers] = useState([]);
     const [unlockedCustomers, setUnlockedCustomers] = useState(null);
     const [loading, setLoading] = useState(false);
-    const customerService = new CustomerService();
+    
 
     useEffect(() => {
         setLoading(true);
-        
-        customerService.getCustomersMedium().then((data) => {
+
+        CustomerService.getCustomersMedium().then((data) => {
             setUnlockedCustomers(data);
         });
 
@@ -160,18 +161,19 @@ import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
+import './DataTableDemo.css';
 
 const ScrollFrozenRowsDoc = () => {
     const [lockedCustomers, setLockedCustomers] = useState([]);
     const [unlockedCustomers, setUnlockedCustomers] = useState(null);
     const [loading, setLoading] = useState(false);
-    const customerService = new CustomerService();
+    
 
     useEffect(() => {
         setLoading(true);
-        
-        customerService.getCustomersMedium().then((data) => {
+
+        CustomerService.getCustomersMedium().then((data) => {
             setUnlockedCustomers(data);
         });
 
@@ -234,7 +236,39 @@ const ScrollFrozenRowsDoc = () => {
         </div>
     );
 }
-        `
+        `,
+        css: `
+/* DataTableDemo.css */
+.datatable-scroll-demo .p-datatable-frozen-tbody {
+    font-weight: bold;
+}
+
+.datatable-scroll-demo .p-datatable-scrollable .p-frozen-column {
+    font-weight: bold;
+}
+        `,
+        data: `
+/* CustomerService */ 
+{
+    id: 1000,
+    name: 'James Butt',
+    country: {
+        name: 'Algeria',
+        code: 'dz'
+    },
+    company: 'Benton, John B Jr',
+    date: '2015-09-13',
+    status: 'unqualified',
+    verified: true,
+    activity: 17,
+    representative: {
+        name: 'Ioni Bowcher',
+        image: 'ionibowcher.png'
+    },
+    balance: 70663
+},
+...
+       `
     };
 
     return (
@@ -251,7 +285,7 @@ const ScrollFrozenRowsDoc = () => {
                     <Column style={{ flex: '0 0 4rem' }} body={lockTemplate}></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );
 }

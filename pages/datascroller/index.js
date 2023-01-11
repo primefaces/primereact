@@ -3,6 +3,8 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/datascroller/apidoc';
+import { AccessibilityDoc } from '../../components/doc/datascroller/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/datascroller/styledoc';
 import { BasicDoc } from '../../components/doc/datascroller/basicdoc';
 import { ImportDoc } from '../../components/doc/datascroller/importdoc';
 import { InlineDataScrollerDoc } from '../../components/doc/datascroller/inlinedoc';
@@ -31,6 +33,16 @@ const DataScrollerDemo = () => {
             component: LoaderDataScrollerDoc
         },
         {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -42,14 +54,6 @@ const DataScrollerDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

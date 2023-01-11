@@ -10,10 +10,9 @@ import { Dialog } from '../../../lib/dialog/Dialog';
 export function ScrollFlexibleDoc(props) {
     const [customers, setCustomers] = useState([]);
     const [dialogVisible, setDialogVisible] = useState(false);
-    const customerService = new CustomerService();
 
     useEffect(() => {
-        customerService.getCustomersLarge().then((data) => {
+        CustomerService.getCustomersLarge().then((data) => {
             setCustomers(data);
         });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -48,12 +47,12 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 const ScrollFlexibleDoc = () => {
 
     useEffect(() => {
-        customerService.getCustomersLarge().then((data) => {
+        CustomerService.getCustomersLarge().then((data) => {
             setCustomers(data);
         });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -91,12 +90,12 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
-import { CustomerService } from '../service/CustomerService';
+import { CustomerService } from './service/CustomerService';
 
 const ScrollFlexibleDoc = () => {
     
     useEffect(() => {
-        customerService.getCustomersLarge().then((data) => {
+        CustomerService.getCustomersLarge().then((data) => {
             setCustomers(data);
         });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -127,7 +126,29 @@ const ScrollFlexibleDoc = () => {
         </div>
     );
 }
-        `
+        `,
+        data: `
+/* CustomerService */ 
+{
+    id: 1000,
+    name: 'James Butt',
+    country: {
+        name: 'Algeria',
+        code: 'dz'
+    },
+    company: 'Benton, John B Jr',
+    date: '2015-09-13',
+    status: 'unqualified',
+    verified: true,
+    activity: 17,
+    representative: {
+        name: 'Ioni Bowcher',
+        image: 'ionibowcher.png'
+    },
+    balance: 70663
+},
+...
+       `
     };
 
     return (
@@ -149,7 +170,7 @@ const ScrollFlexibleDoc = () => {
                     </DataTable>
                 </Dialog>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );
 }

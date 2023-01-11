@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 
 export const InputSwitch = React.memo(
     React.forwardRef((props, ref) => {
@@ -50,8 +50,9 @@ export const InputSwitch = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            focus: () => DomHandler.focus(inputRef.current),
             getElement: () => elementRef.current,
-            getInput: () => elementRef.current
+            getInput: () => inputRef.current
         }));
 
         React.useEffect(() => {

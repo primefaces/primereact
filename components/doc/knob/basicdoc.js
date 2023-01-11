@@ -11,7 +11,7 @@ export function BasicDoc(props) {
 <Knob value={value} onChange={(e) => setValue(e.value)} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Knob } from 'primereact/knob';
 
 export default function BasicDoc() {
@@ -23,7 +23,7 @@ export default function BasicDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Knob, KnobChangeParams } from 'primereact/knob';
 
 export default function BasicDoc() {

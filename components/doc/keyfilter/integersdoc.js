@@ -9,6 +9,7 @@ export function IntegersDoc(props) {
 <InputText id="integer" keyfilter="int" />
         `,
         javascript: `
+import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
 
 export default function IntegersDoc() {
@@ -22,6 +23,7 @@ export default function IntegersDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
 
 export default function IntegersDoc() {
@@ -39,7 +41,8 @@ export default function IntegersDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Integers</p>
+                {/* TO DO: Add demo content. */}
+                <p></p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="grid p-fluid gap-2">

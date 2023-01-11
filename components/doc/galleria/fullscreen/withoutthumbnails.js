@@ -8,7 +8,7 @@ import getConfig from 'next/config';
 
 export function WithoutThumbnailsDoc(props) {
     const [images, setImages] = useState(null);
-    const galleriaService = new PhotoService();
+
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const galleria = useRef(null);
 
@@ -28,7 +28,7 @@ export function WithoutThumbnailsDoc(props) {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then((data) => setImages(data));
+        PhotoService.getImages().then((data) => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
@@ -47,14 +47,14 @@ export function WithoutThumbnailsDoc(props) {
 <Button label="Show" icon="pi pi-external-link" onClick={() => galleria.current.show()} />
         `,
         javascript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
 
 export default function WithoutThumbnailsDoc() {
     const [images, setImages] = useState(null);
-    const galleriaService = new PhotoService();
+    
     const galleria = useRef(null);
 
     const responsiveOptions = [
@@ -73,7 +73,7 @@ export default function WithoutThumbnailsDoc() {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
@@ -85,7 +85,7 @@ export default function WithoutThumbnailsDoc() {
     }
 
     return (
-        <div>
+        <div className="card flex justify-content-center">
             <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={7} style={{ maxWidth: '850px' }}
                 circular fullScreen showItemNavigators showThumbnails={false} item={itemTemplate} thumbnail={thumbnailTemplate} />
 
@@ -95,14 +95,14 @@ export default function WithoutThumbnailsDoc() {
 }
         `,
         typescript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
 
 export default function WithoutThumbnailsDoc() {
     const [images, setImages] = useState(null);
-    const galleriaService = new PhotoService();
+    
     const galleria = useRef(null);
     
     const responsiveOptions = [
@@ -121,7 +121,7 @@ export default function WithoutThumbnailsDoc() {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
@@ -133,7 +133,7 @@ export default function WithoutThumbnailsDoc() {
     }
     
     return (
-        <div>
+        <div className="card flex justify-content-center">
             <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={7} style={{ maxWidth: '850px' }}
                 circular fullScreen showItemNavigators showThumbnails={false} item={itemTemplate} thumbnail={thumbnailTemplate} />
 
@@ -141,6 +141,16 @@ export default function WithoutThumbnailsDoc() {
         </div>
     )
 }
+        `,
+        data: `
+/* PhotoService */
+{
+    itemImageSrc: 'images/galleria/galleria1.jpg',
+    thumbnailImageSrc: 'images/galleria/galleria1s.jpg',
+    alt: 'Description for Image 1',
+    title: 'Title 1'
+},
+...
         `
     };
 
@@ -166,7 +176,7 @@ export default function WithoutThumbnailsDoc() {
 
                 <Button label="Show" icon="pi pi-external-link" onClick={() => galleria.current.show()} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['PhotoService']} />
         </>
     );
 }

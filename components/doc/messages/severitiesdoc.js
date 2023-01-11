@@ -4,60 +4,66 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function SeveritiesDoc(props) {
-    const msgs1 = useRef(null);
+    const msgs = useRef(null);
 
     useEffect(() => {
-        msgs1.current.show([
-            { severity: 'success', summary: 'Success', detail: 'Message Content', sticky: true },
-            { severity: 'info', summary: 'Info', detail: 'Message Content', sticky: true },
-            { severity: 'warn', summary: 'Warning', detail: 'Message Content', sticky: true },
-            { severity: 'error', summary: 'Error', detail: 'Message Content', sticky: true }
+        msgs.current.show([
+            { sticky: true, severity: 'success', summary: 'Success', detail: 'Message Content' },
+            { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content' },
+            { sticky: true, severity: 'warn', summary: 'Warning', detail: 'Message Content' },
+            { sticky: true, severity: 'error', summary: 'Error', detail: 'Message Content' }
         ]);
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const code = {
         basic: `
-<Messages ref={msgs1} />
+msgs.current.show([
+    {sticky: true, severity: 'success', summary: 'Success', detail: 'Message Content'},
+    {sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content'},
+    {sticky: true, severity: 'warn', summary: 'Warning', detail: 'Message Content'},
+    {sticky: true, severity: 'error', summary: 'Error', detail: 'Message Content'}
+]);
+<Messages ref={msgs} />
         `,
         javascript: `
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Messages } from 'primereact/messages';
 
 export default function SeveritiesDoc() {
-    const msgs1 = useRef(null);
+    const msgs = useRef(null);
 
     useEffect(() => {
-        msgs1.current.show([
-            { severity: 'success', summary: 'Success', detail: 'Message Content', sticky: true },
-            { severity: 'info', summary: 'Info', detail: 'Message Content', sticky: true },
-            { severity: 'warn', summary: 'Warning', detail: 'Message Content', sticky: true },
-            { severity: 'error', summary: 'Error', detail: 'Message Content', sticky: true }
+        msgs.current.show([
+            {sticky: true, severity: 'success', summary: 'Success', detail: 'Message Content'},
+            {sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content'},
+            {sticky: true, severity: 'warn', summary: 'Warning', detail: 'Message Content'},
+            {sticky: true, severity: 'error', summary: 'Error', detail: 'Message Content'}
         ]);
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <Messages ref={msgs1} />
+        <Messages ref={msgs} />
     )
 }
         `,
         typescript: `
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Messages } from 'primereact/messages';
 
 export default function SeveritiesDoc() {
-    const msgs1 = useRef<Messages>(null);
+    const msgs = useRef<Messages>(null);
 
     useEffect(() => {
-        msgs1.current?.show([
-            { severity: 'success', summary: 'Success', detail: 'Message Content', sticky: true },
-            { severity: 'info', summary: 'Info', detail: 'Message Content', sticky: true },
-            { severity: 'warn', summary: 'Warning', detail: 'Message Content', sticky: true },
-            { severity: 'error', summary: 'Error', detail: 'Message Content', sticky: true }
+        msgs.current?.show([
+            {sticky: true, severity: 'success', summary: 'Success', detail: 'Message Content'},
+            {sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content'},
+            {sticky: true, severity: 'warn', summary: 'Warning', detail: 'Message Content'},
+            {sticky: true, severity: 'error', summary: 'Error', detail: 'Message Content'}
         ]);
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <Messages ref={msgs1} />
+        <Messages ref={msgs} />
     )
 }
         `
@@ -72,7 +78,7 @@ export default function SeveritiesDoc() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <Messages ref={msgs1} />
+                <Messages ref={msgs} />
             </div>
             <DocSectionCode code={code} />
         </>

@@ -11,7 +11,7 @@ export function BasicDoc(props) {
 <Rating value={val} onChange={(e) => setVal(e.value)} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Rating } from "primereact/rating";
 
 export default function BasicDemo() {
@@ -24,7 +24,7 @@ export default function BasicDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Rating, RatingChangeParams } from "primereact/rating";
 
 export default function BasicDemo() {

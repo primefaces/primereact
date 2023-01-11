@@ -138,7 +138,7 @@ export function PopupDoc(props) {
 <Button type="button" icon="pi pi-bars" label="Show" onClick={(event) => menu.current.toggle(event)}></Button>
 `,
         javascript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { SlideMenu } from 'primereact/slidemenu';
 import { Button } from 'primereact/button';
 
@@ -284,7 +284,7 @@ export default function PopupDoc() {
 }
         `,
         typescript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { SlideMenu } from 'primereact/slidemenu';
 import { Button } from 'primereact/button';
 

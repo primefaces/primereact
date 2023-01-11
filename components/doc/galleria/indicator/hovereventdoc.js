@@ -1,0 +1,95 @@
+import { useState, useEffect } from 'react';
+import { Galleria } from '../../../lib/galleria/Galleria';
+import { DocSectionText } from '../../common/docsectiontext';
+import { DocSectionCode } from '../../common/docsectioncode';
+import { PhotoService } from '../../../../service/PhotoService';
+import getConfig from 'next/config';
+
+export function HoverEventDoc(props) {
+    const [images, setImages] = useState(null);
+    const contextPath = getConfig().publicRuntimeConfig.contextPath;
+
+    useEffect(() => {
+        PhotoService.getImages().then((data) => setImages(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const itemTemplate = (item) => {
+        return <img src={`${contextPath}/${item.itemImageSrc}`} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+    };
+
+    const code = {
+        basic: `
+<Galleria value={images} style={{ maxWidth: '640px' }} showThumbnails={false} showIndicators item={itemTemplate} />
+        `,
+        javascript: `
+import React, { useState, useEffect } from 'react';
+import { Galleria } from 'primereact/galleria';
+import { PhotoService } from './service/PhotoService';
+
+export default function HoverEventDemo() {
+    const [images, setImages] = useState(null);
+    
+    useEffect(() => {
+        PhotoService.getImages().then((data) => setImages(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const itemTemplate = (item) => {
+        return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+    };
+
+    return (
+        <div className="card">
+            <Galleria value={images} style={{ maxWidth: '640px' }} changeItemOnIndicatorHover showThumbnails={false} showIndicators item={itemTemplate} />
+        </div>
+    )
+}
+        `,
+        typescript: `
+import React, { useState, useEffect } from 'react';
+import { Galleria } from 'primereact/galleria';
+import { PhotoService } from './service/PhotoService';
+
+export default function HoverEventDemo() {
+    const [images, setImages] = useState(null);
+
+    useEffect(() => {
+        PhotoService.getImages().then((data) => setImages(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const itemTemplate = (item) => {
+        return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+    };
+
+    return (
+        <div className="card">
+            <Galleria value={images} style={{ maxWidth: '640px' }} changeItemOnIndicatorHover showThumbnails={false} showIndicators item={itemTemplate} />
+        </div>
+    )
+}
+        `,
+        data: `
+/* PhotoService */
+{
+    itemImageSrc: 'images/galleria/galleria1.jpg',
+    thumbnailImageSrc: 'images/galleria/galleria1s.jpg',
+    alt: 'Description for Image 1',
+    title: 'Title 1'
+},
+...
+        `
+    };
+
+    return (
+        <>
+            <DocSectionText {...props}>
+                <p>
+                    Indicators can be activated on hover instead of click if <i>changeItemOnIndicatorHover</i> is added.
+                </p>
+            </DocSectionText>
+            <div className="card">
+                <Galleria value={images} style={{ maxWidth: '640px' }} changeItemOnIndicatorHover showThumbnails={false} showIndicators item={itemTemplate} />
+            </div>
+            <DocSectionCode code={code} service={['PhotoService']} />
+        </>
+    );
+}

@@ -14,32 +14,36 @@ export function FloatLabelDoc(props) {
 </span>
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Chips } from "primereact/chips";
 
 export default function FloatLabelDemo() {
     const [value, setValue] = useState([]);
 
     return (
-        <span className="p-float-label">
-            <Chips id="chips" value={value} onChange={(e) => setValue(e.value)} />
-            <label htmlFor="chips">Username</label>
-        </span>
+        <div className="card p-fluid">
+            <span className="p-float-label">
+                <Chips id="chips" value={value} onChange={(e) => setValue(e.value)} />
+                <label htmlFor="chips">Username</label>
+            </span>
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Chips, ChipsChangeParams } from "primereact/chips";
 
 export default function FloatLabelDemo() {
     const [value, setValue] = useState<string[]>([]);
 
     return (
-        <span className="p-float-label">
-            <Chips id="chips" value={value} onChange={(e: ChipsChangeParams) => setValue(e.value)} />
-            <label htmlFor="chips">Username</label>
-        </span>
+        <div className="card p-fluid">
+            <span className="p-float-label">
+                <Chips id="chips" value={value} onChange={(e: ChipsChangeParams) => setValue(e.value)} />
+                <label htmlFor="chips">Username</label>
+            </span>
+        </div>
     )
 }
         `

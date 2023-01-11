@@ -20,7 +20,7 @@ export function TemplateDoc(props) {
 <Chips value={value} onChange={(e) => setValue(e.value)} itemTemplate={customChip} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Chips } from "primereact/chips";
 
 export default function TemplateDemo() {
@@ -35,12 +35,14 @@ export default function TemplateDemo() {
     };
 
     return (
-        <Chips value={value} onChange={(e) => setValue(e.value)} itemTemplate={customChip} />
+        <div className="card p-fluid">
+            <Chips value={value} onChange={(e) => setValue(e.value)} itemTemplate={customChip} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Chips, ChipsChangeParams } from "primereact/chips";
 
 export default function TemplateDemo() {
@@ -55,7 +57,9 @@ export default function TemplateDemo() {
     };
 
     return (
-        <Chips value={value} onChange={(e: ChipsChangeParams) => setValue(e.value)} itemTemplate={customChip} />
+        <div className="card p-fluid">
+            <Chips value={value} onChange={(e: ChipsChangeParams) => setValue(e.value)} itemTemplate={customChip} />
+        </div>
     )
 }
         `

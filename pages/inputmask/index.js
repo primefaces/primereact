@@ -3,6 +3,8 @@ import React from 'react';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/inputmask/apidoc';
+import { AccessibilityDoc } from '../../components/doc/inputmask/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/inputmask/styledoc';
 import { BasicDoc } from '../../components/doc/inputmask/basicdoc';
 import { DisabledDoc } from '../../components/doc/inputmask/disableddoc';
 import { FloatLabelDoc } from '../../components/doc/inputmask/floatlabeldoc';
@@ -61,6 +63,16 @@ const InputMaskDemo = () => {
             component: ValidationDoc
         },
         {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
             id: 'api',
             label: 'API',
             component: ApiDoc,
@@ -72,14 +84,6 @@ const InputMaskDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

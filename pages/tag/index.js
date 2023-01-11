@@ -4,10 +4,14 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/tag/apidoc';
+import { AccessibilityDoc } from '../../components/doc/tag/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/tag/styledoc';
 import { ImportDoc } from '../../components/doc/tag/importdoc';
-import { TagsDoc } from '../../components/doc/tag/tagsdoc';
-import { PillsDoc } from '../../components/doc/tag/pillsdoc';
-import { IconsDoc } from '../../components/doc/tag/iconsdoc';
+import { BasicDoc } from '../../components/doc/tag/basicdoc';
+import { SeverityDoc } from '../../components/doc/tag/severitydoc';
+import { PillDoc } from '../../components/doc/tag/pilldoc';
+import { IconDoc } from '../../components/doc/tag/icondoc';
+import { TemplateDoc } from '../../components/doc/tag/templatedoc';
 
 const TerminalDemo = () => {
     const docs = [
@@ -17,40 +21,48 @@ const TerminalDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'tags',
-            label: 'Tags',
-            component: TagsDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
-            id: 'pills',
-            label: 'Pills',
-            component: PillsDoc
+            id: 'severity',
+            label: 'Severity',
+            component: SeverityDoc
+        },
+        {
+            id: 'pill',
+            label: 'Pill',
+            component: PillDoc
         },
         {
             id: 'icons',
-            label: 'Icons',
-            component: IconsDoc
+            label: 'Icon',
+            component: IconDoc
         },
         {
-            id: 'apidoc',
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        },
+        {
+            id: 'api',
             label: 'API',
             component: ApiDoc,
             children: [
                 {
-                    id: 'templating',
-                    label: 'Templating'
-                },
-                {
                     id: 'properties',
                     label: 'Properties'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

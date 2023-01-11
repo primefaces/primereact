@@ -103,7 +103,7 @@ import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 
-const LazyDoc = () => {
+export default function LazyDoc() {
     const [nodes, setNodes] = useState([]);
     const [first, setFirst] = useState(0);
     const [rows, setRows] = useState(10);
@@ -208,7 +208,7 @@ import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 
-const LazyDoc = () => {
+export default function LazyDoc() {
     const [nodes, setNodes] = useState([]);
     const [first, setFirst] = useState(0);
     const [rows, setRows] = useState(10);
@@ -316,7 +316,7 @@ const LazyDoc = () => {
                 <p>
                     Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking corresponding callbacks everytime paging or sorting. In addition, children of a node can be loaded on
                     demand at onNodeExpand event as well. Sample belows imitates lazy paging by using an in memory list.
-                </p>{' '}
+                </p>
             </DocSectionText>
             <div className="card">
                 <TreeTable value={nodes} lazy paginator totalRecords={totalRecords} first={first} rows={rows} onPage={onPage} onExpand={onExpand} loading={loading}>

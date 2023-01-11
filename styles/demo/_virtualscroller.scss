@@ -1,14 +1,4 @@
 .virtualscroller-demo {
-	.scroll-item {
-		display: flex;
-		align-items: center;
-	}
-
-	.custom-scroll-item {
-		flex-direction: column;
-		align-items: stretch;
-	}
-
 	.odd {
 		background-color: var(--surface-b);
 	}

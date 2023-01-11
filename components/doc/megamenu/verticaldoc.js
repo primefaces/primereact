@@ -124,6 +124,7 @@ export function VerticalDoc(props) {
 <MegaMenu model={items} orientation="vertical" />        
 `,
         javascript: `
+import React from 'react'; 
 import { MegaMenu } from 'primereact/megamenu';
 
 export default function VerticalDoc() {
@@ -246,6 +247,7 @@ export default function VerticalDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { MegaMenu } from 'primereact/megamenu';
 
 export default function VerticalDoc() {

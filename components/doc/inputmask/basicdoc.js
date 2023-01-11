@@ -11,7 +11,7 @@ export function BasicDoc(props) {
 <InputMask value={value} onChange={(e) => setValue(e.target.value)} mask="99-999999" placeholder="99-999999" />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputMask } from "primereact/inputmask";
 
 export default function BasicDoc() {
@@ -23,7 +23,7 @@ export default function BasicDoc() {
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputMask, InputMaskChangeParams } from "primereact/inputmask";
 
 export default function BasicDoc() {

@@ -13,6 +13,7 @@ export function PositionsDoc(props) {
 
         `,
         javascript: `
+import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
 import { Tooltip } from 'primereact/tooltip';
 
@@ -40,6 +41,7 @@ export default function PositionsDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
 import { Tooltip } from 'primereact/tooltip';
 

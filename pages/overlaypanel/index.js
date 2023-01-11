@@ -3,8 +3,11 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ApiDoc } from '../../components/doc/overlaypanel/apidoc';
+import { AccessibilityDoc } from '../../components/doc/overlaypanel/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/overlaypanel/styledoc';
 import { ImportDoc } from '../../components/doc/overlaypanel/importdoc';
-import { OverlayPanelDoc } from '../../components/doc/overlaypanel/overlaypaneldoc';
+import { BasicDoc } from '../../components/doc/overlaypanel/basicdoc';
+import { DataTableDoc } from '../../components/doc/overlaypanel/datatabledoc';
 
 const OverlayPanelDemo = () => {
     const docs = [
@@ -14,9 +17,24 @@ const OverlayPanelDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'overlaypanel',
-            label: 'OverlayPanel',
-            component: OverlayPanelDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'dataTable',
+            label: 'DataTable',
+            component: DataTableDoc
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         },
         {
             id: 'api',
@@ -34,14 +52,6 @@ const OverlayPanelDemo = () => {
                 {
                     id: 'methods',
                     label: 'Methods'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 
 export const ToggleButton = React.memo(
     React.forwardRef((props, ref) => {
@@ -49,11 +49,12 @@ export const ToggleButton = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            focus: () => DomHandler.focusFirstElement(elementRef.current),
             getElement: () => elementRef.current
         }));
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const tabIndex = !props.disabled && props.tabIndex;
+        const tabIndex = props.disabled ? -1 : props.tabIndex;
         const otherProps = ObjectUtils.findDiffKeys(props, ToggleButton.defaultProps);
         const className = classNames(
             'p-button p-togglebutton p-component',

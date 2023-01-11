@@ -51,5 +51,6 @@ export interface MultiStateCheckboxProps extends Omit<React.DetailedHTMLProps<Re
 }
 
 export declare class MultiStateCheckbox extends React.Component<MultiStateCheckboxProps, any> {
+    public focus(): void;
     public getElement(): HTMLDivElement;
 }

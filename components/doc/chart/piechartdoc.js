@@ -43,7 +43,7 @@ export function PieChartDoc(props) {
 <Chart type="pie" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
 export default function PieChartDoc() {
@@ -82,12 +82,14 @@ export default function PieChartDoc() {
     }, []);
 
     return (
-        <Chart type="pie" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+        <div className="card flex justify-content-center">
+            <Chart type="pie" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
 export default function PieChartDoc() {
@@ -126,7 +128,9 @@ export default function PieChartDoc() {
     }, []);
 
     return (
-        <Chart type="pie" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+        <div className="card flex justify-content-center">
+            <Chart type="pie" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+        </div>
     )
 }
         `
@@ -140,7 +144,7 @@ export default function PieChartDoc() {
             <div className="card flex justify-content-center">
                 <Chart type="pie" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} dependencies={{ 'chart.js': '3.9.1' }} />
         </>
     );
 }

@@ -8,7 +8,6 @@ import getConfig from 'next/config';
 export function ResponsiveDoc(props) {
     const [images, setImages] = useState(null);
 
-    const galleriaService = new PhotoService();
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     const responsiveOptions = [
@@ -31,7 +30,7 @@ export function ResponsiveDoc(props) {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then((data) => setImages(data));
+        PhotoService.getImages().then((data) => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
@@ -48,15 +47,13 @@ export function ResponsiveDoc(props) {
     item={itemTemplate} thumbnail={thumbnailTemplate} />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
 
 export default function ResponsiveDoc() {
     const [images, setImages] = useState(null);
-
-    const galleriaService = new PhotoService();
 
     const responsiveOptions = [
         {
@@ -78,7 +75,7 @@ export default function ResponsiveDoc() {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
@@ -90,21 +87,21 @@ export default function ResponsiveDoc() {
     }
 
     return (
-        <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={7} circular style={{ maxWidth: '800px' }}
-            item={itemTemplate} thumbnail={thumbnailTemplate} />
+        <div>
+            <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={7} circular style={{ maxWidth: '800px' }}
+                item={itemTemplate} thumbnail={thumbnailTemplate} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
 
 export default function ResponsiveDoc() {
     const [images, setImages] = useState(null);
-
-    const galleriaService = new PhotoService();
 
     const responsiveOptions = [
         {
@@ -126,7 +123,7 @@ export default function ResponsiveDoc() {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
@@ -138,10 +135,22 @@ export default function ResponsiveDoc() {
     }
     
     return (
-        <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={7} circular style={{ maxWidth: '800px' }}
-            item={itemTemplate} thumbnail={thumbnailTemplate} />
+        <div>
+            <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={7} circular style={{ maxWidth: '800px' }}
+                item={itemTemplate} thumbnail={thumbnailTemplate} />
+        </div>
     )
 }
+        `,
+        data: `
+/* PhotoService */
+{
+    itemImageSrc: 'images/galleria/galleria1.jpg',
+    thumbnailImageSrc: 'images/galleria/galleria1s.jpg',
+    alt: 'Description for Image 1',
+    title: 'Title 1'
+},
+...
         `
     };
 
@@ -155,7 +164,7 @@ export default function ResponsiveDoc() {
                     <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={7} circular style={{ maxWidth: '800px' }} item={itemTemplate} thumbnail={thumbnailTemplate} />
                 </div>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['PhotoService']} />
         </>
     );
 }

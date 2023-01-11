@@ -61,52 +61,6 @@ export function ApiDoc(props) {
                     </table>
                 </div>
             </DocSubSection>
-            <DocSubSection id="styling" label="Styling">
-                <p>
-                    Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
-                </p>
-                <div className="doc-tablewrapper">
-                    <table className="doc-table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Element</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>p-progress-spinner</td>
-                                <td>Container element.</td>
-                            </tr>
-                            <tr>
-                                <td>p-progress-circle</td>
-                                <td>SVG element.</td>
-                            </tr>
-                            <tr>
-                                <td>p-progress-path</td>
-                                <td>Circle element.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </DocSubSection>
-
-            <DocSubSection id="accessibility" label="Accessibility">
-                <DevelopmentSection>
-                    <h6>Screen Reader</h6>
-                    <p>
-                        ProgressSpinner components uses <i>progressbar</i> role. Value to describe the component can be defined using <i>aria-labelledby</i> and <i>aria-label</i> props.
-                    </p>
-                    <CodeHighlight>
-                        {`
-<ProgressSpinner aria-label="Loading" />
-`}
-                    </CodeHighlight>
-
-                    <h6>Keyboard Support</h6>
-                    <p>Component does not include any interactive elements.</p>
-                </DevelopmentSection>
-            </DocSubSection>
         </>
     );
 }

@@ -9,6 +9,7 @@ export function AlphabeticDoc(props) {
 <InputText id="alpha" keyfilter="alpha" />
         `,
         javascript: `
+import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
 
 export default function AlpahbeticDoc() {
@@ -22,6 +23,7 @@ export default function AlpahbeticDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
 
 export default function AlpahbeticDoc() {
@@ -39,7 +41,8 @@ export default function AlpahbeticDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Alphabetic</p>
+                {/* TO DO: Add demo content. */}
+                <p></p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="grid p-fluid gap-2">

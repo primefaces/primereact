@@ -37,7 +37,7 @@ export function ApiDoc(props) {
                                 <td>dataKey</td>
                                 <td>string</td>
                                 <td>null</td>
-                                <td>A property to uniquely identify an item.</td>
+                                <td>Name of the field that uniquely identifies a record in the data. Should be a unique business key to prevent re-rendering.</td>
                             </tr>
                             <tr>
                                 <td>style</td>
@@ -81,7 +81,7 @@ export function ApiDoc(props) {
 
             <DocSubSection id="paginator" label="Paginator">
                 <p>
-                    Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the the number of page links to display. Visit the <Link href="/paginator"> paginator</Link>{' '}
+                    Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the number of page links to display. Visit the <Link href="/paginator"> paginator</Link>{' '}
                     paginator component for more information about the available properties.
                 </p>
 
@@ -366,88 +366,6 @@ const onSortChange = (event) => {
                         </tbody>
                     </table>
                 </div>
-            </DocSubSection>
-
-            <DocSubSection id="styling" label="Styling">
-                <p>
-                    Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
-                </p>
-                <div className="doc-tablewrapper">
-                    <table className="doc-table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Element</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>p-dataview</td>
-                                <td>Container element.</td>
-                            </tr>
-                            <tr>
-                                <td>p-dataview-list</td>
-                                <td>Container element in list layout.</td>
-                            </tr>
-                            <tr>
-                                <td>p-dataview-grid</td>
-                                <td>Container element in grid layout.</td>
-                            </tr>
-                            <tr>
-                                <td>p-dataview-header</td>
-                                <td>Header section.</td>
-                            </tr>
-                            <tr>
-                                <td>p-dataview-footer</td>
-                                <td>Footer section.</td>
-                            </tr>
-                            <tr>
-                                <td>p-dataview-content</td>
-                                <td>Container of items.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </DocSubSection>
-
-            <DocSubSection id="accessibility" label="Accessibility">
-                <DevelopmentSection>
-                    <h4>Screen Reader</h4>
-                    <p>
-                        The container element that wraps the layout options buttons has a <i>group</i> role whereas each button element uses <i>button</i> role and <i>aria-pressed</i> is updated depending on selection state. Values to describe the
-                        buttons are derived from the <i>aria.listView</i> and <i>aria.gridView</i> properties of the <Link href="/locale">locale</Link> API respectively.
-                    </p>
-
-                    <p>
-                        Refer to <Link href="/paginator">paginator</Link> accessibility documentation for the paginator of the component.
-                    </p>
-
-                    <h4>Keyboard Support</h4>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <i>tab</i>
-                                    </td>
-                                    <td>Moves focus to the buttons.</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <i>space</i>
-                                    </td>
-                                    <td>Toggles the checked state of a button.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </DevelopmentSection>
             </DocSubSection>
         </>
     );

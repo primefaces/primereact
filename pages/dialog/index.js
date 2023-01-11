@@ -4,11 +4,15 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/dialog/importdoc';
 import { BasicDoc } from '../../components/doc/dialog/basicdoc';
+import { FooterDoc } from '../../components/doc/dialog/footerdoc';
 import { WithoutModalDoc } from '../../components/doc/dialog/withoutmodaldoc';
 import { ResponsiveDoc } from '../../components/doc/dialog/responsivedoc';
 import { MaximizableDoc } from '../../components/doc/dialog/maximizabledoc';
 import { PositionDoc } from '../../components/doc/dialog/positiondoc';
 import { ApiDoc } from '../../components/doc/dialog/apidoc';
+import { AccessibilityDoc } from '../../components/doc/dialog/accessibilitydoc';
+import { StyleDoc } from '../../components/doc/dialog/styledoc';
+import { LengthyContentDoc } from '../../components/doc/dialog/lengthycontentdoc';
 
 const DialogDemo = () => {
     const docs = [
@@ -23,6 +27,16 @@ const DialogDemo = () => {
             component: BasicDoc
         },
         {
+            id: 'footer',
+            label: 'Footer',
+            component: FooterDoc
+        },
+        {
+            id: 'lengthycontent',
+            label: 'Lengthy Content',
+            component: LengthyContentDoc
+        },
+        {
             id: 'modal',
             label: 'Without Modal',
             component: WithoutModalDoc
@@ -33,14 +47,24 @@ const DialogDemo = () => {
             component: ResponsiveDoc
         },
         {
+            id: 'position',
+            label: 'Position',
+            component: PositionDoc
+        },
+        {
             id: 'maximizable',
             label: 'Maximizable',
             component: MaximizableDoc
         },
         {
-            id: 'position',
-            label: 'Position',
-            component: PositionDoc
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         },
         {
             id: 'api',
@@ -54,14 +78,6 @@ const DialogDemo = () => {
                 {
                     id: 'events',
                     label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
                 }
             ]
         }

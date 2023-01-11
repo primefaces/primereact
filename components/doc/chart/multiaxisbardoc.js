@@ -102,7 +102,7 @@ export function MultiAxisBarDoc(props) {
 <Chart type="bar" data={chartData} options={chartOptions} />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
 export default function MultiAxisBarDoc() {
@@ -200,12 +200,14 @@ export default function MultiAxisBarDoc() {
     }, []);
 
     return (
-        <Chart type="bar" data={chartData} options={chartOptions} />
+        <div className="card">
+            <Chart type="bar" data={chartData} options={chartOptions} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
 export default function MultiAxisBarDoc() {
@@ -303,7 +305,9 @@ export default function MultiAxisBarDoc() {
     }, []);
 
     return (
-        <Chart type="bar" data={chartData} options={chartOptions} />
+        <div className="card">
+            <Chart type="bar" data={chartData} options={chartOptions} />
+        </div>
     )
 }
         `
@@ -314,10 +318,10 @@ export default function MultiAxisBarDoc() {
             <DocSectionText {...props}>
                 <p>A bar chart or bar graph is a chart that presents grouped data with rectangular bars with lengths proportional to the values that they represent.</p>
             </DocSectionText>
-            <div className="card ">
+            <div className="card">
                 <Chart type="bar" data={chartData} options={chartOptions} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} dependencies={{ 'chart.js': '3.9.1' }} />
         </>
     );
 }

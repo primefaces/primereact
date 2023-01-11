@@ -660,6 +660,10 @@ export default class DomHandler {
         return /(android)/i.test(navigator.userAgent);
     }
 
+    static isChrome() {
+        return /(chrome)/i.test(navigator.userAgent);
+    }
+
     static isTouchDevice() {
         return 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
     }
@@ -829,6 +833,22 @@ export default class DomHandler {
         const preventScroll = scrollTo === undefined ? true : !scrollTo;
 
         el && document.activeElement !== el && el.focus({ preventScroll });
+    }
+
+    /**
+     * Focus the first focusable element if it does not already have focus.
+     *
+     * @param {HTMLElement} el a HTML element
+     * @param {boolean} scrollTo flag to control whether to scroll to the element, false by default
+     * @return {HTMLElement | undefined} the first focusable HTML element found
+     */
+    static focusFirstElement(el, scrollTo) {
+        if (!el) return;
+        const firstFocusableElement = DomHandler.getFirstFocusableElement(el);
+
+        firstFocusableElement && DomHandler.focus(firstFocusableElement, scrollTo);
+
+        return firstFocusableElement;
     }
 
     static getCursorOffset(el, prevText, nextText, currentText) {

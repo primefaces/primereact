@@ -23,7 +23,7 @@ const IconsPage = () => {
     };
 
     useEffect(() => {
-        new IconService().getIcons().then((data) => {
+        IconService.getIcons().then((data) => {
             data.sort((icon1, icon2) => {
                 if (icon1.properties.name < icon2.properties.name) return -1;
                 else if (icon1.properties.name < icon2.properties.name) return 1;
