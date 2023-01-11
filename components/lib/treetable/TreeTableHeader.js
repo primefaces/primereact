@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { InputText } from '../inputtext/InputText';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 
 export const TreeTableHeader = React.memo((props) => {
     const filterTimeout = React.useRef(null);
@@ -174,6 +174,12 @@ export const TreeTableHeader = React.memo((props) => {
         return null;
     };
 
+    const createTitle = (column, options) => {
+        const title = ObjectUtils.getJSXElement(getColumnProp(column, 'header'), { props: options });
+
+        return <span className="p-column-title">{title}</span>;
+    };
+
     const createHeaderCell = (column, options) => {
         let filterElement;
 
@@ -226,7 +232,7 @@ export const TreeTableHeader = React.memo((props) => {
 
             const headerTooltip = column.props.headerTooltip;
             const hasTooltip = ObjectUtils.isNotEmpty(headerTooltip);
-
+            const title = createTitle(column, options);
             const resizer = createResizer(column);
 
             return (
@@ -248,7 +254,7 @@ export const TreeTableHeader = React.memo((props) => {
                         onDrop={(e) => onDrop(e, column)}
                     >
                         {resizer}
-                        <span className="p-column-title">{column.props.header}</span>
+                        {title}
                         {sortIconElement}
                         {sortBadge}
                         {filterElement}
