@@ -527,7 +527,8 @@ export default class DomHandler {
             };
 
             const addScrollableParent = (node) => {
-                if (node.nodeName === 'BODY' || node.nodeName === 'HTML' || node.nodeType === 9) { // nodeType 9 is for document element
+                if (node.nodeName === 'BODY' || node.nodeName === 'HTML' || node.nodeType === 9) {
+                    // nodeType 9 is for document element
                     scrollableParents.push(window);
                 } else {
                     scrollableParents.push(node);
