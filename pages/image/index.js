@@ -7,13 +7,12 @@ import { ImportDoc } from '../../components/doc/image/importdoc';
 import { BasicDoc } from '../../components/doc/image/basicdoc';
 import { PreviewDoc } from '../../components/doc/image/previewdoc';
 import { ThumbnailDoc } from '../../components/doc/image/thumbnaildoc';
-import { TemplatingDoc } from '../../components/doc/image/templatingdoc';
+import { TemplateDoc } from '../../components/doc/image/templatedoc';
 import { ApiDoc } from '../../components/doc/image/apidoc';
 import { AccessibilityDoc } from '../../components/doc/image/accessibilitydoc';
 import { StylingDoc } from '../../components/doc/image/stylingdoc';
 
 const ImageDemo = () => {
-    // const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const docs = [
         {
             id: 'import',
@@ -27,7 +26,7 @@ const ImageDemo = () => {
         },
         {
             id: 'preview',
-            label: 'Preview and Zoom',
+            label: 'Preview',
             component: PreviewDoc
         },
         {
@@ -36,9 +35,9 @@ const ImageDemo = () => {
             component: ThumbnailDoc
         },
         {
-            id: 'templating',
-            label: 'Templating',
-            component: TemplatingDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
             id: 'styling',
@@ -71,14 +70,14 @@ const ImageDemo = () => {
         <div>
             <Head>
                 <title>React Image Component</title>
-                <meta name="description" content="Displays an image with preview and tranformation options." />
+                <meta name="description" content="Displays a single image with preview and tranformation options." />
             </Head>
             <div className="content-section introduction">
                 <div>
                     <div className="feature-intro">
                         <h1>Image</h1>
                         <p>
-                            Displays an image with preview and tranformation options. For multiple image, see <Link href="/galleria">Galleria</Link>.
+                            Displays a single image with preview and tranformation options.
                         </p>
                     </div>
                 </div>
