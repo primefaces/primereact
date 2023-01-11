@@ -197,7 +197,9 @@ export default function NumScrollDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Number of items to scroll is specified with the <i>numScroll</i> option.</p>
+                <p>
+                    Number of items to scroll is specified with the <i>numScroll</i> option.
+                </p>
             </DocSectionText>
             <div className="card">
                 <Carousel value={products} numScroll={1} numVisible={3} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} />

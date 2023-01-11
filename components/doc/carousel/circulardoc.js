@@ -200,19 +200,12 @@ export default function CircularDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>When <i>autoplayInterval</i> is defined in milliseconds, items are scrolled automatically. In addition, for infinite scrolling <i>circular</i> property needs to be added which is enabled automatically in auto play mode.</p>
+                <p>
+                    When <i>autoplayInterval</i> is defined in milliseconds, items are scrolled automatically. In addition, for infinite scrolling <i>circular</i> property needs to be added which is enabled automatically in auto play mode.
+                </p>
             </DocSectionText>
             <div className="card">
-                <Carousel
-                    value={products}
-                    numVisible={3}
-                    numScroll={3}
-                    responsiveOptions={responsiveOptions}
-                    className="custom-carousel"
-                    circular
-                    autoplayInterval={3000}
-                    itemTemplate={productTemplate}
-                />
+                <Carousel value={products} numVisible={3} numScroll={3} responsiveOptions={responsiveOptions} className="custom-carousel" circular autoplayInterval={3000} itemTemplate={productTemplate} />
             </div>
             <DocSectionCode code={code} service={['ProductService']} />
         </>

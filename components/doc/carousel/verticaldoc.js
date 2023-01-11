@@ -147,7 +147,9 @@ export default function VerticalDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>To create a vertical Carousel, <i>orientation</i> needs to be set to <i>vertical</i> along with a <i>verticalViewPortHeight</i>.</p>
+                <p>
+                    To create a vertical Carousel, <i>orientation</i> needs to be set to <i>vertical</i> along with a <i>verticalViewPortHeight</i>.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Carousel value={products} numVisible={1} numScroll={1} orientation="vertical" verticalViewPortHeight="360px" itemTemplate={productTemplate} />
