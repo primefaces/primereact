@@ -143,7 +143,9 @@ export default function PositionDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Indicators can be placed at four different sides using the <i>indicatorsPosition</i> property. In addition, enabling <i>showIndicatorsOnItem</i> moves the indicators inside the image section.</p>
+                <p>
+                    Indicators can be placed at four different sides using the <i>indicatorsPosition</i> property. In addition, enabling <i>showIndicatorsOnItem</i> moves the indicators inside the image section.
+                </p>
             </DocSectionText>
             <div className="card">
                 <div className="flex flex-wrap gap-3 mb-5">
@@ -153,17 +155,20 @@ export default function PositionDemo() {
                         return (
                             <div className="flex align-items-center" key={label}>
                                 <RadioButton value={value} onChange={(e) => setPosition(e.value)} checked={position === value} />
-                                <label htmlFor={label} className="ml-2">{label}</label>
+                                <label htmlFor={label} className="ml-2">
+                                    {label}
+                                </label>
                             </div>
                         );
                     })}
                 </div>
                 <div className="flex align-items-center mb-5">
-                    <Checkbox inputId="inside_cbox" onChange={e => setInside(e.checked)} checked={inside}></Checkbox>
-                    <label htmlFor="inside_cbox" className="ml-2">Inside</label>
+                    <Checkbox inputId="inside_cbox" onChange={(e) => setInside(e.checked)} checked={inside}></Checkbox>
+                    <label htmlFor="inside_cbox" className="ml-2">
+                        Inside
+                    </label>
                 </div>
-                <Galleria value={images} style={{ maxWidth: '640px' }} showThumbnails={false} showIndicators 
-                        showIndicatorsOnItem={inside} indicatorsPosition={position} item={itemTemplate} />
+                <Galleria value={images} style={{ maxWidth: '640px' }} showThumbnails={false} showIndicators showIndicatorsOnItem={inside} indicatorsPosition={position} item={itemTemplate} />
             </div>
             <DocSectionCode code={code} service={['PhotoService']} />
         </>

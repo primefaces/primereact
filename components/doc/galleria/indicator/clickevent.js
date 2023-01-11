@@ -8,7 +8,7 @@ import getConfig from 'next/config';
 export function ClickEventDoc(props) {
     const [images, setImages] = useState(null);
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
-    
+
     useEffect(() => {
         PhotoService.getImages().then((data) => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -82,7 +82,9 @@ export default function ClickEventDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Indicators are displayed at the bottom by enabling <i>showIndicators</i> property and interacted with the click event by default.</p>
+                <p>
+                    Indicators are displayed at the bottom by enabling <i>showIndicators</i> property and interacted with the click event by default.
+                </p>
             </DocSectionText>
             <div className="card">
                 <Galleria value={images} style={{ maxWidth: '640px' }} showThumbnails={false} showIndicators item={itemTemplate} />

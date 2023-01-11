@@ -18,7 +18,7 @@ export function IndicatorTemplateDoc(props) {
     };
 
     const indicatorTemplate = (index) => {
-        return <span style={{ color: '#ffffff', cursor: 'pointer'}}>{index + 1}</span>;
+        return <span style={{ color: '#ffffff', cursor: 'pointer' }}>{index + 1}</span>;
     };
 
     const code = {
@@ -117,7 +117,9 @@ export default function IndicatorTemplateDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Indicator content can be customized with the <i>indicator</i> property that takes an index as a parameter and expects content.</p>
+                <p>
+                    Indicator content can be customized with the <i>indicator</i> property that takes an index as a parameter and expects content.
+                </p>
             </DocSectionText>
             <div className="card">
                 <Galleria

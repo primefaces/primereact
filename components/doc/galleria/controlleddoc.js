@@ -203,7 +203,9 @@ export default function ControlledDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Galleria can be controlled programmatically using a binding to <i>activeIndex</i> and <i>onItemChange</i> event to update the active index.</p>
+                <p>
+                    Galleria can be controlled programmatically using a binding to <i>activeIndex</i> and <i>onItemChange</i> event to update the active index.
+                </p>
             </DocSectionText>
             <div className="card">
                 <div className="mb-3">
@@ -211,16 +213,7 @@ export default function ControlledDemo() {
                     <Button icon="pi pi-plus" onClick={next} className="p-button-secondary ml-2" />
                 </div>
 
-                <Galleria
-                    value={images}
-                    activeIndex={activeIndex}
-                    onItemChange={(e) => setActiveIndex(e.index)}
-                    responsiveOptions={responsiveOptions}
-                    numVisible={5}
-                    item={itemTemplate}
-                    thumbnail={thumbnailTemplate}
-                    style={{ maxWidth: '640px' }}
-                />
+                <Galleria value={images} activeIndex={activeIndex} onItemChange={(e) => setActiveIndex(e.index)} responsiveOptions={responsiveOptions} numVisible={5} item={itemTemplate} thumbnail={thumbnailTemplate} style={{ maxWidth: '640px' }} />
             </div>
             <DocSectionCode code={code} service={['PhotoService']} />
         </>
