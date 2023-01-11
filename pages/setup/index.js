@@ -11,7 +11,7 @@ const SetupPage = () => {
         <div>
             <Head>
                 <title>Getting Started - PrimeReact</title>
-                <meta name="description" content="PrimeReact is a rich set of open source native components for React." />
+                <meta name="description" content="PrimeReact is a rich set of open source components for React." />
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
