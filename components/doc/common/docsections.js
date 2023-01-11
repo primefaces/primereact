@@ -16,12 +16,12 @@ export function DocSections(props) {
                     <section key={doc.label}>
                         {doc.children && doc.id !== 'api' ? (
                             <div id={doc.id}>
-                                <h1 className="doc-section-label" id={doc.id}>
+                                <h2 className="doc-section-label" id={doc.id}>
                                     {doc.label}
                                     <Link href={router.basePath + router.pathname + '#' + doc.id}>
                                         <a id={doc.id}>#</a>
                                     </Link>
-                                </h1>
+                                </h2>
                                 <div className={classNames('doc-section-description main')}>{doc.description || 'Section Content'}</div>
                             </div>
                         ) : null}
@@ -34,7 +34,7 @@ export function DocSections(props) {
 
                                     return (
                                         <DeferredContent id={id} key={i}>
-                                            <Component id={id} key={label} label={label} />
+                                            <Component id={id} key={label} label={label} level="2" />
                                         </DeferredContent>
                                     );
                                 })}
