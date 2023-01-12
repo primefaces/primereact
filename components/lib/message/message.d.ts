@@ -1,6 +1,6 @@
 /**
  *
- * Message represents people using icons, labels and images.
+ * Message is used to display inline message with various severities.
  *
  * [Live Demo](https://www.primefaces.org/primereact/message)
  *

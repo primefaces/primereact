@@ -1,6 +1,6 @@
 /**
  *
- * Toast is an input component that provides real-time suggestions when being typed.
+ * Toast is used to display messages in an overlay.
  *
  * [Live Demo](https://www.primefaces.org/primereact/toast/)
  *

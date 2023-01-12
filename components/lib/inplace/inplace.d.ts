@@ -1,6 +1,6 @@
 /**
  *
- * Inplace represents people using icons, labels and images.
+ * Inplace provides an easy to do editing and display at the same time where clicking the output displays the actual content.
  *
  * [Live Demo](https://www.primefaces.org/primereact/inplace)
  *

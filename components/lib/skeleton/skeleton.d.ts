@@ -1,6 +1,6 @@
 /**
  *
- * Skeleton groups a collection of contents in tabs.
+ * Skeleton is a placeholder to display instead of the actual content.
  *
  * [Live Demo](https://www.primefaces.org/primereact/skeleton/)
  *

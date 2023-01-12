@@ -1,6 +1,6 @@
 /**
  *
- * Sidebar is an input component that provides real-time suggestions when being typed.
+ * Sidebar is a panel component displayed as an overlay.
  *
  * [Live Demo](https://www.primefaces.org/primereact/sidebar/)
  *

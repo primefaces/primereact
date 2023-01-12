@@ -1,6 +1,6 @@
 /**
  *
- * Divider is an input component that provides real-time suggestions when being typed.
+ * Divider is used to separate contents.
  *
  * [Live Demo](https://www.primefaces.org/primereact/divider/)
  *

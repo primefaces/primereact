@@ -1,6 +1,6 @@
 /**
  *
- * FileUpload represents people using icons, labels and images.
+ * FileUpload is an advanced uploader with dragdrop support, multi file uploads, auto uploading, progress tracking and validations.
  *
  * [Live Demo](https://www.primefaces.org/primereact/fileupload)
  *

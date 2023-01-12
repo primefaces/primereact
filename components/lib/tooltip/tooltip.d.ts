@@ -1,6 +1,6 @@
 /**
  *
- * Tooltip is an input component that provides real-time suggestions when being typed.
+ * Tooltip functionality is integrated within various PrimeReact components.
  *
  * [Live Demo](https://www.primefaces.org/primereact/tooltip/)
  *

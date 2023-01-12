@@ -1,6 +1,6 @@
 /**
  *
- * ScrollTop is an input component that provides real-time suggestions when being typed.
+ * ScrollTop gets displayed after a certain scroll position and used to navigates to the top of the page quickly.
  *
  * [Live Demo](https://www.primefaces.org/primereact/scrolltop/)
  *
