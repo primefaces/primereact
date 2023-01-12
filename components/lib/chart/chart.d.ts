@@ -10,7 +10,7 @@
 import * as React from 'react';
 
 /**
- * Defines valid properties in Ripple component.
+ * Defines valid properties in Chart component.
  * @group Properties
  */
 export interface ChartProps {
