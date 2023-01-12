@@ -131,6 +131,7 @@ interface FileUploadBeforeUploadEvent {
 /**
  * Custom before send event.
  * @see {@link FileUploadProps.onBeforeSend}
+ * @extends {FileUploadBeforeUploadEvent}
  * @event
  */
 interface FileUploadBeforeSendEvent extends FileUploadBeforeUploadEvent {}
@@ -148,6 +149,7 @@ interface FileUploadFilesEvent {
 /**
  * Custom upload event.
  * @see {@link FileUploadProps.onUpload}
+ * @extends {FileUploadFilesEvent}
  * @event
  */
 interface FileUploadUploadEvent extends FileUploadFilesEvent {
@@ -160,6 +162,7 @@ interface FileUploadUploadEvent extends FileUploadFilesEvent {
 /**
  * Custom error event.
  * @see {@link FileUploadProps.onError}
+ * @extends {FileUploadUploadEvent}
  * @event
  */
 interface FileUploadErrorEvent extends FileUploadUploadEvent {}
@@ -167,6 +170,7 @@ interface FileUploadErrorEvent extends FileUploadUploadEvent {}
 /**
  * Custom select event.
  * @see {@link FileUploadProps.onSelect}, {@link FileUploadProps.onBeforeSelect}
+ * @extends {FileUploadFilesEvent}
  * @event
  */
 interface FileUploadSelectEvent extends FileUploadFilesEvent {
@@ -209,6 +213,7 @@ interface FileUploadHandlerOptions {
 /**
  * Custom uploadHandler event.
  * @see {@link FileUploadProps.uploadHandler}
+ * @extends {FileUploadFilesEvent}
  * @event
  */
 interface FileUploadHandlerEvent extends FileUploadFilesEvent {
