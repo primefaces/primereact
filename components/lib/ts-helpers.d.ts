@@ -12,8 +12,8 @@ export interface FormTarget<T = any> {
     value: Nullable<T>;
 }
 
-export interface FormEvent<T = any> {
-    originalEvent?: React.SyntheticEvent;
+export interface FormEvent<T = any, E = React.SyntheticEvent> {
+    originalEvent?: E;
     value: Nullable<T>;
     stopPropagation(): void;
     preventDefault(): void;
