@@ -57,10 +57,10 @@ import { CustomStorageDoc } from '../../components/doc/datatable/state/customsto
 import { LocalStorageDoc } from '../../components/doc/datatable/state/localdoc';
 import { SessionStorageDoc } from '../../components/doc/datatable/state/sessionstoragedoc';
 import { StripedDoc } from '../../components/doc/datatable/stripeddoc';
-import { StyleDoc } from '../../components/doc/datatable/styledoc';
-import { TemplatingDoc } from '../../components/doc/datatable/templatingdoc';
+import { TemplateDoc } from '../../components/doc/datatable/templatedoc';
 import { LazyLoadingFromRemoteDataSourceDoc } from '../../components/doc/datatable/virtualscroll/lazyloadfromremotedatadoc';
 import { PreloadedDataDoc } from '../../components/doc/datatable/virtualscroll/preloadeddatadoc';
+import { StyledDataTableDoc } from '../../components/doc/datatable/styleddatatabledoc';
 
 const DataTableDemo = () => {
     const docs = [
@@ -80,9 +80,9 @@ const DataTableDemo = () => {
             component: DynamicDoc
         },
         {
-            id: 'templating',
-            label: 'Templating',
-            component: TemplatingDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
             id: 'size',
@@ -332,9 +332,9 @@ const DataTableDemo = () => {
             component: ResponsiveDoc
         },
         {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
+            id: 'styleddatatable',
+            label: 'Styled DataTable',
+            component: StyledDataTableDoc
         },
         {
             id: 'colresize',

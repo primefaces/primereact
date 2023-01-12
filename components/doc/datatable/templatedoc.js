@@ -8,7 +8,7 @@ import { ProductService } from '../../../service/ProductService';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function TemplatingDoc(props) {
+export function TemplateDoc(props) {
     const [products, setProducts] = useState([]);
 
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
@@ -65,7 +65,7 @@ import { Button } from 'primereact/button';
 import { Rating } from 'primereact/rating';
 import './DataTableDemo.css';
 
-const TemplatingDoc = () => {
+const TemplateDoc = () => {
     const [products, setProducts] = useState([]);
     
 
@@ -125,7 +125,7 @@ import { Button } from 'primereact/button';
 import { Rating } from 'primereact/rating';
 import './DataTableDemo.css';
 
-const TemplatingDoc = () => {
+const TemplateDoc = () => {
     const [products, setProducts] = useState([]);
     
 

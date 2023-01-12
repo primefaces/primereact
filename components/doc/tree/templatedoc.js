@@ -2,7 +2,7 @@ import { Tree } from '../../lib/tree/Tree';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function TemplatingDoc(props) {
+export function TemplateDoc(props) {
     const nodes = [
         {
             key: '0',
@@ -46,7 +46,7 @@ export function TemplatingDoc(props) {
 import React from 'react'; 
 import { Tree } from 'primereact/tree';
 
-export default function TemplatingDoc() {
+export default function TemplateDoc() {
     const nodes = [
         {
             key: "0",
@@ -95,7 +95,7 @@ export default function TemplatingDoc() {
 import React from 'react'; 
 import { Tree } from 'primereact/tree';
 
-export default function TemplatingDoc() {
+export default function TemplateDoc() {
     const nodes = [
         {
             key: "0",

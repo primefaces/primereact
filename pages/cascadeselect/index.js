@@ -11,7 +11,7 @@ import { BasicDoc } from '../../components/doc/cascadeselect/basicdoc';
 import { FloatLabelDoc } from '../../components/doc/cascadeselect/floatlabeldoc';
 import { InvalidDoc } from '../../components/doc/cascadeselect/invaliddoc';
 import { DisabledDoc } from '../../components/doc/cascadeselect/disableddoc';
-import { TemplatingDoc } from '../../components/doc/cascadeselect/templatingdoc';
+import { TemplateDoc } from '../../components/doc/cascadeselect/templatedoc';
 import { FormikDoc } from '../../components/doc/cascadeselect/validation/formikdoc';
 import { HookFormDoc } from '../../components/doc/cascadeselect/validation/hookformdoc';
 
@@ -60,9 +60,9 @@ const CascadeSelectDemo = () => {
             ]
         },
         {
-            id: 'templating',
-            label: 'Templating',
-            component: TemplatingDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
             id: 'style',

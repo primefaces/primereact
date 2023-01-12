@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from '../../lib/treetable/TreeTable';
-import { Column } from '../../lib/column/column';
+import { Column } from '../../lib/column/Column';
 import { NodeService } from '../../../service/NodeService';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function StyleDoc(props) {
+export function StyledTreeTableDoc(props) {
     const [nodes, setNodes] = useState([]);
 
     useEffect(() => {
@@ -37,7 +37,7 @@ import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { NodeService } from './service/NodeService';
 
-export default function StyleDoc() {
+export default function StyledTreeTableDoc() {
     const [nodes, setNodes] = useState([]);
     
 
@@ -76,7 +76,7 @@ import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { NodeService } from './service/NodeService';
 
-export default function StyleDoc() {
+export default function StyledTreeTableDoc() {
     const [nodes, setNodes] = useState([]);
     
 

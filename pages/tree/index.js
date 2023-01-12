@@ -10,7 +10,7 @@ import { BasicDoc } from '../../components/doc/tree/basicdoc';
 import { ProgrammaticDoc } from '../../components/doc/tree/programmaticdoc';
 import { TreeEventsDoc } from '../../components/doc/tree/eventsdoc';
 import { LazyDoc } from '../../components/doc/tree/lazydoc';
-import { TemplatingDoc } from '../../components/doc/tree/templatingdoc';
+import { TemplateDoc } from '../../components/doc/tree/templatedoc';
 import { DragAndDropDoc } from '../../components/doc/tree/draganddropdoc';
 import { ContextMenuDoc } from '../../components/doc/tree/contextmenudoc';
 import { LenientFilterDoc } from '../../components/doc/tree/filter/lenientfilterdoc';
@@ -75,9 +75,9 @@ const TreeDemo = () => {
             component: LazyDoc
         },
         {
-            id: 'templating',
-            label: 'Templating',
-            component: TemplatingDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
             id: 'draganddrop',

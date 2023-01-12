@@ -16,7 +16,7 @@ import { LazyDoc } from '../../components/doc/treetable/lazydoc';
 import { EditDoc } from '../../components/doc/treetable/editdoc';
 import { ReorderDoc } from '../../components/doc/treetable/reorderdoc';
 import { ColToggleDoc } from '../../components/doc/treetable/coltoggledoc';
-import { StyleDoc } from '../../components/doc/treetable/demo_styledoc';
+import { StyledTreeTableDoc } from '../../components/doc/treetable/styledtreetabledoc';
 import { ContextMenuDoc } from '../../components/doc/treetable/contextmenudoc';
 import { ResponsiveDoc } from '../../components/doc/treetable/responsivedoc';
 import { LenientFilterDoc } from '../../components/doc/treetable/filter/lenientfilterdoc';
@@ -55,9 +55,9 @@ const TreeTableDemo = () => {
             component: ProgrammaticDoc
         },
         {
-            id: 'templating',
-            label: 'Templating',
-            component: TemplatingDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
             id: 'paginator',
@@ -212,9 +212,9 @@ const TreeTableDemo = () => {
             component: ColToggleDoc
         },
         {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
+            id: 'styledtreetable',
+            label: 'Styled TreeTable',
+            component: StyledTreeTableDoc
         },
         {
             id: 'contextmenu',

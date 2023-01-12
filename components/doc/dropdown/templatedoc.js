@@ -3,7 +3,7 @@ import { Dropdown } from '../../lib/dropdown/Dropdown';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function TemplatingDoc(props) {
+export function TemplateDoc(props) {
     const [selectedCountry, setSelectedCountry] = useState(null);
     const countries = [
         { name: 'Australia', code: 'AU' },
@@ -53,7 +53,7 @@ import React, { useState } from "react";
 import { Dropdown } from 'primereact/dropdown';
 import './DropdownDemo.css';
 
-export default function TemplatingDoc() {
+export default function TemplateDoc() {
     const [selectedCountry, setSelectedCountry] = useState(null);
 
      const countries = [
@@ -110,7 +110,7 @@ import React, { useState } from "react";
 import { Dropdown, DropdownChangeParams, DropdownProps } from 'primereact/dropdown';
 import './DropdownDemo.css';
 
-export default function TemplatingDoc() {
+export default function TemplateDoc() {
     const [selectedCountry, setSelectedCountry] = useState<any | null>(null);
 
      const countries = [

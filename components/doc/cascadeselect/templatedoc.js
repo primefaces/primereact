@@ -3,7 +3,7 @@ import { CascadeSelect } from '../../lib/cascadeselect/CascadeSelect';
 import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
 
-export function TemplatingDoc(props) {
+export function TemplateDoc(props) {
     const [selectedCity, setSelectedCity] = useState(null);
     const countries = [
         {
@@ -101,7 +101,7 @@ export function TemplatingDoc(props) {
 import React, { useState } from "react";
 import { CascadeSelect } from 'primereact/cascadeselect';
 
-export default function TemplatingDoc() {
+export default function TemplateDoc() {
     const [selectedCity, setSelectedCity] = useState(null);
     const countries = [
         {
@@ -203,7 +203,7 @@ export default function TemplatingDoc() {
 import React, { useState } from "react";
 import { CascadeSelect } from 'primereact/cascadeselect';
 
-export default function TemplatingDoc() {
+export default function TemplateDoc() {
     const [selectedCity, setSelectedCity] = useState(null);
     const countries = [
         {
