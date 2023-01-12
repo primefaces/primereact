@@ -1,13 +1,41 @@
+/**
+ *
+ * Toolbar is a grouping component for buttons and other content.
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/toolbar/)
+ *
+ * @module toolbar
+ *
+ */
 import * as React from 'react';
 
-type ToolbarTemplateType = React.ReactNode | ((props: ToolbarProps) => React.ReactNode);
-
+/**
+ * Defines valid properties in Toolbar component. In addition to these, all properties of HTMLDivElement can be used in this component.
+ * @group Properties
+ */
 export interface ToolbarProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
-    left?: ToolbarTemplateType;
-    right?: ToolbarTemplateType;
-    children?: React.ReactNode;
+    /**
+     * The template of left element.
+     */
+    left?: React.ReactNode | ((props: ToolbarProps) => React.ReactNode);
+    /**
+     * The template of right element.
+     */
+    right?: React.ReactNode | ((props: ToolbarProps) => React.ReactNode);
+    /**
+     * Used to get the child elements of the component.
+     * @readonly
+     */
+    children?: React.ReactNode | undefined;
 }
 
+/**
+ * @group Component
+ */
 export declare class Toolbar extends React.Component<ToolbarProps, any> {
+    /**
+     * Used to get container element.
+     * @return {HTMLDivElement} Container element
+     */
     public getElement(): HTMLDivElement;
 }
