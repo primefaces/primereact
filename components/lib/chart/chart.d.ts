@@ -1,23 +1,90 @@
+/**
+ *
+ * Chart components are based on Chart.js, an open source HTML5 based charting library.
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/chart)
+ *
+ * @module chart
+ *
+ */
 import * as React from 'react';
 
+/**
+ * Defines valid properties in Ripple component.
+ * @group Properties
+ */
 export interface ChartProps {
-    id?: string;
-    type?: string;
-    data?: object;
-    options?: object;
-    plugins?: any[];
-    width?: string;
-    height?: string;
-    style?: React.CSSProperties;
-    className?: string;
-    children?: React.ReactNode;
+    /**
+     * Unique identifier of the element.
+     */
+    id?: string | undefined;
+    /**
+     * Type of the chart.
+     */
+    type?: string | undefined;
+    /**
+     * Data to display.
+     */
+    data?: object | undefined;
+    /**
+     * Options to customize the chart.
+     */
+    options?: object | undefined;
+    /**
+     * Used to custom plugins of the chart.
+     */
+    plugins?: any[] | undefined;
+    /**
+     * Width of the chart in non-responsive mode.
+     */
+    width?: string | undefined;
+    /**
+     * Height of the chart in non-responsive mode.
+     */
+    height?: string | undefined;
+    /**
+     * Inline style of the element.
+     */
+    style?: React.CSSProperties | undefined;
+    /**
+     * Style class of the element.
+     */
+    className?: string | undefined;
+    /**
+     * Used to get the child elements of the component.
+     * @readonly
+     */
+    children?: React.ReactNode | undefined;
 }
 
+/**
+ * @group Component
+ */
 export declare class Chart extends React.Component<ChartProps, any> {
+    /**
+     * Used to get canvas element.
+     * @return {HTMLCanvasElement} Canvas element
+     */
     public getCanvas(): HTMLCanvasElement;
+    /**
+     * @todo Write the documentation.
+     */
     public getChart(): any;
+    /**
+     * @todo Write the documentation.
+     */
     public getBase64Image(): any;
+    /**
+     * @todo Write the documentation.
+     */
     public generateLegend(): string;
+    /**
+     * Redraws the graph.
+     */
     public refresh(): void;
+    /**
+     * Used to get container element.
+     * @return {HTMLDivElement} Container element
+     */
     public getElement(): HTMLDivElement;
 }
