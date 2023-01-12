@@ -65,16 +65,16 @@ export interface ConfirmPopupProps {
     /**
      * @todo Write the documantation
      */
-    tagKey?: string;
+    tagKey?: string | undefined;
     /**
      * @todo Write the documantation
      */
-    target?: HTMLElement;
+    target?: HTMLElement | undefined;
     /**
      * Specifies the visibility of the confirm popup.
      * @defaultValue false
      */
-    visible?: boolean;
+    visible?: boolean | undefined;
     /**
      * Message of the confirmation.
      */
@@ -83,40 +83,40 @@ export interface ConfirmPopupProps {
      * Label of the reject button.
      * @defaultValue No
      */
-    rejectLabel?: string;
+    rejectLabel?: string | undefined;
     /**
      * Label of the accept button.
      * @defaultValue Yes
      */
-    acceptLabel?: string;
+    acceptLabel?: string | undefined;
     /**
      * Icon to display next to the message.
      */
-    icon?: IconType<ConfirmPopupProps>;
+    icon?: IconType<ConfirmPopupProps> | undefined;
     /**
      * Icon of the reject button.
      */
-    rejectIcon?: IconType<ConfirmPopupProps>;
+    rejectIcon?: IconType<ConfirmPopupProps> | undefined;
     /**
      * Icon of the accept button.
      */
-    acceptIcon?: IconType<ConfirmPopupProps>;
+    acceptIcon?: IconType<ConfirmPopupProps> | undefined;
     /**
      * Style class of the reject button.
      */
-    rejectClassName?: string;
+    rejectClassName?: string | undefined;
     /**
      * Style class of the accept button.
      */
-    acceptClassName?: string;
+    acceptClassName?: string | undefined;
     /**
      * Style class of the element.
      */
-    className?: string;
+    className?: string | undefined;
     /**
      * Inline style of the element.
      */
-    style?: React.CSSProperties;
+    style?: React.CSSProperties | undefined;
     /**
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue document.body
@@ -126,7 +126,7 @@ export interface ConfirmPopupProps {
      * Enables to hide the popup when outside is clicked.
      * @defaultValue true
      */
-    dismissable?: boolean;
+    dismissable?: boolean | undefined;
     /**
      * Footer content of the confirm popup.
      */
@@ -134,7 +134,7 @@ export interface ConfirmPopupProps {
     /**
      * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
      */
-    transitionOptions?: CSSTransitionProps;
+    transitionOptions?: CSSTransitionProps | undefined;
     /**
      * Callback to invoke when overlay panel becomes visible.
      */
