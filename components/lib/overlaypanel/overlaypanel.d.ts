@@ -1,31 +1,96 @@
+/**
+ *
+ * OverlayPanel also known as Popover, is a container component that can overlay other components on page.
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/overlaypanel)
+ *
+ * @module overlaypanel
+ *
+ */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 
-type OverlayPanelEventType = React.SyntheticEvent | undefined | null;
-
-type OverlayPanelTargetType = HTMLElement | EventTarget | undefined | null;
-
-type OverlayPanelAppendToType = 'self' | HTMLElement | undefined | null;
-
+/**
+ * @todo Write the documantation
+ */
 interface OverlayPanelBreakpoints {
+    /**
+     * @todo Write the documantation
+     */
     [key: string]: string;
 }
 
+/**
+ * Defines valid properties in OverlayPanel component. In addition to these, all properties of HTMLDivElement can be used in this component.
+ * @group Properties
+ */
 export interface OverlayPanelProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+    /**
+     * Enables to hide the overlay when outside is clicked.
+     * @defaultValue true
+     */
     dismissable?: boolean;
+    /**
+     * When enabled, displays a close icon at top right corner.
+     * @defaultValue false
+     */
     showCloseIcon?: boolean;
-    appendTo?: OverlayPanelAppendToType;
+    /**
+     * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
+     * @defaultValue document.body
+     */
+    appendTo?: 'self' | HTMLElement | undefined | null;
+    /**
+     * Aria label of the close icon.
+     * @defaultValue close
+     */
     ariaCloseLabel?: string;
+    /**
+     * Object literal to define widths per screen size.
+     */
     breakpoints?: OverlayPanelBreakpoints;
+    /**
+     * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
+     */
     transitionOptions?: CSSTransitionProps;
+    /**
+     * Callback to invoke when overlay becomes visible.
+     */
     onShow?(): void;
+    /**
+     * Callback to invoke when overlay becomes hidden.
+     */
     onHide?(): void;
-    children?: React.ReactNode;
+    /**
+     * Used to get the child elements of the component.
+     * @readonly
+     */
+    children?: React.ReactNode | undefined;
 }
 
+/**
+ * @group Component
+ */
 export declare class OverlayPanel extends React.Component<OverlayPanelProps, any> {
-    public toggle(event: OverlayPanelEventType, target?: OverlayPanelTargetType): void;
-    public show(event: OverlayPanelEventType, target: OverlayPanelTargetType): void;
+    /**
+     * Toggles the visiblity of the overlay.
+     * @param {React.SyntheticEvent | undefined | null} event - Browser event.
+     * @param {HTMLElement | EventTarget | undefined | null} target - Browser event.
+     */
+    public toggle(event: React.SyntheticEvent | undefined | null, target?: HTMLElement | EventTarget | undefined | null): void;
+    /**
+     * Shows the overlay.
+     * @param {React.SyntheticEvent | undefined | null} event - Browser event.
+     * @param {HTMLElement | EventTarget | undefined | null} target - Browser event.
+     */
+    public show(event: React.SyntheticEvent | undefined | null, target: HTMLElement | EventTarget | undefined | null): void;
+    /**
+     * Hides the overlay.
+     */
     public hide(): void;
+    /**
+     * Used to get container element.
+     * @return {HTMLDivElement} Container element
+     */
     public getElement(): HTMLDivElement;
 }
