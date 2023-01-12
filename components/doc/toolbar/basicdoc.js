@@ -5,7 +5,7 @@ import { Toolbar } from '../../lib/toolbar/Toolbar';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function ToolbarDoc(props) {
+export function BasicDoc(props) {
     const items = [
         {
             label: 'Update',
@@ -49,7 +49,7 @@ export function ToolbarDoc(props) {
     );
     const code = {
         basic: `
-<Toolbar left={leftContents} right={rightContents} />
+<Toolbar className="gap-2" left={leftContents} right={rightContents} />
         `,
         javascript: `
 import React from 'react';
@@ -57,7 +57,7 @@ import { Toolbar } from 'primereact/toolbar';
 import { Button } from 'primereact/button';
 import { SplitButton } from 'primereact/splitbutton';
 
-export default function ToolbarDoc() {
+export default function BasicDoc() {
 
     const items = [
         {
@@ -100,7 +100,11 @@ export default function ToolbarDoc() {
         </React.Fragment>
     );
 
-    return ( <Toolbar left={leftContents} right={rightContents} /> );
+    return (
+        <div className="card">
+            <Toolbar className="gap-2" left={leftContents} right={rightContents} />
+        </div>
+    );
 }
         `,
         typescript: `
@@ -110,7 +114,7 @@ import { Button } from 'primereact/button';
 import { MenuItem } from 'primereact/menuitem';
 import { SplitButton } from 'primereact/splitbutton';
 
-export default function ToolbarDoc() {
+export default function BasicDoc() {
 
     const items: MenuItem[] = [
         {
@@ -153,7 +157,11 @@ export default function ToolbarDoc() {
         </React.Fragment>
     );
 
-    return ( <Toolbar left={leftContents} right={rightContents} /> )
+    return (
+        <div className="card">
+            <Toolbar className="gap-2" left={leftContents} right={rightContents} />
+        </div>
+    )
 }
         `
     };
@@ -163,8 +171,8 @@ export default function ToolbarDoc() {
             <DocSectionText {...props}>
                 <p>Toolbar provides left and right templates to place content at these sections.</p>
             </DocSectionText>
-            <div className="card ">
-                <Toolbar left={leftContents} right={rightContents} />
+            <div className="card">
+                <Toolbar className="gap-2" left={leftContents} right={rightContents} />
             </div>
             <DocSectionCode code={code} />
         </>
