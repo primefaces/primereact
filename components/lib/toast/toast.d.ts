@@ -10,6 +10,9 @@
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 
+/**
+ * @todo Write the documantation
+ */
 export interface ToastMessage {
     /**
      * Severity of the message.
@@ -113,12 +116,12 @@ export interface ToastProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
  */
 export declare class Toast extends React.Component<ToastProps, any> {
     /**
-     * Used to show the overlay.
+     * Used to show the message.
      * @param {ToastMessage | ToastMessage[]} message - Message to show
      */
     public show(message: ToastMessage | ToastMessage[]): void;
     /**
-     * Used to clear all messages.
+     * Clears the all messages from Toast.
      */
     public clear(): void;
     /**
