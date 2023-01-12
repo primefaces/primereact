@@ -323,36 +323,36 @@ interface FileUploadProps {
     /**
      * Options used to customize the choose button. These options have "label", "icon", "className" and "style" properties.
      */
-    chooseOptions?: FileUploadOptions;
+    chooseOptions?: FileUploadOptions | undefined;
     /**
      * Options used to customize the upload button. These options have "label", "icon", "className" and "style" properties.
      */
-    uploadOptions?: FileUploadOptions;
+    uploadOptions?: FileUploadOptions | undefined;
     /**
      * Options used to customize the cancel button. These options have "label", "icon", "className" and "style" properties.
      */
-    cancelOptions?: FileUploadOptions;
+    cancelOptions?: FileUploadOptions | undefined;
     /**
      * Whether to use the default upload or a manual implementation defined in uploadHandler callback.
      * @defaultValue false
      */
-    customUpload?: boolean;
+    customUpload?: boolean | undefined;
     /**
      * Custom template of the header.
      */
-    headerClassName?: string;
+    headerClassName?: string | undefined;
     /**
      * Inline style of the header.
      */
-    headerStyle?: React.CSSProperties;
+    headerStyle?: React.CSSProperties | undefined;
     /**
      * Style class of the content.
      */
-    contentClassName?: string;
+    contentClassName?: string | undefined;
     /**
      * Inline style of the content.
      */
-    contentStyle?: React.CSSProperties;
+    contentStyle?: React.CSSProperties | undefined;
     /**
      * Custom template of the header.
      */
