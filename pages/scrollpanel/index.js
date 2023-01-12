@@ -6,7 +6,7 @@ import { ImportDoc } from '../../components/doc/scrollpanel/importdoc';
 import { ApiDoc } from '../../components/doc/scrollpanel/apidoc';
 import { AccessibilityDoc } from '../../components/doc/scrollpanel/accessibilitydoc';
 import { StyleDoc } from '../../components/doc/scrollpanel/styledoc';
-import { CustomDemo } from '../../components/doc/scrollpanel/scrolldemo';
+import { CustomDemo } from '../../components/doc/scrollpanel/customdoc';
 import { BasicDoc } from '../../components/doc/scrollpanel/basicdoc';
 
 const ScrollPanelDemo = () => {
