@@ -19,7 +19,13 @@ import * as React from 'react';
  * @event
  */
 interface SplitterResizeEndEvent {
+    /**
+     * Browser event.
+     */
     originalEvent: React.SyntheticEvent;
+    /**
+     * Sizes of the panels as an array.
+     */
     sizes: number[];
 }
 
