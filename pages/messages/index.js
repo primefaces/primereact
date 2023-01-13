@@ -66,40 +66,12 @@ const MessagesDemo = () => {
             component: ApiDoc,
             children: [
                 {
-                    id: 'messageapi',
-                    label: 'Message API'
+                    id: 'properties',
+                    label: 'Properties'
                 },
                 {
-                    id: 'severitiesapi',
-                    label: 'Severities'
-                },
-                {
-                    id: 'showingmessages',
-                    label: 'Showing Messages'
-                },
-                {
-                    id: 'clearingmessages',
-                    label: 'Clearing Messages'
-                },
-                {
-                    id: 'replacingmessages',
-                    label: 'Replacing Messages'
-                },
-                {
-                    id: 'closable',
-                    label: 'Closable'
-                },
-                {
-                    id: 'sticky',
-                    label: 'Sticky'
-                },
-                {
-                    id: 'propertiesmessages',
-                    label: 'Properties of Messages'
-                },
-                {
-                    id: 'event',
-                    label: 'Events of Messages'
+                    id: 'events',
+                    label: 'Events'
                 }
             ]
         }
