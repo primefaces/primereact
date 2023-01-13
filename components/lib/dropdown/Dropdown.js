@@ -3,7 +3,7 @@ import PrimeReact, { FilterService } from '../api/Api';
 import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
+import { DomHandler, ObjectUtils, ZIndexUtils, classNames, IconUtils } from '../utils/Utils';
 import { DropdownPanel } from './DropdownPanel';
 
 export const Dropdown = React.memo(
@@ -715,19 +715,23 @@ export const Dropdown = React.memo(
 
         const createClearIcon = () => {
             if (props.value != null && props.showClear && !props.disabled) {
-                return <i className="p-dropdown-clear-icon pi pi-times" onClick={clear}></i>;
+                return (
+                    <span className=" p-dropdown-clear-icon p-clickable" onClick={clear}>
+                        {IconUtils.getJSXIcon(props.clearIcon ?? 'pi pi-times', {}, { props })}
+                    </span>
+                );
             }
 
             return null;
         };
 
         const createDropdownIcon = () => {
-            const iconClassName = classNames('p-dropdown-trigger-icon p-clickable', props.dropdownIcon);
+            const iconClassName = classNames('p-dropdown-trigger-icon p-clickable', typeof props.dropdownIcon === 'string' ? props.dropdownIcon : '');
             const ariaLabel = props.placeholder || props.ariaLabel;
 
             return (
                 <div className="p-dropdown-trigger" role="button" aria-haspopup="listbox" aria-expanded={overlayVisibleState} aria-label={ariaLabel}>
-                    <span className={iconClassName}></span>
+                    {IconUtils.getJSXIcon(props.dropdownIcon, { className: iconClassName }, { props })}
                 </div>
             );
         };
