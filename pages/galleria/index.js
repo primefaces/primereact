@@ -181,7 +181,7 @@ const GalleriaDemo = () => {
                     <p>Galleria is a content gallery component.</p>
                 </div>
             </div>
-            <div className="content-section doc galleria-demo">
+            <div className="content-section doc">
                 <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>

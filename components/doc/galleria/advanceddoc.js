@@ -13,7 +13,6 @@ export function AdvancedDoc(props) {
     const [showThumbnails, setShowThumbnails] = useState(false);
     const [isAutoPlayActive, setAutoPlayActive] = useState(true);
     const [isFullScreen, setFullScreen] = useState(false);
-
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const galleria = useRef(null);
 
@@ -46,10 +45,6 @@ export function AdvancedDoc(props) {
     useEffect(() => {
         setAutoPlayActive(galleria.current.isAutoPlayActive());
     }, [isAutoPlayActive]);
-
-    const onThumbnailChange = (event) => {
-        setActiveIndex(event.index);
-    };
 
     const onItemChange = (event) => {
         setActiveIndex(event.index);
@@ -187,7 +182,7 @@ import { classNames } from 'primereact/utils';
 import { PhotoService } from './service/PhotoService';
 import './GalleriaAdvancedDemo.css';
 
-export default function AdvancedDoc() {
+export default function AdvancedDemo() {
     const [images, setImages] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
     const [showThumbnails, setShowThumbnails] = useState(false);
@@ -220,15 +215,11 @@ export default function AdvancedDoc() {
         bindDocumentListeners();
 
         return () => unbindDocumentListeners();
-    },[]) // eslint-disable-line react-hooks/exhaustive-deps
+    },[]);
 
     useEffect(() => {
         setAutoPlayActive(galleria.current.isAutoPlayActive())
     },[isAutoPlayActive]);
-
-    const onThumbnailChange = (event) => {
-        setActiveIndex(event.index)
-    }
 
     const onItemChange = (event) => {
         setActiveIndex(event.index)
@@ -352,32 +343,34 @@ export default function AdvancedDoc() {
     });
 
     return (
-        <Galleria ref={galleria} value={images} activeIndex={activeIndex} onItemChange={onItemChange}
-            showThumbnails={showThumbnails} showItemNavigators showItemNavigatorsOnHover
-            numVisible={5} circular autoPlay transitionInterval={3000} responsiveOptions={responsiveOptions}
-            item={itemTemplate} thumbnail={thumbnailTemplate} footer={footer}
-            style={{ maxWidth: '640px' }} className={galleriaClassName} />
+        <div className="card galleria-demo">
+            <Galleria ref={galleria} value={images} activeIndex={activeIndex} onItemChange={onItemChange}
+                showThumbnails={showThumbnails} showItemNavigators showItemNavigatorsOnHover
+                numVisible={5} circular autoPlay transitionInterval={3000} responsiveOptions={responsiveOptions}
+                item={itemTemplate} thumbnail={thumbnailTemplate} footer={footer}
+                style={{ maxWidth: '640px' }} className={galleriaClassName} />
+        </div>
     )
 }
         `,
         typescript: `
 import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
-import { Galleria } from 'primereact/galleria';
+import { Galleria, GalleriaResponsiveOptions } from 'primereact/galleria';
 import { classNames } from 'primereact/utils';
 import { PhotoService } from './service/PhotoService';
 import './GalleriaAdvancedDemo.css';
 
-export default function AdvancedDoc() {
+export default function AdvancedDemo() {
     const [images, setImages] = useState(null);
-    const [activeIndex, setActiveIndex] = useState(0);
-    const [showThumbnails, setShowThumbnails] = useState(false);
-    const [isAutoPlayActive, setAutoPlayActive] = useState(true);
-    const [isFullScreen, setFullScreen] = useState(false);
+    const [activeIndex, setActiveIndex] = useState<number>(0);
+    const [showThumbnails, setShowThumbnails] = useState<boolean>(false);
+    const [isAutoPlayActive, setAutoPlayActive] = <boolean>useState(true);
+    const [isFullScreen, setFullScreen] = useState<boolean>(false);
     
     const galleria = useRef(null)
 
-    const responsiveOptions = [
+    const responsiveOptions: GalleriaResponsiveOptions = [
         {
             breakpoint: '1024px',
             numVisible: 5
@@ -401,15 +394,11 @@ export default function AdvancedDoc() {
         bindDocumentListeners();
 
         return () => unbindDocumentListeners();
-    },[]) // eslint-disable-line react-hooks/exhaustive-deps
+    },[]);
 
     useEffect(() => {
         setAutoPlayActive(galleria.current.isAutoPlayActive())
     },[isAutoPlayActive]);
-
-    const onThumbnailChange = (event) => {
-        setActiveIndex(event.index)
-    }
 
     const onItemChange = (event) => {
         setActiveIndex(event.index)
@@ -533,11 +522,13 @@ export default function AdvancedDoc() {
     });
     
     return (
-        <Galleria ref={galleria} value={images} activeIndex={activeIndex} onItemChange={onItemChange}
-            showThumbnails={showThumbnails} showItemNavigators showItemNavigatorsOnHover
-            numVisible={5} circular autoPlay transitionInterval={3000} responsiveOptions={responsiveOptions}
-            item={itemTemplate} thumbnail={thumbnailTemplate} footer={footer}
-            style={{ maxWidth: '640px' }} className={galleriaClassName} />
+        <div className="card galleria-demo">
+            <Galleria ref={galleria} value={images} activeIndex={activeIndex} onItemChange={onItemChange}
+                showThumbnails={showThumbnails} showItemNavigators showItemNavigatorsOnHover
+                numVisible={5} circular autoPlay transitionInterval={3000} responsiveOptions={responsiveOptions}
+                item={itemTemplate} thumbnail={thumbnailTemplate} footer={footer}
+                style={{ maxWidth: '640px' }} className={galleriaClassName} />
+        </div>
     )
 }
         `,
@@ -638,9 +629,9 @@ export default function AdvancedDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Advanced</p>
+                <p>Advanced Galleria implementation with a custom UI.</p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
+            <div className="card galleria-demo">
                 <Galleria
                     ref={galleria}
                     value={images}
