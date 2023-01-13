@@ -38,17 +38,17 @@ export interface StepsProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
     /**
      * An array of menuitems.
      */
-    model: MenuItem[];
+    model: MenuItem[] | undefined;
     /**
      * Index of the active item.
      * @defaultValue 0
      */
-    activeIndex?: number;
+    activeIndex?: number | undefined;
     /**
      * Whether the items are clickable or not.
      * @defaultValue true
      */
-    readOnly?: boolean;
+    readOnly?: boolean | undefined;
     /**
      * Callback to invoke when the new step is selected.
      * @param {StepsSelectEvent} event - Custom select event

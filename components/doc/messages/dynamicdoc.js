@@ -94,7 +94,9 @@ export default function DynamicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Multiple messages are displayed by passing an array to the <i>show</i> method.</p>
+                <p>
+                    Multiple messages are displayed by passing an array to the <i>show</i> method.
+                </p>
             </DocSectionText>
             <div className="card">
                 <Button type="button" onClick={addMessages} label="Show" className="mr-2" />

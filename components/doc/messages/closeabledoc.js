@@ -8,8 +8,8 @@ export function ClosableDoc(props) {
 
     useEffect(() => {
         msgs.current.show([
-            { sticky: true, severity: 'success', summary: 'Success', detail: 'Closable Message'},
-            { sticky: true, severity: 'info', summary: 'Info', detail: 'Not Closable Message', closable: false}
+            { sticky: true, severity: 'success', summary: 'Success', detail: 'Closable Message' },
+            { sticky: true, severity: 'info', summary: 'Info', detail: 'Not Closable Message', closable: false }
         ]);
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -68,7 +68,9 @@ export default function ClosableDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>A message displays a close icon by default, <i>closable</i> option is used to control this behavior.</p>
+                <p>
+                    A message displays a close icon by default, <i>closable</i> option is used to control this behavior.
+                </p>
             </DocSectionText>
             <div className="card">
                 <Messages ref={msgs} />

@@ -71,7 +71,9 @@ export default function SeverityDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>The <i>severity</i> option specifies the type of the message.</p>
+                <p>
+                    The <i>severity</i> option specifies the type of the message.
+                </p>
             </DocSectionText>
             <div className="card">
                 <Messages ref={msgs} />
