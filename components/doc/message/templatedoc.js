@@ -88,7 +88,9 @@ export default function TemplateDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Custom content is displayed with the <i>content</i> property.</p>
+                <p>
+                    Custom content is displayed with the <i>content</i> property.
+                </p>
             </DocSectionText>
             <div className="card">
                 <Message

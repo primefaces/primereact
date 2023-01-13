@@ -13,9 +13,10 @@ export function DocSectionText(props) {
         </>
     );
     const tag = props.level === '2' ? 'h3' : 'h2';
-    const Title = (titleProps) => { 
-        return React.createElement(tag, { className: 'doc-section-label' }, titleProps.children); 
-    }; 
+
+    const Title = (titleProps) => {
+        return React.createElement(tag, { className: 'doc-section-label' }, titleProps.children);
+    };
 
     return (
         <>
