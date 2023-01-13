@@ -1,13 +1,13 @@
-import { CodeHighlight } from '../common/codehighlight';
+import { DocSectionText } from '../common/docsectiontext';
 import { DevelopmentSection } from '../common/developmentsection';
-import { DocSubSection } from '../common/docsubsection';
+
 
 export function AccessibilityDoc() {
     return (
-        <>
-            <DocSubSection id="accessibility" label="Accessibility">
-                <DevelopmentSection>
-                    <h4>Screen Reader</h4>
+        
+            <DocSectionText id="accessibility" label="Accessibility">
+                
+                    <h3>Screen Reader</h3>
                     <p>
                         ConfirmDialog component uses <i>alertdialog</i> role along with <i>aria-labelledby</i> referring to the header element however any attribute is passed to the root element so you may use <i>aria-labelledby</i> to override this
                         default behavior. In addition <i>aria-modal</i> is added since focus is kept within the popup.
@@ -38,22 +38,22 @@ const confirm = (event) => {
 
 <ConfirmDialog />
 `}
-                    </CodeHighlight>
+                    
 
                     <p>
                         If the dialog is controlled with the <i>visible</i> property <i>aria-expanded</i> and <i>aria-controls</i> need to be handled explicitly.
                     </p>
 
-                    <CodeHighlight>
+                    
                         {`
 <ConfirmDialog id="dlg_confirmation" visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?"
     header="Confirmation" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
 
 <Button onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" aria-controls={visible ? 'dlg_confirmation' : null} aria-expanded={visible ? true : false} />
 `}
-                    </CodeHighlight>
+                    
 
-                    <h4>Overlay Keyboard Support</h4>
+                    <h3>Overlay Keyboard Support</h3>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -85,7 +85,7 @@ const confirm = (event) => {
                         </table>
                     </div>
 
-                    <h4>Buttons Keyboard Support</h4>
+                    <h3>Buttons Keyboard Support</h3>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -110,8 +110,8 @@ const confirm = (event) => {
                             </tbody>
                         </table>
                     </div>
-                </DevelopmentSection>
-            </DocSubSection>
-        </>
+                
+            </DocSectionText>
+        
     );
 }
