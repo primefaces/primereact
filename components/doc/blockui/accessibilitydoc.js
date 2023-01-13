@@ -3,15 +3,17 @@ import { DevelopmentSection } from '../common/developmentsection';
 
 export function AccessibilityDoc() {
     return (
-        <DocSectionText id="accessibility" label="Accessibility">
-            <h3>Screen Reader</h3>
-            <p>
-                BlockUI manages <i>aria-busy</i> state attribute when the UI gets blocked and unblocked. Any valid attribute is passed to the root element so additional attributes like <i>role</i> and <i>aria-live</i> can be used to define live
-                regions.
-            </p>
+        <DevelopmentSection>
+            <DocSectionText id="accessibility" label="Accessibility">
+                <h3>Screen Reader</h3>
+                <p>
+                    BlockUI manages <i>aria-busy</i> state attribute when the UI gets blocked and unblocked. Any valid attribute is passed to the root element so additional attributes like <i>role</i> and <i>aria-live</i> can be used to define live
+                    regions.
+                </p>
 
-            <h5>Keyboard Support</h5>
-            <p>Component does not include any interactive elements.</p>
-        </DocSectionText>
+                <h4>Keyboard Support</h4>
+                <p>Component does not include any interactive elements.</p>
+            </DocSectionText>
+        </DevelopmentSection>
     );
 }
