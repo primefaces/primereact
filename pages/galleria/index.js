@@ -8,7 +8,7 @@ import { AccessibilityDoc } from '../../components/doc/galleria/accessibilitydoc
 import { StyleDoc } from '../../components/doc/galleria/styledoc';
 import { ControlledDoc } from '../../components/doc/galleria/controlleddoc';
 import { ResponsiveDoc } from '../../components/doc/galleria/responsivedoc';
-import { AutoPlayDemoDoc } from '../../components/doc/galleria/autoplaydoc';
+import { AutoPlayDoc } from '../../components/doc/galleria/autoplaydoc';
 import { CaptionDoc } from '../../components/doc/galleria/captiondoc';
 import { AdvancedDoc } from '../../components/doc/galleria/advanceddoc';
 import { ClickEventDoc } from '../../components/doc/galleria/indicator/clickeventdoc';
@@ -130,7 +130,7 @@ const GalleriaDemo = () => {
         {
             id: 'autoplay',
             label: 'AutoPlay',
-            component: AutoPlayDemoDoc
+            component: AutoPlayDoc
         },
         {
             id: 'caption',
