@@ -3,7 +3,7 @@ import PrimeReact, { FilterService } from '../api/Api';
 import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 import { DropdownPanel } from './DropdownPanel';
 
 export const Dropdown = React.memo(
@@ -715,19 +715,24 @@ export const Dropdown = React.memo(
 
         const createClearIcon = () => {
             if (props.value != null && props.showClear && !props.disabled) {
-                return <i className="p-dropdown-clear-icon pi pi-times" onClick={clear}></i>;
+                const iconClassName = classNames('p-dropdown-clear-icon p-clickable');
+                const iconProps = { className: iconClassName, onPointerUp: clear };
+
+                return IconUtils.getJSXIcon(props.clearIcon, iconProps);
             }
 
             return null;
         };
 
         const createDropdownIcon = () => {
-            const iconClassName = classNames('p-dropdown-trigger-icon p-clickable', props.dropdownIcon);
+            const iconClassName = classNames('p-dropdown-trigger-icon p-clickable');
+            const icon = IconUtils.getJSXIcon(props.dropdownIcon, { className: iconClassName });
+
             const ariaLabel = props.placeholder || props.ariaLabel;
 
             return (
                 <div className="p-dropdown-trigger" role="button" aria-haspopup="listbox" aria-expanded={overlayVisibleState} aria-label={ariaLabel}>
-                    <span className={iconClassName}></span>
+                    {icon}
                 </div>
             );
         };
@@ -805,6 +810,7 @@ Dropdown.defaultProps = {
     ariaLabelledBy: null,
     autoFocus: false,
     className: null,
+    clearIcon: 'pi pi-times',
     dataKey: null,
     disabled: false,
     dropdownIcon: 'pi pi-chevron-down',

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 import { SelectItemOptionsType } from '../selectitem/selectitem';
 import TooltipOptions from '../tooltip/tooltipoptions';
+import { IconType } from '../utils';
 import { VirtualScrollerProps } from '../virtualscroller';
 
 type DropdownOptionGroupTemplateType = React.ReactNode | ((option: any, index: number) => React.ReactNode);
@@ -51,9 +52,10 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
     autoFocus?: boolean;
     children?: React.ReactNode;
     className?: string;
+    clearIcon?: IconType<DropdownProps> | undefined;
     dataKey?: string;
     disabled?: boolean;
-    dropdownIcon?: string;
+    dropdownIcon?: IconType<DropdownProps> | undefined;
     editable?: boolean;
     emptyFilterMessage?: DropdownEmptyFilterMessageType;
     emptyMessage?: DropdownEmptyMessageType;
