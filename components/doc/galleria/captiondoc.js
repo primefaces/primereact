@@ -167,11 +167,12 @@ export default function CaptionDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Description of an image is specified with the <i>caption</i> property that takes the displayed object and returns content.</p>
+                <p>
+                    Description of an image is specified with the <i>caption</i> property that takes the displayed object and returns content.
+                </p>
             </DocSectionText>
             <div className="card">
-                <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} 
-                    item={itemTemplate} thumbnail={thumbnailTemplate} caption={caption} style={{ maxWidth: '640px' }} />
+                <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} item={itemTemplate} thumbnail={thumbnailTemplate} caption={caption} style={{ maxWidth: '640px' }} />
             </div>
             <DocSectionCode code={code} service={['PhotoService']} />
         </>

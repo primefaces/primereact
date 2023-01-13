@@ -100,8 +100,7 @@ export default function ItemWithoutThumbnailsDemo() {
                 <p>Simple example with indicators only.</p>
             </DocSectionText>
             <div className="card">
-                <Galleria value={images} numVisible={5} circular style={{ maxWidth: '640px' }} showItemNavigators 
-                    showThumbnails={false} item={itemTemplate} thumbnail={thumbnailTemplate} />
+                <Galleria value={images} numVisible={5} circular style={{ maxWidth: '640px' }} showItemNavigators showThumbnails={false} item={itemTemplate} thumbnail={thumbnailTemplate} />
             </div>
             <DocSectionCode code={code} service={['PhotoService']} />
         </>

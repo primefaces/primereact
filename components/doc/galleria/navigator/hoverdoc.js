@@ -140,11 +140,12 @@ export default function HoverDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Navigators are displayed on hover only if <i>showItemNavigatorsOnHover</i> is enabled.</p>
+                <p>
+                    Navigators are displayed on hover only if <i>showItemNavigatorsOnHover</i> is enabled.
+                </p>
             </DocSectionText>
             <div className="card">
-                <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} circular style={{ maxWidth: '640px' }} showItemNavigators showItemNavigatorsOnHover
-                    item={itemTemplate} thumbnail={thumbnailTemplate} />
+                <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} circular style={{ maxWidth: '640px' }} showItemNavigators showItemNavigatorsOnHover item={itemTemplate} thumbnail={thumbnailTemplate} />
             </div>
             <DocSectionCode code={code} service={['PhotoService']} />
         </>

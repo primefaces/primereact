@@ -140,11 +140,12 @@ export default function AutoPlayDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>A slideshow implementation is defined by adding <i>circular</i> and <i>autoPlay</i> properties.</p>
+                <p>
+                    A slideshow implementation is defined by adding <i>circular</i> and <i>autoPlay</i> properties.
+                </p>
             </DocSectionText>
             <div className="card">
-                <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }} 
-                    item={itemTemplate} thumbnail={thumbnailTemplate} circular autoPlay transitionInterval={2000} />
+                <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }} item={itemTemplate} thumbnail={thumbnailTemplate} circular autoPlay transitionInterval={2000} />
             </div>
             <DocSectionCode code={code} service={['PhotoService']} />
         </>
