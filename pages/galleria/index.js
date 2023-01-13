@@ -18,10 +18,10 @@ import { IndicatorTemplateDoc } from '../../components/doc/galleria/indicator/te
 import { WithThumbnailsDoc } from '../../components/doc/galleria/fullscreen/withthumbnailsdoc';
 import { WithoutThumbnailsDoc } from '../../components/doc/galleria/fullscreen/withoutthumbnailsdoc';
 import { CustomContentDoc } from '../../components/doc/galleria/fullscreen/customcontentdoc';
-import { ItemThumbnailsDoc } from '../../components/doc/galleria/navigator/itemthumbnails';
-import { ItemWithoutThumbnailsDoc } from '../../components/doc/galleria/navigator/itemwithouthumbnails';
-import { ItemHoverDoc } from '../../components/doc/galleria/navigator/hover';
-import { IndicatorsDoc } from '../../components/doc/galleria/navigator/indicators';
+import { ItemThumbnailsDoc } from '../../components/doc/galleria/navigator/itemthumbnailsdoc';
+import { ItemWithoutThumbnailsDoc } from '../../components/doc/galleria/navigator/itemwithouthumbnailsdoc';
+import { HoverDoc } from '../../components/doc/galleria/navigator/hoverdoc';
+import { IndicatorsDoc } from '../../components/doc/galleria/navigator/indicatorsdoc';
 import { ThumbnailDoc } from '../../components/doc/galleria/thumbnaildoc';
 
 const GalleriaDemo = () => {
@@ -103,26 +103,26 @@ const GalleriaDemo = () => {
         {
             id: 'navigator',
             label: 'Navigator',
-            description: 'Combining item navigators, thumbnails and indicators provide various UI alternatives.',
+            description: 'Navigators are used to move back and forth between the images.',
             children: [
                 {
                     id: 'itemthumbnails',
-                    label: 'Item Navigators and Thumbnails',
+                    label: 'With Thumbnails',
                     component: ItemThumbnailsDoc
                 },
                 {
                     id: 'itemwithouthumbnails',
-                    label: 'Item Navigators without Thumbnails',
+                    label: 'Without Thumbnails',
                     component: ItemWithoutThumbnailsDoc
                 },
                 {
                     id: 'itemhover',
-                    label: 'Item Navigators on Hover',
-                    component: ItemHoverDoc
+                    label: 'Display on Hover',
+                    component: HoverDoc
                 },
                 {
                     id: 'indicators',
-                    label: 'Item Navigators and Indicators',
+                    label: 'With Indicators',
                     component: IndicatorsDoc
                 }
             ]

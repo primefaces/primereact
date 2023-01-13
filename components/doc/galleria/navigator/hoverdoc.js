@@ -5,20 +5,21 @@ import { DocSectionCode } from '../../common/docsectioncode';
 import { PhotoService } from '../../../../service/PhotoService';
 import getConfig from 'next/config';
 
-export function ItemHoverDoc(props) {
+export function HoverDoc(props) {
     const [images, setImages] = useState(null);
+    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     const responsiveOptions = [
         {
-            breakpoint: '1024px',
-            numVisible: 5
+            breakpoint: '991px',
+            numVisible: 4
         },
         {
-            breakpoint: '768px',
+            breakpoint: '767px',
             numVisible: 3
         },
         {
-            breakpoint: '560px',
+            breakpoint: '575px',
             numVisible: 1
         }
     ];
@@ -35,11 +36,9 @@ export function ItemHoverDoc(props) {
         return <img src={`${contextPath}/${item.thumbnailImageSrc}`} alt={item.alt} style={{ display: 'block' }} />;
     };
 
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
-
     const code = {
         basic: `
-<Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} circular style={{ maxWidth: '640px' }}
+<Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} circular style={{ maxWidth: '640px' }} 
     showItemNavigators showItemNavigatorsOnHover item={itemTemplate} thumbnail={thumbnailTemplate} />
         `,
         javascript: `
@@ -47,40 +46,37 @@ import React, { useState, useEffect } from 'react';
 import { Galleria } from 'primereact/galleria';
 import { PhotoService } from './service/PhotoService';
 
-export default function ItemHoverDoc() {
-    const [images, setImages] = useState(null)
-    
-
+export default function HoverDemo() {
+    const [images, setImages] = useState(null);
     const responsiveOptions = [
         {
-            breakpoint: '1024px',
-            numVisible: 5
+            breakpoint: '991px',
+            numVisible: 4
         },
         {
-            breakpoint: '768px',
+            breakpoint: '767px',
             numVisible: 3
         },
         {
-            breakpoint: '560px',
+            breakpoint: '575px',
             numVisible: 1
         }
     ];
 
+    useEffect(() => {
+            PhotoService.getImages().then(data => setImages(data));
+    }, []);
 
-useEffect(() => {
-        PhotoService.getImages().then(data => setImages(data));
-}, []); // eslint-disable-line react-hooks/exhaustive-deps
+    const itemTemplate = (item) => {
+        return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+    }
 
-const itemTemplate = (item) => {
-    return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
-}
-
-const thumbnailTemplate = (item) => {
-    return <img src={item.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.alt} style={{ display: 'block' }} />;
-}
+    const thumbnailTemplate = (item) => {
+        return <img src={item.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} alt={item.alt} style={{ display: 'block' }} />;
+    }
 
     return (
-        <div className="card flex justify-content-center">
+        <div className="card"> 
             <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} circular style={{ maxWidth: '640px' }}
                 showItemNavigators showItemNavigatorsOnHover item={itemTemplate} thumbnail={thumbnailTemplate} />
         </div>
@@ -89,43 +85,40 @@ const thumbnailTemplate = (item) => {
         `,
         typescript: `
 import React, { useState, useEffect } from 'react';
-import { Galleria } from 'primereact/galleria';
+import { Galleria, GalleriaResponsiveOptions } from 'primereact/galleria';
 import { PhotoService } from './service/PhotoService';
 
-export default function ItemHoverDoc() {
+export default function HoverDemo() {
     const [images, setImages] = useState(null)
-    
-
-    const responsiveOptions = [
+    const responsiveOptions: GalleriaResponsiveOptions[] = [
         {
-            breakpoint: '1024px',
-            numVisible: 5
+            breakpoint: '991px',
+            numVisible: 4
         },
         {
-            breakpoint: '768px',
+            breakpoint: '767px',
             numVisible: 3
         },
         {
-            breakpoint: '560px',
+            breakpoint: '575px',
             numVisible: 1
         }
     ];
 
+    useEffect(() => {
+            PhotoService.getImages().then(data => setImages(data));
+    }, []);
 
-useEffect(() => {
-        PhotoService.getImages().then(data => setImages(data));
-}, []); // eslint-disable-line react-hooks/exhaustive-deps
+    const itemTemplate = (item) => {
+        return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+    }
 
-const itemTemplate = (item) => {
-    return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
-}
-
-const thumbnailTemplate = (item) => {
-    return <img src={item.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.alt} style={{ display: 'block' }} />;
-}
+    const thumbnailTemplate = (item) => {
+        return <img src={item.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} alt={item.alt} style={{ display: 'block' }} />;
+    }
 
     return (
-        <div className="card flex justify-content-center">
+        <div className="card"> 
             <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} circular style={{ maxWidth: '640px' }}
                 showItemNavigators showItemNavigatorsOnHover item={itemTemplate} thumbnail={thumbnailTemplate} />
         </div>
@@ -147,10 +140,11 @@ const thumbnailTemplate = (item) => {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Item Navigators on Hover</p>
+                <p>Navigators are displayed on hover only if <i>showItemNavigatorsOnHover</i> is enabled.</p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} circular style={{ maxWidth: '640px' }} showItemNavigators showItemNavigatorsOnHover item={itemTemplate} thumbnail={thumbnailTemplate} />
+            <div className="card">
+                <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} circular style={{ maxWidth: '640px' }} showItemNavigators showItemNavigatorsOnHover
+                    item={itemTemplate} thumbnail={thumbnailTemplate} />
             </div>
             <DocSectionCode code={code} service={['PhotoService']} />
         </>
