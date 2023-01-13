@@ -7,9 +7,9 @@ import { DocSectionText } from '../common/docsectiontext';
 export function TemplateDoc(props) {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
-    const itemTemplate = (
+    const content = (
         <div className="flex align-items-center">
-            <img alt="logo" src={contextPath + 'images/logo.png'} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} width="32" />
+            <img alt="logo" src={contextPath + 'images/logo.png'} width="32" />
             <div className="ml-2">Always bet on Prime.</div>
         </div>
     );
@@ -24,17 +24,17 @@ style={{
 }}
 className="border-primary w-full justify-content-start"
 severity="info"
-content={itemTemplate}
+content={content}
 />
         `,
         javascript: `
 import React from 'react';
 import { Message } from 'primereact/message';
 
-export default function TemplateDoc() {
-    const itemTemplate = (
+export default function TemplateDemo() {
+    const content = (
         <div className="flex align-items-center">
-            <img alt="logo" src="images/logo.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} width="32" />
+            <img alt="logo" src="images/logo.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/cdn/images/placeholder.png')} width="32" />
             <div className="ml-2">Always bet on Prime.</div>
         </div>
     );
@@ -49,7 +49,7 @@ export default function TemplateDoc() {
                 }}
                 className="border-primary w-full justify-content-start"
                 severity="info"
-                content={itemTemplate}
+                content={content}
             />
         </div>
     )
@@ -59,10 +59,10 @@ export default function TemplateDoc() {
 import React from 'react';
 import { Message } from 'primereact/message';
 
-export default function TemplateDoc() {
-    const itemTemplate = (
+export default function TemplateDemo() {
+    const content = (
         <div className="flex align-items-center">
-            <img alt="logo" src="images/logo.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} width="32" />
+            <img alt="logo" src="images/logo.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/cdn/images/placeholder.png')} width="32" />
             <div className="ml-2">Always bet on Prime.</div>
         </div>
     );
@@ -77,7 +77,7 @@ export default function TemplateDoc() {
                 }}
                 className="border-primary w-full justify-content-start"
                 severity="info"
-                content={itemTemplate}
+                content={content}
             />
         </div>
     )
@@ -88,8 +88,7 @@ export default function TemplateDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                {/* TO DO: Add demo content. */}
-                <p></p>
+                <p>Custom content is displayed with the <i>content</i> property.</p>
             </DocSectionText>
             <div className="card">
                 <Message
@@ -100,7 +99,7 @@ export default function TemplateDoc() {
                     }}
                     className="border-primary w-full justify-content-start"
                     severity="info"
-                    content={itemTemplate}
+                    content={content}
                 />
             </div>
             <DocSectionCode code={code} />

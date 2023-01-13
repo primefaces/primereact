@@ -3,10 +3,9 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ImportDoc } from '../../components/doc/message/importdoc';
-import { SeveritiesDoc } from '../../components/doc/message/severitiesdoc';
+import { SeverityDoc } from '../../components/doc/message/severitydoc';
 import { TemplateDoc } from '../../components/doc/message/templatedoc';
 import { ValidationDoc } from '../../components/doc/message/validationdoc';
-import { FormLayoutDoc } from '../../components/doc/message/formlayoutdoc';
 import { ApiDoc } from '../../components/doc/message/apidoc';
 import { AccessibilityDoc } from '../../components/doc/message/accessibilitydoc';
 import { StyleDoc } from '../../components/doc/message/styledoc';
@@ -25,19 +24,14 @@ const MessageDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'severities',
-            label: 'Severities',
-            component: SeveritiesDoc
+            id: 'severity',
+            label: 'Severity',
+            component: SeverityDoc
         },
         {
             id: 'validation',
             label: 'Validation',
             component: ValidationDoc
-        },
-        {
-            id: 'formlayout',
-            label: 'Form Layout',
-            component: FormLayoutDoc
         },
         {
             id: 'template',
@@ -59,19 +53,6 @@ const MessageDemo = () => {
             label: 'API',
             component: ApiDoc,
             children: [
-                {
-                    id: 'messageapi',
-                    label: 'Message API'
-                },
-                {
-                    id: 'severitiesapi',
-                    label: 'Severities'
-                },
-
-                {
-                    id: 'messagecomponent',
-                    label: 'Message Component'
-                },
                 {
                     id: 'properties',
                     label: 'Properties'
