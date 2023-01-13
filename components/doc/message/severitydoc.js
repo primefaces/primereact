@@ -45,7 +45,9 @@ export default function SeverityDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>The <i>severity</i> property specifies the type of the message.</p>
+                <p>
+                    The <i>severity</i> property specifies the type of the message.
+                </p>
             </DocSectionText>
             <div className="card flex flex-wrap align-items-center justify-content-center gap-3">
                 <Message severity="info" text="Info Message" />

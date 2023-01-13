@@ -37,7 +37,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Text to display is defined with the <i>text</i> property.</p>
+                <p>
+                    Text to display is defined with the <i>text</i> property.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Message text="Message Content" />
