@@ -1,3 +1,5 @@
+import { DocSectionText } from '../common/docsectiontext';
+
 export function AccessibilityDoc() {
     return (
         <DocSectionText id="accessibility" label="Accessibility">

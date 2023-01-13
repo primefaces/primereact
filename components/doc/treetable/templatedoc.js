@@ -6,7 +6,7 @@ import { NodeService } from '../../../service/NodeService';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function TemplatingDoc(props) {
+export function TemplateDoc(props) {
     const [nodes, setNodes] = useState([]);
 
     useEffect(() => {
@@ -45,7 +45,7 @@ import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { NodeService } from './service/NodeService';
 
-export default function TemplatingDoc() {
+export default function TemplateDoc() {
     const [nodes, setNodes] = useState([]);
     
     useEffect(() => {
@@ -89,7 +89,7 @@ import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { NodeService } from './service/NodeService';
 
-export default function TemplatingDoc() {
+export default function TemplateDoc() {
     const [nodes, setNodes] = useState([]);
     
     useEffect(() => {

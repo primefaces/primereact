@@ -7,7 +7,7 @@ import { ApiDoc } from '../../components/doc/treetable/apidoc';
 import { AccessibilityDoc } from '../../components/doc/treetable/accessibilitydoc';
 import { StyleDoc } from '../../components/doc/treetable/styledoc';
 import { PaginatorDoc } from '../../components/doc/treetable/paginatordoc';
-import { TemplatingDoc } from '../../components/doc/treetable/templatingdoc';
+import { TemplateDoc } from '../../components/doc/treetable/templatedoc';
 import { ImportDoc } from '../../components/doc/treetable/importdoc';
 import { BasicDoc } from '../../components/doc/treetable/basicdoc';
 import { ProgrammaticDoc } from '../../components/doc/treetable/programmaticdoc';

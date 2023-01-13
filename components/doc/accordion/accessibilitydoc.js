@@ -1,4 +1,5 @@
 import { DevelopmentSection } from '../common/developmentsection';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function AccessibilityDoc() {
     return (

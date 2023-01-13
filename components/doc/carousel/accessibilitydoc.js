@@ -1,6 +1,7 @@
 import { DevelopmentSection } from '../common/developmentsection';
 
 import Link from 'next/link';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function AccessibilityDoc() {
     return (

@@ -28,7 +28,7 @@ export function StyleDoc() {
                         </tbody>
                     </table>
                 </div>
-            
+            </DocSectionText>
         </>
     );
 }
