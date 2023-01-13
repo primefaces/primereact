@@ -149,7 +149,9 @@ export default function CustomContentDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Using <i>activeIndex</i>, Galleria is displayed with a specific initial image.</p>
+                <p>
+                    Using <i>activeIndex</i>, Galleria is displayed with a specific initial image.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Galleria

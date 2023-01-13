@@ -166,11 +166,12 @@ export default function WithThumbnailsDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Full screen mode is enabled by adding <i>fullScreen</i> property and the <i>ref</i> of the Galleria needs to be defined so that <i>show</i> method can be called from a target like a button.</p>
+                <p>
+                    Full screen mode is enabled by adding <i>fullScreen</i> property and the <i>ref</i> of the Galleria needs to be defined so that <i>show</i> method can be called from a target like a button.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={9} style={{ maxWidth: '50%' }} 
-                    circular fullScreen showItemNavigators item={itemTemplate} thumbnail={thumbnailTemplate} />
+                <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={9} style={{ maxWidth: '50%' }} circular fullScreen showItemNavigators item={itemTemplate} thumbnail={thumbnailTemplate} />
 
                 <Button label="Show" icon="pi pi-external-link" onClick={() => galleria.current.show()} />
             </div>

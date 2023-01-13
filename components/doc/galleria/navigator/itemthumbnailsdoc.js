@@ -140,11 +140,12 @@ export default function ItemThumbnailsDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Add <i>showItemNavigators</i> to display navigator elements and the left and right side.</p>
+                <p>
+                    Add <i>showItemNavigators</i> to display navigator elements and the left and right side.
+                </p>
             </DocSectionText>
             <div className="card">
-                <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} circular style={{ maxWidth: '640px' }} showItemNavigators 
-                    item={itemTemplate} thumbnail={thumbnailTemplate} />
+                <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} circular style={{ maxWidth: '640px' }} showItemNavigators item={itemTemplate} thumbnail={thumbnailTemplate} />
             </div>
             <DocSectionCode code={code} service={['PhotoService']} />
         </>
