@@ -29,12 +29,12 @@ export interface OverlayPanelProps extends Omit<React.DetailedHTMLProps<React.HT
      * Enables to hide the overlay when outside is clicked.
      * @defaultValue true
      */
-    dismissable?: boolean;
+    dismissable?: boolean | undefined;
     /**
      * When enabled, displays a close icon at top right corner.
      * @defaultValue false
      */
-    showCloseIcon?: boolean;
+    showCloseIcon?: boolean | undefined;
     /**
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue document.body
@@ -44,15 +44,15 @@ export interface OverlayPanelProps extends Omit<React.DetailedHTMLProps<React.HT
      * Aria label of the close icon.
      * @defaultValue close
      */
-    ariaCloseLabel?: string;
+    ariaCloseLabel?: string | undefined;
     /**
      * Object literal to define widths per screen size.
      */
-    breakpoints?: OverlayPanelBreakpoints;
+    breakpoints?: OverlayPanelBreakpoints | undefined;
     /**
      * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
      */
-    transitionOptions?: CSSTransitionProps;
+    transitionOptions?: CSSTransitionProps | undefined;
     /**
      * Callback to invoke when overlay becomes visible.
      */
