@@ -65,12 +65,12 @@ const MessageDemo = () => {
         <div>
             <Head>
                 <title>React Message Component</title>
-                <meta name="description" content="Message is used to display inline message with various severities." />
+                <meta name="description" content="Message component displays information related to another element such as invalid input." />
             </Head>
             <div className="content-section introduction">
                 <div>
                     <h1>Message</h1>
-                    <p>Message is used to display inline message with various severities.</p>
+                    <p>Message component displays information related to another element such as invalid input.</p>
                 </div>
                 <DocActions github="message/index.js" />
             </div>

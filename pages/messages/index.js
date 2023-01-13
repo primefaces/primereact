@@ -3,7 +3,7 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ImportDoc } from '../../components/doc/messages/importdoc';
-import { SeveritiesDoc } from '../../components/doc/messages/severitiesdoc';
+import { SeverityDoc } from '../../components/doc/messages/severitydoc';
 import { DynamicDoc } from '../../components/doc/messages/dynamicdoc';
 import { TemplateDoc } from '../../components/doc/messages/templatedoc';
 import { ApiDoc } from '../../components/doc/messages/apidoc';
@@ -26,9 +26,9 @@ const MessagesDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'severities',
-            label: 'Severities',
-            component: SeveritiesDoc
+            id: 'severity',
+            label: 'Severity',
+            component: SeverityDoc
         },
         {
             id: 'dynamic',
@@ -109,12 +109,12 @@ const MessagesDemo = () => {
         <div>
             <Head>
                 <title>React Messages Component</title>
-                <meta name="description" content="Messages is used to display inline messages with various severities." />
+                <meta name="description" content="Messages component is used to display inline messages" />
             </Head>
             <div className="content-section introduction">
                 <div>
                     <h1>Messages</h1>
-                    <p>Messages is used to display inline messages with various severities.</p>
+                    <p>Messages component is used to display inline messages.</p>
                 </div>
                 <DocActions github="messages/index.js" />
             </div>
