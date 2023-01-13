@@ -8,7 +8,6 @@ import getConfig from 'next/config';
 
 export function WithThumbnailsDoc(props) {
     const [images, setImages] = useState(null);
-
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const galleria = useRef(null);
 
@@ -45,7 +44,8 @@ export function WithThumbnailsDoc(props) {
 
     const code = {
         basic: `
-<Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={9} style={{ maxWidth: '50%' }} circular fullScreen showItemNavigators item={itemTemplate} thumbnail={thumbnailTemplate} />
+<Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={9} style={{ maxWidth: '50%' }} 
+    circular fullScreen showItemNavigators item={itemTemplate} thumbnail={thumbnailTemplate} />
 
 <Button label="Show" icon="pi pi-external-link" onClick={() => galleria.current.show()} />
         `,
@@ -55,9 +55,8 @@ import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
 import { PhotoService } from './service/PhotoService';
 
-export default function WithThumbnailsDoc() {
+export default function WithThumbnailsDemo() {
     const [images, setImages] = useState(null);
-    
     const galleria = useRef(null);
 
     const responsiveOptions = [
@@ -81,19 +80,21 @@ export default function WithThumbnailsDoc() {
 
     useEffect(() => {
         PhotoService.getImages().then(data => setImages(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     const itemTemplate = (item) => {
-        return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+        return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
     }
 
     const thumbnailTemplate = (item) => {
-        return <img src={item.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.alt} style={{ display: 'block' }} />;
+        return <img src={item.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} alt={item.alt} style={{ display: 'block' }} />;
     }
 
     return (
         <div className="card flex justify-content-center">
-            <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={9} style={{ maxWidth: '50%' }} circular fullScreen showItemNavigators item={itemTemplate} thumbnail={thumbnailTemplate} />
+            <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={9} style={{ maxWidth: '50%' }} 
+                circular fullScreen showItemNavigators item={itemTemplate} thumbnail={thumbnailTemplate} />
+
             <Button label="Show" icon="pi pi-external-link" onClick={() => galleria.current.show()} />
         </div>
     )
@@ -102,15 +103,14 @@ export default function WithThumbnailsDoc() {
         typescript: `
 import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
-import { Galleria } from 'primereact/galleria';
+import { Galleria, GalleriaResponsiveOptions } from 'primereact/galleria';
 import { PhotoService } from './service/PhotoService';
 
-export default function WithThumbnailsDoc() {
+export default function WithThumbnailsDemo() {
     const [images, setImages] = useState(null);
-    
     const galleria = useRef(null);
 
-    const responsiveOptions = [
+    const responsiveOptions: GalleriaResponsiveOptions[] = [
         {
             breakpoint: '1500px',
             numVisible: 5
@@ -131,19 +131,21 @@ export default function WithThumbnailsDoc() {
 
     useEffect(() => {
         PhotoService.getImages().then(data => setImages(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     const itemTemplate = (item) => {
-        return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+        return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
     }
 
     const thumbnailTemplate = (item) => {
-        return <img src={item.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.alt} style={{ display: 'block' }} />;
+        return <img src={item.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} alt={item.alt} style={{ display: 'block' }} />;
     }
     
     return (
         <div className="card flex justify-content-center">
-            <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={9} style={{ maxWidth: '50%' }} circular fullScreen showItemNavigators item={itemTemplate} thumbnail={thumbnailTemplate} />
+            <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={9} style={{ maxWidth: '50%' }} 
+                circular fullScreen showItemNavigators item={itemTemplate} thumbnail={thumbnailTemplate} />
+
             <Button label="Show" icon="pi pi-external-link" onClick={() => galleria.current.show()} />
         </div>
     )
@@ -164,10 +166,11 @@ export default function WithThumbnailsDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>With Thumbnails</p>
+                <p>Full screen mode is enabled by adding <i>fullScreen</i> property and the <i>ref</i> of the Galleria needs to be defined so that <i>show</i> method can be called from a target like a button.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={9} style={{ maxWidth: '50%' }} circular fullScreen showItemNavigators item={itemTemplate} thumbnail={thumbnailTemplate} />
+                <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={9} style={{ maxWidth: '50%' }} 
+                    circular fullScreen showItemNavigators item={itemTemplate} thumbnail={thumbnailTemplate} />
 
                 <Button label="Show" icon="pi pi-external-link" onClick={() => galleria.current.show()} />
             </div>

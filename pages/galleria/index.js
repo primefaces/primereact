@@ -15,9 +15,9 @@ import { ClickEventDoc } from '../../components/doc/galleria/indicator/clickeven
 import { HoverEventDoc } from '../../components/doc/galleria/indicator/hovereventdoc';
 import { PositionDoc } from '../../components/doc/galleria/indicator/positiondoc';
 import { IndicatorTemplateDoc } from '../../components/doc/galleria/indicator/templatedoc';
-import { WithThumbnailsDoc } from '../../components/doc/galleria/fullscreen/withthumbnails';
-import { WithoutThumbnailsDoc } from '../../components/doc/galleria/fullscreen/withoutthumbnails';
-import { CustomContentDoc } from '../../components/doc/galleria/fullscreen/custom';
+import { WithThumbnailsDoc } from '../../components/doc/galleria/fullscreen/withthumbnailsdoc';
+import { WithoutThumbnailsDoc } from '../../components/doc/galleria/fullscreen/withoutthumbnailsdoc';
+import { CustomContentDoc } from '../../components/doc/galleria/fullscreen/customcontentdoc';
 import { ItemThumbnailsDoc } from '../../components/doc/galleria/navigator/itemthumbnails';
 import { ItemWithoutThumbnailsDoc } from '../../components/doc/galleria/navigator/itemwithouthumbnails';
 import { ItemHoverDoc } from '../../components/doc/galleria/navigator/hover';
@@ -81,7 +81,7 @@ const GalleriaDemo = () => {
         {
             id: 'fullscreen',
             label: 'Full Screen',
-            description: 'In fullscreen mode content covers the whole page over a mask.',
+            description: 'In fullscreen mode content covers the whole page over a modal layer.',
             children: [
                 {
                     id: 'fullscreenwiththumbnail',
