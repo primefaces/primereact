@@ -47,12 +47,31 @@ export function PositionDoc(props) {
         javascript: `
 import React, { useState, useEffect } from 'react';
 import { Galleria } from 'primereact/galleria';
+import { RadioButton } from 'primereact/radiobutton';
 import { PhotoService } from './service/PhotoService';
 
 export default function PositionDemo() {
     const [images, setImages] = useState(null);
     const [inside, setInside] = useState(false);
     const [position, setPosition] = useState('bottom');
+    const positionOptions = [
+        {
+            label: 'Bottom',
+            value: 'bottom'
+        },
+        {
+            label: 'Top',
+            value: 'top'
+        },
+        {
+            label: 'Left',
+            value: 'left'
+        },
+        {
+            label: 'Right',
+            value: 'right'
+        }
+    ];
     
     useEffect(() => {
         PhotoService.getImages().then((data) => setImages(data));
@@ -95,6 +114,24 @@ export default function PositionDemo() {
     const [images, setImages] = useState(null);
     const [inside, setInside] = useState<boolean>(false);
     const [position, setPosition] = useState<string>('bottom');
+    const positionOptions: Array<{label: string, value: string}> = [
+        {
+            label: 'Bottom',
+            value: 'bottom'
+        },
+        {
+            label: 'Top',
+            value: 'top'
+        },
+        {
+            label: 'Left',
+            value: 'left'
+        },
+        {
+            label: 'Right',
+            value: 'right'
+        }
+    ];
 
     useEffect(() => {
         PhotoService.getImages().then((data) => setImages(data));
