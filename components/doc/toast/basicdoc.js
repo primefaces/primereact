@@ -8,7 +8,7 @@ export function BasicDoc(props) {
     const toast = useRef(null);
 
     const show = () => {
-        toast.current.show([{ severity: 'info', summary: 'Basic', detail: 'Basic Content' }]);
+        toast.current.show({ severity: 'info', summary: 'Info', detail: 'Message Content' });
     };
 
     const code = {
@@ -21,17 +21,17 @@ import React, { useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
-export default function BasicDoc() {
+export default function BasicDemo() {
     const toast = useRef(null);
 
     const show = () => {
-        toast.current.show([{ severity: 'info', summary: 'Basic', detail: 'Basic Content' }]);
+        toast.current.show({ severity: 'info', summary: 'Info', detail: 'Message Content' });
     };
 
     return (
-        <div>
+        <div className="card flex justify-content-center">
             <Toast ref={toast} />
-            <Button onClick={show} label="Basic" />
+            <Button onClick={show} label="Show" />
         </div>
     )
 }
@@ -41,17 +41,17 @@ import React, { useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
-export default function BasicDoc() {
+export default function BasicDemo() {
     const toast = useRef<Toast>(null);
 
     const show = () => {
-        toast.current?.show([{ severity: 'info', summary: 'Basic', detail: 'Basic Content' }]);
+        toast.current?.show({ severity: 'info', summary: 'Info', detail: 'Message Content' });
     };
 
     return (
-        <div>
+        <div className="card flex justify-content-center">
             <Toast ref={toast} />
-            <Button onClick={show} label="Basic" />
+            <Button onClick={show} label="Show" />
         </div>
     )
 }
@@ -61,14 +61,12 @@ export default function BasicDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                {/* TO DO: Add demo content. */}
-                <p></p>
+                <p>Messages are displayed by calling the <i>show</i> method provided by the component ref. A single message is specified by the 
+                Message interface that defines various properties such as <i>severity</i>, <i>summary</i> and <i>detail</i>.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Toast ref={toast} />
-                <div>
-                    <Button onClick={show} label="Basic" />
-                </div>
+                <Button onClick={show} label="Show" />
             </div>
             <DocSectionCode code={code} />
         </>

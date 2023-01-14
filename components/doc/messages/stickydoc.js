@@ -78,7 +78,7 @@ export default function StickyDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    A message disappears after 3000ms defined the <i>life</i> option, set <i>sticky</i> option to displays messages that do not hide automatically.
+                    A message disappears after 3000ms defined the <i>life</i> option, set <i>sticky</i> option to displays message that do not hide automatically.
                 </p>
             </DocSectionText>
             <div className="card ">

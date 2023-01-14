@@ -17,7 +17,7 @@ export function TemplateDoc(props) {
         toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
     };
 
-    const showSubmit = () => {
+    const confirm = () => {
         toastBC.current.show({
             severity: 'info',
             sticky: true,
@@ -26,12 +26,11 @@ export function TemplateDoc(props) {
                 <div className="flex flex-column align-items-center" style={{ flex: '1' }}>
                     <div className="text-center">
                         <i className="pi pi-exclamation-triangle" style={{ fontSize: '3rem' }}></i>
-                        <h4>Are you sure?</h4>
-                        <p>Submit your work</p>
+                        <div className="font-bold text-xl my-3">Are you sure?</div>
                     </div>
                     <div className="flex gap-2">
-                        <Button onClick={(e) => clear(true)} type="button" label="Confirm" className="p-button-success w-6rem flex justify-content-center" />
-                        <Button onClick={(e) => clear(false)} type="button" label="Cancel" className="p-button-warning w-6rem flex justify-content-center" />
+                        <Button onClick={(e) => clear(true)} type="button" label="Confirm" className="p-button-success w-6rem" />
+                        <Button onClick={(e) => clear(false)} type="button" label="Cancel" className="p-button-warning w-6rem" />
                     </div>
                 </div>
             )
@@ -42,14 +41,14 @@ export function TemplateDoc(props) {
         basic: `
 <Toast ref={toast} />
 <Toast ref={toastBC} position="bottom-center" />
-<Button type="button" onClick={showSubmit} label="Submit" className="ui-button-warning" />
+<Button type="button" onClick={confirm} label="Submit" />
         `,
         javascript: `
 import React, { useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
-export default function TemplateDoc() {
+export default function TemplateDemo() {
     const toast = useRef(null);
     const toastBC = useRef(null);
 
@@ -62,7 +61,7 @@ export default function TemplateDoc() {
         toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
     };
 
-    const showSubmit = () => {
+    const confirm = () => {
         toastBC.current.show({
             severity: 'info',
             sticky: true,
@@ -71,12 +70,11 @@ export default function TemplateDoc() {
                 <div className="flex flex-column align-items-center" style={{ flex: '1' }}>
                     <div className="text-center">
                         <i className="pi pi-exclamation-triangle" style={{ fontSize: '3rem' }}></i>
-                        <h4>Are you sure?</h4>
-                        <p>Submit your work</p>
+                        <div className="font-bold text-xl my-3">Are you sure?</div>
                     </div>
                     <div className="flex gap-2">
-                        <Button onClick={(e) => clear(true)} type="button" label="Confirm" className="p-button-success w-6rem flex justify-content-center" />
-                        <Button onClick={(e) => clear(false)} type="button" label="Cancel" className="p-button-warning w-6rem flex justify-content-center" />
+                        <Button onClick={(e) => clear(true)} type="button" label="Confirm" className="p-button-success w-6rem" />
+                        <Button onClick={(e) => clear(false)} type="button" label="Cancel" className="p-button-warning w-6rem" />
                     </div>
                 </div>
             )
@@ -86,10 +84,8 @@ export default function TemplateDoc() {
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast} />
-            <div>
-                <Toast ref={toastBC} position="bottom-center" />
-                <Button type="button" onClick={showSubmit} label="Submit" className="ui-button-warning md:w-auto md:mr-1 w-full mb-1" />
-            </div>
+            <Toast ref={toastBC} position="bottom-center" />
+            <Button type="button" onClick={confirm} label="Submit" />
         </div>
     )
 }
@@ -99,7 +95,7 @@ import React, { useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
-export default function TemplateDoc() {
+export default function TemplateDemo() {
     const toast = useRef<Toast>(null);
     const toastBC = useRef<Toast>(null);
 
@@ -112,7 +108,7 @@ export default function TemplateDoc() {
         toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
     };
 
-    const showSubmit = () => {
+    const confirm = () => {
         toastBC.current?.show({
             severity: 'info',
             sticky: true,
@@ -121,12 +117,11 @@ export default function TemplateDoc() {
                 <div className="flex flex-column align-items-center" style={{ flex: '1' }}>
                     <div className="text-center">
                         <i className="pi pi-exclamation-triangle" style={{ fontSize: '3rem' }}></i>
-                        <h4>Are you sure?</h4>
-                        <p>Submit your work</p>
+                        <div className="font-bold text-xl my-3">Are you sure?</div>
                     </div>
                     <div className="flex gap-2">
-                        <Button onClick={(e) => clear(true)} type="button" label="Confirm" className="p-button-success w-6rem flex justify-content-center" />
-                        <Button onClick={(e) => clear(false)} type="button" label="Cancel" className="p-button-warning w-6rem flex justify-content-center" />
+                        <Button onClick={(e) => clear(true)} type="button" label="Confirm" className="p-button-success w-6rem" />
+                        <Button onClick={(e) => clear(false)} type="button" label="Cancel" className="p-button-warning w-6rem" />
                     </div>
                 </div>
             )
@@ -136,10 +131,8 @@ export default function TemplateDoc() {
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast} />
-            <div>
-                <Toast ref={toastBC} position="bottom-center" />
-                <Button type="button" onClick={showSubmit} label="Submit" className="ui-button-warning md:w-auto md:mr-1 w-full mb-1" />
-            </div>
+            <Toast ref={toastBC} position="bottom-center" />
+            <Button type="button" onClick={confirm} label="Submit" />
         </div>
     )
 }
@@ -149,15 +142,12 @@ export default function TemplateDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                {/* TO DO: Add demo content. */}
-                <p></p>
+                <p>Custom content inside a message is defined with the <i>content</i> option.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Toast ref={toast} />
-                <div>
-                    <Toast ref={toastBC} position="bottom-center" />
-                    <Button type="button" onClick={showSubmit} label="Submit" className="ui-button-warning md:w-auto md:mr-1 w-full mb-1" />
-                </div>
+                <Toast ref={toastBC} position="bottom-center" />
+                <Button type="button" onClick={confirm} label="Submit" />
             </div>
             <DocSectionCode code={code} />
         </>

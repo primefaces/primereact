@@ -6,7 +6,7 @@ import { ImportDoc } from '../../components/doc/toast/importdoc';
 import { ApiDoc } from '../../components/doc/toast/apidoc';
 import { AccessibilityDoc } from '../../components/doc/toast/accessibilitydoc';
 import { StyleDoc } from '../../components/doc/toast/styledoc';
-import { SeveritiesDoc } from '../../components/doc/toast/severitiesdoc';
+import { SeverityDoc } from '../../components/doc/toast/severitydoc';
 import { PositionDoc } from '../../components/doc/toast/positiondoc';
 import { TemplateDoc } from '../../components/doc/toast/templatedoc';
 import { StickyDoc } from '../../components/doc/toast/stickydoc';
@@ -26,9 +26,9 @@ const ToastDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'severities',
-            label: 'Severities',
-            component: SeveritiesDoc
+            id: 'severity',
+            label: 'Severity',
+            component: SeverityDoc
         },
         {
             id: 'position',
@@ -65,38 +65,6 @@ const ToastDemo = () => {
             label: 'API',
             component: ApiDoc,
             children: [
-                {
-                    id: 'messageapi',
-                    label: 'Message API'
-                },
-                {
-                    id: 'severitiesapi',
-                    label: 'Severities'
-                },
-                {
-                    id: 'showingmessages',
-                    label: 'Showing Messages'
-                },
-                {
-                    id: 'closable',
-                    label: 'Closable'
-                },
-                {
-                    id: 'sticky',
-                    label: 'Sticky'
-                },
-                {
-                    id: 'positionapi',
-                    label: 'Position'
-                },
-                {
-                    id: 'clearingmessages',
-                    label: 'Clearing Messages'
-                },
-                {
-                    id: 'replacingmessages',
-                    label: 'Replacing Messages'
-                },
                 {
                     id: 'properties',
                     label: 'Properties'

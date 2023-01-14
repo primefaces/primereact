@@ -8,7 +8,7 @@ export function StickyDoc(props) {
     const toast = useRef(null);
 
     const showSticky = () => {
-        toast.current.show({ severity: 'info', summary: 'Sticky Message', detail: 'Message Content', sticky: true });
+        toast.current.show({ severity: 'info', summary: 'Sticky', detail: 'Message Content', sticky: true });
     };
 
     const code = {
@@ -21,11 +21,11 @@ import React, { useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
-export default function StickyDoc() {
+export default function StickyDemo() {
     const toast = useRef(null);
 
     const showSticky = () => {
-        toast.current.show({ severity: 'info', summary: 'Sticky Message', detail: 'Message Content', sticky: true });
+        toast.current.show({ severity: 'info', summary: 'Sticky', detail: 'Message Content', sticky: true });
     };
 
     return (
@@ -41,11 +41,11 @@ import React, { useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
-export default function StickyDoc() {
+export default function StickyDemo() {
     const toast = useRef<Toast>(null);
 
     const showSticky = () => {
-        toast.current?.show({ severity: 'info', summary: 'Sticky Message', detail: 'Message Content', sticky: true });
+        toast.current?.show({ severity: 'info', summary: 'Sticky', detail: 'Message Content', sticky: true });
     };
 
     return (
@@ -61,13 +61,12 @@ export default function StickyDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                {/* TO DO: Add demo content. */}
-                <p></p>
+                <p>A message disappears after 3000ms defined the <i>life</i> option, set <i>sticky</i> option to display messages that do not hide automatically.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Toast ref={toast} />
                 <div>
-                    <Button onClick={showSticky} label="Sticky" className="md:w-auto md:mr-1 w-full mb-1" />
+                    <Button onClick={showSticky} label="Sticky" />
                 </div>
             </div>
             <DocSectionCode code={code} />
