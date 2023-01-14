@@ -9,8 +9,7 @@ export default class IconUtils {
         if (icon !== null) {
             const iconType = typeof icon;
             const className = classNames(iconProps.className, iconType === 'string' && icon);
-
-            content = <span {...iconProps} className={className}></span>;
+            let customIcon;
 
             if (iconType !== 'string') {
                 const defaultContentOptions = {
@@ -19,8 +18,14 @@ export default class IconUtils {
                     ...options
                 };
 
-                return ObjectUtils.getJSXElement(icon, defaultContentOptions);
+                customIcon = ObjectUtils.getJSXElement(icon, defaultContentOptions);
             }
+
+            content = (
+                <span {...iconProps} className={className}>
+                    {customIcon}
+                </span>
+            );
         }
 
         return content;
