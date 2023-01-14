@@ -205,7 +205,7 @@ export default function TemplateDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Title section of a tab is customized with the <i>header</i> property that take a <i>TabPanelHeaderTemplateOptions</i> as a parameter and returns content.</p>
+                <p>Title section of a tab is customized with the <i>header</i> property that takes a <i>TabPanelHeaderTemplateOptions</i> object as a parameter and returns content.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <TabView>

@@ -63,12 +63,12 @@ const PanelDemo = () => {
         <div>
             <Head>
                 <title>React Panel Component</title>
-                <meta name="description" content="Panel is a grouping component providing with content toggle feature." />
+                <meta name="description" content="Panel is a container component with an optional content toggle feature." />
             </Head>
             <div className="content-section introduction">
                 <div>
                     <h1>Panel</h1>
-                    <p>Panel is a grouping component providing with content toggle feature.</p>
+                    <p>Panel is a container component with an optional content toggle feature.</p>
                 </div>
                 <DocActions github="panel/index.js" />
             </div>
