@@ -1,20 +1,12 @@
-import React from 'react';
 import { Accordion, AccordionTab } from '../../lib/accordion/Accordion';
 import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
 
-export function TemplateDoc(props) {
+export function DisabledDoc(props) {
     const code = {
         basic: `
 <Accordion activeIndex={0}>
-    <AccordionTab
-        header={
-            <div className="flex align-items-center">
-                <i className="pi pi-calendar mr-2"></i>
-                <span className="vertical-align-middle">Header I</span>
-            </div>
-        }
-    >
+    <AccordionTab header="Header I">
         <p className="m-0">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
@@ -22,14 +14,7 @@ export function TemplateDoc(props) {
             Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
     </AccordionTab>
-    <AccordionTab
-        header={
-            <div className="flex align-items-center">
-                <i className="pi pi-user mr-2"></i>
-                <span className="vertical-align-middle">Header II</span>
-            </div>
-        }
-    >
+    <AccordionTab header="Header II">
         <p className="m-0">
             Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa 
             quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas 
@@ -37,15 +22,7 @@ export function TemplateDoc(props) {
             Consectetur, adipisci velit, sed quia non numquam eius modi.
         </p>
     </AccordionTab>
-    <AccordionTab
-        header={
-            <div className="flex align-items-center">
-                <i className="pi pi-search mr-2"></i>
-                <span className="vertical-align-middle">Header III</span>
-                <i className="pi pi-cog ml-2 ml-2"></i>
-            </div>
-        }
-    >
+    <AccordionTab header="Header III">
         <p className="m-0">
             At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti
             quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt 
@@ -53,24 +30,18 @@ export function TemplateDoc(props) {
             Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
         </p>
     </AccordionTab>
+    <AccordionTab header="Header IV" disabled></AccordionTab>
 </Accordion>
         `,
         javascript: `
 import React from 'react';
 import { Accordion, AccordionTab } from 'primereact/accordion';
 
-export default function TemplateDemo() {
+export default function DisabledDemo() {
     return (
         <div className="card">
             <Accordion activeIndex={0}>
-                <AccordionTab
-                    header={
-                        <div className="flex align-items-center">
-                            <i className="pi pi-calendar mr-2"></i>
-                            <span className="vertical-align-middle">Header I</span>
-                        </div>
-                    }
-                >
+                <AccordionTab header="Header I">
                     <p className="m-0">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
                         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
@@ -78,14 +49,7 @@ export default function TemplateDemo() {
                         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     </p>
                 </AccordionTab>
-                <AccordionTab
-                    header={
-                        <div className="flex align-items-center">
-                            <i className="pi pi-user mr-2"></i>
-                            <span className="vertical-align-middle">Header II</span>
-                        </div>
-                    }
-                >
+                <AccordionTab header="Header II">
                     <p className="m-0">
                         Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa 
                         quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas 
@@ -93,15 +57,7 @@ export default function TemplateDemo() {
                         Consectetur, adipisci velit, sed quia non numquam eius modi.
                     </p>
                 </AccordionTab>
-                <AccordionTab
-                    header={
-                        <div className="flex align-items-center">
-                            <i className="pi pi-search mr-2"></i>
-                            <span className="vertical-align-middle">Header III</span>
-                            <i className="pi pi-cog ml-2 ml-2"></i>
-                        </div>
-                    }
-                >
+                <AccordionTab header="Header III">
                     <p className="m-0">
                         At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti
                         quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt 
@@ -109,6 +65,7 @@ export default function TemplateDemo() {
                         Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
                     </p>
                 </AccordionTab>
+                <AccordionTab header="Header IV" disabled></AccordionTab>
             </Accordion>
         </div>
     )
@@ -118,18 +75,11 @@ export default function TemplateDemo() {
 import React from 'react';
 import { Accordion, AccordionTab } from 'primereact/accordion';
 
-export default function TemplateDemo() {
+export default function DisabledDemo() {
     return (
         <div className="card">
             <Accordion activeIndex={0}>
-                <AccordionTab
-                    header={
-                        <div className="flex align-items-center">
-                            <i className="pi pi-calendar mr-2"></i>
-                            <span className="vertical-align-middle">Header I</span>
-                        </div>
-                    }
-                >
+                <AccordionTab header="Header I">
                     <p className="m-0">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
                         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
@@ -137,14 +87,7 @@ export default function TemplateDemo() {
                         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     </p>
                 </AccordionTab>
-                <AccordionTab
-                    header={
-                        <div className="flex align-items-center">
-                            <i className="pi pi-user mr-2"></i>
-                            <span className="vertical-align-middle">Header II</span>
-                        </div>
-                    }
-                >
+                <AccordionTab header="Header II">
                     <p className="m-0">
                         Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa 
                         quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas 
@@ -152,15 +95,7 @@ export default function TemplateDemo() {
                         Consectetur, adipisci velit, sed quia non numquam eius modi.
                     </p>
                 </AccordionTab>
-                <AccordionTab
-                    header={
-                        <div className="flex align-items-center">
-                            <i className="pi pi-search mr-2"></i>
-                            <span className="vertical-align-middle">Header III</span>
-                            <i className="pi pi-cog ml-2 ml-2"></i>
-                        </div>
-                    }
-                >
+                <AccordionTab header="Header III">
                     <p className="m-0">
                         At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti
                         quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt 
@@ -168,6 +103,7 @@ export default function TemplateDemo() {
                         Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
                     </p>
                 </AccordionTab>
+                <AccordionTab header="Header IV" disabled></AccordionTab>
             </Accordion>
         </div>
     )
@@ -178,18 +114,11 @@ export default function TemplateDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Header section of a tab is customized with the <i>header</i> property.</p>
+                <p>Enabling <i>disabled</i> property of an AccordionTab prevents user interaction.</p>
             </DocSectionText>
             <div className="card">
                 <Accordion activeIndex={0}>
-                    <AccordionTab
-                        header={
-                            <div className="flex align-items-center">
-                                <i className="pi pi-calendar mr-2"></i>
-                                <span className="vertical-align-middle">Header I</span>
-                            </div>
-                        }
-                    >
+                    <AccordionTab header="Header I">
                         <p className="m-0">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
                             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
@@ -197,14 +126,7 @@ export default function TemplateDemo() {
                             Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                         </p>
                     </AccordionTab>
-                    <AccordionTab
-                        header={
-                            <div className="flex align-items-center">
-                                <i className="pi pi-user mr-2"></i>
-                                <span className="vertical-align-middle">Header II</span>
-                            </div>
-                        }
-                    >
+                    <AccordionTab header="Header II">
                         <p className="m-0">
                             Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa 
                             quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas 
@@ -212,15 +134,7 @@ export default function TemplateDemo() {
                             Consectetur, adipisci velit, sed quia non numquam eius modi.
                         </p>
                     </AccordionTab>
-                    <AccordionTab
-                        header={
-                            <div className="flex align-items-center">
-                                <i className="pi pi-search mr-2"></i>
-                                <span className="vertical-align-middle">Header III</span>
-                                <i className="pi pi-cog ml-2 ml-2"></i>
-                            </div>
-                        }
-                    >
+                    <AccordionTab header="Header III">
                         <p className="m-0">
                             At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti
                             quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt 
@@ -228,6 +142,7 @@ export default function TemplateDemo() {
                             Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
                         </p>
                     </AccordionTab>
+                    <AccordionTab header="Header IV" disabled></AccordionTab>
                 </Accordion>
             </div>
             <DocSectionCode code={code} />

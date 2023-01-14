@@ -5,6 +5,7 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/accordion/importdoc';
 import { BasicDoc } from '../../components/doc/accordion/basicdoc';
 import { MultipleDoc } from '../../components/doc/accordion/multipledoc';
+import { DisabledDoc } from '../../components/doc/accordion/disableddoc';
 import { ControlledDoc } from '../../components/doc/accordion/controlleddoc';
 import { TemplateDoc } from '../../components/doc/accordion/templatedoc';
 import { ApiDoc } from '../../components/doc/accordion/apidoc';
@@ -27,6 +28,11 @@ const AccordionDemo = () => {
             id: 'multiple',
             label: 'Multiple',
             component: MultipleDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
         },
         {
             id: 'controlled',
