@@ -178,7 +178,7 @@ export default function TemplateDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Header section of a tab is customized with the <i>header</i> property.</p>
+                <p>Title section of a tab is customized with the <i>header</i> property.</p>
             </DocSectionText>
             <div className="card">
                 <Accordion activeIndex={0}>
