@@ -92,7 +92,9 @@ export default function MultipleDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Multiple messages are displayed by passing an array to the <i>show</i> method.</p>
+                <p>
+                    Multiple messages are displayed by passing an array to the <i>show</i> method.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center gap-2">
                 <Toast ref={toast} />

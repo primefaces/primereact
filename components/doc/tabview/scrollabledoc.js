@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TabView, TabPanel } from '../../lib/tabview/TabView';;
+import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
@@ -66,7 +66,9 @@ export default function ScrollableDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Adding <i>scrollable</i> property displays navigational buttons at each side to scroll between tabs.</p>
+                <p>
+                    Adding <i>scrollable</i> property displays navigational buttons at each side to scroll between tabs.
+                </p>
             </DocSectionText>
             <div className="card">
                 <TabView scrollable>

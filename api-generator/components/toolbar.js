@@ -46,7 +46,7 @@ const ToolbarProps = [
         type: 'any',
         default: 'null',
         description: 'The template of end section.'
-    },
+    }
 ];
 
 const ToolbarEvents = [];

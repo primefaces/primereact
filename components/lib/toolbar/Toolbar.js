@@ -6,9 +6,9 @@ export const Toolbar = React.memo(
         const elementRef = React.useRef(null);
         const otherProps = ObjectUtils.findDiffKeys(props, Toolbar.defaultProps);
         const toolbarClass = classNames('p-toolbar p-component', props.className);
-        const start = ObjectUtils.getJSXElement(props.left||props.start, props);
+        const start = ObjectUtils.getJSXElement(props.left || props.start, props);
         const center = ObjectUtils.getJSXElement(props.center, props);
-        const end = ObjectUtils.getJSXElement(props.right||props.end, props);
+        const end = ObjectUtils.getJSXElement(props.right || props.end, props);
 
         React.useImperativeHandle(ref, () => ({
             props,

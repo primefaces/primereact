@@ -171,7 +171,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Toolbar provides <i>start</i>, <i>center</i> and <i>end</i> properties to place content at these sections.</p>
+                <p>
+                    Toolbar provides <i>start</i>, <i>center</i> and <i>end</i> properties to place content at these sections.
+                </p>
             </DocSectionText>
             <div className="card">
                 <Toolbar start={startContent} end={endContent} />
