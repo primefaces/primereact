@@ -4,7 +4,7 @@ import { DocSectionText } from '../common/docsectiontext';
 
 export function IconsDoc(props) {
     const customSvgIcon = () => (
-        <svg width="1em" height="1em" viewBox="0 0 26 21" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+        <svg width="1em" height="1em" viewBox="0 0 26 21" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
                 d="M25 5v14.113a.888.888 0 0 1-.887.887H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h6.662c.217 0 .427.071.6.2l3.476 2.6c.173.129.383.2.6.2H24a1 1 0 0 1 1 1ZM10 12h6M13 9v6"
                 stroke="currentColor"
@@ -30,7 +30,7 @@ import './ButtonDemo.css';
 export default function IconsDoc() {
 
     const customSvgIcon = () => (
-        <svg width="1em" height="1em" viewBox="0 0 26 21" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+        <svg width="1em" height="1em" viewBox="0 0 26 21" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
                 d="M25 5v14.113a.888.888 0 0 1-.887.887H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h6.662c.217 0 .427.071.6.2l3.476 2.6c.173.129.383.2.6.2H24a1 1 0 0 1 1 1ZM10 12h6M13 9v6"
                 stroke="currentColor"
@@ -59,7 +59,7 @@ import './ButtonDemo.css';
 export default function IconsDoc() {
 
     const customSvgIcon = () => (
-        <svg width="1em" height="1em" viewBox="0 0 26 21" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+        <svg width="1em" height="1em" viewBox="0 0 26 21" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
                 d="M25 5v14.113a.888.888 0 0 1-.887.887H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h6.662c.217 0 .427.071.6.2l3.476 2.6c.173.129.383.2.6.2H24a1 1 0 0 1 1 1ZM10 12h6M13 9v6"
                 stroke="currentColor"
