@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import { Button } from '../../lib/button/Button';
 import { SplitButton } from '../../lib/splitbutton/SplitButton';
 import { Toolbar } from '../../lib/toolbar/Toolbar';
@@ -6,6 +7,7 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
+    const router = useRouter();
     const items = [
         {
             label: 'Update',
@@ -26,12 +28,12 @@ export function BasicDoc(props) {
             label: 'Upload',
             icon: 'pi pi-upload',
             command: () => {
-                window.location.hash = '/fileupload';
+                router.push('/fileupload');
             }
         }
     ];
 
-    const leftContents = (
+    const startContent = (
         <React.Fragment>
             <Button label="New" icon="pi pi-plus" className="mr-2" />
             <Button label="Upload" icon="pi pi-upload" className="p-button-success" />
@@ -40,7 +42,7 @@ export function BasicDoc(props) {
         </React.Fragment>
     );
 
-    const rightContents = (
+    const endContent = (
         <React.Fragment>
             <Button icon="pi pi-search" className="mr-2" />
             <Button icon="pi pi-calendar" className="p-button-success mr-2" />
@@ -49,7 +51,7 @@ export function BasicDoc(props) {
     );
     const code = {
         basic: `
-<Toolbar className="gap-2" left={leftContents} right={rightContents} />
+<Toolbar start={startContent} end={endContent} />
         `,
         javascript: `
 import React from 'react';
@@ -57,8 +59,8 @@ import { Toolbar } from 'primereact/toolbar';
 import { Button } from 'primereact/button';
 import { SplitButton } from 'primereact/splitbutton';
 
-export default function BasicDoc() {
-
+export default function BasicDemo() {
+    const router = useRouter();
     const items = [
         {
             label: 'Update',
@@ -78,12 +80,12 @@ export default function BasicDoc() {
         {   label: 'Upload',
             icon: 'pi pi-upload',
             command: () => {
-                window.location.hash = "/fileupload"
+                router.push('/fileupload');
             }
         }
     ];
 
-    const leftContents = (
+    const startContent = (
         <React.Fragment>
             <Button label="New" icon="pi pi-plus" className="mr-2" />
             <Button label="Upload" icon="pi pi-upload" className="p-button-success" />
@@ -92,7 +94,7 @@ export default function BasicDoc() {
         </React.Fragment>
     );
 
-    const rightContents = (
+    const endContent = (
         <React.Fragment>
             <Button icon="pi pi-search" className="mr-2" />
             <Button icon="pi pi-calendar" className="p-button-success mr-2" />
@@ -102,7 +104,7 @@ export default function BasicDoc() {
 
     return (
         <div className="card">
-            <Toolbar className="gap-2" left={leftContents} right={rightContents} />
+            <Toolbar start={startContent} end={endContent} />
         </div>
     );
 }
@@ -114,8 +116,8 @@ import { Button } from 'primereact/button';
 import { MenuItem } from 'primereact/menuitem';
 import { SplitButton } from 'primereact/splitbutton';
 
-export default function BasicDoc() {
-
+export default function BasicDemo() {
+    const router = useRouter();
     const items: MenuItem[] = [
         {
             label: 'Update',
@@ -135,12 +137,12 @@ export default function BasicDoc() {
         {   label: 'Upload',
             icon: 'pi pi-upload',
             command: () => {
-                window.location.hash = "/fileupload"
+                router.push('/fileupload');
             }
         }
     ];
 
-    const leftContents = (
+    const startContent = (
         <React.Fragment>
             <Button label="New" icon="pi pi-plus" className="mr-2" />
             <Button label="Upload" icon="pi pi-upload" className="p-button-success" />
@@ -149,7 +151,7 @@ export default function BasicDoc() {
         </React.Fragment>
     );
 
-    const rightContents = (
+    const endContent = (
         <React.Fragment>
             <Button icon="pi pi-search" className="mr-2" />
             <Button icon="pi pi-calendar" className="p-button-success mr-2" />
@@ -159,9 +161,9 @@ export default function BasicDoc() {
 
     return (
         <div className="card">
-            <Toolbar className="gap-2" left={leftContents} right={rightContents} />
+            <Toolbar start={startContent} end={endContent} />
         </div>
-    )
+    );
 }
         `
     };
@@ -169,10 +171,12 @@ export default function BasicDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Toolbar provides left and right templates to place content at these sections.</p>
+                <p>
+                    Toolbar provides <i>start</i>, <i>center</i> and <i>end</i> properties to place content at these sections.
+                </p>
             </DocSectionText>
             <div className="card">
-                <Toolbar className="gap-2" left={leftContents} right={rightContents} />
+                <Toolbar start={startContent} end={endContent} />
             </div>
             <DocSectionCode code={code} />
         </>

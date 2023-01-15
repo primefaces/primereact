@@ -6,8 +6,9 @@ export const Toolbar = React.memo(
         const elementRef = React.useRef(null);
         const otherProps = ObjectUtils.findDiffKeys(props, Toolbar.defaultProps);
         const toolbarClass = classNames('p-toolbar p-component', props.className);
-        const left = ObjectUtils.getJSXElement(props.left, props);
-        const right = ObjectUtils.getJSXElement(props.right, props);
+        const start = ObjectUtils.getJSXElement(props.left || props.start, props);
+        const center = ObjectUtils.getJSXElement(props.center, props);
+        const end = ObjectUtils.getJSXElement(props.right || props.end, props);
 
         React.useImperativeHandle(ref, () => ({
             props,
@@ -16,8 +17,9 @@ export const Toolbar = React.memo(
 
         return (
             <div id={props.id} ref={elementRef} className={toolbarClass} style={props.style} role="toolbar" {...otherProps}>
-                <div className="p-toolbar-group-left">{left}</div>
-                <div className="p-toolbar-group-right">{right}</div>
+                <div className="p-toolbar-group-start p-toolbar-group-left">{start}</div>
+                <div className="p-toolbar-group-center">{center}</div>
+                <div className="p-toolbar-group-end p-toolbar-group-right">{end}</div>
             </div>
         );
     })
@@ -30,5 +32,8 @@ Toolbar.defaultProps = {
     style: null,
     className: null,
     left: null,
-    right: null
+    right: null,
+    start: null,
+    center: null,
+    end: null
 };

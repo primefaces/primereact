@@ -204,7 +204,7 @@ export default function ControlledDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Galleria can be controlled programmatically using a binding to <i>activeIndex</i> and <i>onItemChange</i> event to update the active index.
+                    Galleria can be controlled programmatically using a binding to <i>activeIndex</i> along with <i>onItemChange</i> event to update the active index.
                 </p>
             </DocSectionText>
             <div className="card">

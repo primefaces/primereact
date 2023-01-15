@@ -107,7 +107,9 @@ export default function PositionDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Location of the messages is customized with the <i>position</i> property.</p>
+                <p>
+                    Location of the messages is customized with the <i>position</i> property.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Toast ref={toastTL} position="top-left" />

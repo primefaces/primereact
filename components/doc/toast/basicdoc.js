@@ -61,8 +61,10 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Messages are displayed by calling the <i>show</i> method provided by the component ref. A single message is specified by the 
-                Message interface that defines various properties such as <i>severity</i>, <i>summary</i> and <i>detail</i>.</p>
+                <p>
+                    Messages are displayed by calling the <i>show</i> method provided by the component ref. A single message is specified by the Message interface that defines various properties such as <i>severity</i>, <i>summary</i> and{' '}
+                    <i>detail</i>.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Toast ref={toast} />

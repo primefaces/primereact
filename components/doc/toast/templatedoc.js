@@ -142,7 +142,9 @@ export default function TemplateDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Custom content inside a message is defined with the <i>content</i> option.</p>
+                <p>
+                    Custom content inside a message is defined with the <i>content</i> option.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Toast ref={toast} />

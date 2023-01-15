@@ -37,8 +37,8 @@ const TabViewDemo = () => {
             component: DisabledDoc
         },
         {
-            id: 'headericons',
-            label: 'Header Icons',
+            id: 'headericon',
+            label: 'Header Icon',
             component: HeaderIconDoc
         },
         {
@@ -47,7 +47,7 @@ const TabViewDemo = () => {
             component: TemplateDoc
         },
         {
-            id: 'slosable',
+            id: 'closable',
             label: 'Closable',
             component: ClosableDoc
         },

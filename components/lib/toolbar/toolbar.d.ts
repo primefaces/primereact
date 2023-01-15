@@ -15,13 +15,27 @@ import * as React from 'react';
  */
 export interface ToolbarProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     /**
-     * The template of left element.
+     * The template of left section.
+     * @deprecated use start instead
      */
     left?: React.ReactNode | ((props: ToolbarProps) => React.ReactNode);
     /**
-     * The template of right element.
+     * The template of right section.
+     * @deprecated use end instead
      */
     right?: React.ReactNode | ((props: ToolbarProps) => React.ReactNode);
+    /**
+     * The template of start section.
+     */
+    start?: React.ReactNode | ((props: ToolbarProps) => React.ReactNode);
+    /**
+     * The template of center section.
+     */
+    center?: React.ReactNode | ((props: ToolbarProps) => React.ReactNode);
+    /**
+     * The template of end section.
+     */
+    end?: React.ReactNode | ((props: ToolbarProps) => React.ReactNode);
     /**
      * Used to get the child elements of the component.
      * @readonly

@@ -24,11 +24,15 @@ export function StyleDoc() {
                             <td>Main container element.</td>
                         </tr>
                         <tr>
-                            <td>p-toolbar-group-left</td>
+                            <td>p-toolbar-group-start</td>
                             <td>Left content container.</td>
                         </tr>
                         <tr>
-                            <td>p-toolbar-group-right</td>
+                            <td>p-toolbar-group-center</td>
+                            <td>Center content container.</td>
+                        </tr>
+                        <tr>
+                            <td>p-toolbar-group-end</td>
                             <td>Right content container.</td>
                         </tr>
                     </tbody>

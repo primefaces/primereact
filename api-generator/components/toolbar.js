@@ -21,13 +21,31 @@ const ToolbarProps = [
         name: 'left',
         type: 'any',
         default: 'null',
-        description: 'The template of left element.'
+        description: 'The template of left section.'
     },
     {
         name: 'right',
         type: 'any',
         default: 'null',
-        description: 'The template of right element'
+        description: 'The template of right section'
+    },
+    {
+        name: 'start',
+        type: 'any',
+        default: 'null',
+        description: 'The template of start section.'
+    },
+    {
+        name: 'center',
+        type: 'any',
+        default: 'null',
+        description: 'The template of center section.'
+    },
+    {
+        name: 'end',
+        type: 'any',
+        default: 'null',
+        description: 'The template of end section.'
     }
 ];
 
@@ -42,6 +60,18 @@ const ToolbarStyles = [
     {
         name: 'p-toolbar-group-right',
         description: 'Right content container.'
+    },
+    {
+        name: 'p-toolbar-group-start',
+        description: 'Start content container.'
+    },
+    {
+        name: 'p-toolbar-group-center',
+        description: 'Center content container.'
+    },
+    {
+        name: 'p-toolbar-group-end',
+        description: 'End content container.'
     }
 ];
 
