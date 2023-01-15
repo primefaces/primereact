@@ -211,23 +211,11 @@ export const InputNumber = React.memo(
             }
         };
 
-        const onUpButtonTouchStart = (event) => {
-            if (!props.disabled && !props.readOnly) {
-                repeat(event, null, 1);
-            }
-        };
-
         const onUpButtonMouseDown = (event) => {
             if (!props.disabled && !props.readOnly) {
                 props.autoFocus && DomHandler.focus(inputRef.current, props.autoFocus);
                 repeat(event, null, 1);
                 event.preventDefault();
-            }
-        };
-
-        const onUpButtonTouchEnd = () => {
-            if (!props.disabled && !props.readOnly) {
-                clearTimer();
             }
         };
 
@@ -252,18 +240,6 @@ export const InputNumber = React.memo(
         const onUpButtonKeyDown = (event) => {
             if (!props.disabled && !props.readOnly && (event.keyCode === 32 || event.keyCode === 13)) {
                 repeat(event, null, 1);
-            }
-        };
-
-        const onDownButtonTouchStart = (event) => {
-            if (!props.disabled && !props.readOnly) {
-                repeat(event, null, -1);
-            }
-        };
-
-        const onDownButtonTouchEnd = () => {
-            if (!props.disabled && !props.readOnly) {
-                clearTimer();
             }
         };
 
@@ -1059,13 +1035,11 @@ export const InputNumber = React.memo(
                 <button
                     type="button"
                     className={className}
-                    onMouseLeave={onUpButtonMouseLeave}
-                    onMouseDown={onUpButtonMouseDown}
-                    onMouseUp={onUpButtonMouseUp}
+                    onPointerLeave={onUpButtonMouseLeave}
+                    onPointerDown={onUpButtonMouseDown}
+                    onPointerUp={onUpButtonMouseUp}
                     onKeyDown={onUpButtonKeyDown}
                     onKeyUp={onUpButtonKeyUp}
-                    onTouchStart={onUpButtonTouchStart}
-                    onTouchEnd={onUpButtonTouchEnd}
                     disabled={props.disabled}
                     tabIndex={-1}
                 >
@@ -1089,13 +1063,11 @@ export const InputNumber = React.memo(
                 <button
                     type="button"
                     className={className}
-                    onMouseLeave={onDownButtonMouseLeave}
-                    onMouseDown={onDownButtonMouseDown}
-                    onMouseUp={onDownButtonMouseUp}
+                    onPointerLeave={onDownButtonMouseLeave}
+                    onPointerDown={onDownButtonMouseDown}
+                    onPointerUp={onDownButtonMouseUp}
                     onKeyDown={onDownButtonKeyDown}
                     onKeyUp={onDownButtonKeyUp}
-                    onTouchStart={onDownButtonTouchStart}
-                    onTouchEnd={onDownButtonTouchEnd}
                     disabled={props.disabled}
                     tabIndex={-1}
                 >
