@@ -1,15 +1,57 @@
+/**
+ *
+ * InputText is an extension to standard input element with theming and keyfiltering.
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/inputtext/)
+ *
+ * @module inputtext
+ *
+ */
 import * as React from 'react';
 import { KeyFilterType } from '../keyfilter';
 import TooltipOptions from '../tooltip/tooltipoptions';
 
+/**
+ * Defines valid properties in InputText component. In addition to these, all properties of HTMLInputElement can be used in this component.
+ * @group Properties
+ */
 export interface InputTextProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onInput' | 'ref' | 'value'> {
-    children?: React.ReactNode;
+    /**
+     * Format definition of the keys to block.
+     */
     keyfilter?: KeyFilterType;
-    tooltip?: string;
-    tooltipOptions?: TooltipOptions;
-    validateOnly?: boolean;
+    /**
+     * Content of the tooltip.
+     */
+    tooltip?: string | undefined;
+    /**
+     * Configuration of the tooltip, refer to the tooltip documentation for more information.
+     * @type {TooltipOptions}
+     */
+    tooltipOptions?: TooltipOptions | undefined;
+    /**
+     * When enabled, instead of blocking keys, input is validated internally to test against the regular expression.
+     * @defaultValue false
+     */
+    validateOnly?: boolean | undefined;
+    /**
+     * The value of component
+     */
     value?: string;
+    /**
+     * Callback to invoke while typing value on input
+     * @param {React.FormEvent<HTMLInputElement>} event - Browser event
+     * @param {boolean} validatePattern - Whether to validate the value
+     */
     onInput?(event: React.FormEvent<HTMLInputElement>, validatePattern: boolean): void;
+    /**
+     * Used to get the child elements of the component.
+     * @readonly
+     */
+    children?: React.ReactNode | undefined;
 }
 
+/**
+ * @group Component
+ */
 export declare const InputText: React.ForwardRefExoticComponent<InputTextProps & React.RefAttributes<HTMLInputElement>>;
