@@ -34,12 +34,12 @@ export interface DataScrollerProps extends Omit<React.DetailedHTMLProps<React.HT
      * Number of buffer size.
      * @defaultValue 0.9
      */
-    buffer?: number;
+    buffer?: number | undefined;
     /**
      * Used to get the child elements of the component.
      * @readonly
      */
-    children?: React.ReactNode;
+    children?: React.ReactNode | undefined;
     /**
      * Text to display when there is no data.
      * @defaultValue No records found
@@ -48,41 +48,41 @@ export interface DataScrollerProps extends Omit<React.DetailedHTMLProps<React.HT
     /**
      * Label of footer.
      */
-    footer?: React.ReactNode;
+    footer?: React.ReactNode | undefined;
     /**
      * Label of header.
      */
-    header?: React.ReactNode;
+    header?: React.ReactNode | undefined;
     /**
      * Defines if the event target to listen the scroll event is the element itself.
      * @defaultValue false
      */
-    inline?: boolean;
+    inline?: boolean | undefined;
     /**
      * @todo Write the documentation.
      */
-    lazy?: boolean;
+    lazy?: boolean | undefined;
     /**
      * Determines whether data is loaded by a target element.
      */
-    loader?: boolean;
+    loader?: boolean | undefined;
     /**
      * Number of rows to fetch in a load event.
      */
-    rows?: number;
+    rows?: number | undefined;
     /**
      * Max height of the content area in inline mode.
      */
-    scrollHeight?: string;
+    scrollHeight?: string | undefined;
     /**
      * An array of objects to display.
      */
-    value?: any[];
+    value?: any[] | undefined;
     /**
      * Function that gets an item in the value and returns the content for it.
      * @param {any} item - @todo Write the documentation.
      */
-    itemTemplate?(item: any): React.ReactNode;
+    itemTemplate?(item: any): React.ReactNode | undefined;
     /**
      * Callback to invoke in lazy mode to load new data.
      * @param {DataScrollerLazyLoadEvents} event - Custom lazy event
