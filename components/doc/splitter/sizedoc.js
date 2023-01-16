@@ -41,13 +41,19 @@ export default function SizeDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Initial  dimension of a panel is percentage based and defined using the <i>size</i> property. In addition,
-                <i>minSize</i> is provided to set a minimum value during a resize.</p>
+                <p>
+                    Initial dimension of a panel is percentage based and defined using the <i>size</i> property. In addition,
+                    <i>minSize</i> is provided to set a minimum value during a resize.
+                </p>
             </DocSectionText>
             <div className="card">
                 <Splitter style={{ height: '300px' }}>
-                    <SplitterPanel className="flex align-items-center justify-content-center" size={25} minSize={10}>Panel 1</SplitterPanel>
-                    <SplitterPanel className="flex align-items-center justify-content-center" size={75}>Panel 2</SplitterPanel>
+                    <SplitterPanel className="flex align-items-center justify-content-center" size={25} minSize={10}>
+                        Panel 1
+                    </SplitterPanel>
+                    <SplitterPanel className="flex align-items-center justify-content-center" size={75}>
+                        Panel 2
+                    </SplitterPanel>
                 </Splitter>
             </div>
             <DocSectionCode code={code} />

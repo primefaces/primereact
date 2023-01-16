@@ -41,7 +41,9 @@ export default function VerticalDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Panels are displayed as stacked by setting the <i>layout</i> to <i>vertical</i>.</p>
+                <p>
+                    Panels are displayed as stacked by setting the <i>layout</i> to <i>vertical</i>.
+                </p>
             </DocSectionText>
             <div className="card">
                 <Splitter style={{ height: '300px' }} layout="vertical">
