@@ -18,7 +18,6 @@ export function DataTableDoc(props) {
 
     const code = {
         basic: `
-<Toast ref={toast} />
 <DeferredContent onLoad={onDataLoad}>
     <DataTable value={products}>
         <Column field="code" header="Code"></Column>
@@ -36,7 +35,7 @@ import { Column } from 'primereact/column';
 import { Toast } from 'primereact/toast';
 import { ProductService } from './service/ProductService';
 
-export default function DataTableDoc() {
+export default function DataTableDemo() {
     const toast = useRef(null);
     const [products, setProducts] = useState(null);
 
@@ -46,12 +45,9 @@ export default function DataTableDoc() {
     }
 
     return (
-        <div className="card flex flex-column">
+        <div className="card">
+            <p style={{marginBottom: '70rem', textAlign: 'center'}}>Scroll down to lazy load a DataTable.</p>
             <Toast ref={toast} />
-            <div className="flex flex-column align-items-center m-3 lg:p-8 text-xl font-semibold" style={{ minHeight: '80rem' }}>
-                    Scroll down to lazy load an image and the DataTable which initiates a query that is not executed on initial page load to speed up load performance.
-                    <i className="pi pi-angle-down fadeout animation-duration-1000 animation-iteration-infinite mt-5" style={{ fontSize: '3rem' }}></i>
-                </div>
             <DeferredContent onLoad={onDataLoad}>
                 <DataTable value={products}>
                     <Column field="code" header="Code"></Column>
@@ -72,7 +68,7 @@ import { Column } from 'primereact/column';
 import { Toast } from 'primereact/toast';
 import { ProductService } from './service/ProductService';
 
-export default function DataTableDoc() {
+export default function DataTableDemo() {
     const toast = useRef<Toast>(null);
     const [products, setProducts] = useState(null);
 
@@ -82,12 +78,9 @@ export default function DataTableDoc() {
     }
 
     return (
-        <div className="card flex flex-column">
+        <div className="card">
+            <p style={{marginBottom: '70rem', textAlign: 'center'}}>Scroll down to lazy load a DataTable.</p>
             <Toast ref={toast} />
-            <div className="flex flex-column align-items-center m-3 lg:p-8 text-xl font-semibold" style={{ minHeight: '80rem' }}>
-                    Scroll down to lazy load an image and the DataTable which initiates a query that is not executed on initial page load to speed up load performance.
-                    <i className="pi pi-angle-down fadeout animation-duration-1000 animation-iteration-infinite mt-5" style={{ fontSize: '3rem' }}></i>
-                </div>
             <DeferredContent onLoad={onDataLoad}>
                 <DataTable value={products}>
                     <Column field="code" header="Code"></Column>
@@ -121,9 +114,10 @@ export default function DataTableDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>DeferredContent is used as a wrapper element of its content.</p>
+                <p>A practical example that loads only when table becomes visible in viewport.</p>
             </DocSectionText>
-            <div className="card flex flex-column">
+            <div className="card">
+                <p style={{marginBottom: '70rem', textAlign: 'center'}}>Scroll down to lazy load a DataTable.</p>
                 <Toast ref={toast} />
                 <DeferredContent onLoad={onDataLoad}>
                     <DataTable value={products}>
