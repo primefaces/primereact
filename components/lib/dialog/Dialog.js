@@ -14,6 +14,7 @@ export const Dialog = React.forwardRef((props, ref) => {
     const [maximizedState, setMaximizedState] = React.useState(props.maximized);
     const dialogRef = React.useRef(null);
     const maskRef = React.useRef(null);
+    const pointerRef = React.useRef(null);
     const contentRef = React.useRef(null);
     const headerRef = React.useRef(null);
     const footerRef = React.useRef(null);
@@ -46,12 +47,18 @@ export const Dialog = React.forwardRef((props, ref) => {
         }
     };
 
-    const onMaskClick = (event) => {
-        if (props.dismissableMask && props.modal && maskRef.current === event.target) {
+    const onDialogPointerDown = (event) => {
+        pointerRef.current = event.target;
+        props.onPointerDown && props.onPointerDown(event);
+    };
+
+    const onMaskPointerUp = (event) => {
+        if (props.dismissableMask && props.modal && maskRef.current === event.target && !pointerRef.current) {
             onClose(event);
         }
 
         props.onMaskClick && props.onMaskClick(event);
+        pointerRef.current = null;
     };
 
     const toggleMaximize = (event) => {
@@ -529,9 +536,21 @@ export const Dialog = React.forwardRef((props, ref) => {
         };
 
         return (
-            <div ref={maskRef} style={props.maskStyle} className={maskClassName} onClick={onMaskClick}>
+            <div ref={maskRef} style={props.maskStyle} className={maskClassName} onPointerUp={onMaskPointerUp}>
                 <CSSTransition nodeRef={dialogRef} classNames="p-dialog" timeout={transitionTimeout} in={visibleState} options={props.transitionOptions} unmountOnExit onEnter={onEnter} onEntered={onEntered} onExiting={onExiting} onExited={onExited}>
-                    <div ref={dialogRef} id={idState} className={className} style={props.style} onClick={props.onClick} role="dialog" {...otherProps} aria-labelledby={headerId} aria-describedby={contentId} aria-modal={props.modal}>
+                    <div
+                        ref={dialogRef}
+                        id={idState}
+                        className={className}
+                        style={props.style}
+                        onClick={props.onClick}
+                        role="dialog"
+                        {...otherProps}
+                        aria-labelledby={headerId}
+                        aria-describedby={contentId}
+                        aria-modal={props.modal}
+                        onPointerDown={onDialogPointerDown}
+                    >
                         {header}
                         {content}
                         {footer}
@@ -582,6 +601,7 @@ Dialog.defaultProps = {
     minY: 0,
     modal: true,
     onClick: null,
+    onPointerDown: null,
     onDrag: null,
     onDragEnd: null,
     onDragStart: null,

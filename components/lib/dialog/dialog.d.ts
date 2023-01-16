@@ -204,9 +204,9 @@ export interface DialogProps {
     visible?: boolean | undefined;
     /**
      * Callback to invoke when dialog is clicked.
-     * @param {React.MouseEvent<HTMLElement>} event - Browser event.
+     * @param {React.PointerEvent<HTMLElement>} event - Browser event.
      */
-    onClick?(event: React.MouseEvent<HTMLElement>): void;
+    onClick?(event: React.PointerEvent<HTMLElement>): void;
     /**
      * Callback to invoke when dragging dialog.
      * @param {React.DragEvent<HTMLElement>} event - Browser event.
