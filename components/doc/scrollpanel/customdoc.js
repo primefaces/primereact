@@ -5,32 +5,16 @@ import { DocSectionCode } from '../common/docsectioncode';
 export function CustomDemo(props) {
     const code = {
         basic: `
-<ScrollPanel style={{ width: '100%', height: '200px' }}>
-    <div style={{ padding: '1em', lineHeight: '1.5' }}>
-        The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved son Michael has just come home from the war, but does not intend to become part of his
-        father's business. Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, kind and benevolent to those who give respect, but
-        given to ruthless violence whenever anything stands against the good of the family. The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved son
-        Michael has just come home from the war, but does not intend to become part of his father's business. Through Michael's life the nature of the family business becomes clear. The business of the family is just
-        like the head of the family, kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
-    </div>
-</ScrollPanel>
 <ScrollPanel style={{ width: '100%', height: '200px' }} className="custombar1">
-    <div style={{ padding: '1em', lineHeight: '1.5' }}>
-        The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved son Michael has just come home from the war, but does not intend to become part of his
-        father's business. Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, kind and benevolent to those who give respect, but
-        given to ruthless violence whenever anything stands against the good of the family. The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved son
-        Michael has just come home from the war, but does not intend to become part of his father's business. Through Michael's life the nature of the family business becomes clear. The business of the family is just
-        like the head of the family, kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
-    </div>
+    <p>
+        Lorem ipsum dolor ...
+    </p>
 </ScrollPanel>
+
 <ScrollPanel style={{ width: '100%', height: '200px' }} className="custombar2">
-    <div style={{ padding: '1em', lineHeight: '1.5', width: '600px' }}>
-        The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved son Michael has just come home from the war, but does not intend to become part of his
-        father's business. Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, kind and benevolent to those who give respect, but
-        given to ruthless violence whenever anything stands against the good of the family. The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved son
-        Michael has just come home from the war, but does not intend to become part of his father's business. Through Michael's life the nature of the family business becomes clear. The business of the family is just
-        like the head of the family, kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
-    </div>
+    <p>
+    Lorem ipsum dolor ...
+    </p>
 </ScrollPanel>
         `,
         javascript: `
@@ -39,33 +23,52 @@ import { ScrollPanel } from 'primereact/scrollpanel';
 import './ScrollPanelDemo.css';
 
 export default function CustomDemo() {
-
     return (
-        <div className="scrollpanel-demo">
-            <div className="card">
-                <div className="grid">
-                    <div className="col-12 md:col-4">
-                        <ScrollPanel style={{ width: '100%', height: '200px' }} className="custombar1">
-                            <div style={{ padding: '1em', lineHeight: '1.5' }}>
-                                The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved son Michael has just come home from the war, but does not intend to become part of his
-                                father's business. Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, kind and benevolent to those who give respect, but
-                                given to ruthless violence whenever anything stands against the good of the family. The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved son
-                                Michael has just come home from the war, but does not intend to become part of his father's business. Through Michael's life the nature of the family business becomes clear. The business of the family is just
-                                like the head of the family, kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
-                            </div>
-                        </ScrollPanel>
-                    </div>
-                    <div className="col-12 md:col-4">
-                        <ScrollPanel style={{ width: '100%', height: '200px' }} className="custombar2">
-                            <div style={{ padding: '1em', lineHeight: '1.5', width: '600px' }}>
-                                The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved son Michael has just come home from the war, but does not intend to become part of his
-                                father's business. Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, kind and benevolent to those who give respect, but
-                                given to ruthless violence whenever anything stands against the good of the family. The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved son
-                                Michael has just come home from the war, but does not intend to become part of his father's business. Through Michael's life the nature of the family business becomes clear. The business of the family is just
-                                like the head of the family, kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
-                            </div>
-                        </ScrollPanel>
-                    </div>
+        <div className="card scrollpanel-demo">
+            <div className="flex flex-column md:flex-row gap-5">
+                <div className="flex-auto">
+                    <ScrollPanel style={{ width: '100%', height: '200px' }} className="custombar1">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
+                        <p>
+                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, 
+                            eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo
+                            enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui 
+                            ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.
+                        </p>
+                        <p>
+                            At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti 
+                            quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in
+                            culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. 
+                            Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
+                        </p>
+                    </ScrollPanel>
+                </div>
+                <div className="flex-auto">
+                    <ScrollPanel style={{ width: '100%', height: '200px' }} className="custombar2">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
+                        <p>
+                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, 
+                            eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo
+                            enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui 
+                            ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.
+                        </p>
+                        <p>
+                            At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti 
+                            quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in
+                            culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. 
+                            Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
+                        </p>
+                    </ScrollPanel>
                 </div>
             </div>
         </div>
@@ -78,33 +81,52 @@ import { ScrollPanel } from 'primereact/scrollpanel';
 import './ScrollPanelDemo.css';
 
 export default function CustomDemo() {
-
     return (
-        <div className="scrollpanel-demo">
-            <div className="card">
-                <div className="grid">
-                    <div className="col-12 md:col-4">
-                        <ScrollPanel style={{ width: '100%', height: '200px' }} className="custombar1">
-                            <div style={{ padding: '1em', lineHeight: '1.5' }}>
-                                The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved son Michael has just come home from the war, but does not intend to become part of his
-                                father's business. Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, kind and benevolent to those who give respect, but
-                                given to ruthless violence whenever anything stands against the good of the family. The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved son
-                                Michael has just come home from the war, but does not intend to become part of his father's business. Through Michael's life the nature of the family business becomes clear. The business of the family is just
-                                like the head of the family, kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
-                            </div>
-                        </ScrollPanel>
-                    </div>
-                    <div className="col-12 md:col-4">
-                        <ScrollPanel style={{ width: '100%', height: '200px' }} className="custombar2">
-                            <div style={{ padding: '1em', lineHeight: '1.5', width: '600px' }}>
-                                The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved son Michael has just come home from the war, but does not intend to become part of his
-                                father's business. Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, kind and benevolent to those who give respect, but
-                                given to ruthless violence whenever anything stands against the good of the family. The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved son
-                                Michael has just come home from the war, but does not intend to become part of his father's business. Through Michael's life the nature of the family business becomes clear. The business of the family is just
-                                like the head of the family, kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
-                            </div>
-                        </ScrollPanel>
-                    </div>
+        <div className="card scrollpanel-demo">
+            <div className="flex flex-column md:flex-row gap-5">
+                <div className="flex-auto">
+                    <ScrollPanel style={{ width: '100%', height: '200px' }} className="custombar1">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
+                        <p>
+                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, 
+                            eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo
+                            enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui 
+                            ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.
+                        </p>
+                        <p>
+                            At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti 
+                            quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in
+                            culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. 
+                            Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
+                        </p>
+                    </ScrollPanel>
+                </div>
+                <div className="flex-auto">
+                    <ScrollPanel style={{ width: '100%', height: '200px' }} className="custombar2">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
+                        <p>
+                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, 
+                            eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo
+                            enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui 
+                            ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.
+                        </p>
+                        <p>
+                            At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti 
+                            quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in
+                            culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. 
+                            Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
+                        </p>
+                    </ScrollPanel>
                 </div>
             </div>
         </div>
@@ -115,36 +137,30 @@ export default function CustomDemo() {
             'ScrollPanelDemo.css': `
 /* ScrollPanelDemo.css */
 
-.scrollpanel-demo .p-scrollpanel p {
-    padding: .5rem;
-    line-height: 1.5;
-    margin: 0;
-}
-
 .scrollpanel-demo .p-scrollpanel.custombar1 .p-scrollpanel-wrapper {
-    border-right: 10px solid var(--surface-b);
+    border-right: 10px solid var(--surface-ground);
 }
 
 .scrollpanel-demo .p-scrollpanel.custombar1 .p-scrollpanel-bar {
-    background-color: var(--primary-color);
+    background-color: var(--primary-300);
     opacity: 1;
-    transition: background-color .2s;
+    transition: background-color .3s;
 }
 
 .scrollpanel-demo .p-scrollpanel.custombar1 .p-scrollpanel-bar:hover {
-    background-color: #007ad9;
+    background-color: var(--primary-400);
 }
 
 .scrollpanel-demo .p-scrollpanel.custombar2 .p-scrollpanel-wrapper {
-    border-right: 10px solid var(--surface-b);
-    border-bottom: 10px solid var(--surface-b);
+    border-right: 10px solid var(--surface-50);
+    border-bottom: 10px solid var(--surface-50);
 }
 
 .scrollpanel-demo .p-scrollpanel.custombar2 .p-scrollpanel-bar {
-    background-color: var(--surface-d);
+    background-color: var(--surface-300);
     border-radius: 0;
     opacity: 1;
-    transition: background-color .2s;
+    transition: background-color .3s;
 }
 
 .scrollpanel-demo .col-12 {
@@ -157,33 +173,45 @@ export default function CustomDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>ScrollPanel is defined using dimensions for the scrollable viewport.</p>
+                <p>Scrollbar visuals can be styled for a unified look across different platforms.</p>
             </DocSectionText>
-            <div className="scrollpanel-demo">
-                <div className="card">
-                    <div className="grid">
-                        <div className="col-12 md:col-6">
-                            <ScrollPanel style={{ width: '100%', height: '200px' }} className="custombar1">
-                                <div style={{ padding: '1em', lineHeight: '1.5' }}>
-                                    The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved son Michael has just come home from the war, but does not intend to become part of his
-                                    father's business. Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, kind and benevolent to those who give respect, but given to
-                                    ruthless violence whenever anything stands against the good of the family. The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved son Michael has
-                                    just come home from the war, but does not intend to become part of his father's business. Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of
-                                    the family, kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
-                                </div>
-                            </ScrollPanel>
-                        </div>
-                        <div className="col-12 md:col-6">
-                            <ScrollPanel style={{ width: '100%', height: '200px' }} className="custombar2">
-                                <div style={{ padding: '1em', lineHeight: '1.5', width: '600px' }}>
-                                    The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved son Michael has just come home from the war, but does not intend to become part of his
-                                    father's business. Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, kind and benevolent to those who give respect, but given to
-                                    ruthless violence whenever anything stands against the good of the family. The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved son Michael has
-                                    just come home from the war, but does not intend to become part of his father's business. Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of
-                                    the family, kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
-                                </div>
-                            </ScrollPanel>
-                        </div>
+            <div className="card scrollpanel-demo">
+                <div className="flex flex-column md:flex-row gap-5">
+                    <div className="flex-auto">
+                        <ScrollPanel style={{ width: '100%', height: '200px' }} className="custombar1">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
+                                id est laborum.
+                            </p>
+                            <p>
+                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                                Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.
+                            </p>
+                            <p>
+                                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt
+                                in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo
+                                minus.
+                            </p>
+                        </ScrollPanel>
+                    </div>
+                    <div className="flex-auto">
+                        <ScrollPanel style={{ width: '100%', height: '200px' }} className="custombar2">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
+                                id est laborum.
+                            </p>
+                            <p>
+                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                                Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.
+                            </p>
+                            <p>
+                                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt
+                                in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo
+                                minus.
+                            </p>
+                        </ScrollPanel>
                     </div>
                 </div>
             </div>

@@ -1442,15 +1442,6 @@
 .p-password-panel .p-password-meter .p-password-strength.strong {
   background: #9fdaa8;
 }
-.p-password-panel .p-password-info.weak {
-  color: #f19ea6;
-}
-.p-password-panel .p-password-info.medium {
-  color: #ffe082;
-}
-.p-password-panel .p-password-info.strong {
-  color: #9fdaa8;
-}
 
 .p-radiobutton {
   width: 20px;
@@ -1855,6 +1846,9 @@
   outline: 0 none;
   outline-offset: 0;
   box-shadow: 0 0 0 1px #f0e6f5;
+}
+.p-button .p-button-label {
+  transition-duration: 0.15s;
 }
 .p-button .p-button-icon-left {
   margin-right: 0.5rem;
@@ -4250,6 +4244,7 @@
   border: 1px solid #3f4b5b;
   padding: 1rem 1.25rem;
   border-radius: 4px;
+  gap: 0.5rem;
 }
 .p-toolbar .p-toolbar-separator {
   margin: 0 0.5rem;

@@ -2,10 +2,10 @@ import { Accordion, AccordionTab } from '../../lib/accordion/Accordion';
 import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
 
-export function MultipleDoc(props) {
+export function DisabledDoc(props) {
     const code = {
         basic: `
-<Accordion multiple activeIndex={[0]}>
+<Accordion activeIndex={0}>
     <AccordionTab header="Header I">
         <p className="m-0">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
@@ -30,16 +30,17 @@ export function MultipleDoc(props) {
             Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
         </p>
     </AccordionTab>
+    <AccordionTab header="Header IV" disabled></AccordionTab>
 </Accordion>
         `,
         javascript: `
 import React from 'react';
 import { Accordion, AccordionTab } from 'primereact/accordion';
 
-export default function MultipleDemo() {
+export default function DisabledDemo() {
     return (
         <div className="card">
-            <Accordion multiple activeIndex={[0]}>
+            <Accordion activeIndex={0}>
                 <AccordionTab header="Header I">
                     <p className="m-0">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
@@ -64,6 +65,7 @@ export default function MultipleDemo() {
                         Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
                     </p>
                 </AccordionTab>
+                <AccordionTab header="Header IV" disabled></AccordionTab>
             </Accordion>
         </div>
     )
@@ -73,10 +75,10 @@ export default function MultipleDemo() {
 import React from 'react';
 import { Accordion, AccordionTab } from 'primereact/accordion';
 
-export default function MultipleDemo() {
+export default function DisabledDemo() {
     return (
         <div className="card">
-            <Accordion multiple activeIndex={[0]}>
+            <Accordion activeIndex={0}>
                 <AccordionTab header="Header I">
                     <p className="m-0">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
@@ -101,6 +103,7 @@ export default function MultipleDemo() {
                         Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
                     </p>
                 </AccordionTab>
+                <AccordionTab header="Header IV" disabled></AccordionTab>
             </Accordion>
         </div>
     )
@@ -112,11 +115,11 @@ export default function MultipleDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Only one tab at a time can be active by default, enabling <i>multiple</i> property changes this behavior to allow multiple tabs. In this case <i>activeIndex</i> needs to be an array.
+                    Enabling <i>disabled</i> property of an AccordionTab prevents user interaction.
                 </p>
             </DocSectionText>
             <div className="card">
-                <Accordion multiple activeIndex={[0]}>
+                <Accordion activeIndex={0}>
                     <AccordionTab header="Header I">
                         <p className="m-0">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -136,6 +139,7 @@ export default function MultipleDemo() {
                             culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
                         </p>
                     </AccordionTab>
+                    <AccordionTab header="Header IV" disabled></AccordionTab>
                 </Accordion>
             </div>
             <DocSectionCode code={code} />

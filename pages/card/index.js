@@ -3,7 +3,7 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/card/importdoc';
-import { SimpleDoc } from '../../components/doc/card/simpledoc';
+import { BasicDoc } from '../../components/doc/card/basicdoc';
 import { AdvancedDoc } from '../../components/doc/card/advanceddoc';
 import { ApiDoc } from '../../components/doc/card/apidoc';
 import { AccessibilityDoc } from '../../components/doc/card/accessibilitydoc';
@@ -17,9 +17,9 @@ const CardDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'simple',
-            label: 'Simple',
-            component: SimpleDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
             id: 'advanced',
