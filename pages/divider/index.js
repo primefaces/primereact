@@ -4,10 +4,10 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/divider/importdoc';
 import { BasicDoc } from '../../components/doc/divider/basicdoc';
+import { TypeDoc } from '../../components/doc/divider/typedoc';
 import { ContentDoc } from '../../components/doc/divider/contentdoc';
-import { TextDoc } from '../../components/doc/divider/textdoc';
 import { VerticalDoc } from '../../components/doc/divider/verticaldoc';
-import { VerticalContentDoc } from '../../components/doc/divider/verticalcontentdoc';
+import { LoginDoc } from '../../components/doc/divider/logindoc';
 import { ApiDoc } from '../../components/doc/divider/apidoc';
 import { AccessibilityDoc } from '../../components/doc/divider/accessibilitydoc';
 import { StyleDoc } from '../../components/doc/divider/styledoc';
@@ -25,9 +25,9 @@ const DividerDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'text',
-            label: 'Text with Dashed',
-            component: TextDoc
+            id: 'type',
+            label: 'Type',
+            component: TypeDoc
         },
         {
             id: 'content',
@@ -40,9 +40,10 @@ const DividerDemo = () => {
             component: VerticalDoc
         },
         {
-            id: 'verticalcontent',
-            label: 'Vertical with Content',
-            component: VerticalContentDoc
+            id: 'login',
+            label: 'Login',
+            component: LoginDoc
+
         },
         {
             id: 'style',
