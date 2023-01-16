@@ -31,10 +31,10 @@ interface ToggleButtonChangeTargetOptions {
 
 /**
  * Custom change event.
- * @see {@link DataViewProps.onChange}
+ * @see {@link ToggleButtonProps.onChange}
  * @event
  */
-interface ToggleButtonChangeEvents {
+interface ToggleButtonChangeEvent {
     /**
      * Browser event
      */
@@ -111,9 +111,9 @@ export interface ToggleButtonProps extends Omit<React.DetailedHTMLProps<React.In
     onBlur?(event: React.FocusEvent<HTMLElement>): void;
     /**
      * Callback to invoke on value change.
-     * @param {ToggleButtonChangeEvents} event - Browser event.
+     * @param {ToggleButtonChangeEvent} event - Browser event.
      */
-    onChange?(event: ToggleButtonChangeEvents): void;
+    onChange?(event: ToggleButtonChangeEvent): void;
     /**
      * Callback to invoke when autocomplete gets focus.
      * @param {React.FocusEvent<HTMLElement>} event - Browser event.
