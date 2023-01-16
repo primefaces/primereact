@@ -1,5 +1,5 @@
 module.exports = {
-    reactStrictMode: true,
+    reactStrictMode: process.env.NODE_ENV === 'production' ? false : true,
     trailingSlash: true,
     basePath: process.env.NODE_ENV === 'production' ? '/primereact' : '',
     publicRuntimeConfig: {
