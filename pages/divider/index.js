@@ -43,7 +43,6 @@ const DividerDemo = () => {
             id: 'login',
             label: 'Login',
             component: LoginDoc
-
         },
         {
             id: 'style',

@@ -75,7 +75,9 @@ export default function VerticalDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Vertical divider is enabled by setting the <i>layout</i> property as <i>vertical</i>.</p>
+                <p>
+                    Vertical divider is enabled by setting the <i>layout</i> property as <i>vertical</i>.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <p>

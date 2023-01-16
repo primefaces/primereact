@@ -71,7 +71,7 @@ export default function BasicDemo() {
                 <p>DeferredContent is used by wrapping the target.</p>
             </DocSectionText>
             <div className="card">
-                <p style={{marginBottom: '70rem', textAlign: 'center'}}>Scroll down to lazy load an image.</p>
+                <p style={{ marginBottom: '70rem', textAlign: 'center' }}>Scroll down to lazy load an image.</p>
                 <Toast ref={toast} />
                 <DeferredContent onLoad={onImageLoad}>
                     <img className="w-full md:w-30rem md:block md:mx-auto" src="images/galleria/galleria3.jpg" alt="Prime" />

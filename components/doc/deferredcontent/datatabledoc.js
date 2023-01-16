@@ -117,7 +117,7 @@ export default function DataTableDemo() {
                 <p>A practical example that loads only when table becomes visible in viewport.</p>
             </DocSectionText>
             <div className="card">
-                <p style={{marginBottom: '70rem', textAlign: 'center'}}>Scroll down to lazy load a DataTable.</p>
+                <p style={{ marginBottom: '70rem', textAlign: 'center' }}>Scroll down to lazy load a DataTable.</p>
                 <Toast ref={toast} />
                 <DeferredContent onLoad={onDataLoad}>
                     <DataTable value={products}>
