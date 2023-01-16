@@ -37,7 +37,7 @@ export interface InputTextProps extends Omit<React.DetailedHTMLProps<React.Input
     /**
      * The value of component
      */
-    value?: string;
+    value?: string | undefined;
     /**
      * Callback to invoke while typing value on input
      * @param {React.FormEvent<HTMLInputElement>} event - Browser event
