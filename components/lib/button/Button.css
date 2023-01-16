@@ -18,6 +18,10 @@
     order: 1;
 }
 
+.p-button-icon-custom {
+    display: flex;
+}
+
 .p-button:disabled {
     cursor: default;
 }

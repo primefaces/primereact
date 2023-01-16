@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 
 export const Button = React.memo(
     React.forwardRef((props, ref) => {
@@ -19,7 +19,8 @@ export const Button = React.memo(
             const icon = props.loading ? props.loadingIcon : props.icon;
             const className = classNames('p-button-icon p-c', {
                 'p-button-loading-icon': props.loading,
-                [`p-button-icon-${props.iconPos}`]: props.label
+                [`p-button-icon-${props.iconPos}`]: props.label,
+                'p-button-icon-custom': icon !== 'string'
             });
 
             return IconUtils.getJSXIcon(icon, { className }, { props });
