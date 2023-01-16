@@ -14,8 +14,7 @@ export function VerticalDoc(props) {
 import React from 'react'; 
 import { Splitter, SplitterPanel } from 'primereact/splitter';
 
-export default function VerticalDoc() {
-
+export default function VerticalDemo() {
     return (
         <Splitter style={{ height: '300px' }} layout="vertical">
             <SplitterPanel className="flex align-items-center justify-content-center">Panel 1</SplitterPanel>
@@ -28,8 +27,7 @@ export default function VerticalDoc() {
 import React from 'react'; 
 import { Splitter, SplitterPanel } from 'primereact/splitter';
 
-export default function VerticalDoc() {
-
+export default function VerticalDemo() {
     return (
         <Splitter style={{ height: '300px' }} layout="vertical">
             <SplitterPanel className="flex align-items-center justify-content-center">Panel 1</SplitterPanel>
@@ -43,9 +41,7 @@ export default function VerticalDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    Default orientation is configured with the <i>layout</i> property and default is the "horizontal" whereas other alternative is the "vertical".
-                </p>
+                <p>Panels are displayed as stacked by setting the <i>layout</i> to <i>vertical</i>.</p>
             </DocSectionText>
             <div className="card">
                 <Splitter style={{ height: '300px' }} layout="vertical">
