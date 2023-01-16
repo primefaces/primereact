@@ -17,10 +17,11 @@ export const Button = React.memo(
 
         const createIcon = () => {
             const icon = props.loading ? props.loadingIcon : props.icon;
+            const iconType = typeof icon;
             const className = classNames('p-button-icon p-c', {
                 'p-button-loading-icon': props.loading,
                 [`p-button-icon-${props.iconPos}`]: props.label,
-                'p-button-icon-custom': icon !== 'string'
+                'p-button-icon-custom': iconType !== 'string'
             });
 
             return IconUtils.getJSXIcon(icon, { className }, { props });
