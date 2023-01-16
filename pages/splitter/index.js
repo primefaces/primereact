@@ -4,6 +4,7 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/splitter/importdoc';
 import { HorizontalDoc } from '../../components/doc/splitter/horizontaldoc';
+import { SizeDoc } from '../../components/doc/splitter/sizedoc';
 import { VerticalDoc } from '../../components/doc/splitter/verticaldoc';
 import { NestedDoc } from '../../components/doc/splitter/nesteddoc';
 import { ApiDoc } from '../../components/doc/splitter/apidoc';
@@ -21,6 +22,11 @@ const SplitterDemo = () => {
             id: 'horizontal',
             label: 'Horizontal',
             component: HorizontalDoc
+        },
+        {
+            id: 'size',
+            label: 'Size',
+            component: SizeDoc
         },
         {
             id: 'vertical',

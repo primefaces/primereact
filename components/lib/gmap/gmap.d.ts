@@ -37,11 +37,11 @@ export interface GMapProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
     /**
      * Google Maps API configuration object.
      */
-    options?: object| undefined;
+    options?: object | undefined;
     /**
      * An array of overlays to display.
      */
-    overlays?: any[]| undefined;
+    overlays?: any[] | undefined;
     /**
      * Callback to invoke when the map is ready to be used.
      * @param {any} map - Google Maps instance
