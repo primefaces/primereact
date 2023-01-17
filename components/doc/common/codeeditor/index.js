@@ -1,9 +1,9 @@
 import sdk from '@stackblitz/sdk';
-import { getCRA } from './templates';
+import { getCRA, getNextJS } from './templates';
 
 const useCodeSandbox = (props) => {
     const getSandboxParameters = (sourceType) => {
-        const { files, dependencies, sourceFileName } = getCRA(props, sourceType);
+        const { files, dependencies, sourceFileName } = props.template === 'cra' ? getCRA(props, sourceType) : getNextJS(props, sourceType);
 
         files['sandbox.config.json'] = {
             content: {
@@ -37,7 +37,7 @@ const useCodeSandbox = (props) => {
 };
 
 const useStackBlitz = (props) => {
-    const getStackBlitzParameters = (sourceType) => getCRA(props, sourceType);
+    const getStackBlitzParameters = (sourceType) => (props.template === 'cra' ? getCRA(props, sourceType) : getNextJS(props, sourceType));
 
     return (sourceType, errorCallback) => {
         const stackBlitzParameters = getStackBlitzParameters(sourceType);
@@ -55,7 +55,7 @@ const useStackBlitz = (props) => {
         sdk.openProject(
             {
                 title: props.title || 'PrimeReact Demo',
-                template: 'create-react-app',
+                template: props.template === 'cra' ? 'create-react-app' : 'node',
                 description:
                     '**' +
                     (props.description || '') +
@@ -71,6 +71,11 @@ const useStackBlitz = (props) => {
     };
 };
 
+/**
+ * @todo Write the documentation.
+ * @param {string} props.template - valid values are 'cra' and 'nextjs'.
+ * @returns
+ */
 export const useCodeEditor = (props) => {
     const openCodeSandbox = useCodeSandbox(props);
     const openStackBlitz = useStackBlitz(props);
