@@ -1,39 +1,145 @@
+/**
+ *
+ * Rating component is a star based selection input.
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/rating/)
+ *
+ * @module rating
+ *
+ */
 import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
 import { IconType } from '../utils';
 
+/**
+ * @todo Write the documentation.
+ */
 interface RatingChangeTargetOptions {
+    /**
+     * @todo Write the documentation.
+     */
     name: string;
+    /**
+     * @todo Write the documentation.
+     */
     id: string;
+    /**
+     * @todo Write the documentation.
+     */
     value: number | undefined | null;
 }
 
-interface RatingChangeParams {
+/**
+ * Custom change event.
+ * @see {@link RatingProps.onChange}
+ * @event
+ */
+interface RatingChangeEvent {
+    /**
+     * Browser event
+     */
     originalEvent: React.SyntheticEvent;
+    /**
+     * Selected value
+     */
     value: number | undefined | null;
+    /**
+     * @todo Write the documentation.
+     */
     stopPropagation(): void;
+    /**
+     * @todo Write the documentation.
+     */
     preventDefault(): void;
+    /**
+     * @todo Write the documentation.
+     */
     target: RatingChangeTargetOptions;
 }
 
+/**
+ * Defines valid properties in Rating component. In addition to these, all properties of HTMLDivElement can be used in this component.
+ * @group Properties
+ */
 export interface RatingProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
-    value?: number;
-    disabled?: boolean;
-    readOnly?: boolean;
-    stars?: number;
-    cancel?: boolean;
-    tooltip?: string;
-    tooltipOptions?: TooltipOptions;
-    onChange?(e: RatingChangeParams): void;
-    children?: React.ReactNode;
-    onIcon?: IconType<RatingProps>;
+    /**
+     * Value of the rating.
+     */
+    value?: number | undefined;
+    /**
+     * When present, it specifies that the element should be disabled.
+     * @defaultValue false
+     */
+    disabled?: boolean | undefined;
+    /**
+     * When present, it specifies that the input cannot be typed.
+     * @defaultValue false
+     */
+    readOnly?: boolean | undefined;
+    /**
+     * Number of stars.
+     * @defaultValue 5
+     */
+    stars?: number | undefined;
+    /**
+     * When specified a cancel icon is displayed to allow removing the value.
+     * @defaultValue true
+     */
+    cancel?: boolean | undefined;
+    /**
+     * Content of the tooltip.
+     */
+    tooltip?: string | undefined;
+    /**
+     * Configuration of the tooltip, refer to the tooltip documentation for more information.
+     */
+    tooltipOptions?: TooltipOptions | undefined;
+    /**
+     * Callback to invoke on value change.
+     * @param {RatingChangeEvent} event - Custom change event.
+     */
+    onChange?(event: RatingChangeEvent): void;
+    /**
+     * Used to get the child elements of the component.
+     * @readonly
+     */
+    children?: React.ReactNode | undefined;
+    /**
+     * ClassName of the on icon component.
+     * @defaultValue pi pi-star-fill
+     */
+    onIcon?: IconType<RatingProps> | undefined;
+    /**
+     * ClassName of the off icon component.
+     * @defaultValue pi pi-star
+     */
     offIcon?: IconType<RatingProps>;
+    /**
+     * ClassName of the cancel icon component.
+     * @defaultValue pi pi-ban
+     */
     cancelIcon?: IconType<RatingProps>;
+    /**
+     * Properties of the cancel icon.
+     */
     cancelIconProps?: React.HTMLAttributes<HTMLSpanElement>;
+    /**
+     * Properties of the on icon.
+     */
     onIconProps?: React.HTMLAttributes<HTMLSpanElement>;
+    /**
+     * Properties of the off icon.
+     */
     offIconProps?: React.HTMLAttributes<HTMLSpanElement>;
 }
 
+/**
+ * @group Component
+ */
 export declare class Rating extends React.Component<RatingProps, any> {
+    /**
+     * Used to get container element.
+     * @return {HTMLDivElement} Container element
+     */
     public getElement(): HTMLDivElement;
 }
