@@ -39,7 +39,7 @@ interface CalendarMonthChangeEvent {
 
 /**
  * Custom view change event
- * @see {@link CalenderProps.onViewDateChange}
+ * @see {@link CalendarProps.onViewDateChange}
  * @event
  */
 interface CalendarViewChangeEvent {

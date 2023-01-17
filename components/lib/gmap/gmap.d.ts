@@ -11,7 +11,7 @@ import * as React from 'react';
 
 /**
  * Custom click event.
- * @see {@link GMapsProps.onEvent}
+ * @see {@link GMapProps.onOverlayClick}
  * @event
  */
 interface GMapEvent {

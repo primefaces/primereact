@@ -519,7 +519,7 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
      */
     onUnselect?(event: TreeTableEvent): void;
     /**
-     * Function that takes the row data and returns an object in "{'styleclass' : condition}" format to define a classname for a particular now.
+     * Function that takes the row data and returns an object in &#123;'styleclass' : condition&#125; format to define a classname for a particular now.
      * @param {TreeNode} data - @todo Write the documentation.
      */
     rowClassName?(data: TreeNode): object;

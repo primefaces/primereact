@@ -1,65 +1,209 @@
+/**
+ *
+ * Mention component is used to refer someone or something.
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/mention/)
+ *
+ * @module mention
+ *
+ */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 import { InputTextarea } from '../inputtextarea';
 
-type MentionTriggerType = string | string[];
-
-type MentionFieldType = string | string[];
-
-type MentionHeaderTemplateType = React.ReactNode | ((props: MentionProps) => React.ReactNode);
-
-type MentionFooterTemplateType = React.ReactNode | ((props: MentionProps) => React.ReactNode);
-
-type MentionItemTemplateType = React.ReactNode | ((suggestion: any, options: MentionItemTemplateOptions) => React.ReactNode);
-
+/**
+ * @todo Write the description
+ */
 interface MentionItemTemplateOptions {
+    /**
+     * @todo Write the description
+     */
     index: number;
+    /**
+     * @todo Write the description
+     */
     trigger: string;
 }
 
-interface MentionSearchParams {
+/**
+ * Custom search event
+ * @see {@link MentionProps.onSearch}
+ * @event
+ */
+interface MentionSearchEvent {
+    /**
+     * Browser event.
+     */
     originalEvent: React.SyntheticEvent;
+    /**
+     * Current trigger keyword.
+     */
     trigger: string;
+    /**
+     * @todo Write the description
+     */
     query: string;
 }
 
-interface MentionSelectParams {
+/**
+ * Custom select event
+ * @see {@link MentionProps.onSelect}
+ * @event
+ */
+interface MentionSelectEvent {
+    /**
+     * Browser event
+     */
     originalEvent: React.SyntheticEvent;
+    /**
+     * Selected item
+     */
     suggestion: any;
 }
 
+/**
+ * Defines valid properties in Mention component. In addition to these, all properties of HTMLTextAreaElement can be used in this component.
+ * @group Properties
+ */
 export interface MentionProps extends Omit<React.DetailedHTMLProps<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>, 'onSelect' | 'onChange' | 'onInput' | 'onFocus' | 'onBlur' | 'ref'> {
-    autoHighlight?: boolean;
-    autoResize?: boolean;
-    children?: React.ReactNode;
-    delay?: number;
-    field?: MentionFieldType;
-    footerTemplate?: MentionFooterTemplateType;
-    headerTemplate?: MentionHeaderTemplateType;
-    inputClassName?: string;
-    inputId?: string;
-    inputRef?: React.Ref<HTMLInputElement>;
-    inputStyle?: React.CSSProperties;
-    itemTemplate?: MentionItemTemplateType;
-    panelClassName?: string;
-    panelStyle?: React.CSSProperties;
-    scrollHeight?: string;
-    suggestions?: any[];
-    transitionOptions?: CSSTransitionProps;
-    trigger?: MentionTriggerType;
+    /**
+     * When enabled, highlights the first item in the list by default.
+     * @defaultValue true
+     */
+    autoHighlight?: boolean | undefined;
+    /**
+     * @todo Write the description
+     */
+    autoResize?: boolean | undefined;
+    /**
+     * Used to get the child elements of the component.
+     * @readonly
+     */
+    children?: React.ReactNode | undefined;
+    /**
+     * Delay between keystrokes to wait before sending a query.
+     * @defaultValue 0
+     */
+    delay?: number | undefined;
+    /**
+     * Field of a suggested object to resolve and display.
+     */
+    field?: string | string[] | undefined;
+    /**
+     * Custom template of footer.
+     */
+    footerTemplate?: React.ReactNode | ((props: MentionProps) => React.ReactNode);
+    /**
+     * Custom template of header.
+     */
+    headerTemplate?: React.ReactNode | ((props: MentionProps) => React.ReactNode);
+    /**
+     * Style class of the input field.
+     */
+    inputClassName?: string | undefined;
+    /**
+     * Identifier of the input element.
+     */
+    inputId?: string | undefined;
+    /**
+     * @todo Write the description
+     */
+    inputRef?: React.Ref<HTMLInputElement> | undefined;
+    /**
+     * Inline style of the input field.
+     */
+    inputStyle?: React.CSSProperties | undefined;
+    /**
+     * Custom template for the items.
+     */
+    itemTemplate?: React.ReactNode | ((suggestion: any, options: MentionItemTemplateOptions) => React.ReactNode);
+    /**
+     * Style class of the overlay panel element.
+     */
+    panelClassName?: string | undefined;
+    /**
+     * Inline style of the overlay panel element.
+     */
+    panelStyle?: React.CSSProperties | undefined;
+    /**
+     * Maximum height of the suggestions panel.
+     * @defaultValue 200px
+     */
+    scrollHeight?: string | undefined;
+    /**
+     * An array of suggestions to display.
+     */
+    suggestions?: any[] | undefined;
+    /**
+     * The properties of {@link CSSTransitionProps} can be customized, except for "nodeRef" and "in" properties.
+     */
+    transitionOptions?: CSSTransitionProps | undefined;
+    /**
+     * Set trigger keyword.
+     * @defaultValue "@"
+     */
+    trigger?: string | string[] | undefined;
+    /**
+     * Callback to invoke when the element loses focus.
+     * @param {React.FocusEvent<HTMLInputElement>} event Browser event
+     */
     onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
+    /**
+     * Callback to invoke when value changes.
+     * @param {React.FormEvent<HTMLInputElement>} event Browser event
+     */
     onChange?(event: React.FormEvent<HTMLInputElement>): void;
+    /**
+     * Callback to invoke when the element receives focus.
+     * @param {React.FocusEvent<HTMLInputElement>} event Browser event
+     */
     onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
+    /**
+     * Callback to invoke when overlay panel becomes hidden.
+     */
     onHide?(): void;
+    /**
+     * Callback to invoke on input event of input field.
+     * @param {React.FormEvent<HTMLInputElement>} event Browser event
+     */
     onInput?(event: React.FormEvent<HTMLInputElement>): void;
-    onSearch?(e: MentionSearchParams): void;
-    onSelect?(e: MentionSelectParams): void;
+    /**
+     * Callback to invoke when search.
+     * @param {MentionSearchEvent} event Custom search event
+     */
+    onSearch?(event: MentionSearchEvent): void;
+    /**
+     * Callback to invoke when selection changes.
+     * @param {MentionSelectEvent} event Custom select event
+     */
+    onSelect?(event: MentionSelectEvent): void;
+    /**
+     * Callback to invoke when overlay panel becomes visible.
+     */
     onShow?(): void;
 }
 
+/**
+ * @group Component
+ */
 export declare class Mention extends React.Component<MentionProps, any> {
+    /**
+     * Used to focus the component.
+     */
     public focus(): void;
+    /**
+     * Used to get container element.
+     * @return {HTMLDivElement} Container element
+     */
     public getElement(): HTMLDivElement;
+    /**
+     * Used to get input element.
+     * @return {InputTextarea} Input element
+     */
     public getInput(): typeof InputTextarea;
+    /**
+     * Used to get overlay element.
+     * @return {HTMLElement} Overlay element
+     */
     public getOverlay(): HTMLElement;
 }
