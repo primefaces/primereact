@@ -268,7 +268,7 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
     inputId?: string | undefined;
     /**
      * @todo Write the documentation.
-     * 
+     *
      */
     inputRef?: React.Ref<HTMLSelectElement>;
     /**
