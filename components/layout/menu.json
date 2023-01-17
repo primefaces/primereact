@@ -520,34 +520,9 @@
             "meta": ["menu"],
             "children": [
                 {
-                    "name": "MenuModel",
-                    "to": "/menumodel",
-                    "meta": ["menumodel"]
-                },
-                {
-                    "name": "Menu",
-                    "to": "/menu",
-                    "meta": ["menu"]
-                },
-                {
-                    "name": "TabMenu",
-                    "to": "/tabmenu",
-                    "meta": ["tabmenu"]
-                },
-                {
                     "name": "Breadcrumb",
                     "to": "/breadcrumb",
                     "meta": ["breadcrumb"]
-                },
-                {
-                    "name": "TieredMenu",
-                    "to": "/tieredmenu",
-                    "meta": ["tieredMenu"]
-                },
-                {
-                    "name": "Menubar",
-                    "to": "/menubar",
-                    "meta": ["menubar"]
                 },
                 {
                     "name": "ContextMenu",
@@ -555,14 +530,20 @@
                     "meta": ["contextmenu"]
                 },
                 {
-                    "name": "PanelMenu",
-                    "to": "/panelmenu",
-                    "meta": ["panelmenu"]
+                    "name": "Dock",
+                    "to": "/dock",
+                    "meta": ["dock"]
                 },
                 {
-                    "name": "Steps",
-                    "to": "/steps",
-                    "meta": ["steps", "wizard"]
+                    "name": "Menu",
+                    "to": "/menu",
+                    "meta": ["menu"]
+                },
+                
+                {
+                    "name": "Menubar",
+                    "to": "/menubar",
+                    "meta": ["menubar"]
                 },
                 {
                     "name": "MegaMenu",
@@ -570,14 +551,29 @@
                     "meta": ["megamenu"]
                 },
                 {
+                    "name": "PanelMenu",
+                    "to": "/panelmenu",
+                    "meta": ["panelmenu"]
+                },
+                {
                     "name": "SlideMenu",
                     "to": "/slidemenu",
                     "meta": ["slidemenu"]
                 },
                 {
-                    "name": "Dock",
-                    "to": "/dock",
-                    "meta": ["dock"]
+                    "name": "Steps",
+                    "to": "/steps",
+                    "meta": ["steps", "wizard"]
+                },
+                {
+                    "name": "TabMenu",
+                    "to": "/tabmenu",
+                    "meta": ["tabmenu"]
+                },
+                {
+                    "name": "TieredMenu",
+                    "to": "/tieredmenu",
+                    "meta": ["tieredMenu"]
                 }
             ]
         },

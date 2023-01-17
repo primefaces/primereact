@@ -7,6 +7,7 @@ export function BasicDoc(props) {
         { label: 'New', icon: 'pi pi-fw pi-plus' },
         { label: 'Delete', icon: 'pi pi-fw pi-trash' }
     ];
+
     const code = {
         basic: `
 <Menu model={items} />
@@ -15,7 +16,7 @@ export function BasicDoc(props) {
 import React from 'react'; 
 import { Menu } from 'primereact/menu';
 
-export default function BasicDoc() {
+export default function BasicDemo() {
     let items = [
         {label: 'New', icon: 'pi pi-fw pi-plus'},
         {label: 'Delete', icon: 'pi pi-fw pi-trash'}
@@ -31,7 +32,7 @@ import React from 'react';
 import { Menu } from 'primereact/menu';
 import { MenuItem } from 'primereact/menuitem';
 
-export default function BasicDoc() {
+export default function BasicDemo() {
     let items: MenuItem[] = [
         {label: 'New', icon: 'pi pi-fw pi-plus'},
         {label: 'Delete', icon: 'pi pi-fw pi-trash'}
@@ -47,7 +48,7 @@ export default function BasicDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Menu requires a collection of menuitems as its model.</p>
+                <p>Menu requires a collection of menuitems as its <i>model</i>.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Menu model={items} />

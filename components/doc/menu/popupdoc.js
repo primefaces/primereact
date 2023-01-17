@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { useRouter } from 'next/router';
 import { Button } from '../../lib/button/Button';
 import { Menu } from '../../lib/menu/Menu';
 import { Toast } from '../../lib/toast/Toast';
@@ -7,6 +8,7 @@ import { DocSectionText } from '../common/docsectiontext';
 
 export function PopupDoc(props) {
     const menu = useRef(null);
+    const router = useRouter();
     const toast = useRef(null);
     const items = [
         {
@@ -40,7 +42,7 @@ export function PopupDoc(props) {
                     label: 'Router',
                     icon: 'pi pi-upload',
                     command: (e) => {
-                        window.location.hash = '/fileupload';
+                        router.push('/fileupload');
                     }
                 }
             ]
@@ -49,17 +51,19 @@ export function PopupDoc(props) {
     const code = {
         basic: `
 <Toast ref={toast}></Toast>
-<Menu model={items} popup ref={menu} id="popup_menu" />
-<Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)} aria-controls="popup_menu" aria-haspopup />
+<Menu model={items} popup ref={menu} />
+<Button label="Show" icon="pi pi-bars" onClick={(e) => menu.current.toggle(e)} />
 `,
         javascript: `
 import React, { useRef } from 'react';
+import { useRouter } from 'next/router';
 import { Button } from 'primereact/button';
 import { Menu } from 'primereact/menu';
 import { Toast } from 'primereact/toast';
 
 export default function PopupDoc() {
     const menu = useRef(null);
+    const router = useRouter();
     const toast = useRef(null);
     const items = [
         {
@@ -93,7 +97,7 @@ export default function PopupDoc() {
                     label: 'Router',
                     icon: 'pi pi-upload',
                     command:(e) => {
-                        window.location.hash = "/fileupload"
+                        router.push('/fileupload');
                     }
                 }
             ]
@@ -101,16 +105,17 @@ export default function PopupDoc() {
     ];
 
     return (
-        <div>
+        <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
             <Menu model={items} popup ref={menu} id="popup_menu" />
-            <Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)} aria-controls="popup_menu" aria-haspopup />
+            <Button label="Show" icon="pi pi-bars" onClick={(e) => menu.current.toggle(e)} />
         </div>
     )
 }
         `,
         typescript: `
 import React, { useRef } from 'react';
+import { useRouter } from 'next/router';
 import { Button } from 'primereact/button';
 import { Menu } from 'primereact/menu';
 import { MenuItem } from 'primereact/menuitem';
@@ -118,6 +123,7 @@ import { Toast } from 'primereact/toast';
 
 export default function PopupDoc() {
     const menu = useRef<Menu>(null);
+    const router = useRouter();
     const toast = useRef<Toast>(null);
     const items: MenuItem[] = [
         {
@@ -159,10 +165,10 @@ export default function PopupDoc() {
     ];
 
     return (
-        <div>
+        <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
             <Menu model={items} popup ref={menu} id="popup_menu" />
-            <Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current?.toggle(event)} aria-controls="popup_menu" aria-haspopup />
+            <Button label="Show" icon="pi pi-bars" onClick={(e) => menu.current.toggle(e)} />
         </div>
     )
 }
@@ -172,12 +178,12 @@ export default function PopupDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Menu is inline by default whereas popup mode is supported by enabling popup property and calling toggle method with an event of the target.</p>
+                <p>Popup mode is enabled by adding <i>popup</i> property and calling <i>toggle</i> method with an event of the target.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Toast ref={toast}></Toast>
                 <Menu model={items} popup ref={menu} id="popup_menu" />
-                <Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)} aria-controls="popup_menu" aria-haspopup />
+                <Button label="Show" icon="pi pi-bars" onClick={(e) => menu.current.toggle(e)} />
             </div>
             <DocSectionCode code={code} />
         </>
