@@ -281,7 +281,7 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
     /**
      * @todo Write the documentation.
      */
-    inputRef?: React.Ref<HTMLInputElement>;
+    inputRef?: React.Ref<HTMLInputElement> | undefined;
     /**
      * Defines how multiple items can be selected, when true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.
      * @defaultValue true
@@ -294,7 +294,7 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
     /**
      * An array of options to display.
      */
-    options?: TreeNode[];
+    options?: TreeNode[] | undefined;
     /**
      * Style class of the overlay panel element.
      */

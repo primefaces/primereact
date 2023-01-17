@@ -110,6 +110,7 @@ interface VirtualScrollerTemplateOptions {
 
 /**
  * @todo Write the documentation.
+ * @extends VirtualScrollerTemplateOptions
  */
 interface VirtualScrollerLoadingTemplateOptions extends VirtualScrollerTemplateOptions {
     /**
@@ -166,6 +167,7 @@ interface VirtualScrollerContentTemplateOptions {
     items: any[] | any[][] | undefined | null;
     /**
      * @todo Write the documentation.
+     * @param {number} index - @todo Write a description
      */
     getItemOptions(index: number): VirtualScrollerTemplateOptions;
     /**
@@ -186,6 +188,8 @@ interface VirtualScrollerContentTemplateOptions {
     loading: boolean;
     /**
      * @todo Write the documentation.
+     * @param {number} index - @todo Write a description
+     * @param {object} ext - @todo Write a description
      */
     getLoaderOptions(index: number, ext?: object): VirtualScrollerLoadingTemplateOptions;
     /**
@@ -377,6 +381,7 @@ export interface VirtualScrollerProps {
 export declare class VirtualScroller extends React.Component<VirtualScrollerProps, any> {
     /**
      * Returns the reference of virtualScroller's container.
+     * @return {React.Ref<HTMLDivElement>} Ref Div element
      */
     public getElementRef(): React.Ref<HTMLDivElement>;
     /**
@@ -387,14 +392,14 @@ export declare class VirtualScroller extends React.Component<VirtualScrollerProp
     /**
      * Scroll to move to a specific item.
      * @param {number} index - @todo Write the documentation.
-     * @param {string} behavior - @todo Write the documentation.
+     * @param {'auto' | 'smooth'} behavior - @todo Write the documentation.
      */
     public scrollToIndex(index: number | number[], behavior?: 'auto' | 'smooth'): void;
     /**
      * It is used to move the specified index into the view. It is a method that will usually be needed when keyboard support is added to the virtualScroller component.
      * @param {number} index - @todo Write the documentation.
-     * @param {string} to - @todo Write the documentation.
-     * @param {string} behavior - @todo Write the documentation.
+     * @param {'to-start' | 'to-end'} to - @todo Write the documentation.
+     * @param {'auto' | 'smooth'} behavior - @todo Write the documentation.
      */
     public scrollInView(index: number | number[], to: 'to-start' | 'to-end', behavior?: 'auto' | 'smooth'): void;
     /**
