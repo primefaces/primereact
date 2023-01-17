@@ -415,7 +415,7 @@ interface PaginatorTemplateOptions {
 export type PaginatorTemplate = PaginatorTemplateOptions | string;
 
 /**
- * Defines valid properties in Paginator component. In addition to these, all properties of HTMLSpanElement can be used in this component.
+ * Defines valid properties in Paginator component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
 export interface PaginatorProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
