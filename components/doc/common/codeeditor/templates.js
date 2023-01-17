@@ -45,7 +45,7 @@ const getCRA = (props = {}, template = 'javascript') => {
     const files = {
         'package.json': {
             content: {
-                name: title.toLowerCase().replaceAll(' ', '-'),
+                name: title.toLowerCase().replaceAll(' ', '_'),
                 description: `**${description}** ${PrimeReact.description}`,
                 scripts: {
                     start: 'react-scripts start',
@@ -184,7 +184,7 @@ const getNextJS = (props = {}, template = 'javascript') => {
     const files = {
         'package.json': {
             content: {
-                name: title.toLowerCase().replaceAll(' ', '-'),
+                name: title.toLowerCase().replaceAll(' ', '_'),
                 description: `**${description}** ${PrimeReact.description}`,
                 scripts: {
                     dev: 'next dev',
