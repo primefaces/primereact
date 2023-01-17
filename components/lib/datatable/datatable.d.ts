@@ -638,18 +638,18 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      */
     csvSeparator?: string | undefined;
     /**
-     * Template of the current page report element. Available placeholders are {currentPage}, {totalPages}, {rows}, {first}, {last} and {totalRecords}
-     * @defaultValue ({currentPage} of {totalPages})
+     * Template of the current page report element. Available placeholders are &#123;currentPage&#125;, &#123;totalPages&#125;, &#123;rows&#125;, &#123;first&#125;, &#123;last&#125; and &#123;totalRecords&#125;
+     * @defaultValue (&#123;currentPage&#125; of &#123;totalPages&#125;)
      */
     currentPageReportTemplate?: string | undefined;
     /**
      * Name of the field that uniquely identifies a record in the data. Should be a unique business key to prevent re-rendering.
-     * @defaultValue ({currentPage} of {totalPages})
+     * @defaultValue (&#123;currentPage&#125; of &#123;totalPages&#125;)
      */
     dataKey?: string | undefined;
     /**
      * Default sort order of an unsorted column.
-     * @defaultValue ({currentPage} of {totalPages})
+     * @defaultValue (&#123;currentPage&#125; of &#123;totalPages&#125;)
      */
     defaultSortOrder?: 1 | 0 | -1 | null | undefined;
     /**
@@ -899,7 +899,7 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      */
     selectionAutoFocus?: boolean | undefined;
     /**
-     * A field property from the row to add "Select {field}" and "Unselect {field}" ARIA labels to checkbox/radio buttons.
+     * A field property from the row to add Select &#123;field&#125; and Unselect &#123;field&#125; ARIA labels to checkbox/radio buttons.
      */
     selectionAriaLabel?: string | undefined;
     /**
@@ -979,7 +979,7 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      */
     virtualScrollerOptions?: VirtualScrollerProps | undefined;
     /**
-     * Function that takes the cell data and returns an object in "{'styleclass' : condition}" format to define a classname for a particular now.
+     * Function that takes the cell data and returns an object in &#123;'styleclass' : condition&#125; format to define a classname for a particular now.
      * @param {any} value - Value of the cell.
      * @param {DataTableCellClassNameOptions<TValue>} options - ClassName options.
      * @return {object | string | undefined} @todo Write the description
@@ -1176,7 +1176,7 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      */
     onValueChange?(value: DataTableRowDataArray<TValue>): void;
     /**
-     * Function that takes the row data and returns an object in "{'styleclass' : condition}" format to define a classname for a particular now.
+     * Function that takes the row data and returns an object in &#123;'styleclass' : condition&#125; format to define a classname for a particular now.
      * @param {DataTableRowData<TValue>} data - Value displayed by the table.
      */
     rowClassName?(data: DataTableRowData<TValue>, options: DataTableRowClassNameOptions<TValue>): object | string | undefined;

@@ -11,7 +11,7 @@ import React from 'react';
 
 /**
  * Custom command event.
- * @see {@link MenuItemProps.onCommand}
+ * @see {@link MenuItem.command}
  * @event
  */
 interface MenuItemCommandEvent {
