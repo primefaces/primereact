@@ -11,9 +11,11 @@ export function TemplateDoc(props) {
     let items = [
         { label: 'Profile', icon: 'pi pi-fw pi-user' },
         { label: 'Settings', icon: 'pi pi-fw pi-cog' },
-        { separator: true},
-        { 
-            command: () => { toast.current.show({ severity: 'info', summary: 'Info', detail: 'Item Selected', life: 3000 }); },
+        { separator: true },
+        {
+            command: () => {
+                toast.current.show({ severity: 'info', summary: 'Info', detail: 'Item Selected', life: 3000 });
+            },
             template: (item, options) => {
                 return (
                     <button onClick={(e) => options.onClick(e)} className={classNames(options.className, 'w-full p-link flex align-items-center')}>
@@ -23,8 +25,9 @@ export function TemplateDoc(props) {
                             <span className="text-sm">Agent</span>
                         </div>
                     </button>
-                )
-        }}
+                );
+            }
+        }
     ];
 
     const code = {
@@ -106,7 +109,9 @@ export default function TemplateDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Custom content can be placed inside the menuitem using the <i>template</i> property.</p>
+                <p>
+                    Custom content can be placed inside the menuitem using the <i>template</i> property.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Toast ref={toast} />

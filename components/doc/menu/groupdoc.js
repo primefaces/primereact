@@ -169,7 +169,9 @@ export default function GroupDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Menu supports one level of nesting by defining children with <i>items</i> property.</p>
+                <p>
+                    Menu supports one level of nesting by defining children with <i>items</i> property.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Toast ref={toast} />
