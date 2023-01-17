@@ -3,7 +3,7 @@ import { InputText } from '../../lib/inputtext/InputText';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function CustomDoc(props) {
+export function TemplateDoc(props) {
     const items = [
         {
             label: 'File',
@@ -128,7 +128,7 @@ export function CustomDoc(props) {
         }
     ];
 
-    const start = <img alt="logo" src="images/logo.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} height="40" className="mr-2"></img>;
+    const start = <img alt="logo" src="images/logo.png" height="40" className="mr-2"></img>;
     const end = <InputText placeholder="Search" type="text" />;
 
     const code = {
@@ -140,8 +140,8 @@ import React from 'react';
 import { Menubar } from 'primereact/menubar';
 import { InputText } from 'primereact/inputtext';
 
-export default function CustomDoc() {
-const items = [
+export default function TemplateDemo() {
+    const items = [
         {
             label: 'File',
             icon: 'pi pi-fw pi-file',
@@ -269,11 +269,13 @@ const items = [
         }
     ];
 
-    const start = <img alt="logo" src="images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="mr-2"></img>;
+    const start = <img alt="logo" src="images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} height="40" className="mr-2"></img>;
     const end = <InputText placeholder="Search" type="text" />;
 
     return (
-        <Menubar model={items} start={start} end={end} />
+        <div className="card">
+            <Menubar model={items} start={start} end={end} />
+        </div>
     )
 }
         `,
@@ -281,9 +283,10 @@ const items = [
 import React from 'react'; 
 import { Menubar } from 'primereact/menubar';
 import { InputText } from 'primereact/inputtext';
+import { MenuItem } from 'primereact/menuitem';
 
-export default function CustomDoc() {
-const items = [
+export default function TemplateDemo() {
+    const items: MenuItem[] = [
         {
             label: 'File',
             icon: 'pi pi-fw pi-file',
@@ -411,11 +414,13 @@ const items = [
         }
     ];
 
-    const start = <img alt="logo" src="images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="mr-2"></img>;
+    const start = <img alt="logo" src="images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} height="40" className="mr-2"></img>;
     const end = <InputText placeholder="Search" type="text" />;
     
     return (
-        <Menubar model={items} start={start} end={end} />
+        <div className="card">
+            <Menubar model={items} start={start} end={end} />
+        </div>
     )
 }
         `
@@ -424,9 +429,9 @@ const items = [
     return (
         <>
             <DocSectionText {...props}>
-                <p>The menubar can display custom content by using the "start" and "end" properties.</p>
+                <p>Custom content can be placed inside the menubar using the <i>start</i> and <i>end</i> properties.</p>
             </DocSectionText>
-            <div className="card">
+            <div className="card relative z-2">
                 <Menubar model={items} start={start} end={end} />
             </div>
             <DocSectionCode code={code} />

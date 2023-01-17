@@ -4,7 +4,7 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/menubar/importdoc';
 import { BasicDoc } from '../../components/doc/menubar/basicdoc';
-import { CustomDoc } from '../../components/doc/menubar/customdoc';
+import { TemplateDoc } from '../../components/doc/menubar/templatedoc';
 import { ApiDoc } from '../../components/doc/menubar/apidoc';
 import { AccessibilityDoc } from '../../components/doc/menubar/accessibilitydoc';
 import { StyleDoc } from '../../components/doc/menubar/styledoc';
@@ -22,9 +22,9 @@ const MenubarDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'custom',
-            label: 'Custom',
-            component: CustomDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
             id: 'style',
