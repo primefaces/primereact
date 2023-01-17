@@ -27,7 +27,7 @@ const ts_dependencies = {
 // create-react-app -> https://create-react-app.dev/
 const getCRA = (props = {}, template = 'javascript') => {
     const path = 'src/';
-    const { code: sources, title = 'PrimeReact Demo', description = '', dependencies: pDependencies = {} } = props;
+    const { code: sources, title = 'primereact_demo', description = '', dependencies: pDependencies = {} } = props;
     const isTypeScript = template === 'typescript';
     const dependencies = { ...(isTypeScript ? ts_dependencies : {}), ...core_dependencies, ...pDependencies, 'react-scripts': '5.0.1' };
     const fileExtension = isTypeScript ? '.tsx' : '.js';
@@ -45,7 +45,7 @@ const getCRA = (props = {}, template = 'javascript') => {
     const files = {
         'package.json': {
             content: {
-                name: title,
+                name: title.toLowerCase().replaceAll(' ', '-'),
                 description: `**${description}** ${PrimeReact.description}`,
                 scripts: {
                     start: 'react-scripts start',
@@ -163,4 +163,141 @@ body {
     return { files, dependencies, sourceFileName };
 };
 
-export { getCRA };
+// next.js -> https://nextjs.org/
+const getNextJS = (props = {}, template = 'javascript') => {
+    const path = 'pages/';
+    const { code: sources, title = 'primereact_demo', description = '', dependencies: pDependencies = {} } = props;
+    const isTypeScript = template === 'typescript';
+    const dependencies = { ...(isTypeScript ? ts_dependencies : {}), ...core_dependencies, ...pDependencies, next: '^13.0.7' };
+    const fileExtension = isTypeScript ? '.tsx' : '.js';
+    const sourceFileName = `${path}index${fileExtension}`;
+
+    let extFiles = {};
+
+    sources.extFiles &&
+        Object.entries(sources.extFiles).forEach(([key, value]) => {
+            extFiles[`${path + key}`] = {
+                content: value
+            };
+        });
+
+    const files = {
+        'package.json': {
+            content: {
+                name: title.toLowerCase().replaceAll(' ', '-'),
+                description: `**${description}** ${PrimeReact.description}`,
+                scripts: {
+                    dev: 'next dev',
+                    build: 'next build',
+                    start: 'next start',
+                    lint: 'next lint'
+                },
+                dependencies,
+                browserslist: {
+                    production: ['>0.2%', 'not dead', 'not op_mini all'],
+                    development: ['last 1 chrome version', 'last 1 firefox version', 'last 1 safari version']
+                }
+            }
+        },
+        [`${path}_app${fileExtension}`]: {
+            content: `import 'primereact/resources/themes/lara-light-indigo/theme.css';   // theme
+import 'primereact/resources/primereact.css';                       // core css
+import 'primeicons/primeicons.css';                                 // icons
+import 'primeflex/primeflex.css';                                   // css utility
+import '../styles/globals.css'
+${isTypeScript ? 'import type { AppProps } from "next/app"' : ''}
+
+export default function App({ Component, pageProps }${isTypeScript ? ': AppProps' : ''}) {
+    return <Component {...pageProps} />
+}`
+        },
+        [`${path}_document${fileExtension}`]: {
+            content: `import { Html, Head, Main, NextScript } from 'next/document'
+
+export default function Document() {
+    return (
+    <Html lang="en">
+        <Head />
+        <body>
+        <Main />
+        <NextScript />
+        </body>
+    </Html>
+    )
+}`
+        },
+        ['styles/globals.css']: {
+            content: `html {
+    font-size: 14px;
+}
+
+body {
+    font-family: var(--font-family);
+    font-weight: normal;
+    background: var(--surface-card);
+    color: var(--text-color);
+    padding: 1rem;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+`
+        },
+        '.babelrc': {
+            content: `
+{
+    "presets": ["next/babel"]
+}`
+        },
+        [`${sourceFileName}`]: {
+            content: sources[template]
+        },
+        ...extFiles
+    };
+
+    if (props.service) {
+        props.service.forEach((name) => {
+            files[`service/${name}${fileExtension}`] = {
+                content: services[name]
+            };
+        });
+    }
+
+    isTypeScript &&
+        (files['tsconfig.json'] = {
+            content: `
+{
+    "compilerOptions": {
+        "target": "es5",
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "allowJs": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "noEmit": true,
+        "esModuleInterop": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "jsx": "preserve",
+        "incremental": true
+    },
+    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+    "exclude": ["node_modules"]
+}
+        `
+        }) &&
+        (files['next-env.d.ts'] = {
+            content: `
+/// <reference types="next" />
+/// <reference types="next/image-types/global" />
+
+// NOTE: This file should not be edited
+// see https://nextjs.org/docs/basic-features/typescript for more information.
+        `
+        });
+
+    return { files, dependencies, sourceFileName };
+};
+
+export { getCRA, getNextJS };

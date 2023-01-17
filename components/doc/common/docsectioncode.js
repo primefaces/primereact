@@ -7,7 +7,7 @@ import { CodeHighlight } from './codehighlight';
 export function DocSectionCode(props) {
     const [codeMode, setCodeMode] = useState('basic');
     const [codeLang, setCodeLang] = useState('javascript');
-    const codeEditor = useCodeEditor(props);
+    const codeEditor = useCodeEditor({ ...props, template: 'cra' });
 
     const toggleCodeMode = (content) => {
         setCodeMode(codeMode === 'basic' ? content : 'basic');
