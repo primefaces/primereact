@@ -48,9 +48,7 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    Menu requires a collection of menuitems as its <i>model</i>.
-                </p>
+                <p>Menu requires a collection of menuitems as its <i>model</i>.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Menu model={items} />

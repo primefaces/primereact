@@ -107,7 +107,7 @@ export default function PopupDoc() {
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
-            <Menu model={items} popup ref={menu} id="popup_menu" />
+            <Menu model={items} popup ref={menu} />
             <Button label="Show" icon="pi pi-bars" onClick={(e) => menu.current.toggle(e)} />
         </div>
     )
@@ -167,7 +167,7 @@ export default function PopupDoc() {
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
-            <Menu model={items} popup ref={menu} id="popup_menu" />
+            <Menu model={items} popup ref={menu} />
             <Button label="Show" icon="pi pi-bars" onClick={(e) => menu.current.toggle(e)} />
         </div>
     )
@@ -178,13 +178,11 @@ export default function PopupDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    Popup mode is enabled by adding <i>popup</i> property and calling <i>toggle</i> method with an event of the target.
-                </p>
+                <p>Popup mode is enabled by adding <i>popup</i> property and calling <i>toggle</i> method with an event of the target.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Toast ref={toast}></Toast>
-                <Menu model={items} popup ref={menu} id="popup_menu" />
+                <Menu model={items} popup ref={menu} />
                 <Button label="Show" icon="pi pi-bars" onClick={(e) => menu.current.toggle(e)} />
             </div>
             <DocSectionCode code={code} />
