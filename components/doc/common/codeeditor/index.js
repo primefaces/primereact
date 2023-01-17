@@ -71,6 +71,11 @@ const useStackBlitz = (props) => {
     };
 };
 
+/**
+ * @todo Write the documentation.
+ * @param {string} props.template - valid values are 'cra' and 'nextjs'.
+ * @returns
+ */
 export const useCodeEditor = (props) => {
     const openCodeSandbox = useCodeSandbox(props);
     const openStackBlitz = useStackBlitz(props);
