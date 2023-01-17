@@ -4,7 +4,7 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/dock/importdoc';
 import { BasicDoc } from '../../components/doc/dock/basicdoc';
-import { AdvanceDoc } from '../../components/doc/dock/advancedoc';
+import { AdvancedDoc } from '../../components/doc/dock/advanceddoc';
 import { ApiDoc } from '../../components/doc/dock/apidoc';
 import { AccessibilityDoc } from '../../components/doc/dock/accessibilitydoc';
 import { StyleDoc } from '../../components/doc/dock/styledoc';
@@ -24,7 +24,7 @@ const DockDemo = () => {
         {
             id: 'advance',
             label: 'Advanced',
-            component: AdvanceDoc
+            component: AdvancedDoc
         },
         {
             id: 'style',

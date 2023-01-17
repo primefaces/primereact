@@ -15,7 +15,7 @@ import { Tree } from '../../lib/tree/Tree';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function AdvanceDoc(props) {
+export function AdvancedDoc(props) {
     const [displayTerminal, setDisplayTerminal] = useState(false);
     const [displayFinder, setDisplayFinder] = useState(false);
     const [images, setImages] = useState(null);
@@ -314,7 +314,7 @@ import { Menubar } from 'primereact/menubar';
 import { NodeService } from './service/NodeService';
 import { PhotoService } from './service/PhotoService';
 
-export default function AdvanceDoc() {
+export default function AdvanceDemo() {
     const [displayTerminal, setDisplayTerminal] = useState(false);
     const [displayFinder, setDisplayFinder] = useState(false);
     const [images, setImages] = useState(null);
@@ -614,7 +614,7 @@ import { MenuItem } from 'primereact/menuitem';
 import { NodeService } from './service/NodeService';
 import { PhotoService } from './service/PhotoService';
 
-export default function AdvanceDoc() {
+export default function AdvanceDemo() {
     const [displayTerminal, setDisplayTerminal] = useState(false);
     const [displayFinder, setDisplayFinder] = useState(false);
     const [images, setImages] = useState(null);
