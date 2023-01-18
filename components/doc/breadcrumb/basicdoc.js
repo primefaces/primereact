@@ -42,7 +42,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>BreadCrumb requires a collection of menuitems as its <i>model</i>.</p>
+                <p>
+                    BreadCrumb requires a collection of menuitems as its <i>model</i>.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <BreadCrumb model={items} home={home} />

@@ -59,11 +59,13 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>ContextMenu requires a collection of menuitems as its <i>model</i> and the <i>show</i> method needs to be called explicity using the <i>onContextMenu</i> event of the target to display the menu.</p>
+                <p>
+                    ContextMenu requires a collection of menuitems as its <i>model</i> and the <i>show</i> method needs to be called explicity using the <i>onContextMenu</i> event of the target to display the menu.
+                </p>
             </DocSectionText>
             <div className="card flex md:justify-content-center">
                 <ContextMenu model={items} ref={cm} />
-                <img src="images/nature/nature3.jpg" alt="Logo" className="w-full md:w-auto" onContextMenu={(e) => cm.current.show(e)}  />
+                <img src="images/nature/nature3.jpg" alt="Logo" className="w-full md:w-auto" onContextMenu={(e) => cm.current.show(e)} />
             </div>
             <DocSectionCode code={code} />
         </>

@@ -1,135 +1,202 @@
-import { Field, Form, Formik } from 'formik';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { useFormik } from 'formik';
 import { AutoComplete } from '../../../lib/autocomplete/AutoComplete';
 import { Button } from '../../../lib/button/Button';
-import { classNames } from '../../../lib/utils/Utils';
+import { Toast } from '../../../lib/toast/Toast';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 
 export function FormikDoc(props) {
+    const toast = useRef(null);
     const [items, setItems] = useState([]);
+
+    const show = () => {
+        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+    };
 
     const search = (event) => {
         setItems([...Array(10).keys()].map((item) => event.query + '-' + item));
+    };
+
+    const formik = useFormik({
+        initialValues: {
+            item: ''
+        },
+        validate: (data) => {
+            let errors = {};
+
+            if (!data.item) {
+                errors.item = 'Item is required.';
+            }
+
+            return errors;
+        },
+        onSubmit: (data) => {
+            data.item && show(data);
+            formik.resetForm();
+        }
+    });
+
+    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+
+    const getFormErrorMessage = (name) => {
+        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
     };
 
     const code = {
         basic: `
-<Form className="p-fluid">
-     <div className="field">
-         <Field
-             name="search"
-             validate={(value) => !value && 'Required'}
-             render={({ field }) => (
-                 <>
-                     <label htmlFor={field.name} className={classNames({ 'p-error': errors.search })}>
-                         Value
-                     </label>
-                     <AutoComplete id={field.name} value={field.value} onChange={field.onChange} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': touched.search && errors.search })} />
-                     {errors.search && touched.search && <small className="p-error">{errors.search}</small>}
-                 </>
-             )}
-         />
-     </div>
-     <Button label="Submit" type="submit" icon="pi pi-check" />
-</Form>
+<form onSubmit={formik.handleSubmit} className="flex flex-column justify-content-center">
+    <div className="mb-2">Value</div>
+    <Toast ref={toast} />
+    <AutoComplete
+        id="item"
+        name="item"
+        value={formik.values.item}
+        optionLabel="name"
+        suggestions={items}
+        completeMethod={search}
+        onChange={(e) => {
+            formik.setFieldValue('item', e.value);
+        }}
+    />
+    {getFormErrorMessage('item')}
+    <Button type="submit" label="Submit" className="mt-2" />
+</form>
         `,
         javascript: `
-import React, { useState } from 'react';
-import { Formik, Form, Field } from 'formik';
+import React, {useState, useRef } from "react";
+import { useFormik } from 'formik';
 import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
 import { AutoComplete } from "primereact/autocomplete";
+import { Toast } from 'primereact/toast';
 
 export default function FormikDoc() {
+    const toast = useRef(null);
     const [items, setItems] = useState([]);
+
+    const show = () => {
+        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+    };
 
     const search = (event) => {
         setItems([...Array(10).keys()].map((item) => event.query + '-' + item));
     };
 
+    const formik = useFormik({
+        initialValues: {
+            item: ''
+        },
+        validate: (data) => {
+            let errors = {};
+
+            if (!data.item) {
+                errors.item = 'Item is required.';
+            }
+
+            return errors;
+        },
+        onSubmit: (data) => {
+            data.item && show(data);
+            formik.resetForm();
+        }
+    });
+
+    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+
+    const getFormErrorMessage = (name) => {
+        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+    };
+
+
     return (
-        <div className="card">
-            <div className="flex justify-content-center">
-                <Formik
-                    initialValues={{ search: '' }}
-                    onSubmit={(values, actions) => {
-                        setFormData(values);
-                        actions.setSubmitting(false);
+        <div className="card flex flex-column align-items-center">
+            <form onSubmit={formik.handleSubmit} className="flex flex-column justify-content-center">
+                <div className="mb-2">Value</div>
+                <Toast ref={toast} />
+                <AutoComplete
+                    id="item"
+                    name="item"
+                    value={formik.values.item}
+                    optionLabel="name"
+                    suggestions={items}
+                    completeMethod={search}
+                    onChange={(e) => {
+                        formik.setFieldValue('item', e.value);
                     }}
-                >
-                    {({ errors, touched }) => (
-                        <Form className="p-fluid">
-                            <div className="field">
-                                <Field
-                                    name="search"
-                                    validate={(value) => !value && 'Required'}
-                                    render={({ field }) => (
-                                        <>
-                                            <label htmlFor={field.name} className={classNames({ 'p-error': errors.search })}>
-                                                Value
-                                            </label>
-                                            <AutoComplete id={field.name} value={field.value} onChange={field.onChange} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': touched.search && errors.search })} />
-                                            {errors.search && touched.search && <small className="p-error">{errors.search}</small>}
-                                        </>
-                                    )}
-                                />
-                            </div>
-                            <Button label="Submit" type="submit" icon="pi pi-check" />
-                        </Form>
-                    )}
-                </Formik>
-            </div>
+                />
+                {getFormErrorMessage('item')}
+                <Button type="submit" label="Submit" className="mt-2" />
+            </form>
         </div>
     )
 }
         `,
         typescript: `
-import React, { useState } from 'react';
-import { Formik, Form, Field } from 'formik';
+import React, {useState, useRef } from "react";
+import { useFormik } from 'formik';
 import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
 import { AutoComplete } from "primereact/autocomplete";
+import { Toast } from 'primereact/toast';
 
 export default function FormikDoc() {
+    const toast = useRef(null);
     const [items, setItems] = useState([]);
+
+    const show = () => {
+        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+    };
 
     const search = (event) => {
         setItems([...Array(10).keys()].map((item) => event.query + '-' + item));
     };
 
+    const formik = useFormik({
+        initialValues: {
+            item: ''
+        },
+        validate: (data) => {
+            let errors = {};
+
+            if (!data.item) {
+                errors.item = 'Item is required.';
+            }
+
+            return errors;
+        },
+        onSubmit: (data) => {
+            data.item && show(data);
+            formik.resetForm();
+        }
+    });
+
+    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+
+    const getFormErrorMessage = (name) => {
+        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+    };
+
+
     return (
-        <div className="card">
-            <div className="flex justify-content-center">
-                <Formik
-                    initialValues={{ search: '' }}
-                    onSubmit={(values, actions) => {
-                        setFormData(values);
-                        actions.setSubmitting(false);
+        <div className="card flex flex-column align-items-center">
+            <form onSubmit={formik.handleSubmit} className="flex flex-column justify-content-center">
+                <div className="mb-2">Value</div>
+                <Toast ref={toast} />
+                <AutoComplete
+                    id="item"
+                    name="item"
+                    value={formik.values.item}
+                    optionLabel="name"
+                    suggestions={items}
+                    completeMethod={search}
+                    onChange={(e) => {
+                        formik.setFieldValue('item', e.value);
                     }}
-                >
-                    {({ errors, touched }) => (
-                        <Form className="p-fluid">
-                            <div className="field">
-                                <Field
-                                    name="search"
-                                    validate={(value) => !value && 'Required'}
-                                    render={({ field }) => (
-                                        <>
-                                            <label htmlFor={field.name} className={classNames({ 'p-error': errors.search })}>
-                                                Value
-                                            </label>
-                                            <AutoComplete id={field.name} value={field.value} onChange={field.onChange} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': touched.search && errors.search })} />
-                                            {errors.search && touched.search && <small className="p-error">{errors.search}</small>}
-                                        </>
-                                    )}
-                                />
-                            </div>
-                            <Button label="Submit" type="submit" icon="pi pi-check" />
-                        </Form>
-                    )}
-                </Formik>
-            </div>
+                />
+                {getFormErrorMessage('item')}
+                <Button type="submit" label="Submit" className="mt-2" />
+            </form>
         </div>
     )
 }
@@ -143,39 +210,27 @@ export default function FormikDoc() {
                     <a href="https://formik.org/">Formik</a> is a popular React library for form validation. The field will be highlighted on validation failure.
                 </p>
             </DocSectionText>
-            <div className="card">
-                <div className="flex justify-content-center">
-                    <Formik
-                        initialValues={{ search: '' }}
-                        onSubmit={(values, actions) => {
-                            setFormData(values);
-                            actions.setSubmitting(false);
+            <div className="card flex flex-column align-items-center">
+                <form onSubmit={formik.handleSubmit} className="flex flex-column justify-content-center">
+                    <div className="mb-2">Value</div>
+                    <Toast ref={toast} />
+                    <AutoComplete
+                        id="item"
+                        name="item"
+                        value={formik.values.item}
+                        optionLabel="name"
+                        suggestions={items}
+                        completeMethod={search}
+                        onChange={(e) => {
+                            formik.setFieldValue('item', e.value);
                         }}
-                    >
-                        {({ errors, touched }) => (
-                            <Form className="p-fluid">
-                                <div className="field">
-                                    <Field
-                                        name="search"
-                                        validate={(value) => !value && 'Required'}
-                                        render={({ field }) => (
-                                            <>
-                                                <label htmlFor={field.name} className={classNames({ 'p-error': errors.search })}>
-                                                    Value
-                                                </label>
-                                                <AutoComplete id={field.name} value={field.value} onChange={field.onChange} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': touched.search && errors.search })} />
-                                                {errors.search && touched.search && <small className="p-error">{errors.search}</small>}
-                                            </>
-                                        )}
-                                    />
-                                </div>
-                                <Button label="Submit" type="submit" icon="pi pi-check" />
-                            </Form>
-                        )}
-                    </Formik>
-                </div>
+                    />
+                    {getFormErrorMessage('item')}
+                    <Button type="submit" label="Submit" className="mt-2" />
+                </form>
             </div>
-            <DocSectionCode code={code} service={['CountryService']} dependencies={{ formik: '^2.2.6' }} />
+
+            <DocSectionCode code={code} dependencies={{ formik: '^2.2.6' }} />
         </>
     );
 }

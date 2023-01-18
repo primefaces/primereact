@@ -195,7 +195,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Menu requires a collection of menuitems as its <i>model</i>. Default location is <i>bottom</i> and other sides are also available when defined with the <i>position</i> property.</p>
+                <p>
+                    Menu requires a collection of menuitems as its <i>model</i>. Default location is <i>bottom</i> and other sides are also available when defined with the <i>position</i> property.
+                </p>
             </DocSectionText>
             <div className="card">
                 <div className="flex flex-wrap gap-3 mb-5">

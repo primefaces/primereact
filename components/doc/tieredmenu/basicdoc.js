@@ -414,7 +414,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>TieredMenu requires a collection of menuitems as its <i>model</i>.</p>
+                <p>
+                    TieredMenu requires a collection of menuitems as its <i>model</i>.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <TieredMenu model={items} />

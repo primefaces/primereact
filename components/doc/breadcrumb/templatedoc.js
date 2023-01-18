@@ -87,7 +87,9 @@ export default function TemplateDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Custom content can be placed inside the menuitem using the <i>template</i> property.</p>
+                <p>
+                    Custom content can be placed inside the menuitem using the <i>template</i> property.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <BreadCrumb model={items} home={home} />

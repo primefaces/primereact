@@ -417,7 +417,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Menubar requires a collection of menuitems as its <i>model</i>.</p>
+                <p>
+                    Menubar requires a collection of menuitems as its <i>model</i>.
+                </p>
             </DocSectionText>
             <div className="card relative z-2">
                 <Menubar model={items} />
