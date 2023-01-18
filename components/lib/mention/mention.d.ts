@@ -135,7 +135,8 @@ export interface MentionProps extends Omit<React.DetailedHTMLProps<React.Textare
      */
     suggestions?: any[] | undefined;
     /**
-     * The properties of {@link CSSTransitionProps} can be customized, except for "nodeRef" and "in" properties.
+     * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
+     * @type {CSSTransitionProps}
      */
     transitionOptions?: CSSTransitionProps | undefined;
     /**

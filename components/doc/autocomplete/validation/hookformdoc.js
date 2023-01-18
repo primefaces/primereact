@@ -1,24 +1,31 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { AutoComplete } from '../../../lib/autocomplete/AutoComplete';
 import { Button } from '../../../lib/button/Button';
+import { Toast } from '../../../lib/toast/Toast';
 import { classNames } from '../../../lib/utils/Utils';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 
 export function HookFormDoc(props) {
-    const [formData, setFormData] = useState({});
+    const toast = useRef(null);
     const [items, setItems] = useState([]);
     const defaultValues = { value: '' };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
+
+    const show = () => {
+        // TO DO: Add detail content to the toast.
+        toast.current.show({ severity: 'success', summary: 'Saved', detail: 'Successfully submitted.' });
+    };
 
     const search = (event) => {
         setItems([...Array(10).keys()].map((item) => event.query + '-' + item));
     };
 
     const onSubmit = (data) => {
-        setFormData(data);
+        data.value && show();
+        form.reset();
     };
 
     const getFormErrorMessage = (name) => {
@@ -27,111 +34,143 @@ export function HookFormDoc(props) {
 
     const code = {
         basic: `
-<Controller name="value"  control={form.control} rules={{ required: 'Value is required.'}}
-    render={({ field, fieldState }) => (
+<Toast ref={toast} />
+<Controller
+name="value"
+control={form.control}
+rules={{ required: 'Value is required.' }}
+render={({ field, fieldState }) => (
         <>
-            <label htmlFor={field.name} className={classNames({ 'p-error': errors.value })}>Value</label>
+            <label htmlFor={field.name} className={classNames({ 'p-error': errors.value })}>
+                Value
+            </label>
             <AutoComplete id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': fieldState.error })} />
             {getFormErrorMessage(field.name)}
         </>
     )}
 />
+</div>
+<Button label="Submit" type="submit" icon="pi pi-check" />
         `,
         javascript: `
-import React, { useState } from 'react';
+import React, {useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
 import { AutoComplete } from "primereact/autocomplete";
+import { Toast } from "primereact/toast";
 
 export default function HookFormDoc() {
-    const [formData, setFormData] = useState({});
+    const toast = useRef(null);
     const [items, setItems] = useState([]);
-    const defaultValues = { search: '' };
+    const defaultValues = { value: '' };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
+
+    const show = () => {
+        // TO DO: Add detail content to the toast.
+        toast.current.show({ severity: 'success', summary: 'Saved', detail: 'Successfully submitted.' });
+    };
 
     const search = (event) => {
         setItems([...Array(10).keys()].map((item) => event.query + '-' + item));
     };
 
     const onSubmit = (data) => {
-        setFormData(data);
+        data.value && show();
+        form.reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>
+        return errors[name] && <small className="p-error">{errors[name].message}</small>;
     };
 
     return (
-        <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
-            <div className="field">
-                <Controller
-                    name="value"
-                    control={form.control}
-                    rules={{ required: 'Value is required.' }}
-                    render={({ field, fieldState }) => (
-                        <>
-                            <label htmlFor={field.name} className={classNames({ 'p-error': errors.value })}>
-                                Value
-                            </label>
-                            <AutoComplete id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': fieldState.error })} />
-                            {getFormErrorMessage(field.name)}
-                        </>
-                    )}
-                />
+        <div className="card flex justify-content-center">
+            <div className="flex flex-column gap-2">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
+                    <div className="field">
+                        <Toast ref={toast} />
+                        <Controller
+                            name="value"
+                            control={form.control}
+                            rules={{ required: 'Value is required.' }}
+                            render={({ field, fieldState }) => (
+                                <>
+                                    <label htmlFor={field.name} className={classNames({ 'p-error': errors.value })}>
+                                        Value
+                                    </label>
+                                    <AutoComplete id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': fieldState.error })} />
+                                    {getFormErrorMessage(field.name)}
+                                </>
+                            )}
+                        />
+                    </div>
+                    <Button label="Submit" type="submit" icon="pi pi-check" />
+                </form>
             </div>
-            <Button label="Submit" type="submit" icon="pi pi-check" />
-        </form>
+        </div>
     )
 }
         `,
         typescript: `
-import React, { useState } from 'react';
+import React, {useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
 import { AutoComplete } from "primereact/autocomplete";
+import { Toast } from "primereact/toast";
 
 export default function HookFormDoc() {
-    const [formData, setFormData] = useState<any>({});
-    const [items, setItems] = useState<any[]>([]);
-    const defaultValues = { search: '' };
+    const toast = useRef(null);
+    const [items, setItems] = useState([]);
+    const defaultValues = { value: '' };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
+
+    const show = () => {
+        // TO DO: Add detail content to the toast.
+        toast.current.show({ severity: 'success', summary: 'Saved', detail: 'Successfully submitted.' });
+    };
 
     const search = (event) => {
         setItems([...Array(10).keys()].map((item) => event.query + '-' + item));
     };
 
-    const onSubmit = (data: any) => {
-        setFormData(data);
+    const onSubmit = (data) => {
+        data.value && show();
+        form.reset();
     };
 
-    const getFormErrorMessage = (name: string) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>
+    const getFormErrorMessage = (name) => {
+        return errors[name] && <small className="p-error">{errors[name].message}</small>;
     };
 
     return (
-        <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
-            <div className="field">
-                <Controller
-                    name="value"
-                    control={form.control}
-                    rules={{ required: 'Value is required.' }}
-                    render={({ field, fieldState }) => (
-                        <>
-                            <label htmlFor={field.name} className={classNames({ 'p-error': errors.value })}>
-                                Value
-                            </label>
-                            <AutoComplete id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': fieldState.error })} />
-                            {getFormErrorMessage(field.name)}
-                        </>
-                    )}
-                />
+        <div className="card flex justify-content-center">
+            <div className="flex flex-column gap-2">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
+                    <div className="field">
+                        <Toast ref={toast} />
+                        <Controller
+                            name="value"
+                            control={form.control}
+                            rules={{ required: 'Value is required.' }}
+                            render={({ field, fieldState }) => (
+                                <>
+                                    <label htmlFor={field.name} className={classNames({ 'p-error': errors.value })}>
+                                        Value
+                                    </label>
+                                    <AutoComplete id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': fieldState.error })} />
+                                    {getFormErrorMessage(field.name)}
+                                </>
+                            )}
+                        />
+                    </div>
+                    <Button label="Submit" type="submit" icon="pi pi-check" />
+                </form>
             </div>
-            <Button label="Submit" type="submit" icon="pi pi-check" />
-        </form>
+        </div>
     )
 }
         `
@@ -148,6 +187,7 @@ export default function HookFormDoc() {
                 <div className="flex flex-column gap-2">
                     <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
                         <div className="field">
+                            <Toast ref={toast} />
                             <Controller
                                 name="value"
                                 control={form.control}

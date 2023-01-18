@@ -67,15 +67,18 @@ export declare class Chart extends React.Component<ChartProps, any> {
      */
     public getCanvas(): HTMLCanvasElement;
     /**
-     * @todo Write the documentation.
+     * Used to get chart instance.
+     * @return {*} Chart instance
      */
     public getChart(): any;
     /**
-     * @todo Write the documentation.
+     * Used to get base64 image.
+     * @return {*} base64 image
      */
     public getBase64Image(): any;
     /**
-     * @todo Write the documentation.
+     * Used to generate legend.
+     * @return {string} Generated legend
      */
     public generateLegend(): string;
     /**

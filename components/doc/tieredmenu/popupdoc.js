@@ -135,14 +135,15 @@ export function PopupDoc(props) {
 
     const code = {
         basic: `
-<TieredMenu model={items} />
+<TieredMenu model={items} popup ref={menu} />
+<Button label="Show" icon="pi pi-bars" onClick={(e) => menu.current.toggle(e)} />
         `,
         javascript: `
 import React, { useRef } from 'react'; 
 import { Button } from 'primereact/button';
 import { TieredMenu } from 'primereact/tieredmenu';
 
-export default function PopupDoc() {
+export default function PopupDemo() {
     const menu = useRef(null);
     const items = [
         {
@@ -272,9 +273,9 @@ export default function PopupDoc() {
     ];
 
     return (
-        <div>
-            <TieredMenu model={items} popup ref={menu} id="overlay_tmenu" />
-            <Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)} aria-haspopup aria-controls="overlay_tmenu" />
+        <div className="card flex justify-content-center">
+            <TieredMenu model={items} popup ref={menu} />
+            <Button label="Show" icon="pi pi-bars" onClick={(e) => menu.current.toggle(e)} />
         </div>
     )
 }
@@ -283,10 +284,11 @@ export default function PopupDoc() {
 import React, { useRef } from 'react'; 
 import { Button } from 'primereact/button';
 import { TieredMenu } from 'primereact/tieredmenu';
+import { MenuItem } from 'primereact/menuitem';
 
-export default function PopupDoc() {
+export default function PopupDemo() {
     const menu = useRef(null);
-    const items = [
+    const items: MenuItem[] = [
         {
             label: 'File',
             icon: 'pi pi-fw pi-file',
@@ -414,9 +416,9 @@ export default function PopupDoc() {
     ];
     
     return (
-        <div>
-            <TieredMenu model={items} popup ref={menu} id="overlay_tmenu" />
-            <Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)} aria-haspopup aria-controls="overlay_tmenu" />
+        <div className="card flex justify-content-center">
+            <TieredMenu model={items} popup ref={menu} />
+            <Button label="Show" icon="pi pi-bars" onClick={(e) => menu.current.toggle(e)} />
         </div>
     )
 }
@@ -426,11 +428,13 @@ export default function PopupDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>TieredMenu is inline by default whereas popup mode is supported by enabling popup property and calling toggle method with an event of the target.</p>
+                <p>
+                    Popup mode is enabled by adding <i>popup</i> property and calling <i>toggle</i> method with an event of the target.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <TieredMenu model={items} popup ref={menu} id="overlay_tmenu" />
-                <Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)} aria-haspopup aria-controls="overlay_tmenu" />
+                <TieredMenu model={items} popup ref={menu} />
+                <Button label="Show" icon="pi pi-bars" onClick={(e) => menu.current.toggle(e)} />
             </div>
             <DocSectionCode code={code} />
         </>

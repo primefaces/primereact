@@ -5,7 +5,7 @@
  * [Live Demo](https://www.primefaces.org/primereact/confirmpopup)
  *
  * @module confirmpopup
- *<
+ *
  */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';

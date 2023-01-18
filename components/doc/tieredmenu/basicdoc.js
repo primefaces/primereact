@@ -138,7 +138,7 @@ export function BasicDoc(props) {
 import React from 'react'; 
 import { TieredMenu } from 'primereact/tieredmenu';
 
-export default function BasicDoc() {
+export default function BasicDemo() {
     const items = [
         {
             label: 'File',
@@ -274,9 +274,10 @@ export default function BasicDoc() {
         typescript: `
 import React from 'react'; 
 import { TieredMenu } from 'primereact/tieredmenu';
+import { MenuItem } from 'primereact/menuitem';
 
-export default function BasicDoc() {
-const items = [
+export default function BasicDemo() {
+    const items: MenuItem[] = [
         {
             label: 'File',
             icon: 'pi pi-fw pi-file',
@@ -413,7 +414,9 @@ const items = [
     return (
         <>
             <DocSectionText {...props}>
-                <p>Menu requires a collection of menuitems as its model.</p>
+                <p>
+                    TieredMenu requires a collection of menuitems as its <i>model</i>.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <TieredMenu model={items} />

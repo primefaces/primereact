@@ -1,19 +1,25 @@
-import { useState } from 'react';
+import { useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Calendar } from '../../../lib/calendar/Calendar';
 import { Button } from '../../../lib/button/Button';
 import { classNames } from '../../../lib/utils/Utils';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
+import { Toast } from '../../../lib/toast/Toast';
 
 export function HookFormDoc(props) {
-    const [formData, setFormData] = useState({});
-    const defaultValues = { birthdate: null };
+    const toast = useRef(null);
+    const defaultValues = { date: null };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
 
+    const show = () => {
+        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+    };
+
     const onSubmit = (data) => {
-        setFormData(data);
+        data.date && show();
+        form.reset();
     };
 
     const getFormErrorMessage = (name) => {
@@ -22,104 +28,128 @@ export function HookFormDoc(props) {
 
     const code = {
         basic: `
-<Controller name="birthdate"  control={form.control} rules={{ required: 'Birth Date is required.'}}
+<Toast ref={toast} />
+<Controller
+    name="date"
+    control={form.control}
+    rules={{ required: 'Date is required.' }}
     render={({ field, fieldState }) => (
         <>
-            <label htmlFor={field.name} className={classNames({ 'p-error': errors.name })}>Birth Date</label>
-            <Calendar id={field.name} value={field.value} inputRef={field.ref} onChange={field.onChange} dateFormat="dd/mm/yy" className={classNames({ 'p-invalid': fieldState.error })} />
+            <label htmlFor={field.name} className={classNames({ 'p-error': errors.date })}>
+                Date
+            </label>
+            <Calendar id={field.name} value={field.value} onChange={field.onChange} dateFormat="dd/mm/yy" className={classNames({ 'p-invalid': fieldState.error })} />
             {getFormErrorMessage(field.name)}
         </>
     )}
 />
         `,
         javascript: `
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
 import { Calendar } from "primereact/calendar";
+import { Toast } from "primereact/toast";
 
 export default function HookFormDoc() {
-    const [formData, setFormData] = useState({});
-    const defaultValues = {birthdate: ''};
+    const toast = useRef(null);
+    const defaultValues = { date: null };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
 
+    const show = () => {
+        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+    };
+
     const onSubmit = (data) => {
-        setFormData(data);
+        data.date && show();
+        form.reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>
+        return errors[name] && <small className="p-error">{errors[name].message}</small>;
     };
 
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
-                <div className="field">
-                    <Controller
-                        name="birthdate"
-                        control={form.control}
-                        rules={{ required: 'Birth Date is required.' }}
-                        render={({ field, fieldState }) => (
-                            <>
-                                <label htmlFor={field.name} className={classNames({ 'p-error': errors.birthdate })}>
-                                    Birth Date
-                                </label>
-                                <Calendar id={field.name} value={field.value} inputRef={field.ref} onChange={field.onChange} dateFormat="dd/mm/yy" className={classNames({ 'p-invalid': fieldState.error })} />
-                                {getFormErrorMessage(field.name)}
-                            </>
-                        )}
-                    />
-                </div>
-                <Button label="Submit" type="submit" icon="pi pi-check" />
-            </form>
+            <div className="flex flex-column gap-2">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
+                    <div className="field">
+                        <Toast ref={toast} />
+                        <Controller
+                            name="date"
+                            control={form.control}
+                            rules={{ required: 'Date is required.' }}
+                            render={({ field, fieldState }) => (
+                                <>
+                                    <label htmlFor={field.name} className={classNames({ 'p-error': errors.date })}>
+                                        Date
+                                    </label>
+                                    <Calendar id={field.name} value={field.value} inputRef={field.ref} onChange={field.onChange} dateFormat="dd/mm/yy" className={classNames({ 'p-invalid': fieldState.error })} />
+                                    {getFormErrorMessage(field.name)}
+                                </>
+                            )}
+                        />
+                    </div>
+                    <Button label="Submit" type="submit" icon="pi pi-check" />
+                </form>
+            </div>
         </div>
     )
 }
         `,
         typescript: `
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
 import { Calendar } from "primereact/calendar";
+import { Toast } from "primereact/toast";
 
 export default function HookFormDoc() {
-    const [formData, setFormData] = useState<any>({});
-    const defaultValues = {birthdate: ''};
+    const toast = useRef(null);
+    const defaultValues = { date: null };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
 
-    const onSubmit = (data: any) => {
-        setFormData(data);
+    const show = () => {
+        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
     };
 
-    const getFormErrorMessage = (name: string) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>
+    const onSubmit = (data) => {
+        data.date && show();
+        form.reset();
+    };
+
+    const getFormErrorMessage = (name) => {
+        return errors[name] && <small className="p-error">{errors[name].message}</small>;
     };
 
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
-                <div className="field">
-                    <Controller
-                        name="birthdate"
-                        control={form.control}
-                        rules={{ required: 'Birth Date is required.' }}
-                        render={({ field, fieldState }) => (
-                            <>
-                                <label htmlFor={field.name} className={classNames({ 'p-error': errors.birthdate })}>
-                                    Birth Date
-                                </label>
-                                <Calendar id={field.name} value={field.value} inputRef={field.ref} onChange={field.onChange} dateFormat="dd/mm/yy" className={classNames({ 'p-invalid': fieldState.error })} />
-                                {getFormErrorMessage(field.name)}
-                            </>
-                        )}
-                    />
-                </div>
-                <Button label="Submit" type="submit" icon="pi pi-check" />
-            </form>
+            <div className="flex flex-column gap-2">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
+                    <div className="field">
+                        <Toast ref={toast} />
+                        <Controller
+                            name="date"
+                            control={form.control}
+                            rules={{ required: 'Date is required.' }}
+                            render={({ field, fieldState }) => (
+                                <>
+                                    <label htmlFor={field.name} className={classNames({ 'p-error': errors.date })}>
+                                        Date
+                                    </label>
+                                    <Calendar id={field.name} value={field.value} inputRef={field.ref} onChange={field.onChange} dateFormat="dd/mm/yy" className={classNames({ 'p-invalid': fieldState.error })} />
+                                    {getFormErrorMessage(field.name)}
+                                </>
+                            )}
+                        />
+                    </div>
+                    <Button label="Submit" type="submit" icon="pi pi-check" />
+                </form>
+            </div>
         </div>
     )
 }
@@ -137,16 +167,17 @@ export default function HookFormDoc() {
                 <div className="flex flex-column gap-2">
                     <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
                         <div className="field">
+                            <Toast ref={toast} />
                             <Controller
-                                name="birthdate"
+                                name="date"
                                 control={form.control}
-                                rules={{ required: 'Birth Date is required.' }}
+                                rules={{ required: 'Date is required.' }}
                                 render={({ field, fieldState }) => (
                                     <>
-                                        <label htmlFor={field.name} className={classNames({ 'p-error': errors.birthdate })}>
-                                            Birth Date
+                                        <label htmlFor={field.name} className={classNames({ 'p-error': errors.date })}>
+                                            Date
                                         </label>
-                                        <Calendar id={field.name} value={field.value} inputRef={field.ref} onChange={field.onChange} dateFormat="dd/mm/yy" className={classNames({ 'p-invalid': fieldState.error })} />
+                                        <Calendar id={field.name} value={field.value} onChange={field.onChange} dateFormat="dd/mm/yy" className={classNames({ 'p-invalid': fieldState.error })} />
                                         {getFormErrorMessage(field.name)}
                                     </>
                                 )}

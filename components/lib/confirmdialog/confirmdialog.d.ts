@@ -54,7 +54,7 @@ interface ConfirmDialogOptions {
 }
 
 /**
- * Defines valid properties in ConfirmDialog component. In addition to these, all properties of {@link DialogProps} can be used in this component.
+ * Defines valid properties in ConfirmDialog component. In addition to these, all properties of {@link dialog} can be used in this component.
  * @group Properties
  */
 export interface ConfirmDialogProps extends Omit<DialogProps, 'onHide' | 'footer'> {

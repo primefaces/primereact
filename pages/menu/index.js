@@ -6,6 +6,7 @@ import { ImportDoc } from '../../components/doc/menu/importdoc';
 import { BasicDoc } from '../../components/doc/menu/basicdoc';
 import { GroupDoc } from '../../components/doc/menu/groupdoc';
 import { PopupDoc } from '../../components/doc/menu/popupdoc';
+import { TemplateDoc } from '../../components/doc/menu/templatedoc';
 import { ApiDoc } from '../../components/doc/menu/apidoc';
 import { AccessibilityDoc } from '../../components/doc/menu/accessibilitydoc';
 import { StyleDoc } from '../../components/doc/menu/styledoc';
@@ -31,6 +32,11 @@ const MenuDemo = () => {
             id: 'popup',
             label: 'Popup',
             component: PopupDoc
+        },
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
             id: 'style',

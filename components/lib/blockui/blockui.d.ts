@@ -35,12 +35,11 @@ export interface BlockUIProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      */
     children?: React.ReactNode | undefined;
     /**
-     * @todo Write the documentation.
-     *
+     * Style class of the container element.
      */
     containerClassName?: string | undefined;
     /**
-     * @todo Write the documentation.
+     * Inline style of the container element.
      */
     containerStyle?: React.CSSProperties | undefined;
     /**
@@ -50,17 +49,14 @@ export interface BlockUIProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
     fullScreen?: boolean | undefined;
     /**
      * Template of mask.
-     *
      */
     template?: React.ReactNode | ((props: BlockUIProps) => React.ReactNode) | null | undefined;
     /**
      * Fired when the element gets blocked.
-     *
      */
     onBlocked?(): void;
     /**
      * Fired when the element gets unblocked.
-     *
      */
     onUnblocked?(): void;
 }

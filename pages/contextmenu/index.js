@@ -3,7 +3,7 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { ImportDoc } from '../../components/doc/contextmenu/importdoc';
-import { BasicDoc } from '../../components/doc/contextmenu/BasicDoc';
+import { BasicDoc } from '../../components/doc/contextmenu/basicdoc';
 import { ApiDoc } from '../../components/doc/contextmenu/apidoc';
 import { AccessibilityDoc } from '../../components/doc/contextmenu/accessibilitydoc';
 import { StyleDoc } from '../../components/doc/contextmenu/styledoc';

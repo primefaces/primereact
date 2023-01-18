@@ -1,16 +1,8 @@
-import { useRef } from 'react';
 import { ContextMenu } from '../../lib/contextmenu/ContextMenu';
-import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function DocumentDoc(props) {
-    const cm = useRef(null);
-
-    const show = () => {
-        cm.current.show({ severity: 'info', summary: 'ContextMenu', detail: 'The Dialog component is currently being displayed.' });
-    };
-
     const items = [
         {
             label: 'File',
@@ -139,24 +131,13 @@ export function DocumentDoc(props) {
     ];
     const code = {
         basic: `
-<div>
-    <Toast ref={cm} />
-    <ContextMenu global model={items} />
-    <img src="images/nature/nature3.jpg" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="Logo" onContextMenu={show} />
-</div>
+<ContextMenu global model={items} />
 `,
         javascript: `
-import React, { useRef } from 'react';
+import React from 'react';
 import { ContextMenu } from 'primereact/contextmenu';
-import { Toast } from 'primereact/toast';
 
-export default function DocumentDoc() {
-    const cm = useRef(null);
-
-    const show = () => {
-        cm.current.show({ severity: 'info', summary: 'ContextMenu', detail: 'The Dialog component is currently being displayed.' });
-    };
-
+export default function DocumentDemo() {
     const items = [
         {
             label: 'File',
@@ -289,27 +270,20 @@ export default function DocumentDoc() {
     ];
 
     return (
-        <div className="card flex justify-content-center">
-            <Toast ref={cm} />
+        <div className="card text-center">
+            <p className="mb-0">Right-Click anywhere on this page to view the global ContextMenu.</p>
             <ContextMenu global model={items} />
-            <img src="images/nature/nature3.jpg" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="Logo" onContextMenu={show} />
         </div>
     )
 }
         `,
         typescript: `
-import React, { useRef } from 'react';
+import React from 'react';
 import { ContextMenu } from 'primereact/contextmenu';
-import { Toast } from 'primereact/toast';
+import { MenuItem } from 'primereact/menuitem';
 
-export default function DocumentDoc() {
-    const cm = useRef(null);
-
-    const show = () => {
-        cm.current.show({ severity: 'info', summary: 'ContextMenu', detail: 'The Dialog component is currently being displayed.' });
-    };
-
-    const items = [
+export default function DocumentDemo() {
+    const items: MenuItem[] = [
         {
             label: 'File',
             icon: 'pi pi-fw pi-file',
@@ -441,10 +415,9 @@ export default function DocumentDoc() {
     ];
 
     return (
-        <div className="card flex justify-content-center">
-            <Toast ref={cm} />
+        <div className="card text-center">
+            <p className="mb-0">Right-Click anywhere on this page to view the global ContextMenu.</p>
             <ContextMenu global model={items} />
-            <img src="images/nature/nature3.jpg" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="Logo" onContextMenu={show} />
         </div>
     )
 }
@@ -456,10 +429,9 @@ export default function DocumentDoc() {
             <DocSectionText {...props}>
                 <p>Setting global property attaches the context menu to the document.</p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <Toast ref={cm} />
+            <div className="card text-center">
+                <p className="mb-0">Right-Click anywhere on this page to view the global ContextMenu.</p>
                 <ContextMenu global model={items} />
-                <img src="images/nature/nature3.jpg" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="Logo" onContextMenu={show} />
             </div>
             <DocSectionCode code={code} />
         </>

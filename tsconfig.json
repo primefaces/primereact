@@ -29,6 +29,12 @@
         "out": "doc",
         "exclude": [
             "components/lib/**/*.js"
-        ]
+        ],
+        "externalSymbolLinkMappings": {
+            "@types/react": {
+                "React.ReactNode": "https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts",
+                "React.CSSProperties": "https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts",
+            }
+        }
     }
 }

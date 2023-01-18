@@ -80,12 +80,12 @@ export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputH
     strongLabel?: string | undefined;
     /**
      * Regex for a medium level password.
-     * @defaultValue ^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,}).
+     * @defaultValue ^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.&#123;6,&#125;).
      */
     mediumRegex?: string | undefined;
     /**
      * Regex for a strong level password.
-     * @defaultValue ^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})
+     * @defaultValue ^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.&#123;8,&#125;)
      */
     strongRegex?: string | undefined;
     /**
