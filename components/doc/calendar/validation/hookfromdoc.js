@@ -28,11 +28,17 @@ export function HookFormDoc(props) {
 
     const code = {
         basic: `
-<Controller name="date"  control={form.control} rules={{ required: 'Date is required.'}}
+<Toast ref={toast} />
+<Controller
+    name="date"
+    control={form.control}
+    rules={{ required: 'Date is required.' }}
     render={({ field, fieldState }) => (
         <>
-            <label htmlFor={field.name} className={classNames({ 'p-error': errors.name })}>Date</label>
-            <Calendar id={field.name} value={field.value} inputRef={field.ref} onChange={field.onChange} dateFormat="dd/mm/yy" className={classNames({ 'p-invalid': fieldState.error })} />
+            <label htmlFor={field.name} className={classNames({ 'p-error': errors.date })}>
+                Date
+            </label>
+            <Calendar id={field.name} value={field.value} onChange={field.onChange} dateFormat="dd/mm/yy" className={classNames({ 'p-invalid': fieldState.error })} />
             {getFormErrorMessage(field.name)}
         </>
     )}
