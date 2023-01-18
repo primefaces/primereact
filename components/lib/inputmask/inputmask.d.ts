@@ -37,7 +37,7 @@ interface InputMaskCompleteEvent {
 interface InputMaskChangeEvent extends FormEvent<string> {}
 
 /**
- * Defines valid properties in InputMask component. In addition to these, all properties of {@link InputTextProps} can be used in this component.
+ * Defines valid properties in InputMask component. In addition to these, all properties of {@link inputtext} can be used in this component.
  * @group Properties
  */
 export interface InputMaskProps extends Omit<InputTextProps, 'onChange'> {

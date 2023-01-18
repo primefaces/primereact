@@ -20,7 +20,7 @@ import { FormEvent } from '../ts-helpers';
 interface InputSwitchChangeEvent extends FormEvent<boolean> {}
 
 /**
- * Defines valid properties in InputMask component. In addition to these, all properties of {@link InputTextProps} can be used in this component.
+ * Defines valid properties in InputMask component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
 export interface InputSwitchProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {

@@ -46,8 +46,8 @@ export interface FieldsetProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      */
     collapsed?: boolean | undefined;
     /**
-     * The properties of {@link CSSTransitionProps} can be customized, except for "nodeRef" and "in" properties.
-     * @defaultValue false
+     * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
+     * @type {CSSTransitionProps}
      */
     transitionOptions?: CSSTransitionProps | undefined;
     /**

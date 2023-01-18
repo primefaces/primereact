@@ -84,7 +84,8 @@ export interface SidebarProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      */
     appendTo?: 'self' | HTMLElement | null | undefined;
     /**
-     * The properties of {@link CSSTransitionProps} can be customized, except for "nodeRef" and "in" properties.
+     * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
+     * @type {CSSTransitionProps}
      */
     transitionOptions?: CSSTransitionProps | undefined;
     /**

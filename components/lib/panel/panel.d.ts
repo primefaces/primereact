@@ -118,7 +118,8 @@ export interface PanelProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      */
     icons?: React.ReactNode | ((props: PanelProps) => React.ReactNode);
     /**
-     * The properties of {@link CSSTransitionProps} can be customized, except for "nodeRef" and "in" properties.
+     * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
+     * @type {CSSTransitionProps}
      */
     transitionOptions?: CSSTransitionProps | undefined;
     /**

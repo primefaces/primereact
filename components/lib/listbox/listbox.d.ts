@@ -266,7 +266,8 @@ export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHT
      */
     value?: any | undefined;
     /**
-     * Whether to use the virtualScroller feature. The properties of {@link VirtualScroller} component can be used like an object in it.
+     * Whether to use the virtualScroller feature. The properties of VirtualScroller component can be used like an object in it.
+     * @type {VirtualScrollerProps}
      */
     virtualScrollerOptions?: VirtualScrollerProps | undefined;
     /**
