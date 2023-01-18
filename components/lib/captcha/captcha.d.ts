@@ -30,7 +30,7 @@ export interface CaptchaProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
     onExpire?(): void;
     /**
      * The callback function to be executed when the user submits a successful CAPTCHA response.
-     * @todo Add param if neccessary
+     * @param {*} response - Current response
      */
     onResponse?(response: any): void;
     /**

@@ -577,7 +577,6 @@ export interface CalendarProps {
      */
     onVisibleChange?(event: CalendarVisibleChangeEvent): void;
     /**
-     * @todo
      * Function that gets a navigator information and returns the navigator in header.
      * @param {CalendarYearNavigatorTemplateEvent} event - Custom year navigator template event
      */

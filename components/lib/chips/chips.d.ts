@@ -13,7 +13,7 @@ import TooltipOptions from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
 
 /**
- * @todo
+ * @group Others
  * @see {@link ChipsProps.removable}
  */
 interface ChipsRemovableOptions {

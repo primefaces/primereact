@@ -156,7 +156,7 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.HT
      */
     forceSelection?: boolean | undefined;
     /**
-     * Inline style of the input field.
+     * Style class of the input field.
      */
     inputClassName?: string | undefined;
     /**
