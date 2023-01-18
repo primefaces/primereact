@@ -1,3 +1,12 @@
+/**
+ *
+ * Chips is used to enter multiple values on an input field.
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/chips/)
+ *
+ * @module chips
+ *
+ */
 import * as React from 'react';
 import { KeyFilterType } from '../keyfilter';
 import TooltipOptions from '../tooltip/tooltipoptions';
