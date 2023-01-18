@@ -522,6 +522,9 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                     !!el && (el.style.width = el.style.minWidth = tableWidth);
                 };
 
+                // https://github.com/primefaces/primereact/issues/3970
+                // Reasoning: resize table cells before updating the table width so that it can use existing computed cell widths and adjust only the one column. 
+                resizeTableCells(newColumnWidth); 
                 updateTableWidth(tableRef.current);
 
                 if (!isVirtualScrollerDisabled()) {
@@ -533,7 +536,6 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                     }
                 }
 
-                resizeTableCells(newColumnWidth);
             }
 
             if (props.onColumnResizeEnd) {
