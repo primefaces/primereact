@@ -12,43 +12,47 @@ import { DialogProps } from '../dialog';
 import { IconType } from '../utils';
 
 /**
- * @todo Write the documantation
+ * Custom confirm dialog options
+ * @group Misc
  */
 interface ConfirmDialogOptions {
     /**
-     * @todo Write the documentation.
+     * Callback to execute when action is confirmed.
      */
     accept(): void;
     /**
-     * @todo Write the documentation.
+     * Callback to execute when action is rejected.
      */
     reject(): void;
     /**
-     * @todo Write the documentation.
+     * Style class of the accept button.
      */
     acceptClassName: string;
     /**
-     * @todo Write the documentation.
+     * Style class of the reject button.
      */
     rejectClassName: string;
     /**
-     * @todo Write the documentation.
+     * Label of the accept button.
+     * @defaultValue Yes
      */
     acceptLabel: string;
     /**
-     * @todo Write the documentation.
+     * Label of the reject button.
+     * @defaultValue No
      */
     rejectLabel: string;
     /**
-     * @todo Write the documentation.
+     * Default element created by the component.
      */
     element: React.ReactNode;
     /**
-     * @todo Write the documentation.
+     * All component props
+     * @type {ConfirmDialogProps}
      */
     props: ConfirmDialogProps;
     /**
-     * @todo Write the documentation.
+     * Extra options
      */
     [key: string]: any;
 }
@@ -59,7 +63,7 @@ interface ConfirmDialogOptions {
  */
 export interface ConfirmDialogProps extends Omit<DialogProps, 'onHide' | 'footer'> {
     /**
-     * @todo Write the documentation.
+     * Unique tag key used to separate the confirmDialog components in the page.
      */
     tagKey?: string | undefined;
     /**
@@ -102,9 +106,10 @@ export interface ConfirmDialogProps extends Omit<DialogProps, 'onHide' | 'footer
      */
     acceptClassName?: string | undefined;
     /**
-     * @todo Write the documentation.
+     * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and "self". The "self" value is used to render a component where it is located.
+     * @defaultValue document.body
      */
-    appendTo?: 'self' | HTMLElement | undefined | null | undefined;
+    appendTo?: 'self' | HTMLElement | undefined | null;
     /**
      * Style class of the element.
      */
@@ -133,7 +138,8 @@ export interface ConfirmDialogProps extends Omit<DialogProps, 'onHide' | 'footer
 }
 
 /**
- * @todo Write the documentation.
+ * Object returned by the {@link confirmDialog} method.
+ * @group Misc
  */
 interface ConfirmDialogReturn {
     /**
@@ -151,8 +157,8 @@ interface ConfirmDialogReturn {
  */
 export declare class ConfirmDialog extends React.Component<ConfirmDialogProps, any> {
     /**
-     * @todo Write the documentation.
-     * @param {ConfirmDialogProps} props
+     * Used to call/update the component manually
+     * @param {ConfirmDialogProps} props - All component props
      */
     public confirm(props?: ConfirmDialogProps): void;
 }

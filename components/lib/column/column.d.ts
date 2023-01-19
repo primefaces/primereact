@@ -1,6 +1,7 @@
 /**
  *
- * @todo Write a description.
+ * Column component defines various options to specify corresponding features.
+ * It is a helper component for DataTable and TreeTable.
  *
  * [Live Demo](https://www.primefaces.org/primereact/datatable/)
  *

@@ -59,7 +59,8 @@ export interface DataScrollerProps extends Omit<React.DetailedHTMLProps<React.HT
      */
     inline?: boolean | undefined;
     /**
-     * @todo Write the documentation.
+     * Defines if data is loaded and interacted with in lazy manner.
+     * @defaultValue false
      */
     lazy?: boolean | undefined;
     /**
@@ -80,7 +81,7 @@ export interface DataScrollerProps extends Omit<React.DetailedHTMLProps<React.HT
     value?: any[] | undefined;
     /**
      * Function that gets an item in the value and returns the content for it.
-     * @param {any} item - @todo Write the documentation.
+     * @param {*} item - Current item
      */
     itemTemplate?(item: any): React.ReactNode | undefined;
     /**
@@ -95,7 +96,7 @@ export interface DataScrollerProps extends Omit<React.DetailedHTMLProps<React.HT
  */
 export declare class DataScroller extends React.Component<DataScrollerProps, any> {
     /**
-     * @todo Write the documentation.
+     * Used to load data manually
      */
     public load(): void;
     /**
