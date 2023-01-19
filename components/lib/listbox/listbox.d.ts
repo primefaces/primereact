@@ -140,7 +140,7 @@ interface ListBoxFilterOptions {
  */
 export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
     /**
-     * @todo Write the description
+     * Establishes relationships between the component and label(s) where its value should be one or more element IDs.
      */
     ariaLabelledBy?: string | undefined;
     /**

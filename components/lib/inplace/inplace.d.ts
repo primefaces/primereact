@@ -26,7 +26,7 @@ interface InplaceToggleEvent {
      */
     originalEvent: React.SyntheticEvent;
     /**
-     * @todo Write the documentation.
+     * Current value
      */
     value: boolean;
 }
@@ -52,7 +52,7 @@ export interface InplaceProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      */
     disabled?: boolean | undefined;
     /**
-     * @todo Write the documentation.
+     * Used to define a string that labels the component.
      */
     ariaLabel?: string | undefined;
     /**

@@ -72,7 +72,8 @@ export declare class StyleClass extends React.Component<StyleClassProps, any> {
      */
     public getElement(): HTMLElement;
     /**
-     * @todo Write the documentation.
+     * Used to get target element.
+     * @return {HTMLElement} Container element
      */
     public getTarget(): HTMLElement;
 }

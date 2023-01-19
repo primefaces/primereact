@@ -92,7 +92,8 @@ export interface GMapProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
  */
 export declare class GMap extends React.Component<GMapProps, any> {
     /**
-     * @todo Write the documentation.
+     * Used to get map instance
+     * @return {*} Map instance
      */
     public getMap(): any;
     /**

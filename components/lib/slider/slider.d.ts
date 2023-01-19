@@ -74,7 +74,7 @@ export interface SliderProps extends Omit<React.DetailedHTMLProps<React.InputHTM
      */
     disabled?: boolean | undefined;
     /**
-     * @todo Write the documentation.
+     * Establishes relationships between the component and label(s) where its value should be one or more element IDs.
      */
     ariaLabelledBy?: string | undefined;
     /**

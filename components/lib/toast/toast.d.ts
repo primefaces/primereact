@@ -11,7 +11,8 @@ import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 
 /**
- * @todo Write the documantation
+ * Message options for toast component
+ * @group Misc
  */
 export interface ToastMessage {
     /**

@@ -10,52 +10,15 @@
 import * as React from 'react';
 import { SelectItemOptionsType } from '../selectitem/selectitem';
 import TooltipOptions from '../tooltip/tooltipoptions';
-
-/**
- * @todo Write the documentation.
- */
-interface SelectButtonChangeTargetOptions {
-    /**
-     * @todo Write the documentation.
-     */
-    name: string;
-    /**
-     * @todo Write the documentation.
-     */
-    id: string;
-    /**
-     * @todo Write the documentation.
-     */
-    value: any;
-}
+import { FormEvent } from '../ts-helpers';
 
 /**
  * Custom change event.
  * @see {@link SelectButtonProps.onChange}
+ * @extends {FormEvent}
  * @event
  */
-interface SelectButtonChangeEvent {
-    /**
-     * Browser event.
-     */
-    originalEvent: React.SyntheticEvent;
-    /**
-     * Single value or an array of values that are selected.
-     */
-    value: any;
-    /**
-     * @todo Write the documentation.
-     */
-    stopPropagation(): void;
-    /**
-     * @todo Write the documentation.
-     */
-    preventDefault(): void;
-    /**
-     * @todo Write the documentation.
-     */
-    target: SelectButtonChangeTargetOptions;
-}
+interface SelectButtonChangeEvent extends FormEvent {}
 
 /**
  * Defines valid properties in SelectButton component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -114,14 +77,14 @@ export interface SelectButtonProps extends Omit<React.DetailedHTMLProps<React.In
      */
     tooltipOptions?: TooltipOptions | undefined;
     /**
-     * @todo Write the documentation.
+     * Establishes relationships between the component and label(s) where its value should be one or more element IDs.
      */
     ariaLabelledBy?: string | undefined;
     /**
      * Function that gets the option and returns the content.
-     * @param {any} option - @todo Write the documentation.
+     * @param {*} item - Current item
      */
-    itemTemplate?(option: any): React.ReactNode;
+    itemTemplate?(item: any): React.ReactNode;
     /**
      * Callback to invoke on value change.
      * @param {SelectButtonChangeEvent} event - Custom change event.

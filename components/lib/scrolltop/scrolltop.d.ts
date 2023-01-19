@@ -41,15 +41,14 @@ export interface ScrollTopProps {
      */
     className?: string | undefined;
     /**
-     * @todo Write the documentation
+     * Inline style of the component.
      */
-    style?: React.CSSProperties;
+    style?: React.CSSProperties | undefined;
     /**
-     * The properties of CSSTransitionProps can be customized, except for "nodeRef" and "in" properties.
-     * @defaultValue smooth
-     * @todo Add link for CSSTransitionProps
+     * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
+     * @type {CSSTransitionProps}
      */
-    transitionOptions?: CSSTransitionProps;
+    transitionOptions?: CSSTransitionProps | undefined;
     /**
      * Callback to invoke when overlay panel becomes visible.
      */

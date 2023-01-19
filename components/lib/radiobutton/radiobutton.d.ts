@@ -9,64 +9,15 @@
  */
 import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
-
-/**
- * @todo Write the documentation.
- */
-interface RadioButtonChangeTargetOptions {
-    /**
-     * @todo Write the documentation.
-     */
-    type: string;
-    /**
-     * @todo Write the documentation.
-     */
-    name: string;
-    /**
-     * @todo Write the documentation.
-     */
-    id: string;
-    /**
-     * @todo Write the documentation.
-     */
-    value: any;
-    /**
-     * @todo Write the documentation.
-     */
-    checked: boolean;
-}
+import { FormEvent } from '../ts-helpers';
 
 /**
  * Custom change event.
  * @see {@link RadioButtonProps.onChange}
+ * @extends {FormEvent}
  * @event
  */
-interface RadioButtonChangeEvent {
-    /**
-     * Original event
-     */
-    originalEvent: React.SyntheticEvent;
-    /**
-     * Value of the checkbox
-     */
-    value: any;
-    /**
-     * Checked state as a boolean
-     */
-    checked: boolean;
-    /**
-     * @todo Write the documentation.
-     */
-    stopPropagation(): void;
-    /**
-     * @todo Write the documentation.
-     */
-    preventDefault(): void;
-    /**
-     * @todo Write the documentation.
-     */
-    target: RadioButtonChangeTargetOptions;
-}
+interface RadioButtonChangeEvent extends FormEvent {}
 
 /**
  * Defines valid properties in RadioButton component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -74,7 +25,7 @@ interface RadioButtonChangeEvent {
  */
 export interface RadioButtonProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
     /**
-     * @todo Write the documentation.
+     * Reference of the input element.
      */
     inputRef?: React.Ref<HTMLInputElement> | undefined;
     /**
@@ -133,8 +84,8 @@ export declare class RadioButton extends React.Component<RadioButtonProps, any> 
      */
     public focus(): void;
     /**
-     * @todo Write the documentation.
-     * @param {React.SyntheticEvent} event - @todo Write the documentation.
+     * Used to select a button
+     * @param {React.SyntheticEvent} event - Browser event
      */
     public select(event?: React.SyntheticEvent): void;
     /**

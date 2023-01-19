@@ -18,7 +18,7 @@ import { MenuItem } from '../menuitem';
  */
 interface SlideMenuNavigateEvent {
     /**
-     * @todo Write the documentation
+     * Level of current displayed menu
      */
     level: number;
 }

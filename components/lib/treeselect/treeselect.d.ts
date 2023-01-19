@@ -206,7 +206,7 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      */
     ariaLabel?: string | undefined;
     /**
-     * Contains the element IDs of labels.
+     * Establishes relationships between the component and label(s) where its value should be one or more element IDs.
      */
     ariaLabelledBy?: string | undefined;
     /**
