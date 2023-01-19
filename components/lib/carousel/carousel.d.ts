@@ -10,11 +10,13 @@
 import * as React from 'react';
 
 /**
- * @group Others
+ * Custom responsive option
+ * @see {@link CarouselProps.responsiveOptions}
+ * @group Misc
  */
 interface CarouselResponsiveOption {
     /**
-     * @todo Write the documantation
+     * The breakpoint to define the maximum width boundary.
      */
     breakpoint: string;
     /**
