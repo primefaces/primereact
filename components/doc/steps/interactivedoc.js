@@ -17,13 +17,13 @@ export function InteractiveDoc(props) {
         {
             label: 'Seat',
             command: (event) => {
-                toast.current.show({ severity: 'info', summary: 'Seat Selection', detail: event.item.label });
+                toast.current.show({ severity: 'info', summary: 'Second Step', detail: event.item.label });
             }
         },
         {
             label: 'Payment',
             command: (event) => {
-                toast.current.show({ severity: 'info', summary: 'Pay with CC', detail: event.item.label });
+                toast.current.show({ severity: 'info', summary: 'Third Step', detail: event.item.label });
             }
         },
         {
@@ -43,7 +43,7 @@ import React, { useState, useRef } from 'react';
 import { Steps } from 'primereact/steps';
 import { Toast } from 'primereact/toast';
 
-export default function InteractiveDoc() {
+export default function InteractiveDemo() {
     const [activeIndex, setActiveIndex] = useState(1);
     const toast = useRef(null);
     const items = [
@@ -56,13 +56,13 @@ export default function InteractiveDoc() {
         {
             label: 'Seat',
             command: (event) => {
-                toast.current.show({ severity: 'info', summary: 'Seat Selection', detail: event.item.label });
+                toast.current.show({ severity: 'info', summary: 'Second Step', detail: event.item.label });
             }
         },
         {
             label: 'Payment',
             command: (event) => {
-                toast.current.show({ severity: 'info', summary: 'Pay with CC', detail: event.item.label });
+                toast.current.show({ severity: 'info', summary: 'Third Step', detail: event.item.label });
             }
         },
         {
@@ -74,7 +74,7 @@ export default function InteractiveDoc() {
     ];
 
     return (
-        <div>
+        <div className="card">
             <Toast ref={toast}></Toast>
             <Steps model={items} activeIndex={activeIndex} onSelect={(e) => setActiveIndex(e.index)} readOnly={false} />
         </div>
@@ -85,11 +85,12 @@ export default function InteractiveDoc() {
 import React, { useState, useRef } from 'react';
 import { Steps } from 'primereact/steps';
 import { Toast } from 'primereact/toast';
+import { MenuItem } from 'primereact/menuitem';
 
-export default function InteractiveDoc() {
-    const [activeIndex, setActiveIndex] = useState(1);
+export default function InteractiveDemo() {
+    const [activeIndex, setActiveIndex] = useState<number>(1);
     const toast = useRef(null);
-    const items = [
+    const items: MenuItem = [
         {
             label: 'Personal',
             command: (event) => {
@@ -99,13 +100,13 @@ export default function InteractiveDoc() {
         {
             label: 'Seat',
             command: (event) => {
-                toast.current.show({ severity: 'info', summary: 'Seat Selection', detail: event.item.label });
+                toast.current.show({ severity: 'info', summary: 'Second Step', detail: event.item.label });
             }
         },
         {
             label: 'Payment',
             command: (event) => {
-                toast.current.show({ severity: 'info', summary: 'Pay with CC', detail: event.item.label });
+                toast.current.show({ severity: 'info', summary: 'Third Step', detail: event.item.label });
             }
         },
         {
@@ -117,7 +118,7 @@ export default function InteractiveDoc() {
     ];
 
     return (
-        <div>
+        <div className="card">
             <Toast ref={toast}></Toast>
             <Steps model={items} activeIndex={activeIndex} onSelect={(e) => setActiveIndex(e.index)} readOnly={false} />
         </div>
@@ -129,10 +130,7 @@ export default function InteractiveDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    Items are readOnly by default, if you'd like to make them interactive then disable readonly, use command handlers of menuitem to respond to selection events and define activeIndex property along with the onSelect event to use it
-                    as a controlled component.
-                </p>
+                <p>In order to add interactivity to the component, disable <i>readOnly</i> and use a binding to <i>activeIndex</i> along with <i>onSelect</i> to control the Steps.</p>
             </DocSectionText>
             <div className="card">
                 <Toast ref={toast}></Toast>
