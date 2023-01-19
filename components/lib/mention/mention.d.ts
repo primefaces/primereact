@@ -12,15 +12,15 @@ import { CSSTransitionProps } from '../csstransition';
 import { InputTextarea } from '../inputtextarea';
 
 /**
- * @todo Write the description
+ * @group Misc
  */
 interface MentionItemTemplateOptions {
     /**
-     * @todo Write the description
+     * Index of the menu item.
      */
     index: number;
     /**
-     * @todo Write the description
+     * Triggered the mention item.
      */
     trigger: string;
 }
@@ -40,7 +40,7 @@ interface MentionSearchEvent {
      */
     trigger: string;
     /**
-     * @todo Write the description
+     * Current query string entered by the user.
      */
     query: string;
 }
@@ -72,7 +72,7 @@ export interface MentionProps extends Omit<React.DetailedHTMLProps<React.Textare
      */
     autoHighlight?: boolean | undefined;
     /**
-     * @todo Write the description
+     * When present, height of textarea changes as being typed.
      */
     autoResize?: boolean | undefined;
     /**
@@ -106,7 +106,7 @@ export interface MentionProps extends Omit<React.DetailedHTMLProps<React.Textare
      */
     inputId?: string | undefined;
     /**
-     * @todo Write the description
+     * Reference of the input element.
      */
     inputRef?: React.Ref<HTMLInputElement> | undefined;
     /**

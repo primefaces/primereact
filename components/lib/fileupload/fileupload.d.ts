@@ -11,103 +11,109 @@ import * as React from 'react';
 import { IconType } from '../utils';
 
 /**
- * @todo Write the documantation
+ * Custom file upload options
+ * @group Misc
  */
 interface FileUploadOptions {
     /**
-     * @todo Write the documantation
+     * Defines the text to display.
      */
     label?: string;
     /**
-     * @todo Write the documantation
+     * Defines the image to display.
      */
     icon?: IconType<FileUploadProps>;
     /**
-     * @todo Write the documantation
+     * Defines whether to display only the icon.
      */
     iconOnly?: boolean;
     /**
-     * @todo Write the documantation
+     * Style class of the component.
      */
     className?: string;
     /**
-     * @todo Write the documantation
+     * Inline style of the component.
      */
     style?: React.CSSProperties;
 }
 
 /**
- * @todo Write the documantation
+ * Custom file upload header options
+ * @group Misc
  */
 interface FileUploadHeaderTemplateOptions {
     /**
-     * @todo Write the documantation
+     * The class name for the header element.
      */
     className: string;
     /**
-     * @todo Write the documantation
+     * The choose button element.
      */
     chooseButton: JSX.Element;
     /**
-     * @todo Write the documantation
+     * The upload button element.
      */
     uploadButton: JSX.Element;
     /**
-     * @todo Write the documantation
+     * The cancel button element.
      */
     cancelButton: JSX.Element;
     /**
-     * @todo Write the documantation
+     * The default element created by the component.
      */
     element: JSX.Element;
     /**
-     * @todo Write the documantation
+     * The props passed to the component.
+     * @type {FileUploadProps}
      */
     props: FileUploadProps;
 }
 
 /**
- * @todo Write the documantation
+ * Custom item template options
+ * @group Misc
  */
 interface ItemTemplateOptions {
     /**
-     * @todo Write the documantation
+     * Callback to invoke when a item template is removed.
+     * @param {React.SyntheticEvent} event - Browser event
      */
     onRemove(event: React.SyntheticEvent): void;
     /**
-     * @todo Write the documantation
+     * Element to display preview of the file.
      */
     previewElement: JSX.Element;
     /**
-     * @todo Write the documantation
+     * Element to display the name of the file.
      */
     fileNameElement: JSX.Element;
     /**
-     * @todo Write the documantation
+     * Element to display the size of the file.
      */
     sizeElement: JSX.Element;
     /**
-     * @todo Write the documantation
+     * Element to display the remove button.
      */
     removeElement: JSX.Element;
     /**
-     * @todo Write the documantation
+     * Formatted string of the file size.
      */
     formatSize: string;
     /**
-     * @todo Write the documantation
+     * Array of files.
      */
     files: File[];
     /**
-     * @todo Write the documantation
+     * Index of the file.
      */
     index: number;
     /**
-     * @todo Write the documantation
+     * Default element created by the component.
      */
     element: JSX.Element;
     /**
-     * @todo Write the documantation
+     * All component props
+     * @type {FileUploadProps}
      */
     props: FileUploadProps;
 }
@@ -137,7 +143,7 @@ interface FileUploadBeforeUploadEvent {
 interface FileUploadBeforeSendEvent extends FileUploadBeforeUploadEvent {}
 
 /**
- * @todo Write the documantation
+ * Custom file upload event.
  */
 interface FileUploadFilesEvent {
     /**
@@ -197,15 +203,17 @@ interface FileUploadProgressEvent {
 }
 
 /**
- * @todo Write the documantation
+ * Custom file upload handler options
+ * @group Misc
  */
 interface FileUploadHandlerOptions {
     /**
-     * @todo Write the documantation
+     * Clears the current files selected for upload.
      */
     clear(): void;
     /**
-     * @todo Write the documantation
+     * All component props
+     * @type {FileUploadProps}
      */
     props: FileUploadProps;
 }
@@ -381,7 +389,7 @@ interface FileUploadProps {
     onBeforeUpload?(event: FileUploadBeforeUploadEvent): void;
     /**
      * Callback to invoke before file send begins to customize the request such as adding headers.
-     * @param {FileUploadBeforeSendEvent} event - @todo Add description
+     * @param {FileUploadBeforeSendEvent} event - Browser event.
      */
     onBeforeSend?(event: FileUploadBeforeSendEvent): void;
     /**
@@ -453,13 +461,13 @@ export declare class FileUpload extends React.Component<FileUploadProps, any> {
      */
     public clear(): void;
     /**
-     * @todo Write the documantation
-     * @param {number} bytes - @todo Write the description
+     * Formats the number of bytes.
+     * @param {number} bytes - Custom size event.
      */
     public formatSize(bytes: number): number;
     /**
-     * @todo Write the documantation
-     * @param {FileUploadSelectEvent} event - @todo Write the description
+     * Handles file selection event and updates.
+     * @param {FileUploadSelectEvent} event - Custom select event.
      */
     public onFileSelect(event: FileUploadSelectEvent): void;
     /**
