@@ -426,7 +426,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>SlideMenu requires a collection of menuitems as its <i>model</i> along with <i>viewportHeight</i> and <i>menuWidth</i>.</p>
+                <p>
+                    SlideMenu requires a collection of menuitems as its <i>model</i> along with <i>viewportHeight</i> and <i>menuWidth</i>.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <SlideMenu model={items} viewportHeight={220} menuWidth={175}></SlideMenu>

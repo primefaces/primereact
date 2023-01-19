@@ -436,7 +436,9 @@ export default function PopupDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Popup mode is enabled by adding <i>popup</i> property and calling <i>toggle</i> method with an event of the target.</p>
+                <p>
+                    Popup mode is enabled by adding <i>popup</i> property and calling <i>toggle</i> method with an event of the target.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <SlideMenu ref={menu} model={items} popup viewportHeight={220} menuWidth={175}></SlideMenu>
