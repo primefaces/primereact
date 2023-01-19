@@ -65,12 +65,12 @@ const SidebarDemo = () => {
         <div>
             <Head>
                 <title>React Sidebar Component</title>
-                <meta name="description" content="Sidebar is a panel component displayed as an overlay." />
+                <meta name="description" content="Sidebar, also known as Drawer, is a container component displayed as an overlay." />
             </Head>
             <div className="content-section introduction">
                 <div>
-                    <h3>Sidebar</h3>
-                    <p>Sidebar is a panel component displayed as an overlay.</p>
+                    <h1>Sidebar</h1>
+                    <p>Sidebar, also known as Drawer, is a container component displayed as an overlay.</p>
                 </div>
                 <DocActions github="sidebar/index.js" />
             </div>

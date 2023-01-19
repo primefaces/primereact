@@ -65,7 +65,7 @@ export function StyleDoc() {
                         </tr>
                         <tr>
                             <td>p-sidebar-content</td>
-                            <td>A content is displayed according to the sidebar position. To use this style, a sidebar must be created inside that content using the appendTo property and this content must have position:"relative" style.</td>
+                            <td>Content of sidebar.</td>
                         </tr>
                         <tr>
                             <td>p-sidebar-mask</td>

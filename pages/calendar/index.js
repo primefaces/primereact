@@ -162,12 +162,12 @@ const CalendarDemo = () => {
         <div>
             <Head>
                 <title>React Calendar Component</title>
-                <meta name="description" content="Calendar also known as DatePicker, is a form component to work with dates." />
+                <meta name="description" content="Calendar, also known as DatePicker, is a form component to work with dates." />
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
                     <h1>Calendar</h1>
-                    <p>Calendar also known as DatePicker, is a form component to work with dates.</p>
+                    <p>Calendar, also known as DatePicker, is a form component to work with dates.</p>
                 </div>
                 <DocActions github="calendar/index.js" />
             </div>
