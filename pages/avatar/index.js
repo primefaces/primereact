@@ -58,21 +58,7 @@ const AvatarDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'propertiesofavatar',
-                    label: 'Properties of Avatar'
-                },
-                {
-                    id: 'propertiesofavatargroup',
-                    label: 'Properties of AvatarGroup'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                }
-            ]
+            component: ApiDoc
         }
     ];
 

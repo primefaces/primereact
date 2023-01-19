@@ -29,21 +29,7 @@ const StyleClassDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'targetelement',
-                    label: 'Target Element'
-                },
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                }
-            ]
+            component: ApiDoc
         }
     ];
 

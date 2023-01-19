@@ -239,25 +239,7 @@ const TreeTableDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'treenodeapi',
-                    label: 'TreeNode API'
-                },
-                {
-                    id: 'columncomponent',
-                    label: 'Column Component'
-                },
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                }
-            ]
+            component: ApiDoc
         }
     ];
 

@@ -39,17 +39,7 @@ const DockDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'menumodelapi',
-                    label: 'MenuModel API'
-                },
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                }
-            ]
+            component: ApiDoc
         }
     ];
 

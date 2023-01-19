@@ -34,25 +34,7 @@ const GMapDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'typescript',
-                    label: 'Typescript'
-                },
-                {
-                    id: 'gmap-api',
-                    label: 'Google Maps API'
-                },
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                }
-            ]
+            component: ApiDoc
         }
     ];
 

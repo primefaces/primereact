@@ -40,13 +40,7 @@ const RippleDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                }
-            ]
+            component: ApiDoc
         }
     ];
 

@@ -87,33 +87,7 @@ const TooltipDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'tooltipproperties',
-                    label: 'Tooltip Options'
-                },
-                {
-                    id: 'globaltooltip',
-                    label: 'Global Tooltip'
-                },
-                {
-                    id: 'customcontent',
-                    label: 'Custom Content'
-                },
-                {
-                    id: 'targetelement',
-                    label: 'Target Element Options'
-                },
-                {
-                    id: 'tooltipcomponent',
-                    label: 'Tooltip Component Properties'
-                },
-                {
-                    id: 'methods',
-                    label: 'Methods'
-                }
-            ]
+            component: ApiDoc
         }
     ];
 

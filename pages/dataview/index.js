@@ -39,37 +39,7 @@ const DataViewDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'propertiesofdataviewlayout',
-                    label: 'Properties of DataViewLayoutOptions'
-                },
-                {
-                    id: 'eventsofdataview',
-                    label: 'Events of DataViewLayoutOptions'
-                },
-                {
-                    id: 'paginator',
-                    label: 'Paginator'
-                },
-                {
-                    id: 'sorting',
-                    label: 'Sorting'
-                },
-                {
-                    id: 'lazyloading',
-                    label: 'Lazy Loading'
-                },
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                }
-            ]
+            component: ApiDoc
         }
     ];
 

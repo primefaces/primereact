@@ -87,25 +87,7 @@ const SplitButtonDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'menumodelapi',
-                    label: 'MenuModel'
-                },
-                {
-                    id: 'severity',
-                    label: 'Severity'
-                },
-                {
-                    id: 'raisedrounded',
-                    label: 'Raised and Rounded Buttons'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                }
-            ]
+            component: ApiDoc
         }
     ];
 

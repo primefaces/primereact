@@ -58,17 +58,7 @@ const BadgeDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'severities',
-                    label: 'Severities'
-                },
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                }
-            ]
+            component: ApiDoc
         }
     ];
 

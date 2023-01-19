@@ -119,25 +119,7 @@ const TreeDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'treenodeapi',
-                    label: 'TreeNode API'
-                },
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'event',
-                    label: 'Events'
-                },
-                {
-                    id: 'methods',
-                    label: 'Methods'
-                }
-            ]
+            component: ApiDoc
         }
     ];
 

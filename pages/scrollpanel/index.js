@@ -39,17 +39,7 @@ const ScrollPanelDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'methods',
-                    label: 'Methods'
-                }
-            ]
+            component: ApiDoc
         }
     ];
 
