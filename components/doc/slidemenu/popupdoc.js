@@ -132,6 +132,7 @@ export function PopupDoc(props) {
             icon: 'pi pi-fw pi-power-off'
         }
     ];
+
     const code = {
         basic: `
 <SlideMenu ref={menu} model={items} popup viewportHeight={220} menuWidth={175}></SlideMenu>
@@ -142,7 +143,7 @@ import React, { useRef } from 'react';
 import { SlideMenu } from 'primereact/slidemenu';
 import { Button } from 'primereact/button';
 
-export default function PopupDoc() {
+export default function PopupDemo() {
     const menu = useRef(null);
     const items = [
         {
@@ -276,7 +277,7 @@ export default function PopupDoc() {
     ];
 
     return (
-        <div>
+        <div className="card flex justify-content-center">
             <SlideMenu ref={menu} model={items} popup viewportHeight={220} menuWidth={175}></SlideMenu>
             <Button type="button" icon="pi pi-bars" label="Show" onClick={(event) => menu.current.toggle(event)}></Button>
         </div>
@@ -287,10 +288,11 @@ export default function PopupDoc() {
 import React, { useRef } from 'react';
 import { SlideMenu } from 'primereact/slidemenu';
 import { Button } from 'primereact/button';
+import { MenuItem } from 'primereact/menuitem';
 
-export default function PopupDoc() {
+export default function PopupDemo() {
     const menu = useRef(null);
-    const items = [
+    const items: MenuItem[] = [
         {
             label:'File',
             icon:'pi pi-fw pi-file',
@@ -422,7 +424,7 @@ export default function PopupDoc() {
     ];
 
     return (
-        <div>
+        <div className="card flex justify-content-center">
             <SlideMenu ref={menu} model={items} popup viewportHeight={220} menuWidth={175}></SlideMenu>
             <Button type="button" icon="pi pi-bars" label="Show" onClick={(event) => menu.current.toggle(event)}></Button>
         </div>
@@ -434,7 +436,7 @@ export default function PopupDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>SlideMenu is inline by default whereas popup mode is supported by enabling popup property and calling toggle method with an event of the target.</p>
+                <p>Popup mode is enabled by adding <i>popup</i> property and calling <i>toggle</i> method with an event of the target.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <SlideMenu ref={menu} model={items} popup viewportHeight={220} menuWidth={175}></SlideMenu>
