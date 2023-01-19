@@ -25,53 +25,51 @@ export function AdvancedDoc(props) {
     const galleria = useRef(null);
 
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
-
-    const imgErrorPath = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png';
     const imgPath = contextPath + '/images/dock';
 
     const dockItems = [
         {
             label: 'Finder',
-            icon: () => <img alt="Finder" src={`${imgPath}/finder.svg`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
+            icon: () => <img alt="Finder" src={`${imgPath}/finder.svg`} width="100%" />,
             command: () => {
                 setDisplayFinder(true);
             }
         },
         {
             label: 'Terminal',
-            icon: () => <img alt="Finder" src={`${imgPath}/terminal.svg`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
+            icon: () => <img alt="Finder" src={`${imgPath}/terminal.svg`} width="100%" />,
             command: () => {
                 setDisplayTerminal(true);
             }
         },
         {
             label: 'App Store',
-            icon: () => <img alt="App Store" src={`${imgPath}/appstore.svg`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
+            icon: () => <img alt="App Store" src={`${imgPath}/appstore.svg`} width="100%" />,
             command: () => {
                 toast2.current.show({ severity: 'error', summary: 'An unexpected error occurred while signing in.', detail: 'UNTRUSTED_CERT_TITLE' });
             }
         },
         {
             label: 'Safari',
-            icon: () => <img alt="Finder" src={`${imgPath}/safari.svg`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
+            icon: () => <img alt="Finder" src={`${imgPath}/safari.svg`} width="100%" />,
             command: () => {
                 toast2.current.show({ severity: 'warn', summary: 'Safari has stopped working' });
             }
         },
         {
             label: 'Photos',
-            icon: () => <img alt="Photos" src={`${imgPath}/photos.svg`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
+            icon: () => <img alt="Photos" src={`${imgPath}/photos.svg`} width="100%" />,
             command: () => {
                 galleria.current.show();
             }
         },
         {
             label: 'GitHub',
-            icon: () => <img alt="Settings" src={`${imgPath}/github.svg`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
+            icon: () => <img alt="Settings" src={`${imgPath}/github.svg`} width="100%" />
         },
         {
             label: 'Trash',
-            icon: () => <img alt="trash" src={`${imgPath}/trash.png`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
+            icon: () => <img alt="trash" src={`${imgPath}/trash.png`} width="100%" />,
             command: () => {
                 toast.current.show({ severity: 'info', summary: 'Empty Trash' });
             }
@@ -323,51 +321,51 @@ export default function AdvanceDemo() {
     const toast2 = useRef(null);
     const galleria = useRef(null);
 
-    const imgErrorPath = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png';
+    const imgErrorPath = 'https://www.primefaces.org/cdn/images/placeholder.png';
 
     const dockItems = [
         {
             label: 'Finder',
-            icon: () => <img alt="Finder" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />,
+            icon: () => <img alt="Finder" onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
             command: () => {
                 setDisplayFinder(true);
             }
         },
         {
             label: 'Terminal',
-            icon: () => <img alt="Finder" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />,
+            icon: () => <img alt="Finder" onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
             command: () => {
                 setDisplayTerminal(true);
             }
         },
         {
             label: 'App Store',
-            icon: () => <img alt="App Store" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />,
+            icon: () => <img alt="App Store" onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
             command: () => {
                 toast2.current.show({ severity: 'error', summary: 'An unexpected error occurred while signing in.', detail: 'UNTRUSTED_CERT_TITLE' });
             }
         },
         {
             label: 'Safari',
-            icon: () => <img alt="Finder" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />,
+            icon: () => <img alt="Finder" onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
             command: () => {
                 toast2.current.show({ severity: 'warn', summary: 'Safari has stopped working' });
             }
         },
         {
             label: 'Photos',
-            icon: () => <img alt="Photos" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />,
+            icon: () => <img alt="Photos" onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
             command: () => {
                 galleria.current.show();
             }
         },
         {
             label: 'GitHub',
-            icon: () => <img alt="Settings" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />
+            icon: () => <img alt="Settings" onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
         },
         {
             label: 'Trash',
-            icon: () => <img alt="trash" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />,
+            icon: () => <img alt="trash" onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
             command: () => {
                 toast.current.show({ severity: 'info', summary: 'Empty Trash' });
             }
@@ -513,7 +511,7 @@ export default function AdvanceDemo() {
     ];
 
     const itemTemplate = (item) => {
-        return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+        return <img src={item.itemImageSrc} onError={(e) => (e.target.src = imgErrorPath)} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
     };
 
     const commandHandler = (text) => {
@@ -623,51 +621,51 @@ export default function AdvanceDemo() {
     const toast2 = useRef<Toast>(null);
     const galleria = useRef<Galleria>(null);
 
-    const imgErrorPath = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png';
+    const imgErrorPath = 'https://www.primefaces.org/cdn/images/placeholder.png';
 
     const dockItems: MenuItem[] = [
         {
             label: 'Finder',
-            icon: () => <img alt="Finder" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />,
+            icon: () => <img alt="Finder" onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
             command: () => {
                 setDisplayFinder(true);
             }
         },
         {
             label: 'Terminal',
-            icon: () => <img alt="Finder" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />,
+            icon: () => <img alt="Finder" onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
             command: () => {
                 setDisplayTerminal(true);
             }
         },
         {
             label: 'App Store',
-            icon: () => <img alt="App Store" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />,
+            icon: () => <img alt="App Store" onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
             command: () => {
                 toast2.current.show({ severity: 'error', summary: 'An unexpected error occurred while signing in.', detail: 'UNTRUSTED_CERT_TITLE' });
             }
         },
         {
             label: 'Safari',
-            icon: () => <img alt="Finder" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />,
+            icon: () => <img alt="Finder" onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
             command: () => {
                 toast2.current.show({ severity: 'warn', summary: 'Safari has stopped working' });
             }
         },
         {
             label: 'Photos',
-            icon: () => <img alt="Photos" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />,
+            icon: () => <img alt="Photos" onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
             command: () => {
                 galleria.current.show();
             }
         },
         {
             label: 'GitHub',
-            icon: () => <img alt="Settings" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />
+            icon: () => <img alt="Settings" onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
         },
         {
             label: 'Trash',
-            icon: () => <img alt="trash" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="100%" />,
+            icon: () => <img alt="trash" onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
             command: () => {
                 toast.current.show({ severity: 'info', summary: 'Empty Trash' });
             }
@@ -981,7 +979,6 @@ export default function AdvanceDemo() {
     };
     `,
             data: `
-
 /* NodeService */
 {
     key: '0',
@@ -1025,11 +1022,10 @@ export default function AdvanceDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>AdvanceDoc</p>
+                <p>A sample macOS implementation using various components.</p>
             </DocSectionText>
             <div className="card">
                 <Tooltip className="dark-tooltip" target=".dock-advanced .p-dock-action" my="center+15 bottom-15" at="center top" showDelay={150} />
-
                 <Menubar model={menubarItems} start={start} end={end} />
                 <div className="dock-window dock-advanced" style={{ backgroundImage: `url(${contextPath}/images/dock/window.jpg)` }}>
                     <Toast ref={toast} />
