@@ -508,6 +508,10 @@ interface ColumnFilterMatchModeOptions {
     [key: string]: string;
 }
 
+/**
+ * Defines valid properties in ColumnProps component.
+ * @group Properties
+ */
 export interface ColumnProps {
     /**
      * Aligns the content of the column, valid values are left, right and center.
