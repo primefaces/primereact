@@ -11,15 +11,16 @@ import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 
 /**
- * @todo Write the documantation
+ * Custom galleria responsive options
+ * @group Misc
  */
 interface GalleriaResponsiveOptions {
     /**
-     * @todo Write the documantation
+     * Breakpoint for this responsive option.
      */
     breakpoint: string;
     /**
-     * @todo Write the documantation
+     * Number of visible items.
      */
     numVisible: number;
 }
@@ -57,28 +58,25 @@ export interface GalleriaProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
     fullScreen?: boolean | undefined;
     /**
      * Function that gets an item in the value and returns the content for preview item.
-     * @param {any} item
-     * @todo Write documentation to item param
+     * @param {*} item - Current item.
      */
     item?(item: any): React.ReactNode | undefined;
     /**
      * Function that gets an item in the value and returns the content for thumbnail item.
-     * @param {any} item
-     * @todo Write documentation to item param
+     * @param {*} item - Current thumbnail item.
      */
     thumbnail?(item: any): React.ReactNode | undefined;
     /**
      * Function that gets an item in the value and returns the content for indicator item.
-     * @param {number} index
-     * @todo Write documentation to index param
+     * @param {number} index - Index of the indicator.
      */
     indicator?(index: number): React.ReactNode | undefined;
     /**
-     * Label of header.
+     * Custom header template.
      */
     header?: React.ReactNode | undefined;
     /**
-     * Label of footer.
+     * Custom footer template.
      */
     footer?: React.ReactNode | undefined;
     /**
@@ -127,8 +125,7 @@ export interface GalleriaProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
     transitionInterval?: number | undefined;
     /**
      * Function that gets an item in the value and returns the content for caption item.
-     * @param {any} item
-     * @todo Write documentation to item param
+     * @param {*} item - Browser event.
      */
     caption?(item: any): React.ReactNode | undefined;
     /**
@@ -198,15 +195,15 @@ export declare class Galleria extends React.Component<GalleriaProps, any> {
      */
     public hide(): void;
     /**
-     * @todo Write the documentation.
+     * Whether auto-play feature is currently active.
      */
     public isAutoPlayActive(): boolean;
     /**
-     * @todo Write the documentation.
+     * Used to start the slideshow.
      */
     public startSlideShow(): void;
     /**
-     * @todo Write the documentation.
+     * Used to stop the slideshow.
      */
     public stopSlideShow(): void;
     /**

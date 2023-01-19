@@ -69,14 +69,16 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Sidebar is used as a container and visibility is controlled with a binding to <i>visible</i> and <i>onHide</i> event callback.</p>
+                <p>
+                    Sidebar is used as a container and visibility is controlled with a binding to <i>visible</i> and <i>onHide</i> event callback.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Sidebar visible={visible} onHide={() => setVisible(false)}>
                     <h2>Sidebar</h2>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat.
                     </p>
                 </Sidebar>
                 <Button icon="pi pi-arrow-right" onClick={() => setVisible(true)} />

@@ -25,61 +25,66 @@ interface DataViewPageEvent {
      */
     rows: number;
     /**
-     * @todo Write the documentation
+     * Value of the new page.
      */
     page: number;
     /**
-     * @todo Write the documentation
+     * Total number of pages.
      */
     pageCount: number;
 }
 
 /**
- * @todo Write the documentation
+ * Custom data view layout options event.
  */
 interface DataViewLayoutOptionsChangeEvent {
     /**
-     * @todo Write the documentation
+     * Browser event.
      */
     originalEvent: React.MouseEvent<HTMLButtonElement>;
     /**
-     * @todo Write the documentation
+     * New value.
      */
     value: 'list' | 'grid' | (string & Record<string, unknown>);
 }
 
 /**
- * @todo Write the documentation
+ * Custom data view layout options props
+ * @group Misc
  */
 export interface DataViewLayoutOptionsProps {
     /**
-     * @todo Write the documentation
+     * Unique identifier of the element.
      */
     id?: string;
     /**
-     * @todo Write the documentation
+     * Orientation of the panels, valid values are "list" and "grid".
      */
     layout?: 'list' | 'grid' | (string & Record<string, unknown>);
     /**
-     * @todo Write the documentation
+     * Inline style of the element.
      */
     style?: React.CSSProperties;
     /**
-     * @todo Write the documentation
+     * Style class of the element.
      */
     className?: string;
     /**
-     * @todo Write the documentation
+     * Layout options change callback
+     * @param {DataViewLayoutOptionsChangeEvent} event - Custom event.
      */
     onChange(event: DataViewLayoutOptionsChangeEvent): void;
     /**
-     * @todo Write the documentation
+     * Used to get the child elements of the component.
+     * @readonly
      */
-    children?: React.ReactNode;
+    children?: React.ReactNode | undefined;
 }
 
 /**
- * @todo Write the documentation
+ * Custom data view layout options
+ * @group Misc
+ * @extends {React.Component<DataViewLayoutOptionsProps, any>}
  */
 export declare class DataViewLayoutOptions extends React.Component<DataViewLayoutOptionsProps, any> {}
 
@@ -192,11 +197,11 @@ export interface DataViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      */
     lazy?: boolean | undefined;
     /**
-     * @todo Write the documentation.
+     * Display loading icon of the button.
      */
     loading?: boolean | undefined;
     /**
-     * @todo Write the documentation.
+     * Name of the loading icon or JSX.Element for loading icon.
      */
     loadingIcon?: string | undefined;
     /**
@@ -211,8 +216,8 @@ export interface DataViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
     onPage?(event: DataViewPageEvent): void;
     /**
      * Function that gets the option along with the layout mdoe and returns the content.
-     * @param {any} item - @todo Write the documentation.
-     * @param {string} layout - @todo Write the documentation.
+     * @param {*} item - Current item.
+     * @param {'list' | 'grid' | (string & Record<string, unknown>)} layout - Current layout.
      */
     itemTemplate?(item: any, layout: 'list' | 'grid' | (string & Record<string, unknown>)): React.ReactNode;
     /**
