@@ -48,6 +48,7 @@ interface ChipsAddEvent {
 
 /**
  * Custom remove event
+ * @event
  */
 interface ChipsRemoveEvent {
     /**

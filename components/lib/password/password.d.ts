@@ -14,25 +14,25 @@ import { KeyFilterType } from '../keyfilter/keyfilteroptions';
 import TooltipOptions from '../tooltip/tooltipoptions';
 
 /**
- * @todo Write the documentation.
+ * Custom icon event
  * @see {@link PasswordProps.icon}
  * @event
  */
 interface PasswordIconEvent {
     /**
-     * @todo Write the documentation.
+     * Click event for the default element.
      */
     onClick(): void;
     /**
-     * @todo Write the documentation.
+     * Style class of the default element.
      */
     className: string;
     /**
-     * @todo Write the documentation.
+     * Default element created by the component.
      */
     element: JSX.Element;
     /**
-     * @todo Write the documentation.
+     * All component props.
      */
     props: PasswordProps;
 }
@@ -47,7 +47,7 @@ export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     inputId?: string | undefined;
     /**
-     * @todo Write the documentation.
+     * Reference of the input element.
      */
     inputRef?: React.Ref<HTMLInputElement> | undefined;
     /**
@@ -144,9 +144,9 @@ export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     transitionOptions?: CSSTransitionProps | undefined;
     /**
-     * @todo Write the documentation.
-     * @param {React.FormEvent<HTMLInputElement>} event - @todo Write the documentation.
-     * @param {boolean} validatePattern - @todo Write the documentation.
+     * Callback to invoke on input event of input field.
+     * @param {React.FormEvent<HTMLInputElement>} event - Browser event
+     * @param {boolean} validatePattern - Whether to validate the value
      */
     onInput?(event: React.FormEvent<HTMLInputElement>, validatePattern: boolean): void;
     /**

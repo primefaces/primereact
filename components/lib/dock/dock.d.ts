@@ -11,20 +11,22 @@ import * as React from 'react';
 import { MenuItem } from '../menuitem';
 
 /**
- * @todo Write the documentation
+ * Custom header template
+ * @see {@link DockProps.header}
+ * @group Misc
  */
 interface DockHeaderTemplateOptions {
     /**
-     * @todo Check if this description is correct.
-     * Options of the custom header template.
-     * @param {DockProps} props Properties of Dock component.
+     * All component props
      */
     props: DockProps;
 }
 
 /**
- * @todo Write the documentation
+ * Custom footer template
+ * @see {@link DockProps.footer}
  * @extends {DockHeaderTemplateOptions}
+ * @group Misc
  */
 interface DockFooterTemplateOptions extends DockHeaderTemplateOptions {}
 

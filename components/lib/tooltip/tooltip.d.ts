@@ -25,7 +25,7 @@ export interface TooltipProps extends TooltipOptions {
      */
     target?: string | string[] | HTMLElement | undefined;
     /**
-     * @todo Write the documantation
+     * Content to be displayed in tooltip.
      */
     content?: string | undefined;
     /**

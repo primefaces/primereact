@@ -39,10 +39,19 @@ interface DropdownFilterEvent {
 }
 
 /**
- * @todo
+ * Custom filter options
+ * @see {@link DropdownProps.filterTemplate}
+ * @group Misc
  */
 interface DropdownFilterOptions {
-    filter?: (event?: KeyboardEvent) => void;
+    /**
+     * Used to filter options
+     * @param {React.KeyboardEvent<HTMLElement>} event - Browser event
+     */
+    filter?: (event?: React.KeyboardEvent<HTMLElement>) => void;
+    /**
+     * Used to reset the filtered options
+     */
     reset?: () => void;
 }
 
@@ -61,7 +70,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     ariaLabel?: string | undefined;
     /**
-     * Contains the element IDs of labels.
+     * Establishes relationships between the component and label(s) where its value should be one or more element IDs.
      */
     ariaLabelledBy?: string | undefined;
     /**

@@ -386,7 +386,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>PanelMenu requires a collection of menuitems as its <i>model</i>.</p>
+                <p>
+                    PanelMenu requires a collection of menuitems as its <i>model</i>.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <PanelMenu model={items} className="w-full md:w-25rem" />

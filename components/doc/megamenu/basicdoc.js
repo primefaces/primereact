@@ -379,7 +379,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>MegaMenu requires a collection of menuitems as its <i>model</i>.</p>
+                <p>
+                    MegaMenu requires a collection of menuitems as its <i>model</i>.
+                </p>
             </DocSectionText>
             <div className="card">
                 <MegaMenu model={items} />

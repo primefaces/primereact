@@ -12,47 +12,51 @@ import { CSSTransitionProps } from '../csstransition';
 import { IconType } from '../utils';
 
 /**
- * @todo Write the documantation
+ * Custom confirm popup options
+ * @group Misc
  */
 interface ConfirmPopupOptions {
     /**
-     * @todo Write the documantation
+     * Callback to execute when action is confirmed.
      */
     accept(): void;
     /**
-     * @todo Write the documantation
+     * Callback to execute when action is rejected.
      */
     reject(): void;
     /**
-     * @todo Write the documantation
+     * Style class of the component.
      */
     className: string;
     /**
-     * @todo Write the documantation
+     * Style class of the accept button.
      */
     acceptClassName: string;
     /**
-     * @todo Write the documantation
+     * Style class of the reject button.
      */
     rejectClassName: string;
     /**
-     * @todo Write the documantation
+     * Label of the accept button.
+     * @defaultValue Yes
      */
     acceptLabel: string;
     /**
-     * @todo Write the documantation
+     * Label of the reject button.
+     * @defaultValue No
      */
     rejectLabel: string;
     /**
-     * @todo Write the documantation
+     * Default element created by the component.
      */
     element: React.ReactNode;
     /**
-     * @todo Write the documantation
+     * All component props
+     * @type {ConfirmPopupProps}
      */
     props: ConfirmPopupProps;
     /**
-     * @todo Write the documantation
+     * Extra options
      */
     [key: string]: any;
 }
@@ -63,11 +67,11 @@ interface ConfirmPopupOptions {
  */
 export interface ConfirmPopupProps {
     /**
-     * @todo Write the documantation
+     * Unique tag key used to separate the confirmPopup components in the page.
      */
     tagKey?: string | undefined;
     /**
-     * @todo Write the documantation
+     * Target element to align the popup.
      */
     target?: HTMLElement | undefined;
     /**
@@ -159,7 +163,8 @@ export interface ConfirmPopupProps {
 }
 
 /**
- * @todo Write the documentation.
+ * Object returned by the {@link confirmPopup} method.
+ * @group Misc
  */
 interface ConfirmPopupReturn {
     /**
@@ -177,8 +182,8 @@ interface ConfirmPopupReturn {
  */
 export declare class ConfirmPopup extends React.Component<ConfirmPopupProps, any> {
     /**
-     * @todo Write the documentation.
-     * @param {ConfirmPopupProps} props
+     * Used to call/update the component manually
+     * @param {ConfirmPopupProps} props - All component props
      */
     public confirm(props?: ConfirmPopupProps): void;
 }

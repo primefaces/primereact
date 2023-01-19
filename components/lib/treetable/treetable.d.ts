@@ -8,7 +8,7 @@
  *
  */
 import * as React from 'react';
-import { ColumnFilterMatchModeType, ColumnProps } from '../column';
+import { ColumnProps } from '../column';
 import { PaginatorTemplate } from '../paginator';
 import TreeNode from '../treenode';
 
@@ -267,7 +267,7 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
      * Defines filterMatchMode; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "lt", "lte", "gt", "gte" and "custom".
      * @defaultValue contains
      */
-    globalFilterMatchMode?: ColumnFilterMatchModeType;
+    globalFilterMatchMode?: 'startsWith' | 'contains' | 'notContains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'between' | 'dateIs' | 'dateIsNot' | 'dateBefore' | 'dateAfter' | 'custom' | undefined;
     /**
      * Header content of the table.
      */

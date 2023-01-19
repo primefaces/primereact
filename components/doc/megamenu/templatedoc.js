@@ -393,7 +393,9 @@ export default function TemplateDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Custom content can be placed inside the megamenu using the <i>start</i> and <i>end</i> properties.</p>
+                <p>
+                    Custom content can be placed inside the megamenu using the <i>start</i> and <i>end</i> properties.
+                </p>
             </DocSectionText>
             <div className="card">
                 <MegaMenu model={items} orientation="horizontal" start={start} end={end} />

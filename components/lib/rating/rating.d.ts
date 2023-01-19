@@ -9,53 +9,16 @@
  */
 import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
+import { FormEvent } from '../ts-helpers';
 import { IconType } from '../utils';
-
-/**
- * @todo Write the documentation.
- */
-interface RatingChangeTargetOptions {
-    /**
-     * @todo Write the documentation.
-     */
-    name: string;
-    /**
-     * @todo Write the documentation.
-     */
-    id: string;
-    /**
-     * @todo Write the documentation.
-     */
-    value: number | undefined | null;
-}
 
 /**
  * Custom change event.
  * @see {@link RatingProps.onChange}
+ * @extends {FormEvent}
  * @event
  */
-interface RatingChangeEvent {
-    /**
-     * Browser event
-     */
-    originalEvent: React.SyntheticEvent;
-    /**
-     * Selected value
-     */
-    value: number | undefined | null;
-    /**
-     * @todo Write the documentation.
-     */
-    stopPropagation(): void;
-    /**
-     * @todo Write the documentation.
-     */
-    preventDefault(): void;
-    /**
-     * @todo Write the documentation.
-     */
-    target: RatingChangeTargetOptions;
-}
+interface RatingChangeEvent extends FormEvent<number> {}
 
 /**
  * Defines valid properties in Rating component. In addition to these, all properties of HTMLDivElement can be used in this component.
