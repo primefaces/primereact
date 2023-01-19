@@ -4,10 +4,10 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { BasicDoc } from '../../components/doc/panelmenu/basicdoc';
 import { ImportDoc } from '../../components/doc/panelmenu/importdoc';
+import { MultipleDoc } from '../../components/doc/panelmenu/multipledoc';
 import { ApiDoc } from '../../components/doc/panelmenu/apidoc';
 import { AccessibilityDoc } from '../../components/doc/panelmenu/accessibilitydoc';
 import { StyleDoc } from '../../components/doc/panelmenu/styledoc';
-import { ControlledDoc } from '../../components/doc/panelmenu/controlleddoc';
 
 const PanelMenuDemo = () => {
     const docs = [
@@ -22,9 +22,9 @@ const PanelMenuDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'controlled',
-            label: 'Controlled',
-            component: ControlledDoc
+            id: 'multiple',
+            label: 'Multiple',
+            component: MultipleDoc
         },
         {
             id: 'style',

@@ -2,7 +2,7 @@ import { PanelMenu } from '../../lib/panelmenu/PanelMenu';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function ControlledDoc(props) {
+export function MultipleDoc(props) {
     const items = [
         {
             label: 'File',
@@ -121,13 +121,13 @@ export function ControlledDoc(props) {
     ];
     const code = {
         basic: `
-<PanelMenu multiple model={items} style={{ width: '22rem' }}/>        
+<PanelMenu model={items} className="w-full md:w-25rem" />   
 `,
         javascript: `
 import React from 'react'; 
 import { PanelMenu } from 'primereact/panelmenu';
 
-export default function ControlledDoc() {
+export default function MultipleDemo() {
     const items = [
         {
             label:'File',
@@ -246,16 +246,19 @@ export default function ControlledDoc() {
     ];
 
     return (
-        <PanelMenu multiple model={items} style={{ width: '22rem' }}/>
+        <div className="card flex justify-content-center">
+            <PanelMenu model={items} className="w-full md:w-25rem" />
+        </div>
     )
 }
         `,
         typescript: `
 import React from 'react'; 
 import { PanelMenu } from 'primereact/panelmenu';
+import { MenuItem } from 'primereact/menuitem';
 
-export default function ControlledDoc() {
-    const items = [
+export default function MultipleDemo() {
+    const items: MenuItem[] = [
         {
             label:'File',
             icon:'pi pi-fw pi-file',
@@ -372,7 +375,9 @@ export default function ControlledDoc() {
         }
     ];
     return (
-        <PanelMenu multiple model={items} style={{ width: '22rem' }}/>
+        <div className="card flex justify-content-center">
+            <PanelMenu model={items} className="w-full md:w-25rem" />
+        </div>
     )
 }
         `
@@ -381,11 +386,10 @@ export default function ControlledDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                {/* TO DO: Add demo content. */}
-                <p></p>
+                <p>Only one single root menuitem can be active by default, enable <i>multiple</i> property to be able to open more than one items.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <PanelMenu multiple model={items} style={{ width: '22rem' }} />
+                <PanelMenu model={items} className="w-full md:w-25rem" multiple />
             </div>
             <DocSectionCode code={code} />
         </>
