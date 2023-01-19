@@ -127,7 +127,7 @@ export function BasicDoc(props) {
 import React from 'react'; 
 import { MegaMenu } from 'primereact/megamenu';
 
-export default function BasicDoc() {
+export default function BasicDemo() {
     const items = [
         {
             label: 'Videos', icon: 'pi pi-fw pi-video',
@@ -242,16 +242,19 @@ export default function BasicDoc() {
     ];
 
     return (
-        <MegaMenu model={items} />
+        <div className="card">
+            <MegaMenu model={items} />
+        </div>
     )
 }
         `,
         typescript: `
 import React from 'react'; 
 import { MegaMenu } from 'primereact/megamenu';
+import { MenuItem } from 'primereact/menuitem';
 
-export default function BasicDoc() {
-    const items = [
+export default function BasicDemo() {
+    const items: MenuItem[] = [
         {
             label: 'Videos', icon: 'pi pi-fw pi-video',
             items: [
@@ -365,7 +368,9 @@ export default function BasicDoc() {
     ];
 
     return (
-        <MegaMenu model={items} />
+        <div className="card">
+            <MegaMenu model={items} />
+        </div>
     )
 }
         `
@@ -374,9 +379,9 @@ export default function BasicDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Default orientation is "horizontal" with "vertical" as the alternative.</p>
+                <p>MegaMenu requires a collection of menuitems as its <i>model</i>.</p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
+            <div className="card">
                 <MegaMenu model={items} />
             </div>
             <DocSectionCode code={code} />
