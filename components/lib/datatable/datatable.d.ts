@@ -8,7 +8,7 @@
  *
  */
 import * as React from 'react';
-import { Column, ColumnFilterMatchModeType, ColumnProps } from '../column';
+import { Column, ColumnProps } from '../column';
 import { PaginatorTemplate } from '../paginator';
 import { VirtualScroller, VirtualScrollerProps } from '../virtualscroller/virtualscroller';
 
@@ -741,7 +741,7 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      * Defines filterMatchMode; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "lt", "lte", "gt", "gte" and "custom".
      * @defaultValue contains
      */
-    globalFilterMatchMode?: ColumnFilterMatchModeType | undefined;
+    globalFilterMatchMode?: 'startsWith' | 'contains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'custom' | undefined;
     /**
      * @todo Write the description
      */

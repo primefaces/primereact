@@ -379,7 +379,9 @@ export default function VerticalDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Layout of the MegaMenu is changed with the <i>orientation</i> property that accepts <i>horizontal</i> and <i>vertical</i> as options.</p>
+                <p>
+                    Layout of the MegaMenu is changed with the <i>orientation</i> property that accepts <i>horizontal</i> and <i>vertical</i> as options.
+                </p>
             </DocSectionText>
             <div className="card">
                 <MegaMenu model={items} orientation="vertical" />
