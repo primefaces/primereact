@@ -58,7 +58,7 @@ export default function ToggleableDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Content of the fieldset can be expanded and collapsed when <i>toggleable</i> option is enabled. A toggleable fieldset can either be used as a Controlled or Uncontrolled component. In controlled mode a binding to <i>collapsed</i>{' '}
+                    Content of the fieldset can be expanded and collapsed when <i>toggleable</i> option is enabled. A toggleable fieldset can either be used as a Controlled or Uncontrolled component. In controlled mode a binding to <i>collapsed</i>
                     property along with <i>onToggle</i> event are needed to manage the content state.
                 </p>
             </DocSectionText>

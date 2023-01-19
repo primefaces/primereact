@@ -16,11 +16,7 @@ export function ControlledDoc(props) {
 
     const code = {
         basic: `
-<div className="pt-2 pb-4">
-    <Button onClick={() => setActiveIndex(0)} className="p-button-text" label="Activate 1st" />
-    <Button onClick={() => setActiveIndex(1)} className="p-button-text" label="Activate 2nd" />
-    <Button onClick={() => setActiveIndex(2)} className="p-button-text" label="Activate 3rd" />
-</div>
+<Button onClick={() => setActiveIndex(0)} className="p-button-outlined mb-5" label="Activate 1st" />
 <TabMenu model={items} activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)} />
         `,
         javascript: `
@@ -28,7 +24,7 @@ import React, { useState } from 'react';
 import { Button } from 'primereact/button';
 import { TabMenu } from 'primereact/tabmenu';
 
-export default function ControlledDoc() {
+export default function ControlledDemo() {
     const [activeIndex, setActiveIndex] = useState(3);
     const items = [
         {label: 'Home', icon: 'pi pi-fw pi-home'},
@@ -39,13 +35,8 @@ export default function ControlledDoc() {
     ];
 
     return (
-        <div>
-            <div className="pt-2 pb-4">
-                <Button onClick={() => setActiveIndex(0)} className="p-button-text" label="Activate 1st" />
-                <Button onClick={() => setActiveIndex(1)} className="p-button-text" label="Activate 2nd" />
-                <Button onClick={() => setActiveIndex(2)} className="p-button-text" label="Activate 3rd" />
-            </div>
-
+        <div className="card">
+            <Button onClick={() => setActiveIndex(0)} className="p-button-outlined mb-5" label="Activate 1st" />
             <TabMenu model={items} activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)} />
         </div>
     )
@@ -55,10 +46,11 @@ export default function ControlledDoc() {
 import React, { useState } from 'react';
 import { Button } from 'primereact/button';
 import { TabMenu } from 'primereact/tabmenu';
+import { MenuItem } from 'primereact/menuitem';
 
-export default function ControlledDoc() {
-    const [activeIndex, setActiveIndex] = useState(3);
-    const items = [
+export default function ControlledDemo() {
+    const [activeIndex, setActiveIndex] = useState<number>(3);
+    const items: MenuItem[] = [
         {label: 'Home', icon: 'pi pi-fw pi-home'},
         {label: 'Calendar', icon: 'pi pi-fw pi-calendar'},
         {label: 'Edit', icon: 'pi pi-fw pi-pencil'},
@@ -67,13 +59,8 @@ export default function ControlledDoc() {
     ];
 
     return (
-        <div>
-            <div className="pt-2 pb-4">
-                <Button onClick={() => setActiveIndex(0)} className="p-button-text" label="Activate 1st" />
-                <Button onClick={() => setActiveIndex(1)} className="p-button-text" label="Activate 2nd" />
-                <Button onClick={() => setActiveIndex(2)} className="p-button-text" label="Activate 3rd" />
-            </div>
-
+        <div className="card">
+            <Button onClick={() => setActiveIndex(0)} className="p-button-outlined mb-5" label="Activate 1st" />
             <TabMenu model={items} activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)} />
         </div>
     )
@@ -84,17 +71,10 @@ export default function ControlledDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    In controlled mode, <i>activeIndex</i> and <i>onTabChange</i> properties must be defined along with the model.
-                </p>
+                <p>In controlled mode, a binding to <i>activeIndex</i> property along with <i>onTabChange</i> event are needed to manage the active item.</p>
             </DocSectionText>
             <div className="card">
-                <div className="pt-2 pb-4">
-                    <Button onClick={() => setActiveIndex(0)} className="p-button-text" label="Activate 1st" />
-                    <Button onClick={() => setActiveIndex(1)} className="p-button-text" label="Activate 2nd" />
-                    <Button onClick={() => setActiveIndex(2)} className="p-button-text" label="Activate 3rd" />
-                </div>
-
+                <Button onClick={() => setActiveIndex(0)} className="p-button-outlined mb-5" label="Activate 1st" />
                 <TabMenu model={items} activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)} />
             </div>
             <DocSectionCode code={code} />
