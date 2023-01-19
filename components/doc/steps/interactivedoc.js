@@ -130,7 +130,9 @@ export default function InteractiveDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>In order to add interactivity to the component, disable <i>readOnly</i> and use a binding to <i>activeIndex</i> along with <i>onSelect</i> to control the Steps.</p>
+                <p>
+                    In order to add interactivity to the component, disable <i>readOnly</i> and use a binding to <i>activeIndex</i> along with <i>onSelect</i> to control the Steps.
+                </p>
             </DocSectionText>
             <div className="card">
                 <Toast ref={toast}></Toast>

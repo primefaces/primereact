@@ -71,7 +71,9 @@ export default function ControlledDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>In controlled mode, a binding to <i>activeIndex</i> property along with <i>onTabChange</i> event are needed to manage the active item.</p>
+                <p>
+                    In controlled mode, a binding to <i>activeIndex</i> property along with <i>onTabChange</i> event are needed to manage the active item.
+                </p>
             </DocSectionText>
             <div className="card">
                 <Button onClick={() => setActiveIndex(0)} className="p-button-outlined mb-5" label="Activate 1st" />

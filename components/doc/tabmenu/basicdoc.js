@@ -61,7 +61,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Steps requires a collection of menuitems as its <i>model</i>.</p>
+                <p>
+                    Steps requires a collection of menuitems as its <i>model</i>.
+                </p>
             </DocSectionText>
             <div className="card">
                 <TabMenu model={items} />
