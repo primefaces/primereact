@@ -1088,7 +1088,7 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     virtualScrollerOptions?: VirtualScrollerProps | undefined;
     /**
      * Function that takes the cell data and returns an object in &#123;'styleclass' : condition&#125; format to define a classname for a particular now.
-     * @param {any} value - Value of the cell.
+     * @param {*} value - Value of the cell.
      * @param {DataTableCellClassNameOptions<TValue>} options - ClassName options.
      * @return {object | string | undefined} A string or object to define a classname for a particular cell.
      */
@@ -1384,7 +1384,7 @@ export declare class DataTable<TValue extends DataTableValueArray> extends React
     public restoreState(): void;
     /**
      * Stored states can be loaded at any time using this method if there is a stateStorage property.
-     * @param {any} state - The state to restore
+     * @param {*} state - The state to restore
      */
     public restoreTableState(state: any): void;
     /**

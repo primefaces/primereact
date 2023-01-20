@@ -44,7 +44,7 @@ export interface GMapProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
     overlays?: any[] | undefined;
     /**
      * Callback to invoke when the map is ready to be used.
-     * @param {any} map - Google Maps instance
+     * @param {*} map - Google Maps instance
      */
     onMapReady?(map: any): void;
     /**

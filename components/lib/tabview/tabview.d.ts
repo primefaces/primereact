@@ -14,55 +14,58 @@
 import * as React from 'react';
 
 /**
- * @todo Write the documantation
+ * Custom Tabpanel header template options
+ * @group Misc
  */
 interface TabPanelHeaderTemplateOptions {
     /**
-     * @todo Write the documantation
+     * Style class of the header element.
      */
     className: string;
     /**
-     * @todo Write the documantation
+     * Style class of the header title element.
      */
     titleClassName: string;
     /**
-     * @todo Write the documantation
+     * Callback to invoke on click.
+     * @param {React.MouseEvent<HTMLElement>} event - Browser event.
      */
     onClick(event: React.MouseEvent<HTMLElement>): void;
     /**
-     * @todo Write the documantation
+     * Callback to invoke when the key pressed.
+     * @param {React.KeyboardEvent<HTMLElement>} event - Browser event.
      */
     onKeyDown(event: React.KeyboardEvent<HTMLElement>): void;
     /**
-     * @todo Write the documantation
+     * Left icon of the tab header.
      */
     leftIconElement: JSX.Element;
     /**
-     * @todo Write the documantation
+     * The title element of the tab header.
      */
     titleElement: JSX.Element;
     /**
-     * @todo Write the documantation
+     * Right icon of the tab header.
      */
     rightIconElement: JSX.Element;
     /**
-     * @todo Write the documantation
+     * The JSX element of the tab header.
      */
     element: JSX.Element;
     /**
-     * @todo Write the documantation
+     * The props of the tab panel component.
      */
     props: TabPanelProps;
     /**
-     * @todo Write the documantation
+     * The index of the tab header.
      */
     index: number;
     /**
-     * @todo Write the documantation
+     * Whether the tab header is selected or not.
      */
     selected: boolean;
     /**
-     * @todo Write the documantation
+     * The aria-controls attribute of the tab header.
      */
     ariaControls: string;
 }
