@@ -20,8 +20,7 @@ export function DeclarativeDoc(props) {
     const code = {
         basic: `
 <Toast ref={toast} />
-<ConfirmDialog />
-<ConfirmDialog visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?"
+<ConfirmDialog visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?" 
     header="Confirmation" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
 <Button onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />
         `,
@@ -29,9 +28,9 @@ export function DeclarativeDoc(props) {
 import React, { useState, useRef } from 'react';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { Toast } from 'primereact/toast';
-import { Button } from '../../lib/button/Button';
+import { Button } from 'primereact/button';
 
-export default function DeclarativeDoc() {
+export default function DeclarativeDemo() {
     const [visible, setVisible] = useState(false);
     const toast = useRef(null);
 
@@ -44,13 +43,14 @@ export default function DeclarativeDoc() {
     }
 
     return (
-        <div className="card flex justify-content-center">
+        <>
             <Toast ref={toast} />
-            <ConfirmDialog />
-            <ConfirmDialog visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?"
+            <ConfirmDialog visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?" 
                 header="Confirmation" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
-            <Button onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />
-        </div>
+            <div className="card">
+                <Button onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />
+            </div>
+        </>
     )
 }
         `,
@@ -58,10 +58,10 @@ export default function DeclarativeDoc() {
 import React, { useState, useRef } from 'react';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { Toast } from 'primereact/toast';
-import { Button } from '../../lib/button/Button';
+import { Button } from 'primefaces/button';
 
-export default function DeclarativeDoc() {
-    const [visible, setVisible] = useState(false);
+export default function DeclarativeDemo() {
+    const [visible, setVisible] = useState<boolean>(false);
     const toast = useRef<Toast>(null);
 
     const accept = () => {
@@ -73,13 +73,14 @@ export default function DeclarativeDoc() {
     }
 
     return (
-        <div className="card flex justify-content-center">
+        <>
             <Toast ref={toast} />
-            <ConfirmDialog />
-            <ConfirmDialog visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?"
+            <ConfirmDialog visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?" 
                 header="Confirmation" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
-            <Button onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />
-        </div>
+            <div className="card">
+                <Button onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />
+            </div>
+        </>
     )
 }
         `
@@ -88,11 +89,12 @@ export default function DeclarativeDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>ConfirmDialog is used as a container and visibility is managed with visible property where onHide event is required to update the visibility state.</p>
+            <p>Declarative is an alternative to the programmatic approach where ConfirmDialog is controlled with a binding to <i>visible</i> and <i>onHide</i> event callback.</p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <Toast ref={toast} />
-                <ConfirmDialog visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?" header="Confirmation" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
+            <Toast ref={toast} />
+            <ConfirmDialog visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?" 
+                header="Confirmation" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
+            <div className="card">
                 <Button onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />
             </div>
             <DocSectionCode code={code} />

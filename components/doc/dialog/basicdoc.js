@@ -70,9 +70,8 @@ export default function BasicDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    Dialog is used as a container and visibility is controlled with a binding to <i>visible</i> and <i>onHide</i> event callback. Dialogs are <i>draggable</i> and <i>resizable</i> by default.
-                </p>
+                <p>Dialog is used as a container and visibility is controlled with a binding to <i>visible</i> and <i>onHide</i> event callback. 
+                Dialogs are <i>draggable</i> and <i>resizable</i> by default.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Button label="Show" icon="pi pi-external-link" onClick={() => setVisible(true)} />
