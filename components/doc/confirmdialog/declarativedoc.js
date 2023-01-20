@@ -89,11 +89,12 @@ export default function DeclarativeDemo() {
     return (
         <>
             <DocSectionText {...props}>
-            <p>Declarative is an alternative to the programmatic approach where ConfirmDialog is controlled with a binding to <i>visible</i> and <i>onHide</i> event callback.</p>
+                <p>
+                    Declarative is an alternative to the programmatic approach where ConfirmDialog is controlled with a binding to <i>visible</i> and <i>onHide</i> event callback.
+                </p>
             </DocSectionText>
             <Toast ref={toast} />
-            <ConfirmDialog visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?" 
-                header="Confirmation" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
+            <ConfirmDialog visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?" header="Confirmation" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
             <div className="card">
                 <Button onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />
             </div>

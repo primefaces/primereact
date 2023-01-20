@@ -147,7 +147,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>A ConfirmDialog component needs to be present on the page that is interacted with the <i>confirmDialog</i> function that takes a configuration object for customization.</p>
+                <p>
+                    A ConfirmDialog component needs to be present on the page that is interacted with the <i>confirmDialog</i> function that takes a configuration object for customization.
+                </p>
             </DocSectionText>
             <Toast ref={toast} />
             <div className="card flex flex-wrap gap-2 justify-content-center">
