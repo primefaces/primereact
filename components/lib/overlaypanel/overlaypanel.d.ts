@@ -1,6 +1,6 @@
 /**
  *
- * OverlayPanel also known as Popover, is a container component that can overlay other components on page.
+ * OverlayPanel, also known as Popover, is a container component that can overlay other components on page.
  *
  * [Live Demo](https://www.primefaces.org/primereact/overlaypanel)
  *
