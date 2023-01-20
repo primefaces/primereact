@@ -12,7 +12,7 @@ import { PositionDoc } from '../../components/doc/dialog/positiondoc';
 import { ApiDoc } from '../../components/doc/dialog/apidoc';
 import { AccessibilityDoc } from '../../components/doc/dialog/accessibilitydoc';
 import { StyleDoc } from '../../components/doc/dialog/styledoc';
-import { LengthyContentDoc } from '../../components/doc/dialog/lengthycontentdoc';
+import { LongContentDoc } from '../../components/doc/dialog/longcontentdoc';
 
 const DialogDemo = () => {
     const docs = [
@@ -32,9 +32,9 @@ const DialogDemo = () => {
             component: FooterDoc
         },
         {
-            id: 'lengthycontent',
-            label: 'Lengthy Content',
-            component: LengthyContentDoc
+            id: 'longcontent',
+            label: 'Long Content',
+            component: LongContentDoc
         },
         {
             id: 'modal',

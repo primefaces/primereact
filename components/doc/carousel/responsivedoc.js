@@ -198,7 +198,7 @@ export default function ResponsiveDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Carousel supports specific configuration per screen size with the <i>responsiveOptions</i> property that takes an array of objects where each object define the max-width <i>breakpoint</i>, <i>numVisible</i> for the number of items
+                    Carousel supports specific configuration per screen size with the <i>responsiveOptions</i> property that takes an array of objects where each object defines the max-width <i>breakpoint</i>, <i>numVisible</i> for the number of items
                     items per page and <i>numScroll</i> for number of items to scroll. When <i>responsiveOptions</i> is defined, the <i>numScroll</i> and <i>numVisible</i> properties of the Carousel are used as default when there is breakpoint that
                     applies.
                 </p>
