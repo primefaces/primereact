@@ -11,149 +11,161 @@ import * as React from 'react';
 import TreeNode from '../treenode';
 
 /**
- * @todo Write the documentation.
+ * Custom tree header template options
+ * @group Misc
  */
 interface TreeHeaderTemplateOptions {
     /**
-     * @todo Write the documentation.
+     * Style class of the filter container element.
      */
     filterContainerClassName: string;
     /**
-     * @todo Write the documentation.
+     * Style class of the filter icon element.
      */
     filterIconClasssName: string;
     /**
-     * @todo Write the documentation.
+     * The options for the filter input element.
      */
     filterInput: TreeFilterInputOptions;
     /**
-     * @todo Write the documentation.
+     * The JSX element of the filter input.
      */
     filterElement: JSX.Element;
     /**
-     * @todo Write the documentation.
+     * The JSX element of the tree header.
      */
     element: JSX.Element;
     /**
-     * @todo Write the documentation.
+     * The props of the tree header component.
      */
     props: TreeProps;
 }
 
 /**
- * @todo Write the documentation.
+ * Custom tree filter input options
+ * @group Misc
  */
 interface TreeFilterInputOptions {
     /**
-     * @todo Write the documentation.
+     * Style class of the tree filter input element.
      */
     className: string;
     /**
-     * @todo Write the documentation.
+     * Callback function to be invoked when the keydown event.
+     * @param {React.KeyboardEvent<HTMLInputElement>} event - Browser event.
      */
     onKeyDown(event: React.KeyboardEvent<HTMLInputElement>): void;
     /**
-     * @todo Write the documentation.
+     * Callback function to be invoked when the change event.
+     * @param {React.KeyboardEvent<HTMLInputElement>} event - Browser event.
      */
     onChange(event: React.KeyboardEvent<HTMLInputElement>): void;
 }
 
 /**
- * @todo Write the documentation.
+ * Custom tree node template options
+ * @group Misc
  */
 interface TreeNodeTemplateOptions {
     /**
-     * @todo Write the documentation.
+     * Callback to invoke when the toggler button is clicked.
+     * @param {React.SyntheticEvent} event - Browser event
      */
     onTogglerClick(event: React.SyntheticEvent): void;
     /**
-     * @todo Write the documentation.
+     * Style class of the element.
      */
     className: string;
     /**
-     * @todo Write the documentation.
+     * The JSX element that represents the tree node.
      */
     element: JSX.Element;
     /**
-     * @todo Write the documentation.
+     * The props of the Tree component.
      */
     props: TreeProps;
     /**
-     * @todo Write the documentation.
+     * Whether the tree node is expanded or not.
      */
     expanded: boolean;
 }
 
 /**
- * @todo Write the documentation.
+ * Custom tree toggler template options
+ * @group Misc
  */
 interface TreeTogglerTemplateOptions {
     /**
-     * @todo Write the documentation.
+     * Callback to invoke on click.
+     * @param {React.SyntheticEvent} event - Browser event.
      */
     onClick(event: React.SyntheticEvent): void;
     /**
-     * @todo Write the documentation.
+     * Style class of the panels container.
      */
     containerClassName: string;
     /**
-     * @todo Write the documentation.
+     * Icon classname.
      */
     iconClassName: string;
     /**
-     * @todo Write the documentation.
+     * JSX element to be used as the template options.
      */
     element: JSX.Element;
     /**
-     * @todo Write the documentation.
+     * The props of Tree component
      */
     props: TreeProps;
     /**
-     * @todo Write the documentation.
+     * Whether the tree node is expanded or not.
      */
     expanded: boolean;
 }
 
 /**
- * @todo Write the documentation.
+ * Custom tree multiple selection keys
+ * @group Misc
  */
 interface TreeMultipleSelectionKeys {
     /**
-     * @todo Write the documentation.
+     * Extra options.
      */
     [key: string]: boolean;
 }
 
 /**
- * @todo Write the documentation.
+ * Custom tree checkbox selection keys
+ * @group Misc
  */
 interface TreeCheckboxSelectionKeys {
     /**
-     * @todo Write the documentation.
+     * Extra options.
      */
     [key: string]: TreeCheckboxSelectionKeyType;
 }
 
 /**
- * @todo Write the documentation.
+ * Custom tree checkbox selection type
+ * @group Misc
  */
 interface TreeCheckboxSelectionKeyType {
     /**
-     * @todo Write the documentation.
+     * Whether the checkbox is checked or not.
      */
     checked?: boolean;
     /**
-     * @todo Write the documentation.
+     * Whether the checkbox is partially checked or not.
      */
     partialChecked?: boolean;
 }
 
 /**
- * @todo Write the documentation.
+ * Custom tree expanded keys type
+ * @group Misc
  */
 interface TreeExpandedKeysType {
     /**
-     * @todo Write the documentation.
+     * Extra options.
      */
     [key: string]: boolean;
 }
@@ -169,7 +181,7 @@ interface TreeExpandedEvent {
      */
     originalEvent: React.SyntheticEvent;
     /**
-     * @todo Write the documentation.
+     * Expanded node key.
      */
     value: TreeExpandedKeysType;
 }
@@ -221,11 +233,11 @@ interface TreeDragDropEvent {
      */
     value: TreeNode[];
     /**
-     * @todo Write the documentation.
+     * The node that is being dragged.
      */
     dragNode: TreeNode;
     /**
-     * @todo Write the documentation.
+     * The index of the drop.
      */
     dropIndex: number;
 }
@@ -262,15 +274,17 @@ interface TreeNodeClickEvent {
 }
 
 /**
- * @todo Write the documentation.
+ * Custom tree filter options
+ * @group Misc
  */
 interface TreeFilterOptions {
     /**
-     * @todo Write the documentation.
+     * Used to filter options
+     * @param {KeyboardEvent} event - Browser event.
      */
     filter?: (event?: KeyboardEvent) => void;
     /**
-     * @todo Write the documentation.
+     * Used to reset the filtered options
      */
     reset?: () => void;
 }
@@ -489,7 +503,8 @@ export interface TreeProps {
  */
 export declare class Tree extends React.Component<TreeProps, any> {
     /**
-     * @todo Write the documentation.
+     * Filters the data.
+     * @param {T} value - The filter value
      */
     public filter<T>(value: T): void;
     /**
