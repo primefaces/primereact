@@ -16,7 +16,6 @@ import { VirtualScrollerProps } from '../virtualscroller';
 
 /**
  * Custom checkbox change event
- * @todo Check if it is correct
  * @see {@link MultiSelectPanelHeaderTemplateEvent.onChange}
  * @event
  */
@@ -26,70 +25,72 @@ interface MultiSelectHeaderCheckboxChangeEvent {
 }
 
 /**
- * @todo Write the documentation.
+ * Custom multiselect panel header template event.
  */
 interface MultiSelectPanelHeaderTemplateEvent {
     /**
-     * @todo Write the documentation.
+     * The class name for the header element.
      */
     className: string;
     /**
-     * @todo Write the documentation.
+     * The checkbox element for selecting items.
      */
     checkboxElement: HTMLElement;
     /**
-     * @todo Write the documentation.
+     * Whether the checkbox is checked.
      */
     checked: boolean;
     /**
-     * @todo Write the documentation.
+     * Callback function when the checkbox state is changed.
      * @param {MultiSelectHeaderCheckboxChangeEvent} event - Custom checkbox change event
      */
     onChange(event: MultiSelectHeaderCheckboxChangeEvent): void;
     /**
-     * @todo Write the documentation.
+     * The element for filtering the items.
      */
     filterElement: JSX.Element;
     /**
-     * @todo Write the documentation.
+     * The close element.
      */
     closeElement: JSX.Element;
     /**
-     * @todo Write the documentation.
+     * The classname for the close element.
      */
     closeElementClassName: string;
     /**
-     * @todo Write the documentation.
+     * The classname for the close icon element.
      */
     closeIconClassName: string;
     /**
-     * @todo Write the documentation.
+     * Callback function when the close button is clicked.
+     * @param {React.MouseEvent<HTMLElement>} event - Current param
      */
     onCloseClick(event: React.MouseEvent<HTMLElement>): void;
     /**
-     * @todo Write the documentation.
+     * The default element created by the component.
      */
     element: JSX.Element;
     /**
-     * @todo Write the documentation.
+     * The props of Multiselect component
      */
     props: MultiSelectProps;
 }
 
 /**
- * @todo Write the documentation.
+ * Custom multiselect change target options
+ * @group Misc
  */
 interface MultiSelectChangeTargetOptions {
     /**
-     * @todo Write the documentation.
+     * The name of the element.
      */
     name: string;
     /**
-     * @todo Write the documentation.
+     * Unique identifier of the element.
      */
     id: string;
     /**
-     * @todo Write the documentation.
+     * The value of the element.
      */
     value: any;
 }
@@ -109,15 +110,15 @@ interface MultiSelectChangeEvent {
      */
     value: any;
     /**
-     * @todo Write the documentation.
+     * Stops the event from propagating.
      */
     stopPropagation(): void;
     /**
-     * @todo Write the documentation.
+     * Prevents the default action of the event.
      */
     preventDefault(): void;
     /**
-     * @todo Write the documentation.
+     * Additional information about the event.
      */
     target: MultiSelectChangeTargetOptions;
 }
@@ -133,7 +134,7 @@ interface MultiSelectFilterEvent {
      */
     originalEvent: React.SyntheticEvent;
     /**
-     * @todo Write the documentation.
+     * Filter value.
      */
     filter: string;
 }
@@ -155,15 +156,17 @@ interface MultiSelectAllEvent {
 }
 
 /**
- * @todo Write the documentation.
+ * Multiselect filter options
+ * @group Misc
  */
 interface MultiSelectFilterOptions {
     /**
-     * @todo Write the documentation.
+     * Used to filter options
+     * @param {KeyboardEvent} event - Browser event
      */
     filter?: (event?: KeyboardEvent) => void;
     /**
-     * @todo Write the documentation.
+     * Used to reset the filtered options
      */
     reset?: () => void;
 }
@@ -267,8 +270,7 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     inputId?: string | undefined;
     /**
-     * @todo Write the documentation.
-     *
+     * Reference of the input element.
      */
     inputRef?: React.Ref<HTMLSelectElement>;
     /**
@@ -404,7 +406,7 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     transitionOptions?: CSSTransitionProps | undefined;
     /**
-     * @todo Write the documentation.
+     * Whether the option should be used as the value for the select element.
      */
     useOptionAsValue?: boolean | undefined;
     /**

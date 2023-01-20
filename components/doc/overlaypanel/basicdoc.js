@@ -53,11 +53,13 @@ export default function BasicDemo() {
 }
         `
     };
-    
+
     return (
         <>
             <DocSectionText {...props}>
-                <p>OverlayPanel is accessed via its reference and visibility is controlled using <i>toggle</i>, <i>show</i> and <i>hide</i> methods with an event of the target.</p>
+                <p>
+                    OverlayPanel is accessed via its reference and visibility is controlled using <i>toggle</i>, <i>show</i> and <i>hide</i> methods with an event of the target.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Button type="button" icon="pi pi-image" label="Image" onClick={(e) => op.current.toggle(e)} />

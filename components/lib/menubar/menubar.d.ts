@@ -44,12 +44,12 @@ export declare class Menubar extends React.Component<MenubarProps, any> {
      */
     public getElement(): HTMLDivElement;
     /**
-     * @todo Write the documentation
+     * Used to get root menu element.
      * @return {HTMLElement} Root menu element
      */
     public getRootMenu(): HTMLElement;
     /**
-     * @todo Write the documentation
+     * Used to get menu button element.
      * @return {HTMLElement} Menu button element
      */
     public getMenuButton(): HTMLElement;

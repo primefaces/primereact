@@ -11,11 +11,12 @@ import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 
 /**
- * @todo Write the documantation
+ * Custom overlay panel breakpoints
+ * @group Misc
  */
 interface OverlayPanelBreakpoints {
     /**
-     * @todo Write the documantation
+     *  A key-value pair representing a breakpoint and its associated value.
      */
     [key: string]: string;
 }

@@ -1,5 +1,5 @@
 /**
- * @todo Write the documentation.
+ *
  * PrimeReact menus components share a common api to specify the menuitems and submenus.
  *
  * [Live Demo](https://www.primefaces.org/primereact/menumodel/)
@@ -20,37 +20,39 @@ interface MenuItemCommandEvent {
      */
     originalEvent: React.SyntheticEvent;
     /**
-     * @todo Write the documentation.
+     * Selected item instance.
      */
     item: MenuItem;
 }
 
 /**
- * @todo Write the documentation.
+ * Menu item options
+ * @group Misc
  */
 interface MenuItemOptions {
     /**
-     * @todo Write the documentation.
+     * Callback to invoke on click.
+     * @param {React.SyntheticEvent} event - Browser event.
      */
     onClick(event: React.SyntheticEvent): void;
     /**
-     * @todo Write the documentation.
+     * Style class of the component.
      */
     className: string;
     /**
-     * @todo Write the documentation.
+     * Style class of the label element.
      */
     labelClassName: string;
     /**
-     * @todo Write the documentation.
+     * Class name of the options icon.
      */
     iconClassName: string;
     /**
-     * @todo Write the documentation.
+     * Default element created by the component.
      */
     element: React.ReactNode;
     /**
-     * @todo Write the documentation.
+     * All component props
      */
     props: any;
 }

@@ -4,15 +4,13 @@
  *
  * @todo Write the documentation.
  *
- * @module speeddial
+ * @module overlayservice
  *
  */
 import React from 'react';
 
 /**
- * Custom tab open event.
- * @see {@link @todo Write the documentation.}
- * @event
+ * Overlay service event.
  */
 interface OverlayServiceEvent {
     /**
@@ -50,6 +48,6 @@ export interface OverlayServiceOptions {
 }
 
 /**
- * @todo Write the documentation.
+ * @group Component
  */
 export declare const OverlayService: OverlayServiceOptions;
