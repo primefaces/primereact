@@ -21,11 +21,12 @@ type DataTableRowGroupHeaderTemplateType<TValue extends DataTableValueArray> = R
 type DataTableRowGroupFooterTemplateType<TValue extends DataTableValueArray> = React.ReactNode | ((data: any, options: DataTableRowGroupFooterTemplateOptions<TValue>) => React.ReactNode);
 
 /**
- * @todo Write a description.
+ * Custom datatable header template options.
+ * @group Misc
  */
 interface DataTableHeaderTemplateOptions<TValue extends DataTableValueArray> {
     /**
-     * @todo Write a description.
+     * The props of the datatable.
      */
     props: DataTableProps<TValue>;
 }
@@ -33,56 +34,99 @@ interface DataTableHeaderTemplateOptions<TValue extends DataTableValueArray> {
 interface DataTableFooterTemplateOptions<TValue extends DataTableValueArray> extends DataTableHeaderTemplateOptions<TValue> {}
 
 /**
- * @todo Write a description.
+ * Custom datatable row group header template options.
+ * @group Misc
  */
 interface DataTableRowGroupHeaderTemplateOptions<TValue extends DataTableValueArray> {
     /**
-     * @todo Write a description.
+     * index of the row group header template.
      */
     index: number;
     /**
-     * @todo Write a description.
+     * The props of the datatable.
      */
     props: DataTableProps<TValue>;
     /**
-     * @todo Write a description.
+     * Used to override the rendering of the content.
      */
     customRendering: boolean;
 }
 
 /**
- * @todo Write a description.
+ * Custom datatable row group footer template options.
+ * @group Misc
  */
 interface DataTableRowGroupFooterTemplateOptions<T extends DataTableValueArray> extends DataTableRowGroupHeaderTemplateOptions<T> {
     /**
-     * @todo Write a description.
+     * Number of columns to span for grouping.
      */
     colSpan: number;
 }
 
+/**
+ * @group Misc
+ */
 interface DataTableSortMeta {
+    /**
+     * Column field to sort against.
+     */
     field: string;
+    /**
+     * Sort order as integer.
+     */
     order: 1 | 0 | -1 | null | undefined;
 }
 
+/**
+ * Custom datatable filter metadata.
+ * @group Misc
+ */
 interface DataTableFilterMetaData {
+    /**
+     * Value to filter against.
+     */
     value: any;
+    /**
+     * Type of filter match.
+     */
     matchMode: 'startsWith' | 'contains' | 'notContains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'between' | 'dateIs' | 'dateIsNot' | 'dateBefore' | 'dateAfter' | 'custom' | undefined;
 }
 
+/**
+ * Custom datatable operator filter metadata.
+ * @group Misc
+ */
 interface DataTableOperatorFilterMetaData {
+    /**
+     * Operator to use for filtering.
+     */
     operator: string;
+    /**
+     * Operator to use for filtering.
+     */
     constraints: DataTableFilterMetaData[];
 }
 
+/**
+ * Custom datatable filter meta.
+ * @group Misc
+ */
 interface DataTableFilterMeta {
     [key: string]: DataTableFilterMetaData | DataTableOperatorFilterMetaData;
 }
 
+/**
+ * Custom datatable expanded rows.
+ * @group Misc
+ */
 interface DataTableExpandedRows {
     [key: string]: boolean;
 }
 
+/**
+ * Custom datatable editing rows.
+ * @group Misc
+ */
 interface DataTableEditingRows {
     [key: string]: boolean;
 }
@@ -152,17 +196,18 @@ interface DataTablePageEvent {
      */
     rows: number;
     /**
-     * @todo Write a description.
+     * The page number of the datatable.
      */
     page?: number;
     /**
-     * @todo Write a description.
+     * Total number of pages.
      */
     pageCount?: number;
 }
 
 /**
  * Custom sort event.
+ * @event
  */
 interface DataTableSortEvent {
     /**
@@ -192,17 +237,31 @@ interface DataTableFilterEvent {
 }
 
 /**
- * @todo Write a description.
+ * Custom page, sort, filter event.
  * @see {@link DataTableProps.onPage}, {@link DataTableProps.onSort}, {@link DataTableProps.onFilter}
- * @extends @todo Write the extends.
+ * @extends @check
  * @event
  */
 interface DataTablePFSEvent extends DataTablePageEvent, DataTableSortEvent, DataTableFilterEvent {
+    /**
+     * Extra options.
+     */
     [key: string]: any;
 }
 
+/**
+ * Custom data selectable event.
+ * @see {@link DataTableProps.isDataSelectable}
+ * @event
+ */
 interface DataTableDataSelectableEvent<TValue extends DataTableValueArray> {
+    /**
+     * Original data of the row.
+     */
     data: DataTableRowDataArray<TValue>;
+    /**
+     * Index of the row.
+     */
     index: number;
 }
 
@@ -221,11 +280,11 @@ interface DataTableSelectionChangeEvent<TValue extends DataTableValueArray> {
      */
     value: DataTableSelection<TValue>;
     /**
-     * @todo Write a description.
+     * Type of the selection.
      */
     type?: string;
     /**
-     * @todo Write a description.
+     * Extra options.
      */
     [key: string]: any;
 }
@@ -235,7 +294,13 @@ interface DataTableSelectionChangeEvent<TValue extends DataTableValueArray> {
  * @see {@link DataTableProps.onSelectAllChange}
  */
 interface DataTableSelectAllChangeEvent {
+    /**
+     * Browser event.
+     */
     originalEvent: React.SyntheticEvent;
+    /**
+     * Whether all data is selected.
+     */
     checked: boolean;
 }
 
@@ -280,35 +345,36 @@ interface DataTableRowMouseEvent extends Omit<DataTableRowEvent, 'originalEvent'
 interface DataTableRowClickEvent extends DataTableRowMouseEvent {}
 
 /**
- * @todo Write a description.
+ * Custom cell click event.
+ * @see {@link DataTableProps.onCellClick}
  */
-interface DataTableCellClickEventEvent<TValue extends DataTableValueArray> {
+interface DataTableCellClickEvent<TValue extends DataTableValueArray> {
     /**
-     * @todo Write a description.
+     * Browser event.
      */
     originalEvent: React.MouseEvent<HTMLElement>;
     /**
-     * @todo Write a description.
+     * Value of the cell.
      */
     value: any;
     /**
-     * @todo Write a description.
+     * Column field.
      */
     field: string;
     /**
-     * @todo Write a description.
+     * Data of the row.
      */
     rowData: DataTableRowData<TValue>;
     /**
-     * @todo Write a description.
+     * Index of the row.
      */
     rowIndex: number;
     /**
-     * @todo Write a description.
+     * Index of the cell.
      */
     cellIndex: number;
     /**
-     * @todo Write a description.
+     * Whether the cell is selected or not.
      */
     selected: boolean;
 }
@@ -320,6 +386,9 @@ interface DataTableCellClickEventEvent<TValue extends DataTableValueArray> {
  * @event
  */
 interface DataTableRowEditEvent extends DataTableRowEvent {
+    /**
+     * Index of the row.
+     */
     index: number;
 }
 
@@ -330,7 +399,7 @@ interface DataTableRowEditEvent extends DataTableRowEvent {
  */
 interface DataTableRowEditSaveEvent extends DataTableRowEditEvent {
     /**
-     * @todo Write a description.
+     * Whether the row is valid or not.
      */
     valid: boolean;
 }
@@ -399,7 +468,7 @@ interface DataTableExportFunctionEvent<TValue extends DataTableValueArray> {
      */
     field: string;
     /**
-     * Row data.
+     * Data of the row.
      */
     rowData: DataTableRowData<TValue>;
     /**
@@ -439,104 +508,119 @@ interface DataTableColReorderEvent {
  */
 interface DataTableRowReorderEvent<TValue extends DataTableValueArray> {
     /**
-     * @todo Write a description.
+     * Browser event.
      */
     originalEvent: React.DragEvent<HTMLElement>;
     /**
-     * @todo Write a description.
+     * New value after reorder.
      */
     value: DataTableRowDataArray<TValue>;
     /**
-     * @todo Write a description.
+     * Index of the dragged row.
      */
     dragIndex: number;
     /**
-     * @todo Write a description.
+     * Index of the drop location.
      */
     dropIndex: number;
 }
 
 /**
- * @todo Write a description.
+ * Options for the row expansion template
  * @see {@link DataTableProps.rowExpansionTemplate}
+ * @group Misc
  */
 interface DataTableRowExpansionTemplate {
     /**
-     * @todo Write a description.
+     * Index of the row.
      */
     index: number;
     /**
-     * @todo Write a description.
+     * Used to override the rendering of the content.
      */
     customRendering: boolean;
 }
 
 /**
- * @todo Write a description.
+ * Custom row className options.
+ * @see {@link DataTableProps.rowClassName}
+ * @group Misc
  */
 interface DataTableRowClassNameOptions<TValue extends DataTableValueArray> {
     /**
-     * @todo Write a description.
+     * The props of the datatable.
      */
     props: DataTableProps<TValue>;
 }
 
 /**
- * @todo Write a description.
+ * Custom cell className options.
+ * @see {@link DataTableProps.cellClassName}
+ * @group Misc
  */
 interface DataTableCellClassNameOptions<TValue extends DataTableValueArray> {
     /**
-     * @todo Write a description.
+     * The props of the datatable.
      */
     props: DataTableProps<TValue>;
     /**
-     * @todo Write a description.
+     * Column element of the datatable.
      */
     column: Column;
     /**
-     * @todo Write a description.
+     * Column field.
      */
     field: string;
     /**
-     * @todo Write a description.
+     * Whether the row is frozen or not.
      */
     frozenRow: boolean;
     /**
-     * @todo Write a description.
+     * Index of the row.
      */
     rowIndex: number;
 }
 
 /**
- * @todo Write a description.
+ * Custom show selection element options.
  * @see {@link DataTableProps.showSelectionElement}
+ * @group Misc
  */
 interface DataTableShowSelectionElementOptions<TValue extends DataTableValueArray> {
+    /**
+     * Index of the row.
+     */
     rowIndex: number;
+    /**
+     * The props of the datatable.
+     */
     props: DataTableProps<TValue>;
 }
 
 /**
- * @todo Write a description.
+ * Custom show row reorder element options.
  * @see {@link DataTableProps.showRowReorderElement}
+ * @group Misc
  */
 interface DataTableShowRowReorderElementOptions<TValue extends DataTableValueArray> {
     /**
-     * @todo Write a description.
+     * Index of the row element.
      */
     rowIndex: number;
     /**
-     * @todo Write a description.
+     * The props of the datatable.
      */
     props: DataTableProps<TValue>;
 }
 
 /**
- * @todo Write a description.
+ * Custom row edit validator options.
+ * @see {@link DataTableProps.rowEditValidator}
+ * @group Misc
  */
 interface DataTableRowEditValidatorOptions<TValue extends DataTableValueArray> {
     /**
-     * @todo Write a description.
+     * The props of the datatable.
      */
     props: DataTableProps<TValue>;
 }
@@ -546,34 +630,57 @@ interface DataTableValue extends Record<string, any> {}
 interface DataTableValueArray extends Array<DataTableValue> {}
 
 /**
- * @todo Write a description.
- * @see {@link DataTableProps.rowClassName}, {@link DataTableProps.rowEditValidator}, {@link DataTableProps.showSelectionElement}, {@link DataTableProps.showRowReorderElement}
+ * @group Misc
  */
 type DataTableRowData<TValue extends DataTableValueArray> = {
     [K in keyof TValue]: TValue[K];
 };
 
 /**
- * @todo Write a description.
+ * @group Misc
  */
 type DataTableRowDataArray<TValue extends DataTableValueArray> = DataTableRowData<TValue>[];
 
 /**
- * @todo Write a description.
+ * @group Misc
  */
 type DataTableCellSelection<TValue extends DataTableValueArray> = {
+    /**
+     * Index of the cell.
+     */
     cellIndex: number;
+    /**
+     * Column element of the datatable.
+     */
     column: Column;
+    /**
+     * Column field.
+     */
     field: string;
+    /**
+     * Properties of the column.
+     */
     props: ColumnProps;
+    /**
+     * Data of the row.
+     */
     rowData: DataTableRowData<TValue>;
+    /**
+     * Index of the row.
+     */
     rowIndex: number;
+    /**
+     * Whether the row is selected or not.
+     */
     selected: boolean;
+    /**
+     * Value of the cell.
+     */
     value: TValue[keyof TValue];
 };
 
 /**
- * @todo Write a description.
+ * @group Misc
  */
 type DataTableSelection<TValue extends DataTableValueArray> = DataTableRowData<TValue> | DataTableRowDataArray<TValue> | DataTableCellSelection<TValue>;
 
@@ -606,7 +713,7 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      */
     breakpoint?: string | undefined;
     /**
-     * @todo Write the description
+     * Whether to cell selection is enabled or not.
      * @defaultValue false
      */
     cellSelection?: boolean | undefined;
@@ -620,7 +727,8 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      */
     collapsedRowIcon?: string | undefined;
     /**
-     * @todo Write the description
+     * Used to define the resize mode of the columns, valid values are "fit" and "expand".
+     * @defaultValue fit
      */
     columnResizeMode?: 'fit' | 'expand' | undefined;
     /**
@@ -667,7 +775,7 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      */
     editingRows?: DataTableValueArray | DataTableEditingRows | undefined;
     /**
-     * @todo Write the description
+     * Text to display when there is no data.
      */
     emptyMessage?: React.ReactNode | ((frozen: boolean) => React.ReactNode);
     /**
@@ -743,7 +851,7 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      */
     globalFilterMatchMode?: 'startsWith' | 'contains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'custom' | undefined;
     /**
-     * @todo Write the description
+     * Used for either be grouped by a separate grouping row or using rowspan.
      */
     groupRowsBy?: string | undefined;
     /**
@@ -917,7 +1025,7 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      */
     showGridlines?: boolean | undefined;
     /**
-     * @todo Write the description
+     * Whether to show the select all checkbox inside the datatable's header.
      */
     showSelectAll?: boolean | undefined;
     /**
@@ -982,12 +1090,12 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      * Function that takes the cell data and returns an object in &#123;'styleclass' : condition&#125; format to define a classname for a particular now.
      * @param {any} value - Value of the cell.
      * @param {DataTableCellClassNameOptions<TValue>} options - ClassName options.
-     * @return {object | string | undefined} @todo Write the description
+     * @return {object | string | undefined} A string or object to define a classname for a particular cell.
      */
     cellClassName?(value: any, options: DataTableCellClassNameOptions<TValue>): object | string | undefined;
     /**
      * A function to implement custom restoreState with stateStorage="custom". Need to return state object.
-     * @return {object | undefined} @todo Write the description
+     * @return {object | undefined} Returns the state object.
      */
     customRestoreState?(): object | undefined;
     /**
@@ -1016,17 +1124,17 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      */
     onAllRowsUnselect?(event: DataTableUnselectEvent): void;
     /**
-     * @todo Write the description
-     * @param {DataTableCellClickEventEvent<TValue>} event - Custom cell click event.
+     * Callback to invoke on cell click.
+     * @param {DataTableCellClickEvent<TValue>} event - Custom cell click event.
      */
-    onCellClick?(event: DataTableCellClickEventEvent<TValue>): void;
+    onCellClick?(event: DataTableCellClickEvent<TValue>): void;
     /**
-     * @todo Write the description
+     * Callback to invoke on cell select.
      * @param {DataTableSelectEvent} event - Custom select event.
      */
     onCellSelect?(event: DataTableSelectEvent): void;
     /**
-     * @todo Write the description
+     * Callback to invoke on cell unselect.
      * @param {DataTableUnselectEvent} event - Custom unselect event.
      */
     onCellUnselect?(event: DataTableUnselectEvent): void;
@@ -1116,12 +1224,12 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      */
     onRowExpand?(event: DataTableRowEvent): void;
     /**
-     * @todo Write the description
+     * Callback to invoke when a row is hovered with mouse.
      * @param {DataTableRowMouseEvent} event - Custom row mouse event.
      */
     onRowMouseEnter?(event: DataTableRowMouseEvent): void;
     /**
-     * @todo Write the description
+     * Callback to invoke when a row is navigated away from with mouse.
      * @param {DataTableRowMouseEvent} event - Custom row mouse event.
      */
     onRowMouseLeave?(event: DataTableRowMouseEvent): void;
@@ -1146,7 +1254,7 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      */
     onRowUnselect?(event: DataTableUnselectEvent): void;
     /**
-     * @todo Write the description
+     * Callback to invoke when select all value changes.
      * @param {DataTableSelectAllChangeEvent} event - Custom select all change event.
      */
     onSelectAllChange?(event: DataTableSelectAllChangeEvent): void;
@@ -1215,7 +1323,7 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
  */
 export declare class DataTable<TValue extends DataTableValueArray> extends React.Component<DataTableProps<TValue>, any> {
     /**
-     * @todo Write the description
+     * Clears the table state.
      */
     public clearState(): void;
     /**
@@ -1232,12 +1340,24 @@ export declare class DataTable<TValue extends DataTableValueArray> extends React
      * @param {T} value - The filter value
      * @param {string} field - The filter field
      * @param {'startsWith' | 'contains' | 'notContains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'between' | 'dateIs' | 'dateIsNot' | 'dateBefore' | 'dateAfter' | 'custom'} mode - Filter match mode
-     * @param  {number} index - @todo Write the description
+     * @param  {number} index - Index of the filter
      */
     public filter<T>(
+        /**
+         * The filter value.
+         */
         value: T,
+        /**
+         * The filter field.
+         */
         field: string,
+        /**
+         * Filter match mode.
+         */
         mode: 'startsWith' | 'contains' | 'notContains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'between' | 'dateIs' | 'dateIsNot' | 'dateBefore' | 'dateAfter' | 'custom',
+        /**
+         * Index of the filter.
+         */
         index?: number
     ): void;
     /**
@@ -1253,11 +1373,13 @@ export declare class DataTable<TValue extends DataTableValueArray> extends React
      */
     public resetScroll(): void;
     /**
-     * @todo Write the description
+     * Restores the column widths.
+     * @check
      */
     public restoreColumnWidths(): void;
     /**
-     * @todo Write the description
+     * Restores the table state.
+     * @check
      */
     public restoreState(): void;
     /**
@@ -1266,7 +1388,7 @@ export declare class DataTable<TValue extends DataTableValueArray> extends React
      */
     public restoreTableState(state: any): void;
     /**
-     * @todo Write the description
+     * Saves the state.
      */
     public saveState(): void;
     /**
@@ -1280,7 +1402,7 @@ export declare class DataTable<TValue extends DataTableValueArray> extends React
      */
     public getTable(): HTMLTableElement;
     /**
-     * @todo Write the description
+     * Used to get the virtual scroller.
      */
     public getVirtualScroller(): VirtualScroller;
 }
