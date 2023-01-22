@@ -1,8 +1,6 @@
 /**
- *
- * @todo Write the documentation.
- *
- * @todo Write the documentation.
+ * @check is this correct?
+ * This module contains the interface and types for options in a select component.
  *
  * @module selectitem
  *
@@ -10,6 +8,7 @@
 import { IconType } from '../utils';
 
 /**
+ * Custom options type.
  * @group Misc
  */
 export type SelectItemOptionsType = SelectItem[] | any[];
