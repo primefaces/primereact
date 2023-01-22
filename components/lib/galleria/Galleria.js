@@ -4,7 +4,7 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useInterval, useUnmountEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 import { GalleriaItem } from './GalleriaItem';
 import { GalleriaThumbnails } from './GalleriaThumbnails';
 
@@ -29,6 +29,13 @@ export const Galleria = React.memo(
         );
 
         const onActiveItemChange = (event) => {
+            if (event.index >= props.value.length) {
+                // #3973 AutoPlay without circular should stop the slideshow when it reaches the end
+                stopSlideShow();
+
+                return;
+            }
+
             if (props.onItemChange) {
                 props.onItemChange(event);
             } else {
