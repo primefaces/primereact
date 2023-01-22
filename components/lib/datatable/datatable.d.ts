@@ -64,6 +64,7 @@ interface DataTableRowGroupFooterTemplateOptions<T extends DataTableValueArray> 
 }
 
 /**
+ * Custom datatable sort meta
  * @group Misc
  */
 interface DataTableSortMeta {
@@ -112,6 +113,9 @@ interface DataTableOperatorFilterMetaData {
  * @group Misc
  */
 interface DataTableFilterMeta {
+    /**
+     * Extra options.
+     */
     [key: string]: DataTableFilterMetaData | DataTableOperatorFilterMetaData;
 }
 
