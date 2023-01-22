@@ -11,6 +11,7 @@ import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 import { SelectItemOptionsType } from '../selectitem/selectitem';
 import TooltipOptions from '../tooltip/tooltipoptions';
+import { IconType } from '../utils';
 import { FormEvent } from '../ts-helpers';
 import { VirtualScrollerProps } from '../virtualscroller';
 
@@ -83,6 +84,11 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     className?: string | undefined;
     /**
+     * Icon class of the dropdown icon.
+     * @defaultValue pi pi-times
+     */
+    clearIcon?: IconType<DropdownProps> | undefined;
+    /**
      * A property to uniquely match the value in options for better performance.
      */
     dataKey?: string | undefined;
@@ -95,7 +101,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      * Icon class of the dropdown icon.
      * @defaultValue pi pi-chevron-down
      */
-    dropdownIcon?: string | undefined;
+    dropdownIcon?: IconType<DropdownProps> | undefined;
     /**
      * When present, custom value instead of predefined options can be entered using the editable input field.
      * @defaultValue false

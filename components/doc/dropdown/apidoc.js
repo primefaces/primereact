@@ -1,6 +1,4 @@
 import Link from 'next/link';
-import { CodeHighlight } from '../common/codehighlight';
-import { DevelopmentSection } from '../common/developmentsection';
 import { DocSectionText } from '../common/docsectiontext';
 import { DocSubSection } from '../common/docsubsection';
 
@@ -298,6 +296,12 @@ export function ApiDoc(props) {
                                     </a>{' '}
                                     can be customized, except for "nodeRef" and "in" properties.
                                 </td>
+                            </tr>
+                            <tr>
+                                <td>clearIcon</td>
+                                <td>string</td>
+                                <td>pi pi-times</td>
+                                <td>Icon class of the clear icon.</td>
                             </tr>
                             <tr>
                                 <td>dropdownIcon</td>
