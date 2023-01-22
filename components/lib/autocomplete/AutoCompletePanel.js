@@ -3,7 +3,7 @@ import PrimeReact, { localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { ObjectUtils, classNames } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 
 export const AutoCompletePanel = React.memo(
@@ -19,9 +19,10 @@ export const AutoCompletePanel = React.memo(
                 const key = i + '_' + j;
                 const selected = props.selectedItem === item;
                 const content = props.itemTemplate ? ObjectUtils.getJSXElement(props.itemTemplate, item, j) : props.field ? ObjectUtils.resolveFieldData(item, props.field) : item;
+                const className = classNames('p-autocomplete-item', { 'p-disabled': item.disabled });
 
                 return (
-                    <li key={key} role="option" aria-selected={selected} className="p-autocomplete-item" style={style} onClick={(e) => props.onItemClick(e, item)} data-group={i} data-index={j}>
+                    <li key={key} role="option" aria-selected={selected} className={className} style={style} onClick={(e) => props.onItemClick(e, item)} data-group={i} data-index={j}>
                         {content}
                         <Ripple />
                     </li>
@@ -47,9 +48,10 @@ export const AutoCompletePanel = React.memo(
                 );
             } else {
                 const content = props.itemTemplate ? ObjectUtils.getJSXElement(props.itemTemplate, suggestion, index) : props.field ? ObjectUtils.resolveFieldData(suggestion, props.field) : suggestion;
+                const className = classNames('p-autocomplete-item', { 'p-disabled': suggestion.disabled });
 
                 return (
-                    <li key={index} role="option" aria-selected={props.selectedItem === suggestion} className="p-autocomplete-item" style={style} onClick={(e) => props.onItemClick(e, suggestion)}>
+                    <li key={index} role="option" aria-selected={props.selectedItem === suggestion} className={className} style={style} onClick={(e) => props.onItemClick(e, suggestion)}>
                         {content}
                         <Ripple />
                     </li>
