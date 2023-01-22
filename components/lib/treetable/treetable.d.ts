@@ -531,7 +531,15 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
 }
 
 /**
- * @group Component
+ * **PrimeReact - TreeTable**
+ *
+ * _TreeTable is used to display hierarchical data in tabular format._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/treetable/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module treetable
  */
 export declare class TreeTable extends React.Component<TreeTableProps, any> {
     /**

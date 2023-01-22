@@ -38,6 +38,14 @@ export interface CardProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
 }
 
 /**
- * @group Component
+ * **PrimeReact - Card**
+ *
+ * _Card is a flexible container component._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/card/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module card
  */
 export declare class Card extends React.Component<CardProps, any> {}

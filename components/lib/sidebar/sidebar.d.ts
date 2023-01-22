@@ -104,7 +104,15 @@ export interface SidebarProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
 }
 
 /**
- * @group Component
+ * **PrimeReact - Sidebar**
+ *
+ * _Sidebar is a panel component displayed as an overlay._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/sidebar/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module sidebar
  */
 export declare class Sidebar extends React.Component<SidebarProps, any> {
     /**

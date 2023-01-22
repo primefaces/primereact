@@ -62,7 +62,15 @@ export interface ContextMenuProps extends Omit<React.DetailedHTMLProps<React.HTM
 }
 
 /**
- * @group Component
+ * **PrimeReact - ContextMenu**
+ *
+ * _ContextMenu displays an overlay menu on right click of its target. Note that components like DataTable has special integration with ContextMenu. Refer to documentation of the individual documentation of the components having a special integration._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/contextmenu/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module contextmenu
  */
 export declare class ContextMenu extends React.Component<ContextMenuProps, any> {
     /**

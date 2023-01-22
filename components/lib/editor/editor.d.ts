@@ -115,7 +115,15 @@ export interface EditorProps extends Omit<React.DetailedHTMLProps<React.InputHTM
 }
 
 /**
- * @group Component
+ * **PrimeReact - Editor**
+ *
+ * _Editor is rich text editor component based on Quill._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/editor/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module editor
  */
 export declare class Editor extends React.Component<EditorProps, any> {
     /**

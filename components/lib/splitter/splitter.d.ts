@@ -100,7 +100,15 @@ export interface SplitterProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
 }
 
 /**
- * @group Component
+ * **PrimeReact - SplitterPanel**
+ *
+ * _Splitter is utilized to separate and resize panels._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/splitter/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module splitter
  */
 export declare class Splitter extends React.Component<SplitterProps, any> {
     /**

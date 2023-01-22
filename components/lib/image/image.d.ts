@@ -72,7 +72,15 @@ export interface ImageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
 }
 
 /**
- * @group Component
+ * **PrimeReact - Image**
+ *
+ * _Displays a single image with preview and tranformation options._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/image/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module image
  */
 export declare class Image extends React.Component<ImageProps, any> {
     /**

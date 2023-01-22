@@ -41,7 +41,15 @@ export interface TagProps extends Omit<React.DetailedHTMLProps<React.HTMLAttribu
 }
 
 /**
- * @group Component
+ * **PrimeReact - Tag**
+ *
+ * _Tag component is used to categorize content._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/tag/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module tag
  */
 export declare class Tag extends React.Component<TagProps, any> {
     /**

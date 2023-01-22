@@ -136,7 +136,15 @@ export interface CarouselProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
 }
 
 /**
- * @group Component
+ * **PrimeReact - Carousel**
+ *
+ * _Carousel is a content slider featuring various customization options._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/carousel/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module carousel
  */
 export declare class Carousel extends React.Component<CarouselProps, any> {
     /**

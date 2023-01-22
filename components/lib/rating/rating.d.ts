@@ -97,7 +97,15 @@ export interface RatingProps extends Omit<React.DetailedHTMLProps<React.InputHTM
 }
 
 /**
- * @group Component
+ * **PrimeReact - Rating**
+ *
+ * _Rating component is a star based selection input._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/rating/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module rating
  */
 export declare class Rating extends React.Component<RatingProps, any> {
     /**

@@ -36,7 +36,15 @@ export interface ProgressSpinnerProps extends Omit<React.DetailedHTMLProps<React
 }
 
 /**
- * @group Component
+ * **PrimeReact - ProgressSpinner**
+ *
+ * _ProgressSpinner is a process status indicator._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/progressspinner/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module progressspinner
  */
 export declare class ProgressSpinner extends React.Component<ProgressSpinnerProps, any> {
     /**

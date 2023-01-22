@@ -22,7 +22,15 @@ export interface AvatarGroupProps extends Omit<React.DetailedHTMLProps<React.HTM
 }
 
 /**
- * @group Component
+ * **PrimeReact - AvatarGroup**
+ *
+ * _A set of Avatars can be displayed together using the AvatarGroup component._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/avatargroup/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module avatargroup
  */
 export declare class AvatarGroup extends React.Component<AvatarGroupProps, any> {
     /**

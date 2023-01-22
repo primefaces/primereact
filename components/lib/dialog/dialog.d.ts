@@ -259,7 +259,15 @@ export interface DialogProps {
 }
 
 /**
- * @group Component
+ * **PrimeReact - Dialog**
+ *
+ * _Dialog is a container to display content in an overlay window._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/dialog/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module dialog
  */
 export declare class Dialog extends React.Component<DialogProps, any> {
     /**

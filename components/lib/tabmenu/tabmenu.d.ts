@@ -57,7 +57,15 @@ export interface TabMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
 }
 
 /**
- * @group Component
+ * **PrimeReact - TabMenu**
+ *
+ * _TabMenu is a navigation/command component that displays items as tab headers._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/tabmenu/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module tabmenu
  */
 export declare class TabMenu extends React.Component<TabMenuProps, any> {
     /**

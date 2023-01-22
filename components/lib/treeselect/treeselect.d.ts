@@ -395,7 +395,15 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
 }
 
 /**
- * @group Component
+ * **PrimeReact - TreeSelect**
+ *
+ * _TreeSelect is a form component to choose from hierarchical data._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/treeselect/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module treeselect
  */
 export declare class TreeSelect extends React.Component<TreeSelectProps, any> {
     /**

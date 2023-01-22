@@ -95,7 +95,15 @@ export interface SliderProps extends Omit<React.DetailedHTMLProps<React.InputHTM
 }
 
 /**
- * @group Component
+ * **PrimeReact - Slider**
+ *
+ * _Slider is a component to provide input with a drag handle._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/slider/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module slider
  */
 export declare class Slider extends React.Component<SliderProps, any> {
     /**

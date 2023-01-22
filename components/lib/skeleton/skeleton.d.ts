@@ -50,7 +50,15 @@ export interface SkeletonProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
 }
 
 /**
- * @group Component
+ * **PrimeReact - Skeleton**
+ *
+ * _Skeleton is a placeholder to display instead of the actual content._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/skeleton/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module skeleton
  */
 export declare class Skeleton extends React.Component<SkeletonProps, any> {
     /**

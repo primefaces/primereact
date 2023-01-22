@@ -329,7 +329,15 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
 }
 
 /**
- * @group Component
+ * **PrimeReact - Dropdown**
+ *
+ * _Dropdown also known as Select, is used to choose an item from a collection of options._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/dropdown/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module dropdown
  */
 export declare class Dropdown extends React.Component<DropdownProps, any> {
     /**

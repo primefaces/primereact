@@ -40,7 +40,15 @@ export interface MessageProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
 }
 
 /**
- * @group Component
+ * **PrimeReact - Message**
+ *
+ * _Message is used to display inline message with various severities._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/message/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module message
  */
 export declare class Message extends React.Component<MessageProps, any> {
     /**

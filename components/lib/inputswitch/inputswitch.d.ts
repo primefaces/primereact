@@ -104,7 +104,15 @@ export interface InputSwitchProps extends Omit<React.DetailedHTMLProps<React.Inp
 }
 
 /**
- * @group Component
+ * **PrimeReact - InputSwitch**
+ *
+ * _InputSwitch is used to select a boolean value._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/inputswitch/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module inputswitch
  */
 export declare class InputSwitch extends React.Component<InputSwitchProps, any> {
     /**

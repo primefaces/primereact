@@ -88,7 +88,15 @@ export interface GMapProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
 }
 
 /**
- * @group Component
+ * **PrimeReact - GMap**
+ *
+ * _GMap component provides integration with Google Maps API. This sample demontrates various uses cases like binding, overlays and events. Click the map to add a new item._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/gmap/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module gmap
  */
 export declare class GMap extends React.Component<GMapProps, any> {
     /**

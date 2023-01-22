@@ -120,7 +120,15 @@ export interface SplitButtonProps extends Omit<React.DetailedHTMLProps<React.HTM
 }
 
 /**
- * @group Component
+ * **PrimeReact - SplitButton**
+ *
+ * _SplitButton groups a set of commands in an overlay with a default command._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/splitbutton/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module splitbutton
  */
 export declare class SplitButton extends React.Component<SplitButtonProps, any> {
     /**

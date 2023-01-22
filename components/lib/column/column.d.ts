@@ -863,6 +863,14 @@ export interface ColumnProps {
 }
 
 /**
- * @group Component
+ * **PrimeReact - Column**
+ *
+ * _It is a helper component for DataTable and TreeTable._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/column/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module column
  */
 export declare class Column extends React.Component<ColumnProps, any> {}

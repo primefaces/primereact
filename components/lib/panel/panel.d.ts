@@ -149,7 +149,15 @@ export interface PanelProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
 }
 
 /**
- * @group Component
+ * **PrimeReact - Panel**
+ *
+ * _Panel is a grouping component providing with content toggle feature._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/panel/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module panel
  */
 export declare class Panel extends React.Component<PanelProps, any> {
     /**

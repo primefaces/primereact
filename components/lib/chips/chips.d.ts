@@ -188,7 +188,15 @@ export interface ChipsProps extends Omit<React.DetailedHTMLProps<React.InputHTML
 }
 
 /**
- * @group Component
+ * **PrimeReact - Chips**
+ *
+ * _Chips is used to enter multiple values on an input field._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/chips/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module chips
  */
 export declare class Chips extends React.Component<ChipsProps, any> {
     /**

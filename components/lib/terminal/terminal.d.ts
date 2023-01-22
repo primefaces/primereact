@@ -30,7 +30,15 @@ export interface TerminalProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
 }
 
 /**
- * @group Component
+ * **PrimeReact - Terminal**
+ *
+ * _Terminal is a text based user interface._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/terminal/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module terminal
  */
 export declare class Terminal extends React.Component<TerminalProps, any> {
     /**

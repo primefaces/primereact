@@ -98,7 +98,15 @@ export interface SelectButtonProps extends Omit<React.DetailedHTMLProps<React.In
 }
 
 /**
- * @group Component
+ * **PrimeReact - SelectButton**
+ *
+ * _SelectButton is used to choose single or multiple items from a list using buttons._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/selectbutton/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module selectbutton
  */
 export declare class SelectButton extends React.Component<SelectButtonProps, any> {
     /**

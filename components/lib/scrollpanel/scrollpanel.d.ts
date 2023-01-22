@@ -22,7 +22,15 @@ export interface ScrollPanelProps extends Omit<React.DetailedHTMLProps<React.HTM
 }
 
 /**
- * @group Component
+ * **PrimeReact - ScrollPanel**
+ *
+ * _ScrollPanel is a cross browser, lightweight and skinnable alternative to native browser scrollbar._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/scrollpanel/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module scrollpanel
  */
 export declare class ScrollPanel extends React.Component<ScrollPanelProps, any> {
     /**

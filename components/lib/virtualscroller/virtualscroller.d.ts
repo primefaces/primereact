@@ -387,7 +387,15 @@ export interface VirtualScrollerProps {
 }
 
 /**
- * @group Component
+ * **PrimeReact - VirtualScroller**
+ *
+ * _VirtualScroller is a performant approach to handle huge data efficiently._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/virtualscroller/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module virtualscroller
  */
 export declare class VirtualScroller extends React.Component<VirtualScrollerProps, any> {
     /**

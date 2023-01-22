@@ -64,7 +64,15 @@ export interface DockProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
 }
 
 /**
- * @group Component
+ * **PrimeReact - Dock**
+ *
+ * _Dock is a navigation component consisting of menuitems._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/dock/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module dock
  */
 export declare class Dock extends React.Component<DockProps, any> {
     /**

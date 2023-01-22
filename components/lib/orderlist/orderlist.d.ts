@@ -112,7 +112,15 @@ export interface OrderListProps extends Omit<React.DetailedHTMLProps<React.HTMLA
 }
 
 /**
- * @group Component
+ * **PrimeReact - OrderList**
+ *
+ * _OrderList is used to sort a collection._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/orderlist/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module orderlist
  */
 export declare class OrderList extends React.Component<OrderListProps, any> {
     /**

@@ -252,7 +252,15 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
 }
 
 /**
- * @group Component
+ * **PrimeReact - InputNumber**
+ *
+ * _InputNumber is an input component to provide numerical input._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/inputnumber/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module inputnumber
  */
 export declare class InputNumber extends React.Component<InputNumberProps, any> {
     /**

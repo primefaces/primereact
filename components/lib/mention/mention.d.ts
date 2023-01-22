@@ -185,7 +185,15 @@ export interface MentionProps extends Omit<React.DetailedHTMLProps<React.Textare
 }
 
 /**
- * @group Component
+ * **PrimeReact - Mention**
+ *
+ * _Mention component is used to refer someone or something._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/mention/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module mention
  */
 export declare class Mention extends React.Component<MentionProps, any> {
     /**

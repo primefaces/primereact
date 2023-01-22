@@ -44,7 +44,15 @@ export interface ToolbarProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
 }
 
 /**
- * @group Component
+ * **PrimeReact - Toolbar**
+ *
+ * _Toolbar is a grouping component for buttons and other content._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/toolbar/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module toolbar
  */
 export declare class Toolbar extends React.Component<ToolbarProps, any> {
     /**

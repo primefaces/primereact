@@ -505,7 +505,15 @@ export interface PaginatorProps extends Omit<React.DetailedHTMLProps<React.HTMLA
 }
 
 /**
- * @group Component
+ * **PrimeReact - Paginator**
+ *
+ * _Paginator is a generic widget to display content in paged format._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/paginator/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module paginator
  */
 export declare class Paginator extends React.Component<PaginatorProps, any> {
     /**

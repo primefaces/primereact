@@ -178,7 +178,15 @@ interface ConfirmPopupReturn {
 }
 
 /**
- * @group Component
+ * **PrimeReact - ConfirmPopup**
+ *
+ * _ConfirmPopup displays a confirmation overlay displayed relatively to its target._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/confirmpopup/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module confirmpopup
  */
 export declare class ConfirmPopup extends React.Component<ConfirmPopupProps, any> {
     /**

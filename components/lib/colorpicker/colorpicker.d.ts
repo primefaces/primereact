@@ -137,7 +137,15 @@ export interface ColorPickerProps extends Omit<React.DetailedHTMLProps<React.Inp
 }
 
 /**
- * @group Component
+ * **PrimeReact - ColorPicker**
+ *
+ * _ColorPicker is an input component to select a color._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/colorpicker/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module colorpicker
  */
 export declare class ColorPicker extends React.Component<ColorPickerProps, any> {
     /**

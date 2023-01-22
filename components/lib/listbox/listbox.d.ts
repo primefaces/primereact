@@ -287,7 +287,15 @@ export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHT
 }
 
 /**
- * @group Component
+ * **PrimeReact - ListBox**
+ *
+ * _ListBox is used to select one or more values from a list of items._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/listbox/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module listbox
  */
 export declare class ListBox extends React.Component<ListBoxProps, any> {
     /**

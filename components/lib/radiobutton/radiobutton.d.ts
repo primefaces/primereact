@@ -76,7 +76,15 @@ export interface RadioButtonProps extends Omit<React.DetailedHTMLProps<React.Inp
 }
 
 /**
- * @group Component
+ * **PrimeReact - RadioButton**
+ *
+ * _RadioButton is an extension to standard radio button element with theming._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/radiobutton/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module radiobutton
  */
 export declare class RadioButton extends React.Component<RadioButtonProps, any> {
     /**

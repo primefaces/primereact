@@ -374,7 +374,15 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.HT
 }
 
 /**
- * @group Component
+ * **PrimeReact - AutoComplete**
+ *
+ * _AutoComplete is an input component that provides real-time suggestions when being typed._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/autocomplete/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module autocomplete
  */
 export declare class AutoComplete extends React.Component<AutoCompleteProps, any> {
     /**

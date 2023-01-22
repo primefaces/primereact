@@ -453,7 +453,15 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
 }
 
 /**
- * @group Component
+ * **PrimeReact - MultiSelect**
+ *
+ * _MultiSelect is used to select multiple items from a collection._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/multiselect/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module multiselect
  */
 export declare class MultiSelect extends React.Component<MultiSelectProps, any> {
     /**

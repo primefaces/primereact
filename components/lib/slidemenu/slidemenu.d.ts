@@ -104,7 +104,15 @@ export interface SlideMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLA
 }
 
 /**
- * @group Component
+ * **PrimeReact - SlideMenu**
+ *
+ * _SlideMenu displays submenus with a slide animation._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/slidemenu/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module slidemenu
  */
 export declare class SlideMenu extends React.Component<SlideMenuProps, any> {
     /**

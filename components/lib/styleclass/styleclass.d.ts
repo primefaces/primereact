@@ -63,7 +63,15 @@ export interface StyleClassProps {
 }
 
 /**
- * @group Component
+ * **PrimeReact - StyleClass**
+ *
+ * _StyleClass manages css classes declaratively to during enter/leave animations or just to toggle classes on an element._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/styleclass/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module styleclass
  */
 export declare class StyleClass extends React.Component<StyleClassProps, any> {
     /**

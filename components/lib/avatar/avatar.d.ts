@@ -69,7 +69,15 @@ export interface AvatarProps extends Omit<React.DetailedHTMLProps<React.HTMLAttr
 }
 
 /**
- * @group Component
+ * **PrimeReact - Avatar**
+ *
+ * _Avatar represents people using icons, labels and images._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/avatar/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module avatar
  */
 export declare class Avatar extends React.Component<AvatarProps, any> {
     /**

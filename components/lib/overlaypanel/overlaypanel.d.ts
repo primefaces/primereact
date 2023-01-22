@@ -70,7 +70,15 @@ export interface OverlayPanelProps extends Omit<React.DetailedHTMLProps<React.HT
 }
 
 /**
- * @group Component
+ * **PrimeReact - OverlayPanel**
+ *
+ * _OverlayPanel, also known as Popover, is a container component that can overlay other components on page._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/overlaypanel/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module overlaypanel
  */
 export declare class OverlayPanel extends React.Component<OverlayPanelProps, any> {
     /**

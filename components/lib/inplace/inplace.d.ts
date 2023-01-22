@@ -78,7 +78,15 @@ export interface InplaceProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
 }
 
 /**
- * @group Component
+ * **PrimeReact - Inplace**
+ *
+ * _Inplace provides an easy to do editing and display at the same time where clicking the output displays the actual content._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/inplace/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module inplace
  */
 export declare class Inplace extends React.Component<InplaceProps, any> {
     /**

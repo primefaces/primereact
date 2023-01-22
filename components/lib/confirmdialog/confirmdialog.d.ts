@@ -153,7 +153,15 @@ interface ConfirmDialogReturn {
 }
 
 /**
- * @group Component
+ * **PrimeReact - ConfirmDialog**
+ *
+ * _ConfirmDialog uses a Dialog UI with confirmDialog method or <ConfirmDialog> tag._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/confirmdialog/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module confirmdialog
  */
 export declare class ConfirmDialog extends React.Component<ConfirmDialogProps, any> {
     /**

@@ -113,7 +113,15 @@ export interface ToastProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
 }
 
 /**
- * @group Component
+ * **PrimeReact - Toast**
+ *
+ * _Toast is used to display messages in an overlay._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/toast/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module toast
  */
 export declare class Toast extends React.Component<ToastProps, any> {
     /**

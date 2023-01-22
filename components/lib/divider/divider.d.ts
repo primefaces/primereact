@@ -36,7 +36,15 @@ export interface DividerProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
 }
 
 /**
- * @group Component
+ * **PrimeReact - Divider**
+ *
+ * _Divider is used to separate contents._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/divider/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module divider
  */
 export declare class Divider extends React.Component<DividerProps, any> {
     /**

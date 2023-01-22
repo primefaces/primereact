@@ -58,7 +58,15 @@ export interface ChartProps {
 }
 
 /**
- * @group Component
+ * **PrimeReact - Chart**
+ *
+ * _Chart components are based on Chart.js, an open source HTML5 based charting library._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/chart/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module chart
  */
 export declare class Chart extends React.Component<ChartProps, any> {
     /**

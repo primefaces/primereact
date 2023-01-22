@@ -151,7 +151,15 @@ export interface SpeedDialProps extends Omit<React.DetailedHTMLProps<React.HTMLA
 }
 
 /**
- * @group Component
+ * **PrimeReact - SpeedDial**
+ *
+ * _When pressed, a floating action button can display multiple primary actions that can be performed on a page._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/speeddial/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module speeddial
  */
 export declare class SpeedDial extends React.Component<SpeedDialProps, any> {
     /**

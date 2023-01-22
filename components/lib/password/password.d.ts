@@ -165,7 +165,15 @@ export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputH
 }
 
 /**
- * @group Component
+ * **PrimeReact - Password**
+ *
+ * _Password displays strength indicator for password fields._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/password/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module password
  */
 export declare class Password extends React.Component<PasswordProps, any> {
     /**

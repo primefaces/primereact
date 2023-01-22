@@ -63,7 +63,15 @@ export interface TieredMenuProps extends Omit<React.DetailedHTMLProps<React.HTML
 }
 
 /**
- * @group Component
+ * **PrimeReact - TieredMenu**
+ *
+ * _TieredMenu is an input component that provides real-time suggestions when being typed._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/tieredmenu/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module tieredmenu
  */
 export declare class TieredMenu extends React.Component<TieredMenuProps, any> {
     /**

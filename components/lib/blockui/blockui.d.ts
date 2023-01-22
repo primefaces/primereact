@@ -62,7 +62,15 @@ export interface BlockUIProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
 }
 
 /**
- * @group Component
+ * **PrimeReact - BlockUI**
+ *
+ * _BlockUI represents people using icons, labels and images._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/blockui/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module blockui
  */
 export declare class BlockUI extends React.Component<BlockUIProps, any> {
     public block(): void;

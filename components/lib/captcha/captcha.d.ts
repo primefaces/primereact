@@ -61,7 +61,15 @@ export interface CaptchaProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
 }
 
 /**
- * @group Component
+ * **PrimeReact - Captcha**
+ *
+ * _Captcha is a form validation component based on Recaptcha._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/captcha/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module captcha
  */
 export declare class Captcha extends React.Component<CaptchaProps, any> {
     /**

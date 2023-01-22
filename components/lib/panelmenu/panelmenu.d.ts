@@ -37,7 +37,15 @@ export interface PanelMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLA
 }
 
 /**
- * @group Component
+ * **PrimeReact - PanelMenu**
+ *
+ * _PanelMenu is a hybrid of accordion-tree components._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/panelmenu/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module panelmenu
  */
 export declare class PanelMenu extends React.Component<PanelMenuProps, any> {
     /**

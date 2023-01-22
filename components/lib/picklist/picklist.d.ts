@@ -284,7 +284,15 @@ export interface PickListProps {
 }
 
 /**
- * @group Component
+ * **PrimeReact - PickList**
+ *
+ * _PickList is used to reorder items between different lists._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/picklist/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module picklist
  */
 export declare class PickList extends React.Component<PickListProps, any> {
     /**

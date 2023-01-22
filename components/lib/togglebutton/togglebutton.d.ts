@@ -122,7 +122,15 @@ export interface ToggleButtonProps extends Omit<React.DetailedHTMLProps<React.In
 }
 
 /**
- * @group Component
+ * **PrimeReact - ToggleButton**
+ *
+ * _ToggleButton is used to select a boolean value using a button._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/togglebutton/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module togglebutton
  */
 export declare class ToggleButton extends React.Component<ToggleButtonProps, any> {
     /**

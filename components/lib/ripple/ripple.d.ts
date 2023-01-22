@@ -22,6 +22,14 @@ export interface RippleProps {
 }
 
 /**
- * @group Component
+ * **PrimeReact - Ripple**
+ *
+ * _Ripple component adds ripple effect to the host element._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/ripple/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module ripple
  */
 export declare class Ripple extends React.Component<RippleProps, any> {}

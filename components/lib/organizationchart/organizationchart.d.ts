@@ -110,7 +110,15 @@ export interface OrganizationChartProps extends Omit<React.DetailedHTMLProps<Rea
 }
 
 /**
- * @group Component
+ * **PrimeReact - OrganizationChart**
+ *
+ * _OrganizationChart visualizes hierarchical organization data._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/organizationchart/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module organizationchart
  */
 export declare class OrganizationChart extends React.Component<OrganizationChartProps, any> {
     /**

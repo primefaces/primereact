@@ -589,7 +589,15 @@ export interface CalendarProps {
 }
 
 /**
- * @group Component
+ * **PrimeReact - Calendar**
+ *
+ * _Calendar also known as DatePicker, is a form component to work with dates._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/calendar/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module calendar
  */
 export declare class Calendar extends React.Component<CalendarProps, any> {
     /**

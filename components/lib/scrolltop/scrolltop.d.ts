@@ -65,7 +65,15 @@ export interface ScrollTopProps {
 }
 
 /**
- * @group Component
+ * **PrimeReact - ScrollTop**
+ *
+ * _ScrollTop gets displayed after a certain scroll position and used to navigates to the top of the page quickly._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/scrolltop/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module scrolltop
  */
 export declare class ScrollTop extends React.Component<ScrollTopProps, any> {
     /**

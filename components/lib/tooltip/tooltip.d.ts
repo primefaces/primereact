@@ -36,7 +36,15 @@ export interface TooltipProps extends TooltipOptions {
 }
 
 /**
- * @group Component
+ * **PrimeReact - Tooltip**
+ *
+ * _Tooltip functionality is integrated within various PrimeReact components._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/tooltip/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module tooltip
  */
 export declare class Tooltip extends React.Component<TooltipProps, any> {
     /**

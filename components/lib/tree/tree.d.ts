@@ -499,7 +499,15 @@ export interface TreeProps {
 }
 
 /**
- * @group Component
+ * **PrimeReact - Tree**
+ *
+ * _Tree is used to display hierarchical data._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/tree/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module tree
  */
 export declare class Tree extends React.Component<TreeProps, any> {
     /**

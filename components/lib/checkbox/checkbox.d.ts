@@ -125,7 +125,15 @@ export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputH
 }
 
 /**
- * @group Component
+ * **PrimeReact - Checkbox**
+ *
+ * _Checkbox is an extension to standard checkbox element with skinning capabilities._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/checkbox/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module checkbox
  */
 export declare class Checkbox extends React.Component<CheckboxProps, any> {
     /**

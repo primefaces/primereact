@@ -24,6 +24,14 @@ export interface ColumnGroupProps {
 }
 
 /**
- * @group Component
+ * **PrimeReact - ColumnGroup**
+ *
+ * _It is a helper component for DataTable._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/columngroup/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module columngroup
  */
 export declare class ColumnGroup extends React.Component<ColumnGroupProps, any> {}

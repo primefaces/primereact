@@ -52,7 +52,15 @@ export interface TimelineProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
 }
 
 /**
- * @group Component
+ * **PrimeReact - Timeline**
+ *
+ * _Timeline visualizes a series of chained events._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/timeline/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module timeline
  */
 export declare class Timeline extends React.Component<TimelineProps, any> {
     /**

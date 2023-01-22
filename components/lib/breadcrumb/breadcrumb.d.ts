@@ -31,7 +31,15 @@ export interface BreadCrumbProps extends Omit<React.DetailedHTMLProps<React.HTML
 }
 
 /**
- * @group Component
+ * **PrimeReact - BreadCrumb**
+ *
+ * _Breadcrumb provides contextual information about page hierarchy._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/breadcrumb/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module breadcrumb
  */
 export declare class BreadCrumb extends React.Component<BreadCrumbProps, any> {
     /**

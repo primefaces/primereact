@@ -226,7 +226,15 @@ export interface TabViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
 }
 
 /**
- * @group Component
+ * **PrimeReact - TabPanel**
+ *
+ * _TabView is a container component to group content with tabs._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/tabview/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
+ * @module tabview
  */
 // tslint:disable-next-line:max-classes-per-file
 export declare class TabView extends React.Component<TabViewProps, any> {
