@@ -42,27 +42,29 @@ interface OrganizationChartNodeUnselectEvent {
 }
 
 /**
- * @todo Write the documentation
+ * Custom organizationchart node data.
  */
 interface OrganizationChartNodeData {
     /**
-     * @todo Write the documentation
+     * Style class of the node.
      */
     className?: string;
     /**
-     * @todo Write the documentation
+     * Visibility of node.
      */
     expanded?: boolean;
     /**
-     * @todo Write the documentation
+     * @check is this correct?
+     * Used to get the child elements of the component.
+     * @readonly
      */
     children?: OrganizationChartNodeData[];
     /**
-     * @todo Write the documentation
+     * Whether the node is selectable when selection mode is enabled.
      */
     selectable?: boolean;
     /**
-     * @todo Write the documentation
+     * Label of node.
      */
     label?: string;
 }
@@ -86,7 +88,7 @@ export interface OrganizationChartProps extends Omit<React.DetailedHTMLProps<Rea
      */
     nodeTemplate?(node: OrganizationChartNodeData): React.ReactNode;
     /**
-     * @todo Write the documentation
+     * Callback to invoke when node selection changes.
      * @param {OrganizationChartNodeData | OrganizationChartNodeData[] | null | undefined} node - A node instance.
      */
     selectionChange?(node: OrganizationChartNodeData | OrganizationChartNodeData[] | null | undefined): void;
