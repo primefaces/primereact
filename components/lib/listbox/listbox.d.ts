@@ -13,19 +13,20 @@ import TooltipOptions from '../tooltip/tooltipoptions';
 import { VirtualScroller, VirtualScrollerProps } from '../virtualscroller';
 
 /**
- * @todo Write the description
+ * Custom change target options.
+ * @group Misc
  */
 interface ListBoxChangeTargetOptions {
     /**
-     * @todo Write the description
+     * The name of the target.
      */
     name: string;
     /**
-     * @todo Write the description
+     * Unique identifier of the element.
      */
     id: string;
     /**
-     * @todo Write the description
+     * New value of the element.
      */
     value: any;
 }
@@ -45,15 +46,15 @@ interface ListBoxChangeEvent {
      */
     value: any;
     /**
-     * @todo Write the description
+     * Stops the event from propagating.
      */
     stopPropagation(): void;
     /**
-     * @todo Write the description
+     * Prevents the default action of the event.
      */
     preventDefault(): void;
     /**
-     * @todo Write the description
+     * Target element.
      */
     target: ListBoxChangeTargetOptions;
 }
@@ -75,61 +76,64 @@ interface ListBoxFilterValueChangeEvent {
 }
 
 /**
- * @todo Write the description
+ * Custom filter template options.
+ * @group Misc
  */
 interface ListBoxFilterTemplateOptions {
     /**
-     * @todo Write the description
+     * Style class of the filter.
      */
     className: string;
     /**
-     * @todo Write the description
+     * Whether the option is disabled or not
      */
     disabled?: boolean;
     /**
-     * @todo Write the description
+     * The filter element.
      */
     element: HTMLDivElement;
     /**
-     * @todo Write the description
+     * The filter.
      */
     filter?: string;
     /**
-     * @todo Write the description
+     * Style class of the filter icon.
      */
     filterIconClassName: string;
     /**
-     * @todo Write the description
+     * Browser change event for the filter input element.
      */
     filterInputChange?: React.ChangeEvent<HTMLInputElement>;
     /**
-     * @todo Write the description
+     * The props of the filter input element.
      */
     filterInputProps?: any;
     /**
-     * @todo Write the description
+     * The filter input options.
      */
     filterOptions?: ListBoxFilterOptions;
     /**
-     * @todo Write the description
+     * The placeholder of the filter element.
      */
     filterPlaceholder?: string;
     /**
-     * @todo Write the description
+     * Custom filter template.
      */
     filterTemplate?: React.ReactNode | ((options: ListBoxFilterTemplateOptions) => React.ReactNode);
 }
 
 /**
- * @todo Write the description
+ * Custom filter options.
+ * @group Misc
  */
 interface ListBoxFilterOptions {
     /**
-     * @todo Write the description
+     * Used to filter options
+     * @param { React.ChangeEvent<HTMLInputElement>} event - Browser event.
      */
     filter?: (event?: React.ChangeEvent<HTMLInputElement>) => void;
     /**
-     * @todo Write the description
+     * Used to reset the filtered options
      */
     reset?: () => void;
 }
@@ -159,11 +163,11 @@ export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHT
      */
     disabled?: boolean | undefined;
     /**
-     * @todo Write the description
+     * Text to display when there is no data.
      */
     emptyMessage?: React.ReactNode | ((props: ListBoxProps) => React.ReactNode);
     /**
-     * @todo Write the description
+     * Template to display when filtering does not return any results.
      */
     emptyFilterMessage?: React.ReactNode | ((props: ListBoxProps) => React.ReactNode);
     /**
@@ -296,8 +300,8 @@ export declare class ListBox extends React.Component<ListBoxProps, any> {
      */
     public getElement(): HTMLDivElement;
     /**
-     * @todo Write the description
-     * @return {VirtualScroller} @todo Write the description
+     * Used to get the virtual scroller instance.
+     * @return {VirtualScroller} Virtual Scroller instance
      */
     public getVirtualScroller(): VirtualScroller;
 }
