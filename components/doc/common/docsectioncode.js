@@ -105,29 +105,35 @@ export function DocSectionCode(props) {
 
             {codeMode === 'basic' && (
                 <div>
-                    <CodeHighlight import={props.import} style={{ marginBottom: '30px' }}>
+                    <CodeHighlight code import={props.import}>
                         {props.code.basic}
                     </CodeHighlight>
                 </div>
             )}
             {codeMode !== 'basic' && codeLang === 'javascript' && (
                 <div>
-                    <CodeHighlight>{props.code.javascript}</CodeHighlight>
+                    <CodeHighlight code>{props.code.javascript}</CodeHighlight>
                 </div>
             )}
             {codeMode !== 'basic' && codeLang === 'typescript' && (
                 <div>
-                    <CodeHighlight lang={'tsx'}>{props.code.typescript}</CodeHighlight>
+                    <CodeHighlight code lang={'tsx'}>
+                        {props.code.typescript}
+                    </CodeHighlight>
                 </div>
             )}
             {codeMode !== 'basic' && codeLang === 'php' && (
                 <div>
-                    <CodeHighlight lang={'php'}>{props.code.php}</CodeHighlight>
+                    <CodeHighlight code lang={'php'}>
+                        {props.code.php}
+                    </CodeHighlight>
                 </div>
             )}
             {codeMode !== 'basic' && codeLang === 'data' && (
                 <div>
-                    <CodeHighlight lang={'json'}>{props.code.data}</CodeHighlight>
+                    <CodeHighlight code lang={'json'}>
+                        {props.code.data}
+                    </CodeHighlight>
                 </div>
             )}
         </div>
