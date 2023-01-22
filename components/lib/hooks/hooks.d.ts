@@ -1,37 +1,155 @@
+/**
+ * @todo Write the description.
+ */
 import * as React from 'react';
 
-export type TargetType = 'document' | 'window' | React.Ref<HTMLElement> | undefined;
-export type StorageType = 'local' | 'session';
-
+/**
+ * Custom event options.
+ * @group Misc
+ */
 interface EventOptions {
-    target?: TargetType;
+    /**
+     * The target element to listen to.
+     */
+    target?: 'document' | 'window' | React.Ref<HTMLElement>;
+    /**
+     * The event type to listen to.
+     */
     type?: string;
+    /**
+     * The event listener.
+     */
     listener?(event: Event): void;
+    /**
+     * The event options.
+     */
     options?: any;
+    /**
+     * Whether to listen to the event or not.
+     * @check
+     */
     when?: boolean;
 }
 
+/**
+ * Custom overlay event options.
+ * @group Misc
+ */
 interface OverlayEventOptions {
-    target?: TargetType;
-    overlay?: TargetType;
+    /**
+     * The target element to listen to.
+     */
+    target?: 'document' | 'window' | React.Ref<HTMLElement> | undefined;
+    /**
+     * The overlay element to listen to.
+     */
+    overlay?: 'document' | 'window' | React.Ref<HTMLElement> | undefined;
+    /**
+     * The event listener.
+     */
     listener?(event: Event, type?: string): void;
+    /**
+     * Whether to listen to the event or not.
+     * @check
+     */
     when?: boolean;
 }
 
+/**
+ * Custom resize event options.
+ * @group Misc
+ */
 interface ResizeEventOptions {
+    /**
+     * The event listener.
+     * @param {Event} event - The browser event object.
+     */
     listener?(event: Event): void;
 }
 
+/**
+ * @check
+ * Custom hook to get the previous value of a property.
+ * @param {*} value - The value to compare.
+ */
 export declare function usePrevious(value: any): any;
+/**
+ * @check
+ * Custom hook to run a mount effect only once.
+ * @param {React.EffectCallback} effect - The effect to run.
+ */
 export declare function useMountEffect(effect: React.EffectCallback): void;
+/**
+ * @check
+ * Custom hook to run an update effect.
+ * @param {React.EffectCallback} effect - The effect to run.
+ * @param {React.DependencyList} deps - The dependencies.
+ */
 export declare function useUpdateEffect(effect: React.EffectCallback, deps?: React.DependencyList): void;
+/**
+ * @check
+ * Custom hook to run an update effect.
+ * @param {React.EffectCallback} effect - The effect to run.
+ */
 export declare function useUnmountEffect(effect: React.EffectCallback): void;
+/**
+ * @check
+ * Custom hook to listen to an event.
+ * @param {EventOptions} options - The event options.
+ */
 export declare function useEventListener(options: EventOptions): any[];
+/**
+ * @check
+ * Custom hook to listen to an event.
+ * @param {EventOptions} options - The event options.
+ */
 export declare function useOverlayListener(options: OverlayEventOptions): any[];
+/**
+ * @check
+ * Custom hook to listen to ovelay scroll.
+ * @param {EventOptions} options - The event options.
+ */
 export declare function useOverlayScrollListener(options: EventOptions): any[];
+/**
+ * @check
+ * Custom hook to listen to ovelay scroll.
+ * @param {EventOptions} options - The event options.
+ */
 export declare function useResizeListener(options: ResizeEventOptions): any[];
+/**
+ * Custom hook to use an interval.
+ * @check fn
+ * @param {*} fn - The function that will be executed after the delay.
+ * @param {number} delay - Delay in milliseconds.
+ * @param {boolean} when - Whether to listen to the event or not.
+ */
 export declare function useInterval(fn: any, delay?: number, when?: boolean): any[];
+/**
+ * Custom hook to use a timeout.
+ * @check fn
+ * @param {*} fn - The function that will be executed after the delay.
+ * @param {number} delay - Delay in milliseconds.
+ * @param {boolean} when - Whether to listen to the event or not.
+ */
 export declare function useTimeout(fn: any, delay?: number, when?: boolean): any[];
-export declare function useStorage<S, K extends string = string>(initialValue: S, key: K, storage?: StorageType): [S, React.Dispatch<React.SetStateAction<S>>];
+/**
+ * @check
+ * Custom hook to use storage such as local and session storage.
+ * @param {*} initialValue - The initial value.
+ * @param {string} key - The key to store the value.
+ * @param {string} storage - The storage type. Valid values are 'local' and 'session'.
+ */
+export declare function useStorage<S, K extends string = string>(initialValue: S, key: K, storage?: 'local' | 'session'): [S, React.Dispatch<React.SetStateAction<S>>];
+/**
+ * @check
+ * Custom hook to use local storage.
+ * @param {*} initialValue - The initial value.
+ * @param {string} key - The key to store the value in local storage.
+ */
 export declare function useLocalStorage<S, K extends string = string>(initialValue: S, key: K): [S, React.Dispatch<React.SetStateAction<S>>];
+/**
+ * @check
+ * Custom hook to use session storage.
+ * @param {*} initialValue - The initial value.
+ * @param {string} key - The key to store the value in session storage. */
 export declare function useSessionStorage<S, K extends string = string>(initialValue: S, key: K): [S, React.Dispatch<React.SetStateAction<S>>];
