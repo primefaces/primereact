@@ -53,45 +53,48 @@ interface PickListChangeEvent {
 }
 
 /**
- * @todo Write the documentation
+ * Custom filter template options.
+ * @group Misc
  */
 interface PickListFilterTemplateOptions {
     /**
-     * @todo Write the documentation
+     * Style class of the filter.
      */
     className: string;
     /**
-     * @todo Write the documentation
+     * Props of the filter input.
      */
     inputProps: PickListFilterInputProps;
     /**
-     * @todo Write the documentation
+     * Style class of the filter icon.
      */
     iconClassName: string;
     /**
-     * @todo Write the documentation
+     * The JSX element that represents the picklist filter.
      */
     element: React.ReactNode;
     /**
-     * @todo Write the documentation
+     * The props of the PickList component.
      */
     props: PickListProps;
 }
 
 /**
- * @todo Write the documentation
+ * Custom filter input props.
  */
 interface PickListFilterInputProps {
     /**
-     * @todo Write the documentation
+     * Style class of the filter input.
      */
     className: string;
     /**
-     * @todo Write the documentation
+     * Filter change callback.
+     * @param {React.SyntheticEvent} event - Browser event.
      */
     onChange(event: React.SyntheticEvent): void;
     /**
-     * @todo Write the documentation
+     * Callback function to be invoked when the keydown event.
+     * @param {React.SyntheticEvent} event - Browser event.
      */
     onKeyDown(event: React.SyntheticEvent): void;
 }
