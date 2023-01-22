@@ -12,57 +12,60 @@ import { CSSTransitionProps } from '../csstransition';
 import TreeNode from '../treenode';
 
 /**
- * @todo Write the documentation.
+ * Custom panel header template options.
+ * @group Misc
  */
 interface TreeSelectPanelHeaderTemplateOptions {
     /**
-     * @todo Write the documentation.
+     * Style class of the panel.
      */
     className: string;
     /**
-     * @todo Write the documentation.
+     * The JSX element that represents the filter of the panel.
      */
     filterElement: JSX.Element;
     /**
-     * @todo Write the documentation.
+     * The JSX element that represents the close of the panel.
      */
     closeElement: JSX.Element;
     /**
-     * @todo Write the documentation.
+     * Style class of the panel close element.
      */
     closeElementClassName: string;
     /**
-     * @todo Write the documentation.
+     * Style class of the panel close icon.
      */
     closeIconClassName: string;
     /**
-     * @todo Write the documentation.
+     * Callback to invoke when the close button is clicked.
      */
     onCloseClick(): void;
     /**
-     * @todo Write the documentation.
+     * The JSX element that represents the panel.
      */
     element: JSX.Element;
     /**
-     * @todo Write the documentation.
+     * The props of the TreeSelect component.
      */
     props: TreeSelectProps;
 }
 
 /**
- * @todo Write the documentation.
+ * Custom change target options.
+ * @group Misc
  */
 interface TreeSelectChangeTargetOptions {
     /**
-     * @todo Write the documentation.
+     * The name of the element.
      */
     name: string;
     /**
-     * @todo Write the documentation.
+     * Unique identifier of the element.
      */
     id: string;
     /**
-     * @todo Write the documentation.
+     * @check
+     * Selected option value
      */
     value: string | TreeSelectSelectionKeysType | TreeSelectSelectionKeysType[] | undefined | null;
 }
@@ -82,39 +85,41 @@ interface TreeSelectChangeEvent {
      */
     value: string | TreeSelectSelectionKeysType | TreeSelectSelectionKeysType[] | undefined | null;
     /**
-     * @todo Write the documentation.
+     * Stops the event from propagating.
      */
     stopPropagation(): void;
     /**
-     * @todo Write the documentation.
+     * Prevents the default action of the event.
      */
     preventDefault(): void;
     /**
-     * @todo Write the documentation.
+     * Target element.
      */
     target: TreeSelectChangeTargetOptions;
 }
 
 /**
- * @todo Write the documentation.
+ * Custom treeselect selection keys type
+ * @group Misc
  */
 interface TreeSelectSelectionKeysType {
     /**
-     * @todo Write the documentation.
+     * Extra options.
      */
     [key: string]: boolean | TreeSelectCheckboxSelectionKeyType;
 }
 
 /**
- * @todo Write the documentation.
+ * Custom checkbox selection key type
+ * @group Misc
  */
 interface TreeSelectCheckboxSelectionKeyType {
     /**
-     * @todo Write the documentation.
+     * Whether the checkbox is checked or not.
      */
     checked?: boolean;
     /**
-     * @todo Write the documentation.
+     * Whether the checkbox is partially checked or not.
      */
     partialChecked?: boolean;
 }
@@ -136,11 +141,12 @@ interface TreeSelectEventNodeEvent {
 }
 
 /**
- * @todo Write the documentation.
+ * Custom expanded keys type.
+ * @group Misc
  */
 interface TreeSelectExpandedKeysType {
     /**
-     * @todo Write the documentation.
+     * Extra options.
      */
     [key: string]: boolean;
 }
@@ -178,15 +184,17 @@ interface TreeSelectFilterValueChangeEvent {
 }
 
 /**
- * @todo Write the documentation.
+ * Custom filter options.
+ * @group Misc
  */
 interface TreeSelectFilterOptions {
     /**
-     * @todo Write the documentation.
+     * Used to filter options
+     * @param {KeyboardEvent} event - Browser event.
      */
     filter?: (event?: KeyboardEvent) => void;
     /**
-     * @todo Write the documentation.
+     * Used to reset the filtered options
      */
     reset?: () => void;
 }
@@ -234,7 +242,7 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      */
     emptyMessage?: string | undefined;
     /**
-     * @todo Write the documentation.
+     * An array of keys to represent the state of the treeselect expansion state in controlled mode.
      */
     expandedKeys?: TreeSelectExpandedKeysType | undefined;
     /**
@@ -279,7 +287,7 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      */
     inputId?: string | undefined;
     /**
-     * @todo Write the documentation.
+     * Reference of the input element.
      */
     inputRef?: React.Ref<HTMLInputElement> | undefined;
     /**
