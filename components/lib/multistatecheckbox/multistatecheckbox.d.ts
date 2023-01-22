@@ -12,65 +12,66 @@ import TooltipOptions from '../tooltip/tooltipoptions';
 import { IconType } from '../utils';
 
 /**
- * @todo Write the documentation
+ * Custom MultiStateCheckbox option.
+ * @group Misc
  */
 interface MultiStateCheckboxOption {
     /**
-     * @todo Write the documentation
+     * The icon of the option.
      */
     icon: IconType<MultiStateCheckboxProps>;
     /**
-     * @todo Write the documentation
+     * Inline style of the element.
      */
     style: React.CSSProperties;
     /**
-     * @todo Write the documentation
+     * Style class of the element.
      */
     className: string;
     /**
-     * @todo Write the documentation
+     * Extra options.
      */
     [key: string]: any;
 }
 
 /**
- * @todo Write the documentation
+ * Custom icon template options.
  */
 interface MultiStateCheckboxIconTemplateEvent {
     /**
-     * @todo Write the documentation
+     * Option of the element.
      */
-    option: MultiStateCheckboxOption | undefined | null;
+    option: MultiStateCheckboxOption | null | undefined;
     /**
-     * @todo Write the documentation
+     * Style class of the element.
      */
     className: string;
     /**
-     * @todo Write the documentation
+     * The default element created by the component.
      */
     element: JSX.Element;
     /**
-     * @todo Write the documentation
+     * The props passed to the component.
      */
     props: MultiStateCheckboxProps;
 }
 
 /**
- * @todo Write the documentation
+ * Custom change target options.
  */
 interface MultiStateCheckboxChangeTargetOptions {
     /**
-     * @todo Write the documentation
+     * The name of the element.
      */
     name: string;
     /**
-     * @todo Write the documentation
+     * Unique identifier of the element.
      */
     id: string;
     /**
-     * @todo Write the documentation
+     * Value of the MultiStateCheckbox.
      */
-    value: boolean | undefined | null;
+    value: boolean | null | undefined;
 }
 
 /**
@@ -88,15 +89,15 @@ interface MultiStateCheckboxChangeEvent {
      */
     value: any;
     /**
-     * @todo Write the documentation
+     * Stops the event from propagating.
      */
     stopPropagation(): void;
     /**
-     * @todo Write the documentation
+     * Prevents the default action of the event.
      */
     preventDefault(): void;
     /**
-     * @todo Write the documentation
+     * Target options.
      */
     target: MultiStateCheckboxChangeTargetOptions;
 }
@@ -127,7 +128,7 @@ export interface MultiStateCheckboxProps extends Omit<React.DetailedHTMLProps<Re
      */
     iconTemplate?: React.ReactNode | ((options: MultiStateCheckboxIconTemplateEvent) => React.ReactNode);
     /**
-     * @todo Write the documentation
+     * A property to uniquely identify an option.
      */
     dataKey?: string | undefined;
     /**
