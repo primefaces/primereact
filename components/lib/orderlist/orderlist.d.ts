@@ -26,15 +26,16 @@ interface OrderListChangeEvent {
 }
 
 /**
- * @todo Write the documentation
+ * Custom filter options.
+ * @group Misc
  */
 interface OrderListFilterOptions {
     /**
-     * @todo Write the documentation
+     * Browser keyboard event for the filter orderlist element.
      */
     filter?: (event?: KeyboardEvent) => void;
     /**
-     * @todo Write the documentation
+     * Used to reset the filter.
      */
     reset?: () => void;
 }
