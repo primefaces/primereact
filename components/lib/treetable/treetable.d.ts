@@ -13,73 +13,78 @@ import { PaginatorTemplate } from '../paginator';
 import TreeNode from '../treenode';
 
 /**
- * @todo Write the documentation.
+ * Custom selection keys type.
+ * @group Misc
  */
 interface TreeTableSelectionKeysType {
     /**
-     * @todo Write the documentation.
+     * Extra options.
      */
     [key: string]: boolean | TreeTableCheckboxSelectionKeyType | undefined;
 }
 
 /**
- * @todo Write the documentation.
+ * Custom treetable checkbox selection type
+ * @group Misc
  */
 interface TreeTableCheckboxSelectionKeyType {
     /**
-     * @todo Write the documentation.
+     * Whether the checkbox is checked or not.
      */
     checked?: boolean;
     /**
-     * @todo Write the documentation.
+     * Whether the checkbox is partially checked or not.
      */
     partialChecked?: boolean;
 }
 
 /**
- * @todo Write the documentation.
+ * Custom expanded keys type.
+ * @group Misc
  */
 type TreeTableExpandedKeysType = {
     /**
-     * @todo Write the documentation.
+     * Extra options.
      */
     [key: string]: boolean;
 };
 
 /**
- * @todo Write the documentation.
+ * Custom treetable sort meta.
+ * @group Misc
  */
 interface TreeTableSortMeta {
     /**
-     * @todo Write the documentation.
+     * The field to sort against.
      */
     field: string;
     /**
-     * @todo Write the documentation.
+     * Sort order as integer.
      */
-    order: 1 | 0 | -1 | undefined | null;
+    order: 1 | 0 | -1 | null | undefined;
 }
 
 /**
- * @todo Write the documentation.
+ * Custom treetable filter metadata.
  */
 interface TreeTableFilterMetaData {
     /**
-     * @todo Write the documentation.
+     * Value to filter against.
      */
     value: any;
     /**
-     * @todo Write the documentation.
+     * Type of filter match.
      */
     matchMode: 'startsWith' | 'contains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'custom' | undefined;
 }
 
 /**
- * @todo Write the documentation.
+ * Custom treetable filter meta.
+ * @group Misc
  */
 interface TreeTableFilterMeta {
     /**
-     * @todo Write the documentation.
+     * Extra options.
      */
     [key: string]: TreeTableFilterMetaData;
 }
@@ -111,7 +116,7 @@ interface TreeTableToggleEvent {
      */
     originalEvent: React.SyntheticEvent;
     /**
-     * @todo Write the documentation.
+     * Collapsed state as a boolean.
      */
     value: TreeTableExpandedKeysType;
 }
@@ -131,11 +136,11 @@ interface TreeTablePageEvent {
      */
     rows: number;
     /**
-     * @todo Write the documentation.
+     * Value of the new page.
      */
     page: number;
     /**
-     * @todo Write the documentation.
+     * Total number of pages.
      */
     pageCount: number;
 }
@@ -520,7 +525,7 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
     onUnselect?(event: TreeTableEvent): void;
     /**
      * Function that takes the row data and returns an object in &#123;'styleclass' : condition&#125; format to define a classname for a particular now.
-     * @param {TreeNode} data - @todo Write the documentation.
+     * @param {TreeNode} data - Value displayed by the treetable.
      */
     rowClassName?(data: TreeNode): object;
 }
@@ -530,12 +535,25 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
  */
 export declare class TreeTable extends React.Component<TreeTableProps, any> {
     /**
-     * @todo Write the documentation.
-     * @param {T} value - @todo Write the documentation.
-     * @param {string} field - @todo Write the documentation.
-     * @param {string} mode - @todo Write the documentation.
+     * Filters the data.
+     * @param {T} value - The filter value
+     * @param {string} field - The filter field
+     * @param {string} mode - Filter match mode.
      */
-    public filter<T>(value: T, field: string, mode: 'startsWith' | 'contains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'custom' | undefined): void;
+    public filter<T>(
+        /**
+         * The filter value
+         */
+        value: T,
+        /**
+         * The filter field
+         */
+        field: string,
+        /**
+         * Filter match mode.
+         */
+        mode: 'startsWith' | 'contains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'custom' | undefined
+    ): void;
     /**
      * Used to get container element.
      * @return {HTMLDivElement} Container element
