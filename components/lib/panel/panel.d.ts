@@ -12,55 +12,57 @@ import { CSSTransitionProps } from '../csstransition';
 import { IconType } from '../utils';
 
 /**
- * @todo Write the documantation
+ * Custom panel header template options.
+ * @group Misc
  */
 interface PanelHeaderTemplateOptions {
     /**
-     * @todo Write the documantation
+     * Style class of the panel.
      */
     className: string;
     /**
-     * @todo Write the documantation
+     * Style class of the panel title.
      */
     titleClssName: string;
     /**
-     * @todo Write the documantation
+     * Style class of the panel icons.
      */
     iconsClassName: string;
     /**
-     * @todo Write the documantation
+     * Style class of the panel toggler.
      */
     togglerClassName: string;
     /**
-     * @todo Write the documantation
+     * Style class of the panel toggler icon.
      */
     togglerIconClassName: string;
     /**
-     * @todo Write the documantation
+     * Callback to invoke when the toggler button is clicked.
+     * @param {React.MouseEvent<HTMLElement>} event Browser event.
      */
     onTogglerClick(event: React.MouseEvent<HTMLElement>): void;
     /**
-     * @todo Write the documantation
+     * The JSX element that represents the title of the panel.
      */
     titleElement: JSX.Element;
     /**
-     * @todo Write the documantation
+     * The JSX element that represents the icons of the panel.
      */
     iconsElement: JSX.Element;
     /**
-     * @todo Write the documantation
+     * The JSX element that represents the toggler of the panel.
      */
     togglerElement: JSX.Element;
     /**
-     * @todo Write the documantation
+     * The JSX element that represents the panel.
      */
     element: JSX.Element;
     /**
-     * @todo Write the documantation
+     * The props of the Panel component.
      */
     props: PanelProps;
     /**
-     * @todo Write the documantation
+     * Whether the panel header is collapsed or not.
      */
     collapsed: boolean;
 }
@@ -106,11 +108,13 @@ export interface PanelProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      */
     collapsed?: boolean | undefined;
     /**
-     * @todo Write the documentation
+     * Icon of a expanded tab.
+     * @defaultValue pi pi-plus
      */
     expandIcon?: IconType<PanelProps> | undefined;
     /**
-     * @todo Write the documentation
+     * Icon of a collapsed tab.
+     * @defaultValue pi pi-minus
      */
     collapseIcon?: IconType<PanelProps> | undefined;
     /**
