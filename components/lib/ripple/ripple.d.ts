@@ -28,7 +28,7 @@ export interface RippleProps {
  *
  * [Live Demo](https://www.primefaces.org/primereact/ripple/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
  *
  * @group Component
  */

@@ -125,7 +125,7 @@ export interface KnobProps extends Omit<React.DetailedHTMLProps<React.InputHTMLA
  *
  * [Live Demo](https://www.primefaces.org/primereact/knob/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
  *
  * @group Component
  */

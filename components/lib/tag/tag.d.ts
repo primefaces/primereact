@@ -47,7 +47,7 @@ export interface TagProps extends Omit<React.DetailedHTMLProps<React.HTMLAttribu
  *
  * [Live Demo](https://www.primefaces.org/primereact/tag/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
  *
  * @group Component
  */

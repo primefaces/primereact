@@ -174,7 +174,7 @@ export interface AccordionProps extends Omit<React.DetailedHTMLProps<React.HTMLA
  *
  * [Live Demo](https://www.primefaces.org/primereact/accordion/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
  *
  * @group Component
  */

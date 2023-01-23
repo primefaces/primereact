@@ -265,7 +265,7 @@ export interface DialogProps {
  *
  * [Live Demo](https://www.primefaces.org/primereact/dialog/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
  *
  * @group Component
  */
