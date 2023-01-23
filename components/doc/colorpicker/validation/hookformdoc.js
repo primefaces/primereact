@@ -38,7 +38,7 @@ export function HookFormDoc(props) {
         basic: `
 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column align-items-center justify-content-center">
     <Toast ref={toast} />
-    <Controller name="color" control={control} rules={{ required: 'Color is required.' }} render={({ field }) => <ColorPicker name="color" control={control} value={field.color} onChange={(e) => field.onChange(e.value)} />} />
+    <Controller name="color" control={control} rules={{ required: 'Color is required.' }} render={({ field }) => <ColorPicker name="color" control={control} value={field.value} onChange={(e) => field.onChange(e.value)} />} />
     {getFormErrorMessage('color')}
     <Button type="submit" label="Submit" className="mt-2" />
 </form>
@@ -83,7 +83,7 @@ export default function HookFormDoc() {
         <div className="card flex justify-content-center">
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column align-items-center justify-content-center">
                 <Toast ref={toast} />
-                <Controller name="color" control={control} rules={{ required: 'Color is required.' }} render={({ field }) => <ColorPicker name="color" control={control} value={field.color} onChange={(e) => field.onChange(e.value)} />} />
+                <Controller name="color" control={control} rules={{ required: 'Color is required.' }} render={({ field }) => <ColorPicker name="color" control={control} value={field.value} onChange={(e) => field.onChange(e.value)} />} />
                 {getFormErrorMessage('color')}
                 <Button type="submit" label="Submit" className="mt-2" />
             </form>
@@ -131,7 +131,7 @@ export default function HookFormDoc() {
         <div className="card flex justify-content-center">
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column align-items-center justify-content-center">
                 <Toast ref={toast} />
-                <Controller name="color" control={control} rules={{ required: 'Color is required.' }} render={({ field }) => <ColorPicker name="color" control={control} value={field.color} onChange={(e) => field.onChange(e.value)} />} />
+                <Controller name="color" control={control} rules={{ required: 'Color is required.' }} render={({ field }) => <ColorPicker name="color" control={control} value={field.value} onChange={(e) => field.onChange(e.value)} />} />
                 {getFormErrorMessage('color')}
                 <Button type="submit" label="Submit" className="mt-2" />
             </form>
@@ -150,7 +150,7 @@ export default function HookFormDoc() {
             <div className="card flex justify-content-center">
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column align-items-center justify-content-center">
                     <Toast ref={toast} />
-                    <Controller name="color" control={control} rules={{ required: 'Color is required.' }} render={({ field }) => <ColorPicker name="color" control={control} value={field.color} onChange={(e) => field.onChange(e.value)} />} />
+                    <Controller name="color" control={control} rules={{ required: 'Color is required.' }} render={({ field }) => <ColorPicker name="color" control={control} value={field.value} onChange={(e) => field.onChange(e.value)} />} />
                     {getFormErrorMessage('color')}
                     <Button type="submit" label="Submit" className="mt-2" />
                 </form>

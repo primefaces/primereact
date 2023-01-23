@@ -16,7 +16,7 @@ export function HookFormDoc(props) {
     };
 
     const defaultValues = {
-        checked: false
+        value: ''
     };
 
     const {
@@ -27,7 +27,7 @@ export function HookFormDoc(props) {
     } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
-        data.checked && show();
+        data.value && show();
 
         reset();
     };
@@ -39,13 +39,13 @@ export function HookFormDoc(props) {
     const code = {
         basic: `
 <Controller
-    name="checked"
+    name="value"
     control={control}
     rules={{ required: 'Name - Surname is required.' }}
     render={({ field, fieldState }) => (
         <>
-            <label htmlFor={field.name} className={classNames({ 'p-error': errors.checked })}></label>
-            <InputText inputId={field.name} checked={field.value} inputRef={field.ref} className={classNames({ 'p-invalid my-1': fieldState.error })} onChange={(e) => field.onChange(e.target.value)} />
+            <label htmlFor={field.name} className={classNames({ 'p-error': errors.value })}></label>
+            <InputText inputId={field.name} value={field.value} inputRef={field.ref} className={classNames({ 'p-invalid my-1': fieldState.error })} onChange={(e) => field.onChange(e.target.value)} />
             {getFormErrorMessage(field.name)}
         </>
     )}/>        
@@ -67,7 +67,7 @@ export default function HookFormDoc() {
     };
 
     const defaultValues = {
-        checked: false
+        value: ''
     };
 
     const {
@@ -78,7 +78,7 @@ export default function HookFormDoc() {
     } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
-        data.checked && show();
+        data.value && show();
 
         reset();
     };
@@ -95,13 +95,13 @@ export default function HookFormDoc() {
                     <div className="mb-2 flex flex-column align-items-center">
                         <Toast ref={toast} />
                         <Controller
-                            name="checked"
+                            name="value"
                             control={control}
                             rules={{ required: 'Name - Surname is required.' }}
                             render={({ field, fieldState }) => (
                                 <>
-                                    <label htmlFor={field.name} className={classNames({ 'p-error': errors.checked })}></label>
-                                    <InputText inputId={field.name} checked={field.value} inputRef={field.ref} className={classNames({ 'p-invalid my-1': fieldState.error })} onChange={(e) => field.onChange(e.target.value)} />
+                                    <label htmlFor={field.name} className={classNames({ 'p-error': errors.value })}></label>
+                                    <InputText inputId={field.name} value={field.value} inputRef={field.ref} className={classNames({ 'p-invalid my-1': fieldState.error })} onChange={(e) => field.onChange(e.target.value)} />
                                     {getFormErrorMessage(field.name)}
                                 </>
                             )}
@@ -131,7 +131,7 @@ export default function HookFormDoc() {
     };
 
     const defaultValues = {
-        checked: false
+        value: ''
     };
 
     const {
@@ -142,7 +142,7 @@ export default function HookFormDoc() {
     } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
-        data.checked && show();
+        data.value && show();
 
         reset();
     };
@@ -159,13 +159,13 @@ export default function HookFormDoc() {
                     <div className="mb-2 flex flex-column align-items-center">
                         <Toast ref={toast} />
                         <Controller
-                            name="checked"
+                            name="value"
                             control={control}
                             rules={{ required: 'Name - Surname is required.' }}
                             render={({ field, fieldState }) => (
                                 <>
-                                    <label htmlFor={field.name} className={classNames({ 'p-error': errors.checked })}></label>
-                                    <InputText inputId={field.name} checked={field.value} inputRef={field.ref} className={classNames({ 'p-invalid my-1': fieldState.error })} onChange={(e) => field.onChange(e.target.value)} />
+                                    <label htmlFor={field.name} className={classNames({ 'p-error': errors.value })}></label>
+                                    <InputText inputId={field.name} value={field.value} inputRef={field.ref} className={classNames({ 'p-invalid my-1': fieldState.error })} onChange={(e) => field.onChange(e.target.value)} />
                                     {getFormErrorMessage(field.name)}
                                 </>
                             )}
@@ -193,13 +193,13 @@ export default function HookFormDoc() {
                         <div className="mb-2 flex flex-column align-items-center">
                             <Toast ref={toast} />
                             <Controller
-                                name="checked"
+                                name="value"
                                 control={control}
                                 rules={{ required: 'Name - Surname is required.' }}
                                 render={({ field, fieldState }) => (
                                     <>
-                                        <label htmlFor={field.name} className={classNames({ 'p-error': errors.checked })}></label>
-                                        <InputText inputId={field.name} checked={field.value} inputRef={field.ref} className={classNames({ 'p-invalid my-1': fieldState.error })} onChange={(e) => field.onChange(e.target.value)} />
+                                        <label htmlFor={field.name} className={classNames({ 'p-error': errors.value })}></label>
+                                        <InputText inputId={field.name} value={field.value} inputRef={field.ref} className={classNames({ 'p-invalid my-1': fieldState.error })} onChange={(e) => field.onChange(e.target.value)} />
                                         {getFormErrorMessage(field.name)}
                                     </>
                                 )}
