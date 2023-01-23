@@ -161,7 +161,7 @@ interface ConfirmDialogReturn {
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module confirmdialog
+ * @group Component
  */
 export declare class ConfirmDialog extends React.Component<ConfirmDialogProps, any> {
     /**

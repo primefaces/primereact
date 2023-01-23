@@ -39,7 +39,7 @@ export interface BreadCrumbProps extends Omit<React.DetailedHTMLProps<React.HTML
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module breadcrumb
+ * @group Component
  */
 export declare class BreadCrumb extends React.Component<BreadCrumbProps, any> {
     /**

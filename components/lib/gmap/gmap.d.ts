@@ -96,7 +96,7 @@ export interface GMapProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module gmap
+ * @group Component
  */
 export declare class GMap extends React.Component<GMapProps, any> {
     /**

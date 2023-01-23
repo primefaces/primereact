@@ -71,7 +71,7 @@ export interface StyleClassProps {
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module styleclass
+ * @group Component
  */
 export declare class StyleClass extends React.Component<StyleClassProps, any> {
     /**

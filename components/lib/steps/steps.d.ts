@@ -70,7 +70,7 @@ export interface StepsProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module steps
+ * @group Component
  */
 export declare class Steps extends React.Component<StepsProps, any> {
     /**

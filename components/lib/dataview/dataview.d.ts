@@ -236,7 +236,8 @@ export interface DataViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module dataview
+ * @group Component
+ *
  */
 // tslint:disable-next-line:max-classes-per-file
 export declare class DataView extends React.Component<DataViewProps, any> {

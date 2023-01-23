@@ -112,7 +112,7 @@ export interface InputSwitchProps extends Omit<React.DetailedHTMLProps<React.Inp
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module inputswitch
+ * @group Component
  */
 export declare class InputSwitch extends React.Component<InputSwitchProps, any> {
     /**

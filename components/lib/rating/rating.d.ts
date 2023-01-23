@@ -105,7 +105,7 @@ export interface RatingProps extends Omit<React.DetailedHTMLProps<React.InputHTM
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module rating
+ * @group Component
  */
 export declare class Rating extends React.Component<RatingProps, any> {
     /**

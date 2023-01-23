@@ -65,7 +65,7 @@ export interface TabMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module tabmenu
+ * @group Component
  */
 export declare class TabMenu extends React.Component<TabMenuProps, any> {
     /**

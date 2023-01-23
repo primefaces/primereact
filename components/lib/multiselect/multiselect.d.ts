@@ -461,7 +461,7 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module multiselect
+ * @group Component
  */
 export declare class MultiSelect extends React.Component<MultiSelectProps, any> {
     /**

@@ -191,7 +191,7 @@ export interface GalleriaProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module galleria
+ * @group Component
  */
 export declare class Galleria extends React.Component<GalleriaProps, any> {
     /**

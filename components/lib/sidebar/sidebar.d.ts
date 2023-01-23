@@ -112,7 +112,7 @@ export interface SidebarProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module sidebar
+ * @group Component
  */
 export declare class Sidebar extends React.Component<SidebarProps, any> {
     /**

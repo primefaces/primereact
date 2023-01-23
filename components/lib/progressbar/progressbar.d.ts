@@ -57,7 +57,7 @@ export interface ProgressBarProps extends Omit<React.DetailedHTMLProps<React.HTM
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module progressbar
+ * @group Component
  */
 export declare class ProgressBar extends React.Component<ProgressBarProps, any> {
     /**

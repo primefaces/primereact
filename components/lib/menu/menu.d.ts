@@ -71,7 +71,7 @@ export interface MenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module menu
+ * @group Component
  */
 export declare class Menu extends React.Component<MenuProps, any> {
     /**

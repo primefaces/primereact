@@ -77,7 +77,7 @@ export interface AvatarProps extends Omit<React.DetailedHTMLProps<React.HTMLAttr
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module avatar
+ * @group Component
  */
 export declare class Avatar extends React.Component<AvatarProps, any> {
     /**

@@ -170,7 +170,7 @@ export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.I
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module cascadeselect
+ * @group Component
  */
 export declare class CascadeSelect extends React.Component<CascadeSelectProps, any> {
     /**

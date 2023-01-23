@@ -292,7 +292,7 @@ export interface PickListProps {
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module picklist
+ * @group Component
  */
 export declare class PickList extends React.Component<PickListProps, any> {
     /**

@@ -295,7 +295,7 @@ export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHT
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module listbox
+ * @group Component
  */
 export declare class ListBox extends React.Component<ListBoxProps, any> {
     /**

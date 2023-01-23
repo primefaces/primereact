@@ -123,7 +123,7 @@ export interface EditorProps extends Omit<React.DetailedHTMLProps<React.InputHTM
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module editor
+ * @group Component
  */
 export declare class Editor extends React.Component<EditorProps, any> {
     /**

@@ -24,5 +24,6 @@ export type CSSTransitionProps<Ref extends undefined | HTMLElement = undefined> 
 
 /**
  * @group Component
+ * @todo Write the documentation.
  */
 export declare class CSSTransition<Ref extends undefined | HTMLElement> extends React.Component<CSSTransitionProps<Ref>, any> {}

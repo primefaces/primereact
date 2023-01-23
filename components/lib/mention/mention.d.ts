@@ -193,7 +193,7 @@ export interface MentionProps extends Omit<React.DetailedHTMLProps<React.Textare
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module mention
+ * @group Component
  */
 export declare class Mention extends React.Component<MentionProps, any> {
     /**

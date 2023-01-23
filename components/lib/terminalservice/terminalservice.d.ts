@@ -9,6 +9,7 @@
  */
 
 /**
+ * Custom terminal service options.
  * @group Misc
  */
 export interface TerminalServiceOptions {
@@ -33,6 +34,14 @@ export interface TerminalServiceOptions {
 }
 
 /**
+ * **PrimeReact - TerminalService**
+ *
+ * _Terminal is a text based user interface._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/terminal/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
  * @group Component
  */
 export declare const TerminalService: TerminalServiceOptions;

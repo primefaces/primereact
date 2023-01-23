@@ -73,7 +73,7 @@ export interface ScrollTopProps {
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module scrolltop
+ * @group Component
  */
 export declare class ScrollTop extends React.Component<ScrollTopProps, any> {
     /**

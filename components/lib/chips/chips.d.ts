@@ -196,7 +196,7 @@ export interface ChipsProps extends Omit<React.DetailedHTMLProps<React.InputHTML
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module chips
+ * @group Component
  */
 export declare class Chips extends React.Component<ChipsProps, any> {
     /**

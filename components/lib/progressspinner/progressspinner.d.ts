@@ -44,7 +44,7 @@ export interface ProgressSpinnerProps extends Omit<React.DetailedHTMLProps<React
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module progressspinner
+ * @group Component
  */
 export declare class ProgressSpinner extends React.Component<ProgressSpinnerProps, any> {
     /**

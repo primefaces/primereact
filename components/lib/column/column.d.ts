@@ -871,6 +871,6 @@ export interface ColumnProps {
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module column
+ * @group Component
  */
 export declare class Column extends React.Component<ColumnProps, any> {}

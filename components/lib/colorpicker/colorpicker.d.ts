@@ -145,7 +145,7 @@ export interface ColorPickerProps extends Omit<React.DetailedHTMLProps<React.Inp
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module colorpicker
+ * @group Component
  */
 export declare class ColorPicker extends React.Component<ColorPickerProps, any> {
     /**

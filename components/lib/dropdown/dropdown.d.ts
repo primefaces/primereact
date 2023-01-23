@@ -337,7 +337,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module dropdown
+ * @group Component
  */
 export declare class Dropdown extends React.Component<DropdownProps, any> {
     /**

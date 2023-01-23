@@ -168,7 +168,7 @@ export interface AccordionProps extends Omit<React.DetailedHTMLProps<React.HTMLA
 }
 
 /**
- * **PrimeReact - AccordionTab**
+ * **PrimeReact - Accordion**
  *
  * _Accordion groups a collection of contents in tabs._
  *
@@ -176,7 +176,7 @@ export interface AccordionProps extends Omit<React.DetailedHTMLProps<React.HTMLA
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module accordion
+ * @group Component
  */
 // tslint:disable-next-line:max-classes-per-file
 export declare class Accordion extends React.Component<AccordionProps, any> {

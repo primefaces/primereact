@@ -112,7 +112,7 @@ export interface SlideMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLA
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module slidemenu
+ * @group Component
  */
 export declare class SlideMenu extends React.Component<SlideMenuProps, any> {
     /**

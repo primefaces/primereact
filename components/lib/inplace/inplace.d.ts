@@ -4,7 +4,7 @@
  *
  * [Live Demo](https://www.primefaces.org/primereact/inplace)
  *
- *  * Helper Components:
+ * Helper Components:
  *
  * - {@link InplaceDisplay}
  *
@@ -86,7 +86,7 @@ export interface InplaceProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module inplace
+ * @group Component
  */
 export declare class Inplace extends React.Component<InplaceProps, any> {
     /**

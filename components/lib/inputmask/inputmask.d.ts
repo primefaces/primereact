@@ -120,7 +120,7 @@ export interface InputMaskProps extends Omit<InputTextProps, 'onChange'> {
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module inputmask
+ * @group Component
  */
 export declare class InputMask extends React.Component<InputMaskProps, any> {
     /**

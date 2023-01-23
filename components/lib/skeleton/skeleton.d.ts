@@ -58,7 +58,7 @@ export interface SkeletonProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module skeleton
+ * @group Component
  */
 export declare class Skeleton extends React.Component<SkeletonProps, any> {
     /**

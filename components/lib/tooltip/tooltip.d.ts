@@ -44,7 +44,7 @@ export interface TooltipProps extends TooltipOptions {
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module tooltip
+ * @group Component
  */
 export declare class Tooltip extends React.Component<TooltipProps, any> {
     /**

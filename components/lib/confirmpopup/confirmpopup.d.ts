@@ -186,7 +186,7 @@ interface ConfirmPopupReturn {
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module confirmpopup
+ * @group Component
  */
 export declare class ConfirmPopup extends React.Component<ConfirmPopupProps, any> {
     /**

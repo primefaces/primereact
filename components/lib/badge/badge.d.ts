@@ -45,7 +45,7 @@ export interface BadgeProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module badge
+ * @group Component
  */
 export declare class Badge extends React.Component<BadgeProps, any> {
     /**

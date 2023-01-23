@@ -130,7 +130,7 @@ export interface ToggleButtonProps extends Omit<React.DetailedHTMLProps<React.In
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module togglebutton
+ * @group Component
  */
 export declare class ToggleButton extends React.Component<ToggleButtonProps, any> {
     /**

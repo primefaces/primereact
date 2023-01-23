@@ -49,5 +49,6 @@ export interface OverlayServiceOptions {
 
 /**
  * @group Component
+ * @todo Write the documentation.
  */
 export declare const OverlayService: OverlayServiceOptions;

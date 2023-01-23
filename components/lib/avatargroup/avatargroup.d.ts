@@ -30,7 +30,7 @@ export interface AvatarGroupProps extends Omit<React.DetailedHTMLProps<React.HTM
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module avatargroup
+ * @group Component
  */
 export declare class AvatarGroup extends React.Component<AvatarGroupProps, any> {
     /**

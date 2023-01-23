@@ -173,7 +173,7 @@ export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputH
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module password
+ * @group Component
  */
 export declare class Password extends React.Component<PasswordProps, any> {
     /**

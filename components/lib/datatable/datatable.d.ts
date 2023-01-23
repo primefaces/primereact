@@ -1331,7 +1331,7 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module datatable
+ * @group Component
  */
 export declare class DataTable<TValue extends DataTableValueArray> extends React.Component<DataTableProps<TValue>, any> {
     /**

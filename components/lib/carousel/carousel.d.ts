@@ -144,7 +144,7 @@ export interface CarouselProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module carousel
+ * @group Component
  */
 export declare class Carousel extends React.Component<CarouselProps, any> {
     /**

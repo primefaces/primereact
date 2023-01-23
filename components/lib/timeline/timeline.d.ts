@@ -60,7 +60,7 @@ export interface TimelineProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module timeline
+ * @group Component
  */
 export declare class Timeline extends React.Component<TimelineProps, any> {
     /**

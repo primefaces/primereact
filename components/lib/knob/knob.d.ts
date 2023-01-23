@@ -127,7 +127,7 @@ export interface KnobProps extends Omit<React.DetailedHTMLProps<React.InputHTMLA
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module knob
+ * @group Component
  */
 export declare class Knob extends React.Component<KnobProps, any> {
     /**

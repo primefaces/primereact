@@ -507,7 +507,7 @@ export interface TreeProps {
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module tree
+ * @group Component
  */
 export declare class Tree extends React.Component<TreeProps, any> {
     /**

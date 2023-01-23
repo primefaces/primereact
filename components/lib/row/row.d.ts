@@ -38,6 +38,6 @@ export interface RowProps {
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module row
+ * @group Component
  */
 export declare class Row extends React.Component<RowProps, any> {}

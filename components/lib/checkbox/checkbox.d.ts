@@ -133,7 +133,7 @@ export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputH
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module checkbox
+ * @group Component
  */
 export declare class Checkbox extends React.Component<CheckboxProps, any> {
     /**

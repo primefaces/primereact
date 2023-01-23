@@ -260,7 +260,7 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module inputnumber
+ * @group Component
  */
 export declare class InputNumber extends React.Component<InputNumberProps, any> {
     /**

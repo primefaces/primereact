@@ -106,7 +106,7 @@ export interface SelectButtonProps extends Omit<React.DetailedHTMLProps<React.In
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module selectbutton
+ * @group Component
  */
 export declare class SelectButton extends React.Component<SelectButtonProps, any> {
     /**

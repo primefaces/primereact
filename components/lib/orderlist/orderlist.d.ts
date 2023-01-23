@@ -120,7 +120,7 @@ export interface OrderListProps extends Omit<React.DetailedHTMLProps<React.HTMLA
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module orderlist
+ * @group Component
  */
 export declare class OrderList extends React.Component<OrderListProps, any> {
     /**

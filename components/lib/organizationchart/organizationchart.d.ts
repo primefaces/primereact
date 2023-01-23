@@ -118,7 +118,7 @@ export interface OrganizationChartProps extends Omit<React.DetailedHTMLProps<Rea
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module organizationchart
+ * @group Component
  */
 export declare class OrganizationChart extends React.Component<OrganizationChartProps, any> {
     /**

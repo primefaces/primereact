@@ -403,7 +403,7 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module treeselect
+ * @group Component
  */
 export declare class TreeSelect extends React.Component<TreeSelectProps, any> {
     /**

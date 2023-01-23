@@ -46,6 +46,14 @@ export interface InputTextareaProps extends Omit<React.DetailedHTMLProps<React.T
 }
 
 /**
+ * **PrimeReact - InputTextarea**
+ *
+ * _Inputtextarea add styling and autoResize functionality to standard textarea element._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/inputtextarea/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
+ *
  * @group Component
  */
 export declare const InputTextarea: React.ForwardRefExoticComponent<InputTextareaProps & React.RefAttributes<HTMLTextAreaElement>>;

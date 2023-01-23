@@ -121,7 +121,7 @@ export interface ToastProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module toast
+ * @group Component
  */
 export declare class Toast extends React.Component<ToastProps, any> {
     /**

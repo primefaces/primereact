@@ -66,7 +66,7 @@ export interface ChartProps {
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module chart
+ * @group Component
  */
 export declare class Chart extends React.Component<ChartProps, any> {
     /**

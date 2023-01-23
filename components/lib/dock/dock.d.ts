@@ -72,7 +72,7 @@ export interface DockProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module dock
+ * @group Component
  */
 export declare class Dock extends React.Component<DockProps, any> {
     /**

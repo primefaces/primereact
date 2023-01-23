@@ -49,7 +49,7 @@ export interface TagProps extends Omit<React.DetailedHTMLProps<React.HTMLAttribu
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module tag
+ * @group Component
  */
 export declare class Tag extends React.Component<TagProps, any> {
     /**

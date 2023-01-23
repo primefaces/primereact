@@ -32,6 +32,6 @@ export interface ColumnGroupProps {
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module columngroup
+ * @group Component
  */
 export declare class ColumnGroup extends React.Component<ColumnGroupProps, any> {}

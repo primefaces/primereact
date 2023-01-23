@@ -100,7 +100,7 @@ export interface DataScrollerProps extends Omit<React.DetailedHTMLProps<React.HT
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module datascroller
+ * @group Component
  */
 export declare class DataScroller extends React.Component<DataScrollerProps, any> {
     /**

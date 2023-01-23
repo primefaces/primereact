@@ -44,7 +44,7 @@ export interface DividerProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module divider
+ * @group Component
  */
 export declare class Divider extends React.Component<DividerProps, any> {
     /**

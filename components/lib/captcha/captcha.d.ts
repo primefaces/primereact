@@ -69,7 +69,7 @@ export interface CaptchaProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module captcha
+ * @group Component
  */
 export declare class Captcha extends React.Component<CaptchaProps, any> {
     /**

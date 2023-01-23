@@ -234,7 +234,8 @@ export interface TabViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module tabview
+ * @group Component
+ *
  */
 // tslint:disable-next-line:max-classes-per-file
 export declare class TabView extends React.Component<TabViewProps, any> {

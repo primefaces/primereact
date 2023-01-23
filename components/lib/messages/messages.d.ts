@@ -88,7 +88,7 @@ export interface MessagesProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module messages
+ * @group Component
  */
 export declare class Messages extends React.Component<MessagesProps, any> {
     /**

@@ -46,6 +46,6 @@ export interface CardProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module card
+ * @group Component
  */
 export declare class Card extends React.Component<CardProps, any> {}

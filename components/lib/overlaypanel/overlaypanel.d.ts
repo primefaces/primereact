@@ -78,7 +78,7 @@ export interface OverlayPanelProps extends Omit<React.DetailedHTMLProps<React.HT
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module overlaypanel
+ * @group Component
  */
 export declare class OverlayPanel extends React.Component<OverlayPanelProps, any> {
     /**

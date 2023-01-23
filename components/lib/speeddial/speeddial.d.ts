@@ -159,7 +159,7 @@ export interface SpeedDialProps extends Omit<React.DetailedHTMLProps<React.HTMLA
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module speeddial
+ * @group Component
  */
 export declare class SpeedDial extends React.Component<SpeedDialProps, any> {
     /**

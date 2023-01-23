@@ -70,7 +70,7 @@ export interface ContextMenuProps extends Omit<React.DetailedHTMLProps<React.HTM
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module contextmenu
+ * @group Component
  */
 export declare class ContextMenu extends React.Component<ContextMenuProps, any> {
     /**

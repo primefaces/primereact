@@ -108,7 +108,7 @@ export interface SplitterProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module splitter
+ * @group Component
  */
 export declare class Splitter extends React.Component<SplitterProps, any> {
     /**

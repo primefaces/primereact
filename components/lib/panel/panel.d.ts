@@ -157,7 +157,7 @@ export interface PanelProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module panel
+ * @group Component
  */
 export declare class Panel extends React.Component<PanelProps, any> {
     /**

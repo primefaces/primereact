@@ -86,7 +86,7 @@ export interface FieldsetProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module fieldset
+ * @group Component
  */
 export declare class Fieldset extends React.Component<FieldsetProps, any> {
     /**

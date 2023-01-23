@@ -80,7 +80,7 @@ export interface ImageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module image
+ * @group Component
  */
 export declare class Image extends React.Component<ImageProps, any> {
     /**

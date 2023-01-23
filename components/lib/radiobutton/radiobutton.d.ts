@@ -84,7 +84,7 @@ export interface RadioButtonProps extends Omit<React.DetailedHTMLProps<React.Inp
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module radiobutton
+ * @group Component
  */
 export declare class RadioButton extends React.Component<RadioButtonProps, any> {
     /**

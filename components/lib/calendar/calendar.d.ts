@@ -597,7 +597,7 @@ export interface CalendarProps {
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module calendar
+ * @group Component
  */
 export declare class Calendar extends React.Component<CalendarProps, any> {
     /**

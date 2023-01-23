@@ -35,7 +35,7 @@ export interface DeferredContentProps extends Omit<React.DetailedHTMLProps<React
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module deferredcontent
+ * @group Component
  */
 export declare class DeferredContent extends React.Component<DeferredContentProps, any> {
     /**

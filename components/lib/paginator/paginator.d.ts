@@ -513,7 +513,7 @@ export interface PaginatorProps extends Omit<React.DetailedHTMLProps<React.HTMLA
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module paginator
+ * @group Component
  */
 export declare class Paginator extends React.Component<PaginatorProps, any> {
     /**

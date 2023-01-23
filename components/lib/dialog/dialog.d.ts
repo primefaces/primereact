@@ -267,7 +267,7 @@ export interface DialogProps {
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module dialog
+ * @group Component
  */
 export declare class Dialog extends React.Component<DialogProps, any> {
     /**

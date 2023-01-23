@@ -30,6 +30,6 @@ export interface RippleProps {
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module ripple
+ * @group Component
  */
 export declare class Ripple extends React.Component<RippleProps, any> {}

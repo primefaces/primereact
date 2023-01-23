@@ -30,7 +30,7 @@ export interface ScrollPanelProps extends Omit<React.DetailedHTMLProps<React.HTM
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module scrollpanel
+ * @group Component
  */
 export declare class ScrollPanel extends React.Component<ScrollPanelProps, any> {
     /**

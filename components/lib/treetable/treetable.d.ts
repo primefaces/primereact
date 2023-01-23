@@ -539,7 +539,7 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module treetable
+ * @group Component
  */
 export declare class TreeTable extends React.Component<TreeTableProps, any> {
     /**

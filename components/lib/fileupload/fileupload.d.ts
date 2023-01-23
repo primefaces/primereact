@@ -457,7 +457,7 @@ interface FileUploadProps {
  * --- ---
  * ![PrimeReact](https://www.primefaces.org/primereact/images/logo.png|height=100|width=100)
  *
- * @module fileupload
+ * @group Component
  */
 export declare class FileUpload extends React.Component<FileUploadProps, any> {
     /**
