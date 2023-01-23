@@ -36,7 +36,7 @@ export function FormikDoc(props) {
     const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldValid(name) ? <small className="p-error mb-1">{formik.errors[name]}</small> : <small className="p-error"> </small>;
     };
 
     const code = {
@@ -51,7 +51,7 @@ export function FormikDoc(props) {
     }}
     className={classNames({ 'p-invalid': formik.errors.accept })}
 />
-<div className="ml-2">* I've read and accept the terms & conditions.</div>
+<div className="my-2">* I've read and accept the terms & conditions.</div>
 {getFormErrorMessage('accept')}
 <Button type="submit" label="Submit" icon="pi pi-check" />
 `,
@@ -64,7 +64,7 @@ import { classNames } from 'primereact/utils';
 import { TriStateCheckbox } from "primereact/tristatecheckbox";
 
 export default function FormikDoc() {
-    const toast = useRef(null);
+        const toast = useRef(null);
 
     const show = () => {
         toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'The form is successfully submitted.' });
@@ -92,14 +92,14 @@ export default function FormikDoc() {
     const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldValid(name) ? <small className="p-error mb-1">{formik.errors[name]}</small> : <small className="p-error"> </small>;
     };
 
     return (
         <div className="card flex flex-column align-items-center">
-            <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-start justify-content-center gap-2">
-                <Toast ref={toast} />
-                <div className="flex align-items-start">
+            <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-start justify-content-center">
+                <div className="flex flex-column align-items-start">
+                    <Toast ref={toast} />
                     <TriStateCheckbox
                         id="accept"
                         name="accept"
@@ -109,7 +109,7 @@ export default function FormikDoc() {
                         }}
                         className={classNames({ 'p-invalid': formik.errors.accept })}
                     />
-                    <div className="ml-2">* I've read and accept the terms & conditions.</div>
+                    <div className="my-2">* I've read and accept the terms & conditions.</div>
                 </div>
                 {getFormErrorMessage('accept')}
                 <Button type="submit" label="Submit" icon="pi pi-check" />
@@ -127,9 +127,9 @@ import { classNames } from 'primereact/utils';
 import { TriStateCheckbox } from "primereact/tristatecheckbox";
 
 export default function FormikDoc() {
-    const toast = useRef<Toast | null>(null);
+        const toast = useRef(null);
 
-    const show = (): void => {
+    const show = () => {
         toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'The form is successfully submitted.' });
     };
 
@@ -155,14 +155,14 @@ export default function FormikDoc() {
     const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldValid(name) ? <small className="p-error mb-1">{formik.errors[name]}</small> : <small className="p-error"> </small>;
     };
 
     return (
         <div className="card flex flex-column align-items-center">
-            <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-start justify-content-center gap-2">
-                <Toast ref={toast} />
-                <div className="flex align-items-start">
+            <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-start justify-content-center">
+                <div className="flex flex-column align-items-start">
+                    <Toast ref={toast} />
                     <TriStateCheckbox
                         id="accept"
                         name="accept"
@@ -172,7 +172,7 @@ export default function FormikDoc() {
                         }}
                         className={classNames({ 'p-invalid': formik.errors.accept })}
                     />
-                    <div className="ml-2">* I've read and accept the terms & conditions.</div>
+                    <div className="my-2">* I've read and accept the terms & conditions.</div>
                 </div>
                 {getFormErrorMessage('accept')}
                 <Button type="submit" label="Submit" icon="pi pi-check" />
@@ -190,9 +190,9 @@ export default function FormikDoc() {
                 <p></p>
             </DocSectionText>
             <div className="card flex flex-column align-items-center">
-                <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-start justify-content-center gap-2">
-                    <Toast ref={toast} />
-                    <div className="flex align-items-start">
+                <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-start justify-content-center">
+                    <div className="flex flex-column align-items-start">
+                        <Toast ref={toast} />
                         <TriStateCheckbox
                             id="accept"
                             name="accept"
@@ -202,7 +202,7 @@ export default function FormikDoc() {
                             }}
                             className={classNames({ 'p-invalid': formik.errors.accept })}
                         />
-                        <div className="ml-2">* I've read and accept the terms & conditions.</div>
+                        <div className="my-2">* I've read and accept the terms & conditions.</div>
                     </div>
                     {getFormErrorMessage('accept')}
                     <Button type="submit" label="Submit" icon="pi pi-check" />
