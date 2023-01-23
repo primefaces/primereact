@@ -1,24 +1,22 @@
 import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/chart/importdoc';
-import { PieChartDoc } from '../../components/doc/chart/piechartdoc';
+import { AccessibilityDoc } from '../../components/doc/chart/accessibilitydoc';
+import { ApiDoc } from '../../components/doc/chart/apidoc';
+import { BasicDoc } from '../../components/doc/chart/basicdoc';
+import { ComboDoc } from '../../components/doc/chart/combodoc';
 import { DoughnutChartDoc } from '../../components/doc/chart/doughnutdoc';
-import { VerticalBarDoc } from '../../components/doc/chart/verticalbardoc';
 import { HorizontalBarDoc } from '../../components/doc/chart/horizontalbardoc';
-import { MultiAxisBarDoc } from '../../components/doc/chart/multiaxisbardoc';
-import { StackedBarDoc } from '../../components/doc/chart/stackeddoc';
-import { BasicLineDoc } from '../../components/doc/chart/basiclinedoc';
-import { MultiAxisLineDoc } from '../../components/doc/chart/multiaxislinedoc';
+import { ImportDoc } from '../../components/doc/chart/importdoc';
+import { LineDoc } from '../../components/doc/chart/linedoc';
 import { LineStylesDoc } from '../../components/doc/chart/linestylesdoc';
+import { MultiAxisDoc } from '../../components/doc/chart/multiaxisdoc';
+import { PieChartDoc } from '../../components/doc/chart/piechartdoc';
 import { PolarAreaDoc } from '../../components/doc/chart/polarareadoc';
 import { RadarDoc } from '../../components/doc/chart/radardoc';
-import { ComboDoc } from '../../components/doc/chart/combodoc';
-import { ApiDoc } from '../../components/doc/chart/apidoc';
-import { AccessibilityDoc } from '../../components/doc/chart/accessibilitydoc';
-
-import { ModelDoc } from '../../components/doc/chart/modeldoc';
+import { StackedBarDoc } from '../../components/doc/chart/stackedbardoc';
+import { VerticalBarDoc } from '../../components/doc/chart/verticalbardoc';
+import { DocActions } from '../../components/doc/common/docactions';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
 
 const ChartDemo = () => {
     const docs = [
@@ -28,23 +26,9 @@ const ChartDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'model',
-            label: 'Model',
-            component: ModelDoc,
-            children: [
-                {
-                    id: 'charttypes',
-                    label: 'Chart Types'
-                },
-                {
-                    id: 'data',
-                    label: 'Data'
-                },
-                {
-                    id: 'options',
-                    label: 'Options'
-                }
-            ]
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
             id: 'pie',
@@ -67,24 +51,19 @@ const ChartDemo = () => {
             component: HorizontalBarDoc
         },
         {
-            id: 'multiaxis',
-            label: 'Multi Axis Bar',
-            component: MultiAxisBarDoc
-        },
-        {
             id: 'stacked',
             label: 'Stacked Bar',
             component: StackedBarDoc
         },
         {
-            id: 'basicline',
-            label: 'Basic Line',
-            component: BasicLineDoc
+            id: 'line',
+            label: 'Line',
+            component: LineDoc
         },
         {
-            id: 'multiaxisline',
-            label: 'Multi Axis Line',
-            component: MultiAxisLineDoc
+            id: 'multiaxis',
+            label: 'Multi Axis',
+            component: MultiAxisDoc
         },
         {
             id: 'linestyles',
@@ -128,7 +107,7 @@ const ChartDemo = () => {
                     <h1>Chart</h1>
                     <p>
                         Chart components are based on{' '}
-                        <a style={{ color: 'black' }} href="http://www.chartjs.org/">
+                        <a href="http://www.chartjs.org/" className="text-primary-500 no-underline hover:underline">
                             Chart.js
                         </a>
                         , an open source HTML5 based charting library.

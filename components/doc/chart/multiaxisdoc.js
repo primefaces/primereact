@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Chart } from '../../lib/chart/Chart';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
-export function MultiAxisLineDoc(props) {
+export function MultiAxisDoc(props) {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
@@ -12,7 +12,6 @@ export function MultiAxisLineDoc(props) {
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
         const data = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [
@@ -34,9 +33,6 @@ export function MultiAxisLineDoc(props) {
                 }
             ]
         };
-
-        setChartData(data);
-
         const options = {
             stacked: false,
             maintainAspectRatio: false,
@@ -83,6 +79,7 @@ export function MultiAxisLineDoc(props) {
             }
         };
 
+        setChartData(data);
         setChartOptions(options);
     }, []);
 
@@ -94,7 +91,7 @@ export function MultiAxisLineDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
-export default function MultiAxisLineDoc() {
+export default function MultiAxisDemo() {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
@@ -103,7 +100,6 @@ export default function MultiAxisLineDoc() {
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
         const data = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [
@@ -125,9 +121,6 @@ export default function MultiAxisLineDoc() {
                 }
             ]
         };
-
-        setChartData(data);
-
         const options = {
             stacked: false,
             maintainAspectRatio: false,
@@ -174,6 +167,7 @@ export default function MultiAxisLineDoc() {
             }
         };
 
+        setChartData(data);
         setChartOptions(options);
     }, []);
 
@@ -188,7 +182,7 @@ export default function MultiAxisLineDoc() {
 import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
-export default function MultiAxisLineDoc() {
+export default function MultiAxisDemo() {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
@@ -197,7 +191,6 @@ export default function MultiAxisLineDoc() {
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
         const data = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [
@@ -219,9 +212,6 @@ export default function MultiAxisLineDoc() {
                 }
             ]
         };
-
-        setChartData(data);
-
         const options = {
             stacked: false,
             maintainAspectRatio: false,
@@ -268,6 +258,7 @@ export default function MultiAxisLineDoc() {
             }
         };
 
+        setChartData(data);
         setChartOptions(options);
     }, []);
 
@@ -283,7 +274,7 @@ export default function MultiAxisLineDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>A line chart or line graph is a type of chart which displays information as a series of data points called 'markers' connected by straight line segments.</p>
+                <p>Multiple axes can be added using the <i>scales</i> option.</p>
             </DocSectionText>
             <div className="card">
                 <Chart type="line" data={chartData} options={chartOptions} />

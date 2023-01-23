@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Chart } from '../../lib/chart/Chart';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
-export function BasicLineDoc(props) {
+export function StackedBarDoc(props) {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
@@ -12,33 +12,37 @@ export function BasicLineDoc(props) {
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
         const data = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [
                 {
-                    label: 'First Dataset',
-                    data: [65, 59, 80, 81, 56, 55, 40],
-                    fill: false,
-                    borderColor: documentStyle.getPropertyValue('--blue-500'),
-                    tension: 0.4
+                    type: 'bar',
+                    label: 'Dataset 1',
+                    backgroundColor: documentStyle.getPropertyValue('--blue-500'),
+                    data: [50, 25, 12, 48, 90, 76, 42]
                 },
                 {
-                    label: 'Second Dataset',
-                    data: [28, 48, 40, 19, 86, 27, 90],
-                    fill: false,
-                    borderColor: documentStyle.getPropertyValue('--orange-500'),
-                    tension: 0.4
+                    type: 'bar',
+                    label: 'Dataset 2',
+                    backgroundColor: documentStyle.getPropertyValue('--green-500'),
+                    data: [21, 84, 24, 75, 37, 65, 34]
+                },
+                {
+                    type: 'bar',
+                    label: 'Dataset 3',
+                    backgroundColor: documentStyle.getPropertyValue('--yellow-500'),
+                    data: [41, 52, 24, 74, 23, 21, 32]
                 }
             ]
         };
-
-        setChartData(data);
-
         const options = {
             maintainAspectRatio: false,
-            aspectRatio: 0.6,
+            aspectRatio: 0.8,
             plugins: {
+                tooltips: {
+                    mode: 'index',
+                    intersect: false
+                },
                 legend: {
                     labels: {
                         color: textColor
@@ -47,6 +51,7 @@ export function BasicLineDoc(props) {
             },
             scales: {
                 x: {
+                    stacked: true,
                     ticks: {
                         color: textColorSecondary
                     },
@@ -55,6 +60,7 @@ export function BasicLineDoc(props) {
                     }
                 },
                 y: {
+                    stacked: true,
                     ticks: {
                         color: textColorSecondary
                     },
@@ -65,18 +71,19 @@ export function BasicLineDoc(props) {
             }
         };
 
+        setChartData(data);
         setChartOptions(options);
     }, []);
 
     const code = {
         basic: `
-<Chart type="line" data={chartData} options={chartOptions} />
+<Chart type="bar" data={chartData} options={chartOptions} />
         `,
         javascript: `
 import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
-export default function BasicLineDoc() {
+export default function StackedBarDemo() {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
@@ -85,33 +92,37 @@ export default function BasicLineDoc() {
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
         const data = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [
                 {
-                    label: 'First Dataset',
-                    data: [65, 59, 80, 81, 56, 55, 40],
-                    fill: false,
-                    borderColor: documentStyle.getPropertyValue('--blue-500'),
-                    tension: 0.4
+                    type: 'bar',
+                    label: 'Dataset 1',
+                    backgroundColor: documentStyle.getPropertyValue('--blue-500'),
+                    data: [50, 25, 12, 48, 90, 76, 42]
                 },
                 {
-                    label: 'Second Dataset',
-                    data: [28, 48, 40, 19, 86, 27, 90],
-                    fill: false,
-                    borderColor: documentStyle.getPropertyValue('--orange-500'),
-                    tension: 0.4
+                    type: 'bar',
+                    label: 'Dataset 2',
+                    backgroundColor: documentStyle.getPropertyValue('--green-500'),
+                    data: [21, 84, 24, 75, 37, 65, 34]
+                },
+                {
+                    type: 'bar',
+                    label: 'Dataset 3',
+                    backgroundColor: documentStyle.getPropertyValue('--yellow-500'),
+                    data: [41, 52, 24, 74, 23, 21, 32]
                 }
             ]
         };
-
-        setChartData(data);
-
         const options = {
             maintainAspectRatio: false,
-            aspectRatio: 0.6,
+            aspectRatio: 0.8,
             plugins: {
+                tooltips: {
+                    mode: 'index',
+                    intersect: false
+                },
                 legend: {
                     labels: {
                         color: textColor
@@ -120,6 +131,7 @@ export default function BasicLineDoc() {
             },
             scales: {
                 x: {
+                    stacked: true,
                     ticks: {
                         color: textColorSecondary
                     },
@@ -128,6 +140,7 @@ export default function BasicLineDoc() {
                     }
                 },
                 y: {
+                    stacked: true,
                     ticks: {
                         color: textColorSecondary
                     },
@@ -138,12 +151,13 @@ export default function BasicLineDoc() {
             }
         };
 
+        setChartData(data);
         setChartOptions(options);
     }, []);
 
     return (
         <div className="card">
-            <Chart type="line" data={chartData} options={chartOptions} />
+            <Chart type="bar" data={chartData} options={chartOptions} />
         </div>
     )
 }
@@ -152,7 +166,7 @@ export default function BasicLineDoc() {
 import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
-export default function BasicLineDoc() {
+export default function StackedBarDemo() {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
@@ -161,33 +175,37 @@ export default function BasicLineDoc() {
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
         const data = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [
                 {
-                    label: 'First Dataset',
-                    data: [65, 59, 80, 81, 56, 55, 40],
-                    fill: false,
-                    borderColor: documentStyle.getPropertyValue('--blue-500'),
-                    tension: 0.4
+                    type: 'bar',
+                    label: 'Dataset 1',
+                    backgroundColor: documentStyle.getPropertyValue('--blue-500'),
+                    data: [50, 25, 12, 48, 90, 76, 42]
                 },
                 {
-                    label: 'Second Dataset',
-                    data: [28, 48, 40, 19, 86, 27, 90],
-                    fill: false,
-                    borderColor: documentStyle.getPropertyValue('--orange-500'),
-                    tension: 0.4
+                    type: 'bar',
+                    label: 'Dataset 2',
+                    backgroundColor: documentStyle.getPropertyValue('--green-500'),
+                    data: [21, 84, 24, 75, 37, 65, 34]
+                },
+                {
+                    type: 'bar',
+                    label: 'Dataset 3',
+                    backgroundColor: documentStyle.getPropertyValue('--yellow-500'),
+                    data: [41, 52, 24, 74, 23, 21, 32]
                 }
             ]
         };
-
-        setChartData(data);
-
         const options = {
             maintainAspectRatio: false,
-            aspectRatio: 0.6,
+            aspectRatio: 0.8,
             plugins: {
+                tooltips: {
+                    mode: 'index',
+                    intersect: false
+                },
                 legend: {
                     labels: {
                         color: textColor
@@ -196,6 +214,7 @@ export default function BasicLineDoc() {
             },
             scales: {
                 x: {
+                    stacked: true,
                     ticks: {
                         color: textColorSecondary
                     },
@@ -204,6 +223,7 @@ export default function BasicLineDoc() {
                     }
                 },
                 y: {
+                    stacked: true,
                     ticks: {
                         color: textColorSecondary
                     },
@@ -214,12 +234,13 @@ export default function BasicLineDoc() {
             }
         };
 
+        setChartData(data);
         setChartOptions(options);
     }, []);
 
     return (
         <div className="card">
-            <Chart type="line" data={chartData} options={chartOptions} />
+            <Chart type="bar" data={chartData} options={chartOptions} />
         </div>
     )
 }
@@ -229,10 +250,10 @@ export default function BasicLineDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>A line chart or line graph is a type of chart which displays information as a series of data points called 'markers' connected by straight line segments.</p>
+                <p>Bars can be stacked on top of each other when <i>stacked</i> option of a scale is enabled.</p>
             </DocSectionText>
-            <div className="card">
-                <Chart type="line" data={chartData} options={chartOptions} />
+            <div className="card ">
+                <Chart type="bar" data={chartData} options={chartOptions} />
             </div>
             <DocSectionCode code={code} dependencies={{ 'chart.js': '3.9.1' }} />
         </>

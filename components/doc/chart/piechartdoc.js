@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Chart } from '../../lib/chart/Chart';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function PieChartDoc(props) {
     const [chartData, setChartData] = useState({});
@@ -9,81 +9,87 @@ export function PieChartDoc(props) {
 
     useEffect(() => {
         const documentStyle = getComputedStyle(document.documentElement);
-        const textColor = documentStyle.getPropertyValue('--text-color');
-
         const data = {
             labels: ['A', 'B', 'C'],
             datasets: [
                 {
                     data: [540, 325, 702],
-                    backgroundColor: [documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500'), documentStyle.getPropertyValue('--green-500')],
-                    hoverBackgroundColor: [documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400'), documentStyle.getPropertyValue('--green-400')]
+                    backgroundColor: [
+                        documentStyle.getPropertyValue('--blue-500'), 
+                        documentStyle.getPropertyValue('--yellow-500'), 
+                        documentStyle.getPropertyValue('--green-500')
+                    ],
+                    hoverBackgroundColor: [
+                        documentStyle.getPropertyValue('--blue-400'), 
+                        documentStyle.getPropertyValue('--yellow-400'), 
+                        documentStyle.getPropertyValue('--green-400')
+                    ]
                 }
             ]
-        };
-
-        setChartData(data);
-
+        }
         const options = {
             plugins: {
                 legend: {
                     labels: {
-                        usePointStyle: true,
-                        color: textColor
+                        usePointStyle: true
                     }
                 }
             }
         };
 
+        setChartData(data);
         setChartOptions(options);
     }, []);
 
     const code = {
         basic: `
-<Chart type="pie" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+<Chart type="pie" data={chartData} options={chartOptions} className="w-full md:w-30rem" />
         `,
         javascript: `
 import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
-export default function PieChartDoc() {
+export default function PieChartDemo() {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
     useEffect(() => {
         const documentStyle = getComputedStyle(document.documentElement);
-        const textColor = documentStyle.getPropertyValue('--text-color');
-
         const data = {
             labels: ['A', 'B', 'C'],
             datasets: [
                 {
                     data: [540, 325, 702],
-                    backgroundColor: [documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500'), documentStyle.getPropertyValue('--green-500')],
-                    hoverBackgroundColor: [documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400'), documentStyle.getPropertyValue('--green-400')]
+                    backgroundColor: [
+                        documentStyle.getPropertyValue('--blue-500'), 
+                        documentStyle.getPropertyValue('--yellow-500'), 
+                        documentStyle.getPropertyValue('--green-500')
+                    ],
+                    hoverBackgroundColor: [
+                        documentStyle.getPropertyValue('--blue-400'), 
+                        documentStyle.getPropertyValue('--yellow-400'), 
+                        documentStyle.getPropertyValue('--green-400')
+                    ]
                 }
             ]
-        };
-
-        setChartData(data);
-
+        }
         const options = {
             plugins: {
                 legend: {
                     labels: {
-                        usePointStyle: true,
-                        color: textColor
+                        usePointStyle: true
                     }
                 }
             }
         };
 
+        setChartData(data);
         setChartOptions(options);
     }, []);
 
     return (
         <div className="card flex justify-content-center">
-            <Chart type="pie" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+            <Chart type="pie" data={chartData} options={chartOptions} className="w-full md:w-30rem" />
         </div>
     )
 }
@@ -92,44 +98,47 @@ export default function PieChartDoc() {
 import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
-export default function PieChartDoc() {
+export default function PieChartDemo() {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
     useEffect(() => {
         const documentStyle = getComputedStyle(document.documentElement);
-        const textColor = documentStyle.getPropertyValue('--text-color');
-
         const data = {
             labels: ['A', 'B', 'C'],
             datasets: [
                 {
                     data: [540, 325, 702],
-                    backgroundColor: [documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500'), documentStyle.getPropertyValue('--green-500')],
-                    hoverBackgroundColor: [documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400'), documentStyle.getPropertyValue('--green-400')]
+                    backgroundColor: [
+                        documentStyle.getPropertyValue('--blue-500'), 
+                        documentStyle.getPropertyValue('--yellow-500'), 
+                        documentStyle.getPropertyValue('--green-500')
+                    ],
+                    hoverBackgroundColor: [
+                        documentStyle.getPropertyValue('--blue-400'), 
+                        documentStyle.getPropertyValue('--yellow-400'), 
+                        documentStyle.getPropertyValue('--green-400')
+                    ]
                 }
             ]
-        };
-
-        setChartData(data);
-
+        }
         const options = {
             plugins: {
                 legend: {
                     labels: {
-                        usePointStyle: true,
-                        color: textColor
+                        usePointStyle: true
                     }
                 }
             }
         };
 
+        setChartData(data);
         setChartOptions(options);
     }, []);
 
     return (
         <div className="card flex justify-content-center">
-            <Chart type="pie" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+            <Chart type="pie" data={chartData} options={chartOptions} className="w-full md:w-30rem" />
         </div>
     )
 }
@@ -139,10 +148,10 @@ export default function PieChartDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>A pie chart is a circular statistical graphic, which is divided into slices to illustrate numerical proportion.</p>
+                <p>A pie chart is a circular statistical graphic which is divided into slices to illustrate numerical proportion.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Chart type="pie" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+                <Chart type="pie" data={chartData} options={chartOptions} className="w-full md:w-30rem" />
             </div>
             <DocSectionCode code={code} dependencies={{ 'chart.js': '3.9.1' }} />
         </>

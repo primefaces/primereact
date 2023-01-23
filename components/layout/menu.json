@@ -44,8 +44,7 @@
                 {
                     "name": "PRO Support",
                     "to": "/support",
-                    "meta": ["pro support"],
-                    "badge": "new"
+                    "meta": ["pro support"]
                 }
             ]
         },
@@ -121,8 +120,7 @@
                 {
                     "name": "Figma",
                     "to": "/uikit",
-                    "meta": ["figma"],
-                    "badge": "new"
+                    "meta": ["figma"]
                 }
             ]
         },
@@ -174,8 +172,7 @@
                 {
                     "name": "Icons v6",
                     "to": "/icons",
-                    "meta": ["icons"],
-                    "badge": "new"
+                    "meta": ["icons"]
                 }
             ]
         },
@@ -582,7 +579,7 @@
             "meta": ["chart"],
             "children": [
                 {
-                    "name": "Chart",
+                    "name": "Chart.js",
                     "to": "/chart",
                     "meta": ["chartdemo", "chartmodel"]
                 }
