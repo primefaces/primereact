@@ -7,7 +7,7 @@ export function TemplateDoc(props) {
     const code = {
         basic: `
 <Tooltip target=".custom-tooltip-btn">
-    <img alt="logo" src="images/logo.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} data-pr-tooltip="PrimeReact-Logo" height="80px" />
+    <img alt="logo" src="images/logo.png" data-pr-tooltip="PrimeReact-Logo" height="80px" />
 </Tooltip>
 
 <Button className="custom-tooltip-btn" type="button" label="Save" icon="pi pi-check" />
@@ -17,12 +17,11 @@ import React from 'react';
 import { Tooltip } from 'primereact/tooltip';
 import { Button } from 'primereact/button';
 
-export default function TemplateDoc() {
-
+export default function TemplateDemo() {
     return (
-        <div>
+        <div className="card flex justify-content-center">
             <Tooltip target=".custom-tooltip-btn">
-                <img alt="logo" src="images/logo.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} data-pr-tooltip="PrimeReact-Logo" height="80px" />
+                <img alt="logo" src="images/logo.png" data-pr-tooltip="PrimeReact-Logo" height="80px" onError={(e) => (e.target.src = 'https://www.primefaces.org/cdn/images/placeholder.png')} />
             </Tooltip>
 
             <Button className="custom-tooltip-btn" type="button" label="Save" icon="pi pi-check" />
@@ -35,12 +34,11 @@ import React from 'react';
 import { Tooltip } from 'primereact/tooltip';
 import { Button } from 'primereact/button';
 
-export default function TemplateDoc() {
-
+export default function TemplateDemo() {
     return (
-        <div>
+        <div className="card flex justify-content-center">
             <Tooltip target=".custom-tooltip-btn">
-                <img alt="logo" src="images/logo.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} data-pr-tooltip="PrimeReact-Logo" height="80px" />
+                <img alt="logo" src="images/logo.png" data-pr-tooltip="PrimeReact-Logo" height="80px" onError={(e) => (e.target.src = 'https://www.primefaces.org/cdn/images/placeholder.png')} />
             </Tooltip>
 
             <Button className="custom-tooltip-btn" type="button" label="Save" icon="pi pi-check" />
@@ -53,11 +51,11 @@ export default function TemplateDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Template</p>
+                <p>Custom content can be placed as the tooltip value either with <i>content</i> property or nesting the content as children.</p>
             </DocSectionText>
-            <div className="card flex align-items-center justify-content-center">
+            <div className="card flex justify-content-center">
                 <Tooltip target=".custom-tooltip-btn">
-                    <img alt="logo" src="images/logo.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} data-pr-tooltip="PrimeReact-Logo" height="80px" />
+                    <img alt="logo" src="images/logo.png" data-pr-tooltip="PrimeReact-Logo" height="80px" />
                 </Tooltip>
 
                 <Button className="custom-tooltip-btn" type="button" label="Save" icon="pi pi-check" />

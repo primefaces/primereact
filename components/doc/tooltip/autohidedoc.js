@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Tooltip } from '../../lib/tooltip/Tooltip';
 import { Button } from '../../lib/button/Button';
+import { Tooltip } from '../../lib/tooltip/Tooltip';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
@@ -10,6 +10,7 @@ export function AutoHideDoc(props) {
     const code = {
         basic: `
 <Button type="button" label="Save" icon="pi pi-check" tooltip="Save (autoHide: true)" />
+
 <Tooltip target=".tooltip-button" autoHide={false}>
     <div className="flex align-items-center">
         <span style={{ minWidth: '5rem' }}>Count: {count}</span>
@@ -17,18 +18,18 @@ export function AutoHideDoc(props) {
         <Button type="button" icon="pi pi-minus" onClick={() => setCount(count - 1)} className="p-button-rounded p-button-danger ml-2"></Button>
     </div>
 </Tooltip>
-<Button className="tooltip-button ml-2" type="button" label="Save" icon="pi pi-check" />
+<Button className="tooltip-button" type="button" label="Number" icon="pi pi-plus" />
         `,
         javascript: `
 import React, { useState } from 'react';
 import { Tooltip } from 'primereact/tooltip';
 import { Button } from 'primereact/button';
 
-export default function AutoHideDoc() {
+export default function AutoHideDemo() {
     const [count, setCount] = useState(0);
 
     return (
-        <div>
+        <div className="card flex flex-wrap align-items-center justify-content-center gap-2">
             <Button type="button" label="Save" icon="pi pi-check" tooltip="Save (autoHide: true)" />
 
             <Tooltip target=".tooltip-button" autoHide={false}>
@@ -38,7 +39,7 @@ export default function AutoHideDoc() {
                     <Button type="button" icon="pi pi-minus" onClick={() => setCount(count - 1)} className="p-button-rounded p-button-danger ml-2"></Button>
                 </div>
             </Tooltip>
-            <Button className="tooltip-button ml-2" type="button" label="Save" icon="pi pi-check" />
+            <Button className="tooltip-button" type="button" label="Number" icon="pi pi-plus" />
         </div>
     );
 }
@@ -48,11 +49,11 @@ import React, { useState } from 'react';
 import { Tooltip } from 'primereact/tooltip';
 import { Button } from 'primereact/button';
 
-export default function AutoHideDoc() {
-    const [count, setCount] = useState(0);
+export default function AutoHideDemo() {
+    const [count, setCount] = useState<number>(0);
 
     return (
-        <div>
+        <div className="card flex flex-wrap align-items-center justify-content-center gap-2">
             <Button type="button" label="Save" icon="pi pi-check" tooltip="Save (autoHide: true)" />
 
             <Tooltip target=".tooltip-button" autoHide={false}>
@@ -62,7 +63,7 @@ export default function AutoHideDoc() {
                     <Button type="button" icon="pi pi-minus" onClick={() => setCount(count - 1)} className="p-button-rounded p-button-danger ml-2"></Button>
                 </div>
             </Tooltip>
-            <Button className="tooltip-button ml-2" type="button" label="Save" icon="pi pi-check" />
+            <Button className="tooltip-button" type="button" label="Number" icon="pi pi-plus" />
         </div>
     );
 }
@@ -72,9 +73,9 @@ export default function AutoHideDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>AutoHide</p>
+                <p>Tooltip is hidden when mouse leaves the target element, in cases where tooltip needs to be interacted with, set <i>autoHide</i> to false to change the default behavior.</p>
             </DocSectionText>
-            <div className="card flex align-items-center justify-content-center">
+            <div className="card flex flex-wrap align-items-center justify-content-center gap-2">
                 <Button type="button" label="Save" icon="pi pi-check" tooltip="Save (autoHide: true)" />
 
                 <Tooltip target=".tooltip-button" autoHide={false}>
@@ -84,7 +85,7 @@ export default function AutoHideDoc() {
                         <Button type="button" icon="pi pi-minus" onClick={() => setCount(count - 1)} className="p-button-rounded p-button-danger ml-2"></Button>
                     </div>
                 </Tooltip>
-                <Button className="tooltip-button ml-2" type="button" label="Save" icon="pi pi-check" />
+                <Button className="tooltip-button" type="button" label="Number" icon="pi pi-plus" />
             </div>
             <DocSectionCode code={code} />
         </>
