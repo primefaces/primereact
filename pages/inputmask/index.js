@@ -13,7 +13,8 @@ import { InvalidDoc } from '../../components/doc/inputmask/invaliddoc';
 import { MaskDoc } from '../../components/doc/inputmask/maskdoc';
 import { OptionalDoc } from '../../components/doc/inputmask/optionaldoc';
 import { SlotCharDoc } from '../../components/doc/inputmask/slotchardoc';
-import { ValidationDoc } from '../../components/doc/inputmask/validationdoc';
+import { FormikDoc } from '../../components/doc/inputmask/validation/formikdoc';
+import { HookFormDoc } from '../../components/doc/inputmask/validation/hookformdoc';
 
 const InputMaskDemo = () => {
     const docs = [
@@ -60,7 +61,19 @@ const InputMaskDemo = () => {
         {
             id: 'validation',
             label: 'Validation',
-            component: ValidationDoc
+            description: 'Validate using popular React validation libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
         },
         {
             id: 'style',

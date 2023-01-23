@@ -43,6 +43,11 @@ const CascadeSelectDemo = () => {
             component: DisabledDoc
         },
         {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
             id: 'validation',
             label: 'Validation',
             description: 'Validate using popular React validation libraries.',
@@ -58,11 +63,6 @@ const CascadeSelectDemo = () => {
                     component: HookFormDoc
                 }
             ]
-        },
-        {
-            id: 'template',
-            label: 'Template',
-            component: TemplateDoc
         },
         {
             id: 'style',
