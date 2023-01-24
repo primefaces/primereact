@@ -51,7 +51,9 @@ export default function TemplateDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Custom content can be placed as the tooltip value either with <i>content</i> property or nesting the content as children.</p>
+                <p>
+                    Custom content can be placed as the tooltip value either with <i>content</i> property or nesting the content as children.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Tooltip target=".custom-tooltip-btn">

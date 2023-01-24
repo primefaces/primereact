@@ -247,7 +247,9 @@ export default function ComboDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Different chart types can be combined in the same graph usign the <i>type</i> option of a dataset.</p>
+                <p>
+                    Different chart types can be combined in the same graph usign the <i>type</i> option of a dataset.
+                </p>
             </DocSectionText>
             <div className="card">
                 <Chart type="bar" data={chartData} options={chartOptions} />

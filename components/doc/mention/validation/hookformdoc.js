@@ -82,7 +82,7 @@ render={({ field, fieldState }) => (
         field="nickname"
         {...field}
         rows={5}
-        cols={30}
+        cols={40}
         className={classNames({ 'p-invalid': fieldState.error })}
         suggestions={suggestions}
         onSearch={onSearch}
@@ -178,7 +178,7 @@ export default function HookFormDoc() {
                                     field="nickname"
                                     {...field}
                                     rows={5}
-                                    cols={30}
+                                    cols={40}
                                     className={classNames({ 'p-invalid': fieldState.error })}
                                     suggestions={suggestions}
                                     onSearch={onSearch}
@@ -283,7 +283,7 @@ export default function HookFormDoc() {
                                     field="nickname"
                                     {...field}
                                     rows={5}
-                                    cols={30}
+                                    cols={40}
                                     className={classNames({ 'p-invalid': fieldState.error })}
                                     suggestions={suggestions}
                                     onSearch={onSearch}
@@ -325,7 +325,7 @@ export default function HookFormDoc() {
                                         field="nickname"
                                         {...field}
                                         rows={5}
-                                        cols={30}
+                                        cols={40}
                                         className={classNames({ 'p-invalid': fieldState.error })}
                                         suggestions={suggestions}
                                         onSearch={onSearch}

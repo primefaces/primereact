@@ -274,7 +274,9 @@ export default function MultiAxisDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Multiple axes can be added using the <i>scales</i> option.</p>
+                <p>
+                    Multiple axes can be added using the <i>scales</i> option.
+                </p>
             </DocSectionText>
             <div className="card">
                 <Chart type="line" data={chartData} options={chartOptions} />

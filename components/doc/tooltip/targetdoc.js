@@ -66,7 +66,9 @@ export default function TargetDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Standalone <i>Tooltip</i> component can attach to any element using the <i>target</i> property that accepts a valid query selector. In this case, content and options need to be defined with <i>data-pr</i> attributes.</p>
+                <p>
+                    Standalone <i>Tooltip</i> component can attach to any element using the <i>target</i> property that accepts a valid query selector. In this case, content and options need to be defined with <i>data-pr</i> attributes.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Tooltip target=".custom-target-icon" />

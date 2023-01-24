@@ -54,8 +54,10 @@ export default function DisabledDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Disabled elements do not trigger user interactions due to standard behavior. A common workaround for such cases is wrapping the disabled element with another element that has a tooltip attached. If the tooltip
-                    is built-in to the component then enable <i>showOnDisabled</i> option instead.</p>
+                <p>
+                    Disabled elements do not trigger user interactions due to standard behavior. A common workaround for such cases is wrapping the disabled element with another element that has a tooltip attached. If the tooltip is built-in to the
+                    component then enable <i>showOnDisabled</i> option instead.
+                </p>
             </DocSectionText>
             <div className="card flex flex-wrap justify-content-center gap-2">
                 <Tooltip target=".disabled-button" />

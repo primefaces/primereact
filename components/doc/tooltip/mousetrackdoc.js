@@ -48,7 +48,9 @@ export default function MouseTrackDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>When <i>mouseTrack</i> option is enabled, position of the Tooltip is updated according to the pointer coordinates.</p>
+                <p>
+                    When <i>mouseTrack</i> option is enabled, position of the Tooltip is updated according to the pointer coordinates.
+                </p>
             </DocSectionText>
             <div className="card flex flex-wrap align-items-center justify-content-center gap-5">
                 <Button type="button" label="Save" icon="pi pi-check" tooltip="Save" tooltipOptions={{ position: 'bottom', mouseTrack: true, mouseTrackTop: 15 }} />
