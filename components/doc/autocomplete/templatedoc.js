@@ -34,7 +34,6 @@ export function TemplateDoc(props) {
                 <img
                     alt={item.name}
                     src={`${contextPath}/images/flag/flag_placeholder.png`}
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
                     className={`flag flag-${item.code.toLowerCase()} mr-2`}
                     style={{ width: '18px' }}
                 />
@@ -49,7 +48,8 @@ export function TemplateDoc(props) {
 
     const code = {
         basic: `
-<AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
+<AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} 
+    completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
         `,
         javascript: `
 import React, { useEffect, useState } from 'react';
@@ -61,7 +61,6 @@ export default function TemplateDemo() {
     const [selectedCountry, setSelectedCountry] = useState(null);
     const [filteredCountries, setFilteredCountries] = useState(null);
 
-    
     const search = (event) => {
         // Timeout to emulate a network connection
         setTimeout(() => {
@@ -85,8 +84,8 @@ export default function TemplateDemo() {
             <div className="flex align-items-center">
                 <img
                     alt={item.name}
-                    src={\`/images/flag/flag_placeholder.png\`}
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                    src="/images/flag/flag_placeholder.png"
+                    onError={(e) => (e.target.src = 'https://www.primefaces.org/cdn/images/placeholder.png')}
                     className={\`flag flag-\${item.code.toLowerCase()} mr-2\`}
                     style={{width: '18px'}}
                 />
@@ -97,19 +96,13 @@ export default function TemplateDemo() {
 
     useEffect(() => {
         CountryService.getCountries().then((data) => setCountries(data));
-        /*
-            Countries is an array of objects with a name and a code;
-            [
-                ...
-                {"name": "United Kingdom", "code": "UK"},
-                {"name": "United States", "code": "USA"},
-                ...
-            ]
-        */
     }, []);
 
     return (
-        <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
+        <div className="card flex justify-content-center">
+            <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} 
+                completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
+        </div>
     )
 }
         `,
@@ -127,7 +120,6 @@ export default function TemplateDemo() {
     const [countries, setCountries] = useState<Country[]>([]);
     const [selectedCountry, setSelectedCountry] = useState<Country>(null);
     const [filteredCountries, setFilteredCountries] = useState<Country[]>(null);
-
     
     const search = (event: AutoCompleteCompleteMethodParams) => {
         // Timeout to emulate a network connection
@@ -152,8 +144,8 @@ export default function TemplateDemo() {
             <div className="flex align-items-center">
                 <img
                     alt={item.name}
-                    src={\`/images/flag/flag_placeholder.png\`}
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                    src="/images/flag/flag_placeholder.png"
+                    onError={(e) => (e.target.src = 'https://www.primefaces.org/cdn/images/placeholder.png')}
                     className={\`flag flag-\${item.code.toLowerCase()} mr-2\`}
                     style={{width: '18px'}}
                 />
@@ -164,19 +156,13 @@ export default function TemplateDemo() {
 
     useEffect(() => {
         CountryService.getCountries().then((data) => setCountries(data));
-        /*
-            Countries is an array of objects with a name and a code;
-            [
-                ...
-                {"name": "United Kingdom", "code": "UK"},
-                {"name": "United States", "code": "USA"},
-                ...
-            ]
-        */
     }, []);
 
     return (
-        <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e: AutoCompleteChangeParams) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
+        <div className="card flex justify-content-center">
+            <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} 
+                completeMethod={search} onChange={(e: AutoCompleteChangeParams) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
+        </div>
     )
 }
         `,
@@ -198,7 +184,8 @@ export default function TemplateDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
+                <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} 
+                    completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
             </div>
             <DocSectionCode code={code} service={['CountryService']} />
         </>

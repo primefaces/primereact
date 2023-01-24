@@ -1,18 +1,18 @@
 import Head from 'next/head';
 import React from 'react';
-import { ApiDoc } from '../../components/doc/autocomplete/apidoc';
 import { AccessibilityDoc } from '../../components/doc/autocomplete/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/autocomplete/styledoc';
+import { ApiDoc } from '../../components/doc/autocomplete/apidoc';
 import { BasicDoc } from '../../components/doc/autocomplete/basicdoc';
 import { DisabledDoc } from '../../components/doc/autocomplete/disableddoc';
 import { DropdownDoc } from '../../components/doc/autocomplete/dropdowndoc';
-import { FloatlabelDoc } from '../../components/doc/autocomplete/floatlabeldoc';
+import { FloatLabelDoc } from '../../components/doc/autocomplete/floatlabeldoc';
 import { ForceSelectionDoc } from '../../components/doc/autocomplete/forceselectiondoc';
 import { GroupDoc } from '../../components/doc/autocomplete/groupdoc';
 import { ImportDoc } from '../../components/doc/autocomplete/importdoc';
 import { InvalidStateDoc } from '../../components/doc/autocomplete/invalidstatedoc';
 import { MultipleDoc } from '../../components/doc/autocomplete/multipledoc';
 import { ObjectsDoc } from '../../components/doc/autocomplete/objectsdoc';
+import { StyleDoc } from '../../components/doc/autocomplete/styledoc';
 import { TemplateDoc } from '../../components/doc/autocomplete/templatedoc';
 import { FormikDoc } from '../../components/doc/autocomplete/validation/formikdoc';
 import { HookFormDoc } from '../../components/doc/autocomplete/validation/hookformdoc';
@@ -35,7 +35,7 @@ const AutoCompleteDemo = () => {
         {
             id: 'floatlabel',
             label: 'Float Label',
-            component: FloatlabelDoc
+            component: FloatLabelDoc
         },
         {
             id: 'invalidstate',
@@ -120,12 +120,12 @@ const AutoCompleteDemo = () => {
         <div>
             <Head>
                 <title>React AutoComplete Component</title>
-                <meta name="description" content="AutoComplete is an input component that provides real-time suggestions when being typed." />
+                <meta name="description" content="AutoComplete is an input component that provides real-time suggestions while being typed." />
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
                     <h1>AutoComplete</h1>
-                    <p>AutoComplete is an input component that provides real-time suggestions when being typed.</p>
+                    <p>AutoComplete is an input component that provides real-time suggestions while being typed.</p>
                 </div>
             </div>
 

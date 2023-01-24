@@ -31,7 +31,9 @@ export default function DropdownDemo() {
     }
 
     return (
-        <AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e) => setValue(e.value)} dropdown />
+        <div className="card flex justify-content-center">
+            <AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e) => setValue(e.value)} dropdown />
+        </div>
     )
 }
         `,
@@ -49,7 +51,9 @@ export default function DropdownDemo() {
     }
 
     return (
-        <AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e: AutoCompleteChangeParams) => setValue(e.value)} dropdown />
+        <div className="card flex justify-content-center">
+            <AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e: AutoCompleteChangeParams) => setValue(e.value)} dropdown />
+        </div>
     )
 }
         `
@@ -60,7 +64,7 @@ export default function DropdownDemo() {
             <DocSectionText {...props}>
                 <p>
                     Enabling <i>dropdown</i> property displays a button next to the input field where click behavior of the button is defined using <i>dropdownMode</i> property that takes <strong>blank</strong> or <strong>current</strong> as possible
-                    values. <strong>blank</strong> is the default mode to send a query with an empty string whereas <strong>current</strong> setting sends a query with the current value of the input.
+                    values. <i>blank</i> is the default mode to send a query with an empty string whereas <i>current</i> setting sends a query with the current value of the input.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">

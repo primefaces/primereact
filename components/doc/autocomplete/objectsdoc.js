@@ -28,15 +28,6 @@ export function ObjectsDoc(props) {
 
     useEffect(() => {
         CountryService.getCountries().then((data) => setCountries(data));
-        /*
-            Countries is an array of objects with name, code pairs;
-            [
-                ...
-                {"name": "United Kingdom", "code": "UK"},
-                {"name": "United States", "code": "USA"},
-                ...
-            ]
-        */
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const code = {
@@ -53,7 +44,6 @@ export default function ObjectDemo() {
     const [selectedCountry, setSelectedCountry] = useState(null);
     const [filteredCountries, setFilteredCountries] = useState(null);
 
-    
     const search = (event) => {
         // Timeout to emulate a network connection
         setTimeout(() => {
@@ -74,19 +64,12 @@ export default function ObjectDemo() {
 
     useEffect(() => {
         CountryService.getCountries().then((data) => setCountries(data));
-        /*
-            Countries is an array of objects with a name and a code;
-            [
-                ...
-                {"name": "United Kingdom", "code": "UK"},
-                {"name": "United States", "code": "USA"},
-                ...
-            ]
-        */
     }, []);
 
     return (
-        <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} />
+        <div className="card flex justify-content-center">
+            <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} />
+        </div>
     )
 }
         `,
@@ -104,7 +87,6 @@ export default function ObjectDemo() {
     const [countries, setCountries] = useState<Country[]>([]);
     const [selectedCountry, setSelectedCountry] = useState<Country>(null);
     const [filteredCountries, setFilteredCountries] = useState<Country[]>(null);
-
     
     const search = (event: AutoCompleteCompleteMethodParams) => {
         // Timeout to emulate a network connection
@@ -126,25 +108,17 @@ export default function ObjectDemo() {
 
     useEffect(() => {
         CountryService.getCountries().then((data) => setCountries(data));
-        /*
-            Countries is an array of objects with a name and a code;
-            [
-                ...
-                {"name": "United Kingdom", "code": "UK"},
-                {"name": "United States", "code": "USA"},
-                ...
-            ]
-        */
     }, []);
 
     return (
-        <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e: AutoCompleteChangeParams) => setSelectedCountry(e.value)} />
+        <div className="card flex justify-content-center">
+            <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e: AutoCompleteChangeParams) => setSelectedCountry(e.value)} />
+        </div>
     )
 }
         `,
         data: `
  /* CountryService */
-
 {"name": "United Kingdom", "code": "UK"},
 {"name": "United States", "code": "USA"},
 ...

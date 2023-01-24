@@ -47,7 +47,6 @@ export function GroupDoc(props) {
                 <img
                     alt={item.label}
                     src={`${contextPath}/images/flag/flag_placeholder.png`}
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
                     className={`flag flag-${item.code.toLowerCase()} mr-2`}
                     style={{ width: '18px' }}
                 />
@@ -121,8 +120,8 @@ export default function GroupDemo() {
             <div className="flex align-items-center">
                 <img
                     alt={item.label}
-                    src={\`/images/flag/flag_placeholder.png\`}
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                    src="/images/flag/flag_placeholder.png"
+                    onError={(e) => (e.target.src = 'https://www.primefaces.org/cdn/images/placeholder.png')}
                     className={\`flag flag-\${item.code.toLowerCase()} mr-2\`}
                     style={{width: '18px'}}
                 />
@@ -147,8 +146,10 @@ export default function GroupDemo() {
     }
 
     return (
-        <AutoComplete value={selectedCity} onChange={(e) => setSelectedCity(e.value)} suggestions={filteredCities} completeMethod={search}
-            field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} placeholder="Hint: type 'a'" />
+        <div className="card flex justify-content-center">
+            <AutoComplete value={selectedCity} onChange={(e) => setSelectedCity(e.value)} suggestions={filteredCities} completeMethod={search}
+                field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} placeholder="Hint: type 'a'" />
+        </div>
     )
 }
         `,
@@ -208,8 +209,8 @@ export default function GroupDemo() {
             <div className="flex align-items-center">
                 <img
                     alt={item.label}
-                    src={\`/images/flag/flag_placeholder.png\`}
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                    src="/images/flag/flag_placeholder.png"
+                    onError={(e) => (e.target.src = 'https://www.primefaces.org/cdn/images/placeholder.png')}
                     className={\`flag flag-\${item.code.toLowerCase()} mr-2\`}
                     style={{width: '18px'}}
                 />
@@ -234,8 +235,10 @@ export default function GroupDemo() {
     }
 
     return (
-        <AutoComplete value={selectedCity} onChange={(e: AutoCompleteChangeParams) => setSelectedCity(e.value)} suggestions={filteredCities} completeMethod={search}
-            field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} placeholder="Hint: type 'a'" />
+        <div className="card flex justify-content-center">
+            <AutoComplete value={selectedCity} onChange={(e: AutoCompleteChangeParams) => setSelectedCity(e.value)} suggestions={filteredCities} completeMethod={search}
+                field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} placeholder="Hint: type 'a'" />
+        </div>
     )
 }
         `
@@ -244,9 +247,7 @@ export default function GroupDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    Options groups are specified with the <i>optionGroupLabel</i> and <i>optionGroupChildren</i> properties.
-                </p>
+                <p>Option groups are specified with the <i>optionGroupLabel</i> and <i>optionGroupChildren</i> properties.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <AutoComplete

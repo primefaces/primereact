@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
 import { useFormik } from 'formik';
+import React, { useRef, useState } from 'react';
 import { AutoComplete } from '../../../lib/autocomplete/AutoComplete';
 import { Button } from '../../../lib/button/Button';
 import { Toast } from '../../../lib/toast/Toast';
@@ -107,7 +107,6 @@ export default function FormikDoc() {
     const getFormErrorMessage = (name) => {
         return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
     };
-
 
     return (
         <div className="card flex flex-column align-items-center">

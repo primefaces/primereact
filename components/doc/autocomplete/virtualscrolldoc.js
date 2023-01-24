@@ -100,10 +100,8 @@ export default function VirtualScrollerDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    Virtual Scrolling is a performant way to render large lists. Configuration of the scroll behavior is defined with <i>virtualScrollerOptions</i>
-                    that requires <i>itemSize</i> as the mandatory value to set the height of an item. Visit <Link href="/virtualscroller">VirtualScroller</Link> documentation for more information about the configuration API.
-                </p>
+                <p>Virtual Scrolling is a performant way to render large lists. Configuration of the scroll behavior is defined with <i>virtualScrollerOptions</i>
+                    that requires <i>itemSize</i> as the mandatory value to set the height of an item. Visit <Link href="/virtualscroller">VirtualScroller</Link> documentation for more information about the configuration API.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <AutoComplete value={selectedItem} suggestions={filteredItems} completeMethod={searchItems} virtualScrollerOptions={{ itemSize: 38 }} field="label" dropdown onChange={(e) => setSelectedItem(e.value)} />

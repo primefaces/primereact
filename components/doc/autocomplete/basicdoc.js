@@ -28,7 +28,9 @@ export default function BasicDemo() {
     }
 
     return (
-        <AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e) => setValue(e.value)}  />
+        <div className="card flex justify-content-center">
+            <AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e) => setValue(e.value)} />
+        </div>
     )
 }
         `,
@@ -45,7 +47,9 @@ export default function BasicDemo() {
     }
 
     return (
-        <AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e: AutoCompleteChangeParams) => setValue(e.value)}  />
+        <div className="card flex justify-content-center">
+            <AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e) => setValue(e.value)} />
+        </div>
     )
 }
         `
