@@ -13,7 +13,7 @@ export function AccessibilityDoc() {
 
 <InputText aria-label="Age"/>
     `
-};
+    };
 
     return (
         <DevelopmentSection>
@@ -23,7 +23,7 @@ export function AccessibilityDoc() {
                     InputText component renders a native input element that implicitly includes any passed prop. Value to describe the component can either be provided via <i>label</i> tag combined with <i>id</i> prop or using <i>aria-labelledby</i>,{' '}
                     <i>aria-label</i> props.
                 </p>
-                
+
                 <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
 
                 <h3>Keyboard Support</h3>

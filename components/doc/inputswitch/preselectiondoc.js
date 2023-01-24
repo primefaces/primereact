@@ -43,7 +43,9 @@ export default function PreselectionDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Enabling <i>checked</i> property displays the component as active initially.</p>
+                <p>
+                    Enabling <i>checked</i> property displays the component as active initially.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />

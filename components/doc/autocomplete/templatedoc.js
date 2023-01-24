@@ -31,12 +31,7 @@ export function TemplateDoc(props) {
     const itemTemplate = (item) => {
         return (
             <div className="flex align-items-center">
-                <img
-                    alt={item.name}
-                    src={`${contextPath}/images/flag/flag_placeholder.png`}
-                    className={`flag flag-${item.code.toLowerCase()} mr-2`}
-                    style={{ width: '18px' }}
-                />
+                <img alt={item.name} src={`${contextPath}/images/flag/flag_placeholder.png`} className={`flag flag-${item.code.toLowerCase()} mr-2`} style={{ width: '18px' }} />
                 <div>{item.name}</div>
             </div>
         );
@@ -184,8 +179,7 @@ export default function TemplateDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} 
-                    completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
+                <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
             </div>
             <DocSectionCode code={code} service={['CountryService']} />
         </>

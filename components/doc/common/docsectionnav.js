@@ -81,6 +81,7 @@ export function DocSectionNav(props) {
         return () => {
             window.removeEventListener('scroll', onScroll, { passive: true });
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

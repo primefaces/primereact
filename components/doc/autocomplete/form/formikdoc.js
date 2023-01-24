@@ -207,7 +207,9 @@ export default function FormikDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p><a href="https://formik.org/">Formik</a> is a popular library for handling forms in React.</p>
+                <p>
+                    <a href="https://formik.org/">Formik</a> is a popular library for handling forms in React.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">

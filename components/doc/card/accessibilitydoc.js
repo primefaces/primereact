@@ -20,7 +20,8 @@ export function AccessibilityDoc() {
                     require to use one of the{' '}
                     <a href="https://www.w3.org/TR/wai-aria/#landmark" alt="Landmark Roles">
                         landmark
-                    </a> roles like <i>region</i>, you may use the <i>role</i> property.
+                    </a>{' '}
+                    roles like <i>region</i>, you may use the <i>role</i> property.
                 </p>
 
                 <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />

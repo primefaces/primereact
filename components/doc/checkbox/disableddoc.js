@@ -36,7 +36,9 @@ export default function DisabledDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>When <i>disabled</i> is present, the element cannot be edited and focused.</p>
+                <p>
+                    When <i>disabled</i> is present, the element cannot be edited and focused.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Checkbox checked disabled></Checkbox>

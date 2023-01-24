@@ -44,12 +44,7 @@ export function GroupDoc(props) {
     const groupedItemTemplate = (item) => {
         return (
             <div className="flex align-items-center">
-                <img
-                    alt={item.label}
-                    src={`${contextPath}/images/flag/flag_placeholder.png`}
-                    className={`flag flag-${item.code.toLowerCase()} mr-2`}
-                    style={{ width: '18px' }}
-                />
+                <img alt={item.label} src={`${contextPath}/images/flag/flag_placeholder.png`} className={`flag flag-${item.code.toLowerCase()} mr-2`} style={{ width: '18px' }} />
                 <div>{item.label}</div>
             </div>
         );
@@ -247,7 +242,9 @@ export default function GroupDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Option groups are specified with the <i>optionGroupLabel</i> and <i>optionGroupChildren</i> properties.</p>
+                <p>
+                    Option groups are specified with the <i>optionGroupLabel</i> and <i>optionGroupChildren</i> properties.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <AutoComplete

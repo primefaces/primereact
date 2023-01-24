@@ -43,7 +43,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Checkbox is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.</p>
+                <p>
+                    Checkbox is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Checkbox onChange={(e) => setChecked(e.checked)} checked={checked}></Checkbox>

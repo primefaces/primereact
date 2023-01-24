@@ -94,7 +94,9 @@ export default function GroupDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>RadioButton is used as a controlled input with <i>value</i>, <i>checked</i> and <i>onChange</i> properties.</p>
+                <p>
+                    RadioButton is used as a controlled input with <i>value</i>, <i>checked</i> and <i>onChange</i> properties.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="flex flex-wrap gap-3">

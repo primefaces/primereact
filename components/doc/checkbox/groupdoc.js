@@ -9,10 +9,8 @@ export function GroupDoc(props) {
     const onIngredientsChange = (e) => {
         let _ingredients = [...ingredients];
 
-        if (e.checked) 
-            _ingredients.push(e.value);
-        else 
-            _ingredients.splice(_ingredients.indexOf(e.value), 1);
+        if (e.checked) _ingredients.push(e.value);
+        else _ingredients.splice(_ingredients.indexOf(e.value), 1);
 
         setIngredients(_ingredients);
     };
@@ -128,19 +126,27 @@ export default function GroupDemo() {
             <div className="card flex flex-wrap justify-content-center gap-3">
                 <div className="flex align-items-center">
                     <Checkbox inputId="ingredient1" name="pizza" value="Cheese" onChange={onIngredientsChange} checked={ingredients.includes('Cheese')} />
-                    <label htmlFor="ingredient1" className="ml-2">Cheese</label>
+                    <label htmlFor="ingredient1" className="ml-2">
+                        Cheese
+                    </label>
                 </div>
                 <div className="flex align-items-center">
                     <Checkbox inputId="ingredient2" name="pizza" value="Mushroom" onChange={onIngredientsChange} checked={ingredients.includes('Mushroom')} />
-                    <label htmlFor="ingredient2" className="ml-2">Mushroom</label>
+                    <label htmlFor="ingredient2" className="ml-2">
+                        Mushroom
+                    </label>
                 </div>
                 <div className="flex align-items-center">
                     <Checkbox inputId="ingredient3" name="pizza" value="Pepper" onChange={onIngredientsChange} checked={ingredients.includes('Pepper')} />
-                    <label htmlFor="ingredient3" className="ml-2">Pepper</label>
+                    <label htmlFor="ingredient3" className="ml-2">
+                        Pepper
+                    </label>
                 </div>
                 <div className="flex align-items-center">
                     <Checkbox inputId="ingredient4" name="pizza" value="Onion" onChange={onIngredientsChange} checked={ingredients.includes('Onion')} />
-                    <label htmlFor="ingredient4" className="ml-2">Onion</label>
+                    <label htmlFor="ingredient4" className="ml-2">
+                        Onion
+                    </label>
                 </div>
             </div>
             <DocSectionCode code={code} />

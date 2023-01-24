@@ -182,9 +182,7 @@ export default function HookFormDoc() {
                         rules={{ required: 'Value is required.' }}
                         render={({ field, fieldState }) => (
                             <>
-                                <label htmlFor={field.name}>
-                                    Value
-                                </label>
+                                <label htmlFor={field.name}>Value</label>
                                 <AutoComplete inputId={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': fieldState.error })} />
                                 {getFormErrorMessage(field.name)}
                             </>
