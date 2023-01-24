@@ -1,12 +1,12 @@
-import { useRef, useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { CustomerService } from '../../../../service/CustomerService';
 import { Button } from '../../../lib/button/Button';
 import { Mention } from '../../../lib/mention/Mention';
 import { Toast } from '../../../lib/toast/Toast';
 import { classNames } from '../../../lib/utils/Utils';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
-import { CustomerService } from '../../../../service/CustomerService';
 
 export function HookFormDoc(props) {
     const [customers, setCustomers] = useState([]);
@@ -307,7 +307,7 @@ export default function HookFormDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    <a href="https://react-hook-form.com/">React Hook Form</a> is the most popular React library for form validation. The field will be highlighted and receive focus on validation failure.
+                    <a href="https://react-hook-form.com/">React Hook Form</a> is another popular React library to handle forms.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">

@@ -2,9 +2,8 @@ import Head from 'next/head';
 import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/inputnumber/apidoc';
 import { AccessibilityDoc } from '../../components/doc/inputnumber/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/inputnumber/styledoc';
+import { ApiDoc } from '../../components/doc/inputnumber/apidoc';
 import { ButtonsDoc } from '../../components/doc/inputnumber/buttonsdoc';
 import { CurrencyDoc } from '../../components/doc/inputnumber/currencydoc';
 import { DisabledDoc } from '../../components/doc/inputnumber/disableddoc';
@@ -14,9 +13,9 @@ import { InvalidDoc } from '../../components/doc/inputnumber/invaliddoc';
 import { LocaleDoc } from '../../components/doc/inputnumber/localedoc';
 import { NumeralsDoc } from '../../components/doc/inputnumber/numberalsdoc';
 import { PrefixDoc } from '../../components/doc/inputnumber/prefixdoc';
+import { StyleDoc } from '../../components/doc/inputnumber/styledoc';
 import { FormikDoc } from '../../components/doc/inputnumber/validation/formikdoc';
 import { HookFormDoc } from '../../components/doc/inputnumber/validation/hookformdoc';
-import { ValidationDoc } from '../../components/doc/inputnumber/validationdoc';
 import { VerticalDoc } from '../../components/doc/inputnumber/verticaldoc';
 
 const InputNumberDemo = () => {
@@ -74,7 +73,7 @@ const InputNumberDemo = () => {
         {
             id: 'validation',
             label: 'Validation',
-            description: 'Validate using popular React validation libraries.',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
                     id: 'formik',

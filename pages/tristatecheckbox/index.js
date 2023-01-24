@@ -2,13 +2,13 @@ import Head from 'next/head';
 import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/tristatecheckbox/apidoc';
 import { AccessibilityDoc } from '../../components/doc/tristatecheckbox/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/tristatecheckbox/styledoc';
+import { ApiDoc } from '../../components/doc/tristatecheckbox/apidoc';
 import { BasicDoc } from '../../components/doc/tristatecheckbox/basicdoc';
 import { DisabledDoc } from '../../components/doc/tristatecheckbox/disableddoc';
 import { ImportDoc } from '../../components/doc/tristatecheckbox/importdoc';
 import { InvalidDoc } from '../../components/doc/tristatecheckbox/invaliddoc';
+import { StyleDoc } from '../../components/doc/tristatecheckbox/styledoc';
 import { FormikDoc } from '../../components/doc/tristatecheckbox/validation/formikdoc';
 import { HookFormDoc } from '../../components/doc/tristatecheckbox/validation/hookformdoc';
 
@@ -37,7 +37,7 @@ const TriStateCheckboxDemo = () => {
         {
             id: 'validation',
             label: 'Validation',
-            description: 'Validate using popular React validation libraries.',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
                     id: 'formik',

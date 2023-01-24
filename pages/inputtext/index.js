@@ -1,11 +1,10 @@
 import Head from 'next/head';
 import React from 'react';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ApiDoc } from '../../components/doc/inputtext/apidoc';
 import { AccessibilityDoc } from '../../components/doc/inputtext/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/inputtext/styledoc';
+import { ApiDoc } from '../../components/doc/inputtext/apidoc';
 import { BasicDoc } from '../../components/doc/inputtext/basicdoc';
 import { DisabledDoc } from '../../components/doc/inputtext/disableddoc';
 import { FloatLabelDoc } from '../../components/doc/inputtext/floatlabeldoc';
@@ -15,6 +14,7 @@ import { ImportDoc } from '../../components/doc/inputtext/importdoc';
 import { InvalidDoc } from '../../components/doc/inputtext/invaliddoc';
 import { KeyFilterDoc } from '../../components/doc/inputtext/keyfilterdoc';
 import { SizesDoc } from '../../components/doc/inputtext/sizesdoc';
+import { StyleDoc } from '../../components/doc/inputtext/styledoc';
 import { FormikDoc } from '../../components/doc/inputtext/validation/formikdoc';
 import { HookFormDoc } from '../../components/doc/inputtext/validation/hookformdoc';
 
@@ -68,7 +68,7 @@ const InputTextDemo = () => {
         {
             id: 'validation',
             label: 'Validation',
-            description: 'Validate using popular React validation libraries.',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
                     id: 'formik',

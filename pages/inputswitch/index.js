@@ -1,12 +1,12 @@
 import Head from 'next/head';
-import { DocSections } from '../../components/doc/common/docsections';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { ImportDoc } from '../../components/doc/inputswitch/importdoc';
-import { BasicDoc } from '../../components/doc/inputswitch/basicdoc';
-import { PreselectionDoc } from '../../components/doc/inputswitch/preselectiondoc';
-import { DisabledDoc } from '../../components/doc/inputswitch/disableddoc';
-import { ApiDoc } from '../../components/doc/inputswitch/apidoc';
+import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/inputswitch/accessibilitydoc';
+import { ApiDoc } from '../../components/doc/inputswitch/apidoc';
+import { BasicDoc } from '../../components/doc/inputswitch/basicdoc';
+import { DisabledDoc } from '../../components/doc/inputswitch/disableddoc';
+import { ImportDoc } from '../../components/doc/inputswitch/importdoc';
+import { PreselectionDoc } from '../../components/doc/inputswitch/preselectiondoc';
 import { StyleDoc } from '../../components/doc/inputswitch/styledoc';
 import { FormikDoc } from '../../components/doc/inputswitch/validation/formikdoc';
 import { HookFormDoc } from '../../components/doc/inputswitch/validation/hookformdoc';
@@ -36,7 +36,7 @@ const InputSwitchDemo = () => {
         {
             id: 'validation',
             label: 'Validation',
-            description: 'Validate using popular React validation libraries.',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
                     id: 'formik',

@@ -2,20 +2,20 @@ import Head from 'next/head';
 import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/treeselect/apidoc';
 import { AccessibilityDoc } from '../../components/doc/treeselect/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/treeselect/styledoc';
+import { ApiDoc } from '../../components/doc/treeselect/apidoc';
 import { BasicDoc } from '../../components/doc/treeselect/basicdoc';
 import { CheckboxDoc } from '../../components/doc/treeselect/checkboxdoc';
-import { FilterDoc } from '../../components/doc/treeselect/filterdoc';
 import { DefaultDoc } from '../../components/doc/treeselect/defaultdoc';
-import { MultipleDoc } from '../../components/doc/treeselect/multipledoc';
-import { ProgrammaticDoc } from '../../components/doc/treeselect/programmaticdoc';
-import { HookFormDoc } from '../../components/doc/treeselect/validation/hookformdoc';
-import { FormikDoc } from '../../components/doc/treeselect/validation/formikdoc';
+import { DisabledDoc } from '../../components/doc/treeselect/disableddoc';
+import { FilterDoc } from '../../components/doc/treeselect/filterdoc';
 import { FloatLabelDoc } from '../../components/doc/treeselect/floatlabeldoc';
 import { InvalidDoc } from '../../components/doc/treeselect/invaliddoc';
-import { DisabledDoc } from '../../components/doc/treeselect/disableddoc';
+import { MultipleDoc } from '../../components/doc/treeselect/multipledoc';
+import { ProgrammaticDoc } from '../../components/doc/treeselect/programmaticdoc';
+import { StyleDoc } from '../../components/doc/treeselect/styledoc';
+import { FormikDoc } from '../../components/doc/treeselect/validation/formikdoc';
+import { HookFormDoc } from '../../components/doc/treeselect/validation/hookformdoc';
 
 const TreeSelectDemo = () => {
     const docs = [
@@ -67,7 +67,7 @@ const TreeSelectDemo = () => {
         {
             id: 'validation',
             label: 'Validation',
-            description: 'Validate using popular React validation libraries.',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
                     id: 'formik',

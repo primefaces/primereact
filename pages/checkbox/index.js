@@ -1,16 +1,16 @@
 import Head from 'next/head';
 import React from 'react';
-import { ApiDoc } from '../../components/doc/checkbox/apidoc';
 import { AccessibilityDoc } from '../../components/doc/checkbox/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/checkbox/styledoc';
+import { ApiDoc } from '../../components/doc/checkbox/apidoc';
 import { BasicDoc } from '../../components/doc/checkbox/basicdoc';
 import { DisabledDoc } from '../../components/doc/checkbox/disableddoc';
 import { DynamicDoc } from '../../components/doc/checkbox/dynamicdoc';
 import { GroupDoc } from '../../components/doc/checkbox/groupdoc';
 import { ImportDoc } from '../../components/doc/checkbox/importdoc';
 import { InvalidDoc } from '../../components/doc/checkbox/invaliddoc';
+import { StyleDoc } from '../../components/doc/checkbox/styledoc';
 import { FormikDoc } from '../../components/doc/checkbox/validation/formikdoc';
-import { HookFormDoc, ValidationDoc } from '../../components/doc/checkbox/validation/hookformdoc';
+import { HookFormDoc } from '../../components/doc/checkbox/validation/hookformdoc';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 
@@ -49,7 +49,7 @@ const CheckboxDemo = () => {
         {
             id: 'validation',
             label: 'Validation',
-            description: 'Validate using popular React validation libraries.',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
                     id: 'formik',

@@ -1,11 +1,11 @@
-import React, { useRef } from 'react';
 import { useFormik } from 'formik';
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
+import React, { useRef } from 'react';
 import { Button } from '../../../lib/button/Button';
-import { Toast } from '../../../lib/toast/Toast';
 import { RadioButton } from '../../../lib/radiobutton/RadioButton';
+import { Toast } from '../../../lib/toast/Toast';
 import { classNames } from '../../../lib/utils/Utils';
+import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function FormikDoc(props) {
     const toast = useRef(null);
@@ -296,7 +296,7 @@ export default function FormikDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    <a href="https://formik.org/">Formik</a> is a popular library for handling forms in React. The field will be highlighted and receive focus on validation failure.
+                    <a href="https://formik.org/">Formik</a> is a popular library for handling forms in React.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">

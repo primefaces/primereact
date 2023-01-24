@@ -1,13 +1,13 @@
 import Head from 'next/head';
 import { DocActions } from '../../components/doc/common/docactions';
-import { DocSections } from '../../components/doc/common/docsections';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
+import { AccessibilityDoc } from '../../components/doc/togglebutton/accessibilitydoc';
+import { ApiDoc } from '../../components/doc/togglebutton/apidoc';
 import { BasicDoc } from '../../components/doc/togglebutton/basicdoc';
 import { CustomizedDoc } from '../../components/doc/togglebutton/customizeddoc';
-import { ApiDoc } from '../../components/doc/togglebutton/apidoc';
-import { AccessibilityDoc } from '../../components/doc/togglebutton/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/togglebutton/styledoc';
 import { ImportDoc } from '../../components/doc/togglebutton/importdoc';
+import { StyleDoc } from '../../components/doc/togglebutton/styledoc';
 import { FormikDoc } from '../../components/doc/togglebutton/validation/formikdoc';
 import { HookFormDoc } from '../../components/doc/togglebutton/validation/hookformdoc';
 
@@ -31,7 +31,7 @@ const ToggleButtonDemo = () => {
         {
             id: 'validation',
             label: 'Validation',
-            description: 'Validate using popular React validation libraries.',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
                     id: 'formik',

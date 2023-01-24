@@ -3,15 +3,15 @@ import React from 'react';
 import { ApiDoc } from '../../components/doc/checkbox/apidoc';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { FormikDoc } from '../../components/doc/radiobutton/validation/formikdoc';
+import { AccessibilityDoc } from '../../components/doc/radiobutton/accessibilitydoc';
 import { DisabledDoc } from '../../components/doc/radiobutton/disableddoc';
 import { DynamicDoc } from '../../components/doc/radiobutton/dynamicdoc';
 import { GroupDoc } from '../../components/doc/radiobutton/groupdoc';
 import { ImportDoc } from '../../components/doc/radiobutton/importdoc';
 import { InvalidDoc } from '../../components/doc/radiobutton/invaliddoc';
-import { HookFormDoc } from '../../components/doc/radiobutton/validation/hookformdoc';
 import { StyleDoc } from '../../components/doc/radiobutton/styledoc';
-import { AccessibilityDoc } from '../../components/doc/radiobutton/accessibilitydoc';
+import { FormikDoc } from '../../components/doc/radiobutton/validation/formikdoc';
+import { HookFormDoc } from '../../components/doc/radiobutton/validation/hookformdoc';
 
 const RadioButtonDemo = () => {
     const docs = [
@@ -43,7 +43,7 @@ const RadioButtonDemo = () => {
         {
             id: 'validation',
             label: 'Validation',
-            description: 'Validate using popular React validation libraries.',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
                     id: 'formik',

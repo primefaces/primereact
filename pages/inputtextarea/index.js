@@ -2,9 +2,8 @@ import Head from 'next/head';
 import React from 'react';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/inputtextarea/apidoc';
 import { AccessibilityDoc } from '../../components/doc/inputtextarea/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/inputtextarea/styledoc';
+import { ApiDoc } from '../../components/doc/inputtextarea/apidoc';
 import { AutoResizeDoc } from '../../components/doc/inputtextarea/autoresizedoc';
 import { BasicDoc } from '../../components/doc/inputtextarea/basicdoc';
 import { DisabledDoc } from '../../components/doc/inputtextarea/disableddoc';
@@ -12,6 +11,7 @@ import { FloatLabelDoc } from '../../components/doc/inputtextarea/floatlabeldoc'
 import { ImportDoc } from '../../components/doc/inputtextarea/importdoc';
 import { InvalidDoc } from '../../components/doc/inputtextarea/invaliddoc';
 import { KeyFilterDoc } from '../../components/doc/inputtextarea/keyfilterdoc';
+import { StyleDoc } from '../../components/doc/inputtextarea/styledoc';
 import { FormikDoc } from '../../components/doc/inputtextarea/validation/formikdoc';
 import { HookFormDoc } from '../../components/doc/inputtextarea/validation/hookformdoc';
 
@@ -55,7 +55,7 @@ const InputTextareaDemo = () => {
         {
             id: 'validation',
             label: 'Validation',
-            description: 'Validate using popular React validation libraries.',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
                     id: 'formik',

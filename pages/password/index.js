@@ -3,9 +3,8 @@ import React, { useState } from 'react';
 import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/password/apidoc';
 import { AccessibilityDoc } from '../../components/doc/password/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/password/styledoc';
+import { ApiDoc } from '../../components/doc/password/apidoc';
 import { BasicDoc } from '../../components/doc/password/basicdoc';
 import { DisabledDoc } from '../../components/doc/password/disableddoc';
 import { FloatLabelDoc } from '../../components/doc/password/floatlabeldoc';
@@ -13,6 +12,7 @@ import { ImportDoc } from '../../components/doc/password/importdoc';
 import { InvalidDoc } from '../../components/doc/password/invaliddoc';
 import { PasswordMeter } from '../../components/doc/password/passwordmeterdoc';
 import { ShowPassword } from '../../components/doc/password/showpassworddoc';
+import { StyleDoc } from '../../components/doc/password/styledoc';
 import { Templating } from '../../components/doc/password/templatingdoc';
 import { FormikDoc } from '../../components/doc/password/validation/formikdoc';
 import { HookFormDoc } from '../../components/doc/password/validation/hookformdoc';
@@ -58,7 +58,7 @@ const PasswordDemo = () => {
         {
             id: 'validation',
             label: 'Validation',
-            description: 'Validate using popular React validation libraries.',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
                     id: 'formik',

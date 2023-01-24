@@ -2,9 +2,8 @@ import Head from 'next/head';
 import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/dropdown/apidoc';
 import { AccessibilityDoc } from '../../components/doc/dropdown/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/dropdown/styledoc';
+import { ApiDoc } from '../../components/doc/dropdown/apidoc';
 import { BasicDoc } from '../../components/doc/dropdown/basicdoc';
 import { ClearIconDoc } from '../../components/doc/dropdown/clearicondoc';
 import { DisabledDoc } from '../../components/doc/dropdown/disableddoc';
@@ -14,6 +13,7 @@ import { FloatLabelDoc } from '../../components/doc/dropdown/floatlabeldoc';
 import { GroupedDoc } from '../../components/doc/dropdown/groupeddoc';
 import { ImportDoc } from '../../components/doc/dropdown/importdoc';
 import { InvalidDoc } from '../../components/doc/dropdown/invaliddoc';
+import { StyleDoc } from '../../components/doc/dropdown/styledoc';
 import { TemplateDoc } from '../../components/doc/dropdown/templatedoc';
 import { FormikDoc } from '../../components/doc/dropdown/validation/formikdoc';
 import { HookFormDoc } from '../../components/doc/dropdown/validation/hookformdoc';
@@ -92,7 +92,7 @@ const DropdownDemo = () => {
         {
             id: 'validation',
             label: 'Validation',
-            description: 'Validate using popular React validation libraries.',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
                     id: 'formik',

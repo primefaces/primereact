@@ -142,7 +142,7 @@ export default function HookFormDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    <a href="https://react-hook-form.com/">React Hook Form</a> is the most popular React library for form validation. The field will be highlighted and receive focus on validation failure.
+                    <a href="https://react-hook-form.com/">React Hook Form</a> is another popular React library to handle forms.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">

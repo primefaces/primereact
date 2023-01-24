@@ -2,22 +2,22 @@ import Head from 'next/head';
 import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/multiselect/apidoc';
 import { AccessibilityDoc } from '../../components/doc/multiselect/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/multiselect/styledoc';
-import { ImportDoc } from '../../components/doc/multiselect/importdoc';
+import { ApiDoc } from '../../components/doc/multiselect/apidoc';
 import { BasicDoc } from '../../components/doc/multiselect/basicdoc';
 import { ChipsDoc } from '../../components/doc/multiselect/chipsdoc';
-import { GroupedDoc } from '../../components/doc/multiselect/groupeddoc';
+import { DisabledDoc } from '../../components/doc/multiselect/disableddoc';
 import { EagerDoc } from '../../components/doc/multiselect/eagerdoc';
+import { FilterDoc } from '../../components/doc/multiselect/filterdoc';
+import { FloatLabelDoc } from '../../components/doc/multiselect/floatlabeldoc';
+import { GroupedDoc } from '../../components/doc/multiselect/groupeddoc';
+import { ImportDoc } from '../../components/doc/multiselect/importdoc';
+import { InvalidDoc } from '../../components/doc/multiselect/invaliddoc';
 import { LazyDoc } from '../../components/doc/multiselect/lazydoc';
+import { StyleDoc } from '../../components/doc/multiselect/styledoc';
+import { TemplateDoc } from '../../components/doc/multiselect/templatedoc';
 import { FormikDoc } from '../../components/doc/multiselect/validation/formikdoc';
 import { HookFormDoc } from '../../components/doc/multiselect/validation/hookformdoc';
-import { InvalidDoc } from '../../components/doc/multiselect/invaliddoc';
-import { FloatLabelDoc } from '../../components/doc/multiselect/floatlabeldoc';
-import { TemplateDoc } from '../../components/doc/multiselect/templatedoc';
-import { FilterDoc } from '../../components/doc/multiselect/filterdoc';
-import { DisabledDoc } from '../../components/doc/multiselect/disableddoc';
 
 const MultiSelectDemo = () => {
     const docs = [
@@ -87,7 +87,7 @@ const MultiSelectDemo = () => {
         {
             id: 'validation',
             label: 'Validation',
-            description: 'Validate using popular React validation libraries.',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
                     id: 'formik',

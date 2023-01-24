@@ -206,7 +206,7 @@ export default function FormikDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    <a href="https://formik.org/">Formik</a> is a popular React library for form validation. The field will be highlighted on validation failure.
+                    <a href="https://formik.org/">Formik</a> is a popular library for handling forms in React.
                 </p>
             </DocSectionText>
             <div className="card flex flex-column align-items-center">

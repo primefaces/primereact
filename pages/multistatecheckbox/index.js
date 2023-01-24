@@ -2,13 +2,13 @@ import Head from 'next/head';
 import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/multistatecheckbox/apidoc';
 import { AccessibilityDoc } from '../../components/doc/multistatecheckbox/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/multistatecheckbox/styledoc';
+import { ApiDoc } from '../../components/doc/multistatecheckbox/apidoc';
 import { BasicDoc } from '../../components/doc/multistatecheckbox/basicdoc';
 import { DisabledDoc } from '../../components/doc/multistatecheckbox/disableddoc';
 import { ImportDoc } from '../../components/doc/multistatecheckbox/importdoc';
 import { InvalidDoc } from '../../components/doc/multistatecheckbox/invaliddoc';
+import { StyleDoc } from '../../components/doc/multistatecheckbox/styledoc';
 import { FormikDoc } from '../../components/doc/multistatecheckbox/validation/formikdoc';
 import { HookFormDoc } from '../../components/doc/multistatecheckbox/validation/hookformdoc';
 
@@ -37,7 +37,7 @@ const MultiStateCheckboxDemo = () => {
         {
             id: 'validation',
             label: 'Validation',
-            description: 'Validate using popular React validation libraries.',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
                     id: 'formik',

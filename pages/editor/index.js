@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
 import Head from 'next/head';
+import React from 'react';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
+import { AccessibilityDoc } from '../../components/doc/editor/accessibilitydoc';
+import { ApiDoc } from '../../components/doc/editor/apidoc';
+import { BasicDoc } from '../../components/doc/editor/basicdoc';
 import { ImportDoc } from '../../components/doc/editor/importdoc';
 import { QuillDoc } from '../../components/doc/editor/quilldoc';
-import { BasicDoc } from '../../components/doc/editor/basicdoc';
-import { TemplateDoc } from '../../components/doc/editor/templatedoc';
-import { ApiDoc } from '../../components/doc/editor/apidoc';
-import { AccessibilityDoc } from '../../components/doc/editor/accessibilitydoc';
+import { ReadOnlyDoc } from '../../components/doc/editor/readonlydoc';
 import { StyleDoc } from '../../components/doc/editor/styledoc';
+import { TemplateDoc } from '../../components/doc/editor/templatedoc';
 import { FormikDoc } from '../../components/doc/editor/validation/formikdoc';
 import { HookFormDoc } from '../../components/doc/editor/validation/hookformdoc';
-import { ReadOnlyDoc } from '../../components/doc/editor/readonlydoc';
 
 const EditorDemo = () => {
     const docs = [
@@ -38,7 +38,7 @@ const EditorDemo = () => {
         {
             id: 'validation',
             label: 'Validation',
-            description: 'Validate using popular React validation libraries.',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
                     id: 'formik',

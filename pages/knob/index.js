@@ -2,20 +2,20 @@ import Head from 'next/head';
 import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { BasicDoc } from '../../components/doc/knob/basicdoc';
-import { ReadOnlyDoc } from '../../components/doc/knob/readonlydoc';
-import { DisabledDoc } from '../../components/doc/knob/disableddoc';
-import { MinMaxDoc } from '../../components/doc/knob/minmaxdoc';
-import { StepDoc } from '../../components/doc/knob/stepdoc';
-import { TemplateDoc } from '../../components/doc/knob/templatedoc';
-import { ImportDoc } from '../../components/doc/knob/importdoc';
-import { StrokeDoc } from '../../components/doc/knob/strokedoc';
-import { SizeDoc } from '../../components/doc/knob/sizedoc';
-import { ColorDoc } from '../../components/doc/knob/colordoc';
-import { ReactiveDoc } from '../../components/doc/knob/reactivedoc';
-import { ApiDoc } from '../../components/doc/knob/apidoc';
 import { AccessibilityDoc } from '../../components/doc/knob/accessibilitydoc';
+import { ApiDoc } from '../../components/doc/knob/apidoc';
+import { BasicDoc } from '../../components/doc/knob/basicdoc';
+import { ColorDoc } from '../../components/doc/knob/colordoc';
+import { DisabledDoc } from '../../components/doc/knob/disableddoc';
+import { ImportDoc } from '../../components/doc/knob/importdoc';
+import { MinMaxDoc } from '../../components/doc/knob/minmaxdoc';
+import { ReactiveDoc } from '../../components/doc/knob/reactivedoc';
+import { ReadOnlyDoc } from '../../components/doc/knob/readonlydoc';
+import { SizeDoc } from '../../components/doc/knob/sizedoc';
+import { StepDoc } from '../../components/doc/knob/stepdoc';
+import { StrokeDoc } from '../../components/doc/knob/strokedoc';
 import { StyleDoc } from '../../components/doc/knob/styledoc';
+import { TemplateDoc } from '../../components/doc/knob/templatedoc';
 import { FormikDoc } from '../../components/doc/knob/validation/formikdoc';
 import { HookFormDoc } from '../../components/doc/knob/validation/hookformdoc';
 
@@ -79,7 +79,7 @@ const KnobDemo = () => {
         {
             id: 'validation',
             label: 'Validation',
-            description: 'Validate using popular React validation libraries.',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
                     id: 'formik',

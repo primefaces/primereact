@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
 import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ImportDoc } from '../../components/doc/chips/importdoc';
-import { BasicDoc } from '../../components/doc/chips/basicdoc';
-import { FloatLabelDoc } from '../../components/doc/chips/floatlabeldoc';
-import { InvalidDoc } from '../../components/doc/chips/invaliddoc';
-import { DisabledDoc } from '../../components/doc/chips/disableddoc';
-import { SeparatorDoc } from '../../components/doc/chips/separatordoc';
-import { TemplateDoc } from '../../components/doc/chips/templatedoc';
-import { KeyFilterDoc } from '../../components/doc/chips/keyfilterdoc';
-import { ApiDoc } from '../../components/doc/chips/apidoc';
+import React, { useState } from 'react';
 import { AccessibilityDoc } from '../../components/doc/chips/accessibilitydoc';
+import { ApiDoc } from '../../components/doc/chips/apidoc';
+import { BasicDoc } from '../../components/doc/chips/basicdoc';
+import { DisabledDoc } from '../../components/doc/chips/disableddoc';
+import { FloatLabelDoc } from '../../components/doc/chips/floatlabeldoc';
+import { ImportDoc } from '../../components/doc/chips/importdoc';
+import { InvalidDoc } from '../../components/doc/chips/invaliddoc';
+import { KeyFilterDoc } from '../../components/doc/chips/keyfilterdoc';
+import { SeparatorDoc } from '../../components/doc/chips/separatordoc';
 import { StyleDoc } from '../../components/doc/chips/styledoc';
+import { TemplateDoc } from '../../components/doc/chips/templatedoc';
 import { FormikDoc } from '../../components/doc/chips/validation/formikdoc';
 import { HookFormDoc } from '../../components/doc/chips/validation/hookformdoc';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
 
 const ChipsDemo = () => {
     const docs = [
@@ -56,7 +56,7 @@ const ChipsDemo = () => {
         {
             id: 'validation',
             label: 'Validation',
-            description: 'Validate using popular React validation libraries.',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
                     id: 'formik',

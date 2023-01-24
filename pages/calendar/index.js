@@ -1,7 +1,6 @@
 import Head from 'next/head';
-import { ApiDoc } from '../../components/doc/calendar/apidoc';
 import { AccessibilityDoc } from '../../components/doc/calendar/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/calendar/styledoc';
+import { ApiDoc } from '../../components/doc/calendar/apidoc';
 import { BasicDoc } from '../../components/doc/calendar/basicdoc';
 import { ButtonBarDoc } from '../../components/doc/calendar/buttonbardoc';
 import { DateFormatDoc } from '../../components/doc/calendar/dateformatdoc';
@@ -17,6 +16,7 @@ import { MonthPickerDoc } from '../../components/doc/calendar/monthpickerdoc';
 import { MultipleDoc } from '../../components/doc/calendar/multipledoc';
 import { MultipleMonthsDoc } from '../../components/doc/calendar/multiplemonthsdoc';
 import { RangeDoc } from '../../components/doc/calendar/rangedoc';
+import { StyleDoc } from '../../components/doc/calendar/styledoc';
 import { Time12Doc } from '../../components/doc/calendar/time12doc';
 import { Time24Doc } from '../../components/doc/calendar/time24doc';
 import { TouchUIDoc } from '../../components/doc/calendar/touchuidoc';
@@ -127,7 +127,7 @@ const CalendarDemo = () => {
         {
             id: 'validation',
             label: 'Validation',
-            description: 'Validate using popular React validation libraries.',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
                     id: 'formik',

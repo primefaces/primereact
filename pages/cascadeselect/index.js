@@ -1,19 +1,19 @@
-import React from 'react';
 import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/cascadeselect/importdoc';
-import { ApiDoc } from '../../components/doc/cascadeselect/apidoc';
+import React from 'react';
 import { AccessibilityDoc } from '../../components/doc/cascadeselect/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/cascadeselect/styledoc';
+import { ApiDoc } from '../../components/doc/cascadeselect/apidoc';
 import { BasicDoc } from '../../components/doc/cascadeselect/basicdoc';
-import { FloatLabelDoc } from '../../components/doc/cascadeselect/floatlabeldoc';
-import { InvalidDoc } from '../../components/doc/cascadeselect/invaliddoc';
 import { DisabledDoc } from '../../components/doc/cascadeselect/disableddoc';
+import { FloatLabelDoc } from '../../components/doc/cascadeselect/floatlabeldoc';
+import { ImportDoc } from '../../components/doc/cascadeselect/importdoc';
+import { InvalidDoc } from '../../components/doc/cascadeselect/invaliddoc';
+import { StyleDoc } from '../../components/doc/cascadeselect/styledoc';
 import { TemplateDoc } from '../../components/doc/cascadeselect/templatedoc';
 import { FormikDoc } from '../../components/doc/cascadeselect/validation/formikdoc';
 import { HookFormDoc } from '../../components/doc/cascadeselect/validation/hookformdoc';
+import { DocActions } from '../../components/doc/common/docactions';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
 
 const CascadeSelectDemo = () => {
     const docs = [
@@ -50,7 +50,7 @@ const CascadeSelectDemo = () => {
         {
             id: 'validation',
             label: 'Validation',
-            description: 'Validate using popular React validation libraries.',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
                     id: 'formik',

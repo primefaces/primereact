@@ -2,16 +2,16 @@ import Head from 'next/head';
 import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/mention/apidoc';
 import { AccessibilityDoc } from '../../components/doc/mention/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/mention/styledoc';
-import { ImportDoc } from '../../components/doc/mention/importdoc';
-import { BasicDoc } from '../../components/doc/mention/basicdoc';
-import { TriggersDoc } from '../../components/doc/mention/triggersdoc';
+import { ApiDoc } from '../../components/doc/mention/apidoc';
 import { AutoDoc } from '../../components/doc/mention/autodoc';
-import { FloatLabelDoc } from '../../components/doc/mention/floatlabeldoc';
+import { BasicDoc } from '../../components/doc/mention/basicdoc';
 import { DisabledDoc } from '../../components/doc/mention/disableddoc';
+import { FloatLabelDoc } from '../../components/doc/mention/floatlabeldoc';
+import { ImportDoc } from '../../components/doc/mention/importdoc';
 import { InvalidDoc } from '../../components/doc/mention/invaliddoc';
+import { StyleDoc } from '../../components/doc/mention/styledoc';
+import { TriggersDoc } from '../../components/doc/mention/triggersdoc';
 import { FormikDoc } from '../../components/doc/mention/validation/formikdoc';
 import { HookFormDoc } from '../../components/doc/mention/validation/hookformdoc';
 
@@ -55,7 +55,7 @@ const MentionDemo = () => {
         {
             id: 'validation',
             label: 'Validation',
-            description: 'Validate using popular React validation libraries.',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
                     id: 'formik',
