@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Checkbox } from '../../lib/checkbox/Checkbox';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function InvalidDoc(props) {
     const [checked, setChecked] = useState(false);
@@ -14,7 +14,7 @@ export function InvalidDoc(props) {
 import React, { useState } from "react";
 import { Checkbox } from "primereact/checkbox";
 
-export default function InvalidDoc() {
+export default function InvalidDemo() {
     const [checked, setChecked] = useState(false);
 
     return (
@@ -28,7 +28,7 @@ export default function InvalidDoc() {
 import React, { useState } from "react";
 import { Checkbox } from "primereact/checkbox";
 
-export default function InvalidDoc() {
+export default function InvalidDemo() {
     const [checked, setChecked] = useState<boolean>(false);
 
     return (
@@ -43,9 +43,7 @@ export default function InvalidDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    Applying <i>p-invalid</i> class to an input element indicates a failed validation.
-                </p>
+                <p>Invalid state style is added using the <i>p-invalid</i> class to indicate a failed validation.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Checkbox onChange={(e) => setChecked(e.checked)} checked={checked} className="p-invalid"></Checkbox>
