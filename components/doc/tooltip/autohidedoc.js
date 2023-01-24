@@ -73,7 +73,9 @@ export default function AutoHideDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Tooltip is hidden when mouse leaves the target element, in cases where tooltip needs to be interacted with, set <i>autoHide</i> to false to change the default behavior.</p>
+                <p>
+                    Tooltip is hidden when mouse leaves the target element, in cases where tooltip needs to be interacted with, set <i>autoHide</i> to false to change the default behavior.
+                </p>
             </DocSectionText>
             <div className="card flex flex-wrap align-items-center justify-content-center gap-2">
                 <Button type="button" label="Save" icon="pi pi-check" tooltip="Save (autoHide: true)" />

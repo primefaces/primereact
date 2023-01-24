@@ -250,7 +250,9 @@ export default function StackedBarDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Bars can be stacked on top of each other when <i>stacked</i> option of a scale is enabled.</p>
+                <p>
+                    Bars can be stacked on top of each other when <i>stacked</i> option of a scale is enabled.
+                </p>
             </DocSectionText>
             <div className="card ">
                 <Chart type="bar" data={chartData} options={chartOptions} />

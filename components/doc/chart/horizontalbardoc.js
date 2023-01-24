@@ -65,7 +65,7 @@ export function HorizontalBarDoc(props) {
             }
         };
 
-        setChartData(data)
+        setChartData(data);
         setChartOptions(options);
     }, []);
 
@@ -232,7 +232,9 @@ export default function HorizontalBarDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>A bar chart is rendered horizontally when <i>indexAxis</i> option is set as <i>y</i>.</p>
+                <p>
+                    A bar chart is rendered horizontally when <i>indexAxis</i> option is set as <i>y</i>.
+                </p>
             </DocSectionText>
             <div className="card">
                 <Chart type="bar" data={chartData} options={chartOptions} />

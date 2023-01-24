@@ -36,7 +36,9 @@ export default function DelayDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Adding delays to the show and hide events are defined with <i>showDelay</i> and <i>hideDelay</i> options respectively.</p>
+                <p>
+                    Adding delays to the show and hide events are defined with <i>showDelay</i> and <i>hideDelay</i> options respectively.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <InputText type="text" placeholder="Delayed" tooltip="Enter your username" tooltipOptions={{ showDelay: 1000, hideDelay: 300 }} />

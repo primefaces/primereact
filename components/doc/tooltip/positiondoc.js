@@ -48,7 +48,9 @@ export default function PositionDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Form components have built-in support with the <i>tooltip</i> property and customizations like positioning is provided with <i>tooltipOptions</i>.</p>
+                <p>
+                    Form components have built-in support with the <i>tooltip</i> property and customizations like positioning is provided with <i>tooltipOptions</i>.
+                </p>
             </DocSectionText>
             <div className="card flex flex-wrap justify-content-center gap-2">
                 <InputText type="text" placeholder="Right" tooltip="Enter your username" />
