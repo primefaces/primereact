@@ -3,6 +3,7 @@ import React, { useRef, useState } from 'react';
 import { AutoComplete } from '../../../lib/autocomplete/AutoComplete';
 import { Button } from '../../../lib/button/Button';
 import { Toast } from '../../../lib/toast/Toast';
+import { classNames } from '../../../lib/utils/utils';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 
@@ -11,7 +12,7 @@ export function FormikDoc(props) {
     const [items, setItems] = useState([]);
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.item });
     };
 
     const search = (event) => {
@@ -26,7 +27,7 @@ export function FormikDoc(props) {
             let errors = {};
 
             if (!data.item) {
-                errors.item = 'Item is required.';
+                errors.item = 'Value is required.';
             }
 
             return errors;
@@ -37,15 +38,15 @@ export function FormikDoc(props) {
         }
     });
 
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const isFormFieldInvalid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldInvalid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     const code = {
-        basic: `
-<form onSubmit={formik.handleSubmit} className="flex flex-column justify-content-center">
+        basic: `           
+<form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
     <div className="mb-2">Value</div>
     <Toast ref={toast} />
     <AutoComplete
@@ -76,7 +77,7 @@ export default function FormikDoc() {
     const [items, setItems] = useState([]);
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.item });
     };
 
     const search = (event) => {
@@ -91,7 +92,7 @@ export default function FormikDoc() {
             let errors = {};
 
             if (!data.item) {
-                errors.item = 'Item is required.';
+                errors.item = 'Value is required.';
             }
 
             return errors;
@@ -102,30 +103,31 @@ export default function FormikDoc() {
         }
     });
 
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const isFormFieldInvalid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldInvalid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
-        <div className="card flex flex-column align-items-center">
-            <form onSubmit={formik.handleSubmit} className="flex flex-column justify-content-center">
-                <div className="mb-2">Value</div>
+        <div className="card flex justify-content-center">
+            <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
+                <label htmlFor="ac_item">Value</label>
                 <Toast ref={toast} />
                 <AutoComplete
-                    id="item"
+                    inputId="ac_item"
                     name="item"
                     value={formik.values.item}
                     optionLabel="name"
                     suggestions={items}
                     completeMethod={search}
+                    className={classNames({ 'p-invalid': isFormFieldInvalid('item') })}
                     onChange={(e) => {
                         formik.setFieldValue('item', e.value);
                     }}
                 />
                 {getFormErrorMessage('item')}
-                <Button type="submit" label="Submit" className="mt-2" />
+                <Button type="submit" label="Submit" />
             </form>
         </div>
     )
@@ -144,7 +146,7 @@ export default function FormikDoc() {
     const [items, setItems] = useState([]);
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.item });
     };
 
     const search = (event) => {
@@ -159,7 +161,7 @@ export default function FormikDoc() {
             let errors = {};
 
             if (!data.item) {
-                errors.item = 'Item is required.';
+                errors.item = 'Value is required.';
             }
 
             return errors;
@@ -170,31 +172,31 @@ export default function FormikDoc() {
         }
     });
 
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const isFormFieldInvalid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldInvalid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error">&nbsp;</small>;
     };
 
-
     return (
-        <div className="card flex flex-column align-items-center">
-            <form onSubmit={formik.handleSubmit} className="flex flex-column justify-content-center">
-                <div className="mb-2">Value</div>
+        <div className="card flex justify-content-center">
+            <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
+                <label htmlFor="ac_item">Value</label>
                 <Toast ref={toast} />
                 <AutoComplete
-                    id="item"
+                    inputId="ac_item"
                     name="item"
                     value={formik.values.item}
                     optionLabel="name"
                     suggestions={items}
                     completeMethod={search}
+                    className={classNames({ 'p-invalid': isFormFieldInvalid('item') })}
                     onChange={(e) => {
                         formik.setFieldValue('item', e.value);
                     }}
                 />
                 {getFormErrorMessage('item')}
-                <Button type="submit" label="Submit" className="mt-2" />
+                <Button type="submit" label="Submit" />
             </form>
         </div>
     )
@@ -205,27 +207,26 @@ export default function FormikDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    <a href="https://formik.org/">Formik</a> is a popular library for handling forms in React.
-                </p>
+                <p><a href="https://formik.org/">Formik</a> is a popular library for handling forms in React.</p>
             </DocSectionText>
-            <div className="card flex flex-column align-items-center">
-                <form onSubmit={formik.handleSubmit} className="flex flex-column justify-content-center">
-                    <div className="mb-2">Value</div>
+            <div className="card flex justify-content-center">
+                <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
+                    <label htmlFor="ac_item">Value</label>
                     <Toast ref={toast} />
                     <AutoComplete
-                        id="item"
+                        inputId="ac_item"
                         name="item"
                         value={formik.values.item}
                         optionLabel="name"
                         suggestions={items}
                         completeMethod={search}
+                        className={classNames({ 'p-invalid': isFormFieldInvalid('item') })}
                         onChange={(e) => {
                             formik.setFieldValue('item', e.value);
                         }}
                     />
                     {getFormErrorMessage('item')}
-                    <Button type="submit" label="Submit" className="mt-2" />
+                    <Button type="submit" label="Submit" />
                 </form>
             </div>
 

@@ -35,8 +35,8 @@ const TriStateCheckboxDemo = () => {
             component: InvalidDoc
         },
         {
-            id: 'validation',
-            label: 'Validation',
+            id: 'form',
+            label: 'Form',
             description: 'Compatibility with popular React form libraries.',
             children: [
                 {

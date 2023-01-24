@@ -36,8 +36,8 @@ const EditorDemo = () => {
             component: ReadOnlyDoc
         },
         {
-            id: 'validation',
-            label: 'Validation',
+            id: 'form',
+            label: 'Form',
             description: 'Compatibility with popular React form libraries.',
             children: [
                 {

@@ -48,8 +48,8 @@ const CascadeSelectDemo = () => {
             component: TemplateDoc
         },
         {
-            id: 'validation',
-            label: 'Validation',
+            id: 'form',
+            label: 'Form',
             description: 'Compatibility with popular React form libraries.',
             children: [
                 {

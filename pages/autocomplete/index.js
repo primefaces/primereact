@@ -7,6 +7,8 @@ import { DisabledDoc } from '../../components/doc/autocomplete/disableddoc';
 import { DropdownDoc } from '../../components/doc/autocomplete/dropdowndoc';
 import { FloatLabelDoc } from '../../components/doc/autocomplete/floatlabeldoc';
 import { ForceSelectionDoc } from '../../components/doc/autocomplete/forceselectiondoc';
+import { FormikDoc } from '../../components/doc/autocomplete/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/autocomplete/form/hookformdoc';
 import { GroupDoc } from '../../components/doc/autocomplete/groupdoc';
 import { ImportDoc } from '../../components/doc/autocomplete/importdoc';
 import { InvalidDoc } from '../../components/doc/autocomplete/invaliddoc';
@@ -14,8 +16,6 @@ import { MultipleDoc } from '../../components/doc/autocomplete/multipledoc';
 import { ObjectsDoc } from '../../components/doc/autocomplete/objectsdoc';
 import { StyleDoc } from '../../components/doc/autocomplete/styledoc';
 import { TemplateDoc } from '../../components/doc/autocomplete/templatedoc';
-import { FormikDoc } from '../../components/doc/autocomplete/validation/formikdoc';
-import { HookFormDoc } from '../../components/doc/autocomplete/validation/hookformdoc';
 import { VirtualScrollDoc } from '../../components/doc/autocomplete/virtualscrolldoc';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
@@ -83,8 +83,8 @@ const AutoCompleteDemo = () => {
             component: MultipleDoc
         },
         {
-            id: 'validation',
-            label: 'Validation',
+            id: 'form',
+            label: 'Form',
             description: 'Compatibility with popular React form libraries.',
             children: [
                 {

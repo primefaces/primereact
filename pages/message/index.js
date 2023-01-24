@@ -2,14 +2,14 @@ import Head from 'next/head';
 import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
+import { AccessibilityDoc } from '../../components/doc/message/accessibilitydoc';
+import { ApiDoc } from '../../components/doc/message/apidoc';
+import { BasicDoc } from '../../components/doc/message/basicdoc';
 import { ImportDoc } from '../../components/doc/message/importdoc';
 import { SeverityDoc } from '../../components/doc/message/severitydoc';
+import { StyleDoc } from '../../components/doc/message/styledoc';
 import { TemplateDoc } from '../../components/doc/message/templatedoc';
 import { ValidationDoc } from '../../components/doc/message/validationdoc';
-import { ApiDoc } from '../../components/doc/message/apidoc';
-import { AccessibilityDoc } from '../../components/doc/message/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/message/styledoc';
-import { BasicDoc } from '../../components/doc/message/basicdoc';
 
 const MessageDemo = () => {
     const docs = [
@@ -29,8 +29,8 @@ const MessageDemo = () => {
             component: SeverityDoc
         },
         {
-            id: 'validation',
-            label: 'Validation',
+            id: 'form',
+            label: 'Form',
             component: ValidationDoc
         },
         {
