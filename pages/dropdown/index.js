@@ -15,8 +15,8 @@ import { ImportDoc } from '../../components/doc/dropdown/importdoc';
 import { InvalidDoc } from '../../components/doc/dropdown/invaliddoc';
 import { StyleDoc } from '../../components/doc/dropdown/styledoc';
 import { TemplateDoc } from '../../components/doc/dropdown/templatedoc';
-import { FormikDoc } from '../../components/doc/dropdown/validation/formikdoc';
-import { HookFormDoc } from '../../components/doc/dropdown/validation/hookformdoc';
+import { FormikDoc } from '../../components/doc/dropdown/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/dropdown/form/hookformdoc';
 import { EagerDoc } from '../../components/doc/dropdown/virtualscroll/eagerdoc';
 import { LazyDoc } from '../../components/doc/dropdown/virtualscroll/lazydoc';
 

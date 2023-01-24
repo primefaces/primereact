@@ -10,8 +10,8 @@ import { QuillDoc } from '../../components/doc/editor/quilldoc';
 import { ReadOnlyDoc } from '../../components/doc/editor/readonlydoc';
 import { StyleDoc } from '../../components/doc/editor/styledoc';
 import { TemplateDoc } from '../../components/doc/editor/templatedoc';
-import { FormikDoc } from '../../components/doc/editor/validation/formikdoc';
-import { HookFormDoc } from '../../components/doc/editor/validation/hookformdoc';
+import { FormikDoc } from '../../components/doc/editor/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/editor/form/hookformdoc';
 
 const EditorDemo = () => {
     const docs = [
@@ -36,6 +36,11 @@ const EditorDemo = () => {
             component: ReadOnlyDoc
         },
         {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
             id: 'form',
             label: 'Form',
             description: 'Compatibility with popular React form libraries.',
@@ -51,11 +56,6 @@ const EditorDemo = () => {
                     component: HookFormDoc
                 }
             ]
-        },
-        {
-            id: 'template',
-            label: 'Template',
-            component: TemplateDoc
         },
         {
             id: 'style',

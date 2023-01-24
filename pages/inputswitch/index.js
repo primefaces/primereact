@@ -9,8 +9,8 @@ import { ImportDoc } from '../../components/doc/inputswitch/importdoc';
 import { InvalidDoc } from '../../components/doc/inputswitch/invaliddoc';
 import { PreselectionDoc } from '../../components/doc/inputswitch/preselectiondoc';
 import { StyleDoc } from '../../components/doc/inputswitch/styledoc';
-import { FormikDoc } from '../../components/doc/inputswitch/validation/formikdoc';
-import { HookFormDoc } from '../../components/doc/inputswitch/validation/hookformdoc';
+import { FormikDoc } from '../../components/doc/inputswitch/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/inputswitch/form/hookformdoc';
 
 const InputSwitchDemo = () => {
     const docs = [

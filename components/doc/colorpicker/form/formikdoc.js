@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { Button } from '../../../lib/button/Button';
-import { Calendar } from '../../../lib/calendar/Calendar';
+import { ColorPicker } from '../../../lib/colorpicker/ColorPicker';
 import { Toast } from '../../../lib/toast/Toast';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
@@ -10,28 +10,26 @@ import { classNames } from '../../../lib/utils/utils';
 export function FormikDoc(props) {
     const toast = useRef(null);
 
-    const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.date.toLocaleDateString() });
+    const show = (data) => {
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: `#${data.color.toUpperCase()}` });
     };
 
     const formik = useFormik({
         initialValues: {
-            date: ''
+            color: ''
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.date) {
-                errors.date = 'Date is required.';
+            if (!data.color) {
+                errors.color = 'Color is required.';
             }
 
             return errors;
         },
         onSubmit: (data) => {
-            if (!formik.errors.date) {
-                data && show(data);
-                formik.resetForm();
-            }
+            data.color && show(data);
+            formik.resetForm();
         }
     });
 
@@ -43,26 +41,23 @@ export function FormikDoc(props) {
 
     const code = {
         basic: `
-<form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
-    <label htmlFor="cal_date">Date</label>
-    <Toast ref={toast} />
-    <Calendar
-        inputId="cal_date"
-        name="date"
-        value={formik.values.date}
-        className={classNames({ 'p-invalid': isFormFieldInvalid('date') })}
-        onChange={(e) => {
-            formik.setFieldValue('date', e.target.value);
-        }}
-    />
-    {getFormErrorMessage('date')}
-    <Button type="submit" label="Submit" />
-</form>
+<Toast ref={toast} />
+<ColorPicker
+    id="color"
+    name="color"
+    value={formik.values.color}
+    className={classNames({ 'p-invalid': isFormFieldInvalid('item') })}
+    onChange={(e) => {
+        formik.setFieldValue('color', e.value);
+    }}
+/>
+{getFormErrorMessage('color')}
+<Button type="submit" label="Submit" />
         `,
         javascript: `
-import React, {useRef} from 'react';
+import React, { useRef } from "react";
 import { useFormik } from 'formik';
-import { Calendar } from "primereact/calendar";
+import { ColorPicker } from 'primereact/colorpicker';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 import { classNames } from 'primereact/utils';
@@ -70,28 +65,26 @@ import { classNames } from 'primereact/utils';
 export default function FormikDoc() {
     const toast = useRef(null);
 
-    const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.date.toLocaleDateString() });
+    const show = (data) => {
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: \`#\${data.color.toUpperCase()}\` });
     };
 
     const formik = useFormik({
         initialValues: {
-            date: ''
+            color: ''
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.date) {
-                errors.date = 'Date is required.';
+            if (!data.color) {
+                errors.color = 'Color is required.';
             }
 
             return errors;
         },
         onSubmit: (data) => {
-            if (!formik.errors.date) {
-                data && show(data);
-                formik.resetForm();
-            }
+            data.color && show(data);
+            formik.resetForm();
         }
     });
 
@@ -103,19 +96,19 @@ export default function FormikDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
-                <label htmlFor="cal_date">Date</label>
+            <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
-                <Calendar
-                    inputId="cal_date"
-                    name="date"
-                    value={formik.values.date}
-                    className={classNames({ 'p-invalid': isFormFieldInvalid('date') })}
+                <ColorPicker
+                    id="color"
+                    name="color"
+                    value={formik.values.color}
+                    className={classNames({ 'p-invalid': isFormFieldInvalid('item') })}
                     onChange={(e) => {
-                        formik.setFieldValue('date', e.target.value);
+                        formik.setFieldValue('color', e.value);
                     }}
                 />
-                {getFormErrorMessage('date')}
+
+                {getFormErrorMessage('color')}
                 <Button type="submit" label="Submit" />
             </form>
         </div>
@@ -123,9 +116,9 @@ export default function FormikDoc() {
 }
         `,
         typescript: `
-import React, {useRef} from 'react';
+import React, { useRef } from "react";
 import { useFormik } from 'formik';
-import { Calendar } from "primereact/calendar";
+import { ColorPicker } from 'primereact/colorpicker';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 import { classNames } from 'primereact/utils';
@@ -133,28 +126,26 @@ import { classNames } from 'primereact/utils';
 export default function FormikDoc() {
     const toast = useRef(null);
 
-    const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.date.toLocaleDateString() });
+    const show = (data) => {
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: \`#\${data.color.toUpperCase()}\` });
     };
 
     const formik = useFormik({
         initialValues: {
-            date: ''
+            color: ''
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.date) {
-                errors.date = 'Date is required.';
+            if (!data.color) {
+                errors.color = 'Color is required.';
             }
 
             return errors;
         },
         onSubmit: (data) => {
-            if (!formik.errors.date) {
-                data && show(data);
-                formik.resetForm();
-            }
+            data.color && show(data);
+            formik.resetForm();
         }
     });
 
@@ -166,19 +157,19 @@ export default function FormikDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
-                <label htmlFor="cal_date">Date</label>
+            <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
-                <Calendar
-                    inputId="cal_date"
-                    name="date"
-                    value={formik.values.date}
-                    className={classNames({ 'p-invalid': isFormFieldInvalid('date') })}
+                <ColorPicker
+                    id="color"
+                    name="color"
+                    value={formik.values.color}
+                    className={classNames({ 'p-invalid': isFormFieldInvalid('item') })}
                     onChange={(e) => {
-                        formik.setFieldValue('date', e.target.value);
+                        formik.setFieldValue('color', e.value);
                     }}
                 />
-                {getFormErrorMessage('date')}
+
+                {getFormErrorMessage('color')}
                 <Button type="submit" label="Submit" />
             </form>
         </div>
@@ -194,24 +185,24 @@ export default function FormikDoc() {
                     <a href="https://formik.org/">Formik</a> is a popular library for handling forms in React.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
-                    <label htmlFor="cal_date">Date</label>
+            <div className="card flex justify-content-center ">
+                <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                     <Toast ref={toast} />
-                    <Calendar
-                        inputId="cal_date"
-                        name="date"
-                        value={formik.values.date}
-                        className={classNames({ 'p-invalid': isFormFieldInvalid('date') })}
+                    <ColorPicker
+                        id="color"
+                        name="color"
+                        value={formik.values.color}
+                        className={classNames({ 'p-invalid': isFormFieldInvalid('color') })}
                         onChange={(e) => {
-                            formik.setFieldValue('date', e.target.value);
+                            formik.setFieldValue('color', e.value);
                         }}
                     />
-                    {getFormErrorMessage('date')}
+
+                    {getFormErrorMessage('color')}
                     <Button type="submit" label="Submit" />
                 </form>
             </div>
-            <DocSectionCode code={code} dependencies={{ formik: '^2.1.4' }} />
+            <DocSectionCode code={code} dependencies={{ formik: '^2.2.6' }} />
         </>
     );
 }

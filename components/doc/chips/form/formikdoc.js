@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { Button } from '../../../lib/button/Button';
-import { Calendar } from '../../../lib/calendar/Calendar';
+import { Chips } from '../../../lib/chips/Chips';
 import { Toast } from '../../../lib/toast/Toast';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
@@ -10,28 +10,26 @@ import { classNames } from '../../../lib/utils/utils';
 export function FormikDoc(props) {
     const toast = useRef(null);
 
-    const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.date.toLocaleDateString() });
+    const show = (data) => {
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: `${data.chipArray}` });
     };
 
     const formik = useFormik({
         initialValues: {
-            date: ''
+            chipArray: []
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.date) {
-                errors.date = 'Date is required.';
+            if (!data.chipArray.length > 0) {
+                errors.chipArray = 'At least one chip is required.';
             }
 
             return errors;
         },
         onSubmit: (data) => {
-            if (!formik.errors.date) {
-                data && show(data);
-                formik.resetForm();
-            }
+            data.chipArray.length > 0 && show(data);
+            formik.resetForm();
         }
     });
 
@@ -43,26 +41,23 @@ export function FormikDoc(props) {
 
     const code = {
         basic: `
-<form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
-    <label htmlFor="cal_date">Date</label>
-    <Toast ref={toast} />
-    <Calendar
-        inputId="cal_date"
-        name="date"
-        value={formik.values.date}
-        className={classNames({ 'p-invalid': isFormFieldInvalid('date') })}
-        onChange={(e) => {
-            formik.setFieldValue('date', e.target.value);
-        }}
-    />
-    {getFormErrorMessage('date')}
-    <Button type="submit" label="Submit" />
-</form>
+<Toast ref={toast} />
+<Chips
+    inputId="c_chipArray"
+    name="chipArray"
+    value={formik.values.chipArray}
+    className={classNames({ 'p-invalid': isFormFieldInvalid('chipArray') })}
+    onChange={(e) => {
+        formik.setFieldValue('chipArray', e.value);
+    }}
+/>
+{getFormErrorMessage('chipArray')}
+<Button type="submit" label="Submit" className='w-7rem' />
         `,
         javascript: `
-import React, {useRef} from 'react';
+import React, { useRef } from "react";
 import { useFormik } from 'formik';
-import { Calendar } from "primereact/calendar";
+import { Chips } from 'primereact/chips';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 import { classNames } from 'primereact/utils';
@@ -70,28 +65,26 @@ import { classNames } from 'primereact/utils';
 export default function FormikDoc() {
     const toast = useRef(null);
 
-    const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.date.toLocaleDateString() });
+    const show = (data) => {
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: \`\${data.chipArray}\` });
     };
 
     const formik = useFormik({
         initialValues: {
-            date: ''
+            chipArray: []
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.date) {
-                errors.date = 'Date is required.';
+            if (!data.chipArray.length > 0) {
+                errors.chipArray = 'At least one chip is required.';
             }
 
             return errors;
         },
         onSubmit: (data) => {
-            if (!formik.errors.date) {
-                data && show(data);
-                formik.resetForm();
-            }
+            data.chipArray.length > 0 && show(data);
+            formik.resetForm();
         }
     });
 
@@ -102,30 +95,29 @@ export default function FormikDoc() {
     };
 
     return (
-        <div className="card flex justify-content-center">
+        <div className="card p-fluid justify-content-center">
             <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
-                <label htmlFor="cal_date">Date</label>
                 <Toast ref={toast} />
-                <Calendar
-                    inputId="cal_date"
-                    name="date"
-                    value={formik.values.date}
-                    className={classNames({ 'p-invalid': isFormFieldInvalid('date') })}
+                <Chips
+                    inputId="c_chipArray"
+                    name="chipArray"
+                    value={formik.values.chipArray}
+                    className={classNames({ 'p-invalid': isFormFieldInvalid('chipArray') })}
                     onChange={(e) => {
-                        formik.setFieldValue('date', e.target.value);
+                        formik.setFieldValue('chipArray', e.value);
                     }}
                 />
-                {getFormErrorMessage('date')}
-                <Button type="submit" label="Submit" />
+                {getFormErrorMessage('chipArray')}
+                <Button type="submit" label="Submit" className='w-7rem' />
             </form>
         </div>
     )
 }
         `,
         typescript: `
-import React, {useRef} from 'react';
+import React, { useRef } from "react";
 import { useFormik } from 'formik';
-import { Calendar } from "primereact/calendar";
+import { Chips } from 'primereact/chips';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 import { classNames } from 'primereact/utils';
@@ -133,28 +125,26 @@ import { classNames } from 'primereact/utils';
 export default function FormikDoc() {
     const toast = useRef(null);
 
-    const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.date.toLocaleDateString() });
+    const show = (data) => {
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: \`\${data.chipArray}\` });
     };
 
     const formik = useFormik({
         initialValues: {
-            date: ''
+            chipArray: []
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.date) {
-                errors.date = 'Date is required.';
+            if (!data.chipArray.length > 0) {
+                errors.chipArray = 'At least one chip is required.';
             }
 
             return errors;
         },
         onSubmit: (data) => {
-            if (!formik.errors.date) {
-                data && show(data);
-                formik.resetForm();
-            }
+            data.chipArray.length > 0 && show(data);
+            formik.resetForm();
         }
     });
 
@@ -165,21 +155,20 @@ export default function FormikDoc() {
     };
 
     return (
-        <div className="card flex justify-content-center">
+        <div className="card p-fluid justify-content-center">
             <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
-                <label htmlFor="cal_date">Date</label>
                 <Toast ref={toast} />
-                <Calendar
-                    inputId="cal_date"
-                    name="date"
-                    value={formik.values.date}
-                    className={classNames({ 'p-invalid': isFormFieldInvalid('date') })}
+                <Chips
+                    inputId="c_chipArray"
+                    name="chipArray"
+                    value={formik.values.chipArray}
+                    className={classNames({ 'p-invalid': isFormFieldInvalid('chipArray') })}
                     onChange={(e) => {
-                        formik.setFieldValue('date', e.target.value);
+                        formik.setFieldValue('chipArray', e.value);
                     }}
                 />
-                {getFormErrorMessage('date')}
-                <Button type="submit" label="Submit" />
+                {getFormErrorMessage('chipArray')}
+                <Button type="submit" label="Submit" className='w-7rem' />
             </form>
         </div>
     )
@@ -194,24 +183,23 @@ export default function FormikDoc() {
                     <a href="https://formik.org/">Formik</a> is a popular library for handling forms in React.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
+            <div className="card p-fluid justify-content-center">
                 <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
-                    <label htmlFor="cal_date">Date</label>
                     <Toast ref={toast} />
-                    <Calendar
-                        inputId="cal_date"
-                        name="date"
-                        value={formik.values.date}
-                        className={classNames({ 'p-invalid': isFormFieldInvalid('date') })}
+                    <Chips
+                        inputId="c_chipArray"
+                        name="chipArray"
+                        value={formik.values.chipArray}
+                        className={classNames({ 'p-invalid': isFormFieldInvalid('chipArray') })}
                         onChange={(e) => {
-                            formik.setFieldValue('date', e.target.value);
+                            formik.setFieldValue('chipArray', e.value);
                         }}
                     />
-                    {getFormErrorMessage('date')}
-                    <Button type="submit" label="Submit" />
+                    {getFormErrorMessage('chipArray')}
+                    <Button type="submit" label="Submit" className="w-7rem" />
                 </form>
             </div>
-            <DocSectionCode code={code} dependencies={{ formik: '^2.1.4' }} />
+            <DocSectionCode code={code} dependencies={{ formik: '^2.2.6' }} />
         </>
     );
 }

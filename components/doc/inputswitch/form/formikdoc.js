@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { Button } from '../../../lib/button/Button';
-import { Calendar } from '../../../lib/calendar/Calendar';
+import { InputSwitch } from '../../../lib/inputswitch/InputSwitch';
 import { Toast } from '../../../lib/toast/Toast';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
@@ -11,27 +11,25 @@ export function FormikDoc(props) {
     const toast = useRef(null);
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.date.toLocaleDateString() });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: 'The form is successfully submitted.' });
     };
 
     const formik = useFormik({
         initialValues: {
-            date: ''
+            value: false
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.date) {
-                errors.date = 'Date is required.';
+            if (!data.value) {
+                errors.value = 'Accept is required.';
             }
 
             return errors;
         },
         onSubmit: (data) => {
-            if (!formik.errors.date) {
-                data && show(data);
-                formik.resetForm();
-            }
+            data && show(data);
+            formik.resetForm();
         }
     });
 
@@ -43,55 +41,50 @@ export function FormikDoc(props) {
 
     const code = {
         basic: `
-<form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
-    <label htmlFor="cal_date">Date</label>
-    <Toast ref={toast} />
-    <Calendar
-        inputId="cal_date"
-        name="date"
-        value={formik.values.date}
-        className={classNames({ 'p-invalid': isFormFieldInvalid('date') })}
-        onChange={(e) => {
-            formik.setFieldValue('date', e.target.value);
-        }}
-    />
-    {getFormErrorMessage('date')}
-    <Button type="submit" label="Submit" />
-</form>
-        `,
+<Toast ref={toast} />
+<InputSwitch
+    id="value"
+    name="value"
+    checked={formik.values.value}
+    onChange={(e) => {
+        formik.setFieldValue('value', e.value);
+    }}
+    className={classNames({ 'p-invalid': isFormFieldInvalid('value') })}
+/>
+{getFormErrorMessage('value')}
+<Button type="submit" label="Submit" />
+`,
         javascript: `
-import React, {useRef} from 'react';
+import React, { useRef } from "react";
 import { useFormik } from 'formik';
-import { Calendar } from "primereact/calendar";
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
+import { InputSwitch } from "primereact/inputswitch";
 import { classNames } from 'primereact/utils';
 
 export default function FormikDoc() {
     const toast = useRef(null);
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.date.toLocaleDateString() });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: 'The form is successfully submitted.' });
     };
 
     const formik = useFormik({
         initialValues: {
-            date: ''
+            value: false
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.date) {
-                errors.date = 'Date is required.';
+            if (!data.value) {
+                errors.value = 'Accept is required.';
             }
 
             return errors;
         },
         onSubmit: (data) => {
-            if (!formik.errors.date) {
-                data && show(data);
-                formik.resetForm();
-            }
+            data && show(data);
+            formik.resetForm();
         }
     });
 
@@ -104,18 +97,18 @@ export default function FormikDoc() {
     return (
         <div className="card flex justify-content-center">
             <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
-                <label htmlFor="cal_date">Date</label>
+                <div>I've read and accept the terms & conditions.</div>
                 <Toast ref={toast} />
-                <Calendar
-                    inputId="cal_date"
-                    name="date"
-                    value={formik.values.date}
-                    className={classNames({ 'p-invalid': isFormFieldInvalid('date') })}
+                <InputSwitch
+                    id="value"
+                    name="value"
+                    checked={formik.values.value}
                     onChange={(e) => {
-                        formik.setFieldValue('date', e.target.value);
+                        formik.setFieldValue('value', e.value);
                     }}
+                    className={classNames({ 'p-invalid': isFormFieldInvalid('value') })}
                 />
-                {getFormErrorMessage('date')}
+                {getFormErrorMessage('value')}
                 <Button type="submit" label="Submit" />
             </form>
         </div>
@@ -123,38 +116,36 @@ export default function FormikDoc() {
 }
         `,
         typescript: `
-import React, {useRef} from 'react';
+import React, { useRef } from "react";
 import { useFormik } from 'formik';
-import { Calendar } from "primereact/calendar";
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
+import { InputSwitch } from "primereact/inputswitch";
 import { classNames } from 'primereact/utils';
 
 export default function FormikDoc() {
     const toast = useRef(null);
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.date.toLocaleDateString() });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: 'The form is successfully submitted.' });
     };
 
     const formik = useFormik({
         initialValues: {
-            date: ''
+            value: false
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.date) {
-                errors.date = 'Date is required.';
+            if (!data.value) {
+                errors.value = 'Accept is required.';
             }
 
             return errors;
         },
         onSubmit: (data) => {
-            if (!formik.errors.date) {
-                data && show(data);
-                formik.resetForm();
-            }
+            data && show(data);
+            formik.resetForm();
         }
     });
 
@@ -167,18 +158,18 @@ export default function FormikDoc() {
     return (
         <div className="card flex justify-content-center">
             <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
-                <label htmlFor="cal_date">Date</label>
+                <div>I've read and accept the terms & conditions.</div>
                 <Toast ref={toast} />
-                <Calendar
-                    inputId="cal_date"
-                    name="date"
-                    value={formik.values.date}
-                    className={classNames({ 'p-invalid': isFormFieldInvalid('date') })}
+                <InputSwitch
+                    id="value"
+                    name="value"
+                    checked={formik.values.value}
                     onChange={(e) => {
-                        formik.setFieldValue('date', e.target.value);
+                        formik.setFieldValue('value', e.value);
                     }}
+                    className={classNames({ 'p-invalid': isFormFieldInvalid('value') })}
                 />
-                {getFormErrorMessage('date')}
+                {getFormErrorMessage('value')}
                 <Button type="submit" label="Submit" />
             </form>
         </div>
@@ -196,22 +187,22 @@ export default function FormikDoc() {
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
-                    <label htmlFor="cal_date">Date</label>
+                    <div>I've read and accept the terms & conditions.</div>
                     <Toast ref={toast} />
-                    <Calendar
-                        inputId="cal_date"
-                        name="date"
-                        value={formik.values.date}
-                        className={classNames({ 'p-invalid': isFormFieldInvalid('date') })}
+                    <InputSwitch
+                        id="value"
+                        name="value"
+                        checked={formik.values.value}
                         onChange={(e) => {
-                            formik.setFieldValue('date', e.target.value);
+                            formik.setFieldValue('value', e.value);
                         }}
+                        className={classNames({ 'p-invalid': isFormFieldInvalid('value') })}
                     />
-                    {getFormErrorMessage('date')}
+                    {getFormErrorMessage('value')}
                     <Button type="submit" label="Submit" />
                 </form>
             </div>
-            <DocSectionCode code={code} dependencies={{ formik: '^2.1.4' }} />
+            <DocSectionCode code={code} dependencies={{ formik: '^2.2.6' }} />
         </>
     );
 }

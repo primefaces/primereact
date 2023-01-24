@@ -9,8 +9,8 @@ import { GroupDoc } from '../../components/doc/checkbox/groupdoc';
 import { ImportDoc } from '../../components/doc/checkbox/importdoc';
 import { InvalidDoc } from '../../components/doc/checkbox/invaliddoc';
 import { StyleDoc } from '../../components/doc/checkbox/styledoc';
-import { FormikDoc } from '../../components/doc/checkbox/validation/formikdoc';
-import { HookFormDoc } from '../../components/doc/checkbox/validation/hookformdoc';
+import { FormikDoc } from '../../components/doc/checkbox/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/checkbox/form/hookformdoc';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 

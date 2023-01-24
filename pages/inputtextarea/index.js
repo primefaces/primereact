@@ -12,8 +12,8 @@ import { ImportDoc } from '../../components/doc/inputtextarea/importdoc';
 import { InvalidDoc } from '../../components/doc/inputtextarea/invaliddoc';
 import { KeyFilterDoc } from '../../components/doc/inputtextarea/keyfilterdoc';
 import { StyleDoc } from '../../components/doc/inputtextarea/styledoc';
-import { FormikDoc } from '../../components/doc/inputtextarea/validation/formikdoc';
-import { HookFormDoc } from '../../components/doc/inputtextarea/validation/hookformdoc';
+import { FormikDoc } from '../../components/doc/inputtextarea/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/inputtextarea/form/hookformdoc';
 
 const InputTextareaDemo = () => {
     const docs = [

@@ -13,8 +13,8 @@ import { MaskDoc } from '../../components/doc/inputmask/maskdoc';
 import { OptionalDoc } from '../../components/doc/inputmask/optionaldoc';
 import { SlotCharDoc } from '../../components/doc/inputmask/slotchardoc';
 import { StyleDoc } from '../../components/doc/inputmask/styledoc';
-import { FormikDoc } from '../../components/doc/inputmask/validation/formikdoc';
-import { HookFormDoc } from '../../components/doc/inputmask/validation/hookformdoc';
+import { FormikDoc } from '../../components/doc/inputmask/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/inputmask/form/hookformdoc';
 
 const InputMaskDemo = () => {
     const docs = [

@@ -14,8 +14,8 @@ import { LocaleDoc } from '../../components/doc/inputnumber/localedoc';
 import { NumeralsDoc } from '../../components/doc/inputnumber/numberalsdoc';
 import { PrefixDoc } from '../../components/doc/inputnumber/prefixdoc';
 import { StyleDoc } from '../../components/doc/inputnumber/styledoc';
-import { FormikDoc } from '../../components/doc/inputnumber/validation/formikdoc';
-import { HookFormDoc } from '../../components/doc/inputnumber/validation/hookformdoc';
+import { FormikDoc } from '../../components/doc/inputnumber/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/inputnumber/form/hookformdoc';
 import { VerticalDoc } from '../../components/doc/inputnumber/verticaldoc';
 
 const InputNumberDemo = () => {

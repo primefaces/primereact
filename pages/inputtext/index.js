@@ -15,8 +15,8 @@ import { InvalidDoc } from '../../components/doc/inputtext/invaliddoc';
 import { KeyFilterDoc } from '../../components/doc/inputtext/keyfilterdoc';
 import { SizesDoc } from '../../components/doc/inputtext/sizesdoc';
 import { StyleDoc } from '../../components/doc/inputtext/styledoc';
-import { FormikDoc } from '../../components/doc/inputtext/validation/formikdoc';
-import { HookFormDoc } from '../../components/doc/inputtext/validation/hookformdoc';
+import { FormikDoc } from '../../components/doc/inputtext/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/inputtext/form/hookformdoc';
 
 const InputTextDemo = () => {
     const docs = [
