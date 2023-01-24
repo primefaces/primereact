@@ -38,16 +38,6 @@ const AutoCompleteDemo = () => {
             component: FloatLabelDoc
         },
         {
-            id: 'invalid',
-            label: 'Invalid',
-            component: InvalidDoc
-        },
-        {
-            id: 'disabled',
-            label: 'Disabled',
-            component: DisabledDoc
-        },
-        {
             id: 'dropdown',
             label: 'Dropdown',
             component: DropdownDoc
@@ -81,6 +71,16 @@ const AutoCompleteDemo = () => {
             id: 'multiple',
             label: 'Multiple',
             component: MultipleDoc
+        },
+        {
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
         },
         {
             id: 'form',

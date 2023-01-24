@@ -4,7 +4,7 @@ import { DocSectionText } from '../common/docsectiontext';
 
 export function AccessibilityDoc() {
         const code = {
-        basic: `
+            basic: `
 <label htmlFor="chkbox1">Remember Me</label>
 <Checkbox inputId="chkbox1" />
 
