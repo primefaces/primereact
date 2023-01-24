@@ -2,19 +2,19 @@ import { InputSwitch } from '../../lib/inputswitch/InputSwitch';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function DisabledDoc(props) {
+export function InvalidDoc(props) {
     const code = {
         basic: `
-<InputSwitch disabled />
+<InputSwitch className="p-invalid" />
         `,
         javascript: `
 import React, { useState } from "react";
 import { InputSwitch } from "primereact/inputswitch";
 
-export default function DisabledDemo() {
+export default function InvalidDemo() {
     return (
         <div className="card flex justify-content-center">
-            <InputSwitch disabled />
+            <InputSwitch className="p-invalid" />
         </div>
     );
 }
@@ -23,10 +23,10 @@ export default function DisabledDemo() {
 import React, { useState } from "react";
 import { InputSwitch } from "primereact/inputswitch";
 
-export default function DisabledDemo() {
+export default function InvalidDemo() {
     return (
         <div className="card flex justify-content-center">
-            <InputSwitch disabled />
+            <InputSwitch className="p-invalid" />
         </div>
     );
 }
@@ -36,10 +36,10 @@ export default function DisabledDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>When <i>disabled</i> is present, the element cannot be edited and focused.</p>
+                <p>Invalid state style is added using the <i>p-invalid</i> class to indicate a failed validation.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <InputSwitch disabled />
+                <InputSwitch className="p-invalid" />
             </div>
             <DocSectionCode code={code} />
         </>

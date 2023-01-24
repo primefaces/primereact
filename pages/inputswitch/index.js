@@ -6,6 +6,7 @@ import { ApiDoc } from '../../components/doc/inputswitch/apidoc';
 import { BasicDoc } from '../../components/doc/inputswitch/basicdoc';
 import { DisabledDoc } from '../../components/doc/inputswitch/disableddoc';
 import { ImportDoc } from '../../components/doc/inputswitch/importdoc';
+import { InvalidDoc } from '../../components/doc/inputswitch/invaliddoc';
 import { PreselectionDoc } from '../../components/doc/inputswitch/preselectiondoc';
 import { StyleDoc } from '../../components/doc/inputswitch/styledoc';
 import { FormikDoc } from '../../components/doc/inputswitch/validation/formikdoc';
@@ -27,6 +28,11 @@ const InputSwitchDemo = () => {
             id: 'preselection',
             label: 'Preselection',
             component: PreselectionDoc
+        },
+        {
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
         },
         {
             id: 'disabled',

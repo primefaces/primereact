@@ -18,7 +18,9 @@ export default function PreselectionDemo() {
     const [checked, setChecked] = useState(true);
 
     return (
-        <InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />
+        <div className="card flex justify-content-center">
+            <InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />
+        </div>
     );
 }
         `,
@@ -30,7 +32,9 @@ export default function PreselectionDemo() {
     const [checked, setChecked] = useState<boolean>(true);
 
     return (
-        <InputSwitch checked={checked} onChange={(e: InputSwitchChangeParams) => setChecked(e.value)} />
+        <div className="card flex justify-content-center">
+            <InputSwitch checked={checked} onChange={(e: InputSwitchChangeParams) => setChecked(e.value)} />
+        </div>
     );
 }
         `
@@ -39,9 +43,7 @@ export default function PreselectionDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    Enabling <i>checked</i> property displays the component as active.
-                </p>
+                <p>Enabling <i>checked</i> property displays the component as active initially.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />

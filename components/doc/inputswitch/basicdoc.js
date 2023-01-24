@@ -18,7 +18,9 @@ export default function BasicDemo() {
     const [checked, setChecked] = useState(false);
 
     return (
-        <InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />
+        <div className="card flex justify-content-center">
+            <InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />
+        </div>
     );
 }
         `,
@@ -30,7 +32,9 @@ export default function BasicDemo() {
     const [checked, setChecked] = useState<boolean>(false);
 
     return (
-        <InputSwitch checked={checked} onChange={(e: InputSwitchChangeParams) => setChecked(e.value)} />
+        <div className="card flex justify-content-center">
+            <InputSwitch checked={checked} onChange={(e: InputSwitchChangeParams) => setChecked(e.value)} />
+        </div>
     );
 }
         `
@@ -39,9 +43,7 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    InputSwitch is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.
-                </p>
+                <p>InputSwitch is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />
