@@ -13,7 +13,7 @@ export function DocSections(props) {
                 const Comp = doc.component;
 
                 return (
-                    <section key={doc.label}>
+                    <section key={doc.label} className="py-3">
                         {doc.children && doc.id !== 'api' ? (
                             <div id={doc.id}>
                                 <h2 className="doc-section-label" id={doc.id}>

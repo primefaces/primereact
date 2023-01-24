@@ -105,7 +105,7 @@ export function DocSectionCode(props) {
 
             {codeMode === 'basic' && (
                 <div>
-                    <CodeHighlight code import={props.import}>
+                    <CodeHighlight code {...props}>
                         {props.code.basic}
                     </CodeHighlight>
                 </div>
