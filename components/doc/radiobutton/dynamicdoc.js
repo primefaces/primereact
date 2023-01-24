@@ -14,16 +14,14 @@ export function DynamicDoc(props) {
 
     const code = {
         basic: `
-<div className="flex flex-col gap-3">
-    {categories.map((category) => {
-        return (
-            <div key={category.key} className="flex align-items-center">
-                <RadioButton inputId={category.key} name="category" value={category} onChange={(e) => setSelectedCategory(e.value)} checked={selectedCategory.key === category.key} />
-                <label htmlFor={category.key} className="ml-2">{category.name}</label>
-            </div>
-        );
-    })}
-</div>
+{categories.map((category) => {
+    return (
+        <div key={category.key} className="flex align-items-center">
+            <RadioButton inputId={category.key} name="category" value={category} onChange={(e) => setSelectedCategory(e.value)} checked={selectedCategory.key === category.key} />
+            <label htmlFor={category.key} className="ml-2">{category.name}</label>
+        </div>
+    );
+})}
         `,
         javascript: `
 import React, { useState } from "react";
@@ -39,15 +37,17 @@ export default function DynamicDemo() {
     const [selectedCategory, setSelectedCategory] = useState(categories[1]);
 
     return (
-        <div className="flex flex-column gap-3">
-            {categories.map((category) => {
-                return (
-                    <div key={category.key} className="flex align-items-center">
-                        <RadioButton inputId={category.key} name="category" value={category} onChange={(e) => setSelectedCategory(e.value)} checked={selectedCategory.key === category.key} />
-                        <label htmlFor={category.key} className="ml-2">{category.name}</label>
-                    </div>
-                );
-            })}
+        <div className="card flex justify-content-center">
+            <div className="flex flex-column gap-3">
+                {categories.map((category) => {
+                    return (
+                        <div key={category.key} className="flex align-items-center">
+                            <RadioButton inputId={category.key} name="category" value={category} onChange={(e) => setSelectedCategory(e.value)} checked={selectedCategory.key === category.key} />
+                            <label htmlFor={category.key} className="ml-2">{category.name}</label>
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     );
 }
@@ -71,15 +71,17 @@ export default function DynamicDemo() {
     const [selectedCategory, setSelectedCategory] = useState<Category>(categories[1]);
 
     return (
-        <div className="flex flex-column gap-3">
-            {categories.map((category) => {
-                return (
-                    <div key={category.key} className="flex align-items-center">
-                        <RadioButton inputId={category.key} name="category" value={category} onChange={(e: RadioButtonChangeParams) => setSelectedCategory(e.value)} checked={selectedCategory.key === category.key} />
-                        <label htmlFor={category.key} className="ml-2">{category.name}</label>
-                    </div>
-                );
-            })}
+        <div className="card flex justify-content-center">
+            <div className="flex flex-column gap-3">
+                {categories.map((category) => {
+                    return (
+                        <div key={category.key} className="flex align-items-center">
+                            <RadioButton inputId={category.key} name="category" value={category} onChange={(e: RadioButtonChangeParams) => setSelectedCategory(e.value)} checked={selectedCategory.key === category.key} />
+                            <label htmlFor={category.key} className="ml-2">{category.name}</label>
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     );
 }

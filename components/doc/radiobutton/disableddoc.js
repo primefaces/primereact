@@ -1,6 +1,6 @@
 import { RadioButton } from '../../lib/radiobutton/RadioButton';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function DisabledDoc(props) {
     const code = {
@@ -13,7 +13,9 @@ import { RadioButton } from "primereact/radiobutton";
 
 export default function DisabledDemo() {
     return (
-        <RadioButton checked disabled></RadioButton>
+        <div className="card flex justify-content-center">
+            <RadioButton checked disabled></RadioButton>
+        </div>
     )
 }
         `,
@@ -23,7 +25,9 @@ import { RadioButton } from "primereact/radiobutton";
 
 export default function DisabledDemo() {
     return (
-        <RadioButton checked disabled></RadioButton>
+        <div className="card flex justify-content-center">
+            <RadioButton checked disabled></RadioButton>
+        </div>
     )
 }
         `
@@ -32,9 +36,7 @@ export default function DisabledDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    <i>disabled</i> prop prevents an input from being editable.
-                </p>
+                <p>When <i>disabled</i> is present, the element cannot be edited and focused.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <RadioButton checked disabled></RadioButton>
