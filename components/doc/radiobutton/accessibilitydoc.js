@@ -1,8 +1,20 @@
-import { DocSectionText } from '../common/docsectiontext';
 import { DevelopmentSection } from '../common/developmentsection';
-import { CodeHighlight } from '../common/codehighlight';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function AccessibilityDoc() {
+    const code = {
+        basic: `
+<label htmlFor="rb1">One</label>
+<RadioButton inputId="rb1" />
+
+<span id="rb2">Two</span>
+<RadioButton aria-labelledby="rb2" />
+
+<RadioButton aria-label="Three" />
+    `
+};
+
     return (
         <DevelopmentSection>
             <DocSectionText id="accessibility" label="Accessibility">
@@ -11,18 +23,9 @@ export function AccessibilityDoc() {
                     RadioButton component uses a hidden native radio button element internally that is only visible to screen readers. Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or
                     using <i>aria-labelledby</i>, <i>aria-label</i> props.
                 </p>
-                <CodeHighlight>
-                    {`
-<label htmlFor="rb1">One</label>
-<RadioButton inputId="rb1" />
-
-<span id="rb2">Two</span>
-<RadioButton aria-labelledby="rb2" />
-
-<RadioButton aria-label="Three" />
-`}
-                </CodeHighlight>
-
+                
+                <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+                
                 <h3>Keyboard Support</h3>
                 <div className="doc-tablewrapper">
                     <table className="doc-table">
