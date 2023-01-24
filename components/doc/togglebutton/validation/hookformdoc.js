@@ -9,29 +9,29 @@ import { DocSectionText } from '../../common/docsectiontext';
 
 export function HookFormDoc(props) {
     const toast = useRef(null);
-    const defaultValues = { checked: false };
+    const defaultValues = { value: false };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: form.getValues('value').toString() });
     };
 
     const onSubmit = (data) => {
-        data.checked && show();
+        data.value && show();
         form.reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>;
+        return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     const code = {
         basic: `
 <Controller
-name="checked"
+name="value"
 control={form.control}
-rules={{ required: 'Checked is required.' }}
+rules={{ required: 'Value is required.' }}
 render={({ field, fieldState }) => (
     <div className="flex flex-column gap-2">
         <ToggleButton id={field.name} checked={field.value} onChange={field.onChange} className={classNames({ 'p-invalid': fieldState.error })} />
@@ -50,21 +50,21 @@ import { ToggleButton } from "primereact/togglebutton";
 
 export default function HookFormDoc() {
     const toast = useRef(null);
-    const defaultValues = { checked: false };
+    const defaultValues = { value: false };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: form.getValues('value').toString() });
     };
 
     const onSubmit = (data) => {
-        data.checked && show();
+        data.value && show();
         form.reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>;
+        return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
@@ -72,9 +72,9 @@ export default function HookFormDoc() {
             <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column gap-2">
                 <Toast ref={toast} />
                 <Controller
-                    name="checked"
+                    name="value"
                     control={form.control}
-                    rules={{ required: 'Checked is required.' }}
+                    rules={{ required: 'Value is required.' }}
                     render={({ field, fieldState }) => (
                         <div className="flex flex-column gap-2">
                             <ToggleButton id={field.name} checked={field.value} onChange={field.onChange} className={classNames({ 'p-invalid': fieldState.error })} />
@@ -98,21 +98,21 @@ import { ToggleButton } from "primereact/togglebutton";
 
 export default function HookFormDoc() {
     const toast = useRef<Toast | null>(null);
-    const defaultValues = { checked: false };
+    const defaultValues = { value: false };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: form.getValues('value').toString() });
     };
 
     const onSubmit = (data) => {
-        data.checked && show();
+        data.value && show();
         form.reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>;
+        return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
@@ -120,9 +120,9 @@ export default function HookFormDoc() {
             <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column gap-2">
                 <Toast ref={toast} />
                 <Controller
-                    name="checked"
+                    name="value"
                     control={form.control}
-                    rules={{ required: 'Checked is required.' }}
+                    rules={{ required: 'Value is required.' }}
                     render={({ field, fieldState }) => (
                         <div className="flex flex-column gap-2">
                             <ToggleButton id={field.name} checked={field.value} onChange={field.onChange} className={classNames({ 'p-invalid': fieldState.error })} />
@@ -149,9 +149,9 @@ export default function HookFormDoc() {
                 <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column gap-2">
                     <Toast ref={toast} />
                     <Controller
-                        name="checked"
+                        name="value"
                         control={form.control}
-                        rules={{ required: 'Checked is required.' }}
+                        rules={{ required: 'Value is required.' }}
                         render={({ field, fieldState }) => (
                             <div className="flex flex-column gap-2">
                                 <ToggleButton id={field.name} checked={field.value} onChange={field.onChange} className={classNames({ 'p-invalid': fieldState.error })} />

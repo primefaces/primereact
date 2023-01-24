@@ -9,12 +9,12 @@ import { DocSectionText } from '../../common/docsectiontext';
 
 export function HookFormDoc(props) {
     const toast = useRef(null);
-    const defaultValues = { level: '' };
+    const defaultValues = { value: '' };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: form.getValues('value') });
     };
 
     const options = [
@@ -24,17 +24,17 @@ export function HookFormDoc(props) {
     ];
 
     const onSubmit = (data) => {
-        data.level && show();
+        data.value && show();
         form.reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>;
+        return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     const code = {
         basic: `
-<Controller name="level"  control={form.control} rules={{ required: 'Level is required.'}}
+<Controller name="value"  control={form.control} rules={{ required: 'Level is required.'}}
     render={({ field, fieldState }) => (
         <>
             <label htmlFor={field.name} className={classNames({ 'p-error': errors.name })}>Level*</label>
@@ -54,12 +54,12 @@ import { MultiStateCheckbox } from "primereact/multistatecheckbox";
 
 export default function HookFormDoc() {
     const toast = useRef(null);
-    const defaultValues = {level: ''};
+    const defaultValues = {value: ''};
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
     
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: form.getValues('value') });
     };
 
     const options = [
@@ -69,38 +69,34 @@ export default function HookFormDoc() {
     ];
 
     const onSubmit = (data) => {
-        data.level && show();
+        data.value && show();
         form.reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error ml-2">{errors[name].message}</small>
+        return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
         <div className="card flex justify-content-center">
-            <div className="flex flex-column gap-2">
-                <form onSubmit={form.handleSubmit(onSubmit)}>
-                    <div className="field">
-                        <Toast ref={toast} />
-                        <Controller
-                            name="level"
-                            control={form.control}
-                            rules={{ required: 'Level is required.' }}
-                            render={({ field, fieldState }) => (
-                                <div className="flex flex-column gap-2">
-                                    <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.level })}>
-                                        Level
-                                    </label>
-                                    <MultiStateCheckbox id={field.name} value={field.value} ref={field.ref} onChange={field.onChange} options={options} optionValue="value" className={classNames({ 'p-invalid': fieldState.error })} />
-                                    {getFormErrorMessage(field.name)}
-                                </div>
-                            )}
-                        />
-                    </div>
-                    <Button label="Submit" type="submit" icon="pi pi-check" />
-                </form>
-            </div>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column gap-2">
+                <Toast ref={toast} />
+                <Controller
+                    name="value"
+                    control={form.control}
+                    rules={{ required: 'Level is required.' }}
+                    render={({ field, fieldState }) => (
+                        <div className="flex flex-column gap-2">
+                            <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.value })}>
+                                Level
+                            </label>
+                            <MultiStateCheckbox id={field.name} value={field.value} ref={field.ref} onChange={field.onChange} options={options} optionValue="value" className={classNames({ 'p-invalid': fieldState.error })} />
+                            {getFormErrorMessage(field.name)}
+                        </div>
+                    )}
+                />
+                <Button label="Submit" type="submit" icon="pi pi-check" />
+            </form>
         </div>
     )
 }
@@ -115,12 +111,12 @@ import { MultiStateCheckbox } from "primereact/multistatecheckbox";
 
 export default function HookFormDoc() {
     const toast = useRef<Toast | null>(null);
-    const defaultValues = {level: ''};
+    const defaultValues = {value: ''};
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
     
-    const show = (): void => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+    const show = () => {
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: form.getValues('value') });
     };
 
     const options = [
@@ -130,38 +126,34 @@ export default function HookFormDoc() {
     ];
 
     const onSubmit = (data: any) => {
-        data.level && show();
+        data.value && show();
         form.reset();
     };
 
-    const getFormErrorMessage = (name: string) => {
-        return errors[name] && <small className="p-error ml-2">{errors[name].message}</small>
+    const getFormErrorMessage = (name) => {
+        return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
         <div className="card flex justify-content-center">
-            <div className="flex flex-column gap-2">
-                <form onSubmit={form.handleSubmit(onSubmit)}>
-                    <div className="field">
-                        <Toast ref={toast} />
-                        <Controller
-                            name="level"
-                            control={form.control}
-                            rules={{ required: 'Level is required.' }}
-                            render={({ field, fieldState }) => (
-                                <div className="flex flex-column gap-2">
-                                    <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.level })}>
-                                        Level
-                                    </label>
-                                    <MultiStateCheckbox id={field.name} value={field.value} ref={field.ref} onChange={field.onChange} options={options} optionValue="value" className={classNames({ 'p-invalid': fieldState.error })} />
-                                    {getFormErrorMessage(field.name)}
-                                </div>
-                            )}
-                        />
-                    </div>
-                    <Button label="Submit" type="submit" icon="pi pi-check" />
-                </form>
-            </div>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column gap-2">
+                <Toast ref={toast} />
+                <Controller
+                    name="value"
+                    control={form.control}
+                    rules={{ required: 'Level is required.' }}
+                    render={({ field, fieldState }) => (
+                        <div className="flex flex-column gap-2">
+                            <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.value })}>
+                                Level
+                            </label>
+                            <MultiStateCheckbox id={field.name} value={field.value} ref={field.ref} onChange={field.onChange} options={options} optionValue="value" className={classNames({ 'p-invalid': fieldState.error })} />
+                            {getFormErrorMessage(field.name)}
+                        </div>
+                    )}
+                />
+                <Button label="Submit" type="submit" icon="pi pi-check" />
+            </form>
         </div>
     )
 }
@@ -176,28 +168,24 @@ export default function HookFormDoc() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <div className="flex flex-column gap-2">
-                    <form onSubmit={form.handleSubmit(onSubmit)}>
-                        <div className="field">
-                            <Toast ref={toast} />
-                            <Controller
-                                name="level"
-                                control={form.control}
-                                rules={{ required: 'Level is required.' }}
-                                render={({ field, fieldState }) => (
-                                    <div className="flex flex-column gap-2">
-                                        <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.level })}>
-                                            Level
-                                        </label>
-                                        <MultiStateCheckbox id={field.name} value={field.value} ref={field.ref} onChange={field.onChange} options={options} optionValue="value" className={classNames({ 'p-invalid': fieldState.error })} />
-                                        {getFormErrorMessage(field.name)}
-                                    </div>
-                                )}
-                            />
-                        </div>
-                        <Button label="Submit" type="submit" icon="pi pi-check" />
-                    </form>
-                </div>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column gap-2">
+                    <Toast ref={toast} />
+                    <Controller
+                        name="value"
+                        control={form.control}
+                        rules={{ required: 'Level is required.' }}
+                        render={({ field, fieldState }) => (
+                            <div className="flex flex-column gap-2">
+                                <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.value })}>
+                                    Level
+                                </label>
+                                <MultiStateCheckbox id={field.name} value={field.value} ref={field.ref} onChange={field.onChange} options={options} optionValue="value" className={classNames({ 'p-invalid': fieldState.error })} />
+                                {getFormErrorMessage(field.name)}
+                            </div>
+                        )}
+                    />
+                    <Button label="Submit" type="submit" icon="pi pi-check" />
+                </form>
             </div>
             <DocSectionCode code={code} dependencies={{ 'react-hook-form': '^7.39.4' }} />
         </>

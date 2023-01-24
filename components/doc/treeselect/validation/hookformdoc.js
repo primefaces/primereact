@@ -10,7 +10,7 @@ import { DocSectionText } from '../../common/docsectiontext';
 
 export function HookFormDoc(props) {
     const [nodes, setNodes] = useState(null);
-    const defaultValues = { node: null };
+    const defaultValues = { value: null };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
     const toast = useRef(null);
@@ -20,29 +20,29 @@ export function HookFormDoc(props) {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: form.getValues('value') });
     };
 
     const onSubmit = (data) => {
-        data.node && show();
+        data.value && show();
 
         form.reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error ">{errors[name].message}</small>;
+        return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     const code = {
         basic: `
 <Toast ref={toast} />
 <Controller
-    name="node"
+    name="value"
     control={form.control}
-    rules={{ required: 'Item is required.' }}
+    rules={{ required: 'Value is required.' }}
     render={({ field, fieldState }) => (
         <>
-            <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.node })}>
+            <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.value })}>
                 Item
             </label>
             <TreeSelect id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} options={nodes} placeholder="Select Item" className={classNames({ 'p-invalid': fieldState.error })} />
@@ -62,7 +62,7 @@ import { NodeService } from './service/NodeService';
 
 export default function HookFormDoc() {
     const [nodes, setNodes] = useState(null);
-    const defaultValues = { node: null };
+    const defaultValues = { value: null };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
     const toast = useRef(null);
@@ -72,17 +72,17 @@ export default function HookFormDoc() {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: form.getValues('value') });
     };
 
     const onSubmit = (data) => {
-        data.node && show();
+        data.value && show();
 
         form.reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error ">{errors[name].message}</small>;
+        return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
@@ -92,12 +92,12 @@ export default function HookFormDoc() {
                     <div className="mb-2">
                         <Toast ref={toast} />
                         <Controller
-                            name="node"
+                            name="value"
                             control={form.control}
-                            rules={{ required: 'Item is required.' }}
+                            rules={{ required: 'Value is required.' }}
                             render={({ field, fieldState }) => (
                                 <>
-                                    <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.node })}>
+                                    <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.value })}>
                                         Item
                                     </label>
                                     <TreeSelect id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} options={nodes} placeholder="Select Item" className={classNames({ 'p-invalid': fieldState.error })} />
@@ -124,7 +124,7 @@ import { NodeService } from './service/NodeService';
 
 export default function HookFormDoc() {
     const [nodes, setNodes] = useState(null);
-    const defaultValues = { node: null };
+    const defaultValues = { value: null };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
     const toast = useRef(null);
@@ -134,17 +134,17 @@ export default function HookFormDoc() {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: form.getValues('value') });
     };
 
     const onSubmit = (data) => {
-        data.node && show();
+        data.value && show();
 
         form.reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error ">{errors[name].message}</small>;
+        return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
@@ -154,12 +154,12 @@ export default function HookFormDoc() {
                     <div className="mb-2">
                         <Toast ref={toast} />
                         <Controller
-                            name="node"
+                            name="value"
                             control={form.control}
-                            rules={{ required: 'Item is required.' }}
+                            rules={{ required: 'Value is required.' }}
                             render={({ field, fieldState }) => (
                                 <>
-                                    <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.node })}>
+                                    <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.value })}>
                                         Item
                                     </label>
                                     <TreeSelect id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} options={nodes} placeholder="Select Item" className={classNames({ 'p-invalid': fieldState.error })} />
@@ -218,9 +218,9 @@ export default function HookFormDoc() {
                         <div className="mb-2">
                             <Toast ref={toast} />
                             <Controller
-                                name="node"
+                                name="value"
                                 control={form.control}
-                                rules={{ required: 'Item is required.' }}
+                                rules={{ required: 'Value is required.' }}
                                 render={({ field, fieldState }) => (
                                     <>
                                         <TreeSelect id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} options={nodes} placeholder="Select Item" className={classNames({ 'p-invalid': fieldState.error })} />

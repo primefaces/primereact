@@ -17,38 +17,42 @@ export function HookFormDoc(props) {
     ];
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        const values = getValues('value');
+        const detail = values.map((value, i) => value.name + (i < values.length - 1 ? ', ' : ''));
+
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail });
     };
 
     const defaultValues = {
-        city: null
+        value: null
     };
 
     const {
         control,
         formState: { errors },
         handleSubmit,
+        getValues,
         reset
     } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
-        data.city && show();
+        data.value && show();
 
         reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>;
+        return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     const code = {
         basic: `
 <Toast ref={toast} />
 <Controller
-    name="city"
+    name="value"
     control={control}
-    rules={{ required: 'City is required.' }}
-    render={({ field }) => <MultiSelect id={field.name} name="city" value={field.value} options={cities} onChange={(e) => field.onChange(e.value)} optionLabel="name" placeholder="Select a City" maxSelectedLabels={3} />}
+    rules={{ required: 'Value is required.' }}
+    render={({ field }) => <MultiSelect id={field.name} name="value" value={field.value} options={cities} onChange={(e) => field.onChange(e.value)} optionLabel="name" placeholder="Select a City" maxSelectedLabels={3} />}
 />
 <Button type="submit" label="Submit" className="mt-2" />
         `,
@@ -70,28 +74,32 @@ export default function HookFormDoc() {
     ];
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        const values = getValues('value');
+        const detail = values.map((value, i) => value.name + (i < values.length - 1 ? ', ' : ''));
+
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail });
     };
 
     const defaultValues = {
-        city: null
+        value: null
     };
 
     const {
         control,
         formState: { errors },
         handleSubmit,
+        getValues,
         reset
     } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
-        data.city && show();
+        data.value && show();
 
         reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>;
+        return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
@@ -99,13 +107,13 @@ export default function HookFormDoc() {
             <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
                 <Toast ref={toast} />
                 <Controller
-                    name="city"
+                    name="value"
                     control={control}
-                    rules={{ required: 'City is required.' }}
-                    render={({ field }) => <MultiSelect id={field.name} name="city" value={field.value} options={cities} onChange={(e) => field.onChange(e.value)} optionLabel="name" placeholder="Select a City" maxSelectedLabels={3} />}
+                    rules={{ required: 'Value is required.' }}
+                    render={({ field }) => <MultiSelect id={field.name} name="value" value={field.value} options={cities} onChange={(e) => field.onChange(e.value)} optionLabel="name" placeholder="Select a City" maxSelectedLabels={3} />}
                 />
 
-                {getFormErrorMessage('city')}
+                {getFormErrorMessage('value')}
                 <Button type="submit" label="Submit" className="mt-2" />
             </form>
         </div>
@@ -130,28 +138,32 @@ export default function HookFormDoc() {
     ];
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        const values = getValues('value');
+        const detail = values.map((value, i) => value.name + (i < values.length - 1 ? ', ' : ''));
+
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail });
     };
 
     const defaultValues = {
-        city: null
+        value: null
     };
 
     const {
         control,
         formState: { errors },
         handleSubmit,
+        getValues,
         reset
     } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
-        data.city && show();
+        data.value && show();
 
         reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>;
+        return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
@@ -159,13 +171,13 @@ export default function HookFormDoc() {
             <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
                 <Toast ref={toast} />
                 <Controller
-                    name="city"
+                    name="value"
                     control={control}
-                    rules={{ required: 'City is required.' }}
-                    render={({ field }) => <MultiSelect id={field.name} name="city" value={field.value} options={cities} onChange={(e: MultiSelectChangeParams) => field.onChange(e.value)} optionLabel="name" placeholder="Select a City" maxSelectedLabels={3} />}
+                    rules={{ required: 'Value is required.' }}
+                    render={({ field }) => <MultiSelect id={field.name} name="value" value={field.value} options={cities} onChange={(e: MultiSelectChangeParams) => field.onChange(e.value)} optionLabel="name" placeholder="Select a City" maxSelectedLabels={3} />}
                 />
 
-                {getFormErrorMessage('city')}
+                {getFormErrorMessage('value')}
                 <Button type="submit" label="Submit" className="mt-2" />
             </form>
         </div>
@@ -184,13 +196,13 @@ export default function HookFormDoc() {
                 <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
                     <Toast ref={toast} />
                     <Controller
-                        name="city"
+                        name="value"
                         control={control}
-                        rules={{ required: 'City is required.' }}
-                        render={({ field }) => <MultiSelect id={field.name} name="city" value={field.value} options={cities} onChange={(e) => field.onChange(e.value)} optionLabel="name" placeholder="Select a City" maxSelectedLabels={3} />}
+                        rules={{ required: 'Value is required.' }}
+                        render={({ field }) => <MultiSelect id={field.name} name="value" value={field.value} options={cities} onChange={(e) => field.onChange(e.value)} optionLabel="name" placeholder="Select a City" maxSelectedLabels={3} />}
                     />
 
-                    {getFormErrorMessage('city')}
+                    {getFormErrorMessage('value')}
                     <Button type="submit" label="Submit" className="mt-2" />
                 </form>
             </div>

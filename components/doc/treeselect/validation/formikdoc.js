@@ -16,46 +16,46 @@ export function FormikDoc(props) {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.item });
     };
 
     const formik = useFormik({
         initialValues: {
-            node: ''
+            item: ''
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.node) {
-                errors.node = 'Item is required.';
+            if (!data.item) {
+                errors.item = 'Item is required.';
             }
 
             return errors;
         },
         onSubmit: (data) => {
-            data.node && show();
+            data.item && show();
             formik.resetForm();
         }
     });
 
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const isFormFieldInvalid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldInvalid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     const code = {
         basic: `
 <Toast ref={toast} />
 <TreeSelect
-    id="node"
-    name="node"
-    value={formik.values.node}
+    id="item"
+    name="item"
+    value={formik.values.item}
     options={node}
     optionLabel="name"
     placeholder="Select Item"
     onChange={(e) => {
-        formik.setFieldValue('node', e.value);
+        formik.setFieldValue('item', e.value);
     }}
 />
         `,
@@ -76,32 +76,32 @@ export default function FormikDoc() {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.item });
     };
 
     const formik = useFormik({
         initialValues: {
-            node: ''
+            item: ''
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.node) {
-                errors.node = 'Item is required.';
+            if (!data.item) {
+                errors.item = 'Item is required.';
             }
 
             return errors;
         },
         onSubmit: (data) => {
-            data.node && show();
+            data.item && show();
             formik.resetForm();
         }
     });
 
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const isFormFieldInvalid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldInvalid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error">&nbsp;</small>;
     };
     
     return (
@@ -109,17 +109,17 @@ export default function FormikDoc() {
             <form onSubmit={formik.handleSubmit} className="flex flex-column justify-content-center md:w-20rem w-full">
                 <Toast ref={toast} />
                 <TreeSelect
-                    id="node"
-                    name="node"
-                    value={formik.values.node}
+                    id="item"
+                    name="item"
+                    value={formik.values.item}
                     options={node}
                     optionLabel="name"
                     placeholder="Select Item"
                     onChange={(e) => {
-                        formik.setFieldValue('node', e.value);
+                        formik.setFieldValue('item', e.value);
                     }}
                 />
-                {getFormErrorMessage('node')}
+                {getFormErrorMessage('item')}
                 <Button type="submit" label="Submit" className="mt-2" />
             </form>
         </div>
@@ -143,32 +143,32 @@ export default function FormikDoc() {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.item });
     };
 
     const formik = useFormik({
         initialValues: {
-            node: ''
+            item: ''
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.node) {
-                errors.node = 'Item is required.';
+            if (!data.item) {
+                errors.item = 'Item is required.';
             }
 
             return errors;
         },
         onSubmit: (data) => {
-            data.node && show();
+            data.item && show();
             formik.resetForm();
         }
     });
 
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const isFormFieldInvalid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldInvalid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error">&nbsp;</small>;
     };
     
     return (
@@ -176,17 +176,17 @@ export default function FormikDoc() {
             <form onSubmit={formik.handleSubmit} className="flex flex-column justify-content-center md:w-20rem w-full">
                 <Toast ref={toast} />
                 <TreeSelect
-                    id="node"
-                    name="node"
-                    value={formik.values.node}
+                    id="item"
+                    name="item"
+                    value={formik.values.item}
                     options={node}
                     optionLabel="name"
                     placeholder="Select Item"
                     onChange={(e) => {
-                        formik.setFieldValue('node', e.value);
+                        formik.setFieldValue('item', e.value);
                     }}
                 />
-                {getFormErrorMessage('node')}
+                {getFormErrorMessage('item')}
                 <Button type="submit" label="Submit" className="mt-2" />
             </form>
         </div>
@@ -205,17 +205,17 @@ export default function FormikDoc() {
                 <form onSubmit={formik.handleSubmit} className="flex flex-column justify-content-center md:w-20rem w-full">
                     <Toast ref={toast} />
                     <TreeSelect
-                        id="node"
-                        name="node"
-                        value={formik.values.node}
+                        id="item"
+                        name="item"
+                        value={formik.values.item}
                         options={node}
                         optionLabel="name"
                         placeholder="Select Item"
                         onChange={(e) => {
-                            formik.setFieldValue('node', e.value);
+                            formik.setFieldValue('item', e.value);
                         }}
                     />
-                    {getFormErrorMessage('node')}
+                    {getFormErrorMessage('item')}
                     <Button type="submit" label="Submit" className="mt-2" />
                 </form>
             </div>

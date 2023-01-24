@@ -53,22 +53,22 @@ export function FormikDoc(props) {
     };
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.item });
     };
 
     const formik = useFormik({
         initialValues: {
-            mention: ''
+            item: ''
         },
         validate: (data) => {
             const hasMentionedCustomersNickname = customers.some((customer) => {
-                return data.mention && data.mention.includes('@' + customer.nickname);
+                return data.item && data.item.includes('@' + customer.nickname);
             });
 
             let errors = {};
 
-            if (!data.mention || !hasMentionedCustomersNickname) {
-                errors.mention = 'Mention is required.';
+            if (!data.item || !hasMentionedCustomersNickname) {
+                errors.item = 'Mention is required.';
             }
 
             return errors;
@@ -79,18 +79,18 @@ export function FormikDoc(props) {
         }
     });
 
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const isFormFieldInvalid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldInvalid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     const code = {
         basic: `
 <Toast ref={toast} />
 <Mention
-    id="mention"
-    name="mention"
+    id="item"
+    name="item"
     field="nickname"
     onSearch={onSearch}
     placeholder="Please enter @ to mention people"
@@ -98,13 +98,13 @@ export function FormikDoc(props) {
     cols={40}
     suggestions={suggestions}
     itemTemplate={itemTemplate}
-    className={classNames({ 'p-invalid': isFormFieldValid('mention') })}
-    value={formik.values.mention}
+    className={classNames({ 'p-invalid': isFormFieldInvalid('item') })}
+    value={formik.values.item}
     onChange={(e) => {
-        formik.setFieldValue('mention', e.target.value);
+        formik.setFieldValue('item', e.target.value);
     }}
 />
-{getFormErrorMessage('mention')}
+{getFormErrorMessage('item')}
 <Button label="Submit" type="submit" icon="pi pi-check mt-2" />
         `,
         javascript: `
@@ -162,22 +162,22 @@ export default function FormikDoc() {
     };
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.item });
     };
 
     const formik = useFormik({
         initialValues: {
-            mention: ''
+            item: ''
         },
         validate: (data) => {
             const hasMentionedCustomersNickname = customers.some((customer) => {
-                return data.mention && data.mention.includes('@' + customer.nickname);
+                return data.item && data.item.includes('@' + customer.nickname);
             });
 
             let errors = {};
 
-            if (!data.mention || !hasMentionedCustomersNickname) {
-                errors.mention = 'Mention is required.';
+            if (!data.item || !hasMentionedCustomersNickname) {
+                errors.item = 'Mention is required.';
             }
 
             return errors;
@@ -188,10 +188,10 @@ export default function FormikDoc() {
         }
     });
 
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const isFormFieldInvalid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldInvalid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
@@ -201,8 +201,8 @@ export default function FormikDoc() {
                 <div className="field">
                     <div className="flex flex-column">
                         <Mention
-                            id="mention"
-                            name="mention"
+                            id="item"
+                            name="item"
                             field="nickname"
                             onSearch={onSearch}
                             placeholder="Please enter @ to mention people"
@@ -210,14 +210,14 @@ export default function FormikDoc() {
                             cols={40}
                             suggestions={suggestions}
                             itemTemplate={itemTemplate}
-                            className={classNames({ 'p-invalid': isFormFieldValid('mention') })}
-                            value={formik.values.mention}
+                            className={classNames({ 'p-invalid': isFormFieldInvalid('item') })}
+                            value={formik.values.item}
                             onChange={(e) => {
-                                formik.setFieldValue('mention', e.target.value);
+                                formik.setFieldValue('item', e.target.value);
                             }}
                         />
 
-                        {getFormErrorMessage('mention')}
+                        {getFormErrorMessage('item')}
                     </div>
                 </div>
                 <Button label="Submit" type="submit" icon="pi pi-check mt-2" />
@@ -280,22 +280,22 @@ export default function FormikDoc() {
     };
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.item });
     };
 
     const formik = useFormik({
         initialValues: {
-            mention: ''
+            item: ''
         },
         validate: (data) => {
             const hasMentionedCustomersNickname = customers.some((customer) => {
-                return data.mention && data.mention.includes('@' + customer.nickname);
+                return data.item && data.item.includes('@' + customer.nickname);
             });
 
             let errors = {};
 
-            if (!data.mention || !hasMentionedCustomersNickname) {
-                errors.mention = 'Mention is required.';
+            if (!data.item || !hasMentionedCustomersNickname) {
+                errors.item = 'Mention is required.';
             }
 
             return errors;
@@ -306,10 +306,10 @@ export default function FormikDoc() {
         }
     });
 
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const isFormFieldInvalid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldInvalid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
@@ -319,8 +319,8 @@ export default function FormikDoc() {
                 <div className="field">
                     <div className="flex flex-column">
                         <Mention
-                            id="mention"
-                            name="mention"
+                            id="item"
+                            name="item"
                             field="nickname"
                             onSearch={onSearch}
                             placeholder="Please enter @ to mention people"
@@ -328,14 +328,14 @@ export default function FormikDoc() {
                             cols={40}
                             suggestions={suggestions}
                             itemTemplate={itemTemplate}
-                            className={classNames({ 'p-invalid': isFormFieldValid('mention') })}
-                            value={formik.values.mention}
+                            className={classNames({ 'p-invalid': isFormFieldInvalid('item') })}
+                            value={formik.values.item}
                             onChange={(e) => {
-                                formik.setFieldValue('mention', e.target.value);
+                                formik.setFieldValue('item', e.target.value);
                             }}
                         />
 
-                        {getFormErrorMessage('mention')}
+                        {getFormErrorMessage('item')}
                     </div>
                 </div>
                 <Button label="Submit" type="submit" icon="pi pi-check mt-2" />
@@ -358,8 +358,8 @@ export default function FormikDoc() {
                     <div className="field">
                         <div className="flex flex-column">
                             <Mention
-                                id="mention"
-                                name="mention"
+                                id="item"
+                                name="item"
                                 field="nickname"
                                 onSearch={onSearch}
                                 placeholder="Please enter @ to mention people"
@@ -367,14 +367,14 @@ export default function FormikDoc() {
                                 cols={40}
                                 suggestions={suggestions}
                                 itemTemplate={itemTemplate}
-                                className={classNames({ 'p-invalid': isFormFieldValid('mention') })}
-                                value={formik.values.mention}
+                                className={classNames({ 'p-invalid': isFormFieldInvalid('item') })}
+                                value={formik.values.item}
                                 onChange={(e) => {
-                                    formik.setFieldValue('mention', e.target.value);
+                                    formik.setFieldValue('item', e.target.value);
                                 }}
                             />
 
-                            {getFormErrorMessage('mention')}
+                            {getFormErrorMessage('item')}
                         </div>
                     </div>
                     <Button label="Submit" type="submit" icon="pi pi-check mt-2" />

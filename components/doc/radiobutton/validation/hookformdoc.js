@@ -11,56 +11,60 @@ export function HookFormDoc(props) {
     const toast = useRef(null);
 
     const show = () => {
-        // TO DO: Add detail content to the toast.
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: `Thank you, we have received your submission.` });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: getValues('value') });
     };
 
     const defaultValues = {
-        checked: true
+        value: ''
     };
 
     const {
         control,
         formState: { errors },
         handleSubmit,
+        getValues,
         reset
     } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
-        data.checked && show();
+        data.value && show();
 
         reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error mb-2">{errors[name].message}</small>;
+        return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     const code = {
         basic: `
 <Toast ref={toast} />
     <Controller
-        name="ingredient"
+        name="value"
         control={control}
-        rules={{ required: 'Ingredient is required.' }}
+        rules={{ required: 'Value is required.' }}
         render={({ field, fieldState }) => (
             <>
-                <div className="mt-3 mb-3 flex justify-content-center">
+                <div className={classNames('mb-2', { 'p-error': fieldState.error })}>Please choose your ingredient.</div>
+                <div className="flex justify-content-center">
                     <div className="flex align-items-center">
-                        <RadioButton inputId="f5" {...field} inputRef={field.ref} value="Cheese" checked={field.value === 'Cheese'} className={classNames( { 'p-invalid': fieldState.error })} />
-                        <label htmlFor="f5" className={classNames('ml-1', { 'p-error': errors.ingredient })}>
+                        <RadioButton inputId="f5" {...field} inputRef={field.ref} value="Cheese" checked={field.value === 'Cheese'} />
+                        <label htmlFor="f5" className="ml-1 mr-3">
                             Cheese
                         </label>
-                        <RadioButton inputId="f6" {...field} value="Mushroom" checked={field.value === 'Mushroom'} className={classNames('ml-2', { 'p-invalid': fieldState.error })} />
-                        <label htmlFor="f6" className={classNames('ml-1', { 'p-error': errors.ingredient })}>
+
+                        <RadioButton inputId="f6" {...field} value="Mushroom" checked={field.value === 'Mushroom'} />
+                        <label htmlFor="f6" className="ml-1 mr-3">
                             Mushroom
                         </label>
-                        <RadioButton inputId="f6" {...field} value="Pepper" checked={field.value === 'Pepper'} className={classNames('ml-2', { 'p-invalid': fieldState.error })} />
-                        <label htmlFor="f6" className={classNames('ml-1', { 'p-error': errors.ingredient })}>
+
+                        <RadioButton inputId="f6" {...field} value="Pepper" checked={field.value === 'Pepper'} />
+                        <label htmlFor="f6" className="ml-1 mr-3">
                             Pepper
                         </label>
-                        <RadioButton inputId="f7" {...field} value="Onion" checked={field.value === 'Onion'} className={classNames('ml-2', { 'p-invalid': fieldState.error })} />
-                        <label htmlFor="f7" className={classNames('ml-1', { 'p-error': errors.ingredient })}>
+
+                        <RadioButton inputId="f7" {...field} value="Onion" checked={field.value === 'Onion'} />
+                        <label htmlFor="f7" className="ml-1 mr-3">
                             Onion
                         </label>
                     </div>
@@ -83,63 +87,63 @@ export default function HookFormDoc() {
     const toast = useRef(null);
 
     const show = () => {
-        // TO DO: Add detail content to the toast.
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: "Thank you, we have received your submission." });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: getValues('value') });
     };
 
     const defaultValues = {
-        checked: true
+        value: ''
     };
 
     const {
         control,
         formState: { errors },
         handleSubmit,
+        getValues,
         reset
     } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
-        data.checked && show();
+        data.value && show();
 
         reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error mb-2">{errors[name].message}</small>;
+        return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
         <div className="card flex justify-content-center ">
             <div className="flex">
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <div>Please choose your ingredient.</div>
                     <div className="flex flex-column">
                     <Toast ref={toast} />
                         <Controller
-                            name="ingredient"
+                            name="value"
                             control={control}
-                            rules={{ required: 'Ingredient is required.' }}
+                            rules={{ required: 'Value is required.' }}
                             render={({ field, fieldState }) => (
                                 <>
-                                    <div className="mt-3 mb-3 flex justify-content-center">
+                                    <div className={classNames('mb-2', { 'p-error': fieldState.error })}>Please choose your ingredient.</div>
+                                    <div className="flex justify-content-center">
                                         <div className="flex align-items-center">
-                                            <RadioButton inputId="f5" {...field} inputRef={field.ref} value="Cheese" checked={field.value === 'Cheese'} className={classNames( { 'p-invalid': fieldState.error })} />
-                                            <label htmlFor="f5" className={classNames('ml-1', { 'p-error': errors.ingredient })}>
+                                            <RadioButton inputId="f5" {...field} inputRef={field.ref} value="Cheese" checked={field.value === 'Cheese'} />
+                                            <label htmlFor="f5" className="ml-1 mr-3">
                                                 Cheese
                                             </label>
 
-                                            <RadioButton inputId="f6" {...field} value="Mushroom" checked={field.value === 'Mushroom'} className={classNames('ml-2', { 'p-invalid': fieldState.error })} />
-                                            <label htmlFor="f6" className={classNames('ml-1', { 'p-error': errors.ingredient })}>
+                                            <RadioButton inputId="f6" {...field} value="Mushroom" checked={field.value === 'Mushroom'} />
+                                            <label htmlFor="f6" className="ml-1 mr-3">
                                                 Mushroom
                                             </label>
 
-                                            <RadioButton inputId="f6" {...field} value="Pepper" checked={field.value === 'Pepper'} className={classNames('ml-2', { 'p-invalid': fieldState.error })} />
-                                            <label htmlFor="f6" className={classNames('ml-1', { 'p-error': errors.ingredient })}>
+                                            <RadioButton inputId="f6" {...field} value="Pepper" checked={field.value === 'Pepper'} />
+                                            <label htmlFor="f6" className="ml-1 mr-3">
                                                 Pepper
                                             </label>
 
-                                            <RadioButton inputId="f7" {...field} value="Onion" checked={field.value === 'Onion'} className={classNames('ml-2', { 'p-invalid': fieldState.error })} />
-                                            <label htmlFor="f7" className={classNames('ml-1', { 'p-error': errors.ingredient })}>
+                                            <RadioButton inputId="f7" {...field} value="Onion" checked={field.value === 'Onion'} />
+                                            <label htmlFor="f7" className="ml-1 mr-3">
                                                 Onion
                                             </label>
                                         </div>
@@ -168,63 +172,63 @@ export default function HookFormDoc() {
     const toast = useRef(null);
 
     const show = () => {
-        // TO DO: Add detail content to the toast.
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: "Thank you, we have received your submission." });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: getValues('value') });
     };
 
     const defaultValues = {
-        checked: true
+        value: ''
     };
 
     const {
         control,
         formState: { errors },
         handleSubmit,
+        getValues,
         reset
     } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
-        data.checked && show();
+        data.value && show();
 
         reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error mb-2">{errors[name].message}</small>;
+        return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
         <div className="card flex justify-content-center ">
             <div className="flex">
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <div>Please choose your ingredient.</div>
                     <div className="flex flex-column">
                     <Toast ref={toast} />
                         <Controller
-                            name="ingredient"
+                            name="value"
                             control={control}
-                            rules={{ required: 'Ingredient is required.' }}
+                            rules={{ required: 'Value is required.' }}
                             render={({ field, fieldState }) => (
                                 <>
-                                    <div className="mt-3 mb-3 flex justify-content-center">
+                                    <div className={classNames('mb-2', { 'p-error': fieldState.error })}>Please choose your ingredient.</div>
+                                    <div className="flex justify-content-center">
                                         <div className="flex align-items-center">
-                                            <RadioButton inputId="f5" {...field} inputRef={field.ref} value="Cheese" checked={field.value === 'Cheese'} className={classNames( { 'p-invalid': fieldState.error })} />
-                                            <label htmlFor="f5" className={classNames('ml-1', { 'p-error': errors.ingredient })}>
+                                            <RadioButton inputId="f5" {...field} inputRef={field.ref} value="Cheese" checked={field.value === 'Cheese'} />
+                                            <label htmlFor="f5" className="ml-1 mr-3">
                                                 Cheese
                                             </label>
 
-                                            <RadioButton inputId="f6" {...field} value="Mushroom" checked={field.value === 'Mushroom'} className={classNames('ml-2', { 'p-invalid': fieldState.error })} />
-                                            <label htmlFor="f6" className={classNames('ml-1', { 'p-error': errors.ingredient })}>
+                                            <RadioButton inputId="f6" {...field} value="Mushroom" checked={field.value === 'Mushroom'} />
+                                            <label htmlFor="f6" className="ml-1 mr-3">
                                                 Mushroom
                                             </label>
 
-                                            <RadioButton inputId="f6" {...field} value="Pepper" checked={field.value === 'Pepper'} className={classNames('ml-2', { 'p-invalid': fieldState.error })} />
-                                            <label htmlFor="f6" className={classNames('ml-1', { 'p-error': errors.ingredient })}>
+                                            <RadioButton inputId="f6" {...field} value="Pepper" checked={field.value === 'Pepper'} />
+                                            <label htmlFor="f6" className="ml-1 mr-3">
                                                 Pepper
                                             </label>
 
-                                            <RadioButton inputId="f7" {...field} value="Onion" checked={field.value === 'Onion'} className={classNames('ml-2', { 'p-invalid': fieldState.error })} />
-                                            <label htmlFor="f7" className={classNames('ml-1', { 'p-error': errors.ingredient })}>
+                                            <RadioButton inputId="f7" {...field} value="Onion" checked={field.value === 'Onion'} />
+                                            <label htmlFor="f7" className="ml-1 mr-3">
                                                 Onion
                                             </label>
                                         </div>
@@ -252,34 +256,34 @@ export default function HookFormDoc() {
             <div className="card flex justify-content-center ">
                 <div className="flex">
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <div>Please choose your ingredient.</div>
-                        <div className="flex flex-column">
+                        <div className="flex flex-column gap-2">
                             <Toast ref={toast} />
                             <Controller
-                                name="ingredient"
+                                name="value"
                                 control={control}
-                                rules={{ required: 'Ingredient is required.' }}
+                                rules={{ required: 'Value is required.' }}
                                 render={({ field, fieldState }) => (
                                     <>
-                                        <div className="mt-3 mb-3 flex justify-content-center">
+                                        <div className={classNames('mb-2', { 'p-error': fieldState.error })}>Please choose your ingredient.</div>
+                                        <div className="flex justify-content-center">
                                             <div className="flex align-items-center">
-                                                <RadioButton inputId="f5" {...field} inputRef={field.ref} value="Cheese" checked={field.value === 'Cheese'} className={classNames({ 'p-invalid': fieldState.error })} />
-                                                <label htmlFor="f5" className={classNames('ml-1', { 'p-error': errors.ingredient })}>
+                                                <RadioButton inputId="f5" {...field} inputRef={field.ref} value="Cheese" checked={field.value === 'Cheese'} />
+                                                <label htmlFor="f5" className="ml-1 mr-3">
                                                     Cheese
                                                 </label>
 
-                                                <RadioButton inputId="f6" {...field} value="Mushroom" checked={field.value === 'Mushroom'} className={classNames('ml-2', { 'p-invalid': fieldState.error })} />
-                                                <label htmlFor="f6" className={classNames('ml-1', { 'p-error': errors.ingredient })}>
+                                                <RadioButton inputId="f6" {...field} value="Mushroom" checked={field.value === 'Mushroom'} />
+                                                <label htmlFor="f6" className="ml-1 mr-3">
                                                     Mushroom
                                                 </label>
 
-                                                <RadioButton inputId="f6" {...field} value="Pepper" checked={field.value === 'Pepper'} className={classNames('ml-2', { 'p-invalid': fieldState.error })} />
-                                                <label htmlFor="f6" className={classNames('ml-1', { 'p-error': errors.ingredient })}>
+                                                <RadioButton inputId="f6" {...field} value="Pepper" checked={field.value === 'Pepper'} />
+                                                <label htmlFor="f6" className="ml-1 mr-3">
                                                     Pepper
                                                 </label>
 
-                                                <RadioButton inputId="f7" {...field} value="Onion" checked={field.value === 'Onion'} className={classNames('ml-2', { 'p-invalid': fieldState.error })} />
-                                                <label htmlFor="f7" className={classNames('ml-1', { 'p-error': errors.ingredient })}>
+                                                <RadioButton inputId="f7" {...field} value="Onion" checked={field.value === 'Onion'} />
+                                                <label htmlFor="f7" className="ml-1 mr-3">
                                                     Onion
                                                 </label>
                                             </div>

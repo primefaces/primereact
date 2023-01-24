@@ -17,18 +17,20 @@ export function FormikDoc(props) {
     ];
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        const itemArray = formik.values.item.map((item, i) => item.name + (i < formik.values.item.length - 1 ? ', ' : ''));
+
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: itemArray });
     };
 
     const formik = useFormik({
         initialValues: {
-            city: null
+            item: null
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.city) {
-                errors.city = 'City is required.';
+            if (!data.item) {
+                errors.item = 'City is required.';
             }
 
             return errors;
@@ -39,16 +41,16 @@ export function FormikDoc(props) {
         }
     });
 
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const isFormFieldInvalid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldInvalid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     const code = {
         basic: `
 <Toast ref={toast} />
-<MultiSelect id="city" name="city" options={cities} value={formik.values.city} onChange={(e) => { formik.setFieldValue('city', e.value) }} optionLabel="name" placeholder="Select a City" maxSelectedLabels={3} />
+<MultiSelect id="item" name="item" options={cities} value={formik.values.item} onChange={(e) => { formik.setFieldValue('item', e.value) }} optionLabel="name" placeholder="Select a City" maxSelectedLabels={3} />
 <Button type="submit" label="Submit" className="mt-2" />
         `,
         javascript: `
@@ -70,18 +72,20 @@ export default function FormikDoc() {
 
         
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        const itemArray = formik.values.item.map((item, i) => item.name + (i < formik.values.item.length - 1 ? ', ' : ''));
+
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: itemArray });
     };
 
     const formik = useFormik({
         initialValues: {
-            city: null
+            item: null
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.city) {
-                errors.city = 'City is required.';
+            if (!data.item) {
+                errors.item = 'City is required.';
             }
 
             return errors;
@@ -93,10 +97,10 @@ export default function FormikDoc() {
         }
     });
 
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const isFormFieldInvalid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) && <small className="p-error">{formik.errors[name]}</small>;
+        return isFormFieldInvalid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
@@ -104,18 +108,18 @@ export default function FormikDoc() {
             <form onSubmit={formik.handleSubmit} className="flex flex-column">
                 <Toast ref={toast} />
                 <MultiSelect
-                    id="city"
-                    name="city"
+                    id="item"
+                    name="item"
                     options={cities}
-                    value={formik.values.city}
+                    value={formik.values.item}
                     onChange={(e) => {
-                        formik.setFieldValue('city', e.value);
+                        formik.setFieldValue('item', e.value);
                     }}
                     optionLabel="name"
                     placeholder="Select a City"
                     maxSelectedLabels={3}
                 />
-                {getFormErrorMessage('city')}
+                {getFormErrorMessage('item')}
                 <Button type="submit" label="Submit" className="mt-2" />
             </form>
         </div>
@@ -141,18 +145,20 @@ export default function FormikDoc() {
 
         
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        const itemArray = formik.values.item.map((item, i) => item.name + (i < formik.values.item.length - 1 ? ', ' : ''));
+
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: itemArray });
     };
 
     const formik = useFormik({
         initialValues: {
-            city: null
+            item: null
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.city) {
-                errors.city = 'City is required.';
+            if (!data.item) {
+                errors.item = 'City is required.';
             }
 
             return errors;
@@ -164,10 +170,10 @@ export default function FormikDoc() {
         }
     });
 
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const isFormFieldInvalid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) && <small className="p-error">{formik.errors[name]}</small>;
+        return isFormFieldInvalid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
@@ -175,18 +181,18 @@ export default function FormikDoc() {
             <form onSubmit={formik.handleSubmit} className="flex flex-column">
                 <Toast ref={toast} />
                 <MultiSelect
-                    id="city"
-                    name="city"
+                    id="item"
+                    name="item"
                     options={cities}
-                    value={formik.values.city}
+                    value={formik.values.item}
                     onChange={(e) => {
-                        formik.setFieldValue('city', e.value);
+                        formik.setFieldValue('item', e.value);
                     }}
                     optionLabel="name"
                     placeholder="Select a City"
                     maxSelectedLabels={3}
                 />
-                {getFormErrorMessage('city')}
+                {getFormErrorMessage('item')}
                 <Button type="submit" label="Submit" className="mt-2" />
             </form>
         </div>
@@ -206,18 +212,18 @@ export default function FormikDoc() {
                 <form onSubmit={formik.handleSubmit} className="flex flex-column">
                     <Toast ref={toast} />
                     <MultiSelect
-                        id="city"
-                        name="city"
+                        id="item"
+                        name="item"
                         options={cities}
-                        value={formik.values.city}
+                        value={formik.values.item}
                         onChange={(e) => {
-                            formik.setFieldValue('city', e.value);
+                            formik.setFieldValue('item', e.value);
                         }}
                         optionLabel="name"
                         placeholder="Select a City"
                         maxSelectedLabels={3}
                     />
-                    {getFormErrorMessage('city')}
+                    {getFormErrorMessage('item')}
                     <Button type="submit" label="Submit" className="mt-2" />
                 </form>
             </div>

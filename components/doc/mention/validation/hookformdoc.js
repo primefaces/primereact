@@ -14,21 +14,21 @@ export function HookFormDoc(props) {
     const toast = useRef(null);
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: form.getValues('value') });
     };
 
-    const defaultValues = { mention: '' };
+    const defaultValues = { value: '' };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
 
     const onSubmit = (data) => {
-        data.mention && show();
+        data.value && show();
 
         form.reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>;
+        return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     useEffect(() => {
@@ -73,9 +73,9 @@ export function HookFormDoc(props) {
     const code = {
         basic: `
 <Controller
-name="mention"
+name="value"
 control={form.control}
-rules={{ required: 'Mention is required.' }}
+rules={{ required: 'Value is required.' }}
 render={({ field, fieldState }) => (
     <Mention
         id={field.name}
@@ -106,21 +106,21 @@ export default function HookFormDoc() {
     const toast = useRef(null);
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: form.getValues('value') });
     };
 
-    const defaultValues = { mention: '' };
+    const defaultValues = { value: '' };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
 
     const onSubmit = (data) => {
-        data.mention && show();
+        data.value && show();
 
         form.reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>;
+        return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     useEffect(() => {
@@ -168,9 +168,9 @@ export default function HookFormDoc() {
                 <div className="field">
                     <Toast ref={toast} />
                     <Controller
-                        name="mention"
+                        name="value"
                         control={form.control}
-                        rules={{ required: 'Mention is required.' }}
+                        rules={{ required: 'Value is required.' }}
                         render={({ field, fieldState }) => (
                             <div className="flex flex-column">
                                 <Mention
@@ -211,21 +211,21 @@ export default function HookFormDoc() {
     const [suggestions, setSuggestions] = useState<any[] | []>([]);
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: form.getValues('value') });
     };
 
-    const defaultValues = { mention: '' };
+    const defaultValues = { value: '' };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
 
     const onSubmit = (data) => {
-        data.mention && show();
+        data.value && show();
 
         form.reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>;
+        return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     useEffect(() => {
@@ -273,9 +273,9 @@ export default function HookFormDoc() {
                 <div className="field">
                     <Toast ref={toast} />
                     <Controller
-                        name="mention"
+                        name="value"
                         control={form.control}
-                        rules={{ required: 'Mention is required.' }}
+                        rules={{ required: 'Value is required.' }}
                         render={({ field, fieldState }) => (
                             <div className="flex flex-column">
                                 <Mention
@@ -315,9 +315,9 @@ export default function HookFormDoc() {
                     <div className="field">
                         <Toast ref={toast} />
                         <Controller
-                            name="mention"
+                            name="value"
                             control={form.control}
-                            rules={{ required: 'Mention is required.' }}
+                            rules={{ required: 'Value is required.' }}
                             render={({ field, fieldState }) => (
                                 <div className="flex flex-column">
                                     <Mention

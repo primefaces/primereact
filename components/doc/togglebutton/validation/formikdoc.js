@@ -11,46 +11,46 @@ export function FormikDoc(props) {
     const toast = useRef(null);
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.item.toString() });
     };
 
     const formik = useFormik({
         initialValues: {
-            checked: false
+            item: false
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.checked) {
-                errors.checked = 'Checked is required.';
+            if (!data.item) {
+                errors.item = 'Checked is required.';
             }
 
             return errors;
         },
         onSubmit: (data) => {
-            data.checked && show();
+            data.item && show();
             formik.resetForm();
         }
     });
 
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const isFormFieldInvalid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldInvalid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     const code = {
         basic: `
 <ToggleButton
-id="checked"
-name="checked"
-checked={formik.values.checked}
+id="item"
+name="item"
+checked={formik.values.item}
 onChange={(e) => {
-    formik.setFieldValue('checked', e.value);
+    formik.setFieldValue('item', e.value);
 }}
-className={classNames({ 'p-invalid': formik.errors.checked })}
+className={classNames({ 'p-invalid': formik.errors.item })}
 />
-{getFormErrorMessage('checked')}
+{getFormErrorMessage('item')}
 <Button label="Submit" type="submit" icon="pi pi-check" />
         `,
         javascript: `
@@ -66,32 +66,32 @@ export default function FormikDoc() {
     const toast = useRef(null);
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.item.toString() });
     };
 
     const formik = useFormik({
         initialValues: {
-            checked: false
+            item: false
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.checked) {
-                errors.checked = 'Checked is required.';
+            if (!data.item) {
+                errors.item = 'Checked is required.';
             }
 
             return errors;
         },
         onSubmit: (data) => {
-            data.checked && show();
+            data.item && show();
             formik.resetForm();
         }
     });
 
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const isFormFieldInvalid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldInvalid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
@@ -99,15 +99,15 @@ export default function FormikDoc() {
             <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
                 <Toast ref={toast} />
                 <ToggleButton
-                    id="checked"
-                    name="checked"
-                    checked={formik.values.checked}
+                    id="item"
+                    name="item"
+                    checked={formik.values.item}
                     onChange={(e) => {
-                        formik.setFieldValue('checked', e.value);
+                        formik.setFieldValue('item', e.value);
                     }}
-                    className={classNames({ 'p-invalid': formik.errors.checked })}
+                    className={classNames({ 'p-invalid': formik.errors.item })}
                 />
-                {getFormErrorMessage('checked')}
+                {getFormErrorMessage('item')}
                 <Button label="Submit" type="submit" icon="pi pi-check" />
             </form>
         </div>
@@ -126,32 +126,32 @@ export default function FormikDoc() {
     const toast = useRef<Toast | null>(null);
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.item.toString() });
     };
 
     const formik = useFormik({
         initialValues: {
-            checked: false
+            item: false
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.checked) {
-                errors.checked = 'Checked is required.';
+            if (!data.item) {
+                errors.item = 'Checked is required.';
             }
 
             return errors;
         },
         onSubmit: (data) => {
-            data.checked && show();
+            data.item && show();
             formik.resetForm();
         }
     });
 
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const isFormFieldInvalid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldInvalid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
@@ -159,15 +159,15 @@ export default function FormikDoc() {
             <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
                 <Toast ref={toast} />
                 <ToggleButton
-                    id="checked"
-                    name="checked"
-                    checked={formik.values.checked}
+                    id="item"
+                    name="item"
+                    checked={formik.values.item}
                     onChange={(e) => {
-                        formik.setFieldValue('checked', e.value);
+                        formik.setFieldValue('item', e.value);
                     }}
-                    className={classNames({ 'p-invalid': formik.errors.checked })}
+                    className={classNames({ 'p-invalid': formik.errors.item })}
                 />
-                {getFormErrorMessage('checked')}
+                {getFormErrorMessage('item')}
                 <Button label="Submit" type="submit" icon="pi pi-check" />
             </form>
         </div>
@@ -187,15 +187,15 @@ export default function FormikDoc() {
                 <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
                     <Toast ref={toast} />
                     <ToggleButton
-                        id="checked"
-                        name="checked"
-                        checked={formik.values.checked}
+                        id="item"
+                        name="item"
+                        checked={formik.values.item}
                         onChange={(e) => {
-                            formik.setFieldValue('checked', e.value);
+                            formik.setFieldValue('item', e.value);
                         }}
-                        className={classNames({ 'p-invalid': formik.errors.checked })}
+                        className={classNames({ 'p-invalid': formik.errors.item })}
                     />
-                    {getFormErrorMessage('checked')}
+                    {getFormErrorMessage('item')}
                     <Button label="Submit" type="submit" icon="pi pi-check" />
                 </form>
             </div>

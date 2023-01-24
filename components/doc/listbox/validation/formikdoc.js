@@ -17,46 +17,46 @@ export function FormikDoc(props) {
     ];
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.item.name });
     };
 
     const formik = useFormik({
         initialValues: {
-            city: ''
+            item: ''
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.city) {
-                errors.city = 'City is required.';
+            if (!data.item) {
+                errors.item = 'City is required.';
             }
 
             return errors;
         },
         onSubmit: (data) => {
-            data.city && show(data);
+            data.item && show(data);
             formik.resetForm();
         }
     });
 
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const isFormFieldInvalid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldInvalid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     const code = {
         basic: `
 <Toast ref={toast} />
 <ListBox
-    id="city"
-    name="city"
-    value={formik.values.city}
+    id="item"
+    name="item"
+    value={formik.values.item}
     options={cities}
     optionLabel="name"
     placeholder="Select a City"
     onChange={(e) => {
-        formik.setFieldValue('city', e.value);
+        formik.setFieldValue('item', e.value);
     }}
     style={{ width: '15rem' }}
 />
@@ -79,32 +79,32 @@ export default function FormikDoc() {
     ];
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.item.name });
     };
 
     const formik = useFormik({
         initialValues: {
-            city: ''
+            item: ''
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.city) {
-                errors.city = 'City is required.';
+            if (!data.item) {
+                errors.item = 'City is required.';
             }
 
             return errors;
         },
         onSubmit: (data) => {
-            data.city && show(data);
+            data.item && show(data);
             formik.resetForm();
         }
     });
 
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const isFormFieldInvalid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldInvalid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error">&nbsp;</small>;
     };
     
     return (
@@ -112,18 +112,18 @@ export default function FormikDoc() {
             <form onSubmit={formik.handleSubmit} className="flex flex-column justify-content-center">
                 <Toast ref={toast} />
                 <ListBox
-                    id="city"
-                    name="city"
-                    value={formik.values.city}
+                    id="item"
+                    name="item"
+                    value={formik.values.item}
                     options={cities}
                     optionLabel="name"
                     placeholder="Select a City"
                     onChange={(e) => {
-                        formik.setFieldValue('city', e.value);
+                        formik.setFieldValue('item', e.value);
                     }}
                     style={{ width: '15rem' }}
                 />
-                {getFormErrorMessage('city')}
+                {getFormErrorMessage('item')}
                 <Button type="submit" label="Submit" className="mt-2" />
             </form>
         </div>
@@ -148,32 +148,32 @@ export default function FormikDoc() {
     ];
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.item.name });
     };
 
     const formik = useFormik({
         initialValues: {
-            city: ''
+            item: ''
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.city) {
-                errors.city = 'City is required.';
+            if (!data.item) {
+                errors.item = 'City is required.';
             }
 
             return errors;
         },
         onSubmit: (data) => {
-            data.city && show(data);
+            data.item && show(data);
             formik.resetForm();
         }
     });
 
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const isFormFieldInvalid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldInvalid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error">&nbsp;</small>;
     };
     
     return (
@@ -181,18 +181,18 @@ export default function FormikDoc() {
             <form onSubmit={formik.handleSubmit} className="flex flex-column justify-content-center" >
                 <Toast ref={toast} />
                 <ListBox
-                    id="city"
-                    name="city"
-                    value={formik.values.city}
+                    id="item"
+                    name="item"
+                    value={formik.values.item}
                     options={cities}
                     optionLabel="name"
                     placeholder="Select a City"
                     onChange={(e) => {
-                        formik.setFieldValue('city', e.value);
+                        formik.setFieldValue('item', e.value);
                     }}
                     style={{ width: '15rem' }}
                 />
-                {getFormErrorMessage('city')}
+                {getFormErrorMessage('item')}
                 <Button type="submit" label="Submit" className="mt-2" />
             </form>
         </div>
@@ -212,18 +212,18 @@ export default function FormikDoc() {
                 <form onSubmit={formik.handleSubmit} className="flex flex-column justify-content-center">
                     <Toast ref={toast} />
                     <ListBox
-                        id="city"
-                        name="city"
-                        value={formik.values.city}
+                        id="item"
+                        name="item"
+                        value={formik.values.item}
                         options={cities}
                         optionLabel="name"
                         placeholder="Select a City"
                         onChange={(e) => {
-                            formik.setFieldValue('city', e.value);
+                            formik.setFieldValue('item', e.value);
                         }}
                         style={{ width: '15rem' }}
                     />
-                    {getFormErrorMessage('city')}
+                    {getFormErrorMessage('item')}
                     <Button type="submit" label="Submit" className="mt-2" />
                 </form>
             </div>

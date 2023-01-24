@@ -38,32 +38,32 @@ export function FormikDoc(props) {
     ];
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.item });
     };
 
     const formik = useFormik({
         initialValues: {
-            activeRadioButton: ''
+            item: ''
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.activeRadioButton) {
-                errors.activeRadioButton = 'Option is required.';
+            if (!data.item) {
+                errors.item = 'Value is required.';
             }
 
             return errors;
         },
         onSubmit: (data) => {
-            data.activeRadioButton && show();
+            data.item && show();
             formik.resetForm();
         }
     });
 
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const isFormFieldInvalid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error ml-1">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldInvalid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     const code = {
@@ -75,9 +75,9 @@ export function FormikDoc(props) {
             <div key={i} className="flex align-items-center mr-3">
                 <RadioButton
                     {...btn}
-                    checked={formik.values.activeRadioButton === btn.value}
+                    checked={formik.values.item === btn.value}
                     onChange={(e) => {
-                        formik.setFieldValue('activeRadioButton', e.value);
+                        formik.setFieldValue('item', e.value);
                     }}
                 />
                 <label htmlFor={btn.inputId} className="ml-1">
@@ -127,39 +127,39 @@ export default function FormikDoc() {
     ];
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.item });
     };
 
     const formik = useFormik({
         initialValues: {
-            activeRadioButton: ''
+            item: ''
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.activeRadioButton) {
-                errors.activeRadioButton = 'Option is required.';
+            if (!data.item) {
+                errors.item = 'Value is required.';
             }
 
             return errors;
         },
         onSubmit: (data) => {
-            data.activeRadioButton && show();
+            data.item && show();
             formik.resetForm();
         }
     });
 
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const isFormFieldInvalid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error ml-1">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldInvalid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
         <div className="card flex justify-content-center">
             <div className="flex flex-column">
                 <form onSubmit={formik.handleSubmit} className="p-fluid justify-content-center">
-                    <div className={classNames('mb-3', { 'p-error': formik.errors.activeRadioButton })}>Please choose your ingredient.</div>
+                    <div className={classNames('mb-3', { 'p-error': formik.errors.item })}>Please choose your ingredient.</div>
                     <div className="flex flex-column gap-2">
                         <Toast ref={toast} />
                         <div className="flex">
@@ -168,9 +168,9 @@ export default function FormikDoc() {
                                     <div key={i} className="flex align-items-center mr-3">
                                         <RadioButton
                                             {...btn}
-                                            checked={formik.values.activeRadioButton === btn.value}
+                                            checked={formik.values.item === btn.value}
                                             onChange={(e) => {
-                                                formik.setFieldValue('activeRadioButton', e.value);
+                                                formik.setFieldValue('item', e.value);
                                             }}
                                         />
                                         <label htmlFor={btn.inputId} className="ml-1">
@@ -180,7 +180,7 @@ export default function FormikDoc() {
                                 );
                             })}
                         </div>
-                        {getFormErrorMessage('activeRadioButton')}
+                        {getFormErrorMessage('item')}
                     </div>
                     <Button type="submit" label="Submit" className="mt-2" />
                 </form>
@@ -228,39 +228,39 @@ export default function FormikDoc() {
     ];
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.item });
     };
 
     const formik = useFormik({
         initialValues: {
-            activeRadioButton: ''
+            item: ''
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.activeRadioButton) {
-                errors.activeRadioButton = 'Option is required.';
+            if (!data.item) {
+                errors.item = 'Value is required.';
             }
 
             return errors;
         },
         onSubmit: (data) => {
-            data.activeRadioButton && show();
+            data.item && show();
             formik.resetForm();
         }
     });
 
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const isFormFieldInvalid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error ml-1">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldInvalid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
         <div className="card flex justify-content-center">
             <div className="flex flex-column">
                 <form onSubmit={formik.handleSubmit} className="p-fluid justify-content-center">
-                    <div className={classNames('mb-3', { 'p-error': formik.errors.activeRadioButton })}>Please choose your ingredient.</div>
+                    <div className={classNames('mb-3', { 'p-error': formik.errors.item })}>Please choose your ingredient.</div>
                     <div className="flex flex-column gap-2">
                         <Toast ref={toast} />
                         <div className="flex">
@@ -269,9 +269,9 @@ export default function FormikDoc() {
                                     <div key={i} className="flex align-items-center mr-3">
                                         <RadioButton
                                             {...btn}
-                                            checked={formik.values.activeRadioButton === btn.value}
+                                            checked={formik.values.item === btn.value}
                                             onChange={(e) => {
-                                                formik.setFieldValue('activeRadioButton', e.value);
+                                                formik.setFieldValue('item', e.value);
                                             }}
                                         />
                                         <label htmlFor={btn.inputId} className="ml-1">
@@ -281,7 +281,7 @@ export default function FormikDoc() {
                                 );
                             })}
                         </div>
-                        {getFormErrorMessage('activeRadioButton')}
+                        {getFormErrorMessage('item')}
                     </div>
                     <Button type="submit" label="Submit" className="mt-2" />
                 </form>
@@ -302,7 +302,7 @@ export default function FormikDoc() {
             <div className="card flex justify-content-center">
                 <div className="flex flex-column">
                     <form onSubmit={formik.handleSubmit} className="p-fluid justify-content-center">
-                        <div className={classNames('mb-3', { 'p-error': formik.errors.activeRadioButton })}>Please choose your ingredient.</div>
+                        <div className={classNames('mb-3', { 'p-error': formik.errors.item })}>Please choose your ingredient.</div>
                         <div className="flex flex-column gap-2">
                             <Toast ref={toast} />
                             <div className="flex">
@@ -311,9 +311,9 @@ export default function FormikDoc() {
                                         <div key={i} className="flex align-items-center mr-3">
                                             <RadioButton
                                                 {...btn}
-                                                checked={formik.values.activeRadioButton === btn.value}
+                                                checked={formik.values.item === btn.value}
                                                 onChange={(e) => {
-                                                    formik.setFieldValue('activeRadioButton', e.value);
+                                                    formik.setFieldValue('item', e.value);
                                                 }}
                                             />
                                             <label htmlFor={btn.inputId} className="ml-1">
@@ -323,7 +323,7 @@ export default function FormikDoc() {
                                     );
                                 })}
                             </div>
-                            {getFormErrorMessage('activeRadioButton')}
+                            {getFormErrorMessage('item')}
                         </div>
                         <Button type="submit" label="Submit" className="mt-2" />
                     </form>

@@ -17,38 +17,39 @@ export function HookFormDoc(props) {
     ];
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: getValues('value.name') });
     };
 
     const defaultValues = {
-        city: ''
+        value: ''
     };
 
     const {
         control,
         formState: { errors },
         handleSubmit,
+        getValues,
         reset
     } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
-        data.city && show();
+        data.value && show();
 
         reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>;
+        return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     const code = {
         basic: `
 <Toast ref={toast} />
 <Controller
-    name="city"
+    name="value"
     control={control}
-    rules={{ required: 'City is required.' }}
-    render={({ field }) => <ListBox value={field.value} optionLabel="name" placeholder="Select a City" name="city" options={cities} control={control} onChange={(e) => field.onChange(e.value)} style={{ width: '15rem' }} />}
+    rules={{ required: 'Value is required.' }}
+    render={({ field }) => <ListBox value={field.value} optionLabel="name" placeholder="Select a City" name="value" options={cities} control={control} onChange={(e) => field.onChange(e.value)} style={{ width: '15rem' }} />}
 />
         `,
         javascript: `
@@ -69,28 +70,29 @@ export default function HookFormDoc() {
     ];
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: getValues('value.name') });
     };
 
     const defaultValues = {
-        city: ''
+        value: ''
     };
 
     const {
         control,
         formState: { errors },
         handleSubmit,
+        getValues,
         reset
     } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
-        data.city && show();
+        data.value && show();
 
         reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>;
+        return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
@@ -98,12 +100,12 @@ export default function HookFormDoc() {
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column justify-content-center">
                 <Toast ref={toast} />
                 <Controller
-                    name="city"
+                    name="value"
                     control={control}
-                    rules={{ required: 'City is required.' }}
-                    render={({ field }) => <ListBox value={field.value} optionLabel="name" placeholder="Select a City" name="city" options={cities} control={control} onChange={(e) => field.onChange(e.value)} style={{ width: '15rem' }}/>}
+                    rules={{ required: 'Value is required.' }}
+                    render={({ field }) => <ListBox value={field.value} optionLabel="name" placeholder="Select a City" name="value" options={cities} control={control} onChange={(e) => field.onChange(e.value)} style={{ width: '15rem' }}/>}
                 />
-                {getFormErrorMessage('city')}
+                {getFormErrorMessage('value')}
                 <Button type="submit" label="Submit" className="mt-2" />
             </form>
         </div>
@@ -128,28 +130,29 @@ export default function HookFormDoc() {
     ];
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: getValues('value.name') });
     };
 
     const defaultValues = {
-        city: ''
+        value: ''
     };
 
     const {
         control,
         formState: { errors },
         handleSubmit,
+        getValues,
         reset
     } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
-        data.city && show();
+        data.value && show();
 
         reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>;
+        return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
@@ -157,12 +160,12 @@ export default function HookFormDoc() {
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column justify-content-center">
                 <Toast ref={toast} />
                 <Controller
-                    name="city"
+                    name="value"
                     control={control}
-                    rules={{ required: 'City is required.' }}
-                    render={({ field }) => <ListBox value={field.value} optionLabel="name" placeholder="Select a City" name="city" options={cities} control={control} onChange={(e) => field.onChange(e.value)} style={{ width: '15rem' }}/>}
+                    rules={{ required: 'Value is required.' }}
+                    render={({ field }) => <ListBox value={field.value} optionLabel="name" placeholder="Select a City" name="value" options={cities} control={control} onChange={(e) => field.onChange(e.value)} style={{ width: '15rem' }}/>}
                 />
-                {getFormErrorMessage('city')}
+                {getFormErrorMessage('value')}
                 <Button type="submit" label="Submit" className="mt-2" />
             </form>
         </div>
@@ -181,12 +184,12 @@ export default function HookFormDoc() {
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column justify-content-center">
                     <Toast ref={toast} />
                     <Controller
-                        name="city"
+                        name="value"
                         control={control}
-                        rules={{ required: 'City is required.' }}
-                        render={({ field }) => <ListBox value={field.value} optionLabel="name" placeholder="Select a City" name="city" options={cities} control={control} onChange={(e) => field.onChange(e.value)} style={{ width: '15rem' }} />}
+                        rules={{ required: 'Value is required.' }}
+                        render={({ field }) => <ListBox value={field.value} optionLabel="name" placeholder="Select a City" name="value" options={cities} control={control} onChange={(e) => field.onChange(e.value)} style={{ width: '15rem' }} />}
                     />
-                    {getFormErrorMessage('city')}
+                    {getFormErrorMessage('value')}
                     <Button type="submit" label="Submit" className="mt-2" />
                 </form>
             </div>

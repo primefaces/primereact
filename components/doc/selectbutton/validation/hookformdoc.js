@@ -9,34 +9,34 @@ import { DocSectionText } from '../../common/docsectiontext';
 
 export function HookFormDoc(props) {
     const options = ['Off', 'On'];
-    const defaultValues = { engine: '' };
+    const defaultValues = { value: '' };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
     const toast = useRef(null);
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'The blog is uploaded' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: form.getValues('value') });
     };
 
     const onSubmit = (data) => {
-        data.engine && show();
+        data.value && show();
 
         form.reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>;
+        return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     const code = {
         basic: `
 <Controller
-    name="engine"
+    name="value"
     control={form.control}
-    rules={{ required: 'Engine State is required.' }}
+    rules={{ required: 'Value is required.' }}
     render={({ field, fieldState }) => (
         <>
-            <label htmlFor={field.name} className={classNames('flex justify-content-center', { 'p-error': errors.engine })}>
+            <label htmlFor={field.name} className={classNames('flex justify-content-center', { 'p-error': errors.value })}>
                 Engine State
             </label>
             <SelectButton id={field.name} options={options} {...field} className={classNames('flex justify-content-center', { 'p-invalid': fieldState.error })} />
@@ -56,23 +56,23 @@ import { Toast } from 'primereact/toast';
 
 export default function HookFormDoc() {
     const options = ['Off', 'On'];
-    const defaultValues = { engine: '' };
+    const defaultValues = { value: '' };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
     const toast = useRef(null);
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'The blog is uploaded' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: form.getValues('value') });
     };
 
     const onSubmit = (data) => {
-        data.engine && show();
+        data.value && show();
 
         form.reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>;
+        return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
@@ -80,12 +80,12 @@ export default function HookFormDoc() {
             <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
                 <Controller
-                    name="engine"
+                    name="value"
                     control={form.control}
-                    rules={{ required: 'Engine State is required.' }}
+                    rules={{ required: 'Value is required.' }}
                     render={({ field, fieldState }) => (
                         <>
-                            <label htmlFor={field.name} className={classNames('flex justify-content-center', { 'p-error': errors.engine })}>
+                            <label htmlFor={field.name} className={classNames('flex justify-content-center', { 'p-error': errors.value })}>
                                 Engine State
                             </label>
                             <SelectButton id={field.name} options={options} {...field} className={classNames('flex justify-content-center', { 'p-invalid': fieldState.error })} />
@@ -109,23 +109,23 @@ import { Toast } from 'primereact/toast';
 
 export default function HookFormDoc() {
     const options = ['Off', 'On'];
-    const defaultValues = { engine: '' };
+    const defaultValues = { value: '' };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
     const toast = useRef(null);
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'The blog is uploaded' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: form.getValues('value') });
     };
 
     const onSubmit = (data) => {
-        data.engine && show();
+        data.value && show();
 
         form.reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>;
+        return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
@@ -133,12 +133,12 @@ export default function HookFormDoc() {
             <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
                 <Controller
-                    name="engine"
+                    name="value"
                     control={form.control}
-                    rules={{ required: 'Engine State is required.' }}
+                    rules={{ required: 'Value is required.' }}
                     render={({ field, fieldState }) => (
                         <>
-                            <label htmlFor={field.name} className={classNames('flex justify-content-center', { 'p-error': errors.engine })}>
+                            <label htmlFor={field.name} className={classNames('flex justify-content-center', { 'p-error': errors.value })}>
                                 Engine State
                             </label>
                             <SelectButton id={field.name} options={options} {...field} className={classNames('flex justify-content-center', { 'p-invalid': fieldState.error })} />
@@ -165,12 +165,12 @@ export default function HookFormDoc() {
                 <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column align-items-center gap-2">
                     <Toast ref={toast} />
                     <Controller
-                        name="engine"
+                        name="value"
                         control={form.control}
-                        rules={{ required: 'Engine State is required.' }}
+                        rules={{ required: 'Value is required.' }}
                         render={({ field, fieldState }) => (
                             <>
-                                <label htmlFor={field.name} className={classNames('flex justify-content-center', { 'p-error': errors.engine })}>
+                                <label htmlFor={field.name} className={classNames('flex justify-content-center', { 'p-error': errors.value })}>
                                     Engine State
                                 </label>
                                 <SelectButton id={field.name} options={options} {...field} className={classNames('flex justify-content-center', { 'p-invalid': fieldState.error })} />

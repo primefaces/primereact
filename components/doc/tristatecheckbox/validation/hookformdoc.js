@@ -11,38 +11,38 @@ export function HookFormDoc(props) {
     const toast = useRef(null);
 
     const show = () => {
-        // TO DO: Add detail content to the toast.
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: getValues('value').toString() });
     };
 
     const defaultValues = {
-        accept: null
+        value: null
     };
 
     const {
         control,
         formState: { errors },
         handleSubmit,
+        getValues,
         reset
     } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
-        data.accept && show();
+        data.value && show();
 
         reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>;
+        return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     const code = {
         basic: `
 <Toast ref={toast} />
 <Controller
-    name="accept"
+    name="value"
     control={control}
-    rules={{ required: 'Accept is required.' }}
+    rules={{ required: 'Value is required.' }}
     render={({ field, fieldState }) => (
         <>
             <TriStateCheckbox id={field.name} value={field.value} ref={field.ref} onChange={field.onChange} className={classNames({ 'p-invalid': fieldState.error })} />
@@ -65,29 +65,29 @@ export default function HookFormDoc() {
     const toast = useRef(null);
 
     const show = () => {
-        // TO DO: Add detail content to the toast.
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: "Thank you, we have received your submission." });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: getValues('value').toString() });
     };
 
     const defaultValues = {
-        accept: null
+        value: null
     };
 
     const {
         control,
         formState: { errors },
         handleSubmit,
+        getValues,
         reset
     } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
-        data.accept && show();
+        data.value && show();
 
         reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>;
+        return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
@@ -95,9 +95,9 @@ export default function HookFormDoc() {
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column align-items-start justify-content-center gap-2">
                 <Toast ref={toast} />
                 <Controller
-                    name="accept"
+                    name="value"
                     control={control}
-                    rules={{ required: 'Accept is required.' }}
+                    rules={{ required: 'Value is required.' }}
                     render={({ field, fieldState }) => (
                         <>
                             <TriStateCheckbox id={field.name} value={field.value} ref={field.ref} onChange={field.onChange} className={classNames({ 'p-invalid': fieldState.error })} />
@@ -124,29 +124,29 @@ export default function HookFormDoc() {
     const toast = useRef(null);
 
     const show = () => {
-        // TO DO: Add detail content to the toast.
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: "Thank you, we have received your submission." });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: getValues('value').toString() });
     };
 
     const defaultValues = {
-        accept: null
+        value: null
     };
 
     const {
         control,
         formState: { errors },
         handleSubmit,
+        getValues,
         reset
     } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
-        data.accept && show();
+        data.value && show();
 
         reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>;
+        return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
@@ -154,9 +154,9 @@ export default function HookFormDoc() {
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column align-items-start justify-content-center gap-2">
                 <Toast ref={toast} />
                 <Controller
-                    name="accept"
+                    name="value"
                     control={control}
-                    rules={{ required: 'Accept is required.' }}
+                    rules={{ required: 'Value is required.' }}
                     render={({ field, fieldState }) => (
                         <>
                             <TriStateCheckbox id={field.name} value={field.value} ref={field.ref} onChange={field.onChange} className={classNames({ 'p-invalid': fieldState.error })} />
@@ -184,13 +184,15 @@ export default function HookFormDoc() {
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column align-items-start justify-content-center gap-2">
                     <Toast ref={toast} />
                     <Controller
-                        name="accept"
+                        name="value"
                         control={control}
-                        rules={{ required: 'Accept is required.' }}
+                        rules={{ required: 'Value is required.' }}
                         render={({ field, fieldState }) => (
                             <>
-                                <TriStateCheckbox id={field.name} value={field.value} ref={field.ref} onChange={field.onChange} className={classNames({ 'p-invalid': fieldState.error })} />
-                                <label>* I've read and accept the terms & conditions.</label>
+                                <div className="flex align-items-end gap-2">
+                                    <TriStateCheckbox id={field.name} value={field.value} ref={field.ref} onChange={field.onChange} className={classNames({ 'p-invalid': fieldState.error })} />
+                                    <label>* I've read and accept the terms & conditions.</label>
+                                </div>
                                 {getFormErrorMessage(field.name)}
                             </>
                         )}

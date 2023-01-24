@@ -10,18 +10,18 @@ export function FormikDoc(props) {
     const toast = useRef(null);
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.item });
     };
 
     const formik = useFormik({
         initialValues: {
-            knobValue: '0'
+            item: '0'
         },
         validate: (data) => {
             let errors = {};
 
-            if (data.knobValue === '0') {
-                errors.knobValue = 'The value must be greater than zero.';
+            if (data.item === '0') {
+                errors.item = 'The value must be greater than zero.';
             }
 
             return errors;
@@ -32,16 +32,16 @@ export function FormikDoc(props) {
         }
     });
 
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const isFormFieldInvalid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldInvalid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     const code = {
         basic: `
 <Toast ref={toast} />
-<Knob id="knobValue" name="knobValue" value={formik.values.knobValue} onChange={(e) => { formik.setFieldValue('knobValue', e.value) }} />
+<Knob id="item" name="item" value={formik.values.item} onChange={(e) => { formik.setFieldValue('item', e.value) }} />
 <Button type="submit" label="Submit" className="mt-2" />
         `,
         javascript: `
@@ -56,18 +56,18 @@ export default function FormikDoc() {
     const toast = useRef(null);
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.item });
     };
 
     const formik = useFormik({
         initialValues: {
-            knobValue: '0'
+            item: '0'
         },
         validate: (data) => {
             let errors = {};
 
-            if (data.knobValue === '0') {
-                errors.knobValue = 'The value must be greater than zero.';
+            if (data.item === '0') {
+                errors.item = 'The value must be greater than zero.';
             }
 
             return errors;
@@ -78,10 +78,10 @@ export default function FormikDoc() {
         }
     });
 
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const isFormFieldInvalid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldInvalid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
@@ -90,15 +90,15 @@ export default function FormikDoc() {
                 <Toast ref={toast} />
 
                 <Knob
-                    id="knobValue"
-                    name="knobValue"
-                    value={formik.values.knobValue}
+                    id="item"
+                    name="item"
+                    value={formik.values.item}
                     onChange={(e) => {
-                        formik.setFieldValue('knobValue', e.value);
+                        formik.setFieldValue('item', e.value);
                     }}
                 />
 
-                {getFormErrorMessage('knobValue')}
+                {getFormErrorMessage('item')}
                 <Button type="submit" label="Submit" className="mt-2" />
             </form>
         </div>
@@ -116,18 +116,18 @@ export default function FormikDoc() {
     const toast = useRef(null);
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.item });
     };
 
     const formik = useFormik({
         initialValues: {
-            knobValue: '0'
+            item: '0'
         },
         validate: (data) => {
             let errors = {};
 
-            if (data.knobValue === '0') {
-                errors.knobValue = 'The value must be greater than zero.';
+            if (data.item === '0') {
+                errors.item = 'The value must be greater than zero.';
             }
 
             return errors;
@@ -138,10 +138,10 @@ export default function FormikDoc() {
         }
     });
 
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const isFormFieldInvalid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldInvalid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
@@ -150,15 +150,15 @@ export default function FormikDoc() {
                 <Toast ref={toast} />
 
                 <Knob
-                    id="knobValue"
-                    name="knobValue"
-                    value={formik.values.knobValue}
+                    id="item"
+                    name="item"
+                    value={formik.values.item}
                     onChange={(e) => {
-                        formik.setFieldValue('knobValue', e.value);
+                        formik.setFieldValue('item', e.value);
                     }}
                 />
 
-                {getFormErrorMessage('knobValue')}
+                {getFormErrorMessage('item')}
                 <Button type="submit" label="Submit" className="mt-2" />
             </form>
         </div>
@@ -179,15 +179,15 @@ export default function FormikDoc() {
                     <Toast ref={toast} />
 
                     <Knob
-                        id="knobValue"
-                        name="knobValue"
-                        value={formik.values.knobValue}
+                        id="item"
+                        name="item"
+                        value={formik.values.item}
                         onChange={(e) => {
-                            formik.setFieldValue('knobValue', e.value);
+                            formik.setFieldValue('item', e.value);
                         }}
                     />
 
-                    {getFormErrorMessage('knobValue')}
+                    {getFormErrorMessage('item')}
                     <Button type="submit" label="Submit" className="mt-2" />
                 </form>
             </div>

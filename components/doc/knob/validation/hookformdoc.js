@@ -10,39 +10,40 @@ export function HookFormDoc(props) {
     const toast = useRef(null);
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: getValues('value') });
     };
 
     const defaultValues = {
-        knobValue: ''
+        value: ''
     };
 
     const {
         control,
         formState: { errors },
         handleSubmit,
+        getValues,
         reset
     } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
-        data.knobValue && show();
+        data.value && show();
 
         reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>;
+        return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     const code = {
         basic: `
 <Toast ref={toast} />
 <Controller
-    name="city"
+    name="value"
     control={control}
-    rules={{ required: 'knobValue is required.' }}
+    rules={{ required: 'The value must be greater than zero.' }}
     render={({ field }) => (
-        <CascadeSelect id={field.name} name="city" value={field.value} options={countries} optionLabel={'cname'} optionGroupLabel={'name'}
+        <CascadeSelect id={field.name} name="value" value={field.value} options={countries} optionLabel={'cname'} optionGroupLabel={'name'}
          optionGroupChildren={['states', 'cities']} style={{ minWidth: '14rem' }} placeholder={'Select a City'}
          onChange={(e) => field.onChange(e.value)}/>)}
     />
@@ -59,28 +60,29 @@ export default function HookFormDoc() {
     const toast = useRef(null);
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: getValues('value') });
     };
 
     const defaultValues = {
-        knobValue: ''
+        value: ''
     };
 
     const {
         control,
         formState: { errors },
         handleSubmit,
+        getValues,
         reset
     } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
-        data.knobValue && show();
+        data.value && show();
 
         reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>;
+        return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
@@ -89,13 +91,13 @@ export default function HookFormDoc() {
                 <Toast ref={toast} />
                 <div className="flex flex-column align-items-center">
                     <Controller
-                        name="knobValue"
+                        name="value"
                         control={control}
                         rules={{ required: 'The value must be greater than zero.' }}
-                        render={({ field }) => <Knob id={field.name} name="knobValue" value={field.value || '0'} onChange={(e) => field.onChange(e.value)} />}
+                        render={({ field }) => <Knob id={field.name} name="value" value={field.value || '0'} onChange={(e) => field.onChange(e.value)} />}
                     />
 
-                    {getFormErrorMessage('knobValue')}
+                    {getFormErrorMessage('value')}
                     <Button type="submit" label="Submit" className="mt-2" />
                 </div>
             </form>
@@ -114,28 +116,29 @@ export default function HookFormDoc() {
     const toast = useRef(null);
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: getValues('value') });
     };
 
     const defaultValues = {
-        knobValue: ''
+        value: ''
     };
 
     const {
         control,
         formState: { errors },
         handleSubmit,
+        getValues,
         reset
     } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
-        data.knobValue && show();
+        data.value && show();
 
         reset();
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>;
+        return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
@@ -144,13 +147,13 @@ export default function HookFormDoc() {
                 <Toast ref={toast} />
                 <div className="flex flex-column align-items-center">
                     <Controller
-                        name="knobValue"
+                        name="value"
                         control={control}
                         rules={{ required: 'The value must be greater than zero.' }}
-                        render={({ field }) => <Knob id={field.name} name="knobValue" value={field.value || '0'} onChange={(e) => field.onChange(e.value)} />}
+                        render={({ field }) => <Knob id={field.name} name="value" value={field.value || '0'} onChange={(e) => field.onChange(e.value)} />}
                     />
 
-                    {getFormErrorMessage('knobValue')}
+                    {getFormErrorMessage('value')}
                     <Button type="submit" label="Submit" className="mt-2" />
                 </div>
             </form>
@@ -171,13 +174,13 @@ export default function HookFormDoc() {
                     <Toast ref={toast} />
                     <div className="flex flex-column align-items-center">
                         <Controller
-                            name="knobValue"
+                            name="value"
                             control={control}
                             rules={{ required: 'The value must be greater than zero.' }}
-                            render={({ field }) => <Knob id={field.name} name="knobValue" value={field.value || '0'} onChange={(e) => field.onChange(e.value)} />}
+                            render={({ field }) => <Knob id={field.name} name="value" value={field.value || '0'} onChange={(e) => field.onChange(e.value)} />}
                         />
 
-                        {getFormErrorMessage('knobValue')}
+                        {getFormErrorMessage('value')}
                         <Button type="submit" label="Submit" className="mt-2" />
                     </div>
                 </form>

@@ -11,18 +11,18 @@ export function FormikDoc(props) {
     const toast = useRef(null);
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.item });
     };
 
     const formik = useFormik({
         initialValues: {
-            password: ''
+            item: ''
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.password) {
-                errors.password = 'Password is required.';
+            if (!data.item) {
+                errors.item = 'Password is required.';
             }
 
             return errors;
@@ -33,28 +33,28 @@ export function FormikDoc(props) {
         }
     });
 
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const isFormFieldInvalid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldInvalid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     const code = {
         basic: `
 <Toast ref={toast} />
-    <label htmlFor="password" className={classNames({ 'p-error': isFormFieldValid('password') })}>
+    <label htmlFor="item" className={classNames({ 'p-error': isFormFieldInvalid('item') })}>
         Password
     </label>
     <Password
-        id="password"
-        name="password"
+        id="item"
+        name="item"
         rows={5}
         cols={30}
-        className={classNames({ 'p-invalid': isFormFieldValid('password') })}
-        value={formik.values.password}
+        className={classNames({ 'p-invalid': isFormFieldInvalid('item') })}
+        value={formik.values.item}
         feedback={false}
         onChange={(e) => {
-            formik.setFieldValue('password', e.target.value);
+            formik.setFieldValue('item', e.target.value);
         }}
     />
 `,
@@ -70,18 +70,18 @@ export default function FormikDoc() {
     const toast = useRef(null);
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.item });
     };
 
     const formik = useFormik({
         initialValues: {
-            password: ''
+            item: ''
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.password) {
-                errors.password = 'Password is required.';
+            if (!data.item) {
+                errors.item = 'Password is required.';
             }
 
             return errors;
@@ -92,10 +92,10 @@ export default function FormikDoc() {
         }
     });
 
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const isFormFieldInvalid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldInvalid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
@@ -104,22 +104,22 @@ export default function FormikDoc() {
                 <Toast ref={toast} />
                 <div className="field">
                     <div className="flex flex-column">
-                        <label htmlFor="password" className={classNames({ 'p-error': isFormFieldValid('password') })}>
+                        <label htmlFor="item" className={classNames({ 'p-error': isFormFieldInvalid('item') })}>
                             Password
                         </label>
                         <Password
-                            id="password"
-                            name="password"
+                            id="item"
+                            name="item"
                             rows={5}
                             cols={30}
-                            className={classNames({ 'p-invalid': isFormFieldValid('password') })}
-                            value={formik.values.password}
+                            className={classNames({ 'p-invalid': isFormFieldInvalid('item') })}
+                            value={formik.values.item}
                             feedback={false}
                             onChange={(e) => {
-                                formik.setFieldValue('password', e.target.value);
+                                formik.setFieldValue('item', e.target.value);
                             }}
                         />
-                        {getFormErrorMessage('password')}
+                        {getFormErrorMessage('item')}
                     </div>
                 </div>
                 <Button label="Submit" type="submit" icon="pi pi-check mt-2" />
@@ -141,18 +141,18 @@ export default function FormikDoc() {
     const toast = useRef(null);
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.item });
     };
 
     const formik = useFormik({
         initialValues: {
-            password: ''
+            item: ''
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.password) {
-                errors.password = 'Password is required.';
+            if (!data.item) {
+                errors.item = 'Password is required.';
             }
 
             return errors;
@@ -163,10 +163,10 @@ export default function FormikDoc() {
         }
     });
 
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const isFormFieldInvalid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldInvalid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
@@ -175,22 +175,22 @@ export default function FormikDoc() {
                 <Toast ref={toast} />
                 <div className="field">
                     <div className="flex flex-column">
-                        <label htmlFor="password" className={classNames({ 'p-error': isFormFieldValid('password') })}>
+                        <label htmlFor="item" className={classNames({ 'p-error': isFormFieldInvalid('item') })}>
                             Password
                         </label>
                         <Password
-                            id="password"
-                            name="password"
+                            id="item"
+                            name="item"
                             rows={5}
                             cols={30}
-                            className={classNames({ 'p-invalid': isFormFieldValid('password') })}
-                            value={formik.values.password}
+                            className={classNames({ 'p-invalid': isFormFieldInvalid('item') })}
+                            value={formik.values.item}
                             feedback={false}
                             onChange={(e) => {
-                                formik.setFieldValue('password', e.target.value);
+                                formik.setFieldValue('item', e.target.value);
                             }}
                         />
-                        {getFormErrorMessage('password')}
+                        {getFormErrorMessage('item')}
                     </div>
                 </div>
                 <Button label="Submit" type="submit" icon="pi pi-check mt-2" />
@@ -212,22 +212,22 @@ export default function FormikDoc() {
                     <Toast ref={toast} />
                     <div className="field">
                         <div className="flex flex-column">
-                            <label htmlFor="password" className={classNames({ 'p-error': isFormFieldValid('password') })}>
+                            <label htmlFor="item" className={classNames({ 'p-error': isFormFieldInvalid('item') })}>
                                 Password
                             </label>
                             <Password
-                                id="password"
-                                name="password"
+                                id="item"
+                                name="item"
                                 rows={5}
                                 cols={30}
-                                className={classNames({ 'p-invalid': isFormFieldValid('password') })}
-                                value={formik.values.password}
+                                className={classNames({ 'p-invalid': isFormFieldInvalid('item') })}
+                                value={formik.values.item}
                                 feedback={false}
                                 onChange={(e) => {
-                                    formik.setFieldValue('password', e.target.value);
+                                    formik.setFieldValue('item', e.target.value);
                                 }}
                             />
-                            {getFormErrorMessage('password')}
+                            {getFormErrorMessage('item')}
                         </div>
                     </div>
                     <Button label="Submit" type="submit" icon="pi pi-check mt-2" />

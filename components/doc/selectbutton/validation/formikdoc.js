@@ -12,18 +12,18 @@ export function FormikDoc(props) {
     const options = ['Off', 'On'];
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.item });
     };
 
     const formik = useFormik({
         initialValues: {
-            engine: null
+            item: null
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.engine) {
-                errors.engine = 'Engine State is required.';
+            if (!data.item) {
+                errors.item = 'Engine State is required.';
             }
 
             return errors;
@@ -34,26 +34,26 @@ export function FormikDoc(props) {
         }
     });
 
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const isFormFieldInvalid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error"> </small>;
+        return isFormFieldInvalid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     const code = {
         basic: `
-<label htmlFor="engine" className={classNames('flex justify-content-center', { 'p-error': formik.errors.engine })}>
+<label htmlFor="item" className={classNames('flex justify-content-center', { 'p-error': formik.errors.item })}>
     Engine State
 </label>
 <SelectButton
-    id="engine"
-    name="engine"
-    value={formik.values.engine}
+    id="item"
+    name="item"
+    value={formik.values.item}
     options={options}
     onChange={(e) => {
-        formik.setFieldValue('engine', e.value);
+        formik.setFieldValue('item', e.value);
     }}
-    className={classNames('flex justify-content-center', { 'p-invalid': formik.errors.engine })}
+    className={classNames('flex justify-content-center', { 'p-invalid': formik.errors.item })}
 />
 <Button label="Submit" type="submit" icon="pi pi-check" />
         `,
@@ -71,18 +71,18 @@ export default function FormikDoc() {
     const options = ['Off', 'On'];
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.item });
     };
 
     const formik = useFormik({
         initialValues: {
-            engine: null
+            item: null
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.engine) {
-                errors.engine = 'Engine State is required.';
+            if (!data.item) {
+                errors.item = 'Engine State is required.';
             }
 
             return errors;
@@ -93,30 +93,30 @@ export default function FormikDoc() {
         }
     });
 
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const isFormFieldInvalid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) && <small className="p-error">{formik.errors[name]}</small>;
+        return isFormFieldInvalid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
         <div className="card flex justify-content-center">
             <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
-                <label htmlFor="engine" className={classNames('flex justify-content-center', { 'p-error': formik.errors.engine })}>
+                <label htmlFor="item" className={classNames('flex justify-content-center', { 'p-error': formik.errors.item })}>
                     Engine State
                 </label>
                 <SelectButton
-                    id="engine"
-                    name="engine"
-                    value={formik.values.engine}
+                    id="item"
+                    name="item"
+                    value={formik.values.item}
                     options={options}
                     onChange={(e) => {
-                        formik.setFieldValue('engine', e.value);
+                        formik.setFieldValue('item', e.value);
                     }}
-                    className={classNames('flex justify-content-center', { 'p-invalid': formik.errors.engine })}
+                    className={classNames('flex justify-content-center', { 'p-invalid': formik.errors.item })}
                 />
-                {getFormErrorMessage('engine')}
+                {getFormErrorMessage('item')}
                 <Button label="Submit" type="submit" icon="pi pi-check" />
             </form>
         </div>
@@ -136,18 +136,18 @@ export default function FormikDoc() {
     const options = ['Off', 'On'];
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Submission Received', detail: 'Thank you, we have received your submission.' });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.item });
     };
 
     const formik = useFormik({
         initialValues: {
-            engine: null
+            item: null
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.engine) {
-                errors.engine = 'Engine State is required.';
+            if (!data.item) {
+                errors.item = 'Engine State is required.';
             }
 
             return errors;
@@ -158,30 +158,30 @@ export default function FormikDoc() {
         }
     });
 
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const isFormFieldInvalid = (name) => !!(formik.touched[name] && formik.errors[name]);
 
     const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) && <small className="p-error">{formik.errors[name]}</small>;
+        return isFormFieldInvalid(name) ? <small className="p-error">{formik.errors[name]}</small> : <small className="p-error">&nbsp;</small>;
     };
 
     return (
         <div className="card flex justify-content-center">
             <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
-                <label htmlFor="engine" className={classNames('flex justify-content-center', { 'p-error': formik.errors.engine })}>
+                <label htmlFor="item" className={classNames('flex justify-content-center', { 'p-error': formik.errors.item })}>
                     Engine State
                 </label>
                 <SelectButton
-                    id="engine"
-                    name="engine"
-                    value={formik.values.engine}
+                    id="item"
+                    name="item"
+                    value={formik.values.item}
                     options={options}
                     onChange={(e) => {
-                        formik.setFieldValue('engine', e.value);
+                        formik.setFieldValue('item', e.value);
                     }}
-                    className={classNames('flex justify-content-center', { 'p-invalid': formik.errors.engine })}
+                    className={classNames('flex justify-content-center', { 'p-invalid': formik.errors.item })}
                 />
-                {getFormErrorMessage('engine')}
+                {getFormErrorMessage('item')}
                 <Button label="Submit" type="submit" icon="pi pi-check" />
             </form>
         </div>
@@ -200,20 +200,20 @@ export default function FormikDoc() {
             <div className="card flex justify-content-center">
                 <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                     <Toast ref={toast} />
-                    <label htmlFor="engine" className={classNames('flex justify-content-center', { 'p-error': formik.errors.engine })}>
+                    <label htmlFor="item" className={classNames('flex justify-content-center', { 'p-error': formik.errors.item })}>
                         Engine State
                     </label>
                     <SelectButton
-                        id="engine"
-                        name="engine"
-                        value={formik.values.engine}
+                        id="item"
+                        name="item"
+                        value={formik.values.item}
                         options={options}
                         onChange={(e) => {
-                            formik.setFieldValue('engine', e.value);
+                            formik.setFieldValue('item', e.value);
                         }}
-                        className={classNames('flex justify-content-center', { 'p-invalid': formik.errors.engine })}
+                        className={classNames('flex justify-content-center', { 'p-invalid': formik.errors.item })}
                     />
-                    {getFormErrorMessage('engine')}
+                    {getFormErrorMessage('item')}
                     <Button label="Submit" type="submit" icon="pi pi-check" />
                 </form>
             </div>
