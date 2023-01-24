@@ -9,7 +9,7 @@ import { FloatLabelDoc } from '../../components/doc/autocomplete/floatlabeldoc';
 import { ForceSelectionDoc } from '../../components/doc/autocomplete/forceselectiondoc';
 import { GroupDoc } from '../../components/doc/autocomplete/groupdoc';
 import { ImportDoc } from '../../components/doc/autocomplete/importdoc';
-import { InvalidStateDoc } from '../../components/doc/autocomplete/invalidstatedoc';
+import { InvalidDoc } from '../../components/doc/autocomplete/invaliddoc';
 import { MultipleDoc } from '../../components/doc/autocomplete/multipledoc';
 import { ObjectsDoc } from '../../components/doc/autocomplete/objectsdoc';
 import { StyleDoc } from '../../components/doc/autocomplete/styledoc';
@@ -38,9 +38,9 @@ const AutoCompleteDemo = () => {
             component: FloatLabelDoc
         },
         {
-            id: 'invalidstate',
-            label: 'Invalid State',
-            component: InvalidStateDoc
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
         },
         {
             id: 'disabled',

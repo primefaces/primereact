@@ -3,7 +3,7 @@ import { AutoComplete } from '../../lib/autocomplete/AutoComplete';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function InvalidStateDoc(props) {
+export function InvalidDoc(props) {
     const [value, setValue] = useState('');
     const [items, setItems] = useState([]);
 
@@ -19,7 +19,7 @@ export function InvalidStateDoc(props) {
 import React, { useState } from "react";
 import { AutoComplete } from "primereact/autocomplete";
 
-export default function InvalidStateDemo() {
+export default function InvalidDemo() {
     const [value, setValue] = useState('');
     const [items, setItems] = useState([]);
 
@@ -38,7 +38,7 @@ export default function InvalidStateDemo() {
 import React, { useState } from "react";
 import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
 
-export default function InvalidStateDemo() {
+export default function InvalidDemo() {
     const [value, setValue] = useState<string>('');
     const [items, setItems] = useState<string[]>([]);
 
