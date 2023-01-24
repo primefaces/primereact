@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { classNames } from '../../lib/utils/Utils';
@@ -6,56 +6,71 @@ import { classNames } from '../../lib/utils/Utils';
 export function DocSectionNav(props) {
     const router = useRouter();
     const [activeTab, setActiveTab] = useState('');
+    const [topbarHeight, setTopbarHeight] = useState(null);
 
     const onButtonClick = (doc) => {
-        if (doc.children && doc.id === 'api') {
-            setActiveTab(doc.children[0].id);
-            document.getElementById(doc.children[0].id).parentElement.scrollIntoView({ block: 'start', inline: 'nearest', offset: { top: 140 } });
-        } else {
-            setActiveTab(doc.id);
-            document.getElementById(doc.id).parentElement.scrollIntoView({ block: 'start', inline: 'nearest', offset: { top: 140 } });
-        }
+        setActiveTab(doc.id);
+        // Scroll to the clicked button's parent element
+        scrollToTheSection(doc.id);
+    };
+
+    const scrollToTheSection = (id) => {
+        document.getElementById(id).parentElement.scrollIntoView({ block: 'start', offset: { top: topbarHeight + 100 } });
+    };
+
+    const getIdOfTheSection = (section) => {
+        return section.querySelector('a').getAttribute('id');
     };
 
     useEffect(() => {
         const handleHashChange = (url) => {
             const hash = url.split('#')[1];
-            const docWithId = props.docs.find((doc) => doc.id === hash);
 
-            if (docWithId && docWithId.children && docWithId.id === 'api') {
-                setActiveTab(docWithId.children[0].id);
-            } else {
-                setActiveTab(hash);
-            }
+            setActiveTab(hash);
         };
 
-        router.events.on('hashChangeStart', handleHashChange);
+        router.events.on('onRouteChangeComplete', handleHashChange);
 
         return () => {
-            router.events.off('hashChangeStart', handleHashChange);
+            router.events.off('onRouteChangeComplete', handleHashChange);
         };
     }, [props.docs, router.events]);
 
     useEffect(() => {
-        const sections = document.querySelectorAll('section');
-        const topbarEl = document.getElementsByClassName('layout-topbar')[0];
+        const sections = document.querySelectorAll('section'); // Get all sections on the page
+        const topbarEl = document.getElementsByClassName('layout-topbar')[0]; // Get the topbar element
+        const hash = window.location.hash.substring(1); // Get the initial hash
+
+        setTopbarHeight(topbarEl.clientHeight);
+
+        // Set the active tab to the initial hash and scroll into view if it exists
+        if (hash) {
+            setActiveTab(hash);
+            // Scroll to the section with the current hash
+            scrollToTheSection(hash);
+        } else if (window.scrollY + window.innerHeight >= document.body.offsetHeight) {
+            // Set the active tab to the first section
+            setActiveTab(getIdOfTheSection(sections[0].querySelector('.doc-section-label')));
+        }
 
         const onScroll = () => {
             sections.forEach((section) => {
-                const sectionLabelEl = section.querySelectorAll('.doc-section-label');
-                const scrolledToSection = window.scrollY >= section.offsetTop - topbarEl.clientHeight - 20 && window.scrollY < section.offsetTop + section.offsetHeight - topbarEl.clientHeight - 20;
+                const sectionLabelEl = section.querySelectorAll('.doc-section-label'); //Get all labels on the currrent section
+                // Check if the section is currently scrolled to center of the screen
+                const isScrolledTo = (section) => window.scrollY >= section.offsetTop - topbarEl.clientHeight - 20 && window.scrollY < section.offsetTop + section.offsetHeight - topbarEl.clientHeight - 20;
 
-                if (scrolledToSection) {
-                    sectionLabelEl[0].querySelector('a');
-
+                if (isScrolledTo(section)) {
+                    // Check if the section has multiple child elements
                     if (sectionLabelEl.length > 1) {
                         sectionLabelEl.forEach((child) => {
-                            if (window.scrollY >= child.offsetTop - topbarEl.clientHeight - 20 && window.scrollY < child.offsetTop + child.offsetHeight - topbarEl.clientHeight - 20) {
-                                setActiveTab(child.querySelector('a').getAttribute('id'));
+                            // Check if the child element is currently scrolled to
+                            if (isScrolledTo(child)) {
+                                // Set the active tab to the id of the currently scrolled to child element
+                                setActiveTab(getIdOfTheSection(child));
                             }
                         });
                     } else {
-                        setActiveTab(sectionLabelEl[0].querySelector('a').getAttribute('id'));
+                        setActiveTab(getIdOfTheSection(sectionLabelEl[0]));
                     }
                 }
             });
@@ -71,7 +86,7 @@ export function DocSectionNav(props) {
     return (
         <ul className={classNames('hidden xl:block', 'doc-section-nav')}>
             {props.docs.map((doc) => {
-                const hash = doc.id === 'api' && doc.children ? doc.children[0].id : doc.id;
+                const hash = doc.id;
 
                 return (
                     <React.Fragment key={doc.label}>
