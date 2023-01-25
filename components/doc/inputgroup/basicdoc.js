@@ -87,7 +87,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>An InputGroup is created by wrapping the input and add-ons inside an element with a <i>p-inputgroup</i> class where add-ons also should be inside an element with <i>.p-inputgroup-addon</i> class.</p>
+                <p>
+                    An InputGroup is created by wrapping the input and add-ons inside an element with a <i>p-inputgroup</i> class where add-ons also should be inside an element with <i>.p-inputgroup-addon</i> class.
+                </p>
             </DocSectionText>
             <div className="card flex flex-column md:flex-row gap-3">
                 <div className="p-inputgroup flex-1">

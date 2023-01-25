@@ -5,7 +5,9 @@ export function StyleDoc() {
     return (
         <>
             <DocSectionText id="style" label="Style">
-                <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
+                <p>
+                    Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.
+                </p>
             </DocSectionText>
             <div className="doc-tablewrapper">
                 <table className="doc-table">

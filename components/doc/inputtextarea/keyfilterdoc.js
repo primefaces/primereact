@@ -37,7 +37,9 @@ export default function KeyFilterDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>InputTextarea has built-in key filtering support to block certain keys, refer to <Link href="/keyfilter">keyfilter</Link> page for more information.</p>
+                <p>
+                    InputTextarea has built-in key filtering support to block certain keys, refer to <Link href="/keyfilter">keyfilter</Link> page for more information.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <InputTextarea keyfilter="int" placeholder="Integers" rows={5} cols={30} />

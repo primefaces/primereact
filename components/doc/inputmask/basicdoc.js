@@ -43,7 +43,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>InputMask is used as a controlled input with <i>value</i> and <i>onChange</i> properties along with the <i>mask</i> property to define the mask.</p>
+                <p>
+                    InputMask is used as a controlled input with <i>value</i> and <i>onChange</i> properties along with the <i>mask</i> property to define the mask.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <InputMask value={value} onChange={(e) => setValue(e.target.value)} mask="99-999999" placeholder="99-999999" />
