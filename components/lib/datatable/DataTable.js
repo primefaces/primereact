@@ -1197,10 +1197,10 @@ export const DataTable = React.forwardRef((props, ref) => {
 
         //headers
         columns.forEach((column, i) => {
-            const { field, header, exportable } = column.props;
+            const { field, header, exportHeader, exportable } = column.props;
 
             if (exportable && field) {
-                csv += '"' + (header || field) + '"';
+                csv += '"' + (exportHeader || header || field) + '"';
 
                 if (i < columns.length - 1) {
                     csv += props.csvSeparator;

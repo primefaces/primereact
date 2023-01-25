@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { DevelopmentSection } from '../common/developmentsection';
 import { DocSectionText } from '../common/docsectiontext';
 import { DocSubSection } from '../common/docsubsection';
 
@@ -42,12 +41,6 @@ export function ApiDoc(props) {
                                 <td>string</td>
                                 <td>null</td>
                                 <td>Property of a row data used for filtering, defaults to field.</td>
-                            </tr>
-                            <tr>
-                                <td>exportField</td>
-                                <td>string</td>
-                                <td>null</td>
-                                <td>Property of a row data used for exporting, defaults to field.</td>
                             </tr>
                             <tr>
                                 <td>header</td>
@@ -462,6 +455,18 @@ export function ApiDoc(props) {
                                 <td>boolean</td>
                                 <td>true</td>
                                 <td>Defines whether the column is exported or not.</td>
+                            </tr>
+                            <tr>
+                                <td>exportField</td>
+                                <td>string</td>
+                                <td>null</td>
+                                <td>Property of a row data used for exporting, defaults to field.</td>
+                            </tr>
+                            <tr>
+                                <td>exportHeader</td>
+                                <td>string</td>
+                                <td>null</td>
+                                <td>Custom export header of the column to be exported.</td>
                             </tr>
                             <tr>
                                 <td>reorderable</td>

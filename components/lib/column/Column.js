@@ -19,6 +19,7 @@ Column.defaultProps = {
     excludeGlobalFilter: false,
     expander: false,
     exportField: null,
+    exportHeader: null,
     exportable: true,
     field: null,
     filter: false,
