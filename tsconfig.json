@@ -25,7 +25,7 @@
         "excludeExternals": true,
         "searchInComments": true,
         "disableSources": true,
-        "out": "docs",
+        "out": "docs/9.0.0",
         "exclude": ["components/lib/**/*.js"],
         "externalSymbolLinkMappings": {
             "@types/react": {
