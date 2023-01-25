@@ -1,17 +1,18 @@
 import Head from 'next/head';
 import React from 'react';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/editor/accessibilitydoc';
 import { ApiDoc } from '../../components/doc/editor/apidoc';
 import { BasicDoc } from '../../components/doc/editor/basicdoc';
+import { FormikDoc } from '../../components/doc/editor/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/editor/form/hookformdoc';
 import { ImportDoc } from '../../components/doc/editor/importdoc';
 import { QuillDoc } from '../../components/doc/editor/quilldoc';
 import { ReadOnlyDoc } from '../../components/doc/editor/readonlydoc';
 import { StyleDoc } from '../../components/doc/editor/styledoc';
 import { TemplateDoc } from '../../components/doc/editor/templatedoc';
-import { FormikDoc } from '../../components/doc/editor/form/formikdoc';
-import { HookFormDoc } from '../../components/doc/editor/form/hookformdoc';
 
 const EditorDemo = () => {
     const docs = [
@@ -86,6 +87,7 @@ const EditorDemo = () => {
                     <h1>Editor</h1>
                     <p>Editor is rich text editor component based on Quill.</p>
                 </div>
+                <DocActions github="editor/index.js" />
             </div>
 
             <div className="content-section doc">

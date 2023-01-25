@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import React from 'react';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/inputmask/accessibilitydoc';
@@ -7,14 +8,14 @@ import { ApiDoc } from '../../components/doc/inputmask/apidoc';
 import { BasicDoc } from '../../components/doc/inputmask/basicdoc';
 import { DisabledDoc } from '../../components/doc/inputmask/disableddoc';
 import { FloatLabelDoc } from '../../components/doc/inputmask/floatlabeldoc';
+import { FormikDoc } from '../../components/doc/inputmask/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/inputmask/form/hookformdoc';
 import { ImportDoc } from '../../components/doc/inputmask/importdoc';
 import { InvalidDoc } from '../../components/doc/inputmask/invaliddoc';
 import { MaskDoc } from '../../components/doc/inputmask/maskdoc';
 import { OptionalDoc } from '../../components/doc/inputmask/optionaldoc';
 import { SlotCharDoc } from '../../components/doc/inputmask/slotchardoc';
 import { StyleDoc } from '../../components/doc/inputmask/styledoc';
-import { FormikDoc } from '../../components/doc/inputmask/form/formikdoc';
-import { HookFormDoc } from '../../components/doc/inputmask/form/hookformdoc';
 
 const InputMaskDemo = () => {
     const docs = [
@@ -104,6 +105,7 @@ const InputMaskDemo = () => {
                     <h1>InputMask</h1>
                     <p>InputMask component is used to enter input in a certain format such as numeric, date, currency, email and phone.</p>
                 </div>
+                <DocActions github="inputmask/index.js" />
             </div>
 
             <div className="content-section doc">

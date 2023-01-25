@@ -5,12 +5,13 @@ import { ApiDoc } from '../../components/doc/checkbox/apidoc';
 import { BasicDoc } from '../../components/doc/checkbox/basicdoc';
 import { DisabledDoc } from '../../components/doc/checkbox/disableddoc';
 import { DynamicDoc } from '../../components/doc/checkbox/dynamicdoc';
+import { FormikDoc } from '../../components/doc/checkbox/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/checkbox/form/hookformdoc';
 import { GroupDoc } from '../../components/doc/checkbox/groupdoc';
 import { ImportDoc } from '../../components/doc/checkbox/importdoc';
 import { InvalidDoc } from '../../components/doc/checkbox/invaliddoc';
 import { StyleDoc } from '../../components/doc/checkbox/styledoc';
-import { FormikDoc } from '../../components/doc/checkbox/form/formikdoc';
-import { HookFormDoc } from '../../components/doc/checkbox/form/hookformdoc';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 
@@ -92,6 +93,7 @@ const CheckboxDemo = () => {
                     <h1>Checkbox</h1>
                     <p>Checkbox is an extension to standard checkbox element with theming.</p>
                 </div>
+                <DocActions github="checkbox/index.js" />
             </div>
 
             <div className="content-section doc">

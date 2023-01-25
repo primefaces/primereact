@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import React from 'react';
 import { ApiDoc } from '../../components/doc/checkbox/apidoc';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/radiobutton/accessibilitydoc';
@@ -86,6 +87,7 @@ const RadioButtonDemo = () => {
                     <h1>RadioButton</h1>
                     <p>RadioButton is an extension to standard radio button element with theming.</p>
                 </div>
+                <DocActions github="radiobutton/index.js" />
             </div>
 
             <div className="content-section doc">

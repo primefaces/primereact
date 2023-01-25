@@ -17,6 +17,7 @@ import { ObjectsDoc } from '../../components/doc/autocomplete/objectsdoc';
 import { StyleDoc } from '../../components/doc/autocomplete/styledoc';
 import { TemplateDoc } from '../../components/doc/autocomplete/templatedoc';
 import { VirtualScrollDoc } from '../../components/doc/autocomplete/virtualscrolldoc';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 
@@ -127,6 +128,7 @@ const AutoCompleteDemo = () => {
                     <h1>AutoComplete</h1>
                     <p>AutoComplete is an input component that provides real-time suggestions while being typed.</p>
                 </div>
+                <DocActions github="autocomplete/index.js" />
             </div>
 
             <div className="content-section doc">
