@@ -155,8 +155,7 @@
         flex-shrink: 1;
         flex-basis: auto;   
         li{
-            &.navbar-child-item{    
-                padding: 0.25rem;
+            &.navbar-child-item{
                 border-left: 5rem;
                 border-left-width: 2px;
                 border-left-style: solid;
