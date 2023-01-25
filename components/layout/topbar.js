@@ -1,9 +1,9 @@
-import { Badge } from '../lib/badge/Badge';
-import { CSSTransition } from 'react-transition-group';
+import getConfig from 'next/config';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
+import { CSSTransition } from 'react-transition-group';
 import { VersionService } from '../../service/VersionService';
-import getConfig from 'next/config';
+import { Badge } from '../lib/badge/Badge';
 
 export default function Topbar(props) {
     const [activeMenuIndex, setActiveMenuIndex] = useState(null);
@@ -310,7 +310,7 @@ export default function Topbar(props) {
                             </li>
 
                             <li role="none" className="topbar-submenu-header">
-                                PRIMEONE 2022 <Badge value="New" severity="success" className="capitalize ml-2" />
+                                PRIMEONE
                             </li>
                             <li role="none">
                                 <button type="button" className="p-link" onClick={() => onThemeChange('lara-light-indigo')} role="menuitem">
@@ -362,7 +362,47 @@ export default function Topbar(props) {
                             </li>
 
                             <li role="none" className="topbar-submenu-header">
-                                PRIMEONE 2021
+                                MISC
+                            </li>
+                            <li role="none">
+                                <button type="button" className="p-link" onClick={() => onThemeChange('soho-light')} role="menuitem">
+                                    <img src={`${contextPath}/images/themes/soho-light.png`} alt="Soho Light" />
+                                    <span>Soho Light</span>
+                                </button>
+                            </li>
+                            <li role="none">
+                                <button type="button" className="p-link" onClick={() => onThemeChange('soho-dark', true)} role="menuitem">
+                                    <img src={`${contextPath}/images/themes/soho-dark.png`} alt="Soho Dark" />
+                                    <span>Soho Dark</span>
+                                </button>
+                            </li>
+                            <li role="none">
+                                <button type="button" className="p-link" onClick={() => onThemeChange('viva-light')} role="menuitem">
+                                    <img src={`${contextPath}/images/themes/viva-light.svg`} alt="Viva Light" />
+                                    <span>Viva Light</span>
+                                </button>
+                            </li>
+                            <li role="none">
+                                <button type="button" className="p-link" onClick={() => onThemeChange('viva-dark', true)} role="menuitem">
+                                    <img src={`${contextPath}/images/themes/viva-dark.svg`} alt="Viva Dark" />
+                                    <span>Viva Dark</span>
+                                </button>
+                            </li>
+                            <li role="none">
+                                <button type="button" className="p-link" onClick={() => onThemeChange('mira')} role="menuitem">
+                                    <img src={`${contextPath}/images/themes/mira.jpg`} alt="Mira" />
+                                    <span>Mira</span>
+                                </button>
+                            </li>
+                            <li role="none">
+                                <button type="button" className="p-link" onClick={() => onThemeChange('nano')} role="menuitem">
+                                    <img src={`${contextPath}/images/themes/nano.jpg`} alt="Nano" />
+                                    <span>Nano</span>
+                                </button>
+                            </li>
+
+                            <li role="none" className="topbar-submenu-header">
+                                PRIMEONE - LEGACY
                             </li>
                             <li role="none">
                                 <button type="button" className="p-link" onClick={() => onThemeChange('saga-blue')} role="menuitem">
@@ -434,46 +474,6 @@ export default function Topbar(props) {
                                 <button type="button" className="p-link" onClick={() => onThemeChange('arya-purple', true)} role="menuitem">
                                     <img src={`${contextPath}/images/themes/arya-purple.png`} alt="Arya Purple" />
                                     <span>Arya Purple</span>
-                                </button>
-                            </li>
-
-                            <li role="none" className="topbar-submenu-header">
-                                PREMIUM
-                            </li>
-                            <li role="none">
-                                <button type="button" className="p-link" onClick={() => onThemeChange('soho-light')} role="menuitem">
-                                    <img src={`${contextPath}/images/themes/soho-light.png`} alt="Soho Light" />
-                                    <span>Soho Light</span>
-                                </button>
-                            </li>
-                            <li role="none">
-                                <button type="button" className="p-link" onClick={() => onThemeChange('soho-dark', true)} role="menuitem">
-                                    <img src={`${contextPath}/images/themes/soho-dark.png`} alt="Soho Dark" />
-                                    <span>Soho Dark</span>
-                                </button>
-                            </li>
-                            <li role="none">
-                                <button type="button" className="p-link" onClick={() => onThemeChange('viva-light')} role="menuitem">
-                                    <img src={`${contextPath}/images/themes/viva-light.svg`} alt="Viva Light" />
-                                    <span>Viva Light</span>
-                                </button>
-                            </li>
-                            <li role="none">
-                                <button type="button" className="p-link" onClick={() => onThemeChange('viva-dark', true)} role="menuitem">
-                                    <img src={`${contextPath}/images/themes/viva-dark.svg`} alt="Viva Dark" />
-                                    <span>Viva Dark</span>
-                                </button>
-                            </li>
-                            <li role="none">
-                                <button type="button" className="p-link" onClick={() => onThemeChange('mira')} role="menuitem">
-                                    <img src={`${contextPath}/images/themes/mira.jpg`} alt="Mira" />
-                                    <span>Mira</span>
-                                </button>
-                            </li>
-                            <li role="none">
-                                <button type="button" className="p-link" onClick={() => onThemeChange('nano')} role="menuitem">
-                                    <img src={`${contextPath}/images/themes/nano.jpg`} alt="Nano" />
-                                    <span>Nano</span>
                                 </button>
                             </li>
 
