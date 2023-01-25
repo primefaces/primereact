@@ -33,11 +33,6 @@ const AutoCompleteDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'floatlabel',
-            label: 'Float Label',
-            component: FloatLabelDoc
-        },
-        {
             id: 'dropdown',
             label: 'Dropdown',
             component: DropdownDoc
@@ -71,6 +66,11 @@ const AutoCompleteDemo = () => {
             id: 'multiple',
             label: 'Multiple',
             component: MultipleDoc
+        },
+        {
+            id: 'floatlabel',
+            label: 'Float Label',
+            component: FloatLabelDoc
         },
         {
             id: 'invalid',

@@ -28,11 +28,6 @@ const InputTextareaDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'floatlabel',
-            label: 'Float Label',
-            component: FloatLabelDoc
-        },
-        {
             id: 'autoresize',
             label: 'Auto Resize',
             component: AutoResizeDoc
@@ -41,6 +36,11 @@ const InputTextareaDemo = () => {
             id: 'keyfilter',
             label: 'Key Filter',
             component: KeyFilterDoc
+        },
+        {
+            id: 'floatlabel',
+            label: 'Float Label',
+            component: FloatLabelDoc
         },
         {
             id: 'invalid',
