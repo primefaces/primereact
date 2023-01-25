@@ -1,5 +1,5 @@
 /**
- * @check is this correct?
+ *
  * This module contains the interface and types for options in a select component.
  *
  * @module selectitem

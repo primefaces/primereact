@@ -207,6 +207,10 @@ interface DataTablePageEvent {
      * Total number of pages.
      */
     pageCount?: number;
+    /**
+     * Extra options.
+     */
+    [key: string]: any;
 }
 
 /**
@@ -226,6 +230,10 @@ interface DataTableSortEvent {
      * MultiSort metadata.
      */
     multiSortMeta: DataTableSortMeta[] | null | undefined;
+    /**
+     * Extra options.
+     */
+    [key: string]: any;
 }
 
 /**
@@ -238,15 +246,6 @@ interface DataTableFilterEvent {
      * Collection of active filters.
      */
     filters: DataTableFilterMeta;
-}
-
-/**
- * Custom page, sort, filter event.
- * @see {@link DataTableProps.onPage}, {@link DataTableProps.onSort}, {@link DataTableProps.onFilter}
- * @extends @check
- * @event
- */
-interface DataTablePFSEvent extends DataTablePageEvent, DataTableSortEvent, DataTableFilterEvent {
     /**
      * Extra options.
      */
@@ -1174,14 +1173,14 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     onContextMenuSelectionChange?(event: DataTableSelectionChangeEvent<TValue>): void;
     /**
      * Callback to invoke on filtering.
-     * @param {DataTablePFSEvent} event - Custom filter event.
+     * @param {DataTableFilterEvent} event - Custom filter event.
      */
-    onFilter?(event: DataTablePFSEvent): void;
+    onFilter?(event: DataTableFilterEvent): void;
     /**
      * Callback to invoke on pagination.
-     * @param {DataTablePFSEvent} event - Custom pagination event.
+     * @param {DataTablePageEvent} event - Custom pagination event.
      */
-    onPage?(event: DataTablePFSEvent): void;
+    onPage?(event: DataTablePageEvent): void;
     /**
      * Callback to invoke when a row is clicked.
      * @param {DataTableRowClickEvent} event - Custom row click event.
@@ -1269,9 +1268,9 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     onSelectionChange?(event: DataTableSelectionChangeEvent<TValue>): void;
     /**
      * Callback to invoke on sort.
-     * @param {DataTablePFSEvent} event - Custom sort event.
+     * @param {DataTableSortEvent} event - Custom sort event.
      */
-    onSort?(event: DataTablePFSEvent): void;
+    onSort?(event: DataTableSortEvent): void;
     /**
      * Callback to invoke table state is restored.
      * @param {object} state - Table state.
@@ -1386,12 +1385,10 @@ export declare class DataTable<TValue extends DataTableValueArray> extends React
     public resetScroll(): void;
     /**
      * Restores the column widths.
-     * @check
      */
     public restoreColumnWidths(): void;
     /**
      * Restores the table state.
-     * @check
      */
     public restoreState(): void;
     /**

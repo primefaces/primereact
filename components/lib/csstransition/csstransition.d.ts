@@ -1,8 +1,9 @@
 /**
  *
- * @todo Write the documentation.
+ * CSSTransition component wraps [ReactCSSTransition](https://reactcommunity.org/react-transition-group/css-transition) API.
+ * It allows us to easily manage animations. All PrimeReact components use this component.
  *
- * @todo Write the documentation.
+ * [Live Demo](https://www.primefaces.org/primereact/dropdown/)
  *
  * @module csstransition
  *
@@ -11,7 +12,7 @@ import * as React from 'react';
 import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
 
 /**
- * Defines valid properties in CSSTransition component. In addition to these, all properties of HTMLElement can be used in this component.
+ * Defines valid properties in [ReactCSSTransition](https://reactcommunity.org/react-transition-group/css-transition) API. In addition to these, all properties of HTMLElement can be used in this component.
  * @group Properties
  */
 export type CSSTransitionProps<Ref extends undefined | HTMLElement = undefined> = ReactCSSTransitionProps<Ref> & {
@@ -23,7 +24,15 @@ export type CSSTransitionProps<Ref extends undefined | HTMLElement = undefined> 
 };
 
 /**
+ * **PrimeReact - CSSTransition**
+ *
+ * _CSSTransition component wraps [ReactCSSTransition](https://reactcommunity.org/react-transition-group/css-transition) API.
+ * It allows us to easily manage animations. All PrimeReact components use this component._
+ *
+ * [Live Demo](https://www.primefaces.org/primereact/dropdown/)
+ * --- ---
+ * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ *
  * @group Component
- * @todo Write the documentation.
  */
 export declare class CSSTransition<Ref extends undefined | HTMLElement> extends React.Component<CSSTransitionProps<Ref>, any> {}

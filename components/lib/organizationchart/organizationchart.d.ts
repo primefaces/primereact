@@ -54,8 +54,7 @@ interface OrganizationChartNodeData {
      */
     expanded?: boolean;
     /**
-     * @check is this correct?
-     * Used to get the child elements of the component.
+     * The child elements of the component.
      * @readonly
      */
     children?: OrganizationChartNodeData[];

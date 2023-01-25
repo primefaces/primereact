@@ -10,6 +10,7 @@
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 import TreeNode from '../treenode';
+import { FormEvent } from '../ts-helpers';
 
 /**
  * Custom panel header template options.
@@ -51,52 +52,12 @@ interface TreeSelectPanelHeaderTemplateOptions {
 }
 
 /**
- * Custom change target options.
- * @group Misc
- */
-interface TreeSelectChangeTargetOptions {
-    /**
-     * The name of the element.
-     */
-    name: string;
-    /**
-     * Unique identifier of the element.
-     */
-    id: string;
-    /**
-     * @check
-     * Selected option value
-     */
-    value: string | TreeSelectSelectionKeysType | TreeSelectSelectionKeysType[] | undefined | null;
-}
-
-/**
  * Custom change event.
  * @see {@link TreeSelectProps.onChange}
+ * @extends {FormEvent}
  * @event
  */
-interface TreeSelectChangeEvent {
-    /**
-     * Browser event
-     */
-    originalEvent: React.SyntheticEvent;
-    /**
-     * Selected node key(s).
-     */
-    value: string | TreeSelectSelectionKeysType | TreeSelectSelectionKeysType[] | undefined | null;
-    /**
-     * Stops the event from propagating.
-     */
-    stopPropagation(): void;
-    /**
-     * Prevents the default action of the event.
-     */
-    preventDefault(): void;
-    /**
-     * Target element.
-     */
-    target: TreeSelectChangeTargetOptions;
-}
+interface TreeSelectChangeEvent extends FormEvent<string | TreeSelectSelectionKeysType | TreeSelectSelectionKeysType[]> {}
 
 /**
  * Custom treeselect selection keys type

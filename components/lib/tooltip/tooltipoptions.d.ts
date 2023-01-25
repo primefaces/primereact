@@ -1,3 +1,10 @@
+/**
+ *
+ * This module contains the common options and events of Tooltip.
+ *
+ * @module tooltipoptions
+ *
+ */
 import * as React from 'react';
 
 /**
@@ -137,4 +144,13 @@ export default interface TooltipOptions {
      * @param {TooltipEvent} event - Browser event
      */
     onHide?(event: TooltipEvent): void;
+}
+
+declare module 'react' {
+    /**
+     * extends React's HTMLAttributes
+     */
+    interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
+        'data-tooltip'?: string | undefined;
+    }
 }

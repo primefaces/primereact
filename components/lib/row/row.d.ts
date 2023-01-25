@@ -1,6 +1,6 @@
 /**
  *
- * @todo
+ * Row component is a helper component used to create grouping structures in DataTable.
  *
  * [Live Demo](https://www.primefaces.org/primereact/datatable/)
  *
@@ -32,7 +32,7 @@ export interface RowProps {
 /**
  * **PrimeReact - Row**
  *
- * @todo
+ * _Row component is a helper component used to create grouping structures in DataTable._
  *
  * [Live Demo](https://www.primefaces.org/primereact/datatable/)
  * --- ---

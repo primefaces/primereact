@@ -1,5 +1,9 @@
 /**
- * @todo Write the description.
+ *
+ * The module includes custom hook methods to create shorthands for users.
+ *
+ * @module hooks
+ *
  */
 import * as React from 'react';
 
@@ -26,7 +30,6 @@ interface EventOptions {
     options?: any;
     /**
      * Whether to listen to the event or not.
-     * @check
      */
     when?: boolean;
 }
@@ -50,7 +53,6 @@ interface OverlayEventOptions {
     listener?(event: Event, type?: string): void;
     /**
      * Whether to listen to the event or not.
-     * @check
      */
     when?: boolean;
 }
@@ -68,57 +70,48 @@ interface ResizeEventOptions {
 }
 
 /**
- * @check
  * Custom hook to get the previous value of a property.
  * @param {*} value - The value to compare.
  */
 export declare function usePrevious(value: any): any;
 /**
- * @check
  * Custom hook to run a mount effect only once.
  * @param {React.EffectCallback} effect - The effect to run.
  */
 export declare function useMountEffect(effect: React.EffectCallback): void;
 /**
- * @check
  * Custom hook to run an update effect.
  * @param {React.EffectCallback} effect - The effect to run.
  * @param {React.DependencyList} deps - The dependencies.
  */
 export declare function useUpdateEffect(effect: React.EffectCallback, deps?: React.DependencyList): void;
 /**
- * @check
- * Custom hook to run an update effect.
+ * Custom hook to run an unmount effect.
  * @param {React.EffectCallback} effect - The effect to run.
  */
 export declare function useUnmountEffect(effect: React.EffectCallback): void;
 /**
- * @check
  * Custom hook to listen to an event.
  * @param {EventOptions} options - The event options.
  */
 export declare function useEventListener(options: EventOptions): any[];
 /**
- * @check
- * Custom hook to listen to an event.
- * @param {EventOptions} options - The event options.
+ * Custom hook to listen to overlay event. It can be used when an overlay is desired to behave like the overlays in PrimeReact.
+ * @param {OverlayEventOptions} options - The event options.
  */
 export declare function useOverlayListener(options: OverlayEventOptions): any[];
 /**
- * @check
- * Custom hook to listen to ovelay scroll.
+ * Custom hook to listen to overlay scroll. It can be used when an overlay is desired to behave like the overlays in PrimeReact.
  * @param {EventOptions} options - The event options.
  */
 export declare function useOverlayScrollListener(options: EventOptions): any[];
 /**
- * @check
- * Custom hook to listen to ovelay scroll.
- * @param {EventOptions} options - The event options.
+ * Custom hook to listen to a resize event.
+ * @param {ResizeEventOptions} options - The event options.
  */
 export declare function useResizeListener(options: ResizeEventOptions): any[];
 /**
  * Custom hook to use an interval.
- * @check fn
  * @param {*} fn - The function that will be executed after the delay.
  * @param {number} delay - Delay in milliseconds.
  * @param {boolean} when - Whether to listen to the event or not.
@@ -126,14 +119,12 @@ export declare function useResizeListener(options: ResizeEventOptions): any[];
 export declare function useInterval(fn: any, delay?: number, when?: boolean): any[];
 /**
  * Custom hook to use a timeout.
- * @check fn
  * @param {*} fn - The function that will be executed after the delay.
  * @param {number} delay - Delay in milliseconds.
  * @param {boolean} when - Whether to listen to the event or not.
  */
 export declare function useTimeout(fn: any, delay?: number, when?: boolean): any[];
 /**
- * @check
  * Custom hook to use storage such as local and session storage.
  * @param {*} initialValue - The initial value.
  * @param {string} key - The key to store the value.
@@ -141,14 +132,12 @@ export declare function useTimeout(fn: any, delay?: number, when?: boolean): any
  */
 export declare function useStorage<S, K extends string = string>(initialValue: S, key: K, storage?: 'local' | 'session'): [S, React.Dispatch<React.SetStateAction<S>>];
 /**
- * @check
  * Custom hook to use local storage.
  * @param {*} initialValue - The initial value.
  * @param {string} key - The key to store the value in local storage.
  */
 export declare function useLocalStorage<S, K extends string = string>(initialValue: S, key: K): [S, React.Dispatch<React.SetStateAction<S>>];
 /**
- * @check
  * Custom hook to use session storage.
  * @param {*} initialValue - The initial value.
  * @param {string} key - The key to store the value in session storage. */

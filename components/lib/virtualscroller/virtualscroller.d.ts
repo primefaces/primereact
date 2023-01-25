@@ -30,8 +30,7 @@ interface VirtualScrollerOptionsType {
 }
 
 /**
- * @check
- * Custom viewport rendered range.
+ * Viewport rendered range.
  * @group Misc
  */
 interface VirtualScrollerViewportRenderedRange {
@@ -46,8 +45,7 @@ interface VirtualScrollerViewportRenderedRange {
 }
 
 /**
- * @check
- * Custom virtual scroller rendered range.
+ * Virtual scroller rendered range.
  * @group Misc
  */
 interface VirtualScrollerRenderedRange {
@@ -60,7 +58,6 @@ interface VirtualScrollerRenderedRange {
      */
     last: number;
     /**
-     * @check
      * Viewport of the rendered range.
      */
     viewport: VirtualScrollerViewportRenderedRange;
@@ -199,7 +196,7 @@ interface VirtualScrollerContentTemplateOptions {
     /**
      * Information of any item during the loading.
      * @param {number} index - Index of the item.
-     * @param {object} ext - @todo Write a description
+     * @param {object} ext - The extra options to pass to the content.
      */
     getLoaderOptions(index: number, ext?: object): VirtualScrollerLoadingTemplateOptions;
     /**
@@ -324,8 +321,7 @@ export interface VirtualScrollerProps {
      */
     loaderDisabled?: boolean | undefined;
     /**
-     * Columns of the virtual scroller.
-     * @check
+     * Columns of the virtual scroller for vertical option.
      */
     columns?: any | undefined;
     /**
