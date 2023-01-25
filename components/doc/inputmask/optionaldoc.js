@@ -18,7 +18,9 @@ export default function OptionalDemo() {
     const [value, setValue] = useState('');
 
     return (
-        <InputMask value={value} onChange={(e) => setValue(e.target.value)} mask="(999) 999-9999? x99999" placeholder="(999) 999-9999? x99999" />
+        <div className="card flex justify-content-center">
+            <InputMask value={value} onChange={(e) => setValue(e.target.value)} mask="(999) 999-9999? x99999" placeholder="(999) 999-9999? x99999" />
+        </div>
     )
 }
         `,
@@ -30,7 +32,9 @@ export default function OptionalDemo() {
     const [value, setValue] = useState<string>('');
 
     return (
-        <InputMask value={value} onChange={(e: InputMaskChangeParams) => setValue(e.target.value)} mask="(999) 999-9999? x99999" placeholder="(999) 999-9999? x99999" />
+        <div className="card flex justify-content-center">
+            <InputMask value={value} onChange={(e: InputMaskChangeParams) => setValue(e.target.value)} mask="(999) 999-9999? x99999" placeholder="(999) 999-9999? x99999" />
+        </div>
     )
 }
         `
@@ -39,9 +43,7 @@ export default function OptionalDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    When the input does not complete the mask definition, it is cleared by default. Use <i>autoClear</i> property to control this behavior. In addition, <i>?</i> is used to mark anything after the question mark optional.
-                </p>
+                <p>When the input does not complete the mask definition, it is cleared by default. Use <i>autoClear</i> property to control this behavior. In addition, <i>?</i> is used to mark anything after the question mark optional.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <InputMask value={value} onChange={(e) => setValue(e.target.value)} mask="(999) 999-9999? x999" placeholder="(999) 999-9999? x999" />

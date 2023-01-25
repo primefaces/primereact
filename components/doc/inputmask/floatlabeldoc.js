@@ -9,8 +9,8 @@ export function FloatLabelDoc(props) {
     const code = {
         basic: `
 <span className="p-float-label">
-    <InputMask id="inputmask" value={value} onChange={(e) => setValue(e.target.value)} mask="99-999999" />
-    <label htmlFor="inputmask">InputMask</label>
+    <InputMask id="ssn_input" value={value} onChange={(e) => setValue(e.target.value)} mask="999-99-9999" />
+    <label htmlFor="ssn_input">SSN</label>
 </span>
         `,
         javascript: `
@@ -21,10 +21,12 @@ export default function FloatLabelDemo() {
     const [value, setValue] = useState('');
 
     return (
-        <span className="p-float-label">
-            <InputMask id="inputmask" value={value} onChange={(e) => setValue(e.target.value)} mask="99-999999" />
-            <label htmlFor="inputmask">InputMask</label>
-        </span>
+        <div className="card flex justify-content-center">
+            <span className="p-float-label">
+                <InputMask id="ssn_input" value={value} onChange={(e) => setValue(e.target.value)} mask="999-99-9999" />
+                <label htmlFor="ssn_input">SSN</label>
+            </span>
+        </div>
     )
 }
         `,
@@ -36,10 +38,12 @@ export default function FloatLabelDemo() {
     const [value, setValue] = useState<string>('');
 
     return (
-        <span className="p-float-label">
-            <InputMask id="inputmask" value={value} onChange={(e: InputMaskChangeParams) => setValue(e.target.value)} mask="99-999999" />
-            <label htmlFor="inputmask">InputMask</label>
-        </span>
+        <div className="card flex justify-content-center">
+            <span className="p-float-label">
+                <InputMask id="ssn_input" value={value} onChange={(e: InputMaskChangeParams) => setValue(e.target.value)} mask="999-99-9999" />
+                <label htmlFor="ssn_input">SSN</label>
+            </span>
+        </div>
     )
 }
         `
@@ -48,14 +52,12 @@ export default function FloatLabelDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    A floating label is implemented by wrapping the input and the label inside a container having <i>.p-float-label</i> style class.
-                </p>
+                <p>A floating label appears on top of the input field when focused.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <span className="p-float-label">
-                    <InputMask id="inputmask" value={value} onChange={(e) => setValue(e.target.value)} mask="99-999999" />
-                    <label htmlFor="inputmask">InputMask</label>
+                    <InputMask id="ssn_input" value={value} onChange={(e) => setValue(e.target.value)} mask="999-99-9999" />
+                    <label htmlFor="ssn_input">SSN</label>
                 </span>
             </div>
             <DocSectionCode code={code} />
