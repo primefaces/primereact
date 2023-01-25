@@ -8,14 +8,14 @@ import { ButtonsDoc } from '../../components/doc/inputnumber/buttonsdoc';
 import { CurrencyDoc } from '../../components/doc/inputnumber/currencydoc';
 import { DisabledDoc } from '../../components/doc/inputnumber/disableddoc';
 import { FloatLabelDoc } from '../../components/doc/inputnumber/floatlabeldoc';
+import { FormikDoc } from '../../components/doc/inputnumber/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/inputnumber/form/hookformdoc';
 import { ImportDoc } from '../../components/doc/inputnumber/importdoc';
 import { InvalidDoc } from '../../components/doc/inputnumber/invaliddoc';
 import { LocaleDoc } from '../../components/doc/inputnumber/localedoc';
 import { NumeralsDoc } from '../../components/doc/inputnumber/numberalsdoc';
-import { PrefixDoc } from '../../components/doc/inputnumber/prefixdoc';
+import { PrefixSuffixDoc } from '../../components/doc/inputnumber/prefixsuffixdoc';
 import { StyleDoc } from '../../components/doc/inputnumber/styledoc';
-import { FormikDoc } from '../../components/doc/inputnumber/form/formikdoc';
-import { HookFormDoc } from '../../components/doc/inputnumber/form/hookformdoc';
 import { VerticalDoc } from '../../components/doc/inputnumber/verticaldoc';
 
 const InputNumberDemo = () => {
@@ -24,21 +24,6 @@ const InputNumberDemo = () => {
             id: 'import',
             label: 'Import',
             component: ImportDoc
-        },
-        {
-            id: 'floatlabel',
-            label: 'Float Label',
-            component: FloatLabelDoc
-        },
-        {
-            id: 'invalid',
-            label: 'Invalid',
-            component: InvalidDoc
-        },
-        {
-            id: 'disabled',
-            label: 'Disabled',
-            component: DisabledDoc
         },
         {
             id: 'numerals',
@@ -56,9 +41,9 @@ const InputNumberDemo = () => {
             component: CurrencyDoc
         },
         {
-            id: 'prefix',
-            label: 'Prefix and Suffix',
-            component: PrefixDoc
+            id: 'prefixsuffix',
+            label: 'Prefix & Suffix',
+            component: PrefixSuffixDoc
         },
         {
             id: 'buttons',
@@ -69,6 +54,21 @@ const InputNumberDemo = () => {
             id: 'vertical',
             label: 'Vertical',
             component: VerticalDoc
+        },
+        {
+            id: 'floatlabel',
+            label: 'Float Label',
+            component: FloatLabelDoc
+        },
+        {
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
         },
         {
             id: 'form',

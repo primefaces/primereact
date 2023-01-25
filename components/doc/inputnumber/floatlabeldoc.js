@@ -9,22 +9,22 @@ export function FloatLabelDoc(props) {
     const code = {
         basic: `
 <span className="p-float-label">
-    <InputNumber value={value} onValueChange={(e) => setValue(e.value)} mode="decimal" minFractionDigits={2} />
-    <label htmlFor="locale-user">User Locale</label>
+    <InputNumber id="number-input" value={value} onValueChange={(e) => setValue(e.value)} />
+    <label htmlFor="number-input">Number</label>
 </span>
 `,
         javascript: `
 import React, { useState } from "react";
 import { InputNumber } from 'primereact/inputnumber';
 
-export default function FloatLabelDoc() {
+export default function FloatLabelDemo() {
     const [value, setValue] = useState(151351);
 
     return (
-        <div className="card flex justify-content-center p-fluid">
+        <div className="card flex justify-content-center">
             <span className="p-float-label">
-                <InputNumber value={value} onValueChange={(e) => setValue(e.value)} mode="decimal" minFractionDigits={2} />
-                <label htmlFor="locale-user">User Locale</label>
+                <InputNumber id="number-input" value={value} onValueChange={(e) => setValue(e.value)} />
+                <label htmlFor="number-input">Number</label>
             </span>
         </div>
     )
@@ -32,16 +32,16 @@ export default function FloatLabelDoc() {
         `,
         typescript: `
 import React, { useState } from "react";
-import { InputNumber, InputNumberValueChangeParams } from 'primereact/inputnumber';
+import { InputNumber, InputNumberValueChangeEvent } from 'primereact/inputnumber';
 
-export default function FloatLabelDoc() {
+export default function FloatLabelDemo() {
     const [value, setValue] = useState<number>(151351);
 
     return (
-        <div className="card flex justify-content-center p-fluid">
+        <div className="card flex justify-content-center">
             <span className="p-float-label">
-                <InputNumber value={value} onValueChange={(e) => setValue(e.value)} mode="decimal" minFractionDigits={2} />
-                <label htmlFor="locale-user">User Locale</label>
+                <InputNumber id="number-input" value={value} onValueChange={(e: InputNumberValueChangeEvent) => setValue(e.value)} />
+                <label htmlFor="number-input">Number</label>
             </span>
         </div>
     )
@@ -52,14 +52,12 @@ export default function FloatLabelDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    A floating label is implemented by wrapping the input and the label inside a container having <i>.p-float-label</i> style class.
-                </p>
+                <p>A floating label appears on top of the input field when focused.</p>
             </DocSectionText>
-            <div className="card flex justify-content-center p-fluid">
+            <div className="card flex justify-content-center">
                 <span className="p-float-label">
-                    <InputNumber value={value} onValueChange={(e) => setValue(e.value)} mode="decimal" minFractionDigits={2} />
-                    <label htmlFor="locale-user">User Locale</label>
+                    <InputNumber id="number-input" value={value} onValueChange={(e) => setValue(e.value)} />
+                    <label htmlFor="number-input">Number</label>
                 </span>
             </div>
             <DocSectionCode code={code} />
