@@ -1,11 +1,11 @@
 import Head from 'next/head';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { CheckboxDoc } from '../../components/doc/inputgroup/checkboxdoc';
-import { ButtonDoc } from '../../components/doc/inputgroup/buttonsdoc';
-import { MultipleDoc } from '../../components/doc/inputgroup/multipledoc';
 import { BasicDoc } from '../../components/doc/inputgroup/basicdoc';
+import { ButtonDoc } from '../../components/doc/inputgroup/buttondoc';
+import { CheckboxDoc } from '../../components/doc/inputgroup/checkboxdoc';
+import { MultipleDoc } from '../../components/doc/inputgroup/multipledoc';
 
 const InputGroupDemo = () => {
     const docs = [
@@ -26,7 +26,7 @@ const InputGroupDemo = () => {
         },
         {
             id: 'checkbox',
-            label: 'Checkbox and RadioButton',
+            label: 'Checkbox & RadioButton',
             component: CheckboxDoc
         }
     ];
