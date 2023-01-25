@@ -3,8 +3,8 @@ name: API DOC Deploy
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    paths:
+      - '**/**/*.d.ts'
 
 permissions:
   contents: write
@@ -26,7 +26,15 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
 
-    - name: Build
+    - name: Install node packages
+      run: npm install
+
+    - name: Generate api doc
+      run: npm run doc
+
+    - name: Commit doc
       run: |
-        npm install
-        npm run doc
+        git config user.name "GitHub Actions Bot"
+        git config user.email "<>"
+        git commit -a -m "Update API doc"
+        git push
