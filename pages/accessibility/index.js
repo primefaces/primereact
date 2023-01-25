@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import Head from 'next/head';
-import { Checkbox } from '../../components/lib/checkbox/Checkbox';
 import getConfig from 'next/config';
+import Head from 'next/head';
+import React, { useState } from 'react';
 import { CodeHighlight } from '../../components/doc/common/codehighlight';
+import { Checkbox } from '../../components/lib/checkbox/Checkbox';
 
 const AccessibilityPage = () => {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
@@ -28,8 +28,8 @@ const AccessibilityPage = () => {
                         PrimeTek
                     </a>{' '}
                     teams have initiated a significant process to review and enhance the accessibility features of the components. This guide documents the foundation of the general guidelines that PrimeReact will follow and each component
-                    documentation will have a separate <b>Accessibility</b> section that states the keyboard support, screen reader compatibility, the implementation details along with tips to achieve WCAG compliancy. This work has been initiated in
-                    Q2 2022 and planned to be completed by early Q3. PrimeReact will be the reference implementation which then will be ported to PrimeFaces, PrimeNG and PrimeVue.
+                    documentation will have a separate <b>Accessibility</b> section that states the keyboard support, screen reader compatibility, the implementation details along with tips to achieve WCAG compliancy. This work has been completed for 
+                    PrimeVue as the reference implementation and currently being ported to PrimeReact to be finalized in Q2 2023.
                 </p>
 
                 <h3>Introduction</h3>

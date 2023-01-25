@@ -1,11 +1,12 @@
 import * as React from 'react';
 
 export const DevelopmentSection = React.memo((props) => {
-    const isProduction = process.env.NODE_ENV === 'production';
-
-    if (isProduction) {
-        return <p>This section is under development. After the necessary tests and improvements are made, it will be shared with the users as soon as possible.</p>;
-    }
-
-    return props.children;
+    return (
+        <>
+            <div className="line-height-3 bg-indigo-600 text-white p-3 text-lg" style={{ borderRadius: '10px' }}>
+                Accessibility guide documents the specification of this component based on WCAG guidelines, the implementation is in progress.
+            </div>
+            {props.children}
+        </>
+    )
 });
