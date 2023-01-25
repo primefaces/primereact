@@ -18,15 +18,14 @@
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
     "exclude": ["node_modules", "dist"],
     "typedocOptions": {
-        "name": "PrimeReact",
+        "name": "PrimeReact - v9.0.0",
         "entryPoints": ["components/lib"],
         "entryPointStrategy": "expand",
         "hideGenerator": true,
         "excludeExternals": true,
-        "includeVersion": true,
         "searchInComments": true,
         "disableSources": true,
-        "out": "doc",
+        "out": "docs/api/9.0.0",
         "exclude": ["components/lib/**/*.js"],
         "externalSymbolLinkMappings": {
             "@types/react": {
