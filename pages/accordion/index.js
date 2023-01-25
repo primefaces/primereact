@@ -13,8 +13,6 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 
 const AccordionDemo = () => {
-    console.log('Test');
-
     const docs = [
         {
             id: 'import',
