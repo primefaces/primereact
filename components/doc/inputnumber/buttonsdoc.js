@@ -10,9 +10,9 @@ export function ButtonsDoc(props) {
 
     const code = {
         basic: `
-<InputNumber inputId="stacked" value={value1} onValueChange={(e: InputNumberValueChangeEvent) => setValue1(e.value)} showButtons mode="currency" currency="USD" />
-<InputNumber inputId="minmax-buttons" value={value3} onValueChange={(e: InputNumberValueChangeEvent) => setValue3(e.value)} mode="decimal" showButtons min={0} max={100} />
-<InputNumber inputId="horizontal" value={value2} onValueChange={(e: InputNumberValueChangeEvent) => setValue2(e.value)} showButtons buttonLayout="horizontal" step={0.25}
+<InputNumber value={value1} onValueChange={(e: InputNumberValueChangeEvent) => setValue1(e.value)} showButtons mode="currency" currency="USD" />
+<InputNumber value={value3} onValueChange={(e: InputNumberValueChangeEvent) => setValue3(e.value)} mode="decimal" showButtons min={0} max={100} />
+<InputNumber value={value2} onValueChange={(e: InputNumberValueChangeEvent) => setValue2(e.value)} showButtons buttonLayout="horizontal" step={0.25}
             decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"
             mode="currency" currency="EUR" />
 `,
@@ -28,8 +28,8 @@ export default function ButtonsDemo() {
     return (
         <div class="card flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
-                <label htmlFor="stacked" className="font-bold block mb-2">Stacked</label>
-                <InputNumber inputId="stacked" value={value1} onValueChange={(e) => setValue1(e.value)} showButtons mode="currency" currency="USD" />
+                <label htmlFor="stacked-buttons" className="font-bold block mb-2">Stacked</label>
+                <InputNumber inputId="stacked-buttons" value={value1} onValueChange={(e) => setValue1(e.value)} showButtons mode="currency" currency="USD" />
             </div>
             
             <div className="flex-auto">
@@ -37,8 +37,8 @@ export default function ButtonsDemo() {
                 <InputNumber inputId="minmax-buttons" value={value3} onValueChange={(e) => setValue3(e.value)} mode="decimal" showButtons min={0} max={100} />
             </div>
             <div className="flex-auto">
-                <label htmlFor="horizontal" className="font-bold block mb-2">Horizontal with Step</label>
-                <InputNumber inputId="horizontal" value={value2} onValueChange={(e) => setValue2(e.value)} showButtons buttonLayout="horizontal" step={0.25}
+                <label htmlFor="horizontal-buttons" className="font-bold block mb-2">Horizontal with Step</label>
+                <InputNumber inputId="horizontal-buttons" value={value2} onValueChange={(e) => setValue2(e.value)} showButtons buttonLayout="horizontal" step={0.25}
                     decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"
                     mode="currency" currency="EUR" />
             </div>
@@ -58,8 +58,8 @@ export default function ButtonsDemo() {
     return (
         <div class="card flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
-                <label htmlFor="stacked" className="font-bold block mb-2">Stacked</label>
-                <InputNumber inputId="stacked" value={value1} onValueChange={(e: InputNumberValueChangeEvent) => setValue1(e.value)} showButtons mode="currency" currency="USD" />
+                <label htmlFor="stacked-buttons" className="font-bold block mb-2">Stacked</label>
+                <InputNumber inputId="stacked-buttons" value={value1} onValueChange={(e: InputNumberValueChangeEvent) => setValue1(e.value)} showButtons mode="currency" currency="USD" />
             </div>
             
             <div className="flex-auto">
@@ -67,8 +67,8 @@ export default function ButtonsDemo() {
                 <InputNumber inputId="minmax-buttons" value={value3} onValueChange={(e: InputNumberValueChangeEvent) => setValue3(e.value)} mode="decimal" showButtons min={0} max={100} />
             </div>
             <div className="flex-auto">
-                <label htmlFor="horizontal" className="font-bold block mb-2">Horizontal with Step</label>
-                <InputNumber inputId="horizontal" value={value2} onValueChange={(e: InputNumberValueChangeEvent) => setValue2(e.value)} showButtons buttonLayout="horizontal" step={0.25}
+                <label htmlFor="horizontal-buttons" className="font-bold block mb-2">Horizontal with Step</label>
+                <InputNumber inputId="horizontal-buttons" value={value2} onValueChange={(e: InputNumberValueChangeEvent) => setValue2(e.value)} showButtons buttonLayout="horizontal" step={0.25}
                     decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"
                     mode="currency" currency="EUR" />
             </div>
@@ -85,8 +85,8 @@ export default function ButtonsDemo() {
             </DocSectionText>
             <div class="card flex flex-wrap gap-3 p-fluid">
                 <div className="flex-auto">
-                    <label htmlFor="stacked" className="font-bold block mb-2">Stacked</label>
-                    <InputNumber inputId="stacked" value={value1} onValueChange={(e) => setValue1(e.value)} showButtons mode="currency" currency="USD" />
+                    <label htmlFor="stacked-buttons" className="font-bold block mb-2">Stacked</label>
+                    <InputNumber inputId="stacked-buttons" value={value1} onValueChange={(e) => setValue1(e.value)} showButtons mode="currency" currency="USD" />
                 </div>
                 
                 <div className="flex-auto">
@@ -94,8 +94,8 @@ export default function ButtonsDemo() {
                     <InputNumber inputId="minmax-buttons" value={value3} onValueChange={(e) => setValue3(e.value)} mode="decimal" showButtons min={0} max={100} />
                 </div>
                 <div className="flex-auto">
-                    <label htmlFor="horizontal" className="font-bold block mb-2">Horizontal with Step</label>
-                    <InputNumber inputId="horizontal" value={value2} onValueChange={(e) => setValue2(e.value)} showButtons buttonLayout="horizontal" step={0.25}
+                    <label htmlFor="horizontal-buttons" className="font-bold block mb-2">Horizontal with Step</label>
+                    <InputNumber inputId="horizontal-buttons" value={value2} onValueChange={(e) => setValue2(e.value)} showButtons buttonLayout="horizontal" step={0.25}
                         decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"
                         mode="currency" currency="EUR" />
                 </div>
