@@ -7,6 +7,8 @@ import { DateFormatDoc } from '../../components/doc/calendar/dateformatdoc';
 import { DateTemplateDoc } from '../../components/doc/calendar/datetemplatedoc';
 import { DisabledDoc } from '../../components/doc/calendar/disableddoc';
 import { FloatLabelDoc } from '../../components/doc/calendar/floatlabeldoc';
+import { FormikDoc } from '../../components/doc/calendar/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/calendar/form/hookfromdoc';
 import { IconDoc } from '../../components/doc/calendar/icondoc';
 import { ImportDoc } from '../../components/doc/calendar/importdoc';
 import { InlineDoc } from '../../components/doc/calendar/inlinedoc';
@@ -20,8 +22,6 @@ import { StyleDoc } from '../../components/doc/calendar/styledoc';
 import { Time12Doc } from '../../components/doc/calendar/time12doc';
 import { Time24Doc } from '../../components/doc/calendar/time24doc';
 import { TouchUIDoc } from '../../components/doc/calendar/touchuidoc';
-import { FormikDoc } from '../../components/doc/calendar/form/formikdoc';
-import { HookFormDoc } from '../../components/doc/calendar/form/hookfromdoc';
 import { YearPickerDoc } from '../../components/doc/calendar/yearpickerdoc';
 import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
@@ -169,7 +169,7 @@ const CalendarDemo = () => {
                     <h1>Calendar</h1>
                     <p>Calendar, also known as DatePicker, is a form component to work with dates.</p>
                 </div>
-                <DocActions github="calendar/index.js" />
+                <DocActions github="/calendar" />
             </div>
 
             <div className="content-section doc">

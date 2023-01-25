@@ -61,7 +61,7 @@ const ConfirmDialogDemo = () => {
                     <h1>ConfirmDialog</h1>
                     <p>ConfirmDialog is an easy to use and customizable Confirmation API using a dialog.</p>
                 </div>
-                <DocActions github="confirmdialog/index.js" />
+                <DocActions github="/confirmdialog" />
             </div>
 
             <div className="content-section doc">

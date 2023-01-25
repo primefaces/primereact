@@ -1,17 +1,17 @@
 import Head from 'next/head';
 import React from 'react';
+import { AccessibilityDoc } from '../../components/doc/badge/accessibilitydoc';
+import { ApiDoc } from '../../components/doc/badge/apidoc';
+import { BasicDoc } from '../../components/doc/badge/basicdoc';
+import { ButtonDoc } from '../../components/doc/badge/buttondoc';
+import { ImportDoc } from '../../components/doc/badge/importdoc';
+import { PositionDoc } from '../../components/doc/badge/positiondoc';
+import { SeverityDoc } from '../../components/doc/badge/severitydoc';
+import { SizeDoc } from '../../components/doc/badge/sizedoc';
+import { StyleDoc } from '../../components/doc/badge/styledoc';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/badge/apidoc';
-import { AccessibilityDoc } from '../../components/doc/badge/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/badge/styledoc';
-import { ImportDoc } from '../../components/doc/badge/importdoc';
-import { BasicDoc } from '../../components/doc/badge/basicdoc';
-import { SeverityDoc } from '../../components/doc/badge/severitydoc';
-import { ButtonDoc } from '../../components/doc/badge/buttondoc';
-import { PositionDoc } from '../../components/doc/badge/positiondoc';
-import { SizeDoc } from '../../components/doc/badge/sizedoc';
-import { DocActions } from '../../components/doc/common/docactions';
 
 const BadgeDemo = () => {
     const docs = [
@@ -74,7 +74,7 @@ const BadgeDemo = () => {
                     <h1>Badge</h1>
                     <p>Badge is a small status indicator for another element.</p>
                 </div>
-                <DocActions github="badge/index.js" />
+                <DocActions github="/badge" />
             </div>
 
             <div className="content-section doc">

@@ -111,7 +111,7 @@ const InputTextDemo = () => {
                     <h1>InputText</h1>
                     <p>InputText is an extension to standard input element with theming and keyfiltering.</p>
                 </div>
-                <DocActions github="inputtext/index.js" />
+                <DocActions github="/inputtext" />
             </div>
 
             <div className="content-section doc">

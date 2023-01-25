@@ -87,7 +87,7 @@ const RadioButtonDemo = () => {
                     <h1>RadioButton</h1>
                     <p>RadioButton is an extension to standard radio button element with theming.</p>
                 </div>
-                <DocActions github="radiobutton/index.js" />
+                <DocActions github="/radiobutton" />
             </div>
 
             <div className="content-section doc">

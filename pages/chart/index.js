@@ -113,7 +113,7 @@ const ChartDemo = () => {
                         , an open source HTML5 based charting library.
                     </p>
                 </div>
-                <DocActions github="chart/index.js" />
+                <DocActions github="/chart" />
             </div>
 
             <div className="content-section doc">

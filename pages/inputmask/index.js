@@ -105,7 +105,7 @@ const InputMaskDemo = () => {
                     <h1>InputMask</h1>
                     <p>InputMask component is used to enter input in a certain format such as numeric, date, currency, email and phone.</p>
                 </div>
-                <DocActions github="inputmask/index.js" />
+                <DocActions github="/inputmask" />
             </div>
 
             <div className="content-section doc">

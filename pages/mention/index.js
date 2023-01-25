@@ -98,7 +98,7 @@ const MentionDemo = () => {
                     <p>Mention component is used to refer someone or something.</p>
                 </div>
 
-                <DocActions github="mention/index.js" />
+                <DocActions github="/mention" />
             </div>
 
             <div className="content-section doc multiselect-demo">

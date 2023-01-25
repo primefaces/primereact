@@ -116,7 +116,7 @@ const InputNumberDemo = () => {
                     <p>InputNumber is an input component to provide numerical input.</p>
                 </div>
 
-                <DocActions github="inputnumber/index.js" />
+                <DocActions github="/inputnumber" />
             </div>
 
             <div className="content-section doc">

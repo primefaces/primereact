@@ -5,12 +5,12 @@ import { ApiDoc } from '../../components/doc/cascadeselect/apidoc';
 import { BasicDoc } from '../../components/doc/cascadeselect/basicdoc';
 import { DisabledDoc } from '../../components/doc/cascadeselect/disableddoc';
 import { FloatLabelDoc } from '../../components/doc/cascadeselect/floatlabeldoc';
+import { FormikDoc } from '../../components/doc/cascadeselect/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/cascadeselect/form/hookformdoc';
 import { ImportDoc } from '../../components/doc/cascadeselect/importdoc';
 import { InvalidDoc } from '../../components/doc/cascadeselect/invaliddoc';
 import { StyleDoc } from '../../components/doc/cascadeselect/styledoc';
 import { TemplateDoc } from '../../components/doc/cascadeselect/templatedoc';
-import { FormikDoc } from '../../components/doc/cascadeselect/form/formikdoc';
-import { HookFormDoc } from '../../components/doc/cascadeselect/form/hookformdoc';
 import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
@@ -92,7 +92,7 @@ const CascadeSelectDemo = () => {
                     <h1>CascadeSelect</h1>
                     <p>CascadeSelect is a form component to select a value from a nested structure of options.</p>
                 </div>
-                <DocActions github="cascadeselect/index.js" />
+                <DocActions github="/cascadeselect" />
             </div>
             <div className="content-section doc">
                 <DocSections docs={docs} />

@@ -1,16 +1,16 @@
 import Head from 'next/head';
 import React from 'react';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ApiDoc } from '../../components/doc/timeline/apidoc';
 import { AccessibilityDoc } from '../../components/doc/timeline/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/timeline/styledoc';
-import { HorizontalDoc } from '../../components/doc/timeline/horizontaldoc';
 import { AlignmentDoc } from '../../components/doc/timeline/aligndoc';
-import { OppositeContentDoc } from '../../components/doc/timeline/oppositecontentdoc';
+import { ApiDoc } from '../../components/doc/timeline/apidoc';
 import { CustomizedDoc } from '../../components/doc/timeline/customizeddoc';
+import { HorizontalDoc } from '../../components/doc/timeline/horizontaldoc';
 import { ImportDoc } from '../../components/doc/timeline/importdoc';
+import { OppositeContentDoc } from '../../components/doc/timeline/oppositecontentdoc';
+import { StyleDoc } from '../../components/doc/timeline/styledoc';
 
 const TimelineDemo = () => {
     const docs = [
@@ -69,7 +69,7 @@ const TimelineDemo = () => {
                     <p>Timeline visualizes a series of chained events.</p>
                 </div>
 
-                <DocActions github="timeline/index.js" />
+                <DocActions github="/timeline" />
             </div>
 
             <div className="content-section doc timeline-demo">

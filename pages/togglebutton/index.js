@@ -75,7 +75,7 @@ const ToggleButtonDemo = () => {
                     <p>ToggleButton is used to select a boolean value using a button.</p>
                 </div>
 
-                <DocActions github="togglebutton/index.js" />
+                <DocActions github="/togglebutton" />
             </div>
 
             <div className="content-section doc">

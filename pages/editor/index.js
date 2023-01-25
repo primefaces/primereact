@@ -87,7 +87,7 @@ const EditorDemo = () => {
                     <h1>Editor</h1>
                     <p>Editor is rich text editor component based on Quill.</p>
                 </div>
-                <DocActions github="editor/index.js" />
+                <DocActions github="/editor" />
             </div>
 
             <div className="content-section doc">

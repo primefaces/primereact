@@ -93,7 +93,7 @@ const CheckboxDemo = () => {
                     <h1>Checkbox</h1>
                     <p>Checkbox is an extension to standard checkbox element with theming.</p>
                 </div>
-                <DocActions github="checkbox/index.js" />
+                <DocActions github="/checkbox" />
             </div>
 
             <div className="content-section doc">

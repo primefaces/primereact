@@ -10,13 +10,13 @@ import { DisabledDoc } from '../../components/doc/dropdown/disableddoc';
 import { EditableDoc } from '../../components/doc/dropdown/editabledoc';
 import { FilterDoc } from '../../components/doc/dropdown/filterdoc';
 import { FloatLabelDoc } from '../../components/doc/dropdown/floatlabeldoc';
+import { FormikDoc } from '../../components/doc/dropdown/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/dropdown/form/hookformdoc';
 import { GroupedDoc } from '../../components/doc/dropdown/groupeddoc';
 import { ImportDoc } from '../../components/doc/dropdown/importdoc';
 import { InvalidDoc } from '../../components/doc/dropdown/invaliddoc';
 import { StyleDoc } from '../../components/doc/dropdown/styledoc';
 import { TemplateDoc } from '../../components/doc/dropdown/templatedoc';
-import { FormikDoc } from '../../components/doc/dropdown/form/formikdoc';
-import { HookFormDoc } from '../../components/doc/dropdown/form/hookformdoc';
 import { EagerDoc } from '../../components/doc/dropdown/virtualscroll/eagerdoc';
 import { LazyDoc } from '../../components/doc/dropdown/virtualscroll/lazydoc';
 
@@ -135,7 +135,7 @@ const DropdownDemo = () => {
                     <h1>Dropdown</h1>
                     <p>Dropdown also known as Select, is used to choose an item from a collection of options.</p>
                 </div>
-                <DocActions github="dropdown/index.js" />
+                <DocActions github="/dropdown" />
             </div>
 
             <div className="content-section doc dropdown-demo">

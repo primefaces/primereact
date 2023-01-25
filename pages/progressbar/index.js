@@ -1,16 +1,16 @@
 import Head from 'next/head';
 import React from 'react';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/progressbar/apidoc';
 import { AccessibilityDoc } from '../../components/doc/progressbar/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/progressbar/styledoc';
-import { ImportDoc } from '../../components/doc/progressbar/importdoc';
-import { DynamicDoc } from '../../components/doc/progressbar/dynamicdoc';
+import { ApiDoc } from '../../components/doc/progressbar/apidoc';
 import { BasicDoc } from '../../components/doc/progressbar/basicdoc';
-import { TemplateDoc } from '../../components/doc/progressbar/templatedoc';
+import { DynamicDoc } from '../../components/doc/progressbar/dynamicdoc';
+import { ImportDoc } from '../../components/doc/progressbar/importdoc';
 import { IndeterminateDoc } from '../../components/doc/progressbar/indeterminatedoc';
-import { DocActions } from '../../components/doc/common/docactions';
+import { StyleDoc } from '../../components/doc/progressbar/styledoc';
+import { TemplateDoc } from '../../components/doc/progressbar/templatedoc';
 
 const ProgressBarDemo = () => {
     const docs = [
@@ -68,7 +68,7 @@ const ProgressBarDemo = () => {
                     <h1>ProgressBar</h1>
                     <p>ProgressBar is a process status indicator.</p>
                 </div>
-                <DocActions github="progressbar/index.js" />
+                <DocActions github="/progressbar" />
             </div>
 
             <div className="content-section doc">

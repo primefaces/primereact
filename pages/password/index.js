@@ -125,7 +125,7 @@ const PasswordDemo = () => {
                     <p>Password displays strength indicator for password fields.</p>
                 </div>
 
-                <DocActions github="password/index.js" />
+                <DocActions github="/password" />
             </div>
             <div className="content-section doc">
                 <DocSections docs={docs} />

@@ -1,12 +1,12 @@
 import Head from 'next/head';
 import React from 'react';
+import { AccessibilityDoc } from '../../components/doc/captcha/accessibilitydoc';
+import { ApiDoc } from '../../components/doc/captcha/apidoc';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/captcha/apidoc';
-import { AccessibilityDoc } from '../../components/doc/captcha/accessibilitydoc';
 
-import { ImportDoc } from '../../components/doc/captcha/importdoc';
 import { CaptchaDoc } from '../../components/doc/captcha/captchadoc';
+import { ImportDoc } from '../../components/doc/captcha/importdoc';
 import { DocActions } from '../../components/doc/common/docactions';
 
 const CaptchaDemo = () => {
@@ -45,7 +45,7 @@ const CaptchaDemo = () => {
                     <h1>Captcha</h1>
                     <p>Captcha is a form validation component based on Recaptcha.</p>
                 </div>
-                <DocActions github="captcha/index.js" />
+                <DocActions github="/captcha" />
             </div>
 
             <div className="content-section doc">

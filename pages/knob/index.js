@@ -122,7 +122,7 @@ const KnobDemo = () => {
                     <p>Knob is a form component to define number inputs with a dial.</p>
                 </div>
 
-                <DocActions github="konb/index.js" />
+                <DocActions github="/konb" />
             </div>
 
             <div className="content-section doc">

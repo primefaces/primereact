@@ -54,7 +54,7 @@ const ConfirmPopupDemo = () => {
                     <h1>ConfirmPopup</h1>
                     <p>ConfirmPopup is an easy to use and customizable Confirmation API using a popover.</p>
                 </div>
-                <DocActions github="confirmpopup/index.js" />
+                <DocActions github="/confirmpopup" />
             </div>
 
             <div className="content-section doc">

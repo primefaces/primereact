@@ -110,7 +110,7 @@ const TreeSelectDemo = () => {
                     <p>TreeSelect is a form component to choose from hierarchical data.</p>
                 </div>
 
-                <DocActions github="treeselect/index.js" />
+                <DocActions github="/treeselect" />
             </div>
             <div className="content-section doc treeselect-demo">
                 <DocSections docs={docs} />

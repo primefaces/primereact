@@ -130,7 +130,7 @@ const MultiSelectDemo = () => {
                     <p>MultiSelect is used to select multiple items from a collection.</p>
                 </div>
 
-                <DocActions github="multiselect/index.js" />
+                <DocActions github="/multiselect" />
             </div>
             <div className="content-section doc multiselect-demo">
                 <DocSections docs={docs} />

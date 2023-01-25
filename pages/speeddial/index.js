@@ -1,19 +1,18 @@
 import Head from 'next/head';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
+import { AccessibilityDoc } from '../../components/doc/speeddial/accessibilitydoc';
+import { ApiDoc } from '../../components/doc/speeddial/apidoc';
+import { CircleDoc } from '../../components/doc/speeddial/circledoc';
+import { CustomDoc } from '../../components/doc/speeddial/customdoc';
 import { ImportDoc } from '../../components/doc/speeddial/importdoc';
 import { LinearDoc } from '../../components/doc/speeddial/lineardoc';
-import { CircleDoc } from '../../components/doc/speeddial/circledoc';
-import { TooltipDoc } from '../../components/doc/speeddial/tooltipdoc';
-import { TransitionDoc } from '../../components/doc/speeddial/customdoc';
 import { MaskDoc } from '../../components/doc/speeddial/maskdoc';
-import { ApiDoc } from '../../components/doc/speeddial/apidoc';
-import { AccessibilityDoc } from '../../components/doc/speeddial/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/speeddial/styledoc';
-import { SemiCircleDoc } from '../../components/doc/speeddial/semicircledoc';
 import { QuarterCircleDoc } from '../../components/doc/speeddial/quartercircledoc';
-import { CustomDoc } from '../../components/doc/speeddial/customdoc';
+import { SemiCircleDoc } from '../../components/doc/speeddial/semicircledoc';
+import { StyleDoc } from '../../components/doc/speeddial/styledoc';
+import { TooltipDoc } from '../../components/doc/speeddial/tooltipdoc';
 
 const SpeedDialDemo = () => {
     const docs = [
@@ -86,7 +85,7 @@ const SpeedDialDemo = () => {
                     <p>When pressed, a floating action button can display multiple primary actions that can be performed on a page.</p>
                 </div>
 
-                <DocActions github="speeddial/index.js" />
+                <DocActions github="/speeddial" />
             </div>
 
             <div className="content-section doc">

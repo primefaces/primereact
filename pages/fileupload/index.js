@@ -5,11 +5,11 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { AdvancedDoc } from '../../components/doc/fileupload/advanceddoc';
 import { ApiDoc } from '../../components/doc/fileupload/apidoc';
 
-import { StyleDoc } from '../../components/doc/fileupload/styledoc';
-import { BasicDoc } from '../../components/doc/fileupload/basicdoc';
 import { AutoDoc } from '../../components/doc/fileupload/autodoc';
+import { BasicDoc } from '../../components/doc/fileupload/basicdoc';
 import { CustomUploadDoc } from '../../components/doc/fileupload/customuploaddoc';
 import { ImportDoc } from '../../components/doc/fileupload/importdoc';
+import { StyleDoc } from '../../components/doc/fileupload/styledoc';
 import { TemplateDoc } from '../../components/doc/fileupload/templatedoc';
 
 const FileUploadDemo = () => {
@@ -68,7 +68,7 @@ const FileUploadDemo = () => {
                     <h1>FileUpload</h1>
                     <p>FileUpload is an advanced uploader with dragdrop support, multi file uploads, auto uploading, progress tracking and validations.</p>
                 </div>
-                <DocActions github="fileupload/index.js" />
+                <DocActions github="/fileupload" />
             </div>
 
             <div className="content-section doc dropdown-demo">

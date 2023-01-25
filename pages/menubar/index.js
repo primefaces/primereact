@@ -1,13 +1,13 @@
 import Head from 'next/head';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/menubar/importdoc';
-import { BasicDoc } from '../../components/doc/menubar/basicdoc';
-import { TemplateDoc } from '../../components/doc/menubar/templatedoc';
-import { ApiDoc } from '../../components/doc/menubar/apidoc';
 import { AccessibilityDoc } from '../../components/doc/menubar/accessibilitydoc';
+import { ApiDoc } from '../../components/doc/menubar/apidoc';
+import { BasicDoc } from '../../components/doc/menubar/basicdoc';
+import { ImportDoc } from '../../components/doc/menubar/importdoc';
 import { StyleDoc } from '../../components/doc/menubar/styledoc';
+import { TemplateDoc } from '../../components/doc/menubar/templatedoc';
 
 const MenubarDemo = () => {
     const docs = [
@@ -54,7 +54,7 @@ const MenubarDemo = () => {
                     <h1>Menubar</h1>
                     <p>Menubar also known as Navbar, is a horizontal menu component.</p>
                 </div>
-                <DocActions github="menubar/index.js" />
+                <DocActions github="/menubar" />
             </div>
 
             <div className="content-section doc">

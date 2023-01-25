@@ -1,16 +1,16 @@
 import Head from 'next/head';
 import React from 'react';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/inplace/apidoc';
 import { AccessibilityDoc } from '../../components/doc/inplace/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/inplace/styledoc';
-import { ImportDoc } from '../../components/doc/inplace/importdoc';
+import { ApiDoc } from '../../components/doc/inplace/apidoc';
 import { BasicDoc } from '../../components/doc/inplace/basicdoc';
-import { InputDoc } from '../../components/doc/inplace/inputdoc';
 import { ImageDoc } from '../../components/doc/inplace/imagedoc';
+import { ImportDoc } from '../../components/doc/inplace/importdoc';
+import { InputDoc } from '../../components/doc/inplace/inputdoc';
 import { LazyDoc } from '../../components/doc/inplace/lazydoc';
-import { DocActions } from '../../components/doc/common/docactions';
+import { StyleDoc } from '../../components/doc/inplace/styledoc';
 
 const ChipDemo = () => {
     const docs = [
@@ -68,7 +68,7 @@ const ChipDemo = () => {
                     <h1>Inplace</h1>
                     <p>Inplace provides an easy to do editing and display at the same time where clicking the output displays the actual content.</p>
                 </div>
-                <DocActions github="inplace/index.js" />
+                <DocActions github="/inplace" />
             </div>
 
             <div className="content-section doc">

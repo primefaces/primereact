@@ -128,7 +128,7 @@ const AutoCompleteDemo = () => {
                     <h1>AutoComplete</h1>
                     <p>AutoComplete is an input component that provides real-time suggestions while being typed.</p>
                 </div>
-                <DocActions github="autocomplete/index.js" />
+                <DocActions github="/autocomplete" />
             </div>
 
             <div className="content-section doc">

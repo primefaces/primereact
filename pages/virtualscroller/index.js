@@ -1,15 +1,15 @@
 import Head from 'next/head';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/virtualscroller/importdoc';
-import { BasicDoc } from '../../components/doc/virtualscroller/basicdoc';
-import { ApiDoc } from '../../components/doc/virtualscroller/apidoc';
 import { AccessibilityDoc } from '../../components/doc/virtualscroller/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/virtualscroller/styledoc';
-import { ScrollDelayDoc } from '../../components/doc/virtualscroller/scrolldelaydoc';
-import { LoadingDoc } from '../../components/doc/virtualscroller/loadingdoc';
+import { ApiDoc } from '../../components/doc/virtualscroller/apidoc';
+import { BasicDoc } from '../../components/doc/virtualscroller/basicdoc';
+import { ImportDoc } from '../../components/doc/virtualscroller/importdoc';
 import { LazyDoc } from '../../components/doc/virtualscroller/lazydoc';
+import { LoadingDoc } from '../../components/doc/virtualscroller/loadingdoc';
+import { ScrollDelayDoc } from '../../components/doc/virtualscroller/scrolldelaydoc';
+import { StyleDoc } from '../../components/doc/virtualscroller/styledoc';
 import { TemplateDoc } from '../../components/doc/virtualscroller/templatedoc';
 
 const VirtualScrollerDemo = () => {
@@ -73,7 +73,7 @@ const VirtualScrollerDemo = () => {
                     <p>VirtualScroller is a performant approach to handle huge data efficiently.</p>
                 </div>
 
-                <DocActions github="virtualscroller/index.js" />
+                <DocActions github="/virtualscroller" />
             </div>
 
             <div className="content-section doc virtualscroller-demo">

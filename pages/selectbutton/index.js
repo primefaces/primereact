@@ -87,7 +87,7 @@ const SelectButtonDemo = () => {
                     <p>SelectButton is used to choose single or multiple items from a list using buttons.</p>
                 </div>
 
-                <DocActions github="selectbutton/index.js" />
+                <DocActions github="/selectbutton" />
             </div>
 
             <div className="content-section doc">

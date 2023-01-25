@@ -1,18 +1,18 @@
 import Head from 'next/head';
-import React, { useState } from 'react';
+import React from 'react';
 import { DocActions } from '../../components/doc/common/docactions';
-import { DocSections } from '../../components/doc/common/docsections';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { ImportDoc } from '../../components/doc/rating/importdoc';
-import { BasicDoc } from '../../components/doc/rating/basicdoc';
-import { WithoutCancelDoc } from '../../components/doc/rating/withoutcanceldoc';
-import { ReadOnlyDoc } from '../../components/doc/rating/readonlydoc';
-import { DisabledDoc } from '../../components/doc/rating/disableddoc';
-import { TemplateDoc } from '../../components/doc/rating/templatedoc';
-import { ApiDoc } from '../../components/doc/rating/apidoc';
+import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/rating/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/rating/styledoc';
+import { ApiDoc } from '../../components/doc/rating/apidoc';
+import { BasicDoc } from '../../components/doc/rating/basicdoc';
+import { DisabledDoc } from '../../components/doc/rating/disableddoc';
+import { ImportDoc } from '../../components/doc/rating/importdoc';
 import { NumberOfStarsDoc } from '../../components/doc/rating/numberofstarsdoc';
+import { ReadOnlyDoc } from '../../components/doc/rating/readonlydoc';
+import { StyleDoc } from '../../components/doc/rating/styledoc';
+import { TemplateDoc } from '../../components/doc/rating/templatedoc';
+import { WithoutCancelDoc } from '../../components/doc/rating/withoutcanceldoc';
 
 const RatingDemo = () => {
     const docs = [
@@ -81,7 +81,7 @@ const RatingDemo = () => {
                     <p>Rating component is a star based selection input.</p>
                 </div>
 
-                <DocActions github="rating/index.js" />
+                <DocActions github="/rating" />
             </div>
 
             <div className="content-section doc">

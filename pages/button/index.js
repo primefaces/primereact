@@ -1,28 +1,28 @@
 import Head from 'next/head';
+import { AccessibilityDoc } from '../../components/doc/button/accessibilitydoc';
+import { ApiDoc } from '../../components/doc/button/apidoc';
+import { BadgesDoc } from '../../components/doc/button/badgesdoc';
+import { BasicDoc } from '../../components/doc/button/basicdoc';
+import { ButtonSetDoc } from '../../components/doc/button/buttonsetdoc';
+import { DisabledDoc } from '../../components/doc/button/disableddoc';
+import { IconsDoc } from '../../components/doc/button/iconsdoc';
+import { ImportDoc } from '../../components/doc/button/importdoc';
+import { LoadingDoc } from '../../components/doc/button/loadingdoc';
+import { OutlinedButtonsDoc } from '../../components/doc/button/outlinedbuttonsdoc';
+import { RaisedButtonsDoc } from '../../components/doc/button/raisedbuttonsdoc';
+import { RaisedTextButtonsDoc } from '../../components/doc/button/raisedtextdoc';
+import { RoundedButtonsDoc } from '../../components/doc/button/roundedbuttonsdoc';
+import { RoundedIconButtonsDoc } from '../../components/doc/button/roundedicondoc';
+import { RoundedOutlinedButtonsDoc } from '../../components/doc/button/roundedoutlineddoc';
+import { RoundedTextIconButtonsDoc } from '../../components/doc/button/roundedtextdoc';
+import { SeveritiesDoc } from '../../components/doc/button/severitiesdoc';
+import { SizesDoc } from '../../components/doc/button/sizesdoc';
+import { StyleDoc } from '../../components/doc/button/styledoc';
+import { TemplateDoc } from '../../components/doc/button/templatedoc';
+import { TextButtonsDoc } from '../../components/doc/button/textdoc';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/button/importdoc';
-import { BasicDoc } from '../../components/doc/button/basicdoc';
-import { IconsDoc } from '../../components/doc/button/iconsdoc';
-import { LoadingDoc } from '../../components/doc/button/loadingdoc';
-import { SeveritiesDoc } from '../../components/doc/button/severitiesdoc';
-import { RaisedButtonsDoc } from '../../components/doc/button/raisedbuttonsdoc';
-import { RoundedButtonsDoc } from '../../components/doc/button/roundedbuttonsdoc';
-import { TextButtonsDoc } from '../../components/doc/button/textdoc';
-import { RaisedTextButtonsDoc } from '../../components/doc/button/raisedtextdoc';
-import { OutlinedButtonsDoc } from '../../components/doc/button/outlinedbuttonsdoc';
-import { RoundedIconButtonsDoc } from '../../components/doc/button/roundedicondoc';
-import { RoundedTextIconButtonsDoc } from '../../components/doc/button/roundedtextdoc';
-import { RoundedOutlinedButtonsDoc } from '../../components/doc/button/roundedoutlineddoc';
-import { BadgesDoc } from '../../components/doc/button/badgesdoc';
-import { ButtonSetDoc } from '../../components/doc/button/buttonsetdoc';
-import { SizesDoc } from '../../components/doc/button/sizesdoc';
-import { TemplateDoc } from '../../components/doc/button/templatedoc';
-import { ApiDoc } from '../../components/doc/button/apidoc';
-import { AccessibilityDoc } from '../../components/doc/button/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/button/styledoc';
-import { DisabledDoc } from '../../components/doc/button/disableddoc';
 
 const ButtonDemo = () => {
     const docs = [
@@ -145,7 +145,7 @@ const ButtonDemo = () => {
                     <p>Button is an extension to standard input element with icons and theming.</p>
                 </div>
 
-                <DocActions github="button/index.js" />
+                <DocActions github="/button" />
             </div>
             <div className="content-section doc button-demo">
                 <DocSections docs={docs} />

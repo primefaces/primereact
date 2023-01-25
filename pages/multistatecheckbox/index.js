@@ -81,7 +81,7 @@ const MultiStateCheckboxDemo = () => {
                     <p>MultiStateCheckbox is used to select a state from given multiple states.</p>
                 </div>
 
-                <DocActions github="multistatecheckbox/index.js" />
+                <DocActions github="/multistatecheckbox" />
             </div>
 
             <div className="content-section doc">

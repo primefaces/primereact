@@ -1,18 +1,18 @@
 import Head from 'next/head';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/dialog/importdoc';
+import { AccessibilityDoc } from '../../components/doc/dialog/accessibilitydoc';
+import { ApiDoc } from '../../components/doc/dialog/apidoc';
 import { BasicDoc } from '../../components/doc/dialog/basicdoc';
 import { FooterDoc } from '../../components/doc/dialog/footerdoc';
-import { WithoutModalDoc } from '../../components/doc/dialog/withoutmodaldoc';
-import { ResponsiveDoc } from '../../components/doc/dialog/responsivedoc';
+import { ImportDoc } from '../../components/doc/dialog/importdoc';
+import { LongContentDoc } from '../../components/doc/dialog/longcontentdoc';
 import { MaximizableDoc } from '../../components/doc/dialog/maximizabledoc';
 import { PositionDoc } from '../../components/doc/dialog/positiondoc';
-import { ApiDoc } from '../../components/doc/dialog/apidoc';
-import { AccessibilityDoc } from '../../components/doc/dialog/accessibilitydoc';
+import { ResponsiveDoc } from '../../components/doc/dialog/responsivedoc';
 import { StyleDoc } from '../../components/doc/dialog/styledoc';
-import { LongContentDoc } from '../../components/doc/dialog/longcontentdoc';
+import { WithoutModalDoc } from '../../components/doc/dialog/withoutmodaldoc';
 
 const DialogDemo = () => {
     const docs = [
@@ -84,7 +84,7 @@ const DialogDemo = () => {
                     <h1>Dialog</h1>
                     <p>Dialog is a container to display content in an overlay window.</p>
                 </div>
-                <DocActions github="dialog/index.js" />
+                <DocActions github="/dialog" />
             </div>
 
             <div className="content-section doc">

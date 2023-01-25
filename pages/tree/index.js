@@ -2,23 +2,23 @@ import Head from 'next/head';
 import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ImportDoc } from '../../components/doc/tree/importdoc';
-import { ApiDoc } from '../../components/doc/tree/apidoc';
 import { AccessibilityDoc } from '../../components/doc/tree/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/tree/styledoc';
+import { ApiDoc } from '../../components/doc/tree/apidoc';
 import { BasicDoc } from '../../components/doc/tree/basicdoc';
-import { ProgrammaticDoc } from '../../components/doc/tree/programmaticdoc';
-import { TreeEventsDoc } from '../../components/doc/tree/eventsdoc';
-import { LazyDoc } from '../../components/doc/tree/lazydoc';
-import { TemplateDoc } from '../../components/doc/tree/templatedoc';
-import { DragAndDropDoc } from '../../components/doc/tree/draganddropdoc';
 import { ContextMenuDoc } from '../../components/doc/tree/contextmenudoc';
+import { DragAndDropDoc } from '../../components/doc/tree/draganddropdoc';
+import { TreeEventsDoc } from '../../components/doc/tree/eventsdoc';
 import { LenientFilterDoc } from '../../components/doc/tree/filter/lenientfilterdoc';
 import { StrictFilterDoc } from '../../components/doc/tree/filter/strictfilterdoc';
-import { SingleSelectionDoc } from '../../components/doc/tree/selection/singleselectiondoc';
+import { ImportDoc } from '../../components/doc/tree/importdoc';
+import { LazyDoc } from '../../components/doc/tree/lazydoc';
+import { ProgrammaticDoc } from '../../components/doc/tree/programmaticdoc';
+import { CheckboxSelectionDoc } from '../../components/doc/tree/selection/checkboxselectiondoc';
 import { MultipleSelectionWithKeyDoc } from '../../components/doc/tree/selection/multipleselectionwithkeydoc';
 import { MultipleSelectionWithoutKeyDoc } from '../../components/doc/tree/selection/multipleselectionwithoutkeydoc';
-import { CheckboxSelectionDoc } from '../../components/doc/tree/selection/checkboxselectiondoc';
+import { SingleSelectionDoc } from '../../components/doc/tree/selection/singleselectiondoc';
+import { StyleDoc } from '../../components/doc/tree/styledoc';
+import { TemplateDoc } from '../../components/doc/tree/templatedoc';
 
 const TreeDemo = () => {
     const docs = [
@@ -135,7 +135,7 @@ const TreeDemo = () => {
                     <p>Tree is used to display hierarchical data.</p>
                 </div>
 
-                <DocActions github="tree/index.js" />
+                <DocActions github="/tree" />
             </div>
 
             <div className="content-section doc">

@@ -1,16 +1,16 @@
 import Head from 'next/head';
 import React from 'react';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/skeleton/apidoc';
 import { AccessibilityDoc } from '../../components/doc/skeleton/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/skeleton/styledoc';
-import { ImportDoc } from '../../components/doc/skeleton/importdoc';
-import { ShapesDoc } from '../../components/doc/skeleton/shapesdoc';
-import { ListDoc } from '../../components/doc/skeleton/listdoc';
+import { ApiDoc } from '../../components/doc/skeleton/apidoc';
 import { CardDoc } from '../../components/doc/skeleton/carddoc';
 import { DataTableDoc } from '../../components/doc/skeleton/datatabledoc';
-import { DocActions } from '../../components/doc/common/docactions';
+import { ImportDoc } from '../../components/doc/skeleton/importdoc';
+import { ListDoc } from '../../components/doc/skeleton/listdoc';
+import { ShapesDoc } from '../../components/doc/skeleton/shapesdoc';
+import { StyleDoc } from '../../components/doc/skeleton/styledoc';
 
 const SkeletonDemo = () => {
     const docs = [
@@ -68,7 +68,7 @@ const SkeletonDemo = () => {
                     <h1>Skeleton</h1>
                     <p>Skeleton is a placeholder to display instead of the actual content.</p>
                 </div>
-                <DocActions github="skeleton/index.js" />
+                <DocActions github="/skeleton" />
             </div>
 
             <div className="content-section doc">

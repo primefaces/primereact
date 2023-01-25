@@ -1,12 +1,12 @@
 import Head from 'next/head';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/slidemenu/importdoc';
-import { BasicDoc } from '../../components/doc/slidemenu/basicdoc';
-import { PopupDoc } from '../../components/doc/slidemenu/popupdoc';
-import { ApiDoc } from '../../components/doc/slidemenu/apidoc';
 import { AccessibilityDoc } from '../../components/doc/slidemenu/accessibilitydoc';
+import { ApiDoc } from '../../components/doc/slidemenu/apidoc';
+import { BasicDoc } from '../../components/doc/slidemenu/basicdoc';
+import { ImportDoc } from '../../components/doc/slidemenu/importdoc';
+import { PopupDoc } from '../../components/doc/slidemenu/popupdoc';
 import { StyleDoc } from '../../components/doc/slidemenu/styledoc';
 
 const SlideMenuDemo = () => {
@@ -54,7 +54,7 @@ const SlideMenuDemo = () => {
                     <h1>Slide Menu</h1>
                     <p>SlideMenu displays submenus with a slide animation.</p>
                 </div>
-                <DocActions github="slidemenu/index.js" />
+                <DocActions github="/slidemenu" />
             </div>
             <div className="content-section doc">
                 <DocSections docs={docs} />

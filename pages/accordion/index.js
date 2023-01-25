@@ -72,7 +72,7 @@ const AccordionDemo = () => {
                     <h1>Accordion</h1>
                     <p>Accordion groups a collection of contents in tabs.</p>
                 </div>
-                <DocActions github="accordion/index.js" />
+                <DocActions github="/accordion" />
             </div>
             <div className="content-section doc ">
                 <DocSections docs={docs} />

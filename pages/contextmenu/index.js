@@ -1,13 +1,13 @@
 import Head from 'next/head';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/contextmenu/importdoc';
-import { BasicDoc } from '../../components/doc/contextmenu/basicdoc';
-import { ApiDoc } from '../../components/doc/contextmenu/apidoc';
 import { AccessibilityDoc } from '../../components/doc/contextmenu/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/contextmenu/styledoc';
+import { ApiDoc } from '../../components/doc/contextmenu/apidoc';
+import { BasicDoc } from '../../components/doc/contextmenu/basicdoc';
 import { DocumentDoc } from '../../components/doc/contextmenu/documentdoc';
+import { ImportDoc } from '../../components/doc/contextmenu/importdoc';
+import { StyleDoc } from '../../components/doc/contextmenu/styledoc';
 
 const ContextMenuDemo = () => {
     const docs = [
@@ -57,7 +57,7 @@ const ContextMenuDemo = () => {
                         special integration.
                     </p>
                 </div>
-                <DocActions github="contextmenu/index.js" />
+                <DocActions github="/contextmenu" />
             </div>
 
             <div className="content-section doc">

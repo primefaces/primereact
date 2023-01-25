@@ -1,12 +1,12 @@
 import Head from 'next/head';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/dock/importdoc';
-import { BasicDoc } from '../../components/doc/dock/basicdoc';
+import { AccessibilityDoc } from '../../components/doc/dock/accessibilitydoc';
 import { AdvancedDoc } from '../../components/doc/dock/advanceddoc';
 import { ApiDoc } from '../../components/doc/dock/apidoc';
-import { AccessibilityDoc } from '../../components/doc/dock/accessibilitydoc';
+import { BasicDoc } from '../../components/doc/dock/basicdoc';
+import { ImportDoc } from '../../components/doc/dock/importdoc';
 import { StyleDoc } from '../../components/doc/dock/styledoc';
 
 const DockDemo = () => {
@@ -55,7 +55,7 @@ const DockDemo = () => {
                     <p>Dock is a navigation component consisting of menuitems.</p>
                 </div>
 
-                <DocActions github="dock/index.js" />
+                <DocActions github="/dock" />
             </div>
 
             <div className="content-section doc dock-demo">

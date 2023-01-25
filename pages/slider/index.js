@@ -73,7 +73,7 @@ const SliderDemo = () => {
                     <h1>Slider</h1>
                     <p>Slider is a component to provide input with a drag handle.</p>
                 </div>
-                <DocActions github="slider/index.js" />
+                <DocActions github="/slider" />
             </div>
 
             <div className="content-section doc">

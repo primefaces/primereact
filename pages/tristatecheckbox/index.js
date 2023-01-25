@@ -80,7 +80,7 @@ const TriStateCheckboxDemo = () => {
                     <p>TriStateCheckbox is used to select either "true", "false" or "null" as the value.</p>
                 </div>
 
-                <DocActions github="tristatecheckbox/index.js" />
+                <DocActions github="/tristatecheckbox" />
             </div>
             <div className="content-section doc">
                 <DocSections docs={docs} />

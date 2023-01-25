@@ -1,13 +1,13 @@
 import Head from 'next/head';
-import { DocSections } from '../../components/doc/common/docsections';
 import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { ImportDoc } from '../../components/doc/dataview/importdoc';
-import { BasicDoc } from '../../components/doc/dataview/basicdoc';
-import { ApiDoc } from '../../components/doc/dataview/apidoc';
+import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/dataview/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/dataview/styledoc';
+import { ApiDoc } from '../../components/doc/dataview/apidoc';
+import { BasicDoc } from '../../components/doc/dataview/basicdoc';
+import { ImportDoc } from '../../components/doc/dataview/importdoc';
 import { LazyDataViewDoc } from '../../components/doc/dataview/lazydoc';
+import { StyleDoc } from '../../components/doc/dataview/styledoc';
 
 const DataViewDemo = () => {
     const docs = [
@@ -55,7 +55,7 @@ const DataViewDemo = () => {
                     <p>DataView displays data in grid or list layout with pagination and sorting features.</p>
                 </div>
 
-                <DocActions github="dataview/index.js" />
+                <DocActions github="/dataview" />
             </div>
 
             <div className="content-section doc">

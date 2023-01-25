@@ -1,16 +1,16 @@
 import Head from 'next/head';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocActions } from '../../components/doc/common/docactions';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
+import { AccessibilityDoc } from '../../components/doc/sidebar/accessibilitydoc';
+import { ApiDoc } from '../../components/doc/sidebar/apidoc';
 import { BasicDoc } from '../../components/doc/sidebar/basicdoc';
+import { FullScreenDoc } from '../../components/doc/sidebar/fullscreendoc';
 import { ImportDoc } from '../../components/doc/sidebar/importdoc';
 import { PositionDoc } from '../../components/doc/sidebar/positiondoc';
-import { TemplateDoc } from '../../components/doc/sidebar/templatedoc';
-import { FullScreenDoc } from '../../components/doc/sidebar/fullscreendoc';
-import { ApiDoc } from '../../components/doc/sidebar/apidoc';
-import { AccessibilityDoc } from '../../components/doc/sidebar/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/sidebar/styledoc';
 import { SizeDoc } from '../../components/doc/sidebar/sizedoc';
+import { StyleDoc } from '../../components/doc/sidebar/styledoc';
+import { TemplateDoc } from '../../components/doc/sidebar/templatedoc';
 
 const SidebarDemo = () => {
     const docs = [
@@ -72,7 +72,7 @@ const SidebarDemo = () => {
                     <h1>Sidebar</h1>
                     <p>Sidebar, also known as Drawer, is a container component displayed as an overlay.</p>
                 </div>
-                <DocActions github="sidebar/index.js" />
+                <DocActions github="/sidebar" />
             </div>
 
             <div className="content-section doc">

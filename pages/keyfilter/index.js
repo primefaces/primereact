@@ -1,16 +1,16 @@
 import Head from 'next/head';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { IntegersDoc } from '../../components/doc/keyfilter/integersdoc';
-import { NumbersDoc } from '../../components/doc/keyfilter/numbersdoc';
-import { MoneyDoc } from '../../components/doc/keyfilter/moneydoc';
-import { HexDoc } from '../../components/doc/keyfilter/hexdoc';
+import { AccessibilityDoc } from '../../components/doc/keyfilter/accessibilitydoc';
 import { AlphabeticDoc } from '../../components/doc/keyfilter/alphabeticdoc';
 import { AlphanumbericDoc } from '../../components/doc/keyfilter/alphanumberdoc';
-import { RegexDoc } from '../../components/doc/keyfilter/regexdoc';
 import { ApiDoc } from '../../components/doc/keyfilter/apidoc';
-import { AccessibilityDoc } from '../../components/doc/keyfilter/accessibilitydoc';
+import { HexDoc } from '../../components/doc/keyfilter/hexdoc';
+import { IntegersDoc } from '../../components/doc/keyfilter/integersdoc';
+import { MoneyDoc } from '../../components/doc/keyfilter/moneydoc';
+import { NumbersDoc } from '../../components/doc/keyfilter/numbersdoc';
+import { RegexDoc } from '../../components/doc/keyfilter/regexdoc';
 
 import { ImportDoc } from '../../components/doc/keyfilter/importdoc';
 
@@ -79,7 +79,7 @@ const KeyFilterDemo = () => {
                     <h1>KeyFilter</h1>
                     <p>KeyFilter feature restricts user input based on a regular expression.</p>
                 </div>
-                <DocActions github="keyfilter/index.js" />
+                <DocActions github="/keyfilter" />
             </div>
 
             <div className="content-section doc">

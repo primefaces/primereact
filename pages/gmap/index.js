@@ -1,13 +1,13 @@
 import Head from 'next/head';
 import React from 'react';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ApiDoc } from '../../components/doc/gmap/apidoc';
 import { AccessibilityDoc } from '../../components/doc/gmap/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/gmap/styledoc';
-import { ImportDoc } from '../../components/doc/gmap/importdoc';
+import { ApiDoc } from '../../components/doc/gmap/apidoc';
 import { GMapDoc } from '../../components/doc/gmap/gmapdoc';
+import { ImportDoc } from '../../components/doc/gmap/importdoc';
+import { StyleDoc } from '../../components/doc/gmap/styledoc';
 
 const GMapDemo = () => {
     const docs = [
@@ -51,7 +51,7 @@ const GMapDemo = () => {
                     <p>GMap component provides integration with Google Maps API. This sample demontrates various uses cases like binding, overlays and events. Click the map to add a new item.</p>
                 </div>
 
-                <DocActions github="gmap/index.js" />
+                <DocActions github="/gmap" />
             </div>
 
             <div className="content-section doc">

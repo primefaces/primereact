@@ -2,9 +2,8 @@ import Head from 'next/head';
 import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/datatable/apidoc';
 import { AccessibilityDoc } from '../../components/doc/datatable/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/datatable/styledoc';
+import { ApiDoc } from '../../components/doc/datatable/apidoc';
 import { BasicDoc } from '../../components/doc/datatable/basicdoc';
 import { ColGroupDoc } from '../../components/doc/datatable/colgroupdoc';
 import { ChooseResizableColumnsDoc } from '../../components/doc/datatable/colresize/chooseresizablecolumnsdoc';
@@ -57,10 +56,11 @@ import { CustomStorageDoc } from '../../components/doc/datatable/state/customsto
 import { LocalStorageDoc } from '../../components/doc/datatable/state/localdoc';
 import { SessionStorageDoc } from '../../components/doc/datatable/state/sessionstoragedoc';
 import { StripedDoc } from '../../components/doc/datatable/stripeddoc';
+import { StyledDataTableDoc } from '../../components/doc/datatable/styleddatatabledoc';
+import { StyleDoc } from '../../components/doc/datatable/styledoc';
 import { TemplateDoc } from '../../components/doc/datatable/templatedoc';
 import { LazyLoadingFromRemoteDataSourceDoc } from '../../components/doc/datatable/virtualscroll/lazyloadfromremotedatadoc';
 import { PreloadedDataDoc } from '../../components/doc/datatable/virtualscroll/preloadeddatadoc';
-import { StyledDataTableDoc } from '../../components/doc/datatable/styleddatatabledoc';
 
 const DataTableDemo = () => {
     const docs = [
@@ -458,7 +458,7 @@ const DataTableDemo = () => {
                     <p>DataTable displays data in tabular format.</p>
                 </div>
 
-                <DocActions github="datatable/index.js" />
+                <DocActions github="/datatable" />
             </div>
 
             <div className="content-section doc datatable-doc-demo">

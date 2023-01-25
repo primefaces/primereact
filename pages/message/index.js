@@ -66,7 +66,7 @@ const MessageDemo = () => {
                     <h1>Message</h1>
                     <p>Message component displays information related to another element such as invalid input.</p>
                 </div>
-                <DocActions github="message/index.js" />
+                <DocActions github="/message" />
             </div>
 
             <div className="content-section doc">

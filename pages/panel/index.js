@@ -1,14 +1,14 @@
 import Head from 'next/head';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/panel/importdoc';
-import { BasicDoc } from '../../components/doc/panel/basicdoc';
-import { ToggleableDoc } from '../../components/doc/panel/toggleabledoc';
-import { TemplateDoc } from '../../components/doc/panel/templatedoc';
-import { ApiDoc } from '../../components/doc/panel/apidoc';
 import { AccessibilityDoc } from '../../components/doc/panel/accessibilitydoc';
+import { ApiDoc } from '../../components/doc/panel/apidoc';
+import { BasicDoc } from '../../components/doc/panel/basicdoc';
+import { ImportDoc } from '../../components/doc/panel/importdoc';
 import { StyleDoc } from '../../components/doc/panel/styledoc';
+import { TemplateDoc } from '../../components/doc/panel/templatedoc';
+import { ToggleableDoc } from '../../components/doc/panel/toggleabledoc';
 
 const PanelDemo = () => {
     const docs = [
@@ -60,7 +60,7 @@ const PanelDemo = () => {
                     <h1>Panel</h1>
                     <p>Panel is a container component with an optional content toggle feature.</p>
                 </div>
-                <DocActions github="panel/index.js" />
+                <DocActions github="/panel" />
             </div>
 
             <div className="content-section doc">

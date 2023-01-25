@@ -105,7 +105,7 @@ const ChipsDemo = () => {
                     <h1>Chips</h1>
                     <p>Chips is used to enter multiple values on an input field.</p>
                 </div>
-                <DocActions github="chips/index.js" />
+                <DocActions github="/chips" />
             </div>
 
             <div className="content-section doc">

@@ -6,7 +6,7 @@ export const DocActions = (props) => {
     const context = useContext(AppContentContext);
 
     const viewOnGitHub = () => {
-        window.open('https://github.com/primefaces/primereact/blob/master/pages/' + props.github, '_blank');
+        window.open('https://github.com/primefaces/primereact/blob/master/components/lib' + props.github, '_blank');
     };
 
     const viewOnFigma = () => {

@@ -111,7 +111,7 @@ const ListBoxDemo = () => {
                     <p>ListBox is used to select one or more values from a list of items.</p>
                 </div>
 
-                <DocActions github="listbox/index.js" />
+                <DocActions github="/listbox" />
             </div>
 
             <div className="content-section doc multiselect-demo">

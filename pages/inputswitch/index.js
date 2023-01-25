@@ -86,7 +86,7 @@ const InputSwitchDemo = () => {
                     <h1>InputSwitch</h1>
                     <p>InputSwitch is used to select a boolean value.</p>
                 </div>
-                <DocActions github="inputswitch/index.js" />
+                <DocActions github="/inputswitch" />
             </div>
 
             <div className="content-section doc">

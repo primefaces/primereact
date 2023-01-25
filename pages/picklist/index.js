@@ -1,13 +1,13 @@
 import Head from 'next/head';
 import React from 'react';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ApiDoc } from '../../components/doc/picklist/apidoc';
 import { AccessibilityDoc } from '../../components/doc/picklist/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/picklist/styledoc';
+import { ApiDoc } from '../../components/doc/picklist/apidoc';
 import { ImportDoc } from '../../components/doc/picklist/importdoc';
 import { PickListDoc } from '../../components/doc/picklist/picklistdoc';
+import { StyleDoc } from '../../components/doc/picklist/styledoc';
 
 const PickListDemo = () => {
     const docs = [
@@ -50,7 +50,7 @@ const PickListDemo = () => {
                     <p>PickList is used to reorder items between different lists.</p>
                 </div>
 
-                <DocActions github="picklist/index.js" />
+                <DocActions github="/picklist" />
             </div>
 
             <div className="content-section doc">

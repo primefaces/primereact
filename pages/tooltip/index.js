@@ -97,7 +97,7 @@ const TooltipDemo = () => {
                     <p>Tooltip functionality is integrated within various PrimeReact components.</p>
                 </div>
 
-                <DocActions github="tooltip/index.js" />
+                <DocActions github="/tooltip" />
             </div>
 
             <div className="content-section doc">

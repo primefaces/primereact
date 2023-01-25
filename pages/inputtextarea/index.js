@@ -99,7 +99,7 @@ const InputTextareaDemo = () => {
                     <h1>InputTextarea</h1>
                     <p>InputTextarea adds styling and autoResize functionality to standard textarea element.</p>
                 </div>
-                <DocActions github="inputtextarea/index.js" />
+                <DocActions github="/inputtextarea" />
             </div>
 
             <div className="content-section doc">
