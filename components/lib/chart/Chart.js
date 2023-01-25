@@ -81,10 +81,12 @@ const PrimeReactChart = React.memo(
         const otherProps = ObjectUtils.findDiffKeys(props, PrimeReactChart.defaultProps);
         const className = classNames('p-chart', props.className);
         const style = Object.assign({ width: props.width, height: props.height }, props.style);
+        const title = props.options && props.options.plugins && props.options.plugins.title && props.options.plugins.title.text;
+        const ariaLabel = props.ariaLabel || title;
 
         return (
             <div id={props.id} ref={elementRef} style={style} className={className} {...otherProps}>
-                <canvas ref={canvasRef} width={props.width} height={props.height}></canvas>
+                <canvas ref={canvasRef} width={props.width} height={props.height} role="img" aria-label={ariaLabel}></canvas>
             </div>
         );
     }),
@@ -102,6 +104,7 @@ PrimeReactChart.defaultProps = {
     width: null,
     height: null,
     style: null,
+    ariaLabel: null,
     className: null
 };
 

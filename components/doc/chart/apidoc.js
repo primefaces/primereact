@@ -1,7 +1,5 @@
-import { DevelopmentSection } from '../common/developmentsection';
 import { DocSectionText } from '../common/docsectiontext';
 import { DocSubSection } from '../common/docsubsection';
-import { CodeHighlight } from '../common/codehighlight';
 
 export function ApiDoc(props) {
     return (
@@ -72,6 +70,12 @@ export function ApiDoc(props) {
                                 <td>string</td>
                                 <td>null</td>
                                 <td>Style class of the element.</td>
+                            </tr>
+                            <tr>
+                                <td>ariaLabel</td>
+                                <td>string</td>
+                                <td>options.plugins.title.text</td>
+                                <td>ARIA label for the chart canvas. Defaults to options.plugins.title.text if available.</td>
                             </tr>
                         </tbody>
                     </table>
