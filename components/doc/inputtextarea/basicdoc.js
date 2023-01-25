@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { InputTextarea } from '../../lib/inputtextarea/InputTextarea';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const [value, setValue] = useState('');
@@ -18,7 +18,9 @@ export default function BasicDemo() {
     const [value, setValue] = useState('');
 
     return (
-        <InputTextarea value={value} onChange={(e) => setValue(e.target.value)} rows={5} cols={30} />
+        <div className="card flex justify-content-center">
+            <InputTextarea value={value} onChange={(e) => setValue(e.target.value)} rows={5} cols={30} />
+        </div>
     )
 }
         `,
@@ -30,7 +32,9 @@ export default function BasicDemo() {
     const [value, setValue] = useState<string>('');
 
     return (
-        <InputTextarea value={value} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setValue(e.target.value)} rows={5} cols={30} />
+        <div className="card flex justify-content-center">
+            <InputTextarea value={value} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setValue(e.target.value)} rows={5} cols={30} />
+        </div>
     )
 }
         `
@@ -39,9 +43,7 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    Textarea is used as a controlled input with <i>value</i> and <i>onChange</i> properties.
-                </p>
+                <p>Textarea is used as a controlled input with <i>value</i> and <i>onChange</i> properties.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <InputTextarea value={value} onChange={(e) => setValue(e.target.value)} rows={5} cols={30} />

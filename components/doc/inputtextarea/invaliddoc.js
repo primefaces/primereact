@@ -1,6 +1,6 @@
 import { InputTextarea } from '../../lib/inputtextarea/InputTextarea';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function InvalidDoc(props) {
     const code = {
@@ -13,7 +13,9 @@ import { InputTextarea } from "primereact/inputtextarea";
 
 export default function InvalidDemo() {
     return (
-        <InputTextarea rows={5} cols={30} className="p-invalid" />
+        <div className="card flex justify-content-center">
+            <InputTextarea rows={5} cols={30} className="p-invalid" />
+        </div>
     )
 }
         `,
@@ -23,7 +25,9 @@ import { InputTextarea } from "primereact/inputtextarea";
 
 export default function InvalidDemo() {
     return (
-        <InputTextarea rows={5} cols={30} className="p-invalid" />
+        <div className="card flex justify-content-center">
+            <InputTextarea rows={5} cols={30} className="p-invalid" />
+        </div>
     )
 }
         `
@@ -32,9 +36,7 @@ export default function InvalidDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    Applying <i>p-invalid</i> class to an input element indicates a failed validation.
-                </p>
+                <p>Invalid state style is added using the <i>p-invalid</i> class to indicate a failed validation.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <InputTextarea rows={5} cols={30} className="p-invalid" />

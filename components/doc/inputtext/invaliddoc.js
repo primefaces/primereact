@@ -36,9 +36,7 @@ export default function InvalidDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    Invalid state style is added using the <i>p-invalid</i> class to indicate a failed validation.
-                </p>
+                <p>Invalid state style is added using the <i>p-invalid</i> class to indicate a failed validation.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <InputText className="p-invalid" />

@@ -1,6 +1,6 @@
 import { InputTextarea } from '../../lib/inputtextarea/InputTextarea';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function DisabledDoc(props) {
     const code = {
@@ -13,7 +13,9 @@ import { InputTextarea } from "primereact/inputtextarea";
 
 export default function DisabledDemo() {
     return (
-        <InputTextarea disabled rows={5} cols={30} value="Disabled" />
+        <div className="card flex justify-content-center">
+            <InputTextarea disabled rows={5} cols={30} value="Disabled" />
+        </div>
     )
 }
         `,
@@ -23,7 +25,9 @@ import { InputTextarea } from "primereact/inputtextarea";
 
 export default function DisabledDemo() {
     return (
-        <InputTextarea disabled rows={5} cols={30} value="Disabled" />
+        <div className="card flex justify-content-center">
+            <InputTextarea disabled rows={5} cols={30} value="Disabled" />
+        </div>
     )
 }
         `
@@ -32,9 +36,7 @@ export default function DisabledDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    <i>disabled</i> prop prevents a textarea from being editable.
-                </p>
+                <p>When <i>disabled</i> is present, the element cannot be edited and focused.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <InputTextarea disabled rows={5} cols={30} value="Disabled" />

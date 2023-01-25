@@ -8,12 +8,12 @@ import { AutoResizeDoc } from '../../components/doc/inputtextarea/autoresizedoc'
 import { BasicDoc } from '../../components/doc/inputtextarea/basicdoc';
 import { DisabledDoc } from '../../components/doc/inputtextarea/disableddoc';
 import { FloatLabelDoc } from '../../components/doc/inputtextarea/floatlabeldoc';
+import { FormikDoc } from '../../components/doc/inputtextarea/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/inputtextarea/form/hookformdoc';
 import { ImportDoc } from '../../components/doc/inputtextarea/importdoc';
 import { InvalidDoc } from '../../components/doc/inputtextarea/invaliddoc';
 import { KeyFilterDoc } from '../../components/doc/inputtextarea/keyfilterdoc';
 import { StyleDoc } from '../../components/doc/inputtextarea/styledoc';
-import { FormikDoc } from '../../components/doc/inputtextarea/form/formikdoc';
-import { HookFormDoc } from '../../components/doc/inputtextarea/form/hookformdoc';
 
 const InputTextareaDemo = () => {
     const docs = [
@@ -28,6 +28,11 @@ const InputTextareaDemo = () => {
             component: BasicDoc
         },
         {
+            id: 'floatlabel',
+            label: 'Float Label',
+            component: FloatLabelDoc
+        },
+        {
             id: 'autoresize',
             label: 'Auto Resize',
             component: AutoResizeDoc
@@ -36,11 +41,6 @@ const InputTextareaDemo = () => {
             id: 'keyfilter',
             label: 'Key Filter',
             component: KeyFilterDoc
-        },
-        {
-            id: 'floatlabel',
-            label: 'Float Label',
-            component: FloatLabelDoc
         },
         {
             id: 'invalid',
