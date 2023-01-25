@@ -8,7 +8,7 @@
  *
  * - {@link AccordionTab}
  *
- * @module accordion-primereact
+ * @module accordion
  *
  */
 import * as React from 'react';
