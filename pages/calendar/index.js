@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { AccessibilityDoc } from '../../components/doc/calendar/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/calendar/apidoc';
+
 import { BasicDoc } from '../../components/doc/calendar/basicdoc';
 import { ButtonBarDoc } from '../../components/doc/calendar/buttonbardoc';
 import { DateFormatDoc } from '../../components/doc/calendar/dateformatdoc';
@@ -154,7 +154,7 @@ const CalendarDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Calendar', pathname: '/modules/calendar.html' }]
         }
     ];
 

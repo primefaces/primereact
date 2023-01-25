@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/fieldset/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/fieldset/apidoc';
 import { BasicDoc } from '../../components/doc/fieldset/basicdoc';
 import { ImportDoc } from '../../components/doc/fieldset/importdoc';
 import { StyleDoc } from '../../components/doc/fieldset/styledoc';
@@ -45,7 +44,7 @@ const FieldsetDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Fieldset', pathname: '/modules/fieldset.html' }]
         }
     ];
 

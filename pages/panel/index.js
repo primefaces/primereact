@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/panel/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/panel/apidoc';
 import { BasicDoc } from '../../components/doc/panel/basicdoc';
 import { ImportDoc } from '../../components/doc/panel/importdoc';
 import { StyleDoc } from '../../components/doc/panel/styledoc';
@@ -45,7 +44,7 @@ const PanelDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Panel', pathname: '/modules/panel.html' }]
         }
     ];
 

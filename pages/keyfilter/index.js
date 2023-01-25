@@ -5,13 +5,11 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/keyfilter/accessibilitydoc';
 import { AlphabeticDoc } from '../../components/doc/keyfilter/alphabeticdoc';
 import { AlphanumbericDoc } from '../../components/doc/keyfilter/alphanumberdoc';
-import { ApiDoc } from '../../components/doc/keyfilter/apidoc';
 import { HexDoc } from '../../components/doc/keyfilter/hexdoc';
 import { IntegersDoc } from '../../components/doc/keyfilter/integersdoc';
 import { MoneyDoc } from '../../components/doc/keyfilter/moneydoc';
 import { NumbersDoc } from '../../components/doc/keyfilter/numbersdoc';
 import { RegexDoc } from '../../components/doc/keyfilter/regexdoc';
-
 import { ImportDoc } from '../../components/doc/keyfilter/importdoc';
 
 const KeyFilterDemo = () => {
@@ -64,7 +62,7 @@ const KeyFilterDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'KeyFilter', pathname: '/modules/keyfilter.html' }]
         }
     ];
 

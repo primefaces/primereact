@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/tieredmenu/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/tieredmenu/apidoc';
 import { BasicDoc } from '../../components/doc/tieredmenu/basicdoc';
 import { ImportDoc } from '../../components/doc/tieredmenu/importdoc';
 import { PopupDoc } from '../../components/doc/tieredmenu/popupdoc';
@@ -39,7 +38,7 @@ const TieredMenuDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'TieredMenu', pathname: '/modules/tieredmenu.html' }]
         }
     ];
 

@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/tabmenu/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/tabmenu/apidoc';
 import { BasicDoc } from '../../components/doc/tabmenu/basicdoc';
 import { ControlledDoc } from '../../components/doc/tabmenu/controlleddoc';
 import { ImportDoc } from '../../components/doc/tabmenu/importdoc';
@@ -39,7 +38,7 @@ const TabMenuDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'TabMenu', pathname: '/modules/tabmenu.html' }]
         }
     ];
 

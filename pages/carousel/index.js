@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { AccessibilityDoc } from '../../components/doc/carousel/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/carousel/apidoc';
 import { BasicDoc } from '../../components/doc/carousel/basicdoc';
 import { CircularDoc } from '../../components/doc/carousel/circulardoc';
 import { ImportDoc } from '../../components/doc/carousel/importdoc';
@@ -57,7 +56,7 @@ const CarouselDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Carousel', pathname: '/modules/carousel.html' }]
         }
     ];
 

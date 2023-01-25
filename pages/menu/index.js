@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/menu/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/menu/apidoc';
 import { BasicDoc } from '../../components/doc/menu/basicdoc';
 import { GroupDoc } from '../../components/doc/menu/groupdoc';
 import { ImportDoc } from '../../components/doc/menu/importdoc';
@@ -51,7 +50,7 @@ const MenuDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Menu', pathname: '/modules/menu.html' }]
         }
     ];
 

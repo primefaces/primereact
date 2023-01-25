@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/toast/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/toast/apidoc';
 import { BasicDoc } from '../../components/doc/toast/basicdoc';
 import { ImportDoc } from '../../components/doc/toast/importdoc';
 import { MultipleDoc } from '../../components/doc/toast/multipledoc';
@@ -63,7 +62,7 @@ const ToastDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Toast', pathname: '/modules/toast.html' }]
         }
     ];
 

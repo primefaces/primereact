@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import React from 'react';
 import { AccessibilityDoc } from '../../components/doc/blockui/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/blockui/apidoc';
 import { BasicDoc } from '../../components/doc/blockui/basicdoc';
 import { DocumentDoc } from '../../components/doc/blockui/documentdoc';
 import { ImportDoc } from '../../components/doc/blockui/importdoc';
@@ -46,7 +45,7 @@ const BlockUIDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'BlockUI', pathname: '/modules/blockui.html' }]
         }
     ];
 

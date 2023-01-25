@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/splitbutton/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/splitbutton/apidoc';
 import { BasicDoc } from '../../components/doc/splitbutton/basic';
 import { DisabledDoc } from '../../components/doc/splitbutton/disableddoc';
 import { ImportDoc } from '../../components/doc/splitbutton/importdoc';
@@ -87,7 +86,7 @@ const SplitButtonDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'SplitButton', pathname: '/modules/splitbutton.html' }]
         }
     ];
 

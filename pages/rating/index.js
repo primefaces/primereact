@@ -4,7 +4,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/rating/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/rating/apidoc';
 import { BasicDoc } from '../../components/doc/rating/basicdoc';
 import { DisabledDoc } from '../../components/doc/rating/disableddoc';
 import { ImportDoc } from '../../components/doc/rating/importdoc';
@@ -65,7 +64,7 @@ const RatingDemo = () => {
             id: 'api',
             label: 'API',
             type: 'api',
-            component: ApiDoc
+            doc: [{ name: 'Rating', pathname: '/modules/rating.html' }]
         }
     ];
 

@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/dialog/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/dialog/apidoc';
 import { BasicDoc } from '../../components/doc/dialog/basicdoc';
 import { FooterDoc } from '../../components/doc/dialog/footerdoc';
 import { ImportDoc } from '../../components/doc/dialog/importdoc';
@@ -69,7 +68,7 @@ const DialogDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Dialog', pathname: '/modules/dialog.html' }]
         }
     ];
 

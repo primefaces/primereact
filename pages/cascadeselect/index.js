@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import React from 'react';
 import { AccessibilityDoc } from '../../components/doc/cascadeselect/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/cascadeselect/apidoc';
+
 import { BasicDoc } from '../../components/doc/cascadeselect/basicdoc';
 import { DisabledDoc } from '../../components/doc/cascadeselect/disableddoc';
 import { FloatLabelDoc } from '../../components/doc/cascadeselect/floatlabeldoc';
@@ -77,7 +77,7 @@ const CascadeSelectDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'CascadeSelect', pathname: '/modules/cascadeselect.html' }]
         }
     ];
 

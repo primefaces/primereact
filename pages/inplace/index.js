@@ -4,7 +4,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/inplace/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/inplace/apidoc';
 import { BasicDoc } from '../../components/doc/inplace/basicdoc';
 import { ImageDoc } from '../../components/doc/inplace/imagedoc';
 import { ImportDoc } from '../../components/doc/inplace/importdoc';
@@ -52,7 +51,11 @@ const ChipDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [
+                { name: 'Inplace', pathname: '/modules/inplace.html' },
+                { name: 'InplaceDisplay', pathname: '/classes/inplace.InplaceDisplay.html' },
+                { name: 'InplaceContent', pathname: '/classes/inplace.InplaceContent.html' }
+            ]
         }
     ];
 

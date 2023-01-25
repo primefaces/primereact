@@ -3,7 +3,7 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/dropdown/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/dropdown/apidoc';
+
 import { BasicDoc } from '../../components/doc/dropdown/basicdoc';
 import { ClearIconDoc } from '../../components/doc/dropdown/clearicondoc';
 import { DisabledDoc } from '../../components/doc/dropdown/disableddoc';
@@ -120,7 +120,7 @@ const DropdownDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Dropdown', pathname: '/modules/dropdown.html' }]
         }
     ];
 

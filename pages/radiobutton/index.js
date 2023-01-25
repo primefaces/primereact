@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import React from 'react';
-import { ApiDoc } from '../../components/doc/checkbox/apidoc';
 import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
@@ -71,7 +70,7 @@ const RadioButtonDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'RadioButton', pathname: '/modules/radiobutton.html' }]
         }
     ];
 

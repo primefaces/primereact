@@ -3,7 +3,7 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/confirmpopup/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/confirmpopup/apidoc';
+
 import { BasicDoc } from '../../components/doc/confirmpopup/basicdoc';
 import { DeclarativeDoc } from '../../components/doc/confirmpopup/declarativedoc';
 import { ImportDoc } from '../../components/doc/confirmpopup/importdoc';
@@ -39,7 +39,7 @@ const ConfirmPopupDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'ConfirmPopup', pathname: '/modules/confirmpopup.html' }]
         }
     ];
 

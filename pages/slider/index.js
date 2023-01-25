@@ -4,7 +4,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/slider/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/slider/apidoc';
 import { BasicDoc } from '../../components/doc/slider/basicdoc';
 import { ImportDoc } from '../../components/doc/slider/importdoc';
 import { InputDoc } from '../../components/doc/slider/inputdoc';
@@ -58,7 +57,7 @@ const SliderDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Slider', pathname: '/modules/slider.html' }]
         }
     ];
 

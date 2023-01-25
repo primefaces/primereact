@@ -4,7 +4,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/progressspinner/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/progressspinner/apidoc';
 import { BasicDoc } from '../../components/doc/progressspinner/basicdoc';
 import { CustomDoc } from '../../components/doc/progressspinner/customdoc';
 import { ImportDoc } from '../../components/doc/progressspinner/importdoc';
@@ -40,7 +39,7 @@ const SkeletonDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'ProgressSpinner', pathname: '/modules/progressspinner.html' }]
         }
     ];
 

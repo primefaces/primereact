@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/tabview/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/tabview/apidoc';
 import { BasicDoc } from '../../components/doc/tabview/basicdoc';
 import { ClosableDoc } from '../../components/doc/tabview/closabledoc';
 import { ControlledDoc } from '../../components/doc/tabview/controlleddoc';
@@ -69,7 +68,10 @@ const TabViewDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [
+                { name: 'TabView', pathname: '/modules/tabview.html' },
+                { name: 'TabPanel', pathname: '/classes/tabview.TabPanel.html' }
+            ]
         }
     ];
 

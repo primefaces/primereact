@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/treeselect/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/treeselect/apidoc';
 import { BasicDoc } from '../../components/doc/treeselect/basicdoc';
 import { CheckboxDoc } from '../../components/doc/treeselect/checkboxdoc';
 import { DefaultDoc } from '../../components/doc/treeselect/defaultdoc';
@@ -94,7 +93,7 @@ const TreeSelectDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'TreeSelect', pathname: '/modules/treeselect.html' }]
         }
     ];
 

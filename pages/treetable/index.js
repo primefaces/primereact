@@ -4,7 +4,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/treetable/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/treetable/apidoc';
 import { BasicDoc } from '../../components/doc/treetable/basicdoc';
 import { ColGroupDoc } from '../../components/doc/treetable/colgroupdoc';
 import { ColToggleDoc } from '../../components/doc/treetable/coltoggledoc';
@@ -239,7 +238,10 @@ const TreeTableDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [
+                { name: 'TreeTable', pathname: '/modules/treetable.html' },
+                { name: 'Column', pathname: '/modules/column.html' }
+            ]
         }
     ];
 

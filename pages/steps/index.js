@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/steps/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/steps/apidoc';
 import { BasicDoc } from '../../components/doc/steps/basicdoc';
 import { ImportDoc } from '../../components/doc/steps/importdoc';
 import { InteractiveDoc } from '../../components/doc/steps/interactivedoc';
@@ -39,7 +38,7 @@ const StepsDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Steps', pathname: '/modules/steps.html' }]
         }
     ];
 

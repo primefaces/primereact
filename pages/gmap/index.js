@@ -4,7 +4,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/gmap/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/gmap/apidoc';
 import { GMapDoc } from '../../components/doc/gmap/gmapdoc';
 import { ImportDoc } from '../../components/doc/gmap/importdoc';
 import { StyleDoc } from '../../components/doc/gmap/styledoc';
@@ -34,7 +33,7 @@ const GMapDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'GMap', pathname: '/modules/gmap.html' }]
         }
     ];
 

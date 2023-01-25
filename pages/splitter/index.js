@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/splitter/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/splitter/apidoc';
 import { HorizontalDoc } from '../../components/doc/splitter/horizontaldoc';
 import { ImportDoc } from '../../components/doc/splitter/importdoc';
 import { NestedDoc } from '../../components/doc/splitter/nesteddoc';
@@ -51,7 +50,10 @@ const SplitterDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [
+                { name: 'Splitter', pathname: '/modules/splitter.html' },
+                { name: 'SplitterPanel', pathname: '/classes/splitter.SplitterPanel.html' }
+            ]
         }
     ];
 

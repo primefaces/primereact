@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/datascroller/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/datascroller/apidoc';
 import { BasicDoc } from '../../components/doc/datascroller/basicdoc';
 import { ImportDoc } from '../../components/doc/datascroller/importdoc';
 import { InlineDataScrollerDoc } from '../../components/doc/datascroller/inlinedoc';
@@ -45,7 +44,7 @@ const DataScrollerDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'DataScroller', pathname: '/modules/datascroller.html' }]
         }
     ];
 

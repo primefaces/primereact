@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import React from 'react';
 import { AccessibilityDoc } from '../../components/doc/chips/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/chips/apidoc';
+
 import { BasicDoc } from '../../components/doc/chips/basicdoc';
 import { DisabledDoc } from '../../components/doc/chips/disableddoc';
 import { FloatLabelDoc } from '../../components/doc/chips/floatlabeldoc';
@@ -89,7 +89,7 @@ const ChipsDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Chips', pathname: '/modules/chips.html' }]
         }
     ];
 

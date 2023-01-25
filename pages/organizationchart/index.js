@@ -4,7 +4,6 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/organizationchart/accessibilitydoc';
 import { AdvancedDoc } from '../../components/doc/organizationchart/advanceddoc';
-import { ApiDoc } from '../../components/doc/organizationchart/apidoc';
 import { BasicDoc } from '../../components/doc/organizationchart/basicdoc';
 import { ImportDoc } from '../../components/doc/organizationchart/importdoc';
 import { StyleDoc } from '../../components/doc/organizationchart/styledoc';
@@ -39,7 +38,7 @@ const OrganizationChartDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'OrganizationChart', pathname: '/modules/organizationchart.html' }]
         }
     ];
 

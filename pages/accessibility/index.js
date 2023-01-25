@@ -28,7 +28,7 @@ const AccessibilityPage = () => {
                         PrimeTek
                     </a>{' '}
                     teams have initiated a significant process to review and enhance the accessibility features of the components. This guide documents the foundation of the general guidelines that PrimeReact will follow and each component
-                    documentation will have a separate <b>Accessibility</b> section that states the keyboard support, screen reader compatibility, the implementation details along with tips to achieve WCAG compliancy. This work has been completed for 
+                    documentation will have a separate <b>Accessibility</b> section that states the keyboard support, screen reader compatibility, the implementation details along with tips to achieve WCAG compliancy. This work has been completed for
                     PrimeVue as the reference implementation and currently being ported to PrimeReact to be finalized in Q2 2023.
                 </p>
 

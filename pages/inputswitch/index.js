@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/inputswitch/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/inputswitch/apidoc';
 import { BasicDoc } from '../../components/doc/inputswitch/basicdoc';
 import { DisabledDoc } from '../../components/doc/inputswitch/disableddoc';
 import { FormikDoc } from '../../components/doc/inputswitch/form/formikdoc';
@@ -71,7 +70,7 @@ const InputSwitchDemo = () => {
             id: 'api',
             label: 'API',
             type: 'api',
-            component: ApiDoc
+            doc: [{ name: 'InputSwitch', pathname: '/modules/inputswitch.html' }]
         }
     ];
 

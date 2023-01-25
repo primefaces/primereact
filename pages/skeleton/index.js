@@ -4,7 +4,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/skeleton/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/skeleton/apidoc';
 import { CardDoc } from '../../components/doc/skeleton/carddoc';
 import { DataTableDoc } from '../../components/doc/skeleton/datatabledoc';
 import { ImportDoc } from '../../components/doc/skeleton/importdoc';
@@ -52,7 +51,7 @@ const SkeletonDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Skeleton', pathname: '/modules/skeleton.html' }]
         }
     ];
 

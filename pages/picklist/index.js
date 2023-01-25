@@ -4,7 +4,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/picklist/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/picklist/apidoc';
 import { ImportDoc } from '../../components/doc/picklist/importdoc';
 import { PickListDoc } from '../../components/doc/picklist/picklistdoc';
 import { StyleDoc } from '../../components/doc/picklist/styledoc';
@@ -34,7 +33,7 @@ const PickListDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'PickList', pathname: '/modules/picklist.html' }]
         }
     ];
 

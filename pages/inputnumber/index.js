@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/inputnumber/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/inputnumber/apidoc';
 import { ButtonsDoc } from '../../components/doc/inputnumber/buttonsdoc';
 import { CurrencyDoc } from '../../components/doc/inputnumber/currencydoc';
 import { DisabledDoc } from '../../components/doc/inputnumber/disableddoc';
@@ -100,7 +99,7 @@ const InputNumberDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'InputNumber', pathname: '/modules/inputnumber.html' }]
         }
     ];
 

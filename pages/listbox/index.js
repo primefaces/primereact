@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/listbox/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/listbox/apidoc';
 import { DisabledDoc } from '../../components/doc/listbox/disableddoc';
 import { FilterDoc } from '../../components/doc/listbox/filterdoc';
 import { GroupDoc } from '../../components/doc/listbox/groupdoc';
@@ -94,7 +93,7 @@ const ListBoxDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'ListBox', pathname: '/modules/listbox.html' }]
         }
     ];
 

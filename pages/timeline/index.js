@@ -5,7 +5,6 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/timeline/accessibilitydoc';
 import { AlignmentDoc } from '../../components/doc/timeline/aligndoc';
-import { ApiDoc } from '../../components/doc/timeline/apidoc';
 import { CustomizedDoc } from '../../components/doc/timeline/customizeddoc';
 import { HorizontalDoc } from '../../components/doc/timeline/horizontaldoc';
 import { ImportDoc } from '../../components/doc/timeline/importdoc';
@@ -52,7 +51,7 @@ const TimelineDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Timeline', pathname: '/modules/timeline.html' }]
         }
     ];
 

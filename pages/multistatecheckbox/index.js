@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/multistatecheckbox/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/multistatecheckbox/apidoc';
 import { BasicDoc } from '../../components/doc/multistatecheckbox/basicdoc';
 import { DisabledDoc } from '../../components/doc/multistatecheckbox/disableddoc';
 import { ImportDoc } from '../../components/doc/multistatecheckbox/importdoc';
@@ -65,7 +64,7 @@ const MultiStateCheckboxDemo = () => {
             id: 'api',
             label: 'API',
             type: 'api',
-            component: ApiDoc
+            doc: [{ name: 'MultiStateCheckbox', pathname: '/modules/multistatecheckbox.html' }]
         }
     ];
 

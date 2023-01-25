@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/slidemenu/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/slidemenu/apidoc';
 import { BasicDoc } from '../../components/doc/slidemenu/basicdoc';
 import { ImportDoc } from '../../components/doc/slidemenu/importdoc';
 import { PopupDoc } from '../../components/doc/slidemenu/popupdoc';
@@ -39,7 +38,7 @@ const SlideMenuDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Slide Menu', pathname: '/modules/slide menu.html' }]
         }
     ];
 

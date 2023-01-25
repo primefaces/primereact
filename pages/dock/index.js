@@ -4,7 +4,6 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/dock/accessibilitydoc';
 import { AdvancedDoc } from '../../components/doc/dock/advanceddoc';
-import { ApiDoc } from '../../components/doc/dock/apidoc';
 import { BasicDoc } from '../../components/doc/dock/basicdoc';
 import { ImportDoc } from '../../components/doc/dock/importdoc';
 import { StyleDoc } from '../../components/doc/dock/styledoc';
@@ -39,7 +38,7 @@ const DockDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Dock', pathname: '/modules/dock.html' }]
         }
     ];
 

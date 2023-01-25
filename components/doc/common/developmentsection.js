@@ -8,5 +8,5 @@ export const DevelopmentSection = React.memo((props) => {
             </div>
             {props.children}
         </>
-    )
+    );
 });

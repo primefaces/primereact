@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/sidebar/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/sidebar/apidoc';
 import { BasicDoc } from '../../components/doc/sidebar/basicdoc';
 import { FullScreenDoc } from '../../components/doc/sidebar/fullscreendoc';
 import { ImportDoc } from '../../components/doc/sidebar/importdoc';
@@ -57,7 +56,7 @@ const SidebarDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Sidebar', pathname: '/modules/sidebar.html' }]
         }
     ];
 

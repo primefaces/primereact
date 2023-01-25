@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/toolbar/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/toolbar/apidoc';
 import { BasicDoc } from '../../components/doc/toolbar/basicdoc';
 import { ImportDoc } from '../../components/doc/toolbar/importdoc';
 import { StyleDoc } from '../../components/doc/toolbar/styledoc';
@@ -33,7 +32,7 @@ const ToolbarDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Toolbar', pathname: '/modules/toolbar.html' }]
         }
     ];
 

@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import React from 'react';
 import { AccessibilityDoc } from '../../components/doc/badge/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/badge/apidoc';
 import { BasicDoc } from '../../components/doc/badge/basicdoc';
 import { ButtonDoc } from '../../components/doc/badge/buttondoc';
 import { ImportDoc } from '../../components/doc/badge/importdoc';
@@ -58,7 +57,7 @@ const BadgeDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Badge', pathname: '/modules/badge.html' }]
         }
     ];
 

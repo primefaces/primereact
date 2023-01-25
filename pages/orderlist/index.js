@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/orderlist/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/orderlist/apidoc';
 import { BasicDoc } from '../../components/doc/orderlist/basicdoc';
 import { DragDropDoc } from '../../components/doc/orderlist/dragdropdoc';
 import { FilterDoc } from '../../components/doc/orderlist/filterdoc';
@@ -51,7 +50,7 @@ const OrderListDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'OrderList', pathname: '/modules/orderlist.html' }]
         }
     ];
 

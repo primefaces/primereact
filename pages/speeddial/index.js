@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/speeddial/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/speeddial/apidoc';
 import { CircleDoc } from '../../components/doc/speeddial/circledoc';
 import { CustomDoc } from '../../components/doc/speeddial/customdoc';
 import { ImportDoc } from '../../components/doc/speeddial/importdoc';
@@ -69,7 +68,7 @@ const SpeedDialDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Speed Dial', pathname: '/modules/speed dial.html' }]
         }
     ];
 

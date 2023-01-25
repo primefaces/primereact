@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import React from 'react';
 import { AccessibilityDoc } from '../../components/doc/autocomplete/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/autocomplete/apidoc';
+
 import { BasicDoc } from '../../components/doc/autocomplete/basicdoc';
 import { DisabledDoc } from '../../components/doc/autocomplete/disableddoc';
 import { DropdownDoc } from '../../components/doc/autocomplete/dropdowndoc';
@@ -113,7 +113,7 @@ const AutoCompleteDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'AutoComplete', pathname: '/modules/autocomplete.html' }]
         }
     ];
 

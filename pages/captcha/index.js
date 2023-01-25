@@ -1,10 +1,8 @@
 import Head from 'next/head';
 import React from 'react';
 import { AccessibilityDoc } from '../../components/doc/captcha/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/captcha/apidoc';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-
 import { CaptchaDoc } from '../../components/doc/captcha/captchadoc';
 import { ImportDoc } from '../../components/doc/captcha/importdoc';
 import { DocActions } from '../../components/doc/common/docactions';
@@ -29,7 +27,7 @@ const CaptchaDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Captcha', pathname: '/modules/captcha.html' }]
         }
     ];
 

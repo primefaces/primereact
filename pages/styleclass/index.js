@@ -3,8 +3,6 @@ import React from 'react';
 import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/styleclass/apidoc';
-
 import { AnimationDoc } from '../../components/doc/styleclass/animationdoc';
 import { ImportDoc } from '../../components/doc/styleclass/importdoc';
 import { ToggleClassDoc } from '../../components/doc/styleclass/toggleclassdoc';
@@ -29,7 +27,7 @@ const StyleClassDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'StyleClass', pathname: '/modules/styleclass.html' }]
         }
     ];
 

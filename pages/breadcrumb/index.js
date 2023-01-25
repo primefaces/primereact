@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { AccessibilityDoc } from '../../components/doc/breadcrumb/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/breadcrumb/apidoc';
 import { BasicDoc } from '../../components/doc/breadcrumb/basicdoc';
 import { ImportDoc } from '../../components/doc/breadcrumb/importdoc';
 import { StyleDoc } from '../../components/doc/breadcrumb/styledoc';
@@ -39,7 +38,7 @@ const BreadCrumbDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Breadcrumb', pathname: '/modules/breadcrumb.html' }]
         }
     ];
 

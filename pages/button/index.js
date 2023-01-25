@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { AccessibilityDoc } from '../../components/doc/button/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/button/apidoc';
 import { BadgesDoc } from '../../components/doc/button/badgesdoc';
 import { BasicDoc } from '../../components/doc/button/basicdoc';
 import { ButtonSetDoc } from '../../components/doc/button/buttonsetdoc';
@@ -129,7 +128,7 @@ const ButtonDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Button', pathname: '/modules/button.html' }]
         }
     ];
 

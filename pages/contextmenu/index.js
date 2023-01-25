@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/contextmenu/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/contextmenu/apidoc';
 import { BasicDoc } from '../../components/doc/contextmenu/basicdoc';
 import { DocumentDoc } from '../../components/doc/contextmenu/documentdoc';
 import { ImportDoc } from '../../components/doc/contextmenu/importdoc';
@@ -39,7 +38,7 @@ const ContextMenuDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'ContextMenu', pathname: '/modules/contextmenu.html' }]
         }
     ];
 

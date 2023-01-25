@@ -4,7 +4,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/ripple/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/ripple/apidoc';
 import { CustomDoc } from '../../components/doc/ripple/customdoc';
 import { DefaultDoc } from '../../components/doc/ripple/defaultdoc';
 import { ImportDoc } from '../../components/doc/ripple/importdoc';
@@ -40,7 +39,7 @@ const RippleDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Ripple', pathname: '/modules/ripple.html' }]
         }
     ];
 

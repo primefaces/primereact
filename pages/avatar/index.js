@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import React from 'react';
 import { AccessibilityDoc } from '../../components/doc/avatar/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/avatar/apidoc';
 import { AvatarGroupDoc } from '../../components/doc/avatar/avatargroupdoc';
 import { IconDoc } from '../../components/doc/avatar/icondoc';
 import { ImageDoc } from '../../components/doc/avatar/imagedoc';
@@ -58,7 +57,7 @@ const AvatarDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Avatar', pathname: '/modules/avatar.html' }]
         }
     ];
 

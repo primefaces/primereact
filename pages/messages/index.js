@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/messages/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/messages/apidoc';
 import { BasicDoc } from '../../components/doc/messages/basicdoc';
 import { ClosableDoc } from '../../components/doc/messages/closeabledoc';
 import { DynamicDoc } from '../../components/doc/messages/dynamicdoc';
@@ -63,7 +62,7 @@ const MessagesDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Messages', pathname: '/modules/messages.html' }]
         }
     ];
 

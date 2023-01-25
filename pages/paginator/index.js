@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/paginator/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/paginator/apidoc';
 import { BasicDoc } from '../../components/doc/paginator/basicdoc';
 import { ContentDoc } from '../../components/doc/paginator/contentdoc';
 import { CustomDoc } from '../../components/doc/paginator/customdoc';
@@ -45,7 +44,7 @@ const PaginatorDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Paginator', pathname: '/modules/paginator.html' }]
         }
     ];
 

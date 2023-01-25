@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/scrollpanel/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/scrollpanel/apidoc';
 import { BasicDoc } from '../../components/doc/scrollpanel/basicdoc';
 import { CustomDemo } from '../../components/doc/scrollpanel/customdoc';
 import { ImportDoc } from '../../components/doc/scrollpanel/importdoc';
@@ -39,7 +38,7 @@ const ScrollPanelDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'ScrollPanel', pathname: '/modules/scrollpanel.html' }]
         }
     ];
 

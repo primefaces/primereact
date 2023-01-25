@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import { AccessibilityDoc } from '../../components/doc/card/accessibilitydoc';
 import { AdvancedDoc } from '../../components/doc/card/advanceddoc';
-import { ApiDoc } from '../../components/doc/card/apidoc';
 import { BasicDoc } from '../../components/doc/card/basicdoc';
 import { ImportDoc } from '../../components/doc/card/importdoc';
 import { StyleDoc } from '../../components/doc/card/styledoc';
@@ -39,7 +38,7 @@ const CardDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Card', pathname: '/modules/card.html' }]
         }
     ];
 

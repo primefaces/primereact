@@ -4,7 +4,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/tag/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/tag/apidoc';
 import { BasicDoc } from '../../components/doc/tag/basicdoc';
 import { IconDoc } from '../../components/doc/tag/icondoc';
 import { ImportDoc } from '../../components/doc/tag/importdoc';
@@ -58,7 +57,7 @@ const TerminalDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Tag', pathname: '/modules/tag.html' }]
         }
     ];
 

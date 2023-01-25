@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/megamenu/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/megamenu/apidoc';
 import { BasicDoc } from '../../components/doc/megamenu/basicdoc';
 import { ImportDoc } from '../../components/doc/megamenu/importdoc';
 import { StyleDoc } from '../../components/doc/megamenu/styledoc';
@@ -45,7 +44,7 @@ const MegaMenuDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'MegaMenu', pathname: '/modules/megamenu.html' }]
         }
     ];
 

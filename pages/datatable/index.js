@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/datatable/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/datatable/apidoc';
 import { BasicDoc } from '../../components/doc/datatable/basicdoc';
 import { ColGroupDoc } from '../../components/doc/datatable/colgroupdoc';
 import { ChooseResizableColumnsDoc } from '../../components/doc/datatable/colresize/chooseresizablecolumnsdoc';
@@ -442,7 +441,11 @@ const DataTableDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [
+                { name: 'DataTable', pathname: '/modules/datatable.html' },
+                { name: 'Column', pathname: '/modules/column.html' },
+                { name: 'ColumnGroup', pathname: '/modules/columngroup.html' }
+            ]
         }
     ];
 

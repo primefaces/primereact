@@ -4,7 +4,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/progressbar/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/progressbar/apidoc';
 import { BasicDoc } from '../../components/doc/progressbar/basicdoc';
 import { DynamicDoc } from '../../components/doc/progressbar/dynamicdoc';
 import { ImportDoc } from '../../components/doc/progressbar/importdoc';
@@ -52,7 +51,7 @@ const ProgressBarDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'ProgressBar', pathname: '/modules/progressbar.html' }]
         }
     ];
 

@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import React from 'react';
 import { AccessibilityDoc } from '../../components/doc/checkbox/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/checkbox/apidoc';
+
 import { BasicDoc } from '../../components/doc/checkbox/basicdoc';
 import { DisabledDoc } from '../../components/doc/checkbox/disableddoc';
 import { DynamicDoc } from '../../components/doc/checkbox/dynamicdoc';
@@ -77,7 +77,7 @@ const CheckboxDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Checkbox', pathname: '/modules/checkbox.html' }]
         }
     ];
 

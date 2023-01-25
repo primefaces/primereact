@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { AccessibilityDoc } from '../../components/doc/colorpicker/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/colorpicker/apidoc';
+
 import { DisabledDoc } from '../../components/doc/colorpicker/disableddoc';
 import { FormikDoc } from '../../components/doc/colorpicker/form/formikdoc';
 import { HookFormDoc } from '../../components/doc/colorpicker/form/hookformdoc';
@@ -70,7 +70,7 @@ const ColorPickerDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'ColorPicker', pathname: '/modules/colorpicker.html' }]
         }
     ];
 

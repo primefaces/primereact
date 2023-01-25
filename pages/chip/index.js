@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import React from 'react';
 import { AccessibilityDoc } from '../../components/doc/chip/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/chip/apidoc';
 import { BasicDoc } from '../../components/doc/chip/basicdoc';
 import { IconDoc } from '../../components/doc/chip/icondoc';
 import { ImageDoc } from '../../components/doc/chip/imagedoc';
@@ -52,7 +51,7 @@ const ChipDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Chip', pathname: '/modules/chip.html' }]
         }
     ];
 
