@@ -4,7 +4,7 @@ import { Avatar } from '../../lib/avatar/Avatar';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 import { Toast } from '../../lib/toast/Toast';
-import { classNames } from '../../lib/utils/utils';
+import { classNames } from '../../lib/utils/Utils';
 
 export function TemplateDoc(props) {
     const toast = useRef(null);

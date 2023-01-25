@@ -3,7 +3,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { Button } from '../../../lib/button/Button';
 import { MultiStateCheckbox } from '../../../lib/multistatecheckbox/MultiStateCheckbox';
 import { Toast } from '../../../lib/toast/Toast';
-import { classNames } from '../../../lib/utils/utils';
+import { classNames } from '../../../lib/utils/Utils';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 

@@ -5,7 +5,7 @@ import { CascadeSelect } from '../../../lib/cascadeselect/CascadeSelect';
 import { Toast } from '../../../lib/toast/Toast';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
-import { classNames } from '../../../lib/utils/utils';
+import { classNames } from '../../../lib/utils/Utils';
 
 export function FormikDoc(props) {
     const toast = useRef(null);

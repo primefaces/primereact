@@ -3,7 +3,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { Button } from '../../../lib/button/Button';
 import { Toast } from '../../../lib/toast/Toast';
 import { ToggleButton } from '../../../lib/togglebutton/ToggleButton';
-import { classNames } from '../../../lib/utils/utils';
+import { classNames } from '../../../lib/utils/Utils';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 
