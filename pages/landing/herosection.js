@@ -46,7 +46,7 @@ const HeroSection = () => {
                                 <img src={`${contextPath}/images/landing-new/core-icon.svg`} alt="primereact core" />
                                 <div className="name">
                                     <b>Open Source</b>
-                                    <span>80+ UI Components</span>
+                                    <span>90+ UI Components</span>
                                 </div>
                             </div>
                         </div>
@@ -76,7 +76,7 @@ const HeroSection = () => {
                                 <img src={`${contextPath}/images/landing-new/blocks-icon.svg`} alt="primereact templates" />
                                 <div className="name">
                                     <b>Prime Blocks</b>
-                                    <span>280+ UI Blocks</span>
+                                    <span>400+ UI Blocks</span>
                                 </div>
                             </div>
                         </div>
