@@ -1,29 +1,20 @@
-import React, { useState, useEffect, useRef } from 'react';
 import getConfig from 'next/config';
-import { DataTable } from '../../lib/datatable/DataTable';
-import { Column } from '../../lib/column/Column';
+import React, { useEffect, useRef, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 import { Button } from '../../lib/button/Button';
+import { Column } from '../../lib/column/Column';
+import { DataTable } from '../../lib/datatable/DataTable';
 import { Rating } from '../../lib/rating/Rating';
 import { Toast } from '../../lib/toast/Toast';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function RowExpandDoc(props) {
     const [products, setProducts] = useState([]);
     const [expandedRows, setExpandedRows] = useState(null);
     const toast = useRef(null);
     const isMounted = useRef(false);
-
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
-
-    useEffect(() => {
-        if (isMounted.current) {
-            const summary = expandedRows !== null ? 'All Rows Expanded' : 'All Rows Collapsed';
-
-            toast.current.show({ severity: 'success', summary: `${summary}`, life: 3000 });
-        }
-    }, [expandedRows]);
 
     useEffect(() => {
         isMounted.current = true;
@@ -139,14 +130,6 @@ const RowExpandDoc = () => {
     const toast = useRef(null);
     const isMounted = useRef(false);
     
-
-    useEffect(() => {
-        if (isMounted.current) {
-            const summary = expandedRows !== null ? 'All Rows Expanded' : 'All Rows Collapsed';
-            toast.current.show({severity: 'success', summary: \`\${summary}\`, life: 3000});
-        }
-    }, [expandedRows]);
-
     useEffect(() => {
         isMounted.current = true;
         ProductService.getProductsWithOrdersSmall().then(data => setProducts(data));
@@ -264,14 +247,6 @@ const RowExpandDoc = () => {
     const toast = useRef(null);
     const isMounted = useRef(false);
     
-
-    useEffect(() => {
-        if (isMounted.current) {
-            const summary = expandedRows !== null ? 'All Rows Expanded' : 'All Rows Collapsed';
-            toast.current.show({severity: 'success', summary: \`\${summary}\`, life: 3000});
-        }
-    }, [expandedRows]);
-
     useEffect(() => {
         isMounted.current = true;
         ProductService.getProductsWithOrdersSmall().then(data => setProducts(data));
