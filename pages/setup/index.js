@@ -80,7 +80,7 @@ import { Button } from 'primereact/button';
                     Other alternative is utilizing the components directly within the browser with the <i>iife</i> build. Note that PrimeReact does not provide a <i>umd</i> build. The core.min.js is required. It includes shared components and
                     structures; utils, api, ripple, portal, keyfilter, tooltip, virtualscroller, terminalservice, overlayservice, checkbox, button, inputtext, inputnumber, messages, progressbar, dropdown, dialog, paginator and tree.
                 </p>
-                <CodeHighlight lang="js">
+                <CodeHighlight lang="html">
                     {`
 <!DOCTYPE html>
 <html lang="en">

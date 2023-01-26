@@ -12,6 +12,7 @@
     .doc-section-label {
         display: flex;
         align-items: center;
+        scroll-margin-top: 6.5rem;
 
         > a {
             font-size: 1.25rem;
@@ -35,7 +36,7 @@
 
     .doc-section-description {
         font-size: 1.125rem;
-        
+
         i {
             background-color: var(--primary-100);
             color: var(--primary-900);
@@ -57,7 +58,7 @@
         &.main{
             margin-bottom: 1rem;
         }
-        
+
     }
 
     .doc-tablewrapper {
@@ -69,35 +70,35 @@
         width: 100%;
         background-color: var(--surface-card);
         margin-bottom: 1.5rem;
-    
+
         th {
             border-bottom: 1px solid var(--surface-border);
             padding: 1rem;
             text-align: left;
         }
-    
+
         tbody {
             tr:hover {
                 background: var(--surface-hover);
             }
-    
+
             td {
                 padding: 1rem;
                 border-bottom: 1px solid var(--surface-border);
-    
+
                 &:first-child {
                     font-family: ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,Liberation Mono,monospace;
                     font-weight: 700;
                     color: var(--text-color-secondary);
                 }
-    
+
                 &:nth-child(2):not(:last-child) {
                     color: var(--primary-color);
                     font-weight: 600;
                 }
             }
         }
-    
+
         &.browsers {
             td {
                 &:first-child {
@@ -153,7 +154,7 @@
         padding: 0;
         flex-grow: 1;
         flex-shrink: 1;
-        flex-basis: auto;   
+        flex-basis: auto;
         li{
             &.navbar-child-item{
                 border-left: 5rem;
@@ -182,7 +183,7 @@
         }
         }
     }
-   
+
 }
 
 .doc-section-code-tooltip .p-tooltip-text {

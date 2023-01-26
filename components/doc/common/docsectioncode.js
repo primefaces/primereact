@@ -31,17 +31,23 @@ export function DocSectionCode(props) {
                             className={classNames('p-button-rounded p-button-text p-button-plain h-2rem w-2rem p-0 inline-flex align-items-center justify-content-center', { 'doc-section-code-active text-primary': codeLang === 'javascript' })}
                             label="JS"
                             onClick={() => setCodeLang('javascript')}
+                            tooltip="JavaScript Code"
+                            tooltipOptions={{ position: 'bottom', className: 'doc-section-code-tooltip' }}
                         ></Button>
                         <Button
                             className={classNames('p-button-rounded p-button-text p-button-plain h-2rem w-2rem p-0 inline-flex align-items-center justify-content-center', { 'doc-section-code-active text-primary': codeLang === 'typescript' })}
                             label="TS"
                             onClick={() => setCodeLang('typescript')}
+                            tooltip="TypeScript Code"
+                            tooltipOptions={{ position: 'bottom', className: 'doc-section-code-tooltip' }}
                         ></Button>
                         {props.code.php ? (
                             <Button
                                 className={classNames('p-button-rounded p-button-text p-button-plain h-2rem w-2rem p-0 inline-flex align-items-center justify-content-center', { 'doc-section-code-active text-primary': codeLang === 'php' })}
                                 label="PHP"
                                 onClick={() => setCodeLang('php')}
+                                tooltip="Php Code"
+                                tooltipOptions={{ position: 'bottom', className: 'doc-section-code-tooltip' }}
                             ></Button>
                         ) : null}
                     </>
