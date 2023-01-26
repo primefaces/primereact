@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { DeferredContent } from '../../lib/deferredcontent/DeferredContent';
 import { classNames } from '../../lib/utils/Utils';
 import DocApiSection from './docapisection';
 
@@ -33,9 +32,7 @@ export function DocSections({ docs }) {
                                 const Component = component;
 
                                 return (
-                                    <DeferredContent id={id} key={i}>
-                                        <Component id={id} key={label} label={label} level="2" />
-                                    </DeferredContent>
+                                    <Component id={id} key={label} label={label} level="2" />
                                 );
                             })}
                         </React.Fragment>
