@@ -2,7 +2,7 @@
  *
  * @todo Write the documentation.
  *
- * @module utils
+ * @module api
  *
  */
 
