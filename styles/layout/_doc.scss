@@ -127,14 +127,15 @@
     li {
         &.navbar-item{
             border-left-style: solid;
-            border-left-width: 2px;
+            border-left-width: 3px;
             border-color: var(--surface-border);
+            padding: 0.25rem;
+            padding-left: 0.5rem;
+            z-index: 1;
                 button {
+                    font-size: 1.125rem;
                     display: inline;
-                    padding: 0.25rem;
-                    margin-left: 0.5rem;
                     color: var(--text-color);
-                    z-index: 1;
                     &:hover {
                         color: var(--primary-color);
                     }
@@ -158,17 +159,16 @@
         li{
             &.navbar-child-item{
                 border-left: 5rem;
-                border-left-width: 2px;
+                border-left-width: 3px;
                 border-left-style: solid;
                 border-color: var(--surface-border);
+                padding: 0.25rem;
+                padding-left: 0.5rem;
                 z-index: 1;
                 button {
-                    padding: 0.25rem;
-                    margin-left: 0.5rem;
-                    padding-left: 1rem;
-                    font-size: .875rem;
+                    font-size: 1.125rem;
+                    padding-left: 1.5rem;
                     color: var(--text-color);
-                    z-index: 1;
                     &:hover {
                         color: var(--primary-color);
                     }
