@@ -1,3 +1,11 @@
+/**
+ *
+ * @todo Write the documentation.
+ *
+ * @module utils
+ *
+ */
+
 // Config
 export interface ZIndexOptions {
     modal: number;

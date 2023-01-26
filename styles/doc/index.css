@@ -1,3 +1,4 @@
-.tsd-comment:has(img){
+.tsd-panel.tsd-comment:has(img),
+.tsd-comment img {
     display: none !important;
 }
