@@ -13,7 +13,7 @@ export default function Topbar(props) {
         },
         {
             version: 'v8',
-            url: 'https://www.primefaces.org/primereact'
+            url: 'https://www.primefaces.org/primereact-v8'
         },
         {
             version: 'v7',
