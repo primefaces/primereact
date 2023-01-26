@@ -10,6 +10,12 @@
                     "meta": ["get started", "browser support", "cdn", "quickstart", "starter"]
                 },
                 {
+                    "name": "API",
+                    "href": "https://primefaces.github.io/primereact",
+                    "meta": ["api"],
+                    "badge": "new"
+                },
+                {
                     "name": "Examples",
                     "href": "https://github.com/primefaces/primereact-examples",
                     "meta": ["create-react-app", "next.js", "examples", "demo", "quickstart", "starter"]
