@@ -6,7 +6,7 @@ export function AccessibilityDoc() {
     return (
         <DevelopmentSection>
             <DocSectionText id="accessibility" label="Accessibility">
-                <h6>Screen Reader</h6>
+                <h3>Screen Reader</h3>
                 <p>
                     Knob element component uses <i>slider</i> role in addition to the <i>aria-valuemin</i>, <i>aria-valuemax</i> and <i>aria-valuenow</i> attributes. Value to describe the component can be defined using
                     <i>aria-labelledby</i> and <i>aria-label</i> props.
@@ -21,7 +21,7 @@ export function AccessibilityDoc() {
 `}
                 </CodeHighlight>
 
-                <h6>Keyboard Support</h6>
+                <h3>Keyboard Support</h3>
                 <div className="doc-tablewrapper">
                     <table className="doc-table">
                         <thead>

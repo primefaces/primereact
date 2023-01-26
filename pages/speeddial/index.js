@@ -68,7 +68,7 @@ const SpeedDialDemo = () => {
         {
             id: 'api',
             label: 'API',
-            doc: [{ name: 'Speed Dial', pathname: '/modules/speed dial.html' }]
+            doc: [{ name: 'Speed Dial', pathname: '/modules/speeddial.html' }]
         }
     ];
 

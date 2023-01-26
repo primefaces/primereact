@@ -38,7 +38,7 @@ const SlideMenuDemo = () => {
         {
             id: 'api',
             label: 'API',
-            doc: [{ name: 'Slide Menu', pathname: '/modules/slide menu.html' }]
+            doc: [{ name: 'Slide Menu', pathname: '/modules/slidemenu.html' }]
         }
     ];
 

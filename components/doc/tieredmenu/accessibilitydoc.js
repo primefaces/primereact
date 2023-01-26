@@ -5,7 +5,7 @@ export function AccessibilityDoc() {
     return (
         <DevelopmentSection>
             <DocSectionText id="accessibility" label="Accessibility">
-                <h6>Screen Reader</h6>
+                <h3>Screen Reader</h3>
                 <p>
                     TieredMenu component uses the <i>menubar</i> role with <i>aria-orientation</i> set to "vertical" and the value to describe the menu can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. Each list item has
                     a <i>presentation</i> role whereas anchor elements have a <i>menuitem</i> role with <i>aria-label</i> referring to the label of the item and <i>aria-disabled</i> defined if the item is disabled. A submenu within a TieredMenu uses
@@ -17,7 +17,7 @@ export function AccessibilityDoc() {
                     In popup mode, the component implicitly manages the <i>aria-expanded</i>, <i>aria-haspopup</i> and <i>aria-controls</i> attributes of the target element to define the relation between the target and the popup.
                 </p>
 
-                <h6>Keyboard Support</h6>
+                <h3>Keyboard Support</h3>
                 <div className="doc-tablewrapper">
                     <table className="doc-table">
                         <thead>

@@ -444,6 +444,7 @@ const DataTableDemo = () => {
             doc: [
                 { name: 'DataTable', pathname: '/modules/datatable.html' },
                 { name: 'Column', pathname: '/modules/column.html' },
+                { name: 'Row', pathname: '/modules/row.html' },
                 { name: 'ColumnGroup', pathname: '/modules/columngroup.html' }
             ]
         }

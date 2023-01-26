@@ -19,7 +19,7 @@ export function AccessibilityDoc() {
 <ProgressBar aria-label="Status" />
 `}
                 </CodeHighlight>
-                <h6>Keyboard Support</h6>
+                <h3>Keyboard Support</h3>
                 <p>Not applicable.</p>
             </DocSectionText>
         </DevelopmentSection>
