@@ -31,9 +31,7 @@ export function DocSections({ docs }) {
                                 const { id, label, component } = comp;
                                 const Component = component;
 
-                                return (
-                                    <Component id={id} key={label} label={label} level="2" />
-                                );
+                                return <Component id={id} key={label} label={label} level="2" />;
                             })}
                         </React.Fragment>
                     )}
