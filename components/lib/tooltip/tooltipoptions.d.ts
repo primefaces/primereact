@@ -62,7 +62,7 @@ export default interface TooltipOptions {
      */
     disabled?: boolean | undefined;
     /**
-     * Event to show the tooltip, valid values are hover, focus, and both.
+     * Event to show the tooltip.
      * @defaultValue hover
      */
     event?: 'hover' | 'focus' | 'both' | undefined;
@@ -96,7 +96,7 @@ export default interface TooltipOptions {
      */
     my?: string | undefined;
     /**
-     * Position of the tooltip, valid values are mouse, right, left, top and bottom.
+     * Position of the tooltip.
      * @defaultValue right
      */
     position?: 'top' | 'bottom' | 'left' | 'right' | 'mouse' | undefined;
@@ -148,9 +148,139 @@ export default interface TooltipOptions {
 
 declare module 'react' {
     /**
-     * extends React's HTMLAttributes
+     * In addition to HTMLAttributes, the following attributes can be used with Tooltip component.
      */
     interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
-        'data-tooltip'?: string | undefined;
+        /**
+         * Content of the tooltip.
+         * _Note: this feature will be active when there is a PrimeReact {@link tooltip} component on the page._
+         *
+         * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+         */
+        'data-pr-tooltip'?: string | undefined;
+        /**
+         * When present, it specifies that the tooltip should be hidden.
+         * _Note: this feature will be active when there is a PrimeReact {@link tooltip} component on the page._
+         *
+         * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+         */
+        'data-pr-disabled'?: boolean | undefined;
+        /**
+         * Style class of the tooltip.
+         * _Note: this feature will be active when there is a PrimeReact {@link tooltip} component on the page._
+         *
+         * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+         */
+        'data-pr-classname'?: string | undefined;
+        /**
+         * Position of the tooltip.
+         * @defaultValue right
+         * _Note: this feature will be active when there is a PrimeReact {@link tooltip} component on the page._
+         *
+         * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+         */
+        'data-pr-position'?: 'top' | 'bottom' | 'left' | 'right' | 'mouse' | undefined;
+        /**
+         * Defines which position on the tooltip being positioned to align with the target element.
+         * _Note: this feature will be active when there is a PrimeReact {@link tooltip} component on the page._
+         *
+         * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+         */
+        'data-pr-my'?: string | undefined;
+        /**
+         * Defines which position on the target element to align the positioned tooltip.
+         * _Note: this feature will be active when there is a PrimeReact {@link tooltip} component on the page._
+         *
+         * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+         */
+        'data-pr-at'?: string | undefined;
+        /**
+         * Event to show the tooltip.
+         * @defaultValue hover
+         * _Note: this feature will be active when there is a PrimeReact {@link tooltip} component on the page._
+         *
+         * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+         */
+        'data-pr-event'?: 'hover' | 'focus' | 'both' | undefined;
+        /**
+         * Event to show the tooltip if the event property is empty.
+         * @defaultValue mouseenter
+         * _Note: this feature will be active when there is a PrimeReact {@link tooltip} component on the page._
+         *
+         * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+         */
+        'data-pr-showevent'?: string | undefined;
+        /**
+         * Event to hide the tooltip if the event property is empty.
+         * @defaultValue mouseleave
+         * _Note: this feature will be active when there is a PrimeReact {@link tooltip} component on the page._
+         *
+         * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+         */
+        'data-pr-hideevent'?: string | undefined;
+        /**
+         * Whether the tooltip will follow the mouse.
+         * @defaultValue false
+         * _Note: this feature will be active when there is a PrimeReact {@link tooltip} component on the page._
+         *
+         * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+         */
+        'data-pr-mousetrack'?: boolean | undefined;
+        /**
+         * Defines top position of the tooltip in relation to the mouse when the mouseTrack is enabled.
+         * @defaultValue 5
+         * _Note: this feature will be active when there is a PrimeReact {@link tooltip} component on the page._
+         *
+         * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+         */
+        'data-pr-mousetracktop'?: number | undefined;
+        /**
+         * Defines left position of the tooltip in relation to the mouse when the mouseTrack is enabled.
+         * @defaultValue 5
+         * _Note: this feature will be active when there is a PrimeReact {@link tooltip} component on the page._
+         *
+         * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+         */
+        'data-pr-mousetrackleft'?: number | undefined;
+        /**
+         * Delay to show the tooltip in milliseconds.
+         * @defaultValue 0
+         * _Note: this feature will be active when there is a PrimeReact {@link tooltip} component on the page._
+         *
+         * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+         */
+        'data-pr-showdelay'?: number | undefined;
+        /**
+         * Delay to update the tooltip in milliseconds.
+         * @defaultValue 0
+         * _Note: this feature will be active when there is a PrimeReact {@link tooltip} component on the page._
+         *
+         * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+         */
+        'data-pr-updatedelay'?: number | undefined;
+        /**
+         * Delay to hide the tooltip in milliseconds.
+         * @defaultValue 0
+         * _Note: this feature will be active when there is a PrimeReact {@link tooltip} component on the page._
+         *
+         * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+         */
+        'data-pr-hidedelay'?: number | undefined;
+        /**
+         * Whether to hide tooltip when hovering over tooltip content.
+         * @defaultValue true
+         * _Note: this feature will be active when there is a PrimeReact {@link tooltip} component on the page._
+         *
+         * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+         */
+        'data-pr-autohide'?: boolean | undefined;
+        /**
+         * Whether to show tooltip for disabled elements.
+         * @defaultValue false
+         * _Note: this feature will be active when there is a PrimeReact {@link tooltip} component on the page._
+         *
+         * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+         */
+        'data-pr-showondisabled'?: boolean | undefined;
     }
 }

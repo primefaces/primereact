@@ -12,7 +12,7 @@ export function PositionDoc(props) {
 <InputText type="text" placeholder="Mouse" tooltip="Enter your username" tooltipOptions={{ position: 'mouse' }} />
         `,
         javascript: `
-import React from 'react'; 
+import React from 'react';
 import { InputText } from 'primereact/inputtext';
 
 export default function PositionDemo() {
@@ -28,7 +28,7 @@ export default function PositionDemo() {
 }
         `,
         typescript: `
-import React from 'react'; 
+import React from 'react';
 import { InputText } from 'primereact/inputtext';
 
 export default function PositionDemo() {
