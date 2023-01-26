@@ -8,7 +8,6 @@ export function DocSectionNav(props) {
     const [activeTab, setActiveTab] = useState('');
 
     const onButtonClick = (doc) => {
-        setActiveTab(doc.id);
         // Scroll to the clicked button's parent element
         scrollToTheSection(doc.id, 'smooth');
     };
@@ -24,7 +23,6 @@ export function DocSectionNav(props) {
     useEffect(() => {
         const handleHashChange = (url) => {
             const hash = url.split('#')[1];
-
             setActiveTab(hash);
         };
 

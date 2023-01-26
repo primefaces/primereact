@@ -2,12 +2,36 @@ import getConfig from 'next/config';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
-import { VersionService } from '../../service/VersionService';
 import { Badge } from '../lib/badge/Badge';
 
 export default function Topbar(props) {
     const [activeMenuIndex, setActiveMenuIndex] = useState(null);
-    const [versions, setVersions] = useState([]);
+    const versions = [
+        {
+            "version": "v9",
+            "url": "https://www.primereact.org"
+        },
+        {
+            "version": "v8",
+            "url": "https://www.primefaces.org/primereact"
+        },
+        {
+            "version": "v7",
+            "url": "https://www.primefaces.org/primereact-v7"
+        },
+        {
+            "version": "v6",
+            "url": "https://www.primefaces.org/primereact-v6"
+        },
+        {
+            "version": "v5",
+            "url": "https://www.primefaces.org/primereact-v5"
+        },
+        {
+            "version": "v4",
+            "url": "https://www.primefaces.org/primereact-v4"
+        }
+    ];
 
     const onMenuButtonClick = () => {
         props.onMenuButtonClick();
@@ -57,10 +81,6 @@ export default function Topbar(props) {
             unbindOutsideClickListener();
         };
     }, [activeMenuIndex]); // eslint-disable-line react-hooks/exhaustive-deps
-
-    useEffect(() => {
-        VersionService.getVersions().then((data) => setVersions(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const containerElement = useRef(null);
     const scrollListener = useRef();

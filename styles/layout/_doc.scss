@@ -129,11 +129,11 @@
             border-left-style: solid;
             border-left-width: 3px;
             border-color: var(--surface-border);
-            padding: 0.25rem;
-            padding-left: 0.5rem;
             z-index: 1;
                 button {
-                    font-size: 1.125rem;
+                    padding: 0.25rem;
+                    margin-left: .5rem;
+                    font-size: 1rem;
                     display: inline;
                     color: var(--text-color);
                     &:hover {
@@ -162,12 +162,10 @@
                 border-left-width: 3px;
                 border-left-style: solid;
                 border-color: var(--surface-border);
-                padding: 0.25rem;
-                padding-left: 0.5rem;
                 z-index: 1;
                 button {
-                    font-size: 1.125rem;
-                    padding-left: 1.5rem;
+                    padding: 0.25rem;
+                    margin-left: 1.5rem;
                     color: var(--text-color);
                     &:hover {
                         color: var(--primary-color);
