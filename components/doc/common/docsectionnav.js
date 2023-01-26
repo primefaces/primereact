@@ -23,6 +23,7 @@ export function DocSectionNav(props) {
     useEffect(() => {
         const handleHashChange = (url) => {
             const hash = url.split('#')[1];
+
             setActiveTab(hash);
         };
 
