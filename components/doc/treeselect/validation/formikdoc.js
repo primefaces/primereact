@@ -27,7 +27,7 @@ export function FormikDoc(props) {
             let errors = {};
 
             if (!data.item) {
-                errors.item = 'Item is required.';
+                errors.item = 'Value is required.';
             }
 
             return errors;
@@ -87,7 +87,7 @@ export default function FormikDoc() {
             let errors = {};
 
             if (!data.item) {
-                errors.item = 'Item is required.';
+                errors.item = 'Value is required.';
             }
 
             return errors;
@@ -154,7 +154,7 @@ export default function FormikDoc() {
             let errors = {};
 
             if (!data.item) {
-                errors.item = 'Item is required.';
+                errors.item = 'Value is required.';
             }
 
             return errors;
