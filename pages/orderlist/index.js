@@ -69,11 +69,9 @@ const OrderListDemo = () => {
                 <DocActions github="/orderlist" />
             </div>
 
-            <div className="content-section implementation">
-                <div className="content-section doc">
-                    <DocSections docs={docs} />
-                    <DocSectionNav docs={docs} />
-                </div>
+            <div className="content-section doc implementation">
+                <DocSections docs={docs} />
+                <DocSectionNav docs={docs} />
             </div>
         </div>
     );

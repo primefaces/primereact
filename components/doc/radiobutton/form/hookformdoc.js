@@ -2,7 +2,6 @@ import { useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Button } from '../../../lib/button/Button';
 import { RadioButton } from '../../../lib/radiobutton/RadioButton';
-import { classNames } from '../../../lib/utils/Utils';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 import { Toast } from '../../../lib/toast/Toast';
@@ -43,9 +42,9 @@ export function HookFormDoc(props) {
         name="value"
         control={control}
         rules={{ required: 'Value is required.' }}
-        render={({ field, fieldState }) => (
+        render={({ field }) => (
             <>
-                <div className={classNames('mb-2', { 'p-error': fieldState.error })}>Please choose your ingredient.</div>
+                <div>Please choose your ingredient.</div>
                 <div className="flex justify-content-center">
                     <div className="flex align-items-center">
                         <RadioButton inputId="f5" {...field} inputRef={field.ref} value="Cheese" checked={field.value === 'Cheese'} />
@@ -79,7 +78,6 @@ export function HookFormDoc(props) {
 import React, { useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Button } from 'primereact/button';
-import { classNames } from 'primereact/utils';
 import { Toast } from 'primereact/toast';
 import { RadioButton } from "primereact/radiobutton";
 
@@ -116,15 +114,15 @@ export default function HookFormDoc() {
         <div className="card flex justify-content-center ">
             <div className="flex">
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="flex flex-column">
-                    <Toast ref={toast} />
+                    <div className="flex flex-column gap-2">
+                        <Toast ref={toast} />
                         <Controller
                             name="value"
                             control={control}
                             rules={{ required: 'Value is required.' }}
-                            render={({ field, fieldState }) => (
+                            render={({ field }) => (
                                 <>
-                                    <div className={classNames('mb-2', { 'p-error': fieldState.error })}>Please choose your ingredient.</div>
+                                    <div>Please choose your ingredient.</div>
                                     <div className="flex justify-content-center">
                                         <div className="flex align-items-center">
                                             <RadioButton inputId="f5" {...field} inputRef={field.ref} value="Cheese" checked={field.value === 'Cheese'} />
@@ -165,7 +163,6 @@ import React, { useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
-import { classNames } from 'primereact/utils';
 import { RadioButton } from "primereact/radiobutton";
 
 export default function HookFormDoc() {
@@ -201,15 +198,15 @@ export default function HookFormDoc() {
         <div className="card flex justify-content-center ">
             <div className="flex">
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="flex flex-column">
-                    <Toast ref={toast} />
+                    <div className="flex flex-column gap-2">
+                        <Toast ref={toast} />
                         <Controller
                             name="value"
                             control={control}
                             rules={{ required: 'Value is required.' }}
-                            render={({ field, fieldState }) => (
+                            render={({ field }) => (
                                 <>
-                                    <div className={classNames('mb-2', { 'p-error': fieldState.error })}>Please choose your ingredient.</div>
+                                    <div>Please choose your ingredient.</div>
                                     <div className="flex justify-content-center">
                                         <div className="flex align-items-center">
                                             <RadioButton inputId="f5" {...field} inputRef={field.ref} value="Cheese" checked={field.value === 'Cheese'} />
@@ -250,8 +247,9 @@ export default function HookFormDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                {/* TO DO: Add demo content. */}
-                <p></p>
+                <p>
+                    <a href="https://react-hook-form.com/">React Hook Form</a> is another popular React library to handle forms.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center ">
                 <div className="flex">
@@ -262,9 +260,9 @@ export default function HookFormDoc() {
                                 name="value"
                                 control={control}
                                 rules={{ required: 'Value is required.' }}
-                                render={({ field, fieldState }) => (
+                                render={({ field }) => (
                                     <>
-                                        <div className={classNames('mb-2', { 'p-error': fieldState.error })}>Please choose your ingredient.</div>
+                                        <div>Please choose your ingredient.</div>
                                         <div className="flex justify-content-center">
                                             <div className="flex align-items-center">
                                                 <RadioButton inputId="f5" {...field} inputRef={field.ref} value="Cheese" checked={field.value === 'Cheese'} />

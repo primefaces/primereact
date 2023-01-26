@@ -1,8 +1,8 @@
 import { useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Button } from '../../../lib/button/Button';
+import { Password } from '../../../lib/password/Password';
 import { Toast } from '../../../lib/toast/Toast';
-import { TriStateCheckbox } from '../../../lib/tristatecheckbox/TriStateCheckbox';
 import { classNames } from '../../../lib/utils/Utils';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
@@ -11,25 +11,17 @@ export function HookFormDoc(props) {
     const toast = useRef(null);
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: getValues('value').toString() });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: form.getValues('value') });
     };
 
-    const defaultValues = {
-        value: null
-    };
-
-    const {
-        control,
-        formState: { errors },
-        handleSubmit,
-        getValues,
-        reset
-    } = useForm({ defaultValues });
+    const defaultValues = { value: '' };
+    const form = useForm({ defaultValues });
+    const errors = form.formState.errors;
 
     const onSubmit = (data) => {
         data.value && show();
 
-        reset();
+        form.reset();
     };
 
     const getFormErrorMessage = (name) => {
@@ -41,12 +33,14 @@ export function HookFormDoc(props) {
 <Toast ref={toast} />
 <Controller
     name="value"
-    control={control}
-    rules={{ required: 'Value is required.' }}
+    control={form.control}
+    rules={{ required: 'Password is required.' }}
     render={({ field, fieldState }) => (
         <>
-            <TriStateCheckbox id={field.name} value={field.value} ref={field.ref} onChange={field.onChange} className={classNames({ 'p-invalid': fieldState.error })} />
-            <label>* I've read and accept the terms & conditions.</label>
+            <label htmlFor={field.name} className={classNames({ 'p-error': errors.value })}>
+                Password
+            </label>
+            <Password id={field.name} {...field} inputRef={field.ref} className={classNames({ 'p-invalid': fieldState.error })} feedback={false} />
             {getFormErrorMessage(field.name)}
         </>
     )}
@@ -58,32 +52,24 @@ import React, { useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
-import { TriStateCheckbox } from "primereact/tristatecheckbox";
 import { classNames } from 'primereact/utils';
+import { Password } from "primereact/password";
 
 export default function HookFormDoc() {
     const toast = useRef(null);
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: getValues('value').toString() });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: form.getValues('value') });
     };
 
-    const defaultValues = {
-        value: null
-    };
-
-    const {
-        control,
-        formState: { errors },
-        handleSubmit,
-        getValues,
-        reset
-    } = useForm({ defaultValues });
+    const defaultValues = { value: '' };
+    const form = useForm({ defaultValues });
+    const errors = form.formState.errors;
 
     const onSubmit = (data) => {
         data.value && show();
 
-        reset();
+        form.reset();
     };
 
     const getFormErrorMessage = (name) => {
@@ -91,17 +77,19 @@ export default function HookFormDoc() {
     };
 
     return (
-        <div className="card flex flex-column align-items-center">
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column align-items-start justify-content-center gap-2">
+        <div className="card flex justify-content-center">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column gap-2">
                 <Toast ref={toast} />
                 <Controller
                     name="value"
-                    control={control}
-                    rules={{ required: 'Value is required.' }}
+                    control={form.control}
+                    rules={{ required: 'Password is required.' }}
                     render={({ field, fieldState }) => (
                         <>
-                            <TriStateCheckbox id={field.name} value={field.value} ref={field.ref} onChange={field.onChange} className={classNames({ 'p-invalid': fieldState.error })} />
-                            <label>* I've read and accept the terms & conditions.</label>
+                            <label htmlFor={field.name} className={classNames({ 'p-error': errors.value })}>
+                                Password
+                            </label>
+                            <Password id={field.name} {...field} inputRef={field.ref} className={classNames({ 'p-invalid': fieldState.error })} feedback={false} />
                             {getFormErrorMessage(field.name)}
                         </>
                     )}
@@ -117,32 +105,24 @@ import React, { useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
-import { TriStateCheckbox } from "primereact/tristatecheckbox";
 import { classNames } from 'primereact/utils';
+import { Password } from "primereact/password";
 
 export default function HookFormDoc() {
     const toast = useRef(null);
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: getValues('value').toString() });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: form.getValues('value') });
     };
 
-    const defaultValues = {
-        value: null
-    };
-
-    const {
-        control,
-        formState: { errors },
-        handleSubmit,
-        getValues,
-        reset
-    } = useForm({ defaultValues });
+    const defaultValues = { value: '' };
+    const form = useForm({ defaultValues });
+    const errors = form.formState.errors;
 
     const onSubmit = (data) => {
         data.value && show();
 
-        reset();
+        form.reset();
     };
 
     const getFormErrorMessage = (name) => {
@@ -150,17 +130,19 @@ export default function HookFormDoc() {
     };
 
     return (
-        <div className="card flex flex-column align-items-center">
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column align-items-start justify-content-center gap-2">
+        <div className="card flex justify-content-center">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column gap-2">
                 <Toast ref={toast} />
                 <Controller
                     name="value"
-                    control={control}
-                    rules={{ required: 'Value is required.' }}
+                    control={form.control}
+                    rules={{ required: 'Password is required.' }}
                     render={({ field, fieldState }) => (
                         <>
-                            <TriStateCheckbox id={field.name} value={field.value} ref={field.ref} onChange={field.onChange} className={classNames({ 'p-invalid': fieldState.error })} />
-                            <label>* I've read and accept the terms & conditions.</label>
+                            <label htmlFor={field.name} className={classNames({ 'p-error': errors.value })}>
+                                Password
+                            </label>
+                            <Password id={field.name} {...field} inputRef={field.ref} className={classNames({ 'p-invalid': fieldState.error })} feedback={false} />
                             {getFormErrorMessage(field.name)}
                         </>
                     )}
@@ -180,19 +162,19 @@ export default function HookFormDoc() {
                     <a href="https://react-hook-form.com/">React Hook Form</a> is another popular React library to handle forms.
                 </p>
             </DocSectionText>
-            <div className="card flex flex-column align-items-center">
-                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column align-items-start justify-content-center gap-2">
+            <div className="card flex justify-content-center">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column gap-2">
                     <Toast ref={toast} />
                     <Controller
                         name="value"
-                        control={control}
-                        rules={{ required: 'Value is required.' }}
+                        control={form.control}
+                        rules={{ required: 'Password is required.' }}
                         render={({ field, fieldState }) => (
                             <>
-                                <div className="flex align-items-end gap-2">
-                                    <TriStateCheckbox id={field.name} value={field.value} ref={field.ref} onChange={field.onChange} className={classNames({ 'p-invalid': fieldState.error })} />
-                                    <label>* I've read and accept the terms & conditions.</label>
-                                </div>
+                                <label htmlFor={field.name} className={classNames({ 'p-error': errors.value })}>
+                                    Password
+                                </label>
+                                <Password id={field.name} {...field} inputRef={field.ref} className={classNames({ 'p-invalid': fieldState.error })} feedback={false} />
                                 {getFormErrorMessage(field.name)}
                             </>
                         )}

@@ -6,6 +6,7 @@ import { DocSectionText } from '../../common/docsectiontext';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { Button } from '../../../lib/button/Button';
 import { Toast } from '../../../lib/toast/Toast';
+import { classNames } from '../../../lib/utils/Utils';
 
 export function FormikDoc(props) {
     const toast = useRef(null);
@@ -16,7 +17,7 @@ export function FormikDoc(props) {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.item });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: 'The form is successfully submitted.' });
     };
 
     const formik = useFormik({
@@ -54,10 +55,13 @@ export function FormikDoc(props) {
     options={node}
     optionLabel="name"
     placeholder="Select Item"
+    className={classNames({ 'p-invalid': isFormFieldInvalid('item') })}
     onChange={(e) => {
         formik.setFieldValue('item', e.value);
     }}
 />
+{getFormErrorMessage('item')}
+<Button type="submit" label="Submit" />
         `,
         javascript: `
 import React, { useState, useEffect, useRef } from "react";
@@ -76,7 +80,7 @@ export default function FormikDoc() {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.item });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: 'The form is successfully submitted.'});
     };
 
     const formik = useFormik({
@@ -105,8 +109,8 @@ export default function FormikDoc() {
     };
     
     return (
-        <div className="card flex flex-column align-items-center justify-content-center">
-            <form onSubmit={formik.handleSubmit} className="flex flex-column justify-content-center md:w-20rem w-full">
+        <div className="card flex justify-content-center">
+            <form onSubmit={formik.handleSubmit} className="flex flex-column md:w-20rem w-full gap-2">
                 <Toast ref={toast} />
                 <TreeSelect
                     id="item"
@@ -115,12 +119,13 @@ export default function FormikDoc() {
                     options={node}
                     optionLabel="name"
                     placeholder="Select Item"
+                    className={classNames({ 'p-invalid': isFormFieldInvalid('item') })}
                     onChange={(e) => {
                         formik.setFieldValue('item', e.value);
                     }}
                 />
                 {getFormErrorMessage('item')}
-                <Button type="submit" label="Submit" className="mt-2" />
+                <Button type="submit" label="Submit" />
             </form>
         </div>
     )
@@ -143,7 +148,7 @@ export default function FormikDoc() {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.item });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: 'The form is successfully submitted.'});
     };
 
     const formik = useFormik({
@@ -172,8 +177,8 @@ export default function FormikDoc() {
     };
     
     return (
-        <div className="card flex flex-column align-items-center justify-content-center">
-            <form onSubmit={formik.handleSubmit} className="flex flex-column justify-content-center md:w-20rem w-full">
+        <div className="card flex justify-content-center">
+            <form onSubmit={formik.handleSubmit} className="flex flex-column md:w-20rem w-full gap-2">
                 <Toast ref={toast} />
                 <TreeSelect
                     id="item"
@@ -182,12 +187,13 @@ export default function FormikDoc() {
                     options={node}
                     optionLabel="name"
                     placeholder="Select Item"
+                    className={classNames({ 'p-invalid': isFormFieldInvalid('item') })}
                     onChange={(e) => {
                         formik.setFieldValue('item', e.value);
                     }}
                 />
                 {getFormErrorMessage('item')}
-                <Button type="submit" label="Submit" className="mt-2" />
+                <Button type="submit" label="Submit" />
             </form>
         </div>
     )
@@ -198,11 +204,12 @@ export default function FormikDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                {/* TO DO: Add demo content. */}
-                <p></p>
+                <p>
+                    <a href="https://formik.org/">Formik</a> is a popular library for handling forms in React.
+                </p>
             </DocSectionText>
-            <div className="card flex flex-column align-items-center justify-content-center">
-                <form onSubmit={formik.handleSubmit} className="flex flex-column justify-content-center md:w-20rem w-full">
+            <div className="card flex justify-content-center">
+                <form onSubmit={formik.handleSubmit} className="flex flex-column md:w-20rem w-full gap-2">
                     <Toast ref={toast} />
                     <TreeSelect
                         id="item"
@@ -211,12 +218,13 @@ export default function FormikDoc() {
                         options={node}
                         optionLabel="name"
                         placeholder="Select Item"
+                        className={classNames({ 'p-invalid': isFormFieldInvalid('item') })}
                         onChange={(e) => {
                             formik.setFieldValue('item', e.value);
                         }}
                     />
                     {getFormErrorMessage('item')}
-                    <Button type="submit" label="Submit" className="mt-2" />
+                    <Button type="submit" label="Submit" />
                 </form>
             </div>
             <DocSectionCode code={code} service={['NodeService']} dependencies={{ formik: '^2.2.6' }} />

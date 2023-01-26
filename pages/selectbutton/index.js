@@ -9,8 +9,8 @@ import { DisabledDoc } from '../../components/doc/selectbutton/disableddoc';
 import { ImportDoc } from '../../components/doc/selectbutton/importdoc';
 import { InvalidDoc } from '../../components/doc/selectbutton/invaliddoc';
 import { MultipleSelectionDoc } from '../../components/doc/selectbutton/multipleselectiondoc';
-import { FormikDoc } from '../../components/doc/selectbutton/validation/formikdoc';
-import { HookFormDoc } from '../../components/doc/selectbutton/validation/hookformdoc';
+import { FormikDoc } from '../../components/doc/selectbutton/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/selectbutton/form/hookformdoc';
 
 const SelectButtonDemo = () => {
     const docs = [

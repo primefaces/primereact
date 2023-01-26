@@ -33,7 +33,7 @@ export function HookFormDoc(props) {
 <Controller
     name="value"
     control={form.control}
-    rules={{ required: 'Value is required.' }}
+    rules={{ required: 'Engine State is required.' }}
     render={({ field, fieldState }) => (
         <>
             <label htmlFor={field.name} className={classNames('flex justify-content-center', { 'p-error': errors.value })}>
@@ -82,7 +82,7 @@ export default function HookFormDoc() {
                 <Controller
                     name="value"
                     control={form.control}
-                    rules={{ required: 'Value is required.' }}
+                    rules={{ required: 'Engine State is required.' }}
                     render={({ field, fieldState }) => (
                         <>
                             <label htmlFor={field.name} className={classNames('flex justify-content-center', { 'p-error': errors.value })}>
@@ -135,7 +135,7 @@ export default function HookFormDoc() {
                 <Controller
                     name="value"
                     control={form.control}
-                    rules={{ required: 'Value is required.' }}
+                    rules={{ required: 'Engine State is required.' }}
                     render={({ field, fieldState }) => (
                         <>
                             <label htmlFor={field.name} className={classNames('flex justify-content-center', { 'p-error': errors.value })}>
@@ -167,7 +167,7 @@ export default function HookFormDoc() {
                     <Controller
                         name="value"
                         control={form.control}
-                        rules={{ required: 'Value is required.' }}
+                        rules={{ required: 'Engine State is required.' }}
                         render={({ field, fieldState }) => (
                             <>
                                 <label htmlFor={field.name} className={classNames('flex justify-content-center', { 'p-error': errors.value })}>

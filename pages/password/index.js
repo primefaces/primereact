@@ -13,9 +13,8 @@ import { PasswordMeter } from '../../components/doc/password/passwordmeterdoc';
 import { ShowPassword } from '../../components/doc/password/showpassworddoc';
 import { StyleDoc } from '../../components/doc/password/styledoc';
 import { Templating } from '../../components/doc/password/templatingdoc';
-import { FormikDoc } from '../../components/doc/password/validation/formikdoc';
-import { HookFormDoc } from '../../components/doc/password/validation/hookformdoc';
-import { Divider } from '../../components/lib/divider/Divider';
+import { FormikDoc } from '../../components/doc/password/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/password/form/hookformdoc';
 
 const PasswordDemo = () => {
     const docs = [
@@ -92,25 +91,6 @@ const PasswordDemo = () => {
             doc: [{ name: 'Password', pathname: '/modules/password.html' }]
         }
     ];
-
-    const [value1, setValue1] = useState('');
-    const [value2, setValue2] = useState('');
-    const [value3, setValue3] = useState('');
-    const [value4, setValue4] = useState('');
-
-    const header = <h6>Pick a password</h6>;
-    const footer = (
-        <React.Fragment>
-            <Divider />
-            <p className="mt-2">Suggestions</p>
-            <ul className="pl-2 ml-2 mt-0" style={{ lineHeight: '1.5' }}>
-                <li>At least one lowercase</li>
-                <li>At least one uppercase</li>
-                <li>At least one numeric</li>
-                <li>Minimum 8 characters</li>
-            </ul>
-        </React.Fragment>
-    );
 
     return (
         <div>

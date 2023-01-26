@@ -10,8 +10,8 @@ import { GroupDoc } from '../../components/doc/radiobutton/groupdoc';
 import { ImportDoc } from '../../components/doc/radiobutton/importdoc';
 import { InvalidDoc } from '../../components/doc/radiobutton/invaliddoc';
 import { StyleDoc } from '../../components/doc/radiobutton/styledoc';
-import { FormikDoc } from '../../components/doc/radiobutton/validation/formikdoc';
-import { HookFormDoc } from '../../components/doc/radiobutton/validation/hookformdoc';
+import { FormikDoc } from '../../components/doc/radiobutton/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/radiobutton/form/hookformdoc';
 
 const RadioButtonDemo = () => {
     const docs = [

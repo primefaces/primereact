@@ -20,7 +20,7 @@ export function HookFormDoc(props) {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: form.getValues('value') });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: 'The form is successfully submitted.' });
     };
 
     const onSubmit = (data) => {
@@ -42,14 +42,12 @@ export function HookFormDoc(props) {
     rules={{ required: 'Value is required.' }}
     render={({ field, fieldState }) => (
         <>
-            <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.value })}>
-                Item
-            </label>
             <TreeSelect id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} options={nodes} placeholder="Select Item" className={classNames({ 'p-invalid': fieldState.error })} />
             {getFormErrorMessage(field.name)}
         </>
     )}
 />
+<Button label="Submit" type="submit" icon="pi pi-check" />
         `,
         javascript: `
 import React, { useEffect, useState, useRef } from 'react';
@@ -72,7 +70,7 @@ export default function HookFormDoc() {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: form.getValues('value') });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: 'The form is successfully submitted.' });
     };
 
     const onSubmit = (data) => {
@@ -87,28 +85,21 @@ export default function HookFormDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <div className="flex flex-column gap-2 md:w-20rem w-full">
-                <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
-                    <div className="mb-2">
-                        <Toast ref={toast} />
-                        <Controller
-                            name="value"
-                            control={form.control}
-                            rules={{ required: 'Value is required.' }}
-                            render={({ field, fieldState }) => (
-                                <>
-                                    <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.value })}>
-                                        Item
-                                    </label>
-                                    <TreeSelect id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} options={nodes} placeholder="Select Item" className={classNames({ 'p-invalid': fieldState.error })} />
-                                    {getFormErrorMessage(field.name)}
-                                </>
-                            )}
-                        />
-                    </div>
-                    <Button label="Submit" type="submit" icon="pi pi-check" />
-                </form>
-            </div>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column md:w-20rem w-full gap-2">
+                <Toast ref={toast} />
+                <Controller
+                    name="value"
+                    control={form.control}
+                    rules={{ required: 'Value is required.' }}
+                    render={({ field, fieldState }) => (
+                        <>
+                            <TreeSelect id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} options={nodes} placeholder="Select Item" className={classNames({ 'p-invalid': fieldState.error })} />
+                            {getFormErrorMessage(field.name)}
+                        </>
+                    )}
+                />
+                <Button label="Submit" type="submit" icon="pi pi-check" />
+            </form>
         </div>
     )
 }
@@ -134,7 +125,7 @@ export default function HookFormDoc() {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const show = () => {
-        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: form.getValues('value') });
+        toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: 'The form is successfully submitted.' });
     };
 
     const onSubmit = (data) => {
@@ -149,28 +140,21 @@ export default function HookFormDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <div className="flex flex-column gap-2 md:w-20rem w-full">
-                <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
-                    <div className="mb-2">
-                        <Toast ref={toast} />
-                        <Controller
-                            name="value"
-                            control={form.control}
-                            rules={{ required: 'Value is required.' }}
-                            render={({ field, fieldState }) => (
-                                <>
-                                    <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.value })}>
-                                        Item
-                                    </label>
-                                    <TreeSelect id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} options={nodes} placeholder="Select Item" className={classNames({ 'p-invalid': fieldState.error })} />
-                                    {getFormErrorMessage(field.name)}
-                                </>
-                            )}
-                        />
-                    </div>
-                    <Button label="Submit" type="submit" icon="pi pi-check" />
-                </form>
-            </div>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column md:w-20rem w-full gap-2">
+                <Toast ref={toast} />
+                <Controller
+                    name="value"
+                    control={form.control}
+                    rules={{ required: 'Value is required.' }}
+                    render={({ field, fieldState }) => (
+                        <>
+                            <TreeSelect id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} options={nodes} placeholder="Select Item" className={classNames({ 'p-invalid': fieldState.error })} />
+                            {getFormErrorMessage(field.name)}
+                        </>
+                    )}
+                />
+                <Button label="Submit" type="submit" icon="pi pi-check" />
+            </form>
         </div>
     )
 }
@@ -209,29 +193,26 @@ export default function HookFormDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                {/* TO DO: Add demo content. */}
-                <p></p>
+                <p>
+                    <a href="https://react-hook-form.com/">React Hook Form</a> is another popular React library to handle forms.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <div className="flex flex-column gap-2 md:w-20rem w-full">
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="p-fluid">
-                        <div className="mb-2">
-                            <Toast ref={toast} />
-                            <Controller
-                                name="value"
-                                control={form.control}
-                                rules={{ required: 'Value is required.' }}
-                                render={({ field, fieldState }) => (
-                                    <>
-                                        <TreeSelect id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} options={nodes} placeholder="Select Item" className={classNames({ 'p-invalid': fieldState.error })} />
-                                        {getFormErrorMessage(field.name)}
-                                    </>
-                                )}
-                            />
-                        </div>
-                        <Button label="Submit" type="submit" icon="pi pi-check" />
-                    </form>
-                </div>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column md:w-20rem w-full gap-2">
+                    <Toast ref={toast} />
+                    <Controller
+                        name="value"
+                        control={form.control}
+                        rules={{ required: 'Value is required.' }}
+                        render={({ field, fieldState }) => (
+                            <>
+                                <TreeSelect id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} options={nodes} placeholder="Select Item" className={classNames({ 'p-invalid': fieldState.error })} />
+                                {getFormErrorMessage(field.name)}
+                            </>
+                        )}
+                    />
+                    <Button label="Submit" type="submit" icon="pi pi-check" />
+                </form>
             </div>
             <DocSectionCode code={code} service={['NodeService']} dependencies={{ 'react-hook-form': '^7.39.4' }} />
         </>

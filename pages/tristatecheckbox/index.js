@@ -8,8 +8,8 @@ import { DisabledDoc } from '../../components/doc/tristatecheckbox/disableddoc';
 import { ImportDoc } from '../../components/doc/tristatecheckbox/importdoc';
 import { InvalidDoc } from '../../components/doc/tristatecheckbox/invaliddoc';
 import { StyleDoc } from '../../components/doc/tristatecheckbox/styledoc';
-import { FormikDoc } from '../../components/doc/tristatecheckbox/validation/formikdoc';
-import { HookFormDoc } from '../../components/doc/tristatecheckbox/validation/hookformdoc';
+import { FormikDoc } from '../../components/doc/tristatecheckbox/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/tristatecheckbox/form/hookformdoc';
 
 const TriStateCheckboxDemo = () => {
     const docs = [
