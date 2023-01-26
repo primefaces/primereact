@@ -9,7 +9,7 @@
  */
 import * as React from 'react';
 import { SelectItemOptionsType } from '../selectitem/selectitem';
-import TooltipOptions from '../tooltip/tooltipoptions';
+import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
 
 /**

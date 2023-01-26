@@ -57,7 +57,7 @@ export default function ReactiveDemo() {
     const [buttonTooltip, setButtonTooltip] = useState<string>('Click to proceed');
     const [knobValue, setKnobValue] = useState<number>(60);
     const [sliderValue, setSliderValue] = useState<number>(20);
-    
+
     return (
         <div className="card flex flex-wrap align-items-center justify-content-center gap-5">
             <Button type="button" label="Save" icon="pi pi-check" tooltip={buttonTooltip} onClick={() => setButtonTooltip('Completed')} />

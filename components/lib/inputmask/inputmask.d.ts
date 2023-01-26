@@ -9,7 +9,7 @@
  */
 import * as React from 'react';
 import { InputText, InputTextProps } from '../inputtext';
-import TooltipOptions from '../tooltip/tooltipoptions';
+import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
 
 /**
