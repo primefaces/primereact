@@ -8,28 +8,28 @@ export default function Topbar(props) {
     const [activeMenuIndex, setActiveMenuIndex] = useState(null);
     const versions = [
         {
-            "version": "v9",
-            "url": "https://www.primereact.org"
+            version: 'v9',
+            url: 'https://www.primereact.org'
         },
         {
-            "version": "v8",
-            "url": "https://www.primefaces.org/primereact"
+            version: 'v8',
+            url: 'https://www.primefaces.org/primereact'
         },
         {
-            "version": "v7",
-            "url": "https://www.primefaces.org/primereact-v7"
+            version: 'v7',
+            url: 'https://www.primefaces.org/primereact-v7'
         },
         {
-            "version": "v6",
-            "url": "https://www.primefaces.org/primereact-v6"
+            version: 'v6',
+            url: 'https://www.primefaces.org/primereact-v6'
         },
         {
-            "version": "v5",
-            "url": "https://www.primefaces.org/primereact-v5"
+            version: 'v5',
+            url: 'https://www.primefaces.org/primereact-v5'
         },
         {
-            "version": "v4",
-            "url": "https://www.primefaces.org/primereact-v4"
+            version: 'v4',
+            url: 'https://www.primefaces.org/primereact-v4'
         }
     ];
 
