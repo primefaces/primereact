@@ -99,7 +99,7 @@ primereact/resources/themes/rhea/theme.css
 
                 <p>
                     <a href="https://www.primefaces.org/designer/primereact">Designer</a> is the ultimate tool to create your own PrimeReact experience powered by a SASS based theme engine with 500+ variables and a Visual Designer. PrimeReact only
-                    ships the generated CSS of <b>Material</b>, <b>Bootstrap</b>, <b>Tailwind</b> and <b>PrimeOne</b> themes whereas Designer provides full access to the whole SASS structure and the variables of these pre-built themes for easier
+                    ships the generated CSS of the themes whereas Designer provides full access to the whole SASS structure and the variables of these pre-built themes for easier
                     customization.
                 </p>
 
