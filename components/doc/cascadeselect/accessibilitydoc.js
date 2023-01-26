@@ -1,7 +1,17 @@
-import { DocSectionText } from '../common/docsectiontext';
 import { DevelopmentSection } from '../common/developmentsection';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function AccessibilityDoc() {
+    const code = {
+        basic: `
+<span id="dd1">Options</span>
+<CascadeSelect aria-labelledby="dd1" />
+
+<CascadeSelect aria-label="Options" />
+    `
+    };
+
     return (
         <DevelopmentSection>
             <DocSectionText id="accessibility" label="Accessibility">
@@ -20,12 +30,7 @@ export function AccessibilityDoc() {
                     If filtering is enabled, <i>filterInputProps</i> can be defined to give <i>aria-*</i> props to the filter input element.
                 </p>
 
-                {`
-<span id="dd1">Options</span>
-<CascadeSelect aria-labelledby="dd1" />
-
-<CascadeSelect aria-label="Options" />
-`}
+                <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
 
                 <h3>Closed State Keyboard Support</h3>
                 <div className="doc-tablewrapper">

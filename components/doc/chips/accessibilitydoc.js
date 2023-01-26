@@ -1,7 +1,20 @@
-import { DocSectionText } from '../common/docsectiontext';
 import { DevelopmentSection } from '../common/developmentsection';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function AccessibilityDoc() {
+    const code = {
+        basic: `
+<label htmlFor="chips1">Tags</label>
+<Chips inputId="chips1" />
+
+<span id="chips2">Tags</span>
+<Chips aria-labelledby="chips2" />
+
+<Chips aria-label="Tags" />
+    `
+    };
+
     return (
         <DevelopmentSection>
             <DocSectionText id="accessibility" label="Accessibility">
@@ -11,15 +24,7 @@ export function AccessibilityDoc() {
                     <i>aria-orientation</i> set to horizontal whereas each chip has the <i>option</i> role with <i>aria-label</i> set to the label of the chip.
                 </p>
 
-                {`
-<label htmlFor="chips1">Tags</label>
-<Chips inputId="chips1" />
-
-<span id="chips2">Tags</span>
-<Chips aria-labelledby="chips2" />
-
-<Chips aria-label="Tags" />
-`}
+                <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
 
                 <h3>Input Field Keyboard Support</h3>
                 <div className="doc-tablewrapper">
