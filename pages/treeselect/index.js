@@ -13,8 +13,8 @@ import { InvalidDoc } from '../../components/doc/treeselect/invaliddoc';
 import { MultipleDoc } from '../../components/doc/treeselect/multipledoc';
 import { ProgrammaticDoc } from '../../components/doc/treeselect/programmaticdoc';
 import { StyleDoc } from '../../components/doc/treeselect/styledoc';
-import { FormikDoc } from '../../components/doc/treeselect/validation/formikdoc';
-import { HookFormDoc } from '../../components/doc/treeselect/validation/hookformdoc';
+import { FormikDoc } from '../../components/doc/treeselect/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/treeselect/form/hookformdoc';
 
 const TreeSelectDemo = () => {
     const docs = [

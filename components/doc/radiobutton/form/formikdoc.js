@@ -3,7 +3,6 @@ import React, { useRef } from 'react';
 import { Button } from '../../../lib/button/Button';
 import { RadioButton } from '../../../lib/radiobutton/RadioButton';
 import { Toast } from '../../../lib/toast/Toast';
-import { classNames } from '../../../lib/utils/Utils';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 
@@ -69,31 +68,31 @@ export function FormikDoc(props) {
     const code = {
         basic: `
 <Toast ref={toast} />
-<div className="flex">
-    {radioBtns.map((btn, i) => {
-        return (
-            <div key={i} className="flex align-items-center mr-3">
-                <RadioButton
-                    {...btn}
-                    checked={formik.values.item === btn.value}
-                    onChange={(e) => {
-                        formik.setFieldValue('item', e.value);
-                    }}
+{radioBtns.map((btn, i) => {
+    return (
+        <div key={i} className="flex align-items-center mr-3">
+        <RadioButton
+            {...btn}
+                checked={formik.values.item === btn.value}
+                onChange={(e) => {
+                    formik.setFieldValue('item', e.value);
+                }}
                 />
-                <label htmlFor={btn.inputId} className="ml-1">
-                    {btn.value}
+            <label htmlFor={btn.inputId} className="ml-1">
+            {btn.value}
                 </label>
             </div>
         );
-    })}
+})}
 </div>
+{getFormErrorMessage('item')}
+<Button type="submit" label="Submit" />
 `,
         javascript: `
 import React, { useRef } from "react";
 import { useFormik } from 'formik';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
-import { classNames } from 'primereact/utils';
 import { RadioButton } from "primereact/radiobutton";
 
 export default function FormikDoc() {
@@ -157,34 +156,30 @@ export default function FormikDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <div className="flex flex-column">
-                <form onSubmit={formik.handleSubmit} className="p-fluid justify-content-center">
-                    <div className={classNames('mb-3', { 'p-error': formik.errors.item })}>Please choose your ingredient.</div>
-                    <div className="flex flex-column gap-2">
-                        <Toast ref={toast} />
-                        <div className="flex">
-                            {radioBtns.map((btn, i) => {
-                                return (
-                                    <div key={i} className="flex align-items-center mr-3">
-                                        <RadioButton
-                                            {...btn}
-                                            checked={formik.values.item === btn.value}
-                                            onChange={(e) => {
-                                                formik.setFieldValue('item', e.value);
-                                            }}
-                                        />
-                                        <label htmlFor={btn.inputId} className="ml-1">
-                                            {btn.value}
-                                        </label>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                        {getFormErrorMessage('item')}
-                    </div>
-                    <Button type="submit" label="Submit" className="mt-2" />
-                </form>
-            </div>
+            <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
+                <div>Please choose your ingredient.</div>
+                <div className="flex">
+                    <Toast ref={toast} />
+                    {radioBtns.map((btn, i) => {
+                        return (
+                            <div key={i} className="flex align-items-center mr-3">
+                                <RadioButton
+                                    {...btn}
+                                    checked={formik.values.item === btn.value}
+                                    onChange={(e) => {
+                                        formik.setFieldValue('item', e.value);
+                                    }}
+                                />
+                                <label htmlFor={btn.inputId} className="ml-1">
+                                    {btn.value}
+                                </label>
+                            </div>
+                        );
+                    })}
+                </div>
+                {getFormErrorMessage('item')}
+                <Button type="submit" label="Submit" />
+            </form>
         </div>
     )
 }
@@ -194,7 +189,6 @@ import React, { useRef } from "react";
 import { useFormik } from 'formik';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
-import { classNames } from 'primereact/utils';
 import { RadioButton } from "primereact/radiobutton";
 
 export default function FormikDoc() {
@@ -258,34 +252,30 @@ export default function FormikDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <div className="flex flex-column">
-                <form onSubmit={formik.handleSubmit} className="p-fluid justify-content-center">
-                    <div className={classNames('mb-3', { 'p-error': formik.errors.item })}>Please choose your ingredient.</div>
-                    <div className="flex flex-column gap-2">
-                        <Toast ref={toast} />
-                        <div className="flex">
-                            {radioBtns.map((btn, i) => {
-                                return (
-                                    <div key={i} className="flex align-items-center mr-3">
-                                        <RadioButton
-                                            {...btn}
-                                            checked={formik.values.item === btn.value}
-                                            onChange={(e) => {
-                                                formik.setFieldValue('item', e.value);
-                                            }}
-                                        />
-                                        <label htmlFor={btn.inputId} className="ml-1">
-                                            {btn.value}
-                                        </label>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                        {getFormErrorMessage('item')}
-                    </div>
-                    <Button type="submit" label="Submit" className="mt-2" />
-                </form>
-            </div>
+            <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
+                <div>Please choose your ingredient.</div>
+                <div className="flex">
+                    <Toast ref={toast} />
+                    {radioBtns.map((btn, i) => {
+                        return (
+                            <div key={i} className="flex align-items-center mr-3">
+                                <RadioButton
+                                    {...btn}
+                                    checked={formik.values.item === btn.value}
+                                    onChange={(e) => {
+                                        formik.setFieldValue('item', e.value);
+                                    }}
+                                />
+                                <label htmlFor={btn.inputId} className="ml-1">
+                                    {btn.value}
+                                </label>
+                            </div>
+                        );
+                    })}
+                </div>
+                {getFormErrorMessage('item')}
+                <Button type="submit" label="Submit" />
+            </form>
         </div>
     )
 }
@@ -300,36 +290,31 @@ export default function FormikDoc() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <div className="flex flex-column">
-                    <form onSubmit={formik.handleSubmit} className="p-fluid justify-content-center">
-                        <div className={classNames('mb-3', { 'p-error': formik.errors.item })}>Please choose your ingredient.</div>
-                        <div className="flex flex-column gap-2">
-                            <Toast ref={toast} />
-                            <div className="flex">
-                                {radioBtns.map((btn, i) => {
-                                    return (
-                                        <div key={i} className="flex align-items-center mr-3">
-                                            <RadioButton
-                                                {...btn}
-                                                checked={formik.values.item === btn.value}
-                                                onChange={(e) => {
-                                                    formik.setFieldValue('item', e.value);
-                                                }}
-                                            />
-                                            <label htmlFor={btn.inputId} className="ml-1">
-                                                {btn.value}
-                                            </label>
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                            {getFormErrorMessage('item')}
-                        </div>
-                        <Button type="submit" label="Submit" className="mt-2" />
-                    </form>
-                </div>
+                <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
+                    <div>Please choose your ingredient.</div>
+                    <div className="flex">
+                        <Toast ref={toast} />
+                        {radioBtns.map((btn, i) => {
+                            return (
+                                <div key={i} className="flex align-items-center mr-3">
+                                    <RadioButton
+                                        {...btn}
+                                        checked={formik.values.item === btn.value}
+                                        onChange={(e) => {
+                                            formik.setFieldValue('item', e.value);
+                                        }}
+                                    />
+                                    <label htmlFor={btn.inputId} className="ml-1">
+                                        {btn.value}
+                                    </label>
+                                </div>
+                            );
+                        })}
+                    </div>
+                    {getFormErrorMessage('item')}
+                    <Button type="submit" label="Submit" />
+                </form>
             </div>
-
             <DocSectionCode code={code} dependencies={{ formik: '^2.2.6' }} />
         </>
     );
