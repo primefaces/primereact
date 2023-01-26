@@ -17,13 +17,10 @@
 - Sidebar: `dismissible` not working immediately while sidebar is visible [\#3811](https://github.com/primefaces/primereact/issues/3811)
 - Inputs: expose focus\(\) method on all input components [\#3806](https://github.com/primefaces/primereact/issues/3806)
 - FileUpload: Control internal files state [\#3750](https://github.com/primefaces/primereact/issues/3750)
-- New Component: Gauge Chart\(s\) [\#2818](https://github.com/primefaces/primereact/issues/2818)
 - Dropdown Item list responsive issue [\#2574](https://github.com/primefaces/primereact/issues/2574)
-- New Component: Signature [\#2524](https://github.com/primefaces/primereact/issues/2524)
 - DataTable/TreeTable: stricter generically typed API [\#2523](https://github.com/primefaces/primereact/issues/2523)
 - TreeTable: accessibility improvements for keyboard navigation [\#2153](https://github.com/primefaces/primereact/issues/2153)
 - DataTable features in PickList lists [\#1374](https://github.com/primefaces/primereact/issues/1374)
-- Support quill 2.0 in Editor [\#502](https://github.com/primefaces/primereact/issues/502)
 
 **Fixed bugs:**
 
