@@ -23,7 +23,7 @@ interface PanelHeaderTemplateOptions {
     /**
      * Style class of the panel title.
      */
-    titleClssName: string;
+    titleClassName: string;
     /**
      * Style class of the panel icons.
      */
