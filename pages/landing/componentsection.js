@@ -1,5 +1,4 @@
 import getConfig from 'next/config';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Badge } from '../../components/lib/badge/Badge';
 import { Button } from '../../components/lib/button/Button';
@@ -81,16 +80,8 @@ const ComponentSection = () => {
         <section className="landing-components py-8">
             <div className="section-header">Components</div>
             <p className="section-detail">
-                <span className="font-bold text-900">Over 80</span> React UI Components with top-notch quality to help you implement all your UI requirements in style.
+                <span className="font-bold text-900">Over 90</span> React UI Components with top-notch quality to help you implement all your UI requirements in style.
             </p>
-            <div className="flex justify-content-center mt-4">
-                <Link href="/setup">
-                    <a className="font-semibold p-3 border-round flex align-items-center linkbox active">
-                        <span>Get Started</span>
-                        <i className="pi pi-arrow-right ml-2"></i>
-                    </a>
-                </Link>
-            </div>
             <div className="components-main flex mt-7 relative md:justify-content-center overflow-auto">
                 <div className="flex flex-column px-3 py-8 z-1">
                     <div className="box p-4 mb-5">
