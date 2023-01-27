@@ -1,21 +1,21 @@
 import { Editor } from '../../lib/editor/Editor';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function ReadOnlyDoc(props) {
     const code = {
         basic: `
-<Editor style={{ height: '320px' }} value="ReadOnly Mode" readOnly />
+<Editor value="Always bet on Prime!" readOnly style={{ height: '320px' }} />
         `,
         javascript: `
 import React from "react";
 import { Editor } from "primereact/editor";
 
-export default function ReadOnlyDoc() {
+export default function ReadOnlyDemo() {
 
     return (
         <div className="card">
-            <Editor style={{ height: '320px' }} value="ReadOnly Mode" readOnly />
+            <Editor value="Always bet on Prime!" readOnly style={{ height: '320px' }} />
         </div>        
     )
 }
@@ -24,11 +24,10 @@ export default function ReadOnlyDoc() {
 import React from "react";
 import { Editor } from "primereact/editor";
 
-export default function ReadOnlyDoc() {
-
+export default function ReadOnlyDemo() {
     return (
         <div className="card">
-            <Editor style={{ height: '320px' }} value="ReadOnly Mode" readOnly />
+            <Editor value="Always bet on Prime!" readOnly style={{ height: '320px' }} />
         </div>    
     )
 }
@@ -38,11 +37,10 @@ export default function ReadOnlyDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                {/* TO DO: Add demo content. */}
-                <p></p>
+                <p>When <i>readOnly</i> is present, the value cannot be edited.</p>
             </DocSectionText>
             <div className="card">
-                <Editor style={{ height: '320px' }} value="ReadOnly Mode" readOnly />
+                <Editor value="Always bet on Prime!" readOnly style={{ height: '320px' }} />
             </div>
             <DocSectionCode code={code} dependencies={{ quill: '1.3.7' }} />
         </>

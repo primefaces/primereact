@@ -4,7 +4,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/editor/accessibilitydoc';
-
 import { BasicDoc } from '../../components/doc/editor/basicdoc';
 import { FormikDoc } from '../../components/doc/editor/form/formikdoc';
 import { HookFormDoc } from '../../components/doc/editor/form/hookformdoc';
@@ -23,7 +22,7 @@ const EditorDemo = () => {
         },
         {
             id: 'quill',
-            label: 'QuillJS',
+            label: 'Quill',
             component: QuillDoc
         },
         {
