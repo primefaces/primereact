@@ -1,12 +1,9 @@
 import React from 'react';
-import getConfig from 'next/config';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 import { Inplace, InplaceDisplay, InplaceContent } from '../../../components/lib/inplace/Inplace';
 
 export function ImageDoc(props) {
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
-
     const code = {
         basic: `
 <Inplace>
@@ -17,7 +14,7 @@ export function ImageDoc(props) {
         </span>
     </InplaceDisplay>
     <InplaceContent>
-        <img alt="Nature" src="images/nature/nature1.jpg" />
+        <img alt="Nature" src="https://www.primereact.org/images/nature/nature1.jpg" />
     </InplaceContent>
 </Inplace>
         `,
@@ -35,7 +32,7 @@ export default function ImageDemo() {
                 </span>
             </InplaceDisplay>
             <InplaceContent>
-                <img alt="Nature" src="images/nature/nature1.jpg" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} />
+                <img alt="Nature" src="https://www.primereact.org/images/nature/nature1.jpg" />
             </InplaceContent>
         </Inplace>
     );
@@ -55,7 +52,7 @@ export default function ImageDemo() {
                 </span>
             </InplaceDisplay>
             <InplaceContent>
-                <img alt="Nature" src="images/nature/nature1.jpg" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} />
+                <img alt="Nature" src="https://www.primereact.org/images/nature/nature1.jpg" />
             </InplaceContent>
         </Inplace>
     );
@@ -77,7 +74,7 @@ export default function ImageDemo() {
                         </span>
                     </InplaceDisplay>
                     <InplaceContent>
-                        <img alt="Nature" src={`${contextPath}/images/nature/nature1.jpg`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} />
+                        <img alt="Nature" src={`https://www.primereact.org/images/nature/nature1.jpg`} />
                     </InplaceContent>
                 </Inplace>
             </div>
