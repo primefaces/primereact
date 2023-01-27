@@ -49,7 +49,7 @@ export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputH
      * Specifies whether a checkbox should be checked or not.
      * @defaultValue false
      */
-    checked?: boolean | undefined;
+    checked: boolean;
     /**
      * Value in checked state.
      * @defaultValue true
