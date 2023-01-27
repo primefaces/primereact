@@ -56,7 +56,7 @@ export interface InputSwitchProps extends Omit<React.DetailedHTMLProps<React.Inp
      * Specifies whether a inputswitch should be checked or not.
      * @defaultValue false
      */
-    checked?: boolean | undefined;
+    checked: boolean;
     /**
      * Value in checked state.
      * @defaultValue true
