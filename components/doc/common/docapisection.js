@@ -1,6 +1,6 @@
+import getConfig from 'next/config';
 import React from 'react';
 import { DocSectionText } from './docsectiontext';
-import getConfig from 'next/config';
 
 function DocApiSection(props) {
     /**
@@ -24,7 +24,7 @@ function DocApiSection(props) {
 
     return (
         <React.Fragment>
-            <DocSectionText {...props}>For API references of the following component(s);</DocSectionText>
+            <DocSectionText {...props}>Visit the API documentation for detailed information about all the properties, events and methods of the component.</DocSectionText>
             <ul {...props}>{renderApiDocs()}</ul>
         </React.Fragment>
     );
