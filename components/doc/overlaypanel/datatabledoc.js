@@ -1,4 +1,3 @@
-import getConfig from 'next/config';
 import { useEffect, useRef, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
 import { Button } from '../../lib/button/Button';
@@ -12,12 +11,11 @@ import { DocSectionText } from '../common/docsectiontext';
 export function DataTableDoc(props) {
     const [products, setProducts] = useState(null);
     const [selectedProduct, setSelectedProduct] = useState(null);
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     const selectedProductContent = selectedProduct && (
         <div className="p-5 surface-card shadow-2 border-round">
             <div className="relative">
-                <img src={contextPath + 'images/product/' + selectedProduct.image} alt={selectedProduct.name}></img>
+                <img src={'https://www.primereact.org/images/product/' + selectedProduct.image} alt={selectedProduct.name}></img>
             </div>
             <div className="flex align-items-center justify-content-between mt-3 mb-2">
                 <span className="text-900 font-medium text-xl">{selectedProduct.name}</span>
@@ -84,10 +82,10 @@ export default function DataTableDemo() {
     const [products, setProducts] = useState(null);
     const [selectedProduct, setSelectedProduct] = useState(null);
 
-    const product = selectedProduct && (
+    const selectedProductContent = selectedProduct && (
         <div className="p-5 surface-card shadow-2 border-round">
             <div className="relative">
-                <img src={'/images/product/' + selectedProduct.image} alt={selectedProduct.name} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'}></img>
+                <img src={'https://www.primereact.org/images/product/' + selectedProduct.image} alt={selectedProduct.name}></img>
             </div>
             <div className="flex align-items-center justify-content-between mt-3 mb-2">
                 <span className="text-900 font-medium text-xl">{selectedProduct.name}</span>
@@ -122,7 +120,7 @@ export default function DataTableDemo() {
     };
 
     const imageBody = (rowData) => {
-        return <img src={\`/images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} alt={rowData.image} className="w-4rem shadow-1" />
+        return <img src={\`https://www.primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} className="w-4rem shadow-1" />
     };
 
     const priceBody = (rowData) => {
@@ -162,10 +160,10 @@ export default function DataTableDemo() {
     const toast = useRef<Toast>(null);
     const isMounted = useRef(false);
 
-    const product = selectedProduct && (
+    const selectedProductContent = selectedProduct && (
         <div className="p-5 surface-card shadow-2 border-round">
             <div className="relative">
-                <img src={'/images/product/' + selectedProduct.image} alt={selectedProduct.name} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'}></img>
+                <img src={'https://www.primereact.org/images/product/' + selectedProduct.image} alt={selectedProduct.name}></img>
             </div>
             <div className="flex align-items-center justify-content-between mt-3 mb-2">
                 <span className="text-900 font-medium text-xl">{selectedProduct.name}</span>
@@ -196,7 +194,7 @@ export default function DataTableDemo() {
     };
 
     const imageBody = (rowData: Product) => {
-        return <img src={\`/images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} alt={rowData.image} className="w-4rem shadow-1" />
+        return <img src={\`https://www.primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} className="w-4rem shadow-1" />
     };
 
     const priceBody = (rowData: Product) => {
@@ -226,7 +224,7 @@ export default function DataTableDemo() {
     code: 'f230fh0g3',
     name: 'Bamboo Watch',
     description: 'Product Description',
-    image: 'bamboo-watch.jpg',
+    image: '/bamboo-watch.jpg',
     price: 65,
     category: 'Accessories',
     quantity: 24,

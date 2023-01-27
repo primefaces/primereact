@@ -180,6 +180,12 @@ primereact/resources/themes/lara-dark-blue/theme.css
 primereact/resources/themes/lara-dark-indigo/theme.css
 primereact/resources/themes/lara-dark-purple/theme.css
 primereact/resources/themes/lara-dark-teal/theme.css
+primereact/resources/themes/soho-light/theme.css
+primereact/resources/themes/soho-dark/theme.css
+primereact/resources/themes/viva-light/theme.css
+primereact/resources/themes/viva-dark/theme.css
+primereact/resources/themes/mira/theme.css
+primereact/resources/themes/nano/theme.css
 primereact/resources/themes/saga-blue/theme.css
 primereact/resources/themes/saga-green/theme.css
 primereact/resources/themes/saga-orange/theme.css
