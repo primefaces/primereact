@@ -2,10 +2,8 @@ import { Menubar } from '../../lib/menubar/Menubar';
 import { InputText } from '../../lib/inputtext/InputText';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
-import getConfig from 'next/config';
 
 export function TemplateDoc(props) {
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const items = [
         {
             label: 'File',
@@ -130,7 +128,7 @@ export function TemplateDoc(props) {
         }
     ];
 
-    const start = <img alt="logo" src={contextPath + '/images/logo.png'} height="40" className="mr-2"></img>;
+    const start = <img alt="logo" src={'https://www.primereact.org/images/logo.png'} height="40" className="mr-2"></img>;
     const end = <InputText placeholder="Search" type="text" />;
 
     const code = {
@@ -271,7 +269,7 @@ export default function TemplateDemo() {
         }
     ];
 
-    const start = <img alt="logo" src="images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} height="40" className="mr-2"></img>;
+    const start = <img alt="logo" src="https://www.primereact.org/images/logo.png" height="40" className="mr-2"></img>;
     const end = <InputText placeholder="Search" type="text" />;
 
     return (
@@ -416,7 +414,7 @@ export default function TemplateDemo() {
         }
     ];
 
-    const start = <img alt="logo" src="images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} height="40" className="mr-2"></img>;
+    const start = <img alt="logo" src="https://www.primereact.org/images/logo.png" height="40" className="mr-2"></img>;
     const end = <InputText placeholder="Search" type="text" />;
     
     return (
