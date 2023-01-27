@@ -642,7 +642,7 @@ export default function Topbar(props) {
                     </CSSTransition>
                 </li>
                 <li>
-                    <a href="https://www.primefaces.org/primeblocks-react" role="menuitem" rel="noopener noreferrer" target="_blank">
+                    <a href="https://blocks.primereact.org" role="menuitem" rel="noopener noreferrer" target="_blank">
                         <span className="p-overlay-badge">Blocks</span>
                     </a>
                 </li>

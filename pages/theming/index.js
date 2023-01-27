@@ -94,7 +94,7 @@ primereact/resources/themes/rhea/theme.css
                 <p>
                     CSS of the themes share the same license as PrimeReact which is MIT, this means the generated CSS can be customized per your needs however this should be avoided if your customizations are not simple. For instance even to change a
                     primary color, since there is no variable a find and replace should be performed various times. On the other hand, this can be achieved by changing a single variable e.g. <i>$primaryColor</i>. Visit the{' '}
-                    <a href="https://www.primefaces.org/designer/api/primereact/7.0.0">SASS API</a> for the documentation of available customization options.
+                    <a href="https://www.primefaces.org/designer/api/primereact/8.1.0">SASS API</a> for the documentation of available customization options.
                 </p>
 
                 <p>
@@ -277,7 +277,7 @@ html {
                     <a href="https://www.primefaces.org/primeflex/">PrimeFlex</a> is a lightweight responsive CSS utility library to accompany Prime UI libraries and static webpages as well. PrimeReact can be used with any CSS utility library like
                     bootstrap and tailwind however PrimeFlex has benefits like integration with PrimeReact themes usign CSS variables so that colors classes e.g. <i>bg-blue-500</i> receive the color code from the PrimeReact theme being used.
                     PrimeReact follows the CSS utility approach of PrimeFlex and currently does not provide an extended style property like <i>sx</i>. Same approach is also utilized in{' '}
-                    <a href="https://www.primefaces.org/primeblocks-react">PrimeBlocks for PrimeReact</a> project as well.
+                    <a href="https://blocks.primereact.org">PrimeBlocks for PrimeReact</a> project as well.
                 </p>
 
                 <p>Here is an example to demonstrate how to align 3 buttons horizontally on bigger screens and display them as stacked on smaller ones.</p>

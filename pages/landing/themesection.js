@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FilterMatchMode, FilterOperator } from '../../components/lib/api/Api';
-import { DataTable } from '../../components/lib/datatable/DataTable';
-import { Column } from '../../components/lib/column/Column';
-import { InputText } from '../../components/lib/inputtext/InputText';
 import { Button } from '../../components/lib/button/Button';
+import { Column } from '../../components/lib/column/Column';
+import { DataTable } from '../../components/lib/datatable/DataTable';
+import { InputText } from '../../components/lib/inputtext/InputText';
 import { ProgressBar } from '../../components/lib/progressbar/ProgressBar';
-import { CustomerService } from '../../service/CustomerService';
 import { classNames } from '../../components/lib/utils/Utils';
+import { CustomerService } from '../../service/CustomerService';
 
 const ThemeSection = (props) => {
     const [customers, setCustomers] = useState(null);
@@ -135,7 +135,7 @@ const ThemeSection = (props) => {
                 <button type="button" className={classNames('font-medium linkbox mr-3 mt-4', { active: props.theme && props.theme.startsWith('bootstrap4') })} onClick={() => changeTheme('bootstrap4', 'blue')}>
                     Bootstrap
                 </button>
-                <a type="button" className="font-medium p-link linkbox mt-4" href="https://www.primefaces.org/designer-react">
+                <a type="button" className="font-medium p-link linkbox mt-4" href="https://designer.primereact.orgt">
                     more...
                 </a>
             </div>

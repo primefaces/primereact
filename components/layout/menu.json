@@ -105,7 +105,7 @@
                 },
                 {
                     "name": "Visual Editor",
-                    "href": "https://www.primefaces.org/designer-react",
+                    "href": "https://designer.primereact.org",
                     "meta": ["visual editor"]
                 },
                 {
@@ -114,7 +114,7 @@
                 },
                 {
                     "name": "SASS API",
-                    "href": "https://www.primefaces.org/designer/api/primereact/7.0.0",
+                    "href": "https://www.primefaces.org/designer/api/primereact/8.1.0",
                     "meta": ["sass api"]
                 }
             ]
@@ -147,12 +147,12 @@
             "children": [
                 {
                     "name": "Free Blocks",
-                    "href": "https://www.primefaces.org/primeblocks-react/#/free",
+                    "href": "https://blocks.primereact.org/#/free",
                     "meta": ["free blocks"]
                 },
                 {
                     "name": "All Blocks",
-                    "href": "https://www.primefaces.org/primeblocks-react",
+                    "href": "https://blocks.primereact.org",
                     "meta": ["primeblocks"]
                 }
             ]
