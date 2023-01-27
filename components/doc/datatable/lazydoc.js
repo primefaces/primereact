@@ -121,7 +121,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { CustomerService } from './service/CustomerService';
 
-const LazyDoc = () => {
+export default function LazyDoc() {
 
     const [loading, setLoading] = useState(false);
     const [totalRecords, setTotalRecords] = useState(0);
@@ -244,7 +244,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { CustomerService } from './service/CustomerService';
 
-const LazyDoc = () => {
+export default function LazyDoc() {
 
     const [loading, setLoading] = useState(false);
     const [totalRecords, setTotalRecords] = useState(0);
