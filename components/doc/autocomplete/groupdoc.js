@@ -1,4 +1,3 @@
-import getConfig from 'next/config';
 import { useState } from 'react';
 import { AutoComplete } from '../../lib/autocomplete/AutoComplete';
 import { DocSectionCode } from '../common/docsectioncode';
@@ -39,12 +38,11 @@ export function GroupDoc(props) {
             ]
         }
     ];
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     const groupedItemTemplate = (item) => {
         return (
             <div className="flex align-items-center">
-                <img alt={item.label} src={`${contextPath}/images/flag/flag_placeholder.png`} className={`flag flag-${item.code.toLowerCase()} mr-2`} style={{ width: '18px' }} />
+                <img alt={item.label} src={'images/flag/flag_placeholder.png'} className={`flag flag-${item.code.toLowerCase()} mr-2`} style={{ width: '18px' }} />
                 <div>{item.label}</div>
             </div>
         );
@@ -115,8 +113,7 @@ export default function GroupDemo() {
             <div className="flex align-items-center">
                 <img
                     alt={item.label}
-                    src="/images/flag/flag_placeholder.png"
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/cdn/images/placeholder.png')}
+                    src="https://www.primereact.org/images/flag/flag_placeholder.png"
                     className={\`flag flag-\${item.code.toLowerCase()} mr-2\`}
                     style={{width: '18px'}}
                 />
@@ -204,8 +201,7 @@ export default function GroupDemo() {
             <div className="flex align-items-center">
                 <img
                     alt={item.label}
-                    src="/images/flag/flag_placeholder.png"
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/cdn/images/placeholder.png')}
+                    src="https://www.primereact.org/images/flag/flag_placeholder.png"
                     className={\`flag flag-\${item.code.toLowerCase()} mr-2\`}
                     style={{width: '18px'}}
                 />

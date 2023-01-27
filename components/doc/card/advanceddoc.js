@@ -27,7 +27,7 @@ import { Button } from 'primereact/button';
 
 export default function AdvancedDemo() {
     const header = (
-        <img alt="Card" src="images/usercard.png" onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} />
+        <img alt="Card" src="https://www.primereact.org/images/usercard.png" />
     );
     const footer = (
         <div className="flex flex-wrap justify-content-end gap-2">
@@ -55,7 +55,7 @@ import { Button } from 'primereact/button';
 
 export default function AdvancedDemo() {
     const header = (
-        <img alt="Card" src="images/usercard.png" onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} />
+        <img alt="Card" src="https://www.primereact.org/images/usercard.png" />
     );
     const footer = (
         <div className="flex flex-wrap justify-content-end gap-2">
