@@ -635,9 +635,7 @@ interface DataTableValueArray extends Array<DataTableValue> {}
 /**
  * @group Misc
  */
-type DataTableRowData<TValue extends DataTableValueArray> = {
-    [K in keyof TValue]: TValue[K];
-};
+type DataTableRowData<TValueArray extends DataTableValueArray> = TValueArray extends Array<infer TValue> ? TValue : never;
 
 /**
  * @group Misc
@@ -679,7 +677,7 @@ type DataTableCellSelection<TValue extends DataTableValueArray> = {
     /**
      * Value of the cell.
      */
-    value: TValue[keyof TValue];
+    value: TValue[number][keyof TValue[number]];
 };
 
 /**
