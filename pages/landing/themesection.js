@@ -7,10 +7,8 @@ import { Button } from '../../components/lib/button/Button';
 import { ProgressBar } from '../../components/lib/progressbar/ProgressBar';
 import { CustomerService } from '../../service/CustomerService';
 import { classNames } from '../../components/lib/utils/Utils';
-import getConfig from 'next/config';
 
 const ThemeSection = (props) => {
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const [customers, setCustomers] = useState(null);
     const [selectedCustomers, setSelectedCustomers] = useState(null);
     const [filters, setFilters] = useState({
@@ -84,13 +82,7 @@ const ThemeSection = (props) => {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img
-                    alt="flag"
-                    src={`${contextPath}/images/flag/flag_placeholder.png`}
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
-                    className={`flag flag-${rowData.country.code}`}
-                    width={30}
-                />
+                <img alt="flag" src={`https://www.primereact.org/images/flag/flag_placeholder.png`} className={`flag flag-${rowData.country.code}`} width={30} />
                 <span className="image-text">{rowData.country.name}</span>
             </React.Fragment>
         );
@@ -101,13 +93,7 @@ const ThemeSection = (props) => {
 
         return (
             <React.Fragment>
-                <img
-                    alt={representative.name}
-                    src={`${contextPath}/images/avatar/${representative.image}`}
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
-                    width={32}
-                    style={{ verticalAlign: 'middle' }}
-                />
+                <img alt={representative.name} src={`https://www.primereact.org/images/avatar/${representative.image}`} width={32} style={{ verticalAlign: 'middle' }} />
                 <span className="image-text">{representative.name}</span>
             </React.Fragment>
         );
@@ -153,7 +139,7 @@ const ThemeSection = (props) => {
                     more...
                 </a>
             </div>
-            <div className="themes-main flex mt-7 justify-content-center pad-section" style={{ backgroundImage: `url(${contextPath}/images/landing-new/wave-${props.dark ? 'dark-alt' : 'light-alt'}.svg)`, backgroundSize: 'cover' }}>
+            <div className="themes-main flex mt-7 justify-content-center pad-section" style={{ backgroundImage: `url(https://www.primereact.org/images/landing-new/wave-${props.dark ? 'dark-alt' : 'light-alt'}.svg)`, backgroundSize: 'cover' }}>
                 <div className="box overflow-hidden z-1 p-5 table-container">
                     <DataTable
                         value={customers}
