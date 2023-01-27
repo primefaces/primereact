@@ -27,10 +27,7 @@ const HeroSection = () => {
                                 </div>
                             </div>
                         </div>
-                        <div
-                            className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation ml-4 md:ml-0 md:mt-4 flex align-items-center justify-content-center"
-                            onClick={() => (window.location.href = 'https://designer.primereact.org')}
-                        >
+                        <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation ml-4 md:ml-0 md:mt-4 flex align-items-center justify-content-center" onClick={() => (window.location.href = 'https://designer.primereact.org')}>
                             <div className="flex flex-column align-items-center">
                                 <img src={`${contextPath}/images/landing-new/designer-icon.svg`} alt="primereact templates" />
                                 <div className="name">

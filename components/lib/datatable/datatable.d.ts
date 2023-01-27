@@ -189,6 +189,8 @@ interface DataTableColumnResizerClickEvent {
 
 /**
  * Custom pagination event
+ * @see {@link DataTableProps.onPage}
+ * @event
  */
 interface DataTablePageEvent {
     /**
@@ -215,6 +217,7 @@ interface DataTablePageEvent {
 
 /**
  * Custom sort event.
+ * @see {@link DataTableProps.onSort}
  * @event
  */
 interface DataTableSortEvent {
