@@ -1,4 +1,3 @@
-import getConfig from 'next/config';
 import React, { useEffect, useRef, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
 import { Button } from '../../lib/button/Button';
@@ -14,7 +13,6 @@ export function RowExpandDoc(props) {
     const [expandedRows, setExpandedRows] = useState(null);
     const toast = useRef(null);
     const isMounted = useRef(false);
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
         isMounted.current = true;
@@ -58,7 +56,7 @@ export function RowExpandDoc(props) {
     };
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={`${contextPath}/images/product/${rowData.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={rowData.image} className="shadow-1 w-full" />;
+        return <img src={`images/product/${rowData.image}`} alt={rowData.image} className="shadow-1 w-full" />;
     };
 
     const priceBodyTemplate = (rowData) => {
@@ -122,9 +120,8 @@ import { ProductService } from './service/ProductService';
 import { Rating } from 'primereact/rating';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
-import './DataTableDemo.css';
 
-const RowExpandDoc = () => {
+export default function RowExpandDoc() {
     const [products, setProducts] = useState([]);
     const [expandedRows, setExpandedRows] = useState(null);
     const toast = useRef(null);
@@ -171,7 +168,7 @@ const RowExpandDoc = () => {
     }
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={\`images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="shadow-1 w-full" />;
+        return <img src={\`https://www.primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} className="shadow-1 w-full" />;
     }
 
     const priceBodyTemplate = (rowData) => {
@@ -239,9 +236,8 @@ import { ProductService } from './service/ProductService';
 import { Rating } from 'primereact/rating';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
-import './DataTableDemo.css';
 
-const RowExpandDoc = () => {
+export default function RowExpandDoc() {
     const [products, setProducts] = useState([]);
     const [expandedRows, setExpandedRows] = useState(null);
     const toast = useRef(null);
@@ -288,7 +284,7 @@ const RowExpandDoc = () => {
     }
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={\`images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="shadow-1 w-full" />;
+        return <img src={\`https://www.primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} className="shadow-1 w-full" />;
     }
 
     const priceBodyTemplate = (rowData) => {

@@ -4,7 +4,6 @@ import { Carousel } from '../../lib/carousel/Carousel';
 import { ProductService } from '../../../service/ProductService';
 import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
-import getConfig from 'next/config';
 
 export function ResponsiveDoc(props) {
     const [products, setProducts] = useState([]);
@@ -26,8 +25,6 @@ export function ResponsiveDoc(props) {
         }
     ];
 
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
-
     useEffect(() => {
         ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -37,7 +34,7 @@ export function ResponsiveDoc(props) {
             <div className="product-item">
                 <div className="product-item-content">
                     <div className="mb-3">
-                        <img src={`${contextPath}/images/product/${product.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={product.name} className="product-image" />
+                        <img src={`images/product/${product.image}`} alt={product.name} className="product-image" />
                     </div>
                     <div>
                         <h4 className="mb-1">{product.name}</h4>
@@ -93,7 +90,7 @@ export default function ResponsiveDemo() {
             <div className="product-item">
                 <div className="product-item-content">
                     <div className="mb-3">
-                        <img src={\`images/product/\${product.image}\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={product.name} className="product-image" />
+                        <img src={\`https://www.primereact.org/images/product/\${product.image}\`} alt={product.name} className="product-image" />
                     </div>
                     <div>
                         <h4 className="mb-1">{product.name}</h4>
@@ -152,7 +149,7 @@ export default function ResponsiveDemo() {
             <div className="product-item">
                 <div className="product-item-content">
                     <div className="mb-3">
-                        <img src={\`images/product/\${product.image}\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={product.name} className="product-image" />
+                        <img src={\`https://www.primereact.org/images/product/\${product.image}\`} alt={product.name} className="product-image" />
                     </div>
                     <div>
                         <h4 className="mb-1">{product.name}</h4>

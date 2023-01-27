@@ -46,7 +46,7 @@ import { Column } from 'primereact/column';
 import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
-const StyleDoc = () => {
+export default function StyleDoc() {
     const [products, setProducts] = useState([]);
     
 
@@ -94,7 +94,7 @@ import { Column } from 'primereact/column';
 import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
-const StyleDoc = () => {
+export default function StyleDoc() {
     const [products, setProducts] = useState([]);
     
 
@@ -123,7 +123,7 @@ const StyleDoc = () => {
     }
 
     return (
-        <div className="card">
+        <div className="card datatable-style-demo">
             <DataTable value={products} rowClassName={rowClass} responsiveLayout="scroll">
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
@@ -134,6 +134,30 @@ const StyleDoc = () => {
     );
 }
         `,
+        extFiles: {
+            'DataTableDemo.css': `
+/* DataTableDemo.css */
+.datatable-style-demo .outofstock {
+    font-weight: 700;
+    color: #FF5252;
+    text-decoration: line-through;
+}
+
+.datatable-style-demo .lowstock {
+    font-weight: 700;
+    color: #FFA726;
+}
+
+.datatable-style-demo .instock {
+    font-weight: 700;
+    color: #66BB6A;
+}
+
+.datatable-style-demo .row-accessories {
+    background-color: rgba(0, 0, 0, 0.15) !important;
+}            
+            `
+        },
         data: `
 /* ProductService */        
 {

@@ -8,7 +8,6 @@ import { MultiSelect } from '../../../lib/multiselect/MultiSelect';
 import { Dropdown } from '../../../lib/dropdown/Dropdown';
 import { InputText } from '../../../lib/inputtext/InputText';
 import { FilterMatchMode, FilterOperator } from '../../../lib/api/Api';
-import getConfig from 'next/config';
 
 export function CustomStorageDoc(props) {
     const [customers, setCustomers] = useState(null);
@@ -35,8 +34,6 @@ export function CustomStorageDoc(props) {
     ];
     const statuses = ['unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal'];
 
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
-
     useEffect(() => {
         CustomerService.getCustomersMedium().then((data) => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -52,14 +49,8 @@ export function CustomStorageDoc(props) {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img
-                    alt={rowData.country.code}
-                    src={`${contextPath}/images/flag/flag_placeholder.png`}
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
-                    className={`flag flag-${rowData.country.code}`}
-                    width="30"
-                />
-                <span className="image-text">{rowData.country.name}</span>
+                <img alt={rowData.country.code} src={`images/flag/flag_placeholder.png`} className={`flag flag-${rowData.country.code}`} width="30" />
+                <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );
     };
@@ -67,14 +58,8 @@ export function CustomStorageDoc(props) {
     const representativeBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img
-                    alt={rowData.representative.name}
-                    src={`${contextPath}/images/avatar/${rowData.representative.image}`}
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
-                    width="32"
-                    style={{ verticalAlign: 'middle' }}
-                />
-                <span className="image-text">{rowData.representative.name}</span>
+                <img alt={rowData.representative.name} src={`images/avatar/${rowData.representative.image}`} width="32" style={{ verticalAlign: 'middle' }} />
+                <span className="vertical-align-middle ml-2">{rowData.representative.name}</span>
             </React.Fragment>
         );
     };
@@ -86,8 +71,8 @@ export function CustomStorageDoc(props) {
     const representativesItemTemplate = (option) => {
         return (
             <div className="p-multiselect-representative-option">
-                <img alt={option.name} src={`${contextPath}/images/avatar/${option.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} width={32} style={{ verticalAlign: 'middle' }} />
-                <span className="image-text">{option.name}</span>
+                <img alt={option.name} src={`images/avatar/${option.image}`} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="vertical-align-middle ml-2">{option.name}</span>
             </div>
         );
     };
@@ -147,7 +132,7 @@ import { MultiSelect } from 'primereact/multiselect';
 import { Dropdown } from 'primereact/dropdown';
 import { CustomerService } from './service/CustomerService';
 
-const CustomStorageDoc = () => {
+export default function CustomStorageDoc() {
 
     const [customers, setCustomers] = useState(null);
     const [filters, setFilters] = useState({
@@ -190,8 +175,8 @@ const CustomStorageDoc = () => {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt={rowData.country.code} src="contextPath}/images/flag/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${rowData.country.code}\`} width="30" />
-                <span className="image-text">{rowData.country.name}</span>
+                <img alt={rowData.country.code} src="https://www.primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} width="30" />
+                <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );
     }
@@ -199,8 +184,8 @@ const CustomStorageDoc = () => {
     const representativeBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt={rowData.representative.name} src={\`images/avatar/\${rowData.representative.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{ verticalAlign: 'middle' }} />
-                <span className="image-text">{rowData.representative.name}</span>
+                <img alt={rowData.representative.name} src={\`https://www.primereact.org/images/avatar/\${rowData.representative.image}\`} width="32" style={{ verticalAlign: 'middle' }} />
+                <span className="vertical-align-middle ml-2">{rowData.representative.name}</span>
             </React.Fragment>
         );
     }
@@ -212,8 +197,8 @@ const CustomStorageDoc = () => {
     const representativesItemTemplate = (option) => {
         return (
             <div className="p-multiselect-representative-option">
-                <img alt={option.name} src={\`images/avatar/\${option.image}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{ verticalAlign: 'middle' }} />
-                <span className="image-text">{option.name}</span>
+                <img alt={option.name} src={\`https://www.primereact.org/images/avatar/\${option.image}\`} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="vertical-align-middle ml-2">{option.name}</span>
             </div>
         );
     }
@@ -276,7 +261,7 @@ import { MultiSelect } from 'primereact/multiselect';
 import { Dropdown } from 'primereact/dropdown';
 import { CustomerService } from './service/CustomerService';
 
-const CustomStorageDoc = () => {
+export default function CustomStorageDoc() {
 
     const [customers, setCustomers] = useState(null);
     const [filters, setFilters] = useState({
@@ -325,8 +310,8 @@ const CustomStorageDoc = () => {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt={rowData.country.code} src="contextPath}/images/flag/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${rowData.country.code}\`} width="30" />
-                <span className="image-text">{rowData.country.name}</span>
+                <img alt={rowData.country.code} src="https://www.primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} width="30" />
+                <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );
     }
@@ -334,8 +319,8 @@ const CustomStorageDoc = () => {
     const representativeBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt={rowData.representative.name} src={\`images/avatar/\${rowData.representative.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{ verticalAlign: 'middle' }} />
-                <span className="image-text">{rowData.representative.name}</span>
+                <img alt={rowData.representative.name} src={\`https://www.primereact.org/images/avatar/\${rowData.representative.image}\`} width="32" style={{ verticalAlign: 'middle' }} />
+                <span className="vertical-align-middle ml-2">{rowData.representative.name}</span>
             </React.Fragment>
         );
     }
@@ -347,8 +332,8 @@ const CustomStorageDoc = () => {
     const representativesItemTemplate = (option) => {
         return (
             <div className="p-multiselect-representative-option">
-                <img alt={option.name} src={\`images/avatar/\${option.image}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{ verticalAlign: 'middle' }} />
-                <span className="image-text">{option.name}</span>
+                <img alt={option.name} src={\`images/avatar/\${option.image}\`} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="vertical-align-middle ml-2">{option.name}</span>
             </div>
         );
     }

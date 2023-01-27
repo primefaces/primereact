@@ -87,7 +87,7 @@ import { InputNumber } from 'primereact/inputnumber';
 import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
-const CellEditingDoc = () => {
+export default function CellEditingDoc() {
     const [products, setProducts] = useState(null);
 
     const columns = [
@@ -172,7 +172,7 @@ import { InputNumber } from 'primereact/inputnumber';
 import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
-const CellEditingDoc = () => {
+export default function CellEditingDoc() {
     const [products, setProducts] = useState(null);
 
     const columns = [

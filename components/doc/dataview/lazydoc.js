@@ -55,7 +55,7 @@ export function LazyDataViewDoc(props) {
         return (
             <div className="col-12">
                 <div className="flex flex-column align-items-center p-3 w-full md:flex-row">
-                    <img className="md:w-11rem w-9 shadow-2 md:my-0 md:mr-5 mr-0 my-5" src={`images/product/${data.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={data.name} />
+                    <img className="md:w-11rem w-9 shadow-2 md:my-0 md:mr-5 mr-0 my-5" src={`images/product/${data.image}`} alt={data.name} />
                     <div className="text-center md:text-left md:flex-1">
                         <div className="text-2xl font-bold">{data.name}</div>
                         <div className="mb-3">{data.description}</div>
@@ -85,7 +85,7 @@ export function LazyDataViewDoc(props) {
                         <span className={`product-badge status-${data.inventoryStatus.toLowerCase()}`}>{data.inventoryStatus}</span>
                     </div>
                     <div className="text-center">
-                        <img className="w-9 my-5 shadow-3" src={`images/product/${data.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={data.name} />
+                        <img className="w-9 my-5 shadow-3" src={`images/product/${data.image}`} alt={data.name} />
                         <div className="text-2xl font-bold">{data.name}</div>
                         <div className="mb-3">{data.description}</div>
                         <Rating className="mb-2" value={data.rating} readOnly cancel={false}></Rating>
@@ -185,7 +185,7 @@ export default function LazyDataViewDoc() {
         return (
             <div className="col-12">
                 <div className="flex flex-column align-items-center p-3 w-full md:flex-row">
-                    <img className="md:w-11rem w-9 shadow-2 md:my-0 md:mr-5 mr-0 my-5" src={\`images/product/\${data.image}\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={data.name} />
+                    <img className="md:w-11rem w-9 shadow-2 md:my-0 md:mr-5 mr-0 my-5" src={\`https://www.primereact.org/images/product/\${data.image}\`}  alt={data.name} />
                     <div className="text-center md:text-left md:flex-1">
                         <div className="text-2xl font-bold">{data.name}</div>
                         <div className="mb-3">{data.description}</div>
@@ -215,7 +215,7 @@ export default function LazyDataViewDoc() {
                         <span className={\`product-badge status-\${data.inventoryStatus.toLowerCase()}\`}>{data.inventoryStatus}</span>
                     </div>
                     <div className="text-center">
-                        <img className="w-9 my-5 shadow-3" src={\`images/product/\${data.image}\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={data.name} />
+                        <img className="w-9 my-5 shadow-3" src={\`https://www.primereact.org/images/product/\${data.image}\`}  alt={data.name} />
                         <div className="text-2xl font-bold">{data.name}</div>
                         <div className="mb-3">{data.description}</div>
                         <Rating className="mb-2" value={data.rating} readOnly cancel={false}></Rating>
@@ -320,7 +320,7 @@ export default function LazyDataViewDoc() {
         return (
             <div className="col-12">
                 <div className="flex flex-column align-items-center p-3 w-full md:flex-row">
-                    <img className="md:w-11rem w-9 shadow-2 md:my-0 md:mr-5 mr-0 my-5" src={\`images/product/\${data.image}\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={data.name} />
+                    <img className="md:w-11rem w-9 shadow-2 md:my-0 md:mr-5 mr-0 my-5" src={\`https://www.primereact.org/images/product/\${data.image}\`}  alt={data.name} />
                     <div className="text-center md:text-left md:flex-1">
                         <div className="text-2xl font-bold">{data.name}</div>
                         <div className="mb-3">{data.description}</div>
@@ -350,7 +350,7 @@ export default function LazyDataViewDoc() {
                         <span className={\`product-badge status-\${data.inventoryStatus.toLowerCase()}\`}>{data.inventoryStatus}</span>
                     </div>
                     <div className="text-center">
-                        <img className="w-9 my-5 shadow-3" src={\`images/product/\${data.image}\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={data.name} />
+                        <img className="w-9 my-5 shadow-3" src={\`https://www.primereact.org/images/product/\${data.image}\`}  alt={data.name} />
                         <div className="text-2xl font-bold">{data.name}</div>
                         <div className="mb-3">{data.description}</div>
                         <Rating className="mb-2" value={data.rating} readOnly cancel={false}></Rating>
@@ -397,14 +397,16 @@ export default function LazyDataViewDoc() {
     )
 }
         `,
-        css: `
+        exFiles: {
+            'DataViewDemo.css': `
 /* DataViewDemo.css */
 
 .dataview-demo .p-dropdown {
     width: 14rem;
     font-weight: normal;
 }
-        `,
+        `
+        },
         data: `
 /* ProductService */        
 {

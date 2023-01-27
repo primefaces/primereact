@@ -13,7 +13,6 @@ import { Slider } from '../../../components/lib/slider/Slider';
 import { CustomerService } from '../../../service/CustomerService';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
-import getConfig from 'next/config';
 
 export const CustomersDoc = (props) => {
     const [customers, setCustomers] = useState(null);
@@ -82,7 +81,7 @@ import { Slider } from 'primereact/slider';
 import { CustomerService } from './service/CustomerService';
 import './DataTableDemo.css';
 
-const DataTableDemo = () => {
+export default DataTableDemo() {
     const [customers, setCustomers] = useState(null);
     const [selectedCustomers, setSelectedCustomers] = useState(null);
     const [filters, setFilters] = useState({
@@ -162,8 +161,8 @@ const DataTableDemo = () => {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt="flag" src="images/flag/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${rowData.country.code}\`} width={30} />
-                <span className="image-text">{rowData.country.name}</span>
+                <img alt="flag" src="https://www.primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} width={30} />
+                <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );
     }
@@ -172,8 +171,8 @@ const DataTableDemo = () => {
         const representative = rowData.representative;
         return (
             <React.Fragment>
-                <img alt={representative.name} src={\`images/avatar/\${representative.image}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{ verticalAlign: 'middle' }} />
-                <span className="image-text">{representative.name}</span>
+                <img alt={representative.name} src={\`https://www.primereact.org/images/avatar/\${representative.image}\`} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="vertical-align-middle ml-2">{representative.name}</span>
             </React.Fragment>
         );
     }
@@ -190,8 +189,8 @@ const DataTableDemo = () => {
     const representativesItemTemplate = (option) => {
         return (
             <div className="p-multiselect-representative-option">
-                <img alt={option.name} src={\`images/avatar/\${option.image}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{ verticalAlign: 'middle' }} />
-                <span className="image-text">{option.name}</span>
+                <img alt={option.name} src={\`images/avatar/\${option.image}\`} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="vertical-align-middle ml-2">{option.name}</span>
             </div>
         );
     }
@@ -296,7 +295,7 @@ import { Slider } from 'primereact/slider';
 import { CustomerService } from './service/CustomerService';
 import './DataTableDemo.css';
 
-const DataTableDemo = () => {
+export default DataTableDemo() {
     const [customers, setCustomers] = useState(null);
     const [selectedCustomers, setSelectedCustomers] = useState(null);
     const [filters, setFilters] = useState({
@@ -376,8 +375,8 @@ const DataTableDemo = () => {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt="flag" src="images/flag/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${rowData.country.code}\`} width={30} />
-                <span className="image-text">{rowData.country.name}</span>
+                <img alt="flag" src="https://www.primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} width={30} />
+                <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );
     }
@@ -386,8 +385,8 @@ const DataTableDemo = () => {
         const representative = rowData.representative;
         return (
             <React.Fragment>
-                <img alt={representative.name} src={\`images/avatar/\${representative.image}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{ verticalAlign: 'middle' }} />
-                <span className="image-text">{representative.name}</span>
+                <img alt={representative.name} src={\`https://www.primereact.org/images/avatar/\${representative.image}\`} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="vertical-align-middle ml-2">{representative.name}</span>
             </React.Fragment>
         );
     }
@@ -404,8 +403,8 @@ const DataTableDemo = () => {
     const representativesItemTemplate = (option) => {
         return (
             <div className="p-multiselect-representative-option">
-                <img alt={option.name} src={\`images/avatar/\${option.image}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{ verticalAlign: 'middle' }} />
-                <span className="image-text">{option.name}</span>
+                <img alt={option.name} src={\`images/avatar/\${option.image}\`} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="vertical-align-middle ml-2">{option.name}</span>
             </div>
         );
     }
@@ -494,7 +493,8 @@ const DataTableDemo = () => {
     );
 }
         `,
-        css: `
+        extFiles: {
+            'DataTableDemo.css': `
 /* DataTableDemo.css */
 
 .datatable-doc-demo .p-paginator .p-paginator-current {
@@ -527,7 +527,8 @@ const DataTableDemo = () => {
 .datatable-doc-demo .p-datatable.p-datatable-customers .p-dropdown-label:not(.p-placeholder) {
     text-transform: uppercase;
 }
-        `,
+        `
+        },
         data: `
 /* CustomerService */ 
 {
@@ -551,8 +552,6 @@ const DataTableDemo = () => {
 ...
        `
     };
-
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
         CustomerService.getCustomersLarge().then((data) => {
@@ -606,14 +605,8 @@ const DataTableDemo = () => {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img
-                    alt="flag"
-                    src={`${contextPath}/images/flag/flag_placeholder.png`}
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
-                    className={`flag flag-${rowData.country.code}`}
-                    width={30}
-                />
-                <span className="image-text">{rowData.country.name}</span>
+                <img alt="flag" src={`images/flag/flag_placeholder.png`} className={`flag flag-${rowData.country.code}`} width={30} />
+                <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );
     };
@@ -623,14 +616,8 @@ const DataTableDemo = () => {
 
         return (
             <React.Fragment>
-                <img
-                    alt={representative.name}
-                    src={`${contextPath}/images/avatar/${representative.image}`}
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
-                    width={32}
-                    style={{ verticalAlign: 'middle' }}
-                />
-                <span className="image-text">{representative.name}</span>
+                <img alt={representative.name} src={`images/avatar/${representative.image}`} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="vertical-align-middle ml-2">{representative.name}</span>
             </React.Fragment>
         );
     };
@@ -647,8 +634,8 @@ const DataTableDemo = () => {
     const representativesItemTemplate = (option) => {
         return (
             <div className="p-multiselect-representative-option">
-                <img alt={option.name} src={`${contextPath}/images/avatar/${option.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} width={32} style={{ verticalAlign: 'middle' }} />
-                <span className="image-text">{option.name}</span>
+                <img alt={option.name} src={`images/avatar/${option.image}`} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="vertical-align-middle ml-2">{option.name}</span>
             </div>
         );
     };

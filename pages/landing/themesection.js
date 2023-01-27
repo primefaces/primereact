@@ -83,7 +83,7 @@ const ThemeSection = (props) => {
         return (
             <React.Fragment>
                 <img alt="flag" src={`https://www.primereact.org/images/flag/flag_placeholder.png`} className={`flag flag-${rowData.country.code}`} width={30} />
-                <span className="image-text">{rowData.country.name}</span>
+                <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );
     };
@@ -94,7 +94,7 @@ const ThemeSection = (props) => {
         return (
             <React.Fragment>
                 <img alt={representative.name} src={`https://www.primereact.org/images/avatar/${representative.image}`} width={32} style={{ verticalAlign: 'middle' }} />
-                <span className="image-text">{representative.name}</span>
+                <span className="vertical-align-middle ml-2">{representative.name}</span>
             </React.Fragment>
         );
     };
