@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/togglebutton/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/togglebutton/apidoc';
 import { BasicDoc } from '../../components/doc/togglebutton/basicdoc';
 import { CustomizedDoc } from '../../components/doc/togglebutton/customizeddoc';
 import { ImportDoc } from '../../components/doc/togglebutton/importdoc';
@@ -59,7 +58,7 @@ const ToggleButtonDemo = () => {
             id: 'api',
             label: 'API',
             type: 'api',
-            component: ApiDoc
+            doc: [{ name: 'ToggleButton', pathname: '/modules/togglebutton.html' }]
         }
     ];
 
@@ -75,7 +74,7 @@ const ToggleButtonDemo = () => {
                     <p>ToggleButton is used to select a boolean value using a button.</p>
                 </div>
 
-                <DocActions github="togglebutton/index.js" />
+                <DocActions github="/togglebutton" />
             </div>
 
             <div className="content-section doc">

@@ -1,21 +1,19 @@
-import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 import { classNames } from '../../lib/utils/Utils';
 
 export function DocSectionNav(props) {
     const router = useRouter();
     const [activeTab, setActiveTab] = useState('');
-    const [topbarHeight, setTopbarHeight] = useState(null);
 
     const onButtonClick = (doc) => {
-        setActiveTab(doc.id);
         // Scroll to the clicked button's parent element
-        scrollToTheSection(doc.id);
+        scrollToTheSection(doc.id, 'smooth');
     };
 
-    const scrollToTheSection = (id) => {
-        document.getElementById(id).parentElement.scrollIntoView({ block: 'start', offset: { top: topbarHeight + 100 } });
+    const scrollToTheSection = (id, behavior) => {
+        document.getElementById(id).parentElement.scrollIntoView({ block: 'start', behavior });
     };
 
     const getIdOfTheSection = (section) => {
@@ -40,8 +38,6 @@ export function DocSectionNav(props) {
         const sections = document.querySelectorAll('section'); // Get all sections on the page
         const topbarEl = document.getElementsByClassName('layout-topbar')[0]; // Get the topbar element
         const hash = window.location.hash.substring(1); // Get the initial hash
-
-        setTopbarHeight(topbarEl.clientHeight);
 
         // Set the active tab to the initial hash and scroll into view if it exists
         if (hash) {

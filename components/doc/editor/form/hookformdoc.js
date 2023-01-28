@@ -1,10 +1,10 @@
 import { useRef } from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
+import { Controller, useForm } from 'react-hook-form';
 import { Button } from '../../../lib/button/Button';
-import { Toast } from '../../../lib/toast/Toast';
 import { Editor } from '../../../lib/editor/Editor';
+import { Toast } from '../../../lib/toast/Toast';
+import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function HookFormDoc(props) {
     const toast = useRef(null);
@@ -56,7 +56,7 @@ export function HookFormDoc(props) {
     render={({ field }) => <Editor id={field.name} name="blog" value={field.value} headerTemplate={header} onTextChange={(e) => field.onChange(e.textValue)} style={{ height: '320px' }} />}
 /
 {getFormErrorMessage('blog')}
-<Button type="submit" label="Upload" />
+<Button type="submit" label="Save" />
         `,
         javascript: `
 import React, { useRef } from "react";
@@ -115,10 +115,9 @@ export default function HookFormDoc() {
                     rules={{ required: 'Content is required.' }}
                     render={({ field }) => <Editor id={field.name} name="blog" value={field.value} headerTemplate={header} onTextChange={(e) => field.onChange(e.textValue)} style={{ height: '320px' }} />}
                 />
-
-                {getFormErrorMessage('blog')}
-                <div className="mt-2 flex justify-content-end">
-                    <Button type="submit" label="Upload" />
+                <div className="flex flex-wrap justify-content-between align-items-center gap-3 mt-3">
+                    {getFormErrorMessage('blog')}
+                    <Button type="submit" label="Save" />
                 </div>
             </form>
         </div>
@@ -128,7 +127,7 @@ export default function HookFormDoc() {
         typescript: `
 import React, { useRef } from "react";
 import { useForm, Controller } from 'react-hook-form';
-import { Editor } from 'primereact/editor';
+import { Editor, EditorTextChangeEvent } from 'primereact/editor';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
@@ -180,12 +179,11 @@ export default function HookFormDoc() {
                     name="blog"
                     control={control}
                     rules={{ required: 'Content is required.' }}
-                    render={({ field }) => <Editor id={field.name} name="blog" value={field.value} headerTemplate={header} onTextChange={(e) => field.onChange(e.textValue)} style={{ height: '320px' }} />}
+                    render={({ field }) => <Editor id={field.name} name="blog" value={field.value} headerTemplate={header} onTextChange={(e: EditorTextChangeEvent) => field.onChange(e.textValue)} style={{ height: '320px' }} />}
                 />
-
-                {getFormErrorMessage('blog')}
-                <div className="mt-2 flex justify-content-end">
-                    <Button type="submit" label="Upload" />
+                <div className="flex flex-wrap justify-content-between align-items-center gap-3 mt-3">
+                    {getFormErrorMessage('blog')}
+                    <Button type="submit" label="Save" />
                 </div>
             </form>
         </div>
@@ -210,10 +208,9 @@ export default function HookFormDoc() {
                         rules={{ required: 'Content is required.' }}
                         render={({ field }) => <Editor id={field.name} name="blog" value={field.value} headerTemplate={header} onTextChange={(e) => field.onChange(e.textValue)} style={{ height: '320px' }} />}
                     />
-
-                    {getFormErrorMessage('blog')}
-                    <div className="mt-2 flex justify-content-end">
-                        <Button type="submit" label="Upload" />
+                    <div className="flex flex-wrap justify-content-between align-items-center gap-3 mt-3">
+                        {getFormErrorMessage('blog')}
+                        <Button type="submit" label="Save" />
                     </div>
                 </form>
             </div>

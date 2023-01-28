@@ -75,7 +75,7 @@ import { Column } from 'primereact/column';
 import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
-const MultipleDoc = () => {
+export default function MultipleDoc() {
 
     const [products, setProducts] = useState([]);
     const [selectedProducts1, setSelectedProducts1] = useState(null);
@@ -92,7 +92,7 @@ const MultipleDoc = () => {
     },[]);
 
     return (
-        <div className="card">
+        <div className="card datatable-selection-demo">
             <h6>Row Selection with MetaKey</h6>
             <DataTable value={products} selectionMode="multiple" selection={selectedProducts1} onSelectionChange={e => setSelectedProducts1(e.value)} dataKey="id" responsiveLayout="scroll">
                 <Column field="code" header="Code"></Column>
@@ -151,7 +151,7 @@ import { Column } from 'primereact/column';
 import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
-const MultipleDoc = () => {
+export default function MultipleDoc() {
 
     const [products, setProducts] = useState([]);
     const [selectedProducts1, setSelectedProducts1] = useState(null);
@@ -168,7 +168,7 @@ const MultipleDoc = () => {
     },[]);
 
     return (
-        <div className="card">
+        <div className="card datatable-selection-demo">
             <h6>Row Selection with MetaKey</h6>
             <DataTable value={products} selectionMode="multiple" selection={selectedProducts1} onSelectionChange={e => setSelectedProducts1(e.value)} dataKey="id" responsiveLayout="scroll">
                 <Column field="code" header="Code"></Column>
@@ -220,6 +220,18 @@ const MultipleDoc = () => {
     );
 }
         `,
+        extFiles: {
+            'DataTableDemo.css': `
+/* DataTableDemo.css */
+
+.datatable-selection-demo .card h6 {
+    margin-top: 2rem;
+}
+.datatable-selection-demo .card h6:first-of-type {
+    margin-top: 0;
+}
+`
+        },
         data: `
 /* ProductService */        
 {
@@ -246,7 +258,7 @@ const MultipleDoc = () => {
                     selection without meta key. In addition, the rectangular selection can be dragged over the desired rows or cells thanks to the dragSelection property. In this way, a range of rows or cells can be selected.
                 </p>{' '}
             </DocSectionText>
-            <div className="card">
+            <div className="card datatable-selection-demo">
                 <h6>Row Selection with MetaKey</h6>
                 <DataTable value={products} selectionMode="multiple" selection={selectedProducts1} onSelectionChange={(e) => setSelectedProducts1(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>

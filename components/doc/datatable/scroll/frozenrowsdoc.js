@@ -83,7 +83,7 @@ import { Button } from 'primereact/button';
 import { CustomerService } from './service/CustomerService';
 import './DataTableDemo.css';
 
-const ScrollFrozenRowsDoc = () => {
+export default function ScrollFrozenRowsDoc() {
     const [lockedCustomers, setLockedCustomers] = useState([]);
     const [unlockedCustomers, setUnlockedCustomers] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -144,7 +144,7 @@ const ScrollFrozenRowsDoc = () => {
     };
 
     return (
-        <div className="card">
+        <div className="card datatable-scroll-demo">
             <DataTable value={unlockedCustomers} frozenValue={lockedCustomers} scrollable scrollHeight="400px" loading={loading}>
                 <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
                 <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
@@ -164,7 +164,7 @@ import { Button } from 'primereact/button';
 import { CustomerService } from './service/CustomerService';
 import './DataTableDemo.css';
 
-const ScrollFrozenRowsDoc = () => {
+export default function ScrollFrozenRowsDoc() {
     const [lockedCustomers, setLockedCustomers] = useState([]);
     const [unlockedCustomers, setUnlockedCustomers] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -225,7 +225,7 @@ const ScrollFrozenRowsDoc = () => {
     };
 
     return (
-        <div className="card">
+        <div className="card datatable-scroll-demo">
             <DataTable value={unlockedCustomers} frozenValue={lockedCustomers} scrollable scrollHeight="400px" loading={loading}>
                 <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
                 <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
@@ -237,7 +237,8 @@ const ScrollFrozenRowsDoc = () => {
     );
 }
         `,
-        css: `
+        extFiles: {
+            'DataTableDemo.css': `
 /* DataTableDemo.css */
 .datatable-scroll-demo .p-datatable-frozen-tbody {
     font-weight: bold;
@@ -246,7 +247,8 @@ const ScrollFrozenRowsDoc = () => {
 .datatable-scroll-demo .p-datatable-scrollable .p-frozen-column {
     font-weight: bold;
 }
-        `,
+        `
+        },
         data: `
 /* CustomerService */ 
 {
@@ -276,7 +278,7 @@ const ScrollFrozenRowsDoc = () => {
             <DocSectionText {...props}>
                 <p>Frozen Rows demo content.</p>
             </DocSectionText>
-            <div className="card">
+            <div className="card datatable-scroll-demo">
                 <DataTable value={unlockedCustomers} frozenValue={lockedCustomers} scrollable scrollHeight="400px" loading={loading}>
                     <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
                     <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>

@@ -37,7 +37,7 @@ const InputSwitchProps = [
     },
     {
         name: 'checked',
-        type: 'any',
+        type: 'boolean',
         default: 'false',
         description: 'Specifies whether a inputswitch should be checked or not.'
     },

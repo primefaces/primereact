@@ -1,14 +1,13 @@
 import Head from 'next/head';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/megamenu/importdoc';
-import { BasicDoc } from '../../components/doc/megamenu/basicdoc';
-import { VerticalDoc } from '../../components/doc/megamenu/verticaldoc';
-import { TemplateDoc } from '../../components/doc/megamenu/templatedoc';
-import { ApiDoc } from '../../components/doc/megamenu/apidoc';
 import { AccessibilityDoc } from '../../components/doc/megamenu/accessibilitydoc';
+import { BasicDoc } from '../../components/doc/megamenu/basicdoc';
+import { ImportDoc } from '../../components/doc/megamenu/importdoc';
 import { StyleDoc } from '../../components/doc/megamenu/styledoc';
+import { TemplateDoc } from '../../components/doc/megamenu/templatedoc';
+import { VerticalDoc } from '../../components/doc/megamenu/verticaldoc';
 
 const MegaMenuDemo = () => {
     const docs = [
@@ -45,7 +44,7 @@ const MegaMenuDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'MegaMenu', pathname: '/modules/megamenu.html' }]
         }
     ];
 
@@ -60,7 +59,7 @@ const MegaMenuDemo = () => {
                     <h1>MegaMenu</h1>
                     <p>MegaMenu is navigation component that displays submenus together.</p>
                 </div>
-                <DocActions github="megamenu/index.js" />
+                <DocActions github="/megamenu" />
             </div>
 
             <div className="content-section doc">

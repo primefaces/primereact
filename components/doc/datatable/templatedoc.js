@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import getConfig from 'next/config';
 import { DataTable } from '../../lib/datatable/DataTable';
 import { Column } from '../../lib/column/Column';
 import { Button } from '../../lib/button/Button';
@@ -11,8 +10,6 @@ import { DocSectionText } from '../common/docsectiontext';
 export function TemplateDoc(props) {
     const [products, setProducts] = useState([]);
 
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
-
     useEffect(() => {
         ProductService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -22,7 +19,7 @@ export function TemplateDoc(props) {
     };
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={`${contextPath}/images/product/${rowData.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={rowData.image} className="product-image" />;
+        return <img src={`images/product/${rowData.image}`} alt={rowData.image} className="product-image" />;
     };
 
     const priceBodyTemplate = (rowData) => {
@@ -65,7 +62,7 @@ import { Button } from 'primereact/button';
 import { Rating } from 'primereact/rating';
 import './DataTableDemo.css';
 
-const TemplateDoc = () => {
+export default function TemplateDoc() {
     const [products, setProducts] = useState([]);
     
 
@@ -78,7 +75,7 @@ const TemplateDoc = () => {
     }
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={\`images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />;
+        return <img src={\`https://www.primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} className="product-image" />;
     }
 
     const priceBodyTemplate = (rowData) => {
@@ -125,7 +122,7 @@ import { Button } from 'primereact/button';
 import { Rating } from 'primereact/rating';
 import './DataTableDemo.css';
 
-const TemplateDoc = () => {
+export default function TemplateDoc() {
     const [products, setProducts] = useState([]);
     
 
@@ -138,7 +135,7 @@ const TemplateDoc = () => {
     }
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={\`images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />;
+        return <img src={\`https://www.primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} className="product-image" />;
     }
 
     const priceBodyTemplate = (rowData) => {
@@ -176,7 +173,8 @@ const TemplateDoc = () => {
         </div>
     );
         `,
-        css: `
+        extFiles: {
+            'DataTableDemo.css': `
 /* DataTableDemo.css */
 
 .datatable-templating-demo .table-header {
@@ -189,7 +187,8 @@ const TemplateDoc = () => {
     width: 100px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
-        `,
+        `
+        },
         data: `
 /* ProductService */        
 {

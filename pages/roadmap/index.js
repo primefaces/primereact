@@ -8,7 +8,7 @@ const Roadmap = () => {
                 <title>React Roadmap</title>
                 <meta
                     name="description"
-                    content="These are planned to be implemented in parellel to the regular
+                    content="These are planned to be implemented in parallel to the regular
                         maintenance work of the PrimeReact library"
                 />
             </Head>
@@ -16,8 +16,8 @@ const Roadmap = () => {
                 <div className="feature-intro">
                     <h1>Roadmap</h1>
                     <p>
-                        At <a href="https://www.primetek.com.tr/">PrimeTek</a>, we are passionate about improving PrimeReact and would like to share our ideas for 2023 with the community. These are planned to be implemented in parellel to the regular
-                        maintenance work of the library involving review of issue tickets, PRs and PrimeReact PRO support. This page is updated on changes so please visit it to learn more about what is coming up next.
+                        At <a href="https://www.primetek.com.tr/">PrimeTek</a>, we are passionate about improving PrimeReact and would like to share our ideas for 2023 with the community. These are planned to be implemented in parallel to the regular
+                        maintenance work of the library involving review of issue tickets, PRs and PrimeReact PRO support. This page is updated periodically so please revisit to monitor the progress.
                     </p>
                 </div>
             </div>
@@ -38,14 +38,14 @@ const Roadmap = () => {
                                 <div className="flex-1 flex gap-3 flex-column">
                                     <div className="p-3 surface-card border-round border-blue-500" style={{ borderLeft: '6px solid' }}>
                                         <h2 className="text-lg font-bold mt-0 mb-2">Accessibility</h2>
-                                        <p className="mt-0 mb-3 line-height-3">Finalize WCAG Level AA compliance for all components with screen reader and keyboard support.</p>
+                                        <p className="mt-0 mb-3 line-height-3">Implement WCAG Level AA compliance using PrimeVue as the reference implementation.</p>
                                         <div className="surface-200 border-round">
-                                            <div className="bg-blue-500 border-round" style={{ width: '90%', height: '4px' }}></div>
+                                            <div className="bg-blue-500 border-round" style={{ width: '15%', height: '4px' }}></div>
                                         </div>
                                     </div>
                                     <div className="p-3 surface-card border-round border-blue-500" style={{ borderLeft: '6px solid' }}>
-                                        <h2 className="text-lg font-bold mt-0 mb-2">Headless Mode</h2>
-                                        <p className="mt-0 mb-3 line-height-3">Design the implementation of Headless Mode to support libraries like Tailwind.</p>
+                                        <h2 className="text-lg font-bold mt-0 mb-2">New Styling API</h2>
+                                        <p className="mt-0 mb-3 line-height-3">Modernize styling to provide a flexible API to support styled components, css modules and sass.</p>
                                         <div className="surface-200 border-round">
                                             <div className="bg-blue-500 border-round" style={{ width: '0%', height: '4px' }}></div>
                                         </div>
@@ -60,8 +60,8 @@ const Roadmap = () => {
                                         </div>
                                     </div>
                                     <div className="p-3 surface-card border-round border-blue-500" style={{ borderLeft: '6px solid' }}>
-                                        <h2 className="text-lg font-bold mt-0 mb-2">Headless Mode</h2>
-                                        <p className="mt-0 mb-3 line-height-3">Initate headless mode implementation for commonly used components.</p>
+                                        <h2 className="text-lg font-bold mt-0 mb-2">Unstyled Mode</h2>
+                                        <p className="mt-0 mb-3 line-height-3">Implementation of the Unstyled Mode to support libraries like Tailwind.</p>
                                         <div className="surface-200 border-round">
                                             <div className="bg-blue-500 border-round" style={{ width: '0%', height: '4px' }}></div>
                                         </div>
@@ -112,24 +112,17 @@ const Roadmap = () => {
                                 <div className="flex-shrink-0 p-3 bg-teal-500 text-white border-round font-bold text-lg flex align-items-center justify-content-center w-14rem">SHOWCASE</div>
                                 <div className="flex-1 flex gap-3 flex-column">
                                     <div className="p-3 surface-card border-round border-teal-500" style={{ borderLeft: '6px solid' }}>
-                                        <h2 className="text-lg font-bold mt-0 mb-2">Nuxt</h2>
-                                        <p className="mt-0 mb-3 line-height-3">Migrate showcase application to Nuxt for SSR.</p>
-                                        <div className="surface-200 border-round">
-                                            <div className="bg-teal-500 border-round" style={{ width: '0%', height: '4px' }}></div>
-                                        </div>
-                                    </div>
-                                    <div className="p-3 surface-card border-round border-teal-500" style={{ borderLeft: '6px solid' }}>
                                         <h2 className="text-lg font-bold mt-0 mb-2">Demos</h2>
                                         <p className="mt-0 mb-3 line-height-3">Standalone demos for each component feature instead of one demo page that demonstrates multiple features.</p>
                                         <div className="surface-200 border-round">
-                                            <div className="bg-teal-500 border-round" style={{ width: '0%', height: '4px' }}></div>
+                                            <div className="bg-teal-500 border-round" style={{ width: '75%', height: '4px' }}></div>
                                         </div>
                                     </div>
                                     <div className="p-3 surface-card border-round border-teal-500" style={{ borderLeft: '6px solid' }}>
                                         <h2 className="text-lg font-bold mt-0 mb-2">Documentation</h2>
                                         <p className="mt-0 mb-3 line-height-3">New component API docs generated by TSDoc.</p>
                                         <div className="surface-200 border-round">
-                                            <div className="bg-teal-500 border-round" style={{ width: '0%', height: '4px' }}></div>
+                                            <div className="bg-teal-500 border-round" style={{ width: '90%', height: '4px' }}></div>
                                         </div>
                                     </div>
                                 </div>
@@ -144,7 +137,7 @@ const Roadmap = () => {
                                         <h2 className="text-lg font-bold mt-0 mb-2">New Blocks</h2>
                                         <p className="mt-0 mb-3 line-height-3">30+ new UI Blocks.</p>
                                         <div className="surface-200 border-round">
-                                            <div className="bg-orange-500 border-round" style={{ width: '0%', height: '4px' }}></div>
+                                            <div className="bg-orange-500 border-round" style={{ width: '50%', height: '4px' }}></div>
                                         </div>
                                     </div>
                                 </div>
@@ -180,8 +173,8 @@ const Roadmap = () => {
                                 <div className="flex-shrink-0 p-3 bg-pink-500 text-white border-round font-bold text-lg flex align-items-center justify-content-center w-14rem">Designer</div>
                                 <div className="flex-1 flex gap-3 flex-column">
                                     <div className="p-3 surface-card border-round border-pink-500" style={{ borderLeft: '6px solid' }}>
-                                        <h2 className="text-lg font-bold mt-0 mb-2">New Free Theme</h2>
-                                        <p className="mt-0 mb-3 line-height-3">A brand new theme with dark mode alternative.</p>
+                                        <h2 className="text-lg font-bold mt-0 mb-2">New Free Themes</h2>
+                                        <p className="mt-0 mb-3 line-height-3">Open source new themes including Soho, Viva, Mira and Nano.</p>
                                         <div className="surface-200 border-round">
                                             <div className="bg-pink-500 border-round" style={{ width: '0%', height: '4px' }}></div>
                                         </div>
@@ -204,23 +197,16 @@ const Roadmap = () => {
                                 <div className="flex-1 flex gap-3 flex-column">
                                     <div className="p-3 surface-card border-round border-purple-500" style={{ borderLeft: '6px solid' }}>
                                         <h2 className="text-lg font-bold mt-0 mb-2">Apollo</h2>
-                                        <p className="mt-0 mb-3 line-height-3">Port Apollo from PrimeNG using Vite.</p>
+                                        <p className="mt-0 mb-3 line-height-3">Port Apollo from PrimeNG using NEXT.js.</p>
                                         <div className="surface-200 border-round">
-                                            <div className="bg-purple-500 border-round" style={{ width: '0%', height: '4px' }}></div>
-                                        </div>
-                                    </div>
-                                    <div className="p-3 surface-card border-round border-purple-500" style={{ borderLeft: '6px solid' }}>
-                                        <h2 className="text-lg font-bold mt-0 mb-2">Migrate to Vite</h2>
-                                        <p className="mt-0 mb-3 line-height-3">Initiate migration of templates to Vite.</p>
-                                        <div className="surface-200 border-round">
-                                            <div className="bg-purple-500 border-round" style={{ width: '0%', height: '4px' }}></div>
+                                            <div className="bg-purple-500 border-round" style={{ width: '100%', height: '4px' }}></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="flex-1 flex gap-3 flex-column">
                                     <div className="p-3 surface-card border-round border-purple-500" style={{ borderLeft: '6px solid' }}>
-                                        <h2 className="text-lg font-bold mt-0 mb-2">Migrate to Vite</h2>
-                                        <p className="mt-0 mb-3 line-height-3">Continue migration of templates to Vite.</p>
+                                        <h2 className="text-lg font-bold mt-0 mb-2">Migrate to NEXT.js</h2>
+                                        <p className="mt-0 mb-3 line-height-3">Continue migration of templates to NEXT.js.</p>
                                         <div className="surface-200 border-round">
                                             <div className="bg-purple-500 border-round" style={{ width: '0%', height: '4px' }}></div>
                                         </div>

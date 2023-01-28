@@ -1,12 +1,12 @@
-import React from 'react';
-import Link from 'next/link';
-import { CodeHighlight } from '../../components/doc/common/codehighlight';
-import Head from 'next/head';
 import getConfig from 'next/config';
-import { Panel } from '../../components/lib/panel/Panel';
-import { Button } from '../../components/lib/button/Button';
-import stylesModule from './theming.module.css';
+import Head from 'next/head';
+import Link from 'next/link';
+import React from 'react';
 import css from 'styled-jsx/css';
+import { CodeHighlight } from '../../components/doc/common/codehighlight';
+import { Button } from '../../components/lib/button/Button';
+import { Panel } from '../../components/lib/panel/Panel';
+import stylesModule from './theming.module.css';
 
 const ThemingPage = () => {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
@@ -94,13 +94,12 @@ primereact/resources/themes/rhea/theme.css
                 <p>
                     CSS of the themes share the same license as PrimeReact which is MIT, this means the generated CSS can be customized per your needs however this should be avoided if your customizations are not simple. For instance even to change a
                     primary color, since there is no variable a find and replace should be performed various times. On the other hand, this can be achieved by changing a single variable e.g. <i>$primaryColor</i>. Visit the{' '}
-                    <a href="https://www.primefaces.org/designer/api/primereact/7.0.0">SASS API</a> for the documentation of available customization options.
+                    <a href="https://www.primefaces.org/designer/api/primereact/8.1.0">SASS API</a> for the documentation of available customization options.
                 </p>
 
                 <p>
                     <a href="https://www.primefaces.org/designer/primereact">Designer</a> is the ultimate tool to create your own PrimeReact experience powered by a SASS based theme engine with 500+ variables and a Visual Designer. PrimeReact only
-                    ships the generated CSS of <b>Material</b>, <b>Bootstrap</b>, <b>Tailwind</b> and <b>PrimeOne</b> themes whereas Designer provides full access to the whole SASS structure and the variables of these pre-built themes for easier
-                    customization. In addition, designer provides exclusive premium themes to subscribers including <b>Soho</b>, <b>Viva</b>, <b>Mira</b> and <b>Nano</b> that are not available in core PrimeReact distribution at NPM.
+                    ships the generated CSS of the themes whereas Designer provides full access to the whole SASS structure and the variables of these pre-built themes for easier customization.
                 </p>
 
                 <p>Whether you have your own style guide or just need a custom theme, Designer is the right tool to design and bring them to existence.</p>
@@ -278,7 +277,7 @@ html {
                     <a href="https://www.primefaces.org/primeflex/">PrimeFlex</a> is a lightweight responsive CSS utility library to accompany Prime UI libraries and static webpages as well. PrimeReact can be used with any CSS utility library like
                     bootstrap and tailwind however PrimeFlex has benefits like integration with PrimeReact themes usign CSS variables so that colors classes e.g. <i>bg-blue-500</i> receive the color code from the PrimeReact theme being used.
                     PrimeReact follows the CSS utility approach of PrimeFlex and currently does not provide an extended style property like <i>sx</i>. Same approach is also utilized in{' '}
-                    <a href="https://www.primefaces.org/primeblocks-react">PrimeBlocks for PrimeReact</a> project as well.
+                    <a href="https://blocks.primereact.org">PrimeBlocks for PrimeReact</a> project as well.
                 </p>
 
                 <p>Here is an example to demonstrate how to align 3 buttons horizontally on bigger screens and display them as stacked on smaller ones.</p>

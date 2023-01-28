@@ -64,7 +64,7 @@ export function FormikDoc(props) {
     style={{ height: '320px' }}
 />
 {getFormErrorMessage('blog')}
-<Button type="submit" label="Upload" />
+<Button type="submit" label="Save" />
         `,
         javascript: `
 import React, { useRef } from "react";
@@ -132,9 +132,9 @@ export default function FormikDoc() {
                     }}
                     style={{ height: '320px' }}
                 />
-                {getFormErrorMessage('blog')}
-                <div className="flex justify-content-end">
-                    <Button type="submit" label="Upload" />
+                <div className="flex flex-wrap justify-content-between align-items-center gap-3 mt-3">
+                    {getFormErrorMessage('blog')}
+                    <Button type="submit" label="Save" />
                 </div>
             </form>
         </div>
@@ -144,7 +144,7 @@ export default function FormikDoc() {
         typescript: `
 import React, { useRef } from "react";
 import { useFormik } from 'formik';
-import { Editor } from 'primereact/editor';
+import { Editor, EditorTextChangeEvent } from 'primereact/editor';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
@@ -202,14 +202,14 @@ export default function FormikDoc() {
                     name="blog"
                     value={formik.values.blog}
                     headerTemplate={header}
-                    onTextChange={(e) => {
+                    onTextChange={(e: EditorTextChangeEvent) => {
                         formik.setFieldValue('blog', e.textValue);
                     }}
                     style={{ height: '320px' }}
                 />
-                {getFormErrorMessage('blog')}
-                <div className="flex justify-content-end">
-                    <Button type="submit" label="Upload" />
+                <div className="flex flex-wrap justify-content-between align-items-center gap-3 mt-3">
+                    {getFormErrorMessage('blog')}
+                    <Button type="submit" label="Save" />
                 </div>
             </form>
         </div>
@@ -238,9 +238,9 @@ export default function FormikDoc() {
                         }}
                         style={{ height: '320px' }}
                     />
-                    {getFormErrorMessage('blog')}
-                    <div className="flex justify-content-end">
-                        <Button type="submit" label="Upload" />
+                    <div className="flex flex-wrap justify-content-between align-items-center gap-3 mt-3">
+                        {getFormErrorMessage('blog')}
+                        <Button type="submit" label="Save" />
                     </div>
                 </form>
             </div>

@@ -2,20 +2,19 @@ import Head from 'next/head';
 import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { BasicDoc } from '../../components/doc/splitbutton/basic';
-import { ImportDoc } from '../../components/doc/splitbutton/importdoc';
-import { SeveritiesDoc } from '../../components/doc/splitbutton/severitiesdoc';
-import { RaisedButtonsDoc } from '../../components/doc/splitbutton/raisedbuttonsdoc';
-import { RoundedButtonsDoc } from '../../components/doc/splitbutton/roundedbuttonsdoc';
-import { TextButtonsDoc } from '../../components/doc/splitbutton/textbuttonsdoc';
-import { RaisedTextButtonsDoc } from '../../components/doc/splitbutton/raisedtextbuttonsdoc';
-import { OutlinedButtonsDoc } from '../../components/doc/splitbutton/outlinedbuttonsdoc';
-import { SizesDoc } from '../../components/doc/splitbutton/sizesdoc';
-import { ApiDoc } from '../../components/doc/splitbutton/apidoc';
 import { AccessibilityDoc } from '../../components/doc/splitbutton/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/splitbutton/styledoc';
-import { LoadingDoc } from '../../components/doc/splitbutton/loadingdoc';
+import { BasicDoc } from '../../components/doc/splitbutton/basic';
 import { DisabledDoc } from '../../components/doc/splitbutton/disableddoc';
+import { ImportDoc } from '../../components/doc/splitbutton/importdoc';
+import { LoadingDoc } from '../../components/doc/splitbutton/loadingdoc';
+import { OutlinedButtonsDoc } from '../../components/doc/splitbutton/outlinedbuttonsdoc';
+import { RaisedButtonsDoc } from '../../components/doc/splitbutton/raisedbuttonsdoc';
+import { RaisedTextButtonsDoc } from '../../components/doc/splitbutton/raisedtextbuttonsdoc';
+import { RoundedButtonsDoc } from '../../components/doc/splitbutton/roundedbuttonsdoc';
+import { SeveritiesDoc } from '../../components/doc/splitbutton/severitiesdoc';
+import { SizesDoc } from '../../components/doc/splitbutton/sizesdoc';
+import { StyleDoc } from '../../components/doc/splitbutton/styledoc';
+import { TextButtonsDoc } from '../../components/doc/splitbutton/textbuttonsdoc';
 
 const SplitButtonDemo = () => {
     const docs = [
@@ -87,7 +86,7 @@ const SplitButtonDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'SplitButton', pathname: '/modules/splitbutton.html' }]
         }
     ];
 
@@ -103,7 +102,7 @@ const SplitButtonDemo = () => {
                     <p>SplitButton groups a set of commands in an overlay with a default command.</p>
                 </div>
 
-                <DocActions github="splitbutton/index.js" />
+                <DocActions github="/splitbutton" />
             </div>
 
             <div className="content-section doc">

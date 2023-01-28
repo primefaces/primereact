@@ -1,13 +1,12 @@
 import Head from 'next/head';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/scrollpanel/importdoc';
-import { ApiDoc } from '../../components/doc/scrollpanel/apidoc';
 import { AccessibilityDoc } from '../../components/doc/scrollpanel/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/scrollpanel/styledoc';
-import { CustomDemo } from '../../components/doc/scrollpanel/customdoc';
 import { BasicDoc } from '../../components/doc/scrollpanel/basicdoc';
+import { CustomDemo } from '../../components/doc/scrollpanel/customdoc';
+import { ImportDoc } from '../../components/doc/scrollpanel/importdoc';
+import { StyleDoc } from '../../components/doc/scrollpanel/styledoc';
 
 const ScrollPanelDemo = () => {
     const docs = [
@@ -39,7 +38,7 @@ const ScrollPanelDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'ScrollPanel', pathname: '/modules/scrollpanel.html' }]
         }
     ];
 
@@ -54,7 +53,7 @@ const ScrollPanelDemo = () => {
                     <h1>ScrollPanel</h1>
                     <p>ScrollPanel is a cross browser, lightweight and skinnable alternative to native browser scrollbar.</p>
                 </div>
-                <DocActions github="scrollpanel/index.js" />
+                <DocActions github="/scrollpanel" />
             </div>
 
             <div className="content-section doc">

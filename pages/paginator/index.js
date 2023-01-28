@@ -1,14 +1,13 @@
 import Head from 'next/head';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ApiDoc } from '../../components/doc/paginator/apidoc';
 import { AccessibilityDoc } from '../../components/doc/paginator/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/paginator/styledoc';
-import { ImportDoc } from '../../components/doc/paginator/importdoc';
 import { BasicDoc } from '../../components/doc/paginator/basicdoc';
-import { CustomDoc } from '../../components/doc/paginator/customdoc';
 import { ContentDoc } from '../../components/doc/paginator/contentdoc';
+import { CustomDoc } from '../../components/doc/paginator/customdoc';
+import { ImportDoc } from '../../components/doc/paginator/importdoc';
+import { StyleDoc } from '../../components/doc/paginator/styledoc';
 
 const PaginatorDemo = () => {
     const docs = [
@@ -45,7 +44,7 @@ const PaginatorDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Paginator', pathname: '/modules/paginator.html' }]
         }
     ];
 
@@ -61,7 +60,7 @@ const PaginatorDemo = () => {
                     <p>Paginator is a generic widget to display content in paged format.</p>
                 </div>
 
-                <DocActions github="paginator/index.js" />
+                <DocActions github="/paginator" />
             </div>
 
             <div className="content-section doc">

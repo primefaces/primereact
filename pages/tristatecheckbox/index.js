@@ -3,14 +3,13 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/tristatecheckbox/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/tristatecheckbox/apidoc';
 import { BasicDoc } from '../../components/doc/tristatecheckbox/basicdoc';
 import { DisabledDoc } from '../../components/doc/tristatecheckbox/disableddoc';
 import { ImportDoc } from '../../components/doc/tristatecheckbox/importdoc';
 import { InvalidDoc } from '../../components/doc/tristatecheckbox/invaliddoc';
 import { StyleDoc } from '../../components/doc/tristatecheckbox/styledoc';
-import { FormikDoc } from '../../components/doc/tristatecheckbox/validation/formikdoc';
-import { HookFormDoc } from '../../components/doc/tristatecheckbox/validation/hookformdoc';
+import { FormikDoc } from '../../components/doc/tristatecheckbox/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/tristatecheckbox/form/hookformdoc';
 
 const TriStateCheckboxDemo = () => {
     const docs = [
@@ -64,7 +63,7 @@ const TriStateCheckboxDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'TriStateCheckbox', pathname: '/modules/tristatecheckbox.html' }]
         }
     ];
 
@@ -80,7 +79,7 @@ const TriStateCheckboxDemo = () => {
                     <p>TriStateCheckbox is used to select either "true", "false" or "null" as the value.</p>
                 </div>
 
-                <DocActions github="tristatecheckbox/index.js" />
+                <DocActions github="/tristatecheckbox" />
             </div>
             <div className="content-section doc">
                 <DocSections docs={docs} />

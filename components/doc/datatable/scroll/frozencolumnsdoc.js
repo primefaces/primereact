@@ -52,7 +52,7 @@ import { ToggleButton } from 'primereact/togglebutton';
 import { CustomerService } from './service/CustomerService';
 import './DataTableDemo.css';
 
-const ScrollFrozenColumnsDoc = () => {
+export default function ScrollFrozenColumnsDoc() {
     const [customers, setCustomers] = useState([]);
     const [loading, setLoading] = useState(false);
     const [balanceFrozen, setBalanceFrozen] = useState(false);
@@ -77,7 +77,7 @@ const ScrollFrozenColumnsDoc = () => {
     };
 
     return (
-        <div className="card">
+        <div className="card datatable-scroll-demo">
             <ToggleButton checked={balanceFrozen} onChange={(e) => setBalanceFrozen(e.value)} onIcon="pi pi-lock" offIcon="pi pi-lock-open" onLabel="Unfreeze Balance" offLabel="Freeze Balance" style={{ flexGrow: 1, flexBasis: '12rem' }} />
             <DataTable value={customers} scrollable scrollHeight="400px" loading={loading} scrollDirection="both" className="mt-3">
                 <Column field="name" header="Name" style={{ width: '160px' }} frozen></Column>
@@ -103,7 +103,7 @@ import { ToggleButton } from 'primereact/togglebutton';
 import { CustomerService } from './service/CustomerService';
 import './DataTableDemo.css';
 
-const ScrollFrozenColumnsDoc = () => {
+export default function ScrollFrozenColumnsDoc() {
     const [customers, setCustomers] = useState([]);
     const [loading, setLoading] = useState(false);
     const [balanceFrozen, setBalanceFrozen] = useState(false);
@@ -128,7 +128,7 @@ const ScrollFrozenColumnsDoc = () => {
     };
 
     return (
-        <div className="card">
+        <div className="card datatable-scroll-demo">
             <ToggleButton checked={balanceFrozen} onChange={(e) => setBalanceFrozen(e.value)} onIcon="pi pi-lock" offIcon="pi pi-lock-open" onLabel="Unfreeze Balance" offLabel="Freeze Balance" style={{ flexGrow: 1, flexBasis: '12rem' }} />
             <DataTable value={customers} scrollable scrollHeight="400px" loading={loading} scrollDirection="both" className="mt-3">
                 <Column field="name" header="Name" style={{ width: '160px' }} frozen></Column>
@@ -146,7 +146,8 @@ const ScrollFrozenColumnsDoc = () => {
     );
 }
         `,
-        css: `
+        extFiles: {
+            'DataTableDemo.css': `
 /* DataTableDemo.css */
 .datatable-scroll-demo .p-datatable-frozen-tbody {
     font-weight: bold;
@@ -155,7 +156,8 @@ const ScrollFrozenColumnsDoc = () => {
 .datatable-scroll-demo .p-datatable-scrollable .p-frozen-column {
     font-weight: bold;
 }
-        `,
+        `
+        },
         data: `
 /* CustomerService */ 
 {
@@ -185,7 +187,7 @@ const ScrollFrozenColumnsDoc = () => {
             <DocSectionText {...props}>
                 <p>Frozen Columns demo content.</p>
             </DocSectionText>
-            <div className="card">
+            <div className="card datatable-scroll-demo">
                 <ToggleButton checked={balanceFrozen} onChange={(e) => setBalanceFrozen(e.value)} onIcon="pi pi-lock" offIcon="pi pi-lock-open" onLabel="Unfreeze Balance" offLabel="Freeze Balance" style={{ flexGrow: 1, flexBasis: '12rem' }} />
                 <DataTable value={customers} scrollable scrollHeight="400px" loading={loading} scrollDirection="both" className="mt-3">
                     <Column field="name" header="Name" style={{ width: '160px' }} frozen></Column>

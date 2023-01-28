@@ -61,7 +61,7 @@ import { ProductService } from './service/ProductService';
 import { Toast } from 'primereact/toast';
 import './DataTableDemo.css';
 
-const EventsDoc = () => {
+export default function EventsDoc() {
 
     const [products, setProducts] = useState([]);
     const [selectedProduct1, setSelectedProduct1] = useState(null);
@@ -74,7 +74,7 @@ const EventsDoc = () => {
     },[]);
 
     return (
-        <div className="card">
+        <div className="card datatable-selection-demo">
             <Toast ref={toast} />
             <h6>Row Selection</h6>
             <p>onRowSelect and onRowUnselects are available as selection events.</p>
@@ -107,7 +107,7 @@ import { ProductService } from './service/ProductService';
 import { Toast } from 'primereact/toast';
 import './DataTableDemo.css';
 
-const EventsDoc = () => {
+export default function EventsDoc() {
 
     const [products, setProducts] = useState([]);
     const [selectedProduct1, setSelectedProduct1] = useState(null);
@@ -141,7 +141,7 @@ const EventsDoc = () => {
     },[]);
 
     return (
-        <div className="card">
+        <div className="card datatable-selection-demo">
             <Toast ref={toast} />
             <h6>Row Selection</h6>
             <p>onRowSelect and onRowUnselects are available as selection events.</p>
@@ -166,6 +166,18 @@ const EventsDoc = () => {
     );
 }
         `,
+        extFiles: {
+            'DataTableDemo.css': `
+/* DataTableDemo.css */
+
+.datatable-selection-demo .card h6 {
+    margin-top: 2rem;
+}
+.datatable-selection-demo .card h6:first-of-type {
+    margin-top: 0;
+}
+`
+        },
         data: `
 /* ProductService */        
 {
@@ -189,7 +201,7 @@ const EventsDoc = () => {
             <DocSectionText {...props}>
                 <p>Events demo content.</p>
             </DocSectionText>
-            <div className="card">
+            <div className="card datatable-selection-demo">
                 <Toast ref={toast} />
                 <h6>Row Selection</h6>
                 <p>onRowSelect and onRowUnselects are available as selection events.</p>

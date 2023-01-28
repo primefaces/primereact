@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import getConfig from 'next/config';
 import { DataTable } from '../../../lib/datatable/DataTable';
 import { Column } from '../../../lib/column/Column';
 import { CustomerService } from '../../../../service/CustomerService';
@@ -12,8 +11,6 @@ export function ExpandableRowGroupsDoc(props) {
     const [expandedRows, setExpandedRows] = useState([]);
     const toast = useRef(null);
 
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
-
     useEffect(() => {
         CustomerService.getCustomersMedium().then((data) => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -21,14 +18,8 @@ export function ExpandableRowGroupsDoc(props) {
     const headerTemplate = (data) => {
         return (
             <React.Fragment>
-                <img
-                    alt={data.representative.name}
-                    src={`${contextPath}/images/avatar/${data.representative.image}`}
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
-                    width="32"
-                    style={{ verticalAlign: 'middle' }}
-                />
-                <span className="image-text">{data.representative.name}</span>
+                <img alt={data.representative.name} src={`images/avatar/${data.representative.image}`} width="32" style={{ verticalAlign: 'middle' }} />
+                <span className="vertical-align-middle ml-2">{data.representative.name}</span>
             </React.Fragment>
         );
     };
@@ -47,14 +38,8 @@ export function ExpandableRowGroupsDoc(props) {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img
-                    alt={rowData.country.name}
-                    src={`${contextPath}/images/flag/flag_placeholder.png`}
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
-                    className={`flag flag-${rowData.country.code}`}
-                    width="30"
-                />
-                <span className="image-text">{rowData.country.name}</span>
+                <img alt={rowData.country.name} src={`images/flag/flag_placeholder.png`} className={`flag flag-${rowData.country.code}`} width="30" />
+                <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );
     };
@@ -107,7 +92,7 @@ import { Toast } from 'primereact/toast';
 import { CustomerService } from './service/CustomerService';
 import './DataTableDemo.css';
 
-const ExpandableRowGroupsDoc = () => {
+export default function ExpandableRowGroupsDoc() {
 
     const [customers, setCustomers] = useState([]);
     const [expandedRows, setExpandedRows] = useState([]);
@@ -121,8 +106,8 @@ const ExpandableRowGroupsDoc = () => {
     const headerTemplate = (data) => {
         return (
             <React.Fragment>
-                <img alt={data.representative.name} src={\`images/avatar/\${data.representative.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{ verticalAlign: 'middle' }} />
-                <span className="image-text">{data.representative.name}</span>
+                <img alt={data.representative.name} src={\`https://www.primereact.org/images/avatar/\${data.representative.image}\`} width="32" style={{ verticalAlign: 'middle' }} />
+                <span className="vertical-align-middle ml-2">{data.representative.name}</span>
             </React.Fragment>
         );
     }
@@ -139,8 +124,8 @@ const ExpandableRowGroupsDoc = () => {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt={rowData.country.name} src="/images/flag/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${rowData.country.code}\`} width="30" />
-                <span className="image-text">{rowData.country.name}</span>
+                <img alt={rowData.country.name} src="https://www.primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} width="30" />
+                <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );
     }
@@ -197,7 +182,7 @@ import { Toast } from 'primereact/toast';
 import { CustomerService } from './service/CustomerService';
 import './DataTableDemo.css';
 
-const ExpandableRowGroupsDoc = () => {
+export default function ExpandableRowGroupsDoc() {
 
     const [customers, setCustomers] = useState([]);
     const [expandedRows, setExpandedRows] = useState([]);
@@ -211,8 +196,8 @@ const ExpandableRowGroupsDoc = () => {
     const headerTemplate = (data) => {
         return (
             <React.Fragment>
-                <img alt={data.representative.name} src={\`images/avatar/\${data.representative.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{ verticalAlign: 'middle' }} />
-                <span className="image-text">{data.representative.name}</span>
+                <img alt={data.representative.name} src={\`https://www.primereact.org/images/avatar/\${data.representative.image}\`} width="32" style={{ verticalAlign: 'middle' }} />
+                <span className="vertical-align-middle ml-2">{data.representative.name}</span>
             </React.Fragment>
         );
     }
@@ -229,8 +214,8 @@ const ExpandableRowGroupsDoc = () => {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt={rowData.country.name} src="/images/flag/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${rowData.country.code}\`} width="30" />
-                <span className="image-text">{rowData.country.name}</span>
+                <img alt={rowData.country.name} src="https://www.primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} width="30" />
+                <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );
     }
@@ -279,7 +264,8 @@ const ExpandableRowGroupsDoc = () => {
     );
 }
         `,
-        css: `
+        extFiles: {
+            'DataTableDemo.css': `
 /* DataTableDemo.css */
 
 .datatable-rowgroup-demo .p-rowgroup-footer td {
@@ -294,7 +280,8 @@ const ExpandableRowGroupsDoc = () => {
     vertical-align: middle;
     margin-right: .25rem;
 }
-        `,
+        `
+        },
         data: `
 /* CustomerService */ 
 {

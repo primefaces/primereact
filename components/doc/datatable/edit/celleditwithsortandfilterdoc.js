@@ -89,7 +89,7 @@ import { InputNumber } from 'primereact/inputnumber';
 import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
-const CellEditWithSortAndFilterDoc = () => {
+export default function CellEditWithSortAndFilterDoc() {
     const [products, setProducts] = useState(null);
 
     
@@ -171,7 +171,7 @@ import { InputNumber } from 'primereact/inputnumber';
 import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
-const CellEditWithSortAndFilterDoc = () => {
+export default function CellEditWithSortAndFilterDoc() {
     const [products, setProducts] = useState(null);
 
     

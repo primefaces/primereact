@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { AccessibilityDoc } from '../../components/doc/accordion/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/accordion/apidoc';
 import { BasicDoc } from '../../components/doc/accordion/basicdoc';
 import { ControlledDoc } from '../../components/doc/accordion/controlleddoc';
 import { DisabledDoc } from '../../components/doc/accordion/disableddoc';
@@ -57,7 +56,10 @@ const AccordionDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [
+                { name: 'Accordion', pathname: '/modules/accordion.html' },
+                { name: 'AccordionTab', pathname: '/classes/accordion.AccordionTab.html' }
+            ]
         }
     ];
 
@@ -72,7 +74,7 @@ const AccordionDemo = () => {
                     <h1>Accordion</h1>
                     <p>Accordion groups a collection of contents in tabs.</p>
                 </div>
-                <DocActions github="accordion/index.js" />
+                <DocActions github="/accordion" />
             </div>
             <div className="content-section doc ">
                 <DocSections docs={docs} />

@@ -1,4 +1,3 @@
-import getConfig from 'next/config';
 import { useEffect, useState } from 'react';
 import { CountryService } from '../../../service/CountryService';
 import { AutoComplete } from '../../lib/autocomplete/AutoComplete';
@@ -9,7 +8,6 @@ export function TemplateDoc(props) {
     const [countries, setCountries] = useState([]);
     const [selectedCountry, setSelectedCountry] = useState(null);
     const [filteredCountries, setFilteredCountries] = useState(null);
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     const search = (event) => {
         // Timeout to emulate a network connection
@@ -31,7 +29,7 @@ export function TemplateDoc(props) {
     const itemTemplate = (item) => {
         return (
             <div className="flex align-items-center">
-                <img alt={item.name} src={`${contextPath}/images/flag/flag_placeholder.png`} className={`flag flag-${item.code.toLowerCase()} mr-2`} style={{ width: '18px' }} />
+                <img alt={item.name} src={'images/flag/flag_placeholder.png'} className={`flag flag-${item.code.toLowerCase()} mr-2`} style={{ width: '18px' }} />
                 <div>{item.name}</div>
             </div>
         );
@@ -79,8 +77,7 @@ export default function TemplateDemo() {
             <div className="flex align-items-center">
                 <img
                     alt={item.name}
-                    src="/images/flag/flag_placeholder.png"
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/cdn/images/placeholder.png')}
+                    src="https://www.primereact.org/images/flag/flag_placeholder.png"
                     className={\`flag flag-\${item.code.toLowerCase()} mr-2\`}
                     style={{width: '18px'}}
                 />
@@ -139,8 +136,7 @@ export default function TemplateDemo() {
             <div className="flex align-items-center">
                 <img
                     alt={item.name}
-                    src="/images/flag/flag_placeholder.png"
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/cdn/images/placeholder.png')}
+                    src="https://www.primereact.org/images/flag/flag_placeholder.png"
                     className={\`flag flag-\${item.code.toLowerCase()} mr-2\`}
                     style={{width: '18px'}}
                 />

@@ -1,14 +1,13 @@
 import Head from 'next/head';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/fieldset/importdoc';
-import { ApiDoc } from '../../components/doc/fieldset/apidoc';
 import { AccessibilityDoc } from '../../components/doc/fieldset/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/fieldset/styledoc';
 import { BasicDoc } from '../../components/doc/fieldset/basicdoc';
-import { ToggleableDoc } from '../../components/doc/fieldset/toggleabledoc';
+import { ImportDoc } from '../../components/doc/fieldset/importdoc';
+import { StyleDoc } from '../../components/doc/fieldset/styledoc';
 import { TemplateDoc } from '../../components/doc/fieldset/templatedoc';
+import { ToggleableDoc } from '../../components/doc/fieldset/toggleabledoc';
 
 const FieldsetDemo = () => {
     const docs = [
@@ -45,7 +44,7 @@ const FieldsetDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Fieldset', pathname: '/modules/fieldset.html' }]
         }
     ];
 
@@ -60,7 +59,7 @@ const FieldsetDemo = () => {
                     <h1>Fieldset</h1>
                     <p>Fieldset is a grouping component with a content toggle feature.</p>
                 </div>
-                <DocActions github="fieldset/index.js" />
+                <DocActions github="/fieldset" />
             </div>
 
             <div className="content-section doc">

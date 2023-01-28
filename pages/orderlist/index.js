@@ -1,15 +1,14 @@
 import Head from 'next/head';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ApiDoc } from '../../components/doc/orderlist/apidoc';
 import { AccessibilityDoc } from '../../components/doc/orderlist/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/orderlist/styledoc';
-import { ImportDoc } from '../../components/doc/orderlist/importdoc';
-import { TemplateDoc } from '../../components/doc/orderlist/templatedoc';
 import { BasicDoc } from '../../components/doc/orderlist/basicdoc';
-import { FilterDoc } from '../../components/doc/orderlist/filterdoc';
 import { DragDropDoc } from '../../components/doc/orderlist/dragdropdoc';
+import { FilterDoc } from '../../components/doc/orderlist/filterdoc';
+import { ImportDoc } from '../../components/doc/orderlist/importdoc';
+import { StyleDoc } from '../../components/doc/orderlist/styledoc';
+import { TemplateDoc } from '../../components/doc/orderlist/templatedoc';
 
 const OrderListDemo = () => {
     const docs = [
@@ -51,7 +50,7 @@ const OrderListDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'OrderList', pathname: '/modules/orderlist.html' }]
         }
     ];
 
@@ -67,14 +66,12 @@ const OrderListDemo = () => {
                     <p>OrderList is used to sort a collection.</p>
                 </div>
 
-                <DocActions github="orderlist/index.js" />
+                <DocActions github="/orderlist" />
             </div>
 
-            <div className="content-section implementation">
-                <div className="content-section doc">
-                    <DocSections docs={docs} />
-                    <DocSectionNav docs={docs} />
-                </div>
+            <div className="content-section doc implementation">
+                <DocSections docs={docs} />
+                <DocSectionNav docs={docs} />
             </div>
         </div>
     );

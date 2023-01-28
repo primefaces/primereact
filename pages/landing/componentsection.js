@@ -1,19 +1,19 @@
-import { useEffect, useState } from 'react';
-import { InputNumber } from '../../components/lib/inputnumber/InputNumber';
-import { RadioButton } from '../../components/lib/radiobutton/RadioButton';
-import { ProgressBar } from '../../components/lib/progressbar/ProgressBar';
-import { Button } from '../../components/lib/button/Button';
-import { Tree } from '../../components/lib/tree/Tree';
-import { Chip } from '../../components/lib/chip/Chip';
-import { Slider } from '../../components/lib/slider/Slider';
-import { Calendar } from '../../components/lib/calendar/Calendar';
-import { InputSwitch } from '../../components/lib/inputswitch/InputSwitch';
-import { NodeService } from '../../service/NodeService';
-import { Badge } from '../../components/lib/badge/Badge';
-import { SelectButton } from '../../components/lib/selectbutton/SelectButton';
-import { TabMenu } from '../../components/lib/tabmenu/TabMenu';
-import { Chart } from '../../components/lib/chart/Chart';
 import getConfig from 'next/config';
+import { useEffect, useState } from 'react';
+import { Badge } from '../../components/lib/badge/Badge';
+import { Button } from '../../components/lib/button/Button';
+import { Calendar } from '../../components/lib/calendar/Calendar';
+import { Chart } from '../../components/lib/chart/Chart';
+import { Chip } from '../../components/lib/chip/Chip';
+import { InputNumber } from '../../components/lib/inputnumber/InputNumber';
+import { InputSwitch } from '../../components/lib/inputswitch/InputSwitch';
+import { ProgressBar } from '../../components/lib/progressbar/ProgressBar';
+import { RadioButton } from '../../components/lib/radiobutton/RadioButton';
+import { SelectButton } from '../../components/lib/selectbutton/SelectButton';
+import { Slider } from '../../components/lib/slider/Slider';
+import { TabMenu } from '../../components/lib/tabmenu/TabMenu';
+import { Tree } from '../../components/lib/tree/Tree';
+import { NodeService } from '../../service/NodeService';
 
 let chartData = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -80,14 +80,8 @@ const ComponentSection = () => {
         <section className="landing-components py-8">
             <div className="section-header">Components</div>
             <p className="section-detail">
-                <span className="font-bold text-900">Over 80</span> React UI Components with top-notch quality to help you implement all your UI requirements in style.
+                <span className="font-bold text-900">Over 90</span> React UI Components with top-notch quality to help you implement all your UI requirements in style.
             </p>
-            <div className="flex justify-content-center mt-4">
-                <a href="https://www.primefaces.org/primeblocks-react" className="font-semibold p-3 border-round flex align-items-center linkbox active">
-                    <span>Get Started</span>
-                    <i className="pi pi-arrow-right ml-2"></i>
-                </a>
-            </div>
             <div className="components-main flex mt-7 relative md:justify-content-center overflow-auto">
                 <div className="flex flex-column px-3 py-8 z-1">
                     <div className="box p-4 mb-5">

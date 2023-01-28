@@ -91,19 +91,27 @@ export default function PrefixSuffixDemo() {
             </DocSectionText>
             <div class="card flex flex-wrap gap-3 p-fluid">
                 <div className="flex-auto">
-                    <label htmlFor="mile" className="font-bold block mb-2">Mile</label>
+                    <label htmlFor="mile" className="font-bold block mb-2">
+                        Mile
+                    </label>
                     <InputNumber inputId="mile" value={value1} onValueChange={(e) => setValue1(e.value)} suffix=" mi" />
                 </div>
                 <div className="flex-auto">
-                    <label htmlFor="percent" className="font-bold block mb-2">Percent</label>
+                    <label htmlFor="percent" className="font-bold block mb-2">
+                        Percent
+                    </label>
                     <InputNumber inputId="percent" value={value2} onValueChange={(e) => setValue2(e.value)} prefix="%" />
                 </div>
                 <div className="flex-auto">
-                    <label htmlFor="expiry" className="font-bold block mb-2">Expiry</label>
+                    <label htmlFor="expiry" className="font-bold block mb-2">
+                        Expiry
+                    </label>
                     <InputNumber inputId="expiry" value={value3} onValueChange={(e) => setValue3(e.value)} prefix="Expires in " suffix=" days" />
                 </div>
                 <div className="flex-auto">
-                    <label htmlFor="temperature" className="font-bold block mb-2">Temperature</label>
+                    <label htmlFor="temperature" className="font-bold block mb-2">
+                        Temperature
+                    </label>
                     <InputNumber inputId="temperature" value={value4} onValueChange={(e) => setValue4(e.value)} prefix="&uarr; " suffix="℃" min={0} max={40} />
                 </div>
             </div>

@@ -1,12 +1,11 @@
 import Head from 'next/head';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
+import { AccessibilityDoc } from '../../components/doc/panelmenu/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/panelmenu/basicdoc';
 import { ImportDoc } from '../../components/doc/panelmenu/importdoc';
 import { MultipleDoc } from '../../components/doc/panelmenu/multipledoc';
-import { ApiDoc } from '../../components/doc/panelmenu/apidoc';
-import { AccessibilityDoc } from '../../components/doc/panelmenu/accessibilitydoc';
 import { StyleDoc } from '../../components/doc/panelmenu/styledoc';
 
 const PanelMenuDemo = () => {
@@ -39,7 +38,7 @@ const PanelMenuDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'PanelMenu', pathname: '/modules/panelmenu.html' }]
         }
     ];
 
@@ -54,7 +53,7 @@ const PanelMenuDemo = () => {
                     <h1>PanelMenu</h1>
                     <p>PanelMenu is a hybrid of accordion-tree components.</p>
                 </div>
-                <DocActions github="panelmenu/index.js" />
+                <DocActions github="/panelmenu" />
             </div>
 
             <div className="content-section doc">

@@ -39,11 +39,11 @@ export function FormikDoc(props) {
     };
 
     const itemTemplate = (suggestion) => {
-        const src = 'images/avatar/' + suggestion.representative.image;
+        const src = 'https://www.primereact.org/images/avatar/' + suggestion.representative.image;
 
         return (
             <div className="flex align-items-center">
-                <img alt={suggestion.name} src={src} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} width="32" style={{ verticalAlign: 'middle' }} />
+                <img alt={suggestion.name} src={src} width="32" style={{ verticalAlign: 'middle' }} />
                 <span className="flex flex-column ml-2">
                     {suggestion.name}
                     <small style={{ fontSize: '.75rem', color: 'var(--text-secondary-color)' }}>@{suggestion.nickname}</small>
@@ -148,11 +148,11 @@ export default function FormikDoc() {
     };
 
     const itemTemplate = (suggestion) => {
-        const src = 'images/avatar/' + suggestion.representative.image;
+        const src = 'https://www.primereact.org/images/avatar/' + suggestion.representative.image;
 
         return (
             <div className="flex align-items-center">
-                <img alt={suggestion.name} src={src} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} width="32" style={{ verticalAlign: 'middle' }} />
+                <img alt={suggestion.name} src={src} width="32" style={{ verticalAlign: 'middle' }} />
                 <span className="flex flex-column ml-2">
                     {suggestion.name}
                     <small style={{ fontSize: '.75rem', color: 'var(--text-secondary-color)' }}>@{suggestion.nickname}</small>
@@ -266,11 +266,11 @@ export default function FormikDoc() {
     };
 
     const itemTemplate = (suggestion) => {
-        const src = 'images/avatar/' + suggestion.representative.image;
+        const src = 'https://www.primereact.org/images/avatar/' + suggestion.representative.image;
 
         return (
             <div className="flex align-items-center">
-                <img alt={suggestion.name} src={src} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} width="32" style={{ verticalAlign: 'middle' }} />
+                <img alt={suggestion.name} src={src} width="32" style={{ verticalAlign: 'middle' }} />
                 <span className="flex flex-column ml-2">
                     {suggestion.name}
                     <small style={{ fontSize: '.75rem', color: 'var(--text-secondary-color)' }}>@{suggestion.nickname}</small>

@@ -1,11 +1,11 @@
 {
     "name": "primereact",
     "private": false,
-    "version": "8.7.4-SNAPSHOT",
+    "version": "9.0.0-beta.1",
     "scripts": {
         "dev": "next dev",
         "start": "next start",
-        "build": "next build && next export",
+        "build": "next build",
         "build:lib": "NODE_ENV=production INPUT_DIR=components/lib/ OUTPUT_DIR=dist/ npm run build:package",
         "build:package": "npm run build:check && rollup -c && gulp build-resources && npm run build:api",
         "build:api": "node ./api-generator/build-api.js",
@@ -18,7 +18,7 @@
         "type:check": "tsc",
         "test": "jest --watch --coverage",
         "test:check": "jest --watchAll=false --coverage",
-        "doc": "typedoc"
+        "doc": "typedoc --name \"PrimeReact - v9.0.0-beta.1\" --out docs/api/9.0.0-beta.1"
     },
     "dependencies": {
         "chart.js": "3.9.1",

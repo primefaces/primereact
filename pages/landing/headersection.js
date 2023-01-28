@@ -1,6 +1,6 @@
 import getConfig from 'next/config';
-import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
 import { classNames } from '../../components/lib/utils/ClassNames';
 
 const HeaderSection = (props) => {
@@ -67,13 +67,13 @@ const HeaderSection = (props) => {
                             </Link>
                         </li>
                         <li className="mr-0 lg:mr-2">
-                            <a href="https://www.primefaces.org/primeblocks-react">
+                            <a href="https://blocks.primereact.org">
                                 <img src={`${contextPath}/images/landing-new/blocks-icon.svg`} alt="primereact templates" />
                                 <span>Blocks</span>
                             </a>
                         </li>
                         <li className="mr-0 lg:mr-2">
-                            <a href="https://www.primefaces.org/designer-react">
+                            <a href="https://designer.primereact.org">
                                 <img src={`${contextPath}/images/landing-new/designer-icon.svg`} alt="primereact templates" />
                                 <span>Designer</span>
                             </a>

@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/multiselect/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/multiselect/apidoc';
 import { BasicDoc } from '../../components/doc/multiselect/basicdoc';
 import { ChipsDoc } from '../../components/doc/multiselect/chipsdoc';
 import { DisabledDoc } from '../../components/doc/multiselect/disableddoc';
@@ -114,7 +113,7 @@ const MultiSelectDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'MultiSelect', pathname: '/modules/multiselect.html' }]
         }
     ];
 
@@ -130,7 +129,7 @@ const MultiSelectDemo = () => {
                     <p>MultiSelect is used to select multiple items from a collection.</p>
                 </div>
 
-                <DocActions github="multiselect/index.js" />
+                <DocActions github="/multiselect" />
             </div>
             <div className="content-section doc multiselect-demo">
                 <DocSections docs={docs} />

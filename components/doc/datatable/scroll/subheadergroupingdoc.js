@@ -4,12 +4,9 @@ import { Column } from '../../../lib/column/Column';
 import { CustomerService } from '../../../../service/CustomerService';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
-import getConfig from 'next/config';
 
 export function ScrollSubHeaderGroupingDoc(props) {
     const [customersGrouped, setCustomersGrouped] = useState(null);
-
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
         CustomerService.getCustomersMedium().then((data) => {
@@ -20,14 +17,8 @@ export function ScrollSubHeaderGroupingDoc(props) {
     const countryTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img
-                    alt="flag"
-                    src={`${contextPath}/images/flag/flag_placeholder.png`}
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
-                    className={`flag flag-${rowData.country.code}`}
-                    width={30}
-                />
-                <span className="image-text">{rowData.country.name}</span>
+                <img alt="flag" src={`images/flag/flag_placeholder.png`} className={`flag flag-${rowData.country.code}`} width={30} />
+                <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );
     };
@@ -39,14 +30,8 @@ export function ScrollSubHeaderGroupingDoc(props) {
     const headerTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img
-                    alt={rowData.representative.name}
-                    src={`${contextPath}/images/avatar/${rowData.representative.image}`}
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
-                    width="32"
-                    style={{ verticalAlign: 'middle' }}
-                />
-                <span className="image-text">{rowData.representative.name}</span>
+                <img alt={rowData.representative.name} src={`images/avatar/${rowData.representative.image}`} width="32" style={{ verticalAlign: 'middle' }} />
+                <span className="vertical-align-middle ml-2">{rowData.representative.name}</span>
             </React.Fragment>
         );
     };
@@ -101,8 +86,8 @@ const ScrollSubHeaderGroupingDoc = () => {
     const countryTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt="flag" src="/images/flag/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${rowData.country.code}\`} width={30} />
-                <span className="image-text">{rowData.country.name}</span>
+                <img alt="flag" src="https://www.primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} width={30} />
+                <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         )
     }
@@ -114,8 +99,8 @@ const ScrollSubHeaderGroupingDoc = () => {
     const headerTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt={rowData.representative.name} src={\`images/avatar/\${rowData.representative.image}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{ verticalAlign: 'middle' }} />
-                <span className="image-text">{rowData.representative.name}</span>
+                <img alt={rowData.representative.name} src={\`https://www.primereact.org/images/avatar/\${rowData.representative.image}\`} width="32" style={{ verticalAlign: 'middle' }} />
+                <span className="vertical-align-middle ml-2">{rowData.representative.name}</span>
             </React.Fragment>
         );
     }
@@ -173,8 +158,8 @@ const ScrollSubHeaderGroupingDoc = () => {
     const countryTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt="flag" src="/images/flag/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${rowData.country.code}\`} width={30} />
-                <span className="image-text">{rowData.country.name}</span>
+                <img alt="flag" src="https://www.primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} width={30} />
+                <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         )
     }
@@ -186,8 +171,8 @@ const ScrollSubHeaderGroupingDoc = () => {
     const headerTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt={rowData.representative.name} src={\`images/avatar/\${rowData.representative.image}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{ verticalAlign: 'middle' }} />
-                <span className="image-text">{rowData.representative.name}</span>
+                <img alt={rowData.representative.name} src={\`https://www.primereact.org/images/avatar/\${rowData.representative.image}\`} width="32" style={{ verticalAlign: 'middle' }} />
+                <span className="vertical-align-middle ml-2">{rowData.representative.name}</span>
             </React.Fragment>
         );
     }

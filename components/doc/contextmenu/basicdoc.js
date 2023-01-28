@@ -29,7 +29,7 @@ export default function BasicDemo() {
     return (
         <div className="card flex md:justify-content-center">
             <ContextMenu model={items} ref={cm} />
-            <img src="images/nature/nature3.jpg" onError={(e) => (e.target.src = 'https://www.primefaces.org/cdn/images/placeholder.png')} alt="Logo" onContextMenu={(e) => cm.current.show(e)} />
+            <img src="https://www.primereact.org/images/nature/nature3.jpg" alt="Logo" onContextMenu={(e) => cm.current.show(e)} />
         </div>
     )
 }
@@ -49,7 +49,7 @@ export default function BasicDemo() {
     return (
         <div className="card flex md:justify-content-center">
             <ContextMenu model={items} ref={cm} />
-            <img src="images/nature/nature3.jpg" onError={(e) => (e.target.src = 'https://www.primefaces.org/cdn/images/placeholder.png')} alt="Logo" onContextMenu={(e) => cm.current.show(e)} />
+            <img src="https://www.primereact.org/images/nature/nature3.jpg" alt="Logo" onContextMenu={(e) => cm.current.show(e)} />
         </div>
     )
 }

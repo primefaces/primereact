@@ -111,7 +111,7 @@ import { Button } from 'primereact/button';
 import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
-const ProgrammaticDoc = () => {
+export default function ProgrammaticDoc() {
     const [products, setProducts] = useState(null);
     const [editingRows, setEditingRows] = useState({});
 
@@ -220,7 +220,7 @@ import { Button } from 'primereact/button';
 import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
-const ProgrammaticDoc = () => {
+export default function ProgrammaticDoc() {
     const [products, setProducts] = useState(null);
     const [editingRows, setEditingRows] = useState({});
 

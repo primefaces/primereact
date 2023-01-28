@@ -9,7 +9,7 @@
  */
 import * as React from 'react';
 import { KeyFilterType } from '../keyfilter';
-import TooltipOptions from '../tooltip/tooltipoptions';
+import { TooltipOptions } from '../tooltip/tooltipoptions';
 
 /**
  * Defines valid properties in InputTextarea component. In addition to these, all properties of HTMLTextAreaElement can be used in this component.

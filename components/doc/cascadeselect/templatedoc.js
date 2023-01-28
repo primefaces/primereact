@@ -83,9 +83,7 @@ export function TemplateDoc(props) {
     const countryOptionTemplate = (option) => {
         return (
             <div className="country-item">
-                {option.states && (
-                    <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} className={`flag flag-${option.code.toLowerCase()}`} />
-                )}
+                {option.states && <img alt={option.name} src="images/flag/flag_placeholder.png" className={`flag flag-${option.code.toLowerCase()}`} />}
                 {option.cities && <i className="pi pi-compass mr-2" />}
                 {option.cname && <i className="pi pi-map-marker mr-2" />}
                 <span>{option.cname || option.name}</span>
@@ -183,7 +181,7 @@ export default function TemplateDoc() {
     const countryOptionTemplate = (option) => {
         return (
             <div className="country-item">
-                {option.states && <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'}
+                {option.states && <img alt={option.name} src="https://www.primereact.org/images/flag/flag_placeholder.png"
                 className={\`flag flag-\${option.code.toLowerCase()}\`} />}
                 {option.cities && <i className="pi pi-compass mr-2"/>}
                 {option.cname && <i className="pi pi-map-marker mr-2"/>}
@@ -285,8 +283,8 @@ export default function TemplateDoc() {
     const countryOptionTemplate = (option) => {
         return (
             <div className="country-item">
-                {option.states && <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'}
-                                       className={\`flag flag-\${option.code.toLowerCase()}\`} />}
+                {option.states && <img alt={option.name} src="https://www.primereact.org/images/flag/flag_placeholder.png"
+                className={\`flag flag-\${option.code.toLowerCase()}\`} />}
                 {option.cities && <i className="pi pi-compass mr-2"/>}
                 {option.cname && <i className="pi pi-map-marker mr-2"/>}
                 <span>{option.cname || option.name}</span>

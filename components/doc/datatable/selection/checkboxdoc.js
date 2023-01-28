@@ -53,7 +53,7 @@ import { Column } from 'primereact/column';
 import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
-const CheckboxDoc = () => {
+export default function CheckboxDoc() {
 
     const [products, setProducts] = useState([]);
     const [selectedProducts1, setSelectedProducts1] = useState(null);
@@ -67,7 +67,7 @@ const CheckboxDoc = () => {
     },[]);
 
     return (
-        <div className="card">
+        <div className="card datatable-selection-demo">
             <h6>Row and Checkbox Selection</h6>
             <DataTable value={products} selection={selectedProducts1} onSelectionChange={e => setSelectedProducts1(e.value)} dataKey="id" responsiveLayout="scroll">
                 <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
@@ -106,7 +106,7 @@ import { Column } from 'primereact/column';
 import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
-const CheckboxDoc = () => {
+export default function CheckboxDoc() {
 
     const [products, setProducts] = useState([]);
     const [selectedProducts1, setSelectedProducts1] = useState(null);
@@ -120,7 +120,7 @@ const CheckboxDoc = () => {
     },[]);
 
     return (
-        <div className="card">
+        <div className="card datatable-selection-demo">
             <h6>Row and Checkbox Selection</h6>
             <DataTable value={products} selection={selectedProducts1} onSelectionChange={e => setSelectedProducts1(e.value)} dataKey="id" responsiveLayout="scroll">
                 <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
@@ -152,6 +152,18 @@ const CheckboxDoc = () => {
     );
 }
         `,
+        extFiles: {
+            'DataTableDemo.css': `
+/* DataTableDemo.css */
+
+.datatable-selection-demo .card h6 {
+    margin-top: 2rem;
+}
+.datatable-selection-demo .card h6:first-of-type {
+    margin-top: 0;
+}
+`
+        },
         data: `
 /* ProductService */        
 {
@@ -175,7 +187,7 @@ const CheckboxDoc = () => {
             <DocSectionText {...props}>
                 <p>Checkbox demo content.</p>
             </DocSectionText>
-            <div className="card">
+            <div className="card datatable-selection-demo">
                 <h6>Row and Checkbox Selection</h6>
                 <DataTable value={products} selection={selectedProducts1} onSelectionChange={(e) => setSelectedProducts1(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>

@@ -1,29 +1,18 @@
-import React, { useState, useEffect, useRef } from 'react';
-import getConfig from 'next/config';
-import { DataTable } from '../../lib/datatable/DataTable';
-import { Column } from '../../lib/column/Column';
+import React, { useEffect, useRef, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 import { Button } from '../../lib/button/Button';
+import { Column } from '../../lib/column/Column';
+import { DataTable } from '../../lib/datatable/DataTable';
 import { Rating } from '../../lib/rating/Rating';
 import { Toast } from '../../lib/toast/Toast';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function RowExpandDoc(props) {
     const [products, setProducts] = useState([]);
     const [expandedRows, setExpandedRows] = useState(null);
     const toast = useRef(null);
     const isMounted = useRef(false);
-
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
-
-    useEffect(() => {
-        if (isMounted.current) {
-            const summary = expandedRows !== null ? 'All Rows Expanded' : 'All Rows Collapsed';
-
-            toast.current.show({ severity: 'success', summary: `${summary}`, life: 3000 });
-        }
-    }, [expandedRows]);
 
     useEffect(() => {
         isMounted.current = true;
@@ -67,7 +56,7 @@ export function RowExpandDoc(props) {
     };
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={`${contextPath}/images/product/${rowData.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={rowData.image} className="shadow-1 w-full" />;
+        return <img src={`images/product/${rowData.image}`} alt={rowData.image} className="shadow-1 w-full" />;
     };
 
     const priceBodyTemplate = (rowData) => {
@@ -131,22 +120,13 @@ import { ProductService } from './service/ProductService';
 import { Rating } from 'primereact/rating';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
-import './DataTableDemo.css';
 
-const RowExpandDoc = () => {
+export default function RowExpandDoc() {
     const [products, setProducts] = useState([]);
     const [expandedRows, setExpandedRows] = useState(null);
     const toast = useRef(null);
     const isMounted = useRef(false);
     
-
-    useEffect(() => {
-        if (isMounted.current) {
-            const summary = expandedRows !== null ? 'All Rows Expanded' : 'All Rows Collapsed';
-            toast.current.show({severity: 'success', summary: \`\${summary}\`, life: 3000});
-        }
-    }, [expandedRows]);
-
     useEffect(() => {
         isMounted.current = true;
         ProductService.getProductsWithOrdersSmall().then(data => setProducts(data));
@@ -188,7 +168,7 @@ const RowExpandDoc = () => {
     }
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={\`images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="shadow-1 w-full" />;
+        return <img src={\`https://www.primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} className="shadow-1 w-full" />;
     }
 
     const priceBodyTemplate = (rowData) => {
@@ -256,22 +236,13 @@ import { ProductService } from './service/ProductService';
 import { Rating } from 'primereact/rating';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
-import './DataTableDemo.css';
 
-const RowExpandDoc = () => {
+export default function RowExpandDoc() {
     const [products, setProducts] = useState([]);
     const [expandedRows, setExpandedRows] = useState(null);
     const toast = useRef(null);
     const isMounted = useRef(false);
     
-
-    useEffect(() => {
-        if (isMounted.current) {
-            const summary = expandedRows !== null ? 'All Rows Expanded' : 'All Rows Collapsed';
-            toast.current.show({severity: 'success', summary: \`\${summary}\`, life: 3000});
-        }
-    }, [expandedRows]);
-
     useEffect(() => {
         isMounted.current = true;
         ProductService.getProductsWithOrdersSmall().then(data => setProducts(data));
@@ -313,7 +284,7 @@ const RowExpandDoc = () => {
     }
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={\`images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="shadow-1 w-full" />;
+        return <img src={\`https://www.primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} className="shadow-1 w-full" />;
     }
 
     const priceBodyTemplate = (rowData) => {

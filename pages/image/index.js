@@ -1,16 +1,14 @@
 import Head from 'next/head';
-import Link from 'next/link';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/image/importdoc';
-import { BasicDoc } from '../../components/doc/image/basicdoc';
-import { PreviewDoc } from '../../components/doc/image/previewdoc';
-import { ThumbnailDoc } from '../../components/doc/image/thumbnaildoc';
-import { TemplateDoc } from '../../components/doc/image/templatedoc';
-import { ApiDoc } from '../../components/doc/image/apidoc';
 import { AccessibilityDoc } from '../../components/doc/image/accessibilitydoc';
+import { BasicDoc } from '../../components/doc/image/basicdoc';
+import { ImportDoc } from '../../components/doc/image/importdoc';
+import { PreviewDoc } from '../../components/doc/image/previewdoc';
 import { StyleDoc } from '../../components/doc/image/styledoc';
+import { TemplateDoc } from '../../components/doc/image/templatedoc';
+import { ThumbnailDoc } from '../../components/doc/image/thumbnaildoc';
 
 const ImageDemo = () => {
     const docs = [
@@ -52,7 +50,7 @@ const ImageDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Image', pathname: '/modules/image.html' }]
         }
     ];
 
@@ -69,7 +67,7 @@ const ImageDemo = () => {
                         <p>Displays a single image with preview and tranformation options.</p>
                     </div>
                 </div>
-                <DocActions github="image/index.js" />
+                <DocActions github="/image" />
             </div>
 
             <div className="content-section doc">

@@ -1,14 +1,13 @@
 import Head from 'next/head';
 import React from 'react';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/progressspinner/apidoc';
 import { AccessibilityDoc } from '../../components/doc/progressspinner/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/progressspinner/styledoc';
-import { ImportDoc } from '../../components/doc/progressspinner/importdoc';
 import { BasicDoc } from '../../components/doc/progressspinner/basicdoc';
 import { CustomDoc } from '../../components/doc/progressspinner/customdoc';
-import { DocActions } from '../../components/doc/common/docactions';
+import { ImportDoc } from '../../components/doc/progressspinner/importdoc';
+import { StyleDoc } from '../../components/doc/progressspinner/styledoc';
 
 const SkeletonDemo = () => {
     const docs = [
@@ -40,7 +39,7 @@ const SkeletonDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'ProgressSpinner', pathname: '/modules/progressspinner.html' }]
         }
     ];
 
@@ -56,7 +55,7 @@ const SkeletonDemo = () => {
                     <h1>ProgressSpinner</h1>
                     <p>ProgressSpinner is a process status indicator.</p>
                 </div>
-                <DocActions github="progressspinner/index.js" />
+                <DocActions github="/progressspinner" />
             </div>
 
             <div className="content-section doc">

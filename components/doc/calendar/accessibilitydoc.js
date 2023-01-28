@@ -1,9 +1,22 @@
-import { DocSectionText } from '../common/docsectiontext';
 import { DevelopmentSection } from '../common/developmentsection';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 import Link from 'next/link';
 
 export function AccessibilityDoc() {
+    const code = {
+        basic: `
+<label htmlFor="date1">Date</label>
+<Calendar inputId="date1" />
+
+<span id="date2">Date</span>
+<Calendar aria-labelledby="date2" />
+
+<Calendar aria-label="Date" />
+    `
+    };
+
     return (
         <DevelopmentSection>
             <DocSectionText id="accessibility" label="Accessibility">
@@ -39,15 +52,7 @@ export function AccessibilityDoc() {
                     Calendar also includes a hidden section that is only available to screen readers with <i>aria-live</i> as "polite". This element is updated when the selected date changes to instruct the user about the current date selected.
                 </p>
 
-                {`
-<label htmlFor="date1">Date</label>
-<Calendar inputId="date1" />
-
-<span id="date2">Date</span>
-<Calendar aria-labelledby="date2" />
-
-<Calendar aria-label="Date" />
-`}
+                <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
 
                 <h3>Choose Date Button Keyboard Support</h3>
                 <div className="doc-tablewrapper">

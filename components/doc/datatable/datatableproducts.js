@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import getConfig from 'next/config';
 import { DataTable } from '../../lib/datatable/DataTable';
 import { Column } from '../../lib/column/Column';
 import { DocSectionCode } from '../common/docsectioncode';
@@ -40,8 +39,6 @@ export function DatatableProductsDoc(props) {
     const [globalFilter, setGlobalFilter] = useState(null);
     const toast = useRef(null);
     const dt = useRef(null);
-
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
         ProductService.getProducts().then((data) => setProducts(data));
@@ -235,7 +232,7 @@ export function DatatableProductsDoc(props) {
     };
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={`${contextPath}/images/product/${rowData.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={rowData.image} className="product-image" />;
+        return <img src={`images/product/${rowData.image}`} alt={rowData.image} className="product-image" />;
     };
 
     const priceBodyTemplate = (rowData) => {
@@ -324,7 +321,7 @@ import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import './DataTableDemo.css';
 
-const DataTableCrudDemo = () => {
+export default function DataTableCrudDemo() {
 
 let emptyProduct = {
     id: null,
@@ -530,7 +527,7 @@ const rightToolbarTemplate = () => {
 }
 
 const imageBodyTemplate = (rowData) => {
-    return <img src={\`images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />
+    return <img src={\`https://www.primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} className="product-image" />
 }
 
 const priceBodyTemplate = (rowData) => {
@@ -607,7 +604,7 @@ return (
         </div>
 
         <Dialog visible={productDialog} style={{ width: '450px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
-            {product.image && <img src={\`images/product/\${product.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={product.image} className="product-image block m-auto pb-3" />}
+            {product.image && <img src={\`https://www.primereact.org/images/product/\${product.image}\`} alt={product.image} className="product-image block m-auto pb-3" />}
             <div className="field">
                 <label htmlFor="name">Name</label>
                 <InputText id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />
@@ -687,7 +684,7 @@ import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import './DataTableDemo.css';
 
-const DataTableCrudDemo = () => {
+export default function DataTableCrudDemo() {
 
 let emptyProduct = {
     id: null,
@@ -893,7 +890,7 @@ const rightToolbarTemplate = () => {
 }
 
 const imageBodyTemplate = (rowData) => {
-    return <img src={\`images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />
+    return <img src={\`https://www.primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} className="product-image" />
 }
 
 const priceBodyTemplate = (rowData) => {
@@ -970,7 +967,7 @@ return (
         </div>
 
         <Dialog visible={productDialog} style={{ width: '450px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
-            {product.image && <img src={\`images/product/\${product.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={product.image} className="product-image block m-auto pb-3" />}
+            {product.image && <img src={\`https://www.primereact.org/images/product/\${product.image}\`} alt={product.image} className="product-image block m-auto pb-3" />}
             <div className="field">
                 <label htmlFor="name">Name</label>
                 <InputText id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />
@@ -1032,7 +1029,8 @@ return (
 );
 }
         `,
-        css: `
+        extFiles: {
+            'DataTableDemo.css': `
 /* DataTableDemo.css */
 
 .datatable-crud-demo .table-header {
@@ -1073,7 +1071,8 @@ return (
         width: 100%;
     }
 }        
-        `,
+        `
+        },
         data: `
 /* ProductService */        
 {
@@ -1131,14 +1130,7 @@ return (
                 </div>
 
                 <Dialog visible={productDialog} style={{ width: '450px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
-                    {product.image && (
-                        <img
-                            src={`${contextPath}/images/product/${product.image}`}
-                            onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
-                            alt={product.image}
-                            className="product-image block m-auto pb-3"
-                        />
-                    )}
+                    {product.image && <img src={`images/product/${product.image}`} alt={product.image} className="product-image block m-auto pb-3" />}
                     <div className="field">
                         <label htmlFor="name">Name</label>
                         <InputText id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />

@@ -1,14 +1,13 @@
 import Head from 'next/head';
 import React from 'react';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/scrolltop/apidoc';
 import { AccessibilityDoc } from '../../components/doc/scrolltop/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/scrolltop/styledoc';
-import { ImportDoc } from '../../components/doc/scrolltop/importdoc';
 import { BasicDoc } from '../../components/doc/scrolltop/basicdoc';
 import { ElementDoc } from '../../components/doc/scrolltop/elementdoc';
-import { DocActions } from '../../components/doc/common/docactions';
+import { ImportDoc } from '../../components/doc/scrolltop/importdoc';
+import { StyleDoc } from '../../components/doc/scrolltop/styledoc';
 
 const ScrollTopDemo = () => {
     const docs = [
@@ -40,7 +39,7 @@ const ScrollTopDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'ScrollTop', pathname: '/modules/scrolltop.html' }]
         }
     ];
 
@@ -56,7 +55,7 @@ const ScrollTopDemo = () => {
                     <h1>ScrollTop</h1>
                     <p>ScrollTop gets displayed after a certain scroll position and used to navigates to the top of the page quickly.</p>
                 </div>
-                <DocActions github="scrolltop/index.js" />
+                <DocActions github="/scrolltop" />
             </div>
 
             <div className="content-section doc">

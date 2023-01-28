@@ -1,15 +1,14 @@
 import Head from 'next/head';
 import React from 'react';
+import { AccessibilityDoc } from '../../components/doc/blockui/accessibilitydoc';
+import { BasicDoc } from '../../components/doc/blockui/basicdoc';
+import { DocumentDoc } from '../../components/doc/blockui/documentdoc';
+import { ImportDoc } from '../../components/doc/blockui/importdoc';
+import { StyleDoc } from '../../components/doc/blockui/styledoc';
+import { TemplateDoc } from '../../components/doc/blockui/templatedoc';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/blockui/apidoc';
-import { AccessibilityDoc } from '../../components/doc/blockui/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/blockui/styledoc';
-import { ImportDoc } from '../../components/doc/blockui/importdoc';
-import { BasicDoc } from '../../components/doc/blockui/basicdoc';
-import { TemplateDoc } from '../../components/doc/blockui/templatedoc';
-import { DocumentDoc } from '../../components/doc/blockui/documentdoc';
-import { DocActions } from '../../components/doc/common/docactions';
 
 const BlockUIDemo = () => {
     const docs = [
@@ -46,7 +45,7 @@ const BlockUIDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'BlockUI', pathname: '/modules/blockui.html' }]
         }
     ];
 
@@ -62,7 +61,7 @@ const BlockUIDemo = () => {
                     <h1>BlockUI</h1>
                     <p>BlockUI can block certain elements or the whole page.</p>
                 </div>
-                <DocActions github="blockui/index.js" />
+                <DocActions github="/blockui" />
             </div>
 
             <div className="content-section doc">

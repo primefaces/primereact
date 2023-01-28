@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import getConfig from 'next/config';
 import { DataTable } from '../../../lib/datatable/DataTable';
 import { Column } from '../../../lib/column/Column';
 import { DocSectionCode } from '../../common/docsectioncode';
@@ -36,8 +35,6 @@ export function FilterMenuDoc(props) {
     ];
 
     const statuses = ['unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal'];
-
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
         CustomerService.getCustomersLarge().then((data) => {
@@ -111,14 +108,8 @@ export function FilterMenuDoc(props) {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img
-                    alt="flag"
-                    src={`${contextPath}/images/flag/flag_placeholder.png`}
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
-                    className={`flag flag-${rowData.country.code}`}
-                    width={30}
-                />
-                <span className="image-text">{rowData.country.name}</span>
+                <img alt="flag" src={`images/flag/flag_placeholder.png`} className={`flag flag-${rowData.country.code}`} width={30} />
+                <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );
     };
@@ -140,14 +131,8 @@ export function FilterMenuDoc(props) {
 
         return (
             <React.Fragment>
-                <img
-                    alt={representative.name}
-                    src={`${contextPath}/images/avatar/${representative.image}`}
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
-                    width={32}
-                    style={{ verticalAlign: 'middle' }}
-                />
-                <span className="image-text">{representative.name}</span>
+                <img alt={representative.name} src={`images/avatar/${representative.image}`} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="vertical-align-middle ml-2">{representative.name}</span>
             </React.Fragment>
         );
     };
@@ -159,8 +144,8 @@ export function FilterMenuDoc(props) {
     const representativesItemTemplate = (option) => {
         return (
             <div className="p-multiselect-representative-option">
-                <img alt={option.name} src={`${contextPath}/images/avatar/${option.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} width={32} style={{ verticalAlign: 'middle' }} />
-                <span className="image-text">{option.name}</span>
+                <img alt={option.name} src={`images/avatar/${option.image}`} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="vertical-align-middle ml-2">{option.name}</span>
             </div>
         );
     };
@@ -255,7 +240,7 @@ import { TriStateCheckbox } from 'primereact/tristatecheckbox';
 import { CustomerService } from './service/CustomerService';
 import './DataTableDemo.css';
 
-const FilterMenuDoc = () => {
+export default function FilterMenuDoc() {
     const [customers, setCustomers] = useState(null);
     const [filters, setFilters] = useState(null);
     const [globalFilterValue, setGlobalFilterValue] = useState('');
@@ -347,8 +332,8 @@ const FilterMenuDoc = () => {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt="flag" src="/images/flag/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${rowData.country.code}\`} width={30} />
-                <span className="image-text">{rowData.country.name}</span>
+                <img alt="flag" src="https://www.primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} width={30} />
+                <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );
     }
@@ -369,8 +354,8 @@ const FilterMenuDoc = () => {
         const representative = rowData.representative;
         return (
             <React.Fragment>
-                <img alt={representative.name} src={\`images/avatar/\${representative.image}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{ verticalAlign: 'middle' }} />
-                <span className="image-text">{representative.name}</span>
+                <img alt={representative.name} src={\`https://www.primereact.org/images/avatar/\${representative.image}\`} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="vertical-align-middle ml-2">{representative.name}</span>
             </React.Fragment>
         );
     }
@@ -382,8 +367,8 @@ const FilterMenuDoc = () => {
     const representativesItemTemplate = (option) => {
         return (
             <div className="p-multiselect-representative-option">
-                <img alt={option.name} src={\`images/avatar/\${option.image}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{ verticalAlign: 'middle' }} />
-                <span className="image-text">{option.name}</span>
+                <img alt={option.name} src={\`https://www.primereact.org/images/avatar/\${option.image}\`} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="vertical-align-middle ml-2">{option.name}</span>
             </div>
         );
     }
@@ -483,7 +468,7 @@ import { TriStateCheckbox } from 'primereact/tristatecheckbox';
 import { CustomerService } from './service/CustomerService';
 import './DataTableDemo.css';
 
-const FilterMenuDoc = () => {
+export default function FilterMenuDoc() {
     const [customers, setCustomers] = useState(null);
     const [filters, setFilters] = useState(null);
     const [globalFilterValue, setGlobalFilterValue] = useState('');
@@ -575,8 +560,8 @@ const FilterMenuDoc = () => {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt="flag" src="/images/flag/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${rowData.country.code}\`} width={30} />
-                <span className="image-text">{rowData.country.name}</span>
+                <img alt="flag" src="https://www.primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} width={30} />
+                <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );
     }
@@ -597,8 +582,8 @@ const FilterMenuDoc = () => {
         const representative = rowData.representative;
         return (
             <React.Fragment>
-                <img alt={representative.name} src={\`images/avatar/\${representative.image}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{ verticalAlign: 'middle' }} />
-                <span className="image-text">{representative.name}</span>
+                <img alt={representative.name} src={\`https://www.primereact.org/images/avatar/\${representative.image}\`} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="vertical-align-middle ml-2">{representative.name}</span>
             </React.Fragment>
         );
     }
@@ -610,8 +595,8 @@ const FilterMenuDoc = () => {
     const representativesItemTemplate = (option) => {
         return (
             <div className="p-multiselect-representative-option">
-                <img alt={option.name} src={\`images/avatar/\${option.image}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{ verticalAlign: 'middle' }} />
-                <span className="image-text">{option.name}</span>
+                <img alt={option.name} src={\`https://www.primereact.org/images/avatar/\${option.image}\`} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="vertical-align-middle ml-2">{option.name}</span>
             </div>
         );
     }

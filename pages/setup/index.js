@@ -16,7 +16,7 @@ const SetupPage = () => {
             <div className="content-section introduction">
                 <div className="feature-intro">
                     <h1>Setup</h1>
-                    <p>PrimeReact is a rich set of open source native components for React.</p>
+                    <p>PrimeReact is a rich set of open source UI components for React.</p>
                 </div>
             </div>
 
@@ -80,7 +80,7 @@ import { Button } from 'primereact/button';
                     Other alternative is utilizing the components directly within the browser with the <i>iife</i> build. Note that PrimeReact does not provide a <i>umd</i> build. The core.min.js is required. It includes shared components and
                     structures; utils, api, ripple, portal, keyfilter, tooltip, virtualscroller, terminalservice, overlayservice, checkbox, button, inputtext, inputnumber, messages, progressbar, dropdown, dialog, paginator and tree.
                 </p>
-                <CodeHighlight lang="js">
+                <CodeHighlight lang="html">
                     {`
 <!DOCTYPE html>
 <html lang="en">
@@ -180,6 +180,12 @@ primereact/resources/themes/lara-dark-blue/theme.css
 primereact/resources/themes/lara-dark-indigo/theme.css
 primereact/resources/themes/lara-dark-purple/theme.css
 primereact/resources/themes/lara-dark-teal/theme.css
+primereact/resources/themes/soho-light/theme.css
+primereact/resources/themes/soho-dark/theme.css
+primereact/resources/themes/viva-light/theme.css
+primereact/resources/themes/viva-dark/theme.css
+primereact/resources/themes/mira/theme.css
+primereact/resources/themes/nano/theme.css
 primereact/resources/themes/saga-blue/theme.css
 primereact/resources/themes/saga-green/theme.css
 primereact/resources/themes/saga-orange/theme.css

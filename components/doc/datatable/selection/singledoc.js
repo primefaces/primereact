@@ -38,20 +38,18 @@ import { Column } from 'primereact/column';
 import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
-const SingleDoc = () => {
+export default function SingleDoc() {
 
     const [products, setProducts] = useState([]);
     const [selectedProduct1, setSelectedProduct1] = useState(null);
     const [selectedProduct2, setSelectedProduct2] = useState(null);
 
     useEffect(() => {
-        
-
         ProductService.getProductsMini().then(data => setProducts(data));
     },[]);
 
     return (
-        <div className="card">
+        <div className="card datatable-selection-demo">
             <h6>Row Selection</h6>
             <DataTable value={products} selectionMode="single" selection={selectedProduct1} onSelectionChange={e => setSelectedProduct1(e.value)} dataKey="id" responsiveLayout="scroll">
                 <Column field="code" header="Code"></Column>
@@ -78,20 +76,18 @@ import { Column } from 'primereact/column';
 import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
-const SingleDoc = () => {
+export default function SingleDoc() {
 
     const [products, setProducts] = useState([]);
     const [selectedProduct1, setSelectedProduct1] = useState(null);
     const [selectedProduct2, setSelectedProduct2] = useState(null);
 
     useEffect(() => {
-        
-
         ProductService.getProductsMini().then(data => setProducts(data));
     },[]);
 
     return (
-        <div className="card">
+        <div className="card datatable-selection-demo">
             <h6>Row Selection</h6>
             <DataTable value={products} selectionMode="single" selection={selectedProduct1} onSelectionChange={e => setSelectedProduct1(e.value)} dataKey="id" responsiveLayout="scroll">
                 <Column field="code" header="Code"></Column>
@@ -111,6 +107,18 @@ const SingleDoc = () => {
     );
 }
         `,
+        extFiles: {
+            'DataTableDemo.css': `
+/* DataTableDemo.css */
+
+.datatable-selection-demo .card h6 {
+    margin-top: 2rem;
+}
+.datatable-selection-demo .card h6:first-of-type {
+    margin-top: 0;
+}
+`
+        },
         data: `
 /* ProductService */        
 {
@@ -134,7 +142,7 @@ const SingleDoc = () => {
             <DocSectionText {...props}>
                 <p>In single mode, a row or cell is selected on its click event. If it is already selected then it gets unselected using meta key.</p>
             </DocSectionText>
-            <div className="card">
+            <div className="card datatable-selection-demo">
                 <h6>Row Selection</h6>
                 <DataTable value={products} selectionMode="single" selection={selectedProduct1} onSelectionChange={(e) => setSelectedProduct1(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
