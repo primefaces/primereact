@@ -37,7 +37,9 @@ export default function ReadOnlyDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>When <i>readOnly</i> is present, the value cannot be edited.</p>
+                <p>
+                    When <i>readOnly</i> is present, the value cannot be edited.
+                </p>
             </DocSectionText>
             <div className="card">
                 <Editor value="Always bet on Prime!" readOnly style={{ height: '320px' }} />

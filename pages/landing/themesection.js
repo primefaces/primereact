@@ -135,7 +135,7 @@ const ThemeSection = (props) => {
                 <button type="button" className={classNames('font-medium linkbox mr-3 mt-4', { active: props.theme && props.theme.startsWith('bootstrap4') })} onClick={() => changeTheme('bootstrap4', 'blue')}>
                     Bootstrap
                 </button>
-                <a type="button" className="font-medium p-link linkbox mt-4" href="https://designer.primereact.orgt">
+                <a type="button" className="font-medium p-link linkbox mt-4" href="https://designer.primereact.org">
                     more...
                 </a>
             </div>
