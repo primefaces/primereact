@@ -3,19 +3,18 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/inputnumber/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/inputnumber/apidoc';
 import { ButtonsDoc } from '../../components/doc/inputnumber/buttonsdoc';
 import { CurrencyDoc } from '../../components/doc/inputnumber/currencydoc';
 import { DisabledDoc } from '../../components/doc/inputnumber/disableddoc';
 import { FloatLabelDoc } from '../../components/doc/inputnumber/floatlabeldoc';
+import { FormikDoc } from '../../components/doc/inputnumber/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/inputnumber/form/hookformdoc';
 import { ImportDoc } from '../../components/doc/inputnumber/importdoc';
 import { InvalidDoc } from '../../components/doc/inputnumber/invaliddoc';
 import { LocaleDoc } from '../../components/doc/inputnumber/localedoc';
 import { NumeralsDoc } from '../../components/doc/inputnumber/numberalsdoc';
-import { PrefixDoc } from '../../components/doc/inputnumber/prefixdoc';
+import { PrefixSuffixDoc } from '../../components/doc/inputnumber/prefixsuffixdoc';
 import { StyleDoc } from '../../components/doc/inputnumber/styledoc';
-import { FormikDoc } from '../../components/doc/inputnumber/form/formikdoc';
-import { HookFormDoc } from '../../components/doc/inputnumber/form/hookformdoc';
 import { VerticalDoc } from '../../components/doc/inputnumber/verticaldoc';
 
 const InputNumberDemo = () => {
@@ -24,21 +23,6 @@ const InputNumberDemo = () => {
             id: 'import',
             label: 'Import',
             component: ImportDoc
-        },
-        {
-            id: 'floatlabel',
-            label: 'Float Label',
-            component: FloatLabelDoc
-        },
-        {
-            id: 'invalid',
-            label: 'Invalid',
-            component: InvalidDoc
-        },
-        {
-            id: 'disabled',
-            label: 'Disabled',
-            component: DisabledDoc
         },
         {
             id: 'numerals',
@@ -56,9 +40,9 @@ const InputNumberDemo = () => {
             component: CurrencyDoc
         },
         {
-            id: 'prefix',
-            label: 'Prefix and Suffix',
-            component: PrefixDoc
+            id: 'prefixsuffix',
+            label: 'Prefix & Suffix',
+            component: PrefixSuffixDoc
         },
         {
             id: 'buttons',
@@ -69,6 +53,21 @@ const InputNumberDemo = () => {
             id: 'vertical',
             label: 'Vertical',
             component: VerticalDoc
+        },
+        {
+            id: 'floatlabel',
+            label: 'Float Label',
+            component: FloatLabelDoc
+        },
+        {
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
         },
         {
             id: 'form',
@@ -100,7 +99,7 @@ const InputNumberDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'InputNumber', pathname: '/modules/inputnumber.html' }]
         }
     ];
 
@@ -116,7 +115,7 @@ const InputNumberDemo = () => {
                     <p>InputNumber is an input component to provide numerical input.</p>
                 </div>
 
-                <DocActions github="inputnumber/index.js" />
+                <DocActions github="/inputnumber" />
             </div>
 
             <div className="content-section doc">

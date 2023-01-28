@@ -41,7 +41,7 @@ import { Column } from 'primereact/column';
 import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
-const RadioButtonDoc = () => {
+export default function RadioButtonDoc() {
 
     const [products, setProducts] = useState([]);
     const [selectedProduct1, setSelectedProduct1] = useState(null);
@@ -54,7 +54,7 @@ const RadioButtonDoc = () => {
     },[]);
 
     return (
-        <div className="card">
+        <div className="card datatable-selection-demo">
             <h6>Row and RadioButton Selection</h6>
             <DataTable value={products} selection={selectedProduct1} onSelectionChange={e => setSelectedProduct1(e.value)} dataKey="id" responsiveLayout="scroll">
                 <Column selectionMode="single" headerStyle={{width: '3em'}}></Column>
@@ -83,7 +83,7 @@ import { Column } from 'primereact/column';
 import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
-const RadioButtonDoc = () => {
+export default function RadioButtonDoc() {
 
     const [products, setProducts] = useState([]);
     const [selectedProduct1, setSelectedProduct1] = useState(null);
@@ -96,7 +96,7 @@ const RadioButtonDoc = () => {
     },[]);
 
     return (
-        <div className="card">
+        <div className="card datatable-selection-demo">
             <h6>Row and RadioButton Selection</h6>
             <DataTable value={products} selection={selectedProduct1} onSelectionChange={e => setSelectedProduct1(e.value)} dataKey="id" responsiveLayout="scroll">
                 <Column selectionMode="single" headerStyle={{width: '3em'}}></Column>
@@ -118,6 +118,18 @@ const RadioButtonDoc = () => {
     );
 }
         `,
+        extFiles: {
+            'DataTableDemo.css': `
+/* DataTableDemo.css */
+
+.datatable-selection-demo .card h6 {
+    margin-top: 2rem;
+}
+.datatable-selection-demo .card h6:first-of-type {
+    margin-top: 0;
+}
+`
+        },
         data: `
 /* ProductService */        
 {
@@ -141,7 +153,7 @@ const RadioButtonDoc = () => {
             <DocSectionText {...props}>
                 <p>Single selection can also be handled using radio buttons and rows by enabling the selectionMode property of column as "single".</p>
             </DocSectionText>
-            <div className="card">
+            <div className="card datatable-selection-demo">
                 <h6>Row and RadioButton Selection</h6>
                 <DataTable value={products} selection={selectedProduct1} onSelectionChange={(e) => setSelectedProduct1(e.value)} dataKey="id" responsiveLayout="scroll" selectionAriaLabel="name">
                     <Column selectionMode="single" headerStyle={{ width: '3em' }}></Column>

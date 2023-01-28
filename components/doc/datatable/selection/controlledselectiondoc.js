@@ -94,7 +94,7 @@ import { Column } from 'primereact/column';
 import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
-const ControlledSelectionDoc = () => {
+export default function ControlledSelectionDoc() {
 
     const [products, setProducts] = useState([]);
     const [selectedProducts1, setSelectedProducts1] = useState(null);
@@ -144,7 +144,7 @@ const ControlledSelectionDoc = () => {
     }
 
     return (
-        <div className="card">
+        <div className="card datatable-selection-demo">
             <DataTable value={products} selectionMode="multiple" dragSelection selection={selectedProducts1} onSelectionChange={e => setSelectedProducts1(e.value)} dataKey="id" responsiveLayout="scroll"
                 isDataSelectable={isRowSelectable} rowClassName={rowClassName}>
                 <Column field="code" header="Code"></Column>
@@ -182,7 +182,7 @@ import { Column } from 'primereact/column';
 import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
-const ControlledSelectionDoc = () => {
+export default function ControlledSelectionDoc() {
 
     const [products, setProducts] = useState([]);
     const [selectedProducts1, setSelectedProducts1] = useState(null);
@@ -232,7 +232,7 @@ const ControlledSelectionDoc = () => {
     }
 
     return (
-        <div className="card">
+        <div className="card datatable-selection-demo">
             <DataTable value={products} selectionMode="multiple" dragSelection selection={selectedProducts1} onSelectionChange={e => setSelectedProducts1(e.value)} dataKey="id" responsiveLayout="scroll"
                 isDataSelectable={isRowSelectable} rowClassName={rowClassName}>
                 <Column field="code" header="Code"></Column>
@@ -263,6 +263,18 @@ const ControlledSelectionDoc = () => {
     );
 }
         `,
+        extFiles: {
+            'DataTableDemo.css': `
+/* DataTableDemo.css */
+
+.datatable-selection-demo .card h6 {
+    margin-top: 2rem;
+}
+.datatable-selection-demo .card h6:first-of-type {
+    margin-top: 0;
+}
+`
+        },
         data: `
 /* ProductService */        
 {
@@ -286,7 +298,7 @@ const ControlledSelectionDoc = () => {
             <DocSectionText {...props}>
                 <p>It can be checked whether a row or cell can be selected or not according to the specified conditions.</p>
             </DocSectionText>
-            <div className="card">
+            <div className="card datatable-selection-demo">
                 <h6>Row Selection</h6>
                 <DataTable
                     value={products}

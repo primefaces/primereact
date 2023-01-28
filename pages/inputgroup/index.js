@@ -42,7 +42,7 @@ const InputGroupDemo = () => {
                     <h1>InputGroup</h1>
                     <p>Text, icon, buttons and other content can be grouped next to an input.</p>
                 </div>
-                <DocActions github="inputgroup/index.js" />
+                <DocActions github="/inputgroup" />
             </div>
 
             <div className="content-section doc">

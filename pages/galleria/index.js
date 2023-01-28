@@ -3,7 +3,6 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ImportDoc } from '../../components/doc/galleria/importdoc';
 import { BasicDoc } from '../../components/doc/galleria/basicdoc';
-import { ApiDoc } from '../../components/doc/galleria/apidoc';
 import { AccessibilityDoc } from '../../components/doc/galleria/accessibilitydoc';
 import { StyleDoc } from '../../components/doc/galleria/styledoc';
 import { ControlledDoc } from '../../components/doc/galleria/controlleddoc';
@@ -143,7 +142,7 @@ const GalleriaDemo = () => {
             component: AdvancedDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },
@@ -155,7 +154,7 @@ const GalleriaDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Galleria', pathname: '/modules/galleria.html' }]
         }
     ];
 

@@ -1,8 +1,20 @@
-import { DocSectionText } from '../common/docsectiontext';
 import { DevelopmentSection } from '../common/developmentsection';
-import { CodeHighlight } from '../common/codehighlight';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function AccessibilityDoc() {
+    const code = {
+        basic: `
+<label htmlFor="price">Price</label>
+<InputNumber inputId="price" />
+
+<span id="label_number">Number</span>
+<InputNumber aria-labelledby="label_number" />
+
+<InputNumber aria-label="Number" />
+    `
+    };
+
     return (
         <DevelopmentSection>
             <DocSectionText id="accessibility" label="Accessibility">
@@ -11,17 +23,8 @@ export function AccessibilityDoc() {
                     Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props. The input element uses <i>spinbutton</i> role in addition to
                     the <i>aria-valuemin</i>, <i>aria-valuemax</i> and <i>aria-valuenow</i> attributes.
                 </p>
-                <CodeHighlight>
-                    {`
-<label htmlFor="price">Price</label>
-<InputNumber inputId="price" />
 
-<span id="label_number">Number</span>
-<InputNumber aria-labelledby="label_number" />
-
-<InputNumber aria-label="Number" />
-`}
-                </CodeHighlight>
+                <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
 
                 <h3>Keyboard Support</h3>
                 <div className="doc-tablewrapper">

@@ -1,13 +1,12 @@
 import Head from 'next/head';
+import { AccessibilityDoc } from '../../components/doc/card/accessibilitydoc';
+import { AdvancedDoc } from '../../components/doc/card/advanceddoc';
+import { BasicDoc } from '../../components/doc/card/basicdoc';
+import { ImportDoc } from '../../components/doc/card/importdoc';
+import { StyleDoc } from '../../components/doc/card/styledoc';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/card/importdoc';
-import { BasicDoc } from '../../components/doc/card/basicdoc';
-import { AdvancedDoc } from '../../components/doc/card/advanceddoc';
-import { ApiDoc } from '../../components/doc/card/apidoc';
-import { AccessibilityDoc } from '../../components/doc/card/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/card/styledoc';
 
 const CardDemo = () => {
     const docs = [
@@ -39,7 +38,7 @@ const CardDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Card', pathname: '/modules/card.html' }]
         }
     ];
 
@@ -54,7 +53,7 @@ const CardDemo = () => {
                     <h1>Card</h1>
                     <p>Card is a flexible container component.</p>
                 </div>
-                <DocActions github="card/index.js" />
+                <DocActions github="/card" />
             </div>
 
             <div className="content-section doc">

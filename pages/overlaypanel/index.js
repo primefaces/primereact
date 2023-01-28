@@ -2,12 +2,11 @@ import Head from 'next/head';
 import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/overlaypanel/apidoc';
 import { AccessibilityDoc } from '../../components/doc/overlaypanel/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/overlaypanel/styledoc';
-import { ImportDoc } from '../../components/doc/overlaypanel/importdoc';
 import { BasicDoc } from '../../components/doc/overlaypanel/basicdoc';
 import { DataTableDoc } from '../../components/doc/overlaypanel/datatabledoc';
+import { ImportDoc } from '../../components/doc/overlaypanel/importdoc';
+import { StyleDoc } from '../../components/doc/overlaypanel/styledoc';
 
 const OverlayPanelDemo = () => {
     const docs = [
@@ -39,7 +38,7 @@ const OverlayPanelDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'OverlayPanel', pathname: '/modules/overlaypanel.html' }]
         }
     ];
 
@@ -54,7 +53,7 @@ const OverlayPanelDemo = () => {
                     <h1>OverlayPanel</h1>
                     <p>OverlayPanel, also known as Popover, is a container component that can overlay other components on page.</p>
                 </div>
-                <DocActions github="overlaypanel/index.js" />
+                <DocActions github="/overlaypanel" />
             </div>
             <div className="content-section doc multiselect-demo">
                 <DocSections docs={docs} />

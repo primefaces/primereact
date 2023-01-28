@@ -8,7 +8,7 @@
  *
  */
 import * as React from 'react';
-import TooltipOptions, { TooltipEvent } from './tooltipoptions';
+import { TooltipEvent, TooltipOptions } from './tooltipoptions';
 
 /**
  * Defines valid properties in Tooltip component. In addition to these, all properties of TooltipOptions can be used in this component.

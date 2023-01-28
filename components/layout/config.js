@@ -1,10 +1,9 @@
-import { classNames } from '../lib/utils/ClassNames';
-import { Button } from '../lib/button/Button';
-import { RadioButton } from '../lib/radiobutton/RadioButton';
-import { InputSwitch } from '../lib/inputswitch/InputSwitch';
-import { Badge } from '../lib/badge/Badge';
-import React, { useState, useRef, useEffect } from 'react';
 import getConfig from 'next/config';
+import React, { useEffect, useRef, useState } from 'react';
+import { Button } from '../lib/button/Button';
+import { InputSwitch } from '../lib/inputswitch/InputSwitch';
+import { RadioButton } from '../lib/radiobutton/RadioButton';
+import { classNames } from '../lib/utils/ClassNames';
 
 export default function Config(props) {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
@@ -222,9 +221,7 @@ export default function Config(props) {
                             </div>
                         </div>
 
-                        <h5 className="flex align-items-center">
-                            PrimeOne Design - 2022 <Badge value="NEW" severity="success" className="ml-3" />
-                        </h5>
+                        <h5>PrimeOne Design</h5>
                         <div className="grid free-themes">
                             <div className="col-3">
                                 <button className="p-link" onClick={() => onThemeChange('lara-light-indigo')}>
@@ -276,7 +273,47 @@ export default function Config(props) {
                             </div>
                         </div>
 
-                        <h5>PrimeOne Design - 2021</h5>
+                        <h5>Misc</h5>
+                        <div className="grid free-themes">
+                            <div className="col-3">
+                                <button className="p-link" onClick={() => onThemeChange('soho-light')}>
+                                    <img src={`${contextPath}/images/themes/soho-light.png`} alt="Soho Light" />
+                                </button>
+                                <span>Soho Light</span>
+                            </div>
+                            <div className="col-3">
+                                <button className="p-link" onClick={() => onThemeChange('soho-dark', true)}>
+                                    <img src={`${contextPath}/images/themes/soho-dark.png`} alt="Soho Dark" />
+                                </button>
+                                <span>Soho Dark</span>
+                            </div>
+                            <div className="col-3">
+                                <button className="p-link" onClick={() => onThemeChange('viva-light')}>
+                                    <img src={`${contextPath}/images/themes/viva-light.svg`} alt="Viva Light" />
+                                </button>
+                                <span>Viva Light</span>
+                            </div>
+                            <div className="col-3">
+                                <button className="p-link" onClick={() => onThemeChange('viva-dark', true)}>
+                                    <img src={`${contextPath}/images/themes/viva-dark.svg`} alt="Viva Dark" />
+                                </button>
+                                <span>Viva Dark</span>
+                            </div>
+                            <div className="col-3">
+                                <button className="p-link" onClick={() => onThemeChange('mira')}>
+                                    <img src={`${contextPath}/images/themes/mira.jpg`} alt="Mira" />
+                                </button>
+                                <span>Mira</span>
+                            </div>
+                            <div className="col-3">
+                                <button className="p-link" onClick={() => onThemeChange('nano')}>
+                                    <img src={`${contextPath}/images/themes/nano.jpg`} alt="Nano" />
+                                </button>
+                                <span>Nano</span>
+                            </div>
+                        </div>
+
+                        <h5>PrimeOne Design - Legacy</h5>
                         <div className="grid free-themes">
                             <div className="col-3">
                                 <button className="p-link" onClick={() => onThemeChange('saga-blue')}>
@@ -352,50 +389,7 @@ export default function Config(props) {
                             </div>
                         </div>
 
-                        <h5>Premium Themes</h5>
-                        <p>
-                            Premium themes are only available exclusively for <a href="https://www.primefaces.org/designer/primereact">PrimeReact Theme Designer</a> subscribers and therefore not included in PrimeReact core.
-                        </p>
-                        <div className="grid free-themes">
-                            <div className="col-3">
-                                <button className="p-link" onClick={() => onThemeChange('soho-light')}>
-                                    <img src={`${contextPath}/images/themes/soho-light.png`} alt="Soho Light" />
-                                </button>
-                                <span>Soho Light</span>
-                            </div>
-                            <div className="col-3">
-                                <button className="p-link" onClick={() => onThemeChange('soho-dark', true)}>
-                                    <img src={`${contextPath}/images/themes/soho-dark.png`} alt="Soho Dark" />
-                                </button>
-                                <span>Soho Dark</span>
-                            </div>
-                            <div className="col-3">
-                                <button className="p-link" onClick={() => onThemeChange('viva-light')}>
-                                    <img src={`${contextPath}/images/themes/viva-light.svg`} alt="Viva Light" />
-                                </button>
-                                <span>Viva Light</span>
-                            </div>
-                            <div className="col-3">
-                                <button className="p-link" onClick={() => onThemeChange('viva-dark', true)}>
-                                    <img src={`${contextPath}/images/themes/viva-dark.svg`} alt="Viva Dark" />
-                                </button>
-                                <span>Viva Dark</span>
-                            </div>
-                            <div className="col-3">
-                                <button className="p-link" onClick={() => onThemeChange('mira')}>
-                                    <img src={`${contextPath}/images/themes/mira.jpg`} alt="Mira" />
-                                </button>
-                                <span>Mira</span>
-                            </div>
-                            <div className="col-3">
-                                <button className="p-link" onClick={() => onThemeChange('nano')}>
-                                    <img src={`${contextPath}/images/themes/nano.jpg`} alt="Nano" />
-                                </button>
-                                <span>Nano</span>
-                            </div>
-                        </div>
-
-                        <h4>Legacy Free Themes</h4>
+                        <h4>Legacy</h4>
                         <div className="grid free-themes">
                             <div className="col-3">
                                 <button className="p-link" onClick={() => onThemeChange('nova')}>

@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/mention/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/mention/apidoc';
 import { AutoDoc } from '../../components/doc/mention/autodoc';
 import { BasicDoc } from '../../components/doc/mention/basicdoc';
 import { DisabledDoc } from '../../components/doc/mention/disableddoc';
@@ -82,7 +81,7 @@ const MentionDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Mention', pathname: '/modules/mention.html' }]
         }
     ];
 
@@ -98,7 +97,7 @@ const MentionDemo = () => {
                     <p>Mention component is used to refer someone or something.</p>
                 </div>
 
-                <DocActions github="mention/index.js" />
+                <DocActions github="/mention" />
             </div>
 
             <div className="content-section doc multiselect-demo">

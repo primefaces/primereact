@@ -2,13 +2,12 @@ import Head from 'next/head';
 import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/datascroller/apidoc';
 import { AccessibilityDoc } from '../../components/doc/datascroller/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/datascroller/styledoc';
 import { BasicDoc } from '../../components/doc/datascroller/basicdoc';
 import { ImportDoc } from '../../components/doc/datascroller/importdoc';
 import { InlineDataScrollerDoc } from '../../components/doc/datascroller/inlinedoc';
 import { LoaderDataScrollerDoc } from '../../components/doc/datascroller/loaderdoc';
+import { StyleDoc } from '../../components/doc/datascroller/styledoc';
 
 const DataScrollerDemo = () => {
     const docs = [
@@ -45,7 +44,7 @@ const DataScrollerDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'DataScroller', pathname: '/modules/datascroller.html' }]
         }
     ];
 
@@ -61,7 +60,7 @@ const DataScrollerDemo = () => {
                     <p>DataScroller displays data with on demand loading using scroll.</p>
                 </div>
 
-                <DocActions github="datascroller/index.js" />
+                <DocActions github="/datascroller" />
             </div>
 
             <div className="content-section doc datascroller-demo">

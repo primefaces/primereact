@@ -4,7 +4,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/inputtext/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/inputtext/apidoc';
 import { BasicDoc } from '../../components/doc/inputtext/basicdoc';
 import { DisabledDoc } from '../../components/doc/inputtext/disableddoc';
 import { FloatLabelDoc } from '../../components/doc/inputtext/floatlabeldoc';
@@ -95,7 +94,7 @@ const InputTextDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'InputText', pathname: '/modules/inputtext.html' }]
         }
     ];
 
@@ -111,7 +110,7 @@ const InputTextDemo = () => {
                     <h1>InputText</h1>
                     <p>InputText is an extension to standard input element with theming and keyfiltering.</p>
                 </div>
-                <DocActions github="inputtext/index.js" />
+                <DocActions github="/inputtext" />
             </div>
 
             <div className="content-section doc">

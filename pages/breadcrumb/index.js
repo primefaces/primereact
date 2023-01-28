@@ -1,13 +1,12 @@
 import Head from 'next/head';
+import { AccessibilityDoc } from '../../components/doc/breadcrumb/accessibilitydoc';
+import { BasicDoc } from '../../components/doc/breadcrumb/basicdoc';
+import { ImportDoc } from '../../components/doc/breadcrumb/importdoc';
+import { StyleDoc } from '../../components/doc/breadcrumb/styledoc';
+import { TemplateDoc } from '../../components/doc/breadcrumb/templatedoc';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/breadcrumb/importdoc';
-import { BasicDoc } from '../../components/doc/breadcrumb/basicdoc';
-import { ApiDoc } from '../../components/doc/breadcrumb/apidoc';
-import { StyleDoc } from '../../components/doc/breadcrumb/styledoc';
-import { AccessibilityDoc } from '../../components/doc/breadcrumb/accessibilitydoc';
-import { TemplateDoc } from '../../components/doc/breadcrumb/templatedoc';
 
 const BreadCrumbDemo = () => {
     const docs = [
@@ -39,7 +38,7 @@ const BreadCrumbDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Breadcrumb', pathname: '/modules/breadcrumb.html' }]
         }
     ];
 
@@ -54,7 +53,7 @@ const BreadCrumbDemo = () => {
                     <h1>Breadcrumb</h1>
                     <p>Breadcrumb provides contextual information about page hierarchy.</p>
                 </div>
-                <DocActions github="breadcrumb/index.js" />
+                <DocActions github="/breadcrumb" />
             </div>
 
             <div className="content-section doc">

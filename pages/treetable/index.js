@@ -1,41 +1,40 @@
 import Head from 'next/head';
 import React from 'react';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ApiDoc } from '../../components/doc/treetable/apidoc';
 import { AccessibilityDoc } from '../../components/doc/treetable/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/treetable/styledoc';
-import { PaginatorDoc } from '../../components/doc/treetable/paginatordoc';
-import { TemplateDoc } from '../../components/doc/treetable/templatedoc';
-import { ImportDoc } from '../../components/doc/treetable/importdoc';
 import { BasicDoc } from '../../components/doc/treetable/basicdoc';
-import { ProgrammaticDoc } from '../../components/doc/treetable/programmaticdoc';
 import { ColGroupDoc } from '../../components/doc/treetable/colgroupdoc';
-import { LazyDoc } from '../../components/doc/treetable/lazydoc';
-import { EditDoc } from '../../components/doc/treetable/editdoc';
-import { ReorderDoc } from '../../components/doc/treetable/reorderdoc';
 import { ColToggleDoc } from '../../components/doc/treetable/coltoggledoc';
-import { StyledTreeTableDoc } from '../../components/doc/treetable/styledtreetabledoc';
 import { ContextMenuDoc } from '../../components/doc/treetable/contextmenudoc';
-import { ResponsiveDoc } from '../../components/doc/treetable/responsivedoc';
+import { EditDoc } from '../../components/doc/treetable/editdoc';
 import { LenientFilterDoc } from '../../components/doc/treetable/filter/lenientfilterdoc';
 import { StrictFilterDoc } from '../../components/doc/treetable/filter/strictfilterdoc';
-import { VerticalDoc } from '../../components/doc/treetable/scroll/verticaldoc';
-import { HorizontalDoc } from '../../components/doc/treetable/scroll/horizontaldoc';
-import { HorizontalAndVerticalDoc } from '../../components/doc/treetable/scroll/horizontalandverticaldoc';
-import { FrozenColumnsDoc } from '../../components/doc/treetable/scroll/frozencolsdoc';
-import { SingleDoc } from '../../components/doc/treetable/sort/singledoc';
-import { MultipleDoc } from '../../components/doc/treetable/sort/multipledoc';
-import { FitModeDoc } from '../../components/doc/treetable/resize/fitmodedoc';
+import { ImportDoc } from '../../components/doc/treetable/importdoc';
+import { LazyDoc } from '../../components/doc/treetable/lazydoc';
+import { PaginatorDoc } from '../../components/doc/treetable/paginatordoc';
+import { ProgrammaticDoc } from '../../components/doc/treetable/programmaticdoc';
+import { ReorderDoc } from '../../components/doc/treetable/reorderdoc';
 import { ExpandModeDoc } from '../../components/doc/treetable/resize/expandmodedoc';
+import { FitModeDoc } from '../../components/doc/treetable/resize/fitmodedoc';
 import { ScrollableDoc } from '../../components/doc/treetable/resize/scrollabledoc';
 import { ScrollableWithVariableWidthDoc } from '../../components/doc/treetable/resize/scrollablewithvariabledoc';
+import { ResponsiveDoc } from '../../components/doc/treetable/responsivedoc';
+import { FrozenColumnsDoc } from '../../components/doc/treetable/scroll/frozencolsdoc';
+import { HorizontalAndVerticalDoc } from '../../components/doc/treetable/scroll/horizontalandverticaldoc';
+import { HorizontalDoc } from '../../components/doc/treetable/scroll/horizontaldoc';
+import { VerticalDoc } from '../../components/doc/treetable/scroll/verticaldoc';
 import { CheckboxDoc } from '../../components/doc/treetable/selection/checkboxdoc';
 import { EventsDoc } from '../../components/doc/treetable/selection/eventsdoc';
 import { MultipleSelectionDoc } from '../../components/doc/treetable/selection/multipledoc';
 import { MultipleWithMetaKeysDoc } from '../../components/doc/treetable/selection/multiplewithmetadoc';
 import { SingleSelectionDoc } from '../../components/doc/treetable/selection/singledoc';
+import { MultipleDoc } from '../../components/doc/treetable/sort/multipledoc';
+import { SingleDoc } from '../../components/doc/treetable/sort/singledoc';
+import { StyleDoc } from '../../components/doc/treetable/styledoc';
+import { StyledTreeTableDoc } from '../../components/doc/treetable/styledtreetabledoc';
+import { TemplateDoc } from '../../components/doc/treetable/templatedoc';
 
 const TreeTableDemo = () => {
     const docs = [
@@ -239,7 +238,10 @@ const TreeTableDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [
+                { name: 'TreeTable', pathname: '/modules/treetable.html' },
+                { name: 'Column', pathname: '/modules/column.html' }
+            ]
         }
     ];
 
@@ -256,7 +258,7 @@ const TreeTableDemo = () => {
                     <p>TreeTable is used to display hierarchical data in tabular format.</p>
                 </div>
 
-                <DocActions github="treetable/index.js" />
+                <DocActions github="/treetable" />
             </div>
 
             <div className="content-section doc">

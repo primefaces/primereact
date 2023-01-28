@@ -3,7 +3,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/tooltip/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/tooltip/apidoc';
 import { AutoHideDoc } from '../../components/doc/tooltip/autohidedoc';
 import { DelayDoc } from '../../components/doc/tooltip/delaydoc';
 import { DisabledDoc } from '../../components/doc/tooltip/disableddoc';
@@ -81,7 +80,7 @@ const TooltipDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Tooltip', pathname: '/modules/tooltip.html' }]
         }
     ];
 
@@ -97,7 +96,7 @@ const TooltipDemo = () => {
                     <p>Tooltip functionality is integrated within various PrimeReact components.</p>
                 </div>
 
-                <DocActions github="tooltip/index.js" />
+                <DocActions github="/tooltip" />
             </div>
 
             <div className="content-section doc">

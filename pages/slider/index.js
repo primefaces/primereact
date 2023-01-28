@@ -1,16 +1,16 @@
-import React from 'react';
 import Head from 'next/head';
+import React from 'react';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ImportDoc } from '../../components/doc/slider/importdoc';
-import { BasicDoc } from '../../components/doc/slider/basicdoc';
-import { InputDoc } from '../../components/doc/slider/inputdoc';
-import { StepDoc } from '../../components/doc/slider/stepdoc';
-import { RangeDoc } from '../../components/doc/slider/rangedoc';
-import { VerticalDoc } from '../../components/doc/slider/verticaldoc';
-import { ApiDoc } from '../../components/doc/slider/apidoc';
 import { AccessibilityDoc } from '../../components/doc/slider/accessibilitydoc';
+import { BasicDoc } from '../../components/doc/slider/basicdoc';
+import { ImportDoc } from '../../components/doc/slider/importdoc';
+import { InputDoc } from '../../components/doc/slider/inputdoc';
+import { RangeDoc } from '../../components/doc/slider/rangedoc';
+import { StepDoc } from '../../components/doc/slider/stepdoc';
 import { StyleDoc } from '../../components/doc/slider/styledoc';
+import { VerticalDoc } from '../../components/doc/slider/verticaldoc';
 
 const SliderDemo = () => {
     const docs = [
@@ -57,7 +57,7 @@ const SliderDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Slider', pathname: '/modules/slider.html' }]
         }
     ];
 
@@ -72,6 +72,7 @@ const SliderDemo = () => {
                     <h1>Slider</h1>
                     <p>Slider is a component to provide input with a drag handle.</p>
                 </div>
+                <DocActions github="/slider" />
             </div>
 
             <div className="content-section doc">

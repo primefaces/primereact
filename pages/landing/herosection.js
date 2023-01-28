@@ -27,10 +27,7 @@ const HeroSection = () => {
                                 </div>
                             </div>
                         </div>
-                        <div
-                            className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation ml-4 md:ml-0 md:mt-4 flex align-items-center justify-content-center"
-                            onClick={() => (window.location.href = 'https://www.primefaces.org/designer-react')}
-                        >
+                        <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation ml-4 md:ml-0 md:mt-4 flex align-items-center justify-content-center" onClick={() => (window.location.href = 'https://designer.primereact.org')}>
                             <div className="flex flex-column align-items-center">
                                 <img src={`${contextPath}/images/landing-new/designer-icon.svg`} alt="primereact templates" />
                                 <div className="name">
@@ -46,7 +43,7 @@ const HeroSection = () => {
                                 <img src={`${contextPath}/images/landing-new/core-icon.svg`} alt="primereact core" />
                                 <div className="name">
                                     <b>Open Source</b>
-                                    <span>80+ UI Components</span>
+                                    <span>90+ UI Components</span>
                                 </div>
                             </div>
                         </div>
@@ -71,12 +68,12 @@ const HeroSection = () => {
                         </div>
                     </div>
                     <div className="p-2 flex flex-row md:flex-column">
-                        <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation flex align-items-center justify-content-center" onClick={() => (window.location.href = 'https://www.primefaces.org/primeblocks-react')}>
+                        <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation flex align-items-center justify-content-center" onClick={() => (window.location.href = 'https://blocks.primereact.org')}>
                             <div className="flex flex-column align-items-center">
                                 <img src={`${contextPath}/images/landing-new/blocks-icon.svg`} alt="primereact templates" />
                                 <div className="name">
                                     <b>Prime Blocks</b>
-                                    <span>280+ UI Blocks</span>
+                                    <span>400+ UI Blocks</span>
                                 </div>
                             </div>
                         </div>

@@ -1,4 +1,11 @@
-import React from 'react';
+/**
+ *
+ * @todo Write the documentation.
+ *
+ * @module utils
+ *
+ */
+import * as React from 'react';
 
 export declare function classNames(...args: any[]): string | undefined;
 

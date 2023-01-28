@@ -8,7 +8,7 @@
  *
  */
 import * as React from 'react';
-import TooltipOptions from '../tooltip/tooltipoptions';
+import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
 import { IconType } from '../utils';
 
@@ -49,7 +49,7 @@ export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputH
      * Specifies whether a checkbox should be checked or not.
      * @defaultValue false
      */
-    checked?: boolean | undefined;
+    checked: boolean;
     /**
      * Value in checked state.
      * @defaultValue true

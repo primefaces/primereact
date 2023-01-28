@@ -1,16 +1,16 @@
 import Head from 'next/head';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/inputswitch/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/inputswitch/apidoc';
 import { BasicDoc } from '../../components/doc/inputswitch/basicdoc';
 import { DisabledDoc } from '../../components/doc/inputswitch/disableddoc';
+import { FormikDoc } from '../../components/doc/inputswitch/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/inputswitch/form/hookformdoc';
 import { ImportDoc } from '../../components/doc/inputswitch/importdoc';
 import { InvalidDoc } from '../../components/doc/inputswitch/invaliddoc';
 import { PreselectionDoc } from '../../components/doc/inputswitch/preselectiondoc';
 import { StyleDoc } from '../../components/doc/inputswitch/styledoc';
-import { FormikDoc } from '../../components/doc/inputswitch/form/formikdoc';
-import { HookFormDoc } from '../../components/doc/inputswitch/form/hookformdoc';
 
 const InputSwitchDemo = () => {
     const docs = [
@@ -70,7 +70,7 @@ const InputSwitchDemo = () => {
             id: 'api',
             label: 'API',
             type: 'api',
-            component: ApiDoc
+            doc: [{ name: 'InputSwitch', pathname: '/modules/inputswitch.html' }]
         }
     ];
 
@@ -85,6 +85,7 @@ const InputSwitchDemo = () => {
                     <h1>InputSwitch</h1>
                     <p>InputSwitch is used to select a boolean value.</p>
                 </div>
+                <DocActions github="/inputswitch" />
             </div>
 
             <div className="content-section doc">

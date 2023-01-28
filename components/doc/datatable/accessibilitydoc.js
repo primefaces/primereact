@@ -7,7 +7,7 @@ export function AccessibilityDoc() {
     return (
         <DevelopmentSection>
             <DocSectionText id="accessibility" label="Accessibility">
-                <h6>Screen Reader</h6>
+                <h3>Screen Reader</h3>
                 <p>
                     DataTable uses a <i>table</i> element whose attributes can be extended with the <i>tableProps</i> option. This property allows passing aria roles and attributes like <i>aria-label</i> and <i>aria-describedby</i> to define the
                     table for readers. Default role of the table is <i>table</i>. Header, body and footer elements use <i>rowgroup</i>, rows use <i>row</i> role, header cells have <i>columnheader</i> and body cells use <i>cell</i> roles. Sortable
@@ -48,7 +48,7 @@ export function AccessibilityDoc() {
                     Any button element inside the DataTable used for cases like filter, row expansion, edit are tabbable and can be used with <i>space</i> and <i>enter</i> keys.
                 </p>
 
-                <h6>Sortable Headers Keyboard Support</h6>
+                <h3>Sortable Headers Keyboard Support</h3>
                 <div className="doc-tablewrapper">
                     <table className="doc-table">
                         <thead>
@@ -80,7 +80,7 @@ export function AccessibilityDoc() {
                     </table>
                 </div>
 
-                <h6>Filter Menu Keyboard Support</h6>
+                <h3>Filter Menu Keyboard Support</h3>
                 <div className="doc-tablewrapper">
                     <table className="doc-table">
                         <thead>
@@ -106,7 +106,7 @@ export function AccessibilityDoc() {
                     </table>
                 </div>
 
-                <h6>Selection Keyboard Support</h6>
+                <h3>Selection Keyboard Support</h3>
                 <div className="doc-tablewrapper">
                     <table className="doc-table">
                         <thead>

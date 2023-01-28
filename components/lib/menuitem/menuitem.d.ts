@@ -7,7 +7,7 @@
  * @module menuitem
  *
  */
-import React from 'react';
+import * as React from 'react';
 
 /**
  * Custom command event.

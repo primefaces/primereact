@@ -41,7 +41,7 @@ export function GroupDoc(props) {
     const groupedItemTemplate = (option) => {
         return (
             <div className="flex align-items-center country-item">
-                <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} className={`flag flag-${option.code.toLowerCase()}`} />
+                <img alt={option.name} src="images/flag/flag_placeholder.png" className={`flag flag-${option.code.toLowerCase()}`} />
                 <div>{option.label}</div>
             </div>
         );
@@ -93,7 +93,7 @@ export default function GroupDoc() {
     const groupedItemTemplate = (option) => {
         return (
             <div className="flex align-items-center country-item">
-                <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <img alt={option.name} src="https://www.primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
                 <div>{option.label}</div>
             </div>
         );
@@ -149,7 +149,7 @@ export default function GroupDoc() {
     const groupedItemTemplate = (option: any) => {
         return (
             <div className="flex align-items-center country-item">
-                <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <img alt={option.name} src="https://www.primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
                 <div>{option.label}</div>
             </div>
         );

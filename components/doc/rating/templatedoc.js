@@ -13,9 +13,9 @@ export function TemplateDoc(props) {
 <Rating
     value={val}
     onChange={(e) => setVal(e.value)}
-    cancelIcon={<img src={'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-cancel-image" width="25px" height="25px" />}
-    onIcon={<img src={'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image-active" width="25px" height="25px" />}
-    offIcon={<img src={'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image" width="25px" height="25px" />}
+    cancelIcon={<img src={'https://www.primereact.org/images/rating/cancel.png'} alt="custom-cancel-image" width="25px" height="25px" />}
+    onIcon={<img src={'https://www.primereact.org/images/rating/custom-icon-active.png'} alt="custom-image-active" width="25px" height="25px" />}
+    offIcon={<img src={'https://www.primereact.org/images/rating/custom-icon.png'} alt="custom-image" width="25px" height="25px" />}
 />
 `,
         javascript: `
@@ -26,15 +26,15 @@ export default function TemplateDoc() {
     const [val, setVal] = useState(null);
 
     return (
-        <Rating
-        value={val}
-        onChange={(e) => setVal(e.value)}
-        cancelIcon={<img src={'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-cancel-image" width="25px" height="25px" />}
-        onIcon={
-            <img src={'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image-active" width="25px" height="25px" />
-        }
-        offIcon={<img src={'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image" width="25px" height="25px" />}
-        />
+        <div className="card flex justify-content-center">
+            <Rating
+            value={val}
+            onChange={(e) => setVal(e.value)}
+            cancelIcon={<img src={'https://www.primereact.org/images/rating/cancel.png'} alt="custom-cancel-image" width="25px" height="25px" />}
+            onIcon={<img src={'https://www.primereact.org/images/rating/custom-icon-active.png'} alt="custom-image-active" width="25px" height="25px" />}
+            offIcon={<img src={'https://www.primereact.org/images/rating/custom-icon.png'} alt="custom-image" width="25px" height="25px" />}
+            />
+        </div>
     );
 }
         `,
@@ -46,15 +46,15 @@ export default function TemplateDoc() {
     const [val, setVal] = useState<number>(0);
 
     return (
-        <Rating
-        value={val}
-        onChange={(e) => setVal(e.value)}
-        cancelIcon={<img src={'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-cancel-image" width="25px" height="25px" />}
-        onIcon={
-            <img src={'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image-active" width="25px" height="25px" />
-        }
-        offIcon={<img src={'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image" width="25px" height="25px" />}
-        />
+        <div className="card flex justify-content-center">
+            <Rating
+            value={val}
+            onChange={(e) => setVal(e.value)}
+            cancelIcon={<img src={'https://www.primereact.org/images/rating/cancel.png'} alt="custom-cancel-image" width="25px" height="25px" />}
+            onIcon={<img src={'https://www.primereact.org/images/rating/custom-icon-active.png'} alt="custom-image-active" width="25px" height="25px" />}
+            offIcon={<img src={'https://www.primereact.org/images/rating/custom-icon.png'} alt="custom-image" width="25px" height="25px" />}
+            />
+        </div>
     );
 }
     `
@@ -71,11 +71,9 @@ export default function TemplateDoc() {
                 <Rating
                     value={val}
                     onChange={(e) => setVal(e.value)}
-                    cancelIcon={<img src={`${contextPath}/images/rating/cancel.png`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-cancel-image" width="25px" height="25px" />}
-                    onIcon={
-                        <img src={`${contextPath}/images/rating/custom-icon-active.png`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image-active" width="25px" height="25px" />
-                    }
-                    offIcon={<img src={`${contextPath}/images/rating/custom-icon.png`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image" width="25px" height="25px" />}
+                    cancelIcon={<img src={`https://www.primereact.org/images/rating/cancel.png`} alt="custom-cancel-image" width="25px" height="25px" />}
+                    onIcon={<img src={`https://www.primereact.org/images/rating/custom-icon-active.png`} alt="custom-image-active" width="25px" height="25px" />}
+                    offIcon={<img src={`https://www.primereact.org/images/rating/custom-icon.png`} alt="custom-image" width="25px" height="25px" />}
                 />
             </div>
             <DocSectionCode code={code} />

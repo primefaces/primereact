@@ -1,16 +1,15 @@
 import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/carousel/importdoc';
-import { BasicDoc } from '../../components/doc/carousel/basicdoc';
-import { ApiDoc } from '../../components/doc/carousel/apidoc';
 import { AccessibilityDoc } from '../../components/doc/carousel/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/carousel/styledoc';
+import { BasicDoc } from '../../components/doc/carousel/basicdoc';
 import { CircularDoc } from '../../components/doc/carousel/circulardoc';
-import { VerticalDoc } from '../../components/doc/carousel/verticaldoc';
+import { ImportDoc } from '../../components/doc/carousel/importdoc';
 import { NumScrollDoc } from '../../components/doc/carousel/numscrolldoc';
 import { ResponsiveDoc } from '../../components/doc/carousel/responsivedoc';
+import { StyleDoc } from '../../components/doc/carousel/styledoc';
+import { VerticalDoc } from '../../components/doc/carousel/verticaldoc';
+import { DocActions } from '../../components/doc/common/docactions';
+import { DocSectionNav } from '../../components/doc/common/docsectionnav';
+import { DocSections } from '../../components/doc/common/docsections';
 
 const CarouselDemo = () => {
     const docs = [
@@ -57,7 +56,7 @@ const CarouselDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Carousel', pathname: '/modules/carousel.html' }]
         }
     ];
 
@@ -72,7 +71,7 @@ const CarouselDemo = () => {
                     <h1>Carousel</h1>
                     <p>Carousel is a content slider featuring various customization options.</p>
                 </div>
-                <DocActions github="carousel/index.js" />
+                <DocActions github="/carousel" />
             </div>
 
             <div className="content-section doc carousel-demo">

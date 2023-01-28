@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import getConfig from 'next/config';
 import { DataTable } from '../../lib/datatable/DataTable';
 import { Column } from '../../lib/column/Column';
 import { CustomerService } from '../../../service/CustomerService';
@@ -25,8 +24,6 @@ export function LazyDoc(props) {
             'representative.name': { value: '', matchMode: 'contains' }
         }
     });
-
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     let loadLazyTimeout = null;
 
@@ -88,14 +85,8 @@ export function LazyDoc(props) {
     const representativeBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img
-                    alt={rowData.representative.name}
-                    src={`${contextPath}/images/avatar/${rowData.representative.image}`}
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
-                    width={32}
-                    style={{ verticalAlign: 'middle' }}
-                />
-                <span className="image-text">{rowData.representative.name}</span>
+                <img alt={rowData.representative.name} src={`images/avatar/${rowData.representative.image}`} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="vertical-align-middle ml-2">{rowData.representative.name}</span>
             </React.Fragment>
         );
     };
@@ -103,14 +94,8 @@ export function LazyDoc(props) {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img
-                    alt="flag"
-                    src={`${contextPath}/images/flag/flag_placeholder.png`}
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
-                    className={`flag flag-${rowData.country.code}`}
-                    width={30}
-                />
-                <span className="image-text">{rowData.country.name}</span>
+                <img alt="flag" src={`images/flag/flag_placeholder.png`} className={`flag flag-${rowData.country.code}`} width={30} />
+                <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );
     };
@@ -136,7 +121,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { CustomerService } from './service/CustomerService';
 
-const LazyDoc = () => {
+export default function LazyDoc() {
 
     const [loading, setLoading] = useState(false);
     const [totalRecords, setTotalRecords] = useState(0);
@@ -157,8 +142,6 @@ const LazyDoc = () => {
             'representative.name': { value: '', matchMode: 'contains' },
         }
     });
-
-    
 
     let loadLazyTimeout = null;
 
@@ -220,8 +203,8 @@ const LazyDoc = () => {
     const representativeBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt={rowData.representative.name} src={\`images/avatar/\${rowData.representative.image}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{ verticalAlign: 'middle' }} />
-                <span className="image-text">{rowData.representative.name}</span>
+                <img alt={rowData.representative.name} src={\`https://www.primereact.org/images/avatar/\${rowData.representative.image}\`} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="vertical-align-middle ml-2">{rowData.representative.name}</span>
             </React.Fragment>
         );
     }
@@ -229,8 +212,8 @@ const LazyDoc = () => {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt="flag" src="/images/flag/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${rowData.country.code}\`} width={30} />
-                <span className="image-text">{rowData.country.name}</span>
+                <img alt="flag" src="https://www.primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} width={30} />
+                <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );
     }
@@ -261,7 +244,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { CustomerService } from './service/CustomerService';
 
-const LazyDoc = () => {
+export default function LazyDoc() {
 
     const [loading, setLoading] = useState(false);
     const [totalRecords, setTotalRecords] = useState(0);
@@ -282,8 +265,6 @@ const LazyDoc = () => {
             'representative.name': { value: '', matchMode: 'contains' },
         }
     });
-
-    
 
     let loadLazyTimeout = null;
 
@@ -345,8 +326,8 @@ const LazyDoc = () => {
     const representativeBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt={rowData.representative.name} src={\`images/avatar/\${rowData.representative.image}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{ verticalAlign: 'middle' }} />
-                <span className="image-text">{rowData.representative.name}</span>
+                <img alt={rowData.representative.name} src={\`https://www.primereact.org/images/avatar/\${rowData.representative.image}\`} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="vertical-align-middle ml-2">{rowData.representative.name}</span>
             </React.Fragment>
         );
     }
@@ -354,8 +335,8 @@ const LazyDoc = () => {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt="flag" src="/images/flag/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${rowData.country.code}\`} width={30} />
-                <span className="image-text">{rowData.country.name}</span>
+                <img alt="flag" src="https://www.primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} width={30} />
+                <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );
     }

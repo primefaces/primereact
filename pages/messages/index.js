@@ -2,16 +2,15 @@ import Head from 'next/head';
 import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { ImportDoc } from '../../components/doc/messages/importdoc';
-import { SeverityDoc } from '../../components/doc/messages/severitydoc';
-import { DynamicDoc } from '../../components/doc/messages/dynamicdoc';
-import { TemplateDoc } from '../../components/doc/messages/templatedoc';
-import { ApiDoc } from '../../components/doc/messages/apidoc';
 import { AccessibilityDoc } from '../../components/doc/messages/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/messages/styledoc';
 import { BasicDoc } from '../../components/doc/messages/basicdoc';
 import { ClosableDoc } from '../../components/doc/messages/closeabledoc';
+import { DynamicDoc } from '../../components/doc/messages/dynamicdoc';
+import { ImportDoc } from '../../components/doc/messages/importdoc';
+import { SeverityDoc } from '../../components/doc/messages/severitydoc';
 import { StickyDoc } from '../../components/doc/messages/stickydoc';
+import { StyleDoc } from '../../components/doc/messages/styledoc';
+import { TemplateDoc } from '../../components/doc/messages/templatedoc';
 
 const MessagesDemo = () => {
     const docs = [
@@ -63,7 +62,7 @@ const MessagesDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Messages', pathname: '/modules/messages.html' }]
         }
     ];
 
@@ -78,7 +77,7 @@ const MessagesDemo = () => {
                     <h1>Messages</h1>
                     <p>Messages component is used to display inline messages.</p>
                 </div>
-                <DocActions github="messages/index.js" />
+                <DocActions github="/messages" />
             </div>
 
             <div className="content-section doc">

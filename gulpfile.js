@@ -20,15 +20,7 @@ gulp.task('build-themes', function () {
     return (
         gulp
             .src([
-                'public/themes/**/*',
-                '!public/themes/soho-*',
-                '!public/themes/soho-*/**/*',
-                '!public/themes/viva-*',
-                '!public/themes/viva-*/**/*',
-                '!public/themes/mira',
-                '!public/themes/mira/**/*',
-                '!public/themes/nano',
-                '!public/themes/nano/**/*'
+                'public/themes/**/*'
             ])
             //.pipe(uglifycss({"uglyComments": true}))
             .pipe(gulp.dest(process.env.OUTPUT_DIR + 'resources/themes'))

@@ -98,7 +98,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
-const RowEditingDoc = () => {
+export default function RowEditingDoc() {
     const [products, setProducts] = useState(null);
 
     const statuses = [
@@ -187,7 +187,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { ProductService } from './service/ProductService';
 import './DataTableDemo.css';
 
-const RowEditingDoc = () => {
+export default function RowEditingDoc() {
     const [products, setProducts] = useState(null);
 
     const statuses = [

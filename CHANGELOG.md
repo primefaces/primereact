@@ -1,5 +1,61 @@
 # Changelog
 
+## [9.0.0-beta.1](https://github.com/primefaces/primereact/tree/9.0.0-beta.1)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/8.7.3...9.0.0-beta.1)
+
+**Breaking Changes:**
+
+- TypeScript: Improve definitions on all components [\#2734](https://github.com/primefaces/primereact/issues/2734)
+
+**Implemented New Features and Enhancements:**
+
+- Autocomplete: disable issue [\#3953](https://github.com/primefaces/primereact/issues/3953)
+- Dropdown button icon [\#3952](https://github.com/primefaces/primereact/issues/3952)
+- Dropdown: support `onClick` event to intercept the event propagation [\#3935](https://github.com/primefaces/primereact/issues/3935)
+- ReCaptcha: Allow for custom URL [\#3921](https://github.com/primefaces/primereact/issues/3921)
+- Sidebar: `dismissible` not working immediately while sidebar is visible [\#3811](https://github.com/primefaces/primereact/issues/3811)
+- Inputs: expose focus\(\) method on all input components [\#3806](https://github.com/primefaces/primereact/issues/3806)
+- FileUpload: Control internal files state [\#3750](https://github.com/primefaces/primereact/issues/3750)
+- Dropdown Item list responsive issue [\#2574](https://github.com/primefaces/primereact/issues/2574)
+- DataTable/TreeTable: stricter generically typed API [\#2523](https://github.com/primefaces/primereact/issues/2523)
+- TreeTable: accessibility improvements for keyboard navigation [\#2153](https://github.com/primefaces/primereact/issues/2153)
+- DataTable features in PickList lists [\#1374](https://github.com/primefaces/primereact/issues/1374)
+
+**Fixed bugs:**
+
+- Calendar: Year incorrectly disabled in navigator view due to minDate [\#3967](https://github.com/primefaces/primereact/issues/3967)
+- InputNumber :  In Mobile mode value are getting trigger two times  [\#3951](https://github.com/primefaces/primereact/issues/3951)
+- DataTable: CellEdit Filtering and NOT\_EQUALS [\#3928](https://github.com/primefaces/primereact/issues/3928)
+- Dialog: breakpoints not working in \<React.StrictMode\> [\#3922](https://github.com/primefaces/primereact/issues/3922)
+- InputNumber: When using the InputNumber with the built in spinner buttons, "onValueChange" is called before "onChange". [\#3913](https://github.com/primefaces/primereact/issues/3913)
+- Chips separator not working on mobile [\#3885](https://github.com/primefaces/primereact/issues/3885)
+- DataTable: Global search won't reset when the field is empty on react 17 [\#3819](https://github.com/primefaces/primereact/issues/3819)
+- DataTable: RowReorder fails in case of pagination on page other than first & last [\#3817](https://github.com/primefaces/primereact/issues/3817)
+- DataTable: 'virtualScroll' + selection [\#3804](https://github.com/primefaces/primereact/issues/3804)
+- DataTable: Error when 'virtualScrollerOptions.showLoader' + 'dataKey' are enabled [\#3803](https://github.com/primefaces/primereact/issues/3803)
+- DataTable: Virtual Scroll with Loading template + frozen columns [\#3800](https://github.com/primefaces/primereact/issues/3800)
+- TreeTable: Error in resize mode expand [\#3796](https://github.com/primefaces/primereact/issues/3796)
+- File Upload: itemTemplate missing props [\#3792](https://github.com/primefaces/primereact/issues/3792)
+- SelectButton: Submit with React Hook Form [\#3790](https://github.com/primefaces/primereact/issues/3790)
+- Calendar: Inline display issue if more than one month  [\#3789](https://github.com/primefaces/primereact/issues/3789)
+- DataTable: Edit Programmatic all row cannot read properties of undefined \(reading 'data'\) [\#3783](https://github.com/primefaces/primereact/issues/3783)
+- ConfirmPopup: Using Tag, when popup is dismissed it stops working forever [\#3779](https://github.com/primefaces/primereact/issues/3779)
+- Calendar: Console warning using ParseDateTime [\#3777](https://github.com/primefaces/primereact/issues/3777)
+- Calendar: StepMinute should initialize value [\#3770](https://github.com/primefaces/primereact/issues/3770)
+- ToggleButton: Received `false` for a non-boolean attribute `tabIndex` [\#3768](https://github.com/primefaces/primereact/issues/3768)
+- Hook: useOverlayListener incorrectly passing target [\#3766](https://github.com/primefaces/primereact/issues/3766)
+- SplitButton: className in menu api does not work [\#3757](https://github.com/primefaces/primereact/issues/3757)
+- Password: Eye icon problem in MS Edge and IE [\#3756](https://github.com/primefaces/primereact/issues/3756)
+- Dialog: Unintended margins [\#3755](https://github.com/primefaces/primereact/issues/3755)
+- DataTable: row reordering in lazy mode [\#3618](https://github.com/primefaces/primereact/issues/3618)
+- AutoComplete: space between overlay panel and the component [\#3463](https://github.com/primefaces/primereact/issues/3463)
+- InputStyle gets ignored within overlays bound to body [\#3428](https://github.com/primefaces/primereact/issues/3428)
+- Datatable: Virtualscroll and frozenvalue \(frozen rows\) hide first rows [\#3361](https://github.com/primefaces/primereact/issues/3361)
+- Dropdown: Incorrect flipFit detection when using filter [\#3203](https://github.com/primefaces/primereact/issues/3203)
+- DataTable: Edit Programmatic all row cannot read properties of undefined \(reading 'data'\) [\#3013](https://github.com/primefaces/primereact/issues/3013)
+- Menu: Popup menu positioning - appendTo [\#2980](https://github.com/primefaces/primereact/issues/2980)
+
 ## [8.7.3](https://github.com/primefaces/primereact/tree/8.7.3) (2022-12-05)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/8.7.2...8.7.3)

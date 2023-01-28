@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { AccessibilityDoc } from '../../components/doc/chart/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/chart/apidoc';
+
 import { BasicDoc } from '../../components/doc/chart/basicdoc';
 import { ComboDoc } from '../../components/doc/chart/combodoc';
 import { DoughnutChartDoc } from '../../components/doc/chart/doughnutdoc';
@@ -93,7 +93,7 @@ const ChartDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'Chart', pathname: '/modules/chart.html' }]
         }
     ];
 
@@ -113,7 +113,7 @@ const ChartDemo = () => {
                         , an open source HTML5 based charting library.
                     </p>
                 </div>
-                <DocActions github="chart/index.js" />
+                <DocActions github="/chart" />
             </div>
 
             <div className="content-section doc">

@@ -8,7 +8,7 @@
  *
  */
 import * as React from 'react';
-import TooltipOptions from '../tooltip/tooltipoptions';
+import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
 
 /**
@@ -56,7 +56,7 @@ export interface InputSwitchProps extends Omit<React.DetailedHTMLProps<React.Inp
      * Specifies whether a inputswitch should be checked or not.
      * @defaultValue false
      */
-    checked?: boolean | undefined;
+    checked: boolean;
     /**
      * Value in checked state.
      * @defaultValue true

@@ -3,16 +3,14 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/selectbutton/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/selectbutton/apidoc';
-
 import { BasicDoc } from '../../components/doc/selectbutton/basicdoc';
 import { CustomContentDoc } from '../../components/doc/selectbutton/customcontentdoc';
 import { DisabledDoc } from '../../components/doc/selectbutton/disableddoc';
 import { ImportDoc } from '../../components/doc/selectbutton/importdoc';
 import { InvalidDoc } from '../../components/doc/selectbutton/invaliddoc';
 import { MultipleSelectionDoc } from '../../components/doc/selectbutton/multipleselectiondoc';
-import { FormikDoc } from '../../components/doc/selectbutton/validation/formikdoc';
-import { HookFormDoc } from '../../components/doc/selectbutton/validation/hookformdoc';
+import { FormikDoc } from '../../components/doc/selectbutton/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/selectbutton/form/hookformdoc';
 
 const SelectButtonDemo = () => {
     const docs = [
@@ -71,7 +69,7 @@ const SelectButtonDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'SelectButton', pathname: '/modules/selectbutton.html' }]
         }
     ];
 
@@ -87,7 +85,7 @@ const SelectButtonDemo = () => {
                     <p>SelectButton is used to choose single or multiple items from a list using buttons.</p>
                 </div>
 
-                <DocActions github="selectbutton/index.js" />
+                <DocActions github="/selectbutton" />
             </div>
 
             <div className="content-section doc">

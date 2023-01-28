@@ -1,15 +1,14 @@
 import Head from 'next/head';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/splitter/importdoc';
-import { HorizontalDoc } from '../../components/doc/splitter/horizontaldoc';
-import { SizeDoc } from '../../components/doc/splitter/sizedoc';
-import { VerticalDoc } from '../../components/doc/splitter/verticaldoc';
-import { NestedDoc } from '../../components/doc/splitter/nesteddoc';
-import { ApiDoc } from '../../components/doc/splitter/apidoc';
 import { AccessibilityDoc } from '../../components/doc/splitter/accessibilitydoc';
+import { HorizontalDoc } from '../../components/doc/splitter/horizontaldoc';
+import { ImportDoc } from '../../components/doc/splitter/importdoc';
+import { NestedDoc } from '../../components/doc/splitter/nesteddoc';
+import { SizeDoc } from '../../components/doc/splitter/sizedoc';
 import { StyleDoc } from '../../components/doc/splitter/styledoc';
+import { VerticalDoc } from '../../components/doc/splitter/verticaldoc';
 
 const SplitterDemo = () => {
     const docs = [
@@ -51,7 +50,10 @@ const SplitterDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [
+                { name: 'Splitter', pathname: '/modules/splitter.html' },
+                { name: 'SplitterPanel', pathname: '/classes/splitter.SplitterPanel.html' }
+            ]
         }
     ];
 
@@ -66,7 +68,7 @@ const SplitterDemo = () => {
                     <h1>Splitter</h1>
                     <p>Splitter is utilized to separate and resize panels.</p>
                 </div>
-                <DocActions github="splitter/index.js" />
+                <DocActions github="/splitter" />
             </div>
 
             <div className="content-section doc">

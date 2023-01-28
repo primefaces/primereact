@@ -10,7 +10,7 @@
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 import { MenuItem } from '../menuitem';
-import TooltipOptions from '../tooltip/tooltipoptions';
+import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { IconType, TemplateType } from '../utils';
 
 /**

@@ -231,6 +231,63 @@ interface TreeTableColReorderEvent {
  */
 export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onContextMenu' | 'onSelect' | 'ref' | 'value'> {
     /**
+     * Whether to show it even there is only one page.
+     * @defaultValue true
+     */
+    alwaysShowPaginator?: boolean | undefined;
+    /**
+     * Whether the cell widths scale according to their content or not.
+     * @defaultValue true
+     */
+    autoLayout?: boolean | undefined;
+    /**
+     * Used to get the child elements of the component.
+     * @readonly
+     */
+    children?: React.ReactNode | undefined;
+    /**
+     * Style class of the node.
+     */
+    className?: string | undefined;
+    /**
+     * Defines whether the overall table width should change on column resize, valid values are "fit" and "expand".
+     * @defaultValue fit
+     */
+    columnResizeMode?: 'fit' | 'expand' | undefined;
+    /**
+     * A single key to control the selection with the context menu.
+     */
+    contextMenuSelectionKey?: string | undefined;
+    /**
+     * Template of the current page report element. Available placeholders are {currentPage}, {totalPages}, {rows}, {first}, {last} and {totalRecords}.
+     * @defaultValue ({currentPage} of {totalPages})
+     */
+    currentPageReportTemplate?: string | undefined;
+    /**
+     * Default sort order of an unsorted column.
+     * @defaultValue 1
+     */
+    defaultSortOrder?: 1 | 0 | -1 | undefined | null;
+    /**
+     * Text to display when there is no data.
+     * @defaultValue No records found
+     */
+    emptyMessage?: string | undefined;
+    /**
+     * An array of keys to represent the state of the tree expansion state in controlled mode.
+     */
+    expandedKeys?: TreeTableExpandedKeysType | undefined;
+    /**
+     * Delay in milliseconds before filtering the data.
+     * @defaultValue 300
+     */
+    filterDelay?: number | undefined;
+    /**
+     * Locale to use in filtering. The default locale is the host environment's current locale.
+     * @defaultValue undefined
+     */
+    filterLocale?: string | undefined;
+    /**
      * Mode for filtering valid values are lenient and strict. Default is lenient.
      * @defaultValue lenient
      */

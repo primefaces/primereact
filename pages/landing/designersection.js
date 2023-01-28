@@ -1,15 +1,15 @@
 import getConfig from 'next/config';
-import { InputText } from '../../components/lib/inputtext/InputText';
+import { useRef, useState } from 'react';
 import { Button } from '../../components/lib/button/Button';
+import { Checkbox } from '../../components/lib/checkbox/Checkbox';
 import { Dropdown } from '../../components/lib/dropdown/Dropdown';
+import { InputMask } from '../../components/lib/inputmask/InputMask';
+import { InputNumber } from '../../components/lib/inputnumber/InputNumber';
+import { InputText } from '../../components/lib/inputtext/InputText';
 import { ListBox } from '../../components/lib/listbox/ListBox';
 import { RadioButton } from '../../components/lib/radiobutton/RadioButton';
-import { Checkbox } from '../../components/lib/checkbox/Checkbox';
-import { InputNumber } from '../../components/lib/inputnumber/InputNumber';
-import { InputMask } from '../../components/lib/inputmask/InputMask';
 import { Slider } from '../../components/lib/slider/Slider';
 import { classNames } from '../../components/lib/utils/ClassNames';
-import { useRef, useState } from 'react';
 
 const DesignerSection = (props) => {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
@@ -120,7 +120,7 @@ const DesignerSection = (props) => {
                                 </div>
                             </div>
 
-                            <a href="https://www.primefaces.org/designer-react" className="font-semibold p-3 border-round flex align-items-center linkbox active">
+                            <a href="https://designer.primereact.org" className="font-semibold p-3 border-round flex align-items-center linkbox active">
                                 <span>View Full Version</span>
                                 <i className="pi pi-arrow-right ml-auto"></i>
                             </a>

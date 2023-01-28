@@ -3,7 +3,7 @@ import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/confirmdialog/accessibilitydoc';
-import { ApiDoc } from '../../components/doc/confirmdialog/apidoc';
+
 import { BasicDoc } from '../../components/doc/confirmdialog/basicdoc';
 import { DeclarativeDoc } from '../../components/doc/confirmdialog/declarativedoc';
 import { ImportDoc } from '../../components/doc/confirmdialog/importdoc';
@@ -46,7 +46,7 @@ const ConfirmDialogDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'ConfirmDialog', pathname: '/modules/confirmdialog.html' }]
         }
     ];
 
@@ -61,7 +61,7 @@ const ConfirmDialogDemo = () => {
                     <h1>ConfirmDialog</h1>
                     <p>ConfirmDialog is an easy to use and customizable Confirmation API using a dialog.</p>
                 </div>
-                <DocActions github="confirmdialog/index.js" />
+                <DocActions github="/confirmdialog" />
             </div>
 
             <div className="content-section doc">

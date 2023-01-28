@@ -16,7 +16,7 @@ export function InlineDataScrollerDoc(props) {
     const itemTemplate = (data) => {
         return (
             <div className="product-item">
-                <img src={`images/product/${data.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={data.name} />
+                <img src={`images/product/${data.image}`} alt={data.name} />
                 <div className="product-detail">
                     <div className="product-name">{data.name}</div>
                     <div className="product-description">{data.description}</div>
@@ -55,7 +55,7 @@ export default function InlineDataScrollerDoc() {
     const itemTemplate = (data) => {
         return (
             <div className="product-item">
-            <img src={\`images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
+            <img src={\`https://www.primereact.org/images/product/\${data.image}\`} alt={data.name} />
                 <div className="product-detail">
                     <div className="product-name">{data.name}</div>
                     <div className="product-description">{data.description}</div>
@@ -72,7 +72,7 @@ export default function InlineDataScrollerDoc() {
     }    
 
     return (
-        <div className="card">
+        <div className="card datascroller-demo">
             <DataScroller value={products} itemTemplate={itemTemplate} rows={5} inline scrollHeight="500px" header="Scroll Down to Load More" />
         </div>
     )
@@ -96,7 +96,7 @@ export default function InlineDataScrollerDoc() {
     const itemTemplate = (data) => {
         return (
             <div className="product-item">
-            <img src={\`images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
+            <img src={\`https://www.primereact.org/images/product/\${data.image}\`} alt={data.name} />
                 <div className="product-detail">
                     <div className="product-name">{data.name}</div>
                     <div className="product-description">{data.description}</div>
@@ -113,12 +113,105 @@ export default function InlineDataScrollerDoc() {
     }  
 
     return (
-        <div className="card">
+        <div className="card datascroller-demo">
             <DataScroller value={products} itemTemplate={itemTemplate} rows={5} inline scrollHeight="500px" header="Scroll Down to Load More" />
         </div>
     )
 }
         `,
+        extFiles: {
+            'DataScrollerDemo.css': `
+/* DataScrollerDemo.css */
+.datascroller-demo .product-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.datascroller-demo .product-description {
+    margin: 0 0 1rem 0;
+}
+
+.datascroller-demo .product-category-icon {
+    vertical-align: middle;
+    margin-right: .5rem;
+}
+
+.datascroller-demo .product-category {
+    font-weight: 600;
+    vertical-align: middle;
+}
+
+.datascroller-demo .product-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    width: 100%;
+}
+
+.datascroller-demo .product-item img {
+    width: 150px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    margin-right: 2rem;
+}
+
+.datascroller-demo .product-item .product-detail {
+    flex: 1 1 0;
+}
+
+.datascroller-demo .product-item .p-rating {
+    margin: 0 0 .5rem 0;
+}
+
+.datascroller-demo .product-item .product-price {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: .5rem;
+    align-self: flex-end;
+}
+
+.datascroller-demo .product-item .product-action {
+    display: flex;
+    flex-direction: column;
+}
+
+.datascroller-demo .product-item .p-button {
+    margin-bottom: .5rem;
+}
+
+@media screen and (max-width: 576px) {
+    .datascroller-demo .product-item {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .datascroller-demo .product-item img {
+        width: 75%;
+        margin: 2rem 0;
+    }
+
+    .datascroller-demo .product-item .product-detail {
+        text-align: center;
+    }
+
+    .datascroller-demo .product-item .product-price {
+        align-self: center;
+    }
+
+    .datascroller-demo .product-item .product-action {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .datascroller-demo .product-item .product-action {
+        margin-top: 2rem;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+}                                      
+        `
+        },
         data: `
 /* ProductService */        
 {

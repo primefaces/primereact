@@ -11,7 +11,7 @@ import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 import { InputText } from '../inputtext';
 import { KeyFilterType } from '../keyfilter/keyfilteroptions';
-import TooltipOptions from '../tooltip/tooltipoptions';
+import { TooltipOptions } from '../tooltip/tooltipoptions';
 
 /**
  * Custom icon event

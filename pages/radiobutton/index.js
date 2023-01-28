@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import React from 'react';
-import { ApiDoc } from '../../components/doc/checkbox/apidoc';
+import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/radiobutton/accessibilitydoc';
@@ -10,8 +10,8 @@ import { GroupDoc } from '../../components/doc/radiobutton/groupdoc';
 import { ImportDoc } from '../../components/doc/radiobutton/importdoc';
 import { InvalidDoc } from '../../components/doc/radiobutton/invaliddoc';
 import { StyleDoc } from '../../components/doc/radiobutton/styledoc';
-import { FormikDoc } from '../../components/doc/radiobutton/validation/formikdoc';
-import { HookFormDoc } from '../../components/doc/radiobutton/validation/hookformdoc';
+import { FormikDoc } from '../../components/doc/radiobutton/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/radiobutton/form/hookformdoc';
 
 const RadioButtonDemo = () => {
     const docs = [
@@ -70,7 +70,7 @@ const RadioButtonDemo = () => {
         {
             id: 'api',
             label: 'API',
-            component: ApiDoc
+            doc: [{ name: 'RadioButton', pathname: '/modules/radiobutton.html' }]
         }
     ];
 
@@ -86,6 +86,7 @@ const RadioButtonDemo = () => {
                     <h1>RadioButton</h1>
                     <p>RadioButton is an extension to standard radio button element with theming.</p>
                 </div>
+                <DocActions github="/radiobutton" />
             </div>
 
             <div className="content-section doc">

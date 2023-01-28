@@ -1,18 +1,19 @@
-import '../styles/layout/layout.scss';
-import '../styles/primereact.css';
-import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
-import '../styles/demo/demo.scss';
-import Layout from '../components/layout/layout';
+import 'primeicons/primeicons.css';
 import { useEffect, useRef, useState } from 'react';
+import Layout from '../components/layout/layout';
 import fetchNews from '../service/NewsService';
-import { useStorage } from '../components/lib/hooks/useStorage';
+import '../styles/layout/layout.scss';
+// prettier-ignore
+import '../styles/primereact.css';
+// prettier-ignore
+import '../styles/demo/demo.scss';
 
 export default function MyApp({ Component }) {
     const [dark, setDark] = useState(false);
-    const [theme, setTheme] = useStorage('lara-light-indigo', 'primereact-showcase-theme');
-    const [storedNews, setStoredNews] = useStorage('', 'primereact-news');
+    const [theme, setTheme] = useState('lara-light-indigo');
     const [newsActive, setNewsActive] = useState(false);
+    const storageKey = 'primereact-news';
     const announcement = useRef(null);
 
     useEffect(() => {
@@ -49,7 +50,7 @@ export default function MyApp({ Component }) {
                 hiddenNews: announcement.current.id
             };
 
-            setStoredNews(item);
+            localStorage.setItem(storageKey, JSON.stringify(item));
         },
         onThemeChange: (newTheme, dark) => {
             setDark(dark);

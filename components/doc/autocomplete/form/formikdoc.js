@@ -45,7 +45,7 @@ export function FormikDoc(props) {
     };
 
     const code = {
-        basic: `           
+        basic: `
 <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
     <div className="mb-2">Value</div>
     <Toast ref={toast} />
@@ -53,7 +53,6 @@ export function FormikDoc(props) {
         id="item"
         name="item"
         value={formik.values.item}
-        optionLabel="name"
         suggestions={items}
         completeMethod={search}
         onChange={(e) => {
@@ -118,7 +117,6 @@ export default function FormikDoc() {
                     inputId="ac_item"
                     name="item"
                     value={formik.values.item}
-                    optionLabel="name"
                     suggestions={items}
                     completeMethod={search}
                     className={classNames({ 'p-invalid': isFormFieldInvalid('item') })}
@@ -187,7 +185,6 @@ export default function FormikDoc() {
                     inputId="ac_item"
                     name="item"
                     value={formik.values.item}
-                    optionLabel="name"
                     suggestions={items}
                     completeMethod={search}
                     className={classNames({ 'p-invalid': isFormFieldInvalid('item') })}
@@ -219,7 +216,6 @@ export default function FormikDoc() {
                         inputId="ac_item"
                         name="item"
                         value={formik.values.item}
-                        optionLabel="name"
                         suggestions={items}
                         completeMethod={search}
                         className={classNames({ 'p-invalid': isFormFieldInvalid('item') })}

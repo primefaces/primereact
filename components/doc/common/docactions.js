@@ -1,62 +1,12 @@
-import React, { useEffect, useContext } from 'react';
-import { useRef } from 'react';
-import { Button } from '../../lib/button/Button';
-import { Menu } from '../../lib/menu/Menu';
-import { Toast } from '../../lib/toast/Toast';
-import DomHandler from '../../lib/utils/DomHandler';
-import { useLiveEditor } from './liveeditor';
+import React, { useContext } from 'react';
 import AppContentContext from '../../../components/layout/appcontentcontext';
+import { Button } from '../../lib/button/Button';
 
 export const DocActions = (props) => {
-    const menu = useRef(null);
-    const toast = useRef(null);
-    const liveEditor = useRef(null);
     const context = useContext(AppContentContext);
 
-    useEffect(() => {
-        /* eslint-disable */
-        liveEditor.current = useLiveEditor();
-        /* eslint-enable */
-    }, []);
-
-    const items = [
-        {
-            label: 'Hooks Source Demo',
-            className: props.showHooksSource === false ? 'hidden' : '',
-            command: () => liveEditor.current.postSandboxParameters('hooks', toast)
-        },
-        {
-            label: 'Class Source Demo',
-            className: props.showClassSource === false ? 'hidden' : '',
-            command: () => liveEditor.current.postSandboxParameters('class', toast)
-        },
-        {
-            label: 'TS Source Demo',
-            className: props.showTsSource === false ? 'hidden' : '',
-            command: () => liveEditor.current.postSandboxParameters('ts', toast)
-        },
-        {
-            label: 'Browser Source Demo',
-            className: props.showBrowserSource === false ? 'hidden' : '',
-            command: () => liveEditor.current.postSandboxParameters('browser', toast)
-        }
-    ];
-
-    const toggleMenu = (event) => {
-        menu.current.toggle(event);
-    };
-
-    const scrollToDocs = () => {
-        const top = DomHandler.getOffset(document.getElementById('app-doc')).top - DomHandler.getOuterHeight(document.getElementsByClassName('layout-topbar')[0], true);
-
-        window.scroll({
-            top,
-            behavior: 'smooth'
-        });
-    };
-
     const viewOnGitHub = () => {
-        window.open('https://github.com/primefaces/primereact/blob/master/pages/' + props.github, '_blank');
+        window.open('https://github.com/primefaces/primereact/blob/master/components/lib' + props.github, '_blank');
     };
 
     const viewOnFigma = () => {
@@ -66,13 +16,7 @@ export const DocActions = (props) => {
 
     return (
         <>
-            <Toast ref={toast} />
             <div className="app-demoactions flex align-items-end justify-content-end mt-3">
-                <Button className="p-button-text p-button-rounded p-button-plain p-button-lg p-button-icon-only" onClick={toggleMenu}>
-                    <svg role="img" viewBox="0 0 24 24" width={17} height={17} fill={'var(--text-color-secondary)'} style={{ display: 'block' }}>
-                        <path d="M2 6l10.455-6L22.91 6 23 17.95 12.455 24 2 18V6zm2.088 2.481v4.757l3.345 1.86v3.516l3.972 2.296v-8.272L4.088 8.481zm16.739 0l-7.317 4.157v8.272l3.972-2.296V15.1l3.345-1.861V8.48zM5.134 6.601l7.303 4.144 7.32-4.18-3.871-2.197-3.41 1.945-3.43-1.968L5.133 6.6z" />
-                    </svg>
-                </Button>
                 <Button icon="pi pi-github" className="p-button-text p-button-rounded p-button-plain p-button-lg ml-2" onClick={viewOnGitHub}></Button>
                 <Button className="p-button-text p-button-rounded p-button-plain p-button-lg p-button-icon-only ml-2" onClick={viewOnFigma}>
                     <svg role="img" width="14" height="20" viewBox="0 0 14 20" fill="var(--text-color-secondary)" style={{ display: 'block' }} xmlns="http://www.w3.org/2000/svg">
@@ -84,8 +28,6 @@ export const DocActions = (props) => {
                         />
                     </svg>
                 </Button>
-                <Button icon="pi pi-info-circle" className="p-button-text p-button-rounded p-button-plain p-button-lg ml-2" onClick={scrollToDocs}></Button>
-                <Menu ref={menu} model={items} popup style={{ width: '14rem' }} />
             </div>
         </>
     );

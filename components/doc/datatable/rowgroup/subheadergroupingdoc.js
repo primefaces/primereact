@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import getConfig from 'next/config';
 import { DataTable } from '../../../lib/datatable/DataTable';
 import { Column } from '../../../lib/column/Column';
 import { CustomerService } from '../../../../service/CustomerService';
@@ -9,8 +8,6 @@ import { DocSectionText } from '../../common/docsectiontext';
 export function SubHeaderGroupingDoc(props) {
     const [customers, setCustomers] = useState([]);
 
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
-
     useEffect(() => {
         CustomerService.getCustomersMedium().then((data) => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -18,14 +15,8 @@ export function SubHeaderGroupingDoc(props) {
     const headerTemplate = (data) => {
         return (
             <React.Fragment>
-                <img
-                    alt={data.representative.name}
-                    src={`${contextPath}/images/avatar/${data.representative.image}`}
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
-                    width="32"
-                    style={{ verticalAlign: 'middle' }}
-                />
-                <span className="image-text">{data.representative.name}</span>
+                <img alt={data.representative.name} src={`images/avatar/${data.representative.image}`} width="32" style={{ verticalAlign: 'middle' }} />
+                <span className="vertical-align-middle ml-2">{data.representative.name}</span>
             </React.Fragment>
         );
     };
@@ -44,14 +35,8 @@ export function SubHeaderGroupingDoc(props) {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img
-                    alt={rowData.country.name}
-                    src={`${contextPath}/images/flag/flag_placeholder.png`}
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
-                    className={`flag flag-${rowData.country.code}`}
-                    width="30"
-                />
-                <span className="image-text">{rowData.country.name}</span>
+                <img alt={rowData.country.name} src={`images/flag/flag_placeholder.png`} className={`flag flag-${rowData.country.code}`} width="30" />
+                <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );
     };
@@ -93,7 +78,7 @@ import { Column } from 'primereact/column';
 import { CustomerService } from './service/CustomerService';
 import './DataTableDemo.css';
 
-const SubHeaderGroupingDoc = () => {
+export default function SubHeaderGroupingDoc() {
 
     const [customers, setCustomers] = useState([]);
     
@@ -105,8 +90,8 @@ const SubHeaderGroupingDoc = () => {
     const headerTemplate = (data) => {
         return (
             <React.Fragment>
-                <img alt={data.representative.name} src={\`images/avatar/\${data.representative.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{ verticalAlign: 'middle' }} />
-                <span className="image-text">{data.representative.name}</span>
+                <img alt={data.representative.name} src={\`https://www.primereact.org/images/avatar/\${data.representative.image}\`} width="32" style={{ verticalAlign: 'middle' }} />
+                <span className="vertical-align-middle ml-2">{data.representative.name}</span>
             </React.Fragment>
         );
     }
@@ -123,8 +108,8 @@ const SubHeaderGroupingDoc = () => {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt={rowData.country.name} src="/images/flag/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${rowData.country.code}\`} width="30" />
-                <span className="image-text">{rowData.country.name}</span>
+                <img alt={rowData.country.name} src="/images/flag/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} width="30" />
+                <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );
     }
@@ -169,7 +154,7 @@ import { Column } from 'primereact/column';
 import { CustomerService } from './service/CustomerService';
 import './DataTableDemo.css';
 
-const SubHeaderGroupingDoc = () => {
+export default function SubHeaderGroupingDoc() {
 
     const [customers, setCustomers] = useState([]);
     
@@ -181,8 +166,8 @@ const SubHeaderGroupingDoc = () => {
     const headerTemplate = (data) => {
         return (
             <React.Fragment>
-                <img alt={data.representative.name} src={\`images/avatar/\${data.representative.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{ verticalAlign: 'middle' }} />
-                <span className="image-text">{data.representative.name}</span>
+                <img alt={data.representative.name} src={\`https://www.primereact.org/images/avatar/\${data.representative.image}\`} width="32" style={{ verticalAlign: 'middle' }} />
+                <span className="vertical-align-middle ml-2">{data.representative.name}</span>
             </React.Fragment>
         );
     }
@@ -199,8 +184,8 @@ const SubHeaderGroupingDoc = () => {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt={rowData.country.name} src="/images/flag/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${rowData.country.code}\`} width="30" />
-                <span className="image-text">{rowData.country.name}</span>
+                <img alt={rowData.country.name} src="/images/flag/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} width="30" />
+                <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );
     }
@@ -238,7 +223,8 @@ const SubHeaderGroupingDoc = () => {
     );
 }
         `,
-        css: `
+        extFiles: {
+            'DataTableDemo.css': `
 /* DataTableDemo.css */
 
 .datatable-rowgroup-demo .p-rowgroup-footer td {
@@ -253,7 +239,8 @@ const SubHeaderGroupingDoc = () => {
     vertical-align: middle;
     margin-right: .25rem;
 }
-        `,
+        `
+        },
         data: `
 /* CustomerService */ 
 {

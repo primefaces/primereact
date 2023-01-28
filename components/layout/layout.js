@@ -1,15 +1,15 @@
+import getConfig from 'next/config';
+import Head from 'next/head';
 import { useEffect, useState } from 'react';
+import PrimeReact from '../lib/api/PrimeReact';
 import { classNames } from '../lib/utils/ClassNames';
-import Topbar from './topbar';
 import NewsSection from '../news/newssection';
-import Menu from './menu';
+import Analytics from './analytics';
+import AppContentContext from './appcontentcontext';
 import Config from './config';
 import Footer from './footer';
-import Analytics from './analytics';
-import Head from 'next/head';
-import AppContentContext from './appcontentcontext';
-import PrimeReact from '../lib/api/PrimeReact';
-import getConfig from 'next/config';
+import Menu from './menu';
+import Topbar from './topbar';
 
 export default function Layout(props) {
     const [inputStyle, setInputStyle] = useState('outlined');
@@ -84,10 +84,6 @@ export default function Layout(props) {
                 <meta property="og:image" content="https://www.primefaces.org/static/social/primereact-preview.jpg"></meta>
                 <meta property="og:ttl" content="604800"></meta>
                 <link rel="icon" href={`${contextPath}/images/favicon.ico`} type="image/x-icon"></link>
-                <link rel="stylesheet" href={`${contextPath}/styles/flags.css`}></link>
-                {/* eslint-disable */}
-                <script src={`${contextPath}/scripts/prism/prism.js`} data-manual></script>
-                {/* eslint-enable */}
             </Head>
             {props.newsActive && <NewsSection announcement={props.announcement} onClose={props.onNewsClose} />}
             <Topbar onMenuButtonClick={onMenuButtonClick} onThemeChange={onThemeChange} theme={props.theme} darkTheme={props.dark} versions={[]} />
