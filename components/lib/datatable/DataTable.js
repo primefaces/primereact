@@ -1200,7 +1200,11 @@ export const DataTable = React.forwardRef((props, ref) => {
             const { field, header, exportable } = column.props;
 
             if (exportable && field) {
-                csv += '"' + (header || field) + '"';
+                const columnHeader = String(header || field)
+                    .replace(/"/g, '""')
+                    .replace(/\n/g, '\u2028');
+
+                csv += '"' + columnHeader + '"';
 
                 if (i < columns.length - 1) {
                     csv += props.csvSeparator;
@@ -1219,7 +1223,11 @@ export const DataTable = React.forwardRef((props, ref) => {
                     let cellData = ObjectUtils.resolveFieldData(record, field);
 
                     if (cellData != null) {
-                        cellData = props.exportFunction ? props.exportFunction({ data: cellData, field, rowData: record, column }) : String(cellData).replace(/"/g, '""');
+                        if (props.exportFunction) {
+                            cellData = props.exportFunction({ data: cellData, field, rowData: record, column });
+                        } else {
+                            cellData = String(cellData).replace(/"/g, '""').replace(/\n/g, '\u2028');
+                        }
                     } else cellData = '';
 
                     csv += '"' + cellData + '"';
