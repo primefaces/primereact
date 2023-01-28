@@ -49,7 +49,7 @@ export function DataTableDoc(props) {
     };
 
     const imageBody = (rowData) => {
-        return <img src={`${contextPath}/images/product/${rowData.image}`} alt={rowData.image} className="w-4rem shadow-1" />;
+        return <img src={`https://www.primereact.org/images/product/${rowData.image}`} alt={rowData.image} className="w-4rem shadow-1" />;
     };
 
     const priceBody = (rowData) => {
@@ -94,7 +94,7 @@ export default function DataTableDemo() {
             <span className="text-600">{selectedProduct.category}</span>
         </div>
     );
-    
+
     const op = useRef(null);
     const toast = useRef(null);
     const isMounted = useRef(false);
@@ -155,7 +155,7 @@ import { ProductService } from './service/ProductService';
 export default function DataTableDemo() {
     const [products, setProducts] = useState<Product[]>(null);
     const [selectedProduct, setSelectedProduct] = useState<Product>(null);
-    
+
     const op = useRef<OverlayPanel>(null);
     const toast = useRef<Toast>(null);
     const isMounted = useRef(false);
@@ -218,7 +218,7 @@ export default function DataTableDemo() {
 }
         `,
         data: `
-/* ProductService */        
+/* ProductService */
 {
     id: '1000',
     code: 'f230fh0g3',
