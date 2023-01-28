@@ -1200,7 +1200,9 @@ export const DataTable = React.forwardRef((props, ref) => {
             const { field, header, exportable } = column.props;
 
             if (exportable && field) {
-                const columnHeader = String(header || field).replace(/\n/g, '\u2028');
+                const columnHeader = String(header || field)
+                    .replace(/"/g, '""')
+                    .replace(/\n/g, '\u2028');
 
                 csv += '"' + columnHeader + '"';
 
