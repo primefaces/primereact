@@ -35,7 +35,7 @@ export function AutoDoc(props) {
     };
 
     const itemTemplate = (suggestion) => {
-        const src = 'https://primereact.org/images/avatar/' + suggestion.representative.image;
+        const src = '/images/avatar/' + suggestion.representative.image;
 
         return (
             <div className="flex align-items-center">

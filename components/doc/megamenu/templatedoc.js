@@ -120,7 +120,7 @@ export function TemplateDoc(props) {
             ]
         }
     ];
-    const start = <img alt="logo" src={'https://primereact.org/images/logo.png'} height="40" className="mr-2"></img>;
+    const start = <img alt="logo" src={'/images/logo.png'} height="40" className="mr-2"></img>;
     const end = <InputText placeholder="Search" type="text" />;
 
     const code = {
