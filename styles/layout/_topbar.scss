@@ -21,6 +21,7 @@
         color: var(--text-color);
         width: 3rem;
         height: 3rem;
+        background-color: var(--surface-card);
         border: 1px solid var(--surface-border);
         align-items: center;
         justify-content: center;
@@ -33,22 +34,6 @@
 
         i {
             font-size: 1.5rem;
-        }
-    }
-}
-
-.layout-wrapper-dark {
-    .layout-topbar {
-        &.layout-topbar-sticky {
-            border-bottom-color: rgba(0,0,0,.2);
-        }
-    }
-}
-
-.layout-wrapper-light {
-    .layout-topbar {
-        &.layout-topbar-sticky {
-            border-bottom-color: rgba(255,255,255,.2);
         }
     }
 }
