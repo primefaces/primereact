@@ -76,7 +76,7 @@ export default function Layout(props) {
         return () => {
             router.events.off('routeChangeComplete', handleRouteChange);
         };
-    }, [router.events]);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     PrimeReact.ripple = true;
 
