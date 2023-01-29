@@ -1,8 +1,6 @@
-import getConfig from 'next/config';
 import { useEffect, useState } from 'react';
 
 const TemplateSection = (props) => {
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const [animationClass, setAnimationClass] = useState('');
 
     useEffect(() => {
@@ -26,10 +24,10 @@ const TemplateSection = (props) => {
                         style={
                             props.dark
                                 ? {
-                                      backgroundImage: `url("${contextPath}/images/landing-new/templates/diamond-dark.jpeg")`
+                                      backgroundImage: `url("https://www.primereact.org/images/landing-new/templates/diamond-dark.jpeg")`
                                   }
                                 : {
-                                      backgroundImage: `url("${contextPath}/images/landing-new/templates/diamond-light.jpeg")`
+                                      backgroundImage: `url("https://www.primereact.org/images/landing-new/templates/diamond-light.jpeg")`
                                   }
                         }
                     >
@@ -42,10 +40,10 @@ const TemplateSection = (props) => {
                         style={
                             props.dark
                                 ? {
-                                      backgroundImage: `url("${contextPath}/images/landing-new/templates/freya-dark.jpeg")`
+                                      backgroundImage: `url("https://www.primereact.org/images/landing-new/templates/freya-dark.jpeg")`
                                   }
                                 : {
-                                      backgroundImage: `url("${contextPath}/images/landing-new/templates/freya-light.jpeg")`
+                                      backgroundImage: `url("https://www.primereact.org/images/landing-new/templates/freya-light.jpeg")`
                                   }
                         }
                     >
@@ -60,10 +58,10 @@ const TemplateSection = (props) => {
                         style={
                             props.dark
                                 ? {
-                                      backgroundImage: `url("${contextPath}/images/landing-new/templates/atlantis-dark.jpeg")`
+                                      backgroundImage: `url("https://www.primereact.org/images/landing-new/templates/atlantis-dark.jpeg")`
                                   }
                                 : {
-                                      backgroundImage: `url("${contextPath}/images/landing-new/templates/atlantis-light.jpeg")`
+                                      backgroundImage: `url("https://www.primereact.org/images/landing-new/templates/atlantis-light.jpeg")`
                                   }
                         }
                     >
@@ -72,17 +70,22 @@ const TemplateSection = (props) => {
                         </a>
                     </div>
                     <div className="template-block block-middle border-none box-shadow-none mr-2 flex justify-content-center align-items-center flex-column">
-                        <img className="img-1" src={props.dark ? `${contextPath}/images/landing-new/templates/templates-text-dark.png` : `${contextPath}/images/landing-new/templates/templates-text-light.png`} alt="template-text" height={110} />
+                        <img
+                            className="img-1"
+                            src={props.dark ? `https://www.primereact.org/images/landing-new/templates/templates-text-dark.png` : `https://www.primereact.org/images/landing-new/templates/templates-text-light.png`}
+                            alt="template-text"
+                            height={110}
+                        />
                     </div>
                     <div
                         className="template-block block-4 ml-2 flex justify-content-center align-items-center"
                         style={
                             props.dark
                                 ? {
-                                      backgroundImage: `url("${contextPath}/images/landing-new/templates/apollo-dark.jpg")`
+                                      backgroundImage: `url("https://www.primereact.org/images/landing-new/templates/apollo-dark.jpg")`
                                   }
                                 : {
-                                      backgroundImage: `url("${contextPath}/images/landing-new/templates/apollo-light.jpg")`
+                                      backgroundImage: `url("https://www.primereact.org/images/landing-new/templates/apollo-light.jpg")`
                                   }
                         }
                     >
@@ -97,10 +100,10 @@ const TemplateSection = (props) => {
                         style={
                             props.dark
                                 ? {
-                                      backgroundImage: `url("${contextPath}/images/landing-new/templates/serenity-dark.jpeg")`
+                                      backgroundImage: `url("https://www.primereact.org/images/landing-new/templates/serenity-dark.jpeg")`
                                   }
                                 : {
-                                      backgroundImage: `url("${contextPath}/images/landing-new/templates/serenity-light.jpeg")`
+                                      backgroundImage: `url("https://www.primereact.org/images/landing-new/templates/serenity-light.jpeg")`
                                   }
                         }
                     >
@@ -113,10 +116,10 @@ const TemplateSection = (props) => {
                         style={
                             props.dark
                                 ? {
-                                      backgroundImage: `url("${contextPath}/images/landing-new/templates/ultima-dark.jpeg")`
+                                      backgroundImage: `url("https://www.primereact.org/images/landing-new/templates/ultima-dark.jpeg")`
                                   }
                                 : {
-                                      backgroundImage: `url("${contextPath}/images/landing-new/templates/ultima-light.jpeg")`
+                                      backgroundImage: `url("https://www.primereact.org/images/landing-new/templates/ultima-light.jpeg")`
                                   }
                         }
                     >

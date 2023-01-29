@@ -1,4 +1,3 @@
-import getConfig from 'next/config';
 import { useState } from 'react';
 import { Rating } from '../../lib/rating/Rating';
 import { DocSectionCode } from '../common/docsectioncode';
@@ -6,7 +5,6 @@ import { DocSectionText } from '../common/docsectiontext';
 
 export function TemplateDoc(props) {
     const [val, setVal] = useState(null);
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     const code = {
         basic: `

@@ -149,8 +149,6 @@ const LocalStorageDoc = () => {
         { name: 'XuXue Feng', image: 'xuxuefeng.png' }
     ];
     const statuses = ['unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal'];
-    
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
         CustomerService.getCustomersMedium().then((data) => setCustomers(data));

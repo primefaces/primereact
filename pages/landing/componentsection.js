@@ -1,4 +1,3 @@
-import getConfig from 'next/config';
 import { useEffect, useState } from 'react';
 import { Badge } from '../../components/lib/badge/Badge';
 import { Button } from '../../components/lib/button/Button';
@@ -60,7 +59,6 @@ const ComponentSection = () => {
     const [selectButtonValue, setSelectButtonValue] = useState(1);
     const [activeTabIndex, setActiveTabIndex] = useState(0);
 
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const items = [
         { label: 'Home', icon: 'pi pi-fw pi-home' },
         { label: 'Calendar', icon: 'pi pi-fw pi-calendar' },
@@ -121,31 +119,31 @@ const ComponentSection = () => {
                     <div className="box p-4">
                         <ul className="list-none p-0 m-0">
                             <li className="flex align-items-center mb-3">
-                                <img src={`${contextPath}/images/landing-new/avatar-1.svg`} alt="avatar 1" className="w-2rem h-2rem mr-3" />
+                                <img src={`https://www.primereact.org/images/landing-new/avatar-1.svg`} alt="avatar 1" className="w-2rem h-2rem mr-3" />
                                 <span className="font-medium">Darrel Steward</span>
                                 <ProgressBar value={15} showValue={false} className="w-10rem ml-auto mr-3" style={{ height: '.5rem' }} />
                                 <span className="text-secondary font-medium">15%</span>
                             </li>
                             <li className="flex align-items-center mb-3">
-                                <img src={`${contextPath}/images/landing-new/avatar-2.svg`} alt="avatar 2" className="w-2rem h-2rem mr-3" />
+                                <img src={`https://www.primereact.org/images/landing-new/avatar-2.svg`} alt="avatar 2" className="w-2rem h-2rem mr-3" />
                                 <span className="font-medium">Albert Flores</span>
                                 <ProgressBar value={85} showValue={false} className="w-10rem ml-auto mr-3" style={{ height: '.5rem' }} />
                                 <span className="text-secondary font-medium">85%</span>
                             </li>
                             <li className="flex align-items-center mb-3">
-                                <img src={`${contextPath}/images/landing-new/avatar-3.svg`} alt="avatar 3" className="w-2rem h-2rem mr-3" />
+                                <img src={`https://www.primereact.org/images/landing-new/avatar-3.svg`} alt="avatar 3" className="w-2rem h-2rem mr-3" />
                                 <span className="font-medium">Kathryn Murphy</span>
                                 <ProgressBar value={50} showValue={false} className="w-10rem ml-auto mr-3" style={{ height: '.5rem' }} />
                                 <span className="text-secondary font-medium">50%</span>
                             </li>
                             <li className="flex align-items-center mb-3">
-                                <img src={`${contextPath}/images/landing-new/avatar-4.svg`} alt="avatar 4" className="w-2rem h-2rem mr-3" />
+                                <img src={`https://www.primereact.org/images/landing-new/avatar-4.svg`} alt="avatar 4" className="w-2rem h-2rem mr-3" />
                                 <span className="font-medium">Cody Fisher</span>
                                 <ProgressBar value={75} showValue={false} className="w-10rem ml-auto mr-3" style={{ height: '.5rem' }} />
                                 <span className="text-secondary font-medium">75%</span>
                             </li>
                             <li className="flex align-items-center mb-3">
-                                <img src={`${contextPath}/images/landing-new/avatar-5.svg`} alt="avatar 5" className="w-2rem h-2rem mr-3" />
+                                <img src={`https://www.primereact.org/images/landing-new/avatar-5.svg`} alt="avatar 5" className="w-2rem h-2rem mr-3" />
                                 <span className="font-medium">Brandon Atkinson</span>
                                 <ProgressBar value={60} showValue={false} className="w-10rem ml-auto mr-3" style={{ height: '.5rem' }} />
                                 <span className="text-secondary font-medium">60%</span>
@@ -156,7 +154,7 @@ const ComponentSection = () => {
                 <div className="flex flex-column justify-content-start px-3 z-1">
                     <div className="box p-4 mb-5">
                         <div className="surface-card mb-4 w-20rem text-center p-5" style={{ borderRadius: '10px' }}>
-                            <img src={`${contextPath}/images/landing-new/watch.png`} alt="Watch" />
+                            <img src={`https://www.primereact.org/images/landing-new/watch.png`} alt="Watch" />
                         </div>
                         <div className="flex align-items-center mb-4">
                             <div className="flex flex-column">
@@ -191,7 +189,7 @@ const ComponentSection = () => {
                         <ul className="list-none p-0 m-0">
                             <li className="flex mb-3">
                                 <span className="mr-3">
-                                    <img src={`${contextPath}/images/landing-new/avatar.png`} alt="Avatar" className="w-3rem h-3rem" />
+                                    <img src={`https://www.primereact.org/images/landing-new/avatar.png`} alt="Avatar" className="w-3rem h-3rem" />
                                 </span>
                                 <div className="flex flex-column">
                                     <span className="font-bold mb-2">Amanda Williams</span>

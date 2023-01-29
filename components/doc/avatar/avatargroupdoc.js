@@ -1,20 +1,17 @@
-import getConfig from 'next/config';
 import { Avatar } from '../../lib/avatar/Avatar';
 import { AvatarGroup } from '../../lib/avatargroup/AvatarGroup';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function AvatarGroupDoc(props) {
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
-
     const code = {
         basic: `
 <AvatarGroup>
-  <Avatar image="images/avatar/amyelsner.png" size="large" shape="circle" />
-  <Avatar image="images/avatar/asiyajavayant.png" size="large" shape="circle" />
-  <Avatar image="images/avatar/onyamalimba.png" size="large" shape="circle" />
-  <Avatar image="images/avatar/ionibowcher.png" size="large" shape="circle" />
-  <Avatar image="images/avatar/xuxuefeng.png" size="large" shape="circle" />
+  <Avatar image="https://www.primereact.org/images/avatar/amyelsner.png" size="large" shape="circle" />
+  <Avatar image="https://www.primereact.org/images/avatar/asiyajavayant.png" size="large" shape="circle" />
+  <Avatar image="https://www.primereact.org/images/avatar/onyamalimba.png" size="large" shape="circle" />
+  <Avatar image="https://www.primereact.org/images/avatar/ionibowcher.png" size="large" shape="circle" />
+  <Avatar image="https://www.primereact.org/images/avatar/xuxuefeng.png" size="large" shape="circle" />
   <Avatar label="+2" shape="circle" size="large" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
 </AvatarGroup>
 
@@ -30,11 +27,11 @@ export default function AvatarGroupDemo() {
     return (
         <div className="card flex justify-content-center">
             <AvatarGroup>
-                <Avatar image="images/avatar/amyelsner.png" size="large" shape="circle" />
-                <Avatar image="images/avatar/asiyajavayant.png" size="large" shape="circle" />
-                <Avatar image="images/avatar/onyamalimba.png" size="large" shape="circle" />
-                <Avatar image="images/avatar/ionibowcher.png" size="large" shape="circle" />
-                <Avatar image="images/avatar/xuxuefeng.png" size="large" shape="circle" />
+                <Avatar image="https://www.primereact.org/images/avatar/amyelsner.png" size="large" shape="circle" />
+                <Avatar image="https://www.primereact.org/images/avatar/asiyajavayant.png" size="large" shape="circle" />
+                <Avatar image="https://www.primereact.org/images/avatar/onyamalimba.png" size="large" shape="circle" />
+                <Avatar image="https://www.primereact.org/images/avatar/ionibowcher.png" size="large" shape="circle" />
+                <Avatar image="https://www.primereact.org/images/avatar/xuxuefeng.png" size="large" shape="circle" />
                 <Avatar label="+2" shape="circle" size="large" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
             </AvatarGroup>
         </div>
@@ -52,11 +49,11 @@ export default function AvatarGroupDemo() {
     return (
         <div className="card flex justify-content-center">
             <AvatarGroup>
-                <Avatar image="images/avatar/amyelsner.png" size="large" shape="circle" />
-                <Avatar image="images/avatar/asiyajavayant.png" size="large" shape="circle" />
-                <Avatar image="images/avatar/onyamalimba.png" size="large" shape="circle" />
-                <Avatar image="images/avatar/ionibowcher.png" size="large" shape="circle" />
-                <Avatar image="images/avatar/xuxuefeng.png" size="large" shape="circle" />
+                <Avatar image="https://www.primereact.org/images/avatar/amyelsner.png" size="large" shape="circle" />
+                <Avatar image="https://www.primereact.org/images/avatar/asiyajavayant.png" size="large" shape="circle" />
+                <Avatar image="https://www.primereact.org/images/avatar/onyamalimba.png" size="large" shape="circle" />
+                <Avatar image="https://www.primereact.org/images/avatar/ionibowcher.png" size="large" shape="circle" />
+                <Avatar image="https://www.primereact.org/images/avatar/xuxuefeng.png" size="large" shape="circle" />
                 <Avatar label="+2" shape="circle" size="large" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
             </AvatarGroup>
         </div>
@@ -72,11 +69,11 @@ export default function AvatarGroupDemo() {
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <AvatarGroup>
-                    <Avatar image={`${contextPath}/images/avatar/amyelsner.png`} size="large" shape="circle" />
-                    <Avatar image={`${contextPath}/images/avatar/asiyajavayant.png`} size="large" shape="circle" />
-                    <Avatar image={`${contextPath}/images/avatar/onyamalimba.png`} size="large" shape="circle" />
-                    <Avatar image={`${contextPath}/images/avatar/ionibowcher.png`} size="large" shape="circle" />
-                    <Avatar image={`${contextPath}/images/avatar/xuxuefeng.png`} size="large" shape="circle" />
+                    <Avatar image={`https://www.primereact.org/images/avatar/amyelsner.png`} size="large" shape="circle" />
+                    <Avatar image={`https://www.primereact.org/images/avatar/asiyajavayant.png`} size="large" shape="circle" />
+                    <Avatar image={`https://www.primereact.org/images/avatar/onyamalimba.png`} size="large" shape="circle" />
+                    <Avatar image={`https://www.primereact.org/images/avatar/ionibowcher.png`} size="large" shape="circle" />
+                    <Avatar image={`https://www.primereact.org/images/avatar/xuxuefeng.png`} size="large" shape="circle" />
                     <Avatar label="+2" shape="circle" size="large" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
                 </AvatarGroup>
             </div>

@@ -1,4 +1,3 @@
-import getConfig from 'next/config';
 import Document, { Head, Html, Main, NextScript } from 'next/document';
 
 class MyDocument extends Document {
@@ -9,16 +8,14 @@ class MyDocument extends Document {
     }
 
     render() {
-        const contextPath = getConfig().publicRuntimeConfig.contextPath;
-
         return (
             <Html>
                 <Head>
-                    <link href={`${contextPath}/images/favicon.ico`} rel="icon" type="image/x-icon"></link>
-                    <link id="theme-link" href={`${contextPath}/themes/lara-light-indigo/theme.css`} rel="stylesheet"></link>
-                    <link rel="stylesheet" href={`${contextPath}/styles/flags.css`}></link>
+                    <link href={`https://www.primereact.org/images/favicon.ico`} rel="icon" type="image/x-icon"></link>
+                    <link id="theme-link" href={`https://www.primereact.org/themes/lara-light-indigo/theme.css`} rel="stylesheet"></link>
+                    <link rel="stylesheet" href={`https://www.primereact.org/styles/flags.css`}></link>
                     {/* eslint-disable */}
-                    <script src={`${contextPath}/scripts/prism/prism.js`} data-manual></script>
+                    <script src={`https://www.primereact.org/scripts/prism/prism.js`} data-manual></script>
                     {/* eslint-enable */}
                 </Head>
                 <body>

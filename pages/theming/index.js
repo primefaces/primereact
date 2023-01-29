@@ -1,4 +1,3 @@
-import getConfig from 'next/config';
 import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
@@ -9,7 +8,6 @@ import { Panel } from '../../components/lib/panel/Panel';
 import stylesModule from './theming.module.css';
 
 const ThemingPage = () => {
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const { className, styles } = css.resolve`
         .p-panel > :global(.p-panel-header) {
             background-color: #54b5a6;
@@ -32,7 +30,7 @@ const ThemingPage = () => {
 
             <div className="content-section documentation theming-page">
                 <h5>Architecture</h5>
-                <img alt="Architecture" src={`${contextPath}/images/architecture.jpg`} className="architecture-image" />
+                <img alt="Architecture" src={`https://www.primereact.org/images/architecture.jpg`} className="architecture-image" />
                 <p>
                     PrimeReact is a design agnostic library so unlike other UI libraries it does not enforce a certain styling such as material or bootstrap. In order to achieve this, styling has been separated into two parts, core and theme. Core
                     resides inside PrimeReact to implement the structure of the components such as positioning whereas theme brings the colors, paddings and margins. vVarious free themes and premium themes are available along with premium templates
@@ -108,7 +106,7 @@ primereact/resources/themes/rhea/theme.css
                     Visit <a href="https://www.primefaces.org/designer/primereact">Designer Website</a> for more information and live demos.
                 </p>
                 <a href="http://www.primefaces.org/designer/primereact" className="designer-image">
-                    <img alt="PrimeReact Designer" src={`${contextPath}/images/primereact-designer.jpg`} style={{ width: '100%' }} />
+                    <img alt="PrimeReact Designer" src={`https://www.primereact.org/images/primereact-designer.jpg`} style={{ width: '100%' }} />
                 </a>
 
                 <h5>Scoped Styling</h5>

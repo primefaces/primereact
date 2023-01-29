@@ -1,10 +1,8 @@
-import getConfig from 'next/config';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { classNames } from '../../components/lib/utils/ClassNames';
 
 const HeaderSection = (props) => {
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const [menuActive, setMenuActive] = useState(false);
     const colorSchemeIcon = classNames('pi', { 'pi-sun': props.dark, 'pi-moon': !props.dark });
     const containerElement = useRef(null);
@@ -52,7 +50,7 @@ const HeaderSection = (props) => {
     return (
         <section ref={containerElement} className={headerClassName}>
             <span>
-                <img src={`${contextPath}/images/primereact-logo-${props.dark ? 'light' : 'dark'}.svg`} alt="primereact logo" className="landing-header-logo" />
+                <img src={`https://www.primereact.org/images/primereact-logo-${props.dark ? 'light' : 'dark'}.svg`} alt="primereact logo" className="landing-header-logo" />
             </span>
 
             <div className="flex align-items-center">
@@ -61,26 +59,26 @@ const HeaderSection = (props) => {
                         <li className="mr-0 lg:mr-2">
                             <Link href="/setup">
                                 <a>
-                                    <img src={`${contextPath}/images/landing-new/core-icon.svg`} alt="primereact core" />
+                                    <img src={`https://www.primereact.org/images/landing-new/core-icon.svg`} alt="primereact core" />
                                     <span>Components</span>
                                 </a>
                             </Link>
                         </li>
                         <li className="mr-0 lg:mr-2">
                             <a href="https://blocks.primereact.org">
-                                <img src={`${contextPath}/images/landing-new/blocks-icon.svg`} alt="primereact templates" />
+                                <img src={`https://www.primereact.org/images/landing-new/blocks-icon.svg`} alt="primereact templates" />
                                 <span>Blocks</span>
                             </a>
                         </li>
                         <li className="mr-0 lg:mr-2">
                             <a href="https://designer.primereact.org">
-                                <img src={`${contextPath}/images/landing-new/designer-icon.svg`} alt="primereact templates" />
+                                <img src={`https://www.primereact.org/images/landing-new/designer-icon.svg`} alt="primereact templates" />
                                 <span>Designer</span>
                             </a>
                         </li>
                         <li className="mr-0 lg:mr-2">
                             <a href="https://www.primefaces.org/store/templates.xhtml">
-                                <img src={`${contextPath}/images/landing-new/templates-icon.svg`} alt="primereact templates" />
+                                <img src={`https://www.primereact.org/images/landing-new/templates-icon.svg`} alt="primereact templates" />
                                 <span>Templates</span>
                             </a>
                         </li>

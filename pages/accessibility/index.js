@@ -1,11 +1,9 @@
-import getConfig from 'next/config';
 import Head from 'next/head';
 import React, { useState } from 'react';
 import { CodeHighlight } from '../../components/doc/common/codehighlight';
 import { Checkbox } from '../../components/lib/checkbox/Checkbox';
 
 const AccessibilityPage = () => {
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const [checked, setChecked] = useState(false);
 
     return (

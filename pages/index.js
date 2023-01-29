@@ -1,4 +1,3 @@
-import getConfig from 'next/config';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import Analytics from '../components/layout/analytics';
@@ -16,7 +15,6 @@ import ThemeSection from './landing/themesection';
 import UsersSection from './landing/userssection';
 
 export default function Home(props) {
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const [tableTheme, setTableTheme] = useState('lara-light-indigo');
     const rootClassName = classNames('landing', { 'landing-light': !props.dark, 'landing-dark': props.dark, 'landing-news-active': props.newsActive });
 
@@ -56,7 +54,7 @@ export default function Home(props) {
                 <meta property="og:description" content="The ultimate collection of design-agnostic, flexible and accessible React UI Components." />
                 <meta property="og:image" content="https://www.primefaces.org/primereact/static/social/primereact-preview.jpg"></meta>
                 <meta property="og:ttl" content="604800"></meta>
-                <link href={`${contextPath}/styles/landing/themes/${tableTheme}/theme.css`} rel="stylesheet"></link>
+                <link href={`https://www.primereact.org/styles/landing/themes/${tableTheme}/theme.css`} rel="stylesheet"></link>
             </Head>
             <div className="landing-intro">
                 {props.newsActive && <NewsSection announcement={props.announcement} onClose={props.onNewsClose} />}

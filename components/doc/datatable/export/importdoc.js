@@ -6,7 +6,6 @@ import { FileUpload } from '../../../lib/fileupload/FileUpload';
 import { Toast } from '../../../lib/toast/Toast';
 import { DataTable } from '../../../lib/datatable/DataTable';
 import { Column } from '../../../lib/column/Column';
-import getConfig from 'next/config';
 
 export function ExportImportDoc(props) {
     const [importedData, setImportedData] = useState([]);

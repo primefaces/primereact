@@ -1,12 +1,9 @@
-import getConfig from 'next/config';
 import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
 import { CodeHighlight } from '../../components/doc/common/codehighlight';
 
 const SetupPage = () => {
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
-
     return (
         <div>
             <Head>
@@ -384,31 +381,31 @@ PrimeReact.nullSortOrder = -1; // Default value is 1 for Excel like sorting.
                             <tr>
                                 <th>
                                     <div className="flex align-items-center">
-                                        <img src={`${contextPath}/images/browsers/edge.svg`} alt="edge" style={{ width: '1.5rem' }} className="mr-2" />
+                                        <img src={`https://www.primereact.org/images/browsers/edge.svg`} alt="edge" style={{ width: '1.5rem' }} className="mr-2" />
                                         Edge
                                     </div>
                                 </th>
                                 <th>
                                     <div className="flex align-items-center">
-                                        <img src={`${contextPath}/images/browsers/firefox.svg`} alt="firefox" style={{ width: '1.5rem' }} className="mr-2" />
+                                        <img src={`https://www.primereact.org/images/browsers/firefox.svg`} alt="firefox" style={{ width: '1.5rem' }} className="mr-2" />
                                         Firefox
                                     </div>
                                 </th>
                                 <th>
                                     <div className="flex align-items-center">
-                                        <img src={`${contextPath}/images/browsers/chrome.svg`} alt="chrome" style={{ width: '1.5rem' }} className="mr-2" />
+                                        <img src={`https://www.primereact.org/images/browsers/chrome.svg`} alt="chrome" style={{ width: '1.5rem' }} className="mr-2" />
                                         Chrome
                                     </div>
                                 </th>
                                 <th>
                                     <div className="flex align-items-center">
-                                        <img src={`${contextPath}/images/browsers/safari.svg`} alt="safari" style={{ width: '1.5rem' }} className="mr-2" />
+                                        <img src={`https://www.primereact.org/images/browsers/safari.svg`} alt="safari" style={{ width: '1.5rem' }} className="mr-2" />
                                         Safari
                                     </div>
                                 </th>
                                 <th>
                                     <div className="flex align-items-center">
-                                        <img src={`${contextPath}/images/browsers/opera.svg`} alt="opera" style={{ width: '1.5rem' }} className="mr-2" />
+                                        <img src={`https://www.primereact.org/images/browsers/opera.svg`} alt="opera" style={{ width: '1.5rem' }} className="mr-2" />
                                         Opera
                                     </div>
                                 </th>

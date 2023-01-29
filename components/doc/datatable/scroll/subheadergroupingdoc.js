@@ -74,8 +74,6 @@ import { CustomerService } from './service/CustomerService';
 
 const ScrollSubHeaderGroupingDoc = () => {
     const [customersGrouped, setCustomersGrouped] = useState(null);
-    
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
         CustomerService.getCustomersMedium().then((data) => {
@@ -146,8 +144,6 @@ import { CustomerService } from './service/CustomerService';
 
 const ScrollSubHeaderGroupingDoc = () => {
     const [customersGrouped, setCustomersGrouped] = useState(null);
-    
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
         CustomerService.getCustomersMedium().then((data) => {

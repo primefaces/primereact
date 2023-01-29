@@ -1,9 +1,6 @@
-import getConfig from 'next/config';
 import Link from 'next/link';
 
 const FooterSection = (props) => {
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
-
     return (
         <section className="landing-footer pt-8 pad-section">
             <div className="flex flex-wrap z-1">
@@ -108,7 +105,7 @@ const FooterSection = (props) => {
 
             <div className="flex flex-wrap justify-content-between py-6">
                 <span>
-                    <img src={`${contextPath}/images/primereact-logo-${props.dark ? 'light' : 'dark'}.svg`} alt="primereact logo" />
+                    <img src={`https://www.primereact.org/images/primereact-logo-${props.dark ? 'light' : 'dark'}.svg`} alt="primereact logo" />
                 </span>
                 <div className="flex align-items-center">
                     <a href="https://twitter.com/primereact" className="linkbox block w-3rem h-3rem flex align-items-center justify-content-center mr-3">
