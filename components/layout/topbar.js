@@ -40,6 +40,10 @@ export default function Topbar(props) {
         props.onMenuButtonClick();
     };
 
+    const onConfigButtonClick = () => {
+        props.onConfigButtonClick();
+    }
+
     const containerElement = useRef(null);
     const scrollListener = useRef();
 
@@ -87,8 +91,9 @@ export default function Topbar(props) {
                     </a>
                 </li>
                 <li>
-                    <button type="button" className="p-link flex border-1 p-2 surface-border border-solid border-round surface-card h-full align-items-center justify-content-center transition-all transition-duration-300 hover:border-primary">
-                        <i className="pi pi-cog text-700"></i>
+                    <button type="button" className="p-button flex border-1 p-2 h-full align-items-center justify-content-center transition-all transition-duration-300"
+                        onClick={onConfigButtonClick}>
+                        <i className="pi pi-cog"></i>
                     </button>
                 </li>
                 

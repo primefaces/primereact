@@ -15,6 +15,7 @@ export default function Layout(props) {
     const [inputStyle, setInputStyle] = useState('outlined');
     const [ripple, setRipple] = useState(false);
     const [sidebarActive, setSidebarActive] = useState(false);
+    const [configActive, setConfigActive] = useState(false);
     const router = useRouter();
 
     const wrapperClassName = classNames('layout-wrapper', {
@@ -51,6 +52,14 @@ export default function Layout(props) {
     const onRippleChange = (value) => {
         setRipple(value);
     };
+
+    const onConfigHide = () => {
+        setConfigActive(false);
+    }
+
+    const onConfigButtonClick = () => {
+        setConfigActive(true);
+    }
 
     useEffect(() => {
         if (sidebarActive) document.body.classList.add('blocked-scroll');
@@ -94,7 +103,7 @@ export default function Layout(props) {
                 <link rel="icon" href="/images/favicon.ico" type="image/x-icon"></link>
             </Head>
             {props.newsActive && <NewsSection announcement={props.announcement} onClose={props.onNewsClose} />}
-            <Topbar onMenuButtonClick={onMenuButtonClick} />
+            <Topbar onMenuButtonClick={onMenuButtonClick} onConfigButtonClick={onConfigButtonClick} />
             <Menu active={sidebarActive} darkTheme={props.dark} />
             <AppContentContext.Provider
                 value={{
@@ -111,7 +120,8 @@ export default function Layout(props) {
                         <Footer></Footer>
                     </div>
                 </div>
-                <Config ripple={ripple} onRippleChange={onRippleChange} inputStyle={inputStyle} onInputStyleChange={onInputStyleChange} onThemeChange={onThemeChange} />
+                <Config ripple={ripple} onRippleChange={onRippleChange} inputStyle={inputStyle} onInputStyleChange={onInputStyleChange} onThemeChange={onThemeChange} 
+                        active={configActive} onHide={onConfigHide}/>
             </AppContentContext.Provider>
             <div className={maskClassName} onClick={onMaskClick}></div>
         </div>
