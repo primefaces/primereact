@@ -14,7 +14,7 @@ export default function Menu(props) {
             <>
                 {item.icon && (
                     <div className="menu-icon">
-                        <i class={item.icon}></i>
+                        <i className={item.icon}></i>
                     </div>
                 )}
                 {name}

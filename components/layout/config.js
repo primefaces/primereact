@@ -383,66 +383,6 @@ export default function Config(props) {
                             <span>Rhea</span>
                         </div>
                     </div>
-
-                    <h4>Premium Templates</h4>
-                    <p>Beautifully created premium application templates.</p>
-                    <div className="grid premium-themes">
-                        <div className="col-12 md:col-6">
-                            <a href="https://www.primefaces.org/layouts/apollo-react" rel="noopener noreferrer" target="_blank">
-                                <img alt="Apollo" src={`https://www.primereact.org/images/layouts/apollo-nextjs.jpg`} />
-                            </a>
-                        </div>
-                        <div className="col-12 md:col-6">
-                            <a href="https://www.primefaces.org/sakai-react" rel="noopener noreferrer" target="_blank">
-                                <img alt="Sakai" src={`https://www.primereact.org/images/layouts/sakai-react.jpg`} />
-                            </a>
-                        </div>
-                        <div className="col-12 md:col-6">
-                            <a href="https://www.primefaces.org/layouts/atlantis-react" rel="noopener noreferrer" target="_blank">
-                                <img alt="Atlantis" src={`https://www.primereact.org/images/layouts/atlantis-react.jpg`} />
-                            </a>
-                        </div>
-                        <div className="col-12 md:col-6">
-                            <a href="https://www.primefaces.org/layouts/freya-react" rel="noopener noreferrer" target="_blank">
-                                <img alt="Freya" src={`https://www.primereact.org/images/layouts/freya-react.jpg`} />
-                            </a>
-                        </div>
-                        <div className="col-12 md:col-6">
-                            <a href="https://www.primefaces.org/layouts/ultima-react" rel="noopener noreferrer" target="_blank">
-                                <img alt="Ultima" src={`https://www.primereact.org/images/layouts/ultima-react.jpg`} />
-                            </a>
-                        </div>
-                        <div className="col-12 md:col-6">
-                            <a href="https://www.primefaces.org/layouts/diamond-react" rel="noopener noreferrer" target="_blank">
-                                <img alt="Diamond" src={`https://www.primereact.org/images/layouts/diamond-react.jpg`} />
-                            </a>
-                        </div>
-                        <div className="col-12 md:col-6">
-                            <a href="https://www.primefaces.org/layouts/sapphire-react" rel="noopener noreferrer" target="_blank">
-                                <img alt="Sapphire" src={`https://www.primereact.org/images/layouts/sapphire-react.jpg`} />
-                            </a>
-                        </div>
-                        <div className="col-12 md:col-6">
-                            <a href="https://www.primefaces.org/layouts/serenity-react" rel="noopener noreferrer" target="_blank">
-                                <img alt="Serenity" src={`https://www.primereact.org/images/layouts/serenity-react.jpg`} />
-                            </a>
-                        </div>
-                        <div className="col-12 md:col-6">
-                            <a href="https://www.primefaces.org/layouts/babylon-react" rel="noopener noreferrer" target="_blank">
-                                <img alt="Babylon" src={`https://www.primereact.org/images/layouts/babylon-react.jpg`} />
-                            </a>
-                        </div>
-                        <div className="col-12 md:col-6">
-                            <a href="https://www.primefaces.org/layouts/avalon-react" rel="noopener noreferrer" target="_blank">
-                                <img alt="Avalon" src={`https://www.primereact.org/images/layouts/avalon-react.jpg`} />
-                            </a>
-                        </div>
-                        <div className="col-12 md:col-6">
-                            <a href="https://www.primefaces.org/layouts/roma-react" rel="noopener noreferrer" target="_blank">
-                                <img alt="Roma" src={`https://www.primereact.org/images/layouts/roma-react.jpg`} />
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </Sidebar>

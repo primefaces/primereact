@@ -2,15 +2,6 @@
     display: flex;
     flex-wrap: wrap;
 
-    .doc-intro {
-        margin-bottom: 2rem;
-
-        p {
-            font-size: 1.25rem;
-            color: var(--surface-800);
-        }
-    }
-
     > .doc-main {
         flex-grow: 1;
         flex-shrink: 1;
@@ -118,6 +109,15 @@
                 }
             }
         }
+    }
+}
+
+.doc-intro {
+    margin-bottom: 2rem;
+
+    p {
+        font-size: 1.25rem;
+        color: var(--surface-800);
     }
 }
 

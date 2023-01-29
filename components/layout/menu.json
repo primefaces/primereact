@@ -486,6 +486,11 @@
             "to": "/icons"
         },
         {
+            "name": "Templates",
+            "icon": "pi pi-star",
+            "to": "/templates"
+        },
+        {
             "name": "PrimeBlocks",
             "icon": "pi pi-server",
             "href": "https://blocks.primereact.org"
