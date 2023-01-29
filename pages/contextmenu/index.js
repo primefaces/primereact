@@ -53,8 +53,8 @@ const ContextMenuDemo = () => {
                     <div className="doc-intro">
                         <h1>ContextMenu</h1>
                         <p>
-                            ContextMenu displays an overlay menu on right click of its target. Note that components like DataTable has special integration with ContextMenu. Refer to documentation of the individual documentation of the components having a
-                            special integration.
+                            ContextMenu displays an overlay menu on right click of its target. Note that components like DataTable has special integration with ContextMenu. Refer to documentation of the individual documentation of the components
+                            having a special integration.
                         </p>
                     </div>
                     <DocSections docs={docs} />

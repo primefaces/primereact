@@ -55,11 +55,11 @@ export default function Layout(props) {
 
     const onConfigHide = () => {
         setConfigActive(false);
-    }
+    };
 
     const onConfigButtonClick = () => {
         setConfigActive(true);
-    }
+    };
 
     useEffect(() => {
         if (sidebarActive) document.body.classList.add('blocked-scroll');
@@ -69,14 +69,14 @@ export default function Layout(props) {
     useEffect(() => {
         const handleRouteChange = (url, { shallow }) => {
             setSidebarActive(false);
-        }
-    
+        };
+
         router.events.on('routeChangeComplete', handleRouteChange);
-    
+
         return () => {
-          router.events.off('routeChangeComplete', handleRouteChange);
-        }
-      }, [])
+            router.events.off('routeChangeComplete', handleRouteChange);
+        };
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     PrimeReact.ripple = true;
 
@@ -120,8 +120,7 @@ export default function Layout(props) {
                         <Footer></Footer>
                     </div>
                 </div>
-                <Config ripple={ripple} onRippleChange={onRippleChange} inputStyle={inputStyle} onInputStyleChange={onInputStyleChange} onThemeChange={onThemeChange} 
-                        active={configActive} onHide={onConfigHide}/>
+                <Config ripple={ripple} onRippleChange={onRippleChange} inputStyle={inputStyle} onInputStyleChange={onInputStyleChange} onThemeChange={onThemeChange} active={configActive} onHide={onConfigHide} />
             </AppContentContext.Provider>
             <div className={maskClassName} onClick={onMaskClick}></div>
         </div>

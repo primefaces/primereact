@@ -70,7 +70,7 @@ const VirtualScrollerDemo = () => {
                     <div className="doc-intro">
                         <h1>VirtualScroller</h1>
                         <p>VirtualScroller is a performant approach to handle huge data efficiently.</p>
-                        </div>
+                    </div>
                     <DocSections docs={docs} />
                 </div>
                 <DocSectionNav docs={docs} />
