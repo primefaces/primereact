@@ -27,7 +27,7 @@ export default function CurrencyDemo() {
     const [value4, setValue4] = useState(5002);
 
     return (
-        <div class="card flex flex-wrap gap-3 p-fluid">
+        <div className="card flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
                 <label htmlFor="currency-us" className="font-bold block mb-2">United States</label>
                 <InputNumber inputId="currency-us" value={value1} onValueChange={(e) => setValue1(e.value)} mode="currency" currency="USD" locale="en-US" />
@@ -59,7 +59,7 @@ export default function CurrencyDemo() {
     const [value4, setValue4] = useState<number>(5002);
 
     return (
-        <div class="card flex flex-wrap gap-3 p-fluid">
+        <div className="card flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
                 <label htmlFor="currency-us" className="font-bold block mb-2">United States</label>
                 <InputNumber inputId="currency-us" value={value1} onValueChange={(e: InputNumberValueChangeEvent) => setValue1(e.value)} mode="currency" currency="USD" locale="en-US" />
@@ -89,7 +89,7 @@ export default function CurrencyDemo() {
                     Monetary values are enabled by setting <i>mode</i> property as <i>currency</i>. In this setting, <i>currency</i> property also needs to be defined using ISO 4217 standard such as "USD" for the US dollar.
                 </p>
             </DocSectionText>
-            <div class="card flex flex-wrap gap-3 p-fluid">
+            <div className="card flex flex-wrap gap-3 p-fluid">
                 <div className="flex-auto">
                     <label htmlFor="currency-us" className="font-bold block mb-2">
                         United States

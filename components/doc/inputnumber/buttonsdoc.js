@@ -26,12 +26,12 @@ export default function ButtonsDemo() {
     const [value3, setValue3] = useState(25);
 
     return (
-        <div class="card flex flex-wrap gap-3 p-fluid">
+        <div className="card flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
                 <label htmlFor="stacked-buttons" className="font-bold block mb-2">Stacked</label>
                 <InputNumber inputId="stacked-buttons" value={value1} onValueChange={(e) => setValue1(e.value)} showButtons mode="currency" currency="USD" />
             </div>
-            
+
             <div className="flex-auto">
                 <label htmlFor="minmax-buttons" className="font-bold block mb-2">Min-Max Boundaries</label>
                 <InputNumber inputId="minmax-buttons" value={value3} onValueChange={(e) => setValue3(e.value)} mode="decimal" showButtons min={0} max={100} />
@@ -56,12 +56,12 @@ export default function ButtonsDemo() {
     const [value3, setValue3] = useState<number>(25);
 
     return (
-        <div class="card flex flex-wrap gap-3 p-fluid">
+        <div className="card flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
                 <label htmlFor="stacked-buttons" className="font-bold block mb-2">Stacked</label>
                 <InputNumber inputId="stacked-buttons" value={value1} onValueChange={(e: InputNumberValueChangeEvent) => setValue1(e.value)} showButtons mode="currency" currency="USD" />
             </div>
-            
+
             <div className="flex-auto">
                 <label htmlFor="minmax-buttons" className="font-bold block mb-2">Min-Max Boundaries</label>
                 <InputNumber inputId="minmax-buttons" value={value3} onValueChange={(e: InputNumberValueChangeEvent) => setValue3(e.value)} mode="decimal" showButtons min={0} max={100} />
@@ -85,7 +85,7 @@ export default function ButtonsDemo() {
                     Spinner buttons are enabled using the <i>showButtons</i> property and layout is defined with the <i>buttonLayout</i>.
                 </p>
             </DocSectionText>
-            <div class="card flex flex-wrap gap-3 p-fluid">
+            <div className="card flex flex-wrap gap-3 p-fluid">
                 <div className="flex-auto">
                     <label htmlFor="stacked-buttons" className="font-bold block mb-2">
                         Stacked

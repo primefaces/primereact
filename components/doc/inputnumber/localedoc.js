@@ -27,7 +27,7 @@ export default function LocaleDemo() {
     const [value4, setValue4] = useState(732762);
 
     return (
-        <div class="card flex flex-wrap gap-3 p-fluid">
+        <div className="card flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
                 <label htmlFor="locale-user" className="font-bold block mb-2">User Locale</label>
                 <InputNumber inputId="locale-user" value={value1} onValueChange={(e) => setValue1(e.value)} minFractionDigits={2} />
@@ -59,7 +59,7 @@ export default function LocaleDemo() {
     const [value4, setValue4] = useState<number>(732762);
 
     return (
-        <div class="card flex flex-wrap gap-3 p-fluid">
+        <div className="card flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
                 <label htmlFor="locale-user" className="font-bold block mb-2">User Locale</label>
                 <InputNumber inputId="locale-user" value={value1} onValueChange={(e: InputNumberValueChangeEvent) => setValue1(e.value)} minFractionDigits={2} />
@@ -89,7 +89,7 @@ export default function LocaleDemo() {
                     Localization information such as grouping and decimal symbols are defined with the <i>locale</i> property which defaults to the user locale.
                 </p>
             </DocSectionText>
-            <div class="card flex flex-wrap gap-3 p-fluid">
+            <div className="card flex flex-wrap gap-3 p-fluid">
                 <div className="flex-auto">
                     <label htmlFor="locale-user" className="font-bold block mb-2">
                         User Locale
