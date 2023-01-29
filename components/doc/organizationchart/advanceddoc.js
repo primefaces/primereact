@@ -89,7 +89,7 @@ export function AdvancedDoc(props) {
                 <div>
                     <div className="node-header">{node.label}</div>
                     <div className="node-content">
-                        <img alt={node.data.avatar} src={`https://www.primereact.org/images/organization/${node.data.avatar}`} style={{ width: '32px' }} />
+                        <img alt={node.data.avatar} src={`/images/organization/${node.data.avatar}`} style={{ width: '32px' }} />
                         <div>{node.data.name}</div>
                     </div>
                 </div>
@@ -184,7 +184,7 @@ export default function AdvancedDoc() {
                 <div>
                     <div className="node-header">{node.label}</div>
                     <div className="node-content">
-                    <img alt={node.data.avatar} src={\`https://www.primereact.org/images/organization/\${node.data.avatar}\`} style={{ width: '32px' }} />
+                    <img alt={node.data.avatar} src={\`https://primereact.org/images/organization/\${node.data.avatar}\`} style={{ width: '32px' }} />
                         <div>{node.data.name}</div>
                     </div>
                 </div>
@@ -282,7 +282,7 @@ export default function AdvancedDoc() {
                 <div>
                     <div className="node-header">{node.label}</div>
                     <div className="node-content">
-                    <img alt={node.data.avatar} src={\`https://www.primereact.org/images/organization/\${node.data.avatar}\`} style={{ width: '32px' }} />
+                    <img alt={node.data.avatar} src={\`https://primereact.org/images/organization/\${node.data.avatar}\`} style={{ width: '32px' }} />
                         <div>{node.data.name}</div>
                     </div>
                 </div>

@@ -77,7 +77,7 @@ export default function TemplateDemo() {
             <div className="flex align-items-center">
                 <img
                     alt={item.name}
-                    src="https://www.primereact.org/images/flag/flag_placeholder.png"
+                    src="https://primereact.org/images/flag/flag_placeholder.png"
                     className={\`flag flag-\${item.code.toLowerCase()} mr-2\`}
                     style={{width: '18px'}}
                 />
@@ -136,7 +136,7 @@ export default function TemplateDemo() {
             <div className="flex align-items-center">
                 <img
                     alt={item.name}
-                    src="https://www.primereact.org/images/flag/flag_placeholder.png"
+                    src="https://primereact.org/images/flag/flag_placeholder.png"
                     className={\`flag flag-\${item.code.toLowerCase()} mr-2\`}
                     style={{width: '18px'}}
                 />

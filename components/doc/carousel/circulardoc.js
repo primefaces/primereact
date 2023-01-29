@@ -91,7 +91,7 @@ export default function CircularDemo() {
             <div className="product-item">
                 <div className="product-item-content">
                     <div className="mb-3">
-                        <img src={\`https://www.primereact.org/images/product/\${product.image}\`} alt={product.name} className="product-image" />
+                        <img src={\`https://primereact.org/images/product/\${product.image}\`} alt={product.name} className="product-image" />
                     </div>
                     <div>
                         <h4 className="mb-1">{product.name}</h4>
@@ -151,7 +151,7 @@ export default function CircularDemo() {
             <div className="product-item">
                 <div className="product-item-content">
                     <div className="mb-3">
-                        <img src={\`https://www.primereact.org/images/product/\${product.image}\`} alt={product.name} className="product-image" />
+                        <img src={\`https://primereact.org/images/product/\${product.image}\`} alt={product.name} className="product-image" />
                     </div>
                     <div>
                         <h4 className="mb-1">{product.name}</h4>

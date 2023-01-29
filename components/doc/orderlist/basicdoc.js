@@ -15,7 +15,7 @@ export function BasicDoc(props) {
         return (
             <div className="flex align-items-center p-2 w-full flex-wrap">
                 <div className="w-full text-center md:w-auto md:text-left">
-                    <img className="w-7rem md:w-5rem md:shadow-2 md:mr-3 mb-3 md:mb-auto" src={`https://www.primereact.org/images/product/${item.image}`} alt={item.name} />
+                    <img className="w-7rem md:w-5rem md:shadow-2 md:mr-3 mb-3 md:mb-auto" src={`/images/product/${item.image}`} alt={item.name} />
                 </div>
                 <div className="flex-1">
                     <h5 className="mb-2">{item.name}</h5>
@@ -50,7 +50,7 @@ export default function BasicDoc() {
         return (
             <div className="flex align-items-center p-2 w-full flex-wrap">
                 <div className="w-full text-center md:w-auto md:text-left">
-                    <img className='w-7rem md:w-5rem md:shadow-2 md:mr-3 mb-3 md:mb-auto' src={\`https://www.primereact.org/images/product/\${item.image}\`} alt={item.name} />
+                    <img className='w-7rem md:w-5rem md:shadow-2 md:mr-3 mb-3 md:mb-auto' src={\`https://primereact.org/images/product/\${item.image}\`} alt={item.name} />
                 </div>
                 <div className="flex-1">
                     <h5 className="mb-2">{item.name}</h5>
@@ -88,7 +88,7 @@ export default function BasicDoc() {
         return (
             <div className="flex align-items-center p-2 w-full flex-wrap">
                 <div className="w-full text-center md:w-auto md:text-left">
-                    <img className='w-7rem md:w-5rem md:shadow-2 md:mr-3 mb-3 md:mb-auto' src={\`https://www.primereact.org/images/product/\${item.image}\`} alt={item.name} />
+                    <img className='w-7rem md:w-5rem md:shadow-2 md:mr-3 mb-3 md:mb-auto' src={\`https://primereact.org/images/product/\${item.image}\`} alt={item.name} />
                 </div>
                 <div className="flex-1">
                     <h5 className="mb-2">{item.name}</h5>

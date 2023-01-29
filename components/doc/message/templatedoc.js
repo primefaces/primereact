@@ -6,7 +6,7 @@ import { DocSectionText } from '../common/docsectiontext';
 export function TemplateDoc(props) {
     const content = (
         <div className="flex align-items-center">
-            <img alt="logo" src={'https://www.primereact.org/images/logo.png'} width="32" />
+            <img alt="logo" src={'/images/logo.png'} width="32" />
             <div className="ml-2">Always bet on Prime.</div>
         </div>
     );
@@ -31,7 +31,7 @@ import { Message } from 'primereact/message';
 export default function TemplateDemo() {
     const content = (
         <div className="flex align-items-center">
-            <img alt="logo" src="https://www.primereact.org/images/logo.png" width="32" />
+            <img alt="logo" src="https://primereact.org/images/logo.png" width="32" />
             <div className="ml-2">Always bet on Prime.</div>
         </div>
     );
@@ -59,7 +59,7 @@ import { Message } from 'primereact/message';
 export default function TemplateDemo() {
     const content = (
         <div className="flex align-items-center">
-            <img alt="logo" src="https://www.primereact.org/images/logo.png" width="32" />
+            <img alt="logo" src="https://primereact.org/images/logo.png" width="32" />
             <div className="ml-2">Always bet on Prime.</div>
         </div>
     );

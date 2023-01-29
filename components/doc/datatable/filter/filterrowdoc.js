@@ -237,7 +237,7 @@ export default function FilterRowDoc() {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt="flag" src="https://www.primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} width={30} />
+                <img alt="flag" src="https://primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} width={30} />
                 <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );
@@ -247,7 +247,7 @@ export default function FilterRowDoc() {
         const representative = rowData.representative;
         return (
             <React.Fragment>
-                <img alt={representative.name} src={\`https://www.primereact.org/images/avatar/\${representative.image}\`} width={32} style={{ verticalAlign: 'middle' }} />
+                <img alt={representative.name} src={\`https://primereact.org/images/avatar/\${representative.image}\`} width={32} style={{ verticalAlign: 'middle' }} />
                 <span className="vertical-align-middle ml-2">{representative.name}</span>
             </React.Fragment>
         );
@@ -391,7 +391,7 @@ export default function FilterRowDoc() {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt="flag" src="https://www.primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} width={30} />
+                <img alt="flag" src="https://primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} width={30} />
                 <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );
@@ -401,7 +401,7 @@ export default function FilterRowDoc() {
         const representative = rowData.representative;
         return (
             <React.Fragment>
-                <img alt={representative.name} src={\`https://www.primereact.org/images/avatar/\${representative.image}\`} width={32} style={{ verticalAlign: 'middle' }} />
+                <img alt={representative.name} src={\`https://primereact.org/images/avatar/\${representative.image}\`} width={32} style={{ verticalAlign: 'middle' }} />
                 <span className="vertical-align-middle ml-2">{representative.name}</span>
             </React.Fragment>
         );

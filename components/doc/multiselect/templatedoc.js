@@ -21,7 +21,7 @@ export function TemplateDoc(props) {
     const countryTemplate = (option) => {
         return (
             <div className="country-item">
-                <img alt={option.name} src="https://www.primereact.org/images/flag/flag_placeholder.png" />
+                <img alt={option.name} src="/images/flag/flag_placeholder.png" />
                 <div>{option.name}</div>
             </div>
         );
@@ -31,7 +31,7 @@ export function TemplateDoc(props) {
         if (option) {
             return (
                 <div className="country-item country-item-value">
-                    <img alt={option.name} src="https://www.primereact.org/images/flag/flag_placeholder.png" />
+                    <img alt={option.name} src="/images/flag/flag_placeholder.png" />
                     <div>{option.name}</div>
                 </div>
             );
@@ -78,7 +78,7 @@ export default function TemplateDocs() {
     const countryTemplate = (option) => {
         return (
             <div className="country-item flex">
-                <img alt={option.name} src="https://www.primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()} h-1 w-1 mr-2\`} />
+                <img alt={option.name} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()} h-1 w-1 mr-2\`} />
                 <div>{option.name}</div>
             </div>
         );
@@ -88,7 +88,7 @@ export default function TemplateDocs() {
         if (option) {
             return (
                 <div className="country-item country-item-value">
-                    <img alt={option.name} src="https://www.primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                    <img alt={option.name} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
                     <div>{option.name}</div>
                 </div>
             );
@@ -139,7 +139,7 @@ export default function TemplateDocs() {
     const countryTemplate = (option) => {
         return (
             <div className="country-item flex">
-                <img alt={option.name} src="https://www.primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()} h-1 w-1 mr-2\`} />
+                <img alt={option.name} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()} h-1 w-1 mr-2\`} />
                 <div>{option.name}</div>
             </div>
         );
@@ -149,7 +149,7 @@ export default function TemplateDocs() {
         if (option) {
             return (
                 <div className="country-item country-item-value">
-                    <img alt={option.name} src="https://www.primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                    <img alt={option.name} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
                     <div>{option.name}</div>
                 </div>
             );

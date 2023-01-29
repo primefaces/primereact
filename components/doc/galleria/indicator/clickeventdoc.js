@@ -68,8 +68,8 @@ export default function ClickEventDemo() {
         data: `
 /* PhotoService */
 {
-    itemImageSrc: 'https://www.primereact.org/images/galleria/galleria1.jpg',
-    thumbnailImageSrc: 'https://www.primereact.org/images/galleria/galleria1s.jpg',
+    itemImageSrc: 'https://primereact.org/images/galleria/galleria1.jpg',
+    thumbnailImageSrc: 'https://primereact.org/images/galleria/galleria1s.jpg',
     alt: 'Description for Image 1',
     title: 'Title 1'
 },

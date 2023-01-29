@@ -21,7 +21,7 @@ leftContent={leftContent} rightContent={rightContent}
 template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator
 
 <div className="p-3 text-center">
-    <img alt={contentFirst} src={\`https://www.primereact.org/images/nature/nature\${contentFirst + 1}.jpg\`} />
+    <img alt={contentFirst} src={\`/images/nature/nature\${contentFirst + 1}.jpg\`} />
 </div>
         `,
         javascript: `
@@ -45,7 +45,7 @@ export default function ContentDoc() {
             leftContent={leftContent} rightContent={rightContent}
             template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator>
             <div className="p-3 text-center">
-                <img alt={contentFirst} src={\`https://www.primereact.org/images/nature/nature\${contentFirst + 1}.jpg\`} />
+                <img alt={contentFirst} src={\`https://primereact.org/images/nature/nature\${contentFirst + 1}.jpg\`} />
             </div>
         </div>
     )
@@ -72,7 +72,7 @@ export default function ContentDoc() {
             leftContent={leftContent} rightContent={rightContent}
             template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator>
             <div className="p-3 text-center">
-                <img alt={contentFirst} src={\`https://www.primereact.org/images/nature/nature\${contentFirst + 1}.jpg\`} />
+                <img alt={contentFirst} src={\`https://primereact.org/images/nature/nature\${contentFirst + 1}.jpg\`} />
             </div>
         </div>
     )
@@ -97,7 +97,7 @@ export default function ContentDoc() {
                 ></Paginator>
 
                 <div className="p-3 text-center">
-                    <img alt={contentFirst} src={`https://www.primereact.org/images/nature/nature${contentFirst + 1}.jpg`} />
+                    <img alt={contentFirst} src={`/images/nature/nature${contentFirst + 1}.jpg`} />
                 </div>
             </div>
             <DocSectionCode code={code} />

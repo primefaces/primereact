@@ -527,7 +527,7 @@ const rightToolbarTemplate = () => {
 }
 
 const imageBodyTemplate = (rowData) => {
-    return <img src={\`https://www.primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} className="product-image" />
+    return <img src={\`https://primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} className="product-image" />
 }
 
 const priceBodyTemplate = (rowData) => {
@@ -604,7 +604,7 @@ return (
         </div>
 
         <Dialog visible={productDialog} style={{ width: '450px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
-            {product.image && <img src={\`https://www.primereact.org/images/product/\${product.image}\`} alt={product.image} className="product-image block m-auto pb-3" />}
+            {product.image && <img src={\`https://primereact.org/images/product/\${product.image}\`} alt={product.image} className="product-image block m-auto pb-3" />}
             <div className="field">
                 <label htmlFor="name">Name</label>
                 <InputText id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />
@@ -890,7 +890,7 @@ const rightToolbarTemplate = () => {
 }
 
 const imageBodyTemplate = (rowData) => {
-    return <img src={\`https://www.primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} className="product-image" />
+    return <img src={\`https://primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} className="product-image" />
 }
 
 const priceBodyTemplate = (rowData) => {
@@ -967,7 +967,7 @@ return (
         </div>
 
         <Dialog visible={productDialog} style={{ width: '450px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
-            {product.image && <img src={\`https://www.primereact.org/images/product/\${product.image}\`} alt={product.image} className="product-image block m-auto pb-3" />}
+            {product.image && <img src={\`https://primereact.org/images/product/\${product.image}\`} alt={product.image} className="product-image block m-auto pb-3" />}
             <div className="field">
                 <label htmlFor="name">Name</label>
                 <InputText id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />

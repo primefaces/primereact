@@ -55,7 +55,7 @@ export default function InlineDataScrollerDoc() {
     const itemTemplate = (data) => {
         return (
             <div className="product-item">
-            <img src={\`https://www.primereact.org/images/product/\${data.image}\`} alt={data.name} />
+            <img src={\`https://primereact.org/images/product/\${data.image}\`} alt={data.name} />
                 <div className="product-detail">
                     <div className="product-name">{data.name}</div>
                     <div className="product-description">{data.description}</div>
@@ -96,7 +96,7 @@ export default function InlineDataScrollerDoc() {
     const itemTemplate = (data) => {
         return (
             <div className="product-item">
-            <img src={\`https://www.primereact.org/images/product/\${data.image}\`} alt={data.name} />
+            <img src={\`https://primereact.org/images/product/\${data.image}\`} alt={data.name} />
                 <div className="product-detail">
                     <div className="product-name">{data.name}</div>
                     <div className="product-description">{data.description}</div>

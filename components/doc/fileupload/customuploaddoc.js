@@ -1,11 +1,8 @@
 import { FileUpload } from '../../lib/fileupload/FileUpload';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
-import getConfig from 'next/config';
 
 export function CustomUploadDoc(props) {
-    const uploadPath = getConfig().publicRuntimeConfig.uploadPath;
-
     const customBase64Uploader = async (event) => {
         // convert file to base64 encoded
         const file = event.files[0];
@@ -24,7 +21,7 @@ export function CustomUploadDoc(props) {
 
     const code = {
         basic: `
-<FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" customUpload uploadHandler={customBase64Uploader} />
+<FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" customUpload uploadHandler={customBase64Uploader} />
         `,
         javascript: `
 import React from 'react'; 
@@ -86,7 +83,7 @@ export default function CustomUploadDoc() {
                 <p>Uploading implementation can be overriden by enabling customUpload property and defining a custom upload handler event.</p>
             </DocSectionText>
             <div className="card">
-                <FileUpload mode="basic" name="demo[]" url={uploadPath} accept="image/*" customUpload uploadHandler={customBase64Uploader} />
+                <FileUpload mode="basic" name="demo[]" url={'/api/upload'} accept="image/*" customUpload uploadHandler={customBase64Uploader} />
             </div>
             <DocSectionCode code={code} />
         </>

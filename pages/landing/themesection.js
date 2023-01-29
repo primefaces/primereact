@@ -82,7 +82,7 @@ const ThemeSection = (props) => {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt="flag" src={`https://www.primereact.org/images/flag/flag_placeholder.png`} className={`flag flag-${rowData.country.code}`} width={30} />
+                <img alt="flag" src={`/images/flag/flag_placeholder.png`} className={`flag flag-${rowData.country.code}`} width={30} />
                 <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );
@@ -93,7 +93,7 @@ const ThemeSection = (props) => {
 
         return (
             <React.Fragment>
-                <img alt={representative.name} src={`https://www.primereact.org/images/avatar/${representative.image}`} width={32} style={{ verticalAlign: 'middle' }} />
+                <img alt={representative.name} src={`/images/avatar/${representative.image}`} width={32} style={{ verticalAlign: 'middle' }} />
                 <span className="vertical-align-middle ml-2">{representative.name}</span>
             </React.Fragment>
         );
@@ -139,7 +139,7 @@ const ThemeSection = (props) => {
                     more...
                 </a>
             </div>
-            <div className="themes-main flex mt-7 justify-content-center pad-section" style={{ backgroundImage: `url(https://www.primereact.org/images/landing-new/wave-${props.dark ? 'dark-alt' : 'light-alt'}.svg)`, backgroundSize: 'cover' }}>
+            <div className="themes-main flex mt-7 justify-content-center pad-section" style={{ backgroundImage: `url(images/landing-new/wave-${props.dark ? 'dark-alt' : 'light-alt'}.svg)`, backgroundSize: 'cover' }}>
                 <div className="box overflow-hidden z-1 p-5 table-container">
                     <DataTable
                         value={customers}

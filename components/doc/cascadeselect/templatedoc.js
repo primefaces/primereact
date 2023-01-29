@@ -181,7 +181,7 @@ export default function TemplateDoc() {
     const countryOptionTemplate = (option) => {
         return (
             <div className="country-item">
-                {option.states && <img alt={option.name} src="https://www.primereact.org/images/flag/flag_placeholder.png"
+                {option.states && <img alt={option.name} src="https://primereact.org/images/flag/flag_placeholder.png"
                 className={\`flag flag-\${option.code.toLowerCase()}\`} />}
                 {option.cities && <i className="pi pi-compass mr-2"/>}
                 {option.cname && <i className="pi pi-map-marker mr-2"/>}
@@ -283,7 +283,7 @@ export default function TemplateDoc() {
     const countryOptionTemplate = (option) => {
         return (
             <div className="country-item">
-                {option.states && <img alt={option.name} src="https://www.primereact.org/images/flag/flag_placeholder.png"
+                {option.states && <img alt={option.name} src="https://primereact.org/images/flag/flag_placeholder.png"
                 className={\`flag flag-\${option.code.toLowerCase()}\`} />}
                 {option.cities && <i className="pi pi-compass mr-2"/>}
                 {option.cname && <i className="pi pi-map-marker mr-2"/>}
