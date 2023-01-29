@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import React from 'react';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/inputtextarea/accessibilitydoc';
@@ -92,17 +91,14 @@ const InputTextareaDemo = () => {
                 <title>React Textarea Component</title>
                 <meta name="description" content="InputTextarea adds styling, key filtering and autoResize functionality to standard textarea element." />
             </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>InputTextarea</h1>
-                    <p>InputTextarea adds styling and autoResize functionality to standard textarea element.</p>
-                </div>
-                <DocActions github="/inputtextarea" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>InputTextarea</h1>
+                        <p>InputTextarea adds styling and autoResize functionality to standard textarea element.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

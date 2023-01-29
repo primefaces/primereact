@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/tabview/accessibilitydoc';
@@ -81,16 +80,14 @@ const TabViewDemo = () => {
                 <title>React Tabs Component</title>
                 <meta name="description" content="TabView is a container component to group content with tabs." />
             </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>TabView</h1>
-                    <p>TabView is a container component to group content with tabs.</p>
+            <div className="content-section doc">
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>TabView</h1>
+                        <p>TabView is a container component to group content with tabs.</p>
+                    </div>
+                    <DocSections docs={docs} />
                 </div>
-                <DocActions github="/tabview" />
-            </div>
-
-            <div className="content-section doc dataview-demo">
-                <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>
         </div>

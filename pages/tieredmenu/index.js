@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/tieredmenu/accessibilitydoc';
@@ -48,15 +47,14 @@ const TieredMenuDemo = () => {
                 <title>React TieredMenu Component</title>
                 <meta name="description" content="TieredMenu displays submenus in nested overlays." />
             </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>TieredMenu</h1>
-                    <p>TieredMenu displays submenus in nested overlays.</p>
-                </div>
-                <DocActions github="/tieredmenu" />
-            </div>
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>TieredMenu</h1>
+                        <p>TieredMenu displays submenus in nested overlays.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

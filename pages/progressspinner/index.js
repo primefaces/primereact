@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import React from 'react';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/progressspinner/accessibilitydoc';
@@ -49,17 +48,14 @@ const SkeletonDemo = () => {
                 <title>React ProgressSpinner Component</title>
                 <meta name="description" content="ProgressSpinner is a process status indicator." />
             </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>ProgressSpinner</h1>
-                    <p>ProgressSpinner is a process status indicator.</p>
-                </div>
-                <DocActions github="/progressspinner" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>ProgressSpinner</h1>
+                        <p>ProgressSpinner is a process status indicator.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/tooltip/accessibilitydoc';
@@ -90,17 +89,14 @@ const TooltipDemo = () => {
                 <title>React Tooltip Component</title>
                 <meta name="description" content="Tooltip functionality is integrated within various PrimeReact components." />
             </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Tooltip</h1>
-                    <p>Tooltip functionality is integrated within various PrimeReact components.</p>
-                </div>
-
-                <DocActions github="/tooltip" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Tooltip</h1>
+                        <p>Tooltip functionality is integrated within various PrimeReact components.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

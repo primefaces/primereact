@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import React from 'react';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/terminal/accessibilitydoc';
@@ -43,15 +42,14 @@ const TerminalDemo = () => {
                 <title>React Terminal Component</title>
                 <meta name="description" content="Terminal is a text based user interface." />
             </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Terminal</h1>
-                    <p>Terminal is a text based user interface.</p>
+            <div className="content-section doc">
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Terminal</h1>
+                        <p>Terminal is a text based user interface.</p>
+                    </div>
+                    <DocSections docs={docs} />
                 </div>
-                <DocActions github="/terminal" />
-            </div>
-            <div className="content-section doc terminal-demos">
-                <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>
         </div>

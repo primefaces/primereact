@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/treeselect/accessibilitydoc';
@@ -9,12 +8,12 @@ import { DefaultDoc } from '../../components/doc/treeselect/defaultdoc';
 import { DisabledDoc } from '../../components/doc/treeselect/disableddoc';
 import { FilterDoc } from '../../components/doc/treeselect/filterdoc';
 import { FloatLabelDoc } from '../../components/doc/treeselect/floatlabeldoc';
+import { FormikDoc } from '../../components/doc/treeselect/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/treeselect/form/hookformdoc';
 import { InvalidDoc } from '../../components/doc/treeselect/invaliddoc';
 import { MultipleDoc } from '../../components/doc/treeselect/multipledoc';
 import { ProgrammaticDoc } from '../../components/doc/treeselect/programmaticdoc';
 import { StyleDoc } from '../../components/doc/treeselect/styledoc';
-import { FormikDoc } from '../../components/doc/treeselect/form/formikdoc';
-import { HookFormDoc } from '../../components/doc/treeselect/form/hookformdoc';
 
 const TreeSelectDemo = () => {
     const docs = [
@@ -103,16 +102,14 @@ const TreeSelectDemo = () => {
                 <title>React TreeSelect Component</title>
                 <meta name="description" content="TreeSelect is a form component to choose from hierarchical data." />
             </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>TreeSelect</h1>
-                    <p>TreeSelect is a form component to choose from hierarchical data.</p>
+            <div className="content-section doc">
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>TreeSelect</h1>
+                        <p>TreeSelect is a form component to choose from hierarchical data.</p>
+                    </div>
+                    <DocSections docs={docs} />
                 </div>
-
-                <DocActions github="/treeselect" />
-            </div>
-            <div className="content-section doc treeselect-demo">
-                <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>
         </div>

@@ -19,7 +19,6 @@ import { SizesDoc } from '../../components/doc/button/sizesdoc';
 import { StyleDoc } from '../../components/doc/button/styledoc';
 import { TemplateDoc } from '../../components/doc/button/templatedoc';
 import { TextButtonsDoc } from '../../components/doc/button/textdoc';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 
@@ -138,16 +137,14 @@ const ButtonDemo = () => {
                 <title>React Button Component</title>
                 <meta name="description" content="Button is an extension to standard input element with icons and theming." />
             </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Button</h1>
-                    <p>Button is an extension to standard input element with icons and theming.</p>
+            <div className="content-section doc">
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Button</h1>
+                        <p>Button is an extension to standard input element with icons and theming.</p>
+                    </div>
+                    <DocSections docs={docs} />
                 </div>
-
-                <DocActions github="/button" />
-            </div>
-            <div className="content-section doc button-demo">
-                <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>
         </div>

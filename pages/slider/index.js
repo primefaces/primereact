@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import React from 'react';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/slider/accessibilitydoc';
@@ -67,16 +66,14 @@ const SliderDemo = () => {
                 <title>React Slider Component</title>
                 <meta name="description" content="Slider is a component to provide input with a drag handle." />
             </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Slider</h1>
-                    <p>Slider is a component to provide input with a drag handle.</p>
-                </div>
-                <DocActions github="/slider" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Slider</h1>
+                        <p>Slider is a component to provide input with a drag handle.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

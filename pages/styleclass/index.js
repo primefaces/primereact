@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import React from 'react';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AnimationDoc } from '../../components/doc/styleclass/animationdoc';
@@ -37,15 +36,14 @@ const StyleClassDemo = () => {
                 <title>React StyleClass Component</title>
                 <meta name="description" content="StyleClass manages css classes declaratively to during enter/leave animations or just to toggle classes on an element." />
             </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>StyleClass</h1>
-                    <p>StyleClass manages css classes declaratively to during enter/leave animations or just to toggle classes on an element.</p>
-                </div>
-                <DocActions github="/styleclass" />
-            </div>
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>StyleClass</h1>
+                        <p>StyleClass manages css classes declaratively to during enter/leave animations or just to toggle classes on an element.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

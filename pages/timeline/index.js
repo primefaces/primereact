@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import React from 'react';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/timeline/accessibilitydoc';
@@ -61,18 +60,14 @@ const TimelineDemo = () => {
                 <title>React Timeline Component</title>
                 <meta name="description" content="Timeline visualizes a series of chained events." />
             </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Timeline</h1>
-                    <p>Timeline visualizes a series of chained events.</p>
+            <div className="content-section doc">
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Timeline</h1>
+                        <p>Timeline visualizes a series of chained events.</p>
+                    </div>
+                    <DocSections docs={docs} />
                 </div>
-
-                <DocActions github="/timeline" />
-            </div>
-
-            <div className="content-section doc timeline-demo">
-                <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>
         </div>

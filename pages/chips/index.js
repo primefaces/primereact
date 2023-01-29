@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import React from 'react';
 import { AccessibilityDoc } from '../../components/doc/chips/accessibilitydoc';
-
 import { BasicDoc } from '../../components/doc/chips/basicdoc';
 import { DisabledDoc } from '../../components/doc/chips/disableddoc';
 import { FloatLabelDoc } from '../../components/doc/chips/floatlabeldoc';
@@ -98,7 +97,6 @@ const ChipsDemo = () => {
                 <title>React Chips Component</title>
                 <meta name="description" content="Chips is used to enter multiple values on an input field." />
             </Head>
-
             <div className="content-section doc">
                 <div className="doc-main">
                     <div className="doc-intro">

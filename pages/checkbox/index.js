@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import React from 'react';
 import { AccessibilityDoc } from '../../components/doc/checkbox/accessibilitydoc';
-
 import { BasicDoc } from '../../components/doc/checkbox/basicdoc';
 import { DisabledDoc } from '../../components/doc/checkbox/disableddoc';
 import { DynamicDoc } from '../../components/doc/checkbox/dynamicdoc';
@@ -11,7 +10,6 @@ import { GroupDoc } from '../../components/doc/checkbox/groupdoc';
 import { ImportDoc } from '../../components/doc/checkbox/importdoc';
 import { InvalidDoc } from '../../components/doc/checkbox/invaliddoc';
 import { StyleDoc } from '../../components/doc/checkbox/styledoc';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 
@@ -87,17 +85,14 @@ const CheckboxDemo = () => {
                 <title>React Checkbox Component</title>
                 <meta name="description" content="Checkbox is an extension to standard checkbox element with theming." />
             </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Checkbox</h1>
-                    <p>Checkbox is an extension to standard checkbox element with theming.</p>
-                </div>
-                <DocActions github="/checkbox" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Checkbox</h1>
+                        <p>Checkbox is an extension to standard checkbox element with theming.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

@@ -1,20 +1,19 @@
 import Head from 'next/head';
-import React, { useState } from 'react';
-import { DocActions } from '../../components/doc/common/docactions';
+import React from 'react';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/password/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/password/basicdoc';
 import { DisabledDoc } from '../../components/doc/password/disableddoc';
 import { FloatLabelDoc } from '../../components/doc/password/floatlabeldoc';
+import { FormikDoc } from '../../components/doc/password/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/password/form/hookformdoc';
 import { ImportDoc } from '../../components/doc/password/importdoc';
 import { InvalidDoc } from '../../components/doc/password/invaliddoc';
 import { PasswordMeter } from '../../components/doc/password/passwordmeterdoc';
 import { ShowPassword } from '../../components/doc/password/showpassworddoc';
 import { StyleDoc } from '../../components/doc/password/styledoc';
 import { Templating } from '../../components/doc/password/templatingdoc';
-import { FormikDoc } from '../../components/doc/password/form/formikdoc';
-import { HookFormDoc } from '../../components/doc/password/form/hookformdoc';
 
 const PasswordDemo = () => {
     const docs = [
@@ -98,16 +97,14 @@ const PasswordDemo = () => {
                 <title>React Password Component</title>
                 <meta name="description" content="Password displays strength indicator for password fields." />
             </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Password</h1>
-                    <p>Password displays strength indicator for password fields.</p>
-                </div>
-
-                <DocActions github="/password" />
-            </div>
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Password</h1>
+                        <p>Password displays strength indicator for password fields.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

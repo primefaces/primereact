@@ -8,7 +8,6 @@ import { PositionDoc } from '../../components/doc/badge/positiondoc';
 import { SeverityDoc } from '../../components/doc/badge/severitydoc';
 import { SizeDoc } from '../../components/doc/badge/sizedoc';
 import { StyleDoc } from '../../components/doc/badge/styledoc';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 
@@ -67,17 +66,14 @@ const BadgeDemo = () => {
                 <title>React Badge Component</title>
                 <meta name="description" content="Badge is a small status indicator for another element." />
             </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Badge</h1>
-                    <p>Badge is a small status indicator for another element.</p>
-                </div>
-                <DocActions github="/badge" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Badge</h1>
+                        <p>Badge is a small status indicator for another element.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/contextmenu/accessibilitydoc';
@@ -48,19 +47,18 @@ const ContextMenuDemo = () => {
                 <title>React ContextMenu Component</title>
                 <meta name="description" content="ContextMenu displays an overlay menu on right click of its target." />
             </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>ContextMenu</h1>
-                    <p>
-                        ContextMenu displays an overlay menu on right click of its target. Note that components like DataTable has special integration with ContextMenu. Refer to documentation of the individual documentation of the components having a
-                        special integration.
-                    </p>
-                </div>
-                <DocActions github="/contextmenu" />
-            </div>
 
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>ContextMenu</h1>
+                        <p>
+                            ContextMenu displays an overlay menu on right click of its target. Note that components like DataTable has special integration with ContextMenu. Refer to documentation of the individual documentation of the components having a
+                            special integration.
+                        </p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

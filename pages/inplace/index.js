@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import React from 'react';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/inplace/accessibilitydoc';
@@ -65,17 +64,14 @@ const ChipDemo = () => {
                 <title>React Inplace Component</title>
                 <meta name="description" content="Inplace provides an easy to do editing and display at the same time where clicking the output displays the actual content." />
             </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Inplace</h1>
-                    <p>Inplace provides an easy to do editing and display at the same time where clicking the output displays the actual content.</p>
-                </div>
-                <DocActions github="/inplace" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Inplace</h1>
+                        <p>Inplace provides an easy to do editing and display at the same time where clicking the output displays the actual content.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

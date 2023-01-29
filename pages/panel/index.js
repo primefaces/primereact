@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/panel/accessibilitydoc';
@@ -54,16 +53,14 @@ const PanelDemo = () => {
                 <title>React Panel Component</title>
                 <meta name="description" content="Panel is a container component with an optional content toggle feature." />
             </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Panel</h1>
-                    <p>Panel is a container component with an optional content toggle feature.</p>
-                </div>
-                <DocActions github="/panel" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Panel</h1>
+                        <p>Panel is a container component with an optional content toggle feature.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

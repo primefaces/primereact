@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import React from 'react';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/inputmask/accessibilitydoc';
@@ -98,17 +97,14 @@ const InputMaskDemo = () => {
                 <title>React Mask Component</title>
                 <meta name="description" content="InputMask component is used to enter input in a certain format such as numeric, date, currency, email and phone." />
             </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>InputMask</h1>
-                    <p>InputMask component is used to enter input in a certain format such as numeric, date, currency, email and phone.</p>
-                </div>
-                <DocActions github="/inputmask" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>InputMask</h1>
+                        <p>InputMask component is used to enter input in a certain format such as numeric, date, currency, email and phone.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

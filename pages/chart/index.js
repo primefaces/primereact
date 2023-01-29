@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { AccessibilityDoc } from '../../components/doc/chart/accessibilitydoc';
-
 import { BasicDoc } from '../../components/doc/chart/basicdoc';
 import { ComboDoc } from '../../components/doc/chart/combodoc';
 import { DoughnutChartDoc } from '../../components/doc/chart/doughnutdoc';
@@ -14,7 +13,6 @@ import { PolarAreaDoc } from '../../components/doc/chart/polarareadoc';
 import { RadarDoc } from '../../components/doc/chart/radardoc';
 import { StackedBarDoc } from '../../components/doc/chart/stackedbardoc';
 import { VerticalBarDoc } from '../../components/doc/chart/verticalbardoc';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 
@@ -100,24 +98,23 @@ const ChartDemo = () => {
     return (
         <div>
             <Head>
-                <title>React Chart</title>
+                <title>React Chart Component</title>
+                <meta name="description" content="Chart components are based on Chart.js, an open source HTML5 based charting library." />
             </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Chart</h1>
-                    <p>
-                        Chart components are based on{' '}
-                        <a href="http://www.chartjs.org/" className="text-primary-500 no-underline hover:underline">
-                            Chart.js
-                        </a>
-                        , an open source HTML5 based charting library.
-                    </p>
-                </div>
-                <DocActions github="/chart" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Chart</h1>
+                        <p>
+                            Chart components are based on{' '}
+                            <a href="http://www.chartjs.org/" className="text-primary-500 no-underline hover:underline">
+                                Chart.js
+                            </a>
+                            , an open source HTML5 based charting library.
+                        </p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

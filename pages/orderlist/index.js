@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/orderlist/accessibilitydoc';
@@ -60,17 +59,14 @@ const OrderListDemo = () => {
                 <title>React OrderList Component</title>
                 <meta name="description" content="OrderList is used to sort a collection." />
             </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>OrderList</h1>
-                    <p>OrderList is used to sort a collection.</p>
+            <div className="content-section doc">
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>OrderList</h1>
+                        <p>OrderList is used to sort a collection.</p>
+                    </div>
+                    <DocSections docs={docs} />
                 </div>
-
-                <DocActions github="/orderlist" />
-            </div>
-
-            <div className="content-section doc implementation">
-                <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>
         </div>

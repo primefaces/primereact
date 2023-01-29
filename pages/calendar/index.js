@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { AccessibilityDoc } from '../../components/doc/calendar/accessibilitydoc';
-
 import { BasicDoc } from '../../components/doc/calendar/basicdoc';
 import { ButtonBarDoc } from '../../components/doc/calendar/buttonbardoc';
 import { DateFormatDoc } from '../../components/doc/calendar/dateformatdoc';
@@ -23,7 +22,6 @@ import { Time12Doc } from '../../components/doc/calendar/time12doc';
 import { Time24Doc } from '../../components/doc/calendar/time24doc';
 import { TouchUIDoc } from '../../components/doc/calendar/touchuidoc';
 import { YearPickerDoc } from '../../components/doc/calendar/yearpickerdoc';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 
@@ -164,16 +162,14 @@ const CalendarDemo = () => {
                 <title>React Calendar Component</title>
                 <meta name="description" content="Calendar, also known as DatePicker, is a form component to work with dates." />
             </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Calendar</h1>
-                    <p>Calendar, also known as DatePicker, is a form component to work with dates.</p>
-                </div>
-                <DocActions github="/calendar" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Calendar</h1>
+                        <p>Calendar, also known as DatePicker, is a form component to work with dates.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/image/accessibilitydoc';
@@ -60,18 +59,14 @@ const ImageDemo = () => {
                 <title>React Image Component</title>
                 <meta name="description" content="Displays a single image with preview and tranformation options." />
             </Head>
-            <div className="content-section introduction">
-                <div>
-                    <div className="feature-intro">
+            <div className="content-section doc">
+                <div className="doc-main">
+                    <div className="doc-intro">
                         <h1>Image</h1>
                         <p>Displays a single image with preview and tranformation options.</p>
                     </div>
+                    <DocSections docs={docs} />
                 </div>
-                <DocActions github="/image" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>
         </div>

@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { AccessibilityDoc } from '../../components/doc/colorpicker/accessibilitydoc';
-
 import { DisabledDoc } from '../../components/doc/colorpicker/disableddoc';
 import { FormikDoc } from '../../components/doc/colorpicker/form/formikdoc';
 import { HookFormDoc } from '../../components/doc/colorpicker/form/hookformdoc';
@@ -9,7 +8,6 @@ import { ImportDoc } from '../../components/doc/colorpicker/importdoc';
 import { InlineDoc } from '../../components/doc/colorpicker/inlinedoc';
 import { OverlayDoc } from '../../components/doc/colorpicker/overlaydoc';
 import { StyleDoc } from '../../components/doc/colorpicker/styledoc';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 
@@ -80,15 +78,14 @@ const ColorPickerDemo = () => {
                 <title>React ColorPicker Component</title>
                 <meta name="description" content="ColorPicker is an input component to select a color." />
             </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>ColorPicker</h1>
-                    <p>ColorPicker is an input component to select a color.</p>
-                </div>
-                <DocActions github="/colorpicker" />
-            </div>
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>ColorPicker</h1>
+                        <p>ColorPicker is an input component to select a color.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

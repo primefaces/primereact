@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/inputnumber/accessibilitydoc';
@@ -109,17 +108,14 @@ const InputNumberDemo = () => {
                 <title>React InputNumber Component</title>
                 <meta name="description" content="InputNumber is an input component to provide numerical input." />
             </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>InputNumber</h1>
-                    <p>InputNumber is an input component to provide numerical input.</p>
-                </div>
-
-                <DocActions github="/inputnumber" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>InputNumber</h1>
+                        <p>InputNumber is an input component to provide numerical input.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

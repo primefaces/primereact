@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/message/accessibilitydoc';
@@ -60,16 +59,14 @@ const MessageDemo = () => {
                 <title>React Message Component</title>
                 <meta name="description" content="Message component displays information related to another element such as invalid input." />
             </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Message</h1>
-                    <p>Message component displays information related to another element such as invalid input.</p>
-                </div>
-                <DocActions github="/message" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Message</h1>
+                        <p>Message component displays information related to another element such as invalid input.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

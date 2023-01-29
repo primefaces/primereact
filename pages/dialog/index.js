@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/dialog/accessibilitydoc';
@@ -78,16 +77,14 @@ const DialogDemo = () => {
                 <title>React Dialog Component</title>
                 <meta name="description" content="Dialog is a container to display content in an overlay window." />
             </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Dialog</h1>
-                    <p>Dialog is a container to display content in an overlay window.</p>
-                </div>
-                <DocActions github="/dialog" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Dialog</h1>
+                        <p>Dialog is a container to display content in an overlay window.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

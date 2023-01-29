@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/paginator/accessibilitydoc';
@@ -54,17 +53,14 @@ const PaginatorDemo = () => {
                 <title>React Paginator Component</title>
                 <meta name="description" content="Paginator is a generic widget to display content in paged format." />
             </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Paginator</h1>
-                    <p>Paginator is a generic widget to display content in paged format.</p>
-                </div>
-
-                <DocActions github="/paginator" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Paginator</h1>
+                        <p>Paginator is a generic widget to display content in paged format.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

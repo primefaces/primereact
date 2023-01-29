@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import React from 'react';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/editor/accessibilitydoc';
@@ -80,17 +79,14 @@ const EditorDemo = () => {
                 <title>React Editor Component</title>
                 <meta name="description" content="Editor is rich text editor component based on Quill." />
             </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Editor</h1>
-                    <p>Editor is rich text editor component based on Quill.</p>
-                </div>
-                <DocActions github="/editor" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Editor</h1>
+                        <p>Editor is rich text editor component based on Quill.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

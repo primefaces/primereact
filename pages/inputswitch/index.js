@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/inputswitch/accessibilitydoc';
@@ -80,16 +79,14 @@ const InputSwitchDemo = () => {
                 <title>React InputSwitch Component</title>
                 <meta name="description" content="InputSwitch is used to select a boolean value." />
             </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>InputSwitch</h1>
-                    <p>InputSwitch is used to select a boolean value.</p>
-                </div>
-                <DocActions github="/inputswitch" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>InputSwitch</h1>
+                        <p>InputSwitch is used to select a boolean value.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

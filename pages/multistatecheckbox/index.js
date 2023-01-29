@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/multistatecheckbox/accessibilitydoc';
@@ -74,17 +73,14 @@ const MultiStateCheckboxDemo = () => {
                 <title>React MultiStateCheckbox Component</title>
                 <meta name="description" content="MultiStateCheckbox is used to select a state from given multiple states." />
             </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>MultiStateCheckbox</h1>
-                    <p>MultiStateCheckbox is used to select a state from given multiple states.</p>
-                </div>
-
-                <DocActions github="/multistatecheckbox" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>MultiStateCheckbox</h1>
+                        <p>MultiStateCheckbox is used to select a state from given multiple states.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

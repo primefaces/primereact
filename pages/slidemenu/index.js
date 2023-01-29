@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/slidemenu/accessibilitydoc';
@@ -48,15 +47,14 @@ const SlideMenuDemo = () => {
                 <title>React SlideMenu Component</title>
                 <meta name="description" content="SlideMenu displays submenus with a slide animation." />
             </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Slide Menu</h1>
-                    <p>SlideMenu displays submenus with a slide animation.</p>
-                </div>
-                <DocActions github="/slidemenu" />
-            </div>
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Slide Menu</h1>
+                        <p>SlideMenu displays submenus with a slide animation.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

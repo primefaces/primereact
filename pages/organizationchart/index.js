@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/organizationchart/accessibilitydoc';
@@ -48,17 +47,14 @@ const OrganizationChartDemo = () => {
                 <title>React OrganizationChart Component</title>
                 <meta name="description" content="OrganizationChart visualizes hierarchical organization data." />
             </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>OrganizationChart</h1>
-                    <p>OrganizationChart visualizes hierarchical organization data.</p>
+            <div className="content-section doc">
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>OrganizationChart</h1>
+                        <p>OrganizationChart visualizes hierarchical organization data.</p>
+                    </div>
+                    <DocSections docs={docs} />
                 </div>
-
-                <DocActions github="/organizationchart" />
-            </div>
-
-            <div className="content-section doc organizationchart-demo">
-                <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>
         </div>

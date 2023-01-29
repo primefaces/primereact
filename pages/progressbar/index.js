@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import React from 'react';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/progressbar/accessibilitydoc';
@@ -61,17 +60,14 @@ const ProgressBarDemo = () => {
                 <title>React ProgressBar Component</title>
                 <meta name="description" content="ProgressBar is a process status indicator." />
             </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>ProgressBar</h1>
-                    <p>ProgressBar is a process status indicator.</p>
-                </div>
-                <DocActions github="/progressbar" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>ProgressBar</h1>
+                        <p>ProgressBar is a process status indicator.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

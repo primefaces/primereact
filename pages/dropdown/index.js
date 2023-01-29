@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/dropdown/accessibilitydoc';
@@ -130,16 +129,14 @@ const DropdownDemo = () => {
                 <title>React Select Component</title>
                 <meta name="description" content="Dropdown also known as Select, is used to choose an item from a collection of options." />
             </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Dropdown</h1>
-                    <p>Dropdown also known as Select, is used to choose an item from a collection of options.</p>
+            <div className="content-section doc">
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Dropdown</h1>
+                        <p>Dropdown also known as Select, is used to choose an item from a collection of options.</p>
+                    </div>
+                    <DocSections docs={docs} />
                 </div>
-                <DocActions github="/dropdown" />
-            </div>
-
-            <div className="content-section doc dropdown-demo">
-                <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>
         </div>

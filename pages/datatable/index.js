@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/datatable/accessibilitydoc';
@@ -456,17 +455,14 @@ const DataTableDemo = () => {
                 <title>React Table Component</title>
                 <meta name="description" content="DataTable displays data in tabular format" />
             </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>DataTable</h1>
-                    <p>DataTable displays data in tabular format.</p>
+            <div className="content-section doc">
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>DataTable</h1>
+                        <p>DataTable displays data in tabular format.</p>
+                    </div>
+                    <DocSections docs={docs} />
                 </div>
-
-                <DocActions github="/datatable" />
-            </div>
-
-            <div className="content-section doc datatable-doc-demo">
-                <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>
         </div>

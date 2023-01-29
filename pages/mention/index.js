@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/mention/accessibilitydoc';
@@ -91,17 +90,14 @@ const MentionDemo = () => {
                 <title>React Mention Component</title>
                 <meta name="description" content="Mention component is used to refer someone or something." />
             </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Mention</h1>
-                    <p>Mention component is used to refer someone or something.</p>
+            <div className="content-section doc">
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Mention</h1>
+                        <p>Mention component is used to refer someone or something.</p>
+                    </div>
+                    <DocSections docs={docs} />
                 </div>
-
-                <DocActions github="/mention" />
-            </div>
-
-            <div className="content-section doc multiselect-demo">
-                <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>
         </div>

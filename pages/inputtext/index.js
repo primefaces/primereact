@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import React from 'react';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/inputtext/accessibilitydoc';
@@ -104,17 +103,14 @@ const InputTextDemo = () => {
                 <title>React InputText Component</title>
                 <meta name="description" content="InputText is an extension to standard input element with theming and keyfiltering." />
             </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>InputText</h1>
-                    <p>InputText is an extension to standard input element with theming and keyfiltering.</p>
-                </div>
-                <DocActions github="/inputtext" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>InputText</h1>
+                        <p>InputText is an extension to standard input element with theming and keyfiltering.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

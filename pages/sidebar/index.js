@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/sidebar/accessibilitydoc';
@@ -66,16 +65,14 @@ const SidebarDemo = () => {
                 <title>React Sidebar Component</title>
                 <meta name="description" content="Sidebar, also known as Drawer, is a container component displayed as an overlay." />
             </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Sidebar</h1>
-                    <p>Sidebar, also known as Drawer, is a container component displayed as an overlay.</p>
-                </div>
-                <DocActions github="/sidebar" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Sidebar</h1>
+                        <p>Sidebar, also known as Drawer, is a container component displayed as an overlay.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

@@ -4,7 +4,6 @@ import { BasicDoc } from '../../components/doc/breadcrumb/basicdoc';
 import { ImportDoc } from '../../components/doc/breadcrumb/importdoc';
 import { StyleDoc } from '../../components/doc/breadcrumb/styledoc';
 import { TemplateDoc } from '../../components/doc/breadcrumb/templatedoc';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 
@@ -48,16 +47,14 @@ const BreadCrumbDemo = () => {
                 <title>React BreadCrumb Component</title>
                 <meta name="description" content="Breadcrumb provides contextual information about page hierarchy." />
             </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Breadcrumb</h1>
-                    <p>Breadcrumb provides contextual information about page hierarchy.</p>
-                </div>
-                <DocActions github="/breadcrumb" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Breadcrumb</h1>
+                        <p>Breadcrumb provides contextual information about page hierarchy.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

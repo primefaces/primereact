@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/multiselect/accessibilitydoc';
@@ -123,16 +122,14 @@ const MultiSelectDemo = () => {
                 <title>React MultiSelect Component</title>
                 <meta name="description" content="MultiSelect is used to select multiple items from a collection." />
             </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>MultiSelect</h1>
-                    <p>MultiSelect is used to select multiple items from a collection.</p>
+            <div className="content-section doc">
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>MultiSelect</h1>
+                        <p>MultiSelect is used to select multiple items from a collection.</p>
+                    </div>
+                    <DocSections docs={docs} />
                 </div>
-
-                <DocActions github="/multiselect" />
-            </div>
-            <div className="content-section doc multiselect-demo">
-                <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>
         </div>

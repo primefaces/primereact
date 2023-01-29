@@ -11,7 +11,6 @@ import { ImportDoc } from '../../components/doc/cascadeselect/importdoc';
 import { InvalidDoc } from '../../components/doc/cascadeselect/invaliddoc';
 import { StyleDoc } from '../../components/doc/cascadeselect/styledoc';
 import { TemplateDoc } from '../../components/doc/cascadeselect/templatedoc';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 
@@ -87,15 +86,14 @@ const CascadeSelectDemo = () => {
                 <title>React CascadeSelect Component</title>
                 <meta name="description" content="CascadeSelect is a form component to select a value from a nested structure of options." />
             </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>CascadeSelect</h1>
-                    <p>CascadeSelect is a form component to select a value from a nested structure of options.</p>
-                </div>
-                <DocActions github="/cascadeselect" />
-            </div>
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>CascadeSelect</h1>
+                        <p>CascadeSelect is a form component to select a value from a nested structure of options.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

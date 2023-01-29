@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import React from 'react';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/scrolltop/accessibilitydoc';
@@ -49,17 +48,14 @@ const ScrollTopDemo = () => {
                 <title>React ScrollTop Component</title>
                 <meta name="description" content="ScrollTop gets displayed after a certain scroll position and used to navigates to the top of the page quickly." />
             </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>ScrollTop</h1>
-                    <p>ScrollTop gets displayed after a certain scroll position and used to navigates to the top of the page quickly.</p>
-                </div>
-                <DocActions github="/scrolltop" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>ScrollTop</h1>
+                        <p>ScrollTop gets displayed after a certain scroll position and used to navigates to the top of the page quickly.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

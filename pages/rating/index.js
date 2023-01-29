@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import React from 'react';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/rating/accessibilitydoc';
@@ -74,17 +73,14 @@ const RatingDemo = () => {
                 <title>React Rating Component</title>
                 <meta name="description" content="Rating component is a star based selection input." />
             </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Rating</h1>
-                    <p>Rating component is a star based selection input.</p>
-                </div>
-
-                <DocActions github="/rating" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Rating</h1>
+                        <p>Rating component is a star based selection input.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

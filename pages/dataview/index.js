@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/dataview/accessibilitydoc';
@@ -48,17 +47,14 @@ const DataViewDemo = () => {
                 <title>React DataView Component</title>
                 <meta name="description" content="DataView displays data in grid or list layout with pagination and sorting features." />
             </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>DataView</h1>
-                    <p>DataView displays data in grid or list layout with pagination and sorting features.</p>
-                </div>
-
-                <DocActions github="/dataview" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>DataView</h1>
+                        <p>DataView displays data in grid or list layout with pagination and sorting features.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

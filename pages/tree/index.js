@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/tree/accessibilitydoc';
@@ -128,17 +127,14 @@ const TreeDemo = () => {
                 <title>React Tree Component</title>
                 <meta name="description" content="Tree is used to display hierarchical data." />
             </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Tree</h1>
-                    <p>Tree is used to display hierarchical data.</p>
-                </div>
-
-                <DocActions github="/tree" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Tree</h1>
+                        <p>Tree is used to display hierarchical data.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

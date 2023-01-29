@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/splitter/accessibilitydoc';
@@ -63,16 +62,14 @@ const SplitterDemo = () => {
                 <title>React Splitter Component</title>
                 <meta name="description" content="Splitter is utilized to separate and resize panels." />
             </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Splitter</h1>
-                    <p>Splitter is utilized to separate and resize panels.</p>
-                </div>
-                <DocActions github="/splitter" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Splitter</h1>
+                        <p>Splitter is utilized to separate and resize panels.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

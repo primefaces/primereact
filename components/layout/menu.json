@@ -180,10 +180,6 @@
                             "to": "/virtualscroller"
                         },
                         {
-                            "name": "Google Maps",
-                            "to": "/gmap"
-                        },
-                        {
                             "name": "OrderList",
                             "to": "/orderlist"
                         },
@@ -431,10 +427,6 @@
                         {
                             "name": "Ripple",
                             "to": "/ripple"
-                        },
-                        {
-                            "name": "Captcha",
-                            "to": "/captcha"
                         },
                         {
                             "name": "Tag",

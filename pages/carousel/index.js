@@ -7,7 +7,6 @@ import { NumScrollDoc } from '../../components/doc/carousel/numscrolldoc';
 import { ResponsiveDoc } from '../../components/doc/carousel/responsivedoc';
 import { StyleDoc } from '../../components/doc/carousel/styledoc';
 import { VerticalDoc } from '../../components/doc/carousel/verticaldoc';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 
@@ -66,16 +65,14 @@ const CarouselDemo = () => {
                 <title>React Carousel Component</title>
                 <meta name="description" content="Carousel is a content slider featuring various customization options." />
             </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Carousel</h1>
-                    <p>Carousel is a content slider featuring various customization options.</p>
+            <div className="content-section doc">
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Carousel</h1>
+                        <p>Carousel is a content slider featuring various customization options.</p>
+                    </div>
+                    <DocSections docs={docs} />
                 </div>
-                <DocActions github="/carousel" />
-            </div>
-
-            <div className="content-section doc carousel-demo">
-                <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>
         </div>

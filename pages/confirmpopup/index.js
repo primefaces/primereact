@@ -1,9 +1,7 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/confirmpopup/accessibilitydoc';
-
 import { BasicDoc } from '../../components/doc/confirmpopup/basicdoc';
 import { DeclarativeDoc } from '../../components/doc/confirmpopup/declarativedoc';
 import { ImportDoc } from '../../components/doc/confirmpopup/importdoc';
@@ -49,16 +47,14 @@ const ConfirmPopupDemo = () => {
                 <title>React Confirmation Popup Component</title>
                 <meta name="description" content="ConfirmPopup is an easy to use and customizable Confirmation API using a popover." />
             </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>ConfirmPopup</h1>
-                    <p>ConfirmPopup is an easy to use and customizable Confirmation API using a popover.</p>
-                </div>
-                <DocActions github="/confirmpopup" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>ConfirmPopup</h1>
+                        <p>ConfirmPopup is an easy to use and customizable Confirmation API using a popover.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

@@ -7,7 +7,6 @@ import { ImageDoc } from '../../components/doc/chip/imagedoc';
 import { ImportDoc } from '../../components/doc/chip/importdoc';
 import { StyleDoc } from '../../components/doc/chip/styledoc';
 import { TemplateDoc } from '../../components/doc/chip/templatedoc';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 
@@ -61,17 +60,14 @@ const ChipDemo = () => {
                 <title>React Chip Component</title>
                 <meta name="description" content="Chip represents entities using icons, labels and images." />
             </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Chip</h1>
-                    <p>Chip represents entities using icons, labels and images.</p>
-                </div>
-                <DocActions github="/chip" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Chip</h1>
+                        <p>Chip represents entities using icons, labels and images.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

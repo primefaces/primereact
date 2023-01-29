@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/dock/accessibilitydoc';
@@ -48,17 +47,14 @@ const DockDemo = () => {
                 <title>React Dock Component</title>
                 <meta name="description" content="Dock is a navigation component consisting of menuitems." />
             </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Dock</h1>
-                    <p>Dock is a navigation component consisting of menuitems.</p>
+            <div className="content-section doc">
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Dock</h1>
+                        <p>Dock is a navigation component consisting of menuitems.</p>
+                    </div>
+                    <DocSections docs={docs} />
                 </div>
-
-                <DocActions github="/dock" />
-            </div>
-
-            <div className="content-section doc dock-demo">
-                <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>
         </div>

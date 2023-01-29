@@ -6,7 +6,6 @@ import { DocumentDoc } from '../../components/doc/blockui/documentdoc';
 import { ImportDoc } from '../../components/doc/blockui/importdoc';
 import { StyleDoc } from '../../components/doc/blockui/styledoc';
 import { TemplateDoc } from '../../components/doc/blockui/templatedoc';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 
@@ -55,17 +54,14 @@ const BlockUIDemo = () => {
                 <title>React BlockUI Component</title>
                 <meta name="description" content="BlockUI can block certain elements or the whole page." />
             </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>BlockUI</h1>
-                    <p>BlockUI can block certain elements or the whole page.</p>
-                </div>
-                <DocActions github="/blockui" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>BlockUI</h1>
+                        <p>BlockUI can block certain elements or the whole page.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

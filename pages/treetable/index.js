@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import React from 'react';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/treetable/accessibilitydoc';
@@ -251,18 +250,14 @@ const TreeTableDemo = () => {
                 <title>React TreeTable Component</title>
                 <meta name="description" content="TreeTable is used to display hierarchical data in tabular format." />
             </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>TreeTable</h1>
-                    <p>TreeTable is used to display hierarchical data in tabular format.</p>
-                </div>
-
-                <DocActions github="/treetable" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>TreeTable</h1>
+                        <p>TreeTable is used to display hierarchical data in tabular format.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

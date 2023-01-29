@@ -1,16 +1,15 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/keyfilter/accessibilitydoc';
 import { AlphabeticDoc } from '../../components/doc/keyfilter/alphabeticdoc';
 import { AlphanumbericDoc } from '../../components/doc/keyfilter/alphanumberdoc';
 import { HexDoc } from '../../components/doc/keyfilter/hexdoc';
+import { ImportDoc } from '../../components/doc/keyfilter/importdoc';
 import { IntegersDoc } from '../../components/doc/keyfilter/integersdoc';
 import { MoneyDoc } from '../../components/doc/keyfilter/moneydoc';
 import { NumbersDoc } from '../../components/doc/keyfilter/numbersdoc';
 import { RegexDoc } from '../../components/doc/keyfilter/regexdoc';
-import { ImportDoc } from '../../components/doc/keyfilter/importdoc';
 
 const KeyFilterDemo = () => {
     const docs = [
@@ -72,16 +71,14 @@ const KeyFilterDemo = () => {
                 <title>React KeyFilter Component</title>
                 <meta name="description" content="KeyFilter feature restricts user input based on a regular expression." />
             </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>KeyFilter</h1>
-                    <p>KeyFilter feature restricts user input based on a regular expression.</p>
-                </div>
-                <DocActions github="/keyfilter" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>KeyFilter</h1>
+                        <p>KeyFilter feature restricts user input based on a regular expression.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/steps/accessibilitydoc';
@@ -48,16 +47,14 @@ const StepsDemo = () => {
                 <title>React Stepper Component</title>
                 <meta name="description" content="Steps also known as Stepper, is an indicator for the steps in a workflow. Layout of steps component is optimized for responsive design." />
             </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Steps</h1>
-                    <p>Steps also known as Stepper, is an indicator for the steps in a workflow. Layout of steps component is optimized for responsive design.</p>
+            <div className="content-section doc">
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Steps</h1>
+                        <p>Steps also known as Stepper, is an indicator for the steps in a workflow. Layout of steps component is optimized for responsive design.</p>
+                    </div>
+                    <DocSections docs={docs} />
                 </div>
-                <DocActions github="/steps" />
-            </div>
-
-            <div className="content-section doc steps-demo">
-                <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>
         </div>

@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import React from 'react';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/picklist/accessibilitydoc';
@@ -43,17 +42,14 @@ const PickListDemo = () => {
                 <title>React PickList Component</title>
                 <meta name="description" content="PickList is used to reorder items between different lists." />
             </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>PickList</h1>
-                    <p>PickList is used to reorder items between different lists.</p>
-                </div>
-
-                <DocActions github="/picklist" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>PickList</h1>
+                        <p>PickList is used to reorder items between different lists.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

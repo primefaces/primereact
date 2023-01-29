@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/datascroller/accessibilitydoc';
@@ -54,17 +53,14 @@ const DataScrollerDemo = () => {
                 <title>React DataScroller Component</title>
                 <meta name="description" content="DataScroller displays data with on demand loading using scroll." />
             </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>DataScroller</h1>
-                    <p>DataScroller displays data with on demand loading using scroll.</p>
+            <div className="content-section doc">
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>DataScroller</h1>
+                        <p>DataScroller displays data with on demand loading using scroll.</p>
+                    </div>
+                    <DocSections docs={docs} />
                 </div>
-
-                <DocActions github="/datascroller" />
-            </div>
-
-            <div className="content-section doc datascroller-demo">
-                <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>
         </div>

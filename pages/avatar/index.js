@@ -8,7 +8,6 @@ import { ImportDoc } from '../../components/doc/avatar/importdoc';
 import { LabelDoc } from '../../components/doc/avatar/labeldoc';
 import { StylingAvatarDoc } from '../../components/doc/avatar/stylingavatardoc';
 import { StylingAvatarGroupDoc } from '../../components/doc/avatar/stylingavatargroupdoc';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 
@@ -67,15 +66,14 @@ const AvatarDemo = () => {
                 <title>React Avatar Component</title>
                 <meta name="description" content="Avatar represents people using icons, labels and images." />
             </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Avatar</h1>
-                    <p>Avatar represents people using icons, labels and images.</p>
-                </div>
-                <DocActions github="/avatar" />
-            </div>
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Avatar</h1>
+                        <p>Avatar represents people using icons, labels and images.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

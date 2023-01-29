@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import React from 'react';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/tag/accessibilitydoc';
@@ -67,15 +66,14 @@ const TerminalDemo = () => {
                 <title>React Tag Component</title>
                 <meta name="description" content="Tag component is used to categorize content." />
             </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Tag</h1>
-                    <p>Tag component is used to categorize content.</p>
-                </div>
-                <DocActions github="/tag" />
-            </div>
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Tag</h1>
+                        <p>Tag component is used to categorize content.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

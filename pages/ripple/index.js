@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import React from 'react';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/ripple/accessibilitydoc';
@@ -49,17 +48,14 @@ const RippleDemo = () => {
                 <title>React Ripple Component</title>
                 <meta name="description" content="Ripple component adds ripple effect to the host element." />
             </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Ripple</h1>
-                    <p>Ripple component adds ripple effect to the host element.</p>
+            <div className="content-section doc">
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Ripple</h1>
+                        <p>Ripple component adds ripple effect to the host element.</p>
+                    </div>
+                    <DocSections docs={docs} />
                 </div>
-                <DocActions github="/ripple" />
-            </div>
-
-            <div className="content-section doc ripple-demo">
-                <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>
         </div>

@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/tabmenu/accessibilitydoc';
@@ -48,16 +47,14 @@ const TabMenuDemo = () => {
                 <title>React TabMenu Component</title>
                 <meta name="description" content="TabMenu is a navigation/command component that displays items as tab headers." />
             </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>TabMenu</h1>
-                    <p>TabMenu is a navigation/command component that displays items as tab headers.</p>
-                </div>
-                <DocActions github="/tabmenu" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>TabMenu</h1>
+                        <p>TabMenu is a navigation/command component that displays items as tab headers.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

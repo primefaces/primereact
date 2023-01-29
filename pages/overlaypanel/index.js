@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/overlaypanel/accessibilitydoc';
@@ -48,15 +47,14 @@ const OverlayPanelDemo = () => {
                 <title>React Popover Component</title>
                 <meta name="description" content="OverlayPanel, also known as Popover, is a container component that can overlay other components on page." />
             </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>OverlayPanel</h1>
-                    <p>OverlayPanel, also known as Popover, is a container component that can overlay other components on page.</p>
+            <div className="content-section doc">
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>OverlayPanel</h1>
+                        <p>OverlayPanel, also known as Popover, is a container component that can overlay other components on page.</p>
+                    </div>
+                    <DocSections docs={docs} />
                 </div>
-                <DocActions github="/overlaypanel" />
-            </div>
-            <div className="content-section doc multiselect-demo">
-                <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>
         </div>

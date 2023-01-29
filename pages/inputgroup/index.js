@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { BasicDoc } from '../../components/doc/inputgroup/basicdoc';
@@ -37,16 +36,14 @@ const InputGroupDemo = () => {
                 <title>React InputGroup Component</title>
                 <meta name="description" content="Text, icon, buttons and other content can be grouped next to an input." />
             </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>InputGroup</h1>
-                    <p>Text, icon, buttons and other content can be grouped next to an input.</p>
-                </div>
-                <DocActions github="/inputgroup" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>InputGroup</h1>
+                        <p>Text, icon, buttons and other content can be grouped next to an input.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

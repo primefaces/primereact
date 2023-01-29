@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/fieldset/accessibilitydoc';
@@ -54,16 +53,14 @@ const FieldsetDemo = () => {
                 <title>React Fieldset Component</title>
                 <meta name="description" content="Fieldset is a grouping component with a content toggle feature." />
             </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Fieldset</h1>
-                    <p>Fieldset is a grouping component with a content toggle feature.</p>
-                </div>
-                <DocActions github="/fieldset" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Fieldset</h1>
+                        <p>Fieldset is a grouping component with a content toggle feature.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>
