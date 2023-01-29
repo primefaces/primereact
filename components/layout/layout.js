@@ -1,5 +1,5 @@
-import getConfig from 'next/config';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import PrimeReact from '../lib/api/PrimeReact';
 import { classNames } from '../lib/utils/ClassNames';
@@ -15,7 +15,7 @@ export default function Layout(props) {
     const [inputStyle, setInputStyle] = useState('outlined');
     const [ripple, setRipple] = useState(false);
     const [sidebarActive, setSidebarActive] = useState(false);
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
+    const router = useRouter();
 
     const wrapperClassName = classNames('layout-wrapper', {
         'layout-news-active': props.newsActive,
@@ -30,10 +30,6 @@ export default function Layout(props) {
 
     const onMenuButtonClick = () => {
         setSidebarActive(true);
-    };
-
-    const onMenuItemClick = () => {
-        setSidebarActive(false);
     };
 
     const onMaskClick = () => {
@@ -61,6 +57,18 @@ export default function Layout(props) {
         else document.body.classList.remove('blocked-scroll');
     }, [sidebarActive]); // eslint-disable-line react-hooks/exhaustive-deps
 
+    useEffect(() => {
+        const handleRouteChange = (url, { shallow }) => {
+            setSidebarActive(false);
+        }
+    
+        router.events.on('routeChangeComplete', handleRouteChange);
+    
+        return () => {
+          router.events.off('routeChangeComplete', handleRouteChange);
+        }
+      }, [])
+
     PrimeReact.ripple = true;
 
     return (
@@ -83,11 +91,11 @@ export default function Layout(props) {
                 <meta property="og:description" content="The ultimate collection of design-agnostic, flexible and accessible React UI Components." />
                 <meta property="og:image" content="https://www.primefaces.org/static/social/primereact-preview.jpg"></meta>
                 <meta property="og:ttl" content="604800"></meta>
-                <link rel="icon" href={`${contextPath}/images/favicon.ico`} type="image/x-icon"></link>
+                <link rel="icon" href="/images/favicon.ico" type="image/x-icon"></link>
             </Head>
             {props.newsActive && <NewsSection announcement={props.announcement} onClose={props.onNewsClose} />}
-            <Topbar onMenuButtonClick={onMenuButtonClick} onThemeChange={onThemeChange} theme={props.theme} darkTheme={props.dark} versions={[]} />
-            <Menu active={sidebarActive} onMenuItemClick={onMenuItemClick} darkTheme={props.dark} />
+            <Topbar onMenuButtonClick={onMenuButtonClick} />
+            <Menu active={sidebarActive} darkTheme={props.dark} />
             <AppContentContext.Provider
                 value={{
                     ripple: ripple,

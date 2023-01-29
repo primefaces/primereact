@@ -14,49 +14,12 @@
         }
     
         .layout-topbar {
-            height: 8rem;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            padding: 0;
             left: 0;
             width: 100%;
     
             .menu-button {
-                display: block;
-            }
-    
-            .app-theme {
-                margin-left: 0;
-                margin-right: 23px;
-            }
-    
-            .topbar-menu {
-                width: 100%;
-                height: 3rem;
-                margin: 0;
-    
-                > li {
-                    width: 25%;
-                    margin-right: 0;
-                    position: static;
-    
-                    > a,
-                    > .p-link {
-                        display: flex;
-                        height: 100%;
-                        width: 100%;
-                        justify-content: center;
-                        align-items: center;
-                        border-radius: 0;
-                    }
-    
-                    &.topbar-submenu > ul {
-                        right: auto;
-                        width: 100vw;
-                        left: 0;
-                        top: 8rem;
-                    }
-                }
+                display: flex;
+                
             }
         }
     
@@ -73,7 +36,6 @@
     
         .layout-content {
             margin-left: 0;
-            padding-top: 8rem;
     
             .content-section {
                 &.introduction {
@@ -126,6 +88,11 @@
 
 @media screen and (max-width: 575px) {
     .layout-wrapper {
+        .layout-topbar {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
         .layout-content {
             .content-section {
                 padding-left: 1rem;

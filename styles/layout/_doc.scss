@@ -2,6 +2,14 @@
     display: flex;
     flex-wrap: wrap;
 
+    .doc-intro {
+        margin-bottom: 2rem;
+
+        p {
+            font-size: 1.25rem;
+        }
+    }
+
     > .doc-main {
         flex-grow: 1;
         flex-shrink: 1;
@@ -127,7 +135,7 @@
     li {
         &.navbar-item{
             border-left-style: solid;
-            border-left-width: 3px;
+            border-left-width: 1px;
             border-color: var(--surface-border);
             z-index: 1;
                 button {
@@ -159,7 +167,7 @@
         li{
             &.navbar-child-item{
                 border-left: 5rem;
-                border-left-width: 3px;
+                border-left-width: 1px;
                 border-left-style: solid;
                 border-color: var(--surface-border);
                 z-index: 1;

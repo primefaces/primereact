@@ -13,7 +13,6 @@ import { KeyFilterDoc } from '../../components/doc/chips/keyfilterdoc';
 import { SeparatorDoc } from '../../components/doc/chips/separatordoc';
 import { StyleDoc } from '../../components/doc/chips/styledoc';
 import { TemplateDoc } from '../../components/doc/chips/templatedoc';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 
@@ -100,16 +99,14 @@ const ChipsDemo = () => {
                 <meta name="description" content="Chips is used to enter multiple values on an input field." />
             </Head>
 
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Chips</h1>
-                    <p>Chips is used to enter multiple values on an input field.</p>
-                </div>
-                <DocActions github="/chips" />
-            </div>
-
             <div className="content-section doc">
-                <DocSections docs={docs} />
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Chips</h1>
+                        <p>Chips is used to enter multiple values on an input field.</p>
+                    </div>
+                    <DocSections docs={docs} />
+                </div>
                 <DocSectionNav docs={docs} />
             </div>
         </div>

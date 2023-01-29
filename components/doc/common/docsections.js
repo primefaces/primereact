@@ -41,5 +41,5 @@ export function DocSections({ docs }) {
         });
     };
 
-    return <div className="doc-main">{renderDocs()}</div>;
+    return renderDocs();
 }
