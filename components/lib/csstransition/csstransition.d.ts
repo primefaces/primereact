@@ -31,7 +31,7 @@ export type CSSTransitionProps<Ref extends undefined | HTMLElement = undefined> 
  *
  * [Live Demo](https://www.primefaces.org/primereact/dropdown/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
  *
  * @group Component
  */

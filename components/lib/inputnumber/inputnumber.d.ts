@@ -258,7 +258,7 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
  *
  * [Live Demo](https://www.primefaces.org/primereact/inputnumber/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
  *
  * @group Component
  */

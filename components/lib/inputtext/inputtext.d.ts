@@ -58,7 +58,7 @@ export interface InputTextProps extends Omit<React.DetailedHTMLProps<React.Input
  *
  * [Live Demo](https://www.primefaces.org/primereact/inputtext/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
  *
  * @group Component
  */

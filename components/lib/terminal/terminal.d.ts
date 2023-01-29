@@ -36,7 +36,7 @@ export interface TerminalProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
  *
  * [Live Demo](https://www.primefaces.org/primereact/terminal/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
  *
  * @group Component
  */
