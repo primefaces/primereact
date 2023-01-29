@@ -40,8 +40,10 @@
   --surface-overlay:#2a323d;
   --surface-border:#3f4b5b;
   --surface-hover:rgba(255,255,255,.04);
-  --maskbg: rgba(0, 0, 0, 0.4);
   --focus-ring: 0 0 0 1px #e3f3fe;
+  --maskbg: rgba(0, 0, 0, 0.4);
+  --highlight-bg: #8dd0ff;
+  --highlight-text-color: #151515;
   color-scheme: dark;
 }
 

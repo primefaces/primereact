@@ -85,7 +85,8 @@
         }
 
         a.router-link-active {
-            background-color: var(--primary-50);
+            background-color: var(--highlight-bg);
+            color: var(--highlight-text-color);
         }
 
         .menu-child-category {
