@@ -176,7 +176,6 @@ const TemplatesPage = () => {
                 </div>
             </div>
         </div>
-        
     );
 };
 
