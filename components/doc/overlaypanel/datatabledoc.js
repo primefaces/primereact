@@ -15,7 +15,7 @@ export function DataTableDoc(props) {
     const selectedProductContent = selectedProduct && (
         <div className="p-5 surface-card shadow-2 border-round">
             <div className="relative">
-                <img src={'https://www.primereact.org/images/product/' + selectedProduct.image} alt={selectedProduct.name}></img>
+                <img src={'/images/product/' + selectedProduct.image} alt={selectedProduct.name}></img>
             </div>
             <div className="flex align-items-center justify-content-between mt-3 mb-2">
                 <span className="text-900 font-medium text-xl">{selectedProduct.name}</span>
@@ -49,7 +49,7 @@ export function DataTableDoc(props) {
     };
 
     const imageBody = (rowData) => {
-        return <img src={`https://www.primereact.org/images/product/${rowData.image}`} alt={rowData.image} className="w-4rem shadow-1" />;
+        return <img src={`/images/product/${rowData.image}`} alt={rowData.image} className="w-4rem shadow-1" />;
     };
 
     const priceBody = (rowData) => {
@@ -85,7 +85,7 @@ export default function DataTableDemo() {
     const selectedProductContent = selectedProduct && (
         <div className="p-5 surface-card shadow-2 border-round">
             <div className="relative">
-                <img src={'https://www.primereact.org/images/product/' + selectedProduct.image} alt={selectedProduct.name}></img>
+                <img src={'https://primereact.org/images/product/' + selectedProduct.image} alt={selectedProduct.name}></img>
             </div>
             <div className="flex align-items-center justify-content-between mt-3 mb-2">
                 <span className="text-900 font-medium text-xl">{selectedProduct.name}</span>
@@ -120,7 +120,7 @@ export default function DataTableDemo() {
     };
 
     const imageBody = (rowData) => {
-        return <img src={\`https://www.primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} className="w-4rem shadow-1" />
+        return <img src={\`https://primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} className="w-4rem shadow-1" />
     };
 
     const priceBody = (rowData) => {
@@ -163,7 +163,7 @@ export default function DataTableDemo() {
     const selectedProductContent = selectedProduct && (
         <div className="p-5 surface-card shadow-2 border-round">
             <div className="relative">
-                <img src={'https://www.primereact.org/images/product/' + selectedProduct.image} alt={selectedProduct.name}></img>
+                <img src={'https://primereact.org/images/product/' + selectedProduct.image} alt={selectedProduct.name}></img>
             </div>
             <div className="flex align-items-center justify-content-between mt-3 mb-2">
                 <span className="text-900 font-medium text-xl">{selectedProduct.name}</span>
@@ -194,7 +194,7 @@ export default function DataTableDemo() {
     };
 
     const imageBody = (rowData: Product) => {
-        return <img src={\`https://www.primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} className="w-4rem shadow-1" />
+        return <img src={\`https://primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} className="w-4rem shadow-1" />
     };
 
     const priceBody = (rowData: Product) => {

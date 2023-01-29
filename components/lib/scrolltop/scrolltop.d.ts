@@ -71,7 +71,7 @@ export interface ScrollTopProps {
  *
  * [Live Demo](https://www.primefaces.org/primereact/scrolltop/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
  *
  * @group Component
  */

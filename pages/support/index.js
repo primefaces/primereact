@@ -3,7 +3,7 @@ import React from 'react';
 const SupportPage = () => {
     return (
         <div className="content-section">
-            <img alt="PRO Support" src={`https://www.primereact.org/images/support/support-header.png`} className="w-full block mb-5" style={{ borderRadius: '20px' }} />
+            <img alt="PRO Support" src={`/images/support/support-header.png`} className="w-full block mb-5" style={{ borderRadius: '20px' }} />
 
             <div className="flex flex-column xl:flex-row mb-5 gap-5">
                 <div className="card xl:w-3 m-0 relative overflow-hidden">
@@ -21,7 +21,7 @@ const SupportPage = () => {
                         although they are monitored and maintained by our staff. If you need to secure our response within 1 business day, you may consider PRO support instead.
                     </p>
                 </div>
-                <div className="card m-0 xl:w-9 text-white bg-cover" style={{ backgroundImage: `url(https://www.primereact.org/images/support/card-pro.jpg)` }}>
+                <div className="card m-0 xl:w-9 text-white bg-cover" style={{ backgroundImage: `url(images/support/card-pro.jpg)` }}>
                     <div className="text-xl font-semibold mb-3">PRO Support</div>
                     <p className="m-0 line-height-3">
                         With PRO support, it's easy to support, tune and add features to PrimeReact as if it were an in- house library. PRO is a term based commercial support service. With the exclusive services of PRO account, it is no longer needed

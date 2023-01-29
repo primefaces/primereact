@@ -12,7 +12,6 @@ export function ExportImportDoc(props) {
     const [selectedImportedData, setSelectedImportedData] = useState([]);
     const [importedCols, setImportedCols] = useState([{ field: '', header: 'Header' }]);
     const toast = useRef(null);
-    const uploadPath = getConfig().publicRuntimeConfig.uploadPath;
 
     const importCSV = (e) => {
         const file = e.files[0];
@@ -100,8 +99,8 @@ export function ExportImportDoc(props) {
         basic: `
 <Toast ref={toast} />
 <div className="flex align-items-center py-2">
-    <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" className="mr-2" onUpload={importCSV} />
-    <FileUpload chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php"
+    <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file' }} mode="basic" name="demo[]" auto url="/api/upload" accept=".csv" className="mr-2" onUpload={importCSV} />
+    <FileUpload chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }} mode="basic" name="demo[]" auto url="/api/upload"
         accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" className="mr-2" onUpload={importExcel} />
     <Button type="button" label="Clear" icon="pi pi-times" onClick={clear} className="p-button-info ml-auto" />
 </div>
@@ -349,13 +348,13 @@ echo '<p>Fake Upload Process</p>'; ?>
             <div className="card">
                 <Toast ref={toast} />
                 <div className="flex align-items-center py-2">
-                    <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file' }} mode="basic" name="demo[]" auto url={uploadPath} accept=".csv" className="mr-2" onUpload={importCSV} />
+                    <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file' }} mode="basic" name="demo[]" auto url={'api/upload'} accept=".csv" className="mr-2" onUpload={importCSV} />
                     <FileUpload
                         chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }}
                         mode="basic"
                         name="demo[]"
                         auto
-                        url={uploadPath}
+                        url={'api/upload'}
                         accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                         className="mr-2"
                         onUpload={importExcel}

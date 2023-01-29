@@ -17,7 +17,7 @@ export function TemplateDoc(props) {
     const tab2HeaderTemplate = (options) => {
         return (
             <div className="flex align-items-center px-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
-                <Avatar image="https://www.primereact.org/images/avatar/amyelsner.png" shape="circle" className="mx-2" />
+                <Avatar image="/images/avatar/amyelsner.png" shape="circle" className="mx-2" />
                 Amy Elsner
             </div>
         );
@@ -81,7 +81,7 @@ export default function TemplateDemo() {
     const tab2HeaderTemplate = (options) => {
         return (
             <div className="flex align-items-center px-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
-                <Avatar image="https://www.primereact.org/images/avatar/amyelsner.png" shape="circle" className="mx-2" />
+                <Avatar image="https://primereact.org/images/avatar/amyelsner.png" shape="circle" className="mx-2" />
                 Amy Elsner
             </div>
         )
@@ -150,7 +150,7 @@ export default function TemplateDemo() {
     const tab2HeaderTemplate = (options: TabPanelHeaderTemplateOptions) => {
         return (
             <div className="flex align-items-center px-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
-                <Avatar image="https://www.primereact.org/images/avatar/amyelsner.png" shape="circle" className="mx-2" />
+                <Avatar image="https://primereact.org/images/avatar/amyelsner.png" shape="circle" className="mx-2" />
                 Amy Elsner
             </div>
         )

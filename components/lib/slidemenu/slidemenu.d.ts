@@ -110,7 +110,7 @@ export interface SlideMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLA
  *
  * [Live Demo](https://www.primefaces.org/primereact/slidemenu/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
  *
  * @group Component
  */

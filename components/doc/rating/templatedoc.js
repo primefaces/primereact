@@ -11,9 +11,9 @@ export function TemplateDoc(props) {
 <Rating
     value={val}
     onChange={(e) => setVal(e.value)}
-    cancelIcon={<img src={'https://www.primereact.org/images/rating/cancel.png'} alt="custom-cancel-image" width="25px" height="25px" />}
-    onIcon={<img src={'https://www.primereact.org/images/rating/custom-icon-active.png'} alt="custom-image-active" width="25px" height="25px" />}
-    offIcon={<img src={'https://www.primereact.org/images/rating/custom-icon.png'} alt="custom-image" width="25px" height="25px" />}
+    cancelIcon={<img src={'/images/rating/cancel.png'} alt="custom-cancel-image" width="25px" height="25px" />}
+    onIcon={<img src={'/images/rating/custom-icon-active.png'} alt="custom-image-active" width="25px" height="25px" />}
+    offIcon={<img src={'/images/rating/custom-icon.png'} alt="custom-image" width="25px" height="25px" />}
 />
 `,
         javascript: `
@@ -28,9 +28,9 @@ export default function TemplateDoc() {
             <Rating
             value={val}
             onChange={(e) => setVal(e.value)}
-            cancelIcon={<img src={'https://www.primereact.org/images/rating/cancel.png'} alt="custom-cancel-image" width="25px" height="25px" />}
-            onIcon={<img src={'https://www.primereact.org/images/rating/custom-icon-active.png'} alt="custom-image-active" width="25px" height="25px" />}
-            offIcon={<img src={'https://www.primereact.org/images/rating/custom-icon.png'} alt="custom-image" width="25px" height="25px" />}
+            cancelIcon={<img src={'https://primereact.org/images/rating/cancel.png'} alt="custom-cancel-image" width="25px" height="25px" />}
+            onIcon={<img src={'https://primereact.org/images/rating/custom-icon-active.png'} alt="custom-image-active" width="25px" height="25px" />}
+            offIcon={<img src={'https://primereact.org/images/rating/custom-icon.png'} alt="custom-image" width="25px" height="25px" />}
             />
         </div>
     );
@@ -48,9 +48,9 @@ export default function TemplateDoc() {
             <Rating
             value={val}
             onChange={(e) => setVal(e.value)}
-            cancelIcon={<img src={'https://www.primereact.org/images/rating/cancel.png'} alt="custom-cancel-image" width="25px" height="25px" />}
-            onIcon={<img src={'https://www.primereact.org/images/rating/custom-icon-active.png'} alt="custom-image-active" width="25px" height="25px" />}
-            offIcon={<img src={'https://www.primereact.org/images/rating/custom-icon.png'} alt="custom-image" width="25px" height="25px" />}
+            cancelIcon={<img src={'https://primereact.org/images/rating/cancel.png'} alt="custom-cancel-image" width="25px" height="25px" />}
+            onIcon={<img src={'https://primereact.org/images/rating/custom-icon-active.png'} alt="custom-image-active" width="25px" height="25px" />}
+            offIcon={<img src={'https://primereact.org/images/rating/custom-icon.png'} alt="custom-image" width="25px" height="25px" />}
             />
         </div>
     );
@@ -69,9 +69,9 @@ export default function TemplateDoc() {
                 <Rating
                     value={val}
                     onChange={(e) => setVal(e.value)}
-                    cancelIcon={<img src={`https://www.primereact.org/images/rating/cancel.png`} alt="custom-cancel-image" width="25px" height="25px" />}
-                    onIcon={<img src={`https://www.primereact.org/images/rating/custom-icon-active.png`} alt="custom-image-active" width="25px" height="25px" />}
-                    offIcon={<img src={`https://www.primereact.org/images/rating/custom-icon.png`} alt="custom-image" width="25px" height="25px" />}
+                    cancelIcon={<img src={`/images/rating/cancel.png`} alt="custom-cancel-image" width="25px" height="25px" />}
+                    onIcon={<img src={`/images/rating/custom-icon-active.png`} alt="custom-image-active" width="25px" height="25px" />}
+                    offIcon={<img src={`/images/rating/custom-icon.png`} alt="custom-image" width="25px" height="25px" />}
                 />
             </div>
             <DocSectionCode code={code} />

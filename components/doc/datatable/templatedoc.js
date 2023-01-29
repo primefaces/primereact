@@ -75,7 +75,7 @@ export default function TemplateDoc() {
     }
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={\`https://www.primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} className="product-image" />;
+        return <img src={\`https://primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} className="product-image" />;
     }
 
     const priceBodyTemplate = (rowData) => {
@@ -135,7 +135,7 @@ export default function TemplateDoc() {
     }
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={\`https://www.primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} className="product-image" />;
+        return <img src={\`https://primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} className="product-image" />;
     }
 
     const priceBodyTemplate = (rowData) => {

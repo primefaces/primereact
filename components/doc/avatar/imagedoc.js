@@ -6,9 +6,9 @@ import { DocSectionText } from '../common/docsectiontext';
 export function ImageDoc(props) {
     const code = {
         basic: `
-<Avatar image="https://www.primereact.org/images/avatar/amyelsner.png" size="xlarge" shape="circle" />
-<Avatar image="https://www.primereact.org/images/avatar/asiyajavayant.png" size="large" shape="circle" />
-<Avatar image="https://www.primereact.org/images/avatar/onyamalimba.png" shape="circle" />
+<Avatar image="/images/avatar/amyelsner.png" size="xlarge" shape="circle" />
+<Avatar image="/images/avatar/asiyajavayant.png" size="large" shape="circle" />
+<Avatar image="/images/avatar/onyamalimba.png" shape="circle" />
 
 <Avatar className="p-overlay-badge" image="images/organization/walter.jpg" size="xlarge">
     <Badge value="4" severity="danger" />
@@ -27,9 +27,9 @@ export default function ImageDemo() {
             <div className="flex flex-wrap gap-5">
                 <div className="flex-auto">
                     <h5>Image</h5>
-                    <Avatar image="https://www.primereact.org/images/avatar/amyelsner.png" className="mr-2" size="xlarge" shape="circle" />
-                    <Avatar image="https://www.primereact.org/images/avatar/asiyajavayant.png" className="mr-2" size="large" shape="circle" />
-                    <Avatar image="https://www.primereact.org/images/avatar/onyamalimba.png" shape="circle" />
+                    <Avatar image="https://primereact.org/images/avatar/amyelsner.png" className="mr-2" size="xlarge" shape="circle" />
+                    <Avatar image="https://primereact.org/images/avatar/asiyajavayant.png" className="mr-2" size="large" shape="circle" />
+                    <Avatar image="https://primereact.org/images/avatar/onyamalimba.png" shape="circle" />
                 </div>
 
                 <div className="flex-auto">
@@ -59,9 +59,9 @@ export default function ImageDemo() {
             <div className="flex flex-wrap gap-5">
                 <div className="flex-auto">
                     <h5>Image</h5>
-                    <Avatar image="https://www.primereact.org/images/avatar/amyelsner.png" className="mr-2" size="xlarge" shape="circle" />
-                    <Avatar image="https://www.primereact.org/images/avatar/asiyajavayant.png" className="mr-2" size="large" shape="circle" />
-                    <Avatar image="https://www.primereact.org/images/avatar/onyamalimba.png" shape="circle" />
+                    <Avatar image="https://primereact.org/images/avatar/amyelsner.png" className="mr-2" size="xlarge" shape="circle" />
+                    <Avatar image="https://primereact.org/images/avatar/asiyajavayant.png" className="mr-2" size="large" shape="circle" />
+                    <Avatar image="https://primereact.org/images/avatar/onyamalimba.png" shape="circle" />
                 </div>
 
                 <div className="flex-auto">
@@ -93,9 +93,9 @@ export default function ImageDemo() {
                 <div className="flex flex-wrap gap-5">
                     <div className="flex-auto">
                         <h5>Image</h5>
-                        <Avatar image="https://www.primereact.org/images/avatar/amyelsner.png" className="mr-2" size="xlarge" shape="circle" />
-                        <Avatar image="https://www.primereact.org/images/avatar/asiyajavayant.png" className="mr-2" size="large" shape="circle" />
-                        <Avatar image="https://www.primereact.org/images/avatar/onyamalimba.png" shape="circle" />
+                        <Avatar image="/images/avatar/amyelsner.png" className="mr-2" size="xlarge" shape="circle" />
+                        <Avatar image="/images/avatar/asiyajavayant.png" className="mr-2" size="large" shape="circle" />
+                        <Avatar image="/images/avatar/onyamalimba.png" shape="circle" />
                     </div>
 
                     <div className="flex-auto">

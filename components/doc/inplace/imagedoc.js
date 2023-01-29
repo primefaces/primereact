@@ -14,7 +14,7 @@ export function ImageDoc(props) {
         </span>
     </InplaceDisplay>
     <InplaceContent>
-        <img alt="Nature" src="https://www.primereact.org/images/nature/nature1.jpg" />
+        <img alt="Nature" src="/images/nature/nature1.jpg" />
     </InplaceContent>
 </Inplace>
         `,
@@ -32,7 +32,7 @@ export default function ImageDemo() {
                 </span>
             </InplaceDisplay>
             <InplaceContent>
-                <img alt="Nature" src="https://www.primereact.org/images/nature/nature1.jpg" />
+                <img alt="Nature" src="https://primereact.org/images/nature/nature1.jpg" />
             </InplaceContent>
         </Inplace>
     );
@@ -52,7 +52,7 @@ export default function ImageDemo() {
                 </span>
             </InplaceDisplay>
             <InplaceContent>
-                <img alt="Nature" src="https://www.primereact.org/images/nature/nature1.jpg" />
+                <img alt="Nature" src="https://primereact.org/images/nature/nature1.jpg" />
             </InplaceContent>
         </Inplace>
     );

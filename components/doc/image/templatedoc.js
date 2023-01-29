@@ -7,7 +7,7 @@ export function TemplateDoc(props) {
 
     const code = {
         basic: `
-<Image src="https://www.primereact.org/images/galleria/galleria12.jpg" template={icon} alt="Image" preview width="250" />
+<Image src="/images/galleria/galleria12.jpg" template={icon} alt="Image" preview width="250" />
         `,
         javascript: `
 import React from 'react'; 
@@ -18,7 +18,7 @@ export default function TemplateDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <Image src="https://www.primereact.org/images/galleria/galleria12.jpg" template={icon} alt="Image" preview width="250" />
+            <Image src="https://primereact.org/images/galleria/galleria12.jpg" template={icon} alt="Image" preview width="250" />
         </div>
     )
 }
@@ -32,7 +32,7 @@ export default function TemplateDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <Image src="https://www.primereact.org/images/galleria/galleria12.jpg" template={icon} alt="Image" preview width="250" />
+            <Image src="https://primereact.org/images/galleria/galleria12.jpg" template={icon} alt="Image" preview width="250" />
         </div>
     )
 }
@@ -47,7 +47,7 @@ export default function TemplateDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Image src={`https://www.primereact.org/images/galleria/galleria12.jpg`} template={icon} alt="Image" preview width="250" />
+                <Image src={`/images/galleria/galleria12.jpg`} template={icon} alt="Image" preview width="250" />
             </div>
             <DocSectionCode code={code} />
         </>

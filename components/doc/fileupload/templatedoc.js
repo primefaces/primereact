@@ -7,13 +7,11 @@ import { ProgressBar } from '../../lib/progressbar/ProgressBar';
 import { Button } from '../../lib/button/Button';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
-import getConfig from 'next/config';
 
 export function TemplateDoc(props) {
     const [totalSize, setTotalSize] = useState(0);
     const toast = useRef(null);
     const fileUploadRef = useRef(null);
-    const uploadPath = getConfig().publicRuntimeConfig.uploadPath;
 
     const onTemplateSelect = (e) => {
         let _totalSize = totalSize;
@@ -100,7 +98,7 @@ export function TemplateDoc(props) {
 <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />
 <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" />
 
-<FileUpload ref={fileUploadRef} name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" multiple accept="image/*" maxFileSize={1000000}
+<FileUpload ref={fileUploadRef} name="demo[]" url="/api/upload" multiple accept="image/*" maxFileSize={1000000}
 onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
 headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate}
 chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
@@ -344,7 +342,7 @@ echo '<p>Fake Upload Process</p>'; ?>
                 <FileUpload
                     ref={fileUploadRef}
                     name="demo[]"
-                    url={uploadPath}
+                    url={'/api/upload'}
                     multiple
                     accept="image/*"
                     maxFileSize={1000000}

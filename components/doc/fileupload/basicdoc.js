@@ -3,11 +3,9 @@ import { FileUpload } from '../../lib/fileupload/FileUpload';
 import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
-import getConfig from 'next/config';
 
 export function BasicDoc(props) {
     const toast = useRef(null);
-    const uploadPath = getConfig().publicRuntimeConfig.uploadPath;
 
     const onBasicUpload = () => {
         toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
@@ -16,7 +14,7 @@ export function BasicDoc(props) {
     const code = {
         basic: `
 <Toast ref={toast}></Toast>
-<FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUpload} />
+<FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" maxFileSize={1000000} onUpload={onBasicUpload} />
         `,
         javascript: `
 import React, { useRef } from 'react';
@@ -74,7 +72,7 @@ echo '<p>Fake Upload Process</p>'; ?>
             </DocSectionText>
             <div className="card">
                 <Toast ref={toast}></Toast>
-                <FileUpload mode="basic" name="demo[]" url={uploadPath} accept="image/*" maxFileSize={1000000} onUpload={onBasicUpload} />
+                <FileUpload mode="basic" name="demo[]" url={'/api/upload'} accept="image/*" maxFileSize={1000000} onUpload={onBasicUpload} />
             </div>
             <DocSectionCode code={code} />
         </>

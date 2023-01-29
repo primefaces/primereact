@@ -52,7 +52,7 @@ export interface InputTextareaProps extends Omit<React.DetailedHTMLProps<React.T
  *
  * [Live Demo](https://www.primefaces.org/primereact/inputtextarea/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
  *
  * @group Component
  */

@@ -77,7 +77,7 @@ export default function TemplateDoc() {
         if (option) {
             return (
                 <div className="country-item country-item-value">
-                    <img alt={option.name} src="https://www.primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                    <img alt={option.name} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
                     <div>{option.name}</div>
                 </div>
             );
@@ -92,7 +92,7 @@ export default function TemplateDoc() {
     const countryOptionTemplate = (option) => {
         return (
             <div className="country-item">
-                <img alt={option.name} src="https://www.primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <img alt={option.name} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
                 <div>{option.name}</div>
             </div>
         );
@@ -134,7 +134,7 @@ export default function TemplateDoc() {
         if (option) {
             return (
                 <div className="country-item country-item-value">
-                    <img alt={option.name} src="https://www.primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                    <img alt={option.name} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
                     <div>{option.name}</div>
                 </div>
             );
@@ -149,7 +149,7 @@ export default function TemplateDoc() {
     const countryOptionTemplate = (option: any) => {
         return (
             <div className="country-item">
-                <img alt={option.name} src="https://www.primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <img alt={option.name} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
                 <div>{option.name}</div>
             </div>
         );
