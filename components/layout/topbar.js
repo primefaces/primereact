@@ -81,12 +81,12 @@ export default function Topbar(props) {
 
             <ul className="flex list-none m-0 p-0 ml-auto gap-2 align-items-center ">
                 <li>
-                    <a href="https://primefaces.github.io/primereact" className="flex border-1 w-2rem h-2rem surface-border border-round surface-card align-items-center justify-content-center transition-all transition-duration-300 hover:border-primary">
+                    <a href="https://primefaces.github.io/primereact" className="flex p-link border-1 w-2rem h-2rem surface-border border-round surface-card align-items-center justify-content-center transition-all transition-duration-300 hover:border-primary">
                         <i className="pi pi-github text-700"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="https://discord.gg/gzKFYnpmCY" className="flex border-1 w-2rem h-2rem surface-border border-round surface-card align-items-center justify-content-center transition-all transition-duration-300 hover:border-primary">
+                    <a href="https://discord.gg/gzKFYnpmCY" className="flex p-link border-1 w-2rem h-2rem surface-border border-round surface-card align-items-center justify-content-center transition-all transition-duration-300 hover:border-primary">
                         <i className="pi pi-discord text-700"></i>
                     </a>
                 </li>
