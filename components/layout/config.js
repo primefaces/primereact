@@ -64,25 +64,25 @@ export default function Config(props) {
                     <div className="grid free-themes">
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('bootstrap4-light-blue')}>
-                                <img src={`/images/themes/bootstrap4-light-blue.svg`} alt="Bootstrap Light Blue" />
+                                <img src="/images/themes/bootstrap4-light-blue.svg" alt="Bootstrap Light Blue" />
                             </button>
                             <span>Blue</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('bootstrap4-light-purple')}>
-                                <img src={`/images/themes/bootstrap4-light-purple.svg`} alt="Bootstrap Light Blue" />
+                                <img src="/images/themes/bootstrap4-light-purple.svg" alt="Bootstrap Light Blue" />
                             </button>
                             <span>Purple</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('bootstrap4-dark-blue', true)}>
-                                <img src={`/images/themes/bootstrap4-dark-blue.svg`} alt="Bootstrap Dark Blue" />
+                                <img src="/images/themes/bootstrap4-dark-blue.svg" alt="Bootstrap Dark Blue" />
                             </button>
                             <span>Blue</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('bootstrap4-dark-purple', true)}>
-                                <img src={`/images/themes/bootstrap4-dark-purple.svg`} alt="Bootstrap Dark Blue" />
+                                <img src="/images/themes/bootstrap4-dark-purple.svg" alt="Bootstrap Dark Blue" />
                             </button>
                             <span>Purple</span>
                         </div>
@@ -92,25 +92,25 @@ export default function Config(props) {
                     <div className="grid free-themes">
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('md-light-indigo')}>
-                                <img src={`/images/themes/md-light-indigo.svg`} alt="Material Light Indigo" />
+                                <img src="/images/themes/md-light-indigo.svg" alt="Material Light Indigo" />
                             </button>
                             <span>Indigo</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('md-light-deeppurple')}>
-                                <img src={`/images/themes/md-light-deeppurple.svg`} alt="Material Light Deep Purple" />
+                                <img src="/images/themes/md-light-deeppurple.svg" alt="Material Light Deep Purple" />
                             </button>
                             <span>Deep Purple</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('md-dark-indigo', true)}>
-                                <img src={`/images/themes/md-dark-indigo.svg`} alt="Material Dark Indigo" />
+                                <img src="/images/themes/md-dark-indigo.svg" alt="Material Dark Indigo" />
                             </button>
                             <span>Indigo</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('md-dark-deeppurple', true)}>
-                                <img src={`/images/themes/md-dark-deeppurple.svg`} alt="Material Dark Deep Purple" />
+                                <img src="/images/themes/md-dark-deeppurple.svg" alt="Material Dark Deep Purple" />
                             </button>
                             <span>Deep Purple</span>
                         </div>
@@ -120,25 +120,25 @@ export default function Config(props) {
                     <div className="grid free-themes">
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('mdc-light-indigo')}>
-                                <img src={`/images/themes/md-light-indigo.svg`} alt="Material Compact Light Indigo" />
+                                <img src="/images/themes/md-light-indigo.svg" alt="Material Compact Light Indigo" />
                             </button>
                             <span>Indigo</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('mdc-light-deeppurple')}>
-                                <img src={`/images/themes/md-light-deeppurple.svg`} alt="Material Compact Deep Purple" />
+                                <img src="/images/themes/md-light-deeppurple.svg" alt="Material Compact Deep Purple" />
                             </button>
                             <span>Deep Purple</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('mdc-dark-indigo', true)}>
-                                <img src={`/images/themes/md-dark-indigo.svg`} alt="Material Compact Dark Indigo" />
+                                <img src="/images/themes/md-dark-indigo.svg" alt="Material Compact Dark Indigo" />
                             </button>
                             <span>Indigo</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('mdc-dark-deeppurple', true)}>
-                                <img src={`/images/themes/md-dark-deeppurple.svg`} alt="Material Compact Dark Deep Purple" />
+                                <img src="/images/themes/md-dark-deeppurple.svg" alt="Material Compact Dark Deep Purple" />
                             </button>
                             <span>Deep Purple</span>
                         </div>
@@ -148,7 +148,7 @@ export default function Config(props) {
                     <div className="grid free-themes">
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('tailwind-light')}>
-                                <img src={`/images/themes/tailwind-light.png`} alt="Tailwind Light" />
+                                <img src="/images/themes/tailwind-light.png" alt="Tailwind Light" />
                             </button>
                             <span>Tailwind Light</span>
                         </div>
@@ -158,7 +158,7 @@ export default function Config(props) {
                     <div className="grid free-themes">
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('fluent-light')}>
-                                <img src={`/images/themes/fluent-light.png`} alt="Fluent Light" />
+                                <img src="/images/themes/fluent-light.png" alt="Fluent Light" />
                             </button>
                             <span>Blue</span>
                         </div>
@@ -168,49 +168,49 @@ export default function Config(props) {
                     <div className="grid free-themes">
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('lara-light-indigo')}>
-                                <img src={`/images/themes/lara-light-indigo.png`} alt="Lara Light Indigo" />
+                                <img src="/images/themes/lara-light-indigo.png" alt="Lara Light Indigo" />
                             </button>
                             <span>Lara Indigo</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('lara-light-blue')}>
-                                <img src={`/images/themes/lara-light-blue.png`} alt="Lara Light Blue" />
+                                <img src="/images/themes/lara-light-blue.png" alt="Lara Light Blue" />
                             </button>
                             <span>Lara Blue</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('lara-light-purple')}>
-                                <img src={`/images/themes/lara-light-purple.png`} alt="Lara Light Purple" />
+                                <img src="/images/themes/lara-light-purple.png" alt="Lara Light Purple" />
                             </button>
                             <span>Lara Purple</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('lara-light-teal')}>
-                                <img src={`/images/themes/lara-light-teal.png`} alt="Lara Light Teal" />
+                                <img src="/images/themes/lara-light-teal.png" alt="Lara Light Teal" />
                             </button>
                             <span>Lara Teal</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('lara-dark-indigo', true)}>
-                                <img src={`/images/themes/lara-dark-indigo.png`} alt="Lara Dark Indigo" />
+                                <img src="/images/themes/lara-dark-indigo.png" alt="Lara Dark Indigo" />
                             </button>
                             <span>Lara Indigo</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('lara-dark-blue', true)}>
-                                <img src={`/images/themes/lara-dark-blue.png`} alt="Lara Dark Blue" />
+                                <img src="/images/themes/lara-dark-blue.png" alt="Lara Dark Blue" />
                             </button>
                             <span>Lara Blue</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('lara-dark-purple', true)}>
-                                <img src={`/images/themes/lara-dark-purple.png`} alt="Lara Dark Purple" />
+                                <img src="/images/themes/lara-dark-purple.png" alt="Lara Dark Purple" />
                             </button>
                             <span>Lara Purple</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('lara-dark-teal', true)}>
-                                <img src={`/images/themes/lara-dark-teal.png`} alt="Lara Dark Teal" />
+                                <img src="/images/themes/lara-dark-teal.png" alt="Lara Dark Teal" />
                             </button>
                             <span>Lara Teal</span>
                         </div>
@@ -220,37 +220,37 @@ export default function Config(props) {
                     <div className="grid free-themes">
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('soho-light')}>
-                                <img src={`/images/themes/soho-light.png`} alt="Soho Light" />
+                                <img src="/images/themes/soho-light.png" alt="Soho Light" />
                             </button>
                             <span>Soho Light</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('soho-dark', true)}>
-                                <img src={`/images/themes/soho-dark.png`} alt="Soho Dark" />
+                                <img src="/images/themes/soho-dark.png" alt="Soho Dark" />
                             </button>
                             <span>Soho Dark</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('viva-light')}>
-                                <img src={`/images/themes/viva-light.svg`} alt="Viva Light" />
+                                <img src="/images/themes/viva-light.svg" alt="Viva Light" />
                             </button>
                             <span>Viva Light</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('viva-dark', true)}>
-                                <img src={`/images/themes/viva-dark.svg`} alt="Viva Dark" />
+                                <img src="/images/themes/viva-dark.svg" alt="Viva Dark" />
                             </button>
                             <span>Viva Dark</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('mira')}>
-                                <img src={`/images/themes/mira.jpg`} alt="Mira" />
+                                <img src="/images/themes/mira.jpg" alt="Mira" />
                             </button>
                             <span>Mira</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('nano')}>
-                                <img src={`/images/themes/nano.jpg`} alt="Nano" />
+                                <img src="/images/themes/nano.jpg" alt="Nano" />
                             </button>
                             <span>Nano</span>
                         </div>
@@ -260,73 +260,73 @@ export default function Config(props) {
                     <div className="grid free-themes">
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('saga-blue')}>
-                                <img src={`/images/themes/saga-blue.png`} alt="Saga Blue" />
+                                <img src="/images/themes/saga-blue.png" alt="Saga Blue" />
                             </button>
                             <span>Saga Blue</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('saga-green')}>
-                                <img src={`/images/themes/saga-green.png`} alt="Saga Green" />
+                                <img src="/images/themes/saga-green.png" alt="Saga Green" />
                             </button>
                             <span>Saga Green</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('saga-orange')}>
-                                <img src={`/images/themes/saga-orange.png`} alt="Saga Orange" />
+                                <img src="/images/themes/saga-orange.png" alt="Saga Orange" />
                             </button>
                             <span>Saga Orange</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('saga-purple')}>
-                                <img src={`/images/themes/saga-purple.png`} alt="Saga Purple" />
+                                <img src="/images/themes/saga-purple.png" alt="Saga Purple" />
                             </button>
                             <span>Saga Purple</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('vela-blue', true)}>
-                                <img src={`/images/themes/vela-blue.png`} alt="Vela Blue" />
+                                <img src="/images/themes/vela-blue.png" alt="Vela Blue" />
                             </button>
                             <span>Vela Blue</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('vela-green', true)}>
-                                <img src={`/images/themes/vela-green.png`} alt="Vela Green" />
+                                <img src="/images/themes/vela-green.png" alt="Vela Green" />
                             </button>
                             <span>Vela Green</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('vela-orange', true)}>
-                                <img src={`/images/themes/vela-orange.png`} alt="Vela Orange" />
+                                <img src="/images/themes/vela-orange.png" alt="Vela Orange" />
                             </button>
                             <span>Vela Orange</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('vela-purple', true)}>
-                                <img src={`/images/themes/vela-purple.png`} alt="Vela Purple" />
+                                <img src="/images/themes/vela-purple.png" alt="Vela Purple" />
                             </button>
                             <span>Vela Purple</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('arya-blue', true)}>
-                                <img src={`/images/themes/arya-blue.png`} alt="Arya Blue" />
+                                <img src="/images/themes/arya-blue.png" alt="Arya Blue" />
                             </button>
                             <span>Arya Blue</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('arya-green', true)}>
-                                <img src={`/images/themes/arya-green.png`} alt="Arya Green" />
+                                <img src="/images/themes/arya-green.png" alt="Arya Green" />
                             </button>
                             <span>Arya Green</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('arya-orange', true)}>
-                                <img src={`/images/themes/arya-orange.png`} alt="Arya Orange" />
+                                <img src="/images/themes/arya-orange.png" alt="Arya Orange" />
                             </button>
                             <span>Arya Orange</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('arya-purple', true)}>
-                                <img src={`/images/themes/arya-purple.png`} alt="Arya Purple" />
+                                <img src="/images/themes/arya-purple.png" alt="Arya Purple" />
                             </button>
                             <span>Arya Purple</span>
                         </div>
@@ -336,49 +336,49 @@ export default function Config(props) {
                     <div className="grid free-themes">
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('nova')}>
-                                <img src={`/images/themes/nova.png`} alt="Nova" />
+                                <img src="/images/themes/nova.png" alt="Nova" />
                             </button>
                             <span>Nova</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('nova-alt')}>
-                                <img src={`/images/themes/nova-alt.png`} alt="Nova Alt" />
+                                <img src="/images/themes/nova-alt.png" alt="Nova Alt" />
                             </button>
                             <span>Nova Alt</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('nova-accent')}>
-                                <img src={`/images/themes/nova-accent.png`} alt="Nova Accent" />
+                                <img src="/images/themes/nova-accent.png" alt="Nova Accent" />
                             </button>
                             <span>Nova Accent</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('luna-blue', true)}>
-                                <img src={`/images/themes/luna-blue.png`} alt="Luna Blue" />
+                                <img src="/images/themes/luna-blue.png" alt="Luna Blue" />
                             </button>
                             <span>Luna Blue</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('luna-green', true)}>
-                                <img src={`/images/themes/luna-green.png`} alt="Luna Green" />
+                                <img src="/images/themes/luna-green.png" alt="Luna Green" />
                             </button>
                             <span>Luna Green</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('luna-amber', true)}>
-                                <img src={`/images/themes/luna-amber.png`} alt="Luna Amber" />
+                                <img src="/images/themes/luna-amber.png" alt="Luna Amber" />
                             </button>
                             <span>Luna Amber</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('luna-pink', true)}>
-                                <img src={`/images/themes/luna-pink.png`} alt="Luna Pink" />
+                                <img src="/images/themes/luna-pink.png" alt="Luna Pink" />
                             </button>
                             <span>Luna Pink</span>
                         </div>
                         <div className="col-3">
                             <button className="p-link" onClick={() => onThemeChange('rhea', false)}>
-                                <img src={`/images/themes/rhea.png`} alt="Rhea" />
+                                <img src="/images/themes/rhea.png" alt="Rhea" />
                             </button>
                             <span>Rhea</span>
                         </div>
