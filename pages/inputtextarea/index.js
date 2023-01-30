@@ -91,7 +91,7 @@ const InputTextareaDemo = () => {
                 <title>React Textarea Component</title>
                 <meta name="description" content="InputTextarea adds styling, key filtering and autoResize functionality to standard textarea element." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>InputTextarea</h1>

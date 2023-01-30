@@ -53,7 +53,7 @@ const FieldsetDemo = () => {
                 <title>React Fieldset Component</title>
                 <meta name="description" content="Fieldset is a grouping component with a content toggle feature." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Fieldset</h1>

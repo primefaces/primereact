@@ -59,7 +59,7 @@ const MenuDemo = () => {
                 <title>React Menu Component</title>
                 <meta name="description" content="Menu is a navigation/command component that supports dynamic and static positioning." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Menu</h1>

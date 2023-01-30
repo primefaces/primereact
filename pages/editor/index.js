@@ -79,7 +79,7 @@ const EditorDemo = () => {
                 <title>React Editor Component</title>
                 <meta name="description" content="Editor is rich text editor component based on Quill." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Editor</h1>

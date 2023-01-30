@@ -127,7 +127,7 @@ const TreeDemo = () => {
                 <title>React Tree Component</title>
                 <meta name="description" content="Tree is used to display hierarchical data." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Tree</h1>

@@ -48,7 +48,7 @@ const ContextMenuDemo = () => {
                 <meta name="description" content="ContextMenu displays an overlay menu on right click of its target." />
             </Head>
 
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>ContextMenu</h1>

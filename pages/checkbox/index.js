@@ -85,7 +85,7 @@ const CheckboxDemo = () => {
                 <title>React Checkbox Component</title>
                 <meta name="description" content="Checkbox is an extension to standard checkbox element with theming." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Checkbox</h1>

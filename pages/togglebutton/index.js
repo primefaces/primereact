@@ -67,7 +67,7 @@ const ToggleButtonDemo = () => {
                 <title>React ToggleButton Component</title>
                 <meta name="description" content="ToggleButton is used to select a boolean value using a button." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>ToggleButton</h1>

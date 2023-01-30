@@ -53,7 +53,7 @@ const PanelDemo = () => {
                 <title>React Panel Component</title>
                 <meta name="description" content="Panel is a container component with an optional content toggle feature." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Panel</h1>

@@ -47,7 +47,7 @@ const OrganizationChartDemo = () => {
                 <title>React OrganizationChart Component</title>
                 <meta name="description" content="OrganizationChart visualizes hierarchical organization data." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>OrganizationChart</h1>

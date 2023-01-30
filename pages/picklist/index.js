@@ -42,7 +42,7 @@ const PickListDemo = () => {
                 <title>React PickList Component</title>
                 <meta name="description" content="PickList is used to reorder items between different lists." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>PickList</h1>

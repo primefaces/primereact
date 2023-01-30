@@ -60,7 +60,7 @@ const ChipDemo = () => {
                 <title>React Chip Component</title>
                 <meta name="description" content="Chip represents entities using icons, labels and images." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Chip</h1>

@@ -73,7 +73,7 @@ const MultiStateCheckboxDemo = () => {
                 <title>React MultiStateCheckbox Component</title>
                 <meta name="description" content="MultiStateCheckbox is used to select a state from given multiple states." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>MultiStateCheckbox</h1>

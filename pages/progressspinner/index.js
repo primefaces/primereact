@@ -48,7 +48,7 @@ const SkeletonDemo = () => {
                 <title>React ProgressSpinner Component</title>
                 <meta name="description" content="ProgressSpinner is a process status indicator." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>ProgressSpinner</h1>

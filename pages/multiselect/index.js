@@ -122,7 +122,7 @@ const MultiSelectDemo = () => {
                 <title>React MultiSelect Component</title>
                 <meta name="description" content="MultiSelect is used to select multiple items from a collection." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>MultiSelect</h1>

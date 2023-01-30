@@ -60,7 +60,7 @@ const TimelineDemo = () => {
                 <title>React Timeline Component</title>
                 <meta name="description" content="Timeline visualizes a series of chained events." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Timeline</h1>

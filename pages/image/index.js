@@ -59,7 +59,7 @@ const ImageDemo = () => {
                 <title>React Image Component</title>
                 <meta name="description" content="Displays a single image with preview and tranformation options." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Image</h1>

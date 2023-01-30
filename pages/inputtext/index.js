@@ -103,7 +103,7 @@ const InputTextDemo = () => {
                 <title>React InputText Component</title>
                 <meta name="description" content="InputText is an extension to standard input element with theming and keyfiltering." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>InputText</h1>

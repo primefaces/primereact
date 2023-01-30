@@ -66,7 +66,7 @@ const TerminalDemo = () => {
                 <title>React Tag Component</title>
                 <meta name="description" content="Tag component is used to categorize content." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Tag</h1>

@@ -79,7 +79,7 @@ const RadioButtonDemo = () => {
                 <title>React RadioButton Component</title>
                 <meta name="description" content="RadioButton is an extension to standard radio button element with theming." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>RadioButton</h1>

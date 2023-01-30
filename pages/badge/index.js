@@ -66,7 +66,7 @@ const BadgeDemo = () => {
                 <title>React Badge Component</title>
                 <meta name="description" content="Badge is a small status indicator for another element." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Badge</h1>

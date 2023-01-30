@@ -62,7 +62,7 @@ const SplitterDemo = () => {
                 <title>React Splitter Component</title>
                 <meta name="description" content="Splitter is utilized to separate and resize panels." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Splitter</h1>

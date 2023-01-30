@@ -36,7 +36,7 @@ const StyleClassDemo = () => {
                 <title>React StyleClass Component</title>
                 <meta name="description" content="StyleClass manages css classes declaratively to during enter/leave animations or just to toggle classes on an element." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>StyleClass</h1>

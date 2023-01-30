@@ -36,7 +36,7 @@ const InputGroupDemo = () => {
                 <title>React InputGroup Component</title>
                 <meta name="description" content="Text, icon, buttons and other content can be grouped next to an input." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>InputGroup</h1>

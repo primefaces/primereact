@@ -80,7 +80,7 @@ const TabViewDemo = () => {
                 <title>React Tabs Component</title>
                 <meta name="description" content="TabView is a container component to group content with tabs." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>TabView</h1>

@@ -54,7 +54,7 @@ const BlockUIDemo = () => {
                 <title>React BlockUI Component</title>
                 <meta name="description" content="BlockUI can block certain elements or the whole page." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>BlockUI</h1>

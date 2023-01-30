@@ -47,7 +47,7 @@ const DataViewDemo = () => {
                 <title>React DataView Component</title>
                 <meta name="description" content="DataView displays data in grid or list layout with pagination and sorting features." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>DataView</h1>

@@ -137,7 +137,7 @@ const ButtonDemo = () => {
                 <title>React Button Component</title>
                 <meta name="description" content="Button is an extension to standard input element with icons and theming." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Button</h1>

@@ -73,7 +73,7 @@ const RatingDemo = () => {
                 <title>React Rating Component</title>
                 <meta name="description" content="Rating component is a star based selection input." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Rating</h1>

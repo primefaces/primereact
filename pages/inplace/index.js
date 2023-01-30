@@ -64,7 +64,7 @@ const ChipDemo = () => {
                 <title>React Inplace Component</title>
                 <meta name="description" content="Inplace provides an easy to do editing and display at the same time where clicking the output displays the actual content." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Inplace</h1>

@@ -97,7 +97,7 @@ const ChipsDemo = () => {
                 <title>React Chips Component</title>
                 <meta name="description" content="Chips is used to enter multiple values on an input field." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Chips</h1>

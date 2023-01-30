@@ -53,7 +53,7 @@ const MegaMenuDemo = () => {
                 <title>React MegaMenu Component</title>
                 <meta name="description" content="MegaMenu is navigation component that displays submenus together." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>MegaMenu</h1>

@@ -41,7 +41,7 @@ const ToolbarDemo = () => {
                 <title>React Toolbar Component</title>
                 <meta name="description" content="Toolbar is a grouping component for buttons and other content." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Toolbar</h1>

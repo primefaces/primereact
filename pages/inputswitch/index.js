@@ -79,7 +79,7 @@ const InputSwitchDemo = () => {
                 <title>React InputSwitch Component</title>
                 <meta name="description" content="InputSwitch is used to select a boolean value." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>InputSwitch</h1>

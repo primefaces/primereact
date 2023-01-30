@@ -47,7 +47,7 @@ const TieredMenuDemo = () => {
                 <title>React TieredMenu Component</title>
                 <meta name="description" content="TieredMenu displays submenus in nested overlays." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>TieredMenu</h1>

@@ -65,7 +65,7 @@ const DividerDemo = () => {
                 <title>React Divider Component</title>
                 <meta name="description" content="Divider is used to separate contents." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Divider</h1>

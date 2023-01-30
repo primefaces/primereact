@@ -78,7 +78,7 @@ const ColorPickerDemo = () => {
                 <title>React ColorPicker Component</title>
                 <meta name="description" content="ColorPicker is an input component to select a color." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>ColorPicker</h1>

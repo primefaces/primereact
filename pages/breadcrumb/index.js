@@ -47,7 +47,7 @@ const BreadCrumbDemo = () => {
                 <title>React BreadCrumb Component</title>
                 <meta name="description" content="Breadcrumb provides contextual information about page hierarchy." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Breadcrumb</h1>

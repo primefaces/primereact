@@ -108,7 +108,7 @@ const InputNumberDemo = () => {
                 <title>React InputNumber Component</title>
                 <meta name="description" content="InputNumber is an input component to provide numerical input." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>InputNumber</h1>

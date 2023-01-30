@@ -71,7 +71,7 @@ const ToastDemo = () => {
                 <title>React Toast Component</title>
                 <meta name="description" content="Toast is used to display messages in an overlay." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Toast</h1>

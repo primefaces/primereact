@@ -455,7 +455,7 @@ const DataTableDemo = () => {
                 <title>React Table Component</title>
                 <meta name="description" content="DataTable displays data in tabular format" />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>DataTable</h1>

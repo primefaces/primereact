@@ -77,7 +77,7 @@ const SpeedDialDemo = () => {
                 <title>React Speed Dial Component</title>
                 <meta name="description" content="When pressed, a floating action button can display multiple primary actions that can be performed on a page." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Speed Dial</h1>

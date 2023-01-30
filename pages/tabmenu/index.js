@@ -47,7 +47,7 @@ const TabMenuDemo = () => {
                 <title>React TabMenu Component</title>
                 <meta name="description" content="TabMenu is a navigation/command component that displays items as tab headers." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>TabMenu</h1>

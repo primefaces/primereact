@@ -86,7 +86,7 @@ const CascadeSelectDemo = () => {
                 <title>React CascadeSelect Component</title>
                 <meta name="description" content="CascadeSelect is a form component to select a value from a nested structure of options." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>CascadeSelect</h1>

@@ -59,7 +59,7 @@ const MessageDemo = () => {
                 <title>React Message Component</title>
                 <meta name="description" content="Message component displays information related to another element such as invalid input." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Message</h1>

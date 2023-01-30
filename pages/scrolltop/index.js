@@ -48,7 +48,7 @@ const ScrollTopDemo = () => {
                 <title>React ScrollTop Component</title>
                 <meta name="description" content="ScrollTop gets displayed after a certain scroll position and used to navigates to the top of the page quickly." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>ScrollTop</h1>

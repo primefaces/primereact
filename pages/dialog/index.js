@@ -77,7 +77,7 @@ const DialogDemo = () => {
                 <title>React Dialog Component</title>
                 <meta name="description" content="Dialog is a container to display content in an overlay window." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Dialog</h1>

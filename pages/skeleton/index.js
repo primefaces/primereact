@@ -60,7 +60,7 @@ const SkeletonDemo = () => {
                 <title>React Skeleton Component</title>
                 <meta name="description" content="Skeleton is a placeholder to display instead of the actual content." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Skeleton</h1>

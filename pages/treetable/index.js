@@ -250,7 +250,7 @@ const TreeTableDemo = () => {
                 <title>React TreeTable Component</title>
                 <meta name="description" content="TreeTable is used to display hierarchical data in tabular format." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>TreeTable</h1>

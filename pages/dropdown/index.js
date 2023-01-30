@@ -129,7 +129,7 @@ const DropdownDemo = () => {
                 <title>React Select Component</title>
                 <meta name="description" content="Dropdown also known as Select, is used to choose an item from a collection of options." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Dropdown</h1>

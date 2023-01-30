@@ -59,7 +59,7 @@ const OrderListDemo = () => {
                 <title>React OrderList Component</title>
                 <meta name="description" content="OrderList is used to sort a collection." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>OrderList</h1>

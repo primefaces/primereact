@@ -65,7 +65,7 @@ const CarouselDemo = () => {
                 <title>React Carousel Component</title>
                 <meta name="description" content="Carousel is a content slider featuring various customization options." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Carousel</h1>

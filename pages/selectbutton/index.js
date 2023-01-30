@@ -78,7 +78,7 @@ const SelectButtonDemo = () => {
                 <title>React SelectButton Component</title>
                 <meta name="description" content="SelectButton is used to choose single or multiple items from a list using buttons." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>SelectButton</h1>

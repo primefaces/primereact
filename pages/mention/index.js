@@ -90,7 +90,7 @@ const MentionDemo = () => {
                 <title>React Mention Component</title>
                 <meta name="description" content="Mention component is used to refer someone or something." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Mention</h1>

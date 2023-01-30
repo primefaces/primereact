@@ -53,7 +53,7 @@ const DataScrollerDemo = () => {
                 <title>React DataScroller Component</title>
                 <meta name="description" content="DataScroller displays data with on demand loading using scroll." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>DataScroller</h1>

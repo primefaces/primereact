@@ -71,7 +71,7 @@ const MessagesDemo = () => {
                 <title>React Messages Component</title>
                 <meta name="description" content="Messages component is used to display inline messages" />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Messages</h1>

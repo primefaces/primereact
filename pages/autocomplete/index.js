@@ -121,7 +121,7 @@ const AutoCompleteDemo = () => {
                 <title>React AutoComplete Component</title>
                 <meta name="description" content="AutoComplete is an input component that provides real-time suggestions while being typed." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>AutoComplete</h1>

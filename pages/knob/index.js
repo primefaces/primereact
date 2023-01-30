@@ -114,7 +114,7 @@ const KnobDemo = () => {
                 <title>React Knob Component</title>
                 <meta name="description" content="Knob is a form component to define number inputs with a dial." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Knob</h1>

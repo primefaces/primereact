@@ -47,7 +47,7 @@ const ConfirmPopupDemo = () => {
                 <title>React Confirmation Popup Component</title>
                 <meta name="description" content="ConfirmPopup is an easy to use and customizable Confirmation API using a popover." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>ConfirmPopup</h1>

@@ -47,7 +47,7 @@ const DeferredContentDemo = () => {
                 <title>React Deferred Content Component</title>
                 <meta name="description" content="DeferredContent postpones the loading the content that is initially not in the viewport until it becomes visible on scroll." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>DeferredContent</h1>

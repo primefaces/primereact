@@ -97,7 +97,7 @@ const PasswordDemo = () => {
                 <title>React Password Component</title>
                 <meta name="description" content="Password displays strength indicator for password fields." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Password</h1>

@@ -48,7 +48,7 @@ const RippleDemo = () => {
                 <title>React Ripple Component</title>
                 <meta name="description" content="Ripple component adds ripple effect to the host element." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Ripple</h1>

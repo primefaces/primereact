@@ -65,7 +65,7 @@ const VirtualScrollerDemo = () => {
                 <title>React VirtualScroller Component</title>
                 <meta name="description" content="VirtualScroller is a performant approach to handle huge data efficiently." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>VirtualScroller</h1>

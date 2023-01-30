@@ -42,7 +42,7 @@ const TerminalDemo = () => {
                 <title>React Terminal Component</title>
                 <meta name="description" content="Terminal is a text based user interface." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Terminal</h1>

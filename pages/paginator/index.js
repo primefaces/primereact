@@ -53,7 +53,7 @@ const PaginatorDemo = () => {
                 <title>React Paginator Component</title>
                 <meta name="description" content="Paginator is a generic widget to display content in paged format." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Paginator</h1>

@@ -66,7 +66,7 @@ const AvatarDemo = () => {
                 <title>React Avatar Component</title>
                 <meta name="description" content="Avatar represents people using icons, labels and images." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Avatar</h1>

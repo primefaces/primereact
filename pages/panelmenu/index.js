@@ -47,7 +47,7 @@ const PanelMenuDemo = () => {
                 <title>React PanelMenu Component</title>
                 <meta name="description" content="PanelMenu is a hybrid of accordion-tree components." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>PanelMenu</h1>

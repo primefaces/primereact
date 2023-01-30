@@ -47,7 +47,7 @@ const CardDemo = () => {
                 <title>React Card Component</title>
                 <meta name="description" content="Card is a flexible container component." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Card</h1>

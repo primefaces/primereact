@@ -102,7 +102,7 @@ const TreeSelectDemo = () => {
                 <title>React TreeSelect Component</title>
                 <meta name="description" content="TreeSelect is a form component to choose from hierarchical data." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>TreeSelect</h1>

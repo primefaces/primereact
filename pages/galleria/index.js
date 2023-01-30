@@ -164,7 +164,7 @@ const GalleriaDemo = () => {
                 <title>React Gallery Component</title>
                 <meta name="description" content="Galleria is a content gallery component." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Galleria</h1>

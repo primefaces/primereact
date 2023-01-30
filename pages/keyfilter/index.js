@@ -71,7 +71,7 @@ const KeyFilterDemo = () => {
                 <title>React KeyFilter Component</title>
                 <meta name="description" content="KeyFilter feature restricts user input based on a regular expression." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>KeyFilter</h1>

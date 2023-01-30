@@ -65,7 +65,7 @@ const SidebarDemo = () => {
                 <title>React Sidebar Component</title>
                 <meta name="description" content="Sidebar, also known as Drawer, is a container component displayed as an overlay." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Sidebar</h1>

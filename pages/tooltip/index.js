@@ -89,7 +89,7 @@ const TooltipDemo = () => {
                 <title>React Tooltip Component</title>
                 <meta name="description" content="Tooltip functionality is integrated within various PrimeReact components." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Tooltip</h1>

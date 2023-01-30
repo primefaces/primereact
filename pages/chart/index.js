@@ -101,7 +101,7 @@ const ChartDemo = () => {
                 <title>React Chart Component</title>
                 <meta name="description" content="Chart components are based on Chart.js, an open source HTML5 based charting library." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Chart</h1>

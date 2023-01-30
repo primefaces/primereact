@@ -72,7 +72,7 @@ const TriStateCheckboxDemo = () => {
                 <title>React TriStateCheckbox Component</title>
                 <meta name="description" content="TriStateCheckbox is used to select either true, false or null as the value." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>TriStateCheckbox</h1>

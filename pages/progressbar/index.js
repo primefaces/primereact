@@ -60,7 +60,7 @@ const ProgressBarDemo = () => {
                 <title>React ProgressBar Component</title>
                 <meta name="description" content="ProgressBar is a process status indicator." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>ProgressBar</h1>

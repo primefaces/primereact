@@ -102,7 +102,7 @@ const ListBoxDemo = () => {
                 <title>React ListBox Component</title>
                 <meta name="description" content="ListBox is used to select one or more values from a list of items." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>ListBox</h1>

@@ -47,7 +47,7 @@ const MenubarDemo = () => {
                 <title>React Navbar Component</title>
                 <meta name="description" content="Menubar is a horizontal menu component." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Menubar</h1>

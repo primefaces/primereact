@@ -95,7 +95,7 @@ const SplitButtonDemo = () => {
                 <title>React SplitButton Component</title>
                 <meta name="description" content="SplitButton groups a set of commands in an overlay with a default command." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>SplitButton</h1>

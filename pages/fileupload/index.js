@@ -60,7 +60,7 @@ const FileUploadDemo = () => {
                 <title>React Upload Component</title>
                 <meta name="description" content="FileUpload is an advanced uploader with dragdrop support, multi file uploads, auto uploading, progress tracking and validations." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>FileUpload</h1>

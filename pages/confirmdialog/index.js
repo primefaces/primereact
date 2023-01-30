@@ -53,7 +53,7 @@ const ConfirmDialogDemo = () => {
                 <title>React Confirmation Dialog Component</title>
                 <meta name="description" content="ConfirmDialog is an easy to use and customizable Confirmation API using a dialog" />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>ConfirmDialog</h1>

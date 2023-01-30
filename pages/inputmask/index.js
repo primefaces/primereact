@@ -97,7 +97,7 @@ const InputMaskDemo = () => {
                 <title>React Mask Component</title>
                 <meta name="description" content="InputMask component is used to enter input in a certain format such as numeric, date, currency, email and phone." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>InputMask</h1>

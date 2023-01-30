@@ -47,7 +47,7 @@ const StepsDemo = () => {
                 <title>React Stepper Component</title>
                 <meta name="description" content="Steps also known as Stepper, is an indicator for the steps in a workflow. Layout of steps component is optimized for responsive design." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Steps</h1>

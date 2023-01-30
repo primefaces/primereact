@@ -47,7 +47,7 @@ const SlideMenuDemo = () => {
                 <title>React SlideMenu Component</title>
                 <meta name="description" content="SlideMenu displays submenus with a slide animation." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Slide Menu</h1>

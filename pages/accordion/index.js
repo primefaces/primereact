@@ -68,7 +68,7 @@ const AccordionDemo = () => {
                 <title>React Accordion Component</title>
                 <meta name="description" content="Accordion groups a collection of contents in tabs." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Accordion</h1>

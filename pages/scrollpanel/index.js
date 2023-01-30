@@ -47,7 +47,7 @@ const ScrollPanelDemo = () => {
                 <title>React ScrollPanel Component</title>
                 <meta name="description" content="ScrollPanel is a cross browser, lightweight and skinnable alternative to native browser scrollbar." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>ScrollPanel</h1>

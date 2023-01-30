@@ -66,7 +66,7 @@ const SliderDemo = () => {
                 <title>React Slider Component</title>
                 <meta name="description" content="Slider is a component to provide input with a drag handle." />
             </Head>
-            <div className="content-section doc">
+            <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Slider</h1>
