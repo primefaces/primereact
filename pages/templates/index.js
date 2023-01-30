@@ -33,7 +33,7 @@ const TemplatesPage = () => {
                             <a href="https://www.primefaces.org/sakai-react" className="flex-auto p-button p-component" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Preview</span>
                             </a>
-                            <a href="https://github.com/primereact/sakai-react" className="flex-auto p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
+                            <a href="https://github.com/primefaces/sakai-react" className="flex-auto p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Download</span>
                             </a>
                         </div>
