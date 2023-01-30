@@ -70,7 +70,7 @@ const TemplateSection = (props) => {
                         </a>
                     </div>
                     <div className="template-block block-middle border-none box-shadow-none mr-2 flex justify-content-center align-items-center flex-column">
-                        <img className="img-1" src={props.dark ? `/images/landing-new/templates/templates-text-dark.png` : `/images/landing-new/templates/templates-text-light.png`} alt="template-text" height={110} />
+                        <img className="img-1" src={props.dark ? '/images/landing-new/templates/templates-text-dark.png' : '/images/landing-new/templates/templates-text-light.png'} alt="template-text" height={110} />
                     </div>
                     <div
                         className="template-block block-4 ml-2 flex justify-content-center align-items-center"

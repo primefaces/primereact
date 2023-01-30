@@ -49,7 +49,7 @@ export function CustomStorageDoc(props) {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt={rowData.country.code} src={`images/flag/flag_placeholder.png`} className={`flag flag-${rowData.country.code}`} width="30" />
+                <img alt={rowData.country.code} src={'images/flag/flag_placeholder.png'} className={`flag flag-${rowData.country.code}`} width="30" />
                 <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );

@@ -47,7 +47,7 @@ export default function TemplateDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Image src={`/images/galleria/galleria12.jpg`} template={icon} alt="Image" preview width="250" />
+                <Image src={'/images/galleria/galleria12.jpg'} template={icon} alt="Image" preview width="250" />
             </div>
             <DocSectionCode code={code} />
         </>

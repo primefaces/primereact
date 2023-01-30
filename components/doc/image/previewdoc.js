@@ -41,7 +41,7 @@ export default function PreviewDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Image src={`/images/galleria/galleria10.jpg`} alt="Image" width="250" preview />
+                <Image src={'/images/galleria/galleria10.jpg'} alt="Image" width="250" preview />
             </div>
             <DocSectionCode code={code} />
         </>

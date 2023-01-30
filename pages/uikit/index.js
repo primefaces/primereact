@@ -25,7 +25,7 @@ const UIKitPage = (props) => {
                     <div className="card mb-5" style={{ borderRadius: '50px' }}>
                         <div className="flex flex-column md:flex-row align-items-center gap-4 md:gap-8 mb-8">
                             <div className="w-full md:w-6">
-                                <img alt="PrimeReact Designer" src={`/images/uikit/uikit-figma.png`} className="w-full" />
+                                <img alt="PrimeReact Designer" src={'/images/uikit/uikit-figma.png'} className="w-full" />
                             </div>
                             <div className="w-full md:w-6">
                                 <div className="text-primary font-bold mb-2">UP-TO-DATE</div>
@@ -78,12 +78,12 @@ const UIKitPage = (props) => {
                                 </ul>
                             </div>
                             <div className="w-full md:w-6">
-                                <img alt="PrimeReact Designer" src={`/images/uikit/uikit-system.png`} className="w-full" />
+                                <img alt="PrimeReact Designer" src={'/images/uikit/uikit-system.png'} className="w-full" />
                             </div>
                         </div>
                         <div className="flex flex-column md:flex-row align-items-center gap-4 md:gap-8">
                             <div className="w-full md:w-6">
-                                <img alt="PrimeReact Designer" src={`/images/uikit/uikit-themes.png`} className="w-full" />
+                                <img alt="PrimeReact Designer" src={'/images/uikit/uikit-themes.png'} className="w-full" />
                             </div>
                             <div className="w-full md:w-6">
                                 <div className="text-primary font-bold mb-2">DARK MODE</div>
@@ -111,7 +111,7 @@ const UIKitPage = (props) => {
                             style={{ borderRadius: '50px' }}
                         >
                             <span className="text-gray-900 text-4xl font-bold mb-5">Preview Light</span>
-                            <img alt="PrimeReact Designer" src={`/images/uikit/logo-figma-light.svg`} className="w-4rem" />
+                            <img alt="PrimeReact Designer" src={'/images/uikit/logo-figma-light.svg'} className="w-4rem" />
                         </a>
                         <a
                             href="https://www.figma.com/file/LJBqVfMpK8xY6KR2KIc8RK/Preview-%7C-Dark-%7C-PrimeOne-2022-%7C-1.0.0?node-id=806%3A36648"
@@ -119,7 +119,7 @@ const UIKitPage = (props) => {
                             style={{ borderRadius: '50px' }}
                         >
                             <span className="text-white text-4xl font-bold mb-5">Preview Dark</span>
-                            <img alt="PrimeReact Designer" src={`/images/uikit/logo-figma-dark.svg`} className="w-4rem" />
+                            <img alt="PrimeReact Designer" src={'/images/uikit/logo-figma-dark.svg'} className="w-4rem" />
                         </a>
                     </div>
 

@@ -381,31 +381,31 @@ PrimeReact.nullSortOrder = -1; // Default value is 1 for Excel like sorting.
                             <tr>
                                 <th>
                                     <div className="flex align-items-center">
-                                        <img src={`/images/browsers/edge.svg`} alt="edge" style={{ width: '1.5rem' }} className="mr-2" />
+                                        <img src={'/images/browsers/edge.svg'} alt="edge" style={{ width: '1.5rem' }} className="mr-2" />
                                         Edge
                                     </div>
                                 </th>
                                 <th>
                                     <div className="flex align-items-center">
-                                        <img src={`/images/browsers/firefox.svg`} alt="firefox" style={{ width: '1.5rem' }} className="mr-2" />
+                                        <img src={'/images/browsers/firefox.svg'} alt="firefox" style={{ width: '1.5rem' }} className="mr-2" />
                                         Firefox
                                     </div>
                                 </th>
                                 <th>
                                     <div className="flex align-items-center">
-                                        <img src={`/images/browsers/chrome.svg`} alt="chrome" style={{ width: '1.5rem' }} className="mr-2" />
+                                        <img src={'/images/browsers/chrome.svg'} alt="chrome" style={{ width: '1.5rem' }} className="mr-2" />
                                         Chrome
                                     </div>
                                 </th>
                                 <th>
                                     <div className="flex align-items-center">
-                                        <img src={`/images/browsers/safari.svg`} alt="safari" style={{ width: '1.5rem' }} className="mr-2" />
+                                        <img src={'/images/browsers/safari.svg'} alt="safari" style={{ width: '1.5rem' }} className="mr-2" />
                                         Safari
                                     </div>
                                 </th>
                                 <th>
                                     <div className="flex align-items-center">
-                                        <img src={`/images/browsers/opera.svg`} alt="opera" style={{ width: '1.5rem' }} className="mr-2" />
+                                        <img src={'/images/browsers/opera.svg'} alt="opera" style={{ width: '1.5rem' }} className="mr-2" />
                                         Opera
                                     </div>
                                 </th>

@@ -41,7 +41,7 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Image src={`/images/galleria/galleria7.jpg`} alt="Image" width="250" />
+                <Image src={'/images/galleria/galleria7.jpg'} alt="Image" width="250" />
             </div>
             <DocSectionCode code={code} />
         </>

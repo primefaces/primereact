@@ -22,7 +22,7 @@ const BlockSection = () => {
                     <div className="prime-block flex align-self-stretch p-1">
                         <div className="block-sidebar w-1 p-3">
                             <div className="logo">
-                                <img src={`/images/landing-new/blocks/logo-1.svg`} alt="block logo" />
+                                <img src={'/images/landing-new/blocks/logo-1.svg'} alt="block logo" />
                             </div>
                             <div className="sidebar-menu mt-5">
                                 <div className="bar w-8 my-3"></div>
@@ -115,7 +115,7 @@ const BlockSection = () => {
                     <div className="prime-block p-1 flex align-self-stretch flex-column">
                         <div className="block-header py-3 px-4 flex justify-content-between align-items-center">
                             <div className="logo pr-5">
-                                <img src={`/images/landing-new/blocks/logo-1.svg`} alt="block logo" />
+                                <img src={'/images/landing-new/blocks/logo-1.svg'} alt="block logo" />
                             </div>
                             <div className="flex-auto sidebar-menu flex">
                                 <div className="bar w-2rem mx-2"></div>
@@ -157,7 +157,7 @@ const BlockSection = () => {
                     <div className="prime-block flex align-self-stretch p-1">
                         <div className="block-sidebar p-3">
                             <div className="logo">
-                                <img src={`/images/landing-new/blocks/logo-2.svg`} alt="block logo" />
+                                <img src={'/images/landing-new/blocks/logo-2.svg'} alt="block logo" />
                             </div>
                             <div className="sidebar-menu mt-5">
                                 <div className="circle my-3"></div>
@@ -223,7 +223,7 @@ const BlockSection = () => {
                     <div className="prime-block flex align-self-stretch p-1">
                         <div className="block-sidebar w-1 p-3">
                             <div className="logo">
-                                <img src={`/images/landing-new/blocks/logo-1.svg`} alt="block logo" />
+                                <img src={'/images/landing-new/blocks/logo-1.svg'} alt="block logo" />
                             </div>
                             <div className="sidebar-menu mt-5">
                                 <div className="bar w-8 my-3"></div>
@@ -287,7 +287,7 @@ const BlockSection = () => {
                     <div className="prime-block  flex align-self-stretch p-1">
                         <div className="block-sidebar p-3">
                             <div className="logo">
-                                <img src={`/images/landing-new/blocks/logo-2.svg`} alt="block logo" />
+                                <img src={'/images/landing-new/blocks/logo-2.svg'} alt="block logo" />
                             </div>
                             <div className="sidebar-menu mt-5">
                                 <div className="circle my-3"></div>
@@ -350,7 +350,7 @@ const BlockSection = () => {
                     <div className="prime-block p-1 flex align-self-stretch flex-column">
                         <div className="block-header py-3 px-4 flex justify-content-between align-items-center">
                             <div className="logo pr-5">
-                                <img src={`/images/landing-new/blocks/logo-1.svg`} alt="block logo" />
+                                <img src={'/images/landing-new/blocks/logo-1.svg'} alt="block logo" />
                             </div>
                             <div className="flex-auto sidebar-menu flex">
                                 <div className="bar w-2rem mx-2"></div>
@@ -365,7 +365,7 @@ const BlockSection = () => {
                             <div className="block-main h-full flex justify-content-center align-items-center flex-column">
                                 <div className="block-item block-item-active animation-2 mx-3 w-8rem text-center flex flex-column align-items-center overflow-visible">
                                     <div className="-mt-4">
-                                        <img src={`/images/landing-new/blocks/question.svg`} alt="question mark" />
+                                        <img src={'/images/landing-new/blocks/question.svg'} alt="question mark" />
                                     </div>
                                     <div className="bar w-2rem mt-2"></div>
                                     <div className="bar w-6rem mt-2"></div>

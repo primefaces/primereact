@@ -3,7 +3,7 @@ import React from 'react';
 const SupportPage = () => {
     return (
         <div className="content-section">
-            <img alt="PRO Support" src={`/images/support/support-header.png`} className="w-full block mb-5" style={{ borderRadius: '20px' }} />
+            <img alt="PRO Support" src={'/images/support/support-header.png'} className="w-full block mb-5" style={{ borderRadius: '20px' }} />
 
             <div className="flex flex-column xl:flex-row mb-5 gap-5">
                 <div className="card xl:w-3 m-0 relative overflow-hidden">

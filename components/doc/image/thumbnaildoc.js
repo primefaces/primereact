@@ -41,7 +41,7 @@ export default function ThumbnailDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Image src={`/images/galleria/galleria14s.jpg`} zoomSrc={`/images/galleria/galleria14.jpg`} alt="Image" width="80" height="60" preview />
+                <Image src={'/images/galleria/galleria14s.jpg'} zoomSrc={'/images/galleria/galleria14.jpg'} alt="Image" width="80" height="60" preview />
             </div>
             <DocSectionCode code={code} />
         </>

@@ -74,7 +74,7 @@ export default function ImageDemo() {
                         </span>
                     </InplaceDisplay>
                     <InplaceContent>
-                        <img alt="Nature" src={`images/nature/nature1.jpg`} />
+                        <img alt="Nature" src={'images/nature/nature1.jpg'} />
                     </InplaceContent>
                 </Inplace>
             </div>
