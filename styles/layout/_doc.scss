@@ -2,7 +2,7 @@
     display: flex;
     flex-wrap: wrap;
 
-    > .doc-main {
+    .doc-main {
         flex-grow: 1;
         flex-shrink: 1;
         flex-basis: 0;
@@ -96,16 +96,6 @@
                 &:nth-child(2):not(:last-child) {
                     color: var(--primary-color);
                     font-weight: 600;
-                }
-            }
-        }
-
-        &.browsers {
-            td {
-                &:first-child {
-                    font-family: var(--font-family);
-                    font-weight: normal;
-                    color: var(--text-color);
                 }
             }
         }

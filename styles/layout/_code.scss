@@ -392,7 +392,7 @@
     }
 }
  
- pre[class*="language-"] {
+pre[class*="language-"] {
     position: relative;
     background: transparent !important;
 
@@ -409,7 +409,7 @@
         font-size: 14px;
         border-radius: 10px;
     }
-}
+    }
 
 .copy-to-clipboard-button {
     display: none;

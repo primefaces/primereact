@@ -84,7 +84,6 @@ export default function Layout(props) {
         <div className={wrapperClassName}>
             <Analytics />
             <Head>
-                <base href="/"></base>
                 <title>PrimeReact - React UI Component Library</title>
                 <meta charSet="UTF-8" />
                 <meta name="description" content="The ultimate collection of design-agnostic, flexible and accessible React UI Components." />

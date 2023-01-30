@@ -4,13 +4,13 @@
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--text-800);
     border-top: 1px solid var(--surface-border);
 
     a {
         color: var(--primary-color);
-        font-weight: 600;
+        font-weight: 700;
 
         &:hover {
             text-decoration: underline;

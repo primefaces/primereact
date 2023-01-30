@@ -7,7 +7,6 @@ import { ImportDoc } from '../../components/doc/accordion/importdoc';
 import { MultipleDoc } from '../../components/doc/accordion/multipledoc';
 import { StyleDoc } from '../../components/doc/accordion/styledoc';
 import { TemplateDoc } from '../../components/doc/accordion/templatedoc';
-import { DocActions } from '../../components/doc/common/docactions';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 
@@ -69,15 +68,14 @@ const AccordionDemo = () => {
                 <title>React Accordion Component</title>
                 <meta name="description" content="Accordion groups a collection of contents in tabs." />
             </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Accordion</h1>
-                    <p>Accordion groups a collection of contents in tabs.</p>
+            <div className="content-section doc">
+                <div className="doc-main">
+                    <div className="doc-intro">
+                        <h1>Accordion</h1>
+                        <p>Accordion groups a collection of contents in tabs.</p>
+                    </div>
+                    <DocSections docs={docs} />
                 </div>
-                <DocActions github="/accordion" />
-            </div>
-            <div className="content-section doc ">
-                <DocSections docs={docs} />
                 <DocSectionNav docs={docs} />
             </div>
         </div>

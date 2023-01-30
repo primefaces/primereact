@@ -81,7 +81,7 @@ export function DocSectionNav(props) {
     }, []);
 
     return (
-        <ul className={classNames('hidden xl:block', 'doc-section-nav')}>
+        <ul className="doc-section-nav">
             {props.docs.map((doc) => {
                 const hash = doc.id;
 
