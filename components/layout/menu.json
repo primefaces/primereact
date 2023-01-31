@@ -3,6 +3,7 @@
         {
             "name": "Overview",
             "icon": "pi pi-home",
+            "expanded": true,
             "children": [
                 {
                     "name": "Get Started",

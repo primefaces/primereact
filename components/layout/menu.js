@@ -57,10 +57,10 @@ export default function Menu(props) {
         }
     };
 
-    const renderChildren = (menuitem, parentIndex) => {
+    const renderRootMenuItemChildren = (menuitem, parentIndex) => {
         if (menuitem.children) {
             return (
-                <div className="hidden overflow-y-hidden transition-all transition-duration-400 transition-ease-in-out">
+                <div className={classNames({ hidden: !menuitem.expanded }, 'overflow-y-hidden transition-all transition-duration-400 transition-ease-in-out')}>
                     <ol>{menuitem.children.map((item, index) => renderChild(item, parentIndex + '_' + index))}</ol>
                 </div>
             );
@@ -85,12 +85,12 @@ export default function Menu(props) {
         );
     };
 
-    const renderMenuitems = () => {
+    const renderRootMenuItems = () => {
         return (
             <>
                 {MenuData.data.map((menuitem, index) => {
                     const label = menuitem.children ? renderRootItemButton(menuitem, index) : renderLink(menuitem);
-                    const children = renderChildren(menuitem, index);
+                    const children = renderRootMenuItemChildren(menuitem, index);
 
                     return (
                         <li key={'root_' + index}>
@@ -103,7 +103,7 @@ export default function Menu(props) {
         );
     };
 
-    const menuItems = renderMenuitems();
+    const menuItems = renderRootMenuItems();
     const sidebarClassName = classNames('layout-sidebar', { active: props.active });
 
     return (
