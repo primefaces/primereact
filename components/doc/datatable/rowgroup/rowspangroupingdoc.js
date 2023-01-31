@@ -28,7 +28,7 @@ export function RowSpanGroupingDoc(props) {
     const representativeBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt={rowData.representative.name} src={`images/avatar/${rowData.representative.image}`} width="32" style={{ verticalAlign: 'middle' }} />
+                <img alt={rowData.representative.name} src={`/images/avatar/${rowData.representative.image}`} width="32" style={{ verticalAlign: 'middle' }} />
                 <span className="vertical-align-middle ml-2">{rowData.representative.name}</span>
             </React.Fragment>
         );

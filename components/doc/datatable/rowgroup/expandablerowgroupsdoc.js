@@ -18,7 +18,7 @@ export function ExpandableRowGroupsDoc(props) {
     const headerTemplate = (data) => {
         return (
             <React.Fragment>
-                <img alt={data.representative.name} src={`images/avatar/${data.representative.image}`} width="32" style={{ verticalAlign: 'middle' }} />
+                <img alt={data.representative.name} src={`/images/avatar/${data.representative.image}`} width="32" style={{ verticalAlign: 'middle' }} />
                 <span className="vertical-align-middle ml-2">{data.representative.name}</span>
             </React.Fragment>
         );

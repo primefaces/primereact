@@ -56,7 +56,7 @@ export function RowExpandDoc(props) {
     };
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={`images/product/${rowData.image}`} alt={rowData.image} className="shadow-1 w-full" />;
+        return <img src={`/images/product/${rowData.image}`} alt={rowData.image} width="100px" className="shadow-4" />;
     };
 
     const priceBodyTemplate = (rowData) => {
@@ -168,7 +168,7 @@ export default function RowExpandDoc() {
     }
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={\`https://primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} className="shadow-1 w-full" />;
+        return <img src={\`https://primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} width="100px" className="shadow-4" />;
     }
 
     const priceBodyTemplate = (rowData) => {
@@ -284,7 +284,7 @@ export default function RowExpandDoc() {
     }
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={\`https://primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} className="shadow-1 w-full" />;
+        return <img src={\`https://primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} width="100px" className="shadow-4" />;
     }
 
     const priceBodyTemplate = (rowData) => {

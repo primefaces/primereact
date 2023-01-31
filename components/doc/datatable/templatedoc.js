@@ -19,7 +19,7 @@ export function TemplateDoc(props) {
     };
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={`images/product/${rowData.image}`} alt={rowData.image} className="product-image" />;
+        return <img src={`/images/product/${rowData.image}`} alt={rowData.image} className="product-image" />;
     };
 
     const priceBodyTemplate = (rowData) => {

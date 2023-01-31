@@ -88,7 +88,7 @@ export function FilterRowDoc(props) {
 
         return (
             <React.Fragment>
-                <img alt={representative.name} src={`images/avatar/${representative.image}`} width={32} style={{ verticalAlign: 'middle' }} />
+                <img alt={representative.name} src={`/images/avatar/${representative.image}`} width={32} style={{ verticalAlign: 'middle' }} />
                 <span className="vertical-align-middle ml-2">{representative.name}</span>
             </React.Fragment>
         );
@@ -97,7 +97,7 @@ export function FilterRowDoc(props) {
     const representativesItemTemplate = (option) => {
         return (
             <div className="p-multiselect-representative-option">
-                <img alt={option.name} src={`images/avatar/${option.image}`} width={32} style={{ verticalAlign: 'middle' }} />
+                <img alt={option.name} src={`/images/avatar/${option.image}`} width={32} style={{ verticalAlign: 'middle' }} />
                 <span className="vertical-align-middle ml-2">{option.name}</span>
             </div>
         );
@@ -256,7 +256,7 @@ export default function FilterRowDoc() {
     const representativesItemTemplate = (option) => {
         return (
             <div className="p-multiselect-representative-option">
-                <img alt={option.name} src={\`images/avatar/\${option.image}\`} width={32} style={{ verticalAlign: 'middle' }} />
+                <img alt={option.name} src={\`https://primereact.org/images/avatar/\${option.image}\`} width={32} style={{ verticalAlign: 'middle' }} />
                 <span className="vertical-align-middle ml-2">{option.name}</span>
             </div>
         );
@@ -410,7 +410,7 @@ export default function FilterRowDoc() {
     const representativesItemTemplate = (option) => {
         return (
             <div className="p-multiselect-representative-option">
-                <img alt={option.name} src={\`images/avatar/\${option.image}\`} width={32} style={{ verticalAlign: 'middle' }} />
+                <img alt={option.name} src={\`https://primereact.org/images/avatar/\${option.image}\`} width={32} style={{ verticalAlign: 'middle' }} />
                 <span className="vertical-align-middle ml-2">{option.name}</span>
             </div>
         );

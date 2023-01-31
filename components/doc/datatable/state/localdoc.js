@@ -50,7 +50,7 @@ export function LocalStorageDoc(props) {
     const representativeBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt={rowData.representative.name} src={`images/avatar/${rowData.representative.image}`} width="32" style={{ verticalAlign: 'middle' }} />
+                <img alt={rowData.representative.name} src={`/images/avatar/${rowData.representative.image}`} width="32" style={{ verticalAlign: 'middle' }} />
                 <span className="vertical-align-middle ml-2">{rowData.representative.name}</span>
             </React.Fragment>
         );
@@ -63,7 +63,7 @@ export function LocalStorageDoc(props) {
     const representativesItemTemplate = (option) => {
         return (
             <div className="p-multiselect-representative-option">
-                <img alt={option.name} src={`images/avatar/${option.image}`} width={32} style={{ verticalAlign: 'middle' }} />
+                <img alt={option.name} src={`/images/avatar/${option.image}`} width={32} style={{ verticalAlign: 'middle' }} />
                 <span className="vertical-align-middle ml-2">{option.name}</span>
             </div>
         );

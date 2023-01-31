@@ -16,7 +16,7 @@ export function BasicDoc(props) {
     const itemTemplate = (data) => {
         return (
             <div className="product-item">
-                <img src={`images/product/${data.image}`} alt={data.name} />
+                <img src={`/images/product/${data.image}`} alt={data.name} />
                 <div className="product-detail">
                     <div className="product-name">{data.name}</div>
                     <div className="product-description">{data.description}</div>
