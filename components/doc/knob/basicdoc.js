@@ -14,23 +14,27 @@ export function BasicDoc(props) {
 import React, { useState } from "react";
 import { Knob } from 'primereact/knob';
 
-export default function BasicDoc() {
+export default function BasicDemo() {
     const [value, setValue] = useState(0);
 
     return (
-        <Knob value={value} onChange={(e) => setValue(e.value)} />
+        <div className="card flex justify-content-center">
+            <Knob value={value} onChange={(e) => setValue(e.value)} />
+        </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { Knob, KnobChangeParams } from 'primereact/knob';
+import { Knob, KnobChangeEvent } from 'primereact/knob';
 
-export default function BasicDoc() {
+export default function BasicDemo() {
     const [value, setValue] = useState<number>(0);
 
     return (
-        <Knob value={value} onChange={(e: KnobChangeParams) => setValue(e.value)} />
+        <div className="card flex justify-content-center">
+            <Knob value={value} onChange={(e: KnobChangeEvent) => setValue(e.value)} />
+        </div>
     )
 }
         `
@@ -40,8 +44,7 @@ export default function BasicDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    There are two ways to display confirm popup. One of them is to use the confirmPopup method and the other is to use the &lg;ConfirmPopup&gl; tag. These independently create popup element. It supports the same properties in both.
-                    target property is mandatory to align the popup to its caller.
+                    Knob is used as a controlled input with <i>value</i> and <i>onChange</i> properties.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">

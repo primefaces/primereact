@@ -8,29 +8,33 @@ export function SizeDoc(props) {
 
     const code = {
         basic: `
-<Knob value={value} size={200} onChange={(e) => setValue(e.value)} />
+<Knob value={value} onChange={(e) => setValue(e.value)} size={200} />
         `,
         javascript: `
 import React, { useState } from 'react';
 import { Knob } from 'primereact/knob';
 
-export default function SizeDoc() {
+export default function SizeDemo() {
     const [value, setValue] = useState(60);
 
     return (
-        <Knob value={value} size={200} onChange={(e) => setValue(e.value)} />
+        <div className="card flex justify-content-center">
+            <Knob value={value} onChange={(e) => setValue(e.value)} size={200} />
+        </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from 'react';
-import { Knob, KnobChangeParams } from 'primereact/knob';
+import { Knob, KnobChangeEvent } from 'primereact/knob';
 
-export default function SizeDoc() {
+export default function SizeDemo() {
     const [value, setValue] = useState<number>(60);
 
     return (
-        <Knob value={value} size={200} onChange={(e : KnobChangeParams) => setValue(e.value)} />
+        <div className="card flex justify-content-center">
+            <Knob value={value} onChange={(e : KnobChangeEvent) => setValue(e.value)} size={200} />
+        </div>
     )
 }
         `
@@ -39,10 +43,12 @@ export default function SizeDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Size of the component in pixels.</p>
+                <p>
+                    Diameter of the knob is defined in pixels using the <i>size</i> property.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Knob value={value} size={200} onChange={(e) => setValue(e.value)} />
+                <Knob value={value} onChange={(e) => setValue(e.value)} size={200} />
             </div>
             <DocSectionCode code={code} />
         </>
