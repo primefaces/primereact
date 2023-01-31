@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { CascadeSelect } from '../../lib/cascadeselect/CascadeSelect';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function TemplateDoc(props) {
     const [selectedCity, setSelectedCity] = useState(null);
@@ -83,7 +83,7 @@ export function TemplateDoc(props) {
     const countryOptionTemplate = (option) => {
         return (
             <div className="country-item">
-                {option.states && <img alt={option.name} src="images/flag/flag_placeholder.png" className={`flag flag-${option.code.toLowerCase()}`} />}
+                {option.states && <img alt={option.name} src="/images/flag/flag_placeholder.png" className={`flag flag-${option.code.toLowerCase()}`} />}
                 {option.cities && <i className="pi pi-compass mr-2" />}
                 {option.cname && <i className="pi pi-map-marker mr-2" />}
                 <span>{option.cname || option.name}</span>
