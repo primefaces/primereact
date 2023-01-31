@@ -3,7 +3,7 @@ const FeaturesSection = (props) => {
         <section className="landing-features py-8">
             <div className="section-header">Features</div>
             <p className="section-detail">PrimeReact is the most complete solution for your UI requirements.</p>
-            <div className="grid grid-nogutter mt-7 pad-section" style={{ backgroundImage: `url(images/landing-new/wave-${props.dark ? 'dark-alt' : 'light-alt'}.svg)`, backgroundSize: 'cover' }}>
+            <div className="grid grid-nogutter mt-7 pad-section" style={{ backgroundImage: `url(/images/landing-new/wave-${props.dark ? 'dark-alt' : 'light-alt'}.svg)`, backgroundSize: 'cover' }}>
                 <div className="col-12 md:col-6 xl:col-3 flex justify-content-center p-3">
                     <div className="box p-4 w-full">
                         <img src={'/images/landing-new/features/icon-components.svg'} alt="components icon" className="block mb-3" />

@@ -245,7 +245,7 @@ export default function CellEditWithSortAndFilterDoc() {
 }
         `,
         extFiles: {
-            'DatatableDemo.css': `
+            'DataTableDemo.css': `
 /* DataTableDemo.css */
 
 .datatable-editing-demo .editable-cells-table td.p-cell-editing {

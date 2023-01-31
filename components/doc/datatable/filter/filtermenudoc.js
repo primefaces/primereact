@@ -679,7 +679,7 @@ export default function FilterMenuDoc() {
 }
         `,
         extFiles: {
-            'DatatableDemo.css': `
+            'DataTableDemo.css': `
 /* DataTableDemo.css */
 
 .datatable-filter-demo .p-paginator .p-paginator-current {
