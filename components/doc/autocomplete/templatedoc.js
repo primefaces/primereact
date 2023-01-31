@@ -29,7 +29,7 @@ export function TemplateDoc(props) {
     const itemTemplate = (item) => {
         return (
             <div className="flex align-items-center">
-                <img alt={item.name} src={'images/flag/flag_placeholder.png'} className={`flag flag-${item.code.toLowerCase()} mr-2`} style={{ width: '18px' }} />
+                <img alt={item.name} src={'/images/flag/flag_placeholder.png'} className={`flag flag-${item.code.toLowerCase()} mr-2`} style={{ width: '18px' }} />
                 <div>{item.name}</div>
             </div>
         );

@@ -1,27 +1,27 @@
-import { Dock } from '../../lib/dock/Dock';
 import { useState } from 'react';
+import { Dock } from '../../lib/dock/Dock';
+import { RadioButton } from '../../lib/radiobutton/RadioButton';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
-import { RadioButton } from '../../lib/radiobutton/RadioButton';
 
 export function BasicDoc(props) {
     const [position, setPosition] = useState('bottom');
     const items = [
         {
             label: 'Finder',
-            icon: () => <img alt="Finder" src={'https://primereact.org/images/dock/finder.svg'} width="100%" />
+            icon: () => <img alt="Finder" src="/images/dock/finder.svg" width="100%" />
         },
         {
             label: 'App Store',
-            icon: () => <img alt="App Store" src={'https://primereact.org/images/dock/appstore.svg'} width="100%" />
+            icon: () => <img alt="App Store" src="/images/dock/appstore.svg" width="100%" />
         },
         {
             label: 'Photos',
-            icon: () => <img alt="Photos" src={'https://primereact.org/images/dock/photos.svg'} width="100%" />
+            icon: () => <img alt="Photos" src="/images/dock/photos.svg" width="100%" />
         },
         {
             label: 'Trash',
-            icon: () => <img alt="trash" src={'https://primereact.org/images/dock/trash.png'} width="100%" />
+            icon: () => <img alt="trash" src="/images/dock/trash.png" width="100%" />
         }
     ];
 
@@ -59,19 +59,19 @@ export default function BasicDemo() {
     const items = [
         {
             label: 'Finder',
-            icon: () => <img alt="Finder" src={'https://primereact.org/images/dock/finder.svg'} width="100%" />,
+            icon: () => <img alt="Finder" src="https://primereact.org/images/dock/finder.svg" width="100%" />,
         },
         {
             label: 'App Store',
-            icon: () => <img alt="App Store" src={'https://primereact.org/images/dock/appstore.svg'} width="100%" />,
+            icon: () => <img alt="App Store" src="https://primereact.org/images/dock/appstore.svg" width="100%" />,
         },
         {
             label: 'Photos',
-            icon: () => <img alt="Photos" src={'https://primereact.org/images/dock/photos.svg'} width="100%" />,
+            icon: () => <img alt="Photos" src="https://primereact.org/images/dock/photos.svg" width="100%" />,
         },
         {
             label: 'Trash',
-            icon: () => <img alt="trash" src={'https://primereact.org/images/dock/trash.png'} width="100%" />,
+            icon: () => <img alt="trash" src="https://primereact.org/images/dock/trash.png" width="100%" />,
         }
     ];
 
@@ -129,19 +129,19 @@ export default function BasicDemo() {
     const items: MenuItem[] = [
         {
             label: 'Finder',
-            icon: () => <img alt="Finder" src={'https://primereact.org/images/dock/finder.svg'} width="100%" />,
+            icon: () => <img alt="Finder" src="https://primereact.org/images/dock/finder.svg" width="100%" />,
         },
         {
             label: 'App Store',
-            icon: () => <img alt="App Store" src={'https://primereact.org/images/dock/appstore.svg'} width="100%" />,
+            icon: () => <img alt="App Store" src="https://primereact.org/images/dock/appstore.svg" width="100%" />,
         },
         {
             label: 'Photos',
-            icon: () => <img alt="Photos" src={'https://primereact.org/images/dock/photos.svg'} width="100%" />,
+            icon: () => <img alt="Photos" src="https://primereact.org/images/dock/photos.svg" width="100%" />,
         },
         {
             label: 'Trash',
-            icon: () => <img alt="trash" src={'https://primereact.org/images/dock/trash.png'} width="100%" />,
+            icon: () => <img alt="trash" src="https://primereact.org/images/dock/trash.png" width="100%" />,
         }
     ];
 
@@ -227,7 +227,7 @@ export default function BasicDemo() {
                         );
                     })}
                 </div>
-                <div className="dock-window" style={{ backgroundImage: 'url(images/dock/window.jpg)' }}>
+                <div className="dock-window" style={{ backgroundImage: 'url(/images/dock/window.jpg)' }}>
                     <Dock model={items} position={position} />
                 </div>
             </div>

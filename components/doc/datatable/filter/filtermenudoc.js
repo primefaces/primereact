@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { DataTable } from '../../../lib/datatable/DataTable';
-import { Column } from '../../../lib/column/Column';
-import { DocSectionCode } from '../../common/docsectioncode';
+import React, { useEffect, useState } from 'react';
+import { CustomerService } from '../../../../service/CustomerService';
 import { FilterMatchMode, FilterOperator } from '../../../lib/api/Api';
-import { DocSectionText } from '../../common/docsectiontext';
-import { InputText } from '../../../lib/inputtext/InputText';
 import { Button } from '../../../lib/button/Button';
-import { MultiSelect } from '../../../lib/multiselect/MultiSelect';
-import { ProgressBar } from '../../../lib/progressbar/ProgressBar';
+import { Calendar } from '../../../lib/calendar/Calendar';
+import { Column } from '../../../lib/column/Column';
+import { DataTable } from '../../../lib/datatable/DataTable';
 import { Dropdown } from '../../../lib/dropdown/Dropdown';
 import { InputNumber } from '../../../lib/inputnumber/InputNumber';
+import { InputText } from '../../../lib/inputtext/InputText';
+import { MultiSelect } from '../../../lib/multiselect/MultiSelect';
+import { ProgressBar } from '../../../lib/progressbar/ProgressBar';
 import { Slider } from '../../../lib/slider/Slider';
 import { TriStateCheckbox } from '../../../lib/tristatecheckbox/TriStateCheckbox';
-import { CustomerService } from '../../../../service/CustomerService';
-import { Calendar } from '../../../lib/calendar/Calendar';
 import { classNames } from '../../../lib/utils/Utils';
+import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function FilterMenuDoc(props) {
     const [customers, setCustomers] = useState(null);
@@ -108,7 +108,7 @@ export function FilterMenuDoc(props) {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt="flag" src={'images/flag/flag_placeholder.png'} className={`flag flag-${rowData.country.code}`} width={30} />
+                <img alt="flag" src={'/images/flag/flag_placeholder.png'} className={`flag flag-${rowData.country.code}`} width={30} />
                 <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );

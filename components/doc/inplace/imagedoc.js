@@ -1,7 +1,7 @@
 import React from 'react';
+import { Inplace, InplaceContent, InplaceDisplay } from '../../../components/lib/inplace/Inplace';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
-import { Inplace, InplaceDisplay, InplaceContent } from '../../../components/lib/inplace/Inplace';
 
 export function ImageDoc(props) {
     const code = {
@@ -74,7 +74,7 @@ export default function ImageDemo() {
                         </span>
                     </InplaceDisplay>
                     <InplaceContent>
-                        <img alt="Nature" src={'images/nature/nature1.jpg'} />
+                        <img alt="Nature" src={'/images/nature/nature1.jpg'} />
                     </InplaceContent>
                 </Inplace>
             </div>

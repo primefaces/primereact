@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FilterMatchMode, FilterOperator } from '../../../components/lib/api/Api';
-import { DataTable } from '../../../components/lib/datatable/DataTable';
+import { Button } from '../../../components/lib/button/Button';
+import { Calendar } from '../../../components/lib/calendar/Calendar';
 import { Column } from '../../../components/lib/column/Column';
-import { InputText } from '../../../components/lib/inputtext/InputText';
+import { DataTable } from '../../../components/lib/datatable/DataTable';
 import { Dropdown } from '../../../components/lib/dropdown/Dropdown';
 import { InputNumber } from '../../../components/lib/inputnumber/InputNumber';
-import { Button } from '../../../components/lib/button/Button';
-import { ProgressBar } from '../../../components/lib/progressbar/ProgressBar';
-import { Calendar } from '../../../components/lib/calendar/Calendar';
+import { InputText } from '../../../components/lib/inputtext/InputText';
 import { MultiSelect } from '../../../components/lib/multiselect/MultiSelect';
+import { ProgressBar } from '../../../components/lib/progressbar/ProgressBar';
 import { Slider } from '../../../components/lib/slider/Slider';
 import { CustomerService } from '../../../service/CustomerService';
 import { DocSectionCode } from '../common/docsectioncode';
@@ -605,7 +605,7 @@ export default DataTableDemo() {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt="flag" src={'images/flag/flag_placeholder.png'} className={`flag flag-${rowData.country.code}`} width={30} />
+                <img alt="flag" src={'/images/flag/flag_placeholder.png'} className={`flag flag-${rowData.country.code}`} width={30} />
                 <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );
