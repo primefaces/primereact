@@ -3,13 +3,13 @@ import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/selectbutton/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/selectbutton/basicdoc';
-import { CustomContentDoc } from '../../components/doc/selectbutton/customcontentdoc';
 import { DisabledDoc } from '../../components/doc/selectbutton/disableddoc';
 import { FormikDoc } from '../../components/doc/selectbutton/form/formikdoc';
 import { HookFormDoc } from '../../components/doc/selectbutton/form/hookformdoc';
 import { ImportDoc } from '../../components/doc/selectbutton/importdoc';
 import { InvalidDoc } from '../../components/doc/selectbutton/invaliddoc';
-import { MultipleSelectionDoc } from '../../components/doc/selectbutton/multipleselectiondoc';
+import { MultipleDoc } from '../../components/doc/selectbutton/multipledoc';
+import { TemplateDoc } from '../../components/doc/selectbutton/templatedoc';
 
 const SelectButtonDemo = () => {
     const docs = [
@@ -24,24 +24,24 @@ const SelectButtonDemo = () => {
             component: BasicDoc
         },
         {
+            id: 'multiple',
+            label: 'Multiple',
+            component: MultipleDoc
+        },
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
             id: 'invalid',
             label: 'Invalid',
             component: InvalidDoc
         },
         {
-            id: 'deisabled',
+            id: 'disabled',
             label: 'Disabled',
             component: DisabledDoc
-        },
-        {
-            id: 'multiple',
-            label: 'Multiple',
-            component: MultipleSelectionDoc
-        },
-        {
-            id: 'template',
-            label: 'Template',
-            component: CustomContentDoc
         },
         {
             id: 'form',
