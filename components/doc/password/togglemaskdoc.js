@@ -3,23 +3,23 @@ import { Password } from '../../lib/password/Password';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function PasswordMeter(props) {
-    const [value, setValue] = useState('');
+export function ToggleMaskDoc(props) {
+    const [value, setValue] = useState(null);
 
     const code = {
         basic: `
-<Password value={value} onChange={(e) => setValue(e.target.value)} inputClassName="w-15rem" />
+<Password value={value} onChange={(e) => setValue(e.target.value)} toggleMask />
         `,
         javascript: `
 import React, { useState } from "react";
 import { Password } from 'primereact/password';
 
-export default function PasswordMeter() {
-    const [value, setValue] = useState('');
+export default function ToggleMaskDemo() {
+    const [value, setValue] = useState(null);
 
     return (
         <div className="card flex justify-content-center">
-            <Password value={value} onChange={(e) => setValue(e.target.value)} inputClassName="w-15rem" />
+            <Password value={value} onChange={(e) => setValue(e.target.value)} toggleMask />
         </div>
     )
 }
@@ -28,12 +28,12 @@ export default function PasswordMeter() {
 import React, { useState } from "react";
 import { Password } from 'primereact/password';
 
-export default function PasswordMeter() {
-    const [value, setValue] = useState<string>('');
+export default function ToggleMaskDemo() {
+    const [value, setValue] = useState<string>(null);
 
     return (
         <div className="card flex justify-content-center">
-            <Password value={value} onChange={(e : ChangeEventHandler) => setValue(e.target.value)} />
+            <Password value={value} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)} toggleMask />
         </div>
     )
 }
@@ -44,11 +44,11 @@ export default function PasswordMeter() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Without <i>feedback</i> property it shows the strength indicator.
+                    When <i>toggleMask</i> is present, an icon is displayed to show the value as plain text.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Password value={value} onChange={(e) => setValue(e.target.value)} inputClassName="w-15rem" />
+                <Password value={value} onChange={(e) => setValue(e.target.value)} toggleMask />
             </div>
             <DocSectionCode code={code} />
         </>
