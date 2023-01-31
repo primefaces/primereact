@@ -9,10 +9,6 @@
                     "to": "/setup"
                 },
                 {
-                    "name": "Examples",
-                    "href": "https://github.com/primefaces/primereact-examples"
-                },
-                {
                     "name": "Locale",
                     "to": "/locale"
                 },

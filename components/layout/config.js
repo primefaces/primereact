@@ -62,7 +62,7 @@ export default function Config(props) {
                     <h3>Free Themes</h3>
                     <p>
                         Built-in component themes created by the{' '}
-                        <a href="https://www.primefaces.org/designer/primereact" className="text-primary hover:underline font-medium">
+                        <a href="https://www.primefaces.org/designer/primereact" className="text-primary hover:underline font-semibold">
                             PrimeReact Theme Designer
                         </a>
                         .
