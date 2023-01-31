@@ -505,6 +505,10 @@
             "icon": "pi pi-search",
             "children": [
                 {
+                    "name": "About Us",
+                    "to": "/team"
+                },
+                {
                     "name": "Roadmap",
                     "to": "/roadmap"
                 },
