@@ -9,5 +9,6 @@ import { useResizeListener } from './useResizeListener';
 import { useInterval } from './useInterval';
 import { useStorage, useLocalStorage, useSessionStorage } from './useStorage';
 import { useTimeout } from './useTimeout';
+import { useCounter } from './useCounter';
 
-export { usePrevious, useMountEffect, useUpdateEffect, useUnmountEffect, useEventListener, useOverlayListener, useOverlayScrollListener, useResizeListener, useInterval, useStorage, useLocalStorage, useSessionStorage, useTimeout };
+export { usePrevious, useMountEffect, useUpdateEffect, useUnmountEffect, useEventListener, useOverlayListener, useOverlayScrollListener, useResizeListener, useInterval, useStorage, useLocalStorage, useSessionStorage, useTimeout, useCounter };

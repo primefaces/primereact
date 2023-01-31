@@ -142,3 +142,9 @@ export declare function useLocalStorage<S, K extends string = string>(initialVal
  * @param {*} initialValue - The initial value.
  * @param {string} key - The key to store the value in session storage. */
 export declare function useSessionStorage<S, K extends string = string>(initialValue: S, key: K): [S, React.Dispatch<React.SetStateAction<S>>];
+/**
+ * @todo
+ * @param {number} initialValue - The value to counter. @defaultValue 0
+ * @param {step} initialValue - The step to counter. @defaultValue 1
+ */
+export declare function useCounter(initialValue: number, options: { min: number; max: number; step: number }): any;
