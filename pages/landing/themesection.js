@@ -139,7 +139,7 @@ const ThemeSection = (props) => {
                     more...
                 </a>
             </div>
-            <div className="themes-main flex mt-7 justify-content-center pad-section" style={{ backgroundImage: `url(images/landing-new/wave-${props.dark ? 'dark-alt' : 'light-alt'}.svg)`, backgroundSize: 'cover' }}>
+            <div className="themes-main flex mt-7 justify-content-center pad-section" style={{ backgroundImage: `url(/images/landing-new/wave-${props.dark ? 'dark-alt' : 'light-alt'}.svg)`, backgroundSize: 'cover' }}>
                 <div className="box overflow-hidden z-1 p-5 table-container">
                     <DataTable
                         value={customers}
