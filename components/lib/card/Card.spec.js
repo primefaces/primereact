@@ -3,7 +3,7 @@ import { snapshot } from '../../test';
 import { Button } from '../button/Button';
 import { Card } from './Card';
 
-const header = <img alt="Card" src="images/usercard.png" />;
+const header = <img alt="Card" src="/images/usercard.png" />;
 const footer = (
     <span>
         <Button label="Save" icon="pi pi-check" />

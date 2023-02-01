@@ -12,7 +12,7 @@ exports[`Card advanced 1`] = `
     >
       <img
         alt="Card"
-        src="images/usercard.png"
+        src="/images/usercard.png"
       />
     </div>
     <div

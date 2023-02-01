@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { DataTable } from '../../../lib/datatable/DataTable';
-import { Column } from '../../../lib/column/Column';
+import React, { useEffect, useState } from 'react';
+import { CustomerService } from '../../../../service/CustomerService';
 import { FilterMatchMode } from '../../../lib/api/Api';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
+import { Column } from '../../../lib/column/Column';
+import { DataTable } from '../../../lib/datatable/DataTable';
+import { Dropdown } from '../../../lib/dropdown/Dropdown';
 import { InputText } from '../../../lib/inputtext/InputText';
 import { MultiSelect } from '../../../lib/multiselect/MultiSelect';
-import { Dropdown } from '../../../lib/dropdown/Dropdown';
 import { TriStateCheckbox } from '../../../lib/tristatecheckbox/TriStateCheckbox';
-import { CustomerService } from '../../../../service/CustomerService';
 import { classNames } from '../../../lib/utils/Utils';
+import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function FilterRowDoc(props) {
     const [customers, setCustomers] = useState(null);
@@ -77,7 +77,7 @@ export function FilterRowDoc(props) {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt="flag" src={'images/flag/flag_placeholder.png'} className={`flag flag-${rowData.country.code}`} width={30} />
+                <img alt="flag" src={'/images/flag/flag_placeholder.png'} className={`flag flag-${rowData.country.code}`} width={30} />
                 <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );

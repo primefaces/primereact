@@ -126,7 +126,7 @@ const UIKitPage = (props) => {
                     <div className="card mb-5" style={{ borderRadius: '50px' }}>
                         <div className="text-900 font-bold text-5xl mb-4 text-center">Pricing</div>
                         <div className="mb-2 text-center line-height-3">Choose the right plan for your business. Whether you are an individual or a member of a team, UI Kit is available for affordable prices.</div>
-                        <a href="https://www.primefaces.org/uikit/licenses" className="mb-6 text-primary hover:underline font-medium text-center block">
+                        <a href="https://www.primefaces.org/uikit/licenses" className="mb-6 text-primary hover:underline font-semibold text-center block">
                             View License Details
                         </a>
 
@@ -282,7 +282,7 @@ const UIKitPage = (props) => {
                                 <div className="text-xl text-900 line-height-3 mb-2 text-900">We're a reseller, are we able to purchase a license on behalf of our client?</div>
                                 <p className="mt-0 mb-6 p-0 line-height-3">
                                     Yes, after the purchase, please{' '}
-                                    <a href="mailto:contact@primetek.com.tr" className="text-primary hover:underline font-medium">
+                                    <a href="mailto:contact@primetek.com.tr" className="text-primary hover:underline font-semibold">
                                         contact us
                                     </a>{' '}
                                     so we can transfer the license to your client.
@@ -301,7 +301,7 @@ const UIKitPage = (props) => {
                                 <div className="text-xl text-900 line-height-3 mb-2 text-900">How can I get support?</div>
                                 <p className="mt-0 mb-6 p-0 line-height-3">
                                     Support is provided by PrimeTek via
-                                    <a href="https://forum.primefaces.org/viewforum.php?f=159" className="text-primary hover:underline font-medium">
+                                    <a href="https://forum.primefaces.org/viewforum.php?f=159" className="text-primary hover:underline font-semibold">
                                         a dedicated forum channel monitored
                                     </a>{' '}
                                     by PrimeTek support staff.

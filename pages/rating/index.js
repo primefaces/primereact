@@ -30,16 +30,6 @@ const RatingDemo = () => {
             component: WithoutCancelDoc
         },
         {
-            id: 'readonly',
-            label: 'ReadOnly',
-            component: ReadOnlyDoc
-        },
-        {
-            id: 'disabled',
-            label: 'Disabled',
-            component: DisabledDoc
-        },
-        {
             id: 'numberofstars',
             label: 'Number of Stars',
             component: NumberOfStarsDoc
@@ -48,6 +38,16 @@ const RatingDemo = () => {
             id: 'template',
             label: 'Template',
             component: TemplateDoc
+        },
+        {
+            id: 'readonly',
+            label: 'ReadOnly',
+            component: ReadOnlyDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
         },
         {
             id: 'style',

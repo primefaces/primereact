@@ -8,7 +8,7 @@ export function BasicDoc(props) {
 
     const code = {
         basic: `
-<Slider value={value} onChange={(e) => setValue(e.value)} className="w-14rem" />
+<Slider value={value} onChange={(e) => setValue(e.value)} />
         `,
         javascript: `
 import React, { useState } from "react";
@@ -18,19 +18,23 @@ export default function BasicDemo() {
     const [value, setValue] = useState(null);
 
     return (
-        <Slider value={value} onChange={(e) => setValue(e.value)} className="w-14rem" />
+        <div className="card flex justify-content-center">
+            <Slider value={value} onChange={(e) => setValue(e.value)} className="w-14rem" />
+        </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { Slider, SliderChangeParams } from "primereact/slider";
+import { Slider, SliderChangeEvent } from "primereact/slider";
 
 export default function BasicDemo() {
     const [value, setValue] = useState<number>(null);
 
     return (
-        <Slider value={value} onChange={(e: SliderChangeParams) => setValue(e.value)} className="w-14rem" />
+        <div className="card flex justify-content-center">
+            <Slider value={value} onChange={(e: SliderChangeEvent) => setValue(e.value)} className="w-14rem" />
+        </div>
     )
 }
         `

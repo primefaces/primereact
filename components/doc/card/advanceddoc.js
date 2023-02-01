@@ -1,10 +1,10 @@
-import { Card } from '../../lib/card/Card';
 import { Button } from '../../lib/button/Button';
-import { DocSectionText } from '../common/docsectiontext';
+import { Card } from '../../lib/card/Card';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function AdvancedDoc(props) {
-    const header = <img alt="Card" src="images/usercard.png" />;
+    const header = <img alt="Card" src="/images/usercard.png" />;
     const footer = (
         <div className="flex flex-wrap justify-content-end gap-2">
             <Button label="Save" icon="pi pi-check" />

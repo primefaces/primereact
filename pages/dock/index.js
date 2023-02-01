@@ -47,7 +47,7 @@ const DockDemo = () => {
                 <title>React Dock Component</title>
                 <meta name="description" content="Dock is a navigation component consisting of menuitems." />
             </Head>
-            <div className="doc">
+            <div className="doc dock-demo">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Dock</h1>

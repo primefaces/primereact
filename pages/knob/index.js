@@ -5,6 +5,8 @@ import { AccessibilityDoc } from '../../components/doc/knob/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/knob/basicdoc';
 import { ColorDoc } from '../../components/doc/knob/colordoc';
 import { DisabledDoc } from '../../components/doc/knob/disableddoc';
+import { FormikDoc } from '../../components/doc/knob/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/knob/form/hookformdoc';
 import { ImportDoc } from '../../components/doc/knob/importdoc';
 import { MinMaxDoc } from '../../components/doc/knob/minmaxdoc';
 import { ReactiveDoc } from '../../components/doc/knob/reactivedoc';
@@ -14,8 +16,6 @@ import { StepDoc } from '../../components/doc/knob/stepdoc';
 import { StrokeDoc } from '../../components/doc/knob/strokedoc';
 import { StyleDoc } from '../../components/doc/knob/styledoc';
 import { TemplateDoc } from '../../components/doc/knob/templatedoc';
-import { FormikDoc } from '../../components/doc/knob/validation/formikdoc';
-import { HookFormDoc } from '../../components/doc/knob/validation/hookformdoc';
 
 const KnobDemo = () => {
     const docs = [
@@ -28,16 +28,6 @@ const KnobDemo = () => {
             id: 'basic',
             label: 'Basic',
             component: BasicDoc
-        },
-        {
-            id: 'readOnly',
-            label: 'ReadOnly',
-            component: ReadOnlyDoc
-        },
-        {
-            id: 'disabled',
-            label: 'Disabled',
-            component: DisabledDoc
         },
         {
             id: 'minmax',
@@ -70,9 +60,19 @@ const KnobDemo = () => {
             component: ColorDoc
         },
         {
-            id: 'reactive',
+            id: 'reactivec',
             label: 'Reactive',
             component: ReactiveDoc
+        },
+        {
+            id: 'readonly',
+            label: 'ReadOnly',
+            component: ReadOnlyDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
         },
         {
             id: 'form',

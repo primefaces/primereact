@@ -107,7 +107,7 @@ const ChartDemo = () => {
                         <h1>Chart</h1>
                         <p>
                             Chart components are based on{' '}
-                            <a href="http://www.chartjs.org/" className="text-primary hover:underline font-medium">
+                            <a href="http://www.chartjs.org/" className="text-primary hover:underline font-semibold">
                                 Chart.js
                             </a>
                             , an open source HTML5 based charting library.

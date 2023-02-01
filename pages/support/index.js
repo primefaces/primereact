@@ -10,18 +10,18 @@ const SupportPage = () => {
                     <i className="pi pi-github absolute text-200" style={{ bottom: '-50px', right: '-50px', fontSize: '200px', transform: 'rotateX(45deg) rotateY(0deg) rotateZ(-45deg)' }}></i>
                     <div className="text-xl text-900 font-semibold mb-3 relative">Community Support</div>
                     <p className="m-0 line-height-3 relative">
-                        <a href="https://forum.primefaces.org/viewforum.php?f=57" className="text-primary hover:underline font-medium">
+                        <a href="https://forum.primefaces.org/viewforum.php?f=57" className="text-primary hover:underline font-semibold">
                             Forum
                         </a>{' '}
                         and{' '}
-                        <a href="https://discord.gg/gzKFYnpmCY" className="text-primary hover:underline font-medium">
+                        <a href="https://discord.gg/gzKFYnpmCY" className="text-primary hover:underline font-semibold">
                             Discord
                         </a>{' '}
                         are where the community users gather to seek support, post topics and discuss the technology. GitHub issue tracker is the channel where community users can create tickets however PrimeTek does not guarantee a response time
                         although they are monitored and maintained by our staff. If you need to secure our response within 1 business day, you may consider PRO support instead.
                     </p>
                 </div>
-                <div className="card m-0 xl:w-9 text-white bg-cover" style={{ backgroundImage: `url(images/support/card-pro.jpg)` }}>
+                <div className="card m-0 xl:w-9 text-white bg-cover" style={{ backgroundImage: `url(/images/support/card-pro.jpg)` }}>
                     <div className="text-xl font-semibold mb-3">PRO Support</div>
                     <p className="m-0 line-height-3">
                         With PRO support, it's easy to support, tune and add features to PrimeReact as if it were an in- house library. PRO is a term based commercial support service. With the exclusive services of PRO account, it is no longer needed

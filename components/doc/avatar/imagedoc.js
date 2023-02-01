@@ -10,7 +10,7 @@ export function ImageDoc(props) {
 <Avatar image="/images/avatar/asiyajavayant.png" size="large" shape="circle" />
 <Avatar image="/images/avatar/onyamalimba.png" shape="circle" />
 
-<Avatar className="p-overlay-badge" image="images/organization/walter.jpg" size="xlarge">
+<Avatar className="p-overlay-badge" image="/images/organization/walter.jpg" size="xlarge">
     <Badge value="4" severity="danger" />
 </Avatar>
 
@@ -34,7 +34,7 @@ export default function ImageDemo() {
 
                 <div className="flex-auto">
                     <h5>Badge</h5>
-                    <Avatar className="p-overlay-badge" image="images/organization/walter.jpg" size="xlarge">
+                    <Avatar className="p-overlay-badge" image="https://primereact.org/images/organization/walter.jpg" size="xlarge">
                         <Badge value="4" severity="danger" />
                     </Avatar>
                 </div>
@@ -66,7 +66,7 @@ export default function ImageDemo() {
 
                 <div className="flex-auto">
                     <h5>Badge</h5>
-                    <Avatar className="p-overlay-badge" image="images/organization/walter.jpg" size="xlarge">
+                    <Avatar className="p-overlay-badge" image="https://primereact.org/images/organization/walter.jpg" size="xlarge">
                         <Badge value="4" severity="danger" />
                     </Avatar>
                 </div>
@@ -100,7 +100,7 @@ export default function ImageDemo() {
 
                     <div className="flex-auto">
                         <h5>Badge</h5>
-                        <Avatar className="p-overlay-badge" image="images/organization/walter.jpg" size="xlarge">
+                        <Avatar className="p-overlay-badge" image="/images/organization/walter.jpg" size="xlarge">
                             <Badge value="4" severity="danger" />
                         </Avatar>
                     </div>

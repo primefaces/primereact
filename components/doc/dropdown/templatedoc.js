@@ -26,7 +26,7 @@ export function TemplateDoc(props) {
         if (option) {
             return (
                 <div className="country-item country-item-value">
-                    <img alt={option.name} src="images/flag/flag_placeholder.png" className={`flag flag-${option.code.toLowerCase()}`} />
+                    <img alt={option.name} src="/images/flag/flag_placeholder.png" className={`flag flag-${option.code.toLowerCase()}`} />
                     <div>{option.name}</div>
                 </div>
             );
@@ -38,7 +38,7 @@ export function TemplateDoc(props) {
     const countryOptionTemplate = (option) => {
         return (
             <div className="country-item">
-                <img alt={option.name} src="images/flag/flag_placeholder.png" className={`flag flag-${option.code.toLowerCase()}`} />
+                <img alt={option.name} src="/images/flag/flag_placeholder.png" className={`flag flag-${option.code.toLowerCase()}`} />
                 <div>{option.name}</div>
             </div>
         );

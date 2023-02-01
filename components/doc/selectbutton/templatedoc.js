@@ -3,7 +3,7 @@ import { SelectButton } from '../../lib/selectbutton/SelectButton';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function CustomContentDoc(props) {
+export function TemplateDoc(props) {
     const [value, setValue] = useState(null);
     const justifyOptions = [
         { icon: 'pi pi-align-left', value: 'left' },
@@ -18,14 +18,13 @@ export function CustomContentDoc(props) {
 
     const code = {
         basic: `
-<SelectButton value={value} options={justifyOptions} onChange={(e) => setValue(e.value)} itemTemplate={justifyTemplate} optionLabel="value" />
-
+<SelectButton value={value} onChange={(e) => setValue(e.value)} itemTemplate={justifyTemplate} optionLabel="value" options={justifyOptions} />
         `,
         javascript: `
 import React, { useState } from "react";
 import { SelectButton } from 'primereact/selectbutton';
 
-export default function CustomContentDoc() {
+export default function TemplateDemo() {
     const [value, setValue] = useState(null);
     const justifyOptions = [
         {icon: 'pi pi-align-left', value: 'left'},
@@ -39,29 +38,39 @@ export default function CustomContentDoc() {
     }
 
     return (
-        <SelectButton value={value} options={justifyOptions} onChange={(e) => setValue(e.value)} itemTemplate={justifyTemplate} optionLabel="value" />
+        <div className="card flex justify-content-center">
+            <SelectButton value={value} onChange={(e) => setValue(e.value)} itemTemplate={justifyTemplate} optionLabel="value" options={justifyOptions} />
+        </div>
     );
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { SelectButton, SelectButtonChangeParams } from 'primereact/selectbutton';
+import { SelectButton, SelectButtonChangeEvent } from 'primereact/selectbutton';
 
-export default function CustomContentDoc() {
-    const [value, setValue] = useState<string>(null);
-    const justifyOptions = [
+interface JustifyOption {
+    icon: string;
+    value: string;
+}
+
+export default function TemplateDemo() {
+    const [value, setValue] = useState<JustifyOption>(null);
+    const justifyOptions: JustifyOption[] = [
         {icon: 'pi pi-align-left', value: 'left'},
         {icon: 'pi pi-align-right', value: 'Right'},
         {icon: 'pi pi-align-center', value: 'Center'},
         {icon: 'pi pi-align-justify', value: 'Justify'}
     ];
 
-    const justifyTemplate = (option) => {
+    const justifyTemplate = (option: JustifyOption) => {
         return <i className={option.icon}></i>;
     }
 
     return (
-        <SelectButton value={value} options={justifyOptions} onChange={(e : SelectButtonChangeParams) => setValue(e.value)} itemTemplate={justifyTemplate} optionLabel="value" />
+        <div className="card flex justify-content-center">
+            <SelectButton value={value} onChange={(e: SelectButtonChangeEvent) => setValue(e.value)} itemTemplate={justifyTemplate} optionLabel="value" options={justifyOptions} />
+        </div>
+    )
 }
         `
     };
@@ -70,12 +79,12 @@ export default function CustomContentDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Options support templating using the <i>itemTemplate</i> property that references a function to render the content. Notice the usage of optionLabel, although it is not rendered visually, it is still required to be used as the list
-                    key.
+                    Options support templating using the <i>itemTemplate</i> property that references a function to render the content. Notice the usage of <i>optionLabel</i>, although not rendered visually, it is still required to be used as the
+                    list key.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <SelectButton value={value} options={justifyOptions} onChange={(e) => setValue(e.value)} itemTemplate={justifyTemplate} optionLabel="value" />
+                <SelectButton value={value} onChange={(e) => setValue(e.value)} itemTemplate={justifyTemplate} optionLabel="value" options={justifyOptions} />
             </div>
             <DocSectionCode code={code} />
         </>

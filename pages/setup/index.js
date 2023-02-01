@@ -424,22 +424,8 @@ PrimeReact.nullSortOrder = -1; // Default value is 1 for Excel like sorting.
                 </div>
 
                 <h3>Samples</h3>
-                <h5>Quickstart</h5>
                 <p>
-                    An{' '}
-                    <a href="https://github.com/primefaces/primereact-examples/tree/main/cra-basic" className="layout-content-link">
-                        example application
-                    </a>{' '}
-                    based on create-react-app is available at github.
-                </p>
-
-                <h5>Typescript</h5>
-                <p>
-                    Typescript is fully supported as type definition files are provided in the npm package of PrimeReact. A sample{' '}
-                    <a href="https://github.com/primefaces/primereact-examples/tree/main/cra-basic-ts" className="layout-content-link">
-                        typescript-primereact
-                    </a>{' '}
-                    application with create-react-app is available as at github.
+                    Visit the <a href="https://github.com/primefaces/primereact-examples">examples repository</a> for starters based on Create React App, Next JS, Remix or Vite.
                 </p>
 
                 <h5>Next.js</h5>

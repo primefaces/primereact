@@ -2,13 +2,8 @@ import Head from 'next/head';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/keyfilter/accessibilitydoc';
-import { AlphabeticDoc } from '../../components/doc/keyfilter/alphabeticdoc';
-import { AlphanumbericDoc } from '../../components/doc/keyfilter/alphanumberdoc';
-import { HexDoc } from '../../components/doc/keyfilter/hexdoc';
 import { ImportDoc } from '../../components/doc/keyfilter/importdoc';
-import { IntegersDoc } from '../../components/doc/keyfilter/integersdoc';
-import { MoneyDoc } from '../../components/doc/keyfilter/moneydoc';
-import { NumbersDoc } from '../../components/doc/keyfilter/numbersdoc';
+import { PresetsDoc } from '../../components/doc/keyfilter/presetsdoc';
 import { RegexDoc } from '../../components/doc/keyfilter/regexdoc';
 
 const KeyFilterDemo = () => {
@@ -19,34 +14,9 @@ const KeyFilterDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'integers',
-            label: 'Integers',
-            component: IntegersDoc
-        },
-        {
-            id: 'numbers',
-            label: 'Numbers',
-            component: NumbersDoc
-        },
-        {
-            id: 'money',
-            label: 'Money',
-            component: MoneyDoc
-        },
-        {
-            id: 'hex',
-            label: 'Hex',
-            component: HexDoc
-        },
-        {
-            id: 'alphabetic',
-            label: 'Alphabetic',
-            component: AlphabeticDoc
-        },
-        {
-            id: 'alphanumberic',
-            label: 'Alphannumeric',
-            component: AlphanumbericDoc
+            id: 'presets',
+            label: 'Presets',
+            component: PresetsDoc
         },
         {
             id: 'regex',
@@ -69,13 +39,13 @@ const KeyFilterDemo = () => {
         <div>
             <Head>
                 <title>React KeyFilter Component</title>
-                <meta name="description" content="KeyFilter feature restricts user input based on a regular expression." />
+                <meta name="description" content="KeyFilter is a built-in feature of InputText to restrict user input based on a regular expression." />
             </Head>
             <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>KeyFilter</h1>
-                        <p>KeyFilter feature restricts user input based on a regular expression.</p>
+                        <p>KeyFilter is a built-in feature of InputText to restrict user input based on a regular expression.</p>
                     </div>
                     <DocSections docs={docs} />
                 </div>

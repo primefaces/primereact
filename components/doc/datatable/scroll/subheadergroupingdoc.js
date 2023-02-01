@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { DataTable } from '../../../lib/datatable/DataTable';
-import { Column } from '../../../lib/column/Column';
+import React, { useEffect, useState } from 'react';
 import { CustomerService } from '../../../../service/CustomerService';
+import { Column } from '../../../lib/column/Column';
+import { DataTable } from '../../../lib/datatable/DataTable';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 
@@ -17,7 +17,7 @@ export function ScrollSubHeaderGroupingDoc(props) {
     const countryTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt="flag" src={'images/flag/flag_placeholder.png'} className={`flag flag-${rowData.country.code}`} width={30} />
+                <img alt="flag" src={'/images/flag/flag_placeholder.png'} className={`flag flag-${rowData.country.code}`} width={30} />
                 <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );

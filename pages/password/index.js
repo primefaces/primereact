@@ -10,10 +10,11 @@ import { FormikDoc } from '../../components/doc/password/form/formikdoc';
 import { HookFormDoc } from '../../components/doc/password/form/hookformdoc';
 import { ImportDoc } from '../../components/doc/password/importdoc';
 import { InvalidDoc } from '../../components/doc/password/invaliddoc';
-import { PasswordMeter } from '../../components/doc/password/passwordmeterdoc';
-import { ShowPassword } from '../../components/doc/password/showpassworddoc';
+import { LocaleDoc } from '../../components/doc/password/localedoc';
+import { MeterDoc } from '../../components/doc/password/meterdoc';
 import { StyleDoc } from '../../components/doc/password/styledoc';
-import { Templating } from '../../components/doc/password/templatingdoc';
+import { TemplateDoc } from '../../components/doc/password/templatedoc';
+import { ToggleMaskDoc } from '../../components/doc/password/togglemaskdoc';
 
 const PasswordDemo = () => {
     const docs = [
@@ -28,14 +29,24 @@ const PasswordDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'passwordmeterdoc',
-            label: 'Password Meter',
-            component: PasswordMeter
+            id: 'meter',
+            label: 'Meter',
+            component: MeterDoc
         },
         {
-            id: 'showpassword',
-            label: 'Show Password',
-            component: ShowPassword
+            id: 'locale',
+            label: 'Locale',
+            component: LocaleDoc
+        },
+        {
+            id: 'togglemask',
+            label: 'Toggle Mask',
+            component: ToggleMaskDoc
+        },
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
             id: 'floatlabel',
@@ -68,11 +79,6 @@ const PasswordDemo = () => {
                     component: HookFormDoc
                 }
             ]
-        },
-        {
-            id: 'templating',
-            label: 'Templating',
-            component: Templating
         },
         {
             id: 'style',

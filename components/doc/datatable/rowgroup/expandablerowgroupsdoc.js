@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { DataTable } from '../../../lib/datatable/DataTable';
-import { Column } from '../../../lib/column/Column';
+import React, { useEffect, useRef, useState } from 'react';
 import { CustomerService } from '../../../../service/CustomerService';
+import { Column } from '../../../lib/column/Column';
+import { DataTable } from '../../../lib/datatable/DataTable';
+import { Toast } from '../../../lib/toast/Toast';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
-import { Toast } from '../../../lib/toast/Toast';
 
 export function ExpandableRowGroupsDoc(props) {
     const [customers, setCustomers] = useState([]);
@@ -38,7 +38,7 @@ export function ExpandableRowGroupsDoc(props) {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt={rowData.country.name} src={'images/flag/flag_placeholder.png'} className={`flag flag-${rowData.country.code}`} width="30" />
+                <img alt={rowData.country.name} src={'/images/flag/flag_placeholder.png'} className={`flag flag-${rowData.country.code}`} width="30" />
                 <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );
