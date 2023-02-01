@@ -256,6 +256,15 @@ interface DataTableFilterEvent {
 }
 
 /**
+ * Custom sort,page,filter event used especially in lazy tables where the event contain the current state.
+ * @see {@link DataTableProps.onFilter}
+ * @see {@link DataTableProps.onSort}
+ * @see {@link DataTableProps.onPage}
+ * @event
+ */
+interface DataTableLazyEvent extends DataTablePageEvent, DataTableFilterEvent, DataTableSortEvent {}
+
+/**
  * Custom data selectable event.
  * @see {@link DataTableProps.isDataSelectable}
  * @event
@@ -1174,14 +1183,14 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     onContextMenuSelectionChange?(event: DataTableSelectionChangeEvent<TValue>): void;
     /**
      * Callback to invoke on filtering.
-     * @param {DataTableFilterEvent} event - Custom filter event.
+     * @param {DataTableFilterEvent | DataTableLazyEvent} event - Custom filter event.
      */
-    onFilter?(event: DataTableFilterEvent): void;
+    onFilter?(event: DataTableFilterEvent | DataTableLazyEvent): void;
     /**
      * Callback to invoke on pagination.
-     * @param {DataTablePageEvent} event - Custom pagination event.
+     * @param {DataTablePageEvent | DataTableLazyEvent} event - Custom pagination event.
      */
-    onPage?(event: DataTablePageEvent): void;
+    onPage?(event: DataTablePageEvent | DataTableLazyEvent): void;
     /**
      * Callback to invoke when a row is clicked.
      * @param {DataTableRowClickEvent} event - Custom row click event.
@@ -1269,9 +1278,9 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     onSelectionChange?(event: DataTableSelectionChangeEvent<TValue>): void;
     /**
      * Callback to invoke on sort.
-     * @param {DataTableSortEvent} event - Custom sort event.
+     * @param {DataTableSortEvent | DataTableLazyEvent} event - Custom sort event.
      */
-    onSort?(event: DataTableSortEvent): void;
+    onSort?(event: DataTableSortEvent | DataTableLazyEvent): void;
     /**
      * Callback to invoke table state is restored.
      * @param {object} state - Table state.
