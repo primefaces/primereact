@@ -8,6 +8,29 @@
 import * as React from 'react';
 
 /**
+ * Custom MouseDataOptions
+ * @group Misc
+ */
+declare interface MouseDataOptions {
+    /**
+     * Position of the mouse for the x-axis.
+     */
+    x: number;
+    /**
+     * Position of the mouse for the y-axis.
+     */
+    y: number;
+    /**
+     * Used to reset the mouse position data.
+     */
+    reset: () => void;
+    /**
+     * The ref of the element to position.
+     */
+    ref: React.RefObject<HTMLElement>;
+}
+
+/**
  * Custom event options.
  * @group Misc
  */
@@ -148,3 +171,7 @@ export declare function useSessionStorage<S, K extends string = string>(initialV
  * @param {step} initialValue - The step to counter. @defaultValue 1
  */
 export declare function useCounter(initialValue: number, options: { min: number; max: number; step: number }): any;
+/**
+ * @todo
+ */
+export declare function useMouse(): MouseDataOptions;

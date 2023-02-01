@@ -10,5 +10,22 @@ import { useInterval } from './useInterval';
 import { useStorage, useLocalStorage, useSessionStorage } from './useStorage';
 import { useTimeout } from './useTimeout';
 import { useCounter } from './useCounter';
+import { useMouse } from './useMouse';
 
-export { usePrevious, useMountEffect, useUpdateEffect, useUnmountEffect, useEventListener, useOverlayListener, useOverlayScrollListener, useResizeListener, useInterval, useStorage, useLocalStorage, useSessionStorage, useTimeout, useCounter };
+export {
+    usePrevious,
+    useMountEffect,
+    useUpdateEffect,
+    useUnmountEffect,
+    useEventListener,
+    useOverlayListener,
+    useOverlayScrollListener,
+    useResizeListener,
+    useInterval,
+    useStorage,
+    useLocalStorage,
+    useSessionStorage,
+    useTimeout,
+    useCounter,
+    useMouse
+};

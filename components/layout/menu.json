@@ -308,7 +308,7 @@
                             "name": "Menu",
                             "to": "/menu"
                         },
-                        
+
                         {
                             "name": "Menubar",
                             "to": "/menubar"
@@ -496,6 +496,32 @@
             "name": "PrimeFlex CSS",
             "icon": "pi pi-table",
             "href": "https://www.primefaces.org/primeflex"
+        },
+        {
+            "name": "Hooks",
+            "icon": "pi pi-link",
+            "children": [
+                {
+                    "name": "useCounter",
+                    "to": "/hooks/useCounter"
+                },
+                {
+                    "name": "useMouse",
+                    "to": "/hooks/useMouse"
+                },
+                {
+                    "name": "useMove",
+                    "to": "/hooks/useMove"
+                },
+                {
+                    "name": "useIntersectionObserver",
+                    "to": "/hooks/useIntersectionObserver"
+                },
+                {
+                    "name": "useFavicon",
+                    "to": "/hooks/useFavicon"
+                }
+            ]
         },
         {
             "name": "Discover",
