@@ -60,7 +60,7 @@
         "@typescript-eslint/eslint-plugin": "^5.42.1",
         "eslint": "8.31.0",
         "eslint-config-next": "13.0.5",
-        "eslint-config-prettier": "^8.5.0",
+        "eslint-config-prettier": "^8.6.0",
         "eslint-plugin-jest-dom": "^4.0.3",
         "gulp": "^4.0.2",
         "gulp-concat": "^2.6.1",
