@@ -48,7 +48,7 @@ export function BasicDoc(props) {
         `,
         javascript: `
 import React, { useRef } from 'react';
-import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
+import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup';
 import { Toast } from 'primereact/toast';
 
 export default function BasicDemo() {
@@ -61,7 +61,7 @@ export default function BasicDemo() {
     const reject = () => {
         toast.current.show({ severity: 'warn', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
     };
-    
+
     const confirm1 = (event) => {
         confirmPopup({
             target: event.currentTarget,
@@ -97,21 +97,21 @@ export default function BasicDemo() {
         `,
         typescript: `
 import React, { useRef } from 'react';
-import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
+import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup';
 import { Toast } from 'primereact/toast';
 
 export default function BasicDemo() {
     const toast = useRef<Toast>(null);
 
     const accept = () => {
-        toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
+        toast.current?.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
     };
 
     const reject = () => {
-        toast.current.show({ severity: 'warn', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
+        toast.current?.show({ severity: 'warn', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
     };
 
-    const confirm1 = (event) => {
+    const confirm1 = (event: MouseEventHandler<HTMLButtonElement>) => {
         confirmPopup({
             target: event.currentTarget,
             message: 'Are you sure you want to proceed?',
@@ -121,7 +121,7 @@ export default function BasicDemo() {
         });
     };
 
-    const confirm2 = (event) => {
+    const confirm2 = (event: MouseEventHandler<HTMLButtonElement>) => {
         confirmPopup({
             target: event.currentTarget,
             message: 'Do you want to delete this record?',
@@ -132,7 +132,7 @@ export default function BasicDemo() {
         });
     };
 
-    return ( 
+    return (
         <>
             <Toast ref={toast} />
             <ConfirmPopup />
