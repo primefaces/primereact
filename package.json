@@ -37,7 +37,8 @@
         "react-final-form": "^6.5.9",
         "react-hook-form": "^7.41.3",
         "react-transition-group": "^4.4.5",
-        "xlsx": "0.18.5"
+        "xlsx": "0.18.5",
+        "@docsearch/react": "3.3.2"
     },
     "devDependencies": {
         "@babel/plugin-proposal-class-properties": "^7.18.6",

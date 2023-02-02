@@ -7,6 +7,7 @@ import { DeclarativeDoc } from '../../components/doc/confirmdialog/declarativedo
 import { ImportDoc } from '../../components/doc/confirmdialog/importdoc';
 import { PositionDoc } from '../../components/doc/confirmdialog/positiondoc';
 import { StyleDoc } from '../../components/doc/confirmdialog/styledoc';
+import { ConfirmDialog } from '../../components/lib/confirmdialog/ConfirmDialog';
 
 const ConfirmDialogDemo = () => {
     const docs = [
@@ -63,6 +64,7 @@ const ConfirmDialogDemo = () => {
                 </div>
                 <DocSectionNav docs={docs} />
             </div>
+            <ConfirmDialog />
         </div>
     );
 };

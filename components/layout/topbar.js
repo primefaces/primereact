@@ -1,3 +1,4 @@
+import { DocSearch } from '@docsearch/react';
 import { useEffect, useRef } from 'react';
 import { StyleClass } from '../lib/styleclass/StyleClass';
 
@@ -78,22 +79,16 @@ export default function Topbar(props) {
             <button type="button" className="p-link menu-button" onClick={onMenuButtonClick} aria-haspopup aria-label="Menu">
                 <i className="pi pi-bars"></i>
             </button>
+            <DocSearch appId="SCRI13XXZO" apiKey="ea9e6c8a983c5646d6b9079921d4aed7" indexName="primereact" container="" debug={false} />
 
-            <ul className="flex list-none m-0 p-0 ml-auto gap-2 align-items-center ">
+            <ul className="flex list-none m-0 p-0 gap-2 align-items-center">
+                <li></li>
                 <li>
                     <a
                         href="https://primefaces.github.io/primereact"
                         className="flex p-link border-1 border-solid w-2rem h-2rem surface-border border-round surface-card align-items-center justify-content-center transition-all transition-duration-300 hover:border-primary"
                     >
                         <i className="pi pi-github text-700"></i>
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href="https://twitter.com/primereact"
-                        className="flex p-link border-1 border-solid w-2rem h-2rem surface-border border-round surface-card align-items-center justify-content-center transition-all transition-duration-300 hover:border-primary"
-                    >
-                        <i className="pi pi-twitter text-700"></i>
                     </a>
                 </li>
                 <li>

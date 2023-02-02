@@ -1,3 +1,4 @@
+import '@docsearch/css';
 import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
 import { useEffect, useRef, useState } from 'react';
