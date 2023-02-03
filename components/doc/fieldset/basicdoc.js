@@ -1,6 +1,6 @@
 import { Fieldset } from '../../lib/fieldset/Fieldset';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const code = {
@@ -57,9 +57,7 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    A simple Fieldset is created with a <i>legend</i> property along with the content as children.
-                </p>
+                <p>PrimeIcons is available at npm, run the following command to download it to your project.</p>
             </DocSectionText>
             <div className="card">
                 <Fieldset legend="Header">

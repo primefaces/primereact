@@ -3,8 +3,11 @@ import PrimeReact, { localeOption } from '../api/Api';
 import { Paginator } from '../paginator/Paginator';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, ObjectUtils } from '../utils/Utils';
+import { DataViewDefaultProps, DataViewLayoutOptionsDefaultProps } from './DataViewBase';
 
-export const DataViewLayoutOptions = React.memo((props) => {
+export const DataViewLayoutOptions = React.memo((inProps) => {
+    const props = ObjectUtils.getProps(inProps, DataViewLayoutOptionsDefaultProps);
+
     const changeLayout = (event, layoutMode) => {
         props.onChange({
             originalEvent: event,
@@ -13,7 +16,7 @@ export const DataViewLayoutOptions = React.memo((props) => {
         event.preventDefault();
     };
 
-    const otherProps = ObjectUtils.findDiffKeys(props, DataViewLayoutOptions.defaultProps);
+    const otherProps = ObjectUtils.findDiffKeys(props, DataViewLayoutOptionsDefaultProps);
     const className = classNames('p-dataview-layout-options p-selectbutton p-buttonset', props.className);
     const buttonListClass = classNames('p-button p-button-icon-only', { 'p-highlight': props.layout === 'list' });
     const buttonGridClass = classNames('p-button p-button-icon-only', { 'p-highlight': props.layout === 'grid' });
@@ -37,7 +40,9 @@ export const DataViewItem = React.memo((props) => {
 });
 
 export const DataView = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ObjectUtils.getProps(inProps, DataViewDefaultProps);
+
         const [firstState, setFirstState] = React.useState(props.first);
         const [rowsState, setRowsState] = React.useState(props.rows);
         const elementRef = React.useRef(null);
@@ -212,7 +217,7 @@ export const DataView = React.memo(
 
         const data = processData();
 
-        const otherProps = ObjectUtils.findDiffKeys(props, DataView.defaultProps);
+        const otherProps = ObjectUtils.findDiffKeys(props, DataViewDefaultProps);
         const className = classNames(
             'p-dataview p-component',
             {
@@ -242,49 +247,7 @@ export const DataView = React.memo(
 );
 
 DataViewLayoutOptions.displayName = 'DataViewLayoutOptions';
-DataViewLayoutOptions.defaultProps = {
-    __TYPE: 'DataViewLayoutOptions',
-    id: null,
-    style: null,
-    className: null,
-    layout: null,
-    onChange: null
-};
 
 DataViewItem.displayName = 'DataViewItem';
 
 DataView.displayName = 'DataView';
-DataView.defaultProps = {
-    __TYPE: 'DataView',
-    id: null,
-    header: null,
-    footer: null,
-    value: null,
-    layout: 'list',
-    dataKey: null,
-    rows: null,
-    first: 0,
-    totalRecords: null,
-    paginator: false,
-    paginatorPosition: 'bottom',
-    alwaysShowPaginator: true,
-    paginatorClassName: null,
-    paginatorTemplate: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
-    paginatorLeft: null,
-    paginatorRight: null,
-    paginatorDropdownAppendTo: null,
-    pageLinkSize: 5,
-    rowsPerPageOptions: null,
-    currentPageReportTemplate: '({currentPage} of {totalPages})',
-    emptyMessage: null,
-    sortField: null,
-    sortOrder: null,
-    style: null,
-    className: null,
-    lazy: false,
-    loading: false,
-    loadingIcon: 'pi pi-spinner',
-    gutter: false,
-    itemTemplate: null,
-    onPage: null
-};

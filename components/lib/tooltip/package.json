@@ -2,5 +2,6 @@
     "main": "./tooltip.cjs.js",
     "module": "./tooltip.esm.js",
     "unpkg": "./tooltip.min.js",
-    "types": "./tooltip.d.ts"
+    "types": "./tooltip.d.ts",
+    "sideEffects": false
 }

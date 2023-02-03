@@ -4,9 +4,12 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMountEffect, useUnmountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { ScrollTopDefaultProps } from './ScrollTopBase';
 
 export const ScrollTop = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ObjectUtils.getProps(inProps, ScrollTopDefaultProps);
+
         const [visibleState, setVisibleState] = React.useState(false);
         const scrollElementRef = React.useRef(null);
         const helperRef = React.useRef(null);
@@ -69,7 +72,7 @@ export const ScrollTop = React.memo(
             ZIndexUtils.clear(scrollElementRef.current);
         });
 
-        const otherProps = ObjectUtils.findDiffKeys(props, ScrollTop.defaultProps);
+        const otherProps = ObjectUtils.findDiffKeys(props, ScrollTopDefaultProps);
         const className = classNames(
             'p-scrolltop p-link p-component',
             {
@@ -93,15 +96,3 @@ export const ScrollTop = React.memo(
 );
 
 ScrollTop.displayName = 'ScrollTop';
-ScrollTop.defaultProps = {
-    __TYPE: 'ScrollTop',
-    target: 'window',
-    threshold: 400,
-    icon: 'pi pi-chevron-up',
-    behavior: 'smooth',
-    className: null,
-    style: null,
-    transitionOptions: null,
-    onShow: null,
-    onHide: null
-};

@@ -256,6 +256,20 @@ interface DataTableFilterEvent {
 }
 
 /**
+ * Custom state event containing page, filter and sort states.
+ * @see {@link DataTableProps.onFilter}
+ * @see {@link DataTableProps.onSort}
+ * @see {@link DataTableProps.onPage}
+ * @event
+ */
+interface DataTableStateEvent extends DataTablePageEvent, DataTableFilterEvent, DataTableSortEvent {
+    /**
+     * Extra options.
+     */
+    [key: string]: any;
+}
+
+/**
  * Custom data selectable event.
  * @see {@link DataTableProps.isDataSelectable}
  * @event
@@ -1174,14 +1188,14 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     onContextMenuSelectionChange?(event: DataTableSelectionChangeEvent<TValue>): void;
     /**
      * Callback to invoke on filtering.
-     * @param {DataTableFilterEvent} event - Custom filter event.
+     * @param {DataTableStateEvent} event - Custom state event.
      */
-    onFilter?(event: DataTableFilterEvent): void;
+    onFilter?(event: DataTableStateEvent): void;
     /**
      * Callback to invoke on pagination.
-     * @param {DataTablePageEvent} event - Custom pagination event.
+     * @param {DataTableStateEvent} event - Custom state event.
      */
-    onPage?(event: DataTablePageEvent): void;
+    onPage?(event: DataTableStateEvent): void;
     /**
      * Callback to invoke when a row is clicked.
      * @param {DataTableRowClickEvent} event - Custom row click event.
@@ -1269,9 +1283,9 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     onSelectionChange?(event: DataTableSelectionChangeEvent<TValue>): void;
     /**
      * Callback to invoke on sort.
-     * @param {DataTableSortEvent} event - Custom sort event.
+     * @param {DataTableStateEvent} event - Custom state event.
      */
-    onSort?(event: DataTableSortEvent): void;
+    onSort?(event: DataTableStateEvent): void;
     /**
      * Callback to invoke table state is restored.
      * @param {object} state - Table state.

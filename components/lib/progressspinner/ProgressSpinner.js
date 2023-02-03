@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { classNames, ObjectUtils } from '../utils/Utils';
+import { ProgressSpinnerDefaultProps } from './ProgressSpinnerBase';
 
 export const ProgressSpinner = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ObjectUtils.getProps(inProps, ProgressSpinnerDefaultProps);
+
         const elementRef = React.useRef(null);
-        const otherProps = ObjectUtils.findDiffKeys(props, ProgressSpinner.defaultProps);
+        const otherProps = ObjectUtils.findDiffKeys(props, ProgressSpinnerDefaultProps);
         const className = classNames('p-progress-spinner', props.className);
 
         React.useImperativeHandle(ref, () => ({
@@ -23,12 +26,3 @@ export const ProgressSpinner = React.memo(
 );
 
 ProgressSpinner.displayName = 'ProgressSpinner';
-ProgressSpinner.defaultProps = {
-    __TYPE: 'ProgressSpinner',
-    id: null,
-    style: null,
-    className: null,
-    strokeWidth: '2',
-    fill: 'none',
-    animationDuration: '2s'
-};

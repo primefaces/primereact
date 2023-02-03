@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { useEventListener } from '../hooks/Hooks';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { SliderDefaultProps } from './SliderBase';
 
 export const Slider = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ObjectUtils.getProps(inProps, SliderDefaultProps);
+
         const elementRef = React.useRef(null);
         const handleIndex = React.useRef(0);
         const sliderHandleClick = React.useRef(false);
@@ -244,7 +247,7 @@ export const Slider = React.memo(
             getElement: () => elementRef.current
         }));
 
-        const otherProps = ObjectUtils.findDiffKeys(props, Slider.defaultProps);
+        const otherProps = ObjectUtils.findDiffKeys(props, SliderDefaultProps);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames('p-slider p-component', props.className, {
             'p-disabled': props.disabled,
@@ -262,19 +265,3 @@ export const Slider = React.memo(
 );
 
 Slider.displayName = 'Slider';
-Slider.defaultProps = {
-    __TYPE: 'Slider',
-    id: null,
-    value: null,
-    min: 0,
-    max: 100,
-    orientation: 'horizontal',
-    step: null,
-    range: false,
-    style: null,
-    className: null,
-    disabled: false,
-    tabIndex: 0,
-    onChange: null,
-    onSlideEnd: null
-};

@@ -1,0 +1,23 @@
+export const CheckboxDefaultProps = {
+    __TYPE: 'Checkbox',
+    id: null,
+    inputRef: null,
+    inputId: null,
+    value: null,
+    name: null,
+    checked: false,
+    trueValue: true,
+    falseValue: false,
+    style: null,
+    className: null,
+    disabled: false,
+    required: false,
+    readOnly: false,
+    tabIndex: null,
+    icon: 'pi pi-check',
+    tooltip: null,
+    tooltipOptions: null,
+    onChange: null,
+    onMouseDown: null,
+    onContextMenu: null
+};

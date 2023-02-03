@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { RadioButtonDefaultProps } from './RadioButtonBase';
 
 export const RadioButton = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ObjectUtils.getProps(inProps, RadioButtonDefaultProps);
+
         const [focusedState, setFocusedState] = React.useState(false);
         const elementRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
@@ -82,7 +85,7 @@ export const RadioButton = React.memo(
         }));
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, RadioButton.defaultProps);
+        const otherProps = ObjectUtils.findDiffKeys(props, RadioButtonDefaultProps);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-radiobutton p-component',
@@ -129,20 +132,3 @@ export const RadioButton = React.memo(
 );
 
 RadioButton.displayName = 'RadioButton';
-RadioButton.defaultProps = {
-    __TYPE: 'RadioButton',
-    id: null,
-    inputRef: null,
-    inputId: null,
-    name: null,
-    value: null,
-    checked: false,
-    style: null,
-    className: null,
-    disabled: false,
-    required: false,
-    tabIndex: null,
-    tooltip: null,
-    tooltipOptions: null,
-    onChange: null
-};

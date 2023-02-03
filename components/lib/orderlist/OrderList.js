@@ -1,12 +1,15 @@
 import * as React from 'react';
-import { useUpdateEffect } from '../hooks/Hooks';
 import { FilterService } from '../api/Api';
+import { useUpdateEffect } from '../hooks/Hooks';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { OrderListDefaultProps } from './OrderListBase';
 import { OrderListControls } from './OrderListControls';
 import { OrderListSubList } from './OrderListSubList';
 
 export const OrderList = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ObjectUtils.getProps(inProps, OrderListDefaultProps);
+
         const [selectionState, setSelectionState] = React.useState([]);
         const [filterValueState, setFilterValueState] = React.useState('');
         const hasFilter = ObjectUtils.isNotEmpty(filterValueState);
@@ -163,7 +166,7 @@ export const OrderList = React.memo(
             }
         });
 
-        const otherProps = ObjectUtils.findDiffKeys(props, OrderList.defaultProps);
+        const otherProps = ObjectUtils.findDiffKeys(props, OrderListDefaultProps);
         const className = classNames('p-orderlist p-component', props.className);
         const visibleList = getVisibleList();
 
@@ -194,24 +197,3 @@ export const OrderList = React.memo(
 );
 
 OrderList.displayName = 'OrderList';
-OrderList.defaultProps = {
-    __TYPE: 'OrderList',
-    id: null,
-    value: null,
-    header: null,
-    style: null,
-    className: null,
-    listStyle: null,
-    dragdrop: false,
-    tabIndex: 0,
-    dataKey: null,
-    onChange: null,
-    itemTemplate: null,
-    filter: false,
-    filterBy: null,
-    filterMatchMode: 'contains',
-    filterLocale: undefined,
-    filterPlaceholder: null,
-    filterTemplate: null,
-    onFilter: null
-};

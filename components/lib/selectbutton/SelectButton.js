@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { SelectButtonDefaultProps } from './SelectButtonBase';
 import { SelectButtonItem } from './SelectButtonItem';
 
 export const SelectButton = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ObjectUtils.getProps(inProps, SelectButtonDefaultProps);
+
         const elementRef = React.useRef(null);
 
         const onOptionClick = (event) => {
@@ -97,7 +100,7 @@ export const SelectButton = React.memo(
         }));
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, SelectButton.defaultProps);
+        const otherProps = ObjectUtils.findDiffKeys(props, SelectButtonDefaultProps);
         const className = classNames('p-selectbutton p-buttonset p-component', props.className);
         const items = createItems();
 
@@ -113,23 +116,3 @@ export const SelectButton = React.memo(
 );
 
 SelectButton.displayName = 'SelectButton';
-SelectButton.defaultProps = {
-    __TYPE: 'SelectButton',
-    id: null,
-    value: null,
-    options: null,
-    optionLabel: null,
-    optionValue: null,
-    optionDisabled: null,
-    tabIndex: null,
-    multiple: false,
-    unselectable: true,
-    disabled: false,
-    style: null,
-    className: null,
-    dataKey: null,
-    tooltip: null,
-    tooltipOptions: null,
-    itemTemplate: null,
-    onChange: null
-};

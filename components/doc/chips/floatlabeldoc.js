@@ -9,8 +9,8 @@ export function FloatLabelDoc(props) {
     const code = {
         basic: `
 <span className="p-float-label">
-    <Chips id="chips" value={value} onChange={(e) => setValue(e.value)} />
-    <label htmlFor="chips">Username</label>
+    <Chips id="username" value={value} onChange={(e) => setValue(e.value)} />
+    <label htmlFor="username">Username</label>
 </span>
         `,
         javascript: `
@@ -23,8 +23,8 @@ export default function FloatLabelDemo() {
     return (
         <div className="card p-fluid">
             <span className="p-float-label">
-                <Chips id="chips" value={value} onChange={(e) => setValue(e.value)} />
-                <label htmlFor="chips">Username</label>
+                <Chips id="username" value={value} onChange={(e) => setValue(e.value)} />
+                <label htmlFor="username">Username</label>
             </span>
         </div>
     )
@@ -32,7 +32,7 @@ export default function FloatLabelDemo() {
         `,
         typescript: `
 import React, { useState } from "react";
-import { Chips, ChipsChangeParams } from "primereact/chips";
+import { Chips, ChipsChangeEvent } from "primereact/chips";
 
 export default function FloatLabelDemo() {
     const [value, setValue] = useState<string[]>([]);
@@ -40,8 +40,8 @@ export default function FloatLabelDemo() {
     return (
         <div className="card p-fluid">
             <span className="p-float-label">
-                <Chips id="chips" value={value} onChange={(e: ChipsChangeParams) => setValue(e.value)} />
-                <label htmlFor="chips">Username</label>
+                <Chips id="username" value={value} onChange={(e: ChipsChangeEvent) => setValue(e.value)} />
+                <label htmlFor="username">Username</label>
             </span>
         </div>
     )
@@ -52,14 +52,12 @@ export default function FloatLabelDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    A floating label is implemented by wrapping the input and the label inside a container having <i>.p-float-label</i> style class.
-                </p>
+                <p>A floating label appears on top of the input field when focused.</p>
             </DocSectionText>
             <div className="card p-fluid">
                 <span className="p-float-label">
-                    <Chips id="chips" value={value} onChange={(e) => setValue(e.value)} />
-                    <label htmlFor="chips">Username</label>
+                    <Chips id="username" value={value} onChange={(e) => setValue(e.value)} />
+                    <label htmlFor="username">Username</label>
                 </span>
             </div>
             <DocSectionCode code={code} />

@@ -6,6 +6,7 @@ import { BasicDoc } from '../../components/doc/confirmpopup/basicdoc';
 import { DeclarativeDoc } from '../../components/doc/confirmpopup/declarativedoc';
 import { ImportDoc } from '../../components/doc/confirmpopup/importdoc';
 import { StyleDoc } from '../../components/doc/confirmpopup/styledoc';
+import { ConfirmPopup } from '../../components/lib/confirmpopup/ConfirmPopup';
 
 const ConfirmPopupDemo = () => {
     const docs = [
@@ -57,6 +58,7 @@ const ConfirmPopupDemo = () => {
                 </div>
                 <DocSectionNav docs={docs} />
             </div>
+            <ConfirmPopup />
         </div>
     );
 };

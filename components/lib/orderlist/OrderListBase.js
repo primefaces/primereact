@@ -1,0 +1,21 @@
+export const OrderListDefaultProps = {
+    __TYPE: 'OrderList',
+    id: null,
+    value: null,
+    header: null,
+    style: null,
+    className: null,
+    listStyle: null,
+    dragdrop: false,
+    tabIndex: 0,
+    dataKey: null,
+    onChange: null,
+    itemTemplate: null,
+    filter: false,
+    filterBy: null,
+    filterMatchMode: 'contains',
+    filterLocale: undefined,
+    filterPlaceholder: null,
+    filterTemplate: null,
+    onFilter: null
+};

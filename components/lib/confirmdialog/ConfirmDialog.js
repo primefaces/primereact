@@ -6,6 +6,7 @@ import { useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { ConfirmDialogDefaultProps } from './ConfirmDialogBase';
 
 export const confirmDialog = (props = {}) => {
     props = { ...props, ...{ visible: props.visible === undefined ? true : props.visible } };
@@ -23,7 +24,9 @@ export const confirmDialog = (props = {}) => {
 };
 
 export const ConfirmDialog = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ObjectUtils.getProps(inProps, ConfirmDialogDefaultProps);
+
         const [visibleState, setVisibleState] = React.useState(props.visible);
         const [reshowState, setReshowState] = React.useState(false);
         const confirmProps = React.useRef(null);
@@ -135,7 +138,7 @@ export const ConfirmDialog = React.memo(
         const createElement = () => {
             const currentProps = getCurrentProps();
             const className = classNames('p-confirm-dialog', getPropValue('className'));
-            const otherProps = ObjectUtils.findDiffKeys(currentProps, ConfirmDialog.defaultProps);
+            const otherProps = ObjectUtils.findDiffKeys(currentProps, ConfirmDialogDefaultProps);
             const message = ObjectUtils.getJSXElement(getPropValue('message'), currentProps);
             const icon = IconUtils.getJSXIcon(getPropValue('icon'), { className: 'p-confirm-dialog-icon' }, { props: currentProps });
             const footer = createFooter();
@@ -155,23 +158,3 @@ export const ConfirmDialog = React.memo(
 );
 
 ConfirmDialog.displayName = 'ConfirmDialog';
-ConfirmDialog.defaultProps = {
-    __TYPE: 'ConfirmDialog',
-    tagKey: undefined,
-    visible: undefined,
-    message: null,
-    rejectLabel: null,
-    acceptLabel: null,
-    icon: null,
-    rejectIcon: null,
-    acceptIcon: null,
-    rejectClassName: null,
-    acceptClassName: null,
-    className: null,
-    appendTo: null,
-    footer: null,
-    breakpoints: null,
-    onHide: null,
-    accept: null,
-    reject: null
-};

@@ -3,10 +3,13 @@ import { ariaLabel } from '../api/Api';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { getTabProp, TabPanelDefaultProps, TabViewDefaultProps } from './TabViewBase';
 
 export const TabPanel = () => {};
 
-export const TabView = React.forwardRef((props, ref) => {
+export const TabView = React.forwardRef((inProps, ref) => {
+    const props = ObjectUtils.getProps(inProps, TabViewDefaultProps);
+
     const [idState, setIdState] = React.useState(props.id);
     const [backwardIsDisabledState, setBackwardIsDisabledState] = React.useState(true);
     const [forwardIsDisabledState, setForwardIsDisabledState] = React.useState(false);
@@ -24,7 +27,7 @@ export const TabView = React.forwardRef((props, ref) => {
     const isSelected = (index) => index === activeIndex;
 
     const shouldUseTab = (tab, index) => {
-        return tab && tab.props.__TYPE === 'TabPanel' && hiddenTabsState.every((_i) => _i !== index);
+        return ObjectUtils.isValidChild(tab, 'TabPanel') && hiddenTabsState.every((_i) => _i !== index);
     };
 
     const findVisibleActiveTab = (i) => {
@@ -34,7 +37,7 @@ export const TabView = React.forwardRef((props, ref) => {
             }
         });
 
-        return tabsInfo.find(({ tab, index }) => !tab.props.disabled && index >= i) || tabsInfo.reverse().find(({ tab, index }) => !tab.props.disabled && i > index);
+        return tabsInfo.find(({ tab, index }) => !getTabProp(tab, 'disabled') && index >= i) || tabsInfo.reverse().find(({ tab, index }) => !getTabProp(tab, 'disabled') && i > index);
     };
 
     const onTabHeaderClose = (event, index) => {
@@ -57,7 +60,7 @@ export const TabView = React.forwardRef((props, ref) => {
             event.preventDefault();
         }
 
-        if (!tab.props.disabled) {
+        if (!getTabProp(tab, 'disabled')) {
             // give caller a chance to stop the selection
             if (props.onBeforeTabChange && props.onBeforeTabChange({ originalEvent: event, index }) === false) {
                 return;
@@ -162,7 +165,7 @@ export const TabView = React.forwardRef((props, ref) => {
 
     const createTabHeader = (tab, index) => {
         const selected = isSelected(index);
-        const { headerStyle, headerClassName, style: _style, className: _className, disabled, leftIcon, rightIcon, header, headerTemplate, closable } = tab.props;
+        const { headerStyle, headerClassName, style: _style, className: _className, disabled, leftIcon, rightIcon, header, headerTemplate, closable } = ObjectUtils.getProps(tab.props, TabPanelDefaultProps);
         const style = { ...(headerStyle || {}), ...(_style || {}) };
         const className = classNames('p-unselectable-text', { 'p-tabview-selected p-highlight': selected, 'p-disabled': disabled }, headerClassName, _className);
         const headerId = idState + '_header_' + index;
@@ -237,15 +240,15 @@ export const TabView = React.forwardRef((props, ref) => {
         const contents = React.Children.map(props.children, (tab, index) => {
             if (shouldUseTab(tab, index) && (!props.renderActiveOnly || isSelected(index))) {
                 const selected = isSelected(index);
-                const style = { ...(tab.props.contentStyle || {}), ...(tab.props.style || {}) };
-                const className = classNames(tab.props.contentClassName, tab.props.className, 'p-tabview-panel', { 'p-hidden': !selected });
+                const style = { ...(getTabProp(tab, 'contentStyle') || {}), ...(getTabProp(tab, 'style') || {}) };
+                const className = classNames(getTabProp(tab, 'contentClassName'), getTabProp(tab, 'className'), 'p-tabview-panel', { 'p-hidden': !selected });
                 const contentId = idState + '_content_' + index;
                 const ariaLabelledBy = idState + '_header_' + index;
-                const otherProps = ObjectUtils.findDiffKeys(tab.props, TabPanel.defaultProps);
+                const otherProps = ObjectUtils.findDiffKeys(tab.props, TabPanelDefaultProps);
 
                 return (
                     <div {...otherProps} id={contentId} aria-labelledby={ariaLabelledBy} aria-hidden={!selected} className={className} style={style} role="tabpanel">
-                        {!props.renderActiveOnly ? tab.props.children : selected && tab.props.children}
+                        {!props.renderActiveOnly ? getTabProp(tab, 'children') : selected && getTabProp(tab, 'children')}
                     </div>
                 );
             }
@@ -282,7 +285,7 @@ export const TabView = React.forwardRef((props, ref) => {
         }
     };
 
-    const otherProps = ObjectUtils.findDiffKeys(props, TabView.defaultProps);
+    const otherProps = ObjectUtils.findDiffKeys(props, TabViewDefaultProps);
     const className = classNames(
         'p-tabview p-component',
         {
@@ -308,35 +311,5 @@ export const TabView = React.forwardRef((props, ref) => {
 });
 
 TabPanel.displayName = 'TabPanel';
-TabPanel.defaultProps = {
-    __TYPE: 'TabPanel',
-    className: null,
-    closable: false,
-    contentClassName: null,
-    contentStyle: null,
-    disabled: false,
-    header: null,
-    headerClassName: null,
-    headerStyle: null,
-    headerTemplate: null,
-    leftIcon: null,
-    rightIcon: null,
-    style: null
-};
 
 TabView.displayName = 'TabView';
-TabView.defaultProps = {
-    __TYPE: 'TabView',
-    id: null,
-    activeIndex: 0,
-    className: null,
-    onBeforeTabChange: null,
-    onBeforeTabClose: null,
-    onTabChange: null,
-    onTabClose: null,
-    panelContainerClassName: null,
-    panelContainerStyle: null,
-    renderActiveOnly: true,
-    scrollable: false,
-    style: null
-};

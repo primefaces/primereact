@@ -5,11 +5,14 @@ import { useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/H
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { SplitButtonDefaultProps } from './SplitButtonBase';
 import { SplitButtonItem } from './SplitButtonItem';
 import { SplitButtonPanel } from './SplitButtonPanel';
 
 export const SplitButton = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ObjectUtils.getProps(inProps, SplitButtonDefaultProps);
+
         const [idState, setIdState] = React.useState(props.id);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const elementRef = React.useRef(null);
@@ -105,7 +108,7 @@ export const SplitButton = React.memo(
         }
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, SplitButton.defaultProps);
+        const otherProps = ObjectUtils.findDiffKeys(props, SplitButtonDefaultProps);
         const className = classNames('p-splitbutton p-component', props.className, { 'p-disabled': props.disabled });
         const buttonClassName = classNames('p-splitbutton-defaultbutton', props.buttonClassName);
         const menuButtonClassName = classNames('p-splitbutton-menubutton', props.menuButtonClassName);
@@ -166,31 +169,3 @@ export const SplitButton = React.memo(
 );
 
 SplitButton.displayName = 'SplitButton';
-SplitButton.defaultProps = {
-    __TYPE: 'SplitButton',
-    id: null,
-    label: null,
-    icon: null,
-    loading: false,
-    loadingIcon: 'pi pi-spinner pi-spin',
-    model: null,
-    disabled: null,
-    style: null,
-    className: null,
-    buttonClassName: null,
-    menuStyle: null,
-    menuClassName: null,
-    menuButtonClassName: null,
-    buttonProps: null,
-    menuButtonProps: null,
-    tabIndex: null,
-    appendTo: null,
-    tooltip: null,
-    tooltipOptions: null,
-    buttonTemplate: null,
-    transitionOptions: null,
-    dropdownIcon: 'pi pi-chevron-down',
-    onClick: null,
-    onShow: null,
-    onHide: null
-};

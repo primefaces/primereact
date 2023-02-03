@@ -5,12 +5,15 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useUnmountEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { classNames, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { ToastDefaultProps } from './ToastBase';
 import { ToastMessage } from './ToastMessage';
 
 let messageIdx = 0;
 
 export const Toast = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ObjectUtils.getProps(inProps, ToastDefaultProps);
+
         const [messagesState, setMessagesState] = React.useState([]);
         const containerRef = React.useRef(null);
 
@@ -98,7 +101,7 @@ export const Toast = React.memo(
         }));
 
         const createElement = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, Toast.defaultProps);
+            const otherProps = ObjectUtils.findDiffKeys(props, ToastDefaultProps);
             const className = classNames('p-toast p-component p-toast-' + props.position, props.className, {
                 'p-input-filled': PrimeReact.inputStyle === 'filled',
                 'p-ripple-disabled': PrimeReact.ripple === false
@@ -129,19 +132,3 @@ export const Toast = React.memo(
 );
 
 Toast.displayName = 'Toast';
-Toast.defaultProps = {
-    __TYPE: 'Toast',
-    id: null,
-    className: null,
-    style: null,
-    baseZIndex: 0,
-    position: 'top-right',
-    transitionOptions: null,
-    appendTo: 'self',
-    onClick: null,
-    onRemove: null,
-    onShow: null,
-    onHide: null,
-    onMouseEnter: null,
-    onMouseLeave: null
-};

@@ -5,10 +5,13 @@ import { useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { TieredMenuDefaultProps } from './TieredMenuBase';
 import { TieredMenuSub } from './TieredMenuSub';
 
 export const TieredMenu = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ObjectUtils.getProps(inProps, TieredMenuDefaultProps);
+
         const [visibleState, setVisibleState] = React.useState(!props.popup);
         const menuRef = React.useRef(null);
         const targetRef = React.useRef(null);
@@ -85,7 +88,7 @@ export const TieredMenu = React.memo(
         }));
 
         const createElement = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, TieredMenu.defaultProps);
+            const otherProps = ObjectUtils.findDiffKeys(props, TieredMenuDefaultProps);
             const className = classNames(
                 'p-tieredmenu p-component',
                 {
@@ -123,17 +126,3 @@ export const TieredMenu = React.memo(
 );
 
 TieredMenu.displayName = 'TieredMenu';
-TieredMenu.defaultProps = {
-    __TYPE: 'TieredMenu',
-    id: null,
-    model: null,
-    popup: false,
-    style: null,
-    className: null,
-    autoZIndex: true,
-    baseZIndex: 0,
-    appendTo: null,
-    transitionOptions: null,
-    onShow: null,
-    onHide: null
-};

@@ -41,14 +41,13 @@ export function FormikDoc(props) {
 
     const code = {
         basic: `
-<ToggleButton
-id="item"
-name="item"
-checked={formik.values.item}
-onChange={(e) => {
-    formik.setFieldValue('item', e.value);
-}}
-className={classNames({ 'p-invalid': formik.errors.item })}
+<ToggleButton id="item"
+    name="item"
+    checked={formik.values.item}
+    onChange={(e) => {
+        formik.setFieldValue('item', e.value);
+    }}
+    className={classNames('w-6rem', { 'p-invalid': formik.errors.item })}
 />
 {getFormErrorMessage('item')}
 <Button label="Submit" type="submit" icon="pi pi-check" />
@@ -96,7 +95,7 @@ export default function FormikDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
+            <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
                 <ToggleButton
                     id="item"
@@ -105,10 +104,10 @@ export default function FormikDoc() {
                     onChange={(e) => {
                         formik.setFieldValue('item', e.value);
                     }}
-                    className={classNames({ 'p-invalid': formik.errors.item })}
+                    className={classNames('w-6rem', { 'p-invalid': formik.errors.item })}
                 />
                 {getFormErrorMessage('item')}
-                <Button label="Submit" type="submit" icon="pi pi-check" />
+                <Button label="Submit" type="submit" icon="pi pi-check" className="p-button-outlined" />
             </form>
         </div>
     )
@@ -156,7 +155,7 @@ export default function FormikDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
+            <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
                 <ToggleButton
                     id="item"
@@ -165,10 +164,10 @@ export default function FormikDoc() {
                     onChange={(e) => {
                         formik.setFieldValue('item', e.value);
                     }}
-                    className={classNames({ 'p-invalid': formik.errors.item })}
+                    className={classNames('w-6rem', { 'p-invalid': formik.errors.item })}
                 />
                 {getFormErrorMessage('item')}
-                <Button label="Submit" type="submit" icon="pi pi-check" />
+                <Button label="Submit" type="submit" icon="pi pi-check" className="p-button-outlined" />
             </form>
         </div>
     )
@@ -184,7 +183,7 @@ export default function FormikDoc() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
+                <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                     <Toast ref={toast} />
                     <ToggleButton
                         id="item"
@@ -193,10 +192,10 @@ export default function FormikDoc() {
                         onChange={(e) => {
                             formik.setFieldValue('item', e.value);
                         }}
-                        className={classNames({ 'p-invalid': formik.errors.item })}
+                        className={classNames('w-6rem', { 'p-invalid': formik.errors.item })}
                     />
                     {getFormErrorMessage('item')}
-                    <Button label="Submit" type="submit" icon="pi pi-check" />
+                    <Button label="Submit" type="submit" icon="pi pi-check" className="p-button-outlined" />
                 </form>
             </div>
             <DocSectionCode code={code} dependencies={{ formik: '^2.2.6' }} />

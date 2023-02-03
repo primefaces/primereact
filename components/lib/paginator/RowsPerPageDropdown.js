@@ -2,8 +2,11 @@ import * as React from 'react';
 import { localeOption } from '../api/Api';
 import { Dropdown } from '../dropdown/Dropdown';
 import { ObjectUtils } from '../utils/Utils';
+import { RowsPerPageDropdownDefaultProps } from './PaginatorBase';
 
-export const RowsPerPageDropdown = React.memo((props) => {
+export const RowsPerPageDropdown = React.memo((inProps) => {
+    const props = ObjectUtils.getProps(inProps, RowsPerPageDropdownDefaultProps);
+
     const hasOptions = props.options && props.options.length > 0;
     const options = hasOptions ? props.options.map((opt) => ({ label: String(opt), value: opt })) : [];
     const ariaLabel = localeOption('choose');
@@ -30,15 +33,3 @@ export const RowsPerPageDropdown = React.memo((props) => {
 });
 
 RowsPerPageDropdown.displayName = 'RowsPerPageDropdown';
-RowsPerPageDropdown.defaultProps = {
-    __TYPE: 'RowsPerPageDropdown',
-    options: null,
-    value: null,
-    page: null,
-    pageCount: null,
-    totalRecords: 0,
-    appendTo: null,
-    onChange: null,
-    template: null,
-    disabled: false
-};

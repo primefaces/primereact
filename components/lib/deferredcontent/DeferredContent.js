@@ -1,8 +1,11 @@
 import * as React from 'react';
 import { useEventListener, useMountEffect } from '../hooks/Hooks';
 import { ObjectUtils } from '../utils/Utils';
+import { DeferredContentDefaultProps } from './DeferredContentBase';
 
-export const DeferredContent = React.forwardRef((props, ref) => {
+export const DeferredContent = React.forwardRef((inProps, ref) => {
+    const props = ObjectUtils.getProps(inProps, DeferredContentDefaultProps);
+
     const [loadedState, setLoadedState] = React.useState(false);
     const elementRef = React.useRef(null);
 
@@ -44,7 +47,7 @@ export const DeferredContent = React.forwardRef((props, ref) => {
         }
     });
 
-    const otherProps = ObjectUtils.findDiffKeys(props, DeferredContent.defaultProps);
+    const otherProps = ObjectUtils.findDiffKeys(props, DeferredContentDefaultProps);
 
     return (
         <div ref={elementRef} {...otherProps}>
@@ -54,7 +57,3 @@ export const DeferredContent = React.forwardRef((props, ref) => {
 });
 
 DeferredContent.displayName = 'DeferredContent';
-DeferredContent.defaultProps = {
-    __TYPE: 'DeferredContent',
-    onload: null
-};

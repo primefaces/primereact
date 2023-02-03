@@ -2,9 +2,12 @@ import * as React from 'react';
 import ReactDOM from 'react-dom';
 import PrimeReact from '../api/Api';
 import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { DomHandler } from '../utils/Utils';
+import { DomHandler, ObjectUtils } from '../utils/Utils';
+import { PortalDefaultProps } from './PortalBase';
 
-export const Portal = React.memo((props) => {
+export const Portal = React.memo((inProps) => {
+    const props = ObjectUtils.getProps(inProps, PortalDefaultProps);
+
     const [mountedState, setMountedState] = React.useState(props.visible && DomHandler.hasDOM());
 
     useMountEffect(() => {
@@ -34,11 +37,3 @@ export const Portal = React.memo((props) => {
 });
 
 Portal.displayName = 'Portal';
-Portal.defaultProps = {
-    __TYPE: 'Portal',
-    element: null,
-    appendTo: null,
-    visible: false,
-    onMounted: null,
-    onUnmounted: null
-};

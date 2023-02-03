@@ -8,32 +8,32 @@ export function IconDoc(props) {
 
     const code = {
         basic: `
-<Calendar id="icon" value={date} onChange={(e) => setDate(e.value)} showIcon />
+<Calendar value={date} onChange={(e) => setDate(e.value)} showIcon />
         `,
         javascript: `
 import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
-export default function IconDoc() {
+export default function IconDemo() {
     const [date, setDate] = useState(null);
 
     return (
         <div className="card flex justify-content-center">
-            <Calendar id="icon" value={date} onChange={(e) => setDate(e.value)} showIcon />
+            <Calendar value={date} onChange={(e) => setDate(e.value)} showIcon />
         </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { Calendar, CalendarChangeParams } from 'primereact/calendar';
+import { Calendar, CalendarChangeEvent } from 'primereact/calendar';
 
-export default function IconDoc() {
+export default function IconDemo() {
     const [date, setDate] = useState<Date | null>(null);
 
     return (
         <div className="card flex justify-content-center">
-            <Calendar id="icon" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} showIcon />
+            <Calendar value={date} onChange={(e : CalendarChangeEvent) => setDate(e.value)} showIcon />
         </div>
     )
 }
@@ -44,11 +44,11 @@ export default function IconDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Calendar is used a controlled input component with <i>value</i> and <i>onChange</i> properties.
+                    An additional icon is displayed next to the input field when <i>showIcon</i> is present.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Calendar id="icon" value={date} onChange={(e) => setDate(e.value)} showIcon />
+                <Calendar value={date} onChange={(e) => setDate(e.value)} showIcon />
             </div>
             <DocSectionCode code={code} />
         </>

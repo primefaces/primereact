@@ -4,11 +4,14 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { CascadeSelectDefaultProps } from './CascadeSelectBase';
 import { CascadeSelectSub } from './CascadeSelectSub';
 
 export const CascadeSelect = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ObjectUtils.getProps(inProps, CascadeSelectDefaultProps);
+
         const [focusedState, setFocusedState] = React.useState(false);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const elementRef = React.useRef(null);
@@ -326,7 +329,7 @@ export const CascadeSelect = React.memo(
             );
         };
 
-        const otherProps = ObjectUtils.findDiffKeys(props, CascadeSelect.defaultProps);
+        const otherProps = ObjectUtils.findDiffKeys(props, CascadeSelectDefaultProps);
         const dataProps = ObjectUtils.reduceKeys(otherProps, DomHandler.DATA_PROPS);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const element = createElement();
@@ -336,33 +339,3 @@ export const CascadeSelect = React.memo(
 );
 
 CascadeSelect.displayName = 'CascadeSelect';
-CascadeSelect.defaultProps = {
-    __TYPE: 'CascadeSelect',
-    id: null,
-    inputRef: null,
-    style: null,
-    className: null,
-    value: null,
-    name: null,
-    options: null,
-    optionLabel: null,
-    optionValue: null,
-    optionGroupLabel: null,
-    optionGroupChildren: null,
-    placeholder: null,
-    itemTemplate: null,
-    disabled: false,
-    dataKey: null,
-    inputId: null,
-    tabIndex: null,
-    ariaLabelledBy: null,
-    appendTo: null,
-    transitionOptions: null,
-    dropdownIcon: 'pi pi-chevron-down',
-    onChange: null,
-    onGroupChange: null,
-    onBeforeShow: null,
-    onBeforeHide: null,
-    onShow: null,
-    onHide: null
-};

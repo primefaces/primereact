@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { TabMenuDefaultProps } from './TabMenuBase';
 
 export const TabMenu = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ObjectUtils.getProps(inProps, TabMenuDefaultProps);
+
         const [activeIndexState, setActiveIndexState] = React.useState(props.activeIndex);
         const elementRef = React.useRef(null);
         const inkbarRef = React.useRef(null);
@@ -115,7 +118,7 @@ export const TabMenu = React.memo(
         };
 
         if (props.model) {
-            const otherProps = ObjectUtils.findDiffKeys(props, TabMenu.defaultProps);
+            const otherProps = ObjectUtils.findDiffKeys(props, TabMenuDefaultProps);
             const className = classNames('p-tabmenu p-component', props.className);
             const items = createItems();
 
@@ -134,12 +137,3 @@ export const TabMenu = React.memo(
 );
 
 TabMenu.displayName = 'TabMenu';
-TabMenu.defaultProps = {
-    __TYPE: 'TabMenu',
-    id: null,
-    model: null,
-    activeIndex: 0,
-    style: null,
-    className: null,
-    onTabChange: null
-};

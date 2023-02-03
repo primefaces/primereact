@@ -71,6 +71,10 @@
                             "to": "/inputswitch"
                         },
                         {
+                            "name": "InputNumber",
+                            "to": "/inputnumber"
+                        },
+                        {
                             "name": "InputText",
                             "to": "/inputtext"
                         },
@@ -79,16 +83,12 @@
                             "to": "/inputtextarea"
                         },
                         {
-                            "name": "InputNumber",
-                            "to": "/inputnumber"
+                            "name": "KeyFilter",
+                            "to": "/keyfilter"
                         },
                         {
                             "name": "Knob",
                             "to": "/knob"
-                        },
-                        {
-                            "name": "KeyFilter",
-                            "to": "/keyfilter"
                         },
                         {
                             "name": "Listbox",
@@ -101,6 +101,10 @@
                         {
                             "name": "MultiSelect",
                             "to": "/multiselect"
+                        },
+                        {
+                            "name": "MultiStateCheckbox",
+                            "to": "/multistatecheckbox"
                         },
                         {
                             "name": "Password",
@@ -131,10 +135,6 @@
                             "to": "/tristatecheckbox"
                         },
                         {
-                            "name": "MultiStateCheckbox",
-                            "to": "/multistatecheckbox"
-                        },
-                        {
                             "name": "ToggleButton",
                             "to": "/togglebutton"
                         }
@@ -148,12 +148,12 @@
                             "to": "/button"
                         },
                         {
-                            "name": "SplitButton",
-                            "to": "/splitbutton"
-                        },
-                        {
                             "name": "Speed Dial",
                             "to": "/speeddial"
+                        },
+                        {
+                            "name": "SplitButton",
+                            "to": "/splitbutton"
                         }
                     ]
                 },
@@ -165,16 +165,12 @@
                             "to": "/datatable"
                         },
                         {
-                            "name": "DataView",
-                            "to": "/dataview"
-                        },
-                        {
                             "name": "DataScroller",
                             "to": "/datascroller"
                         },
                         {
-                            "name": "VirtualScroller",
-                            "to": "/virtualscroller"
+                            "name": "DataView",
+                            "to": "/dataview"
                         },
                         {
                             "name": "OrderList",
@@ -203,6 +199,10 @@
                         {
                             "name": "Timeline",
                             "to": "/timeline"
+                        },
+                        {
+                            "name": "VirtualScroller",
+                            "to": "/virtualscroller"
                         }
                     ]
                 },
@@ -234,12 +234,12 @@
                             "to": "/panel"
                         },
                         {
-                            "name": "Splitter",
-                            "to": "/splitter"
-                        },
-                        {
                             "name": "ScrollPanel",
                             "to": "/scrollpanel"
+                        },
+                        {
+                            "name": "Splitter",
+                            "to": "/splitter"
                         },
                         {
                             "name": "TabView",
@@ -305,17 +305,16 @@
                             "to": "/dock"
                         },
                         {
+                            "name": "MegaMenu",
+                            "to": "/megamenu"
+                        },
+                        {
                             "name": "Menu",
                             "to": "/menu"
                         },
-
                         {
                             "name": "Menubar",
                             "to": "/menubar"
-                        },
-                        {
-                            "name": "MegaMenu",
-                            "to": "/megamenu"
                         },
                         {
                             "name": "PanelMenu",
@@ -426,16 +425,16 @@
                             "to": "/ripple"
                         },
                         {
+                            "name": "StyleClass",
+                            "to": "/styleclass"
+                        },
+                        {
                             "name": "Tag",
                             "to": "/tag"
                         },
                         {
                             "name": "Terminal",
                             "to": "/terminal"
-                        },
-                        {
-                            "name": "StyleClass",
-                            "to": "/styleclass"
                         }
                     ]
                 }

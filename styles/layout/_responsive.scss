@@ -3,6 +3,11 @@
         max-width: 1478px;
         margin: 0 auto;
     }
+
+    .layout-topbar-inner {
+        max-width: 1478px;
+        margin: 0 auto;
+    }
 }
 
 @media screen and (max-width: 991px) {
@@ -13,6 +18,27 @@
     
             .menu-button {
                 display: flex;
+            }
+
+            .DocSearch-Button {
+                margin-right: 0;
+                margin-left: auto;
+                width: 2rem;
+                height: 2rem;
+                overflow: hidden;
+                padding: 0;
+                justify-content: center;
+                align-items: center;
+
+                .DocSearch-Search-Icon {
+                    width: 1rem;
+                    height: 1rem;
+                }
+
+                .DocSearch-Button-Placeholder,
+                .DocSearch-Button-Keys {
+                    display: none;
+                }
             }
         }
     
@@ -73,7 +99,7 @@
 
 @media screen and (max-width: 575px) {
     .layout-wrapper {
-        .layout-topbar {
+        .layout-topbar-inner {
             padding-left: 1rem;
             padding-right: 1rem;
         }

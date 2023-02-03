@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { TagDefaultProps } from './TagBase';
 
-export const Tag = React.forwardRef((props, ref) => {
+export const Tag = React.forwardRef((inProps, ref) => {
+    const props = ObjectUtils.getProps(inProps, TagDefaultProps);
+
     const elementRef = React.useRef(null);
-    const otherProps = ObjectUtils.findDiffKeys(props, Tag.defaultProps);
+    const otherProps = ObjectUtils.findDiffKeys(props, TagDefaultProps);
     const className = classNames(
         'p-tag p-component',
         {
@@ -29,12 +32,3 @@ export const Tag = React.forwardRef((props, ref) => {
 });
 
 Tag.displayName = 'Tag';
-Tag.defaultProps = {
-    __TYPE: 'Tag',
-    value: null,
-    severity: null,
-    rounded: false,
-    icon: null,
-    style: null,
-    className: null
-};

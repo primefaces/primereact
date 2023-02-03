@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { TreeDefaultProps } from './TreeBase';
 import { UITreeNode } from './UITreeNode';
 
 export const Tree = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ObjectUtils.getProps(inProps, TreeDefaultProps);
+
         const [filterValueState, setFilterValueState] = React.useState('');
         const [expandedKeysState, setExpandedKeysState] = React.useState(props.expandedKeys);
         const elementRef = React.useRef(null);
@@ -445,7 +448,7 @@ export const Tree = React.memo(
             return <div className="p-tree-footer">{content}</div>;
         };
 
-        const otherProps = ObjectUtils.findDiffKeys(props, Tree.defaultProps);
+        const otherProps = ObjectUtils.findDiffKeys(props, TreeDefaultProps);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames('p-tree p-component', props.className, {
             'p-tree-selectable': props.selectionMode,
@@ -469,47 +472,3 @@ export const Tree = React.memo(
 );
 
 Tree.displayName = 'Tree';
-Tree.defaultProps = {
-    __TYPE: 'Tree',
-    id: null,
-    value: null,
-    disabled: false,
-    selectionMode: null,
-    selectionKeys: null,
-    onSelectionChange: null,
-    contextMenuSelectionKey: null,
-    onContextMenuSelectionChange: null,
-    expandedKeys: null,
-    style: null,
-    className: null,
-    contentStyle: null,
-    contentClassName: null,
-    metaKeySelection: true,
-    propagateSelectionUp: true,
-    propagateSelectionDown: true,
-    loading: false,
-    loadingIcon: 'pi pi-spinner',
-    dragdropScope: null,
-    header: null,
-    footer: null,
-    showHeader: true,
-    filter: false,
-    filterValue: null,
-    filterBy: 'label',
-    filterMode: 'lenient',
-    filterPlaceholder: null,
-    filterLocale: undefined,
-    filterTemplate: null,
-    nodeTemplate: null,
-    togglerTemplate: null,
-    onSelect: null,
-    onUnselect: null,
-    onExpand: null,
-    onCollapse: null,
-    onToggle: null,
-    onDragDrop: null,
-    onContextMenu: null,
-    onFilterValueChange: null,
-    onNodeClick: null,
-    onNodeDoubleClick: null
-};

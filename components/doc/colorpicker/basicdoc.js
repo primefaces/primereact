@@ -3,8 +3,8 @@ import { ColorPicker } from '../../lib/colorpicker/ColorPicker';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function OverlayDoc(props) {
-    const [color, setColor] = useState('1976D2');
+export function BasicDoc(props) {
+    const [color, setColor] = useState(null);
 
     const code = {
         basic: `
@@ -16,7 +16,7 @@ import React, { useState } from "react";
 import { ColorPicker } from 'primereact/colorpicker';
 
 export default function BasicDemo() {
-    const [color, setColor] = useState('1976D2');
+    const [color, setColor] = useState(null);
 
     return (
         <div className="card flex justify-content-center">
@@ -27,14 +27,14 @@ export default function BasicDemo() {
         `,
         typescript: `
 import React, { useState } from "react";
-import { ColorPicker, ColorPickerChangeParams } from 'primereact/colorpicker';
+import { ColorPicker, ColorPickerChangeEvent } from 'primereact/colorpicker';
 
 export default function BasicDemo() {
-    const [color, setColor] = useState<string>('1976D2');
+    const [color, setColor] = useState<string>(null);
 
     return (
         <div className="card flex justify-content-center">
-            <ColorPicker value={color} onChange={(e: ColorPickerChangeParams) => setColor(e.value)} />
+            <ColorPicker value={color} onChange={(e: ColorPickerChangeEvent) => setColor(e.value)} />
         </div>
     )
 }
@@ -45,7 +45,7 @@ export default function BasicDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    ColorPicker is used as a controlled input component with <i>value</i> and <i>onChange</i> properties.
+                    ColorPicker is used as a controlled input with <i>value</i> and <i>onChange</i> properties.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">

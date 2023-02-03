@@ -5,10 +5,13 @@ import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { SlideMenuDefaultProps } from './SlideMenuBase';
 import { SlideMenuSub } from './SlideMenuSub';
 
 export const SlideMenu = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ObjectUtils.getProps(inProps, SlideMenuDefaultProps);
+
         const [levelState, setLevelState] = React.useState(0);
         const [visibleState, setVisibleState] = React.useState(false);
         const menuRef = React.useRef(null);
@@ -119,7 +122,7 @@ export const SlideMenu = React.memo(
         };
 
         const createElement = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, SlideMenu.defaultProps);
+            const otherProps = ObjectUtils.findDiffKeys(props, SlideMenuDefaultProps);
             const className = classNames(
                 'p-slidemenu p-component',
                 {
@@ -162,23 +165,3 @@ export const SlideMenu = React.memo(
 );
 
 SlideMenu.displayName = 'SlideMenu';
-SlideMenu.defaultProps = {
-    __TYPE: 'SlideMenu',
-    appendTo: null,
-    autoZIndex: true,
-    backLabel: 'Back',
-    baseZIndex: 0,
-    className: null,
-    easing: 'ease-out',
-    effectDuration: 250,
-    id: null,
-    menuWidth: 190,
-    model: null,
-    onHide: null,
-    onShow: null,
-    onNavigate: null,
-    popup: false,
-    style: null,
-    transitionOptions: null,
-    viewportHeight: 175
-};

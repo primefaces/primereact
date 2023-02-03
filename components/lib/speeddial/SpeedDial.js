@@ -3,9 +3,12 @@ import { Button } from '../button/Button';
 import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { SpeedDialDefaultProps } from './SpeedDialBase';
 
 export const SpeedDial = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ObjectUtils.getProps(inProps, SpeedDialDefaultProps);
+
         const [visibleState, setVisibleState] = React.useState(false);
         const isItemClicked = React.useRef(false);
         const elementRef = React.useRef(null);
@@ -251,7 +254,7 @@ export const SpeedDial = React.memo(
             return null;
         };
 
-        const otherProps = ObjectUtils.findDiffKeys(props, SpeedDial.defaultProps);
+        const otherProps = ObjectUtils.findDiffKeys(props, SpeedDialDefaultProps);
         const className = classNames(
             `p-speeddial p-component p-speeddial-${props.type}`,
             {
@@ -278,31 +281,3 @@ export const SpeedDial = React.memo(
 );
 
 SpeedDial.displayName = 'SpeedDial';
-SpeedDial.defaultProps = {
-    __TYPE: 'SpeedDial',
-    id: null,
-    model: null,
-    visible: false,
-    style: null,
-    className: null,
-    direction: 'up',
-    transitionDelay: 30,
-    type: 'linear',
-    radius: 0,
-    mask: false,
-    disabled: false,
-    hideOnClickOutside: true,
-    buttonStyle: null,
-    buttonClassName: null,
-    buttonTemplate: null,
-    'aria-label': null,
-    maskStyle: null,
-    maskClassName: null,
-    showIcon: 'pi pi-plus',
-    hideIcon: null,
-    rotateAnimation: true,
-    onVisibleChange: null,
-    onClick: null,
-    onShow: null,
-    onHide: null
-};

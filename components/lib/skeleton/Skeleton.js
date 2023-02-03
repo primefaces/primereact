@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { classNames, ObjectUtils } from '../utils/Utils';
+import { SkeletonDefaultProps } from './SkeletonBase';
 
 export const Skeleton = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ObjectUtils.getProps(inProps, SkeletonDefaultProps);
+
         const elementRef = React.useRef(null);
-        const otherProps = ObjectUtils.findDiffKeys(props, Skeleton.defaultProps);
+        const otherProps = ObjectUtils.findDiffKeys(props, SkeletonDefaultProps);
         const style = props.size ? { width: props.size, height: props.size, borderRadius: props.borderRadius } : { width: props.width, height: props.height, borderRadius: props.borderRadius };
         const className = classNames(
             'p-skeleton p-component',
@@ -25,14 +28,3 @@ export const Skeleton = React.memo(
 );
 
 Skeleton.displayName = 'Skeleton';
-Skeleton.defaultProps = {
-    __TYPE: 'Skeleton',
-    shape: 'rectangle',
-    size: null,
-    width: '100%',
-    height: '1rem',
-    borderRadius: null,
-    animation: 'wave',
-    style: null,
-    className: null
-};

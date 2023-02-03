@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { AvatarDefaultProps } from './AvatarBase';
 
-export const Avatar = React.forwardRef((props, ref) => {
+export const Avatar = React.forwardRef((inProps, ref) => {
+    const props = ObjectUtils.getProps(inProps, AvatarDefaultProps);
+
     const elementRef = React.useRef(null);
     const [imageFailed, setImageFailed] = React.useState(false);
 
@@ -37,7 +40,7 @@ export const Avatar = React.forwardRef((props, ref) => {
         getElement: () => elementRef.current
     }));
 
-    const otherProps = ObjectUtils.findDiffKeys(props, Avatar.defaultProps);
+    const otherProps = ObjectUtils.findDiffKeys(props, AvatarDefaultProps);
     const containerClassName = classNames(
         'p-avatar p-component',
         {
@@ -61,17 +64,3 @@ export const Avatar = React.forwardRef((props, ref) => {
 });
 
 Avatar.displayName = 'Avatar';
-Avatar.defaultProps = {
-    __TYPE: 'Avatar',
-    className: null,
-    icon: null,
-    image: null,
-    imageAlt: 'avatar',
-    imageFallback: 'default',
-    label: null,
-    onImageError: null,
-    shape: 'square',
-    size: 'normal',
-    style: null,
-    template: null
-};

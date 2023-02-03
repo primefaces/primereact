@@ -9,7 +9,8 @@ export function LocaleDoc(props) {
 
     const code = {
         basic: `
-<Password value={value} onChange={(e) => setValue(e.target.value)} />
+<Password value={value} onChange={(e) => setValue(e.target.value)}
+    promptLabel="Choose a password" weakLabel="Too simple" mediumLabel="Average complexity" strongLabel="Complex password"/>
         `,
         javascript: `
 import React, { useState } from "react";
@@ -20,7 +21,8 @@ export default function LocaleDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <Password value={value} onChange={(e) => setValue(e.target.value)} />
+            <Password value={value} onChange={(e) => setValue(e.target.value)}
+                promptLabel="Choose a password" weakLabel="Too simple" mediumLabel="Average complexity" strongLabel="Complex password"/>
         </div>
     )
 }
@@ -34,7 +36,8 @@ export default function LocaleDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <Password value={value} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)} />
+            <Password value={value} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)} 
+                promptLabel="Choose a password" weakLabel="Too simple" mediumLabel="Average complexity" strongLabel="Complex password"/>
         </div>
     )
 }
@@ -50,7 +53,7 @@ export default function LocaleDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Password value={value} onChange={(e) => setValue(e.target.value)} />
+                <Password value={value} onChange={(e) => setValue(e.target.value)} promptLabel="Choose a password" weakLabel="Too simple" mediumLabel="Average complexity" strongLabel="Complex password" />
             </div>
             <DocSectionCode code={code} />
         </>

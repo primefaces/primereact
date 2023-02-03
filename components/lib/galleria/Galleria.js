@@ -5,11 +5,14 @@ import { useInterval, useUnmountEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { GalleriaDefaultProps } from './GalleriaBase';
 import { GalleriaItem } from './GalleriaItem';
 import { GalleriaThumbnails } from './GalleriaThumbnails';
 
 export const Galleria = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ObjectUtils.getProps(inProps, GalleriaDefaultProps);
+
         const [visibleState, setVisibleState] = React.useState(false);
         const [numVisibleState, setNumVisibleState] = React.useState(props.numVisible);
         const [slideShowActiveState, setSlideShowActiveState] = React.useState(false);
@@ -133,7 +136,7 @@ export const Galleria = React.memo(
         };
 
         const createElement = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, Galleria.defaultProps);
+            const otherProps = ObjectUtils.findDiffKeys(props, GalleriaDefaultProps);
             const thumbnailsPosClassName = props.showThumbnails && getPositionClassName('p-galleria-thumbnails', props.thumbnailsPosition);
             const indicatorPosClassName = props.showIndicators && getPositionClassName('p-galleria-indicators', props.indicatorsPosition);
             const galleriaClassName = classNames(
@@ -246,36 +249,3 @@ export const Galleria = React.memo(
 );
 
 Galleria.displayName = 'Galleria';
-Galleria.defaultProps = {
-    __TYPE: 'Galleria',
-    id: null,
-    value: null,
-    activeIndex: 0,
-    fullScreen: false,
-    item: null,
-    thumbnail: null,
-    indicator: null,
-    caption: null,
-    className: null,
-    style: null,
-    header: null,
-    footer: null,
-    numVisible: 3,
-    responsiveOptions: null,
-    showItemNavigators: false,
-    showThumbnailNavigators: true,
-    showItemNavigatorsOnHover: false,
-    changeItemOnIndicatorHover: false,
-    circular: false,
-    autoPlay: false,
-    transitionInterval: 4000,
-    showThumbnails: true,
-    thumbnailsPosition: 'bottom',
-    verticalThumbnailViewPortHeight: '300px',
-    showIndicators: false,
-    showIndicatorsOnItem: false,
-    indicatorsPosition: 'bottom',
-    baseZIndex: 0,
-    transitionOptions: null,
-    onItemChange: null
-};

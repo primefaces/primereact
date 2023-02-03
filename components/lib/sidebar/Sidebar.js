@@ -4,9 +4,12 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { SidebarDefaultProps } from './SidebarBase';
 
-export const Sidebar = React.forwardRef((props, ref) => {
+export const Sidebar = React.forwardRef((inProps, ref) => {
+    const props = ObjectUtils.getProps(inProps, SidebarDefaultProps);
+
     const [maskVisibleState, setMaskVisibleState] = React.useState(false);
     const [visibleState, setVisibleState] = React.useState(false);
     const sidebarRef = React.useRef(null);
@@ -176,7 +179,7 @@ export const Sidebar = React.forwardRef((props, ref) => {
     };
 
     const createElement = () => {
-        const otherProps = ObjectUtils.findDiffKeys(props, Sidebar.defaultProps);
+        const otherProps = ObjectUtils.findDiffKeys(props, SidebarDefaultProps);
         const className = classNames('p-sidebar p-component', props.className, {
             'p-input-filled': PrimeReact.inputStyle === 'filled',
             'p-ripple-disabled': PrimeReact.ripple === false
@@ -226,26 +229,3 @@ export const Sidebar = React.forwardRef((props, ref) => {
 });
 
 Sidebar.displayName = 'Sidebar';
-Sidebar.defaultProps = {
-    __TYPE: 'Sidebar',
-    id: null,
-    style: null,
-    className: null,
-    maskStyle: null,
-    maskClassName: null,
-    visible: false,
-    position: 'left',
-    fullScreen: false,
-    blockScroll: false,
-    baseZIndex: 0,
-    dismissable: true,
-    showCloseIcon: true,
-    ariaCloseLabel: null,
-    closeOnEscape: true,
-    icons: null,
-    modal: true,
-    appendTo: null,
-    transitionOptions: null,
-    onShow: null,
-    onHide: null
-};
