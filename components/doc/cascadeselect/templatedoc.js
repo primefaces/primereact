@@ -93,13 +93,15 @@ export function TemplateDoc(props) {
 
     const code = {
         basic: `
-<CascadeSelect value={selectedCity} options={countries}  optionLabel={"cname"} optionGroupLabel={"name"} optionGroupChildren={['states', 'cities']} style={{minWidth: '14rem'}} placeholder={"Select a City"} onChange={event => setSelectedCity(event.value)} itemTemplate={countryOptionTemplate}/>
+<CascadeSelect value={selectedCity} onChange={e => setSelectedCity(e.value)} options={countries} 
+    optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']} 
+    style={{minWidth: '14rem'}} placeholder="Select a City" itemTemplate={countryOptionTemplate} />
         `,
         javascript: `
 import React, { useState } from "react";
 import { CascadeSelect } from 'primereact/cascadeselect';
 
-export default function TemplateDoc() {
+export default function TemplateDemo() {
     const [selectedCity, setSelectedCity] = useState(null);
     const countries = [
         {
@@ -192,18 +194,36 @@ export default function TemplateDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <CascadeSelect value={selectedCity} options={countries} optionLabel={"cname"} optionGroupLabel={"name"} optionGroupChildren={['states', 'cities']} style={{minWidth: '14rem'}} placeholder={"Select a City"} onChange={event => setSelectedCity(event.value)} itemTemplate={countryOptionTemplate}/>
+            <CascadeSelect value={selectedCity} onChange={e => setSelectedCity(e.value)} options={countries} 
+                optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']} 
+                style={{minWidth: '14rem'}} placeholder="Select a City" itemTemplate={countryOptionTemplate} />
         </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { CascadeSelect } from 'primereact/cascadeselect';
+import { CascadeSelect, CascadeSelectChangeEvent } from 'primereact/cascadeselect';
 
-export default function TemplateDoc() {
-    const [selectedCity, setSelectedCity] = useState(null);
-    const countries = [
+interface City {
+    cname: string;
+    code: string;
+}
+
+interface CountryState {
+    name: string;
+    cities: City[];
+}
+
+interface Country {
+    name: string;
+    code: string;
+    states: CountryState[];
+}
+
+export default function TemplateDemo() {
+    const [selectedCity, setSelectedCity] = useState<City | null>(null);
+    const countries: Country[] = [
         {
             name: 'Australia',
             code: 'AU',
@@ -293,7 +313,9 @@ export default function TemplateDoc() {
     }
     return (
         <div className="card flex justify-content-center">
-            <CascadeSelect value={selectedCity} options={countries} optionLabel={"cname"} optionGroupLabel={"name"} optionGroupChildren={['states', 'cities']} style={{minWidth: '14rem'}} placeholder={"Select a City"} onChange={event =>  setSelectedCity(event.value)}  itemTemplate={countryOptionTemplate}/>
+            <CascadeSelect value={selectedCity} onChange={(e: CascadeSelectChangeEvent) => setSelectedCity(event.value)} options={countries} 
+                optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']} 
+                style={{minWidth: '14rem'}} placeholder="Select a City" itemTemplate={countryOptionTemplate} />
         </div>
     )
 }
@@ -304,19 +326,19 @@ export default function TemplateDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Content of an item can be customized with the <i>itemTemplate</i> prop.
+                    Content of an item is customized with the <i>itemTemplate</i> property that takes an option as a parameter.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <CascadeSelect
                     value={selectedCity}
+                    onChange={(e) => setSelectedCity(e.value)}
                     options={countries}
-                    optionLabel={'cname'}
-                    optionGroupLabel={'name'}
+                    optionLabel="cname"
+                    optionGroupLabel="name"
                     optionGroupChildren={['states', 'cities']}
                     style={{ minWidth: '14rem' }}
-                    placeholder={'Select a City'}
-                    onChange={(event) => setSelectedCity(event.value)}
+                    placeholder="Select a City"
                     itemTemplate={countryOptionTemplate}
                 />
             </div>

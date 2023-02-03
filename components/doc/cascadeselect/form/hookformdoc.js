@@ -1,11 +1,11 @@
 import { useRef } from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import { CascadeSelect } from '../../../lib/cascadeselect/CascadeSelect';
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
+import { Controller, useForm } from 'react-hook-form';
 import { Button } from '../../../lib/button/Button';
+import { CascadeSelect } from '../../../lib/cascadeselect/CascadeSelect';
 import { Toast } from '../../../lib/toast/Toast';
 import { classNames } from '../../../lib/utils/Utils';
+import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function HookFormDoc(props) {
     const toast = useRef(null);
@@ -122,11 +122,11 @@ export function HookFormDoc(props) {
             name="city"
             value={field.value}
             options={countries}
-            optionLabel={'cname'}
-            optionGroupLabel={'name'}
+            optionLabel="cname"
+            optionGroupLabel="name"
             optionGroupChildren={['states', 'cities']}
             style={{ minWidth: '14rem' }}
-            placeholder={'Select a City'}
+            placeholder="Select a City"
             onChange={(e) => field.onChange(e.value)}
         />
     )}
@@ -258,11 +258,11 @@ export default function HookFormDoc() {
                             name="city"
                             value={field.value}
                             options={countries}
-                            optionLabel={'cname'}
-                            optionGroupLabel={'name'}
+                            optionLabel="cname"
+                            optionGroupLabel="name"
                             optionGroupChildren={['states', 'cities']}
                             style={{ minWidth: '14rem' }}
-                            placeholder={'Select a City'}
+                            placeholder="Select a City"
                             className={classNames({ 'p-invalid': fieldState.error })}
                             onChange={(e) => field.onChange(e.value)}
                         />
@@ -278,14 +278,30 @@ export default function HookFormDoc() {
         typescript: `
 import React, { useRef } from "react";
 import { useForm, Controller } from 'react-hook-form';
-import { CascadeSelect } from 'primereact/cascadeselect';
+import { CascadeSelect, CascadeSelectChangeEvent } from 'primereact/cascadeselect';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 import { classNames } from 'primereact/utils';
 
+interface City {
+    cname: string;
+    code: string;
+}
+
+interface CountryState {
+    name: string;
+    cities: City[];
+}
+
+interface Country {
+    name: string;
+    code: string;
+    states: CountryState[];
+}
+
 export default function HookFormDoc() {
     const toast = useRef(null);
-    const countries = [
+    const countries: Country[] = [
         {
             name: 'Australia',
             code: 'AU',
@@ -399,13 +415,13 @@ export default function HookFormDoc() {
                             name="city"
                             value={field.value}
                             options={countries}
-                            optionLabel={'cname'}
-                            optionGroupLabel={'name'}
+                            optionLabel="cname"
+                            optionGroupLabel="name"
                             optionGroupChildren={['states', 'cities']}
                             style={{ minWidth: '14rem' }}
-                            placeholder={'Select a City'}
+                            placeholder="Select a City"
                             className={classNames({ 'p-invalid': fieldState.error })}
-                            onChange={(e) => field.onChange(e.value)}
+                            onChange={(e: CascadeSelectChangeEvent) => field.onChange(e.value)}
                         />
                     )}
                 />

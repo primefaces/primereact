@@ -27,6 +27,11 @@ const CascadeSelectDemo = () => {
             component: BasicDoc
         },
         {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
             id: 'floatlabel',
             label: 'Float Label',
             component: FloatLabelDoc
@@ -40,11 +45,6 @@ const CascadeSelectDemo = () => {
             id: 'disabled',
             label: 'Disabled',
             component: DisabledDoc
-        },
-        {
-            id: 'template',
-            label: 'Template',
-            component: TemplateDoc
         },
         {
             id: 'form',

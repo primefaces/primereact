@@ -3,9 +3,9 @@ import { useRef } from 'react';
 import { Button } from '../../../lib/button/Button';
 import { CascadeSelect } from '../../../lib/cascadeselect/CascadeSelect';
 import { Toast } from '../../../lib/toast/Toast';
+import { classNames } from '../../../lib/utils/Utils';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
-import { classNames } from '../../../lib/utils/Utils';
 
 export function FormikDoc(props) {
     const toast = useRef(null);
@@ -121,11 +121,11 @@ export function FormikDoc(props) {
     name="city"
     value={formik.values.city}
     options={countries}
-    optionLabel={'cname'}
-    optionGroupLabel={'name'}
+    optionLabel="cname"
+    optionGroupLabel="name"
     optionGroupChildren={['states', 'cities']}
     style={{ minWidth: '14rem' }}
-    placeholder={'Select a City'}
+    placeholder="Select a City"
     onChange={(e) => {
         formik.setFieldValue('city', e.value);
     }}
@@ -257,11 +257,11 @@ export default function FormikDoc() {
                     name="city"
                     value={formik.values.city}
                     options={countries}
-                    optionLabel={'cname'}
-                    optionGroupLabel={'name'}
+                    optionLabel="cname"
+                    optionGroupLabel="name"
                     optionGroupChildren={['states', 'cities']}
                     style={{ minWidth: '14rem' }}
-                    placeholder={'Select a City'}
+                    placeholder="Select a City"
                     onChange={(e) => {
                         formik.setFieldValue('city', e.value);
                     }}
@@ -276,13 +276,29 @@ export default function FormikDoc() {
         typescript: `
 import React, { useRef } from "react";
 import { useFormik } from 'formik';
-import { CascadeSelect } from 'primereact/cascadeselect';
+import { CascadeSelect, CascadeSelectChangeEvent } from 'primereact/cascadeselect';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
+interface City {
+    cname: string;
+    code: string;
+}
+
+interface CountryState {
+    name: string;
+    cities: City[];
+}
+
+interface Country {
+    name: string;
+    code: string;
+    states: CountryState[];
+}
+
 export default function FormikDoc() {
     const toast = useRef(null);
-    const countries = [
+    const countries: Country[] = [
         {
             name: 'Australia',
             code: 'AU',
@@ -397,12 +413,12 @@ export default function FormikDoc() {
                     name="city"
                     value={formik.values.city}
                     options={countries}
-                    optionLabel={'cname'}
-                    optionGroupLabel={'name'}
+                    optionLabel="cname"
+                    optionGroupLabel="name"
                     optionGroupChildren={['states', 'cities']}
                     style={{ minWidth: '14rem' }}
-                    placeholder={'Select a City'}
-                    onChange={(e) => {
+                    placeholder="Select a City"
+                    onChange={(e: CascadeSelectChangeEvent) => {
                         formik.setFieldValue('city', e.value);
                     }}
                 />
@@ -430,11 +446,11 @@ export default function FormikDoc() {
                         name="city"
                         value={formik.values.city}
                         options={countries}
-                        optionLabel={'cname'}
-                        optionGroupLabel={'name'}
+                        optionLabel="cname"
+                        optionGroupLabel="name"
                         optionGroupChildren={['states', 'cities']}
                         style={{ minWidth: '14rem' }}
-                        placeholder={'Select a City'}
+                        placeholder="Select a City"
                         className={classNames({ 'p-invalid': isFormFieldInvalid('city') })}
                         onChange={(e) => {
                             formik.setFieldValue('city', e.value);
