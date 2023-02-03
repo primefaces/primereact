@@ -8,32 +8,32 @@ export function ButtonBarDoc(props) {
 
     const code = {
         basic: `
-<Calendar id="buttonbar" value={date} onChange={(e) => setDate(e.value)} showButtonBar />
+<Calendar value={date} onChange={(e) => setDate(e.value)} showButtonBar />
         `,
         javascript: `
 import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
-export default function ButtonBarDoc() {
+export default function ButtonBarDemo() {
     const [date, setDate] = useState(null);
 
     return (
         <div className="card flex justify-content-center">
-            <Calendar id="buttonbar" value={date} onChange={(e) => setDate(e.value)} showButtonBar />
+            <Calendar value={date} onChange={(e) => setDate(e.value)} showButtonBar />
         </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { Calendar, CalendarChangeParams } from 'primereact/calendar';
+import { Calendar, CalendarChangeEvent } from 'primereact/calendar';
 
-export default function ButtonBarDoc() {
+export default function ButtonBarDemo() {
     const [date, setDate] = useState<Date | null>(null);
 
     return (
         <div className="card flex justify-content-center">
-            <Calendar id="buttonbar" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} showButtonBar />
+            <Calendar value={date} onChange={(e : CalendarChangeEvent) => setDate(e.value)} showButtonBar />
         </div>
     )
 }
@@ -43,10 +43,12 @@ export default function ButtonBarDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Whether to display today and clear buttons at the footer</p>
+                <p>
+                    When <i>showButtonBar</i> is present, today and clear buttons are displayed at the footer.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Calendar id="buttonbar" value={date} onChange={(e) => setDate(e.value)} showButtonBar />
+                <Calendar value={date} onChange={(e) => setDate(e.value)} showButtonBar />
             </div>
             <DocSectionCode code={code} />
         </>

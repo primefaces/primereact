@@ -2,24 +2,24 @@ import Head from 'next/head';
 import { AccessibilityDoc } from '../../components/doc/calendar/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/calendar/basicdoc';
 import { ButtonBarDoc } from '../../components/doc/calendar/buttonbardoc';
-import { DateFormatDoc } from '../../components/doc/calendar/dateformatdoc';
 import { DateTemplateDoc } from '../../components/doc/calendar/datetemplatedoc';
 import { DisabledDoc } from '../../components/doc/calendar/disableddoc';
 import { FloatLabelDoc } from '../../components/doc/calendar/floatlabeldoc';
 import { FormikDoc } from '../../components/doc/calendar/form/formikdoc';
 import { HookFormDoc } from '../../components/doc/calendar/form/hookfromdoc';
+import { FormatDoc } from '../../components/doc/calendar/formatdoc';
 import { IconDoc } from '../../components/doc/calendar/icondoc';
 import { ImportDoc } from '../../components/doc/calendar/importdoc';
 import { InlineDoc } from '../../components/doc/calendar/inlinedoc';
-import { InvalidStateDoc } from '../../components/doc/calendar/invaliddoc';
+import { InvalidDoc } from '../../components/doc/calendar/invaliddoc';
+import { LocaleDoc } from '../../components/doc/calendar/localedoc';
 import { MinMaxDoc } from '../../components/doc/calendar/minmaxdoc';
 import { MonthPickerDoc } from '../../components/doc/calendar/monthpickerdoc';
 import { MultipleDoc } from '../../components/doc/calendar/multipledoc';
 import { MultipleMonthsDoc } from '../../components/doc/calendar/multiplemonthsdoc';
 import { RangeDoc } from '../../components/doc/calendar/rangedoc';
 import { StyleDoc } from '../../components/doc/calendar/styledoc';
-import { Time12Doc } from '../../components/doc/calendar/time12doc';
-import { Time24Doc } from '../../components/doc/calendar/time24doc';
+import { TimeDoc } from '../../components/doc/calendar/timedoc';
 import { TouchUIDoc } from '../../components/doc/calendar/touchuidoc';
 import { YearPickerDoc } from '../../components/doc/calendar/yearpickerdoc';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
@@ -38,24 +38,14 @@ const CalendarDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'floatlabel',
-            label: 'Float Label',
-            component: FloatLabelDoc
+            id: 'format',
+            label: 'Format',
+            component: FormatDoc
         },
         {
-            id: 'invalidstate',
-            label: 'Invalid State',
-            component: InvalidStateDoc
-        },
-        {
-            id: 'disabled',
-            label: 'Disabled',
-            component: DisabledDoc
-        },
-        {
-            id: 'dateformat',
-            label: 'Date Format',
-            component: DateFormatDoc
+            id: 'locale',
+            label: 'Locale',
+            component: LocaleDoc
         },
         {
             id: 'icon',
@@ -83,14 +73,9 @@ const CalendarDemo = () => {
             component: ButtonBarDoc
         },
         {
-            id: 'time24',
-            label: 'Time / 24h',
-            component: Time24Doc
-        },
-        {
-            id: 'time12',
-            label: 'Time / 12h',
-            component: Time12Doc
+            id: 'time',
+            label: 'Time',
+            component: TimeDoc
         },
         {
             id: 'monthpicker',
@@ -121,6 +106,21 @@ const CalendarDemo = () => {
             id: 'inline',
             label: 'Inline',
             component: InlineDoc
+        },
+        {
+            id: 'floatlabel',
+            label: 'Float Label',
+            component: FloatLabelDoc
+        },
+        {
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
         },
         {
             id: 'form',
