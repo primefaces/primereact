@@ -28,21 +28,6 @@ const ChipsDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'floatlabel',
-            label: 'Float Label',
-            component: FloatLabelDoc
-        },
-        {
-            id: 'invalid',
-            label: 'Invalid',
-            component: InvalidDoc
-        },
-        {
-            id: 'disabled',
-            label: 'Disabled',
-            component: DisabledDoc
-        },
-        {
             id: 'separator',
             label: 'Separator',
             component: SeparatorDoc
@@ -56,6 +41,21 @@ const ChipsDemo = () => {
             id: 'keyfilter',
             label: 'Key Filter',
             component: KeyFilterDoc
+        },
+        {
+            id: 'floatlabel',
+            label: 'Float Label',
+            component: FloatLabelDoc
+        },
+        {
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
         },
         {
             id: 'form',

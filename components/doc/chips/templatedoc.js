@@ -9,8 +9,8 @@ export function TemplateDoc(props) {
     const customChip = (item) => {
         return (
             <div>
-                <span>{item} - (active) </span>
-                <i className="pi pi-user-plus" style={{ fontSize: '14px' }}></i>
+                <span>{item} - (active)</span>
+                <i className="pi pi-user-plus"></i>
             </div>
         );
     };
@@ -28,8 +28,8 @@ export default function TemplateDemo() {
     const customChip = (item) => {
         return (
             <div>
-                <span>{item} - (active) </span>
-                <i className="pi pi-user-plus" style={{ fontSize: '14px' }}></i>
+                <span>{item} - (active)</span>
+                <i className="pi pi-user-plus"></i>
             </div>
         );
     };
@@ -43,22 +43,22 @@ export default function TemplateDemo() {
         `,
         typescript: `
 import React, { useState } from "react";
-import { Chips, ChipsChangeParams } from "primereact/chips";
+import { Chips, ChipsChangeEvent } from "primereact/chips";
 
 export default function TemplateDemo() {
     const [value, setValue] = useState<string[]>([]);
-    const customChip = (item: any) => {
+    const customChip = (item: string) => {
         return (
             <div>
-                <span>{item} - (active) </span>
-                <i className="pi pi-user-plus" style={{ fontSize: '14px' }}></i>
+                <span>{item} - (active)</span>
+                <i className="pi pi-user-plus"></i>
             </div>
         );
     };
 
     return (
         <div className="card p-fluid">
-            <Chips value={value} onChange={(e: ChipsChangeParams) => setValue(e.value)} itemTemplate={customChip} />
+            <Chips value={value} onChange={(e: ChipsChangeEvent) => setValue(e.value)} itemTemplate={customChip} />
         </div>
     )
 }
@@ -69,7 +69,7 @@ export default function TemplateDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    A chip is customized using <i>itemTemplate</i> function where value is passed to return JSX.
+                    Chip content is customized using <i>itemTemplate</i> function that receives a single chip value as a parameter.
                 </p>
             </DocSectionText>
             <div className="card p-fluid">

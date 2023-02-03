@@ -26,14 +26,14 @@ export default function BasicDemo() {
         `,
         typescript: `
 import React, { useState } from "react";
-import { Chips } from "primereact/chips";
+import { Chips, ChipsChangeEvent } from "primereact/chips";
 
 export default function BasicDemo() {
     const [value, setValue] = useState<string[]>([]);
 
     return (
         <div className="card p-fluid">
-            <Chips value={value} onChange={(e: ChipsChangeParams) => setValue(e.value)} />
+            <Chips value={value} onChange={(e: ChipsChangeEvent) => setValue(e.value)} />
         </div>
     )
 }
@@ -44,7 +44,7 @@ export default function BasicDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Chips requires an array as its <i>value</i> and <i>onChange</i> callback to update the model.
+                    InputText is used as a controlled input with <i>value</i> and <i>onChange</i> properties where <i>value</i> should be an array.
                 </p>
             </DocSectionText>
             <div className="card p-fluid">
