@@ -29,15 +29,15 @@ export function HookFormDoc(props) {
     const code = {
         basic: `
 <Controller
-name="value"
-control={form.control}
-rules={{ required: 'Value is required.' }}
-render={({ field, fieldState }) => (
-    <div className="flex flex-column gap-2">
-        <ToggleButton id={field.name} checked={field.value} onChange={field.onChange} className={classNames({ 'p-invalid': fieldState.error })} />
-        {getFormErrorMessage(field.name)}
-    </div>
-)}
+    name="value"
+    control={form.control}
+    rules={{ required: 'Value is required.' }}
+    render={({ field, fieldState }) => (
+        <div className="flex flex-column align-items-center gap-2">
+            <ToggleButton id={field.name} checked={field.value} onChange={field.onChange} className={classNames('w-6rem', { 'p-invalid': fieldState.error })} />
+            {getFormErrorMessage(field.name)}
+        </div>
+    )}
 />
         `,
         javascript: `
@@ -69,20 +69,20 @@ export default function HookFormDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column gap-2">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
                 <Controller
                     name="value"
                     control={form.control}
                     rules={{ required: 'Value is required.' }}
                     render={({ field, fieldState }) => (
-                        <div className="flex flex-column gap-2">
-                            <ToggleButton id={field.name} checked={field.value} onChange={field.onChange} className={classNames({ 'p-invalid': fieldState.error })} />
+                        <div className="flex flex-column align-items-center gap-2">
+                            <ToggleButton id={field.name} checked={field.value} onChange={field.onChange} className={classNames('w-6rem', { 'p-invalid': fieldState.error })} />
                             {getFormErrorMessage(field.name)}
                         </div>
                     )}
                 />
-                <Button label="Submit" type="submit" icon="pi pi-check" />
+                <Button label="Submit" type="submit" icon="pi pi-check" className="p-button-outlined" />
             </form>
         </div>
     )
@@ -117,20 +117,20 @@ export default function HookFormDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column gap-2">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
                 <Controller
                     name="value"
                     control={form.control}
                     rules={{ required: 'Value is required.' }}
                     render={({ field, fieldState }) => (
-                        <div className="flex flex-column gap-2">
-                            <ToggleButton id={field.name} checked={field.value} onChange={field.onChange} className={classNames({ 'p-invalid': fieldState.error })} />
+                        <div className="flex flex-column align-items-center gap-2">
+                            <ToggleButton id={field.name} checked={field.value} onChange={field.onChange} className={classNames('w-6rem', { 'p-invalid': fieldState.error })} />
                             {getFormErrorMessage(field.name)}
                         </div>
                     )}
                 />
-                <Button label="Submit" type="submit" icon="pi pi-check" />
+                <Button label="Submit" type="submit" icon="pi pi-check" className="p-button-outlined" />
             </form>
         </div>
     )
@@ -146,20 +146,20 @@ export default function HookFormDoc() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column gap-2">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column align-items-center gap-2">
                     <Toast ref={toast} />
                     <Controller
                         name="value"
                         control={form.control}
                         rules={{ required: 'Value is required.' }}
                         render={({ field, fieldState }) => (
-                            <div className="flex flex-column gap-2">
-                                <ToggleButton id={field.name} checked={field.value} onChange={field.onChange} className={classNames({ 'p-invalid': fieldState.error })} />
+                            <div className="flex flex-column align-items-center gap-2">
+                                <ToggleButton id={field.name} checked={field.value} onChange={field.onChange} className={classNames('w-6rem', { 'p-invalid': fieldState.error })} />
                                 {getFormErrorMessage(field.name)}
                             </div>
                         )}
                     />
-                    <Button label="Submit" type="submit" icon="pi pi-check" />
+                    <Button label="Submit" type="submit" icon="pi pi-check" className="p-button-outlined" />
                 </form>
             </div>
             <DocSectionCode code={code} dependencies={{ 'react-hook-form': '^7.39.4' }} />
