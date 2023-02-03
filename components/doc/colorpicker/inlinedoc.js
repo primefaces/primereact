@@ -9,13 +9,12 @@ export function InlineDoc(props) {
     const code = {
         basic: `
 <ColorPicker value={color} onChange={(e) => setColor(e.value)} inline />
-
         `,
         javascript: `
 import React, { useState } from "react";
 import { ColorPicker } from 'primereact/colorpicker';
 
-export default function BasicDemo() {
+export default function InlineDemo() {
     const [color, setColor] = useState(null);
 
     return (
@@ -27,14 +26,14 @@ export default function BasicDemo() {
         `,
         typescript: `
 import React, { useState } from "react";
-import { ColorPicker, ColorPickerChangeParams } from 'primereact/colorpicker';
+import { ColorPicker, ColorPickerChangeEvent } from 'primereact/colorpicker';
 
-export default function BasicDemo() {
-    const [color, setColor] = useState<any>(null);
+export default function InlineDemo() {
+    const [color, setColor] = useState<string>(null);
 
     return (
         <div className="card flex justify-content-center">
-            <ColorPicker value={color} onChange={(e: ColorPickerChangeParams) => setColor(e.value)} inline />
+            <ColorPicker value={color} onChange={(e: ColorPickerChangeEvent) => setColor(e.value)} inline />
         </div>
     )
 }
@@ -45,7 +44,7 @@ export default function BasicDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    ColorPicker is used as a controlled input component with <i>value</i> and <i>onChange</i> properties.
+                    ColorPicker is displayed as a popup by default, add <i>inline</i> property to customize this behavior.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">

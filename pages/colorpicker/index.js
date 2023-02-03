@@ -1,12 +1,12 @@
 import Head from 'next/head';
 import { AccessibilityDoc } from '../../components/doc/colorpicker/accessibilitydoc';
+import { BasicDoc } from '../../components/doc/colorpicker/basicdoc';
 import { DisabledDoc } from '../../components/doc/colorpicker/disableddoc';
 import { FormikDoc } from '../../components/doc/colorpicker/form/formikdoc';
 import { HookFormDoc } from '../../components/doc/colorpicker/form/hookformdoc';
 import { FormatDoc } from '../../components/doc/colorpicker/formatdoc';
 import { ImportDoc } from '../../components/doc/colorpicker/importdoc';
 import { InlineDoc } from '../../components/doc/colorpicker/inlinedoc';
-import { OverlayDoc } from '../../components/doc/colorpicker/overlaydoc';
 import { StyleDoc } from '../../components/doc/colorpicker/styledoc';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
@@ -19,14 +19,14 @@ const ColorPickerDemo = () => {
             component: ImportDoc
         },
         {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
             id: 'inline',
             label: 'Inline',
             component: InlineDoc
-        },
-        {
-            id: 'overlay',
-            label: 'Overlay',
-            component: OverlayDoc
         },
         {
             id: 'format',
