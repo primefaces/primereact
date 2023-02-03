@@ -82,8 +82,8 @@
     flex-basis: auto;
     flex-shrink: 0;
     flex-grow: 0;
-    padding: 0.25rem 1rem;
-    margin: 0 1rem;
+    padding: 0.25rem 0 .25rem 4rem;
+    margin: 0;
     overflow-y: auto;
     li {
         &.navbar-item{
@@ -92,8 +92,7 @@
             border-color: var(--surface-border);
             z-index: 1;
                 button {
-                    padding: 0.25rem;
-                    margin-left: .5rem;
+                    padding: .25rem .25rem .25rem 1rem;
                     font-size: 1rem;
                     display: inline;
                     color: var(--text-color);
@@ -119,14 +118,13 @@
         flex-basis: auto;
         li{
             &.navbar-child-item{
-                border-left: 5rem;
+                border-left: 1rem;
                 border-left-width: 1px;
                 border-left-style: solid;
                 border-color: var(--surface-border);
                 z-index: 1;
                 button {
-                    padding: 0.25rem;
-                    margin-left: 1.5rem;
+                    padding: .25rem .25rem .25rem 2rem;
                     color: var(--text-color);
                     &:hover {
                         color: var(--primary-color);
