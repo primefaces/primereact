@@ -44,9 +44,23 @@ export function TemplateDoc(props) {
         );
     };
 
+    const panelFooterTemplate = () => {
+        return (
+            <div className="py-2 px-3">
+                {selectedCountry ? (
+                    <span>
+                        <b>{selectedCountry.name}</b> selected.
+                    </span>
+                ) : (
+                    'No country selected.'
+                )}
+            </div>
+        );
+    };
+
     const code = {
         basic: `
-<Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" placeholder="Select a Country" valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
+<Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" placeholder="Select a Country" valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} panelFooterTemplate={panelFooterTemplate} />
         `,
         javascript: `
 import React, { useState } from "react";
@@ -98,10 +112,24 @@ export default function TemplateDoc() {
         );
     }
 
+    const panelFooterTemplate = () => {
+        return (
+            <div className="py-2 px-3">
+                {selectedCountry ? (
+                    <span>
+                        <b>{selectedCountry.name}</b> selected.
+                    </span>
+                ) : (
+                    'No country selected.'
+                )}
+            </div>
+        );
+    };
+
     return (
         <div className="card flex justify-content-center dropdown-demo">
-            <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" placeholder="Select a Country" valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
-        </div>    
+            <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" placeholder="Select a Country" valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} panelFooterTemplate={panelFooterTemplate} />
+        </div>
     )
 }
         `,
@@ -155,9 +183,23 @@ export default function TemplateDoc() {
         );
     }
 
+    const panelFooterTemplate = () => {
+        return (
+            <div className="py-2 px-3">
+                {selectedCountry ? (
+                    <span>
+                        <b>{selectedCountry.name}</b> selected.
+                    </span>
+                ) : (
+                    'No country selected.'
+                )}
+            </div>
+        );
+    };
+
     return (
         <div className="card flex justify-content-center dropdown-demo">
-            <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" placeholder="Select a Country" valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
+            <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" placeholder="Select a Country" valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} panelFooterTemplate={panelFooterTemplate} />
         </div>
     )
 }
@@ -184,7 +226,16 @@ export default function TemplateDoc() {
                 <p></p>
             </DocSectionText>
             <div className="card flex justify-content-center dropdown-demo">
-                <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" placeholder="Select a Country" valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
+                <Dropdown
+                    value={selectedCountry}
+                    options={countries}
+                    onChange={onCountryChange}
+                    optionLabel="name"
+                    placeholder="Select a Country"
+                    valueTemplate={selectedCountryTemplate}
+                    itemTemplate={countryOptionTemplate}
+                    panelFooterTemplate={panelFooterTemplate}
+                />
             </div>
             <DocSectionCode code={code} />
         </>
