@@ -1,8 +1,11 @@
 import * as React from 'react';
 import { InputNumber } from '../inputnumber/InputNumber';
 import { ObjectUtils } from '../utils/Utils';
+import { JumpToPageInputDefaultProps } from './PaginatorBase';
 
-export const JumpToPageInput = React.memo((props) => {
+export const JumpToPageInput = React.memo((inProps) => {
+    const props = ObjectUtils.getProps(inProps, JumpToPageInputDefaultProps);
+
     const onChange = (event) => {
         if (props.onChange) {
             props.onChange(props.rows * (event.value - 1), props.rows);
@@ -29,12 +32,3 @@ export const JumpToPageInput = React.memo((props) => {
 });
 
 JumpToPageInput.displayName = 'JumpToPageInput';
-JumpToPageInput.defaultProps = {
-    __TYPE: 'JumbToPageInput',
-    page: null,
-    rows: null,
-    pageCount: null,
-    disabled: false,
-    template: null,
-    onChange: null
-};

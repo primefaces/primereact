@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { RatingDefaultProps } from './RatingBase';
 
 export const Rating = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ObjectUtils.getProps(inProps, RatingDefaultProps);
+
         const elementRef = React.useRef(null);
         const enabled = !props.disabled && !props.readOnly;
         const tabIndex = enabled ? 0 : null;
@@ -91,7 +94,7 @@ export const Rating = React.memo(
         }));
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, Rating.defaultProps);
+        const otherProps = ObjectUtils.findDiffKeys(props, RatingDefaultProps);
         const className = classNames(
             'p-rating',
             {
@@ -116,23 +119,3 @@ export const Rating = React.memo(
 );
 
 Rating.displayName = 'Rating';
-Rating.defaultProps = {
-    __TYPE: 'Rating',
-    id: null,
-    value: null,
-    disabled: false,
-    readOnly: false,
-    stars: 5,
-    cancel: true,
-    style: null,
-    className: null,
-    tooltip: null,
-    tooltipOptions: null,
-    onChange: null,
-    onIcon: 'pi pi-star-fill',
-    offIcon: 'pi pi-star',
-    cancelIcon: 'pi pi-ban',
-    cancelIconProps: null,
-    onIconProps: null,
-    offIconProps: null
-};

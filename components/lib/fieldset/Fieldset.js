@@ -3,8 +3,11 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { FieldsetDefaultProps } from './FieldsetBase';
 
-export const Fieldset = React.forwardRef((props, ref) => {
+export const Fieldset = React.forwardRef((inProps, ref) => {
+    const props = ObjectUtils.getProps(inProps, FieldsetDefaultProps);
+
     const [idState, setIdState] = React.useState(props.id);
     const [collapsedState, setCollapsedState] = React.useState(props.collapsed);
     const collapsed = props.toggleable ? (props.onToggle ? props.collapsed : collapsedState) : false;
@@ -111,7 +114,7 @@ export const Fieldset = React.forwardRef((props, ref) => {
         getContent: () => contentRef.current
     }));
 
-    const otherProps = ObjectUtils.findDiffKeys(props, Fieldset.defaultProps);
+    const otherProps = ObjectUtils.findDiffKeys(props, FieldsetDefaultProps);
     const className = classNames(
         'p-fieldset p-component',
         {
@@ -131,17 +134,3 @@ export const Fieldset = React.forwardRef((props, ref) => {
 });
 
 Fieldset.displayName = 'Fieldset';
-Fieldset.defaultProps = {
-    __TYPE: 'Fieldset',
-    id: null,
-    legend: null,
-    className: null,
-    style: null,
-    toggleable: null,
-    collapsed: null,
-    transitionOptions: null,
-    onExpand: null,
-    onCollapse: null,
-    onToggle: null,
-    onClick: null
-};

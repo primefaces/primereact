@@ -2,12 +2,15 @@ import * as React from 'react';
 import { FilterService } from '../api/Api';
 import { useUpdateEffect } from '../hooks/Hooks';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { PickListDefaultProps } from './PickListBase';
 import { PickListControls } from './PickListControls';
 import { PickListSubList } from './PickListSubList';
 import { PickListTransferControls } from './PickListTransferControls';
 
 export const PickList = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ObjectUtils.getProps(inProps, PickListDefaultProps);
+
         const [sourceSelectionState, setSourceSelectionState] = React.useState([]);
         const [targetSelectionState, setTargetSelectionState] = React.useState([]);
         const [sourceFilterValueState, setSourceFilterValueState] = React.useState('');
@@ -209,7 +212,7 @@ export const PickList = React.memo(
             }
         });
 
-        const otherProps = ObjectUtils.findDiffKeys(props, PickList.defaultProps);
+        const otherProps = ObjectUtils.findDiffKeys(props, PickListDefaultProps);
         const className = classNames('p-picklist p-component', props.className);
         const sourceItemTemplate = props.sourceItemTemplate ? props.sourceItemTemplate : props.itemTemplate;
         const targetItemTemplate = props.targetItemTemplate ? props.targetItemTemplate : props.itemTemplate;
@@ -280,45 +283,3 @@ export const PickList = React.memo(
 );
 
 PickList.displayName = 'PickList';
-PickList.defaultProps = {
-    __TYPE: 'PickList',
-    id: null,
-    source: null,
-    target: null,
-    sourceHeader: null,
-    targetHeader: null,
-    style: null,
-    className: null,
-    sourceStyle: null,
-    targetStyle: null,
-    sourceSelection: null,
-    targetSelection: null,
-    showSourceControls: true,
-    showTargetControls: true,
-    metaKeySelection: true,
-    filterBy: null,
-    filterMatchMode: 'contains',
-    filterLocale: undefined,
-    sourceFilterValue: null,
-    targetFilterValue: null,
-    showSourceFilter: true,
-    showTargetFilter: true,
-    sourceFilterPlaceholder: null,
-    targetFilterPlaceholder: null,
-    sourceFilterTemplate: null,
-    targetFilterTemplate: null,
-    tabIndex: 0,
-    dataKey: null,
-    itemTemplate: null,
-    sourceItemTemplate: null,
-    targetItemTemplate: null,
-    onChange: null,
-    onMoveToSource: null,
-    onMoveAllToSource: null,
-    onMoveToTarget: null,
-    onMoveAllToTarget: null,
-    onSourceSelectionChange: null,
-    onTargetSelectionChange: null,
-    onSourceFilterChange: null,
-    onTargetFilterChange: null
-};

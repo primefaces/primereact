@@ -3,8 +3,11 @@ import { CSSTransition as ReactCSSTransition } from 'react-transition-group';
 import PrimeReact from '../api/Api';
 import { useUpdateEffect } from '../hooks/Hooks';
 import { ObjectUtils } from '../utils/Utils';
+import { CSSTransitionDefaultProps } from './CSSTransitionBase';
 
-export const CSSTransition = React.forwardRef((props, ref) => {
+export const CSSTransition = React.forwardRef((inProps, ref) => {
+    const props = ObjectUtils.getProps(inProps, CSSTransitionDefaultProps);
+
     const disabled = props.disabled || (props.options && props.options.disabled) || !PrimeReact.cssTransition;
 
     const onEnter = (node, isAppearing) => {
@@ -66,6 +69,3 @@ export const CSSTransition = React.forwardRef((props, ref) => {
 });
 
 CSSTransition.displayName = 'CSSTransition';
-CSSTransition.defaultProps = {
-    __TYPE: 'CSSTransition'
-};

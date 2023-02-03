@@ -1,8 +1,11 @@
 import * as React from 'react';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { MessageDefaultProps } from './MessageBase';
 
 export const Message = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ObjectUtils.getProps(inProps, MessageDefaultProps);
+
         const elementRef = React.useRef(null);
 
         const createContent = () => {
@@ -37,7 +40,7 @@ export const Message = React.memo(
             getElement: () => elementRef.current
         }));
 
-        const otherProps = ObjectUtils.findDiffKeys(props, Message.defaultProps);
+        const otherProps = ObjectUtils.findDiffKeys(props, MessageDefaultProps);
         const className = classNames(
             'p-inline-message p-component',
             {
@@ -60,13 +63,3 @@ export const Message = React.memo(
 );
 
 Message.displayName = 'Message';
-Message.defaultProps = {
-    __TYPE: 'Message',
-    id: null,
-    className: null,
-    style: null,
-    text: null,
-    icon: null,
-    severity: 'info',
-    content: null
-};

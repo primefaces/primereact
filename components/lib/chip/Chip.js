@@ -1,8 +1,11 @@
 import * as React from 'react';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { ChipDefaultProps } from './ChipBase';
 
 export const Chip = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ObjectUtils.getProps(inProps, ChipDefaultProps);
+
         const elementRef = React.useRef(null);
         const [visibleState, setVisibleState] = React.useState(true);
 
@@ -46,7 +49,7 @@ export const Chip = React.memo(
         };
 
         const createElement = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, Chip.defaultProps);
+            const otherProps = ObjectUtils.findDiffKeys(props, ChipDefaultProps);
             const className = classNames(
                 'p-chip p-component',
                 {
@@ -74,17 +77,3 @@ export const Chip = React.memo(
 );
 
 Chip.displayName = 'Chip';
-Chip.defaultProps = {
-    __TYPE: 'Chip',
-    label: null,
-    icon: null,
-    image: null,
-    removable: false,
-    removeIcon: 'pi pi-times-circle',
-    className: null,
-    style: null,
-    template: null,
-    imageAlt: 'chip',
-    onImageError: null,
-    onRemove: null
-};

@@ -4,9 +4,12 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useUnmountEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { ImageDefaultProps } from './ImageBase';
 
 export const Image = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ObjectUtils.getProps(inProps, ImageDefaultProps);
+
         const [maskVisibleState, setMaskVisibleState] = React.useState(false);
         const [previewVisibleState, setPreviewVisibleState] = React.useState(false);
         const [rotateState, setRotateState] = React.useState(0);
@@ -164,7 +167,7 @@ export const Image = React.memo(
         }));
 
         const { src, alt, width, height } = props;
-        const otherProps = ObjectUtils.findDiffKeys(props, Image.defaultProps);
+        const otherProps = ObjectUtils.findDiffKeys(props, ImageDefaultProps);
         const containerClassName = classNames('p-image p-component', props.className, {
             'p-image-preview-container': props.preview
         });
@@ -184,20 +187,3 @@ export const Image = React.memo(
 );
 
 Image.displayName = 'Image';
-Image.defaultProps = {
-    __TYPE: 'Image',
-    alt: null,
-    className: null,
-    downloadable: false,
-    height: null,
-    imageClassName: null,
-    imageStyle: null,
-    onError: null,
-    onHide: null,
-    onShow: null,
-    preview: false,
-    src: null,
-    template: null,
-    width: null,
-    zoomSrc: null
-};

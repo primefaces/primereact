@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputText } from '../inputtext/InputText';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { InputMaskDefaultProps } from './InputMaskBase';
 
 export const InputMask = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ObjectUtils.getProps(inProps, InputMaskDefaultProps);
+
         const elementRef = React.useRef(ref);
         const firstNonMaskPos = React.useRef(null);
         const lastRequiredNonMaskPos = React.useRef(0);
@@ -563,7 +566,7 @@ export const InputMask = React.memo(
             }
         }, [isValueUpdated]);
 
-        const otherProps = ObjectUtils.findDiffKeys(props, InputMask.defaultProps);
+        const otherProps = ObjectUtils.findDiffKeys(props, InputMaskDefaultProps);
         const className = classNames('p-inputmask', props.className);
 
         return (
@@ -596,29 +599,3 @@ export const InputMask = React.memo(
 );
 
 InputMask.displayName = 'InputMask';
-InputMask.defaultProps = {
-    __TYPE: 'InputMask',
-    id: null,
-    value: null,
-    type: 'text',
-    mask: null,
-    slotChar: '_',
-    autoClear: true,
-    unmask: false,
-    style: null,
-    className: null,
-    placeholder: null,
-    size: null,
-    maxLength: null,
-    tabIndex: null,
-    disabled: false,
-    readOnly: false,
-    name: null,
-    required: false,
-    tooltip: null,
-    tooltipOptions: null,
-    onComplete: null,
-    onChange: null,
-    onFocus: null,
-    onBlur: null
-};

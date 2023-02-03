@@ -3,19 +3,20 @@ import { ariaLabel } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
 import { classNames, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { AccordionDefaultProps, AccordionTabDefaultProps, getTabProp } from './AccordionBase';
 
 export const AccordionTab = () => {};
 
-const shouldUseTab = (tab) => tab && tab.props.__TYPE === 'AccordionTab';
+export const Accordion = React.forwardRef((inProps, ref) => {
+    const props = ObjectUtils.getProps(inProps, AccordionDefaultProps);
 
-export const Accordion = React.forwardRef((props, ref) => {
     const [idState, setIdState] = React.useState(props.id);
     const [activeIndexState, setActiveIndexState] = React.useState(props.activeIndex);
     const elementRef = React.useRef(null);
     const activeIndex = props.onTabChange ? props.activeIndex : activeIndexState;
 
     const onTabHeaderClick = (event, tab, index) => {
-        if (!tab.props.disabled) {
+        if (!getTabProp(tab, 'disabled')) {
             const selected = isSelected(index);
             let newActiveIndex = null;
 
@@ -64,20 +65,20 @@ export const Accordion = React.forwardRef((props, ref) => {
     }
 
     const createTabHeader = (tab, selected, index) => {
-        const style = { ...(tab.props.style || {}), ...(tab.props.headerStyle || {}) };
+        const style = { ...(getTabProp(tab, 'style') || {}), ...(getTabProp(tab, 'headerStyle') || {}) };
         const className = classNames(
             'p-accordion-header',
             {
                 'p-highlight': selected,
-                'p-disabled': tab.props.disabled
+                'p-disabled': getTabProp(tab, 'disabled')
             },
-            tab.props.headerClassName,
-            tab.props.className
+            getTabProp(tab, 'headerClassName'),
+            getTabProp(tab, 'className')
         );
         const headerId = idState + '_header_' + index;
         const ariaControls = idState + '_content_' + index;
-        const tabIndex = tab.props.disabled ? -1 : tab.props.tabIndex;
-        const header = tab.props.headerTemplate ? ObjectUtils.getJSXElement(tab.props.headerTemplate, tab.props) : <span className="p-accordion-header-text">{tab.props.header}</span>;
+        const tabIndex = getTabProp(tab, 'disabled') ? -1 : getTabProp(tab, 'tabIndex');
+        const header = getTabProp(tab, 'headerTemplate') ? ObjectUtils.getJSXElement(getTabProp(tab, 'headerTemplate'), { ...AccordionTabDefaultProps, ...tab.props }) : <span className="p-accordion-header-text">{getTabProp(tab, 'header')}</span>;
         const icon = IconUtils.getJSXIcon(selected ? props.collapseIcon : props.expandIcon, { className: 'p-accordion-toggle-icon' }, { props, selected });
         const label = selected ? ariaLabel('collapseLabel') : ariaLabel('expandLabel');
 
@@ -92,8 +93,8 @@ export const Accordion = React.forwardRef((props, ref) => {
     };
 
     const createTabContent = (tab, selected, index) => {
-        const style = { ...(tab.props.style || {}), ...(tab.props.contentStyle || {}) };
-        const className = classNames('p-toggleable-content', tab.props.contentClassName, tab.props.className);
+        const style = { ...(getTabProp(tab, 'style') || {}), ...(getTabProp(tab, 'contentStyle') || {}) };
+        const className = classNames('p-toggleable-content', getTabProp(tab, 'contentClassName'), getTabProp(tab, 'className'));
         const contentId = idState + '_content_' + index;
         const ariaLabelledby = idState + '_header_' + index;
         const contentRef = React.createRef();
@@ -101,17 +102,17 @@ export const Accordion = React.forwardRef((props, ref) => {
         return (
             <CSSTransition nodeRef={contentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={selected} unmountOnExit options={props.transitionOptions}>
                 <div ref={contentRef} id={contentId} className={className} style={style} role="region" aria-labelledby={ariaLabelledby}>
-                    <div className="p-accordion-content">{tab.props.children}</div>
+                    <div className="p-accordion-content">{getTabProp(tab, 'children')}</div>
                 </div>
             </CSSTransition>
         );
     };
 
     const createTab = (tab, index) => {
-        if (shouldUseTab(tab)) {
+        if (ObjectUtils.isValidChild(tab, 'AccordionTab')) {
             const key = idState + '_' + index;
             const selected = isSelected(index);
-            const otherProps = ObjectUtils.findDiffKeys(tab.props, AccordionTab.defaultProps);
+            const otherProps = ObjectUtils.findDiffKeys(tab.props, AccordionTabDefaultProps);
             const tabHeader = createTabHeader(tab, selected, index);
             const tabContent = createTabContent(tab, selected, index);
             const tabClassName = classNames('p-accordion-tab', {
@@ -133,7 +134,7 @@ export const Accordion = React.forwardRef((props, ref) => {
         return React.Children.map(props.children, createTab);
     };
 
-    const otherProps = ObjectUtils.findDiffKeys(props, Accordion.defaultProps);
+    const otherProps = ObjectUtils.findDiffKeys(props, AccordionDefaultProps);
     const className = classNames('p-accordion p-component', props.className);
     const tabs = createTabs();
 
@@ -145,32 +146,5 @@ export const Accordion = React.forwardRef((props, ref) => {
 });
 
 AccordionTab.displayName = 'AccordionTab';
-AccordionTab.defaultProps = {
-    __TYPE: 'AccordionTab',
-    className: null,
-    contentClassName: null,
-    contentStyle: null,
-    disabled: false,
-    header: null,
-    headerClassName: null,
-    headerStyle: null,
-    headerTemplate: null,
-    style: null,
-    tabIndex: 0
-};
 
 Accordion.displayName = 'Accordion';
-Accordion.defaultProps = {
-    __TYPE: 'Accordion',
-    id: null,
-    activeIndex: null,
-    className: null,
-    style: null,
-    multiple: false,
-    expandIcon: 'pi pi-chevron-right',
-    collapseIcon: 'pi pi-chevron-down',
-    transitionOptions: null,
-    onTabOpen: null,
-    onTabClose: null,
-    onTabChange: null
-};

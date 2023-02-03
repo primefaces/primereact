@@ -4,9 +4,12 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DialogDefaultProps } from './DialogBase';
 
-export const Dialog = React.forwardRef((props, ref) => {
+export const Dialog = React.forwardRef((inProps, ref) => {
+    const props = ObjectUtils.getProps(inProps, DialogDefaultProps);
+
     const uniqueId = props.id ? props.id : UniqueComponentId();
     const [idState, setIdState] = React.useState(uniqueId);
     const [maskVisibleState, setMaskVisibleState] = React.useState(false);
@@ -497,7 +500,7 @@ export const Dialog = React.forwardRef((props, ref) => {
     };
 
     const createElement = () => {
-        const otherProps = ObjectUtils.findDiffKeys(props, Dialog.defaultProps);
+        const otherProps = ObjectUtils.findDiffKeys(props, DialogDefaultProps);
         const className = classNames('p-dialog p-component', props.className, {
             'p-dialog-rtl': props.rtl,
             'p-dialog-maximized': maximized,
@@ -552,51 +555,3 @@ export const Dialog = React.forwardRef((props, ref) => {
 });
 
 Dialog.displayName = 'Dialog';
-Dialog.defaultProps = {
-    __TYPE: 'Dialog',
-    appendTo: null,
-    ariaCloseIconLabel: null,
-    baseZIndex: 0,
-    blockScroll: false,
-    breakpoints: null,
-    className: null,
-    closable: true,
-    closeOnEscape: true,
-    contentClassName: null,
-    contentStyle: null,
-    dismissableMask: false,
-    draggable: true,
-    focusOnShow: true,
-    footer: null,
-    header: null,
-    headerClassName: null,
-    headerStyle: null,
-    icons: null,
-    id: null,
-    keepInViewport: true,
-    maskClassName: null,
-    maskStyle: null,
-    maximizable: false,
-    maximized: false,
-    minX: 0,
-    minY: 0,
-    modal: true,
-    onClick: null,
-    onDrag: null,
-    onDragEnd: null,
-    onDragStart: null,
-    onHide: null,
-    onMaskClick: null,
-    onMaximize: null,
-    onResize: null,
-    onResizeEnd: null,
-    onResizeStart: null,
-    onShow: null,
-    position: 'center',
-    resizable: true,
-    rtl: false,
-    showHeader: true,
-    style: null,
-    transitionOptions: null,
-    visible: false
-};

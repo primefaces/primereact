@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { OrganizationChartDefaultProps } from './OrganizationChartBase';
 import { OrganizationChartNode } from './OrganizationChartNode';
 
 export const OrganizationChart = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ObjectUtils.getProps(inProps, OrganizationChartDefaultProps);
+
         const elementRef = React.useRef(null);
         const root = props.value && props.value.length ? props.value[0] : null;
 
@@ -64,7 +67,7 @@ export const OrganizationChart = React.memo(
             getElement: () => elementRef.current
         }));
 
-        const otherProps = ObjectUtils.findDiffKeys(props, OrganizationChart.defaultProps);
+        const otherProps = ObjectUtils.findDiffKeys(props, OrganizationChartDefaultProps);
         const className = classNames('p-organizationchart p-component', props.className);
 
         return (
@@ -76,16 +79,3 @@ export const OrganizationChart = React.memo(
 );
 
 OrganizationChart.displayName = 'OrganizationChart';
-OrganizationChart.defaultProps = {
-    __TYPE: 'OrganizationChart',
-    id: null,
-    value: null,
-    style: null,
-    className: null,
-    selectionMode: null,
-    selection: null,
-    nodeTemplate: null,
-    onSelectionChange: null,
-    onNodeSelect: null,
-    onNodeUnselect: null
-};

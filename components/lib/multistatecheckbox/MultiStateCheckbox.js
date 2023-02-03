@@ -2,10 +2,13 @@ import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { MultiStateCheckboxDefaultProps } from './MultiStateCheckboxBase';
 
 export const MultiStateCheckbox = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ObjectUtils.getProps(inProps, MultiStateCheckboxDefaultProps);
+
         const [focusedState, setFocusedState] = React.useState(false);
         const elementRef = React.useRef(null);
         const equalityKey = props.optionValue ? null : props.dataKey;
@@ -114,7 +117,7 @@ export const MultiStateCheckbox = React.memo(
         const { option: selectedOption, index: selectedOptionIndex } = getSelectedOptionMap();
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, MultiStateCheckbox.defaultProps);
+        const otherProps = ObjectUtils.findDiffKeys(props, MultiStateCheckboxDefaultProps);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames('p-multistatecheckbox p-checkbox p-component', props.className, { 'p-checkbox-disabled': props.disabled });
         const boxClassName = classNames(
@@ -149,22 +152,3 @@ export const MultiStateCheckbox = React.memo(
 );
 
 MultiStateCheckbox.displayName = 'MultiStateCheckbox';
-MultiStateCheckbox.defaultProps = {
-    __TYPE: 'MultiStateCheckbox',
-    id: null,
-    value: null,
-    options: null,
-    optionValue: null,
-    optionLabel: null,
-    iconTemplate: null,
-    dataKey: null,
-    style: null,
-    className: null,
-    disabled: false,
-    readOnly: false,
-    empty: true,
-    tabIndex: '0',
-    tooltip: null,
-    tooltipOptions: null,
-    onChange: null
-};

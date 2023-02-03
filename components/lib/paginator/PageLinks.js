@@ -2,8 +2,11 @@ import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, ObjectUtils } from '../utils/Utils';
+import { PageLinksDefaultProps } from './PaginatorBase';
 
-export const PageLinks = React.memo((props) => {
+export const PageLinks = React.memo((inProps) => {
+    const props = ObjectUtils.getProps(inProps, PageLinksDefaultProps);
+
     const onPageLinkClick = (event, pageLink) => {
         if (props.onClick) {
             props.onClick({
@@ -61,12 +64,3 @@ export const PageLinks = React.memo((props) => {
 });
 
 PageLinks.displayName = 'PageLinks';
-PageLinks.defaultProps = {
-    __TYPE: 'PageLinks',
-    value: null,
-    page: null,
-    rows: null,
-    pageCount: null,
-    links: null,
-    template: null
-};

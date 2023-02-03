@@ -152,6 +152,20 @@ export default class ObjectUtils {
         return this.isFunction(obj) ? obj(...params) : obj;
     }
 
+    static getProps(inProps, defaultProps) {
+        return Object.assign({}, defaultProps, inProps);
+    }
+
+    static getProp(component, propertyName = '', defaultProperties = {}) {
+        if (this.isNotEmpty(component)) {
+            const value = component.props ? component.props[propertyName] : undefined;
+
+            return value === undefined ? defaultProperties[propertyName] : value;
+        }
+
+        return undefined;
+    }
+
     static getPropValue(obj, ...params) {
         let methodParams = params;
 
@@ -160,6 +174,25 @@ export default class ObjectUtils {
         }
 
         return this.isFunction(obj) ? obj(...methodParams) : obj;
+    }
+
+    static isValidChild(child, type, validTypes) {
+        /* eslint-disable */
+        try {
+            if (process.env.NODE_ENV !== 'production' && this.getProp(child, '__TYPE') !== type && child.type.displayName !== type) {
+                if (validTypes && validTypes.includes(type)) {
+                    return false;
+                }
+
+                console.error(`PrimeReact: Parent component expects a '${type}' component or a component with the '__TYPE="${type}"' property as a child component.`);
+                return false;
+            }
+        } catch (error) {
+            // NOOP
+        }
+
+        return true;
+        /* eslint-enable */
     }
 
     static getRefElement(ref) {

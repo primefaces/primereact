@@ -1,11 +1,14 @@
 import * as React from 'react';
 import { useEventListener } from '../hooks/Hooks';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { getPanelProp, SplitterDefaultProps, SplitterPanelDefaultProps } from './SplitterBase';
 
 export const SplitterPanel = () => {};
 
 export const Splitter = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ObjectUtils.getProps(inProps, SplitterDefaultProps);
+
         const elementRef = React.useRef(null);
         const gutterRef = React.useRef();
         const gutterRefs = React.useRef({});
@@ -199,8 +202,8 @@ export const Splitter = React.memo(
         }, [restoreState, isStateful]);
 
         const createPanel = (panel, index) => {
-            const otherProps = ObjectUtils.findDiffKeys(panel.props, SplitterPanel.defaultProps);
-            const panelClassName = classNames('p-splitter-panel', panel.props.className);
+            const otherProps = ObjectUtils.findDiffKeys(panel.props, SplitterPanelDefaultProps);
+            const panelClassName = classNames('p-splitter-panel', getPanelProp(panel, 'className'));
             const gutterStyle = props.layout === 'horizontal' ? { width: props.gutterSize + 'px' } : { height: props.gutterSize + 'px' };
             const gutter = index !== props.children.length - 1 && (
                 <div
@@ -220,8 +223,8 @@ export const Splitter = React.memo(
 
             return (
                 <React.Fragment>
-                    <div key={index} className={panelClassName} style={{ ...panel.props.style, flexBasis }} {...otherProps}>
-                        {panel.props.children}
+                    <div key={index} className={panelClassName} style={{ ...getPanelProp(panel, 'style'), flexBasis }} {...otherProps}>
+                        {getPanelProp(panel, 'children')}
                     </div>
                     {gutter}
                 </React.Fragment>
@@ -232,7 +235,7 @@ export const Splitter = React.memo(
             return React.Children.map(props.children, createPanel);
         };
 
-        const otherProps = ObjectUtils.findDiffKeys(props, Splitter.defaultProps);
+        const otherProps = ObjectUtils.findDiffKeys(props, SplitterDefaultProps);
         const className = classNames(`p-splitter p-component p-splitter-${props.layout}`, props.className);
         const panels = createPanels();
 
@@ -245,23 +248,5 @@ export const Splitter = React.memo(
 );
 
 SplitterPanel.displayName = 'SplitterPanel';
-SplitterPanel.defaultProps = {
-    __TYPE: 'SplitterPanel',
-    className: null,
-    minSize: null,
-    size: null,
-    style: null
-};
 
 Splitter.displayName = 'Splitter';
-Splitter.defaultProps = {
-    __TYPE: 'Splitter',
-    className: null,
-    gutterSize: 4,
-    id: null,
-    layout: 'horizontal',
-    onResizeEnd: null,
-    stateKey: null,
-    stateStorage: 'session',
-    style: null
-};
