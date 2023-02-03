@@ -8,10 +8,10 @@
 import * as React from 'react';
 
 /**
- * Custom MouseDataOptions
+ * Custom MousePositionOptions
  * @group Misc
  */
-declare interface MouseDataOptions {
+interface MousePositionOptions {
     /**
      * Position of the mouse for the x-axis.
      */
@@ -20,6 +20,13 @@ declare interface MouseDataOptions {
      * Position of the mouse for the y-axis.
      */
     y: number;
+}
+
+/**
+ * Custom MouseDataOptions
+ * @group Misc
+ */
+declare interface MouseDataOptions extends MousePositionOptions {
     /**
      * Used to reset the mouse position data.
      */
@@ -28,6 +35,17 @@ declare interface MouseDataOptions {
      * The ref of the element to position.
      */
     ref: React.RefObject<HTMLElement>;
+}
+
+/**
+ * Custom MouseMoveOptions
+ * @group Misc
+ */
+declare interface MouseMoveOptions extends MouseDataOptions {
+    /**
+     * Whether the mouse is touching the element or not.
+     */
+    active: boolean;
 }
 
 /**
@@ -175,3 +193,27 @@ export declare function useCounter(initialValue: number, options: { min: number;
  * @todo
  */
 export declare function useMouse(): MouseDataOptions;
+/**
+ * Custom hook to handles move behavior over any element.
+ * @param {'horizontal' | 'vertical' | 'both'} mode - The mode of the move. Valid values are 'horizontal', 'vertical' and 'both'.
+ * @param {MousePositionOptions} initialValue - The initial value.
+ */
+export declare function useMove(mode: 'horizontal' | 'vertical' | 'both', initialValue: MousePositionOptions): MouseMoveOptions;
+/**
+ * Custom hook to use change the current favicon.
+ * @param {string} newIcon - The new favicon url to set.
+ * @param {string} rel - The rel attribute of the link element. @defaultValue 'shortcut icon'
+ */
+export declare function useFavicon(newIcon: string, rel: string): void;
+/**
+ * Custom hook to use change the current favicon.
+ * @param {React.RefObject<Element>} ref - The ref of the element to observe.
+ * @param {IntersectionObserver} options - The options of the intersection observer.
+ */
+export declare function useIntersectionObserver(ref: React.RefObject<Element>, options: IntersectionObserver): void;
+/**
+ * Custom hook to use detect click outside.
+ * @param {React.RefObject<Element>} ref - The ref of the element to detect click outside.
+ * @param {*} callback - The callback to run when click outside.
+ */
+export declare function useClickOutside(ref: React.RefObject<Element>, callback: any): void;

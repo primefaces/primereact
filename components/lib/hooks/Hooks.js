@@ -11,6 +11,9 @@ import { useStorage, useLocalStorage, useSessionStorage } from './useStorage';
 import { useTimeout } from './useTimeout';
 import { useCounter } from './useCounter';
 import { useMouse } from './useMouse';
+import { useMove } from './useMove';
+import { useFavicon } from './useFavicon';
+import { useClickOutside } from './useClickOutside';
 
 export {
     usePrevious,
@@ -27,5 +30,8 @@ export {
     useSessionStorage,
     useTimeout,
     useCounter,
-    useMouse
+    useFavicon,
+    useMouse,
+    useMove,
+    useClickOutside
 };
