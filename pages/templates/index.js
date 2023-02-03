@@ -15,10 +15,10 @@ const TemplatesPage = () => {
                             <img alt="Apollo" src="/images/layouts/apollo-nextjs.jpg" className="w-full" />
                         </a>
                         <div class="flex gap-3 mt-3">
-                            <a href="https://www.primefaces.org/apollo-react" className="flex-auto p-button p-component" rel="noopener noreferrer" target="_blank">
+                            <a href="https://www.primefaces.org/apollo-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Preview</span>
                             </a>
-                            <a href="https://www.primefaces.org/layouts/apollo-react" className="flex-auto p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
+                            <a href="https://www.primefaces.org/layouts/apollo-react" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Learn More</span>
                             </a>
                         </div>
@@ -30,10 +30,10 @@ const TemplatesPage = () => {
                             <img alt="Sakai" src="/images/layouts/sakai-react.jpg" className="w-full" />
                         </a>
                         <div class="flex gap-3 mt-3">
-                            <a href="https://www.primefaces.org/sakai-react" className="flex-auto p-button p-component" rel="noopener noreferrer" target="_blank">
+                            <a href="https://www.primefaces.org/sakai-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Preview</span>
                             </a>
-                            <a href="https://github.com/primefaces/sakai-react" className="flex-auto p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
+                            <a href="https://github.com/primefaces/sakai-react" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Download</span>
                             </a>
                         </div>
@@ -45,10 +45,10 @@ const TemplatesPage = () => {
                             <img alt="Atlantis" src="/images/layouts/atlantis-react.jpg" className="w-full" />
                         </a>
                         <div class="flex gap-3 mt-3">
-                            <a href="https://www.primefaces.org/atlantis-react" className="flex-auto p-button p-component" rel="noopener noreferrer" target="_blank">
+                            <a href="https://www.primefaces.org/atlantis-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Preview</span>
                             </a>
-                            <a href="https://www.primefaces.org/layouts/atlantis-react" className="flex-auto p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
+                            <a href="https://www.primefaces.org/layouts/atlantis-react" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Learn More</span>
                             </a>
                         </div>
@@ -60,10 +60,10 @@ const TemplatesPage = () => {
                             <img alt="Freya" src="/images/layouts/freya-react.jpg" className="w-full" />
                         </a>
                         <div class="flex gap-3 mt-3">
-                            <a href="https://www.primefaces.org/freya-react" className="flex-auto p-button p-component" rel="noopener noreferrer" target="_blank">
+                            <a href="https://www.primefaces.org/freya-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Preview</span>
                             </a>
-                            <a href="https://www.primefaces.org/layouts/freya-react" className="flex-auto p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
+                            <a href="https://www.primefaces.org/layouts/freya-react" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Learn More</span>
                             </a>
                         </div>
@@ -75,10 +75,10 @@ const TemplatesPage = () => {
                             <img alt="Ultima" src="/images/layouts/atlantis-react.jpg" className="w-full" />
                         </a>
                         <div class="flex gap-3 mt-3">
-                            <a href="https://www.primefaces.org/ultima-react" className="flex-auto p-button p-component" rel="noopener noreferrer" target="_blank">
+                            <a href="https://www.primefaces.org/ultima-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Preview</span>
                             </a>
-                            <a href="https://www.primefaces.org/layouts/ultima-react" className="flex-auto p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
+                            <a href="https://www.primefaces.org/layouts/ultima-react" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Learn More</span>
                             </a>
                         </div>
@@ -90,10 +90,10 @@ const TemplatesPage = () => {
                             <img alt="Diamond" src="/images/layouts/diamond-react.jpg" className="w-full" />
                         </a>
                         <div class="flex gap-3 mt-3">
-                            <a href="https://www.primefaces.org/diamond-react" className="flex-auto p-button p-component" rel="noopener noreferrer" target="_blank">
+                            <a href="https://www.primefaces.org/diamond-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Preview</span>
                             </a>
-                            <a href="https://www.primefaces.org/layouts/diamond-react" className="flex-auto p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
+                            <a href="https://www.primefaces.org/layouts/diamond-react" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Learn More</span>
                             </a>
                         </div>
@@ -105,10 +105,10 @@ const TemplatesPage = () => {
                             <img alt="Sapphire" src="/images/layouts/sapphire-react.jpg" className="w-full" />
                         </a>
                         <div class="flex gap-3 mt-3">
-                            <a href="https://www.primefaces.org/sapphire-react" className="flex-auto p-button p-component" rel="noopener noreferrer" target="_blank">
+                            <a href="https://www.primefaces.org/sapphire-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Preview</span>
                             </a>
-                            <a href="https://www.primefaces.org/layouts/sapphire-react" className="flex-auto p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
+                            <a href="https://www.primefaces.org/layouts/sapphire-react" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Learn More</span>
                             </a>
                         </div>
@@ -120,10 +120,10 @@ const TemplatesPage = () => {
                             <img alt="Serenity" src="/images/layouts/serenity-react.jpg" className="w-full" />
                         </a>
                         <div class="flex gap-3 mt-3">
-                            <a href="https://www.primefaces.org/serenity-react" className="flex-auto p-button p-component" rel="noopener noreferrer" target="_blank">
+                            <a href="https://www.primefaces.org/serenity-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Preview</span>
                             </a>
-                            <a href="https://www.primefaces.org/layouts/serenity-react" className="flex-auto p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
+                            <a href="https://www.primefaces.org/layouts/serenity-react" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Learn More</span>
                             </a>
                         </div>
@@ -135,10 +135,10 @@ const TemplatesPage = () => {
                             <img alt="Babylon" src="/images/layouts/babylon-react.jpg" className="w-full" />
                         </a>
                         <div class="flex gap-3 mt-3">
-                            <a href="https://www.primefaces.org/babylon-react" className="flex-auto p-button p-component" rel="noopener noreferrer" target="_blank">
+                            <a href="https://www.primefaces.org/babylon-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Preview</span>
                             </a>
-                            <a href="https://www.primefaces.org/layouts/babylon-react" className="flex-auto p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
+                            <a href="https://www.primefaces.org/layouts/babylon-react" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Learn More</span>
                             </a>
                         </div>
@@ -150,10 +150,10 @@ const TemplatesPage = () => {
                             <img alt="Avalon" src="/images/layouts/avalon-react.jpg" className="w-full" />
                         </a>
                         <div class="flex gap-3 mt-3">
-                            <a href="https://www.primefaces.org/avalon-react" className="flex-auto p-button p-component" rel="noopener noreferrer" target="_blank">
+                            <a href="https://www.primefaces.org/avalon-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Preview</span>
                             </a>
-                            <a href="https://www.primefaces.org/layouts/avalon-react" className="flex-auto p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
+                            <a href="https://www.primefaces.org/layouts/avalon-react" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Learn More</span>
                             </a>
                         </div>
@@ -165,10 +165,10 @@ const TemplatesPage = () => {
                             <img alt="Roma" src="/images/layouts/roma-react.jpg" className="w-full" />
                         </a>
                         <div class="flex gap-3 mt-3">
-                            <a href="https://www.primefaces.org/roma-react" className="flex-auto p-button p-component" rel="noopener noreferrer" target="_blank">
+                            <a href="https://www.primefaces.org/roma-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Preview</span>
                             </a>
-                            <a href="https://www.primefaces.org/layouts/roma-react" className="flex-auto p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
+                            <a href="https://www.primefaces.org/layouts/roma-react" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Learn More</span>
                             </a>
                         </div>
