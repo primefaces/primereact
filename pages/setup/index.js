@@ -215,7 +215,7 @@ primereact/resources/themes/rhea/theme.css
 
                 <h3 id="setup-configuration">Configuration</h3>
                 <h5>Dependencies</h5>
-                <p>Majority of PrimeReact components (95%) are native and there are some exceptions having 3rd party dependencies such as Google Maps for GMap.</p>
+                <p>Majority of PrimeReact components (95%) are native and there are some exceptions having 3rd party dependencies such as Quill for Editor.</p>
                 <p>
                     In addition, components require <Link href="/icons">PrimeIcons</Link> library for icons and
                     <a href="https://www.npmjs.com/package/react-transition-group" className="layout-content-link">
@@ -254,10 +254,6 @@ dependencies: {
                             <tr>
                                 <td>Charts</td>
                                 <td>Charts.js 3.x</td>
-                            </tr>
-                            <tr>
-                                <td>GMap</td>
-                                <td>Google Maps</td>
                             </tr>
                             <tr>
                                 <td>Editor</td>

@@ -50,7 +50,7 @@ export function FormikDoc(props) {
     const code = {
         basic: `
 <Toast ref={toast} />
-<MultiSelect id="item" name="item" options={cities} value={formik.values.item} onChange={(e) => { formik.setFieldValue('item', e.value) }} optionLabel="name" placeholder="Select a City" maxSelectedLabels={3} />
+<MultiSelect id="item" name="item" options={cities} value={formik.values.item} onChange={(e) => { formik.setFieldValue('item', e.value) }} optionLabel="name" placeholder="Select Cities" maxSelectedLabels={3} />
 <Button type="submit" label="Submit" className="mt-2" />
         `,
         javascript: `
@@ -69,7 +69,6 @@ export default function FormikDoc() {
         { name: 'Istanbul', code: 'IST' },
         { name: 'Paris', code: 'PRS' }
     ];
-
         
     const show = () => {
         const itemArray = formik.values.item.map((item, i) => item.name + (i < formik.values.item.length - 1 ? ', ' : ''));
@@ -105,7 +104,7 @@ export default function FormikDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={formik.handleSubmit} className="flex flex-column">
+            <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
                 <MultiSelect
                     id="item"
@@ -116,8 +115,9 @@ export default function FormikDoc() {
                         formik.setFieldValue('item', e.value);
                     }}
                     optionLabel="name"
-                    placeholder="Select a City"
+                    placeholder="Select Cities"
                     maxSelectedLabels={3}
+                    className="w-full md:w-20rem"
                 />
                 {getFormErrorMessage('item')}
                 <Button type="submit" label="Submit" className="mt-2" />
@@ -129,13 +129,18 @@ export default function FormikDoc() {
         typescript: `
 import React, { useRef } from "react";
 import { useFormik } from 'formik';
-import { MultiSelect } from 'primereact/multiselect';
+import { MultiSelect, MultiSelectChangeEvent } from 'primereact/multiselect';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
+interface City {
+    name: string;
+    code: string;
+}
+
 export default function FormikDoc() {
     const toast = useRef<Toast | null>(null);
-     const cities = [
+     const cities: City[] = [
         { name: 'New York', code: 'NY' },
         { name: 'Rome', code: 'RM' },
         { name: 'London', code: 'LDN' },
@@ -143,7 +148,6 @@ export default function FormikDoc() {
         { name: 'Paris', code: 'PRS' }
     ];
 
-        
     const show = () => {
         const itemArray = formik.values.item.map((item, i) => item.name + (i < formik.values.item.length - 1 ? ', ' : ''));
 
@@ -178,19 +182,20 @@ export default function FormikDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={formik.handleSubmit} className="flex flex-column">
+            <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
                 <MultiSelect
                     id="item"
                     name="item"
                     options={cities}
                     value={formik.values.item}
-                    onChange={(e) => {
+                    onChange={(e: MultiSelectChangeEvent) => {
                         formik.setFieldValue('item', e.value);
                     }}
                     optionLabel="name"
-                    placeholder="Select a City"
+                    placeholder="Select Cities"
                     maxSelectedLabels={3}
+                    className="w-full md:w-20rem"
                 />
                 {getFormErrorMessage('item')}
                 <Button type="submit" label="Submit" className="mt-2" />
@@ -209,7 +214,7 @@ export default function FormikDoc() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <form onSubmit={formik.handleSubmit} className="flex flex-column">
+                <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                     <Toast ref={toast} />
                     <MultiSelect
                         id="item"
@@ -220,8 +225,9 @@ export default function FormikDoc() {
                             formik.setFieldValue('item', e.value);
                         }}
                         optionLabel="name"
-                        placeholder="Select a City"
+                        placeholder="Select Cities"
                         maxSelectedLabels={3}
+                        className="w-full md:w-20rem"
                     />
                     {getFormErrorMessage('item')}
                     <Button type="submit" label="Submit" className="mt-2" />

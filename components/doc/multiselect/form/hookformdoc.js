@@ -1,10 +1,10 @@
 import { useRef } from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
+import { Controller, useForm } from 'react-hook-form';
 import { Button } from '../../../lib/button/Button';
-import { Toast } from '../../../lib/toast/Toast';
 import { MultiSelect } from '../../../lib/multiselect/MultiSelect';
+import { Toast } from '../../../lib/toast/Toast';
+import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function HookFormDoc(props) {
     const toast = useRef(null);
@@ -52,7 +52,7 @@ export function HookFormDoc(props) {
     name="value"
     control={control}
     rules={{ required: 'Value is required.' }}
-    render={({ field }) => <MultiSelect id={field.name} name="value" value={field.value} options={cities} onChange={(e) => field.onChange(e.value)} optionLabel="name" placeholder="Select a City" maxSelectedLabels={3} />}
+    render={({ field }) => <MultiSelect id={field.name} name="value" value={field.value} options={cities} onChange={(e) => field.onChange(e.value)} optionLabel="name" placeholder="Select Cities" maxSelectedLabels={3} />}
 />
 <Button type="submit" label="Submit" className="mt-2" />
         `,
@@ -104,13 +104,13 @@ export default function HookFormDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
                 <Controller
                     name="value"
                     control={control}
                     rules={{ required: 'Value is required.' }}
-                    render={({ field }) => <MultiSelect id={field.name} name="value" value={field.value} options={cities} onChange={(e) => field.onChange(e.value)} optionLabel="name" placeholder="Select a City" maxSelectedLabels={3} />}
+                    render={({ field }) => <MultiSelect id={field.name} name="value" value={field.value} options={cities} onChange={(e) => field.onChange(e.value)} optionLabel="name" placeholder="Select Cities" maxSelectedLabels={3} className="w-full md:w-20rem" />}
                 />
 
                 {getFormErrorMessage('value')}
@@ -127,9 +127,14 @@ import { MultiSelect, MultiSelectChangeParams } from 'primereact/multiselect';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
+interface City {
+    name: string;
+    code: string;
+}
+
 export default function HookFormDoc() {
     const toast = useRef<Toast | null>(null);
-    const cities = [
+    const cities: City[] = [
         { name: 'New York', code: 'NY' },
         { name: 'Rome', code: 'RM' },
         { name: 'London', code: 'LDN' },
@@ -168,13 +173,13 @@ export default function HookFormDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
                 <Controller
                     name="value"
                     control={control}
                     rules={{ required: 'Value is required.' }}
-                    render={({ field }) => <MultiSelect id={field.name} name="value" value={field.value} options={cities} onChange={(e: MultiSelectChangeParams) => field.onChange(e.value)} optionLabel="name" placeholder="Select a City" maxSelectedLabels={3} />}
+                    render={({ field }) => <MultiSelect id={field.name} name="value" value={field.value} options={cities} onChange={(e: MultiSelectChangeParams) => field.onChange(e.value)} optionLabel="name" placeholder="Select Cities" maxSelectedLabels={3} className="w-full md:w-20rem" />}
                 />
 
                 {getFormErrorMessage('value')}
@@ -193,13 +198,15 @@ export default function HookFormDoc() {
                 <p></p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
+                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column align-items-center gap-2">
                     <Toast ref={toast} />
                     <Controller
                         name="value"
                         control={control}
                         rules={{ required: 'Value is required.' }}
-                        render={({ field }) => <MultiSelect id={field.name} name="value" value={field.value} options={cities} onChange={(e) => field.onChange(e.value)} optionLabel="name" placeholder="Select a City" maxSelectedLabels={3} />}
+                        render={({ field }) => (
+                            <MultiSelect id={field.name} name="value" value={field.value} options={cities} onChange={(e) => field.onChange(e.value)} optionLabel="name" placeholder="Select Cities" maxSelectedLabels={3} className="w-full md:w-20rem" />
+                        )}
                     />
 
                     {getFormErrorMessage('value')}

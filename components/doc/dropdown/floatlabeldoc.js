@@ -17,7 +17,7 @@ export function FloatLabelDoc(props) {
         basic: `
 <span className="p-float-label">
     <Dropdown inputId="dd-city" value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" className="w-full md:w-14rem" />
-    <label htmlFor="dd-city">Select City</label>
+    <label htmlFor="dd-city">Select a City</label>
 </span>
         `,
         javascript: `
@@ -38,7 +38,7 @@ export default function FloatLabelDemo() {
         <div className="card flex justify-content-center">
             <span className="p-float-label">
                 <Dropdown inputId="dd-city" value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" className="w-full md:w-14rem" />
-                <label htmlFor="dd-city">Select City</label>
+                <label htmlFor="dd-city">Select a City</label>
             </span>
         </div>
     )
@@ -67,7 +67,7 @@ export default function FloatLabelDemo() {
         <div className="card flex justify-content-center">
             <span className="p-float-label">
                 <Dropdown inputId="dd-city" value={selectedCity} onChange={(e: DropdownChangeEvent) => setSelectedCity(e.value)} options={cities} optionLabel="name" className="w-full md:w-14rem" />
-                <label htmlFor="dd-city">Select City</label>
+                <label htmlFor="dd-city">Select a City</label>
             </span>
         </div>
     )
@@ -83,7 +83,7 @@ export default function FloatLabelDemo() {
             <div className="card flex justify-content-center">
                 <span className="p-float-label">
                     <Dropdown inputId="dd-city" value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" className="w-full md:w-14rem" />
-                    <label htmlFor="dd-city">Select City</label>
+                    <label htmlFor="dd-city">Select a City</label>
                 </span>
             </div>
             <DocSectionCode code={code} />

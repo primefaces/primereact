@@ -3,8 +3,8 @@ import { MultiSelect } from '../../lib/multiselect/MultiSelect';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function GroupedDoc(props) {
-    const [selectedGroupedCities, setSelectedGroupedCities] = useState(null);
+export function GroupDoc(props) {
+    const [selectedCities, setSelectedCities] = useState(null);
     const groupedCities = [
         {
             label: 'Germany',
@@ -40,8 +40,8 @@ export function GroupedDoc(props) {
 
     const groupedItemTemplate = (option) => {
         return (
-            <div className="flex align-items-center country-item">
-                <img alt={option.label} src="/images/flag/flag_placeholder.png" className={`flag flag-${option.code.toLowerCase()}`} />
+            <div className="flex align-items-center">
+                <img alt={option.label} src="/images/flag/flag_placeholder.png" className={`mr-2 flag flag-${option.code.toLowerCase()}`} style={{ width: '18px' }} />
                 <div>{option.label}</div>
             </div>
         );
@@ -49,19 +49,20 @@ export function GroupedDoc(props) {
 
     const code = {
         basic: `
-<MultiSelect value={selectedGroupedCities} options={groupedCities} onChange={(e) => setSelectedGroupedCities(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" 
-optionGroupTemplate={groupedItemTemplate} placeholder="Select Cities" />
+<MultiSelect value={selectedCities} options={groupedCities} onChange={(e) => setSelectedCities(e.value)} optionLabel="label" 
+    optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate}
+    placeholder="Select Cities" display="chip" className="w-full md:w-20rem" />
         `,
         javascript: `
 import React, { useState } from "react";
 import { MultiSelect } from 'primereact/multiselect';
-import './MultiSelectDemo.css';
 
 export default function GroupedDoc() {
-    const [selectedGroupedCities, setSelectedGroupedCities] = useState(null);
+    const [selectedCities, setSelectedCities] = useState(null);
     const groupedCities = [
         {
-            label: 'Germany', code: 'DE',
+            label: 'Germany',
+            code: 'DE',
             items: [
                 { label: 'Berlin', value: 'Berlin' },
                 { label: 'Frankfurt', value: 'Frankfurt' },
@@ -70,7 +71,8 @@ export default function GroupedDoc() {
             ]
         },
         {
-            label: 'USA', code: 'US',
+            label: 'USA',
+            code: 'US',
             items: [
                 { label: 'Chicago', value: 'Chicago' },
                 { label: 'Los Angeles', value: 'Los Angeles' },
@@ -78,8 +80,9 @@ export default function GroupedDoc() {
                 { label: 'San Francisco', value: 'San Francisco' }
             ]
         },
-    {
-            label: 'Japan', code: 'JP',
+        {
+            label: 'Japan',
+            code: 'JP',
             items: [
                 { label: 'Kyoto', value: 'Kyoto' },
                 { label: 'Osaka', value: 'Osaka' },
@@ -91,31 +94,43 @@ export default function GroupedDoc() {
 
     const groupedItemTemplate = (option) => {
         return (
-            <div className="flex align-items-center country-item">
-                <img alt={option.label} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
+            <div className="flex align-items-center">
+                <img alt={option.label} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`mr-2 flag flag-\${option.code.toLowerCase()}\`} style={{ width: '18px' }} />
                 <div>{option.label}</div>
             </div>
         );
-    }
+    };
 
     return (
-        <div className="card flex justify-content-center align-items-center multiselect-demo">
-            <MultiSelect value={selectedGroupedCities} options={groupedCities} onChange={(e) => setSelectedGroupedCities(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
-            optionGroupTemplate={groupedItemTemplate} placeholder="Select Cities" />
+        <div className="card flex justify-content-center">
+            <MultiSelect value={selectedCities} options={groupedCities} onChange={(e) => setSelectedCities(e.value)} optionLabel="label" 
+                optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate}
+                placeholder="Select Cities" display="chip" className="w-full md:w-20rem" />
         </div>
     );
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { MultiSelect, MultiSelectChangeParams } from 'primereact/multiselect';
-import './MultiSelectDemo.css';
+import { MultiSelect, MultiSelectChangeEvent } from 'primereact/multiselect';
+
+interface City {
+    label: string;
+    value: string;
+}
+
+interface Country {
+    label: string;
+    code: string;
+    items: City[];
+}
 
 export default function GroupedDoc() {
-    const [selectedGroupedCities, setSelectedGroupedCities] = useState<any>(null);
-    const groupedCities = [
+    const [selectedCities, setSelectedCities] = useState<City | null>(null);
+    const groupedCities: Country[] = [
         {
-            label: 'Germany', code: 'DE',
+            label: 'Germany',
+            code: 'DE',
             items: [
                 { label: 'Berlin', value: 'Berlin' },
                 { label: 'Frankfurt', value: 'Frankfurt' },
@@ -124,7 +139,8 @@ export default function GroupedDoc() {
             ]
         },
         {
-            label: 'USA', code: 'US',
+            label: 'USA',
+            code: 'US',
             items: [
                 { label: 'Chicago', value: 'Chicago' },
                 { label: 'Los Angeles', value: 'Los Angeles' },
@@ -132,8 +148,9 @@ export default function GroupedDoc() {
                 { label: 'San Francisco', value: 'San Francisco' }
             ]
         },
-    {
-            label: 'Japan', code: 'JP',
+        {
+            label: 'Japan',
+            code: 'JP',
             items: [
                 { label: 'Kyoto', value: 'Kyoto' },
                 { label: 'Osaka', value: 'Osaka' },
@@ -143,67 +160,46 @@ export default function GroupedDoc() {
         }
     ];
 
-    const groupedItemTemplate = (option) => {
+    const groupedItemTemplate = (option: Country) => {
         return (
-            <div className="flex align-items-center country-item">
-                <img alt={option.label} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
+            <div className="flex align-items-center">
+                <img alt={option.label} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`mr-2 flag flag-\${option.code.toLowerCase()}\`} style={{ width: '18px' }} />
                 <div>{option.label}</div>
             </div>
         );
-    }
+    };
 
     return (
-        <div className="card flex justify-content-center align-items-center multiselect-demo">
-            <MultiSelect value={selectedGroupedCities} options={groupedCities} onChange={(e : MultiSelectChangeParams) => setSelectedGroupedCities(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
-            optionGroupTemplate={groupedItemTemplate} placeholder="Select Cities" />
+        <div className="card flex justify-content-center">
+            <MultiSelect value={selectedCities} options={groupedCities} onChange={(e) => setSelectedCities(e.value)} optionLabel="label" 
+                optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate}
+                placeholder="Select Cities" display="chip" className="w-full md:w-20rem" />
         </div>
     );
 }
-        `,
-        extFiles: {
-            'MultiSelectDemo.css': `
-/* MultiSelectDemo.css */
-
-.multiselect-demo .p-multiselect {
-    min-width: 15rem;
-}
-
-.multiselect-demo .multiselect-custom .p-multiselect-label:not(.p-placeholder):not(.p-multiselect-items-label) {
-    padding-top: .25rem;
-    padding-bottom: .25rem;
-}
-
-.multiselect-demo .multiselect-custom .country-item-value {
-    padding: .25rem .5rem;
-    border-radius: 3px;
-    display: inline-flex;
-    margin-right: .5rem;
-    background-color: var(--primary-color);
-    color: var(--primary-color-text);
-}
-
-.multiselect-demo .multiselect-custom .country-item-value img.flag {
-    width: 17px;
-}
         `
-        }
     };
 
     return (
         <>
             <DocSectionText {...props}>
-                <p>Used mode to display the selected items as chips.</p>
+                <p>
+                    Options can be grouped when a nested data structures is provided. To define the label of a group <i>optionGroupLabel</i> property is needed and also <i>optionGroupChildren</i> is required to define the property that refers to the
+                    children of a group.
+                </p>
             </DocSectionText>
-            <div className="card flex justify-content-center align-items-center multiselect-demo">
+            <div className="card flex justify-content-center">
                 <MultiSelect
-                    value={selectedGroupedCities}
+                    value={selectedCities}
                     options={groupedCities}
-                    onChange={(e) => setSelectedGroupedCities(e.value)}
+                    onChange={(e) => setSelectedCities(e.value)}
                     optionLabel="label"
                     optionGroupLabel="label"
                     optionGroupChildren="items"
                     optionGroupTemplate={groupedItemTemplate}
                     placeholder="Select Cities"
+                    display="chip"
+                    className="w-full md:w-20rem"
                 />
             </div>
             <DocSectionCode code={code} />
