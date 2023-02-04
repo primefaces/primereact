@@ -1,10 +1,10 @@
 import { useRef } from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
+import { Controller, useForm } from 'react-hook-form';
 import { Button } from '../../../lib/button/Button';
-import { Toast } from '../../../lib/toast/Toast';
 import { ListBox } from '../../../lib/listbox/ListBox';
+import { Toast } from '../../../lib/toast/Toast';
+import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function HookFormDoc(props) {
     const toast = useRef(null);
@@ -97,7 +97,7 @@ export default function HookFormDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column justify-content-center">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
                 <Controller
                     name="value"
@@ -119,9 +119,14 @@ import { ListBox } from 'primereact/listbox';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
+interface City {
+    name: string;
+    code: string;
+}
+
 export default function HookFormDoc() {
     const toast = useRef(null);
-    const cities = [
+    const cities: City[] = [
         { name: 'New York', code: 'NY' },
         { name: 'Rome', code: 'RM' },
         { name: 'London', code: 'LDN' },
@@ -157,7 +162,7 @@ export default function HookFormDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column justify-content-center">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
                 <Controller
                     name="value"
@@ -181,7 +186,7 @@ export default function HookFormDoc() {
                 <p></p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column justify-content-center">
+                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column align-items-center gap-2">
                     <Toast ref={toast} />
                     <Controller
                         name="value"

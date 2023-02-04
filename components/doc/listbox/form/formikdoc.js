@@ -109,7 +109,7 @@ export default function FormikDoc() {
     
     return (
         <div className="card flex flex-column align-items-center justify-content-center">
-            <form onSubmit={formik.handleSubmit} className="flex flex-column justify-content-center">
+            <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
                 <ListBox
                     id="item"
@@ -133,13 +133,18 @@ export default function FormikDoc() {
         typescript: `
 import React, { useRef } from "react";
 import { useFormik } from 'formik';
-import { ListBox } from 'primereact/listbox';
+import { ListBox, ListBoxChangeEvent } from 'primereact/listbox';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
+interface City {
+    name: string;
+    code: string;
+}
+
 export default function FormikDoc() {
     const toast = useRef(null);
-    const cities = [
+    const cities: City[] = [
         { name: 'New York', code: 'NY' },
         { name: 'Rome', code: 'RM' },
         { name: 'London', code: 'LDN' },
@@ -178,7 +183,7 @@ export default function FormikDoc() {
     
     return (
         <div className="card flex flex-column align-items-center justify-content-center">
-            <form onSubmit={formik.handleSubmit} className="flex flex-column justify-content-center" >
+            <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
                 <ListBox
                     id="item"
@@ -187,7 +192,7 @@ export default function FormikDoc() {
                     options={cities}
                     optionLabel="name"
                     placeholder="Select a City"
-                    onChange={(e) => {
+                    onChange={(e: ListBoxChangeEvent) => {
                         formik.setFieldValue('item', e.value);
                     }}
                     style={{ width: '15rem' }}
@@ -209,7 +214,7 @@ export default function FormikDoc() {
                 </p>
             </DocSectionText>
             <div className="card flex flex-column align-items-center justify-content-center">
-                <form onSubmit={formik.handleSubmit} className="flex flex-column justify-content-center">
+                <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                     <Toast ref={toast} />
                     <ListBox
                         id="item"

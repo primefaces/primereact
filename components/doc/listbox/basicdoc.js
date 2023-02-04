@@ -3,7 +3,7 @@ import { ListBox } from '../../lib/listbox/ListBox';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function SingleDoc(props) {
+export function BasicDoc(props) {
     const [selectedCity, setSelectedCity] = useState(null);
     const cities = [
         { name: 'New York', code: 'NY' },
@@ -15,13 +15,13 @@ export function SingleDoc(props) {
 
     const code = {
         basic: `
-<ListBox value={selectedCity} options={cities} onChange={(e: ListBoxChangeParams) => setSelectedCity(e.value)} optionLabel="name" style={{ width: '15rem' }} />
+<ListBox value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" className="w-full md:w-14rem" />
         `,
         javascript: `
 import React, { useState } from "react";
 import { ListBox } from 'primereact/listbox';
 
-export default function SingleDoc() {
+export default function BasicDemo() {
     const [selectedCity, setSelectedCity] = useState(null);
     const cities = [
         { name: 'New York', code: 'NY' },
@@ -33,18 +33,23 @@ export default function SingleDoc() {
 
     return (
         <div className="card flex justify-content-center">  
-            <ListBox value={selectedCity} options={cities} onChange={(e: ListBoxChangeParams) => setSelectedCity(e.value)} optionLabel="name" style={{ width: '15rem' }} />
+            <ListBox value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" className="w-full md:w-14rem" />
         </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { ListBox, ListBoxChangeParams } from 'primereact/listbox';
+import { ListBox, ListBoxChangeEvent } from 'primereact/listbox';
 
-export default function SingleDoc() {
-    const [selectedCity, setSelectedCity] = useState<any>(null);
-    const cities = [
+interface City {
+    name: string;
+    code: string;
+} 
+
+export default function BasicDemo() {
+    const [selectedCity, setSelectedCity] = useState<City | null>(null);
+    const cities: City[] = [
         { name: 'New York', code: 'NY' },
         { name: 'Rome', code: 'RM' },
         { name: 'London', code: 'LDN' },
@@ -54,7 +59,7 @@ export default function SingleDoc() {
 
     return (
         <div className="card flex justify-content-center">  
-            <ListBox value={selectedCity} options={cities} onChange={(e: ListBoxChangeParams) => setSelectedCity(e.value)} optionLabel="name" style={{ width: '15rem' }} />
+            <ListBox value={selectedCity} onChange={(e: ListBoxChangeEvent) => setSelectedCity(e.value)} options={cities} optionLabel="name" className="w-full md:w-14rem" />
         </div>
     )
 }
@@ -65,13 +70,13 @@ export default function SingleDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Listbox is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives of how to define the options property; One way is providing a collection of{' '}
-                    <i>SelectItem</i> instances having label-value pairs whereas other way is providing an array of arbitrary objects along with the optionLabel and optionValue properties to specify the label/value field pair. In addition, options
-                    can be simple primitive values such as a string array, in this case no <i>optionLabel</i> or <i>optionValue</i> is necessary.
+                    ListBox is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with an <i>options</i> collection. Label and value of an option are defined with the <i>optionLabel</i> and <i>optionValue</i>{' '}
+                    properties respectively. Default property name for the <i>optionLabel</i> is <i>label</i> and <i>value</i> for the <i>optionValue</i>. If <i>optionValue</i> is omitted and the object has no <i>value</i> property, the object itself
+                    becomes the value of an option. Note that, when options are simple primitive values such as a string array, no <i>optionLabel</i> and <i>optionValue</i> would be necessary.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <ListBox value={selectedCity} options={cities} onChange={(e) => setSelectedCity(e.value)} optionLabel="name" style={{ width: '15rem' }} />
+                <ListBox value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" className="w-full md:w-14rem" />
             </div>
             <DocSectionCode code={code} />
         </>
