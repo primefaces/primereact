@@ -23,6 +23,10 @@ export const MultiStateCheckbox = React.memo(
             return props.optionValue ? ObjectUtils.resolveFieldData(option, props.optionValue) : option;
         };
 
+        const getOptionIcon = (option) => {
+            return ObjectUtils.resolveFieldData(option, props.optionIcon || 'icon');
+        };
+
         const getOptionAriaLabel = (option) => {
             const ariaField = props.optionLabel || props.optionValue;
 
@@ -94,7 +98,7 @@ export const MultiStateCheckbox = React.memo(
         });
 
         const createIcon = () => {
-            const icon = (selectedOption && selectedOption.icon) || '';
+            const icon = (selectedOption && getOptionIcon(selectedOption)) || '';
             const className = classNames('p-checkbox-icon p-c', {
                 [`${icon}`]: true
             });

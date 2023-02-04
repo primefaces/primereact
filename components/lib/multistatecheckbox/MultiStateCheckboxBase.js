@@ -5,6 +5,7 @@ export const MultiStateCheckboxDefaultProps = {
     options: null,
     optionValue: null,
     optionLabel: null,
+    optionIcon: null,
     iconTemplate: null,
     dataKey: null,
     style: null,

@@ -124,6 +124,10 @@ export interface MultiStateCheckboxProps extends Omit<React.DetailedHTMLProps<Re
      */
     optionLabel?: string | undefined;
     /**
+     * Property name to use as the icon of an option, defaults to the icon property.
+     */
+    optionIcon?: string | undefined;
+    /**
      * Template of icon for the selected option.
      */
     iconTemplate?: React.ReactNode | ((options: MultiStateCheckboxIconTemplateEvent) => React.ReactNode);

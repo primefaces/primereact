@@ -4,11 +4,11 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/multistatecheckbox/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/multistatecheckbox/basicdoc';
 import { DisabledDoc } from '../../components/doc/multistatecheckbox/disableddoc';
+import { FormikDoc } from '../../components/doc/multistatecheckbox/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/multistatecheckbox/form/hookformdoc';
 import { ImportDoc } from '../../components/doc/multistatecheckbox/importdoc';
 import { InvalidDoc } from '../../components/doc/multistatecheckbox/invaliddoc';
 import { StyleDoc } from '../../components/doc/multistatecheckbox/styledoc';
-import { FormikDoc } from '../../components/doc/multistatecheckbox/validation/formikdoc';
-import { HookFormDoc } from '../../components/doc/multistatecheckbox/validation/hookformdoc';
 
 const MultiStateCheckboxDemo = () => {
     const docs = [
@@ -23,14 +23,14 @@ const MultiStateCheckboxDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'disabled',
-            label: 'Disabled',
-            component: DisabledDoc
-        },
-        {
             id: 'invalid',
             label: 'Invalid',
             component: InvalidDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
         },
         {
             id: 'form',
@@ -71,13 +71,13 @@ const MultiStateCheckboxDemo = () => {
         <div>
             <Head>
                 <title>React MultiStateCheckbox Component</title>
-                <meta name="description" content="MultiStateCheckbox is used to select a state from given multiple states." />
+                <meta name="description" content="MultiStateCheckbox is used to select a state from given options." />
             </Head>
             <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>MultiStateCheckbox</h1>
-                        <p>MultiStateCheckbox is used to select a state from given multiple states.</p>
+                        <p>MultiStateCheckbox is used to select a state from given states.</p>
                     </div>
                     <DocSections docs={docs} />
                 </div>

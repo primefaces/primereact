@@ -79,14 +79,14 @@ export default function HookFormDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column gap-2">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
                 <Controller
                     name="value"
                     control={form.control}
                     rules={{ required: 'Level is required.' }}
                     render={({ field, fieldState }) => (
-                        <div className="flex flex-column gap-2">
+                        <div className="flex flex-column align-items-center gap-2">
                             <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.value })}>
                                 Level
                             </label>
@@ -109,6 +109,11 @@ import { Toast } from 'primereact/toast';
 import { classNames } from 'primereact/utils';
 import { MultiStateCheckbox } from "primereact/multistatecheckbox";
 
+interface Item {
+    value: string;
+    icon: string;
+}
+
 export default function HookFormDoc() {
     const toast = useRef<Toast | null>(null);
     const defaultValues = {value: ''};
@@ -119,7 +124,7 @@ export default function HookFormDoc() {
         toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: form.getValues('value') });
     };
 
-    const options = [
+    const options: Item[] = [
         { value: 'public', icon: 'pi pi-globe' },
         { value: 'protected', icon: 'pi pi-lock-open' },
         { value: 'private', icon: 'pi pi-lock' }
@@ -136,14 +141,14 @@ export default function HookFormDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column gap-2">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
                 <Controller
                     name="value"
                     control={form.control}
                     rules={{ required: 'Level is required.' }}
                     render={({ field, fieldState }) => (
-                        <div className="flex flex-column gap-2">
+                        <div className="flex flex-column align-items-center gap-2">
                             <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.value })}>
                                 Level
                             </label>
@@ -168,14 +173,14 @@ export default function HookFormDoc() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column gap-2">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column align-items-center gap-2">
                     <Toast ref={toast} />
                     <Controller
                         name="value"
                         control={form.control}
                         rules={{ required: 'Level is required.' }}
                         render={({ field, fieldState }) => (
-                            <div className="flex flex-column gap-2">
+                            <div className="flex flex-column align-items-center gap-2">
                                 <label htmlFor={field.name} className={classNames('mr-2', { 'p-error': errors.value })}>
                                     Level
                                 </label>

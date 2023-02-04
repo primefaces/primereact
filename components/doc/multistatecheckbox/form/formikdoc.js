@@ -60,7 +60,6 @@ import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 import { classNames } from 'primereact/utils';
 
-
 export default function FormikDoc() {
     const toast = useRef(null);
 
@@ -101,7 +100,7 @@ export default function FormikDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
+            <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
                 <label htmlFor="item" className={classNames('mr-2', { 'p-error': formik.errors.item })}>
                     Level
@@ -132,6 +131,11 @@ import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 import { classNames } from 'primereact/utils';
 
+interface Item {
+    value: string;
+    icon: string;
+}
+
 export default function FormikDoc() {
     const toast = useRef<Toast | null>(null);
 
@@ -139,7 +143,7 @@ export default function FormikDoc() {
         toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.item });
     };
 
-    const options = [
+    const options: Item[] = [
         { value: 'public', icon: 'pi pi-globe' },
         { value: 'protected', icon: 'pi pi-lock-open' },
         { value: 'private', icon: 'pi pi-lock' }
@@ -172,7 +176,7 @@ export default function FormikDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
+            <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
                 <label htmlFor="item" className={classNames('mr-2', { 'p-error': formik.errors.item })}>
                     Level
@@ -181,7 +185,7 @@ export default function FormikDoc() {
                     id="item"
                     name="item"
                     value={formik.values.item}
-                    onChange={(e) => {
+                    onChange={(e: MultiStateCheckboxChangeEvent) => {
                         formik.setFieldValue('item', e.value);
                     }}
                     options={options}
@@ -205,7 +209,7 @@ export default function FormikDoc() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
+                <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                     <Toast ref={toast} />
                     <label htmlFor="item" className={classNames('mr-2', { 'p-error': formik.errors.item })}>
                         Level
