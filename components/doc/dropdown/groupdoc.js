@@ -3,8 +3,8 @@ import { Dropdown } from '../../lib/dropdown/Dropdown';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function GroupedDoc(props) {
-    const [selectedGroupedCity, setSelectedGroupedCity] = useState(null);
+export function GroupDoc(props) {
+    const [selectedCity, setSelectedCity] = useState(null);
     const groupedCities = [
         {
             label: 'Germany',
@@ -38,14 +38,10 @@ export function GroupedDoc(props) {
         }
     ];
 
-    const onGroupedCityChange = (e) => {
-        setSelectedGroupedCity(e.value);
-    };
-
     const groupedItemTemplate = (option) => {
         return (
-            <div className="flex align-items-center country-item">
-                <img alt={option.label} src="/images/flag/flag_placeholder.png" className={`flag flag-${option.code.toLowerCase()}`} />
+            <div className="flex align-items-center">
+                <img alt={option.label} src="/images/flag/flag_placeholder.png" className={`mr-2 flag flag-${option.code.toLowerCase()}`} style={{ width: '18px' }} />
                 <div>{option.label}</div>
             </div>
         );
@@ -53,19 +49,19 @@ export function GroupedDoc(props) {
 
     const code = {
         basic: `
-<Dropdown value={selectedGroupedCity} options={groupedCities} onChange={onGroupedCityChange} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} />
-
+<Dropdown value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={groupedCities} optionLabel="label" 
+    optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} className="w-full md:w-14rem" placeholder="Select a City" />
         `,
         javascript: `
 import React, { useState } from "react";
 import { Dropdown } from 'primereact/dropdown';
-import './DropdownDemo.css';
 
-export default function GroupedDoc() {
-    const [selectedGroupedCity, setSelectedGroupedCity] = useState(null);
+export default function GroupedDemo() {
+    const [selectedCity, setSelectedCity] = useState(null);
     const groupedCities = [
         {
-            label: 'Germany', code: 'DE',
+            label: 'Germany',
+            code: 'DE',
             items: [
                 { label: 'Berlin', value: 'Berlin' },
                 { label: 'Frankfurt', value: 'Frankfurt' },
@@ -74,7 +70,8 @@ export default function GroupedDoc() {
             ]
         },
         {
-            label: 'USA', code: 'US',
+            label: 'USA',
+            code: 'US',
             items: [
                 { label: 'Chicago', value: 'Chicago' },
                 { label: 'Los Angeles', value: 'Los Angeles' },
@@ -83,7 +80,8 @@ export default function GroupedDoc() {
             ]
         },
         {
-            label: 'Japan', code: 'JP',
+            label: 'Japan',
+            code: 'JP',
             items: [
                 { label: 'Kyoto', value: 'Kyoto' },
                 { label: 'Osaka', value: 'Osaka' },
@@ -93,34 +91,41 @@ export default function GroupedDoc() {
         }
     ];
 
-    const onGroupedCityChange = (e) => {
-        setSelectedGroupedCity(e.value);
-    }
-
     const groupedItemTemplate = (option) => {
         return (
-            <div className="flex align-items-center country-item">
-                <img alt={option.label} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
+            <div className="flex align-items-center">
+                <img alt={option.label} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`mr-2 flag flag-\${option.code.toLowerCase()}\`} style={{ width: '18px' }} />
                 <div>{option.label}</div>
             </div>
         );
-    }
+    };
 
     return (
-        <div className="card flex justify-content-center dropdown-demo">
-            <Dropdown value={selectedGroupedCity} options={groupedCities} onChange={onGroupedCityChange} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} />
+        <div className="card flex justify-content-center">
+            <Dropdown value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={groupedCities} optionLabel="label" 
+                optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} className="w-full md:w-14rem" placeholder="Select a City" />
         </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { Dropdown } from 'primereact/dropdown';
-import './DropdownDemo.css';
+import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 
-export default function GroupedDoc() {
-    const [selectedGroupedCity, setSelectedGroupedCity] = useState<any | null>(null);
-    const groupedCities = [
+interface City {
+    label: string;
+    value: string;
+} 
+
+interface Country {
+    label: string;
+    code: string;
+    items: City[];
+}
+
+export default function GroupedDemo() {
+    const [selectedCity, setSelectedCity] = useState<City | null>(null);
+    const groupedCities: Country[] = [
         {
             label: 'Germany', code: 'DE',
             items: [
@@ -150,50 +155,45 @@ export default function GroupedDoc() {
         }
     ];
 
-    const onGroupedCityChange = (e: DropdownChangeParams) => {
-        setSelectedGroupedCity(e.value);
-    }
-
-    const groupedItemTemplate = (option: any) => {
+    const groupedItemTemplate = (option: City) => {
         return (
-            <div className="flex align-items-center country-item">
-                <img alt={option.label} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
+            <div className="flex align-items-center">
+                <img alt={option.label} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`mr-2 flag flag-\${option.code.toLowerCase()}\`} style={{ width: '18px' }} />
                 <div>{option.label}</div>
             </div>
         );
-    }
+    };
 
     return (
-        <div className="card flex justify-content-center dropdown-demo">
-            <Dropdown value={selectedGroupedCity} options={groupedCities} onChange={onGroupedCityChange} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} />
+        <div className="card flex justify-content-center">
+            <Dropdown value={selectedCity} onChange={(e: DropdownChangeEvent) => setSelectedCity(e.value)} options={groupedCities} optionLabel="label" 
+                optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} className="w-full md:w-14rem" placeholder="Select a City" />
         </div>
     )
 }
-        `,
-        extFiles: {
-            'DropdownDemo.css': `
-/* DropdownDemo.css */
-
-.dropdown-demo .p-dropdown {
-    width: 14rem;
-}
-
-.dropdown-demo .country-item-value img.flag {
-    width: 17px;
-}
         `
-        }
     };
 
     return (
         <>
             <DocSectionText {...props}>
                 <p>
-                    Options groups are specified with the <i>optionGroupLabel</i> and <i>optionGroupChildren</i> properties.
+                    Options can be grouped when a nested data structures is provided. To define the label of a group <i>optionGroupLabel</i> property is needed and also <i>optionGroupChildren</i> is required to define the property that refers to the
+                    children of a group.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center dropdown-demo">
-                <Dropdown value={selectedGroupedCity} options={groupedCities} onChange={onGroupedCityChange} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} />
+            <div className="card flex justify-content-center">
+                <Dropdown
+                    value={selectedCity}
+                    onChange={(e) => setSelectedCity(e.value)}
+                    options={groupedCities}
+                    optionLabel="label"
+                    optionGroupLabel="label"
+                    optionGroupChildren="items"
+                    optionGroupTemplate={groupedItemTemplate}
+                    className="w-full md:w-14rem"
+                    placeholder="Select a City"
+                />
             </div>
             <DocSectionCode code={code} />
         </>

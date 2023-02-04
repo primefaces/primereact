@@ -87,7 +87,7 @@ export default function LazyDoc() {
     };
 
     return (
-        <div className="card flex justify-content-center dropdown-demo">
+        <div className="card flex justify-content-center">
         <Dropdown value={selectedItem} options={lazyItems} onChange={onLazyItemChange} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 38, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
                 return (
                     <div className="flex align-items-center p-2" style={{ height: '38px' }}>
@@ -147,7 +147,7 @@ export default function LazyDoc() {
 
     return (
         return (
-            <div className="card flex justify-content-center dropdown-demo">
+            <div className="card flex justify-content-center">
             <Dropdown value={selectedItem} options={lazyItems} onChange={onLazyItemChange} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 38, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
                     return (
                         <div className="flex align-items-center p-2" style={{ height: '38px' }}>
@@ -183,7 +183,7 @@ export default function LazyDoc() {
                 {/* To Do:  */}
                 <p></p>
             </DocSectionText>
-            <div className="card flex justify-content-center dropdown-demo">
+            <div className="card flex justify-content-center">
                 <Dropdown
                     value={selectedItem}
                     options={lazyItems}

@@ -18,15 +18,11 @@ export function TemplateDoc(props) {
         { name: 'United States', code: 'US' }
     ];
 
-    const onCountryChange = (e) => {
-        setSelectedCountry(e.value);
-    };
-
     const selectedCountryTemplate = (option, props) => {
         if (option) {
             return (
-                <div className="country-item country-item-value">
-                    <img alt={option.name} src="/images/flag/flag_placeholder.png" className={`flag flag-${option.code.toLowerCase()}`} />
+                <div className="flex align-items-center">
+                    <img alt={option.name} src="/images/flag/flag_placeholder.png" className={`mr-2 flag flag-${option.code.toLowerCase()}`} style={{ width: '18px' }} />
                     <div>{option.name}</div>
                 </div>
             );
@@ -37,8 +33,8 @@ export function TemplateDoc(props) {
 
     const countryOptionTemplate = (option) => {
         return (
-            <div className="country-item">
-                <img alt={option.name} src="/images/flag/flag_placeholder.png" className={`flag flag-${option.code.toLowerCase()}`} />
+            <div className="flex align-items-center">
+                <img alt={option.name} src="/images/flag/flag_placeholder.png" className={`mr-2 flag flag-${option.code.toLowerCase()}`} style={{ width: '18px' }} />
                 <div>{option.name}</div>
             </div>
         );
@@ -46,17 +42,16 @@ export function TemplateDoc(props) {
 
     const code = {
         basic: `
-<Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" placeholder="Select a Country" valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
+<Dropdown value={selectedCountry} onChange={(e) => setSelectedCountry(e.value)} options={countries} optionLabel="name" placeholder="Select a Country" 
+    valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} className="w-full md:w-14rem" />
         `,
         javascript: `
 import React, { useState } from "react";
 import { Dropdown } from 'primereact/dropdown';
-import './DropdownDemo.css';
 
-export default function TemplateDoc() {
+export default function TemplateDemo() {
     const [selectedCountry, setSelectedCountry] = useState(null);
-
-     const countries = [
+    const countries = [
         { name: 'Australia', code: 'AU' },
         { name: 'Brazil', code: 'BR' },
         { name: 'China', code: 'CN' },
@@ -69,51 +64,48 @@ export default function TemplateDoc() {
         { name: 'United States', code: 'US' }
     ];
 
-    const onCountryChange = (e) => {
-        setSelectedCountry(e.value);
-    }
-
     const selectedCountryTemplate = (option, props) => {
         if (option) {
             return (
-                <div className="country-item country-item-value">
-                    <img alt={option.name} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <div className="flex align-items-center">
+                    <img alt={option.name} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`mr-2 flag flag-\${option.code.toLowerCase()}\`} style={{ width: '18px' }} />
                     <div>{option.name}</div>
                 </div>
             );
         }
-        return (
-            <span>
-                {props.placeholder}
-            </span>
-        );
-    }
+
+        return <span>{props.placeholder}</span>;
+    };
 
     const countryOptionTemplate = (option) => {
         return (
-            <div className="country-item">
-                <img alt={option.name} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
+            <div className="flex align-items-center">
+                <img alt={option.name} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`mr-2 flag flag-\${option.code.toLowerCase()}\`} style={{ width: '18px' }} />
                 <div>{option.name}</div>
             </div>
         );
-    }
+    };
 
     return (
-        <div className="card flex justify-content-center dropdown-demo">
-            <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" placeholder="Select a Country" valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
+        <div className="card flex justify-content-center">
+            <Dropdown value={selectedCountry} onChange={(e) => setSelectedCountry(e.value)} options={countries} optionLabel="name" placeholder="Select a Country" 
+                valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} className="w-full md:w-14rem" />
         </div>    
     )
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { Dropdown, DropdownChangeParams, DropdownProps } from 'primereact/dropdown';
-import './DropdownDemo.css';
+import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 
-export default function TemplateDoc() {
-    const [selectedCountry, setSelectedCountry] = useState<any | null>(null);
+interface Country {
+    name: string;
+    code: string;
+}
 
-     const countries = [
+export default function TemplateDemo() {
+    const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
+    const countries: Country[] = [
         { name: 'Australia', code: 'AU' },
         { name: 'Brazil', code: 'BR' },
         { name: 'China', code: 'CN' },
@@ -126,65 +118,56 @@ export default function TemplateDoc() {
         { name: 'United States', code: 'US' }
     ];
 
-    const onCountryChange = (e: DropdownChangeParams) => {
-        setSelectedCountry(e.value);
-    }
-
-    const selectedCountryTemplate = (option: any, props: DropdownProps) => {
+    const selectedCountryTemplate = (option: Country, props) => {
         if (option) {
             return (
-                <div className="country-item country-item-value">
-                    <img alt={option.name} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <div className="flex align-items-center">
+                    <img alt={option.name} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`mr-2 flag flag-\${option.code.toLowerCase()}\`} style={{ width: '18px' }} />
                     <div>{option.name}</div>
                 </div>
             );
         }
-        return (
-            <span>
-                {props.placeholder}
-            </span>
-        );
-    }
 
-    const countryOptionTemplate = (option: any) => {
+        return <span>{props.placeholder}</span>;
+    };
+
+    const countryOptionTemplate = (option: Country) => {
         return (
-            <div className="country-item">
-                <img alt={option.name} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
+            <div className="flex align-items-center">
+                <img alt={option.name} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`mr-2 flag flag-\${option.code.toLowerCase()}\`} style={{ width: '18px' }} />
                 <div>{option.name}</div>
             </div>
         );
-    }
+    };
 
     return (
-        <div className="card flex justify-content-center dropdown-demo">
-            <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" placeholder="Select a Country" valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
-        </div>
+        <div className="card flex justify-content-center">
+            <Dropdown value={selectedCountry} onChange={(e: DropdownChangeEvent) => setSelectedCountry(e.value)} options={countries} optionLabel="name" placeholder="Select a Country" 
+                valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} className="w-full md:w-14rem" />
+        </div>    
     )
 }
-        `,
-        extFiles: {
-            'DropdownDemo.css': `
-/* DropdownDemo.css */
-
-.dropdown-demo .p-dropdown {
-    width: 14rem;
-}
-
-.dropdown-demo .country-item-value img.flag {
-    width: 17px;
-}
         `
-        }
     };
 
     return (
         <>
             <DocSectionText {...props}>
-                {/* TO DO: Add demo content. */}
-                <p></p>
+                <p>
+                    Options and the selected option display support templating with <i>itemTemplate</i> and <i>valueTemplate</i> properties respectively.
+                </p>
             </DocSectionText>
-            <div className="card flex justify-content-center dropdown-demo">
-                <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" placeholder="Select a Country" valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
+            <div className="card flex justify-content-center">
+                <Dropdown
+                    value={selectedCountry}
+                    onChange={(e) => setSelectedCountry(e.value)}
+                    options={countries}
+                    optionLabel="name"
+                    placeholder="Select a Country"
+                    valueTemplate={selectedCountryTemplate}
+                    itemTemplate={countryOptionTemplate}
+                    className="w-full md:w-14rem"
+                />
             </div>
             <DocSectionCode code={code} />
         </>

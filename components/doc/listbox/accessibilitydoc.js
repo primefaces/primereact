@@ -8,7 +8,7 @@ export function AccessibilityDoc() {
 <span id="lb">Options</span>
 <ListBox aria-labelledby="lb" />
 
-<ListBox aria-label="City" />>
+<ListBox aria-label="City" />
     `
     };
 

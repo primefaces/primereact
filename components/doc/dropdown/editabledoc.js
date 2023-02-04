@@ -13,20 +13,16 @@ export function EditableDoc(props) {
         { name: 'Paris', code: 'PRS' }
     ];
 
-    const onCityChange = (e) => {
-        setSelectedCity(e.value);
-    };
-
     const code = {
         basic: `
-<Dropdown value={selectedCity} options={cities} onChange={onCityChange} optionLabel="name" editable />
+<Dropdown value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" 
+    editable placeholder="Select a City" className="w-full md:w-14rem" />
         `,
         javascript: `
 import React, { useState } from "react";
 import { Dropdown } from 'primereact/dropdown';
-import './DropdownDemo.css';
 
-export default function EditableDoc() {
+export default function EditableDemo() {
     const [selectedCity, setSelectedCity] = useState(null);
     const cities = [
         { name: 'New York', code: 'NY' },
@@ -36,25 +32,26 @@ export default function EditableDoc() {
         { name: 'Paris', code: 'PRS' }
     ];
 
-    const onCityChange = (e) => {
-        setSelectedCity(e.value);
-    }
-
     return (
-        <div className="card flex justify-content-center dropdown-demo">
-            <Dropdown value={selectedCity} options={cities} onChange={onCityChange} optionLabel="name" editable />
+        <div className="card flex justify-content-center">
+            <Dropdown value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" 
+                editable placeholder="Select a City" className="w-full md:w-14rem" />
         </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { Dropdown, DropdownChangeParams } from 'primereact/dropdown';
-import './DropdownDemo.css';
+import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 
-export default function EditableDoc() {
-    const [selectedCity, setSelectedCity] = useState<any | null>(null);
-    const cities = [
+interface City {
+    name: string;
+    code: string;
+}
+
+export default function EditableDemo() {
+    const [selectedCity, setSelectedCity] = useState<City | null>(null);
+    const cities: City[] = [
         { name: 'New York', code: 'NY' },
         { name: 'Rome', code: 'RM' },
         { name: 'London', code: 'LDN' },
@@ -62,35 +59,25 @@ export default function EditableDoc() {
         { name: 'Paris', code: 'PRS' }
     ];
 
-    const onCityChange = (e: DropdownChangeParams) => {
-        setSelectedCity(e.value);
-    }
-
     return (
-        <div className="card flex justify-content-center dropdown-demo">
-            <Dropdown value={selectedCity} options={cities} onChange={onCityChange} optionLabel="name" editable />
+        <div className="card flex justify-content-center">
+            <Dropdown value={selectedCity} onChange={(e: DropdownChangeEvent) => setSelectedCity(e.value)} options={cities} optionLabel="name" 
+                editable placeholder="Select a City" className="w-full md:w-14rem" />
         </div>
     )
 }
-        `,
-        extFiles: {
-            'DropdownDemo.css': `
-/* DropdownDemo.css */
-
-.dropdown-demo .p-dropdown {
-    width: 14rem;
-}
         `
-        }
     };
 
     return (
         <>
             <DocSectionText {...props}>
-                <p></p>
+                <p>
+                    When <i>editable</i> is present, the input can also be entered with typing.
+                </p>
             </DocSectionText>
-            <div className="card flex justify-content-center dropdown-demo">
-                <Dropdown value={selectedCity} options={cities} onChange={onCityChange} optionLabel="name" editable />
+            <div className="card flex justify-content-center">
+                <Dropdown value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" editable placeholder="Select a City" className="w-full md:w-14rem" />
             </div>
             <DocSectionCode code={code} />
         </>
