@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { NodeService } from '../../../service/NodeService';
 import { Button } from '../../lib/button/Button';
@@ -7,7 +8,7 @@ import { DocSectionText } from '../common/docsectiontext';
 
 export function ProgrammaticDoc(props) {
     const [nodes, setNodes] = useState(null);
-    const [selectedNodeKeys, setSelectedNodeKeys] = useState(null);
+    const [selectedNodeKey, setSelectedNodeKey] = useState(null);
     const [expandedKeys, setExpandedKeys] = useState({});
 
     const expandAll = () => {
@@ -34,97 +35,135 @@ export function ProgrammaticDoc(props) {
         }
     };
 
+    const headerTemplate = (
+        <div className="p-3 pb-0">
+            <Button type="button" icon="pi pi-plus" onClick={expandAll} className="w-2rem h-2rem mr-2 p-button-outlined" />
+            <Button type="button" icon="pi pi-minus" onClick={collapseAll} className="w-2rem h-2rem p-button-outlined" />
+        </div>
+    );
+
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const code = {
         basic: `
-<TreeSelect
-value={selectedNodeKeys}
-options={nodes}
-expandedKeys={expandedKeys}
-onToggle={(e) => setExpandedKeys(e.value)}
-onChange={(e) => setSelectedNodeKeys(e.value)}
-display="chip"
-selectionMode="checkbox"
-className="md:w-20rem w-full"
-placeholder="Select Items"
-></TreeSelect>
-<div className="mb-4 mt-2">
-    <Button type="button" icon="pi pi-plus" label="Expand All" onClick={expandAll} className="mr-2" />
-    <Button type="button" icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
-</div>
+<TreeSelect value={selectedNodeKey} onChange={(e) => setSelectedNodeKey(e.value)} options={nodes} 
+    className="md:w-20rem w-full" placeholder="Select Item"
+    expandedKeys={expandedKeys} onToggle={(e) => setExpandedKeys(e.value)} panelHeaderTemplate={headerTemplate}></TreeSelect>
         `,
         javascript: `
 import React, { useState, useEffect } from "react";
 import { TreeSelect } from 'primereact/treeselect';
-import { Button } from '../../lib/button/Button';
+import { Button } from 'primereact/button';
 import { NodeService } from './service/NodeService';
 
-export default function ProgrammaticDoc() {
+export default function ProgrammaticDemo() {
     const [nodes, setNodes] = useState(null);
-    const [selectedNodeKeys, setSelectedNodeKeys] = useState(null);
+    const [selectedNodeKey, setSelectedNodeKey] = useState(null);
     const [expandedKeys, setExpandedKeys] = useState({});
-    
+
+    const expandAll = () => {
+        let _expandedKeys = {};
+
+        for (let node of nodes) {
+            expandNode(node, _expandedKeys);
+        }
+
+        setExpandedKeys(_expandedKeys);
+    };
+
+    const collapseAll = () => {
+        setExpandedKeys({});
+    };
+
+    const expandNode = (node, _expandedKeys) => {
+        if (node.children && node.children.length) {
+            _expandedKeys[node.key] = true;
+
+            for (let child of node.children) {
+                expandNode(child, _expandedKeys);
+            }
+        }
+    };
+
+    const headerTemplate = (
+        <div className="p-3 pb-0">
+            <Button type="button" icon="pi pi-plus" onClick={expandAll} className="w-2rem h-2rem mr-2 p-button-outlined" />
+            <Button type="button" icon="pi pi-minus" onClick={collapseAll} className="w-2rem h-2rem p-button-outlined" />
+        </div>
+    );
+
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
-        <div className="card flex flex-column align-items-center justify-content-center">
-            <TreeSelect
-                value={selectedNodeKeys}
-                options={nodes}
-                expandedKeys={expandedKeys}
-                onToggle={(e : TreeSelectExpandedParams) => setExpandedKeys(e.value)}
-                onChange={(e : TreeSelectChangeParams) => setSelectedNodeKeys(e.value)}
-                display="chip"
-                selectionMode="checkbox"
-                className="md:w-20rem w-full"
-                placeholder="Select Items"
-            ></TreeSelect>
-            <div className="mb-4 mt-2">
-                <Button type="button" icon="pi pi-plus" label="Expand All" onClick={expandAll} className="mr-2" />
-                <Button type="button" icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
-            </div>
+        <div className="card flex justify-content-center">
+            <TreeSelect value={selectedNodeKey} onChange={(e) => setSelectedNodeKey(e.value)} options={nodes} 
+                className="md:w-20rem w-full" placeholder="Select Item"
+                expandedKeys={expandedKeys} onToggle={(e) => setExpandedKeys(e.value)} panelHeaderTemplate={headerTemplate}></TreeSelect>
         </div>
     );
 }
         `,
         typescript: `
 import React, { useState, useEffect } from "react";
-import { TreeSelect, TreeSelectChangeParams, TreeSelectExpandedParams } from 'primereact/treeselect';
-import { Button } from '../../lib/button/Button';
+import { TreeSelect, TreeSelectChangeEvent, TreeSelectExpandedEvent } from 'primereact/treeselect';
+import { TreeNode } from 'primereact/treenode';
+import { Button } from 'primereact/button';
 import { NodeService } from './service/NodeService';
 
-export default function ProgrammaticDoc() {
-    const [nodes, setNodes] = useState<any[]>(null);
-    const [selectedNodeKeys, setSelectedNodeKeys] = useState<any>(null);
-    const [expandedKeys, setExpandedKeys] = useState<any>({});
+interface NodeKey {
+    [key: string]: boolean;
+ }
 
+export default function ProgrammaticDemo() {
+    const [nodes, setNodes] = useState<TreeNode[] | null>(null);
+    const [selectedNodeKey, setSelectedNodeKey] = useState<string>(null);
+    const [expandedKeys, setExpandedKeys] = useState<NodeKey>({});
+
+    const expandAll = () => {
+        let _expandedKeys = {};
+
+        for (let node of nodes) {
+            expandNode(node, _expandedKeys);
+        }
+
+        setExpandedKeys(_expandedKeys);
+    };
+
+    const collapseAll = () => {
+        setExpandedKeys({});
+    };
+
+    const expandNode = (node, _expandedKeys) => {
+        if (node.children && node.children.length) {
+            _expandedKeys[node.key] = true;
+
+            for (let child of node.children) {
+                expandNode(child, _expandedKeys);
+            }
+        }
+    };
+
+    const headerTemplate = (
+        <div className="p-3 pb-0">
+            <Button type="button" icon="pi pi-plus" onClick={expandAll} className="w-2rem h-2rem mr-2 p-button-outlined" />
+            <Button type="button" icon="pi pi-minus" onClick={collapseAll} className="w-2rem h-2rem p-button-outlined" />
+        </div>
+    );
+    
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
-    <div className="card flex flex-column align-items-center justify-content-center">
-        <TreeSelect
-            value={selectedNodeKeys}
-            options={nodes}
-            expandedKeys={expandedKeys}
-            onToggle={(e : TreeSelectExpandedParams) => setExpandedKeys(e.value)}
-            onChange={(e : TreeSelectChangeParams) => setSelectedNodeKeys(e.value)}
-            display="chip"
-            selectionMode="checkbox"
-            className="md:w-20rem w-full"
-            placeholder="Select Items"
-        ></TreeSelect>
-        <div className="mb-4 mt-2">
-            <Button type="button" icon="pi pi-plus" label="Expand All" onClick={expandAll} className="mr-2" />
-            <Button type="button" icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
+        <div className="card flex justify-content-center">
+            <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e : TreeSelectChangeEvent) => setSelectedNodeKey(e.value)} 
+                className="md:w-20rem w-full" placeholder="Select Item" 
+                expandedKeys={expandedKeys} onToggle={(e: TreeSelectExpandedEvent) => setExpandedKeys(e.value)} panelHeaderTemplate={headerTemplate}></TreeSelect>
         </div>
-    </div>
     );
 }
         `,
@@ -163,26 +202,24 @@ export default function ProgrammaticDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Label of an option is used as the display text of an item by default, for custom content support define a <i>valueTemplate</i> that gets the selected nodes as a parameter. For custom filter support define a <i>filterTemplate</i>
-                    function that gets the option instance as a parameter and returns the content for the filter element. In addition <i>header</i>, <i>footer</i> and <i>emptyMessage</i> templates are provided for further customization.
+                    TreeSelect is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with an <i>options</i> collection. Internally <Link href="tree">Tree</Link> component is used so the options model is based on
+                    TreeNode API.
+                </p>
+                <p>
+                    In single selection mode, value binding should be the <i>key</i> value of a node.
                 </p>
             </DocSectionText>
-            <div className="card flex flex-column align-items-center justify-content-center">
+            <div className="card flex justify-content-center">
                 <TreeSelect
-                    value={selectedNodeKeys}
+                    value={selectedNodeKey}
+                    onChange={(e) => setSelectedNodeKey(e.value)}
                     options={nodes}
+                    className="md:w-20rem w-full"
+                    placeholder="Select Item"
                     expandedKeys={expandedKeys}
                     onToggle={(e) => setExpandedKeys(e.value)}
-                    onChange={(e) => setSelectedNodeKeys(e.value)}
-                    display="chip"
-                    selectionMode="checkbox"
-                    className="md:w-20rem w-full"
-                    placeholder="Select Items"
+                    panelHeaderTemplate={headerTemplate}
                 ></TreeSelect>
-                <div className="mb-4 mt-2">
-                    <Button type="button" icon="pi pi-plus" label="Expand All" onClick={expandAll} className="mr-2" />
-                    <Button type="button" icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
-                </div>
             </div>
             <DocSectionCode code={code} service={['NodeService']} />
         </>
