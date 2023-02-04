@@ -502,23 +502,27 @@
             "children": [
                 {
                     "name": "useCounter",
-                    "to": "/hooks/useCounter"
+                    "to": "/hooks/usecounter"
                 },
                 {
                     "name": "useMouse",
-                    "to": "/hooks/useMouse"
+                    "to": "/hooks/usemouse"
                 },
                 {
                     "name": "useMove",
-                    "to": "/hooks/useMove"
+                    "to": "/hooks/usemove"
                 },
                 {
                     "name": "useIntersectionObserver",
-                    "to": "/hooks/useIntersectionObserver"
+                    "to": "/hooks/useintersectionobserver"
+                },
+                {
+                    "name": "useInterval",
+                    "to": "/hooks/useinterval"
                 },
                 {
                     "name": "useFavicon",
-                    "to": "/hooks/useFavicon"
+                    "to": "/hooks/usefavicon"
                 }
             ]
         },
