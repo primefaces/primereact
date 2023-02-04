@@ -61,7 +61,7 @@ export function HookFormDoc(props) {
 
         return (
             <div className="flex align-items-center">
-                <img alt={suggestion.name} src={src} width="32" style={{ verticalAlign: 'middle' }} />
+                <img alt={suggestion.name} src={src} width="32" />
                 <span className="flex flex-column ml-2">
                     {suggestion.name}
                     <small style={{ fontSize: '.75rem', color: 'var(--text-secondary-color)' }}>@{suggestion.nickname}</small>
@@ -72,23 +72,20 @@ export function HookFormDoc(props) {
 
     const code = {
         basic: `
-<Controller
-name="value"
-control={form.control}
-rules={{ required: 'Value is required.' }}
-render={({ field, fieldState }) => (
-    <Mention
-        id={field.name}
-        field="nickname"
-        {...field}
-        rows={5}
-        cols={40}
-        className={classNames({ 'p-invalid': fieldState.error })}
-        suggestions={suggestions}
-        onSearch={onSearch}
-        placeholder="Please enter @ to mention people"
-        itemTemplate={itemTemplate}
-    />)}
+<Controller name="value" control={form.control}
+    rules={{ required: 'Value is required.' }} render={({ field, fieldState }) => (
+        <Mention
+            id={field.name}
+            field="nickname"
+            {...field}
+            rows={5}
+            cols={40}
+            className={classNames({ 'p-invalid': fieldState.error })}
+            suggestions={suggestions}
+            onSearch={onSearch}
+            placeholder="Please enter @ to mention people"
+            itemTemplate={itemTemplate}
+        />)}
 />
         `,
         javascript: `
@@ -153,7 +150,7 @@ export default function HookFormDoc() {
 
         return (
             <div className="flex align-items-center">
-                <img alt={suggestion.name} src={src} width="32" style={{ verticalAlign: 'middle' }} />
+                <img alt={suggestion.name} src={src} width="32" />
                 <span className="flex flex-column ml-2">
                     {suggestion.name}
                     <small style={{ fontSize: '.75rem', color: 'var(--text-secondary-color)' }}>@{suggestion.nickname}</small>
@@ -258,7 +255,7 @@ export default function HookFormDoc() {
 
         return (
             <div className="flex align-items-center">
-                <img alt={suggestion.name} src={src} width="32" style={{ verticalAlign: 'middle' }} />
+                <img alt={suggestion.name} src={src} width="32" />
                 <span className="flex flex-column ml-2">
                     {suggestion.name}
                     <small style={{ fontSize: '.75rem', color: 'var(--text-secondary-color)' }}>@{suggestion.nickname}</small>

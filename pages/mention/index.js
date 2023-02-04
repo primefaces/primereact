@@ -2,16 +2,16 @@ import Head from 'next/head';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/mention/accessibilitydoc';
-import { AutoDoc } from '../../components/doc/mention/autodoc';
+import { AutoResizeDoc } from '../../components/doc/mention/autoresizedoc';
 import { BasicDoc } from '../../components/doc/mention/basicdoc';
 import { DisabledDoc } from '../../components/doc/mention/disableddoc';
 import { FloatLabelDoc } from '../../components/doc/mention/floatlabeldoc';
+import { FormikDoc } from '../../components/doc/mention/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/mention/form/hookformdoc';
 import { ImportDoc } from '../../components/doc/mention/importdoc';
 import { InvalidDoc } from '../../components/doc/mention/invaliddoc';
 import { StyleDoc } from '../../components/doc/mention/styledoc';
 import { TriggersDoc } from '../../components/doc/mention/triggersdoc';
-import { FormikDoc } from '../../components/doc/mention/validation/formikdoc';
-import { HookFormDoc } from '../../components/doc/mention/validation/hookformdoc';
 
 const MentionDemo = () => {
     const docs = [
@@ -26,9 +26,14 @@ const MentionDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'auto',
+            id: 'triggers',
+            label: 'Triggers',
+            component: TriggersDoc
+        },
+        {
+            id: 'autoresize',
             label: 'Auto Resize',
-            component: AutoDoc
+            component: AutoResizeDoc
         },
         {
             id: 'floatlabel',
@@ -36,19 +41,14 @@ const MentionDemo = () => {
             component: FloatLabelDoc
         },
         {
-            id: 'disabled',
-            label: 'Disabled',
-            component: DisabledDoc
-        },
-        {
             id: 'invalid',
             label: 'Invalid',
             component: InvalidDoc
         },
         {
-            id: 'triggers',
-            label: 'Triggers',
-            component: TriggersDoc
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
         },
         {
             id: 'form',
@@ -88,13 +88,13 @@ const MentionDemo = () => {
         <div>
             <Head>
                 <title>React Mention Component</title>
-                <meta name="description" content="Mention component is used to refer someone or something." />
+                <meta name="description" content="Mention component is used to tag objects in a text." />
             </Head>
             <div className="doc">
                 <div className="doc-main">
                     <div className="doc-intro">
                         <h1>Mention</h1>
-                        <p>Mention component is used to refer someone or something.</p>
+                        <p>Mention component is used to tag objects in a text.</p>
                     </div>
                     <DocSections docs={docs} />
                 </div>

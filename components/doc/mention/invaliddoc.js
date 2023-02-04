@@ -6,6 +6,7 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function InvalidDoc(props) {
+    const [value, setValue] = useState('');
     const [customers, setCustomers] = useState([]);
     const [suggestions, setSuggestions] = useState([]);
 
@@ -39,7 +40,7 @@ export function InvalidDoc(props) {
 
         return (
             <div className="flex align-items-center">
-                <img alt={suggestion.name} src={src} width="32" style={{ verticalAlign: 'middle' }} />
+                <img alt={suggestion.name} src={src} width="32" />
                 <span className="flex flex-column ml-2">
                     {suggestion.name}
                     <small style={{ fontSize: '.75rem', color: 'var(--text-secondary-color)' }}>@{suggestion.nickname}</small>
@@ -50,18 +51,19 @@ export function InvalidDoc(props) {
 
     const code = {
         basic: `
-<Mention inputClassName="p-invalid" suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people" rows={5} cols={40} itemTemplate={itemTemplate} />
+<Mention value={value} onChange={(e) => setValue(e.target.value)} suggestions={suggestions} onSearch={onSearch} field="nickname" 
+    placeholder="Enter @ to mention people" rows={5} cols={40} itemTemplate={itemTemplate} inputClassName="p-invalid" />
         `,
         javascript: `
 import React, { useState, useEffect } from "react";
 import { Mention } from 'primereact/mention';
 import { CustomerService } from './service/CustomerService';
 
-export default function InvalidDoc() {
+export default function InvalidDemo() {
+    const [value, setValue] = useState('');
     const [customers, setCustomers] = useState([]);
     const [suggestions, setSuggestions] = useState([]);
     
-
     useEffect(() => {
         CustomerService.getCustomersSmall().then(data => {
             data.forEach(d => d['nickname'] = \`\${d.name.replace(/\\s+/g, '').toLowerCase()}_\${d.id}\`);
@@ -93,7 +95,7 @@ export default function InvalidDoc() {
 
         return (
             <div className="flex align-items-center">
-                <img alt={suggestion.name} src={src} width="32" style={{verticalAlign: 'middle'}} />
+                <img alt={suggestion.name} src={src} width="32" />
                 <span className="flex flex-column ml-2">
                     {suggestion.name}
                     <small style={{ fontSize: '.75rem', color: 'var(--text-secondary-color)' }}>@{suggestion.nickname}</small>
@@ -104,21 +106,22 @@ export default function InvalidDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <Mention inputClassName="p-invalid" suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people" rows={5} cols={40} itemTemplate={itemTemplate} />
+            <Mention value={value} onChange={(e) => setValue(e.target.value)} suggestions={suggestions} onSearch={onSearch} field="nickname" 
+                placeholder="Enter @ to mention people" rows={5} cols={40} itemTemplate={itemTemplate} inputClassName="p-invalid" />
         </div>
     )
 }
         `,
         typescript: `
 import React, { useState, useEffect } from "react";
-import { Mention, MentionSearchParams } from 'primereact/mention';
+import { Mention, MentionSearchEvent } from 'primereact/mention';
 import { CustomerService } from './service/CustomerService';
 
-export default function InvalidDoc() {
+export default function InvalidDemo() {
+    const [value, setValue] = useState<string>('');
     const [customers, setCustomers] = useState<any>([]);
     const [suggestions, setSuggestions] = useState<any>([]);
     
-
     useEffect(() => {
         CustomerService.getCustomersSmall().then(data => {
             data.forEach(d => d['nickname'] = \`\${d.name.replace(/\\s+/g, '').toLowerCase()}_\${d.id}\`);
@@ -126,7 +129,7 @@ export default function InvalidDoc() {
         });
     }, [])
 
-    const onSearch = (event: MentionSearchParams) => {
+    const onSearch = (event: MentionSearchEvent) => {
         //in a real application, make a request to a remote url with the query and return suggestions, for demo we filter at client side
         setTimeout(() => {
             const query = event.query;
@@ -150,7 +153,7 @@ export default function InvalidDoc() {
 
         return (
             <div className="flex align-items-center">
-                <img alt={suggestion.name} src={src} width="32" style={{verticalAlign: 'middle'}} />
+                <img alt={suggestion.name} src={src} width="32" />
                 <span className="flex flex-column ml-2">
                     {suggestion.name}
                     <small style={{ fontSize: '.75rem', color: 'var(--text-secondary-color)' }}>@{suggestion.nickname}</small>
@@ -161,7 +164,8 @@ export default function InvalidDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <Mention inputClassName="p-invalid" suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people" rows={5} cols={40} itemTemplate={itemTemplate} />
+            <Mention value={value} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setValue(e.target.value)} suggestions={suggestions} onSearch={onSearch} field="nickname" 
+                placeholder="Enter @ to mention people" rows={5} cols={40} itemTemplate={itemTemplate} inputClassName="p-invalid" />
         </div>
     )
 }
@@ -193,11 +197,23 @@ export default function InvalidDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                {/* TO DO: Add demo content. IT'S WRITTEN WITH INPUTCLASSNAME  */}
-                <p></p>
+                <p>
+                    Invalid state style is added using the <i>p-invalid</i> class to indicate a failed validation.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Mention inputClassName="p-invalid" suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people" rows={5} cols={40} itemTemplate={itemTemplate} />
+                <Mention
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
+                    suggestions={suggestions}
+                    onSearch={onSearch}
+                    field="nickname"
+                    placeholder="Enter @ to mention people"
+                    rows={5}
+                    cols={40}
+                    itemTemplate={itemTemplate}
+                    inputClassName="p-invalid"
+                />
             </div>
             <DocSectionCode code={code} service={['CustomerService']} />
         </>

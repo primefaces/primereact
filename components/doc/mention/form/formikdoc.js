@@ -1,12 +1,12 @@
-import { useRef, useEffect, useState } from 'react';
 import { useFormik } from 'formik';
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { Button } from '../../../lib/button/Button';
+import { useEffect, useRef, useState } from 'react';
 import { CustomerService } from '../../../../service/CustomerService';
+import { Button } from '../../../lib/button/Button';
+import { Mention } from '../../../lib/mention/Mention';
 import { Toast } from '../../../lib/toast/Toast';
 import { classNames } from '../../../lib/utils/Utils';
-import { Mention } from '../../../lib/mention/Mention';
+import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function FormikDoc(props) {
     const toast = useRef(null);
@@ -115,7 +115,6 @@ import { CustomerService } from './service/CustomerService';
 import { Toast } from 'primereact/toast';
 import { classNames } from 'primereact/utils';
 import { Mention } from "primereact/mention";
-
 
 export default function FormikDoc() {
     const toast = useRef(null);
@@ -260,7 +259,7 @@ export default function FormikDoc() {
                     return customer.nickname.toLowerCase().startsWith(query.toLowerCase());
                 });
             }
-
+            
             setSuggestions(suggestions);
         }, 250);
     };
@@ -330,7 +329,7 @@ export default function FormikDoc() {
                             itemTemplate={itemTemplate}
                             className={classNames({ 'p-invalid': isFormFieldInvalid('item') })}
                             value={formik.values.item}
-                            onChange={(e) => {
+                            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
                                 formik.setFieldValue('item', e.target.value);
                             }}
                         />

@@ -6,6 +6,7 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function TriggersDoc(props) {
+    const [value, setValue] = useState('');
     const [customers, setCustomers] = useState([]);
     const [multipleSuggestions, setMultipleSuggestions] = useState([]);
     const tagSuggestions = ['primereact', 'primefaces', 'primeng', 'primevue'];
@@ -59,7 +60,7 @@ export function TriggersDoc(props) {
 
         return (
             <div className="flex align-items-center">
-                <img alt={suggestion.name} src={src} width="32" style={{ verticalAlign: 'middle' }} />
+                <img alt={suggestion.name} src={src} width="32" />
                 <span className="flex flex-column ml-2">
                     {suggestion.name}
                     <small style={{ fontSize: '.75rem', color: 'var(--text-secondary-color)' }}>@{suggestion.nickname}</small>
@@ -82,18 +83,19 @@ export function TriggersDoc(props) {
 
     const code = {
         basic: `
-<Mention suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people"  rows={5} cols={40} autoResize itemTemplate={itemTemplate} />
+<Mention value={value} onChange={(e) => setValue(e.target.value)} trigger={['@', '#']} suggestions={multipleSuggestions} onSearch={onMultipleSearch}
+    field={['nickname']} placeholder="Enter @ to mention people, # to mention tag" itemTemplate={multipleItemTemplate} rows={5} cols={40} />
         `,
         javascript: `
 import React, { useState, useEffect } from "react";
 import { Mention } from 'primereact/mention';
 import { CustomerService } from './service/CustomerService';
 
-export default function TriggersDoc() {
+export default function TriggersDemo() {
+    const [value, setValue] = useState('');
     const [customers, setCustomers] = useState([]);
     const [multipleSuggestions, setMultipleSuggestions]= useState([]);
     const tagSuggestions = ['primereact', 'primefaces', 'primeng', 'primevue'];
-    
 
     useEffect(() => {
         CustomerService.getCustomersSmall().then(data => {
@@ -147,7 +149,7 @@ export default function TriggersDoc() {
         
         return (
             <div className="flex align-items-center">
-                <img alt={suggestion.name} src={src}th="32" style={{verticalAlign: 'middle'}} />
+                <img alt={suggestion.name} src={src}th="32" />
                 <span className="flex flex-column ml-2">
                     {suggestion.name}
                     <small style={{ fontSize: '.75rem', color: 'var(--text-secondary-color)' }}>@{suggestion.nickname}</small>
@@ -170,21 +172,24 @@ export default function TriggersDoc() {
     }
 
     return (
-        <Mention suggestions={multipleSuggestions} onSearch={onMultipleSearch} field="nickname" placeholder="Please enter @ to mention people"  rows={5} cols={40} autoResize itemTemplate={itemTemplate} />
+        <div className="card flex justify-content-center">
+            <Mention value={value} onChange={(e) => setValue(e.target.value)} trigger={['@', '#']} suggestions={multipleSuggestions} onSearch={onMultipleSearch}
+                field={['nickname']} placeholder="Enter @ to mention people, # to mention tag" itemTemplate={multipleItemTemplate} rows={5} cols={40} />
+        </div>
     )
 }
         `,
         typescript: `
 import React, { useState, useEffect } from "react";
-import { Mention, MentionSearchParams, MentionItemTemplateOptions } from 'primereact/mention';
+import { Mention, MentionSearchEvent, MentionItemTemplateOptions } from 'primereact/mention';
 import { CustomerService } from './service/CustomerService';
 
-export default function TriggersDoc() {
+export default function TriggersDemo() {
+    const [value, setValue] = useState<string>('');
     const [customers, setCustomers] = useState<any>([]);
     const [multipleSuggestions, setMultipleSuggestions]= useState<any>([]);
     const tagSuggestions = ['primereact', 'primefaces', 'primeng', 'primevue'];
     
-
     useEffect(() => {
         CustomerService.getCustomersSmall().then(data => {
             data.forEach(d => d['nickname'] = \`\${d.name.replace(/\\s+/g, '').toLowerCase()}_\${d.id}\`);
@@ -192,7 +197,7 @@ export default function TriggersDoc() {
         });
     }, [])
 
-    const onMultipleSearch = (event: MentionSearchParams) => {
+    const onMultipleSearch = (event: MentionSearchEvent) => {
         const trigger = event.trigger;
 
         if (trigger === '@') {
@@ -237,7 +242,7 @@ export default function TriggersDoc() {
         
         return (
             <div className="flex align-items-center">
-                <img alt={suggestion.name} src={src}th="32" style={{verticalAlign: 'middle'}} />
+                <img alt={suggestion.name} src={src}th="32" />
                 <span className="flex flex-column ml-2">
                     {suggestion.name}
                     <small style={{ fontSize: '.75rem', color: 'var(--text-secondary-color)' }}>@{suggestion.nickname}</small>
@@ -260,8 +265,10 @@ export default function TriggersDoc() {
     }
 
     return (
-        <Mention suggestions={multipleSuggestions} onSearch={onMultipleSearch} field="nickname" placeholder="Please enter @ to mention people"  rows={5} cols={40} autoResize
-        itemTemplate={itemTemplate} />
+        <div className="card flex justify-content-center">
+            <Mention value={value} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setValue(e.target.value)} trigger={['@', '#']} suggestions={multipleSuggestions} onSearch={onMultipleSearch}
+                field={['nickname']} placeholder="Enter @ to mention people, # to mention tag" itemTemplate={multipleItemTemplate} rows={5} cols={40} />
+        </div>
     )
 }
         `,
@@ -296,11 +303,13 @@ export default function TriggersDoc() {
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Mention
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
                     trigger={['@', '#']}
                     suggestions={multipleSuggestions}
                     onSearch={onMultipleSearch}
                     field={['nickname']}
-                    placeholder="Please enter @ to mention people, # to mention tag"
+                    placeholder="Enter @ to mention people, # to mention tag"
                     itemTemplate={multipleItemTemplate}
                     rows={5}
                     cols={40}
