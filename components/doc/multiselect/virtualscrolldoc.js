@@ -103,7 +103,7 @@ export default function VirtualScrollDemo() {
                     <Link href="/virtualscroller">VirtualScroller</Link> for more information about the available options as it is used internally by MultiSelect.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center multiselect-demo">
+            <div className="card flex justify-content-center">
                 <MultiSelect
                     value={selectedItems}
                     options={items}
