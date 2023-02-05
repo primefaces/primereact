@@ -2,11 +2,11 @@ import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, ObjectUtils, UniqueComponentId } from '../utils/Utils';
-import { FieldsetDefaultProps } from './FieldsetBase';
+import { classNames, UniqueComponentId } from '../utils/Utils';
+import { FieldsetBase } from './FieldsetBase';
 
 export const Fieldset = React.forwardRef((inProps, ref) => {
-    const props = ObjectUtils.getProps(inProps, FieldsetDefaultProps);
+    const props = FieldsetBase.getProps(inProps);
 
     const [idState, setIdState] = React.useState(props.id);
     const [collapsedState, setCollapsedState] = React.useState(props.collapsed);
@@ -114,7 +114,7 @@ export const Fieldset = React.forwardRef((inProps, ref) => {
         getContent: () => contentRef.current
     }));
 
-    const otherProps = ObjectUtils.findDiffKeys(props, FieldsetDefaultProps);
+    const otherProps = FieldsetBase.getOtherProps(props);
     const className = classNames(
         'p-fieldset p-component',
         {

@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { classNames, ObjectUtils } from '../utils/Utils';
-import { BadgeDefaultProps } from './BadgeBase';
+import { BadgeBase } from './BadgeBase';
 
 export const Badge = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, BadgeDefaultProps);
+        const props = BadgeBase.getProps(inProps);
 
         const elementRef = React.useRef(null);
-        const otherProps = ObjectUtils.findDiffKeys(props, BadgeDefaultProps);
+        const otherProps = BadgeBase.getOtherProps(props);
         const className = classNames(
             'p-badge p-component',
             {

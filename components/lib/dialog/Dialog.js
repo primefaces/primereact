@@ -5,10 +5,10 @@ import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } f
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
-import { DialogDefaultProps } from './DialogBase';
+import { DialogBase } from './DialogBase';
 
 export const Dialog = React.forwardRef((inProps, ref) => {
-    const props = ObjectUtils.getProps(inProps, DialogDefaultProps);
+    const props = DialogBase.getProps(inProps);
 
     const uniqueId = props.id ? props.id : UniqueComponentId();
     const [idState, setIdState] = React.useState(uniqueId);
@@ -500,7 +500,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     };
 
     const createElement = () => {
-        const otherProps = ObjectUtils.findDiffKeys(props, DialogDefaultProps);
+        const otherProps = DialogBase.getOtherProps(props);
         const className = classNames('p-dialog p-component', props.className, {
             'p-dialog-rtl': props.rtl,
             'p-dialog-maximized': maximized,

@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
+import { ColumnBase } from '../column/ColumnBase';
 import { useEventListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { RowCheckbox } from './RowCheckbox';
 import { RowRadioButton } from './RowRadioButton';
 
@@ -18,7 +19,7 @@ export const BodyCell = React.memo((props) => {
     const tabindexTimeout = React.useRef(null);
     const initFocusTimeout = React.useRef(null);
 
-    const getColumnProp = (prop) => (props.column ? props.column.props[prop] : null);
+    const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
     const field = getColumnProp('field') || `field_${props.index}`;
     const editingKey = props.dataKey ? (props.rowData && props.rowData[props.dataKey]) || props.rowIndex : props.rowIndex;
 

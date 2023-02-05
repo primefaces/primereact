@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
-import { RatingDefaultProps } from './RatingBase';
+import { RatingBase } from './RatingBase';
 
 export const Rating = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, RatingDefaultProps);
+        const props = RatingBase.getProps(inProps);
 
         const elementRef = React.useRef(null);
         const enabled = !props.disabled && !props.readOnly;
@@ -94,7 +94,7 @@ export const Rating = React.memo(
         }));
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, RatingDefaultProps);
+        const otherProps = RatingBase.getOtherProps(props);
         const className = classNames(
             'p-rating',
             {

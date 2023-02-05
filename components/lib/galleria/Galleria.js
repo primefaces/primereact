@@ -5,13 +5,13 @@ import { useInterval, useUnmountEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { GalleriaDefaultProps } from './GalleriaBase';
+import { GalleriaBase } from './GalleriaBase';
 import { GalleriaItem } from './GalleriaItem';
 import { GalleriaThumbnails } from './GalleriaThumbnails';
 
 export const Galleria = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, GalleriaDefaultProps);
+        const props = GalleriaBase.getProps(inProps);
 
         const [visibleState, setVisibleState] = React.useState(false);
         const [numVisibleState, setNumVisibleState] = React.useState(props.numVisible);
@@ -136,7 +136,7 @@ export const Galleria = React.memo(
         };
 
         const createElement = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, GalleriaDefaultProps);
+            const otherProps = GalleriaBase.getOtherProps(props);
             const thumbnailsPosClassName = props.showThumbnails && getPositionClassName('p-galleria-thumbnails', props.thumbnailsPosition);
             const indicatorPosClassName = props.showIndicators && getPositionClassName('p-galleria-indicators', props.indicatorsPosition);
             const galleriaClassName = classNames(

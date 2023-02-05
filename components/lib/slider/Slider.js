@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { useEventListener } from '../hooks/Hooks';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
-import { SliderDefaultProps } from './SliderBase';
+import { SliderBase } from './SliderBase';
 
 export const Slider = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, SliderDefaultProps);
+        const props = SliderBase.getProps(inProps);
 
         const elementRef = React.useRef(null);
         const handleIndex = React.useRef(0);
@@ -247,7 +247,7 @@ export const Slider = React.memo(
             getElement: () => elementRef.current
         }));
 
-        const otherProps = ObjectUtils.findDiffKeys(props, SliderDefaultProps);
+        const otherProps = SliderBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames('p-slider p-component', props.className, {
             'p-disabled': props.disabled,

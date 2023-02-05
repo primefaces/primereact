@@ -1,14 +1,14 @@
 import * as React from 'react';
-import { classNames, ObjectUtils } from '../utils/Utils';
-import { DividerDefaultProps } from './DividerBase';
+import { classNames } from '../utils/Utils';
+import { DividerBase } from './DividerBase';
 
 export const Divider = React.forwardRef((inProps, ref) => {
-    const props = ObjectUtils.getProps(inProps, DividerDefaultProps);
+    const props = DividerBase.getProps(inProps);
 
     const elementRef = React.useRef(null);
     const horizontal = props.layout === 'horizontal';
     const vertical = props.layout === 'vertical';
-    const otherProps = ObjectUtils.findDiffKeys(props, DividerDefaultProps);
+    const otherProps = DividerBase.getOtherProps(props);
     const className = classNames(
         `p-divider p-component p-divider-${props.layout} p-divider-${props.type}`,
         {

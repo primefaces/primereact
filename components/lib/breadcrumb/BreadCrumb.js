@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
-import { BreadCrumbDefaultProps } from './BreadCrumbBase';
+import { BreadCrumbBase } from './BreadCrumbBase';
 
 export const BreadCrumb = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, BreadCrumbDefaultProps);
+        const props = BreadCrumbBase.getProps(inProps);
 
         const elementRef = React.useRef(null);
 
@@ -133,7 +133,7 @@ export const BreadCrumb = React.memo(
             getElement: () => elementRef.current
         }));
 
-        const otherProps = ObjectUtils.findDiffKeys(props, BreadCrumbDefaultProps);
+        const otherProps = BreadCrumbBase.getOtherProps(props);
         const className = classNames('p-breadcrumb p-component', props.className);
         const home = createHome();
         const items = createMenuitems();

@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
-import { InputSwitchDefaultProps } from './InputSwitchBase';
+import { InputSwitchBase } from './InputSwitchBase';
 
 export const InputSwitch = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, InputSwitchDefaultProps);
+        const props = InputSwitchBase.getProps(inProps);
 
         const [focusedState, setFocusedState] = React.useState(false);
         const elementRef = React.useRef(null);
@@ -63,7 +63,7 @@ export const InputSwitch = React.memo(
         }, [inputRef, props.inputRef]);
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, InputSwitchDefaultProps);
+        const otherProps = InputSwitchBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-inputswitch p-component',

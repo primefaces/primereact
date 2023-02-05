@@ -152,18 +152,18 @@ export default class ObjectUtils {
         return this.isFunction(obj) ? obj(...params) : obj;
     }
 
-    static getProps(inProps, defaultProps) {
-        return Object.assign({}, defaultProps, inProps);
+    static getProp(props, prop = '', defaultProps = {}) {
+        const value = props ? props[prop] : undefined;
+
+        return value === undefined ? defaultProps[prop] : value;
     }
 
-    static getProp(component, propertyName = '', defaultProperties = {}) {
-        if (this.isNotEmpty(component)) {
-            const value = component.props ? component.props[propertyName] : undefined;
+    static getMergedProps(props, defaultProps) {
+        return Object.assign({}, defaultProps, props);
+    }
 
-            return value === undefined ? defaultProperties[propertyName] : value;
-        }
-
-        return undefined;
+    static getDiffProps(props, defaultProps) {
+        return this.findDiffKeys(props, defaultProps);
     }
 
     static getPropValue(obj, ...params) {
@@ -174,6 +174,18 @@ export default class ObjectUtils {
         }
 
         return this.isFunction(obj) ? obj(...methodParams) : obj;
+    }
+
+    static getComponentProp(component, prop = '', defaultProps = {}) {
+        return this.isNotEmpty(component) ? this.getProp(component.props, prop, defaultProps) : undefined;
+    }
+
+    static getComponentProps(component, defaultProps) {
+        return this.isNotEmpty(component) ? this.getMergedProps(component.props, defaultProps) : undefined;
+    }
+
+    static getComponentDiffProps(component, defaultProps) {
+        return this.isNotEmpty(component) ? this.getDiffProps(component.props, defaultProps) : undefined;
     }
 
     static isValidChild(child, type, validTypes) {

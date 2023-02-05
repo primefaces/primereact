@@ -2,12 +2,12 @@ import * as React from 'react';
 import PrimeReact from '../api/Api';
 import { useEventListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { classNames, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { MenubarDefaultProps } from './MenubarBase';
+import { MenubarBase } from './MenubarBase';
 import { MenubarSub } from './MenubarSub';
 
 export const Menubar = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, MenubarDefaultProps);
+        const props = MenubarBase.getProps(inProps);
 
         const [mobileActiveState, setMobileActiveState] = React.useState(false);
         const elementRef = React.useRef(null);
@@ -95,7 +95,7 @@ export const Menubar = React.memo(
             return button;
         };
 
-        const otherProps = ObjectUtils.findDiffKeys(props, MenubarDefaultProps);
+        const otherProps = MenubarBase.getOtherProps(props);
         const className = classNames(
             'p-menubar p-component',
             {

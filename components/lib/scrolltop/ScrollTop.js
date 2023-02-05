@@ -3,12 +3,12 @@ import PrimeReact from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMountEffect, useUnmountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { ScrollTopDefaultProps } from './ScrollTopBase';
+import { classNames, DomHandler, IconUtils, ZIndexUtils } from '../utils/Utils';
+import { ScrollTopBase } from './ScrollTopBase';
 
 export const ScrollTop = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, ScrollTopDefaultProps);
+        const props = ScrollTopBase.getProps(inProps);
 
         const [visibleState, setVisibleState] = React.useState(false);
         const scrollElementRef = React.useRef(null);
@@ -72,7 +72,7 @@ export const ScrollTop = React.memo(
             ZIndexUtils.clear(scrollElementRef.current);
         });
 
-        const otherProps = ObjectUtils.findDiffKeys(props, ScrollTopDefaultProps);
+        const otherProps = ScrollTopBase.getOtherProps(props);
         const className = classNames(
             'p-scrolltop p-link p-component',
             {

@@ -1,15 +1,14 @@
 import * as React from 'react';
 import { TransitionGroup } from 'react-transition-group';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { ObjectUtils } from '../utils/Utils';
-import { MessagesDefaultProps } from './MessagesBase';
+import { MessagesBase } from './MessagesBase';
 import { UIMessage } from './UIMessage';
 
 let messageIdx = 0;
 
 export const Messages = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, MessagesDefaultProps);
+        const props = MessagesBase.getProps(inProps);
 
         const [messagesState, setMessagesState] = React.useState([]);
         const elementRef = React.useRef(null);
@@ -81,7 +80,7 @@ export const Messages = React.memo(
             getElement: () => elementRef.current
         }));
 
-        const otherProps = ObjectUtils.findDiffKeys(props, MessagesDefaultProps);
+        const otherProps = MessagesBase.getOtherProps(props);
 
         return (
             <div id={props.id} ref={elementRef} className={props.className} style={props.style} {...otherProps}>

@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { classNames, ObjectUtils } from '../utils/Utils';
-import { TimelineDefaultProps } from './TimelineBase';
+import { TimelineBase } from './TimelineBase';
 
 export const Timeline = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, TimelineDefaultProps);
+        const props = TimelineBase.getProps(inProps);
 
         const elementRef = React.useRef(null);
 
@@ -40,7 +40,7 @@ export const Timeline = React.memo(
             getElement: () => elementRef.current
         }));
 
-        const otherProps = ObjectUtils.findDiffKeys(props, TimelineDefaultProps);
+        const otherProps = TimelineBase.getOtherProps(props);
         const className = classNames(
             'p-timeline p-component',
             {

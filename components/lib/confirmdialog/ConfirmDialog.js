@@ -6,7 +6,7 @@ import { useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
-import { ConfirmDialogDefaultProps } from './ConfirmDialogBase';
+import { ConfirmDialogBase } from './ConfirmDialogBase';
 
 export const confirmDialog = (props = {}) => {
     props = { ...props, ...{ visible: props.visible === undefined ? true : props.visible } };
@@ -25,7 +25,7 @@ export const confirmDialog = (props = {}) => {
 
 export const ConfirmDialog = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, ConfirmDialogDefaultProps);
+        const props = ConfirmDialogBase.getProps(inProps);
 
         const [visibleState, setVisibleState] = React.useState(props.visible);
         const [reshowState, setReshowState] = React.useState(false);
@@ -138,7 +138,7 @@ export const ConfirmDialog = React.memo(
         const createElement = () => {
             const currentProps = getCurrentProps();
             const className = classNames('p-confirm-dialog', getPropValue('className'));
-            const otherProps = ObjectUtils.findDiffKeys(currentProps, ConfirmDialogDefaultProps);
+            const otherProps = ConfirmDialogBase.getOtherProps(currentProps);
             const message = ObjectUtils.getJSXElement(getPropValue('message'), currentProps);
             const icon = IconUtils.getJSXIcon(getPropValue('icon'), { className: 'p-confirm-dialog-icon' }, { props: currentProps });
             const footer = createFooter();

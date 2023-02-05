@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
-import { StepsDefaultProps } from './StepsBase';
+import { StepsBase } from './StepsBase';
 
 export const Steps = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, StepsDefaultProps);
+        const props = StepsBase.getProps(inProps);
 
         const elementRef = React.useRef(null);
 
@@ -99,7 +99,7 @@ export const Steps = React.memo(
             getElement: () => elementRef.current
         }));
 
-        const otherProps = ObjectUtils.findDiffKeys(props, StepsDefaultProps);
+        const otherProps = StepsBase.getOtherProps(props);
         const className = classNames(
             'p-steps p-component',
             {

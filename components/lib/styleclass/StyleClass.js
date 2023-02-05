@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { DomHandler, ObjectUtils } from '../utils/Utils';
-import { StyleClassDefaultProps } from './StyleClassBase';
+import { StyleClassBase } from './StyleClassBase';
 
 export const StyleClass = React.forwardRef((inProps, ref) => {
-    const props = ObjectUtils.getProps(inProps, StyleClassDefaultProps);
+    const props = StyleClassBase.getProps(inProps);
 
     const targetRef = React.useRef(null);
     const animating = React.useRef(false);

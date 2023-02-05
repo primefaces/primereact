@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { classNames, ObjectUtils } from '../utils/Utils';
-import { ProgressBarDefaultProps } from './ProgressBarBase';
+import { classNames } from '../utils/Utils';
+import { ProgressBarBase } from './ProgressBarBase';
 
 export const ProgressBar = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, ProgressBarDefaultProps);
+        const props = ProgressBarBase.getProps(inProps);
 
         const elementRef = React.useRef(null);
 
@@ -19,7 +19,7 @@ export const ProgressBar = React.memo(
         };
 
         const createDeterminate = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, ProgressBarDefaultProps);
+            const otherProps = ProgressBarBase.getOtherProps(props);
             const className = classNames('p-progressbar p-component p-progressbar-determinate', props.className);
             const label = createLabel();
 
@@ -33,7 +33,7 @@ export const ProgressBar = React.memo(
         };
 
         const createIndeterminate = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, ProgressBarDefaultProps);
+            const otherProps = ProgressBarBase.getOtherProps(props);
             const className = classNames('p-progressbar p-component p-progressbar-indeterminate', props.className);
 
             return (

@@ -6,12 +6,12 @@ import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, mask, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
-import { CalendarDefaultProps } from './CalendarBase';
+import { CalendarBase } from './CalendarBase';
 import { CalendarPanel } from './CalendarPanel';
 
 export const Calendar = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, CalendarDefaultProps);
+        const props = CalendarBase.getProps(inProps);
 
         const [focusedState, setFocusedState] = React.useState(false);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
@@ -3255,7 +3255,7 @@ export const Calendar = React.memo(
             return null;
         };
 
-        const otherProps = ObjectUtils.findDiffKeys(props, CalendarDefaultProps);
+        const otherProps = CalendarBase.getOtherProps(props);
         const className = classNames('p-calendar p-component p-inputwrapper', props.className, {
             [`p-calendar-w-btn p-calendar-w-btn-${props.iconPos}`]: props.showIcon,
             'p-calendar-disabled': props.disabled,

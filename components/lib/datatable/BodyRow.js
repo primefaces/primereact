@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ColumnBase } from '../column/ColumnBase';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { BodyCell } from './BodyCell';
 
@@ -6,13 +7,17 @@ export const BodyRow = React.memo((props) => {
     const [editingState, setEditingState] = React.useState(false);
     const editing = props.onRowEditChange ? props.editing : editingState;
 
+    const getColumnProp = (column, name) => ColumnBase.getCProp(column, name);
+
     const isFocusable = () => {
         return props.selectionMode && props.selectionModeInColumn !== 'single' && props.selectionModeInColumn !== 'multiple';
     };
 
     const isGrouped = (column) => {
-        if (props.groupRowsBy && getColumnProp(column, 'field')) {
-            return Array.isArray(props.groupRowsBy) ? props.groupRowsBy.indexOf(column.props.field) > -1 : props.groupRowsBy === column.props.field;
+        const columnField = getColumnProp(column, 'field');
+
+        if (props.groupRowsBy && columnField) {
+            return Array.isArray(props.groupRowsBy) ? props.groupRowsBy.indexOf(columnField) > -1 : props.groupRowsBy === columnField;
         }
 
         return false;
@@ -20,10 +25,6 @@ export const BodyRow = React.memo((props) => {
 
     const equals = (data1, data2) => {
         return props.compareSelectionBy === 'equals' ? data1 === data2 : ObjectUtils.equals(data1, data2, props.dataKey);
-    };
-
-    const getColumnProp = (col, prop) => {
-        return col ? col.props[prop] : null;
     };
 
     const getTabIndex = () => {

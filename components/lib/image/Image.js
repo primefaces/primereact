@@ -4,11 +4,11 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useUnmountEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { ImageDefaultProps } from './ImageBase';
+import { ImageBase } from './ImageBase';
 
 export const Image = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, ImageDefaultProps);
+        const props = ImageBase.getProps(inProps);
 
         const [maskVisibleState, setMaskVisibleState] = React.useState(false);
         const [previewVisibleState, setPreviewVisibleState] = React.useState(false);
@@ -167,7 +167,7 @@ export const Image = React.memo(
         }));
 
         const { src, alt, width, height } = props;
-        const otherProps = ObjectUtils.findDiffKeys(props, ImageDefaultProps);
+        const otherProps = ImageBase.getOtherProps(props);
         const containerClassName = classNames('p-image p-component', props.className, {
             'p-image-preview-container': props.preview
         });

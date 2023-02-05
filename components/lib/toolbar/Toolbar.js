@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { classNames, ObjectUtils } from '../utils/Utils';
-import { ToolbarDefaultProps } from './ToolbarBase';
+import { ToolbarBase } from './ToolbarBase';
 
 export const Toolbar = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, ToolbarDefaultProps);
+        const props = ToolbarBase.getProps(inProps);
 
         const elementRef = React.useRef(null);
-        const otherProps = ObjectUtils.findDiffKeys(props, ToolbarDefaultProps);
+        const otherProps = ToolbarBase.getOtherProps(props);
         const toolbarClass = classNames('p-toolbar p-component', props.className);
         const start = ObjectUtils.getJSXElement(props.left || props.start, props);
         const center = ObjectUtils.getJSXElement(props.center, props);

@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
-import { TreeDefaultProps } from './TreeBase';
+import { TreeBase } from './TreeBase';
 import { UITreeNode } from './UITreeNode';
 
 export const Tree = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, TreeDefaultProps);
+        const props = TreeBase.getProps(inProps);
 
         const [filterValueState, setFilterValueState] = React.useState('');
         const [expandedKeysState, setExpandedKeysState] = React.useState(props.expandedKeys);
@@ -448,7 +448,7 @@ export const Tree = React.memo(
             return <div className="p-tree-footer">{content}</div>;
         };
 
-        const otherProps = ObjectUtils.findDiffKeys(props, TreeDefaultProps);
+        const otherProps = TreeBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames('p-tree p-component', props.className, {
             'p-tree-selectable': props.selectionMode,

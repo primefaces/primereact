@@ -2,11 +2,11 @@ import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
-import { ButtonDefaultProps } from './ButtonBase';
+import { ButtonBase } from './ButtonBase';
 
 export const Button = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, ButtonDefaultProps);
+        const props = ButtonBase.getProps(inProps);
 
         const elementRef = React.useRef(ref);
 
@@ -49,7 +49,7 @@ export const Button = React.memo(
         const disabled = props.disabled || props.loading;
         const showTooltip = !disabled || (props.tooltipOptions && props.tooltipOptions.showOnDisabled);
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip) && showTooltip;
-        const otherProps = ObjectUtils.findDiffKeys(props, ButtonDefaultProps);
+        const otherProps = ButtonBase.getOtherProps(props);
         const className = classNames('p-button p-component', props.className, {
             'p-button-icon-only': (props.icon || (props.loading && props.loadingIcon)) && !props.label && !props.children,
             'p-button-vertical': (props.iconPos === 'top' || props.iconPos === 'bottom') && props.label,

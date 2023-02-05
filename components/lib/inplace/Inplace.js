@@ -2,13 +2,13 @@ import * as React from 'react';
 import { localeOption } from '../api/Api';
 import { Button } from '../button/Button';
 import { classNames, ObjectUtils } from '../utils/Utils';
-import { InplaceContentDefaultProps, InplaceDefaultProps, InplaceDisplayDefaultProps } from './InplaceBase';
+import { InplaceBase, InplaceContentBase, InplaceDisplayBase } from './InplaceBase';
 
 export const InplaceDisplay = (props) => props.children;
 export const InplaceContent = (props) => props.children;
 
 export const Inplace = React.forwardRef((inProps, ref) => {
-    const props = ObjectUtils.getProps(inProps, InplaceDefaultProps);
+    const props = InplaceBase.getProps(inProps);
 
     const [activeState, setActiveState] = React.useState(props.active);
     const elementRef = React.useRef(null);
@@ -52,7 +52,7 @@ export const Inplace = React.forwardRef((inProps, ref) => {
     };
 
     const createDisplay = (content) => {
-        const otherProps = ObjectUtils.findDiffKeys(content.props, InplaceDisplayDefaultProps);
+        const otherProps = InplaceDisplayBase.getOtherProps(content);
         const className = classNames('p-inplace-display', {
             'p-disabled': props.disabled
         });
@@ -73,7 +73,7 @@ export const Inplace = React.forwardRef((inProps, ref) => {
     };
 
     const createContent = (content) => {
-        const otherProps = ObjectUtils.findDiffKeys(content.props, InplaceContentDefaultProps);
+        const otherProps = InplaceContentBase.getOtherProps(content);
         const closeButton = createCloseButton();
 
         return (
@@ -101,7 +101,7 @@ export const Inplace = React.forwardRef((inProps, ref) => {
         getElement: () => elementRef.current
     }));
 
-    const otherProps = ObjectUtils.findDiffKeys(props, InplaceDefaultProps);
+    const otherProps = InplaceBase.getOtherProps(props);
     const children = createChildren();
     const className = classNames(
         'p-inplace p-component',
