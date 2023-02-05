@@ -21,7 +21,10 @@ export function DocSections({ docs }) {
                                     <a id={doc.id}>#</a>
                                 </Link>
                             </h2>
-                            <div className={classNames('doc-section-description main')}>{doc.description || 'Section Content'}</div>
+                            <div className={classNames('doc-section-description')}>
+                                <p>{doc.description || 'Section Content'}</p>
+                            </div>
+                            {doc.content}
                         </div>
                     ) : null}
                     {doc.component && !doc.doc && <Comp id={doc.id} label={doc.label} />}

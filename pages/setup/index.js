@@ -195,14 +195,6 @@ primereact/resources/themes/arya-blue/theme.css
 primereact/resources/themes/arya-green/theme.css
 primereact/resources/themes/arya-orange/theme.css
 primereact/resources/themes/arya-purple/theme.css
-primereact/resources/themes/nova/theme.css
-primereact/resources/themes/nova-alt/theme.css
-primereact/resources/themes/nova-accent/theme.css
-primereact/resources/themes/luna-amber/theme.css
-primereact/resources/themes/luna-blue/theme.css
-primereact/resources/themes/luna-green/theme.css
-primereact/resources/themes/luna-pink/theme.css
-primereact/resources/themes/rhea/theme.css
 `}
                     </CodeHighlight>
                 </div>
