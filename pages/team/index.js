@@ -2,7 +2,7 @@ import React from 'react';
 
 const TemplatesPage = () => {
     return (
-        <div className="content-section">
+        <div>
             <div className="doc-intro">
                 <h1>Meet the Team</h1>
                 <p>
