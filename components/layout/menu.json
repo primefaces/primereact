@@ -505,6 +505,18 @@
                     "to": "/hooks/usecounter"
                 },
                 {
+                    "name": "useEventListener",
+                    "to": "/hooks/useeventlistener"
+                },
+                {
+                    "name": "useFavicon",
+                    "to": "/hooks/usefavicon"
+                },
+                {
+                    "name": "useMountEffect",
+                    "to": "/hooks/usemounteffect"
+                },
+                {
                     "name": "useMouse",
                     "to": "/hooks/usemouse"
                 },
@@ -519,10 +531,6 @@
                 {
                     "name": "useInterval",
                     "to": "/hooks/useinterval"
-                },
-                {
-                    "name": "useFavicon",
-                    "to": "/hooks/usefavicon"
                 }
             ]
         },
