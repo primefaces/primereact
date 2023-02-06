@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { useEventListener } from '../hooks/Hooks';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
-import { getPanelProp, SplitterDefaultProps, SplitterPanelDefaultProps } from './SplitterBase';
+import { SplitterBase, SplitterPanelBase } from './SplitterBase';
 
 export const SplitterPanel = () => {};
 
 export const Splitter = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, SplitterDefaultProps);
+        const props = SplitterBase.getProps(inProps);
 
         const elementRef = React.useRef(null);
         const gutterRef = React.useRef();
@@ -44,6 +44,10 @@ export const Splitter = React.memo(
         const unbindMouseListeners = () => {
             unbindDocumentMouseMoveListener();
             unbindDocumentMouseUpListener();
+        };
+
+        const getPanelProp = (panel, name) => {
+            return SplitterPanelBase.getCProp(panel, name);
         };
 
         const validateResize = (newPrevPanelSize, newNextPanelSize) => {
@@ -202,7 +206,7 @@ export const Splitter = React.memo(
         }, [restoreState, isStateful]);
 
         const createPanel = (panel, index) => {
-            const otherProps = ObjectUtils.findDiffKeys(panel.props, SplitterPanelDefaultProps);
+            const otherProps = SplitterPanelBase.getCOtherProps(panel);
             const panelClassName = classNames('p-splitter-panel', getPanelProp(panel, 'className'));
             const gutterStyle = props.layout === 'horizontal' ? { width: props.gutterSize + 'px' } : { height: props.gutterSize + 'px' };
             const gutter = index !== props.children.length - 1 && (
@@ -235,7 +239,7 @@ export const Splitter = React.memo(
             return React.Children.map(props.children, createPanel);
         };
 
-        const otherProps = ObjectUtils.findDiffKeys(props, SplitterDefaultProps);
+        const otherProps = SplitterBase.getOtherProps(props);
         const className = classNames(`p-splitter p-component p-splitter-${props.layout}`, props.className);
         const panels = createPanels();
 

@@ -6,7 +6,7 @@ import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { ConfirmPopupDefaultProps } from './ConfirmPopupBase';
+import { ConfirmPopupBase } from './ConfirmPopupBase';
 
 export const confirmPopup = (props = {}) => {
     props = { ...props, ...{ visible: props.visible === undefined ? true : props.visible } };
@@ -25,7 +25,7 @@ export const confirmPopup = (props = {}) => {
 
 export const ConfirmPopup = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, ConfirmPopupDefaultProps);
+        const props = ConfirmPopupBase.getProps(inProps);
 
         const [visibleState, setVisibleState] = React.useState(props.visible);
         const [reshowState, setReshowState] = React.useState(false);
@@ -243,7 +243,7 @@ export const ConfirmPopup = React.memo(
         };
 
         const createElement = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, ConfirmPopupDefaultProps);
+            const otherProps = ConfirmPopupBase.getOtherProps(props);
             const className = classNames('p-confirm-popup p-component', getPropValue('className'), {
                 'p-input-filled': PrimeReact.inputStyle === 'filled',
                 'p-ripple-disabled': PrimeReact.ripple === false

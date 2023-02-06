@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
-import { AvatarDefaultProps } from './AvatarBase';
+import { AvatarBase } from './AvatarBase';
 
 export const Avatar = React.forwardRef((inProps, ref) => {
-    const props = ObjectUtils.getProps(inProps, AvatarDefaultProps);
+    const props = AvatarBase.getProps(inProps);
 
     const elementRef = React.useRef(null);
     const [imageFailed, setImageFailed] = React.useState(false);
@@ -40,7 +40,7 @@ export const Avatar = React.forwardRef((inProps, ref) => {
         getElement: () => elementRef.current
     }));
 
-    const otherProps = ObjectUtils.findDiffKeys(props, AvatarDefaultProps);
+    const otherProps = AvatarBase.getOtherProps(props);
     const containerClassName = classNames(
         'p-avatar p-component',
         {

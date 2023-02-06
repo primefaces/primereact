@@ -124,6 +124,10 @@ export interface MultiStateCheckboxProps extends Omit<React.DetailedHTMLProps<Re
      */
     optionLabel?: string | undefined;
     /**
+     * Property name to use as the icon of an option, defaults to the icon property.
+     */
+    optionIcon?: string | undefined;
+    /**
      * Template of icon for the selected option.
      */
     iconTemplate?: React.ReactNode | ((options: MultiStateCheckboxIconTemplateEvent) => React.ReactNode);
@@ -173,7 +177,7 @@ export interface MultiStateCheckboxProps extends Omit<React.DetailedHTMLProps<Re
  *
  * [Live Demo](https://www.primefaces.org/primereact/multistatecheckbox/)
  * --- ---
- * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

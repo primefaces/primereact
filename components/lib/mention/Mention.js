@@ -7,11 +7,11 @@ import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { MentionDefaultProps } from './MentionBase';
+import { MentionBase } from './MentionBase';
 
 export const Mention = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, MentionDefaultProps);
+        const props = MentionBase.getProps(inProps);
 
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const [focusedState, setFocusedState] = React.useState(false);
@@ -423,7 +423,7 @@ export const Mention = React.memo(
             props.className
         );
         const inputClassName = classNames('p-mention-input', props.inputClassName);
-        const inputProps = ObjectUtils.findDiffKeys(props, MentionDefaultProps);
+        const inputProps = MentionBase.getOtherProps(props);
         const panel = createPanel();
 
         return (

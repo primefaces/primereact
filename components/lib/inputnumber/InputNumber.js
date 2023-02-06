@@ -4,11 +4,11 @@ import { InputText } from '../inputtext/InputText';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
-import { InputNumberDefaultProps } from './InputNumberBase';
+import { InputNumberBase } from './InputNumberBase';
 
 export const InputNumber = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, InputNumberDefaultProps);
+        const props = InputNumberBase.getProps(inProps);
 
         const [focusedState, setFocusedState] = React.useState(false);
         const elementRef = React.useRef(null);
@@ -1102,7 +1102,7 @@ export const InputNumber = React.memo(
         };
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, InputNumberDefaultProps);
+        const otherProps = InputNumberBase.getOtherProps(props);
         const dataProps = ObjectUtils.reduceKeys(otherProps, DomHandler.DATA_PROPS);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(

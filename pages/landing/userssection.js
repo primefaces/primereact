@@ -8,62 +8,62 @@ const UsersSection = (props) => {
             <div className="grid mt-7">
                 <div className="col-6 md:col-4 lg:col-3 xl:col-2 flex justify-content-center p-3">
                     <div className="box w-10rem h-10rem flex justify-content-center align-items-center bg-transparent">
-                        <img src={`/images/landing-new/whouses/fox-${colorScheme}.svg`} alt="fox logo" />
+                        <img src={`https://primefaces.org/cdn/primereact/images/landing-new/whouses/fox-${colorScheme}.svg`} alt="fox logo" />
                     </div>
                 </div>
                 <div className="col-6 md:col-4 lg:col-3 xl:col-2 flex justify-content-center p-3">
                     <div className="box w-10rem h-10rem flex justify-content-center align-items-center bg-transparent">
-                        <img src={`/images/landing-new/whouses/airbus-${colorScheme}.svg`} alt="airbus logo" />
+                        <img src={`https://primefaces.org/cdn/primereact/images/landing-new/whouses/airbus-${colorScheme}.svg`} alt="airbus logo" />
                     </div>
                 </div>
                 <div className="col-6 md:col-4 lg:col-3 xl:col-2 flex justify-content-center p-3">
                     <div className="box w-10rem h-10rem flex justify-content-center align-items-center bg-transparent">
-                        <img src={`/images/landing-new/whouses/mercedes-${colorScheme}.svg`} alt="mercedes logo" />
+                        <img src={`https://primefaces.org/cdn/primereact/images/landing-new/whouses/mercedes-${colorScheme}.svg`} alt="mercedes logo" />
                     </div>
                 </div>
                 <div className="col-6 md:col-4 lg:col-3 xl:col-2 flex justify-content-center p-3">
                     <div className="box w-10rem h-10rem flex justify-content-center align-items-center bg-transparent">
-                        <img src={`/images/landing-new/whouses/ebay-${colorScheme}.svg`} alt="ebay logo" />
+                        <img src={`https://primefaces.org/cdn/primereact/images/landing-new/whouses/ebay-${colorScheme}.svg`} alt="ebay logo" />
                     </div>
                 </div>
                 <div className="col-6 md:col-4 lg:col-3 xl:col-2 flex justify-content-center p-3">
                     <div className="box w-10rem h-10rem flex justify-content-center align-items-center bg-transparent">
-                        <img src={`/images/landing-new/whouses/ford-${colorScheme}.svg`} alt="ford logo" />
+                        <img src={`https://primefaces.org/cdn/primereact/images/landing-new/whouses/ford-${colorScheme}.svg`} alt="ford logo" />
                     </div>
                 </div>
                 <div className="col-6 md:col-4 lg:col-3 xl:col-2 flex justify-content-center p-3">
                     <div className="box w-10rem h-10rem flex justify-content-center align-items-center bg-transparent">
-                        <img src={`/images/landing-new/whouses/vw-${colorScheme}.svg`} alt="volkswage logo" />
+                        <img src={`https://primefaces.org/cdn/primereact/images/landing-new/whouses/vw-${colorScheme}.svg`} alt="volkswage logo" />
                     </div>
                 </div>
                 <div className="col-6 md:col-4 lg:col-3 xl:col-2 flex justify-content-center p-3">
                     <div className="box w-10rem h-10rem flex justify-content-center align-items-center bg-transparent">
-                        <img src={`/images/landing-new/whouses/intel-${colorScheme}.svg`} alt="intel logo" />
+                        <img src={`https://primefaces.org/cdn/primereact/images/landing-new/whouses/intel-${colorScheme}.svg`} alt="intel logo" />
                     </div>
                 </div>
                 <div className="col-6 md:col-4 lg:col-3 xl:col-2 flex justify-content-center p-3">
                     <div className="box w-10rem h-10rem flex justify-content-center align-items-center bg-transparent">
-                        <img src={`/images/landing-new/whouses/unicredit-${colorScheme}.svg`} alt="unicredit logo" />
+                        <img src={`https://primefaces.org/cdn/primereact/images/landing-new/whouses/unicredit-${colorScheme}.svg`} alt="unicredit logo" />
                     </div>
                 </div>
                 <div className="col-6 md:col-4 lg:col-3 xl:col-2 flex justify-content-center p-3">
                     <div className="box w-10rem h-10rem flex justify-content-center align-items-center bg-transparent">
-                        <img src={`/images/landing-new/whouses/lufthansa-${colorScheme}.svg`} alt="lufthansa logo" />
+                        <img src={`https://primefaces.org/cdn/primereact/images/landing-new/whouses/lufthansa-${colorScheme}.svg`} alt="lufthansa logo" />
                     </div>
                 </div>
                 <div className="col-6 md:col-4 lg:col-3 xl:col-2 flex justify-content-center p-3">
                     <div className="box w-10rem h-10rem flex justify-content-center align-items-center bg-transparent">
-                        <img src={`/images/landing-new/whouses/nvidia-${colorScheme}.svg`} alt="nvidia logo" />
+                        <img src={`https://primefaces.org/cdn/primereact/images/landing-new/whouses/nvidia-${colorScheme}.svg`} alt="nvidia logo" />
                     </div>
                 </div>
                 <div className="col-6 md:col-4 lg:col-3 xl:col-2 flex justify-content-center p-3">
                     <div className="box w-10rem h-10rem flex justify-content-center align-items-center bg-transparent">
-                        <img src={`/images/landing-new/whouses/verizon-${colorScheme}.svg`} alt="verizon logo" />
+                        <img src={`https://primefaces.org/cdn/primereact/images/landing-new/whouses/verizon-${colorScheme}.svg`} alt="verizon logo" />
                     </div>
                 </div>
                 <div className="col-6 md:col-4 lg:col-3 xl:col-2 flex justify-content-center p-3">
                     <div className="box w-10rem h-10rem flex justify-content-center align-items-center bg-transparent">
-                        <img src={`/images/landing-new/whouses/amex-${colorScheme}.svg`} alt="american express logo" />
+                        <img src={`https://primefaces.org/cdn/primereact/images/landing-new/whouses/amex-${colorScheme}.svg`} alt="american express logo" />
                     </div>
                 </div>
             </div>

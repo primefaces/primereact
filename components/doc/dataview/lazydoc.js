@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { DataView, DataViewLayoutOptions } from '../../lib/dataview/DataView';
-import { Button } from '../../lib/button/Button';
-import { Rating } from '../../lib/rating/Rating';
+import React, { useEffect, useRef, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
+import { Button } from '../../lib/button/Button';
+import { DataView, DataViewLayoutOptions } from '../../lib/dataview/DataView';
+import { Rating } from '../../lib/rating/Rating';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
@@ -55,7 +55,7 @@ export function LazyDataViewDoc(props) {
         return (
             <div className="col-12">
                 <div className="flex flex-column align-items-center p-3 w-full md:flex-row">
-                    <img className="md:w-11rem w-9 shadow-2 md:my-0 md:mr-5 mr-0 my-5" src={`/images/product/${data.image}`} alt={data.name} />
+                    <img className="md:w-11rem w-9 shadow-2 md:my-0 md:mr-5 mr-0 my-5" src={`https://primefaces.org/cdn/primereact/images/product/${data.image}`} alt={data.name} />
                     <div className="text-center md:text-left md:flex-1">
                         <div className="text-2xl font-bold">{data.name}</div>
                         <div className="mb-3">{data.description}</div>
@@ -85,7 +85,7 @@ export function LazyDataViewDoc(props) {
                         <span className={`product-badge status-${data.inventoryStatus.toLowerCase()}`}>{data.inventoryStatus}</span>
                     </div>
                     <div className="text-center">
-                        <img className="w-9 my-5 shadow-3" src={`/images/product/${data.image}`} alt={data.name} />
+                        <img className="w-9 my-5 shadow-3" src={`https://primefaces.org/cdn/primereact/images/product/${data.image}`} alt={data.name} />
                         <div className="text-2xl font-bold">{data.name}</div>
                         <div className="mb-3">{data.description}</div>
                         <Rating className="mb-2" value={data.rating} readOnly cancel={false}></Rating>
@@ -185,7 +185,7 @@ export default function LazyDataViewDoc() {
         return (
             <div className="col-12">
                 <div className="flex flex-column align-items-center p-3 w-full md:flex-row">
-                    <img className="md:w-11rem w-9 shadow-2 md:my-0 md:mr-5 mr-0 my-5" src={\`https://primereact.org/images/product/\${data.image}\`}  alt={data.name} />
+                    <img className="md:w-11rem w-9 shadow-2 md:my-0 md:mr-5 mr-0 my-5" src={\`https://primefaces.org/cdn/primereact/images/product/\${data.image}\`}  alt={data.name} />
                     <div className="text-center md:text-left md:flex-1">
                         <div className="text-2xl font-bold">{data.name}</div>
                         <div className="mb-3">{data.description}</div>
@@ -215,7 +215,7 @@ export default function LazyDataViewDoc() {
                         <span className={\`product-badge status-\${data.inventoryStatus.toLowerCase()}\`}>{data.inventoryStatus}</span>
                     </div>
                     <div className="text-center">
-                        <img className="w-9 my-5 shadow-3" src={\`https://primereact.org/images/product/\${data.image}\`}  alt={data.name} />
+                        <img className="w-9 my-5 shadow-3" src={\`https://primefaces.org/cdn/primereact/images/product/\${data.image}\`}  alt={data.name} />
                         <div className="text-2xl font-bold">{data.name}</div>
                         <div className="mb-3">{data.description}</div>
                         <Rating className="mb-2" value={data.rating} readOnly cancel={false}></Rating>
@@ -320,7 +320,7 @@ export default function LazyDataViewDoc() {
         return (
             <div className="col-12">
                 <div className="flex flex-column align-items-center p-3 w-full md:flex-row">
-                    <img className="md:w-11rem w-9 shadow-2 md:my-0 md:mr-5 mr-0 my-5" src={\`https://primereact.org/images/product/\${data.image}\`}  alt={data.name} />
+                    <img className="md:w-11rem w-9 shadow-2 md:my-0 md:mr-5 mr-0 my-5" src={\`https://primefaces.org/cdn/primereact/images/product/\${data.image}\`}  alt={data.name} />
                     <div className="text-center md:text-left md:flex-1">
                         <div className="text-2xl font-bold">{data.name}</div>
                         <div className="mb-3">{data.description}</div>
@@ -350,7 +350,7 @@ export default function LazyDataViewDoc() {
                         <span className={\`product-badge status-\${data.inventoryStatus.toLowerCase()}\`}>{data.inventoryStatus}</span>
                     </div>
                     <div className="text-center">
-                        <img className="w-9 my-5 shadow-3" src={\`https://primereact.org/images/product/\${data.image}\`}  alt={data.name} />
+                        <img className="w-9 my-5 shadow-3" src={\`https://primefaces.org/cdn/primereact/images/product/\${data.image}\`}  alt={data.name} />
                         <div className="text-2xl font-bold">{data.name}</div>
                         <div className="mb-3">{data.description}</div>
                         <Rating className="mb-2" value={data.rating} readOnly cancel={false}></Rating>

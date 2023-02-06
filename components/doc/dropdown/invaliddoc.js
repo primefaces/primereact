@@ -4,7 +4,7 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function InvalidDoc(props) {
-    const [value, setValue] = useState(null);
+    const [selectedCity, setSelectedCity] = useState(null);
     const cities = [
         { name: 'New York', code: 'NY' },
         { name: 'Rome', code: 'RM' },
@@ -15,16 +15,15 @@ export function InvalidDoc(props) {
 
     const code = {
         basic: `
-<Dropdown inputId="dropdown" value={value} options={cities} onChange={(e) => setValue(e.value)} optionLabel="name" className='p-invalid'/>
-<label htmlFor="dropdown">Dropdown</label>
+<Dropdown value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" 
+    placeholder="Select a City" className="p-invalid w-full md:w-14rem" />
         `,
         javascript: `
 import React, { useState } from "react";
 import { Dropdown } from 'primereact/dropdown';
-import './DropdownDemo.css';
 
-export default function InvalidDoc() {
-    const [value, setValue] = useState(null);
+export default function InvalidDemo() {
+    const [selectedCity, setSelectedCity] = useState(null);
     const cities = [
         { name: 'New York', code: 'NY' },
         { name: 'Rome', code: 'RM' },
@@ -34,23 +33,25 @@ export default function InvalidDoc() {
     ];
 
     return (
-        <div className="card flex justify-content-center dropdown-demo">
-            <span className="p-float-label">
-                <Dropdown inputId="dropdown" value={value} options={cities} onChange={(e) => setValue(e.value)} optionLabel="name" className='p-invalid'/>
-                <label htmlFor="dropdown">Dropdown</label>
-            </span>
+        <div className="card flex justify-content-center">
+            <Dropdown value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" 
+                placeholder="Select a City" className="p-invalid w-full md:w-14rem" />
         </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { Dropdown } from 'primereact/dropdown';
-import './DropdownDemo.css';
+import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 
-export default function InvalidDoc() {
-    const [value, setValue] = useState(null);
-    const cities = [
+interface City {
+    name: string;
+    code: string;
+}
+
+export default function InvalidDemo() {
+    const [selectedCity, setSelectedCity] = useState<City | null>(null);
+    const cities: City[] = [
         { name: 'New York', code: 'NY' },
         { name: 'Rome', code: 'RM' },
         { name: 'London', code: 'LDN' },
@@ -59,37 +60,24 @@ export default function InvalidDoc() {
     ];
 
     return (
-        <div className="card flex justify-content-center dropdown-demo">
-            <span className="p-float-label">
-                <Dropdown inputId="dropdown" value={value} options={cities} onChange={(e) => setValue(e.value)} optionLabel="name" className='p-invalid'/>
-                <label htmlFor="dropdown">Dropdown</label>
-            </span>
+        <div className="card flex justify-content-center">
+            <Dropdown value={selectedCity} onChange={(e: DropdownChangeEvent) => setSelectedCity(e.value)} options={cities} optionLabel="name" 
+                placeholder="Select a City" className="p-invalid w-full md:w-14rem" />
         </div>
     )
 }
-        `,
-        extFiles: {
-            'DropdownDemo.css': `
-/* DropdownDemo.css */
-
-.dropdown-demo .p-dropdown {
-    width: 14rem;
-}
         `
-        }
     };
 
     return (
         <>
             <DocSectionText {...props}>
-                {/* To Do:  */}
-                <p></p>
+                <p>
+                    Invalid state style is added using the <i>p-invalid</i> class to indicate a failed validation.
+                </p>
             </DocSectionText>
-            <div className="card flex justify-content-center dropdown-demo">
-                <span className="p-float-label">
-                    <Dropdown inputId="dropdown" value={value} options={cities} onChange={(e) => setValue(e.value)} optionLabel="name" className="p-invalid" />
-                    <label htmlFor="dropdown">Dropdown</label>
-                </span>
+            <div className="card flex justify-content-center">
+                <Dropdown value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" placeholder="Select a City" className="p-invalid w-full md:w-14rem" />
             </div>
             <DocSectionCode code={code} />
         </>

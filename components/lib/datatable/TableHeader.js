@@ -1,5 +1,8 @@
 import * as React from 'react';
+import { ColumnBase } from '../column/ColumnBase';
+import { ColumnGroupBase } from '../columngroup/ColumnGroupBase';
 import { useMountEffect } from '../hooks/Hooks';
+import { RowBase } from '../row/RowBase';
 import { classNames } from '../utils/Utils';
 import { ColumnFilter } from './ColumnFilter';
 import { HeaderCell } from './HeaderCell';
@@ -12,8 +15,12 @@ export const TableHeader = React.memo((props) => {
     const isMultipleSort = props.sortMode === 'multiple';
     const isAllSortableDisabled = isSingleSort && allSortableDisabledState;
 
+    const getColumnProp = (column, name) => {
+        return ColumnBase.getCProp(column, name);
+    };
+
     const isColumnSorted = (column) => {
-        return props.sortField !== null ? column.props.field === props.sortField || column.props.sortField === props.sortField : false;
+        return props.sortField !== null ? getColumnProp(column, 'field') === props.sortField || getColumnProp(column, 'sortField') === props.sortField : false;
     };
 
     const updateSortableDisabled = () => {
@@ -22,8 +29,8 @@ export const TableHeader = React.memo((props) => {
             let allSortableDisabled = false;
 
             props.columns.forEach((column) => {
-                if (column.props.sortableDisabled) {
-                    sortableDisabledFields.push(column.props.sortField || column.props.field);
+                if (getColumnProp(column, 'sortableDisabled')) {
+                    sortableDisabledFields.push(getColumnProp(column, 'sortField') || getColumnProp(column, 'field'));
 
                     if (!allSortableDisabled && isColumnSorted(column)) {
                         allSortableDisabled = true;
@@ -49,15 +56,15 @@ export const TableHeader = React.memo((props) => {
     });
 
     const createGroupHeaderCells = (row) => {
-        const columns = React.Children.toArray(row.props.children);
+        const columns = React.Children.toArray(RowBase.getCProp(row, 'children'));
 
         return createHeaderCells(columns);
     };
 
     const createHeaderCells = (columns) => {
         return React.Children.map(columns, (col, i) => {
-            const isVisible = col ? !col.props.hidden : true;
-            const key = col ? col.props.columnKey || col.props.field || i : i;
+            const isVisible = col ? !getColumnProp(col, 'hidden') : true;
+            const key = col ? getColumnProp(col, 'columnKey') || getColumnProp(col, 'field') || i : i;
 
             return (
                 isVisible && (
@@ -122,10 +129,10 @@ export const TableHeader = React.memo((props) => {
 
     const createFilterCells = () => {
         return React.Children.map(props.columns, (col, i) => {
-            const isVisible = !col.props.hidden;
+            const isVisible = !getColumnProp(col, 'hidden');
 
             if (isVisible) {
-                const { filterHeaderStyle, style, filterHeaderClassName, className, frozen, columnKey, field, selectionMode, filter } = col.props;
+                const { filterHeaderStyle, style, filterHeaderClassName, className, frozen, columnKey, field, selectionMode, filter } = ColumnBase.getCProps(col);
                 const colStyle = { ...(filterHeaderStyle || {}), ...(style || {}) };
                 const colClassName = classNames('p-filter-column', filterHeaderClassName, className, { 'p-frozen-column': frozen });
                 const colKey = columnKey || field || i;
@@ -146,7 +153,7 @@ export const TableHeader = React.memo((props) => {
 
     const createContent = () => {
         if (props.headerColumnGroup) {
-            const rows = React.Children.toArray(props.headerColumnGroup.props.children);
+            const rows = React.Children.toArray(ColumnGroupBase.getCProp(props.headerColumnGroup, 'children'));
 
             return rows.map((row, i) => (
                 <tr key={i} role="row">

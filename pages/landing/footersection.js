@@ -8,7 +8,7 @@ const FooterSection = (props) => {
                     <ul className="list-none p-0 m-0">
                         <li className="font-bold mb-5">General</li>
                         <li className="mb-4">
-                            <Link href="/setup">
+                            <Link href="/installation">
                                 <a className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150">Get Started</a>
                             </Link>
                         </li>
@@ -105,7 +105,7 @@ const FooterSection = (props) => {
 
             <div className="flex flex-wrap justify-content-between py-6">
                 <span>
-                    <img src={`/images/primereact-logo-${props.dark ? 'light' : 'dark'}.svg`} alt="primereact logo" />
+                    <img src={`https://primefaces.org/cdn/primereact/images/primereact-logo-${props.dark ? 'light' : 'dark'}.svg`} alt="primereact logo" />
                 </span>
                 <div className="flex align-items-center">
                     <a href="https://twitter.com/primereact" className="linkbox block w-3rem h-3rem flex align-items-center justify-content-center mr-3">

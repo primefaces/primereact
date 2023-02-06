@@ -1,6 +1,7 @@
 import * as React from 'react';
 import PrimeReact, { FilterMatchMode, FilterOperator, localeOption } from '../api/Api';
 import { Button } from '../button/Button';
+import { ColumnBase } from '../column/ColumnBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Dropdown } from '../dropdown/Dropdown';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
@@ -17,7 +18,8 @@ export const ColumnFilter = React.memo((props) => {
     const selfClick = React.useRef(false);
     const overlayEventListener = React.useRef(null);
 
-    const getColumnProp = (prop) => props.column.props[prop];
+    const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
+
     const field = getColumnProp('filterField') || getColumnProp('field');
     const filterModel = props.filters[field];
     const filterStoreModel = props.filtersStore && props.filtersStore[field];

@@ -17,7 +17,7 @@ export function ScrollSubHeaderGroupingDoc(props) {
     const countryTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt="flag" src={'/images/flag/flag_placeholder.png'} className={`flag flag-${rowData.country.code}`} width={30} />
+                <img alt="flag" src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={`flag flag-${rowData.country.code}`} width={30} />
                 <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );
@@ -30,7 +30,7 @@ export function ScrollSubHeaderGroupingDoc(props) {
     const headerTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt={rowData.representative.name} src={`/images/avatar/${rowData.representative.image}`} width="32" style={{ verticalAlign: 'middle' }} />
+                <img alt={rowData.representative.name} src={`https://primefaces.org/cdn/primereact/images/avatar/${rowData.representative.image}`} width="32" style={{ verticalAlign: 'middle' }} />
                 <span className="vertical-align-middle ml-2">{rowData.representative.name}</span>
             </React.Fragment>
         );
@@ -84,7 +84,7 @@ const ScrollSubHeaderGroupingDoc = () => {
     const countryTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt="flag" src="https://primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} width={30} />
+                <img alt="flag" src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} width={30} />
                 <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         )
@@ -97,7 +97,7 @@ const ScrollSubHeaderGroupingDoc = () => {
     const headerTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt={rowData.representative.name} src={\`https://primereact.org/images/avatar/\${rowData.representative.image}\`} width="32" style={{ verticalAlign: 'middle' }} />
+                <img alt={rowData.representative.name} src={\`https://primefaces.org/cdn/primereact/images/avatar/\${rowData.representative.image}\`} width="32" style={{ verticalAlign: 'middle' }} />
                 <span className="vertical-align-middle ml-2">{rowData.representative.name}</span>
             </React.Fragment>
         );
@@ -154,7 +154,7 @@ const ScrollSubHeaderGroupingDoc = () => {
     const countryTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt="flag" src="https://primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} width={30} />
+                <img alt="flag" src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} width={30} />
                 <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         )
@@ -167,7 +167,7 @@ const ScrollSubHeaderGroupingDoc = () => {
     const headerTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt={rowData.representative.name} src={\`https://primereact.org/images/avatar/\${rowData.representative.image}\`} width="32" style={{ verticalAlign: 'middle' }} />
+                <img alt={rowData.representative.name} src={\`https://primefaces.org/cdn/primereact/images/avatar/\${rowData.representative.image}\`} width="32" style={{ verticalAlign: 'middle' }} />
                 <span className="vertical-align-middle ml-2">{rowData.representative.name}</span>
             </React.Fragment>
         );

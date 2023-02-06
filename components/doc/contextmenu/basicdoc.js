@@ -29,7 +29,7 @@ export default function BasicDemo() {
     return (
         <div className="card flex md:justify-content-center">
             <ContextMenu model={items} ref={cm} />
-            <img src="https://primereact.org/images/nature/nature3.jpg" alt="Logo" onContextMenu={(e) => cm.current.show(e)} />
+            <img src="https://primefaces.org/cdn/primereact/images/nature/nature3.jpg" alt="Logo" onContextMenu={(e) => cm.current.show(e)} />
         </div>
     )
 }
@@ -49,7 +49,7 @@ export default function BasicDemo() {
     return (
         <div className="card flex md:justify-content-center">
             <ContextMenu model={items} ref={cm} />
-            <img src="https://primereact.org/images/nature/nature3.jpg" alt="Logo" onContextMenu={(e) => cm.current.show(e)} />
+            <img src="https://primefaces.org/cdn/primereact/images/nature/nature3.jpg" alt="Logo" onContextMenu={(e) => cm.current.show(e)} />
         </div>
     )
 }
@@ -65,7 +65,7 @@ export default function BasicDemo() {
             </DocSectionText>
             <div className="card flex md:justify-content-center">
                 <ContextMenu model={items} ref={cm} />
-                <img src="/images/nature/nature3.jpg" alt="Logo" className="w-full md:w-auto" onContextMenu={(e) => cm.current.show(e)} />
+                <img src="https://primefaces.org/cdn/primereact/images/nature/nature3.jpg" alt="Logo" className="w-full md:w-auto" onContextMenu={(e) => cm.current.show(e)} />
             </div>
             <DocSectionCode code={code} />
         </>

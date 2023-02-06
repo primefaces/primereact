@@ -5,10 +5,10 @@ import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } f
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { SidebarDefaultProps } from './SidebarBase';
+import { SidebarBase } from './SidebarBase';
 
 export const Sidebar = React.forwardRef((inProps, ref) => {
-    const props = ObjectUtils.getProps(inProps, SidebarDefaultProps);
+    const props = SidebarBase.getProps(inProps);
 
     const [maskVisibleState, setMaskVisibleState] = React.useState(false);
     const [visibleState, setVisibleState] = React.useState(false);
@@ -179,7 +179,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
     };
 
     const createElement = () => {
-        const otherProps = ObjectUtils.findDiffKeys(props, SidebarDefaultProps);
+        const otherProps = SidebarBase.getOtherProps(props);
         const className = classNames('p-sidebar p-component', props.className, {
             'p-input-filled': PrimeReact.inputStyle === 'filled',
             'p-ripple-disabled': PrimeReact.ripple === false

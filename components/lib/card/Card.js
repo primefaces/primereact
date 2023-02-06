@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { classNames, ObjectUtils } from '../utils/Utils';
-import { CardDefaultProps } from './CardBase';
+import { CardBase } from './CardBase';
 
 export const Card = React.forwardRef((inProps, ref) => {
-    const props = ObjectUtils.getProps(inProps, CardDefaultProps);
+    const props = CardBase.getProps(inProps);
 
     const elementRef = React.useRef(ref);
 
@@ -35,7 +35,7 @@ export const Card = React.forwardRef((inProps, ref) => {
         ObjectUtils.combinedRefs(elementRef, ref);
     }, [elementRef, ref]);
 
-    const otherProps = ObjectUtils.findDiffKeys(props, CardDefaultProps);
+    const otherProps = CardBase.getOtherProps(props);
     const className = classNames('p-card p-component', props.className);
     const header = createHeader();
     const body = createBody();

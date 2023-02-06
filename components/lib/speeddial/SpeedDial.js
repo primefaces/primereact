@@ -3,11 +3,11 @@ import { Button } from '../button/Button';
 import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
-import { SpeedDialDefaultProps } from './SpeedDialBase';
+import { SpeedDialBase } from './SpeedDialBase';
 
 export const SpeedDial = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, SpeedDialDefaultProps);
+        const props = SpeedDialBase.getProps(inProps);
 
         const [visibleState, setVisibleState] = React.useState(false);
         const isItemClicked = React.useRef(false);
@@ -254,7 +254,7 @@ export const SpeedDial = React.memo(
             return null;
         };
 
-        const otherProps = ObjectUtils.findDiffKeys(props, SpeedDialDefaultProps);
+        const otherProps = SpeedDialBase.getOtherProps(props);
         const className = classNames(
             `p-speeddial p-component p-speeddial-${props.type}`,
             {

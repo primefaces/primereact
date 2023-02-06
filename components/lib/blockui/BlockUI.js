@@ -3,10 +3,10 @@ import PrimeReact from '../api/Api';
 import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { BlockUIDefaultProps } from './BlockUIBase';
+import { BlockUIBase } from './BlockUIBase';
 
 export const BlockUI = React.forwardRef((inProps, ref) => {
-    const props = ObjectUtils.getProps(inProps, BlockUIDefaultProps);
+    const props = BlockUIBase.getProps(inProps);
 
     const [visibleState, setVisibleState] = React.useState(props.blocked);
     const elementRef = React.useRef(null);
@@ -96,7 +96,7 @@ export const BlockUI = React.forwardRef((inProps, ref) => {
         return null;
     };
 
-    const otherProps = ObjectUtils.findDiffKeys(props, BlockUIDefaultProps);
+    const otherProps = BlockUIBase.getOtherProps(props);
     const mask = createMask();
     const className = classNames('p-blockui-container', props.containerClassName);
 

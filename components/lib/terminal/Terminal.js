@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { TerminalService } from '../terminalservice/TerminalService';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
-import { TerminalDefaultProps } from './TerminalBase';
+import { classNames, DomHandler } from '../utils/Utils';
+import { TerminalBase } from './TerminalBase';
 
 export const Terminal = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, TerminalDefaultProps);
+        const props = TerminalBase.getProps(inProps);
 
         const [commandTextState, setCommandTextState] = React.useState('');
         const [commandsState, setCommandsState] = React.useState([]);
@@ -136,7 +136,7 @@ export const Terminal = React.memo(
             );
         };
 
-        const otherProps = ObjectUtils.findDiffKeys(props, TerminalDefaultProps);
+        const otherProps = TerminalBase.getOtherProps(props);
         const className = classNames('p-terminal p-component', props.className);
         const welcomeMessage = createWelcomeMessage();
         const content = createContent();

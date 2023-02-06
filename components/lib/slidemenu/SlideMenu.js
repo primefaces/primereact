@@ -4,13 +4,13 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { SlideMenuDefaultProps } from './SlideMenuBase';
+import { classNames, DomHandler, ZIndexUtils } from '../utils/Utils';
+import { SlideMenuBase } from './SlideMenuBase';
 import { SlideMenuSub } from './SlideMenuSub';
 
 export const SlideMenu = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, SlideMenuDefaultProps);
+        const props = SlideMenuBase.getProps(inProps);
 
         const [levelState, setLevelState] = React.useState(0);
         const [visibleState, setVisibleState] = React.useState(false);
@@ -122,7 +122,7 @@ export const SlideMenu = React.memo(
         };
 
         const createElement = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, SlideMenuDefaultProps);
+            const otherProps = SlideMenuBase.getOtherProps(props);
             const className = classNames(
                 'p-slidemenu p-component',
                 {

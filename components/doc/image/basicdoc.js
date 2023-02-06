@@ -14,7 +14,7 @@ import { Image } from 'primereact/image';
 export default function BasicDemo() {
     return (
         <div className="card flex justify-content-center">
-            <Image src="https://primereact.org/images/galleria/galleria7.jpg" alt="Image" width="250" />
+            <Image src="https://primefaces.org/cdn/primereact/images/galleria/galleria7.jpg" alt="Image" width="250" />
         </div>
     )
 }
@@ -26,7 +26,7 @@ import { Image } from 'primereact/image';
 export default function BasicDemo() {
     return (
         <div className="card flex justify-content-center">
-            <Image src="https://primereact.org/images/galleria/galleria7.jpg" alt="Image" width="250" />
+            <Image src="https://primefaces.org/cdn/primereact/images/galleria/galleria7.jpg" alt="Image" width="250" />
         </div>
     )
 }
@@ -41,7 +41,7 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Image src={'/images/galleria/galleria7.jpg'} alt="Image" width="250" />
+                <Image src="https://primefaces.org/cdn/primereact/images/galleria/galleria7.jpg" alt="Image" width="250" />
             </div>
             <DocSectionCode code={code} />
         </>

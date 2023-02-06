@@ -4,15 +4,15 @@ import PrimeReact from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useUnmountEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { classNames, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { ToastDefaultProps } from './ToastBase';
+import { classNames, ZIndexUtils } from '../utils/Utils';
+import { ToastBase } from './ToastBase';
 import { ToastMessage } from './ToastMessage';
 
 let messageIdx = 0;
 
 export const Toast = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, ToastDefaultProps);
+        const props = ToastBase.getProps(inProps);
 
         const [messagesState, setMessagesState] = React.useState([]);
         const containerRef = React.useRef(null);
@@ -101,7 +101,7 @@ export const Toast = React.memo(
         }));
 
         const createElement = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, ToastDefaultProps);
+            const otherProps = ToastBase.getOtherProps(props);
             const className = classNames('p-toast p-component p-toast-' + props.position, props.className, {
                 'p-input-filled': PrimeReact.inputStyle === 'filled',
                 'p-ripple-disabled': PrimeReact.ripple === false

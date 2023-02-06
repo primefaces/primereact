@@ -4,187 +4,80 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function ClearIconDoc(props) {
-    const [selectedCountry, setSelectedCountry] = useState(null);
-    const countries = [
-        { name: 'Australia', code: 'AU' },
-        { name: 'Brazil', code: 'BR' },
-        { name: 'China', code: 'CN' },
-        { name: 'Egypt', code: 'EG' },
-        { name: 'France', code: 'FR' },
-        { name: 'Germany', code: 'DE' },
-        { name: 'India', code: 'IN' },
-        { name: 'Japan', code: 'JP' },
-        { name: 'Spain', code: 'ES' },
-        { name: 'United States', code: 'US' }
+    const [selectedCity, setSelectedCity] = useState(null);
+    const cities = [
+        { name: 'New York', code: 'NY' },
+        { name: 'Rome', code: 'RM' },
+        { name: 'London', code: 'LDN' },
+        { name: 'Istanbul', code: 'IST' },
+        { name: 'Paris', code: 'PRS' }
     ];
-
-    const onCountryChange = (e) => {
-        setSelectedCountry(e.value);
-    };
-
-    const selectedCountryTemplate = (option, props) => {
-        if (option) {
-            return (
-                <div className="country-item country-item-value">
-                    <img alt={option.name} src="/images/flag/flag_placeholder.png" className={`flag flag-${option.code.toLowerCase()}`} />
-                    <div>{option.name}</div>
-                </div>
-            );
-        }
-
-        return <span>{props.placeholder}</span>;
-    };
-
-    const countryOptionTemplate = (option) => {
-        return (
-            <div className="country-item">
-                <img alt={option.name} src="/images/flag/flag_placeholder.png" className={`flag flag-${option.code.toLowerCase()}`} />
-                <div>{option.name}</div>
-            </div>
-        );
-    };
 
     const code = {
         basic: `
-<Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" showClear placeholder="Select a Country" valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
+<Dropdown value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" 
+    showClear placeholder="Select a City" className="w-full md:w-14rem" />
         `,
         javascript: `
 import React, { useState } from "react";
 import { Dropdown } from 'primereact/dropdown';
-import './DropdownDemo.css';
 
-export default function ClearIconDoc() {
-    const [selectedCountry, setSelectedCountry] = useState(null);
-
-     const countries = [
-        { name: 'Australia', code: 'AU' },
-        { name: 'Brazil', code: 'BR' },
-        { name: 'China', code: 'CN' },
-        { name: 'Egypt', code: 'EG' },
-        { name: 'France', code: 'FR' },
-        { name: 'Germany', code: 'DE' },
-        { name: 'India', code: 'IN' },
-        { name: 'Japan', code: 'JP' },
-        { name: 'Spain', code: 'ES' },
-        { name: 'United States', code: 'US' }
+export default function ClearIconDemo() {
+    const [selectedCity, setSelectedCity] = useState(null);
+    const cities = [
+        { name: 'New York', code: 'NY' },
+        { name: 'Rome', code: 'RM' },
+        { name: 'London', code: 'LDN' },
+        { name: 'Istanbul', code: 'IST' },
+        { name: 'Paris', code: 'PRS' }
     ];
 
-    const onCountryChange = (e) => {
-        setSelectedCountry(e.value);
-    }
-
-    const selectedCountryTemplate = (option, props) => {
-        if (option) {
-            return (
-                <div className="country-item country-item-value">
-                    <img alt={option.name} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
-                    <div>{option.name}</div>
-                </div>
-            );
-        }
-        return (
-            <span>
-                {props.placeholder}
-            </span>
-        );
-    }
-
-    const countryOptionTemplate = (option) => {
-        return (
-            <div className="country-item">
-                <img alt={option.name} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
-                <div>{option.name}</div>
-            </div>
-        );
-    }
-
     return (
-        <div className="card flex justify-content-center dropdown-demo">
-            <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" showClear placeholder="Select a Country" valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
-        </div>    
+        <div className="card flex justify-content-center">
+            <Dropdown value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" 
+                showClear placeholder="Select a City" className="w-full md:w-14rem" />
+        </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { Dropdown, DropdownChangeParams, DropdownProps } from 'primereact/dropdown';
-import './DropdownDemo.css';
+import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 
-export default function ClearIconDoc() {
-    const [selectedCountry, setSelectedCountry] = useState<any | null>(null);
+interface City {
+    name: string;
+    code: string;
+}
 
-     const countries = [
-        { name: 'Australia', code: 'AU' },
-        { name: 'Brazil', code: 'BR' },
-        { name: 'China', code: 'CN' },
-        { name: 'Egypt', code: 'EG' },
-        { name: 'France', code: 'FR' },
-        { name: 'Germany', code: 'DE' },
-        { name: 'India', code: 'IN' },
-        { name: 'Japan', code: 'JP' },
-        { name: 'Spain', code: 'ES' },
-        { name: 'United States', code: 'US' }
+export default function ClearIconDemo() {
+    const [selectedCity, setSelectedCity] = useState<City | null>(null);
+    const cities: City[] = [
+        { name: 'New York', code: 'NY' },
+        { name: 'Rome', code: 'RM' },
+        { name: 'London', code: 'LDN' },
+        { name: 'Istanbul', code: 'IST' },
+        { name: 'Paris', code: 'PRS' }
     ];
 
-    const onCountryChange = (e: DropdownChangeParams) => {
-        setSelectedCountry(e.value);
-    }
-
-    const selectedCountryTemplate = (option: any, props: DropdownProps) => {
-        if (option) {
-            return (
-                <div className="country-item country-item-value">
-                    <img alt={option.name} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
-                    <div>{option.name}</div>
-                </div>
-            );
-        }
-        return (
-            <span>
-                {props.placeholder}
-            </span>
-        );
-    }
-
-    const countryOptionTemplate = (option: any) => {
-        return (
-            <div className="country-item">
-                <img alt={option.name} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
-                <div>{option.name}</div>
-            </div>
-        );
-    }
-
     return (
-        <div className="card flex justify-content-center dropdown-demo">
-            <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" showClear placeholder="Select a Country" valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
+        <div className="card flex justify-content-center">
+            <Dropdown value={selectedCity} onChange={(e: DropdownChangeEvent) => setSelectedCity(e.value)} options={cities} optionLabel="name" 
+                showClear placeholder="Select a City" className="w-full md:w-14rem" />
         </div>
     )
 }
-        `,
-        extFiles: {
-            'DropdownDemo.css': `
-/* DropdownDemo.css */
-
-.dropdown-demo .p-dropdown {
-    width: 14rem;
-}
-
-.dropdown-demo .country-item-value img.flag {
-    width: 17px;
-}
         `
-        }
     };
 
     return (
         <>
             <DocSectionText {...props}>
-                {/* TO DO: Add demo content. */}
-                <p></p>
+                <p>
+                    When <i>showClear</i> is enabled, a clear icon is added to reset the Dropdown.
+                </p>
             </DocSectionText>
-            <div className="card flex justify-content-center dropdown-demo">
-                <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" showClear placeholder="Select a Country" valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
+            <div className="card flex justify-content-center">
+                <Dropdown value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" showClear placeholder="Select a City" className="w-full md:w-14rem" />
             </div>
             <DocSectionCode code={code} />
         </>

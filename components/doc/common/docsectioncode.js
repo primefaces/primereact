@@ -41,15 +41,6 @@ export function DocSectionCode(props) {
                             tooltip="TypeScript Code"
                             tooltipOptions={{ position: 'bottom', className: 'doc-section-code-tooltip' }}
                         ></Button>
-                        {props.code.php ? (
-                            <Button
-                                className={classNames('p-button-rounded p-button-text p-button-plain h-2rem w-2rem p-0 inline-flex align-items-center justify-content-center', { 'doc-section-code-active text-primary': codeLang === 'php' })}
-                                label="PHP"
-                                onClick={() => setCodeLang('php')}
-                                tooltip="Php Code"
-                                tooltipOptions={{ position: 'bottom', className: 'doc-section-code-tooltip' }}
-                            ></Button>
-                        ) : null}
                     </>
                 )}
 
@@ -110,33 +101,26 @@ export function DocSectionCode(props) {
             </div>
 
             {codeMode === 'basic' && (
-                <div>
+                <div className={props.codeClassName}>
                     <CodeHighlight code {...props}>
                         {props.code.basic}
                     </CodeHighlight>
                 </div>
             )}
             {codeMode !== 'basic' && codeLang === 'javascript' && (
-                <div>
+                <div className={props.codeClassName}>
                     <CodeHighlight code>{props.code.javascript}</CodeHighlight>
                 </div>
             )}
             {codeMode !== 'basic' && codeLang === 'typescript' && (
-                <div>
+                <div className={props.codeClassName}>
                     <CodeHighlight code lang={'tsx'}>
                         {props.code.typescript}
                     </CodeHighlight>
                 </div>
             )}
-            {codeMode !== 'basic' && codeLang === 'php' && (
-                <div>
-                    <CodeHighlight code lang={'php'}>
-                        {props.code.php}
-                    </CodeHighlight>
-                </div>
-            )}
             {codeMode !== 'basic' && codeLang === 'data' && (
-                <div>
+                <div className={props.codeClassName}>
                     <CodeHighlight code lang={'json'}>
                         {props.code.data}
                     </CodeHighlight>

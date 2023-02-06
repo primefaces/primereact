@@ -1,13 +1,17 @@
 {
     "data": [
         {
-            "name": "Overview",
+            "name": "Getting Started",
             "icon": "pi pi-home",
             "expanded": true,
             "children": [
                 {
-                    "name": "Get Started",
-                    "to": "/setup"
+                    "name": "Installation",
+                    "to": "/installation"
+                },
+                {
+                    "name": "Configuration",
+                    "to": "/configuration"
                 },
                 {
                     "name": "Locale",
@@ -547,6 +551,24 @@
             ]
         },
         {
+            "name": "Support",
+            "icon": "pi pi-question",
+            "children": [
+                {
+                    "name": "Discord Server",
+                    "href": "https://discord.gg/gzKFYnpmCY"
+                },
+                {
+                    "name": "Forum",
+                    "href": "https://forum.primefaces.org/viewforum.php?f=57"
+                },
+                {
+                    "name": "PRO Support",
+                    "to": "/support"
+                }
+            ]
+        },
+        {
             "name": "Discover",
             "icon": "pi pi-search",
             "children": [
@@ -585,24 +607,6 @@
                 {
                     "name": "PrimeGear",
                     "href": "https://gear.primefaces.org"
-                }
-            ]
-        },
-        {
-            "name": "Support",
-            "icon": "pi pi-question",
-            "children": [
-                {
-                    "name": "Discord Server",
-                    "href": "https://discord.gg/gzKFYnpmCY"
-                },
-                {
-                    "name": "Forum",
-                    "href": "https://forum.primefaces.org/viewforum.php?f=57"
-                },
-                {
-                    "name": "PRO Support",
-                    "to": "/support"
                 }
             ]
         }

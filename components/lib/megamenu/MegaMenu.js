@@ -3,11 +3,11 @@ import PrimeReact from '../api/Api';
 import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { MegaMenuDefaultProps } from './MegaMenuBase';
+import { MegaMenuBase } from './MegaMenuBase';
 
 export const MegaMenu = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, MegaMenuDefaultProps);
+        const props = MegaMenuBase.getProps(inProps);
 
         const [activeItemState, setActiveItemState] = React.useState(null);
         const elementRef = React.useRef(null);
@@ -390,7 +390,7 @@ export const MegaMenu = React.memo(
             return null;
         };
 
-        const otherProps = ObjectUtils.findDiffKeys(props, MegaMenuDefaultProps);
+        const otherProps = MegaMenuBase.getOtherProps(props);
         const className = classNames(
             'p-megamenu p-component',
             {

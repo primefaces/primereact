@@ -7,13 +7,13 @@ import { JumpToPageInput } from './JumpToPageInput';
 import { LastPageLink } from './LastPageLink';
 import { NextPageLink } from './NextPageLink';
 import { PageLinks } from './PageLinks';
-import { PaginatorDefaultProps } from './PaginatorBase';
+import { PaginatorBase } from './PaginatorBase';
 import { PrevPageLink } from './PrevPageLink';
 import { RowsPerPageDropdown } from './RowsPerPageDropdown';
 
 export const Paginator = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, PaginatorDefaultProps);
+        const props = PaginatorBase.getProps(inProps);
 
         const elementRef = React.useRef(null);
         const rppChanged = React.useRef(false);
@@ -204,7 +204,7 @@ export const Paginator = React.memo(
         if (!props.alwaysShow && pageCount === 1) {
             return null;
         } else {
-            const otherProps = ObjectUtils.findDiffKeys(props, PaginatorDefaultProps);
+            const otherProps = PaginatorBase.getOtherProps(props);
             const className = classNames('p-paginator p-component', props.className);
             const leftContent = ObjectUtils.getJSXElement(props.leftContent, props);
             const rightContent = ObjectUtils.getJSXElement(props.rightContent, props);

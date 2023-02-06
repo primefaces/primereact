@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
-import { RadioButtonDefaultProps } from './RadioButtonBase';
+import { RadioButtonBase } from './RadioButtonBase';
 
 export const RadioButton = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, RadioButtonDefaultProps);
+        const props = RadioButtonBase.getProps(inProps);
 
         const [focusedState, setFocusedState] = React.useState(false);
         const elementRef = React.useRef(null);
@@ -85,7 +85,7 @@ export const RadioButton = React.memo(
         }));
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, RadioButtonDefaultProps);
+        const otherProps = RadioButtonBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-radiobutton p-component',

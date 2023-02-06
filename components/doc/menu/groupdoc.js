@@ -1,5 +1,5 @@
-import { useRef } from 'react';
 import { useRouter } from 'next/router';
+import { useRef } from 'react';
 import { Menu } from '../../lib/menu/Menu';
 import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
@@ -53,13 +53,13 @@ export function GroupDoc(props) {
 `,
         javascript: `
 import React, { useRef } from 'react';
-import { useRouter } from 'next/router';
+//import { useRouter } from 'next/router';
 import { Menu } from 'primereact/menu';
 import { Toast } from 'primereact/toast';
 
 export default function GroupDemo() {
     const toast = useRef(null);
-    const router = useRouter();
+    //const router = useRouter();
     const items = [
         {
             label: 'Options',
@@ -92,7 +92,7 @@ export default function GroupDemo() {
                     label: 'Router',
                     icon: 'pi pi-upload',
                     command () => {
-                        router.push('/fileupload');
+                        //router.push('/fileupload');
                     }
                 }
             ]
@@ -109,14 +109,14 @@ export default function GroupDemo() {
         `,
         typescript: `
 import React, { useRef } from 'react';
-import { useRouter } from 'next/router';
+//import { useRouter } from 'next/router';
 import { Menu } from 'primereact/menu';
 import { MenuItem } from 'primereact/menuitem';
 import { Toast } from 'primereact/toast';
 
 export default function GroupDemo() {
     const toast = useRef<Toast>(null);
-    const router = useRouter();
+    //const router = useRouter();
     const items: MenuItem[] = [
         {
             label: 'Options',
@@ -149,7 +149,7 @@ export default function GroupDemo() {
                     label: 'Router',
                     icon: 'pi pi-upload',
                     command: () => {
-                        router.push('/fileupload');
+                        //router.push('/fileupload');
                     }
                 }
             ]

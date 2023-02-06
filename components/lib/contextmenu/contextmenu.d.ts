@@ -8,8 +8,8 @@
  *
  */
 import * as React from 'react';
-import { MenuItem } from '../menuitem';
 import { CSSTransitionProps } from '../csstransition';
+import { MenuItem } from '../menuitem';
 
 /**
  * Defines valid properties in ContextMenu component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -68,7 +68,7 @@ export interface ContextMenuProps extends Omit<React.DetailedHTMLProps<React.HTM
  *
  * [Live Demo](https://www.primefaces.org/primereact/contextmenu/)
  * --- ---
- * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

@@ -5,12 +5,12 @@ import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { CascadeSelectDefaultProps } from './CascadeSelectBase';
+import { CascadeSelectBase } from './CascadeSelectBase';
 import { CascadeSelectSub } from './CascadeSelectSub';
 
 export const CascadeSelect = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, CascadeSelectDefaultProps);
+        const props = CascadeSelectBase.getProps(inProps);
 
         const [focusedState, setFocusedState] = React.useState(false);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
@@ -329,7 +329,7 @@ export const CascadeSelect = React.memo(
             );
         };
 
-        const otherProps = ObjectUtils.findDiffKeys(props, CascadeSelectDefaultProps);
+        const otherProps = CascadeSelectBase.getOtherProps(props);
         const dataProps = ObjectUtils.reduceKeys(otherProps, DomHandler.DATA_PROPS);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const element = createElement();

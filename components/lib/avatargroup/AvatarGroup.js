@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { classNames, ObjectUtils } from '../utils/Utils';
-import { AvatarGroupDefaultProps } from './AvatarGroupBase';
+import { classNames } from '../utils/Utils';
+import { AvatarGroupBase } from './AvatarGroupBase';
 
 export const AvatarGroup = React.forwardRef((inProps, ref) => {
-    const props = ObjectUtils.getProps(inProps, AvatarGroupDefaultProps);
+    const props = AvatarGroupBase.getProps(inProps);
 
     const elementRef = React.useRef(null);
-    const otherProps = ObjectUtils.findDiffKeys(props, AvatarGroupDefaultProps);
+    const otherProps = AvatarGroupBase.getOtherProps(props);
     const className = classNames('p-avatar-group p-component', props.className);
 
     React.useImperativeHandle(ref, () => ({

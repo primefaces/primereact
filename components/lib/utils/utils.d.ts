@@ -111,10 +111,14 @@ export declare class ObjectUtils {
     static reorderArray(value: any, from: number, to: number): void;
     static findIndexInList(value: any, list: any[], dataKey?: string): number;
     static getJSXElement(obj: any, ...params: any[]): any;
-    static getProps(inProps: object, defaultProps: object): object;
-    static getProp(component: any, propertyName: string, defaultProperties?: object): any;
+    static getProp(props: object, prop: string, defaultProps?: object): any;
+    static getMergedProps(props: object, defaultProps: object): object;
+    static getDiffProps(props: object, defaultProps: object): object;
     static getPropValue(obj: any, ...params: any[]): any;
     static isValidChild(child: any, type: string): boolean;
+    static getComponentProp(component: any, prop: string, defaultProps?: object): any;
+    static getComponentProps(component: any, defaultProps?: object): object | undefined;
+    static getComponentDiffProps(component: any, defaultProps?: object): object | undefined;
     static getRefElement(ref: any): any;
     static combinedRefs(innerRef: any, forwardRef: any): void;
     static removeAccents(str: any): string;

@@ -3,9 +3,9 @@ import { useRef } from 'react';
 import { Button } from '../../../lib/button/Button';
 import { Checkbox } from '../../../lib/checkbox/Checkbox';
 import { Toast } from '../../../lib/toast/Toast';
+import { classNames } from '../../../lib/utils/Utils';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
-import { classNames } from '../../../lib/utils/Utils';
 
 export function FormikDoc(props) {
     const toast = useRef(null);
@@ -96,7 +96,7 @@ export default function FormikDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
+            <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                 <div>I've read and accept the terms & conditions.</div>
                 <Toast ref={toast} />
                 <Checkbox
@@ -157,7 +157,7 @@ export default function FormikDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
+            <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                 <div>I've read and accept the terms & conditions.</div>
                 <Toast ref={toast} />
                 <Checkbox
@@ -186,7 +186,7 @@ export default function FormikDoc() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
+                <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                     <div>I've read and accept the terms & conditions.</div>
                     <Toast ref={toast} />
                     <Checkbox

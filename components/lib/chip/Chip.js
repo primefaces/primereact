@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
-import { ChipDefaultProps } from './ChipBase';
+import { ChipBase } from './ChipBase';
 
 export const Chip = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, ChipDefaultProps);
+        const props = ChipBase.getProps(inProps);
 
         const elementRef = React.useRef(null);
         const [visibleState, setVisibleState] = React.useState(true);
@@ -49,7 +49,7 @@ export const Chip = React.memo(
         };
 
         const createElement = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, ChipDefaultProps);
+            const otherProps = ChipBase.getOtherProps(props);
             const className = classNames(
                 'p-chip p-component',
                 {

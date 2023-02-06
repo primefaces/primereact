@@ -2,11 +2,11 @@ import * as React from 'react';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
-import { InputTextDefaultProps } from './InputTextBase';
+import { InputTextBase } from './InputTextBase';
 
 export const InputText = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, InputTextDefaultProps);
+        const props = InputTextBase.getProps(inProps);
 
         const elementRef = React.useRef(ref);
 
@@ -50,7 +50,7 @@ export const InputText = React.memo(
         }, [elementRef, ref]);
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, InputTextDefaultProps);
+        const otherProps = InputTextBase.getOtherProps(props);
         const className = classNames(
             'p-inputtext p-component',
             {

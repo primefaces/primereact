@@ -3,9 +3,9 @@ import { useRef } from 'react';
 import { Button } from '../../../lib/button/Button';
 import { InputText } from '../../../lib/inputtext/InputText';
 import { Toast } from '../../../lib/toast/Toast';
+import { classNames } from '../../../lib/utils/Utils';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
-import { classNames } from '../../../lib/utils/Utils';
 
 export function FormikDoc(props) {
     const toast = useRef(null);
@@ -43,7 +43,7 @@ export function FormikDoc(props) {
         basic: `
 <Toast ref={toast} />
 <InputText
-    inputId="value"
+    id="value"
     name="value"
     value={formik.values.value}
     onChange={(e) => {
@@ -98,7 +98,7 @@ export default function FormikDoc() {
                 <span className="p-float-label">
                     <Toast ref={toast} />
                     <InputText
-                        inputId="value"
+                        id="value"
                         name="value"
                         value={formik.values.value}
                         onChange={(e) => {
@@ -161,7 +161,7 @@ export default function FormikDoc() {
                 <span className="p-float-label">
                     <Toast ref={toast} />
                     <InputText
-                        inputId="value"
+                        id="value"
                         name="value"
                         value={formik.values.value}
                         onChange={(e) => {
@@ -192,7 +192,7 @@ export default function FormikDoc() {
                     <span className="p-float-label">
                         <Toast ref={toast} />
                         <InputText
-                            inputId="value"
+                            id="value"
                             name="value"
                             value={formik.values.value}
                             onChange={(e) => {

@@ -1,8 +1,17 @@
-import { DocSectionText } from '../common/docsectiontext';
 import { DevelopmentSection } from '../common/developmentsection';
-import { CodeHighlight } from '../common/codehighlight';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function AccessibilityDoc() {
+    const code = {
+        basic: `
+<span id="dd1">Options</span>
+<TreeSelect aria-labelledby="dd1" />
+
+<TreeSelect aria-label="Options" />
+    `
+    };
+
     return (
         <DevelopmentSection>
             <DocSectionText id="accessibility" label="Accessibility">
@@ -21,14 +30,8 @@ export function AccessibilityDoc() {
                 <p>
                     If filtering is enabled, <i>filterInputProps</i> can be defined to give <i>aria-*</i> props to the filter input element.
                 </p>
-                <CodeHighlight>
-                    {`
-<span id="dd1">Options</span>
-<TreeSelect aria-labelledby="dd1" />
 
-<TreeSelect aria-label="Options" />
-`}
-                </CodeHighlight>
+                <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
 
                 <h3>Closed State Keyboard Support</h3>
                 <div className="doc-tablewrapper">

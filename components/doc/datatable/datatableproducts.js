@@ -1,20 +1,20 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { DataTable } from '../../lib/datatable/DataTable';
-import { Column } from '../../lib/column/Column';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
-import { InputText } from '../../lib/inputtext/InputText';
+import React, { useEffect, useRef, useState } from 'react';
+import { ProductService } from '../../../service/ProductService';
 import { Button } from '../../lib/button/Button';
-import { Rating } from '../../lib/rating/Rating';
+import { Column } from '../../lib/column/Column';
+import { DataTable } from '../../lib/datatable/DataTable';
+import { Dialog } from '../../lib/dialog/Dialog';
 import { FileUpload } from '../../lib/fileupload/FileUpload';
 import { InputNumber } from '../../lib/inputnumber/InputNumber';
-import { RadioButton } from '../../lib/radiobutton/RadioButton';
-import { Dialog } from '../../lib/dialog/Dialog';
+import { InputText } from '../../lib/inputtext/InputText';
 import { InputTextarea } from '../../lib/inputtextarea/InputTextarea';
-import { Toolbar } from '../../lib/toolbar/Toolbar';
+import { RadioButton } from '../../lib/radiobutton/RadioButton';
+import { Rating } from '../../lib/rating/Rating';
 import { Toast } from '../../lib/toast/Toast';
-import { ProductService } from '../../../service/ProductService';
+import { Toolbar } from '../../lib/toolbar/Toolbar';
 import { classNames } from '../../lib/utils/Utils';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function DatatableProductsDoc(props) {
     let emptyProduct = {
@@ -232,7 +232,7 @@ export function DatatableProductsDoc(props) {
     };
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={`/images/product/${rowData.image}`} alt={rowData.image} className="product-image" />;
+        return <img src={`https://primefaces.org/cdn/primereact/images/product/${rowData.image}`} alt={rowData.image} className="product-image" />;
     };
 
     const priceBodyTemplate = (rowData) => {
@@ -527,7 +527,7 @@ const rightToolbarTemplate = () => {
 }
 
 const imageBodyTemplate = (rowData) => {
-    return <img src={\`https://primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} className="product-image" />
+    return <img src={\`https://primefaces.org/cdn/primereact/images/product/\${rowData.image}\`} alt={rowData.image} className="product-image" />
 }
 
 const priceBodyTemplate = (rowData) => {
@@ -604,7 +604,7 @@ return (
         </div>
 
         <Dialog visible={productDialog} style={{ width: '450px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
-            {product.image && <img src={\`https://primereact.org/images/product/\${product.image}\`} alt={product.image} className="product-image block m-auto pb-3" />}
+            {product.image && <img src={\`https://primefaces.org/cdn/primereact/images/product/\${product.image}\`} alt={product.image} className="product-image block m-auto pb-3" />}
             <div className="field">
                 <label htmlFor="name">Name</label>
                 <InputText id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />
@@ -890,7 +890,7 @@ const rightToolbarTemplate = () => {
 }
 
 const imageBodyTemplate = (rowData) => {
-    return <img src={\`https://primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} className="product-image" />
+    return <img src={\`https://primefaces.org/cdn/primereact/images/product/\${rowData.image}\`} alt={rowData.image} className="product-image" />
 }
 
 const priceBodyTemplate = (rowData) => {
@@ -967,7 +967,7 @@ return (
         </div>
 
         <Dialog visible={productDialog} style={{ width: '450px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
-            {product.image && <img src={\`https://primereact.org/images/product/\${product.image}\`} alt={product.image} className="product-image block m-auto pb-3" />}
+            {product.image && <img src={\`https://primefaces.org/cdn/primereact/images/product/\${product.image}\`} alt={product.image} className="product-image block m-auto pb-3" />}
             <div className="field">
                 <label htmlFor="name">Name</label>
                 <InputText id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />
@@ -1130,7 +1130,7 @@ return (
                 </div>
 
                 <Dialog visible={productDialog} style={{ width: '450px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
-                    {product.image && <img src={`/images/product/${product.image}`} alt={product.image} className="product-image block m-auto pb-3" />}
+                    {product.image && <img src={`https://primefaces.org/cdn/primereact/images/product/${product.image}`} alt={product.image} className="product-image block m-auto pb-3" />}
                     <div className="field">
                         <label htmlFor="name">Name</label>
                         <InputText id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />

@@ -66,7 +66,7 @@ const DesignerSection = (props) => {
                 <div className="box p-4 flex flex-column md:flex-row z-1 designer-editor">
                     <div className="mr-0 md:mr-4 p-4 designer-controls box border-bottom-1 border-left-none border-right-none border-top-none md:border-bottom-none md:border-right-1" style={{ borderRadius: '10px' }}>
                         <div className="text-center mb-4">
-                            <img src={`/images/landing-new/${designerLogo}`} alt={designerLogo} />
+                            <img src={`https://primefaces.org/cdn/primereact/images/landing-new/${designerLogo}`} alt={designerLogo} />
                         </div>
                         <div className="p-fluid">
                             <span className="font-semibold block mb-3">Primary</span>

@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
-import { TagDefaultProps } from './TagBase';
+import { classNames, IconUtils } from '../utils/Utils';
+import { TagBase } from './TagBase';
 
 export const Tag = React.forwardRef((inProps, ref) => {
-    const props = ObjectUtils.getProps(inProps, TagDefaultProps);
+    const props = TagBase.getProps(inProps);
 
     const elementRef = React.useRef(null);
-    const otherProps = ObjectUtils.findDiffKeys(props, TagDefaultProps);
+    const otherProps = TagBase.getOtherProps(props);
     const className = classNames(
         'p-tag p-component',
         {
