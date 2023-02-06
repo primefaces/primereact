@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { AccessibilityDoc } from '../../components/doc/chart/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/chart/basicdoc';
+import { ChartJSDoc } from '../../components/doc/chart/chartjsdoc';
 import { ComboDoc } from '../../components/doc/chart/combodoc';
 import { DoughnutChartDoc } from '../../components/doc/chart/doughnutdoc';
 import { HorizontalBarDoc } from '../../components/doc/chart/horizontalbardoc';
@@ -22,6 +23,11 @@ const ChartDemo = () => {
             id: 'import',
             label: 'Import',
             component: ImportDoc
+        },
+        {
+            id: 'chartjs',
+            label: 'Chart.js',
+            component: ChartJSDoc
         },
         {
             id: 'basic',

@@ -3,7 +3,7 @@ import Link from 'next/link';
 const GetStartedSection = () => {
     return (
         <section className="landing-getstarted flex flex-column md:flex-row align-items-center justify-content-center mt-8 z-1">
-            <Link href="/setup">
+            <Link href="/installation">
                 <a className="linkbox active font-semibold py-3 px-4 fadeinleft animation-duration-2000 animation-ease-out">
                     Get Started <i className="pi pi-arrow-right ml-3"></i>
                 </a>

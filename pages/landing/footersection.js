@@ -8,7 +8,7 @@ const FooterSection = (props) => {
                     <ul className="list-none p-0 m-0">
                         <li className="font-bold mb-5">General</li>
                         <li className="mb-4">
-                            <Link href="/setup">
+                            <Link href="/installation">
                                 <a className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150">Get Started</a>
                             </Link>
                         </li>

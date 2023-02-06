@@ -57,7 +57,7 @@ const HeaderSection = (props) => {
                 <nav className="scalein origin-top">
                     <ol className="list-none m-0 p-0 flex flex-column lg:flex-row flex-wrap lg:flex-nowrap lg:align-items-center font-semibold">
                         <li className="mr-0 lg:mr-2">
-                            <Link href="/setup">
+                            <Link href="/installation">
                                 <a>
                                     <img src={'/images/landing-new/core-icon.svg'} alt="primereact core" />
                                     <span>Components</span>

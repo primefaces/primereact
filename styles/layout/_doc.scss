@@ -204,6 +204,7 @@
                 }
 
                 &:nth-child(2):not(:last-child) {
+                    font-family: ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,Liberation Mono,monospace;
                     color: var(--primary-color);
                     font-weight: 600;
                 }
