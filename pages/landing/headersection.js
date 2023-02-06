@@ -59,26 +59,26 @@ const HeaderSection = (props) => {
                         <li className="mr-0 lg:mr-2">
                             <Link href="/installation">
                                 <a>
-                                    <img src={'/images/landing-new/core-icon.svg'} alt="primereact core" />
+                                    <img src="https://primefaces.org/cdn/primereact/images/landing-new/core-icon.svg" alt="primereact core" />
                                     <span>Components</span>
                                 </a>
                             </Link>
                         </li>
                         <li className="mr-0 lg:mr-2">
                             <a href="https://blocks.primereact.org">
-                                <img src={'/images/landing-new/blocks-icon.svg'} alt="primereact templates" />
+                                <img src="https://primefaces.org/cdn/primereact/images/landing-new/blocks-icon.svg" alt="primereact templates" />
                                 <span>Blocks</span>
                             </a>
                         </li>
                         <li className="mr-0 lg:mr-2">
                             <a href="https://designer.primereact.org">
-                                <img src={'/images/landing-new/designer-icon.svg'} alt="primereact templates" />
+                                <img src="https://primefaces.org/cdn/primereact/images/landing-new/designer-icon.svg" alt="primereact templates" />
                                 <span>Designer</span>
                             </a>
                         </li>
                         <li className="mr-0 lg:mr-2">
                             <a href="https://www.primefaces.org/store/templates.xhtml">
-                                <img src={'/images/landing-new/templates-icon.svg'} alt="primereact templates" />
+                                <img src="https://primefaces.org/cdn/primereact/images/landing-new/templates-icon.svg" alt="primereact templates" />
                                 <span>Templates</span>
                             </a>
                         </li>
