@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useRef } from 'react';
 import { SplitButton } from '../../lib/splitbutton/SplitButton';
 import { Toast } from '../../lib/toast/Toast';
@@ -5,34 +6,35 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
+    const router = useRouter();
     const toast = useRef(null);
     const items = [
         {
             label: 'Update',
             icon: 'pi pi-refresh',
-            command: (e) => {
+            command: () => {
                 toast.current.show({ severity: 'success', summary: 'Updated', detail: 'Data Updated' });
             }
         },
         {
             label: 'Delete',
             icon: 'pi pi-times',
-            command: (e) => {
-                toast.current.show({ severity: 'success', summary: 'Delete', detail: 'Data Deleted' });
+            command: () => {
+                toast.current.show({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted' });
             }
         },
         {
             label: 'React Website',
             icon: 'pi pi-external-link',
-            command: (e) => {
-                window.location.href = 'https://facebook.github.io/react/';
+            command: () => {
+                window.location.href = 'https://reactjs.org/';
             }
         },
         {
             label: 'Upload',
             icon: 'pi pi-upload',
-            command: (e) => {
-                window.location.hash = '/fileupload';
+            command: () => {
+                router.push('/fileupload');
             }
         }
     ];
@@ -44,102 +46,109 @@ export function BasicDoc(props) {
     const code = {
         basic: `
 <Toast ref={toast}></Toast>
-<SplitButton label="Save" icon="pi pi-plus"  onClick={save} model={items}></SplitButton>
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} />
         `,
         javascript: `
 import React, { useRef } from 'react';
+//import { useRouter } from 'next/router';
 import { SplitButton } from 'primereact/splitbutton';
 import { Toast } from 'primereact/toast';
 
-export default function BasicDoc() {
+export default function BasicDemo() {
+    //const router = useRouter();
     const toast = useRef(null);
     const items = [
         {
             label: 'Update',
             icon: 'pi pi-refresh',
-            command: (e) => {
-                toast.current.show({severity:'success', summary:'Updated', detail:'Data Updated'});
+            command: () => {
+                toast.current.show({ severity: 'success', summary: 'Updated', detail: 'Data Updated' });
             }
         },
         {
             label: 'Delete',
             icon: 'pi pi-times',
-            command: (e) => {
-                toast.current.show({ severity: 'success', summary: 'Delete', detail: 'Data Deleted' });
+            command: () => {
+                toast.current.show({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted' });
             }
         },
         {
             label: 'React Website',
             icon: 'pi pi-external-link',
-            command:(e) => {
-                window.location.href = 'https://facebook.github.io/react/'
+            command: () => {
+                window.location.href = 'https://reactjs.org/';
             }
         },
-        {   label: 'Upload',
+        {
+            label: 'Upload',
             icon: 'pi pi-upload',
-            command:(e) => {
-                window.location.hash = "/fileupload"
+            command: () => {
+                //router.push('/fileupload');
             }
         }
-    ]
+    ];
 
     const save = () => {
-        toast.current.show({severity: 'success', summary: 'Success', detail: 'Data Saved'});
-    }
+        toast.current.show({ severity: 'success', summary: 'Success', detail: 'Data Saved' });
+    };
 
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
-            <SplitButton label="Save" icon="pi pi-plus"  onClick={save} model={items}></SplitButton>
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} />
         </div>
     )
 }
         `,
         typescript: `
 import React, { useRef } from 'react';
+//import { useRouter } from 'next/router';
 import { SplitButton } from 'primereact/splitbutton';
+import { MenuItem } from 'primereact/menuitem';
 import { Toast } from 'primereact/toast';
 
-export default function BasicDoc() {
+export default function BasicDemo() {
+    //const router = useRouter();
     const toast = useRef<Toast>(null);
-    const items = [
+    const items: MenuItem[] = [
         {
             label: 'Update',
             icon: 'pi pi-refresh',
-            command: (e) => {
-                toast.current?.show({severity:'success', summary:'Updated', detail:'Data Updated'});
+            command: () => {
+                toast.current.show({ severity: 'success', summary: 'Updated', detail: 'Data Updated' });
             }
         },
         {
             label: 'Delete',
             icon: 'pi pi-times',
-            command: (e) => {
-                toast.current?.show({ severity: 'success', summary: 'Delete', detail: 'Data Deleted' });
+            command: () => {
+                toast.current.show({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted' });
             }
         },
         {
             label: 'React Website',
             icon: 'pi pi-external-link',
-            command:(e) => {
-                window.location.href = 'https://facebook.github.io/react/'
+            command: () => {
+                window.location.href = 'https://reactjs.org/';
             }
         },
-        {   label: 'Upload',
+        {
+            label: 'Upload',
             icon: 'pi pi-upload',
-            command:(e) => {
-                window.location.hash = "/fileupload"
+            command: () => {
+                //router.push('/fileupload');
             }
         }
-    ]
+    ];
 
     const save = () => {
-        toast.current?.show({severity: 'success', summary: 'Success', detail: 'Data Saved'});
-    }
+        toast.current.show({ severity: 'success', summary: 'Success', detail: 'Data Saved' });
+    };
 
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
-            <SplitButton label="Save" icon="pi pi-plus"  onClick={save} model={items}></SplitButton>
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} />
         </div>
     )
 }
@@ -150,12 +159,12 @@ export default function BasicDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    SplitButton has a default command button and a collection of additional options defined by the <i>model</i> property.
+                    SplitButton has a default action button and a collection of additional options defined by the <i>model</i> property based on MenuModel API.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Toast ref={toast}></Toast>
-                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items}></SplitButton>
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} />
             </div>
             <DocSectionCode code={code} />
         </>

@@ -5,7 +5,7 @@ import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function DisabledDoc(props) {
+export function TextDoc(props) {
     const router = useRouter();
     const toast = useRef(null);
     const items = [
@@ -46,7 +46,13 @@ export function DisabledDoc(props) {
     const code = {
         basic: `
 <Toast ref={toast}></Toast>
-<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-text" />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-secondary p-button-text" />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-success p-button-text" />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-info p-button-text" />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-warning p-button-text" />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-help p-button-text" />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-danger p-button-text" />
         `,
         javascript: `
 import React, { useRef } from 'react';
@@ -54,7 +60,7 @@ import React, { useRef } from 'react';
 import { SplitButton } from 'primereact/splitbutton';
 import { Toast } from 'primereact/toast';
 
-export default function DisabledDemo() {
+export default function TextDemo() {
     //const router = useRouter();
     const toast = useRef(null);
     const items = [
@@ -95,7 +101,13 @@ export default function DisabledDemo() {
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} disabled />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-text" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-secondary p-button-text" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-success p-button-text" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-info p-button-text" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-warning p-button-text" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-help p-button-text" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-danger p-button-text" />
         </div>
     )
 }
@@ -107,7 +119,7 @@ import { SplitButton } from 'primereact/splitbutton';
 import { MenuItem } from 'primereact/menuitem';
 import { Toast } from 'primereact/toast';
 
-export default function DisabledDemo() {
+export default function TextDemo() {
     //const router = useRouter();
     const toast = useRef<Toast>(null);
     const items: MenuItem[] = [
@@ -148,7 +160,13 @@ export default function DisabledDemo() {
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} disabled />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-text" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-secondary p-button-text" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-success p-button-text" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-info p-button-text" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-warning p-button-text" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-help p-button-text" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-danger p-button-text" />
         </div>
     )
 }
@@ -158,13 +176,17 @@ export default function DisabledDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    When <i>disabled</i> is present, the element cannot be edited and focused.
-                </p>
+                <p>Text buttons are displayed as textual elements.</p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
+            <div className="card flex flex-wrap justify-content-center gap-3">
                 <Toast ref={toast}></Toast>
-                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} disabled />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-text" />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-secondary p-button-text" />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-success p-button-text" />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-info p-button-text" />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-warning p-button-text" />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-help p-button-text" />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-danger p-button-text" />
             </div>
             <DocSectionCode code={code} />
         </>

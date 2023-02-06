@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { SplitButton } from '../../lib/splitbutton/SplitButton';
 import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function LoadingDoc(props) {
+export function SeverityDoc(props) {
     const router = useRouter();
     const toast = useRef(null);
     const items = [
@@ -38,29 +38,29 @@ export function LoadingDoc(props) {
             }
         }
     ];
-    const [loading, setLoading] = useState(false);
 
     const save = () => {
-        setLoading(true);
-
-        setTimeout(() => {
-            setLoading(false);
-            toast.current.show({ severity: 'success', summary: 'Success', detail: 'Data Saved' });
-        }, 2000);
+        toast.current.show({ severity: 'success', summary: 'Success', detail: 'Data Saved' });
     };
 
     const code = {
         basic: `
 <Toast ref={toast}></Toast>
-<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} loading={loading} />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-secondary" />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-success" />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-info" />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-warning" />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-help" />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-danger" />
         `,
         javascript: `
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 //import { useRouter } from 'next/router';
 import { SplitButton } from 'primereact/splitbutton';
 import { Toast } from 'primereact/toast';
 
-export default function LoadingDemo() {
+export default function SeverityDemo() {
     //const router = useRouter();
     const toast = useRef(null);
     const items = [
@@ -94,33 +94,32 @@ export default function LoadingDemo() {
         }
     ];
 
-    const [loading, setLoading] = useState(false);
-
     const save = () => {
-        setLoading(true);
-
-        setTimeout(() => {
-            setLoading(false);
-            toast.current.show({ severity: 'success', summary: 'Success', detail: 'Data Saved' });
-        }, 2000);
+        toast.current.show({ severity: 'success', summary: 'Success', detail: 'Data Saved' });
     };
 
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} loading={loading} />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-secondary" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-success" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-info" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-warning" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-help" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-danger" />
         </div>
     )
 }
         `,
         typescript: `
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 //import { useRouter } from 'next/router';
 import { SplitButton } from 'primereact/splitbutton';
 import { MenuItem } from 'primereact/menuitem';
 import { Toast } from 'primereact/toast';
 
-export default function LoadingDemo() {
+export default function SeverityDemo() {
     //const router = useRouter();
     const toast = useRef<Toast>(null);
     const items: MenuItem[] = [
@@ -154,21 +153,20 @@ export default function LoadingDemo() {
         }
     ];
 
-    const [loading, setLoading] = useState<boolean>(false);
-
     const save = () => {
-        setLoading(true);
-
-        setTimeout(() => {
-            setLoading(false);
-            toast.current.show({ severity: 'success', summary: 'Success', detail: 'Data Saved' });
-        }, 2000);
+        toast.current.show({ severity: 'success', summary: 'Success', detail: 'Data Saved' });
     };
 
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} loading={loading} />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-secondary" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-success" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-info" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-warning" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-help" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-danger" />
         </div>
     )
 }
@@ -178,13 +176,17 @@ export default function LoadingDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    SplitButton has a default action button and a collection of additional options defined by the <i>model</i> property based on MenuModel API.
-                </p>
+                <p>Severity defines the type of button.</p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
+            <div className="card flex flex-wrap justify-content-center gap-3">
                 <Toast ref={toast}></Toast>
-                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} loading={loading} />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-secondary" />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-success" />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-info" />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-warning" />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-help" />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-danger" />
             </div>
             <DocSectionCode code={code} />
         </>
