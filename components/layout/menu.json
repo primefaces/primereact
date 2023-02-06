@@ -501,6 +501,10 @@
             "icon": "pi pi-link",
             "children": [
                 {
+                    "name": "useClickOutside",
+                    "to": "/hooks/useclickoutside"
+                },
+                {
                     "name": "useCounter",
                     "to": "/hooks/usecounter"
                 },
@@ -531,6 +535,14 @@
                 {
                     "name": "useInterval",
                     "to": "/hooks/useinterval"
+                },
+                {
+                    "name": "useOverlayListener",
+                    "to": "/hooks/useoverlaylistener"
+                },
+                {
+                    "name": "useOverlayScrollListener",
+                    "to": "/hooks/useoverlayscrolllistener"
                 }
             ]
         },

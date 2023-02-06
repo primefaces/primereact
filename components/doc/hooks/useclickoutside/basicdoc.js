@@ -32,7 +32,7 @@ export default function BasicDemo() {
 
     return (
         <div className="card flex flex-column justify-content-center align-items-center gap-2">
-            <div>{isOpen ? <Button ref={btnRef}>Click outside of the button to close</Button> : <Button onClick={() => setIsOpen(true)}>Change Button</Button>}</div>
+            <div>{isOpen ? <Button className="p-button-outlined border-dashed" ref={btnRef}>Click outside of the button to change</Button> : <Button onClick={() => setIsOpen(true)}>Change Button</Button>}</div>
         </div>
     )
 }
@@ -48,7 +48,7 @@ export default function BasicDemo() {
 
     return (
         <div className="card flex flex-column justify-content-center align-items-center gap-2">
-            <div>{isOpen ? <Button ref={btnRef}>Click outside of the button to close</Button> : <Button onClick={() => setIsOpen(true)}>Change Button</Button>}</div>
+            <div>{isOpen ? <Button className="p-button-outlined border-dashed" ref={btnRef}>Click outside of the button to change</Button> : <Button onClick={() => setIsOpen(true)}>Change Button</Button>}</div>
         </div>
     )
 }
@@ -64,7 +64,15 @@ export default function BasicDemo() {
             </DocSectionText>
 
             <div className="card flex flex-column justify-content-center align-items-center gap-2">
-                <div>{isOpen ? <Button ref={btnRef}>Click outside of the button to close</Button> : <Button onClick={() => setIsOpen(true)}>Change Button</Button>}</div>
+                <div>
+                    {isOpen ? (
+                        <Button className="p-button-outlined border-dashed" ref={btnRef}>
+                            Click outside of the button to change
+                        </Button>
+                    ) : (
+                        <Button onClick={() => setIsOpen(true)}>Change Button</Button>
+                    )}
+                </div>
             </div>
             <DocSectionCode code={code} />
         </>

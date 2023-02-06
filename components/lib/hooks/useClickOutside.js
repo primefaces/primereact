@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import * as React from 'react';
 import { useEventListener } from './useEventListener';
 
 export const useClickOutside = (ref, callback) => {
@@ -20,7 +20,7 @@ export const useClickOutside = (ref, callback) => {
         listener: isOutsideClicked
     });
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (!ref.current) {
             return;
         }

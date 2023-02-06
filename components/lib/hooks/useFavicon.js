@@ -1,4 +1,4 @@
-import { useLayoutEffect } from 'react';
+import * as React from 'react';
 
 const TYPE_MAP = {
     ico: 'image/x-icon',
@@ -8,7 +8,7 @@ const TYPE_MAP = {
 };
 
 export const useFavicon = (newIcon = '', rel = 'shortcut icon') => {
-    useLayoutEffect(() => {
+    React.useLayoutEffect(() => {
         const linkElements = document.querySelectorAll(`link[rel*='icon']`);
 
         linkElements.forEach((linkEl) => {

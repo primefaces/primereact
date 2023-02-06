@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState, useRef } from 'react';
+import * as React from 'react';
 import { useEventListener } from './useEventListener';
 
 export function useMove({ mode = 'both', initialValue = { x: 0, y: 0 } }) {
-    const [positions, setPositions] = useState(initialValue);
-    const [active, setActive] = useState(false);
-    const isMounted = useRef(false);
-    const isSliding = useRef(false);
-    const ref = useRef(null);
+    const [positions, setPositions] = React.useState(initialValue);
+    const [active, setActive] = React.useState(false);
+    const isMounted = React.useRef(false);
+    const isSliding = React.useRef(false);
+    const ref = React.useRef(null);
 
     const onMouseMove = (event) => updateMousePosition({ x: event.clientX, y: event.clientY });
 
@@ -114,7 +114,7 @@ export function useMove({ mode = 'both', initialValue = { x: 0, y: 0 } }) {
         setPositions(initialValue);
     };
 
-    useEffect(() => {
+    React.useEffect(() => {
         isMounted.current = true;
     }, []);
 
@@ -138,7 +138,7 @@ export function useMove({ mode = 'both', initialValue = { x: 0, y: 0 } }) {
         }
     };
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (ref.current) {
             bindMouseDownListener();
             bindTouchStartListener();
