@@ -2,11 +2,11 @@ import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
-import { ToggleButtonDefaultProps } from './ToggleButtonBase';
+import { ToggleButtonBase } from './ToggleButtonBase';
 
 export const ToggleButton = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, ToggleButtonDefaultProps);
+        const props = ToggleButtonBase.getProps(inProps);
 
         const elementRef = React.useRef(null);
         const hasLabel = props.onLabel && props.onLabel.length > 0 && props.offLabel && props.offLabel.length > 0;
@@ -58,7 +58,7 @@ export const ToggleButton = React.memo(
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const tabIndex = props.disabled ? -1 : props.tabIndex;
-        const otherProps = ObjectUtils.findDiffKeys(props, ToggleButtonDefaultProps);
+        const otherProps = ToggleButtonBase.getOtherProps(props);
         const className = classNames(
             'p-button p-togglebutton p-component',
             {

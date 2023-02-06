@@ -2,11 +2,11 @@ import * as React from 'react';
 import { localeOption } from '../api/Api';
 import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { classNames, ObjectUtils } from '../utils/Utils';
-import { DataScrollerDefaultProps } from './DataScrollerBase';
+import { DataScrollerBase } from './DataScrollerBase';
 
 export const DataScroller = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, DataScrollerDefaultProps);
+        const props = DataScrollerBase.getProps(inProps);
 
         const [dataToRenderState, setDataToRenderState] = React.useState([]);
         const elementRef = React.useRef(null);
@@ -190,7 +190,7 @@ export const DataScroller = React.memo(
             );
         };
 
-        const otherProps = ObjectUtils.findDiffKeys(props, DataScrollerDefaultProps);
+        const otherProps = DataScrollerBase.getOtherProps(props);
         const className = classNames('p-datascroller p-component', props.className, {
             'p-datascroller-inline': props.inline
         });

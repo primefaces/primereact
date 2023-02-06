@@ -2,11 +2,11 @@ import * as React from 'react';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputText } from '../inputtext/InputText';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
-import { InputMaskDefaultProps } from './InputMaskBase';
+import { InputMaskBase } from './InputMaskBase';
 
 export const InputMask = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, InputMaskDefaultProps);
+        const props = InputMaskBase.getProps(inProps);
 
         const elementRef = React.useRef(ref);
         const firstNonMaskPos = React.useRef(null);
@@ -566,7 +566,7 @@ export const InputMask = React.memo(
             }
         }, [isValueUpdated]);
 
-        const otherProps = ObjectUtils.findDiffKeys(props, InputMaskDefaultProps);
+        const otherProps = InputMaskBase.getOtherProps(props);
         const className = classNames('p-inputmask', props.className);
 
         return (

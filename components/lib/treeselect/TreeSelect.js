@@ -5,12 +5,12 @@ import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
 import { Tree } from '../tree/Tree';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { TreeSelectDefaultProps } from './TreeSelectBase';
+import { TreeSelectBase } from './TreeSelectBase';
 import { TreeSelectPanel } from './TreeSelectPanel';
 
 export const TreeSelect = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, TreeSelectDefaultProps);
+        const props = TreeSelectBase.getProps(inProps);
 
         const [focusedState, setFocusedState] = React.useState(false);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
@@ -518,7 +518,7 @@ export const TreeSelect = React.memo(
 
         const selectedNodes = getSelectedNodes();
 
-        const otherProps = ObjectUtils.findDiffKeys(props, TreeSelectDefaultProps);
+        const otherProps = TreeSelectBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-treeselect p-component p-inputwrapper',

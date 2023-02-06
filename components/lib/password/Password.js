@@ -6,11 +6,11 @@ import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { PasswordDefaultProps } from './PasswordBase';
+import { PasswordBase } from './PasswordBase';
 
 export const Password = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, PasswordDefaultProps);
+        const props = PasswordBase.getProps(inProps);
 
         const promptLabel = props.promptLabel || localeOption('passwordPrompt');
         const weakLabel = props.weakLabel || localeOption('weak');
@@ -314,7 +314,7 @@ export const Password = React.memo(
             props.className
         );
         const inputClassName = classNames('p-password-input', props.inputClassName);
-        const inputProps = ObjectUtils.findDiffKeys(props, PasswordDefaultProps);
+        const inputProps = PasswordBase.getOtherProps(props);
         const icon = createIcon();
         const panel = createPanel();
 

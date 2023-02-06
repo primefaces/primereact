@@ -3,11 +3,11 @@ import PrimeReact from '../api/Api';
 import { useMountEffect, useOverlayScrollListener, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { TooltipDefaultProps } from './TooltipBase';
+import { TooltipBase } from './TooltipBase';
 
 export const Tooltip = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, TooltipDefaultProps);
+        const props = TooltipBase.getProps(inProps);
 
         const [visibleState, setVisibleState] = React.useState(false);
         const [positionState, setPositionState] = React.useState(props.position);
@@ -461,7 +461,7 @@ export const Tooltip = React.memo(
         }));
 
         const createElement = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, TooltipDefaultProps);
+            const otherProps = TooltipBase.getOtherProps(props);
             const tooltipClassName = classNames(
                 'p-tooltip p-component',
                 {

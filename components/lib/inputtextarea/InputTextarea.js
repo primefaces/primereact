@@ -2,11 +2,11 @@ import * as React from 'react';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
-import { InputTextareaDefaultProps } from './InputTextareaBase';
+import { InputTextareaBase } from './InputTextareaBase';
 
 export const InputTextarea = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, InputTextareaDefaultProps);
+        const props = InputTextareaBase.getProps(inProps);
 
         const elementRef = React.useRef(ref);
         const cachedScrollHeight = React.useRef(0);
@@ -102,7 +102,7 @@ export const InputTextarea = React.memo(
         }, [props.autoResize]);
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, InputTextareaDefaultProps);
+        const otherProps = InputTextareaBase.getOtherProps(props);
         const className = classNames(
             'p-inputtextarea p-inputtext p-component',
             {

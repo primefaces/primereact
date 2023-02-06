@@ -2,10 +2,10 @@ import * as React from 'react';
 import { localeOption } from '../api/Api';
 import { Dropdown } from '../dropdown/Dropdown';
 import { ObjectUtils } from '../utils/Utils';
-import { RowsPerPageDropdownDefaultProps } from './PaginatorBase';
+import { RowsPerPageDropdownBase } from './PaginatorBase';
 
 export const RowsPerPageDropdown = React.memo((inProps) => {
-    const props = ObjectUtils.getProps(inProps, RowsPerPageDropdownDefaultProps);
+    const props = RowsPerPageDropdownBase.getProps(inProps);
 
     const hasOptions = props.options && props.options.length > 0;
     const options = hasOptions ? props.options.map((opt) => ({ label: String(opt), value: opt })) : [];

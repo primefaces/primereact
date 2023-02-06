@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { localeOption } from '../api/Api';
+import { ColumnBase } from '../column/ColumnBase';
 import { useMountEffect, usePrevious, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { BodyRow } from './BodyRow';
 import { RowTogglerButton } from './RowTogglerButton';
 
@@ -39,7 +40,7 @@ export const TableBody = React.memo(
         };
 
         const isSelectionEnabled = () => {
-            return props.selectionMode || props.selectionModeInColumn !== null || (props.columns && props.columns.some((col) => col && !!col.props.selectionMode));
+            return props.selectionMode || props.selectionModeInColumn !== null || (props.columns && props.columns.some((col) => col && !!getColumnProp(col, 'selectionMode')));
         };
 
         const isSingleSelection = () => {
@@ -139,6 +140,10 @@ export const TableBody = React.memo(
 
         const getColumnsLength = () => {
             return props.columns ? props.columns.length : 0;
+        };
+
+        const getColumnProp = (column, name) => {
+            return ColumnBase.getCProp(column, name);
         };
 
         const getVirtualScrollerOption = (option, options) => {
@@ -359,7 +364,7 @@ export const TableBody = React.memo(
                 let rowIndex = props.paginator ? i + props.first : i;
 
                 for (let j = cellRangeStart; j <= cellRangeEnd; j++) {
-                    let field = columns[j].props.field;
+                    let field = getColumnProp(columns[j], 'field');
                     let value = ObjectUtils.resolveFieldData(rowData, field);
                     let rangeRowData = {
                         value,

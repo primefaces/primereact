@@ -4,12 +4,12 @@ import { useEventListener, useMountEffect, useOverlayListener, useUnmountEffect,
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { ColorPickerDefaultProps } from './ColorPickerBase';
+import { ColorPickerBase } from './ColorPickerBase';
 import { ColorPickerPanel } from './ColorPickerPanel';
 
 export const ColorPicker = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, ColorPickerDefaultProps);
+        const props = ColorPickerBase.getProps(inProps);
 
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const elementRef = React.useRef(null);
@@ -550,7 +550,7 @@ export const ColorPicker = React.memo(
                     'p-disabled': props.disabled
                 });
 
-                const inputProps = ObjectUtils.findDiffKeys(props, ColorPickerDefaultProps);
+                const inputProps = ColorPickerBase.getOtherProps(props);
 
                 return <input ref={inputRef} type="text" className={inputClassName} readOnly id={props.inputId} tabIndex={props.tabIndex} disabled={props.disabled} onClick={onInputClick} onKeyDown={onInputKeydown} {...inputProps} />;
             }
@@ -559,7 +559,7 @@ export const ColorPicker = React.memo(
         };
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, ColorPickerDefaultProps);
+        const otherProps = ColorPickerBase.getOtherProps(props);
         const className = classNames(
             'p-colorpicker p-component',
             {

@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { InputNumber } from '../inputnumber/InputNumber';
 import { ObjectUtils } from '../utils/Utils';
-import { JumpToPageInputDefaultProps } from './PaginatorBase';
+import { JumpToPageInputBase } from './PaginatorBase';
 
 export const JumpToPageInput = React.memo((inProps) => {
-    const props = ObjectUtils.getProps(inProps, JumpToPageInputDefaultProps);
+    const props = JumpToPageInputBase.getProps(inProps);
 
     const onChange = (event) => {
         if (props.onChange) {

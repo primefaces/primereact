@@ -3,7 +3,7 @@ import PrimeReact, { ariaLabel } from '../api/Api';
 import { useMountEffect, usePrevious, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
-import { CarouselDefaultProps } from './CarouselBase';
+import { CarouselBase } from './CarouselBase';
 
 const CarouselItem = React.memo((props) => {
     const content = props.template(props.item);
@@ -18,7 +18,7 @@ const CarouselItem = React.memo((props) => {
 
 export const Carousel = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, CarouselDefaultProps);
+        const props = CarouselBase.getProps(inProps);
 
         const [numVisibleState, setNumVisibleState] = React.useState(props.numVisible);
         const [numScrollState, setNumScrollState] = React.useState(props.numScroll);
@@ -546,7 +546,7 @@ export const Carousel = React.memo(
             return null;
         };
 
-        const otherProps = ObjectUtils.findDiffKeys(props, CarouselDefaultProps);
+        const otherProps = CarouselBase.getOtherProps(props);
         const className = classNames(
             'p-carousel p-component',
             {

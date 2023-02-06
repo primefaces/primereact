@@ -2,14 +2,14 @@ import * as React from 'react';
 import { FilterService } from '../api/Api';
 import { useUpdateEffect } from '../hooks/Hooks';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
-import { PickListDefaultProps } from './PickListBase';
+import { PickListBase } from './PickListBase';
 import { PickListControls } from './PickListControls';
 import { PickListSubList } from './PickListSubList';
 import { PickListTransferControls } from './PickListTransferControls';
 
 export const PickList = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, PickListDefaultProps);
+        const props = PickListBase.getProps(inProps);
 
         const [sourceSelectionState, setSourceSelectionState] = React.useState([]);
         const [targetSelectionState, setTargetSelectionState] = React.useState([]);
@@ -212,7 +212,7 @@ export const PickList = React.memo(
             }
         });
 
-        const otherProps = ObjectUtils.findDiffKeys(props, PickListDefaultProps);
+        const otherProps = PickListBase.getOtherProps(props);
         const className = classNames('p-picklist p-component', props.className);
         const sourceItemTemplate = props.sourceItemTemplate ? props.sourceItemTemplate : props.itemTemplate;
         const targetItemTemplate = props.targetItemTemplate ? props.targetItemTemplate : props.itemTemplate;

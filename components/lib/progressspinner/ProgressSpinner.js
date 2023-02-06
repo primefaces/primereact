@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { classNames, ObjectUtils } from '../utils/Utils';
-import { ProgressSpinnerDefaultProps } from './ProgressSpinnerBase';
+import { classNames } from '../utils/Utils';
+import { ProgressSpinnerBase } from './ProgressSpinnerBase';
 
 export const ProgressSpinner = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, ProgressSpinnerDefaultProps);
+        const props = ProgressSpinnerBase.getProps(inProps);
 
         const elementRef = React.useRef(null);
-        const otherProps = ObjectUtils.findDiffKeys(props, ProgressSpinnerDefaultProps);
+        const otherProps = ProgressSpinnerBase.getOtherProps(props);
         const className = classNames('p-progress-spinner', props.className);
 
         React.useImperativeHandle(ref, () => ({

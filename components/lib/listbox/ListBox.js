@@ -4,13 +4,13 @@ import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
-import { ListBoxDefaultProps } from './ListBoxBase';
+import { ListBoxBase } from './ListBoxBase';
 import { ListBoxHeader } from './ListBoxHeader';
 import { ListBoxItem } from './ListBoxItem';
 
 export const ListBox = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, ListBoxDefaultProps);
+        const props = ListBoxBase.getProps(inProps);
 
         const [filterValueState, setFilterValueState] = React.useState('');
         const elementRef = React.useRef(null);
@@ -397,7 +397,7 @@ export const ListBox = React.memo(
         const visibleOptions = getVisibleOptions();
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, ListBoxDefaultProps);
+        const otherProps = ListBoxBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-listbox p-component',

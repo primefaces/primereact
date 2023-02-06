@@ -5,11 +5,11 @@ import { Messages } from '../messages/Messages';
 import { ProgressBar } from '../progressbar/ProgressBar';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
-import { FileUploadDefaultProps } from './FileUploadBase';
+import { FileUploadBase } from './FileUploadBase';
 
 export const FileUpload = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, FileUploadDefaultProps);
+        const props = FileUploadBase.getProps(inProps);
 
         const [filesState, setFilesState] = React.useState([]);
         const [progressState, setProgressState] = React.useState(0);
@@ -429,7 +429,7 @@ export const FileUpload = React.memo(
         };
 
         const createAdvanced = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, FileUploadDefaultProps);
+            const otherProps = FileUploadBase.getOtherProps(props);
             const className = classNames('p-fileupload p-fileupload-advanced p-component', props.className);
             const headerClassName = classNames('p-fileupload-buttonbar', props.headerClassName);
             const contentClassName = classNames('p-fileupload-content', props.contentClassName);
@@ -488,7 +488,7 @@ export const FileUpload = React.memo(
 
         const createBasic = () => {
             const chooseOptions = props.chooseOptions;
-            const otherProps = ObjectUtils.findDiffKeys(props, FileUploadDefaultProps);
+            const otherProps = FileUploadBase.getOtherProps(props);
             const className = classNames('p-fileupload p-fileupload-basic p-component', props.className);
             const buttonClassName = classNames('p-button p-component p-fileupload-choose', { 'p-fileupload-choose-selected': hasFiles, 'p-disabled': disabled, 'p-focus': focusedState }, chooseOptions.className);
             const chooseIcon = chooseOptions.icon || classNames({ 'pi pi-plus': !chooseOptions.icon && (!hasFiles || props.auto), 'pi pi-upload': !chooseOptions.icon && hasFiles && !props.auto });

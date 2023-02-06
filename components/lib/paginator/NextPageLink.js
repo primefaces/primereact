@@ -2,10 +2,10 @@ import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, ObjectUtils } from '../utils/Utils';
-import { NextPageLinkDefaultProps } from './PaginatorBase';
+import { NextPageLinkBase } from './PaginatorBase';
 
 export const NextPageLink = React.memo((inProps) => {
-    const props = ObjectUtils.getProps(inProps, NextPageLinkDefaultProps);
+    const props = NextPageLinkBase.getProps(inProps);
 
     const className = classNames('p-paginator-next p-paginator-element p-link', { 'p-disabled': props.disabled });
     const iconClassName = 'p-paginator-icon pi pi-angle-right';

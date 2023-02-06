@@ -3,10 +3,10 @@ import PrimeReact, { localeOption } from '../api/Api';
 import { Paginator } from '../paginator/Paginator';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, ObjectUtils } from '../utils/Utils';
-import { DataViewDefaultProps, DataViewLayoutOptionsDefaultProps } from './DataViewBase';
+import { DataViewBase, DataViewLayoutOptionsBase } from './DataViewBase';
 
 export const DataViewLayoutOptions = React.memo((inProps) => {
-    const props = ObjectUtils.getProps(inProps, DataViewLayoutOptionsDefaultProps);
+    const props = DataViewLayoutOptionsBase.getProps(inProps);
 
     const changeLayout = (event, layoutMode) => {
         props.onChange({
@@ -16,7 +16,7 @@ export const DataViewLayoutOptions = React.memo((inProps) => {
         event.preventDefault();
     };
 
-    const otherProps = ObjectUtils.findDiffKeys(props, DataViewLayoutOptionsDefaultProps);
+    const otherProps = DataViewLayoutOptionsBase.getOtherProps(props);
     const className = classNames('p-dataview-layout-options p-selectbutton p-buttonset', props.className);
     const buttonListClass = classNames('p-button p-button-icon-only', { 'p-highlight': props.layout === 'list' });
     const buttonGridClass = classNames('p-button p-button-icon-only', { 'p-highlight': props.layout === 'grid' });
@@ -41,7 +41,7 @@ export const DataViewItem = React.memo((props) => {
 
 export const DataView = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, DataViewDefaultProps);
+        const props = DataViewBase.getProps(inProps);
 
         const [firstState, setFirstState] = React.useState(props.first);
         const [rowsState, setRowsState] = React.useState(props.rows);
@@ -217,7 +217,7 @@ export const DataView = React.memo(
 
         const data = processData();
 
-        const otherProps = ObjectUtils.findDiffKeys(props, DataViewDefaultProps);
+        const otherProps = DataViewBase.getOtherProps(props);
         const className = classNames(
             'p-dataview p-component',
             {

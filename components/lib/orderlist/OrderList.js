@@ -2,13 +2,13 @@ import * as React from 'react';
 import { FilterService } from '../api/Api';
 import { useUpdateEffect } from '../hooks/Hooks';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
-import { OrderListDefaultProps } from './OrderListBase';
+import { OrderListBase } from './OrderListBase';
 import { OrderListControls } from './OrderListControls';
 import { OrderListSubList } from './OrderListSubList';
 
 export const OrderList = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, OrderListDefaultProps);
+        const props = OrderListBase.getProps(inProps);
 
         const [selectionState, setSelectionState] = React.useState([]);
         const [filterValueState, setFilterValueState] = React.useState('');
@@ -166,7 +166,7 @@ export const OrderList = React.memo(
             }
         });
 
-        const otherProps = ObjectUtils.findDiffKeys(props, OrderListDefaultProps);
+        const otherProps = OrderListBase.getOtherProps(props);
         const className = classNames('p-orderlist p-component', props.className);
         const visibleList = getVisibleList();
 

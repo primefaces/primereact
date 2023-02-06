@@ -4,12 +4,12 @@ import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect }
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { DropdownDefaultProps } from './DropdownBase';
+import { DropdownBase } from './DropdownBase';
 import { DropdownPanel } from './DropdownPanel';
 
 export const Dropdown = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, DropdownDefaultProps);
+        const props = DropdownBase.getProps(inProps);
 
         const [filterState, setFilterState] = React.useState('');
         const [focusedState, setFocusedState] = React.useState(false);
@@ -744,7 +744,7 @@ export const Dropdown = React.memo(
         const selectedOption = getSelectedOption();
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, DropdownDefaultProps);
+        const otherProps = DropdownBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-dropdown p-component p-inputwrapper',

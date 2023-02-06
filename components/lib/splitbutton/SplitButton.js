@@ -5,13 +5,13 @@ import { useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/H
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
-import { SplitButtonDefaultProps } from './SplitButtonBase';
+import { SplitButtonBase } from './SplitButtonBase';
 import { SplitButtonItem } from './SplitButtonItem';
 import { SplitButtonPanel } from './SplitButtonPanel';
 
 export const SplitButton = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, SplitButtonDefaultProps);
+        const props = SplitButtonBase.getProps(inProps);
 
         const [idState, setIdState] = React.useState(props.id);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
@@ -108,7 +108,7 @@ export const SplitButton = React.memo(
         }
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, SplitButtonDefaultProps);
+        const otherProps = SplitButtonBase.getOtherProps(props);
         const className = classNames('p-splitbutton p-component', props.className, { 'p-disabled': props.disabled });
         const buttonClassName = classNames('p-splitbutton-defaultbutton', props.buttonClassName);
         const menuButtonClassName = classNames('p-splitbutton-menubutton', props.menuButtonClassName);

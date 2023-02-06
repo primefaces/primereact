@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
-import { EditorDefaultProps } from './EditorBase';
+import { classNames, DomHandler } from '../utils/Utils';
+import { EditorBase } from './EditorBase';
 
 const QuillJS = (function () {
     try {
@@ -13,7 +13,7 @@ const QuillJS = (function () {
 
 export const Editor = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, EditorDefaultProps);
+        const props = EditorBase.getProps(inProps);
 
         const elementRef = React.useRef(null);
         const contentRef = React.useRef(null);
@@ -194,7 +194,7 @@ export const Editor = React.memo(
             }
         };
 
-        const otherProps = ObjectUtils.findDiffKeys(props, EditorDefaultProps);
+        const otherProps = EditorBase.getOtherProps(props);
         const className = classNames('p-component p-editor-container', props.className);
         const header = createToolbarHeader();
         const content = <div ref={contentRef} className="p-editor-content" style={props.style}></div>;

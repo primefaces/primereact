@@ -3,10 +3,10 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
-import { PanelDefaultProps } from './PanelBase';
+import { PanelBase } from './PanelBase';
 
 export const Panel = React.forwardRef((inProps, ref) => {
-    const props = ObjectUtils.getProps(inProps, PanelDefaultProps);
+    const props = PanelBase.getProps(inProps);
 
     const [idState, setIdState] = React.useState(props.id);
     const [collapsedState, setCollapsedState] = React.useState(props.collapsed);
@@ -135,7 +135,7 @@ export const Panel = React.forwardRef((inProps, ref) => {
         );
     };
 
-    const otherProps = ObjectUtils.findDiffKeys(props, PanelDefaultProps);
+    const otherProps = PanelBase.getOtherProps(props);
     const className = classNames(
         'p-panel p-component',
         {

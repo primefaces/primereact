@@ -2,10 +2,10 @@ import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, ObjectUtils } from '../utils/Utils';
-import { PageLinksDefaultProps } from './PaginatorBase';
+import { PageLinksBase } from './PaginatorBase';
 
 export const PageLinks = React.memo((inProps) => {
-    const props = ObjectUtils.getProps(inProps, PageLinksDefaultProps);
+    const props = PageLinksBase.getProps(inProps);
 
     const onPageLinkClick = (event, pageLink) => {
         if (props.onClick) {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useEventListener } from '../hooks/Hooks';
-import { classNames, ObjectUtils } from '../utils/Utils';
-import { KnobDefaultProps } from './KnobBase';
+import { classNames } from '../utils/Utils';
+import { KnobBase } from './KnobBase';
 
 const radius = 40;
 const midX = 50;
@@ -11,7 +11,7 @@ const maxRadians = -Math.PI / 3;
 
 export const Knob = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, KnobDefaultProps);
+        const props = KnobBase.getProps(inProps);
 
         const elementRef = React.useRef(null);
         const enabled = !props.disabled && !props.readOnly;
@@ -151,7 +151,7 @@ export const Knob = React.memo(
             getElement: () => elementRef.current
         }));
 
-        const otherProps = ObjectUtils.findDiffKeys(props, KnobDefaultProps);
+        const otherProps = KnobBase.getOtherProps(props);
         const className = classNames(
             'p-knob p-component',
             {

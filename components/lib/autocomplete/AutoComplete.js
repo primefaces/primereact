@@ -6,12 +6,12 @@ import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
-import { AutoCompleteDefaultProps } from './AutoCompleteBase';
+import { AutoCompleteBase } from './AutoCompleteBase';
 import { AutoCompletePanel } from './AutoCompletePanel';
 
 export const AutoComplete = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, AutoCompleteDefaultProps);
+        const props = AutoCompleteBase.getProps(inProps);
 
         const [idState, setIdState] = React.useState(props.id);
         const [searchingState, setSearchingState] = React.useState(false);
@@ -620,7 +620,7 @@ export const AutoComplete = React.memo(
 
         const listId = idState + '_list';
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, AutoCompleteDefaultProps);
+        const otherProps = AutoCompleteBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-autocomplete p-component p-inputwrapper',

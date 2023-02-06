@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ColumnBase } from '../column/ColumnBase';
 import { usePrevious } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
@@ -19,7 +20,7 @@ export const HeaderCell = React.memo((props) => {
     };
 
     const getColumnProp = (...args) => {
-        return props.column ? (typeof args[0] === 'string' ? props.column.props[args[0]] : (args[0] || props.column).props[args[1]]) : null;
+        return props.column ? (typeof args[0] === 'string' ? ColumnBase.getCProp(props.column, args[0]) : ColumnBase.getCProp(args[0] || props.column, args[1])) : null;
     };
 
     const getStyle = () => {

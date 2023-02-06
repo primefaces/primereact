@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { useEventListener, useMountEffect, usePrevious, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
-import { VirtualScrollerDefaultProps } from './VirtualScrollerBase';
+import { VirtualScrollerBase } from './VirtualScrollerBase';
 
 export const VirtualScroller = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, VirtualScrollerDefaultProps);
+        const props = VirtualScrollerBase.getProps(inProps);
 
         const vertical = props.orientation === 'vertical';
         const horizontal = props.orientation === 'horizontal';
@@ -613,7 +613,7 @@ export const VirtualScroller = React.memo(
                 </React.Fragment>
             );
         } else {
-            const otherProps = ObjectUtils.findDiffKeys(props, VirtualScrollerDefaultProps);
+            const otherProps = VirtualScrollerBase.getOtherProps(props);
             const className = classNames(
                 'p-virtualscroller',
                 {
