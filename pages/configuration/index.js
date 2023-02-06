@@ -9,6 +9,7 @@ import { ImportDoc } from '../../components/doc/configuration/importdoc';
 import { InputStyleDoc } from '../../components/doc/configuration/inputstyledoc';
 import { LocaleDoc } from '../../components/doc/configuration/localedoc';
 import { NonceDoc } from '../../components/doc/configuration/noncedoc';
+import { NullSortOrderDoc } from '../../components/doc/configuration/nullsortorderdoc';
 import { RippleDoc } from '../../components/doc/configuration/rippledoc';
 import { ZIndexDoc } from '../../components/doc/configuration/zindexdoc';
 
@@ -48,6 +49,11 @@ const InstallationPage = () => {
             id: 'nonce',
             label: 'Nonce',
             component: NonceDoc
+        },
+        {
+            id: 'nullsortorder',
+            label: 'Null Sort Order',
+            component: NullSortOrderDoc
         },
         {
             id: 'ripple',
