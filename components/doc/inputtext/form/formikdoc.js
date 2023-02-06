@@ -43,7 +43,7 @@ export function FormikDoc(props) {
         basic: `
 <Toast ref={toast} />
 <InputText
-    inputId="value"
+    inputid="value"
     name="value"
     value={formik.values.value}
     onChange={(e) => {
@@ -98,7 +98,7 @@ export default function FormikDoc() {
                 <span className="p-float-label">
                     <Toast ref={toast} />
                     <InputText
-                        inputId="value"
+                        inputid="value"
                         name="value"
                         value={formik.values.value}
                         onChange={(e) => {
@@ -161,7 +161,7 @@ export default function FormikDoc() {
                 <span className="p-float-label">
                     <Toast ref={toast} />
                     <InputText
-                        inputId="value"
+                        inputid="value"
                         name="value"
                         value={formik.values.value}
                         onChange={(e) => {
@@ -192,7 +192,7 @@ export default function FormikDoc() {
                     <span className="p-float-label">
                         <Toast ref={toast} />
                         <InputText
-                            inputId="value"
+                            inputid="value"
                             name="value"
                             value={formik.values.value}
                             onChange={(e) => {

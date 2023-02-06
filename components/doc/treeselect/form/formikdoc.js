@@ -53,7 +53,6 @@ export function FormikDoc(props) {
     name="item"
     value={formik.values.item}
     options={node}
-    optionLabel="name"
     placeholder="Select Item"
     className={classNames('w-full md:w-20rem', { 'p-invalid': isFormFieldInvalid('item') })}
     onChange={(e) => {
@@ -117,7 +116,6 @@ export default function FormikDoc() {
                     name="item"
                     value={formik.values.item}
                     options={node}
-                    optionLabel="name"
                     placeholder="Select Item"
                     className={classNames('w-full md:w-20rem', { 'p-invalid': isFormFieldInvalid('item') })}
                     onChange={(e) => {
@@ -186,7 +184,6 @@ export default function FormikDoc() {
                     name="item"
                     value={formik.values.item}
                     options={node}
-                    optionLabel="name"
                     placeholder="Select Item"
                     className={classNames('w-full md:w-20rem', { 'p-invalid': isFormFieldInvalid('item') })}
                     onChange={(e: TreeSelectChangeEvent) => {
@@ -217,7 +214,6 @@ export default function FormikDoc() {
                         name="item"
                         value={formik.values.item}
                         options={node}
-                        optionLabel="name"
                         placeholder="Select Item"
                         className={classNames('w-full md:w-20rem', { 'p-invalid': isFormFieldInvalid('item') })}
                         onChange={(e) => {

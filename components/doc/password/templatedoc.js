@@ -5,7 +5,7 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function TemplateDoc(props) {
-    const [value, setValue] = useState(null);
+    const [value, setValue] = useState('');
     const header = <div className="font-bold mb-3">Pick a password</div>;
     const footer = (
         <>
@@ -30,7 +30,7 @@ import { Password } from 'primereact/password';
 import { Divider } from 'primereact/divider';
 
 export default function TemplateDemo() {
-    const [value, setValue] = useState(null);
+    const [value, setValue] = useState("");
     const header = <div className="font-bold mb-3">Pick a password</div>;
     const footer = (
         <>

@@ -47,7 +47,7 @@ export function HookFormDoc(props) {
         <>
             <label htmlFor={field.name} className={classNames({ 'p-error': errors.value })}></label>
             <span className="p-float-label">
-                <InputText inputId={field.name} value={field.value} inputRef={field.ref} className={classNames({ 'p-invalid': fieldState.error })} onChange={(e) => field.onChange(e.target.value)} />
+                <InputText inputid={field.name} value={field.value} className={classNames({ 'p-invalid': fieldState.error })} onChange={(e) => field.onChange(e.target.value)} />
                 <label htmlFor={field.name}>Name - Surname</label>
             </span>
             {getFormErrorMessage(field.name)}
@@ -104,7 +104,7 @@ export default function HookFormDoc() {
                         <>
                             <label htmlFor={field.name} className={classNames({ 'p-error': errors.value })}></label>
                             <span className="p-float-label">
-                                <InputText inputId={field.name} value={field.value} inputRef={field.ref} className={classNames({ 'p-invalid': fieldState.error })} onChange={(e) => field.onChange(e.target.value)} />
+                                <InputText inputid={field.name} value={field.value} className={classNames({ 'p-invalid': fieldState.error })} onChange={(e) => field.onChange(e.target.value)} />
                                 <label htmlFor={field.name}>Name - Surname</label>
                             </span>
                             {getFormErrorMessage(field.name)}
@@ -166,7 +166,7 @@ export default function HookFormDoc() {
                         <>
                             <label htmlFor={field.name} className={classNames({ 'p-error': errors.value })}></label>
                             <span className="p-float-label">
-                                <InputText inputId={field.name} value={field.value} inputRef={field.ref} className={classNames({ 'p-invalid': fieldState.error })} onChange={(e) => field.onChange(e.target.value)} />
+                                <InputText inputid={field.name} value={field.value} className={classNames({ 'p-invalid': fieldState.error })} onChange={(e) => field.onChange(e.target.value)} />
                                 <label htmlFor={field.name}>Name - Surname</label>
                             </span>
                             {getFormErrorMessage(field.name)}
@@ -199,7 +199,7 @@ export default function HookFormDoc() {
                             <>
                                 <label htmlFor={field.name} className={classNames({ 'p-error': errors.value })}></label>
                                 <span className="p-float-label">
-                                    <InputText inputId={field.name} value={field.value} inputRef={field.ref} className={classNames({ 'p-invalid': fieldState.error })} onChange={(e) => field.onChange(e.target.value)} />
+                                    <InputText inputid={field.name} value={field.value} className={classNames({ 'p-invalid': fieldState.error })} onChange={(e) => field.onChange(e.target.value)} />
                                     <label htmlFor={field.name}>Name - Surname</label>
                                 </span>
                                 {getFormErrorMessage(field.name)}

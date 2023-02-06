@@ -4,7 +4,7 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function MeterDoc(props) {
-    const [value, setValue] = useState(null);
+    const [value, setValue] = useState('');
 
     const code = {
         basic: `
@@ -15,7 +15,7 @@ import React, { useState } from "react";
 import { Password } from 'primereact/password';
 
 export default function MeterDemo() {
-    const [value, setValue] = useState(null);
+    const [value, setValue] = useState("");
 
     return (
         <div className="card flex justify-content-center">

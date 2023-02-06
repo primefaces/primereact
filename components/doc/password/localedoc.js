@@ -5,7 +5,7 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function LocaleDoc(props) {
-    const [value, setValue] = useState(null);
+    const [value, setValue] = useState('');
 
     const code = {
         basic: `
@@ -17,7 +17,7 @@ import React, { useState } from "react";
 import { Password } from 'primereact/password';
 
 export default function LocaleDemo() {
-    const [value, setValue] = useState(null);
+    const [value, setValue] = useState("");
 
     return (
         <div className="card flex justify-content-center">
