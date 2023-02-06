@@ -17,7 +17,7 @@ import React, { useState } from "react";
 import { Password } from 'primereact/password';
 
 export default function LocaleDemo() {
-    const [value, setValue] = useState("");
+    const [value, setValue] = useState('');
 
     return (
         <div className="card flex justify-content-center">
@@ -32,7 +32,7 @@ import React, { useState } from "react";
 import { Password } from 'primereact/password';
 
 export default function LocaleDemo() {
-    const [value, setValue] = useState<string>(null);
+    const [value, setValue] = useState<string>('');
 
     return (
         <div className="card flex justify-content-center">

@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { Button } from '../../../lib/button/Button';
 import { InputMask } from '../../../lib/inputmask/InputMask';
 import { Toast } from '../../../lib/toast/Toast';
@@ -47,7 +47,7 @@ export function HookFormDoc(props) {
         <>
             <label htmlFor={field.name} className={classNames({ 'p-error': errors.value })}></label>
             <InputMask
-                inputid={field.name}
+                id={field.name}
                 value={field.value}
                 className={classNames({ 'p-invalid': fieldState.error })}
                 onChange={(e) => field.onChange(e.target.value)}
@@ -109,7 +109,7 @@ export default function HookFormDoc() {
                         <>
                             <label htmlFor={field.name} className={classNames({ 'p-error': errors.value })}></label>
                             <InputMask
-                                inputid={field.name}
+                                id={field.name}
                                 value={field.value}
                                 className={classNames({ 'p-invalid': fieldState.error })}
                                 onChange={(e) => field.onChange(e.target.value)}
@@ -175,7 +175,7 @@ export default function HookFormDoc() {
                         <>
                             <label htmlFor={field.name} className={classNames({ 'p-error': errors.value })}></label>
                             <InputMask
-                                inputid={field.name}
+                                id={field.name}
                                 value={field.value}
                                 className={classNames({ 'p-invalid': fieldState.error })}
                                 onChange={(e) => field.onChange(e.target.value)}
@@ -211,7 +211,7 @@ export default function HookFormDoc() {
                         render={({ field, fieldState }) => (
                             <>
                                 <label htmlFor={field.name} className={classNames({ 'p-error': errors.value })}></label>
-                                <InputMask inputid={field.name} value={field.value} className={classNames({ 'p-invalid': fieldState.error })} onChange={(e) => field.onChange(e.target.value)} mask="99-999999" placeholder="99-999999" />
+                                <InputMask id={field.name} value={field.value} className={classNames({ 'p-invalid': fieldState.error })} onChange={(e) => field.onChange(e.target.value)} mask="99-999999" placeholder="99-999999" />
                                 {getFormErrorMessage(field.name)}
                             </>
                         )}

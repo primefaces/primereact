@@ -30,7 +30,7 @@ import { Password } from 'primereact/password';
 import { Divider } from 'primereact/divider';
 
 export default function TemplateDemo() {
-    const [value, setValue] = useState("");
+    const [value, setValue] = useState('');
     const header = <div className="font-bold mb-3">Pick a password</div>;
     const footer = (
         <>
@@ -58,7 +58,7 @@ import { Password } from 'primereact/password';
 import { Divider } from 'primereact/divider';
 
 export default function TemplateDemo() {
-    const [value, setValue] = useState<string>(null);
+    const [value, setValue] = useState<string>('');
     const header = <div className="font-bold mb-3">Pick a password</div>;
     const footer = (
         <>
