@@ -21,7 +21,7 @@ export function TemplateDoc(props) {
     const countryTemplate = (option) => {
         return (
             <div className="flex align-items-center">
-                <img alt={option.name} src="/images/flag/flag_placeholder.png" className={`flag flag-${option.code.toLowerCase()}`} style={{ width: '1.25rem', marginRight: '.5rem' }} />
+                <img alt={option.name} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={`flag flag-${option.code.toLowerCase()}`} style={{ width: '1.25rem', marginRight: '.5rem' }} />
                 <div>{option.name}</div>
             </div>
         );
@@ -54,7 +54,7 @@ export default function TemplateDemo() {
     const countryTemplate = (option) => {
         return (
             <div className="flex align-items-center">
-                <img alt={option.name} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} style={{ width: '1.25rem', marginRight: '.5rem' }}/>
+                <img alt={option.name} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} style={{ width: '1.25rem', marginRight: '.5rem' }}/>
                 <div>{option.name}</div>
             </div>
         );
@@ -95,7 +95,7 @@ export default function TemplateDemo() {
     const countryTemplate = (option: Country) => {
         return (
             <div className="flex align-items-center">
-                <img alt={option.name} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} style={{ width: '1.25rem', marginRight: '.5rem' }}/>
+                <img alt={option.name} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} style={{ width: '1.25rem', marginRight: '.5rem' }}/>
                 <div>{option.name}</div>
             </div>
         );

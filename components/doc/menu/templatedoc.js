@@ -19,7 +19,7 @@ export function TemplateDoc(props) {
             template: (item, options) => {
                 return (
                     <button onClick={(e) => options.onClick(e)} className={classNames(options.className, 'w-full p-link flex align-items-center')}>
-                        <Avatar image="/images/avatar/amyelsner.png" className="mr-2" shape="circle" />
+                        <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" className="mr-2" shape="circle" />
                         <div className="flex flex-column align">
                             <span className="font-bold">Amy Elsner</span>
                             <span className="text-sm">Agent</span>
@@ -51,7 +51,7 @@ export default function TemplateDemo() {
             template: (item, options) => {
                 return (
                     <button onClick={(e) => options.onClick(e)} className={classNames(options.className, 'w-full p-link flex align-items-center')}>
-                        <Avatar image="https://primereact.org/images/avatar/amyelsner.png" className="mr-2" shape="circle" />
+                        <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" className="mr-2" shape="circle" />
                         <div className="flex flex-column align">
                             <span className="font-bold">Amy Elsner</span>
                             <span className="text-sm">Agent</span>
@@ -87,7 +87,7 @@ export default function TemplateDemo() {
             template: (item, options) => {
                 return (
                     <button onClick={(e) => options.onClick(e)} className={classNames(options.className, 'w-full p-link flex align-items-center')}>
-                        <Avatar image="https://primereact.org/images/avatar/amyelsner.png" className="mr-2" shape="circle" />
+                        <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" className="mr-2" shape="circle" />
                         <div className="flex flex-column align">
                             <span className="font-bold">Amy Elsner</span>
                             <span className="text-sm">Agent</span>

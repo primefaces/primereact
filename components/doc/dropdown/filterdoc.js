@@ -22,7 +22,7 @@ export function FilterDoc(props) {
         if (option) {
             return (
                 <div className="flex align-items-center">
-                    <img alt={option.name} src="/images/flag/flag_placeholder.png" className={`mr-2 flag flag-${option.code.toLowerCase()}`} style={{ width: '18px' }} />
+                    <img alt={option.name} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={`mr-2 flag flag-${option.code.toLowerCase()}`} style={{ width: '18px' }} />
                     <div>{option.name}</div>
                 </div>
             );
@@ -34,7 +34,7 @@ export function FilterDoc(props) {
     const countryOptionTemplate = (option) => {
         return (
             <div className="flex align-items-center">
-                <img alt={option.name} src="/images/flag/flag_placeholder.png" className={`mr-2 flag flag-${option.code.toLowerCase()}`} style={{ width: '18px' }} />
+                <img alt={option.name} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={`mr-2 flag flag-${option.code.toLowerCase()}`} style={{ width: '18px' }} />
                 <div>{option.name}</div>
             </div>
         );
@@ -68,7 +68,7 @@ export default function FilterDemo() {
         if (option) {
             return (
                 <div className="flex align-items-center">
-                    <img alt={option.name} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`mr-2 flag flag-\${option.code.toLowerCase()}\`} style={{ width: '18px' }} />
+                    <img alt={option.name} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={\`mr-2 flag flag-\${option.code.toLowerCase()}\`} style={{ width: '18px' }} />
                     <div>{option.name}</div>
                 </div>
             );
@@ -80,7 +80,7 @@ export default function FilterDemo() {
     const countryOptionTemplate = (option) => {
         return (
             <div className="flex align-items-center">
-                <img alt={option.name} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`mr-2 flag flag-\${option.code.toLowerCase()}\`} style={{ width: '18px' }} />
+                <img alt={option.name} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={\`mr-2 flag flag-\${option.code.toLowerCase()}\`} style={{ width: '18px' }} />
                 <div>{option.name}</div>
             </div>
         );
@@ -122,7 +122,7 @@ export default function FilterDemo() {
         if (option) {
             return (
                 <div className="flex align-items-center">
-                    <img alt={option.name} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`mr-2 flag flag-\${option.code.toLowerCase()}\`} style={{ width: '18px' }} />
+                    <img alt={option.name} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={\`mr-2 flag flag-\${option.code.toLowerCase()}\`} style={{ width: '18px' }} />
                     <div>{option.name}</div>
                 </div>
             );
@@ -134,7 +134,7 @@ export default function FilterDemo() {
     const countryOptionTemplate = (option: Country) => {
         return (
             <div className="flex align-items-center">
-                <img alt={option.name} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`mr-2 flag flag-\${option.code.toLowerCase()}\`} style={{ width: '18px' }} />
+                <img alt={option.name} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={\`mr-2 flag flag-\${option.code.toLowerCase()}\`} style={{ width: '18px' }} />
                 <div>{option.name}</div>
             </div>
         );

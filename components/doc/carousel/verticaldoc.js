@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { ProductService } from '../../../service/ProductService';
 import { Button } from '../../lib/button/Button';
 import { Carousel } from '../../lib/carousel/Carousel';
-import { ProductService } from '../../../service/ProductService';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function VerticalDoc(props) {
     const [products, setProducts] = useState([]);
@@ -17,7 +17,7 @@ export function VerticalDoc(props) {
             <div className="product-item">
                 <div className="product-item-content">
                     <div className="mb-3">
-                        <img src={`/images/product/${product.image}`} alt={product.name} className="product-image" />
+                        <img src={`https://primefaces.org/cdn/primereact/images/product/${product.image}`} alt={product.name} className="product-image" />
                     </div>
                     <div>
                         <h4 className="mb-1">{product.name}</h4>
@@ -56,7 +56,7 @@ export default function VerticalDemo() {
             <div className="product-item">
                 <div className="product-item-content">
                     <div className="mb-3">
-                        <img src={\`https://primereact.org/images/product/\${product.image}\`} alt={product.name} className="product-image" />
+                        <img src={\`https://primefaces.org/cdn/primereact/images/product/\${product.image}\`} alt={product.name} className="product-image" />
                     </div>
                     <div>
                         <h4 className="mb-1">{product.name}</h4>
@@ -99,7 +99,7 @@ export default function VerticalDemo() {
             <div className="product-item">
                 <div className="product-item-content">
                     <div className="mb-3">
-                        <img src={\`https://primereact.org/images/product/\${product.image}\`} alt={product.name} className="product-image" />
+                        <img src={\`https://primefaces.org/cdn/primereact/images/product/\${product.image}\`} alt={product.name} className="product-image" />
                     </div>
                     <div>
                         <h4 className="mb-1">{product.name}</h4>

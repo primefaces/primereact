@@ -83,7 +83,7 @@ export function TemplateDoc(props) {
     const countryOptionTemplate = (option) => {
         return (
             <div className="country-item">
-                {option.states && <img alt={option.name} src="/images/flag/flag_placeholder.png" className={`flag flag-${option.code.toLowerCase()}`} />}
+                {option.states && <img alt={option.name} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={`flag flag-${option.code.toLowerCase()}`} />}
                 {option.cities && <i className="pi pi-compass mr-2" />}
                 {option.cname && <i className="pi pi-map-marker mr-2" />}
                 <span>{option.cname || option.name}</span>
@@ -183,7 +183,7 @@ export default function TemplateDemo() {
     const countryOptionTemplate = (option) => {
         return (
             <div className="country-item">
-                {option.states && <img alt={option.name} src="https://primereact.org/images/flag/flag_placeholder.png"
+                {option.states && <img alt={option.name} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png"
                 className={\`flag flag-\${option.code.toLowerCase()}\`} />}
                 {option.cities && <i className="pi pi-compass mr-2"/>}
                 {option.cname && <i className="pi pi-map-marker mr-2"/>}
@@ -303,7 +303,7 @@ export default function TemplateDemo() {
     const countryOptionTemplate = (option) => {
         return (
             <div className="country-item">
-                {option.states && <img alt={option.name} src="https://primereact.org/images/flag/flag_placeholder.png"
+                {option.states && <img alt={option.name} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png"
                 className={\`flag flag-\${option.code.toLowerCase()}\`} />}
                 {option.cities && <i className="pi pi-compass mr-2"/>}
                 {option.cname && <i className="pi pi-map-marker mr-2"/>}

@@ -12,7 +12,7 @@ const TemplatesPage = () => {
                 <div className="col-12 lg:col-6 xl:col-4">
                     <div class="card mb-0">
                         <a href="https://www.primefaces.org/apollo-react" rel="noopener noreferrer" target="_blank">
-                            <img alt="Apollo" src="/images/layouts/apollo-nextjs.jpg" className="w-full" />
+                            <img alt="Apollo" src="https://primefaces.org/cdn/primereact/images/layouts/apollo-nextjs.jpg" className="w-full" />
                         </a>
                         <div class="flex gap-3 mt-3">
                             <a href="https://www.primefaces.org/apollo-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
@@ -27,7 +27,7 @@ const TemplatesPage = () => {
                 <div className="col-12 lg:col-6 xl:col-4">
                     <div class="card mb-0">
                         <a href="https://www.primefaces.org/sakai-react" rel="noopener noreferrer" target="_blank">
-                            <img alt="Sakai" src="/images/layouts/sakai-react.jpg" className="w-full" />
+                            <img alt="Sakai" src="https://primefaces.org/cdn/primereact/images/layouts/sakai-react.jpg" className="w-full" />
                         </a>
                         <div class="flex gap-3 mt-3">
                             <a href="https://www.primefaces.org/sakai-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
@@ -42,7 +42,7 @@ const TemplatesPage = () => {
                 <div className="col-12 lg:col-6 xl:col-4">
                     <div class="card mb-0">
                         <a href="https://www.primefaces.org/atlantis-react" rel="noopener noreferrer" target="_blank">
-                            <img alt="Atlantis" src="/images/layouts/atlantis-react.jpg" className="w-full" />
+                            <img alt="Atlantis" src="https://primefaces.org/cdn/primereact/images/layouts/atlantis-react.jpg" className="w-full" />
                         </a>
                         <div class="flex gap-3 mt-3">
                             <a href="https://www.primefaces.org/atlantis-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
@@ -57,7 +57,7 @@ const TemplatesPage = () => {
                 <div className="col-12 lg:col-6 xl:col-4">
                     <div class="card mb-0">
                         <a href="https://www.primefaces.org/freya-react" rel="noopener noreferrer" target="_blank">
-                            <img alt="Freya" src="/images/layouts/freya-react.jpg" className="w-full" />
+                            <img alt="Freya" src="https://primefaces.org/cdn/primereact/images/layouts/freya-react.jpg" className="w-full" />
                         </a>
                         <div class="flex gap-3 mt-3">
                             <a href="https://www.primefaces.org/freya-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
@@ -72,7 +72,7 @@ const TemplatesPage = () => {
                 <div className="col-12 lg:col-6 xl:col-4">
                     <div class="card mb-0">
                         <a href="https://www.primefaces.org/ultima-react" rel="noopener noreferrer" target="_blank">
-                            <img alt="Ultima" src="/images/layouts/atlantis-react.jpg" className="w-full" />
+                            <img alt="Ultima" src="https://primefaces.org/cdn/primereact/images/layouts/atlantis-react.jpg" className="w-full" />
                         </a>
                         <div class="flex gap-3 mt-3">
                             <a href="https://www.primefaces.org/ultima-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
@@ -87,7 +87,7 @@ const TemplatesPage = () => {
                 <div className="col-12 lg:col-6 xl:col-4">
                     <div class="card mb-0">
                         <a href="https://www.primefaces.org/diamond-react" rel="noopener noreferrer" target="_blank">
-                            <img alt="Diamond" src="/images/layouts/diamond-react.jpg" className="w-full" />
+                            <img alt="Diamond" src="https://primefaces.org/cdn/primereact/images/layouts/diamond-react.jpg" className="w-full" />
                         </a>
                         <div class="flex gap-3 mt-3">
                             <a href="https://www.primefaces.org/diamond-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
@@ -102,7 +102,7 @@ const TemplatesPage = () => {
                 <div className="col-12 lg:col-6 xl:col-4">
                     <div class="card mb-0">
                         <a href="https://www.primefaces.org/sapphire-react" rel="noopener noreferrer" target="_blank">
-                            <img alt="Sapphire" src="/images/layouts/sapphire-react.jpg" className="w-full" />
+                            <img alt="Sapphire" src="https://primefaces.org/cdn/primereact/images/layouts/sapphire-react.jpg" className="w-full" />
                         </a>
                         <div class="flex gap-3 mt-3">
                             <a href="https://www.primefaces.org/sapphire-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
@@ -117,7 +117,7 @@ const TemplatesPage = () => {
                 <div className="col-12 lg:col-6 xl:col-4">
                     <div class="card mb-0">
                         <a href="https://www.primefaces.org/serenity-react" rel="noopener noreferrer" target="_blank">
-                            <img alt="Serenity" src="/images/layouts/serenity-react.jpg" className="w-full" />
+                            <img alt="Serenity" src="https://primefaces.org/cdn/primereact/images/layouts/serenity-react.jpg" className="w-full" />
                         </a>
                         <div class="flex gap-3 mt-3">
                             <a href="https://www.primefaces.org/serenity-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
@@ -132,7 +132,7 @@ const TemplatesPage = () => {
                 <div className="col-12 lg:col-6 xl:col-4">
                     <div class="card mb-0">
                         <a href="https://www.primefaces.org/babylon-react" rel="noopener noreferrer" target="_blank">
-                            <img alt="Babylon" src="/images/layouts/babylon-react.jpg" className="w-full" />
+                            <img alt="Babylon" src="https://primefaces.org/cdn/primereact/images/layouts/babylon-react.jpg" className="w-full" />
                         </a>
                         <div class="flex gap-3 mt-3">
                             <a href="https://www.primefaces.org/babylon-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
@@ -147,7 +147,7 @@ const TemplatesPage = () => {
                 <div className="col-12 lg:col-6 xl:col-4">
                     <div class="card mb-0">
                         <a href="https://www.primefaces.org/avalon-react" rel="noopener noreferrer" target="_blank">
-                            <img alt="Avalon" src="/images/layouts/avalon-react.jpg" className="w-full" />
+                            <img alt="Avalon" src="https://primefaces.org/cdn/primereact/images/layouts/avalon-react.jpg" className="w-full" />
                         </a>
                         <div class="flex gap-3 mt-3">
                             <a href="https://www.primefaces.org/avalon-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
@@ -162,7 +162,7 @@ const TemplatesPage = () => {
                 <div className="col-12 lg:col-6 xl:col-4">
                     <div class="card mb-0">
                         <a href="https://www.primefaces.org/roma-react" rel="noopener noreferrer" target="_blank">
-                            <img alt="Roma" src="/images/layouts/roma-react.jpg" className="w-full" />
+                            <img alt="Roma" src="https://primefaces.org/cdn/primereact/images/layouts/roma-react.jpg" className="w-full" />
                         </a>
                         <div class="flex gap-3 mt-3">
                             <a href="https://www.primefaces.org/roma-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">

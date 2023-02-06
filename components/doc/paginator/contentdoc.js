@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Paginator } from '../../lib/paginator/Paginator';
 import { Button } from '../../lib/button/Button';
+import { Paginator } from '../../lib/paginator/Paginator';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
@@ -45,7 +45,7 @@ export default function ContentDoc() {
             leftContent={leftContent} rightContent={rightContent}
             template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator>
             <div className="p-3 text-center">
-                <img alt={contentFirst} src={\`https://primereact.org/images/nature/nature\${contentFirst + 1}.jpg\`} />
+                <img alt={contentFirst} src={\`https://primefaces.org/cdn/primereact/images/nature/nature\${contentFirst + 1}.jpg\`} />
             </div>
         </div>
     )
@@ -72,7 +72,7 @@ export default function ContentDoc() {
             leftContent={leftContent} rightContent={rightContent}
             template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator>
             <div className="p-3 text-center">
-                <img alt={contentFirst} src={\`https://primereact.org/images/nature/nature\${contentFirst + 1}.jpg\`} />
+                <img alt={contentFirst} src={\`https://primefaces.org/cdn/primereact/images/nature/nature\${contentFirst + 1}.jpg\`} />
             </div>
         </div>
     )
@@ -97,7 +97,7 @@ export default function ContentDoc() {
                 ></Paginator>
 
                 <div className="p-3 text-center">
-                    <img alt={contentFirst} src={`/images/nature/nature${contentFirst + 1}.jpg`} />
+                    <img alt={contentFirst} src={`https://primefaces.org/cdn/primereact/images/nature/nature${contentFirst + 1}.jpg`} />
                 </div>
             </div>
             <DocSectionCode code={code} />

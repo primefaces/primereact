@@ -21,7 +21,7 @@ export function DesignerDoc(props) {
                     Visit <a href="https://www.primefaces.org/designer/primereact">Designer Website</a> for more information and live demos.
                 </p>
                 <a href="http://www.primefaces.org/designer/primereact">
-                    <img alt="PrimeReact Designer" src="/images/primereact-designer.jpg" className="w-full" />
+                    <img alt="PrimeReact Designer" src="https://primefaces.org/cdn/primereact/images/primereact-designer.jpg" className="w-full" />
                 </a>
             </DocSectionText>
         </>

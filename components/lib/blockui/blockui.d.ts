@@ -68,7 +68,7 @@ export interface BlockUIProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
  *
  * [Live Demo](https://www.primefaces.org/primereact/blockui/)
  * --- ---
- * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

@@ -110,7 +110,7 @@ export interface InputSwitchProps extends Omit<React.DetailedHTMLProps<React.Inp
  *
  * [Live Demo](https://www.primefaces.org/primereact/inputswitch/)
  * --- ---
- * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

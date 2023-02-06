@@ -10,7 +10,7 @@ export function ArchitectureDoc(props) {
                     that provide an application layout as well. All the free themes are built with the <a href="https://www.primefaces.org/designer/primereact">Theme Designer</a> and the npm package brings the compiled CSS output of the theme whereas
                     SCSS is kept as a premium feature in the designer.
                 </p>
-                <img alt="Architecture" src="/images/architecture.jpg" className="w-full" />
+                <img alt="Architecture" src="https://primefaces.org/cdn/primereact/images/architecture.jpg" className="w-full" />
             </DocSectionText>
         </>
     );

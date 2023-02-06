@@ -93,7 +93,7 @@ const ThemeSection = (props) => {
 
         return (
             <React.Fragment>
-                <img alt={representative.name} src={`/images/avatar/${representative.image}`} width={32} style={{ verticalAlign: 'middle' }} />
+                <img alt={representative.name} src={`https://primefaces.org/cdn/primereact/images/avatar/${representative.image}`} width={32} style={{ verticalAlign: 'middle' }} />
                 <span className="vertical-align-middle ml-2">{representative.name}</span>
             </React.Fragment>
         );

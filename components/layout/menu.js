@@ -110,7 +110,7 @@ export default function Menu(props) {
         <aside className={sidebarClassName}>
             <Link href="/">
                 <a className="logo" aria-label="PrimeReact logo">
-                    <img alt="logo" src={`/images/primereact-logo${props.darkTheme ? '-light' : '-dark'}.svg`} />
+                    <img alt="logo" src={`https://primefaces.org/cdn/primereact/images/primereact-logo${props.darkTheme ? '-light' : '-dark'}.svg`} />
                 </a>
             </Link>
             <nav>

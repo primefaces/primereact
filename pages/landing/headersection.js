@@ -50,7 +50,7 @@ const HeaderSection = (props) => {
     return (
         <section ref={containerElement} className={headerClassName}>
             <span>
-                <img src={`/images/primereact-logo-${props.dark ? 'light' : 'dark'}.svg`} alt="primereact logo" className="landing-header-logo" />
+                <img src={`https://primefaces.org/cdn/primereact/images/primereact-logo-${props.dark ? 'light' : 'dark'}.svg`} alt="primereact logo" className="landing-header-logo" />
             </span>
 
             <div className="flex align-items-center">

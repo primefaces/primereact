@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { ProductService } from '../../../service/ProductService';
+import { Button } from '../../lib/button/Button';
 import { DataScroller } from '../../lib/datascroller/DataScroller';
 import { Rating } from '../../lib/rating/Rating';
-import { Button } from '../../lib/button/Button';
-import { ProductService } from '../../../service/ProductService';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
@@ -16,7 +16,7 @@ export function BasicDoc(props) {
     const itemTemplate = (data) => {
         return (
             <div className="product-item">
-                <img src={`/images/product/${data.image}`} alt={data.name} />
+                <img src={`https://primefaces.org/cdn/primereact/images/product/${data.image}`} alt={data.name} />
                 <div className="product-detail">
                     <div className="product-name">{data.name}</div>
                     <div className="product-description">{data.description}</div>
@@ -56,7 +56,7 @@ export default function BasicDoc() {
     const itemTemplate = (data) => {
         return (
             <div className="product-item">
-                <img src={\`https://primereact.org/images/product/\${data.image}\`} alt={data.name} />
+                <img src={\`https://primefaces.org/cdn/primereact/images/product/\${data.image}\`} alt={data.name} />
                 <div className="product-detail">
                     <div className="product-name">{data.name}</div>
                     <div className="product-description">{data.description}</div>
@@ -98,7 +98,7 @@ export default function BasicDoc() {
     const itemTemplate = (data) => {
         return (
             <div className="product-item">
-                <img src={\`https://primereact.org/images/product/\${data.image}\`} alt={data.name} />
+                <img src={\`https://primefaces.org/cdn/primereact/images/product/\${data.image}\`} alt={data.name} />
                 <div className="product-detail">
                     <div className="product-name">{data.name}</div>
                     <div className="product-description">{data.description}</div>

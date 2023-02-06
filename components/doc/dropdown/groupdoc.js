@@ -41,7 +41,7 @@ export function GroupDoc(props) {
     const groupedItemTemplate = (option) => {
         return (
             <div className="flex align-items-center">
-                <img alt={option.label} src="/images/flag/flag_placeholder.png" className={`mr-2 flag flag-${option.code.toLowerCase()}`} style={{ width: '18px' }} />
+                <img alt={option.label} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={`mr-2 flag flag-${option.code.toLowerCase()}`} style={{ width: '18px' }} />
                 <div>{option.label}</div>
             </div>
         );
@@ -94,7 +94,7 @@ export default function GroupedDemo() {
     const groupedItemTemplate = (option) => {
         return (
             <div className="flex align-items-center">
-                <img alt={option.label} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`mr-2 flag flag-\${option.code.toLowerCase()}\`} style={{ width: '18px' }} />
+                <img alt={option.label} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={\`mr-2 flag flag-\${option.code.toLowerCase()}\`} style={{ width: '18px' }} />
                 <div>{option.label}</div>
             </div>
         );
@@ -158,7 +158,7 @@ export default function GroupedDemo() {
     const groupedItemTemplate = (option: City) => {
         return (
             <div className="flex align-items-center">
-                <img alt={option.label} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`mr-2 flag flag-\${option.code.toLowerCase()}\`} style={{ width: '18px' }} />
+                <img alt={option.label} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={\`mr-2 flag flag-\${option.code.toLowerCase()}\`} style={{ width: '18px' }} />
                 <div>{option.label}</div>
             </div>
         );

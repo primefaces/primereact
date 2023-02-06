@@ -98,7 +98,7 @@ export interface DataScrollerProps extends Omit<React.DetailedHTMLProps<React.HT
  *
  * [Live Demo](https://www.primefaces.org/primereact/datascroller/)
  * --- ---
- * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

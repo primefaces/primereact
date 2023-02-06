@@ -18,7 +18,7 @@ export function ExpandableRowGroupsDoc(props) {
     const headerTemplate = (data) => {
         return (
             <React.Fragment>
-                <img alt={data.representative.name} src={`/images/avatar/${data.representative.image}`} width="32" style={{ verticalAlign: 'middle' }} />
+                <img alt={data.representative.name} src={`https://primefaces.org/cdn/primereact/images/avatar/${data.representative.image}`} width="32" style={{ verticalAlign: 'middle' }} />
                 <span className="vertical-align-middle ml-2">{data.representative.name}</span>
             </React.Fragment>
         );
@@ -106,7 +106,7 @@ export default function ExpandableRowGroupsDoc() {
     const headerTemplate = (data) => {
         return (
             <React.Fragment>
-                <img alt={data.representative.name} src={\`https://primereact.org/images/avatar/\${data.representative.image}\`} width="32" style={{ verticalAlign: 'middle' }} />
+                <img alt={data.representative.name} src={\`https://primefaces.org/cdn/primereact/images/avatar/\${data.representative.image}\`} width="32" style={{ verticalAlign: 'middle' }} />
                 <span className="vertical-align-middle ml-2">{data.representative.name}</span>
             </React.Fragment>
         );
@@ -124,7 +124,7 @@ export default function ExpandableRowGroupsDoc() {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt={rowData.country.name} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} width="30" />
+                <img alt={rowData.country.name} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} width="30" />
                 <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );
@@ -196,7 +196,7 @@ export default function ExpandableRowGroupsDoc() {
     const headerTemplate = (data) => {
         return (
             <React.Fragment>
-                <img alt={data.representative.name} src={\`https://primereact.org/images/avatar/\${data.representative.image}\`} width="32" style={{ verticalAlign: 'middle' }} />
+                <img alt={data.representative.name} src={\`https://primefaces.org/cdn/primereact/images/avatar/\${data.representative.image}\`} width="32" style={{ verticalAlign: 'middle' }} />
                 <span className="vertical-align-middle ml-2">{data.representative.name}</span>
             </React.Fragment>
         );
@@ -214,7 +214,7 @@ export default function ExpandableRowGroupsDoc() {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img alt={rowData.country.name} src="https://primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} width="30" />
+                <img alt={rowData.country.name} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} width="30" />
                 <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );

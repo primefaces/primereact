@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
-import { DataTable } from '../../lib/datatable/DataTable';
-import { Column } from '../../lib/column/Column';
-import { Button } from '../../lib/button/Button';
-import { Rating } from '../../lib/rating/Rating';
+import { useEffect, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
+import { Button } from '../../lib/button/Button';
+import { Column } from '../../lib/column/Column';
+import { DataTable } from '../../lib/datatable/DataTable';
+import { Rating } from '../../lib/rating/Rating';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
@@ -19,7 +19,7 @@ export function TemplateDoc(props) {
     };
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={`/images/product/${rowData.image}`} alt={rowData.image} className="product-image" />;
+        return <img src={`https://primefaces.org/cdn/primereact/images/product/${rowData.image}`} alt={rowData.image} className="product-image" />;
     };
 
     const priceBodyTemplate = (rowData) => {
@@ -75,7 +75,7 @@ export default function TemplateDoc() {
     }
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={\`https://primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} className="product-image" />;
+        return <img src={\`https://primefaces.org/cdn/primereact/images/product/\${rowData.image}\`} alt={rowData.image} className="product-image" />;
     }
 
     const priceBodyTemplate = (rowData) => {
@@ -135,7 +135,7 @@ export default function TemplateDoc() {
     }
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={\`https://primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} className="product-image" />;
+        return <img src={\`https://primefaces.org/cdn/primereact/images/product/\${rowData.image}\`} alt={rowData.image} className="product-image" />;
     }
 
     const priceBodyTemplate = (rowData) => {

@@ -1,6 +1,6 @@
-import { Timeline } from '../../lib/timeline/Timeline';
-import { Card } from '../../lib/card/Card';
 import { Button } from '../../lib/button/Button';
+import { Card } from '../../lib/card/Card';
+import { Timeline } from '../../lib/timeline/Timeline';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
@@ -23,7 +23,7 @@ export function CustomizedDoc(props) {
     const customizedContent = (item) => {
         return (
             <Card title={item.status} subTitle={item.date}>
-                {item.image && <img src={`/images/product/${item.image}`} alt={item.name} width={200} className="shadow-1" />}
+                {item.image && <img src={`https://primefaces.org/cdn/primereact/images/product/${item.image}`} alt={item.name} width={200} className="shadow-1" />}
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
                     quas!
@@ -63,7 +63,7 @@ export default function CustomizedDoc() {
     const customizedContent = (item) => {
         return (
             <Card title={item.status} subTitle={item.date}>
-                { item.image && <img src={\`https://primereact.org/images/product/\${item.image}\`} alt={item.name} width={200} className="shadow-1" />}
+                { item.image && <img src={\`https://primefaces.org/cdn/primereact/images/product/\${item.image}\`} alt={item.name} width={200} className="shadow-1" />}
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
                     quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
                 <Button label="Read more" className="p-button-text"></Button>
@@ -105,7 +105,7 @@ export default function CustomizedDoc() {
     const customizedContent = (item) => {
         return (
             <Card title={item.status} subTitle={item.date}>
-                { item.image && <img src={\`https://primereact.org/images/product/\${item.image}\`} alt={item.name} width={200} className="shadow-1" />}
+                { item.image && <img src={\`https://primefaces.org/cdn/primereact/images/product/\${item.image}\`} alt={item.name} width={200} className="shadow-1" />}
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
                     quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
                 <Button label="Read more" className="p-button-text"></Button>

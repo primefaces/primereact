@@ -65,7 +65,7 @@ export interface TriStateCheckboxProps extends Omit<React.DetailedHTMLProps<Reac
  *
  * [Live Demo](https://www.primefaces.org/primereact/tristatecheckbox/)
  * --- ---
- * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

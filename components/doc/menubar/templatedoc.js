@@ -1,5 +1,5 @@
-import { Menubar } from '../../lib/menubar/Menubar';
 import { InputText } from '../../lib/inputtext/InputText';
+import { Menubar } from '../../lib/menubar/Menubar';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
@@ -269,7 +269,7 @@ export default function TemplateDemo() {
         }
     ];
 
-    const start = <img alt="logo" src="https://primereact.org/images/logo.png" height="40" className="mr-2"></img>;
+    const start = <img alt="logo" src="https://primefaces.org/cdn/primereact/images/logo.png" height="40" className="mr-2"></img>;
     const end = <InputText placeholder="Search" type="text" />;
 
     return (
@@ -414,7 +414,7 @@ export default function TemplateDemo() {
         }
     ];
 
-    const start = <img alt="logo" src="https://primereact.org/images/logo.png" height="40" className="mr-2"></img>;
+    const start = <img alt="logo" src="https://primefaces.org/cdn/primereact/images/logo.png" height="40" className="mr-2"></img>;
     const end = <InputText placeholder="Search" type="text" />;
     
     return (
