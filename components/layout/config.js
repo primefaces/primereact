@@ -72,25 +72,25 @@ export default function Config(props) {
                     <div className="grid free-themes">
                         <div className="col-3 flex flex-column align-items-center gap-2">
                             <button className="p-link" onClick={() => onThemeChange('bootstrap4-light-blue')}>
-                                <img src="https://primefaces.org/cdn/primereacthttps://primefaces.org/cdn/primereact/images/themes/bootstrap4-light-blue.svg" alt="Bootstrap Light Blue" className="w-3rem border-round" />
+                                <img src="https://primefaces.org/cdn/primereact/images/themes/bootstrap4-light-blue.svg" alt="Bootstrap Light Blue" className="w-3rem border-round" />
                             </button>
                             <span className="white-space-nowrap">Blue</span>
                         </div>
                         <div className="col-3 flex flex-column align-items-center gap-2">
                             <button className="p-link" onClick={() => onThemeChange('bootstrap4-light-purple')}>
-                                <img src="https://primefaces.org/cdn/primereacthttps://primefaces.org/cdn/primereact/images/themes/bootstrap4-light-purple.svg" alt="Bootstrap Light Blue" className="w-3rem border-round" />
+                                <img src="https://primefaces.org/cdn/primereact/images/themes/bootstrap4-light-purple.svg" alt="Bootstrap Light Blue" className="w-3rem border-round" />
                             </button>
                             <span className="white-space-nowrap">Purple</span>
                         </div>
                         <div className="col-3 flex flex-column align-items-center gap-2">
                             <button className="p-link" onClick={() => onThemeChange('bootstrap4-dark-blue', true)}>
-                                <img src="https://primefaces.org/cdn/primereacthttps://primefaces.org/cdn/primereact/images/themes/bootstrap4-dark-blue.svg" alt="Bootstrap Dark Blue" className="w-3rem border-round" />
+                                <img src="https://primefaces.org/cdn/primereact/images/themes/bootstrap4-dark-blue.svg" alt="Bootstrap Dark Blue" className="w-3rem border-round" />
                             </button>
                             <span className="white-space-nowrap">Blue</span>
                         </div>
                         <div className="col-3 flex flex-column align-items-center gap-2">
                             <button className="p-link" onClick={() => onThemeChange('bootstrap4-dark-purple', true)}>
-                                <img src="https://primefaces.org/cdn/primereacthttps://primefaces.org/cdn/primereact/images/themes/bootstrap4-dark-purple.svg" alt="Bootstrap Dark Blue" className="w-3rem border-round" />
+                                <img src="https://primefaces.org/cdn/primereact/images/themes/bootstrap4-dark-purple.svg" alt="Bootstrap Dark Blue" className="w-3rem border-round" />
                             </button>
                             <span className="white-space-nowrap">Purple</span>
                         </div>
@@ -100,25 +100,25 @@ export default function Config(props) {
                     <div className="grid free-themes">
                         <div className="col-3 flex flex-column align-items-center gap-2">
                             <button className="p-link" onClick={() => onThemeChange('md-light-indigo')}>
-                                <img src="https://primefaces.org/cdn/primereacthttps://primefaces.org/cdn/primereact/images/themes/md-light-indigo.svg" alt="Material Light Indigo" className="w-3rem border-round" />
+                                <img src="https://primefaces.org/cdn/primereact/images/themes/md-light-indigo.svg" alt="Material Light Indigo" className="w-3rem border-round" />
                             </button>
                             <span className="white-space-nowrap">Indigo</span>
                         </div>
                         <div className="col-3 flex flex-column align-items-center gap-2">
                             <button className="p-link" onClick={() => onThemeChange('md-light-deeppurple')}>
-                                <img src="https://primefaces.org/cdn/primereacthttps://primefaces.org/cdn/primereact/images/themes/md-light-deeppurple.svg" alt="Material Light Deep Purple" className="w-3rem border-round" />
+                                <img src="https://primefaces.org/cdn/primereact/images/themes/md-light-deeppurple.svg" alt="Material Light Deep Purple" className="w-3rem border-round" />
                             </button>
                             <span className="white-space-nowrap">Deep Purple</span>
                         </div>
                         <div className="col-3 flex flex-column align-items-center gap-2">
                             <button className="p-link" onClick={() => onThemeChange('md-dark-indigo', true)}>
-                                <img src="https://primefaces.org/cdn/primereacthttps://primefaces.org/cdn/primereact/images/themes/md-dark-indigo.svg" alt="Material Dark Indigo" className="w-3rem border-round" />
+                                <img src="https://primefaces.org/cdn/primereact/images/themes/md-dark-indigo.svg" alt="Material Dark Indigo" className="w-3rem border-round" />
                             </button>
                             <span className="white-space-nowrap">Indigo</span>
                         </div>
                         <div className="col-3 flex flex-column align-items-center gap-2">
                             <button className="p-link" onClick={() => onThemeChange('md-dark-deeppurple', true)}>
-                                <img src="https://primefaces.org/cdn/primereacthttps://primefaces.org/cdn/primereact/images/themes/md-dark-deeppurple.svg" alt="Material Dark Deep Purple" className="w-3rem border-round" />
+                                <img src="https://primefaces.org/cdn/primereact/images/themes/md-dark-deeppurple.svg" alt="Material Dark Deep Purple" className="w-3rem border-round" />
                             </button>
                             <span className="white-space-nowrap">Deep Purple</span>
                         </div>
@@ -128,25 +128,25 @@ export default function Config(props) {
                     <div className="grid free-themes">
                         <div className="col-3 flex flex-column align-items-center gap-2">
                             <button className="p-link" onClick={() => onThemeChange('mdc-light-indigo')}>
-                                <img src="https://primefaces.org/cdn/primereacthttps://primefaces.org/cdn/primereact/images/themes/md-light-indigo.svg" alt="Material Compact Light Indigo" className="w-3rem border-round" />
+                                <img src="https://primefaces.org/cdn/primereact/images/themes/md-light-indigo.svg" alt="Material Compact Light Indigo" className="w-3rem border-round" />
                             </button>
                             <span className="white-space-nowrap">Indigo</span>
                         </div>
                         <div className="col-3 flex flex-column align-items-center gap-2">
                             <button className="p-link" onClick={() => onThemeChange('mdc-light-deeppurple')}>
-                                <img src="https://primefaces.org/cdn/primereacthttps://primefaces.org/cdn/primereact/images/themes/md-light-deeppurple.svg" alt="Material Compact Deep Purple" className="w-3rem border-round" />
+                                <img src="https://primefaces.org/cdn/primereact/images/themes/md-light-deeppurple.svg" alt="Material Compact Deep Purple" className="w-3rem border-round" />
                             </button>
                             <span className="white-space-nowrap">Deep Purple</span>
                         </div>
                         <div className="col-3 flex flex-column align-items-center gap-2">
                             <button className="p-link" onClick={() => onThemeChange('mdc-dark-indigo', true)}>
-                                <img src="https://primefaces.org/cdn/primereacthttps://primefaces.org/cdn/primereact/images/themes/md-dark-indigo.svg" alt="Material Compact Dark Indigo" className="w-3rem border-round" />
+                                <img src="https://primefaces.org/cdn/primereact/images/themes/md-dark-indigo.svg" alt="Material Compact Dark Indigo" className="w-3rem border-round" />
                             </button>
                             <span className="white-space-nowrap">Indigo</span>
                         </div>
                         <div className="col-3 flex flex-column align-items-center gap-2">
                             <button className="p-link" onClick={() => onThemeChange('mdc-dark-deeppurple', true)}>
-                                <img src="https://primefaces.org/cdn/primereacthttps://primefaces.org/cdn/primereact/images/themes/md-dark-deeppurple.svg" alt="Material Compact Dark Deep Purple" className="w-3rem border-round" />
+                                <img src="https://primefaces.org/cdn/primereact/images/themes/md-dark-deeppurple.svg" alt="Material Compact Dark Deep Purple" className="w-3rem border-round" />
                             </button>
                             <span className="white-space-nowrap">Deep Purple</span>
                         </div>
@@ -156,7 +156,7 @@ export default function Config(props) {
                     <div className="grid free-themes">
                         <div className="col-3 flex flex-column align-items-center gap-2">
                             <button className="p-link" onClick={() => onThemeChange('tailwind-light')}>
-                                <img src="https://primefaces.org/cdn/primereacthttps://primefaces.org/cdn/primereact/images/themes/tailwind-light.png" alt="Tailwind Light" className="w-3rem border-round" />
+                                <img src="https://primefaces.org/cdn/primereact/images/themes/tailwind-light.png" alt="Tailwind Light" className="w-3rem border-round" />
                             </button>
                             <span className="white-space-nowrap">Tailwind Light</span>
                         </div>
@@ -166,7 +166,7 @@ export default function Config(props) {
                     <div className="grid free-themes">
                         <div className="col-3 flex flex-column align-items-center gap-2">
                             <button className="p-link" onClick={() => onThemeChange('fluent-light')}>
-                                <img src="https://primefaces.org/cdn/primereacthttps://primefaces.org/cdn/primereact/images/themes/fluent-light.png" alt="Fluent Light" className="w-3rem border-round" />
+                                <img src="https://primefaces.org/cdn/primereact/images/themes/fluent-light.png" alt="Fluent Light" className="w-3rem border-round" />
                             </button>
                             <span className="white-space-nowrap">Blue</span>
                         </div>
@@ -176,13 +176,13 @@ export default function Config(props) {
                     <div className="grid free-themes">
                         <div className="col-3 flex flex-column align-items-center gap-2">
                             <button className="p-link" onClick={() => onThemeChange('lara-light-indigo')}>
-                                <img src="https://primefaces.org/cdn/primereacthttps://primefaces.org/cdn/primereact/images/themes/lara-light-indigo.png" alt="Lara Light Indigo" className="w-3rem border-round" />
+                                <img src="https://primefaces.org/cdn/primereact/images/themes/lara-light-indigo.png" alt="Lara Light Indigo" className="w-3rem border-round" />
                             </button>
                             <span className="white-space-nowrap">Lara Indigo</span>
                         </div>
                         <div className="col-3 flex flex-column align-items-center gap-2">
                             <button className="p-link" onClick={() => onThemeChange('lara-light-blue')}>
-                                <img src="https://primefaces.org/cdn/primereacthttps://primefaces.org/cdn/primereact/images/themes/lara-light-blue.png" alt="Lara Light Blue" className="w-3rem border-round" />
+                                <img src="https://primefaces.org/cdn/primereact/images/themes/lara-light-blue.png" alt="Lara Light Blue" className="w-3rem border-round" />
                             </button>
                             <span className="white-space-nowrap">Lara Blue</span>
                         </div>
