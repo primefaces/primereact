@@ -513,18 +513,6 @@
                     "to": "/hooks/usecounter"
                 },
                 {
-                    "name": "useEventListener",
-                    "to": "/hooks/useeventlistener"
-                },
-                {
-                    "name": "useFavicon",
-                    "to": "/hooks/usefavicon"
-                },
-                {
-                    "name": "useMountEffect",
-                    "to": "/hooks/usemounteffect"
-                },
-                {
                     "name": "useMouse",
                     "to": "/hooks/usemouse"
                 },
@@ -537,34 +525,36 @@
                     "to": "/hooks/useintersectionobserver"
                 },
                 {
-                    "name": "useInterval",
-                    "to": "/hooks/useinterval"
+                    "name": "useFavicon",
+                    "to": "/hooks/usefavicon"
                 },
                 {
-                    "name": "useOverlayListener",
-                    "to": "/hooks/useoverlaylistener"
+                    "name": "useDebounced",
+                    "to": "/hooks/usedebounced"
                 },
                 {
-                    "name": "useOverlayScrollListener",
-                    "to": "/hooks/useoverlayscrolllistener"
-                }
-            ]
-        },
-        {
-            "name": "Support",
-            "icon": "pi pi-question",
-            "children": [
-                {
-                    "name": "Discord Server",
-                    "href": "https://discord.gg/gzKFYnpmCY"
+                    "name": "useTimeout",
+                    "to": "/hooks/usetimeout"
                 },
                 {
-                    "name": "Forum",
-                    "href": "https://forum.primefaces.org/viewforum.php?f=57"
+                    "name": "useUpdateEffect",
+                    "to": "/hooks/useupdateeffect"
                 },
                 {
-                    "name": "PRO Support",
-                    "to": "/support"
+                    "name": "usePrevious",
+                    "to": "/hooks/useprevious"
+                },
+                {
+                    "name": "useResizeListener",
+                    "to": "/hooks/useresizelistener"
+                },
+                {
+                    "name": "useStorage",
+                    "to": "/hooks/usestorage"
+                },
+                {
+                    "name": "useUnmountEffect",
+                    "to": "/hooks/useunmounteffect"
                 }
             ]
         },

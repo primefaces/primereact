@@ -14,6 +14,7 @@ import { useMouse } from './useMouse';
 import { useMove } from './useMove';
 import { useFavicon } from './useFavicon';
 import { useClickOutside } from './useClickOutside';
+import { useDebounced } from './useDebounced';
 
 export {
     usePrevious,
@@ -33,5 +34,6 @@ export {
     useFavicon,
     useMouse,
     useMove,
-    useClickOutside
+    useClickOutside,
+    useDebounced
 };

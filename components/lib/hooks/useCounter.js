@@ -1,11 +1,9 @@
-import { useState } from 'react';
-
 export const useCounter = (initialValue = 0, options = { step: 1 }) => {
-    const [count, setCount] = useState(initialValue);
+    const [count, setCount] = React.useState(initialValue);
 
     const increment = () => {
         if (options.max && count >= options.max) {
-            return null;
+            return;
         }
 
         setCount(count + options.step);

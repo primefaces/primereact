@@ -1,11 +1,10 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
 import { useEventListener } from './useEventListener';
 
 export const useMouse = () => {
-    const [position, setPosition] = useState({ x: 0, y: 0 });
-    const ref = useRef(null);
+    const [position, setPosition] = React.useState({ x: 0, y: 0 });
+    const ref = React.useRef(null);
 
-    const handleMouseMove = useCallback((event) => {
+    const handleMouseMove = React.useCallback((event) => {
         let x, y;
 
         if (ref.current) {
@@ -34,7 +33,7 @@ export const useMouse = () => {
 
     const reset = () => setPosition({ x: 0, y: 0 });
 
-    useEffect(() => {
+    React.useEffect(() => {
         bindMouseMoveEventListener();
 
         if (!ref.current) {
