@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { classNames } from '../../lib/utils/Utils';
 import { DocApiSection } from './docapisection';
@@ -7,6 +8,12 @@ import { DocSections } from './docsections';
 
 export function DocComponent(props) {
     const [tab, setTab] = useState(0);
+    const router = useRouter();
+
+    const activateTab = (i) => {
+        setTab(i);
+        router.replace(router.pathname);
+    };
 
     return (
         <div className="doc-component">
@@ -16,12 +23,12 @@ export function DocComponent(props) {
             </Head>
             <ul className="doc-tabmenu">
                 <li className={classNames({ 'doc-tabmenu-active': tab === 0 })}>
-                    <button type="button" onClick={() => setTab(0)}>
+                    <button type="button" onClick={() => activateTab(0)}>
                         COMPONENT
                     </button>
                 </li>
                 <li className={classNames({ 'doc-tabmenu-active': tab === 1 })}>
-                    <button type="button" onClick={() => setTab(1)}>
+                    <button type="button" onClick={() => activateTab(1)}>
                         API
                     </button>
                 </li>

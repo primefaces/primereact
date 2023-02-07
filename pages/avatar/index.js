@@ -1,12 +1,11 @@
 import React from 'react';
 import { AccessibilityDoc } from '../../components/doc/avatar/accessibilitydoc';
-import { AvatarGroupDoc } from '../../components/doc/avatar/avatargroupdoc';
+import { GroupDoc } from '../../components/doc/avatar/groupdoc';
 import { IconDoc } from '../../components/doc/avatar/icondoc';
 import { ImageDoc } from '../../components/doc/avatar/imagedoc';
 import { ImportDoc } from '../../components/doc/avatar/importdoc';
 import { LabelDoc } from '../../components/doc/avatar/labeldoc';
-import { StylingAvatarDoc } from '../../components/doc/avatar/stylingavatardoc';
-import { StylingAvatarGroupDoc } from '../../components/doc/avatar/stylingavatargroupdoc';
+import { StyleDoc } from '../../components/doc/avatar/styledoc';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 
 const AvatarDemo = () => {
@@ -32,19 +31,14 @@ const AvatarDemo = () => {
             component: ImageDoc
         },
         {
-            id: 'avatargroup',
-            label: 'AvatarGroup',
-            component: AvatarGroupDoc
+            id: 'group',
+            label: 'Group',
+            component: GroupDoc
         },
         {
-            id: 'stylingofavatar',
-            label: 'Styling of Avatar',
-            component: StylingAvatarDoc
-        },
-        {
-            id: 'stylingofavatargroup',
-            label: 'Styling of Avatar Group',
-            component: StylingAvatarGroupDoc
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
         },
         {
             id: 'accessibility',
