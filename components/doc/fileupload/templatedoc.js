@@ -1,10 +1,10 @@
 import { useRef, useState } from 'react';
+import { Button } from '../../lib/button/Button';
 import { FileUpload } from '../../lib/fileupload/FileUpload';
+import { ProgressBar } from '../../lib/progressbar/ProgressBar';
+import { Tag } from '../../lib/tag/Tag';
 import { Toast } from '../../lib/toast/Toast';
 import { Tooltip } from '../../lib/tooltip/Tooltip';
-import { Tag } from '../../lib/tag/Tag';
-import { ProgressBar } from '../../lib/progressbar/ProgressBar';
-import { Button } from '../../lib/button/Button';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
@@ -54,7 +54,10 @@ export function TemplateDoc(props) {
                 {chooseButton}
                 {uploadButton}
                 {cancelButton}
-                <ProgressBar value={value} displayValueTemplate={() => `${formatedValue} / 1 MB`} style={{ width: '300px', height: '20px', marginLeft: 'auto' }}></ProgressBar>
+                <div className="flex align-items-center gap-3 ml-auto">
+                    <span>{formatedValue} / 1 MB</span>
+                    <ProgressBar value={value} showValue={false} style={{ width: '10rem', height: '12px' }}></ProgressBar>
+                </div>
             </div>
         );
     };
@@ -99,10 +102,9 @@ export function TemplateDoc(props) {
 <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" />
 
 <FileUpload ref={fileUploadRef} name="demo[]" url="/api/upload" multiple accept="image/*" maxFileSize={1000000}
-onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
-headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate}
-chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
-
+    onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
+    headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate}
+    chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
         `,
         javascript: `
 import React, { useRef, useState } from 'react';
@@ -113,7 +115,7 @@ import { Button } from 'primereact/button';
 import { Tooltip } from 'primereact/tooltip';
 import { Tag } from 'primereact/tag';
 
-export default function TemplateDoc() {
+export default function TemplateDemo() {
     const toast = useRef(null);
     const [totalSize, setTotalSize] = useState(0);
     const fileUploadRef = useRef(null);
@@ -159,7 +161,10 @@ export default function TemplateDoc() {
                 {chooseButton}
                 {uploadButton}
                 {cancelButton}
-                <ProgressBar value={value} displayValueTemplate={() => \`\${formatedValue} / 1 MB\`} style={{width: '300px', height: '20px', marginLeft: 'auto'}}></ProgressBar>
+                <div className="flex align-items-center gap-3 ml-auto">
+                    <span>{formatedValue} / 1 MB</span>
+                    <ProgressBar value={value} showValue={false} style={{ width: '10rem', height: '12px' }}></ProgressBar>
+                </div>
             </div>
         );
     };
@@ -203,10 +208,10 @@ export default function TemplateDoc() {
             <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />
             <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" />
 
-            <FileUpload ref={fileUploadRef} name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" multiple accept="image/*" maxFileSize={1000000}
-            onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
-            headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate}
-            chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
+            <FileUpload ref={fileUploadRef} name="demo[]" url="/api/upload" multiple accept="image/*" maxFileSize={1000000}
+                onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
+                headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate}
+                chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
         </div>
     )
 }
@@ -220,7 +225,7 @@ import { Button } from 'primereact/button';
 import { Tooltip } from 'primereact/tooltip';
 import { Tag } from 'primereact/tag';
 
-export default function TemplateDoc() {
+export default function TemplateDemo() {
     const toast = useRef(null);
     const [totalSize, setTotalSize] = useState(0);
     const fileUploadRef = useRef(null);
@@ -266,7 +271,10 @@ export default function TemplateDoc() {
                 {chooseButton}
                 {uploadButton}
                 {cancelButton}
-                <ProgressBar value={value} displayValueTemplate={() => \`\${formatedValue} / 1 MB\`} style={{width: '300px', height: '20px', marginLeft: 'auto'}}></ProgressBar>
+                <div className="flex align-items-center gap-3 ml-auto">
+                    <span>{formatedValue} / 1 MB</span>
+                    <ProgressBar value={value} showValue={false} style={{ width: '10rem', height: '12px' }}></ProgressBar>
+                </div>
             </div>
         );
     };
@@ -310,10 +318,10 @@ export default function TemplateDoc() {
             <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />
             <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" />
 
-            <FileUpload ref={fileUploadRef} name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" multiple accept="image/*" maxFileSize={1000000}
-            onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
-            headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate}
-            chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
+            <FileUpload ref={fileUploadRef} name="demo[]" url="/api/upload" multiple accept="image/*" maxFileSize={1000000}
+                onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
+                headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate}
+                chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
         </div>
     )
 }
@@ -330,7 +338,7 @@ echo '<p>Fake Upload Process</p>'; ?>
     return (
         <>
             <DocSectionText {...props}>
-                <p>Used to create custom item elements in the container.</p>
+                <p>Uploader UI can be customized with templating.</p>
             </DocSectionText>
             <div className="card">
                 <Toast ref={toast}></Toast>
@@ -342,7 +350,7 @@ echo '<p>Fake Upload Process</p>'; ?>
                 <FileUpload
                     ref={fileUploadRef}
                     name="demo[]"
-                    url={'/api/upload'}
+                    url="/api/upload"
                     multiple
                     accept="image/*"
                     maxFileSize={1000000}
