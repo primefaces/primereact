@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import { AccessibilityDoc } from '../../components/doc/button/accessibilitydoc';
 import { BadgesDoc } from '../../components/doc/button/badgesdoc';
 import { BasicDoc } from '../../components/doc/button/basicdoc';
@@ -18,8 +17,7 @@ import { SizesDoc } from '../../components/doc/button/sizesdoc';
 import { StyleDoc } from '../../components/doc/button/styledoc';
 import { TemplateDoc } from '../../components/doc/button/templatedoc';
 import { TextDoc } from '../../components/doc/button/textdoc';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 
 const ButtonDemo = () => {
     const docs = [
@@ -117,32 +115,10 @@ const ButtonDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Button', pathname: '/modules/button.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Button Component</title>
-                <meta name="description" content="Button is an extension to standard input element with icons and theming." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>Button</h1>
-                        <p>Button is an extension to standard input element with icons and theming.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Button Component" header="Button" description="Button is an extension to standard input element with icons and theming." componentDocs={docs} apiDocs={[{ name: 'Button', pathname: '/modules/button.html' }]} />;
 };
 
 export default ButtonDemo;

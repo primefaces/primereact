@@ -1,6 +1,4 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/virtualscroller/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/virtualscroller/basicdoc';
 import { ImportDoc } from '../../components/doc/virtualscroller/importdoc';
@@ -51,31 +49,17 @@ const VirtualScrollerDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'VirtualScroller', pathname: '/modules/virtualscroller.html' }]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React VirtualScroller Component</title>
-                <meta name="description" content="VirtualScroller is a performant approach to handle huge data efficiently." />
-            </Head>
-            <div className="doc virtualscroller-demo">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>VirtualScroller</h1>
-                        <p>VirtualScroller is a performant approach to handle huge data efficiently.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React VirtualScroller Component"
+            header="VirtualScroller"
+            description="VirtualScroller is a performant approach to handle huge data efficiently."
+            componentDocs={docs}
+            apiDocs={[{ name: 'VirtualScroller', pathname: '/modules/virtualscroller.html' }]}
+        />
     );
 };
 

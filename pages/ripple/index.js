@@ -1,7 +1,5 @@
-import Head from 'next/head';
 import React, { useContext } from 'react';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/ripple/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/ripple/basicdoc';
 import { ConfigurationDoc } from '../../components/doc/ripple/configurationdoc';
@@ -35,35 +33,13 @@ const RippleDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Ripple', pathname: '/modules/ripple.html' }]
         }
     ];
     const appContentContext = useContext(AppContentContext);
 
     appContentContext.onRippleChange(true);
 
-    return (
-        <div>
-            <Head>
-                <title>React Ripple Component</title>
-                <meta name="description" content="Ripple component adds ripple effect to the host element." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>Ripple</h1>
-                        <p>Ripple component adds ripple effect to the host element.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Ripple Component" header="Ripple" description="Ripple component adds ripple effect to the host element." componentDocs={docs} apiDocs={[{ name: 'Ripple', pathname: '/modules/ripple.html' }]} />;
 };
 
 export default RippleDemo;

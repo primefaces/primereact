@@ -1,7 +1,5 @@
-import Head from 'next/head';
 import React from 'react';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/password/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/password/basicdoc';
 import { DisabledDoc } from '../../components/doc/password/disableddoc';
@@ -89,32 +87,10 @@ const PasswordDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Password', pathname: '/modules/password.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Password Component</title>
-                <meta name="description" content="Password displays strength indicator for password fields." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>Password</h1>
-                        <p>Password displays strength indicator for password fields.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Password Component" header="Password" description="Password displays strength indicator for password fields." componentDocs={docs} apiDocs={[{ name: 'Password', pathname: '/modules/password.html' }]} />;
 };
 
 export default PasswordDemo;

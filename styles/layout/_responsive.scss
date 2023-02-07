@@ -76,6 +76,10 @@
             display: none;
         }
 
+        .doc-tabmenu {
+            margin-right: 0;
+        }
+
         .video-container {
             position: relative;
             width: 100%;
@@ -114,6 +118,17 @@
         .layout-footer {
             padding-left: 1rem;
             padding-right: 1rem;
+        }
+
+        .doc-tabmenu {
+            li {
+                flex: 1 1 0;
+
+                button {
+                    width: 100%;
+                    min-width: auto;
+                }
+            }
         }
     }
 

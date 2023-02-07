@@ -1,6 +1,4 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/tabview/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/tabview/basicdoc';
 import { ClosableDoc } from '../../components/doc/tabview/closabledoc';
@@ -63,34 +61,20 @@ const TabViewDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [
-                { name: 'TabView', pathname: '/modules/tabview.html' },
-                { name: 'TabPanel', pathname: '/classes/tabview.TabPanel.html' }
-            ]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React Tabs Component</title>
-                <meta name="description" content="TabView is a container component to group content with tabs." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>TabView</h1>
-                        <p>TabView is a container component to group content with tabs.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React Tabs Component"
+            header="TabView"
+            description="TabView is a container component to group content with tabs."
+            componentDocs={docs}
+            apiDocs={[
+                { name: 'TabView', pathname: '/modules/tabview.html' },
+                { name: 'TabPanel', pathname: '/classes/tabview.TabPanel.html' }
+            ]}
+        />
     );
 };
 

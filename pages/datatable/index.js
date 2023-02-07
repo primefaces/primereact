@@ -1,6 +1,4 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/datatable/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/datatable/basicdoc';
 import { ColGroupDoc } from '../../components/doc/datatable/colgroupdoc';
@@ -436,36 +434,22 @@ const DataTableDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [
-                { name: 'DataTable', pathname: '/modules/datatable.html' },
-                { name: 'Column', pathname: '/modules/column.html' },
-                { name: 'Row', pathname: '/modules/row.html' },
-                { name: 'ColumnGroup', pathname: '/modules/columngroup.html' }
-            ]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React Table Component</title>
-                <meta name="description" content="DataTable displays data in tabular format" />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>DataTable</h1>
-                        <p>DataTable displays data in tabular format.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React Table Component"
+            header="DataTable"
+            description="DataTable displays data in tabular format."
+            componentDocs={docs}
+            apiDocs={[
+                { name: 'DataTable', pathname: '/modules/datatable.html' },
+                { name: 'Column', pathname: '/modules/column.html' },
+                { name: 'Row', pathname: '/modules/row.html' },
+                { name: 'ColumnGroup', pathname: '/modules/columngroup.html' }
+            ]}
+        />
     );
 };
 

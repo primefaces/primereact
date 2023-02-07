@@ -1,7 +1,5 @@
-import Head from 'next/head';
 import React from 'react';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/treetable/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/treetable/basicdoc';
 import { ColGroupDoc } from '../../components/doc/treetable/colgroupdoc';
@@ -233,34 +231,20 @@ const TreeTableDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [
-                { name: 'TreeTable', pathname: '/modules/treetable.html' },
-                { name: 'Column', pathname: '/modules/column.html' }
-            ]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React TreeTable Component</title>
-                <meta name="description" content="TreeTable is used to display hierarchical data in tabular format." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>TreeTable</h1>
-                        <p>TreeTable is used to display hierarchical data in tabular format.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React TreeTable Component"
+            header="TreeTable"
+            description="TreeTable is used to display hierarchical data in tabular format."
+            componentDocs={docs}
+            apiDocs={[
+                { name: 'TreeTable', pathname: '/modules/treetable.html' },
+                { name: 'Column', pathname: '/modules/column.html' }
+            ]}
+        />
     );
 };
 

@@ -1,6 +1,4 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/mention/accessibilitydoc';
 import { AutoResizeDoc } from '../../components/doc/mention/autoresizedoc';
 import { BasicDoc } from '../../components/doc/mention/basicdoc';
@@ -76,32 +74,10 @@ const MentionDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Mention', pathname: '/modules/mention.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Mention Component</title>
-                <meta name="description" content="Mention component is used to tag objects in a text." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>Mention</h1>
-                        <p>Mention component is used to tag objects in a text.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Mention Component" header="Mention" description="Mention component is used to tag objects in a text." componentDocs={docs} apiDocs={[{ name: 'Mention', pathname: '/modules/mention.html' }]} />;
 };
 
 export default MentionDemo;

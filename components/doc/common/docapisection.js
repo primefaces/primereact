@@ -2,7 +2,7 @@ import getConfig from 'next/config';
 import React from 'react';
 import { DocSectionText } from './docsectiontext';
 
-function DocApiSection(props) {
+export function DocApiSection(props) {
     /**
      * @todo Version is hard-coded here. It should be dynamic.
      */
@@ -24,10 +24,12 @@ function DocApiSection(props) {
 
     return (
         <React.Fragment>
-            <DocSectionText {...props}>Visit the API documentation for detailed information about all the properties, events and methods of the component.</DocSectionText>
-            <ul {...props}>{renderApiDocs()}</ul>
+            <div className="doc-main">
+                <DocSectionText {...props}>
+                    <p>{props.doc ? 'Visit the API documentation for detailed information about all the properties, events and methods of the component.' : 'The components does not have any Javascript API.'}</p>
+                </DocSectionText>
+                {props.doc ? <ul {...props}>{renderApiDocs()}</ul> : null}
+            </div>
         </React.Fragment>
     );
 }
-
-export default DocApiSection;

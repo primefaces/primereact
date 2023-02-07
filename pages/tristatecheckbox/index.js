@@ -1,6 +1,4 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/tristatecheckbox/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/tristatecheckbox/basicdoc';
 import { DisabledDoc } from '../../components/doc/tristatecheckbox/disableddoc';
@@ -58,31 +56,17 @@ const TriStateCheckboxDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'TriStateCheckbox', pathname: '/modules/tristatecheckbox.html' }]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React TriStateCheckbox Component</title>
-                <meta name="description" content="TriStateCheckbox is an extension to the Checkbox component with an additional state." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>TriStateCheckbox</h1>
-                        <p>TriStateCheckbox is an extension to the Checkbox component with an additional state.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React TriStateCheckbox Component"
+            header="TriStateCheckbox"
+            description="TriStateCheckbox is an extension to the Checkbox component with an additional state."
+            componentDocs={docs}
+            apiDocs={[{ name: 'TriStateCheckbox', pathname: '/modules/tristatecheckbox.html' }]}
+        />
     );
 };
 

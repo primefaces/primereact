@@ -1,7 +1,5 @@
-import Head from 'next/head';
 import React from 'react';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/inputtext/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/inputtext/basicdoc';
 import { DisabledDoc } from '../../components/doc/inputtext/disableddoc';
@@ -89,31 +87,17 @@ const InputTextDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'InputText', pathname: '/modules/inputtext.html' }]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React InputText Component</title>
-                <meta name="description" content="InputText is an extension to standard input element with theming and keyfiltering." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>InputText</h1>
-                        <p>InputText is an extension to standard input element with theming and keyfiltering.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React Input Component"
+            header="InputText"
+            description="InputText is an extension to standard input element with theming and keyfiltering."
+            componentDocs={docs}
+            apiDocs={[{ name: 'InputText', pathname: '/modules/inputtext.html' }]}
+        />
     );
 };
 

@@ -1,7 +1,5 @@
-import Head from 'next/head';
 import React from 'react';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/timeline/accessibilitydoc';
 import { AlignmentDoc } from '../../components/doc/timeline/alignmentdoc';
 import { BasicDoc } from '../../components/doc/timeline/basicdoc';
@@ -52,32 +50,10 @@ const TimelineDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Timeline', pathname: '/modules/timeline.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Timeline Component</title>
-                <meta name="description" content="Timeline visualizes a series of chained events." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>Timeline</h1>
-                        <p>Timeline visualizes a series of chained events.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Timeline Component" header="Timeline" description="Timeline visualizes a series of chained events." componentDocs={docs} apiDocs={[{ name: 'Timeline', pathname: '/modules/timeline.html' }]} />;
 };
 
 export default TimelineDemo;

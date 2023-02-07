@@ -1,6 +1,4 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/inputswitch/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/inputswitch/basicdoc';
 import { DisabledDoc } from '../../components/doc/inputswitch/disableddoc';
@@ -64,33 +62,10 @@ const InputSwitchDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            type: 'api',
-            doc: [{ name: 'InputSwitch', pathname: '/modules/inputswitch.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React InputSwitch Component</title>
-                <meta name="description" content="InputSwitch is used to select a boolean value." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>InputSwitch</h1>
-                        <p>InputSwitch is used to select a boolean value.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React InputSwitch Component" header="InputSwitch" description="InputSwitch is used to select a boolean value." componentDocs={docs} apiDocs={[{ name: 'InputSwitch', pathname: '/modules/inputswitch.html' }]} />;
 };
 
 export default InputSwitchDemo;

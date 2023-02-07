@@ -1,7 +1,5 @@
-import Head from 'next/head';
 import React from 'react';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/inputtextarea/accessibilitydoc';
 import { AutoResizeDoc } from '../../components/doc/inputtextarea/autoresizedoc';
 import { BasicDoc } from '../../components/doc/inputtextarea/basicdoc';
@@ -77,31 +75,17 @@ const InputTextareaDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'InputTextarea', pathname: '/modules/inputtextarea.html' }]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React Textarea Component</title>
-                <meta name="description" content="InputTextarea adds styling, key filtering and autoResize functionality to standard textarea element." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>InputTextarea</h1>
-                        <p>InputTextarea adds styling and autoResize functionality to standard textarea element.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React Textarea Component"
+            header="InputTextarea"
+            description="InputTextarea adds styling and autoResize functionality to standard textarea element."
+            componentDocs={docs}
+            apiDocs={[{ name: 'InputTextarea', pathname: '/modules/inputtextarea.html' }]}
+        />
     );
 };
 

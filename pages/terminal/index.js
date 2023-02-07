@@ -1,7 +1,5 @@
-import Head from 'next/head';
 import React from 'react';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/terminal/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/terminal/basicdoc';
 import { ImportDoc } from '../../components/doc/terminal/importdoc';
@@ -28,32 +26,10 @@ const TerminalDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Terminal', pathname: '/modules/terminal.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Terminal Component</title>
-                <meta name="description" content="Terminal is a text based user interface." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>Terminal</h1>
-                        <p>Terminal is a text based user interface.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Terminal Component" header="Terminal" description="Terminal is a text based user interface." componentDocs={docs} apiDocs={[{ name: 'Terminal', pathname: '/modules/terminal.html' }]} />;
 };
 
 export default TerminalDemo;

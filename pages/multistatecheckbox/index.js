@@ -1,6 +1,4 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/multistatecheckbox/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/multistatecheckbox/basicdoc';
 import { DisabledDoc } from '../../components/doc/multistatecheckbox/disableddoc';
@@ -58,32 +56,17 @@ const MultiStateCheckboxDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            type: 'api',
-            doc: [{ name: 'MultiStateCheckbox', pathname: '/modules/multistatecheckbox.html' }]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React MultiStateCheckbox Component</title>
-                <meta name="description" content="MultiStateCheckbox is used to select a state from given options." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>MultiStateCheckbox</h1>
-                        <p>MultiStateCheckbox is used to select a state from given states.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React MultiStateCheckbox Component"
+            header="MultiStateCheckbox"
+            description="MultiStateCheckbox is used to select a state from given options."
+            componentDocs={docs}
+            apiDocs={[{ name: 'MultiStateCheckbox', pathname: '/modules/multistatecheckbox.html' }]}
+        />
     );
 };
 

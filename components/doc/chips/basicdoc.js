@@ -44,7 +44,7 @@ export default function BasicDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    InputText is used as a controlled input with <i>value</i> and <i>onChange</i> properties where <i>value</i> should be an array.
+                    Chips is used as a controlled input with <i>value</i> and <i>onChange</i> properties where <i>value</i> should be an array.
                 </p>
             </DocSectionText>
             <div className="card p-fluid">
