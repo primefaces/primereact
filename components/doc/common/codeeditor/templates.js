@@ -88,11 +88,18 @@ root.render(
 body {
     font-family: var(--font-family);
     font-weight: normal;
-    background: var(--surface-card);
+    background: var(--surface-ground);
     color: var(--text-color);
     padding: 1rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.card {
+    background: var(--surface-card);
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
 }
 `
         },
@@ -234,11 +241,18 @@ export default function Document() {
 body {
     font-family: var(--font-family);
     font-weight: normal;
-    background: var(--surface-card);
+    background: var(--surface-ground);
     color: var(--text-color);
     padding: 1rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.card {
+    background: var(--surface-card);
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
 }
 `
         },
