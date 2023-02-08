@@ -16,6 +16,7 @@ const isVisible = useIntersectionObserver(ref, { threshold: 0.5 });
         javascript: `
 import React, { useRef } from 'react'; 
 import { useIntersectionObserver } from 'primereact/hooks';
+import { classNames } from 'primereact/utils';
 
 export default function BasicDemo() {
     const ref = useRef(null);
@@ -36,6 +37,7 @@ export default function BasicDemo() {
         typescript: `
 import React, { useRef } from 'react'; 
 import { useIntersectionObserver } from 'primereact/hooks';
+import { classNames } from 'primereact/utils';
 
 export default function BasicDemo() {
     const ref = useRef(null);

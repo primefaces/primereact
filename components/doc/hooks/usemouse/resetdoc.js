@@ -18,7 +18,6 @@ export function ResetDoc(props) {
         javascript: `
 import React from 'react';
 import { useMouse } from 'primereact/hooks';
-import { useCounter } from 'primereact/hooks';
 
 export default function ElementDemo() {
     const { ref, x, y, reset } = useMouse();
@@ -38,7 +37,6 @@ export default function ElementDemo() {
         typescript: `
 import React from 'react';
 import { useMouse } from 'primereact/hooks';
-import { useCounter } from 'primereact/hooks';
 
 export default function ElementDemo() {
     const { ref, x, y, reset } = useMouse();

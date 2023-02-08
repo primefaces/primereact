@@ -17,7 +17,6 @@ export function ElementDoc(props) {
         javascript: `
 import React from 'react';
 import { useMouse } from 'primereact/hooks';
-import { useCounter } from 'primereact/hooks';
 
 export default function ElementDemo() {
     const { ref, x, y } = useMouse();
@@ -37,7 +36,6 @@ export default function ElementDemo() {
         typescript: `
 import React from 'react';
 import { useMouse } from 'primereact/hooks';
-import { useCounter } from 'primereact/hooks';
 
 export default function ElementDemo() {
     const { ref, x, y } = useMouse();

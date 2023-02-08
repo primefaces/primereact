@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { useEventListener } from './useEventListener';
 
 export const useMouse = () => {

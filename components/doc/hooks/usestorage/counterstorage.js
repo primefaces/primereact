@@ -8,15 +8,18 @@ export function CounterDoc(props) {
     const [count, setCount] = useStorage(0, 'count');
 
     const handleCounter = () => {
-        const newCount = count++;
+        setCount((prevCount) => ++prevCount);
+    };
 
-        setCount(newCount);
+    const reset = () => {
+        setCount(0);
     };
 
     const code = {
         basic: `
 <span className='text-lg field '>{count}</span>
 <Button label="Click Me!" onClick={handleCounter}></Button>
+<Button label="Reset" onClick={reset}></Button>
         `,
         javascript: `
 import React from 'react';
@@ -27,15 +30,20 @@ export default function CounterDemo() {
     const [count, setCount] = useStorage(0, 'count');
 
     const handleCounter = () => {
-        const newCount = count++;
-
-        setCount(newCount);
+        setCount((prevCount) => ++prevCount);
     };
 
+    const reset = () => {
+        setCount(0);
+    };
+    
     return (
         <div className="card flex flex-column justify-content-center align-items-center">
             <span className='text-lg field '>{count}</span>
-            <Button label="Click Me!" onClick={handleCounter}></Button>
+            <div className="flex gap-2">
+                <Button label="Click Me!" onClick={handleCounter}></Button>
+                <Button label="Reset" onClick={reset}></Button>
+            </div>
         </div>
     )
 }
@@ -49,15 +57,20 @@ export default function CounterDemo() {
     const [count, setCount] = useStorage(0, 'count');
 
     const handleCounter = () => {
-        const newCount = count++;
-
-        setCount(newCount);
+        setCount((prevCount) => ++prevCount);
     };
-    
+
+    const reset = () => {
+        setCount(0);
+    };
+        
     return (
         <div className="card flex flex-column justify-content-center align-items-center">
             <span className='text-lg field '>{count}</span>
-            <Button label="Click Me!" onClick={handleCounter}></Button>
+            <div className="flex gap-2">
+                <Button label="Click Me!" onClick={handleCounter}></Button>
+                <Button label="Reset" onClick={reset}></Button>
+            </div>
         </div>
     )
 }
@@ -71,9 +84,12 @@ export default function CounterDemo() {
                  * @todo Add a description
                  */}
             </DocSectionText>
-            <div className="card flex flex-column justify-content-center align-items-center">
+            <div className="card flex flex-column justify-content-center align-items-center gap-2">
                 <span className="text-lg field ">{count}</span>
-                <Button label="Click Me!" onClick={handleCounter}></Button>
+                <div className="flex gap-2">
+                    <Button label="Click Me!" onClick={handleCounter}></Button>
+                    <Button label="Reset" onClick={reset}></Button>
+                </div>
             </div>
             <DocSectionCode code={code} />
         </>

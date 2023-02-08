@@ -17,7 +17,7 @@ export function BasicDoc(props) {
         `,
         javascript: `
 import React from 'react'; 
-import { InputText } from 'primereact/InputText';
+import { InputText } from 'primereact/inputtext';
 import { useTimeout } from 'primereact/hooks';
 
 export default function BasicDemo() {
@@ -37,7 +37,7 @@ export default function BasicDemo() {
         `,
         typescript: `
 import React from 'react'; 
-import { InputText } from 'primereact/InputText';
+import { InputText } from 'primereact/inputtext';
 import { useTimeout } from 'primereact/hooks';
 
 export default function BasicDemo() {

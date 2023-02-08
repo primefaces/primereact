@@ -31,6 +31,7 @@ useInterval(
 import React from 'react'; 
 import { Button } from 'primereact/button';
 import { useInterval } from 'primereact/hooks';
+import { classNames } from 'primereact/utils';
 
 export default function BasicDemo() {
     const [second, setSecond] = React.useState(0);
@@ -62,7 +63,8 @@ export default function BasicDemo() {
         typescript: `
 import React from 'react'; 
 import { Button } from 'primereact/button';
-import { useFavicon } from 'primereact/hooks';
+import { useInterval } from 'primereact/hooks';
+import { classNames } from 'primereact/utils';
 
 export default function BasicDemo() {
     const [second, setSecond] = React.useState(0);

@@ -15,7 +15,7 @@ export function InputPreviousDoc(props) {
 {message && <p>{message}</p>}
         `,
         javascript: `
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { usePrevious } from 'primereact/hooks';
 
@@ -42,7 +42,7 @@ export default function InputDemo() {
 }
         `,
         typescript: `
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { usePrevious } from 'primereact/hooks';
 

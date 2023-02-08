@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 export const useCounter = (initialValue = 0, options = { step: 1 }) => {
     const [count, setCount] = React.useState(initialValue);
 

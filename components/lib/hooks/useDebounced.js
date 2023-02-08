@@ -1,8 +1,9 @@
+import * as React from 'react';
 import { useTimeout } from './useTimeout';
 
-export const useDebounced = (value, delay) => {
-    const [inputValue, setInputValue] = React.useState(value);
-    const [debouncedValue, setDebouncedValue] = React.useState(value);
+export const useDebounced = (initialValue, delay) => {
+    const [inputValue, setInputValue] = React.useState(initialValue);
+    const [debouncedValue, setDebouncedValue] = React.useState(initialValue);
     const timeout = useTimeout(
         () => {
             setDebouncedValue(inputValue);

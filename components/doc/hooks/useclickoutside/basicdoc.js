@@ -27,12 +27,24 @@ import { Button } from 'primereact/button';
 import { useClickOutside } from 'primereact/hooks';
 
 export default function BasicDemo() {
-    const [opened, setOpened] = useState(false);
-    const ref = useClickOutside(() => setOpened(false));
+    const [isOpen, setIsOpen] = useState(false);
+    const btnRef = useRef(null);
+
+    useClickOutside(btnRef, () => {
+        setIsOpen(false);
+    });
 
     return (
         <div className="card flex flex-column justify-content-center align-items-center gap-2">
-            <div>{isOpen ? <Button className="p-button-outlined border-dashed" ref={btnRef}>Click outside of the button to change</Button> : <Button onClick={() => setIsOpen(true)}>Change Button</Button>}</div>
+            <div>
+                {isOpen ? (
+                    <Button className="p-button-outlined border-dashed" ref={btnRef}>
+                        Click outside of the button to change
+                    </Button>
+                ) : (
+                    <Button onClick={() => setIsOpen(true)}>Change Button</Button>
+                )}
+            </div>
         </div>
     )
 }
@@ -43,12 +55,24 @@ import { Button } from 'primereact/button';
 import { useClickOutside } from 'primereact/hooks';
 
 export default function BasicDemo() {
-    const [opened, setOpened] = useState(false);
-    const ref = useClickOutside(() => setOpened(false));
+    const [isOpen, setIsOpen] = useState(false);
+    const btnRef = useRef(null);
+
+    useClickOutside(btnRef, () => {
+        setIsOpen(false);
+    });
 
     return (
         <div className="card flex flex-column justify-content-center align-items-center gap-2">
-            <div>{isOpen ? <Button className="p-button-outlined border-dashed" ref={btnRef}>Click outside of the button to change</Button> : <Button onClick={() => setIsOpen(true)}>Change Button</Button>}</div>
+            <div>
+                {isOpen ? (
+                    <Button className="p-button-outlined border-dashed" ref={btnRef}>
+                        Click outside of the button to change
+                    </Button>
+                ) : (
+                    <Button onClick={() => setIsOpen(true)}>Change Button</Button>
+                )}
+            </div>
         </div>
     )
 }

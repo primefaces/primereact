@@ -10,6 +10,7 @@ export function ResetDoc(props) {
     const code = {
         basic: `
 const { ref, x, reset } = useMove({ initialValue: { x: 0.2 } });
+<Button onClick={reset}>Reset</Button>
         `,
         javascript: `
 import React from 'react'; 
@@ -41,6 +42,7 @@ export default function ResetDemo() {
                 ></div>
             </div>
             <span>Value {Math.round(x * 100)}</span>
+            <Button onClick={reset}>Reset</Button>
         </div>
     )
 }
@@ -75,6 +77,7 @@ export default function ResetDemo() {
                 ></div>
             </div>
             <span>Value {Math.round(x * 100)}</span>
+            <Button onClick={reset}>Reset</Button>
         </div>
     )
 }

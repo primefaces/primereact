@@ -513,6 +513,14 @@
                     "to": "/hooks/usecounter"
                 },
                 {
+                    "name": "useEventListener",
+                    "to": "/hooks/useeventlistener"
+                },
+                {
+                    "name": "useMountEffect",
+                    "to": "/hooks/usemounteffect"
+                },
+                {
                     "name": "useMouse",
                     "to": "/hooks/usemouse"
                 },
@@ -523,6 +531,10 @@
                 {
                     "name": "useIntersectionObserver",
                     "to": "/hooks/useintersectionobserver"
+                },
+                {
+                    "name": "useInterval",
+                    "to": "/hooks/useinterval"
                 },
                 {
                     "name": "useFavicon",
@@ -551,6 +563,14 @@
                 {
                     "name": "useStorage",
                     "to": "/hooks/usestorage"
+                },
+                {
+                    "name": "useOverlayListener",
+                    "to": "/hooks/useoverlaylistener"
+                },
+                {
+                    "name": "useOverlayScrollListener",
+                    "to": "/hooks/useoverlayscrolllistener"
                 },
                 {
                     "name": "useUnmountEffect",

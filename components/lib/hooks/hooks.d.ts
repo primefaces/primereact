@@ -186,11 +186,17 @@ export declare function useSessionStorage<S, K extends string = string>(initialV
 /**
  * @todo
  * @param {number} initialValue - The value to counter. @defaultValue 0
- * @param {step} initialValue - The step to counter. @defaultValue 1
+ * @param {{ min: number; max: number; step: number }} options - The options of the counter. @defaultValue &#123; step: 1 &#125;
  */
 export declare function useCounter(initialValue: number, options: { min: number; max: number; step: number }): any;
 /**
- * @todo
+ * Custom hook to use a debounced value.
+ * @param {*} initialValue - The initial value for debounce.
+ * @param {number} delay - The delay in milliseconds.
+ */
+export declare function useDebounced(initialValue: any, delay: number): any[];
+/**
+ * Custom hook to use to get the current mouse position.
  */
 export declare function useMouse(): MouseDataOptions;
 /**
