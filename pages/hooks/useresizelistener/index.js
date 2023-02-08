@@ -16,7 +16,7 @@ const ResizeListenerDemo = () => {
         }
     ];
 
-    return <DocComponent title="React useResizeListener Hook" header="useResizeListener" description="" componentDocs={docs} apiDocs={[{ name: 'useResizeListener', pathname: '/functions/hooks.useResizeListener.html' }]} />;
+    return <DocComponent title="React useResizeListener Hook" header="useResizeListener" description="Tracks window resize event." componentDocs={docs} apiDocs={[{ name: 'useResizeListener', pathname: '/functions/hooks.useResizeListener.html' }]} />;
 };
 
 export default ResizeListenerDemo;
