@@ -1,16 +1,13 @@
-import React from 'react';
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
+import React, { useState } from 'react';
 import { Button } from '../../../lib/button/Button';
 import { useFavicon } from '../../../lib/hooks/Hooks';
+import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function BasicDoc(props) {
-    const [favicon, setFavicon] = React.useState();
+    const [favicon, setFavicon] = useState('');
     const setFaviconToTwitter = () => setFavicon('https://twitter.com/favicon.ico');
-    /**
-     * @todo Set the favicon to the PrimeReact favicon
-     */
-    const setFaviconToPrimeReact = () => setFavicon('/favicon.ico');
+    const setFaviconToPrimeReact = () => setFavicon('https://primefaces.org/cdn/primereact/images/favicon.ico');
 
     useFavicon(favicon);
 
@@ -24,16 +21,16 @@ import { Button } from 'primereact/button';
 import { useFavicon } from 'primereact/hooks';
 
 export default function BasicDemo() {
-    const [favicon, setFavicon] = useState();
+    const [favicon, setFavicon] = useState('');
     const setFaviconToTwitter = () => setFavicon('https://twitter.com/favicon.ico');
-    const setFaviconToPrimeReact = () => setFavicon('https://primereact.org/favicon.ico');
+    const setFaviconToPrimeReact = () => setFavicon('https://primefaces.org/cdn/primereact/images/favicon.ico');
 
     useFavicon(favicon);
 
     return (
-        <div className="card flex justify-content-center align-items-center gap-2">
-            <Button onClick={setFaviconToTwitter}>Twitter Favicon</Button>
-            <Button onClick={setFaviconToPrimeReact}>PrimeReact Favicon</Button>
+        <div className="card flex justify-content-center gap-2">
+            <Button icon="pi pi-twitter" label="Twitter" onClick={setFaviconToTwitter} />
+            <Button icon="pi pi-prime" label="PrimeReact" onClick={setFaviconToPrimeReact} className="p-button-secondary" />
         </div>
     )
 }
@@ -44,16 +41,16 @@ import { Button } from 'primereact/button';
 import { useFavicon } from 'primereact/hooks';
 
 export default function BasicDemo() {
-    const [favicon, setFavicon] = useState();
+    const [favicon, setFavicon] = useState<string>('');
     const setFaviconToTwitter = () => setFavicon('https://twitter.com/favicon.ico');
-    const setFaviconToPrimeReact = () => setFavicon('https://primereact.org/favicon.ico');
+    const setFaviconToPrimeReact = () => setFavicon('https://primefaces.org/cdn/primereact/images/favicon.ico');
 
     useFavicon(favicon);
 
     return (
-        <div className="card flex justify-content-center align-items-center gap-2">
-            <Button onClick={setFaviconToTwitter}>Twitter Favicon</Button>
-            <Button onClick={setFaviconToPrimeReact}>PrimeReact Favicon</Button>
+        <div className="card flex justify-content-center gap-2">
+            <Button icon="pi pi-twitter" label="Twitter" onClick={setFaviconToTwitter} />
+            <Button icon="pi pi-prime" label="PrimeReact" onClick={setFaviconToPrimeReact} className="p-button-secondary" />
         </div>
     )
 }
@@ -63,13 +60,11 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                {/**
-                 * @todo Add a description
-                 */}
+                <p>Click the buttons to change the favicon of this page dynamically.</p>
             </DocSectionText>
-            <div className="card flex justify-content-center align-items-center gap-2">
-                <Button onClick={setFaviconToTwitter}>Twitter Favicon</Button>
-                <Button onClick={setFaviconToPrimeReact}>PrimeReact Favicon</Button>
+            <div className="card flex justify-content-center gap-2">
+                <Button icon="pi pi-twitter" label="Twitter" onClick={setFaviconToTwitter} />
+                <Button icon="pi pi-prime" label="PrimeReact" onClick={setFaviconToPrimeReact} className="p-button-secondary" />
             </div>
             <DocSectionCode code={code} />
         </>
