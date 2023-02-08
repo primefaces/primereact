@@ -1,8 +1,9 @@
 import React from 'react';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/picklist/accessibilitydoc';
+import { BasicDoc } from '../../components/doc/picklist/basicdoc';
+import { FilterDoc } from '../../components/doc/picklist/filterdoc';
 import { ImportDoc } from '../../components/doc/picklist/importdoc';
-import { PickListDoc } from '../../components/doc/picklist/picklistdoc';
 import { StyleDoc } from '../../components/doc/picklist/styledoc';
 
 const PickListDemo = () => {
@@ -13,9 +14,14 @@ const PickListDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'picklist',
-            label: 'PickList',
-            component: PickListDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'filter',
+            label: 'Filter',
+            component: FilterDoc
         },
         {
             id: 'style',
