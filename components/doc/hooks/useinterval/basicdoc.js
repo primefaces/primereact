@@ -1,30 +1,30 @@
 import React, { useState } from 'react';
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
 import { Button } from '../../../lib/button/Button';
 import { useInterval } from '../../../lib/hooks/Hooks';
 import { classNames } from '../../../lib/utils/Utils';
+import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function BasicDoc(props) {
-    const [second, setSecond] = useState(0);
-    const [isRunning, setIsRunning] = useState(true);
+    const [seconds, setSeconds] = useState(0);
+    const [active, setActive] = useState(true);
 
     useInterval(
         () => {
-            setSecond((prevSecond) => (prevSecond === 59 ? 0 : prevSecond + 1));
+            setSeconds((prevSecond) => (prevSecond === 59 ? 0 : prevSecond + 1));
         },
         1000,
-        isRunning
+        active
     );
 
     const code = {
         basic: `
 useInterval(
     () => {
-        setSecond((prevSecond) => (prevSecond === 59 ? 0 : prevSecond + 1)); //fn
+        setSeconds((prevSecond) => (prevSecond === 59 ? 0 : prevSecond + 1)); //fn
     },
-    1000, //delay (ms)
-    isRunning //condition (when)
+    1000,   //delay (ms)
+    active  //condition (when)
 );
         `,
         javascript: `
@@ -34,28 +34,22 @@ import { useInterval } from 'primereact/hooks';
 import { classNames } from 'primereact/utils';
 
 export default function BasicDemo() {
-    const [second, setSecond] = React.useState(0);
-    const [isRunning, setIsRunning] = React.useState(true);
-    
+    const [seconds, setSeconds] = useState(0);
+    const [active, setActive] = useState(true);
+
     useInterval(
         () => {
-            setSecond((prevSecond) => (prevSecond === 59 ? 0 : prevSecond + 1));
+            setSeconds((prevSecond) => (prevSecond === 59 ? 0 : prevSecond + 1));
         },
         1000,
-        isRunning
+        active
     );
 
-    const secondText = \`00:\${second.toString().length === 2 ? second : '0' + second}\`;
-
     return (
-        <div className="card flex flex-column justify-content-center align-items-center">
-            <div className="card flex justify-content-center align-items-center p-2 border-solid surface-border border-2 text-xl text-color">
-                <i className="text-500 pi pi-clock mr-2"></i>
-                <span className="px-2">{secondText}</span>
-            </div>
-            <Button className={classNames({ 'p-button-danger': isRunning })} onClick={() => setIsRunning((prevIsRunning) => !prevIsRunning)}>
-                {isRunning ? 'Stop' : 'Run'}
-            </Button>
+        <div className="card flex flex-column align-items-center">
+            <div className="mb-3 font-bold text-4xl">{seconds}</div>
+            <Button className={classNames('w-8rem p-button-outlined', { 'p-button-danger': active })}
+                onClick={() => setActive(!active)} label={active ? 'Stop' : 'Resume'} />
         </div>
     )
 }
@@ -67,51 +61,36 @@ import { useInterval } from 'primereact/hooks';
 import { classNames } from 'primereact/utils';
 
 export default function BasicDemo() {
-    const [second, setSecond] = React.useState(0);
-    const [isRunning, setIsRunning] = React.useState(true);
-    
+    const [seconds, setSeconds] = useState<number>(0);
+    const [active, setActive] = useState<boolean>(true);
+
     useInterval(
         () => {
-            setSecond((prevSecond) => (prevSecond === 59 ? 0 : prevSecond + 1));
+            setSeconds((prevSecond) => (prevSecond === 59 ? 0 : prevSecond + 1));
         },
         1000,
-        isRunning
+        active
     );
 
-    const secondText = \`00:\${second.toString().length === 2 ? second : '0' + second}\`;
-
     return (
-        <div className="card flex flex-column justify-content-center align-items-center">
-            <div className="card flex justify-content-center align-items-center p-2 border-solid surface-border border-2 text-xl text-color">
-                <i className="text-500 pi pi-clock mr-2"></i>
-                <span className="px-2">{secondText}</span>
-            </div>
-            <Button className={classNames({ 'p-button-danger': isRunning })} onClick={() => setIsRunning((prevIsRunning) => !prevIsRunning)}>
-                {isRunning ? 'Stop' : 'Run'}
-            </Button>
+        <div className="card flex flex-column align-items-center">
+            <div className="mb-3 font-bold text-4xl">{seconds}</div>
+            <Button className={classNames('w-8rem p-button-outlined', { 'p-button-danger': active })}
+                onClick={() => setActive(!active)} label={active ? 'Stop' : 'Resume'} />
         </div>
     )
 }
         `
     };
 
-    const secondText = `00:${second.toString().length === 2 ? second : '0' + second}`;
-
     return (
         <>
             <DocSectionText {...props}>
-                {/**
-                 * @todo Add a description
-                 */}
+                <p>Simple timer that is updated every second.</p>
             </DocSectionText>
-            <div className="card flex flex-column justify-content-center align-items-center">
-                <div className="card flex justify-content-center align-items-center p-2 border-solid surface-border border-2 text-xl text-color">
-                    <i className="text-500 pi pi-clock mr-2"></i>
-                    <span className="px-2">{secondText}</span>
-                </div>
-                <Button className={classNames({ 'p-button-danger': isRunning })} onClick={() => setIsRunning((prevIsRunning) => !prevIsRunning)}>
-                    {isRunning ? 'Stop' : 'Run'}
-                </Button>
+            <div className="card flex flex-column align-items-center">
+                <div className="mb-3 font-bold text-4xl">{seconds}</div>
+                <Button className={classNames('w-8rem p-button-outlined', { 'p-button-danger': active })} onClick={() => setActive(!active)} label={active ? 'Stop' : 'Resume'} />
             </div>
             <DocSectionCode code={code} />
         </>
