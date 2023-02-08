@@ -2,7 +2,7 @@ import { DocComponent } from '../../../components/doc/common/doccomponent';
 import { BasicDoc } from '../../../components/doc/hooks/useoverlayscrolllistener/basicdoc';
 import { ImportDoc } from '../../../components/doc/hooks/useoverlayscrolllistener/importdoc';
 
-const CounterDemo = () => {
+const OverlayScrollListenerDemo = () => {
     const docs = [
         {
             id: 'import',
@@ -21,4 +21,4 @@ const CounterDemo = () => {
     );
 };
 
-export default CounterDemo;
+export default OverlayScrollListenerDemo;

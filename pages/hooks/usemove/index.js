@@ -5,7 +5,7 @@ import { ImportDoc } from '../../../components/doc/hooks/usemove/importdoc';
 import { ResetDoc } from '../../../components/doc/hooks/usemove/resetdoc';
 import { VerticalDoc } from '../../../components/doc/hooks/usemove/verticaldoc';
 
-const CounterDemo = () => {
+const MoveDemo = () => {
     const docs = [
         {
             id: 'import',
@@ -37,4 +37,4 @@ const CounterDemo = () => {
     return <DocComponent title="React useMove Hook" header="useMove" description="" componentDocs={docs} apiDocs={[{ name: 'useMove', pathname: '/functions/hooks.useMove.html' }]} />;
 };
 
-export default CounterDemo;
+export default MoveDemo;

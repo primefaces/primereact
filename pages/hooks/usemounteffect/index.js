@@ -2,7 +2,7 @@ import { DocComponent } from '../../../components/doc/common/doccomponent';
 import { BasicDoc } from '../../../components/doc/hooks/usemounteffect/basicdoc';
 import { ImportDoc } from '../../../components/doc/hooks/usemounteffect/importdoc';
 
-const CounterDemo = () => {
+const MountEffectDemo = () => {
     const docs = [
         {
             id: 'import',
@@ -27,4 +27,4 @@ const CounterDemo = () => {
     );
 };
 
-export default CounterDemo;
+export default MountEffectDemo;

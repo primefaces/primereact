@@ -2,7 +2,7 @@ import { DocComponent } from '../../../components/doc/common/doccomponent';
 import { BasicDoc } from '../../../components/doc/hooks/useunmounteffect/basicdoc';
 import { ImportDoc } from '../../../components/doc/hooks/useunmounteffect/importdoc';
 
-const CounterDemo = () => {
+const UnmountEffectDemo = () => {
     const docs = [
         {
             id: 'import',
@@ -27,4 +27,4 @@ const CounterDemo = () => {
     );
 };
 
-export default CounterDemo;
+export default UnmountEffectDemo;

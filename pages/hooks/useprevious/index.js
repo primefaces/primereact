@@ -2,7 +2,7 @@ import { DocComponent } from '../../../components/doc/common/doccomponent';
 import { BasicDoc } from '../../../components/doc/hooks/useprevious/basicdoc';
 import { ImportDoc } from '../../../components/doc/hooks/useprevious/importdoc';
 
-const CounterDemo = () => {
+const PreviousDemo = () => {
     const docs = [
         {
             id: 'import',
@@ -19,4 +19,4 @@ const CounterDemo = () => {
     return <DocComponent title="React usePrevious Hook" header="usePrevious" description="Allows access to the previous value in state." componentDocs={docs} apiDocs={[{ name: 'usePrevious', pathname: '/functions/hooks.usePrevious.html' }]} />;
 };
 
-export default CounterDemo;
+export default PreviousDemo;
