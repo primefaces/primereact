@@ -5,7 +5,6 @@ import { DragDropDoc } from '../../components/doc/orderlist/dragdropdoc';
 import { FilterDoc } from '../../components/doc/orderlist/filterdoc';
 import { ImportDoc } from '../../components/doc/orderlist/importdoc';
 import { StyleDoc } from '../../components/doc/orderlist/styledoc';
-import { TemplateDoc } from '../../components/doc/orderlist/templatedoc';
 
 const OrderListDemo = () => {
     const docs = [
@@ -28,11 +27,6 @@ const OrderListDemo = () => {
             id: 'dragdrop',
             label: 'DragDrop',
             component: DragDropDoc
-        },
-        {
-            id: 'template',
-            label: 'Template',
-            component: TemplateDoc
         },
         {
             id: 'style',
