@@ -1,7 +1,6 @@
 import { DocComponent } from '../../../components/doc/common/doccomponent';
-import { CounterPreviousDoc } from '../../../components/doc/hooks/useprevious/counterpreviousdoc';
+import { BasicDoc } from '../../../components/doc/hooks/useprevious/basicdoc';
 import { ImportDoc } from '../../../components/doc/hooks/useprevious/importdoc';
-import { InputPreviousDoc } from '../../../components/doc/hooks/useprevious/inputpreviousdoc';
 
 const CounterDemo = () => {
     const docs = [
@@ -11,18 +10,13 @@ const CounterDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'input',
-            label: 'Input',
-            component: InputPreviousDoc
-        },
-        {
-            id: 'counter',
-            label: 'Counter',
-            component: CounterPreviousDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         }
     ];
 
-    return <DocComponent title="React usePrevious Hook" header="usePrevious" description="" componentDocs={docs} apiDocs={[{ name: 'usePrevious', pathname: '/functions/hooks.usePrevious.html' }]} />;
+    return <DocComponent title="React usePrevious Hook" header="usePrevious" description="Allows access to the previous value in state." componentDocs={docs} apiDocs={[{ name: 'usePrevious', pathname: '/functions/hooks.usePrevious.html' }]} />;
 };
 
 export default CounterDemo;
