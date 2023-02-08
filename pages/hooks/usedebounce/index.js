@@ -16,7 +16,9 @@ const CounterDemo = () => {
         }
     ];
 
-    return <DocComponent title="React useDebounce Hook" header="useDebounce" description="" componentDocs={docs} apiDocs={[{ name: 'useDebounce', pathname: '/functions/hooks.useDebounce.html' }]} />;
+    return (
+        <DocComponent title="React useDebounce Hook" header="useDebounce" description="Delays rapidly changing values to optimize performance." componentDocs={docs} apiDocs={[{ name: 'useDebounce', pathname: '/functions/hooks.useDebounce.html' }]} />
+    );
 };
 
 export default CounterDemo;

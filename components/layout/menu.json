@@ -486,21 +486,6 @@
             "to": "/icons"
         },
         {
-            "name": "Templates",
-            "icon": "pi pi-star",
-            "to": "/templates"
-        },
-        {
-            "name": "PrimeBlocks",
-            "icon": "pi pi-server",
-            "href": "https://blocks.primereact.org"
-        },
-        {
-            "name": "PrimeFlex CSS",
-            "icon": "pi pi-table",
-            "href": "https://www.primefaces.org/primeflex"
-        },
-        {
             "name": "Hooks",
             "icon": "pi pi-link",
             "children": [
@@ -577,6 +562,21 @@
                     "to": "/hooks/useupdateeffect"
                 }
             ]
+        },
+        {
+            "name": "Templates",
+            "icon": "pi pi-star",
+            "to": "/templates"
+        },
+        {
+            "name": "PrimeBlocks",
+            "icon": "pi pi-server",
+            "href": "https://blocks.primereact.org"
+        },
+        {
+            "name": "PrimeFlex CSS",
+            "icon": "pi pi-table",
+            "href": "https://www.primefaces.org/primeflex"
         },
         {
             "name": "Discover",
