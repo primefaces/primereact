@@ -1,7 +1,7 @@
 import React from 'react';
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
 import { useMove } from '../../../../components/lib/hooks/Hooks';
+import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function HorizontalDoc(props) {
     const { ref, x } = useMove({ initialValue: { x: 0.2 } });
@@ -18,10 +18,10 @@ export default function HorizontalDemo() {
     const { ref, x } = useMove({ initialValue: { x: 0.2 } });
 
     return (
-        <div className="card flex flex-column justify-content-center align-items-center gap-2">
+        <div className="card flex flex-column align-items-center gap-3">
             <div ref={ref} className="flex align-items-center justify-content-center relative surface-ground w-14rem z-1" style={{ height: '8px' }}>
                 <div
-                    className="absolute bg-primary-500 z-2"
+                    className="absolute bg-teal-500 z-2"
                     style={{
                         left: 0,
                         width: \`\${x * 100}%\`,
@@ -29,7 +29,7 @@ export default function HorizontalDemo() {
                     }}
                 ></div>
                 <div
-                    className='absolute block border-circle border-solid border-2 border-primary -ml-2 bg-white z-3'
+                    className="absolute block border-circle border-solid border-2 border-teal-500 -ml-2 surface-overlay z-3"
                     style={{
                         width: '18px',
                         height: '18px',
@@ -38,7 +38,9 @@ export default function HorizontalDemo() {
                     }}
                 ></div>
             </div>
-            <span>Value {Math.round(x * 100)}</span>
+            <span className="text-xl">
+                Value: <strong>{Math.round(x * 100)}</strong>
+            </span>
         </div>
     )
 }
@@ -51,10 +53,10 @@ export default function HorizontalDemo() {
     const { ref, x } = useMove({ initialValue: { x: 0.2 } });
 
     return (
-        <div className="card flex flex-column justify-content-center align-items-center gap-2">
+        <div className="card flex flex-column align-items-center gap-3">
             <div ref={ref} className="flex align-items-center justify-content-center relative surface-ground w-14rem z-1" style={{ height: '8px' }}>
                 <div
-                    className="absolute bg-primary-500 z-2"
+                    className="absolute bg-teal-500 z-2"
                     style={{
                         left: 0,
                         width: \`\${x * 100}%\`,
@@ -62,7 +64,7 @@ export default function HorizontalDemo() {
                     }}
                 ></div>
                 <div
-                    className='absolute block border-circle border-solid border-2 border-primary -ml-2 bg-white z-3'
+                    className="absolute block border-circle border-solid border-2 border-teal-500 -ml-2 surface-overlay z-3"
                     style={{
                         width: '18px',
                         height: '18px',
@@ -71,7 +73,9 @@ export default function HorizontalDemo() {
                     }}
                 ></div>
             </div>
-            <span>Value {Math.round(x * 100)}</span>
+            <span className="text-xl">
+                Value: <strong>{Math.round(x * 100)}</strong>
+            </span>
         </div>
     )
 }
@@ -81,14 +85,12 @@ export default function HorizontalDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                {/**
-                 * @todo Add a description
-                 */}
+                <p>A horizontal slider implementation by utilizing the x-axis only.</p>
             </DocSectionText>
-            <div className="card flex flex-column justify-content-center align-items-center gap-2">
+            <div className="card flex flex-column align-items-center gap-3">
                 <div ref={ref} className="flex align-items-center justify-content-center relative surface-ground w-14rem z-1" style={{ height: '8px' }}>
                     <div
-                        className="absolute bg-primary-500 z-2"
+                        className="absolute bg-teal-500 z-2"
                         style={{
                             left: 0,
                             width: `${x * 100}%`,
@@ -96,7 +98,7 @@ export default function HorizontalDemo() {
                         }}
                     ></div>
                     <div
-                        className="absolute block border-circle border-solid border-2 border-primary -ml-2 bg-white z-3"
+                        className="absolute block border-circle border-solid border-2 border-teal-500 -ml-2 surface-overlay z-3"
                         style={{
                             width: '18px',
                             height: '18px',
@@ -105,7 +107,9 @@ export default function HorizontalDemo() {
                         }}
                     ></div>
                 </div>
-                <span>Value {Math.round(x * 100)}</span>
+                <span className="text-xl">
+                    Value: <strong>{Math.round(x * 100)}</strong>
+                </span>
             </div>
             <DocSectionCode code={code} />
         </>

@@ -1,7 +1,7 @@
 import React from 'react';
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
 import { useMove } from '../../../../components/lib/hooks/Hooks';
+import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function VerticalDoc(props) {
     const { ref, y } = useMove({ initialValue: { y: 0.2 }, mode: 'vertical' });
@@ -18,10 +18,10 @@ export default function VerticalDemo() {
     const { ref, y } = useMove({ initialValue: { y: 0.2 } });
 
     return (
-        <div className="card flex flex-column justify-content-center align-items-center gap-2">
+        <div className="card flex flex-column justify-content-center align-items-center gap-3">
             <div ref={ref} className="flex align-items-center justify-content-center relative surface-ground h-14rem z-1" style={{ width: '8px' }}>
                 <div
-                    className="absolute bg-primary-500 z-2"
+                    className="absolute bg-purple-500 z-2"
                     style={{
                         bottom: 0,
                         width: '8px',
@@ -29,7 +29,7 @@ export default function VerticalDemo() {
                     }}
                 ></div>
                 <div
-                    className='absolute block border-circle border-solid border-2 border-primary -mb-2 bg-white z-3'
+                    className='absolute block border-circle border-solid border-2 border-purple -mb-2 surface-overlay z-3'
                     style={{
                         width: '18px',
                         height: '18px',
@@ -38,7 +38,9 @@ export default function VerticalDemo() {
                     }}
                 ></div>
             </div>
-            <span>Value {Math.round(y * 100)}</span>
+            <span className="text-xl">
+                Value: <strong>{Math.round(y * 100)}</strong>
+            </span>
         </div>
     )
 }
@@ -51,10 +53,10 @@ export default function VerticalDemo() {
     const { ref, y } = useMove({ initialValue: { y: 0.2 } });
 
     return (
-        <div className="card flex flex-column justify-content-center align-items-center gap-2">
+        <div className="card flex flex-column justify-content-center align-items-center gap-3">
             <div ref={ref} className="flex align-items-center justify-content-center relative surface-ground h-14rem z-1" style={{ width: '8px' }}>
                 <div
-                    className="absolute bg-primary-500 z-2"
+                    className="absolute bg-purple-500 z-2"
                     style={{
                         bottom: 0,
                         width: '8px',
@@ -62,7 +64,7 @@ export default function VerticalDemo() {
                     }}
                 ></div>
                 <div
-                    className='absolute block border-circle border-solid border-2 border-primary -mb-2 bg-white z-3'
+                    className='absolute block border-circle border-solid border-2 border-purple -mb-2 surface-overlay z-3'
                     style={{
                         width: '18px',
                         height: '18px',
@@ -71,7 +73,9 @@ export default function VerticalDemo() {
                     }}
                 ></div>
             </div>
-            <span>Value {Math.round(y * 100)}</span>
+            <span className="text-xl">
+                Value: <strong>{Math.round(y * 100)}</strong>
+            </span>
         </div>
     )
 }
@@ -81,14 +85,12 @@ export default function VerticalDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                {/**
-                 * @todo Add a description
-                 */}
+                <p>A vertical slider implementation by utilizing the y-axis only.</p>
             </DocSectionText>
-            <div className="card flex flex-column justify-content-center align-items-center gap-2">
+            <div className="card flex flex-column justify-content-center align-items-center gap-3">
                 <div ref={ref} className="flex align-items-center justify-content-center relative surface-ground h-14rem z-1" style={{ width: '8px' }}>
                     <div
-                        className="absolute bg-primary-500 z-2"
+                        className="absolute bg-purple-500 z-2"
                         style={{
                             bottom: 0,
                             width: '8px',
@@ -96,7 +98,7 @@ export default function VerticalDemo() {
                         }}
                     ></div>
                     <div
-                        className="absolute block border-circle border-solid border-2 border-primary -mb-2 bg-white z-3"
+                        className="absolute block border-circle border-solid border-2 border-purple-500 -mb-2 surface-overlay z-3"
                         style={{
                             width: '18px',
                             height: '18px',
@@ -105,7 +107,9 @@ export default function VerticalDemo() {
                         }}
                     ></div>
                 </div>
-                <span>Value {Math.round(y * 100)}</span>
+                <span className="text-xl">
+                    Value: <strong>{Math.round(y * 100)}</strong>
+                </span>
             </div>
             <DocSectionCode code={code} />
         </>

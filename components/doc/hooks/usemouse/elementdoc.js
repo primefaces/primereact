@@ -19,7 +19,7 @@ export default function ElementDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <div ref={ref} className="border-round shadow-2 flex flex-wrap gap-3 justify-content-center align-items-center w-full md:w-20rem h-10rem text-xl">
+            <div ref={ref} className="border-round surface-ground flex flex-wrap gap-3 justify-content-center align-items-center w-full md:w-20rem h-10rem text-xl">
                 <span>
                     X: <strong>{x}</strong>
                 </span>
@@ -40,7 +40,7 @@ export default function ElementDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <div ref={ref} className="border-round shadow-2 flex flex-wrap gap-3 justify-content-center align-items-center w-full md:w-20rem h-10rem text-xl">
+            <div ref={ref} className="border-round surface-ground flex flex-wrap gap-3 justify-content-center align-items-center w-full md:w-20rem h-10rem text-xl">
                 <span>
                     X: <strong>{x}</strong>
                 </span>
@@ -60,7 +60,7 @@ export default function ElementDemo() {
                 <p>Hover the mouse over the element to track the mouse position.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <div ref={ref} className="border-round shadow-2 flex flex-wrap gap-3 justify-content-center align-items-center w-full md:w-20rem h-10rem text-xl">
+                <div ref={ref} className="border-round surface-ground flex flex-wrap gap-3 justify-content-center align-items-center w-full md:w-20rem h-10rem text-xl">
                     <span>
                         X: <strong>{x}</strong>
                     </span>
