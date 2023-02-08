@@ -21,6 +21,7 @@ useMountEffect(() => {
         javascript: `
 import React from 'react'; 
 import { useMountEffect } from 'primereact/hooks';
+import { Toast } from 'primereact/toast';
 
 export default function BasicDemo() {
     const toast = useRef(null);
@@ -30,15 +31,19 @@ export default function BasicDemo() {
     });
 
     return (
-        <div className="card flex justify-content-center">
-            <span className="text-xl">View the Toast message at top right.</span>
-        </div>
+        <>
+            <Toast ref={toast} />
+            <div className="card flex justify-content-center">
+                <span className="text-xl">View the Toast message at top right.</span>
+            </div>
+        </>
     )
 }
         `,
         typescript: `
 import React from 'react'; 
 import { useMountEffect } from 'primereact/hooks';
+import { Toast } from 'primereact/toast';
 
 export default function BasicDemo() {
     const toast = useRef<Toast>(null);
@@ -48,9 +53,12 @@ export default function BasicDemo() {
     });
 
     return (
-        <div className="card flex justify-content-center">
-            <span className="text-xl">View the Toast message at top right.</span>
-        </div>
+        <>
+            <Toast ref={toast} />
+            <div className="card flex justify-content-center">
+                <span className="text-xl">View the Toast message at top right.</span>
+            </div>
+        </>
     )
 }
         `

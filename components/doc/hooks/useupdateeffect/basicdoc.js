@@ -37,10 +37,12 @@ export default function BasicDemo() {
     }, [value]);
 
     return (
-        <div className="card flex justify-content-center">
+        <>
             <Toast ref={toast} />
-            <InputText type="text" defaultValue={value} onBlur={(e) => setValue(e.target.value)} />
-        </div>
+            <div className="card flex justify-content-center">
+                <InputText type="text" defaultValue={value} onBlur={(e) => setValue(e.target.value)} />
+            </div>
+        </>
     )
 }
         `,
@@ -59,10 +61,12 @@ export default function BasicDemo() {
     }, [value]);
 
     return (
-        <div className="card flex justify-content-center">
+        <>
             <Toast ref={toast} />
-            <InputText type="text" defaultValue={value} onBlur={(e) => setValue(e.target.value)} />
-        </div>
+            <div className="card flex justify-content-center">
+                <InputText type="text" defaultValue={value} onBlur={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)} />
+            </div>
+        </>
     )
 }
         `
