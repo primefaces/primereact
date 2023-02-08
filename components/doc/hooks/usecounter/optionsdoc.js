@@ -5,15 +5,15 @@ import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 
 export function OptionsDoc(props) {
-    const { count, increment, decrement, reset } = useCounter(10, { step: 0.5, min: 0, max: 15 });
+    const { count, increment, decrement, reset } = useCounter(10, { step: 0.25, min: 0, max: 15 });
 
     const code = {
         basic: `
-<h2>Count: {count}</h2>
-<div className="flex">
-    <Button label="Increment" className="ml-2" onClick={increment}></Button>
-    <Button label="Decrement" className="ml-2" onClick={decrement}></Button>
-    <Button label="Reset" className="ml-2" onClick={reset}></Button>
+<span className="font-bold text-4xl mb-5">{count}</span>
+<div className="flex flex-wrap gap-3">
+    <Button icon="pi pi-plus" className="p-button-outlined p-button-rounded p-button-success" onClick={increment}></Button>
+    <Button icon="pi pi-minus" className="p-button-outlined p-button-rounded" onClick={decrement}></Button>
+    <Button icon="pi pi-times" className="p-button-outlined p-button-rounded p-button-danger" onClick={reset}></Button>
 </div>
         `,
         javascript: `
@@ -22,15 +22,15 @@ import { Button } from 'primereact/button';
 import { useCounter } from 'primereact/hooks';
 
 export default function OptionsDemo() {
-    const { count, increment, decrement, reset } = useCounter(10, {step: 0.5, min: 0, max: 15 });
+    const { count, increment, decrement, reset } = useCounter(10, { step: 0.25, min: 0, max: 15 });
 
     return (
-        <div className="card flex flex-column justify-content-center align-items-center">
-            <h2>Count: {count}</h2>
-            <div className="flex">
-                <Button label="Increment" className="ml-2" onClick={increment}></Button>
-                <Button label="Decrement" className="ml-2" onClick={decrement}></Button>
-                <Button label="Reset" className="ml-2" onClick={reset}></Button>
+        <div className="card flex flex-column align-items-center">
+            <span className="font-bold text-4xl mb-5">{count}</span>
+            <div className="flex flex-wrap gap-3">
+                <Button icon="pi pi-plus" className="p-button-outlined p-button-rounded p-button-success" onClick={increment}></Button>
+                <Button icon="pi pi-minus" className="p-button-outlined p-button-rounded" onClick={decrement}></Button>
+                <Button icon="pi pi-times" className="p-button-outlined p-button-rounded p-button-danger" onClick={reset}></Button>
             </div>
         </div>
     )
@@ -42,15 +42,15 @@ import { Button } from 'primereact/button';
 import { useCounter } from 'primereact/hooks';
 
 export default function OptionsDemo() {
-    const { count, increment, decrement, reset } = useCounter(10, {step: 0.5, min: 0, max: 15 });
-    
+    const { count, increment, decrement, reset } = useCounter(10, { step: 0.25, min: 0, max: 15 });
+
     return (
-        <div className="card flex flex-column justify-content-center align-items-center">
-            <h2>Count: {count}</h2>
-            <div className="flex">
-                <Button label="Increment" className="ml-2" onClick={increment}></Button>
-                <Button label="Decrement" className="ml-2" onClick={decrement}></Button>
-                <Button label="Reset" className="ml-2" onClick={reset}></Button>
+        <div className="card flex flex-column align-items-center">
+            <span className="font-bold text-4xl mb-5">{count}</span>
+            <div className="flex flex-wrap gap-3">
+                <Button icon="pi pi-plus" className="p-button-outlined p-button-rounded p-button-success" onClick={increment}></Button>
+                <Button icon="pi pi-minus" className="p-button-outlined p-button-rounded" onClick={decrement}></Button>
+                <Button icon="pi pi-times" className="p-button-outlined p-button-rounded p-button-danger" onClick={reset}></Button>
             </div>
         </div>
     )
@@ -61,19 +61,18 @@ export default function OptionsDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                {/**
-                 * @todo Add a description
-                 */}
+                <p>
+                    Step factor to change the counter is specified using the <i>step</i> option. In addition boundaries can be defined with <i>min</i> and <i>max</i> options.
+                </p>
             </DocSectionText>
-            <div className="card flex flex-column justify-content-center align-items-center">
-                <h2>Count: {count}</h2>
-                <div className="flex">
-                    <Button label="Increment" className="ml-2" onClick={increment}></Button>
-                    <Button label="Decrement" className="ml-2" onClick={decrement}></Button>
-                    <Button label="Reset" className="ml-2" onClick={reset}></Button>
+            <div className="card flex flex-column align-items-center">
+                <span className="font-bold text-4xl mb-5">{count}</span>
+                <div className="flex flex-wrap gap-3">
+                    <Button icon="pi pi-plus" className="p-button-outlined p-button-rounded p-button-success" onClick={increment}></Button>
+                    <Button icon="pi pi-minus" className="p-button-outlined p-button-rounded" onClick={decrement}></Button>
+                    <Button icon="pi pi-times" className="p-button-outlined p-button-rounded p-button-danger" onClick={reset}></Button>
                 </div>
             </div>
-
             <DocSectionCode code={code} />
         </>
     );

@@ -22,7 +22,7 @@ const CounterDemo = () => {
         }
     ];
 
-    return <DocComponent title="React useCounter Hook" header="useCounter" description="" componentDocs={docs} apiDocs={[{ name: 'useCounter', pathname: '/functions/hooks.useCounter.html' }]} />;
+    return <DocComponent title="React useCounter Hook" header="useCounter" description="Manages a counter state." componentDocs={docs} apiDocs={[{ name: 'useCounter', pathname: '/functions/hooks.useCounter.html' }]} />;
 };
 
 export default CounterDemo;
