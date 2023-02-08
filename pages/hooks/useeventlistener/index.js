@@ -1,6 +1,6 @@
 import { DocComponent } from '../../../components/doc/common/doccomponent';
-import { BasicDoc } from '../../../components/doc/hooks/useeventlistener/basicdoc';
-import { DefaultDoc } from '../../../components/doc/hooks/useeventlistener/defaultdoc';
+import { DocumentDoc } from '../../../components/doc/hooks/useeventlistener/documentdoc';
+import { ElementDoc } from '../../../components/doc/hooks/useeventlistener/elementdoc';
 import { ImportDoc } from '../../../components/doc/hooks/useeventlistener/importdoc';
 
 const EventListenerDemo = () => {
@@ -11,18 +11,26 @@ const EventListenerDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'default',
-            label: 'Default',
-            component: DefaultDoc
+            id: 'document',
+            label: 'Document',
+            component: DocumentDoc
         },
         {
-            id: 'basic',
-            label: 'Basic',
-            component: BasicDoc
+            id: 'element',
+            label: 'Element',
+            component: ElementDoc
         }
     ];
 
-    return <DocComponent title="React useEventListener Hook" header="useEventListener" description="" componentDocs={docs} apiDocs={[{ name: 'useEventListener', pathname: '/functions/hooks.useEventListener.html' }]} />;
+    return (
+        <DocComponent
+            title="React useEventListener Hook"
+            header="useEventListener"
+            description="Manages event bindings of an element programmatically."
+            componentDocs={docs}
+            apiDocs={[{ name: 'useEventListener', pathname: '/functions/hooks.useEventListener.html' }]}
+        />
+    );
 };
 
 export default EventListenerDemo;

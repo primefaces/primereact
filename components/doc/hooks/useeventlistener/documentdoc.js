@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
+import React, { useEffect, useState } from 'react';
 import { useEventListener } from '../../../lib/hooks/Hooks';
 import { classNames } from '../../../lib/utils/Utils';
+import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
-export function DefaultDoc(props) {
+export function DocumentDoc(props) {
     const [pressed, setPressed] = useState(false);
     const [value, setValue] = useState('');
 
     const onKeyDown = (e) => {
         setPressed(true);
 
-        if (e.code == 'Space') {
+        if (e.code === 'Space') {
             e.preventDefault();
             setValue('space');
 
@@ -53,20 +53,27 @@ const [bindKeyDown, unbindKeyDown] = useEventListener({
         onKeyDown(e);
     }
 });
+
+const [bindKeyUp, unbindKeyUp] = useEventListener({
+    type: 'keyup',
+    listener: (e) => {
+        setPressed(false);
+    }
+});
         `,
         javascript: `
 import React, { useState, useEffect } from 'react'; 
 import { classNames } from 'primereact/utils';
 import { useEventListener } from 'primereact/hooks';
 
-export default function DefaultDemo() {
+export default function DocumentDemo() {
     const [pressed, setPressed] = useState(false);
     const [value, setValue] = useState('');
 
     const onKeyDown = (e) => {
         setPressed(true);
 
-        if (e.code == 'Space') {
+        if (e.code === 'Space') {
             setValue('space');
 
             return;
@@ -100,17 +107,15 @@ export default function DefaultDemo() {
     }, [bindKeyDown, bindKeyUp, unbindKeyDown, unbindKeyUp]);
 
     return (
-        <div className="card flex flex-column justify-content-center align-items-center gap-2">
+        <div className="card flex flex-column align-items-center gap-3">
             <button
-                className={classNames('card border-300 border-1 border-round-md py-3 px-4 text-color font-semibold text-lg', { 'shadow-1': pressed, 'shadow-5': !pressed })}
+                className={classNames('card border-1 surface-border border-round-md py-3 px-4 text-color font-semibold text-lg transition-all transition-duration-150', { 'shadow-1': pressed, 'shadow-5': !pressed })}
                 style={{
-                    background: '-webkit-linear-gradient(top, var(--surface-100) 0%, var(--surface-300) 80%, var(--surface-400) 100%)',
+                    background: '-webkit-linear-gradient(top, var(--surface-ground) 0%, var(--surface-card) 100%)',
                     transform: pressed ? 'translateY(5px)' : 'translateY(0)'
-                }}
-            >
-                {value.toUpperCase() || <i className="pi pi-arrow-down font-semibold"></i>}
+                }}>
+                {value.toUpperCase() || 'Press a Key'}
             </button>
-            {!value ? <small className="text-md font-semibold">Press a key</small> : <small className="font-semibold">&nbsp;</small>}
         </div>
     )
 }
@@ -120,14 +125,14 @@ import React, { useState, useEffect } from 'react';
 import { classNames } from 'primereact/utils';
 import { useEventListener } from 'primereact/hooks';
 
-export default function DefaultDemo() {
-    const [pressed, setPressed] = useState(false);
-    const [value, setValue] = useState('');
+export default function DocumentDemo() {
+    const [pressed, setPressed] = useState<boolean>(false);
+    const [value, setValue] = useState<string>('');
 
     const onKeyDown = (e) => {
         setPressed(true);
 
-        if (e.code == 'Space') {
+        if (e.code === 'Space') {
             setValue('space');
 
             return;
@@ -161,17 +166,15 @@ export default function DefaultDemo() {
     }, [bindKeyDown, bindKeyUp, unbindKeyDown, unbindKeyUp]);
 
     return (
-        <div className="card flex flex-column justify-content-center align-items-center gap-2">
+        <div className="card flex flex-column align-items-center gap-3">
             <button
-                className={classNames('card border-300 border-1 border-round-md py-3 px-4 text-color font-semibold text-lg', { 'shadow-1': pressed, 'shadow-5': !pressed })}
+                className={classNames('card border-1 surface-border border-round-md py-3 px-4 text-color font-semibold text-lg transition-all transition-duration-150', { 'shadow-1': pressed, 'shadow-5': !pressed })}
                 style={{
-                    background: '-webkit-linear-gradient(top, var(--surface-100) 0%, var(--surface-300) 80%, var(--surface-400) 100%)',
+                    background: '-webkit-linear-gradient(top, var(--surface-ground) 0%, var(--surface-card) 100%)',
                     transform: pressed ? 'translateY(5px)' : 'translateY(0)'
-                }}
-            >
-                {value.toUpperCase() || <i className="pi pi-arrow-down font-semibold"></i>}
+                }}>
+                {value.toUpperCase() || 'Press a Key'}
             </button>
-            {!value ? <small className="text-md font-semibold">Press a key</small> : <small className="font-semibold">&nbsp;</small>}
         </div>
     )
 }
@@ -181,21 +184,18 @@ export default function DefaultDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                {/**
-                 * @todo Add a description
-                 */}
+                <p>Events are attached to the document itself by default.</p>
             </DocSectionText>
-            <div className="card flex flex-column justify-content-center align-items-center gap-2">
+            <div className="card flex flex-column align-items-center gap-3">
                 <button
-                    className={classNames('card border-300 border-1 border-round-md py-3 px-4 text-color font-semibold text-lg', { 'shadow-1': pressed, 'shadow-5': !pressed })}
+                    className={classNames('card border-1 surface-border border-round-md py-3 px-4 text-color font-semibold text-lg transition-all transition-duration-150', { 'shadow-1': pressed, 'shadow-5': !pressed })}
                     style={{
-                        background: '-webkit-linear-gradient(top, var(--surface-100) 0%, var(--surface-300) 80%, var(--surface-400) 100%)',
+                        background: '-webkit-linear-gradient(top, var(--surface-ground) 0%, var(--surface-card) 100%)',
                         transform: pressed ? 'translateY(5px)' : 'translateY(0)'
                     }}
                 >
-                    {value.toUpperCase() || <i className="pi pi-arrow-down font-semibold"></i>}
+                    {value.toUpperCase() || 'Press a Key'}
                 </button>
-                {!value ? <small className="text-md font-semibold">Press a key</small> : <small className="font-semibold">&nbsp;</small>}
             </div>
             <DocSectionCode code={code} />
         </>
