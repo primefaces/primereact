@@ -1,37 +1,42 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { useTimeout } from '../../../lib/hooks/Hooks';
-import { DocSectionText } from '../../common/docsectiontext';
+import { Toast } from '../../../lib/toast/Toast';
 import { DocSectionCode } from '../../common/docsectioncode';
-import { Button } from '../../../lib/button/Button';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function BasicDoc(props) {
-    const [showButton, setShowButton] = useState(true);
+    const toast = useRef(null);
 
     const [clearTimeout] = useTimeout(() => {
-        setShowButton(false);
+        toast.current.show({ severity: 'info', summary: 'Loaded' });
     }, 5000);
 
     const code = {
         basic: `
-<div>{showButton ? <Button label="I'm visible for 5000ms" /> : 'You can no longer see this button'}</div>
+const [clearTimeout] = useTimeout(() => {
+    toast.current.show({ severity: 'info', summary: 'Loaded' });
+}, 5000);
         `,
         javascript: `
 import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
 import { useTimeout } from 'primereact/hooks';
+import { Toast } from 'primereact/toast';
 
 export default function BasicDemo() {
-
-    const [showButton, setShowButton] = useState(true);
+    const toast = useRef(null);
 
     const [clearTimeout] = useTimeout(() => {
-        setShowButton(false);
+        toast.current.show({ severity: 'info', summary: 'Loaded' });
     }, 5000);
 
     return (
-        <div className="card flex flex-column justify-content-center align-items-center">
-            <div>{showButton ? <Button label="I'm visible for 5000ms" /> : 'You can no longer see this button'}</div>
-        </div>
+        <>
+            <Toast ref={toast} />
+            <div className="card flex justify-content-center">
+                <span className="text-xl">A message will be displayed in 3 seconds after mount.</span>
+            </div>
+        </>
     )
 }
         `,
@@ -39,19 +44,22 @@ export default function BasicDemo() {
 import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
 import { useTimeout } from 'primereact/hooks';
+import { Toast } from 'primereact/toast';
 
 export default function BasicDemo() {
-
-    const [showButton, setShowButton] = useState(true);
+    const toast = useRef<Toast>(null);
 
     const [clearTimeout] = useTimeout(() => {
-        setShowButton(false);
+        toast.current.show({ severity: 'info', summary: 'Loaded' });
     }, 5000);
 
     return (
-        <div className="card flex flex-column justify-content-center align-items-center">
-            <div>{showButton ? <Button label="I'm visible for 5000ms" /> : 'You can no longer see this button'}</div>
-        </div>
+        <>
+            <Toast ref={toast} />
+            <div className="card flex justify-content-center">
+                <span className="text-xl">A message will be displayed in 3 seconds after mount.</span>
+            </div>
+        </>
     )
 }
         `
@@ -60,12 +68,11 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                {/**
-                 * @todo Add a description
-                 */}
+                <p>Wait for 3 seconds to view the Toast message.</p>
             </DocSectionText>
-            <div className="card flex flex-column justify-content-center align-items-center">
-                <div>{showButton ? <Button label="I'm visible for 5000ms" /> : 'You can no longer see this button'}</div>
+            <Toast ref={toast} />
+            <div className="card flex justify-content-center">
+                <span className="text-xl">A message will be displayed in 3 seconds after mount.</span>
             </div>
             <DocSectionCode code={code} />
         </>

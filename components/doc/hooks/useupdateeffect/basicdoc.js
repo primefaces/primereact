@@ -37,7 +37,7 @@ export default function BasicDemo() {
     }, [value]);
 
     return (
-        <div className="card flex flex-column justify-content-center">
+        <div className="card flex justify-content-center">
             <Toast ref={toast} />
             <InputText type="text" defaultValue={value} onBlur={(e) => setValue(e.target.value)} />
         </div>
@@ -59,7 +59,7 @@ export default function BasicDemo() {
     }, [value]);
 
     return (
-        <div className="card flex flex-column justify-content-center">
+        <div className="card flex justify-content-center">
             <Toast ref={toast} />
             <InputText type="text" defaultValue={value} onBlur={(e) => setValue(e.target.value)} />
         </div>
@@ -73,7 +73,7 @@ export default function BasicDemo() {
             <DocSectionText {...props}>
                 <p>Updating the value at blur event triggers a message.</p>
             </DocSectionText>
-            <div className="card flex flex-column justify-content-center">
+            <div className="card flex justify-content-center">
                 <Toast ref={toast} />
                 <InputText type="text" defaultValue={value} onBlur={(e) => setValue(e.target.value)} />
             </div>
