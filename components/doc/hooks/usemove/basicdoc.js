@@ -32,14 +32,12 @@ export default function BasicDemo() {
                 </span>
             </div>
             <div ref={ref} className="relative w-14rem h-8rem surface-ground border-round">
-                <div
-                    className={classNames('absolute border-circle w-2rem h-2rem flex align-items-center justify-content-center', { 'bg-green-500': active, 'bg-primary': !active })}
+                <div className={classNames('absolute border-circle w-2rem h-2rem flex align-items-center justify-content-center', { 'bg-green-500': active, 'bg-primary': !active })}
                     style={{
                         left: \`calc(\${x * 100}% - 1rem)\`,
                         top: \`calc(\${y * 100}% - 1rem)\`,
                         cursor: 'grab'
-                    }}
-                >
+                    }}>
                     <i className="pi pi-arrows-alt"></i>
                 </div>
             </div>
@@ -68,14 +66,12 @@ export default function BasicDemo() {
                 </span>
             </div>
             <div ref={ref} className="relative w-14rem h-8rem surface-ground border-round">
-                <div
-                    className={classNames('absolute border-circle w-2rem h-2rem flex align-items-center justify-content-center', { 'bg-green-500': active, 'bg-primary': !active })}
+                <div className={classNames('absolute border-circle w-2rem h-2rem flex align-items-center justify-content-center', { 'bg-green-500': active, 'bg-primary': !active })}
                     style={{
                         left: \`calc(\${x * 100}% - 1rem)\`,
                         top: \`calc(\${y * 100}% - 1rem)\`,
                         cursor: 'grab'
-                    }}
-                >
+                    }}>
                     <i className="pi pi-arrows-alt"></i>
                 </div>
             </div>
