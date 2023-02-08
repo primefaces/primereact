@@ -9,6 +9,7 @@ import { useResizeListener } from './useResizeListener';
 import { useInterval } from './useInterval';
 import { useStorage, useLocalStorage, useSessionStorage } from './useStorage';
 import { useTimeout } from './useTimeout';
+import { useIntersectionObserver } from './useIntersectionObserver';
 import { useCounter } from './useCounter';
 import { useMouse } from './useMouse';
 import { useMove } from './useMove';
@@ -25,6 +26,7 @@ export {
     useOverlayListener,
     useOverlayScrollListener,
     useResizeListener,
+    useIntersectionObserver,
     useInterval,
     useStorage,
     useLocalStorage,

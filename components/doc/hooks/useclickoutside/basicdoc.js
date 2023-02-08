@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Button } from '../../../lib/button/Button';
-import { useClickOutside } from '../../../lib/hooks/useClickOutside';
+import { useClickOutside } from '../../../lib/hooks/Hooks';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 

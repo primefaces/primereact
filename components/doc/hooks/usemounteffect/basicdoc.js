@@ -2,7 +2,7 @@
 import React from 'react';
 import { DocSectionText } from '../../common/docsectiontext';
 import { DocSectionCode } from '../../common/docsectioncode';
-import { useMountEffect } from '../../../lib/hooks/useMountEffect';
+import { useMountEffect } from '../../../lib/hooks/Hooks';
 
 export function BasicDoc(props) {
     useMountEffect(() => {

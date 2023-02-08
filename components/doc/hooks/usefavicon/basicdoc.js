@@ -2,7 +2,7 @@ import React from 'react';
 import { DocSectionText } from '../../common/docsectiontext';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { Button } from '../../../lib/button/Button';
-import { useFavicon } from '../../../lib/hooks/useFavicon';
+import { useFavicon } from '../../../lib/hooks/Hooks';
 
 export function BasicDoc(props) {
     const [favicon, setFavicon] = React.useState();

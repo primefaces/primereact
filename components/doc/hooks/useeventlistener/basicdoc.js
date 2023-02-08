@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { DocSectionText } from '../../common/docsectiontext';
 import { DocSectionCode } from '../../common/docsectioncode';
-import { useEventListener } from '../../../lib/hooks/useEventListener';
+import { useEventListener } from '../../../lib/hooks/Hooks';
 import { classNames } from '../../../lib/utils/Utils';
 
 export function BasicDoc(props) {

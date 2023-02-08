@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { DocSectionText } from '../../common/docsectiontext';
 import { DocSectionCode } from '../../common/docsectioncode';
-import { useOverlayScrollListener } from '../../../lib/hooks/useOverlayScrollListener';
+import { useOverlayScrollListener } from '../../../lib/hooks/Hooks';
 import { Button } from '../../../lib/button/Button';
 import { InputText } from '../../../lib/inputtext/InputText';
 import { classNames } from '../../../lib/utils/Utils';

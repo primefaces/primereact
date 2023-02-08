@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useIntersectionObserver } from '../../../lib/hooks/useIntersectionObserver';
+import { useIntersectionObserver } from '../../../lib/hooks/Hooks';
 import { classNames } from '../../../lib/utils/Utils';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
