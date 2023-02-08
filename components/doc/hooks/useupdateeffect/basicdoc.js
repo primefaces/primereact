@@ -1,58 +1,67 @@
-/* eslint-disable no-console */
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useUpdateEffect } from '../../../lib/hooks/Hooks';
-import { DocSectionText } from '../../common/docsectiontext';
+import { InputText } from '../../../lib/inputtext/InputText';
+import { Toast } from '../../../lib/toast/Toast';
 import { DocSectionCode } from '../../common/docsectioncode';
-import { Button } from '../../../lib/button/Button';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function BasicDoc(props) {
-    const [count, setCount] = useState(0);
+    const toast = useRef(null);
+    const [value, setValue] = useState('');
 
     useUpdateEffect(() => {
-        console.log('Update effect triggered! count: ', count);
-    }, [count]);
+        toast.current.show({ severity: 'info', summary: 'Updated' });
+    }, [value]);
 
     const code = {
         basic: `
-<h3>Count: {count}</h3>
-<Button label="Click" onClick={() => setCount(count + 1)} />
+const toast = useRef(null);
+const [value, setValue] = useState('');
+
+useUpdateEffect(() => {
+    toast.current.show({ severity: 'info', summary: 'Updated' });
+}, [value]);
         `,
         javascript: `
 import React, { useState } from 'react';
-import { Button } from 'primereact/button';
+import { InputText } from 'primereact/inputtext';
+import { Toast } from 'primereact/toast';
 import { useUpdateEffect } from 'primereact/hooks';
 
 export default function BasicDemo() {
-    const [count, setCount] = useState(0);
+    const toast = useRef(null);
+    const [value, setValue] = useState('');
 
     useUpdateEffect(() => {
-        console.log('Update effect triggered! count: ', count);
-    }, [count]);
+        toast.current.show({ severity: 'info', summary: 'Updated' });
+    }, [value]);
 
     return (
-        <div className="card flex flex-column justify-content-center align-items-center">
-            <h3>Count: {count}</h3>
-            <Button label="Click" onClick={() => setCount(count + 1)} />
+        <div className="card flex flex-column justify-content-center">
+            <Toast ref={toast} />
+            <InputText type="text" defaultValue={value} onBlur={(e) => setValue(e.target.value)} />
         </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from 'react';
-import { Button } from 'primereact/button';
+import { InputText } from 'primereact/inputtext';
+import { Toast } from 'primereact/toast';
 import { useUpdateEffect } from 'primereact/hooks';
 
 export default function BasicDemo() {
-    const [count, setCount] = useState(0);
+    const toast = useRef(null);
+    const [value, setValue] = useState<string>('');
 
     useUpdateEffect(() => {
-        console.log('Update effect triggered! count: ', count);
-    }, [count]);
+        toast.current.show({ severity: 'info', summary: 'Updated' });
+    }, [value]);
 
     return (
-        <div className="card flex flex-column justify-content-center align-items-center">
-            <h3>Count: {count}</h3>
-            <Button label="Click" onClick={() => setCount(count + 1)} />
+        <div className="card flex flex-column justify-content-center">
+            <Toast ref={toast} />
+            <InputText type="text" defaultValue={value} onBlur={(e) => setValue(e.target.value)} />
         </div>
     )
 }
@@ -62,13 +71,11 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                {/**
-                 * @todo Add a description
-                 */}
+                <p>Updating the value at blur event triggers a message.</p>
             </DocSectionText>
-            <div className="card flex flex-column justify-content-center align-items-center">
-                <h3>Count: {count}</h3>
-                <Button label="Click" onClick={() => setCount(count + 1)} />
+            <div className="card flex flex-column justify-content-center">
+                <Toast ref={toast} />
+                <InputText type="text" defaultValue={value} onBlur={(e) => setValue(e.target.value)} />
             </div>
             <DocSectionCode code={code} />
         </>

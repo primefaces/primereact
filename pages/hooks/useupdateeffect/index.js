@@ -16,7 +16,15 @@ const CounterDemo = () => {
         }
     ];
 
-    return <DocComponent title="React useUpdateEffect Hook" header="useUpdateEffect" description="" componentDocs={docs} apiDocs={[{ name: 'useUpdateEffect', pathname: '/functions/hooks.useUpdateEffect.html' }]} />;
+    return (
+        <DocComponent
+            title="React useUpdateEffect Hook"
+            header="useUpdateEffect"
+            description="Executes a given callback when a stateful property is updated."
+            componentDocs={docs}
+            apiDocs={[{ name: 'useUpdateEffect', pathname: '/functions/hooks.useUpdateEffect.html' }]}
+        />
+    );
 };
 
 export default CounterDemo;
