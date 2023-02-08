@@ -27,8 +27,7 @@ export function CustomUploadDoc(props) {
 import React from 'react'; 
 import { FileUpload } from 'primereact/fileupload';
 
-export default function CustomUploadDoc() {
-
+export default function CustomUploadDemo() {
     const customBase64Uploader = async (event) => {
         // convert file to base64 encoded
         const file = event.files[0];
@@ -43,19 +42,18 @@ export default function CustomUploadDoc() {
     };
 
     return (
-        <div className="card">
-            <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" customUpload uploadHandler={customBase64Uploader} />
+        <div className="card flex justify-content-center">
+            <FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" customUpload uploadHandler={customBase64Uploader} />
         </div>
     )
 }
         `,
         typescript: `
 import React from 'react'; 
-import { FileUpload } from 'primereact/fileupload';
+import { FileUpload, FileUploadHandlerEvent } from 'primereact/fileupload';
 
-export default function CustomUploadDoc() {
-
-    const customBase64Uploader = async (event) => {
+export default function CustomUploadDemo() {
+    const customBase64Uploader = async (event: FileUploadHandlerEvent) => {
         // convert file to base64 encoded
         const file = event.files[0];
         const reader = new FileReader();
@@ -69,8 +67,8 @@ export default function CustomUploadDoc() {
     };
 
     return (
-        <div className="card">
-            <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" customUpload uploadHandler={customBase64Uploader} />
+        <div className="card flex justify-content-center">
+            <FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" customUpload uploadHandler={customBase64Uploader} />
         </div>
     )
 }
@@ -80,10 +78,12 @@ export default function CustomUploadDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Uploading implementation can be overriden by enabling customUpload property and defining a custom upload handler event.</p>
+                <p>
+                    Uploading implementation can be overriden with <i>customUpload</i> property and defining a custom <i>uploadHandler</i> function.
+                </p>
             </DocSectionText>
-            <div className="card">
-                <FileUpload mode="basic" name="demo[]" url={'/api/upload'} accept="image/*" customUpload uploadHandler={customBase64Uploader} />
+            <div className="card flex justify-content-center">
+                <FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" customUpload uploadHandler={customBase64Uploader} />
             </div>
             <DocSectionCode code={code} />
         </>

@@ -14,24 +14,24 @@ export function AdvancedDoc(props) {
     const code = {
         basic: `
 <Toast ref={toast}></Toast>
-<FileUpload name="demo[]" url="/api/upload" onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
+<FileUpload name="demo[]" url={'/api/upload'} onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
         `,
         javascript: `
 import React, { useRef } from 'react';
 import { Toast } from 'primereact/toast';
 import { FileUpload } from 'primereact/fileupload';
 
-export default function AdvancedDoc() {
+export default function AdvanceDemo() {
     const toast = useRef(null);
 
     const onUpload = () => {
         toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' });
     };
-
+        
     return (
         <div className="card">
             <Toast ref={toast}></Toast>
-            <FileUpload name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
+            <FileUpload name="demo[]" url={'/api/upload'} onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
         </div>
     )
 }
@@ -41,28 +41,21 @@ import React, { useRef } from 'react';
 import { Toast } from 'primereact/toast';
 import { FileUpload } from 'primereact/fileupload';
 
-export default function AdvancedDoc() {
-    const toast = useRef(null);
+export default function AdvanceDemo() {
+    const toast = useRef<Toast>(null);
 
     const onUpload = () => {
         toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' });
     };
-    
+        
     return (
         <div className="card">
             <Toast ref={toast}></Toast>
-            <FileUpload name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
+            <FileUpload name="demo[]" url={'/api/upload'} onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
         </div>
-    )ß
+    )
 }
-        `,
-        php: `
-/* public/upload.php */
-
-<?php
-header ("Access-Control-Allow-Origin: *");
-echo '<p>Fake Upload Process</p>'; ?>
-    `
+        `
     };
 
     return (
@@ -72,7 +65,6 @@ echo '<p>Fake Upload Process</p>'; ?>
             </DocSectionText>
             <div className="card">
                 <Toast ref={toast}></Toast>
-
                 <FileUpload name="demo[]" url={'/api/upload'} onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
             </div>
             <DocSectionCode code={code} />

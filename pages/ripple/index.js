@@ -1,12 +1,13 @@
 import Head from 'next/head';
-import React from 'react';
+import React, { useContext } from 'react';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { AccessibilityDoc } from '../../components/doc/ripple/accessibilitydoc';
-import { CustomDoc } from '../../components/doc/ripple/customdoc';
-import { DefaultDoc } from '../../components/doc/ripple/defaultdoc';
+import { BasicDoc } from '../../components/doc/ripple/basicdoc';
+import { ConfigurationDoc } from '../../components/doc/ripple/configurationdoc';
 import { ImportDoc } from '../../components/doc/ripple/importdoc';
 import { StyleDoc } from '../../components/doc/ripple/styledoc';
+import AppContentContext from '../../components/layout/appcontentcontext';
 
 const RippleDemo = () => {
     const docs = [
@@ -16,14 +17,14 @@ const RippleDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'default',
-            label: 'Default',
-            component: DefaultDoc
+            id: 'configuration',
+            label: 'ConfigurationDoc',
+            component: ConfigurationDoc
         },
         {
-            id: 'custom',
-            label: 'Custom',
-            component: CustomDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
             id: 'style',
@@ -41,6 +42,9 @@ const RippleDemo = () => {
             doc: [{ name: 'Ripple', pathname: '/modules/ripple.html' }]
         }
     ];
+    const appContentContext = useContext(AppContentContext);
+
+    appContentContext.onRippleChange(true);
 
     return (
         <div>
