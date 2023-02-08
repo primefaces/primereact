@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import { AccessibilityDoc } from '../../components/doc/colorpicker/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/colorpicker/basicdoc';
 import { DisabledDoc } from '../../components/doc/colorpicker/disableddoc';
@@ -8,8 +7,7 @@ import { FormatDoc } from '../../components/doc/colorpicker/formatdoc';
 import { ImportDoc } from '../../components/doc/colorpicker/importdoc';
 import { InlineDoc } from '../../components/doc/colorpicker/inlinedoc';
 import { StyleDoc } from '../../components/doc/colorpicker/styledoc';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 
 const ColorPickerDemo = () => {
     const docs = [
@@ -64,32 +62,10 @@ const ColorPickerDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'ColorPicker', pathname: '/modules/colorpicker.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React ColorPicker Component</title>
-                <meta name="description" content="ColorPicker is an input component to select a color." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>ColorPicker</h1>
-                        <p>ColorPicker is an input component to select a color.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React ColorPicker Component" header="ColorPicker" description="ColorPicker is an input component to select a color." componentDocs={docs} apiDocs={[{ name: 'ColorPicker', pathname: '/modules/colorpicker.html' }]} />;
 };
 
 export default ColorPickerDemo;

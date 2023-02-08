@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import { AccessibilityDoc } from '../../components/doc/calendar/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/calendar/basicdoc';
 import { ButtonBarDoc } from '../../components/doc/calendar/buttonbardoc';
@@ -22,8 +21,7 @@ import { StyleDoc } from '../../components/doc/calendar/styledoc';
 import { TimeDoc } from '../../components/doc/calendar/timedoc';
 import { TouchUIDoc } from '../../components/doc/calendar/touchuidoc';
 import { YearPickerDoc } from '../../components/doc/calendar/yearpickerdoc';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 
 const CalendarDemo = () => {
     const docs = [
@@ -148,31 +146,17 @@ const CalendarDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Calendar', pathname: '/modules/calendar.html' }]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React Calendar Component</title>
-                <meta name="description" content="Calendar, also known as DatePicker, is a form component to work with dates." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>Calendar</h1>
-                        <p>Calendar, also known as DatePicker, is a form component to work with dates.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React Calendar Component"
+            header="Calendar"
+            description="Calendar, also known as DatePicker, is a form component to work with dates."
+            componentDocs={docs}
+            apiDocs={[{ name: 'Calendar', pathname: '/modules/calendar.html' }]}
+        />
     );
 };
 

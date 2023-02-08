@@ -1,6 +1,4 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/divider/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/divider/basicdoc';
 import { ContentDoc } from '../../components/doc/divider/contentdoc';
@@ -51,32 +49,10 @@ const DividerDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Divider', pathname: '/modules/divider.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Divider Component</title>
-                <meta name="description" content="Divider is used to separate contents." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>Divider</h1>
-                        <p>Divider is used to separate contents.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Divider Component" header="Divider" description="Divider is used to separate contents." componentDocs={docs} apiDocs={[{ name: 'Divider', pathname: '/modules/divider.html' }]} />;
 };
 
 export default DividerDemo;

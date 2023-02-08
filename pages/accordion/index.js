@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import { AccessibilityDoc } from '../../components/doc/accordion/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/accordion/basicdoc';
 import { ControlledDoc } from '../../components/doc/accordion/controlleddoc';
@@ -7,8 +6,7 @@ import { ImportDoc } from '../../components/doc/accordion/importdoc';
 import { MultipleDoc } from '../../components/doc/accordion/multipledoc';
 import { StyleDoc } from '../../components/doc/accordion/styledoc';
 import { TemplateDoc } from '../../components/doc/accordion/templatedoc';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 
 const AccordionDemo = () => {
     const docs = [
@@ -51,34 +49,20 @@ const AccordionDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [
-                { name: 'Accordion', pathname: '/modules/accordion.html' },
-                { name: 'AccordionTab', pathname: '/classes/accordion.AccordionTab.html' }
-            ]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React Accordion Component</title>
-                <meta name="description" content="Accordion groups a collection of contents in tabs." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>Accordion</h1>
-                        <p>Accordion groups a collection of contents in tabs.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React Accordion Component"
+            header="Accordion"
+            description="Accordion groups a collection of contents in tabs."
+            componentDocs={docs}
+            apiDocs={[
+                { name: 'Accordion', pathname: '/modules/accordion.html' },
+                { name: 'AccordionTab', pathname: '/classes/accordion.AccordionTab.html' }
+            ]}
+        />
     );
 };
 

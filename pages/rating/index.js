@@ -1,7 +1,5 @@
-import Head from 'next/head';
 import React from 'react';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/rating/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/rating/basicdoc';
 import { DisabledDoc } from '../../components/doc/rating/disableddoc';
@@ -58,33 +56,10 @@ const RatingDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            type: 'api',
-            doc: [{ name: 'Rating', pathname: '/modules/rating.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Rating Component</title>
-                <meta name="description" content="Rating component is a star based selection input." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>Rating</h1>
-                        <p>Rating component is a star based selection input.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Rating Component" header="Rating" description="Rating component is a star based selection input." componentDocs={docs} apiDocs={[{ name: 'Rating', pathname: '/modules/rating.html' }]} />;
 };
 
 export default RatingDemo;

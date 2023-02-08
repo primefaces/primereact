@@ -1,6 +1,4 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/tieredmenu/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/tieredmenu/basicdoc';
 import { ImportDoc } from '../../components/doc/tieredmenu/importdoc';
@@ -33,32 +31,10 @@ const TieredMenuDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'TieredMenu', pathname: '/modules/tieredmenu.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React TieredMenu Component</title>
-                <meta name="description" content="TieredMenu displays submenus in nested overlays." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>TieredMenu</h1>
-                        <p>TieredMenu displays submenus in nested overlays.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React TieredMenu Component" header="TieredMenu" description="TieredMenu displays submenus in nested overlays." componentDocs={docs} apiDocs={[{ name: 'TieredMenu', pathname: '/modules/tieredmenu.html' }]} />;
 };
 
 export default TieredMenuDemo;

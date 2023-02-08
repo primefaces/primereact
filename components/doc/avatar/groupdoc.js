@@ -3,7 +3,7 @@ import { AvatarGroup } from '../../lib/avatargroup/AvatarGroup';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function AvatarGroupDoc(props) {
+export function GroupDoc(props) {
     const code = {
         basic: `
 <AvatarGroup>
@@ -22,7 +22,7 @@ import { Avatar } from 'primereact/avatar';
 import { AvatarGroup } from 'primereact/avatargroup';
 import { Badge } from 'primereact/badge';
 
-export default function AvatarGroupDemo() {
+export default function GroupDemo() {
 
     return (
         <div className="card flex justify-content-center">
@@ -44,7 +44,7 @@ import { Avatar } from 'primereact/avatar';
 import { AvatarGroup } from 'primereact/avatargroup';
 import { Badge } from 'primereact/badge';
 
-export default function AvatarGroupDemo() {
+export default function GroupDemo() {
 
     return (
         <div className="card flex justify-content-center">

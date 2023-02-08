@@ -1,6 +1,4 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/multiselect/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/multiselect/basicdoc';
 import { ChipsDoc } from '../../components/doc/multiselect/chipsdoc';
@@ -94,31 +92,17 @@ const MultiSelectDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'MultiSelect', pathname: '/modules/multiselect.html' }]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React MultiSelect Component</title>
-                <meta name="description" content="MultiSelect is used to select multiple items from a collection." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>MultiSelect</h1>
-                        <p>MultiSelect is used to select multiple items from a collection.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React MultiSelect Component"
+            header="MultiSelect"
+            description="MultiSelect is used to select multiple items from a collection."
+            componentDocs={docs}
+            apiDocs={[{ name: 'MultiSelect', pathname: '/modules/multiselect.html' }]}
+        />
     );
 };
 

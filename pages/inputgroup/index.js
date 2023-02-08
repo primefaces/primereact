@@ -1,6 +1,4 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { BasicDoc } from '../../components/doc/inputgroup/basicdoc';
 import { ButtonDoc } from '../../components/doc/inputgroup/buttondoc';
 import { CheckboxDoc } from '../../components/doc/inputgroup/checkboxdoc';
@@ -30,24 +28,7 @@ const InputGroupDemo = () => {
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React InputGroup Component</title>
-                <meta name="description" content="Text, icon, buttons and other content can be grouped next to an input." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>InputGroup</h1>
-                        <p>Text, icon, buttons and other content can be grouped next to an input.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React InputGroup Component" header="InputGroup" description="Text, icon, buttons and other content can be grouped next to an input." componentDocs={docs} />;
 };
 
 export default InputGroupDemo;

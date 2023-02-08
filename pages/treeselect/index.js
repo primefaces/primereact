@@ -1,6 +1,4 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/treeselect/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/treeselect/basicdoc';
 import { CheckboxDoc } from '../../components/doc/treeselect/checkboxdoc';
@@ -88,31 +86,17 @@ const TreeSelectDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'TreeSelect', pathname: '/modules/treeselect.html' }]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React TreeSelect Component</title>
-                <meta name="description" content="TreeSelect is a form component to choose from hierarchical data." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>TreeSelect</h1>
-                        <p>TreeSelect is a form component to choose from hierarchical data.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React TreeSelect Component"
+            header="TreeSelect"
+            description="TreeSelect is a form component to choose from hierarchical data."
+            componentDocs={docs}
+            apiDocs={[{ name: 'TreeSelect', pathname: '/modules/treeselect.html' }]}
+        />
     );
 };
 

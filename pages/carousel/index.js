@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import { AccessibilityDoc } from '../../components/doc/carousel/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/carousel/basicdoc';
 import { CircularDoc } from '../../components/doc/carousel/circulardoc';
@@ -7,8 +6,7 @@ import { NumScrollDoc } from '../../components/doc/carousel/numscrolldoc';
 import { ResponsiveDoc } from '../../components/doc/carousel/responsivedoc';
 import { StyleDoc } from '../../components/doc/carousel/styledoc';
 import { VerticalDoc } from '../../components/doc/carousel/verticaldoc';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 
 const CarouselDemo = () => {
     const docs = [
@@ -51,31 +49,11 @@ const CarouselDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Carousel', pathname: '/modules/carousel.html' }]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React Carousel Component</title>
-                <meta name="description" content="Carousel is a content slider featuring various customization options." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>Carousel</h1>
-                        <p>Carousel is a content slider featuring various customization options.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent title="React Carousel Component" header="Carousel" description="Carousel is a content slider featuring various customization options." componentDocs={docs} apiDocs={[{ name: 'Carousel', pathname: '/modules/carousel.html' }]} />
     );
 };
 

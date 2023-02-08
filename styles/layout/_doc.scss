@@ -1,6 +1,51 @@
-.doc {
+.doc-tabmenu {
+    list-style: none;
+    margin: 0 17rem 0 0;
+    padding: 0;
     display: flex;
-    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--surface-border);
+
+    li {
+        margin-bottom: -1px;
+
+        button {
+            background-color: transparent;
+            border: 0 none;
+            display: block;
+            padding: 1rem 0;
+            min-width: 12rem;
+            text-align: center;
+            color: var(--text-color-secondary);
+            font-size: 1.125rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            margin: 0;
+            transition: all .3s;
+            border-bottom: 1px solid transparent;
+            border-top-right-radius: var(--border-round);
+            border-top-left-radius: var(--border-round);
+
+            &:hover {
+                border-bottom-color: var(--text-color);
+            }
+
+            &:focus {
+                outline: 0 none;
+            }
+        }
+        
+        &.doc-tabmenu-active {
+            button {
+                color: var(--primary-color);
+                border-bottom-color: var(--primary-color);
+            }
+        }
+    }
+}
+
+.doc-tabpanel, .doc {
+    display: flex;
 }
 
 .doc-main {
@@ -75,7 +120,7 @@
 .doc-section-nav {
     position: sticky;
     list-style: none;
-    width: 17rem;
+    width: 18rem;
     height: calc(100vh - 15rem);
     top: 7rem;
     right: 0;

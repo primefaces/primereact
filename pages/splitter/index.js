@@ -1,6 +1,4 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/splitter/accessibilitydoc';
 import { HorizontalDoc } from '../../components/doc/splitter/horizontaldoc';
 import { ImportDoc } from '../../components/doc/splitter/importdoc';
@@ -45,34 +43,20 @@ const SplitterDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [
-                { name: 'Splitter', pathname: '/modules/splitter.html' },
-                { name: 'SplitterPanel', pathname: '/classes/splitter.SplitterPanel.html' }
-            ]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React Splitter Component</title>
-                <meta name="description" content="Splitter is utilized to separate and resize panels." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>Splitter</h1>
-                        <p>Splitter is utilized to separate and resize panels.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React Splitter Component"
+            header="Splitter"
+            description="Splitter is utilized to separate and resize panels."
+            componentDocs={docs}
+            apiDocs={[
+                { name: 'Splitter', pathname: '/modules/splitter.html' },
+                { name: 'SplitterPanel', pathname: '/classes/splitter.SplitterPanel.html' }
+            ]}
+        />
     );
 };
 

@@ -1,6 +1,4 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/splitbutton/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/splitbutton/basicdoc';
 import { DisabledDoc } from '../../components/doc/splitbutton/disableddoc';
@@ -81,31 +79,17 @@ const SplitButtonDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'SplitButton', pathname: '/modules/splitbutton.html' }]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React SplitButton Component</title>
-                <meta name="description" content="SplitButton groups a set of commands in an overlay with a default action item." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>SplitButton</h1>
-                        <p>SplitButton groups a set of commands in an overlay with a default action item.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React SplitButton Component"
+            header="SplitButton"
+            description="SplitButton groups a set of commands in an overlay with a default action item."
+            componentDocs={docs}
+            apiDocs={[{ name: 'SplitButton', pathname: '/modules/splitbutton.html' }]}
+        />
     );
 };
 

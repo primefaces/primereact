@@ -1,6 +1,4 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/panel/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/panel/basicdoc';
 import { ImportDoc } from '../../components/doc/panel/importdoc';
@@ -39,32 +37,10 @@ const PanelDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Panel', pathname: '/modules/panel.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Panel Component</title>
-                <meta name="description" content="Panel is a container component with an optional content toggle feature." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>Panel</h1>
-                        <p>Panel is a container component with an optional content toggle feature.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Panel Component" header="Panel" description="Panel is a container component with an optional content toggle feature." componentDocs={docs} apiDocs={[{ name: 'Panel', pathname: '/modules/panel.html' }]} />;
 };
 
 export default PanelDemo;

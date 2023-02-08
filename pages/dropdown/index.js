@@ -1,6 +1,4 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/dropdown/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/dropdown/basicdoc';
 import { ClearIconDoc } from '../../components/doc/dropdown/clearicondoc';
@@ -101,31 +99,17 @@ const DropdownDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Dropdown', pathname: '/modules/dropdown.html' }]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React Select Component</title>
-                <meta name="description" content="Dropdown also known as Select, is used to choose an item from a collection of options." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>Dropdown</h1>
-                        <p>Dropdown also known as Select, is used to choose an item from a collection of options.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React Select Component"
+            header="Dropdown"
+            description="Dropdown also known as Select, is used to choose an item from a collection of options."
+            componentDocs={docs}
+            apiDocs={[{ name: 'Dropdown', pathname: '/modules/dropdown.html' }]}
+        />
     );
 };
 

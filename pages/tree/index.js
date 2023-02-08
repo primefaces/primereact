@@ -1,6 +1,4 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/tree/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/tree/basicdoc';
 import { ContextMenuDoc } from '../../components/doc/tree/contextmenudoc';
@@ -113,32 +111,10 @@ const TreeDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Tree', pathname: '/modules/tree.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Tree Component</title>
-                <meta name="description" content="Tree is used to display hierarchical data." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>Tree</h1>
-                        <p>Tree is used to display hierarchical data.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Tree Component" header="Tree" description="Tree is used to display hierarchical data." componentDocs={docs} apiDocs={[{ name: 'Tree', pathname: '/modules/tree.html' }]} />;
 };
 
 export default TreeDemo;
