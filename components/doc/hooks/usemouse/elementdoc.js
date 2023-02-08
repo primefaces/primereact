@@ -8,11 +8,7 @@ export function ElementDoc(props) {
 
     const code = {
         basic: `
-<div ref={ref} style={{ border: '2px solid black', padding: '20px', width: 'fit-content' }}>
-    <p>
-        The mouse position is: {x}, {y}
-    </p>
-</div>
+const { ref, x, y } = useMouse();
         `,
         javascript: `
 import React from 'react';
@@ -22,12 +18,14 @@ export default function ElementDemo() {
     const { ref, x, y } = useMouse();
 
     return (
-        <div className="card flex flex-column justify-content-center align-items-center">
-            <h2>Move your mouse!</h2>
-            <div ref={ref} style={{ border: '2px solid black', padding: '20px', width: 'fit-content' }}>
-                <p>
-                    The mouse position is: {x}, {y}
-                </p>
+        <div className="card flex justify-content-center">
+            <div ref={ref} className="border-round shadow-2 flex flex-wrap gap-3 justify-content-center align-items-center w-full md:w-20rem h-10rem text-xl">
+                <span>
+                    X: <strong>{x}</strong>
+                </span>
+                <span>
+                    Y: <strong>{y}</strong>
+                </span>
             </div>
         </div>
     )
@@ -41,12 +39,14 @@ export default function ElementDemo() {
     const { ref, x, y } = useMouse();
 
     return (
-        <div className="card flex flex-column justify-content-center align-items-center">
-            <h2>Move your mouse!</h2>
-            <div ref={ref} style={{ border: '2px solid black', padding: '20px', width: 'fit-content' }}>
-                <p>
-                    The mouse position is: {x}, {y}
-                </p>
+        <div className="card flex justify-content-center">
+            <div ref={ref} className="border-round shadow-2 flex flex-wrap gap-3 justify-content-center align-items-center w-full md:w-20rem h-10rem text-xl">
+                <span>
+                    X: <strong>{x}</strong>
+                </span>
+                <span>
+                    Y: <strong>{y}</strong>
+                </span>
             </div>
         </div>
     )
@@ -57,16 +57,16 @@ export default function ElementDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                {/**
-                 * @todo Add a description
-                 */}
+                <p>Hover the mouse over the element to track the mouse position.</p>
             </DocSectionText>
-            <div className="card flex flex-column justify-content-center align-items-center">
-                <h2>Move your mouse!</h2>
-                <div ref={ref} style={{ border: '2px solid black', padding: '20px', width: 'fit-content' }}>
-                    <p>
-                        The mouse position is: {x}, {y}
-                    </p>
+            <div className="card flex justify-content-center">
+                <div ref={ref} className="border-round shadow-2 flex flex-wrap gap-3 justify-content-center align-items-center w-full md:w-20rem h-10rem text-xl">
+                    <span>
+                        X: <strong>{x}</strong>
+                    </span>
+                    <span>
+                        Y: <strong>{y}</strong>
+                    </span>
                 </div>
             </div>
             <DocSectionCode code={code} />

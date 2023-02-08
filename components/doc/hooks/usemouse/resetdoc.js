@@ -8,27 +8,24 @@ export function ResetDoc(props) {
 
     const code = {
         basic: `
-<h2>Move your mouse!</h2>
-<div ref={ref} onMouseOut={reset} style={{ border: '2px solid black', padding: '20px', width: 'fit-content' }}>
-    <p>
-        The mouse position is: {x}, {y}
-    </p>
-</div>
+const { ref, x, y } = useMouse();
         `,
         javascript: `
 import React from 'react';
 import { useMouse } from 'primereact/hooks';
 
-export default function ElementDemo() {
+export default function ResetDemo() {
     const { ref, x, y, reset } = useMouse();
 
     return (
-        <div className="card flex flex-column justify-content-center align-items-center">
-            <h2>Move your mouse!</h2>
-            <div ref={ref} onMouseOut={reset} style={{ border: '2px solid black', padding: '20px', width: 'fit-content' }}>
-                <p>
-                    The mouse position is: {x}, {y}
-                </p>
+        <div className="card flex justify-content-center">
+            <div ref={ref} onMouseLeave={reset} className="border-round shadow-2 flex flex-wrap gap-3 justify-content-center align-items-center w-full md:w-20rem h-10rem text-xl">
+                <span>
+                    X: <strong>{x}</strong>
+                </span>
+                <span>
+                    Y: <strong>{y}</strong>
+                </span>
             </div>
         </div>
     )
@@ -38,16 +35,18 @@ export default function ElementDemo() {
 import React from 'react';
 import { useMouse } from 'primereact/hooks';
 
-export default function ElementDemo() {
+export default function ResetDemo() {
     const { ref, x, y, reset } = useMouse();
 
     return (
-        <div className="card flex flex-column justify-content-center align-items-center">
-            <h2>Move your mouse!</h2>
-            <div ref={ref} onMouseOut={reset} style={{ border: '2px solid black', padding: '20px', width: 'fit-content' }}>
-                <p>
-                    The mouse position is: {x}, {y}
-                </p>
+        <div className="card flex justify-content-center">
+            <div ref={ref} onMouseLeave={reset} className="border-round shadow-2 flex flex-wrap gap-3 justify-content-center align-items-center w-full md:w-20rem h-10rem text-xl">
+                <span>
+                    X: <strong>{x}</strong>
+                </span>
+                <span>
+                    Y: <strong>{y}</strong>
+                </span>
             </div>
         </div>
     )
@@ -58,16 +57,18 @@ export default function ElementDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                {/**
-                 * @todo Add a description
-                 */}
+                <p>
+                    The <i>reset</i> callback is provided to clear the tracked mouse position.
+                </p>
             </DocSectionText>
-            <div className="card flex flex-column justify-content-center align-items-center">
-                <h2>Move your mouse!</h2>
-                <div ref={ref} onMouseOut={reset} style={{ border: '2px solid black', padding: '20px', width: 'fit-content' }}>
-                    <p>
-                        The mouse position is: {x}, {y}
-                    </p>
+            <div className="card flex justify-content-center">
+                <div ref={ref} onMouseLeave={reset} className="border-round shadow-2 flex flex-wrap gap-3 justify-content-center align-items-center w-full md:w-20rem h-10rem text-xl">
+                    <span>
+                        X: <strong>{x}</strong>
+                    </span>
+                    <span>
+                        Y: <strong>{y}</strong>
+                    </span>
                 </div>
             </div>
             <DocSectionCode code={code} />
