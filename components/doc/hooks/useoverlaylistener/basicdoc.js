@@ -11,7 +11,7 @@ export function BasicDoc(props) {
     const overlayRef = useRef(null);
 
     const handleEvents = (event, options) => {
-        setVisible(false);
+        if (options.valid) setVisible(false);
     };
 
     const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
@@ -51,7 +51,7 @@ export default function BasicDemo() {
     const overlayRef = useRef(null);
 
     const handleEvents = (event, options) => {
-        setVisible(false);
+        if (options.valid) setVisible(false);
     };
 
     const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
@@ -99,7 +99,7 @@ export default function BasicDemo() {
     const overlayRef = useRef(null);
 
     const handleEvents = (event, options) => {
-        setVisible(false);
+        if (options.valid) setVisible(false);
     };
 
     const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
