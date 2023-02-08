@@ -19,7 +19,7 @@ export function DocComponent(props) {
         <div className="doc-component">
             <Head>
                 <title>{props.title}</title>
-                <meta name="description" content={props.title} />
+                <meta name="description" content={props.description} />
             </Head>
             <ul className="doc-tabmenu">
                 <li className={classNames({ 'doc-tabmenu-active': tab === 0 })}>
