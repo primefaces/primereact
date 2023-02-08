@@ -513,8 +513,24 @@
                     "to": "/hooks/usecounter"
                 },
                 {
+                    "name": "useDebounced",
+                    "to": "/hooks/usedebounced"
+                },
+                {
                     "name": "useEventListener",
                     "to": "/hooks/useeventlistener"
+                },
+                {
+                    "name": "useFavicon",
+                    "to": "/hooks/usefavicon"
+                },
+                {
+                    "name": "useIntersectionObserver",
+                    "to": "/hooks/useintersectionobserver"
+                },
+                {
+                    "name": "useInterval",
+                    "to": "/hooks/useinterval"
                 },
                 {
                     "name": "useMountEffect",
@@ -529,28 +545,12 @@
                     "to": "/hooks/usemove"
                 },
                 {
-                    "name": "useIntersectionObserver",
-                    "to": "/hooks/useintersectionobserver"
+                    "name": "useOverlayListener",
+                    "to": "/hooks/useoverlaylistener"
                 },
                 {
-                    "name": "useInterval",
-                    "to": "/hooks/useinterval"
-                },
-                {
-                    "name": "useFavicon",
-                    "to": "/hooks/usefavicon"
-                },
-                {
-                    "name": "useDebounced",
-                    "to": "/hooks/usedebounced"
-                },
-                {
-                    "name": "useTimeout",
-                    "to": "/hooks/usetimeout"
-                },
-                {
-                    "name": "useUpdateEffect",
-                    "to": "/hooks/useupdateeffect"
+                    "name": "useOverlayScrollListener",
+                    "to": "/hooks/useoverlayscrolllistener"
                 },
                 {
                     "name": "usePrevious",
@@ -565,16 +565,16 @@
                     "to": "/hooks/usestorage"
                 },
                 {
-                    "name": "useOverlayListener",
-                    "to": "/hooks/useoverlaylistener"
-                },
-                {
-                    "name": "useOverlayScrollListener",
-                    "to": "/hooks/useoverlayscrolllistener"
+                    "name": "useTimeout",
+                    "to": "/hooks/usetimeout"
                 },
                 {
                     "name": "useUnmountEffect",
                     "to": "/hooks/useunmounteffect"
+                },
+                {
+                    "name": "useUpdateEffect",
+                    "to": "/hooks/useupdateeffect"
                 }
             ]
         },
