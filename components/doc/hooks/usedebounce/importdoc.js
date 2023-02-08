@@ -1,10 +1,10 @@
-import { DocSectionText } from '../../common/docsectiontext';
 import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function ImportDoc(props) {
     const code = {
         basic: `
-import { useDebounced } from 'primereact/hooks';
+import { useDebounce } from 'primereact/hooks';
         `
     };
 

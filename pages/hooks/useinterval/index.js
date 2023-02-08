@@ -1,8 +1,6 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../../components/doc/common/docsectionnav';
-import { DocSections } from '../../../components/doc/common/docsections';
-import { ImportDoc } from '../../../components/doc/hooks/useInterval/importdoc';
+import { DocComponent } from '../../../components/doc/common/doccomponent';
 import { BasicDoc } from '../../../components/doc/hooks/useInterval/basicdoc';
+import { ImportDoc } from '../../../components/doc/hooks/useInterval/importdoc';
 
 const IntervalDemo = () => {
     const docs = [
@@ -15,38 +13,10 @@ const IntervalDemo = () => {
             id: 'basic',
             label: 'Basic',
             component: BasicDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'useInterval', pathname: '/functions/hooks.useInterval.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React useInterval Custom Hook</title>
-                {/**
-                 * @todo Add a description
-                 */}
-                <meta name="description" content="" />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>useInterval</h1>
-                        {/**
-                         * @todo Add a description
-                         */}
-                        <p></p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React useInterval Hook" header="useInterval" description="" componentDocs={docs} apiDocs={[{ name: 'useInterval', pathname: '/functions/hooks.useInterval.html' }]} />;
 };
 
 export default IntervalDemo;

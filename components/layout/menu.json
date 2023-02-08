@@ -513,8 +513,8 @@
                     "to": "/hooks/usecounter"
                 },
                 {
-                    "name": "useDebounced",
-                    "to": "/hooks/usedebounced"
+                    "name": "useDebounce",
+                    "to": "/hooks/usedebounce"
                 },
                 {
                     "name": "useEventListener",

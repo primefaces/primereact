@@ -194,7 +194,7 @@ export declare function useCounter(initialValue: number, options: { min: number;
  * @param {*} initialValue - The initial value for debounce.
  * @param {number} delay - The delay in milliseconds.
  */
-export declare function useDebounced(initialValue: any, delay: number): any[];
+export declare function useDebounce(initialValue: any, delay: number): any[];
 /**
  * Custom hook to use to get the current mouse position.
  */

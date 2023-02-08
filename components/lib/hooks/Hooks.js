@@ -1,21 +1,21 @@
-import { usePrevious } from './usePrevious';
-import { useMountEffect } from './useMountEffect';
-import { useUpdateEffect } from './useUpdateEffect';
-import { useUnmountEffect } from './useUnmountEffect';
-import { useEventListener } from './useEventListener';
-import { useOverlayListener } from './useOverlayListener';
-import { useOverlayScrollListener } from './useOverlayScrollListener';
-import { useResizeListener } from './useResizeListener';
-import { useInterval } from './useInterval';
-import { useStorage, useLocalStorage, useSessionStorage } from './useStorage';
-import { useTimeout } from './useTimeout';
-import { useIntersectionObserver } from './useIntersectionObserver';
+import { useClickOutside } from './useClickOutside';
 import { useCounter } from './useCounter';
+import { useDebounce } from './useDebounce';
+import { useEventListener } from './useEventListener';
+import { useFavicon } from './useFavicon';
+import { useIntersectionObserver } from './useIntersectionObserver';
+import { useInterval } from './useInterval';
+import { useMountEffect } from './useMountEffect';
 import { useMouse } from './useMouse';
 import { useMove } from './useMove';
-import { useFavicon } from './useFavicon';
-import { useClickOutside } from './useClickOutside';
-import { useDebounced } from './useDebounced';
+import { useOverlayListener } from './useOverlayListener';
+import { useOverlayScrollListener } from './useOverlayScrollListener';
+import { usePrevious } from './usePrevious';
+import { useResizeListener } from './useResizeListener';
+import { useLocalStorage, useSessionStorage, useStorage } from './useStorage';
+import { useTimeout } from './useTimeout';
+import { useUnmountEffect } from './useUnmountEffect';
+import { useUpdateEffect } from './useUpdateEffect';
 
 export {
     usePrevious,
@@ -37,5 +37,5 @@ export {
     useMouse,
     useMove,
     useClickOutside,
-    useDebounced
+    useDebounce
 };

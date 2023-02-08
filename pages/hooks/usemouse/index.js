@@ -1,10 +1,8 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../../components/doc/common/docsectionnav';
-import { DocSections } from '../../../components/doc/common/docsections';
-import { ImportDoc } from '../../../components/doc/hooks/usemouse/importdoc';
-import { ElementDoc } from '../../../components/doc/hooks/usemouse/elementdoc';
-import { ResetDoc } from '../../../components/doc/hooks/usemouse/resetdoc';
+import { DocComponent } from '../../../components/doc/common/doccomponent';
 import { DocumentDoc } from '../../../components/doc/hooks/usemouse/documentdoc';
+import { ElementDoc } from '../../../components/doc/hooks/usemouse/elementdoc';
+import { ImportDoc } from '../../../components/doc/hooks/usemouse/importdoc';
+import { ResetDoc } from '../../../components/doc/hooks/usemouse/resetdoc';
 
 const MouseDemo = () => {
     const docs = [
@@ -27,38 +25,10 @@ const MouseDemo = () => {
             id: 'document',
             label: 'Document',
             component: DocumentDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Hooks', pathname: '/modules/hooks.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React useMouse Custom Hook</title>
-                {/**
-                 * @todo Add a description
-                 */}
-                <meta name="description" content="" />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>useMouse</h1>
-                        {/**
-                         * @todo Add a description
-                         */}
-                        <p></p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React useMouse Hook" header="useMouse" description="" componentDocs={docs} apiDocs={[{ name: 'useMouse', pathname: '/functions/hooks.useMouse.html' }]} />;
 };
 
 export default MouseDemo;

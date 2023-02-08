@@ -1,8 +1,6 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../../components/doc/common/docsectionnav';
-import { DocSections } from '../../../components/doc/common/docsections';
-import { ImportDoc } from '../../../components/doc/hooks/useunmounteffect/importdoc';
+import { DocComponent } from '../../../components/doc/common/doccomponent';
 import { BasicDoc } from '../../../components/doc/hooks/useunmounteffect/basicdoc';
+import { ImportDoc } from '../../../components/doc/hooks/useunmounteffect/importdoc';
 
 const CounterDemo = () => {
     const docs = [
@@ -15,38 +13,10 @@ const CounterDemo = () => {
             id: 'basic',
             label: 'Basic',
             component: BasicDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'useUnmountEffect', pathname: '/functions/hooks.useUnmountEffect.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React useUnmountEffect Custom Hook</title>
-                {/**
-                 * @todo Add a description
-                 */}
-                <meta name="description" content="" />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>useUnmountEffect</h1>
-                        {/**
-                         * @todo Add a description
-                         */}
-                        <p></p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React useUnmountEffect Hook" header="useUnmountEffect" description="" componentDocs={docs} apiDocs={[{ name: 'useUnmountEffect', pathname: '/functions/hooks.useUnmountEffect.html' }]} />;
 };
 
 export default CounterDemo;

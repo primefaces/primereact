@@ -1,6 +1,6 @@
 import { DocComponent } from '../../../components/doc/common/doccomponent';
-import { BasicDoc } from '../../../components/doc/hooks/usetimeout/basicdoc';
-import { ImportDoc } from '../../../components/doc/hooks/usetimeout/importdoc';
+import { BasicDoc } from '../../../components/doc/hooks/usedebounce/basicdoc';
+import { ImportDoc } from '../../../components/doc/hooks/usedebounce/importdoc';
 
 const CounterDemo = () => {
     const docs = [
@@ -16,7 +16,7 @@ const CounterDemo = () => {
         }
     ];
 
-    return <DocComponent title="React useTimeout Hook" header="useTimeout" description="" componentDocs={docs} apiDocs={[{ name: 'useTimeout', pathname: '/functions/hooks.useTimeout.html' }]} />;
+    return <DocComponent title="React useDebounce Hook" header="useDebounce" description="" componentDocs={docs} apiDocs={[{ name: 'useDebounce', pathname: '/functions/hooks.useDebounce.html' }]} />;
 };
 
 export default CounterDemo;

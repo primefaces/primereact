@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { useDebounced } from '../../../lib/hooks/Hooks';
+import React from 'react';
+import { useDebounce } from '../../../lib/hooks/Hooks';
 import { InputText } from '../../../lib/inputtext/InputText';
-import { DocSectionText } from '../../common/docsectiontext';
 import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function BasicDoc(props) {
-    const [inputValue, debouncedValue, setInputValue] = useDebounced('', 400);
+    const [inputValue, debouncedValue, setInputValue] = useDebounce('', 400);
 
     const code = {
         basic: `
@@ -15,11 +15,11 @@ export function BasicDoc(props) {
         javascript: `
 import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
-import { useDebounced } from 'primereact/hooks';
+import { useDebounce } from 'primereact/hooks';
 
 export default function BasicDemo() {
 
-    const [inputValue, debouncedValue, setInputValue] = useDebounced('', 400);
+    const [inputValue, debouncedValue, setInputValue] = useDebounce('', 400);
 
     return (
         <div className="card flex flex-column justify-content-center align-items-center">
@@ -34,11 +34,11 @@ export default function BasicDemo() {
         typescript: `
 import React from 'react'; 
 import { InputText } from 'primereact/inputtext';
-import { useDebounced } from 'primereact/hooks';
+import { useDebounce } from 'primereact/hooks';
 
 export default function BasicDemo() {
 
-    const [inputValue, debouncedValue, setInputValue] = useDebounced('', 400);
+    const [inputValue, debouncedValue, setInputValue] = useDebounce('', 400);
 
     return (
         <div className="card flex flex-column justify-content-center align-items-center">

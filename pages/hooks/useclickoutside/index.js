@@ -1,8 +1,6 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../../components/doc/common/docsectionnav';
-import { DocSections } from '../../../components/doc/common/docsections';
-import { ImportDoc } from '../../../components/doc/hooks/useclickoutside/importdoc';
+import { DocComponent } from '../../../components/doc/common/doccomponent';
 import { BasicDoc } from '../../../components/doc/hooks/useclickoutside/basicdoc';
+import { ImportDoc } from '../../../components/doc/hooks/useclickoutside/importdoc';
 
 const ClickOutsideDemo = () => {
     const docs = [
@@ -15,32 +13,17 @@ const ClickOutsideDemo = () => {
             id: 'basic',
             label: 'Basic',
             component: BasicDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'useClickOutside', pathname: '/functions/hooks.useClickOutside.html' }]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React useClickOutside Custom Hook</title>
-
-                <meta name="description" content="The useClickOutside hook is a custom hook that listens for a click outside of a specified element." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>useClickOutside</h1>
-                        <p>The useClickOutside hook is a custom hook that listens for a click outside of a specified element.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React useClickOutside Hook"
+            header="useClickOutside"
+            description="Detects outside clicks of a specific element."
+            componentDocs={docs}
+            apiDocs={[{ name: 'useClickOutside', pathname: '/functions/hooks.useClickOutside.html' }]}
+        />
     );
 };
 

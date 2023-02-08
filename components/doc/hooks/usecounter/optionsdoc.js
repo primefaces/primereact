@@ -1,10 +1,10 @@
 import React from 'react';
-import { useCounter } from '../../../../components/lib/hooks/Hooks';
 import { Button } from '../../../../components/lib/button/Button';
-import { DocSectionText } from '../../common/docsectiontext';
+import { useCounter } from '../../../../components/lib/hooks/Hooks';
 import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
-export function OptionsDemo(props) {
+export function OptionsDoc(props) {
     const { count, increment, decrement, reset } = useCounter(10, { step: 0.5, min: 0, max: 15 });
 
     const code = {

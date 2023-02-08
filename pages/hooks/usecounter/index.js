@@ -1,9 +1,7 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../../components/doc/common/docsectionnav';
-import { DocSections } from '../../../components/doc/common/docsections';
+import { DocComponent } from '../../../components/doc/common/doccomponent';
+import { BasicDoc } from '../../../components/doc/hooks/usecounter/basicdoc';
 import { ImportDoc } from '../../../components/doc/hooks/usecounter/importdoc';
-import { BasicDemo } from '../../../components/doc/hooks/usecounter/basicdoc';
-import { OptionsDemo } from '../../../components/doc/hooks/usecounter/optionsdoc';
+import { OptionsDoc } from '../../../components/doc/hooks/usecounter/optionsdoc';
 
 const CounterDemo = () => {
     const docs = [
@@ -15,44 +13,16 @@ const CounterDemo = () => {
         {
             id: 'basic',
             label: 'Basic',
-            component: BasicDemo
+            component: BasicDoc
         },
         {
             id: 'options',
             label: 'Options',
-            component: OptionsDemo
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'useCounter', pathname: '/functions/hooks.useCounter.html' }]
+            component: OptionsDoc
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React useCounter Custom Hook</title>
-                {/**
-                 * @todo Add a description
-                 */}
-                <meta name="description" content="" />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>useCounter</h1>
-                        {/**
-                         * @todo Add a description
-                         */}
-                        <p></p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React useCounter Hook" header="useCounter" description="" componentDocs={docs} apiDocs={[{ name: 'useCounter', pathname: '/functions/hooks.useCounter.html' }]} />;
 };
 
 export default CounterDemo;

@@ -1,8 +1,6 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../../components/doc/common/docsectionnav';
-import { DocSections } from '../../../components/doc/common/docsections';
-import { ImportDoc } from '../../../components/doc/hooks/useintersectionobserver/importdoc';
+import { DocComponent } from '../../../components/doc/common/doccomponent';
 import { BasicDoc } from '../../../components/doc/hooks/useintersectionobserver/basicdoc';
+import { ImportDoc } from '../../../components/doc/hooks/useintersectionobserver/importdoc';
 
 const IntersectionObserverDemo = () => {
     const docs = [
@@ -15,38 +13,10 @@ const IntersectionObserverDemo = () => {
             id: 'basic',
             label: 'Basic',
             component: BasicDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'useIntersectionObserver', pathname: '/functions/hooks.useIntersectionObserver.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React useIntersectionObserver Custom Hook</title>
-                {/**
-                 * @todo Add a description
-                 */}
-                <meta name="description" content="" />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>useIntersectionObserver</h1>
-                        {/**
-                         * @todo Add a description
-                         */}
-                        <p></p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React useIntersectionObserver Hook" header="useIntersectionObserver" description="" componentDocs={docs} apiDocs={[{ name: 'useIntersectionObserver', pathname: '/functions/hooks.useIntersectionObserver.html' }]} />;
 };
 
 export default IntersectionObserverDemo;

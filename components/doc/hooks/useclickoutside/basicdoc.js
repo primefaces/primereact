@@ -1,25 +1,27 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Button } from '../../../lib/button/Button';
 import { useClickOutside } from '../../../lib/hooks/Hooks';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 
 export function BasicDoc(props) {
-    const [isOpen, setIsOpen] = useState(false);
-    const btnRef = useRef(null);
+    const [visible, setVisible] = useState(false);
+    const overlayRef = useRef(null);
 
-    useClickOutside(btnRef, () => {
-        setIsOpen(false);
+    useClickOutside(overlayRef, () => {
+        setVisible(false);
     });
 
     const code = {
         basic: `
-const [isOpen, setIsOpen] = useState(false);
-const btnRef = useRef(null);
-
-useClickOutside(btnRef, () => {
-    setIsOpen(false);
-});   
+<div className="relative">
+    <Button onClick={() => setVisible(true)} label="Show" />
+    {visible ? (
+        <div ref={overlayRef} className="absolute border-round shadow-2 p-5 surface-overlay z-2 white-space-nowrap scalein origin-top">
+            Popup Content
+        </div>
+    ) : null}
+</div>  
         `,
         javascript: `
 import React, { useState, useRef } from 'react'; 
@@ -27,24 +29,21 @@ import { Button } from 'primereact/button';
 import { useClickOutside } from 'primereact/hooks';
 
 export default function BasicDemo() {
-    const [isOpen, setIsOpen] = useState(false);
-    const btnRef = useRef(null);
+    const [visible, setVisible] = useState(false);
+    const overlayRef = useRef(null);
 
-    useClickOutside(btnRef, () => {
-        setIsOpen(false);
+    useClickOutside(overlayRef, () => {
+        setVisible(false);
     });
 
     return (
-        <div className="card flex flex-column justify-content-center align-items-center gap-2">
-            <div>
-                {isOpen ? (
-                    <Button className="p-button-outlined border-dashed" ref={btnRef}>
-                        Click outside of the button to change
-                    </Button>
-                ) : (
-                    <Button onClick={() => setIsOpen(true)}>Change Button</Button>
-                )}
-            </div>
+        <div className="relative">
+            <Button onClick={() => setVisible(true)} label="Show" />
+            {visible ? (
+                <div ref={overlayRef} className="absolute border-round shadow-2 p-5 surface-overlay z-2 white-space-nowrap scalein origin-top">
+                    Popup Content
+                </div>
+            ) : null}
         </div>
     )
 }
@@ -55,24 +54,21 @@ import { Button } from 'primereact/button';
 import { useClickOutside } from 'primereact/hooks';
 
 export default function BasicDemo() {
-    const [isOpen, setIsOpen] = useState(false);
-    const btnRef = useRef(null);
+    const [visible, setVisible] = useState<boolean>(false);
+    const overlayRef = useRef(null);
 
-    useClickOutside(btnRef, () => {
-        setIsOpen(false);
+    useClickOutside(overlayRef, () => {
+        setVisible(false);
     });
 
     return (
-        <div className="card flex flex-column justify-content-center align-items-center gap-2">
-            <div>
-                {isOpen ? (
-                    <Button className="p-button-outlined border-dashed" ref={btnRef}>
-                        Click outside of the button to change
-                    </Button>
-                ) : (
-                    <Button onClick={() => setIsOpen(true)}>Change Button</Button>
-                )}
-            </div>
+        <div className="relative">
+            <Button onClick={() => setVisible(true)} label="Show" />
+            {visible ? (
+                <div ref={overlayRef} className="absolute border-round shadow-2 p-5 surface-overlay z-2 white-space-nowrap scalein origin-top">
+                    Popup Content
+                </div>
+            ) : null}
         </div>
     )
 }
@@ -82,20 +78,17 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                {/**
-                 * @todo Add a description
-                 */}
+                <p>Click the button to display a popup and click outside to hide it.</p>
             </DocSectionText>
 
-            <div className="card flex flex-column justify-content-center align-items-center gap-2">
-                <div>
-                    {isOpen ? (
-                        <Button className="p-button-outlined border-dashed" ref={btnRef}>
-                            Click outside of the button to change
-                        </Button>
-                    ) : (
-                        <Button onClick={() => setIsOpen(true)}>Change Button</Button>
-                    )}
+            <div className="card flex justify-content-center">
+                <div className="relative">
+                    <Button onClick={() => setVisible(true)} label="Show" />
+                    {visible ? (
+                        <div ref={overlayRef} className="absolute border-round shadow-2 p-5 surface-overlay z-2 white-space-nowrap scalein origin-top">
+                            Popup Content
+                        </div>
+                    ) : null}
                 </div>
             </div>
             <DocSectionCode code={code} />
