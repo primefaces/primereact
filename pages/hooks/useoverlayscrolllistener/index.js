@@ -17,7 +17,13 @@ const OverlayScrollListenerDemo = () => {
     ];
 
     return (
-        <DocComponent title="React useOverlayScrollListener Hook" header="useOverlayScrollListener" description="" componentDocs={docs} apiDocs={[{ name: 'useOverlayScrollListener', pathname: '/functions/hooks.useOverlayScrollListener.html' }]} />
+        <DocComponent
+            title="React useOverlayScrollListener Hook"
+            header="useOverlayScrollListener"
+            description="Monitors scroll event of a parent element."
+            componentDocs={docs}
+            apiDocs={[{ name: 'useOverlayScrollListener', pathname: '/functions/hooks.useOverlayScrollListener.html' }]}
+        />
     );
 };
 
