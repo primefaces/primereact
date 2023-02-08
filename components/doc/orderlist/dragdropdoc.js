@@ -9,7 +9,7 @@ export function DragDropDoc(props) {
 
     useEffect(() => {
         ProductService.getProductsSmall().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
         return (
