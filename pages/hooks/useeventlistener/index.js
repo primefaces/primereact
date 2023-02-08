@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { DocSectionNav } from '../../../components/doc/common/docsectionnav';
 import { DocSections } from '../../../components/doc/common/docsections';
 import { ImportDoc } from '../../../components/doc/hooks/useeventlistener/importdoc';
+import { DefaultDoc } from '../../../components/doc/hooks/useeventlistener/defaultdoc';
 import { BasicDoc } from '../../../components/doc/hooks/useeventlistener/basicdoc';
 
 const EventListenerDemo = () => {
@@ -10,6 +11,11 @@ const EventListenerDemo = () => {
             id: 'import',
             label: 'Import',
             component: ImportDoc
+        },
+        {
+            id: 'default',
+            label: 'Default',
+            component: DefaultDoc
         },
         {
             id: 'basic',

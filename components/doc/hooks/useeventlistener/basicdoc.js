@@ -1,177 +1,141 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { DocSectionText } from '../../common/docsectiontext';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { useEventListener } from '../../../lib/hooks/Hooks';
 import { classNames } from '../../../lib/utils/Utils';
+import { Button } from '../../../lib/button/Button';
 
 export function BasicDoc(props) {
-    const [pressed, setPressed] = useState(false);
-    const [value, setValue] = useState('');
+    const [isClicked, setIsClicked] = useState(false);
+    const btnRef = useRef(null);
 
-    const onKeyDown = (e) => {
-        setPressed(true);
-
-        if (e.code == 'Space') {
-            e.preventDefault();
-            setValue('space');
-
-            return;
-        }
-
-        setValue(e.key);
-    };
-
-    const [bindKeyDown, unbindKeyDown] = useEventListener({
-        type: 'keydown',
-        listener: (e) => {
-            onKeyDown(e);
+    const [bindMouseUpListener, unbindMouseUpListener] = useEventListener({
+        target: btnRef,
+        type: 'mouseup',
+        listener: () => {
+            setIsClicked(false);
         }
     });
 
-    const [bindKeyUp, unbindKeyUp] = useEventListener({
-        type: 'keyup',
-        listener: (e) => {
-            setPressed(false);
+    const [bindMouseDownListener, unbindMouseDownListener] = useEventListener({
+        target: btnRef,
+        type: 'mousedown',
+        listener: () => {
+            setIsClicked(true);
         }
     });
 
     useEffect(() => {
-        bindKeyDown();
-        bindKeyUp();
+        bindMouseUpListener();
+        bindMouseDownListener();
 
         return () => {
-            unbindKeyDown();
-            unbindKeyUp();
+            unbindMouseUpListener();
+            unbindMouseDownListener();
         };
-    }, [bindKeyDown, bindKeyUp, unbindKeyDown, unbindKeyUp]);
+    }, [bindMouseDownListener, bindMouseUpListener, unbindMouseDownListener, unbindMouseUpListener]);
 
     const code = {
         basic: `
-const [bindKeyDown, unbindKeyDown] = useEventListener({
-    type: 'keydown',
-    listener: (e) => {
-        onKeyDown(e);
+const btnRef = useRef(null); //Target element reference
+const [bindMouseUpListener, unbindMouseUpListener] = useEventListener({
+    target: btnRef,
+    type: 'mouseup',
+    listener: () => {
+        setIsClicked(false);
+    }
+});
+
+const [bindMouseDownListener, unbindMouseDownListener] = useEventListener({
+    target: btnRef,
+    type: 'mousedown',
+    listener: () => {
+        setIsClicked(true);
     }
 });
         `,
         javascript: `
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect, useRef } from 'react'; 
+import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
 import { useEventListener } from 'primereact/hooks';
 
 export default function BasicDemo() {
-    const [pressed, setPressed] = useState(false);
-    const [value, setValue] = useState('');
+    const [isClicked, setIsClicked] = useState(false);
+    const btnRef = useRef(null);
 
-    const onKeyDown = (e) => {
-        setPressed(true);
-
-        if (e.code == 'Space') {
-            setValue('space');
-
-            return;
-        }
-
-        setValue(e.key);
-    };
-
-    const [bindKeyDown, unbindKeyDown] = useEventListener({
-        type: 'keydown',
-        listener: (e) => {
-            onKeyDown(e);
+    const [bindMouseUpListener, unbindMouseUpListener] = useEventListener({
+        target: btnRef,
+        type: 'mouseup',
+        listener: () => {
+            setIsClicked(false);
         }
     });
 
-    const [bindKeyUp, unbindKeyUp] = useEventListener({
-        type: 'keyup',
-        listener: (e) => {
-            setPressed(false);
+    const [bindMouseDownListener, unbindMouseDownListener] = useEventListener({
+        target: btnRef,
+        type: 'mousedown',
+        listener: () => {
+            setIsClicked(true);
         }
     });
 
     useEffect(() => {
-        bindKeyDown();
-        bindKeyUp();
+        bindMouseUpListener();
+        bindMouseDownListener();
 
         return () => {
-            unbindKeyDown();
-            unbindKeyUp();
+            unbindMouseUpListener();
+            unbindMouseDownListener();
         };
-    }, [bindKeyDown, bindKeyUp, unbindKeyDown, unbindKeyUp]);
+    }, [bindMouseDownListener, bindMouseUpListener, unbindMouseDownListener, unbindMouseUpListener]);
 
     return (
         <div className="card flex flex-column justify-content-center align-items-center gap-2">
-            <button
-                className={classNames('card border-300 border-1 border-round-md py-3 px-4 text-color font-semibold text-lg', { 'shadow-1': pressed, 'shadow-5': !pressed })}
-                style={{
-                    background: '-webkit-linear-gradient(top, var(--surface-100) 0%, var(--surface-300) 80%, var(--surface-400) 100%)',
-                    transform: pressed ? 'translateY(5px)' : 'translateY(0)'
-                }}
-            >
-                {value.toUpperCase() || <i className="pi pi-arrow-down font-semibold"></i>}
-            </button>
-            {!value ? <small className="text-md font-semibold">Press a key</small> : <small className="font-semibold">&nbsp;</small>}
+            <Button ref={btnRef} label="Click Me!" className={classNames('border-round mb-2 cursor-pointer', { ' p-button-success': isClicked, 'p-button-primary': !isClicked })} />
         </div>
     )
 }
         `,
         typescript: `
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect, useRef } from 'react';
+import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
 import { useEventListener } from 'primereact/hooks';
 
 export default function BasicDemo() {
-    const [pressed, setPressed] = useState(false);
-    const [value, setValue] = useState('');
+    const [isClicked, setIsClicked] = useState(false);
+    const btnRef = useRef(null);
 
-    const onKeyDown = (e) => {
-        setPressed(true);
-
-        if (e.code == 'Space') {
-            setValue('space');
-
-            return;
-        }
-
-        setValue(e.key);
-    };
-
-    const [bindKeyDown, unbindKeyDown] = useEventListener({
-        type: 'keydown',
-        listener: (e) => {
-            onKeyDown(e);
+    const [bindMouseUpListener, unbindMouseUpListener] = useEventListener({
+        target: btnRef,
+        type: 'mouseup',
+        listener: () => {
+            setIsClicked(false);
         }
     });
 
-    const [bindKeyUp, unbindKeyUp] = useEventListener({
-        type: 'keyup',
-        listener: (e) => {
-            setPressed(false);
+    const [bindMouseDownListener, unbindMouseDownListener] = useEventListener({
+        target: btnRef,
+        type: 'mousedown',
+        listener: () => {
+            setIsClicked(true);
         }
     });
 
     useEffect(() => {
-        bindKeyDown();
-        bindKeyUp();
+        bindMouseUpListener();
+        bindMouseDownListener();
 
         return () => {
-            unbindKeyDown();
-            unbindKeyUp();
+            unbindMouseUpListener();
+            unbindMouseDownListener();
         };
-    }, [bindKeyDown, bindKeyUp, unbindKeyDown, unbindKeyUp]);
+    }, [bindMouseDownListener, bindMouseUpListener, unbindMouseDownListener, unbindMouseUpListener]);
 
     return (
         <div className="card flex flex-column justify-content-center align-items-center gap-2">
-            <button
-                className={classNames('card border-300 border-1 border-round-md py-3 px-4 text-color font-semibold text-lg', { 'shadow-1': pressed, 'shadow-5': !pressed })}
-                style={{
-                    background: '-webkit-linear-gradient(top, var(--surface-100) 0%, var(--surface-300) 80%, var(--surface-400) 100%)',
-                    transform: pressed ? 'translateY(5px)' : 'translateY(0)'
-                }}
-            >
-                {value.toUpperCase() || <i className="pi pi-arrow-down font-semibold"></i>}
-            </button>
-            {!value ? <small className="text-md font-semibold">Press a key</small> : <small className="font-semibold">&nbsp;</small>}
+            <Button ref={btnRef} label="Click Me!" className={classNames('border-round mb-2 cursor-pointer', { ' p-button-success': isClicked, 'p-button-primary': !isClicked })} />
         </div>
     )
 }
@@ -186,16 +150,7 @@ export default function BasicDemo() {
                  */}
             </DocSectionText>
             <div className="card flex flex-column justify-content-center align-items-center gap-2">
-                <button
-                    className={classNames('card border-300 border-1 border-round-md py-3 px-4 text-color font-semibold text-lg', { 'shadow-1': pressed, 'shadow-5': !pressed })}
-                    style={{
-                        background: '-webkit-linear-gradient(top, var(--surface-100) 0%, var(--surface-300) 80%, var(--surface-400) 100%)',
-                        transform: pressed ? 'translateY(5px)' : 'translateY(0)'
-                    }}
-                >
-                    {value.toUpperCase() || <i className="pi pi-arrow-down font-semibold"></i>}
-                </button>
-                {!value ? <small className="text-md font-semibold">Press a key</small> : <small className="font-semibold">&nbsp;</small>}
+                <Button ref={btnRef} label="Click Me!" className={classNames('border-round mb-2 cursor-pointer', { ' p-button-success': isClicked, 'p-button-primary': !isClicked })} />
             </div>
             <DocSectionCode code={code} />
         </>
