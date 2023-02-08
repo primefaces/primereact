@@ -1,23 +1,28 @@
 import { DocComponent } from '../../../components/doc/common/doccomponent';
-import { CounterDoc } from '../../../components/doc/hooks/usestorage/counterstorage';
 import { ImportDoc } from '../../../components/doc/hooks/usestorage/importdoc';
+import { LocalDoc } from '../../../components/doc/hooks/usestorage/localdoc';
+import { SessionDoc } from '../../../components/doc/hooks/usestorage/sessiondoc';
 
-const CounterDemo = () => {
+const StorageDemo = () => {
     const docs = [
         {
             id: 'import',
             label: 'Import',
             component: ImportDoc
         },
-
         {
-            id: 'counter',
-            label: 'Counter',
-            component: CounterDoc
+            id: 'local',
+            label: 'Local',
+            component: LocalDoc
+        },
+        {
+            id: 'session',
+            label: 'Session',
+            component: SessionDoc
         }
     ];
 
-    return <DocComponent title="React useClickOutside Hook" header="useClickOutside" description="" componentDocs={docs} apiDocs={[{ name: 'useStorage', pathname: '/functions/hooks.useStorage.html' }]} />;
+    return <DocComponent title="React useStorage Hook" header="useStorage" description="Syncs state to local or session storage." componentDocs={docs} apiDocs={[{ name: 'useStorage', pathname: '/functions/hooks.useStorage.html' }]} />;
 };
 
-export default CounterDemo;
+export default StorageDemo;
