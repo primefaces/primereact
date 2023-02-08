@@ -1,31 +1,26 @@
-/* eslint-disable no-console */
 import React, { useState } from 'react';
-import { useUnmountEffect, useMountEffect } from '../../../lib/hooks/Hooks';
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
 import { Button } from '../../../lib/button/Button';
+import { useUnmountEffect } from '../../../lib/hooks/Hooks';
+import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function BasicDoc(props) {
-    const [isHidden, setIsHidden] = useState(false);
+    const [hidden, setHidden] = useState(false);
 
-    const BlueBox = () => {
-        useMountEffect(() => {
-            console.log('Mounted');
-        });
-
+    const DynamicBox = () => {
         useUnmountEffect(() => {
+            // eslint-disable-next-line no-console
             console.log('Unmounted');
         });
 
-        return <div className="w-2rem h-2rem border-round bg-blue-500 mb-2"></div>;
+        return <div className="w-8rem h-8rem border-round bg-primary border-1 border-primary mb-3 flex justify-content-center align-items-center">Mounted</div>;
     };
 
     const code = {
         basic: `
-<div className="card flex flex-column justify-content-center align-items-center gap-2">
-    {!isHidden ? <BlueBox /> : <div className="w-2rem h-2rem mb-2">&nbsp;</div>}
-    <Button label={isHidden ? 'Mount' : 'Unmount'} onClick={() => setIsHidden((prevIsHidden) => !prevIsHidden)} />
-</div>
+useUnmountEffect(() => {
+    console.log('Unmounted');
+});
         `,
         javascript: `
 import React, { useState } from 'react'; 
@@ -33,24 +28,21 @@ import { Button } from 'primereact/button';
 import { useUnmountEffect, useMountEffect } from 'primereact/hooks';
 
 export default function BasicDemo() {
-    const [isHidden, setIsHidden] = useState(false);
+    const [hidden, setHidden] = useState(false);
 
-    const BlueBox = () => {
-        useMountEffect(() => {
-            console.log('Mounted');
-        });
-
+    const DynamicBox = () => {
         useUnmountEffect(() => {
+            // eslint-disable-next-line no-console
             console.log('Unmounted');
         });
-
-        return <div className="w-2rem h-2rem border-round bg-blue-500 mb-2"></div>;
+    
+        return <div className="w-8rem h-8rem border-round bg-primary border-1 border-primary mb-3 flex justify-content-center align-items-center">Mounted</div>;
     };
 
     return (
-        <div className="card flex flex-column justify-content-center align-items-center gap-2">
-            {!isHidden ? <BlueBox /> : <div className="w-2rem h-2rem mb-2">&nbsp;</div>}
-            <Button label={isHidden ? 'Mount' : 'Unmount'} onClick={() => setIsHidden((prevIsHidden) => !prevIsHidden)} />
+        <div className="card flex flex-column align-items-center">
+            {!hidden ? <DynamicBox /> : <div className="w-8rem h-8rem border-round surface-card border-1 surface-border border-dashed mb-3 flex justify-content-center align-items-center">Unmounted</div>}
+            <Button label={hidden ? 'Mount' : 'Unmount'} onClick={() => setHidden(() => !hidden)} className="p-button-outlined w-10rem" />
         </div>
     )
 }
@@ -61,24 +53,21 @@ import { Button } from 'primereact/button';
 import { useUnmountEffect, useMountEffect } from 'primereact/hooks';
 
 export default function BasicDemo() {
-    const [isHidden, setIsHidden] = useState(false);
+    const [hidden, setHidden] = useState<boolean>(false);
 
-    const BlueBox = () => {
-        useMountEffect(() => {
-            console.log('Mounted');
-        });
-
+    const DynamicBox = () => {
         useUnmountEffect(() => {
+            // eslint-disable-next-line no-console
             console.log('Unmounted');
         });
-
-        return <div className="w-2rem h-2rem border-round bg-blue-500 mb-2"></div>;
+    
+        return <div className="w-8rem h-8rem border-round bg-primary border-1 border-primary mb-3 flex justify-content-center align-items-center">Mounted</div>;
     };
 
     return (
-        <div className="card flex flex-column justify-content-center align-items-center gap-2">
-            {!isHidden ? <BlueBox /> : <div className="w-2rem h-2rem mb-2">&nbsp;</div>}
-            <Button label={isHidden ? 'Mount' : 'Unmount'} onClick={() => setIsHidden((prevIsHidden) => !prevIsHidden)} />
+        <div className="card flex flex-column align-items-center">
+            {!hidden ? <DynamicBox /> : <div className="w-8rem h-8rem border-round surface-card border-1 surface-border border-dashed mb-3 flex justify-content-center align-items-center">Unmounted</div>}
+            <Button label={hidden ? 'Mount' : 'Unmount'} onClick={() => setHidden(() => !hidden)} className="p-button-outlined w-10rem" />
         </div>
     )
 }
@@ -88,13 +77,11 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                {/**
-                 * @todo Add a description
-                 */}
+                <p>A messages is displayed at browser console when the box is unmounted.</p>
             </DocSectionText>
-            <div className="card flex flex-column justify-content-center align-items-center gap-2">
-                {!isHidden ? <BlueBox /> : <div className="w-2rem h-2rem mb-2">&nbsp;</div>}
-                <Button label={isHidden ? 'Mount' : 'Unmount'} onClick={() => setIsHidden((prevIsHidden) => !prevIsHidden)} />
+            <div className="card flex flex-column align-items-center">
+                {!hidden ? <DynamicBox /> : <div className="w-8rem h-8rem border-round surface-card border-1 surface-border border-dashed mb-3 flex justify-content-center align-items-center">Unmounted</div>}
+                <Button label={hidden ? 'Mount' : 'Unmount'} onClick={() => setHidden(() => !hidden)} className="p-button-outlined w-10rem" />
             </div>
             <DocSectionCode code={code} />
         </>

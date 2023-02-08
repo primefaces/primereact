@@ -16,7 +16,15 @@ const CounterDemo = () => {
         }
     ];
 
-    return <DocComponent title="React useUnmountEffect Hook" header="useUnmountEffect" description="" componentDocs={docs} apiDocs={[{ name: 'useUnmountEffect', pathname: '/functions/hooks.useUnmountEffect.html' }]} />;
+    return (
+        <DocComponent
+            title="React useUnmountEffect Hook"
+            header="useUnmountEffect"
+            description="Executes a given callback when component is unmounted."
+            componentDocs={docs}
+            apiDocs={[{ name: 'useUnmountEffect', pathname: '/functions/hooks.useUnmountEffect.html' }]}
+        />
+    );
 };
 
 export default CounterDemo;

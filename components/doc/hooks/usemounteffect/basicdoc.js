@@ -1,18 +1,21 @@
 /* eslint-disable no-console */
-import React from 'react';
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
+import React, { useRef } from 'react';
 import { useMountEffect } from '../../../lib/hooks/Hooks';
+import { Toast } from '../../../lib/toast/Toast';
+import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function BasicDoc(props) {
+    const toast = useRef(null);
+
     useMountEffect(() => {
-        console.log('Mounted');
+        toast.current.show({ severity: 'info', summary: 'Mounted', sticky: true });
     });
 
     const code = {
         basic: `
 useMountEffect(() => {
-    console.log('Mounted');
+    toast.current.show({ severity: 'info', summary: 'Mounted', sticky: true });
 });
         `,
         javascript: `
@@ -20,13 +23,15 @@ import React from 'react';
 import { useMountEffect } from 'primereact/hooks';
 
 export default function BasicDemo() {
+    const toast = useRef(null);
+
     useMountEffect(() => {
-        console.log('Mounted');
+        toast.current.show({ severity: 'info', summary: 'Mounted', sticky: true });
     });
 
     return (
         <div className="card flex justify-content-center">
-            <span className="text-lg font-semibold text-color">Open console to see the effect</span>
+            <span className="text-xl">View the Toast message at top right.</span>
         </div>
     )
 }
@@ -36,13 +41,15 @@ import React from 'react';
 import { useMountEffect } from 'primereact/hooks';
 
 export default function BasicDemo() {
+    const toast = useRef<Toast>(null);
+
     useMountEffect(() => {
-        console.log('Mounted');
+        toast.current.show({ severity: 'info', summary: 'Mounted', sticky: true });
     });
 
     return (
         <div className="card flex justify-content-center">
-            <span className="text-lg font-semibold text-color">Open console to see the effect</span>
+            <span className="text-xl">View the Toast message at top right.</span>
         </div>
     )
 }
@@ -52,12 +59,11 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                {/**
-                 * @todo Add a description
-                 */}
+                <p>A message is displayed when the component is mounted.</p>
             </DocSectionText>
+            <Toast ref={toast} />
             <div className="card flex justify-content-center">
-                <span className="text-lg font-semibold text-color">Open console to see the effect</span>
+                <span className="text-xl">View the Toast message at top right.</span>
             </div>
             <DocSectionCode code={code} />
         </>
