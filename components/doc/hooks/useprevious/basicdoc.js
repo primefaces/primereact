@@ -24,7 +24,7 @@ export default function BasicDemo() {
 
     return (
         <div className="card flex flex-column align-items-center">
-            <InputText placeholder="example@outlook.com" id="email" value={value} className="mb-4" 
+            <InputText value={value} className="mb-4" 
                 onChange={(e) => setValue(e.target.value)} />
             <div className="flex flex-column align-items-start flex-wrap gap-3 text-xl">
                 <span>
@@ -49,7 +49,7 @@ export default function BasicDemo() {
 
     return (
         <div className="card flex flex-column align-items-center">
-            <InputText placeholder="example@outlook.com" id="email" value={value} className="mb-4" 
+            <InputText value={value} className="mb-4" 
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)} />
             <div className="flex flex-column align-items-start flex-wrap gap-3 text-xl">
                 <span>
@@ -72,8 +72,6 @@ export default function BasicDemo() {
             </DocSectionText>
             <div className="card flex flex-column align-items-center">
                 <InputText
-                    placeholder="example@outlook.com"
-                    id="email"
                     value={value}
                     className="mb-4"
                     onChange={(e) => {
