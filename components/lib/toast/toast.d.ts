@@ -8,6 +8,7 @@
  *
  */
 import * as React from 'react';
+import { MessageSeverity } from '../api/api';
 import { CSSTransitionProps } from '../csstransition';
 import { IconType } from '../utils/utils';
 
@@ -18,7 +19,7 @@ export interface ToastMessage {
     /**
      * Severity of the message.
      */
-    severity?: 'success' | 'info' | 'warn' | 'error' | undefined;
+    severity?: MessageSeverity;
     /**
      * Summary content of the message.
      */

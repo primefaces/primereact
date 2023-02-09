@@ -8,6 +8,7 @@
  *
  */
 import * as React from 'react';
+import { MessageSeverity } from '../api/api';
 import { IconType } from '../utils/utils';
 
 /**
@@ -22,7 +23,7 @@ export interface MessageProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
     /**
      * Severity level of the message.
      */
-    severity?: 'success' | 'info' | 'warn' | 'error' | undefined;
+    severity?: MessageSeverity;
     /**
      * Custom template of the message.
      */
