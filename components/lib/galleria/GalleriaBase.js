@@ -1,0 +1,40 @@
+import { ObjectUtils } from '../utils/Utils';
+
+export const GalleriaBase = {
+    defaultProps: {
+        __TYPE: 'Galleria',
+        id: null,
+        value: null,
+        activeIndex: 0,
+        fullScreen: false,
+        item: null,
+        thumbnail: null,
+        indicator: null,
+        caption: null,
+        className: null,
+        style: null,
+        header: null,
+        footer: null,
+        numVisible: 3,
+        responsiveOptions: null,
+        showItemNavigators: false,
+        showThumbnailNavigators: true,
+        showItemNavigatorsOnHover: false,
+        changeItemOnIndicatorHover: false,
+        circular: false,
+        autoPlay: false,
+        transitionInterval: 4000,
+        showThumbnails: true,
+        thumbnailsPosition: 'bottom',
+        verticalThumbnailViewPortHeight: '300px',
+        showIndicators: false,
+        showIndicatorsOnItem: false,
+        indicatorsPosition: 'bottom',
+        baseZIndex: 0,
+        transitionOptions: null,
+        onItemChange: null,
+        children: undefined
+    },
+    getProps: (props) => ObjectUtils.getMergedProps(props, GalleriaBase.defaultProps),
+    getOtherProps: (props) => ObjectUtils.getDiffProps(props, GalleriaBase.defaultProps)
+};

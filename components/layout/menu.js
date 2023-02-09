@@ -1,257 +1,121 @@
 import Link from 'next/link';
-import { classNames } from '../lib/utils/ClassNames';
-import { CSSTransition } from 'react-transition-group';
-import React, { useRef, useState } from 'react';
 import { useRouter } from 'next/router';
-import { InputText } from '../lib/inputtext/InputText';
+import React from 'react';
+import { StyleClass } from '../lib/styleclass/StyleClass';
+import { classNames } from '../lib/utils/ClassNames';
 import MenuData from './menu.json';
-import getConfig from 'next/config';
 
 export default function Menu(props) {
-    const [filteredMenu, setFilteredMenu] = useState(MenuData.data || []);
-    const [activeSubmenus, setActiveSubmenus] = useState({});
     const router = useRouter();
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
-    const toggleSubmenu = (name) => {
-        let _activeSubmenus = { ...activeSubmenus };
-
-        _activeSubmenus[name] = _activeSubmenus[name] ? false : true;
-        setActiveSubmenus(_activeSubmenus);
-    };
-
-    const isSubmenuActive = (name) => {
-        if (activeSubmenus.hasOwnProperty(name)) {
-            return activeSubmenus[name];
-        }
-
-        return false;
-    };
-
-    const renderBadge = (item) => {
-        const badge = item.badge;
-
-        if (badge) {
-            return <span className={classNames('layout-menu-badge p-tag p-tag-rounded ml-2 uppercase', { [`${badge}`]: true, 'p-tag-success': badge === 'new', 'p-tag-info': badge === 'updated' })}>{badge}</span>;
-        }
-
-        return null;
-    };
-
-    const renderLink = (item, linkProps) => {
+    const renderLink = (item) => {
         const { name, to, href } = item;
-        const badge = renderBadge(item);
         const content = (
             <>
+                {item.icon && (
+                    <div className="menu-icon">
+                        <i className={item.icon}></i>
+                    </div>
+                )}
                 {name}
-                {badge}
             </>
         );
 
-        if (href)
+        if (href) {
             return (
-                <a href={href} role="menuitem" target="_blank" rel="noopener noreferrer" onClick={props.onMenuItemClick}>
+                <a href={href} target="_blank" rel="noopener noreferrer">
                     {content}
                 </a>
             );
-        else if (!to)
+        } else {
             return (
-                <button type="button" className="p-link" {...linkProps}>
-                    {content}
-                </button>
+                <Link href={to}>
+                    <a className={classNames({ 'router-link-active': to === router.pathname })}>{content}</a>
+                </Link>
             );
-
-        return (
-            <Link href={to}>
-                <a className={to === router.pathname ? 'router-link-exact-active router-link-active' : undefined} onClick={props.onMenuItemClick}>
-                    {content}
-                </a>
-            </Link>
-        );
+        }
     };
 
-    const renderCategorySubmenuItems = (item, submenuKey) => {
-        const cSubmenuRef = React.createRef();
-
-        return (
-            <CSSTransition nodeRef={cSubmenuRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={isSubmenuActive(item.name) || item.expanded} unmountOnExit>
-                <div ref={cSubmenuRef} className="p-toggleable-content">
-                    <ul role="menu">
-                        {item.children.map((item, index) => {
-                            const link = renderLink(item);
-
-                            return (
-                                <li role="menuitem" key={`menuitem_${submenuKey}_${index}`}>
-                                    {link}
-                                </li>
-                            );
-                        })}
-                    </ul>
-                </div>
-            </CSSTransition>
-        );
-    };
-
-    const renderCategoryItem = (menuitem, menuitemIndex) => {
+    const renderChild = (menuitem, key) => {
         if (menuitem.children) {
             return (
-                <>
-                    {menuitem.children.map((item, index) => {
-                        const submenuKey = `${menuitemIndex}_${index}`;
-                        const link = renderLink(item, { onClick: () => toggleSubmenu(item.name) });
+                <li key={key}>
+                    <span className="menu-child-category">{menuitem.name}</span>
+                    <ol>
+                        {menuitem.children.map((child, index) => {
+                            const link = renderLink(child);
 
-                        return (
-                            <React.Fragment key={`menuitem_${submenuKey}`}>
-                                {link}
-                                {item.children && renderCategorySubmenuItems(item, submenuKey)}
-                            </React.Fragment>
-                        );
-                    })}
-                </>
+                            return <li key={key + '_' + index}>{link}</li>;
+                        })}
+                    </ol>
+                </li>
+            );
+        } else {
+            const link = renderLink(menuitem);
+
+            return <li key={key}>{link}</li>;
+        }
+    };
+
+    const renderRootMenuItemChildren = (menuitem, parentIndex) => {
+        if (menuitem.children) {
+            return (
+                <div className={classNames({ hidden: !menuitem.expanded }, 'overflow-y-hidden transition-all transition-duration-400 transition-ease-in-out')}>
+                    <ol>{menuitem.children.map((item, index) => renderChild(item, parentIndex + '_' + index))}</ol>
+                </div>
             );
         }
 
         return null;
     };
 
-    const renderMenu = () => {
+    const renderRootItemButton = (menuitem) => {
+        const btnRef = React.createRef();
+
+        return (
+            <StyleClass nodeRef={btnRef} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
+                <button ref={btnRef} type="button" className="p-link">
+                    <div className="menu-icon">
+                        <i className={menuitem.icon}></i>
+                    </div>
+                    <span>{menuitem.name}</span>
+                    <i className="menu-toggle-icon pi pi-angle-down"></i>
+                </button>
+            </StyleClass>
+        );
+    };
+
+    const renderRootMenuItems = () => {
         return (
             <>
-                {filteredMenu.map((menuitem, index) => {
-                    const categoryItem = renderCategoryItem(menuitem, index);
-                    const badge = renderBadge(menuitem);
+                {MenuData.data.map((menuitem, index) => {
+                    const label = menuitem.children ? renderRootItemButton(menuitem, index) : renderLink(menuitem);
+                    const children = renderRootMenuItemChildren(menuitem, index);
 
                     return (
-                        <React.Fragment key={`category_${index}`}>
-                            <div className="menu-category">
-                                {menuitem.name}
-                                {badge}
-                            </div>
-                            {menuitem.children && <div className="menu-items">{categoryItem}</div>}
-                            {menuitem.banner && (
-                                <div className="menu-image menu-banner">
-                                    <a href={menuitem.href}>
-                                        <img src={contextPath + (props.darkTheme ? menuitem.imageDark : menuitem.imageLight)} alt="banner" />
-                                    </a>
-                                </div>
-                            )}
-                        </React.Fragment>
+                        <li key={'root_' + index}>
+                            {label}
+                            {children}
+                        </li>
                     );
                 })}
             </>
         );
     };
 
-    const onSearchInputChange = (event) => {
-        if (!MenuData.data) {
-            setFilteredMenu([]);
-        } else if (!event.target.value) {
-            setFilteredMenu(MenuData.data);
-        } else if (MenuData.data) {
-            const searchVal = event.target.value && event.target.value.toLowerCase();
-            let _filteredMenu = [];
-
-            for (let item of MenuData.data) {
-                let copyItem = { ...item };
-
-                if (isFilterMatched(copyItem, searchVal) || findFilteredItems(copyItem, searchVal)) {
-                    _filteredMenu.push(copyItem);
-                }
-            }
-
-            setFilteredMenu(_filteredMenu);
-        }
-    };
-
-    const findFilteredItems = (item, searchVal) => {
-        if (item) {
-            let matched = false;
-
-            if (item.children) {
-                let childItems = [...item.children];
-
-                item.children = [];
-
-                for (let childItem of childItems) {
-                    let copyChildItem = { ...childItem };
-
-                    if (isFilterMatched(copyChildItem, searchVal)) {
-                        matched = true;
-                        item.children.push(copyChildItem);
-                        item.expanded = true;
-                    }
-                }
-            }
-
-            if (matched) {
-                return true;
-            }
-        }
-    };
-
-    const isFilterMatched = (item, searchVal) => {
-        let matched = false;
-
-        if (onFilterOnOptions(item, searchVal, ['name', 'meta', 'badge'])) {
-            matched = true;
-        }
-
-        if (!matched || !(item.children && item.children.length)) {
-            matched = findFilteredItems(item, searchVal) || matched;
-        }
-
-        return matched;
-    };
-
-    const onFilterOnOptions = (item, searchVal, optionKeys) => {
-        if (item && optionKeys) {
-            const isMatched = (val) => {
-                if (searchVal.indexOf('&') < 0) {
-                    return val.toLowerCase().indexOf(searchVal) > -1;
-                } else {
-                    return searchVal.split('&').some((s) => !!s && val.toLowerCase().indexOf(s) > -1);
-                }
-            };
-
-            return optionKeys.some((optionKey) => {
-                const value = item[optionKey];
-
-                return value && (typeof value === 'string' ? isMatched(value) : value.filter((meta) => isMatched(meta)).length > 0);
-            });
-        }
-
-        return false;
-    };
-
-    const resetFilter = () => {
-        setFilteredMenu(MenuData.data);
-        searchInput.current.value = '';
-        searchInput.current.focus();
-    };
-
-    const menuItems = renderMenu();
-    const showClearIcon = filteredMenu.length !== MenuData.data.length;
+    const menuItems = renderRootMenuItems();
     const sidebarClassName = classNames('layout-sidebar', { active: props.active });
-    const filterContentClassName = classNames('layout-sidebar-filter-content p-input-icon-left p-fluid', { 'p-input-icon-right': showClearIcon });
-    const searchInput = useRef();
 
     return (
-        <div className={sidebarClassName} role="navigation">
+        <aside className={sidebarClassName}>
             <Link href="/">
                 <a className="logo" aria-label="PrimeReact logo">
-                    <img alt="logo" src={`${contextPath}/images/primereact-logo${props.darkTheme ? '-light' : '-dark'}.svg`} />
+                    <img alt="logo" src={`https://primefaces.org/cdn/primereact/images/primereact-logo${props.darkTheme ? '-light' : '-dark'}.svg`} />
                 </a>
             </Link>
-            <div className="layout-sidebar-filter">
-                <div className={filterContentClassName}>
-                    <i className="pi pi-search" />
-                    <InputText ref={searchInput} type="text" onChange={onSearchInputChange} placeholder="Search" aria-label="Search input" autoComplete="off" />
-                    {showClearIcon && <i className="clear-icon pi pi-times" onClick={resetFilter} />}
-                </div>
-            </div>
-            <div className="layout-menu" role="menubar">
-                {menuItems}
-            </div>
-        </div>
+            <nav>
+                <ol className="layout-menu">{menuItems}</ol>
+            </nav>
+        </aside>
     );
 }

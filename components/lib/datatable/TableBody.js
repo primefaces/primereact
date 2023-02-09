@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { localeOption } from '../api/Api';
+import { ColumnBase } from '../column/ColumnBase';
 import { useMountEffect, usePrevious, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { BodyRow } from './BodyRow';
@@ -39,7 +40,7 @@ export const TableBody = React.memo(
         };
 
         const isSelectionEnabled = () => {
-            return props.selectionMode || props.selectionModeInColumn !== null || (props.columns && props.columns.some((col) => col && !!col.props.selectionMode));
+            return props.selectionMode || props.selectionModeInColumn !== null || (props.columns && props.columns.some((col) => col && !!getColumnProp(col, 'selectionMode')));
         };
 
         const isSingleSelection = () => {
@@ -141,6 +142,10 @@ export const TableBody = React.memo(
             return props.columns ? props.columns.length : 0;
         };
 
+        const getColumnProp = (column, name) => {
+            return ColumnBase.getCProp(column, name);
+        };
+
         const getVirtualScrollerOption = (option, options) => {
             options = options || props.virtualScrollerOptions;
 
@@ -160,7 +165,7 @@ export const TableBody = React.memo(
         };
 
         const getRowKey = (rowData, index) => {
-            return props.dataKey ? ObjectUtils.resolveFieldData(rowData, props.dataKey) + '_' + index : index;
+            return props.dataKey ? ObjectUtils.resolveFieldData(rowData, props.dataKey) : index;
         };
 
         const shouldRenderRowGroupHeader = (value, rowData, i) => {
@@ -359,7 +364,7 @@ export const TableBody = React.memo(
                 let rowIndex = props.paginator ? i + props.first : i;
 
                 for (let j = cellRangeStart; j <= cellRangeEnd; j++) {
-                    let field = columns[j].props.field;
+                    let field = getColumnProp(columns[j], 'field');
                     let value = ObjectUtils.resolveFieldData(rowData, field);
                     let rangeRowData = {
                         value,
@@ -505,6 +510,14 @@ export const TableBody = React.memo(
             }
         };
 
+        const onRowMouseEnter = (event) => {
+            props.onRowMouseEnter && props.onRowMouseEnter(event);
+        };
+
+        const onRowMouseLeave = (event) => {
+            props.onRowMouseLeave && props.onRowMouseLeave(event);
+        };
+
         const onRowTouchEnd = () => {
             rowTouched.current = true;
         };
@@ -646,7 +659,7 @@ export const TableBody = React.memo(
 
             if (droppedRowIndex.current != null) {
                 let dropIndex = draggedRowIndex.current > droppedRowIndex.current ? droppedRowIndex.current : droppedRowIndex.current === 0 ? 0 : droppedRowIndex.current - 1;
-                let val = [...props.value];
+                let val = [...props.tableProps.value];
 
                 ObjectUtils.reorderArray(val, draggedRowIndex.current, dropIndex);
 
@@ -655,7 +668,7 @@ export const TableBody = React.memo(
                         originalEvent: event,
                         value: val,
                         dragIndex: draggedRowIndex.current,
-                        dropIndex: droppedRowIndex.current
+                        dropIndex: dropIndex
                     });
                 }
             }
@@ -813,14 +826,22 @@ export const TableBody = React.memo(
             if (isSubheaderGrouping && shouldRenderRowGroupHeader(props.value, rowData, index - props.first)) {
                 const style = rowGroupHeaderStyle();
                 const toggler = props.expandableRowGroups && <RowTogglerButton onClick={onRowToggle} rowData={rowData} expanded={expanded} expandedRowIcon={props.expandedRowIcon} collapsedRowIcon={props.collapsedRowIcon} />;
-                const content = ObjectUtils.getJSXElement(props.rowGroupHeaderTemplate, rowData, { index, props: props.tableProps });
+                const options = { index, index, props: props.tableProps, customRendering: false };
+                let content = ObjectUtils.getJSXElement(props.rowGroupHeaderTemplate, rowData, options);
 
-                return (
-                    <tr className="p-rowgroup-header" style={style} role="row">
+                // check if the user wants complete control of the rendering
+                if (!options.customRendering) {
+                    content = (
                         <td colSpan={colSpan}>
                             {toggler}
                             <span className="p-rowgroup-header-name">{content}</span>
                         </td>
+                    );
+                }
+
+                return (
+                    <tr className="p-rowgroup-header" style={style} role="row">
+                        {content}
                     </tr>
                 );
             }
@@ -849,6 +870,8 @@ export const TableBody = React.memo(
                         onRowClick={onRowClick}
                         onRowDoubleClick={onRowDoubleClick}
                         onRowRightClick={onRowRightClick}
+                        onRowMouseEnter={onRowMouseEnter}
+                        onRowMouseLeave={onRowMouseLeave}
                         tabIndex={props.tabIndex}
                         isSelectable={isSelectable}
                         onRowTouchEnd={onRowTouchEnd}

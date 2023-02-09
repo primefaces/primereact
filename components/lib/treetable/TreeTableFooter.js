@@ -1,23 +1,36 @@
 import * as React from 'react';
+import { ColumnBase } from '../column/ColumnBase';
+import { ColumnGroupBase } from '../columngroup/ColumnGroupBase';
+import { RowBase } from '../row/RowBase';
 
 export const TreeTableFooter = React.memo((props) => {
+    const getColumnProp = (column, name) => {
+        return ColumnBase.getCProp(column, name);
+    };
+
     const createFooterCell = (column, index) => {
         return (
-            <td key={column.field || index} className={column.props.footerClassName || column.props.className} style={column.props.footerStyle || column.props.style} rowSpan={column.props.rowSpan} colSpan={column.props.colSpan}>
-                {column.props.footer}
+            <td
+                key={column.field || index}
+                className={getColumnProp(column, 'footerClassName') || getColumnProp(column, 'className')}
+                style={getColumnProp(column, 'footerStyle') || getColumnProp(column, 'style')}
+                rowSpan={getColumnProp(column, 'rowSpan')}
+                colSpan={getColumnProp(column, 'colSpan')}
+            >
+                {getColumnProp(column, 'footer')}
             </td>
         );
     };
 
     const createFooterRow = (row, index) => {
-        const rowColumns = React.Children.toArray(row.props.children);
+        const rowColumns = React.Children.toArray(RowBase.getCProp(row, 'children'));
         const rowFooterCells = rowColumns.map(createFooterCell);
 
         return <tr key={index}>{rowFooterCells}</tr>;
     };
 
     const createColumnGroup = () => {
-        let rows = React.Children.toArray(props.columnGroup.props.children);
+        let rows = React.Children.toArray(ColumnGroupBase.getCProp(props.columnGroup, 'children'));
 
         return rows.map(createFooterRow);
     };
@@ -37,7 +50,7 @@ export const TreeTableFooter = React.memo((props) => {
             return true;
         } else {
             for (let i = 0; i < props.columns.length; i++) {
-                if (props.columns[i].props.footer) {
+                if (getColumnProp(props.columns[i], 'footer')) {
                     return true;
                 }
             }

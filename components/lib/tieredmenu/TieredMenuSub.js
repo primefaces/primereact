@@ -23,6 +23,13 @@ export const TieredMenuSub = React.memo((props) => {
             const viewport = DomHandler.getViewport();
             const sublistWidth = elementRef.current.offsetParent ? elementRef.current.offsetWidth : DomHandler.getHiddenElementOuterWidth(elementRef.current);
             const itemOuterWidth = DomHandler.getOuterWidth(parentItem.children[0]);
+            const top = parseInt(containerOffset.top, 10) + elementRef.current.offsetHeight - DomHandler.getWindowScrollTop();
+
+            if (top > viewport.height) {
+                elementRef.current.style.top = viewport.height - top + 'px';
+            } else {
+                elementRef.current.style.top = '0px';
+            }
 
             if (parseInt(containerOffset.left, 10) + itemOuterWidth + sublistWidth > viewport.width - DomHandler.calculateScrollbarWidth()) {
                 DomHandler.addClass(elementRef.current, 'p-submenu-list-flipped');
@@ -72,7 +79,7 @@ export const TieredMenuSub = React.memo((props) => {
         }
 
         if (!item.items) {
-            onLeafClick();
+            onLeafClick(event);
         }
     };
 
@@ -136,9 +143,10 @@ export const TieredMenuSub = React.memo((props) => {
         return prevItem ? (DomHandler.hasClass(prevItem, 'p-disabled') || !DomHandler.hasClass(prevItem, 'p-menuitem') ? findPrevItem(prevItem) : prevItem) : null;
     };
 
-    const onLeafClick = () => {
+    const onLeafClick = (event) => {
         setActiveItemState(null);
-        props.onLeafClick && props.onLeafClick();
+        props.onLeafClick && props.onLeafClick(event);
+        props.onHide && props.onHide(event);
     };
 
     useMountEffect(() => {

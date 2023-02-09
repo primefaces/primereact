@@ -1,30 +1,107 @@
-import React from 'react';
-import ChartDoc from '../../components/doc/chart';
-import { DocActions } from '../../components/doc/common/docactions';
-import Head from 'next/head';
+import { AccessibilityDoc } from '../../components/doc/chart/accessibilitydoc';
+import { BasicDoc } from '../../components/doc/chart/basicdoc';
+import { ChartJSDoc } from '../../components/doc/chart/chartjsdoc';
+import { ComboDoc } from '../../components/doc/chart/combodoc';
+import { DoughnutChartDoc } from '../../components/doc/chart/doughnutdoc';
+import { HorizontalBarDoc } from '../../components/doc/chart/horizontalbardoc';
+import { ImportDoc } from '../../components/doc/chart/importdoc';
+import { LineDoc } from '../../components/doc/chart/linedoc';
+import { LineStylesDoc } from '../../components/doc/chart/linestylesdoc';
+import { MultiAxisDoc } from '../../components/doc/chart/multiaxisdoc';
+import { PieChartDoc } from '../../components/doc/chart/piechartdoc';
+import { PolarAreaDoc } from '../../components/doc/chart/polarareadoc';
+import { RadarDoc } from '../../components/doc/chart/radardoc';
+import { StackedBarDoc } from '../../components/doc/chart/stackedbardoc';
+import { VerticalBarDoc } from '../../components/doc/chart/verticalbardoc';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 
 const ChartDemo = () => {
-    return (
-        <div>
-            <Head>
-                <title>React Chart</title>
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Charts</h1>
-                    <p>
-                        Chart components are based on{' '}
-                        <a style={{ color: 'black' }} href="http://www.chartjs.org/">
-                            Chart.js
-                        </a>
-                        , an open source HTML5 based charting library.
-                    </p>
-                </div>
-                <DocActions github="chart/index.js" />
-            </div>
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'chartjs',
+            label: 'Chart.js',
+            component: ChartJSDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'pie',
+            label: 'Pie',
+            component: PieChartDoc
+        },
+        {
+            id: 'doughnut',
+            label: 'Doughnut',
+            component: DoughnutChartDoc
+        },
+        {
+            id: 'vertical',
+            label: 'Vertical Bar',
+            component: VerticalBarDoc
+        },
+        {
+            id: 'horizontal',
+            label: 'Horizontal Bar',
+            component: HorizontalBarDoc
+        },
+        {
+            id: 'stacked',
+            label: 'Stacked Bar',
+            component: StackedBarDoc
+        },
+        {
+            id: 'line',
+            label: 'Line',
+            component: LineDoc
+        },
+        {
+            id: 'multiaxis',
+            label: 'Multi Axis',
+            component: MultiAxisDoc
+        },
+        {
+            id: 'linestyles',
+            label: 'Line Styles',
+            component: LineStylesDoc
+        },
+        {
+            id: 'polararea',
+            label: 'Polar Area',
+            component: PolarAreaDoc
+        },
+        {
+            id: 'radar',
+            label: 'Radar',
+            component: RadarDoc
+        },
+        {
+            id: 'combo',
+            label: 'Combo',
+            component: ComboDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
 
-            <ChartDoc />
-        </div>
+    return (
+        <DocComponent
+            title="React Chart Component"
+            header="Chart"
+            description="Chart components are based on Chart.js, an open source HTML5 based charting library."
+            componentDocs={docs}
+            apiDocs={[{ name: 'Chart', pathname: '/modules/chart.html' }]}
+        />
     );
 };
 

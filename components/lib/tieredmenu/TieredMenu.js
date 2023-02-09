@@ -4,11 +4,14 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, ZIndexUtils } from '../utils/Utils';
+import { TieredMenuBase } from './TieredMenuBase';
 import { TieredMenuSub } from './TieredMenuSub';
 
 export const TieredMenu = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = TieredMenuBase.getProps(inProps);
+
         const [visibleState, setVisibleState] = React.useState(!props.popup);
         const menuRef = React.useRef(null);
         const targetRef = React.useRef(null);
@@ -44,9 +47,11 @@ export const TieredMenu = React.memo(
         };
 
         const hide = (event) => {
-            targetRef.current = event.currentTarget;
-            setVisibleState(false);
-            props.onHide && props.onHide(event);
+            if (props.popup) {
+                targetRef.current = event.currentTarget;
+                setVisibleState(false);
+                props.onHide && props.onHide(event);
+            }
         };
 
         const onEnter = () => {
@@ -83,11 +88,13 @@ export const TieredMenu = React.memo(
         }));
 
         const createElement = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, TieredMenu.defaultProps);
+            const otherProps = TieredMenuBase.getOtherProps(props);
             const className = classNames(
                 'p-tieredmenu p-component',
                 {
-                    'p-tieredmenu-overlay': props.popup
+                    'p-tieredmenu-overlay': props.popup,
+                    'p-input-filled': PrimeReact.inputStyle === 'filled',
+                    'p-ripple-disabled': PrimeReact.ripple === false
                 },
                 props.className
             );
@@ -106,7 +113,7 @@ export const TieredMenu = React.memo(
                     onExited={onExited}
                 >
                     <div ref={menuRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onPanelClick}>
-                        <TieredMenuSub menuProps={props} model={props.model} root popup={props.popup} />
+                        <TieredMenuSub menuProps={props} model={props.model} root popup={props.popup} onHide={hide} />
                     </div>
                 </CSSTransition>
             );
@@ -119,17 +126,3 @@ export const TieredMenu = React.memo(
 );
 
 TieredMenu.displayName = 'TieredMenu';
-TieredMenu.defaultProps = {
-    __TYPE: 'TieredMenu',
-    id: null,
-    model: null,
-    popup: false,
-    style: null,
-    className: null,
-    autoZIndex: true,
-    baseZIndex: 0,
-    appendTo: null,
-    transitionOptions: null,
-    onShow: null,
-    onHide: null
-};

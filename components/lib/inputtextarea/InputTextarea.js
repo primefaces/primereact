@@ -1,9 +1,13 @@
 import * as React from 'react';
+import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { InputTextareaBase } from './InputTextareaBase';
 
 export const InputTextarea = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = InputTextareaBase.getProps(inProps);
+
         const elementRef = React.useRef(ref);
         const cachedScrollHeight = React.useRef(0);
 
@@ -29,6 +33,22 @@ export const InputTextarea = React.memo(
             }
 
             props.onKeyUp && props.onKeyUp(event);
+        };
+
+        const onKeyDown = (event) => {
+            props.onKeyDown && props.onKeyDown(event);
+
+            if (props.keyfilter) {
+                KeyFilter.onKeyPress(event, props.keyfilter, props.validateOnly);
+            }
+        };
+
+        const onPaste = (event) => {
+            props.onPaste && props.onPaste(event);
+
+            if (props.keyfilter) {
+                KeyFilter.onPaste(event, props.keyfilter, props.validateOnly);
+            }
         };
 
         const onInput = (event) => {
@@ -82,7 +102,7 @@ export const InputTextarea = React.memo(
         }, [props.autoResize]);
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, InputTextarea.defaultProps);
+        const otherProps = InputTextareaBase.getOtherProps(props);
         const className = classNames(
             'p-inputtextarea p-inputtext p-component',
             {
@@ -95,7 +115,7 @@ export const InputTextarea = React.memo(
 
         return (
             <>
-                <textarea ref={elementRef} {...otherProps} className={className} onFocus={onFocus} onBlur={onBlur} onKeyUp={onKeyUp} onInput={onInput}></textarea>
+                <textarea ref={elementRef} {...otherProps} className={className} onFocus={onFocus} onBlur={onBlur} onKeyUp={onKeyUp} onKeyDown={onKeyDown} onInput={onInput} onPaste={onPaste}></textarea>
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
             </>
         );
@@ -103,10 +123,3 @@ export const InputTextarea = React.memo(
 );
 
 InputTextarea.displayName = 'InputTextarea';
-InputTextarea.defaultProps = {
-    __TYPE: 'InputTextarea',
-    autoResize: false,
-    tooltip: null,
-    tooltipOptions: null,
-    onInput: null
-};

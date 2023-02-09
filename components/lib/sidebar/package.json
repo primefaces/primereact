@@ -2,5 +2,6 @@
     "main": "./sidebar.cjs.js",
     "module": "./sidebar.esm.js",
     "unpkg": "./sidebar.min.js",
-    "types": "./sidebar.d.ts"
+    "types": "./sidebar.d.ts",
+    "sideEffects": false
 }

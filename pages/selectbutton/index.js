@@ -1,60 +1,78 @@
-import React, { useState } from 'react';
-import { SelectButton } from '../../components/lib/selectbutton/SelectButton';
-import SelectButtonDoc from '../../components/doc/selectbutton';
-import { DocActions } from '../../components/doc/common/docactions';
-import Head from 'next/head';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '../../components/doc/selectbutton/accessibilitydoc';
+import { BasicDoc } from '../../components/doc/selectbutton/basicdoc';
+import { DisabledDoc } from '../../components/doc/selectbutton/disableddoc';
+import { FormikDoc } from '../../components/doc/selectbutton/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/selectbutton/form/hookformdoc';
+import { ImportDoc } from '../../components/doc/selectbutton/importdoc';
+import { InvalidDoc } from '../../components/doc/selectbutton/invaliddoc';
+import { MultipleDoc } from '../../components/doc/selectbutton/multipledoc';
+import { TemplateDoc } from '../../components/doc/selectbutton/templatedoc';
 
 const SelectButtonDemo = () => {
-    const [value1, setValue1] = useState('Off');
-    const [value2, setValue2] = useState(null);
-    const [value3, setValue3] = useState(null);
-    const options = ['Off', 'On'];
-    const paymentOptions = [
-        { name: 'Option 1', value: 1 },
-        { name: 'Option 2', value: 2 },
-        { name: 'Option 3', value: 3 }
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'multiple',
+            label: 'Multiple',
+            component: MultipleDoc
+        },
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
+        },
+        {
+            id: 'form',
+            label: 'Form',
+            description: 'Compatibility with popular React form libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
     ];
-    const justifyOptions = [
-        { icon: 'pi pi-align-left', value: 'left' },
-        { icon: 'pi pi-align-right', value: 'Right' },
-        { icon: 'pi pi-align-center', value: 'Center' },
-        { icon: 'pi pi-align-justify', value: 'Justify' }
-    ];
-
-    const justifyTemplate = (option) => {
-        return <i className={option.icon}></i>;
-    };
 
     return (
-        <div>
-            <Head>
-                <title>React SelectButton Component</title>
-                <meta name="description" content="SelectButton is used to choose single or multiple items from a list using buttons." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>SelectButton</h1>
-                    <p>SelectButton is used to choose single or multiple items from a list using buttons.</p>
-                </div>
-
-                <DocActions github="selectbutton/index.js" />
-            </div>
-
-            <div className="content-section implementation">
-                <div className="card">
-                    <h5>Single Selection</h5>
-                    <SelectButton value={value1} options={options} onChange={(e) => setValue1(e.value)} />
-
-                    <h5>Multiple Selection</h5>
-                    <SelectButton value={value2} options={paymentOptions} onChange={(e) => setValue2(e.value)} optionLabel="name" multiple />
-
-                    <h5>Custom Content</h5>
-                    <SelectButton value={value3} options={justifyOptions} onChange={(e) => setValue3(e.value)} itemTemplate={justifyTemplate} optionLabel="value" />
-                </div>
-            </div>
-
-            <SelectButtonDoc />
-        </div>
+        <DocComponent
+            title="React SelectButton Component"
+            header="SelectButton"
+            description="SelectButton is used to choose single or multiple items from a list using buttons."
+            componentDocs={docs}
+            apiDocs={[{ name: 'SelectButton', pathname: '/modules/selectbutton.html' }]}
+        />
     );
 };
 

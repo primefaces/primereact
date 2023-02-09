@@ -5,10 +5,13 @@ import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
 import { Tree } from '../tree/Tree';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { TreeSelectBase } from './TreeSelectBase';
 import { TreeSelectPanel } from './TreeSelectPanel';
 
 export const TreeSelect = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = TreeSelectBase.getProps(inProps);
+
         const [focusedState, setFocusedState] = React.useState(false);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const [expandedKeysState, setExpandedKeysState] = React.useState(props.expandedKeys);
@@ -16,7 +19,7 @@ export const TreeSelect = React.memo(
         const elementRef = React.useRef(null);
         const overlayRef = React.useRef(null);
         const filterInputRef = React.useRef(null);
-        const focusInputRef = React.useRef(null);
+        const focusInputRef = React.useRef(props.inputRef);
         const triggerRef = React.useRef(null);
         const selfChange = React.useRef(null);
         const expandedKeys = props.onToggle ? props.expandedKeys : expandedKeysState;
@@ -296,8 +299,13 @@ export const TreeSelect = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            focus: () => DomHandler.focus(focusInputRef.current),
             getElement: () => elementRef.current
         }));
+
+        React.useEffect(() => {
+            ObjectUtils.combinedRefs(focusInputRef, props.inputRef);
+        }, [focusInputRef, props.inputRef]);
 
         useMountEffect(() => {
             updateTreeState();
@@ -510,7 +518,7 @@ export const TreeSelect = React.memo(
 
         const selectedNodes = getSelectedNodes();
 
-        const otherProps = ObjectUtils.findDiffKeys(props, TreeSelect.defaultProps);
+        const otherProps = TreeSelectBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-treeselect p-component p-inputwrapper',
@@ -531,7 +539,7 @@ export const TreeSelect = React.memo(
         const footer = createFooter();
 
         return (
-            <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps} onClick={onClick}>
+            <div ref={elementRef} className={className} style={props.style} {...otherProps} onClick={onClick}>
                 {keyboardHelper}
                 {labelElement}
                 {dropdownIcon}
@@ -559,49 +567,3 @@ export const TreeSelect = React.memo(
 );
 
 TreeSelect.displayName = 'TreeSelect';
-TreeSelect.defaultProps = {
-    __TYPE: 'TreeSelect',
-    id: null,
-    value: null,
-    name: null,
-    style: null,
-    className: null,
-    disabled: false,
-    options: null,
-    scrollHeight: '400px',
-    placeholder: null,
-    tabIndex: null,
-    inputId: null,
-    ariaLabel: null,
-    ariaLabelledBy: null,
-    selectionMode: 'single',
-    expandedKeys: null,
-    panelStyle: null,
-    panelClassName: null,
-    appendTo: null,
-    emptyMessage: null,
-    display: 'comma',
-    metaKeySelection: true,
-    valueTemplate: null,
-    panelHeaderTemplate: null,
-    panelFooterTemplate: null,
-    transitionOptions: null,
-    dropdownIcon: 'pi pi-chevron-down',
-    filter: false,
-    filterTemplate: null,
-    filterValue: null,
-    filterBy: 'label',
-    filterMode: 'lenient',
-    filterPlaceholder: null,
-    filterLocale: undefined,
-    filterInputAutoFocus: true,
-    resetFilterOnHide: false,
-    onShow: null,
-    onHide: null,
-    onChange: null,
-    onNodeSelect: null,
-    onNodeUnselect: null,
-    onNodeExpand: null,
-    onNodeCollapse: null,
-    onFilterValueChange: null
-};

@@ -6,10 +6,13 @@ import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { AutoCompleteBase } from './AutoCompleteBase';
 import { AutoCompletePanel } from './AutoCompletePanel';
 
 export const AutoComplete = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = AutoCompleteBase.getProps(inProps);
+
         const [idState, setIdState] = React.useState(props.id);
         const [searchingState, setSearchingState] = React.useState(false);
         const [focusedState, setFocusedState] = React.useState(false);
@@ -88,9 +91,12 @@ export const AutoComplete = React.memo(
                 inputRef.current.value = '';
 
                 if (!isSelected(option)) {
-                    const newValue = props.value ? [...props.value, option] : [option];
+                    // allows empty value/selectionlimit and within sectionlimit
+                    if (!props.value || !props.selectionLimit || props.value.length < props.selectionLimit) {
+                        const newValue = props.value ? [...props.value, option] : [option];
 
-                    updateModel(event, newValue);
+                        updateModel(event, newValue);
+                    }
                 }
             } else {
                 updateInputField(option);
@@ -112,7 +118,7 @@ export const AutoComplete = React.memo(
 
         const updateModel = (event, value) => {
             // #2176 only call change if value actually changed
-            if (selectedItem && selectedItem.current === value) {
+            if (selectedItem && ObjectUtils.deepEquals(selectedItem.current, value)) {
                 return;
             }
 
@@ -454,6 +460,10 @@ export const AutoComplete = React.memo(
             if (inputRef.current && !props.multiple) {
                 updateInputField(props.value);
             }
+
+            if (overlayVisibleState) {
+                alignOverlay();
+            }
         });
 
         useUnmountEffect(() => {
@@ -469,6 +479,7 @@ export const AutoComplete = React.memo(
             search,
             show,
             hide,
+            focus: () => DomHandler.focus(inputRef.current),
             getElement: () => elementRef.current,
             getOverlay: () => overlayRef.current,
             getInput: () => inputRef.current,
@@ -609,7 +620,7 @@ export const AutoComplete = React.memo(
 
         const listId = idState + '_list';
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, AutoComplete.defaultProps);
+        const otherProps = AutoCompleteBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-autocomplete p-component p-inputwrapper',
@@ -656,67 +667,3 @@ export const AutoComplete = React.memo(
 );
 
 AutoComplete.displayName = 'AutoComplete';
-AutoComplete.defaultProps = {
-    __TYPE: 'AutoComplete',
-    id: null,
-    appendTo: null,
-    autoFocus: false,
-    autoHighlight: false,
-    className: null,
-    completeMethod: null,
-    delay: 300,
-    disabled: false,
-    dropdown: false,
-    dropdownAriaLabel: null,
-    dropdownAutoFocus: true,
-    dropdownIcon: 'pi pi-chevron-down',
-    dropdownMode: 'blank',
-    emptyMessage: null,
-    field: null,
-    forceSelection: false,
-    inputClassName: null,
-    inputId: null,
-    inputRef: null,
-    inputStyle: null,
-    itemTemplate: null,
-    maxLength: null,
-    minLength: 1,
-    multiple: false,
-    name: null,
-    onBlur: null,
-    onChange: null,
-    onClear: null,
-    onClick: null,
-    onContextMenu: null,
-    onDblClick: null,
-    onDropdownClick: null,
-    onFocus: null,
-    onHide: null,
-    onKeyPress: null,
-    onKeyUp: null,
-    onMouseDown: null,
-    onSelect: null,
-    onShow: null,
-    onUnselect: null,
-    optionGroupChildren: null,
-    optionGroupLabel: null,
-    optionGroupTemplate: null,
-    panelClassName: null,
-    panelStyle: null,
-    placeholder: null,
-    readOnly: false,
-    removeIcon: 'pi pi-times-circle',
-    scrollHeight: '200px',
-    selectedItemTemplate: null,
-    showEmptyMessage: false,
-    size: null,
-    style: null,
-    suggestions: null,
-    tabIndex: null,
-    tooltip: null,
-    tooltipOptions: null,
-    transitionOptions: null,
-    type: 'text',
-    value: null,
-    virtualScrollerOptions: null
-};

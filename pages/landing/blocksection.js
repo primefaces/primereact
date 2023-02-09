@@ -1,8 +1,6 @@
-import getConfig from 'next/config';
 import { useEffect, useState } from 'react';
 
 const BlockSection = () => {
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const [animationClass, setAnimationClass] = useState('');
 
     useEffect(() => {
@@ -12,9 +10,9 @@ const BlockSection = () => {
     return (
         <section id="blocks-section" className="landing-blocks pt-8 overflow-hidden">
             <div className="section-header">PrimeBlocks</div>
-            <p className="section-detail">280+ ready to copy-paste UI blocks to build spectacular applications in no time.</p>
+            <p className="section-detail">370+ ready to copy-paste UI blocks to build spectacular applications in no time.</p>
             <div className="flex justify-content-center mt-4">
-                <a href="https://www.primefaces.org/primeblocks-react" className="font-semibold p-3 border-round flex align-items-center linkbox active">
+                <a href="https://blocks.primereact.org" className="font-semibold p-3 border-round flex align-items-center linkbox active z-1">
                     <span>Learn More</span>
                     <i className="pi pi-arrow-right ml-2"></i>
                 </a>
@@ -24,7 +22,7 @@ const BlockSection = () => {
                     <div className="prime-block flex align-self-stretch p-1">
                         <div className="block-sidebar w-1 p-3">
                             <div className="logo">
-                                <img src={`${contextPath}/images/landing-new/blocks/logo-1.svg`} alt="block logo" />
+                                <img src="https://primefaces.org/cdn/primereact/images/landing-new/blocks/logo-1.svg" alt="block logo" />
                             </div>
                             <div className="sidebar-menu mt-5">
                                 <div className="bar w-8 my-3"></div>
@@ -117,7 +115,7 @@ const BlockSection = () => {
                     <div className="prime-block p-1 flex align-self-stretch flex-column">
                         <div className="block-header py-3 px-4 flex justify-content-between align-items-center">
                             <div className="logo pr-5">
-                                <img src={`${contextPath}/images/landing-new/blocks/logo-1.svg`} alt="block logo" />
+                                <img src="https://primefaces.org/cdn/primereact/images/landing-new/blocks/logo-1.svg" alt="block logo" />
                             </div>
                             <div className="flex-auto sidebar-menu flex">
                                 <div className="bar w-2rem mx-2"></div>
@@ -159,7 +157,7 @@ const BlockSection = () => {
                     <div className="prime-block flex align-self-stretch p-1">
                         <div className="block-sidebar p-3">
                             <div className="logo">
-                                <img src={`${contextPath}/images/landing-new/blocks/logo-2.svg`} alt="block logo" />
+                                <img src="https://primefaces.org/cdn/primereact/images/landing-new/blocks/logo-2.svg" alt="block logo" />
                             </div>
                             <div className="sidebar-menu mt-5">
                                 <div className="circle my-3"></div>
@@ -225,7 +223,7 @@ const BlockSection = () => {
                     <div className="prime-block flex align-self-stretch p-1">
                         <div className="block-sidebar w-1 p-3">
                             <div className="logo">
-                                <img src={`${contextPath}/images/landing-new/blocks/logo-1.svg`} alt="block logo" />
+                                <img src="https://primefaces.org/cdn/primereact/images/landing-new/blocks/logo-1.svg" alt="block logo" />
                             </div>
                             <div className="sidebar-menu mt-5">
                                 <div className="bar w-8 my-3"></div>
@@ -289,7 +287,7 @@ const BlockSection = () => {
                     <div className="prime-block  flex align-self-stretch p-1">
                         <div className="block-sidebar p-3">
                             <div className="logo">
-                                <img src={`${contextPath}/images/landing-new/blocks/logo-2.svg`} alt="block logo" />
+                                <img src="https://primefaces.org/cdn/primereact/images/landing-new/blocks/logo-2.svg" alt="block logo" />
                             </div>
                             <div className="sidebar-menu mt-5">
                                 <div className="circle my-3"></div>
@@ -352,7 +350,7 @@ const BlockSection = () => {
                     <div className="prime-block p-1 flex align-self-stretch flex-column">
                         <div className="block-header py-3 px-4 flex justify-content-between align-items-center">
                             <div className="logo pr-5">
-                                <img src={`${contextPath}/images/landing-new/blocks/logo-1.svg`} alt="block logo" />
+                                <img src="https://primefaces.org/cdn/primereact/images/landing-new/blocks/logo-1.svg" alt="block logo" />
                             </div>
                             <div className="flex-auto sidebar-menu flex">
                                 <div className="bar w-2rem mx-2"></div>
@@ -367,7 +365,7 @@ const BlockSection = () => {
                             <div className="block-main h-full flex justify-content-center align-items-center flex-column">
                                 <div className="block-item block-item-active animation-2 mx-3 w-8rem text-center flex flex-column align-items-center overflow-visible">
                                     <div className="-mt-4">
-                                        <img src={`${contextPath}/images/landing-new/blocks/question.svg`} alt="question mark" />
+                                        <img src="https://primefaces.org/cdn/primereact/images/landing-new/blocks/question.svg" alt="question mark" />
                                     </div>
                                     <div className="bar w-2rem mt-2"></div>
                                     <div className="bar w-6rem mt-2"></div>

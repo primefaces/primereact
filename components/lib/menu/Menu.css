@@ -1,5 +1,8 @@
 .p-menu-overlay {
     position: absolute;
+    /* Github #3122: Prevent animation flickering  */
+    top: -9999px;
+    left: -9999px;
 }
 
 .p-menu ul {

@@ -1,18 +1,16 @@
-import getConfig from 'next/config';
-import { InputText } from '../../components/lib/inputtext/InputText';
+import { useRef, useState } from 'react';
 import { Button } from '../../components/lib/button/Button';
+import { Checkbox } from '../../components/lib/checkbox/Checkbox';
 import { Dropdown } from '../../components/lib/dropdown/Dropdown';
+import { InputMask } from '../../components/lib/inputmask/InputMask';
+import { InputNumber } from '../../components/lib/inputnumber/InputNumber';
+import { InputText } from '../../components/lib/inputtext/InputText';
 import { ListBox } from '../../components/lib/listbox/ListBox';
 import { RadioButton } from '../../components/lib/radiobutton/RadioButton';
-import { Checkbox } from '../../components/lib/checkbox/Checkbox';
-import { InputNumber } from '../../components/lib/inputnumber/InputNumber';
-import { InputMask } from '../../components/lib/inputmask/InputMask';
 import { Slider } from '../../components/lib/slider/Slider';
 import { classNames } from '../../components/lib/utils/ClassNames';
-import { useRef, useState } from 'react';
 
 const DesignerSection = (props) => {
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const [font, setFont] = useState('-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol');
     const fonts = [
         { label: 'Arial', value: 'Arial,Helvetica Neue,Helvetica,sans-serif' },
@@ -64,11 +62,11 @@ const DesignerSection = (props) => {
         <section className="landing-designer py-8">
             <div className="section-header">Theme Designer</div>
             <p className="section-detail">Designer is the ultimate tool to create your own PrimeReact experience powered by a SASS based theme engine with 500+ variables and a Visual Designer.</p>
-            <div className="designer-main mt-7 justify-content-center pad-section" style={{ backgroundImage: `url(${contextPath}/images/landing-new/wave-${props.dark ? 'dark' : 'light'}.svg)`, backgroundSize: 'cover' }}>
+            <div className="designer-main mt-7 justify-content-center pad-section" style={{ backgroundImage: `url(/images/landing-new/wave-${props.dark ? 'dark' : 'light'}.svg)`, backgroundSize: 'cover' }}>
                 <div className="box p-4 flex flex-column md:flex-row z-1 designer-editor">
                     <div className="mr-0 md:mr-4 p-4 designer-controls box border-bottom-1 border-left-none border-right-none border-top-none md:border-bottom-none md:border-right-1" style={{ borderRadius: '10px' }}>
                         <div className="text-center mb-4">
-                            <img src={`${contextPath}/images/landing-new/${designerLogo}`} alt={designerLogo} />
+                            <img src={`https://primefaces.org/cdn/primereact/images/landing-new/${designerLogo}`} alt={designerLogo} />
                         </div>
                         <div className="p-fluid">
                             <span className="font-semibold block mb-3">Primary</span>
@@ -120,7 +118,7 @@ const DesignerSection = (props) => {
                                 </div>
                             </div>
 
-                            <a href="https://www.primefaces.org/designer-react" className="font-semibold p-3 border-round flex align-items-center linkbox active">
+                            <a href="https://designer.primereact.org" className="font-semibold p-3 border-round flex align-items-center linkbox active">
                                 <span>View Full Version</span>
                                 <i className="pi pi-arrow-right ml-auto"></i>
                             </a>

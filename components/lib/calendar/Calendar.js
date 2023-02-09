@@ -6,10 +6,13 @@ import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, mask, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { CalendarBase } from './CalendarBase';
 import { CalendarPanel } from './CalendarPanel';
 
 export const Calendar = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = CalendarBase.getProps(inProps);
+
         const [focusedState, setFocusedState] = React.useState(false);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const [viewDateState, setViewDateState] = React.useState(null);
@@ -2548,6 +2551,7 @@ export const Calendar = React.memo(
             getCurrentDateTime,
             getViewDate,
             updateViewDate,
+            focus: () => DomHandler.focus(inputRef.current),
             getElement: () => elementRef.current,
             getOverlay: () => overlayRef.current,
             getInput: () => inputRef.current
@@ -2642,7 +2646,7 @@ export const Calendar = React.memo(
             );
         };
 
-        const createTitleYearElement = () => {
+        const createTitleYearElement = (metaYear) => {
             if (props.yearNavigator) {
                 let yearOptions = [];
                 const years = props.yearRange.split(':');
@@ -2684,10 +2688,12 @@ export const Calendar = React.memo(
                 return content;
             }
 
+            const displayYear = props.inline ? metaYear : currentYear;
+
             return (
                 currentView !== 'year' && (
                     <button className="p-datepicker-year p-link" onClick={switchToYearView} disabled={switchViewButtonDisabled()}>
-                        {currentYear}
+                        {displayYear}
                     </button>
                 )
             );
@@ -2915,8 +2921,12 @@ export const Calendar = React.memo(
         };
 
         const createHourPicker = () => {
-            let currentTime = getCurrentDateTime();
+            const currentTime = getCurrentDateTime();
+            const minute = doStepMinute(currentTime.getMinutes());
             let hour = currentTime.getHours();
+
+            // #3770 account for step minutes rolling to next hour
+            hour = minute > 59 ? hour + 1 : hour;
 
             if (props.hourFormat === '12') {
                 if (hour === 0) hour = 12;
@@ -2956,7 +2966,9 @@ export const Calendar = React.memo(
 
         const createMinutePicker = () => {
             const currentTime = getCurrentDateTime();
-            const minute = currentTime.getMinutes();
+            let minute = doStepMinute(currentTime.getMinutes());
+
+            minute = minute > 59 ? minute - 60 : minute;
             const minuteDisplay = minute < 10 ? '0' + minute : minute;
 
             return (
@@ -3227,7 +3239,11 @@ export const Calendar = React.memo(
                     <div className="p-yearpicker">
                         {yearPickerValues().map((y, i) => {
                             return (
-                                <span onClick={(event) => onYearSelect(event, y)} key={`year${i + 1}`} className={classNames('p-yearpicker-year', { 'p-highlight': isYearSelected(y), 'p-disabled': !isSelectable(0, 0, y) })}>
+                                <span
+                                    onClick={(event) => onYearSelect(event, y)}
+                                    key={`year${i + 1}`}
+                                    className={classNames('p-yearpicker-year', { 'p-highlight': isYearSelected(y), 'p-disabled': !(isSelectable(0, 0, y) || isSelectable(30, 11, y)) })}
+                                >
                                     {y}
                                 </span>
                             );
@@ -3239,7 +3255,7 @@ export const Calendar = React.memo(
             return null;
         };
 
-        const otherProps = ObjectUtils.findDiffKeys(props, Calendar.defaultProps);
+        const otherProps = CalendarBase.getOtherProps(props);
         const className = classNames('p-calendar p-component p-inputwrapper', props.className, {
             [`p-calendar-w-btn p-calendar-w-btn-${props.iconPos}`]: props.showIcon,
             'p-calendar-disabled': props.disabled,
@@ -3253,7 +3269,9 @@ export const Calendar = React.memo(
             'p-datepicker-timeonly': props.timeOnly,
             'p-datepicker-multiple-month': props.numberOfMonths > 1,
             'p-datepicker-monthpicker': currentView === 'month',
-            'p-datepicker-touch-ui': props.touchUI
+            'p-datepicker-touch-ui': props.touchUI,
+            'p-input-filled': PrimeReact.inputStyle === 'filled',
+            'p-ripple-disabled': PrimeReact.ripple === false
         });
         const content = createContent();
         const datePicker = createDatePicker();
@@ -3294,89 +3312,3 @@ export const Calendar = React.memo(
 );
 
 Calendar.displayName = 'Calendar';
-Calendar.defaultProps = {
-    __TYPE: 'Calendar',
-    appendTo: null,
-    ariaLabelledBy: null,
-    autoZIndex: true,
-    baseZIndex: 0,
-    className: null,
-    clearButtonClassName: 'p-button-secondary',
-    dateFormat: null,
-    dateTemplate: null,
-    decadeTemplate: null,
-    disabled: false,
-    disabledDates: null,
-    disabledDays: null,
-    footerTemplate: null,
-    headerTemplate: null,
-    hideOnDateTimeSelect: false,
-    hourFormat: '24',
-    icon: 'pi pi-calendar',
-    iconPos: 'right',
-    id: null,
-    inline: false,
-    inputClassName: null,
-    inputId: null,
-    inputMode: 'none',
-    inputRef: null,
-    inputStyle: null,
-    keepInvalid: false,
-    locale: null,
-    mask: null,
-    maxDate: null,
-    maxDateCount: null,
-    minDate: null,
-    monthNavigator: false,
-    monthNavigatorTemplate: null,
-    name: null,
-    numberOfMonths: 1,
-    onBlur: null,
-    onChange: null,
-    onClearButtonClick: null,
-    onFocus: null,
-    onHide: null,
-    onInput: null,
-    onMonthChange: null,
-    onSelect: null,
-    onShow: null,
-    onTodayButtonClick: null,
-    onViewDateChange: null,
-    onVisibleChange: null,
-    panelClassName: null,
-    panelStyle: null,
-    placeholder: null,
-    readOnlyInput: false,
-    required: false,
-    selectOtherMonths: false,
-    selectionMode: 'single',
-    shortYearCutoff: '+10',
-    showButtonBar: false,
-    showIcon: false,
-    showMillisec: false,
-    showMinMaxRange: false,
-    showOnFocus: true,
-    showOtherMonths: true,
-    showSeconds: false,
-    showTime: false,
-    showWeek: false,
-    stepHour: 1,
-    stepMillisec: 1,
-    stepMinute: 1,
-    stepSecond: 1,
-    style: null,
-    tabIndex: null,
-    timeOnly: false,
-    todayButtonClassName: 'p-button-secondary',
-    tooltip: null,
-    tooltipOptions: null,
-    touchUI: false,
-    transitionOptions: null,
-    value: null,
-    view: 'date',
-    viewDate: null,
-    visible: false,
-    yearNavigator: false,
-    yearNavigatorTemplate: null,
-    yearRange: null
-};

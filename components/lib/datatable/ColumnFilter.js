@@ -1,6 +1,7 @@
 import * as React from 'react';
 import PrimeReact, { FilterMatchMode, FilterOperator, localeOption } from '../api/Api';
 import { Button } from '../button/Button';
+import { ColumnBase } from '../column/ColumnBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Dropdown } from '../dropdown/Dropdown';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
@@ -17,7 +18,8 @@ export const ColumnFilter = React.memo((props) => {
     const selfClick = React.useRef(false);
     const overlayEventListener = React.useRef(null);
 
-    const getColumnProp = (prop) => props.column.props[prop];
+    const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
+
     const field = getColumnProp('filterField') || getColumnProp('field');
     const filterModel = props.filters[field];
     const filterStoreModel = props.filtersStore && props.filtersStore[field];
@@ -194,6 +196,14 @@ export const ColumnFilter = React.memo((props) => {
 
         if (!getColumnProp('showApplyButton') || props.display === 'row') {
             props.onFilterApply();
+        }
+    };
+
+    const onInputKeydown = (event, _index) => {
+        if (event.key === 'Enter') {
+            if (!getColumnProp('showApplyButton') || props.display === 'menu') {
+                applyFilter();
+            }
         }
     };
 
@@ -442,7 +452,15 @@ export const ColumnFilter = React.memo((props) => {
         return getColumnProp('filterElement') ? (
             ObjectUtils.getJSXElement(getColumnProp('filterElement'), { field, index, filterModel: model, value, filterApplyCallback, filterCallback })
         ) : (
-            <InputText type={getColumnProp('filterType')} value={value || ''} onChange={(e) => onInputChange(e, index)} className="p-column-filter" placeholder={getColumnProp('filterPlaceholder')} maxLength={getColumnProp('filterMaxLength')} />
+            <InputText
+                type={getColumnProp('filterType')}
+                value={value || ''}
+                onChange={(e) => onInputChange(e, index)}
+                onKeyDown={(e) => onInputKeydown(e, index)}
+                className="p-column-filter"
+                placeholder={getColumnProp('filterPlaceholder')}
+                maxLength={getColumnProp('filterMaxLength')}
+            />
         );
     };
 

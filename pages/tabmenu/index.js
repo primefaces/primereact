@@ -1,55 +1,41 @@
-import React, { useState } from 'react';
-import { TabMenu } from '../../components/lib/tabmenu/TabMenu';
-import { Button } from '../../components/lib/button/Button';
-import TabMenuDoc from '../../components/doc/tabmenu';
-import { DocActions } from '../../components/doc/common/docactions';
-import Head from 'next/head';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '../../components/doc/tabmenu/accessibilitydoc';
+import { BasicDoc } from '../../components/doc/tabmenu/basicdoc';
+import { ControlledDoc } from '../../components/doc/tabmenu/controlleddoc';
+import { ImportDoc } from '../../components/doc/tabmenu/importdoc';
+import { StyleDoc } from '../../components/doc/tabmenu/styledoc';
 
 const TabMenuDemo = () => {
-    const [activeIndex, setActiveIndex] = useState(3);
-
-    const items = [
-        { label: 'Home', icon: 'pi pi-fw pi-home' },
-        { label: 'Calendar', icon: 'pi pi-fw pi-calendar' },
-        { label: 'Edit', icon: 'pi pi-fw pi-pencil' },
-        { label: 'Documentation', icon: 'pi pi-fw pi-file' },
-        { label: 'Settings', icon: 'pi pi-fw pi-cog' }
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'controlled',
+            label: 'Controlled',
+            component: ControlledDoc
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React TabMenu Component</title>
-                <meta name="description" content="TabMenu is a navigation/command component that displays items as tab headers." />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>TabMenu</h1>
-                    <p>TabMenu is a navigation/command component that displays items as tab headers.</p>
-                </div>
-                <DocActions github="tabmenu/index.js" />
-            </div>
-
-            <div className="content-section implementation">
-                <div className="card">
-                    <h5>Default</h5>
-                    <TabMenu model={items} />
-                </div>
-
-                <div className="card">
-                    <h5>Programmatic</h5>
-                    <div className="pt-2 pb-4">
-                        <Button onClick={() => setActiveIndex(0)} className="p-button-text" label="Activate 1st" />
-                        <Button onClick={() => setActiveIndex(1)} className="p-button-text" label="Activate 2nd" />
-                        <Button onClick={() => setActiveIndex(2)} className="p-button-text" label="Activate 3rd" />
-                    </div>
-
-                    <TabMenu model={items} activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)} />
-                </div>
-            </div>
-
-            <TabMenuDoc />
-        </div>
+        <DocComponent title="React TabMenu Component" header="TabMenu" description="TabMenu is a navigation component that displays menu items as tab headers." componentDocs={docs} apiDocs={[{ name: 'TabMenu', pathname: '/modules/tabmenu.html' }]} />
     );
 };
 

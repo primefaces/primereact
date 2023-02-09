@@ -1,11 +1,14 @@
 import * as React from 'react';
 import { useEventListener } from '../hooks/Hooks';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { SplitterBase, SplitterPanelBase } from './SplitterBase';
 
 export const SplitterPanel = () => {};
 
 export const Splitter = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = SplitterBase.getProps(inProps);
+
         const elementRef = React.useRef(null);
         const gutterRef = React.useRef();
         const gutterRefs = React.useRef({});
@@ -21,8 +24,8 @@ export const Splitter = React.memo(
         const prevPanelIndex = React.useRef(null);
         const [panelSizes, setPanelSizes] = React.useState([]);
         const isStateful = props.stateKey != null;
-        const childrenLength = props.children && props.children.length;
-        const panelSize = (sizes, index) => (index in sizes ? sizes[index] : ((props.children[index] && props.children[index].props.size) || 100) / childrenLength);
+        const childrenLength = (props.children && props.children.length) || 1;
+        const panelSize = (sizes, index) => (index in sizes ? sizes[index] : (props.children && [].concat(props.children)[index].props.size) || 100 / childrenLength);
 
         const [bindDocumentMouseMoveListener, unbindDocumentMouseMoveListener] = useEventListener({ type: 'mousemove', listener: (event) => onResize(event) });
         const [bindDocumentMouseUpListener, unbindDocumentMouseUpListener] = useEventListener({
@@ -41,6 +44,10 @@ export const Splitter = React.memo(
         const unbindMouseListeners = () => {
             unbindDocumentMouseMoveListener();
             unbindDocumentMouseUpListener();
+        };
+
+        const getPanelProp = (panel, name) => {
+            return SplitterPanelBase.getCProp(panel, name);
         };
 
         const validateResize = (newPrevPanelSize, newNextPanelSize) => {
@@ -199,8 +206,8 @@ export const Splitter = React.memo(
         }, [restoreState, isStateful]);
 
         const createPanel = (panel, index) => {
-            const otherProps = ObjectUtils.findDiffKeys(panel.props, SplitterPanel.defaultProps);
-            const panelClassName = classNames('p-splitter-panel', panel.props.className);
+            const otherProps = SplitterPanelBase.getCOtherProps(panel);
+            const panelClassName = classNames('p-splitter-panel', getPanelProp(panel, 'className'));
             const gutterStyle = props.layout === 'horizontal' ? { width: props.gutterSize + 'px' } : { height: props.gutterSize + 'px' };
             const gutter = index !== props.children.length - 1 && (
                 <div
@@ -220,8 +227,8 @@ export const Splitter = React.memo(
 
             return (
                 <React.Fragment>
-                    <div key={index} className={panelClassName} style={{ ...panel.props.style, flexBasis }} {...otherProps}>
-                        {panel.props.children}
+                    <div key={index} className={panelClassName} style={{ ...getPanelProp(panel, 'style'), flexBasis }} {...otherProps}>
+                        {getPanelProp(panel, 'children')}
                     </div>
                     {gutter}
                 </React.Fragment>
@@ -232,7 +239,7 @@ export const Splitter = React.memo(
             return React.Children.map(props.children, createPanel);
         };
 
-        const otherProps = ObjectUtils.findDiffKeys(props, Splitter.defaultProps);
+        const otherProps = SplitterBase.getOtherProps(props);
         const className = classNames(`p-splitter p-component p-splitter-${props.layout}`, props.className);
         const panels = createPanels();
 
@@ -245,23 +252,5 @@ export const Splitter = React.memo(
 );
 
 SplitterPanel.displayName = 'SplitterPanel';
-SplitterPanel.defaultProps = {
-    __TYPE: 'SplitterPanel',
-    className: null,
-    minSize: null,
-    size: null,
-    style: null
-};
 
 Splitter.displayName = 'Splitter';
-Splitter.defaultProps = {
-    __TYPE: 'Splitter',
-    className: null,
-    gutterSize: 4,
-    id: null,
-    layout: 'horizontal',
-    onResizeEnd: null,
-    stateKey: null,
-    stateStorage: 'session',
-    style: null
-};

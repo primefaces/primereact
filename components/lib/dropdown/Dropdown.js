@@ -3,18 +3,21 @@ import PrimeReact, { FilterService } from '../api/Api';
 import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DropdownBase } from './DropdownBase';
 import { DropdownPanel } from './DropdownPanel';
 
 export const Dropdown = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = DropdownBase.getProps(inProps);
+
         const [filterState, setFilterState] = React.useState('');
         const [focusedState, setFocusedState] = React.useState(false);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const elementRef = React.useRef(null);
         const overlayRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
-        const focusInputRef = React.useRef(null);
+        const focusInputRef = React.useRef(props.focusInputRef);
         const searchTimeout = React.useRef(null);
         const searchValue = React.useRef(null);
         const currentSearchChar = React.useRef(null);
@@ -64,6 +67,13 @@ export const Dropdown = React.memo(
 
         const onClick = (event) => {
             if (props.disabled) {
+                return;
+            }
+
+            props.onClick && props.onClick(event);
+
+            // do not continue if the user defined click wants to prevent it
+            if (event.defaultPrevented) {
                 return;
             }
 
@@ -582,6 +592,7 @@ export const Dropdown = React.memo(
             props,
             show,
             hide,
+            focus: () => DomHandler.focus(focusInputRef.current),
             getElement: () => elementRef.current,
             getOverlay: () => overlayRef.current,
             getInput: () => inputRef.current,
@@ -590,7 +601,8 @@ export const Dropdown = React.memo(
 
         React.useEffect(() => {
             ObjectUtils.combinedRefs(inputRef, props.inputRef);
-        }, [inputRef, props.inputRef]);
+            ObjectUtils.combinedRefs(focusInputRef, props.focusInputRef);
+        }, [inputRef, props.inputRef, focusInputRef, props.focusInputRef]);
 
         useMountEffect(() => {
             if (props.autoFocus) {
@@ -605,10 +617,10 @@ export const Dropdown = React.memo(
         }, [overlayVisibleState, props.value]);
 
         useUpdateEffect(() => {
-            if (overlayVisibleState && props.filter) {
+            if (overlayVisibleState && filterState && props.filter) {
                 alignOverlay();
             }
-        }, [overlayVisibleState, props.filter]);
+        }, [overlayVisibleState, filterState, props.filter]);
 
         useUpdateEffect(() => {
             if (filterState && (!props.options || props.options.length === 0)) {
@@ -706,19 +718,24 @@ export const Dropdown = React.memo(
 
         const createClearIcon = () => {
             if (props.value != null && props.showClear && !props.disabled) {
-                return <i className="p-dropdown-clear-icon pi pi-times" onClick={clear}></i>;
+                const iconClassName = classNames('p-dropdown-clear-icon p-clickable');
+                const iconProps = { className: iconClassName, onPointerUp: clear };
+
+                return IconUtils.getJSXIcon(props.clearIcon, iconProps);
             }
 
             return null;
         };
 
         const createDropdownIcon = () => {
-            const iconClassName = classNames('p-dropdown-trigger-icon p-clickable', props.dropdownIcon);
+            const iconClassName = classNames('p-dropdown-trigger-icon p-clickable');
+            const icon = IconUtils.getJSXIcon(props.dropdownIcon, { className: iconClassName });
+
             const ariaLabel = props.placeholder || props.ariaLabel;
 
             return (
                 <div className="p-dropdown-trigger" role="button" aria-haspopup="listbox" aria-expanded={overlayVisibleState} aria-label={ariaLabel}>
-                    <span className={iconClassName}></span>
+                    {icon}
                 </div>
             );
         };
@@ -727,7 +744,7 @@ export const Dropdown = React.memo(
         const selectedOption = getSelectedOption();
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, Dropdown.defaultProps);
+        const otherProps = DropdownBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-dropdown p-component p-inputwrapper',
@@ -789,62 +806,3 @@ export const Dropdown = React.memo(
 );
 
 Dropdown.displayName = 'Dropdown';
-Dropdown.defaultProps = {
-    __TYPE: 'Dropdown',
-    appendTo: null,
-    ariaLabel: null,
-    ariaLabelledBy: null,
-    autoFocus: false,
-    className: null,
-    dataKey: null,
-    disabled: false,
-    dropdownIcon: 'pi pi-chevron-down',
-    editable: false,
-    emptyFilterMessage: null,
-    emptyMessage: null,
-    filter: false,
-    filterBy: null,
-    filterInputAutoFocus: true,
-    filterLocale: undefined,
-    filterMatchMode: 'contains',
-    filterPlaceholder: null,
-    filterTemplate: null,
-    id: null,
-    inputId: null,
-    inputRef: null,
-    itemTemplate: null,
-    maxLength: null,
-    name: null,
-    onBlur: null,
-    onChange: null,
-    onContextMenu: null,
-    onFilter: null,
-    onFocus: null,
-    onHide: null,
-    onMouseDown: null,
-    onShow: null,
-    optionDisabled: null,
-    optionGroupChildren: null,
-    optionGroupLabel: null,
-    optionGroupTemplate: null,
-    optionLabel: null,
-    optionValue: null,
-    options: null,
-    panelClassName: null,
-    panelStyle: null,
-    placeholder: null,
-    required: false,
-    resetFilterOnHide: false,
-    scrollHeight: '200px',
-    showClear: false,
-    showFilterClear: false,
-    showOnFocus: false,
-    style: null,
-    tabIndex: null,
-    tooltip: null,
-    tooltipOptions: null,
-    transitionOptions: null,
-    value: null,
-    valueTemplate: null,
-    virtualScrollerOptions: null
-};

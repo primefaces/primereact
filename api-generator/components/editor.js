@@ -13,7 +13,7 @@ const EditorProps = [
     },
     {
         name: 'style',
-        type: 'object',
+        type: 'React.CSSProperties',
         default: 'null',
         description: 'Inline style of the container.'
     },

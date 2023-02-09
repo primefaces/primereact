@@ -3,11 +3,14 @@ import PrimeReact from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMountEffect, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, ZIndexUtils } from '../utils/Utils';
+import { ContextMenuBase } from './ContextMenuBase';
 import { ContextMenuSub } from './ContextMenuSub';
 
 export const ContextMenu = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ContextMenuBase.getProps(inProps);
+
         const [visibleState, setVisibleState] = React.useState(false);
         const [reshowState, setReshowState] = React.useState(false);
         const [resetMenuState, setResetMenuState] = React.useState(false);
@@ -172,8 +175,11 @@ export const ContextMenu = React.memo(
         }));
 
         const createContextMenu = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, ContextMenu.defaultProps);
-            const className = classNames('p-contextmenu p-component', props.className);
+            const otherProps = ContextMenuBase.getOtherProps(props);
+            const className = classNames('p-contextmenu p-component', props.className, {
+                'p-input-filled': PrimeReact.inputStyle === 'filled',
+                'p-ripple-disabled': PrimeReact.ripple === false
+            });
 
             return (
                 <CSSTransition
@@ -202,17 +208,3 @@ export const ContextMenu = React.memo(
 );
 
 ContextMenu.displayName = 'ContextMenu';
-ContextMenu.defaultProps = {
-    __TYPE: 'ContextMenu',
-    id: null,
-    model: null,
-    style: null,
-    className: null,
-    global: false,
-    autoZIndex: true,
-    baseZIndex: 0,
-    appendTo: null,
-    transitionOptions: null,
-    onShow: null,
-    onHide: null
-};

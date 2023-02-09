@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useUnmountEffect } from '../hooks/Hooks';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames } from '../utils/Utils';
+import { ChartBase } from './ChartBase';
 
 // GitHub #3059 wrapper if loaded by script tag
 const ChartJS = (function () {
@@ -12,7 +13,9 @@ const ChartJS = (function () {
 })();
 
 const PrimeReactChart = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ChartBase.getProps(inProps);
+
         const elementRef = React.useRef(null);
         const chartRef = React.useRef(null);
         const canvasRef = React.useRef(null);
@@ -33,6 +36,12 @@ const PrimeReactChart = React.memo(
             } else {
                 import('chart.js/auto').then((module) => {
                     destroyChart();
+
+                    // In case that the Chart component has been unmounted during asynchronous loading of ChartJS,
+                    // the canvasRef will not be available anymore, and no Chart should be created.
+                    if (!canvasRef.current) {
+                        return;
+                    }
 
                     if (module) {
                         if (module.default) {
@@ -72,7 +81,7 @@ const PrimeReactChart = React.memo(
             destroyChart();
         });
 
-        const otherProps = ObjectUtils.findDiffKeys(props, PrimeReactChart.defaultProps);
+        const otherProps = ChartBase.getOtherProps(props);
         const className = classNames('p-chart', props.className);
         const style = Object.assign({ width: props.width, height: props.height }, props.style);
 
@@ -86,17 +95,5 @@ const PrimeReactChart = React.memo(
 );
 
 PrimeReactChart.displayName = 'Chart';
-PrimeReactChart.defaultProps = {
-    __TYPE: 'Chart',
-    id: null,
-    type: null,
-    data: null,
-    options: null,
-    plugins: null,
-    width: null,
-    height: null,
-    style: null,
-    className: null
-};
 
 export { PrimeReactChart as Chart };

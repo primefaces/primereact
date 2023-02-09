@@ -1,285 +1,455 @@
-import React, { useState, useEffect } from 'react';
-import { FilterMatchMode, FilterOperator } from '../../components/lib/api/Api';
-import { DataTable } from '../../components/lib/datatable/DataTable';
-import { Column } from '../../components/lib/column/Column';
-import { InputText } from '../../components/lib/inputtext/InputText';
-import { Dropdown } from '../../components/lib/dropdown/Dropdown';
-import { InputNumber } from '../../components/lib/inputnumber/InputNumber';
-import { Button } from '../../components/lib/button/Button';
-import { ProgressBar } from '../../components/lib/progressbar/ProgressBar';
-import { Calendar } from '../../components/lib/calendar/Calendar';
-import { MultiSelect } from '../../components/lib/multiselect/MultiSelect';
-import { Slider } from '../../components/lib/slider/Slider';
-import { CustomerService } from '../../service/CustomerService';
-import DataTableDoc from '../../components/doc/datatable';
-import { DocActions } from '../../components/doc/common/docactions';
-import Head from 'next/head';
-import getConfig from 'next/config';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '../../components/doc/datatable/accessibilitydoc';
+import { BasicDoc } from '../../components/doc/datatable/basicdoc';
+import { ColGroupDoc } from '../../components/doc/datatable/colgroupdoc';
+import { ChooseResizableColumnsDoc } from '../../components/doc/datatable/colresize/chooseresizablecolumnsdoc';
+import { ExpandModeDoc } from '../../components/doc/datatable/colresize/expandmodedoc';
+import { FitModeDoc } from '../../components/doc/datatable/colresize/fitmodedoc';
+import { ColToggleDoc } from '../../components/doc/datatable/coltoggledoc';
+import { ContextMenuDoc } from '../../components/doc/datatable/contextmenudoc';
+import { DatatableProductsDoc } from '../../components/doc/datatable/datatableproducts';
+import { DynamicDoc } from '../../components/doc/datatable/dynamiccolumnsdoc';
+import { CellEditingDoc } from '../../components/doc/datatable/edit/celleditingdoc';
+import { CellEditWithSortAndFilterDoc } from '../../components/doc/datatable/edit/celleditwithsortandfilterdoc';
+import { ProgrammaticDoc } from '../../components/doc/datatable/edit/programmaticdoc';
+import { RowEditingDoc } from '../../components/doc/datatable/edit/roweditingdoc';
+import { ExportDoc } from '../../components/doc/datatable/export/exportdoc';
+import { ExportImportDoc } from '../../components/doc/datatable/export/importdoc';
+import { FilterMenuDoc } from '../../components/doc/datatable/filter/filtermenudoc';
+import { FilterRowDoc } from '../../components/doc/datatable/filter/filterrowdoc';
+import { FlexScrollDoc } from '../../components/doc/datatable/flexscrolldoc';
+import { GridLinesDoc } from '../../components/doc/datatable/gridlinesdoc';
+import { ImportDoc } from '../../components/doc/datatable/importdoc';
+import { LazyDoc } from '../../components/doc/datatable/lazydoc';
+import { PaginatorBasicDoc } from '../../components/doc/datatable/paginator/basicdoc';
+import { CustomPaginatorTemplateDoc } from '../../components/doc/datatable/paginator/custompaginatortemplatedoc';
+import { ReorderDoc } from '../../components/doc/datatable/reorderdoc';
+import { ResponsiveDoc } from '../../components/doc/datatable/responsivedoc';
+import { RowExpandDoc } from '../../components/doc/datatable/rowexpanddoc';
+import { ExpandableRowGroupsDoc } from '../../components/doc/datatable/rowgroup/expandablerowgroupsdoc';
+import { RowSpanGroupingDoc } from '../../components/doc/datatable/rowgroup/rowspangroupingdoc';
+import { SubHeaderGroupingDoc } from '../../components/doc/datatable/rowgroup/subheadergroupingdoc';
+import { CustomersDoc } from '../../components/doc/datatable/samplesdoc';
+import { ScrollFlexibleDoc } from '../../components/doc/datatable/scroll/flexibledoc';
+import { ScrollFrozenColumnsDoc } from '../../components/doc/datatable/scroll/frozencolumnsdoc';
+import { ScrollFrozenRowsDoc } from '../../components/doc/datatable/scroll/frozenrowsdoc';
+import { ScrollHorizontalAndVerticalWithFooterDoc } from '../../components/doc/datatable/scroll/horizontalandverticalwithfooterdoc';
+import { ScrollSubHeaderGroupingDoc } from '../../components/doc/datatable/scroll/subheadergroupingdoc';
+import { ScrollVerticalDoc } from '../../components/doc/datatable/scroll/verticaldoc';
+import { CheckboxDoc } from '../../components/doc/datatable/selection/checkboxdoc';
+import { ControlledSelectionDoc } from '../../components/doc/datatable/selection/controlledselectiondoc';
+import { EventsDoc } from '../../components/doc/datatable/selection/eventsdoc';
+import { MultipleDoc } from '../../components/doc/datatable/selection/multipledoc';
+import { RadioButtonDoc } from '../../components/doc/datatable/selection/radiobuttondoc';
+import { SingleDoc } from '../../components/doc/datatable/selection/singledoc';
+import { SizeDoc } from '../../components/doc/datatable/sizedoc';
+import { MultipleColumnsDoc } from '../../components/doc/datatable/sort/multiplecolumnsdoc';
+import { PresortDoc } from '../../components/doc/datatable/sort/presortdoc';
+import { RemovableSortDoc } from '../../components/doc/datatable/sort/removablesortdoc';
+import { SingleColumnDoc } from '../../components/doc/datatable/sort/singlecolumndoc';
+import { SortableDisabledDoc } from '../../components/doc/datatable/sort/sortabledisableddoc';
+import { CustomStorageDoc } from '../../components/doc/datatable/state/customstoragedoc';
+import { LocalStorageDoc } from '../../components/doc/datatable/state/localdoc';
+import { SessionStorageDoc } from '../../components/doc/datatable/state/sessionstoragedoc';
+import { StripedDoc } from '../../components/doc/datatable/stripeddoc';
+import { StyledDataTableDoc } from '../../components/doc/datatable/styleddatatabledoc';
+import { StyleDoc } from '../../components/doc/datatable/styledoc';
+import { TemplateDoc } from '../../components/doc/datatable/templatedoc';
+import { LazyLoadingFromRemoteDataSourceDoc } from '../../components/doc/datatable/virtualscroll/lazyloadfromremotedatadoc';
+import { PreloadedDataDoc } from '../../components/doc/datatable/virtualscroll/preloadeddatadoc';
 
 const DataTableDemo = () => {
-    const [customers, setCustomers] = useState(null);
-    const [selectedCustomers, setSelectedCustomers] = useState(null);
-    const [filters, setFilters] = useState({
-        global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-        name: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
-        'country.name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
-        representative: { value: null, matchMode: FilterMatchMode.IN },
-        date: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.DATE_IS }] },
-        balance: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
-        status: { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
-        activity: { value: null, matchMode: FilterMatchMode.BETWEEN }
-    });
-    const [globalFilterValue, setGlobalFilterValue] = useState('');
-    const [loading, setLoading] = useState(true);
-    const representatives = [
-        { name: 'Amy Elsner', image: 'amyelsner.png' },
-        { name: 'Anna Fali', image: 'annafali.png' },
-        { name: 'Asiya Javayant', image: 'asiyajavayant.png' },
-        { name: 'Bernardo Dominic', image: 'bernardodominic.png' },
-        { name: 'Elwin Sharvill', image: 'elwinsharvill.png' },
-        { name: 'Ioni Bowcher', image: 'ionibowcher.png' },
-        { name: 'Ivan Magalhaes', image: 'ivanmagalhaes.png' },
-        { name: 'Onyama Limba', image: 'onyamalimba.png' },
-        { name: 'Stephen Shaw', image: 'stephenshaw.png' },
-        { name: 'XuXue Feng', image: 'xuxuefeng.png' }
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'dynamiccolsdoc',
+            label: 'Dynamic Columns',
+            component: DynamicDoc
+        },
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'size',
+            label: 'Size',
+            component: SizeDoc
+        },
+        {
+            id: 'gridlines',
+            label: 'GridLines',
+            component: GridLinesDoc
+        },
+        {
+            id: 'striped',
+            label: 'Striped',
+            component: StripedDoc
+        },
+        {
+            id: 'sort',
+            label: 'Sort',
+            description: 'Enabling sortable property on a column is enough to make a column sortable. Multiple column sorting is enabled using sortMode property and used with metaKey.',
+            children: [
+                {
+                    id: 'singlecolumn',
+                    label: 'Single Column',
+                    component: SingleColumnDoc
+                },
+                {
+                    id: 'multiplecolumns',
+                    label: 'Multiple Columns',
+                    component: MultipleColumnsDoc
+                },
+                {
+                    id: 'presort',
+                    label: 'Presort',
+                    component: PresortDoc
+                },
+                {
+                    id: 'removablesort',
+                    label: 'Removable Sort',
+                    component: RemovableSortDoc
+                },
+                {
+                    id: 'sortabledisabled',
+                    label: 'Sortable Disabled',
+                    component: SortableDisabledDoc
+                }
+            ]
+        },
+        {
+            id: 'paginator',
+            label: 'Paginator',
+            description: 'Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the number of page links to display.',
+            children: [
+                {
+                    id: 'sortbasic',
+                    label: 'Basic',
+                    component: PaginatorBasicDoc
+                },
+                {
+                    id: 'custompaginatortemplate',
+                    label: 'Custom Paginator Template',
+                    component: CustomPaginatorTemplateDoc
+                }
+            ]
+        },
+        {
+            id: 'filter',
+            label: 'Filter',
+            description: 'Filtering feature provides advanced and flexible options to query the data.',
+            children: [
+                {
+                    id: 'filtermenu',
+                    label: 'Filter Menu',
+                    component: FilterMenuDoc
+                },
+                {
+                    id: 'filterrow',
+                    label: 'Filter Row',
+                    component: FilterRowDoc
+                }
+            ]
+        },
+        {
+            id: 'selection',
+            label: 'Selection',
+            description:
+                'DataTable provides single, multiple, radiobutton and checkbox selection modes. Selected rows or cells are bound to the selection property and onRowSelect-onRowUnselect/onCellSelect-onCellUnselect events are provided as optional callbacks. In addition built-in radio button and checkbox based selections are available as alternatives.',
+            children: [
+                {
+                    id: 'singleselection',
+                    label: 'Single',
+                    component: SingleDoc
+                },
+                {
+                    id: 'multipleselection',
+                    label: 'Multiple',
+                    component: MultipleDoc
+                },
+                {
+                    id: 'eventsselection',
+                    label: 'Events',
+                    component: EventsDoc
+                },
+                {
+                    id: 'radiobuttonselection',
+                    label: 'RadioButton',
+                    component: RadioButtonDoc
+                },
+                {
+                    id: 'checkboxselection',
+                    label: 'Checkbox',
+                    component: CheckboxDoc
+                },
+                {
+                    id: 'controlledselectiondoc',
+                    label: 'Controlled Selection',
+                    component: ControlledSelectionDoc
+                }
+            ]
+        },
+        {
+            id: 'edit',
+            label: 'Edit',
+            description: 'Cell and Row editing provides a rapid and user friendly way to manipulate data.',
+            children: [
+                {
+                    id: 'cellediting',
+                    label: 'Cell Editing',
+                    component: CellEditingDoc
+                },
+                {
+                    id: 'rowediting',
+                    label: 'Row Editing',
+                    component: RowEditingDoc
+                },
+                {
+                    id: 'programmatic',
+                    label: 'Programmatic',
+                    component: ProgrammaticDoc
+                },
+                {
+                    id: 'celleditwithsortandfilterDoc',
+                    label: 'Cell Editing with Sorting and Filter',
+                    component: CellEditWithSortAndFilterDoc
+                }
+            ]
+        },
+        {
+            id: 'lazy',
+            label: 'Lazy',
+            component: LazyDoc
+        },
+        {
+            id: 'scroll',
+            label: 'Scroll',
+            description: 'Data scrolling with fixed header is available horizontally, vertically or both. Certain columns and rows can be frozen as well.',
+            children: [
+                {
+                    id: 'vertical',
+                    label: 'Vertical',
+                    component: ScrollVerticalDoc
+                },
+                {
+                    id: 'scrollflexible',
+                    label: 'Flexible',
+                    component: ScrollFlexibleDoc
+                },
+                {
+                    id: 'scrollhorizontalandverticalwithfooter',
+                    label: 'Horizontal and Vertical with Footer',
+                    component: ScrollHorizontalAndVerticalWithFooterDoc
+                },
+                {
+                    id: 'scrollfrozenrows',
+                    label: 'Frozen Rows',
+                    component: ScrollFrozenRowsDoc
+                },
+                {
+                    id: 'scrollfrozencolumns',
+                    label: 'Frozen Columns',
+                    component: ScrollFrozenColumnsDoc
+                },
+                {
+                    id: 'scrollsubheadergrouping',
+                    label: 'SubHeader Grouping',
+                    component: ScrollSubHeaderGroupingDoc
+                }
+            ]
+        },
+        {
+            id: 'flexscroll',
+            label: 'Flex Scroll',
+            component: FlexScrollDoc
+        },
+        {
+            id: 'virtualscroll',
+            label: 'Virtual Scroll',
+            description: 'VirtualScroller is a performant approach to handle huge data efficiently.',
+            children: [
+                {
+                    id: 'preload',
+                    label: 'Preloaded Data (100000 Rows)',
+                    component: PreloadedDataDoc
+                },
+                {
+                    id: 'lazyloading',
+                    label: 'Lazy Loading from a Remote Datasource (100000 Rows)',
+                    component: LazyLoadingFromRemoteDataSourceDoc
+                }
+            ]
+        },
+        {
+            id: 'colgroup',
+            label: 'ColGroup',
+            component: ColGroupDoc
+        },
+        {
+            id: 'rowgroup',
+            label: 'RowGroup',
+            description: 'Rows can either be grouped by a separate grouping row or using rowspan.',
+            children: [
+                {
+                    id: 'subheadergrouping',
+                    label: 'Subheader Grouping',
+                    component: SubHeaderGroupingDoc
+                },
+                {
+                    id: 'expandablerowgroups',
+                    label: 'Expandable Row Groups',
+                    component: ExpandableRowGroupsDoc
+                },
+                {
+                    id: 'rowspangrouping',
+                    label: 'RowSpan Grouping',
+                    component: RowSpanGroupingDoc
+                }
+            ]
+        },
+        {
+            id: 'rowexpand',
+            label: 'Expand',
+            component: RowExpandDoc
+        },
+        {
+            id: 'responsive',
+            label: 'Responsive',
+            component: ResponsiveDoc
+        },
+        {
+            id: 'styleddatatable',
+            label: 'Styled DataTable',
+            component: StyledDataTableDoc
+        },
+        {
+            id: 'colresize',
+            label: 'ColResize',
+            description:
+                'Columns can be resized using drag drop by setting the resizableColumns to true. There are two resize modes; "fit" and "expand". Fit is the default one and the overall table width does not change when a column is resized. In "expand" mode, table width also changes along with the column width. onColumnResize is a callback that passes the resized column header as a parameter.',
+            children: [
+                {
+                    id: 'fitmode',
+                    label: 'Fit Mode',
+                    component: FitModeDoc
+                },
+                {
+                    id: 'expandmode',
+                    label: 'Expand Mode',
+                    component: ExpandModeDoc
+                },
+                {
+                    id: 'chooseresizablecolumns',
+                    label: 'Choose Resizable Columns',
+                    component: ChooseResizableColumnsDoc
+                }
+            ]
+        },
+        {
+            id: 'reorder',
+            label: 'Reorder',
+            component: ReorderDoc
+        },
+        {
+            id: 'coltoggle',
+            label: 'ColToggle',
+            component: ColToggleDoc
+        },
+        {
+            id: 'datatableexport',
+            label: 'Import/Export',
+            description: 'DataTable can export its data to various formats',
+            children: [
+                {
+                    id: 'importdoc',
+                    label: 'Import',
+                    component: ExportImportDoc
+                },
+                {
+                    id: 'export',
+                    label: 'Export',
+                    component: ExportDoc
+                }
+            ]
+        },
+        {
+            id: 'contextmenu',
+            label: 'Context Menu',
+            component: ContextMenuDoc
+        },
+        {
+            id: 'state',
+            label: 'State',
+            description: 'Stateful table allows keeping the state such as page, sort and filtering either at local storage or session storage so that when the page is visited again, table would render the data using its last settings.',
+            children: [
+                {
+                    id: 'sessionstorage',
+                    label: 'Session Storage',
+                    component: SessionStorageDoc
+                },
+                {
+                    id: 'localstorage',
+                    label: 'Local Storage',
+                    component: LocalStorageDoc
+                },
+                {
+                    id: 'customstorage',
+                    label: 'Custom Storage',
+                    component: CustomStorageDoc
+                }
+            ]
+        },
+        {
+            id: 'samples',
+            label: 'Samples',
+            children: [
+                {
+                    id: 'customers',
+                    label: 'Customers',
+                    component: CustomersDoc
+                },
+                {
+                    id: 'dtproducts',
+                    label: 'Products',
+                    component: DatatableProductsDoc
+                }
+            ]
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
     ];
 
-    const statuses = ['unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal'];
-
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
-    const customerService = new CustomerService();
-
-    useEffect(() => {
-        customerService.getCustomersLarge().then((data) => {
-            setCustomers(getCustomers(data));
-            setLoading(false);
-        });
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const getCustomers = (data) => {
-        return [...(data || [])].map((d) => {
-            d.date = new Date(d.date);
-
-            return d;
-        });
-    };
-
-    const formatDate = (value) => {
-        return value.toLocaleDateString('en-US', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric'
-        });
-    };
-
-    const formatCurrency = (value) => {
-        return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-    };
-
-    const onGlobalFilterChange = (e) => {
-        const value = e.target.value;
-        let _filters = { ...filters };
-
-        _filters['global'].value = value;
-
-        setFilters(_filters);
-        setGlobalFilterValue(value);
-    };
-
-    const renderHeader = () => {
-        return (
-            <div className="flex justify-content-between align-items-center">
-                <h5 className="m-0">Customers</h5>
-                <span className="p-input-icon-left">
-                    <i className="pi pi-search" />
-                    <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Keyword Search" />
-                </span>
-            </div>
-        );
-    };
-
-    const countryBodyTemplate = (rowData) => {
-        return (
-            <React.Fragment>
-                <img
-                    alt="flag"
-                    src={`${contextPath}/images/flag/flag_placeholder.png`}
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
-                    className={`flag flag-${rowData.country.code}`}
-                    width={30}
-                />
-                <span className="image-text">{rowData.country.name}</span>
-            </React.Fragment>
-        );
-    };
-
-    const representativeBodyTemplate = (rowData) => {
-        const representative = rowData.representative;
-
-        return (
-            <React.Fragment>
-                <img
-                    alt={representative.name}
-                    src={`${contextPath}/images/avatar/${representative.image}`}
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
-                    width={32}
-                    style={{ verticalAlign: 'middle' }}
-                />
-                <span className="image-text">{representative.name}</span>
-            </React.Fragment>
-        );
-    };
-
-    const representativeFilterTemplate = (options) => {
-        return (
-            <React.Fragment>
-                <div className="mb-3 font-bold">Agent Picker</div>
-                <MultiSelect value={options.value} options={representatives} itemTemplate={representativesItemTemplate} onChange={(e) => options.filterCallback(e.value)} optionLabel="name" placeholder="Any" className="p-column-filter" />
-            </React.Fragment>
-        );
-    };
-
-    const representativesItemTemplate = (option) => {
-        return (
-            <div className="p-multiselect-representative-option">
-                <img alt={option.name} src={`${contextPath}/images/avatar/${option.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} width={32} style={{ verticalAlign: 'middle' }} />
-                <span className="image-text">{option.name}</span>
-            </div>
-        );
-    };
-
-    const dateBodyTemplate = (rowData) => {
-        return formatDate(rowData.date);
-    };
-
-    const dateFilterTemplate = (options) => {
-        return <Calendar value={options.value} onChange={(e) => options.filterCallback(e.value, options.index)} dateFormat="mm/dd/yy" placeholder="mm/dd/yyyy" mask="99/99/9999" />;
-    };
-
-    const balanceBodyTemplate = (rowData) => {
-        return formatCurrency(rowData.balance);
-    };
-
-    const balanceFilterTemplate = (options) => {
-        return <InputNumber value={options.value} onChange={(e) => options.filterCallback(e.value, options.index)} mode="currency" currency="USD" locale="en-US" />;
-    };
-
-    const statusBodyTemplate = (rowData) => {
-        return <span className={`customer-badge status-${rowData.status}`}>{rowData.status}</span>;
-    };
-
-    const statusFilterTemplate = (options) => {
-        return <Dropdown value={options.value} options={statuses} onChange={(e) => options.filterCallback(e.value, options.index)} itemTemplate={statusItemTemplate} placeholder="Select a Status" className="p-column-filter" showClear />;
-    };
-
-    const statusItemTemplate = (option) => {
-        return <span className={`customer-badge status-${option}`}>{option}</span>;
-    };
-
-    const activityBodyTemplate = (rowData) => {
-        return <ProgressBar value={rowData.activity} showValue={false}></ProgressBar>;
-    };
-
-    const activityFilterTemplate = (options) => {
-        return (
-            <>
-                <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="m-3"></Slider>
-                <div className="flex align-items-center justify-content-between px-2">
-                    <span>{options.value ? options.value[0] : 0}</span>
-                    <span>{options.value ? options.value[1] : 100}</span>
-                </div>
-            </>
-        );
-    };
-
-    const representativeRowFilterTemplate = (options) => {
-        return (
-            <MultiSelect
-                value={options.value}
-                options={representatives}
-                itemTemplate={representativesItemTemplate}
-                onChange={(e) => options.filterApplyCallback(e.value)}
-                optionLabel="name"
-                placeholder="Any"
-                className="p-column-filter"
-                maxSelectedLabels={1}
-            />
-        );
-    };
-
-    const statusRowFilterTemplate = (options) => {
-        return <Dropdown value={options.value} options={statuses} onChange={(e) => options.filterApplyCallback(e.value)} itemTemplate={statusItemTemplate} placeholder="Select a Status" className="p-column-filter" showClear />;
-    };
-
-    const actionBodyTemplate = () => {
-        return <Button type="button" icon="pi pi-cog"></Button>;
-    };
-
-    const header = renderHeader();
-
     return (
-        <div>
-            <Head>
-                <title>React Table Component</title>
-                <meta name="description" content="DataTable displays data in tabular format" />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>DataTable</h1>
-                    <p>DataTable displays data in tabular format.</p>
-                </div>
-
-                <DocActions github="datatable/index.js" />
-            </div>
-
-            <div className="content-section implementation datatable-doc-demo">
-                <div className="card">
-                    <DataTable
-                        value={customers}
-                        paginator
-                        className="p-datatable-customers"
-                        header={header}
-                        rows={10}
-                        paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                        rowsPerPageOptions={[10, 25, 50]}
-                        dataKey="id"
-                        rowHover
-                        selection={selectedCustomers}
-                        onSelectionChange={(e) => setSelectedCustomers(e.value)}
-                        filters={filters}
-                        filterDisplay="menu"
-                        loading={loading}
-                        responsiveLayout="scroll"
-                        globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']}
-                        emptyMessage="No customers found."
-                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                    >
-                        <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
-                        <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name" style={{ minWidth: '14rem' }} />
-                        <Column field="country.name" header="Country" sortable filterField="country.name" style={{ minWidth: '14rem' }} body={countryBodyTemplate} filter filterPlaceholder="Search by country" />
-                        <Column
-                            header="Agent"
-                            sortable
-                            sortField="representative.name"
-                            filterField="representative"
-                            showFilterMatchModes={false}
-                            filterMenuStyle={{ width: '14rem' }}
-                            style={{ minWidth: '14rem' }}
-                            body={representativeBodyTemplate}
-                            filter
-                            filterElement={representativeFilterTemplate}
-                        />
-                        <Column field="date" header="Date" sortable filterField="date" dataType="date" style={{ minWidth: '8rem' }} body={dateBodyTemplate} filter filterElement={dateFilterTemplate} />
-                        <Column field="balance" header="Balance" sortable dataType="numeric" style={{ minWidth: '8rem' }} body={balanceBodyTemplate} filter filterElement={balanceFilterTemplate} />
-                        <Column field="status" header="Status" sortable filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '10rem' }} body={statusBodyTemplate} filter filterElement={statusFilterTemplate} />
-                        <Column field="activity" header="Activity" sortable showFilterMatchModes={false} style={{ minWidth: '10rem' }} body={activityBodyTemplate} filter filterElement={activityFilterTemplate} />
-                        <Column headerStyle={{ width: '4rem', textAlign: 'center' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={actionBodyTemplate} />
-                    </DataTable>
-                </div>
-            </div>
-
-            <DataTableDoc></DataTableDoc>
-        </div>
+        <DocComponent
+            title="React Table Component"
+            header="DataTable"
+            description="DataTable displays data in tabular format."
+            componentDocs={docs}
+            apiDocs={[
+                { name: 'DataTable', pathname: '/modules/datatable.html' },
+                { name: 'Column', pathname: '/modules/column.html' },
+                { name: 'Row', pathname: '/modules/row.html' },
+                { name: 'ColumnGroup', pathname: '/modules/columngroup.html' }
+            ]}
+        />
     );
 };
 

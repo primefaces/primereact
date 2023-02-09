@@ -3,8 +3,11 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { PanelBase } from './PanelBase';
 
-export const Panel = React.forwardRef((props, ref) => {
+export const Panel = React.forwardRef((inProps, ref) => {
+    const props = PanelBase.getProps(inProps);
+
     const [idState, setIdState] = React.useState(props.id);
     const [collapsedState, setCollapsedState] = React.useState(props.collapsed);
     const elementRef = React.useRef(ref);
@@ -132,7 +135,7 @@ export const Panel = React.forwardRef((props, ref) => {
         );
     };
 
-    const otherProps = ObjectUtils.findDiffKeys(props, Panel.defaultProps);
+    const otherProps = PanelBase.getOtherProps(props);
     const className = classNames(
         'p-panel p-component',
         {
@@ -152,20 +155,3 @@ export const Panel = React.forwardRef((props, ref) => {
 });
 
 Panel.displayName = 'Panel';
-Panel.defaultProps = {
-    __TYPE: 'Panel',
-    id: null,
-    header: null,
-    headerTemplate: null,
-    toggleable: null,
-    style: null,
-    className: null,
-    collapsed: null,
-    expandIcon: 'pi pi-plus',
-    collapseIcon: 'pi pi-minus',
-    icons: null,
-    transitionOptions: null,
-    onExpand: null,
-    onCollapse: null,
-    onToggle: null
-};

@@ -1,48 +1,52 @@
-import getConfig from 'next/config';
-import Head from 'next/head';
-import Link from 'next/link';
-import React from 'react';
-import { DocActions } from '../../components/doc/common/docactions';
-import ImageDoc from '../../components/doc/image';
-import { Image } from '../../components/lib/image/Image';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '../../components/doc/image/accessibilitydoc';
+import { BasicDoc } from '../../components/doc/image/basicdoc';
+import { ImportDoc } from '../../components/doc/image/importdoc';
+import { PreviewDoc } from '../../components/doc/image/previewdoc';
+import { StyleDoc } from '../../components/doc/image/styledoc';
+import { TemplateDoc } from '../../components/doc/image/templatedoc';
+import { ThumbnailDoc } from '../../components/doc/image/thumbnaildoc';
 
 const ImageDemo = () => {
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'preview',
+            label: 'Preview',
+            component: PreviewDoc
+        },
+        {
+            id: 'thumbnail',
+            label: 'Thumbnail',
+            component: ThumbnailDoc
+        },
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Image Component</title>
-                <meta name="description" content="Displays an image with preview and tranformation options." />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <div className="feature-intro">
-                        <h1>Image</h1>
-                        <p>
-                            Displays an image with preview and tranformation options. For multiple image, see <Link href="/galleria">Galleria</Link>.
-                        </p>
-                    </div>
-                </div>
-                <DocActions github="image/index.js" />
-            </div>
-
-            <div className="content-section implementation">
-                <div className="card">
-                    <h5>Basic</h5>
-                    <Image src={`${contextPath}/images/galleria/galleria7.jpg`} alt="Image" width="250" />
-
-                    <h5>Preview and Zoom</h5>
-                    <Image src={`${contextPath}/images/galleria/galleria12.jpg`} alt="Image" width="250" preview />
-
-                    <h5>Thumbnail</h5>
-                    <Image src={`${contextPath}/images/galleria/galleria14s.jpg`} zoomSrc={`${contextPath}/images/galleria/galleria14.jpg`} alt="Image" width="80" height="60" preview />
-                </div>
-            </div>
-
-            <ImageDoc></ImageDoc>
-        </div>
-    );
+    return <DocComponent title="React Image Component" header="Image" description="Displays a single image with preview and tranformation options." componentDocs={docs} apiDocs={[{ name: 'Image', pathname: '/modules/image.html' }]} />;
 };
 
 export default ImageDemo;

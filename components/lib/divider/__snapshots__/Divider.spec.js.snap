@@ -1,0 +1,118 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Divider default 1`] = `
+<div>
+  <div
+    class="p-divider p-component p-divider-horizontal p-divider-solid p-divider-left"
+    role="separator"
+  >
+    <div
+      class="p-divider-content"
+    />
+  </div>
+</div>
+`;
+
+exports[`Divider horizontal center 1`] = `
+<div>
+  <div
+    class="p-divider p-component p-divider-horizontal p-divider-solid p-divider-center"
+    role="separator"
+  >
+    <div
+      class="p-divider-content"
+    />
+  </div>
+</div>
+`;
+
+exports[`Divider horizontal left 1`] = `
+<div>
+  <div
+    class="p-divider p-component p-divider-horizontal p-divider-solid p-divider-left"
+    role="separator"
+  >
+    <div
+      class="p-divider-content"
+    />
+  </div>
+</div>
+`;
+
+exports[`Divider horizontal right 1`] = `
+<div>
+  <div
+    class="p-divider p-component p-divider-horizontal p-divider-solid p-divider-right"
+    role="separator"
+  >
+    <div
+      class="p-divider-content"
+    />
+  </div>
+</div>
+`;
+
+exports[`Divider type dashed 1`] = `
+<div>
+  <div
+    class="p-divider p-component p-divider-horizontal p-divider-dashed p-divider-left"
+    role="separator"
+  >
+    <div
+      class="p-divider-content"
+    />
+  </div>
+</div>
+`;
+
+exports[`Divider type dotted 1`] = `
+<div>
+  <div
+    class="p-divider p-component p-divider-horizontal p-divider-dotted p-divider-left"
+    role="separator"
+  >
+    <div
+      class="p-divider-content"
+    />
+  </div>
+</div>
+`;
+
+exports[`Divider vertical bottom 1`] = `
+<div>
+  <div
+    class="p-divider p-component p-divider-vertical p-divider-solid p-divider-bottom"
+    role="separator"
+  >
+    <div
+      class="p-divider-content"
+    />
+  </div>
+</div>
+`;
+
+exports[`Divider vertical center 1`] = `
+<div>
+  <div
+    class="p-divider p-component p-divider-vertical p-divider-solid p-divider-center"
+    role="separator"
+  >
+    <div
+      class="p-divider-content"
+    />
+  </div>
+</div>
+`;
+
+exports[`Divider vertical top 1`] = `
+<div>
+  <div
+    class="p-divider p-component p-divider-vertical p-divider-solid p-divider-top"
+    role="separator"
+  >
+    <div
+      class="p-divider-content"
+    />
+  </div>
+</div>
+`;

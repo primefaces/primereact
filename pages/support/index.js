@@ -1,32 +1,29 @@
-import getConfig from 'next/config';
 import React from 'react';
 
 const SupportPage = () => {
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
-
     return (
         <div className="content-section">
-            <img alt="PRO Support" src={`${contextPath}/images/support/support-header.png`} className="w-full block mb-5" style={{ borderRadius: '20px' }} />
+            <img alt="PRO Support" src="https://primefaces.org/cdn/primereact/images/support/support-header.png" className="w-full block mb-5" style={{ borderRadius: '20px' }} />
 
             <div className="flex flex-column xl:flex-row mb-5 gap-5">
                 <div className="card xl:w-3 m-0 relative overflow-hidden">
                     <i className="pi pi-github absolute text-200" style={{ bottom: '-50px', right: '-50px', fontSize: '200px', transform: 'rotateX(45deg) rotateY(0deg) rotateZ(-45deg)' }}></i>
-                    <div className="text-xl text-900 font-semibold mb-3 relative">Community Support</div>
-                    <p className="m-0 line-height-3 relative">
-                        <a href="https://forum.primefaces.org/viewforum.php?f=57" className="font-bold hover:underline text-primary">
+                    <div className="text-2xl text-900 font-semibold mb-3 relative">Community Support</div>
+                    <p className="m-0 line-height-3 relative text-lg">
+                        <a href="https://forum.primefaces.org/viewforum.php?f=57" className="text-primary hover:underline font-semibold">
                             Forum
                         </a>{' '}
                         and{' '}
-                        <a href="https://discord.gg/gzKFYnpmCY" className="font-bold hover:underline text-primary">
+                        <a href="https://discord.gg/gzKFYnpmCY" className="text-primary hover:underline font-semibold">
                             Discord
                         </a>{' '}
                         are where the community users gather to seek support, post topics and discuss the technology. GitHub issue tracker is the channel where community users can create tickets however PrimeTek does not guarantee a response time
                         although they are monitored and maintained by our staff. If you need to secure our response within 1 business day, you may consider PRO support instead.
                     </p>
                 </div>
-                <div className="card m-0 xl:w-9 text-white bg-cover" style={{ backgroundImage: `url(${contextPath}/images/support/card-pro.jpg)` }}>
-                    <div className="text-xl font-semibold mb-3">PRO Support</div>
-                    <p className="m-0 line-height-3">
+                <div className="card m-0 xl:w-9 text-white bg-cover" style={{ backgroundImage: `url(/images/support/card-pro.jpg)` }}>
+                    <div className="text-2xl font-semibold mb-3">PRO Support</div>
+                    <p className="m-0 line-height-3 text-lg">
                         With PRO support, it's easy to support, tune and add features to PrimeReact as if it were an in- house library. PRO is a term based commercial support service. With the exclusive services of PRO account, it is no longer needed
                         to post questions in community forum and issue reports to community issue tracker at GitHub. A JIRA account will be created to the customer by PrimeTek, this account can be shared between any number of users within your
                         organization.
@@ -36,12 +33,12 @@ const SupportPage = () => {
             <div className="grid mb-5">
                 <div className="col-12 md:col-6 xl:col-3">
                     <div className="card m-0 flex-1 h-full">
-                        <div className="text-xl text-900 font-semibold mb-3">Free</div>
-                        <p className="m-0 line-height-3 mb-3 text-secondary">Community Support</p>
-                        <a href="https://discord.com/invite/gzKFYnpmCY" className="flex align-items-center justify-content-center border-1 border-indigo-500 border-round block p-3 mb-4 text-indigo-500 font-medium hover:surface-hover">
+                        <div className="text-2xl text-900 font-semibold mb-3">Free</div>
+                        <p className="m-0 line-height-3 mb-3 text-secondary text-lg">Community Support</p>
+                        <a href="https://discord.com/invite/gzKFYnpmCY" className="flex align-items-center justify-content-center border-1 border-indigo-500 border-round block p-3 mb-4 text-indigo-500 font-medium hover:surface-hover text-lg">
                             Join Now
                         </a>
-                        <ul className="list-none p-0 m-0">
+                        <ul className="list-none p-0 m-0 text-lg">
                             <li className="flex align-items-center mb-3">
                                 <i className="pi pi-check-circle mr-2 text-green-500"></i>
                                 <span>GitHub Issue Tracker</span>
@@ -59,15 +56,15 @@ const SupportPage = () => {
                 </div>
                 <div className="col-12 md:col-6 xl:col-3">
                     <div className="card m-0 flex-1 h-full">
-                        <div className="text-xl text-900 font-semibold mb-3">Standard</div>
-                        <p className="m-0 line-height-3 mb-3 text-secondary">1 Year Subscription</p>
+                        <div className="text-2xl text-900 font-semibold mb-3">Standard</div>
+                        <p className="m-0 line-height-3 mb-3 text-secondary text-lg">1 Year Subscription</p>
                         <a
                             href="mailto:primereact@primetek.com.tr"
-                            className="flex align-items-center justify-content-center border-1 bg-indigo-500 border-round block p-3 mb-4 hover:bg-indigo-600 transition-all transition-duration-300 text-white font-medium"
+                            className="flex align-items-center justify-content-center border-1 bg-indigo-500 border-round block p-3 mb-4 hover:bg-indigo-600 transition-all transition-duration-300 text-white font-medium text-lg"
                         >
                             Get a Quote
                         </a>
-                        <ul className="list-none p-0 m-0">
+                        <ul className="list-none p-0 m-0 text-lg">
                             <li className="flex align-items-center mb-3">
                                 <i className="pi pi-check-circle mr-2 text-green-500"></i>
                                 <span>Access to Private JIRA</span>
@@ -91,15 +88,15 @@ const SupportPage = () => {
                 </div>
                 <div className="col-12 md:col-6 xl:col-3">
                     <div className="card m-0 flex-1 h-full">
-                        <div className="text-xl text-900 font-semibold mb-3">Premium</div>
-                        <p className="m-0 line-height-3 mb-3 text-secondary">1 Year Subscription</p>
+                        <div className="text-2xl text-900 font-semibold mb-3">Premium</div>
+                        <p className="m-0 line-height-3 mb-3 text-secondary text-lg">1 Year Subscription</p>
                         <a
                             href="mailto:primereact@primetek.com.tr"
-                            className="flex align-items-center justify-content-center border-1 bg-indigo-500 border-round block p-3 mb-4 hover:bg-indigo-600 transition-all transition-duration-300 text-white font-medium"
+                            className="flex align-items-center justify-content-center border-1 bg-indigo-500 border-round block p-3 mb-4 hover:bg-indigo-600 transition-all transition-duration-300 text-white font-medium text-lg"
                         >
                             Get a Quote
                         </a>
-                        <ul className="list-none p-0 m-0">
+                        <ul className="list-none p-0 m-0 text-lg">
                             <li className="flex align-items-center mb-3">
                                 <i className="pi pi-check-circle mr-2 text-green-500"></i>
                                 <span>Access to Private JIRA</span>
@@ -127,15 +124,15 @@ const SupportPage = () => {
                 </div>
                 <div className="col-12 md:col-6 xl:col-3">
                     <div className="card m-0 flex-1 border-2 border-indigo-500 h-full">
-                        <div className="text-xl text-900 font-semibold mb-3">Enterprise</div>
-                        <p className="m-0 line-height-3 mb-3 text-secondary">1 Year Subscription</p>
+                        <div className="text-2xl text-900 font-semibold mb-3">Enterprise</div>
+                        <p className="m-0 line-height-3 mb-3 text-secondary text-lg">1 Year Subscription</p>
                         <a
                             href="mailto:primereact@primetek.com.tr"
-                            className="flex align-items-center justify-content-center border-1 bg-indigo-500 border-round block p-3 mb-4 hover:bg-indigo-600 transition-all transition-duration-300 text-white font-medium"
+                            className="flex align-items-center justify-content-center border-1 bg-indigo-500 border-round block p-3 mb-4 hover:bg-indigo-600 transition-all transition-duration-300 text-white font-medium text-lg"
                         >
                             Get a Quote
                         </a>
-                        <ul className="list-none p-0 m-0">
+                        <ul className="list-none p-0 m-0 text-lg">
                             <li className="flex align-items-center mb-3">
                                 <i className="pi pi-check-circle mr-2 text-green-500"></i>
                                 <span>Access to Private JIRA</span>
@@ -176,31 +173,31 @@ const SupportPage = () => {
             </div>
 
             <div className="card mb-5">
-                <div className="text-xl text-900 font-semibold mb-3">Enhancement Credits</div>
-                <p className="m-0 line-height-3 mb-5 text-secondary">
+                <div className="text-2xl text-900 font-semibold mb-3">Enhancement Credits</div>
+                <p className="m-0 line-height-3 mb-5 text-secondary text-lg">
                     New features and enhancement requests are not available in core services and provided via a credit based model instead named PrimeCredit. When you have a feature request, we offer an initial estimate in terms of credits and once
                     this estimate is confirmed by you then implementation will be delivered by our team within an estimated timeframe.
                 </p>
 
                 <div className="flex flex-column md:flex-row gap-5">
                     <div className="flex-1">
-                        <div className="text-900 font-semibold mb-2">New Components</div>
-                        <p className="m-0 line-height-3 mb-3 text-secondary">Brand new components you need that are not already available in the existing UI suite.</p>
+                        <div className="text-900 font-semibold mb-2 text-xl">New Components</div>
+                        <p className="m-0 line-height-3 mb-3 text-secondary text-lg">Brand new components you need that are not already available in the existing UI suite.</p>
                     </div>
                     <div className="flex-1">
-                        <div className="text-900  font-semibold mb-2">New Features</div>
-                        <p className="m-0 line-height-3 mb-3 text-secondary">Enhancements to the components you need such as new properties, events and templating.</p>
+                        <div className="text-900  font-semibold mb-2 text-xl">New Features</div>
+                        <p className="m-0 line-height-3 mb-3 text-secondary text-lg">Enhancements to the components you need such as new properties, events and templating.</p>
                     </div>
                     <div className="flex-1">
-                        <div className="text-900  font-semibold mb-2">UX Customization</div>
-                        <p className="m-0 line-height-3 mb-3 text-secondary">Behavioral changes to the existing components.</p>
+                        <div className="text-900  font-semibold mb-2 text-xl">UX Customization</div>
+                        <p className="m-0 line-height-3 mb-3 text-secondary text-lg">Behavioral changes to the existing components.</p>
                     </div>
                 </div>
             </div>
 
             <div className="card m-0">
-                <div className="text-xl text-900 font-semibold mb-3">Frequently Asked Questions</div>
-                <div className="grid">
+                <div className="text-2xl text-900 font-semibold mb-3">Frequently Asked Questions</div>
+                <div className="grid text-lg">
                     <div className="col-12 lg:col-4">
                         <div className="text-900 line-height-3 mb-2 font-medium">What are the conditions for support service to end?</div>
                         <p className="mt-0 mb-6 p-0 line-height-3 text-secondary">Support service ends either after 1 year end for all plans or when all tickets are used in Standard or Premium plans.</p>

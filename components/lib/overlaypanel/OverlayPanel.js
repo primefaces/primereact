@@ -5,9 +5,12 @@ import { useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/H
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { OverlayPanelBase } from './OverlayPanelBase';
 
-export const OverlayPanel = React.forwardRef((props, ref) => {
+export const OverlayPanel = React.forwardRef((inProps, ref) => {
+    const props = OverlayPanelBase.getProps(inProps);
+
     const [visibleState, setVisibleState] = React.useState(false);
     const attributeSelector = React.useRef('');
     const overlayRef = React.useRef(null);
@@ -200,8 +203,11 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
     };
 
     const createElement = () => {
-        const otherProps = ObjectUtils.findDiffKeys(props, OverlayPanel.defaultProps);
-        const className = classNames('p-overlaypanel p-component', props.className);
+        const otherProps = OverlayPanelBase.getOtherProps(props);
+        const className = classNames('p-overlaypanel p-component', props.className, {
+            'p-input-filled': PrimeReact.inputStyle === 'filled',
+            'p-ripple-disabled': PrimeReact.ripple === false
+        });
         const closeIcon = createCloseIcon();
 
         return (
@@ -233,17 +239,3 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
 });
 
 OverlayPanel.displayName = 'OverlayPanel';
-OverlayPanel.defaultProps = {
-    __TYPE: 'OverlayPanel',
-    id: null,
-    dismissable: true,
-    showCloseIcon: false,
-    style: null,
-    className: null,
-    appendTo: null,
-    breakpoints: null,
-    ariaCloseLabel: null,
-    transitionOptions: null,
-    onShow: null,
-    onHide: null
-};

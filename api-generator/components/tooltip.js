@@ -39,7 +39,7 @@ const TooltipProps = [
         name: 'position',
         type: 'string',
         default: 'right',
-        description: 'Position of the tooltip, valid values are right, left, top and bottom.'
+        description: 'Position of the tooltip, valid values are mouse, right, left, top and bottom.'
     },
     {
         name: 'my',

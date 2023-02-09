@@ -66,7 +66,7 @@ const InputMaskProps = [
         description: 'Size of the input field.'
     },
     {
-        name: 'maxlength',
+        name: 'maxLength',
         type: 'number',
         default: 'null',
         description: 'Maximum number of character allows in the input field.'

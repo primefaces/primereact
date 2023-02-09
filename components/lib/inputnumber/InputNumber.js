@@ -4,9 +4,12 @@ import { InputText } from '../inputtext/InputText';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { InputNumberBase } from './InputNumberBase';
 
 export const InputNumber = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = InputNumberBase.getProps(inProps);
+
         const [focusedState, setFocusedState] = React.useState(false);
         const elementRef = React.useRef(null);
         const inputRef = React.useRef(null);
@@ -199,18 +202,15 @@ export const InputNumber = React.memo(
                 let currentValue = parseValue(inputRef.current.value) || 0;
                 let newValue = validateValue(currentValue + step);
 
+                if (props.maxLength && props.maxLength < formatValue(newValue).length) {
+                    return;
+                }
+
+                // #3913 onChange should be called before onValueChange
+                handleOnChange(event, currentValue, newValue);
                 // touch devices trigger the keyboard to display because of setSelectionRange
                 !DomHandler.isTouchDevice() && updateInput(newValue, null, 'spin');
                 updateModel(event, newValue);
-
-                handleOnChange(event, currentValue, newValue);
-            }
-        };
-
-        const onUpButtonTouchStart = (event) => {
-            if (!props.disabled && !props.readOnly) {
-                repeat(event, null, 1);
-                event.preventDefault();
             }
         };
 
@@ -218,13 +218,6 @@ export const InputNumber = React.memo(
             if (!props.disabled && !props.readOnly) {
                 props.autoFocus && DomHandler.focus(inputRef.current, props.autoFocus);
                 repeat(event, null, 1);
-                event.preventDefault();
-            }
-        };
-
-        const onUpButtonTouchEnd = () => {
-            if (!props.disabled && !props.readOnly) {
-                clearTimer();
                 event.preventDefault();
             }
         };
@@ -250,20 +243,6 @@ export const InputNumber = React.memo(
         const onUpButtonKeyDown = (event) => {
             if (!props.disabled && !props.readOnly && (event.keyCode === 32 || event.keyCode === 13)) {
                 repeat(event, null, 1);
-            }
-        };
-
-        const onDownButtonTouchStart = (event) => {
-            if (!props.disabled && !props.readOnly) {
-                repeat(event, null, -1);
-                event.preventDefault();
-            }
-        };
-
-        const onDownButtonTouchEnd = () => {
-            if (!props.disabled && !props.readOnly) {
-                clearTimer();
-                event.preventDefault();
             }
         };
 
@@ -627,7 +606,9 @@ export const InputNumber = React.memo(
             } else if (end - start === value.length) {
                 return formatValue(text);
             } else if (start === 0) {
-                return text + value.slice(end);
+                const suffix = ObjectUtils.isLetter(value[end]) ? end - 1 : end;
+
+                return text + value.slice(suffix);
             } else if (end === value.length) {
                 return value.slice(0, start) + text;
             } else {
@@ -809,6 +790,10 @@ export const InputNumber = React.memo(
                 let selectionStart = inputEl.selectionStart;
                 let selectionEnd = inputEl.selectionEnd;
 
+                if (props.maxLength && props.maxLength < newValue.length) {
+                    return;
+                }
+
                 inputEl.value = newValue;
                 let newLength = newValue.length;
 
@@ -920,6 +905,13 @@ export const InputNumber = React.memo(
         const onInputFocus = (event) => {
             setFocusedState(true);
             props.onFocus && props.onFocus(event);
+
+            if ((props.suffix || props.currency || props.prefix) && inputRef.current) {
+                // GitHub #1866 Cursor must be placed before/after symbol or arrow keys don't work
+                const selectionEnd = initCursor();
+
+                inputRef.current.setSelectionRange(selectionEnd, selectionEnd);
+            }
         };
 
         const onInputBlur = (event) => {
@@ -961,6 +953,7 @@ export const InputNumber = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            focus: () => DomHandler.focus(inputRef.current),
             getFormatter,
             getElement: () => elementRef.current,
             getInput: () => inputRef.current
@@ -1045,13 +1038,11 @@ export const InputNumber = React.memo(
                 <button
                     type="button"
                     className={className}
-                    onMouseLeave={onUpButtonMouseLeave}
-                    onMouseDown={onUpButtonMouseDown}
-                    onMouseUp={onUpButtonMouseUp}
+                    onPointerLeave={onUpButtonMouseLeave}
+                    onPointerDown={onUpButtonMouseDown}
+                    onPointerUp={onUpButtonMouseUp}
                     onKeyDown={onUpButtonKeyDown}
                     onKeyUp={onUpButtonKeyUp}
-                    onTouchStart={onUpButtonTouchStart}
-                    onTouchEnd={onUpButtonTouchEnd}
                     disabled={props.disabled}
                     tabIndex={-1}
                 >
@@ -1075,13 +1066,11 @@ export const InputNumber = React.memo(
                 <button
                     type="button"
                     className={className}
-                    onMouseLeave={onDownButtonMouseLeave}
-                    onMouseDown={onDownButtonMouseDown}
-                    onMouseUp={onDownButtonMouseUp}
+                    onPointerLeave={onDownButtonMouseLeave}
+                    onPointerDown={onDownButtonMouseDown}
+                    onPointerUp={onDownButtonMouseUp}
                     onKeyDown={onDownButtonKeyDown}
                     onKeyUp={onDownButtonKeyUp}
-                    onTouchStart={onDownButtonTouchStart}
-                    onTouchEnd={onDownButtonTouchEnd}
                     disabled={props.disabled}
                     tabIndex={-1}
                 >
@@ -1113,7 +1102,7 @@ export const InputNumber = React.memo(
         };
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, InputNumber.defaultProps);
+        const otherProps = InputNumberBase.getOtherProps(props);
         const dataProps = ObjectUtils.reduceKeys(otherProps, DomHandler.DATA_PROPS);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
@@ -1143,54 +1132,3 @@ export const InputNumber = React.memo(
 );
 
 InputNumber.displayName = 'InputNumber';
-InputNumber.defaultProps = {
-    __TYPE: 'InputNumber',
-    allowEmpty: true,
-    ariaLabelledBy: null,
-    autoFocus: false,
-    buttonLayout: 'stacked',
-    className: null,
-    currency: undefined,
-    currencyDisplay: undefined,
-    decrementButtonClassName: null,
-    decrementButtonIcon: 'pi pi-angle-down',
-    disabled: false,
-    format: true,
-    id: null,
-    incrementButtonClassName: null,
-    incrementButtonIcon: 'pi pi-angle-up',
-    inputClassName: null,
-    inputId: null,
-    inputMode: null,
-    inputRef: null,
-    inputStyle: null,
-    locale: undefined,
-    localeMatcher: undefined,
-    max: null,
-    maxFractionDigits: undefined,
-    min: null,
-    minFractionDigits: undefined,
-    mode: 'decimal',
-    name: null,
-    onBlur: null,
-    onChange: null,
-    onFocus: null,
-    onKeyDown: null,
-    onValueChange: null,
-    pattern: null,
-    placeholder: null,
-    prefix: null,
-    readOnly: false,
-    required: false,
-    showButtons: false,
-    size: null,
-    step: 1,
-    style: null,
-    suffix: null,
-    tabIndex: null,
-    tooltip: null,
-    tooltipOptions: null,
-    type: 'text',
-    useGrouping: true,
-    value: null
-};

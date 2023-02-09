@@ -1,17 +1,20 @@
-import '../styles/layout/layout.scss';
-import '../styles/primereact.css';
-import 'primeicons/primeicons.css';
+import '@docsearch/css';
 import 'primeflex/primeflex.css';
-import '../styles/demo/demo.scss';
-import Layout from '../components/layout/layout';
+import 'primeicons/primeicons.css';
 import { useEffect, useRef, useState } from 'react';
+import Layout from '../components/layout/layout';
 import fetchNews from '../service/NewsService';
+import '../styles/layout/layout.scss';
+// prettier-ignore
+import '../styles/primereact.css';
+// prettier-ignore
+import '../styles/demo/demo.scss';
 
 export default function MyApp({ Component }) {
     const [dark, setDark] = useState(false);
     const [theme, setTheme] = useState('lara-light-indigo');
     const [newsActive, setNewsActive] = useState(false);
-    const storageKey = 'primereact';
+    const storageKey = 'primereact-news';
     const announcement = useRef(null);
 
     useEffect(() => {

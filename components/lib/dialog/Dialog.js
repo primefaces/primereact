@@ -5,9 +5,13 @@ import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } f
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DialogBase } from './DialogBase';
 
-export const Dialog = React.forwardRef((props, ref) => {
-    const [idState, setIdState] = React.useState(props.id);
+export const Dialog = React.forwardRef((inProps, ref) => {
+    const props = DialogBase.getProps(inProps);
+
+    const uniqueId = props.id ? props.id : UniqueComponentId();
+    const [idState, setIdState] = React.useState(uniqueId);
     const [maskVisibleState, setMaskVisibleState] = React.useState(false);
     const [visibleState, setVisibleState] = React.useState(false);
     const [maximizedState, setMaximizedState] = React.useState(props.maximized);
@@ -22,7 +26,7 @@ export const Dialog = React.forwardRef((props, ref) => {
     const lastPageX = React.useRef(null);
     const lastPageY = React.useRef(null);
     const styleElement = React.useRef(null);
-    const attributeSelector = React.useRef('');
+    const attributeSelector = React.useRef(uniqueId);
     const maximized = props.onMaximize ? props.maximized : maximizedState;
 
     const [bindDocumentKeyDownListener, unbindDocumentKeyDownListener] = useEventListener({ type: 'keydown', listener: (event) => onKeyDown(event) });
@@ -332,23 +336,21 @@ export const Dialog = React.forwardRef((props, ref) => {
     };
 
     const createStyle = () => {
-        if (!styleElement.current) {
-            styleElement.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+        styleElement.current = DomHandler.createInlineStyle(PrimeReact.nonce);
 
-            let innerHTML = '';
+        let innerHTML = '';
 
-            for (let breakpoint in props.breakpoints) {
-                innerHTML += `
-                    @media screen and (max-width: ${breakpoint}) {
-                        .p-dialog[${attributeSelector.current}] {
-                            width: ${props.breakpoints[breakpoint]} !important;
-                        }
+        for (let breakpoint in props.breakpoints) {
+            innerHTML += `
+                @media screen and (max-width: ${breakpoint}) {
+                    .p-dialog[${attributeSelector.current}] {
+                        width: ${props.breakpoints[breakpoint]} !important;
                     }
-                `;
-            }
-
-            styleElement.current.innerHTML = innerHTML;
+                }
+            `;
         }
+
+        styleElement.current.innerHTML = innerHTML;
     };
 
     const changeScrollOnMaximizable = () => {
@@ -360,16 +362,6 @@ export const Dialog = React.forwardRef((props, ref) => {
     };
 
     useMountEffect(() => {
-        const unqiueId = UniqueComponentId();
-
-        if (!idState) {
-            setIdState(unqiueId);
-        }
-
-        if (!attributeSelector.current) {
-            attributeSelector.current = unqiueId;
-        }
-
         if (props.visible) {
             setMaskVisibleState(true);
         }
@@ -508,10 +500,13 @@ export const Dialog = React.forwardRef((props, ref) => {
     };
 
     const createElement = () => {
-        const otherProps = ObjectUtils.findDiffKeys(props, Dialog.defaultProps);
+        const otherProps = DialogBase.getOtherProps(props);
         const className = classNames('p-dialog p-component', props.className, {
             'p-dialog-rtl': props.rtl,
-            'p-dialog-maximized': maximized
+            'p-dialog-maximized': maximized,
+            'p-dialog-default': !maximized,
+            'p-input-filled': PrimeReact.inputStyle === 'filled',
+            'p-ripple-disabled': PrimeReact.ripple === false
         });
         const maskClassName = classNames(
             'p-dialog-mask',
@@ -560,51 +555,3 @@ export const Dialog = React.forwardRef((props, ref) => {
 });
 
 Dialog.displayName = 'Dialog';
-Dialog.defaultProps = {
-    __TYPE: 'Dialog',
-    appendTo: null,
-    ariaCloseIconLabel: null,
-    baseZIndex: 0,
-    blockScroll: false,
-    breakpoints: null,
-    className: null,
-    closable: true,
-    closeOnEscape: true,
-    contentClassName: null,
-    contentStyle: null,
-    dismissableMask: false,
-    draggable: true,
-    focusOnShow: true,
-    footer: null,
-    header: null,
-    headerClassName: null,
-    headerStyle: null,
-    icons: null,
-    id: null,
-    keepInViewport: true,
-    maskClassName: null,
-    maskStyle: null,
-    maximizable: false,
-    maximized: false,
-    minX: 0,
-    minY: 0,
-    modal: true,
-    onClick: null,
-    onDrag: null,
-    onDragEnd: null,
-    onDragStart: null,
-    onHide: null,
-    onMaskClick: null,
-    onMaximize: null,
-    onResize: null,
-    onResizeEnd: null,
-    onResizeStart: null,
-    onShow: null,
-    position: 'center',
-    resizable: true,
-    rtl: false,
-    showHeader: true,
-    style: null,
-    transitionOptions: null,
-    visible: false
-};

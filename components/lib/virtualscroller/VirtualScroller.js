@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { useEventListener, useMountEffect, usePrevious, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { VirtualScrollerBase } from './VirtualScrollerBase';
 
 export const VirtualScroller = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = VirtualScrollerBase.getProps(inProps);
+
         const vertical = props.orientation === 'vertical';
         const horizontal = props.orientation === 'horizontal';
         const both = props.orientation === 'both';
@@ -610,7 +613,7 @@ export const VirtualScroller = React.memo(
                 </React.Fragment>
             );
         } else {
-            const otherProps = ObjectUtils.findDiffKeys(props, VirtualScroller.defaultProps);
+            const otherProps = VirtualScrollerBase.getOtherProps(props);
             const className = classNames(
                 'p-virtualscroller',
                 {
@@ -636,32 +639,3 @@ export const VirtualScroller = React.memo(
 );
 
 VirtualScroller.displayName = 'VirtualScroller';
-VirtualScroller.defaultProps = {
-    __TYPE: 'VirtualScroller',
-    id: null,
-    style: null,
-    className: null,
-    items: null,
-    itemSize: 0,
-    scrollHeight: null,
-    scrollWidth: null,
-    orientation: 'vertical',
-    numToleratedItems: null,
-    delay: 0,
-    resizeDelay: 10,
-    lazy: false,
-    disabled: false,
-    loaderDisabled: false,
-    columns: null,
-    loading: undefined,
-    autoSize: false,
-    showSpacer: true,
-    showLoader: false,
-    loadingTemplate: null,
-    loaderIconTemplate: null,
-    itemTemplate: null,
-    contentTemplate: null,
-    onScroll: null,
-    onScrollIndexChange: null,
-    onLazyLoad: null
-};

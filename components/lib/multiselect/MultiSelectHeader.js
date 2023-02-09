@@ -36,7 +36,7 @@ export const MultiSelectHeader = React.memo((props) => {
             const containerClassName = classNames('p-multiselect-filter-container');
             let content = (
                 <div className={containerClassName}>
-                    <InputText type="text" role="textbox" value={props.filterValue} onChange={onFilter} className="p-multiselect-filter" placeholder={props.filterPlaceholder} />
+                    <InputText ref={props.filterRef} type="text" role="textbox" value={props.filterValue} onChange={onFilter} className="p-multiselect-filter" placeholder={props.filterPlaceholder} />
                     <span className="p-multiselect-filter-icon pi pi-search"></span>
                 </div>
             );

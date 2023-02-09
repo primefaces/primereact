@@ -1,0 +1,215 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button when Ripple is enabled button should have ripple effect 1`] = `
+<div>
+  <button
+    class="p-button p-component"
+  >
+    <span
+      class="p-button-label p-c"
+    >
+       
+    </span>
+    <span
+      class="p-ink p-ink-active"
+      role="presentation"
+      style="height: 0px; width: 0px;"
+    />
+  </button>
+</div>
+`;
+
+exports[`Button when aria-label prop is not exist aria-label prop should be equal to label prop  1`] = `
+<div>
+  <button
+    aria-label="test"
+    class="p-button p-component"
+  >
+    <span
+      class="p-button-label p-c"
+    >
+      test
+    </span>
+  </button>
+</div>
+`;
+
+exports[`Button when badge is null it renders Button without badge 1`] = `
+<div>
+  <button
+    class="p-button p-component"
+  >
+    <span
+      class="p-button-label p-c"
+    >
+       
+    </span>
+  </button>
+</div>
+`;
+
+exports[`Button when badge is true it renders Button with badge 1`] = `
+<div>
+  <button
+    class="p-button p-component"
+  >
+    <span
+      class="p-button-label p-c"
+    >
+       
+    </span>
+    <span
+      class="p-badge"
+    >
+      test
+    </span>
+  </button>
+</div>
+`;
+
+exports[`Button when click the button if loading is false it renders Button without loading icon 1`] = `
+<div>
+  <button
+    class="p-button p-component"
+  >
+    <span
+      class="p-button-label p-c"
+    >
+       
+    </span>
+  </button>
+</div>
+`;
+
+exports[`Button when click the button if loading is true it renders Button with loading icon 1`] = `
+<div>
+  <button
+    class="p-button p-component p-button-icon-only p-disabled p-button-loading"
+    disabled=""
+  >
+    <span
+      class="p-button-icon p-c p-button-loading-icon pi pi-spinner pi-spin"
+    />
+    <span
+      class="p-button-label p-c"
+    >
+       
+    </span>
+  </button>
+</div>
+`;
+
+exports[`Button when iconPos is bottom Button is vertical 1`] = `
+<div>
+  <button
+    aria-label="test"
+    class="p-button p-component p-button-vertical"
+  >
+    <span
+      class="p-button-label p-c"
+    >
+      test
+    </span>
+  </button>
+</div>
+`;
+
+exports[`Button when label is empty it returns empty button 1`] = `
+<div>
+  <button
+    class="p-button p-component"
+  >
+    <span
+      class="p-button-label p-c"
+    >
+       
+    </span>
+  </button>
+</div>
+`;
+
+exports[`Button when label is true it renders Button with default aria label 1`] = `
+<div>
+  <button
+    class="p-button p-component"
+  >
+    <span
+      class="p-button-label p-c"
+    >
+       
+    </span>
+  </button>
+</div>
+`;
+
+exports[`Button when label prop is not exist label prop should be equal to aria-label prop 1`] = `
+<div>
+  <button
+    aria-label="test"
+    class="p-button p-component"
+  >
+    <span
+      class="p-button-label p-c"
+    >
+       
+    </span>
+  </button>
+</div>
+`;
+
+exports[`Button when using badge and label the aria-label should contain both values 1`] = `
+<div>
+  <button
+    aria-label="test lost"
+    class="p-button p-component"
+  >
+    <span
+      class="p-button-label p-c"
+    >
+      test
+    </span>
+    <span
+      class="p-badge"
+    >
+      lost
+    </span>
+  </button>
+</div>
+`;
+
+exports[`Button when using badge and label the aria-label should contain both values 2`] = `
+<div>
+  <button
+    aria-label="test lost"
+    class="p-button p-component"
+  >
+    <span
+      class="p-button-label p-c"
+    >
+      test
+    </span>
+    <span
+      class="p-badge"
+    >
+      lost
+    </span>
+  </button>
+</div>
+`;
+
+exports[`Button when visible is false Button return null 1`] = `<div />`;
+
+exports[`Button when visible is true Button render correctly 1`] = `
+<div>
+  <button
+    aria-label="test"
+    class="p-button p-component"
+  >
+    <span
+      class="p-button-label p-c"
+    >
+      test
+    </span>
+  </button>
+</div>
+`;

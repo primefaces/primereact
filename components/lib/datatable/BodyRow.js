@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ColumnBase } from '../column/ColumnBase';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { BodyCell } from './BodyCell';
 
@@ -6,13 +7,17 @@ export const BodyRow = React.memo((props) => {
     const [editingState, setEditingState] = React.useState(false);
     const editing = props.onRowEditChange ? props.editing : editingState;
 
+    const getColumnProp = (column, name) => ColumnBase.getCProp(column, name);
+
     const isFocusable = () => {
         return props.selectionMode && props.selectionModeInColumn !== 'single' && props.selectionModeInColumn !== 'multiple';
     };
 
     const isGrouped = (column) => {
-        if (props.groupRowsBy && getColumnProp(column, 'field')) {
-            return Array.isArray(props.groupRowsBy) ? props.groupRowsBy.indexOf(column.props.field) > -1 : props.groupRowsBy === column.props.field;
+        const columnField = getColumnProp(column, 'field');
+
+        if (props.groupRowsBy && columnField) {
+            return Array.isArray(props.groupRowsBy) ? props.groupRowsBy.indexOf(columnField) > -1 : props.groupRowsBy === columnField;
         }
 
         return false;
@@ -20,10 +25,6 @@ export const BodyRow = React.memo((props) => {
 
     const equals = (data1, data2) => {
         return props.compareSelectionBy === 'equals' ? data1 === data2 : ObjectUtils.equals(data1, data2, props.dataKey);
-    };
-
-    const getColumnProp = (col, prop) => {
-        return col ? col.props[prop] : null;
     };
 
     const getTabIndex = () => {
@@ -103,6 +104,14 @@ export const BodyRow = React.memo((props) => {
 
     const onRightClick = (event) => {
         props.onRowRightClick({ originalEvent: event, data: props.rowData, index: props.index });
+    };
+
+    const onMouseEnter = (event) => {
+        props.onRowMouseEnter({ originalEvent: event, data: props.rowData, index: props.index });
+    };
+
+    const onMouseLeave = (event) => {
+        props.onRowMouseLeave({ originalEvent: event, data: props.rowData, index: props.index });
     };
 
     const onTouchEnd = (event) => {
@@ -344,7 +353,7 @@ export const BodyRow = React.memo((props) => {
 
     const rowClassName = ObjectUtils.getPropValue(props.rowClassName, props.rowData, { props: props.tableProps });
     const className = classNames(rowClassName, {
-        'p-highlight': !props.allowCellSelection && props.selected,
+        'p-highlight': (!props.allowCellSelection && props.selected) || props.contextMenuSelected,
         'p-highlight-contextmenu': props.contextMenuSelected,
         'p-selectable-row': props.allowRowSelection && props.isSelectable({ data: props.rowData, index: props.index }),
         'p-row-odd': props.index % 2 !== 0
@@ -361,6 +370,8 @@ export const BodyRow = React.memo((props) => {
             style={style}
             onMouseDown={onMouseDown}
             onMouseUp={onMouseUp}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
             onClick={onClick}
             onDoubleClick={onDoubleClick}
             onContextMenu={onRightClick}

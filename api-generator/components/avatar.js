@@ -18,6 +18,18 @@ const AvatarProps = [
         description: 'Defines the image to display.'
     },
     {
+        name: 'imageAlt',
+        type: 'any',
+        default: 'null',
+        description: 'It specifies an alternate text for an image, if the image cannot be displayed.'
+    },
+    {
+        name: 'imageFallback',
+        type: 'string',
+        default: 'default',
+        description: 'Defines a fallback image or URL if the main image fails to load. If "default" will fallback to label then icon.'
+    },
+    {
         name: 'size',
         type: 'string',
         default: 'null',
@@ -34,12 +46,6 @@ const AvatarProps = [
         type: 'any',
         default: 'null',
         description: 'Template of the content.'
-    },
-    {
-        name: 'imageAlt',
-        type: 'any',
-        default: 'null',
-        description: 'It specifies an alternate text for an image, if the image cannot be displayed.'
     }
 ];
 

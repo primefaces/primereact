@@ -1,40 +1,71 @@
-import React, { useState } from 'react';
-import { ColorPicker } from '../../components/lib/colorpicker/ColorPicker';
-import ColorPickerDoc from '../../components/doc/colorpicker';
-import { DocActions } from '../../components/doc/common/docactions';
-import Head from 'next/head';
+import { AccessibilityDoc } from '../../components/doc/colorpicker/accessibilitydoc';
+import { BasicDoc } from '../../components/doc/colorpicker/basicdoc';
+import { DisabledDoc } from '../../components/doc/colorpicker/disableddoc';
+import { FormikDoc } from '../../components/doc/colorpicker/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/colorpicker/form/hookformdoc';
+import { FormatDoc } from '../../components/doc/colorpicker/formatdoc';
+import { ImportDoc } from '../../components/doc/colorpicker/importdoc';
+import { InlineDoc } from '../../components/doc/colorpicker/inlinedoc';
+import { StyleDoc } from '../../components/doc/colorpicker/styledoc';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 
 const ColorPickerDemo = () => {
-    const [color1, setColor1] = useState(null);
-    const [color2, setColor2] = useState('1976D2');
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'inline',
+            label: 'Inline',
+            component: InlineDoc
+        },
+        {
+            id: 'format',
+            label: 'Format',
+            component: FormatDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
+        },
+        {
+            id: 'form',
+            label: 'Form',
+            description: 'Compatibility with popular React form libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
 
-    return (
-        <div>
-            <Head>
-                <title>React ColorPicker Component</title>
-                <meta name="description" content="ColorPicker is an input component to select a color." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>ColorPicker</h1>
-                    <p>ColorPicker is an input component to select a color.</p>
-                </div>
-                <DocActions github="colorpicker/index.js" />
-            </div>
-
-            <div className="content-section implementation">
-                <div className="card">
-                    <h5>Inline</h5>
-                    <ColorPicker value={color1} onChange={(e) => setColor1(e.value)} inline></ColorPicker>
-
-                    <h5>Overlay</h5>
-                    <ColorPicker value={color2} onChange={(e) => setColor2(e.value)}></ColorPicker>
-                </div>
-            </div>
-
-            <ColorPickerDoc />
-        </div>
-    );
+    return <DocComponent title="React ColorPicker Component" header="ColorPicker" description="ColorPicker is an input component to select a color." componentDocs={docs} apiDocs={[{ name: 'ColorPicker', pathname: '/modules/colorpicker.html' }]} />;
 };
 
 export default ColorPickerDemo;

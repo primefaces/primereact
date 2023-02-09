@@ -1,43 +1,72 @@
-import React, { useState } from 'react';
-import { MultiStateCheckbox } from '../../components/lib/multistatecheckbox/MultiStateCheckbox';
-import MultiStateCheckboxDoc from '../../components/doc/multistatecheckbox';
-import { DocActions } from '../../components/doc/common/docactions';
-import Head from 'next/head';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '../../components/doc/multistatecheckbox/accessibilitydoc';
+import { BasicDoc } from '../../components/doc/multistatecheckbox/basicdoc';
+import { DisabledDoc } from '../../components/doc/multistatecheckbox/disableddoc';
+import { FormikDoc } from '../../components/doc/multistatecheckbox/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/multistatecheckbox/form/hookformdoc';
+import { ImportDoc } from '../../components/doc/multistatecheckbox/importdoc';
+import { InvalidDoc } from '../../components/doc/multistatecheckbox/invaliddoc';
+import { StyleDoc } from '../../components/doc/multistatecheckbox/styledoc';
 
 const MultiStateCheckboxDemo = () => {
-    const [value, setValue] = useState('public');
-    const options = [
-        { value: 'public', icon: 'pi pi-globe' },
-        { value: 'protected', icon: 'pi pi-lock-open' },
-        { value: 'private', icon: 'pi pi-lock' }
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
+        },
+        {
+            id: 'form',
+            label: 'Form',
+            description: 'Compatibility with popular React form libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React MultiStateCheckbox Component</title>
-                <meta name="description" content="MultiStateCheckbox is used to select a state from given multiple states." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>MultiStateCheckbox</h1>
-                    <p>MultiStateCheckbox is used to select a state from given multiple states.</p>
-                </div>
-
-                <DocActions github="multistatecheckbox/index.js" />
-            </div>
-
-            <div className="content-section implementation">
-                <div className="card">
-                    <div className="field-checkbox m-0">
-                        <MultiStateCheckbox value={value} options={options} optionValue="value" onChange={(e) => setValue(e.value)} aria-label="Access Type" />
-                        <label>{value}</label>
-                    </div>
-                </div>
-            </div>
-
-            <MultiStateCheckboxDoc />
-        </div>
+        <DocComponent
+            title="React MultiStateCheckbox Component"
+            header="MultiStateCheckbox"
+            description="MultiStateCheckbox is used to select a state from given options."
+            componentDocs={docs}
+            apiDocs={[{ name: 'MultiStateCheckbox', pathname: '/modules/multistatecheckbox.html' }]}
+        />
     );
 };
 

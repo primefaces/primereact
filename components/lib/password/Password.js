@@ -6,9 +6,12 @@ import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { PasswordBase } from './PasswordBase';
 
 export const Password = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = PasswordBase.getProps(inProps);
+
         const promptLabel = props.promptLabel || localeOption('passwordPrompt');
         const weakLabel = props.weakLabel || localeOption('weak');
         const mediumLabel = props.mediumLabel || localeOption('medium');
@@ -208,6 +211,7 @@ export const Password = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            focus: () => DomHandler.focus(inputRef.current),
             getElement: () => elementRef.current,
             getOverlay: () => overlayRef.current,
             getInput: () => inputRef.current
@@ -258,7 +262,10 @@ export const Password = React.memo(
         };
 
         const createPanel = () => {
-            const panelClassName = classNames('p-password-panel p-component', props.panelClassName);
+            const panelClassName = classNames('p-password-panel p-component', props.panelClassName, {
+                'p-input-filled': PrimeReact.inputStyle === 'filled',
+                'p-ripple-disabled': PrimeReact.ripple === false
+            });
             const { strength, width } = meterState || { strength: '', width: '0%' };
             const header = ObjectUtils.getJSXElement(props.header, props);
             const footer = ObjectUtils.getJSXElement(props.footer, props);
@@ -307,7 +314,7 @@ export const Password = React.memo(
             props.className
         );
         const inputClassName = classNames('p-password-input', props.inputClassName);
-        const inputProps = ObjectUtils.findDiffKeys(props, Password.defaultProps);
+        const inputProps = PasswordBase.getOtherProps(props);
         const icon = createIcon();
         const panel = createPanel();
 
@@ -335,34 +342,3 @@ export const Password = React.memo(
 );
 
 Password.displayName = 'Password';
-Password.defaultProps = {
-    __TYPE: 'Password',
-    id: null,
-    inputId: null,
-    inputRef: null,
-    promptLabel: null,
-    weakLabel: null,
-    mediumLabel: null,
-    strongLabel: null,
-    mediumRegex: '^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})',
-    strongRegex: '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})',
-    feedback: true,
-    toggleMask: false,
-    appendTo: null,
-    header: null,
-    content: null,
-    footer: null,
-    icon: null,
-    tooltip: null,
-    tooltipOptions: null,
-    style: null,
-    className: null,
-    inputStyle: null,
-    inputClassName: null,
-    panelStyle: null,
-    panelClassName: null,
-    transitionOptions: null,
-    onInput: null,
-    onShow: null,
-    onHide: null
-};

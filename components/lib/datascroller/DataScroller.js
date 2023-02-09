@@ -2,9 +2,12 @@ import * as React from 'react';
 import { localeOption } from '../api/Api';
 import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { classNames, ObjectUtils } from '../utils/Utils';
+import { DataScrollerBase } from './DataScrollerBase';
 
 export const DataScroller = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = DataScrollerBase.getProps(inProps);
+
         const [dataToRenderState, setDataToRenderState] = React.useState([]);
         const elementRef = React.useRef(null);
         const contentRef = React.useRef(null);
@@ -187,7 +190,7 @@ export const DataScroller = React.memo(
             );
         };
 
-        const otherProps = ObjectUtils.findDiffKeys(props, DataScroller.defaultProps);
+        const otherProps = DataScrollerBase.getOtherProps(props);
         const className = classNames('p-datascroller p-component', props.className, {
             'p-datascroller-inline': props.inline
         });
@@ -207,21 +210,3 @@ export const DataScroller = React.memo(
 );
 
 DataScroller.displayName = 'DataScroller';
-DataScroller.defaultProps = {
-    __TYPE: 'DataScroller',
-    id: null,
-    value: null,
-    rows: 0,
-    inline: false,
-    scrollHeight: null,
-    loader: false,
-    buffer: 0.9,
-    style: null,
-    className: null,
-    onLazyLoad: null,
-    emptyMessage: null,
-    itemTemplate: null,
-    header: null,
-    footer: null,
-    lazy: false
-};

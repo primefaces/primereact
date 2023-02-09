@@ -1,53 +1,90 @@
-import React, { useState } from 'react';
-import { Chips } from '../../components/lib/chips/Chips';
-import ChipsDoc from '../../components/doc/chips';
-import { DocActions } from '../../components/doc/common/docactions';
-import Head from 'next/head';
+import React from 'react';
+import { AccessibilityDoc } from '../../components/doc/chips/accessibilitydoc';
+import { BasicDoc } from '../../components/doc/chips/basicdoc';
+import { DisabledDoc } from '../../components/doc/chips/disableddoc';
+import { FloatLabelDoc } from '../../components/doc/chips/floatlabeldoc';
+import { FormikDoc } from '../../components/doc/chips/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/chips/form/hookformdoc';
+import { ImportDoc } from '../../components/doc/chips/importdoc';
+import { InvalidDoc } from '../../components/doc/chips/invaliddoc';
+import { KeyFilterDoc } from '../../components/doc/chips/keyfilterdoc';
+import { SeparatorDoc } from '../../components/doc/chips/separatordoc';
+import { StyleDoc } from '../../components/doc/chips/styledoc';
+import { TemplateDoc } from '../../components/doc/chips/templatedoc';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 
 const ChipsDemo = () => {
-    const [values1, setValues1] = useState([]);
-    const [values2, setValues2] = useState([]);
-    const [values3, setValues3] = useState([]);
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'separator',
+            label: 'Separator',
+            component: SeparatorDoc
+        },
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'keyfilter',
+            label: 'Key Filter',
+            component: KeyFilterDoc
+        },
+        {
+            id: 'floatlabel',
+            label: 'Float Label',
+            component: FloatLabelDoc
+        },
+        {
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
+        },
+        {
+            id: 'form',
+            label: 'Form',
+            description: 'Compatibility with popular React form libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
 
-    const customChip = (item) => {
-        return (
-            <div>
-                <span>{item} - (active) </span>
-                <i className="pi pi-user-plus" style={{ fontSize: '14px' }}></i>
-            </div>
-        );
-    };
-
-    return (
-        <div>
-            <Head>
-                <title>React Chips Component</title>
-                <meta name="description" content="Chips is used to enter multiple values on an input field." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Chips</h1>
-                    <p>Chips is used to enter multiple values on an input field.</p>
-                </div>
-                <DocActions github="chips/index.js" />
-            </div>
-
-            <div className="content-section implementation p-fluid">
-                <div className="card p-fluid">
-                    <h5>Basic</h5>
-                    <Chips value={values1} onChange={(e) => setValues1(e.value)} />
-
-                    <h5>Comma Separator</h5>
-                    <Chips value={values2} onChange={(e) => setValues2(e.value)} separator="," />
-
-                    <h5>Template</h5>
-                    <Chips value={values3} onChange={(e) => setValues3(e.value)} max={5} itemTemplate={customChip}></Chips>
-                </div>
-            </div>
-
-            <ChipsDoc />
-        </div>
-    );
+    return <DocComponent title="React Chips Component" header="Chips" description="Chips is used to enter multiple values on an input field." componentDocs={docs} apiDocs={[{ name: 'Chips', pathname: '/modules/chips.html' }]} />;
 };
 
 export default ChipsDemo;

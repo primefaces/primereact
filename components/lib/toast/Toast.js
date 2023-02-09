@@ -4,13 +4,16 @@ import PrimeReact from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useUnmountEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { classNames, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { classNames, ZIndexUtils } from '../utils/Utils';
+import { ToastBase } from './ToastBase';
 import { ToastMessage } from './ToastMessage';
 
 let messageIdx = 0;
 
 export const Toast = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ToastBase.getProps(inProps);
+
         const [messagesState, setMessagesState] = React.useState([]);
         const containerRef = React.useRef(null);
 
@@ -98,21 +101,25 @@ export const Toast = React.memo(
         }));
 
         const createElement = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, Toast.defaultProps);
-            const className = classNames('p-toast p-component p-toast-' + props.position, props.className);
+            const otherProps = ToastBase.getOtherProps(props);
+            const className = classNames('p-toast p-component p-toast-' + props.position, props.className, {
+                'p-input-filled': PrimeReact.inputStyle === 'filled',
+                'p-ripple-disabled': PrimeReact.ripple === false
+            });
 
             return (
                 <div ref={containerRef} id={props.id} className={className} style={props.style} {...otherProps}>
                     <TransitionGroup>
-                        {messagesState.map((messageInfo) => {
-                            const messageRef = React.createRef();
+                        {messagesState &&
+                            messagesState.map((messageInfo) => {
+                                const messageRef = React.createRef();
 
-                            return (
-                                <CSSTransition nodeRef={messageRef} key={messageInfo._pId} classNames="p-toast-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} onEntered={onEntered} onExited={onExited} options={props.transitionOptions}>
-                                    <ToastMessage ref={messageRef} messageInfo={messageInfo} onClick={props.onClick} onClose={onClose} onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave} />
-                                </CSSTransition>
-                            );
-                        })}
+                                return (
+                                    <CSSTransition nodeRef={messageRef} key={messageInfo._pId} classNames="p-toast-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} onEntered={onEntered} onExited={onExited} options={props.transitionOptions}>
+                                        <ToastMessage ref={messageRef} messageInfo={messageInfo} onClick={props.onClick} onClose={onClose} onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave} />
+                                    </CSSTransition>
+                                );
+                            })}
                     </TransitionGroup>
                 </div>
             );
@@ -125,19 +132,3 @@ export const Toast = React.memo(
 );
 
 Toast.displayName = 'Toast';
-Toast.defaultProps = {
-    __TYPE: 'Toast',
-    id: null,
-    className: null,
-    style: null,
-    baseZIndex: 0,
-    position: 'top-right',
-    transitionOptions: null,
-    appendTo: 'self',
-    onClick: null,
-    onRemove: null,
-    onShow: null,
-    onHide: null,
-    onMouseEnter: null,
-    onMouseLeave: null
-};

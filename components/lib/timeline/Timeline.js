@@ -1,8 +1,11 @@
 import * as React from 'react';
 import { classNames, ObjectUtils } from '../utils/Utils';
+import { TimelineBase } from './TimelineBase';
 
 export const Timeline = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = TimelineBase.getProps(inProps);
+
         const elementRef = React.useRef(null);
 
         const getKey = (item, index) => {
@@ -37,7 +40,7 @@ export const Timeline = React.memo(
             getElement: () => elementRef.current
         }));
 
-        const otherProps = ObjectUtils.findDiffKeys(props, Timeline.defaultProps);
+        const otherProps = TimelineBase.getOtherProps(props);
         const className = classNames(
             'p-timeline p-component',
             {
@@ -50,7 +53,7 @@ export const Timeline = React.memo(
         const events = createEvents();
 
         return (
-            <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
+            <div ref={elementRef} className={className} {...otherProps}>
                 {events}
             </div>
         );
@@ -58,16 +61,3 @@ export const Timeline = React.memo(
 );
 
 Timeline.displayName = 'Timeline';
-Timeline.defaultProps = {
-    __TYPE: 'Timeline',
-    id: null,
-    value: null,
-    align: 'left',
-    layout: 'vertical',
-    dataKey: null,
-    className: null,
-    style: null,
-    opposite: null,
-    marker: null,
-    content: null
-};

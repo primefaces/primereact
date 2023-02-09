@@ -392,7 +392,7 @@
     }
 }
  
- pre[class*="language-"] {
+pre[class*="language-"] {
     position: relative;
     background: transparent !important;
 
@@ -409,32 +409,8 @@
         font-size: 14px;
         border-radius: 10px;
     }
-}
-
-.code-toolbar {
-    div.toolbar {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-
-        .toolbar-item {
-            > button.copy-to-clipboard-button {
-                appearance: none;
-                border: 0 none !important;
-                padding: 0.3rem 1rem;
-                background: var(--surface-50) !important;
-                border-radius: 6px;
-                color: var(--surface-500) !important;
-                font-weight: 600;
-                transition: all .15s;
-                cursor: pointer;
-                box-shadow: none !important;
-    
-                &:hover {
-                    background-color: var(--surface-100) !important;
-                    color: var(--surface-600) !important;
-                }
-            }
-        }
     }
+
+.copy-to-clipboard-button {
+    display: none;
 }

@@ -1,146 +1,83 @@
-import React, { useState, useEffect } from 'react';
-import { Mention } from '../../components/lib/mention/Mention';
-import { CustomerService } from '../../service/CustomerService';
-import MentionDoc from '../../components/doc/mention';
-import { DocActions } from '../../components/doc/common/docactions';
-import Head from 'next/head';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '../../components/doc/mention/accessibilitydoc';
+import { AutoResizeDoc } from '../../components/doc/mention/autoresizedoc';
+import { BasicDoc } from '../../components/doc/mention/basicdoc';
+import { DisabledDoc } from '../../components/doc/mention/disableddoc';
+import { FloatLabelDoc } from '../../components/doc/mention/floatlabeldoc';
+import { FormikDoc } from '../../components/doc/mention/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/mention/form/hookformdoc';
+import { ImportDoc } from '../../components/doc/mention/importdoc';
+import { InvalidDoc } from '../../components/doc/mention/invaliddoc';
+import { StyleDoc } from '../../components/doc/mention/styledoc';
+import { TriggersDoc } from '../../components/doc/mention/triggersdoc';
 
 const MentionDemo = () => {
-    const [customers, setCustomers] = useState([]);
-    const [suggestions, setSuggestions] = useState([]);
-    const [multipleSuggestions, setMultipleSuggestions] = useState([]);
-
-    const tagSuggestions = ['primereact', 'primefaces', 'primeng', 'primevue'];
-    const customerservice = new CustomerService();
-
-    useEffect(() => {
-        customerservice.getCustomersSmall().then((data) => {
-            data.forEach((d) => (d['nickname'] = `${d.name.replace(/\s+/g, '').toLowerCase()}_${d.id}`));
-            setCustomers(data);
-        });
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const onSearch = (event) => {
-        //in a real application, make a request to a remote url with the query and return suggestions, for demo we filter at client side
-        setTimeout(() => {
-            const query = event.query;
-            let suggestions;
-
-            if (!query.trim().length) {
-                suggestions = [...customers];
-            } else {
-                suggestions = customers.filter((customer) => {
-                    return customer.nickname.toLowerCase().startsWith(query.toLowerCase());
-                });
-            }
-
-            setSuggestions(suggestions);
-        }, 250);
-    };
-
-    const onMultipleSearch = (event) => {
-        const trigger = event.trigger;
-
-        if (trigger === '@') {
-            //in a real application, make a request to a remote url with the query and return suggestions, for demo we filter at client side
-            setTimeout(() => {
-                const query = event.query;
-                let suggestions;
-
-                if (!query.trim().length) {
-                    suggestions = [...customers];
-                } else {
-                    suggestions = customers.filter((customer) => {
-                        return customer.nickname.toLowerCase().startsWith(query.toLowerCase());
-                    });
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'triggers',
+            label: 'Triggers',
+            component: TriggersDoc
+        },
+        {
+            id: 'autoresize',
+            label: 'Auto Resize',
+            component: AutoResizeDoc
+        },
+        {
+            id: 'floatlabel',
+            label: 'Float Label',
+            component: FloatLabelDoc
+        },
+        {
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
+        },
+        {
+            id: 'form',
+            label: 'Form',
+            description: 'Compatibility with popular React form libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
                 }
-
-                setMultipleSuggestions(suggestions);
-            }, 250);
-        } else if (trigger === '#') {
-            setTimeout(() => {
-                const query = event.query;
-                let suggestions;
-
-                if (!query.trim().length) {
-                    suggestions = [...tagSuggestions];
-                } else {
-                    suggestions = tagSuggestions.filter((tag) => {
-                        return tag.toLowerCase().startsWith(query.toLowerCase());
-                    });
-                }
-
-                setMultipleSuggestions(suggestions);
-            }, 250);
+            ]
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         }
-    };
+    ];
 
-    const itemTemplate = (suggestion) => {
-        const src = 'images/avatar/' + suggestion.representative.image;
-
-        return (
-            <div className="flex align-items-center">
-                <img alt={suggestion.name} src={src} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} width="32" style={{ verticalAlign: 'middle' }} />
-                <span className="flex flex-column ml-2">
-                    {suggestion.name}
-                    <small style={{ fontSize: '.75rem', color: 'var(--text-secondary-color)' }}>@{suggestion.nickname}</small>
-                </span>
-            </div>
-        );
-    };
-
-    const multipleItemTemplate = (suggestion, options) => {
-        const trigger = options.trigger;
-
-        if (trigger === '@' && suggestion.nickname) {
-            return itemTemplate(suggestion);
-        } else if (trigger === '#' && !suggestion.nickname) {
-            return <span>{suggestion}</span>;
-        }
-
-        return null;
-    };
-
-    return (
-        <div>
-            <Head>
-                <title>React Mention Component</title>
-                <meta name="description" content="Mention component is used to refer someone or something." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Mention</h1>
-                    <p>Mention component is used to refer someone or something.</p>
-                </div>
-
-                <DocActions github="mention/index.js" />
-            </div>
-
-            <div className="content-section implementation">
-                <div className="card">
-                    <h5>Basic</h5>
-                    <Mention suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people" rows={5} cols={40} itemTemplate={itemTemplate} />
-
-                    <h5>Auto Resize</h5>
-                    <Mention suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people" rows={5} cols={40} autoResize itemTemplate={itemTemplate} />
-
-                    <h5>Multiple Trigger</h5>
-                    <Mention
-                        trigger={['@', '#']}
-                        suggestions={multipleSuggestions}
-                        onSearch={onMultipleSearch}
-                        field={['nickname']}
-                        placeholder="Please enter @ to mention people, # to mention tag"
-                        itemTemplate={multipleItemTemplate}
-                        rows={5}
-                        cols={40}
-                    />
-                </div>
-            </div>
-
-            <MentionDoc />
-        </div>
-    );
+    return <DocComponent title="React Mention Component" header="Mention" description="Mention component is used to tag objects in a text." componentDocs={docs} apiDocs={[{ name: 'Mention', pathname: '/modules/mention.html' }]} />;
 };
 
 export default MentionDemo;

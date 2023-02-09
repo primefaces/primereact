@@ -25,7 +25,7 @@ const DataTableProps = [
     },
     {
         name: 'style',
-        type: 'object',
+        type: 'React.CSSProperties',
         default: 'null',
         description: 'Inline style of the component.'
     },
@@ -762,6 +762,48 @@ const DataTableEvents = [
     {
         name: 'onRowDoubleClick',
         description: 'Callback to invoke when a row is double clicked.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event.'
+            },
+            {
+                name: 'event.data',
+                type: 'any',
+                description: 'Clicked row data'
+            },
+            {
+                name: 'event.index',
+                type: 'number',
+                description: 'Clicked row data index'
+            }
+        ]
+    },
+    {
+        name: 'onRowMouseEnter',
+        description: 'Callback to invoke when a row is mouse hovered.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event.'
+            },
+            {
+                name: 'event.data',
+                type: 'any',
+                description: 'Clicked row data'
+            },
+            {
+                name: 'event.index',
+                type: 'number',
+                description: 'Clicked row data index'
+            }
+        ]
+    },
+    {
+        name: 'onRowMouseLeave',
+        description: 'Callback to invoke when a row is moused out.',
         arguments: [
             {
                 name: 'event.originalEvent',

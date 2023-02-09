@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
+import { ColumnBase } from '../column/ColumnBase';
 import { useEventListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
@@ -18,9 +19,9 @@ export const BodyCell = React.memo((props) => {
     const tabindexTimeout = React.useRef(null);
     const initFocusTimeout = React.useRef(null);
 
-    const getColumnProp = (prop) => (props.column ? props.column.props[prop] : null);
+    const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
     const field = getColumnProp('field') || `field_${props.index}`;
-    const editingKey = props.dataKey ? props.rowData[props.dataKey] || props.rowIndex : props.rowIndex;
+    const editingKey = props.dataKey ? (props.rowData && props.rowData[props.dataKey]) || props.rowIndex : props.rowIndex;
 
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
         type: 'click',
@@ -51,7 +52,7 @@ export const BodyCell = React.memo((props) => {
     };
 
     const equals = (selectedCell) => {
-        return (selectedCell.rowIndex === props.rowIndex || equalsData(selectedCell.rowData)) && (selectedCell.field === field || selectedCell.cellIndex === props.index);
+        return selectedCell && (selectedCell.rowIndex === props.rowIndex || equalsData(selectedCell.rowData)) && (selectedCell.field === field || selectedCell.cellIndex === props.index);
     };
 
     const isOutsideClicked = (target) => {
@@ -218,7 +219,7 @@ export const BodyCell = React.memo((props) => {
 
             if (align === 'right') {
                 let right = 0;
-                let next = elementRef.current.nextElementSibling;
+                let next = elementRef.current && elementRef.current.nextElementSibling;
 
                 if (next) {
                     right = DomHandler.getOuterWidth(next) + parseFloat(next.style.right || 0);
@@ -227,7 +228,7 @@ export const BodyCell = React.memo((props) => {
                 styleObject['right'] = right + 'px';
             } else {
                 let left = 0;
-                let prev = elementRef.current.previousElementSibling;
+                let prev = elementRef.current && elementRef.current.previousElementSibling;
 
                 if (prev) {
                     left = DomHandler.getOuterWidth(prev) + parseFloat(prev.style.left || 0);
@@ -250,7 +251,11 @@ export const BodyCell = React.memo((props) => {
         setEditingRowDataState(editingRowData);
 
         // update editing meta for complete methods on row mode
-        props.editingMeta[editingKey].data[field] = val;
+        const currentData = getEditingRowData();
+
+        if (currentData) {
+            currentData[field] = val;
+        }
     };
 
     const onClick = (event) => {
@@ -463,13 +468,14 @@ export const BodyCell = React.memo((props) => {
         }
     }, [props.editingMeta]);
 
-    useUpdateEffect(() => {
+    React.useEffect(() => {
         if (props.editMode === 'cell' || props.editMode === 'row') {
             const callbackParams = getCellCallbackParams();
             const params = { ...callbackParams, editing: editingState, editingKey };
 
             props.onEditingMetaChange(params);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [editingState]);
 
     useUnmountEffect(() => {

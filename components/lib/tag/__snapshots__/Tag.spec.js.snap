@@ -1,0 +1,127 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tag default 1`] = `
+<div>
+  <span
+    class="p-tag p-component"
+  >
+    <span
+      class="p-tag-value"
+    />
+    <span />
+  </span>
+</div>
+`;
+
+exports[`Tag icon 1`] = `
+<div>
+  <span
+    class="p-tag p-component"
+  >
+    <span
+      class="p-tag-icon pi pi-check"
+    />
+    <span
+      class="p-tag-value"
+    />
+    <span />
+  </span>
+</div>
+`;
+
+exports[`Tag rounded 1`] = `
+<div>
+  <span
+    class="p-tag p-component p-tag-rounded"
+  >
+    <span
+      class="p-tag-value"
+    />
+    <span />
+  </span>
+</div>
+`;
+
+exports[`Tag sevrity danger 1`] = `
+<div>
+  <span
+    class="p-tag p-component p-tag-danger"
+  >
+    <span
+      class="p-tag-value"
+    />
+    <span />
+  </span>
+</div>
+`;
+
+exports[`Tag sevrity info 1`] = `
+<div>
+  <span
+    class="p-tag p-component p-tag-info"
+  >
+    <span
+      class="p-tag-value"
+    />
+    <span />
+  </span>
+</div>
+`;
+
+exports[`Tag sevrity success 1`] = `
+<div>
+  <span
+    class="p-tag p-component p-tag-success"
+  >
+    <span
+      class="p-tag-value"
+    />
+    <span />
+  </span>
+</div>
+`;
+
+exports[`Tag sevrity warning 1`] = `
+<div>
+  <span
+    class="p-tag p-component p-tag-warning"
+  >
+    <span
+      class="p-tag-value"
+    />
+    <span />
+  </span>
+</div>
+`;
+
+exports[`Tag templating 1`] = `
+<div>
+  <span
+    class="p-tag p-component"
+  >
+    <span
+      class="p-tag-value"
+    />
+    <span>
+      <div>
+        hello
+      </div>
+    </span>
+  </span>
+</div>
+`;
+
+exports[`Tag value 1`] = `
+<div>
+  <span
+    class="p-tag p-component"
+  >
+    <span
+      class="p-tag-value"
+    >
+      jest
+    </span>
+    <span />
+  </span>
+</div>
+`;

@@ -1,5 +1,13 @@
+/**
+ *
+ * @todo Write the documentation.
+ *
+ * @module api
+ *
+ */
+
 // Config
-interface ZIndexOptions {
+export interface ZIndexOptions {
     modal: number;
     overlay: number;
     menu: number;
@@ -11,13 +19,13 @@ export type InputStyleType = 'outlined' | 'filled';
 
 export type AppendToType = 'self' | HTMLElement | undefined | null;
 
-interface FilterMatchModeOptions {
+export interface FilterMatchModeOptions {
     text: any[];
     numeric: any[];
     date: any[];
 }
 
-interface APIOptions {
+export interface APIOptions {
     ripple?: boolean;
     inputStyle?: InputStyleType;
     nonce?: string;

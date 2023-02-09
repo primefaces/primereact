@@ -1,14 +1,17 @@
 import * as React from 'react';
-import { FilterService } from '../api/Api';
+import { FilterService, localeOption } from '../api/Api';
 import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
+import { ListBoxBase } from './ListBoxBase';
 import { ListBoxHeader } from './ListBoxHeader';
 import { ListBoxItem } from './ListBoxItem';
 
 export const ListBox = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ListBoxBase.getProps(inProps);
+
         const [filterValueState, setFilterValueState] = React.useState('');
         const elementRef = React.useRef(null);
         const virtualScrollerRef = React.useRef(null);
@@ -255,6 +258,7 @@ export const ListBox = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            focus: () => DomHandler.focusFirstElement(elementRef.current),
             getElement: () => elementRef.current,
             getVirtualScroller: () => virtualScrollerRef.current
         }));
@@ -343,7 +347,19 @@ export const ListBox = React.memo(
         };
 
         const createItems = () => {
-            return visibleOptions ? visibleOptions.map(createItem) : null;
+            if (ObjectUtils.isNotEmpty(visibleOptions)) {
+                return visibleOptions.map(createItem);
+            } else if (hasFilter) {
+                return createEmptyMessage(props.emptyFilterMessage, true);
+            }
+
+            return createEmptyMessage(props.emptyMessage);
+        };
+
+        const createEmptyMessage = (emptyMessage, isFilter) => {
+            const message = ObjectUtils.getJSXElement(emptyMessage, props) || localeOption(isFilter ? 'emptyFilterMessage' : 'emptyMessage');
+
+            return <li className="p-listbox-empty-message">{message}</li>;
         };
 
         const createList = () => {
@@ -381,7 +397,7 @@ export const ListBox = React.memo(
         const visibleOptions = getVisibleOptions();
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, ListBox.defaultProps);
+        const otherProps = ListBoxBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-listbox p-component',
@@ -409,38 +425,3 @@ export const ListBox = React.memo(
 );
 
 ListBox.displayName = 'ListBox';
-ListBox.defaultProps = {
-    __TYPE: 'ListBox',
-    id: null,
-    value: null,
-    options: null,
-    optionLabel: null,
-    optionValue: null,
-    optionDisabled: null,
-    optionGroupLabel: null,
-    optionGroupChildren: null,
-    optionGroupTemplate: null,
-    itemTemplate: null,
-    style: null,
-    listStyle: null,
-    listClassName: null,
-    className: null,
-    virtualScrollerOptions: null,
-    disabled: null,
-    dataKey: null,
-    multiple: false,
-    metaKeySelection: false,
-    filter: false,
-    filterTemplate: null,
-    filterBy: null,
-    filterValue: null,
-    filterMatchMode: 'contains',
-    filterPlaceholder: null,
-    filterLocale: undefined,
-    filterInputProps: null,
-    tabIndex: 0,
-    tooltip: null,
-    tooltipOptions: null,
-    onChange: null,
-    onFilterValueChange: null
-};

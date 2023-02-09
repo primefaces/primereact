@@ -1,22 +1,20 @@
 import Head from 'next/head';
+import { useEffect, useState } from 'react';
 import Analytics from '../components/layout/analytics';
-import getConfig from 'next/config';
+import { classNames } from '../components/lib/utils/ClassNames';
 import NewsSection from '../components/news/newssection';
-import HeaderSection from './landing/headersection';
-import HeroSection from './landing/herosection';
-import ComponentSection from './landing/componentsection';
-import ThemeSection from './landing/themesection';
 import BlockSection from './landing/blocksection';
+import ComponentSection from './landing/componentsection';
 import DesignerSection from './landing/designersection';
-import TemplateSection from './landing/templatesection';
-import UsersSection from './landing/userssection';
 import FeaturesSection from './landing/featuressection';
 import FooterSection from './landing/footersection';
-import { classNames } from '../components/lib/utils/ClassNames';
-import { useEffect, useState } from 'react';
+import HeaderSection from './landing/headersection';
+import HeroSection from './landing/herosection';
+import TemplateSection from './landing/templatesection';
+import ThemeSection from './landing/themesection';
+import UsersSection from './landing/userssection';
 
 export default function Home(props) {
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const [tableTheme, setTableTheme] = useState('lara-light-indigo');
     const rootClassName = classNames('landing', { 'landing-light': !props.dark, 'landing-dark': props.dark, 'landing-news-active': props.newsActive });
 
@@ -52,16 +50,11 @@ export default function Home(props) {
                 <meta name="twitter:description" content="The ultimate collection of design-agnostic, flexible and accessible React UI Components." />
                 <meta property="og:type" content="website"></meta>
                 <meta property="og:title" content="PrimeReact | React UI Component Library"></meta>
-                <meta property="og:url" content="https://www.primefaces.org/primereact"></meta>
+                <meta property="og:url" content="https://primereact.org"></meta>
                 <meta property="og:description" content="The ultimate collection of design-agnostic, flexible and accessible React UI Components." />
                 <meta property="og:image" content="https://www.primefaces.org/primereact/static/social/primereact-preview.jpg"></meta>
                 <meta property="og:ttl" content="604800"></meta>
-                <link href={`${contextPath}/images/favicon.ico`} rel="icon" type="image/x-icon"></link>
-                <link href={`${contextPath}/styles/landing/themes/${tableTheme}/theme.css`} rel="stylesheet"></link>
-                <link rel="stylesheet" href={`${contextPath}/styles/flags.css`}></link>
-                {/* eslint-disable */}
-                <script src={`${contextPath}/scripts/prism/prism.js`} data-manual></script>
-                {/* eslint-enable */}
+                <link href={`https://www.primereact.org/styles/landing/themes/${tableTheme}/theme.css`} rel="stylesheet"></link>
             </Head>
             <div className="landing-intro">
                 {props.newsActive && <NewsSection announcement={props.announcement} onClose={props.onNewsClose} />}

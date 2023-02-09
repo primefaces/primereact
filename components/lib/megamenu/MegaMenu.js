@@ -3,9 +3,12 @@ import PrimeReact from '../api/Api';
 import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { MegaMenuBase } from './MegaMenuBase';
 
 export const MegaMenu = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = MegaMenuBase.getProps(inProps);
+
         const [activeItemState, setActiveItemState] = React.useState(null);
         const elementRef = React.useRef(null);
         const horizontal = props.orientation === 'horizontal';
@@ -387,7 +390,7 @@ export const MegaMenu = React.memo(
             return null;
         };
 
-        const otherProps = ObjectUtils.findDiffKeys(props, MegaMenu.defaultProps);
+        const otherProps = MegaMenuBase.getOtherProps(props);
         const className = classNames(
             'p-megamenu p-component',
             {
@@ -411,13 +414,3 @@ export const MegaMenu = React.memo(
 );
 
 MegaMenu.displayName = 'MegaMenu';
-MegaMenu.defaultProps = {
-    __TYPE: 'MegaMenu',
-    id: null,
-    model: null,
-    style: null,
-    className: null,
-    orientation: 'horizontal',
-    start: null,
-    end: null
-};

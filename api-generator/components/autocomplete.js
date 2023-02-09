@@ -84,6 +84,12 @@ const AutoCompleteProps = [
         description: 'Specifies if multiple values can be selected.'
     },
     {
+        name: 'selectionLimit',
+        type: 'number',
+        default: 'null',
+        description: 'Number of maximum options that can be selected.'
+    },
+    {
         name: 'minLength',
         type: 'number',
         default: '1',
@@ -156,7 +162,7 @@ const AutoCompleteProps = [
         description: 'When present, it specifies that the component should be disabled.'
     },
     {
-        name: 'maxlength',
+        name: 'maxLength',
         type: 'number',
         default: 'null',
         description: 'Maximum number of character allows in the input field.'
@@ -470,7 +476,7 @@ const AutoCompleteStyles = [
 module.exports = {
     autocomplete: {
         name: 'AutoComplete',
-        description: 'AutoComplete is an input component that provides real-time suggestions when being typed.',
+        description: 'AutoComplete is an input component that provides real-time suggestions while being typed.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/autocomplete',
         props: AutoCompleteProps,
         events: AutoCompleteEvents,

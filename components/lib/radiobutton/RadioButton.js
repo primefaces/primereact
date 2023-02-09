@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { RadioButtonBase } from './RadioButtonBase';
 
 export const RadioButton = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = RadioButtonBase.getProps(inProps);
+
         const [focusedState, setFocusedState] = React.useState(false);
         const elementRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
@@ -18,7 +21,7 @@ export const RadioButton = React.memo(
                 const radioClicked = e.target instanceof HTMLDivElement;
                 const inputClicked = e.target === inputRef.current;
                 const isInputToggled = inputClicked && e.target.checked !== checked;
-                const isRadioToggled = radioClicked && !e.target.checked;
+                const isRadioToggled = radioClicked && (DomHandler.hasClass(elementRef.current, 'p-radiobutton-checked') === checked ? !checked : false);
 
                 if (isInputToggled || isRadioToggled) {
                     const value = !checked;
@@ -37,6 +40,10 @@ export const RadioButton = React.memo(
                             checked: value
                         }
                     });
+
+                    if (isRadioToggled) {
+                        inputRef.current.checked = value;
+                    }
                 }
 
                 DomHandler.focus(inputRef.current);
@@ -53,7 +60,8 @@ export const RadioButton = React.memo(
         };
 
         const onKeyDown = (event) => {
-            if (event.code === 'Space') {
+            if (event.code === 'Space' || event.key === ' ') {
+                // event.key is for Android support
                 onClick(event);
             }
         };
@@ -71,12 +79,13 @@ export const RadioButton = React.memo(
         React.useImperativeHandle(ref, () => ({
             props,
             select,
+            focus: () => DomHandler.focus(inputRef.current),
             getElement: () => elementRef.current,
             getInput: () => inputRef.current
         }));
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, RadioButton.defaultProps);
+        const otherProps = RadioButtonBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-radiobutton p-component',
@@ -123,20 +132,3 @@ export const RadioButton = React.memo(
 );
 
 RadioButton.displayName = 'RadioButton';
-RadioButton.defaultProps = {
-    __TYPE: 'RadioButton',
-    id: null,
-    inputRef: null,
-    inputId: null,
-    name: null,
-    value: null,
-    checked: false,
-    style: null,
-    className: null,
-    disabled: false,
-    required: false,
-    tabIndex: null,
-    tooltip: null,
-    tooltipOptions: null,
-    onChange: null
-};

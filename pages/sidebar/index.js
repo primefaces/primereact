@@ -1,80 +1,65 @@
-import React, { useState } from 'react';
-import { Sidebar } from '../../components/lib/sidebar/Sidebar';
-import { Button } from '../../components/lib/button/Button';
-import SidebarDoc from '../../components/doc/sidebar';
-import { DocActions } from '../../components/doc/common/docactions';
-import Head from 'next/head';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '../../components/doc/sidebar/accessibilitydoc';
+import { BasicDoc } from '../../components/doc/sidebar/basicdoc';
+import { FullScreenDoc } from '../../components/doc/sidebar/fullscreendoc';
+import { ImportDoc } from '../../components/doc/sidebar/importdoc';
+import { PositionDoc } from '../../components/doc/sidebar/positiondoc';
+import { SizeDoc } from '../../components/doc/sidebar/sizedoc';
+import { StyleDoc } from '../../components/doc/sidebar/styledoc';
+import { TemplateDoc } from '../../components/doc/sidebar/templatedoc';
 
 const SidebarDemo = () => {
-    const [visibleLeft, setVisibleLeft] = useState(false);
-    const [visibleRight, setVisibleRight] = useState(false);
-    const [visibleTop, setVisibleTop] = useState(false);
-    const [visibleBottom, setVisibleBottom] = useState(false);
-    const [visibleFullScreen, setVisibleFullScreen] = useState(false);
-    const [visibleCustomToolbar, setVisibleCustomToolbar] = useState(false);
-
-    const customIcons = (
-        <React.Fragment>
-            <button className="p-sidebar-icon p-link mr-1">
-                <span className="pi pi-print" />
-            </button>
-            <button className="p-sidebar-icon p-link mr-1">
-                <span className="pi pi-arrow-right" />
-            </button>
-        </React.Fragment>
-    );
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'position',
+            label: 'Position',
+            component: PositionDoc
+        },
+        {
+            id: 'size',
+            label: 'Size',
+            component: SizeDoc
+        },
+        {
+            id: 'fullscreen',
+            label: 'Full Screen',
+            component: FullScreenDoc
+        },
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
 
     return (
-        <div>
-            <Head>
-                <title>React Sidebar Component</title>
-                <meta name="description" content="Sidebar is a panel component displayed as an overlay." />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h3>Sidebar</h3>
-                    <p>Sidebar is a panel component displayed as an overlay.</p>
-                </div>
-                <DocActions github="sidebar/index.js" />
-            </div>
-
-            <div className="content-section implementation">
-                <div className="card">
-                    <Sidebar visible={visibleLeft} onHide={() => setVisibleLeft(false)}>
-                        <h3>Left Sidebar</h3>
-                    </Sidebar>
-
-                    <Sidebar visible={visibleRight} position="right" onHide={() => setVisibleRight(false)}>
-                        <h3>Right Sidebar</h3>
-                    </Sidebar>
-
-                    <Sidebar visible={visibleTop} position="top" onHide={() => setVisibleTop(false)}>
-                        <h3>Top Sidebar</h3>
-                    </Sidebar>
-
-                    <Sidebar visible={visibleBottom} position="bottom" onHide={() => setVisibleBottom(false)} modal={false} dismissable>
-                        <h3>Bottom Sidebar</h3>
-                    </Sidebar>
-
-                    <Sidebar visible={visibleFullScreen} fullScreen onHide={() => setVisibleFullScreen(false)}>
-                        <h3>Full Screen Sidebar</h3>
-                    </Sidebar>
-
-                    <Sidebar visible={visibleCustomToolbar} onHide={() => setVisibleCustomToolbar(false)} icons={customIcons}>
-                        <h3>Sidebar with custom icons</h3>
-                    </Sidebar>
-
-                    <Button icon="pi pi-arrow-right" onClick={() => setVisibleLeft(true)} className="mr-2" />
-                    <Button icon="pi pi-arrow-left" onClick={() => setVisibleRight(true)} className="mr-2" />
-                    <Button icon="pi pi-arrow-down" onClick={() => setVisibleTop(true)} className="mr-2" />
-                    <Button icon="pi pi-arrow-up" onClick={() => setVisibleBottom(true)} className="mr-2" />
-                    <Button icon="pi pi-th-large" onClick={() => setVisibleFullScreen(true)} className="mr-2" />
-                    <Button icon="pi pi-plus" onClick={() => setVisibleCustomToolbar(true)} />
-                </div>
-            </div>
-
-            <SidebarDoc />
-        </div>
+        <DocComponent
+            title="React Sidebar Component"
+            header="Sidebar"
+            description="Sidebar, also known as Drawer, is a container component displayed as an overlay."
+            componentDocs={docs}
+            apiDocs={[{ name: 'Sidebar', pathname: '/modules/sidebar.html' }]}
+        />
     );
 };
 
