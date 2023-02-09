@@ -16,7 +16,7 @@ export function DocComponent(props) {
     };
 
     return (
-        <div className="doc-component">
+        <div className="doc-component dock-demo">
             <Head>
                 <title>{props.title}</title>
                 <meta name="description" content={props.description} />
