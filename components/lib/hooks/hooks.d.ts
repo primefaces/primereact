@@ -8,6 +8,47 @@
 import * as React from 'react';
 
 /**
+ * Custom MousePositionOptions
+ * @group Misc
+ */
+interface MousePositionOptions {
+    /**
+     * Position of the mouse for the x-axis.
+     */
+    x: number;
+    /**
+     * Position of the mouse for the y-axis.
+     */
+    y: number;
+}
+
+/**
+ * Custom MouseDataOptions
+ * @group Misc
+ */
+declare interface MouseDataOptions extends MousePositionOptions {
+    /**
+     * Used to reset the mouse position data.
+     */
+    reset: () => void;
+    /**
+     * The ref of the element to position.
+     */
+    ref: React.RefObject<HTMLElement>;
+}
+
+/**
+ * Custom MouseMoveOptions
+ * @group Misc
+ */
+declare interface MouseMoveOptions extends MouseDataOptions {
+    /**
+     * Whether the mouse is touching the element or not.
+     */
+    active: boolean;
+}
+
+/**
  * Custom event options.
  * @group Misc
  */
@@ -142,3 +183,43 @@ export declare function useLocalStorage<S, K extends string = string>(initialVal
  * @param {*} initialValue - The initial value.
  * @param {string} key - The key to store the value in session storage. */
 export declare function useSessionStorage<S, K extends string = string>(initialValue: S, key: K): [S, React.Dispatch<React.SetStateAction<S>>];
+/**
+ * @todo
+ * @param {number} initialValue - The value to counter. @defaultValue 0
+ * @param {{ min: number; max: number; step: number }} options - The options of the counter. @defaultValue &#123; step: 1 &#125;
+ */
+export declare function useCounter(initialValue: number, options: { min: number; max: number; step: number }): any;
+/**
+ * Custom hook to use a debounced value.
+ * @param {*} initialValue - The initial value for debounce.
+ * @param {number} delay - The delay in milliseconds.
+ */
+export declare function useDebounce(initialValue: any, delay: number): any[];
+/**
+ * Custom hook to use to get the current mouse position.
+ */
+export declare function useMouse(): MouseDataOptions;
+/**
+ * Custom hook to handles move behavior over any element.
+ * @param {'horizontal' | 'vertical' | 'both'} mode - The mode of the move. Valid values are 'horizontal', 'vertical' and 'both'.
+ * @param {MousePositionOptions} initialValue - The initial value.
+ */
+export declare function useMove(mode: 'horizontal' | 'vertical' | 'both', initialValue: MousePositionOptions): MouseMoveOptions;
+/**
+ * Custom hook to use change the current favicon.
+ * @param {string} newIcon - The new favicon url to set.
+ * @param {string} rel - The rel attribute of the link element. @defaultValue 'shortcut icon'
+ */
+export declare function useFavicon(newIcon: string, rel: string): void;
+/**
+ * Custom hook to use change the current favicon.
+ * @param {React.RefObject<Element>} ref - The ref of the element to observe.
+ * @param {IntersectionObserver} options - The options of the intersection observer.
+ */
+export declare function useIntersectionObserver(ref: React.RefObject<Element>, options: IntersectionObserver): void;
+/**
+ * Custom hook to use detect click outside.
+ * @param {React.RefObject<Element>} ref - The ref of the element to detect click outside.
+ * @param {*} callback - The callback to run when click outside.
+ */
+export declare function useClickOutside(ref: React.RefObject<Element>, callback: any): void;

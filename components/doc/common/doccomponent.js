@@ -24,7 +24,7 @@ export function DocComponent(props) {
             <ul className="doc-tabmenu">
                 <li className={classNames({ 'doc-tabmenu-active': tab === 0 })}>
                     <button type="button" onClick={() => activateTab(0)}>
-                        COMPONENT
+                        {props.header.startsWith('use') ? 'HOOK' : 'COMPONENT'}
                     </button>
                 </li>
                 <li className={classNames({ 'doc-tabmenu-active': tab === 1 })}>

@@ -26,7 +26,7 @@ export function DocApiSection(props) {
         <React.Fragment>
             <div className="doc-main">
                 <DocSectionText {...props}>
-                    <p>{props.doc ? 'Visit the API documentation for detailed information about all the properties, events and methods of the component.' : 'The components does not have any Javascript API.'}</p>
+                    <p>{props.doc ? 'Visit the API documentation for detailed information about all the options.' : 'The component does not have any Javascript API.'}</p>
                 </DocSectionText>
                 {props.doc ? <ul {...props}>{renderApiDocs()}</ul> : null}
             </div>
