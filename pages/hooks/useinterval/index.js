@@ -1,6 +1,6 @@
 import { DocComponent } from '../../../components/doc/common/doccomponent';
-import { BasicDoc } from '../../../components/doc/hooks/useInterval/basicdoc';
-import { ImportDoc } from '../../../components/doc/hooks/useInterval/importdoc';
+import { BasicDoc } from '../../../components/doc/hooks/useinterval/basicdoc';
+import { ImportDoc } from '../../../components/doc/hooks/useinterval/importdoc';
 
 const IntervalDemo = () => {
     const docs = [
