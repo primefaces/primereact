@@ -7,7 +7,7 @@ export default function Topbar(props) {
     const versions = [
         {
             name: 'v9',
-            version: '9.0.0-beta.1',
+            version: '9.0.0-rc.1',
             url: 'https://www.primereact.org'
         },
         {

@@ -169,10 +169,6 @@
                             "to": "/datatable"
                         },
                         {
-                            "name": "DataScroller",
-                            "to": "/datascroller"
-                        },
-                        {
                             "name": "DataView",
                             "to": "/dataview"
                         },

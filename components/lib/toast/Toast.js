@@ -2,7 +2,7 @@ import * as React from 'react';
 import { TransitionGroup } from 'react-transition-group';
 import PrimeReact from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useUnmountEffect } from '../hooks/Hooks';
+import { useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { classNames, ZIndexUtils } from '../utils/Utils';
 import { ToastBase } from './ToastBase';
@@ -21,7 +21,6 @@ export const Toast = React.memo(
             if (messageInfo) {
                 const messages = assignIdentifiers(messageInfo, true);
 
-                messagesState.length === 0 && ZIndexUtils.set('toast', containerRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['toast']);
                 setMessagesState(messages);
             }
         };
@@ -86,6 +85,10 @@ export const Toast = React.memo(
 
             props.onHide && props.onHide();
         };
+
+        useUpdateEffect(() => {
+            ZIndexUtils.set('toast', containerRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['toast']);
+        }, [messagesState, props.baseZIndex]);
 
         useUnmountEffect(() => {
             ZIndexUtils.clear(containerRef.current);
