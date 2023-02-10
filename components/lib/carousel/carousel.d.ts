@@ -12,7 +12,6 @@ import * as React from 'react';
 /**
  * Custom responsive option
  * @see {@link CarouselProps.responsiveOptions}
- * @group Misc
  */
 interface CarouselResponsiveOption {
     /**

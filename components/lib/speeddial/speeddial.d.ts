@@ -12,7 +12,6 @@ import { MenuItem } from '../menuitem';
 import { IconType } from '../utils';
 
 /**
- * @group Misc
  */
 interface SpeedDialButtonOptions {
     /**

@@ -28,15 +28,7 @@ const KeyFilterDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React KeyFilter"
-            header="KeyFilter"
-            description="KeyFilter is a built-in feature of InputText to restrict user input based on a regular expression."
-            componentDocs={docs}
-            apiDocs={[{ name: 'KeyFilter', pathname: '/modules/keyfilter.html' }]}
-        />
-    );
+    return <DocComponent title="React KeyFilter" header="KeyFilter" description="KeyFilter is a built-in feature of InputText to restrict user input based on a regular expression." componentDocs={docs} apiDocs={['KeyFilter']} />;
 };
 
 export default KeyFilterDemo;

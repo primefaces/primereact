@@ -13,7 +13,6 @@ import { IconType } from '../utils';
 
 /**
  * Custom confirm popup options
- * @group Misc
  */
 interface ConfirmPopupOptions {
     /**
@@ -164,7 +163,6 @@ export interface ConfirmPopupProps {
 
 /**
  * Object returned by the {@link confirmPopup} method.
- * @group Misc
  */
 interface ConfirmPopupReturn {
     /**

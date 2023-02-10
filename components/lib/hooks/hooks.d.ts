@@ -50,7 +50,6 @@ declare interface MouseMoveOptions extends MouseDataOptions {
 
 /**
  * Custom event options.
- * @group Misc
  */
 interface EventOptions {
     /**
@@ -77,7 +76,6 @@ interface EventOptions {
 
 /**
  * Custom overlay event options.
- * @group Misc
  */
 interface OverlayEventOptions {
     /**
@@ -100,7 +98,6 @@ interface OverlayEventOptions {
 
 /**
  * Custom resize event options.
- * @group Misc
  */
 interface ResizeEventOptions {
     /**

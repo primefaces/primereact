@@ -35,15 +35,7 @@ const SkeletonDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React ProgressSpinner Component"
-            header="ProgressSpinner"
-            description="ProgressSpinner is a process status indicator."
-            componentDocs={docs}
-            apiDocs={[{ name: 'ProgressSpinner', pathname: '/modules/progressspinner.html' }]}
-        />
-    );
+    return <DocComponent title="React ProgressSpinner Component" header="ProgressSpinner" description="ProgressSpinner is a process status indicator." componentDocs={docs} apiDocs={['ProgressSpinner']} />;
 };
 
 export default SkeletonDemo;

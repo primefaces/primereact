@@ -97,11 +97,9 @@ export declare class Inplace extends React.Component<InplaceProps, any> {
 }
 
 /**
- * InplaceDisplay is a helper component for Inplace.
- * @group Component
+ * @group Properties
  */
-// tslint:disable-next-line:max-classes-per-file
-export declare class InplaceDisplay extends React.Component {
+export interface InplaceDisplayProps {
     /**
      * Used to get the child elements of the component.
      * @readonly
@@ -110,14 +108,26 @@ export declare class InplaceDisplay extends React.Component {
 }
 
 /**
- * InplaceContent is a helper component for Inplace.
- * @group Component
+ * @group Properties
  */
-// tslint:disable-next-line:max-classes-per-file
-export declare class InplaceContent extends React.Component {
+export interface InplaceContentProps {
     /**
      * Used to get the child elements of the component.
      * @readonly
      */
     children?: React.ReactNode | undefined;
 }
+
+/**
+ * InplaceDisplay is a helper component for Inplace.
+ * @group Component
+ */
+// tslint:disable-next-line:max-classes-per-file
+export declare class InplaceDisplay extends React.Component<InplaceDisplayProps, any> {}
+
+/**
+ * InplaceContent is a helper component for Inplace.
+ * @group Component
+ */
+// tslint:disable-next-line:max-classes-per-file
+export declare class InplaceContent extends React.Component<InplaceContentProps, any> {}

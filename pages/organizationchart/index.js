@@ -40,7 +40,7 @@ const OrganizationChartDemo = () => {
             header="OrganizationChart"
             description="OrganizationChart visualizes hierarchical organization data."
             componentDocs={docs}
-            apiDocs={[{ name: 'OrganizationChart', pathname: '/modules/organizationchart.html' }]}
+            apiDocs={['OrganizationChart']}
             className="organizationchart-demo"
         />
     );

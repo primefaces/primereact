@@ -47,7 +47,7 @@ const ProgressBarDemo = () => {
         }
     ];
 
-    return <DocComponent title="React ProgressBar Component" header="ProgressBar" description="ProgressBar is a process status indicator." componentDocs={docs} apiDocs={[{ name: 'ProgressBar', pathname: '/modules/progressbar.html' }]} />;
+    return <DocComponent title="React ProgressBar Component" header="ProgressBar" description="ProgressBar is a process status indicator." componentDocs={docs} apiDocs={['ProgressBar']} />;
 };
 
 export default ProgressBarDemo;

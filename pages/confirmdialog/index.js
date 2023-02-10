@@ -43,13 +43,7 @@ const ConfirmDialogDemo = () => {
 
     return (
         <>
-            <DocComponent
-                title="React Confirmation Dialog Component"
-                header="ConfirmDialog"
-                description="ConfirmDialog is an easy to use and customizable Confirmation API using a dialog."
-                componentDocs={docs}
-                apiDocs={[{ name: 'ConfirmDialog', pathname: '/modules/confirmdialog.html' }]}
-            />
+            <DocComponent title="React Confirmation Dialog Component" header="ConfirmDialog" description="ConfirmDialog is an easy to use and customizable Confirmation API using a dialog." componentDocs={docs} apiDocs={['ConfirmDialog']} />
             <ConfirmDialog />
         </>
     );

@@ -78,15 +78,7 @@ const InputTextareaDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React Textarea Component"
-            header="InputTextarea"
-            description="InputTextarea adds styling and autoResize functionality to standard textarea element."
-            componentDocs={docs}
-            apiDocs={[{ name: 'InputTextarea', pathname: '/modules/inputtextarea.html' }]}
-        />
-    );
+    return <DocComponent title="React Textarea Component" header="InputTextarea" description="InputTextarea adds styling and autoResize functionality to standard textarea element." componentDocs={docs} apiDocs={['InputTextarea']} />;
 };
 
 export default InputTextareaDemo;

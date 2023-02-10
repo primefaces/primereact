@@ -35,7 +35,6 @@ interface PaginatorPageStateEvent {
 
 /**
  * Custom paginator first page link options
- * @group Misc
  */
 interface PaginatorFirstPageLinkOptions {
     /**
@@ -67,7 +66,6 @@ interface PaginatorFirstPageLinkOptions {
 
 /**
  * Custom paginator prev page link options
- * @group Misc
  */
 interface PaginatorPrevPageLinkOptions {
     /**
@@ -99,7 +97,6 @@ interface PaginatorPrevPageLinkOptions {
 
 /**
  * Custom paginator view options
- * @group Misc
  */
 interface PaginatorViewOptions {
     /**
@@ -114,7 +111,6 @@ interface PaginatorViewOptions {
 
 /**
  * Custom paginator page links options
- * @group Misc
  */
 interface PaginatorPageLinksOptions {
     /**
@@ -154,7 +150,6 @@ interface PaginatorPageLinksOptions {
 
 /**
  * Custom paginator next page link options
- * @group Misc
  */
 interface PaginatorNextPageLinkOptions {
     /**
@@ -186,7 +181,6 @@ interface PaginatorNextPageLinkOptions {
 
 /**
  * Custom paginator last page link options
- * @group Misc
  */
 interface PaginatorLastPageLinkOptions {
     /**
@@ -218,7 +212,6 @@ interface PaginatorLastPageLinkOptions {
 
 /**
  * Custom paginator change target options
- * @group Misc
  */
 interface PaginatorChangeTargetOptions {
     /**
@@ -265,7 +258,6 @@ interface PaginatorChangeEvent {
 
 /**
  * Custom rows per page dropdown options
- * @group Misc
  */
 interface PaginatorRowsPerPageDropdownOptions {
     /**
@@ -313,7 +305,6 @@ interface PaginatorRowsPerPageDropdownOptions {
 
 /**
  * Custom paginator current page report options
- * @group Misc
  */
 interface PaginatorCurrentPageReportOptions {
     /**
@@ -356,7 +347,6 @@ interface PaginatorCurrentPageReportOptions {
 
 /**
  * Custom paginator jump to page input options
- * @group Misc
  */
 interface PaginatorJumpToPageInputOptions {
     /**
@@ -389,7 +379,6 @@ interface PaginatorJumpToPageInputOptions {
 
 /**
  * Custom paginator template options
- * @group Misc
  */
 interface PaginatorTemplateOptions {
     /**
@@ -432,7 +421,6 @@ interface PaginatorTemplateOptions {
 
 /**
  * Custom template for the paginator.
- * @group Misc
  */
 export type PaginatorTemplate = PaginatorTemplateOptions | string | undefined;
 

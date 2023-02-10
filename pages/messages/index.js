@@ -58,7 +58,7 @@ const MessagesDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Messages Component" header="Messages" description="Messages component is used to display inline messages." componentDocs={docs} apiDocs={[{ name: 'Messages', pathname: '/modules/messages.html' }]} />;
+    return <DocComponent title="React Messages Component" header="Messages" description="Messages component is used to display inline messages." componentDocs={docs} apiDocs={['Messages']} />;
 };
 
 export default MessagesDemo;

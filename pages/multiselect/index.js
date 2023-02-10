@@ -95,15 +95,7 @@ const MultiSelectDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React MultiSelect Component"
-            header="MultiSelect"
-            description="MultiSelect is used to select multiple items from a collection."
-            componentDocs={docs}
-            apiDocs={[{ name: 'MultiSelect', pathname: '/modules/multiselect.html' }]}
-        />
-    );
+    return <DocComponent title="React MultiSelect Component" header="MultiSelect" description="MultiSelect is used to select multiple items from a collection." componentDocs={docs} apiDocs={['MultiSelect']} />;
 };
 
 export default MultiSelectDemo;

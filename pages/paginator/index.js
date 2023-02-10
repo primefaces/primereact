@@ -40,9 +40,7 @@ const PaginatorDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent title="React Paginator Component" header="Paginator" description="Paginator is a generic widget to display content in paged format." componentDocs={docs} apiDocs={[{ name: 'Paginator', pathname: '/modules/paginator.html' }]} />
-    );
+    return <DocComponent title="React Paginator Component" header="Paginator" description="Paginator is a generic widget to display content in paged format." componentDocs={docs} apiDocs={['Paginator']} />;
 };
 
 export default PaginatorDemo;

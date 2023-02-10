@@ -40,7 +40,7 @@ const StepsDemo = () => {
             header="Steps"
             description="Steps also known as Stepper, is an indicator for the steps in a workflow. Layout of steps component is optimized for responsive design."
             componentDocs={docs}
-            apiDocs={[{ name: 'Steps', pathname: '/modules/steps.html' }]}
+            apiDocs={['Steps']}
             className="steps-demo"
         />
     );

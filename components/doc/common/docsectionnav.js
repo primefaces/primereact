@@ -13,7 +13,9 @@ export function DocSectionNav(props) {
     };
 
     const scrollToTheSection = (id, behavior) => {
-        document.getElementById(id).parentElement.scrollIntoView({ block: 'start', behavior });
+        setTimeout(() => {
+            document.getElementById(id) && document.getElementById(id).parentElement.scrollIntoView({ block: 'start', behavior });
+        }, 1);
     };
 
     const getIdOfTheSection = (section) => {
@@ -51,7 +53,7 @@ export function DocSectionNav(props) {
 
         const onScroll = () => {
             sections.forEach((section) => {
-                const sectionLabelEl = section.querySelectorAll('.doc-section-label'); //Get all labels on the currrent section
+                const sectionLabelEl = section.querySelectorAll(':is(h1,h2,h3).doc-section-label'); //Get all labels on the currrent section
                 // Check if the section is currently scrolled to center of the screen
                 const isScrolledTo = (section) => window.scrollY >= section.offsetTop - topbarEl.clientHeight - 20 && window.scrollY < section.offsetTop + section.offsetHeight - topbarEl.clientHeight - 20;
 
@@ -96,11 +98,11 @@ export function DocSectionNav(props) {
                         </li>
                         {doc.children && (
                             <ul>
-                                {doc.children.map((child) => {
+                                {doc.children.map((child, i) => {
                                     const hash = child.id;
 
                                     return (
-                                        <li key={child.label} className={classNames('navbar-child-item', { 'active-navbar-child-item': activeTab === child.id })}>
+                                        <li key={child.id + '_' + child.label + '_' + i} className={classNames('navbar-child-item', { 'active-navbar-child-item': activeTab === child.id })}>
                                             <Link href={router.basePath + router.pathname + '#' + hash}>
                                                 <button className="p-link" onClick={(event) => onButtonClick(child)}>
                                                     {child.label}

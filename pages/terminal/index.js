@@ -29,7 +29,7 @@ const TerminalDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Terminal Component" header="Terminal" description="Terminal is a text based user interface." componentDocs={docs} apiDocs={[{ name: 'Terminal', pathname: '/modules/terminal.html' }]} />;
+    return <DocComponent title="React Terminal Component" header="Terminal" description="Terminal is a text based user interface." componentDocs={docs} apiDocs={['Terminal']} />;
 };
 
 export default TerminalDemo;

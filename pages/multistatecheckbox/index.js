@@ -59,15 +59,7 @@ const MultiStateCheckboxDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React MultiStateCheckbox Component"
-            header="MultiStateCheckbox"
-            description="MultiStateCheckbox is used to select a state from given options."
-            componentDocs={docs}
-            apiDocs={[{ name: 'MultiStateCheckbox', pathname: '/modules/multistatecheckbox.html' }]}
-        />
-    );
+    return <DocComponent title="React MultiStateCheckbox Component" header="MultiStateCheckbox" description="MultiStateCheckbox is used to select a state from given options." componentDocs={docs} apiDocs={['MultiStateCheckbox']} />;
 };
 
 export default MultiStateCheckboxDemo;

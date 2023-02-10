@@ -12,7 +12,6 @@ import { CSSTransitionProps } from '../csstransition';
 
 /**
  * Message options for toast component
- * @group Misc
  */
 export interface ToastMessage {
     /**

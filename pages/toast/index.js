@@ -58,7 +58,7 @@ const ToastDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Toast Component" header="Toast" description="Toast is used to display messages in an overlay." componentDocs={docs} apiDocs={[{ name: 'Toast', pathname: '/modules/toast.html' }]} />;
+    return <DocComponent title="React Toast Component" header="Toast" description="Toast is used to display messages in an overlay." componentDocs={docs} apiDocs={['Toast']} />;
 };
 
 export default ToastDemo;

@@ -18,7 +18,7 @@
         "type:check": "tsc",
         "test": "jest --watch --coverage",
         "test:check": "jest --watchAll=false --coverage",
-        "doc": "typedoc --name \"PrimeReact - v9.0.0-rc.1\" --out docs/api/9.0.0-rc.1"
+        "apidoc": "node ./api-generator/build-apidoc.js"
     },
     "dependencies": {
         "@docsearch/react": "3.3.2",

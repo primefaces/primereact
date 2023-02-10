@@ -25,7 +25,6 @@ interface TooltipEvent {
 
 /**
  * Defines valid properties of TooltipOptions.
- * @group Misc
  */
 export interface TooltipOptions {
     /**
@@ -148,7 +147,6 @@ export interface TooltipOptions {
 
 /**
  * In addition to React.HTMLAttributes, the following attributes can be used on any HTMLElement if the page has a PrimeReact {@link tooltip} component.
- * @group Misc
  */
 
 interface TooltipHTMLAttributes {

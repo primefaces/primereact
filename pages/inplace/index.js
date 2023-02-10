@@ -53,11 +53,7 @@ const ChipDemo = () => {
             header="Inplace"
             description="Inplace provides an easy to do editing and display at the same time where clicking the output displays the actual content."
             componentDocs={docs}
-            apiDocs={[
-                { name: 'Inplace', pathname: '/modules/inplace.html' },
-                { name: 'InplaceDisplay', pathname: '/classes/inplace.InplaceDisplay.html' },
-                { name: 'InplaceContent', pathname: '/classes/inplace.InplaceContent.html' }
-            ]}
+            apiDocs={['Inplace', 'InplaceDisplay', 'InplaceContent']}
         />
     );
 };

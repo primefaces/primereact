@@ -27,7 +27,6 @@ interface OrderListChangeEvent {
 
 /**
  * Custom filter options.
- * @group Misc
  */
 interface OrderListFilterOptions {
     /**

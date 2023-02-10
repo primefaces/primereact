@@ -13,7 +13,6 @@ import { IconType } from '../utils';
 
 /**
  * Custom toggle button change target options
- * @group Misc
  */
 interface ToggleButtonChangeTargetOptions {
     /**

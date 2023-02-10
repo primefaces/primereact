@@ -78,7 +78,6 @@ interface MultiSelectPanelHeaderTemplateEvent {
 
 /**
  * Custom multiselect change target options
- * @group Misc
  */
 interface MultiSelectChangeTargetOptions {
     /**
@@ -157,7 +156,6 @@ interface MultiSelectAllEvent {
 
 /**
  * Multiselect filter options
- * @group Misc
  */
 interface MultiSelectFilterOptions {
     /**

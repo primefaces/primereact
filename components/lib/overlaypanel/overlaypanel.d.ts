@@ -12,7 +12,6 @@ import { CSSTransitionProps } from '../csstransition';
 
 /**
  * Custom overlay panel breakpoints
- * @group Misc
  */
 interface OverlayPanelBreakpoints {
     /**

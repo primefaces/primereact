@@ -89,7 +89,7 @@ const ListBoxDemo = () => {
         }
     ];
 
-    return <DocComponent title="React ListBox Component" header="ListBox" description="ListBox is used to select one or more values from a list of items." componentDocs={docs} apiDocs={[{ name: 'ListBox', pathname: '/modules/listbox.html' }]} />;
+    return <DocComponent title="React ListBox Component" header="ListBox" description="ListBox is used to select one or more values from a list of items." componentDocs={docs} apiDocs={['ListBox']} />;
 };
 
 export default ListBoxDemo;

@@ -84,15 +84,7 @@ const InputMaskDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React Mask Component"
-            header="InputMask"
-            description="InputMask component is used to enter input in a certain format such as numeric, date, currency, email and phone."
-            componentDocs={docs}
-            apiDocs={[{ name: 'InputMask', pathname: '/modules/inputmask.html' }]}
-        />
-    );
+    return <DocComponent title="React Mask Component" header="InputMask" description="InputMask component is used to enter input in a certain format such as numeric, date, currency, email and phone." componentDocs={docs} apiDocs={['InputMask']} />;
 };
 
 export default InputMaskDemo;

@@ -34,7 +34,7 @@
                 outline: 0 none;
             }
         }
-        
+
         &.doc-tabmenu-active {
             button {
                 color: var(--primary-color);
@@ -70,7 +70,7 @@
     scroll-margin-top: 6.5rem;
 
     > a {
-        font-size: 1.25rem;
+        /*font-size: 1.25rem;*/
         color: var(--primary-color);
         opacity: .7;
         margin-left: 1rem;
@@ -111,7 +111,7 @@
             text-decoration: underline;
         }
     }
-    
+
     &.main {
         margin-bottom: 1rem;
     }
@@ -241,6 +241,7 @@
             td {
                 padding: 1rem;
                 border-bottom: 1px solid var(--surface-border);
+                white-space: pre-wrap;
 
                 &:first-child {
                     font-family: ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,Liberation Mono,monospace;

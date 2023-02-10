@@ -41,7 +41,7 @@ const BlockUIDemo = () => {
         }
     ];
 
-    return <DocComponent title="React BlockUI Component" header="BlockUI" description="BlockUI can block certain elements or the whole page." componentDocs={docs} apiDocs={[{ name: 'BlockUI', pathname: '/modules/blockui.html' }]} />;
+    return <DocComponent title="React BlockUI Component" header="BlockUI" description="BlockUI can block certain elements or the whole page." componentDocs={docs} apiDocs={['BlockUI']} />;
 };
 
 export default BlockUIDemo;

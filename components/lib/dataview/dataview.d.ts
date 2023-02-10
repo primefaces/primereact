@@ -50,7 +50,6 @@ interface DataViewLayoutOptionsChangeEvent {
 
 /**
  * Custom data view layout options props
- * @group Misc
  */
 export interface DataViewLayoutOptionsProps {
     /**
@@ -83,7 +82,6 @@ export interface DataViewLayoutOptionsProps {
 
 /**
  * Custom data view layout options
- * @group Misc
  * @extends {React.Component<DataViewLayoutOptionsProps, any>}
  */
 export declare class DataViewLayoutOptions extends React.Component<DataViewLayoutOptionsProps, any> {}

@@ -65,7 +65,7 @@ const ColorPickerDemo = () => {
         }
     ];
 
-    return <DocComponent title="React ColorPicker Component" header="ColorPicker" description="ColorPicker is an input component to select a color." componentDocs={docs} apiDocs={[{ name: 'ColorPicker', pathname: '/modules/colorpicker.html' }]} />;
+    return <DocComponent title="React ColorPicker Component" header="ColorPicker" description="ColorPicker is an input component to select a color." componentDocs={docs} apiDocs={['ColorPicker']} />;
 };
 
 export default ColorPickerDemo;

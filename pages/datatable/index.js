@@ -437,20 +437,7 @@ const DataTableDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React Table Component"
-            header="DataTable"
-            description="DataTable displays data in tabular format."
-            componentDocs={docs}
-            apiDocs={[
-                { name: 'DataTable', pathname: '/modules/datatable.html' },
-                { name: 'Column', pathname: '/modules/column.html' },
-                { name: 'Row', pathname: '/modules/row.html' },
-                { name: 'ColumnGroup', pathname: '/modules/columngroup.html' }
-            ]}
-        />
-    );
+    return <DocComponent title="React Table Component" header="DataTable" description="DataTable displays data in tabular format." componentDocs={docs} apiDocs={['DataTable', 'Column', 'Row', 'ColumnGroup']} />;
 };
 
 export default DataTableDemo;

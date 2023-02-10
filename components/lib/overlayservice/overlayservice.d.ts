@@ -24,7 +24,6 @@ export interface OverlayServiceEvent {
 }
 
 /**
- * @group Misc
  */
 export interface OverlayServiceOptions {
     /**

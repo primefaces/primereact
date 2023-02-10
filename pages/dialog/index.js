@@ -64,7 +64,7 @@ const DialogDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Dialog Component" header="Dialog" description="Dialog is a container to display content in an overlay window" componentDocs={docs} apiDocs={[{ name: 'Dialog', pathname: '/modules/dialog.html' }]} />;
+    return <DocComponent title="React Dialog Component" header="Dialog" description="Dialog is a container to display content in an overlay window" componentDocs={docs} apiDocs={['Dialog']} />;
 };
 
 export default DialogDemo;

@@ -12,7 +12,6 @@ import { IconType } from '../utils';
 
 /**
  * Custom file upload options
- * @group Misc
  */
 interface FileUploadOptions {
     /**
@@ -39,7 +38,6 @@ interface FileUploadOptions {
 
 /**
  * Custom file upload header options
- * @group Misc
  */
 interface FileUploadHeaderTemplateOptions {
     /**
@@ -71,7 +69,6 @@ interface FileUploadHeaderTemplateOptions {
 
 /**
  * Custom item template options
- * @group Misc
  */
 interface ItemTemplateOptions {
     /**
@@ -204,7 +201,6 @@ interface FileUploadProgressEvent {
 
 /**
  * Custom file upload handler options
- * @group Misc
  */
 interface FileUploadHandlerOptions {
     /**

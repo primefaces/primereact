@@ -52,15 +52,7 @@ const SidebarDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React Sidebar Component"
-            header="Sidebar"
-            description="Sidebar, also known as Drawer, is a container component displayed as an overlay."
-            componentDocs={docs}
-            apiDocs={[{ name: 'Sidebar', pathname: '/modules/sidebar.html' }]}
-        />
-    );
+    return <DocComponent title="React Sidebar Component" header="Sidebar" description="Sidebar, also known as Drawer, is a container component displayed as an overlay." componentDocs={docs} apiDocs={['Sidebar']} />;
 };
 
 export default SidebarDemo;

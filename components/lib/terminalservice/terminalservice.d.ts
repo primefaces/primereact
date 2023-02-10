@@ -10,7 +10,6 @@
 
 /**
  * Custom terminal service options.
- * @group Misc
  */
 export interface TerminalServiceOptions {
     /**
