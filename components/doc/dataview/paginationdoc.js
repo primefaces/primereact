@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
 import { Button } from '../../lib/button/Button';
@@ -7,11 +8,11 @@ import { Tag } from '../../lib/tag/Tag';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function BasicDoc(props) {
+export function PaginationDoc(props) {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 5)));
+        ProductService.getProducts().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const getSeverity = (product) => {
@@ -59,7 +60,7 @@ export function BasicDoc(props) {
 
     const code = {
         basic: `
-<DataView value={products} itemTemplate={itemTemplate} />
+<DataView value={products} itemTemplate={itemTemplate} paginator rows={5} />
         `,
         javascript: `
 import React, { useState, useEffect } from 'react';
@@ -69,11 +70,11 @@ import { DataView } from 'primereact/dataview';
 import { Rating } from 'primereact/rating';
 import { Tag } from 'primereact/tag';
 
-export default function BasicDemo() {
+export default function PaginationDemo() {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 5)));
+        ProductService.getProducts().then((data) => setProducts(data));
     }, []);
 
     const getSeverity = (product) => {
@@ -121,7 +122,7 @@ export default function BasicDemo() {
 
     return (
         <div className="card">
-            <DataView value={products} itemTemplate={itemTemplate} />
+            <DataView value={products} itemTemplate={itemTemplate} paginator rows={5} />
         </div>
     )
 }
@@ -147,11 +148,11 @@ interface Product {
     rating: number;
 }
 
-export default function BasicDemo() {
+export default function PaginationDemo() {
     const [products, setProducts] = useState<Product[]>([]);
 
     useEffect(() => {
-        ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 5)));
+        ProductService.getProducts().then((data) => setProducts(data));
     }, []);
 
     const getSeverity = (product: Product) => {
@@ -199,7 +200,7 @@ export default function BasicDemo() {
 
     return (
         <div className="card">
-            <DataView value={products} itemTemplate={itemTemplate} />
+            <DataView value={products} itemTemplate={itemTemplate} paginator rows={5} />
         </div>
     )
 }
@@ -226,12 +227,11 @@ export default function BasicDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    DataView requires a <i>value</i> to display along with an <i>itemTemplate</i> that receives an object in the collection to return content. The root element should have the PrimeFlex Grid classes e.g. col-12 to define how items are
-                    displayed.
+                    Pagination is enabled with the <i>paginator</i> and <i>rows</i> properties. Refer to the <Link href="/paginator">Paginator</Link> for more information about customizing the paginator.
                 </p>
             </DocSectionText>
             <div className="card">
-                <DataView value={products} itemTemplate={itemTemplate} />
+                <DataView value={products} itemTemplate={itemTemplate} paginator rows={5} />
             </div>
             <DocSectionCode code={code} service={['ProductService']} />
         </>
