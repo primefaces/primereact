@@ -199,7 +199,7 @@ export default function RowSpanGroupingDoc() {
             <DocSectionText {...props}>
                 <p>RowSpan Grouping demo content.</p>
             </DocSectionText>
-            <div className="card">
+            <div className="card datatable-rowgroup-demo">
                 <DataTable value={customers} rowGroupMode="rowspan" groupRowsBy="representative.name" sortMode="single" sortField="representative.name" sortOrder={1} responsiveLayout="scroll">
                     <Column header="#" headerStyle={{ width: '3em' }} body={(data, options) => options.rowIndex + 1}></Column>
                     <Column field="representative.name" header="Representative" body={representativeBodyTemplate}></Column>

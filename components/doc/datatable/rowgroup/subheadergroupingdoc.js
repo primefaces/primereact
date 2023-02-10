@@ -270,7 +270,7 @@ export default function SubHeaderGroupingDoc() {
             <DocSectionText {...props}>
                 <p>Group customers by their representative.</p>
             </DocSectionText>
-            <div className="card">
+            <div className="card datatable-rowgroup-demo">
                 <DataTable
                     value={customers}
                     rowGroupMode="subheader"

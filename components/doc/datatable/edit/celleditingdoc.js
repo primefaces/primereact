@@ -281,7 +281,7 @@ export default function CellEditingDoc() {
             <DocSectionText {...props}>
                 <p>Validations, dynamic columns and reverting values with the escape key.</p>
             </DocSectionText>
-            <div className="card p-fluid">
+            <div className="card p-fluid datatable-editing-demo">
                 <DataTable value={products} editMode="cell" className="editable-cells-table" responsiveLayout="scroll">
                     {columns.map(({ field, header }) => {
                         return <Column key={field} field={field} header={header} style={{ width: '25%' }} body={field === 'price' && priceBodyTemplate} editor={(options) => cellEditor(options)} onCellEditComplete={onCellEditComplete} />;

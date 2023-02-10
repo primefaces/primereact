@@ -53,7 +53,14 @@ const CarouselDemo = () => {
     ];
 
     return (
-        <DocComponent title="React Carousel Component" header="Carousel" description="Carousel is a content slider featuring various customization options." componentDocs={docs} apiDocs={[{ name: 'Carousel', pathname: '/modules/carousel.html' }]} />
+        <DocComponent
+            title="React Carousel Component"
+            header="Carousel"
+            description="Carousel is a content slider featuring various customization options."
+            componentDocs={docs}
+            apiDocs={[{ name: 'Carousel', pathname: '/modules/carousel.html' }]}
+            className="carousel-demo"
+        />
     );
 };
 

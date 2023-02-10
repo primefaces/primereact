@@ -695,7 +695,7 @@ export default DataTableDemo() {
             <DocSectionText {...props}>
                 <p>Datatable samples demo content.</p>
             </DocSectionText>
-            <div className="card">
+            <div className="card datatable-doc-demo">
                 <DataTable
                     value={customers}
                     paginator

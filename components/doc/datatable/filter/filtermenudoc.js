@@ -746,7 +746,7 @@ export default function FilterMenuDoc() {
             <DocSectionText {...props}>
                 <p>Filters are displayed in an overlay.</p>{' '}
             </DocSectionText>
-            <div className="card">
+            <div className="card datatable-filter-demo ">
                 <DataTable
                     value={customers}
                     paginator

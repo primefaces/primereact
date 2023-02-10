@@ -529,7 +529,7 @@ export default function FilterRowDoc() {
             <DocSectionText {...props}>
                 <p>Filters are displayed inline within a separate row.</p>{' '}
             </DocSectionText>
-            <div className="card">
+            <div className="card datatable-filter-demo ">
                 <DataTable
                     value={customers}
                     paginator

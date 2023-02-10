@@ -350,7 +350,7 @@ export default function ProgrammaticDoc() {
             <DocSectionText {...props}>
                 <p>Programmatic demo content.</p>
             </DocSectionText>
-            <div className="card">
+            <div className="card datatable-editing-demo">
                 <div className="pt-2 pb-4">
                     <Button onClick={() => setActiveRowIndex(0)} className="p-button-text" label="Activate 1st" />
                     <Button onClick={() => setActiveRowIndex(2)} className="p-button-text" label="Activate 3rd" />

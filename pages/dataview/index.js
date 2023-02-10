@@ -41,6 +41,7 @@ const DataViewDemo = () => {
             description="DataView displays data in grid or list layout with pagination and sorting features."
             componentDocs={docs}
             apiDocs={[{ name: 'DataView', pathname: '/modules/dataview.html' }]}
+            className="dataview-demo"
         />
     );
 };

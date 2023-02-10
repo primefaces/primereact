@@ -41,6 +41,7 @@ const OrganizationChartDemo = () => {
             description="OrganizationChart visualizes hierarchical organization data."
             componentDocs={docs}
             apiDocs={[{ name: 'OrganizationChart', pathname: '/modules/organizationchart.html' }]}
+            className="organizationchart-demo"
         />
     );
 };

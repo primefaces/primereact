@@ -299,7 +299,7 @@ export default function RowEditingDoc() {
             <DocSectionText {...props}>
                 <p>Row Editing demo content.</p>
             </DocSectionText>
-            <div className="card p-fluid">
+            <div className="card p-fluid datatable-editing-demo">
                 <DataTable value={products} editMode="row" dataKey="id" onRowEditComplete={onRowEditComplete} responsiveLayout="scroll">
                     <Column field="code" header="Code" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
                     <Column field="name" header="Name" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>

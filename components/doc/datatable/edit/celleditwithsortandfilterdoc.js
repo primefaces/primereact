@@ -277,7 +277,7 @@ export default function CellEditWithSortAndFilterDoc() {
             <DocSectionText {...props}>
                 <p>Programmatic demo content.</p>
             </DocSectionText>
-            <div className="card p-fluid">
+            <div className="card p-fluid datatable-editing-demo">
                 <DataTable value={products} editMode="cell" className="editable-cells-table" filterDisplay="row" responsiveLayout="scroll">
                     {columns.map(({ field, header }) => {
                         return (
