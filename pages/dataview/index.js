@@ -3,6 +3,7 @@ import { AccessibilityDoc } from '../../components/doc/dataview/accessibilitydoc
 import { BasicDoc } from '../../components/doc/dataview/basicdoc';
 import { ImportDoc } from '../../components/doc/dataview/importdoc';
 import { LayoutDoc } from '../../components/doc/dataview/layoutdoc';
+import { LoadingDoc } from '../../components/doc/dataview/loadingdoc';
 import { PaginationDoc } from '../../components/doc/dataview/paginationdoc';
 import { PrimeFlexDoc } from '../../components/doc/dataview/primeflexdoc';
 import { SortingDoc } from '../../components/doc/dataview/sortingdoc';
@@ -39,6 +40,11 @@ const DataViewDemo = () => {
             id: 'layout',
             label: 'Layout',
             component: LayoutDoc
+        },
+        {
+            id: 'loading',
+            label: 'Loading',
+            component: LoadingDoc
         },
         {
             id: 'style',

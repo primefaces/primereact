@@ -1,56 +1,36 @@
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
-import { Button } from '../../lib/button/Button';
 import { DataView, DataViewLayoutOptions } from '../../lib/dataview/DataView';
-import { Rating } from '../../lib/rating/Rating';
-import { Tag } from '../../lib/tag/Tag';
+import { Skeleton } from '../../lib/skeleton/Skeleton';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function LayoutDoc(props) {
+export function LoadingDoc(props) {
     const [products, setProducts] = useState([]);
     const [layout, setLayout] = useState('grid');
 
     useEffect(() => {
-        ProductService.getProducts().then((data) => setProducts(data.slice(0, 12)));
+        ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 6)));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const getSeverity = (product) => {
-        switch (product.inventoryStatus) {
-            case 'INSTOCK':
-                return 'success';
-
-            case 'LOWSTOCK':
-                return 'warning';
-
-            case 'OUTOFSTOCK':
-                return 'danger';
-
-            default:
-                return null;
-        }
-    };
 
     const listItem = (product) => {
         return (
             <div className="col-12">
                 <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
-                    <img className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src={`https://primefaces.org/cdn/primereact/images/product/${product.image}`} alt={product.name} />
+                    <Skeleton className="w-9 sm:w-16rem xl:w-10rem shadow-2 h-6rem block xl:block mx-auto border-round" />
                     <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                         <div className="flex flex-column align-items-center sm:align-items-start gap-3">
-                            <div className="text-2xl font-bold text-900">{product.name}</div>
-                            <Rating value={product.rating} readOnly cancel={false}></Rating>
+                            <Skeleton className="w-8rem border-round h-2rem" />
+                            <Skeleton className="w-6rem border-round h-1rem" />
                             <div className="flex align-items-center gap-3">
-                                <span className="flex align-items-center gap-2">
-                                    <i className="pi pi-tag"></i>
-                                    <span className="font-semibold">{product.category}</span>
-                                </span>
-                                <Tag value={product.inventoryStatus} severity={getSeverity(product)}></Tag>
+                                <Skeleton className="w-6rem border-round h-1rem" />
+                                <Skeleton className="w-3rem border-round h-1rem" />
                             </div>
                         </div>
                         <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
-                            <span className="text-2xl font-semibold">${product.price}</span>
-                            <Button icon="pi pi-shopping-cart" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                            <Skeleton className="w-4rem border-round h-2rem" />
+                            <Skeleton shape="circle" className="w-3rem h-3rem" />
                         </div>
                     </div>
                 </div>
@@ -63,20 +43,17 @@ export function LayoutDoc(props) {
             <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2">
                 <div className="p-4 border-1 surface-border surface-card border-round">
                     <div className="flex flex-wrap align-items-center justify-content-between gap-2">
-                        <div className="flex align-items-center gap-2">
-                            <i className="pi pi-tag"></i>
-                            <span className="font-semibold">{product.category}</span>
-                        </div>
-                        <Tag value={product.inventoryStatus} severity={getSeverity(product)}></Tag>
+                        <Skeleton className="w-6rem border-round h-1rem" />
+                        <Skeleton className="w-3rem border-round h-1rem" />
                     </div>
                     <div className="flex flex-column align-items-center gap-3 py-5">
-                        <img className="w-9 shadow-2 border-round" src={`https://primefaces.org/cdn/primereact/images/product/${product.image}`} alt={product.name} />
-                        <div className="text-2xl font-bold">{product.name}</div>
-                        <Rating value={product.rating} readOnly cancel={false}></Rating>
+                        <Skeleton className="w-9 shadow-2 border-round h-10rem" />
+                        <Skeleton className="w-8rem border-round h-2rem" />
+                        <Skeleton className="w-6rem border-round h-1rem" />
                     </div>
                     <div className="flex align-items-center justify-content-between">
-                        <span className="text-2xl font-semibold">${product.price}</span>
-                        <Button icon="pi pi-shopping-cart" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                        <Skeleton className="w-4rem border-round h-2rem" />
+                        <Skeleton shape="circle" className="w-3rem h-3rem" />
                     </div>
                 </div>
             </div>
@@ -107,55 +84,34 @@ export function LayoutDoc(props) {
         javascript: `
 import React, { useState, useEffect } from 'react';
 import { ProductService } from './service/ProductService';
-import { Button } from 'primereact/button';
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
-import { Rating } from 'primereact/rating';
-import { Tag } from 'primereact/tag';
+import { Skeleton } from 'primereact/skeleton';
 
 export default function BasicDemo() {
     const [products, setProducts] = useState([]);
     const [layout, setLayout] = useState('grid');
 
     useEffect(() => {
-        ProductService.getProducts().then((data) => setProducts(data.slice(0, 12)));
+        ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 6)));
     }, []);
-
-    const getSeverity = (product) => {
-        switch (product.inventoryStatus) {
-            case 'INSTOCK':
-                return 'success';
-
-            case 'LOWSTOCK':
-                return 'warning';
-
-            case 'OUTOFSTOCK':
-                return 'danger';
-
-            default:
-                return null;
-        }
-    };
 
     const listItem = (product) => {
         return (
             <div className="col-12">
                 <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
-                    <img className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src={\`https://primefaces.org/cdn/primereact/images/product/\${product.image}\`} alt={product.name} />
+                    <Skeleton className="w-9 sm:w-16rem xl:w-10rem shadow-2 h-6rem block xl:block mx-auto border-round" />
                     <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                         <div className="flex flex-column align-items-center sm:align-items-start gap-3">
-                            <div className="text-2xl font-bold text-900">{product.name}</div>
-                            <Rating value={product.rating} readOnly cancel={false}></Rating>
+                            <Skeleton className="w-8rem border-round h-2rem" />
+                            <Skeleton className="w-6rem border-round h-1rem" />
                             <div className="flex align-items-center gap-3">
-                                <span className="flex align-items-center gap-2">
-                                    <i className="pi pi-tag"></i>
-                                    <span className="font-semibold">{product.category}</span>
-                                </span>
-                                <Tag value={product.inventoryStatus} severity={getSeverity(product)}></Tag>
+                                <Skeleton className="w-6rem border-round h-1rem" />
+                                <Skeleton className="w-3rem border-round h-1rem" />
                             </div>
                         </div>
                         <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
-                            <span className="text-2xl font-semibold">\${product.price}</span>
-                            <Button icon="pi pi-shopping-cart" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                            <Skeleton className="w-4rem border-round h-2rem" />
+                            <Skeleton shape="circle" className="w-3rem h-3rem" />
                         </div>
                     </div>
                 </div>
@@ -168,20 +124,17 @@ export default function BasicDemo() {
             <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2">
                 <div className="p-4 border-1 surface-border surface-card border-round">
                     <div className="flex flex-wrap align-items-center justify-content-between gap-2">
-                        <div className="flex align-items-center gap-2">
-                            <i className="pi pi-tag"></i>
-                            <span className="font-semibold">{product.category}</span>
-                        </div>
-                        <Tag value={product.inventoryStatus} severity={getSeverity(product)}></Tag>
+                        <Skeleton className="w-6rem border-round h-1rem" />
+                        <Skeleton className="w-3rem border-round h-1rem" />
                     </div>
                     <div className="flex flex-column align-items-center gap-3 py-5">
-                        <img className="w-9 shadow-2 border-round" src={\`https://primefaces.org/cdn/primereact/images/product/\${product.image}\`} alt={product.name} />
-                        <div className="text-2xl font-bold">{product.name}</div>
-                        <Rating value={product.rating} readOnly cancel={false}></Rating>
+                        <Skeleton className="w-9 shadow-2 border-round h-10rem" />
+                        <Skeleton className="w-8rem border-round h-2rem" />
+                        <Skeleton className="w-6rem border-round h-1rem" />
                     </div>
                     <div className="flex align-items-center justify-content-between">
-                        <span className="text-2xl font-semibold">\${product.price}</span>
-                        <Button icon="pi pi-shopping-cart" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                        <Skeleton className="w-4rem border-round h-2rem" />
+                        <Skeleton shape="circle" className="w-3rem h-3rem" />
                     </div>
                 </div>
             </div>
@@ -215,10 +168,8 @@ export default function BasicDemo() {
         typescript: `
 import React, { useState, useEffect } from 'react';
 import { ProductService } from './service/ProductService';
-import { Button } from 'primereact/button';
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
-import { Rating } from 'primereact/rating';
-import { Tag } from 'primereact/tag';
+import { Skeleton } from 'primereact/skeleton';
 
 interface Product {
     id: string;
@@ -238,7 +189,7 @@ export default function BasicDemo() {
     const [layout, setLayout] = useState('grid');
 
     useEffect(() => {
-        ProductService.getProducts().then((data) => setProducts(data.slice(0, 12)));
+        ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 6)));
     }, []);
 
     const getSeverity = (product) => {
@@ -261,22 +212,19 @@ export default function BasicDemo() {
         return (
             <div className="col-12">
                 <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
-                    <img className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src={\`https://primefaces.org/cdn/primereact/images/product/\${product.image}\`} alt={product.name} />
+                    <Skeleton className="w-9 sm:w-16rem xl:w-10rem shadow-2 h-6rem block xl:block mx-auto border-round" />
                     <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                         <div className="flex flex-column align-items-center sm:align-items-start gap-3">
-                            <div className="text-2xl font-bold text-900">{product.name}</div>
-                            <Rating value={product.rating} readOnly cancel={false}></Rating>
+                            <Skeleton className="w-8rem border-round h-2rem" />
+                            <Skeleton className="w-6rem border-round h-1rem" />
                             <div className="flex align-items-center gap-3">
-                                <span className="flex align-items-center gap-2">
-                                    <i className="pi pi-tag"></i>
-                                    <span className="font-semibold">{product.category}</span>
-                                </span>
-                                <Tag value={product.inventoryStatus} severity={getSeverity(product)}></Tag>
+                                <Skeleton className="w-6rem border-round h-1rem" />
+                                <Skeleton className="w-3rem border-round h-1rem" />
                             </div>
                         </div>
                         <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
-                            <span className="text-2xl font-semibold">\${product.price}</span>
-                            <Button icon="pi pi-shopping-cart" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                            <Skeleton className="w-4rem border-round h-2rem" />
+                            <Skeleton shape="circle" className="w-3rem h-3rem" />
                         </div>
                     </div>
                 </div>
@@ -289,20 +237,17 @@ export default function BasicDemo() {
             <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2">
                 <div className="p-4 border-1 surface-border surface-card border-round">
                     <div className="flex flex-wrap align-items-center justify-content-between gap-2">
-                        <div className="flex align-items-center gap-2">
-                            <i className="pi pi-tag"></i>
-                            <span className="font-semibold">{product.category}</span>
-                        </div>
-                        <Tag value={product.inventoryStatus} severity={getSeverity(product)}></Tag>
+                        <Skeleton className="w-6rem border-round h-1rem" />
+                        <Skeleton className="w-3rem border-round h-1rem" />
                     </div>
                     <div className="flex flex-column align-items-center gap-3 py-5">
-                        <img className="w-9 shadow-2 border-round" src={\`https://primefaces.org/cdn/primereact/images/product/\${product.image}\`} alt={product.name} />
-                        <div className="text-2xl font-bold">{product.name}</div>
-                        <Rating value={product.rating} readOnly cancel={false}></Rating>
+                        <Skeleton className="w-9 shadow-2 border-round h-10rem" />
+                        <Skeleton className="w-8rem border-round h-2rem" />
+                        <Skeleton className="w-6rem border-round h-1rem" />
                     </div>
                     <div className="flex align-items-center justify-content-between">
-                        <span className="text-2xl font-semibold">\${product.price}</span>
-                        <Button icon="pi pi-shopping-cart" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                        <Skeleton className="w-4rem border-round h-2rem" />
+                        <Skeleton shape="circle" className="w-3rem h-3rem" />
                     </div>
                 </div>
             </div>
@@ -355,8 +300,7 @@ export default function BasicDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    DataView supports <i>list</i> and <i>grid</i> display modes defined with the <i>layout</i> property. The helper <i>DataViewLayoutOptions</i> component can be used to switch between the modes however this component is optional and
-                    you may use your own UI to switch modes as well. As in <i>list</i> layout, the <i>grid</i> layout also requires PrimeFlex Grid classes to define how the grid is displayed per screen sizes.
+                    While data is being loaded. <Link href="/skeleton">Skeleton</Link> component may be used to indicate the busy state.
                 </p>
             </DocSectionText>
             <div className="card">
