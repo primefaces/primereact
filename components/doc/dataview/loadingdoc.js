@@ -95,7 +95,7 @@ export default function BasicDemo() {
         ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 6)));
     }, []);
 
-    const listItem = (product) => {
+    const listItem = () => {
         return (
             <div className="col-12">
                 <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
@@ -119,7 +119,7 @@ export default function BasicDemo() {
         );
     };
 
-    const gridItem = (product) => {
+    const gridItem = () => {
         return (
             <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2">
                 <div className="p-4 border-1 surface-border surface-card border-round">
@@ -192,23 +192,7 @@ export default function BasicDemo() {
         ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 6)));
     }, []);
 
-    const getSeverity = (product) => {
-        switch (product.inventoryStatus) {
-            case 'INSTOCK':
-                return 'success';
-
-            case 'LOWSTOCK':
-                return 'warning';
-
-            case 'OUTOFSTOCK':
-                return 'danger';
-
-            default:
-                return null;
-        }
-    };
-
-    const listItem = (product: Product) => {
+    const listItem = () => {
         return (
             <div className="col-12">
                 <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
@@ -232,7 +216,7 @@ export default function BasicDemo() {
         );
     };
 
-    const gridItem = (product: Product) => {
+    const gridItem = () => {
         return (
             <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2">
                 <div className="p-4 border-1 surface-border surface-card border-round">
