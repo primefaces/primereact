@@ -34,7 +34,7 @@ const DockDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Dock Component" header="Dock" description="Dock is a navigation component consisting of menuitems." componentDocs={docs} apiDocs={[{ name: 'Dock', pathname: '/modules/dock.html' }]} />;
+    return <DocComponent title="React Dock Component" header="Dock" description="Dock is a navigation component consisting of menuitems." componentDocs={docs} apiDocs={[{ name: 'Dock', pathname: '/modules/dock.html' }]} className="dock-demo" />;
 };
 
 export default DockDemo;
