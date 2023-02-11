@@ -823,7 +823,7 @@ export interface ColumnProps {
 /**
  * **PrimeReact - Column**
  *
- * _It is a helper component for DataTable and TreeTable._
+ * _Column is a helper component for DataTable and TreeTable._
  *
  * [Live Demo](https://www.primefaces.org/primereact/column/)
  * --- ---

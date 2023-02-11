@@ -5,11 +5,22 @@ import React from 'react';
 export function DocSectionText(props) {
     const { id, label, level = 2, children } = props;
     const router = useRouter();
+
+    const onClick = (event) => {
+        const parentElement = event.currentTarget.parentElement;
+
+        setTimeout(() => {
+            parentElement.scrollIntoView({ block: 'start' });
+        }, 0);
+    };
+
     const content = (
         <>
             {label}
             <Link href={router.basePath + router.pathname + '#' + id} target="_self">
-                <a id={id}>#</a>
+                <a id={id} onClick={onClick}>
+                    #
+                </a>
             </Link>
         </>
     );

@@ -630,8 +630,16 @@ interface DataTableRowEditValidatorOptions<TValue extends DataTableValueArray> {
     props: DataTableProps<TValue>;
 }
 
+/**
+ * Custom value definition.
+ * @extends Record<string, any>
+ */
 interface DataTableValue extends Record<string, any> {}
 
+/**
+ * Custom value array definition.
+ * @extends Array<DataTableValue>
+ */
 interface DataTableValueArray extends Array<DataTableValue> {}
 
 type DataTableRowData<TValueArray extends DataTableValueArray> = TValueArray extends Array<infer TValue> ? TValue : never;

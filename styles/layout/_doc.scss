@@ -231,6 +231,7 @@
             border-bottom: 1px solid var(--surface-border);
             padding: 1rem;
             text-align: left;
+            text-transform: capitalize;
         }
 
         tbody {
@@ -249,10 +250,38 @@
                     color: var(--text-color-secondary);
                 }
 
-                &:nth-child(2):not(:last-child) {
+                &:nth-child(2):not(:last-child),
+                &.highlight {
                     font-family: ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,Liberation Mono,monospace;
                     color: var(--primary-color);
                     font-weight: 600;
+                }
+
+                .doc-option {
+                    position: relative;
+                    scroll-margin-top: 6.5rem;
+
+                    .doc-option-link {
+                        position: absolute;
+                        top: 0;
+                        right: -1.5rem;
+                        color: var(--primary-color);
+                        opacity: .7;
+                        display: none;
+                        transition: opacity .3s, colors .3s;
+                    }
+                }
+
+                &:hover {
+                    .doc-option {
+                        .doc-option-link {
+                            display: inline;
+
+                            &:hover {
+                                opacity: 1;
+                            }
+                        }
+                    }
                 }
             }
         }

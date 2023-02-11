@@ -35,6 +35,10 @@ const project = app.convert();
 if (project) {
     const doc = {};
 
+    const parseText = (text) => {
+        return text.replace(/&#123;/g, '{').replace(/&#125;/g, '}');
+    };
+
     project.children.forEach((module) => {
         const { name, comment } = module;
 
@@ -50,18 +54,30 @@ if (project) {
 
         module_component_group &&
             module_component_group.children.forEach((component) => {
-                const description = component.comment && component.comment.summary.map((s) => s.text || '').join(' ');
+                const description =
+                    component.comment &&
+                    component.comment.summary
+                        .map((s) => {
+                            const text = s.text || '';
+                            const splittedText = text.split('_');
+
+                            return splittedText[1] ? splittedText[1] : text;
+                        })
+                        .join(' ');
 
                 !doc[name]['components'] && (doc[name]['components'] = {});
 
-                const methods = [];
+                const methods = {
+                    description: "Defines methods that can be accessed by the component's reference.",
+                    values: []
+                };
                 const component_method_group = component.groups && component.groups.find((g) => g.title === 'Methods');
 
                 component_method_group &&
                     component_method_group.children.forEach((method) => {
                         const signature = method.getAllSignatures()[0];
 
-                        methods.push({
+                        methods.values.push({
                             name: signature.name,
                             parameters: signature.parameters.map((param) => {
                                 return {
@@ -79,24 +95,30 @@ if (project) {
                 const module_properties_group = module.groups.find((g) => g.title === 'Properties');
                 const component_props = module_properties_group && module_properties_group.children.find((c) => c.id === component_props_id);
 
-                const props = [];
-                const callbacks = [];
+                const props = {
+                    description: '',
+                    values: []
+                };
+                const callbacks = {
+                    description: 'Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.',
+                    values: []
+                };
 
                 if (component_props) {
-                    const component_props_description = component_props.comment && component_props.comment.summary.map((s) => s.text || '').join(' ');
+                    props.description = component_props.comment ? component_props.comment.summary.map((s) => parseText(s.text || '')).join(' ') : '';
 
                     const component_props_group = component_props.groups && component_props.groups.find((g) => g.title === 'Properties');
 
                     component_props_group &&
                         component_props_group.children.forEach((prop) => {
                             if (!prop.inheritedFrom) {
-                                props.push({
+                                props.values.push({
                                     name: prop.name,
                                     optional: prop.flags.isOptional,
                                     readonly: prop.flags.isReadonly,
                                     type: prop.type.toString(),
-                                    defaultValue: prop.comment && prop.comment.getTag('@defaultValue') ? prop.comment.getTag('@defaultValue').content[0].text : '', // TODO: Check
-                                    description: prop.comment && prop.comment.summary.map((s) => s.text || '').join(' ')
+                                    defaultValue: prop.comment && prop.comment.getTag('@defaultValue') ? parseText(prop.comment.getTag('@defaultValue').content[0].text) : '', // TODO: Check
+                                    description: prop.comment && prop.comment.summary.map((s) => parseText(s.text || '')).join(' ')
                                 });
                             }
                         });
@@ -107,18 +129,18 @@ if (project) {
                         component_props_methods_group.children.forEach((method) => {
                             const signature = method.getAllSignatures()[0];
 
-                            callbacks.push({
+                            callbacks.values.push({
                                 name: signature.name,
                                 parameters: signature.parameters.map((param) => {
                                     return {
                                         name: param.name,
                                         optional: param.flags.isOptional,
                                         type: param.type.name,
-                                        description: param.comment && param.comment.summary.map((s) => s.text || '').join(' ')
+                                        description: param.comment && param.comment.summary.map((s) => parseText(s.text || '')).join(' ')
                                     };
                                 }),
                                 returnType: signature.type.toString(),
-                                description: signature.comment.summary.map((s) => s.text || '').join(' ')
+                                description: signature.comment.summary.map((s) => parseText(s.text || '')).join(' ')
                             });
                         });
                 }
@@ -139,12 +161,15 @@ if (project) {
 
                 !doc[name]['model'] && (doc[name]['model'] = {});
 
-                const props = [];
+                const props = {
+                    description: '',
+                    values: []
+                };
                 const model_props_group = model.groups.find((g) => g.title === 'Properties');
 
                 model_props_group &&
                     model_props_group.children.forEach((prop) => {
-                        props.push({
+                        props.values.push({
                             name: prop.name,
                             optional: prop.flags.isOptional,
                             readonly: prop.flags.isReadonly,
@@ -168,7 +193,11 @@ if (project) {
                 const component_prop = event.comment && event.comment.getTag('@see') ? event.comment.getTag('@see').content[0].text : ''; // TODO: Check
                 const event_extendedBy = event.extendedBy && event.extendedBy.toString();
 
-                !doc[name]['events'] && (doc[name]['events'] = {});
+                !doc[name]['events'] &&
+                    (doc[name]['events'] = {
+                        description: "Defines the custom events used by the component's callbacks.",
+                        values: {}
+                    });
 
                 const props = [];
                 const event_props_group = event.groups.find((g) => g.title === 'Properties');
@@ -185,7 +214,7 @@ if (project) {
                         });
                     });
 
-                doc[name]['events'][event.name] = {
+                doc[name]['events'].values[event.name] = {
                     description: event_props_description,
                     relatedProp: component_prop,
                     props,
@@ -200,8 +229,13 @@ if (project) {
                 const event_props_description = event.comment && event.comment.summary.map((s) => s.text || '').join(' ');
                 const component_prop = event.comment && event.comment.getTag('@see') ? event.comment.getTag('@see').content[0].text : ''; // TODO: Check
                 const event_extendedBy = event.extendedBy && event.extendedBy.toString();
+                const event_extendedTypes = event.extendedTypes && event.extendedTypes.toString();
 
-                !doc[name]['interfaces'] && (doc[name]['interfaces'] = {});
+                !doc[name]['interfaces'] &&
+                    (doc[name]['interfaces'] = {
+                        description: 'Defines the custom interfaces used by the component.',
+                        values: {}
+                    });
 
                 const props = [];
 
@@ -236,11 +270,12 @@ if (project) {
                     });
                 }
 
-                doc[name]['interfaces'][event.name] = {
+                doc[name]['interfaces'].values[event.name] = {
                     description: event_props_description,
                     relatedProp: component_prop,
                     props,
-                    extendedBy: event_extendedBy
+                    extendedBy: event_extendedBy,
+                    extendedTypes: event_extendedTypes
                 };
             });
 
@@ -250,7 +285,12 @@ if (project) {
             module_types_group.children.forEach((event) => {
                 const event_props_description = event.comment && event.comment.summary.map((s) => s.text || '').join(' ');
 
-                !doc[name]['types'] && (doc[name]['types'] = {});
+                !doc[name]['types'] &&
+                    (doc[name]['types'] = {
+                        description: 'Defines the custom types used by the component.',
+                        values: {}
+                    });
+
                 let values = event.type.toString();
                 const declaration = event.type.declaration;
 
@@ -269,9 +309,9 @@ if (project) {
                     values = JSON.stringify(map, null, 4);
                 }
 
-                doc[name]['types'][event.name] = {
-                    values
-                    //description: event_props_description
+                doc[name]['types'].values[event.name] = {
+                    values,
+                    description: event_props_description
                 };
             });
     });
@@ -281,5 +321,5 @@ if (project) {
     !fs.existsSync(outputPath) && fs.mkdirSync(outputPath);
     fs.writeFileSync(path.resolve(outputPath, 'index.json'), typedocJSON);
 
-    app.generateJson(project, `./api-generator/typedoc.json`);
+    //app.generateJson(project, `./api-generator/typedoc.json`);
 }
