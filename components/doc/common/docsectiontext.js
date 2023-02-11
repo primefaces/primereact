@@ -8,6 +8,9 @@ export function DocSectionText(props) {
 
     const onClick = (event) => {
         const parentElement = event.currentTarget.parentElement;
+        const hash = window.location.hash.substring(1);
+
+        hash === id && event.preventDefault();
 
         setTimeout(() => {
             parentElement.scrollIntoView({ block: 'start' });

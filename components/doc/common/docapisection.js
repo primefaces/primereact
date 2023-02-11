@@ -15,12 +15,10 @@ const Component = (props) => {
         if (ObjectUtils.isNotEmpty(data)) {
             const headers = Object.keys(data[0]);
 
-            const onClick = (id) => {
+            const onClick = (id, behavior) => {
                 const element = document.getElementById(id);
 
-                setTimeout(() => {
-                    element && element.parentElement.scrollIntoView({ block: 'start', behavior: 'smooth' });
-                }, 1);
+                element && element.parentElement.scrollIntoView({ block: 'start', behavior });
             };
 
             const createContent = (value, isLinkableOption) => {
@@ -29,7 +27,11 @@ const Component = (props) => {
 
                     return splitedValues.map((sValue, i) => {
                         if (sValue.includes(name)) {
-                            let val = sValue.replace(/(\[|<).*$/gm, '').trim();
+                            let matchedIndex = sValue.indexOf(name);
+                            let val = sValue
+                                .substring(matchedIndex)
+                                .replace(/(\[|\]|<|>).*$/gm, '')
+                                .trim();
 
                             const apiId = name === val ? `api.${name}` : `api.${name}.${val === `${name}Props` ? 'props' : val}`;
 
@@ -37,7 +39,7 @@ const Component = (props) => {
                                 <React.Fragment key={i}>
                                     {i !== 0 ? '|' : ''}
                                     <Link href={router.basePath + router.pathname + `#${apiId}`} target="_self">
-                                        <a onClick={() => onClick(apiId)}>{sValue}</a>
+                                        <a onClick={() => onClick(apiId, 'smooth')}>{sValue}</a>
                                     </Link>
                                 </React.Fragment>
                             );

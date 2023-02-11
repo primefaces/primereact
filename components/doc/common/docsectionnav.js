@@ -35,6 +35,10 @@ export function DocSectionNav({ docs = [] }) {
             clearTimeout(scrollEndTimer.current);
             scrollEndTimer.current = setTimeout(() => {
                 isScrollBlocked.current = false;
+
+                const activeItem = DomHandler.findSingle(navRef.current, '.active-navbar-item');
+
+                activeItem && activeItem.scrollIntoView({ block: 'nearest', inline: 'start' });
             }, 50);
         }
     });
@@ -71,13 +75,7 @@ export function DocSectionNav({ docs = [] }) {
         setActiveId(id);
         hasHash && scrollToLabelById(id);
         bindDocumentScrollListener();
-    }, []);
-
-    useEffect(() => {
-        const activeItem = DomHandler.findSingle(navRef.current, '.active-navbar-item');
-
-        activeItem && activeItem.scrollIntoView({ block: 'nearest', inline: 'start' });
-    }, [activeId]);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const createItem = ({ id, label, children }, level = 0) => {
         const { basePath, pathname } = router;
@@ -100,7 +98,7 @@ export function DocSectionNav({ docs = [] }) {
 
     return (
         <ul ref={navRef} className="doc-section-nav">
-            {docs.map(createItem)}
+            {docs.map((item) => createItem(item))}
         </ul>
     );
 }
