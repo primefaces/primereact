@@ -41,8 +41,10 @@ export function DocSectionNav(props) {
 
     const onClick = (id) => {
         setActiveId(id);
-        scrollToLabelById(id, 'smooth');
-        isScrollBlocked.current = true;
+        setTimeout(() => {
+            scrollToLabelById(id, 'smooth');
+            isScrollBlocked.current = true;
+        }, 1);
     };
 
     const scrollToLabelById = (id, behavior) => {
