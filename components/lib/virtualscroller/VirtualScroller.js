@@ -618,6 +618,8 @@ export const VirtualScroller = React.memo(
                 'p-virtualscroller',
                 {
                     'p-both-scroll': both,
+                    'p-virtualscroller-both': both,
+                    'p-virtualscroller-horizontal': horizontal,
                     'p-horizontal-scroll': horizontal
                 },
                 props.className

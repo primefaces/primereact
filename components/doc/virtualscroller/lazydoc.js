@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { VirtualScroller } from '../../lib/virtualscroller/VirtualScroller';
+import React, { useEffect, useRef, useState } from 'react';
+import { Skeleton } from '../../lib/skeleton/Skeleton';
 import { classNames } from '../../lib/utils/Utils';
+import { VirtualScroller } from '../../lib/virtualscroller/VirtualScroller';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
@@ -35,30 +36,43 @@ export function LazyDoc(props) {
         }, Math.random() * 1000 + 250);
     };
 
-    const basicItemTemplate = (item, options) => {
+    const itemTemplate = (item, options) => {
+        const className = classNames('flex align-items-center p-2', {
+            'surface-hover': options.odd
+        });
+
+        return (
+            <div className={className} style={{ height: options.props.itemSize + 'px' }}>
+                {item}
+            </div>
+        );
+    };
+
+    const loadingTemplate = (options) => {
         const className = classNames('flex align-items-center p-2', {
             odd: options.odd
         });
-        const style = options.props.orientation === 'horizontal' ? { width: '50px' } : { height: '50px' };
 
         return (
-            <div className={className} style={style}>
-                {item}
+            <div className={className} style={{ height: '50px' }}>
+                <Skeleton width={options.even ? '60%' : '50%'} height="1.3rem" />
             </div>
         );
     };
 
     const code = {
         basic: `
-<VirtualScroller items={lazyItems} itemSize={50} itemTemplate={basicItemTemplate} lazy onLazyLoad={onLazyLoad} showLoader loading={lazyLoading} />
+<VirtualScroller items={lazyItems} itemSize={50} itemTemplate={itemTemplate} lazy onLazyLoad={onLazyLoad} 
+    loadingTemplate={loadingTemplate} showLoader loading={lazyLoading} 
+    className="border-1 surface-border border-round" style={{ width: '200px', height: '200px' }} />
         `,
         javascript: `
 import React, { useState, useEffect, useRef } from 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
+import { Skeleton } from 'primereact/skeleton';
 import { classNames } from 'primereact/utils';
-import './VirtualScrollerDemo.css';
 
-export default function LazyDoc() {
+export default function LazyDemo() {
     const [lazyItems, setLazyItems] = useState([]);
     const [lazyLoading, setLazyLoading] = useState(true);
     const loadLazyTimeout = useRef(null);
@@ -66,7 +80,7 @@ export default function LazyDoc() {
     useEffect(() => {
         setLazyItems(Array.from({ length: 100000 }));
         setLazyLoading(false);
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     const onLazyLoad = (event) => {
         setLazyLoading(true);
@@ -89,43 +103,55 @@ export default function LazyDoc() {
         }, Math.random() * 1000 + 250);
     };
 
-    const basicItemTemplate = (item, options) => {
+    const itemTemplate = (item, options) => {
+        const className = classNames('flex align-items-center p-2', {
+            'surface-hover': options.odd
+        });
+
+        return (
+            <div className={className} style={{ height: options.props.itemSize + 'px' }}>
+                {item}
+            </div>
+        );
+    };
+
+    const loadingTemplate = (options) => {
         const className = classNames('flex align-items-center p-2', {
             odd: options.odd
         });
-        const style = options.props.orientation === 'horizontal' ? { width: '50px' } : { height: '50px' };
 
         return (
-            <div className={className} style={style}>
-                {item}
+            <div className={className} style={{ height: '50px' }}>
+                <Skeleton width={options.even ? '60%' : '50%'} height="1.3rem" />
             </div>
         );
     };
 
     return ( 
-        <div className="card virtualscroller-demo">
-            <VirtualScroller items={lazyItems} itemSize={50} itemTemplate={basicItemTemplate} lazy onLazyLoad={onLazyLoad} showLoader loading={lazyLoading} />
+        <div className="card flex justify-content-center">
+            <VirtualScroller items={lazyItems} itemSize={50} itemTemplate={itemTemplate} lazy onLazyLoad={onLazyLoad} loadingTemplate={loadingTemplate}
+                showLoader loading={lazyLoading} className="border-1 surface-border border-round" style={{ width: '200px', height: '200px' }} />
         </div>
-        );
+    );
 }
         `,
         typescript: `
 import React, { useState, useEffect, useRef } from 'react';
-import { VirtualScroller } from 'primereact/virtualscroller';
+import { VirtualScroller, VirtualScrollerTemplateOptions, VirtualScrollerLazyEvent } from 'primereact/virtualscroller';
+import { Skeleton } from 'primereact/skeleton';
 import { classNames } from 'primereact/utils';
-import './VirtualScrollerDemo.css';
 
-export default function LazyDoc() {
-    const [lazyItems, setLazyItems] = useState([]);
-    const [lazyLoading, setLazyLoading] = useState(true);
+export default function LazyDemo() {
+    const [lazyItems, setLazyItems] = useState<string[]>([]);
+    const [lazyLoading, setLazyLoading] = useState<boolean>(true);
     const loadLazyTimeout = useRef(null);
 
     useEffect(() => {
         setLazyItems(Array.from({ length: 100000 }));
         setLazyLoading(false);
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
-    const onLazyLoad = (event) => {
+    const onLazyLoad = (event: VirtualScrollerLazyEvent) => {
         setLazyLoading(true);
 
         if (loadLazyTimeout.current) {
@@ -146,59 +172,61 @@ export default function LazyDoc() {
         }, Math.random() * 1000 + 250);
     };
 
-    const basicItemTemplate = (item, options) => {
+    const itemTemplate = (item: string, options: VirtualScrollerTemplateOptions) => {
         const className = classNames('flex align-items-center p-2', {
-            odd: options.odd
+            'surface-hover': options.odd
         });
-        const style = options.props.orientation === 'horizontal' ? { width: '50px' } : { height: '50px' };
 
         return (
-            <div className={className} style={style}>
+            <div className={className} style={{ height: options.props.itemSize + 'px' }}>
                 {item}
             </div>
         );
     };
 
+    const loadingTemplate = (options: VirtualScrollerTemplateOptions) => {
+        const className = classNames('flex align-items-center p-2', {
+            odd: options.odd
+        });
+
+        return (
+            <div className={className} style={{ height: '50px' }}>
+                <Skeleton width={options.even ? '60%' : '50%'} height="1.3rem" />
+            </div>
+        );
+    };
+
     return (
-        <div className="card virtualscroller-demo">
-            <VirtualScroller items={lazyItems} itemSize={50} itemTemplate={basicItemTemplate} lazy onLazyLoad={onLazyLoad} showLoader loading={lazyLoading} />
+        <div className="card flex justify-content-center">
+            <VirtualScroller items={lazyItems} itemSize={50} itemTemplate={itemTemplate} lazy onLazyLoad={onLazyLoad} loadingTemplate={loadingTemplate}
+                showLoader loading={lazyLoading} className="border-1 surface-border border-round" style={{ width: '200px', height: '200px' }} />
         </div>
-        )
+    );
 }
-        `,
-        extFiles: {
-            'VirtualScrollerDemo.css': `
-/* VirtualScrollerDemo.css */
-
-.virtualscroller-demo .odd {
-    background-color: var(--surface-b);
-}
-
-.virtualscroller-demo .p-virtualscroller {
-    height: 200px;
-    width: 200px;
-    border: 1px solid var(--surface-d);
-}
-
-.virtualscroller-demo .p-horizontal-scroll .p-virtualscroller-content {
-    display: flex;
-    flex-direction: row;
-}
-    `
-        }
+        `
     };
 
     return (
         <>
             <DocSectionText {...props}>
                 <p>
-                    Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking <i>onLazyLoad</i> callback.
+                    Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded on demand. To implement lazy loading, enable the <i>lazy</i>
+                    property and implement <i>onLazyLoad</i> callback to return data.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center align-items-center flex-wrap">
-                <div className="flex flex-column mr-3 mt-3">
-                    <VirtualScroller items={lazyItems} itemSize={50} itemTemplate={basicItemTemplate} lazy onLazyLoad={onLazyLoad} showLoader loading={lazyLoading} />
-                </div>
+            <div className="card flex justify-content-center">
+                <VirtualScroller
+                    items={lazyItems}
+                    itemSize={50}
+                    itemTemplate={itemTemplate}
+                    lazy
+                    onLazyLoad={onLazyLoad}
+                    loadingTemplate={loadingTemplate}
+                    showLoader
+                    loading={lazyLoading}
+                    className="border-1 surface-border border-round"
+                    style={{ width: '200px', height: '200px' }}
+                />
             </div>
             <DocSectionCode code={code} />
         </>
