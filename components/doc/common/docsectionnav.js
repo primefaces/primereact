@@ -1,97 +1,84 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
-import { classNames } from '../../lib/utils/Utils';
+import React, { useEffect, useRef, useState } from 'react';
+import { useEventListener } from '../../lib/hooks/Hooks';
+import { classNames, DomHandler } from '../../lib/utils/Utils';
 
 export function DocSectionNav(props) {
     const router = useRouter();
-    const [activeTab, setActiveTab] = useState('');
+    const [activeId, setActiveId] = useState(null);
+    const navRef = useRef(null);
+    const blockedScroll = useRef(false);
+    const scrollEndTimer = useRef(undefined);
 
-    const onButtonClick = (doc) => {
-        // Scroll to the clicked button's parent element
-        scrollToTheSection(doc.id, 'smooth');
+    const onClick = (id) => {
+        const label = document.getElementById(id);
+
+        setActiveId(id);
+        label && label.parentElement.scrollIntoView({ block: 'start', behavior: 'smooth' });
+        blockedScroll.current = true;
     };
 
-    const scrollToTheSection = (id, behavior) => {
-        setTimeout(() => {
-            document.getElementById(id) && document.getElementById(id).parentElement.scrollIntoView({ block: 'start', behavior });
-        }, 1);
-    };
-
-    const getIdOfTheSection = (section) => {
-        return section.querySelector('a').getAttribute('id');
-    };
-
-    useEffect(() => {
-        const handleHashChange = (url) => {
-            const hash = url.split('#')[1];
-
-            setActiveTab(hash);
-        };
-
-        router.events.on('onRouteChangeComplete', handleHashChange);
-
-        return () => {
-            router.events.off('onRouteChangeComplete', handleHashChange);
-        };
-    }, [props.docs, router.events]);
-
-    useEffect(() => {
-        const sections = document.querySelectorAll('section'); // Get all sections on the page
-        const topbarEl = document.getElementsByClassName('layout-topbar')[0]; // Get the topbar element
-        const hash = window.location.hash.substring(1); // Get the initial hash
-
-        // Set the active tab to the initial hash and scroll into view if it exists
-        if (hash) {
-            setActiveTab(hash);
-            // Scroll to the section with the current hash
-            scrollToTheSection(hash);
-        } else if (window.scrollY + window.innerHeight >= document.body.offsetHeight) {
-            // Set the active tab to the first section
-            setActiveTab(getIdOfTheSection(sections[0].querySelector('.doc-section-label')));
+    const [bindDocumentScrollListener] = useEventListener({
+        target: 'window',
+        type: 'scroll',
+        listener: () => {
+            clearTimeout(scrollEndTimer.current);
+            scrollEndTimer.current = setTimeout(() => {
+                blockedScroll.current = false;
+            }, 100);
         }
+    });
 
-        const onScroll = () => {
-            sections.forEach((section) => {
-                const sectionLabelEl = section.querySelectorAll(':is(h1,h2,h3).doc-section-label'); //Get all labels on the currrent section
-                // Check if the section is currently scrolled to center of the screen
-                const isScrolledTo = (section) => window.scrollY >= section.offsetTop - topbarEl.clientHeight - 20 && window.scrollY < section.offsetTop + section.offsetHeight - topbarEl.clientHeight - 20;
+    useEffect(() => {
+        const hash = window.location.hash.substring(1);
+        const label = document.getElementById(hash);
 
-                if (isScrolledTo(section)) {
-                    // Check if the section has multiple child elements
-                    if (sectionLabelEl.length > 1) {
-                        sectionLabelEl.forEach((child) => {
-                            // Check if the child element is currently scrolled to
-                            if (isScrolledTo(child)) {
-                                // Set the active tab to the id of the currently scrolled to child element
-                                setActiveTab(getIdOfTheSection(child));
-                            }
-                        });
-                    } else {
-                        setActiveTab(getIdOfTheSection(sectionLabelEl[0]));
+        setActiveId(hash);
+        label && label.parentElement.scrollIntoView({ block: 'start' });
+        bindDocumentScrollListener();
+    }, []);
+
+    useEffect(() => {
+        const observerOptions = {
+            root: null,
+            rootMargin: '50%',
+            threshold: 0
+        };
+
+        const observerCallback = (entries, observer) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting && !blockedScroll.current) {
+                    const link = DomHandler.findSingle(entry.target, 'a');
+
+                    if (link) {
+                        setActiveId(link.id);
+                        entry.target.scrollIntoView({ block: 'nearest', inline: 'start' });
                     }
                 }
             });
         };
 
-        window.addEventListener('scroll', onScroll, { passive: true });
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+        const labels = DomHandler.find(document.body, ':is(h1,h2,h3).doc-section-label');
+
+        labels.forEach((label) => observer.observe(label));
 
         return () => {
-            window.removeEventListener('scroll', onScroll, { passive: true });
+            labels.forEach((label) => observer.unobserve(label));
         };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [router]);
 
     return (
-        <ul className="doc-section-nav">
+        <ul ref={navRef} className="doc-section-nav">
             {props.docs.map((doc) => {
                 const hash = doc.id;
 
                 return (
                     <React.Fragment key={doc.label}>
-                        <li key={doc.label} className={classNames('navbar-item', { 'active-navbar-item': activeTab === doc.id })}>
+                        <li key={doc.label} className={classNames('navbar-item', { 'active active-navbar-item': activeId === doc.id })}>
                             <Link href={router.basePath + router.pathname + '#' + hash}>
-                                <button className="p-link" onClick={() => onButtonClick(doc)}>
+                                <button className="p-link" onClick={() => onClick(doc.id)}>
                                     {doc.label}
                                 </button>
                             </Link>
@@ -102,9 +89,9 @@ export function DocSectionNav(props) {
                                     const hash = child.id;
 
                                     return (
-                                        <li key={child.id + '_' + child.label + '_' + i} className={classNames('navbar-child-item', { 'active-navbar-child-item': activeTab === child.id })}>
+                                        <li key={child.id + '_' + child.label + '_' + i} className={classNames('navbar-child-item', { 'active active-navbar-child-item': activeId === child.id })}>
                                             <Link href={router.basePath + router.pathname + '#' + hash}>
-                                                <button className="p-link" onClick={(event) => onButtonClick(child)}>
+                                                <button className="p-link" onClick={() => onClick(child.id)}>
                                                     {child.label}
                                                 </button>
                                             </Link>
