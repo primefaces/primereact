@@ -120,69 +120,59 @@
 
 .doc-section-nav {
     position: sticky;
-    list-style: none;
-    width: 18rem;
-    height: calc(100vh - 15rem);
     top: 7rem;
     right: 0;
-    flex-basis: auto;
-    flex-shrink: 0;
-    flex-grow: 0;
-    padding: 0.25rem 0 0.25rem 4rem;
+    width: 18rem;
+    height: calc(100vh - 15rem);
+    list-style: none;
     margin: 0;
+    padding: 0.25rem 0 0.25rem 4rem;
     overflow-y: auto;
-    li {
-        &.navbar-item {
-            border-left-style: solid;
-            border-left-width: 1px;
-            border-color: var(--surface-border);
-            z-index: 1;
-            button {
+    overflow-x: hidden;
+
+    > .navbar-item {
+        .navbar-item-content {
+            border-left: 1px solid var(--surface-border);
+        }
+    }
+
+    .navbar-item {
+        > .navbar-item-content {
+            display: flex;
+
+            .p-link {
                 padding: 0.25rem 1rem 0.25rem 1rem;
-                font-size: 1rem;
-                display: inline;
                 color: var(--text-color);
+                white-space: nowrap;
+                min-width: 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+
                 &:hover {
                     color: var(--primary-color);
                 }
             }
-            &.active-navbar-item {
+        }
+
+        &.active-navbar-item {
+            > .navbar-item-content {
                 border-color: var(--primary-color);
-                button {
+
+                .p-link {
                     font-weight: 700;
                     color: var(--primary-color);
                 }
             }
         }
-    }
-    ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        flex-grow: 1;
-        flex-shrink: 1;
-        flex-basis: auto;
-        li {
-            &.navbar-child-item {
-                border-left: 1rem;
-                border-left-width: 1px;
-                border-left-style: solid;
-                border-color: var(--surface-border);
-                z-index: 1;
-                button {
-                    padding: 0.25rem 1rem 0.25rem 1rem;
-                    margin-left: 1rem;
-                    color: var(--text-color);
-                    &:hover {
-                        color: var(--primary-color);
-                    }
-                }
-                &.active-navbar-child-item {
-                    border-color: var(--primary-color);
-                    button {
-                        font-weight: 600;
-                        color: var(--primary-color);
-                    }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            .navbar-item {
+                .navbar-item-content {
+                    padding-left: 1rem;
                 }
             }
         }
