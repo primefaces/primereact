@@ -82,7 +82,7 @@ if (project) {
                             parameters: signature.parameters.map((param) => {
                                 return {
                                     name: param.name,
-                                    type: param.type.name,
+                                    type: param.type.toString(),
                                     description: param.comment && param.comment.summary.map((s) => s.text || '').join(' ')
                                 };
                             }),

@@ -2,9 +2,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
 import { useEventListener } from '../../lib/hooks/Hooks';
-import { classNames, DomHandler } from '../../lib/utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../../lib/utils/Utils';
 
-export function DocSectionNav(props) {
+export function DocSectionNav({ docs = [] }) {
     const router = useRouter();
     const [activeId, setActiveId] = useState(null);
     const navRef = useRef(null);
@@ -35,7 +35,7 @@ export function DocSectionNav(props) {
             clearTimeout(scrollEndTimer.current);
             scrollEndTimer.current = setTimeout(() => {
                 isScrollBlocked.current = false;
-            }, 100);
+            }, 50);
         }
     });
 
@@ -65,9 +65,11 @@ export function DocSectionNav(props) {
 
     useEffect(() => {
         const hash = window.location.hash.substring(1);
+        const hasHash = ObjectUtils.isNotEmpty(hash);
+        const id = hasHash ? hash : (docs[0] || {}).id;
 
-        setActiveId(hash);
-        scrollToLabelById(hash);
+        setActiveId(id);
+        hasHash && scrollToLabelById(id);
         bindDocumentScrollListener();
     }, []);
 
@@ -98,7 +100,7 @@ export function DocSectionNav(props) {
 
     return (
         <ul ref={navRef} className="doc-section-nav">
-            {props.docs.map(createItem)}
+            {docs.map(createItem)}
         </ul>
     );
 }

@@ -1897,7 +1897,7 @@
                             "parameters": [
                                 {
                                     "name": "event",
-                                    "type": "SyntheticEvent",
+                                    "type": "SyntheticEvent<Element, Event>",
                                     "description": "Browser event."
                                 },
                                 {
@@ -1907,6 +1907,7 @@
                                 },
                                 {
                                     "name": "source",
+                                    "type": "null | \"input\" | \"dropdown\"",
                                     "description": "Source type, valid values are 'dropdown' and 'input'"
                                 }
                             ],
@@ -3186,10 +3187,12 @@
                             "parameters": [
                                 {
                                     "name": "event",
+                                    "type": "null | SyntheticEvent<Element, Event>",
                                     "description": "Browser event."
                                 },
                                 {
                                     "name": "value",
+                                    "type": "undefined | null | Date | Date[]",
                                     "description": "New date."
                                 }
                             ],
@@ -8093,7 +8096,7 @@
                             "parameters": [
                                 {
                                     "name": "event",
-                                    "type": "SyntheticEvent",
+                                    "type": "SyntheticEvent<Element, Event>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -8105,7 +8108,7 @@
                             "parameters": [
                                 {
                                     "name": "event",
-                                    "type": "SyntheticEvent",
+                                    "type": "SyntheticEvent<Element, Event>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -8428,6 +8431,7 @@
                             "parameters": [
                                 {
                                     "name": "options",
+                                    "type": "Object",
                                     "description": "Options to export"
                                 }
                             ],
@@ -8449,6 +8453,7 @@
                                 },
                                 {
                                     "name": "mode",
+                                    "type": "\"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notEquals\" | \"lt\" | \"lte\" | \"gt\" | \"gte\" | \"notContains\" | \"between\" | \"dateIs\" | \"dateIsNot\" | \"dateBefore\" | \"dateAfter\"",
                                     "description": "Filter match mode"
                                 },
                                 {
@@ -13062,6 +13067,7 @@
                             "parameters": [
                                 {
                                     "name": "files",
+                                    "type": "File[]",
                                     "description": "Current files."
                                 }
                             ],
@@ -16752,7 +16758,7 @@
                             "parameters": [
                                 {
                                     "name": "event",
-                                    "type": "SyntheticEvent",
+                                    "type": "SyntheticEvent<Element, Event>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -16764,7 +16770,7 @@
                             "parameters": [
                                 {
                                     "name": "event",
-                                    "type": "SyntheticEvent",
+                                    "type": "SyntheticEvent<Element, Event>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -16776,7 +16782,7 @@
                             "parameters": [
                                 {
                                     "name": "event",
-                                    "type": "SyntheticEvent",
+                                    "type": "SyntheticEvent<Element, Event>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -17241,6 +17247,7 @@
                             "parameters": [
                                 {
                                     "name": "message",
+                                    "type": "MessagesMessage | MessagesMessage[]",
                                     "description": "New message."
                                 }
                             ],
@@ -17252,6 +17259,7 @@
                             "parameters": [
                                 {
                                     "name": "message",
+                                    "type": "MessagesMessage | MessagesMessage[]",
                                     "description": "Showed message."
                                 }
                             ],
@@ -18951,10 +18959,12 @@
                             "parameters": [
                                 {
                                     "name": "event",
+                                    "type": "undefined | null | SyntheticEvent<Element, Event>",
                                     "description": "Browser event."
                                 },
                                 {
                                     "name": "target",
+                                    "type": "undefined | null | EventTarget | HTMLElement",
                                     "description": "Browser event."
                                 }
                             ],
@@ -18966,10 +18976,12 @@
                             "parameters": [
                                 {
                                     "name": "event",
+                                    "type": "undefined | null | SyntheticEvent<Element, Event>",
                                     "description": "Browser event."
                                 },
                                 {
                                     "name": "target",
+                                    "type": "null | EventTarget | HTMLElement",
                                     "description": "Browser event."
                                 }
                             ],
@@ -21146,7 +21158,7 @@
                             "parameters": [
                                 {
                                     "name": "event",
-                                    "type": "SyntheticEvent",
+                                    "type": "SyntheticEvent<Element, Event>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -22222,7 +22234,7 @@
                             "parameters": [
                                 {
                                     "name": "event",
-                                    "type": "SyntheticEvent",
+                                    "type": "SyntheticEvent<Element, Event>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -22258,7 +22270,7 @@
                             "parameters": [
                                 {
                                     "name": "event",
-                                    "type": "SyntheticEvent",
+                                    "type": "SyntheticEvent<Element, Event>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -22270,7 +22282,7 @@
                             "parameters": [
                                 {
                                     "name": "event",
-                                    "type": "SyntheticEvent",
+                                    "type": "SyntheticEvent<Element, Event>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -24100,7 +24112,7 @@
                             "parameters": [
                                 {
                                     "name": "event",
-                                    "type": "SyntheticEvent",
+                                    "type": "SyntheticEvent<Element, Event>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -24321,6 +24333,7 @@
                             "parameters": [
                                 {
                                     "name": "message",
+                                    "type": "ToastMessage | ToastMessage[]",
                                     "description": "Message to remove"
                                 }
                             ],
@@ -24332,6 +24345,7 @@
                             "parameters": [
                                 {
                                     "name": "message",
+                                    "type": "ToastMessage | ToastMessage[]",
                                     "description": "Message to replace"
                                 }
                             ],
@@ -24343,6 +24357,7 @@
                             "parameters": [
                                 {
                                     "name": "message",
+                                    "type": "ToastMessage | ToastMessage[]",
                                     "description": "Message to show"
                                 }
                             ],
@@ -26855,6 +26870,7 @@
                                 },
                                 {
                                     "name": "mode",
+                                    "type": "undefined | \"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notEquals\" | \"lt\" | \"lte\" | \"gt\" | \"gte\"",
                                     "description": "Filter match mode."
                                 }
                             ],
@@ -28147,14 +28163,17 @@
                             "parameters": [
                                 {
                                     "name": "index",
+                                    "type": "number | number[]",
                                     "description": "Index of item according to orientation mode."
                                 },
                                 {
                                     "name": "to",
+                                    "type": "\"to-start\" | \"to-end\"",
                                     "description": "Defines the location of the item in view, valid values are 'to-start' and 'to-end'."
                                 },
                                 {
                                     "name": "behavior",
+                                    "type": "\"auto\" | \"smooth\"",
                                     "description": "Behavior of scroll, valid values are 'auto' and 'smooth'"
                                 }
                             ],
@@ -28178,10 +28197,12 @@
                             "parameters": [
                                 {
                                     "name": "index",
+                                    "type": "number | number[]",
                                     "description": "Index of item according to orientation mode."
                                 },
                                 {
                                     "name": "behavior",
+                                    "type": "\"auto\" | \"smooth\"",
                                     "description": "Behavior of scroll, valid values are 'auto' and 'smooth'"
                                 }
                             ],
