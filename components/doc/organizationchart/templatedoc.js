@@ -3,33 +3,40 @@ import { OrganizationChart } from '../../lib/organizationchart/OrganizationChart
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function BasicDoc(props) {
+export function TemplateDoc(props) {
     const [data] = useState([
         {
             label: 'Argentina',
             expanded: true,
+            data: 'ar',
             children: [
                 {
                     label: 'Argentina',
                     expanded: true,
+                    data: 'ar',
                     children: [
                         {
-                            label: 'Argentina'
+                            label: 'Argentina',
+                            data: 'ar'
                         },
                         {
-                            label: 'Croatia'
+                            label: 'Croatia',
+                            data: 'hr'
                         }
                     ]
                 },
                 {
                     label: 'France',
                     expanded: true,
+                    data: 'fr',
                     children: [
                         {
-                            label: 'France'
+                            label: 'France',
+                            data: 'fr'
                         },
                         {
-                            label: 'Morocco'
+                            label: 'Morocco',
+                            data: 'ma'
                         }
                     ]
                 }
@@ -37,41 +44,57 @@ export function BasicDoc(props) {
         }
     ]);
 
+    const nodeTemplate = (node) => {
+        return (
+            <div className="flex flex-column align-items-center">
+                <img alt={node.label} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={`w-2rem shadow-2 flag flag-${node.data}`} />
+                <div className="mt-3 font-medium text-lg">{node.label}</div>
+            </div>
+        );
+    };
+
     const code = {
         basic: `
-<OrganizationChart value={data} />
+<OrganizationChart value={data} nodeTemplate={nodeTemplate} />
         `,
         javascript: `
 import React, { useState } from 'react';
 import { OrganizationChart } from 'primereact/organizationchart';
 
-export default function BasicDoc() {
+export default function TemplateDemo() {
     const [data] = useState([
         {
             label: 'Argentina',
             expanded: true,
+            data: 'ar',
             children: [
                 {
                     label: 'Argentina',
                     expanded: true,
+                    data: 'ar',
                     children: [
                         {
-                            label: 'Argentina'
+                            label: 'Argentina',
+                            data: 'ar'
                         },
                         {
-                            label: 'Croatia'
+                            label: 'Croatia',
+                            data: 'hr'
                         }
                     ]
                 },
                 {
                     label: 'France',
                     expanded: true,
+                    data: 'fr',
                     children: [
                         {
-                            label: 'France'
+                            label: 'France',
+                            data: 'fr'
                         },
                         {
-                            label: 'Morocco'
+                            label: 'Morocco',
+                            data: 'ma'
                         }
                     ]
                 }
@@ -79,9 +102,18 @@ export default function BasicDoc() {
         }
     ]);
 
+    const nodeTemplate = (node) => {
+        return (
+            <div className="flex flex-column align-items-center">
+                <img alt={node.label} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={\`w-2rem shadow-2 flag flag-\${node.data}\`} />
+                <div className="mt-3 font-medium text-lg">{node.label}</div>
+            </div>
+        );
+    };
+
     return (
         <div className="card overflow-x-auto">
-            <OrganizationChart value={data} />
+            <OrganizationChart value={data} nodeTemplate={nodeTemplate} />
         </div>
     )
 }
@@ -91,33 +123,40 @@ import React, { useState } from 'react';
 import { OrganizationChart } from 'primereact/organizationchart';
 import { TreeNode } from 'primereact/treenode';
 
-export default function BasicDoc() {
+export default function TemplateDemo() {
     const [data] = useState<TreeNode>([
         {
             label: 'Argentina',
             expanded: true,
+            data: 'ar',
             children: [
                 {
                     label: 'Argentina',
                     expanded: true,
+                    data: 'ar',
                     children: [
                         {
-                            label: 'Argentina'
+                            label: 'Argentina',
+                            data: 'ar'
                         },
                         {
-                            label: 'Croatia'
+                            label: 'Croatia',
+                            data: 'hr'
                         }
                     ]
                 },
                 {
                     label: 'France',
                     expanded: true,
+                    data: 'fr',
                     children: [
                         {
-                            label: 'France'
+                            label: 'France',
+                            data: 'fr'
                         },
                         {
-                            label: 'Morocco'
+                            label: 'Morocco',
+                            data: 'ma'
                         }
                     ]
                 }
@@ -125,9 +164,18 @@ export default function BasicDoc() {
         }
     ]);
 
+    const nodeTemplate = (node: TreeNode) => {
+        return (
+            <div className="flex flex-column align-items-center">
+                <img alt={node.label} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={\`w-2rem shadow-2 flag flag-\${node.data}\`} />
+                <div className="mt-3 font-medium text-lg">{node.label}</div>
+            </div>
+        );
+    };
+
     return (
         <div className="card overflow-x-auto">
-            <OrganizationChart value={data} />
+            <OrganizationChart value={data} nodeTemplate={nodeTemplate} />
         </div>
     )
 }
@@ -138,11 +186,11 @@ export default function BasicDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    OrganizationChart requires a collection of <i>TreeNode</i> instances as a <i>value</i>.
+                    Custom content instead of a node <i>label</i> is defined using the <i>nodeTemplate</i> property.
                 </p>
             </DocSectionText>
             <div className="card overflow-x-auto">
-                <OrganizationChart value={data} />
+                <OrganizationChart value={data} nodeTemplate={nodeTemplate} />
             </div>
             <DocSectionCode code={code} />
         </>
