@@ -40,15 +40,7 @@ const DataScrollerDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React DataScroller Component"
-            header="DataScroller"
-            description="DataScroller displays data with on demand loading using scroll."
-            componentDocs={docs}
-            apiDocs={[{ name: 'DataScroller', pathname: '/modules/datascroller.html' }]}
-        />
-    );
+    return <DocComponent title="React DataScroller Component" header="DataScroller" description="DataScroller displays data with on demand loading using scroll." componentDocs={docs} apiDocs={['DataScroller']} />;
 };
 
 export default DataScrollerDemo;

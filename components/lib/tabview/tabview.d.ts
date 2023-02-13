@@ -15,7 +15,6 @@ import * as React from 'react';
 
 /**
  * Custom Tabpanel header template options
- * @group Misc
  */
 interface TabPanelHeaderTemplateOptions {
     /**

@@ -47,7 +47,7 @@ const ChipDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Chip Component" header="Chip" description="Chip represents entities using icons, labels and images." componentDocs={docs} apiDocs={[{ name: 'Chip', pathname: '/modules/chip.html' }]} />;
+    return <DocComponent title="React Chip Component" header="Chip" description="Chip represents entities using icons, labels and images." componentDocs={docs} apiDocs={['Chip']} />;
 };
 
 export default ChipDemo;

@@ -12,7 +12,6 @@ import { CSSTransitionProps } from '../csstransition';
 
 /**
  * Custom galleria responsive options
- * @group Misc
  */
 interface GalleriaResponsiveOptions {
     /**

@@ -14,7 +14,6 @@ import TreeNode from '../treenode';
 
 /**
  * Custom selection keys type.
- * @group Misc
  */
 interface TreeTableSelectionKeysType {
     /**
@@ -25,7 +24,6 @@ interface TreeTableSelectionKeysType {
 
 /**
  * Custom treetable checkbox selection type
- * @group Misc
  */
 interface TreeTableCheckboxSelectionKeyType {
     /**
@@ -40,7 +38,6 @@ interface TreeTableCheckboxSelectionKeyType {
 
 /**
  * Custom expanded keys type.
- * @group Misc
  */
 type TreeTableExpandedKeysType = {
     /**
@@ -51,7 +48,6 @@ type TreeTableExpandedKeysType = {
 
 /**
  * Custom treetable sort meta.
- * @group Misc
  */
 interface TreeTableSortMeta {
     /**
@@ -80,7 +76,6 @@ interface TreeTableFilterMetaData {
 
 /**
  * Custom treetable filter meta.
- * @group Misc
  */
 interface TreeTableFilterMeta {
     /**

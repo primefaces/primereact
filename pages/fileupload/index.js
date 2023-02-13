@@ -58,7 +58,7 @@ const FileUploadDemo = () => {
             header="FileUpload"
             description="FileUpload is an advanced uploader with dragdrop support, multi file uploads, auto uploading, progress tracking and validations."
             componentDocs={docs}
-            apiDocs={[{ name: 'FileUpload', pathname: '/modules/fileupload.html' }]}
+            apiDocs={['FileUpload']}
         />
     );
 };

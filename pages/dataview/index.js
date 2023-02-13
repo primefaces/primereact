@@ -58,16 +58,7 @@ const DataViewDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React DataView Component"
-            header="DataView"
-            description="DataView displays data in grid or list layout with pagination and sorting features."
-            componentDocs={docs}
-            apiDocs={[{ name: 'DataView', pathname: '/modules/dataview.html' }]}
-            className="dataview-demo"
-        />
-    );
+    return <DocComponent title="React DataView Component" header="DataView" description="DataView displays data in grid or list layout with pagination and sorting features." componentDocs={docs} apiDocs={['DataView']} className="dataview-demo" />;
 };
 
 export default DataViewDemo;

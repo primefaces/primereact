@@ -47,7 +47,7 @@ const AvatarDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Avatar Component" header="Avatar" description="Avatar represents people using icons, labels and images." componentDocs={docs} apiDocs={[{ name: 'Avatar', pathname: '/modules/avatar.html' }]} />;
+    return <DocComponent title="React Avatar Component" header="Avatar" description="Avatar represents people using icons, labels and images." componentDocs={docs} apiDocs={['Avatar']} />;
 };
 
 export default AvatarDemo;

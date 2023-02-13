@@ -46,15 +46,7 @@ const MessageDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React Message Component"
-            header="Message"
-            description="Message component displays information related to another element such as invalid input."
-            componentDocs={docs}
-            apiDocs={[{ name: 'Message', pathname: '/modules/message.html' }]}
-        />
-    );
+    return <DocComponent title="React Message Component" header="Message" description="Message component displays information related to another element such as invalid input." componentDocs={docs} apiDocs={['Message']} />;
 };
 
 export default MessageDemo;

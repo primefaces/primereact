@@ -90,15 +90,7 @@ const InputTextDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React Input Component"
-            header="InputText"
-            description="InputText is an extension to standard input element with theming and keyfiltering."
-            componentDocs={docs}
-            apiDocs={[{ name: 'InputText', pathname: '/modules/inputtext.html' }]}
-        />
-    );
+    return <DocComponent title="React Input Component" header="InputText" description="InputText is an extension to standard input element with theming and keyfiltering." componentDocs={docs} apiDocs={['InputText']} />;
 };
 
 export default InputTextDemo;

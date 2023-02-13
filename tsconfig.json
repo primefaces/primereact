@@ -16,21 +16,5 @@
         "incremental": true
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-    "exclude": ["node_modules", "dist"],
-    "typedocOptions": {
-        "entryPoints": ["components/lib"],
-        "entryPointStrategy": "expand",
-        "hideGenerator": true,
-        "excludeExternals": true,
-        "searchInComments": true,
-        "disableSources": true,
-        "exclude": ["components/lib/**/*.js"],
-        "externalSymbolLinkMappings": {
-            "@types/react": {
-                "React.ReactNode": "https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts",
-                "React.CSSProperties": "https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts"
-            }
-        },
-        "customCss": "styles/doc/index.css"
-    }
+    "exclude": ["node_modules", "dist"]
 }

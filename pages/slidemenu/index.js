@@ -34,7 +34,7 @@ const SlideMenuDemo = () => {
         }
     ];
 
-    return <DocComponent title="React SlideMenu Component" header="SlideMenu" description="SlideMenu displays submenus with a slide animation." componentDocs={docs} apiDocs={[{ name: 'Slide Menu', pathname: '/modules/slidemenu.html' }]} />;
+    return <DocComponent title="React SlideMenu Component" header="SlideMenu" description="SlideMenu displays submenus with a slide animation." componentDocs={docs} apiDocs={['Slide Menu']} />;
 };
 
 export default SlideMenuDemo;

@@ -42,7 +42,6 @@ interface DropdownFilterEvent {
 /**
  * Custom filter options
  * @see {@link DropdownProps.filterTemplate}
- * @group Misc
  */
 interface DropdownFilterOptions {
     /**

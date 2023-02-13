@@ -16,15 +16,7 @@ const ClickOutsideDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React useClickOutside Hook"
-            header="useClickOutside"
-            description="Detects outside clicks of a specific element."
-            componentDocs={docs}
-            apiDocs={[{ name: 'useClickOutside', pathname: '/functions/hooks.useClickOutside.html' }]}
-        />
-    );
+    return <DocComponent title="React useClickOutside Hook" header="useClickOutside" description="Detects outside clicks of a specific element." componentDocs={docs} apiDocs={['hooks.functions.useClickOutside']} />;
 };
 
 export default ClickOutsideDemo;

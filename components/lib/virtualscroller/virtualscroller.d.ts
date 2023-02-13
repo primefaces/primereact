@@ -12,7 +12,6 @@ import * as React from 'react';
 
 /**
  * Custom virtual scroller options type.
- * @group Misc
  */
 interface VirtualScrollerOptionsType {
     /**
@@ -31,7 +30,6 @@ interface VirtualScrollerOptionsType {
 
 /**
  * Viewport rendered range.
- * @group Misc
  */
 interface VirtualScrollerViewportRenderedRange {
     /**
@@ -46,7 +44,6 @@ interface VirtualScrollerViewportRenderedRange {
 
 /**
  * Virtual scroller rendered range.
- * @group Misc
  */
 interface VirtualScrollerRenderedRange {
     /**
@@ -65,7 +62,6 @@ interface VirtualScrollerRenderedRange {
 
 /**
  * Custom virtual scroller state.
- * @group Misc
  */
 interface VirtualScrollerState {
     /**
@@ -80,7 +76,6 @@ interface VirtualScrollerState {
 
 /**
  * Custom template options.
- * @group Misc
  */
 interface VirtualScrollerTemplateOptions {
     /**
@@ -130,7 +125,6 @@ interface VirtualScrollerLoadingTemplateOptions extends VirtualScrollerTemplateO
 
 /**
  * Custom loader icon template props.
- * @group Misc
  */
 interface VirtualScrollerLoaderIconTemplateOptions {
     /**
@@ -149,7 +143,6 @@ interface VirtualScrollerLoaderIconTemplateOptions {
 
 /**
  * Custom content template options.
- * @group Misc
  */
 interface VirtualScrollerContentTemplateOptions {
     /**

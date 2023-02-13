@@ -34,15 +34,7 @@ const ScrollPanelDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React ScrollPanel Component"
-            header="ScrollPanel"
-            description="ScrollPanel is a cross browser, lightweight and skinnable alternative to native browser scrollbar."
-            componentDocs={docs}
-            apiDocs={[{ name: 'ScrollPanel', pathname: '/modules/scrollpanel.html' }]}
-        />
-    );
+    return <DocComponent title="React ScrollPanel Component" header="ScrollPanel" description="ScrollPanel is a cross browser, lightweight and skinnable alternative to native browser scrollbar." componentDocs={docs} apiDocs={['ScrollPanel']} />;
 };
 
 export default ScrollPanelDemo;

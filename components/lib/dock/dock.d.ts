@@ -13,7 +13,6 @@ import { MenuItem } from '../menuitem';
 /**
  * Custom header template
  * @see {@link DockProps.header}
- * @group Misc
  */
 interface DockHeaderTemplateOptions {
     /**
@@ -26,7 +25,6 @@ interface DockHeaderTemplateOptions {
  * Custom footer template
  * @see {@link DockProps.footer}
  * @extends {DockHeaderTemplateOptions}
- * @group Misc
  */
 interface DockFooterTemplateOptions extends DockHeaderTemplateOptions {}
 

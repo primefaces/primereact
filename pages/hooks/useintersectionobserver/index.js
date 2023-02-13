@@ -28,7 +28,7 @@ const IntersectionObserverDemo = () => {
             header="useIntersectionObserver"
             description="Executes a callback when an element gets into the viewport of its parent."
             componentDocs={docs}
-            apiDocs={[{ name: 'useIntersectionObserver', pathname: '/functions/hooks.useIntersectionObserver.html' }]}
+            apiDocs={['hooks.functions.useIntersectionObserver']}
         />
     );
 };

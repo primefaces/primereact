@@ -64,7 +64,8 @@ const VirtualScrollerDemo = () => {
             header="VirtualScroller"
             description="VirtualScroller is a performant approach to render large amounts of data efficiently."
             componentDocs={docs}
-            apiDocs={[{ name: 'VirtualScroller', pathname: '/modules/virtualscroller.html' }]}
+            apiDocs={['VirtualScroller']}
+            className="virtualscroller-demo"
         />
     );
 };

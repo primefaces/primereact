@@ -13,7 +13,6 @@ import { IconType } from '../utils';
 
 /**
  * Custom MultiStateCheckbox option.
- * @group Misc
  */
 interface MultiStateCheckboxOption {
     /**

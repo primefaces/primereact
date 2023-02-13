@@ -22,15 +22,7 @@ const EventListenerDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React useEventListener Hook"
-            header="useEventListener"
-            description="Manages event bindings of an element programmatically."
-            componentDocs={docs}
-            apiDocs={[{ name: 'useEventListener', pathname: '/functions/hooks.useEventListener.html' }]}
-        />
-    );
+    return <DocComponent title="React useEventListener Hook" header="useEventListener" description="Manages event bindings of an element programmatically." componentDocs={docs} apiDocs={['hooks.functions.useEventListener']} />;
 };
 
 export default EventListenerDemo;

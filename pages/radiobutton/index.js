@@ -66,15 +66,7 @@ const RadioButtonDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React RadioButton Component"
-            header="RadioButton"
-            description="RadioButton is an extension to standard radio button element with theming."
-            componentDocs={docs}
-            apiDocs={[{ name: 'RadioButton', pathname: '/modules/radiobutton.html' }]}
-        />
-    );
+    return <DocComponent title="React RadioButton Component" header="RadioButton" description="RadioButton is an extension to standard radio button element with theming." componentDocs={docs} apiDocs={['RadioButton']} />;
 };
 
 export default RadioButtonDemo;

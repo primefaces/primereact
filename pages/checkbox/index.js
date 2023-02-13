@@ -72,9 +72,7 @@ const CheckboxDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent title="React Checkbox Component" header="Checkbox" description="Checkbox is an extension to standard checkbox element with theming." componentDocs={docs} apiDocs={[{ name: 'Checkbox', pathname: '/modules/checkbox.html' }]} />
-    );
+    return <DocComponent title="React Checkbox Component" header="Checkbox" description="Checkbox is an extension to standard checkbox element with theming." componentDocs={docs} apiDocs={['Checkbox']} />;
 };
 
 export default CheckboxDemo;

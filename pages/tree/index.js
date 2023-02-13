@@ -114,7 +114,7 @@ const TreeDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Tree Component" header="Tree" description="Tree is used to display hierarchical data." componentDocs={docs} apiDocs={[{ name: 'Tree', pathname: '/modules/tree.html' }]} />;
+    return <DocComponent title="React Tree Component" header="Tree" description="Tree is used to display hierarchical data." componentDocs={docs} apiDocs={['Tree']} />;
 };
 
 export default TreeDemo;

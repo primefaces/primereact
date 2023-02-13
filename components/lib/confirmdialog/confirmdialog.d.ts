@@ -13,7 +13,6 @@ import { IconType } from '../utils';
 
 /**
  * Custom confirm dialog options
- * @group Misc
  */
 interface ConfirmDialogOptions {
     /**
@@ -139,7 +138,6 @@ export interface ConfirmDialogProps extends Omit<DialogProps, 'onHide' | 'footer
 
 /**
  * Object returned by the {@link confirmDialog} method.
- * @group Misc
  */
 interface ConfirmDialogReturn {
     /**

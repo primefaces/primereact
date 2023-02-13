@@ -35,15 +35,7 @@ const ScrollTopDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React ScrollTop Component"
-            header="ScrollTop"
-            description="ScrollTop gets displayed when it gets into viewport and used to navigate back to the top of the page."
-            componentDocs={docs}
-            apiDocs={[{ name: 'ScrollTop', pathname: '/modules/scrolltop.html' }]}
-        />
-    );
+    return <DocComponent title="React ScrollTop Component" header="ScrollTop" description="ScrollTop gets displayed when it gets into viewport and used to navigate back to the top of the page." componentDocs={docs} apiDocs={['ScrollTop']} />;
 };
 
 export default ScrollTopDemo;

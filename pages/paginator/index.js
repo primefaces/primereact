@@ -52,7 +52,7 @@ const PaginatorDemo = () => {
             header="Paginator"
             description="Paginator displays data in paged format and provides navigation between pages."
             componentDocs={docs}
-            apiDocs={[{ name: 'Paginator', pathname: '/modules/paginator.html' }]}
+            apiDocs={['Paginator']}
         />
     );
 };

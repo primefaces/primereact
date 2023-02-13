@@ -16,7 +16,7 @@ const TimeoutDemo = () => {
         }
     ];
 
-    return <DocComponent title="React useTimeout Hook" header="useTimeout" description="Executed a given callback after a certain delay." componentDocs={docs} apiDocs={[{ name: 'useTimeout', pathname: '/functions/hooks.useTimeout.html' }]} />;
+    return <DocComponent title="React useTimeout Hook" header="useTimeout" description="Executed a given callback after a certain delay." componentDocs={docs} apiDocs={['hooks.functions.useTimeout']} />;
 };
 
 export default TimeoutDemo;
