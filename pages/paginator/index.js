@@ -46,15 +46,7 @@ const PaginatorDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React Paginator Component"
-            header="Paginator"
-            description="Paginator displays data in paged format and provides navigation between pages."
-            componentDocs={docs}
-            apiDocs={['Paginator']}
-        />
-    );
+    return <DocComponent title="React Paginator Component" header="Paginator" description="Paginator displays data in paged format and provides navigation between pages." componentDocs={docs} apiDocs={['Paginator']} />;
 };
 
 export default PaginatorDemo;
