@@ -27,7 +27,7 @@
 
 - New Hooks [\#4039](https://github.com/primefaces/primereact/issues/4039)
 
-## [9.0.0-beta.1](https://github.com/primefaces/primereact/tree/9.0.0-beta.1)
+## [9.0.0-beta.1](https://github.com/primefaces/primereact/tree/9.0.0-beta.1) (2023-01-26)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/8.7.3...9.0.0-beta.1)
 
