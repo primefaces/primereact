@@ -4,7 +4,7 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 import { NodeService } from '../../../service/NodeService';
 
-export function BasicDoc(props) {
+export function FilterDoc(props) {
     const [nodes, setNodes] = useState([]);
 
     useEffect(() => {
@@ -13,14 +13,15 @@ export function BasicDoc(props) {
 
     const code = {
         basic: `
-<Tree value={nodes} className="w-full md:w-30rem" />
+<Tree value={nodes} filter filterMode="lenient" filterPlaceholder="Lenient Filter" className="w-full md:w-30rem" />
+<Tree value={nodes} filter filterMode="strict" filterPlaceholder="Strict Filter" className="w-full md:w-30rem" />
         `,
         javascript: `
 import React, { useState, useEffect } from 'react';
 import { Tree } from 'primereact/tree';
 import { NodeService } from './service/NodeService';
 
-export default function BasicDemo() {
+export default function FilterDemo() {
     const [nodes, setNodes] = useState([]);
     
     useEffect(() => {
@@ -28,8 +29,9 @@ export default function BasicDemo() {
     }, []);
 
     return (
-        <div className="card flex justify-content-center">
-            <Tree value={nodes} className="w-full md:w-30rem" />
+        <div className="card flex flex-wrap justify-content-center gap-5">
+            <Tree value={nodes} filter filterMode="lenient" filterPlaceholder="Lenient Filter" className="w-full md:w-30rem" />
+            <Tree value={nodes} filter filterMode="strict" filterPlaceholder="Strict Filter" className="w-full md:w-30rem" />
         </div>
     )
 }
@@ -40,7 +42,7 @@ import { Tree } from 'primereact/tree';
 import { TreeNode } from 'primereact/treenode';
 import { NodeService } from './service/NodeService';
 
-export default function BasicDemo() {
+export default function FilterDemo() {
     const [nodes, setNodes] = useState<TreeNode[]>([]);
     
     useEffect(() => {
@@ -48,8 +50,9 @@ export default function BasicDemo() {
     }, []);
 
     return (
-        <div className="card flex justify-content-center">
-            <Tree value={nodes} className="w-full md:w-30rem" />
+        <div className="card flex flex-wrap justify-content-center gap-5">
+            <Tree value={nodes} filter filterMode="lenient" filterPlaceholder="Lenient Filter" className="w-full md:w-30rem" />
+            <Tree value={nodes} filter filterMode="strict" filterPlaceholder="Strict Filter" className="w-full md:w-30rem" />
         </div>
     )
 }
@@ -87,10 +90,15 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>OrganizationChart requires a collection of <i>TreeNode</i> instances as a <i>value</i>.</p>
+                <p>
+                    Filtering is enabled by adding the <i>filter</i> property, by default label property of a node is used to compare against the value in the text field, in order to customize which field(s) should be used during search define{' '}
+                    <i>filterBy</i> property. In addition <i>filterMode</i> specifies the filtering strategy. In <i>lenient</i> mode when the query matches a node, children of the node are not searched further as all descendants of the node are
+                    included. On the other hand, in <i>strict</i> mode when the query matches a node, filtering continues on all descendants.
+                </p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <Tree value={nodes} className="w-full md:w-30rem" />
+            <div className="card flex flex-wrap justify-content-center gap-5">
+                <Tree value={nodes} filter filterMode="lenient" filterPlaceholder="Lenient Filter" className="w-full md:w-30rem" />
+                <Tree value={nodes} filter filterMode="strict" filterPlaceholder="Strict Filter" className="w-full md:w-30rem" />
             </div>
             <DocSectionCode code={code} service={['NodeService']} />
         </>

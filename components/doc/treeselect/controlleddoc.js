@@ -6,7 +6,7 @@ import { TreeSelect } from '../../lib/treeselect/TreeSelect';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function ProgrammaticDoc(props) {
+export function ControlledDoc(props) {
     const [nodes, setNodes] = useState(null);
     const [selectedNodeKey, setSelectedNodeKey] = useState(null);
     const [expandedKeys, setExpandedKeys] = useState({});
@@ -58,7 +58,7 @@ import { TreeSelect } from 'primereact/treeselect';
 import { Button } from 'primereact/button';
 import { NodeService } from './service/NodeService';
 
-export default function ProgrammaticDemo() {
+export default function ControlledDemo() {
     const [nodes, setNodes] = useState(null);
     const [selectedNodeKey, setSelectedNodeKey] = useState(null);
     const [expandedKeys, setExpandedKeys] = useState({});
@@ -118,7 +118,7 @@ interface NodeKey {
     [key: string]: boolean;
  }
 
-export default function ProgrammaticDemo() {
+export default function ControlledDemo() {
     const [nodes, setNodes] = useState<TreeNode[] | null>(null);
     const [selectedNodeKey, setSelectedNodeKey] = useState<string>(null);
     const [expandedKeys, setExpandedKeys] = useState<NodeKey>({});
@@ -202,11 +202,7 @@ export default function ProgrammaticDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    TreeSelect is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with an <i>options</i> collection. Internally <Link href="tree">Tree</Link> component is used so the options model is based on
-                    TreeNode API.
-                </p>
-                <p>
-                    In single selection mode, value binding should be the <i>key</i> value of a node.
+                    Expanded state of nodes is managed programmatically with <i>expandedKeys</i> and <i>onToggle</i> properties.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">

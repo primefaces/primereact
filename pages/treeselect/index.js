@@ -10,7 +10,7 @@ import { HookFormDoc } from '../../components/doc/treeselect/form/hookformdoc';
 import { ImportDoc } from '../../components/doc/treeselect/importdoc';
 import { InvalidDoc } from '../../components/doc/treeselect/invaliddoc';
 import { MultipleDoc } from '../../components/doc/treeselect/multipledoc';
-import { ProgrammaticDoc } from '../../components/doc/treeselect/programmaticdoc';
+import { ControlledDoc } from '../../components/doc/treeselect/controlleddoc';
 import { StyleDoc } from '../../components/doc/treeselect/styledoc';
 
 const TreeSelectDemo = () => {
@@ -41,9 +41,9 @@ const TreeSelectDemo = () => {
             component: FilterDoc
         },
         {
-            id: 'programmatic',
-            label: 'Programmatic',
-            component: ProgrammaticDoc
+            id: 'controlled',
+            label: 'Controlled',
+            component: ControlledDoc
         },
         {
             id: 'floatlabel',

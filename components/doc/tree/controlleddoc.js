@@ -5,9 +5,9 @@ import { DocSectionText } from '../common/docsectiontext';
 import { NodeService } from '../../../service/NodeService';
 import { Button } from '../../lib/button/Button';
 
-export function ProgrammaticDoc(props) {
-    const [nodes, setNodes] = useState(null);
-    const [expandedKeys, setExpandedKeys] = useState({});
+export function ControlledDoc(props) {
+    const [nodes, setNodes] = useState([]);
+    const [expandedKeys, setExpandedKeys] = useState({'0': true, '0-0': true});
 
     const expandAll = () => {
         let _expandedKeys = {};
@@ -39,12 +39,12 @@ export function ProgrammaticDoc(props) {
 
     const code = {
         basic: `
-<div className="mb-4">
-    <Button type="button" icon="pi pi-plus" label="Expand All" onClick={expandAll} className="mr-2" />
+<div className="flex flex-wrap gap-2 mb-4">
+    <Button type="button" icon="pi pi-plus" label="Expand All" onClick={expandAll} />
     <Button type="button" icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
 </div>
 
-<Tree value={nodes} expandedKeys={expandedKeys} onToggle={(e) => setExpandedKeys(e.value)} />
+<Tree value={nodes} expandedKeys={expandedKeys} onToggle={(e) => setExpandedKeys(e.value)} className="w-full md:w-30rem" />
         `,
         javascript: `
 import React, { useState, useEffect } from 'react';
@@ -52,10 +52,10 @@ import { Tree } from 'primereact/tree';
 import { Button } from 'primereact/button';
 import { NodeService } from './service/NodeService';
 
-export default function ProgrammaticDoc() {
-    const [nodes, setNodes] = useState(null);
-    const [expandedKeys, setExpandedKeys] = useState({});
-    
+export default function ControlledDemo() {
+    const [nodes, setNodes] = useState([]);
+    const [expandedKeys, setExpandedKeys] = useState({'0': true, '0-0': true});
+
     const expandAll = () => {
         let _expandedKeys = {};
 
@@ -82,30 +82,31 @@ export default function ProgrammaticDoc() {
 
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
     
     return (
-        <div> 
-            <div className="mb-4">
-                <Button type="button" icon="pi pi-plus" label="Expand All" onClick={expandAll} className="mr-2" />
+        <div className="card flex flex-column align-items-center">
+            <div className="flex flex-wrap gap-2 mb-4">
+                <Button type="button" icon="pi pi-plus" label="Expand All" onClick={expandAll} />
                 <Button type="button" icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
             </div>
 
-            <Tree value={nodes} expandedKeys={expandedKeys} onToggle={(e) => setExpandedKeys(e.value)} />
+            <Tree value={nodes} expandedKeys={expandedKeys} onToggle={(e) => setExpandedKeys(e.value)} className="w-full md:w-30rem" />
         </div>
     )
 }
         `,
         typescript: `
 import React, { useState, useEffect } from 'react';
-import { Tree } from 'primereact/tree';
+import { Tree, TreeExpandedKeysType } from 'primereact/tree';
+import { TreeNode } from 'primereact/treenode';
 import { Button } from 'primereact/button';
 import { NodeService } from './service/NodeService';
 
-export default function ProgrammaticDoc() {
-    const [nodes, setNodes] = useState(null);
-    const [expandedKeys, setExpandedKeys] = useState({});
-    
+export default function ControlledDemo() {
+    const [nodes, setNodes] = useState<TreeNode[]>([]);
+    const [expandedKeys, setExpandedKeys] = useState<TreeExpandedKeysType>({'0': true, '0-0': true});
+
     const expandAll = () => {
         let _expandedKeys = {};
 
@@ -120,7 +121,7 @@ export default function ProgrammaticDoc() {
         setExpandedKeys({});
     };
 
-    const expandNode = (node, _expandedKeys) => {
+    const expandNode = (node: TreeNode, _expandedKeys: TreeExpandedKeysType) => {
         if (node.children && node.children.length) {
             _expandedKeys[node.key] = true;
 
@@ -132,22 +133,21 @@ export default function ProgrammaticDoc() {
 
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
+    }, []);
+    
     return (
-        <div>
-            <div className="mb-4">
-                <Button type="button" icon="pi pi-plus" label="Expand All" onClick={expandAll} className="mr-2" />
+        <div className="card flex flex-column align-items-center">
+            <div className="flex flex-wrap gap-2 mb-4">
+                <Button type="button" icon="pi pi-plus" label="Expand All" onClick={expandAll} />
                 <Button type="button" icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
             </div>
 
-            <Tree value={nodes} expandedKeys={expandedKeys} onToggle={(e) => setExpandedKeys(e.value)} />
+            <Tree value={nodes} expandedKeys={expandedKeys} onToggle={(e) => setExpandedKeys(e.value)} className="w-full md:w-30rem" />
         </div>
     )
 }
         `,
         data: `
-/* NodeService */
 {
     key: '0',
     label: 'Documents',
@@ -180,15 +180,17 @@ export default function ProgrammaticDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Programmatic</p>
+                <p>
+                    Expanded state of nodes is managed programmatically with <i>expandedKeys</i> and <i>onToggle</i> properties.
+                </p>
             </DocSectionText>
-            <div className="card">
-                <div className="mb-4">
-                    <Button type="button" icon="pi pi-plus" label="Expand All" onClick={expandAll} className="mr-2" />
+            <div className="card flex flex-column align-items-center">
+                <div className="flex flex-wrap gap-2 mb-4">
+                    <Button type="button" icon="pi pi-plus" label="Expand All" onClick={expandAll} />
                     <Button type="button" icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
                 </div>
 
-                <Tree value={nodes} expandedKeys={expandedKeys} onToggle={(e) => setExpandedKeys(e.value)} />
+                <Tree value={nodes} expandedKeys={expandedKeys} onToggle={(e) => setExpandedKeys(e.value)} className="w-full md:w-30rem" />
             </div>
             <DocSectionCode code={code} service={['NodeService']} />
         </>

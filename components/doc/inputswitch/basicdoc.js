@@ -26,7 +26,7 @@ export default function BasicDemo() {
         `,
         typescript: `
 import React, { useState } from "react";
-import { InputSwitch, InputSwitchChangeParams } from "primereact/inputswitch";
+import { InputSwitch, InputSwitchChangeEvent } from "primereact/inputswitch";
 
 export default function BasicDemo() {
     const [checked, setChecked] = useState<boolean>(false);
