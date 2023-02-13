@@ -35,12 +35,12 @@ export default function LayoutDemo() {
         `,
         typescript: `
 import React, { useState } from "react";
-import { Paginator, PaginatorPageStateEvent } from 'primereact/paginator';
+import { Paginator, PaginatorPageChangeEvent } from 'primereact/paginator';
 
 export default function LayoutDemo() {
     const [first, setFirst] = useState<number>(0);
 
-    const onPageChange = (event: PaginatorPageStateEvent) => {
+    const onPageChange = (event: PaginatorPageChangeEvent) => {
         setFirst(event.first);
     };
 

@@ -14,7 +14,7 @@ import * as React from 'react';
  * @see {@link PaginatorProps.onPageChange}
  * @event
  */
-interface PaginatorPageStateEvent {
+interface PaginatorPageChangeEvent {
     /**
      * New page number
      */
@@ -482,9 +482,9 @@ export interface PaginatorProps extends Omit<React.DetailedHTMLProps<React.HTMLA
     dropdownAppendTo?: 'self' | HTMLElement | null | undefined;
     /**
      * Callback to invoke when page changes, the event object contains information about the new state.
-     * @param {PaginatorPageStateEvent} event - Custom page change event.
+     * @param {PaginatorPageChangeEvent} event - Custom page change event.
      */
-    onPageChange?(event: PaginatorPageStateEvent): void;
+    onPageChange?(event: PaginatorPageChangeEvent): void;
     /**
      * Used to get the child elements of the component.
      * @readonly

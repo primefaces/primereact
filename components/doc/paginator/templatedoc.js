@@ -322,7 +322,7 @@ export default function TemplateDemo() {
         `,
         typescript: `
 import React, { useState } from "react";
-import { Paginator, PaginatorPageStateEvent, PaginatorJumpToPageInputOptions, PaginatorCurrentPageReportOptions, PaginatorRowsPerPageDropdownOptions,
+import { Paginator, PaginatorPageChangeEvent, PaginatorJumpToPageInputOptions, PaginatorCurrentPageReportOptions, PaginatorRowsPerPageDropdownOptions,
     PaginatorLastPageLinkOptions, PaginatorNextPageLinkOptions, PaginatorPageLinksOptions, PaginatorPrevPageLinkOptions, PaginatorFirstPageLinkOptions } from 'primereact/paginator';
 import { Button } from 'primereact/button';
 import { Ripple } from 'primereact/ripple';
@@ -340,7 +340,7 @@ export default function TemplateDemo() {
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [pageInputTooltip, setPageInputTooltip] = useState<string>("Press 'Enter' key to go to this page.");
 
-    const onPageChange = (e: PaginatorPageStateEvent, index: number) => {
+    const onPageChange = (e: PaginatorPageChangeEvent, index: number) => {
         setFirst(first.map((f, i) => (index === i ? e.first : f)));
         setRows(rows.map((r, i) => (index === i ? e.rows : r)));
     };

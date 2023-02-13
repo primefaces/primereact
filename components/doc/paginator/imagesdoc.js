@@ -42,12 +42,12 @@ export default function ImagesDemo() {
         `,
         typescript: `
 import React, { useState } from "react";
-import { Paginator, PaginatorPageStateEvent } from 'primereact/paginator';
+import { Paginator, PaginatorPageChangeEvent } from 'primereact/paginator';
 
 export default function ImagesDemo() {
     const [first, setFirst] = useState<number>(0);
 
-    const onPageChange = (event: PaginatorPageStateEvent) => {
+    const onPageChange = (event: PaginatorPageChangeEvent) => {
         setFirst(event.first);
     };
 
