@@ -38,13 +38,13 @@ export default function BasicDemo() {
         `,
         typescript: `
 import React, { useState } from "react";
-import { Paginator, PaginatorPageStateEvent } from 'primereact/paginator';
+import { Paginator, PaginatorPageChangeEvent } from 'primereact/paginator';
 
 export default function BasicDemo() {
     const [first, setFirst] = useState<number>(0);
     const [rows, setRows] = useState<number>(10);
 
-    const onPageChange = (event: PaginatorPageStateEvent) => {
+    const onPageChange = (event: PaginatorPageChangeEvent) => {
         setFirst(event.first);
         setRows(event.rows);
     };
