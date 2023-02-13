@@ -173,7 +173,7 @@ export interface DataViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
     rowsPerPageOptions?: number[] | undefined;
     /**
      * Template of the current page report element.
-     * @defaultValue (&123;currentPage&125; of &123;totalPages&125;)
+     * @defaultValue (&#123;currentPage&#125; of &#123;totalPages&#125;)
      */
     currentPageReportTemplate?: string | undefined;
     /**
