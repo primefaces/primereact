@@ -11316,7 +11316,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "string",
-                            "defaultValue": "(&123;currentPage&125; of &123;totalPages&125;)",
+                            "defaultValue": "({currentPage} of {totalPages})",
                             "description": "Template of the current page report element."
                         },
                         {
