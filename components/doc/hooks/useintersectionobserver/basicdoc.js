@@ -14,7 +14,7 @@ const elementRef = useRef(null);
 const visible = useIntersectionObserver(elementRef);
         `,
         javascript: `
-import React, { useRef } from 'react'; 
+import React, { useRef } from 'react';
 import { useIntersectionObserver } from 'primereact/hooks';
 import { classNames } from 'primereact/utils';
 
@@ -28,7 +28,7 @@ export default function BasicDemo() {
             <div className="border-dashed surface-border border-round w-20rem overflow-y-scroll p-3" style={{ height: '300px' }}>
                 <div className="flex align-items-center" style={{ height: '900px' }}>
                     <div ref={elementRef} className={classNames('w-full h-8rem border-round p-3 text-white font-bold bg-primary flex align-items-center justify-content-center')}>
-                        <i class="pi pi-prime text-4xl"></i>
+                        <i className="pi pi-prime text-4xl"></i>
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@ export default function BasicDemo() {
 }
         `,
         typescript: `
-import React, { useRef } from 'react'; 
+import React, { useRef } from 'react';
 import { useIntersectionObserver } from 'primereact/hooks';
 import { classNames } from 'primereact/utils';
 
@@ -51,7 +51,7 @@ export default function BasicDemo() {
             <div className="border-dashed surface-border border-round w-20rem overflow-y-scroll p-3" style={{ height: '300px' }}>
                 <div className="flex align-items-center" style={{ height: '900px' }}>
                     <div ref={elementRef} className={classNames('w-full h-8rem border-round p-3 text-white font-bold bg-primary flex align-items-center justify-content-center')}>
-                        <i class="pi pi-prime text-4xl"></i>
+                        <i className="pi pi-prime text-4xl"></i>
                     </div>
                 </div>
             </div>
@@ -71,7 +71,7 @@ export default function BasicDemo() {
                 <div className="border-dashed surface-border border-round w-20rem overflow-y-scroll p-3" style={{ height: '300px' }}>
                     <div className="flex align-items-center" style={{ height: '900px' }}>
                         <div ref={elementRef} className={classNames('w-full h-8rem border-round p-3 text-white font-bold bg-primary flex align-items-center justify-content-center')}>
-                            <i class="pi pi-prime text-4xl"></i>
+                            <i className="pi pi-prime text-4xl"></i>
                         </div>
                     </div>
                 </div>
