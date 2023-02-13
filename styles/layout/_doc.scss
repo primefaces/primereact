@@ -215,6 +215,7 @@
 .doc-table {
     border-collapse: collapse;
     width: 100%;
+    min-width: 960px;
     background-color: var(--surface-card);
     margin-bottom: 1.5rem;
 
