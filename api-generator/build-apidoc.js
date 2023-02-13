@@ -5,6 +5,15 @@ const fs = require('fs');
 const rootDir = path.resolve(__dirname, '../');
 const outputPath = path.resolve(rootDir, 'components/doc/common/apidoc');
 
+const staticMessages = {
+    methods: "Defines methods that can be accessed by the component's reference.",
+    callbacks: 'Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.',
+    functions: 'Defines the custom functions used by the module.',
+    events: "Defines the custom events used by the component's callbacks.",
+    interfaces: 'Defines the custom interfaces used by the module.',
+    types: 'Defines the custom types used by the module.'
+};
+
 const app = new TypeDoc.Application();
 
 // If you want TypeDoc to load tsconfig.json / typedoc.json files
@@ -42,7 +51,7 @@ if (project) {
     project.children.forEach((module) => {
         const { name, comment } = module;
 
-        // if (name !== 'datatable') return; // REMOVE
+        //if (name !== 'hooks') return; // REMOVE
 
         const description = comment && comment.summary.map((s) => s.text || '').join(' ');
 
@@ -68,7 +77,7 @@ if (project) {
                 !doc[name]['components'] && (doc[name]['components'] = {});
 
                 const methods = {
-                    description: "Defines methods that can be accessed by the component's reference.",
+                    description: staticMessages['methods'],
                     values: []
                 };
                 const component_method_group = component.groups && component.groups.find((g) => g.title === 'Methods');
@@ -86,7 +95,7 @@ if (project) {
                                     description: param.comment && param.comment.summary.map((s) => s.text || '').join(' ')
                                 };
                             }),
-                            returnType: signature.type.name,
+                            returnType: signature.type.toString(),
                             description: signature.comment && signature.comment.summary.map((s) => s.text || '').join(' ')
                         });
                     });
@@ -100,7 +109,7 @@ if (project) {
                     values: []
                 };
                 const callbacks = {
-                    description: 'Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.',
+                    description: staticMessages['callbacks'],
                     values: []
                 };
 
@@ -135,7 +144,7 @@ if (project) {
                                     return {
                                         name: param.name,
                                         optional: param.flags.isOptional,
-                                        type: param.type.name,
+                                        type: param.type.toString(),
                                         description: param.comment && param.comment.summary.map((s) => parseText(s.text || '')).join(' ')
                                     };
                                 }),
@@ -185,6 +194,36 @@ if (project) {
                 };
             });
 
+        const module_functions_group = module.groups.find((g) => g.title === 'Functions');
+
+        module_functions_group &&
+            module_functions_group.children.forEach((method) => {
+                !doc[name]['functions'] &&
+                    (doc[name]['functions'] = {
+                        description: staticMessages['functions'],
+                        values: {}
+                    });
+
+                const signatures = method.getAllSignatures();
+
+                if (signatures && signatures.length > 0) {
+                    const signature = signatures[0];
+
+                    doc[name]['functions'].values[method.name] = {
+                        name: signature.name,
+                        parameters: signature.parameters.map((param) => {
+                            return {
+                                name: param.name,
+                                type: param.type.toString(),
+                                description: param.comment && param.comment.summary.map((s) => s.text || '').join(' ')
+                            };
+                        }),
+                        returnType: signature.type.toString(),
+                        description: signature.comment && signature.comment.summary.map((s) => s.text || '').join(' ')
+                    };
+                }
+            });
+
         const module_events_group = module.groups.find((g) => g.title === 'Events');
 
         module_events_group &&
@@ -195,7 +234,7 @@ if (project) {
 
                 !doc[name]['events'] &&
                     (doc[name]['events'] = {
-                        description: "Defines the custom events used by the component's callbacks.",
+                        description: staticMessages['events'],
                         values: {}
                     });
 
@@ -233,11 +272,12 @@ if (project) {
 
                 !doc[name]['interfaces'] &&
                     (doc[name]['interfaces'] = {
-                        description: 'Defines the custom interfaces used by the component.',
+                        description: staticMessages['interfaces'],
                         values: {}
                     });
 
                 const props = [];
+                const callbacks = [];
 
                 if (event.groups) {
                     const event_props_group = event.groups.find((g) => g.title === 'Properties');
@@ -251,6 +291,27 @@ if (project) {
                                 type: prop.type.toString(),
                                 //defaultValue: prop.comment && prop.comment.getTag('@defaultValue') ? prop.comment.getTag('@defaultValue').content[0].text : '', // TODO: Check
                                 description: prop.comment && prop.comment.summary.map((s) => s.text || '').join(' ')
+                            });
+                        });
+
+                    const event_methods_group = event.groups.find((g) => g.title === 'Methods');
+
+                    event_methods_group &&
+                        event_methods_group.children.forEach((method) => {
+                            const signature = method.getAllSignatures()[0];
+
+                            callbacks.push({
+                                name: signature.name,
+                                parameters: signature.parameters.map((param) => {
+                                    return {
+                                        name: param.name,
+                                        optional: param.flags.isOptional,
+                                        type: param.type.toString(),
+                                        description: param.comment && param.comment.summary.map((s) => parseText(s.text || '')).join(' ')
+                                    };
+                                }),
+                                returnType: signature.type.toString(),
+                                description: signature.comment && signature.comment.summary.map((s) => parseText(s.text || '')).join(' ')
                             });
                         });
                 }
@@ -274,6 +335,7 @@ if (project) {
                     description: event_props_description,
                     relatedProp: component_prop,
                     props,
+                    callbacks,
                     extendedBy: event_extendedBy,
                     extendedTypes: event_extendedTypes
                 };
@@ -287,7 +349,7 @@ if (project) {
 
                 !doc[name]['types'] &&
                     (doc[name]['types'] = {
-                        description: 'Defines the custom types used by the component.',
+                        description: staticMessages['types'],
                         values: {}
                     });
 
@@ -314,6 +376,8 @@ if (project) {
                     description: event_props_description
                 };
             });
+
+        // app.generateJson(module, `./api-generator/module-typedoc.json`);
     });
 
     const typedocJSON = JSON.stringify(doc, null, 4);
@@ -321,5 +385,5 @@ if (project) {
     !fs.existsSync(outputPath) && fs.mkdirSync(outputPath);
     fs.writeFileSync(path.resolve(outputPath, 'index.json'), typedocJSON);
 
-    //app.generateJson(project, `./api-generator/typedoc.json`);
+    // app.generateJson(project, `./api-generator/typedoc.json`);
 }

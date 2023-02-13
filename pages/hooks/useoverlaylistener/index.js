@@ -16,15 +16,7 @@ const OverlayListenerDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React useOverlayListener Hook"
-            header="useOverlayListener"
-            description="Composition of commonly used overlay hooks."
-            componentDocs={docs}
-            apiDocs={[{ name: 'useOverlayListener', pathname: '/functions/hooks.useOverlayListener.html' }]}
-        />
-    );
+    return <DocComponent title="React useOverlayListener Hook" header="useOverlayListener" description="Composition of commonly used overlay hooks." componentDocs={docs} apiDocs={['hooks.functions.useOverlayListener']} />;
 };
 
 export default OverlayListenerDemo;

@@ -137,9 +137,12 @@ const Component = (props) => {
 
 export function DocApiSection(props) {
     const { doc, header } = props;
+    const capitalize = (s) => (s && s[0].toUpperCase() + s.slice(1)) || '';
 
     const docs = doc.reduce((cDocs, name) => {
-        const mod = APIDoc[name.toLowerCase()];
+        const splitedName = name.split('.');
+        const modName = capitalize(splitedName[0]);
+        const mod = APIDoc[modName.toLowerCase()];
 
         if (mod) {
             const addToChildDoc = (childDoc, componentName) => {
@@ -234,76 +237,160 @@ export function DocApiSection(props) {
                 }
             };
 
-            mod.components &&
-                Object.entries(mod.components).forEach(([cKey, cValue]) => {
-                    const cMap = {
-                        id: `api.${cKey}`,
-                        label: cKey,
-                        description: cValue.description,
+            if (splitedName.length === 3) {
+                const type = splitedName[1];
+                const selectedName = splitedName[2];
+
+                if (type === 'functions') {
+                    const value = mod[type].values[selectedName];
+
+                    const fMap = {
+                        id: `api.${modName}`,
+                        label: modName,
                         children: []
                     };
 
-                    if (ObjectUtils.isNotEmpty(cValue.props) && ObjectUtils.isNotEmpty(cValue.props.values)) {
-                        const [id, label] = [`api.${cKey}.props`, 'Props'];
+                    const [id, label] = [`api.${modName}.function`, 'Function'];
 
-                        cMap.children.push({
-                            id,
-                            label,
-                            component: (inProps) => <Component name={cKey} value={cValue.props.values} description={cValue.props.description} {...inProps} />
+                    const values = Object.entries(value).reduce((avs, [k, v]) => {
+                        k !== 'description' && (avs[k] = v);
+
+                        return avs;
+                    }, {});
+
+                    fMap.children.push({
+                        id,
+                        label,
+                        component: (inProps) => <Component name={modName} value={[values]} description={value.description} {...inProps} />
+                    });
+
+                    const types = value.parameters && value.parameters.map((p) => p.type);
+
+                    if (ObjectUtils.isNotEmpty(mod.interfaces) && ObjectUtils.isNotEmpty(mod.interfaces.values)) {
+                        const iMap = {
+                            id: `api.${modName}.interfaces`,
+                            label: 'Interfaces',
+                            description: mod.interfaces.description,
+                            children: []
+                        };
+
+                        Object.entries(mod.interfaces.values).forEach(([iKey, iValue]) => {
+                            if (types.includes(iKey)) {
+                                const [id, label] = [`api.${modName}.${iKey}`, iKey];
+
+                                const tMap = {
+                                    id,
+                                    label,
+                                    description: (
+                                        <>
+                                            {iValue.description}{' '}
+                                            {iValue.extendedTypes && (
+                                                <>
+                                                    Extends <i>{iValue.extendedTypes}</i>.
+                                                </>
+                                            )}
+                                        </>
+                                    ),
+                                    children: []
+                                };
+
+                                if (ObjectUtils.isNotEmpty(iValue.props)) {
+                                    tMap.children.push({
+                                        id: `${id}.props`,
+                                        label: 'Props',
+                                        component: (inProps) => <Component value={iValue.props} {...inProps} />
+                                    });
+                                }
+
+                                if (ObjectUtils.isNotEmpty(iValue.callbacks)) {
+                                    tMap.children.push({
+                                        id: `${id}.callbacks`,
+                                        label: 'Callbacks',
+                                        component: (inProps) => <Component value={iValue.callbacks} {...inProps} />
+                                    });
+                                }
+
+                                iMap.children.push(tMap);
+                            }
                         });
+
+                        ObjectUtils.isNotEmpty(iMap.children) && fMap.children.push(iMap);
                     }
 
-                    if (ObjectUtils.isNotEmpty(cValue.callbacks) && ObjectUtils.isNotEmpty(cValue.callbacks.values)) {
-                        const [id, label] = [`api.${cKey}.callbacks`, 'Callbacks'];
+                    cDocs.push(fMap);
+                }
+            } else {
+                mod.components &&
+                    Object.entries(mod.components).forEach(([cKey, cValue]) => {
+                        const cMap = {
+                            id: `api.${cKey}`,
+                            label: cKey,
+                            description: cValue.description,
+                            children: []
+                        };
 
-                        cMap.children.push({
-                            id,
-                            label,
-                            component: (inProps) => <Component name={cKey} value={cValue.callbacks.values} description={cValue.callbacks.description} {...inProps} />
-                        });
-                    }
+                        if (ObjectUtils.isNotEmpty(cValue.props) && ObjectUtils.isNotEmpty(cValue.props.values)) {
+                            const [id, label] = [`api.${cKey}.props`, 'Props'];
 
-                    if (ObjectUtils.isNotEmpty(cValue.methods) && ObjectUtils.isNotEmpty(cValue.methods.values)) {
-                        const [id, label] = [`api.${cKey}.methods`, 'Methods'];
+                            cMap.children.push({
+                                id,
+                                label,
+                                component: (inProps) => <Component name={cKey} value={cValue.props.values} description={cValue.props.description} {...inProps} />
+                            });
+                        }
 
-                        cMap.children.push({
-                            id,
-                            label,
-                            component: (inProps) => <Component name={cKey} value={cValue.methods.values} description={cValue.methods.description} {...inProps} />
-                        });
-                    }
+                        if (ObjectUtils.isNotEmpty(cValue.callbacks) && ObjectUtils.isNotEmpty(cValue.callbacks.values)) {
+                            const [id, label] = [`api.${cKey}.callbacks`, 'Callbacks'];
 
-                    if (cKey.toLocaleLowerCase() === name.toLowerCase()) {
-                        addToChildDoc(cMap.children, cKey);
-                    }
+                            cMap.children.push({
+                                id,
+                                label,
+                                component: (inProps) => <Component name={cKey} value={cValue.callbacks.values} description={cValue.callbacks.description} {...inProps} />
+                            });
+                        }
 
-                    cDocs.push(cMap);
-                });
+                        if (ObjectUtils.isNotEmpty(cValue.methods) && ObjectUtils.isNotEmpty(cValue.methods.values)) {
+                            const [id, label] = [`api.${cKey}.methods`, 'Methods'];
 
-            mod.model &&
-                Object.entries(mod.model).forEach(([mKey, mValue]) => {
-                    const mMap = {
-                        id: `api.${mKey}`,
-                        label: mKey,
-                        children: []
-                    };
+                            cMap.children.push({
+                                id,
+                                label,
+                                component: (inProps) => <Component name={cKey} value={cValue.methods.values} description={cValue.methods.description} {...inProps} />
+                            });
+                        }
 
-                    if (ObjectUtils.isNotEmpty(mValue.props) && ObjectUtils.isNotEmpty(mValue.props.values)) {
-                        const [id, label] = [`api.${mKey}.props`, 'Props'];
+                        if (cKey.toLocaleLowerCase() === name.toLowerCase()) {
+                            addToChildDoc(cMap.children, cKey);
+                        }
 
-                        mMap.children.push({
-                            id,
-                            label,
-                            component: (inProps) => <Component name={mKey} value={mValue.props.values} description={mValue.props.description} {...inProps} />
-                        });
-                    }
+                        cDocs.push(cMap);
+                    });
 
-                    if (mKey.toLocaleLowerCase() === name.toLowerCase()) {
-                        addToChildDoc(mMap.children, mKey);
-                    }
+                mod.model &&
+                    Object.entries(mod.model).forEach(([mKey, mValue]) => {
+                        const mMap = {
+                            id: `api.${mKey}`,
+                            label: mKey,
+                            children: []
+                        };
 
-                    cDocs.push(mMap);
-                });
+                        if (ObjectUtils.isNotEmpty(mValue.props) && ObjectUtils.isNotEmpty(mValue.props.values)) {
+                            const [id, label] = [`api.${mKey}.props`, 'Props'];
+
+                            mMap.children.push({
+                                id,
+                                label,
+                                component: (inProps) => <Component name={mKey} value={mValue.props.values} description={mValue.props.description} {...inProps} />
+                            });
+                        }
+
+                        if (mKey.toLocaleLowerCase() === name.toLowerCase()) {
+                            addToChildDoc(mMap.children, mKey);
+                        }
+
+                        cDocs.push(mMap);
+                    });
+            }
         }
 
         return cDocs;
@@ -323,7 +410,7 @@ export function DocApiSection(props) {
             <div className="doc-main">
                 <div className="doc-intro">
                     <h1>{header} API</h1>
-                    <p>API defines helper props, events and others for the PrimeReact {header} component.</p>
+                    <p>API defines helper props, events and others for the PrimeReact {header} module.</p>
                 </div>
                 <DocSections docs={docs} />
             </div>

@@ -6,7 +6,7 @@ export function DocSections({ docs }) {
         return (
             <React.Fragment key={doc.id + '_' + level}>
                 <DocSectionText {...doc} level={level}>
-                    <p>{doc.description || 'Section Content'}</p>
+                    {doc.description ? <p>{doc.description}</p> : null}
                 </DocSectionText>
                 {doc.children.map((d) => {
                     const { id, label, component, children } = d;

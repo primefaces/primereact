@@ -9,7 +9,6 @@ import * as React from 'react';
 
 /**
  * Custom MousePositionOptions
- * @group Misc
  */
 interface MousePositionOptions {
     /**
@@ -24,7 +23,6 @@ interface MousePositionOptions {
 
 /**
  * Custom MouseDataOptions
- * @group Misc
  */
 declare interface MouseDataOptions extends MousePositionOptions {
     /**
@@ -39,7 +37,6 @@ declare interface MouseDataOptions extends MousePositionOptions {
 
 /**
  * Custom MouseMoveOptions
- * @group Misc
  */
 declare interface MouseMoveOptions extends MouseDataOptions {
     /**
@@ -182,8 +179,8 @@ export declare function useLocalStorage<S, K extends string = string>(initialVal
 export declare function useSessionStorage<S, K extends string = string>(initialValue: S, key: K): [S, React.Dispatch<React.SetStateAction<S>>];
 /**
  * @todo
- * @param {number} initialValue - The value to counter. @defaultValue 0
- * @param {{ min: number; max: number; step: number }} options - The options of the counter. @defaultValue &#123; step: 1 &#125;
+ * @param {number} [initialValue=0] - The value to counter.
+ * @param {{ min: number; max: number; step: number }} [options=&#123; step: 1 &#125;]  - The options of the counter.
  */
 export declare function useCounter(initialValue: number, options: { min: number; max: number; step: number }): any;
 /**

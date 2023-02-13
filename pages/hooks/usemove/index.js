@@ -28,7 +28,7 @@ const MoveDemo = () => {
         }
     ];
 
-    return <DocComponent title="React useMove Hook" header="useMove" description="Handles move interactions via touch and mouse events." componentDocs={docs} apiDocs={[{ name: 'useMove', pathname: '/functions/hooks.useMove.html' }]} />;
+    return <DocComponent title="React useMove Hook" header="useMove" description="Handles move interactions via touch and mouse events." componentDocs={docs} apiDocs={['hooks.functions.useMove']} />;
 };
 
 export default MoveDemo;

@@ -123,12 +123,13 @@
     top: 7rem;
     right: 0;
     width: 18rem;
-    height: calc(100vh - 15rem);
+    max-height: calc(100vh - 15rem);
     list-style: none;
     margin: 0;
     padding: 0.25rem 0 0.25rem 4rem;
     overflow-y: auto;
     overflow-x: hidden;
+    align-self: flex-start;
 
     > .navbar-item {
         .navbar-item-content {

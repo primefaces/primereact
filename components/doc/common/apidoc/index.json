@@ -287,8 +287,93 @@
     },
     "api": {
         "description": "",
+        "functions": {
+            "description": "Defines the custom functions used by the module.",
+            "values": {
+                "addLocale": {
+                    "name": "addLocale",
+                    "parameters": [
+                        {
+                            "name": "locale",
+                            "type": "string"
+                        },
+                        {
+                            "name": "options",
+                            "type": "object"
+                        }
+                    ],
+                    "returnType": "void"
+                },
+                "locale": {
+                    "name": "locale",
+                    "parameters": [
+                        {
+                            "name": "locale",
+                            "type": "string"
+                        }
+                    ],
+                    "returnType": "Object"
+                },
+                "localeOption": {
+                    "name": "localeOption",
+                    "parameters": [
+                        {
+                            "name": "key",
+                            "type": "string"
+                        },
+                        {
+                            "name": "locale",
+                            "type": "string"
+                        }
+                    ],
+                    "returnType": "any"
+                },
+                "localeOptions": {
+                    "name": "localeOptions",
+                    "parameters": [
+                        {
+                            "name": "locale",
+                            "type": "string"
+                        }
+                    ],
+                    "returnType": "object"
+                },
+                "updateLocaleOption": {
+                    "name": "updateLocaleOption",
+                    "parameters": [
+                        {
+                            "name": "key",
+                            "type": "string"
+                        },
+                        {
+                            "name": "value",
+                            "type": "any"
+                        },
+                        {
+                            "name": "locale",
+                            "type": "string"
+                        }
+                    ],
+                    "returnType": "void"
+                },
+                "updateLocaleOptions": {
+                    "name": "updateLocaleOptions",
+                    "parameters": [
+                        {
+                            "name": "options",
+                            "type": "object"
+                        },
+                        {
+                            "name": "locale",
+                            "type": "string"
+                        }
+                    ],
+                    "returnType": "void"
+                }
+            }
+        },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "APIOptions": {
                     "relatedProp": "",
@@ -353,7 +438,8 @@
                             "readonly": false,
                             "type": "ZIndexOptions"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "FilterMatchModeOptions": {
                     "relatedProp": "",
@@ -376,7 +462,8 @@
                             "readonly": false,
                             "type": "any[]"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "PrimeIconsOptions": {
                     "relatedProp": "",
@@ -1797,7 +1884,8 @@
                             "readonly": true,
                             "type": "string"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "ZIndexOptions": {
                     "relatedProp": "",
@@ -1832,12 +1920,13 @@
                             "readonly": false,
                             "type": "number"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 }
             }
         },
         "types": {
-            "description": "Defines the custom types used by the component.",
+            "description": "Defines the custom types used by the module.",
             "values": {
                 "AppendToType": {
                     "values": "\"self\" | HTMLElement | undefined | null"
@@ -2325,7 +2414,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "FocusEvent",
+                                    "type": "FocusEvent<HTMLInputElement, Element>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -2351,7 +2440,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "SyntheticEvent",
+                                    "type": "SyntheticEvent<Element, Event>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -2364,7 +2453,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent",
+                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -2377,7 +2466,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent",
+                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -2390,7 +2479,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent",
+                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -2416,7 +2505,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "FocusEvent",
+                                    "type": "FocusEvent<HTMLInputElement, Element>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -2435,7 +2524,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "KeyboardEvent",
+                                    "type": "KeyboardEvent<HTMLInputElement>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -2448,7 +2537,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "KeyboardEvent",
+                                    "type": "KeyboardEvent<HTMLInputElement>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -2461,7 +2550,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent",
+                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -2723,7 +2812,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent",
+                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -2736,7 +2825,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "SyntheticEvent",
+                                    "type": "SyntheticEvent<Element, Event>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -3145,6 +3234,7 @@
                         {
                             "name": "getCurrentDateTime",
                             "parameters": [],
+                            "returnType": "Date | Date[]",
                             "description": "Used to get the current date."
                         },
                         {
@@ -3168,6 +3258,7 @@
                         {
                             "name": "getViewDate",
                             "parameters": [],
+                            "returnType": "Date | Date[]",
                             "description": "Used to get the view date."
                         },
                         {
@@ -3748,6 +3839,7 @@
                                 {
                                     "name": "yearValues",
                                     "optional": false,
+                                    "type": "number[]",
                                     "description": "The values of years"
                                 }
                             ],
@@ -3798,7 +3890,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "FocusEvent",
+                                    "type": "FocusEvent<HTMLInputElement, Element>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -3824,7 +3916,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent",
+                                    "type": "MouseEvent<HTMLButtonElement, MouseEvent>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -3837,7 +3929,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "FocusEvent",
+                                    "type": "FocusEvent<HTMLInputElement, Element>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -3856,7 +3948,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "FormEvent",
+                                    "type": "FormEvent<HTMLInputElement>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -3901,7 +3993,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent",
+                                    "type": "MouseEvent<HTMLButtonElement, MouseEvent>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -4204,7 +4296,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "CalendarSelectEvent": {
                     "description": "Custom Select event",
@@ -4224,7 +4316,8 @@
                             "type": "Nullable<string | Date | Date[]>",
                             "description": "Selected date"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 }
             }
         }
@@ -4499,7 +4592,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "CarouselResponsiveOption": {
                     "description": "Custom responsive option",
@@ -4526,7 +4619,8 @@
                             "type": "number",
                             "description": "Number of items per page."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 }
             }
         }
@@ -5193,7 +5287,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent",
+                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -5206,7 +5300,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent",
+                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -5347,7 +5441,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "SyntheticEvent",
+                                    "type": "SyntheticEvent<Element, Event>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -5360,7 +5454,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent",
+                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -5576,7 +5670,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "FocusEvent",
+                                    "type": "FocusEvent<HTMLInputElement, Element>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -5602,7 +5696,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "FocusEvent",
+                                    "type": "FocusEvent<HTMLInputElement, Element>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -5615,7 +5709,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "KeyboardEvent",
+                                    "type": "KeyboardEvent<HTMLInputElement>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -5695,7 +5789,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "ChipsAddEvent": {
                     "description": "Custom add event",
@@ -5715,7 +5809,8 @@
                             "type": "any",
                             "description": "Added item value"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 }
             }
         }
@@ -5943,7 +6038,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "ColorPickerHSBType": {
                     "description": "HSB type of value",
@@ -5970,7 +6065,8 @@
                             "type": "number",
                             "description": "saturation number"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "ColorPickerRGBType": {
                     "description": "RGB type of value",
@@ -5997,7 +6093,8 @@
                             "type": "number",
                             "description": "red color number"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 }
             }
         }
@@ -6971,7 +7068,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "ColumnBodyExpanderOptions": {
                     "relatedProp": "",
@@ -6996,6 +7093,21 @@
                             "readonly": false,
                             "type": "string",
                             "description": "Class name of the options icon."
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "onClick",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "any",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Event on click of the expander."
                         }
                     ]
                 },
@@ -7051,7 +7163,8 @@
                             "type": "number",
                             "description": "Index of the row."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "ColumnBodyRowEditorOptions": {
                     "relatedProp": "",
@@ -7111,6 +7224,47 @@
                             "readonly": false,
                             "type": "string",
                             "description": "Class name of the save icon."
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "onCancelClick",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "any",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Event on cancel click of the row editor."
+                        },
+                        {
+                            "name": "onInitClick",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "any",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Event on init click of the row editor."
+                        },
+                        {
+                            "name": "onSaveClick",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "any",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Event on save click of the row editor."
                         }
                     ]
                 },
@@ -7173,6 +7327,21 @@
                             "type": "any",
                             "description": "Value of the editor."
                         }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "editorCallback",
+                            "parameters": [
+                                {
+                                    "name": "value",
+                                    "optional": false,
+                                    "type": "any",
+                                    "description": "Browser event"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback function triggered on editor change."
+                        }
                     ]
                 },
                 "ColumnFilterApplyTemplateOptions": {
@@ -7193,6 +7362,27 @@
                             "description": "Object containing column filter model options."
                         }
                     ],
+                    "callbacks": [
+                        {
+                            "name": "filterApplyCallback",
+                            "parameters": [
+                                {
+                                    "name": "value",
+                                    "optional": true,
+                                    "type": "any",
+                                    "description": "Value of the filter."
+                                },
+                                {
+                                    "name": "index",
+                                    "optional": true,
+                                    "type": "number",
+                                    "description": "Index of the filter."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback function to apply the filters with optional value and index parameters."
+                        }
+                    ],
                     "extendedBy": "ColumnFilterHeaderTemplateOptions,ColumnFilterFooterTemplateOptions"
                 },
                 "ColumnFilterClearTemplateOptions": {
@@ -7211,6 +7401,14 @@
                             "readonly": false,
                             "type": "ColumnFilterModelOptions",
                             "description": "Object containing column filter model options."
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "filterClearCallback",
+                            "parameters": [],
+                            "returnType": "void",
+                            "description": "Callback function to clear the filters."
                         }
                     ]
                 },
@@ -7245,6 +7443,46 @@
                             "type": "any",
                             "description": "Value of the filter."
                         }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "filterApplyCallback",
+                            "parameters": [
+                                {
+                                    "name": "value",
+                                    "optional": true,
+                                    "type": "any",
+                                    "description": "Value of the filter."
+                                },
+                                {
+                                    "name": "index",
+                                    "optional": true,
+                                    "type": "number",
+                                    "description": "Index of the filter."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback function to apply the filters with optional value and index parameters."
+                        },
+                        {
+                            "name": "filterCallback",
+                            "parameters": [
+                                {
+                                    "name": "value",
+                                    "optional": true,
+                                    "type": "any",
+                                    "description": "Value of the filter."
+                                },
+                                {
+                                    "name": "index",
+                                    "optional": true,
+                                    "type": "number",
+                                    "description": "Index of the filter."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback function with optional value and index parameters."
+                        }
                     ]
                 },
                 "ColumnFilterFooterTemplateOptions": {
@@ -7264,6 +7502,27 @@
                             "readonly": false,
                             "type": "ColumnFilterModelOptions",
                             "description": "Object containing column filter model options."
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "filterApplyCallback",
+                            "parameters": [
+                                {
+                                    "name": "value",
+                                    "optional": true,
+                                    "type": "any",
+                                    "description": "Value of the filter."
+                                },
+                                {
+                                    "name": "index",
+                                    "optional": true,
+                                    "type": "number",
+                                    "description": "Index of the filter."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback function to apply the filters with optional value and index parameters."
                         }
                     ],
                     "extendedTypes": "ColumnFilterApplyTemplateOptions"
@@ -7287,6 +7546,27 @@
                             "description": "Object containing column filter model options."
                         }
                     ],
+                    "callbacks": [
+                        {
+                            "name": "filterApplyCallback",
+                            "parameters": [
+                                {
+                                    "name": "value",
+                                    "optional": true,
+                                    "type": "any",
+                                    "description": "Value of the filter."
+                                },
+                                {
+                                    "name": "index",
+                                    "optional": true,
+                                    "type": "number",
+                                    "description": "Index of the filter."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback function to apply the filters with optional value and index parameters."
+                        }
+                    ],
                     "extendedTypes": "ColumnFilterApplyTemplateOptions"
                 },
                 "ColumnFilterMatchModeOptions": {
@@ -7298,7 +7578,8 @@
                             "readonly": false,
                             "type": "string"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "ColumnFilterMeta": {
                     "relatedProp": "",
@@ -7309,7 +7590,8 @@
                             "readonly": false,
                             "type": "ColumnFilterMetaData"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "ColumnFilterMetaData": {
                     "relatedProp": "",
@@ -7328,7 +7610,8 @@
                             "type": "any",
                             "description": "Value of the filter."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "ColumnFilterMetaDataWithConstraint": {
                     "relatedProp": "",
@@ -7347,7 +7630,8 @@
                             "type": "\"and\" | \"or\"",
                             "description": "Logical operator for the constraints."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "ColumnFilterModelOptions": {
                     "relatedProp": "",
@@ -7358,7 +7642,8 @@
                             "readonly": false,
                             "type": "ColumnFilterMetaData | ColumnFilterMetaDataWithConstraint"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "ColumnFooterOptions": {
                     "description": "Column Header Options",
@@ -7372,6 +7657,7 @@
                             "description": "Additional properties passed to the body component."
                         }
                     ],
+                    "callbacks": [],
                     "extendedTypes": "ColumnHeaderOptions"
                 },
                 "ColumnHeaderOptions": {
@@ -7385,6 +7671,7 @@
                             "description": "Additional properties passed to the body component."
                         }
                     ],
+                    "callbacks": [],
                     "extendedBy": "ColumnFooterOptions"
                 },
                 "ColumnSortMetaData": {
@@ -7405,6 +7692,7 @@
                             "description": "Sort order of the column."
                         }
                     ],
+                    "callbacks": [],
                     "extendedBy": "ColumnSortEvent"
                 }
             }
@@ -7593,7 +7881,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent",
+                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -7606,7 +7894,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "DragEvent",
+                                    "type": "DragEvent<HTMLElement>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -7619,7 +7907,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "DragEvent",
+                                    "type": "DragEvent<HTMLElement>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -7632,7 +7920,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "DragEvent",
+                                    "type": "DragEvent<HTMLElement>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -7657,7 +7945,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent",
+                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -7683,7 +7971,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent",
+                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -7696,7 +7984,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent",
+                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -7709,7 +7997,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent",
+                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -7732,8 +8020,23 @@
                 }
             }
         },
+        "functions": {
+            "description": "Defines the custom functions used by the module.",
+            "values": {
+                "confirmDialog": {
+                    "name": "confirmDialog",
+                    "parameters": [
+                        {
+                            "name": "props",
+                            "type": "ConfirmDialogProps"
+                        }
+                    ],
+                    "returnType": "ConfirmDialogReturn"
+                }
+            }
+        },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "ConfirmDialogOptions": {
                     "description": "Custom confirm dialog options",
@@ -7787,12 +8090,40 @@
                             "readonly": false,
                             "type": "any"
                         }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "accept",
+                            "parameters": [],
+                            "returnType": "void",
+                            "description": "Callback to execute when action is confirmed."
+                        },
+                        {
+                            "name": "reject",
+                            "parameters": [],
+                            "returnType": "void",
+                            "description": "Callback to execute when action is rejected."
+                        }
                     ]
                 },
                 "ConfirmDialogReturn": {
                     "description": "Object returned by the  confirmDialog  method.",
                     "relatedProp": "",
-                    "props": []
+                    "props": [],
+                    "callbacks": [
+                        {
+                            "name": "hide",
+                            "parameters": [],
+                            "returnType": "void",
+                            "description": "Used to hide the dialog."
+                        },
+                        {
+                            "name": "show",
+                            "parameters": [],
+                            "returnType": "void",
+                            "description": "Used to show the dialog."
+                        }
+                    ]
                 }
             }
         }
@@ -8005,8 +8336,23 @@
                 }
             }
         },
+        "functions": {
+            "description": "Defines the custom functions used by the module.",
+            "values": {
+                "confirmPopup": {
+                    "name": "confirmPopup",
+                    "parameters": [
+                        {
+                            "name": "props",
+                            "type": "ConfirmPopupProps"
+                        }
+                    ],
+                    "returnType": "ConfirmPopupReturn"
+                }
+            }
+        },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "ConfirmPopupOptions": {
                     "description": "Custom confirm popup options",
@@ -8067,12 +8413,40 @@
                             "readonly": false,
                             "type": "any"
                         }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "accept",
+                            "parameters": [],
+                            "returnType": "void",
+                            "description": "Callback to execute when action is confirmed."
+                        },
+                        {
+                            "name": "reject",
+                            "parameters": [],
+                            "returnType": "void",
+                            "description": "Callback to execute when action is rejected."
+                        }
                     ]
                 },
                 "ConfirmPopupReturn": {
                     "description": "Object returned by the  confirmPopup  method.",
                     "relatedProp": "",
-                    "props": []
+                    "props": [],
+                    "callbacks": [
+                        {
+                            "name": "hide",
+                            "parameters": [],
+                            "returnType": "void",
+                            "description": "Used to hide the popup."
+                        },
+                        {
+                            "name": "show",
+                            "parameters": [],
+                            "returnType": "void",
+                            "description": "Used to show the popup."
+                        }
+                    ]
                 }
             }
         }
@@ -8187,7 +8561,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "SyntheticEvent",
+                                    "type": "SyntheticEvent<Element, Event>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -8200,7 +8574,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "SyntheticEvent",
+                                    "type": "SyntheticEvent<Element, Event>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -9257,7 +9631,7 @@
                                 {
                                     "name": "options",
                                     "optional": false,
-                                    "type": "DataTableCellClassNameOptions",
+                                    "type": "DataTableCellClassNameOptions<TValue>",
                                     "description": "ClassName options."
                                 }
                             ],
@@ -9289,7 +9663,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "DataTableExportFunctionEvent",
+                                    "type": "DataTableExportFunctionEvent<TValue>",
                                     "description": "Custom export function event."
                                 }
                             ],
@@ -9302,7 +9676,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "DataTableDataSelectableEvent",
+                                    "type": "DataTableDataSelectableEvent<TValue>",
                                     "description": "Custom data selectable event."
                                 }
                             ],
@@ -9341,7 +9715,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "DataTableCellClickEvent",
+                                    "type": "DataTableCellClickEvent<TValue>",
                                     "description": "Custom cell click event."
                                 }
                             ],
@@ -9445,7 +9819,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "DataTableSelectionChangeEvent",
+                                    "type": "DataTableSelectionChangeEvent<TValue>",
                                     "description": "Custom row event."
                                 }
                             ],
@@ -9627,7 +10001,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "DataTableRowReorderEvent",
+                                    "type": "DataTableRowReorderEvent<TValue>",
                                     "description": "Custom row reorder event."
                                 }
                             ],
@@ -9692,7 +10066,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "DataTableSelectionChangeEvent",
+                                    "type": "DataTableSelectionChangeEvent<TValue>",
                                     "description": "Custom selection change event."
                                 }
                             ],
@@ -9744,7 +10118,7 @@
                                 {
                                     "name": "value",
                                     "optional": false,
-                                    "type": "DataTableRowDataArray",
+                                    "type": "DataTableRowDataArray<TValue>",
                                     "description": "Value displayed by the table."
                                 }
                             ],
@@ -9757,13 +10131,13 @@
                                 {
                                     "name": "data",
                                     "optional": false,
-                                    "type": "DataTableRowData",
+                                    "type": "DataTableRowData<TValue>",
                                     "description": "Value displayed by the table."
                                 },
                                 {
                                     "name": "options",
                                     "optional": false,
-                                    "type": "DataTableRowClassNameOptions"
+                                    "type": "DataTableRowClassNameOptions<TValue>"
                                 }
                             ],
                             "returnType": "undefined | string | object",
@@ -9775,13 +10149,13 @@
                                 {
                                     "name": "data",
                                     "optional": false,
-                                    "type": "DataTableRowData",
+                                    "type": "DataTableRowData<TValue>",
                                     "description": "Editing row data."
                                 },
                                 {
                                     "name": "options",
                                     "optional": false,
-                                    "type": "DataTableRowEditValidatorOptions"
+                                    "type": "DataTableRowEditValidatorOptions<TValue>"
                                 }
                             ],
                             "returnType": "undefined | boolean",
@@ -9793,7 +10167,7 @@
                                 {
                                     "name": "data",
                                     "optional": false,
-                                    "type": "DataTableRowData",
+                                    "type": "DataTableRowData<TValue>",
                                     "description": "Editing row data."
                                 },
                                 {
@@ -9812,13 +10186,13 @@
                                 {
                                     "name": "data",
                                     "optional": false,
-                                    "type": "DataTableRowData",
+                                    "type": "DataTableRowData<TValue>",
                                     "description": "Editing row data."
                                 },
                                 {
                                     "name": "options",
                                     "optional": false,
-                                    "type": "DataTableShowRowReorderElementOptions",
+                                    "type": "DataTableShowRowReorderElementOptions<TValue>",
                                     "description": "Options for the row reorder element."
                                 }
                             ],
@@ -9831,13 +10205,13 @@
                                 {
                                     "name": "data",
                                     "optional": false,
-                                    "type": "DataTableRowData",
+                                    "type": "DataTableRowData<TValue>",
                                     "description": "Editing row data."
                                 },
                                 {
                                     "name": "options",
                                     "optional": false,
-                                    "type": "DataTableShowSelectionElementOptions",
+                                    "type": "DataTableShowSelectionElementOptions<TValue>",
                                     "description": "Options for the row reorder element."
                                 }
                             ],
@@ -10381,7 +10755,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "DataTableCellClassNameOptions": {
                     "description": "Custom cell className options.",
@@ -10422,7 +10796,8 @@
                             "type": "number",
                             "description": "Index of the row."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "DataTableCellClickEvent": {
                     "description": "Custom cell click event.",
@@ -10477,7 +10852,8 @@
                             "type": "any",
                             "description": "Value of the cell."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "DataTableEditingRows": {
                     "description": "Custom datatable editing rows.",
@@ -10489,7 +10865,8 @@
                             "readonly": false,
                             "type": "boolean"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "DataTableExpandedRows": {
                     "description": "Custom datatable expanded rows.",
@@ -10501,7 +10878,8 @@
                             "readonly": false,
                             "type": "boolean"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "DataTableFilterMeta": {
                     "description": "Custom datatable filter meta.",
@@ -10513,7 +10891,8 @@
                             "readonly": false,
                             "type": "DataTableFilterMetaData | DataTableOperatorFilterMetaData"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "DataTableFilterMetaData": {
                     "description": "Custom datatable filter metadata.",
@@ -10533,7 +10912,8 @@
                             "type": "any",
                             "description": "Value to filter against."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "DataTableFooterTemplateOptions": {
                     "description": "Custom datatable header template options.",
@@ -10547,6 +10927,7 @@
                             "description": "The props of the datatable."
                         }
                     ],
+                    "callbacks": [],
                     "extendedTypes": "DataTableHeaderTemplateOptions<TValue>"
                 },
                 "DataTableHeaderTemplateOptions": {
@@ -10561,6 +10942,7 @@
                             "description": "The props of the datatable."
                         }
                     ],
+                    "callbacks": [],
                     "extendedBy": "DataTableFooterTemplateOptions"
                 },
                 "DataTableOperatorFilterMetaData": {
@@ -10581,7 +10963,8 @@
                             "type": "string",
                             "description": "Operator to use for filtering."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "DataTableRowClassNameOptions": {
                     "description": "Custom row className options.",
@@ -10594,7 +10977,8 @@
                             "type": "DataTableProps<TValue>",
                             "description": "The props of the datatable."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "DataTableRowEditSaveEvent": {
                     "description": "Custom row edit save event.",
@@ -10629,6 +11013,7 @@
                             "description": "Whether the row is valid or not."
                         }
                     ],
+                    "callbacks": [],
                     "extendedTypes": "DataTableRowEditEvent"
                 },
                 "DataTableRowEditValidatorOptions": {
@@ -10642,7 +11027,8 @@
                             "type": "DataTableProps<TValue>",
                             "description": "The props of the datatable."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "DataTableRowExpansionTemplate": {
                     "description": "Options for the row expansion template",
@@ -10662,7 +11048,8 @@
                             "type": "number",
                             "description": "Index of the row."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "DataTableRowGroupFooterTemplateOptions": {
                     "description": "Custom datatable row group footer template options.",
@@ -10697,6 +11084,7 @@
                             "description": "The props of the datatable."
                         }
                     ],
+                    "callbacks": [],
                     "extendedTypes": "DataTableRowGroupHeaderTemplateOptions<T>"
                 },
                 "DataTableRowGroupHeaderTemplateOptions": {
@@ -10725,6 +11113,7 @@
                             "description": "The props of the datatable."
                         }
                     ],
+                    "callbacks": [],
                     "extendedBy": "DataTableRowGroupFooterTemplateOptions"
                 },
                 "DataTableRowMouseEvent": {
@@ -10753,6 +11142,7 @@
                             "description": "Browser event."
                         }
                     ],
+                    "callbacks": [],
                     "extendedBy": "DataTableRowClickEvent",
                     "extendedTypes": "Omit<DataTableRowEvent, \"originalEvent\">"
                 },
@@ -10774,7 +11164,8 @@
                             "type": "SyntheticEvent<Element, Event>",
                             "description": "Browser event."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "DataTableShowRowReorderElementOptions": {
                     "description": "Custom show row reorder element options.",
@@ -10794,7 +11185,8 @@
                             "type": "number",
                             "description": "Index of the row element."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "DataTableShowSelectionElementOptions": {
                     "description": "Custom show selection element options.",
@@ -10814,7 +11206,8 @@
                             "type": "number",
                             "description": "Index of the row."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "DataTableSortMeta": {
                     "description": "Custom datatable sort meta",
@@ -10834,24 +11227,27 @@
                             "type": "undefined | null | 0 | 1 | -1",
                             "description": "Sort order as integer."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "DataTableValue": {
                     "description": "Custom value definition.",
                     "relatedProp": "",
                     "props": [],
+                    "callbacks": [],
                     "extendedTypes": "Record<string, any>"
                 },
                 "DataTableValueArray": {
                     "description": "Custom value array definition.",
                     "relatedProp": "",
                     "props": [],
+                    "callbacks": [],
                     "extendedTypes": "Array<DataTableValue>"
                 }
             }
         },
         "types": {
-            "description": "Defines the custom types used by the component.",
+            "description": "Defines the custom types used by the module.",
             "values": {
                 "DataTableCellSelection": {
                     "values": "{\n    \"cellIndex\": \"number, // Index of the cell.\",\n    \"column\": \"Column, // Column element of the datatable.\",\n    \"field\": \"string, // Column field.\",\n    \"props\": \"ColumnProps, // Properties of the column.\",\n    \"rowData\": \"DataTableRowData<TValue>, // Data of the row.\",\n    \"rowIndex\": \"number, // Index of the row.\",\n    \"selected\": \"boolean, // Whether the row is selected or not.\",\n    \"value\": \"TValue[number][keyof TValue[number]], // Value of the cell.\"\n}"
@@ -11132,6 +11528,7 @@
                                 {
                                     "name": "layout",
                                     "optional": false,
+                                    "type": "\"grid\" | \"list\" | string & Record<string, unknown>",
                                     "description": "Current layout."
                                 }
                             ],
@@ -11195,7 +11592,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "DataViewLayoutOptionsChangeEvent": {
                     "description": "Custom data view layout options event.",
@@ -11215,7 +11612,8 @@
                             "type": "\"grid\" | \"list\" | string & Record<string, unknown>",
                             "description": "New value."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "DataViewLayoutOptionsProps": {
                     "description": "Custom data view layout options props",
@@ -11255,6 +11653,21 @@
                             "readonly": false,
                             "type": "CSSProperties",
                             "description": "Inline style of the element."
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "onChange",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "DataViewLayoutOptionsChangeEvent",
+                                    "description": "Custom event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Layout options change callback"
                         }
                     ]
                 }
@@ -11299,7 +11712,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "SyntheticEvent",
+                                    "type": "SyntheticEvent<Element, Event>",
                                     "description": "Event object"
                                 }
                             ],
@@ -11657,7 +12070,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent",
+                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -11670,7 +12083,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "DragEvent",
+                                    "type": "DragEvent<HTMLElement>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -11683,7 +12096,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "DragEvent",
+                                    "type": "DragEvent<HTMLElement>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -11696,7 +12109,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "DragEvent",
+                                    "type": "DragEvent<HTMLElement>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -11715,7 +12128,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent",
+                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -11741,7 +12154,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent",
+                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -11754,7 +12167,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent",
+                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -11767,7 +12180,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent",
+                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -11810,7 +12223,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "DialogBreakpoints": {
                     "description": "Dialog break options",
@@ -11822,7 +12235,8 @@
                             "readonly": false,
                             "type": "string"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 }
             }
         }
@@ -11963,7 +12377,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "DockFooterTemplateOptions": {
                     "description": "Custom footer template",
@@ -11977,6 +12391,7 @@
                             "description": "All component props"
                         }
                     ],
+                    "callbacks": [],
                     "extendedTypes": "DockHeaderTemplateOptions"
                 },
                 "DockHeaderTemplateOptions": {
@@ -11991,6 +12406,7 @@
                             "description": "All component props"
                         }
                     ],
+                    "callbacks": [],
                     "extendedBy": "DockFooterTemplateOptions"
                 }
             }
@@ -12458,7 +12874,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "FocusEvent",
+                                    "type": "FocusEvent<HTMLInputElement, Element>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -12484,7 +12900,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent",
+                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -12510,7 +12926,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "FocusEvent",
+                                    "type": "FocusEvent<HTMLInputElement, Element>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -12529,7 +12945,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent",
+                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -12602,7 +13018,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "DropdownFilterOptions": {
                     "description": "Custom filter options",
@@ -12620,7 +13036,8 @@
                             "readonly": false,
                             "type": "Function"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 }
             }
         }
@@ -12931,7 +13348,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent",
+                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -12944,7 +13361,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent",
+                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -12957,7 +13374,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent",
+                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -13042,6 +13459,7 @@
                         {
                             "name": "getFiles",
                             "parameters": [],
+                            "returnType": "File[]",
                             "description": "Gets the current files list."
                         },
                         {
@@ -13659,7 +14077,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "FileUploadFilesEvent": {
                     "description": "Custom file upload event.",
@@ -13673,6 +14091,7 @@
                             "description": "Uploaded files."
                         }
                     ],
+                    "callbacks": [],
                     "extendedBy": "FileUploadUploadEvent,FileUploadSelectEvent,FileUploadHandlerEvent"
                 },
                 "FileUploadHandlerOptions": {
@@ -13685,6 +14104,14 @@
                             "readonly": false,
                             "type": "FileUploadProps",
                             "description": "All component props"
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "clear",
+                            "parameters": [],
+                            "returnType": "void",
+                            "description": "Clears the current files selected for upload."
                         }
                     ]
                 },
@@ -13734,7 +14161,8 @@
                             "type": "Element",
                             "description": "The upload button element."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "FileUploadOptions": {
                     "description": "Custom file upload options",
@@ -13775,7 +14203,8 @@
                             "type": "CSSProperties",
                             "description": "Inline style of the component."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "ItemTemplateOptions": {
                     "description": "Custom item template options",
@@ -13843,6 +14272,21 @@
                             "readonly": false,
                             "type": "Element",
                             "description": "Element to display the size of the file."
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "onRemove",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when a item template is removed."
                         }
                     ]
                 }
@@ -14179,7 +14623,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "GalleriaResponsiveOptions": {
                     "description": "Custom galleria responsive options",
@@ -14199,15 +14643,329 @@
                             "type": "number",
                             "description": "Number of visible items."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 }
             }
         }
     },
     "hooks": {
         "description": "The module includes custom hook methods to create shorthands for users.",
+        "functions": {
+            "description": "Defines the custom functions used by the module.",
+            "values": {
+                "useClickOutside": {
+                    "name": "useClickOutside",
+                    "parameters": [
+                        {
+                            "name": "ref",
+                            "type": "RefObject<Element>",
+                            "description": "The ref of the element to detect click outside."
+                        },
+                        {
+                            "name": "callback",
+                            "type": "any",
+                            "description": "The callback to run when click outside."
+                        }
+                    ],
+                    "returnType": "void",
+                    "description": "Custom hook to use detect click outside."
+                },
+                "useCounter": {
+                    "name": "useCounter",
+                    "parameters": [
+                        {
+                            "name": "initialValue",
+                            "type": "number",
+                            "description": "The value to counter."
+                        },
+                        {
+                            "name": "options",
+                            "type": "Object"
+                        }
+                    ],
+                    "returnType": "any",
+                    "description": ""
+                },
+                "useDebounce": {
+                    "name": "useDebounce",
+                    "parameters": [
+                        {
+                            "name": "initialValue",
+                            "type": "any",
+                            "description": "The initial value for debounce."
+                        },
+                        {
+                            "name": "delay",
+                            "type": "number",
+                            "description": "The delay in milliseconds."
+                        }
+                    ],
+                    "returnType": "any[]",
+                    "description": "Custom hook to use a debounced value."
+                },
+                "useEventListener": {
+                    "name": "useEventListener",
+                    "parameters": [
+                        {
+                            "name": "options",
+                            "type": "EventOptions",
+                            "description": "The event options."
+                        }
+                    ],
+                    "returnType": "any[]",
+                    "description": "Custom hook to listen to an event."
+                },
+                "useFavicon": {
+                    "name": "useFavicon",
+                    "parameters": [
+                        {
+                            "name": "newIcon",
+                            "type": "string",
+                            "description": "The new favicon url to set."
+                        },
+                        {
+                            "name": "rel",
+                            "type": "string",
+                            "description": "The rel attribute of the link element."
+                        }
+                    ],
+                    "returnType": "void",
+                    "description": "Custom hook to use change the current favicon."
+                },
+                "useIntersectionObserver": {
+                    "name": "useIntersectionObserver",
+                    "parameters": [
+                        {
+                            "name": "ref",
+                            "type": "RefObject<Element>",
+                            "description": "The ref of the element to observe."
+                        },
+                        {
+                            "name": "options",
+                            "type": "IntersectionObserver",
+                            "description": "The options of the intersection observer."
+                        }
+                    ],
+                    "returnType": "void",
+                    "description": "Custom hook to use change the current favicon."
+                },
+                "useInterval": {
+                    "name": "useInterval",
+                    "parameters": [
+                        {
+                            "name": "fn",
+                            "type": "any",
+                            "description": "The function that will be executed after the delay."
+                        },
+                        {
+                            "name": "delay",
+                            "type": "number",
+                            "description": "Delay in milliseconds."
+                        },
+                        {
+                            "name": "when",
+                            "type": "boolean",
+                            "description": "Whether to listen to the event or not."
+                        }
+                    ],
+                    "returnType": "any[]",
+                    "description": "Custom hook to use an interval."
+                },
+                "useLocalStorage": {
+                    "name": "useLocalStorage",
+                    "parameters": [
+                        {
+                            "name": "initialValue",
+                            "type": "S",
+                            "description": "The initial value."
+                        },
+                        {
+                            "name": "key",
+                            "type": "K",
+                            "description": "The key to store the value in local storage."
+                        }
+                    ],
+                    "returnType": "[S, React.Dispatch<React.SetStateAction<S>>]",
+                    "description": "Custom hook to use local storage."
+                },
+                "useMountEffect": {
+                    "name": "useMountEffect",
+                    "parameters": [
+                        {
+                            "name": "effect",
+                            "type": "EffectCallback",
+                            "description": "The effect to run."
+                        }
+                    ],
+                    "returnType": "void",
+                    "description": "Custom hook to run a mount effect only once."
+                },
+                "useMouse": {
+                    "name": "useMouse",
+                    "parameters": [],
+                    "returnType": "MouseDataOptions",
+                    "description": "Custom hook to use to get the current mouse position."
+                },
+                "useMove": {
+                    "name": "useMove",
+                    "parameters": [
+                        {
+                            "name": "mode",
+                            "type": "\"both\" | \"horizontal\" | \"vertical\"",
+                            "description": "The mode of the move. Valid values are 'horizontal', 'vertical' and 'both'."
+                        },
+                        {
+                            "name": "initialValue",
+                            "type": "MousePositionOptions",
+                            "description": "The initial value."
+                        }
+                    ],
+                    "returnType": "MouseMoveOptions",
+                    "description": "Custom hook to handles move behavior over any element."
+                },
+                "useOverlayListener": {
+                    "name": "useOverlayListener",
+                    "parameters": [
+                        {
+                            "name": "options",
+                            "type": "OverlayEventOptions",
+                            "description": "The event options."
+                        }
+                    ],
+                    "returnType": "any[]",
+                    "description": "Custom hook to listen to overlay event. It can be used when an overlay is desired to behave like the overlays in PrimeReact."
+                },
+                "useOverlayScrollListener": {
+                    "name": "useOverlayScrollListener",
+                    "parameters": [
+                        {
+                            "name": "options",
+                            "type": "EventOptions",
+                            "description": "The event options."
+                        }
+                    ],
+                    "returnType": "any[]",
+                    "description": "Custom hook to listen to overlay scroll. It can be used when an overlay is desired to behave like the overlays in PrimeReact."
+                },
+                "usePrevious": {
+                    "name": "usePrevious",
+                    "parameters": [
+                        {
+                            "name": "value",
+                            "type": "any",
+                            "description": "The value to compare."
+                        }
+                    ],
+                    "returnType": "any",
+                    "description": "Custom hook to get the previous value of a property."
+                },
+                "useResizeListener": {
+                    "name": "useResizeListener",
+                    "parameters": [
+                        {
+                            "name": "options",
+                            "type": "ResizeEventOptions",
+                            "description": "The event options."
+                        }
+                    ],
+                    "returnType": "any[]",
+                    "description": "Custom hook to listen to a resize event."
+                },
+                "useSessionStorage": {
+                    "name": "useSessionStorage",
+                    "parameters": [
+                        {
+                            "name": "initialValue",
+                            "type": "S",
+                            "description": "The initial value."
+                        },
+                        {
+                            "name": "key",
+                            "type": "K",
+                            "description": "The key to store the value in session storage."
+                        }
+                    ],
+                    "returnType": "[S, React.Dispatch<React.SetStateAction<S>>]",
+                    "description": "Custom hook to use session storage."
+                },
+                "useStorage": {
+                    "name": "useStorage",
+                    "parameters": [
+                        {
+                            "name": "initialValue",
+                            "type": "S",
+                            "description": "The initial value."
+                        },
+                        {
+                            "name": "key",
+                            "type": "K",
+                            "description": "The key to store the value."
+                        },
+                        {
+                            "name": "storage",
+                            "type": "\"local\" | \"session\"",
+                            "description": "The storage type. Valid values are 'local' and 'session'."
+                        }
+                    ],
+                    "returnType": "[S, React.Dispatch<React.SetStateAction<S>>]",
+                    "description": "Custom hook to use storage such as local and session storage."
+                },
+                "useTimeout": {
+                    "name": "useTimeout",
+                    "parameters": [
+                        {
+                            "name": "fn",
+                            "type": "any",
+                            "description": "The function that will be executed after the delay."
+                        },
+                        {
+                            "name": "delay",
+                            "type": "number",
+                            "description": "Delay in milliseconds."
+                        },
+                        {
+                            "name": "when",
+                            "type": "boolean",
+                            "description": "Whether to listen to the event or not."
+                        }
+                    ],
+                    "returnType": "any[]",
+                    "description": "Custom hook to use a timeout."
+                },
+                "useUnmountEffect": {
+                    "name": "useUnmountEffect",
+                    "parameters": [
+                        {
+                            "name": "effect",
+                            "type": "EffectCallback",
+                            "description": "The effect to run."
+                        }
+                    ],
+                    "returnType": "void",
+                    "description": "Custom hook to run an unmount effect."
+                },
+                "useUpdateEffect": {
+                    "name": "useUpdateEffect",
+                    "parameters": [
+                        {
+                            "name": "effect",
+                            "type": "EffectCallback",
+                            "description": "The effect to run."
+                        },
+                        {
+                            "name": "deps",
+                            "type": "DependencyList",
+                            "description": "The dependencies."
+                        }
+                    ],
+                    "returnType": "void",
+                    "description": "Custom hook to run an update effect."
+                }
+            }
+        },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "EventOptions": {
                     "description": "Custom event options.",
@@ -14241,7 +14999,121 @@
                             "type": "boolean",
                             "description": "Whether to listen to the event or not."
                         }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "listener",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "Event"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "The event listener."
+                        }
                     ]
+                },
+                "MouseDataOptions": {
+                    "description": "Custom MouseDataOptions",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "RefObject<HTMLElement>",
+                            "description": "The ref of the element to position."
+                        },
+                        {
+                            "name": "reset",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "Function"
+                        },
+                        {
+                            "name": "x",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Position of the mouse for the x-axis."
+                        },
+                        {
+                            "name": "y",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Position of the mouse for the y-axis."
+                        }
+                    ],
+                    "callbacks": [],
+                    "extendedBy": "MouseMoveOptions",
+                    "extendedTypes": "MousePositionOptions"
+                },
+                "MouseMoveOptions": {
+                    "description": "Custom MouseMoveOptions",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "active",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Whether the mouse is touching the element or not."
+                        },
+                        {
+                            "name": "ref",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "RefObject<HTMLElement>",
+                            "description": "The ref of the element to position."
+                        },
+                        {
+                            "name": "reset",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "Function"
+                        },
+                        {
+                            "name": "x",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Position of the mouse for the x-axis."
+                        },
+                        {
+                            "name": "y",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Position of the mouse for the y-axis."
+                        }
+                    ],
+                    "callbacks": [],
+                    "extendedTypes": "MouseDataOptions"
+                },
+                "MousePositionOptions": {
+                    "description": "Custom MousePositionOptions",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "x",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Position of the mouse for the x-axis."
+                        },
+                        {
+                            "name": "y",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Position of the mouse for the y-axis."
+                        }
+                    ],
+                    "callbacks": [],
+                    "extendedBy": "MouseDataOptions"
                 },
                 "OverlayEventOptions": {
                     "description": "Custom overlay event options.",
@@ -14268,12 +15140,46 @@
                             "type": "boolean",
                             "description": "Whether to listen to the event or not."
                         }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "listener",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "Event"
+                                },
+                                {
+                                    "name": "type",
+                                    "optional": true,
+                                    "type": "string"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "The event listener."
+                        }
                     ]
                 },
                 "ResizeEventOptions": {
                     "description": "Custom resize event options.",
                     "relatedProp": "",
-                    "props": []
+                    "props": [],
+                    "callbacks": [
+                        {
+                            "name": "listener",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "Event",
+                                    "description": "The browser event object."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "The event listener."
+                        }
+                    ]
                 }
             }
         }
@@ -14495,7 +15401,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent",
+                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -14508,7 +15414,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent",
+                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -14623,7 +15529,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "ForwardRefExoticComponent",
+                            "returnType": "ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
                             "description": "Used to get container element."
                         }
                     ]
@@ -14722,7 +15628,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "FocusEvent",
+                                    "type": "FocusEvent<HTMLInputElement, Element>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -14761,7 +15667,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "FocusEvent",
+                                    "type": "FocusEvent<HTMLInputElement, Element>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -14774,7 +15680,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "FormEvent",
+                                    "type": "FormEvent<HTMLInputElement>",
                                     "description": "Browser event"
                                 },
                                 {
@@ -14876,7 +15782,7 @@
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "ForwardRefExoticComponent",
+                            "returnType": "ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
                             "description": "Used to get input element."
                         }
                     ]
@@ -15223,7 +16129,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "FocusEvent",
+                                    "type": "FocusEvent<HTMLInputElement, Element>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -15249,7 +16155,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "FocusEvent",
+                                    "type": "FocusEvent<HTMLInputElement, Element>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -15262,7 +16168,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "KeyboardEvent",
+                                    "type": "KeyboardEvent<HTMLInputElement>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -15496,7 +16402,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "FocusEvent",
+                                    "type": "FocusEvent<HTMLInputElement, Element>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -15522,7 +16428,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "FocusEvent",
+                                    "type": "FocusEvent<HTMLInputElement, Element>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -15610,7 +16516,7 @@
     "keyfilter": {
         "description": "This module contains common options and types of components that use KeyFilter.",
         "types": {
-            "description": "Defines the custom types used by the component.",
+            "description": "Defines the custom types used by the module.",
             "values": {
                 "KeyFilterType": {
                     "values": "\"pint\" | \"int\" | \"pnum\" | \"money\" | \"num\" | \"hex\" | \"email\" | \"alpha\" | \"alphanum\" | RegExp",
@@ -16182,7 +17088,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "ListBoxChangeTargetOptions": {
                     "description": "Custom change target options.",
@@ -16209,7 +17115,8 @@
                             "type": "any",
                             "description": "New value of the element."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "ListBoxFilterOptions": {
                     "description": "Custom filter options.",
@@ -16227,7 +17134,8 @@
                             "readonly": false,
                             "type": "Function"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "ListBoxFilterTemplateOptions": {
                     "description": "Custom filter template options.",
@@ -16303,7 +17211,8 @@
                             "type": "ReactNode | Function",
                             "description": "Custom filter template."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 }
             }
         }
@@ -16399,7 +17308,7 @@
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "ForwardRefExoticComponent",
+                            "returnType": "ForwardRefExoticComponent<InputTextareaProps & RefAttributes<HTMLTextAreaElement>>",
                             "description": "Used to get input element."
                         },
                         {
@@ -16568,7 +17477,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "FocusEvent",
+                                    "type": "FocusEvent<HTMLInputElement, Element>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -16581,7 +17490,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "FormEvent",
+                                    "type": "FormEvent<HTMLInputElement>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -16594,7 +17503,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "FocusEvent",
+                                    "type": "FocusEvent<HTMLInputElement, Element>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -16613,7 +17522,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "FormEvent",
+                                    "type": "FormEvent<HTMLInputElement>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -16709,7 +17618,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "MentionItemTemplateOptions": {
                     "description": "",
@@ -16729,7 +17638,8 @@
                             "type": "string",
                             "description": "Triggered the mention item."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 }
             }
         }
@@ -16751,6 +17661,7 @@
                         {
                             "name": "getTarget",
                             "parameters": [],
+                            "returnType": "null | EventTarget",
                             "description": "Used to get target element."
                         },
                         {
@@ -16861,7 +17772,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "SyntheticEvent",
+                                    "type": "SyntheticEvent<Element, Event>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -16874,7 +17785,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "SyntheticEvent",
+                                    "type": "SyntheticEvent<Element, Event>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -17108,7 +18019,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "MenuItemOptions": {
                     "description": "Menu item options",
@@ -17148,6 +18059,21 @@
                             "readonly": false,
                             "type": "any",
                             "description": "All component props"
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "onClick",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke on click."
                         }
                     ]
                 }
@@ -17323,7 +18249,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "MessagesMessage": {
                     "relatedProp": "",
@@ -17391,7 +18317,8 @@
                             "type": "ReactNode",
                             "description": "Summary content of the message."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 }
             }
         }
@@ -17896,7 +18823,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "FocusEvent",
+                                    "type": "FocusEvent<HTMLInputElement, Element>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -17935,7 +18862,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "FocusEvent",
+                                    "type": "FocusEvent<HTMLInputElement, Element>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -18062,7 +18989,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "MultiSelectChangeTargetOptions": {
                     "description": "Custom multiselect change target options",
@@ -18089,7 +19016,8 @@
                             "type": "any",
                             "description": "The value of the element."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "MultiSelectFilterOptions": {
                     "description": "Multiselect filter options",
@@ -18107,7 +19035,8 @@
                             "readonly": false,
                             "type": "Function"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "MultiSelectPanelHeaderTemplateEvent": {
                     "description": "Custom multiselect panel header template event.",
@@ -18175,6 +19104,34 @@
                             "readonly": false,
                             "type": "MultiSelectProps",
                             "description": "The props of Multiselect component"
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "onChange",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "MultiSelectHeaderCheckboxChangeEvent",
+                                    "description": "Custom checkbox change event"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback function when the checkbox state is changed."
+                        },
+                        {
+                            "name": "onCloseClick",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
+                                    "description": "Current param"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback function when the close button is clicked."
                         }
                     ]
                 }
@@ -18365,7 +19322,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "MultiStateCheckboxChangeTargetOptions": {
                     "description": "Custom change target options.",
@@ -18392,7 +19349,8 @@
                             "type": "undefined | null | boolean",
                             "description": "Value of the MultiStateCheckbox."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "MultiStateCheckboxIconTemplateEvent": {
                     "description": "Custom icon template options.",
@@ -18426,7 +19384,8 @@
                             "type": "MultiStateCheckboxProps",
                             "description": "The props passed to the component."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "MultiStateCheckboxOption": {
                     "description": "Custom MultiStateCheckbox option.",
@@ -18459,7 +19418,8 @@
                             "readonly": false,
                             "type": "any"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 }
             }
         }
@@ -18640,7 +19600,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "OrderListFilterOptions": {
                     "description": "Custom filter options.",
@@ -18658,7 +19618,8 @@
                             "readonly": false,
                             "type": "Function"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 }
             }
         }
@@ -18735,7 +19696,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "OrganizationChartNodeData": {
                     "description": "Custom organizationchart node data.",
@@ -18776,7 +19737,8 @@
                             "type": "boolean",
                             "description": "Whether the node is selectable when selection mode is enabled."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "OrganizationChartProps": {
                     "relatedProp": "",
@@ -18929,6 +19891,60 @@
                             "description": "An array of nested TreeNodes."
                         }
                     ],
+                    "callbacks": [
+                        {
+                            "name": "nodeTemplate",
+                            "parameters": [
+                                {
+                                    "name": "node",
+                                    "optional": false,
+                                    "type": "OrganizationChartNodeData",
+                                    "description": "A node instance."
+                                }
+                            ],
+                            "returnType": "ReactNode",
+                            "description": "Template function that gets a node as a parameter and returns a content."
+                        },
+                        {
+                            "name": "onNodeSelect",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "OrganizationChartNodeSelectEvent",
+                                    "description": "Custom node select event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when a node is selected."
+                        },
+                        {
+                            "name": "onNodeUnselect",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "OrganizationChartNodeUnselectEvent",
+                                    "description": "Custom node unselect event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when a node is unselected."
+                        },
+                        {
+                            "name": "selectionChange",
+                            "parameters": [
+                                {
+                                    "name": "node",
+                                    "optional": false,
+                                    "type": "undefined | null | OrganizationChartNodeData | OrganizationChartNodeData[]",
+                                    "description": "A node instance."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when node selection changes."
+                        }
+                    ],
                     "extendedTypes": "Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, \"ref\">"
                 }
             }
@@ -19071,7 +20087,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "OverlayPanelBreakpoints": {
                     "description": "Custom overlay panel breakpoints",
@@ -19083,7 +20099,8 @@
                             "readonly": false,
                             "type": "string"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 }
             }
         }
@@ -19091,7 +20108,7 @@
     "overlayservice": {
         "description": "OverlayService allows all overlay components to communicate with each other.\n\n[Live Demo](https://www.primefaces.org/primereact/dropdown/)",
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "OverlayServiceEvent": {
                     "description": "Overlay service event.",
@@ -19111,12 +20128,72 @@
                             "type": "HTMLElement",
                             "description": "Target element that the overlay is bound to."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "OverlayServiceOptions": {
                     "description": "",
                     "relatedProp": "",
-                    "props": []
+                    "props": [],
+                    "callbacks": [
+                        {
+                            "name": "emit",
+                            "parameters": [
+                                {
+                                    "name": "action",
+                                    "optional": false,
+                                    "type": "\"overlay-click\"",
+                                    "description": "Custom listener."
+                                },
+                                {
+                                    "name": "params",
+                                    "optional": true,
+                                    "type": "OverlayServiceEvent",
+                                    "description": "Custom listener."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Trigger overlay click event."
+                        },
+                        {
+                            "name": "off",
+                            "parameters": [
+                                {
+                                    "name": "action",
+                                    "optional": false,
+                                    "type": "\"overlay-click\"",
+                                    "description": "Custom listener."
+                                },
+                                {
+                                    "name": "fn",
+                                    "optional": false,
+                                    "type": "any",
+                                    "description": "Custom listener."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Remove event listener for overlay click."
+                        },
+                        {
+                            "name": "on",
+                            "parameters": [
+                                {
+                                    "name": "action",
+                                    "optional": false,
+                                    "type": "\"overlay-click\"",
+                                    "description": "Custom listener."
+                                },
+                                {
+                                    "name": "fn",
+                                    "optional": false,
+                                    "type": "any",
+                                    "description": "Custom listener."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Add event listener for overlay click."
+                        }
+                    ]
                 }
             }
         }
@@ -19325,7 +20402,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "PaginatorChangeTargetOptions": {
                     "description": "Custom paginator change target options",
@@ -19352,7 +20429,8 @@
                             "type": "undefined | null | string",
                             "description": "The value attribute of the target options."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "PaginatorCurrentPageReportOptions": {
                     "description": "Custom paginator current page report options",
@@ -19421,7 +20499,8 @@
                             "type": "number",
                             "description": "The total number of records."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "PaginatorFirstPageLinkOptions": {
                     "description": "Custom paginator first page link options",
@@ -19461,6 +20540,21 @@
                             "readonly": false,
                             "type": "PaginatorProps",
                             "description": "The props of Paginator component"
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "onClick",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event.v"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke on click."
                         }
                     ]
                 },
@@ -19503,6 +20597,27 @@
                             "type": "number",
                             "description": "The current value."
                         }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "onChange",
+                            "parameters": [
+                                {
+                                    "name": "first",
+                                    "optional": false,
+                                    "type": "number",
+                                    "description": "Custom change event."
+                                },
+                                {
+                                    "name": "rows",
+                                    "optional": false,
+                                    "type": "number",
+                                    "description": "Custom change event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when the input value changes."
+                        }
                     ]
                 },
                 "PaginatorLastPageLinkOptions": {
@@ -19544,6 +20659,21 @@
                             "type": "PaginatorProps",
                             "description": "The props of Paginator component"
                         }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "onClick",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke on click."
+                        }
                     ]
                 },
                 "PaginatorNextPageLinkOptions": {
@@ -19584,6 +20714,21 @@
                             "readonly": false,
                             "type": "PaginatorProps",
                             "description": "The props of Paginator component"
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "onClick",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke on click."
                         }
                     ]
                 },
@@ -19640,6 +20785,21 @@
                             "type": "PaginatorViewOptions",
                             "description": "Paginator view options."
                         }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "onClick",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke on click."
+                        }
                     ]
                 },
                 "PaginatorPrevPageLinkOptions": {
@@ -19680,6 +20840,21 @@
                             "readonly": false,
                             "type": "PaginatorProps",
                             "description": "The props of Paginator component"
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "onClick",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke on click."
                         }
                     ]
                 },
@@ -19750,6 +20925,21 @@
                             "type": "any",
                             "description": "New value of the element."
                         }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "onChange",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "PaginatorChangeEvent",
+                                    "description": "Custom change event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Paginator options change callback"
+                        }
                     ]
                 },
                 "PaginatorTemplateOptions": {
@@ -19819,7 +21009,8 @@
                             "type": "string",
                             "description": "The layout of the paginator."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "PaginatorViewOptions": {
                     "description": "Custom paginator view options",
@@ -19839,12 +21030,13 @@
                             "type": "number",
                             "description": "Starting page number for the paginator view."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 }
             }
         },
         "types": {
-            "description": "Defines the custom types used by the component.",
+            "description": "Defines the custom types used by the module.",
             "values": {
                 "PaginatorTemplate": {
                     "values": "PaginatorTemplateOptions | string | undefined",
@@ -19961,7 +21153,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "SyntheticEvent",
+                                    "type": "SyntheticEvent<Element, Event>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -19974,7 +21166,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "SyntheticEvent",
+                                    "type": "SyntheticEvent<Element, Event>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -20024,7 +21216,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "PanelHeaderTemplateOptions": {
                     "description": "Custom panel header template options.",
@@ -20106,6 +21298,21 @@
                             "readonly": false,
                             "type": "string",
                             "description": "Style class of the panel toggler icon."
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "onTogglerClick",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when the toggler button is clicked."
                         }
                     ]
                 }
@@ -20195,7 +21402,7 @@
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "ForwardRefExoticComponent",
+                            "returnType": "ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
                             "description": "Used to get input element."
                         },
                         {
@@ -20418,7 +21625,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "FormEvent",
+                                    "type": "FormEvent<HTMLInputElement>",
                                     "description": "Browser event"
                                 },
                                 {
@@ -20920,7 +22127,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "PickListFilterInputProps": {
                     "description": "Custom filter input props.",
@@ -20932,6 +22139,34 @@
                             "readonly": false,
                             "type": "string",
                             "description": "Style class of the filter input."
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "onChange",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Filter change callback."
+                        },
+                        {
+                            "name": "onKeyDown",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback function to be invoked when the keydown event."
                         }
                     ]
                 },
@@ -20974,7 +22209,8 @@
                             "type": "PickListProps",
                             "description": "The props of the PickList component."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 }
             }
         }
@@ -21056,7 +22292,8 @@
                             "parameters": [
                                 {
                                     "name": "value",
-                                    "optional": false
+                                    "optional": false,
+                                    "type": "undefined | null | string | number"
                                 }
                             ],
                             "returnType": "ReactNode",
@@ -21941,7 +23178,7 @@
     "selectitem": {
         "description": "This module contains the interface and types for options in a select component.",
         "types": {
-            "description": "Defines the custom types used by the component.",
+            "description": "Defines the custom types used by the module.",
             "values": {
                 "SelectItemOptionsType": {
                     "values": "SelectItem[] | any[]",
@@ -22401,7 +23638,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "SyntheticEvent",
+                                    "type": "SyntheticEvent<Element, Event>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -22427,7 +23664,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "SyntheticEvent",
+                                    "type": "SyntheticEvent<Element, Event>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -22816,7 +24053,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent",
+                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -22853,7 +24090,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "SpeedDialButtonOptions": {
                     "description": "",
@@ -22893,6 +24130,21 @@
                             "readonly": false,
                             "type": "boolean",
                             "description": "Whether the overlay is opened."
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "onClick",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Fired when the button element clicked."
                         }
                     ]
                 }
@@ -23101,7 +24353,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent",
+                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -23914,7 +25166,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "TabPanelHeaderTemplateOptions": {
                     "description": "Custom Tabpanel header template options",
@@ -23989,6 +25241,34 @@
                             "readonly": false,
                             "type": "Element",
                             "description": "The title element of the tab header."
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "onClick",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke on click."
+                        },
+                        {
+                            "name": "onKeyDown",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "KeyboardEvent<HTMLElement>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when the key pressed."
                         }
                     ]
                 }
@@ -24083,12 +25363,71 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "TerminalServiceOptions": {
                     "description": "Custom terminal service options.",
                     "relatedProp": "",
-                    "props": []
+                    "props": [],
+                    "callbacks": [
+                        {
+                            "name": "emit",
+                            "parameters": [
+                                {
+                                    "name": "action",
+                                    "optional": false,
+                                    "type": "\"clear\" | \"response\" | \"command\"",
+                                    "description": "Custom listener."
+                                },
+                                {
+                                    "name": "params",
+                                    "optional": true,
+                                    "type": "any",
+                                    "description": "Custom listener."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Method to emit an event for a specific action."
+                        },
+                        {
+                            "name": "off",
+                            "parameters": [
+                                {
+                                    "name": "action",
+                                    "optional": false,
+                                    "type": "\"clear\" | \"response\" | \"command\"",
+                                    "description": "Custom listener."
+                                },
+                                {
+                                    "name": "fn",
+                                    "optional": false,
+                                    "type": "any",
+                                    "description": "Custom listener."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Method to detach an event listener from a specific action."
+                        },
+                        {
+                            "name": "on",
+                            "parameters": [
+                                {
+                                    "name": "action",
+                                    "optional": false,
+                                    "type": "\"clear\" | \"response\" | \"command\"",
+                                    "description": "Custom listener."
+                                },
+                                {
+                                    "name": "fn",
+                                    "optional": false,
+                                    "type": "any",
+                                    "description": "Custom listener."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Method to attach an event listener to a specific action."
+                        }
+                    ]
                 }
             }
         }
@@ -24191,7 +25530,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "SyntheticEvent",
+                                    "type": "SyntheticEvent<Element, Event>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -24204,7 +25543,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "SyntheticEvent",
+                                    "type": "SyntheticEvent<Element, Event>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -24457,7 +25796,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "ToastMessage": {
                     "description": "Message options for toast component",
@@ -24540,7 +25879,8 @@
                             "type": "ReactNode",
                             "description": "Summary content of the message."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 }
             }
         }
@@ -24653,7 +25993,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "FocusEvent",
+                                    "type": "FocusEvent<HTMLElement, Element>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -24679,7 +26019,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "FocusEvent",
+                                    "type": "FocusEvent<HTMLElement, Element>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -24723,7 +26063,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "ToggleButtonChangeTargetOptions": {
                     "description": "Custom toggle button change target options",
@@ -24750,7 +26090,8 @@
                             "type": "boolean",
                             "description": "Collapsed state as a boolean."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 }
             }
         }
@@ -24848,6 +26189,7 @@
                         {
                             "name": "getTarget",
                             "parameters": [],
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get target element."
                         },
                         {
@@ -24859,6 +26201,7 @@
                                     "description": "Browser event."
                                 }
                             ],
+                            "returnType": "null",
                             "description": "Used to hide the tooltip."
                         },
                         {
@@ -24882,6 +26225,7 @@
                                     "description": "Browser event."
                                 }
                             ],
+                            "returnType": "null",
                             "description": "Used to show the tooltip."
                         },
                         {
@@ -25035,7 +26379,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "TooltipHTMLAttributes": {
                     "description": "In addition to React.HTMLAttributes, the following attributes can be used on any HTMLElement if the page has a PrimeReact  tooltip  component.",
@@ -25160,7 +26504,8 @@
                             "type": "number",
                             "description": "**PrimeReact - TooltipHTMLAttributes**\n\nDelay to update the tooltip in milliseconds.*"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "TooltipOptions": {
                     "description": "Defines valid properties of TooltipOptions.",
@@ -25305,6 +26650,60 @@
                             "readonly": false,
                             "type": "number",
                             "description": "Delay to update the tooltip in milliseconds."
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "onBeforeHide",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "TooltipEvent",
+                                    "description": "Browser event"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke before the tooltip is hidden."
+                        },
+                        {
+                            "name": "onBeforeShow",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "TooltipEvent",
+                                    "description": "Browser event"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke before the tooltip is shown."
+                        },
+                        {
+                            "name": "onHide",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "TooltipEvent",
+                                    "description": "Browser event"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when the tooltip is hidden."
+                        },
+                        {
+                            "name": "onShow",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "TooltipEvent",
+                                    "description": "Browser event"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when the tooltip is shown."
                         }
                     ],
                     "extendedBy": "TooltipProps"
@@ -25888,7 +27287,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "TreeCheckboxSelectionKeyType": {
                     "description": "Custom tree checkbox selection type",
@@ -25908,7 +27307,8 @@
                             "type": "boolean",
                             "description": "Whether the checkbox is partially checked or not."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "TreeCheckboxSelectionKeys": {
                     "description": "Custom tree checkbox selection keys",
@@ -25920,7 +27320,8 @@
                             "readonly": false,
                             "type": "TreeCheckboxSelectionKeyType"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "TreeExpandedKeysType": {
                     "description": "Custom tree expanded keys type",
@@ -25932,7 +27333,8 @@
                             "readonly": false,
                             "type": "boolean"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "TreeFilterInputOptions": {
                     "description": "Custom tree filter input options",
@@ -25944,6 +27346,34 @@
                             "readonly": false,
                             "type": "string",
                             "description": "Style class of the tree filter input element."
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "onChange",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "KeyboardEvent<HTMLInputElement>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback function to be invoked when the change event."
+                        },
+                        {
+                            "name": "onKeyDown",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "KeyboardEvent<HTMLInputElement>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback function to be invoked when the keydown event."
                         }
                     ]
                 },
@@ -25963,7 +27393,8 @@
                             "readonly": false,
                             "type": "Function"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "TreeHeaderTemplateOptions": {
                     "description": "Custom tree header template options",
@@ -26011,7 +27442,8 @@
                             "type": "TreeProps",
                             "description": "The props of the tree header component."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "TreeMultipleSelectionKeys": {
                     "description": "Custom tree multiple selection keys",
@@ -26023,7 +27455,8 @@
                             "readonly": false,
                             "type": "boolean"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "TreeNodeClickEvent": {
                     "description": "Custom click event",
@@ -26044,6 +27477,7 @@
                             "description": "Browser event"
                         }
                     ],
+                    "callbacks": [],
                     "extendedBy": "TreeNodeDoubleClickEvent"
                 },
                 "TreeNodeTemplateOptions": {
@@ -26077,6 +27511,21 @@
                             "readonly": false,
                             "type": "TreeProps",
                             "description": "The props of the Tree component."
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "onTogglerClick",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when the toggler button is clicked."
                         }
                     ]
                 },
@@ -26119,6 +27568,21 @@
                             "type": "TreeProps",
                             "description": "The props of Tree component"
                         }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "onClick",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke on click."
+                        }
                     ]
                 }
             }
@@ -26127,7 +27591,7 @@
     "treenode": {
         "description": "This module contains the data interface for nodes in tree components.",
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "default": {
                     "relatedProp": "",
@@ -26223,7 +27687,8 @@
                             "type": "CSSProperties",
                             "description": "Inline style of the node."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 }
             }
         }
@@ -26725,7 +28190,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "TreeSelectCheckboxSelectionKeyType": {
                     "description": "Custom checkbox selection key type",
@@ -26745,7 +28210,8 @@
                             "type": "boolean",
                             "description": "Whether the checkbox is partially checked or not."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "TreeSelectExpandedKeysType": {
                     "description": "Custom expanded keys type.",
@@ -26757,7 +28223,8 @@
                             "readonly": false,
                             "type": "boolean"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "TreeSelectFilterOptions": {
                     "description": "Custom filter options.",
@@ -26775,7 +28242,8 @@
                             "readonly": false,
                             "type": "Function"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "TreeSelectPanelHeaderTemplateOptions": {
                     "description": "Custom panel header template options.",
@@ -26830,6 +28298,14 @@
                             "type": "TreeSelectProps",
                             "description": "The props of the TreeSelect component."
                         }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "onCloseClick",
+                            "parameters": [],
+                            "returnType": "void",
+                            "description": "Callback to invoke when the close button is clicked."
+                        }
                     ]
                 },
                 "TreeSelectSelectionKeysType": {
@@ -26842,7 +28318,8 @@
                             "readonly": false,
                             "type": "boolean | TreeSelectCheckboxSelectionKeyType"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 }
             }
         }
@@ -27473,6 +28950,7 @@
                                 {
                                     "name": "filters",
                                     "optional": false,
+                                    "type": "TreeTableFilterMeta[]",
                                     "description": "Custom treetable event."
                                 }
                             ],
@@ -27775,7 +29253,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "TreeTableCheckboxSelectionKeyType": {
                     "description": "Custom treetable checkbox selection type",
@@ -27795,7 +29273,8 @@
                             "type": "boolean",
                             "description": "Whether the checkbox is partially checked or not."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "TreeTableFilterMeta": {
                     "description": "Custom treetable filter meta.",
@@ -27807,7 +29286,8 @@
                             "readonly": false,
                             "type": "TreeTableFilterMetaData"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "TreeTableFilterMetaData": {
                     "description": "Custom treetable filter metadata.",
@@ -27827,7 +29307,8 @@
                             "type": "any",
                             "description": "Value to filter against."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "TreeTableSelectionKeysType": {
                     "description": "Custom selection keys type.",
@@ -27839,7 +29320,8 @@
                             "readonly": false,
                             "type": "boolean | TreeTableCheckboxSelectionKeyType | undefined"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "TreeTableSortMeta": {
                     "description": "Custom treetable sort meta.",
@@ -27859,12 +29341,13 @@
                             "type": "undefined | null | 0 | 1 | -1",
                             "description": "Sort order as integer."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 }
             }
         },
         "types": {
-            "description": "Defines the custom types used by the component.",
+            "description": "Defines the custom types used by the module.",
             "values": {
                 "TreeTableExpandedKeysType": {
                     "values": "{}",
@@ -28006,7 +29489,7 @@
     },
     "ts-helpers": {
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "FormEvent": {
                     "relatedProp": "",
@@ -28034,6 +29517,18 @@
                             "optional": false,
                             "readonly": false,
                             "type": "Nullable<T>"
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "preventDefault",
+                            "parameters": [],
+                            "returnType": "void"
+                        },
+                        {
+                            "name": "stopPropagation",
+                            "parameters": [],
+                            "returnType": "void"
                         }
                     ],
                     "extendedBy": "AutoCompleteChangeEvent,CalendarChangeEvent,CheckboxChangeEvent,ChipsChangeEvent,ColorPickerChangeEvent,DropdownChangeEvent,InputMaskChangeEvent,InputNumberValueChangeEvent,InputSwitchChangeEvent,RadioButtonChangeEvent,RatingChangeEvent,SelectButtonChangeEvent,TreeSelectChangeEvent,TriStateCheckboxChangeEvent"
@@ -28071,12 +29566,13 @@
                             "readonly": false,
                             "type": "any"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 }
             }
         },
         "types": {
-            "description": "Defines the custom types used by the component.",
+            "description": "Defines the custom types used by the module.",
             "values": {
                 "Booleanish": {
                     "values": "boolean | \"true\" | \"false\""
@@ -28092,8 +29588,52 @@
     },
     "utils": {
         "description": "",
+        "functions": {
+            "description": "Defines the custom functions used by the module.",
+            "values": {
+                "EventBus": {
+                    "name": "EventBus",
+                    "parameters": [],
+                    "returnType": "Object"
+                },
+                "UniqueComponentId": {
+                    "name": "UniqueComponentId",
+                    "parameters": [
+                        {
+                            "name": "prefix",
+                            "type": "string"
+                        }
+                    ],
+                    "returnType": "string"
+                },
+                "classNames": {
+                    "name": "classNames",
+                    "parameters": [
+                        {
+                            "name": "args",
+                            "type": "any[]"
+                        }
+                    ],
+                    "returnType": "string | undefined"
+                },
+                "mask": {
+                    "name": "mask",
+                    "parameters": [
+                        {
+                            "name": "el",
+                            "type": "HTMLElement"
+                        },
+                        {
+                            "name": "options",
+                            "type": "object"
+                        }
+                    ],
+                    "returnType": "Object"
+                }
+            }
+        },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "IconOptions": {
                     "relatedProp": "",
@@ -28122,12 +29662,13 @@
                             "readonly": false,
                             "type": "any"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 }
             }
         },
         "types": {
-            "description": "Defines the custom types used by the component.",
+            "description": "Defines the custom types used by the module.",
             "values": {
                 "IconType": {
                     "values": "React.ReactNode | Function"
@@ -28149,7 +29690,7 @@
                         {
                             "name": "getElementRef",
                             "parameters": [],
-                            "returnType": "Ref",
+                            "returnType": "Ref<HTMLDivElement>",
                             "description": "Returns the reference of virtualScroller's container."
                         },
                         {
@@ -28430,7 +29971,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "UIEvent",
+                                    "type": "UIEvent<HTMLElement, UIEvent>",
                                     "description": "Browser event"
                                 }
                             ],
@@ -28501,7 +30042,7 @@
             }
         },
         "interfaces": {
-            "description": "Defines the custom interfaces used by the component.",
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "VirtualScrollerContentTemplateOptions": {
                     "description": "Custom content template options.",
@@ -28619,6 +30160,40 @@
                             "type": "boolean",
                             "description": "Whether the orientation is vertical."
                         }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "getItemOptions",
+                            "parameters": [
+                                {
+                                    "name": "index",
+                                    "optional": false,
+                                    "type": "number",
+                                    "description": "Index of the template item."
+                                }
+                            ],
+                            "returnType": "VirtualScrollerTemplateOptions",
+                            "description": "Information of any item."
+                        },
+                        {
+                            "name": "getLoaderOptions",
+                            "parameters": [
+                                {
+                                    "name": "index",
+                                    "optional": false,
+                                    "type": "number",
+                                    "description": "Index of the item."
+                                },
+                                {
+                                    "name": "ext",
+                                    "optional": true,
+                                    "type": "object",
+                                    "description": "The extra options to pass to the content."
+                                }
+                            ],
+                            "returnType": "VirtualScrollerLoadingTemplateOptions",
+                            "description": "Information of any item during the loading."
+                        }
                     ]
                 },
                 "VirtualScrollerLoaderIconTemplateOptions": {
@@ -28646,7 +30221,8 @@
                             "type": "VirtualScrollerProps",
                             "description": "The props of the VirtualScroller component."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "VirtualScrollerLoadingTemplateOptions": {
                     "description": "Custom template options.",
@@ -28715,6 +30291,7 @@
                             "type": "any"
                         }
                     ],
+                    "callbacks": [],
                     "extendedTypes": "VirtualScrollerTemplateOptions"
                 },
                 "VirtualScrollerOptionsType": {
@@ -28742,7 +30319,8 @@
                             "type": "number",
                             "description": "Top position of scroll"
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "VirtualScrollerRenderedRange": {
                     "description": "Virtual scroller rendered range.",
@@ -28769,7 +30347,8 @@
                             "type": "VirtualScrollerViewportRenderedRange",
                             "description": "Viewport of the rendered range."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "VirtualScrollerState": {
                     "description": "Custom virtual scroller state.",
@@ -28789,7 +30368,8 @@
                             "type": "number",
                             "description": "Number of rows to be rendered."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 },
                 "VirtualScrollerTemplateOptions": {
                     "description": "Custom template options.",
@@ -28845,6 +30425,7 @@
                             "description": "The props of the virtual scroller."
                         }
                     ],
+                    "callbacks": [],
                     "extendedBy": "VirtualScrollerLoadingTemplateOptions"
                 },
                 "VirtualScrollerViewportRenderedRange": {
@@ -28865,7 +30446,8 @@
                             "type": "number",
                             "description": "The last number of the current viewport."
                         }
-                    ]
+                    ],
+                    "callbacks": []
                 }
             }
         }
