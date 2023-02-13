@@ -2,7 +2,7 @@ import * as React from 'react';
 import PrimeReact from '../api/Api';
 import { useMountEffect, useOverlayScrollListener, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 import { TooltipBase } from './TooltipBase';
 
 export const Tooltip = React.memo(
@@ -373,7 +373,7 @@ export const Tooltip = React.memo(
                     operation(target);
                 } else {
                     const setEvent = (target) => {
-                        let element = DomHandler.find(document, target);
+                        let element = DomHandler.find(document, CSS.escape(target));
 
                         element.forEach((el) => {
                             operation(el);
