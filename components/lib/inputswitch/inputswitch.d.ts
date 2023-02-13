@@ -2,7 +2,7 @@
  *
  * InputSwitch is used to select a boolean value.
  *
- * [Live Demo](https://www.primefaces.org/primereact/inputswitch/)
+ * [Live Demo](https://www.primereact.org/inputswitch/)
  *
  * @module inputswitch
  *
@@ -108,7 +108,7 @@ export interface InputSwitchProps extends Omit<React.DetailedHTMLProps<React.Inp
  *
  * _InputSwitch is used to select a boolean value._
  *
- * [Live Demo](https://www.primefaces.org/primereact/inputswitch/)
+ * [Live Demo](https://www.primereact.org/inputswitch/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

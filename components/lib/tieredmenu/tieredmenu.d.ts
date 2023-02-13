@@ -2,7 +2,7 @@
  *
  * TieredMenu is an input component that provides real-time suggestions when being typed.
  *
- * [Live Demo](https://www.primefaces.org/primereact/tieredmenu/)
+ * [Live Demo](https://www.primereact.org/tieredmenu/)
  *
  * @module tieredmenu
  *
@@ -67,7 +67,7 @@ export interface TieredMenuProps extends Omit<React.DetailedHTMLProps<React.HTML
  *
  * _TieredMenu is an input component that provides real-time suggestions when being typed._
  *
- * [Live Demo](https://www.primefaces.org/primereact/tieredmenu/)
+ * [Live Demo](https://www.primereact.org/tieredmenu/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

@@ -2,7 +2,7 @@
  *
  * InputNumber is an input component to provide numerical input.
  *
- * [Live Demo](https://www.primefaces.org/primereact/inputnumber/)
+ * [Live Demo](https://www.primereact.org/inputnumber/)
  *
  * @module inputnumber
  *
@@ -256,7 +256,7 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
  *
  * _InputNumber is an input component to provide numerical input._
  *
- * [Live Demo](https://www.primefaces.org/primereact/inputnumber/)
+ * [Live Demo](https://www.primereact.org/inputnumber/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

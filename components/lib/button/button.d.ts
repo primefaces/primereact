@@ -2,7 +2,7 @@
  *
  * Button is an extension to standard button element with icons and theming.
  *
- * [Live Demo](https://www.primefaces.org/primereact/button/)
+ * [Live Demo](https://www.primereact.org/button/)
  *
  * @module button
  *
@@ -76,7 +76,7 @@ export interface ButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHT
  *
  * _Button is an extension to standard button element with icons and theming._
  *
- * [Live Demo](https://www.primefaces.org/primereact/button/)
+ * [Live Demo](https://www.primereact.org/button/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

@@ -2,7 +2,7 @@
  *
  * FileUpload is an advanced uploader with dragdrop support, multi file uploads, auto uploading, progress tracking and validations.
  *
- * [Live Demo](https://www.primefaces.org/primereact/fileupload)
+ * [Live Demo](https://www.primereact.org/fileupload)
  *
  * @module fileupload
  *
@@ -449,7 +449,7 @@ interface FileUploadProps {
  *
  * _FileUpload is an advanced uploader with dragdrop support, multi file uploads, auto uploading, progress tracking and validations._
  *
- * [Live Demo](https://www.primefaces.org/primereact/fileupload/)
+ * [Live Demo](https://www.primereact.org/fileupload/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

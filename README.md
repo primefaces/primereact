@@ -5,11 +5,11 @@
 [![Discord Chat](https://img.shields.io/discord/557940238991753223.svg?color=7289da&label=chat&logo=discord)](https://discord.gg/gzKFYnpmCY)
 [![Stackoverflow](https://img.shields.io/badge/StackOverflow-primereact-chocolate.svg)](https://stackoverflow.com/questions/tagged/primereact)
 
-[![PrimeReact Hero](https://www.primefaces.org/wp-content/uploads/2021/12/primereact-release-7.jpeg)](https://www.primefaces.org/primereact)
+[![PrimeReact Hero](https://www.primefaces.org/wp-content/uploads/2021/12/primereact-release-7.jpeg)](https://www.primereact.org)
 
 # PrimeReact
 
-PrimeReact is a rich set of open source UI Components for React. See [PrimeReact homepage](https://www.primefaces.org/primereact) for live showcase and documentation.
+PrimeReact is a rich set of open source UI Components for React. See [PrimeReact homepage](https://www.primereact.org) for live showcase and documentation.
 
 ## Download
 

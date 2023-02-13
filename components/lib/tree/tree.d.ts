@@ -2,7 +2,7 @@
  *
  * Tree is used to display hierarchical data.
  *
- * [Live Demo](https://www.primefaces.org/primereact/tree/)
+ * [Live Demo](https://www.primereact.org/tree/)
  *
  * @module tree
  *
@@ -494,7 +494,7 @@ export interface TreeProps {
  *
  * _Tree is used to display hierarchical data._
  *
- * [Live Demo](https://www.primefaces.org/primereact/tree/)
+ * [Live Demo](https://www.primereact.org/tree/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

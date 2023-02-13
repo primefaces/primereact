@@ -440,11 +440,6 @@
             ]
         },
         {
-            "name": "Component API",
-            "icon": "pi pi-list",
-            "href": "https://primefaces.github.io/primereact"
-        },
-        {
             "name": "Theming",
             "icon": "pi pi-palette",
             "children": [

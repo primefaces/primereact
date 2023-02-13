@@ -4,19 +4,19 @@ import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const items = [{ label: 'Computer' }, { label: 'Notebook' }, { label: 'Accessories' }, { label: 'Backpacks' }, { label: 'Item' }];
-    const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact' };
+    const home = { icon: 'pi pi-home', url: 'https:///primereact' };
 
     const code = {
         basic: `
 <BreadCrumb model={items} home={home} />
         `,
         javascript: `
-import React from 'react'; 
+import React from 'react';
 import { BreadCrumb } from 'primereact/breadcrumb';
 
 export default function BasicDemo() {
     const items = [{ label: 'Computer' }, { label: 'Notebook' }, { label: 'Accessories' }, { label: 'Backpacks' }, { label: 'Item' }];
-    const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact' }
+    const home = { icon: 'pi pi-home', url: 'https:///primereact' }
 
     return (
         <BreadCrumb model={items} home={home} />
@@ -24,13 +24,13 @@ export default function BasicDemo() {
 }
         `,
         typescript: `
-import React from 'react'; 
+import React from 'react';
 import { BreadCrumb } from 'primereact/breadcrumb';
 import { MenuItem } from 'primereact/menuitem';
 
 export default function BasicDemo() {
     const items: MenuItem[] = [{ label: 'Computer' }, { label: 'Notebook' }, { label: 'Accessories' }, { label: 'Backpacks' }, { label: 'Item' }];
-    const home: MenuItem = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact' }
+    const home: MenuItem = { icon: 'pi pi-home', url: 'https:///primereact' }
 
     return (
         <BreadCrumb model={items} home={home} />

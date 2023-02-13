@@ -2,7 +2,7 @@
  *
  * Tag component is used to categorize content.
  *
- * [Live Demo](https://www.primefaces.org/primereact/tag)
+ * [Live Demo](https://www.primereact.org/tag)
  *
  * @module tag
  *
@@ -45,7 +45,7 @@ export interface TagProps extends Omit<React.DetailedHTMLProps<React.HTMLAttribu
  *
  * _Tag component is used to categorize content._
  *
- * [Live Demo](https://www.primefaces.org/primereact/tag/)
+ * [Live Demo](https://www.primereact.org/tag/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

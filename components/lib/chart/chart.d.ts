@@ -2,7 +2,7 @@
  *
  * Chart components are based on Chart.js, an open source HTML5 based charting library.
  *
- * [Live Demo](https://www.primefaces.org/primereact/chart)
+ * [Live Demo](https://www.primereact.org/chart)
  *
  * @module chart
  *
@@ -62,7 +62,7 @@ export interface ChartProps {
  *
  * _Chart components are based on Chart.js, an open source HTML5 based charting library._
  *
- * [Live Demo](https://www.primefaces.org/primereact/chart/)
+ * [Live Demo](https://www.primereact.org/chart/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

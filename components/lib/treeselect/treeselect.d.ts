@@ -2,7 +2,7 @@
  *
  * TreeSelect is a form component to choose from hierarchical data.
  *
- * [Live Demo](https://www.primefaces.org/primereact/treeselect/)
+ * [Live Demo](https://www.primereact.org/treeselect/)
  *
  * @module treeselect
  *
@@ -355,7 +355,7 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
  *
  * _TreeSelect is a form component to choose from hierarchical data._
  *
- * [Live Demo](https://www.primefaces.org/primereact/treeselect/)
+ * [Live Demo](https://www.primereact.org/treeselect/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

@@ -2,7 +2,7 @@
  *
  * ColorPicker is an input component to select a color.
  *
- * [Live Demo](https://www.primefaces.org/primereact/colorpicker/)
+ * [Live Demo](https://www.primereact.org/colorpicker/)
  *
  * @module colorpicker
  *
@@ -141,7 +141,7 @@ export interface ColorPickerProps extends Omit<React.DetailedHTMLProps<React.Inp
  *
  * _ColorPicker is an input component to select a color._
  *
- * [Live Demo](https://www.primefaces.org/primereact/colorpicker/)
+ * [Live Demo](https://www.primereact.org/colorpicker/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

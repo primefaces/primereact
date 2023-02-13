@@ -1,6 +1,6 @@
 {
     "accordion": {
-        "description": "Accordion groups a collection of contents in tabs.\n\n[Live Demo](https://www.primefaces.org/primereact/accordion/)\n\nHelper Components:\n\n-  AccordionTab",
+        "description": "Accordion groups a collection of contents in tabs.\n\n[Live Demo](https://www.primereact.org/accordion/)\n\nHelper Components:\n\n-  AccordionTab",
         "components": {
             "Accordion": {
                 "description": "Accordion groups a collection of contents in tabs.",
@@ -1938,7 +1938,7 @@
         }
     },
     "autocomplete": {
-        "description": "AutoComplete is an input component that provides real-time suggestions while being typed.\n\n[Live Demo](https://www.primefaces.org/primereact/autocomplete/)",
+        "description": "AutoComplete is an input component that provides real-time suggestions while being typed.\n\n[Live Demo](https://www.primereact.org/autocomplete/)",
         "components": {
             "AutoComplete": {
                 "description": "AutoComplete is an input component that provides real-time suggestions while being typed.",
@@ -2711,7 +2711,7 @@
         }
     },
     "avatar": {
-        "description": "Avatar represents people using icons, labels and images.\n\n[Live Demo](https://www.primefaces.org/primereact/avatar)",
+        "description": "Avatar represents people using icons, labels and images.\n\n[Live Demo](https://www.primereact.org/avatar)",
         "components": {
             "Avatar": {
                 "description": "Avatar represents people using icons, labels and images.",
@@ -2838,7 +2838,7 @@
         }
     },
     "avatargroup": {
-        "description": "A set of Avatars can be displayed together using the AvatarGroup component.\n\n[Live Demo](https://www.primefaces.org/primereact/avatar/)",
+        "description": "A set of Avatars can be displayed together using the AvatarGroup component.\n\n[Live Demo](https://www.primereact.org/avatar/)",
         "components": {
             "AvatarGroup": {
                 "description": "A set of Avatars can be displayed together using the AvatarGroup component.",
@@ -2874,7 +2874,7 @@
         }
     },
     "badge": {
-        "description": "Badge represents people using icons, labels and images.\n\n[Live Demo](https://www.primefaces.org/primereact/badge)",
+        "description": "Badge represents people using icons, labels and images.\n\n[Live Demo](https://www.primereact.org/badge)",
         "components": {
             "Badge": {
                 "description": "Badge represents people using icons, labels and images.",
@@ -2934,7 +2934,7 @@
         }
     },
     "blockui": {
-        "description": "BlockUI represents people using icons, labels and images.\n\n[Live Demo](https://www.primefaces.org/primereact/blockui)",
+        "description": "BlockUI represents people using icons, labels and images.\n\n[Live Demo](https://www.primereact.org/blockui)",
         "components": {
             "BlockUI": {
                 "description": "BlockUI represents people using icons, labels and images.",
@@ -3049,7 +3049,7 @@
         }
     },
     "breadcrumb": {
-        "description": "Breadcrumb provides contextual information about page hierarchy.\n\n[Live Demo](https://www.primefaces.org/primereact/breadcrumb/)",
+        "description": "Breadcrumb provides contextual information about page hierarchy.\n\n[Live Demo](https://www.primereact.org/breadcrumb/)",
         "components": {
             "BreadCrumb": {
                 "description": "Breadcrumb provides contextual information about page hierarchy.",
@@ -3101,7 +3101,7 @@
         }
     },
     "button": {
-        "description": "Button is an extension to standard button element with icons and theming.\n\n[Live Demo](https://www.primefaces.org/primereact/button/)",
+        "description": "Button is an extension to standard button element with icons and theming.\n\n[Live Demo](https://www.primereact.org/button/)",
         "components": {
             "Button": {
                 "description": "Button is an extension to standard button element with icons and theming.",
@@ -3218,7 +3218,7 @@
         }
     },
     "calendar": {
-        "description": "Calendar also known as DatePicker, is a form component to work with dates.\n\n[Live Demo](https://www.primefaces.org/primereact/calendar/)",
+        "description": "Calendar also known as DatePicker, is a form component to work with dates.\n\n[Live Demo](https://www.primereact.org/calendar/)",
         "components": {
             "Calendar": {
                 "description": "Calendar also known as DatePicker, is a form component to work with dates.",
@@ -4323,7 +4323,7 @@
         }
     },
     "card": {
-        "description": "Card is a flexible container component.\n\n[Live Demo](https://www.primefaces.org/primereact/card/)",
+        "description": "Card is a flexible container component.\n\n[Live Demo](https://www.primereact.org/card/)",
         "components": {
             "Card": {
                 "description": "Card is a flexible container component.",
@@ -4384,7 +4384,7 @@
         }
     },
     "carousel": {
-        "description": "Carousel is a content slider featuring various customization options.\n\n[Live Demo](https://www.primefaces.org/primereact/carousel)",
+        "description": "Carousel is a content slider featuring various customization options.\n\n[Live Demo](https://www.primereact.org/carousel)",
         "components": {
             "Carousel": {
                 "description": "Carousel is a content slider featuring various customization options.",
@@ -4626,7 +4626,7 @@
         }
     },
     "cascadeselect": {
-        "description": "CascadeSelect is a form component to select a value from a nested structure of options.\n\n[Live Demo](https://www.primefaces.org/primereact/cascadeselect/)",
+        "description": "CascadeSelect is a form component to select a value from a nested structure of options.\n\n[Live Demo](https://www.primereact.org/cascadeselect/)",
         "components": {
             "CascadeSelect": {
                 "description": "CascadeSelect is a form component to select a value from a nested structure of options.",
@@ -4951,7 +4951,7 @@
         }
     },
     "chart": {
-        "description": "Chart components are based on Chart.js, an open source HTML5 based charting library.\n\n[Live Demo](https://www.primefaces.org/primereact/chart)",
+        "description": "Chart components are based on Chart.js, an open source HTML5 based charting library.\n\n[Live Demo](https://www.primereact.org/chart)",
         "components": {
             "Chart": {
                 "description": "Chart components are based on Chart.js, an open source HTML5 based charting library.",
@@ -5089,7 +5089,7 @@
         }
     },
     "checkbox": {
-        "description": "Checkbox is an extension to standard checkbox element with skinning capabilities.\n\n[Live Demo](https://www.primefaces.org/primereact/checkbox/)",
+        "description": "Checkbox is an extension to standard checkbox element with skinning capabilities.\n\n[Live Demo](https://www.primereact.org/checkbox/)",
         "components": {
             "Checkbox": {
                 "description": "Checkbox is an extension to standard checkbox element with skinning capabilities.",
@@ -5348,7 +5348,7 @@
         }
     },
     "chip": {
-        "description": "Chip represents people using icons, labels and images.\n\n[Live Demo](https://www.primefaces.org/primereact/chip)",
+        "description": "Chip represents people using icons, labels and images.\n\n[Live Demo](https://www.primereact.org/chip)",
         "components": {
             "Chip": {
                 "description": "Chip represents people using icons, labels and images.",
@@ -5467,7 +5467,7 @@
         }
     },
     "chips": {
-        "description": "Chips is used to enter multiple values on an input field.\n\n[Live Demo](https://www.primefaces.org/primereact/chips/)",
+        "description": "Chips is used to enter multiple values on an input field.\n\n[Live Demo](https://www.primereact.org/chips/)",
         "components": {
             "Chips": {
                 "description": "Chips is used to enter multiple values on an input field.",
@@ -5816,7 +5816,7 @@
         }
     },
     "colorpicker": {
-        "description": "ColorPicker is an input component to select a color.\n\n[Live Demo](https://www.primefaces.org/primereact/colorpicker/)",
+        "description": "ColorPicker is an input component to select a color.\n\n[Live Demo](https://www.primereact.org/colorpicker/)",
         "components": {
             "ColorPicker": {
                 "description": "ColorPicker is an input component to select a color.",
@@ -6100,7 +6100,7 @@
         }
     },
     "column": {
-        "description": "Column component defines various options to specify corresponding features.\nIt is a helper component for DataTable and TreeTable.\n\n[Live Demo](https://www.primefaces.org/primereact/datatable/)",
+        "description": "Column component defines various options to specify corresponding features.\nIt is a helper component for DataTable and TreeTable.\n\n[Live Demo](https://www.primereact.org/datatable/)",
         "components": {
             "Column": {
                 "description": "Column is a helper component for DataTable and TreeTable.",
@@ -7699,7 +7699,7 @@
         }
     },
     "columngroup": {
-        "description": "Columns can be grouped at header and footer sections by defining a ColumnGroup component.\nIt is a helper component for DataTable.\n\n[Live Demo](https://www.primefaces.org/primereact/datatable/)",
+        "description": "Columns can be grouped at header and footer sections by defining a ColumnGroup component.\nIt is a helper component for DataTable.\n\n[Live Demo](https://www.primereact.org/datatable/)",
         "components": {
             "ColumnGroup": {
                 "description": "It is a helper component for DataTable.",
@@ -7728,7 +7728,7 @@
         }
     },
     "confirmdialog": {
-        "description": "ConfirmDialog uses a Dialog UI with confirmDialog method or <ConfirmDialog> tag.\n\n[Live Demo](https://www.primefaces.org/primereact/confirmdialog)",
+        "description": "ConfirmDialog uses a Dialog UI with confirmDialog method or <ConfirmDialog> tag.\n\n[Live Demo](https://www.primereact.org/confirmdialog)",
         "components": {
             "ConfirmDialog": {
                 "description": "ConfirmDialog uses a Dialog UI with confirmDialog method or <ConfirmDialog> tag.",
@@ -8129,7 +8129,7 @@
         }
     },
     "confirmpopup": {
-        "description": "ConfirmPopup displays a confirmation overlay displayed relatively to its target.\n\n[Live Demo](https://www.primefaces.org/primereact/confirmpopup)",
+        "description": "ConfirmPopup displays a confirmation overlay displayed relatively to its target.\n\n[Live Demo](https://www.primereact.org/confirmpopup)",
         "components": {
             "ConfirmPopup": {
                 "description": "ConfirmPopup displays a confirmation overlay displayed relatively to its target.",
@@ -8452,7 +8452,7 @@
         }
     },
     "contextmenu": {
-        "description": "ContextMenu displays an overlay menu on right click of its target. Note that components like DataTable has special integration with ContextMenu. Refer to documentation of the individual documentation of the components having a special integration.\n\n[Live Demo](https://www.primefaces.org/primereact/contextmenu/)",
+        "description": "ContextMenu displays an overlay menu on right click of its target. Note that components like DataTable has special integration with ContextMenu. Refer to documentation of the individual documentation of the components having a special integration.\n\n[Live Demo](https://www.primereact.org/contextmenu/)",
         "components": {
             "ContextMenu": {
                 "description": "ContextMenu displays an overlay menu on right click of its target. Note that components like DataTable has special integration with ContextMenu. Refer to documentation of the individual documentation of the components having a special integration.",
@@ -8587,7 +8587,7 @@
         }
     },
     "csstransition": {
-        "description": "CSSTransition component wraps [ReactCSSTransition](https://reactcommunity.org/react-transition-group/css-transition) API.\nIt allows us to easily manage animations. All PrimeReact components use this component.\n\n[Live Demo](https://www.primefaces.org/primereact/dropdown/)",
+        "description": "CSSTransition component wraps [ReactCSSTransition](https://reactcommunity.org/react-transition-group/css-transition) API.\nIt allows us to easily manage animations. All PrimeReact components use this component.\n\n[Live Demo](https://www.primereact.org/dropdown/)",
         "components": {
             "CSSTransition": {
                 "description": "CSSTransition component wraps [ReactCSSTransition](https://reactcommunity.org/react-transition-group/css-transition) API.\nIt allows us to easily manage animations. All PrimeReact components use this component.",
@@ -8607,7 +8607,7 @@
         }
     },
     "datascroller": {
-        "description": "DataScroller displays data with on demand loading using scroll.\n\n[Live Demo](https://www.primefaces.org/primereact/datascroller/)",
+        "description": "DataScroller displays data with on demand loading using scroll.\n\n[Live Demo](https://www.primereact.org/datascroller/)",
         "components": {
             "DataScroller": {
                 "description": "DataScroller displays data with on demand loading using scroll.",
@@ -8781,7 +8781,7 @@
         }
     },
     "datatable": {
-        "description": "DataTable displays data in tabular format.\n\n[Live Demo](https://www.primefaces.org/primereact/datatable/)",
+        "description": "DataTable displays data in tabular format.\n\n[Live Demo](https://www.primereact.org/datatable/)",
         "components": {
             "DataTable": {
                 "description": "DataTable displays data in tabular format.",
@@ -11277,7 +11277,7 @@
         }
     },
     "dataview": {
-        "description": "DataView displays data in grid or list layout with pagination and sorting features.\n\n[Live Demo](https://www.primefaces.org/primereact/dataview/)",
+        "description": "DataView displays data in grid or list layout with pagination and sorting features.\n\n[Live Demo](https://www.primereact.org/dataview/)",
         "components": {
             "DataView": {
                 "description": "DataView displays data in grid or list layout with pagination and sorting features.",
@@ -11675,7 +11675,7 @@
         }
     },
     "deferredcontent": {
-        "description": "DeferredContent postpones the loading the content that is initially not in the viewport until it becomes visible on scroll.\n\n[Live Demo](https://www.primefaces.org/primereact/deferredcontent/)",
+        "description": "DeferredContent postpones the loading the content that is initially not in the viewport until it becomes visible on scroll.\n\n[Live Demo](https://www.primereact.org/deferredcontent/)",
         "components": {
             "DeferredContent": {
                 "description": "DeferredContent postpones the loading the content that is initially not in the viewport until it becomes visible on scroll.",
@@ -11725,7 +11725,7 @@
         }
     },
     "dialog": {
-        "description": "Dialog is a container to display content in an overlay window.\n\n[Live Demo](https://www.primefaces.org/primereact/dialog)",
+        "description": "Dialog is a container to display content in an overlay window.\n\n[Live Demo](https://www.primereact.org/dialog)",
         "components": {
             "Dialog": {
                 "description": "Dialog is a container to display content in an overlay window.",
@@ -12242,7 +12242,7 @@
         }
     },
     "divider": {
-        "description": "Divider is used to separate contents.\n\n[Live Demo](https://www.primefaces.org/primereact/divider/)",
+        "description": "Divider is used to separate contents.\n\n[Live Demo](https://www.primereact.org/divider/)",
         "components": {
             "Divider": {
                 "description": "Divider is used to separate contents.",
@@ -12302,7 +12302,7 @@
         }
     },
     "dock": {
-        "description": "Dock is a navigation component consisting of menuitems.\n\n[Live Demo](https://www.primefaces.org/primereact/dock/)",
+        "description": "Dock is a navigation component consisting of menuitems.\n\n[Live Demo](https://www.primereact.org/dock/)",
         "components": {
             "Dock": {
                 "description": "Dock is a navigation component consisting of menuitems.",
@@ -12413,7 +12413,7 @@
         }
     },
     "dropdown": {
-        "description": "Dropdown also known as Select, is used to choose an item from a collection of options.\n\n[Live Demo](https://www.primefaces.org/primereact/dropdown/)",
+        "description": "Dropdown also known as Select, is used to choose an item from a collection of options.\n\n[Live Demo](https://www.primereact.org/dropdown/)",
         "components": {
             "Dropdown": {
                 "description": "Dropdown also known as Select, is used to choose an item from a collection of options.",
@@ -13043,7 +13043,7 @@
         }
     },
     "editor": {
-        "description": "Editor is rich text editor component based on Quill.\n\n[Live Demo](https://www.primefaces.org/primereact/editor/)",
+        "description": "Editor is rich text editor component based on Quill.\n\n[Live Demo](https://www.primereact.org/editor/)",
         "components": {
             "Editor": {
                 "description": "Editor is rich text editor component based on Quill.",
@@ -13273,7 +13273,7 @@
         }
     },
     "fieldset": {
-        "description": "Fieldset is an input component that provides real-time suggestions when being typed.\n\n[Live Demo](https://www.primefaces.org/primereact/fieldset/)",
+        "description": "Fieldset is an input component that provides real-time suggestions when being typed.\n\n[Live Demo](https://www.primereact.org/fieldset/)",
         "components": {
             "Fieldset": {
                 "description": "Fieldset is an input component that provides real-time suggestions when being typed.",
@@ -13425,7 +13425,7 @@
         }
     },
     "fileupload": {
-        "description": "FileUpload is an advanced uploader with dragdrop support, multi file uploads, auto uploading, progress tracking and validations.\n\n[Live Demo](https://www.primefaces.org/primereact/fileupload)",
+        "description": "FileUpload is an advanced uploader with dragdrop support, multi file uploads, auto uploading, progress tracking and validations.\n\n[Live Demo](https://www.primereact.org/fileupload)",
         "components": {
             "FileUpload": {
                 "description": "FileUpload is an advanced uploader with dragdrop support, multi file uploads, auto uploading, progress tracking and validations.",
@@ -14294,7 +14294,7 @@
         }
     },
     "galleria": {
-        "description": "Galleria is a content gallery component.\n\n[Live Demo](https://www.primefaces.org/primereact/galleria)",
+        "description": "Galleria is a content gallery component.\n\n[Live Demo](https://www.primereact.org/galleria)",
         "components": {
             "Galleria": {
                 "description": "Galleria is a content gallery component.",
@@ -15185,7 +15185,7 @@
         }
     },
     "image": {
-        "description": "Displays a single image with preview and tranformation options.\n\n[Live Demo](https://www.primefaces.org/primereact/image/)",
+        "description": "Displays a single image with preview and tranformation options.\n\n[Live Demo](https://www.primereact.org/image/)",
         "components": {
             "Image": {
                 "description": "Displays a single image with preview and tranformation options.",
@@ -15332,7 +15332,7 @@
         }
     },
     "inplace": {
-        "description": "Inplace provides an easy to do editing and display at the same time where clicking the output displays the actual content.\n\n[Live Demo](https://www.primefaces.org/primereact/inplace)\n\nHelper Components:\n\n-  InplaceDisplay \n\n-  InplaceContent",
+        "description": "Inplace provides an easy to do editing and display at the same time where clicking the output displays the actual content.\n\n[Live Demo](https://www.primereact.org/inplace)\n\nHelper Components:\n\n-  InplaceDisplay \n\n-  InplaceContent",
         "components": {
             "Inplace": {
                 "description": "Inplace provides an easy to do editing and display at the same time where clicking the output displays the actual content.",
@@ -15513,7 +15513,7 @@
         }
     },
     "inputmask": {
-        "description": "InputMask component is used to enter input in a certain format such as numeric, date, currency, email and phone.\n\n[Live Demo](https://www.primefaces.org/primereact/inputmask/)",
+        "description": "InputMask component is used to enter input in a certain format such as numeric, date, currency, email and phone.\n\n[Live Demo](https://www.primereact.org/inputmask/)",
         "components": {
             "InputMask": {
                 "description": "InputMask component is used to enter input in a certain format such as numeric, date, currency, email and phone.",
@@ -15754,7 +15754,7 @@
         }
     },
     "inputnumber": {
-        "description": "InputNumber is an input component to provide numerical input.\n\n[Live Demo](https://www.primefaces.org/primereact/inputnumber/)",
+        "description": "InputNumber is an input component to provide numerical input.\n\n[Live Demo](https://www.primereact.org/inputnumber/)",
         "components": {
             "InputNumber": {
                 "description": "InputNumber is an input component to provide numerical input.",
@@ -16249,7 +16249,7 @@
         }
     },
     "inputswitch": {
-        "description": "InputSwitch is used to select a boolean value.\n\n[Live Demo](https://www.primefaces.org/primereact/inputswitch/)",
+        "description": "InputSwitch is used to select a boolean value.\n\n[Live Demo](https://www.primereact.org/inputswitch/)",
         "components": {
             "InputSwitch": {
                 "description": "InputSwitch is used to select a boolean value.",
@@ -16476,7 +16476,7 @@
         }
     },
     "inputtext": {
-        "description": "InputText is an extension to standard input element with theming and keyfiltering.\n\n[Live Demo](https://www.primefaces.org/primereact/inputtext/)",
+        "description": "InputText is an extension to standard input element with theming and keyfiltering.\n\n[Live Demo](https://www.primereact.org/inputtext/)",
         "components": {
             "InputText": {
                 "methods": {
@@ -16495,7 +16495,7 @@
         }
     },
     "inputtextarea": {
-        "description": "Inputtextarea add styling and autoResize functionality to standard textarea element.\n\n[Live Demo](https://www.primefaces.org/primereact/inputtextarea/)",
+        "description": "Inputtextarea add styling and autoResize functionality to standard textarea element.\n\n[Live Demo](https://www.primereact.org/inputtextarea/)",
         "components": {
             "InputTextarea": {
                 "methods": {
@@ -16526,7 +16526,7 @@
         }
     },
     "knob": {
-        "description": "Knob is a form component to define number inputs with a dial.\n\n[Live Demo](https://www.primefaces.org/primereact/knob/)",
+        "description": "Knob is a form component to define number inputs with a dial.\n\n[Live Demo](https://www.primereact.org/knob/)",
         "components": {
             "Knob": {
                 "description": "Knob is a form component to define number inputs with a dial.",
@@ -16730,7 +16730,7 @@
         }
     },
     "listbox": {
-        "description": "ListBox is used to select one or more values from a list of items.\n\n[Live Demo](https://www.primefaces.org/primereact/listbox/)",
+        "description": "ListBox is used to select one or more values from a list of items.\n\n[Live Demo](https://www.primereact.org/listbox/)",
         "components": {
             "ListBox": {
                 "description": "ListBox is used to select one or more values from a list of items.",
@@ -17218,7 +17218,7 @@
         }
     },
     "megamenu": {
-        "description": "MegaMenu is navigation component that displays submenus together.\n\n[Live Demo](https://www.primefaces.org/primereact/megamenu/)",
+        "description": "MegaMenu is navigation component that displays submenus together.\n\n[Live Demo](https://www.primereact.org/megamenu/)",
         "components": {
             "MegaMenu": {
                 "description": "MegaMenu is navigation component that displays submenus together.",
@@ -17286,7 +17286,7 @@
         }
     },
     "mention": {
-        "description": "Mention component is used to refer someone or something.\n\n[Live Demo](https://www.primefaces.org/primereact/mention/)",
+        "description": "Mention component is used to refer someone or something.\n\n[Live Demo](https://www.primereact.org/mention/)",
         "components": {
             "Mention": {
                 "description": "Mention component is used to refer someone or something.",
@@ -17645,7 +17645,7 @@
         }
     },
     "menu": {
-        "description": "Menu is a navigation/command component that supports dynamic and static positioning.\n\n[Live Demo](https://www.primefaces.org/primereact/menu/)",
+        "description": "Menu is a navigation/command component that supports dynamic and static positioning.\n\n[Live Demo](https://www.primereact.org/menu/)",
         "components": {
             "Menu": {
                 "description": "Menu is a navigation/command component that supports dynamic and static positioning.",
@@ -17798,7 +17798,7 @@
         }
     },
     "menubar": {
-        "description": "Manubar is an input component that provides real-time suggestions when being typed.\n\n[Live Demo](https://www.primefaces.org/primereact/menubar/)",
+        "description": "Manubar is an input component that provides real-time suggestions when being typed.\n\n[Live Demo](https://www.primereact.org/menubar/)",
         "components": {
             "Menubar": {
                 "description": "Manubar is an input component that provides real-time suggestions when being typed.",
@@ -17870,7 +17870,7 @@
         }
     },
     "menuitem": {
-        "description": "PrimeReact menus components share a common api to specify the menuitems and submenus.\n\n[Live Demo](https://www.primefaces.org/primereact/menumodel/)",
+        "description": "PrimeReact menus components share a common api to specify the menuitems and submenus.\n\n[Live Demo](https://www.primereact.org/menumodel/)",
         "model": {
             "MenuItem": {
                 "description": "Defines model of MenuItem API.",
@@ -18081,7 +18081,7 @@
         }
     },
     "message": {
-        "description": "Message is used to display inline message with various severities.\n\n[Live Demo](https://www.primefaces.org/primereact/message)",
+        "description": "Message is used to display inline message with various severities.\n\n[Live Demo](https://www.primereact.org/message)",
         "components": {
             "Message": {
                 "description": "Message is used to display inline message with various severities.",
@@ -18149,7 +18149,7 @@
         }
     },
     "messages": {
-        "description": "Messages is used to display inline messages with various severities.\n\n[Live Demo](https://www.primefaces.org/primereact/messages)",
+        "description": "Messages is used to display inline messages with various severities.\n\n[Live Demo](https://www.primereact.org/messages)",
         "components": {
             "Messages": {
                 "description": "Messages is used to display inline messages with various severities.",
@@ -18324,7 +18324,7 @@
         }
     },
     "multiselect": {
-        "description": "MultiSelect is used to select multiple items from a collection.\n\n[Live Demo](https://www.primefaces.org/primereact/multiselect/)",
+        "description": "MultiSelect is used to select multiple items from a collection.\n\n[Live Demo](https://www.primereact.org/multiselect/)",
         "components": {
             "MultiSelect": {
                 "description": "MultiSelect is used to select multiple items from a collection.",
@@ -19139,7 +19139,7 @@
         }
     },
     "multistatecheckbox": {
-        "description": "MultiStateCheckbox is used to select a state from given multiple states.\n\n[Live Demo](https://www.primefaces.org/primereact/multistatecheckbox/)",
+        "description": "MultiStateCheckbox is used to select a state from given multiple states.\n\n[Live Demo](https://www.primereact.org/multistatecheckbox/)",
         "components": {
             "MultiStateCheckbox": {
                 "description": "MultiStateCheckbox is used to select a state from given multiple states.",
@@ -19425,7 +19425,7 @@
         }
     },
     "orderlist": {
-        "description": "OrderList is used to sort a collection.\n\n[Live Demo](https://www.primefaces.org/primereact/orderlist/)",
+        "description": "OrderList is used to sort a collection.\n\n[Live Demo](https://www.primereact.org/orderlist/)",
         "components": {
             "OrderList": {
                 "description": "OrderList is used to sort a collection.",
@@ -19625,7 +19625,7 @@
         }
     },
     "organizationchart": {
-        "description": "OrganizationChart visualizes hierarchical organization data.\n\n[Live Demo](https://www.primefaces.org/primereact/organizationchart/)",
+        "description": "OrganizationChart visualizes hierarchical organization data.\n\n[Live Demo](https://www.primereact.org/organizationchart/)",
         "components": {
             "OrganizationChart": {
                 "description": "OrganizationChart visualizes hierarchical organization data.",
@@ -19951,7 +19951,7 @@
         }
     },
     "overlaypanel": {
-        "description": "OverlayPanel, also known as Popover, is a container component that can overlay other components on page.\n\n[Live Demo](https://www.primefaces.org/primereact/overlaypanel)",
+        "description": "OverlayPanel, also known as Popover, is a container component that can overlay other components on page.\n\n[Live Demo](https://www.primereact.org/overlaypanel)",
         "components": {
             "OverlayPanel": {
                 "description": "OverlayPanel, also known as Popover, is a container component that can overlay other components on page.",
@@ -20106,7 +20106,7 @@
         }
     },
     "overlayservice": {
-        "description": "OverlayService allows all overlay components to communicate with each other.\n\n[Live Demo](https://www.primefaces.org/primereact/dropdown/)",
+        "description": "OverlayService allows all overlay components to communicate with each other.\n\n[Live Demo](https://www.primereact.org/dropdown/)",
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
             "values": {
@@ -20199,7 +20199,7 @@
         }
     },
     "paginator": {
-        "description": "Paginator is a generic widget to display content in paged format.\n\n[Live Demo](https://www.primefaces.org/primereact/paginator/)",
+        "description": "Paginator is a generic widget to display content in paged format.\n\n[Live Demo](https://www.primereact.org/paginator/)",
         "components": {
             "Paginator": {
                 "description": "Paginator is a generic widget to display content in paged format.",
@@ -21046,7 +21046,7 @@
         }
     },
     "panel": {
-        "description": "Panel is a grouping component providing with content toggle feature.\n\n[Live Demo](https://www.primefaces.org/primereact/panel/)",
+        "description": "Panel is a grouping component providing with content toggle feature.\n\n[Live Demo](https://www.primereact.org/panel/)",
         "components": {
             "Panel": {
                 "description": "Panel is a grouping component providing with content toggle feature.",
@@ -21320,7 +21320,7 @@
         }
     },
     "panelmenu": {
-        "description": "PanelMenu is a hybrid of accordion-tree components.\n\n[Live Demo](https://www.primefaces.org/primereact/panelmenu/)",
+        "description": "PanelMenu is a hybrid of accordion-tree components.\n\n[Live Demo](https://www.primereact.org/panelmenu/)",
         "components": {
             "PanelMenu": {
                 "description": "PanelMenu is a hybrid of accordion-tree components.",
@@ -21380,7 +21380,7 @@
         }
     },
     "password": {
-        "description": "Password displays strength indicator for password fields.\n\n[Live Demo](https://www.primefaces.org/primereact/password/)",
+        "description": "Password displays strength indicator for password fields.\n\n[Live Demo](https://www.primereact.org/password/)",
         "components": {
             "Password": {
                 "description": "Password displays strength indicator for password fields.",
@@ -21682,7 +21682,7 @@
         }
     },
     "picklist": {
-        "description": "PickList is used to reorder items between different lists.\n\n[Live Demo](https://www.primefaces.org/primereact/picklist/)",
+        "description": "PickList is used to reorder items between different lists.\n\n[Live Demo](https://www.primereact.org/picklist/)",
         "components": {
             "PickList": {
                 "description": "PickList is used to reorder items between different lists.",
@@ -22216,7 +22216,7 @@
         }
     },
     "progressbar": {
-        "description": "ProgressBar is a process status indicator.\n\n[Live Demo](https://www.primefaces.org/primereact/progressbar)",
+        "description": "ProgressBar is a process status indicator.\n\n[Live Demo](https://www.primereact.org/progressbar)",
         "components": {
             "ProgressBar": {
                 "description": "ProgressBar is a process status indicator.",
@@ -22305,7 +22305,7 @@
         }
     },
     "progressspinner": {
-        "description": "ProgressSpinner is a process status indicator.\n\n[Live Demo](https://www.primefaces.org/primereact/progressspinner)",
+        "description": "ProgressSpinner is a process status indicator.\n\n[Live Demo](https://www.primereact.org/progressspinner)",
         "components": {
             "ProgressSpinner": {
                 "description": "ProgressSpinner is a process status indicator.",
@@ -22365,7 +22365,7 @@
         }
     },
     "radiobutton": {
-        "description": "RadioButton is an extension to standard radio button element with theming.\n\n[Live Demo](https://www.primefaces.org/primereact/radiobutton/)",
+        "description": "RadioButton is an extension to standard radio button element with theming.\n\n[Live Demo](https://www.primereact.org/radiobutton/)",
         "components": {
             "RadioButton": {
                 "description": "RadioButton is an extension to standard radio button element with theming.",
@@ -22546,7 +22546,7 @@
         }
     },
     "rating": {
-        "description": "Rating component is a star based selection input.\n\n[Live Demo](https://www.primefaces.org/primereact/rating/)",
+        "description": "Rating component is a star based selection input.\n\n[Live Demo](https://www.primereact.org/rating/)",
         "components": {
             "Rating": {
                 "description": "Rating component is a star based selection input.",
@@ -22735,7 +22735,7 @@
         }
     },
     "ripple": {
-        "description": "Ripple component adds ripple effect to the host element.\n\n[Live Demo](https://www.primefaces.org/primereact/ripple)",
+        "description": "Ripple component adds ripple effect to the host element.\n\n[Live Demo](https://www.primereact.org/ripple)",
         "components": {
             "Ripple": {
                 "description": "Ripple component adds ripple effect to the host element.",
@@ -22764,7 +22764,7 @@
         }
     },
     "row": {
-        "description": "Row component is a helper component used to create grouping structures in DataTable.\n\n[Live Demo](https://www.primefaces.org/primereact/datatable/)",
+        "description": "Row component is a helper component used to create grouping structures in DataTable.\n\n[Live Demo](https://www.primereact.org/datatable/)",
         "components": {
             "Row": {
                 "description": "Row component is a helper component used to create grouping structures in DataTable.",
@@ -22809,7 +22809,7 @@
         }
     },
     "scrollpanel": {
-        "description": "ScrollPanel is a cross browser, lightweight and skinnable alternative to native browser scrollbar.\n\n[Live Demo](https://www.primefaces.org/primereact/scrollpanel/)",
+        "description": "ScrollPanel is a cross browser, lightweight and skinnable alternative to native browser scrollbar.\n\n[Live Demo](https://www.primereact.org/scrollpanel/)",
         "components": {
             "ScrollPanel": {
                 "description": "ScrollPanel is a cross browser, lightweight and skinnable alternative to native browser scrollbar.",
@@ -22863,7 +22863,7 @@
         }
     },
     "scrolltop": {
-        "description": "ScrollTop gets displayed after a certain scroll position and used to navigates to the top of the page quickly.\n\n[Live Demo](https://www.primefaces.org/primereact/scrolltop/)",
+        "description": "ScrollTop gets displayed after a certain scroll position and used to navigates to the top of the page quickly.\n\n[Live Demo](https://www.primereact.org/scrolltop/)",
         "components": {
             "ScrollTop": {
                 "description": "ScrollTop gets displayed after a certain scroll position and used to navigates to the top of the page quickly.",
@@ -22968,7 +22968,7 @@
         }
     },
     "selectbutton": {
-        "description": "SelectButton is used to choose single or multiple items from a list using buttons.\n\n[Live Demo](https://www.primefaces.org/primereact/selectbutton/)",
+        "description": "SelectButton is used to choose single or multiple items from a list using buttons.\n\n[Live Demo](https://www.primereact.org/selectbutton/)",
         "components": {
             "SelectButton": {
                 "description": "SelectButton is used to choose single or multiple items from a list using buttons.",
@@ -23188,7 +23188,7 @@
         }
     },
     "sidebar": {
-        "description": "Sidebar is a panel component displayed as an overlay.\n\n[Live Demo](https://www.primefaces.org/primereact/sidebar/)",
+        "description": "Sidebar is a panel component displayed as an overlay.\n\n[Live Demo](https://www.primereact.org/sidebar/)",
         "components": {
             "Sidebar": {
                 "description": "Sidebar is a panel component displayed as an overlay.",
@@ -23369,7 +23369,7 @@
         }
     },
     "skeleton": {
-        "description": "Skeleton is a placeholder to display instead of the actual content.\n\n[Live Demo](https://www.primefaces.org/primereact/skeleton/)",
+        "description": "Skeleton is a placeholder to display instead of the actual content.\n\n[Live Demo](https://www.primereact.org/skeleton/)",
         "components": {
             "Skeleton": {
                 "description": "Skeleton is a placeholder to display instead of the actual content.",
@@ -23453,7 +23453,7 @@
         }
     },
     "slidemenu": {
-        "description": "SlideMenu displays submenus with a slide animation.\n\n[Live Demo](https://www.primefaces.org/primereact/slidemenu/)",
+        "description": "SlideMenu displays submenus with a slide animation.\n\n[Live Demo](https://www.primereact.org/slidemenu/)",
         "components": {
             "SlideMenu": {
                 "description": "SlideMenu displays submenus with a slide animation.",
@@ -23695,7 +23695,7 @@
         }
     },
     "slider": {
-        "description": "Slider is a component to provide input with a drag handle.\n\n[Live Demo](https://www.primefaces.org/primereact/slider/)",
+        "description": "Slider is a component to provide input with a drag handle.\n\n[Live Demo](https://www.primereact.org/slider/)",
         "components": {
             "Slider": {
                 "description": "Slider is a component to provide input with a drag handle.",
@@ -23868,7 +23868,7 @@
         }
     },
     "speeddial": {
-        "description": "When pressed, a floating action button can display multiple primary actions that can be performed on a page.\n\n[Live Demo](https://www.primefaces.org/primereact/speeddial/)",
+        "description": "When pressed, a floating action button can display multiple primary actions that can be performed on a page.\n\n[Live Demo](https://www.primereact.org/speeddial/)",
         "components": {
             "SpeedDial": {
                 "description": "When pressed, a floating action button can display multiple primary actions that can be performed on a page.",
@@ -24152,7 +24152,7 @@
         }
     },
     "splitbutton": {
-        "description": "SplitButton groups a set of commands in an overlay with a default command.\n\n[Live Demo](https://www.primefaces.org/primereact/splitbutton/)",
+        "description": "SplitButton groups a set of commands in an overlay with a default command.\n\n[Live Demo](https://www.primereact.org/splitbutton/)",
         "components": {
             "SplitButton": {
                 "description": "SplitButton groups a set of commands in an overlay with a default command.",
@@ -24378,7 +24378,7 @@
         }
     },
     "splitter": {
-        "description": "Splitter is utilized to separate and resize panels.\n\n[Live Demo](https://www.primefaces.org/primereact/splitter/)\n\nHelper Components:\n\n-  SplitterPanel",
+        "description": "Splitter is utilized to separate and resize panels.\n\n[Live Demo](https://www.primereact.org/splitter/)\n\nHelper Components:\n\n-  SplitterPanel",
         "components": {
             "Splitter": {
                 "description": "Splitter is utilized to separate and resize panels.",
@@ -24541,7 +24541,7 @@
         }
     },
     "steps": {
-        "description": "Steps also known as Stepper, is an indicator for the steps in a workflow. Layout of steps component is optimized for responsive design.\n\n[Live Demo](https://www.primefaces.org/primereact/steps/)",
+        "description": "Steps also known as Stepper, is an indicator for the steps in a workflow. Layout of steps component is optimized for responsive design.\n\n[Live Demo](https://www.primereact.org/steps/)",
         "components": {
             "Steps": {
                 "description": "Steps also known as Stepper, is an indicator for the steps in a workflow. Layout of steps component is optimized for responsive design.",
@@ -24647,7 +24647,7 @@
         }
     },
     "styleclass": {
-        "description": "StyleClass manages css classes declaratively to during enter/leave animations or just to toggle classes on an element.\n\n[Live Demo](https://www.primefaces.org/primereact/styleclass)",
+        "description": "StyleClass manages css classes declaratively to during enter/leave animations or just to toggle classes on an element.\n\n[Live Demo](https://www.primereact.org/styleclass)",
         "components": {
             "StyleClass": {
                 "description": "StyleClass manages css classes declaratively to during enter/leave animations or just to toggle classes on an element.",
@@ -24769,7 +24769,7 @@
         }
     },
     "tabmenu": {
-        "description": "TabMenu is a navigation/command component that displays items as tab headers.\n\n[Live Demo](https://www.primefaces.org/primereact/tabmenu/)",
+        "description": "TabMenu is a navigation/command component that displays items as tab headers.\n\n[Live Demo](https://www.primereact.org/tabmenu/)",
         "components": {
             "TabMenu": {
                 "description": "TabMenu is a navigation/command component that displays items as tab headers.",
@@ -24867,7 +24867,7 @@
         }
     },
     "tabview": {
-        "description": "TabView is a container component to group content with tabs.\n\n[Live Demo](https://www.primefaces.org/primereact/tabview/)\n\nHelper Components:\n\n-  TabPanel",
+        "description": "TabView is a container component to group content with tabs.\n\n[Live Demo](https://www.primereact.org/tabview/)\n\nHelper Components:\n\n-  TabPanel",
         "components": {
             "TabPanel": {
                 "description": "TabPanel is a helper component for TabView.",
@@ -25276,7 +25276,7 @@
         }
     },
     "tag": {
-        "description": "Tag component is used to categorize content.\n\n[Live Demo](https://www.primefaces.org/primereact/tag)",
+        "description": "Tag component is used to categorize content.\n\n[Live Demo](https://www.primereact.org/tag)",
         "components": {
             "Tag": {
                 "description": "Tag component is used to categorize content.",
@@ -25344,7 +25344,7 @@
         }
     },
     "terminal": {
-        "description": "Terminal is a text based user interface.\n\n[Live Demo](https://www.primefaces.org/primereact/terminal/)",
+        "description": "Terminal is a text based user interface.\n\n[Live Demo](https://www.primereact.org/terminal/)",
         "components": {
             "TerminalService": {
                 "description": "Terminal is a text based user interface.",
@@ -25433,7 +25433,7 @@
         }
     },
     "tieredmenu": {
-        "description": "TieredMenu is an input component that provides real-time suggestions when being typed.\n\n[Live Demo](https://www.primefaces.org/primereact/tieredmenu/)",
+        "description": "TieredMenu is an input component that provides real-time suggestions when being typed.\n\n[Live Demo](https://www.primereact.org/tieredmenu/)",
         "components": {
             "TieredMenu": {
                 "description": "TieredMenu is an input component that provides real-time suggestions when being typed.",
@@ -25556,7 +25556,7 @@
         }
     },
     "timeline": {
-        "description": "Timeline visualizes a series of chained events.\n\n[Live Demo](https://www.primefaces.org/primereact/timeline/)",
+        "description": "Timeline visualizes a series of chained events.\n\n[Live Demo](https://www.primereact.org/timeline/)",
         "components": {
             "Timeline": {
                 "description": "Timeline visualizes a series of chained events.",
@@ -25648,7 +25648,7 @@
         }
     },
     "toast": {
-        "description": "Toast is used to display messages in an overlay.\n\n[Live Demo](https://www.primefaces.org/primereact/toast/)",
+        "description": "Toast is used to display messages in an overlay.\n\n[Live Demo](https://www.primereact.org/toast/)",
         "components": {
             "Toast": {
                 "description": "Toast is used to display messages in an overlay.",
@@ -25886,7 +25886,7 @@
         }
     },
     "togglebutton": {
-        "description": "ToggleButton is used to select a boolean value using a button.\n\n[Live Demo](https://www.primefaces.org/primereact/togglebutton/)",
+        "description": "ToggleButton is used to select a boolean value using a button.\n\n[Live Demo](https://www.primereact.org/togglebutton/)",
         "components": {
             "ToggleButton": {
                 "description": "ToggleButton is used to select a boolean value using a button.",
@@ -26097,7 +26097,7 @@
         }
     },
     "toolbar": {
-        "description": "Toolbar is a grouping component for buttons and other content.\n\n[Live Demo](https://www.primefaces.org/primereact/toolbar/)",
+        "description": "Toolbar is a grouping component for buttons and other content.\n\n[Live Demo](https://www.primereact.org/toolbar/)",
         "components": {
             "Toolbar": {
                 "description": "Toolbar is a grouping component for buttons and other content.",
@@ -26173,7 +26173,7 @@
         }
     },
     "tooltip": {
-        "description": "Tooltip functionality is integrated within various PrimeReact components.\n\n[Live Demo](https://www.primefaces.org/primereact/tooltip/)",
+        "description": "Tooltip functionality is integrated within various PrimeReact components.\n\n[Live Demo](https://www.primereact.org/tooltip/)",
         "components": {
             "Tooltip": {
                 "description": "Tooltip functionality is integrated within various PrimeReact components.",
@@ -26712,7 +26712,7 @@
         }
     },
     "tree": {
-        "description": "Tree is used to display hierarchical data.\n\n[Live Demo](https://www.primefaces.org/primereact/tree/)",
+        "description": "Tree is used to display hierarchical data.\n\n[Live Demo](https://www.primereact.org/tree/)",
         "components": {
             "Tree": {
                 "description": "Tree is used to display hierarchical data.",
@@ -27694,7 +27694,7 @@
         }
     },
     "treeselect": {
-        "description": "TreeSelect is a form component to choose from hierarchical data.\n\n[Live Demo](https://www.primefaces.org/primereact/treeselect/)",
+        "description": "TreeSelect is a form component to choose from hierarchical data.\n\n[Live Demo](https://www.primereact.org/treeselect/)",
         "components": {
             "TreeSelect": {
                 "description": "TreeSelect is a form component to choose from hierarchical data.",
@@ -28325,7 +28325,7 @@
         }
     },
     "treetable": {
-        "description": "TreeTable is used to display hierarchical data in tabular format.\n\n[Live Demo](https://www.primefaces.org/primereact/treetable/)",
+        "description": "TreeTable is used to display hierarchical data in tabular format.\n\n[Live Demo](https://www.primereact.org/treetable/)",
         "components": {
             "TreeTable": {
                 "description": "TreeTable is used to display hierarchical data in tabular format.",
@@ -29357,7 +29357,7 @@
         }
     },
     "tristatecheckbox": {
-        "description": "TriStateCheckbox is used to select either \"true\", \"false\" or \"null\" as the value.\n\n[Live Demo](https://www.primefaces.org/primereact/tristatecheckbox/)",
+        "description": "TriStateCheckbox is used to select either \"true\", \"false\" or \"null\" as the value.\n\n[Live Demo](https://www.primereact.org/tristatecheckbox/)",
         "components": {
             "TriStateCheckbox": {
                 "description": "TriStateCheckbox is used to select either \"true\", \"false\" or \"null\" as the value.",
@@ -29680,7 +29680,7 @@
         }
     },
     "virtualscroller": {
-        "description": "VirtualScroller is a performant approach to handle huge data efficiently.\n\n[Live Demo](https://www.primefaces.org/primereact/virtualscroller/)",
+        "description": "VirtualScroller is a performant approach to handle huge data efficiently.\n\n[Live Demo](https://www.primereact.org/virtualscroller/)",
         "components": {
             "VirtualScroller": {
                 "description": "VirtualScroller is a performant approach to handle huge data efficiently.",

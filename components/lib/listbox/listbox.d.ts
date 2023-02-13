@@ -2,7 +2,7 @@
  *
  * ListBox is used to select one or more values from a list of items.
  *
- * [Live Demo](https://www.primefaces.org/primereact/listbox/)
+ * [Live Demo](https://www.primereact.org/listbox/)
  *
  * @module listbox
  *
@@ -288,7 +288,7 @@ export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHT
  *
  * _ListBox is used to select one or more values from a list of items._
  *
- * [Live Demo](https://www.primefaces.org/primereact/listbox/)
+ * [Live Demo](https://www.primereact.org/listbox/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

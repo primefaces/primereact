@@ -2,7 +2,7 @@
  *
  * Dropdown also known as Select, is used to choose an item from a collection of options.
  *
- * [Live Demo](https://www.primefaces.org/primereact/dropdown/)
+ * [Live Demo](https://www.primereact.org/dropdown/)
  *
  * @module dropdown
  *
@@ -332,7 +332,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
  *
  * _Dropdown also known as Select, is used to choose an item from a collection of options._
  *
- * [Live Demo](https://www.primefaces.org/primereact/dropdown/)
+ * [Live Demo](https://www.primereact.org/dropdown/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

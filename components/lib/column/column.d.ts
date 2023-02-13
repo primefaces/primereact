@@ -3,7 +3,7 @@
  * Column component defines various options to specify corresponding features.
  * It is a helper component for DataTable and TreeTable.
  *
- * [Live Demo](https://www.primefaces.org/primereact/datatable/)
+ * [Live Demo](https://www.primereact.org/datatable/)
  *
  * @module column
  *
@@ -825,7 +825,7 @@ export interface ColumnProps {
  *
  * _Column is a helper component for DataTable and TreeTable._
  *
- * [Live Demo](https://www.primefaces.org/primereact/column/)
+ * [Live Demo](https://www.primereact.org/column/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

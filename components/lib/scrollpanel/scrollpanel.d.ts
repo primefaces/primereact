@@ -2,7 +2,7 @@
  *
  * ScrollPanel is a cross browser, lightweight and skinnable alternative to native browser scrollbar.
  *
- * [Live Demo](https://www.primefaces.org/primereact/scrollpanel/)
+ * [Live Demo](https://www.primereact.org/scrollpanel/)
  *
  * @module scrollpanel
  *
@@ -26,7 +26,7 @@ export interface ScrollPanelProps extends Omit<React.DetailedHTMLProps<React.HTM
  *
  * _ScrollPanel is a cross browser, lightweight and skinnable alternative to native browser scrollbar._
  *
- * [Live Demo](https://www.primefaces.org/primereact/scrollpanel/)
+ * [Live Demo](https://www.primereact.org/scrollpanel/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
