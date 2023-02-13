@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import { StyleClass } from '../lib/styleclass/StyleClass';
 import { classNames } from '../lib/utils/ClassNames';
 import MenuData from './menu.json';
@@ -42,6 +42,18 @@ const Menu = memo((props) => {
             );
         }
     };
+
+    const scrollToActiveItem = () => {
+        const activeItem = document.querySelector('.router-link-active');
+
+        if (activeItem) {
+            activeItem.scrollIntoView({ block: 'center' });
+        }
+    };
+
+    useEffect(() => {
+        scrollToActiveItem();
+    }, []);
 
     const renderChild = (menuitem, key) => {
         if (menuitem.children) {
