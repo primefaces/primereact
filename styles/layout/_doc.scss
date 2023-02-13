@@ -210,6 +210,7 @@
 
 .doc-tablewrapper {
     overflow: auto;
+    @include card;
 }
 
 .doc-table {
@@ -235,6 +236,7 @@
             padding: 1rem;
             border-bottom: 1px solid var(--surface-border);
             white-space: pre-wrap;
+            line-height: 1.5;
 
             &:first-child {
                 font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, Liberation Mono, monospace;
