@@ -13,7 +13,6 @@ import { IconType } from '../utils';
 
 /**
  * Custom panel header template options.
- * @group Misc
  */
 interface PanelHeaderTemplateOptions {
     /**

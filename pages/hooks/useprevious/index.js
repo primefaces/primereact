@@ -16,7 +16,7 @@ const PreviousDemo = () => {
         }
     ];
 
-    return <DocComponent title="React usePrevious Hook" header="usePrevious" description="Allows access to the previous value in state." componentDocs={docs} apiDocs={[{ name: 'usePrevious', pathname: '/functions/hooks.usePrevious.html' }]} />;
+    return <DocComponent title="React usePrevious Hook" header="usePrevious" description="Allows access to the previous value in state." componentDocs={docs} apiDocs={['hooks.functions.usePrevious']} />;
 };
 
 export default PreviousDemo;

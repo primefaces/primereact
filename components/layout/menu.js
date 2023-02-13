@@ -1,12 +1,19 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { memo } from 'react';
 import { StyleClass } from '../lib/styleclass/StyleClass';
 import { classNames } from '../lib/utils/ClassNames';
 import MenuData from './menu.json';
 
-export default function Menu(props) {
+const Menu = memo((props) => {
     const router = useRouter();
+    const menu = MenuData.data.map((data) => {
+        const rootItem = { ...data };
+
+        rootItem.expanded = rootItem.children && rootItem.children.some((item) => item.to === router.pathname || (item.children && item.children.some((it) => it.to === router.pathname)));
+
+        return rootItem;
+    });
 
     const renderLink = (item) => {
         const { name, to, href } = item;
@@ -88,17 +95,18 @@ export default function Menu(props) {
     const renderRootMenuItems = () => {
         return (
             <>
-                {MenuData.data.map((menuitem, index) => {
-                    const label = menuitem.children ? renderRootItemButton(menuitem, index) : renderLink(menuitem);
-                    const children = renderRootMenuItemChildren(menuitem, index);
+                {menu &&
+                    menu.map((menuitem, index) => {
+                        const label = menuitem.children ? renderRootItemButton(menuitem, index) : renderLink(menuitem);
+                        const children = renderRootMenuItemChildren(menuitem, index);
 
-                    return (
-                        <li key={'root_' + index}>
-                            {label}
-                            {children}
-                        </li>
-                    );
-                })}
+                        return (
+                            <li key={'root_' + index}>
+                                {label}
+                                {children}
+                            </li>
+                        );
+                    })}
             </>
         );
     };
@@ -118,4 +126,6 @@ export default function Menu(props) {
             </nav>
         </aside>
     );
-}
+});
+
+export default Menu;

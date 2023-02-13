@@ -16,15 +16,7 @@ const MountEffectDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React useMountEffect Hook"
-            header="useMountEffect"
-            description="Executes a given callback when component is mounted."
-            componentDocs={docs}
-            apiDocs={[{ name: 'useMountEffect', pathname: '/functions/hooks.useMountEffect.html' }]}
-        />
-    );
+    return <DocComponent title="React useMountEffect Hook" header="useMountEffect" description="Executes a given callback when component is mounted." componentDocs={docs} apiDocs={['hooks.functions.useMountEffect']} />;
 };
 
 export default MountEffectDemo;

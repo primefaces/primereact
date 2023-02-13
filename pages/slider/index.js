@@ -53,7 +53,7 @@ const SliderDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Slider Component" header="Slider" description="Slider is a component to provide input with a drag handle." componentDocs={docs} apiDocs={[{ name: 'Slider', pathname: '/modules/slider.html' }]} />;
+    return <DocComponent title="React Slider Component" header="Slider" description="Slider is a component to provide input with a drag handle." componentDocs={docs} apiDocs={['Slider']} />;
 };
 
 export default SliderDemo;

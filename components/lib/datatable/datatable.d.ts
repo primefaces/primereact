@@ -22,7 +22,6 @@ type DataTableRowGroupFooterTemplateType<TValue extends DataTableValueArray> = R
 
 /**
  * Custom datatable header template options.
- * @group Misc
  */
 interface DataTableHeaderTemplateOptions<TValue extends DataTableValueArray> {
     /**
@@ -35,7 +34,6 @@ interface DataTableFooterTemplateOptions<TValue extends DataTableValueArray> ext
 
 /**
  * Custom datatable row group header template options.
- * @group Misc
  */
 interface DataTableRowGroupHeaderTemplateOptions<TValue extends DataTableValueArray> {
     /**
@@ -54,7 +52,6 @@ interface DataTableRowGroupHeaderTemplateOptions<TValue extends DataTableValueAr
 
 /**
  * Custom datatable row group footer template options.
- * @group Misc
  */
 interface DataTableRowGroupFooterTemplateOptions<T extends DataTableValueArray> extends DataTableRowGroupHeaderTemplateOptions<T> {
     /**
@@ -65,7 +62,6 @@ interface DataTableRowGroupFooterTemplateOptions<T extends DataTableValueArray> 
 
 /**
  * Custom datatable sort meta
- * @group Misc
  */
 interface DataTableSortMeta {
     /**
@@ -80,7 +76,6 @@ interface DataTableSortMeta {
 
 /**
  * Custom datatable filter metadata.
- * @group Misc
  */
 interface DataTableFilterMetaData {
     /**
@@ -95,7 +90,6 @@ interface DataTableFilterMetaData {
 
 /**
  * Custom datatable operator filter metadata.
- * @group Misc
  */
 interface DataTableOperatorFilterMetaData {
     /**
@@ -110,7 +104,6 @@ interface DataTableOperatorFilterMetaData {
 
 /**
  * Custom datatable filter meta.
- * @group Misc
  */
 interface DataTableFilterMeta {
     /**
@@ -121,7 +114,6 @@ interface DataTableFilterMeta {
 
 /**
  * Custom datatable expanded rows.
- * @group Misc
  */
 interface DataTableExpandedRows {
     [key: string]: boolean;
@@ -129,7 +121,6 @@ interface DataTableExpandedRows {
 
 /**
  * Custom datatable editing rows.
- * @group Misc
  */
 interface DataTableEditingRows {
     [key: string]: boolean;
@@ -548,7 +539,6 @@ interface DataTableRowReorderEvent<TValue extends DataTableValueArray> {
 /**
  * Options for the row expansion template
  * @see {@link DataTableProps.rowExpansionTemplate}
- * @group Misc
  */
 interface DataTableRowExpansionTemplate {
     /**
@@ -564,7 +554,6 @@ interface DataTableRowExpansionTemplate {
 /**
  * Custom row className options.
  * @see {@link DataTableProps.rowClassName}
- * @group Misc
  */
 interface DataTableRowClassNameOptions<TValue extends DataTableValueArray> {
     /**
@@ -576,7 +565,6 @@ interface DataTableRowClassNameOptions<TValue extends DataTableValueArray> {
 /**
  * Custom cell className options.
  * @see {@link DataTableProps.cellClassName}
- * @group Misc
  */
 interface DataTableCellClassNameOptions<TValue extends DataTableValueArray> {
     /**
@@ -604,7 +592,6 @@ interface DataTableCellClassNameOptions<TValue extends DataTableValueArray> {
 /**
  * Custom show selection element options.
  * @see {@link DataTableProps.showSelectionElement}
- * @group Misc
  */
 interface DataTableShowSelectionElementOptions<TValue extends DataTableValueArray> {
     /**
@@ -620,7 +607,6 @@ interface DataTableShowSelectionElementOptions<TValue extends DataTableValueArra
 /**
  * Custom show row reorder element options.
  * @see {@link DataTableProps.showRowReorderElement}
- * @group Misc
  */
 interface DataTableShowRowReorderElementOptions<TValue extends DataTableValueArray> {
     /**
@@ -636,7 +622,6 @@ interface DataTableShowRowReorderElementOptions<TValue extends DataTableValueArr
 /**
  * Custom row edit validator options.
  * @see {@link DataTableProps.rowEditValidator}
- * @group Misc
  */
 interface DataTableRowEditValidatorOptions<TValue extends DataTableValueArray> {
     /**
@@ -645,23 +630,22 @@ interface DataTableRowEditValidatorOptions<TValue extends DataTableValueArray> {
     props: DataTableProps<TValue>;
 }
 
+/**
+ * Custom value definition.
+ * @extends Record<string, any>
+ */
 interface DataTableValue extends Record<string, any> {}
 
+/**
+ * Custom value array definition.
+ * @extends Array<DataTableValue>
+ */
 interface DataTableValueArray extends Array<DataTableValue> {}
 
-/**
- * @group Misc
- */
 type DataTableRowData<TValueArray extends DataTableValueArray> = TValueArray extends Array<infer TValue> ? TValue : never;
 
-/**
- * @group Misc
- */
 type DataTableRowDataArray<TValue extends DataTableValueArray> = DataTableRowData<TValue>[];
 
-/**
- * @group Misc
- */
 type DataTableCellSelection<TValue extends DataTableValueArray> = {
     /**
      * Index of the cell.
@@ -697,9 +681,6 @@ type DataTableCellSelection<TValue extends DataTableValueArray> = {
     value: TValue[number][keyof TValue[number]];
 };
 
-/**
- * @group Misc
- */
 type DataTableSelection<TValue extends DataTableValueArray> = DataTableRowData<TValue> | DataTableRowDataArray<TValue> | DataTableCellSelection<TValue>;
 
 /**

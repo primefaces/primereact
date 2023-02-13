@@ -149,15 +149,7 @@ const CalendarDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React Calendar Component"
-            header="Calendar"
-            description="Calendar, also known as DatePicker, is a form component to work with dates."
-            componentDocs={docs}
-            apiDocs={[{ name: 'Calendar', pathname: '/modules/calendar.html' }]}
-        />
-    );
+    return <DocComponent title="React Calendar Component" header="Calendar" description="Calendar, also known as DatePicker, is a form component to work with dates." componentDocs={docs} apiDocs={['Calendar']} />;
 };
 
 export default CalendarDemo;

@@ -34,15 +34,7 @@ const BreadCrumbDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React BreadCrumb Component"
-            header="BreadCrumb"
-            description="Breadcrumb provides contextual information about page hierarchy."
-            componentDocs={docs}
-            apiDocs={[{ name: 'Breadcrumb', pathname: '/modules/breadcrumb.html' }]}
-        />
-    );
+    return <DocComponent title="React BreadCrumb Component" header="BreadCrumb" description="Breadcrumb provides contextual information about page hierarchy." componentDocs={docs} apiDocs={['Breadcrumb']} />;
 };
 
 export default BreadCrumbDemo;

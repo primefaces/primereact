@@ -40,7 +40,7 @@ const FieldsetDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Fieldset Component" header="Fieldset" description="Fieldset is a grouping component with a content toggle feature." componentDocs={docs} apiDocs={[{ name: 'Fieldset', pathname: '/modules/fieldset.html' }]} />;
+    return <DocComponent title="React Fieldset Component" header="Fieldset" description="Fieldset is a grouping component with a content toggle feature." componentDocs={docs} apiDocs={['Fieldset']} />;
 };
 
 export default FieldsetDemo;

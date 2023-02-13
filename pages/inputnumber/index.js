@@ -95,15 +95,7 @@ const InputNumberDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React InputNumber Component"
-            header="InputNumber"
-            description="InputNumber is an input component to provide numerical input."
-            componentDocs={docs}
-            apiDocs={[{ name: 'InputNumber', pathname: '/modules/inputnumber.html' }]}
-        />
-    );
+    return <DocComponent title="React InputNumber Component" header="InputNumber" description="InputNumber is an input component to provide numerical input." componentDocs={docs} apiDocs={['InputNumber']} />;
 };
 
 export default InputNumberDemo;

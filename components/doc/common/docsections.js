@@ -1,40 +1,30 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 import React from 'react';
-import { classNames } from '../../lib/utils/Utils';
+import { DocSectionText } from './docsectiontext';
 
 export function DocSections({ docs }) {
-    const router = useRouter();
+    const renderDocChildren = (doc, level = 2) => {
+        return (
+            <React.Fragment key={doc.id + '_' + level}>
+                <DocSectionText {...doc} level={level}>
+                    {doc.description ? <p>{doc.description}</p> : null}
+                </DocSectionText>
+                {doc.children.map((d) => {
+                    const { id, label, component, children } = d;
+                    const Component = component;
+
+                    return component ? <Component id={id} key={id} label={label} level={level + 1} /> : children ? renderDocChildren(d, level + 1) : null;
+                })}
+            </React.Fragment>
+        );
+    };
 
     const renderDocs = () => {
-        return docs.map((doc) => {
+        return docs.map((doc, i) => {
             const Comp = doc.component;
 
             return (
-                <section key={doc.label} className="py-3">
-                    {doc.children ? (
-                        <React.Fragment>
-                            <div id={doc.id}>
-                                <h2 className="doc-section-label" id={doc.id}>
-                                    {doc.label}
-                                    <Link href={router.basePath + router.pathname + '#' + doc.id}>
-                                        <a id={doc.id}>#</a>
-                                    </Link>
-                                </h2>
-                                <div className={classNames('doc-section-description')}>
-                                    <p>{doc.description || 'Section Content'}</p>
-                                </div>
-                            </div>
-                            {doc.children.map((comp, i) => {
-                                const { id, label, component } = comp;
-                                const Component = component;
-
-                                return <Component id={id} key={label} label={label} level="2" />;
-                            })}
-                        </React.Fragment>
-                    ) : (
-                        doc.component && <Comp id={doc.id} label={doc.label} />
-                    )}
+                <section key={doc.label + '_' + i} className="py-3">
+                    {doc.children ? renderDocChildren(doc) : doc.component && <Comp id={doc.id} label={doc.label} />}
                 </section>
             );
         });

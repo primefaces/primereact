@@ -16,7 +16,7 @@ const FaviconDemo = () => {
         }
     ];
 
-    return <DocComponent title="React useFavicon Hook" header="useFavicon" description="Controls the favicon of the page dynamically." componentDocs={docs} apiDocs={[{ name: 'useFavicon', pathname: '/functions/hooks.useFavicon.html' }]} />;
+    return <DocComponent title="React useFavicon Hook" header="useFavicon" description="Controls the favicon of the page dynamically." componentDocs={docs} apiDocs={['hooks.functions.useFavicon']} />;
 };
 
 export default FaviconDemo;

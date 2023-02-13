@@ -9,7 +9,6 @@ import { IconType } from '../utils';
 
 /**
  * Custom options type.
- * @group Misc
  */
 export type SelectItemOptionsType = SelectItem[] | any[];
 

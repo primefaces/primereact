@@ -39,7 +39,7 @@ const RippleDemo = () => {
 
     appContentContext.onRippleChange(true);
 
-    return <DocComponent title="React Ripple Component" header="Ripple" description="Ripple component adds ripple effect to the host element." componentDocs={docs} apiDocs={[{ name: 'Ripple', pathname: '/modules/ripple.html' }]} />;
+    return <DocComponent title="React Ripple Component" header="Ripple" description="Ripple component adds ripple effect to the host element." componentDocs={docs} apiDocs={['Ripple']} />;
 };
 
 export default RippleDemo;

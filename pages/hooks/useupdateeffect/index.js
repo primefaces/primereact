@@ -16,15 +16,7 @@ const UpdateEffectDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React useUpdateEffect Hook"
-            header="useUpdateEffect"
-            description="Executes a given callback when a stateful property is updated."
-            componentDocs={docs}
-            apiDocs={[{ name: 'useUpdateEffect', pathname: '/functions/hooks.useUpdateEffect.html' }]}
-        />
-    );
+    return <DocComponent title="React useUpdateEffect Hook" header="useUpdateEffect" description="Executes a given callback when a stateful property is updated." componentDocs={docs} apiDocs={['hooks.functions.useUpdateEffect']} />;
 };
 
 export default UpdateEffectDemo;

@@ -1,10 +1,11 @@
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/paginator/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/paginator/basicdoc';
-import { ContentDoc } from '../../components/doc/paginator/contentdoc';
-import { CustomDoc } from '../../components/doc/paginator/customdoc';
+import { ImagesDoc } from '../../components/doc/paginator/imagesdoc';
 import { ImportDoc } from '../../components/doc/paginator/importdoc';
+import { LayoutDoc } from '../../components/doc/paginator/layoutdoc';
 import { StyleDoc } from '../../components/doc/paginator/styledoc';
+import { TemplateDoc } from '../../components/doc/paginator/templatedoc';
 
 const PaginatorDemo = () => {
     const docs = [
@@ -19,14 +20,19 @@ const PaginatorDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'custom',
-            label: 'Custom Template',
-            component: CustomDoc
+            id: 'layout',
+            label: 'Layout',
+            component: LayoutDoc
         },
         {
-            id: 'content',
-            label: 'Left and Right Content',
-            component: ContentDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'images',
+            label: 'Images',
+            component: ImagesDoc
         },
         {
             id: 'style',
@@ -41,7 +47,13 @@ const PaginatorDemo = () => {
     ];
 
     return (
-        <DocComponent title="React Paginator Component" header="Paginator" description="Paginator is a generic widget to display content in paged format." componentDocs={docs} apiDocs={[{ name: 'Paginator', pathname: '/modules/paginator.html' }]} />
+        <DocComponent
+            title="React Paginator Component"
+            header="Paginator"
+            description="Paginator displays data in paged format and provides navigation between pages."
+            componentDocs={docs}
+            apiDocs={['Paginator']}
+        />
     );
 };
 

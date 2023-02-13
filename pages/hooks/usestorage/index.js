@@ -22,7 +22,7 @@ const StorageDemo = () => {
         }
     ];
 
-    return <DocComponent title="React useStorage Hook" header="useStorage" description="Syncs state to local or session storage." componentDocs={docs} apiDocs={[{ name: 'useStorage', pathname: '/functions/hooks.useStorage.html' }]} />;
+    return <DocComponent title="React useStorage Hook" header="useStorage" description="Syncs state to local or session storage." componentDocs={docs} apiDocs={['hooks.functions.useStorage']} />;
 };
 
 export default StorageDemo;

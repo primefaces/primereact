@@ -12,7 +12,6 @@ import { CSSTransitionProps } from '../csstransition';
 
 /**
  * Dialog break options
- * @group Misc
  */
 interface DialogBreakpoints {
     /**

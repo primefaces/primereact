@@ -35,7 +35,7 @@ const PickListDemo = () => {
         }
     ];
 
-    return <DocComponent title="React PickList Component" header="PickList" description="PickList is used to reorder items between different lists.." componentDocs={docs} apiDocs={[{ name: 'PickList', pathname: '/modules/picklist.html' }]} />;
+    return <DocComponent title="React PickList Component" header="PickList" description="PickList is used to reorder items between different lists.." componentDocs={docs} apiDocs={['PickList']} />;
 };
 
 export default PickListDemo;

@@ -14,7 +14,6 @@ import { FormEvent } from '../ts-helpers';
 
 /**
  * Custom panel header template options.
- * @group Misc
  */
 interface TreeSelectPanelHeaderTemplateOptions {
     /**
@@ -61,7 +60,6 @@ interface TreeSelectChangeEvent extends FormEvent<string | TreeSelectSelectionKe
 
 /**
  * Custom treeselect selection keys type
- * @group Misc
  */
 interface TreeSelectSelectionKeysType {
     /**
@@ -72,7 +70,6 @@ interface TreeSelectSelectionKeysType {
 
 /**
  * Custom checkbox selection key type
- * @group Misc
  */
 interface TreeSelectCheckboxSelectionKeyType {
     /**
@@ -103,7 +100,6 @@ interface TreeSelectEventNodeEvent {
 
 /**
  * Custom expanded keys type.
- * @group Misc
  */
 interface TreeSelectExpandedKeysType {
     /**
@@ -146,7 +142,6 @@ interface TreeSelectFilterValueChangeEvent {
 
 /**
  * Custom filter options.
- * @group Misc
  */
 interface TreeSelectFilterOptions {
     /**

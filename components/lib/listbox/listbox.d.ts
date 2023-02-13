@@ -14,7 +14,6 @@ import { VirtualScroller, VirtualScrollerProps } from '../virtualscroller';
 
 /**
  * Custom change target options.
- * @group Misc
  */
 interface ListBoxChangeTargetOptions {
     /**
@@ -77,7 +76,6 @@ interface ListBoxFilterValueChangeEvent {
 
 /**
  * Custom filter template options.
- * @group Misc
  */
 interface ListBoxFilterTemplateOptions {
     /**
@@ -124,7 +122,6 @@ interface ListBoxFilterTemplateOptions {
 
 /**
  * Custom filter options.
- * @group Misc
  */
 interface ListBoxFilterOptions {
     /**

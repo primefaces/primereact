@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Button } from '../../../lib/button/Button';
 import { useUnmountEffect } from '../../../lib/hooks/Hooks';
+import { Toast } from '../../../lib/toast/Toast';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 
 export function BasicDoc(props) {
     const [hidden, setHidden] = useState(false);
+    const toast = useRef(null);
 
     const DynamicBox = () => {
         useUnmountEffect(() => {
-            // eslint-disable-next-line no-console
-            console.log('Unmounted');
+            toast.current && toast.current.show({ severity: 'info', summary: 'Unmounted' });
         });
 
         return <div className="w-8rem h-8rem border-round bg-primary border-1 border-primary mb-3 flex justify-content-center align-items-center">Mounted</div>;
@@ -19,56 +20,62 @@ export function BasicDoc(props) {
     const code = {
         basic: `
 useUnmountEffect(() => {
-    console.log('Unmounted');
+    toast.current && toast.current.show({ severity: 'info', summary: 'Unmounted' });
 });
         `,
         javascript: `
-import React, { useState } from 'react'; 
+import React, { useRef, useState } from 'react';
 import { Button } from 'primereact/button';
 import { useUnmountEffect, useMountEffect } from 'primereact/hooks';
 
 export default function BasicDemo() {
     const [hidden, setHidden] = useState(false);
+    const toast = useRef(null);
 
     const DynamicBox = () => {
         useUnmountEffect(() => {
-            // eslint-disable-next-line no-console
-            console.log('Unmounted');
+            toast.current && toast.current.show({ severity: 'info', summary: 'Unmounted' });
         });
-    
+
         return <div className="w-8rem h-8rem border-round bg-primary border-1 border-primary mb-3 flex justify-content-center align-items-center">Mounted</div>;
     };
 
     return (
-        <div className="card flex flex-column align-items-center">
-            {!hidden ? <DynamicBox /> : <div className="w-8rem h-8rem border-round surface-card border-1 surface-border border-dashed mb-3 flex justify-content-center align-items-center">Unmounted</div>}
-            <Button label={hidden ? 'Mount' : 'Unmount'} onClick={() => setHidden(() => !hidden)} className="p-button-outlined w-10rem" />
-        </div>
+        <>
+            <Toast ref={toast} />
+            <div className="card flex flex-column align-items-center">
+                {!hidden ? <DynamicBox /> : <div className="w-8rem h-8rem border-round surface-card border-1 surface-border border-dashed mb-3 flex justify-content-center align-items-center">Unmounted</div>}
+                <Button label={hidden ? 'Mount' : 'Unmount'} onClick={() => setHidden(() => !hidden)} className="p-button-outlined w-10rem" />
+            </div>
+        </>
     )
 }
         `,
         typescript: `
-import React, { useState } from 'react'; 
+import React, { useRef, useState } from 'react';
 import { Button } from 'primereact/button';
 import { useUnmountEffect, useMountEffect } from 'primereact/hooks';
 
 export default function BasicDemo() {
     const [hidden, setHidden] = useState<boolean>(false);
+    const toast = useRef(null);
 
     const DynamicBox = () => {
         useUnmountEffect(() => {
-            // eslint-disable-next-line no-console
-            console.log('Unmounted');
+            toast.current && toast.current.show({ severity: 'info', summary: 'Unmounted' });
         });
-    
+
         return <div className="w-8rem h-8rem border-round bg-primary border-1 border-primary mb-3 flex justify-content-center align-items-center">Mounted</div>;
     };
 
     return (
-        <div className="card flex flex-column align-items-center">
-            {!hidden ? <DynamicBox /> : <div className="w-8rem h-8rem border-round surface-card border-1 surface-border border-dashed mb-3 flex justify-content-center align-items-center">Unmounted</div>}
-            <Button label={hidden ? 'Mount' : 'Unmount'} onClick={() => setHidden(() => !hidden)} className="p-button-outlined w-10rem" />
-        </div>
+        <>
+            <Toast ref={toast} />
+            <div className="card flex flex-column align-items-center">
+                {!hidden ? <DynamicBox /> : <div className="w-8rem h-8rem border-round surface-card border-1 surface-border border-dashed mb-3 flex justify-content-center align-items-center">Unmounted</div>}
+                <Button label={hidden ? 'Mount' : 'Unmount'} onClick={() => setHidden(() => !hidden)} className="p-button-outlined w-10rem" />
+            </div>
+        </>
     )
 }
         `
@@ -79,6 +86,7 @@ export default function BasicDemo() {
             <DocSectionText {...props}>
                 <p>A messages is displayed at browser console when the box is unmounted.</p>
             </DocSectionText>
+            <Toast ref={toast} />
             <div className="card flex flex-column align-items-center">
                 {!hidden ? <DynamicBox /> : <div className="w-8rem h-8rem border-round surface-card border-1 surface-border border-dashed mb-3 flex justify-content-center align-items-center">Unmounted</div>}
                 <Button label={hidden ? 'Mount' : 'Unmount'} onClick={() => setHidden(() => !hidden)} className="p-button-outlined w-10rem" />

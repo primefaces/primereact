@@ -84,7 +84,7 @@ const ChipsDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Chips Component" header="Chips" description="Chips is used to enter multiple values on an input field." componentDocs={docs} apiDocs={[{ name: 'Chips', pathname: '/modules/chips.html' }]} />;
+    return <DocComponent title="React Chips Component" header="Chips" description="Chips is used to enter multiple values on an input field." componentDocs={docs} apiDocs={['Chips']} />;
 };
 
 export default ChipsDemo;

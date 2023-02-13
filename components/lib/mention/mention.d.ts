@@ -12,7 +12,6 @@ import { CSSTransitionProps } from '../csstransition';
 import { InputTextarea } from '../inputtextarea';
 
 /**
- * @group Misc
  */
 interface MentionItemTemplateOptions {
     /**

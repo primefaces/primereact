@@ -16,7 +16,7 @@ const IntervalDemo = () => {
         }
     ];
 
-    return <DocComponent title="React useInterval Hook" header="useInterval" description="Executes a given callback at specified intervals." componentDocs={docs} apiDocs={[{ name: 'useInterval', pathname: '/functions/hooks.useInterval.html' }]} />;
+    return <DocComponent title="React useInterval Hook" header="useInterval" description="Executes a given callback at specified intervals." componentDocs={docs} apiDocs={['hooks.functions.useInterval']} />;
 };
 
 export default IntervalDemo;

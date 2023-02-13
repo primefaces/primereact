@@ -72,15 +72,7 @@ const CascadeSelectDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React CascadeSelect Component"
-            header="CascadeSelect"
-            description="CascadeSelect is a form component to select a value from a nested structure of options."
-            componentDocs={docs}
-            apiDocs={[{ name: 'CascadeSelect', pathname: '/modules/cascadeselect.html' }]}
-        />
-    );
+    return <DocComponent title="React CascadeSelect Component" header="CascadeSelect" description="CascadeSelect is a form component to select a value from a nested structure of options." componentDocs={docs} apiDocs={['CascadeSelect']} />;
 };
 
 export default CascadeSelectDemo;

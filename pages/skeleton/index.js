@@ -47,9 +47,7 @@ const SkeletonDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent title="React Skeleton Component" header="Skeleton" description="Skeleton is a placeholder to display instead of the actual content." componentDocs={docs} apiDocs={[{ name: 'Skeleton', pathname: '/modules/skeleton.html' }]} />
-    );
+    return <DocComponent title="React Skeleton Component" header="Skeleton" description="Skeleton is a placeholder to display instead of the actual content." componentDocs={docs} apiDocs={['Skeleton']} />;
 };
 
 export default SkeletonDemo;

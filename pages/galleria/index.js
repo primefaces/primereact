@@ -151,7 +151,7 @@ const GalleriaDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Gallery Component" header="Galleria" description="Galleria is a content gallery component." componentDocs={docs} apiDocs={[{ name: 'Galleria', pathname: '/modules/galleria.html' }]} />;
+    return <DocComponent title="React Gallery Component" header="Galleria" description="Galleria is a content gallery component." componentDocs={docs} apiDocs={['Galleria']} />;
 };
 
 export default GalleriaDemo;

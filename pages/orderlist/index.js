@@ -40,7 +40,7 @@ const OrderListDemo = () => {
         }
     ];
 
-    return <DocComponent title="React OrderList Component" header="OrderList" description="OrderList is used to sort a collection." componentDocs={docs} apiDocs={[{ name: 'OrderList', pathname: '/modules/orderlist.html' }]} />;
+    return <DocComponent title="React OrderList Component" header="OrderList" description="OrderList is used to sort a collection." componentDocs={docs} apiDocs={['OrderList']} />;
 };
 
 export default OrderListDemo;

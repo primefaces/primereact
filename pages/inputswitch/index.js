@@ -65,7 +65,7 @@ const InputSwitchDemo = () => {
         }
     ];
 
-    return <DocComponent title="React InputSwitch Component" header="InputSwitch" description="InputSwitch is used to select a boolean value." componentDocs={docs} apiDocs={[{ name: 'InputSwitch', pathname: '/modules/inputswitch.html' }]} />;
+    return <DocComponent title="React InputSwitch Component" header="InputSwitch" description="InputSwitch is used to select a boolean value." componentDocs={docs} apiDocs={['InputSwitch']} />;
 };
 
 export default InputSwitchDemo;

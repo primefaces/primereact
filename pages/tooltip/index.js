@@ -76,9 +76,7 @@ const TooltipDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent title="React Tooltip Component" header="Tooltip" description="Tooltip functionality is integrated within various PrimeReact components." componentDocs={docs} apiDocs={[{ name: 'Tooltip', pathname: '/modules/tooltip.html' }]} />
-    );
+    return <DocComponent title="React Tooltip Component" header="Tooltip" description="Tooltip functionality is integrated within various PrimeReact components." componentDocs={docs} apiDocs={['Tooltip']} />;
 };
 
 export default TooltipDemo;

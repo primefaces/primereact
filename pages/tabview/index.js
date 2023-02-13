@@ -64,18 +64,7 @@ const TabViewDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React Tabs Component"
-            header="TabView"
-            description="TabView is a container component to group content with tabs."
-            componentDocs={docs}
-            apiDocs={[
-                { name: 'TabView', pathname: '/modules/tabview.html' },
-                { name: 'TabPanel', pathname: '/classes/tabview.TabPanel.html' }
-            ]}
-        />
-    );
+    return <DocComponent title="React Tabs Component" header="TabView" description="TabView is a container component to group content with tabs." componentDocs={docs} apiDocs={['TabView', 'TabPanel']} />;
 };
 
 export default TabViewDemo;

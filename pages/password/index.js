@@ -90,7 +90,7 @@ const PasswordDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Password Component" header="Password" description="Password displays strength indicator for password fields." componentDocs={docs} apiDocs={[{ name: 'Password', pathname: '/modules/password.html' }]} />;
+    return <DocComponent title="React Password Component" header="Password" description="Password displays strength indicator for password fields." componentDocs={docs} apiDocs={['Password']} />;
 };
 
 export default PasswordDemo;

@@ -82,15 +82,7 @@ const SplitButtonDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React SplitButton Component"
-            header="SplitButton"
-            description="SplitButton groups a set of commands in an overlay with a default action item."
-            componentDocs={docs}
-            apiDocs={[{ name: 'SplitButton', pathname: '/modules/splitbutton.html' }]}
-        />
-    );
+    return <DocComponent title="React SplitButton Component" header="SplitButton" description="SplitButton groups a set of commands in an overlay with a default action item." componentDocs={docs} apiDocs={['SplitButton']} />;
 };
 
 export default SplitButtonDemo;

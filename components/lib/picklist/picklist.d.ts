@@ -54,7 +54,6 @@ interface PickListChangeEvent {
 
 /**
  * Custom filter template options.
- * @group Misc
  */
 interface PickListFilterTemplateOptions {
     /**
