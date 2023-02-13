@@ -32,7 +32,7 @@ export function TemplateDoc(props) {
         let label = <b>{node.label}</b>;
 
         if (node.url) {
-            label = <a href={node.url}>{node.label}</a>;
+            label = <a href={node.url} className="text-primary hover:underline font-semibold">{node.label}</a>;
         }
 
         return <span className={options.className}>{label}</span>;
@@ -40,13 +40,13 @@ export function TemplateDoc(props) {
 
     const code = {
         basic: `
-<Tree value={nodes} nodeTemplate={nodeTemplate} />
+<Tree value={nodes} nodeTemplate={nodeTemplate} className="w-full md:w-30rem" />
         `,
         javascript: `
 import React from 'react'; 
 import { Tree } from 'primereact/tree';
 
-export default function TemplateDoc() {
+export default function TemplateDemo() {
     const nodes = [
         {
             key: "0",
@@ -76,27 +76,26 @@ export default function TemplateDoc() {
         let label = <b>{node.label}</b>;
 
         if (node.url) {
-            label = <a href={node.url}>{node.label}</a>;
+            label = <a href={node.url} className="text-primary hover:underline font-semibold">{node.label}</a>;
         }
 
-        return (
-            <span className={options.className}>
-                {label}
-            </span>
-        )
+        return <span className={options.className}>{label}</span>;
     }
 
     return (
-        <Tree value={nodes} nodeTemplate={nodeTemplate} />
+        <div className="card flex justify-content-center">
+            <Tree value={nodes} nodeTemplate={nodeTemplate} className="w-full md:w-30rem" />
+        </div>
     )
 }
         `,
         typescript: `
 import React from 'react'; 
-import { Tree } from 'primereact/tree';
+import { Tree, TreeNodeTemplateOptions } from 'primereact/tree';
+import { TreeNode } from 'primereact/treenode';
 
-export default function TemplateDoc() {
-    const nodes = [
+export default function TemplateDemo() {
+    const nodes: TreeNode[] = [
         {
             key: "0",
             label: 'Installation',
@@ -121,22 +120,20 @@ export default function TemplateDoc() {
         }
     ];
 
-    const nodeTemplate = (node, options) => {
+    const nodeTemplate = (node: TreeNode, options: TreeNodeTemplateOptions) => {
         let label = <b>{node.label}</b>;
 
         if (node.url) {
-            label = <a href={node.url}>{node.label}</a>;
+            label = <a href={node.url} className="text-primary hover:underline font-semibold">{node.label}</a>;
         }
 
-        return (
-            <span className={options.className}>
-                {label}
-            </span>
-        )
+        return <span className={options.className}>{label}</span>;
     }
 
     return (
-        <Tree value={nodes} nodeTemplate={nodeTemplate} />
+        <div className="card flex justify-content-center">
+            <Tree value={nodes} nodeTemplate={nodeTemplate} className="w-full md:w-30rem" />
+        </div>
     )
 }
         `
@@ -145,11 +142,11 @@ export default function TemplateDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Tree Templating</p>
+                <p>Custom node content instead of a node label is defined with the <i>nodeTemplate</i> property.</p>
             </DocSectionText>
 
-            <div className="card">
-                <Tree value={nodes} nodeTemplate={nodeTemplate} />
+            <div className="card flex justify-content-center">
+                <Tree value={nodes} nodeTemplate={nodeTemplate} className="w-full md:w-30rem" />
             </div>
             <DocSectionCode code={code} />
         </>

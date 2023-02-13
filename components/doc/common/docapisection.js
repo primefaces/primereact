@@ -82,42 +82,40 @@ const Component = (props) => {
             };
 
             return (
-                <div className="card">
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>{headers.map((h) => h !== 'readonly' && h !== 'optional' && <th key={h}>{h}</th>)}</tr>
-                            </thead>
-                            <tbody>
-                                {data.map((d, i) => {
-                                    return (
-                                        <tr key={i}>
-                                            {Object.entries(d).map(
-                                                ([k, v], index) =>
-                                                    k !== 'readonly' &&
-                                                    k !== 'optional' && (
-                                                        <td key={index} className={classNames({ highlight: k === 'type' })}>
-                                                            {k === 'parameters'
-                                                                ? v.map((_v, i) => {
-                                                                      return (
-                                                                          <React.Fragment key={i}>
-                                                                              {_v.name}:{createContent(_v.type)}
-                                                                              <br />
-                                                                          </React.Fragment>
-                                                                      );
-                                                                  })
-                                                                : k !== 'description'
-                                                                ? createContent(v, k === 'name')
-                                                                : v}
-                                                        </td>
-                                                    )
-                                            )}
-                                        </tr>
-                                    );
-                                })}
-                            </tbody>
-                        </table>
-                    </div>
+                <div className="doc-tablewrapper">
+                    <table className="doc-table">
+                        <thead>
+                            <tr>{headers.map((h) => h !== 'readonly' && h !== 'optional' && <th key={h}>{h}</th>)}</tr>
+                        </thead>
+                        <tbody>
+                            {data.map((d, i) => {
+                                return (
+                                    <tr key={i}>
+                                        {Object.entries(d).map(
+                                            ([k, v], index) =>
+                                                k !== 'readonly' &&
+                                                k !== 'optional' && (
+                                                    <td key={index} className={classNames({ highlight: k === 'type' })}>
+                                                        {k === 'parameters'
+                                                            ? v.map((_v, i) => {
+                                                                    return (
+                                                                        <React.Fragment key={i}>
+                                                                            {_v.name}:{createContent(_v.type)}
+                                                                            <br />
+                                                                        </React.Fragment>
+                                                                    );
+                                                                })
+                                                            : k !== 'description'
+                                                            ? createContent(v, k === 'name')
+                                                            : v}
+                                                    </td>
+                                                )
+                                        )}
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
                 </div>
             );
         }
