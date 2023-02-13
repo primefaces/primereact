@@ -101,7 +101,7 @@ export default function Topbar(props) {
                         </a>
                     </li>
                     <li>
-                        <button type="button" className="p-button flex border-1 w-2rem h-2rem p-0 align-items-center justify-content-center transition-all transition-duration-300" onClick={onConfigButtonClick}>
+                        <button type="button" className="p-button flex border-1 w-2rem h-2rem p-0 align-items-center justify-content-center transition-all transition-duration-300 min-w-0" onClick={onConfigButtonClick}>
                             <i className="pi pi-cog"></i>
                         </button>
                     </li>

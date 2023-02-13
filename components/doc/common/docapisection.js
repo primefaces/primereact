@@ -49,7 +49,7 @@ const Component = (props) => {
                             <React.Fragment key={i}>
                                 {i !== 0 ? '|' : ''}
                                 {isLinkableOption ? (
-                                    <span id={id + '.' + sValue} className="doc-option">
+                                    <span id={id + '.' + sValue} className="doc-option-name">
                                         {sValue}
                                         <Link href={router.basePath + router.pathname + `#${id + '.' + sValue}`} target="_self">
                                             <a onClick={() => onClick(id + '.' + sValue)} className="doc-option-link">
@@ -68,7 +68,7 @@ const Component = (props) => {
                 const val = value && value.includes('": "') ? value.replace(/['"]+/g, '').replace(/\.,/gm, '.') : value;
 
                 return isLinkableOption ? (
-                    <span id={id + '.' + val} className="doc-option">
+                    <span id={id + '.' + val} className="doc-option-name">
                         {val}
                         <Link href={router.basePath + router.pathname + `#${id + '.' + val}`} target="_self">
                             <a onClick={() => onClick(id + '.' + val)} className="doc-option-link">
@@ -95,7 +95,7 @@ const Component = (props) => {
                                             ([k, v], index) =>
                                                 k !== 'readonly' &&
                                                 k !== 'optional' && (
-                                                    <td key={index} className={classNames({ highlight: k === 'type' })}>
+                                                    <td key={index} className={classNames({ 'doc-option-type': k === 'type', 'doc-option-default': k === 'defaultValue' })}>
                                                         {k === 'parameters'
                                                             ? v.map((_v, i) => {
                                                                     return (

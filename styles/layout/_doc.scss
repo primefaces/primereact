@@ -71,7 +71,6 @@
     scroll-margin-top: 6.5rem;
 
     > a {
-        /*font-size: 1.25rem;*/
         color: var(--primary-color);
         opacity: 0.7;
         margin-left: 1rem;
@@ -91,30 +90,48 @@
 }
 
 .doc-section-description {
-    font-size: 1.125rem;
-    color: var(--surface-800);
-
-    i {
-        background-color: var(--primary-100);
-        color: var(--primary-900);
-        border-radius: 6px;
-        padding: 2px 6px;
-        font-size: 0.875rem;
-        font-weight: 600;
-        font-style: normal;
-    }
-
-    a {
-        color: var(--primary-color);
-        font-weight: 600;
-
-        &:hover {
-            text-decoration: underline;
+    > p {
+        font-size: 1.125rem;
+        color: var(--surface-800);
+    
+        i {
+            border-radius: 6px;
+            padding: 2px 6px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            font-style: normal;
+        }
+    
+        a {
+            color: var(--primary-color);
+            font-weight: 600;
+    
+            &:hover {
+                text-decoration: underline;
+            }
         }
     }
+}
 
-    &.main {
-        margin-bottom: 1rem;
+.layout-wrapper-light {
+    .doc-section-description {
+        > p {
+            i {
+                background-color: var(--primary-100);
+                color: var(--primary-900);
+            }
+        }
+    }
+}
+
+.layout-wrapper-dark {
+    .doc-section-description {
+        > p {
+            i {
+                background-color: var(--highlight-bg);
+                color: var(--highlight-text-color);
+            }
+        }
     }
 }
 
@@ -238,22 +255,40 @@
             white-space: pre-wrap;
             line-height: 1.5;
 
-            &:first-child {
+            &.doc-option-type {
                 font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, Liberation Mono, monospace;
-                font-weight: 700;
-                color: var(--text-color-secondary);
+                color: var(--primary-500);
+
+                > a {
+                    color: var(--primary-500);
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
             }
 
-            &:nth-child(2):not(:last-child),
-            &.highlight {
+            &.doc-option-default {
                 font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, Liberation Mono, monospace;
                 color: var(--primary-color);
-                font-weight: 600;
             }
 
-            .doc-option {
+            &:first-child {
+                color: var(--primary-color);
+                font-weight: 700;
+                font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, Liberation Mono, monospace;
+            }
+
+            .doc-option-name, > i {
+                font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, Liberation Mono, monospace;
                 position: relative;
                 scroll-margin-top: 6.5rem;
+                background-color: var(--highlight-bg);
+                color: var(--highlight-text-color);
+                border-radius: 6px;
+                padding: 2px 6px;
+                font-weight: 600;
+                font-style: normal;
 
                 .doc-option-link {
                     position: absolute;
@@ -267,7 +302,7 @@
             }
 
             &:hover {
-                .doc-option {
+                .doc-option-name {
                     .doc-option-link {
                         display: inline;
 
