@@ -7,7 +7,7 @@ import { Paginator } from '../../lib/paginator/Paginator';
 import { Ripple } from '../../lib/ripple/Ripple';
 import { Slider } from '../../lib/slider/Slider';
 import { Tooltip } from '../../lib/tooltip/Tooltip';
-import { classNames } from '../../lib/utils/utils';
+import { classNames } from '../../lib/utils/Utils';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
