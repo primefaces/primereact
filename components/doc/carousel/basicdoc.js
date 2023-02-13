@@ -10,13 +10,13 @@ export function BasicDoc(props) {
     const responsiveOptions = [
         {
             breakpoint: '1199px',
-            numVisible: 3,
-            numScroll: 3
+            numVisible: 1,
+            numScroll: 1
         },
         {
             breakpoint: '991px',
             numVisible: 2,
-            numScroll: 2
+            numScroll: 1
         },
         {
             breakpoint: '767px',
@@ -31,20 +31,17 @@ export function BasicDoc(props) {
 
     const productTemplate = (product) => {
         return (
-            <div className="product-item">
-                <div className="product-item-content">
-                    <div className="mb-3">
-                        <img src={`https://primefaces.org/cdn/primereact/images/product/${product.image}`} alt={product.name} className="product-image" />
-                    </div>
-                    <div>
-                        <h4 className="mb-1">{product.name}</h4>
-                        <h6 className="mt-0 mb-3">${product.price}</h6>
-                        <span className={`product-badge status-${product.inventoryStatus.toLowerCase()}`}>{product.inventoryStatus}</span>
-                        <div className="car-buttons mt-5">
-                            <Button icon="pi pi-search" className="p-button p-button-rounded mr-2" />
-                            <Button icon="pi pi-star-fill" className="p-button-success p-button-rounded mr-2" />
-                            <Button icon="pi pi-cog" className="p-button-help p-button-rounded" />
-                        </div>
+            <div className="border-1 surface-border border-round m-2 text-center py-5 px-3">
+                <div className="mb-3">
+                    <img src={`https://primefaces.org/cdn/primereact/images/product/${product.image}`} alt={product.name} className="w-6 shadow-2" />
+                </div>
+                <div>
+                    <h4 className="mb-1">{product.name}</h4>
+                    <h6 className="mt-0 mb-3">${product.price}</h6>
+                    <span className={`product-badge border-round status-${product.inventoryStatus.toLowerCase()}`}>{product.inventoryStatus}</span>
+                    <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
+                        <Button icon="pi pi-search" className="p-button p-button-rounded" />
+                        <Button icon="pi pi-star-fill" className="p-button-success p-button-rounded" />
                     </div>
                 </div>
             </div>
@@ -66,13 +63,13 @@ export default function BasicDemo() {
     const responsiveOptions = [
         {
             breakpoint: '1199px',
-            numVisible: 3,
-            numScroll: 3
+            numVisible: 1,
+            numScroll: 1
         },
         {
             breakpoint: '991px',
             numVisible: 2,
-            numScroll: 2
+            numScroll: 1
         },
         {
             breakpoint: '767px',
@@ -87,20 +84,17 @@ export default function BasicDemo() {
 
     const productTemplate = (product) => {
         return (
-            <div className="product-item">
-                <div className="product-item-content">
-                    <div className="mb-3">
-                        <img src={\`https://primefaces.org/cdn/primereact/images/product/\${product.image}\`} alt={product.name} className="product-image" />
-                    </div>
-                    <div>
-                        <h4 className="mb-1">{product.name}</h4>
-                        <h6 className="mt-0 mb-3">\${product.price}</h6>
-                        <span className={\`product-badge status-\${product.inventoryStatus.toLowerCase()}\`}>{product.inventoryStatus}</span>
-                        <div className="car-buttons mt-5">
-                            <Button icon="pi pi-search" className="p-button p-button-rounded mr-2" />
-                            <Button icon="pi pi-star-fill" className="p-button-success p-button-rounded mr-2" />
-                            <Button icon="pi pi-cog" className="p-button-help p-button-rounded" />
-                        </div>
+            <div className="border-1 surface-border border-round m-2 text-center py-5 px-3">
+                <div className="mb-3">
+                    <img src={\`https://primefaces.org/cdn/primereact/images/product/\${product.image}\`} alt={product.name} className="w-6 shadow-2" />
+                </div>
+                <div>
+                    <h4 className="mb-1">{product.name}</h4>
+                    <h6 className="mt-0 mb-3">\${product.price}</h6>
+                    <span className={\`product-badge border-round status-\${product.inventoryStatus.toLowerCase()}\`}>{product.inventoryStatus}</span>
+                    <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
+                        <Button icon="pi pi-search" className="p-button p-button-rounded" />
+                        <Button icon="pi pi-star-fill" className="p-button-success p-button-rounded" />
                     </div>
                 </div>
             </div>
@@ -125,13 +119,13 @@ export default function BasicDemo() {
     const responsiveOptions = [
         {
             breakpoint: '1199px',
-            numVisible: 3,
-            numScroll: 3
+            numVisible: 1,
+            numScroll: 1
         },
         {
             breakpoint: '991px',
             numVisible: 2,
-            numScroll: 2
+            numScroll: 1
         },
         {
             breakpoint: '767px',
@@ -146,20 +140,17 @@ export default function BasicDemo() {
 
     const productTemplate = (product) => {
         return (
-            <div className="product-item">
-                <div className="product-item-content">
-                    <div className="mb-3">
-                        <img src={\`https://primefaces.org/cdn/primereact/images/product/\${product.image}\`} alt={product.name} className="product-image" />
-                    </div>
-                    <div>
-                        <h4 className="mb-1">{product.name}</h4>
-                        <h6 className="mt-0 mb-3">\${product.price}</h6>
-                        <span className={\`product-badge status-\${product.inventoryStatus.toLowerCase()}\`}>{product.inventoryStatus}</span>
-                        <div className="car-buttons mt-5">
-                            <Button icon="pi pi-search" className="p-button p-button-rounded mr-2" />
-                            <Button icon="pi pi-star-fill" className="p-button-success p-button-rounded mr-2" />
-                            <Button icon="pi pi-cog" className="p-button-help p-button-rounded" />
-                        </div>
+            <div className="border-1 surface-border border-round m-2 text-center py-5 px-3">
+                <div className="mb-3">
+                    <img src={\`https://primefaces.org/cdn/primereact/images/product/\${product.image}\`} alt={product.name} className="w-6 shadow-2" />
+                </div>
+                <div>
+                    <h4 className="mb-1">{product.name}</h4>
+                    <h6 className="mt-0 mb-3">\${product.price}</h6>
+                    <span className={\`product-badge border-round status-\${product.inventoryStatus.toLowerCase()}\`}>{product.inventoryStatus}</span>
+                    <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
+                        <Button icon="pi pi-search" className="p-button p-button-rounded" />
+                        <Button icon="pi pi-star-fill" className="p-button-success p-button-rounded" />
                     </div>
                 </div>
             </div>

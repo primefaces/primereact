@@ -2,7 +2,11 @@ import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/dataview/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/dataview/basicdoc';
 import { ImportDoc } from '../../components/doc/dataview/importdoc';
-import { LazyDataViewDoc } from '../../components/doc/dataview/lazydoc';
+import { LayoutDoc } from '../../components/doc/dataview/layoutdoc';
+import { LoadingDoc } from '../../components/doc/dataview/loadingdoc';
+import { PaginationDoc } from '../../components/doc/dataview/paginationdoc';
+import { PrimeFlexDoc } from '../../components/doc/dataview/primeflexdoc';
+import { SortingDoc } from '../../components/doc/dataview/sortingdoc';
 import { StyleDoc } from '../../components/doc/dataview/styledoc';
 
 const DataViewDemo = () => {
@@ -13,14 +17,34 @@ const DataViewDemo = () => {
             component: ImportDoc
         },
         {
+            id: 'primeflex',
+            label: 'PrimeFlex',
+            component: PrimeFlexDoc
+        },
+        {
             id: 'basic',
             label: 'Basic',
             component: BasicDoc
         },
         {
-            id: 'lazy',
-            label: 'Lazy',
-            component: LazyDataViewDoc
+            id: 'pagination',
+            label: 'Pagination',
+            component: PaginationDoc
+        },
+        {
+            id: 'sorting',
+            label: 'Sorting',
+            component: SortingDoc
+        },
+        {
+            id: 'layout',
+            label: 'Layout',
+            component: LayoutDoc
+        },
+        {
+            id: 'loading',
+            label: 'Loading',
+            component: LoadingDoc
         },
         {
             id: 'style',

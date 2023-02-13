@@ -1,9 +1,11 @@
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/organizationchart/accessibilitydoc';
-import { AdvancedDoc } from '../../components/doc/organizationchart/advanceddoc';
 import { BasicDoc } from '../../components/doc/organizationchart/basicdoc';
+import { ColoredDoc } from '../../components/doc/organizationchart/coloreddoc';
 import { ImportDoc } from '../../components/doc/organizationchart/importdoc';
+import { SelectionDoc } from '../../components/doc/organizationchart/selectiondoc';
 import { StyleDoc } from '../../components/doc/organizationchart/styledoc';
+import { TemplateDoc } from '../../components/doc/organizationchart/templatedoc';
 
 const OrganizationChartDemo = () => {
     const docs = [
@@ -18,9 +20,19 @@ const OrganizationChartDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'advanced',
-            label: 'Advanced',
-            component: AdvancedDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'selection',
+            label: 'Selection',
+            component: SelectionDoc
+        },
+        {
+            id: 'colored',
+            label: 'Colored',
+            component: ColoredDoc
         },
         {
             id: 'style',
@@ -36,7 +48,7 @@ const OrganizationChartDemo = () => {
 
     return (
         <DocComponent
-            title="React OrganizationChart Component"
+            title="React Organization Chart Component"
             header="OrganizationChart"
             description="OrganizationChart visualizes hierarchical organization data."
             componentDocs={docs}

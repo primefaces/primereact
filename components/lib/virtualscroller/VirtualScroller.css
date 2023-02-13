@@ -44,3 +44,7 @@
 .p-virtualscroller-loading-icon {
     font-size: 2rem;
 }
+
+.p-horizontal-scroll > .p-virtualscroller-content {
+    display: flex;
+}

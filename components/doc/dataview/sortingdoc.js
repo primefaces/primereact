@@ -2,13 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
 import { Button } from '../../lib/button/Button';
 import { DataView } from '../../lib/dataview/DataView';
+import { Dropdown } from '../../lib/dropdown/Dropdown';
 import { Rating } from '../../lib/rating/Rating';
 import { Tag } from '../../lib/tag/Tag';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function BasicDoc(props) {
+export function SortingDoc(props) {
     const [products, setProducts] = useState([]);
+    const [sortKey, setSortKey] = useState('');
+    const [sortOrder, setSortOrder] = useState(0);
+    const [sortField, setSortField] = useState('');
+    const sortOptions = [
+        { label: 'Price High to Low', value: '!price' },
+        { label: 'Price Low to High', value: 'price' }
+    ];
 
     useEffect(() => {
         ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 5)));
@@ -28,6 +36,24 @@ export function BasicDoc(props) {
             default:
                 return null;
         }
+    };
+
+    const onSortChange = (event) => {
+        const value = event.value;
+
+        if (value.indexOf('!') === 0) {
+            setSortOrder(-1);
+            setSortField(value.substring(1, value.length));
+            setSortKey(value);
+        } else {
+            setSortOrder(1);
+            setSortField(value);
+            setSortKey(value);
+        }
+    };
+
+    const header = () => {
+        return <Dropdown options={sortOptions} value={sortKey} optionLabel="label" placeholder="Sort By Price" onChange={onSortChange} className="w-full sm:w-14rem" />;
     };
 
     const itemTemplate = (product) => {
@@ -59,18 +85,26 @@ export function BasicDoc(props) {
 
     const code = {
         basic: `
-<DataView value={products} itemTemplate={itemTemplate} />
+<DataView value={products} itemTemplate={itemTemplate} header={header()} sortField={sortField} sortOrder={sortOrder} />
         `,
         javascript: `
 import React, { useState, useEffect } from 'react';
 import { ProductService } from './service/ProductService';
 import { Button } from 'primereact/button';
 import { DataView } from 'primereact/dataview';
+import { Dropdown } from 'primereact/dropdown';
 import { Rating } from 'primereact/rating';
 import { Tag } from 'primereact/tag';
 
-export default function BasicDemo() {
+export default function SortingDemo() {
     const [products, setProducts] = useState([]);
+    const [sortKey, setSortKey] = useState('');
+    const [sortOrder, setSortOrder] = useState(0);
+    const [sortField, setSortField] = useState('');
+    const sortOptions = [
+        { label: 'Price High to Low', value: '!price' },
+        { label: 'Price Low to High', value: 'price' }
+    ];
 
     useEffect(() => {
         ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 5)));
@@ -90,6 +124,24 @@ export default function BasicDemo() {
             default:
                 return null;
         }
+    };
+
+    const onSortChange = (event) => {
+        const value = event.value;
+
+        if (value.indexOf('!') === 0) {
+            setSortOrder(-1);
+            setSortField(value.substring(1, value.length));
+            setSortKey(value);
+        } else {
+            setSortOrder(1);
+            setSortField(value);
+            setSortKey(value);
+        }
+    };
+
+    const header = () => {
+        return <Dropdown options={sortOptions} value={sortKey} optionLabel="label" placeholder="Sort By Price" onChange={onSortChange} className="w-full sm:w-14rem" />;
     };
 
     const itemTemplate = (product) => {
@@ -121,7 +173,7 @@ export default function BasicDemo() {
 
     return (
         <div className="card">
-            <DataView value={products} itemTemplate={itemTemplate} />
+            <DataView value={products} itemTemplate={itemTemplate} header={header()} sortField={sortField} sortOrder={sortOrder} />
         </div>
     )
 }
@@ -131,6 +183,7 @@ import React, { useState, useEffect } from 'react';
 import { ProductService } from './service/ProductService';
 import { Button } from 'primereact/button';
 import { DataView } from 'primereact/dataview';
+import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 import { Rating } from 'primereact/rating';
 import { Tag } from 'primereact/tag';
 
@@ -147,8 +200,20 @@ interface Product {
     rating: number;
 }
 
-export default function BasicDemo() {
-    const [products, setProducts] = useState<Product[]>([]);
+interface SortOption {
+    label: string;
+    value: string;
+}
+
+export default function SortingDemo() {
+    const [products, setProducts] = useState<Product>([]);
+    const [sortKey, setSortKey] = useState<string>('');
+    const [sortOrder, setSortOrder] = useState<number>(0);
+    const [sortField, setSortField] = useState<string>('');
+    const sortOptions: SortOption[] = [
+        { label: 'Price High to Low', value: '!price' },
+        { label: 'Price Low to High', value: 'price' }
+    ];
 
     useEffect(() => {
         ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 5)));
@@ -168,6 +233,24 @@ export default function BasicDemo() {
             default:
                 return null;
         }
+    };
+
+    const onSortChange = (event: DropdownChangeEvent) => {
+        const value = event.value;
+
+        if (value.indexOf('!') === 0) {
+            setSortOrder(-1);
+            setSortField(value.substring(1, value.length));
+            setSortKey(value);
+        } else {
+            setSortOrder(1);
+            setSortField(value);
+            setSortKey(value);
+        }
+    };
+
+    const header = () => {
+        return <Dropdown options={sortOptions} value={sortKey} optionLabel="label" placeholder="Sort By Price" onChange={onSortChange} className="w-full sm:w-14rem" />;
     };
 
     const itemTemplate = (product: Product) => {
@@ -199,7 +282,7 @@ export default function BasicDemo() {
 
     return (
         <div className="card">
-            <DataView value={products} itemTemplate={itemTemplate} />
+            <DataView value={products} itemTemplate={itemTemplate} header={header()} sortField={sortField} sortOrder={sortOrder} />
         </div>
     )
 }
@@ -226,12 +309,11 @@ export default function BasicDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    DataView requires a <i>value</i> to display along with an <i>itemTemplate</i> that receives an object in the collection to return content. The root element should have the PrimeFlex Grid classes e.g. col-12 to define how items are
-                    displayed.
+                    Built-in sorting is controlled by bindings <i>sortField</i> and <i>sortField</i> properties from a custom UI.
                 </p>
             </DocSectionText>
             <div className="card">
-                <DataView value={products} itemTemplate={itemTemplate} />
+                <DataView value={products} itemTemplate={itemTemplate} header={header()} sortField={sortField} sortOrder={sortOrder} />
             </div>
             <DocSectionCode code={code} service={['ProductService']} />
         </>

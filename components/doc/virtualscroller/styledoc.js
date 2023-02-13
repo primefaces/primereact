@@ -1,5 +1,5 @@
-import { DocSectionText } from '../common/docsectiontext';
 import Link from 'next/link';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function StyleDoc() {
     return (
@@ -29,6 +29,14 @@ export function StyleDoc() {
                         <tr>
                             <td>p-virtualscroller-loader</td>
                             <td>Loader element.</td>
+                        </tr>
+                        <tr>
+                            <td>p-virtualscroller-both</td>
+                            <td>Container element when horizontal and vertical scrolling enabled.</td>
+                        </tr>
+                        <tr>
+                            <td>p-virtualscroller-horizontal</td>
+                            <td>Container element when horizontal orientation.</td>
                         </tr>
                     </tbody>
                 </table>

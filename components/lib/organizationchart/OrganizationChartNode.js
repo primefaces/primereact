@@ -112,7 +112,7 @@ export const OrganizationChartNode = React.memo((props) => {
         return (
             <tr>
                 <td colSpan={colspan}>
-                    <div className={nodeClassName} onClick={(e) => onNodeClick(e, node)}>
+                    <div className={nodeClassName} style={node.style} onClick={(e) => onNodeClick(e, node)}>
                         {label}
                         {toggler}
                     </div>

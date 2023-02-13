@@ -4,7 +4,7 @@ import { VirtualScroller } from '../../lib/virtualscroller/VirtualScroller';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function BasicDoc(props) {
+export function HorizontalDoc(props) {
     const [items] = useState(Array.from({ length: 100000 }).map((_, i) => `Item #${i}`));
 
     const itemTemplate = (item, options) => {
@@ -13,7 +13,7 @@ export function BasicDoc(props) {
         });
 
         return (
-            <div className={className} style={{ height: options.props.itemSize + 'px' }}>
+            <div className={className} style={{ width: options.props.itemSize + 'px', writingMode: 'vertical-lr' }}>
                 {item}
             </div>
         );
@@ -21,7 +21,7 @@ export function BasicDoc(props) {
 
     const code = {
         basic: `
-<VirtualScroller items={items} itemSize={50} itemTemplate={itemTemplate} 
+<VirtualScroller items={items} itemSize={50} itemTemplate={itemTemplate} orientation="horizontal"
     className="border-1 surface-border border-round" style={{ width: '200px', height: '200px' }} />
         `,
         javascript: `
@@ -29,7 +29,7 @@ import React, { useState } from 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { classNames } from 'primereact/utils';
 
-export default function BasicDemo() {
+export default function HorizontalDemo() {
     const [items] = useState(Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`));
 
     const itemTemplate = (item, options) => {
@@ -38,7 +38,7 @@ export default function BasicDemo() {
         });
 
         return (
-            <div className={className} style={{ height: options.props.itemSize + 'px' }}>
+            <div className={className} style={{ width: options.props.itemSize + 'px', writingMode: 'vertical-lr' }}>
                 {item}
             </div>
         );
@@ -46,7 +46,7 @@ export default function BasicDemo() {
 
     return ( 
         <div className="card flex justify-content-center">
-            <VirtualScroller items={items} itemSize={50} itemTemplate={itemTemplate} className="border-1 surface-border border-round" style={{ width: '200px', height: '200px' }} />
+            <VirtualScroller items={items} itemSize={50} itemTemplate={itemTemplate} orientation="horizontal" className="border-1 surface-border border-round" style={{ width: '200px', height: '200px' }} />
         </div>
     );
 }
@@ -56,7 +56,7 @@ import React, { useState } from 'react';
 import { VirtualScroller, VirtualScrollerTemplateOptions } from 'primereact/virtualscroller';
 import { classNames } from 'primereact/utils';
 
-export default function BasicDemo() {
+export default function HorizontalDemo() {
     const [items] = useState<string[]>(Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`));
 
     const itemTemplate = (item: string, options: VirtualScrollerTemplateOptions) => {
@@ -65,7 +65,7 @@ export default function BasicDemo() {
         });
 
         return (
-            <div className={className} style={{ height: options.props.itemSize + 'px' }}>
+            <div className={className} style={{ width: options.props.itemSize + 'px', writingMode: 'vertical-lr' }}>
                 {item}
             </div>
         );
@@ -73,7 +73,7 @@ export default function BasicDemo() {
 
     return ( 
         <div className="card flex justify-content-center">
-            <VirtualScroller items={items} itemSize={50} itemTemplate={itemTemplate} className="border-1 surface-border border-round" style={{ width: '200px', height: '200px' }} />
+            <VirtualScroller items={items} itemSize={50} itemTemplate={itemTemplate} orientation="horizontal" className="border-1 surface-border border-round" style={{ width: '200px', height: '200px' }} />
         </div>
     );
 }
@@ -84,12 +84,11 @@ export default function BasicDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    VirtualScroller requires <i>items</i> as the data to display, <i>itemSize</i> for the dimensions of an item and <i>itemTemplate</i> to define the content per item. Size of the viewport is configured using
-                    <i>scrollWidth</i>, <i>scrollHeight</i> properties directly or with CSS <i>width</i> and <i>height</i> styles.
+                    Setting <i>orientation</i> to <i>horizontal</i> enables scrolling horizontally. In this case, the <i>itemSize</i> should refer to the width of an item.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <VirtualScroller items={items} itemSize={50} itemTemplate={itemTemplate} className="border-1 surface-border border-round" style={{ width: '200px', height: '200px' }} />
+                <VirtualScroller items={items} itemSize={50} itemTemplate={itemTemplate} orientation="horizontal" className="border-1 surface-border border-round" style={{ width: '200px', height: '200px' }} />
             </div>
             <DocSectionCode code={code} />
         </>
