@@ -2,7 +2,7 @@
  *
  * Password displays strength indicator for password fields.
  *
- * [Live Demo](https://www.primefaces.org/primereact/password/)
+ * [Live Demo](https://www.primereact.org/password/)
  *
  * @module password
  *
@@ -169,7 +169,7 @@ export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputH
  *
  * _Password displays strength indicator for password fields._
  *
- * [Live Demo](https://www.primefaces.org/primereact/password/)
+ * [Live Demo](https://www.primereact.org/password/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

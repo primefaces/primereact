@@ -2,7 +2,7 @@
  *
  * InputMask component is used to enter input in a certain format such as numeric, date, currency, email and phone.
  *
- * [Live Demo](https://www.primefaces.org/primereact/inputmask/)
+ * [Live Demo](https://www.primereact.org/inputmask/)
  *
  * @module inputmask
  *
@@ -116,7 +116,7 @@ export interface InputMaskProps extends Omit<InputTextProps, 'onChange'> {
  *
  * _InputMask component is used to enter input in a certain format such as numeric, date, currency, email and phone._
  *
- * [Live Demo](https://www.primefaces.org/primereact/inputmask/)
+ * [Live Demo](https://www.primereact.org/inputmask/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

@@ -2,7 +2,7 @@
  *
  * When pressed, a floating action button can display multiple primary actions that can be performed on a page.
  *
- * [Live Demo](https://www.primefaces.org/primereact/speeddial/)
+ * [Live Demo](https://www.primereact.org/speeddial/)
  *
  * @module speeddial
  *
@@ -154,7 +154,7 @@ export interface SpeedDialProps extends Omit<React.DetailedHTMLProps<React.HTMLA
  *
  * _When pressed, a floating action button can display multiple primary actions that can be performed on a page._
  *
- * [Live Demo](https://www.primefaces.org/primereact/speeddial/)
+ * [Live Demo](https://www.primereact.org/speeddial/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

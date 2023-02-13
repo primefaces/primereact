@@ -2,7 +2,7 @@
  *
  * StyleClass manages css classes declaratively to during enter/leave animations or just to toggle classes on an element.
  *
- * [Live Demo](https://www.primefaces.org/primereact/styleclass)
+ * [Live Demo](https://www.primereact.org/styleclass)
  *
  * @module styleclass
  *
@@ -67,7 +67,7 @@ export interface StyleClassProps {
  *
  * _StyleClass manages css classes declaratively to during enter/leave animations or just to toggle classes on an element._
  *
- * [Live Demo](https://www.primefaces.org/primereact/styleclass/)
+ * [Live Demo](https://www.primereact.org/styleclass/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

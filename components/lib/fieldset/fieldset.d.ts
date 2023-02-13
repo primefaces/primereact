@@ -2,7 +2,7 @@
  *
  * Fieldset is an input component that provides real-time suggestions when being typed.
  *
- * [Live Demo](https://www.primefaces.org/primereact/fieldset/)
+ * [Live Demo](https://www.primereact.org/fieldset/)
  *
  * @module fieldset
  *
@@ -82,7 +82,7 @@ export interface FieldsetProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
  *
  * _Fieldset is an input component that provides real-time suggestions when being typed._
  *
- * [Live Demo](https://www.primefaces.org/primereact/fieldset/)
+ * [Live Demo](https://www.primereact.org/fieldset/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

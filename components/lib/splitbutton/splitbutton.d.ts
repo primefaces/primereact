@@ -2,7 +2,7 @@
  *
  * SplitButton groups a set of commands in an overlay with a default command.
  *
- * [Live Demo](https://www.primefaces.org/primereact/splitbutton/)
+ * [Live Demo](https://www.primereact.org/splitbutton/)
  *
  * @module splitbutton
  *
@@ -124,7 +124,7 @@ export interface SplitButtonProps extends Omit<React.DetailedHTMLProps<React.HTM
  *
  * _SplitButton groups a set of commands in an overlay with a default command._
  *
- * [Live Demo](https://www.primefaces.org/primereact/splitbutton/)
+ * [Live Demo](https://www.primereact.org/splitbutton/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

@@ -2,7 +2,7 @@
  *
  * DataTable displays data in tabular format.
  *
- * [Live Demo](https://www.primefaces.org/primereact/datatable/)
+ * [Live Demo](https://www.primereact.org/datatable/)
  *
  * @module datatable
  *
@@ -1322,7 +1322,7 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
  *
  * _DataTable displays data in tabular format._
  *
- * [Live Demo](https://www.primefaces.org/primereact/datatable/)
+ * [Live Demo](https://www.primereact.org/datatable/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

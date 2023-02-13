@@ -2,7 +2,7 @@
  *
  * Inplace provides an easy to do editing and display at the same time where clicking the output displays the actual content.
  *
- * [Live Demo](https://www.primefaces.org/primereact/inplace)
+ * [Live Demo](https://www.primereact.org/inplace)
  *
  * Helper Components:
  *
@@ -82,7 +82,7 @@ export interface InplaceProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
  *
  * _Inplace provides an easy to do editing and display at the same time where clicking the output displays the actual content._
  *
- * [Live Demo](https://www.primefaces.org/primereact/inplace/)
+ * [Live Demo](https://www.primereact.org/inplace/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

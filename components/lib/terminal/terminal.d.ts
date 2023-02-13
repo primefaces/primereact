@@ -2,7 +2,7 @@
  *
  * Terminal is a text based user interface.
  *
- * [Live Demo](https://www.primefaces.org/primereact/terminal)
+ * [Live Demo](https://www.primereact.org/terminal)
  *
  * @module terminal
  *
@@ -34,7 +34,7 @@ export interface TerminalProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
  *
  * _Terminal is a text based user interface._
  *
- * [Live Demo](https://www.primefaces.org/primereact/terminal/)
+ * [Live Demo](https://www.primereact.org/terminal/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

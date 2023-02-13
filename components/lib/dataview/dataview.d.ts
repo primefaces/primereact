@@ -2,7 +2,7 @@
  *
  * DataView displays data in grid or list layout with pagination and sorting features.
  *
- * [Live Demo](https://www.primefaces.org/primereact/dataview/)
+ * [Live Demo](https://www.primereact.org/dataview/)
  *
  * @module dataview
  *
@@ -173,7 +173,7 @@ export interface DataViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
     rowsPerPageOptions?: number[] | undefined;
     /**
      * Template of the current page report element.
-     * @defaultValue (&123;currentPage&125; of &123;totalPages&125;)
+     * @defaultValue (&#123;currentPage&#125; of &#123;totalPages&#125;)
      */
     currentPageReportTemplate?: string | undefined;
     /**
@@ -230,7 +230,7 @@ export interface DataViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
  *
  * _DataView displays data in grid or list layout with pagination and sorting features._
  *
- * [Live Demo](https://www.primefaces.org/primereact/dataview/)
+ * [Live Demo](https://www.primereact.org/dataview/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

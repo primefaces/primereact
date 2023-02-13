@@ -2,7 +2,7 @@
  *
  * Terminal is a text based user interface.
  *
- * [Live Demo](https://www.primefaces.org/primereact/terminal/)
+ * [Live Demo](https://www.primereact.org/terminal/)
  *
  * @module terminal
  *
@@ -37,7 +37,7 @@ export interface TerminalServiceOptions {
  *
  * _Terminal is a text based user interface._
  *
- * [Live Demo](https://www.primefaces.org/primereact/terminal/)
+ * [Live Demo](https://www.primereact.org/terminal/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

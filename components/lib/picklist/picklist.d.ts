@@ -2,7 +2,7 @@
  *
  * PickList is used to reorder items between different lists.
  *
- * [Live Demo](https://www.primefaces.org/primereact/picklist/)
+ * [Live Demo](https://www.primereact.org/picklist/)
  *
  * @module picklist
  *
@@ -287,7 +287,7 @@ export interface PickListProps {
  *
  * _PickList is used to reorder items between different lists._
  *
- * [Live Demo](https://www.primefaces.org/primereact/picklist/)
+ * [Live Demo](https://www.primereact.org/picklist/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

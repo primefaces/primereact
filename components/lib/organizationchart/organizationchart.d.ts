@@ -2,7 +2,7 @@
  *
  * OrganizationChart visualizes hierarchical organization data.
  *
- * [Live Demo](https://www.primefaces.org/primereact/organizationchart/)
+ * [Live Demo](https://www.primereact.org/organizationchart/)
  *
  * @module organizationchart
  *
@@ -113,7 +113,7 @@ export interface OrganizationChartProps extends Omit<React.DetailedHTMLProps<Rea
  *
  * _OrganizationChart visualizes hierarchical organization data._
  *
- * [Live Demo](https://www.primefaces.org/primereact/organizationchart/)
+ * [Live Demo](https://www.primereact.org/organizationchart/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

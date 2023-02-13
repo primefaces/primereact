@@ -1,4 +1,4 @@
-name: API DOC Deploy
+name: Generate API DOC
 
 on:
   push:

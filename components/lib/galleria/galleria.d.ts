@@ -2,7 +2,7 @@
  *
  * Galleria is a content gallery component.
  *
- * [Live Demo](https://www.primefaces.org/primereact/galleria)
+ * [Live Demo](https://www.primereact.org/galleria)
  *
  * @module galleria
  *
@@ -186,7 +186,7 @@ export interface GalleriaProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
  *
  * _Galleria is a content gallery component._
  *
- * [Live Demo](https://www.primefaces.org/primereact/galleria/)
+ * [Live Demo](https://www.primereact.org/galleria/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

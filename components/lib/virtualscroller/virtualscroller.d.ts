@@ -2,7 +2,7 @@
  *
  * VirtualScroller is a performant approach to handle huge data efficiently.
  *
- * [Live Demo](https://www.primefaces.org/primereact/virtualscroller/)
+ * [Live Demo](https://www.primereact.org/virtualscroller/)
  *
  * @module virtualscroller
  *
@@ -380,7 +380,7 @@ export interface VirtualScrollerProps {
  *
  * _VirtualScroller is a performant approach to handle huge data efficiently._
  *
- * [Live Demo](https://www.primefaces.org/primereact/virtualscroller/)
+ * [Live Demo](https://www.primereact.org/virtualscroller/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

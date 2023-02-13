@@ -2,7 +2,7 @@
  *
  * ConfirmPopup displays a confirmation overlay displayed relatively to its target.
  *
- * [Live Demo](https://www.primefaces.org/primereact/confirmpopup)
+ * [Live Demo](https://www.primereact.org/confirmpopup)
  *
  * @module confirmpopup
  *
@@ -180,7 +180,7 @@ interface ConfirmPopupReturn {
  *
  * _ConfirmPopup displays a confirmation overlay displayed relatively to its target._
  *
- * [Live Demo](https://www.primefaces.org/primereact/confirmpopup/)
+ * [Live Demo](https://www.primereact.org/confirmpopup/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

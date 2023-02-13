@@ -2,7 +2,7 @@
  *
  * MegaMenu is navigation component that displays submenus together.
  *
- * [Live Demo](https://www.primefaces.org/primereact/megamenu/)
+ * [Live Demo](https://www.primereact.org/megamenu/)
  *
  * @module megamenu
  *
@@ -44,7 +44,7 @@ export interface MegaMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
  *
  * _MegaMenu is navigation component that displays submenus together._
  *
- * [Live Demo](https://www.primefaces.org/primereact/megamenu/)
+ * [Live Demo](https://www.primereact.org/megamenu/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

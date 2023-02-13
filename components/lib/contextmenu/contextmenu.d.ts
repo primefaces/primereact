@@ -2,7 +2,7 @@
  *
  * ContextMenu displays an overlay menu on right click of its target. Note that components like DataTable has special integration with ContextMenu. Refer to documentation of the individual documentation of the components having a special integration.
  *
- * [Live Demo](https://www.primefaces.org/primereact/contextmenu/)
+ * [Live Demo](https://www.primereact.org/contextmenu/)
  *
  * @module contextmenu
  *
@@ -66,7 +66,7 @@ export interface ContextMenuProps extends Omit<React.DetailedHTMLProps<React.HTM
  *
  * _ContextMenu displays an overlay menu on right click of its target. Note that components like DataTable has special integration with ContextMenu. Refer to documentation of the individual documentation of the components having a special integration._
  *
- * [Live Demo](https://www.primefaces.org/primereact/contextmenu/)
+ * [Live Demo](https://www.primereact.org/contextmenu/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

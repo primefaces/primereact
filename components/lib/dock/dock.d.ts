@@ -2,7 +2,7 @@
  *
  * Dock is a navigation component consisting of menuitems.
  *
- * [Live Demo](https://www.primefaces.org/primereact/dock/)
+ * [Live Demo](https://www.primereact.org/dock/)
  *
  * @module dock
  *
@@ -66,7 +66,7 @@ export interface DockProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
  *
  * _Dock is a navigation component consisting of menuitems._
  *
- * [Live Demo](https://www.primefaces.org/primereact/dock/)
+ * [Live Demo](https://www.primereact.org/dock/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

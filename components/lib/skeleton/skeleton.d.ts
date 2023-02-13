@@ -2,7 +2,7 @@
  *
  * Skeleton is a placeholder to display instead of the actual content.
  *
- * [Live Demo](https://www.primefaces.org/primereact/skeleton/)
+ * [Live Demo](https://www.primereact.org/skeleton/)
  *
  * @module skeleton
  *
@@ -54,7 +54,7 @@ export interface SkeletonProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
  *
  * _Skeleton is a placeholder to display instead of the actual content._
  *
- * [Live Demo](https://www.primefaces.org/primereact/skeleton/)
+ * [Live Demo](https://www.primereact.org/skeleton/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

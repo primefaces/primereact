@@ -2,7 +2,7 @@
  *
  * ConfirmDialog uses a Dialog UI with confirmDialog method or <ConfirmDialog> tag.
  *
- * [Live Demo](https://www.primefaces.org/primereact/confirmdialog)
+ * [Live Demo](https://www.primereact.org/confirmdialog)
  *
  * @module confirmdialog
  *
@@ -155,7 +155,7 @@ interface ConfirmDialogReturn {
  *
  * _ConfirmDialog uses a Dialog UI with confirmDialog method or <ConfirmDialog> tag._
  *
- * [Live Demo](https://www.primefaces.org/primereact/confirmdialog/)
+ * [Live Demo](https://www.primereact.org/confirmdialog/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

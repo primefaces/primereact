@@ -2,7 +2,7 @@
  *
  * DeferredContent postpones the loading the content that is initially not in the viewport until it becomes visible on scroll.
  *
- * [Live Demo](https://www.primefaces.org/primereact/deferredcontent/)
+ * [Live Demo](https://www.primereact.org/deferredcontent/)
  *
  * @module deferredcontent
  *
@@ -31,7 +31,7 @@ export interface DeferredContentProps extends Omit<React.DetailedHTMLProps<React
  *
  * _DeferredContent postpones the loading the content that is initially not in the viewport until it becomes visible on scroll._
  *
- * [Live Demo](https://www.primefaces.org/primereact/deferredcontent/)
+ * [Live Demo](https://www.primereact.org/deferredcontent/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
