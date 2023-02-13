@@ -1,5 +1,32 @@
 # Changelog
 
+## [9.0.0](https://github.com/primefaces/primereact/tree/9.0.0) (2023-02-13)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.0.0-rc.1...9.0.0)
+
+**Implemented New Features and Enhancements:**
+
+- Add sideEffects: false to nested package.json files on components [\#4028](https://github.com/primefaces/primereact/issues/4028)
+- Remove GMap and Captcha [\#4025](https://github.com/primefaces/primereact/issues/4025)
+- Core: Deprecated defaultProps still used [\#3786](https://github.com/primefaces/primereact/issues/3786)
+
+**Fixed bugs:**
+
+- DataTable: Export Function Newline Separator [\#4001](https://github.com/primefaces/primereact/issues/4001)
+
+## [9.0.0-rc.1](https://github.com/primefaces/primereact/tree/9.0.0-rc.1) (2023-02-09)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.0.0-beta.1...9.0.0-rc.1)
+
+**Breaking Changes:**
+
+- Remove Maps [\#4038](https://github.com/primefaces/primereact/issues/4038)
+- Remove Recaptcha [\#4037](https://github.com/primefaces/primereact/issues/4037)
+
+**Implemented New Features and Enhancements:**
+
+- New Hooks [\#4039](https://github.com/primefaces/primereact/issues/4039)
+
 ## [9.0.0-beta.1](https://github.com/primefaces/primereact/tree/9.0.0-beta.1)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/8.7.3...9.0.0-beta.1)
