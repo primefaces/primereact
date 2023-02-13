@@ -1,38 +1,26 @@
 import React, { useState } from 'react';
-import { Paginator } from '../../lib/paginator/Paginator';
-import { Ripple } from '../../lib/ripple/Ripple';
+import { Button } from '../../lib/button/Button';
+import { Divider } from '../../lib/divider/Divider';
 import { Dropdown } from '../../lib/dropdown/Dropdown';
 import { InputText } from '../../lib/inputtext/InputText';
-import { Tooltip } from '../../lib/tooltip/Tooltip';
+import { Paginator } from '../../lib/paginator/Paginator';
+import { Ripple } from '../../lib/ripple/Ripple';
 import { Slider } from '../../lib/slider/Slider';
-import { classNames } from '../../lib/utils/Utils';
+import { Tooltip } from '../../lib/tooltip/Tooltip';
+import { classNames } from '../../lib/utils/utils';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function CustomDoc(props) {
-    const [customFirst1, setCustomFirst1] = useState(0);
-    const [customRows1, setCustomRows1] = useState(10);
-    const [customFirst2, setCustomFirst2] = useState(0);
-    const [customRows2, setCustomRows2] = useState(10);
-    const [customFirst3, setCustomFirst3] = useState(0);
-    const [customRows3, setCustomRows3] = useState(10);
+export function TemplateDoc(props) {
+    const [first, setFirst] = useState([0, 0, 0]);
+    const [rows, setRows] = useState([10, 10, 10]);
+
     const [currentPage, setCurrentPage] = useState(1);
     const [pageInputTooltip, setPageInputTooltip] = useState("Press 'Enter' key to go to this page.");
 
-    const onCustomPageChange1 = (event) => {
-        setCustomFirst1(event.first);
-        setCustomRows1(event.rows);
-        setCurrentPage(event.page + 1);
-    };
-
-    const onCustomPageChange2 = (event) => {
-        setCustomFirst2(event.first);
-        setCustomRows2(event.rows);
-    };
-
-    const onCustomPageChange3 = (event) => {
-        setCustomFirst3(event.first);
-        setCustomRows3(event.rows);
+    const onPageChange = (e, index) => {
+        setFirst(first.map((f, i) => (index === i ? e.first : f)));
+        setRows(rows.map((r, i) => (index === i ? e.rows : r)));
     };
 
     const onPageInputChange = (event) => {
@@ -46,19 +34,24 @@ export function CustomDoc(props) {
             if (page < 0 || page > options.totalPages) {
                 setPageInputTooltip(`Value must be between 1 and ${options.totalPages}.`);
             } else {
-                const first = currentPage ? options.rows * (page - 1) : 0;
+                let _first = [...first];
 
-                setCustomFirst1(first);
+                _first[0] = currentPage ? options.rows * (page - 1) : 0;
+
+                setFirst(_first);
                 setPageInputTooltip("Press 'Enter' key to go to this page.");
             }
         }
     };
 
+    const leftContent = <Button type="button" icon="pi pi-star" className="p-button-outlined" />;
+    const rightContent = <Button type="button" icon="pi pi-search" />;
+
     const template1 = {
         layout: 'PrevPageLink PageLinks NextPageLink RowsPerPageDropdown CurrentPageReport',
         PrevPageLink: (options) => {
             return (
-                <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
+                <button type="button" className={classNames(options.className, 'border-round')} onClick={options.onClick} disabled={options.disabled}>
                     <span className="p-3">Previous</span>
                     <Ripple />
                 </button>
@@ -66,7 +59,7 @@ export function CustomDoc(props) {
         },
         NextPageLink: (options) => {
             return (
-                <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
+                <button type="button" className={classNames(options.className, 'border-round')} onClick={options.onClick} disabled={options.disabled}>
                     <span className="p-3">Next</span>
                     <Ripple />
                 </button>
@@ -160,44 +153,32 @@ export function CustomDoc(props) {
 
     const code = {
         basic: `
-<Paginator template={template1} first={customFirst1} rows={customRows1} totalRecords={120} onPageChange={onCustomPageChange1}></Paginator>
-<Paginator template={template2} first={customFirst2} rows={customRows2} totalRecords={120} onPageChange={onCustomPageChange2} className="justify-content-end my-3"></Paginator>
-<Paginator template={template3} first={customFirst3} rows={customRows3} totalRecords={120} onPageChange={onCustomPageChange3} className="justify-content-start my-3"></Paginator>
+<Paginator template={template1} first={first[0]} rows={rows[0]} totalRecords={120} onPageChange={(e) => onPageChange(e, 0)} leftContent={leftContent} rightContent={rightContent} />
+<Paginator template={template2} first={first[1]} rows={rows[1]} totalRecords={120} onPageChange={(e) => onPageChange(e, 1)} className="justify-content-end" />
+<Paginator template={template3} first={first[2]} rows={rows[2]} totalRecords={120} onPageChange={(e) => onPageChange(e, 2)} className="justify-content-start" />
         `,
         javascript: `
 import React, { useState } from "react";
+import { Button } from 'primereact/button';
 import { Paginator } from 'primereact/paginator';
 import { Ripple } from 'primereact/ripple';
+import { Divider } from 'primereact/divider';
 import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import { Slider } from 'primereact/slider';
 import { Tooltip } from 'primereact/tooltip';
 import { classNames } from 'primereact/utils';
 
-export default function CustomDoc() {
-    const [customFirst1, setCustomFirst1] = useState(0);
-    const [customRows1, setCustomRows1] = useState(10);
-    const [customFirst2, setCustomFirst2] = useState(0);
-    const [customRows2, setCustomRows2] = useState(10);
-    const [customFirst3, setCustomFirst3] = useState(0);
-    const [customRows3, setCustomRows3] = useState(10);
+export default function TemplateDemo() {
+    const [first, setFirst] = useState([0, 0, 0]);
+    const [rows, setRows] = useState([10, 10, 10]);
+
     const [currentPage, setCurrentPage] = useState(1);
     const [pageInputTooltip, setPageInputTooltip] = useState("Press 'Enter' key to go to this page.");
 
-    const onCustomPageChange1 = (event) => {
-        setCustomFirst1(event.first);
-        setCustomRows1(event.rows);
-        setCurrentPage(event.page + 1);
-    };
-
-    const onCustomPageChange2 = (event) => {
-        setCustomFirst2(event.first);
-        setCustomRows2(event.rows);
-    };
-
-    const onCustomPageChange3 = (event) => {
-        setCustomFirst3(event.first);
-        setCustomRows3(event.rows);
+    const onPageChange = (e, index) => {
+        setFirst(first.map((f, i) => (index === i ? e.first : f)));
+        setRows(rows.map((r, i) => (index === i ? e.rows : r)));
     };
 
     const onPageInputChange = (event) => {
@@ -207,25 +188,28 @@ export default function CustomDoc() {
     const onPageInputKeyDown = (event, options) => {
         if (event.key === 'Enter') {
             const page = parseInt(currentPage);
-            
+
             if (page < 0 || page > options.totalPages) {
                 setPageInputTooltip(\`Value must be between 1 and \${options.totalPages}.\`);
-            }
-            else {
-                const first = currentPage ? options.rows * (page - 1) : 0;
+            } else {
+                let _first = [...first];
 
-                setCustomFirst1(first);
+                _first[0] = currentPage ? options.rows * (page - 1) : 0;
 
-                setPageInputTooltip("Press \'Enter\' key to go to this page.");
+                setFirst(_first);
+                setPageInputTooltip("Press 'Enter' key to go to this page.");
             }
         }
-    }
+    };
+
+    const leftContent = <Button type="button" icon="pi pi-star" className="p-button-outlined" />;
+    const rightContent = <Button type="button" icon="pi pi-search" />;
 
     const template1 = {
         layout: 'PrevPageLink PageLinks NextPageLink RowsPerPageDropdown CurrentPageReport',
         PrevPageLink: (options) => {
             return (
-                <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
+                <button type="button" className={classNames(options.className, 'border-round')} onClick={options.onClick} disabled={options.disabled}>
                     <span className="p-3">Previous</span>
                     <Ripple />
                 </button>
@@ -233,7 +217,7 @@ export default function CustomDoc() {
         },
         NextPageLink: (options) => {
             return (
-                <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
+                <button type="button" className={classNames(options.className, 'border-round')} onClick={options.onClick} disabled={options.disabled}>
                     <span className="p-3">Next</span>
                     <Ripple />
                 </button>
@@ -326,89 +310,84 @@ export default function CustomDoc() {
     };
 
     return (
-        <div>
-            <Paginator template={template1} first={customFirst1} rows={customRows1} totalRecords={120} onPageChange={onCustomPageChange1}></Paginator>
-            <Paginator template={template2} first={customFirst2} rows={customRows2} totalRecords={120} onPageChange={onCustomPageChange2} className="justify-content-end my-3"></Paginator>
-            <Paginator template={template3} first={customFirst3} rows={customRows3} totalRecords={120} onPageChange={onCustomPageChange3} className="justify-content-start my-3"></Paginator>
+        <div className="card">
+            <Paginator template={template1} first={first[0]} rows={rows[0]} totalRecords={120} onPageChange={(e) => onPageChange(e, 0)} leftContent={leftContent} rightContent={rightContent} />
+            <Divider />
+            <Paginator template={template2} first={first[1]} rows={rows[1]} totalRecords={120} onPageChange={(e) => onPageChange(e, 1)} className="justify-content-end" />
+            <Divider />
+            <Paginator template={template3} first={first[2]} rows={rows[2]} totalRecords={120} onPageChange={(e) => onPageChange(e, 2)} className="justify-content-start" />
         </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { Paginator } from 'primereact/paginator';
+import { Paginator, PaginatorPageStateEvent, PaginatorJumpToPageInputOptions, PaginatorCurrentPageReportOptions, PaginatorRowsPerPageDropdownOptions,
+    PaginatorLastPageLinkOptions, PaginatorNextPageLinkOptions, PaginatorPageLinksOptions, PaginatorPrevPageLinkOptions, PaginatorFirstPageLinkOptions } from 'primereact/paginator';
+import { Button } from 'primereact/button';
 import { Ripple } from 'primereact/ripple';
+import { Divider } from 'primereact/divider';
 import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import { Slider } from 'primereact/slider';
 import { Tooltip } from 'primereact/tooltip';
 import { classNames } from 'primereact/utils';
 
-export default function CustomDoc() {
-    const [customFirst1, setCustomFirst1] = useState(0);
-    const [customRows1, setCustomRows1] = useState(10);
-    const [customFirst2, setCustomFirst2] = useState(0);
-    const [customRows2, setCustomRows2] = useState(10);
-    const [customFirst3, setCustomFirst3] = useState(0);
-    const [customRows3, setCustomRows3] = useState(10);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [pageInputTooltip, setPageInputTooltip] = useState("Press 'Enter' key to go to this page.");
+export default function TemplateDemo() {
+    const [first, setFirst] = useState<number[]>([0, 0, 0]);
+    const [rows, setRows] = useState([10, 10, 10]);
 
-    const onCustomPageChange1 = (event) => {
-        setCustomFirst1(event.first);
-        setCustomRows1(event.rows);
-        setCurrentPage(event.page + 1);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [pageInputTooltip, setPageInputTooltip] = useState<string>("Press 'Enter' key to go to this page.");
+
+    const onPageChange = (e: PaginatorPageStateEvent, index: number) => {
+        setFirst(first.map((f, i) => (index === i ? e.first : f)));
+        setRows(rows.map((r, i) => (index === i ? e.rows : r)));
     };
 
-    const onCustomPageChange2 = (event) => {
-        setCustomFirst2(event.first);
-        setCustomRows2(event.rows);
-    };
-
-    const onCustomPageChange3 = (event) => {
-        setCustomFirst3(event.first);
-        setCustomRows3(event.rows);
-    };
-
-    const onPageInputChange = (event) => {
+    const onPageInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCurrentPage(event.target.value);
     };
 
-    const onPageInputKeyDown = (event, options) => {
+    const onPageInputKeyDown = (event: React.KeydownEvent<HTMLInputElement>, options: PaginatorCurrentPageReportOptions) => {
         if (event.key === 'Enter') {
             const page = parseInt(currentPage);
-            
+
             if (page < 0 || page > options.totalPages) {
                 setPageInputTooltip(\`Value must be between 1 and \${options.totalPages}.\`);
-            }
-            else {
-                const first = currentPage ? options.rows * (page - 1) : 0;
+            } else {
+                let _first = [...first];
 
-                setCustomFirst1(first);
-                setPageInputTooltip("Press \'Enter\' key to go to this page.");
+                _first[0] = currentPage ? options.rows * (page - 1) : 0;
+
+                setFirst(_first);
+                setPageInputTooltip("Press 'Enter' key to go to this page.");
             }
         }
-    }
+    };
+
+    const leftContent = <Button type="button" icon="pi pi-star" className="p-button-outlined" />;
+    const rightContent = <Button type="button" icon="pi pi-search" />;
 
     const template1 = {
         layout: 'PrevPageLink PageLinks NextPageLink RowsPerPageDropdown CurrentPageReport',
-        PrevPageLink: (options) => {
+        PrevPageLink: (options: PaginatorPrevPageLinkOptions) => {
             return (
-                <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
+                <button type="button" className={classNames(options.className, 'border-round')} onClick={options.onClick} disabled={options.disabled}>
                     <span className="p-3">Previous</span>
                     <Ripple />
                 </button>
             );
         },
-        NextPageLink: (options) => {
+        NextPageLink: (options: PaginatorNextPageLinkOptions) => {
             return (
-                <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
+                <button type="button" className={classNames(options.className, 'border-round')} onClick={options.onClick} disabled={options.disabled}>
                     <span className="p-3">Next</span>
                     <Ripple />
                 </button>
             );
         },
-        PageLinks: (options) => {
+        PageLinks: (options: PaginatorPageLinksOptions) => {
             if ((options.view.startPage === options.page && options.view.startPage !== 0) || (options.view.endPage === options.page && options.page + 1 !== options.totalPages)) {
                 const className = classNames(options.className, { 'p-disabled': true });
 
@@ -426,7 +405,7 @@ export default function CustomDoc() {
                 </button>
             );
         },
-        RowsPerPageDropdown: (options) => {
+        RowsPerPageDropdown: (options: PaginatorRowsPerPageDropdownOptions) => {
             const dropdownOptions = [
                 { label: 10, value: 10 },
                 { label: 20, value: 20 },
@@ -436,7 +415,7 @@ export default function CustomDoc() {
 
             return <Dropdown value={options.value} options={dropdownOptions} onChange={options.onChange} />;
         },
-        CurrentPageReport: (options) => {
+        CurrentPageReport: (options: PaginatorCurrentPageReportOptions) => {
             return (
                 <span className="mx-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>
                     Go to <InputText size="2" className="ml-1" value={currentPage} tooltip={pageInputTooltip} onKeyDown={(e) => onPageInputKeyDown(e, options)} onChange={onPageInputChange} />
@@ -446,7 +425,7 @@ export default function CustomDoc() {
     };
     const template2 = {
         layout: 'RowsPerPageDropdown CurrentPageReport PrevPageLink NextPageLink',
-        RowsPerPageDropdown: (options) => {
+        RowsPerPageDropdown: (options: PaginatorRowsPerPageDropdownOptions) => {
             const dropdownOptions = [
                 { label: 5, value: 5 },
                 { label: 10, value: 10 },
@@ -463,7 +442,7 @@ export default function CustomDoc() {
                 </React.Fragment>
             );
         },
-        CurrentPageReport: (options) => {
+        CurrentPageReport: (options: PaginatorCurrentPageReportOptions) => {
             return (
                 <span style={{ color: 'var(--text-color)', userSelect: 'none', width: '120px', textAlign: 'center' }}>
                     {options.first} - {options.last} of {options.totalRecords}
@@ -473,7 +452,7 @@ export default function CustomDoc() {
     };
     const template3 = {
         layout: 'RowsPerPageDropdown PrevPageLink PageLinks NextPageLink CurrentPageReport',
-        RowsPerPageDropdown: (options) => {
+        RowsPerPageDropdown: (options: PaginatorRowsPerPageDropdownOptions) => {
             return (
                 <div className="flex align-items-center">
                 <Tooltip target=".slider>.p-slider-handle" content={\`\${options.value} / page\`} position="top" event="focus" />
@@ -485,7 +464,7 @@ export default function CustomDoc() {
                 </div>
             );
         },
-        CurrentPageReport: (options) => {
+        CurrentPageReport: (options: PaginatorCurrentPageReportOptions) => {
             return (
                 <span style={{ color: 'var(--text-color)', userSelect: 'none', width: '120px', textAlign: 'center' }}>
                     {options.first} - {options.last} of {options.totalRecords}
@@ -495,10 +474,12 @@ export default function CustomDoc() {
     };
 
     return (
-        <div>
-            <Paginator template={template1} first={customFirst1} rows={customRows1} totalRecords={120} onPageChange={onCustomPageChange1}></Paginator>
-            <Paginator template={template2} first={customFirst2} rows={customRows2} totalRecords={120} onPageChange={onCustomPageChange2} className="justify-content-end my-3"></Paginator>
-            <Paginator template={template3} first={customFirst3} rows={customRows3} totalRecords={120} onPageChange={onCustomPageChange3} className="justify-content-start my-3"></Paginator>
+        <div className="card">
+            <Paginator template={template1} first={first[0]} rows={rows[0]} totalRecords={120} onPageChange={(e) => onPageChange(e, 0)} leftContent={leftContent} rightContent={rightContent} />
+            <Divider />
+            <Paginator template={template2} first={first[1]} rows={rows[1]} totalRecords={120} onPageChange={(e) => onPageChange(e, 1)} className="justify-content-end" />
+            <Divider />
+            <Paginator template={template3} first={first[2]} rows={rows[2]} totalRecords={120} onPageChange={(e) => onPageChange(e, 2)} className="justify-content-start" />
         </div>
     )
 }
@@ -508,12 +489,17 @@ export default function CustomDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Custom</p>
+                <p>
+                    Templating allows overriding the default content of the UI elements by defining callbacks using the element name. The parameters passed to theese callbacks contain properties for binding to your custom elements like the event
+                    handler to trigger pagination. Additional <i>leftContent</i> and <i>rightContent</i> properties are available to insert content at both sides of the paginator.
+                </p>
             </DocSectionText>
             <div className="card">
-                <Paginator template={template1} first={customFirst1} rows={customRows1} totalRecords={120} onPageChange={onCustomPageChange1}></Paginator>
-                <Paginator template={template2} first={customFirst2} rows={customRows2} totalRecords={120} onPageChange={onCustomPageChange2} className="justify-content-end my-3"></Paginator>
-                <Paginator template={template3} first={customFirst3} rows={customRows3} totalRecords={120} onPageChange={onCustomPageChange3} className="justify-content-start my-3"></Paginator>
+                <Paginator template={template1} first={first[0]} rows={rows[0]} totalRecords={120} onPageChange={(e) => onPageChange(e, 0)} leftContent={leftContent} rightContent={rightContent} />
+                <Divider />
+                <Paginator template={template2} first={first[1]} rows={rows[1]} totalRecords={120} onPageChange={(e) => onPageChange(e, 1)} className="justify-content-end" />
+                <Divider />
+                <Paginator template={template3} first={first[2]} rows={rows[2]} totalRecords={120} onPageChange={(e) => onPageChange(e, 2)} className="justify-content-start" />
             </div>
             <DocSectionCode code={code} />
         </>

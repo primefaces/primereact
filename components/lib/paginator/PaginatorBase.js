@@ -53,7 +53,7 @@ export const FirstPageLinkBase = {
 
 export const JumpToPageInputBase = {
     defaultProps: {
-        __TYPE: 'JumbToPageInput',
+        __TYPE: 'JumpToPageInput',
         page: null,
         rows: null,
         pageCount: null,
