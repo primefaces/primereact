@@ -18,6 +18,7 @@ export const CascadeSelectBase = {
         itemTemplate: null,
         disabled: false,
         dataKey: null,
+        breakpoint: undefined,
         inputId: null,
         tabIndex: null,
         ariaLabelledBy: null,

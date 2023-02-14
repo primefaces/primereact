@@ -1,10 +1,10 @@
 import * as React from 'react';
 import PrimeReact from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
 import { CascadeSelectBase } from './CascadeSelectBase';
 import { CascadeSelectSub } from './CascadeSelectSub';
 
@@ -14,10 +14,12 @@ export const CascadeSelect = React.memo(
 
         const [focusedState, setFocusedState] = React.useState(false);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
+        const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
         const elementRef = React.useRef(null);
         const overlayRef = React.useRef(null);
         const inputRef = React.useRef(null);
         const labelRef = React.useRef(null);
+        const styleElementRef = React.useRef(null);
         const dirty = React.useRef(false);
         const selectionPath = React.useRef(null);
 
@@ -172,6 +174,11 @@ export const CascadeSelect = React.memo(
         const onOverlayEnter = () => {
             ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
             alignOverlay();
+
+            if (attributeSelectorState && props.breakpoint) {
+                overlayRef.current.setAttribute(attributeSelectorState + '_panel', '');
+                createStyle();
+            }
         };
 
         const onOverlayEntered = () => {
@@ -188,10 +195,43 @@ export const CascadeSelect = React.memo(
             ZIndexUtils.clear(overlayRef.current);
 
             props.onHide && props.onHide();
+            destroyStyle();
         };
 
         const alignOverlay = () => {
             DomHandler.alignOverlay(overlayRef.current, labelRef.current.parentElement, props.appendTo || PrimeReact.appendTo);
+        };
+
+        const createStyle = () => {
+            if (!styleElementRef.current) {
+                styleElementRef.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+
+                const selector = `${attributeSelectorState}_panel`;
+                const innerHTML = `
+@media screen and (max-width: ${props.breakpoint}) {
+    .p-cascadeselect-panel[${selector}] .p-cascadeselect-sublist {
+        position: relative;
+    }
+
+    .p-cascadeselect-panel[${selector}] .p-cascadeselect-item-active > .p-cascadeselect-sublist {
+        left: 0;
+        box-shadow: none;
+        border-radius: 0;
+        padding: 0 0 0 calc(var(--inline-spacing) * 2); /* @todo */
+    }
+
+    .p-cascadeselect-panel[${selector}] .p-cascadeselect-group-icon:before {
+        content: "\\e930";
+    }
+}
+`;
+
+                styleElementRef.current.innerHTML = innerHTML;
+            }
+        };
+
+        const destroyStyle = () => {
+            styleElementRef.current = DomHandler.removeInlineStyle(styleElementRef.current);
         };
 
         React.useImperativeHandle(ref, () => ({
@@ -202,6 +242,12 @@ export const CascadeSelect = React.memo(
             getLabel: () => labelRef.current,
             focus: () => DomHandler.focus(inputRef.current)
         }));
+
+        useMountEffect(() => {
+            if (props.breakpoint) {
+                !attributeSelectorState && setAttributeSelectorState(UniqueComponentId());
+            }
+        });
 
         React.useEffect(() => {
             ObjectUtils.combinedRefs(inputRef, props.inputRef);
