@@ -4741,6 +4741,14 @@
                             "description": "Establishes relationships between the component and label(s) where its value should be one or more element IDs."
                         },
                         {
+                            "name": "breakpoint",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "defaultValue": "",
+                            "description": "The breakpoint to define the maximum width boundary when responsiveness is enabled."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
