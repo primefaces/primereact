@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { FilterService } from '../api/Api';
-import { useUpdateEffect } from '../hooks/Hooks';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import PrimeReact, { FilterService } from '../api/Api';
+import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { classNames, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { OrderListBase } from './OrderListBase';
 import { OrderListControls } from './OrderListControls';
 import { OrderListSubList } from './OrderListSubList';
@@ -12,8 +12,10 @@ export const OrderList = React.memo(
 
         const [selectionState, setSelectionState] = React.useState([]);
         const [filterValueState, setFilterValueState] = React.useState('');
+        const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
         const hasFilter = ObjectUtils.isNotEmpty(filterValueState);
         const elementRef = React.useRef(null);
+        const styleElementRef = React.useRef(null);
         const reorderDirection = React.useRef(null);
 
         const onItemClick = (event) => {
@@ -154,10 +156,57 @@ export const OrderList = React.memo(
             }
         };
 
+        const createStyle = () => {
+            if (!styleElementRef.current) {
+                styleElementRef.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+
+                let innerHTML = `
+@media screen and (max-width: ${props.breakpoint}) {
+    .p-orderlist[${attributeSelectorState}] {
+        flex-direction: column;
+    }
+
+    .p-orderlist[${attributeSelectorState}] .p-orderlist-controls {
+        padding: var(--content-padding);
+        flex-direction: row;
+    }
+
+    .p-orderlist[${attributeSelectorState}] .p-orderlist-controls .p-button {
+        margin-right: var(--inline-spacing);
+        margin-bottom: 0;
+    }
+
+    .p-orderlist[${attributeSelectorState}] .p-orderlist-controls .p-button:last-child {
+        margin-right: 0;
+    }
+}
+`;
+
+                styleElementRef.current.innerHTML = innerHTML;
+            }
+        };
+
+        const destroyStyle = () => {
+            styleElementRef.current = DomHandler.removeInlineStyle(styleElementRef.current);
+        };
+
         React.useImperativeHandle(ref, () => ({
             props,
             getElement: () => elementRef.current
         }));
+
+        useMountEffect(() => {
+            setAttributeSelectorState(UniqueComponentId());
+        });
+
+        useUpdateEffect(() => {
+            elementRef.current.setAttribute(attributeSelectorState, '');
+            createStyle();
+
+            return () => {
+                destroyStyle();
+            };
+        }, [attributeSelectorState]);
 
         useUpdateEffect(() => {
             if (reorderDirection.current) {

@@ -12,6 +12,7 @@ export const OrderListBase = {
         dragdrop: false,
         tabIndex: 0,
         dataKey: null,
+        breakpoint: '960px',
         onChange: null,
         itemTemplate: null,
         filter: false,
