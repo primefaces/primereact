@@ -203,7 +203,9 @@ export default function LazyDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Lazy loading is useful when dealing with huge datasets, in this example nodes are dynamically loaded on demand using <i>onExpand</i> event.</p>
+                <p>
+                    Lazy loading is useful when dealing with huge datasets, in this example nodes are dynamically loaded on demand using <i>onExpand</i> event.
+                </p>
             </DocSectionText>
 
             <div className="card flex justify-content-center">

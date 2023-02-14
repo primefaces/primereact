@@ -157,7 +157,17 @@ export default function EventsDemo() {
             </DocSectionText>
             <Toast ref={toast} />
             <div className="card flex justify-content-center">
-                <Tree value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={(e) => setSelectedNodeKey(e.value)} onExpand={onExpand} onCollapse={onCollapse} onSelect={onSelect} onUnselect={onUnselect} className="w-full md:w-30rem" />
+                <Tree
+                    value={nodes}
+                    selectionMode="single"
+                    selectionKeys={selectedNodeKey}
+                    onSelectionChange={(e) => setSelectedNodeKey(e.value)}
+                    onExpand={onExpand}
+                    onCollapse={onCollapse}
+                    onSelect={onSelect}
+                    onUnselect={onUnselect}
+                    className="w-full md:w-30rem"
+                />
             </div>
             <DocSectionCode code={code} service={['NodeService']} />
         </>

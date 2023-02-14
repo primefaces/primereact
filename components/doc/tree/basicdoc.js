@@ -87,7 +87,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>OrganizationChart requires a collection of <i>TreeNode</i> instances as a <i>value</i>.</p>
+                <p>
+                    OrganizationChart requires a collection of <i>TreeNode</i> instances as a <i>value</i>.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Tree value={nodes} className="w-full md:w-30rem" />

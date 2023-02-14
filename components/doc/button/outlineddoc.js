@@ -5,13 +5,13 @@ import { DocSectionText } from '../common/docsectiontext';
 export function OutlinedDoc(props) {
     const code = {
         basic: `
-<Button label="Primary" className="p-button-outlined" />
-<Button label="Secondary" className="p-button-secondary p-button-outlined" />
-<Button label="Success" className="p-button-success p-button-outlined" />
-<Button label="Info" className="p-button-info p-button-outlined" />
-<Button label="Warning" className="p-button-warning p-button-outlined" />
-<Button label="Help" className="p-button-help p-button-outlined" />
-<Button label="Danger" className="p-button-danger p-button-outlined" />
+<Button label="Primary" outlined />
+<Button label="Secondary" severity="secondary" outlined />
+<Button label="Success" severity="success" outlined />
+<Button label="Info" severity="info" outlined />
+<Button label="Warning" severity="warning" outlined />
+<Button label="Help" severity="help" outlined />
+<Button label="Danger" severity="danger" outlined />
         `,
         javascript: `
 import React from 'react'; 
@@ -20,13 +20,13 @@ import { Button } from 'primereact/button';
 export default function OutlinedDemo() {
     return (
         <div className="card flex flex-wrap justify-content-center gap-3">
-            <Button label="Primary" className="p-button-outlined" />
-            <Button label="Secondary" className="p-button-secondary p-button-outlined" />
-            <Button label="Success" className="p-button-success p-button-outlined" />
-            <Button label="Info" className="p-button-info p-button-outlined" />
-            <Button label="Warning" className="p-button-warning p-button-outlined" />
-            <Button label="Help" className="p-button-help p-button-outlined" />
-            <Button label="Danger" className="p-button-danger p-button-outlined" />
+            <Button label="Primary" outlined />
+            <Button label="Secondary" severity="secondary" outlined />
+            <Button label="Success" severity="success" outlined />
+            <Button label="Info" severity="info" outlined />
+            <Button label="Warning" severity="warning" outlined />
+            <Button label="Help" severity="help" outlined />
+            <Button label="Danger" severity="danger" outlined />
         </div>
     )
 }
@@ -38,13 +38,13 @@ import { Button } from 'primereact/button';
 export default function OutlinedDemo() {
     return (
         <div className="card flex flex-wrap justify-content-center gap-3">
-            <Button label="Primary" className="p-button-outlined" />
-            <Button label="Secondary" className="p-button-secondary p-button-outlined" />
-            <Button label="Success" className="p-button-success p-button-outlined" />
-            <Button label="Info" className="p-button-info p-button-outlined" />
-            <Button label="Warning" className="p-button-warning p-button-outlined" />
-            <Button label="Help" className="p-button-help p-button-outlined" />
-            <Button label="Danger" className="p-button-danger p-button-outlined" />
+            <Button label="Primary" outlined />
+            <Button label="Secondary" severity="secondary" outlined />
+            <Button label="Success" severity="success" outlined />
+            <Button label="Info" severity="info" outlined />
+            <Button label="Warning" severity="warning" outlined />
+            <Button label="Help" severity="help" outlined />
+            <Button label="Danger" severity="danger" outlined />
         </div>
     )
 }
@@ -57,13 +57,13 @@ export default function OutlinedDemo() {
                 <p>Outlined buttons display a border without a background initially.</p>
             </DocSectionText>
             <div className="card flex flex-wrap justify-content-center gap-3">
-                <Button label="Primary" className="p-button-outlined" />
-                <Button label="Secondary" className="p-button-secondary p-button-outlined" />
-                <Button label="Success" className="p-button-success p-button-outlined" />
-                <Button label="Info" className="p-button-info p-button-outlined" />
-                <Button label="Warning" className="p-button-warning p-button-outlined" />
-                <Button label="Help" className="p-button-help p-button-outlined" />
-                <Button label="Danger" className="p-button-danger p-button-outlined" />
+                <Button label="Primary" outlined />
+                <Button label="Secondary" severity="secondary" outlined />
+                <Button label="Success" severity="success" outlined />
+                <Button label="Info" severity="info" outlined />
+                <Button label="Warning" severity="warning" outlined />
+                <Button label="Help" severity="help" outlined />
+                <Button label="Danger" severity="danger" outlined />
             </div>
             <DocSectionCode code={code} />
         </>

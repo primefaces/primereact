@@ -191,14 +191,24 @@ export default function ContextMenuDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Tree has exclusive integration with <Link href="/contextMenu">ContextMenu</Link> using <i>contextMenuSelectionKey</i>, <i>onContextMenuSelectionChange</i> and <i>onContextMenu</i> properties.</p>
+                <p>
+                    Tree has exclusive integration with <Link href="/contextMenu">ContextMenu</Link> using <i>contextMenuSelectionKey</i>, <i>onContextMenuSelectionChange</i> and <i>onContextMenu</i> properties.
+                </p>
             </DocSectionText>
             <Toast ref={toast} />
 
             <ContextMenu model={menu} ref={cm} />
 
             <div className="card flex justify-content-center">
-                <Tree value={nodes} expandedKeys={expandedKeys} onToggle={(e) => setExpandedKeys(e.value)} contextMenuSelectionKey={selectedNodeKey} onContextMenuSelectionChange={(e) => setSelectedNodeKey(e.value)} onContextMenu={(e) => cm.current.show(e.originalEvent)} className="w-full md:w-30rem" />
+                <Tree
+                    value={nodes}
+                    expandedKeys={expandedKeys}
+                    onToggle={(e) => setExpandedKeys(e.value)}
+                    contextMenuSelectionKey={selectedNodeKey}
+                    onContextMenuSelectionChange={(e) => setSelectedNodeKey(e.value)}
+                    onContextMenu={(e) => cm.current.show(e.originalEvent)}
+                    className="w-full md:w-30rem"
+                />
             </div>
             <DocSectionCode code={code} service={['NodeService']} />
         </>

@@ -45,7 +45,7 @@ const TreeDemo = () => {
                     label: 'Multiple',
                     component: MultipleSelectionDoc
                 },
-                
+
                 {
                     id: 'checkboxselection',
                     label: 'Checkbox',
