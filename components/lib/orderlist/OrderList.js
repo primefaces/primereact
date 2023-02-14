@@ -196,17 +196,19 @@ export const OrderList = React.memo(
         }));
 
         useMountEffect(() => {
-            setAttributeSelectorState(UniqueComponentId());
+            !attributeSelectorState && setAttributeSelectorState(UniqueComponentId());
         });
 
         useUpdateEffect(() => {
-            elementRef.current.setAttribute(attributeSelectorState, '');
-            createStyle();
+            if (attributeSelectorState) {
+                elementRef.current.setAttribute(attributeSelectorState, '');
+                createStyle();
+            }
 
             return () => {
                 destroyStyle();
             };
-        }, [attributeSelectorState]);
+        }, [attributeSelectorState, props.breakpoint]);
 
         useUpdateEffect(() => {
             if (reorderDirection.current) {
