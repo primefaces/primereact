@@ -16556,12 +16556,81 @@
                     "values": []
                 },
                 "props": {
-                    "description": "",
-                    "values": []
+                    "description": "Defines valid properties in InputText component. In addition to these, all properties of HTMLInputElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": true,
+                            "type": "ReactNode",
+                            "defaultValue": "",
+                            "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "keyfilter",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "KeyFilterType",
+                            "defaultValue": "",
+                            "description": "Format definition of the keys to block."
+                        },
+                        {
+                            "name": "tooltip",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "defaultValue": "",
+                            "description": "Content of the tooltip."
+                        },
+                        {
+                            "name": "tooltipOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TooltipOptions",
+                            "defaultValue": "",
+                            "description": "Configuration of the tooltip, refer to the tooltip documentation for more information."
+                        },
+                        {
+                            "name": "validateOnly",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "defaultValue": "false",
+                            "description": "When enabled, instead of blocking keys, input is validated internally to test against the regular expression."
+                        },
+                        {
+                            "name": "value",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "defaultValue": "",
+                            "description": "The value of component"
+                        }
+                    ]
                 },
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
-                    "values": []
+                    "values": [
+                        {
+                            "name": "onInput",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "FormEvent<HTMLInputElement>",
+                                    "description": "Browser event"
+                                },
+                                {
+                                    "name": "validatePattern",
+                                    "optional": false,
+                                    "type": "boolean",
+                                    "description": "Whether to validate the value"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke while typing value on input"
+                        }
+                    ]
                 }
             }
         }
@@ -16575,8 +16644,57 @@
                     "values": []
                 },
                 "props": {
-                    "description": "",
-                    "values": []
+                    "description": "Defines valid properties in InputTextarea component. In addition to these, all properties of HTMLTextAreaElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "autoResize",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "defaultValue": "false",
+                            "description": "When present, height of textarea changes as being typed."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": true,
+                            "type": "ReactNode",
+                            "defaultValue": "",
+                            "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "keyfilter",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "KeyFilterType",
+                            "defaultValue": "",
+                            "description": "Format definition of the keys to block."
+                        },
+                        {
+                            "name": "tooltip",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "defaultValue": "",
+                            "description": "Content of the tooltip."
+                        },
+                        {
+                            "name": "tooltipOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TooltipOptions",
+                            "defaultValue": "",
+                            "description": "Configuration of the tooltip, refer to the tooltip documentation for more information."
+                        },
+                        {
+                            "name": "value",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "defaultValue": "",
+                            "description": "The value of component"
+                        }
+                    ]
                 },
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
