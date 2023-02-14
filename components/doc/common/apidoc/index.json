@@ -4877,6 +4877,14 @@
                             "description": "Default text to display when no option is selected."
                         },
                         {
+                            "name": "scrollHeight",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "defaultValue": "400px",
+                            "description": "Maximum height of the options panel on responsive mode."
+                        },
+                        {
                             "name": "style",
                             "optional": true,
                             "readonly": false,
