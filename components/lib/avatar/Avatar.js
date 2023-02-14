@@ -44,7 +44,7 @@ export const Avatar = React.forwardRef((inProps, ref) => {
     const containerClassName = classNames(
         'p-avatar p-component',
         {
-            'p-avatar-image': props.image !== null && !imageFailed,
+            'p-avatar-image': props.image && !imageFailed,
             'p-avatar-circle': props.shape === 'circle',
             'p-avatar-lg': props.size === 'large',
             'p-avatar-xl': props.size === 'xlarge',
