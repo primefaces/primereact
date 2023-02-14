@@ -25,6 +25,7 @@ export const CascadeSelectBase = {
         appendTo: null,
         transitionOptions: null,
         dropdownIcon: 'pi pi-chevron-down',
+        scrollHeight: '400px',
         onChange: null,
         onGroupChange: null,
         onBeforeShow: null,

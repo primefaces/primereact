@@ -209,6 +209,11 @@ export const CascadeSelect = React.memo(
                 const selector = `${attributeSelectorState}_panel`;
                 const innerHTML = `
 @media screen and (max-width: ${props.breakpoint}) {
+    .p-cascadeselect-panel[${selector}] .p-cascadeselect-items-wrapper > ul {
+        max-height: ${props.scrollHeight};
+        overflow: ${props.scrollHeight ? 'auto' : ''};
+    }
+
     .p-cascadeselect-panel[${selector}] .p-cascadeselect-sublist {
         position: relative;
     }

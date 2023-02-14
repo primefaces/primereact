@@ -133,6 +133,11 @@ export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.I
      */
     dropdownIcon?: string | undefined;
     /**
+     * Maximum height of the options panel on responsive mode.
+     * @defaultValue 400px
+     */
+    scrollHeight?: string | undefined;
+    /**
      * Callback to invoke on value change
      * @param {CascadeSelectChangeEvent} event - Custom change event
      */
