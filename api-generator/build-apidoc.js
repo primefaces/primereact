@@ -51,7 +51,7 @@ if (project) {
     project.children.forEach((module) => {
         const { name, comment } = module;
 
-        //if (name !== 'hooks') return; // REMOVE
+        // if (name !== 'inputtext') return; // REMOVE
 
         const description = comment && comment.summary.map((s) => s.text || '').join(' ');
 
@@ -102,7 +102,7 @@ if (project) {
 
                 const component_props_id = component.extendedTypes && component.extendedTypes[0].typeArguments && component.extendedTypes[0].typeArguments[0] && component.extendedTypes[0].typeArguments[0]._target;
                 const module_properties_group = module.groups.find((g) => g.title === 'Properties');
-                const component_props = module_properties_group && module_properties_group.children.find((c) => c.id === component_props_id);
+                const component_props = module_properties_group && module_properties_group.children.find((c) => (component_props_id ? c.id === component_props_id : true));
 
                 const props = {
                     description: '',
