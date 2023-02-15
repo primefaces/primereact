@@ -1,5 +1,24 @@
 # Changelog
 
+## [9.1.1](https://github.com/primefaces/primereact/tree/9.1.1) (2023-02-15)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.1.0...9.1.1)
+
+**Fixed bugs:**
+
+- primereact 9.1.0 it is not loaded using vite [\#4064](https://github.com/primefaces/primereact/issues/4064)
+
+## [9.1.0](https://github.com/primefaces/primereact/tree/9.1.0) (2023-02-15)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.0.0...9.1.0)
+
+**Implemented New Features and Enhancements:**
+
+- Improve responsive styling on Menubar [\#4060](https://github.com/primefaces/primereact/issues/4060)
+- FileUpload: Advanced Section same as PrimeVue FileUpload section [\#4059](https://github.com/primefaces/primereact/issues/4059)
+- Add breakpoint and scrollHeight properties to CascadeSelect [\#4052](https://github.com/primefaces/primereact/issues/4052)
+- Add breakpoint property to PickList and OrderList [\#4050](https://github.com/primefaces/primereact/issues/4050)
+
 ## [9.0.0](https://github.com/primefaces/primereact/tree/9.0.0) (2023-02-13)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/9.0.0-rc.1...9.0.0)
