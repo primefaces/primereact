@@ -40,7 +40,7 @@ const MegaMenuDemo = () => {
         }
     ];
 
-    return <DocComponent title="React MegaMenu Component" header="MegaMenu" description="MegaMenu is navigation component that displays submenus together." componentDocs={docs} apiDocs={['MegaMenu']} />;
+    return <DocComponent title="React MegaMenu Component" header="MegaMenu" description="MegaMenu is navigation component that displays submenus together." componentDocs={docs} apiDocs={['MegaMenu', 'MenuItem']} />;
 };
 
 export default MegaMenuDemo;

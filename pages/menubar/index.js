@@ -34,7 +34,7 @@ const MenubarDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Navbar Component" header="Menubar" description="Menubar also known as Navbar, is a horizontal menu component" componentDocs={docs} apiDocs={['Menubar']} />;
+    return <DocComponent title="React Navbar Component" header="Menubar" description="Menubar also known as Navbar, is a horizontal menu component" componentDocs={docs} apiDocs={['Menubar', 'MenuItem']} />;
 };
 
 export default MenubarDemo;

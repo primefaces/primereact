@@ -98,13 +98,13 @@ const Component = (props) => {
                                                     <td key={index} className={classNames({ 'doc-option-type': k === 'type', 'doc-option-default': k === 'defaultValue' })}>
                                                         {k === 'parameters'
                                                             ? v.map((_v, i) => {
-                                                                    return (
-                                                                        <React.Fragment key={i}>
-                                                                            {_v.name}:{createContent(_v.type)}
-                                                                            <br />
-                                                                        </React.Fragment>
-                                                                    );
-                                                                })
+                                                                  return (
+                                                                      <React.Fragment key={i}>
+                                                                          {_v.name}:{createContent(_v.type)}
+                                                                          <br />
+                                                                      </React.Fragment>
+                                                                  );
+                                                              })
                                                             : k !== 'description'
                                                             ? createContent(v, k === 'name')
                                                             : v}
@@ -369,6 +369,7 @@ export function DocApiSection(props) {
                         const mMap = {
                             id: `api.${mKey}`,
                             label: mKey,
+                            description: mValue.description,
                             children: []
                         };
 

@@ -30,6 +30,7 @@ app.bootstrap({
     includeVersion: true,
     searchInComments: true,
     disableSources: true,
+    logLevel: 'Error',
     exclude: ['node_modules', 'components/lib/**/*.js'],
     externalSymbolLinkMappings: {
         '@types/react': {
@@ -51,7 +52,7 @@ if (project) {
     project.children.forEach((module) => {
         const { name, comment } = module;
 
-        // if (name !== 'inputtext') return; // REMOVE
+        // if (name !== 'button') return; // REMOVE
 
         const description = comment && comment.summary.map((s) => s.text || '').join(' ');
 
@@ -120,7 +121,7 @@ if (project) {
 
                     component_props_group &&
                         component_props_group.children.forEach((prop) => {
-                            if (!prop.inheritedFrom) {
+                            if (!prop.inheritedFrom || (prop.inheritedFrom && !prop.inheritedFrom.toString().startsWith('Omit.data-pr-'))) {
                                 props.values.push({
                                     name: prop.name,
                                     optional: prop.flags.isOptional,
