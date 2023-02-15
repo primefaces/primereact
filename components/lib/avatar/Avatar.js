@@ -9,7 +9,7 @@ export const Avatar = React.forwardRef((inProps, ref) => {
     const [imageFailed, setImageFailed] = React.useState(false);
 
     const createContent = () => {
-        if (props.image && !imageFailed) {
+        if (ObjectUtils.isNotEmpty(props.image) && !imageFailed) {
             return <img src={props.image} alt={props.imageAlt} onError={onImageError}></img>;
         } else if (props.label) {
             return <span className="p-avatar-text">{props.label}</span>;
@@ -44,7 +44,7 @@ export const Avatar = React.forwardRef((inProps, ref) => {
     const containerClassName = classNames(
         'p-avatar p-component',
         {
-            'p-avatar-image': props.image && !imageFailed,
+            'p-avatar-image': ObjectUtils.isNotEmpty(props.image) && !imageFailed,
             'p-avatar-circle': props.shape === 'circle',
             'p-avatar-lg': props.size === 'large',
             'p-avatar-xl': props.size === 'xlarge',
