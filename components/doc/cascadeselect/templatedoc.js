@@ -95,7 +95,7 @@ export function TemplateDoc(props) {
         basic: `
 <CascadeSelect value={selectedCity} onChange={e => setSelectedCity(e.value)} options={countries} 
     optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']} 
-    style={{minWidth: '14rem'}} placeholder="Select a City" itemTemplate={countryOptionTemplate} />
+    className="w-full md:w-14rem" breakpoint="767px" placeholder="Select a City" itemTemplate={countryOptionTemplate} />
         `,
         javascript: `
 import React, { useState } from "react";
@@ -196,7 +196,7 @@ export default function TemplateDemo() {
         <div className="card flex justify-content-center">
             <CascadeSelect value={selectedCity} onChange={e => setSelectedCity(e.value)} options={countries} 
                 optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']} 
-                style={{minWidth: '14rem'}} placeholder="Select a City" itemTemplate={countryOptionTemplate} />
+                className="w-full md:w-14rem" breakpoint="767px" placeholder="Select a City" itemTemplate={countryOptionTemplate} />
         </div>
     )
 }
@@ -315,7 +315,7 @@ export default function TemplateDemo() {
         <div className="card flex justify-content-center">
             <CascadeSelect value={selectedCity} onChange={(e: CascadeSelectChangeEvent) => setSelectedCity(event.value)} options={countries} 
                 optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']} 
-                style={{minWidth: '14rem'}} placeholder="Select a City" itemTemplate={countryOptionTemplate} />
+                className="w-full md:w-14rem" breakpoint="767px" placeholder="Select a City" itemTemplate={countryOptionTemplate} />
         </div>
     )
 }
@@ -337,7 +337,8 @@ export default function TemplateDemo() {
                     optionLabel="cname"
                     optionGroupLabel="name"
                     optionGroupChildren={['states', 'cities']}
-                    style={{ minWidth: '14rem' }}
+                    className="w-full md:w-14rem"
+                    breakpoint="767px"
                     placeholder="Select a City"
                     itemTemplate={countryOptionTemplate}
                 />
