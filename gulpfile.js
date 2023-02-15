@@ -64,6 +64,10 @@ gulp.task('copy-d.ts', function () {
         .pipe(gulp.dest('./' + process.env.OUTPUT_DIR));
 });
 
+gulp.task('copy-package.json', function () {
+    return gulp.src(process.env.INPUT_DIR + '**/package.json').pipe(gulp.dest('./' + process.env.OUTPUT_DIR));
+});
+
 //Building project with run sequence
-gulp.task('copy-files', gulp.series('copy-css', 'copy-d.ts'));
+gulp.task('copy-files', gulp.series('copy-css', 'copy-d.ts', 'copy-package.json'));
 gulp.task('build-resources', gulp.series('build-css', 'images', 'build-themes', 'build-meta', 'copy-files'));
