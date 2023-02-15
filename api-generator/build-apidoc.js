@@ -127,7 +127,7 @@ if (project) {
                                     optional: prop.flags.isOptional,
                                     readonly: prop.flags.isReadonly,
                                     type: prop.type.toString(),
-                                    defaultValue: prop.comment && prop.comment.getTag('@defaultValue') ? parseText(prop.comment.getTag('@defaultValue').content[0].text) : '', // TODO: Check
+                                    default: prop.comment && prop.comment.getTag('@defaultValue') ? parseText(prop.comment.getTag('@defaultValue').content[0].text) : '', // TODO: Check
                                     description: prop.comment && prop.comment.summary.map((s) => parseText(s.text || '')).join(' ')
                                 });
                             }
@@ -184,7 +184,7 @@ if (project) {
                             optional: prop.flags.isOptional,
                             readonly: prop.flags.isReadonly,
                             type: prop.type.toString(),
-                            defaultValue: prop.comment && prop.comment.getTag('@defaultValue') ? prop.comment.getTag('@defaultValue').content[0].text : '', // TODO: Check
+                            default: prop.comment && prop.comment.getTag('@defaultValue') ? prop.comment.getTag('@defaultValue').content[0].text : '', // TODO: Check
                             description: prop.comment && prop.comment.summary.map((s) => s.text || '').join(' ')
                         });
                     });
@@ -249,7 +249,7 @@ if (project) {
                             optional: prop.flags.isOptional,
                             readonly: prop.flags.isReadonly,
                             type: prop.type.toString(),
-                            //defaultValue: prop.comment && prop.comment.getTag('@defaultValue') ? prop.comment.getTag('@defaultValue').content[0].text : '', // TODO: Check
+                            //default: prop.comment && prop.comment.getTag('@defaultValue') ? prop.comment.getTag('@defaultValue').content[0].text : '', // TODO: Check
                             description: prop.comment && prop.comment.summary.map((s) => s.text || '').join(' ')
                         });
                     });
@@ -290,7 +290,7 @@ if (project) {
                                 optional: prop.flags.isOptional,
                                 readonly: prop.flags.isReadonly,
                                 type: prop.type.toString(),
-                                //defaultValue: prop.comment && prop.comment.getTag('@defaultValue') ? prop.comment.getTag('@defaultValue').content[0].text : '', // TODO: Check
+                                //default: prop.comment && prop.comment.getTag('@defaultValue') ? prop.comment.getTag('@defaultValue').content[0].text : '', // TODO: Check
                                 description: prop.comment && prop.comment.summary.map((s) => s.text || '').join(' ')
                             });
                         });
@@ -327,7 +327,7 @@ if (project) {
                         optional: parameter.flags.isOptional,
                         readonly: parameter.flags.isReadonly,
                         type: signature[0].type.toString(),
-                        //defaultValue: prop.comment && prop.comment.getTag('@defaultValue') ? prop.comment.getTag('@defaultValue').content[0].text : '', // TODO: Check
+                        //default: prop.comment && prop.comment.getTag('@defaultValue') ? prop.comment.getTag('@defaultValue').content[0].text : '', // TODO: Check
                         description: signature[0].comment && signature[0].comment.summary.map((s) => s.text || '').join(' ')
                     });
                 }
