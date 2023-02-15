@@ -2,7 +2,7 @@ import pkg from '../../../../package.json';
 import { services } from './services';
 
 const PrimeReact = {
-    version: '^9.0.0', // latest
+    version: 'latest' || pkg.version, // latest
     description:
         'PrimeReact is an open source UI library for React featuring a rich set of 80+ components, a theme designer, various theme alternatives such as Material, Bootstrap, Tailwind, premium templates and professional support. In addition, it integrates with PrimeBlock, which has 370+ ready to use UI blocks to build spectacular applications in no time.'
 };
