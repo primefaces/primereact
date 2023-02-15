@@ -287,4 +287,14 @@ export default class ObjectUtils {
 
         return result;
     }
+
+    static escapeSelector(selector) {
+        try {
+            return CSS.escape(selector);
+        } catch (error) {
+            // NOOP
+        }
+
+        return selector ? selector.replace(/(:|\.|\[|\]|,|=)/g, '\\$1') : selector;
+    }
 }
