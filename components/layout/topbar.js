@@ -1,13 +1,14 @@
 import { DocSearch } from '@docsearch/react';
 import { useEffect, useRef } from 'react';
+import pkg from '../../package.json';
 import { StyleClass } from '../lib/styleclass/StyleClass';
 
 export default function Topbar(props) {
     const versionsRef = useRef(null);
     const versions = [
         {
-            name: 'v9',
-            version: '9.0.0',
+            name: `v${pkg.version.split('.')[0]}`,
+            version: pkg.version,
             url: 'https://www.primereact.org'
         },
         {
