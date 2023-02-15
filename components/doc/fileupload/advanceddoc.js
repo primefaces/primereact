@@ -1,57 +1,35 @@
-import { useRef } from 'react';
 import { FileUpload } from '../../lib/fileupload/FileUpload';
-import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function AdvancedDoc(props) {
-    const toast = useRef(null);
-
-    const onUpload = () => {
-        toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' });
-    };
-
     const code = {
         basic: `
-<Toast ref={toast}></Toast>
-<FileUpload name="demo[]" url={'/api/upload'} onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
+<FileUpload name="demo[]" url={'/api/upload'} multiple accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
         `,
         javascript: `
-import React, { useRef } from 'react';
-import { Toast } from 'primereact/toast';
+import React from 'react';
 import { FileUpload } from 'primereact/fileupload';
 
 export default function AdvanceDemo() {
-    const toast = useRef(null);
-
-    const onUpload = () => {
-        toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' });
-    };
         
     return (
         <div className="card">
-            <Toast ref={toast}></Toast>
-            <FileUpload name="demo[]" url={'/api/upload'} onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
+            <FileUpload name="demo[]" url={'/api/upload'} multiple accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
         </div>
     )
 }
         `,
         typescript: `
-import React, { useRef } from 'react';
+import React from 'react';
 import { Toast } from 'primereact/toast';
 import { FileUpload } from 'primereact/fileupload';
 
 export default function AdvanceDemo() {
-    const toast = useRef<Toast>(null);
-
-    const onUpload = () => {
-        toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' });
-    };
         
     return (
         <div className="card">
-            <Toast ref={toast}></Toast>
-            <FileUpload name="demo[]" url={'/api/upload'} onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
+            <FileUpload name="demo[]" url={'/api/upload'} multiple accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
         </div>
     )
 }
@@ -64,8 +42,7 @@ export default function AdvanceDemo() {
                 <p>FileUpload is an advanced uploader with dragdrop support, multi file uploads, auto uploading, progress tracking and validations.</p>
             </DocSectionText>
             <div className="card">
-                <Toast ref={toast}></Toast>
-                <FileUpload name="demo[]" url={'/api/upload'} onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
+                <FileUpload name="demo[]" url={'/api/upload'} multiple accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
             </div>
             <DocSectionCode code={code} />
         </>
