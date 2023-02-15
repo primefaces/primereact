@@ -50,7 +50,7 @@ export function DocSectionCode(props) {
                     </CodeHighlight>
                 </div>
             )}
-                        <div className="flex surface-card align-items-center justify-content-end absolute" style={{ right: '.75rem', top: '.75rem', gap: '.75rem' }}>
+            <div className="flex surface-card align-items-center justify-content-end absolute" style={{ right: '.75rem', top: '.75rem', gap: '.75rem' }}>
                 {codeMode !== 'basic' && !props.hideToggleCode && (
                     <>
                         <Button
