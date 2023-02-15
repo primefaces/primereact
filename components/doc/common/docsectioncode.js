@@ -24,7 +24,33 @@ export function DocSectionCode(props) {
 
     return (
         <div className="relative doc-section-code">
-            <div className="flex surface-card align-items-center justify-content-end absolute z-2" style={{ right: '.75rem', top: '.75rem', gap: '.75rem' }}>
+            {codeMode === 'basic' && (
+                <div className={props.codeClassName}>
+                    <CodeHighlight code {...props}>
+                        {props.code.basic}
+                    </CodeHighlight>
+                </div>
+            )}
+            {codeMode !== 'basic' && codeLang === 'javascript' && (
+                <div className={props.codeClassName}>
+                    <CodeHighlight code>{props.code.javascript}</CodeHighlight>
+                </div>
+            )}
+            {codeMode !== 'basic' && codeLang === 'typescript' && (
+                <div className={props.codeClassName}>
+                    <CodeHighlight code lang={'tsx'}>
+                        {props.code.typescript}
+                    </CodeHighlight>
+                </div>
+            )}
+            {codeMode !== 'basic' && codeLang === 'data' && (
+                <div className={props.codeClassName}>
+                    <CodeHighlight code lang={'json'}>
+                        {props.code.data}
+                    </CodeHighlight>
+                </div>
+            )}
+                        <div className="flex surface-card align-items-center justify-content-end absolute" style={{ right: '.75rem', top: '.75rem', gap: '.75rem' }}>
                 {codeMode !== 'basic' && !props.hideToggleCode && (
                     <>
                         <Button
@@ -99,33 +125,6 @@ export function DocSectionCode(props) {
                     tooltipOptions={{ position: 'bottom', className: 'doc-section-code-tooltip' }}
                 ></Button>
             </div>
-
-            {codeMode === 'basic' && (
-                <div className={props.codeClassName}>
-                    <CodeHighlight code {...props}>
-                        {props.code.basic}
-                    </CodeHighlight>
-                </div>
-            )}
-            {codeMode !== 'basic' && codeLang === 'javascript' && (
-                <div className={props.codeClassName}>
-                    <CodeHighlight code>{props.code.javascript}</CodeHighlight>
-                </div>
-            )}
-            {codeMode !== 'basic' && codeLang === 'typescript' && (
-                <div className={props.codeClassName}>
-                    <CodeHighlight code lang={'tsx'}>
-                        {props.code.typescript}
-                    </CodeHighlight>
-                </div>
-            )}
-            {codeMode !== 'basic' && codeLang === 'data' && (
-                <div className={props.codeClassName}>
-                    <CodeHighlight code lang={'json'}>
-                        {props.code.data}
-                    </CodeHighlight>
-                </div>
-            )}
         </div>
     );
 }
