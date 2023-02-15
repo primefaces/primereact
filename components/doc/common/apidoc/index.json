@@ -559,6 +559,18 @@
                             "type": "string"
                         },
                         {
+                            "name": "ARROWS_H",
+                            "optional": false,
+                            "readonly": true,
+                            "type": "string"
+                        },
+                        {
+                            "name": "ARROWS_V",
+                            "optional": false,
+                            "readonly": true,
+                            "type": "string"
+                        },
+                        {
                             "name": "ARROW_CIRCLE_DOWN",
                             "optional": false,
                             "readonly": true,
@@ -601,12 +613,6 @@
                             "type": "string"
                         },
                         {
-                            "name": "ARROW_H",
-                            "optional": false,
-                            "readonly": true,
-                            "type": "string"
-                        },
-                        {
                             "name": "ARROW_LEFT",
                             "optional": false,
                             "readonly": true,
@@ -632,12 +638,6 @@
                         },
                         {
                             "name": "ARROW_UP_RIGHT",
-                            "optional": false,
-                            "readonly": true,
-                            "type": "string"
-                        },
-                        {
-                            "name": "ARROW_V",
                             "optional": false,
                             "readonly": true,
                             "type": "string"
