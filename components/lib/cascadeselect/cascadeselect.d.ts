@@ -102,6 +102,10 @@ export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.I
      */
     dataKey?: string | undefined;
     /**
+     * The breakpoint to define the maximum width boundary when responsiveness is enabled.
+     */
+    breakpoint?: string | undefined;
+    /**
      * Identifier of the underlying input element.
      */
     inputId?: string | undefined;
@@ -128,6 +132,11 @@ export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.I
      * @defaultValue pi pi-chevron-down
      */
     dropdownIcon?: string | undefined;
+    /**
+     * Maximum height of the options panel on responsive mode.
+     * @defaultValue 400px
+     */
+    scrollHeight?: string | undefined;
     /**
      * Callback to invoke on value change
      * @param {CascadeSelectChangeEvent} event - Custom change event

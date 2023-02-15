@@ -6,12 +6,12 @@ export function SeverityDoc(props) {
     const code = {
         basic: `
 <Button label="Primary" />
-<Button label="Secondary" className="p-button-secondary" />
-<Button label="Success" className="p-button-success" />
-<Button label="Info" className="p-button-info" />
-<Button label="Warning" className="p-button-warning" />
-<Button label="Help" className="p-button-help" />
-<Button label="Danger" className="p-button-danger" />
+<Button label="Secondary" severity="secondary" />
+<Button label="Success" severity="success" />
+<Button label="Info" severity="info" />
+<Button label="Warning" severity="warning" />
+<Button label="Help" severity="help" />
+<Button label="Danger" severity="danger" />
         `,
         javascript: `
 import React from 'react'; 
@@ -21,12 +21,12 @@ export default function SeverityDemo() {
     return (
         <div className="card flex flex-wrap justify-content-center gap-3">
             <Button label="Primary" />
-            <Button label="Secondary" className="p-button-secondary" />
-            <Button label="Success" className="p-button-success" />
-            <Button label="Info" className="p-button-info" />
-            <Button label="Warning" className="p-button-warning" />
-            <Button label="Help" className="p-button-help" />
-            <Button label="Danger" className="p-button-danger" />
+            <Button label="Secondary" severity="secondary" />
+            <Button label="Success" severity="success" />
+            <Button label="Info" severity="info" />
+            <Button label="Warning" severity="warning" />
+            <Button label="Help" severity="help" />
+            <Button label="Danger" severity="danger" />
         </div>
     )
 }
@@ -39,12 +39,12 @@ export default function SeverityDemo() {
     return (
         <div className="card flex flex-wrap justify-content-center gap-3">
             <Button label="Primary" />
-            <Button label="Secondary" className="p-button-secondary" />
-            <Button label="Success" className="p-button-success" />
-            <Button label="Info" className="p-button-info" />
-            <Button label="Warning" className="p-button-warning" />
-            <Button label="Help" className="p-button-help" />
-            <Button label="Danger" className="p-button-danger" />
+            <Button label="Secondary" severity="secondary" />
+            <Button label="Success" severity="success" />
+            <Button label="Info" severity="info" />
+            <Button label="Warning" severity="warning" />
+            <Button label="Help" severity="help" />
+            <Button label="Danger" severity="danger" />
         </div>
     )
 }
@@ -58,12 +58,12 @@ export default function SeverityDemo() {
             </DocSectionText>
             <div className="card flex flex-wrap justify-content-center gap-3">
                 <Button label="Primary" />
-                <Button label="Secondary" className="p-button-secondary" />
-                <Button label="Success" className="p-button-success" />
-                <Button label="Info" className="p-button-info" />
-                <Button label="Warning" className="p-button-warning" />
-                <Button label="Help" className="p-button-help" />
-                <Button label="Danger" className="p-button-danger" />
+                <Button label="Secondary" severity="secondary" />
+                <Button label="Success" severity="success" />
+                <Button label="Info" severity="info" />
+                <Button label="Warning" severity="warning" />
+                <Button label="Help" severity="help" />
+                <Button label="Danger" severity="danger" />
             </div>
             <DocSectionCode code={code} />
         </>

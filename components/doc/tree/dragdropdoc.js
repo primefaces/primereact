@@ -87,8 +87,10 @@ export default function DragDropDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Nodes can be reordered with dragdrop using <i>dragdropScope</i> and <i>onDragDrop</i> properties. The <i>dragdropScope</i> defines a unique scope of the component
-                so that other drag events do not intervene with the component whereas <i>onDragDrop</i> is a callback to update the new state after a drop.</p>
+                <p>
+                    Nodes can be reordered with dragdrop using <i>dragdropScope</i> and <i>onDragDrop</i> properties. The <i>dragdropScope</i> defines a unique scope of the component so that other drag events do not intervene with the component
+                    whereas <i>onDragDrop</i> is a callback to update the new state after a drop.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Tree value={nodes} dragdropScope="demo" onDragDrop={(e) => setNodes(e.value)} className="w-full md:w-30rem" />

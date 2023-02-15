@@ -91,7 +91,9 @@ export default function SingleSelectionDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Single node selection is configured by setting <i>selectionMode</i> as <i>single</i> along with <i>selectionKeys</i> and <i>onSelectionChange</i> properties to manage the selection value binding.</p>
+                <p>
+                    Single node selection is configured by setting <i>selectionMode</i> as <i>single</i> along with <i>selectionKeys</i> and <i>onSelectionChange</i> properties to manage the selection value binding.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Tree value={nodes} selectionMode="single" selectionKeys={selectedKey} onSelectionChange={(e) => setSelectedKey(e.value)} className="w-full md:w-30rem" />

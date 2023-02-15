@@ -119,8 +119,8 @@ export default function MultipleSelectionDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    More than one node is selectable by setting <i>selectionMode</i> to <i>multiple</i>. By default in multiple selection mode, metaKey press (e.g. <i>⌘</i>) is necessary to add to existing selections however this can be configured with disabling the{' '}
-                    <i>metaKeySelection</i> property. Note that in touch enabled devices, Tree always ignores metaKey.
+                    More than one node is selectable by setting <i>selectionMode</i> to <i>multiple</i>. By default in multiple selection mode, metaKey press (e.g. <i>⌘</i>) is necessary to add to existing selections however this can be configured
+                    with disabling the <i>metaKeySelection</i> property. Note that in touch enabled devices, Tree always ignores metaKey.
                 </p>
                 <p>In multiple selection mode, value binding should be a key-value pair where key is the node key and value is a boolean to indicate selection.</p>
             </DocSectionText>

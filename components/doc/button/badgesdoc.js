@@ -6,7 +6,7 @@ export function BadgesDoc(props) {
     const code = {
         basic: `
 <Button type="button" label="Emails" badge="8" />
-<Button type="button" label="Messages" icon="pi pi-users" className="p-button-outlined" badge="2" badgeClassName="p-badge-danger" />
+<Button type="button" label="Messages" icon="pi pi-users" outlined badge="2" badgeClassName="p-badge-danger" />
         `,
         javascript: `
 import React from 'react'; 
@@ -16,7 +16,7 @@ export default function BadgesDemo() {
     return (
         <div className="card flex flex-wrap justify-content-center gap-3">
             <Button type="button" label="Emails" badge="8" />
-            <Button type="button" label="Messages" icon="pi pi-users" className="p-button-outlined" badge="2" badgeClassName="p-badge-danger" />
+            <Button type="button" label="Messages" icon="pi pi-users" outlined badge="2" badgeClassName="p-badge-danger" />
         </div>
     )
 }
@@ -29,7 +29,7 @@ export default function BadgesDemo() {
     return (
         <div className="card flex flex-wrap justify-content-center gap-3">
             <Button type="button" label="Emails" badge="8" />
-            <Button type="button" label="Messages" icon="pi pi-users" className="p-button-outlined" badge="2" badgeClassName="p-badge-danger" />
+            <Button type="button" label="Messages" icon="pi pi-users" outlined badge="2" badgeClassName="p-badge-danger" />
         </div>
     )
 }
@@ -45,7 +45,7 @@ export default function BadgesDemo() {
             </DocSectionText>
             <div className="card flex flex-wrap justify-content-center gap-3">
                 <Button type="button" label="Emails" badge="8" />
-                <Button type="button" label="Messages" icon="pi pi-users" className="p-button-outlined" badge="2" badgeClassName="p-badge-danger" />
+                <Button type="button" label="Messages" icon="pi pi-users" outlined badge="2" badgeClassName="p-badge-danger" />
             </div>
             <DocSectionCode code={code} />
         </>

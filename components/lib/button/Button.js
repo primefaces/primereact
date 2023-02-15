@@ -55,8 +55,15 @@ export const Button = React.memo(
             'p-button-vertical': (props.iconPos === 'top' || props.iconPos === 'bottom') && props.label,
             'p-disabled': disabled,
             'p-button-loading': props.loading,
+            'p-button-outlined': props.outlined,
+            'p-button-raised': props.raised,
+            'p-button-link': props.link,
+            'p-button-text': props.text,
+            'p-button-rounded': props.rounded,
             'p-button-loading-label-only': props.loading && !props.icon && props.label,
-            [`p-button-loading-${props.iconPos}`]: props.loading && props.loadingIcon && props.label
+            [`p-button-loading-${props.iconPos}`]: props.loading && props.loadingIcon && props.label,
+            [`p-button-${props.size}`]: props.size,
+            [`p-button-${props.severity}`]: props.severity
         });
 
         const icon = createIcon();

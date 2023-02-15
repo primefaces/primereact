@@ -5,7 +5,7 @@ import { DocSectionText } from '../common/docsectiontext';
 export function LinkDoc(props) {
     const code = {
         basic: `
-<Button label="Submit" className="p-button-link" />
+<Button label="Submit" link />
         `,
         javascript: `
 import React from 'react'; 
@@ -14,7 +14,7 @@ import { Button } from 'primereact/button';
 export default function LinkDemo() {
     return (
         <div className="card flex justify-content-center">
-            <Button label="Submit" className="p-button-link" />
+            <Button label="Submit" link />
         </div>
     )
 }
@@ -26,7 +26,7 @@ import { Button } from 'primereact/button';
 export default function LinkDemo() {
     return (
         <div className="card flex justify-content-center">
-            <Button label="Submit" className="p-button-link" />
+            <Button label="Submit" link />
         </div>
     )
 }
@@ -41,7 +41,7 @@ export default function LinkDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Button label="Submit" className="p-button-link" />
+                <Button label="Submit" link />
             </div>
             <DocSectionCode code={code} />
         </>

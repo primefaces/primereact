@@ -3169,6 +3169,14 @@
                             "description": "Text of the button."
                         },
                         {
+                            "name": "link",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "defaultValue": "false",
+                            "description": "Add a link style to the button."
+                        },
+                        {
                             "name": "loading",
                             "optional": true,
                             "readonly": false,
@@ -3183,6 +3191,54 @@
                             "type": "IconType<ButtonProps>",
                             "defaultValue": "",
                             "description": "Name of the loading icon or JSX.Element for loading icon."
+                        },
+                        {
+                            "name": "outlined",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "defaultValue": "false",
+                            "description": "Add a border class without a background initially."
+                        },
+                        {
+                            "name": "raised",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "defaultValue": "false",
+                            "description": "Add a shadow to indicate elevation."
+                        },
+                        {
+                            "name": "rounded",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "defaultValue": "false",
+                            "description": "Add a circular border radius to the button."
+                        },
+                        {
+                            "name": "severity",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"success\" | \"warning\" | \"info\" | \"danger\" | \"secondary\"",
+                            "defaultValue": "",
+                            "description": "Defines the style of the button, valid values are \"secondary\", \"success\", \"info\", \"warning\", \"danger\"."
+                        },
+                        {
+                            "name": "size",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"small\" | \"large\"",
+                            "defaultValue": "",
+                            "description": "Defines the size of the button, valid values are \"small\" and \"large\"."
+                        },
+                        {
+                            "name": "text",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "defaultValue": "false",
+                            "description": "Add a textual class to the button without a background initially."
                         },
                         {
                             "name": "tooltip",
@@ -4685,6 +4741,14 @@
                             "description": "Establishes relationships between the component and label(s) where its value should be one or more element IDs."
                         },
                         {
+                            "name": "breakpoint",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "defaultValue": "",
+                            "description": "The breakpoint to define the maximum width boundary when responsiveness is enabled."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
@@ -4811,6 +4875,14 @@
                             "type": "string",
                             "defaultValue": "",
                             "description": "Default text to display when no option is selected."
+                        },
+                        {
+                            "name": "scrollHeight",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "defaultValue": "400px",
+                            "description": "Maximum height of the options panel on responsive mode."
                         },
                         {
                             "name": "style",
@@ -19826,6 +19898,14 @@
                     "description": "Defines valid properties in OrderList component. In addition to these, all properties of HTMLDivElement can be used in this component.",
                     "values": [
                         {
+                            "name": "breakpoint",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "defaultValue": "'960px'.",
+                            "description": "The breakpoint to define the maximum width boundary when responsiveness is enabled."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
@@ -21962,6 +22042,14 @@
                     "description": "Defines valid properties in PickList component.",
                     "values": [
                         {
+                            "name": "breakpoint",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "defaultValue": "'960px'.",
+                            "description": "The breakpoint to define the maximum width boundary when responsiveness is enabled."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
@@ -21984,6 +22072,14 @@
                             "type": "string",
                             "defaultValue": "",
                             "description": "Name of the field that uniquely identifies the a record in the data."
+                        },
+                        {
+                            "name": "filter",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "defaultValue": "false",
+                            "description": "When specified, displays an input field to filter the items on keyup."
                         },
                         {
                             "name": "filterBy",

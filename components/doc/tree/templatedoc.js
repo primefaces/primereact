@@ -32,7 +32,11 @@ export function TemplateDoc(props) {
         let label = <b>{node.label}</b>;
 
         if (node.url) {
-            label = <a href={node.url} className="text-primary hover:underline font-semibold">{node.label}</a>;
+            label = (
+                <a href={node.url} className="text-primary hover:underline font-semibold">
+                    {node.label}
+                </a>
+            );
         }
 
         return <span className={options.className}>{label}</span>;
@@ -142,7 +146,9 @@ export default function TemplateDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Custom node content instead of a node label is defined with the <i>nodeTemplate</i> property.</p>
+                <p>
+                    Custom node content instead of a node label is defined with the <i>nodeTemplate</i> property.
+                </p>
             </DocSectionText>
 
             <div className="card flex justify-content-center">

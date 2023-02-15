@@ -66,6 +66,11 @@ export interface OrderListProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      */
     dataKey?: string | undefined;
     /**
+     * The breakpoint to define the maximum width boundary when responsiveness is enabled.
+     * @defaultValue '960px'.
+     */
+    breakpoint?: string | undefined;
+    /**
      * When specified, displays an input field to filter the items on keyup.
      * @defaultValue false
      */

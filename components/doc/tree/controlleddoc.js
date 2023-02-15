@@ -7,7 +7,7 @@ import { Button } from '../../lib/button/Button';
 
 export function ControlledDoc(props) {
     const [nodes, setNodes] = useState([]);
-    const [expandedKeys, setExpandedKeys] = useState({'0': true, '0-0': true});
+    const [expandedKeys, setExpandedKeys] = useState({ 0: true, '0-0': true });
 
     const expandAll = () => {
         let _expandedKeys = {};
