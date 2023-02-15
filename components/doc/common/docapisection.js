@@ -369,6 +369,7 @@ export function DocApiSection(props) {
                         const mMap = {
                             id: `api.${mKey}`,
                             label: mKey,
+                            description: mValue.description,
                             children: []
                         };
 

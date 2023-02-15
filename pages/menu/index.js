@@ -46,7 +46,7 @@ const MenuDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Menu Component" header="Menu" description="Menu is a navigation/command component that supports dynamic and static positioning." componentDocs={docs} apiDocs={['Menu']} />;
+    return <DocComponent title="React Menu Component" header="Menu" description="Menu is a navigation/command component that supports dynamic and static positioning." componentDocs={docs} apiDocs={['Menu', 'MenuItem']} />;
 };
 
 export default MenuDemo;

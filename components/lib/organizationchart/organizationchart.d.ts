@@ -68,6 +68,10 @@ interface OrganizationChartNodeData {
     label?: string;
 }
 
+/**
+ * Defines valid properties in OrganizationChart component. In addition to these, all properties of HTMLDivElement can be used in this component.
+ * @group Properties
+ */
 export interface OrganizationChartProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     /**
      * An array of nested TreeNodes.
