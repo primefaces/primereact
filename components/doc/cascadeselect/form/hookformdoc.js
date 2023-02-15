@@ -126,6 +126,7 @@ export function HookFormDoc(props) {
             optionGroupLabel="name"
             optionGroupChildren={['states', 'cities']}
             style={{ minWidth: '14rem' }}
+            breakpoint="767px"
             placeholder="Select a City"
             onChange={(e) => field.onChange(e.value)}
         />
@@ -262,6 +263,7 @@ export default function HookFormDoc() {
                             optionGroupLabel="name"
                             optionGroupChildren={['states', 'cities']}
                             style={{ minWidth: '14rem' }}
+                            breakpoint="767px"
                             placeholder="Select a City"
                             className={classNames({ 'p-invalid': fieldState.error })}
                             onChange={(e) => field.onChange(e.value)}
@@ -419,6 +421,7 @@ export default function HookFormDoc() {
                             optionGroupLabel="name"
                             optionGroupChildren={['states', 'cities']}
                             style={{ minWidth: '14rem' }}
+                            breakpoint="767px"
                             placeholder="Select a City"
                             className={classNames({ 'p-invalid': fieldState.error })}
                             onChange={(e: CascadeSelectChangeEvent) => field.onChange(e.value)}
@@ -458,6 +461,7 @@ export default function HookFormDoc() {
                                 optionGroupLabel={'name'}
                                 optionGroupChildren={['states', 'cities']}
                                 style={{ minWidth: '14rem' }}
+                                breakpoint="767px"
                                 placeholder={'Select a City'}
                                 className={classNames({ 'p-invalid': fieldState.error })}
                                 onChange={(e) => field.onChange(e.value)}

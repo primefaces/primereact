@@ -125,6 +125,7 @@ export function FormikDoc(props) {
     optionGroupLabel="name"
     optionGroupChildren={['states', 'cities']}
     style={{ minWidth: '14rem' }}
+    breakpoint="767px"
     placeholder="Select a City"
     onChange={(e) => {
         formik.setFieldValue('city', e.value);
@@ -261,6 +262,7 @@ export default function FormikDoc() {
                     optionGroupLabel="name"
                     optionGroupChildren={['states', 'cities']}
                     style={{ minWidth: '14rem' }}
+                    breakpoint="767px"
                     placeholder="Select a City"
                     onChange={(e) => {
                         formik.setFieldValue('city', e.value);
@@ -417,6 +419,7 @@ export default function FormikDoc() {
                     optionGroupLabel="name"
                     optionGroupChildren={['states', 'cities']}
                     style={{ minWidth: '14rem' }}
+                    breakpoint="767px"
                     placeholder="Select a City"
                     onChange={(e: CascadeSelectChangeEvent) => {
                         formik.setFieldValue('city', e.value);
@@ -450,6 +453,7 @@ export default function FormikDoc() {
                         optionGroupLabel="name"
                         optionGroupChildren={['states', 'cities']}
                         style={{ minWidth: '14rem' }}
+                        breakpoint="767px"
                         placeholder="Select a City"
                         className={classNames({ 'p-invalid': isFormFieldInvalid('city') })}
                         onChange={(e) => {
