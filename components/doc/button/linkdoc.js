@@ -37,7 +37,7 @@ export default function LinkDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    A button can be rendered as a link by adding <i>p-button-link</i> class.
+                    A button can be rendered as a link as well.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">

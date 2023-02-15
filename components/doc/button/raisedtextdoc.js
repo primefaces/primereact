@@ -54,7 +54,7 @@ export default function RaisedTextDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Text buttons can be displayed as raised as well for elevation.</p>
+                <p>Text buttons can be displayed as raised for elevation.</p>
             </DocSectionText>
             <div className="card flex flex-wrap justify-content-center gap-3">
                 <Button label="Primary" text raised />
