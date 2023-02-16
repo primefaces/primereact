@@ -29,6 +29,11 @@ import { RowExpandDoc } from '../../components/doc/datatable/rowexpanddoc';
 import { ExpandableRowGroupsDoc } from '../../components/doc/datatable/rowgroup/expandablerowgroupsdoc';
 import { RowSpanGroupingDoc } from '../../components/doc/datatable/rowgroup/rowspangroupingdoc';
 import { SubHeaderGroupingDoc } from '../../components/doc/datatable/rowgroup/subheadergroupingdoc';
+import { CheckboxRowSelectionDoc } from '../../components/doc/datatable/rowselection/checkboxdoc';
+import { DisabledRowSelectionDoc } from '../../components/doc/datatable/rowselection/disableddoc';
+import { MultipleRowsSelectionDoc } from '../../components/doc/datatable/rowselection/multipledoc';
+import { RadioButtonRowSelectionDoc } from '../../components/doc/datatable/rowselection/radiobuttondoc';
+import { SingleRowSelectionDoc } from '../../components/doc/datatable/rowselection/singledoc';
 import { CustomersDoc } from '../../components/doc/datatable/samplesdoc';
 import { ScrollFlexibleDoc } from '../../components/doc/datatable/scroll/flexibledoc';
 import { ScrollFrozenColumnsDoc } from '../../components/doc/datatable/scroll/frozencolumnsdoc';
@@ -149,6 +154,37 @@ const DataTableDemo = () => {
                     id: 'advanced_filter',
                     label: 'Advanced',
                     component: AdvancedFilterDoc
+                }
+            ]
+        },
+        {
+            id: 'row_selection',
+            label: 'Row Selection',
+            children: [
+                {
+                    id: 'single_row_selection',
+                    label: 'Single',
+                    component: SingleRowSelectionDoc
+                },
+                {
+                    id: 'multiple_rows_selection',
+                    label: 'Multiple',
+                    component: MultipleRowsSelectionDoc
+                },
+                {
+                    id: 'radiobutton_row_selection',
+                    label: 'RadioButton',
+                    component: RadioButtonRowSelectionDoc
+                },
+                {
+                    id: 'checkbox_row_selection',
+                    label: 'Checkbox',
+                    component: CheckboxRowSelectionDoc
+                },
+                {
+                    id: 'disabled_row_selection',
+                    label: 'Disabled',
+                    component: DisabledRowSelectionDoc
                 }
             ]
         },
