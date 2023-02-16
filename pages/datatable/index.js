@@ -53,8 +53,8 @@ import { StripedRowsDoc } from '../../components/doc/datatable/stripedrowsdoc';
 import { StyledDataTableDoc } from '../../components/doc/datatable/styleddatatabledoc';
 import { StyleDoc } from '../../components/doc/datatable/styledoc';
 import { TemplateDoc } from '../../components/doc/datatable/templatedoc';
-import { LazyLoadingFromRemoteDataSourceDoc } from '../../components/doc/datatable/virtualscroll/lazyloadfromremotedatadoc';
-import { PreloadedDataDoc } from '../../components/doc/datatable/virtualscroll/preloadeddatadoc';
+import { LazyVirtualScrollDoc } from '../../components/doc/datatable/virtualscroll/lazydoc';
+import { PreloadVirtualScrollDoc } from '../../components/doc/datatable/virtualscroll/preloaddoc';
 
 const DataTableDemo = () => {
     const docs = [
@@ -270,14 +270,14 @@ const DataTableDemo = () => {
             label: 'Virtual Scroll',
             children: [
                 {
-                    id: 'preload',
+                    id: 'preload_virtualscroll',
                     label: 'Preload',
-                    component: PreloadedDataDoc
+                    component: PreloadVirtualScrollDoc
                 },
                 {
-                    id: 'lazyloading',
+                    id: 'lazy_virtualscroll',
                     label: 'Lazy',
-                    component: LazyLoadingFromRemoteDataSourceDoc
+                    component: LazyVirtualScrollDoc
                 }
             ]
         },

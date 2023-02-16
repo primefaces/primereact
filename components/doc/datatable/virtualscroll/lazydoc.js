@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { DataTable } from '../../../lib/datatable/DataTable';
+import { CarService } from '../../../../service/CarService';
 import { Column } from '../../../lib/column/Column';
+import { DataTable } from '../../../lib/datatable/DataTable';
+import { Skeleton } from '../../../lib/skeleton/Skeleton';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
-import { CarService } from '../../../../service/CarService';
-import { Skeleton } from '../../../lib/skeleton/Skeleton';
 
-export function LazyLoadingFromRemoteDataSourceDoc(props) {
+export function LazyVirtualScrollDoc(props) {
     const cars = Array.from({ length: 100000 }).map((_, i) => CarService.generateCar(i + 1));
     const [virtualCars, setVirtualCars] = useState(Array.from({ length: 100000 }));
     const [lazyLoading, setLazyLoading] = useState(false);
@@ -45,7 +45,8 @@ export function LazyLoadingFromRemoteDataSourceDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={virtualCars} scrollable scrollHeight="400px" virtualScrollerOptions={{ lazy: true, onLazyLoad: loadCarsLazy, itemSize: 46, delay: 200, showLoader: true, loading: lazyLoading, loadingTemplate }}>
+<DataTable value={virtualCars} scrollable scrollHeight="400px" 
+    virtualScrollerOptions={{ lazy: true, onLazyLoad: loadCarsLazy, itemSize: 46, delay: 200, showLoader: true, loading: lazyLoading, loadingTemplate }}>
     <Column field="id" header="Id" style={{ minWidth: '200px' }}></Column>
     <Column field="vin" header="Vin" style={{ minWidth: '200px' }}></Column>
     <Column field="year" header="Year" style={{ minWidth: '200px' }}></Column>
@@ -60,8 +61,7 @@ import { Column } from 'primereact/column';
 import { Skeleton } from 'primereact/skeleton';
 import { CarService } from './service/CarService';
 
-const LazyLoadingFromRemoteDataSourceDoc = () => {
-    
+export default function LazyVirtualScrollDemo() {
     const cars = Array.from({ length: 100000 }).map((_, i) => CarService.generateCar(i + 1));
     const [virtualCars, setVirtualCars] = useState(Array.from({ length: 100000 }));
     const [lazyLoading, setLazyLoading] = useState(false);
@@ -100,7 +100,8 @@ const LazyLoadingFromRemoteDataSourceDoc = () => {
 
     return (
         <div className="card">
-            <DataTable value={virtualCars} scrollable scrollHeight="400px" virtualScrollerOptions={{ lazy: true, onLazyLoad: loadCarsLazy, itemSize: 46, delay: 200, showLoader: true, loading: lazyLoading, loadingTemplate }}>
+            <DataTable value={virtualCars} scrollable scrollHeight="400px" 
+                virtualScrollerOptions={{ lazy: true, onLazyLoad: loadCarsLazy, itemSize: 46, delay: 200, showLoader: true, loading: lazyLoading, loadingTemplate }}>
                 <Column field="id" header="Id" style={{ minWidth: '200px' }}></Column>
                 <Column field="vin" header="Vin" style={{ minWidth: '200px' }}></Column>
                 <Column field="year" header="Year" style={{ minWidth: '200px' }}></Column>
@@ -116,16 +117,24 @@ import React, { useState } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Skeleton } from 'primereact/skeleton';
+import { VirtualScrollerLazyEvent, VirtualScrollerLoadingTemplateOptions } from 'primereact/virtualscroller';
 import { CarService } from './service/CarService';
 
-const LazyLoadingFromRemoteDataSourceDoc = () => {
-    
-    const cars = Array.from({ length: 100000 }).map((_, i) => CarService.generateCar(i + 1));
-    const [virtualCars, setVirtualCars] = useState(Array.from({ length: 100000 }));
-    const [lazyLoading, setLazyLoading] = useState(false);
+interface Car {
+    id: number;
+    vin: string;
+    brand: string;
+    color: string;
+    year: number;
+}
+
+export default function LazyVirtualScrollDemo() {
+    const cars: Car[] = Array.from({ length: 100000 }).map((_, i) => CarService.generateCar(i + 1));
+    const [virtualCars, setVirtualCars] = useState<Car[]>(Array.from({ length: 100000 }));
+    const [lazyLoading, setLazyLoading] = useState<boolean>(false);
     let loadLazyTimeout = null;
 
-    const loadCarsLazy = (event) => {
+    const loadCarsLazy = (event: VirtualScrollerLazyEvent) => {
         !lazyLoading && setLazyLoading(true);
 
         if (loadLazyTimeout) {
@@ -148,7 +157,7 @@ const LazyLoadingFromRemoteDataSourceDoc = () => {
         }, Math.random() * 1000 + 250);
     };
 
-    const loadingTemplate = (options) => {
+    const loadingTemplate = (options: VirtualScrollerLoadingTemplateOptions) => {
         return (
             <div className="flex align-items-center" style={{ height: '17px', flexGrow: '1', overflow: 'hidden' }}>
                 <Skeleton width={options.cellEven ? (options.field === 'year' ? '30%' : '40%') : '60%'} height="1rem" />
@@ -158,7 +167,8 @@ const LazyLoadingFromRemoteDataSourceDoc = () => {
 
     return (
         <div className="card">
-            <DataTable value={virtualCars} scrollable scrollHeight="400px" virtualScrollerOptions={{ lazy: true, onLazyLoad: loadCarsLazy, itemSize: 46, delay: 200, showLoader: true, loading: lazyLoading, loadingTemplate }}>
+            <DataTable value={virtualCars} scrollable scrollHeight="400px" 
+                virtualScrollerOptions={{ lazy: true, onLazyLoad: loadCarsLazy, itemSize: 46, delay: 200, showLoader: true, loading: lazyLoading, loadingTemplate }}>
                 <Column field="id" header="Id" style={{ minWidth: '200px' }}></Column>
                 <Column field="vin" header="Vin" style={{ minWidth: '200px' }}></Column>
                 <Column field="year" header="Year" style={{ minWidth: '200px' }}></Column>
@@ -170,8 +180,6 @@ const LazyLoadingFromRemoteDataSourceDoc = () => {
 }
         `,
         data: `
-/* CarService */
-
 {
     id: 1
     vin: tvACo,
@@ -185,7 +193,12 @@ const LazyLoadingFromRemoteDataSourceDoc = () => {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Lazy Loading from a Remote Datasource (100000 Rows) demo content.</p>
+                <p>
+                    When lazy loading is enabled via the <i>virtualScrollerOptions</i>, data is fetched on demand during scrolling instead of preload.
+                </p>
+                <p>
+                    In sample below, an in-memory list and timeout is used to mimic fetching from a remote datasource. The <i>virtualCars</i> is an empty array that is populated on scroll.
+                </p>
             </DocSectionText>
             <div className="card">
                 <DataTable value={virtualCars} scrollable scrollHeight="400px" virtualScrollerOptions={{ lazy: true, onLazyLoad: loadCarsLazy, itemSize: 46, delay: 200, showLoader: true, loading: lazyLoading, loadingTemplate }}>
