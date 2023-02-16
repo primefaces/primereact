@@ -47,7 +47,6 @@ import { MultipleColumnsDoc } from '../../components/doc/datatable/sort/multiple
 import { PresortDoc } from '../../components/doc/datatable/sort/presortdoc';
 import { RemovableSortDoc } from '../../components/doc/datatable/sort/removablesortdoc';
 import { SingleColumnDoc } from '../../components/doc/datatable/sort/singlecolumndoc';
-import { SortableDisabledDoc } from '../../components/doc/datatable/sort/sortabledisableddoc';
 import { CustomStorageDoc } from '../../components/doc/datatable/state/customstoragedoc';
 import { LocalStorageDoc } from '../../components/doc/datatable/state/localdoc';
 import { SessionStorageDoc } from '../../components/doc/datatable/state/sessionstoragedoc';
@@ -116,29 +115,24 @@ const DataTableDemo = () => {
             label: 'Sort',
             children: [
                 {
-                    id: 'singlecolumn',
+                    id: 'single_sort',
                     label: 'Single Column',
                     component: SingleColumnDoc
                 },
                 {
-                    id: 'multiplecolumns',
+                    id: 'multiple_sort',
                     label: 'Multiple Columns',
                     component: MultipleColumnsDoc
                 },
                 {
-                    id: 'presort',
+                    id: 'pre_sort',
                     label: 'Presort',
                     component: PresortDoc
                 },
                 {
-                    id: 'removablesort',
-                    label: 'Removable Sort',
+                    id: 'removable_sort',
+                    label: 'Removable',
                     component: RemovableSortDoc
-                },
-                {
-                    id: 'sortabledisabled',
-                    label: 'Sortable Disabled',
-                    component: SortableDisabledDoc
                 }
             ]
         },

@@ -140,7 +140,7 @@ export default function PaginatorTemplateDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Paginator UI is customized using the <i>paginatorTemplate</i> property. Each element can also be customized further with your own UI to replace the default one. Refer to the <Link href="/paginator">Paginator</Link> component for
+                    Paginator UI is customized using the <i>paginatorTemplate</i> property. Each element can also be customized further with your own UI to replace the default one, refer to the <Link href="/paginator">Paginator</Link> component for
                     more information about the advanced customization options.
                 </p>
             </DocSectionText>
