@@ -8,7 +8,7 @@ import { FitModeDoc } from '../../components/doc/datatable/colresize/fitmodedoc'
 import { ColToggleDoc } from '../../components/doc/datatable/coltoggledoc';
 import { ContextMenuDoc } from '../../components/doc/datatable/contextmenudoc';
 import { DatatableProductsDoc } from '../../components/doc/datatable/datatableproducts';
-import { DynamicDoc } from '../../components/doc/datatable/dynamiccolumnsdoc';
+import { DynamicColumnsDoc } from '../../components/doc/datatable/dynamiccolumnsdoc';
 import { CellEditingDoc } from '../../components/doc/datatable/edit/celleditingdoc';
 import { CellEditWithSortAndFilterDoc } from '../../components/doc/datatable/edit/celleditwithsortandfilterdoc';
 import { ProgrammaticDoc } from '../../components/doc/datatable/edit/programmaticdoc';
@@ -22,7 +22,7 @@ import { GridLinesDoc } from '../../components/doc/datatable/gridlinesdoc';
 import { ImportDoc } from '../../components/doc/datatable/importdoc';
 import { LazyDoc } from '../../components/doc/datatable/lazydoc';
 import { PaginatorBasicDoc } from '../../components/doc/datatable/paginator/basicdoc';
-import { CustomPaginatorTemplateDoc } from '../../components/doc/datatable/paginator/custompaginatortemplatedoc';
+import { PaginatorTemplateDoc } from '../../components/doc/datatable/paginator/templatedoc';
 import { ReorderDoc } from '../../components/doc/datatable/reorderdoc';
 import { ResponsiveDoc } from '../../components/doc/datatable/responsivedoc';
 import { RowExpandDoc } from '../../components/doc/datatable/rowexpanddoc';
@@ -51,7 +51,7 @@ import { SortableDisabledDoc } from '../../components/doc/datatable/sort/sortabl
 import { CustomStorageDoc } from '../../components/doc/datatable/state/customstoragedoc';
 import { LocalStorageDoc } from '../../components/doc/datatable/state/localdoc';
 import { SessionStorageDoc } from '../../components/doc/datatable/state/sessionstoragedoc';
-import { StripedDoc } from '../../components/doc/datatable/stripeddoc';
+import { StripedRowsDoc } from '../../components/doc/datatable/stripedrowsdoc';
 import { StyledDataTableDoc } from '../../components/doc/datatable/styleddatatabledoc';
 import { StyleDoc } from '../../components/doc/datatable/styledoc';
 import { TemplateDoc } from '../../components/doc/datatable/templatedoc';
@@ -73,7 +73,7 @@ const DataTableDemo = () => {
         {
             id: 'dynamiccolsdoc',
             label: 'Dynamic Columns',
-            component: DynamicDoc
+            component: DynamicColumnsDoc
         },
         {
             id: 'template',
@@ -87,18 +87,33 @@ const DataTableDemo = () => {
         },
         {
             id: 'gridlines',
-            label: 'GridLines',
+            label: 'Grid Lines',
             component: GridLinesDoc
         },
         {
             id: 'striped',
-            label: 'Striped',
-            component: StripedDoc
+            label: 'Striped Rows',
+            component: StripedRowsDoc
+        },
+        {
+            id: 'paginator',
+            label: 'Paginator',
+            children: [
+                {
+                    id: 'paginator_basic',
+                    label: 'Basic',
+                    component: PaginatorBasicDoc
+                },
+                {
+                    id: 'paginator_template',
+                    label: 'Template',
+                    component: PaginatorTemplateDoc
+                }
+            ]
         },
         {
             id: 'sort',
             label: 'Sort',
-            description: 'Enabling sortable property on a column is enough to make a column sortable. Multiple column sorting is enabled using sortMode property and used with metaKey.',
             children: [
                 {
                     id: 'singlecolumn',
@@ -124,23 +139,6 @@ const DataTableDemo = () => {
                     id: 'sortabledisabled',
                     label: 'Sortable Disabled',
                     component: SortableDisabledDoc
-                }
-            ]
-        },
-        {
-            id: 'paginator',
-            label: 'Paginator',
-            description: 'Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the number of page links to display.',
-            children: [
-                {
-                    id: 'sortbasic',
-                    label: 'Basic',
-                    component: PaginatorBasicDoc
-                },
-                {
-                    id: 'custompaginatortemplate',
-                    label: 'Custom Paginator Template',
-                    component: CustomPaginatorTemplateDoc
                 }
             ]
         },

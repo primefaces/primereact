@@ -14,7 +14,7 @@ export function BasicDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={products} responsiveLayout="scroll">
+<DataTable value={products}>
     <Column field="code" header="Code"></Column>
     <Column field="name" header="Name"></Column>
     <Column field="category" header="Category"></Column>
@@ -30,21 +30,18 @@ import { ProductService } from './service/ProductService';
 export default function BasicDemo() {
     const [products, setProducts] = useState([]);
 
-
     useEffect(() => {
         ProductService.getProductsMini().then(data => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
-        <div>
-            <div className="card">
-                <DataTable value={products} responsiveLayout="scroll">
-                    <Column field="code" header="Code"></Column>
-                    <Column field="name" header="Name"></Column>
-                    <Column field="category" header="Category"></Column>
-                    <Column field="quantity" header="Quantity"></Column>
-                </DataTable>
-            </div>
+        <div className="card">
+            <DataTable value={products}>
+                <Column field="code" header="Code"></Column>
+                <Column field="name" header="Name"></Column>
+                <Column field="category" header="Category"></Column>
+                <Column field="quantity" header="Quantity"></Column>
+            </DataTable>
         </div>
     );
 }
@@ -55,30 +52,39 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ProductService } from './service/ProductService';
 
-export default function BasicDemo() {
-    const [products, setProducts] = useState([]);
+interface Product {
+    id: string;
+    code: string;
+    name: string;
+    description: string;
+    image: string;
+    price: number;
+    category: string;
+    quantity: number;
+    inventoryStatus: string;
+    rating: number;
+}
 
+export default function BasicDemo() {
+    const [products, setProducts] = useState<Product[]>([]);
 
     useEffect(() => {
         ProductService.getProductsMini().then(data => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
-        <div>
-            <div className="card">
-                <DataTable value={products} responsiveLayout="scroll">
-                    <Column field="code" header="Code"></Column>
-                    <Column field="name" header="Name"></Column>
-                    <Column field="category" header="Category"></Column>
-                    <Column field="quantity" header="Quantity"></Column>
-                </DataTable>
-            </div>
+        <div className="card">
+            <DataTable value={products}>
+                <Column field="code" header="Code"></Column>
+                <Column field="name" header="Name"></Column>
+                <Column field="category" header="Category"></Column>
+                <Column field="quantity" header="Quantity"></Column>
+            </DataTable>
         </div>
     );
 }
         `,
         data: `
-/* ProductService */        
 {
     id: '1000',
     code: 'f230fh0g3',
@@ -98,17 +104,19 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>DataTable requires a collection to display along with column components for the representation of the data.</p>
+                <p>
+                    DataTable requires a <i>value</i> as data to display and <i>Column</i> components as children for the representation.
+                </p>
             </DocSectionText>
             <div className="card">
-                <DataTable value={products} responsiveLayout="scroll">
+                <DataTable value={products}>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
                     <Column field="quantity" header="Quantity"></Column>
                 </DataTable>
             </div>
-            <DocSectionCode code={code} service={['ProductService']} title="PrimeReact DataTable Demo" description="DataTable requires a collection to display along with column components for the representation of the data." />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

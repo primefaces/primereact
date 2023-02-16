@@ -1,12 +1,17 @@
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { CustomerService } from '../../../../service/CustomerService';
+import { Button } from '../../../lib/button/Button';
 import { Column } from '../../../lib/column/Column';
 import { DataTable } from '../../../lib/datatable/DataTable';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 
-export function PaginatorBasicDoc(props) {
+export function PaginatorTemplateDoc(props) {
     const [customers, setCustomers] = useState([]);
+
+    const paginatorLeft = <Button type="button" icon="pi pi-refresh" text />;
+    const paginatorRight = <Button type="button" icon="pi pi-download" text />;
 
     useEffect(() => {
         CustomerService.getCustomersMedium().then((data) => setCustomers(data));
@@ -14,7 +19,9 @@ export function PaginatorBasicDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={customers} paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]}>
+<DataTable value={customers} paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]} 
+        paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+        currentPageReportTemplate="{first} to {last} of {totalRecords}" paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}>
     <Column field="name" header="Name" style={{ width: '25%' }}></Column>
     <Column field="country.name" header="Country" style={{ width: '25%' }}></Column>
     <Column field="company" header="Company" style={{ width: '25%' }}></Column>
@@ -23,12 +30,16 @@ export function PaginatorBasicDoc(props) {
         `,
         javascript: `
 import React, { useState, useEffect } from 'react';
+import { Button } from 'primereact/button';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { CustomerService } from './service/CustomerService';
 
-export default function PaginatorBasicDemo() {
+export default function PaginatorTemplateDemo() {
     const [customers, setCustomers] = useState([]);
+
+    const paginatorLeft = <Button type="button" icon="pi pi-refresh" text />;
+    const paginatorRight = <Button type="button" icon="pi pi-download" text />;
 
     useEffect(() => {
         CustomerService.getCustomersMedium().then((data) => setCustomers(data));
@@ -36,7 +47,9 @@ export default function PaginatorBasicDemo() {
 
     return (
         <div className="card">
-            <DataTable value={customers} paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]}>
+            <DataTable value={customers} paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]} 
+                    paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+                    currentPageReportTemplate="{first} to {last} of {totalRecords}" paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}>
                 <Column field="name" header="Name" style={{ width: '25%' }}></Column>
                 <Column field="country.name" header="Country" style={{ width: '25%' }}></Column>
                 <Column field="company" header="Company" style={{ width: '25%' }}></Column>
@@ -48,6 +61,7 @@ export default function PaginatorBasicDemo() {
         `,
         typescript: `
 import React, { useState, useEffect } from 'react';
+import { Button } from 'primereact/button';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { CustomerService } from './service/CustomerService';
@@ -75,8 +89,11 @@ interface Customer {
     balance: number;
 }
 
-export default function PaginatorBasicDemo() {
+export default function PaginatorTemplateDemo() {
     const [customers, setCustomers] = useState<Customer[]>([]);
+
+    const paginatorLeft = <Button type="button" icon="pi pi-refresh" text />;
+    const paginatorRight = <Button type="button" icon="pi pi-download" text />;
 
     useEffect(() => {
         CustomerService.getCustomersMedium().then((data) => setCustomers(data));
@@ -84,7 +101,9 @@ export default function PaginatorBasicDemo() {
 
     return (
         <div className="card">
-            <DataTable value={customers} paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]}>
+            <DataTable value={customers} paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]} 
+                    paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+                    currentPageReportTemplate="{first} to {last} of {totalRecords}" paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}>
                 <Column field="name" header="Name" style={{ width: '25%' }}></Column>
                 <Column field="country.name" header="Country" style={{ width: '25%' }}></Column>
                 <Column field="company" header="Company" style={{ width: '25%' }}></Column>
@@ -121,11 +140,21 @@ export default function PaginatorBasicDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Pagination is enabled by adding <i>paginator</i> property and defining <i>rows</i> per page.
+                    Paginator UI is customized using the <i>paginatorTemplate</i> property. Each element can also be customized further with your own UI to replace the default one. Refer to the <Link href="/paginator">Paginator</Link> component for
+                    more information about the advanced customization options.
                 </p>
             </DocSectionText>
             <div className="card">
-                <DataTable value={customers} paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]}>
+                <DataTable
+                    value={customers}
+                    paginator
+                    rows={5}
+                    rowsPerPageOptions={[5, 10, 25, 50]}
+                    paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+                    currentPageReportTemplate="{first} to {last} of {totalRecords}"
+                    paginatorLeft={paginatorLeft}
+                    paginatorRight={paginatorRight}
+                >
                     <Column field="name" header="Name" style={{ width: '25%' }}></Column>
                     <Column field="country.name" header="Country" style={{ width: '25%' }}></Column>
                     <Column field="company" header="Company" style={{ width: '25%' }}></Column>

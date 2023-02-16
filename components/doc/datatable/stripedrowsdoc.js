@@ -5,7 +5,7 @@ import { DataTable } from '../../lib/datatable/DataTable';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function StripedDoc(props) {
+export function StripedRowsDoc(props) {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -14,7 +14,7 @@ export function StripedDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={products} stripedRows responsiveLayout="scroll">
+<DataTable value={products} stripedRows>
     <Column field="code" header="Code"></Column>
     <Column field="name" header="Name"></Column>
     <Column field="category" header="Category"></Column>
@@ -27,17 +27,16 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ProductService } from './service/ProductService';
 
-const StripedDoc = () => {
-    const [products, setProducts] = useState(null);
-    
+export default function StripedRowsDemo() {
+    const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        ProductService.getProductsMiniSmall().then(data => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        ProductService.getProductsMini().then(data => setProducts(data));
+    }, []);
 
     return (
         <div className="card">
-            <DataTable value={products} stripedRows responsiveLayout="scroll">
+            <DataTable value={products} stripedRows>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>
@@ -53,17 +52,29 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ProductService } from './service/ProductService';
 
-const StripedDoc = () => {
-    const [products, setProducts] = useState(null);
-    
+interface Product {
+    id: string;
+    code: string;
+    name: string;
+    description: string;
+    image: string;
+    price: number;
+    category: string;
+    quantity: number;
+    inventoryStatus: string;
+    rating: number;
+}
+
+export default function StripedRowsDemo() {
+    const [products, setProducts] = useState<Product[]>([]);
 
     useEffect(() => {
-        ProductService.getProductsMiniSmall().then(data => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        ProductService.getProductsMini().then(data => setProducts(data));
+    }, []);
 
     return (
         <div className="card">
-            <DataTable value={products} stripedRows responsiveLayout="scroll">
+            <DataTable value={products} stripedRows>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>
@@ -74,7 +85,6 @@ const StripedDoc = () => {
 }
         `,
         data: `
-/* ProductService */        
 {
     id: '1000',
     code: 'f230fh0g3',
@@ -95,11 +105,11 @@ const StripedDoc = () => {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Adding <b>stripedRows</b> displays rows with alternating colors.
-                </p>{' '}
+                    Alternating rows are displayed when <i>stripedRows</i> property is present.
+                </p>
             </DocSectionText>
             <div className="card">
-                <DataTable value={products} stripedRows responsiveLayout="scroll">
+                <DataTable value={products} stripedRows>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
