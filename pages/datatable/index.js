@@ -15,8 +15,8 @@ import { ProgrammaticDoc } from '../../components/doc/datatable/edit/programmati
 import { RowEditingDoc } from '../../components/doc/datatable/edit/roweditingdoc';
 import { ExportDoc } from '../../components/doc/datatable/export/exportdoc';
 import { ExportImportDoc } from '../../components/doc/datatable/export/importdoc';
-import { FilterMenuDoc } from '../../components/doc/datatable/filter/filtermenudoc';
-import { FilterRowDoc } from '../../components/doc/datatable/filter/filterrowdoc';
+import { AdvancedFilterDoc } from '../../components/doc/datatable/filter/advanceddoc';
+import { BasicFilterDoc } from '../../components/doc/datatable/filter/basicdoc';
 import { FlexScrollDoc } from '../../components/doc/datatable/flexscrolldoc';
 import { GridLinesDoc } from '../../components/doc/datatable/gridlinesdoc';
 import { ImportDoc } from '../../components/doc/datatable/importdoc';
@@ -70,7 +70,7 @@ const DataTableDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'dynamiccolsdoc',
+            id: 'dynamic_columns',
             label: 'Dynamic Columns',
             component: DynamicColumnsDoc
         },
@@ -139,25 +139,22 @@ const DataTableDemo = () => {
         {
             id: 'filter',
             label: 'Filter',
-            description: 'Filtering feature provides advanced and flexible options to query the data.',
             children: [
                 {
-                    id: 'filtermenu',
-                    label: 'Filter Menu',
-                    component: FilterMenuDoc
+                    id: 'basic_filter',
+                    label: 'Basic',
+                    component: BasicFilterDoc
                 },
                 {
-                    id: 'filterrow',
-                    label: 'Filter Row',
-                    component: FilterRowDoc
+                    id: 'advanced_filter',
+                    label: 'Advanced',
+                    component: AdvancedFilterDoc
                 }
             ]
         },
         {
             id: 'selection',
             label: 'Selection',
-            description:
-                'DataTable provides single, multiple, radiobutton and checkbox selection modes. Selected rows or cells are bound to the selection property and onRowSelect-onRowUnselect/onCellSelect-onCellUnselect events are provided as optional callbacks. In addition built-in radio button and checkbox based selections are available as alternatives.',
             children: [
                 {
                     id: 'singleselection',
