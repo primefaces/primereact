@@ -6,7 +6,6 @@ import { CellSelectEventsDoc } from '../../components/doc/datatable/cellselectio
 import { MultipleCellsSelectionDoc } from '../../components/doc/datatable/cellselection/multipledoc';
 import { SingleCellSelectionDoc } from '../../components/doc/datatable/cellselection/singledoc';
 import { ColGroupDoc } from '../../components/doc/datatable/colgroupdoc';
-import { ChooseResizableColumnsDoc } from '../../components/doc/datatable/colresize/chooseresizablecolumnsdoc';
 import { ExpandModeDoc } from '../../components/doc/datatable/colresize/expandmodedoc';
 import { FitModeDoc } from '../../components/doc/datatable/colresize/fitmodedoc';
 import { ColToggleDoc } from '../../components/doc/datatable/coltoggledoc';
@@ -19,7 +18,6 @@ import { ExportDoc } from '../../components/doc/datatable/export/exportdoc';
 import { ExportImportDoc } from '../../components/doc/datatable/export/importdoc';
 import { AdvancedFilterDoc } from '../../components/doc/datatable/filter/advanceddoc';
 import { BasicFilterDoc } from '../../components/doc/datatable/filter/basicdoc';
-import { FlexScrollDoc } from '../../components/doc/datatable/flexscrolldoc';
 import { GridLinesDoc } from '../../components/doc/datatable/gridlinesdoc';
 import { ImportDoc } from '../../components/doc/datatable/importdoc';
 import { LazyDoc } from '../../components/doc/datatable/lazydoc';
@@ -38,12 +36,11 @@ import { MultipleRowsSelectionDoc } from '../../components/doc/datatable/rowsele
 import { RadioButtonRowSelectionDoc } from '../../components/doc/datatable/rowselection/radiobuttondoc';
 import { SingleRowSelectionDoc } from '../../components/doc/datatable/rowselection/singledoc';
 import { CustomersDoc } from '../../components/doc/datatable/samplesdoc';
-import { ScrollFlexibleDoc } from '../../components/doc/datatable/scroll/flexibledoc';
-import { ScrollFrozenColumnsDoc } from '../../components/doc/datatable/scroll/frozencolumnsdoc';
-import { ScrollFrozenRowsDoc } from '../../components/doc/datatable/scroll/frozenrowsdoc';
-import { ScrollHorizontalAndVerticalWithFooterDoc } from '../../components/doc/datatable/scroll/horizontalandverticalwithfooterdoc';
-import { ScrollSubHeaderGroupingDoc } from '../../components/doc/datatable/scroll/subheadergroupingdoc';
-import { ScrollVerticalDoc } from '../../components/doc/datatable/scroll/verticaldoc';
+import { FlexibleScrollDoc } from '../../components/doc/datatable/scroll/flexibledoc';
+import { FrozenColumnsDoc } from '../../components/doc/datatable/scroll/frozencolumnsdoc';
+import { FrozenRowsDoc } from '../../components/doc/datatable/scroll/frozenrowsdoc';
+import { HorizontalScrollDoc } from '../../components/doc/datatable/scroll/horizontaldoc';
+import { VerticalScrollDoc } from '../../components/doc/datatable/scroll/verticaldoc';
 import { SizeDoc } from '../../components/doc/datatable/sizedoc';
 import { MultipleColumnsDoc } from '../../components/doc/datatable/sort/multiplecolumnsdoc';
 import { PresortDoc } from '../../components/doc/datatable/sort/presortdoc';
@@ -240,58 +237,46 @@ const DataTableDemo = () => {
         {
             id: 'scroll',
             label: 'Scroll',
-            description: 'Data scrolling with fixed header is available horizontally, vertically or both. Certain columns and rows can be frozen as well.',
             children: [
                 {
-                    id: 'vertical',
+                    id: 'vertical_scroll',
                     label: 'Vertical',
-                    component: ScrollVerticalDoc
+                    component: VerticalScrollDoc
                 },
                 {
-                    id: 'scrollflexible',
+                    id: 'flex_scroll',
                     label: 'Flexible',
-                    component: ScrollFlexibleDoc
+                    component: FlexibleScrollDoc
                 },
                 {
-                    id: 'scrollhorizontalandverticalwithfooter',
-                    label: 'Horizontal and Vertical with Footer',
-                    component: ScrollHorizontalAndVerticalWithFooterDoc
+                    id: 'horizontal_scroll',
+                    label: 'Horizontal',
+                    component: HorizontalScrollDoc
                 },
                 {
-                    id: 'scrollfrozenrows',
+                    id: 'frozen_rows',
                     label: 'Frozen Rows',
-                    component: ScrollFrozenRowsDoc
+                    component: FrozenRowsDoc
                 },
                 {
-                    id: 'scrollfrozencolumns',
+                    id: 'frozen_columns',
                     label: 'Frozen Columns',
-                    component: ScrollFrozenColumnsDoc
-                },
-                {
-                    id: 'scrollsubheadergrouping',
-                    label: 'SubHeader Grouping',
-                    component: ScrollSubHeaderGroupingDoc
+                    component: FrozenColumnsDoc
                 }
             ]
         },
         {
-            id: 'flexscroll',
-            label: 'Flex Scroll',
-            component: FlexScrollDoc
-        },
-        {
             id: 'virtualscroll',
             label: 'Virtual Scroll',
-            description: 'VirtualScroller is a performant approach to handle huge data efficiently.',
             children: [
                 {
                     id: 'preload',
-                    label: 'Preloaded Data (100000 Rows)',
+                    label: 'Preload',
                     component: PreloadedDataDoc
                 },
                 {
                     id: 'lazyloading',
-                    label: 'Lazy Loading from a Remote Datasource (100000 Rows)',
+                    label: 'Lazy',
                     component: LazyLoadingFromRemoteDataSourceDoc
                 }
             ]
@@ -304,21 +289,20 @@ const DataTableDemo = () => {
         {
             id: 'rowgroup',
             label: 'RowGroup',
-            description: 'Rows can either be grouped by a separate grouping row or using rowspan.',
             children: [
                 {
                     id: 'subheadergrouping',
-                    label: 'Subheader Grouping',
+                    label: 'Subheader',
                     component: SubHeaderGroupingDoc
                 },
                 {
                     id: 'expandablerowgroups',
-                    label: 'Expandable Row Groups',
+                    label: 'Expandable',
                     component: ExpandableRowGroupsDoc
                 },
                 {
                     id: 'rowspangrouping',
-                    label: 'RowSpan Grouping',
+                    label: 'RowSpan',
                     component: RowSpanGroupingDoc
                 }
             ]
@@ -353,11 +337,6 @@ const DataTableDemo = () => {
                     id: 'expandmode',
                     label: 'Expand Mode',
                     component: ExpandModeDoc
-                },
-                {
-                    id: 'chooseresizablecolumns',
-                    label: 'Choose Resizable Columns',
-                    component: ChooseResizableColumnsDoc
                 }
             ]
         },
