@@ -7,13 +7,13 @@ import { Column } from '../../../lib/column/Column';
 import { DataTable } from '../../../lib/datatable/DataTable';
 import { Dropdown } from '../../../lib/dropdown/Dropdown';
 import { InputNumber } from '../../../lib/inputnumber/InputNumber';
-import { InputText } from '../../../lib/inputtext/inputtext';
+import { InputText } from '../../../lib/inputtext/InputText';
 import { MultiSelect } from '../../../lib/multiselect/MultiSelect';
 import { ProgressBar } from '../../../lib/progressbar/ProgressBar';
 import { Slider } from '../../../lib/slider/Slider';
 import { Tag } from '../../../lib/tag/Tag';
 import { TriStateCheckbox } from '../../../lib/tristatecheckbox/TriStateCheckbox';
-import { classNames } from '../../../lib/utils/utils';
+import { classNames } from '../../../lib/utils/Utils';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 
@@ -56,7 +56,7 @@ export function AdvancedFilterDoc(props) {
     };
 
     useEffect(() => {
-        CustomerService.getCustomersLarge().then((data) => {
+        CustomerService.getCustomersMedium().then((data) => {
             setCustomers(getCustomers(data));
             setLoading(false);
         });
@@ -306,7 +306,7 @@ export default function AdvancedFilterDemo() {
     };
 
     useEffect(() => {
-        CustomerService.getCustomersLarge().then((data) => {
+        CustomerService.getCustomersMedium().then((data) => {
             setCustomers(getCustomers(data));
             setLoading(false);
         });
@@ -578,7 +578,7 @@ export default function AdvancedFilterDemo() {
     };
 
     useEffect(() => {
-        CustomerService.getCustomersLarge().then((data: Customer[]) => {
+        CustomerService.getCustomersMedium().then((data: Customer[]) => {
             setCustomers(getCustomers(data));
             setLoading(false);
         });

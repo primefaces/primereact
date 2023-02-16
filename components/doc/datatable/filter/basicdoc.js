@@ -8,7 +8,7 @@ import { InputText } from '../../../lib/inputtext/InputText';
 import { MultiSelect } from '../../../lib/multiselect/MultiSelect';
 import { Tag } from '../../../lib/tag/Tag';
 import { TriStateCheckbox } from '../../../lib/tristatecheckbox/TriStateCheckbox';
-import { classNames } from '../../../lib/utils/utils';
+import { classNames } from '../../../lib/utils/Utils';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 
@@ -58,7 +58,7 @@ export function BasicFilterDoc(props) {
     };
 
     useEffect(() => {
-        CustomerService.getCustomersLarge().then((data) => {
+        CustomerService.getCustomersMedium().then((data) => {
             setCustomers(getCustomers(data));
             setLoading(false);
         });
@@ -233,7 +233,7 @@ export default function BasicFilterDemo() {
     };
 
     useEffect(() => {
-        CustomerService.getCustomersLarge().then((data) => {
+        CustomerService.getCustomersMedium().then((data) => {
             setCustomers(getCustomers(data));
             setLoading(false);
         });
@@ -429,7 +429,7 @@ export default function BasicFilterDemo() {
     };
 
     useEffect(() => {
-        CustomerService.getCustomersLarge().then((data: Customer[]) => {
+        CustomerService.getCustomersMedium().then((data: Customer[]) => {
             setCustomers(getCustomers(data));
             setLoading(false);
         });
