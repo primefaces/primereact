@@ -46,12 +46,6 @@ import { ScrollFrozenRowsDoc } from '../../components/doc/datatable/scroll/froze
 import { ScrollHorizontalAndVerticalWithFooterDoc } from '../../components/doc/datatable/scroll/horizontalandverticalwithfooterdoc';
 import { ScrollSubHeaderGroupingDoc } from '../../components/doc/datatable/scroll/subheadergroupingdoc';
 import { ScrollVerticalDoc } from '../../components/doc/datatable/scroll/verticaldoc';
-import { CheckboxDoc } from '../../components/doc/datatable/selection/checkboxdoc';
-import { ControlledSelectionDoc } from '../../components/doc/datatable/selection/controlledselectiondoc';
-import { EventsDoc } from '../../components/doc/datatable/selection/eventsdoc';
-import { MultipleDoc } from '../../components/doc/datatable/selection/multipledoc';
-import { RadioButtonDoc } from '../../components/doc/datatable/selection/radiobuttondoc';
-import { SingleDoc } from '../../components/doc/datatable/selection/singledoc';
 import { SizeDoc } from '../../components/doc/datatable/sizedoc';
 import { MultipleColumnsDoc } from '../../components/doc/datatable/sort/multiplecolumnsdoc';
 import { PresortDoc } from '../../components/doc/datatable/sort/presortdoc';
@@ -221,42 +215,6 @@ const DataTableDemo = () => {
                     id: 'disabled_cells_selection',
                     label: 'Disabled',
                     component: DisabledCellSelectionDoc
-                }
-            ]
-        },
-        {
-            id: 'selection',
-            label: 'Selection',
-            children: [
-                {
-                    id: 'singleselection',
-                    label: 'Single',
-                    component: SingleDoc
-                },
-                {
-                    id: 'multipleselection',
-                    label: 'Multiple',
-                    component: MultipleDoc
-                },
-                {
-                    id: 'eventsselection',
-                    label: 'Events',
-                    component: EventsDoc
-                },
-                {
-                    id: 'radiobuttonselection',
-                    label: 'RadioButton',
-                    component: RadioButtonDoc
-                },
-                {
-                    id: 'checkboxselection',
-                    label: 'Checkbox',
-                    component: CheckboxDoc
-                },
-                {
-                    id: 'controlledselectiondoc',
-                    label: 'Controlled Selection',
-                    component: ControlledSelectionDoc
                 }
             ]
         },
