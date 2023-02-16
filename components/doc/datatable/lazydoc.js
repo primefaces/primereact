@@ -11,7 +11,7 @@ export function LazyDoc(props) {
     const [customers, setCustomers] = useState(null);
     const [selectAll, setSelectAll] = useState(false);
     const [selectedCustomers, setSelectedCustomers] = useState(null);
-    const [lazyParams, setLazyParams] = useState({
+    const [lazyState, setlazyState] = useState({
         first: 0,
         rows: 10,
         page: 1,
@@ -25,22 +25,22 @@ export function LazyDoc(props) {
         }
     });
 
-    let loadLazyTimeout = null;
+    let networkTimeout = null;
 
     useEffect(() => {
         loadLazyData();
-    }, [lazyParams]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [lazyState]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const loadLazyData = () => {
         setLoading(true);
 
-        if (loadLazyTimeout) {
-            clearTimeout(loadLazyTimeout);
+        if (networkTimeout) {
+            clearTimeout(networkTimeout);
         }
 
         //imitate delay of a backend call
-        loadLazyTimeout = setTimeout(() => {
-            CustomerService.getCustomers({ lazyEvent: JSON.stringify(lazyParams) }).then((data) => {
+        networkTimeout = setTimeout(() => {
+            CustomerService.getCustomers({ lazyEvent: JSON.stringify(lazyState) }).then((data) => {
                 setTotalRecords(data.totalRecords);
                 setCustomers(data.customers);
                 setLoading(false);
@@ -49,16 +49,16 @@ export function LazyDoc(props) {
     };
 
     const onPage = (event) => {
-        setLazyParams(event);
+        setlazyState(event);
     };
 
     const onSort = (event) => {
-        setLazyParams(event);
+        setlazyState(event);
     };
 
     const onFilter = (event) => {
         event['first'] = 0;
-        setLazyParams(event);
+        setlazyState(event);
     };
 
     const onSelectionChange = (event) => {
@@ -84,35 +84,34 @@ export function LazyDoc(props) {
 
     const representativeBodyTemplate = (rowData) => {
         return (
-            <React.Fragment>
-                <img alt={rowData.representative.name} src={`https://primefaces.org/cdn/primereact/images/avatar/${rowData.representative.image}`} width={32} style={{ verticalAlign: 'middle' }} />
-                <span className="vertical-align-middle ml-2">{rowData.representative.name}</span>
-            </React.Fragment>
+            <div className="flex align-items-center gap-2">
+                <img alt={rowData.representative.name} src={`https://primefaces.org/cdn/primereact/images/avatar/${rowData.representative.image}`} width={32} />
+                <span>{rowData.representative.name}</span>
+            </div>
         );
     };
 
     const countryBodyTemplate = (rowData) => {
         return (
-            <React.Fragment>
-                <img alt="flag" src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={`flag flag-${rowData.country.code}`} width={30} />
-                <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
-            </React.Fragment>
+            <div className="flex align-items-center gap-2">
+                <img alt="flag" src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={`flag flag-${rowData.country.code}`} style={{ width: '24px' }} />
+                <span>{rowData.country.name}</span>
+            </div>
         );
     };
 
     const code = {
         basic: `
-<DataTable value={customers} lazy filterDisplay="row" responsiveLayout="scroll" dataKey="id"
-    paginator first={lazyParams.first} rows={10} totalRecords={totalRecords} onPage={onPage}
-    onSort={onSort} sortField={lazyParams.sortField} sortOrder={lazyParams.sortOrder}
-    onFilter={onFilter} filters={lazyParams.filters} loading={loading}
-    selection={selectedCustomers} onSelectionChange={onSelectionChange}
-    selectAll={selectAll} onSelectAllChange={onSelectAllChange}>
-    <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
-    <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name" />
-    <Column field="country.name" sortable header="Country" filterField="country.name" body={countryBodyTemplate} filter filterPlaceholder="Search by country" />
-    <Column field="company" sortable filter header="Company" filterPlaceholder="Search by company" />
-    <Column field="representative.name" header="Representative" body={representativeBodyTemplate} filter filterPlaceholder="Search by representative" />
+<DataTable value={customers} lazy filterDisplay="row" responsiveLayout="scroll" dataKey="id" paginator
+        first={lazyState.first} rows={10} totalRecords={totalRecords} onPage={onPage} 
+        onSort={onSort} sortField={lazyState.sortField} sortOrder={lazyState.sortOrder}
+        onFilter={onFilter} filters={lazyState.filters} loading={loading}
+        selection={selectedCustomers} onSelectionChange={onSelectionChange} selectAll={selectAll} onSelectAllChange={onSelectAllChange}>
+    <Column selectionMode="multiple" headerStyle={{ width: '3rem' }} />
+    <Column field="name" header="Name" sortable filter filterPlaceholder="Search" />
+    <Column field="country.name" sortable header="Country" filterField="country.name" body={countryBodyTemplate} filter filterPlaceholder="Search" />
+    <Column field="company" sortable filter header="Company" filterPlaceholder="Search" />
+    <Column field="representative.name" header="Representative" body={representativeBodyTemplate} filter filterPlaceholder="Search" />
 </DataTable>
         `,
         javascript: `
@@ -122,247 +121,269 @@ import { Column } from 'primereact/column';
 import { CustomerService } from './service/CustomerService';
 
 export default function LazyDoc() {
-
     const [loading, setLoading] = useState(false);
     const [totalRecords, setTotalRecords] = useState(0);
     const [customers, setCustomers] = useState(null);
     const [selectAll, setSelectAll] = useState(false);
     const [selectedCustomers, setSelectedCustomers] = useState(null);
-    const [selectedRepresentative, setSelectedRepresentative] = useState(null);
-    const [lazyParams, setLazyParams] = useState({
+    const [lazyState, setlazyState] = useState({
         first: 0,
         rows: 10,
         page: 1,
         sortField: null,
         sortOrder: null,
         filters: {
-            'name': { value: '', matchMode: 'contains' },
+            name: { value: '', matchMode: 'contains' },
             'country.name': { value: '', matchMode: 'contains' },
-            'company': { value: '', matchMode: 'contains' },
-            'representative.name': { value: '', matchMode: 'contains' },
+            company: { value: '', matchMode: 'contains' },
+            'representative.name': { value: '', matchMode: 'contains' }
         }
     });
 
-    let loadLazyTimeout = null;
+    let networkTimeout = null;
 
     useEffect(() => {
         loadLazyData();
-    },[lazyParams]) // eslint-disable-line react-hooks/exhaustive-deps
+    }, [lazyState]);
 
     const loadLazyData = () => {
         setLoading(true);
 
-        if (loadLazyTimeout) {
-            clearTimeout(loadLazyTimeout);
+        if (networkTimeout) {
+            clearTimeout(networkTimeout);
         }
 
         //imitate delay of a backend call
-        loadLazyTimeout = setTimeout(() => {
-            CustomerService.getCustomers({ lazyEvent: JSON.stringify(lazyParams) }).then(data => {
+        networkTimeout = setTimeout(() => {
+            CustomerService.getCustomers({ lazyEvent: JSON.stringify(lazyState) }).then((data) => {
                 setTotalRecords(data.totalRecords);
                 setCustomers(data.customers);
                 setLoading(false);
             });
         }, Math.random() * 1000 + 250);
-    }
+    };
 
     const onPage = (event) => {
-        setLazyParams(event);
-    }
+        setlazyState(event);
+    };
 
     const onSort = (event) => {
-        setLazyParams(event);
-    }
+        setlazyState(event);
+    };
 
     const onFilter = (event) => {
         event['first'] = 0;
-        setLazyParams(event);
-    }
+        setlazyState(event);
+    };
 
     const onSelectionChange = (event) => {
         const value = event.value;
+
         setSelectedCustomers(value);
         setSelectAll(value.length === totalRecords);
-    }
+    };
 
     const onSelectAllChange = (event) => {
         const selectAll = event.checked;
 
         if (selectAll) {
-            CustomerService.getCustomers().then(data => {
+            CustomerService.getCustomers().then((data) => {
                 setSelectAll(true);
                 setSelectedCustomers(data.customers);
             });
-        }
-        else {
+        } else {
             setSelectAll(false);
             setSelectedCustomers([]);
         }
-    }
+    };
 
     const representativeBodyTemplate = (rowData) => {
         return (
-            <React.Fragment>
-                <img alt={rowData.representative.name} src={\`https://primefaces.org/cdn/primereact/images/avatar/\${rowData.representative.image}\`} width={32} style={{ verticalAlign: 'middle' }} />
-                <span className="vertical-align-middle ml-2">{rowData.representative.name}</span>
-            </React.Fragment>
+            <div className="flex align-items-center gap-2">
+                <img alt={rowData.representative.name} src={\`https://primefaces.org/cdn/primereact/images/avatar/\${rowData.representative.image}\`} width={32} />
+                <span>{rowData.representative.name}</span>
+            </div>
         );
-    }
+    };
 
     const countryBodyTemplate = (rowData) => {
         return (
-            <React.Fragment>
-                <img alt="flag" src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} width={30} />
-                <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
-            </React.Fragment>
+            <div className="flex align-items-center gap-2">
+                <img alt="flag" src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} style={{ width: '24px' }} />
+                <span>{rowData.country.name}</span>
+            </div>
         );
-    }
+    };
 
     return (
-        <div>
-            <div className="card">
-                <DataTable value={customers} lazy filterDisplay="row" responsiveLayout="scroll" dataKey="id"
-                    paginator first={lazyParams.first} rows={10} totalRecords={totalRecords} onPage={onPage}
-                    onSort={onSort} sortField={lazyParams.sortField} sortOrder={lazyParams.sortOrder}
-                    onFilter={onFilter} filters={lazyParams.filters} loading={loading}
-                    selection={selectedCustomers} onSelectionChange={onSelectionChange}
-                    selectAll={selectAll} onSelectAllChange={onSelectAllChange}>
-                    <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
-                    <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name" />
-                    <Column field="country.name" sortable header="Country" filterField="country.name" body={countryBodyTemplate} filter filterPlaceholder="Search by country" />
-                    <Column field="company" sortable filter header="Company" filterPlaceholder="Search by company" />
-                    <Column field="representative.name" header="Representative" body={representativeBodyTemplate} filter filterPlaceholder="Search by representative" />
-                </DataTable>
-            </div>
+        <div className="card">
+            <DataTable value={customers} lazy filterDisplay="row" responsiveLayout="scroll" dataKey="id" paginator
+                    first={lazyState.first} rows={10} totalRecords={totalRecords} onPage={onPage} 
+                    onSort={onSort} sortField={lazyState.sortField} sortOrder={lazyState.sortOrder}
+                    onFilter={onFilter} filters={lazyState.filters} loading={loading}
+                    selection={selectedCustomers} onSelectionChange={onSelectionChange} selectAll={selectAll} onSelectAllChange={onSelectAllChange}>
+                <Column selectionMode="multiple" headerStyle={{ width: '3rem' }} />
+                <Column field="name" header="Name" sortable filter filterPlaceholder="Search" />
+                <Column field="country.name" sortable header="Country" filterField="country.name" body={countryBodyTemplate} filter filterPlaceholder="Search" />
+                <Column field="company" sortable filter header="Company" filterPlaceholder="Search" />
+                <Column field="representative.name" header="Representative" body={representativeBodyTemplate} filter filterPlaceholder="Search" />
+            </DataTable>
         </div>
     );
 }
         `,
         typescript: `
 import React, { useState, useEffect } from 'react';
-import { DataTable } from 'primereact/datatable';
+import { DataTable, DataTableSelectionChangeEvent, DataTableSelectAllChangeEvent,
+    DataTablePageEvent, DataTableSortEvent, DataTableFilterEvent } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { CustomerService } from './service/CustomerService';
 
-export default function LazyDoc() {
+interface Country {
+    name: string;
+    code: string;
+}
 
-    const [loading, setLoading] = useState(false);
-    const [totalRecords, setTotalRecords] = useState(0);
-    const [customers, setCustomers] = useState(null);
-    const [selectAll, setSelectAll] = useState(false);
-    const [selectedCustomers, setSelectedCustomers] = useState(null);
-    const [selectedRepresentative, setSelectedRepresentative] = useState(null);
-    const [lazyParams, setLazyParams] = useState({
+interface Representative {
+    name: string;
+    code: string;
+}
+
+interface Customer {
+    id: number;
+    name: string;
+    country: Country;
+    company: string;
+    date: string;
+    status: string;
+    verified: boolean;
+    activity: number;
+    representative: Representative;
+    balance: number;
+}
+
+interface LazyTableState {
+    first: number;
+    rows: number;
+    page: number;
+    sortField?: string;
+    sortOrder?: number;
+    filters: DataTableFilterMeta;
+}
+
+export default function LazyDoc() {
+    const [loading, setLoading] = useState<boolean>(false);
+    const [totalRecords, setTotalRecords] = useState<number>(0);
+    const [customers, setCustomers] = useState<Customer[] | null>(null);
+    const [selectAll, setSelectAll] = useState<boolean>(false);
+    const [selectedCustomers, setSelectedCustomers] = useState<Customer[] | null>(null);
+    const [lazyState, setlazyState] = useState<LazyTableState>({
         first: 0,
         rows: 10,
         page: 1,
         sortField: null,
         sortOrder: null,
         filters: {
-            'name': { value: '', matchMode: 'contains' },
+            name: { value: '', matchMode: 'contains' },
             'country.name': { value: '', matchMode: 'contains' },
-            'company': { value: '', matchMode: 'contains' },
-            'representative.name': { value: '', matchMode: 'contains' },
+            company: { value: '', matchMode: 'contains' },
+            'representative.name': { value: '', matchMode: 'contains' }
         }
     });
 
-    let loadLazyTimeout = null;
+    let networkTimeout = null;
 
     useEffect(() => {
         loadLazyData();
-    },[lazyParams]) // eslint-disable-line react-hooks/exhaustive-deps
+    }, [lazyState]);
 
     const loadLazyData = () => {
         setLoading(true);
 
-        if (loadLazyTimeout) {
-            clearTimeout(loadLazyTimeout);
+        if (networkTimeout) {
+            clearTimeout(networkTimeout);
         }
 
         //imitate delay of a backend call
-        loadLazyTimeout = setTimeout(() => {
-            CustomerService.getCustomers({ lazyEvent: JSON.stringify(lazyParams) }).then(data => {
+        networkTimeout = setTimeout(() => {
+            CustomerService.getCustomers({ lazyEvent: JSON.stringify(lazyState) }).then((data) => {
                 setTotalRecords(data.totalRecords);
                 setCustomers(data.customers);
                 setLoading(false);
             });
         }, Math.random() * 1000 + 250);
-    }
+    };
 
-    const onPage = (event) => {
-        setLazyParams(event);
-    }
+    const onPage = (event: DataTablePageEvent) => {
+        setlazyState(event);
+    };
 
-    const onSort = (event) => {
-        setLazyParams(event);
-    }
+    const onSort = (event: DataTableSortEvent) => {
+        setlazyState(event);
+    };
 
-    const onFilter = (event) => {
+    const onFilter = (event: DataTableFilterEvent) => {
         event['first'] = 0;
-        setLazyParams(event);
-    }
+        setlazyState(event);
+    };
 
-    const onSelectionChange = (event) => {
+    const onSelectionChange = (event: DataTableSelectionChangeEvent) => {
         const value = event.value;
+
         setSelectedCustomers(value);
         setSelectAll(value.length === totalRecords);
-    }
+    };
 
-    const onSelectAllChange = (event) => {
+    const onSelectAllChange = (event: DataTableSelectAllChangeEvent) => {
         const selectAll = event.checked;
 
         if (selectAll) {
-            CustomerService.getCustomers().then(data => {
+            CustomerService.getCustomers().then((data) => {
                 setSelectAll(true);
                 setSelectedCustomers(data.customers);
             });
-        }
-        else {
+        } else {
             setSelectAll(false);
             setSelectedCustomers([]);
         }
-    }
+    };
 
-    const representativeBodyTemplate = (rowData) => {
+    const representativeBodyTemplate = (rowData: Customer) => {
         return (
-            <React.Fragment>
-                <img alt={rowData.representative.name} src={\`https://primefaces.org/cdn/primereact/images/avatar/\${rowData.representative.image}\`} width={32} style={{ verticalAlign: 'middle' }} />
-                <span className="vertical-align-middle ml-2">{rowData.representative.name}</span>
-            </React.Fragment>
+            <div className="flex align-items-center gap-2">
+                <img alt={rowData.representative.name} src={\`https://primefaces.org/cdn/primereact/images/avatar/\${rowData.representative.image}\`} width={32} />
+                <span>{rowData.representative.name}</span>
+            </div>
         );
-    }
+    };
 
-    const countryBodyTemplate = (rowData) => {
+    const countryBodyTemplate = (rowData: Customer) => {
         return (
-            <React.Fragment>
-                <img alt="flag" src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} width={30} />
-                <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
-            </React.Fragment>
+            <div className="flex align-items-center gap-2">
+                <img alt="flag" src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} style={{ width: '24px' }} />
+                <span>{rowData.country.name}</span>
+            </div>
         );
-    }
+    };
 
     return (
-        <div>
-            <div className="card">
-                <DataTable value={customers} lazy filterDisplay="row" responsiveLayout="scroll" dataKey="id"
-                    paginator first={lazyParams.first} rows={10} totalRecords={totalRecords} onPage={onPage}
-                    onSort={onSort} sortField={lazyParams.sortField} sortOrder={lazyParams.sortOrder}
-                    onFilter={onFilter} filters={lazyParams.filters} loading={loading}
-                    selection={selectedCustomers} onSelectionChange={onSelectionChange}
-                    selectAll={selectAll} onSelectAllChange={onSelectAllChange}>
-                    <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
-                    <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name" />
-                    <Column field="country.name" sortable header="Country" filterField="country.name" body={countryBodyTemplate} filter filterPlaceholder="Search by country" />
-                    <Column field="company" sortable filter header="Company" filterPlaceholder="Search by company" />
-                    <Column field="representative.name" header="Representative" body={representativeBodyTemplate} filter filterPlaceholder="Search by representative" />
-                </DataTable>
-            </div>
+        <div className="card">
+            <DataTable value={customers} lazy filterDisplay="row" responsiveLayout="scroll" dataKey="id" paginator
+                    first={lazyState.first} rows={10} totalRecords={totalRecords} onPage={onPage} 
+                    onSort={onSort} sortField={lazyState.sortField} sortOrder={lazyState.sortOrder}
+                    onFilter={onFilter} filters={lazyState.filters} loading={loading}
+                    selection={selectedCustomers} onSelectionChange={onSelectionChange} selectAll={selectAll} onSelectAllChange={onSelectAllChange}>
+                <Column selectionMode="multiple" headerStyle={{ width: '3rem' }} />
+                <Column field="name" header="Name" sortable filter filterPlaceholder="Search" />
+                <Column field="country.name" sortable header="Country" filterField="country.name" body={countryBodyTemplate} filter filterPlaceholder="Search" />
+                <Column field="company" sortable filter header="Company" filterPlaceholder="Search" />
+                <Column field="representative.name" header="Representative" body={representativeBodyTemplate} filter filterPlaceholder="Search" />
+            </DataTable>
         </div>
     );
 }
         `,
         data: `
-/* CustomerService */ 
 {
     id: 1000,
     name: 'James Butt',
@@ -389,11 +410,15 @@ export default function LazyDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking corresponding callbacks everytime <b>paging</b>, <b>sorting</b> and <b>filtering</b> happens. Sample
-                    belows imitates lazy paging by using an in memory list. It is also important to assign the logical number of rows to totalRecords by doing a projection query for paginator configuration so that paginator displays the UI assuming
-                    there are actually records of totalRecords size although in reality they aren't as in lazy mode, only the records that are displayed on the current page exist. Also, the implementation of <b>checkbox selection</b> in lazy tables
-                    is left entirely to the user. Since the DataTable does not know what will happen to the data on the next page or whether there are instant data changes, the selection array can be implemented in several ways. One of them is as in
-                    the example below.
+                    Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking corresponding callbacks everytime <i>paging</i>, <i>sorting</i> and <i>filtering</i> occurs. Sample
+                    below imitates lazy loading data from a remote datasource using an in-memory list and timeouts to mimic network connection.
+                </p>
+                <p>
+                    Enabling the <i>lazy</i> property and assigning the logical number of rows to <i>totalRecords</i> by doing a projection query are the key elements of the implementation so that paginator displays the UI assuming there are actually
+                    records of totalRecords size although in reality they are not present on page, only the records that are displayed on the current page exist.
+                </p>
+                <p>
+                    Note that, the implementation of <i>checkbox selection</i> in lazy mode needs to be handled manually as in this example since the DataTable cannot know about the whole dataset.
                 </p>
             </DocSectionText>
             <div className="card">
@@ -404,26 +429,26 @@ export default function LazyDoc() {
                     responsiveLayout="scroll"
                     dataKey="id"
                     paginator
-                    first={lazyParams.first}
+                    first={lazyState.first}
                     rows={10}
                     totalRecords={totalRecords}
                     onPage={onPage}
                     onSort={onSort}
-                    sortField={lazyParams.sortField}
-                    sortOrder={lazyParams.sortOrder}
+                    sortField={lazyState.sortField}
+                    sortOrder={lazyState.sortOrder}
                     onFilter={onFilter}
-                    filters={lazyParams.filters}
+                    filters={lazyState.filters}
                     loading={loading}
                     selection={selectedCustomers}
                     onSelectionChange={onSelectionChange}
                     selectAll={selectAll}
                     onSelectAllChange={onSelectAllChange}
                 >
-                    <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
-                    <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name" />
-                    <Column field="country.name" sortable header="Country" filterField="country.name" body={countryBodyTemplate} filter filterPlaceholder="Search by country" />
-                    <Column field="company" sortable filter header="Company" filterPlaceholder="Search by company" />
-                    <Column field="representative.name" header="Representative" body={representativeBodyTemplate} filter filterPlaceholder="Search by representative" />
+                    <Column selectionMode="multiple" headerStyle={{ width: '3rem' }} />
+                    <Column field="name" header="Name" sortable filter filterPlaceholder="Search" />
+                    <Column field="country.name" sortable header="Country" filterField="country.name" body={countryBodyTemplate} filter filterPlaceholder="Search" />
+                    <Column field="company" sortable filter header="Company" filterPlaceholder="Search" />
+                    <Column field="representative.name" header="Representative" body={representativeBodyTemplate} filter filterPlaceholder="Search" />
                 </DataTable>
             </div>
             <DocSectionCode code={code} service={['CustomerService']} />
