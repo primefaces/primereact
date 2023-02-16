@@ -7,7 +7,7 @@ import { InputText } from '../../../lib/inputtext/InputText';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 
-export function CellEditWithSortAndFilterDoc(props) {
+export function CellEditDoc(props) {
     const [products, setProducts] = useState(null);
 
     const columns = [
@@ -72,11 +72,11 @@ export function CellEditWithSortAndFilterDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={products} editMode="cell" className="editable-cells-table" filterDisplay="row" responsiveLayout="scroll">
+<DataTable value={products} editMode="cell">
     {columns.map(({ field, header }) => {
-        return (
-            <Column key={field} field={field} header={header} filter sortable style={{ width: '25%' }} body={field === 'price' && priceBodyTemplate} editor={(options) => cellEditor(options)} onCellEditComplete={onCellEditComplete} />
-        );
+        return <Column key={field} field={field} header={header} 
+            style={{ width: '25%' }} body={field === 'price' && priceBodyTemplate} 
+            editor={(options) => cellEditor(options)} onCellEditComplete={onCellEditComplete} />;
     })}
 </DataTable>
         `,
@@ -87,12 +87,16 @@ import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
 import { ProductService } from './service/ProductService';
-import './DataTableDemo.css';
 
-export default function CellEditWithSortAndFilterDoc() {
+export default function CellEditingDemo() {
     const [products, setProducts] = useState(null);
 
-    
+    const columns = [
+        { field: 'code', header: 'Code' },
+        { field: 'name', header: 'Name' },
+        { field: 'quantity', header: 'Quantity' },
+        { field: 'price', header: 'Price' }
+    ];
 
     useEffect(() => {
         ProductService.getProductsMini().then((data) => setProducts(data));
@@ -100,14 +104,18 @@ export default function CellEditWithSortAndFilterDoc() {
 
     const isPositiveInteger = (val) => {
         let str = String(val);
+
         str = str.trim();
+
         if (!str) {
             return false;
         }
-        str = str.replace(/^0+/, "") || "0";
+
+        str = str.replace(/^0+/, '') || '0';
         let n = Math.floor(Number(str));
+
         return n !== Infinity && String(n) === str && n >= 0;
-    }
+    };
 
     const onCellEditComplete = (e) => {
         let { rowData, newValue, field, originalEvent: event } = e;
@@ -115,27 +123,21 @@ export default function CellEditWithSortAndFilterDoc() {
         switch (field) {
             case 'quantity':
             case 'price':
-                if (isPositiveInteger(newValue))
-                    rowData[field] = newValue;
-                else
-                    event.preventDefault();
+                if (isPositiveInteger(newValue)) rowData[field] = newValue;
+                else event.preventDefault();
                 break;
 
             default:
-                if (newValue.trim().length > 0)
-                    rowData[field] = newValue;
-                else
-                    event.preventDefault();
+                if (newValue.trim().length > 0) rowData[field] = newValue;
+                else event.preventDefault();
                 break;
         }
-    }
+    };
 
     const cellEditor = (options) => {
-        if (options.field === 'price')
-            return priceEditor(options);
-        else
-            return textEditor(options);
-    }
+        if (options.field === 'price') return priceEditor(options);
+        else return textEditor(options);
+    };
 
     const textEditor = (options) => {
         return <InputText type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
@@ -151,11 +153,9 @@ export default function CellEditWithSortAndFilterDoc() {
 
     return (
         <div className="card p-fluid">
-            <DataTable value={products} editMode="cell" className="editable-cells-table" filterDisplay="row" responsiveLayout="scroll">
+            <DataTable value={products} editMode="cell">
                 {columns.map(({ field, header }) => {
-                    return (
-                        <Column key={field} field={field} header={header} filter sortable style={{ width: '25%' }} body={field === 'price' && priceBodyTemplate} editor={(options) => cellEditor(options)} onCellEditComplete={onCellEditComplete} />
-                    );
+                    return <Column key={field} field={field} header={header} style={{ width: '25%' }} body={field === 'price' && priceBodyTemplate} editor={(options) => cellEditor(options)} onCellEditComplete={onCellEditComplete} />;
                 })}
             </DataTable>
         </div>
@@ -165,97 +165,104 @@ export default function CellEditWithSortAndFilterDoc() {
         typescript: `
 import React, { useEffect, useState } from 'react';
 import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
+import { Column, ColumnEvent, ColumnEditorOptions } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
-import { InputNumber } from 'primereact/inputnumber';
+import { InputNumber, InputNumberValueChangeEvent } from 'primereact/inputnumber';
 import { ProductService } from './service/ProductService';
-import './DataTableDemo.css';
 
-export default function CellEditWithSortAndFilterDoc() {
-    const [products, setProducts] = useState(null);
+interface Product {
+    id: string;
+    code: string;
+    name: string;
+    description: string;
+    image: string;
+    price: number;
+    category: string;
+    quantity: number;
+    inventoryStatus: string;
+    rating: number;
+}
 
-    
+interface ColumnMeta {
+    field: string;
+    header: string;
+}
+
+export default function CellEditingDemo() {
+    const [products, setProducts] = useState<Product[] | null>(null);
+
+    const columns: ColumnMeta[] = [
+        { field: 'code', header: 'Code' },
+        { field: 'name', header: 'Name' },
+        { field: 'quantity', header: 'Quantity' },
+        { field: 'price', header: 'Price' }
+    ];
 
     useEffect(() => {
         ProductService.getProductsMini().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
-    const isPositiveInteger = (val) => {
+    const isPositiveInteger = (val: any) => {
         let str = String(val);
+
         str = str.trim();
+
         if (!str) {
             return false;
         }
-        str = str.replace(/^0+/, "") || "0";
-        let n = Math.floor(Number(str));
-        return n !== Infinity && String(n) === str && n >= 0;
-    }
 
-    const onCellEditComplete = (e) => {
+        str = str.replace(/^0+/, '') || '0';
+        let n = Math.floor(Number(str));
+
+        return n !== Infinity && String(n) === str && n >= 0;
+    };
+
+    const onCellEditComplete = (e: ColumnEvent) => {
         let { rowData, newValue, field, originalEvent: event } = e;
 
         switch (field) {
             case 'quantity':
             case 'price':
-                if (isPositiveInteger(newValue))
-                    rowData[field] = newValue;
-                else
-                    event.preventDefault();
+                if (isPositiveInteger(newValue)) rowData[field] = newValue;
+                else event.preventDefault();
                 break;
 
             default:
-                if (newValue.trim().length > 0)
-                    rowData[field] = newValue;
-                else
-                    event.preventDefault();
+                if (newValue.trim().length > 0) rowData[field] = newValue;
+                else event.preventDefault();
                 break;
         }
-    }
-
-    const cellEditor = (options) => {
-        if (options.field === 'price')
-            return priceEditor(options);
-        else
-            return textEditor(options);
-    }
-
-    const textEditor = (options) => {
-        return <InputText type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
     };
 
-    const priceEditor = (options) => {
-        return <InputNumber value={options.value} onValueChange={(e) => options.editorCallback(e.value)} mode="currency" currency="USD" locale="en-US" />;
+    const cellEditor = (options: ColumnEditorOptions) => {
+        if (options.field === 'price') return priceEditor(options);
+        else return textEditor(options);
     };
 
-    const priceBodyTemplate = (rowData) => {
+    const textEditor = (options: ColumnEditorOptions) => {
+        return <InputText type="text" value={options.value} onChange={(e: React.ChangeEvent<HTMLInputElement>) => options.editorCallback(e.target.value)} />;
+    };
+
+    const priceEditor = (options: ColumnEditorOptions) => {
+        return <InputNumber value={options.value} onValueChange={(e: InputNumberValueChangeEvent) => options.editorCallback(e.value)} mode="currency" currency="USD" locale="en-US" />;
+    };
+
+    const priceBodyTemplate = (rowData: Product) => {
         return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(rowData.price);
     };
 
     return (
         <div className="card p-fluid">
-            <DataTable value={products} editMode="cell" className="editable-cells-table" filterDisplay="row" responsiveLayout="scroll">
+            <DataTable value={products} editMode="cell">
                 {columns.map(({ field, header }) => {
-                    return (
-                        <Column key={field} field={field} header={header} filter sortable style={{ width: '25%' }} body={field === 'price' && priceBodyTemplate} editor={(options) => cellEditor(options)} onCellEditComplete={onCellEditComplete} />
-                    );
+                    return <Column key={field} field={field} header={header} style={{ width: '25%' }} body={field === 'price' && priceBodyTemplate} editor={(options) => cellEditor(options)} onCellEditComplete={onCellEditComplete} />;
                 })}
             </DataTable>
         </div>
     );
 }
         `,
-        extFiles: {
-            'DataTableDemo.css': `
-/* DataTableDemo.css */
-
-.datatable-editing-demo .editable-cells-table td.p-cell-editing {
-    padding-top: 0;
-    padding-bottom: 0;
-}
-            `
-        },
         data: `
-/* ProductService */        
 {
     id: '1000',
     code: 'f230fh0g3',
@@ -275,14 +282,14 @@ export default function CellEditWithSortAndFilterDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Programmatic demo content.</p>
+                <p>
+                    Cell editing is enabled by setting <i>editMode</i> as <i>cell</i>, defining input elements with <i>editor</i> property of a Column and implementing <i>onCellEditComplete</i> to update the state.
+                </p>
             </DocSectionText>
-            <div className="card p-fluid datatable-editing-demo">
-                <DataTable value={products} editMode="cell" className="editable-cells-table" filterDisplay="row" responsiveLayout="scroll">
+            <div className="card p-fluid">
+                <DataTable value={products} editMode="cell">
                     {columns.map(({ field, header }) => {
-                        return (
-                            <Column key={field} field={field} header={header} filter sortable style={{ width: '25%' }} body={field === 'price' && priceBodyTemplate} editor={(options) => cellEditor(options)} onCellEditComplete={onCellEditComplete} />
-                        );
+                        return <Column key={field} field={field} header={header} style={{ width: '25%' }} body={field === 'price' && priceBodyTemplate} editor={(options) => cellEditor(options)} onCellEditComplete={onCellEditComplete} />;
                     })}
                 </DataTable>
             </div>

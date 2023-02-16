@@ -13,10 +13,8 @@ import { ColToggleDoc } from '../../components/doc/datatable/coltoggledoc';
 import { ContextMenuDoc } from '../../components/doc/datatable/contextmenudoc';
 import { DatatableProductsDoc } from '../../components/doc/datatable/datatableproducts';
 import { DynamicColumnsDoc } from '../../components/doc/datatable/dynamiccolumnsdoc';
-import { CellEditingDoc } from '../../components/doc/datatable/edit/celleditingdoc';
-import { CellEditWithSortAndFilterDoc } from '../../components/doc/datatable/edit/celleditwithsortandfilterdoc';
-import { ProgrammaticDoc } from '../../components/doc/datatable/edit/programmaticdoc';
-import { RowEditingDoc } from '../../components/doc/datatable/edit/roweditingdoc';
+import { CellEditDoc } from '../../components/doc/datatable/edit/celleditdoc';
+import { RowEditDoc } from '../../components/doc/datatable/edit/roweditdoc';
 import { ExportDoc } from '../../components/doc/datatable/export/exportdoc';
 import { ExportImportDoc } from '../../components/doc/datatable/export/importdoc';
 import { AdvancedFilterDoc } from '../../components/doc/datatable/filter/advanceddoc';
@@ -221,27 +219,16 @@ const DataTableDemo = () => {
         {
             id: 'edit',
             label: 'Edit',
-            description: 'Cell and Row editing provides a rapid and user friendly way to manipulate data.',
             children: [
                 {
-                    id: 'cellediting',
-                    label: 'Cell Editing',
-                    component: CellEditingDoc
+                    id: 'cell_edit',
+                    label: 'Cell',
+                    component: CellEditDoc
                 },
                 {
-                    id: 'rowediting',
-                    label: 'Row Editing',
-                    component: RowEditingDoc
-                },
-                {
-                    id: 'programmatic',
-                    label: 'Programmatic',
-                    component: ProgrammaticDoc
-                },
-                {
-                    id: 'celleditwithsortandfilterDoc',
-                    label: 'Cell Editing with Sorting and Filter',
-                    component: CellEditWithSortAndFilterDoc
+                    id: 'row_edit',
+                    label: 'Row',
+                    component: RowEditDoc
                 }
             ]
         },

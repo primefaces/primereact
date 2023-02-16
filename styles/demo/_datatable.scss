@@ -1,3 +1,8 @@
+.p-datatable .p-datatable-tbody > tr > td.p-cell-editing {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
 .datatable-doc-demo {
     .p-paginator {
         .p-paginator-current {
@@ -43,54 +48,6 @@
     }
 }
 
-.datatable-filter-demo {
-    .p-paginator {
-        .p-paginator-current {
-            margin-left: auto;
-        }
-    }
-
-    .p-progressbar {
-        height: .5rem;
-        background-color: #D8DADC;
-
-        .p-progressbar-value {
-            background-color: #607D8B;
-        }
-    }
-
-    .p-datepicker {
-        min-width: 25rem;
-
-        td {
-            font-weight: 400;
-        }
-    }
-
-    .p-datatable.p-datatable-customers {
-        .p-datatable-header {
-            padding: 1rem;
-            text-align: left;
-            font-size: 1.5rem;
-        }
-
-        .p-paginator {
-            padding: 1rem;
-        }
-
-        .p-datatable-thead > tr > th {
-            text-align: left;
-        }
-
-        .p-datatable-tbody > tr > td {
-            cursor: auto;
-        }
-
-        .p-dropdown-label:not(.p-placeholder) {
-            text-transform: uppercase;
-        }
-    }
-}
 
 .datatable-scroll-demo {
     .p-datatable-frozen-tbody {
@@ -99,13 +56,6 @@
 
     .p-datatable-scrollable .p-frozen-column {
         font-weight: bold;
-    }
-}
-
-.datatable-editing-demo {
-    .editable-cells-table td.p-cell-editing {
-        padding-top: 0;
-        padding-bottom: 0;
     }
 }
 

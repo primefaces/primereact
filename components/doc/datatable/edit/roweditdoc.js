@@ -5,35 +5,31 @@ import { DataTable } from '../../../lib/datatable/DataTable';
 import { Dropdown } from '../../../lib/dropdown/Dropdown';
 import { InputNumber } from '../../../lib/inputnumber/InputNumber';
 import { InputText } from '../../../lib/inputtext/InputText';
+import { Tag } from '../../../lib/tag/Tag';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 
-export function RowEditingDoc(props) {
+export function RowEditDoc(props) {
     const [products, setProducts] = useState(null);
-
-    const statuses = [
-        { label: 'In Stock', value: 'INSTOCK' },
-        { label: 'Low Stock', value: 'LOWSTOCK' },
-        { label: 'Out of Stock', value: 'OUTOFSTOCK' }
-    ];
+    const [statuses] = useState(['INSTOCK', 'LOWSTOCK', 'OUTOFSTOCK']);
 
     useEffect(() => {
         ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const getStatusLabel = (status) => {
-        switch (status) {
+    const getSeverity = (value) => {
+        switch (value) {
             case 'INSTOCK':
-                return 'In Stock';
+                return 'success';
 
             case 'LOWSTOCK':
-                return 'Low Stock';
+                return 'warning';
 
             case 'OUTOFSTOCK':
-                return 'Out of Stock';
+                return 'danger';
 
             default:
-                return 'NA';
+                return null;
         }
     };
 
@@ -55,12 +51,10 @@ export function RowEditingDoc(props) {
             <Dropdown
                 value={options.value}
                 options={statuses}
-                optionLabel="label"
-                optionValue="value"
                 onChange={(e) => options.editorCallback(e.value)}
                 placeholder="Select a Status"
                 itemTemplate={(option) => {
-                    return <span className={`product-badge status-${option.value.toLowerCase()}`}>{option.label}</span>;
+                    return <Tag value={option} severity={getSeverity(option)}></Tag>;
                 }}
             />
         );
@@ -71,7 +65,7 @@ export function RowEditingDoc(props) {
     };
 
     const statusBodyTemplate = (rowData) => {
-        return getStatusLabel(rowData.inventoryStatus);
+        return <Tag value={rowData.inventoryStatus} severity={getSeverity(rowData.inventoryStatus)}></Tag>;
     };
 
     const priceBodyTemplate = (rowData) => {
@@ -80,7 +74,7 @@ export function RowEditingDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={products} editMode="row" dataKey="id" onRowEditComplete={onRowEditComplete} responsiveLayout="scroll">
+<DataTable value={products} editMode="row" dataKey="id" onRowEditComplete={onRowEditComplete}>
     <Column field="code" header="Code" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
     <Column field="name" header="Name" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
     <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} editor={(options) => statusEditor(options)} style={{ width: '20%' }}></Column>
@@ -95,37 +89,30 @@ import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
+import { Tag } from 'primereact/tag';
 import { ProductService } from './service/ProductService';
-import './DataTableDemo.css';
 
-export default function RowEditingDoc() {
+export default function RowEditingDemo() {
     const [products, setProducts] = useState(null);
-
-    const statuses = [
-        { label: 'In Stock', value: 'INSTOCK' },
-        { label: 'Low Stock', value: 'LOWSTOCK' },
-        { label: 'Out of Stock', value: 'OUTOFSTOCK' }
-    ];
-
-    
+    const [statuses] = useState(['INSTOCK', 'LOWSTOCK', 'OUTOFSTOCK']);
 
     useEffect(() => {
         ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const getStatusLabel = (status) => {
-        switch (status) {
+    const getSeverity = (value) => {
+        switch (value) {
             case 'INSTOCK':
-                return 'In Stock';
+                return 'success';
 
             case 'LOWSTOCK':
-                return 'Low Stock';
+                return 'warning';
 
             case 'OUTOFSTOCK':
-                return 'Out of Stock';
+                return 'danger';
 
             default:
-                return 'NA';
+                return null;
         }
     };
 
@@ -144,29 +131,33 @@ export default function RowEditingDoc() {
 
     const statusEditor = (options) => {
         return (
-            <Dropdown value={options.value} options={statuses} optionLabel="label" optionValue="value"
-                onChange={(e) => options.editorCallback(e.value)} placeholder="Select a Status"
+            <Dropdown
+                value={options.value}
+                options={statuses}
+                onChange={(e) => options.editorCallback(e.value)}
+                placeholder="Select a Status"
                 itemTemplate={(option) => {
-                    return <span className={\`product-badge status-\${option.value.toLowerCase()}\`}>{option.label}</span>
-                }} />
+                    return <Tag value={option} severity={getSeverity(option)}></Tag>;
+                }}
+            />
         );
-    }
+    };
 
     const priceEditor = (options) => {
-        return <InputNumber value={options.value} onValueChange={(e) => options.editorCallback(e.value)} mode="currency" currency="USD" locale="en-US" />
-    }
+        return <InputNumber value={options.value} onValueChange={(e) => options.editorCallback(e.value)} mode="currency" currency="USD" locale="en-US" />;
+    };
 
     const statusBodyTemplate = (rowData) => {
-        return getStatusLabel(rowData.inventoryStatus);
-    }
+        return <Tag value={rowData.inventoryStatus} severity={getSeverity(rowData.inventoryStatus)}></Tag>;
+    };
 
     const priceBodyTemplate = (rowData) => {
         return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(rowData.price);
-    }
+    };
 
     return (
-        <div className="card p-fluid datatable-editing-demo">
-            <DataTable value={products} editMode="row" dataKey="id" onRowEditComplete={onRowEditComplete} responsiveLayout="scroll">
+        <div className="card p-fluid">
+            <DataTable value={products} editMode="row" dataKey="id" onRowEditComplete={onRowEditComplete}>
                 <Column field="code" header="Code" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
                 <Column field="name" header="Name" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
                 <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} editor={(options) => statusEditor(options)} style={{ width: '20%' }}></Column>
@@ -179,46 +170,52 @@ export default function RowEditingDoc() {
         `,
         typescript: `
 import React, { useEffect, useState } from 'react';
-import { DataTable } from 'primereact/datatable';
+import { DataTable, DataTableRowEditCompleteEvent } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
-import { InputNumber } from 'primereact/inputnumber';
-import { Dropdown } from 'primereact/dropdown';
+import { InputNumber, InputNumberChangeEvent } from 'primereact/inputnumber';
+import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
+import { Tag } from 'primereact/tag';
 import { ProductService } from './service/ProductService';
-import './DataTableDemo.css';
 
-export default function RowEditingDoc() {
-    const [products, setProducts] = useState(null);
+interface Product {
+    id: string;
+    code: string;
+    name: string;
+    description: string;
+    image: string;
+    price: number;
+    category: string;
+    quantity: number;
+    inventoryStatus: string;
+    rating: number;
+}
 
-    const statuses = [
-        { label: 'In Stock', value: 'INSTOCK' },
-        { label: 'Low Stock', value: 'LOWSTOCK' },
-        { label: 'Out of Stock', value: 'OUTOFSTOCK' }
-    ];
-
-    
+export default function RowEditingDemo() {
+    const [products, setProducts] = useState<Product[] | null>(null);
+    const [statuses] = useState<string[]>(['INSTOCK', 'LOWSTOCK', 'OUTOFSTOCK']);
 
     useEffect(() => {
         ProductService.getProductsMini().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
-    const getStatusLabel = (status) => {
-        switch (status) {
+    const getSeverity = (value: string) => {
+        switch (value) {
             case 'INSTOCK':
-                return 'In Stock';
+                return 'success';
 
             case 'LOWSTOCK':
-                return 'Low Stock';
+                return 'warning';
 
             case 'OUTOFSTOCK':
-                return 'Out of Stock';
+                return 'danger';
 
             default:
-                return 'NA';
+                return null;
         }
     };
 
-    const onRowEditComplete = (e) => {
+    const onRowEditComplete = (e: DataTableRowEditCompleteEvent) => {
         let _products = [...products];
         let { newData, index } = e;
 
@@ -228,34 +225,38 @@ export default function RowEditingDoc() {
     };
 
     const textEditor = (options) => {
-        return <InputText type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
+        return <InputText type="text" value={options.value} onChange={(e: React.ChangeEvent<HTMLInputElement>) => options.editorCallback(e.target.value)} />;
     };
 
     const statusEditor = (options) => {
         return (
-            <Dropdown value={options.value} options={statuses} optionLabel="label" optionValue="value"
-                onChange={(e) => options.editorCallback(e.value)} placeholder="Select a Status"
+            <Dropdown
+                value={options.value}
+                options={statuses}
+                onChange={(e: DropdownChangeEvent) => options.editorCallback(e.value)}
+                placeholder="Select a Status"
                 itemTemplate={(option) => {
-                    return <span className={\`product-badge status-\${option.value.toLowerCase()}\`}>{option.label}</span>
-                }} />
+                    return <Tag value={option} severity={getSeverity(option)}></Tag>;
+                }}
+            />
         );
-    }
+    };
 
     const priceEditor = (options) => {
-        return <InputNumber value={options.value} onValueChange={(e) => options.editorCallback(e.value)} mode="currency" currency="USD" locale="en-US" />
-    }
+        return <InputNumber value={options.value} onValueChange={(e: InputNumberChangeEvent) => options.editorCallback(e.value)} mode="currency" currency="USD" locale="en-US" />;
+    };
 
     const statusBodyTemplate = (rowData) => {
-        return getStatusLabel(rowData.inventoryStatus);
-    }
+        return <Tag value={rowData.inventoryStatus} severity={getSeverity(rowData.inventoryStatus)}></Tag>;
+    };
 
     const priceBodyTemplate = (rowData) => {
         return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(rowData.price);
-    }
+    };
 
     return (
-        <div className="card p-fluid datatable-editing-demo">
-            <DataTable value={products} editMode="row" dataKey="id" onRowEditComplete={onRowEditComplete} responsiveLayout="scroll">
+        <div className="card p-fluid">
+            <DataTable value={products} editMode="row" dataKey="id" onRowEditComplete={onRowEditComplete}>
                 <Column field="code" header="Code" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
                 <Column field="name" header="Name" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
                 <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} editor={(options) => statusEditor(options)} style={{ width: '20%' }}></Column>
@@ -266,18 +267,7 @@ export default function RowEditingDoc() {
     );
 }
         `,
-        extFiles: {
-            'DataTableDemo.css': `
-/* DataTableDemo.css */
-
-.datatable-editing-demo .editable-cells-table td.p-cell-editing {
-    padding-top: 0;
-    padding-bottom: 0;
-}
-            `
-        },
-        data: `
-/* ProductService */        
+        data: `       
 {
     id: '1000',
     code: 'f230fh0g3',
@@ -297,10 +287,13 @@ export default function RowEditingDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Row Editing demo content.</p>
+                <p>
+                    Row editing is configured with setting <i>editMode</i> as <i>row</i>. Similarly with cell edit mode, defining input elements with <i>editor</i> property of a Column and implementing <i>onRowEditComplete</i> are necessary to update
+                    the state. The column to control the editing state should have <i>rowEditor</i> property applied.
+                </p>
             </DocSectionText>
-            <div className="card p-fluid datatable-editing-demo">
-                <DataTable value={products} editMode="row" dataKey="id" onRowEditComplete={onRowEditComplete} responsiveLayout="scroll">
+            <div className="card p-fluid">
+                <DataTable value={products} editMode="row" dataKey="id" onRowEditComplete={onRowEditComplete}>
                     <Column field="code" header="Code" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
                     <Column field="name" header="Name" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
                     <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} editor={(options) => statusEditor(options)} style={{ width: '20%' }}></Column>
