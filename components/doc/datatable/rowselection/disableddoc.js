@@ -64,7 +64,7 @@ export default function DisabledRowSelectionDemo() {
         `,
         typescript: `
 import React, { useState, useEffect } from 'react';
-import { DataTable, DataTableDataSelectableEvent } from 'primereact/datatable';
+import { DataTable, DataTableSelectionChangeEvent, DataTableDataSelectableEvent } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ProductService } from './service/ProductService';
 

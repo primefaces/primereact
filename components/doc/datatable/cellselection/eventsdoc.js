@@ -6,17 +6,17 @@ import { Toast } from '../../../lib/toast/Toast';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 
-export function RowSelectEventsDoc(props) {
+export function CellSelectEventsDoc(props) {
     const [products, setProducts] = useState([]);
-    const [selectedProduct, setSelectedProduct] = useState(null);
+    const [selectedCell, setSelectedCell] = useState(null);
     const toast = useRef(null);
 
-    const onRowSelect = (event) => {
-        toast.current.show({ severity: 'info', summary: 'Product Selected', detail: `Name: ${event.data.name}`, life: 3000 });
+    const onCellSelect = (event) => {
+        toast.current.show({ severity: 'info', summary: 'Cell Selected', detail: `Name: ${event.value}`, life: 3000 });
     };
 
-    const onRowUnselect = (event) => {
-        toast.current.show({ severity: 'warn', summary: 'Product Unselected', detail: `Name: ${event.data.name}`, life: 3000 });
+    const onCellUnselect = (event) => {
+        toast.current.show({ severity: 'warn', summary: 'Cell Unselected', detail: `Name: ${event.value}`, life: 3000 });
     };
 
     useEffect(() => {
@@ -25,8 +25,11 @@ export function RowSelectEventsDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={products} selectionMode="single" selection={selectedProduct} onSelectionChange={(e) => setSelectedProduct(e.value)} dataKey="id"
-        onRowSelect={onRowSelect} onRowUnselect={onRowUnselect} metaKeySelection={false}>
+<Toast ref={toast} />
+
+<DataTable value={products} cellSelection selectionMode="single" selection={selectedCell} 
+        onSelectionChange={(e) => setSelectedCell(e.value)} metaKeySelection={false}
+        onCellSelect={onCellSelect} onCellUnselect={onCellUnselect}>
     <Column field="code" header="Code"></Column>
     <Column field="name" header="Name"></Column>
     <Column field="category" header="Category"></Column>
@@ -37,20 +40,20 @@ export function RowSelectEventsDoc(props) {
 import React, { useState, useRef, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { Toast } from 'primereact/toast';
+import { Toast } from 'primereact/toast'
 import { ProductService } from './service/ProductService';
 
-export default function RowSelectEventsDemo() {
+export default function CellSelectEventsDemo() {
     const [products, setProducts] = useState([]);
-    const [selectedProduct, setSelectedProduct] = useState(null);
+    const [selectedCell, setSelectedCell] = useState(null);
     const toast = useRef(null);
 
-    const onRowSelect = (event) => {
-        toast.current.show({ severity: 'info', summary: 'Product Selected', detail: \`Name: \${event.data.name}\`, life: 3000 });
+    const onCellSelect = (event) => {
+        toast.current.show({ severity: 'info', summary: 'Cell Selected', detail: \`Name: \${event.value}\`, life: 3000 });
     };
 
-    const onRowUnselect = (event) => {
-        toast.current.show({ severity: 'warn', summary: 'Product Unselected', detail: \`Name: \${event.data.name}\`, life: 3000 });
+    const onCellUnselect = (event) => {
+        toast.current.show({ severity: 'warn', summary: 'Cell Unselected', detail: \`Name: \${event.value}\`, life: 3000 });
     };
 
     useEffect(() => {
@@ -60,8 +63,9 @@ export default function RowSelectEventsDemo() {
     return (
         <div className="card">
             <Toast ref={toast} />
-            <DataTable value={products} selectionMode="single" selection={selectedProduct} onSelectionChange={(e) => setSelectedProduct(e.value)} dataKey="id"
-                    onRowSelect={onRowSelect} onRowUnselect={onRowUnselect} metaKeySelection={false}>
+            <DataTable value={products} cellSelection selectionMode="single" selection={selectedCell} 
+                    onSelectionChange={(e) => setSelectedCell(e.value)} metaKeySelection={false}
+                    onCellSelect={onCellSelect} onCellUnselect={onCellUnselect}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>
@@ -73,9 +77,9 @@ export default function RowSelectEventsDemo() {
         `,
         typescript: `
 import React, { useState, useRef, useEffect } from 'react';
-import { DataTable, DataTableSelectionChangeEvent, DataTableSelectEvent, DataTableUnselectEvent } from 'primereact/datatable';
+import { DataTable, DataTableSelectionChangeEvent, DataTableCellSelection, DataTableSelectEvent, DataTableUnselectEvent } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { Toast } from 'primereact/toast';
+import { Toast } from 'primereact/toast'
 import { ProductService } from './service/ProductService';
 
 interface Product {
@@ -91,17 +95,17 @@ interface Product {
     rating: number;
 }
 
-export default function RowSelectEventsDemo() {
+export default function CellSelectEventsDemo() {
     const [products, setProducts] = useState<Product[]>([]);
-    const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+    const [selectedCell, setSelectedCell] = useState<DataTableCellSelection | null>(null);
     const toast = useRef<Toast>(null);
 
-    const onRowSelect = (event: DataTableSelectEvent) => {
-        toast.current.show({ severity: 'info', summary: 'Product Selected', detail: \`Name: \${event.data.name}\`, life: 3000 });
+    const onCellSelect = (event: DataTableSelectEvent) => {
+        toast.current.show({ severity: 'info', summary: 'Cell Selected', detail: \`Name: \${event.value}\`, life: 3000 });
     };
 
-    const onRowUnselect = (event: DataTableUnselectEvent) => {
-        toast.current.show({ severity: 'warn', summary: 'Product Unselected', detail: \`Name: \${event.data.name}\`, life: 3000 });
+    const onCellUnselect = (event: DataTableUnselectEvent) => {
+        toast.current.show({ severity: 'warn', summary: 'Cell Unselected', detail: \`Name: \${event.value}\`, life: 3000 });
     };
 
     useEffect(() => {
@@ -111,8 +115,9 @@ export default function RowSelectEventsDemo() {
     return (
         <div className="card">
             <Toast ref={toast} />
-            <DataTable value={products} selectionMode="single" selection={selectedProduct} onSelectionChange={(e: DataTableSelectionChangeEvent<Product>) => setSelectedProduct(e.value)} dataKey="id"
-                    onRowSelect={onRowSelect} onRowUnselect={onRowUnselect} metaKeySelection={false}>
+            <DataTable value={products} cellSelection selectionMode="single" selection={selectedCell} 
+                    onSelectionChange={(e: DataTableSelectionChangeEvent) => setSelectedCell(e.value)} metaKeySelection={false}
+                    onCellSelect={onCellSelect} onCellUnselect={onCellUnselect}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>
@@ -143,12 +148,23 @@ export default function RowSelectEventsDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    DataTable provides <i>onRowSelect</i> and <i>onRowUnselect</i> events to listen selection events.
+                    DataTable provides <i>onCellSelect</i> and <i>onCellUnselect</i> events to listen selection events.
                 </p>
             </DocSectionText>
             <Toast ref={toast} />
             <div className="card">
-                <DataTable value={products} selectionMode="single" selection={selectedProduct} onSelectionChange={(e) => setSelectedProduct(e.value)} dataKey="id" onRowSelect={onRowSelect} onRowUnselect={onRowUnselect} metaKeySelection={false}>
+                <DataTable
+                    value={products}
+                    selectionMode="single"
+                    cellSelection
+                    selection={selectedCell}
+                    onSelectionChange={(e) => {
+                        setSelectedCell(e.value);
+                    }}
+                    metaKeySelection={false}
+                    onCellSelect={onCellSelect}
+                    onCellUnselect={onCellUnselect}
+                >
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>

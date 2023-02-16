@@ -1,6 +1,10 @@
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/datatable/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/datatable/basicdoc';
+import { DisabledCellSelectionDoc } from '../../components/doc/datatable/cellselection/disableddoc';
+import { CellSelectEventsDoc } from '../../components/doc/datatable/cellselection/eventsdoc';
+import { MultipleCellsSelectionDoc } from '../../components/doc/datatable/cellselection/multipledoc';
+import { SingleCellSelectionDoc } from '../../components/doc/datatable/cellselection/singledoc';
 import { ColGroupDoc } from '../../components/doc/datatable/colgroupdoc';
 import { ChooseResizableColumnsDoc } from '../../components/doc/datatable/colresize/chooseresizablecolumnsdoc';
 import { ExpandModeDoc } from '../../components/doc/datatable/colresize/expandmodedoc';
@@ -183,14 +187,40 @@ const DataTableDemo = () => {
                     component: CheckboxRowSelectionDoc
                 },
                 {
-                    id: 'disabled_row_selection',
-                    label: 'Disabled',
-                    component: DisabledRowSelectionDoc
-                },
-                {
                     id: 'row_selection_events',
                     label: 'Events',
                     component: RowSelectEventsDoc
+                },
+                {
+                    id: 'disabled_row_selection',
+                    label: 'Disabled',
+                    component: DisabledRowSelectionDoc
+                }
+            ]
+        },
+        {
+            id: 'cell_selection',
+            label: 'Cell Selection',
+            children: [
+                {
+                    id: 'single_cell_selection',
+                    label: 'Single',
+                    component: SingleCellSelectionDoc
+                },
+                {
+                    id: 'multiple_cells_selection',
+                    label: 'Multiple',
+                    component: MultipleCellsSelectionDoc
+                },
+                {
+                    id: 'cell_selection_events',
+                    label: 'Events',
+                    component: CellSelectEventsDoc
+                },
+                {
+                    id: 'disabled_cells_selection',
+                    label: 'Disabled',
+                    component: DisabledCellSelectionDoc
                 }
             ]
         },
