@@ -31,6 +31,7 @@ import { RowSpanGroupingDoc } from '../../components/doc/datatable/rowgroup/rows
 import { SubHeaderGroupingDoc } from '../../components/doc/datatable/rowgroup/subheadergroupingdoc';
 import { CheckboxRowSelectionDoc } from '../../components/doc/datatable/rowselection/checkboxdoc';
 import { DisabledRowSelectionDoc } from '../../components/doc/datatable/rowselection/disableddoc';
+import { RowSelectEventsDoc } from '../../components/doc/datatable/rowselection/eventsdoc';
 import { MultipleRowsSelectionDoc } from '../../components/doc/datatable/rowselection/multipledoc';
 import { RadioButtonRowSelectionDoc } from '../../components/doc/datatable/rowselection/radiobuttondoc';
 import { SingleRowSelectionDoc } from '../../components/doc/datatable/rowselection/singledoc';
@@ -185,6 +186,11 @@ const DataTableDemo = () => {
                     id: 'disabled_row_selection',
                     label: 'Disabled',
                     component: DisabledRowSelectionDoc
+                },
+                {
+                    id: 'row_selection_events',
+                    label: 'Events',
+                    component: RowSelectEventsDoc
                 }
             ]
         },

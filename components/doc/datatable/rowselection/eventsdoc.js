@@ -1,15 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ProductService } from '../../../../service/ProductService';
 import { Column } from '../../../lib/column/Column';
 import { DataTable } from '../../../lib/datatable/DataTable';
-import { InputSwitch } from '../../../lib/inputswitch/InputSwitch';
+import { Toast } from '../../../lib/toast/Toast';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 
-export function SingleRowSelectionDoc(props) {
+export function RowSelectEventsDoc(props) {
     const [products, setProducts] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null);
-    const [metaKey, setMetaKey] = useState(true);
+    const toast = useRef(null);
+
+    const onRowSelect = (event) => {
+        toast.current.show({ severity: 'info', summary: 'Product Selected', detail: `Name: ${event.data.name}`, life: 3000 });
+    };
+
+    const onRowUnselect = (event) => {
+        toast.current.show({ severity: 'warn', summary: 'Product Unselected', detail: `Name: ${event.data.name}`, life: 3000 });
+    };
 
     useEffect(() => {
         ProductService.getProductsMini().then((data) => setProducts(data));
@@ -17,10 +25,8 @@ export function SingleRowSelectionDoc(props) {
 
     const code = {
         basic: `
-<InputSwitch checked={metaKey} onChange={(e) => setMetaKey(e.value)} />
-
-<DataTable value={products} selectionMode="single" selection={selectedProduct} 
-        onSelectionChange={(e) => setSelectedProduct(e.value)} dataKey="id" metaKeySelection={metaKey}>
+<DataTable value={products} selectionMode="single" selection={selectedProduct} onSelectionChange={(e) => setSelectedProduct(e.value)} dataKey="id"
+        onRowSelect={onRowSelect} onRowUnselect={onRowUnselect} metaKeySelection={false}>
     <Column field="code" header="Code"></Column>
     <Column field="name" header="Name"></Column>
     <Column field="category" header="Category"></Column>
@@ -28,16 +34,24 @@ export function SingleRowSelectionDoc(props) {
 </DataTable>
         `,
         javascript: `
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { InputSwitch } from 'primereact/inputswitch';
+import { Toast } from 'primereact/toast';
 import { ProductService } from './service/ProductService';
 
-export default function SingleRowSelectionDemo() {
+export default function RowSelectEventsDemo() {
     const [products, setProducts] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null);
-    const [metaKey, setMetaKey] = useState(true);
+    const toast = useRef(null);
+
+    const onRowSelect = (event) => {
+        toast.current.show({ severity: 'info', summary: 'Product Selected', detail: \`Name: \${event.data.name}\`, life: 3000 });
+    };
+
+    const onRowUnselect = (event) => {
+        toast.current.show({ severity: 'warn', summary: 'Product Unselected', detail: \`Name: \${event.data.name}\`, life: 3000 });
+    };
 
     useEffect(() => {
         ProductService.getProductsMini().then((data) => setProducts(data));
@@ -45,11 +59,9 @@ export default function SingleRowSelectionDemo() {
 
     return (
         <div className="card">
-            <div className="flex justify-content-center align-items-center mb-4 gap-2">
-                <InputSwitch inputId="input-metakey" checked={metaKey} onChange={(e) => setMetaKey(e.value)} />
-                <label htmlFor="input-metakey">MetaKey</label>
-            </div>
-            <DataTable value={products} selectionMode="single" selection={selectedProduct} onSelectionChange={(e) => setSelectedProduct(e.value)} dataKey="id" metaKeySelection={metaKey}>
+            <Toast ref={toast} />
+            <DataTable value={products} selectionMode="single" selection={selectedProduct} onSelectionChange={(e) => setSelectedProduct(e.value)} dataKey="id"
+                    onRowSelect={onRowSelect} onRowUnselect={onRowUnselect} metaKeySelection={false}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>
@@ -60,10 +72,10 @@ export default function SingleRowSelectionDemo() {
 }
         `,
         typescript: `
-import React, { useState, useEffect } from 'react';
-import { DataTable } from 'primereact/datatable';
+import React, { useState, useRef, useEffect } from 'react';
+import { DataTable, DataTableSelectEvent, DataTableUnselectEvent } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { InputSwitch, InputSwitchChangeEvent } from 'primereact/inputswitch';
+import { Toast } from 'primereact/toast';
 import { ProductService } from './service/ProductService';
 
 interface Product {
@@ -79,10 +91,18 @@ interface Product {
     rating: number;
 }
 
-export default function SingleRowSelectionDemo() {
+export default function RowSelectEventsDemo() {
     const [products, setProducts] = useState<Product[]>([]);
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-    const [metaKey, setMetaKey] = useState<boolean>(true);
+    const toast = useRef<Toast>(null);
+
+    const onRowSelect = (event: DataTableSelectEvent) => {
+        toast.current.show({ severity: 'info', summary: 'Product Selected', detail: \`Name: \${event.data.name}\`, life: 3000 });
+    };
+
+    const onRowUnselect = (event: DataTableUnselectEvent) => {
+        toast.current.show({ severity: 'warn', summary: 'Product Unselected', detail: \`Name: \${event.data.name}\`, life: 3000 });
+    };
 
     useEffect(() => {
         ProductService.getProductsMini().then((data) => setProducts(data));
@@ -90,11 +110,9 @@ export default function SingleRowSelectionDemo() {
 
     return (
         <div className="card">
-            <div className="flex justify-content-center align-items-center mb-4 gap-2">
-                <InputSwitch inputId="input-metakey" checked={metaKey} onChange={(e: InputSwitchChangeEvent) => setMetaKey(e.value)} />
-                <label htmlFor="input-metakey">MetaKey</label>
-            </div>
-            <DataTable value={products} selectionMode="single" selection={selectedProduct} onSelectionChange={(e: DataTableSelectionChangeEvent<Product>) => setSelectedProduct(e.value)} dataKey="id" metaKeySelection={metaKey}>
+            <Toast ref={toast} />
+            <DataTable value={products} selectionMode="single" selection={selectedProduct} onSelectionChange={(e: DataTableSelectionChangeEvent<Product>) => setSelectedProduct(e.value)} dataKey="id"
+                    onRowSelect={onRowSelect} onRowUnselect={onRowUnselect} metaKeySelection={false}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>
@@ -125,20 +143,12 @@ export default function SingleRowSelectionDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Single row selection is enabled by defining <i>selectionMode</i> as <i>single</i> along with a value binding using <i>selection</i> and <i>onSelectionChange</i> properties. When available, it is suggested to provide a unique
-                    identifier of a row with <i>dataKey</i> to optimize performance.
-                </p>
-                <p>
-                    By default, metaKey press (e.g. <i>⌘</i>) is necessary to unselect a row however this can be configured with disabling the <i>metaKeySelection</i> property. In touch enabled devices this option has no effect and behavior is same
-                    as setting it to false.
+                    DataTable provides <i>onRowSelect</i> and <i>onRowUnselect</i> events to listen selection events.
                 </p>
             </DocSectionText>
+            <Toast ref={toast} />
             <div className="card">
-                <div className="flex justify-content-center align-items-center mb-4 gap-2">
-                    <InputSwitch inputId="input-metakey" checked={metaKey} onChange={(e) => setMetaKey(e.value)} />
-                    <label htmlFor="input-metakey">MetaKey</label>
-                </div>
-                <DataTable value={products} selectionMode="single" selection={selectedProduct} onSelectionChange={(e) => setSelectedProduct(e.value)} dataKey="id" metaKeySelection={metaKey}>
+                <DataTable value={products} selectionMode="single" selection={selectedProduct} onSelectionChange={(e) => setSelectedProduct(e.value)} dataKey="id" onRowSelect={onRowSelect} onRowUnselect={onRowUnselect} metaKeySelection={false}>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
