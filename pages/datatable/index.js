@@ -25,7 +25,7 @@ import { PaginatorBasicDoc } from '../../components/doc/datatable/paginator/basi
 import { PaginatorTemplateDoc } from '../../components/doc/datatable/paginator/templatedoc';
 import { ReorderDoc } from '../../components/doc/datatable/reorderdoc';
 import { ResponsiveDoc } from '../../components/doc/datatable/responsivedoc';
-import { RowExpandDoc } from '../../components/doc/datatable/rowexpanddoc';
+import { RowExpansionDoc } from '../../components/doc/datatable/rowexpansiondoc';
 import { ExpandableRowGroupDoc } from '../../components/doc/datatable/rowgroup/expandabledoc';
 import { RowSpanRowGroupDoc } from '../../components/doc/datatable/rowgroup/rowspandoc';
 import { SubHeaderRowGroupDoc } from '../../components/doc/datatable/rowgroup/subheaderdoc';
@@ -214,6 +214,11 @@ const DataTableDemo = () => {
             ]
         },
         {
+            id: 'row_expansion',
+            label: 'Row Expansion',
+            component: RowExpansionDoc
+        },
+        {
             id: 'edit',
             label: 'Edit',
             children: [
@@ -306,11 +311,6 @@ const DataTableDemo = () => {
                     component: RowSpanRowGroupDoc
                 }
             ]
-        },
-        {
-            id: 'rowexpand',
-            label: 'Expand',
-            component: RowExpandDoc
         },
         {
             id: 'responsive',
