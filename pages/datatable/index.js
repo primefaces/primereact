@@ -9,6 +9,7 @@ import { ColGroupDoc } from '../../components/doc/datatable/colgroupdoc';
 import { ExpandModeDoc } from '../../components/doc/datatable/colresize/expandmodedoc';
 import { FitModeDoc } from '../../components/doc/datatable/colresize/fitmodedoc';
 import { ColToggleDoc } from '../../components/doc/datatable/coltoggledoc';
+import { ConditionalStyleDoc } from '../../components/doc/datatable/conditionalstyledoc';
 import { ContextMenuDoc } from '../../components/doc/datatable/contextmenudoc';
 import { DatatableProductsDoc } from '../../components/doc/datatable/datatableproducts';
 import { DynamicColumnsDoc } from '../../components/doc/datatable/dynamiccolumnsdoc';
@@ -50,7 +51,6 @@ import { CustomStorageDoc } from '../../components/doc/datatable/state/customsto
 import { LocalStorageDoc } from '../../components/doc/datatable/state/localdoc';
 import { SessionStorageDoc } from '../../components/doc/datatable/state/sessionstoragedoc';
 import { StripedRowsDoc } from '../../components/doc/datatable/stripedrowsdoc';
-import { StyledDataTableDoc } from '../../components/doc/datatable/styleddatatabledoc';
 import { StyleDoc } from '../../components/doc/datatable/styledoc';
 import { TemplateDoc } from '../../components/doc/datatable/templatedoc';
 import { LazyVirtualScrollDoc } from '../../components/doc/datatable/virtualscroll/lazydoc';
@@ -318,23 +318,21 @@ const DataTableDemo = () => {
             component: ResponsiveDoc
         },
         {
-            id: 'styleddatatable',
-            label: 'Styled DataTable',
-            component: StyledDataTableDoc
+            id: 'conditional_style',
+            label: 'Conditional Style',
+            component: ConditionalStyleDoc
         },
         {
             id: 'colresize',
             label: 'ColResize',
-            description:
-                'Columns can be resized using drag drop by setting the resizableColumns to true. There are two resize modes; "fit" and "expand". Fit is the default one and the overall table width does not change when a column is resized. In "expand" mode, table width also changes along with the column width. onColumnResize is a callback that passes the resized column header as a parameter.',
             children: [
                 {
-                    id: 'fitmode',
+                    id: 'resize_fitmode',
                     label: 'Fit Mode',
                     component: FitModeDoc
                 },
                 {
-                    id: 'expandmode',
+                    id: 'resize_expandmode',
                     label: 'Expand Mode',
                     component: ExpandModeDoc
                 }

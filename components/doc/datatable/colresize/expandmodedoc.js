@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ProductService } from '../../../../service/ProductService';
 import { Column } from '../../../lib/column/Column';
 import { DataTable } from '../../../lib/datatable/DataTable';
@@ -14,7 +14,7 @@ export function ExpandModeDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={products} resizableColumns columnResizeMode="expand" showGridlines responsiveLayout="scroll">
+<DataTable value={products} columnResizeMode="expand" resizableColumns showGridlines>
     <Column field="code" header="Code"></Column>
     <Column field="name" header="Name"></Column>
     <Column field="category" header="Category"></Column>
@@ -27,17 +27,16 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ProductService } from './service/ProductService';
 
-const ExpandModeDoc = () => {
+export default function ExpandModeDemo() {
     const [products, setProducts] = useState([]);
-    
 
     useEffect(() => {
         ProductService.getProductsMini().then(data => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div className="card">
-            <DataTable value={products} resizableColumns columnResizeMode="expand" showGridlines responsiveLayout="scroll">
+            <DataTable value={products} columnResizeMode="expand" resizableColumns showGridlines>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>
@@ -53,17 +52,29 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ProductService } from './service/ProductService';
 
-const ExpandModeDoc = () => {
-    const [products, setProducts] = useState([]);
-    
+interface Product {
+    id: string;
+    code: string;
+    name: string;
+    description: string;
+    image: string;
+    price: number;
+    category: string;
+    quantity: number;
+    inventoryStatus: string;
+    rating: number;
+}
+
+export default function ExpandModeDemo() {
+    const [products, setProducts] = useState<Product[]>([]);
 
     useEffect(() => {
         ProductService.getProductsMini().then(data => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div className="card">
-            <DataTable value={products} resizableColumns columnResizeMode="expand" showGridlines responsiveLayout="scroll">
+            <DataTable value={products} columnResizeMode="expand" resizableColumns showGridlines>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>
@@ -74,7 +85,6 @@ const ExpandModeDoc = () => {
 }
         `,
         data: `
-/* ProductService */        
 {
     id: '1000',
     code: 'f230fh0g3',
@@ -94,10 +104,12 @@ const ExpandModeDoc = () => {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Expand Mode demo content.</p>
+                <p>
+                    Setting <i>columnResizeMode</i> as <i>expand</i> changes the table width as well.
+                </p>
             </DocSectionText>
             <div className="card">
-                <DataTable value={products} resizableColumns columnResizeMode="expand" showGridlines responsiveLayout="scroll">
+                <DataTable value={products} columnResizeMode="expand" resizableColumns showGridlines>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>

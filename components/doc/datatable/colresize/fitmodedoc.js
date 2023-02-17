@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ProductService } from '../../../../service/ProductService';
 import { Column } from '../../../lib/column/Column';
 import { DataTable } from '../../../lib/datatable/DataTable';
@@ -14,11 +14,11 @@ export function FitModeDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={products} resizableColumns columnResizeMode="fit" showGridlines responsiveLayout="scroll">
-    <Column field="code" header="Code" style={{width:'20%'}}/>
-    <Column field="name" header="Name" style={{width:'40%'}}/>
-    <Column field="category" header="Category" style={{width:'20%'}}/>
-    <Column field="quantity" header="Quantity" style={{width:'20%'}}/>
+<DataTable value={products} resizableColumns showGridlines>
+    <Column field="code" header="Code"></Column>
+    <Column field="name" header="Name"></Column>
+    <Column field="category" header="Category"></Column>
+    <Column field="quantity" header="Quantity"></Column>
 </DataTable>
         `,
         javascript: `
@@ -27,21 +27,20 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ProductService } from './service/ProductService';
 
-const FitModeDoc = () => {
+export default function FitModeDemo() {
     const [products, setProducts] = useState([]);
-    
 
     useEffect(() => {
         ProductService.getProductsMini().then(data => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div className="card">
-            <DataTable value={products} resizableColumns columnResizeMode="fit" showGridlines responsiveLayout="scroll">
-                <Column field="code" header="Code" style={{width:'20%'}}/>
-                <Column field="name" header="Name" style={{width:'40%'}}/>
-                <Column field="category" header="Category" style={{width:'20%'}}/>
-                <Column field="quantity" header="Quantity" style={{width:'20%'}}/>
+            <DataTable value={products} resizableColumns showGridlines>
+                <Column field="code" header="Code"></Column>
+                <Column field="name" header="Name"></Column>
+                <Column field="category" header="Category"></Column>
+                <Column field="quantity" header="Quantity"></Column>
             </DataTable>
         </div>
     );
@@ -53,28 +52,39 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ProductService } from './service/ProductService';
 
-const FitModeDoc = () => {
-    const [products, setProducts] = useState([]);
-    
+interface Product {
+    id: string;
+    code: string;
+    name: string;
+    description: string;
+    image: string;
+    price: number;
+    category: string;
+    quantity: number;
+    inventoryStatus: string;
+    rating: number;
+}
+
+export default function FitModeDemo() {
+    const [products, setProducts] = useState<Product[]>([]);
 
     useEffect(() => {
         ProductService.getProductsMini().then(data => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div className="card">
-            <DataTable value={products} resizableColumns columnResizeMode="fit" showGridlines responsiveLayout="scroll">
-                <Column field="code" header="Code" style={{width:'20%'}}/>
-                <Column field="name" header="Name" style={{width:'40%'}}/>
-                <Column field="category" header="Category" style={{width:'20%'}}/>
-                <Column field="quantity" header="Quantity" style={{width:'20%'}}/>
+            <DataTable value={products} resizableColumns showGridlines>
+                <Column field="code" header="Code"></Column>
+                <Column field="name" header="Name"></Column>
+                <Column field="category" header="Category"></Column>
+                <Column field="quantity" header="Quantity"></Column>
             </DataTable>
         </div>
     );
 }
         `,
         data: `
-/* ProductService */        
 {
     id: '1000',
     code: 'f230fh0g3',
@@ -94,14 +104,17 @@ const FitModeDoc = () => {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Fit Mode demo content.</p>
+                <p>
+                    Columns can be resized with drag and drop when <i>resizableColumns</i> is enabled. Default resize mode is <i>fit</i>
+                    that does not change the overall table width.
+                </p>
             </DocSectionText>
             <div className="card">
-                <DataTable value={products} resizableColumns columnResizeMode="fit" showGridlines responsiveLayout="scroll">
-                    <Column field="code" header="Code" style={{ width: '20%' }} />
-                    <Column field="name" header="Name" style={{ width: '40%' }} />
-                    <Column field="category" header="Category" style={{ width: '20%' }} />
-                    <Column field="quantity" header="Quantity" style={{ width: '20%' }} />
+                <DataTable value={products} resizableColumns showGridlines>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
                 </DataTable>
             </div>
             <DocSectionCode code={code} service={['ProductService']} />
