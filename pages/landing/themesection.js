@@ -5,6 +5,7 @@ import { Column } from '../../components/lib/column/Column';
 import { DataTable } from '../../components/lib/datatable/DataTable';
 import { InputText } from '../../components/lib/inputtext/InputText';
 import { ProgressBar } from '../../components/lib/progressbar/ProgressBar';
+import { Tag } from '../../components/lib/tag/Tag';
 import { classNames } from '../../components/lib/utils/Utils';
 import { CustomerService } from '../../service/CustomerService';
 
@@ -108,7 +109,7 @@ const ThemeSection = (props) => {
     };
 
     const statusBodyTemplate = (rowData) => {
-        return <span className={`customer-badge status-${rowData.status}`}>{rowData.status}</span>;
+        return <Tag value={rowData.status} severity={getSeverity(rowData.status)} className="text-sm font-bold" />;
     };
 
     const activityBodyTemplate = (rowData) => {
@@ -117,6 +118,25 @@ const ThemeSection = (props) => {
 
     const actionBodyTemplate = () => {
         return <Button type="button" icon="pi pi-cog" className="p-button-text"></Button>;
+    };
+
+    const getSeverity = (status) => {
+        switch (status) {
+            case 'unqualified':
+                return 'danger';
+
+            case 'qualified':
+                return 'success';
+
+            case 'new':
+                return 'info';
+
+            case 'negotiation':
+                return 'warning';
+
+            case 'renewal':
+                return null;
+        }
     };
 
     const header = renderHeader();

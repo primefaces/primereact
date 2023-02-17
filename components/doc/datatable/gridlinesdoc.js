@@ -14,7 +14,7 @@ export function GridLinesDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={products} header="Header" footer="Footer" showGridlines responsiveLayout="scroll">
+<DataTable value={products} showGridlines>
     <Column field="code" header="Code"></Column>
     <Column field="name" header="Name"></Column>
     <Column field="category" header="Category"></Column>
@@ -27,24 +27,21 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ProductService } from './service/ProductService';
 
-const GridLinesDoc = () => {
-    const [products, setProducts] = useState(null);
-    
+export default function GridLinesDemo() {
+    const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        ProductService.getProductsMiniSmall().then(data => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        ProductService.getProductsMini().then(data => setProducts(data));
+    }, []);
 
     return (
-        <div>
-            <div className="card">
-                <DataTable value={products} header="Header" footer="Footer" showGridlines responsiveLayout="scroll">
-                    <Column field="code" header="Code"></Column>
-                    <Column field="name" header="Name"></Column>
-                    <Column field="category" header="Category"></Column>
-                    <Column field="quantity" header="Quantity"></Column>
-                </DataTable>
-            </div>
+        <div className="card">
+            <DataTable value={products} showGridlines>
+                <Column field="code" header="Code"></Column>
+                <Column field="name" header="Name"></Column>
+                <Column field="category" header="Category"></Column>
+                <Column field="quantity" header="Quantity"></Column>
+            </DataTable>
         </div>
     );
 }
@@ -55,30 +52,39 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ProductService } from './service/ProductService';
 
-const GridLinesDoc = () => {
-    const [products, setProducts] = useState(null);
-    
+interface Product {
+    id: string;
+    code: string;
+    name: string;
+    description: string;
+    image: string;
+    price: number;
+    category: string;
+    quantity: number;
+    inventoryStatus: string;
+    rating: number;
+}
+
+export default function GridLinesDemo() {
+    const [products, setProducts] = useState<Product[]>([]);
 
     useEffect(() => {
-        ProductService.getProductsMiniSmall().then(data => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        ProductService.getProductsMini().then(data => setProducts(data));
+    }, []);
 
     return (
-        <div>
-            <div className="card">
-                <DataTable value={products} header="Header" footer="Footer" showGridlines responsiveLayout="scroll">
-                    <Column field="code" header="Code"></Column>
-                    <Column field="name" header="Name"></Column>
-                    <Column field="category" header="Category"></Column>
-                    <Column field="quantity" header="Quantity"></Column>
-                </DataTable>
-            </div>
+        <div className="card">
+            <DataTable value={products} showGridlines>
+                <Column field="code" header="Code"></Column>
+                <Column field="name" header="Name"></Column>
+                <Column field="category" header="Category"></Column>
+                <Column field="quantity" header="Quantity"></Column>
+            </DataTable>
         </div>
     );
 }
         `,
         data: `
-/* ProductService */        
 {
     id: '1000',
     code: 'f230fh0g3',
@@ -99,11 +105,11 @@ const GridLinesDoc = () => {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Enabling <b>showGridlines</b> displays borders between cells. Note: Some themes may always display gridlines by design.
-                </p>{' '}
+                    Enabling <i>showGridlines</i> displays borders between cells.
+                </p>
             </DocSectionText>
             <div className="card">
-                <DataTable value={products} header="Header" footer="Footer" showGridlines responsiveLayout="scroll">
+                <DataTable value={products} showGridlines>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>

@@ -11082,7 +11082,7 @@ const services = {
         },
 
         getProductsMini() {
-            return Promise.resolve(this.getProductsData().slice(0, 3));
+            return Promise.resolve(this.getProductsData().slice(0, 5));
         },
 
         getProductsSmall() {

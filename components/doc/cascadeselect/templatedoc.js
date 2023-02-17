@@ -82,10 +82,10 @@ export function TemplateDoc(props) {
 
     const countryOptionTemplate = (option) => {
         return (
-            <div className="country-item">
-                {option.states && <img alt={option.name} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={`flag flag-${option.code.toLowerCase()}`} />}
-                {option.cities && <i className="pi pi-compass mr-2" />}
-                {option.cname && <i className="pi pi-map-marker mr-2" />}
+            <div className="flex align-items-center gap-2">
+                {option.states && <img alt={option.name} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={`flag flag-${option.code.toLowerCase()}`} style={{ width: '18px' }} />}
+                {option.cities && <i className="pi pi-compass" />}
+                {option.cname && <i className="pi pi-map-marker" />}
                 <span>{option.cname || option.name}</span>
             </div>
         );
@@ -182,11 +182,11 @@ export default function TemplateDemo() {
 
     const countryOptionTemplate = (option) => {
         return (
-            <div className="country-item">
+            <div className="flex align-items-center gap-2">
                 {option.states && <img alt={option.name} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png"
-                className={\`flag flag-\${option.code.toLowerCase()}\`} />}
-                {option.cities && <i className="pi pi-compass mr-2"/>}
-                {option.cname && <i className="pi pi-map-marker mr-2"/>}
+                className={\`flag flag-\${option.code.toLowerCase()}\`} style={{ width: '18px' }} />}
+                {option.cities && <i className="pi pi-compass"/>}
+                {option.cname && <i className="pi pi-map-marker"/>}
                 <span>{option.cname || option.name}</span>
             </div>
         );
@@ -302,11 +302,11 @@ export default function TemplateDemo() {
 
     const countryOptionTemplate = (option) => {
         return (
-            <div className="country-item">
+            <div className="flex align-items-center gap-2">
                 {option.states && <img alt={option.name} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png"
-                className={\`flag flag-\${option.code.toLowerCase()}\`} />}
-                {option.cities && <i className="pi pi-compass mr-2"/>}
-                {option.cname && <i className="pi pi-map-marker mr-2"/>}
+                className={\`flag flag-\${option.code.toLowerCase()}\`} style={{ width: '18px' }} />}
+                {option.cities && <i className="pi pi-compass"/>}
+                {option.cname && <i className="pi pi-map-marker"/>}
                 <span>{option.cname || option.name}</span>
             </div>
         );

@@ -63,11 +63,11 @@ export function BasicDoc(props) {
         `,
         javascript: `
 import React, { useState, useEffect } from 'react';
-import { ProductService } from './service/ProductService';
 import { Button } from 'primereact/button';
 import { DataView } from 'primereact/dataview';
 import { Rating } from 'primereact/rating';
 import { Tag } from 'primereact/tag';
+import { ProductService } from './service/ProductService';
 
 export default function BasicDemo() {
     const [products, setProducts] = useState([]);
@@ -128,11 +128,11 @@ export default function BasicDemo() {
         `,
         typescript: `
 import React, { useState, useEffect } from 'react';
-import { ProductService } from './service/ProductService';
 import { Button } from 'primereact/button';
 import { DataView } from 'primereact/dataview';
 import { Rating } from 'primereact/rating';
 import { Tag } from 'primereact/tag';
+import { ProductService } from './service/ProductService';
 
 interface Product {
     id: string;

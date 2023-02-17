@@ -97,7 +97,7 @@ export const DataTableBase = {
         reorderableColumns: false,
         reorderableRows: false,
         resizableColumns: false,
-        responsiveLayout: 'stack',
+        responsiveLayout: 'scroll',
         rowClassName: null,
         rowEditValidator: null,
         rowExpansionTemplate: null,

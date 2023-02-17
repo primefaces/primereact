@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { CustomerService } from '../../../../service/CustomerService';
-import { Button } from '../../../lib/button/Button';
 import { Column } from '../../../lib/column/Column';
 import { DataTable } from '../../../lib/datatable/DataTable';
 import { DocSectionCode } from '../../common/docsectioncode';
@@ -10,18 +9,12 @@ export function PaginatorBasicDoc(props) {
     const [customers, setCustomers] = useState([]);
 
     useEffect(() => {
-        CustomerService.getCustomersLarge().then((data) => setCustomers(data));
+        CustomerService.getCustomersMedium().then((data) => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const paginatorLeft = <Button type="button" icon="pi pi-refresh" className="p-button-text" />;
-    const paginatorRight = <Button type="button" icon="pi pi-cloud" className="p-button-text" />;
 
     const code = {
         basic: `
-<DataTable value={customers} paginator responsiveLayout="scroll"
-    paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={10} rowsPerPageOptions={[10,20,50]}
-    paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}>
+<DataTable value={customers} paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]}>
     <Column field="name" header="Name" style={{ width: '25%' }}></Column>
     <Column field="country.name" header="Country" style={{ width: '25%' }}></Column>
     <Column field="company" header="Company" style={{ width: '25%' }}></Column>
@@ -32,27 +25,18 @@ export function PaginatorBasicDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { Button } from 'primereact/button';
 import { CustomerService } from './service/CustomerService';
 
-const PaginatorBasicDoc = () => {
+export default function PaginatorBasicDemo() {
     const [customers, setCustomers] = useState([]);
 
-    
-
     useEffect(() => {
-        CustomerService.getCustomersLarge().then((data) => setCustomers(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const paginatorLeft = <Button type="button" icon="pi pi-refresh" className="p-button-text" />;
-    const paginatorRight = <Button type="button" icon="pi pi-cloud" className="p-button-text" />;
+        CustomerService.getCustomersMedium().then((data) => setCustomers(data));
+    }, []);
 
     return (
         <div className="card">
-            <DataTable value={customers} paginator responsiveLayout="scroll"
-                paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-                currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={10} rowsPerPageOptions={[10,20,50]}
-                paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}>
+            <DataTable value={customers} paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]}>
                 <Column field="name" header="Name" style={{ width: '25%' }}></Column>
                 <Column field="country.name" header="Country" style={{ width: '25%' }}></Column>
                 <Column field="company" header="Company" style={{ width: '25%' }}></Column>
@@ -66,27 +50,41 @@ const PaginatorBasicDoc = () => {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { Button } from 'primereact/button';
 import { CustomerService } from './service/CustomerService';
 
-const PaginatorBasicDoc = () => {
-    const [customers, setCustomers] = useState([]);
+interface Country {
+    name: string;
+    code: string;
+}
 
-    
+interface Representative {
+    name: string;
+    code: string;
+}
+
+interface Customer {
+    id: number;
+    name: string;
+    country: Country;
+    company: string;
+    date: string;
+    status: string;
+    verified: boolean;
+    activity: number;
+    representative: Representative;
+    balance: number;
+}
+
+export default function PaginatorBasicDemo() {
+    const [customers, setCustomers] = useState<Customer[]>([]);
 
     useEffect(() => {
-        CustomerService.getCustomersLarge().then((data) => setCustomers(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const paginatorLeft = <Button type="button" icon="pi pi-refresh" className="p-button-text" />;
-    const paginatorRight = <Button type="button" icon="pi pi-cloud" className="p-button-text" />;
+        CustomerService.getCustomersMedium().then((data) => setCustomers(data));
+    }, []);
 
     return (
         <div className="card">
-            <DataTable value={customers} paginator responsiveLayout="scroll"
-                paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-                currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={10} rowsPerPageOptions={[10,20,50]}
-                paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}>
+            <DataTable value={customers} paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]}>
                 <Column field="name" header="Name" style={{ width: '25%' }}></Column>
                 <Column field="country.name" header="Country" style={{ width: '25%' }}></Column>
                 <Column field="company" header="Company" style={{ width: '25%' }}></Column>
@@ -97,7 +95,6 @@ const PaginatorBasicDoc = () => {
 }
         `,
         data: `
-/* CustomerService */ 
 {
     id: 1000,
     name: 'James Butt',
@@ -117,26 +114,18 @@ const PaginatorBasicDoc = () => {
     balance: 70663
 },
 ...
-       `
+        `
     };
 
     return (
         <>
             <DocSectionText {...props}>
-                <p>Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the number of page links to display.</p>
+                <p>
+                    Pagination is enabled by adding <i>paginator</i> property and defining <i>rows</i> per page.
+                </p>
             </DocSectionText>
             <div className="card">
-                <DataTable
-                    value={customers}
-                    paginator
-                    responsiveLayout="scroll"
-                    paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
-                    rows={5}
-                    rowsPerPageOptions={[5, 10, 20, 50]}
-                    paginatorLeft={paginatorLeft}
-                    paginatorRight={paginatorRight}
-                >
+                <DataTable value={customers} paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]}>
                     <Column field="name" header="Name" style={{ width: '25%' }}></Column>
                     <Column field="country.name" header="Country" style={{ width: '25%' }}></Column>
                     <Column field="company" header="Company" style={{ width: '25%' }}></Column>
