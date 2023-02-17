@@ -2,25 +2,26 @@ import React, { useEffect, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
 import { Column } from '../../lib/column/Column';
 import { DataTable } from '../../lib/datatable/DataTable';
-import { SelectButton } from '../../lib/selectbutton/SelectButton';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function ResponsiveDoc(props) {
     const [products, setProducts] = useState([]);
-    const [responsiveOptions] = useState([
-        { label: 'Stacked', value: 'stack' },
-        { label: 'Scroll', value: 'scroll' }
-    ]);
-    const [responsiveMode, setResponsiveMode] = useState(responsiveOptions[0].value);
 
     useEffect(() => {
-        ProductService.getProductsSmall().then((data) => setProducts(data));
+        ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const code = {
         basic: `
-<DataTable value={products} responsiveLayout={responsiveMode}>
+<DataTable value={products} responsiveLayout="scroll" header={<h3 className="m-0">Scroll</h3>} className="mb-5">
+    <Column field="code" header="Code"></Column>
+    <Column field="name" header="Name" bodyClassName="white-space-nowrap"></Column>
+    <Column field="category" header="Category"></Column>
+    <Column field="quantity" header="Quantity"></Column>
+</DataTable>
+
+<DataTable value={products} responsiveLayout="stack" header={<h3 className="m-0">Stack</h3>} className="mb-5">
     <Column field="code" header="Code"></Column>
     <Column field="name" header="Name" bodyClassName="white-space-nowrap"></Column>
     <Column field="category" header="Category"></Column>
@@ -31,16 +32,10 @@ export function ResponsiveDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { SelectButton } from 'primereact/selectbutton';
 import { ProductService } from './service/ProductService';
 
 export default function ResponsiveDemo() {
     const [products, setProducts] = useState([]);
-    const [responsiveOptions] = useState([
-        { label: 'Stacked', value: 'stack' },
-        { label: 'Scroll', value: 'scroll' }
-    ]);
-    const [responsiveMode, setResponsiveMode] = useState(responsiveOptions[1].value);
 
     useEffect(() => {
         ProductService.getProductsSmall().then((data) => setProducts(data));
@@ -48,10 +43,14 @@ export default function ResponsiveDemo() {
 
     return (
         <div className="card">
-            <div className="flex justify-content-center mb-4">
-                <SelectButton value={responsiveMode} onChange={(e) => setResponsiveMode(e.value)} options={responsiveOptions} />
-            </div>
-            <DataTable value={products} responsiveLayout={responsiveMode}>
+            <DataTable value={products} responsiveLayout="scroll" header={<h3 className="m-0">Scroll</h3>} className="mb-5">
+                <Column field="code" header="Code"></Column>
+                <Column field="name" header="Name" bodyClassName="white-space-nowrap"></Column>
+                <Column field="category" header="Category"></Column>
+                <Column field="quantity" header="Quantity"></Column>
+            </DataTable>
+
+            <DataTable value={products} responsiveLayout="stack" header={<h3 className="m-0">Stack</h3>} className="mb-5">
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name" bodyClassName="white-space-nowrap"></Column>
                 <Column field="category" header="Category"></Column>
@@ -65,7 +64,6 @@ export default function ResponsiveDemo() {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { SelectButton } from 'primereact/selectbutton';
 import { ProductService } from './service/ProductService';
 
 interface Product {
@@ -81,29 +79,23 @@ interface Product {
     rating: number;
 }
 
-interface ResponsiveOption {
-    label: string;
-    value: string;
-}
-
 export default function ResponsiveDemo() {
     const [products, setProducts] = useState<Product[]>([]);
-    const [responsiveOptions] = useState<ResponsiveOption[]>([
-        { label: 'Stacked', value: 'stack' },
-        { label: 'Scroll', value: 'scroll' }
-    ]);
-    const [responsiveMode, setResponsiveMode] = useState<string>(responsiveOptions[1].value);
-
+    
     useEffect(() => {
         ProductService.getProductsSmall().then((data) => setProducts(data));
     }, []);
 
     return (
         <div className="card">
-            <div className="flex justify-content-center mb-4">
-                <SelectButton value={responsiveMode} onChange={(e) => setResponsiveMode(e.value)} options={responsiveOptions} />
-            </div>
-            <DataTable value={products} responsiveLayout={responsiveMode}>
+            <DataTable value={products} responsiveLayout="scroll" header={<h3 className="m-0">Scroll</h3>} className="mb-5">
+                <Column field="code" header="Code"></Column>
+                <Column field="name" header="Name" bodyClassName="white-space-nowrap"></Column>
+                <Column field="category" header="Category"></Column>
+                <Column field="quantity" header="Quantity"></Column>
+            </DataTable>
+
+            <DataTable value={products} responsiveLayout="stack" header={<h3 className="m-0">Stack</h3>} className="mb-5">
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name" bodyClassName="white-space-nowrap"></Column>
                 <Column field="category" header="Category"></Column>
@@ -139,10 +131,14 @@ export default function ResponsiveDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <div className="flex justify-content-center mb-4">
-                    <SelectButton value={responsiveMode} onChange={(e) => setResponsiveMode(e.value)} options={responsiveOptions} />
-                </div>
-                <DataTable value={products} responsiveLayout={responsiveMode}>
+                <DataTable value={products} responsiveLayout="scroll" header={<h3 className="m-0">Scroll</h3>} className="mb-5">
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name" bodyClassName="white-space-nowrap"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+
+                <DataTable value={products} responsiveLayout="stack" header={<h3 className="m-0">Stack</h3>} className="mb-5">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name" bodyClassName="white-space-nowrap"></Column>
                     <Column field="category" header="Category"></Column>
