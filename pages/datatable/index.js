@@ -26,9 +26,9 @@ import { PaginatorTemplateDoc } from '../../components/doc/datatable/paginator/t
 import { ReorderDoc } from '../../components/doc/datatable/reorderdoc';
 import { ResponsiveDoc } from '../../components/doc/datatable/responsivedoc';
 import { RowExpandDoc } from '../../components/doc/datatable/rowexpanddoc';
-import { ExpandableRowGroupsDoc } from '../../components/doc/datatable/rowgroup/expandablerowgroupsdoc';
-import { RowSpanGroupingDoc } from '../../components/doc/datatable/rowgroup/rowspangroupingdoc';
-import { SubHeaderGroupingDoc } from '../../components/doc/datatable/rowgroup/subheadergroupingdoc';
+import { ExpandableRowGroupDoc } from '../../components/doc/datatable/rowgroup/expandabledoc';
+import { RowSpanRowGroupDoc } from '../../components/doc/datatable/rowgroup/rowspandoc';
+import { SubHeaderRowGroupDoc } from '../../components/doc/datatable/rowgroup/subheaderdoc';
 import { CheckboxRowSelectionDoc } from '../../components/doc/datatable/rowselection/checkboxdoc';
 import { DisabledRowSelectionDoc } from '../../components/doc/datatable/rowselection/disableddoc';
 import { RowSelectEventsDoc } from '../../components/doc/datatable/rowselection/eventsdoc';
@@ -291,19 +291,19 @@ const DataTableDemo = () => {
             label: 'RowGroup',
             children: [
                 {
-                    id: 'subheadergrouping',
+                    id: 'rowgroup_subheader',
                     label: 'Subheader',
-                    component: SubHeaderGroupingDoc
+                    component: SubHeaderRowGroupDoc
                 },
                 {
-                    id: 'expandablerowgroups',
+                    id: 'rowgroup_expandable',
                     label: 'Expandable',
-                    component: ExpandableRowGroupsDoc
+                    component: ExpandableRowGroupDoc
                 },
                 {
-                    id: 'rowspangrouping',
+                    id: 'rowgroup_rowspan',
                     label: 'RowSpan',
-                    component: RowSpanGroupingDoc
+                    component: RowSpanRowGroupDoc
                 }
             ]
         },
