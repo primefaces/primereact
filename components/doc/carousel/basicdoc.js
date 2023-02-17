@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
 import { Button } from '../../lib/button/Button';
 import { Carousel } from '../../lib/carousel/Carousel';
+import { Tag } from '../../lib/tag/Tag';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
@@ -25,6 +26,22 @@ export function BasicDoc(props) {
         }
     ];
 
+    const getSeverity = (product) => {
+        switch (product.inventoryStatus) {
+            case 'INSTOCK':
+                return 'success';
+
+            case 'LOWSTOCK':
+                return 'warning';
+
+            case 'OUTOFSTOCK':
+                return 'danger';
+
+            default:
+                return null;
+        }
+    };
+
     useEffect(() => {
         ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -38,7 +55,7 @@ export function BasicDoc(props) {
                 <div>
                     <h4 className="mb-1">{product.name}</h4>
                     <h6 className="mt-0 mb-3">${product.price}</h6>
-                    <span className={`product-badge border-round status-${product.inventoryStatus.toLowerCase()}`}>{product.inventoryStatus}</span>
+                    <Tag value={product.inventoryStatus} severity={getSeverity(product)}></Tag>
                     <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
                         <Button icon="pi pi-search" className="p-button p-button-rounded" />
                         <Button icon="pi pi-star-fill" className="p-button-success p-button-rounded" />
@@ -56,6 +73,7 @@ export function BasicDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { Carousel } from 'primereact/carousel';
+import { Tag } from 'primereact/tag';
 import { ProductService } from './service/ProductService';
 
 export default function BasicDemo() {
@@ -78,6 +96,22 @@ export default function BasicDemo() {
         }
     ];
 
+    const getSeverity = (product) => {
+        switch (product.inventoryStatus) {
+            case 'INSTOCK':
+                return 'success';
+
+            case 'LOWSTOCK':
+                return 'warning';
+
+            case 'OUTOFSTOCK':
+                return 'danger';
+
+            default:
+                return null;
+        }
+    };
+
     useEffect(() => {
         ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
     }, []);
@@ -91,7 +125,7 @@ export default function BasicDemo() {
                 <div>
                     <h4 className="mb-1">{product.name}</h4>
                     <h6 className="mt-0 mb-3">\${product.price}</h6>
-                    <span className={\`product-badge border-round status-\${product.inventoryStatus.toLowerCase()}\`}>{product.inventoryStatus}</span>
+                    <Tag value={product.inventoryStatus} severity={getSeverity(product)}></Tag>
                     <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
                         <Button icon="pi pi-search" className="p-button p-button-rounded" />
                         <Button icon="pi pi-star-fill" className="p-button-success p-button-rounded" />
@@ -111,12 +145,26 @@ export default function BasicDemo() {
         typescript: `
 import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
-import { Carousel } from 'primereact/carousel';
+import { Carousel, CarouselResponsiveOption } from 'primereact/carousel';
+import { Tag } from 'primereact/tag';
 import { ProductService } from './service/ProductService';
 
+interface Product {
+    id: string;
+    code: string;
+    name: string;
+    description: string;
+    image: string;
+    price: number;
+    category: string;
+    quantity: number;
+    inventoryStatus: string;
+    rating: number;
+}
+
 export default function BasicDemo() {
-    const [products, setProducts] = useState([]);
-    const responsiveOptions = [
+    const [products, setProducts] = useState<Product[]>([]);
+    const responsiveOptions: CarouselResponsiveOption[] = [
         {
             breakpoint: '1199px',
             numVisible: 1,
@@ -133,12 +181,28 @@ export default function BasicDemo() {
             numScroll: 1
         }
     ];
+
+    const getSeverity = (product: Product) => {
+        switch (product.inventoryStatus) {
+            case 'INSTOCK':
+                return 'success';
+
+            case 'LOWSTOCK':
+                return 'warning';
+
+            case 'OUTOFSTOCK':
+                return 'danger';
+
+            default:
+                return null;
+        }
+    };
     
     useEffect(() => {
         ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
     }, []);
 
-    const productTemplate = (product) => {
+    const productTemplate = (product: Product) => {
         return (
             <div className="border-1 surface-border border-round m-2 text-center py-5 px-3">
                 <div className="mb-3">
@@ -147,7 +211,7 @@ export default function BasicDemo() {
                 <div>
                     <h4 className="mb-1">{product.name}</h4>
                     <h6 className="mt-0 mb-3">\${product.price}</h6>
-                    <span className={\`product-badge border-round status-\${product.inventoryStatus.toLowerCase()}\`}>{product.inventoryStatus}</span>
+                    <Tag value={product.inventoryStatus} severity={getSeverity(product)}></Tag>
                     <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
                         <Button icon="pi pi-search" className="p-button p-button-rounded" />
                         <Button icon="pi pi-star-fill" className="p-button-success p-button-rounded" />
