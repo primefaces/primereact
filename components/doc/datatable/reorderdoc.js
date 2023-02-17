@@ -1,14 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
 import { Column } from '../../lib/column/Column';
 import { DataTable } from '../../lib/datatable/DataTable';
-import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function ReorderDoc(props) {
     const [products, setProducts] = useState([]);
-    const toast = useRef(null);
     const columns = [
         { field: 'code', header: 'Code' },
         { field: 'name', header: 'Name' },
@@ -17,17 +15,8 @@ export function ReorderDoc(props) {
     ];
 
     useEffect(() => {
-        ProductService.getProductsSmall().then((data) => setProducts(data));
+        ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const onColReorder = () => {
-        toast.current.show({ severity: 'success', summary: 'Column Reordered', life: 3000 });
-    };
-
-    const onRowReorder = (e) => {
-        setProducts(e.value);
-        toast.current.show({ severity: 'success', summary: 'Rows Reordered', life: 3000 });
-    };
 
     const dynamicColumns = columns.map((col, i) => {
         return <Column key={col.field} columnKey={col.field} field={col.field} header={col.header} />;
@@ -35,8 +24,8 @@ export function ReorderDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={products} reorderableColumns reorderableRows onRowReorder={onRowReorder} onColReorder={onColReorder} responsiveLayout="scroll" paginator rows={5}>
-    <Column rowReorder style={{width: '3em'}} />
+<DataTable value={products} reorderableColumns reorderableRows onRowReorder={(e) => setProducts(e.value)}>
+    <Column rowReorder style={{ width: '3rem' }} />
     {dynamicColumns}
 </DataTable>
         `,
@@ -45,47 +34,30 @@ import React, { useState, useEffect, useRef } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ProductService } from './service/ProductService';
-import { Toast } from 'primereact/toast';
 
-const ReorderDoc = () => {
+export default function ReorderDemo() {
     const [products, setProducts] = useState([]);
-    const toast = useRef(null);
     const columns = [
-        {field: 'code', header: 'Code'},
-        {field: 'name', header: 'Name'},
-        {field: 'category', header: 'Category'},
-        {field: 'quantity', header: 'Quantity'}
+        { field: 'code', header: 'Code' },
+        { field: 'name', header: 'Name' },
+        { field: 'category', header: 'Category' },
+        { field: 'quantity', header: 'Quantity' }
     ];
 
-    
-
     useEffect(() => {
-        ProductService.getProductsSmall().then(data => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        ProductService.getProductsMini().then((data) => setProducts(data));
+    }, []);
 
-    const onColReorder = () => {
-        toast.current.show({severity:'success', summary: 'Column Reordered', life: 3000});
-    }
-
-    const onRowReorder = (e) => {
-        setProducts(e.value);
-        toast.current.show({severity:'success', summary: 'Rows Reordered', life: 3000});
-    }
-
-    const dynamicColumns = columns.map((col,i) => {
+    const dynamicColumns = columns.map((col, i) => {
         return <Column key={col.field} columnKey={col.field} field={col.field} header={col.header} />;
     });
 
     return (
-        <div>
-            <Toast ref={toast}></Toast>
-
-            <div className="card">
-                <DataTable value={products} reorderableColumns reorderableRows onRowReorder={onRowReorder} onColReorder={onColReorder} responsiveLayout="scroll" paginator rows={5}>
-                    <Column rowReorder style={{width: '3em'}} />
-                    {dynamicColumns}
-                </DataTable>
-            </div>
+        <div className="card">
+            <DataTable value={products} reorderableColumns reorderableRows onRowReorder={(e) => setProducts(e.value)}>
+                <Column rowReorder style={{ width: '3rem' }} />
+                {dynamicColumns}
+            </DataTable>
         </div>
     );
 }
@@ -95,53 +67,53 @@ import React, { useState, useEffect, useRef } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ProductService } from './service/ProductService';
-import { Toast } from 'primereact/toast';
 
-const ReorderDoc = () => {
-    const [products, setProducts] = useState([]);
-    const toast = useRef(null);
-    const columns = [
-        {field: 'code', header: 'Code'},
-        {field: 'name', header: 'Name'},
-        {field: 'category', header: 'Category'},
-        {field: 'quantity', header: 'Quantity'}
+interface Product {
+    id: string;
+    code: string;
+    name: string;
+    description: string;
+    image: string;
+    price: number;
+    category: string;
+    quantity: number;
+    inventoryStatus: string;
+    rating: number;
+}
+
+interface ColumnMeta {
+    field: string;
+    header: string;
+}
+
+export default function ReorderDemo() {
+    const [products, setProducts] = useState<Product[]>([]);
+    const columns: ColumnMeta[] = [
+        { field: 'code', header: 'Code' },
+        { field: 'name', header: 'Name' },
+        { field: 'category', header: 'Category' },
+        { field: 'quantity', header: 'Quantity' }
     ];
 
-    
-
     useEffect(() => {
-        ProductService.getProductsSmall().then(data => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        ProductService.getProductsMini().then((data) => setProducts(data));
+    }, []);
 
-    const onColReorder = () => {
-        toast.current.show({severity:'success', summary: 'Column Reordered', life: 3000});
-    }
-
-    const onRowReorder = (e) => {
-        setProducts(e.value);
-        toast.current.show({severity:'success', summary: 'Rows Reordered', life: 3000});
-    }
-
-    const dynamicColumns = columns.map((col,i) => {
+    const dynamicColumns = columns.map((col, i) => {
         return <Column key={col.field} columnKey={col.field} field={col.field} header={col.header} />;
     });
 
     return (
-        <div>
-            <Toast ref={toast}></Toast>
-
-            <div className="card">
-                <DataTable value={products} reorderableColumns reorderableRows onRowReorder={onRowReorder} onColReorder={onColReorder} responsiveLayout="scroll" paginator rows={5}>
-                    <Column rowReorder style={{width: '3em'}} />
-                    {dynamicColumns}
-                </DataTable>
-            </div>
+        <div className="card">
+            <DataTable value={products} reorderableColumns reorderableRows onRowReorder={(e) => setProducts(e.value)}>
+                <Column rowReorder style={{ width: '3rem' }} />
+                {dynamicColumns}
+            </DataTable>
         </div>
     );
 }
         `,
-        data: `
-/* ProductService */        
+        data: `       
 {
     id: '1000',
     code: 'f230fh0g3',
@@ -161,12 +133,18 @@ const ReorderDoc = () => {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Order of the columns and rows can be changed using drag and drop.</p>
+                <p>
+                    Order of the columns and rows can be changed using drag and drop. Column reordering is configured by adding
+                    <i>reorderableColumns</i> property and columns are required to be dynamic where each column should also have a unique <i>columnKey</i>
+                </p>
+                <p>
+                    Similarly, adding <i>reorderableRows</i> property enables draggable rows. For the drag handle a column needs to have <i>rowReoder</i>
+                    property and <i>onRowReorder</i> callback is required to control the state of the rows after reorder completes.
+                </p>
             </DocSectionText>
             <div className="card">
-                <Toast ref={toast}></Toast>
-                <DataTable value={products} reorderableColumns reorderableRows onRowReorder={onRowReorder} onColReorder={onColReorder} responsiveLayout="scroll" paginator rows={5}>
-                    <Column rowReorder style={{ width: '3em' }} />
+                <DataTable value={products} reorderableColumns reorderableRows onRowReorder={(e) => setProducts(e.value)}>
+                    <Column rowReorder style={{ width: '3rem' }} />
                     {dynamicColumns}
                 </DataTable>
             </div>
