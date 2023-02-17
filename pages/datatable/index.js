@@ -46,9 +46,7 @@ import { MultipleColumnsDoc } from '../../components/doc/datatable/sort/multiple
 import { PresortDoc } from '../../components/doc/datatable/sort/presortdoc';
 import { RemovableSortDoc } from '../../components/doc/datatable/sort/removablesortdoc';
 import { SingleColumnDoc } from '../../components/doc/datatable/sort/singlecolumndoc';
-import { CustomStorageDoc } from '../../components/doc/datatable/state/customstoragedoc';
-import { LocalStorageDoc } from '../../components/doc/datatable/state/localdoc';
-import { SessionStorageDoc } from '../../components/doc/datatable/state/sessionstoragedoc';
+import { StatefulDoc } from '../../components/doc/datatable/statefuldoc';
 import { StripedRowsDoc } from '../../components/doc/datatable/stripedrowsdoc';
 import { StyleDoc } from '../../components/doc/datatable/styledoc';
 import { TemplateDoc } from '../../components/doc/datatable/templatedoc';
@@ -358,26 +356,9 @@ const DataTableDemo = () => {
             component: ContextMenuDoc
         },
         {
-            id: 'state',
-            label: 'State',
-            description: 'Stateful table allows keeping the state such as page, sort and filtering either at local storage or session storage so that when the page is visited again, table would render the data using its last settings.',
-            children: [
-                {
-                    id: 'sessionstorage',
-                    label: 'Session Storage',
-                    component: SessionStorageDoc
-                },
-                {
-                    id: 'localstorage',
-                    label: 'Local Storage',
-                    component: LocalStorageDoc
-                },
-                {
-                    id: 'customstorage',
-                    label: 'Custom Storage',
-                    component: CustomStorageDoc
-                }
-            ]
+            id: 'stateful',
+            label: 'Stateful',
+            component: StatefulDoc
         },
         {
             id: 'samples',

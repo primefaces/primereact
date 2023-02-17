@@ -505,8 +505,8 @@ import React, { useState, useEffect } from 'react';
 import { classNames } from 'primereact/utils';
 import { FilterMatchMode, FilterOperator } from 'primereact/api';
 import { DataTable, DataTableFilterMeta, ColumnFilterClearTemplateOptions, 
-        ColumnFilterApplyTemplateOptions, ColumnFilterElementTemplateOptions } from 'primereact/datatable';
-import { Column } from 'primereact/column';
+        ColumnFilterApplyTemplateOptions } from 'primereact/datatable';
+import { Column, ColumnFilterElementTemplateOptions } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 import { InputNumber, InputNumberValueChangeEvent } from 'primereact/inputnumber';
