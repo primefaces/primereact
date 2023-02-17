@@ -15,8 +15,7 @@ import { DatatableProductsDoc } from '../../components/doc/datatable/datatablepr
 import { DynamicColumnsDoc } from '../../components/doc/datatable/dynamiccolumnsdoc';
 import { CellEditDoc } from '../../components/doc/datatable/edit/celleditdoc';
 import { RowEditDoc } from '../../components/doc/datatable/edit/roweditdoc';
-import { ExportDoc } from '../../components/doc/datatable/export/exportdoc';
-import { ExportImportDoc } from '../../components/doc/datatable/export/importdoc';
+import { ExportDoc } from '../../components/doc/datatable/exportdoc';
 import { AdvancedFilterDoc } from '../../components/doc/datatable/filter/advanceddoc';
 import { BasicFilterDoc } from '../../components/doc/datatable/filter/basicdoc';
 import { GridLinesDoc } from '../../components/doc/datatable/gridlinesdoc';
@@ -349,21 +348,9 @@ const DataTableDemo = () => {
             component: ColumnToggleDoc
         },
         {
-            id: 'datatableexport',
-            label: 'Import/Export',
-            description: 'DataTable can export its data to various formats',
-            children: [
-                {
-                    id: 'importdoc',
-                    label: 'Import',
-                    component: ExportImportDoc
-                },
-                {
-                    id: 'export',
-                    label: 'Export',
-                    component: ExportDoc
-                }
-            ]
+            id: 'export',
+            label: 'Export',
+            component: ExportDoc
         },
         {
             id: 'contextmenu',

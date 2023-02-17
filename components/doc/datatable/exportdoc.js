@@ -1,15 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ProductService } from '../../../../service/ProductService';
-import { Button } from '../../../lib/button/Button';
-import { Column } from '../../../lib/column/Column';
-import { DataTable } from '../../../lib/datatable/DataTable';
-import { Tooltip } from '../../../lib/tooltip/Tooltip';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
+import { ProductService } from '../../../service/ProductService';
+import { Button } from '../../lib/button/Button';
+import { Column } from '../../lib/column/Column';
+import { DataTable } from '../../lib/datatable/DataTable';
+import { Tooltip } from '../../lib/tooltip/Tooltip';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function ExportDoc(props) {
     const [products, setProducts] = useState([]);
-    const [selectedProducts, setSelectedProducts] = useState([]);
     const dt = useRef(null);
 
     const cols = [
@@ -25,10 +24,6 @@ export function ExportDoc(props) {
         ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const onSelectionChange = (e) => {
-        setSelectedProducts(e.value);
-    };
-
     const exportCSV = (selectionOnly) => {
         dt.current.exportCSV({ selectionOnly });
     };
@@ -72,22 +67,23 @@ export function ExportDoc(props) {
     };
 
     const header = (
-        <div className="flex align-items-center export-buttons">
-            <Button type="button" icon="pi pi-file" onClick={() => exportCSV(false)} className="mr-2" data-pr-tooltip="CSV" />
-            <Button type="button" icon="pi pi-file-excel" onClick={exportExcel} className="p-button-success mr-2" data-pr-tooltip="XLS" />
-            <Button type="button" icon="pi pi-file-pdf" onClick={exportPdf} className="p-button-warning mr-2" data-pr-tooltip="PDF" />
-            <Button type="button" icon="pi pi-filter" onClick={() => exportCSV(true)} className="p-button-info ml-auto" data-pr-tooltip="Selection Only" />
+        <div className="flex align-items-center justify-content-end gap-2">
+            <Button type="button" icon="pi pi-file" rounded onClick={() => exportCSV(false)} data-pr-tooltip="CSV" />
+            <Button type="button" icon="pi pi-file-excel" severity="success" rounded onClick={exportExcel} data-pr-tooltip="XLS" />
+            <Button type="button" icon="pi pi-file-pdf" severity="warning" rounded onClick={exportPdf} data-pr-tooltip="PDF" />
         </div>
     );
 
     const code = {
         basic: `
-<Tooltip target=".export-buttons>button" position="bottom" />
-<DataTable ref={(el) => { this.dt = el; }} value={this.state.products} header={header} dataKey="id" responsiveLayout="scroll"
-    selectionMode="multiple" selection={this.state.selectedProducts} onSelectionChange={this.onSelectionChange}>
-    {
-        this.cols.map((col, index) => <Column key={index} field={col.field} header={col.header} />)
-    }
+<Button type="button" icon="pi pi-file" rounded onClick={() => exportCSV(false)} data-pr-tooltip="CSV" />
+<Button type="button" icon="pi pi-file-excel" severity="success" rounded onClick={exportExcel} data-pr-tooltip="XLS" />
+<Button type="button" icon="pi pi-file-pdf" severity="warning" rounded onClick={exportPdf} data-pr-tooltip="PDF" />
+
+<DataTable ref={dt} value={products} header={header}>
+    {cols.map((col, index) => (
+        <Column key={index} field={col.field} header={col.header} />
+    ))}
 </DataTable>
         `,
         javascript: `
@@ -98,11 +94,9 @@ import { Button } from 'primereact/button';
 import { Tooltip } from 'primereact/tooltip';
 import { ProductService } from './service/ProductService';
 
-export const ExportDoc = () => {
+export default function ExportDemo() {
     const [products, setProducts] = useState([]);
-    const [selectedProducts, setSelectedProducts] = useState([]);
     const dt = useRef(null);
-    
 
     const cols = [
         { field: 'code', header: 'Code' },
@@ -111,16 +105,11 @@ export const ExportDoc = () => {
         { field: 'quantity', header: 'Quantity' }
     ];
 
-    const exportColumns = cols.map(col => ({ title: col.header, dataKey: col.field }));
+    const exportColumns = cols.map((col) => ({ title: col.header, dataKey: col.field }));
 
     useEffect(() => {
         ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-
-    const onSelectionChange = (e) => {
-        setSelectedProducts(e.value);
-    };
 
     const exportCSV = (selectionOnly) => {
         dt.current.exportCSV({ selectionOnly });
@@ -165,11 +154,10 @@ export const ExportDoc = () => {
     };
 
     const header = (
-        <div className="flex align-items-center export-buttons">
-            <Button type="button" icon="pi pi-file" onClick={() => exportCSV(false)} className="mr-2" data-pr-tooltip="CSV" />
-            <Button type="button" icon="pi pi-file-excel" onClick={exportExcel} className="p-button-success mr-2" data-pr-tooltip="XLS" />
-            <Button type="button" icon="pi pi-file-pdf" onClick={exportPdf} className="p-button-warning mr-2" data-pr-tooltip="PDF" />
-            <Button type="button" icon="pi pi-filter" onClick={() => exportCSV(true)} className="p-button-info ml-auto" data-pr-tooltip="Selection Only" />
+        <div className="flex align-items-center justify-content-end gap-2">
+            <Button type="button" icon="pi pi-file" rounded onClick={() => exportCSV(false)} data-pr-tooltip="CSV" />
+            <Button type="button" icon="pi pi-file-excel" severity="success" rounded onClick={exportExcel} data-pr-tooltip="XLS" />
+            <Button type="button" icon="pi pi-file-pdf" severity="warning" rounded onClick={exportPdf} data-pr-tooltip="PDF" />
         </div>
     );
 
@@ -177,11 +165,10 @@ export const ExportDoc = () => {
         <div className="card">
             <Tooltip target=".export-buttons>button" position="bottom" />
 
-            <DataTable ref={(el) => { this.dt = el; }} value={this.state.products} header={header} dataKey="id" responsiveLayout="scroll"
-                selectionMode="multiple" selection={this.state.selectedProducts} onSelectionChange={this.onSelectionChange}>
-                {
-                    this.cols.map((col, index) => <Column key={index} field={col.field} header={col.header} />)
-                }
+            <DataTable ref={dt} value={products} header={header}>
+                {cols.map((col, index) => (
+                    <Column key={index} field={col.field} header={col.header} />
+                ))}
             </DataTable>
         </div>
     );
@@ -195,29 +182,40 @@ import { Button } from 'primereact/button';
 import { Tooltip } from 'primereact/tooltip';
 import { ProductService } from './service/ProductService';
 
-export const ExportDoc = () => {
-    const [products, setProducts] = useState([]);
-    const [selectedProducts, setSelectedProducts] = useState([]);
-    const dt = useRef(null);
-    
+interface Product {
+    id: string;
+    code: string;
+    name: string;
+    description: string;
+    image: string;
+    price: number;
+    category: string;
+    quantity: number;
+    inventoryStatus: string;
+    rating: number;
+}
 
-    const cols = [
+interface ColumnMeta {
+    field: string;
+    header: string;
+}
+
+export default function ExportDemo() {
+    const [products, setProducts] = useState<Product[]>([]);
+    const dt = useRef<DataTable>(null);
+
+    const cols: ColumnMeta[] = [
         { field: 'code', header: 'Code' },
         { field: 'name', header: 'Name' },
         { field: 'category', header: 'Category' },
         { field: 'quantity', header: 'Quantity' }
     ];
 
-    const exportColumns = cols.map(col => ({ title: col.header, dataKey: col.field }));
+    const exportColumns = cols.map((col) => ({ title: col.header, dataKey: col.field }));
 
     useEffect(() => {
         ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-
-    const onSelectionChange = (e) => {
-        setSelectedProducts(e.value);
-    };
 
     const exportCSV = (selectionOnly) => {
         dt.current.exportCSV({ selectionOnly });
@@ -262,11 +260,10 @@ export const ExportDoc = () => {
     };
 
     const header = (
-        <div className="flex align-items-center export-buttons">
-            <Button type="button" icon="pi pi-file" onClick={() => exportCSV(false)} className="mr-2" data-pr-tooltip="CSV" />
-            <Button type="button" icon="pi pi-file-excel" onClick={exportExcel} className="p-button-success mr-2" data-pr-tooltip="XLS" />
-            <Button type="button" icon="pi pi-file-pdf" onClick={exportPdf} className="p-button-warning mr-2" data-pr-tooltip="PDF" />
-            <Button type="button" icon="pi pi-filter" onClick={() => exportCSV(true)} className="p-button-info ml-auto" data-pr-tooltip="Selection Only" />
+        <div className="flex align-items-center justify-content-end gap-2">
+            <Button type="button" icon="pi pi-file" rounded onClick={() => exportCSV(false)} data-pr-tooltip="CSV" />
+            <Button type="button" icon="pi pi-file-excel" severity="success" rounded onClick={exportExcel} data-pr-tooltip="XLS" />
+            <Button type="button" icon="pi pi-file-pdf" severity="warning" rounded onClick={exportPdf} data-pr-tooltip="PDF" />
         </div>
     );
 
@@ -274,22 +271,14 @@ export const ExportDoc = () => {
         <div className="card">
             <Tooltip target=".export-buttons>button" position="bottom" />
 
-            <DataTable ref={(el) => { this.dt = el; }} value={this.state.products} header={header} dataKey="id" responsiveLayout="scroll"
-                selectionMode="multiple" selection={this.state.selectedProducts} onSelectionChange={this.onSelectionChange}>
-                {
-                    this.cols.map((col, index) => <Column key={index} field={col.field} header={col.header} />)
-                }
+            <DataTable ref={dt} value={products} header={header}>
+                {cols.map((col, index) => (
+                    <Column key={index} field={col.field} header={col.header} />
+                ))}
             </DataTable>
         </div>
     );
 }
-        `,
-        php: `
-/* public/upload.php */
-
-<?php
-header ("Access-Control-Allow-Origin: *");
-echo '<p>Fake Upload Process</p>'; ?>
         `,
         data: `
 /* ProductService */        
@@ -312,12 +301,14 @@ echo '<p>Fake Upload Process</p>'; ?>
     return (
         <>
             <DocSectionText {...props}>
-                <p>Export demo content.</p>
+                <p>
+                    CSV export is a built-in feature, in this sample PDF & XLS export are also available using third party libraries like <i>jsPDF</i> and <i>xlsx</i>.
+                </p>
             </DocSectionText>
             <div className="card">
                 <Tooltip target=".export-buttons>button" position="bottom" />
 
-                <DataTable ref={dt} value={products} header={header} dataKey="id" responsiveLayout="scroll" selectionMode="multiple" selection={selectedProducts} onSelectionChange={onSelectionChange}>
+                <DataTable ref={dt} value={products} header={header}>
                     {cols.map((col, index) => (
                         <Column key={index} field={col.field} header={col.header} />
                     ))}
