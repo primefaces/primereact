@@ -11,7 +11,6 @@ import { FitModeDoc } from '../../components/doc/datatable/colresize/fitmodedoc'
 import { ColumnToggleDoc } from '../../components/doc/datatable/columntoggledoc';
 import { ConditionalStyleDoc } from '../../components/doc/datatable/conditionalstyledoc';
 import { ContextMenuDoc } from '../../components/doc/datatable/contextmenudoc';
-import { DatatableProductsDoc } from '../../components/doc/datatable/datatableproducts';
 import { DynamicColumnsDoc } from '../../components/doc/datatable/dynamiccolumnsdoc';
 import { CellEditDoc } from '../../components/doc/datatable/edit/celleditdoc';
 import { RowEditDoc } from '../../components/doc/datatable/edit/roweditdoc';
@@ -35,7 +34,8 @@ import { RowSelectEventsDoc } from '../../components/doc/datatable/rowselection/
 import { MultipleRowsSelectionDoc } from '../../components/doc/datatable/rowselection/multipledoc';
 import { RadioButtonRowSelectionDoc } from '../../components/doc/datatable/rowselection/radiobuttondoc';
 import { SingleRowSelectionDoc } from '../../components/doc/datatable/rowselection/singledoc';
-import { CustomersDoc } from '../../components/doc/datatable/samplesdoc';
+import { CustomersDoc } from '../../components/doc/datatable/samples/customersdoc';
+import { ProductsDoc } from '../../components/doc/datatable/samples/productsdoc';
 import { FlexibleScrollDoc } from '../../components/doc/datatable/scroll/flexibledoc';
 import { FrozenColumnsDoc } from '../../components/doc/datatable/scroll/frozencolumnsdoc';
 import { FrozenRowsDoc } from '../../components/doc/datatable/scroll/frozenrowsdoc';
@@ -372,7 +372,7 @@ const DataTableDemo = () => {
                 {
                     id: 'dtproducts',
                     label: 'Products',
-                    component: DatatableProductsDoc
+                    component: ProductsDoc
                 }
             ]
         },
