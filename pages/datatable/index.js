@@ -8,7 +8,7 @@ import { SingleCellSelectionDoc } from '../../components/doc/datatable/cellselec
 import { ColGroupDoc } from '../../components/doc/datatable/colgroupdoc';
 import { ExpandModeDoc } from '../../components/doc/datatable/colresize/expandmodedoc';
 import { FitModeDoc } from '../../components/doc/datatable/colresize/fitmodedoc';
-import { ColToggleDoc } from '../../components/doc/datatable/coltoggledoc';
+import { ColumnToggleDoc } from '../../components/doc/datatable/columntoggledoc';
 import { ConditionalStyleDoc } from '../../components/doc/datatable/conditionalstyledoc';
 import { ContextMenuDoc } from '../../components/doc/datatable/contextmenudoc';
 import { DatatableProductsDoc } from '../../components/doc/datatable/datatableproducts';
@@ -345,8 +345,8 @@ const DataTableDemo = () => {
         },
         {
             id: 'coltoggle',
-            label: 'ColToggle',
-            component: ColToggleDoc
+            label: 'Column Toggle',
+            component: ColumnToggleDoc
         },
         {
             id: 'datatableexport',
