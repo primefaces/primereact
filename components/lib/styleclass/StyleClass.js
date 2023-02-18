@@ -149,7 +149,7 @@ export const StyleClass = React.forwardRef((inProps, ref) => {
                 return elementRef.current.parentElement.parentElement;
 
             default:
-                return document.querySelector(ObjectUtils.escapeSelector(props.selector));
+                return document.querySelector(props.selector);
         }
     };
 

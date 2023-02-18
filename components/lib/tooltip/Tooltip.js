@@ -373,7 +373,7 @@ export const Tooltip = React.memo(
                     operation(target);
                 } else {
                     const setEvent = (target) => {
-                        let element = DomHandler.find(document, ObjectUtils.escapeSelector(target));
+                        let element = DomHandler.find(document, target);
 
                         element.forEach((el) => {
                             operation(el);

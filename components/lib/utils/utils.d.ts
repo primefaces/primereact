@@ -125,7 +125,6 @@ export declare class ObjectUtils {
     static isEmpty(value: any): boolean;
     static isNotEmpty(value: any): boolean;
     static sort(value1: any, value2: any, order: number, locale: string | string[]): number;
-    static escapeSelector(selector: string): string;
 }
 
 export declare class IconUtils {
