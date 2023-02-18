@@ -102,7 +102,7 @@ export function LazyDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={customers} lazy filterDisplay="row" responsiveLayout="scroll" dataKey="id" paginator
+<DataTable value={customers} lazy filterDisplay="row" dataKey="id" paginator
         first={lazyState.first} rows={10} totalRecords={totalRecords} onPage={onPage} 
         onSort={onSort} sortField={lazyState.sortField} sortOrder={lazyState.sortOrder}
         onFilter={onFilter} filters={lazyState.filters} loading={loading}
@@ -217,7 +217,7 @@ export default function LazyDoc() {
 
     return (
         <div className="card">
-            <DataTable value={customers} lazy filterDisplay="row" responsiveLayout="scroll" dataKey="id" paginator
+            <DataTable value={customers} lazy filterDisplay="row" dataKey="id" paginator
                     first={lazyState.first} rows={10} totalRecords={totalRecords} onPage={onPage} 
                     onSort={onSort} sortField={lazyState.sortField} sortOrder={lazyState.sortOrder}
                     onFilter={onFilter} filters={lazyState.filters} loading={loading}
@@ -368,7 +368,7 @@ export default function LazyDoc() {
 
     return (
         <div className="card">
-            <DataTable value={customers} lazy filterDisplay="row" responsiveLayout="scroll" dataKey="id" paginator
+            <DataTable value={customers} lazy filterDisplay="row" dataKey="id" paginator
                     first={lazyState.first} rows={10} totalRecords={totalRecords} onPage={onPage} 
                     onSort={onSort} sortField={lazyState.sortField} sortOrder={lazyState.sortOrder}
                     onFilter={onFilter} filters={lazyState.filters} loading={loading}
@@ -426,7 +426,6 @@ export default function LazyDoc() {
                     value={customers}
                     lazy
                     filterDisplay="row"
-                    responsiveLayout="scroll"
                     dataKey="id"
                     paginator
                     first={lazyState.first}
