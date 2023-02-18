@@ -609,7 +609,7 @@ export default function ProductsDemo() {
                         <label htmlFor="quantity" className="font-bold">
                             Quantity
                         </label>
-                        <InputNumber id="quantity" value={product.quantity} onValueChange={(e) => onInputNumberChange(e, 'quantity')} integeronly />
+                        <InputNumber id="quantity" value={product.quantity} onValueChange={(e) => onInputNumberChange(e, 'quantity')} />
                     </div>
                 </div>
             </Dialog>
@@ -980,7 +980,7 @@ export default function ProductsDemo() {
                         <label htmlFor="quantity" className="font-bold">
                             Quantity
                         </label>
-                        <InputNumber id="quantity" value={product.quantity} onValueChange={(e) => onInputNumberChange(e, 'quantity')} integeronly />
+                        <InputNumber id="quantity" value={product.quantity} onValueChange={(e) => onInputNumberChange(e, 'quantity')} />
                     </div>
                 </div>
             </Dialog>
@@ -1108,7 +1108,7 @@ export default function ProductsDemo() {
                         <label htmlFor="quantity" className="font-bold">
                             Quantity
                         </label>
-                        <InputNumber id="quantity" value={product.quantity} onValueChange={(e) => onInputNumberChange(e, 'quantity')} integeronly />
+                        <InputNumber id="quantity" value={product.quantity} onValueChange={(e) => onInputNumberChange(e, 'quantity')} />
                     </div>
                 </div>
             </Dialog>
