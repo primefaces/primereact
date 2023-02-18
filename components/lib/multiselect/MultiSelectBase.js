@@ -6,6 +6,7 @@ export const MultiSelectBase = {
         appendTo: null,
         ariaLabelledBy: null,
         className: null,
+        clearIcon: 'pi pi-times',
         dataKey: null,
         disabled: false,
         display: 'comma',

@@ -3,7 +3,7 @@ import PrimeReact, { FilterService } from '../api/Api';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 import { MultiSelectBase } from './MultiSelectBase';
 import { MultiSelectPanel } from './MultiSelectPanel';
 
@@ -561,7 +561,10 @@ export const MultiSelect = React.memo(
 
         const createClearIcon = () => {
             if (!empty && props.showClear && !props.disabled) {
-                return <i className="p-multiselect-clear-icon pi pi-times" onClick={(e) => updateModel(e, null)}></i>;
+                const iconClassName = classNames('p-multiselect-clear-icon p-clickable');
+                const iconProps = { className: iconClassName, onPointerUp: (e) => updateModel(e, null) };
+
+                return IconUtils.getJSXIcon(props.clearIcon, iconProps);
             }
 
             return null;

@@ -18859,6 +18859,14 @@
                             "description": "Style class of the element."
                         },
                         {
+                            "name": "clearIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<MultiSelectProps>",
+                            "default": "pi pi-times",
+                            "description": "Icon class of the clear icon."
+                        },
+                        {
                             "name": "dataKey",
                             "optional": true,
                             "readonly": false,

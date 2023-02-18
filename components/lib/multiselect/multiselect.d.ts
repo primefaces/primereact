@@ -193,6 +193,11 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     className?: string | undefined;
     /**
+     * Icon class of the clear icon.
+     * @defaultValue pi pi-times
+     */
+    clearIcon?: IconType<MultiSelectProps> | undefined;
+    /**
      * A property to uniquely match the value in options for better performance.
      */
     dataKey?: string | undefined;
