@@ -1,14 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { TreeTable } from '../../../lib/treetable/TreeTable';
-import { Column } from '../../../lib/column/Column';
-import { InputText } from '../../../lib/inputtext/InputText';
-import { NodeService } from '../../../../service/NodeService';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
+import React, { useEffect, useState } from 'react';
+import { NodeService } from '../../../service/NodeService';
+import { Column } from '../../lib/column/Column';
+import { InputText } from '../../lib/inputtext/InputText';
+import { SelectButton } from '../../lib/selectbutton/SelectButton';
+import { TreeTable } from '../../lib/treetable/TreeTable';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
-export function LenientFilterDoc(props) {
+export function FilterDoc(props) {
     const [nodes, setNodes] = useState([]);
-    const [globalFilter, setGlobalFilter] = useState(null);
+    const [globalFilter, setGlobalFilter] = useState('');
+    const [filterMode, setFilterMode] = useState('lenient');
+    const [filterOptions] = useState([
+        { label: 'Lenient', value: 'lenient' },
+        { label: 'Strict', value: 'strict' }
+    ]);
 
     useEffect(() => {
         NodeService.getTreeTableNodes().then((data) => setNodes(data));
@@ -16,10 +22,10 @@ export function LenientFilterDoc(props) {
 
     const getHeader = () => {
         return (
-            <div className="text-right">
+            <div className="flex justify-content-end">
                 <div className="p-input-icon-left">
                     <i className="pi pi-search"></i>
-                    <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Global Search" size="50" />
+                    <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Global Search" />
                 </div>
             </div>
         );
@@ -29,7 +35,9 @@ export function LenientFilterDoc(props) {
 
     const code = {
         basic: `
-<TreeTable value={nodes} globalFilter={globalFilter} header={header}>
+<SelectButton value={filterMode} onChange={(e) => setFilterMode(e.value)} options={filterOptions} />
+
+<TreeTable value={nodes} globalFilter={globalFilter} header={header} filterMode={filterMode}>
     <Column field="name" header="Name" expander filter filterPlaceholder="Filter by name"></Column>
     <Column field="size" header="Size" filter filterPlaceholder="Filter by size"></Column>
     <Column field="type" header="Type" filter filterPlaceholder="Filter by type"></Column>
@@ -40,22 +48,28 @@ import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
+import { SelectButton } from 'primereact/selectbutton';
 import { NodeService } from './service/NodeService';
 
-export default function LenientFilterDoc() {
+export default function FilterDemo() {
     const [nodes, setNodes] = useState([]);
-    const [globalFilter, setGlobalFilter] = useState(null);
-    
+    const [globalFilter, setGlobalFilter] = useState('');
+    const [filterMode, setFilterMode] = useState('lenient');
+    const [filterOptions] = useState([
+        { label: 'Lenient', value: 'lenient' },
+        { label: 'Strict', value: 'strict' }
+    ]);
+
     useEffect(() => {
-        NodeService.getTreeTableNodes().then(data => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        NodeService.getTreeTableNodes().then((data) => setNodes(data));
+    }, []);
 
     const getHeader = () => {
         return (
-            <div className="text-right">
+            <div className="flex justify-content-end">
                 <div className="p-input-icon-left">
                     <i className="pi pi-search"></i>
-                    <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Global Search" size="50" />
+                    <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Global Search" />
                 </div>
             </div>
         );
@@ -65,7 +79,10 @@ export default function LenientFilterDoc() {
 
     return (
         <div className="card">
-            <TreeTable value={nodes} globalFilter={globalFilter} header={header}>
+            <div className="flex justify-content-center mb-4">
+                <SelectButton value={filterMode} onChange={(e) => setFilterMode(e.value)} options={filterOptions} />
+            </div>
+            <TreeTable value={nodes} globalFilter={globalFilter} header={header} filterMode={filterMode}>
                 <Column field="name" header="Name" expander filter filterPlaceholder="Filter by name"></Column>
                 <Column field="size" header="Size" filter filterPlaceholder="Filter by size"></Column>
                 <Column field="type" header="Type" filter filterPlaceholder="Filter by type"></Column>
@@ -79,22 +96,34 @@ import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
+import { SelectButton } from 'primereact/selectbutton';
+import { TreeNode } from 'primereact/treenode';
 import { NodeService } from './service/NodeService';
 
-export default function LenientFilterDoc() {
-    const [nodes, setNodes] = useState([]);
-    const [globalFilter, setGlobalFilter] = useState(null);
-    
+inteface FilterModeOption {
+    label: string;
+    value: string;
+}
+
+export default function FilterDemo() {
+    const [nodes, setNodes] = useState<TreeNode>([]);
+    const [globalFilter, setGlobalFilter] = useState<string>('');
+    const [filterMode, setFilterMode] = useState('lenient');
+    const [filterOptions] = useState<FilterModeOption[]>([
+        { label: 'Lenient', value: 'lenient' },
+        { label: 'Strict', value: 'strict' }
+    ]);
+
     useEffect(() => {
-        NodeService.getTreeTableNodes().then(data => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        NodeService.getTreeTableNodes().then((data) => setNodes(data));
+    }, []);
 
     const getHeader = () => {
         return (
-            <div className="text-right">
+            <div className="flex justify-content-end">
                 <div className="p-input-icon-left">
                     <i className="pi pi-search"></i>
-                    <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Global Search" size="50" />
+                    <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Global Search" />
                 </div>
             </div>
         );
@@ -104,7 +133,10 @@ export default function LenientFilterDoc() {
 
     return (
         <div className="card">
-            <TreeTable value={nodes} globalFilter={globalFilter} header={header}>
+            <div className="flex justify-content-center mb-4">
+                <SelectButton value={filterMode} onChange={(e) => setFilterMode(e.value)} options={filterOptions} />
+            </div>
+            <TreeTable value={nodes} globalFilter={globalFilter} header={header} filterMode={filterMode}>
                 <Column field="name" header="Name" expander filter filterPlaceholder="Filter by name"></Column>
                 <Column field="size" header="Size" filter filterPlaceholder="Filter by size"></Column>
                 <Column field="type" header="Type" filter filterPlaceholder="Filter by type"></Column>
@@ -114,7 +146,6 @@ export default function LenientFilterDoc() {
 }
         `,
         data: `
-/* NodeService */
 {
     key: '0',
     label: 'Documents',
@@ -147,10 +178,17 @@ export default function LenientFilterDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Lenient</p>
+                <p>
+                    Filtering is enabled by adding the <i>filter</i> property to a Column. The <i>filterMode</i> specifies the filtering strategy, in <i>lenient</i> mode when the query matches a node, children of the node are not searched further as
+                    all descendants of the node are included. On the other hand, in <i>strict</i> mode when the query matches a node, filtering continues on all descendants. A general filled called <i>globalFilter</i> is also provided to search all
+                    columns that support filtering.
+                </p>
             </DocSectionText>
             <div className="card">
-                <TreeTable value={nodes} globalFilter={globalFilter} header={header}>
+                <div className="flex justify-content-center mb-4">
+                    <SelectButton value={filterMode} onChange={(e) => setFilterMode(e.value)} options={filterOptions} />
+                </div>
+                <TreeTable value={nodes} globalFilter={globalFilter} header={header} filterMode={filterMode}>
                     <Column field="name" header="Name" expander filter filterPlaceholder="Filter by name"></Column>
                     <Column field="size" header="Size" filter filterPlaceholder="Filter by size"></Column>
                     <Column field="type" header="Type" filter filterPlaceholder="Filter by type"></Column>

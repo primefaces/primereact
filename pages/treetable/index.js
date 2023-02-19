@@ -8,8 +8,7 @@ import { ContextMenuDoc } from '../../components/doc/treetable/contextmenudoc';
 import { ControlledDoc } from '../../components/doc/treetable/controlleddoc';
 import { DynamicColumnsDoc } from '../../components/doc/treetable/dynamiccolumnsdoc';
 import { EditDoc } from '../../components/doc/treetable/editdoc';
-import { LenientFilterDoc } from '../../components/doc/treetable/filter/lenientfilterdoc';
-import { StrictFilterDoc } from '../../components/doc/treetable/filter/strictfilterdoc';
+import { FilterDoc } from '../../components/doc/treetable/filterdoc';
 import { ImportDoc } from '../../components/doc/treetable/importdoc';
 import { LazyDoc } from '../../components/doc/treetable/lazydoc';
 import { PaginatorBasicDoc } from '../../components/doc/treetable/paginator/basicdoc';
@@ -29,8 +28,8 @@ import { EventsDoc } from '../../components/doc/treetable/selection/eventsdoc';
 import { MultipleSelectionDoc } from '../../components/doc/treetable/selection/multipledoc';
 import { MultipleWithMetaKeysDoc } from '../../components/doc/treetable/selection/multiplewithmetadoc';
 import { SingleSelectionDoc } from '../../components/doc/treetable/selection/singledoc';
-import { MultipleDoc } from '../../components/doc/treetable/sort/multipledoc';
-import { SingleDoc } from '../../components/doc/treetable/sort/singledoc';
+import { MultipleColumnsDoc } from '../../components/doc/treetable/sort/multiplecolumnsdoc';
+import { SingleColumnDoc } from '../../components/doc/treetable/sort/singlecolumndoc';
 import { StyleDoc } from '../../components/doc/treetable/styledoc';
 import { StyledTreeTableDoc } from '../../components/doc/treetable/styledtreetabledoc';
 import { TemplateDoc } from '../../components/doc/treetable/templatedoc';
@@ -81,37 +80,23 @@ const TreeTableDemo = () => {
         {
             id: 'sort',
             label: 'Sort',
-            description: 'TreeTable supports both single column and multiple column sorting.',
             children: [
                 {
-                    id: 'single',
-                    label: 'Single',
-                    component: SingleDoc
+                    id: 'single_sort',
+                    label: 'Single Column',
+                    component: SingleColumnDoc
                 },
                 {
-                    id: 'multiple',
-                    label: 'Multiple',
-                    component: MultipleDoc
+                    id: 'multiple_sort',
+                    label: 'Multiple Columns',
+                    component: MultipleColumnsDoc
                 }
             ]
         },
         {
             id: 'filter',
             label: 'Filter',
-            description:
-                'Filtering is enabled by setting the filter property as true in column object. Default match mode is "startsWith" and this can be configured using filterMatchMode property of column object that also accepts "contains", "endsWith", "equals", "in" and "custom". An optional global filter feature is available to search all fields with a keyword. By default input fields are generated as filter elements and using templating any component can be used as a filter.',
-            children: [
-                {
-                    id: 'lenientfilter',
-                    label: 'Lenient Filter',
-                    component: LenientFilterDoc
-                },
-                {
-                    id: 'strictfilter',
-                    label: 'Strict Filter',
-                    component: StrictFilterDoc
-                }
-            ]
+            component: FilterDoc
         },
         {
             id: 'selection',
