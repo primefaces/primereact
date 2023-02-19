@@ -5,7 +5,7 @@ import { DataTable } from '../../lib/datatable/DataTable';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function LazyDoc(props) {
+export function LazyLoadDoc(props) {
     const [loading, setLoading] = useState(false);
     const [totalRecords, setTotalRecords] = useState(0);
     const [customers, setCustomers] = useState(null);
@@ -120,7 +120,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { CustomerService } from './service/CustomerService';
 
-export default function LazyDoc() {
+export default function LazyLoadDemo() {
     const [loading, setLoading] = useState(false);
     const [totalRecords, setTotalRecords] = useState(0);
     const [customers, setCustomers] = useState(null);
@@ -271,7 +271,7 @@ interface LazyTableState {
     filters: DataTableFilterMeta;
 }
 
-export default function LazyDoc() {
+export default function LazyLoadDemo() {
     const [loading, setLoading] = useState<boolean>(false);
     const [totalRecords, setTotalRecords] = useState<number>(0);
     const [customers, setCustomers] = useState<Customer[] | null>(null);

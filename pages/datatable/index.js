@@ -19,7 +19,7 @@ import { AdvancedFilterDoc } from '../../components/doc/datatable/filter/advance
 import { BasicFilterDoc } from '../../components/doc/datatable/filter/basicdoc';
 import { GridLinesDoc } from '../../components/doc/datatable/gridlinesdoc';
 import { ImportDoc } from '../../components/doc/datatable/importdoc';
-import { LazyDoc } from '../../components/doc/datatable/lazydoc';
+import { LazyLoadDoc } from '../../components/doc/datatable/lazyloaddoc';
 import { PaginatorBasicDoc } from '../../components/doc/datatable/paginator/basicdoc';
 import { PaginatorTemplateDoc } from '../../components/doc/datatable/paginator/templatedoc';
 import { ReorderDoc } from '../../components/doc/datatable/reorderdoc';
@@ -232,9 +232,9 @@ const DataTableDemo = () => {
             ]
         },
         {
-            id: 'lazy',
-            label: 'Lazy',
-            component: LazyDoc
+            id: 'lazy_load',
+            label: 'Lazy Load',
+            component: LazyLoadDoc
         },
         {
             id: 'scroll',
