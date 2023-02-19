@@ -5,9 +5,9 @@ import { DisabledCellSelectionDoc } from '../../components/doc/datatable/cellsel
 import { CellSelectEventsDoc } from '../../components/doc/datatable/cellselection/eventsdoc';
 import { MultipleCellsSelectionDoc } from '../../components/doc/datatable/cellselection/multipledoc';
 import { SingleCellSelectionDoc } from '../../components/doc/datatable/cellselection/singledoc';
-import { ColGroupDoc } from '../../components/doc/datatable/colgroupdoc';
 import { ExpandModeDoc } from '../../components/doc/datatable/colresize/expandmodedoc';
 import { FitModeDoc } from '../../components/doc/datatable/colresize/fitmodedoc';
+import { ColumnGroupDoc } from '../../components/doc/datatable/columngroupdoc';
 import { ColumnToggleDoc } from '../../components/doc/datatable/columntoggledoc';
 import { ConditionalStyleDoc } from '../../components/doc/datatable/conditionalstyledoc';
 import { ContextMenuDoc } from '../../components/doc/datatable/contextmenudoc';
@@ -284,13 +284,13 @@ const DataTableDemo = () => {
             ]
         },
         {
-            id: 'colgroup',
-            label: 'ColGroup',
-            component: ColGroupDoc
+            id: 'column_group',
+            label: 'Column Group',
+            component: ColumnGroupDoc
         },
         {
-            id: 'rowgroup',
-            label: 'RowGroup',
+            id: 'row_group',
+            label: 'Row Group',
             children: [
                 {
                     id: 'rowgroup_subheader',
