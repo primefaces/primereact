@@ -19,10 +19,9 @@ import { FitModeDoc } from '../../components/doc/treetable/resize/fitmodedoc';
 import { ScrollableDoc } from '../../components/doc/treetable/resize/scrollabledoc';
 import { ScrollableWithVariableWidthDoc } from '../../components/doc/treetable/resize/scrollablewithvariabledoc';
 import { ResponsiveDoc } from '../../components/doc/treetable/responsivedoc';
-import { FrozenColumnsDoc } from '../../components/doc/treetable/scroll/frozencolsdoc';
-import { HorizontalAndVerticalDoc } from '../../components/doc/treetable/scroll/horizontalandverticaldoc';
-import { HorizontalDoc } from '../../components/doc/treetable/scroll/horizontaldoc';
-import { VerticalDoc } from '../../components/doc/treetable/scroll/verticaldoc';
+import { FrozenColumnsDoc } from '../../components/doc/treetable/scroll/frozencolumnsdoc';
+import { HorizontalScrollDoc } from '../../components/doc/treetable/scroll/horizontaldoc';
+import { VerticalScrollDoc } from '../../components/doc/treetable/scroll/verticaldoc';
 import { CheckboxRowSelectionDoc } from '../../components/doc/treetable/selection/checkboxdoc';
 import { RowSelectionEventsDoc } from '../../components/doc/treetable/selection/eventsdoc';
 import { MultipleRowsSelectionDoc } from '../../components/doc/treetable/selection/multipledoc';
@@ -141,25 +140,19 @@ const TreeTableDemo = () => {
         {
             id: 'scroll',
             label: 'Scroll',
-            description: 'Scrolling data is available horizontally, vertically or both with optional support for frozen columns.',
             children: [
                 {
-                    id: 'vertical',
+                    id: 'vertical_scroll',
                     label: 'Vertical',
-                    component: VerticalDoc
+                    component: VerticalScrollDoc
                 },
                 {
-                    id: 'horizontal',
+                    id: 'horizontal_scroll',
                     label: 'Horizontal',
-                    component: HorizontalDoc
+                    component: HorizontalScrollDoc
                 },
                 {
-                    id: 'horizontalandvertical',
-                    label: 'Horizontal and Vertical',
-                    component: HorizontalAndVerticalDoc
-                },
-                {
-                    id: 'frozencolumns',
+                    id: 'frozen_columns',
                     label: 'Frozen Columns',
                     component: FrozenColumnsDoc
                 }

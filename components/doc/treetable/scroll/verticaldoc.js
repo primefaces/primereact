@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { TreeTable } from '../../../lib/treetable/TreeTable';
-import { Column } from '../../../lib/column/Column';
+import React, { useEffect, useState } from 'react';
 import { NodeService } from '../../../../service/NodeService';
+import { Column } from '../../../lib/column/Column';
+import { TreeTable } from '../../../lib/treetable/TreeTable';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 
-export function VerticalDoc(props) {
+export function VerticalScrollDoc(props) {
     const [nodes, setNodes] = useState([]);
 
     useEffect(() => {
         NodeService.getTreeTableNodes().then((data) => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     const code = {
         basic: `
@@ -26,13 +26,12 @@ import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { NodeService } from './service/NodeService';
 
-const VerticalDoc = () => {
+export default function VerticalScrollDemo() {
     const [nodes, setNodes] = useState([]);
     
-
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div className="card">
@@ -49,15 +48,15 @@ const VerticalDoc = () => {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
+import { TreeNode } from 'primereact/treenode';
 import { NodeService } from './service/NodeService';
 
-const VerticalDoc = () => {
-    const [nodes, setNodes] = useState([]);
+export default function VerticalScrollDemo() {
+    const [nodes, setNodes] = useState<TreeNode>([]);
     
-
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div className="card">
@@ -71,7 +70,6 @@ const VerticalDoc = () => {
 }
         `,
         data: `
-/* NodeService */
 {
     key: '0',
     label: 'Documents',
@@ -104,7 +102,9 @@ const VerticalDoc = () => {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Scrolling data is available horizontally, vertically or both with optional support for frozen columns.</p>
+                <p>
+                    Adding <i>scrollable</i> property along with a <i>scrollHeight</i> for the data viewport enables vertical scrolling with fixed headers.
+                </p>
             </DocSectionText>
             <div className="card">
                 <TreeTable value={nodes} scrollable scrollHeight="200px">
