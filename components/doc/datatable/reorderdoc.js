@@ -134,8 +134,7 @@ export default function ReorderDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Order of the columns and rows can be changed using drag and drop. Column reordering is configured by adding
-                    <i>reorderableColumns</i> property and columns are required to be dynamic where each column should also have a unique <i>columnKey</i>.
+                    Order of the columns and rows can be changed using drag and drop. Column reordering is configured by adding <i>reorderableColumns</i> property.
                 </p>
                 <p>
                     Similarly, adding <i>reorderableRows</i> property enables draggable rows. For the drag handle a column needs to have <i>rowReorder</i> property and <i>onRowReorder</i> callback is required to control the state of the rows after

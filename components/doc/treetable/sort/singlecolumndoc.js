@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { TreeTable } from '../../../lib/treetable/TreeTable';
-import { Column } from '../../../lib/column/Column';
+import React, { useEffect, useState } from 'react';
 import { NodeService } from '../../../../service/NodeService';
+import { Column } from '../../../lib/column/Column';
+import { TreeTable } from '../../../lib/treetable/TreeTable';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 
-export function MultipleDoc(props) {
+export function SingleColumnDoc(props) {
     const [nodes, setNodes] = useState([]);
 
     useEffect(() => {
@@ -16,7 +16,7 @@ export function MultipleDoc(props) {
 
     const code = {
         basic: `
-<TreeTable value={nodes} sortMode="multiple">
+<TreeTable value={nodes}>
     <Column field="name" header="Name" expander sortable></Column>
     <Column field="size" header="Size" sortable></Column>
     <Column field="type" header="Type" sortable></Column>
@@ -28,27 +28,18 @@ import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { NodeService } from './service/NodeService';
 
-export default function MultipleDoc() {
+export default function SingleColumnDemo() {
     const [nodes, setNodes] = useState([]);
-
+    
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => {
-            let _nodes = data;
-            _nodes.push({
-                data: {
-                    name: 'Documents',
-                    size: '100kb',
-                    type: 'Link'
-                }
-            });
-
-            setNodes(_nodes);
+            setNodes(data);
         });
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div className="card">
-            <TreeTable value={nodes} sortMode="multiple">
+            <TreeTable value={nodes}>
                 <Column field="name" header="Name" expander sortable></Column>
                 <Column field="size" header="Size" sortable></Column>
                 <Column field="type" header="Type" sortable></Column>
@@ -61,29 +52,21 @@ export default function MultipleDoc() {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
+import { TreeNode } from 'primereact/treenode';
 import { NodeService } from './service/NodeService';
 
-export default function MultipleDoc() {
-    const [nodes, setNodes] = useState([]);
-
+export default function SingleColumnDemo() {
+    const [nodes, setNodes] = useState<TreeNode[]>([]);
+    
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => {
-            let _nodes = data;
-            _nodes.push({
-                data: {
-                    name: 'Documents',
-                    size: '100kb',
-                    type: 'Link'
-                }
-            });
-
-            setNodes(_nodes);
+            setNodes(data);
         });
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div className="card">
-            <TreeTable value={nodes} sortMode="multiple">
+            <TreeTable value={nodes}>
                 <Column field="name" header="Name" expander sortable></Column>
                 <Column field="size" header="Size" sortable></Column>
                 <Column field="type" header="Type" sortable></Column>
@@ -93,7 +76,6 @@ export default function MultipleDoc() {
 }
         `,
         data: `
-/* NodeService */
 {
     key: '0',
     label: 'Documents',
@@ -126,10 +108,12 @@ export default function MultipleDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>TreeTable supports multiple column sorting.</p>
+                <p>
+                    Sorting on a column is enabled by adding the <i>sortable</i> property.
+                </p>
             </DocSectionText>
             <div className="card">
-                <TreeTable value={nodes} sortMode="multiple">
+                <TreeTable value={nodes}>
                     <Column field="name" header="Name" expander sortable></Column>
                     <Column field="size" header="Size" sortable></Column>
                     <Column field="type" header="Type" sortable></Column>

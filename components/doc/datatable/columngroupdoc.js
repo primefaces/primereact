@@ -6,7 +6,7 @@ import { Row } from '../../lib/row/Row';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function ColGroupDoc(props) {
+export function ColumnGroupDoc(props) {
     const [sales] = useState([
         { product: 'Bamboo Watch', lastYearSale: 51, thisYearSale: 40, lastYearProfit: 54406, thisYearProfit: 43342 },
         { product: 'Black Watch', lastYearSale: 83, thisYearSale: 9, lastYearProfit: 423132, thisYearProfit: 312122 },
@@ -106,7 +106,7 @@ import { Column } from 'primereact/column';
 import { ColumnGroup } from 'primereact/columngroup';
 import { Row } from 'primereact/row';
 
-export default function ColGroupDemo() {
+export default function ColumnGroupDemo() {
     const [sales] = useState([
         { product: 'Bamboo Watch', lastYearSale: 51, thisYearSale: 40, lastYearProfit: 54406, thisYearProfit: 43342 },
         { product: 'Black Watch', lastYearSale: 83, thisYearSale: 9, lastYearProfit: 423132, thisYearProfit: 312122 },
@@ -217,7 +217,7 @@ interface Sale {
     thisYearProfit: number;
 }
 
-export default function ColGroupDemo() {
+export default function ColumnGroupDemo() {
     const [sales] = useState<Sale[]>([
         { product: 'Bamboo Watch', lastYearSale: 51, thisYearSale: 40, lastYearProfit: 54406, thisYearProfit: 43342 },
         { product: 'Black Watch', lastYearSale: 83, thisYearSale: 9, lastYearProfit: 423132, thisYearProfit: 312122 },

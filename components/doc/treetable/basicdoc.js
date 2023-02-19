@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { TreeTable } from '../../lib/treetable/TreeTable';
-import { Column } from '../../lib/column/Column';
+import React, { useEffect, useState } from 'react';
 import { NodeService } from '../../../service/NodeService';
+import { Column } from '../../lib/column/Column';
+import { TreeTable } from '../../lib/treetable/TreeTable';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
@@ -26,13 +26,12 @@ import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { NodeService } from './service/NodeService';
 
-const BasicDoc = () => {
+export default function BasicDemo() {
     const [nodes, setNodes] = useState([]);
-    
 
     useEffect(() => {
-        NodeService.getTreeTableNodes().then(data => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        NodeService.getTreeTableNodes().then((data) => setNodes(data));
+    }, []);
 
     return (
         <div className="card">
@@ -49,15 +48,15 @@ const BasicDoc = () => {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
+import { TreeNode } from 'primereact/treenode';
 import { NodeService } from './service/NodeService';
 
-const BasicDoc = () => {
-    const [nodes, setNodes] = useState([]);
-    
+export default function BasicDemo() {
+    const [nodes, setNodes] = useState<TreeNode[]>([]);
 
     useEffect(() => {
-        NodeService.getTreeTableNodes().then(data => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        NodeService.getTreeTableNodes().then((data) => setNodes(data));
+    }, []);
 
     return (
         <div className="card">
@@ -71,7 +70,6 @@ const BasicDoc = () => {
 }
         `,
         data: `
-/* NodeService */
 {
     key: '0',
     label: 'Documents',
@@ -104,7 +102,9 @@ const BasicDoc = () => {
     return (
         <>
             <DocSectionText {...props}>
-                <p>TreeTable is used to display hierarchical data in tabular format.</p>
+                <p>
+                    TreeTable requires a collection of <i>TreeNode</i> instances as a <i>value</i> and <i>Column</i> components as children for the representation. The column with the element to toggle a node should have <i>expander</i> enabled.
+                </p>
             </DocSectionText>
             <div className="card">
                 <TreeTable value={nodes}>
@@ -113,7 +113,7 @@ const BasicDoc = () => {
                     <Column field="type" header="Type"></Column>
                 </TreeTable>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }

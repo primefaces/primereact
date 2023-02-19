@@ -5,9 +5,9 @@ import { DisabledCellSelectionDoc } from '../../components/doc/datatable/cellsel
 import { CellSelectEventsDoc } from '../../components/doc/datatable/cellselection/eventsdoc';
 import { MultipleCellsSelectionDoc } from '../../components/doc/datatable/cellselection/multipledoc';
 import { SingleCellSelectionDoc } from '../../components/doc/datatable/cellselection/singledoc';
-import { ColGroupDoc } from '../../components/doc/datatable/colgroupdoc';
 import { ExpandModeDoc } from '../../components/doc/datatable/colresize/expandmodedoc';
 import { FitModeDoc } from '../../components/doc/datatable/colresize/fitmodedoc';
+import { ColumnGroupDoc } from '../../components/doc/datatable/columngroupdoc';
 import { ColumnToggleDoc } from '../../components/doc/datatable/columntoggledoc';
 import { ConditionalStyleDoc } from '../../components/doc/datatable/conditionalstyledoc';
 import { ContextMenuDoc } from '../../components/doc/datatable/contextmenudoc';
@@ -19,7 +19,7 @@ import { AdvancedFilterDoc } from '../../components/doc/datatable/filter/advance
 import { BasicFilterDoc } from '../../components/doc/datatable/filter/basicdoc';
 import { GridLinesDoc } from '../../components/doc/datatable/gridlinesdoc';
 import { ImportDoc } from '../../components/doc/datatable/importdoc';
-import { LazyDoc } from '../../components/doc/datatable/lazydoc';
+import { LazyLoadDoc } from '../../components/doc/datatable/lazyloaddoc';
 import { PaginatorBasicDoc } from '../../components/doc/datatable/paginator/basicdoc';
 import { PaginatorTemplateDoc } from '../../components/doc/datatable/paginator/templatedoc';
 import { ReorderDoc } from '../../components/doc/datatable/reorderdoc';
@@ -232,9 +232,9 @@ const DataTableDemo = () => {
             ]
         },
         {
-            id: 'lazy',
-            label: 'Lazy',
-            component: LazyDoc
+            id: 'lazy_load',
+            label: 'Lazy Load',
+            component: LazyLoadDoc
         },
         {
             id: 'scroll',
@@ -284,13 +284,13 @@ const DataTableDemo = () => {
             ]
         },
         {
-            id: 'colgroup',
-            label: 'ColGroup',
-            component: ColGroupDoc
+            id: 'column_group',
+            label: 'Column Group',
+            component: ColumnGroupDoc
         },
         {
-            id: 'rowgroup',
-            label: 'RowGroup',
+            id: 'row_group',
+            label: 'Row Group',
             children: [
                 {
                     id: 'rowgroup_subheader',
@@ -320,8 +320,8 @@ const DataTableDemo = () => {
             component: ConditionalStyleDoc
         },
         {
-            id: 'colresize',
-            label: 'ColResize',
+            id: 'column_resize',
+            label: 'Column Resize',
             children: [
                 {
                     id: 'resize_fitmode',
@@ -341,7 +341,7 @@ const DataTableDemo = () => {
             component: ReorderDoc
         },
         {
-            id: 'coltoggle',
+            id: 'column_toggle',
             label: 'Column Toggle',
             component: ColumnToggleDoc
         },

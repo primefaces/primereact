@@ -1,25 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import { TreeTable } from '../../../lib/treetable/TreeTable';
-import { Column } from '../../../lib/column/Column';
-import { NodeService } from '../../../../service/NodeService';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
+import React, { useEffect, useState } from 'react';
+import { NodeService } from '../../../service/NodeService';
+import { Column } from '../../lib/column/Column';
+import { TreeTable } from '../../lib/treetable/TreeTable';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
-export function SingleDoc(props) {
+export function DynamicColumnsDoc(props) {
     const [nodes, setNodes] = useState([]);
+    const columns = [
+        { field: 'name', header: 'Name', expander: true },
+        { field: 'size', header: 'Type' },
+        { field: 'type', header: 'Size' }
+    ];
 
     useEffect(() => {
-        NodeService.getTreeTableNodes().then((data) => {
-            setNodes(data);
-        });
+        NodeService.getTreeTableNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const code = {
         basic: `
 <TreeTable value={nodes}>
-    <Column field="name" header="Name" expander sortable></Column>
-    <Column field="size" header="Size" sortable></Column>
-    <Column field="type" header="Type" sortable></Column>
+    {columns.map((col, i) => (
+        <Column key={col.field} field={col.field} header={col.header} expander={col.expander} />
+    ))}
 </TreeTable>
         `,
         javascript: `
@@ -28,22 +31,24 @@ import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { NodeService } from './service/NodeService';
 
-export default function SingleDoc() {
+export default function DynamicColumnsDemo() {
     const [nodes, setNodes] = useState([]);
-    const [nodes2, setNodes2] = useState([]);
-    
+    const columns = [
+        { field: 'name', header: 'Name', expander: true },
+        { field: 'size', header: 'Type' },
+        { field: 'type', header: 'Size' }
+    ];
+
     useEffect(() => {
-        NodeService.getTreeTableNodes().then(data => {
-            setNodes(data);
-        });
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        NodeService.getTreeTableNodes().then((data) => setNodes(data));
+    }, []);
 
     return (
         <div className="card">
             <TreeTable value={nodes}>
-                <Column field="name" header="Name" expander sortable></Column>
-                <Column field="size" header="Size" sortable></Column>
-                <Column field="type" header="Type" sortable></Column>
+                {columns.map((col, i) => (
+                    <Column key={col.field} field={col.field} header={col.header} expander={col.expander} />
+                ))}
             </TreeTable>
         </div>
     );
@@ -53,31 +58,38 @@ export default function SingleDoc() {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
+import { TreeNode } from 'primereact/treenode';
 import { NodeService } from './service/NodeService';
 
-export default function SingleDoc() {
-    const [nodes, setNodes] = useState([]);
-    const [nodes2, setNodes2] = useState([]);
+interface ColumnMeta {
+    field: string;
+    header: string;
+}
+
+export default function DynamicColumnsDemo() {
+    const [nodes, setNodes] = useState<TreeNode[]>([]);
+    const columns: Column[] = [
+        { field: 'name', header: 'Name', expander: true },
+        { field: 'size', header: 'Type' },
+        { field: 'type', header: 'Size' }
+    ];
 
     useEffect(() => {
-        NodeService.getTreeTableNodes().then(data => {
-            setNodes(data);
-        });
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        NodeService.getTreeTableNodes().then((data) => setNodes(data));
+    }, []);
 
     return (
         <div className="card">
             <TreeTable value={nodes}>
-                <Column field="name" header="Name" expander sortable></Column>
-                <Column field="size" header="Size" sortable></Column>
-                <Column field="type" header="Type" sortable></Column>
+                {columns.map((col, i) => (
+                    <Column key={col.field} field={col.field} header={col.header} expander={col.expander} />
+                ))}
             </TreeTable>
         </div>
     );
 }
         `,
         data: `
-/* NodeService */
 {
     key: '0',
     label: 'Documents',
@@ -110,13 +122,13 @@ export default function SingleDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>TreeTable supports single column sorting.</p>
+                <p>Columns can be created programmatically.</p>
             </DocSectionText>
             <div className="card">
                 <TreeTable value={nodes}>
-                    <Column field="name" header="Name" expander sortable></Column>
-                    <Column field="size" header="Size" sortable></Column>
-                    <Column field="type" header="Type" sortable></Column>
+                    {columns.map((col, i) => (
+                        <Column key={col.field} field={col.field} header={col.header} expander={col.expander} />
+                    ))}
                 </TreeTable>
             </div>
             <DocSectionCode code={code} service={['NodeService']} />

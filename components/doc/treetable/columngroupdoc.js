@@ -1,12 +1,12 @@
 import React from 'react';
-import { TreeTable } from '../../lib/treetable/TreeTable';
 import { Column } from '../../lib/column/Column';
-import { Row } from '../../lib/row/Row';
 import { ColumnGroup } from '../../lib/columngroup/ColumnGroup';
+import { Row } from '../../lib/row/Row';
+import { TreeTable } from '../../lib/treetable/TreeTable';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function ColGroupDoc(props) {
+export function ColumnGroupDoc(props) {
     const nodes = [
         {
             key: '0',
@@ -206,7 +206,7 @@ import { Column } from 'primereact/column';
 import { ColumnGroup } from 'primereact/columngroup';
 import { Row } from 'primereact/row';
 
-export default function ColGroupDoc () {
+export default function ColumnGroupDemo() {
     const nodes = [
         {
             key: '0',
@@ -390,16 +390,14 @@ export default function ColGroupDoc () {
     );
 
     return (
-        <div>
-            <div className="card">
-                <TreeTable value={nodes} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup}>
-                    <Column field="brand" expander />
-                    <Column field="lastYearSale" />
-                    <Column field="thisYearSale" />
-                    <Column field="lastYearProfit" />
-                    <Column field="thisYearProfit" />
-                </TreeTable>
-            </div>
+        <div className="card">
+            <TreeTable value={nodes} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup}>
+                <Column field="brand" expander />
+                <Column field="lastYearSale" />
+                <Column field="thisYearSale" />
+                <Column field="lastYearProfit" />
+                <Column field="thisYearProfit" />
+            </TreeTable>
         </div>
     )
 }
@@ -410,9 +408,10 @@ import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { ColumnGroup } from 'primereact/columngroup';
 import { Row } from 'primereact/row';
+import { TreeNode } from 'primereact/treenode';
 
-export default function ColGroupDoc () {
-    const nodes = [
+export default function ColGroupDemo() {
+    const nodes: TreeNode[] = [
         {
             key: '0',
             data: { brand: 'Bliss', lastYearSale: '51%', thisYearSale: '40%', lastYearProfit: '$54,406.00', thisYearProfit: '$43,342' },
@@ -595,16 +594,14 @@ export default function ColGroupDoc () {
     );
 
     return (
-        <div>
-            <div className="card">
-                <TreeTable value={nodes} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup}>
-                    <Column field="brand" expander />
-                    <Column field="lastYearSale" />
-                    <Column field="thisYearSale" />
-                    <Column field="lastYearProfit" />
-                    <Column field="thisYearProfit" />
-                </TreeTable>
-            </div>
+        <div className="card">
+            <TreeTable value={nodes} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup}>
+                <Column field="brand" expander />
+                <Column field="lastYearSale" />
+                <Column field="thisYearSale" />
+                <Column field="lastYearProfit" />
+                <Column field="thisYearProfit" />
+            </TreeTable>
         </div>
     )
 }
@@ -614,7 +611,10 @@ export default function ColGroupDoc () {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Columns can be grouped at header and footer using headerColumnGroup and footerColumnGroup components that both define an array of columns each having colspan and rowspan.</p>
+                <p>
+                    Columns can be grouped within a <i>Row</i> component and groups can be displayed at header and footer using <i>headerColumnGroup</i>, <i>footerColumnGroup</i> properties. Number of cells and rows to span are defined with the{' '}
+                    <i>colSpan</i> and <i>rowSpan</i> properties of a Column.
+                </p>
             </DocSectionText>
             <div className="card">
                 <TreeTable value={nodes} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup}>

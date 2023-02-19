@@ -5,7 +5,7 @@ import { DataTable } from '../../lib/datatable/DataTable';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function LazyDoc(props) {
+export function LazyLoadDoc(props) {
     const [loading, setLoading] = useState(false);
     const [totalRecords, setTotalRecords] = useState(0);
     const [customers, setCustomers] = useState(null);
@@ -102,7 +102,7 @@ export function LazyDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={customers} lazy filterDisplay="row" responsiveLayout="scroll" dataKey="id" paginator
+<DataTable value={customers} lazy filterDisplay="row" dataKey="id" paginator
         first={lazyState.first} rows={10} totalRecords={totalRecords} onPage={onPage} 
         onSort={onSort} sortField={lazyState.sortField} sortOrder={lazyState.sortOrder}
         onFilter={onFilter} filters={lazyState.filters} loading={loading}
@@ -120,7 +120,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { CustomerService } from './service/CustomerService';
 
-export default function LazyDoc() {
+export default function LazyLoadDemo() {
     const [loading, setLoading] = useState(false);
     const [totalRecords, setTotalRecords] = useState(0);
     const [customers, setCustomers] = useState(null);
@@ -217,7 +217,7 @@ export default function LazyDoc() {
 
     return (
         <div className="card">
-            <DataTable value={customers} lazy filterDisplay="row" responsiveLayout="scroll" dataKey="id" paginator
+            <DataTable value={customers} lazy filterDisplay="row" dataKey="id" paginator
                     first={lazyState.first} rows={10} totalRecords={totalRecords} onPage={onPage} 
                     onSort={onSort} sortField={lazyState.sortField} sortOrder={lazyState.sortOrder}
                     onFilter={onFilter} filters={lazyState.filters} loading={loading}
@@ -271,7 +271,7 @@ interface LazyTableState {
     filters: DataTableFilterMeta;
 }
 
-export default function LazyDoc() {
+export default function LazyLoadDemo() {
     const [loading, setLoading] = useState<boolean>(false);
     const [totalRecords, setTotalRecords] = useState<number>(0);
     const [customers, setCustomers] = useState<Customer[] | null>(null);
@@ -368,7 +368,7 @@ export default function LazyDoc() {
 
     return (
         <div className="card">
-            <DataTable value={customers} lazy filterDisplay="row" responsiveLayout="scroll" dataKey="id" paginator
+            <DataTable value={customers} lazy filterDisplay="row" dataKey="id" paginator
                     first={lazyState.first} rows={10} totalRecords={totalRecords} onPage={onPage} 
                     onSort={onSort} sortField={lazyState.sortField} sortOrder={lazyState.sortOrder}
                     onFilter={onFilter} filters={lazyState.filters} loading={loading}
@@ -426,7 +426,6 @@ export default function LazyDoc() {
                     value={customers}
                     lazy
                     filterDisplay="row"
-                    responsiveLayout="scroll"
                     dataKey="id"
                     paginator
                     first={lazyState.first}

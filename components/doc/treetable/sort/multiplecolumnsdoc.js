@@ -1,23 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { TreeTable } from '../../../lib/treetable/TreeTable';
-import { Column } from '../../../lib/column/Column';
+import React, { useEffect, useState } from 'react';
 import { NodeService } from '../../../../service/NodeService';
+import { Column } from '../../../lib/column/Column';
+import { TreeTable } from '../../../lib/treetable/TreeTable';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 
-export function ScrollableDoc(props) {
+export function MultipleColumnsDoc(props) {
     const [nodes, setNodes] = useState([]);
 
     useEffect(() => {
-        NodeService.getTreeTableNodes().then((data) => setNodes(data));
+        NodeService.getTreeTableNodes().then((data) => {
+            setNodes(data);
+        });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const code = {
         basic: `
-<TreeTable value={nodes} resizableColumns scrollable scrollHeight="200px" showGridlines>
-    <Column field="name" header="Name" expander></Column>
-    <Column field="size" header="Size"></Column>
-    <Column field="type" header="Type"></Column>
+<TreeTable value={nodes} sortMode="multiple">
+    <Column field="name" header="Name" expander sortable></Column>
+    <Column field="size" header="Size" sortable></Column>
+    <Column field="type" header="Type" sortable></Column>
 </TreeTable>
         `,
         javascript: `
@@ -26,19 +28,21 @@ import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { NodeService } from './service/NodeService';
 
-export default function ScrollableDoc() {
+export default function MultipleColumnsDemo() {
     const [nodes, setNodes] = useState([]);
-    
+
     useEffect(() => {
-        NodeService.getTreeTableNodes().then(data => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        NodeService.getTreeTableNodes().then((data) => {
+            setNodes(data);
+        });
+    }, []);
 
     return (
         <div className="card">
-            <TreeTable value={nodes} resizableColumns scrollable scrollHeight="200px" showGridlines>
-                <Column field="name" header="Name" expander></Column>
-                <Column field="size" header="Size"></Column>
-                <Column field="type" header="Type"></Column>
+            <TreeTable value={nodes} sortMode="multiple">
+                <Column field="name" header="Name" expander sortable></Column>
+                <Column field="size" header="Size" sortable></Column>
+                <Column field="type" header="Type" sortable></Column>
             </TreeTable>
         </div>
     );
@@ -48,28 +52,30 @@ export default function ScrollableDoc() {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
+import { TreeNode } from 'primereact/treenode';
 import { NodeService } from './service/NodeService';
 
-export default function ScrollableDoc() {
-    const [nodes, setNodes] = useState([]);
-    
+export default function MultipleColumnsDemo() {
+    const [nodes, setNodes] = useState<TreeNode[]>([]);
+
     useEffect(() => {
-        NodeService.getTreeTableNodes().then(data => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        NodeService.getTreeTableNodes().then((data) => {
+            setNodes(data);
+        });
+    }, []);
 
     return (
         <div className="card">
-            <TreeTable value={nodes} resizableColumns scrollable scrollHeight="200px" showGridlines>
-                <Column field="name" header="Name" expander></Column>
-                <Column field="size" header="Size"></Column>
-                <Column field="type" header="Type"></Column>
+            <TreeTable value={nodes} sortMode="multiple">
+                <Column field="name" header="Name" expander sortable></Column>
+                <Column field="size" header="Size" sortable></Column>
+                <Column field="type" header="Type" sortable></Column>
             </TreeTable>
         </div>
     );
 }
         `,
         data: `
-/* NodeService */
 {
     key: '0',
     label: 'Documents',
@@ -102,13 +108,15 @@ export default function ScrollableDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Scrolling data is available horizontally, vertically or both with optional support for frozen columns.</p>
+                <p>
+                    Multiple columns can be sorted by defining <i>sortMode</i> as <i>multiple</i>. This mode requires metaKey (e.g. <i>⌘</i>) to be pressed when clicking a header.
+                </p>
             </DocSectionText>
             <div className="card">
-                <TreeTable value={nodes} resizableColumns scrollable scrollHeight="200px" showGridlines>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
+                <TreeTable value={nodes} sortMode="multiple">
+                    <Column field="name" header="Name" expander sortable></Column>
+                    <Column field="size" header="Size" sortable></Column>
+                    <Column field="type" header="Type" sortable></Column>
                 </TreeTable>
             </div>
             <DocSectionCode code={code} service={['NodeService']} />

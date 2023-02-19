@@ -1,21 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { TreeTable } from '../../../lib/treetable/TreeTable';
-import { Column } from '../../../lib/column/Column';
+import React, { useEffect, useState } from 'react';
 import { NodeService } from '../../../../service/NodeService';
+import { Column } from '../../../lib/column/Column';
+import { TreeTable } from '../../../lib/treetable/TreeTable';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 
-export function CheckboxDoc(props) {
+export function CheckboxRowSelectionDoc(props) {
     const [nodes, setNodes] = useState([]);
-    const [selectedNodeKeys, setSelectedNodeKeys] = useState([]);
+    const [selectedNodeKeys, setSelectedNodeKeys] = useState(null);
 
     useEffect(() => {
         NodeService.getTreeTableNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+    const introCode = {
+        basic: `
+{
+    '0-0': {
+        partialChecked: false,
+        checked: true
+    }
+}
+        `
+    };
+
     const code = {
         basic: `
-<TreeTable value={nodes} selectionMode="checkbox" selectionKeys={selectedNodeKeys} onSelectionChange={e => setSelectedNodeKeys(e.value)}>
+<TreeTable value={nodes} selectionMode="checkbox" selectionKeys={selectedNodeKeys} 
+        onSelectionChange={(e) => setSelectedNodeKeys(e.value)}>
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
     <Column field="type" header="Type"></Column>
@@ -27,17 +39,17 @@ import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { NodeService } from './service/NodeService';
 
-export default function CheckboxDoc() {
+export default function CheckboxRowSelectionDemo() {
     const [nodes, setNodes] = useState([]);
-    const [selectedNodeKeys, setSelectedNodeKeys] = useState([]);
+    const [selectedNodeKeys, setSelectedNodeKeys] = useState(null);
 
     useEffect(() => {
-        NodeService.getTreeTableNodes().then(data => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        NodeService.getTreeTableNodes().then((data) => setNodes(data));
+    }, []);
 
     return (
         <div className="card">
-            <TreeTable value={nodes} selectionMode="checkbox" selectionKeys={selectedNodeKeys} onSelectionChange={e => setSelectedNodeKeys(e.value)}>
+            <TreeTable value={nodes} selectionMode="checkbox" selectionKeys={selectedNodeKeys} onSelectionChange={(e) => setSelectedNodeKeys(e.value)}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
@@ -48,21 +60,22 @@ export default function CheckboxDoc() {
         `,
         typescript: `
 import React, { useState, useEffect } from 'react';
-import { TreeTable } from 'primereact/treetable';
+import { TreeTable, TreeTableSelectionKeysType, TreeTableSelectionEvent } from 'primereact/treetable';
 import { Column } from 'primereact/column';
+import { TreeNode } from 'primereact/treenode';
 import { NodeService } from './service/NodeService';
 
-export default function CheckboxDoc() {
-    const [nodes, setNodes] = useState([]);
-    const [selectedNodeKeys, setSelectedNodeKeys] = useState([]);
+export default function CheckboxRowSelectionDemo() {
+    const [nodes, setNodes] = useState<TreeNode[]>([]);
+    const [selectedNodeKeys, setSelectedNodeKeys] = useState<TreeTableSelectionKeysType | null>(null);
 
     useEffect(() => {
-        NodeService.getTreeTableNodes().then(data => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        NodeService.getTreeTableNodes().then((data) => setNodes(data));
+    }, []);
 
     return (
         <div className="card">
-            <TreeTable value={nodes} selectionMode="checkbox" selectionKeys={selectedNodeKeys} onSelectionChange={e => setSelectedNodeKeys(e.value)}>
+            <TreeTable value={nodes} selectionMode="checkbox" selectionKeys={selectedNodeKeys} onSelectionChange={(e: TreeTableSelectionEvent) => setSelectedNodeKeys(e.value)}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
@@ -72,7 +85,6 @@ export default function CheckboxDoc() {
 }
         `,
         data: `
-/* NodeService */
 {
     key: '0',
     label: 'Documents',
@@ -105,8 +117,14 @@ export default function CheckboxDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>TreeTable supports single, multiple and checkbox based selection modes.</p>
+                <p>
+                    Selection of multiple nodes via checkboxes is enabled by configuring <i>selectionMode</i> as <i>checkbox</i>.
+                </p>
+                <p>
+                    In checkbox selection mode, value binding should be a key-value pair where key is the node key and value is an object that has <i>checked</i> and <i>partialChecked</i> properties to represent the checked state of a node.
+                </p>
             </DocSectionText>
+            <DocSectionCode code={introCode} hideToggleCode import hideCodeSandbox hideStackBlitz />
             <div className="card">
                 <TreeTable value={nodes} selectionMode="checkbox" selectionKeys={selectedNodeKeys} onSelectionChange={(e) => setSelectedNodeKeys(e.value)}>
                     <Column field="name" header="Name" expander></Column>
