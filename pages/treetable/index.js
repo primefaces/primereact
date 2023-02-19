@@ -16,8 +16,6 @@ import { PaginatorTemplateDoc } from '../../components/doc/treetable/paginator/t
 import { ReorderDoc } from '../../components/doc/treetable/reorderdoc';
 import { ExpandModeDoc } from '../../components/doc/treetable/resize/expandmodedoc';
 import { FitModeDoc } from '../../components/doc/treetable/resize/fitmodedoc';
-import { ScrollableDoc } from '../../components/doc/treetable/resize/scrollabledoc';
-import { ScrollableWithVariableWidthDoc } from '../../components/doc/treetable/resize/scrollablewithvariabledoc';
 import { ResponsiveDoc } from '../../components/doc/treetable/responsivedoc';
 import { FrozenColumnsDoc } from '../../components/doc/treetable/scroll/frozencolumnsdoc';
 import { HorizontalScrollDoc } from '../../components/doc/treetable/scroll/horizontaldoc';
@@ -159,30 +157,18 @@ const TreeTableDemo = () => {
             ]
         },
         {
-            id: 'resize',
-            label: 'Resize',
-            description:
-                'Columns can be resized using drag drop by setting the resizableColumns to true. There are two resize modes; "fit" and "expand". Fit is the default one and the overall table width does not change when a column is resized whereas in "expand" mode, table width also changes along with the column width.',
+            id: 'column_resize',
+            label: 'Column Resize',
             children: [
                 {
-                    id: 'fitmode',
+                    id: 'resize_fitmode',
                     label: 'Fit Mode',
                     component: FitModeDoc
                 },
                 {
-                    id: 'expandmode',
+                    id: 'resize_expandmode',
                     label: 'Expand Mode',
                     component: ExpandModeDoc
-                },
-                {
-                    id: 'scrollable',
-                    label: 'Scrollable',
-                    component: ScrollableDoc
-                },
-                {
-                    id: 'scrollablewithvariable',
-                    label: 'Scrollable with Variable Width',
-                    component: ScrollableWithVariableWidthDoc
                 }
             ]
         },

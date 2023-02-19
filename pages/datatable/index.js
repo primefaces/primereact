@@ -320,8 +320,8 @@ const DataTableDemo = () => {
             component: ConditionalStyleDoc
         },
         {
-            id: 'colresize',
-            label: 'ColResize',
+            id: 'column_resize',
+            label: 'Column Resize',
             children: [
                 {
                     id: 'resize_fitmode',
