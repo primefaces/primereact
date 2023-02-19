@@ -5,13 +5,15 @@ import { BasicDoc } from '../../components/doc/treetable/basicdoc';
 import { ColGroupDoc } from '../../components/doc/treetable/colgroupdoc';
 import { ColToggleDoc } from '../../components/doc/treetable/coltoggledoc';
 import { ContextMenuDoc } from '../../components/doc/treetable/contextmenudoc';
+import { ControlledDoc } from '../../components/doc/treetable/controlleddoc';
+import { DynamicColumnsDoc } from '../../components/doc/treetable/dynamiccolumnsdoc';
 import { EditDoc } from '../../components/doc/treetable/editdoc';
 import { LenientFilterDoc } from '../../components/doc/treetable/filter/lenientfilterdoc';
 import { StrictFilterDoc } from '../../components/doc/treetable/filter/strictfilterdoc';
 import { ImportDoc } from '../../components/doc/treetable/importdoc';
 import { LazyDoc } from '../../components/doc/treetable/lazydoc';
-import { PaginatorDoc } from '../../components/doc/treetable/paginatordoc';
-import { ProgrammaticDoc } from '../../components/doc/treetable/programmaticdoc';
+import { PaginatorBasicDoc } from '../../components/doc/treetable/paginator/basicdoc';
+import { PaginatorTemplateDoc } from '../../components/doc/treetable/paginator/templatedoc';
 import { ReorderDoc } from '../../components/doc/treetable/reorderdoc';
 import { ExpandModeDoc } from '../../components/doc/treetable/resize/expandmodedoc';
 import { FitModeDoc } from '../../components/doc/treetable/resize/fitmodedoc';
@@ -46,9 +48,14 @@ const TreeTableDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'programmatic',
-            label: 'Programmatic',
-            component: ProgrammaticDoc
+            id: 'dynamic_columns',
+            label: 'Dynamic Columns',
+            component: DynamicColumnsDoc
+        },
+        {
+            id: 'controlled',
+            label: 'Controlled',
+            component: ControlledDoc
         },
         {
             id: 'template',
@@ -58,7 +65,18 @@ const TreeTableDemo = () => {
         {
             id: 'paginator',
             label: 'Paginator',
-            component: PaginatorDoc
+            children: [
+                {
+                    id: 'paginator_basic',
+                    label: 'Basic',
+                    component: PaginatorBasicDoc
+                },
+                {
+                    id: 'paginator_template',
+                    label: 'Template',
+                    component: PaginatorTemplateDoc
+                }
+            ]
         },
         {
             id: 'sort',

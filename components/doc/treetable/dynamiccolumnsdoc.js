@@ -5,8 +5,13 @@ import { TreeTable } from '../../lib/treetable/TreeTable';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function BasicDoc(props) {
+export function DynamicColumnsDoc(props) {
     const [nodes, setNodes] = useState([]);
+    const columns = [
+        { field: 'name', header: 'Name', expander: true },
+        { field: 'size', header: 'Type' },
+        { field: 'type', header: 'Size' }
+    ];
 
     useEffect(() => {
         NodeService.getTreeTableNodes().then((data) => setNodes(data));
@@ -15,9 +20,9 @@ export function BasicDoc(props) {
     const code = {
         basic: `
 <TreeTable value={nodes}>
-    <Column field="name" header="Name" expander></Column>
-    <Column field="size" header="Size"></Column>
-    <Column field="type" header="Type"></Column>
+    {columns.map((col, i) => (
+        <Column key={col.field} field={col.field} header={col.header} expander={col.expander} />
+    ))}
 </TreeTable>
         `,
         javascript: `
@@ -26,8 +31,13 @@ import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { NodeService } from './service/NodeService';
 
-export default function BasicDemo() {
+export default function DynamicColumnsDemo() {
     const [nodes, setNodes] = useState([]);
+    const columns = [
+        { field: 'name', header: 'Name', expander: true },
+        { field: 'size', header: 'Type' },
+        { field: 'type', header: 'Size' }
+    ];
 
     useEffect(() => {
         NodeService.getTreeTableNodes().then((data) => setNodes(data));
@@ -36,9 +46,9 @@ export default function BasicDemo() {
     return (
         <div className="card">
             <TreeTable value={nodes}>
-                <Column field="name" header="Name" expander></Column>
-                <Column field="size" header="Size"></Column>
-                <Column field="type" header="Type"></Column>
+                {columns.map((col, i) => (
+                    <Column key={col.field} field={col.field} header={col.header} expander={col.expander} />
+                ))}
             </TreeTable>
         </div>
     );
@@ -51,8 +61,18 @@ import { Column } from 'primereact/column';
 import { TreeNode } from 'primereact/treenode';
 import { NodeService } from './service/NodeService';
 
-export default function BasicDemo() {
+interface ColumnMeta {
+    field: string;
+    header: string;
+}
+
+export default function DynamicColumnsDemo() {
     const [nodes, setNodes] = useState<TreeNode[]>([]);
+    const columns: Column[] = [
+        { field: 'name', header: 'Name', expander: true },
+        { field: 'size', header: 'Type' },
+        { field: 'type', header: 'Size' }
+    ];
 
     useEffect(() => {
         NodeService.getTreeTableNodes().then((data) => setNodes(data));
@@ -61,9 +81,9 @@ export default function BasicDemo() {
     return (
         <div className="card">
             <TreeTable value={nodes}>
-                <Column field="name" header="Name" expander></Column>
-                <Column field="size" header="Size"></Column>
-                <Column field="type" header="Type"></Column>
+                {columns.map((col, i) => (
+                    <Column key={col.field} field={col.field} header={col.header} expander={col.expander} />
+                ))}
             </TreeTable>
         </div>
     );
@@ -102,15 +122,13 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    TreeTable requires a collection of <i>TreeNode</i> instances as a <i>value</i> and <i>Column</i> components as children for the representation. The column with the element to toggle a node should have <i>expander</i> enabled.
-                </p>
+                <p>Columns can be created programmatically.</p>
             </DocSectionText>
             <div className="card">
                 <TreeTable value={nodes}>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
+                    {columns.map((col, i) => (
+                        <Column key={col.field} field={col.field} header={col.header} expander={col.expander} />
+                    ))}
                 </TreeTable>
             </div>
             <DocSectionCode code={code} service={['NodeService']} />

@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { TreeTable } from '../../lib/treetable/TreeTable';
-import { Column } from '../../lib/column/Column';
-import { Button } from '../../lib/button/Button';
+import React, { useEffect, useState } from 'react';
 import { NodeService } from '../../../service/NodeService';
+import { Button } from '../../lib/button/Button';
+import { Column } from '../../lib/column/Column';
+import { TreeTable } from '../../lib/treetable/TreeTable';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function ProgrammaticDoc(props) {
+export function ControlledDoc(props) {
     const [nodes, setNodes] = useState([]);
-    const [expandedKeys, setExpandedKeys] = useState({});
+    const [expandedKeys, setExpandedKeys] = useState(null);
 
     const toggleApplications = () => {
         let _expandedKeys = { ...expandedKeys };
@@ -26,7 +26,7 @@ export function ProgrammaticDoc(props) {
     const code = {
         basic: `
 <Button onClick={toggleApplications} label="Toggle Applications" />
-<TreeTable value={nodes} expandedKeys={expandedKeys} onToggle={(e) => setExpandedKeys(e.value)} style={{ marginTop: '.5em' }}>
+<TreeTable value={nodes} expandedKeys={expandedKeys} onToggle={(e) => setExpandedKeys(e.value)} className="mt-4">
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
     <Column field="type" header="Type"></Column>
@@ -39,26 +39,27 @@ import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { NodeService } from './service/NodeService';
 
-export default function ProgrammaticDoc() {
-const [nodes, setNodes] = useState([]);
-const [expandedKeys, setExpandedKeys] = useState({});
+export default function ControlledDemo() {
+    const [nodes, setNodes] = useState([]);
+    const [expandedKeys, setExpandedKeys] = useState(null);
 
+    const toggleApplications = () => {
+        let _expandedKeys = { ...expandedKeys };
 
-const toggleApplications = () => {
-    let _expandedKeys = { ...expandedKeys };
-    if (_expandedKeys['0']) delete _expandedKeys['0'];
-    else _expandedKeys['0'] = true;
-    setExpandedKeys(_expandedKeys);
-};
+        if (_expandedKeys['0']) delete _expandedKeys['0'];
+        else _expandedKeys['0'] = true;
 
-useEffect(() => {
-    NodeService.getTreeTableNodes().then((data) => setNodes(data));
-}, []); // eslint-disable-line react-hooks/exhaustive-deps
+        setExpandedKeys(_expandedKeys);
+    };
+
+    useEffect(() => {
+        NodeService.getTreeTableNodes().then((data) => setNodes(data));
+    }, []);
 
     return (
         <div className="card">
             <Button onClick={toggleApplications} label="Toggle Applications" />
-            <TreeTable value={nodes} expandedKeys={expandedKeys} onToggle={(e) => setExpandedKeys(e.value)} style={{ marginTop: '.5em' }}>
+            <TreeTable value={nodes} expandedKeys={expandedKeys} onToggle={(e) => setExpandedKeys(e.value)} className="mt-4">
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
@@ -69,30 +70,33 @@ useEffect(() => {
         `,
         typescript: `
 import React, { useState, useEffect } from 'react';
-import { TreeTable } from 'primereact/treetable';
+import { TreeTable, TreeTableExpandedKeysType } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
+import { TreeNode } from 'primereact/treenode';
 import { NodeService } from './service/NodeService';
 
-export default function ProgrammaticDoc() {
-const [nodes, setNodes] = useState([]);
-const [expandedKeys, setExpandedKeys] = useState({});
+export default function ControlledDemo() {
+    const [nodes, setNodes] = useState<TreeNode[]>([]);
+    const [expandedKeys, setExpandedKeys] = useState<TreeTableExpandedKeysType | null>(null);
 
-const toggleApplications = () => {
-    let _expandedKeys = { ...expandedKeys };
-    if (_expandedKeys['0']) delete _expandedKeys['0'];
-    else _expandedKeys['0'] = true;
-    setExpandedKeys(_expandedKeys);
-};
+    const toggleApplications = () => {
+        let _expandedKeys = { ...expandedKeys };
 
-useEffect(() => {
-    NodeService.getTreeTableNodes().then((data) => setNodes(data));
-}, []); // eslint-disable-line react-hooks/exhaustive-deps
+        if (_expandedKeys['0']) delete _expandedKeys['0'];
+        else _expandedKeys['0'] = true;
+
+        setExpandedKeys(_expandedKeys);
+    };
+
+    useEffect(() => {
+        NodeService.getTreeTableNodes().then((data) => setNodes(data));
+    }, []);
 
     return (
         <div className="card">
             <Button onClick={toggleApplications} label="Toggle Applications" />
-            <TreeTable value={nodes} expandedKeys={expandedKeys} onToggle={(e) => setExpandedKeys(e.value)} style={{ marginTop: '.5em' }}>
+            <TreeTable value={nodes} expandedKeys={expandedKeys} onToggle={(e) => setExpandedKeys(e.value)} className="mt-4">
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
@@ -102,7 +106,6 @@ useEffect(() => {
 }
         `,
         data: `
-/* NodeService */
 {
     key: '0',
     label: 'Documents',
@@ -135,11 +138,14 @@ useEffect(() => {
     return (
         <>
             <DocSectionText {...props}>
-                <p>TreeTable is used to display hierarchical data in tabular format.</p>
+                <p>
+                    Expansion state is controlled with <i>expandedKeys</i> and <i>onToggle</i> properties. The <i>expandedKeys</i> should be an object whose keys refer to the node key and values represent the expanded state e.g.{' '}
+                    <i>&#123;'0-0': true&#125;</i>.
+                </p>
             </DocSectionText>
             <div className="card">
                 <Button onClick={toggleApplications} label="Toggle Applications" />
-                <TreeTable value={nodes} expandedKeys={expandedKeys} onToggle={(e) => setExpandedKeys(e.value)} style={{ marginTop: '.5em' }}>
+                <TreeTable value={nodes} expandedKeys={expandedKeys} onToggle={(e) => setExpandedKeys(e.value)} className="mt-4">
                     <Column field="name" header="Name" expander></Column>
                     <Column field="size" header="Size"></Column>
                     <Column field="type" header="Type"></Column>

@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { NodeService } from '../../../service/NodeService';
 import { Tree } from '../../lib/tree/Tree';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
-import { NodeService } from '../../../service/NodeService';
 
 export function BasicDoc(props) {
     const [nodes, setNodes] = useState([]);
@@ -88,7 +88,7 @@ export default function BasicDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    OrganizationChart requires a collection of <i>TreeNode</i> instances as a <i>value</i>.
+                    Tree requires a collection of <i>TreeNode</i> instances as a <i>value</i>.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">

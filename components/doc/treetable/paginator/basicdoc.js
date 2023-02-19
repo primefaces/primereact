@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { TreeTable } from '../../lib/treetable/TreeTable';
-import { Column } from '../../lib/column/Column';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import React, { useEffect, useState } from 'react';
+import { Column } from '../../../lib/column/Column';
+import { TreeTable } from '../../../lib/treetable/TreeTable';
+import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
-export function PaginatorDoc(props) {
+export function PaginatorBasicDoc(props) {
     const [nodes, setNodes] = useState([]);
 
     useEffect(() => {
@@ -38,7 +38,7 @@ export function PaginatorDoc(props) {
 
     const code = {
         basic: `
-<TreeTable value={nodes} paginator rows={10}>
+<TreeTable value={nodes} paginator rows={5} rowsPerPageOptions={[5, 10, 25]}>
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
     <Column field="type" header="Type"></Column>
@@ -49,11 +49,12 @@ import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 
-export default function PaginatorDoc() {
+export default function PaginatorBasicDemo() {
     const [nodes, setNodes] = useState([]);
 
     useEffect(() => {
         let files = [];
+
         for (let i = 0; i < 50; i++) {
             let node = {
                 key: i,
@@ -78,17 +79,15 @@ export default function PaginatorDoc() {
         }
 
         setNodes(files);
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
-        <div>
-            <div className="card">
-                <TreeTable value={nodes} paginator rows={10}>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
-                </TreeTable>
-            </div>
+        <div className="card">
+            <TreeTable value={nodes} paginator rows={5} rowsPerPageOptions={[5, 10, 25]}>
+                <Column field="name" header="Name" expander></Column>
+                <Column field="size" header="Size"></Column>
+                <Column field="type" header="Type"></Column>
+            </TreeTable>
         </div>
     );
 }
@@ -97,12 +96,14 @@ export default function PaginatorDoc() {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
+import { TreeNode } from 'primereact/treenode';
 
-export default function PaginatorDoc() {
-    const [nodes, setNodes] = useState([]);
+export default function PaginatorBasicDemo() {
+    const [nodes, setNodes] = useState<TreeNode[]>([]);
 
     useEffect(() => {
         let files = [];
+
         for (let i = 0; i < 50; i++) {
             let node = {
                 key: i,
@@ -127,17 +128,15 @@ export default function PaginatorDoc() {
         }
 
         setNodes(files);
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
-        <div>
-            <div className="card">
-                <TreeTable value={nodes} paginator rows={10}>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
-                </TreeTable>
-            </div>
+        <div className="card">
+            <TreeTable value={nodes} paginator rows={5} rowsPerPageOptions={[5, 10, 25]}>
+                <Column field="name" header="Name" expander></Column>
+                <Column field="size" header="Size"></Column>
+                <Column field="type" header="Type"></Column>
+            </TreeTable>
         </div>
     );
 }
@@ -147,10 +146,12 @@ export default function PaginatorDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Pagination is enabled by setting paginator property to true and defining a rows property to specify the number of rows per page.</p>
+                <p>
+                    Pagination is enabled by adding <i>paginator</i> property and defining <i>rows</i> per page.
+                </p>
             </DocSectionText>
             <div className="card">
-                <TreeTable value={nodes} paginator rows={10}>
+                <TreeTable value={nodes} paginator rows={5} rowsPerPageOptions={[5, 10, 25]}>
                     <Column field="name" header="Name" expander></Column>
                     <Column field="size" header="Size"></Column>
                     <Column field="type" header="Type"></Column>
