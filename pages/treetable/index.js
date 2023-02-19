@@ -23,11 +23,10 @@ import { FrozenColumnsDoc } from '../../components/doc/treetable/scroll/frozenco
 import { HorizontalAndVerticalDoc } from '../../components/doc/treetable/scroll/horizontalandverticaldoc';
 import { HorizontalDoc } from '../../components/doc/treetable/scroll/horizontaldoc';
 import { VerticalDoc } from '../../components/doc/treetable/scroll/verticaldoc';
-import { CheckboxDoc } from '../../components/doc/treetable/selection/checkboxdoc';
-import { EventsDoc } from '../../components/doc/treetable/selection/eventsdoc';
-import { MultipleSelectionDoc } from '../../components/doc/treetable/selection/multipledoc';
-import { MultipleWithMetaKeysDoc } from '../../components/doc/treetable/selection/multiplewithmetadoc';
-import { SingleSelectionDoc } from '../../components/doc/treetable/selection/singledoc';
+import { CheckboxRowSelectionDoc } from '../../components/doc/treetable/selection/checkboxdoc';
+import { RowSelectionEventsDoc } from '../../components/doc/treetable/selection/eventsdoc';
+import { MultipleRowsSelectionDoc } from '../../components/doc/treetable/selection/multipledoc';
+import { SingleRowSelectionDoc } from '../../components/doc/treetable/selection/singledoc';
 import { MultipleColumnsDoc } from '../../components/doc/treetable/sort/multiplecolumnsdoc';
 import { SingleColumnDoc } from '../../components/doc/treetable/sort/singlecolumndoc';
 import { StyleDoc } from '../../components/doc/treetable/styledoc';
@@ -101,32 +100,26 @@ const TreeTableDemo = () => {
         {
             id: 'selection',
             label: 'Selection',
-            description: 'TreeTable supports single, multiple and checkbox based selection modes.',
             children: [
                 {
-                    id: 'singleselection',
+                    id: 'single_row_selection',
                     label: 'Single',
-                    component: SingleSelectionDoc
+                    component: SingleRowSelectionDoc
                 },
                 {
-                    id: 'checkboxselection',
+                    id: 'multiple_rows_selection',
+                    label: 'Multiple',
+                    component: MultipleRowsSelectionDoc
+                },
+                {
+                    id: 'checkbox_row_selection',
                     label: 'Checkbox',
-                    component: CheckboxDoc
+                    component: CheckboxRowSelectionDoc
                 },
                 {
-                    id: 'eventselection',
+                    id: 'row_selection_events',
                     label: 'Events',
-                    component: EventsDoc
-                },
-                {
-                    id: 'multipleselection',
-                    label: 'Multiple ',
-                    component: MultipleSelectionDoc
-                },
-                {
-                    id: 'multiplewithmetakeys',
-                    label: 'Multiple With Meta Keys',
-                    component: MultipleWithMetaKeysDoc
+                    component: RowSelectionEventsDoc
                 }
             ]
         },

@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { NodeService } from '../../../../service/NodeService';
 import { Tree } from '../../../lib/tree/Tree';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
-import { NodeService } from '../../../../service/NodeService';
 
 export function CheckboxSelectionDoc(props) {
     const [nodes, setNodes] = useState([]);
@@ -106,8 +106,7 @@ export default function CheckboxSelectionDemo() {
                     Selection of multiple nodes via checkboxes is enabled by configuring <i>selectionMode</i> as <i>checkbox</i>.
                 </p>
                 <p>
-                    In checkbox selection mode, value binding should be a key-value pair where key is the node key and value is an object that has <i>checked</i> and <i>partialChecked</i> properties to represent the checked state of a node obje to
-                    indicate selection.
+                    In checkbox selection mode, value binding should be a key-value pair where key is the node key and value is an object that has <i>checked</i> and <i>partialChecked</i> properties to represent the checked state of a node.
                 </p>
             </DocSectionText>
             <DocSectionCode code={introCode} hideToggleCode import hideCodeSandbox hideStackBlitz />
