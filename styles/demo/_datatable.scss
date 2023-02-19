@@ -1,4 +1,5 @@
-.p-datatable .p-datatable-tbody > tr > td.p-cell-editing {
+.p-datatable .p-datatable-tbody > tr > td.p-cell-editing,
+.p-treetable .p-treetable-tbody > tr > td.p-cell-editing {
     padding-top: 0;
     padding-bottom: 0;
 }
