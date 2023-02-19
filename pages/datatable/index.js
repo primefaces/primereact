@@ -341,7 +341,7 @@ const DataTableDemo = () => {
             component: ReorderDoc
         },
         {
-            id: 'coltoggle',
+            id: 'column_toggle',
             label: 'Column Toggle',
             component: ColumnToggleDoc
         },

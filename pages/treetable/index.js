@@ -2,8 +2,8 @@ import React from 'react';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/treetable/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/treetable/basicdoc';
-import { ColToggleDoc } from '../../components/doc/treetable/coltoggledoc';
 import { ColumnGroupDoc } from '../../components/doc/treetable/columngroupdoc';
+import { ColumnToggleDoc } from '../../components/doc/treetable/columntoggledoc';
 import { ContextMenuDoc } from '../../components/doc/treetable/contextmenudoc';
 import { ControlledDoc } from '../../components/doc/treetable/controlleddoc';
 import { DynamicColumnsDoc } from '../../components/doc/treetable/dynamiccolumnsdoc';
@@ -178,9 +178,9 @@ const TreeTableDemo = () => {
             component: ReorderDoc
         },
         {
-            id: 'coltoggle',
-            label: 'ColToggle',
-            component: ColToggleDoc
+            id: 'column_toggle',
+            label: 'Column Toggle',
+            component: ColumnToggleDoc
         },
         {
             id: 'styledtreetable',
