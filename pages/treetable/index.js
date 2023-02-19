@@ -10,7 +10,7 @@ import { DynamicColumnsDoc } from '../../components/doc/treetable/dynamiccolumns
 import { EditDoc } from '../../components/doc/treetable/editdoc';
 import { FilterDoc } from '../../components/doc/treetable/filterdoc';
 import { ImportDoc } from '../../components/doc/treetable/importdoc';
-import { LazyDoc } from '../../components/doc/treetable/lazydoc';
+import { LazyLoadDoc } from '../../components/doc/treetable/lazyloaddoc';
 import { PaginatorBasicDoc } from '../../components/doc/treetable/paginator/basicdoc';
 import { PaginatorTemplateDoc } from '../../components/doc/treetable/paginator/templatedoc';
 import { ReorderDoc } from '../../components/doc/treetable/reorderdoc';
@@ -129,9 +129,9 @@ const TreeTableDemo = () => {
             component: ColumnGroupDoc
         },
         {
-            id: 'lazy',
-            label: 'Lazy',
-            component: LazyDoc
+            id: 'lazy_load',
+            label: 'Lazy Load',
+            component: LazyLoadDoc
         },
         {
             id: 'edit',
