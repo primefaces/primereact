@@ -4,6 +4,7 @@ import { AccessibilityDoc } from '../../components/doc/treetable/accessibilitydo
 import { BasicDoc } from '../../components/doc/treetable/basicdoc';
 import { ColumnGroupDoc } from '../../components/doc/treetable/columngroupdoc';
 import { ColumnToggleDoc } from '../../components/doc/treetable/columntoggledoc';
+import { ConditionalStyleDoc } from '../../components/doc/treetable/conditionalstyledoc';
 import { ContextMenuDoc } from '../../components/doc/treetable/contextmenudoc';
 import { ControlledDoc } from '../../components/doc/treetable/controlleddoc';
 import { DynamicColumnsDoc } from '../../components/doc/treetable/dynamiccolumnsdoc';
@@ -27,7 +28,6 @@ import { SingleRowSelectionDoc } from '../../components/doc/treetable/selection/
 import { MultipleColumnsDoc } from '../../components/doc/treetable/sort/multiplecolumnsdoc';
 import { SingleColumnDoc } from '../../components/doc/treetable/sort/singlecolumndoc';
 import { StyleDoc } from '../../components/doc/treetable/styledoc';
-import { StyledTreeTableDoc } from '../../components/doc/treetable/styledtreetabledoc';
 import { TemplateDoc } from '../../components/doc/treetable/templatedoc';
 
 const TreeTableDemo = () => {
@@ -183,13 +183,13 @@ const TreeTableDemo = () => {
             component: ColumnToggleDoc
         },
         {
-            id: 'styledtreetable',
-            label: 'Styled TreeTable',
-            component: StyledTreeTableDoc
+            id: 'conditional_style',
+            label: 'Conditional Style',
+            component: ConditionalStyleDoc
         },
         {
             id: 'contextmenu',
-            label: 'ContextMenu',
+            label: 'Context Menu',
             component: ContextMenuDoc
         },
         {
