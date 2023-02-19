@@ -2,8 +2,8 @@ import React from 'react';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/treetable/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/treetable/basicdoc';
-import { ColGroupDoc } from '../../components/doc/treetable/colgroupdoc';
 import { ColToggleDoc } from '../../components/doc/treetable/coltoggledoc';
+import { ColumnGroupDoc } from '../../components/doc/treetable/columngroupdoc';
 import { ContextMenuDoc } from '../../components/doc/treetable/contextmenudoc';
 import { ControlledDoc } from '../../components/doc/treetable/controlleddoc';
 import { DynamicColumnsDoc } from '../../components/doc/treetable/dynamiccolumnsdoc';
@@ -124,9 +124,9 @@ const TreeTableDemo = () => {
             ]
         },
         {
-            id: 'colgroup',
-            label: 'ColGroup',
-            component: ColGroupDoc
+            id: 'column_group',
+            label: 'Column Group',
+            component: ColumnGroupDoc
         },
         {
             id: 'lazy',
