@@ -62,10 +62,10 @@ export function FrozenRowsDoc(props) {
     const code = {
         basic: `
 <DataTable value={customers} frozenValue={lockedCustomers} scrollable scrollHeight="400px" tableStyle={{ minWidth: '50rem' }}>
-    <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
-    <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
-    <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
-    <Column field="status" header="Status" style={{ minWidth: '200px' }}></Column>
+    <Column field="name" header="Name"></Column>
+    <Column field="country.name" header="Country"></Column>
+    <Column field="representative.name" header="Representative"></Column>
+    <Column field="status" header="Status"></Column>
     <Column style={{ flex: '0 0 4rem' }} body={lockTemplate}></Column>
 </DataTable>
         `,
@@ -132,10 +132,10 @@ export default function FrozenRowsDemo() {
     return (
         <div className="card">
             <DataTable value={customers} frozenValue={lockedCustomers} scrollable scrollHeight="400px" tableStyle={{ minWidth: '50rem' }}>
-                <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
-                <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
-                <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
-                <Column field="status" header="Status" style={{ minWidth: '200px' }}></Column>
+                <Column field="name" header="Name"></Column>
+                <Column field="country.name" header="Country"></Column>
+                <Column field="representative.name" header="Representative"></Column>
+                <Column field="status" header="Status"></Column>
                 <Column style={{ flex: '0 0 4rem' }} body={lockTemplate}></Column>
             </DataTable>
         </div>
@@ -218,10 +218,10 @@ export default function FrozenRowsDemo() {
     return (
         <div className="card">
             <DataTable value={customers} frozenValue={lockedCustomers} scrollable scrollHeight="400px" tableStyle={{ minWidth: '50rem' }}>
-                <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
-                <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
-                <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
-                <Column field="status" header="Status" style={{ minWidth: '200px' }}></Column>
+                <Column field="name" header="Name"></Column>
+                <Column field="country.name" header="Country"></Column>
+                <Column field="representative.name" header="Representative"></Column>
+                <Column field="status" header="Status"></Column>
                 <Column style={{ flex: '0 0 4rem' }} body={lockTemplate}></Column>
             </DataTable>
         </div>
@@ -258,10 +258,10 @@ export default function FrozenRowsDemo() {
             </DocSectionText>
             <div className="card">
                 <DataTable value={customers} frozenValue={lockedCustomers} scrollable scrollHeight="400px" tableStyle={{ minWidth: '50rem' }}>
-                    <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
-                    <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
-                    <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
-                    <Column field="status" header="Status" style={{ minWidth: '200px' }}></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="country.name" header="Country"></Column>
+                    <Column field="representative.name" header="Representative"></Column>
+                    <Column field="status" header="Status"></Column>
                     <Column style={{ flex: '0 0 4rem' }} body={lockTemplate}></Column>
                 </DataTable>
             </div>
