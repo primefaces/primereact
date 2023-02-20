@@ -9711,14 +9711,6 @@
                             "description": "Array of integer values to display inside rows per page dropdown."
                         },
                         {
-                            "name": "scrollDirection",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "\"both\" | \"horizontal\" | \"vertical\"",
-                            "default": "vertical|horizontal",
-                            "description": "Orientation of the scrolling, options are \"vertical\", \"horizontal\" and \"both\"."
-                        },
-                        {
                             "name": "scrollHeight",
                             "optional": true,
                             "readonly": false,
