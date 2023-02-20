@@ -19,9 +19,9 @@ export function MultipleCellsSelectionDoc(props) {
         basic: `
 <InputSwitch checked={metaKey} onChange={(e) => setMetaKey(e.value)} />
 
-<DataTable value={products} cellSelection selectionMode="multiple" selection={selectedCells} 
-        onSelectionChange={(e) => setSelectedCells(e.value)} 
-        metaKeySelection={metaKey} dragSelection>
+<DataTable value={products} cellSelection selectionMode="multiple" selection={selectedCells}
+        onSelectionChange={(e) => setSelectedCells(e.value)}
+        metaKeySelection={metaKey} dragSelection tableStyle={{ minWidth: '50rem' }}>
     <Column field="code" header="Code"></Column>
     <Column field="name" header="Name"></Column>
     <Column field="category" header="Category"></Column>
@@ -50,9 +50,9 @@ export default function MultipleCellsSelectionDemo() {
                 <InputSwitch inputId="input-metakey" checked={metaKey} onChange={(e) => setMetaKey(e.value)} />
                 <label htmlFor="input-metakey">MetaKey</label>
             </div>
-            <DataTable value={products} cellSelection selectionMode="multiple" selection={selectedCells} 
-                    onSelectionChange={(e) => setSelectedCells(e.value)} 
-                    metaKeySelection={metaKey} dragSelection>
+            <DataTable value={products} cellSelection selectionMode="multiple" selection={selectedCells}
+                    onSelectionChange={(e) => setSelectedCells(e.value)}
+                    metaKeySelection={metaKey} dragSelection tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>
@@ -97,9 +97,9 @@ export default function MultipleCellsSelectionDemo() {
                 <InputSwitch inputId="input-metakey" checked={metaKey} onChange={(e: InputSwitchChangeEvent) => setMetaKey(e.value)} />
                 <label htmlFor="input-metakey">MetaKey</label>
             </div>
-            <DataTable value={products} cellSelection selectionMode="multiple" selection={selectedCells} 
-                    onSelectionChange={(e: DataTableSelectionChangeEvent) => setSelectedCells(e.value)} 
-                    metaKeySelection={metaKey} dragSelection>
+            <DataTable value={products} cellSelection selectionMode="multiple" selection={selectedCells}
+                    onSelectionChange={(e: DataTableSelectionChangeEvent) => setSelectedCells(e.value)}
+                    metaKeySelection={metaKey} dragSelection tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>
@@ -152,6 +152,7 @@ export default function MultipleCellsSelectionDemo() {
                     }}
                     metaKeySelection={metaKey}
                     dragSelection
+                    tableStyle={{ minWidth: '50rem' }}
                 >
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>

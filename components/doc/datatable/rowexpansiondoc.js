@@ -134,10 +134,10 @@ export function RowExpansionDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={products} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)} 
-        onRowExpand={onRowExpand} onRowCollapse={onRowCollapse} rowExpansionTemplate={rowExpansionTemplate} 
-        dataKey="id" header={header}>
-    <Column expander={allowExpansion} style={{ width: '3rem' }} />
+<DataTable value={products} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
+        onRowExpand={onRowExpand} onRowCollapse={onRowCollapse} rowExpansionTemplate={rowExpansionTemplate}
+        dataKey="id" header={header} tableStyle={{ minWidth: '60rem' }}>
+    <Column expander={allowExpansion} style={{ width: '5rem' }} />
     <Column field="name" header="Name" sortable />
     <Column header="Image" body={imageBodyTemplate} />
     <Column field="price" header="Price" sortable body={priceBodyTemplate} />
@@ -282,10 +282,10 @@ export default function RowExpansionDemo() {
     return (
         <div className="card">
             <Toast ref={toast} />
-            <DataTable value={products} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)} 
-                    onRowExpand={onRowExpand} onRowCollapse={onRowCollapse} rowExpansionTemplate={rowExpansionTemplate} 
-                    dataKey="id" header={header}>
-                <Column expander={allowExpansion} style={{ width: '3rem' }} />
+            <DataTable value={products} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
+                    onRowExpand={onRowExpand} onRowCollapse={onRowCollapse} rowExpansionTemplate={rowExpansionTemplate}
+                    dataKey="id" header={header} tableStyle={{ minWidth: '60rem' }}>
+                <Column expander={allowExpansion} style={{ width: '5rem' }} />
                 <Column field="name" header="Name" sortable />
                 <Column header="Image" body={imageBodyTemplate} />
                 <Column field="price" header="Price" sortable body={priceBodyTemplate} />
@@ -457,10 +457,10 @@ export default function RowExpansionDemo() {
     return (
         <div className="card">
             <Toast ref={toast} />
-            <DataTable value={products} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)} 
-                    onRowExpand={onRowExpand} onRowCollapse={onRowCollapse} rowExpansionTemplate={rowExpansionTemplate} 
-                    dataKey="id" header={header}>
-                <Column expander={allowExpansion} style={{ width: '3rem' }} />
+            <DataTable value={products} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
+                    onRowExpand={onRowExpand} onRowCollapse={onRowCollapse} rowExpansionTemplate={rowExpansionTemplate}
+                    dataKey="id" header={header} tableStyle={{ minWidth: '60rem' }}>
+                <Column expander={allowExpansion} style={{ width: '5rem' }} />
                 <Column field="name" header="Name" sortable />
                 <Column header="Image" body={imageBodyTemplate} />
                 <Column field="price" header="Price" sortable body={priceBodyTemplate} />
@@ -503,8 +503,18 @@ export default function RowExpansionDemo() {
             </DocSectionText>
             <div className="card">
                 <Toast ref={toast} />
-                <DataTable value={products} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)} onRowExpand={onRowExpand} onRowCollapse={onRowCollapse} rowExpansionTemplate={rowExpansionTemplate} dataKey="id" header={header}>
-                    <Column expander={allowExpansion} style={{ width: '3rem' }} />
+                <DataTable
+                    value={products}
+                    expandedRows={expandedRows}
+                    onRowToggle={(e) => setExpandedRows(e.data)}
+                    onRowExpand={onRowExpand}
+                    onRowCollapse={onRowCollapse}
+                    rowExpansionTemplate={rowExpansionTemplate}
+                    dataKey="id"
+                    header={header}
+                    tableStyle={{ minWidth: '60rem' }}
+                >
+                    <Column expander={allowExpansion} style={{ width: '5rem' }} />
                     <Column field="name" header="Name" sortable />
                     <Column header="Image" body={imageBodyTemplate} />
                     <Column field="price" header="Price" sortable body={priceBodyTemplate} />

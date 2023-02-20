@@ -14,7 +14,7 @@ export function GridLinesDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={products} showGridlines>
+<DataTable value={products} showGridlines tableStyle={{ minWidth: '50rem' }}>
     <Column field="code" header="Code"></Column>
     <Column field="name" header="Name"></Column>
     <Column field="category" header="Category"></Column>
@@ -36,7 +36,7 @@ export default function GridLinesDemo() {
 
     return (
         <div className="card">
-            <DataTable value={products} showGridlines>
+            <DataTable value={products} showGridlines tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>
@@ -74,7 +74,7 @@ export default function GridLinesDemo() {
 
     return (
         <div className="card">
-            <DataTable value={products} showGridlines>
+            <DataTable value={products} showGridlines tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>
@@ -109,7 +109,7 @@ export default function GridLinesDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <DataTable value={products} showGridlines>
+                <DataTable value={products} showGridlines tableStyle={{ minWidth: '50rem' }}>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>

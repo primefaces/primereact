@@ -20,7 +20,7 @@ export function DynamicColumnsDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={products}>
+<DataTable value={products} tableStyle={{ minWidth: '50rem' }}>
     {columns.map((col, i) => (
         <Column key={col.field} field={col.field} header={col.header} />
     ))}
@@ -47,7 +47,7 @@ export default function DynamicColumnsDemo() {
 
     return (
         <div className="card">
-            <DataTable value={products}>
+            <DataTable value={products} tableStyle={{ minWidth: '50rem' }}>
                 {columns.map((col, i) => (
                     <Column key={col.field} field={col.field} header={col.header} />
                 ))}
@@ -95,7 +95,7 @@ export default function DynamicColumnsDemo() {
 
     return (
         <div className="card">
-            <DataTable value={products}>
+            <DataTable value={products} tableStyle={{ minWidth: '50rem' }}>
                 {columns.map((col, i) => (
                     <Column key={col.field} field={col.field} header={col.header} />
                 ))}
@@ -127,7 +127,7 @@ export default function DynamicColumnsDemo() {
                 <p>Columns can be created programmatically.</p>
             </DocSectionText>
             <div className="card">
-                <DataTable value={products}>
+                <DataTable value={products} tableStyle={{ minWidth: '50rem' }}>
                     {columns.map((col, i) => (
                         <Column key={col.field} field={col.field} header={col.header} />
                     ))}

@@ -22,7 +22,7 @@ export function SizeDoc(props) {
     const code = {
         basic: `
 <SelectButton value={size} onChange={(e) => setSize(e.value)} options={sizeOptions} />
-<DataTable value={products} size={size}>
+<DataTable value={products} size={size} tableStyle={{ minWidth: '50rem' }}>
     <Column field="code" header="Code"></Column>
     <Column field="name" header="Name"></Column>
     <Column field="category" header="Category"></Column>
@@ -54,7 +54,7 @@ export default function SizeDemo() {
             <div className="flex justify-content-center mb-4">
                 <SelectButton value={size} onChange={(e) => setSize(e.value)} options={sizeOptions} />
             </div>
-            <DataTable value={products} size={size}>
+            <DataTable value={products} size={size} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>
@@ -107,7 +107,7 @@ export default function SizeDemo() {
             <div className="flex justify-content-center mb-4">
                 <SelectButton value={size} onChange={(e: SelectButtonChangeEvent) => setSize(e.value)} options={sizeOptions} />
             </div>
-            <DataTable value={products} size={size}>
+            <DataTable value={products} size={size} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>
@@ -117,7 +117,7 @@ export default function SizeDemo() {
     );
 }
             `,
-        data: `    
+        data: `
 {
     id: '1000',
     code: 'f230fh0g3',
@@ -143,7 +143,7 @@ export default function SizeDemo() {
                 <div className="flex justify-content-center mb-4">
                     <SelectButton value={size} onChange={(e) => setSize(e.value)} options={sizeOptions} />
                 </div>
-                <DataTable value={products} size={size}>
+                <DataTable value={products} size={size} tableStyle={{ minWidth: '50rem' }}>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>

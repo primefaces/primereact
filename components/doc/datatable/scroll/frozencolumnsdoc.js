@@ -24,19 +24,19 @@ export function FrozenColumnsDoc(props) {
 
     const code = {
         basic: `
-<ToggleButton checked={balanceFrozen} onChange={(e) => setBalanceFrozen(e.value)} 
+<ToggleButton checked={balanceFrozen} onChange={(e) => setBalanceFrozen(e.value)}
     onIcon="pi pi-lock" offIcon="pi pi-lock-open" onLabel="Balance" offLabel="Balance" />
-<DataTable value={customers} scrollable scrollHeight="400px" scrollDirection="both" className="mt-4">
-    <Column field="name" header="Name" style={{ width: '160px' }} frozen className="font-bold"></Column>
-    <Column field="id" header="Id" style={{ width: '100px' }}></Column>
-    <Column field="name" header="Name" style={{ width: '200px' }}></Column>
-    <Column field="country.name" header="Country" style={{ width: '200px' }}></Column>
-    <Column field="date" header="Date" style={{ width: '200px' }}></Column>
-    <Column field="company" header="Company" style={{ width: '200px' }}></Column>
-    <Column field="status" header="Status" style={{ width: '200px' }}></Column>
-    <Column field="activity" header="Activity" style={{ width: '200px' }}></Column>
-    <Column field="representative.name" header="Representative" style={{ width: '200px' }}></Column>
-    <Column field="balance" header="Balance" body={balanceTemplate} style={{ width: '120px' }} alignFrozen="right" frozen={balanceFrozen}></Column>
+<DataTable value={customers} scrollable scrollHeight="400px" scrollDirection="both" className="mt-4" tableStyle={{ minWidth: '50rem' }}>
+    <Column field="name" header="Name" style={{ minWidth: '160px' }} frozen className="font-bold"></Column>
+    <Column field="id" header="Id" style={{ minWidth: '100px' }}></Column>
+    <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
+    <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
+    <Column field="date" header="Date" style={{ minWidth: '200px' }}></Column>
+    <Column field="company" header="Company" style={{ minWidth: '200px' }}></Column>
+    <Column field="status" header="Status" style={{ minWidth: '200px' }}></Column>
+    <Column field="activity" header="Activity" style={{ minWidth: '200px' }}></Column>
+    <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
+    <Column field="balance" header="Balance" body={balanceTemplate} style={{ minWidth: '120px' }} alignFrozen="right" frozen={balanceFrozen}></Column>
 </DataTable>
         `,
         javascript: `
@@ -65,17 +65,17 @@ export default function FrozenColumnsDemo() {
     return (
         <div className="card">
             <ToggleButton checked={balanceFrozen} onChange={(e) => setBalanceFrozen(e.value)} onIcon="pi pi-lock" offIcon="pi pi-lock-open" onLabel="Balance" offLabel="Balance" />
-            <DataTable value={customers} scrollable scrollHeight="400px" scrollDirection="both" className="mt-4">
-                <Column field="name" header="Name" style={{ width: '160px' }} frozen className="font-bold"></Column>
-                <Column field="id" header="Id" style={{ width: '100px' }}></Column>
-                <Column field="name" header="Name" style={{ width: '200px' }}></Column>
-                <Column field="country.name" header="Country" style={{ width: '200px' }}></Column>
-                <Column field="date" header="Date" style={{ width: '200px' }}></Column>
-                <Column field="company" header="Company" style={{ width: '200px' }}></Column>
-                <Column field="status" header="Status" style={{ width: '200px' }}></Column>
-                <Column field="activity" header="Activity" style={{ width: '200px' }}></Column>
-                <Column field="representative.name" header="Representative" style={{ width: '200px' }}></Column>
-                <Column field="balance" header="Balance" body={balanceTemplate} style={{ width: '120px' }} alignFrozen="right" frozen={balanceFrozen}></Column>
+            <DataTable value={customers} scrollable scrollHeight="400px" scrollDirection="both" className="mt-4" tableStyle={{ minWidth: '50rem' }}>
+                <Column field="name" header="Name" style={{ minWidth: '160px' }} frozen className="font-bold"></Column>
+                <Column field="id" header="Id" style={{ minWidth: '100px' }}></Column>
+                <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
+                <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
+                <Column field="date" header="Date" style={{ minWidth: '200px' }}></Column>
+                <Column field="company" header="Company" style={{ minWidth: '200px' }}></Column>
+                <Column field="status" header="Status" style={{ minWidth: '200px' }}></Column>
+                <Column field="activity" header="Activity" style={{ minWidth: '200px' }}></Column>
+                <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
+                <Column field="balance" header="Balance" body={balanceTemplate} style={{ minWidth: '120px' }} alignFrozen="right" frozen={balanceFrozen}></Column>
             </DataTable>
         </div>
     );
@@ -120,17 +120,17 @@ export default function FrozenColumnsDemo() {
     return (
         <div className="card">
             <ToggleButton checked={balanceFrozen} onChange={(e) => setBalanceFrozen(e.value)} onIcon="pi pi-lock" offIcon="pi pi-lock-open" onLabel="Balance" offLabel="Balance" />
-            <DataTable value={customers} scrollable scrollHeight="400px" scrollDirection="both" className="mt-4">
-                <Column field="name" header="Name" style={{ width: '160px' }} frozen className="font-bold"></Column>
-                <Column field="id" header="Id" style={{ width: '100px' }}></Column>
-                <Column field="name" header="Name" style={{ width: '200px' }}></Column>
-                <Column field="country.name" header="Country" style={{ width: '200px' }}></Column>
-                <Column field="date" header="Date" style={{ width: '200px' }}></Column>
-                <Column field="company" header="Company" style={{ width: '200px' }}></Column>
-                <Column field="status" header="Status" style={{ width: '200px' }}></Column>
-                <Column field="activity" header="Activity" style={{ width: '200px' }}></Column>
-                <Column field="representative.name" header="Representative" style={{ width: '200px' }}></Column>
-                <Column field="balance" header="Balance" body={balanceTemplate} style={{ width: '120px' }} alignFrozen="right" frozen={balanceFrozen}></Column>
+            <DataTable value={customers} scrollable scrollHeight="400px" scrollDirection="both" className="mt-4" tableStyle={{ minWidth: '50rem' }}>
+                <Column field="name" header="Name" style={{ minWidth: '160px' }} frozen className="font-bold"></Column>
+                <Column field="id" header="Id" style={{ minWidth: '100px' }}></Column>
+                <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
+                <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
+                <Column field="date" header="Date" style={{ minWidth: '200px' }}></Column>
+                <Column field="company" header="Company" style={{ minWidth: '200px' }}></Column>
+                <Column field="status" header="Status" style={{ minWidth: '200px' }}></Column>
+                <Column field="activity" header="Activity" style={{ minWidth: '200px' }}></Column>
+                <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
+                <Column field="balance" header="Balance" body={balanceTemplate} style={{ minWidth: '120px' }} alignFrozen="right" frozen={balanceFrozen}></Column>
             </DataTable>
         </div>
     );
@@ -168,17 +168,17 @@ export default function FrozenColumnsDemo() {
             </DocSectionText>
             <div className="card">
                 <ToggleButton checked={balanceFrozen} onChange={(e) => setBalanceFrozen(e.value)} onIcon="pi pi-lock" offIcon="pi pi-lock-open" onLabel="Balance" offLabel="Balance" />
-                <DataTable value={customers} scrollable scrollHeight="400px" scrollDirection="both" className="mt-4">
-                    <Column field="name" header="Name" style={{ width: '160px' }} frozen className="font-bold"></Column>
-                    <Column field="id" header="Id" style={{ width: '100px' }}></Column>
-                    <Column field="name" header="Name" style={{ width: '200px' }}></Column>
-                    <Column field="country.name" header="Country" style={{ width: '200px' }}></Column>
-                    <Column field="date" header="Date" style={{ width: '200px' }}></Column>
-                    <Column field="company" header="Company" style={{ width: '200px' }}></Column>
-                    <Column field="status" header="Status" style={{ width: '200px' }}></Column>
-                    <Column field="activity" header="Activity" style={{ width: '200px' }}></Column>
-                    <Column field="representative.name" header="Representative" style={{ width: '200px' }}></Column>
-                    <Column field="balance" header="Balance" body={balanceTemplate} style={{ width: '120px' }} alignFrozen="right" frozen={balanceFrozen}></Column>
+                <DataTable value={customers} scrollable scrollHeight="400px" scrollDirection="both" className="mt-4" tableStyle={{ minWidth: '50rem' }}>
+                    <Column field="name" header="Name" style={{ minWidth: '160px' }} frozen className="font-bold"></Column>
+                    <Column field="id" header="Id" style={{ minWidth: '100px' }}></Column>
+                    <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
+                    <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
+                    <Column field="date" header="Date" style={{ minWidth: '200px' }}></Column>
+                    <Column field="company" header="Company" style={{ minWidth: '200px' }}></Column>
+                    <Column field="status" header="Status" style={{ minWidth: '200px' }}></Column>
+                    <Column field="activity" header="Activity" style={{ minWidth: '200px' }}></Column>
+                    <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
+                    <Column field="balance" header="Balance" body={balanceTemplate} style={{ minWidth: '120px' }} alignFrozen="right" frozen={balanceFrozen}></Column>
                 </DataTable>
             </div>
             <DocSectionCode code={code} service={['CustomerService']} />

@@ -80,7 +80,7 @@ export function ExportDoc(props) {
 <Button type="button" icon="pi pi-file-excel" severity="success" rounded onClick={exportExcel} data-pr-tooltip="XLS" />
 <Button type="button" icon="pi pi-file-pdf" severity="warning" rounded onClick={exportPdf} data-pr-tooltip="PDF" />
 
-<DataTable ref={dt} value={products} header={header}>
+<DataTable ref={dt} value={products} header={header} tableStyle={{ minWidth: '50rem' }}>
     {cols.map((col, index) => (
         <Column key={index} field={col.field} header={col.header} />
     ))}
@@ -165,7 +165,7 @@ export default function ExportDemo() {
         <div className="card">
             <Tooltip target=".export-buttons>button" position="bottom" />
 
-            <DataTable ref={dt} value={products} header={header}>
+            <DataTable ref={dt} value={products} header={header} tableStyle={{ minWidth: '50rem' }}>
                 {cols.map((col, index) => (
                     <Column key={index} field={col.field} header={col.header} />
                 ))}
@@ -271,7 +271,7 @@ export default function ExportDemo() {
         <div className="card">
             <Tooltip target=".export-buttons>button" position="bottom" />
 
-            <DataTable ref={dt} value={products} header={header}>
+            <DataTable ref={dt} value={products} header={header} tableStyle={{ minWidth: '50rem' }}>
                 {cols.map((col, index) => (
                     <Column key={index} field={col.field} header={col.header} />
                 ))}
@@ -281,7 +281,7 @@ export default function ExportDemo() {
 }
         `,
         data: `
-/* ProductService */        
+/* ProductService */
 {
     id: '1000',
     code: 'f230fh0g3',
@@ -308,7 +308,7 @@ export default function ExportDemo() {
             <div className="card">
                 <Tooltip target=".export-buttons>button" position="bottom" />
 
-                <DataTable ref={dt} value={products} header={header}>
+                <DataTable ref={dt} value={products} header={header} tableStyle={{ minWidth: '50rem' }}>
                     {cols.map((col, index) => (
                         <Column key={index} field={col.field} header={col.header} />
                     ))}

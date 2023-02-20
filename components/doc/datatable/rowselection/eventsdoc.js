@@ -26,7 +26,7 @@ export function RowSelectEventsDoc(props) {
     const code = {
         basic: `
 <DataTable value={products} selectionMode="single" selection={selectedProduct} onSelectionChange={(e) => setSelectedProduct(e.value)} dataKey="id"
-        onRowSelect={onRowSelect} onRowUnselect={onRowUnselect} metaKeySelection={false}>
+        onRowSelect={onRowSelect} onRowUnselect={onRowUnselect} metaKeySelection={false} tableStyle={{ minWidth: '50rem' }}>
     <Column field="code" header="Code"></Column>
     <Column field="name" header="Name"></Column>
     <Column field="category" header="Category"></Column>
@@ -61,7 +61,7 @@ export default function RowSelectEventsDemo() {
         <div className="card">
             <Toast ref={toast} />
             <DataTable value={products} selectionMode="single" selection={selectedProduct} onSelectionChange={(e) => setSelectedProduct(e.value)} dataKey="id"
-                    onRowSelect={onRowSelect} onRowUnselect={onRowUnselect} metaKeySelection={false}>
+                    onRowSelect={onRowSelect} onRowUnselect={onRowUnselect} metaKeySelection={false} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>
@@ -112,7 +112,7 @@ export default function RowSelectEventsDemo() {
         <div className="card">
             <Toast ref={toast} />
             <DataTable value={products} selectionMode="single" selection={selectedProduct} onSelectionChange={(e: DataTableSelectionChangeEvent<Product>) => setSelectedProduct(e.value)} dataKey="id"
-                    onRowSelect={onRowSelect} onRowUnselect={onRowUnselect} metaKeySelection={false}>
+                    onRowSelect={onRowSelect} onRowUnselect={onRowUnselect} metaKeySelection={false} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>
@@ -148,7 +148,17 @@ export default function RowSelectEventsDemo() {
             </DocSectionText>
             <Toast ref={toast} />
             <div className="card">
-                <DataTable value={products} selectionMode="single" selection={selectedProduct} onSelectionChange={(e) => setSelectedProduct(e.value)} dataKey="id" onRowSelect={onRowSelect} onRowUnselect={onRowUnselect} metaKeySelection={false}>
+                <DataTable
+                    value={products}
+                    selectionMode="single"
+                    selection={selectedProduct}
+                    onSelectionChange={(e) => setSelectedProduct(e.value)}
+                    dataKey="id"
+                    onRowSelect={onRowSelect}
+                    onRowUnselect={onRowUnselect}
+                    metaKeySelection={false}
+                    tableStyle={{ minWidth: '50rem' }}
+                >
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>

@@ -24,7 +24,7 @@ export function ReorderDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={products} reorderableColumns reorderableRows onRowReorder={(e) => setProducts(e.value)}>
+<DataTable value={products} reorderableColumns reorderableRows onRowReorder={(e) => setProducts(e.value)} tableStyle={{ minWidth: '50rem' }}>
     <Column rowReorder style={{ width: '3rem' }} />
     {dynamicColumns}
 </DataTable>
@@ -54,7 +54,7 @@ export default function ReorderDemo() {
 
     return (
         <div className="card">
-            <DataTable value={products} reorderableColumns reorderableRows onRowReorder={(e) => setProducts(e.value)}>
+            <DataTable value={products} reorderableColumns reorderableRows onRowReorder={(e) => setProducts(e.value)} tableStyle={{ minWidth: '50rem' }}>
                 <Column rowReorder style={{ width: '3rem' }} />
                 {dynamicColumns}
             </DataTable>
@@ -105,7 +105,7 @@ export default function ReorderDemo() {
 
     return (
         <div className="card">
-            <DataTable value={products} reorderableColumns reorderableRows onRowReorder={(e) => setProducts(e.value)}>
+            <DataTable value={products} reorderableColumns reorderableRows onRowReorder={(e) => setProducts(e.value)} tableStyle={{ minWidth: '50rem' }}>
                 <Column rowReorder style={{ width: '3rem' }} />
                 {dynamicColumns}
             </DataTable>
@@ -113,7 +113,7 @@ export default function ReorderDemo() {
     );
 }
         `,
-        data: `       
+        data: `
 {
     id: '1000',
     code: 'f230fh0g3',
@@ -142,7 +142,7 @@ export default function ReorderDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <DataTable value={products} reorderableColumns reorderableRows onRowReorder={(e) => setProducts(e.value)}>
+                <DataTable value={products} reorderableColumns reorderableRows onRowReorder={(e) => setProducts(e.value)} tableStyle={{ minWidth: '50rem' }}>
                     <Column rowReorder style={{ width: '3rem' }} />
                     {dynamicColumns}
                 </DataTable>

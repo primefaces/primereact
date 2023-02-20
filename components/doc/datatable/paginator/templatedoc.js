@@ -19,7 +19,7 @@ export function PaginatorTemplateDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={customers} paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]} 
+<DataTable value={customers} paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]} tableStyle={{ minWidth: '50rem' }}
         paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
         currentPageReportTemplate="{first} to {last} of {totalRecords}" paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}>
     <Column field="name" header="Name" style={{ width: '25%' }}></Column>
@@ -47,7 +47,7 @@ export default function PaginatorTemplateDemo() {
 
     return (
         <div className="card">
-            <DataTable value={customers} paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]} 
+            <DataTable value={customers} paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]} tableStyle={{ minWidth: '50rem' }}
                     paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
                     currentPageReportTemplate="{first} to {last} of {totalRecords}" paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}>
                 <Column field="name" header="Name" style={{ width: '25%' }}></Column>
@@ -101,7 +101,7 @@ export default function PaginatorTemplateDemo() {
 
     return (
         <div className="card">
-            <DataTable value={customers} paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]} 
+            <DataTable value={customers} paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]} tableStyle={{ minWidth: '50rem' }}
                     paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
                     currentPageReportTemplate="{first} to {last} of {totalRecords}" paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}>
                 <Column field="name" header="Name" style={{ width: '25%' }}></Column>
@@ -154,6 +154,7 @@ export default function PaginatorTemplateDemo() {
                     currentPageReportTemplate="{first} to {last} of {totalRecords}"
                     paginatorLeft={paginatorLeft}
                     paginatorRight={paginatorRight}
+                    tableStyle={{ minWidth: '50rem' }}
                 >
                     <Column field="name" header="Name" style={{ width: '25%' }}></Column>
                     <Column field="country.name" header="Country" style={{ width: '25%' }}></Column>

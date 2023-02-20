@@ -14,7 +14,7 @@ export function SingleColumnDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={products}>
+<DataTable value={products} tableStyle={{ minWidth: '50rem' }}>
     <Column field="code" header="Code" sortable style={{ width: '25%' }}></Column>
     <Column field="name" header="Name" sortable style={{ width: '25%' }}></Column>
     <Column field="category" header="Category" sortable style={{ width: '25%' }}></Column>
@@ -36,7 +36,7 @@ export default function SingleColumnDemo() {
 
     return (
         <div className="card">
-            <DataTable value={products}>
+            <DataTable value={products} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code" sortable style={{ width: '25%' }}></Column>
                 <Column field="name" header="Name" sortable style={{ width: '25%' }}></Column>
                 <Column field="category" header="Category" sortable style={{ width: '25%' }}></Column>
@@ -74,7 +74,7 @@ export default function SingleColumnDemo() {
 
     return (
         <div className="card">
-            <DataTable value={products}>
+            <DataTable value={products} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code" sortable style={{ width: '25%' }}></Column>
                 <Column field="name" header="Name" sortable style={{ width: '25%' }}></Column>
                 <Column field="category" header="Category" sortable style={{ width: '25%' }}></Column>
@@ -109,7 +109,7 @@ export default function SingleColumnDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <DataTable value={products}>
+                <DataTable value={products} tableStyle={{ minWidth: '50rem' }}>
                     <Column field="code" header="Code" sortable style={{ width: '25%' }}></Column>
                     <Column field="name" header="Name" sortable style={{ width: '25%' }}></Column>
                     <Column field="category" header="Category" sortable style={{ width: '25%' }}></Column>

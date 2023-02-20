@@ -74,7 +74,7 @@ export function RowEditDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={products} editMode="row" dataKey="id" onRowEditComplete={onRowEditComplete}>
+<DataTable value={products} editMode="row" dataKey="id" onRowEditComplete={onRowEditComplete} tableStyle={{ minWidth: '50rem' }}>
     <Column field="code" header="Code" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
     <Column field="name" header="Name" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
     <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} editor={(options) => statusEditor(options)} style={{ width: '20%' }}></Column>
@@ -157,7 +157,7 @@ export default function RowEditingDemo() {
 
     return (
         <div className="card p-fluid">
-            <DataTable value={products} editMode="row" dataKey="id" onRowEditComplete={onRowEditComplete}>
+            <DataTable value={products} editMode="row" dataKey="id" onRowEditComplete={onRowEditComplete} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
                 <Column field="name" header="Name" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
                 <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} editor={(options) => statusEditor(options)} style={{ width: '20%' }}></Column>
@@ -256,7 +256,7 @@ export default function RowEditingDemo() {
 
     return (
         <div className="card p-fluid">
-            <DataTable value={products} editMode="row" dataKey="id" onRowEditComplete={onRowEditComplete}>
+            <DataTable value={products} editMode="row" dataKey="id" onRowEditComplete={onRowEditComplete} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
                 <Column field="name" header="Name" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
                 <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} editor={(options) => statusEditor(options)} style={{ width: '20%' }}></Column>
@@ -267,7 +267,7 @@ export default function RowEditingDemo() {
     );
 }
         `,
-        data: `       
+        data: `
 {
     id: '1000',
     code: 'f230fh0g3',
@@ -293,7 +293,7 @@ export default function RowEditingDemo() {
                 </p>
             </DocSectionText>
             <div className="card p-fluid">
-                <DataTable value={products} editMode="row" dataKey="id" onRowEditComplete={onRowEditComplete}>
+                <DataTable value={products} editMode="row" dataKey="id" onRowEditComplete={onRowEditComplete} tableStyle={{ minWidth: '50rem' }}>
                     <Column field="code" header="Code" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
                     <Column field="name" header="Name" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
                     <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} editor={(options) => statusEditor(options)} style={{ width: '20%' }}></Column>

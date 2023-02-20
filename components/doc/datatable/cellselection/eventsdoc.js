@@ -27,9 +27,9 @@ export function CellSelectEventsDoc(props) {
         basic: `
 <Toast ref={toast} />
 
-<DataTable value={products} cellSelection selectionMode="single" selection={selectedCell} 
+<DataTable value={products} cellSelection selectionMode="single" selection={selectedCell}
         onSelectionChange={(e) => setSelectedCell(e.value)} metaKeySelection={false}
-        onCellSelect={onCellSelect} onCellUnselect={onCellUnselect}>
+        onCellSelect={onCellSelect} onCellUnselect={onCellUnselect} tableStyle={{ minWidth: '50rem' }}>
     <Column field="code" header="Code"></Column>
     <Column field="name" header="Name"></Column>
     <Column field="category" header="Category"></Column>
@@ -63,9 +63,9 @@ export default function CellSelectEventsDemo() {
     return (
         <div className="card">
             <Toast ref={toast} />
-            <DataTable value={products} cellSelection selectionMode="single" selection={selectedCell} 
+            <DataTable value={products} cellSelection selectionMode="single" selection={selectedCell}
                     onSelectionChange={(e) => setSelectedCell(e.value)} metaKeySelection={false}
-                    onCellSelect={onCellSelect} onCellUnselect={onCellUnselect}>
+                    onCellSelect={onCellSelect} onCellUnselect={onCellUnselect} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>
@@ -115,9 +115,9 @@ export default function CellSelectEventsDemo() {
     return (
         <div className="card">
             <Toast ref={toast} />
-            <DataTable value={products} cellSelection selectionMode="single" selection={selectedCell} 
+            <DataTable value={products} cellSelection selectionMode="single" selection={selectedCell}
                     onSelectionChange={(e: DataTableSelectionChangeEvent) => setSelectedCell(e.value)} metaKeySelection={false}
-                    onCellSelect={onCellSelect} onCellUnselect={onCellUnselect}>
+                    onCellSelect={onCellSelect} onCellUnselect={onCellUnselect} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>
@@ -164,6 +164,7 @@ export default function CellSelectEventsDemo() {
                     metaKeySelection={false}
                     onCellSelect={onCellSelect}
                     onCellUnselect={onCellUnselect}
+                    tableStyle={{ minWidth: '50rem' }}
                 >
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>

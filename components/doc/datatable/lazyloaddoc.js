@@ -103,9 +103,9 @@ export function LazyLoadDoc(props) {
     const code = {
         basic: `
 <DataTable value={customers} lazy filterDisplay="row" dataKey="id" paginator
-        first={lazyState.first} rows={10} totalRecords={totalRecords} onPage={onPage} 
+        first={lazyState.first} rows={10} totalRecords={totalRecords} onPage={onPage}
         onSort={onSort} sortField={lazyState.sortField} sortOrder={lazyState.sortOrder}
-        onFilter={onFilter} filters={lazyState.filters} loading={loading}
+        onFilter={onFilter} filters={lazyState.filters} loading={loading} tableStyle={{ minWidth: '75rem' }}
         selection={selectedCustomers} onSelectionChange={onSelectionChange} selectAll={selectAll} onSelectAllChange={onSelectAllChange}>
     <Column selectionMode="multiple" headerStyle={{ width: '3rem' }} />
     <Column field="name" header="Name" sortable filter filterPlaceholder="Search" />
@@ -218,9 +218,9 @@ export default function LazyLoadDemo() {
     return (
         <div className="card">
             <DataTable value={customers} lazy filterDisplay="row" dataKey="id" paginator
-                    first={lazyState.first} rows={10} totalRecords={totalRecords} onPage={onPage} 
+                    first={lazyState.first} rows={10} totalRecords={totalRecords} onPage={onPage}
                     onSort={onSort} sortField={lazyState.sortField} sortOrder={lazyState.sortOrder}
-                    onFilter={onFilter} filters={lazyState.filters} loading={loading}
+                    onFilter={onFilter} filters={lazyState.filters} loading={loading} tableStyle={{ minWidth: '75rem' }}
                     selection={selectedCustomers} onSelectionChange={onSelectionChange} selectAll={selectAll} onSelectAllChange={onSelectAllChange}>
                 <Column selectionMode="multiple" headerStyle={{ width: '3rem' }} />
                 <Column field="name" header="Name" sortable filter filterPlaceholder="Search" />
@@ -369,9 +369,9 @@ export default function LazyLoadDemo() {
     return (
         <div className="card">
             <DataTable value={customers} lazy filterDisplay="row" dataKey="id" paginator
-                    first={lazyState.first} rows={10} totalRecords={totalRecords} onPage={onPage} 
+                    first={lazyState.first} rows={10} totalRecords={totalRecords} onPage={onPage}
                     onSort={onSort} sortField={lazyState.sortField} sortOrder={lazyState.sortOrder}
-                    onFilter={onFilter} filters={lazyState.filters} loading={loading}
+                    onFilter={onFilter} filters={lazyState.filters} loading={loading} tableStyle={{ minWidth: '75rem' }}
                     selection={selectedCustomers} onSelectionChange={onSelectionChange} selectAll={selectAll} onSelectAllChange={onSelectAllChange}>
                 <Column selectionMode="multiple" headerStyle={{ width: '3rem' }} />
                 <Column field="name" header="Name" sortable filter filterPlaceholder="Search" />
@@ -438,6 +438,7 @@ export default function LazyLoadDemo() {
                     onFilter={onFilter}
                     filters={lazyState.filters}
                     loading={loading}
+                    tableStyle={{ minWidth: '75rem' }}
                     selection={selectedCustomers}
                     onSelectionChange={onSelectionChange}
                     selectAll={selectAll}

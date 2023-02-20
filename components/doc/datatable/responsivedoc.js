@@ -14,7 +14,7 @@ export function ResponsiveDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={products} responsiveLayout="scroll" header={<h3 className="m-0">Scroll</h3>} className="mb-5">
+<DataTable value={products} responsiveLayout="scroll" header={<h3 className="m-0">Scroll</h3>} className="mb-5" tableStyle={{ minWidth: '50rem' }}>
     <Column field="code" header="Code"></Column>
     <Column field="name" header="Name" bodyClassName="white-space-nowrap"></Column>
     <Column field="category" header="Category"></Column>
@@ -43,7 +43,7 @@ export default function ResponsiveDemo() {
 
     return (
         <div className="card">
-            <DataTable value={products} responsiveLayout="scroll" header={<h3 className="m-0">Scroll</h3>} className="mb-5">
+            <DataTable value={products} responsiveLayout="scroll" header={<h3 className="m-0">Scroll</h3>} className="mb-5" tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name" bodyClassName="white-space-nowrap"></Column>
                 <Column field="category" header="Category"></Column>
@@ -81,14 +81,14 @@ interface Product {
 
 export default function ResponsiveDemo() {
     const [products, setProducts] = useState<Product[]>([]);
-    
+
     useEffect(() => {
         ProductService.getProductsSmall().then((data) => setProducts(data));
     }, []);
 
     return (
         <div className="card">
-            <DataTable value={products} responsiveLayout="scroll" header={<h3 className="m-0">Scroll</h3>} className="mb-5">
+            <DataTable value={products} responsiveLayout="scroll" header={<h3 className="m-0">Scroll</h3>} className="mb-5" tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name" bodyClassName="white-space-nowrap"></Column>
                 <Column field="category" header="Category"></Column>
@@ -131,7 +131,7 @@ export default function ResponsiveDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <DataTable value={products} responsiveLayout="scroll" header={<h3 className="m-0">Scroll</h3>} className="mb-5">
+                <DataTable value={products} responsiveLayout="scroll" header={<h3 className="m-0">Scroll</h3>} className="mb-5" tableStyle={{ minWidth: '50rem' }}>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name" bodyClassName="white-space-nowrap"></Column>
                     <Column field="category" header="Category"></Column>

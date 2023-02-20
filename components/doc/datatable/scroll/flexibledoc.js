@@ -22,9 +22,9 @@ export function FlexibleScrollDoc(props) {
     const code = {
         basic: `
 <Button label="Show" icon="pi pi-external-link" onClick={() => setDialogVisible(true)} />
-<Dialog header="Flex Scroll" visible={dialogVisible} style={{ width: '75vw' }} maximizable 
+<Dialog header="Flex Scroll" visible={dialogVisible} style={{ width: '75vw' }} maximizable
         modal contentStyle={{ height: '300px' }} onHide={() => setDialogVisible(false)} footer={dialogFooterTemplate}>
-    <DataTable value={customers} scrollable scrollHeight="flex">
+    <DataTable value={customers} scrollable scrollHeight="flex" tableStyle={{ minWidth: '50rem' }}>
         <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
         <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
         <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
@@ -55,9 +55,9 @@ export default function FlexibleScrollDemo() {
     return (
         <div className="card">
         <Button label="Show" icon="pi pi-external-link" onClick={() => setDialogVisible(true)} />
-        <Dialog header="Flex Scroll" visible={dialogVisible} style={{ width: '75vw' }} maximizable 
+        <Dialog header="Flex Scroll" visible={dialogVisible} style={{ width: '75vw' }} maximizable
                 modal contentStyle={{ height: '300px' }} onHide={() => setDialogVisible(false)} footer={dialogFooterTemplate}>
-            <DataTable value={customers} scrollable scrollHeight="flex">
+            <DataTable value={customers} scrollable scrollHeight="flex" tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
                 <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
                 <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
@@ -104,9 +104,9 @@ export default function FlexibleScrollDemo() {
     return (
         <div className="card">
             <Button label="Show" icon="pi pi-external-link" onClick={() => setDialogVisible(true)} />
-            <Dialog header="Flex Scroll" visible={dialogVisible} style={{ width: '75vw' }} maximizable 
+            <Dialog header="Flex Scroll" visible={dialogVisible} style={{ width: '75vw' }} maximizable
                     modal contentStyle={{ height: '300px' }} onHide={() => setDialogVisible(false)} footer={dialogFooterTemplate}>
-                <DataTable value={customers} scrollable scrollHeight="flex">
+                <DataTable value={customers} scrollable scrollHeight="flex" tableStyle={{ minWidth: '50rem' }}>
                     <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
                     <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
                     <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
@@ -151,7 +151,7 @@ export default function FlexibleScrollDemo() {
             <div className="card flex justify-content-center">
                 <Button label="Show" icon="pi pi-external-link" onClick={() => setDialogVisible(true)} />
                 <Dialog header="Flex Scroll" visible={dialogVisible} style={{ width: '75vw' }} maximizable modal contentStyle={{ height: '300px' }} onHide={() => setDialogVisible(false)} footer={dialogFooterTemplate}>
-                    <DataTable value={customers} scrollable scrollHeight="flex">
+                    <DataTable value={customers} scrollable scrollHeight="flex" tableStyle={{ minWidth: '50rem' }}>
                         <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
                         <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
                         <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>

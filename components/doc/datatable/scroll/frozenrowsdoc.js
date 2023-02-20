@@ -61,7 +61,7 @@ export function FrozenRowsDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={customers} frozenValue={lockedCustomers} scrollable scrollHeight="400px">
+<DataTable value={customers} frozenValue={lockedCustomers} scrollable scrollHeight="400px" tableStyle={{ minWidth: '50rem' }}>
     <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
     <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
     <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
@@ -131,7 +131,7 @@ export default function FrozenRowsDemo() {
 
     return (
         <div className="card">
-            <DataTable value={customers} frozenValue={lockedCustomers} scrollable scrollHeight="400px">
+            <DataTable value={customers} frozenValue={lockedCustomers} scrollable scrollHeight="400px" tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
                 <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
                 <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
@@ -217,7 +217,7 @@ export default function FrozenRowsDemo() {
 
     return (
         <div className="card">
-            <DataTable value={customers} frozenValue={lockedCustomers} scrollable scrollHeight="400px">
+            <DataTable value={customers} frozenValue={lockedCustomers} scrollable scrollHeight="400px" tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
                 <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
                 <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
@@ -257,7 +257,7 @@ export default function FrozenRowsDemo() {
                 <p>Frozen Rows demo content.</p>
             </DocSectionText>
             <div className="card">
-                <DataTable value={customers} frozenValue={lockedCustomers} scrollable scrollHeight="400px">
+                <DataTable value={customers} frozenValue={lockedCustomers} scrollable scrollHeight="400px" tableStyle={{ minWidth: '50rem' }}>
                     <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
                     <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
                     <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>

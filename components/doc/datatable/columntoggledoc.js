@@ -30,7 +30,7 @@ export function ColumnToggleDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={products} header={header}>
+<DataTable value={products} header={header} tableStyle={{ minWidth: '50rem' }}>
     <Column field="code" header="Code" />
     {visibleColumns.map((col) => (
         <Column key={col.field} field={col.field} header={col.header} />
@@ -68,7 +68,7 @@ export default function ColumnToggleDemo() {
 
     return (
         <div className="card">
-            <DataTable value={products} header={header}>
+            <DataTable value={products} header={header} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code" />
                 {visibleColumns.map((col) => (
                     <Column key={col.field} field={col.field} header={col.header} />
@@ -127,7 +127,7 @@ export default function ColumnToggleDemo() {
 
     return (
         <div className="card">
-            <DataTable value={products} header={header}>
+            <DataTable value={products} header={header} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code" />
                 {visibleColumns.map((col) => (
                     <Column key={col.field} field={col.field} header={col.header} />
@@ -160,7 +160,7 @@ export default function ColumnToggleDemo() {
                 <p>Column visibility based on a condition can be implemented with dynamic columns, in this sample a MultiSelect is used to manage the visible columns.</p>
             </DocSectionText>
             <div className="card">
-                <DataTable value={products} header={header}>
+                <DataTable value={products} header={header} tableStyle={{ minWidth: '50rem' }}>
                     <Column field="code" header="Code" />
                     {visibleColumns.map((col) => (
                         <Column key={col.field} field={col.field} header={col.header} />

@@ -14,7 +14,7 @@ export function FitModeDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={products} resizableColumns showGridlines>
+<DataTable value={products} resizableColumns showGridlines tableStyle={{ minWidth: '50rem' }}>
     <Column field="code" header="Code"></Column>
     <Column field="name" header="Name"></Column>
     <Column field="category" header="Category"></Column>
@@ -36,7 +36,7 @@ export default function FitModeDemo() {
 
     return (
         <div className="card">
-            <DataTable value={products} resizableColumns showGridlines>
+            <DataTable value={products} resizableColumns showGridlines tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>
@@ -74,7 +74,7 @@ export default function FitModeDemo() {
 
     return (
         <div className="card">
-            <DataTable value={products} resizableColumns showGridlines>
+            <DataTable value={products} resizableColumns showGridlines tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>
@@ -110,7 +110,7 @@ export default function FitModeDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <DataTable value={products} resizableColumns showGridlines>
+                <DataTable value={products} resizableColumns showGridlines tableStyle={{ minWidth: '50rem' }}>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>

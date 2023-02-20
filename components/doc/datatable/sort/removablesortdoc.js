@@ -14,7 +14,7 @@ export function RemovableSortDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={products} removableSort>
+<DataTable value={products} removableSort tableStyle={{ minWidth: '50rem' }}>
     <Column field="code" header="Code" sortable style={{ width: '25%' }}></Column>
     <Column field="name" header="Name" sortable style={{ width: '25%' }}></Column>
     <Column field="category" header="Category" sortable style={{ width: '25%' }}></Column>
@@ -36,7 +36,7 @@ export default function RemovableSortDemo() {
 
     return (
         <div className="card">
-            <DataTable value={products} removableSort>
+            <DataTable value={products} removableSort tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code" sortable style={{ width: '25%' }}></Column>
                 <Column field="name" header="Name" sortable style={{ width: '25%' }}></Column>
                 <Column field="category" header="Category" sortable style={{ width: '25%' }}></Column>
@@ -74,7 +74,7 @@ export default function RemovableSortDemo() {
 
     return (
         <div className="card">
-            <DataTable value={products} removableSort>
+            <DataTable value={products} removableSort tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code" sortable style={{ width: '25%' }}></Column>
                 <Column field="name" header="Name" sortable style={{ width: '25%' }}></Column>
                 <Column field="category" header="Category" sortable style={{ width: '25%' }}></Column>
@@ -109,7 +109,7 @@ export default function RemovableSortDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <DataTable value={products} removableSort>
+                <DataTable value={products} removableSort tableStyle={{ minWidth: '50rem' }}>
                     <Column field="code" header="Code" sortable style={{ width: '25%' }}></Column>
                     <Column field="name" header="Name" sortable style={{ width: '25%' }}></Column>
                     <Column field="category" header="Category" sortable style={{ width: '25%' }}></Column>

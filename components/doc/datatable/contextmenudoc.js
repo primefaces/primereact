@@ -46,8 +46,8 @@ export function ContextMenuDoc(props) {
         basic: `
 <Toast ref={toast} />
 <ContextMenu model={menuModel} ref={cm} onHide={() => setSelectedProduct(null)} />
-<DataTable value={products} onContextMenu={(e) => cm.current.show(e.originalEvent)} c
-        ontextMenuSelection={selectedProduct} onContextMenuSelectionChange={(e) => setSelectedProduct(e.value)}>
+<DataTable value={products} onContextMenu={(e) => cm.current.show(e.originalEvent)}
+        contextMenuSelection={selectedProduct} onContextMenuSelectionChange={(e) => setSelectedProduct(e.value)} tableStyle={{ minWidth: '50rem' }}>
     <Column field="code" header="Code"></Column>
     <Column field="name" header="Name"></Column>
     <Column field="category" header="Category"></Column>
@@ -102,7 +102,7 @@ export default function ContextMenuDemo() {
             <Toast ref={toast} />
 
             <ContextMenu model={menuModel} ref={cm} onHide={() => setSelectedProduct(null)} />
-            <DataTable value={products} onContextMenu={(e) => cm.current.show(e.originalEvent)} contextMenuSelection={selectedProduct} onContextMenuSelectionChange={(e) => setSelectedProduct(e.value)}>
+            <DataTable value={products} onContextMenu={(e) => cm.current.show(e.originalEvent)} contextMenuSelection={selectedProduct} onContextMenuSelectionChange={(e) => setSelectedProduct(e.value)} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>
@@ -173,7 +173,7 @@ export default function ContextMenuDemo() {
             <Toast ref={toast} />
 
             <ContextMenu model={menuModel} ref={cm} onHide={() => setSelectedProduct(null)} />
-            <DataTable value={products} onContextMenu={(e) => cm.current.show(e.originalEvent)} contextMenuSelection={selectedProduct} onContextMenuSelectionChange={(e) => setSelectedProduct(e.value)}>
+            <DataTable value={products} onContextMenu={(e) => cm.current.show(e.originalEvent)} contextMenuSelection={selectedProduct} onContextMenuSelectionChange={(e) => setSelectedProduct(e.value)} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>
@@ -184,7 +184,7 @@ export default function ContextMenuDemo() {
 }
         `,
         data: `
-/* ProductService */        
+/* ProductService */
 {
     id: '1000',
     code: 'f230fh0g3',
@@ -213,7 +213,7 @@ export default function ContextMenuDemo() {
                 <Toast ref={toast} />
 
                 <ContextMenu model={menuModel} ref={cm} onHide={() => setSelectedProduct(null)} />
-                <DataTable value={products} onContextMenu={(e) => cm.current.show(e.originalEvent)} contextMenuSelection={selectedProduct} onContextMenuSelectionChange={(e) => setSelectedProduct(e.value)}>
+                <DataTable value={products} onContextMenu={(e) => cm.current.show(e.originalEvent)} contextMenuSelection={selectedProduct} onContextMenuSelectionChange={(e) => setSelectedProduct(e.value)} tableStyle={{ minWidth: '50rem' }}>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>

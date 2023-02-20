@@ -22,7 +22,7 @@ export function HorizontalScrollDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={customers} scrollable scrollHeight="400px" scrollDirection="both">
+<DataTable value={customers} scrollable scrollHeight="400px" scrollDirection="both" tableStyle={{ minWidth: '50rem' }}>
     <Column field="id" header="Id" footer="Id" style={{ flexGrow: 1, flexBasis: '100px' }}></Column>
     <Column field="name" header="Name" footer="Name" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
     <Column field="country.name" header="Country" footer="Country" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>

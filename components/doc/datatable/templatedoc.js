@@ -61,7 +61,7 @@ export function TemplateDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={products} header={header} footer={footer}>
+<DataTable value={products} header={header} footer={footer} tableStyle={{ minWidth: '60rem' }}>
     <Column field="name" header="Name"></Column>
     <Column header="Image" body={imageBodyTemplate}></Column>
     <Column field="price" header="Price" body={priceBodyTemplate}></Column>
@@ -132,7 +132,7 @@ export default function TemplateDemo() {
 
     return (
         <div className="card">
-            <DataTable value={products} header={header} footer={footer}>
+            <DataTable value={products} header={header} footer={footer} tableStyle={{ minWidth: '60rem' }}>
                 <Column field="name" header="Name"></Column>
                 <Column header="Image" body={imageBodyTemplate}></Column>
                 <Column field="price" header="Price" body={priceBodyTemplate}></Column>
@@ -219,7 +219,7 @@ export default function TemplateDemo() {
 
     return (
         <div className="card">
-            <DataTable value={products} header={header} footer={footer}>
+            <DataTable value={products} header={header} footer={footer} tableStyle={{ minWidth: '60rem' }}>
                 <Column field="name" header="Name"></Column>
                 <Column header="Image" body={imageBodyTemplate}></Column>
                 <Column field="price" header="Price" body={priceBodyTemplate}></Column>
@@ -231,7 +231,7 @@ export default function TemplateDemo() {
     );
 }
         `,
-        data: `     
+        data: `
 {
     id: '1000',
     code: 'f230fh0g3',
@@ -256,7 +256,7 @@ export default function TemplateDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <DataTable value={products} header={header} footer={footer}>
+                <DataTable value={products} header={header} footer={footer} tableStyle={{ minWidth: '60rem' }}>
                     <Column field="name" header="Name"></Column>
                     <Column header="Image" body={imageBodyTemplate}></Column>
                     <Column field="price" header="Price" body={priceBodyTemplate}></Column>

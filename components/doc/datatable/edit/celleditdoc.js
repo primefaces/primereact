@@ -72,10 +72,10 @@ export function CellEditDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={products} editMode="cell">
+<DataTable value={products} editMode="cell" tableStyle={{ minWidth: '50rem' }}>
     {columns.map(({ field, header }) => {
-        return <Column key={field} field={field} header={header} 
-            style={{ width: '25%' }} body={field === 'price' && priceBodyTemplate} 
+        return <Column key={field} field={field} header={header}
+            style={{ width: '25%' }} body={field === 'price' && priceBodyTemplate}
             editor={(options) => cellEditor(options)} onCellEditComplete={onCellEditComplete} />;
     })}
 </DataTable>
@@ -153,7 +153,7 @@ export default function CellEditingDemo() {
 
     return (
         <div className="card p-fluid">
-            <DataTable value={products} editMode="cell">
+            <DataTable value={products} editMode="cell" tableStyle={{ minWidth: '50rem' }}>
                 {columns.map(({ field, header }) => {
                     return <Column key={field} field={field} header={header} style={{ width: '25%' }} body={field === 'price' && priceBodyTemplate} editor={(options) => cellEditor(options)} onCellEditComplete={onCellEditComplete} />;
                 })}
@@ -253,7 +253,7 @@ export default function CellEditingDemo() {
 
     return (
         <div className="card p-fluid">
-            <DataTable value={products} editMode="cell">
+            <DataTable value={products} editMode="cell" tableStyle={{ minWidth: '50rem' }}>
                 {columns.map(({ field, header }) => {
                     return <Column key={field} field={field} header={header} style={{ width: '25%' }} body={field === 'price' && priceBodyTemplate} editor={(options) => cellEditor(options)} onCellEditComplete={onCellEditComplete} />;
                 })}
@@ -287,7 +287,7 @@ export default function CellEditingDemo() {
                 </p>
             </DocSectionText>
             <div className="card p-fluid">
-                <DataTable value={products} editMode="cell">
+                <DataTable value={products} editMode="cell" tableStyle={{ minWidth: '50rem' }}>
                     {columns.map(({ field, header }) => {
                         return <Column key={field} field={field} header={header} style={{ width: '25%' }} body={field === 'price' && priceBodyTemplate} editor={(options) => cellEditor(options)} onCellEditComplete={onCellEditComplete} />;
                     })}

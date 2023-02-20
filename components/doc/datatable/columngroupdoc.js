@@ -91,7 +91,7 @@ export function ColumnGroupDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={sales} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup}>
+<DataTable value={sales} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup} tableStyle={{ minWidth: '50rem' }}>
     <Column field="product" />
     <Column field="lastYearSale" body={lastYearSaleBodyTemplate} />
     <Column field="thisYearSale" body={thisYearSaleBodyTemplate} />
@@ -191,7 +191,7 @@ export default function ColumnGroupDemo() {
 
     return (
         <div className="card">
-            <DataTable value={sales} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup}>
+            <DataTable value={sales} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="product" />
                 <Column field="lastYearSale" body={lastYearSaleBodyTemplate} />
                 <Column field="thisYearSale" body={thisYearSaleBodyTemplate} />
@@ -302,7 +302,7 @@ export default function ColumnGroupDemo() {
 
     return (
         <div className="card">
-            <DataTable value={sales} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup}>
+            <DataTable value={sales} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="product" />
                 <Column field="lastYearSale" body={lastYearSaleBodyTemplate} />
                 <Column field="thisYearSale" body={thisYearSaleBodyTemplate} />
@@ -324,7 +324,7 @@ export default function ColumnGroupDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <DataTable value={sales} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup}>
+                <DataTable value={sales} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup} tableStyle={{ minWidth: '50rem' }}>
                     <Column field="product" />
                     <Column field="lastYearSale" body={lastYearSaleBodyTemplate} />
                     <Column field="thisYearSale" body={thisYearSaleBodyTemplate} />

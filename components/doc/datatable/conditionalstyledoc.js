@@ -31,7 +31,7 @@ export function ConditionalStyleDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={products} rowClassName={rowClass}>
+<DataTable value={products} rowClassName={rowClass} tableStyle={{ minWidth: '50rem' }}>
     <Column field="code" header="Code"></Column>
     <Column field="name" header="Name"></Column>
     <Column field="category" header="Category"></Column>
@@ -69,7 +69,7 @@ export default function ConditionalStyleDemo() {
     };
 
     return (
-        <DataTable value={products} rowClassName={rowClass}>
+        <DataTable value={products} rowClassName={rowClass} tableStyle={{ minWidth: '50rem' }}>
             <Column field="code" header="Code"></Column>
             <Column field="name" header="Name"></Column>
             <Column field="category" header="Category"></Column>
@@ -122,7 +122,7 @@ export default function ConditionalStyleDemo() {
     };
 
     return (
-        <DataTable value={products} rowClassName={rowClass}>
+        <DataTable value={products} rowClassName={rowClass} tableStyle={{ minWidth: '50rem' }}>
             <Column field="code" header="Code"></Column>
             <Column field="name" header="Name"></Column>
             <Column field="category" header="Category"></Column>
@@ -156,7 +156,7 @@ export default function ConditionalStyleDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <DataTable value={products} rowClassName={rowClass}>
+                <DataTable value={products} rowClassName={rowClass} tableStyle={{ minWidth: '50rem' }}>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>

@@ -19,7 +19,7 @@ export function CheckboxRowSelectionDoc(props) {
         basic: `
 <InputSwitch checked={rowClick} onChange={(e) => setRowClick(e.value)} />
 
-<DataTable value={products} selectionMode={rowClick ? null : 'checkbox'} selection={selectedProducts} onSelectionChange={(e) => setSelectedProducts(e.value)} dataKey="id">
+<DataTable value={products} selectionMode={rowClick ? null : 'checkbox'} selection={selectedProducts} onSelectionChange={(e) => setSelectedProducts(e.value)} dataKey="id" tableStyle={{ minWidth: '50rem' }}>
     <Column selectionMode="multiple" headerStyle={{ width: '3rem' }}></Column>
     <Column field="code" header="Code"></Column>
     <Column field="name" header="Name"></Column>
@@ -49,7 +49,7 @@ export default function CheckboxRowSelectionDemo() {
                 <InputSwitch inputId="input-rowclick" checked={rowClick} onChange={(e) => setRowClick(e.value)} />
                 <label htmlFor="input-rowclick">Row Click</label>
             </div>
-            <DataTable value={products} selectionMode={rowClick ? null : 'checkbox'} selection={selectedProducts} onSelectionChange={(e) => setSelectedProducts(e.value)} dataKey="id">
+            <DataTable value={products} selectionMode={rowClick ? null : 'checkbox'} selection={selectedProducts} onSelectionChange={(e) => setSelectedProducts(e.value)} dataKey="id" tableStyle={{ minWidth: '50rem' }}>
                 <Column selectionMode="multiple" headerStyle={{ width: '3rem' }}></Column>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
@@ -95,7 +95,7 @@ export default function CheckboxRowSelectionDemo() {
                 <InputSwitch inputId="input-rowclick" checked={rowClick} onChange={(e: InputSwitchChangeEvent) => setRowClick(e.value)} />
                 <label htmlFor="input-rowclick">Row Click</label>
             </div>
-            <DataTable value={products} selectionMode={rowClick ? null : 'multiple'} selection={selectedProducts} onSelectionChange={(e: DataTableSelectionChangeEvent<Product>) => setSelectedProducts(e.value)} dataKey="id">
+            <DataTable value={products} selectionMode={rowClick ? null : 'multiple'} selection={selectedProducts} onSelectionChange={(e: DataTableSelectionChangeEvent<Product>) => setSelectedProducts(e.value)} dataKey="id" tableStyle={{ minWidth: '50rem' }}>
                 <Column selectionMode="multiple" headerStyle={{ width: '3rem' }}></Column>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
@@ -139,7 +139,7 @@ export default function CheckboxRowSelectionDemo() {
                     <InputSwitch inputId="input-rowclick" checked={rowClick} onChange={(e) => setRowClick(e.value)} />
                     <label htmlFor="input-rowclick">Row Click</label>
                 </div>
-                <DataTable value={products} selectionMode={rowClick ? null : 'checkbox'} selection={selectedProducts} onSelectionChange={(e) => setSelectedProducts(e.value)} dataKey="id">
+                <DataTable value={products} selectionMode={rowClick ? null : 'checkbox'} selection={selectedProducts} onSelectionChange={(e) => setSelectedProducts(e.value)} dataKey="id" tableStyle={{ minWidth: '50rem' }}>
                     <Column selectionMode="multiple" headerStyle={{ width: '3rem' }}></Column>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>

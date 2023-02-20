@@ -20,7 +20,7 @@ export function PreloadVirtualScrollDoc(props) {
 </DataTable>
         `,
         javascript: `
-import React from 'react'; 
+import React from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { CarService } from './service/CarService';
@@ -42,7 +42,7 @@ export default function PreloadVirtualScrollDemo() {
 }
         `,
         typescript: `
-import React from 'react'; 
+import React from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { CarService } from './service/CarService';
