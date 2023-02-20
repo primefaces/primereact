@@ -924,7 +924,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         scrollableView = createScrollableView(value, scrollableColumns, false, props.headerColumnGroup, props.footerColumnGroup);
 
         return (
-            <div className="p-treetable-scrollable-wrapper">
+            <div className="p-treetable-wrapper p-treetable-scrollable-wrapper">
                 {frozenView}
                 {scrollableView}
             </div>
@@ -936,10 +936,19 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         const header = createTableHeader(columns, props.headerColumnGroup);
         const footer = createTableFooter(columns, props.footerColumnGroup);
         const body = createTableBody(value, columns);
+        const tableClassName = classNames(
+            'p-treetable-table',
+            {
+                'p-treetable-scrollable-table': props.scrollable,
+                'p-treetable-resizable-table': props.resizableColumns,
+                'p-treetable-resizable-table-fit': props.resizableColumns && props.columnResizeMode === 'fit'
+            },
+            props.tableClassName
+        );
 
         return (
             <div className="p-treetable-wrapper">
-                <table ref={tableRef} style={props.tableStyle} className={props.tableClassName}>
+                <table ref={tableRef} style={props.tableStyle} className={tableClassName}>
                     {header}
                     {footer}
                     {body}
@@ -978,7 +987,6 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
             'p-treetable-selectable': isRowSelectionMode(),
             'p-treetable-resizable': props.resizableColumns,
             'p-treetable-resizable-fit': props.resizableColumns && props.columnResizeMode === 'fit',
-            'p-treetable-auto-layout': props.autoLayout,
             'p-treetable-striped': props.stripedRows,
             'p-treetable-gridlines': props.showGridlines
         },
@@ -996,7 +1004,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
     const reorderIndicatorDown = props.reorderableColumns && <span ref={reorderIndicatorDownRef} className="pi pi-arrow-up p-datatable-reorder-indicator-down" style={{ position: 'absolute', display: 'none' }} />;
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style} data-scrollselectors=".p-treetable-scrollable-body" {...otherProps}>
+        <div ref={elementRef} id={props.id} className={className} style={props.style} data-scrollselectors=".p-treetable-wrapper" {...otherProps}>
             {loader}
             {headerFacet}
             {paginatorTop}

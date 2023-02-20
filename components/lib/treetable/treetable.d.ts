@@ -231,11 +231,6 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
      */
     alwaysShowPaginator?: boolean | undefined;
     /**
-     * Whether the cell widths scale according to their content or not.
-     * @defaultValue true
-     */
-    autoLayout?: boolean | undefined;
-    /**
      * Used to get the child elements of the component.
      * @readonly
      */

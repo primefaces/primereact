@@ -307,7 +307,7 @@ export const TreeTableRow = React.memo((props) => {
         }
     };
 
-    const createCell = (column) => {
+    const createCell = (column, index) => {
         let toggler, checkbox;
 
         if (getColumnProp(column, 'expander')) {
@@ -317,7 +317,7 @@ export const TreeTableRow = React.memo((props) => {
 
         return (
             <TreeTableBodyCell
-                key={getColumnProp(column, 'columnKey') || getColumnProp(column, 'field')}
+                key={`${getColumnProp(column, 'columnKey') || getColumnProp(column, 'field')}_${index}`}
                 {...ColumnBase.getCProps(column)}
                 column={column}
                 selectOnEdit={props.selectOnEdit}
@@ -336,7 +336,7 @@ export const TreeTableRow = React.memo((props) => {
             return props.node.children.map((childNode, index) => {
                 return (
                     <TreeTableRow
-                        key={childNode.key || JSON.stringify(childNode.data)}
+                        key={`${childNode.key || JSON.stringify(childNode.data)}_${index}`}
                         level={props.level + 1}
                         rowIndex={props.rowIndex + '_' + index}
                         node={childNode}

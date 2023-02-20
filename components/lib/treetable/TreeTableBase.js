@@ -5,7 +5,6 @@ export const TreeTableBase = {
     defaultProps: {
         __TYPE: 'TreeTable',
         alwaysShowPaginator: true,
-        autoLayout: false,
         className: null,
         columnResizeMode: 'fit',
         contextMenuSelectionKey: null,
