@@ -25,10 +25,10 @@ export function FlexibleScrollDoc(props) {
 <Dialog header="Flex Scroll" visible={dialogVisible} style={{ width: '75vw' }} maximizable
         modal contentStyle={{ height: '300px' }} onHide={() => setDialogVisible(false)} footer={dialogFooterTemplate}>
     <DataTable value={customers} scrollable scrollHeight="flex" tableStyle={{ minWidth: '50rem' }}>
-        <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
-        <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
-        <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
-        <Column field="company" header="Company" style={{ minWidth: '200px' }}></Column>
+        <Column field="name" header="Name"></Column>
+        <Column field="country.name" header="Country"></Column>
+        <Column field="representative.name" header="Representative"></Column>
+        <Column field="company" header="Company"></Column>
     </DataTable>
 </Dialog>
         `,
@@ -58,10 +58,10 @@ export default function FlexibleScrollDemo() {
         <Dialog header="Flex Scroll" visible={dialogVisible} style={{ width: '75vw' }} maximizable
                 modal contentStyle={{ height: '300px' }} onHide={() => setDialogVisible(false)} footer={dialogFooterTemplate}>
             <DataTable value={customers} scrollable scrollHeight="flex" tableStyle={{ minWidth: '50rem' }}>
-                <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
-                <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
-                <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
-                <Column field="company" header="Company" style={{ minWidth: '200px' }}></Column>
+                <Column field="name" header="Name"></Column>
+                <Column field="country.name" header="Country"></Column>
+                <Column field="representative.name" header="Representative"></Column>
+                <Column field="company" header="Company"></Column>
             </DataTable>
         </Dialog>
         </div>
@@ -107,10 +107,10 @@ export default function FlexibleScrollDemo() {
             <Dialog header="Flex Scroll" visible={dialogVisible} style={{ width: '75vw' }} maximizable
                     modal contentStyle={{ height: '300px' }} onHide={() => setDialogVisible(false)} footer={dialogFooterTemplate}>
                 <DataTable value={customers} scrollable scrollHeight="flex" tableStyle={{ minWidth: '50rem' }}>
-                    <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
-                    <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
-                    <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
-                    <Column field="company" header="Company" style={{ minWidth: '200px' }}></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="country.name" header="Country"></Column>
+                    <Column field="representative.name" header="Representative"></Column>
+                    <Column field="company" header="Company"></Column>
                 </DataTable>
             </Dialog>
         </div>
@@ -152,10 +152,10 @@ export default function FlexibleScrollDemo() {
                 <Button label="Show" icon="pi pi-external-link" onClick={() => setDialogVisible(true)} />
                 <Dialog header="Flex Scroll" visible={dialogVisible} style={{ width: '75vw' }} maximizable modal contentStyle={{ height: '300px' }} onHide={() => setDialogVisible(false)} footer={dialogFooterTemplate}>
                     <DataTable value={customers} scrollable scrollHeight="flex" tableStyle={{ minWidth: '50rem' }}>
-                        <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
-                        <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
-                        <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
-                        <Column field="company" header="Company" style={{ minWidth: '200px' }}></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="country.name" header="Country"></Column>
+                        <Column field="representative.name" header="Representative"></Column>
+                        <Column field="company" header="Company"></Column>
                     </DataTable>
                 </Dialog>
             </div>

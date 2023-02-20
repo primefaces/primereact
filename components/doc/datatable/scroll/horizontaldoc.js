@@ -22,16 +22,16 @@ export function HorizontalScrollDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={customers} scrollable scrollHeight="400px" scrollDirection="both" tableStyle={{ minWidth: '50rem' }}>
-    <Column field="id" header="Id" footer="Id" style={{ flexGrow: 1, flexBasis: '100px' }}></Column>
-    <Column field="name" header="Name" footer="Name" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-    <Column field="country.name" header="Country" footer="Country" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-    <Column field="date" header="Date" footer="Date" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-    <Column field="balance" header="Balance" footer="Balance" body={balanceTemplate} style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-    <Column field="company" header="Company" footer="Company" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-    <Column field="status" header="Status" footer="Status" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-    <Column field="activity" header="Activity" footer="Activity" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-    <Column field="representative.name" header="Representative" footer="Representative" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
+<DataTable value={customers} scrollable scrollHeight="400px">
+    <Column field="id" header="Id" footer="Id" style={{ minWidth: '100px' }}></Column>
+    <Column field="name" header="Name" footer="Name" style={{ minWidth: '200px' }}></Column>
+    <Column field="country.name" header="Country" footer="Country" style={{ minWidth: '200px' }}></Column>
+    <Column field="date" header="Date" footer="Date" style={{ minWidth: '200px' }}></Column>
+    <Column field="balance" header="Balance" footer="Balance" body={balanceTemplate} style={{ minWidth: '200px' }}></Column>
+    <Column field="company" header="Company" footer="Company" style={{ minWidth: '200px' }}></Column>
+    <Column field="status" header="Status" footer="Status" style={{ minWidth: '200px' }}></Column>
+    <Column field="activity" header="Activity" footer="Activity" style={{ minWidth: '200px' }}></Column>
+    <Column field="representative.name" header="Representative" footer="Representative" style={{ minWidth: '200px' }}></Column>
 </DataTable>
         `,
         javascript: `
@@ -57,16 +57,16 @@ export default function HorizontalScrollDemo() {
 
     return (
         <div className="card">
-            <DataTable value={customers} scrollable scrollHeight="400px" scrollDirection="both">
-                <Column field="id" header="Id" footer="Id" style={{ flexGrow: 1, flexBasis: '100px' }}></Column>
-                <Column field="name" header="Name" footer="Name" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                <Column field="country.name" header="Country" footer="Country" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                <Column field="date" header="Date" footer="Date" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                <Column field="balance" header="Balance" footer="Balance" body={balanceTemplate} style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                <Column field="company" header="Company" footer="Company" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                <Column field="status" header="Status" footer="Status" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                <Column field="activity" header="Activity" footer="Activity" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                <Column field="representative.name" header="Representative" footer="Representative" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
+            <DataTable value={customers} scrollable scrollHeight="400px">
+                <Column field="id" header="Id" footer="Id" style={{ minWidth: '100px' }}></Column>
+                <Column field="name" header="Name" footer="Name" style={{ minWidth: '200px' }}></Column>
+                <Column field="country.name" header="Country" footer="Country" style={{ minWidth: '200px' }}></Column>
+                <Column field="date" header="Date" footer="Date" style={{ minWidth: '200px' }}></Column>
+                <Column field="balance" header="Balance" footer="Balance" body={balanceTemplate} style={{ minWidth: '200px' }}></Column>
+                <Column field="company" header="Company" footer="Company" style={{ minWidth: '200px' }}></Column>
+                <Column field="status" header="Status" footer="Status" style={{ minWidth: '200px' }}></Column>
+                <Column field="activity" header="Activity" footer="Activity" style={{ minWidth: '200px' }}></Column>
+                <Column field="representative.name" header="Representative" footer="Representative" style={{ minWidth: '200px' }}></Column>
             </DataTable>
         </div>
     );
@@ -108,16 +108,16 @@ export default function HorizontalScrollDemo() {
 
     return (
         <div className="card">
-            <DataTable value={customers} scrollable scrollHeight="400px" scrollDirection="both">
-                <Column field="id" header="Id" footer="Id" style={{ flexGrow: 1, flexBasis: '100px' }}></Column>
-                <Column field="name" header="Name" footer="Name" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                <Column field="country.name" header="Country" footer="Country" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                <Column field="date" header="Date" footer="Date" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                <Column field="balance" header="Balance" footer="Balance" body={balanceTemplate} style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                <Column field="company" header="Company" footer="Company" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                <Column field="status" header="Status" footer="Status" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                <Column field="activity" header="Activity" footer="Activity" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                <Column field="representative.name" header="Representative" footer="Representative" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
+            <DataTable value={customers} scrollable scrollHeight="400px">
+                <Column field="id" header="Id" footer="Id" style={{ minWidth: '100px' }}></Column>
+                <Column field="name" header="Name" footer="Name" style={{ minWidth: '200px' }}></Column>
+                <Column field="country.name" header="Country" footer="Country" style={{ minWidth: '200px' }}></Column>
+                <Column field="date" header="Date" footer="Date" style={{ minWidth: '200px' }}></Column>
+                <Column field="balance" header="Balance" footer="Balance" body={balanceTemplate} style={{ minWidth: '200px' }}></Column>
+                <Column field="company" header="Company" footer="Company" style={{ minWidth: '200px' }}></Column>
+                <Column field="status" header="Status" footer="Status" style={{ minWidth: '200px' }}></Column>
+                <Column field="activity" header="Activity" footer="Activity" style={{ minWidth: '200px' }}></Column>
+                <Column field="representative.name" header="Representative" footer="Representative" style={{ minWidth: '200px' }}></Column>
             </DataTable>
         </div>
     );
@@ -149,21 +149,19 @@ export default function HorizontalScrollDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    Horizontal scrolling in addition to vertical scrolling is configured with setting <i>scrollDirection</i> as <i>both</i>.
-                </p>
+                <p>Horizontal scrollbar is displayed when table width exceeds the parent width.</p>
             </DocSectionText>
             <div className="card">
-                <DataTable value={customers} scrollable scrollHeight="400px" scrollDirection="both">
-                    <Column field="id" header="Id" footer="Id" style={{ flexGrow: 1, flexBasis: '100px' }}></Column>
-                    <Column field="name" header="Name" footer="Name" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                    <Column field="country.name" header="Country" footer="Country" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                    <Column field="date" header="Date" footer="Date" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                    <Column field="balance" header="Balance" footer="Balance" body={balanceTemplate} style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                    <Column field="company" header="Company" footer="Company" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                    <Column field="status" header="Status" footer="Status" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                    <Column field="activity" header="Activity" footer="Activity" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                    <Column field="representative.name" header="Representative" footer="Representative" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
+                <DataTable value={customers} scrollable scrollHeight="400px">
+                    <Column field="id" header="Id" footer="Id" style={{ minWidth: '100px' }}></Column>
+                    <Column field="name" header="Name" footer="Name" style={{ minWidth: '200px' }}></Column>
+                    <Column field="country.name" header="Country" footer="Country" style={{ minWidth: '200px' }}></Column>
+                    <Column field="date" header="Date" footer="Date" style={{ minWidth: '200px' }}></Column>
+                    <Column field="balance" header="Balance" footer="Balance" body={balanceTemplate} style={{ minWidth: '200px' }}></Column>
+                    <Column field="company" header="Company" footer="Company" style={{ minWidth: '200px' }}></Column>
+                    <Column field="status" header="Status" footer="Status" style={{ minWidth: '200px' }}></Column>
+                    <Column field="activity" header="Activity" footer="Activity" style={{ minWidth: '200px' }}></Column>
+                    <Column field="representative.name" header="Representative" footer="Representative" style={{ minWidth: '200px' }}></Column>
                 </DataTable>
             </div>
             <DocSectionCode code={code} service={['CustomerService']} />

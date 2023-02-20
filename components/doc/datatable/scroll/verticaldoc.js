@@ -14,11 +14,11 @@ export function VerticalScrollDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={customers} scrollable scrollHeight="400px">
-    <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
-    <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
-    <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
-    <Column field="company" header="Company" style={{ minWidth: '200px' }}></Column>
+<DataTable value={customers} scrollable scrollHeight="400px" style={{ minWidth: '50rem' }}>
+    <Column field="name" header="Name"></Column>
+    <Column field="country.name" header="Country"></Column>
+    <Column field="representative.name" header="Representative"></Column>
+    <Column field="company" header="Company"></Column>
 </DataTable>
         `,
         javascript: `
@@ -36,11 +36,11 @@ export default function VerticalScrollDemo() {
 
     return (
         <div className="card">
-            <DataTable value={customers} scrollable scrollHeight="400px">
-                <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
-                <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
-                <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
-                <Column field="company" header="Company" style={{ minWidth: '200px' }}></Column>
+            <DataTable value={customers} scrollable scrollHeight="400px" style={{ minWidth: '50rem' }}>
+                <Column field="name" header="Name"></Column>
+                <Column field="country.name" header="Country"></Column>
+                <Column field="representative.name" header="Representative"></Column>
+                <Column field="company" header="Company"></Column>
             </DataTable>
         </div>
     );
@@ -74,11 +74,11 @@ export default function VerticalScrollDemo() {
 
     return (
         <div className="card">
-            <DataTable value={customers} scrollable scrollHeight="400px">
-                <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
-                <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
-                <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
-                <Column field="company" header="Company" style={{ minWidth: '200px' }}></Column>
+            <DataTable value={customers} scrollable scrollHeight="400px" style={{ minWidth: '50rem' }}>
+                <Column field="name" header="Name"></Column>
+                <Column field="country.name" header="Country"></Column>
+                <Column field="representative.name" header="Representative"></Column>
+                <Column field="company" header="Company"></Column>
             </DataTable>
         </div>
     );
@@ -115,11 +115,11 @@ export default function VerticalScrollDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <DataTable value={customers} scrollable scrollHeight="400px">
-                    <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
-                    <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
-                    <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
-                    <Column field="company" header="Company" style={{ minWidth: '200px' }}></Column>
+                <DataTable value={customers} scrollable scrollHeight="400px" tableStyle={{ minWidth: '50rem' }}>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="country.name" header="Country"></Column>
+                    <Column field="representative.name" header="Representative"></Column>
+                    <Column field="company" header="Company"></Column>
                 </DataTable>
             </div>
             <DocSectionCode code={code} service={['CustomerService']} />
