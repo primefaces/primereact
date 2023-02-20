@@ -28873,14 +28873,6 @@
                             "description": "Whether to show it even there is only one page."
                         },
                         {
-                            "name": "autoLayout",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "true",
-                            "description": "Whether the cell widths scale according to their content or not."
-                        },
-                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
