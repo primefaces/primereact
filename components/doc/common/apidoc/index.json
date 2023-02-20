@@ -9231,14 +9231,6 @@
                             "description": "Whether to show it even there is only one page."
                         },
                         {
-                            "name": "autoLayout",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "Whether the cell widths scale according to their content or not."
-                        },
-                        {
                             "name": "breakpoint",
                             "optional": true,
                             "readonly": false,
@@ -9667,7 +9659,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "\"scroll\" | \"stack\"",
-                            "default": "stack",
+                            "default": "scroll",
                             "description": "Defines the responsive mode, valid options are \"stack\" and \"scroll\"."
                         },
                         {
@@ -15476,7 +15468,15 @@
                 "ResizeEventOptions": {
                     "description": "Custom resize event options.",
                     "relatedProp": "",
-                    "props": [],
+                    "props": [
+                        {
+                            "name": "when",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Whether to listen to the event or not."
+                        }
+                    ],
                     "callbacks": [
                         {
                             "name": "listener",
@@ -30255,6 +30255,14 @@
                     "description": "Defines valid properties in VirtualScroller component.",
                     "values": [
                         {
+                            "name": "appendOnly",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Used to append each loaded item to top without removing any items from the DOM. Using very large data may cause the browser to crash."
+                        },
+                        {
                             "name": "autoSize",
                             "optional": true,
                             "readonly": false,
@@ -30317,6 +30325,14 @@
                             "type": "string",
                             "default": "",
                             "description": "Unique identifier of the element."
+                        },
+                        {
+                            "name": "inline",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, positions the content as inline."
                         },
                         {
                             "name": "itemSize",
@@ -30439,12 +30455,28 @@
                             "description": "Used to implement a custom spacer instead of using the spacer feature in the VirtualScroller."
                         },
                         {
+                            "name": "step",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "0",
+                            "description": "Used to specify how many items to load in each load method in lazy mode."
+                        },
+                        {
                             "name": "style",
                             "optional": true,
                             "readonly": false,
                             "type": "CSSProperties",
                             "default": "",
                             "description": "Inline style of the component."
+                        },
+                        {
+                            "name": "tabIndex",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "0",
+                            "description": "Index of the element in tabbing order."
                         }
                     ]
                 },
