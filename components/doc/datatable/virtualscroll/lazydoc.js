@@ -45,13 +45,14 @@ export function LazyVirtualScrollDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={virtualCars} scrollable scrollHeight="400px" 
-    virtualScrollerOptions={{ lazy: true, onLazyLoad: loadCarsLazy, itemSize: 46, delay: 200, showLoader: true, loading: lazyLoading, loadingTemplate }}>
-    <Column field="id" header="Id" style={{ minWidth: '200px' }}></Column>
-    <Column field="vin" header="Vin" style={{ minWidth: '200px' }}></Column>
-    <Column field="year" header="Year" style={{ minWidth: '200px' }}></Column>
-    <Column field="brand" header="Brand" style={{ minWidth: '200px' }}></Column>
-    <Column field="color" header="Color" style={{ minWidth: '200px' }}></Column>
+<DataTable value={virtualCars} scrollable scrollHeight="400px"
+    virtualScrollerOptions={{ lazy: true, onLazyLoad: loadCarsLazy, itemSize: 46, delay: 200, showLoader: true, loading: lazyLoading, loadingTemplate }}
+    tableStyle={{ minWidth: '50rem' }}>
+    <Column field="id" header="Id" style={{ width: '20%' }}></Column>
+    <Column field="vin" header="Vin" style={{ width: '20%' }}></Column>
+    <Column field="year" header="Year" style={{ width: '20%' }}></Column>
+    <Column field="brand" header="Brand" style={{ width: '20%' }}></Column>
+    <Column field="color" header="Color" style={{ width: '20%' }}></Column>
 </DataTable>
         `,
         javascript: `
@@ -100,13 +101,14 @@ export default function LazyVirtualScrollDemo() {
 
     return (
         <div className="card">
-            <DataTable value={virtualCars} scrollable scrollHeight="400px" 
-                virtualScrollerOptions={{ lazy: true, onLazyLoad: loadCarsLazy, itemSize: 46, delay: 200, showLoader: true, loading: lazyLoading, loadingTemplate }}>
-                <Column field="id" header="Id" style={{ minWidth: '200px' }}></Column>
-                <Column field="vin" header="Vin" style={{ minWidth: '200px' }}></Column>
-                <Column field="year" header="Year" style={{ minWidth: '200px' }}></Column>
-                <Column field="brand" header="Brand" style={{ minWidth: '200px' }}></Column>
-                <Column field="color" header="Color" style={{ minWidth: '200px' }}></Column>
+            <DataTable value={virtualCars} scrollable scrollHeight="400px"
+                virtualScrollerOptions={{ lazy: true, onLazyLoad: loadCarsLazy, itemSize: 46, delay: 200, showLoader: true, loading: lazyLoading, loadingTemplate }}
+                tableStyle={{ minWidth: '50rem' }}>
+                <Column field="id" header="Id" style={{ width: '20%' }}></Column>
+                <Column field="vin" header="Vin" style={{ width: '20%' }}></Column>
+                <Column field="year" header="Year" style={{ width: '20%' }}></Column>
+                <Column field="brand" header="Brand" style={{ width: '20%' }}></Column>
+                <Column field="color" header="Color" style={{ width: '20%' }}></Column>
             </DataTable>
         </div>
     );
@@ -167,13 +169,14 @@ export default function LazyVirtualScrollDemo() {
 
     return (
         <div className="card">
-            <DataTable value={virtualCars} scrollable scrollHeight="400px" 
-                virtualScrollerOptions={{ lazy: true, onLazyLoad: loadCarsLazy, itemSize: 46, delay: 200, showLoader: true, loading: lazyLoading, loadingTemplate }}>
-                <Column field="id" header="Id" style={{ minWidth: '200px' }}></Column>
-                <Column field="vin" header="Vin" style={{ minWidth: '200px' }}></Column>
-                <Column field="year" header="Year" style={{ minWidth: '200px' }}></Column>
-                <Column field="brand" header="Brand" style={{ minWidth: '200px' }}></Column>
-                <Column field="color" header="Color" style={{ minWidth: '200px' }}></Column>
+            <DataTable value={virtualCars} scrollable scrollHeight="400px"
+                virtualScrollerOptions={{ lazy: true, onLazyLoad: loadCarsLazy, itemSize: 46, delay: 200, showLoader: true, loading: lazyLoading, loadingTemplate }}
+                tableStyle={{ minWidth: '50rem' }}>
+                <Column field="id" header="Id" style={{ width: '20%' }}></Column>
+                <Column field="vin" header="Vin" style={{ width: '20%' }}></Column>
+                <Column field="year" header="Year" style={{ width: '20%' }}></Column>
+                <Column field="brand" header="Brand" style={{ width: '20%' }}></Column>
+                <Column field="color" header="Color" style={{ width: '20%' }}></Column>
             </DataTable>
         </div>
     );
@@ -201,12 +204,18 @@ export default function LazyVirtualScrollDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <DataTable value={virtualCars} scrollable scrollHeight="400px" virtualScrollerOptions={{ lazy: true, onLazyLoad: loadCarsLazy, itemSize: 46, delay: 200, showLoader: true, loading: lazyLoading, loadingTemplate }}>
-                    <Column field="id" header="Id" style={{ minWidth: '200px' }}></Column>
-                    <Column field="vin" header="Vin" style={{ minWidth: '200px' }}></Column>
-                    <Column field="year" header="Year" style={{ minWidth: '200px' }}></Column>
-                    <Column field="brand" header="Brand" style={{ minWidth: '200px' }}></Column>
-                    <Column field="color" header="Color" style={{ minWidth: '200px' }}></Column>
+                <DataTable
+                    value={virtualCars}
+                    scrollable
+                    scrollHeight="400px"
+                    virtualScrollerOptions={{ lazy: true, onLazyLoad: loadCarsLazy, itemSize: 46, delay: 200, showLoader: true, loading: lazyLoading, loadingTemplate }}
+                    tableStyle={{ minWidth: '50rem' }}
+                >
+                    <Column field="id" header="Id" style={{ width: '20%' }}></Column>
+                    <Column field="vin" header="Vin" style={{ width: '20%' }}></Column>
+                    <Column field="year" header="Year" style={{ width: '20%' }}></Column>
+                    <Column field="brand" header="Brand" style={{ width: '20%' }}></Column>
+                    <Column field="color" header="Color" style={{ width: '20%' }}></Column>
                 </DataTable>
             </div>
             <DocSectionCode code={code} service={['CarService']} />
