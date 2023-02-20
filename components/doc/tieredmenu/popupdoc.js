@@ -135,7 +135,7 @@ export function PopupDoc(props) {
 
     const code = {
         basic: `
-<TieredMenu model={items} popup ref={menu} />
+<TieredMenu model={items} popup ref={menu} breakpoint="460px" />
 <Button label="Show" icon="pi pi-bars" onClick={(e) => menu.current.toggle(e)} />
         `,
         javascript: `
@@ -274,7 +274,7 @@ export default function PopupDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <TieredMenu model={items} popup ref={menu} />
+            <TieredMenu model={items} popup ref={menu} breakpoint="460px" />
             <Button label="Show" icon="pi pi-bars" onClick={(e) => menu.current.toggle(e)} />
         </div>
     )
@@ -417,7 +417,7 @@ export default function PopupDemo() {
     
     return (
         <div className="card flex justify-content-center">
-            <TieredMenu model={items} popup ref={menu} />
+            <TieredMenu model={items} popup ref={menu} breakpoint="460px" />
             <Button label="Show" icon="pi pi-bars" onClick={(e) => menu.current.toggle(e)} />
         </div>
     )
@@ -433,7 +433,7 @@ export default function PopupDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <TieredMenu model={items} popup ref={menu} />
+                <TieredMenu model={items} popup ref={menu} breakpoint="460px" />
                 <Button label="Show" icon="pi pi-bars" onClick={(e) => menu.current.toggle(e)} />
             </div>
             <DocSectionCode code={code} />

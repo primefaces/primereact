@@ -132,7 +132,7 @@ export function BasicDoc(props) {
 
     const code = {
         basic: `
-<TieredMenu model={items} />
+<TieredMenu model={items} breakpoint="460px" />
         `,
         javascript: `
 import React from 'react'; 
@@ -267,7 +267,7 @@ export default function BasicDemo() {
     ];
 
     return (
-        <TieredMenu model={items} />
+        <TieredMenu model={items} breakpoint="460px" />
     )
 }
         `,
@@ -405,7 +405,7 @@ export default function BasicDemo() {
     ];
     
     return (
-        <TieredMenu model={items} />
+        <TieredMenu model={items} breakpoint="460px" />
     )
 }
         `
@@ -419,7 +419,7 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <TieredMenu model={items} />
+                <TieredMenu model={items} breakpoint="460px" />
             </div>
             <DocSectionCode code={code} />
         </>

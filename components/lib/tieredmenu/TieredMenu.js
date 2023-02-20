@@ -1,10 +1,10 @@
 import * as React from 'react';
 import PrimeReact from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
+import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, ZIndexUtils, UniqueComponentId } from '../utils/Utils';
 import { TieredMenuBase } from './TieredMenuBase';
 import { TieredMenuSub } from './TieredMenuSub';
 
@@ -13,8 +13,10 @@ export const TieredMenu = React.memo(
         const props = TieredMenuBase.getProps(inProps);
 
         const [visibleState, setVisibleState] = React.useState(!props.popup);
+        const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
         const menuRef = React.useRef(null);
         const targetRef = React.useRef(null);
+        const styleElementRef = React.useRef(null);
 
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: targetRef,
@@ -54,13 +56,72 @@ export const TieredMenu = React.memo(
             }
         };
 
+        const createStyle = () => {
+            if (!styleElementRef.current) {
+                styleElementRef.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+
+                const selector = `${attributeSelectorState}`;
+                const innerHTML = `
+@media screen and (max-width: ${props.breakpoint}) {
+    .p-tieredmenu[${selector}] > ul {
+        max-height: ${props.scrollHeight};
+        overflow: ${props.scrollHeight ? 'auto' : ''};
+    }
+
+    .p-tieredmenu[${selector}] .p-submenu-list {
+        position: relative;
+    }
+
+    .p-tieredmenu[${selector}] .p-menuitem-active > .p-submenu-list {
+        left: 0 !important;
+        box-shadow: none;
+        border-radius: 0;
+        padding: 0 0 0 calc(var(--inline-spacing) * 2); /* @todo */
+    }
+
+    .p-tieredmenu[${selector}] .p-submenu-icon:before {           
+        content: "\\e930";
+    }
+}
+`;
+
+                styleElementRef.current.innerHTML = innerHTML;
+            }
+        };
+
+        const destroyStyle = () => {
+            styleElementRef.current = DomHandler.removeInlineStyle(styleElementRef.current);
+        };
+
+        useMountEffect(() => {
+            if (props.breakpoint) {
+                !attributeSelectorState && setAttributeSelectorState(UniqueComponentId());
+            }
+        });
+
         const onEnter = () => {
             if (props.autoZIndex) {
                 ZIndexUtils.set('menu', menuRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['menu']);
             }
 
+            if (attributeSelectorState && props.breakpoint) {
+                menuRef.current.setAttribute(attributeSelectorState, '');
+                createStyle();
+            }
+
             DomHandler.absolutePosition(menuRef.current, targetRef.current);
         };
+
+        useUpdateEffect(() => {
+            if (attributeSelectorState && menuRef.current) {
+                menuRef.current.setAttribute(attributeSelectorState, '');
+                createStyle();
+            }
+
+            return () => {
+                destroyStyle();
+            };
+        }, [attributeSelectorState, props.breakpoint]);
 
         const onEntered = () => {
             bindOverlayListener();
@@ -73,6 +134,7 @@ export const TieredMenu = React.memo(
 
         const onExited = () => {
             ZIndexUtils.clear(menuRef.current);
+            destroyStyle();
         };
 
         useUnmountEffect(() => {

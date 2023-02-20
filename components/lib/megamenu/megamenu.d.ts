@@ -29,6 +29,15 @@ export interface MegaMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      */
     start?: React.ReactNode | ((props: MegaMenuProps) => React.ReactNode);
     /**
+     * The breakpoint to define the maximum width boundary when responsiveness is enabled.
+     */
+    breakpoint?: string | undefined;
+    /**
+     * Maximum height of the options panel on responsive mode.
+     * @defaultValue 400px
+     */
+    scrollHeight?: string | undefined;
+    /**
      * The template of trailing element
      */
     end?: React.ReactNode | ((props: MegaMenuProps) => React.ReactNode);

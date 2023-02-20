@@ -10,6 +10,8 @@ export const TieredMenuBase = {
         className: null,
         autoZIndex: true,
         baseZIndex: 0,
+        breakpoint: undefined,
+        scrollHeight: '400px',
         appendTo: null,
         transitionOptions: null,
         onShow: null,
