@@ -67,6 +67,7 @@ interface EventOptions {
     options?: any;
     /**
      * Whether to listen to the event or not.
+     * @defaultValue true
      */
     when?: boolean;
 }
@@ -89,6 +90,7 @@ interface OverlayEventOptions {
     listener?(event: Event, type?: string): void;
     /**
      * Whether to listen to the event or not.
+     * @defaultValue true
      */
     when?: boolean;
 }
@@ -102,6 +104,11 @@ interface ResizeEventOptions {
      * @param {Event} event - The browser event object.
      */
     listener?(event: Event): void;
+    /**
+     * Whether to listen to the event or not.
+     * @defaultValue true
+     */
+    when?: boolean;
 }
 
 /**
