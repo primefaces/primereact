@@ -2812,13 +2812,46 @@
   border-width: 0 1px 1px 1px;
 }
 .p-datatable.p-datatable-gridlines .p-datatable-thead > tr > th {
-  border-width: 1px 1px 1px 1px;
+  border-width: 1px 0 1px 1px;
+}
+.p-datatable.p-datatable-gridlines .p-datatable-thead > tr > th:last-child {
+  border-width: 1px;
 }
 .p-datatable.p-datatable-gridlines .p-datatable-tbody > tr > td {
+  border-width: 1px 0 0 1px;
+}
+.p-datatable.p-datatable-gridlines .p-datatable-tbody > tr > td:last-child {
+  border-width: 1px 1px 0 1px;
+}
+.p-datatable.p-datatable-gridlines .p-datatable-tbody > tr:last-child > td {
+  border-width: 1px 0 1px 1px;
+}
+.p-datatable.p-datatable-gridlines .p-datatable-tbody > tr:last-child > td:last-child {
   border-width: 1px;
 }
 .p-datatable.p-datatable-gridlines .p-datatable-tfoot > tr > td {
-  border-width: 1px;
+  border-width: 1px 0 1px 1px;
+}
+.p-datatable.p-datatable-gridlines .p-datatable-tfoot > tr > td:last-child {
+  border-width: 1px 1px 1px 1px;
+}
+.p-datatable.p-datatable-gridlines .p-datatable-thead + .p-datatable-tfoot > tr > td {
+  border-width: 0 0 1px 1px;
+}
+.p-datatable.p-datatable-gridlines .p-datatable-thead + .p-datatable-tfoot > tr > td:last-child {
+  border-width: 0 1px 1px 1px;
+}
+.p-datatable.p-datatable-gridlines:has(.p-datatable-thead):has(.p-datatable-tbody) .p-datatable-tbody > tr > td {
+  border-width: 0 0 1px 1px;
+}
+.p-datatable.p-datatable-gridlines:has(.p-datatable-thead):has(.p-datatable-tbody) .p-datatable-tbody > tr > td:last-child {
+  border-width: 0 1px 1px 1px;
+}
+.p-datatable.p-datatable-gridlines:has(.p-datatable-tbody):has(.p-datatable-tfoot) .p-datatable-tbody > tr:last-child > td {
+  border-width: 0 0 0 1px;
+}
+.p-datatable.p-datatable-gridlines:has(.p-datatable-tbody):has(.p-datatable-tfoot) .p-datatable-tbody > tr:last-child > td:last-child {
+  border-width: 0 1px 0 1px;
 }
 .p-datatable.p-datatable-striped .p-datatable-tbody > tr.p-row-odd {
   background: #222222;
@@ -3421,6 +3454,22 @@
   background: rgba(255, 255, 255, 0.04);
 }
 
+@media screen and (max-width: 769px) {
+  .p-orderlist {
+    flex-direction: column;
+  }
+  .p-orderlist .p-orderlist-controls {
+    padding: 1rem;
+    flex-direction: row;
+  }
+  .p-orderlist .p-orderlist-controls .p-button {
+    margin-right: 0.5rem;
+    margin-bottom: 0;
+  }
+  .p-orderlist .p-orderlist-controls .p-button:last-child {
+    margin-right: 0;
+  }
+}
 .p-organizationchart .p-organizationchart-node-content.p-organizationchart-selectable-node:not(.p-highlight):hover {
   background: rgba(255, 255, 255, 0.04);
   color: rgba(255, 255, 255, 0.87);
@@ -3600,6 +3649,34 @@
   background: rgba(206, 147, 216, 0.16);
 }
 
+@media screen and (max-width: 769px) {
+  .p-picklist {
+    flex-direction: column;
+  }
+  .p-picklist .p-picklist-buttons {
+    padding: 1rem;
+    flex-direction: row;
+  }
+  .p-picklist .p-picklist-buttons .p-button {
+    margin-right: 0.5rem;
+    margin-bottom: 0;
+  }
+  .p-picklist .p-picklist-buttons .p-button:last-child {
+    margin-right: 0;
+  }
+  .p-picklist .p-picklist-transfer-buttons .pi-angle-right:before {
+    content: "\e930";
+  }
+  .p-picklist .p-picklist-transfer-buttons .pi-angle-double-right:before {
+    content: "\e92c";
+  }
+  .p-picklist .p-picklist-transfer-buttons .pi-angle-left:before {
+    content: "\e933";
+  }
+  .p-picklist .p-picklist-transfer-buttons .pi-angle-double-left:before {
+    content: "\e92f";
+  }
+}
 .p-tree {
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: #1e1e1e;
