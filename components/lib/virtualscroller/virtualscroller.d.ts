@@ -264,6 +264,11 @@ export interface VirtualScrollerProps {
      */
     className?: string | undefined;
     /**
+     * Index of the element in tabbing order.
+     * @defaultValue 0
+     */
+    tabIndex?: number | undefined;
+    /**
      * An array of objects to display.
      */
     items?: any[] | any[][] | undefined | null;
@@ -285,6 +290,11 @@ export interface VirtualScrollerProps {
      */
     orientation?: 'vertical' | 'horizontal' | 'both' | undefined;
     /**
+     * Used to specify how many items to load in each load method in lazy mode.
+     * @defaultValue 0
+     */
+    step?: number | undefined;
+    /**
      * Determines how many additional elements to add to the DOM outside of the view. According to the scrolls made up and down, extra items are added in a certain algorithm in the form of multiples of this number. Default value is half the number of items shown in the view.
      */
     numToleratedItems?: number | undefined;
@@ -298,6 +308,16 @@ export interface VirtualScrollerProps {
      * @defaultValue 10
      */
     resizeDelay?: number | undefined;
+    /**
+     * Used to append each loaded item to top without removing any items from the DOM. Using very large data may cause the browser to crash.
+     * @defaultValue false
+     */
+    appendOnly?: boolean | undefined;
+    /**
+     * When enabled, positions the content as inline.
+     * @defaultValue false
+     */
+    inline?: boolean | undefined;
     /**
      * Defines if data is loaded and interacted with in lazy manner.
      * @defaultValue false
