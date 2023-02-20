@@ -26,8 +26,8 @@ export function CheckboxRowSelectionDoc(props) {
 
     const code = {
         basic: `
-<TreeTable value={nodes} selectionMode="checkbox" selectionKeys={selectedNodeKeys} 
-        onSelectionChange={(e) => setSelectedNodeKeys(e.value)}>
+<TreeTable value={nodes} selectionMode="checkbox" selectionKeys={selectedNodeKeys}
+        onSelectionChange={(e) => setSelectedNodeKeys(e.value)} tableStyle={{ minWidth: '50rem' }}>
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
     <Column field="type" header="Type"></Column>
@@ -49,7 +49,7 @@ export default function CheckboxRowSelectionDemo() {
 
     return (
         <div className="card">
-            <TreeTable value={nodes} selectionMode="checkbox" selectionKeys={selectedNodeKeys} onSelectionChange={(e) => setSelectedNodeKeys(e.value)}>
+            <TreeTable value={nodes} selectionMode="checkbox" selectionKeys={selectedNodeKeys} onSelectionChange={(e) => setSelectedNodeKeys(e.value)} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
@@ -75,7 +75,7 @@ export default function CheckboxRowSelectionDemo() {
 
     return (
         <div className="card">
-            <TreeTable value={nodes} selectionMode="checkbox" selectionKeys={selectedNodeKeys} onSelectionChange={(e: TreeTableSelectionEvent) => setSelectedNodeKeys(e.value)}>
+            <TreeTable value={nodes} selectionMode="checkbox" selectionKeys={selectedNodeKeys} onSelectionChange={(e: TreeTableSelectionEvent) => setSelectedNodeKeys(e.value)} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
@@ -126,7 +126,7 @@ export default function CheckboxRowSelectionDemo() {
             </DocSectionText>
             <DocSectionCode code={introCode} hideToggleCode import hideCodeSandbox hideStackBlitz />
             <div className="card">
-                <TreeTable value={nodes} selectionMode="checkbox" selectionKeys={selectedNodeKeys} onSelectionChange={(e) => setSelectedNodeKeys(e.value)}>
+                <TreeTable value={nodes} selectionMode="checkbox" selectionKeys={selectedNodeKeys} onSelectionChange={(e) => setSelectedNodeKeys(e.value)} tableStyle={{ minWidth: '50rem' }}>
                     <Column field="name" header="Name" expander></Column>
                     <Column field="size" header="Size"></Column>
                     <Column field="type" header="Type"></Column>

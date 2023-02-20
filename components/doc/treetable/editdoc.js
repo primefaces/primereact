@@ -57,7 +57,7 @@ export function EditDoc(props) {
 
     const code = {
         basic: `
-<TreeTable value={nodes}>
+<TreeTable value={nodes} tableStyle={{ minWidth: '50rem' }}>
     <Column field="name" header="Name" expander style={{ height: '3.5rem' }}></Column>
     <Column field="size" header="Size" editor={sizeEditor} cellEditValidator={requiredValidator} style={{ height: '3.5rem' }}></Column>
     <Column field="type" header="Type" editor={typeEditor} style={{ height: '3.5rem' }}></Column>
@@ -76,7 +76,7 @@ export default function EditDemo() {
     useEffect(() => {
         NodeService.getTreeTableNodes().then((data) => setNodes(data));
     }, []);
-    
+
     const onEditorValueChange = (options, value) => {
         let newNodes = JSON.parse(JSON.stringify(nodes));
         let editedNode = findNodeByKey(newNodes, options.node.key);
@@ -121,7 +121,7 @@ export default function EditDemo() {
 
     return (
         <div className="card">
-            <TreeTable value={nodes}>
+            <TreeTable value={nodes} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" expander style={{ height: '3.5rem' }}></Column>
                 <Column field="size" header="Size" editor={sizeEditor} cellEditValidator={requiredValidator} style={{ height: '3.5rem' }}></Column>
                 <Column field="type" header="Type" editor={typeEditor} style={{ height: '3.5rem' }}></Column>
@@ -144,7 +144,7 @@ export default function EditDemo() {
     useEffect(() => {
         NodeService.getTreeTableNodes().then((data) => setNodes(data));
     }, []);
-    
+
     const onEditorValueChange = (options: ColumnEditorOptions, value: string) => {
         let newNodes = JSON.parse(JSON.stringify(nodes));
         let editedNode = findNodeByKey(newNodes, options.node.key);
@@ -189,7 +189,7 @@ export default function EditDemo() {
 
     return (
         <div className="card">
-            <TreeTable value={nodes}>
+            <TreeTable value={nodes} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" expander style={{ height: '3.5rem' }}></Column>
                 <Column field="size" header="Size" editor={sizeEditor} cellEditValidator={requiredValidator} style={{ height: '3.5rem' }}></Column>
                 <Column field="type" header="Type" editor={typeEditor} style={{ height: '3.5rem' }}></Column>
@@ -236,7 +236,7 @@ export default function EditDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <TreeTable value={nodes}>
+                <TreeTable value={nodes} tableStyle={{ minWidth: '50rem' }}>
                     <Column field="name" header="Name" expander style={{ height: '3.5rem' }}></Column>
                     <Column field="size" header="Size" editor={sizeEditor} cellEditValidator={requiredValidator} style={{ height: '3.5rem' }}></Column>
                     <Column field="type" header="Type" editor={typeEditor} style={{ height: '3.5rem' }}></Column>

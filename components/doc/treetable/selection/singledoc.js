@@ -19,8 +19,8 @@ export function SingleRowSelectionDoc(props) {
         basic: `
 <InputSwitch checked={metaKey} onChange={(e) => setMetaKey(e.value)} />
 
-<TreeTable value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} 
-        onSelectionChange={(e) => setSelectedNodeKey(e.value)} metaKeySelection={metaKey}>
+<TreeTable value={nodes} selectionMode="single" selectionKeys={selectedNodeKey}
+        onSelectionChange={(e) => setSelectedNodeKey(e.value)} metaKeySelection={metaKey} tableStyle={{ minWidth: '50rem' }}>
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
     <Column field="type" header="Type"></Column>
@@ -48,7 +48,7 @@ export default function SingleRowSelectionDemo() {
                 <InputSwitch inputId="input-metakey" checked={metaKey} onChange={(e) => setMetaKey(e.value)} />
                 <label htmlFor="input-metakey">MetaKey</label>
             </div>
-            <TreeTable value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={(e) => setSelectedNodeKey(e.value)} metaKeySelection={metaKey}>
+            <TreeTable value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={(e) => setSelectedNodeKey(e.value)} metaKeySelection={metaKey} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
@@ -80,7 +80,7 @@ export default function SingleRowSelectionDemo() {
                 <InputSwitch inputId="input-metakey" checked={metaKey} onChange={(e: InputSwitchChangeEvent) => setMetaKey(e.value)} />
                 <label htmlFor="input-metakey">MetaKey</label>
             </div>
-            <TreeTable value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={(e: TreeTableSelectionEvent) => setSelectedNodeKey(e.value)} metaKeySelection={metaKey}>
+            <TreeTable value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={(e: TreeTableSelectionEvent) => setSelectedNodeKey(e.value)} metaKeySelection={metaKey} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
@@ -135,7 +135,7 @@ export default function SingleRowSelectionDemo() {
                     <InputSwitch inputId="input-metakey" checked={metaKey} onChange={(e) => setMetaKey(e.value)} />
                     <label htmlFor="input-metakey">MetaKey</label>
                 </div>
-                <TreeTable value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={(e) => setSelectedNodeKey(e.value)} metaKeySelection={metaKey}>
+                <TreeTable value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={(e) => setSelectedNodeKey(e.value)} metaKeySelection={metaKey} tableStyle={{ minWidth: '50rem' }}>
                     <Column field="name" header="Name" expander></Column>
                     <Column field="size" header="Size"></Column>
                     <Column field="type" header="Type"></Column>

@@ -29,7 +29,7 @@ export function ColumnToggleDoc(props) {
 
     const code = {
         basic: `
-<TreeTable value={nodes} header={header}>
+<TreeTable value={nodes} header={header} tableStyle={{ minWidth: '50rem' }}>
     <Column key="name" field="name" header="Name" expander />
     {visibleColumns.map((col) => (
         <Column key={col.field} field={col.field} header={col.header} />
@@ -66,7 +66,7 @@ export default function ColumnToggleDemo() {
 
     return (
         <div className="card">
-            <TreeTable value={nodes} header={header}>
+            <TreeTable value={nodes} header={header} tableStyle={{ minWidth: '50rem' }}>
                 <Column key="name" field="name" header="Name" expander />
                 {visibleColumns.map((col) => (
                     <Column key={col.field} field={col.field} header={col.header} />
@@ -112,7 +112,7 @@ export default function ColumnToggleDemo() {
 
     return (
         <div className="card">
-            <TreeTable value={nodes} header={header}>
+            <TreeTable value={nodes} header={header} tableStyle={{ minWidth: '50rem' }}>
                 <Column key="name" field="name" header="Name" expander />
                 {visibleColumns.map((col) => (
                     <Column key={col.field} field={col.field} header={col.header} />
@@ -158,7 +158,7 @@ export default function ColumnToggleDemo() {
                 <p>Column visibility based on a condition can be implemented with dynamic columns, in this sample a MultiSelect is used to manage the visible columns.</p>
             </DocSectionText>
             <div className="card">
-                <TreeTable value={nodes} header={header}>
+                <TreeTable value={nodes} header={header} tableStyle={{ minWidth: '50rem' }}>
                     <Column key="name" field="name" header="Name" expander />
                     {visibleColumns.map((col) => (
                         <Column key={col.field} field={col.field} header={col.header} />

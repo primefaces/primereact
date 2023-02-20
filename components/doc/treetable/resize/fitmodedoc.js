@@ -14,7 +14,7 @@ export function FitModeDoc(props) {
 
     const code = {
         basic: `
-<TreeTable value={nodes} resizableColumns showGridlines>
+<TreeTable value={nodes} resizableColumns showGridlines tableStyle={{ minWidth: '50rem' }}>
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
     <Column field="type" header="Type"></Column>
@@ -28,14 +28,14 @@ import { NodeService } from './service/NodeService';
 
 export default function FitModeDemo() {
     const [nodes, setNodes] = useState([]);
-    
+
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []);
 
     return (
         <div className="card">
-            <TreeTable value={nodes} resizableColumns showGridlines>
+            <TreeTable value={nodes} resizableColumns showGridlines tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
@@ -53,14 +53,14 @@ import { NodeService } from './service/NodeService';
 
 export default function FitModeDemo() {
     const [nodes, setNodes] = useState<TreeNode[]>([]);
-    
+
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []);
 
     return (
         <div className="card">
-            <TreeTable value={nodes} resizableColumns showGridlines>
+            <TreeTable value={nodes} resizableColumns showGridlines tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
@@ -108,7 +108,7 @@ export default function FitModeDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <TreeTable value={nodes} resizableColumns showGridlines>
+                <TreeTable value={nodes} resizableColumns showGridlines tableStyle={{ minWidth: '50rem' }}>
                     <Column field="name" header="Name" expander></Column>
                     <Column field="size" header="Size"></Column>
                     <Column field="type" header="Type"></Column>

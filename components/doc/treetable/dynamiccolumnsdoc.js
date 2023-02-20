@@ -19,7 +19,7 @@ export function DynamicColumnsDoc(props) {
 
     const code = {
         basic: `
-<TreeTable value={nodes}>
+<TreeTable value={nodes} tableStyle={{ minWidth: '50rem' }}>
     {columns.map((col, i) => (
         <Column key={col.field} field={col.field} header={col.header} expander={col.expander} />
     ))}
@@ -45,7 +45,7 @@ export default function DynamicColumnsDemo() {
 
     return (
         <div className="card">
-            <TreeTable value={nodes}>
+            <TreeTable value={nodes} tableStyle={{ minWidth: '50rem' }}>
                 {columns.map((col, i) => (
                     <Column key={col.field} field={col.field} header={col.header} expander={col.expander} />
                 ))}
@@ -80,7 +80,7 @@ export default function DynamicColumnsDemo() {
 
     return (
         <div className="card">
-            <TreeTable value={nodes}>
+            <TreeTable value={nodes} tableStyle={{ minWidth: '50rem' }}>
                 {columns.map((col, i) => (
                     <Column key={col.field} field={col.field} header={col.header} expander={col.expander} />
                 ))}
@@ -125,7 +125,7 @@ export default function DynamicColumnsDemo() {
                 <p>Columns can be created programmatically.</p>
             </DocSectionText>
             <div className="card">
-                <TreeTable value={nodes}>
+                <TreeTable value={nodes} tableStyle={{ minWidth: '50rem' }}>
                     {columns.map((col, i) => (
                         <Column key={col.field} field={col.field} header={col.header} expander={col.expander} />
                     ))}

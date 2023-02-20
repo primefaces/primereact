@@ -14,7 +14,7 @@ export function ReorderDoc(props) {
 
     const code = {
         basic: `
-<TreeTable value={nodes} reorderableColumns>
+<TreeTable value={nodes} reorderableColumns tableStyle={{ minWidth: '50rem' }}>
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
     <Column field="type" header="Type"></Column>
@@ -35,7 +35,7 @@ export default function ReorderDemo() {
 
     return (
         <div className="card">
-            <TreeTable value={nodes} reorderableColumns>
+            <TreeTable value={nodes} reorderableColumns tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
@@ -53,14 +53,14 @@ import { NodeService } from './service/NodeService';
 
 export default function ReorderDemo() {
     const [nodes, setNodes] = useState<TreeNode[]>([]);
-    
+
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []);
 
     return (
         <div className="card">
-            <TreeTable value={nodes} reorderableColumns>
+            <TreeTable value={nodes} reorderableColumns tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
@@ -107,7 +107,7 @@ export default function ReorderDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <TreeTable value={nodes} reorderableColumns>
+                <TreeTable value={nodes} reorderableColumns tableStyle={{ minWidth: '50rem' }}>
                     <Column field="name" header="Name" expander></Column>
                     <Column field="size" header="Size"></Column>
                     <Column field="type" header="Type"></Column>

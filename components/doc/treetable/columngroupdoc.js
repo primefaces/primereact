@@ -191,7 +191,7 @@ export function ColumnGroupDoc(props) {
 
     const code = {
         basic: `
-<TreeTable value={nodes} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup}>
+<TreeTable value={nodes} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup} tableStyle={{ minWidth: '50rem' }}>
     <Column field="brand" expander />
     <Column field="lastYearSale" />
     <Column field="thisYearSale" />
@@ -391,7 +391,7 @@ export default function ColumnGroupDemo() {
 
     return (
         <div className="card">
-            <TreeTable value={nodes} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup}>
+            <TreeTable value={nodes} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="brand" expander />
                 <Column field="lastYearSale" />
                 <Column field="thisYearSale" />
@@ -617,7 +617,7 @@ export default function ColGroupDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <TreeTable value={nodes} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup}>
+                <TreeTable value={nodes} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup} tableStyle={{ minWidth: '50rem' }}>
                     <Column field="brand" expander />
                     <Column field="lastYearSale" />
                     <Column field="thisYearSale" />

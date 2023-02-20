@@ -25,7 +25,7 @@ export function ConditionalStyleDoc(props) {
 
     const code = {
         basic: `
-<TreeTable value={nodes} rowClassName={rowClassName}>
+<TreeTable value={nodes} rowClassName={rowClassName} tableStyle={{ minWidth: '50rem' }}>
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size" body={sizeTemplate}></Column>
     <Column field="type" header="Type"></Column>
@@ -39,7 +39,7 @@ import { NodeService } from './service/NodeService';
 
 export default function ConditionalStyleDemo() {
     const [nodes, setNodes] = useState([]);
-    
+
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []);
@@ -57,7 +57,7 @@ export default function ConditionalStyleDemo() {
 
     return (
         <div className="card">
-            <TreeTable value={nodes} rowClassName={rowClassName}>
+            <TreeTable value={nodes} rowClassName={rowClassName} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size" body={sizeTemplate}></Column>
                 <Column field="type" header="Type"></Column>
@@ -75,7 +75,7 @@ import { NodeService } from './service/NodeService';
 
 export default function ConditionalStyleDemo() {
     const [nodes, setNodes] = useState<TreeNode[]>([]);
-    
+
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []);
@@ -93,7 +93,7 @@ export default function ConditionalStyleDemo() {
 
     return (
         <div className="card">
-            <TreeTable value={nodes} rowClassName={rowClassName}>
+            <TreeTable value={nodes} rowClassName={rowClassName} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size" body={sizeTemplate}></Column>
                 <Column field="type" header="Type"></Column>
@@ -140,7 +140,7 @@ export default function ConditionalStyleDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <TreeTable value={nodes} rowClassName={rowClassName}>
+                <TreeTable value={nodes} rowClassName={rowClassName} tableStyle={{ minWidth: '50rem' }}>
                     <Column field="name" header="Name" expander></Column>
                     <Column field="size" header="Size" body={sizeTemplate}></Column>
                     <Column field="type" header="Type"></Column>

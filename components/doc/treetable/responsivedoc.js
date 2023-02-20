@@ -14,7 +14,7 @@ export function ResponsiveDoc(props) {
 
     const code = {
         basic: `
-<TreeTable value={nodes} tableStyle={{ minWidth: '650px' }} style={{ overflow: 'auto' }}>
+<TreeTable value={nodes} tableStyle={{ minWidth: '50rem' }}>
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
     <Column field="type" header="Type"></Column>
@@ -35,7 +35,7 @@ export default function ResponsiveDemo() {
 
     return (
         <div className="card">
-            <TreeTable value={nodes} tableStyle={{ minWidth: '650px' }} style={{ overflow: 'auto' }}>
+            <TreeTable value={nodes} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
@@ -60,7 +60,7 @@ export default function ResponsiveDemo() {
 
     return (
         <div className="card">
-            <TreeTable value={nodes} tableStyle={{ minWidth: '650px' }} style={{ overflow: 'auto' }}>
+            <TreeTable value={nodes} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
@@ -107,7 +107,7 @@ export default function ResponsiveDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <TreeTable value={nodes} tableStyle={{ minWidth: '650px' }} style={{ overflow: 'auto' }}>
+                <TreeTable value={nodes} tableStyle={{ minWidth: '50rem' }}>
                     <Column field="name" header="Name" expander></Column>
                     <Column field="size" header="Size"></Column>
                     <Column field="type" header="Type"></Column>

@@ -16,7 +16,7 @@ export function SingleColumnDoc(props) {
 
     const code = {
         basic: `
-<TreeTable value={nodes}>
+<TreeTable value={nodes} tableStyle={{ minWidth: '50rem' }}>
     <Column field="name" header="Name" expander sortable></Column>
     <Column field="size" header="Size" sortable></Column>
     <Column field="type" header="Type" sortable></Column>
@@ -30,7 +30,7 @@ import { NodeService } from './service/NodeService';
 
 export default function SingleColumnDemo() {
     const [nodes, setNodes] = useState([]);
-    
+
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => {
             setNodes(data);
@@ -39,7 +39,7 @@ export default function SingleColumnDemo() {
 
     return (
         <div className="card">
-            <TreeTable value={nodes}>
+            <TreeTable value={nodes} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" expander sortable></Column>
                 <Column field="size" header="Size" sortable></Column>
                 <Column field="type" header="Type" sortable></Column>
@@ -57,7 +57,7 @@ import { NodeService } from './service/NodeService';
 
 export default function SingleColumnDemo() {
     const [nodes, setNodes] = useState<TreeNode[]>([]);
-    
+
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => {
             setNodes(data);
@@ -66,7 +66,7 @@ export default function SingleColumnDemo() {
 
     return (
         <div className="card">
-            <TreeTable value={nodes}>
+            <TreeTable value={nodes} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" expander sortable></Column>
                 <Column field="size" header="Size" sortable></Column>
                 <Column field="type" header="Type" sortable></Column>
@@ -113,7 +113,7 @@ export default function SingleColumnDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <TreeTable value={nodes}>
+                <TreeTable value={nodes} tableStyle={{ minWidth: '50rem' }}>
                     <Column field="name" header="Name" expander sortable></Column>
                     <Column field="size" header="Size" sortable></Column>
                     <Column field="type" header="Type" sortable></Column>

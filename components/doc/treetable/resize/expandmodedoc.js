@@ -14,7 +14,7 @@ export function ExpandModeDoc(props) {
 
     const code = {
         basic: `
-<TreeTable value={nodes} resizableColumns showGridlines columnResizeMode="expand">
+<TreeTable value={nodes} resizableColumns showGridlines columnResizeMode="expand" tableStyle={{ minWidth: '50rem' }}>
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
     <Column field="type" header="Type"></Column>
@@ -28,14 +28,14 @@ import { NodeService } from './service/NodeService';
 
 export default function ExpandModeDemo() {
     const [nodes, setNodes] = useState([]);
-    
+
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []);
 
     return (
         <div className="card">
-            <TreeTable value={nodes} resizableColumns showGridlines columnResizeMode="expand">
+            <TreeTable value={nodes} resizableColumns showGridlines columnResizeMode="expand" tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
@@ -53,14 +53,14 @@ import { NodeService } from './service/NodeService';
 
 export default function ExpandModeDemo() {
     const [nodes, setNodes] = useState<TreeNode[]>([]);
-    
+
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => setNodes(data));
     }, []);
 
     return (
         <div className="card">
-            <TreeTable value={nodes} resizableColumns showGridlines columnResizeMode="expand">
+            <TreeTable value={nodes} resizableColumns showGridlines columnResizeMode="expand" tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
@@ -107,7 +107,7 @@ export default function ExpandModeDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <TreeTable value={nodes} resizableColumns showGridlines columnResizeMode="expand">
+                <TreeTable value={nodes} resizableColumns showGridlines columnResizeMode="expand" tableStyle={{ minWidth: '50rem' }}>
                     <Column field="name" header="Name" expander></Column>
                     <Column field="size" header="Size"></Column>
                     <Column field="type" header="Type"></Column>

@@ -25,9 +25,9 @@ export function RowSelectionEventsDoc(props) {
 
     const code = {
         basic: `
-<TreeTable value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} 
-        onSelectionChange={(e) => setSelectedNodeKey(e.value)} metaKeySelection={false} 
-        onSelect={onSelect} onUnselect={onUnselect}>
+<TreeTable value={nodes} selectionMode="single" selectionKeys={selectedNodeKey}
+        onSelectionChange={(e) => setSelectedNodeKey(e.value)} metaKeySelection={false}
+        onSelect={onSelect} onUnselect={onUnselect} tableStyle={{ minWidth: '50rem' }}>
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
     <Column field="type" header="Type"></Column>
@@ -61,7 +61,7 @@ export default function SingleRowSelectionDemo() {
     return (
         <div className="card">
             <Toast ref={toast} />
-            <TreeTable value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={(e) => setSelectedNodeKey(e.value)} metaKeySelection={false} onSelect={onSelect} onUnselect={onUnselect}>
+            <TreeTable value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={(e) => setSelectedNodeKey(e.value)} metaKeySelection={false} onSelect={onSelect} onUnselect={onUnselect} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
@@ -99,7 +99,7 @@ export default function SingleRowSelectionDemo() {
     return (
         <div className="card">
             <Toast ref={toast} />
-            <TreeTable value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={(e: TreeTableSelectionEvent) => setSelectedNodeKey(e.value)} metaKeySelection={false} onSelect={onSelect} onUnselect={onUnselect}>
+            <TreeTable value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={(e: TreeTableSelectionEvent) => setSelectedNodeKey(e.value)} metaKeySelection={false} onSelect={onSelect} onUnselect={onUnselect} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
@@ -147,7 +147,16 @@ export default function SingleRowSelectionDemo() {
             </DocSectionText>
             <div className="card">
                 <Toast ref={toast} />
-                <TreeTable value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={(e) => setSelectedNodeKey(e.value)} metaKeySelection={false} onSelect={onSelect} onUnselect={onUnselect}>
+                <TreeTable
+                    value={nodes}
+                    selectionMode="single"
+                    selectionKeys={selectedNodeKey}
+                    onSelectionChange={(e) => setSelectedNodeKey(e.value)}
+                    metaKeySelection={false}
+                    onSelect={onSelect}
+                    onUnselect={onUnselect}
+                    tableStyle={{ minWidth: '50rem' }}
+                >
                     <Column field="name" header="Name" expander></Column>
                     <Column field="size" header="Size"></Column>
                     <Column field="type" header="Type"></Column>

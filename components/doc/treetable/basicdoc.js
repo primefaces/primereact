@@ -14,7 +14,7 @@ export function BasicDoc(props) {
 
     const code = {
         basic: `
-<TreeTable value={nodes}>
+<TreeTable value={nodes} tableStyle={{ minWidth: '50rem' }}>
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
     <Column field="type" header="Type"></Column>
@@ -35,7 +35,7 @@ export default function BasicDemo() {
 
     return (
         <div className="card">
-            <TreeTable value={nodes}>
+            <TreeTable value={nodes} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
@@ -60,7 +60,7 @@ export default function BasicDemo() {
 
     return (
         <div className="card">
-            <TreeTable value={nodes}>
+            <TreeTable value={nodes} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
@@ -107,7 +107,7 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <TreeTable value={nodes}>
+                <TreeTable value={nodes} tableStyle={{ minWidth: '50rem' }}>
                     <Column field="name" header="Name" expander></Column>
                     <Column field="size" header="Size"></Column>
                     <Column field="type" header="Type"></Column>

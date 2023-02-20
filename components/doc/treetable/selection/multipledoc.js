@@ -28,8 +28,8 @@ export function MultipleRowsSelectionDoc(props) {
         basic: `
 <InputSwitch checked={metaKey} onChange={(e) => setMetaKey(e.value)} />
 
-<TreeTable value={nodes} selectionMode="multiple" selectionKeys={selectedNodeKeys} 
-        onSelectionChange={(e) => setSelectedNodeKeys(e.value)} metaKeySelection={metaKey}>
+<TreeTable value={nodes} selectionMode="multiple" selectionKeys={selectedNodeKeys}
+        onSelectionChange={(e) => setSelectedNodeKeys(e.value)} metaKeySelection={metaKey} tableStyle={{ minWidth: '50rem' }}>
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
     <Column field="type" header="Type"></Column>
@@ -57,7 +57,7 @@ export default function MultipleRowsSelectionDemo() {
                 <InputSwitch inputId="input-metakey" checked={metaKey} onChange={(e) => setMetaKey(e.value)} />
                 <label htmlFor="input-metakey">MetaKey</label>
             </div>
-            <TreeTable value={nodes} selectionMode="multiple" selectionKeys={selectedNodeKeys} onSelectionChange={(e) => setSelectedNodeKeys(e.value)} metaKeySelection={metaKey}>
+            <TreeTable value={nodes} selectionMode="multiple" selectionKeys={selectedNodeKeys} onSelectionChange={(e) => setSelectedNodeKeys(e.value)} metaKeySelection={metaKey} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
@@ -89,7 +89,7 @@ export default function MultipleRowsSelectionDemo() {
                 <InputSwitch inputId="input-metakey" checked={metaKey} onChange={(e: InputSwitchChangeEvent) => setMetaKey(e.value)} />
                 <label htmlFor="input-metakey">MetaKey</label>
             </div>
-            <TreeTable value={nodes} selectionMode="multiple" selectionKeys={selectedNodeKeys} onSelectionChange={(e: TreeTableSelectionEvent) => setSelectedNodeKeys(e.value)} metaKeySelection={metaKey}>
+            <TreeTable value={nodes} selectionMode="multiple" selectionKeys={selectedNodeKeys} onSelectionChange={(e: TreeTableSelectionEvent) => setSelectedNodeKeys(e.value)} metaKeySelection={metaKey} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
@@ -143,7 +143,7 @@ export default function MultipleRowsSelectionDemo() {
                     <InputSwitch inputId="input-metakey" checked={metaKey} onChange={(e) => setMetaKey(e.value)} />
                     <label htmlFor="input-metakey">MetaKey</label>
                 </div>
-                <TreeTable value={nodes} selectionMode="multiple" selectionKeys={selectedNodeKeys} onSelectionChange={(e) => setSelectedNodeKeys(e.value)} metaKeySelection={metaKey}>
+                <TreeTable value={nodes} selectionMode="multiple" selectionKeys={selectedNodeKeys} onSelectionChange={(e) => setSelectedNodeKeys(e.value)} metaKeySelection={metaKey} tableStyle={{ minWidth: '50rem' }}>
                     <Column field="name" header="Name" expander></Column>
                     <Column field="size" header="Size"></Column>
                     <Column field="type" header="Type"></Column>
