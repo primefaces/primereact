@@ -3573,7 +3573,8 @@
                             "readonly": false,
                             "type": "boolean",
                             "default": "false",
-                            "description": "Whether the month should be rendered as a dropdown instead of text."
+                            "description": "Whether the month should be rendered as a dropdown instead of text.",
+                            "deprecated": "since v6. Navigator is always on."
                         },
                         {
                             "name": "name",
@@ -3861,7 +3862,8 @@
                             "readonly": false,
                             "type": "boolean",
                             "default": "false",
-                            "description": "Whether the year should be rendered as a dropdown instead of text."
+                            "description": "Whether the year should be rendered as a dropdown instead of text.",
+                            "deprecated": "since v6. Navigator is always on."
                         },
                         {
                             "name": "yearRange",
@@ -9660,7 +9662,8 @@
                             "readonly": false,
                             "type": "\"scroll\" | \"stack\"",
                             "default": "scroll",
-                            "description": "Defines the responsive mode, valid options are \"stack\" and \"scroll\"."
+                            "description": "Defines the responsive mode, valid options are \"stack\" and \"scroll\".",
+                            "deprecated": "since version 9.2.0"
                         },
                         {
                             "name": "rowGroupFooterTemplate",
@@ -26494,7 +26497,8 @@
                             "readonly": false,
                             "type": "ReactNode | Function",
                             "default": "",
-                            "description": "The template of left section."
+                            "description": "The template of left section.",
+                            "deprecated": "use start instead"
                         },
                         {
                             "name": "right",
@@ -26502,7 +26506,8 @@
                             "readonly": false,
                             "type": "ReactNode | Function",
                             "default": "",
-                            "description": "The template of right section."
+                            "description": "The template of right section.",
+                            "deprecated": "use end instead"
                         },
                         {
                             "name": "start",
