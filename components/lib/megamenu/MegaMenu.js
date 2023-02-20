@@ -2,7 +2,7 @@ import * as React from 'react';
 import PrimeReact from '../api/Api';
 import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils, UniqueComponentId } from '../utils/Utils';
 import { MegaMenuBase } from './MegaMenuBase';
 
 export const MegaMenu = React.memo(
@@ -10,7 +10,9 @@ export const MegaMenu = React.memo(
         const props = MegaMenuBase.getProps(inProps);
 
         const [activeItemState, setActiveItemState] = React.useState(null);
+        const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
         const elementRef = React.useRef(null);
+        const styleElementRef = React.useRef(null);
         const horizontal = props.orientation === 'horizontal';
         const vertical = props.orientation === 'vertical';
 
@@ -185,6 +187,10 @@ export const MegaMenu = React.memo(
         }));
 
         useMountEffect(() => {
+            if (props.breakpoint) {
+                !attributeSelectorState && setAttributeSelectorState(UniqueComponentId());
+            }
+
             bindDocumentClickListener();
         });
 
@@ -324,6 +330,73 @@ export const MegaMenu = React.memo(
 
             return null;
         };
+
+        const createStyle = () => {
+            if (!styleElementRef.current) {
+                styleElementRef.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+
+                const selector = `${attributeSelectorState}`;
+                const innerHTML = `
+@media screen and (max-width: ${props.breakpoint}) {
+    .p-megamenu-vertical[${selector}] .p-megamenu-root-list {
+        max-height: ${props.scrollHeight};
+        overflow: ${props.scrollHeight ? 'auto' : ''};
+    }
+
+    .p-megamenu-vertical[${selector}] > .p-megamenu-root-list .p-menuitem-active .p-megamenu-panel {
+        position: relative;
+        left: 0 !important;
+        box-shadow: none;
+        border-radius: 0;
+        background: #f8f9fa;
+    }
+
+    .p-megamenu-vertical[${selector}] .p-megamenu-grid {
+        flex-wrap: wrap;
+    }
+
+    .p-megamenu-vertical[${selector}] div[class*="p-megamenu-col-"] {
+        width: auto;
+        padding: 0;
+    }
+
+    .p-megamenu-vertical[${selector}] .p-megamenu-submenu {
+        width: auto;
+    }
+
+    .p-megamenu-vertical[${selector}] div[class*="p-megamenu-col-"] .p-megamenu-submenu-header {
+        background: #f8f9fa;
+    }
+
+    .p-megamenu-vertical[${selector}] div[class*="p-megamenu-col-"] .p-menuitem {
+        width: 100%;
+        padding: 0 0 0 calc(var(--inline-spacing) * 2); /* @todo */
+    }
+
+    .p-megamenu-vertical[${selector}] .p-submenu-icon:before {
+        content: "\\e930";
+    }
+}
+`;
+
+                styleElementRef.current.innerHTML = innerHTML;
+            }
+        };
+
+        const destroyStyle = () => {
+            styleElementRef.current = DomHandler.removeInlineStyle(styleElementRef.current);
+        };
+
+        useUpdateEffect(() => {
+            if (attributeSelectorState && elementRef.current) {
+                elementRef.current.setAttribute(attributeSelectorState, '');
+                createStyle();
+            }
+
+            return () => {
+                destroyStyle();
+            };
+        }, [attributeSelectorState, props.breakpoint]);
 
         const createCategory = (category, index) => {
             const className = classNames('p-menuitem', { 'p-menuitem-active': category === activeItemState }, category.className);

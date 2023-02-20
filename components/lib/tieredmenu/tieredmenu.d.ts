@@ -31,6 +31,15 @@ export interface TieredMenuProps extends Omit<React.DetailedHTMLProps<React.HTML
      */
     autoZIndex?: boolean | undefined;
     /**
+     * The breakpoint to define the maximum width boundary when responsiveness is enabled.
+     */
+    breakpoint?: string | undefined;
+    /**
+     * Maximum height of the options panel on responsive mode.
+     * @defaultValue 400px
+     */
+    scrollHeight?: string | undefined;
+    /**
      * Whether to automatically manage layering.
      * @defaultValue 0
      */

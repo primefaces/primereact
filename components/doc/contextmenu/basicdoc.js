@@ -12,7 +12,7 @@ export function BasicDoc(props) {
 
     const code = {
         basic: `
-<ContextMenu model={items} ref={cm} />
+<ContextMenu model={items} ref={cm} breakpoint="767px" />
 <img src="/images/nature/nature3.jpg" alt="Logo" onContextMenu={(e) => cm.current.show(e)} />
 `,
         javascript: `
@@ -28,7 +28,7 @@ export default function BasicDemo() {
 
     return (
         <div className="card flex md:justify-content-center">
-            <ContextMenu model={items} ref={cm} />
+            <ContextMenu model={items} ref={cm} breakpoint="767px" />
             <img src="https://primefaces.org/cdn/primereact/images/nature/nature3.jpg" alt="Logo" onContextMenu={(e) => cm.current.show(e)} />
         </div>
     )
@@ -48,7 +48,7 @@ export default function BasicDemo() {
 
     return (
         <div className="card flex md:justify-content-center">
-            <ContextMenu model={items} ref={cm} />
+            <ContextMenu model={items} ref={cm} breakpoint="767px" />
             <img src="https://primefaces.org/cdn/primereact/images/nature/nature3.jpg" alt="Logo" onContextMenu={(e) => cm.current.show(e)} />
         </div>
     )
@@ -64,7 +64,7 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex md:justify-content-center">
-                <ContextMenu model={items} ref={cm} />
+                <ContextMenu model={items} ref={cm} breakpoint="767px" />
                 <img src="https://primefaces.org/cdn/primereact/images/nature/nature3.jpg" alt="Logo" className="w-full md:w-auto" onContextMenu={(e) => cm.current.show(e)} />
             </div>
             <DocSectionCode code={code} />
