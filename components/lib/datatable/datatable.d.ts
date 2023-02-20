@@ -702,11 +702,6 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      */
     alwaysShowPaginator?: boolean | undefined;
     /**
-     * Whether the cell widths scale according to their content or not.
-     * @defaultValue false
-     */
-    autoLayout?: boolean | undefined;
-    /**
      * The breakpoint to define the maximum width boundary when using stack responsive layout.
      * @defaultValue 960px
      */
@@ -944,7 +939,7 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     resizableColumns?: boolean | undefined;
     /**
      * Defines the responsive mode, valid options are "stack" and "scroll".
-     * @defaultValue stack
+     * @defaultValue scroll
      */
     responsiveLayout?: 'scroll' | 'stack' | undefined;
     /**

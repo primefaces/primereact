@@ -5,7 +5,6 @@ export const DataTableBase = {
     defaultProps: {
         __TYPE: 'DataTable',
         alwaysShowPaginator: true,
-        autoLayout: false,
         breakpoint: '960px',
         cellClassName: null,
         cellSelection: false,
