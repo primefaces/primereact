@@ -4449,6 +4449,7 @@
   border-bottom: 0 none;
   border-top-right-radius: 6px;
   border-top-left-radius: 6px;
+  gap: 0.5rem;
 }
 .p-fileupload .p-fileupload-buttonbar .p-button {
   margin-right: 0.5rem;
