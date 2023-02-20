@@ -940,6 +940,7 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     /**
      * Defines the responsive mode, valid options are "stack" and "scroll".
      * @defaultValue scroll
+     * @deprecated since version 9.2.0
      */
     responsiveLayout?: 'scroll' | 'stack' | undefined;
     /**
@@ -966,11 +967,6 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      * Array of integer values to display inside rows per page dropdown.
      */
     rowsPerPageOptions?: number[] | undefined;
-    /**
-     * Orientation of the scrolling, options are "vertical", "horizontal" and "both".
-     * @defaultValue vertical|horizontal
-     */
-    scrollDirection?: 'vertical' | 'horizontal' | 'both' | undefined;
     /**
      * Height of the scroll viewport.
      */

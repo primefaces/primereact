@@ -106,7 +106,6 @@ export const DataTableBase = {
         rowHover: false,
         rows: null,
         rowsPerPageOptions: null,
-        scrollDirection: 'vertical',
         scrollHeight: null,
         scrollable: false,
         selectAll: false,
