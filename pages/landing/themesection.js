@@ -175,7 +175,6 @@ const ThemeSection = (props) => {
                         filters={filters}
                         filterDisplay="menu"
                         loading={loading}
-                        responsiveLayout="scroll"
                         globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']}
                         emptyMessage="No customers found."
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
