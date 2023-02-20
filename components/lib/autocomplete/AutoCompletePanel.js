@@ -3,7 +3,7 @@ import PrimeReact, { localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import { classNames, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 
 export const AutoCompletePanel = React.memo(
@@ -86,7 +86,7 @@ export const AutoCompletePanel = React.memo(
                             const className = classNames('p-autocomplete-items', options.className);
 
                             return (
-                                <ul ref={options.contentRef} className={className} role="listbox" id={props.listId}>
+                                <ul ref={options.contentRef} style={options.style} className={className} role="listbox" id={props.listId}>
                                     {options.children}
                                 </ul>
                             );
