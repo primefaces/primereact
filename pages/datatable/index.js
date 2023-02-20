@@ -23,7 +23,6 @@ import { LazyLoadDoc } from '../../components/doc/datatable/lazyloaddoc';
 import { PaginatorBasicDoc } from '../../components/doc/datatable/paginator/basicdoc';
 import { PaginatorTemplateDoc } from '../../components/doc/datatable/paginator/templatedoc';
 import { ReorderDoc } from '../../components/doc/datatable/reorderdoc';
-import { ResponsiveDoc } from '../../components/doc/datatable/responsivedoc';
 import { RowExpansionDoc } from '../../components/doc/datatable/rowexpansiondoc';
 import { ExpandableRowGroupDoc } from '../../components/doc/datatable/rowgroup/expandabledoc';
 import { RowSpanRowGroupDoc } from '../../components/doc/datatable/rowgroup/rowspandoc';
@@ -308,11 +307,6 @@ const DataTableDemo = () => {
                     component: RowSpanRowGroupDoc
                 }
             ]
-        },
-        {
-            id: 'responsive',
-            label: 'Responsive',
-            component: ResponsiveDoc
         },
         {
             id: 'conditional_style',

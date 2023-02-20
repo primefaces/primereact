@@ -17,7 +17,6 @@ import { PaginatorTemplateDoc } from '../../components/doc/treetable/paginator/t
 import { ReorderDoc } from '../../components/doc/treetable/reorderdoc';
 import { ExpandModeDoc } from '../../components/doc/treetable/resize/expandmodedoc';
 import { FitModeDoc } from '../../components/doc/treetable/resize/fitmodedoc';
-import { ResponsiveDoc } from '../../components/doc/treetable/responsivedoc';
 import { FrozenColumnsDoc } from '../../components/doc/treetable/scroll/frozencolumnsdoc';
 import { HorizontalScrollDoc } from '../../components/doc/treetable/scroll/horizontaldoc';
 import { VerticalScrollDoc } from '../../components/doc/treetable/scroll/verticaldoc';
@@ -191,11 +190,6 @@ const TreeTableDemo = () => {
             id: 'contextmenu',
             label: 'Context Menu',
             component: ContextMenuDoc
-        },
-        {
-            id: 'responsive',
-            label: 'Responsive',
-            component: ResponsiveDoc
         },
         {
             id: 'style',
