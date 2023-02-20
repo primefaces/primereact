@@ -8833,6 +8833,14 @@
                             "description": "Base zIndex value to use in layering."
                         },
                         {
+                            "name": "breakpoint",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "The breakpoint to define the maximum width boundary when responsiveness is enabled."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
@@ -8855,6 +8863,14 @@
                             "type": "MenuItem[]",
                             "default": "",
                             "description": "An array of menuitems."
+                        },
+                        {
+                            "name": "scrollHeight",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "400px",
+                            "description": "Maximum height of the options panel on responsive mode."
                         },
                         {
                             "name": "transitionOptions",
@@ -17686,6 +17702,14 @@
                     "description": "Defines valid properties in MegaMenu component. In addition to these, all properties of HTMLDivElement can be used in this component.",
                     "values": [
                         {
+                            "name": "breakpoint",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "The breakpoint to define the maximum width boundary when responsiveness is enabled."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
@@ -17716,6 +17740,14 @@
                             "type": "\"horizontal\" | \"vertical\"",
                             "default": "horizontal",
                             "description": "Defines the orientation, valid values are horizontal and vertical."
+                        },
+                        {
+                            "name": "scrollHeight",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "400px",
+                            "description": "Maximum height of the options panel on responsive mode."
                         },
                         {
                             "name": "start",
@@ -25840,6 +25872,14 @@
                             "description": "Whether to automatically manage layering."
                         },
                         {
+                            "name": "breakpoint",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "The breakpoint to define the maximum width boundary when responsiveness is enabled."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
@@ -25862,6 +25902,14 @@
                             "type": "boolean",
                             "default": "false",
                             "description": "Defines if menu would displayed as a popup."
+                        },
+                        {
+                            "name": "scrollHeight",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "400px",
+                            "description": "Maximum height of the options panel on responsive mode."
                         },
                         {
                             "name": "transitionOptions",
