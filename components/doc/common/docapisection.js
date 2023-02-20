@@ -21,7 +21,7 @@ const Component = (props) => {
                 element && element.parentElement.scrollIntoView({ block: 'start', behavior });
             };
 
-            const createContent = (value, isLinkableOption) => {
+            const createContent = (value, isLinkableOption, deprecated) => {
                 if (allowLink && value) {
                     const splitedValues = value.split('|');
 
@@ -49,7 +49,7 @@ const Component = (props) => {
                             <React.Fragment key={i}>
                                 {i !== 0 ? '|' : ''}
                                 {isLinkableOption ? (
-                                    <span id={id + '.' + sValue} className="doc-option-name">
+                                    <span id={id + '.' + sValue} className={classNames('doc-option-name', { 'line-through cursor-pointer': !!deprecated })} title={deprecated}>
                                         {sValue}
                                         <Link href={router.basePath + router.pathname + `#${id + '.' + sValue}`} target="_self">
                                             <a onClick={() => onClick(id + '.' + sValue)} className="doc-option-link">
@@ -68,7 +68,7 @@ const Component = (props) => {
                 const val = value && value.includes('": "') ? value.replace(/['"]+/g, '').replace(/\.,/gm, '.') : value;
 
                 return isLinkableOption ? (
-                    <span id={id + '.' + val} className="doc-option-name">
+                    <span id={id + '.' + val} className={classNames('doc-option-name', { 'line-through cursor-pointer': !!deprecated })} title={deprecated}>
                         {val}
                         <Link href={router.basePath + router.pathname + `#${id + '.' + val}`} target="_self">
                             <a onClick={() => onClick(id + '.' + val)} className="doc-option-link">
@@ -85,7 +85,7 @@ const Component = (props) => {
                 <div className="doc-tablewrapper">
                     <table className="doc-table">
                         <thead>
-                            <tr>{headers.map((h) => h !== 'readonly' && h !== 'optional' && <th key={h}>{h}</th>)}</tr>
+                            <tr>{headers.map((h) => h !== 'readonly' && h !== 'optional' && h !== 'deprecated' && <th key={h}>{h}</th>)}</tr>
                         </thead>
                         <tbody>
                             {data.map((d, i) => {
@@ -94,7 +94,8 @@ const Component = (props) => {
                                         {Object.entries(d).map(
                                             ([k, v], index) =>
                                                 k !== 'readonly' &&
-                                                k !== 'optional' && (
+                                                k !== 'optional' &&
+                                                k !== 'deprecated' && (
                                                     <td key={index} className={classNames({ 'doc-option-type': k === 'type', 'doc-option-default': k === 'defaultValue' })}>
                                                         {k === 'parameters'
                                                             ? v.map((_v, i) => {
@@ -106,7 +107,7 @@ const Component = (props) => {
                                                                   );
                                                               })
                                                             : k !== 'description'
-                                                            ? createContent(v, k === 'name')
+                                                            ? createContent(v, k === 'name', d['deprecated'])
                                                             : v}
                                                     </td>
                                                 )
