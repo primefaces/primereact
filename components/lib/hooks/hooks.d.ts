@@ -224,3 +224,9 @@ export declare function useIntersectionObserver(ref: React.RefObject<Element>, o
  * @param {*} callback - The callback to run when click outside.
  */
 export declare function useClickOutside(ref: React.RefObject<Element>, callback: any): void;
+/**
+ * Custom hook to detect if window size matches or not.
+ * @param {string} query - the media query
+ * @param {boolean} when - Whether to listen to the event or not.
+ */
+export declare function useMatchMedia(query: string, when?: boolean): boolean;
