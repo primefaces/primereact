@@ -35,7 +35,7 @@ export const useOverlayListener = ({ target, overlay, listener, when = true }) =
         }
     });
     const [bindOverlayScrollListener, unbindOverlayScrollListener] = useOverlayScrollListener({
-        target: target,
+        target,
         listener: (event) => {
             listener && listener(event, { type: 'scroll', valid: true });
         }
