@@ -83,7 +83,7 @@ import { Checkbox } from "primereact/checkbox";
 export default function GroupDemo() {
     const [ingredients, setIngredients] = useState<string[]>([]);
 
-    const onIngredientsChange = (e: CheckboxChangeParams) => {
+    const onIngredientsChange = (e: CheckboxChangeEvent) => {
         let _ingredients = [...ingredients];
 
         if (e.checked)
