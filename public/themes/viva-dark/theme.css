@@ -4602,6 +4602,7 @@
 }
 .p-contextmenu .p-submenu-icon {
   font-size: 0.875rem;
+  transition: transform 0.3s;
 }
 
 .p-dock .p-dock-list {
@@ -4824,6 +4825,9 @@
   outline-offset: 0;
   box-shadow: 0 0 0 1px #9eade6;
 }
+.p-megamenu .p-submenu-icon {
+  transition: transform 0.3s;
+}
 .p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list {
   padding: 0.5rem 0.5rem;
   background: #161d21;
@@ -4877,7 +4881,6 @@
 }
 .p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list > .p-menuitem > .p-menuitem-link > .p-submenu-icon {
   margin-left: auto;
-  transition: transform 0.3s;
 }
 .p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list > .p-menuitem.p-menuitem-active > .p-menuitem-link > .p-submenu-icon {
   transform: rotate(-180deg);
@@ -5546,6 +5549,7 @@
 }
 .p-tieredmenu .p-submenu-icon {
   font-size: 0.875rem;
+  transition: transform 0.3s;
 }
 
 .p-inline-message {
