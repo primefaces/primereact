@@ -15104,6 +15104,23 @@
                     "returnType": "[S, React.Dispatch<React.SetStateAction<S>>]",
                     "description": "Custom hook to use local storage."
                 },
+                "useMatchMedia": {
+                    "name": "useMatchMedia",
+                    "parameters": [
+                        {
+                            "name": "query",
+                            "type": "string",
+                            "description": "the media query"
+                        },
+                        {
+                            "name": "when",
+                            "type": "boolean",
+                            "description": "Whether to listen to the event or not."
+                        }
+                    ],
+                    "returnType": "boolean",
+                    "description": "Custom hook to detect if window size matches or not."
+                },
                 "useMountEffect": {
                     "name": "useMountEffect",
                     "parameters": [
