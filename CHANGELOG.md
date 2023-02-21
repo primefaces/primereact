@@ -1,5 +1,31 @@
 # Changelog
 
+## [9.2.0](https://github.com/primefaces/primereact/tree/9.2.0) (2023-02-21)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.1.1...9.2.0)
+
+**Breaking Changes:**
+
+- DataTable CSS and responsive structure improvements [\#4078](https://github.com/primefaces/primereact/issues/4078)
+
+**Implemented New Features and Enhancements:**
+
+- New Hook: useMatchMedia [\#4090](https://github.com/primefaces/primereact/issues/4090)
+- Add breakpoint and scrollHeight props to ContextMenu, MegaMenu and TieredMenu components. [\#4082](https://github.com/primefaces/primereact/issues/4082)
+- TreeTable CSS improvements [\#4081](https://github.com/primefaces/primereact/issues/4081)
+- Add `when` option to useResizeListener hook  [\#4080](https://github.com/primefaces/primereact/issues/4080)
+- Add tabIndex, appendOnly and inline properties to VirtualScroller [\#4079](https://github.com/primefaces/primereact/issues/4079)
+
+**Fixed bugs:**
+
+- Toast: Flick issue on toast-message-exit-active class [\#4084](https://github.com/primefaces/primereact/issues/4084)
+- Inplace is not working as expected [\#4070](https://github.com/primefaces/primereact/issues/4070)
+- PrimeIcons: can't use pi-arrow-right-arrow-left [\#4062](https://github.com/primefaces/primereact/issues/4062)
+- Calendar: Popup incorrect year in multiple month [\#4058](https://github.com/primefaces/primereact/issues/4058)
+- Avatar: Wrong className is getting used when image is undefined [\#4049](https://github.com/primefaces/primereact/issues/4049)
+- Inline Calendar inside DataTable filter error [\#4042](https://github.com/primefaces/primereact/issues/4042)
+- Toast: Summary Overflow Bug [\#4023](https://github.com/primefaces/primereact/issues/4023)
+
 ## [9.1.1](https://github.com/primefaces/primereact/tree/9.1.1) (2023-02-15)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/9.1.0...9.1.1)
