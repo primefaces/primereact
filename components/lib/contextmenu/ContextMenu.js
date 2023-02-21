@@ -68,6 +68,10 @@ export const ContextMenu = React.memo(
         padding: 0 0 0 calc(var(--inline-spacing) * 2); /* @todo */
     }
 
+    .p-contextmenu[${selector}] .p-menuitem-active > .p-menuitem-link > .p-submenu-icon {
+        transform: rotate(-180deg);
+    }
+
     .p-contextmenu[${selector}] .p-submenu-icon:before {
         content: "\\e930";
     }

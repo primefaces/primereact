@@ -86,6 +86,10 @@ export const TieredMenu = React.memo(
         padding: 0 0 0 calc(var(--inline-spacing) * 2); /* @todo */
     }
 
+    .p-tieredmenu[${selector}] .p-menuitem-active > .p-menuitem-link > .p-submenu-icon {
+        transform: rotate(-180deg);
+    }
+
     .p-tieredmenu[${selector}] .p-submenu-icon:before {
         content: "\\e930";
     }

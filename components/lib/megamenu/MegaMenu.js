@@ -374,6 +374,10 @@ export const MegaMenu = React.memo(
         background: inherit;
     }
 
+    .p-megamenu[${selector}] .p-menuitem-active > .p-menuitem-link > .p-submenu-icon {
+        transform: rotate(-180deg);
+    }
+
     .p-megamenu[${selector}] .p-megamenu-grid {
         flex-wrap: wrap;
     }
