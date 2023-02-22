@@ -19,7 +19,7 @@ const UIKitPage = (props) => {
                 </Head>
                 <div className="content-section">
                     <div style={{ borderRadius: '50px', maxHeight: '500px' }} className="overflow-hidden mb-5 flex align-items-center">
-                        <img alt="PrimeReact Designer" src={`https://primefaces.org/cdn/primereact/images/uikit/primeone-cover-${props.dark ? 'dark' : 'light'}.jpeg`} className="w-full" />
+                        <img alt="PrimeReact Designer" src={`https://primefaces.org/cdn/primereact/images/uikit/primeone-cover-${props.dark ? 'dark' : 'light'}.jpg`} className="w-full" />
                     </div>
 
                     <div className="card mb-5" style={{ borderRadius: '50px' }}>
@@ -48,6 +48,10 @@ const UIKitPage = (props) => {
                                     <li className="flex align-items-center w-6 p-3">
                                         <i className="pi pi-check-circle text-green-600 mr-2"></i>
                                         <span className="font-bold">Interactive Components</span>
+                                    </li>
+                                    <li class="flex align-items-center w-12 p-3">
+                                        <i class="pi pi-check-circle text-green-600 mr-2"></i>
+                                        <span class="font-bold">Boolean, Instance Swap and Text Properties</span>
                                     </li>
                                 </ul>
                             </div>
@@ -106,7 +110,7 @@ const UIKitPage = (props) => {
 
                     <div className="flex flex-column md:flex-row gap-4 md:gap-8 mb-5">
                         <a
-                            href="https://www.figma.com/file/c3BuENd8nGcyPmn7ADieee/Preview-%7C-PrimeOne-2022-%7C-1.0.0?node-id=806%3A36648"
+                            href="https://www.figma.com/file/1rMJ9BAiZovyQYNUG06T0j/Preview-%7C-PrimeOne-%7C-2.0?node-id=806%3A36648&t=MnxlHT9snz8Y6DwL-1"
                             className="p-5 w-full md:w-6 bg-white flex flex-column align-items-center border-2 border-transparent hover:border-primary transition-colors transition-duration-300"
                             style={{ borderRadius: '50px' }}
                         >
@@ -114,7 +118,7 @@ const UIKitPage = (props) => {
                             <img alt="PrimeReact Designer" src="https://primefaces.org/cdn/primereact/images/uikit/logo-figma-light.svg" className="w-4rem" />
                         </a>
                         <a
-                            href="https://www.figma.com/file/LJBqVfMpK8xY6KR2KIc8RK/Preview-%7C-Dark-%7C-PrimeOne-2022-%7C-1.0.0?node-id=806%3A36648"
+                            href="https://www.figma.com/file/lwsadx20eWq3UWS4eAxCYo/Preview-%7C-Dark-%7C-PrimeOne-%7C-2.0?node-id=806%3A36648&t=Qw2Pi6W4Q4rtbnZ5-1"
                             className="p-5 w-full md:w-6 bg-gray-900 flex flex-column align-items-center border-2 border-transparent hover:border-primary transition-colors transition-duration-300"
                             style={{ borderRadius: '50px' }}
                         >
