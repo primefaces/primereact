@@ -690,9 +690,9 @@
 .p-chips .p-chips-multiple-container .p-chips-token {
   padding: 0.2145rem 0.429rem;
   margin-right: 0.5rem;
-  background: #AFD3C8;
-  color: #385048;
-  border-radius: 2px;
+  background: #dadada;
+  color: #666666;
+  border-radius: 16px;
 }
 .p-chips .p-chips-multiple-container .p-chips-token .p-chips-token-icon {
   margin-left: 0.5rem;
@@ -1287,9 +1287,9 @@
 .p-multiselect.p-multiselect-chip .p-multiselect-token {
   padding: 0.2145rem 0.429rem;
   margin-right: 0.5rem;
-  background: #AFD3C8;
-  color: #385048;
-  border-radius: 2px;
+  background: #dadada;
+  color: #666666;
+  border-radius: 16px;
 }
 .p-multiselect.p-multiselect-chip .p-multiselect-token .p-multiselect-token-icon {
   margin-left: 0.5rem;
