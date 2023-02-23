@@ -254,7 +254,9 @@ export default function FrozenRowsDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Frozen Rows demo content.</p>
+                <p>
+                    Rows can be fixed during scrolling by enabling the <i>frozenValue</i> property.
+                </p>
             </DocSectionText>
             <div className="card">
                 <DataTable value={customers} frozenValue={lockedCustomers} scrollable scrollHeight="400px" tableStyle={{ minWidth: '50rem' }}>
