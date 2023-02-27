@@ -2,7 +2,7 @@
  *
  * PrimeReact menus components share a common api to specify the menuitems and submenus.
  *
- * [Live Demo](https://www.primefaces.org/primereact/menumodel/)
+ * [Live Demo](https://www.primereact.org/menumodel/)
  *
  * @module menuitem
  *
@@ -27,7 +27,6 @@ interface MenuItemCommandEvent {
 
 /**
  * Menu item options
- * @group Misc
  */
 interface MenuItemOptions {
     /**
@@ -58,8 +57,8 @@ interface MenuItemOptions {
 }
 
 /**
- * Defines valid properties in MenuItem API.
- * @group Properties
+ * Defines model of MenuItem API.
+ * @group Model
  */
 export interface MenuItem {
     /**

@@ -53,7 +53,7 @@ const BadgeDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Badge Component" header="Badge" description="Badge is a small status indicator for another element." componentDocs={docs} apiDocs={[{ name: 'Badge', pathname: '/modules/badge.html' }]} />;
+    return <DocComponent title="React Badge Component" header="Badge" description="Badge is a small status indicator for another element." componentDocs={docs} apiDocs={['Badge']} />;
 };
 
 export default BadgeDemo;

@@ -2,7 +2,7 @@
  *
  * Message is used to display inline message with various severities.
  *
- * [Live Demo](https://www.primefaces.org/primereact/message)
+ * [Live Demo](https://www.primereact.org/message)
  *
  * @module message
  *
@@ -44,7 +44,7 @@ export interface MessageProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
  *
  * _Message is used to display inline message with various severities._
  *
- * [Live Demo](https://www.primefaces.org/primereact/message/)
+ * [Live Demo](https://www.primereact.org/message/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

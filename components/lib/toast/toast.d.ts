@@ -2,7 +2,7 @@
  *
  * Toast is used to display messages in an overlay.
  *
- * [Live Demo](https://www.primefaces.org/primereact/toast/)
+ * [Live Demo](https://www.primereact.org/toast/)
  *
  * @module toast
  *
@@ -12,7 +12,6 @@ import { CSSTransitionProps } from '../csstransition';
 
 /**
  * Message options for toast component
- * @group Misc
  */
 export interface ToastMessage {
     /**
@@ -117,7 +116,7 @@ export interface ToastProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
  *
  * _Toast is used to display messages in an overlay._
  *
- * [Live Demo](https://www.primefaces.org/primereact/toast/)
+ * [Live Demo](https://www.primereact.org/toast/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

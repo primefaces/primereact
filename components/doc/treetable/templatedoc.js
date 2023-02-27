@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { TreeTable } from '../../lib/treetable/TreeTable';
+import React, { useEffect, useState } from 'react';
+import { NodeService } from '../../../service/NodeService';
 import { Button } from '../../lib/button/Button';
 import { Column } from '../../lib/column/Column';
-import { NodeService } from '../../../service/NodeService';
+import { TreeTable } from '../../lib/treetable/TreeTable';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
@@ -15,27 +15,27 @@ export function TemplateDoc(props) {
 
     const actionTemplate = () => {
         return (
-            <div>
-                <Button type="button" icon="pi pi-search" className="p-button-success" style={{ marginRight: '.5em' }}></Button>
-                <Button type="button" icon="pi pi-pencil" className="p-button-warning"></Button>
+            <div className="flex flex-wrap gap-2">
+                <Button type="button" icon="pi pi-search" rounded></Button>
+                <Button type="button" icon="pi pi-pencil" severity="success" rounded></Button>
             </div>
         );
     };
 
-    const header = 'File Viewer';
+    const header = <div className="text-xl font-bold">File Viewer</div>;
     const footer = (
-        <div style={{ textAlign: 'left' }}>
-            <Button icon="pi pi-refresh" tooltip="Reload" />
+        <div className="flex justify-content-start">
+            <Button icon="pi pi-refresh" label="Reload" severity="warning" />
         </div>
     );
 
     const code = {
         basic: `
-<TreeTable value={nodes} header={header} footer={footer}>
+<TreeTable value={nodes} header={header} footer={footer} tableStyle={{ minWidth: '50rem' }}>
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
     <Column field="type" header="Type"></Column>
-    <Column body={actionTemplate} style={{ textAlign: 'center', width: '10rem' }} />
+    <Column body={actionTemplate} headerClassName="w-10rem" />
 </TreeTable>
         `,
         javascript: `
@@ -45,39 +45,37 @@ import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { NodeService } from './service/NodeService';
 
-export default function TemplateDoc() {
+export default function TemplateDemo() {
     const [nodes, setNodes] = useState([]);
-    
+
     useEffect(() => {
-        NodeService.getTreeTableNodes().then(data => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        NodeService.getTreeTableNodes().then((data) => setNodes(data));
+    }, []);
 
     const actionTemplate = () => {
         return (
-            <div>
-                <Button type="button" icon="pi pi-search" className="p-button-success" style={{ marginRight: '.5em' }}></Button>
-                <Button type="button" icon="pi pi-pencil" className="p-button-warning"></Button>
+            <div className="flex flex-wrap gap-2">
+                <Button type="button" icon="pi pi-search" rounded></Button>
+                <Button type="button" icon="pi pi-pencil" severity="success" rounded></Button>
             </div>
         );
     };
 
-    const header = 'File Viewer';
+    const header = <div className="text-xl font-bold">File Viewer</div>;
     const footer = (
-        <div style={{ textAlign: 'left' }}>
-            <Button icon="pi pi-refresh" tooltip="Reload" />
+        <div className="flex justify-content-start">
+            <Button icon="pi pi-refresh" label="Reload" severity="warning" />
         </div>
     );
 
     return (
-        <div>
-            <div className="card">
-                <TreeTable value={nodes} header={header} footer={footer}>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
-                    <Column body={actionTemplate} style={{ textAlign: 'center', width: '10rem' }} />
-                </TreeTable>
-            </div>
+        <div className="card">
+            <TreeTable value={nodes} header={header} footer={footer} tableStyle={{ minWidth: '50rem' }}>
+                <Column field="name" header="Name" expander></Column>
+                <Column field="size" header="Size"></Column>
+                <Column field="type" header="Type"></Column>
+                <Column body={actionTemplate} headerClassName="w-10rem" />
+            </TreeTable>
         </div>
     );
 }
@@ -87,47 +85,45 @@ import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
+import { TreeNode } from 'primereact/treenode';
 import { NodeService } from './service/NodeService';
 
-export default function TemplateDoc() {
-    const [nodes, setNodes] = useState([]);
-    
+export default function TemplateDemo() {
+    const [nodes, setNodes] = useState<TreeNode[]>([]);
+
     useEffect(() => {
-        NodeService.getTreeTableNodes().then(data => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        NodeService.getTreeTableNodes().then((data) => setNodes(data));
+    }, []);
 
     const actionTemplate = () => {
         return (
-            <div>
-                <Button type="button" icon="pi pi-search" className="p-button-success" style={{ marginRight: '.5em' }}></Button>
-                <Button type="button" icon="pi pi-pencil" className="p-button-warning"></Button>
+            <div className="flex flex-wrap gap-2">
+                <Button type="button" icon="pi pi-search" rounded></Button>
+                <Button type="button" icon="pi pi-pencil" severity="success" rounded></Button>
             </div>
         );
     };
 
-    const header = 'File Viewer';
+    const header = <div className="text-xl font-bold">File Viewer</div>;
     const footer = (
-        <div style={{ textAlign: 'left' }}>
-            <Button icon="pi pi-refresh" tooltip="Reload" />
+        <div className="flex justify-content-start">
+            <Button icon="pi pi-refresh" label="Reload" severity="warning" />
         </div>
     );
 
     return (
-        <div>
-            <div className="card">
-                <TreeTable value={nodes} header={header} footer={footer}>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
-                    <Column body={actionTemplate} style={{ textAlign: 'center', width: '10rem' }} />
-                </TreeTable>
-            </div>
+        <div className="card">
+            <TreeTable value={nodes} header={header} footer={footer} tableStyle={{ minWidth: '50rem' }}>
+                <Column field="name" header="Name" expander></Column>
+                <Column field="size" header="Size"></Column>
+                <Column field="type" header="Type"></Column>
+                <Column body={actionTemplate} headerClassName="w-10rem" />
+            </TreeTable>
         </div>
     );
 }
         `,
         data: `
-/* NodeService */
 {
     key: '0',
     label: 'Documents',
@@ -160,14 +156,16 @@ export default function TemplateDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Custom content at header, body and footer sections are supported via templating.</p>
+                <p>
+                    Custom content at <i>header</i>, <i>body</i> and <i>footer</i> sections are supported via templating.
+                </p>
             </DocSectionText>
             <div className="card">
-                <TreeTable value={nodes} header={header} footer={footer}>
+                <TreeTable value={nodes} header={header} footer={footer} tableStyle={{ minWidth: '50rem' }}>
                     <Column field="name" header="Name" expander></Column>
                     <Column field="size" header="Size"></Column>
                     <Column field="type" header="Type"></Column>
-                    <Column body={actionTemplate} style={{ textAlign: 'center', width: '10rem' }} />
+                    <Column body={actionTemplate} headerClassName="w-10rem" />
                 </TreeTable>
             </div>
             <DocSectionCode code={code} service={['NodeService']} />

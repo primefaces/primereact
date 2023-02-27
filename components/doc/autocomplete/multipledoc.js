@@ -75,7 +75,7 @@ export default function MultipleDemo() {
         `,
         typescript: `
 import React, { useEffect, useState } from 'react';
-import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
+import { AutoComplete, AutoCompleteCompleteEvent } from "primereact/autocomplete";
 import { CountryService } from "./service/CountryService";
 
 interface Country {
@@ -88,7 +88,7 @@ export default function MultipleDemo() {
     const [selectedCountries, setSelectedCountries] = useState<Country>(null);
     const [filteredCountries, setFilteredCountries] = useState<Country[]>(null);
 
-    const search = (event: AutoCompleteCompleteMethodParams) => {
+    const search = (event: AutoCompleteCompleteEvent) => {
         // Timeout to emulate a network connection
         setTimeout(() => {
             let _filteredCountries;

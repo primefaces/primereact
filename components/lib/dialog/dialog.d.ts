@@ -2,7 +2,7 @@
  *
  * Dialog is a container to display content in an overlay window.
  *
- * [Live Demo](https://www.primefaces.org/primereact/dialog)
+ * [Live Demo](https://www.primereact.org/dialog)
  *
  * @module dialog
  *
@@ -12,7 +12,6 @@ import { CSSTransitionProps } from '../csstransition';
 
 /**
  * Dialog break options
- * @group Misc
  */
 interface DialogBreakpoints {
     /**
@@ -263,7 +262,7 @@ export interface DialogProps {
  *
  * _Dialog is a container to display content in an overlay window._
  *
- * [Live Demo](https://www.primefaces.org/primereact/dialog/)
+ * [Live Demo](https://www.primereact.org/dialog/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

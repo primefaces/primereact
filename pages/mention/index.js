@@ -77,7 +77,7 @@ const MentionDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Mention Component" header="Mention" description="Mention component is used to tag objects in a text." componentDocs={docs} apiDocs={[{ name: 'Mention', pathname: '/modules/mention.html' }]} />;
+    return <DocComponent title="React Mention Component" header="Mention" description="Mention component is used to tag objects in a text." componentDocs={docs} apiDocs={['Mention']} />;
 };
 
 export default MentionDemo;

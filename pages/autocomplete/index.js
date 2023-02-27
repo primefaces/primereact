@@ -108,15 +108,7 @@ const AutoCompleteDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React AutoComplete Component"
-            header="AutoComplete"
-            description="AutoComplete is an input component that provides real-time suggestions while being typed"
-            componentDocs={docs}
-            apiDocs={[{ name: 'AutoComplete', pathname: '/modules/autocomplete.html' }]}
-        />
-    );
+    return <DocComponent title="React AutoComplete Component" header="AutoComplete" description="AutoComplete is an input component that provides real-time suggestions while being typed" componentDocs={docs} apiDocs={['AutoComplete']} />;
 };
 
 export default AutoCompleteDemo;

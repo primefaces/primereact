@@ -3,7 +3,6 @@
         {
             "name": "Getting Started",
             "icon": "pi pi-home",
-            "expanded": true,
             "children": [
                 {
                     "name": "Installation",
@@ -167,10 +166,6 @@
                         {
                             "name": "DataTable",
                             "to": "/datatable"
-                        },
-                        {
-                            "name": "DataScroller",
-                            "to": "/datascroller"
                         },
                         {
                             "name": "DataView",
@@ -445,11 +440,6 @@
             ]
         },
         {
-            "name": "Component API",
-            "icon": "pi pi-list",
-            "href": "https://primefaces.github.io/primereact"
-        },
-        {
             "name": "Theming",
             "icon": "pi pi-palette",
             "children": [
@@ -490,76 +480,101 @@
             "icon": "pi pi-link",
             "children": [
                 {
-                    "name": "useClickOutside",
-                    "to": "/hooks/useclickoutside"
+                    "name": "Lifecycle",
+                    "children": [
+                        {
+                            "name": "useMountEffect",
+                            "to": "/hooks/usemounteffect"
+                        },
+                        {
+                            "name": "useUpdateEffect",
+                            "to": "/hooks/useupdateeffect"
+                        },
+                        {
+                            "name": "useUnmountEffect",
+                            "to": "/hooks/useunmounteffect"
+                        }
+                    ]
                 },
                 {
-                    "name": "useCounter",
-                    "to": "/hooks/usecounter"
+                    "name": "Listener",
+                    "children": [
+                        {
+                            "name": "useEventListener",
+                            "to": "/hooks/useeventlistener"
+                        },
+                        {
+                            "name": "useOverlayListener",
+                            "to": "/hooks/useoverlaylistener"
+                        },
+                        {
+                            "name": "useOverlayScrollListener",
+                            "to": "/hooks/useoverlayscrolllistener"
+                        },
+                        {
+                            "name": "useResizeListener",
+                            "to": "/hooks/useresizelistener"
+                        }
+                    ]
                 },
                 {
-                    "name": "useDebounce",
-                    "to": "/hooks/usedebounce"
+                    "name": "Element",
+                    "children": [
+                        {
+                            "name": "useClickOutside",
+                            "to": "/hooks/useclickoutside"
+                        },
+                        {
+                            "name": "useIntersectionObserver",
+                            "to": "/hooks/useintersectionobserver"
+                        },
+                        {
+                            "name": "useMouse",
+                            "to": "/hooks/usemouse"
+                        },
+                        {
+                            "name": "useMove",
+                            "to": "/hooks/usemove"
+                        }
+                    ]
                 },
                 {
-                    "name": "useEventListener",
-                    "to": "/hooks/useeventlistener"
+                    "name": "Timer",
+                    "children": [
+                        {
+                            "name": "useInterval",
+                            "to": "/hooks/useinterval"
+                        },
+                        {
+                            "name": "useTimeout",
+                            "to": "/hooks/usetimeout"
+                        }
+                    ]
                 },
                 {
-                    "name": "useFavicon",
-                    "to": "/hooks/usefavicon"
-                },
-                {
-                    "name": "useIntersectionObserver",
-                    "to": "/hooks/useintersectionobserver"
-                },
-                {
-                    "name": "useInterval",
-                    "to": "/hooks/useinterval"
-                },
-                {
-                    "name": "useMountEffect",
-                    "to": "/hooks/usemounteffect"
-                },
-                {
-                    "name": "useMouse",
-                    "to": "/hooks/usemouse"
-                },
-                {
-                    "name": "useMove",
-                    "to": "/hooks/usemove"
-                },
-                {
-                    "name": "useOverlayListener",
-                    "to": "/hooks/useoverlaylistener"
-                },
-                {
-                    "name": "useOverlayScrollListener",
-                    "to": "/hooks/useoverlayscrolllistener"
-                },
-                {
-                    "name": "usePrevious",
-                    "to": "/hooks/useprevious"
-                },
-                {
-                    "name": "useResizeListener",
-                    "to": "/hooks/useresizelistener"
-                },
-                {
-                    "name": "useStorage",
-                    "to": "/hooks/usestorage"
-                },
-                {
-                    "name": "useTimeout",
-                    "to": "/hooks/usetimeout"
-                },
-                {
-                    "name": "useUnmountEffect",
-                    "to": "/hooks/useunmounteffect"
-                },
-                {
-                    "name": "useUpdateEffect",
-                    "to": "/hooks/useupdateeffect"
+                    "name": "State",
+                    "children": [
+                        {
+                            "name": "useCounter",
+                            "to": "/hooks/usecounter"
+                        },
+                        {
+                            "name": "useDebounce",
+                            "to": "/hooks/usedebounce"
+                        },
+                        {
+                            "name": "useFavicon",
+                            "to": "/hooks/usefavicon"
+                        },
+                        {
+                            "name": "usePrevious",
+                            "to": "/hooks/useprevious"
+                        },
+                        {
+                            "name": "useStorage",
+                            "to": "/hooks/usestorage"
+                        }
+                    ]
                 }
             ]
         },
@@ -577,6 +592,24 @@
             "name": "PrimeFlex CSS",
             "icon": "pi pi-table",
             "href": "https://www.primefaces.org/primeflex"
+        },
+        {
+            "name": "Support",
+            "icon": "pi pi-question",
+            "children": [
+                {
+                    "name": "Discord",
+                    "href": "https://discord.gg/gzKFYnpmCY"
+                },
+                {
+                    "name": "Forum",
+                    "href": "https://forum.primefaces.org/viewforum.php?f=57"
+                },
+                {
+                    "name": "PRO",
+                    "to": "/support"
+                }
+            ]
         },
         {
             "name": "Discover",

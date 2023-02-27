@@ -3,7 +3,7 @@
  * Column component defines various options to specify corresponding features.
  * It is a helper component for DataTable and TreeTable.
  *
- * [Live Demo](https://www.primefaces.org/primereact/datatable/)
+ * [Live Demo](https://www.primereact.org/datatable/)
  *
  * @module column
  *
@@ -11,9 +11,6 @@
 import * as React from 'react';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 
-/**
- * @group misc
- */
 interface ColumnHeaderOptions {
     /**
      * Additional properties passed to the body component.
@@ -27,9 +24,6 @@ interface ColumnHeaderOptions {
  */
 interface ColumnFooterOptions extends ColumnHeaderOptions {}
 
-/**
- * @group misc
- */
 interface ColumnBodyOptions {
     /**
      * Column of the options.
@@ -61,9 +55,6 @@ interface ColumnBodyOptions {
     rowEditor?: ColumnBodyRowEditorOptions;
 }
 
-/**
- * @group misc
- */
 interface ColumnBodyExpanderOptions {
     /**
      * Event on click of the expander.
@@ -84,9 +75,6 @@ interface ColumnBodyExpanderOptions {
     element?: JSX.Element;
 }
 
-/**
- * @group misc
- */
 interface ColumnBodyRowEditorOptions {
     /**
      * Whether row is in editing mode.
@@ -137,9 +125,6 @@ interface ColumnBodyRowEditorOptions {
     initIconClassName?: string;
 }
 
-/**
- * @group misc
- */
 interface ColumnEditorOptions {
     /**
      * Node element of the editor.
@@ -180,9 +165,6 @@ interface ColumnEditorOptions {
     editorCallback?(value: any): void;
 }
 
-/**
- * @group misc
- */
 interface ColumnFilterModelOptions {
     /**
      * Object containing key-value pairs of column filter metadata or metadata with constraint.
@@ -190,9 +172,6 @@ interface ColumnFilterModelOptions {
     [key: string]: ColumnFilterMetaData | ColumnFilterMetaDataWithConstraint;
 }
 
-/**
- * @group misc
- */
 interface ColumnFilterClearTemplateOptions {
     /**
      * Field name of the column.
@@ -208,9 +187,6 @@ interface ColumnFilterClearTemplateOptions {
     filterClearCallback(): void;
 }
 
-/**
- * @group misc
- */
 interface ColumnFilterApplyTemplateOptions {
     /**
      * Field name of the column.
@@ -240,9 +216,6 @@ interface ColumnFilterHeaderTemplateOptions extends ColumnFilterApplyTemplateOpt
  */
 interface ColumnFilterFooterTemplateOptions extends ColumnFilterApplyTemplateOptions {}
 
-/**
- * @group misc
- */
 interface ColumnFilterElementTemplateOptions {
     /**
      * Field name of the column.
@@ -322,9 +295,6 @@ interface ColumnEvent {
     newValue: any;
 }
 
-/**
- * @group misc
- */
 interface ColumnSortMetaData {
     /**
      * Field name of the column.
@@ -352,9 +322,6 @@ interface ColumnSortEvent extends ColumnSortMetaData {
     multiSortMeta?: ColumnSortMetaData[];
 }
 
-/**
- * @group misc
- */
 interface ColumnFilterMetaData {
     /**
      * Value of the filter.
@@ -366,9 +333,6 @@ interface ColumnFilterMetaData {
     matchMode: 'startsWith' | 'contains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'custom';
 }
 
-/**
- * @group misc
- */
 interface ColumnFilterMetaDataWithConstraint {
     /**
      * Logical operator for the constraints.
@@ -452,9 +416,6 @@ interface ColumnFilterConstraintAddEvent {
  */
 interface ColumnFilterConstraintRemoveEvent extends ColumnFilterConstraintAddEvent {}
 
-/**
- * @group misc
- */
 interface ColumnFilterMeta {
     /**
      * Filter metadata for specific columns.
@@ -499,9 +460,6 @@ interface ColumnFilterEvent {
     };
 }
 
-/**
- * @group misc
- */
 interface ColumnFilterMatchModeOptions {
     /**
      * Filter match modes for specific columns.
@@ -865,9 +823,9 @@ export interface ColumnProps {
 /**
  * **PrimeReact - Column**
  *
- * _It is a helper component for DataTable and TreeTable._
+ * _Column is a helper component for DataTable and TreeTable._
  *
- * [Live Demo](https://www.primefaces.org/primereact/column/)
+ * [Live Demo](https://www.primereact.org/column/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

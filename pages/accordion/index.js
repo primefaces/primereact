@@ -52,18 +52,7 @@ const AccordionDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React Accordion Component"
-            header="Accordion"
-            description="Accordion groups a collection of contents in tabs."
-            componentDocs={docs}
-            apiDocs={[
-                { name: 'Accordion', pathname: '/modules/accordion.html' },
-                { name: 'AccordionTab', pathname: '/classes/accordion.AccordionTab.html' }
-            ]}
-        />
-    );
+    return <DocComponent title="React Accordion Component" header="Accordion" description="Accordion groups a collection of contents in tabs." componentDocs={docs} apiDocs={['Accordion', 'AccordionTab']} />;
 };
 
 export default AccordionDemo;

@@ -2,7 +2,7 @@
  *
  * Panel is a grouping component providing with content toggle feature.
  *
- * [Live Demo](https://www.primefaces.org/primereact/panel/)
+ * [Live Demo](https://www.primereact.org/panel/)
  *
  * @module panel
  *
@@ -13,7 +13,6 @@ import { IconType } from '../utils';
 
 /**
  * Custom panel header template options.
- * @group Misc
  */
 interface PanelHeaderTemplateOptions {
     /**
@@ -153,7 +152,7 @@ export interface PanelProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
  *
  * _Panel is a grouping component providing with content toggle feature._
  *
- * [Live Demo](https://www.primefaces.org/primereact/panel/)
+ * [Live Demo](https://www.primereact.org/panel/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

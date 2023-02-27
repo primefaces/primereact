@@ -1,365 +1,209 @@
 import React, { useEffect, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
 import { Button } from '../../lib/button/Button';
-import { DataView, DataViewLayoutOptions } from '../../lib/dataview/DataView';
-import { Dropdown } from '../../lib/dropdown/Dropdown';
+import { DataView } from '../../lib/dataview/DataView';
 import { Rating } from '../../lib/rating/Rating';
+import { Tag } from '../../lib/tag/Tag';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
-    const [products, setProducts] = useState(null);
-    const [layout, setLayout] = useState('grid');
-    const [sortKey, setSortKey] = useState(null);
-    const [sortOrder, setSortOrder] = useState(null);
-    const [sortField, setSortField] = useState(null);
-    const sortOptions = [
-        { label: 'Price High to Low', value: '!price' },
-        { label: 'Price Low to High', value: 'price' }
-    ];
+    const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        ProductService.getProducts().then((data) => setProducts(data));
+        ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 5)));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const onSortChange = (event) => {
-        const value = event.value;
+    const getSeverity = (product) => {
+        switch (product.inventoryStatus) {
+            case 'INSTOCK':
+                return 'success';
 
-        if (value.indexOf('!') === 0) {
-            setSortOrder(-1);
-            setSortField(value.substring(1, value.length));
-            setSortKey(value);
-        } else {
-            setSortOrder(1);
-            setSortField(value);
-            setSortKey(value);
+            case 'LOWSTOCK':
+                return 'warning';
+
+            case 'OUTOFSTOCK':
+                return 'danger';
+
+            default:
+                return null;
         }
     };
 
-    const renderListItem = (data) => {
+    const itemTemplate = (product) => {
         return (
             <div className="col-12">
-                <div className="flex flex-column align-items-center p-3 w-full md:flex-row">
-                    <img className="md:w-11rem w-9 shadow-2 md:my-0 md:mr-5 mr-0 my-5" src={`https://primefaces.org/cdn/primereact/images/product/${data.image}`} alt={data.name} />
-                    <div className="text-center md:text-left md:flex-1">
-                        <div className="text-2xl font-bold">{data.name}</div>
-                        <div className="mb-3">{data.description}</div>
-                        <Rating className="mb-2" value={data.rating} readOnly cancel={false}></Rating>
-                        <i className="pi pi-tag vertical-align-middle mr-2"></i>
-                        <span className="vertical-align-middle font-semibold">{data.category}</span>
-                    </div>
-                    <div className="flex md:flex-column mt-5 justify-content-between align-items-center md:w-auto w-full">
-                        <span className="align-self-center text-2xl font-semibold mb-2 md:align-self-end">${data.price}</span>
-                        <Button className="mb-2" icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
-                        <span className={`md:w-full product-badge status-${data.inventoryStatus.toLowerCase()}`}>{data.inventoryStatus}</span>
-                    </div>
-                </div>
-            </div>
-        );
-    };
-
-    const renderGridItem = (data) => {
-        return (
-            <div className="col-12 md:col-4">
-                <div className="m-2 border-1 surface-border card">
-                    <div className="flex align-items-center justify-content-between">
-                        <div>
-                            <i className="pi pi-tag vertical-align-middle mr-2"></i>
-                            <span className="font-semibold vertical-align-middle">{data.category}</span>
+                <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+                    <img className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src={`https://primefaces.org/cdn/primereact/images/product/${product.image}`} alt={product.name} />
+                    <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
+                        <div className="flex flex-column align-items-center sm:align-items-start gap-3">
+                            <div className="text-2xl font-bold text-900">{product.name}</div>
+                            <Rating value={product.rating} readOnly cancel={false}></Rating>
+                            <div className="flex align-items-center gap-3">
+                                <span className="flex align-items-center gap-2">
+                                    <i className="pi pi-tag"></i>
+                                    <span className="font-semibold">{product.category}</span>
+                                </span>
+                                <Tag value={product.inventoryStatus} severity={getSeverity(product)}></Tag>
+                            </div>
                         </div>
-                        <span className={`product-badge status-${data.inventoryStatus.toLowerCase()}`}>{data.inventoryStatus}</span>
-                    </div>
-                    <div className="text-center">
-                        <img className="w-9 my-5 shadow-3" src={`https://primefaces.org/cdn/primereact/images/product/${data.image}`} alt={data.name} />
-                        <div className="text-2xl font-bold">{data.name}</div>
-                        <div className="mb-3">{data.description}</div>
-                        <Rating className="mb-2" value={data.rating} readOnly cancel={false}></Rating>
-                    </div>
-                    <div className="flex align-items-center justify-content-between">
-                        <span className="align-self-center text-2xl font-semibold mb-2 md:align-self-end">${data.price}</span>
-                        <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                        <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
+                            <span className="text-2xl font-semibold">${product.price}</span>
+                            <Button icon="pi pi-shopping-cart" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                        </div>
                     </div>
                 </div>
             </div>
         );
     };
-
-    const itemTemplate = (product, layout) => {
-        if (!product) {
-            return;
-        }
-
-        if (layout === 'list') return renderListItem(product);
-        else if (layout === 'grid') return renderGridItem(product);
-    };
-
-    const renderHeader = () => {
-        return (
-            <div className="grid grid-nogutter">
-                <div className="col-6" style={{ textAlign: 'left' }}>
-                    <Dropdown options={sortOptions} value={sortKey} optionLabel="label" placeholder="Sort By Price" onChange={onSortChange} />
-                </div>
-                <div className="col-6" style={{ textAlign: 'right' }}>
-                    <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />
-                </div>
-            </div>
-        );
-    };
-
-    const header = renderHeader();
 
     const code = {
         basic: `
-<DataView value={products} layout={layout} header={header} itemTemplate={itemTemplate} paginator rows={9} sortOrder={sortOrder} sortField={sortField} />
+<DataView value={products} itemTemplate={itemTemplate} />
         `,
         javascript: `
 import React, { useState, useEffect } from 'react';
-import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 import { Button } from 'primereact/button';
-import { Dropdown } from 'primereact/dropdown';
-import { ProductService } from './service/ProductService';
+import { DataView } from 'primereact/dataview';
 import { Rating } from 'primereact/rating';
-import './DataViewDemo.css';
+import { Tag } from 'primereact/tag';
+import { ProductService } from './service/ProductService';
 
-export default function BasicDoc() {
-    const [products, setProducts] = useState(null);
-    const [layout, setLayout] = useState('grid');
-    const [sortKey, setSortKey] = useState(null);
-    const [sortOrder, setSortOrder] = useState(null);
-    const [sortField, setSortField] = useState(null);
-    const sortOptions = [
-        { label: 'Price High to Low', value: '!price' },
-        { label: 'Price Low to High', value: 'price' }
-    ];
-
-    
+export default function BasicDemo() {
+    const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        ProductService.getProducts().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 5)));
+    }, []);
 
-    const onSortChange = (event) => {
-        const value = event.value;
+    const getSeverity = (product) => {
+        switch (product.inventoryStatus) {
+            case 'INSTOCK':
+                return 'success';
 
-        if (value.indexOf('!') === 0) {
-            setSortOrder(-1);
-            setSortField(value.substring(1, value.length));
-            setSortKey(value);
-        } else {
-            setSortOrder(1);
-            setSortField(value);
-            setSortKey(value);
+            case 'LOWSTOCK':
+                return 'warning';
+
+            case 'OUTOFSTOCK':
+                return 'danger';
+
+            default:
+                return null;
         }
     };
 
-    const renderListItem = (data) => {
+    const itemTemplate = (product) => {
         return (
             <div className="col-12">
-                <div className="flex flex-column align-items-center p-3 w-full md:flex-row">
-                    <img className="md:w-11rem w-9 shadow-2 md:my-0 md:mr-5 mr-0 my-5" src={\`https://primefaces.org/cdn/primereact/images/product/\${data.image}\`}  alt={data.name} />
-                    <div className="text-center md:text-left md:flex-1">
-                        <div className="text-2xl font-bold">{data.name}</div>
-                        <div className="mb-3">{data.description}</div>
-                        <Rating className="mb-2" value={data.rating} readOnly cancel={false}></Rating>
-                        <i className="pi pi-tag vertical-align-middle mr-2"></i>
-                        <span className="vertical-align-middle font-semibold">{data.category}</span>
-                    </div>
-                    <div className="flex md:flex-column mt-5 justify-content-between align-items-center md:w-auto w-full">
-                        <span className="align-self-center text-2xl font-semibold mb-2 md:align-self-end">\${data.price}</span>
-                        <Button className="mb-2" icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
-                        <span className={\`product-badge status-\${data.inventoryStatus.toLowerCase()}\` md:w-full}>{data.inventoryStatus}</span>
-                    </div>
-                </div>
-            </div>
-        );
-    };
-
-    const renderGridItem = (data) => {
-        return (
-            <div className="col-12 md:col-4">
-                <div className="m-2 border-1 surface-border card">
-                    <div className="flex align-items-center justify-content-between">
-                        <div>
-                            <i className="pi pi-tag vertical-align-middle mr-2"></i>
-                            <span className="font-semibold vertical-align-middle">{data.category}</span>
+                <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+                    <img className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src={\`https://primefaces.org/cdn/primereact/images/product/\${product.image}\`} alt={product.name} />
+                    <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
+                        <div className="flex flex-column align-items-center sm:align-items-start gap-3">
+                            <div className="text-2xl font-bold text-900">{product.name}</div>
+                            <Rating value={product.rating} readOnly cancel={false}></Rating>
+                            <div className="flex align-items-center gap-3">
+                                <span className="flex align-items-center gap-2">
+                                    <i className="pi pi-tag"></i>
+                                    <span className="font-semibold">{product.category}</span>
+                                </span>
+                                <Tag value={product.inventoryStatus} severity={getSeverity(product)}></Tag>
+                            </div>
                         </div>
-                        <span className={\`product-badge status-\${data.inventoryStatus.toLowerCase()}\`}>{data.inventoryStatus}</span>
-                    </div>
-                    <div className="text-center">
-                        <img className="w-9 my-5 shadow-3" src={\`https://primefaces.org/cdn/primereact/images/product/\${data.image}\`}  alt={data.name} />
-                        <div className="text-2xl font-bold">{data.name}</div>
-                        <div className="mb-3">{data.description}</div>
-                        <Rating className="mb-2" value={data.rating} readOnly cancel={false}></Rating>
-                    </div>
-                    <div className="flex align-items-center justify-content-between">
-                        <span className="align-self-center text-2xl font-semibold mb-2 md:align-self-end">\${data.price}</span>
-                        <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                        <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
+                            <span className="text-2xl font-semibold">\${product.price}</span>
+                            <Button icon="pi pi-shopping-cart" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                        </div>
                     </div>
                 </div>
             </div>
         );
     };
-
-    const itemTemplate = (product, layout) => {
-        if (!product) {
-            return;
-        }
-
-        if (layout === 'list') return renderListItem(product);
-        else if (layout === 'grid') return renderGridItem(product);
-    };
-
-    const renderHeader = () => {
-        return (
-            <div className="grid grid-nogutter">
-                <div className="col-6" style={{ textAlign: 'left' }}>
-                    <Dropdown options={sortOptions} value={sortKey} optionLabel="label" placeholder="Sort By Price" onChange={onSortChange} />
-                </div>
-                <div className="col-6" style={{ textAlign: 'right' }}>
-                    <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />
-                </div>
-            </div>
-        );
-    };
-
-    const header = renderHeader();
 
     return (
-        <div className="card dataview-demo">
-            <DataView value={products} layout={layout} header={header} itemTemplate={itemTemplate} paginator rows={9} sortOrder={sortOrder} sortField={sortField} />
+        <div className="card">
+            <DataView value={products} itemTemplate={itemTemplate} />
         </div>
     )
 }
         `,
         typescript: `
 import React, { useState, useEffect } from 'react';
-import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 import { Button } from 'primereact/button';
-import { Dropdown } from 'primereact/dropdown';
-import { ProductService } from './service/ProductService';
+import { DataView } from 'primereact/dataview';
 import { Rating } from 'primereact/rating';
-import './DataViewDemo.css';
+import { Tag } from 'primereact/tag';
+import { ProductService } from './service/ProductService';
 
-export default function BasicDoc() {
-    const [products, setProducts] = useState(null);
-    const [layout, setLayout] = useState('grid');
-    const [sortKey, setSortKey] = useState(null);
-    const [sortOrder, setSortOrder] = useState(null);
-    const [sortField, setSortField] = useState(null);
-    const sortOptions = [
-        { label: 'Price High to Low', value: '!price' },
-        { label: 'Price Low to High', value: 'price' }
-    ];
+interface Product {
+    id: string;
+    code: string;
+    name: string;
+    description: string;
+    image: string;
+    price: number;
+    category: string;
+    quantity: number;
+    inventoryStatus: string;
+    rating: number;
+}
 
-    
+export default function BasicDemo() {
+    const [products, setProducts] = useState<Product[]>([]);
 
     useEffect(() => {
-        ProductService.getProducts().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 5)));
+    }, []);
 
-    const onSortChange = (event) => {
-        const value = event.value;
+    const getSeverity = (product: Product) => {
+        switch (product.inventoryStatus) {
+            case 'INSTOCK':
+                return 'success';
 
-        if (value.indexOf('!') === 0) {
-            setSortOrder(-1);
-            setSortField(value.substring(1, value.length));
-            setSortKey(value);
-        } else {
-            setSortOrder(1);
-            setSortField(value);
-            setSortKey(value);
+            case 'LOWSTOCK':
+                return 'warning';
+
+            case 'OUTOFSTOCK':
+                return 'danger';
+
+            default:
+                return null;
         }
     };
 
-    const renderListItem = (data) => {
+    const itemTemplate = (product: Product) => {
         return (
             <div className="col-12">
-                <div className="flex flex-column align-items-center p-3 w-full md:flex-row">
-                    <img className="md:w-11rem w-9 shadow-2 md:my-0 md:mr-5 mr-0 my-5" src={\`https://primefaces.org/cdn/primereact/images/product/\${data.image}\`}  alt={data.name} />
-                    <div className="text-center md:text-left md:flex-1">
-                        <div className="text-2xl font-bold">{data.name}</div>
-                        <div className="mb-3">{data.description}</div>
-                        <Rating className="mb-2" value={data.rating} readOnly cancel={false}></Rating>
-                        <i className="pi pi-tag vertical-align-middle mr-2"></i>
-                        <span className="vertical-align-middle font-semibold">{data.category}</span>
-                    </div>
-                    <div className="flex md:flex-column mt-5 justify-content-between align-items-center md:w-auto w-full">
-                        <span className="align-self-center text-2xl font-semibold mb-2 md:align-self-end">\${data.price}</span>
-                        <Button className="mb-2" icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
-                        <span className={\`product-badge status-\${data.inventoryStatus.toLowerCase()}\` md:w-full}>{data.inventoryStatus}</span>
-                    </div>
-                </div>
-            </div>
-        );
-    };
-
-    const renderGridItem = (data) => {
-        return (
-            <div className="col-12 md:col-4">
-                <div className="m-2 border-1 surface-border card">
-                    <div className="flex align-items-center justify-content-between">
-                        <div>
-                            <i className="pi pi-tag vertical-align-middle mr-2"></i>
-                            <span className="font-semibold vertical-align-middle">{data.category}</span>
+                <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+                    <img className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src={\`https://primefaces.org/cdn/primereact/images/product/\${product.image}\`} alt={product.name} />
+                    <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
+                        <div className="flex flex-column align-items-center sm:align-items-start gap-3">
+                            <div className="text-2xl font-bold text-900">{product.name}</div>
+                            <Rating value={product.rating} readOnly cancel={false}></Rating>
+                            <div className="flex align-items-center gap-3">
+                                <span className="flex align-items-center gap-2">
+                                    <i className="pi pi-tag"></i>
+                                    <span className="font-semibold">{product.category}</span>
+                                </span>
+                                <Tag value={product.inventoryStatus} severity={getSeverity(product)}></Tag>
+                            </div>
                         </div>
-                        <span className={\`product-badge status-\${data.inventoryStatus.toLowerCase()}\`}>{data.inventoryStatus}</span>
-                    </div>
-                    <div className="text-center">
-                        <img className="w-9 my-5 shadow-3" src={\`https://primefaces.org/cdn/primereact/images/product/\${data.image}\`}  alt={data.name} />
-                        <div className="text-2xl font-bold">{data.name}</div>
-                        <div className="mb-3">{data.description}</div>
-                        <Rating className="mb-2" value={data.rating} readOnly cancel={false}></Rating>
-                    </div>
-                    <div className="flex align-items-center justify-content-between">
-                        <span className="align-self-center text-2xl font-semibold mb-2 md:align-self-end">\${data.price}</span>
-                        <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                        <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
+                            <span className="text-2xl font-semibold">\${product.price}</span>
+                            <Button icon="pi pi-shopping-cart" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                        </div>
                     </div>
                 </div>
             </div>
         );
     };
-
-    const itemTemplate = (product, layout) => {
-        if (!product) {
-            return;
-        }
-
-        if (layout === 'list') return renderListItem(product);
-        else if (layout === 'grid') return renderGridItem(product);
-    };
-
-    const renderHeader = () => {
-        return (
-            <div className="grid grid-nogutter">
-                <div className="col-6" style={{ textAlign: 'left' }}>
-                    <Dropdown options={sortOptions} value={sortKey} optionLabel="label" placeholder="Sort By Price" onChange={onSortChange} />
-                </div>
-                <div className="col-6" style={{ textAlign: 'right' }}>
-                    <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />
-                </div>
-            </div>
-        );
-    };
-
-    const header = renderHeader();
 
     return (
-        <div className="card dataview-demo">
-            <DataView value={products} layout={layout} header={header} itemTemplate={itemTemplate} paginator rows={9} sortOrder={sortOrder} sortField={sortField} />
+        <div className="card">
+            <DataView value={products} itemTemplate={itemTemplate} />
         </div>
     )
 }
         `,
-        exFiles: {
-            'DataViewDemo.css': `
-/* DataViewDemo.css */
-
-.dataview-demo .p-dropdown {
-    width: 14rem;
-    font-weight: normal;
-}
-        `
-        },
         data: `
 /* ProductService */        
 {
@@ -381,12 +225,15 @@ export default function BasicDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>DataView displays data in grid or list layout with pagination and sorting features.</p>
+                <p>
+                    DataView requires a <i>value</i> to display along with an <i>itemTemplate</i> that receives an object in the collection to return content. The root element should have the PrimeFlex Grid classes e.g. col-12 to define how items are
+                    displayed.
+                </p>
             </DocSectionText>
             <div className="card">
-                <DataView value={products} layout={layout} header={header} itemTemplate={itemTemplate} paginator rows={9} sortOrder={sortOrder} sortField={sortField} />
+                <DataView value={products} itemTemplate={itemTemplate} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

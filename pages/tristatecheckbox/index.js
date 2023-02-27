@@ -59,15 +59,7 @@ const TriStateCheckboxDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React TriStateCheckbox Component"
-            header="TriStateCheckbox"
-            description="TriStateCheckbox is an extension to the Checkbox component with an additional state."
-            componentDocs={docs}
-            apiDocs={[{ name: 'TriStateCheckbox', pathname: '/modules/tristatecheckbox.html' }]}
-        />
-    );
+    return <DocComponent title="React TriStateCheckbox Component" header="TriStateCheckbox" description="TriStateCheckbox is an extension to the Checkbox component with an additional state." componentDocs={docs} apiDocs={['TriStateCheckbox']} />;
 };
 
 export default TriStateCheckboxDemo;

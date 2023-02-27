@@ -28,7 +28,7 @@ const MouseDemo = () => {
         }
     ];
 
-    return <DocComponent title="React useMouse Hook" header="useMouse" description="Tracks mouse position on an element or document body." componentDocs={docs} apiDocs={[{ name: 'useMouse', pathname: '/functions/hooks.useMouse.html' }]} />;
+    return <DocComponent title="React useMouse Hook" header="useMouse" description="Tracks mouse position on an element or document body." componentDocs={docs} apiDocs={['hooks.functions.useMouse']} />;
 };
 
 export default MouseDemo;

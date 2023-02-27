@@ -2,7 +2,7 @@
  *
  * ListBox is used to select one or more values from a list of items.
  *
- * [Live Demo](https://www.primefaces.org/primereact/listbox/)
+ * [Live Demo](https://www.primereact.org/listbox/)
  *
  * @module listbox
  *
@@ -14,7 +14,6 @@ import { VirtualScroller, VirtualScrollerProps } from '../virtualscroller';
 
 /**
  * Custom change target options.
- * @group Misc
  */
 interface ListBoxChangeTargetOptions {
     /**
@@ -77,7 +76,6 @@ interface ListBoxFilterValueChangeEvent {
 
 /**
  * Custom filter template options.
- * @group Misc
  */
 interface ListBoxFilterTemplateOptions {
     /**
@@ -124,7 +122,6 @@ interface ListBoxFilterTemplateOptions {
 
 /**
  * Custom filter options.
- * @group Misc
  */
 interface ListBoxFilterOptions {
     /**
@@ -291,7 +288,7 @@ export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHT
  *
  * _ListBox is used to select one or more values from a list of items._
  *
- * [Live Demo](https://www.primefaces.org/primereact/listbox/)
+ * [Live Demo](https://www.primereact.org/listbox/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

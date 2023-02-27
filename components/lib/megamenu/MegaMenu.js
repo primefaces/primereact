@@ -1,8 +1,8 @@
 import * as React from 'react';
 import PrimeReact from '../api/Api';
-import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useEventListener, useMatchMedia, useMountEffect, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
 import { MegaMenuBase } from './MegaMenuBase';
 
 export const MegaMenu = React.memo(
@@ -10,14 +10,31 @@ export const MegaMenu = React.memo(
         const props = MegaMenuBase.getProps(inProps);
 
         const [activeItemState, setActiveItemState] = React.useState(null);
+        const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
+        const [mobileActiveState, setMobileActiveState] = React.useState(false);
         const elementRef = React.useRef(null);
+        const styleElementRef = React.useRef(null);
+        const menuButtonRef = React.useRef(null);
         const horizontal = props.orientation === 'horizontal';
         const vertical = props.orientation === 'vertical';
+        const isMobileMode = useMatchMedia(`screen and (max-width: ${props.breakpoint})`, !!props.breakpoint);
 
         const [bindDocumentClickListener] = useEventListener({
             type: 'click',
             listener: (event) => {
-                isOutsideClicked(event) && setActiveItemState(null);
+                if ((!isMobileMode || mobileActiveState) && isOutsideClicked(event)) {
+                    setActiveItemState(null);
+                    setMobileActiveState(false);
+                }
+            }
+        });
+
+        const [bindDocumentResizeListener] = useResizeListener({
+            listener: () => {
+                if (!isMobileMode || mobileActiveState) {
+                    setActiveItemState(null);
+                    setMobileActiveState(false);
+                }
             }
         });
 
@@ -40,10 +57,11 @@ export const MegaMenu = React.memo(
             }
 
             setActiveItemState(null);
+            setMobileActiveState(false);
         };
 
         const onCategoryMouseEnter = (event, item) => {
-            if (item.disabled) {
+            if (item.disabled || isMobileMode) {
                 event.preventDefault();
 
                 return;
@@ -122,6 +140,13 @@ export const MegaMenu = React.memo(
             setActiveItemState(null);
         };
 
+        const toggle = (event) => {
+            event.preventDefault();
+
+            setMobileActiveState((prevMobileActive) => !prevMobileActive);
+            setActiveItemState(null);
+        };
+
         const findNextItem = (item) => {
             const nextItem = item.nextElementSibling;
 
@@ -147,7 +172,7 @@ export const MegaMenu = React.memo(
         };
 
         const isOutsideClicked = (event) => {
-            return elementRef.current && !(elementRef.current.isSameNode(event.target) || elementRef.current.contains(event.target));
+            return elementRef.current && !(elementRef.current.isSameNode(event.target) || elementRef.current.contains(event.target) || (menuButtonRef.current && menuButtonRef.current.contains(event.target)));
         };
 
         const getColumnClassName = (category) => {
@@ -185,14 +210,23 @@ export const MegaMenu = React.memo(
         }));
 
         useMountEffect(() => {
+            if (props.breakpoint) {
+                !attributeSelectorState && setAttributeSelectorState(UniqueComponentId());
+            }
+
             bindDocumentClickListener();
+            bindDocumentResizeListener();
         });
 
         useUpdateEffect(() => {
             const currentPanel = DomHandler.findSingle(elementRef.current, '.p-menuitem-active > .p-megamenu-panel');
 
-            if (activeItemState) {
+            if (activeItemState && !isMobileMode) {
                 ZIndexUtils.set('menu', currentPanel, PrimeReact.autoZIndex, PrimeReact.zIndex['menu']);
+            }
+
+            if (isMobileMode) {
+                currentPanel && currentPanel.previousElementSibling.scrollIntoView({ block: 'nearest', inline: 'nearest' });
             }
 
             return () => {
@@ -325,6 +359,115 @@ export const MegaMenu = React.memo(
             return null;
         };
 
+        const createStyle = () => {
+            if (!styleElementRef.current) {
+                styleElementRef.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+
+                const selector = `${attributeSelectorState}`;
+                const innerHTML = `
+@media screen and (max-width: ${props.breakpoint}) {
+    .p-megamenu[${selector}] > .p-megamenu-root-list .p-menuitem-active .p-megamenu-panel {
+        position: relative;
+        left: 0 !important;
+        box-shadow: none;
+        border-radius: 0;
+        background: inherit;
+    }
+
+    .p-megamenu[${selector}] .p-menuitem-active > .p-menuitem-link > .p-submenu-icon {
+        transform: rotate(-180deg);
+    }
+
+    .p-megamenu[${selector}] .p-megamenu-grid {
+        flex-wrap: wrap;
+    }
+
+    ${
+        horizontal
+            ? `
+.p-megamenu[${selector}] .p-megamenu-button {
+    display: flex;
+}
+
+.p-megamenu[${selector}].p-megamenu-horizontal {
+    position: relative;
+}
+
+.p-megamenu[${selector}].p-megamenu-horizontal .p-megamenu-root-list {
+    display: none;
+}
+
+.p-megamenu-horizontal[${selector}] div[class*="p-megamenu-col-"] {
+    width: auto;
+    flex: 1;
+    padding: 0;
+}
+
+.p-megamenu[${selector}].p-megamenu-mobile-active .p-megamenu-root-list {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+}
+        `
+            : ''
+    }
+
+    ${
+        vertical
+            ? `
+.p-megamenu-vertical[${selector}] {
+    width: 100%;
+}
+
+.p-megamenu-vertical[${selector}] .p-megamenu-root-list {
+    max-height: ${props.scrollHeight};
+    overflow: ${props.scrollHeight ? 'auto' : ''};
+}
+.p-megamenu-vertical[${selector}] div[class*="p-megamenu-col-"] {
+    width: 100%;
+    padding: 0;
+}
+
+.p-megamenu-vertical[${selector}] .p-megamenu-submenu {
+    width: 100%;
+}
+
+.p-megamenu-vertical[${selector}] div[class*="p-megamenu-col-"] .p-megamenu-submenu-header {
+    background: inherit;
+}
+
+.p-megamenu-vertical[${selector}] .p-submenu-icon:before {
+    content: "\\e930";
+}
+        `
+            : ''
+    }
+}
+`;
+
+                styleElementRef.current.innerHTML = innerHTML;
+            }
+        };
+
+        const destroyStyle = () => {
+            styleElementRef.current = DomHandler.removeInlineStyle(styleElementRef.current);
+        };
+
+        useUpdateEffect(() => {
+            if (attributeSelectorState && elementRef.current) {
+                elementRef.current.setAttribute(attributeSelectorState, '');
+                createStyle();
+            }
+
+            return () => {
+                destroyStyle();
+            };
+        }, [attributeSelectorState, props.breakpoint]);
+
         const createCategory = (category, index) => {
             const className = classNames('p-menuitem', { 'p-menuitem-active': category === activeItemState }, category.className);
             const linkClassName = classNames('p-menuitem-link', { 'p-disabled': category.disabled });
@@ -390,22 +533,40 @@ export const MegaMenu = React.memo(
             return null;
         };
 
+        const createMenuButton = () => {
+            if (props.orientation === 'vertical' || (props.model && props.model.length < 1)) {
+                return null;
+            }
+            /* eslint-disable */
+            const button = (
+                <a ref={menuButtonRef} href={'#'} role="button" tabIndex={0} className="p-megamenu-button" onClick={toggle}>
+                    <i className="pi pi-bars" />
+                </a>
+            );
+            /* eslint-enable */
+
+            return button;
+        };
+
         const otherProps = MegaMenuBase.getOtherProps(props);
         const className = classNames(
             'p-megamenu p-component',
             {
                 'p-megamenu-horizontal': props.orientation === 'horizontal',
-                'p-megamenu-vertical': props.orientation === 'vertical'
+                'p-megamenu-vertical': props.orientation === 'vertical',
+                'p-megamenu-mobile-active': mobileActiveState
             },
             props.className
         );
         const menu = createMenu();
         const start = createStartContent();
         const end = createEndContent();
+        const menuButton = createMenuButton();
 
         return (
             <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
                 {start}
+                {menuButton}
                 {menu}
                 {end}
             </div>

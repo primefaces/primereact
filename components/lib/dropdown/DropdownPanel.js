@@ -162,7 +162,7 @@ export const DropdownPanel = React.memo(
                             const content = isEmptyFilter ? createEmptyMessage() : options.children;
 
                             return (
-                                <ul ref={options.contentRef} className={className} role="listbox">
+                                <ul ref={options.contentRef} style={options.style} className={className} role="listbox">
                                     {content}
                                 </ul>
                             );

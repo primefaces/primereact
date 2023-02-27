@@ -2,7 +2,7 @@
  *
  * CascadeSelect is a form component to select a value from a nested structure of options.
  *
- * [Live Demo](https://www.primefaces.org/primereact/cascadeselect/)
+ * [Live Demo](https://www.primereact.org/cascadeselect/)
  *
  * @module cascadeselect
  *
@@ -102,6 +102,10 @@ export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.I
      */
     dataKey?: string | undefined;
     /**
+     * The breakpoint to define the maximum width boundary when responsiveness is enabled.
+     */
+    breakpoint?: string | undefined;
+    /**
      * Identifier of the underlying input element.
      */
     inputId?: string | undefined;
@@ -128,6 +132,11 @@ export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.I
      * @defaultValue pi pi-chevron-down
      */
     dropdownIcon?: string | undefined;
+    /**
+     * Maximum height of the options panel on responsive mode.
+     * @defaultValue 400px
+     */
+    scrollHeight?: string | undefined;
     /**
      * Callback to invoke on value change
      * @param {CascadeSelectChangeEvent} event - Custom change event
@@ -166,7 +175,7 @@ export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.I
  *
  * _CascadeSelect is a form component to select a value from a nested structure of options._
  *
- * [Live Demo](https://www.primefaces.org/primereact/cascadeselect/)
+ * [Live Demo](https://www.primereact.org/cascadeselect/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

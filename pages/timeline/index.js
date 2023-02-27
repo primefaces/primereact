@@ -53,7 +53,7 @@ const TimelineDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Timeline Component" header="Timeline" description="Timeline visualizes a series of chained events." componentDocs={docs} apiDocs={[{ name: 'Timeline', pathname: '/modules/timeline.html' }]} />;
+    return <DocComponent title="React Timeline Component" header="Timeline" description="Timeline visualizes a series of chained events." componentDocs={docs} apiDocs={['Timeline']} />;
 };
 
 export default TimelineDemo;

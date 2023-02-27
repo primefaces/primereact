@@ -2,7 +2,7 @@
  *
  * Tree is used to display hierarchical data.
  *
- * [Live Demo](https://www.primefaces.org/primereact/tree/)
+ * [Live Demo](https://www.primereact.org/tree/)
  *
  * @module tree
  *
@@ -12,7 +12,6 @@ import TreeNode from '../treenode';
 
 /**
  * Custom tree header template options
- * @group Misc
  */
 interface TreeHeaderTemplateOptions {
     /**
@@ -43,7 +42,6 @@ interface TreeHeaderTemplateOptions {
 
 /**
  * Custom tree filter input options
- * @group Misc
  */
 interface TreeFilterInputOptions {
     /**
@@ -64,7 +62,6 @@ interface TreeFilterInputOptions {
 
 /**
  * Custom tree node template options
- * @group Misc
  */
 interface TreeNodeTemplateOptions {
     /**
@@ -92,7 +89,6 @@ interface TreeNodeTemplateOptions {
 
 /**
  * Custom tree toggler template options
- * @group Misc
  */
 interface TreeTogglerTemplateOptions {
     /**
@@ -124,7 +120,6 @@ interface TreeTogglerTemplateOptions {
 
 /**
  * Custom tree multiple selection keys
- * @group Misc
  */
 interface TreeMultipleSelectionKeys {
     /**
@@ -135,7 +130,6 @@ interface TreeMultipleSelectionKeys {
 
 /**
  * Custom tree checkbox selection keys
- * @group Misc
  */
 interface TreeCheckboxSelectionKeys {
     /**
@@ -146,7 +140,6 @@ interface TreeCheckboxSelectionKeys {
 
 /**
  * Custom tree checkbox selection type
- * @group Misc
  */
 interface TreeCheckboxSelectionKeyType {
     /**
@@ -161,7 +154,6 @@ interface TreeCheckboxSelectionKeyType {
 
 /**
  * Custom tree expanded keys type
- * @group Misc
  */
 interface TreeExpandedKeysType {
     /**
@@ -275,7 +267,6 @@ interface TreeNodeClickEvent {
 
 /**
  * Custom tree filter options
- * @group Misc
  */
 interface TreeFilterOptions {
     /**
@@ -503,7 +494,7 @@ export interface TreeProps {
  *
  * _Tree is used to display hierarchical data._
  *
- * [Live Demo](https://www.primefaces.org/primereact/tree/)
+ * [Live Demo](https://www.primereact.org/tree/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

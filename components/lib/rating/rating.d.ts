@@ -2,7 +2,7 @@
  *
  * Rating component is a star based selection input.
  *
- * [Live Demo](https://www.primefaces.org/primereact/rating/)
+ * [Live Demo](https://www.primereact.org/rating/)
  *
  * @module rating
  *
@@ -101,7 +101,7 @@ export interface RatingProps extends Omit<React.DetailedHTMLProps<React.InputHTM
  *
  * _Rating component is a star based selection input._
  *
- * [Live Demo](https://www.primefaces.org/primereact/rating/)
+ * [Live Demo](https://www.primereact.org/rating/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

@@ -2,7 +2,7 @@
  *
  * Carousel is a content slider featuring various customization options.
  *
- * [Live Demo](https://www.primefaces.org/primereact/carousel)
+ * [Live Demo](https://www.primereact.org/carousel)
  *
  * @module carousel
  *
@@ -12,7 +12,6 @@ import * as React from 'react';
 /**
  * Custom responsive option
  * @see {@link CarouselProps.responsiveOptions}
- * @group Misc
  */
 interface CarouselResponsiveOption {
     /**
@@ -140,7 +139,7 @@ export interface CarouselProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
  *
  * _Carousel is a content slider featuring various customization options._
  *
- * [Live Demo](https://www.primefaces.org/primereact/carousel/)
+ * [Live Demo](https://www.primereact.org/carousel/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

@@ -66,7 +66,7 @@ const EditorDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Editor Component" header="Editor" description="Editor is rich text editor component based on Quill." componentDocs={docs} apiDocs={[{ name: 'Editor', pathname: '/modules/editor.html' }]} />;
+    return <DocComponent title="React Editor Component" header="Editor" description="Editor is rich text editor component based on Quill." componentDocs={docs} apiDocs={['Editor']} />;
 };
 
 export default EditorDemo;

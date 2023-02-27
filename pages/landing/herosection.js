@@ -45,7 +45,7 @@ const HeroSection = () => {
                                 </div>
                             </div>
                         </div>
-                        <Link href="/setup" passHref>
+                        <Link href="/installation" passHref>
                             <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation logo hidden md:flex my-4 align-items-center justify-content-center">
                                 <div className="hero-box-inner text-center">
                                     <img src="https://primefaces.org/cdn/primereact/images/landing-new/overview-icon.svg" alt="primereact main" />

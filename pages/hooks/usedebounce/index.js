@@ -16,9 +16,7 @@ const DebounceDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent title="React useDebounce Hook" header="useDebounce" description="Delays rapidly changing values to optimize performance." componentDocs={docs} apiDocs={[{ name: 'useDebounce', pathname: '/functions/hooks.useDebounce.html' }]} />
-    );
+    return <DocComponent title="React useDebounce Hook" header="useDebounce" description="Delays rapidly changing values to optimize performance." componentDocs={docs} apiDocs={['hooks.functions.useDebounce']} />;
 };
 
 export default DebounceDemo;

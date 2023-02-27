@@ -2,7 +2,7 @@
  *
  * OrganizationChart visualizes hierarchical organization data.
  *
- * [Live Demo](https://www.primefaces.org/primereact/organizationchart/)
+ * [Live Demo](https://www.primereact.org/organizationchart/)
  *
  * @module organizationchart
  *
@@ -68,6 +68,10 @@ interface OrganizationChartNodeData {
     label?: string;
 }
 
+/**
+ * Defines valid properties in OrganizationChart component. In addition to these, all properties of HTMLDivElement can be used in this component.
+ * @group Properties
+ */
 export interface OrganizationChartProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     /**
      * An array of nested TreeNodes.
@@ -113,7 +117,7 @@ export interface OrganizationChartProps extends Omit<React.DetailedHTMLProps<Rea
  *
  * _OrganizationChart visualizes hierarchical organization data._
  *
- * [Live Demo](https://www.primefaces.org/primereact/organizationchart/)
+ * [Live Demo](https://www.primereact.org/organizationchart/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

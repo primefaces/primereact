@@ -110,7 +110,7 @@ const DataViewProps = [
     {
         name: 'currentPageReportTemplate',
         type: 'string',
-        default: '(&123;currentPage&125; of &123;totalPages&125;)',
+        default: '(&#123;currentPage&#125; of &#123;totalPages&#125;)',
         description: 'Template of the current page report element.'
     },
     {

@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { classNames } from '../../lib/utils/Utils';
 import { DocApiSection } from './docapisection';
 import { DocSectionNav } from './docsectionnav';
@@ -15,8 +15,13 @@ export function DocComponent(props) {
         router.replace(router.pathname);
     };
 
+    useEffect(() => {
+        setTab(router.asPath.includes('#api.') ? 1 : 0);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     return (
-        <div className="doc-component">
+        <div className={classNames(props.className, 'doc-component')}>
             <Head>
                 <title>{props.title}</title>
                 <meta name="description" content={props.description} />
@@ -48,7 +53,7 @@ export function DocComponent(props) {
                 ) : null}
                 {tab === 1 ? (
                     <div className="doc-tabpanel">
-                        <DocApiSection doc={props.apiDocs} />
+                        <DocApiSection header={props.header} doc={props.apiDocs} />
                     </div>
                 ) : null}
             </div>

@@ -5,13 +5,13 @@ import { DocSectionText } from '../common/docsectiontext';
 export function RaisedDoc(props) {
     const code = {
         basic: `
-<Button label="Primary" className="p-button-raised" />
-<Button label="Secondary" className="p-button-secondary p-button-raised" />
-<Button label="Success" className="p-button-success p-button-raised" />
-<Button label="Info" className="p-button-info p-button-raised" />
-<Button label="Warning" className="p-button-warning p-button-raised" />
-<Button label="Help" className="p-button-help p-button-raised" />
-<Button label="Danger" className="p-button-danger p-button-raised" />
+<Button label="Primary" raised />
+<Button label="Secondary" severity="secondary" raised />
+<Button label="Success" severity="success" raised />
+<Button label="Info" severity="info" raised />
+<Button label="Warning" severity="warning" raised />
+<Button label="Help" severity="help" raised />
+<Button label="Danger" severity="danger" raised />
         `,
         javascript: `
 import React from 'react'; 
@@ -20,13 +20,13 @@ import { Button } from 'primereact/button';
 export default function RaisedDemo() {
     return (
         <div className="card flex flex-wrap justify-content-center gap-3">
-            <Button label="Primary" className="p-button-raised" />
-            <Button label="Secondary" className="p-button-secondary p-button-raised" />
-            <Button label="Success" className="p-button-success p-button-raised" />
-            <Button label="Info" className="p-button-info p-button-raised" />
-            <Button label="Warning" className="p-button-warning p-button-raised" />
-            <Button label="Help" className="p-button-help p-button-raised" />
-            <Button label="Danger" className="p-button-danger p-button-raised" />
+            <Button label="Primary" raised />
+            <Button label="Secondary" severity="secondary" raised />
+            <Button label="Success" severity="success" raised />
+            <Button label="Info" severity="info" raised />
+            <Button label="Warning" severity="warning" raised />
+            <Button label="Help" severity="help" raised />
+            <Button label="Danger" severity="danger" raised />
         </div>
     )
 }
@@ -38,13 +38,13 @@ import { Button } from 'primereact/button';
 export default function RaisedDemo() {
     return (
         <div className="card flex flex-wrap justify-content-center gap-3">
-            <Button label="Primary" className="p-button-raised" />
-            <Button label="Secondary" className="p-button-secondary p-button-raised" />
-            <Button label="Success" className="p-button-success p-button-raised" />
-            <Button label="Info" className="p-button-info p-button-raised" />
-            <Button label="Warning" className="p-button-warning p-button-raised" />
-            <Button label="Help" className="p-button-help p-button-raised" />
-            <Button label="Danger" className="p-button-danger p-button-raised" />
+            <Button label="Primary" raised />
+            <Button label="Secondary" severity="secondary" raised />
+            <Button label="Success" severity="success" raised />
+            <Button label="Info" severity="info" raised />
+            <Button label="Warning" severity="warning" raised />
+            <Button label="Help" severity="help" raised />
+            <Button label="Danger" severity="danger" raised />
         </div>
     )
 }
@@ -57,13 +57,13 @@ export default function RaisedDemo() {
                 <p>Raised buttons display a shadow to indicate elevation.</p>
             </DocSectionText>
             <div className="card flex flex-wrap justify-content-center gap-3">
-                <Button label="Primary" className="p-button-raised" />
-                <Button label="Secondary" className="p-button-secondary p-button-raised" />
-                <Button label="Success" className="p-button-success p-button-raised" />
-                <Button label="Info" className="p-button-info p-button-raised" />
-                <Button label="Warning" className="p-button-warning p-button-raised" />
-                <Button label="Help" className="p-button-help p-button-raised" />
-                <Button label="Danger" className="p-button-danger p-button-raised" />
+                <Button label="Primary" raised />
+                <Button label="Secondary" severity="secondary" raised />
+                <Button label="Success" severity="success" raised />
+                <Button label="Info" severity="info" raised />
+                <Button label="Warning" severity="warning" raised />
+                <Button label="Help" severity="help" raised />
+                <Button label="Danger" severity="danger" raised />
             </div>
             <DocSectionCode code={code} />
         </>

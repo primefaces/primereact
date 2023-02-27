@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { FilterService } from '../api/Api';
-import { useUpdateEffect } from '../hooks/Hooks';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import PrimeReact, { FilterService } from '../api/Api';
+import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { classNames, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { PickListBase } from './PickListBase';
 import { PickListControls } from './PickListControls';
 import { PickListSubList } from './PickListSubList';
@@ -15,11 +15,13 @@ export const PickList = React.memo(
         const [targetSelectionState, setTargetSelectionState] = React.useState([]);
         const [sourceFilterValueState, setSourceFilterValueState] = React.useState('');
         const [targetFilterValueState, setTargetFilterValueState] = React.useState('');
+        const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
         const elementRef = React.useRef(null);
         const sourceListElementRef = React.useRef(null);
         const targetListElementRef = React.useRef(null);
         const reorderedListElementRef = React.useRef(null);
         const reorderDirection = React.useRef(null);
+        const styleElementRef = React.useRef(null);
         const sourceSelection = props.sourceSelection ? props.sourceSelection : sourceSelectionState;
         const targetSelection = props.targetSelection ? props.targetSelection : targetSelectionState;
         const sourceFilteredValue = props.onSourceFilterChange ? props.sourceFilterValue : sourceFilterValueState;
@@ -199,10 +201,75 @@ export const PickList = React.memo(
             return FilterService.filter(list, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
         };
 
+        const createStyle = () => {
+            if (!styleElementRef.current) {
+                styleElementRef.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+
+                let innerHTML = `
+@media screen and (max-width: ${props.breakpoint}) {
+    .p-picklist[${attributeSelectorState}] {
+        flex-direction: column;
+    }
+
+    .p-picklist[${attributeSelectorState}] .p-picklist-buttons {
+        padding: var(--content-padding);
+        flex-direction: row;
+    }
+
+    .p-picklist[${attributeSelectorState}] .p-picklist-buttons .p-button {
+        margin-right: var(--inline-spacing);
+        margin-bottom: 0;
+    }
+
+    .p-picklist[${attributeSelectorState}] .p-picklist-buttons .p-button:last-child {
+        margin-right: 0;
+    }
+
+    .p-picklist[${attributeSelectorState}] .pi-angle-right:before {
+        content: "\\e930"
+    }
+
+    .p-picklist[${attributeSelectorState}] .pi-angle-double-right:before {
+        content: "\\e92c"
+    }
+
+    .p-picklist[${attributeSelectorState}] .pi-angle-left:before {
+        content: "\\e933"
+    }
+
+    .p-picklist[${attributeSelectorState}] .pi-angle-double-left:before {
+        content: "\\e92f"
+    }
+}
+`;
+
+                styleElementRef.current.innerHTML = innerHTML;
+            }
+        };
+
+        const destroyStyle = () => {
+            styleElementRef.current = DomHandler.removeInlineStyle(styleElementRef.current);
+        };
+
         React.useImperativeHandle(ref, () => ({
             props,
             getElement: () => elementRef.current
         }));
+
+        useMountEffect(() => {
+            !attributeSelectorState && setAttributeSelectorState(UniqueComponentId());
+        });
+
+        useUpdateEffect(() => {
+            if (attributeSelectorState) {
+                elementRef.current.setAttribute(attributeSelectorState, '');
+                createStyle();
+            }
+
+            return () => {
+                destroyStyle();
+            };
+        }, [attributeSelectorState, props.breakpoint]);
 
         useUpdateEffect(() => {
             if (reorderedListElementRef.current) {

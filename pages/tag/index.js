@@ -53,7 +53,7 @@ const TerminalDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Tag Component" header="Tag" description="Tag component is used to categorize content." componentDocs={docs} apiDocs={[{ name: 'Tag', pathname: '/modules/tag.html' }]} />;
+    return <DocComponent title="React Tag Component" header="Tag" description="Tag component is used to categorize content." componentDocs={docs} apiDocs={['Tag']} />;
 };
 
 export default TerminalDemo;

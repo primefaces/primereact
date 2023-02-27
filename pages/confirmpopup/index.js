@@ -37,13 +37,7 @@ const ConfirmPopupDemo = () => {
 
     return (
         <>
-            <DocComponent
-                title="React Confirmation Popup Component"
-                header="ConfirmPopup"
-                description="ConfirmPopup is an easy to use and customizable Confirmation API using a popover."
-                componentDocs={docs}
-                apiDocs={[{ name: 'ConfirmPopup', pathname: '/modules/confirmpopup.html' }]}
-            />
+            <DocComponent title="React Confirmation Popup Component" header="ConfirmPopup" description="ConfirmPopup is an easy to use and customizable Confirmation API using a popover." componentDocs={docs} apiDocs={['ConfirmPopup']} />
             <ConfirmPopup />
         </>
     );

@@ -101,7 +101,7 @@ const KnobDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Knob Component" header="Knob" description="Knob is a form component to define number inputs with a dial." componentDocs={docs} apiDocs={[{ name: 'Knob', pathname: '/modules/knob.html' }]} />;
+    return <DocComponent title="React Knob Component" header="Knob" description="Knob is a form component to define number inputs with a dial." componentDocs={docs} apiDocs={['Knob']} />;
 };
 
 export default KnobDemo;

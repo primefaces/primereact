@@ -94,15 +94,7 @@ const ChartDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React Chart Component"
-            header="Chart"
-            description="Chart components are based on Chart.js, an open source HTML5 based charting library."
-            componentDocs={docs}
-            apiDocs={[{ name: 'Chart', pathname: '/modules/chart.html' }]}
-        />
-    );
+    return <DocComponent title="React Chart Component" header="Chart" description="Chart components are based on Chart.js, an open source HTML5 based charting library." componentDocs={docs} apiDocs={['Chart']} />;
 };
 
 export default ChartDemo;

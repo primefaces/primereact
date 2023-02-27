@@ -5,7 +5,7 @@ import { useMountEffect, useOverlayListener, usePrevious, useUnmountEffect, useU
 import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, mask, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mask } from '../utils/Utils';
 import { CalendarBase } from './CalendarBase';
 import { CalendarPanel } from './CalendarPanel';
 
@@ -2477,7 +2477,7 @@ export const Calendar = React.memo(
             }
 
             return () => {
-                props.mask && unbindMaskEvents();
+                props.mask && unbindMaskEvents && unbindMaskEvents();
             };
         });
 
@@ -2688,7 +2688,7 @@ export const Calendar = React.memo(
                 return content;
             }
 
-            const displayYear = props.inline ? metaYear : currentYear;
+            const displayYear = props.numberOfMonths > 1 ? metaYear : currentYear;
 
             return (
                 currentView !== 'year' && (

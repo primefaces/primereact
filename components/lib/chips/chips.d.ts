@@ -2,7 +2,7 @@
  *
  * Chips is used to enter multiple values on an input field.
  *
- * [Live Demo](https://www.primefaces.org/primereact/chips/)
+ * [Live Demo](https://www.primereact.org/chips/)
  *
  * @module chips
  *
@@ -192,7 +192,7 @@ export interface ChipsProps extends Omit<React.DetailedHTMLProps<React.InputHTML
  *
  * _Chips is used to enter multiple values on an input field._
  *
- * [Live Demo](https://www.primefaces.org/primereact/chips/)
+ * [Live Demo](https://www.primereact.org/chips/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

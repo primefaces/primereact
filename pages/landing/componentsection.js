@@ -61,8 +61,7 @@ const ComponentSection = () => {
 
     const items = [
         { label: 'Home', icon: 'pi pi-fw pi-home' },
-        { label: 'Calendar', icon: 'pi pi-fw pi-calendar' },
-        { label: 'Settings', icon: 'pi pi-fw pi-cog' }
+        { label: 'Calendar', icon: 'pi pi-fw pi-calendar' }
     ];
     const selectButtonOptions = [
         { name: 'Prime', value: 1 },
@@ -80,12 +79,12 @@ const ComponentSection = () => {
             <p className="section-detail">
                 <span className="font-bold text-900">Over 90</span> React UI Components with top-notch quality to help you implement all your UI requirements in style.
             </p>
-            <div className="components-main flex mt-7 relative md:justify-content-center overflow-auto">
+            <div className="components-main flex flex-wrap mt-7 relative justify-content-center overflow-auto">
                 <div className="flex flex-column px-3 py-8 z-1">
                     <div className="box p-4 mb-5">
                         <span className="text-secondary font-medium block mb-3">Balance</span>
-                        <div className="flex">
-                            <InputNumber value={240} mode="currency" currency="USD" locale="en-US" className="mr-2" />
+                        <div className="flex flex-column sm:flex-row gap-3">
+                            <InputNumber value={240} mode="currency" currency="USD" locale="en-US" />
                             <InputNumber value={356} mode="currency" currency="USD" locale="en-US" />
                         </div>
                         <span className="text-secondary font-medium block mt-5 mb-3">Category</span>
@@ -111,7 +110,7 @@ const ComponentSection = () => {
                         </div>
                     </div>
                     <div className="box p-4 mb-5">
-                        <Chart type="line" data={chartData} options={chartOptions} />
+                        <Chart type="line" data={chartData} options={chartOptions} className="w-full" />
                     </div>
                     <div className="box p-4 mb-5">
                         <TabMenu model={items} activeIndex={activeTabIndex} onTabChange={(e) => setActiveTabIndex(e.index)} />
@@ -121,31 +120,31 @@ const ComponentSection = () => {
                             <li className="flex align-items-center mb-3">
                                 <img src="https://primefaces.org/cdn/primereact/images/landing-new/avatar-1.svg" alt="avatar 1" className="w-2rem h-2rem mr-3" />
                                 <span className="font-medium">Darrel Steward</span>
-                                <ProgressBar value={15} showValue={false} className="w-10rem ml-auto mr-3" style={{ height: '.5rem' }} />
+                                <ProgressBar value={15} showValue={false} className="w-6rem sm:w-10rem ml-auto mr-3" style={{ height: '.5rem' }} />
                                 <span className="text-secondary font-medium">15%</span>
                             </li>
                             <li className="flex align-items-center mb-3">
                                 <img src="https://primefaces.org/cdn/primereact/images/landing-new/avatar-2.svg" alt="avatar 2" className="w-2rem h-2rem mr-3" />
                                 <span className="font-medium">Albert Flores</span>
-                                <ProgressBar value={85} showValue={false} className="w-10rem ml-auto mr-3" style={{ height: '.5rem' }} />
+                                <ProgressBar value={85} showValue={false} className="w-6rem sm:w-10rem ml-auto mr-3" style={{ height: '.5rem' }} />
                                 <span className="text-secondary font-medium">85%</span>
                             </li>
                             <li className="flex align-items-center mb-3">
                                 <img src="https://primefaces.org/cdn/primereact/images/landing-new/avatar-3.svg" alt="avatar 3" className="w-2rem h-2rem mr-3" />
                                 <span className="font-medium">Kathryn Murphy</span>
-                                <ProgressBar value={50} showValue={false} className="w-10rem ml-auto mr-3" style={{ height: '.5rem' }} />
+                                <ProgressBar value={50} showValue={false} className="w-6rem sm:w-10rem ml-auto mr-3" style={{ height: '.5rem' }} />
                                 <span className="text-secondary font-medium">50%</span>
                             </li>
                             <li className="flex align-items-center mb-3">
                                 <img src="https://primefaces.org/cdn/primereact/images/landing-new/avatar-4.svg" alt="avatar 4" className="w-2rem h-2rem mr-3" />
                                 <span className="font-medium">Cody Fisher</span>
-                                <ProgressBar value={75} showValue={false} className="w-10rem ml-auto mr-3" style={{ height: '.5rem' }} />
+                                <ProgressBar value={75} showValue={false} className="w-6rem sm:w-10rem ml-auto mr-3" style={{ height: '.5rem' }} />
                                 <span className="text-secondary font-medium">75%</span>
                             </li>
                             <li className="flex align-items-center mb-3">
                                 <img src="https://primefaces.org/cdn/primereact/images/landing-new/avatar-5.svg" alt="avatar 5" className="w-2rem h-2rem mr-3" />
                                 <span className="font-medium">Brandon Atkinson</span>
-                                <ProgressBar value={60} showValue={false} className="w-10rem ml-auto mr-3" style={{ height: '.5rem' }} />
+                                <ProgressBar value={60} showValue={false} className="w-6rem sm:w-10rem ml-auto mr-3" style={{ height: '.5rem' }} />
                                 <span className="text-secondary font-medium">60%</span>
                             </li>
                         </ul>

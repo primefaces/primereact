@@ -118,7 +118,7 @@ const ButtonDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Button Component" header="Button" description="Button is an extension to standard input element with icons and theming." componentDocs={docs} apiDocs={[{ name: 'Button', pathname: '/modules/button.html' }]} />;
+    return <DocComponent title="React Button Component" header="Button" description="Button is an extension to standard input element with icons and theming." componentDocs={docs} apiDocs={['Button']} />;
 };
 
 export default ButtonDemo;

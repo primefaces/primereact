@@ -1,6 +1,78 @@
 # Changelog
 
-## [9.0.0-beta.1](https://github.com/primefaces/primereact/tree/9.0.0-beta.1)
+## [9.2.0](https://github.com/primefaces/primereact/tree/9.2.0) (2023-02-21)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.1.1...9.2.0)
+
+**Breaking Changes:**
+
+- DataTable CSS and responsive structure improvements [\#4078](https://github.com/primefaces/primereact/issues/4078)
+
+**Implemented New Features and Enhancements:**
+
+- New Hook: useMatchMedia [\#4090](https://github.com/primefaces/primereact/issues/4090)
+- Add breakpoint and scrollHeight props to ContextMenu, MegaMenu and TieredMenu components. [\#4082](https://github.com/primefaces/primereact/issues/4082)
+- TreeTable CSS improvements [\#4081](https://github.com/primefaces/primereact/issues/4081)
+- Add `when` option to useResizeListener hook  [\#4080](https://github.com/primefaces/primereact/issues/4080)
+- Add tabIndex, appendOnly and inline properties to VirtualScroller [\#4079](https://github.com/primefaces/primereact/issues/4079)
+
+**Fixed bugs:**
+
+- Toast: Flick issue on toast-message-exit-active class [\#4084](https://github.com/primefaces/primereact/issues/4084)
+- Inplace is not working as expected [\#4070](https://github.com/primefaces/primereact/issues/4070)
+- PrimeIcons: can't use pi-arrow-right-arrow-left [\#4062](https://github.com/primefaces/primereact/issues/4062)
+- Calendar: Popup incorrect year in multiple month [\#4058](https://github.com/primefaces/primereact/issues/4058)
+- Avatar: Wrong className is getting used when image is undefined [\#4049](https://github.com/primefaces/primereact/issues/4049)
+- Inline Calendar inside DataTable filter error [\#4042](https://github.com/primefaces/primereact/issues/4042)
+- Toast: Summary Overflow Bug [\#4023](https://github.com/primefaces/primereact/issues/4023)
+
+## [9.1.1](https://github.com/primefaces/primereact/tree/9.1.1) (2023-02-15)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.1.0...9.1.1)
+
+**Fixed bugs:**
+
+- primereact 9.1.0 it is not loaded using vite [\#4064](https://github.com/primefaces/primereact/issues/4064)
+
+## [9.1.0](https://github.com/primefaces/primereact/tree/9.1.0) (2023-02-15)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.0.0...9.1.0)
+
+**Implemented New Features and Enhancements:**
+
+- Improve responsive styling on Menubar [\#4060](https://github.com/primefaces/primereact/issues/4060)
+- FileUpload: Advanced Section same as PrimeVue FileUpload section [\#4059](https://github.com/primefaces/primereact/issues/4059)
+- Add breakpoint and scrollHeight properties to CascadeSelect [\#4052](https://github.com/primefaces/primereact/issues/4052)
+- Add breakpoint property to PickList and OrderList [\#4050](https://github.com/primefaces/primereact/issues/4050)
+
+## [9.0.0](https://github.com/primefaces/primereact/tree/9.0.0) (2023-02-13)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.0.0-rc.1...9.0.0)
+
+**Implemented New Features and Enhancements:**
+
+- Add sideEffects: false to nested package.json files on components [\#4028](https://github.com/primefaces/primereact/issues/4028)
+- Remove GMap and Captcha [\#4025](https://github.com/primefaces/primereact/issues/4025)
+- Core: Deprecated defaultProps still used [\#3786](https://github.com/primefaces/primereact/issues/3786)
+
+**Fixed bugs:**
+
+- DataTable: Export Function Newline Separator [\#4001](https://github.com/primefaces/primereact/issues/4001)
+
+## [9.0.0-rc.1](https://github.com/primefaces/primereact/tree/9.0.0-rc.1) (2023-02-09)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.0.0-beta.1...9.0.0-rc.1)
+
+**Breaking Changes:**
+
+- Remove Maps [\#4038](https://github.com/primefaces/primereact/issues/4038)
+- Remove Recaptcha [\#4037](https://github.com/primefaces/primereact/issues/4037)
+
+**Implemented New Features and Enhancements:**
+
+- New Hooks [\#4039](https://github.com/primefaces/primereact/issues/4039)
+
+## [9.0.0-beta.1](https://github.com/primefaces/primereact/tree/9.0.0-beta.1) (2023-01-26)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/8.7.3...9.0.0-beta.1)
 

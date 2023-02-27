@@ -9,16 +9,16 @@ export function BasicDoc(props) {
 
     const [clearTimeout] = useTimeout(() => {
         toast.current.show({ severity: 'info', summary: 'Loaded' });
-    }, 5000);
+    }, 3000);
 
     const code = {
         basic: `
 const [clearTimeout] = useTimeout(() => {
     toast.current.show({ severity: 'info', summary: 'Loaded' });
-}, 5000);
+}, 3000);
         `,
         javascript: `
-import React from 'react'; 
+import React from 'react';
 import { InputText } from 'primereact/inputtext';
 import { useTimeout } from 'primereact/hooks';
 import { Toast } from 'primereact/toast';
@@ -28,7 +28,7 @@ export default function BasicDemo() {
 
     const [clearTimeout] = useTimeout(() => {
         toast.current.show({ severity: 'info', summary: 'Loaded' });
-    }, 5000);
+    }, 3000);
 
     return (
         <>
@@ -41,7 +41,7 @@ export default function BasicDemo() {
 }
         `,
         typescript: `
-import React from 'react'; 
+import React from 'react';
 import { InputText } from 'primereact/inputtext';
 import { useTimeout } from 'primereact/hooks';
 import { Toast } from 'primereact/toast';
@@ -51,7 +51,7 @@ export default function BasicDemo() {
 
     const [clearTimeout] = useTimeout(() => {
         toast.current.show({ severity: 'info', summary: 'Loaded' });
-    }, 5000);
+    }, 3000);
 
     return (
         <>

@@ -9,7 +9,6 @@ import * as React from 'react';
 
 /**
  * Custom MousePositionOptions
- * @group Misc
  */
 interface MousePositionOptions {
     /**
@@ -24,7 +23,6 @@ interface MousePositionOptions {
 
 /**
  * Custom MouseDataOptions
- * @group Misc
  */
 declare interface MouseDataOptions extends MousePositionOptions {
     /**
@@ -39,7 +37,6 @@ declare interface MouseDataOptions extends MousePositionOptions {
 
 /**
  * Custom MouseMoveOptions
- * @group Misc
  */
 declare interface MouseMoveOptions extends MouseDataOptions {
     /**
@@ -50,7 +47,6 @@ declare interface MouseMoveOptions extends MouseDataOptions {
 
 /**
  * Custom event options.
- * @group Misc
  */
 interface EventOptions {
     /**
@@ -71,13 +67,13 @@ interface EventOptions {
     options?: any;
     /**
      * Whether to listen to the event or not.
+     * @defaultValue true
      */
     when?: boolean;
 }
 
 /**
  * Custom overlay event options.
- * @group Misc
  */
 interface OverlayEventOptions {
     /**
@@ -94,13 +90,13 @@ interface OverlayEventOptions {
     listener?(event: Event, type?: string): void;
     /**
      * Whether to listen to the event or not.
+     * @defaultValue true
      */
     when?: boolean;
 }
 
 /**
  * Custom resize event options.
- * @group Misc
  */
 interface ResizeEventOptions {
     /**
@@ -108,6 +104,11 @@ interface ResizeEventOptions {
      * @param {Event} event - The browser event object.
      */
     listener?(event: Event): void;
+    /**
+     * Whether to listen to the event or not.
+     * @defaultValue true
+     */
+    when?: boolean;
 }
 
 /**
@@ -185,8 +186,8 @@ export declare function useLocalStorage<S, K extends string = string>(initialVal
 export declare function useSessionStorage<S, K extends string = string>(initialValue: S, key: K): [S, React.Dispatch<React.SetStateAction<S>>];
 /**
  * @todo
- * @param {number} initialValue - The value to counter. @defaultValue 0
- * @param {{ min: number; max: number; step: number }} options - The options of the counter. @defaultValue &#123; step: 1 &#125;
+ * @param {number} [initialValue=0] - The value to counter.
+ * @param {{ min: number; max: number; step: number }} [options=&#123; step: 1 &#125;]  - The options of the counter.
  */
 export declare function useCounter(initialValue: number, options: { min: number; max: number; step: number }): any;
 /**
@@ -223,3 +224,9 @@ export declare function useIntersectionObserver(ref: React.RefObject<Element>, o
  * @param {*} callback - The callback to run when click outside.
  */
 export declare function useClickOutside(ref: React.RefObject<Element>, callback: any): void;
+/**
+ * Custom hook to detect if window size matches or not.
+ * @param {string} query - the media query
+ * @param {boolean} when - Whether to listen to the event or not.
+ */
+export declare function useMatchMedia(query: string, when?: boolean): boolean;

@@ -56,6 +56,9 @@ export default function MyApp({ Component }) {
         onThemeChange: (newTheme, dark) => {
             setDark(dark);
             changeTheme(newTheme);
+        },
+        onTableThemeChange: (currentTableTheme, newTableTheme) => {
+            changeTableTheme(currentTableTheme, newTableTheme);
         }
     };
 
@@ -74,6 +77,24 @@ export default function MyApp({ Component }) {
 
         linkElement.parentNode.insertBefore(cloneLinkElement, linkElement.nextSibling);
         setTheme(newTheme);
+    };
+
+    const changeTableTheme = (currentTableTheme, newTableTheme) => {
+        if (currentTableTheme !== newTableTheme) {
+            const elementId = 'landing-table-theme-link';
+            const linkElement = document.getElementById(elementId);
+            const cloneLinkElement = linkElement.cloneNode(true);
+            const newThemeUrl = linkElement.getAttribute('href').replace(currentTableTheme, newTableTheme);
+
+            cloneLinkElement.setAttribute('id', elementId + '-clone');
+            cloneLinkElement.setAttribute('href', newThemeUrl);
+            cloneLinkElement.addEventListener('load', () => {
+                linkElement.remove();
+                cloneLinkElement.setAttribute('id', elementId);
+            });
+
+            linkElement.parentNode.insertBefore(cloneLinkElement, linkElement.nextSibling);
+        }
     };
 
     if (Component.getLayout) {

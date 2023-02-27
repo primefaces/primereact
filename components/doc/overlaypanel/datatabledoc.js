@@ -149,7 +149,7 @@ import { OverlayPanel } from 'primereact/overlaypanel';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 import { Column } from 'primereact/column';
-import { DataTable, DataTableSelectionChangeParams } from 'primereact/datatable';
+import { DataTable, DataTableSelectionChangeEvent } from 'primereact/datatable';
 import { ProductService } from './service/ProductService';
 
 export default function DataTableDemo() {
@@ -189,7 +189,7 @@ export default function DataTableDemo() {
         return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
     };
 
-    const onProductSelect = (e: DataTableSelectionChangeParams) => {
+    const onProductSelect = (e: DataTableSelectionChangeEvent) => {
         setSelectedProduct(e.value);
     };
 

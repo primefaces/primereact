@@ -1,4 +1,4 @@
-name: API DOC Deploy
+name: Generate API DOC
 
 on:
   push:
@@ -30,7 +30,7 @@ jobs:
       run: npm install
 
     - name: Generate api doc
-      run: npm run doc
+      run: npm run apidoc
 
     - name: Commit doc
       run: |

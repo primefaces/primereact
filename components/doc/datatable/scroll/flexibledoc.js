@@ -1,43 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import { DataTable } from '../../../lib/datatable/DataTable';
-import { Column } from '../../../lib/column/Column';
+import React, { useEffect, useState } from 'react';
 import { CustomerService } from '../../../../service/CustomerService';
+import { Button } from '../../../lib/button/Button';
+import { Column } from '../../../lib/column/Column';
+import { DataTable } from '../../../lib/datatable/DataTable';
+import { Dialog } from '../../../lib/dialog/Dialog';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
-import { Button } from '../../../lib/button/Button';
-import { Dialog } from '../../../lib/dialog/Dialog';
 
-export function ScrollFlexibleDoc(props) {
+export function FlexibleScrollDoc(props) {
     const [customers, setCustomers] = useState([]);
     const [dialogVisible, setDialogVisible] = useState(false);
 
     useEffect(() => {
-        CustomerService.getCustomersLarge().then((data) => {
-            setCustomers(data);
-        });
+        CustomerService.getCustomersMedium().then((data) => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const openDialog = () => {
-        setDialogVisible(true);
-    };
-
-    const closeDialog = () => {
-        setDialogVisible(false);
-    };
-
     const dialogFooterTemplate = () => {
-        return <Button label="Ok" icon="pi pi-check" onClick={closeDialog} />;
+        return <Button label="Ok" icon="pi pi-check" onClick={() => setDialogVisible(false)} />;
     };
 
     const code = {
         basic: `
-<Button label="Show" icon="pi pi-external-link" onClick={openDialog} />
-<Dialog header="Flex Scroll" visible={dialogVisible} style={{ width: '75vw' }} maximizable modal contentStyle={{ height: '300px' }} onHide={closeDialog} footer={dialogFooterTemplate}>
-    <DataTable value={customers} scrollable scrollHeight="flex">
-        <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
-        <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
-        <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
-        <Column field="status" header="Status" style={{ minWidth: '200px' }}></Column>
+<Button label="Show" icon="pi pi-external-link" onClick={() => setDialogVisible(true)} />
+<Dialog header="Flex Scroll" visible={dialogVisible} style={{ width: '75vw' }} maximizable
+        modal contentStyle={{ height: '300px' }} onHide={() => setDialogVisible(false)} footer={dialogFooterTemplate}>
+    <DataTable value={customers} scrollable scrollHeight="flex" tableStyle={{ minWidth: '50rem' }}>
+        <Column field="name" header="Name"></Column>
+        <Column field="country.name" header="Country"></Column>
+        <Column field="representative.name" header="Representative"></Column>
+        <Column field="company" header="Company"></Column>
     </DataTable>
 </Dialog>
         `,
@@ -49,37 +40,30 @@ import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { CustomerService } from './service/CustomerService';
 
-const ScrollFlexibleDoc = () => {
+export default function FlexibleScrollDemo() {
+    const [customers, setCustomers] = useState([]);
+    const [dialogVisible, setDialogVisible] = useState(false);
 
     useEffect(() => {
-        CustomerService.getCustomersLarge().then((data) => {
-            setCustomers(data);
-        });
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const openDialog = () => {
-        setDialogVisible(true);
-    };
-
-    const closeDialog = () => {
-        setDialogVisible(false);
-    };
+        CustomerService.getCustomersMedium().then((data) => setCustomers(data));
+    }, []);
 
     const dialogFooterTemplate = () => {
-        return <Button label="Ok" icon="pi pi-check" onClick={closeDialog} />;
+        return <Button label="Ok" icon="pi pi-check" onClick={() => setDialogVisible(false)} />;
     };
 
     return (
         <div className="card">
-            <Button label="Show" icon="pi pi-external-link" onClick={openDialog} />
-            <Dialog header="Flex Scroll" visible={dialogVisible} style={{ width: '75vw' }} maximizable modal contentStyle={{ height: '300px' }} onHide={closeDialog} footer={dialogFooterTemplate}>
-                <DataTable value={customers} scrollable scrollHeight="flex">
-                    <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
-                    <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
-                    <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
-                    <Column field="status" header="Status" style={{ minWidth: '200px' }}></Column>
-                </DataTable>
-            </Dialog>
+        <Button label="Show" icon="pi pi-external-link" onClick={() => setDialogVisible(true)} />
+        <Dialog header="Flex Scroll" visible={dialogVisible} style={{ width: '75vw' }} maximizable
+                modal contentStyle={{ height: '300px' }} onHide={() => setDialogVisible(false)} footer={dialogFooterTemplate}>
+            <DataTable value={customers} scrollable scrollHeight="flex" tableStyle={{ minWidth: '50rem' }}>
+                <Column field="name" header="Name"></Column>
+                <Column field="country.name" header="Country"></Column>
+                <Column field="representative.name" header="Representative"></Column>
+                <Column field="company" header="Company"></Column>
+            </DataTable>
+        </Dialog>
         </div>
     );
 }
@@ -92,35 +76,41 @@ import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { CustomerService } from './service/CustomerService';
 
-const ScrollFlexibleDoc = () => {
-    
+interface Customer {
+    id: number;
+    name: string;
+    country: Country;
+    company: string;
+    date: string;
+    status: string;
+    verified: boolean;
+    activity: number;
+    representative: Representative;
+    balance: number;
+}
+
+export default function FlexibleScrollDemo() {
+    const [customers, setCustomers] = useState<Customer[]>([]);
+    const [dialogVisible, setDialogVisible] = useState<boolean>(false);
+
     useEffect(() => {
-        CustomerService.getCustomersLarge().then((data) => {
-            setCustomers(data);
-        });
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const openDialog = () => {
-        setDialogVisible(true);
-    };
-
-    const closeDialog = () => {
-        setDialogVisible(false);
-    };
+        CustomerService.getCustomersMedium().then((data) => setCustomers(data));
+    }, []);
 
     const dialogFooterTemplate = () => {
-        return <Button label="Ok" icon="pi pi-check" onClick={closeDialog} />;
+        return <Button label="Ok" icon="pi pi-check" onClick={() => setDialogVisible(false)} />;
     };
 
     return (
         <div className="card">
-            <Button label="Show" icon="pi pi-external-link" onClick={openDialog} />
-            <Dialog header="Flex Scroll" visible={dialogVisible} style={{ width: '75vw' }} maximizable modal contentStyle={{ height: '300px' }} onHide={closeDialog} footer={dialogFooterTemplate}>
-                <DataTable value={customers} scrollable scrollHeight="flex">
-                    <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
-                    <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
-                    <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
-                    <Column field="status" header="Status" style={{ minWidth: '200px' }}></Column>
+            <Button label="Show" icon="pi pi-external-link" onClick={() => setDialogVisible(true)} />
+            <Dialog header="Flex Scroll" visible={dialogVisible} style={{ width: '75vw' }} maximizable
+                    modal contentStyle={{ height: '300px' }} onHide={() => setDialogVisible(false)} footer={dialogFooterTemplate}>
+                <DataTable value={customers} scrollable scrollHeight="flex" tableStyle={{ minWidth: '50rem' }}>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="country.name" header="Country"></Column>
+                    <Column field="representative.name" header="Representative"></Column>
+                    <Column field="company" header="Company"></Column>
                 </DataTable>
             </Dialog>
         </div>
@@ -128,7 +118,6 @@ const ScrollFlexibleDoc = () => {
 }
         `,
         data: `
-/* CustomerService */ 
 {
     id: 1000,
     name: 'James Butt',
@@ -155,18 +144,18 @@ const ScrollFlexibleDoc = () => {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Flex scroll feature makes the scrollable viewport section dynamic insteaf of a fixed value so that it can grow or shrink relative to the parent size of the table. Click the button below to display a maximizable Dialog where data
+                    Flex scroll feature makes the scrollable viewport section dynamic instead of a fixed value so that it can grow or shrink relative to the parent size of the table. Click the button below to display a maximizable Dialog where data
                     viewport adjusts itself according to the size changes.
                 </p>
             </DocSectionText>
-            <div className="card">
-                <Button label="Show" icon="pi pi-external-link" onClick={openDialog} />
-                <Dialog header="Flex Scroll" visible={dialogVisible} style={{ width: '75vw' }} maximizable modal contentStyle={{ height: '300px' }} onHide={closeDialog} footer={dialogFooterTemplate}>
-                    <DataTable value={customers} scrollable scrollHeight="flex">
-                        <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
-                        <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
-                        <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
-                        <Column field="status" header="Status" style={{ minWidth: '200px' }}></Column>
+            <div className="card flex justify-content-center">
+                <Button label="Show" icon="pi pi-external-link" onClick={() => setDialogVisible(true)} />
+                <Dialog header="Flex Scroll" visible={dialogVisible} style={{ width: '75vw' }} maximizable modal contentStyle={{ height: '300px' }} onHide={() => setDialogVisible(false)} footer={dialogFooterTemplate}>
+                    <DataTable value={customers} scrollable scrollHeight="flex" tableStyle={{ minWidth: '50rem' }}>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="country.name" header="Country"></Column>
+                        <Column field="representative.name" header="Representative"></Column>
+                        <Column field="company" header="Company"></Column>
                     </DataTable>
                 </Dialog>
             </div>

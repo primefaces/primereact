@@ -2,7 +2,7 @@
  *
  * TabView is a container component to group content with tabs.
  *
- * [Live Demo](https://www.primefaces.org/primereact/tabview/)
+ * [Live Demo](https://www.primereact.org/tabview/)
  *
  * Helper Components:
  *
@@ -15,7 +15,6 @@ import * as React from 'react';
 
 /**
  * Custom Tabpanel header template options
- * @group Misc
  */
 interface TabPanelHeaderTemplateOptions {
     /**
@@ -230,7 +229,7 @@ export interface TabViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
  *
  * _TabView is a container component to group content with tabs._
  *
- * [Live Demo](https://www.primefaces.org/primereact/tabview/)
+ * [Live Demo](https://www.primereact.org/tabview/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

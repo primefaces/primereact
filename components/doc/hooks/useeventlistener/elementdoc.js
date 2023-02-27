@@ -55,7 +55,7 @@ const [bindMouseLeaveListener, unbindMouseLeaveListener] = useEventListener({
 });
         `,
         javascript: `
-import React, { useState, useEffect, useRef } from 'react'; 
+import React, { useState, useEffect, useRef } from 'react';
 import { useEventListener } from 'primereact/hooks';
 
 export default function ElementDemo() {
@@ -90,7 +90,7 @@ export default function ElementDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <div ref={elementRef} class="border-round border-2 border-dashed surface-border text-xl p-5 w-15rem text-center">
+            <div ref={elementRef} className="border-round border-2 border-dashed surface-border text-xl p-5 w-15rem text-center">
                 {hover ? 'Hovered' : 'Hover Me'}
             </div>
         </div>
@@ -133,7 +133,7 @@ export default function ElementDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <div ref={elementRef} class="border-round border-2 border-dashed surface-border text-xl p-5 w-15rem text-center">
+            <div ref={elementRef} className="border-round border-2 border-dashed surface-border text-xl p-5 w-15rem text-center">
                 {hover ? 'Hovered' : 'Hover Me'}
             </div>
         </div>
@@ -150,7 +150,7 @@ export default function ElementDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <div ref={elementRef} class="border-round border-2 border-dashed surface-border text-xl p-5 w-15rem text-center">
+                <div ref={elementRef} className="border-round border-2 border-dashed surface-border text-xl p-5 w-15rem text-center">
                     {hover ? 'Hovered' : 'Hover Me'}
                 </div>
             </div>

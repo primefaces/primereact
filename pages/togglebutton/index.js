@@ -53,15 +53,7 @@ const ToggleButtonDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React ToggleButton Component"
-            header="ToggleButton"
-            description="ToggleButton is used to select a boolean value using a button."
-            componentDocs={docs}
-            apiDocs={[{ name: 'ToggleButton', pathname: '/modules/togglebutton.html' }]}
-        />
-    );
+    return <DocComponent title="React ToggleButton Component" header="ToggleButton" description="ToggleButton is used to select a boolean value using a button." componentDocs={docs} apiDocs={['ToggleButton']} />;
 };
 
 export default ToggleButtonDemo;

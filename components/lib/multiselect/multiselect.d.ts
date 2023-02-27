@@ -2,7 +2,7 @@
  *
  * MultiSelect is used to select multiple items from a collection.
  *
- * [Live Demo](https://www.primefaces.org/primereact/multiselect/)
+ * [Live Demo](https://www.primereact.org/multiselect/)
  *
  * @module multiselect
  *
@@ -78,7 +78,6 @@ interface MultiSelectPanelHeaderTemplateEvent {
 
 /**
  * Custom multiselect change target options
- * @group Misc
  */
 interface MultiSelectChangeTargetOptions {
     /**
@@ -157,7 +156,6 @@ interface MultiSelectAllEvent {
 
 /**
  * Multiselect filter options
- * @group Misc
  */
 interface MultiSelectFilterOptions {
     /**
@@ -457,7 +455,7 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
  *
  * _MultiSelect is used to select multiple items from a collection._
  *
- * [Live Demo](https://www.primefaces.org/primereact/multiselect/)
+ * [Live Demo](https://www.primereact.org/multiselect/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

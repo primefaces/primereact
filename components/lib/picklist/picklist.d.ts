@@ -2,7 +2,7 @@
  *
  * PickList is used to reorder items between different lists.
  *
- * [Live Demo](https://www.primefaces.org/primereact/picklist/)
+ * [Live Demo](https://www.primereact.org/picklist/)
  *
  * @module picklist
  *
@@ -54,7 +54,6 @@ interface PickListChangeEvent {
 
 /**
  * Custom filter template options.
- * @group Misc
  */
 interface PickListFilterTemplateOptions {
     /**
@@ -164,6 +163,11 @@ export interface PickListProps {
      */
     metaKeySelection?: boolean | undefined;
     /**
+     * When specified, displays an input field to filter the items on keyup.
+     * @defaultValue false
+     */
+    filter?: boolean | undefined;
+    /**
      * When specified displays an input field to filter the items on keyup and decides which field to search (Accepts multiple fields with a comma).
      */
     filterBy?: string | undefined;
@@ -219,6 +223,11 @@ export interface PickListProps {
      * Name of the field that uniquely identifies the a record in the data.
      */
     dataKey?: string | undefined;
+    /**
+     * The breakpoint to define the maximum width boundary when responsiveness is enabled.
+     * @defaultValue '960px'.
+     */
+    breakpoint?: string | undefined;
     /**
      * Template that gets the options for both source and target items and returns the content for it. Useful if you want the same template for both lists else use the custom sourceItemTemplate or targetItemTemplate properties.
      */
@@ -288,7 +297,7 @@ export interface PickListProps {
  *
  * _PickList is used to reorder items between different lists._
  *
- * [Live Demo](https://www.primefaces.org/primereact/picklist/)
+ * [Live Demo](https://www.primereact.org/picklist/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

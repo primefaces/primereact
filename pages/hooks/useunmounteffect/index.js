@@ -16,15 +16,7 @@ const UnmountEffectDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="React useUnmountEffect Hook"
-            header="useUnmountEffect"
-            description="Executes a given callback when component is unmounted."
-            componentDocs={docs}
-            apiDocs={[{ name: 'useUnmountEffect', pathname: '/functions/hooks.useUnmountEffect.html' }]}
-        />
-    );
+    return <DocComponent title="React useUnmountEffect Hook" header="useUnmountEffect" description="Executes a given callback when component is unmounted." componentDocs={docs} apiDocs={['hooks.functions.useUnmountEffect']} />;
 };
 
 export default UnmountEffectDemo;

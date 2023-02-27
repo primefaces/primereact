@@ -40,7 +40,7 @@ const DeferredContentDemo = () => {
             header="DeferredContent"
             description="DeferredContent postpones the loading the content that is initially not in the viewport until it becomes visible on scroll."
             componentDocs={docs}
-            apiDocs={[{ name: 'DeferredContent', pathname: '/modules/deferredcontent.html' }]}
+            apiDocs={['DeferredContent']}
         />
     );
 };

@@ -2,7 +2,7 @@
  *
  * OrderList is used to sort a collection.
  *
- * [Live Demo](https://www.primefaces.org/primereact/orderlist/)
+ * [Live Demo](https://www.primereact.org/orderlist/)
  *
  * @module orderlist
  *
@@ -27,7 +27,6 @@ interface OrderListChangeEvent {
 
 /**
  * Custom filter options.
- * @group Misc
  */
 interface OrderListFilterOptions {
     /**
@@ -66,6 +65,11 @@ export interface OrderListProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      * Name of the field that uniquely identifies the a record in the data.
      */
     dataKey?: string | undefined;
+    /**
+     * The breakpoint to define the maximum width boundary when responsiveness is enabled.
+     * @defaultValue '960px'.
+     */
+    breakpoint?: string | undefined;
     /**
      * When specified, displays an input field to filter the items on keyup.
      * @defaultValue false
@@ -116,7 +120,7 @@ export interface OrderListProps extends Omit<React.DetailedHTMLProps<React.HTMLA
  *
  * _OrderList is used to sort a collection._
  *
- * [Live Demo](https://www.primefaces.org/primereact/orderlist/)
+ * [Live Demo](https://www.primereact.org/orderlist/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

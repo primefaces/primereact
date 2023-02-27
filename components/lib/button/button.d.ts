@@ -1,8 +1,8 @@
 /**
  *
- * Button is an extension to standard input element with icons and theming.
+ * Button is an extension to standard button element with icons and theming.
  *
- * [Live Demo](https://www.primefaces.org/primereact/button/)
+ * [Live Demo](https://www.primereact.org/button/)
  *
  * @module button
  *
@@ -39,6 +39,39 @@ export interface ButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHT
      */
     icon?: IconType<ButtonProps> | undefined;
     /**
+     * Add a textual class to the button without a background initially.
+     * @defaultValue false
+     */
+    text?: boolean | undefined;
+    /**
+     * Add a circular border radius to the button.
+     * @defaultValue false
+     */
+    rounded?: boolean | undefined;
+    /**
+     * Add a shadow to indicate elevation.
+     * @defaultValue false
+     */
+    raised?: boolean | undefined;
+    /**
+     * Add a border class without a background initially.
+     * @defaultValue false
+     */
+    outlined?: boolean | undefined;
+    /**
+     * Add a link style to the button.
+     * @defaultValue false
+     */
+    link?: boolean | undefined;
+    /**
+     * Defines the style of the button, valid values are "secondary", "success", "info", "warning", "danger".
+     */
+    severity?: 'secondary' | 'success' | 'info' | 'warning' | 'danger' | undefined;
+    /**
+     * Defines the size of the button, valid values are "small" and "large".
+     */
+    size?: 'small' | 'large' | undefined;
+    /**
      * Position of the icon, valid values are "left", "right", "top" and "bottom".
      * @defaultValue left
      */
@@ -71,4 +104,15 @@ export interface ButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHT
     visible?: boolean | undefined;
 }
 
+/**
+ * **PrimeReact - Button**
+ *
+ * _Button is an extension to standard button element with icons and theming._
+ *
+ * [Live Demo](https://www.primereact.org/button/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
+ * @group Component
+ */
 export declare class Button extends React.Component<ButtonProps, any> {}

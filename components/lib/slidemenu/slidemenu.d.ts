@@ -2,7 +2,7 @@
  *
  * SlideMenu displays submenus with a slide animation.
  *
- * [Live Demo](https://www.primefaces.org/primereact/slidemenu/)
+ * [Live Demo](https://www.primereact.org/slidemenu/)
  *
  * @module slidemenu
  *
@@ -108,7 +108,7 @@ export interface SlideMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLA
  *
  * _SlideMenu displays submenus with a slide animation._
  *
- * [Live Demo](https://www.primefaces.org/primereact/slidemenu/)
+ * [Live Demo](https://www.primereact.org/slidemenu/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *

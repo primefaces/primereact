@@ -35,7 +35,7 @@ export function FilterDoc(props) {
 
     const code = {
         basic: `
-<PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} filter filterBy="name" 
+<PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} filter filterBy="name" breakpoint="1400px"
     sourceHeader="Available" targetHeader="Selected" sourceStyle={{ height: '30rem' }} targetStyle={{ height: '30rem' }}
     sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name" />
         `,
@@ -75,8 +75,8 @@ export default function FilterDemo() {
 
     return (
         <div className="card">
-            <PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} filter filterBy="name"
-                sourceHeader="Available" targetHeader="Selected" sourceStyle={{ height: '30rem' }} targetStyle={{ height: '30rem' }} 
+            <PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} filter filterBy="name" breakpoint="1400px"
+                sourceHeader="Available" targetHeader="Selected" sourceStyle={{ height: '30rem' }} targetStyle={{ height: '30rem' }}
                 sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name" />
         </div>
     );
@@ -131,7 +131,7 @@ export default function FilterDemo() {
 
     return (
         <div className="card">
-            <PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} filter filterBy="name"
+            <PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} filter filterBy="name" breakpoint="1400px"
                 sourceHeader="Available" targetHeader="Selected" sourceStyle={{ height: '30rem' }} targetStyle={{ height: '30rem' }}
                 sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name" />
         </div>
@@ -139,7 +139,7 @@ export default function FilterDemo() {
 }
         `,
         data: `
-/* ProductService */        
+/* ProductService */
 {
     id: '1000',
     code: 'f230fh0g3',
@@ -174,6 +174,7 @@ export default function FilterDemo() {
                     targetHeader="Selected"
                     sourceStyle={{ height: '30rem' }}
                     targetStyle={{ height: '30rem' }}
+                    breakpoint="1400px"
                     filter
                     filterBy="name"
                     sourceFilterPlaceholder="Search by name"

@@ -1,21 +1,19 @@
-.timeline-demo {
-    @media screen and (max-width: 991px) {
-        .customized-timeline {
-            .p-timeline-event:nth-child(even) {
-                flex-direction: row !important;
+@media screen and (max-width: 991px) {
+    .customized-timeline {
+        .p-timeline-event:nth-child(even) {
+            flex-direction: row !important;
 
-                .p-timeline-event-content {
-                    text-align: left !important;
-                }
+            .p-timeline-event-content {
+                text-align: left !important;
             }
+        }
 
-            .p-timeline-event-opposite {
-                flex: 0;
-            }
+        .p-timeline-event-opposite {
+            flex: 0;
+        }
 
-            .p-card {
-                margin-top: 1rem;
-            }
+        .p-card {
+            margin-top: 1rem;
         }
     }
 }

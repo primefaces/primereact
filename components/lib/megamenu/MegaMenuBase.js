@@ -8,6 +8,8 @@ export const MegaMenuBase = {
         style: null,
         className: null,
         orientation: 'horizontal',
+        breakpoint: undefined,
+        scrollHeight: '400px',
         start: null,
         end: null,
         children: undefined

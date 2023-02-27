@@ -125,10 +125,10 @@ export function TemplateDoc(props) {
 
     const code = {
         basic: `
-<MegaMenu model={items} orientation="horizontal" start={start} end={end} />        
+<MegaMenu model={items} orientation="horizontal" start={start} end={end} breakpoint="960px" />
 `,
         javascript: `
-import React from 'react'; 
+import React from 'react';
 import { MegaMenu } from 'primereact/megamenu';
 import { InputText } from 'primereact/inputtext';
 
@@ -251,13 +251,13 @@ export default function TemplateDemo() {
 
     return (
         <div className="card">
-            <MegaMenu model={items} orientation="horizontal" start={start} end={end} />
+            <MegaMenu model={items} orientation="horizontal" start={start} end={end} breakpoint="960px" />
         </div>
     )
 }
         `,
         typescript: `
-import React from 'react'; 
+import React from 'react';
 import { MegaMenu } from 'primereact/megamenu';
 import { InputText } from 'primereact/inputtext';
 import { MenuItem } from 'primereact/menuitem';
@@ -381,7 +381,7 @@ export default function TemplateDemo() {
 
     return (
         <div className="card">
-            <MegaMenu model={items} orientation="horizontal" start={start} end={end} />
+            <MegaMenu model={items} orientation="horizontal" start={start} end={end} breakpoint="960px" />
         </div>
     )
 }
@@ -396,7 +396,7 @@ export default function TemplateDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <MegaMenu model={items} orientation="horizontal" start={start} end={end} />
+                <MegaMenu model={items} orientation="horizontal" start={start} end={end} breakpoint="960px" />
             </div>
             <DocSectionCode code={code} />
         </>

@@ -2,7 +2,7 @@
  *
  * TreeSelect is a form component to choose from hierarchical data.
  *
- * [Live Demo](https://www.primefaces.org/primereact/treeselect/)
+ * [Live Demo](https://www.primereact.org/treeselect/)
  *
  * @module treeselect
  *
@@ -14,7 +14,6 @@ import { FormEvent } from '../ts-helpers';
 
 /**
  * Custom panel header template options.
- * @group Misc
  */
 interface TreeSelectPanelHeaderTemplateOptions {
     /**
@@ -61,7 +60,6 @@ interface TreeSelectChangeEvent extends FormEvent<string | TreeSelectSelectionKe
 
 /**
  * Custom treeselect selection keys type
- * @group Misc
  */
 interface TreeSelectSelectionKeysType {
     /**
@@ -72,7 +70,6 @@ interface TreeSelectSelectionKeysType {
 
 /**
  * Custom checkbox selection key type
- * @group Misc
  */
 interface TreeSelectCheckboxSelectionKeyType {
     /**
@@ -103,7 +100,6 @@ interface TreeSelectEventNodeEvent {
 
 /**
  * Custom expanded keys type.
- * @group Misc
  */
 interface TreeSelectExpandedKeysType {
     /**
@@ -146,7 +142,6 @@ interface TreeSelectFilterValueChangeEvent {
 
 /**
  * Custom filter options.
- * @group Misc
  */
 interface TreeSelectFilterOptions {
     /**
@@ -360,7 +355,7 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
  *
  * _TreeSelect is a form component to choose from hierarchical data._
  *
- * [Live Demo](https://www.primefaces.org/primereact/treeselect/)
+ * [Live Demo](https://www.primereact.org/treeselect/)
  * --- ---
  * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
