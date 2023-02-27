@@ -776,7 +776,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         border: 0 none;
     }
 
-    ${gridLinesSelector}] > .p-datatable-tbody > tr > td:last-child {
+    ${gridLinesSelector} > .p-datatable-tbody > tr > td:last-child {
         border-top: 0;
         border-right: 0;
         border-left: 0;
