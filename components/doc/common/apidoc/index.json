@@ -3220,9 +3220,9 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"success\" | \"warning\" | \"info\" | \"danger\" | \"secondary\"",
+                            "type": "\"success\" | \"warning\" | \"info\" | \"danger\" | \"help\" | \"secondary\"",
                             "default": "",
-                            "description": "Defines the style of the button, valid values are \"secondary\", \"success\", \"info\", \"warning\", \"danger\"."
+                            "description": "Defines the style of the button, valid values are \"secondary\", \"help\", \"success\", \"info\", \"warning\", \"danger\"."
                         },
                         {
                             "name": "size",
