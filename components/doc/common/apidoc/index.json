@@ -15062,7 +15062,7 @@
                             "description": "The options of the intersection observer."
                         }
                     ],
-                    "returnType": "void",
+                    "returnType": "boolean",
                     "description": "Custom hook to use change the current favicon."
                 },
                 "useInterval": {
