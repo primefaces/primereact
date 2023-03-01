@@ -7,7 +7,7 @@ export function DesignerDoc(props) {
                 <p>
                     CSS of the themes share the same license as PrimeReact which is MIT, this means the generated CSS can be customized per your needs however this should be avoided if your customizations are not simple. For instance even to change a
                     primary color, since there is no variable a find and replace should be performed various times. On the other hand, this can be achieved by changing a single variable e.g. <i>$primaryColor</i>. Visit the{' '}
-                    <a href="https://www.primefaces.org/designer/api/primereact/8.1.0">SASS API</a> for the documentation of available customization options.
+                    <a href="https://www.primefaces.org/designer/api/primereact/9.0.0">SASS API</a> for the documentation of available customization options.
                 </p>
 
                 <p>
