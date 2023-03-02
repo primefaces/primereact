@@ -68,9 +68,9 @@ export interface ButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHT
      */
     severity?: 'secondary' | 'success' | 'info' | 'warning' | 'danger' | undefined;
     /**
-     * Defines the size of the button, valid values are "sm" and "lg".
+     * Defines the size of the button, valid values are "small" and "large".
      */
-    size?: 'sm' | 'lg' | undefined;
+    size?: 'small' | 'large' | undefined;
     /**
      * Position of the icon, valid values are "left", "right", "top" and "bottom".
      * @defaultValue left

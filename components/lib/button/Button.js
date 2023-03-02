@@ -50,6 +50,11 @@ export const Button = React.memo(
         const showTooltip = !disabled || (props.tooltipOptions && props.tooltipOptions.showOnDisabled);
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip) && showTooltip;
         const otherProps = ButtonBase.getOtherProps(props);
+        const sizeMapping = {
+            large: 'lg',
+            small: 'sm'
+        };
+        const size = sizeMapping[props.size];
         const className = classNames('p-button p-component', props.className, {
             'p-button-icon-only': (props.icon || (props.loading && props.loadingIcon)) && !props.label && !props.children,
             'p-button-vertical': (props.iconPos === 'top' || props.iconPos === 'bottom') && props.label,
@@ -62,7 +67,7 @@ export const Button = React.memo(
             'p-button-rounded': props.rounded,
             'p-button-loading-label-only': props.loading && !props.icon && props.label,
             [`p-button-loading-${props.iconPos}`]: props.loading && props.loadingIcon && props.label,
-            [`p-button-${props.size}`]: props.size,
+            [`p-button-${size}`]: size,
             [`p-button-${props.severity}`]: props.severity
         });
 
