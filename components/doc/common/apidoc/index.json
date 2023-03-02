@@ -3228,9 +3228,9 @@
                             "name": "size",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"small\" | \"large\"",
+                            "type": "\"sm\" | \"lg\"",
                             "default": "",
-                            "description": "Defines the size of the button, valid values are \"small\" and \"large\"."
+                            "description": "Defines the size of the button, valid values are \"sm\" and \"lg\"."
                         },
                         {
                             "name": "text",
