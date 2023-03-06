@@ -85,7 +85,7 @@ const ComponentSection = () => {
                 <span className="font-bold text-900">Over 90</span> React UI Components with top-notch quality to help you implement all your UI requirements in style.
             </p>
             <div className="components-main relative ">
-                <div className="components-main-container flex flex-column xl:flex-row mt-7 gap-5 justify-content-center mx-auto w-full px-5 lg:px-8">
+                <div className="components-main-container flex flex-column xl:flex-row mt-7 gap-5 justify-content-center mx-auto w-full xl:w-auto px-5 lg:px-8">
                     <div className="flex flex-column md:flex-row gap-5 w-full ">
                         <div className="flex flex-column w-full gap-5 xl:mt-8 z-1  ">
                             <div className="box p-4  ">
@@ -117,7 +117,7 @@ const ComponentSection = () => {
                                 </div>
                             </div>
                             <div className="box p-4 ">
-                                <Chart type="line" data={chartData} options={chartOptions} className="w-full " />
+                                <Chart type="line" data={chartData} options={chartOptions} className=" " />
                             </div>
                             <div className="box p-4 ">
                                 <TabMenu model={items} activeIndex={activeTabIndex} onTabChange={(e) => setActiveTabIndex(e.index)} />
