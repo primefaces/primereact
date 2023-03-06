@@ -10,7 +10,7 @@ const GetStartedSection = () => {
                     Get Started <i className="pi pi-arrow-right ml-3"></i>
                 </a>
             </Link>
-            <div  className="relative box download-box w-15rem font-medium p-3 px-4 mt-3 md:mt-0 md:ml-3 bg-transparent inline-flex align-items-center fadeinright animation-duration-2000 animation-ease-out" onClick={() => {
+            <div  className="relative cursor-pointer box download-box w-15rem font-medium p-3 px-4 mt-3 md:mt-0 md:ml-3 bg-transparent inline-flex align-items-center fadeinright animation-duration-2000 animation-ease-out" onClick={() => {
                 navigator.clipboard.writeText('npm i primereact') ;
                 npmCopied('copied!')
                 copiedIcon('pi pi-copy mr-3 download-icon')

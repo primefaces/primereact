@@ -86,13 +86,13 @@ const ComponentSection = () => {
             </p>
             <div className="components-main relative ">
                 <div className="components-main-container flex flex-column xl:flex-row mt-7 gap-5 justify-content-center mx-auto w-full xl:w-auto px-5 lg:px-8">
-                    <div className="flex flex-column md:flex-row gap-5 w-full ">
-                        <div className="flex flex-column w-full gap-5 xl:mt-8 z-1  ">
+                    <div className="flex flex-column md:flex-row gap-5 w-full xl:w-auto">
+                        <div className="flex flex-column w-full gap-5 xl:mt-8 z-1  lg:w-28rem md:w-30rem">
                             <div className="box p-4  ">
                                 <span className="text-secondary font-medium block mb-3">Balance</span>
-                                <div className="flex flex-wrap justify-content-start gap-3">
-                                    <InputNumber value={240} mode="currency" currency="USD" locale="en-US" className="w-full md:w-auto"/>
-                                    <InputNumber value={356} mode="currency" currency="USD" locale="en-US" className="w-full md:w-auto"/>
+                                <div className="flex flex-wrap lg:flex-nowrap justify-content-start gap-3">
+                                    <InputNumber value={240} mode="currency" currency="USD" locale="en-US" className="w-full" inputClassName='lg:w-6'/>
+                                    <InputNumber value={356} mode="currency" currency="USD" locale="en-US" className="w-full" inputClassName='lg:w-6'/>
                                 </div>
                                 <span className="text-secondary font-medium block mt-5 mb-3">Category</span>
                                 <div className="flex justify-content-between flex-wrap gap-3">
@@ -157,7 +157,7 @@ const ComponentSection = () => {
                                 </ul>
                             </div>
                         </div>
-                        <div className="flex flex-column w-full  gap-5 justify-content-start   z-1">
+                        <div className="flex flex-column w-full  gap-5 justify-content-start  xl:w-24rem z-1">
                             <div className="box p-4  ">
                                 <div className="surface-card mb-4 w-full text-center p-5" style={{ borderRadius: '10px' }}>
                                     <img src="images/landing-new/brown-watch.png" alt="Watch" className='w-14rem' />
@@ -243,7 +243,7 @@ const ComponentSection = () => {
                         </div>
 
                         <div className="box p-4  md:w-6 xl:w-full">
-                            <Calendar value={dateValue} onChange={(e) => setDateValue(e.value)} inline showWeek className="w-full " />
+                            <Calendar value={dateValue} onChange={(e) => setDateValue(e.value)} inline showWeek className="w-full  " />
                         </div>
                     </div>
                 </div>
