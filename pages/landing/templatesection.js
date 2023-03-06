@@ -20,7 +20,7 @@ const TemplateSection = (props) => {
             <section className={`templates ${animationClass} flex justify-content-center align-items-center flex-column mt-7`}>
                 <div className="flex md:flex-row flex-column gap-4 lg:gap-0">
                     <div
-                        className="template-block block-1 mr-2 mb-4 lg:mb-0 flex justify-content-center align-items-center"
+                        className="template-block block-1 mr-2  lg:mb-0 flex justify-content-center align-items-center"
                         style={
                             props.dark
                                 ? {
@@ -54,7 +54,7 @@ const TemplateSection = (props) => {
                 </div>
                 <div className="flex my-4 md:flex-row flex-column gap-4 lg:gap-0">
                     <div
-                        className="template-block block-3 mr-2  mb-4 lg:mb-0  flex justify-content-center align-items-center"
+                        className="template-block block-3 mr-2  lg:mb-0  flex justify-content-center align-items-center"
                         style={
                             props.dark
                                 ? {
@@ -96,7 +96,7 @@ const TemplateSection = (props) => {
                 </div>
                 <div className="flex md:flex-row flex-column gap-4 lg:gap-0">
                     <div
-                        className="template-block block-5 mr-2  mb-4 lg:mb-0  flex justify-content-center align-items-center"
+                        className="template-block block-5 mr-2   lg:mb-0  flex justify-content-center align-items-center"
                         style={
                             props.dark
                                 ? {
