@@ -117,7 +117,7 @@ const ComponentSection = () => {
                                 </div>
                             </div>
                             <div className="box p-4 ">
-                                <Chart type="line" data={chartData} options={chartOptions} className=" " />
+                                <Chart type="line" data={chartData} options={chartOptions} />
                             </div>
                             <div className="box p-4 ">
                                 <TabMenu model={items} activeIndex={activeTabIndex} onTabChange={(e) => setActiveTabIndex(e.index)} />
