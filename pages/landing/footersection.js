@@ -103,7 +103,7 @@ const FooterSection = (props) => {
 
             <hr className="section-divider mt-8"></hr>
 
-            <div className="flex flex-wrap justify-content-between py-6">
+            <div className="flex flex-wrap justify-content-between py-6 gap-5">
                 <span>
                     <img src={`https://primefaces.org/cdn/primereact/images/primereact-logo-${props.dark ? 'light' : 'dark'}.svg`} alt="primereact logo" />
                 </span>

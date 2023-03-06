@@ -41,7 +41,7 @@ const DesignerSection = (props) => {
         setFont(value);
     };
 
-    const editorClassName = classNames('p-4 designer-demo', {
+    const editorClassName = classNames('designer-demo', {
         'p-input-filled': inputStyle === 'filled',
         'demo-size-small': size === 'small',
         'demo-size-large': size === 'large'
@@ -62,7 +62,7 @@ const DesignerSection = (props) => {
         <section className="landing-designer py-8">
             <div className="section-header">Theme Designer</div>
             <p className="section-detail">Designer is the ultimate tool to create your own PrimeReact experience powered by a SASS based theme engine with 500+ variables and a Visual Designer.</p>
-            <div className="designer-main mt-7 justify-content-center pad-section" style={{ backgroundImage: `url(/images/landing-new/wave-${props.dark ? 'dark' : 'light'}.svg)`, backgroundSize: 'cover' }}>
+            <div className="designer-main mt-7 px-5 lg:px-8 justify-content-center" style={{ backgroundImage: `url(/images/landing-new/wave-${props.dark ? 'dark' : 'light'}.svg)`, backgroundSize: 'cover' }}>
                 <div className="box p-4 flex flex-column md:flex-row z-1 designer-editor">
                     <div className="mr-0 md:mr-4 p-4 designer-controls box border-bottom-1 border-left-none border-right-none border-top-none md:border-bottom-none md:border-right-1" style={{ borderRadius: '10px' }}>
                         <div className="text-center mb-4">
@@ -81,20 +81,20 @@ const DesignerSection = (props) => {
                             <Dropdown options={fonts} value={font} onChange={(e) => changeFont(e.value)}></Dropdown>
 
                             <span className="font-semibold block mt-4 mb-3">Size</span>
-                            <div className="flex align-items-center">
+                            <div className="flex flex-wrap gap-4 align-items-center">
                                 <div className="flex align-items-center">
                                     <RadioButton inputId="size-small" value="small" name="sizevalue" onChange={(e) => setSize('small')} checked={size === 'small'} />
                                     <label htmlFor="size-small" className="ml-2 font-medium">
                                         Small
                                     </label>
                                 </div>
-                                <div className="flex align-items-center ml-4">
+                                <div className="flex align-items-center ">
                                     <RadioButton inputId="size-normal" value="normal" name="sizevalue" onChange={(e) => setSize('normal')} checked={size === 'normal'} />
                                     <label htmlFor="size-normal" className="ml-2 font-medium">
                                         Normal
                                     </label>
                                 </div>
-                                <div className="flex align-items-center ml-4">
+                                <div className="flex align-items-center ">
                                     <RadioButton inputId="size-large" value="small" name="sizevalue" onChange={(e) => setSize('large')} checked={size === 'large'} />
                                     <label htmlFor="size-large" className="ml-2 font-medium">
                                         Large
@@ -103,14 +103,14 @@ const DesignerSection = (props) => {
                             </div>
 
                             <span className="font-semibold block mt-4 mb-3">Input Style</span>
-                            <div className="flex align-items-center mb-6">
+                            <div className="flex align-items-center mb-6 flex-wrap gap-4">
                                 <div className="flex align-items-center">
                                     <RadioButton inputId="inputStyle1" value="outlined" name="inputstylevalue" onChange={(e) => setInputStyle(e.value)} checked={inputStyle === 'outlined'} />
                                     <label htmlFor="inputStyle1" className="ml-2 font-medium">
                                         Outlined
                                     </label>
                                 </div>
-                                <div className="flex align-items-center ml-4">
+                                <div className="flex align-items-center ">
                                     <RadioButton inputId="inputStyle2" value="filled" name="inputstylevalue" onChange={(e) => setInputStyle(e.value)} checked={inputStyle === 'filled'} />
                                     <label htmlFor="inputStyle2" className="ml-2 font-medium">
                                         Filled
@@ -125,7 +125,7 @@ const DesignerSection = (props) => {
                         </div>
                     </div>
                     <div className={editorClassName} style={{ borderRadius: '10px' }} ref={editor}>
-                        <div className="p-fluid formgrid grid">
+                        <div className="p-fluid formgrid grid pt-3">
                             <div className="field col-12 xl:col-6">
                                 <label htmlFor="username" className="font-semibold mb-3 p-component">
                                     Username

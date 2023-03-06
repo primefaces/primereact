@@ -8,6 +8,8 @@
         .components-strip-bottom {
             background: var(--home-components-strip-bg);
         }
+
+        
     }
 
     .p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link {
@@ -21,5 +23,21 @@
     .p-datepicker, .p-datepicker-header {
         background: transparent;
         border-color: transparent;
+    }
+    // .components-main-container {
+    //     width: calc(1250px + 10rem) !important;
+    //     margin-left: auto !important;
+    //     margin-right: auto !important;
+    // }
+  
+}
+
+
+
+@media screen and (min-width: 1660px) {
+    .components-main-container {
+        width: 1504px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
     }
 }
