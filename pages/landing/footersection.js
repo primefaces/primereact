@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const FooterSection = (props) => {
     return (
-        <section className="landing-footer pt-8 pad-section">
+        <section className="landing-footer pt-8 px-5 lg:px-8">
             <div className="flex flex-wrap z-1">
                 <div className="w-6 lg:w-3 flex">
                     <ul className="list-none p-0 m-0">

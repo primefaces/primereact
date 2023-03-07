@@ -2,6 +2,8 @@
     background: var(--home-bg);
     scroll-behavior: smooth;
 
+ 
+
     .landing-intro {
         background: var(--home-intro-bg);
         display: flex;
@@ -75,36 +77,11 @@
     background-color: var(--surface-hover);
 }
 
-.pad-section {
-    padding-left: 12rem;
-    padding-right: 12rem;
-}
-
-@media screen and (max-width: $landingBreakpointXL) {
-    .pad-section {
-        padding-left: 8rem;
-        padding-right: 8rem;
-    }
-}
-
-@media screen and (max-width: $landingBreakpointLG) {
-    .pad-section {
-        padding-left: 4rem;
-        padding-right: 4rem;
-    }
-}
-
-@media screen and (max-width: $landingBreakpointMD) {
-    .pad-section {
-        padding-left: 2rem;
-        padding-right: 2rem;
-    }
-}
-
-@media screen and (max-width: $landingBreakpointMD) {
-    .pad-section {
-        padding-left: 2rem;
-        padding-right: 2rem;
+@media screen and (min-width: 1960px) {
+    .landing-footer{
+        width: 1650px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
     }
 }
 
