@@ -32,11 +32,13 @@ export function DocComponent(props) {
                         {props.header.startsWith('use') ? 'HOOK' : 'COMPONENT'}
                     </button>
                 </li>
-                <li className={classNames({ 'doc-tabmenu-active': tab === 1 })}>
-                    <button type="button" onClick={() => activateTab(1)}>
-                        API
-                    </button>
-                </li>
+                {props.apiDocs && (
+                    <li className={classNames({ 'doc-tabmenu-active': tab === 1 })}>
+                        <button type="button" onClick={() => activateTab(1)}>
+                            API
+                        </button>
+                    </li>
+                )}
             </ul>
             <div className="doc-tabpanels">
                 {tab === 0 ? (
