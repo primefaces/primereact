@@ -18,7 +18,7 @@ const UsersSection = (props) => {
                 </div>
                 <div className="col-6 md:col-4 lg:col-3 xl:col-2 flex justify-content-center p-3">
                     <div className="box w-10rem h-10rem flex justify-content-center align-items-center bg-transparent">
-                        <img src={`https://primefaces.org/cdn/primereact/images/landing-new/whouses/mercedes-${colorScheme}.svg`} alt="mercedes logo"  />
+                        <img src={`https://primefaces.org/cdn/primereact/images/landing-new/whouses/mercedes-${colorScheme}.svg`} alt="mercedes logo" />
                     </div>
                 </div>
                 <div className="col-6 md:col-4 lg:col-3 xl:col-2 flex justify-content-center p-3">

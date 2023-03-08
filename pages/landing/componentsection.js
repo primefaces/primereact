@@ -91,8 +91,8 @@ const ComponentSection = () => {
                             <div className="box p-4  ">
                                 <span className="text-secondary font-medium block mb-3">Balance</span>
                                 <div className="flex flex-wrap lg:flex-nowrap justify-content-start gap-3">
-                                    <InputNumber value={240} mode="currency" currency="USD" locale="en-US" className="w-full" inputClassName='lg:w-6'/>
-                                    <InputNumber value={356} mode="currency" currency="USD" locale="en-US" className="w-full" inputClassName='lg:w-6'/>
+                                    <InputNumber value={240} mode="currency" currency="USD" locale="en-US" className="w-full" inputClassName="lg:w-6" />
+                                    <InputNumber value={356} mode="currency" currency="USD" locale="en-US" className="w-full" inputClassName="lg:w-6" />
                                 </div>
                                 <span className="text-secondary font-medium block mt-5 mb-3">Category</span>
                                 <div className="flex justify-content-between flex-wrap gap-3">
@@ -160,7 +160,7 @@ const ComponentSection = () => {
                         <div className="flex flex-column w-full  gap-5 justify-content-start  xl:w-24rem z-1">
                             <div className="box p-4  ">
                                 <div className="surface-card mb-4 w-full text-center p-5" style={{ borderRadius: '10px' }}>
-                                    <img src="images/landing-new/brown-watch.png" alt="Watch" className='w-14rem' />
+                                    <img src="images/landing-new/brown-watch.png" alt="Watch" className="w-14rem" />
                                 </div>
                                 <div className="flex align-items-center mb-4">
                                     <div className="flex flex-column">
@@ -247,7 +247,6 @@ const ComponentSection = () => {
                         </div>
                     </div>
                 </div>
-
 
                 <div className="components-strip-top absolute w-full md:w-6 h-8rem top-0 left-0"></div>
                 <div className="components-strip-bottom absolute w-full md:w-6 h-8rem bottom-0 right-0"></div>

@@ -99,7 +99,6 @@ const HeaderSection = (props) => {
                     </button>
                 </div>
             </div>
-
         </section>
     );
 };
