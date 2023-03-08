@@ -159,7 +159,7 @@ const DataViewProps = [
         name: 'itemTemplate',
         type: 'function',
         default: 'null',
-        description: 'Function that gets the option along with the layout mdoe and returns the content.'
+        description: 'Function that gets the option along with the layout mode and returns the content.'
     }
 ];
 

@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const FooterSection = (props) => {
     return (
-        <section className="landing-footer pt-8 pad-section">
+        <section className="landing-footer pt-8 px-5 lg:px-8">
             <div className="flex flex-wrap z-1">
                 <div className="w-6 lg:w-3 flex">
                     <ul className="list-none p-0 m-0">
@@ -103,7 +103,7 @@ const FooterSection = (props) => {
 
             <hr className="section-divider mt-8"></hr>
 
-            <div className="flex flex-wrap justify-content-between py-6">
+            <div className="flex flex-wrap justify-content-between py-6 gap-5">
                 <span>
                     <img src={`https://primefaces.org/cdn/primereact/images/primereact-logo-${props.dark ? 'light' : 'dark'}.svg`} alt="primereact logo" />
                 </span>

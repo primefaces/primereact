@@ -5,7 +5,7 @@ import { DocSectionText } from '../common/docsectiontext';
 export function DisabledDoc(props) {
     const code = {
         basic: `
-<Button label="Submit" />
+<Button label="Submit" disabled />
         `,
         javascript: `
 import React from 'react'; 
@@ -14,7 +14,7 @@ import { Button } from 'primereact/button';
 export default function DisabledDemo() {
     return (
         <div className="card flex justify-content-center">
-            <Button label="Submit" />
+            <Button label="Submit" disabled />
         </div>
     )
 }
@@ -26,7 +26,7 @@ import { Button } from 'primereact/button';
 export default function DisabledDemo() {
     return (
         <div className="card flex justify-content-center">
-            <Button label="Submit" />
+            <Button label="Submit" disabled />
         </div>
     )
 }

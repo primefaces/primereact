@@ -46,7 +46,9 @@ export function SizesDoc(props) {
     const code = {
         basic: `
 <Toast ref={toast}></Toast>
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-sm" />
 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-lg" />
         `,
         javascript: `
 import React, { useRef } from 'react';
@@ -95,7 +97,9 @@ export default function SizesDemo() {
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-sm" />
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-lg" />
         </div>
     )
 }
@@ -148,7 +152,9 @@ export default function SizesDemo() {
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-sm" />
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-lg" />
         </div>
     )
 }

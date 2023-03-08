@@ -368,7 +368,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 createStyleElement();
 
                 let innerHTML = '';
-                let selector = `.p-datatable[${attributeSelectorState}] > .p-datatable-wrapper > .p-datatable-table`;
+                let selector = `.p-datatable[${attributeSelectorState}] > .p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
 
                 widths.forEach((width, index) => {
                     let style = `width: ${width}px !important; max-width: ${width}px !important`;
@@ -564,7 +564,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         createStyleElement();
 
         let innerHTML = '';
-        let selector = `.p-datatable[${attributeSelectorState}] > .p-datatable-wrapper > .p-datatable-table`;
+        let selector = `.p-datatable[${attributeSelectorState}] > .p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
 
         widths.forEach((width, index) => {
             let colWidth = index === colIndex ? newColumnWidth : nextColumnWidth && index === colIndex + 1 ? nextColumnWidth : width;
@@ -756,8 +756,9 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         if (!responsiveStyleElement.current) {
             responsiveStyleElement.current = DomHandler.createInlineStyle(PrimeReact.nonce);
 
-            let selector = `.p-datatable[${attributeSelectorState}] > .p-datatable-wrapper > .p-datatable-table`;
-            let gridLinesSelector = `.p-datatable[${attributeSelectorState}].p-datatable-gridlines > .p-datatable-wrapper > .p-datatable-table`;
+            let tableSelector = `.p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
+            let selector = `.p-datatable[${attributeSelectorState}] > ${tableSelector}`;
+            let gridLinesSelector = `.p-datatable[${attributeSelectorState}].p-datatable-gridlines > ${tableSelector}`;
             let innerHTML = `
 @media screen and (max-width: ${props.breakpoint}) {
     ${selector} > .p-datatable-thead > tr > th,
@@ -776,7 +777,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         border: 0 none;
     }
 
-    ${gridLinesSelector}] > .p-datatable-tbody > tr > td:last-child {
+    ${gridLinesSelector} > .p-datatable-tbody > tr > td:last-child {
         border-top: 0;
         border-right: 0;
         border-left: 0;

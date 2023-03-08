@@ -3220,9 +3220,9 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"success\" | \"warning\" | \"info\" | \"danger\" | \"secondary\"",
+                            "type": "\"success\" | \"help\" | \"warning\" | \"info\" | \"danger\" | \"secondary\"",
                             "default": "",
-                            "description": "Defines the style of the button, valid values are \"secondary\", \"success\", \"info\", \"warning\", \"danger\"."
+                            "description": "Defines the style of the button, valid values are \"secondary\", \"success\", \"info\", \"warning\", \"danger\", \"help\"."
                         },
                         {
                             "name": "size",
@@ -11848,7 +11848,7 @@
                                 }
                             ],
                             "returnType": "ReactNode",
-                            "description": "Function that gets the option along with the layout mdoe and returns the content."
+                            "description": "Function that gets the option along with the layout mode and returns the content."
                         },
                         {
                             "name": "onPage",
@@ -15062,7 +15062,7 @@
                             "description": "The options of the intersection observer."
                         }
                     ],
-                    "returnType": "void",
+                    "returnType": "boolean",
                     "description": "Custom hook to use change the current favicon."
                 },
                 "useInterval": {
