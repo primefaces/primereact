@@ -19632,6 +19632,48 @@
                             "description": "Callback function when the close button is clicked."
                         }
                     ]
+                },
+                "MultiSelectTemplateOptions": {
+                    "description": "Custom filter template options.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "className",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Style class of the filter."
+                        },
+                        {
+                            "name": "element",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "HTMLDivElement",
+                            "description": "The filter element."
+                        },
+                        {
+                            "name": "filterIconClassName",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Style class of the filter icon."
+                        },
+                        {
+                            "name": "filterOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MultiSelectFilterOptions",
+                            "description": "The filter input options."
+                        },
+                        {
+                            "name": "props",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "any",
+                            "description": "The props of multiselect header."
+                        }
+                    ],
+                    "callbacks": []
                 }
             }
         }
