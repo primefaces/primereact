@@ -109,7 +109,21 @@ export const SplitButton = React.memo(
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = SplitButtonBase.getOtherProps(props);
-        const className = classNames('p-splitbutton p-component', props.className, { 'p-disabled': props.disabled });
+        const sizeMapping = {
+            large: 'lg',
+            small: 'sm'
+        };
+        const size = sizeMapping[props.size];
+        const className = classNames('p-splitbutton p-component', props.className, {
+            'p-disabled': props.disabled,
+            'p-button-loading-label-only': props.loading && !props.icon && props.label,
+            [`p-button-${props.severity}`]: props.severity,
+            'p-button-raised': props.raised,
+            'p-button-rounded': props.rounded,
+            'p-button-text': props.text,
+            'p-button-outlined': props.outlined,
+            [`p-button-${size}`]: size
+        });
         const buttonClassName = classNames('p-splitbutton-defaultbutton', props.buttonClassName);
         const menuButtonClassName = classNames('p-splitbutton-menubutton', props.menuButtonClassName);
         const buttonContent = props.buttonTemplate ? ObjectUtils.getJSXElement(props.buttonTemplate, props) : null;

@@ -46,13 +46,13 @@ export function OutlinedDoc(props) {
     const code = {
         basic: `
 <Toast ref={toast}></Toast>
-<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-outlined" />
-<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-secondary p-button-outlined" />
-<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-success p-button-outlined" />
-<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-info p-button-outlined" />
-<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-warning p-button-outlined" />
-<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-help p-button-outlined" />
-<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-danger p-button-outlined" />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} outlined />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="secondary" outlined />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="success" outlined />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="info" outlined />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" outlined />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" outlined />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" outlined />
         `,
         javascript: `
 import React, { useRef } from 'react';
@@ -101,13 +101,13 @@ export default function OutlinedDemo() {
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-outlined" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-secondary p-button-outlined" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-success p-button-outlined" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-info p-button-outlined" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-warning p-button-outlined" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-help p-button-outlined" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-danger p-button-outlined" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} outlined />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="secondary" outlined />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="success" outlined />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="info" outlined />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" outlined />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" outlined />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" outlined />
         </div>
     )
 }
@@ -160,13 +160,13 @@ export default function OutlinedDemo() {
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-outlined" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-secondary p-button-outlined" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-success p-button-outlined" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-info p-button-outlined" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-warning p-button-outlined" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-help p-button-outlined" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-danger p-button-outlined" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} outlined />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="secondary" outlined />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="success" outlined />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="info" outlined />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" outlined />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" outlined />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" outlined />
         </div>
     )
 }
@@ -180,13 +180,13 @@ export default function OutlinedDemo() {
             </DocSectionText>
             <div className="card flex flex-wrap justify-content-center gap-3">
                 <Toast ref={toast}></Toast>
-                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-outlined" />
-                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-secondary p-button-outlined" />
-                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-success p-button-outlined" />
-                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-info p-button-outlined" />
-                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-warning p-button-outlined" />
-                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-help p-button-outlined" />
-                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-danger p-button-outlined" />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} outlined />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="secondary" outlined />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="success" outlined />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="info" outlined />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" outlined />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" outlined />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" outlined />
             </div>
             <DocSectionCode code={code} />
         </>

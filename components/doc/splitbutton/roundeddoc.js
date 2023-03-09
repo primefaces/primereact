@@ -46,13 +46,13 @@ export function RoundedDoc(props) {
     const code = {
         basic: `
 <Toast ref={toast}></Toast>
-<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-rounded" />
-<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-secondary p-button-rounded" />
-<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-success p-button-rounded" />
-<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-info p-button-rounded" />
-<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-warning p-button-rounded" />
-<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-help p-button-rounded" />
-<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-danger p-button-rounded" />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} rounded />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="secondary" rounded />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="success" rounded />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="info" rounded />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" rounded />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" rounded />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" rounded />
         `,
         javascript: `
 import React, { useRef } from 'react';
@@ -101,13 +101,13 @@ export default function RoundedDemo() {
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-rounded" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-secondary p-button-rounded" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-success p-button-rounded" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-info p-button-rounded" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-warning p-button-rounded" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-help p-button-rounded" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-danger p-button-rounded" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} rounded />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="secondary" rounded />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="success" rounded />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="info" rounded />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" rounded />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" rounded />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" rounded />
         </div>
     )
 }
@@ -160,13 +160,13 @@ export default function RoundedDemo() {
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-rounded" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-secondary p-button-rounded" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-success p-button-rounded" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-info p-button-rounded" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-warning p-button-rounded" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-help p-button-rounded" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-danger p-button-rounded" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} rounded />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="secondary" rounded />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="success" rounded />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="info" rounded />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" rounded />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" rounded />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" rounded />
         </div>
     )
 }
@@ -180,13 +180,13 @@ export default function RoundedDemo() {
             </DocSectionText>
             <div className="card flex flex-wrap justify-content-center gap-3">
                 <Toast ref={toast}></Toast>
-                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-rounded" />
-                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-secondary p-button-rounded" />
-                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-success p-button-rounded" />
-                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-info p-button-rounded" />
-                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-warning p-button-rounded" />
-                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-help p-button-rounded" />
-                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-danger p-button-rounded" />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} rounded />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="secondary" rounded />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="success" rounded />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="info" rounded />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" rounded />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" rounded />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" rounded />
             </div>
             <DocSectionCode code={code} />
         </>
