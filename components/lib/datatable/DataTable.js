@@ -9,6 +9,7 @@ import { DataTableBase } from './DataTableBase';
 import { TableBody } from './TableBody';
 import { TableFooter } from './TableFooter';
 import { TableHeader } from './TableHeader';
+
 export const DataTable = React.forwardRef((inProps, ref) => {
     const props = DataTableBase.getProps(inProps);
 
@@ -1420,18 +1421,19 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         return null;
     };
 
-    const createTableHeader = (options, empty) => {
+    const createTableHeader = (options, empty, _isVirtualScrollerDisabled) => {
         const sortField = getSortField();
         const sortOrder = getSortOrder();
         const multiSortMeta = [...getMultiSortMeta()];
         const groupRowSortField = getGroupRowSortField();
         const filters = d_filtersState;
         const filtersStore = (!props.onFilter && props.filters) || getFilters();
-        const { items: processedData, columns } = options;
+        const { items: processedData, props: virtualScrollerProps, columns } = options;
+        const data = _isVirtualScrollerDisabled || virtualScrollerProps.lazy ? processedData : virtualScrollerProps.items;
 
         return (
             <TableHeader
-                value={processedData}
+                value={data}
                 tableProps={props}
                 columns={columns}
                 tabIndex={props.tabIndex}
@@ -1672,7 +1674,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                             },
                             props.tableClassName
                         );
-                        const tableHeader = createTableHeader(options, empty);
+                        const tableHeader = createTableHeader(options, empty, _isVirtualScrollerDisabled);
                         const tableBody = createTableBody(options, selectionModeInColumn, empty, _isVirtualScrollerDisabled);
                         const tableFooter = createTableFooter(options);
 
