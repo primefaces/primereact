@@ -1,8 +1,10 @@
 import Link from 'next/link';
 import { useState } from 'react';
+
 const GetStartedSection = () => {
     const [npmText, npmCopied] = useState('npm i primereact');
     const [downloadIcon, copiedIcon] = useState('pi pi-download mr-3 download-icon');
+
     return (
         <section className="landing-getstarted flex flex-column md:flex-row align-items-center justify-content-center mt-8 z-1">
             <Link href="/installation">
