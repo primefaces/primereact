@@ -541,7 +541,7 @@ export default class DomHandler {
                     }
                 }
 
-                if (parent.nodeType !== 9 && overflowCheck(parent)) {
+                if (parent.nodeType === 1 && overflowCheck(parent)) {
                     scrollableParents.push(parent);
                 }
             }
