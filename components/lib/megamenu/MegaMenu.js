@@ -2,7 +2,7 @@ import * as React from 'react';
 import PrimeReact from '../api/Api';
 import { useEventListener, useMatchMedia, useMountEffect, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
 import { MegaMenuBase } from './MegaMenuBase';
 
 export const MegaMenu = React.memo(
@@ -297,6 +297,10 @@ export const MegaMenu = React.memo(
         };
 
         const createSubmenu = (submenu) => {
+            if (submenu.visible === false) {
+                return null;
+            }
+
             const className = classNames(
                 'p-megamenu-submenu-header',
                 {
