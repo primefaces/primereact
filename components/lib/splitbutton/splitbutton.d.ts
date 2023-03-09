@@ -27,6 +27,34 @@ export interface SplitButtonProps extends Omit<React.DetailedHTMLProps<React.HTM
      */
     icon?: IconType<SplitButtonProps> | undefined;
     /**
+     * Add a textual class to the button without a background initially.
+     * @defaultValue false
+     */
+    text?: boolean | undefined;
+    /**
+     * Add a circular border radius to the button.
+     * @defaultValue false
+     */
+    rounded?: boolean | undefined;
+    /**
+     * Add a shadow to indicate elevation.
+     * @defaultValue false
+     */
+    raised?: boolean | undefined;
+    /**
+     * Add a border class without a background initially.
+     * @defaultValue false
+     */
+    outlined?: boolean | undefined;
+    /**
+     * Defines the style of the button, valid values are "secondary", "success", "info", "warning", "danger".
+     */
+    severity?: 'secondary' | 'success' | 'info' | 'warning' | 'danger' | undefined;
+    /**
+     * Defines the size of the button, valid values are "small" and "large".
+     */
+    size?: 'small' | 'large' | undefined;
+    /**
      * Display loading icon of the button
      * @defaultValue false
      */

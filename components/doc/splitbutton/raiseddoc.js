@@ -46,13 +46,13 @@ export function RaisedDoc(props) {
     const code = {
         basic: `
 <Toast ref={toast}></Toast>
-<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-raised" />
-<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-secondary p-button-raised" />
-<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-success p-button-raised" />
-<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-info p-button-raised" />
-<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-warning p-button-raised" />
-<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-help p-button-raised" />
-<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-danger p-button-raised" />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} raised />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="secondary" raised />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="success" raised />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="info" raised />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" raised />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" raised />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" raised />
         `,
         javascript: `
 import React, { useRef } from 'react';
@@ -101,13 +101,13 @@ export default function RaisedDemo() {
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-raised" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-secondary p-button-raised" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-success p-button-raised" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-info p-button-raised" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-warning p-button-raised" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-help p-button-raised" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-danger p-button-raised" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} raised />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="secondary" raised />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="success" raised />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="info" raised />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" raised />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" raised />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" raised />
         </div>
     )
 }
@@ -160,13 +160,13 @@ export default function RaisedDemo() {
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-raised" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-secondary p-button-raised" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-success p-button-raised" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-info p-button-raised" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-warning p-button-raised" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-help p-button-raised" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-danger p-button-raised" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} raised />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="secondary" raised />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="success" raised />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="info" raised />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" raised />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" raised />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" raised />
         </div>
     )
 }
@@ -180,13 +180,13 @@ export default function RaisedDemo() {
             </DocSectionText>
             <div className="card flex flex-wrap justify-content-center gap-3">
                 <Toast ref={toast}></Toast>
-                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-raised" />
-                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-secondary p-button-raised" />
-                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-success p-button-raised" />
-                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-info p-button-raised" />
-                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-warning p-button-raised" />
-                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-help p-button-raised" />
-                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-danger p-button-raised" />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} raised />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="secondary" raised />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="success" raised />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="info" raised />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" raised />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" raised />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" raised />
             </div>
             <DocSectionCode code={code} />
         </>
