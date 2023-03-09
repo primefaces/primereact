@@ -269,7 +269,7 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
     /**
      * The template of filter element.
      */
-    filterTemplate?: React.ReactNode | ((options: MultiSelectFilterOptions) => React.ReactNode);
+    filterTemplate?: React.ReactNode | ((options: MultiSelectTemplateOptions) => React.ReactNode);
     /**
      * Whether to display selected items in the label section or always display the placeholder as the default label.
      * @defaultValue false
