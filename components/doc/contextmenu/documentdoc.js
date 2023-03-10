@@ -110,7 +110,7 @@ export function DocumentDoc(props) {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -249,7 +249,7 @@ export default function DocumentDemo() {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -394,7 +394,7 @@ export default function DocumentDemo() {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
