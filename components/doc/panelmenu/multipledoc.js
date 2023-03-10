@@ -107,7 +107,7 @@ export function MultipleDoc(props) {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -232,7 +232,7 @@ export default function MultipleDemo() {
                     ]
                 },
                 {
-                    label:'Archieve',
+                    label:'Archive',
                     icon:'pi pi-fw pi-calendar-times',
                     items:[
                     {
@@ -362,7 +362,7 @@ export default function MultipleDemo() {
                     ]
                 },
                 {
-                    label:'Archieve',
+                    label:'Archive',
                     icon:'pi pi-fw pi-calendar-times',
                     items:[
                     {
