@@ -32,13 +32,12 @@ export function DocComponent(props) {
                         {props.header.startsWith('use') ? 'HOOK' : 'COMPONENT'}
                     </button>
                 </li>
-                {props.apiDocs && (
-                    <li className={classNames({ 'doc-tabmenu-active': tab === 1 })}>
-                        <button type="button" onClick={() => activateTab(1)}>
-                            API
-                        </button>
-                    </li>
-                )}
+
+                <li className={classNames({ 'doc-tabmenu-active': tab === 1 })}>
+                    <button type="button" onClick={() => activateTab(1)}>
+                        API
+                    </button>
+                </li>
             </ul>
             <div className="doc-tabpanels">
                 {tab === 0 ? (
@@ -55,7 +54,18 @@ export function DocComponent(props) {
                 ) : null}
                 {tab === 1 ? (
                     <div className="doc-tabpanel">
-                        <DocApiSection header={props.header} doc={props.apiDocs} />
+                        {props.apiDocs ? (
+                            <DocApiSection header={props.header} doc={props.apiDocs} />
+                        ) : (
+                            <>
+                                <div className="doc-main">
+                                    <div className="doc-intro">
+                                        <h1>{props.header} API</h1>
+                                        <p>{props.header} is a CSS feature so does not provide a Javascript API</p>
+                                    </div>
+                                </div>
+                            </>
+                        )}
                     </div>
                 ) : null}
             </div>
