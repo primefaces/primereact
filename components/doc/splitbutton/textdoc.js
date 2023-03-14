@@ -46,13 +46,13 @@ export function TextDoc(props) {
     const code = {
         basic: `
 <Toast ref={toast}></Toast>
-<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-text" />
-<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-secondary p-button-text" />
-<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-success p-button-text" />
-<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-info p-button-text" />
-<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-warning p-button-text" />
-<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-help p-button-text" />
-<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-danger p-button-text" />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} text />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="secondary" text />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="success" text />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="info" text />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" text />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" text />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" text />
         `,
         javascript: `
 import React, { useRef } from 'react';
@@ -101,13 +101,13 @@ export default function TextDemo() {
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-text" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-secondary p-button-text" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-success p-button-text" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-info p-button-text" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-warning p-button-text" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-help p-button-text" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-danger p-button-text" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} text />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="secondary" text />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="success" text />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="info" text />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" text />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" text />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" text />
         </div>
     )
 }
@@ -160,13 +160,13 @@ export default function TextDemo() {
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-text" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-secondary p-button-text" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-success p-button-text" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-info p-button-text" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-warning p-button-text" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-help p-button-text" />
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-danger p-button-text" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} text />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="secondary" text />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="success" text />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="info" text />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" text />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" text />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" text />
         </div>
     )
 }
@@ -180,13 +180,13 @@ export default function TextDemo() {
             </DocSectionText>
             <div className="card flex flex-wrap justify-content-center gap-3">
                 <Toast ref={toast}></Toast>
-                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-text" />
-                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-secondary p-button-text" />
-                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-success p-button-text" />
-                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-info p-button-text" />
-                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-warning p-button-text" />
-                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-help p-button-text" />
-                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-danger p-button-text" />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} text />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="secondary" text />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="success" text />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="info" text />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" text />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" text />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" text />
             </div>
             <DocSectionCode code={code} />
         </>

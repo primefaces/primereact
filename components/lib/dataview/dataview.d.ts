@@ -213,7 +213,7 @@ export interface DataViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      */
     onPage?(event: DataViewPageEvent): void;
     /**
-     * Function that gets the option along with the layout mdoe and returns the content.
+     * Function that gets the option along with the layout mode and returns the content.
      * @param {*} item - Current item.
      * @param {'list' | 'grid' | (string & Record<string, unknown>)} layout - Current layout.
      */

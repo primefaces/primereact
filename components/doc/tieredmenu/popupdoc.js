@@ -113,7 +113,7 @@ export function PopupDoc(props) {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -135,11 +135,11 @@ export function PopupDoc(props) {
 
     const code = {
         basic: `
-<TieredMenu model={items} popup ref={menu} breakpoint="460px" />
+<TieredMenu model={items} popup ref={menu} breakpoint="767px" />
 <Button label="Show" icon="pi pi-bars" onClick={(e) => menu.current.toggle(e)} />
         `,
         javascript: `
-import React, { useRef } from 'react'; 
+import React, { useRef } from 'react';
 import { Button } from 'primereact/button';
 import { TieredMenu } from 'primereact/tieredmenu';
 
@@ -252,7 +252,7 @@ export default function PopupDemo() {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -274,14 +274,14 @@ export default function PopupDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <TieredMenu model={items} popup ref={menu} breakpoint="460px" />
+            <TieredMenu model={items} popup ref={menu} breakpoint="767px" />
             <Button label="Show" icon="pi pi-bars" onClick={(e) => menu.current.toggle(e)} />
         </div>
     )
 }
         `,
         typescript: `
-import React, { useRef } from 'react'; 
+import React, { useRef } from 'react';
 import { Button } from 'primereact/button';
 import { TieredMenu } from 'primereact/tieredmenu';
 import { MenuItem } from 'primereact/menuitem';
@@ -395,7 +395,7 @@ export default function PopupDemo() {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -414,10 +414,10 @@ export default function PopupDemo() {
             icon: 'pi pi-fw pi-power-off'
         }
     ];
-    
+
     return (
         <div className="card flex justify-content-center">
-            <TieredMenu model={items} popup ref={menu} breakpoint="460px" />
+            <TieredMenu model={items} popup ref={menu} breakpoint="767px" />
             <Button label="Show" icon="pi pi-bars" onClick={(e) => menu.current.toggle(e)} />
         </div>
     )
@@ -433,7 +433,7 @@ export default function PopupDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <TieredMenu model={items} popup ref={menu} breakpoint="460px" />
+                <TieredMenu model={items} popup ref={menu} breakpoint="767px" />
                 <Button label="Show" icon="pi pi-bars" onClick={(e) => menu.current.toggle(e)} />
             </div>
             <DocSectionCode code={code} />

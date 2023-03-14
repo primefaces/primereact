@@ -13,6 +13,10 @@
     flex: 1 1 auto;
 }
 
+.p-toast-summary {
+    overflow-wrap: anywhere;
+}
+
 .p-toast-detail {
     overflow-wrap: anywhere;
 }

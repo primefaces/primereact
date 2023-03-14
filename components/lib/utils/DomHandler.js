@@ -264,7 +264,7 @@ export default class DomHandler {
     }
 
     static absolutePosition(element, target) {
-        if (element) {
+        if (element && target) {
             let elementDimensions = element.offsetParent ? { width: element.offsetWidth, height: element.offsetHeight } : this.getHiddenElementDimensions(element);
             let elementOuterHeight = elementDimensions.height;
             let elementOuterWidth = elementDimensions.width;
@@ -298,7 +298,7 @@ export default class DomHandler {
     }
 
     static relativePosition(element, target) {
-        if (element) {
+        if (element && target) {
             let elementDimensions = element.offsetParent ? { width: element.offsetWidth, height: element.offsetHeight } : this.getHiddenElementDimensions(element);
             const targetHeight = target.offsetHeight;
             const targetOffset = target.getBoundingClientRect();
@@ -541,7 +541,7 @@ export default class DomHandler {
                     }
                 }
 
-                if (parent.nodeType !== 9 && overflowCheck(parent)) {
+                if (parent.nodeType === 1 && overflowCheck(parent)) {
                     scrollableParents.push(parent);
                 }
             }

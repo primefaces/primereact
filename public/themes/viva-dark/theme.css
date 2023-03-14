@@ -722,9 +722,9 @@
 .p-chips .p-chips-multiple-container .p-chips-token {
   padding: 0.25rem 0.75rem;
   margin-right: 0.5rem;
-  background: rgba(158, 173, 230, 0.16);
-  color: #9eade6;
-  border-radius: 6px;
+  background: #263238;
+  color: rgba(255, 255, 255, 0.87);
+  border-radius: 16px;
 }
 .p-chips .p-chips-multiple-container .p-chips-token .p-chips-token-icon {
   margin-left: 0.5rem;
@@ -1319,9 +1319,9 @@
 .p-multiselect.p-multiselect-chip .p-multiselect-token {
   padding: 0.25rem 0.75rem;
   margin-right: 0.5rem;
-  background: rgba(158, 173, 230, 0.16);
-  color: #9eade6;
-  border-radius: 6px;
+  background: #263238;
+  color: rgba(255, 255, 255, 0.87);
+  border-radius: 16px;
 }
 .p-multiselect.p-multiselect-chip .p-multiselect-token .p-multiselect-token-icon {
   margin-left: 0.5rem;
@@ -4602,6 +4602,7 @@
 }
 .p-contextmenu .p-submenu-icon {
   font-size: 0.875rem;
+  transition: transform 0.3s;
 }
 
 .p-dock .p-dock-list {
@@ -4807,6 +4808,99 @@
 .p-megamenu.p-megamenu-vertical {
   width: 12.5rem;
   padding: 0.5rem 0.5rem;
+}
+.p-megamenu .p-megamenu-button {
+  width: 2rem;
+  height: 2rem;
+  color: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+.p-megamenu .p-megamenu-button:hover {
+  color: rgba(255, 255, 255, 0.87);
+  background: rgba(158, 173, 230, 0.08);
+}
+.p-megamenu .p-megamenu-button:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 1px #9eade6;
+}
+.p-megamenu .p-submenu-icon {
+  transition: transform 0.3s;
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list {
+  padding: 0.5rem 0.5rem;
+  background: #161d21;
+  border: 2px solid #263238;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list .p-menu-separator {
+  border-top: 1px solid #263238;
+  margin: 4px 0;
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list .p-submenu-icon {
+  font-size: 0.875rem;
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list > .p-menuitem {
+  width: 100%;
+  position: static;
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list > .p-menuitem > .p-menuitem-link {
+  padding: 0.75rem 1rem;
+  color: rgba(255, 255, 255, 0.87);
+  border-radius: 6px;
+  transition: box-shadow 0.3s;
+  user-select: none;
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list > .p-menuitem > .p-menuitem-link .p-menuitem-text {
+  color: rgba(255, 255, 255, 0.87);
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list > .p-menuitem > .p-menuitem-link .p-menuitem-icon {
+  color: rgba(255, 255, 255, 0.6);
+  margin-right: 0.5rem;
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list > .p-menuitem > .p-menuitem-link .p-submenu-icon {
+  color: rgba(255, 255, 255, 0.6);
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list > .p-menuitem > .p-menuitem-link:not(.p-disabled):hover {
+  background: rgba(158, 173, 230, 0.08);
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list > .p-menuitem > .p-menuitem-link:not(.p-disabled):hover .p-menuitem-text {
+  color: rgba(255, 255, 255, 0.87);
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list > .p-menuitem > .p-menuitem-link:not(.p-disabled):hover .p-menuitem-icon {
+  color: rgba(255, 255, 255, 0.87);
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list > .p-menuitem > .p-menuitem-link:not(.p-disabled):hover .p-submenu-icon {
+  color: rgba(255, 255, 255, 0.87);
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list > .p-menuitem > .p-menuitem-link:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: inset 0 0 0 0.15rem #9eade6;
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list > .p-menuitem > .p-menuitem-link > .p-submenu-icon {
+  margin-left: auto;
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list > .p-menuitem.p-menuitem-active > .p-menuitem-link > .p-submenu-icon {
+  transform: rotate(-180deg);
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list .p-submenu-list {
+  width: 100%;
+  position: static;
+  box-shadow: none;
+  border: 0 none;
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list .p-submenu-list .p-submenu-icon {
+  transition: transform 0.3s;
+  transform: rotate(90deg);
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list .p-submenu-list .p-menuitem-active > .p-menuitem-link > .p-submenu-icon {
+  transform: rotate(-90deg);
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list .p-menuitem {
+  width: 100%;
+  position: static;
 }
 
 .p-menu {
@@ -5455,6 +5549,7 @@
 }
 .p-tieredmenu .p-submenu-icon {
   font-size: 0.875rem;
+  transition: transform 0.3s;
 }
 
 .p-inline-message {

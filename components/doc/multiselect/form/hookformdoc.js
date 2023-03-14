@@ -123,7 +123,7 @@ export default function HookFormDoc() {
         typescript: `
 import React, { useRef } from "react";
 import { useForm, Controller } from 'react-hook-form';
-import { MultiSelect, MultiSelectChangeParams } from 'primereact/multiselect';
+import { MultiSelect, MultiSelectChangeEvent } from 'primereact/multiselect';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
@@ -179,7 +179,7 @@ export default function HookFormDoc() {
                     name="value"
                     control={control}
                     rules={{ required: 'Value is required.' }}
-                    render={({ field }) => <MultiSelect id={field.name} name="value" value={field.value} options={cities} onChange={(e: MultiSelectChangeParams) => field.onChange(e.value)} optionLabel="name" placeholder="Select Cities" maxSelectedLabels={3} className="w-full md:w-20rem" />}
+                    render={({ field }) => <MultiSelect id={field.name} name="value" value={field.value} options={cities} onChange={(e: MultiSelectChangeEvent) => field.onChange(e.value)} optionLabel="name" placeholder="Select Cities" maxSelectedLabels={3} className="w-full md:w-20rem" />}
                 />
 
                 {getFormErrorMessage('value')}

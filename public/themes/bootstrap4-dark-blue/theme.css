@@ -694,9 +694,9 @@
 .p-chips .p-chips-multiple-container .p-chips-token {
   padding: 0.25rem 0.75rem;
   margin-right: 0.5rem;
-  background: #8dd0ff;
-  color: #151515;
-  border-radius: 4px;
+  background: #3f4b5b;
+  color: rgba(255, 255, 255, 0.87);
+  border-radius: 16px;
 }
 .p-chips .p-chips-multiple-container .p-chips-token .p-chips-token-icon {
   margin-left: 0.5rem;
@@ -1291,9 +1291,9 @@
 .p-multiselect.p-multiselect-chip .p-multiselect-token {
   padding: 0.25rem 0.75rem;
   margin-right: 0.5rem;
-  background: #8dd0ff;
-  color: #151515;
-  border-radius: 4px;
+  background: #3f4b5b;
+  color: rgba(255, 255, 255, 0.87);
+  border-radius: 16px;
 }
 .p-multiselect.p-multiselect-chip .p-multiselect-token .p-multiselect-token-icon {
   margin-left: 0.5rem;
@@ -4582,6 +4582,7 @@
 }
 .p-contextmenu .p-submenu-icon {
   font-size: 0.875rem;
+  transition: transform 0.15s;
 }
 
 .p-dock .p-dock-list {
@@ -4787,6 +4788,99 @@
 .p-megamenu.p-megamenu-vertical {
   width: 12.5rem;
   padding: 0.5rem 0;
+}
+.p-megamenu .p-megamenu-button {
+  width: 2rem;
+  height: 2rem;
+  color: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  transition: color 0.15s, box-shadow 0.15s;
+}
+.p-megamenu .p-megamenu-button:hover {
+  color: rgba(255, 255, 255, 0.87);
+  background: transparent;
+}
+.p-megamenu .p-megamenu-button:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 1px #e3f3fe;
+}
+.p-megamenu .p-submenu-icon {
+  transition: transform 0.15s;
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list {
+  padding: 0.5rem 0;
+  background: #2a323d;
+  border: 1px solid #3f4b5b;
+  box-shadow: none;
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list .p-menu-separator {
+  border-top: 1px solid #3f4b5b;
+  margin: 0.5rem 0;
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list .p-submenu-icon {
+  font-size: 0.875rem;
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list > .p-menuitem {
+  width: 100%;
+  position: static;
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list > .p-menuitem > .p-menuitem-link {
+  padding: 0.75rem 1rem;
+  color: rgba(255, 255, 255, 0.87);
+  border-radius: 0;
+  transition: box-shadow 0.15s;
+  user-select: none;
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list > .p-menuitem > .p-menuitem-link .p-menuitem-text {
+  color: rgba(255, 255, 255, 0.87);
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list > .p-menuitem > .p-menuitem-link .p-menuitem-icon {
+  color: rgba(255, 255, 255, 0.6);
+  margin-right: 0.5rem;
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list > .p-menuitem > .p-menuitem-link .p-submenu-icon {
+  color: rgba(255, 255, 255, 0.6);
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list > .p-menuitem > .p-menuitem-link:not(.p-disabled):hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list > .p-menuitem > .p-menuitem-link:not(.p-disabled):hover .p-menuitem-text {
+  color: rgba(255, 255, 255, 0.87);
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list > .p-menuitem > .p-menuitem-link:not(.p-disabled):hover .p-menuitem-icon {
+  color: rgba(255, 255, 255, 0.87);
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list > .p-menuitem > .p-menuitem-link:not(.p-disabled):hover .p-submenu-icon {
+  color: rgba(255, 255, 255, 0.87);
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list > .p-menuitem > .p-menuitem-link:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: inset 0 0 0 0.15rem #e3f3fe;
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list > .p-menuitem > .p-menuitem-link > .p-submenu-icon {
+  margin-left: auto;
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list > .p-menuitem.p-menuitem-active > .p-menuitem-link > .p-submenu-icon {
+  transform: rotate(-180deg);
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list .p-submenu-list {
+  width: 100%;
+  position: static;
+  box-shadow: none;
+  border: 0 none;
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list .p-submenu-list .p-submenu-icon {
+  transition: transform 0.15s;
+  transform: rotate(90deg);
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list .p-submenu-list .p-menuitem-active > .p-menuitem-link > .p-submenu-icon {
+  transform: rotate(-90deg);
+}
+.p-megamenu.p-megamenu-mobile-active .p-megamenu-root-list .p-menuitem {
+  width: 100%;
+  position: static;
 }
 
 .p-menu {
@@ -5435,6 +5529,7 @@
 }
 .p-tieredmenu .p-submenu-icon {
   font-size: 0.875rem;
+  transition: transform 0.15s;
 }
 
 .p-inline-message {

@@ -2688,7 +2688,7 @@ export const Calendar = React.memo(
                 return content;
             }
 
-            const displayYear = props.inline ? metaYear : currentYear;
+            const displayYear = props.numberOfMonths > 1 ? metaYear : currentYear;
 
             return (
                 currentView !== 'year' && (

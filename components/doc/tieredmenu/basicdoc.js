@@ -110,7 +110,7 @@ export function BasicDoc(props) {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -132,10 +132,10 @@ export function BasicDoc(props) {
 
     const code = {
         basic: `
-<TieredMenu model={items} breakpoint="460px" />
+<TieredMenu model={items} breakpoint="767px" />
         `,
         javascript: `
-import React from 'react'; 
+import React from 'react';
 import { TieredMenu } from 'primereact/tieredmenu';
 
 export default function BasicDemo() {
@@ -246,7 +246,7 @@ export default function BasicDemo() {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -267,12 +267,12 @@ export default function BasicDemo() {
     ];
 
     return (
-        <TieredMenu model={items} breakpoint="460px" />
+        <TieredMenu model={items} breakpoint="767px" />
     )
 }
         `,
         typescript: `
-import React from 'react'; 
+import React from 'react';
 import { TieredMenu } from 'primereact/tieredmenu';
 import { MenuItem } from 'primereact/menuitem';
 
@@ -384,7 +384,7 @@ export default function BasicDemo() {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -403,9 +403,9 @@ export default function BasicDemo() {
             icon: 'pi pi-fw pi-power-off'
         }
     ];
-    
+
     return (
-        <TieredMenu model={items} breakpoint="460px" />
+        <TieredMenu model={items} breakpoint="767px" />
     )
 }
         `
@@ -419,7 +419,7 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <TieredMenu model={items} breakpoint="460px" />
+                <TieredMenu model={items} breakpoint="767px" />
             </div>
             <DocSectionCode code={code} />
         </>

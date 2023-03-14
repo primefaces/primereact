@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useEventListener, useMountEffect, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 
@@ -10,9 +10,15 @@ export const TieredMenuSub = React.memo((props) => {
     const [bindDocumentClickListener] = useEventListener({
         type: 'click',
         listener: (event) => {
-            if (elementRef.current && !elementRef.current.contains(event.target)) {
+            if (!props.isMobileMode && elementRef.current && !elementRef.current.contains(event.target)) {
                 setActiveItemState(null);
             }
+        }
+    });
+
+    const [bindDocumentResizeListener] = useResizeListener({
+        listener: () => {
+            !props.isMobileMode && setActiveItemState(null);
         }
     });
 
@@ -38,7 +44,7 @@ export const TieredMenuSub = React.memo((props) => {
     };
 
     const onItemMouseEnter = (event, item) => {
-        if (item.disabled) {
+        if (item.disabled || props.isMobileMode) {
             event.preventDefault();
 
             return;
@@ -71,7 +77,7 @@ export const TieredMenuSub = React.memo((props) => {
             });
         }
 
-        if (props.root) {
+        if (props.root || props.isMobileMode) {
             if (item.items) {
                 if (activeItemState && item === activeItemState) setActiveItemState(null);
                 else setActiveItemState(item);
@@ -144,13 +150,16 @@ export const TieredMenuSub = React.memo((props) => {
     };
 
     const onLeafClick = (event) => {
-        setActiveItemState(null);
-        props.onLeafClick && props.onLeafClick(event);
-        props.onHide && props.onHide(event);
+        if (!props.isMobileMode || props.popup) {
+            setActiveItemState(null);
+            props.onLeafClick && props.onLeafClick(event);
+            props.onHide && props.onHide(event);
+        }
     };
 
     useMountEffect(() => {
         bindDocumentClickListener();
+        bindDocumentResizeListener();
     });
 
     useUpdateEffect(() => {
@@ -158,10 +167,14 @@ export const TieredMenuSub = React.memo((props) => {
             setActiveItemState(null);
         }
 
-        if (!props.root && props.parentActive) {
+        if (!props.root && props.parentActive && !props.isMobileMode) {
             position();
         }
     }, [props.parentActive]);
+
+    useUpdateEffect(() => {
+        props.onItemToggle && props.onItemToggle();
+    }, [activeItemState]);
 
     const createSeparator = (index) => {
         const key = 'separator_' + index;
@@ -171,7 +184,18 @@ export const TieredMenuSub = React.memo((props) => {
 
     const createSubmenu = (item) => {
         if (item.items) {
-            return <TieredMenuSub menuProps={props.menuProps} model={item.items} onLeafClick={onLeafClick} popup={props.popup} onKeyDown={onChildItemKeyDown} parentActive={item === activeItemState} />;
+            return (
+                <TieredMenuSub
+                    menuProps={props.menuProps}
+                    model={item.items}
+                    onLeafClick={onLeafClick}
+                    popup={props.popup}
+                    onKeyDown={onChildItemKeyDown}
+                    parentActive={item === activeItemState}
+                    isMobileMode={props.isMobileMode}
+                    onItemToggle={props.onItemToggle}
+                />
+            );
         }
 
         return null;

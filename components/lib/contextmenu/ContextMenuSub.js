@@ -14,7 +14,7 @@ export const ContextMenuSub = React.memo((props) => {
     }
 
     const onItemMouseEnter = (event, item) => {
-        if (item.disabled) {
+        if (item.disabled || props.isMobileMode) {
             event.preventDefault();
 
             return;
@@ -41,29 +41,36 @@ export const ContextMenuSub = React.memo((props) => {
             });
         }
 
+        if (props.isMobileMode && item.items) {
+            if (activeItemState && item === activeItemState) setActiveItemState(null);
+            else setActiveItemState(item);
+        }
+
         if (!item.items) {
             props.onLeafClick(event);
         }
     };
 
     const position = () => {
-        const parentItem = submenuRef.current.parentElement;
-        const containerOffset = DomHandler.getOffset(parentItem);
-        const viewport = DomHandler.getViewport();
-        const sublistWidth = submenuRef.current.offsetParent ? submenuRef.current.offsetWidth : DomHandler.getHiddenElementOuterWidth(submenuRef.current);
-        const itemOuterWidth = DomHandler.getOuterWidth(parentItem.children[0]);
-        const top = parseInt(containerOffset.top, 10) + submenuRef.current.offsetHeight - DomHandler.getWindowScrollTop();
+        if (!props.isMobileMode) {
+            const parentItem = submenuRef.current.parentElement;
+            const containerOffset = DomHandler.getOffset(parentItem);
+            const viewport = DomHandler.getViewport();
+            const sublistWidth = submenuRef.current.offsetParent ? submenuRef.current.offsetWidth : DomHandler.getHiddenElementOuterWidth(submenuRef.current);
+            const itemOuterWidth = DomHandler.getOuterWidth(parentItem.children[0]);
+            const top = parseInt(containerOffset.top, 10) + submenuRef.current.offsetHeight - DomHandler.getWindowScrollTop();
 
-        if (top > viewport.height) {
-            submenuRef.current.style.top = viewport.height - top + 'px';
-        } else {
-            submenuRef.current.style.top = '0px';
-        }
+            if (top > viewport.height) {
+                submenuRef.current.style.top = viewport.height - top + 'px';
+            } else {
+                submenuRef.current.style.top = '0px';
+            }
 
-        if (parseInt(containerOffset.left, 10) + itemOuterWidth + sublistWidth > viewport.width - DomHandler.calculateScrollbarWidth()) {
-            submenuRef.current.style.left = -1 * sublistWidth + 'px';
-        } else {
-            submenuRef.current.style.left = itemOuterWidth + 'px';
+            if (parseInt(containerOffset.left, 10) + itemOuterWidth + sublistWidth > viewport.width - DomHandler.calculateScrollbarWidth()) {
+                submenuRef.current.style.left = -1 * sublistWidth + 'px';
+            } else {
+                submenuRef.current.style.left = itemOuterWidth + 'px';
+            }
         }
     };
 
@@ -81,7 +88,7 @@ export const ContextMenuSub = React.memo((props) => {
 
     const createSubmenu = (item) => {
         if (item.items) {
-            return <ContextMenuSub menuProps={props.menuProps} model={item.items} resetMenu={item !== activeItemState} onLeafClick={props.onLeafClick} />;
+            return <ContextMenuSub menuProps={props.menuProps} model={item.items} resetMenu={item !== activeItemState} onLeafClick={props.onLeafClick} isMobileMode={props.isMobileMode} />;
         }
 
         return null;

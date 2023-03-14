@@ -1,9 +1,9 @@
 import * as React from 'react';
 import PrimeReact from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useEventListener, useMountEffect, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useEventListener, useMatchMedia, useMountEffect, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, ZIndexUtils, UniqueComponentId } from '../utils/Utils';
+import { classNames, DomHandler, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
 import { ContextMenuBase } from './ContextMenuBase';
 import { ContextMenuSub } from './ContextMenuSub';
 
@@ -18,6 +18,7 @@ export const ContextMenu = React.memo(
         const menuRef = React.useRef(null);
         const currentEvent = React.useRef(null);
         const styleElementRef = React.useRef(null);
+        const isMobileMode = useMatchMedia(`screen and (max-width: ${props.breakpoint})`, !!props.breakpoint);
 
         const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
             type: 'click',
@@ -55,7 +56,7 @@ export const ContextMenu = React.memo(
         max-height: ${props.scrollHeight};
         overflow: ${props.scrollHeight ? 'auto' : ''};
     }
-    
+
     .p-contextmenu[${selector}] .p-submenu-list {
         position: relative;
     }
@@ -65,6 +66,10 @@ export const ContextMenu = React.memo(
         box-shadow: none;
         border-radius: 0;
         padding: 0 0 0 calc(var(--inline-spacing) * 2); /* @todo */
+    }
+
+    .p-contextmenu[${selector}] .p-menuitem-active > .p-menuitem-link > .p-submenu-icon {
+        transform: rotate(-180deg);
     }
 
     .p-contextmenu[${selector}] .p-submenu-icon:before {
@@ -116,12 +121,12 @@ export const ContextMenu = React.memo(
                 ZIndexUtils.set('menu', menuRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['menu']);
             }
 
+            position(currentEvent.current);
+
             if (attributeSelectorState && props.breakpoint) {
                 menuRef.current.setAttribute(attributeSelectorState, '');
                 createStyle();
             }
-
-            position(currentEvent.current);
         };
 
         const onEntered = () => {
@@ -255,7 +260,7 @@ export const ContextMenu = React.memo(
                     onExited={onExited}
                 >
                     <div ref={menuRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onMenuClick} onMouseEnter={onMenuMouseEnter}>
-                        <ContextMenuSub menuProps={props} model={props.model} root resetMenu={resetMenuState} onLeafClick={onLeafClick} />
+                        <ContextMenuSub menuProps={props} model={props.model} root resetMenu={resetMenuState} onLeafClick={onLeafClick} isMobileMode={isMobileMode} />
                     </div>
                 </CSSTransition>
             );
