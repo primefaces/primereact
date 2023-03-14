@@ -1,7 +1,7 @@
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function ThemesDoc(props) {
+export function BuiltInThemesDoc(props) {
     const code = {
         basic: `
 primereact/resources/themes/bootstrap4-light-blue/theme.css
@@ -50,7 +50,13 @@ primereact/resources/themes/arya-purple/theme.css
     return (
         <>
             <DocSectionText {...props}>
-                <p>PrimeReact ships with various free themes to choose from. The list below states all the available themes in the npm distribution with import paths.</p>
+                <p>
+                    PrimeReact ships with various free themes to choose from. The list below states all the available themes in the npm distribution with import paths. For a live preview, use the configurator{' '}
+                    <span className="border-round inline-flex border-1 w-2rem h-2rem p-0 align-items-center justify-content-center bg-primary">
+                        <span className="pi pi-cog"></span>
+                    </span>{' '}
+                    at the topbar to switch themes.
+                </p>
             </DocSectionText>
             <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz codeClassName="h-20rem overflow-auto" />
         </>

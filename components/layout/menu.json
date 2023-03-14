@@ -448,10 +448,6 @@
                     "to": "/theming"
                 },
                 {
-                    "name": "Theme Designer",
-                    "href": "https://www.primefaces.org/designer/primereact"
-                },
-                {
                     "name": "Visual Editor",
                     "href": "https://designer.primereact.org"
                 },
