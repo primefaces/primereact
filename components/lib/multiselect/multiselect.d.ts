@@ -170,6 +170,32 @@ interface MultiSelectFilterOptions {
 }
 
 /**
+ * Custom filter template options.
+ */
+interface MultiSelectTemplateOptions {
+    /**
+     * Style class of the filter.
+     */
+    className: string;
+    /**
+     * The filter element.
+     */
+    element: HTMLDivElement;
+    /**
+     * Style class of the filter icon.
+     */
+    filterIconClassName: string;
+    /**
+     * The filter input options.
+     */
+    filterOptions?: MultiSelectFilterOptions;
+    /**
+     * The props of multiselect header.
+     */
+    props?: any;
+}
+
+/**
  * Defines valid properties in MultiSelect component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
@@ -243,7 +269,7 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
     /**
      * The template of filter element.
      */
-    filterTemplate?: React.ReactNode | ((options: MultiSelectFilterOptions) => React.ReactNode);
+    filterTemplate?: React.ReactNode | ((options: MultiSelectTemplateOptions) => React.ReactNode);
     /**
      * Whether to display selected items in the label section or always display the placeholder as the default label.
      * @defaultValue false

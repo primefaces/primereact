@@ -1,3 +1,7 @@
+import getConfig from 'next/config';
+
+const { apiUrl } = getConfig().publicRuntimeConfig;
+
 export const CustomerService = {
     getData() {
         return [
@@ -9027,6 +9031,6 @@ export const CustomerService = {
                   .join('&')
             : '';
 
-        return fetch('https://www.primefaces.org/data/customers?' + queryParams).then((res) => res.json());
+        return fetch(apiUrl + '?' + queryParams).then((res) => res.json());
     }
 };

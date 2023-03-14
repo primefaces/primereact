@@ -8,6 +8,7 @@ import '../styles/layout/layout.scss';
 // prettier-ignore
 import '../styles/primereact.css';
 // prettier-ignore
+import PrimeReact from '../components/lib/api/PrimeReact';
 import '../styles/demo/demo.scss';
 
 export default function MyApp({ Component }) {
@@ -54,29 +55,14 @@ export default function MyApp({ Component }) {
             localStorage.setItem(storageKey, JSON.stringify(item));
         },
         onThemeChange: (newTheme, dark) => {
-            setDark(dark);
-            changeTheme(newTheme);
+            PrimeReact.changeTheme(theme, newTheme, 'theme-link', () => {
+                setDark(dark);
+                setTheme(newTheme);
+            });
         },
         onTableThemeChange: (currentTableTheme, newTableTheme) => {
             changeTableTheme(currentTableTheme, newTableTheme);
         }
-    };
-
-    const changeTheme = (newTheme) => {
-        const elementId = 'theme-link';
-        const linkElement = document.getElementById('theme-link');
-        const cloneLinkElement = linkElement.cloneNode(true);
-        const newThemeUrl = linkElement.getAttribute('href').replace(theme, newTheme);
-
-        cloneLinkElement.setAttribute('id', elementId + '-clone');
-        cloneLinkElement.setAttribute('href', newThemeUrl);
-        cloneLinkElement.addEventListener('load', () => {
-            linkElement.remove();
-            cloneLinkElement.setAttribute('id', elementId);
-        });
-
-        linkElement.parentNode.insertBefore(cloneLinkElement, linkElement.nextSibling);
-        setTheme(newTheme);
     };
 
     const changeTableTheme = (currentTableTheme, newTableTheme) => {

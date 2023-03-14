@@ -58,6 +58,7 @@ export const MultiSelectPanel = React.memo(
                     selectAll={props.isAllSelected()}
                     onSelectAll={props.onSelectAll}
                     template={props.panelHeaderTemplate}
+                    resetFilter={props.resetFilter}
                 />
             );
         };

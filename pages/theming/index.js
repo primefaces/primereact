@@ -3,14 +3,15 @@ import React from 'react';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
 import { ArchitectureDoc } from '../../components/doc/theming/architecturedoc';
+import { BuiltInThemesDoc } from '../../components/doc/theming/builtinthemesdoc';
 import { CSSVariablesDoc } from '../../components/doc/theming/cssvariablesdoc';
-import { DesignerDoc } from '../../components/doc/theming/designerdoc';
+import { CustomThemeDoc } from '../../components/doc/theming/customthemedoc';
 import { PrimeFlexDoc } from '../../components/doc/theming/primeflexdoc';
 import { ScaleDoc } from '../../components/doc/theming/scaledoc';
 import { CssInJsDoc } from '../../components/doc/theming/scopedstyling/cssinjsdoc';
 import { CSSModulesDoc } from '../../components/doc/theming/scopedstyling/cssmodulesdoc';
 import { NamedClassDoc } from '../../components/doc/theming/scopedstyling/namedclassdoc';
-import { ThemesDoc } from '../../components/doc/theming/themesdoc';
+import { SwitchThemesDoc } from '../../components/doc/theming/switchthemesdoc';
 import { UtilsDoc } from '../../components/doc/theming/utilsdoc';
 
 const ThemingDoc = () => {
@@ -21,14 +22,19 @@ const ThemingDoc = () => {
             component: ArchitectureDoc
         },
         {
-            id: 'themes',
-            label: 'Themes',
-            component: ThemesDoc
+            id: 'builtinthemes',
+            label: 'Built-in Themes',
+            component: BuiltInThemesDoc
         },
         {
-            id: 'designer',
-            label: 'Designer',
-            component: DesignerDoc
+            id: 'switchthemes',
+            label: 'Switch Themes',
+            component: SwitchThemesDoc
+        },
+        {
+            id: 'customtheme',
+            label: 'Custom Theme',
+            component: CustomThemeDoc
         },
         {
             id: 'scopedstyling',

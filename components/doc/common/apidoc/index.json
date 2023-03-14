@@ -19632,6 +19632,48 @@
                             "description": "Callback function when the close button is clicked."
                         }
                     ]
+                },
+                "MultiSelectTemplateOptions": {
+                    "description": "Custom filter template options.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "className",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Style class of the filter."
+                        },
+                        {
+                            "name": "element",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "HTMLDivElement",
+                            "description": "The filter element."
+                        },
+                        {
+                            "name": "filterIconClassName",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Style class of the filter icon."
+                        },
+                        {
+                            "name": "filterOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MultiSelectFilterOptions",
+                            "description": "The filter input options."
+                        },
+                        {
+                            "name": "props",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "any",
+                            "description": "The props of multiselect header."
+                        }
+                    ],
+                    "callbacks": []
                 }
             }
         }
@@ -24710,6 +24752,54 @@
                             "type": "MenuItem[]",
                             "default": "",
                             "description": "MenuModel instance to define the overlay items."
+                        },
+                        {
+                            "name": "outlined",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Add a border class without a background initially."
+                        },
+                        {
+                            "name": "raised",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Add a shadow to indicate elevation."
+                        },
+                        {
+                            "name": "rounded",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Add a circular border radius to the button."
+                        },
+                        {
+                            "name": "severity",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"success\" | \"warning\" | \"info\" | \"danger\" | \"secondary\"",
+                            "default": "",
+                            "description": "Defines the style of the button, valid values are \"secondary\", \"success\", \"info\", \"warning\", \"danger\"."
+                        },
+                        {
+                            "name": "size",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"small\" | \"large\"",
+                            "default": "",
+                            "description": "Defines the size of the button, valid values are \"small\" and \"large\"."
+                        },
+                        {
+                            "name": "text",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Add a textual class to the button without a background initially."
                         },
                         {
                             "name": "tooltip",
