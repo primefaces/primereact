@@ -110,7 +110,7 @@ export function BasicDoc(props) {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -129,6 +129,7 @@ export function BasicDoc(props) {
             icon: 'pi pi-fw pi-power-off'
         }
     ];
+
     const code = {
         basic: `
 <SlideMenu model={items} viewportHeight={220} menuWidth={175}></SlideMenu>
@@ -137,7 +138,7 @@ export function BasicDoc(props) {
 import React from 'react'; 
 import { SlideMenu } from 'primereact/slidemenu';
 
-export default function BasicDoc() {
+export default function BasicDemo() {
     const items = [
         {
             label:'File',
@@ -249,7 +250,7 @@ export default function BasicDoc() {
                     ]
                 },
                 {
-                    label:'Archieve',
+                    label:'Archive',
                     icon:'pi pi-fw pi-calendar-times',
                     items:[
                     {
@@ -270,16 +271,19 @@ export default function BasicDoc() {
     ];
 
     return (
-        <SlideMenu model={items} viewportHeight={220} menuWidth={175}></SlideMenu>
+        <div className="card flex justify-content-center">
+            <SlideMenu model={items} viewportHeight={220} menuWidth={175}></SlideMenu>
+        </div>
     )
 }
         `,
         typescript: `
 import React from 'react'; 
 import { SlideMenu } from 'primereact/slidemenu';
+import { MenuItem } from 'primereact/menuitem';
 
-export default function BasicDoc() {
-    const items = [
+export default function BasicDemo() {
+    const items: MenuItem[] = [
         {
             label:'File',
             icon:'pi pi-fw pi-file',
@@ -390,7 +394,7 @@ export default function BasicDoc() {
                     ]
                 },
                 {
-                    label:'Archieve',
+                    label:'Archive',
                     icon:'pi pi-fw pi-calendar-times',
                     items:[
                     {
@@ -411,7 +415,9 @@ export default function BasicDoc() {
     ];
 
     return (
-        <SlideMenu model={items} viewportHeight={220} menuWidth={175}></SlideMenu>
+        <div className="card flex justify-content-center">
+            <SlideMenu model={items} viewportHeight={220} menuWidth={175}></SlideMenu>
+        </div>
     )
 }
         `
@@ -420,7 +426,9 @@ export default function BasicDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>SlideMenu Basic</p>
+                <p>
+                    SlideMenu requires a collection of menuitems as its <i>model</i> along with <i>viewportHeight</i> and <i>menuWidth</i>.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <SlideMenu model={items} viewportHeight={220} menuWidth={175}></SlideMenu>

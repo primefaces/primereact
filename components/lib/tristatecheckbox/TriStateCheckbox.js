@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { TriStateCheckboxBase } from './TriStateCheckboxBase';
 
 export const TriStateCheckbox = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = TriStateCheckboxBase.getProps(inProps);
+
         const [focusedState, setFocusedState] = React.useState(false);
         const elementRef = React.useRef(null);
 
@@ -58,7 +61,7 @@ export const TriStateCheckbox = React.memo(
         }));
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, TriStateCheckbox.defaultProps);
+        const otherProps = TriStateCheckboxBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames('p-tristatecheckbox p-checkbox p-component', props.className, { 'p-checkbox-disabled': props.disabled });
         const boxClassName = classNames('p-checkbox-box', {
@@ -92,16 +95,3 @@ export const TriStateCheckbox = React.memo(
 );
 
 TriStateCheckbox.displayName = 'TriStateCheckbox';
-TriStateCheckbox.defaultProps = {
-    __TYPE: 'TriStateCheckbox',
-    id: null,
-    value: null,
-    style: null,
-    className: null,
-    disabled: false,
-    readOnly: false,
-    tabIndex: '0',
-    tooltip: null,
-    tooltipOptions: null,
-    onChange: null
-};

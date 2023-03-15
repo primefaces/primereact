@@ -8,32 +8,32 @@ export function MonthPickerDoc(props) {
 
     const code = {
         basic: `
-<Calendar id="monthpicker" value={date} onChange={(e) => setDate(e.value)} view="month" dateFormat="mm/yy" />
+<Calendar value={date} onChange={(e) => setDate(e.value)} view="month" dateFormat="mm/yy" />
         `,
         javascript: `
 import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
-export default function MonthPickerDoc() {
+export default function MonthPickerDemo() {
     const [date, setDate] = useState(null);
 
     return (
         <div className="card flex justify-content-center">
-            <Calendar id="monthpicker" value={date} onChange={(e) => setDate(e.value)} view="month" dateFormat="mm/yy" />
+            <Calendar value={date} onChange={(e) => setDate(e.value)} view="month" dateFormat="mm/yy" />
         </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { Calendar, CalendarChangeParams } from 'primereact/calendar';
+import { Calendar, CalendarChangeEvent } from 'primereact/calendar';
 
-export default function MonthPickerDoc() {
+export default function MonthPickerDemo() {
     const [date, setDate] = useState<Date | null>(null);
 
     return (
         <div className="card flex justify-content-center">
-            <Calendar id="monthpicker" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} view="month" dateFormat="mm/yy" />
+            <Calendar value={date} onChange={(e : CalendarChangeEvent) => setDate(e.value)} view="month" dateFormat="mm/yy" />
         </div>
     )
 }
@@ -43,10 +43,12 @@ export default function MonthPickerDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Datepicker element in month view.</p>
+                <p>
+                    Month only picker is enabled by specifying <i>view</i> as <i>month</i> in addition to a suitable <i>dateFormat</i>.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Calendar id="monthpicker" value={date} onChange={(e) => setDate(e.value)} view="month" dateFormat="mm/yy" />
+                <Calendar value={date} onChange={(e) => setDate(e.value)} view="month" dateFormat="mm/yy" />
             </div>
             <DocSectionCode code={code} />
         </>

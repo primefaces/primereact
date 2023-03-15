@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { ChipsBase } from './ChipsBase';
 
 export const Chips = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ChipsBase.getProps(inProps);
+
         const [focusedState, setFocusedState] = React.useState(false);
         const elementRef = React.useRef(null);
         const listRef = React.useRef(null);
@@ -258,7 +261,7 @@ export const Chips = React.memo(
         };
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, Chips.defaultProps);
+        const otherProps = ChipsBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-chips p-component p-inputwrapper',
@@ -282,32 +285,3 @@ export const Chips = React.memo(
 );
 
 Chips.displayName = 'Chips';
-Chips.defaultProps = {
-    __TYPE: 'Chips',
-    id: null,
-    inputRef: null,
-    inputId: null,
-    name: null,
-    placeholder: null,
-    value: null,
-    max: null,
-    disabled: null,
-    readOnly: false,
-    removable: true,
-    style: null,
-    className: null,
-    tooltip: null,
-    tooltipOptions: null,
-    ariaLabelledBy: null,
-    separator: null,
-    allowDuplicate: true,
-    itemTemplate: null,
-    keyfilter: null,
-    addOnBlur: null,
-    onAdd: null,
-    onRemove: null,
-    onChange: null,
-    onFocus: null,
-    onBlur: null,
-    onKeyDown: null
-};

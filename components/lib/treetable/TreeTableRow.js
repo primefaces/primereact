@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
+import { ColumnBase } from '../column/ColumnBase';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler } from '../utils/Utils';
 import { TreeTableBodyCell } from './TreeTableBodyCell';
@@ -13,6 +14,10 @@ export const TreeTableRow = React.memo((props) => {
 
     const isLeaf = () => {
         return props.node.leaf === false ? false : !(props.node.children && props.node.children.length);
+    };
+
+    const getColumnProp = (column, name) => {
+        return ColumnBase.getCProp(column, name);
     };
 
     const onTogglerClick = (event) => {
@@ -302,16 +307,24 @@ export const TreeTableRow = React.memo((props) => {
         }
     };
 
-    const createCell = (column) => {
+    const createCell = (column, index) => {
         let toggler, checkbox;
 
-        if (column.props.expander) {
+        if (getColumnProp(column, 'expander')) {
             toggler = createToggler();
             checkbox = createCheckbox();
         }
 
         return (
-            <TreeTableBodyCell key={column.props.columnKey || column.props.field} {...column.props} column={column} selectOnEdit={props.selectOnEdit} selected={isSelected()} node={props.node} rowIndex={props.rowIndex}>
+            <TreeTableBodyCell
+                key={`${getColumnProp(column, 'columnKey') || getColumnProp(column, 'field')}_${index}`}
+                {...ColumnBase.getCProps(column)}
+                column={column}
+                selectOnEdit={props.selectOnEdit}
+                selected={isSelected()}
+                node={props.node}
+                rowIndex={props.rowIndex}
+            >
                 {toggler}
                 {checkbox}
             </TreeTableBodyCell>
@@ -323,7 +336,7 @@ export const TreeTableRow = React.memo((props) => {
             return props.node.children.map((childNode, index) => {
                 return (
                     <TreeTableRow
-                        key={childNode.key || JSON.stringify(childNode.data)}
+                        key={`${childNode.key || JSON.stringify(childNode.data)}_${index}`}
                         level={props.level + 1}
                         rowIndex={props.rowIndex + '_' + index}
                         node={childNode}

@@ -1,5 +1,4 @@
 .landing-designer {
-
     .designer-demo {
         --dd-primary:#03C4E8;
         --dd-primary-darker:#029dba;
@@ -132,7 +131,7 @@
     }
 
     .formgrid > .field {
-        padding: 2rem;
+        padding: 1rem 2rem 1rem;
     }
 
     .designer-editor {
@@ -144,5 +143,11 @@
         border-radius: 0 !important;
         background: transparent;
     }
-    
+
+    .designer-editor{
+        max-width: 1250px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
 }
+

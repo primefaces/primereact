@@ -1,17 +1,14 @@
-import getConfig from 'next/config';
 import Link from 'next/link';
 
 const FooterSection = (props) => {
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
-
     return (
-        <section className="landing-footer pt-8 pad-section">
+        <section className="landing-footer pt-8 px-5 lg:px-8">
             <div className="flex flex-wrap z-1">
                 <div className="w-6 lg:w-3 flex">
                     <ul className="list-none p-0 m-0">
                         <li className="font-bold mb-5">General</li>
                         <li className="mb-4">
-                            <Link href="/setup">
+                            <Link href="/installation">
                                 <a className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150">Get Started</a>
                             </Link>
                         </li>
@@ -106,9 +103,9 @@ const FooterSection = (props) => {
 
             <hr className="section-divider mt-8"></hr>
 
-            <div className="flex flex-wrap justify-content-between py-6">
+            <div className="flex flex-wrap justify-content-between py-6 gap-5">
                 <span>
-                    <img src={`${contextPath}/images/primereact-logo-${props.dark ? 'light' : 'dark'}.svg`} alt="primereact logo" />
+                    <img src={`https://primefaces.org/cdn/primereact/images/primereact-logo-${props.dark ? 'light' : 'dark'}.svg`} alt="primereact logo" />
                 </span>
                 <div className="flex align-items-center">
                     <a href="https://twitter.com/primereact" className="linkbox block w-3rem h-3rem flex align-items-center justify-content-center mr-3">

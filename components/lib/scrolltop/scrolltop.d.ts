@@ -1,8 +1,8 @@
 /**
  *
- * ScrollTop is an input component that provides real-time suggestions when being typed.
+ * ScrollTop gets displayed after a certain scroll position and used to navigates to the top of the page quickly.
  *
- * [Live Demo](https://www.primefaces.org/primereact/scrolltop/)
+ * [Live Demo](https://www.primereact.org/scrolltop/)
  *
  * @module scrolltop
  *
@@ -41,15 +41,14 @@ export interface ScrollTopProps {
      */
     className?: string | undefined;
     /**
-     * @todo Write the documentation
+     * Inline style of the component.
      */
-    style?: React.CSSProperties;
+    style?: React.CSSProperties | undefined;
     /**
-     * The properties of CSSTransitionProps can be customized, except for "nodeRef" and "in" properties.
-     * @defaultValue smooth
-     * @todo Add link for CSSTransitionProps
+     * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
+     * @type {CSSTransitionProps}
      */
-    transitionOptions?: CSSTransitionProps;
+    transitionOptions?: CSSTransitionProps | undefined;
     /**
      * Callback to invoke when overlay panel becomes visible.
      */
@@ -66,6 +65,14 @@ export interface ScrollTopProps {
 }
 
 /**
+ * **PrimeReact - ScrollTop**
+ *
+ * _ScrollTop gets displayed after a certain scroll position and used to navigates to the top of the page quickly._
+ *
+ * [Live Demo](https://www.primereact.org/scrolltop/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class ScrollTop extends React.Component<ScrollTopProps, any> {

@@ -8,32 +8,32 @@ export function YearPickerDoc(props) {
 
     const code = {
         basic: `
-<Calendar id="yearpicker" value={date} onChange={(e) => setDate(e.value)} view="year" dateFormat="yy" />
+<Calendar value={date} onChange={(e) => setDate(e.value)} view="year" dateFormat="yy" />
         `,
         javascript: `
 import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
-export default function YearPickerDoc() {
+export default function YearPickerDemo() {
     const [date, setDate] = useState(null);
 
     return (
         <div className="card flex justify-content-center">
-            <Calendar id="yearpicker" value={date} onChange={(e) => setDate(e.value)} view="year" dateFormat="yy" />
+            <Calendar value={date} onChange={(e) => setDate(e.value)} view="year" dateFormat="yy" />
         </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { Calendar, CalendarChangeParams } from 'primereact/calendar';
+import { Calendar, CalendarChangeEvent } from 'primereact/calendar';
 
-export default function YearPickerDoc() {
+export default function YearPickerDemo() {
     const [date, setDate] = useState<Date | null>(null);
 
     return (
         <div className="card flex justify-content-center">
-            <Calendar id="yearpicker" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} view="year" dateFormat="yy" />
+            <Calendar value={date} onChange={(e : CalendarChangeEvent) => setDate(e.value)} view="year" dateFormat="yy" />
         </div>
     )
 }
@@ -43,10 +43,12 @@ export default function YearPickerDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Datepicker element in year view.</p>
+                <p>
+                    Specifying <i>view</i> as <i>year</i> in addition to a suitable <i>dateFormat</i> enables the year picker.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Calendar id="yearpicker" value={date} onChange={(e) => setDate(e.value)} view="year" dateFormat="yy" />
+                <Calendar value={date} onChange={(e) => setDate(e.value)} view="year" dateFormat="yy" />
             </div>
             <DocSectionCode code={code} />
         </>

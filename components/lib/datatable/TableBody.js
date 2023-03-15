@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { localeOption } from '../api/Api';
-import { useMountEffect, usePrevious, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import { ColumnBase } from '../column/ColumnBase';
+import { useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { DomHandler, ObjectUtils } from '../utils/Utils';
 import { BodyRow } from './BodyRow';
 import { RowTogglerButton } from './RowTogglerButton';
 
@@ -26,7 +27,6 @@ export const TableBody = React.memo(
         const rowDragging = React.useRef(false);
         const draggedRowIndex = React.useRef(null);
         const droppedRowIndex = React.useRef(null);
-        const prevVirtualScrollerOptions = usePrevious(props.virtualScrollerOptions);
         const isSubheaderGrouping = props.rowGroupMode && props.rowGroupMode === 'subheader';
         const isRadioSelectionMode = props.selectionMode === 'radiobutton';
         const isCheckboxSelectionMode = props.selectionMode === 'checkbox';
@@ -39,7 +39,7 @@ export const TableBody = React.memo(
         };
 
         const isSelectionEnabled = () => {
-            return props.selectionMode || props.selectionModeInColumn !== null || (props.columns && props.columns.some((col) => col && !!col.props.selectionMode));
+            return props.selectionMode || props.selectionModeInColumn !== null || (props.columns && props.columns.some((col) => col && !!getColumnProp(col, 'selectionMode')));
         };
 
         const isSingleSelection = () => {
@@ -141,6 +141,10 @@ export const TableBody = React.memo(
             return props.columns ? props.columns.length : 0;
         };
 
+        const getColumnProp = (column, name) => {
+            return ColumnBase.getCProp(column, name);
+        };
+
         const getVirtualScrollerOption = (option, options) => {
             options = options || props.virtualScrollerOptions;
 
@@ -204,12 +208,6 @@ export const TableBody = React.memo(
             if (rowGroupHeaderStyleObjectState.top !== top) {
                 setRowGroupHeaderStyleObjectState({ top });
             }
-        };
-
-        const updateVirtualScrollerPosition = () => {
-            const tableHeaderHeight = DomHandler.getOuterHeight(elementRef.current.previousElementSibling);
-
-            elementRef.current.style.top = (elementRef.current.style.top || 0) + tableHeaderHeight + 'px';
         };
 
         const onSingleSelection = ({ originalEvent, data, index, toggleable, type }) => {
@@ -359,7 +357,7 @@ export const TableBody = React.memo(
                 let rowIndex = props.paginator ? i + props.first : i;
 
                 for (let j = cellRangeStart; j <= cellRangeEnd; j++) {
-                    let field = columns[j].props.field;
+                    let field = getColumnProp(columns[j], 'field');
                     let value = ObjectUtils.resolveFieldData(rowData, field);
                     let rangeRowData = {
                         value,
@@ -776,18 +774,6 @@ export const TableBody = React.memo(
             }
         });
 
-        useMountEffect(() => {
-            if (!props.isVirtualScrollerDisabled && getVirtualScrollerOption('vertical')) {
-                updateVirtualScrollerPosition();
-            }
-        });
-
-        useUpdateEffect(() => {
-            if (!props.isVirtualScrollerDisabled && getVirtualScrollerOption('vertical') && getVirtualScrollerOption('itemSize', prevVirtualScrollerOptions) !== getVirtualScrollerOption('itemSize')) {
-                updateVirtualScrollerPosition();
-            }
-        }, [props.virtualScrollerOptions]);
-
         useUpdateEffect(() => {
             if (props.paginator && isMultipleSelection()) {
                 anchorRowIndex.current = null;
@@ -817,11 +803,11 @@ export const TableBody = React.memo(
             return null;
         };
 
-        const createGroupHeader = (rowData, index, expanded, colSpan) => {
-            if (isSubheaderGrouping && shouldRenderRowGroupHeader(props.value, rowData, index - props.first)) {
+        const createGroupHeader = (rowData, rowIndex, expanded, colSpan) => {
+            if (isSubheaderGrouping && shouldRenderRowGroupHeader(props.value, rowData, rowIndex - props.first)) {
                 const style = rowGroupHeaderStyle();
                 const toggler = props.expandableRowGroups && <RowTogglerButton onClick={onRowToggle} rowData={rowData} expanded={expanded} expandedRowIcon={props.expandedRowIcon} collapsedRowIcon={props.collapsedRowIcon} />;
-                const options = { index, index, props: props.tableProps, customRendering: false };
+                const options = { index: rowIndex, props: props.tableProps, customRendering: false };
                 let content = ObjectUtils.getJSXElement(props.rowGroupHeaderTemplate, rowData, options);
 
                 // check if the user wants complete control of the rendering
@@ -844,7 +830,7 @@ export const TableBody = React.memo(
             return null;
         };
 
-        const createRow = (rowData, index, expanded) => {
+        const createRow = (rowData, rowIndex, index, expanded) => {
             if (!props.expandableRowGroups || expanded) {
                 const selected = isSelectionEnabled() ? isSelected(rowData) : false;
                 const contextMenuSelected = isContextMenuSelected(rowData);
@@ -859,6 +845,7 @@ export const TableBody = React.memo(
                         value={props.value}
                         columns={props.columns}
                         rowData={rowData}
+                        rowIndex={rowIndex}
                         index={index}
                         selected={selected}
                         contextMenuSelected={contextMenuSelected}
@@ -919,10 +906,10 @@ export const TableBody = React.memo(
             }
         };
 
-        const createExpansion = (rowData, index, expanded, colSpan) => {
+        const createExpansion = (rowData, rowIndex, expanded, colSpan) => {
             if (expanded && !(isSubheaderGrouping && props.expandableRowGroups)) {
-                const id = `${props.tableSelector}_content_${index}_expanded`;
-                const options = { index, customRendering: false };
+                const id = `${props.tableSelector}_content_${rowIndex}_expanded`;
+                const options = { index: rowIndex, customRendering: false };
                 let content = ObjectUtils.getJSXElement(props.rowExpansionTemplate, rowData, options);
 
                 // check if the user wants complete control of the rendering
@@ -944,9 +931,9 @@ export const TableBody = React.memo(
             return null;
         };
 
-        const createGroupFooter = (rowData, index, expanded, colSpan) => {
-            if (isSubheaderGrouping && shouldRenderRowGroupFooter(props.value, rowData, index - props.first, expanded)) {
-                const content = ObjectUtils.getJSXElement(props.rowGroupFooterTemplate, rowData, { index, colSpan, props: props.tableProps });
+        const createGroupFooter = (rowData, rowIndex, expanded, colSpan) => {
+            if (isSubheaderGrouping && shouldRenderRowGroupFooter(props.value, rowData, rowIndex - props.first, expanded)) {
+                const content = ObjectUtils.getJSXElement(props.rowGroupFooterTemplate, rowData, { index: rowIndex, colSpan, props: props.tableProps });
 
                 return (
                     <tr className="p-rowgroup-footer" role="row">
@@ -959,33 +946,35 @@ export const TableBody = React.memo(
         };
 
         const createContent = () => {
-            return props.value.map((rowData, i) => {
-                const index = getVirtualScrollerOption('getItemOptions') ? getVirtualScrollerOption('getItemOptions')(i).index : props.first + i;
-                const key = getRowKey(rowData, index);
-                const expanded = isRowExpanded(rowData);
-                const colSpan = getColumnsLength();
+            return (
+                props.value &&
+                props.value.map((rowData, index) => {
+                    const rowIndex = getVirtualScrollerOption('getItemOptions') ? getVirtualScrollerOption('getItemOptions')(index).index : props.first + index;
+                    const key = getRowKey(rowData, rowIndex);
+                    const expanded = isRowExpanded(rowData);
+                    const colSpan = getColumnsLength();
 
-                const groupHeader = createGroupHeader(rowData, index, expanded, colSpan);
-                const row = createRow(rowData, index, expanded);
-                const expansion = createExpansion(rowData, index, expanded, colSpan);
-                const groupFooter = createGroupFooter(rowData, index, expanded, colSpan);
+                    const groupHeader = createGroupHeader(rowData, rowIndex, expanded, colSpan);
+                    const row = createRow(rowData, rowIndex, index, expanded);
+                    const expansion = createExpansion(rowData, rowIndex, expanded, colSpan);
+                    const groupFooter = createGroupFooter(rowData, rowIndex, expanded, colSpan);
 
-                return (
-                    <React.Fragment key={key}>
-                        {groupHeader}
-                        {row}
-                        {expansion}
-                        {groupFooter}
-                    </React.Fragment>
-                );
-            });
+                    return (
+                        <React.Fragment key={key}>
+                            {groupHeader}
+                            {row}
+                            {expansion}
+                            {groupFooter}
+                        </React.Fragment>
+                    );
+                })
+            );
         };
 
-        const className = classNames('p-datatable-tbody', props.className);
         const content = props.empty ? createEmptyContent() : createContent();
 
         return (
-            <tbody ref={refCallback} className={className}>
+            <tbody ref={refCallback} style={props.style} className={props.className}>
                 {content}
             </tbody>
         );

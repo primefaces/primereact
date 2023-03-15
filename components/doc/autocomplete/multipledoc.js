@@ -44,7 +44,6 @@ export default function MultipleDemo() {
     const [selectedCountries, setSelectedCountries] = useState(null);
     const [filteredCountries, setFilteredCountries] = useState(null);
 
-    
     const search = (event) => {
         // Timeout to emulate a network connection
         setTimeout(() => {
@@ -65,25 +64,18 @@ export default function MultipleDemo() {
 
     useEffect(() => {
         CountryService.getCountries().then((data) => setCountries(data));
-        /*
-            Countries is an array of objects with a name and a code;
-            [
-                ...
-                {"name": "United Kingdom", "code": "UK"},
-                {"name": "United States", "code": "USA"},
-                ...
-            ]
-        */
     }, []);
 
     return (
-        <AutoComplete field="name" multiple value={selectedCountries} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountries(e.value)} />
+        <div className="card p-fluid">
+            <AutoComplete field="name" multiple value={selectedCountries} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountries(e.value)} />
+        </div>
     )
 }
         `,
         typescript: `
 import React, { useEffect, useState } from 'react';
-import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
+import { AutoComplete, AutoCompleteCompleteEvent } from "primereact/autocomplete";
 import { CountryService } from "./service/CountryService";
 
 interface Country {
@@ -96,8 +88,7 @@ export default function MultipleDemo() {
     const [selectedCountries, setSelectedCountries] = useState<Country>(null);
     const [filteredCountries, setFilteredCountries] = useState<Country[]>(null);
 
-    
-    const search = (event: AutoCompleteCompleteMethodParams) => {
+    const search = (event: AutoCompleteCompleteEvent) => {
         // Timeout to emulate a network connection
         setTimeout(() => {
             let _filteredCountries;
@@ -117,19 +108,12 @@ export default function MultipleDemo() {
 
     useEffect(() => {
         CountryService.getCountries().then((data) => setCountries(data));
-        /*
-            Countries is an array of objects with a name and a code;
-            [
-                ...
-                {"name": "United Kingdom", "code": "UK"},
-                {"name": "United States", "code": "USA"},
-                ...
-            ]
-        */
     }, []);
 
     return (
-        <AutoComplete field="name" multiple value={selectedCountries} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountries(e.value)} />
+        <div className="card p-fluid">
+            <AutoComplete field="name" multiple value={selectedCountries} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountries(e.value)} />
+        </div>
     )
 }
         `,

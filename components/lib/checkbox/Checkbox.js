@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { useUpdateEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { CheckboxBase } from './CheckboxBase';
 
 export const Checkbox = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = CheckboxBase.getProps(inProps);
+
         const [focusedState, setFocusedState] = React.useState(false);
         const elementRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
@@ -76,7 +79,7 @@ export const Checkbox = React.memo(
 
         const checked = isChecked();
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, Checkbox.defaultProps);
+        const otherProps = CheckboxBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-checkbox p-component',
@@ -123,26 +126,3 @@ export const Checkbox = React.memo(
 );
 
 Checkbox.displayName = 'Checkbox';
-Checkbox.defaultProps = {
-    __TYPE: 'Checkbox',
-    id: null,
-    inputRef: null,
-    inputId: null,
-    value: null,
-    name: null,
-    checked: false,
-    trueValue: true,
-    falseValue: false,
-    style: null,
-    className: null,
-    disabled: false,
-    required: false,
-    readOnly: false,
-    tabIndex: null,
-    icon: 'pi pi-check',
-    tooltip: null,
-    tooltipOptions: null,
-    onChange: null,
-    onMouseDown: null,
-    onContextMenu: null
-};

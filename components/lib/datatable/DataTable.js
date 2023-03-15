@@ -1,14 +1,18 @@
 import * as React from 'react';
 import PrimeReact, { FilterMatchMode, FilterOperator, FilterService } from '../api/Api';
+import { ColumnBase } from '../column/ColumnBase';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Paginator } from '../paginator/Paginator';
-import { DomHandler, ObjectUtils, UniqueComponentId, classNames } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
+import { DataTableBase } from './DataTableBase';
 import { TableBody } from './TableBody';
 import { TableFooter } from './TableFooter';
 import { TableHeader } from './TableHeader';
 
-export const DataTable = React.forwardRef((props, ref) => {
+export const DataTable = React.forwardRef((inProps, ref) => {
+    const props = DataTableBase.getProps(inProps);
+
     const [firstState, setFirstState] = React.useState(props.first);
     const [rowsState, setRowsState] = React.useState(props.rows);
     const [sortFieldState, setSortFieldState] = React.useState(props.sortField);
@@ -116,8 +120,8 @@ export const DataTable = React.forwardRef((props, ref) => {
         return props.onFilter ? props.filters : filtersState;
     };
 
-    const getColumnProp = (col, prop) => {
-        return col.props[prop];
+    const getColumnProp = (column, name) => {
+        return ColumnBase.getCProp(column, name);
     };
 
     const getColumns = (ignoreReorderable) => {
@@ -365,14 +369,15 @@ export const DataTable = React.forwardRef((props, ref) => {
                 createStyleElement();
 
                 let innerHTML = '';
+                let selector = `.p-datatable[${attributeSelectorState}] > .p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
 
                 widths.forEach((width, index) => {
-                    let style = props.scrollable ? `flex: 1 1 ${width}px !important` : `width: ${width}px !important`;
+                    let style = `width: ${width}px !important; max-width: ${width}px !important`;
 
                     innerHTML += `
-                        .p-datatable[${attributeSelectorState}] .p-datatable-thead > tr > th:nth-child(${index + 1}),
-                        .p-datatable[${attributeSelectorState}] .p-datatable-tbody > tr > td:nth-child(${index + 1}),
-                        .p-datatable[${attributeSelectorState}] .p-datatable-tfoot > tr > td:nth-child(${index + 1}) {
+                        ${selector} > .p-datatable-thead > tr > th:nth-child(${index + 1}),
+                        ${selector} > .p-datatable-tbody > tr > td:nth-child(${index + 1}),
+                        ${selector} > .p-datatable-tfoot > tr > td:nth-child(${index + 1}) {
                             ${style}
                         }
                     `;
@@ -431,16 +436,16 @@ export const DataTable = React.forwardRef((props, ref) => {
 
     const getSelectionModeInColumn = (columns) => {
         if (columns) {
-            const col = columns.find((c) => !!c.props.selectionMode);
+            const col = columns.find((c) => !!getColumnProp(c, 'selectionMode'));
 
-            return col ? col.props.selectionMode : null;
+            return col ? getColumnProp(col, 'selectionMode') : null;
         }
 
         return null;
     };
 
     const findColumnByKey = (columns, key) => {
-        return ObjectUtils.isNotEmpty(columns) ? columns.find((col) => col.props.columnKey === key || col.props.field === key) : null;
+        return ObjectUtils.isNotEmpty(columns) ? columns.find((col) => getColumnProp(col, 'columnKey') === key || getColumnProp(col, 'field') === key) : null;
     };
 
     const getTotalRecords = (data) => {
@@ -560,15 +565,16 @@ export const DataTable = React.forwardRef((props, ref) => {
         createStyleElement();
 
         let innerHTML = '';
+        let selector = `.p-datatable[${attributeSelectorState}] > .p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
 
         widths.forEach((width, index) => {
             let colWidth = index === colIndex ? newColumnWidth : nextColumnWidth && index === colIndex + 1 ? nextColumnWidth : width;
-            let style = props.scrollable ? `flex: 1 1 ${colWidth}px !important` : `width: ${colWidth}px !important`;
+            let style = `width: ${colWidth}px !important; max-width: ${colWidth}px !important`;
 
             innerHTML += `
-                .p-datatable[${attributeSelectorState}] .p-datatable-thead > tr > th:nth-child(${index + 1}),
-                .p-datatable[${attributeSelectorState}] .p-datatable-tbody > tr > td:nth-child(${index + 1}),
-                .p-datatable[${attributeSelectorState}] .p-datatable-tfoot > tr > td:nth-child(${index + 1}) {
+                ${selector} > .p-datatable-thead > tr > th:nth-child(${index + 1}),
+                ${selector} > .p-datatable-tbody > tr > td:nth-child(${index + 1}),
+                ${selector} > .p-datatable-tfoot > tr > td:nth-child(${index + 1}) {
                     ${style}
                 }
             `;
@@ -702,7 +708,7 @@ export const DataTable = React.forwardRef((props, ref) => {
 
             if (allowDrop) {
                 let columns = getColumns();
-                let isSameColumn = (col1, col2) => (col1.props.columnKey || col2.props.columnKey ? ObjectUtils.equals(col1.props, col2.props, 'columnKey') : ObjectUtils.equals(col1.props, col2.props, 'field'));
+                let isSameColumn = (col1, col2) => (getColumnProp(col1, 'columnKey') || getColumnProp(col2, 'columnKey') ? ObjectUtils.equals(col1.props, col2.props, 'columnKey') : ObjectUtils.equals(col1.props, col2.props, 'field'));
                 let dragColIndex = columns.findIndex((child) => isSameColumn(child, draggedColumn.current));
                 let dropColIndex = columns.findIndex((child) => isSameColumn(child, column));
 
@@ -717,7 +723,7 @@ export const DataTable = React.forwardRef((props, ref) => {
                 ObjectUtils.reorderArray(columns, dragColIndex, dropColIndex);
 
                 const columnOrder = columns.reduce((orders, col) => {
-                    orders.push(col.props.columnKey || col.props.field);
+                    orders.push(getColumnProp(col, 'columnKey') || getColumnProp(col, 'field'));
 
                     return orders;
                 }, []);
@@ -751,31 +757,34 @@ export const DataTable = React.forwardRef((props, ref) => {
         if (!responsiveStyleElement.current) {
             responsiveStyleElement.current = DomHandler.createInlineStyle(PrimeReact.nonce);
 
+            let tableSelector = `.p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
+            let selector = `.p-datatable[${attributeSelectorState}] > ${tableSelector}`;
+            let gridLinesSelector = `.p-datatable[${attributeSelectorState}].p-datatable-gridlines > ${tableSelector}`;
             let innerHTML = `
 @media screen and (max-width: ${props.breakpoint}) {
-    .p-datatable[${attributeSelectorState}] .p-datatable-thead > tr > th,
-    .p-datatable[${attributeSelectorState}] .p-datatable-tfoot > tr > td {
+    ${selector} > .p-datatable-thead > tr > th,
+    ${selector} > .p-datatable-tfoot > tr > td {
         display: none !important;
     }
 
-    .p-datatable[${attributeSelectorState}] .p-datatable-tbody > tr > td {
+    ${selector} > .p-datatable-tbody > tr > td {
         display: flex;
         width: 100% !important;
         align-items: center;
         justify-content: space-between;
     }
 
-    .p-datatable[${attributeSelectorState}] .p-datatable-tbody > tr > td:not(:last-child) {
+    ${selector} > .p-datatable-tbody > tr > td:not(:last-child) {
         border: 0 none;
     }
 
-    .p-datatable[${attributeSelectorState}].p-datatable-gridlines .p-datatable-tbody > tr > td:last-child {
+    ${gridLinesSelector} > .p-datatable-tbody > tr > td:last-child {
         border-top: 0;
         border-right: 0;
         border-left: 0;
     }
 
-    .p-datatable[${attributeSelectorState}] .p-datatable-tbody > tr > td > .p-column-title {
+    ${selector} > .p-datatable-tbody > tr > td > .p-column-title {
         display: block;
     }
 }
@@ -812,13 +821,13 @@ export const DataTable = React.forwardRef((props, ref) => {
         clearEditingMetaData();
 
         const { originalEvent: event, column, sortableDisabledFields } = e;
-        let sortField = column.props.sortField || column.props.field;
+        let sortField = getColumnProp(column, 'sortField') || getColumnProp(column, 'field');
         let sortOrder = props.defaultSortOrder;
         let multiSortMeta;
         let eventMeta;
 
-        columnSortable.current = column.props.sortable;
-        columnSortFunction.current = column.props.sortFunction;
+        columnSortable.current = getColumnProp(column, 'sortable');
+        columnSortFunction.current = getColumnProp(column, 'sortFunction');
         columnField.current = sortField;
 
         if (props.sortMode === 'multiple') {
@@ -1006,7 +1015,7 @@ export const DataTable = React.forwardRef((props, ref) => {
         let globalFilterFieldsArray;
 
         if (isGlobalFilter) {
-            globalFilterFieldsArray = props.globalFilterFields || columns.filter((col) => !col.props.excludeGlobalFilter).map((col) => col.props.filterField || col.props.field);
+            globalFilterFieldsArray = props.globalFilterFields || columns.filter((col) => !getColumnProp(col, 'excludeGlobalFilter')).map((col) => getColumnProp(col, 'filterField') || getColumnProp(col, 'field'));
         }
 
         for (let i = 0; i < data.length; i++) {
@@ -1106,10 +1115,10 @@ export const DataTable = React.forwardRef((props, ref) => {
             const columns = getColumns();
 
             cloned = columns.reduce((filters, col) => {
-                const field = col.props.filterField || col.props.field;
-                const filterFunction = col.props.filterFunction;
-                const dataType = col.props.dataType;
-                const matchMode = col.props.filterMatchMode || (PrimeReact.filterMatchModeOptions[dataType] ? PrimeReact.filterMatchModeOptions[dataType][0] : FilterMatchMode.STARTS_WITH);
+                const field = getColumnProp(col, 'filterField') || getColumnProp(col, 'field');
+                const filterFunction = getColumnProp(col, 'filterFunction');
+                const dataType = getColumnProp(col, 'dataType');
+                const matchMode = getColumnProp(col, 'filterMatchMode') || (PrimeReact.filterMatchModeOptions[dataType] ? PrimeReact.filterMatchModeOptions[dataType][0] : FilterMatchMode.STARTS_WITH);
                 let constraint = { value: null, matchMode };
 
                 if (filterFunction) {
@@ -1175,7 +1184,7 @@ export const DataTable = React.forwardRef((props, ref) => {
 
         if (columns) {
             columnOrder = columns.reduce((orders, col) => {
-                orders.push(col.props.columnKey || col.props.field);
+                orders.push(getColumnProp(col, 'columnKey') || getColumnProp(col, 'field'));
 
                 return orders;
             }, []);
@@ -1197,10 +1206,14 @@ export const DataTable = React.forwardRef((props, ref) => {
 
         //headers
         columns.forEach((column, i) => {
-            const { field, header, exportable } = column.props;
+            const [field, header, exportable] = [getColumnProp(column, 'field'), getColumnProp(column, 'header'), getColumnProp(column, 'exportable')];
 
             if (exportable && field) {
-                csv += '"' + (header || field) + '"';
+                const columnHeader = String(header || field)
+                    .replace(/"/g, '""')
+                    .replace(/\n/g, '\u2028');
+
+                csv += '"' + columnHeader + '"';
 
                 if (i < columns.length - 1) {
                     csv += props.csvSeparator;
@@ -1212,14 +1225,18 @@ export const DataTable = React.forwardRef((props, ref) => {
         data.forEach((record) => {
             csv += '\n';
             columns.forEach((column, i) => {
-                const { field: colField, exportField, exportable } = column.props;
+                const [colField, exportField, exportable] = [getColumnProp(column, 'field'), getColumnProp(column, 'exportField'), getColumnProp(column, 'exportable')];
                 const field = exportField || colField;
 
                 if (exportable && field) {
                     let cellData = ObjectUtils.resolveFieldData(record, field);
 
                     if (cellData != null) {
-                        cellData = props.exportFunction ? props.exportFunction({ data: cellData, field, rowData: record, column }) : String(cellData).replace(/"/g, '""');
+                        if (props.exportFunction) {
+                            cellData = props.exportFunction({ data: cellData, field, rowData: record, column });
+                        } else {
+                            cellData = String(cellData).replace(/"/g, '""').replace(/\n/g, '\u2028');
+                        }
                     } else cellData = '';
 
                     csv += '"' + cellData + '"';
@@ -1262,11 +1279,11 @@ export const DataTable = React.forwardRef((props, ref) => {
                 const sortOrder = (localState && localState.sortOrder) || getSortOrder();
                 const multiSortMeta = (localState && localState.multiSortMeta) || getMultiSortMeta();
                 const columns = getColumns();
-                const sortColumn = columns.find((col) => col.props.field === sortField);
+                const sortColumn = columns.find((col) => getColumnProp(col, 'field') === sortField);
 
                 if (sortColumn) {
-                    columnSortable.current = sortColumn.props.sortable;
-                    columnSortFunction.current = sortColumn.props.sortFunction;
+                    columnSortable.current = getColumnProp(sortColumn, 'sortable');
+                    columnSortFunction.current = getColumnProp(sortColumn, 'sortFunction');
                 }
 
                 if (ObjectUtils.isNotEmpty(filters) || props.globalFilter) {
@@ -1294,7 +1311,7 @@ export const DataTable = React.forwardRef((props, ref) => {
     };
 
     useMountEffect(() => {
-        setAttributeSelectorState(UniqueComponentId());
+        !attributeSelectorState && setAttributeSelectorState(UniqueComponentId());
 
         setFiltersState(cloneFilters(props.filters));
         setD_filtersState(cloneFilters(props.filters));
@@ -1309,12 +1326,18 @@ export const DataTable = React.forwardRef((props, ref) => {
     });
 
     useUpdateEffect(() => {
-        elementRef.current.setAttribute(attributeSelectorState, '');
+        if (attributeSelectorState) {
+            elementRef.current.setAttribute(attributeSelectorState, '');
 
-        if (props.responsiveLayout === 'stack' && !props.scrollable) {
-            createResponsiveStyle();
+            if (props.responsiveLayout === 'stack' && !props.scrollable) {
+                createResponsiveStyle();
+            }
         }
-    }, [attributeSelectorState]);
+
+        return () => {
+            destroyResponsiveStyle();
+        };
+    }, [attributeSelectorState, props.breakpoint]);
 
     useUpdateEffect(() => {
         const filters = cloneFilters(props.filters);
@@ -1398,18 +1421,19 @@ export const DataTable = React.forwardRef((props, ref) => {
         return null;
     };
 
-    const createTableHeader = (options, empty) => {
+    const createTableHeader = (options, empty, _isVirtualScrollerDisabled) => {
         const sortField = getSortField();
         const sortOrder = getSortOrder();
         const multiSortMeta = [...getMultiSortMeta()];
         const groupRowSortField = getGroupRowSortField();
         const filters = d_filtersState;
         const filtersStore = (!props.onFilter && props.filters) || getFilters();
-        const { items: processedData, columns } = options;
+        const { items: processedData, props: virtualScrollerProps, columns } = options;
+        const data = _isVirtualScrollerDisabled || virtualScrollerProps.lazy ? processedData : virtualScrollerProps.items;
 
         return (
             <TableHeader
-                value={processedData}
+                value={data}
                 tableProps={props}
                 columns={columns}
                 tabIndex={props.tabIndex}
@@ -1447,13 +1471,13 @@ export const DataTable = React.forwardRef((props, ref) => {
 
     const createTableBody = (options, selectionModeInColumn, empty, isVirtualScrollerDisabled) => {
         const first = getFirst();
-        const { rows, columns, contentRef, className, itemSize } = options;
+        const { rows, columns, contentRef, style, className, spacerStyle, itemSize } = options;
 
         const frozenBody = ObjectUtils.isNotEmpty(props.frozenValue) && (
             <TableBody
                 ref={frozenBodyRef}
                 value={props.frozenValue}
-                className="p-datatable-frozen-tbody"
+                className="p-datatable-tbody p-datatable-frozen-tbody"
                 frozenRow
                 tableProps={props}
                 tableSelector={attributeSelectorState}
@@ -1526,7 +1550,8 @@ export const DataTable = React.forwardRef((props, ref) => {
             <TableBody
                 ref={bodyRef}
                 value={dataToRender(rows)}
-                className={className}
+                style={style}
+                className={classNames('p-datatable-tbody', className)}
                 empty={empty}
                 frozenRow={false}
                 tableProps={props}
@@ -1597,11 +1622,13 @@ export const DataTable = React.forwardRef((props, ref) => {
                 isVirtualScrollerDisabled={isVirtualScrollerDisabled}
             />
         );
+        const spacerBody = ObjectUtils.isNotEmpty(spacerStyle) ? <TableBody style={{ height: `calc(${spacerStyle.height} - ${rows.length * itemSize}px)` }} className="p-datatable-virtualscroller-spacer" /> : null;
 
         return (
             <>
                 {frozenBody}
                 {body}
+                {spacerBody}
             </>
         );
     };
@@ -1629,6 +1656,8 @@ export const DataTable = React.forwardRef((props, ref) => {
                     scrollHeight={props.scrollHeight !== 'flex' ? undefined : '100%'}
                     disabled={_isVirtualScrollerDisabled}
                     loaderDisabled
+                    inline
+                    autoSize
                     showSpacer={false}
                     contentTemplate={(options) => {
                         const ref = (el) => {
@@ -1636,8 +1665,16 @@ export const DataTable = React.forwardRef((props, ref) => {
                             options.spacerRef && options.spacerRef(el);
                         };
 
-                        const tableClassName = classNames('p-datatable-table', props.tableClassName);
-                        const tableHeader = createTableHeader(options, empty);
+                        const tableClassName = classNames(
+                            'p-datatable-table',
+                            {
+                                'p-datatable-scrollable-table': props.scrollable,
+                                'p-datatable-resizable-table': props.resizableColumns,
+                                'p-datatable-resizable-table-fit': props.resizableColumns && props.columnResizeMode === 'fit'
+                            },
+                            props.tableClassName
+                        );
+                        const tableHeader = createTableHeader(options, empty, _isVirtualScrollerDisabled);
                         const tableBody = createTableBody(options, selectionModeInColumn, empty, _isVirtualScrollerDisabled);
                         const tableFooter = createTableFooter(options);
 
@@ -1731,20 +1768,16 @@ export const DataTable = React.forwardRef((props, ref) => {
     const empty = ObjectUtils.isEmpty(data);
     const selectionModeInColumn = getSelectionModeInColumn(columns);
     const selectable = props.selectionMode || selectionModeInColumn;
-    const otherProps = ObjectUtils.findDiffKeys(props, DataTable.defaultProps);
+    const otherProps = DataTableBase.getOtherProps(props);
     const className = classNames(
         'p-datatable p-component',
         {
             'p-datatable-hoverable-rows': props.rowHover,
             'p-datatable-selectable': selectable && !props.cellSelection,
             'p-datatable-selectable-cell': selectable && props.cellSelection,
-            'p-datatable-auto-layout': props.autoLayout,
             'p-datatable-resizable': props.resizableColumns,
             'p-datatable-resizable-fit': props.resizableColumns && props.columnResizeMode === 'fit',
             'p-datatable-scrollable': props.scrollable,
-            'p-datatable-scrollable-vertical': props.scrollable && props.scrollDirection === 'vertical',
-            'p-datatable-scrollable-horizontal': props.scrollable && props.scrollDirection === 'horizontal',
-            'p-datatable-scrollable-both': props.scrollable && props.scrollDirection === 'both',
             'p-datatable-flex-scrollable': props.scrollable && props.scrollHeight === 'flex',
             'p-datatable-responsive-stack': props.responsiveLayout === 'stack',
             'p-datatable-responsive-scroll': props.responsiveLayout === 'scroll',
@@ -1782,137 +1815,3 @@ export const DataTable = React.forwardRef((props, ref) => {
 });
 
 DataTable.displayName = 'DataTable';
-DataTable.defaultProps = {
-    __TYPE: 'DataTable',
-    alwaysShowPaginator: true,
-    autoLayout: false,
-    breakpoint: '960px',
-    cellClassName: null,
-    cellSelection: false,
-    className: null,
-    collapsedRowIcon: 'pi pi-chevron-right',
-    columnResizeMode: 'fit',
-    compareSelectionBy: 'deepEquals',
-    contextMenuSelection: null,
-    csvSeparator: ',',
-    currentPageReportTemplate: '({currentPage} of {totalPages})',
-    customRestoreState: null,
-    customSaveState: null,
-    dataKey: null,
-    defaultSortOrder: 1,
-    dragSelection: false,
-    editMode: 'cell',
-    editingRows: null,
-    emptyMessage: null,
-    expandableRowGroups: false,
-    expandedRowIcon: 'pi pi-chevron-down',
-    expandedRows: null,
-    exportFilename: 'download',
-    exportFunction: null,
-    filterDelay: 300,
-    filterDisplay: 'menu',
-    filterLocale: undefined,
-    filters: null,
-    first: 0,
-    footer: null,
-    footerColumnGroup: null,
-    frozenValue: null,
-    frozenWidth: null,
-    globalFilter: null,
-    globalFilterFields: null,
-    globalFilterMatchMode: FilterMatchMode.CONTAINS,
-    groupRowsBy: null,
-    header: null,
-    headerColumnGroup: null,
-    id: null,
-    isDataSelectable: null,
-    lazy: false,
-    loading: false,
-    loadingIcon: 'pi pi-spinner',
-    metaKeySelection: true,
-    multiSortMeta: null,
-    onAllRowsSelect: null,
-    onAllRowsUnselect: null,
-    onCellClick: null,
-    onCellSelect: null,
-    onCellUnselect: null,
-    onColReorder: null,
-    onColumnResizeEnd: null,
-    onColumnResizerClick: null,
-    onColumnResizerDoubleClick: null,
-    onContextMenu: null,
-    onContextMenuSelectionChange: null,
-    onFilter: null,
-    onPage: null,
-    onRowClick: null,
-    onRowMouseEnter: null,
-    onRowMouseLeave: null,
-    onRowCollapse: null,
-    onRowDoubleClick: null,
-    onRowEditCancel: null,
-    onRowEditChange: null,
-    onRowEditComplete: null,
-    onRowEditInit: null,
-    onRowEditSave: null,
-    onRowExpand: null,
-    onRowReorder: null,
-    onRowSelect: null,
-    onRowToggle: null,
-    onRowUnselect: null,
-    onSelectAllChange: null,
-    onSelectionChange: null,
-    onSort: null,
-    onStateRestore: null,
-    onStateSave: null,
-    onValueChange: null,
-    pageLinkSize: 5,
-    paginator: false,
-    paginatorClassName: null,
-    paginatorDropdownAppendTo: null,
-    paginatorLeft: null,
-    paginatorPosition: 'bottom',
-    paginatorRight: null,
-    paginatorTemplate: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
-    removableSort: false,
-    reorderableColumns: false,
-    reorderableRows: false,
-    resizableColumns: false,
-    responsiveLayout: 'stack',
-    rowClassName: null,
-    rowEditValidator: null,
-    rowExpansionTemplate: null,
-    rowGroupFooterTemplate: null,
-    rowGroupHeaderTemplate: null,
-    rowGroupMode: null,
-    rowHover: false,
-    rows: null,
-    rowsPerPageOptions: null,
-    scrollDirection: 'vertical',
-    scrollHeight: null,
-    scrollable: false,
-    selectAll: false,
-    selectOnEdit: true,
-    selection: null,
-    selectionAriaLabel: null,
-    selectionAutoFocus: true,
-    selectionMode: null,
-    selectionPageOnly: false,
-    showGridlines: false,
-    showRowReorderElement: null,
-    showSelectAll: true,
-    showSelectionElement: null,
-    size: 'normal',
-    sortField: null,
-    sortMode: 'single',
-    sortOrder: null,
-    stateKey: null,
-    stateStorage: 'session',
-    stripedRows: false,
-    style: null,
-    tabIndex: 0,
-    tableClassName: null,
-    tableStyle: null,
-    totalRecords: null,
-    value: null,
-    virtualScrollerOptions: null
-};

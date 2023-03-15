@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { Button } from '../../lib/button/Button';
-import { ConfirmPopup, confirmPopup } from '../../lib/confirmpopup/ConfirmPopup';
+import { confirmPopup } from '../../lib/confirmpopup/ConfirmPopup';
 import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
@@ -40,16 +40,18 @@ export function BasicDoc(props) {
     const code = {
         basic: `
 <Toast ref={toast} />
-<ConfirmDialog />
-<Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
-<Button onClick={confirm2} icon="pi pi-times" label="Delete"></Button>
+<ConfirmPopup />
+<div className="card flex flex-wrap gap-2 justify-content-center">
+    <Button onClick={confirm1} icon="pi pi-check" label="Confirm"></Button>
+    <Button onClick={confirm2} icon="pi pi-times" label="Delete" className="p-button-danger p-button-outlined"></Button>
+</div>
         `,
         javascript: `
 import React, { useRef } from 'react';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { Toast } from 'primereact/toast';
 
-export default function BasicDoc() {
+export default function BasicDemo() {
     const toast = useRef(null);
 
     const accept = () => {
@@ -82,12 +84,14 @@ export default function BasicDoc() {
     };
 
     return (
-        <div className="card flex justify-content-center">
+        <>
             <Toast ref={toast} />
             <ConfirmPopup />
-            <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
-            <Button onClick={confirm2} icon="pi pi-times" label="Delete" className="p-button-danger p-button-outlined"></Button>
-        </div>
+            <div className="card flex flex-wrap gap-2 justify-content-center">
+                <Button onClick={confirm1} icon="pi pi-check" label="Confirm"></Button>
+                <Button onClick={confirm2} icon="pi pi-times" label="Delete" className="p-button-danger p-button-outlined"></Button>
+            </div>
+        </>
     )
 }
         `,
@@ -96,7 +100,7 @@ import React, { useRef } from 'react';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { Toast } from 'primereact/toast';
 
-export default function BasicDoc() {
+export default function BasicDemo() {
     const toast = useRef<Toast>(null);
 
     const accept = () => {
@@ -128,14 +132,15 @@ export default function BasicDoc() {
         });
     };
 
-
     return ( 
-        <div className="card flex justify-content-center">
+        <>
             <Toast ref={toast} />
             <ConfirmPopup />
-            <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
-            <Button onClick={confirm2} icon="pi pi-times" label="Delete" className="p-button-danger p-button-outlined"></Button>
-        </div>
+            <div className="card flex flex-wrap gap-2 justify-content-center">
+                <Button onClick={confirm1} icon="pi pi-check" label="Confirm"></Button>
+                <Button onClick={confirm2} icon="pi pi-times" label="Delete" className="p-button-danger p-button-outlined"></Button>
+            </div>
+        </>
     )
 }
         `
@@ -145,14 +150,13 @@ export default function BasicDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    There are two ways to display confirm popup. One of them is to use the confirmPopup method and the other is to use the <i>&lt;ConfirmPopup&gt;</i> tag. These independently create popup element. It supports the same properties in
-                    both. target property is mandatory to align the popup to its caller.
+                    A ConfirmPopup component needs to be present on the page that is interacted with the <i>confirmPopup</i> function that takes a configuration object for customization. In order to align the popover, <i>target</i> property must be
+                    provided referring to the source element.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <Toast ref={toast} />
-                <ConfirmPopup />
-                <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
+            <Toast ref={toast} />
+            <div className="card flex flex-wrap gap-2 justify-content-center">
+                <Button onClick={confirm1} icon="pi pi-check" label="Confirm"></Button>
                 <Button onClick={confirm2} icon="pi pi-times" label="Delete" className="p-button-danger p-button-outlined"></Button>
             </div>
             <DocSectionCode code={code} />

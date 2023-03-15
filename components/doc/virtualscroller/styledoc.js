@@ -1,38 +1,46 @@
-import { DocSubSection } from '../common/docsubsection';
 import Link from 'next/link';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function StyleDoc() {
     return (
         <>
-            <DocSubSection id="style" label="Style">
+            <DocSectionText id="style" label="Style">
                 <p>
                     Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.
                 </p>
-                <div className="doc-tablewrapper">
-                    <table className="doc-table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Element</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>p-virtualscroller</td>
-                                <td>Container element.</td>
-                            </tr>
-                            <tr>
-                                <td>p-virtualscroller-content</td>
-                                <td>Content element.</td>
-                            </tr>
-                            <tr>
-                                <td>p-virtualscroller-loader</td>
-                                <td>Loader element.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </DocSubSection>
+            </DocSectionText>
+            <div className="doc-tablewrapper">
+                <table className="doc-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Element</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>p-virtualscroller</td>
+                            <td>Container element.</td>
+                        </tr>
+                        <tr>
+                            <td>p-virtualscroller-content</td>
+                            <td>Content element.</td>
+                        </tr>
+                        <tr>
+                            <td>p-virtualscroller-loader</td>
+                            <td>Loader element.</td>
+                        </tr>
+                        <tr>
+                            <td>p-virtualscroller-both</td>
+                            <td>Container element when horizontal and vertical scrolling enabled.</td>
+                        </tr>
+                        <tr>
+                            <td>p-virtualscroller-horizontal</td>
+                            <td>Container element when horizontal orientation.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </>
     );
 }

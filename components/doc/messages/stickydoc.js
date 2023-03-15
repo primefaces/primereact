@@ -24,14 +24,13 @@ useEffect(() => {
         { sticky: true, severity: 'warn', summary: 'Warning', detail: 'Message Content', closable: false },
         { sticky: true, severity: 'error', summary: 'Error', detail: 'Message Content', closable: false }
     ]);
-}, []); // eslint-disable-line react-hooks/exhaustive-deps
-<Messages ref={msgs} />
+}, []);
         `,
         javascript: `
 import React, { useEffect, useRef } from 'react'; 
 import { Messages } from 'primereact/messages';
 
-export default function StickyDoc() {
+export default function StickyDemo() {
     const msgs = useRef(null);
 
     useEffect(() => {
@@ -41,7 +40,7 @@ export default function StickyDoc() {
             { sticky: true, severity: 'warn', summary: 'Warning', detail: 'Message Content', closable: false },
             { sticky: true, severity: 'error', summary: 'Error', detail: 'Message Content', closable: false }
         ]);
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div className="card">
@@ -54,7 +53,7 @@ export default function StickyDoc() {
 import React, { useEffect, useRef } from 'react'; 
 import { Messages } from 'primereact/messages';
 
-export default function StickyDoc() {
+export default function StickyDemo() {
     const msgs = useRef(null);
 
     useEffect(() => {
@@ -64,7 +63,7 @@ export default function StickyDoc() {
             { sticky: true, severity: 'warn', summary: 'Warning', detail: 'Message Content', closable: false },
             { sticky: true, severity: 'error', summary: 'Error', detail: 'Message Content', closable: false }
         ]);
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div className="card">
@@ -78,8 +77,9 @@ export default function StickyDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                {/* TO DO: Add demo content. */}
-                <p></p>
+                <p>
+                    A message disappears after 3000ms defined the <i>life</i> option, set <i>sticky</i> option to displays message that do not hide automatically.
+                </p>
             </DocSectionText>
             <div className="card ">
                 <Messages ref={msgs} />

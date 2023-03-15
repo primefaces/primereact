@@ -58,6 +58,7 @@ export const MultiSelectPanel = React.memo(
                     selectAll={props.isAllSelected()}
                     onSelectAll={props.onSelectAll}
                     template={props.panelHeaderTemplate}
+                    resetFilter={props.resetFilter}
                 />
             );
         };
@@ -173,7 +174,7 @@ export const MultiSelectPanel = React.memo(
                             const content = isEmptyFilter() ? createEmptyFilter() : options.children;
 
                             return (
-                                <ul ref={options.contentRef} className={className} role="listbox" aria-multiselectable>
+                                <ul ref={options.contentRef} style={options.style} className={className} role="listbox" aria-multiselectable>
                                     {content}
                                 </ul>
                             );

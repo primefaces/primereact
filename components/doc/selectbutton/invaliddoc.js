@@ -4,39 +4,39 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function InvalidDoc(props) {
-    const [value, setValue] = useState('Off');
     const options = ['Off', 'On'];
+    const [value, setValue] = useState(options[0]);
 
     const code = {
         basic: `
-<SelectButton className="p-invalid" value={value} options={options} onChange={(e) => setValue(e.value)} />
+<SelectButton value={value} onChange={(e) => setValue(e.value)} options={options} className="p-invalid" />
         `,
         javascript: `
 import React, { useState } from "react";
 import { SelectButton } from 'primereact/selectbutton';
 
-export default function InvalidDoc() {
-    const [value, setValue] = useState('Off');
+export default function InvalidDemo() {
     const options = ['Off', 'On'];
+    const [value, setValue] = useState(options[0]);
 
     return (
         <div className="card flex justify-content-center">
-            <SelectButton className="p-invalid" value={value} options={options} onChange={(e) => setValue(e.value)} />
+            <SelectButton value={value} onChange={(e) => setValue(e.value)} options={options} className="p-invalid" />
         </div>
     );
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { SelectButton, SelectButtonChangeParams } from 'primereact/selectbutton';
+import { SelectButton, SelectButtonChangeEvent } from 'primereact/selectbutton';
 
-export default function InvalidDoc() {
-    const [value, setValue] = useState<string>('Off');
-    const options = ['Off', 'On'];
+export default function InvalidDemo() {
+    const options: string[] = ['Off', 'On'];
+    const [value, setValue] = useState<string>(options[0]);
 
     return (
         <div className="card flex justify-content-center">
-            <SelectButton className="p-invalid" value={value} options={options} onChange={(e) => setValue(e.value)} />
+            <SelectButton value={value} onChange={(e: SelectButtonChangeEvent) => setValue(e.value)} options={options} className="p-invalid" />
         </div>
     );
 }
@@ -47,11 +47,11 @@ export default function InvalidDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Applying <i>p-invalid</i> class to an input element indicates a failed validation.
+                    Invalid state style is added using the <i>p-invalid</i> class to indicate a failed validation.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <SelectButton className="p-invalid" value={value} options={options} onChange={(e) => setValue(e.value)} />
+                <SelectButton value={value} onChange={(e) => setValue(e.value)} options={options} className="p-invalid" />
             </div>
             <DocSectionCode code={code} />
         </>

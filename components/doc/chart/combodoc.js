@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Chart } from '../../lib/chart/Chart';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function ComboDoc(props) {
     const [chartData, setChartData] = useState({});
@@ -12,7 +12,6 @@ export function ComboDoc(props) {
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
         const data = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [
@@ -41,9 +40,6 @@ export function ComboDoc(props) {
                 }
             ]
         };
-
-        setChartData(data);
-
         const options = {
             maintainAspectRatio: false,
             aspectRatio: 0.6,
@@ -74,6 +70,7 @@ export function ComboDoc(props) {
             }
         };
 
+        setChartData(data);
         setChartOptions(options);
     }, []);
 
@@ -85,7 +82,7 @@ export function ComboDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
-export default function ComboDoc() {
+export default function ComboDemo() {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
@@ -94,7 +91,6 @@ export default function ComboDoc() {
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
         const data = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [
@@ -123,9 +119,6 @@ export default function ComboDoc() {
                 }
             ]
         };
-
-        setChartData(data);
-
         const options = {
             maintainAspectRatio: false,
             aspectRatio: 0.6,
@@ -156,6 +149,7 @@ export default function ComboDoc() {
             }
         };
 
+        setChartData(data);
         setChartOptions(options);
     }, []);
     
@@ -170,7 +164,7 @@ export default function ComboDoc() {
 import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
-export default function ComboDoc() {
+export default function ComboDemo() {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
@@ -179,7 +173,6 @@ export default function ComboDoc() {
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
         const data = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [
@@ -208,9 +201,6 @@ export default function ComboDoc() {
                 }
             ]
         };
-
-        setChartData(data);
-
         const options = {
             maintainAspectRatio: false,
             aspectRatio: 0.6,
@@ -241,6 +231,7 @@ export default function ComboDoc() {
             }
         };
 
+        setChartData(data);
         setChartOptions(options);
     }, []);
 
@@ -256,7 +247,9 @@ export default function ComboDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Different chart types can be combined in the same graph.</p>
+                <p>
+                    Different chart types can be combined in the same graph usign the <i>type</i> option of a dataset.
+                </p>
             </DocSectionText>
             <div className="card">
                 <Chart type="bar" data={chartData} options={chartOptions} />

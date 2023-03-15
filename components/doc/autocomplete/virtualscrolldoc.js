@@ -62,7 +62,7 @@ export default function VirtualScrollerDemo() {
         `,
         typescript: `
 import React, { useState } from "react";
-import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
+import { AutoComplete, AutoCompleteCompleteEvent } from "primereact/autocomplete";
 
 interface Item {
     label: string;
@@ -74,7 +74,7 @@ export default function VirtualScrollerDemo() {
     const [filteredItems, setFilteredItems] = useState<Item[]>(null);
     const items = Array.from({ length: 100000 }).map((_, i) => ({ label: \`Item #\${i}\`, value: i }));
 
-    const searchItems = (event: AutoCompleteCompleteMethodParams) => {
+    const searchItems = (event: AutoCompleteCompleteEvent) => {
         //in a real application, make a request to a remote url with the query and return filtered results, for demo purposes we filter at client side
         let query = event.query;
         let _filteredItems = [];
@@ -91,7 +91,7 @@ export default function VirtualScrollerDemo() {
 
     return (
         <AutoComplete value={selectedItem} suggestions={filteredItems} completeMethod={searchItems}
-            virtualScrollerOptions={{ itemSize: 38 }} field="label" dropdown onChange={(e: AutoCompleteChangeParams) => setSelectedItem(e.value)} />
+            virtualScrollerOptions={{ itemSize: 38 }} field="label" dropdown onChange={(e: AutoCompleteChangeEvent) => setSelectedItem(e.value)} />
     )
 }
         `

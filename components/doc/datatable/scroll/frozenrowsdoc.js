@@ -6,17 +6,12 @@ import { DataTable } from '../../../lib/datatable/DataTable';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 
-export function ScrollFrozenRowsDoc(props) {
+export function FrozenRowsDoc(props) {
+    const [customers, setCustomers] = useState([]);
     const [lockedCustomers, setLockedCustomers] = useState([]);
-    const [unlockedCustomers, setUnlockedCustomers] = useState(null);
-    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        setLoading(true);
-
-        CustomerService.getCustomersMedium().then((data) => {
-            setUnlockedCustomers(data);
-        });
+        CustomerService.getCustomersMedium().then((data) => setCustomers(data));
 
         setLockedCustomers([
             {
@@ -36,7 +31,6 @@ export function ScrollFrozenRowsDoc(props) {
                 }
             }
         ]);
-        setLoading(false);
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const lockTemplate = (rowData, options) => {
@@ -51,9 +45,9 @@ export function ScrollFrozenRowsDoc(props) {
 
         if (frozen) {
             _lockedCustomers = lockedCustomers.filter((c, i) => i !== index);
-            _unlockedCustomers = [...unlockedCustomers, data];
+            _unlockedCustomers = [...customers, data];
         } else {
-            _unlockedCustomers = unlockedCustomers.filter((c, i) => i !== index);
+            _unlockedCustomers = customers.filter((c, i) => i !== index);
             _lockedCustomers = [...lockedCustomers, data];
         }
 
@@ -62,16 +56,16 @@ export function ScrollFrozenRowsDoc(props) {
         });
 
         setLockedCustomers(_lockedCustomers);
-        setUnlockedCustomers(_unlockedCustomers);
+        setCustomers(_unlockedCustomers);
     };
 
     const code = {
         basic: `
-<DataTable value={unlockedCustomers} frozenValue={lockedCustomers} scrollable scrollHeight="400px" loading={loading}>
-    <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
-    <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
-    <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
-    <Column field="status" header="Status" style={{ minWidth: '200px' }}></Column>
+<DataTable value={customers} frozenValue={lockedCustomers} scrollable scrollHeight="400px" tableStyle={{ minWidth: '50rem' }}>
+    <Column field="name" header="Name"></Column>
+    <Column field="country.name" header="Country"></Column>
+    <Column field="representative.name" header="Representative"></Column>
+    <Column field="status" header="Status"></Column>
     <Column style={{ flex: '0 0 4rem' }} body={lockTemplate}></Column>
 </DataTable>
         `,
@@ -81,20 +75,13 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { CustomerService } from './service/CustomerService';
-import './DataTableDemo.css';
 
-const ScrollFrozenRowsDoc = () => {
+export default function FrozenRowsDemo() {
+    const [customers, setCustomers] = useState([]);
     const [lockedCustomers, setLockedCustomers] = useState([]);
-    const [unlockedCustomers, setUnlockedCustomers] = useState(null);
-    const [loading, setLoading] = useState(false);
-    
 
     useEffect(() => {
-        setLoading(true);
-
-        CustomerService.getCustomersMedium().then((data) => {
-            setUnlockedCustomers(data);
-        });
+        CustomerService.getCustomersMedium().then((data) => setCustomers(data));
 
         setLockedCustomers([
             {
@@ -114,8 +101,7 @@ const ScrollFrozenRowsDoc = () => {
                 }
             }
         ]);
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
+    }, []);
 
     const lockTemplate = (rowData, options) => {
         const icon = options.frozenRow ? 'pi pi-lock' : 'pi pi-lock-open';
@@ -129,9 +115,9 @@ const ScrollFrozenRowsDoc = () => {
 
         if (frozen) {
             _lockedCustomers = lockedCustomers.filter((c, i) => i !== index);
-            _unlockedCustomers = [...unlockedCustomers, data];
+            _unlockedCustomers = [...customers, data];
         } else {
-            _unlockedCustomers = unlockedCustomers.filter((c, i) => i !== index);
+            _unlockedCustomers = customers.filter((c, i) => i !== index);
             _lockedCustomers = [...lockedCustomers, data];
         }
 
@@ -140,16 +126,16 @@ const ScrollFrozenRowsDoc = () => {
         });
 
         setLockedCustomers(_lockedCustomers);
-        setUnlockedCustomers(_unlockedCustomers);
+        setCustomers(_unlockedCustomers);
     };
 
     return (
         <div className="card">
-            <DataTable value={unlockedCustomers} frozenValue={lockedCustomers} scrollable scrollHeight="400px" loading={loading}>
-                <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
-                <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
-                <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
-                <Column field="status" header="Status" style={{ minWidth: '200px' }}></Column>
+            <DataTable value={customers} frozenValue={lockedCustomers} scrollable scrollHeight="400px" tableStyle={{ minWidth: '50rem' }}>
+                <Column field="name" header="Name"></Column>
+                <Column field="country.name" header="Country"></Column>
+                <Column field="representative.name" header="Representative"></Column>
+                <Column field="status" header="Status"></Column>
                 <Column style={{ flex: '0 0 4rem' }} body={lockTemplate}></Column>
             </DataTable>
         </div>
@@ -159,23 +145,29 @@ const ScrollFrozenRowsDoc = () => {
         typescript: `
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
+import { Column, ColumnBodyOptions } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { CustomerService } from './service/CustomerService';
-import './DataTableDemo.css';
 
-const ScrollFrozenRowsDoc = () => {
-    const [lockedCustomers, setLockedCustomers] = useState([]);
-    const [unlockedCustomers, setUnlockedCustomers] = useState(null);
-    const [loading, setLoading] = useState(false);
-    
+interface Customer {
+    id: number;
+    name: string;
+    country: Country;
+    company: string;
+    date: string;
+    status: string;
+    verified: boolean;
+    activity: number;
+    representative: Representative;
+    balance: number;
+}
+
+export default function FrozenRowsDemo() {
+    const [customers, setCustomers] = useState<Customer[]>([]);
+    const [lockedCustomers, setLockedCustomers] = useState<Customer[]>([]);
 
     useEffect(() => {
-        setLoading(true);
-
-        CustomerService.getCustomersMedium().then((data) => {
-            setUnlockedCustomers(data);
-        });
+        CustomerService.getCustomersMedium().then((data) => setCustomers(data));
 
         setLockedCustomers([
             {
@@ -195,24 +187,23 @@ const ScrollFrozenRowsDoc = () => {
                 }
             }
         ]);
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
-
-    const lockTemplate = (rowData, options) => {
+    const lockTemplate = (rowData: Customer, options: ColumnBodyOptions) => {
         const icon = options.frozenRow ? 'pi pi-lock' : 'pi pi-lock-open';
         const disabled = options.frozenRow ? false : lockedCustomers.length >= 2;
 
         return <Button type="button" icon={icon} disabled={disabled} className="p-button-sm p-button-text" onClick={() => toggleLock(rowData, options.frozenRow, options.rowIndex)} />;
     };
 
-    const toggleLock = (data, frozen, index) => {
+    const toggleLock = (data: Customer, frozen: boolean, index: number) => {
         let _lockedCustomers, _unlockedCustomers;
 
         if (frozen) {
             _lockedCustomers = lockedCustomers.filter((c, i) => i !== index);
-            _unlockedCustomers = [...unlockedCustomers, data];
+            _unlockedCustomers = [...customers, data];
         } else {
-            _unlockedCustomers = unlockedCustomers.filter((c, i) => i !== index);
+            _unlockedCustomers = customers.filter((c, i) => i !== index);
             _lockedCustomers = [...lockedCustomers, data];
         }
 
@@ -221,34 +212,23 @@ const ScrollFrozenRowsDoc = () => {
         });
 
         setLockedCustomers(_lockedCustomers);
-        setUnlockedCustomers(_unlockedCustomers);
+        setCustomers(_unlockedCustomers);
     };
 
     return (
         <div className="card">
-            <DataTable value={unlockedCustomers} frozenValue={lockedCustomers} scrollable scrollHeight="400px" loading={loading}>
-                <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
-                <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
-                <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
-                <Column field="status" header="Status" style={{ minWidth: '200px' }}></Column>
+            <DataTable value={customers} frozenValue={lockedCustomers} scrollable scrollHeight="400px" tableStyle={{ minWidth: '50rem' }}>
+                <Column field="name" header="Name"></Column>
+                <Column field="country.name" header="Country"></Column>
+                <Column field="representative.name" header="Representative"></Column>
+                <Column field="status" header="Status"></Column>
                 <Column style={{ flex: '0 0 4rem' }} body={lockTemplate}></Column>
             </DataTable>
         </div>
     );
 }
         `,
-        css: `
-/* DataTableDemo.css */
-.datatable-scroll-demo .p-datatable-frozen-tbody {
-    font-weight: bold;
-}
-
-.datatable-scroll-demo .p-datatable-scrollable .p-frozen-column {
-    font-weight: bold;
-}
-        `,
         data: `
-/* CustomerService */ 
 {
     id: 1000,
     name: 'James Butt',
@@ -274,14 +254,16 @@ const ScrollFrozenRowsDoc = () => {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Frozen Rows demo content.</p>
+                <p>
+                    Rows can be fixed during scrolling by enabling the <i>frozenValue</i> property.
+                </p>
             </DocSectionText>
             <div className="card">
-                <DataTable value={unlockedCustomers} frozenValue={lockedCustomers} scrollable scrollHeight="400px" loading={loading}>
-                    <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
-                    <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
-                    <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
-                    <Column field="status" header="Status" style={{ minWidth: '200px' }}></Column>
+                <DataTable value={customers} frozenValue={lockedCustomers} scrollable scrollHeight="400px" tableStyle={{ minWidth: '50rem' }}>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="country.name" header="Country"></Column>
+                    <Column field="representative.name" header="Representative"></Column>
+                    <Column field="status" header="Status"></Column>
                     <Column style={{ flex: '0 0 4rem' }} body={lockTemplate}></Column>
                 </DataTable>
             </div>

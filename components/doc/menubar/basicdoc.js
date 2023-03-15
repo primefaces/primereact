@@ -1,4 +1,4 @@
-import { Menu } from '../../lib/menu/Menu';
+import { Menubar } from '../../lib/menubar/Menubar';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
@@ -110,7 +110,7 @@ export function BasicDoc(props) {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -129,14 +129,14 @@ export function BasicDoc(props) {
 
     const code = {
         basic: `
-<Menu model={items}/>    
+<Menubar model={items} />    
 `,
         javascript: `
 import React from 'react'; 
-import { Menu } from 'primereact/menu';
+import { Menubar } from 'primereact/menubar';
 
-export default function BasicDoc() {
-const items = [
+export default function BasicDemo() {
+    const items = [
         {
             label: 'File',
             icon: 'pi pi-fw pi-file',
@@ -247,7 +247,7 @@ const items = [
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -265,16 +265,19 @@ const items = [
     ];
 
     return (
-        <Menu model={items}/>
+        <div className="card">
+            <Menubar model={items} />
+        </div>
     )
 }
         `,
         typescript: `
 import React from 'react'; 
-import { Menu } from 'primereact/menu';
+import { Menubar } from 'primereact/menubar';
+import { MenuItem } from 'primereact/menuitem';
 
-export default function BasicDoc() {
-const items = [
+export default function BasicDemo() {
+    const items: MenuItem[] = [
         {
             label: 'File',
             icon: 'pi pi-fw pi-file',
@@ -385,7 +388,7 @@ const items = [
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -403,7 +406,9 @@ const items = [
     ];
     
     return (
-        <Menu model={items}/>
+        <div className="card">
+            <Menubar model={items} />
+        </div>
     )
 }
         `
@@ -412,10 +417,12 @@ const items = [
     return (
         <>
             <DocSectionText {...props}>
-                <p>Menu requires a collection of menuitems as its model.</p>
+                <p>
+                    Menubar requires a collection of menuitems as its <i>model</i>.
+                </p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <Menu model={items} />
+            <div className="card relative z-2">
+                <Menubar model={items} />
             </div>
             <DocSectionCode code={code} />
         </>

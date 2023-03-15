@@ -8,32 +8,32 @@ export function MultipleMonthsDoc(props) {
 
     const code = {
         basic: `
-<Calendar id="multiplemonths" value={date} onChange={(e) => setDate(e.value)} numberOfMonths={3}/>
+<Calendar value={date} onChange={(e) => setDate(e.value)} numberOfMonths={2} />
         `,
         javascript: `
 import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
-export default function MultipleMonthsDoc() {
+export default function MultipleMonthsDemo() {
     const [date, setDate] = useState(null);
 
     return (
         <div className="card flex justify-content-center">
-            <Calendar id="multiplemonths" value={date} onChange={(e) => setDate(e.value)} numberOfMonths={3}/>
+            <Calendar value={date} onChange={(e) => setDate(e.value)} numberOfMonths={2} />
         </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { Calendar, CalendarChangeParams } from 'primereact/calendar';
+import { Calendar, CalendarChangeEvent } from 'primereact/calendar';
 
-export default function MultipleMonthsDoc() {
+export default function MultipleMonthsDemo() {
     const [date, setDate] = useState<Date | null>(null);
 
     return (
         <div className="card flex justify-content-center">
-            <Calendar id="multiplemonths" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} numberOfMonths={3}/>
+            <Calendar value={date} onChange={(e : CalendarChangeEvent) => setDate(e.value)} numberOfMonths={2} />
         </div>
     )
 }
@@ -43,10 +43,12 @@ export default function MultipleMonthsDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Number of months to display. </p>
+                <p>
+                    Number of months to display is configured with the <i>numberOfMonths</i> property.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Calendar id="multiplemonths" value={date} onChange={(e) => setDate(e.value)} numberOfMonths={3} />
+                <Calendar value={date} onChange={(e) => setDate(e.value)} numberOfMonths={2} />
             </div>
             <DocSectionCode code={code} />
         </>

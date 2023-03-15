@@ -96,6 +96,3 @@ export const Ripple = React.memo(
 );
 
 Ripple.displayName = 'Ripple';
-Ripple.defaultProps = {
-    __TYPE: 'Ripple'
-};

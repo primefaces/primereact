@@ -1,9 +1,9 @@
-import { DocSubSection } from '../common/docsubsection';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function StyleDoc() {
     return (
         <>
-            <DocSubSection id="style" label="Style">
+            <DocSectionText id="style" label="Style">
                 <div className="doc-tablewrapper">
                     <table className="doc-table">
                         <thead>
@@ -28,7 +28,7 @@ export function StyleDoc() {
                         </tbody>
                     </table>
                 </div>
-            </DocSubSection>
+            </DocSectionText>
         </>
     );
 }

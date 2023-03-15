@@ -14,23 +14,27 @@ export function BasicDoc(props) {
 import React, { useState } from "react";
 import { InputMask } from "primereact/inputmask";
 
-export default function BasicDoc() {
+export default function BasicDemo() {
     const [value, setValue] = useState('');
 
     return (
-        <InputMask value={value} onChange={(e) => setValue(e.target.value)} mask="99-999999" placeholder="99-999999"/>
+        <div className="card flex justify-content-center">
+            <InputMask value={value} onChange={(e) => setValue(e.target.value)} mask="99-999999" placeholder="99-999999"/>
+        </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { InputMask, InputMaskChangeParams } from "primereact/inputmask";
+import { InputMask, InputMaskChangeEvent } from "primereact/inputmask";
 
-export default function BasicDoc() {
+export default function BasicDemo() {
     const [value, setValue] = useState<string>('');
 
     return (
-        <InputMask value={value} onChange={(e: InputMaskChangeParams) => setValue(e.target.value)} mask="99-999999" placeholder="99-999999"/>
+        <div className="card flex justify-content-center">
+            <InputMask value={value} onChange={(e: InputMaskChangeEvent) => setValue(e.target.value)} mask="99-999999" placeholder="99-999999"/>
+        </div>
     )
 }
         `
@@ -40,7 +44,7 @@ export default function BasicDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    InputMask is used as a controlled input with <i>value</i> and <i>onChange</i> properties, <i>mask</i> property is required to define the mask of the input.
+                    InputMask is used as a controlled input with <i>value</i> and <i>onChange</i> properties along with the <i>mask</i> property to define the mask.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">

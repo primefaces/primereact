@@ -1,5 +1,4 @@
 import { useRef } from 'react';
-import { flushSync } from 'react-dom';
 import { Button } from '../../lib/button/Button';
 import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
@@ -14,37 +13,25 @@ export function MultipleDoc(props) {
 
     const showMultiple = () => {
         toast.current.show([
-            { severity: 'success', summary: 'Message 1', detail: 'Message 1 Content', life: 3000 },
-            { severity: 'info', summary: 'Message 2', detail: 'Message 2 Content', life: 3050 },
-            { severity: 'warn', summary: 'Message 3', detail: 'Message 3 Content', life: 3100 },
-            { severity: 'error', summary: 'Message 4', detail: 'Message 4 Content', life: 3150 }
+            { severity: 'success', summary: 'Success', detail: 'Message Content', life: 3000 },
+            { severity: 'info', summary: 'Info', detail: 'Message Content', life: 3050 },
+            { severity: 'warn', summary: 'Warning', detail: 'Message Content', life: 3100 },
+            { severity: 'error', summary: 'Error', detail: 'Message Content', life: 3150 }
         ]);
-    };
-
-    const showConcurrent = () => {
-        // if for some reason you need to call .show() inside the same hook from different locations
-        flushSync(() => {
-            toast.current.show([{ severity: 'success', summary: 'Message 1', detail: 'Message 1 Content', life: 3000 }]);
-        });
-        flushSync(() => {
-            toast.current.show([{ severity: 'info', summary: 'Message 2', detail: 'Message 2 Content', life: 3050 }]);
-        });
     };
 
     const code = {
         basic: `
 <Toast ref={toast} />
 <Button onClick={showMultiple} label="Multiple" className="p-button-warning" />
-<Button onClick={showConcurrent} label="Concurrent" className="p-button-success" />
 <Button onClick={clear} label="Clear" />
         `,
         javascript: `
 import React, { useRef } from 'react';
-import { flushSync } from 'react-dom';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
-export default function MultipleDoc() {
+export default function MultipleDemo() {
     const toast = useRef(null);
 
     const clear = () => {
@@ -53,28 +40,17 @@ export default function MultipleDoc() {
 
     const showMultiple = () => {
         toast.current.show([
-            { severity: 'success', summary: 'Message 1', detail: 'Message 1 Content', life: 3000 },
-            { severity: 'info', summary: 'Message 2', detail: 'Message 2 Content', life: 3050 },
-            { severity: 'warn', summary: 'Message 3', detail: 'Message 3 Content', life: 3100 },
-            { severity: 'error', summary: 'Message 4', detail: 'Message 4 Content', life: 3150 }
+            { severity: 'success', summary: 'Success', detail: 'Message Content', life: 3000 },
+            { severity: 'info', summary: 'Info', detail: 'Message Content', life: 3050 },
+            { severity: 'warn', summary: 'Warning', detail: 'Message Content', life: 3100 },
+            { severity: 'error', summary: 'Error', detail: 'Message Content', life: 3150 }
         ]);
     };
 
-    const showConcurrent = () => {
-        // if for some reason you need to call .show() inside the same hook from different locations
-        flushSync(() => {
-            toast.current.show([{ severity: 'success', summary: 'Message 1', detail: 'Message 1 Content', life: 3000 }]);
-        });
-        flushSync(() => {
-            toast.current.show([{ severity: 'info', summary: 'Message 2', detail: 'Message 2 Content', life: 3050 }]);
-        });
-    };
-
     return (
-        <div className="card flex justify-content-center align-items-center gap-2">
+        <div className="card flex justify-content-center gap-2">
             <Toast ref={toast} />
             <Button onClick={showMultiple} label="Multiple" className="p-button-warning" />
-            <Button onClick={showConcurrent} label="Concurrent" className="p-button-success" />
             <Button onClick={clear} label="Clear" />
         </div>
     )
@@ -86,7 +62,7 @@ import { flushSync } from 'react-dom';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
-export default function MultipleDoc() {
+export default function MultipleDemo() {
     const toast = useRef<Toast>(null);
 
     const clear = () => {
@@ -95,28 +71,17 @@ export default function MultipleDoc() {
 
     const showMultiple = () => {
         toast.current?.show([
-            { severity: 'success', summary: 'Message 1', detail: 'Message 1 Content', life: 3000 },
-            { severity: 'info', summary: 'Message 2', detail: 'Message 2 Content', life: 3050 },
-            { severity: 'warn', summary: 'Message 3', detail: 'Message 3 Content', life: 3100 },
-            { severity: 'error', summary: 'Message 4', detail: 'Message 4 Content', life: 3150 }
+            { severity: 'success', summary: 'Success', detail: 'Message Content', life: 3000 },
+            { severity: 'info', summary: 'Info', detail: 'Message Content', life: 3050 },
+            { severity: 'warn', summary: 'Warning', detail: 'Message Content', life: 3100 },
+            { severity: 'error', summary: 'Error', detail: 'Message Content', life: 3150 }
         ]);
     };
 
-    const showConcurrent = () => {
-        // if for some reason you need to call .show() inside the same hook from different locations
-        flushSync(() => {
-            toast.current?.show([{ severity: 'success', summary: 'Message 1', detail: 'Message 1 Content', life: 3000 }]);
-        });
-        flushSync(() => {
-            toast.current?.show([{ severity: 'info', summary: 'Message 2', detail: 'Message 2 Content', life: 3050 }]);
-        });
-    };
-
     return (
-        <div className="card flex justify-content-center align-items-center gap-2">
+        <div className="card flex justify-content-center gap-2">
             <Toast ref={toast} />
             <Button onClick={showMultiple} label="Multiple" className="p-button-warning" />
-            <Button onClick={showConcurrent} label="Concurrent" className="p-button-success" />
             <Button onClick={clear} label="Clear" />
         </div>
     )
@@ -127,13 +92,13 @@ export default function MultipleDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                {/* TO DO: Add demo content. */}
-                <p></p>
+                <p>
+                    Multiple messages are displayed by passing an array to the <i>show</i> method.
+                </p>
             </DocSectionText>
-            <div className="card flex justify-content-center align-items-center gap-2">
+            <div className="card flex justify-content-center gap-2">
                 <Toast ref={toast} />
                 <Button onClick={showMultiple} label="Multiple" className="p-button-warning" />
-                <Button onClick={showConcurrent} label="Concurrent" className="p-button-success" />
                 <Button onClick={clear} label="Clear" />
             </div>
             <DocSectionCode code={code} />

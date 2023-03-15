@@ -3,6 +3,7 @@ import PrimeReact, { ariaLabel } from '../api/Api';
 import { useMountEffect, usePrevious, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { CarouselBase } from './CarouselBase';
 
 const CarouselItem = React.memo((props) => {
     const content = props.template(props.item);
@@ -16,7 +17,9 @@ const CarouselItem = React.memo((props) => {
 });
 
 export const Carousel = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = CarouselBase.getProps(inProps);
+
         const [numVisibleState, setNumVisibleState] = React.useState(props.numVisible);
         const [numScrollState, setNumScrollState] = React.useState(props.numScroll);
         const [totalShiftedItemsState, setTotalShiftedItemsState] = React.useState(props.page * props.numScroll * -1);
@@ -543,7 +546,7 @@ export const Carousel = React.memo(
             return null;
         };
 
-        const otherProps = ObjectUtils.findDiffKeys(props, Carousel.defaultProps);
+        const otherProps = CarouselBase.getOtherProps(props);
         const className = classNames(
             'p-carousel p-component',
             {
@@ -574,27 +577,3 @@ export const Carousel = React.memo(
 CarouselItem.displayName = 'CarouselItem';
 
 Carousel.displayName = 'Carousel';
-Carousel.defaultProps = {
-    __TYPE: 'Carousel',
-    id: null,
-    value: null,
-    page: 0,
-    header: null,
-    footer: null,
-    style: null,
-    className: null,
-    itemTemplate: null,
-    circular: false,
-    showIndicators: true,
-    showNavigators: true,
-    autoplayInterval: 0,
-    numVisible: 1,
-    numScroll: 1,
-    responsiveOptions: null,
-    orientation: 'horizontal',
-    verticalViewPortHeight: '300px',
-    contentClassName: null,
-    containerClassName: null,
-    indicatorsContentClassName: null,
-    onPageChange: null
-};

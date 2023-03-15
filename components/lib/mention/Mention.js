@@ -6,10 +6,13 @@ import { InputTextarea } from '../inputtextarea/InputTextarea';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { MentionBase } from './MentionBase';
 
 export const Mention = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = MentionBase.getProps(inProps);
+
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const [focusedState, setFocusedState] = React.useState(false);
         const [searchingState, setSearchingState] = React.useState(false);
@@ -420,7 +423,7 @@ export const Mention = React.memo(
             props.className
         );
         const inputClassName = classNames('p-mention-input', props.inputClassName);
-        const inputProps = ObjectUtils.findDiffKeys(props, Mention.defaultProps);
+        const inputProps = MentionBase.getOtherProps(props);
         const panel = createPanel();
 
         return (
@@ -433,33 +436,3 @@ export const Mention = React.memo(
 );
 
 Mention.displayName = 'Mention';
-Mention.defaultProps = {
-    __TYPE: 'Mention',
-    autoHighlight: true,
-    className: null,
-    delay: 0,
-    field: null,
-    footerTemplate: null,
-    headerTemplate: null,
-    id: null,
-    inputClassName: null,
-    inputId: null,
-    inputRef: null,
-    inputStyle: null,
-    itemTemplate: null,
-    panelClassName: null,
-    panelStyle: null,
-    scrollHeight: '200px',
-    style: null,
-    suggestions: null,
-    transitionOptions: null,
-    trigger: '@',
-    onBlur: null,
-    onChange: null,
-    onFocus: null,
-    onHide: null,
-    onInput: null,
-    onSearch: null,
-    onSelect: null,
-    onShow: null
-};

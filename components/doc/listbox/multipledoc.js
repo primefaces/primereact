@@ -4,7 +4,7 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function MultipleDoc(props) {
-    const [selectedCity, setSelectedCity] = useState(null);
+    const [selectedCities, setSelectedCities] = useState(null);
     const cities = [
         { name: 'New York', code: 'NY' },
         { name: 'Rome', code: 'RM' },
@@ -15,14 +15,14 @@ export function MultipleDoc(props) {
 
     const code = {
         basic: `
-<ListBox multiple value={selectedCity} options={cities} onChange={(e) => setSelectedCity(e.value)} optionLabel="name" style={{ width: '15rem' }} />
+<ListBox multiple value={selectedCities} onChange={(e) => setSelectedCities(e.value)} options={cities} optionLabel="name" className="w-full md:w-14rem" />
         `,
         javascript: `
 import React, { useState } from "react";
 import { ListBox } from 'primereact/listbox';
 
-export default function MultipleDoc() {
-    const [selectedCity, setSelectedCity] = useState(null);
+export default function MultipleDemo() {
+    const [selectedCities, setSelectedCities] = useState(null);
     const cities = [
         { name: 'New York', code: 'NY' },
         { name: 'Rome', code: 'RM' },
@@ -32,19 +32,24 @@ export default function MultipleDoc() {
     ];
 
     return (
-        <div className="card flex justify-content-center">
-            <ListBox multiple value={selectedCity} options={cities} onChange={(e) => setSelectedCity(e.value)} optionLabel="name" style={{ width: '15rem' }} />
+        <div className="card flex justify-content-center">  
+            <ListBox multiple value={selectedCities} onChange={(e) => setSelectedCities(e.value)} options={cities} optionLabel="name" className="w-full md:w-14rem" />
         </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { ListBox, ListBoxChangeParams } from 'primereact/listbox';
+import { ListBox, ListBoxChangeEvent } from 'primereact/listbox';
 
-export default function MultipleDoc() {
-    const [selectedCity, setSelectedCity] = useState<any>(null);
-    const cities = [
+interface City {
+    name: string;
+    code: string;
+} 
+
+export default function MultipleDemo() {
+    const [selectedCities, setSelectedCities] = useState<City | null>(null);
+    const cities: City[] = [
         { name: 'New York', code: 'NY' },
         { name: 'Rome', code: 'RM' },
         { name: 'London', code: 'LDN' },
@@ -53,8 +58,8 @@ export default function MultipleDoc() {
     ];
 
     return (
-        <div className="card flex justify-content-center">
-            <ListBox multiple value={selectedCity} options={cities} onChange={(e) => setSelectedCity(e.value)} optionLabel="name" style={{ width: '15rem' }} />
+        <div className="card flex justify-content-center">  
+            <ListBox multiple value={selectedCities} onChange={(e: ListBoxChangeEvent) => setSelectedCities(e.value)} options={cities} optionLabel="name" className="w-full md:w-14rem" />
         </div>
     )
 }
@@ -64,11 +69,13 @@ export default function MultipleDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                {/* TO DO: Add demo content. */}
-                <p></p>
+                <p>
+                    ListBox allows choosing a single item by default, enable <i>multiple</i> property to choose more than one. When the optional <i>metaKeySelection</i> is present, behavior is changed in a way that selecting a new item requires meta
+                    key to be present.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <ListBox multiple value={selectedCity} options={cities} onChange={(e) => setSelectedCity(e.value)} optionLabel="name" style={{ width: '15rem' }} />
+                <ListBox multiple value={selectedCities} onChange={(e) => setSelectedCities(e.value)} options={cities} optionLabel="name" className="w-full md:w-14rem" />
             </div>
             <DocSectionCode code={code} />
         </>

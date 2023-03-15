@@ -6,24 +6,23 @@ import { DocSectionText } from '../common/docsectiontext';
 export function MouseTrackDoc(props) {
     const code = {
         basic: `
-<Button type="button" label="Save" icon="pi pi-check" tooltip="Save" tooltipOptions={{ position: 'bottom', mouseTrack: true, mouseTrackTop: 15 }} /
+<Button type="button" label="Save" icon="pi pi-check" tooltip="Save" tooltipOptions={{ position: 'bottom', mouseTrack: true, mouseTrackTop: 15 }} />
 
 <Tooltip target=".logo" mouseTrack mouseTrackLeft={10} />
-<img className="logo ml-2" alt="logo" src="images/logo.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} data-pr-tooltip="PrimeReact-Logo" height="80px" />
+<img className="logo" alt="logo" src="/images/logo.png" data-pr-tooltip="PrimeReact-Logo" height="80px" />
         `,
         javascript: `
 import React from 'react'; 
 import { Tooltip } from 'primereact/tooltip';
 import { Button } from 'primereact/button';
 
-export default function MouseTrackDoc() {
-
+export default function MouseTrackDemo() {
     return (
-        <div>
+        <div className="card flex flex-wrap align-items-center justify-content-center gap-5">
             <Button type="button" label="Save" icon="pi pi-check" tooltip="Save" tooltipOptions={{ position: 'bottom', mouseTrack: true, mouseTrackTop: 15 }} />
 
             <Tooltip target=".logo" mouseTrack mouseTrackLeft={10} />
-            <img className="logo ml-2" alt="logo" src="images/logo.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} data-pr-tooltip="PrimeReact-Logo" height="80px" />
+            <img className="logo" alt="logo" src="https://primefaces.org/cdn/primereact/images/logo.png" data-pr-tooltip="PrimeReact-Logo" height="80px" />
         </div>
     );
 }
@@ -33,14 +32,13 @@ import React from 'react';
 import { Tooltip } from 'primereact/tooltip';
 import { Button } from 'primereact/button';
 
-export default function MouseTrackDoc() {
-
+export default function MouseTrackDemo() {
     return (
-        <div>
+        <div className="card flex flex-wrap align-items-center justify-content-center gap-5">
             <Button type="button" label="Save" icon="pi pi-check" tooltip="Save" tooltipOptions={{ position: 'bottom', mouseTrack: true, mouseTrackTop: 15 }} />
 
             <Tooltip target=".logo" mouseTrack mouseTrackLeft={10} />
-            <img className="logo ml-2" alt="logo" src="images/logo.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} data-pr-tooltip="PrimeReact-Logo" height="80px" />
+            <img className="logo" alt="logo" src="https://primefaces.org/cdn/primereact/images/logo.png" data-pr-tooltip="PrimeReact-Logo" height="80px" />
         </div>
     );
 }
@@ -50,13 +48,15 @@ export default function MouseTrackDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>MouseTrack</p>
+                <p>
+                    When <i>mouseTrack</i> option is enabled, position of the Tooltip is updated according to the pointer coordinates.
+                </p>
             </DocSectionText>
-            <div className="card flex align-items-center justify-content-center">
+            <div className="card flex flex-wrap align-items-center justify-content-center gap-5">
                 <Button type="button" label="Save" icon="pi pi-check" tooltip="Save" tooltipOptions={{ position: 'bottom', mouseTrack: true, mouseTrackTop: 15 }} />
 
                 <Tooltip target=".logo" mouseTrack mouseTrackLeft={10} />
-                <img className="logo ml-2" alt="logo" src="images/logo.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} data-pr-tooltip="PrimeReact-Logo" height="80px" />
+                <img className="logo" alt="logo" src="https://primefaces.org/cdn/primereact/images/logo.png" data-pr-tooltip="PrimeReact-Logo" height="80px" />
             </div>
             <DocSectionCode code={code} />
         </>

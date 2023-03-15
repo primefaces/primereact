@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Checkbox } from '../../lib/checkbox/Checkbox';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const [checked, setChecked] = useState(false);
@@ -14,7 +14,7 @@ export function BasicDoc(props) {
 import React, { useState } from "react";
 import { Checkbox } from "primereact/checkbox";
 
-export default function BasicDoc() {
+export default function BasicDemo() {
     const [checked, setChecked] = useState(false);
 
     return (
@@ -28,7 +28,7 @@ export default function BasicDoc() {
 import React, { useState } from "react";
 import { Checkbox } from "primereact/checkbox";
 
-export default function BasicDoc() {
+export default function BasicDemo() {
     const [checked, setChecked] = useState<boolean>(false);
 
     return (

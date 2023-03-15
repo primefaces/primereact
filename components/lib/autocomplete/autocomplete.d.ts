@@ -1,15 +1,15 @@
 /**
  *
- * AutoComplete is an input component that provides real-time suggestions when being typed.
+ * AutoComplete is an input component that provides real-time suggestions while being typed.
  *
- * [Live Demo](https://www.primefaces.org/primereact/autocomplete/)
+ * [Live Demo](https://www.primereact.org/autocomplete/)
  *
  * @module autocomplete
  *
  */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
-import TooltipOptions from '../tooltip/tooltipoptions';
+import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
 import { IconType } from '../utils';
 import { VirtualScroller, VirtualScrollerProps } from '../virtualscroller';
@@ -156,7 +156,7 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.HT
      */
     forceSelection?: boolean | undefined;
     /**
-     * Inline style of the input field.
+     * Style class of the input field.
      */
     inputClassName?: string | undefined;
     /**
@@ -374,6 +374,14 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.HT
 }
 
 /**
+ * **PrimeReact - AutoComplete**
+ *
+ * _AutoComplete is an input component that provides real-time suggestions while being typed._
+ *
+ * [Live Demo](https://www.primereact.org/autocomplete/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class AutoComplete extends React.Component<AutoCompleteProps, any> {

@@ -2,13 +2,16 @@ import * as React from 'react';
 import { FilterService, localeOption } from '../api/Api';
 import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
+import { ListBoxBase } from './ListBoxBase';
 import { ListBoxHeader } from './ListBoxHeader';
 import { ListBoxItem } from './ListBoxItem';
 
 export const ListBox = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ListBoxBase.getProps(inProps);
+
         const [filterValueState, setFilterValueState] = React.useState('');
         const elementRef = React.useRef(null);
         const virtualScrollerRef = React.useRef(null);
@@ -367,12 +370,12 @@ export const ListBox = React.memo(
                         items: visibleOptions,
                         onLazyLoad: (event) => props.virtualScrollerOptions.onLazyLoad({ ...event, ...{ filter: visibleOptions } }),
                         itemTemplate: (item, options) => item && createItem(item, options.index, options),
-                        contentTemplate: (option) => {
-                            const className = classNames('p-listbox-list', option.className);
+                        contentTemplate: (options) => {
+                            const className = classNames('p-listbox-list', options.className);
 
                             return (
-                                <ul ref={option.contentRef} className={className} role="listbox" aria-multiselectable={props.multiple} {...ariaProps}>
-                                    {option.children}
+                                <ul ref={options.contentRef} style={options.style} className={className} role="listbox" aria-multiselectable={props.multiple} {...ariaProps}>
+                                    {options.children}
                                 </ul>
                             );
                         }
@@ -394,7 +397,7 @@ export const ListBox = React.memo(
         const visibleOptions = getVisibleOptions();
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, ListBox.defaultProps);
+        const otherProps = ListBoxBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-listbox p-component',
@@ -422,40 +425,3 @@ export const ListBox = React.memo(
 );
 
 ListBox.displayName = 'ListBox';
-ListBox.defaultProps = {
-    __TYPE: 'ListBox',
-    className: null,
-    dataKey: null,
-    disabled: null,
-    emptyFilterMessage: null,
-    emptyMessage: null,
-    filter: false,
-    filterBy: null,
-    filterInputProps: null,
-    filterLocale: undefined,
-    filterMatchMode: 'contains',
-    filterPlaceholder: null,
-    filterTemplate: null,
-    filterValue: null,
-    id: null,
-    itemTemplate: null,
-    listClassName: null,
-    listStyle: null,
-    metaKeySelection: false,
-    multiple: false,
-    onChange: null,
-    onFilterValueChange: null,
-    optionDisabled: null,
-    optionGroupChildren: null,
-    optionGroupLabel: null,
-    optionGroupTemplate: null,
-    optionLabel: null,
-    optionValue: null,
-    options: null,
-    style: null,
-    tabIndex: 0,
-    tooltip: null,
-    tooltipOptions: null,
-    value: null,
-    virtualScrollerOptions: null
-};

@@ -1,17 +1,14 @@
-import getConfig from 'next/config';
 import React from 'react';
+import { Tag } from '../../lib/tag/Tag';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
-import { Tag } from '../../lib/tag/Tag';
 
 export function TemplateDoc(props) {
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
-
     const code = {
         basic: `
 <Tag style={{background: 'linear-gradient(-225deg,#AC32E4 0%,#7918F2 48%,#4801FF 100%)'}}>
     <div className="flex align-items-center gap-2">
-        <img alt="Country" src="images/flag/flag_placeholder.png" className="flag flag-it" style={{ width: '18px' }}/>
+        <img alt="Country" src="/images/flag/flag_placeholder.png" className="flag flag-it" style={{ width: '18px' }}/>
         <span className="text-base">Italia</span>
         <i className="pi pi-times text-xs"></i>
     </div>
@@ -25,8 +22,7 @@ export default function TemplateDemo() {
     return (
         <Tag style={{background: 'linear-gradient(-225deg,#AC32E4 0%,#7918F2 48%,#4801FF 100%)'}}>
             <div className="flex align-items-center gap-2">
-                <img alt="Country" src={\`/images/flag/flag_placeholder.png\`} 
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                <img alt="Country" src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png"
                     className="flag flag-it" style={{ width: '18px' }}/>
                 <span className="text-base">Italia</span>
                 <i className="pi pi-times text-xs"></i>
@@ -43,8 +39,7 @@ export default function TemplateDemo() {
     return (
         <Tag style={{background: 'linear-gradient(-225deg,#AC32E4 0%,#7918F2 48%,#4801FF 100%)'}}>
             <div className="flex align-items-center gap-2">
-                <img alt="Country" src={\`/images/flag/flag_placeholder.png\`} 
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                <img alt="Country" src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png"
                     className="flag flag-it" style={{ width: '18px' }}/>
                 <span className="text-base">Italia</span>
                 <i className="pi pi-times text-xs"></i>
@@ -63,7 +58,7 @@ export default function TemplateDemo() {
             <div className="card flex justify-content-center">
                 <Tag style={{ background: 'linear-gradient(-225deg,#AC32E4 0%,#7918F2 48%,#4801FF 100%)' }}>
                     <div className="flex align-items-center gap-2">
-                        <img alt="Country" src={`${contextPath}/images/flag/flag_placeholder.png`} className="flag flag-it" style={{ width: '18px' }} />
+                        <img alt="Country" src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className="flag flag-it" style={{ width: '18px' }} />
                         <span className="text-base">Italia</span>
                         <i className="pi pi-times text-xs"></i>
                     </div>

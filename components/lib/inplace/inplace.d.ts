@@ -1,10 +1,10 @@
 /**
  *
- * Inplace represents people using icons, labels and images.
+ * Inplace provides an easy to do editing and display at the same time where clicking the output displays the actual content.
  *
- * [Live Demo](https://www.primefaces.org/primereact/inplace)
+ * [Live Demo](https://www.primereact.org/inplace)
  *
- *  * Helper Components:
+ * Helper Components:
  *
  * - {@link InplaceDisplay}
  *
@@ -26,7 +26,7 @@ interface InplaceToggleEvent {
      */
     originalEvent: React.SyntheticEvent;
     /**
-     * @todo Write the documentation.
+     * Current value
      */
     value: boolean;
 }
@@ -52,7 +52,7 @@ export interface InplaceProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      */
     disabled?: boolean | undefined;
     /**
-     * @todo Write the documentation.
+     * Used to define a string that labels the component.
      */
     ariaLabel?: string | undefined;
     /**
@@ -78,6 +78,14 @@ export interface InplaceProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
 }
 
 /**
+ * **PrimeReact - Inplace**
+ *
+ * _Inplace provides an easy to do editing and display at the same time where clicking the output displays the actual content._
+ *
+ * [Live Demo](https://www.primereact.org/inplace/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class Inplace extends React.Component<InplaceProps, any> {
@@ -89,11 +97,9 @@ export declare class Inplace extends React.Component<InplaceProps, any> {
 }
 
 /**
- * InplaceDisplay is a helper component for Inplace.
- * @group Component
+ * @group Properties
  */
-// tslint:disable-next-line:max-classes-per-file
-export declare class InplaceDisplay extends React.Component {
+export interface InplaceDisplayProps {
     /**
      * Used to get the child elements of the component.
      * @readonly
@@ -102,14 +108,26 @@ export declare class InplaceDisplay extends React.Component {
 }
 
 /**
- * InplaceContent is a helper component for Inplace.
- * @group Component
+ * @group Properties
  */
-// tslint:disable-next-line:max-classes-per-file
-export declare class InplaceContent extends React.Component {
+export interface InplaceContentProps {
     /**
      * Used to get the child elements of the component.
      * @readonly
      */
     children?: React.ReactNode | undefined;
 }
+
+/**
+ * InplaceDisplay is a helper component for Inplace.
+ * @group Component
+ */
+// tslint:disable-next-line:max-classes-per-file
+export declare class InplaceDisplay extends React.Component<InplaceDisplayProps, any> {}
+
+/**
+ * InplaceContent is a helper component for Inplace.
+ * @group Component
+ */
+// tslint:disable-next-line:max-classes-per-file
+export declare class InplaceContent extends React.Component<InplaceContentProps, any> {}

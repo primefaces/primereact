@@ -19,7 +19,7 @@ export function BasicDoc(props) {
 import React from 'react'; 
 import { TabMenu } from 'primereact/tabmenu';
 
-export default function BasicDoc() {
+export default function BasicDemo() {
     const items = [
         {label: 'Home', icon: 'pi pi-fw pi-home'},
         {label: 'Calendar', icon: 'pi pi-fw pi-calendar'},
@@ -29,16 +29,19 @@ export default function BasicDoc() {
     ];
 
     return (
-        <TabMenu model={items} />
+        <div className="card">
+            <TabMenu model={items} />
+        </div>
     )
 }
         `,
         typescript: `
 import React from 'react'; 
 import { TabMenu } from 'primereact/tabmenu';
+import { MenuItem } from 'primereact/menuitem';
 
-export default function BasicDoc() {
-    const items = [
+export default function BasicDemo() {
+    const items: MenuItem = [
         {label: 'Home', icon: 'pi pi-fw pi-home'},
         {label: 'Calendar', icon: 'pi pi-fw pi-calendar'},
         {label: 'Edit', icon: 'pi pi-fw pi-pencil'},
@@ -47,7 +50,9 @@ export default function BasicDoc() {
     ];
 
     return (
-        <TabMenu model={items} />
+        <div className="card">
+            <TabMenu model={items} />
+        </div>
     )
 }
         `
@@ -57,11 +62,10 @@ export default function BasicDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    TabMenu requires a collection of menuitems as its model and can either be used as a Controlled or Uncontrolled component. In uncontrolled mode, only <i>model</i> is required. Initial active item can be provided using the
-                    activeIndex property in uncontrolled mode however it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the active item, prefer to use the component as controlled.
+                    Steps requires a collection of menuitems as its <i>model</i>.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
+            <div className="card">
                 <TabMenu model={items} />
             </div>
             <DocSectionCode code={code} />

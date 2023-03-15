@@ -2,10 +2,13 @@ import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { classNames, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { PanelMenuBase } from './PanelMenuBase';
 import { PanelMenuSub } from './PanelMenuSub';
 
 export const PanelMenu = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = PanelMenuBase.getProps(inProps);
+
         const [idState, setIdState] = React.useState(props.id);
         const [activeItemState, setActiveItemState] = React.useState(null);
         const [animationDisabled, setAnimationDisabled] = React.useState(false);
@@ -154,7 +157,7 @@ export const PanelMenu = React.memo(
             return props.model ? props.model.map(createPanel) : null;
         };
 
-        const otherProps = ObjectUtils.findDiffKeys(props, PanelMenu.defaultProps);
+        const otherProps = PanelMenuBase.getOtherProps(props);
         const className = classNames('p-panelmenu p-component', props.className);
         const panels = createPanels();
 
@@ -167,12 +170,3 @@ export const PanelMenu = React.memo(
 );
 
 PanelMenu.displayName = 'PanelMenu';
-PanelMenu.defaultProps = {
-    __TYPE: 'Panel',
-    id: null,
-    model: null,
-    style: null,
-    className: null,
-    multiple: false,
-    transitionOptions: null
-};
