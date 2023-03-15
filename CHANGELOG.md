@@ -1,5 +1,31 @@
 # Changelog
 
+## [9.2.1](https://github.com/primefaces/primereact/tree/9.2.1) (2023-03-15)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.2.0...9.2.1)
+
+**Implemented New Features and Enhancements:**
+
+- Timeline: subgroups [\#4154](https://github.com/primefaces/primereact/issues/4154)
+- Add new style props to SplitButton component [\#4144](https://github.com/primefaces/primereact/issues/4144)
+- Using the tooltip attribute inside the Shadow Dom crashes Primereact on hover [\#4143](https://github.com/primefaces/primereact/issues/4143)
+- DataTable: responsiveLayout="stack" and scrollable not working together [\#3693](https://github.com/primefaces/primereact/issues/3693)
+
+**Fixed bugs:**
+
+- Showcase: multiple pages have a typo of the word 'archive' [\#4146](https://github.com/primefaces/primereact/issues/4146)
+- MegaMenu: does not hide menuItem when visible = false [\#4140](https://github.com/primefaces/primereact/issues/4140)
+- Multiselect: Errors on types and behaviour not as documented [\#4129](https://github.com/primefaces/primereact/issues/4129)
+- DataTable with VirtualScroller: multi selection bug [\#4120](https://github.com/primefaces/primereact/issues/4120)
+- InputText: Tooltip and float-label incompatibility when using showOnDisabled [\#4110](https://github.com/primefaces/primereact/issues/4110)
+- useIntersectionObserver: Make the options parameter optional [\#4109](https://github.com/primefaces/primereact/issues/4109)
+- Button: Severity 'help' missing in TypeScript definition [\#4108](https://github.com/primefaces/primereact/issues/4108)
+- DataTable Virtual Scroller: Column Resize Not Working [\#4102](https://github.com/primefaces/primereact/issues/4102)
+- Dataview: Callback Documentation Typo [\#4099](https://github.com/primefaces/primereact/issues/4099)
+- Datatable: Duplicate events fire in `paginatorPosition=both` [\#4095](https://github.com/primefaces/primereact/issues/4095)
+- Button: Size 'large' vs 'lg'  [\#4093](https://github.com/primefaces/primereact/issues/4093)
+- Theme: `vela-blue` TreeSelect inconsistent theming  [\#3669](https://github.com/primefaces/primereact/issues/3669)
+
 ## [9.2.0](https://github.com/primefaces/primereact/tree/9.2.0) (2023-02-21)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/9.1.1...9.2.0)
