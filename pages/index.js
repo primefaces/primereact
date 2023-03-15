@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import Analytics from '../components/layout/analytics';
 import { classNames } from '../components/lib/utils/ClassNames';
 import NewsSection from '../components/news/newssection';
 import BlockSection from './landing/blocksection';
@@ -38,7 +37,6 @@ export default function Home(props) {
 
     return (
         <div className={rootClassName}>
-            <Analytics />
             <Head>
                 <title>PrimeReact - React UI Component Library</title>
                 <meta charSet="UTF-8" />

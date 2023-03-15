@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import PrimeReact from '../lib/api/PrimeReact';
 import { classNames } from '../lib/utils/ClassNames';
 import NewsSection from '../news/newssection';
-import Analytics from './analytics';
 import AppContentContext from './appcontentcontext';
 import Config from './config';
 import Footer from './footer';
@@ -82,7 +81,6 @@ export default function Layout(props) {
 
     return (
         <div className={wrapperClassName}>
-            <Analytics />
             <Head>
                 <title>PrimeReact - React UI Component Library</title>
                 <meta charSet="UTF-8" />

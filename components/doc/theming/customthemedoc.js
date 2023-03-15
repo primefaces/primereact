@@ -27,7 +27,7 @@ import './assets/theme.css';
                     environment do the compilation. In all cases, the generated theme file should be imported to your project. We've created a video tutorial that demonstrates all three options.
                 </p>
                 <div className="video-container">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/iZp_l0Yl3Zw" frameBorder="0" allowFullScreen></iframe>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/TqpGx9Rdyrw" frameBorder="0" allowFullScreen></iframe>
                 </div>
 
                 <h3>Visual Editor</h3>
