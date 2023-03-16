@@ -29,7 +29,7 @@ import React, { useState } from "react";
 import { Calendar, CalendarChangeEvent } from 'primereact/calendar';
 
 export default function MultipleDemo() {
-    const [dates, setDates] = useState<Date[] | null>(null);
+    const [dates, setDates] = useState<string | Date | Date[] | null>(null);
 
     return (
         <div className="card flex justify-content-center">

@@ -3836,7 +3836,7 @@
                             "name": "view",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"month\" | \"date\"",
+                            "type": "\"month\" | \"date\" | \"year\"",
                             "default": "date",
                             "description": "Type of view to display."
                         },

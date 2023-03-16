@@ -458,7 +458,7 @@ export interface CalendarProps {
      * Type of view to display.
      * @defaultValue date
      */
-    view?: 'date' | 'month' | undefined;
+    view?: 'date' | 'month' | 'year' | undefined;
     /**
      * Date instance whose month and year are used to display the calendar.
      */

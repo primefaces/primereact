@@ -33,7 +33,8 @@ const GetStartedSection = () => {
             </div>
 
             <div className="flex justify-content-center align-items-center mt-4 fadeindown animation-duration-3000 animation-ease-out relative">
-                <span className='font-medium text-xl animated-text'>5 Million+ Downloads</span><span className='ml-2'> 🎉</span>
+                <span className="font-medium text-xl animated-text">5 Million+ Downloads</span>
+                <span className="ml-2"> 🎉</span>
             </div>
         </section>
     );
