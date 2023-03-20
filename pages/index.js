@@ -59,12 +59,12 @@ export default function Home(props) {
                 <HeaderSection dark={props.dark} onToggleColorScheme={toggleColorScheme} />
                 <HeroSection />
             </div>
+            <UsersSection dark={props.dark} />
             <ComponentSection />
             <ThemeSection theme={tableTheme} onThemeChange={(t) => changeTableTheme(t)} dark={props.dark} />
             <BlockSection />
             <DesignerSection dark={props.dark} />
             <TemplateSection dark={props.dark} />
-            <UsersSection dark={props.dark} />
             <FeaturesSection dark={props.dark} />
             <FooterSection dark={props.dark} />
         </div>
