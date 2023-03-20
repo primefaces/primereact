@@ -39,7 +39,7 @@ import './assets/theme.css';
 
                 <h3>Theme SCSS</h3>
                 <p>
-                    The theme scss is availabe as open source at <a href="http://github.com/primefaces/primereact-sass-theme">primereact-sass-theme</a> repository. The <i>theme-base</i> folder contains the theming structure of the components, themes
+                    The theme scss is available as open source at <a href="http://github.com/primefaces/primereact-sass-theme">primereact-sass-theme</a> repository. The <i>theme-base</i> folder contains the theming structure of the components, themes
                     under
                     <i>themes</i> folder import the base and define the SCSS variables. The <i>themes</i> folder also contains all the built-in themes so you can customize their code as well.
                 </p>
