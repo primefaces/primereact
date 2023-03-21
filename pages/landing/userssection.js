@@ -7,7 +7,7 @@ const UsersSection = (props) => {
             <p className="section-detail">
                 PrimeTek's open-source products are utilized by passionate developers and companies alike. With over{' '}
                 <span className="font-semibold animated-text relative white-space-nowrap">
-                    <span>5 Million Downloads </span>🎉
+                    <span>100 Million Downloads </span>🎉
                 </span>{' '}
                 on npm, we continue to develop every day, while our community grows larger by the day.{' '}
             </p>
