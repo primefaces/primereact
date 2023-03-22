@@ -38,7 +38,7 @@ const UsersSection = (props) => {
                         </div>
                     </div>
                     <div aria-hidden="true" className="marquee ">
-                    <div className=" w-full">
+                        <div className=" w-full">
                             <img src={`https://primefaces.org/cdn/primereact/images/landing-new/whouses/fox-${colorScheme}.svg`} alt={'fox-${colorScheme}'} />
                         </div>
                         <div className=" w-full">
@@ -58,7 +58,7 @@ const UsersSection = (props) => {
                         </div>
                     </div>
                     <div aria-hidden="true" className="marquee ">
-                    <div className=" w-full">
+                        <div className=" w-full">
                             <img src={`https://primefaces.org/cdn/primereact/images/landing-new/whouses/fox-${colorScheme}.svg`} alt={'fox-${colorScheme}'} />
                         </div>
                         <div className=" w-full">
