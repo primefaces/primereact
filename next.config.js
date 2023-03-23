@@ -2,7 +2,6 @@ module.exports = {
     reactStrictMode: process.env.NODE_ENV === 'production' ? false : true,
     trailingSlash: true,
     publicRuntimeConfig: {
-        apiUrl: process.env.NODE_ENV === 'production' ? 'https://www.primereact.org/api/data/customers' : '/api/data/customers',
         appVersion: process.env.npm_package_version || ''
     },
     webpack(config) {
