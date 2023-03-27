@@ -27813,6 +27813,13 @@
                             "description": "The node that is being dragged."
                         },
                         {
+                            "name": "dropNode",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "default",
+                            "description": "The node that is being dropped on."
+                        },
+                        {
                             "name": "dropIndex",
                             "optional": false,
                             "readonly": false,
