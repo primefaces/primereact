@@ -10,22 +10,3 @@
     }
 }
 
-.animated-text {
-    background-image: linear-gradient(-225deg,   var(--home-secondary-text-color) 45%, var(--cyan-500) 70%, var(--home-secondary-text-color) 100%);
-    background-size: auto auto;
-    background-clip: border-box;
-    background-size: 200% auto;
-    color: var(--home-secondary-text-color-secondary);
-    background-clip: text;
-    text-fill-color: transparent;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: textclip 1.5s linear infinite;
-    display: inline-block;
-}
-
-@keyframes textclip {
-    40%, 100% { 
-      background-position: -200% center;
-    }
-  }

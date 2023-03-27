@@ -229,6 +229,10 @@ interface TreeDragDropEvent {
      */
     dragNode: TreeNode;
     /**
+     * The node that is being dropped on.
+     */
+    dropNode: TreeNode;
+    /**
      * The index of the drop.
      */
     dropIndex: number;
