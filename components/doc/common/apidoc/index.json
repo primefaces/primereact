@@ -15485,7 +15485,7 @@
                                 {
                                     "name": "type",
                                     "optional": true,
-                                    "type": "string"
+                                    "type": "Object"
                                 }
                             ],
                             "returnType": "void",
