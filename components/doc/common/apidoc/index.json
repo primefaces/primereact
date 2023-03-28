@@ -15483,15 +15483,36 @@
                                     "type": "Event"
                                 },
                                 {
-                                    "name": "type",
+                                    "name": "options",
                                     "optional": true,
-                                    "type": "Object"
+                                    "type": "OverlayListenerOptions"
                                 }
                             ],
                             "returnType": "void",
                             "description": "The event listener."
                         }
                     ]
+                },
+                "OverlayListenerOptions": {
+                    "description": "The options of event listener in OverlayEventOptions",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "type",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "\"resize\" | \"scroll\" | \"outside\" | \"orientationChange\"",
+                            "description": "Type of listener."
+                        },
+                        {
+                            "name": "valid",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Whether it is valid."
+                        }
+                    ],
+                    "callbacks": []
                 },
                 "ResizeEventOptions": {
                     "description": "Custom resize event options.",
