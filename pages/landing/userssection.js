@@ -33,11 +33,11 @@ const UsersSection = (props) => {
         <section className="landing-users py-8 px-5 lg:px-8">
             <div className="section-header">Who Uses</div>
             <p className="section-detail">
-                PrimeTek's open-source products are utilized by passionate developers and companies alike. With over{' '}
+                PrimeTek libraries have reached over
                 <span className="font-semibold animated-text relative white-space-nowrap">
-                    <span>100 Million Downloads </span>🎉
-                </span>{' '}
-                on npm, we continue to develop every day, while our community grows larger by the day.{' '}
+                    <span>110 Million Downloads </span>
+                </span>
+                on npm! Join the PrimeLand community and experience the difference yourself.
             </p>
             <div className="flex justify-content-center align-items-center mt-4">
                 <span className="ml-2"> </span>
