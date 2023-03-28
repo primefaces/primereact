@@ -89,7 +89,7 @@ export const TableBody = React.memo(
 
                         if (props.expandedRows) {
                             if (Array.isArray(props.expandedRows)) {
-                                expanded = props.expandedRows.some(row => ObjectUtils.resolveFieldData(row, props.dataKey) === rowId);
+                                expanded = props.expandedRows.some((row) => ObjectUtils.resolveFieldData(row, props.dataKey) === rowId);
                             } else {
                                 expanded = props.expandedRows[rowId] !== undefined;
                             }
