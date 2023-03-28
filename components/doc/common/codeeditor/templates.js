@@ -31,7 +31,8 @@ const getCRA = (props = {}, template = 'javascript') => {
     const isTypeScript = template === 'typescript';
     const dependencies = { ...(isTypeScript ? ts_dependencies : {}), ...core_dependencies, ...pDependencies, 'react-scripts': '5.0.1' };
     const fileExtension = isTypeScript ? '.tsx' : '.js';
-    const sourceFileName = `${path}demo${fileExtension}`;
+    const sourceFileName = `${path}App${fileExtension}`;
+    const indexFileName = `${path}index${fileExtension}`;
 
     let extFiles = {};
 
@@ -61,10 +62,11 @@ const getCRA = (props = {}, template = 'javascript') => {
                     production: ['>0.2%', 'not dead', 'not op_mini all'],
                     development: ['last 1 chrome version', 'last 1 firefox version', 'last 1 safari version']
                 },
-                main: `${path}index${fileExtension}` // Github #4172
+                main: indexFileName, // Github #4172
+                keywords: ['primereact', 'react', 'starter']
             }
         },
-        [`${path}index${fileExtension}`]: {
+        [`${indexFileName}`]: {
             content: `import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';   // theme
@@ -73,12 +75,12 @@ import 'primeicons/primeicons.css';                                 // icons
 import 'primeflex/primeflex.css';                                   // css utility
 import './index.css';
 import './flags.css';
-import Demo from './demo';
+import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root')${isTypeScript ? ' as HTMLElement' : ''});
 root.render(
     <React.StrictMode>
-        <Demo />
+        <App />
     </React.StrictMode>
 );`
         },
@@ -107,7 +109,7 @@ root.render(
 </html>`
         },
         [`${sourceFileName}`]: {
-            content: sources[template]
+            content: sources[template].replace(/^\n/, '')
         },
         ...extFiles
     };
@@ -122,8 +124,7 @@ root.render(
 
     isTypeScript &&
         (files['tsconfig.json'] = {
-            content: `
-{
+            content: `{
     "compilerOptions": {
         "target": "es5",
         "lib": [
