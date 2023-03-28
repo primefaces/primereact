@@ -2,7 +2,7 @@ import React from 'react';
 
 const SupportPage = () => {
     return (
-        <div className="content-section">
+        <div>
             <img alt="PRO Support" src="https://primefaces.org/cdn/primereact/images/support/support-header.png" className="w-full block mb-5" style={{ borderRadius: '20px' }} />
 
             <div className="flex flex-column xl:flex-row mb-5 gap-5">

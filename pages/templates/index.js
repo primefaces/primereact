@@ -2,7 +2,7 @@ import React from 'react';
 
 const TemplatesPage = () => {
     return (
-        <div className="content-section">
+        <div>
             <div className="doc-intro">
                 <h1>Templates</h1>
                 <p>Highly customizable application templates to get started in no time with style. Designed and implemented by PrimeTek.</p>

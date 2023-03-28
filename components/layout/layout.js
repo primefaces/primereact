@@ -12,7 +12,7 @@ import Topbar from './topbar';
 
 export default function Layout(props) {
     const [inputStyle, setInputStyle] = useState('outlined');
-    const [ripple, setRipple] = useState(false);
+    const [ripple, setRipple] = useState(true);
     const [sidebarActive, setSidebarActive] = useState(false);
     const [configActive, setConfigActive] = useState(false);
     const router = useRouter();
