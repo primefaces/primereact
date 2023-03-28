@@ -87,7 +87,13 @@ interface OverlayEventOptions {
     /**
      * The event listener.
      */
-    listener?(event: Event, type?: string): void;
+    listener?(
+        event: Event,
+        type?: {
+            type: 'scroll' | 'outside' | 'resize' | 'orientationChange';
+            valid: boolean;
+        }
+    ): void;
     /**
      * Whether to listen to the event or not.
      * @defaultValue true
