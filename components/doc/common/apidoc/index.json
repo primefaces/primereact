@@ -17954,6 +17954,14 @@
                             "description": "Inline style of the overlay panel element."
                         },
                         {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<HTMLDivElement>",
+                            "default": "",
+                            "description": "Reference to the main wrapper element."
+                        },
+                        {
                             "name": "scrollHeight",
                             "optional": true,
                             "readonly": false,
