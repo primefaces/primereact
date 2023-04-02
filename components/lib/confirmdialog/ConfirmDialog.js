@@ -30,6 +30,7 @@ export const ConfirmDialog = React.memo(
         const [visibleState, setVisibleState] = React.useState(props.visible);
         const [reshowState, setReshowState] = React.useState(false);
         const confirmProps = React.useRef(null);
+        const isCallbackExecuting = React.useRef(false);
         const getCurrentProps = () => confirmProps.current || props;
         const getPropValue = (key) => (confirmProps.current || props)[key];
         const callbackFromProp = (key, ...param) => ObjectUtils.getPropValue(getPropValue(key), param);
@@ -38,17 +39,24 @@ export const ConfirmDialog = React.memo(
         const rejectLabel = getPropValue('rejectLabel') || localeOption('reject');
 
         const accept = () => {
-            callbackFromProp('accept');
-            hide('accept');
+            if (!isCallbackExecuting.current) {
+                isCallbackExecuting.current = true;
+                callbackFromProp('accept');
+                hide('accept');
+            }
         };
 
         const reject = () => {
-            callbackFromProp('reject');
-            hide('reject');
+            if (!isCallbackExecuting.current) {
+                isCallbackExecuting.current = true;
+                callbackFromProp('reject');
+                hide('reject');
+            }
         };
 
         const show = () => {
             setVisibleState(true);
+            isCallbackExecuting.current = false;
         };
 
         const hide = (result = 'cancel') => {
