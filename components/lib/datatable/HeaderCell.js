@@ -277,7 +277,7 @@ export const HeaderCell = React.memo((props) => {
         const frozen = getColumnProp('frozen');
         const className = classNames(getColumnProp('headerClassName'), getColumnProp('className'), {
             'p-sortable-column': getColumnProp('sortable'),
-            'p-resizable-column': props.resizableColumns && getColumnProp('resizeable'),
+            'p-resizable-column': (props.resizableColumns && !frozen) && getColumnProp('resizeable'),
             'p-highlight': sortMeta.sorted,
             'p-frozen-column': frozen,
             'p-selection-column': getColumnProp('selectionMode'),
