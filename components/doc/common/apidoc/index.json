@@ -15545,6 +15545,1884 @@
             }
         }
     },
+    "icon/angledoubledown": {
+        "components": {
+            "AngleDoubleDownIcon": {
+                "description": "**PrimeReact - AngleDoubleDownIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in AngleDoubleDownIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/angledoubleleft": {
+        "components": {
+            "AngleDoubleLeftIcon": {
+                "description": "**PrimeReact - AngleDoubleLeftIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in AngleDoubleLeftIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/angledoubleright": {
+        "components": {
+            "AngleDoubleRightIcon": {
+                "description": "**PrimeReact - AngleDoubleRightIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in AngleDoubleRightIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/angledoubleup": {
+        "components": {
+            "AngleDoubleUpIcon": {
+                "description": "**PrimeReact - AngleDoubleUpIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in AngleDoubleUpIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/angledown": {
+        "components": {
+            "AngleDownIcon": {
+                "description": "**PrimeReact - AngleDownIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in AngleDownIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/angleleft": {
+        "components": {
+            "AngleLeftIcon": {
+                "description": "**PrimeReact - AngleLeftIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in AngleLeftIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/angleright": {
+        "components": {
+            "AngleRightIcon": {
+                "description": "**PrimeReact - AngleRightIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in AngleRightIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/angleup": {
+        "components": {
+            "AngleUpIcon": {
+                "description": "**PrimeReact - AngleUpIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in AngleUpIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/arrowdown": {
+        "components": {
+            "ArrowDownIcon": {
+                "description": "**PrimeReact - ArrowDownIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in ArrowDownIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/arrowup": {
+        "components": {
+            "ArrowUpIcon": {
+                "description": "**PrimeReact - ArrowUpIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in ArrowUpIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/ban": {
+        "components": {
+            "BanIcon": {
+                "description": "**PrimeReact - BanIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in BanIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/bars": {
+        "components": {
+            "BarsIcon": {
+                "description": "**PrimeReact - BarsIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in BarsIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/calendar": {
+        "components": {
+            "CalendarIcon": {
+                "description": "**PrimeReact - CalendarIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in CalendarIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/check": {
+        "components": {
+            "CheckIcon": {
+                "description": "**PrimeReact - CheckIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in CheckIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/chevrondown": {
+        "components": {
+            "ChevronDownIcon": {
+                "description": "**PrimeReact - ChevronDownIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in ChevronDownIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/chevronleft": {
+        "components": {
+            "ChevronLeftIcon": {
+                "description": "**PrimeReact - ChevronLeftIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in ChevronLeftIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/chevronright": {
+        "components": {
+            "ChevronRightIcon": {
+                "description": "**PrimeReact - ChevronRightIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in ChevronRightIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/chevronup": {
+        "components": {
+            "ChevronUpIcon": {
+                "description": "**PrimeReact - ChevronUpIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in ChevronUpIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/exclamationtriangle": {
+        "components": {
+            "ExclamationTriangleIcon": {
+                "description": "**PrimeReact - ExclamationTriangleIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in ExclamationTriangleIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/eye": {
+        "components": {
+            "EyeIcon": {
+                "description": "**PrimeReact - EyeIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in EyeIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/eyeslash": {
+        "components": {
+            "EyeSlashIcon": {
+                "description": "**PrimeReact - EyeSlashIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in EyeSlashIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/filter": {
+        "components": {
+            "FilterIcon": {
+                "description": "**PrimeReact - FilterIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in FilterIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/filterslash": {
+        "components": {
+            "FilterSlashIcon": {
+                "description": "**PrimeReact - FilterSlashIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in FilterSlashIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/infocircle": {
+        "components": {
+            "InfoCircleIcon": {
+                "description": "**PrimeReact - InfoCircleIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in InfoCircleIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/minus": {
+        "components": {
+            "MinusIcon": {
+                "description": "**PrimeReact - MinusIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in MinusIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/pencil": {
+        "components": {
+            "PencilIcon": {
+                "description": "**PrimeReact - PencilIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in PencilIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/plus": {
+        "components": {
+            "PlusIcon": {
+                "description": "**PrimeReact - PlusIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in PlusIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/refresh": {
+        "components": {
+            "RefreshIcon": {
+                "description": "**PrimeReact - RefreshIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in RefreshIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/search": {
+        "components": {
+            "SearchIcon": {
+                "description": "**PrimeReact - SearchIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in SearchIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/searchminus": {
+        "components": {
+            "SearchMinusIcon": {
+                "description": "**PrimeReact - SearchMinusIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in SearchMinusIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/searchplus": {
+        "components": {
+            "SearchPlusIcon": {
+                "description": "**PrimeReact - SearchPlusIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in SearchPlusIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/sortalt": {
+        "components": {
+            "SortAltIcon": {
+                "description": "**PrimeReact - SortAltIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in SortAltIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/sortamountdown": {
+        "components": {
+            "SortAmountDownIcon": {
+                "description": "**PrimeReact - SortAmountDownIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in SortAmountDownIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/sortamountupalt": {
+        "components": {
+            "SortAmountUpAltIcon": {
+                "description": "**PrimeReact - SortAmountUpAltIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in SortAmountUpAltIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/spinner": {
+        "components": {
+            "SpinnerIcon": {
+                "description": "**PrimeReact - SpinnerIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in SpinnerIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/star": {
+        "components": {
+            "StarIcon": {
+                "description": "**PrimeReact - StarIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in StarIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/starfill": {
+        "components": {
+            "StarFillIcon": {
+                "description": "**PrimeReact - StarFillIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in StarFillIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/thlarge": {
+        "components": {
+            "ThLargeIcon": {
+                "description": "**PrimeReact - ThLargeIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in ThLargeIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/times": {
+        "components": {
+            "TimesIcon": {
+                "description": "**PrimeReact - TimesIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in TimesIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/timescircle": {
+        "components": {
+            "TimesCircleIcon": {
+                "description": "**PrimeReact - TimesCircleIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in TimesCircleIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/trash": {
+        "components": {
+            "TrashIcon": {
+                "description": "**PrimeReact - TrashIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in TrashIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/undo": {
+        "components": {
+            "UndoIcon": {
+                "description": "**PrimeReact - UndoIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in UndoIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/upload": {
+        "components": {
+            "UploadIcon": {
+                "description": "**PrimeReact - UploadIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in UploadIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/windowmaximize": {
+        "components": {
+            "WindowMaximizeIcon": {
+                "description": "**PrimeReact - WindowMaximizeIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in WindowMaximizeIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icon/windowminimize": {
+        "components": {
+            "WindowMinimizeIcon": {
+                "description": "**PrimeReact - WindowMinimizeIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in WindowMinimizeIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "iconbase/iconbase": {
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "IconBaseProps": {
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string"
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string"
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean"
+                        }
+                    ],
+                    "callbacks": [],
+                    "extendedBy": "AngleDoubleDownIconProps,AngleDoubleLeftIconProps,AngleDoubleRightIconProps,AngleDoubleUpIconProps,AngleDownIconProps,AngleLeftIconProps,AngleRightIconProps,AngleUpIconProps,ArrowDownIconProps,ArrowUpIconProps,BanIconProps,BarsIconProps,CalendarIconProps,CheckIconProps,ChevronDownIconProps,ChevronLeftIconProps,ChevronRightIconProps,ChevronUpIconProps,ExclamationTriangleIconProps,EyeIconProps,EyeSlashIconProps,FilterIconProps,FilterSlashIconProps,InfoCircleIconProps,MinusIconProps,PencilIconProps,PlusIconProps,RefreshIconProps,SearchIconProps,SearchMinusIconProps,SearchPlusIconProps,SortAltIconProps,SortAmountDownIconProps,SortAmountUpAltIconProps,SpinnerIconProps,StarIconProps,StarFillIconProps,ThLargeIconProps,TimesIconProps,TimesCircleIconProps,TrashIconProps,UndoIconProps,UploadIconProps,WindowMaximizeIconProps,WindowMinimizeIconProps",
+                    "extendedTypes": "Omit<React.SVGProps<SVGSVGElement>, \"ref\">"
+                }
+            }
+        }
+    },
     "image": {
         "description": "Displays a single image with preview and tranformation options.\n\n[Live Demo](https://www.primereact.org/image/)",
         "components": {

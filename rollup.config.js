@@ -16,6 +16,55 @@ let entries = [];
 let core = {};
 
 // alias entries
+const ALIAS_ICON_COMPONENT_ENTRIES = [
+    { find: '../../iconbase/IconBase', replacement: 'primereact/iconbase' },
+    { find: '../icon/angledoubledown', replacement: 'primereact/icon/angledoubledown' },
+    { find: '../icon/angledoubleleft', replacement: 'primereact/icon/angledoubleleft' },
+    { find: '../icon/angledoubleright', replacement: 'primereact/icon/angledoubleright' },
+    { find: '../icon/angledoubleup', replacement: 'primereact/icon/angledoubleup' },
+    { find: '../icon/angledown', replacement: 'primereact/icon/angledown' },
+    { find: '../icon/angleleft', replacement: 'primereact/icon/angleleft' },
+    { find: '../icon/angleright', replacement: 'primereact/icon/angleright' },
+    { find: '../icon/angleup', replacement: 'primereact/icon/angleup' },
+    { find: '../icon/arrowdown', replacement: 'primereact/icon/arrowdown' },
+    { find: '../icon/arrowup', replacement: 'primereact/icon/arrowup' },
+    { find: '../icon/ban', replacement: 'primereact/icon/ban' },
+    { find: '../icon/bars', replacement: 'primereact/icon/bars' },
+    { find: '../icon/calendar', replacement: 'primereact/icon/calendar' },
+    { find: '../icon/check', replacement: 'primereact/icon/check' },
+    { find: '../icon/chevrondown', replacement: 'primereact/icon/chevrondown' },
+    { find: '../icon/chevronleft', replacement: 'primereact/icon/chevronleft' },
+    { find: '../icon/chevronright', replacement: 'primereact/icon/chevronright' },
+    { find: '../icon/chevronup', replacement: 'primereact/icon/chevronup' },
+    { find: '../icon/exclamationtriangle', replacement: 'primereact/icon/exclamationtriangle' },
+    { find: '../icon/eye', replacement: 'primereact/icon/eye' },
+    { find: '../icon/eyeslash', replacement: 'primereact/icon/eyeslash' },
+    { find: '../icon/filter', replacement: 'primereact/icon/filter' },
+    { find: '../icon/filterslash', replacement: 'primereact/icon/filterslash' },
+    { find: '../icon/infocircle', replacement: 'primereact/icon/infocircle' },
+    { find: '../icon/minus', replacement: 'primereact/icon/minus' },
+    { find: '../icon/pencil', replacement: 'primereact/icon/pencil' },
+    { find: '../icon/plus', replacement: 'primereact/icon/plus' },
+    { find: '../icon/refresh', replacement: 'primereact/icon/refresh' },
+    { find: '../icon/search', replacement: 'primereact/icon/search' },
+    { find: '../icon/searchminus', replacement: 'primereact/icon/searchminus' },
+    { find: '../icon/searchplus', replacement: 'primereact/icon/searchplus' },
+    { find: '../icon/sortalt', replacement: 'primereact/icon/sortalt' },
+    { find: '../icon/sortamountdown', replacement: 'primereact/icon/sortamountdown' },
+    { find: '../icon/sortamountupalt', replacement: 'primereact/icon/sortamountupalt' },
+    { find: '../icon/spinner', replacement: 'primereact/icon/spinner' },
+    { find: '../icon/star', replacement: 'primereact/icon/star' },
+    { find: '../icon/starfill', replacement: 'primereact/icon/starfill' },
+    { find: '../icon/thlarge', replacement: 'primereact/icon/thlarge' },
+    { find: '../icon/times', replacement: 'primereact/icon/times' },
+    { find: '../icon/timescircle', replacement: 'primereact/icon/timescircle' },
+    { find: '../icon/trash', replacement: 'primereact/icon/trash' },
+    { find: '../icon/undo', replacement: 'primereact/icon/undo' },
+    { find: '../icon/upload', replacement: 'primereact/icon/upload' },
+    { find: '../icon/windowmaximize', replacement: 'primereact/icon/windowmaximize' },
+    { find: '../icon/windowminimize', replacement: 'primereact/icon/windowminimize' }
+];
+
 const ALIAS_COMPONENT_ENTRIES = [
     { find: '../utils/Utils', replacement: 'primereact/utils' },
     { find: '../api/Api', replacement: 'primereact/api' },
@@ -24,6 +73,7 @@ const ALIAS_COMPONENT_ENTRIES = [
     { find: '../csstransition/CSSTransition', replacement: 'primereact/csstransition' },
     { find: '../portal/Portal', replacement: 'primereact/portal' },
     { find: '../keyfilter/KeyFilter', replacement: 'primereact/keyfilter' },
+    ...ALIAS_ICON_COMPONENT_ENTRIES,
     { find: '../tooltip/Tooltip', replacement: 'primereact/tooltip' },
     { find: '../virtualscroller/VirtualScroller', replacement: 'primereact/virtualscroller' },
     { find: '../terminalservice/TerminalService', replacement: 'primereact/terminalservice' },
@@ -103,7 +153,7 @@ const PLUGINS_COMPONENT = [alias(ALIAS_PLUGIN_OPTIONS_FOR_COMPONENT), ...PLUGINS
 
 function addEntry(name, input, output, isComponent = true) {
     const exports = name === 'primereact.api' || name === 'primereact' ? 'named' : 'auto';
-    const useCorePlugin = ALIAS_COMPONENT_ENTRIES.some((entry) => entry.replacement.replace('primereact/', '') === name.replace('primereact.', ''));
+    const useCorePlugin = ALIAS_COMPONENT_ENTRIES.some((entry) => entry.replacement === name.replaceAll('.', '/'));
     const plugins = isComponent ? PLUGINS_COMPONENT : PLUGINS;
     const external = isComponent ? EXTERNAL_COMPONENT : EXTERNAL;
     const inlineDynamicImports = true;
@@ -162,13 +212,15 @@ function corePlugin() {
     return {
         name: 'corePlugin',
         generateBundle(outputOptions, bundle) {
-            if (outputOptions.format === 'iife') {
+            const { name, format } = outputOptions;
+
+            if (format === 'iife') {
                 Object.keys(bundle).forEach((id) => {
                     const chunk = bundle[id];
-                    const name = id.replace('.min.js', '').replace('.js', '');
+                    const folderName = name.replace('primereact.', '').replaceAll('.', '/');
                     const filePath = `./dist/core/core${id.indexOf('.min.js') > 0 ? '.min.js' : '.js'}`;
 
-                    core[filePath] ? (core[filePath][name] = chunk.code) : (core[filePath] = { [`${name}`]: chunk.code });
+                    core[filePath] ? (core[filePath][folderName] = chunk.code) : (core[filePath] = { [`${folderName}`]: chunk.code });
                 });
             }
         }
@@ -209,13 +261,31 @@ function addComponent() {
         .filter((dir) => dir.isDirectory())
         .forEach(({ name: folderName }) => {
             fs.readdirSync(path.resolve(__dirname, process.env.INPUT_DIR + folderName)).forEach((file) => {
-                let name = file.split(/(.js)$/)[0].toLowerCase();
+                const name = file.split(/(.js)$/)[0].toLowerCase();
 
                 if (name === folderName) {
                     const input = process.env.INPUT_DIR + folderName + '/' + file;
                     const output = process.env.OUTPUT_DIR + folderName + '/' + name;
 
                     addEntry('primereact.' + folderName, input, output, true);
+                }
+            });
+        });
+}
+
+function addIcon() {
+    const iconDir = path.resolve(__dirname, process.env.INPUT_DIR + 'icon');
+
+    fs.readdirSync(path.resolve(__dirname, iconDir), { withFileTypes: true })
+        .filter((dir) => dir.isDirectory())
+        .forEach(({ name: folderName }) => {
+            fs.readdirSync(path.resolve(__dirname, iconDir + '/' + folderName)).forEach((file) => {
+                if (/\.js$/.test(file)) {
+                    const name = file.split(/(.js)$/)[0].toLowerCase();
+                    const input = process.env.INPUT_DIR + 'icon/' + folderName + '/' + file;
+                    const output = process.env.OUTPUT_DIR + 'icon/' + folderName + '/' + name;
+
+                    addEntry('primereact.icon.' + folderName, input, output, true);
                 }
             });
         });
@@ -291,6 +361,7 @@ function addPackageJson() {
     fs.writeFileSync(path.resolve(outputDir, 'package.json'), packageJson);
 }
 
+addIcon();
 addComponent();
 addPrimeReact();
 addCore();
