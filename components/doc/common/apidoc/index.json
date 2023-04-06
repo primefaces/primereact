@@ -2126,8 +2126,8 @@
                             "optional": true,
                             "readonly": false,
                             "type": "IconType<AutoCompleteProps>",
-                            "default": "pi pi-chevron-down",
-                            "description": "Icon class of the dropdown icon."
+                            "default": "",
+                            "description": "Icon of the dropdown."
                         },
                         {
                             "name": "dropdownMode",
@@ -2208,6 +2208,14 @@
                             "type": "ReactNode | Function",
                             "default": "",
                             "description": "Template of a list item."
+                        },
+                        {
+                            "name": "loadingIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<AutoCompleteProps>",
+                            "default": "",
+                            "description": "Icon of the loader."
                         },
                         {
                             "name": "maxLength",
@@ -2302,7 +2310,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "IconType<AutoCompleteProps>",
-                            "default": "pi pi-times-circle",
+                            "default": "",
                             "description": "Icon of the remove chip element in multiple mode."
                         },
                         {
