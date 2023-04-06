@@ -36,6 +36,7 @@ export interface APIOptions {
     zIndex?: ZIndexOptions;
     filterMatchModeOptions?: FilterMatchModeOptions;
     nullSortOrder?: number;
+    changeTheme?(theme?: string, newTheme?: string, linkElementId?: string, callback?: () => void): void;
 }
 
 declare const PrimeReact: APIOptions;
