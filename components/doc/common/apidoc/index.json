@@ -25636,6 +25636,14 @@
                             "description": "Used to get the child elements of the component."
                         },
                         {
+                            "name": "closeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<SidebarProps>",
+                            "default": "",
+                            "description": "Icon of the close button."
+                        },
+                        {
                             "name": "closeOnEscape",
                             "optional": true,
                             "readonly": false,
