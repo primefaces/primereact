@@ -74,12 +74,10 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
     decrementButtonClassName?: string | undefined;
     /**
      * Style class of the increment button.
-     * @defaultValue pi pi-caret-up
      */
     incrementButtonIcon?: string | undefined;
     /**
      * Style class of the decrement button.
-     * @defaultValue pi pi-caret-down
      */
     decrementButtonIcon?: string | undefined;
     /**
