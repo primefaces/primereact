@@ -3,6 +3,7 @@ import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 import { ButtonBase } from './ButtonBase';
+import { SpinnerIcon } from '../icon/spinner';
 
 export const Button = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -19,11 +20,11 @@ export const Button = React.memo(
         }
 
         const createIcon = () => {
-            const icon = props.loading ? props.loadingIcon : props.icon;
             const className = classNames('p-button-icon p-c', {
                 'p-button-loading-icon': props.loading,
                 [`p-button-icon-${props.iconPos}`]: props.label
             });
+            const icon = props.loading ? props.loadingIcon || <SpinnerIcon className={className} spin /> : props.icon;
 
             return IconUtils.getJSXIcon(icon, { className }, { props });
         };

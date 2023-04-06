@@ -19,7 +19,7 @@ export const ButtonBase = {
         tooltipOptions: null,
         disabled: false,
         loading: false,
-        loadingIcon: 'pi pi-spinner pi-spin',
+        loadingIcon: null,
         visible: true,
         children: undefined
     },
