@@ -18149,7 +18149,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "string",
-                            "default": "pi pi-caret-down",
+                            "default": "",
                             "description": "Style class of the decrement button."
                         },
                         {
@@ -18181,7 +18181,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "string",
-                            "default": "pi pi-caret-up",
+                            "default": "",
                             "description": "Style class of the increment button."
                         },
                         {
