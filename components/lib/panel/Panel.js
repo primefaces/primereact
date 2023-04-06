@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
+import { MinusIcon } from '../icon/minus';
+import { PlusIcon } from '../icon/plus';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { PanelBase } from './PanelBase';
@@ -66,11 +68,12 @@ export const Panel = React.forwardRef((inProps, ref) => {
     const createToggleIcon = () => {
         if (props.toggleable) {
             const buttonId = idState + '_label';
-            const toggleIcon = collapsed ? props.expandIcon : props.collapseIcon;
+            const icon = collapsed ? props.expandIcon || <PlusIcon /> : props.collapseIcon || <MinusIcon />;
+            const toggleIcon = IconUtils.getJSXIcon(icon, undefined, { props, collapsed });
 
             return (
                 <button className="p-panel-header-icon p-panel-toggler p-link" onClick={toggle} id={buttonId} aria-controls={contentId} aria-expanded={!collapsed} role="tab">
-                    {IconUtils.getJSXIcon(toggleIcon, undefined, { props, collapsed })}
+                    {toggleIcon}
                     <Ripple />
                 </button>
             );
