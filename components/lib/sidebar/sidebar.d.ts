@@ -9,6 +9,7 @@
  */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
+import { IconType } from '../utils';
 
 /**
  * Defines valid properties in Sidebar component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -58,6 +59,10 @@ export interface SidebarProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * @defaultValue true
      */
     showCloseIcon?: boolean | undefined;
+    /**
+     * Icon of the close button.
+     */
+    closeIcon?: IconType<SidebarProps> | undefined;
     /**
      * Aria label of the close icon.
      * @defaultValue close

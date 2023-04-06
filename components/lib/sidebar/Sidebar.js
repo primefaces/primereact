@@ -4,8 +4,9 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils, ZIndexUtils, IconUtils } from '../utils/Utils';
 import { SidebarBase } from './SidebarBase';
+import { TimesIcon } from '../icon/times';
 
 export const Sidebar = React.forwardRef((inProps, ref) => {
     const props = SidebarBase.getProps(inProps);
@@ -160,12 +161,15 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
     });
 
     const createCloseIcon = () => {
-        if (props.showCloseIcon) {
-            const ariaLabel = props.ariaCloseLabel || localeOption('close');
+        const iconClassName = 'p-sidebar-close-icon';
+        const icon = props.closeIcon || <TimesIcon className={iconClassName} />;
+        const closeIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+        const ariaLabel = props.ariaCloseLabel || localeOption('close');
 
+        if (props.showCloseIcon) {
             return (
                 <button type="button" ref={closeIconRef} className="p-sidebar-close p-sidebar-icon p-link" onClick={onClose} aria-label={ariaLabel}>
-                    <span className="p-sidebar-close-icon pi pi-times" aria-hidden="true" />
+                    {closeIcon}
                     <Ripple />
                 </button>
             );
