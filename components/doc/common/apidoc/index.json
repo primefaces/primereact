@@ -26423,7 +26423,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "IconType<SpeedDialProps>",
-                            "default": "pi pi-plus",
+                            "default": "",
                             "description": "Show icon of the button element."
                         },
                         {
