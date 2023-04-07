@@ -27352,6 +27352,14 @@
                             "description": "Defines if tab can be removed."
                         },
                         {
+                            "name": "closeIcon",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "IconType<TabPanel>",
+                            "default": "",
+                            "description": "Close button of the tab header."
+                        },
+                        {
                             "name": "contentClassName",
                             "optional": true,
                             "readonly": false,
@@ -27411,15 +27419,31 @@
                             "name": "leftIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
+                            "type": "IconType<TabPanel>",
                             "default": "",
                             "description": "Icons can be placed at left of a header."
+                        },
+                        {
+                            "name": "nextButton",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "IconType<TabPanel>",
+                            "default": "",
+                            "description": "Next button of the tab header."
+                        },
+                        {
+                            "name": "prevButton",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "IconType<TabPanel>",
+                            "default": "",
+                            "description": "Previous button of the tab header."
                         },
                         {
                             "name": "rightIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
+                            "type": "IconType<TabPanel>",
                             "default": "",
                             "description": "Icons can be placed at right of a header."
                         },
