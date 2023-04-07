@@ -2,8 +2,11 @@ import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { classNames, IconUtils, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { TabPanelBase, TabViewBase } from './TabViewBase';
+import { ChevronRightIcon } from '../icon/chevronright';
+import { ChevronLeftIcon } from '../icon/chevronleft';
+import { TimesIcon } from '../icon/times';
 
 export const TabPanel = () => {};
 
@@ -166,16 +169,18 @@ export const TabView = React.forwardRef((inProps, ref) => {
 
     const createTabHeader = (tab, index) => {
         const selected = isSelected(index);
-        const { headerStyle, headerClassName, style: _style, className: _className, disabled, leftIcon, rightIcon, header, headerTemplate, closable } = TabPanelBase.getCProps(tab);
+        const { headerStyle, headerClassName, style: _style, className: _className, disabled, leftIcon, rightIcon, header, headerTemplate, closable, closeIcon } = TabPanelBase.getCProps(tab);
         const style = { ...(headerStyle || {}), ...(_style || {}) };
         const className = classNames('p-unselectable-text', { 'p-tabview-selected p-highlight': selected, 'p-disabled': disabled }, headerClassName, _className);
         const headerId = idState + '_header_' + index;
         const ariaControls = idState + '_content_' + index;
         const tabIndex = disabled ? null : 0;
-        const leftIconElement = leftIcon && <i className={leftIcon}></i>;
+        const leftIconElement = leftIcon && <>{IconUtils.getJSXIcon(leftIcon, { props })}</>;
         const titleElement = <span className="p-tabview-title">{header}</span>;
-        const rightIconElement = rightIcon && <i className={rightIcon}></i>;
-        const closableIconElement = closable && <i className="p-tabview-close pi pi-times" onClick={(e) => onTabHeaderClose(e, index)}></i>;
+        const rightIconElement = rightIcon && <>{IconUtils.getJSXIcon(rightIcon, { props })}</>;
+        const iconClassName = 'p-tabview-close';
+        const icon = closeIcon || <TimesIcon className={iconClassName} onClick={(e) => onTabHeaderClose(e, index)} />;
+        const closableIconElement = closable ? IconUtils.getJSXIcon(icon, { className: iconClassName }, { props }) : null;
 
         let content = (
             // eslint-disable /
@@ -263,10 +268,13 @@ export const TabView = React.forwardRef((inProps, ref) => {
     };
 
     const createPrevButton = () => {
+        const icon = props.prevButton || <ChevronLeftIcon />;
+        const leftIcon = IconUtils.getJSXIcon(icon, undefined, { props });
+
         if (props.scrollable && !backwardIsDisabledState) {
             return (
                 <button ref={prevBtnRef} className="p-tabview-nav-prev p-tabview-nav-btn p-link" onClick={navBackward} type="button" aria-label={ariaLabel('previousPageLabel')}>
-                    <span className="pi pi-chevron-left"></span>
+                    {leftIcon}
                     <Ripple />
                 </button>
             );
@@ -276,10 +284,13 @@ export const TabView = React.forwardRef((inProps, ref) => {
     };
 
     const createNextButton = () => {
+        const icon = props.prevButton || <ChevronRightIcon />;
+        const rightIcon = IconUtils.getJSXIcon(icon, { 'aria-hidden': 'true' }, { props });
+
         if (props.scrollable && !forwardIsDisabledState) {
             return (
                 <button ref={nextBtnRef} className="p-tabview-nav-next p-tabview-nav-btn p-link" onClick={navForward} type="button" aria-label={ariaLabel('nextPageLabel')}>
-                    <span className="pi pi-chevron-right" aria-hidden="true"></span>
+                    {rightIcon}
                     <Ripple />
                 </button>
             );
