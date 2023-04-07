@@ -11,6 +11,7 @@ import * as React from 'react';
 import { SelectItemOptionsType } from '../selectitem/selectitem';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { VirtualScroller, VirtualScrollerProps } from '../virtualscroller';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom change target options.
@@ -94,6 +95,10 @@ interface ListBoxFilterTemplateOptions {
      * The filter.
      */
     filter?: string;
+    /**
+     * Icon of the filter.
+     */
+    filterIcon?: IconType<ListBox> | string;
     /**
      * Style class of the filter icon.
      */
