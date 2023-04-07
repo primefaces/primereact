@@ -21,7 +21,7 @@ export const SpeedDialBase = {
         'aria-label': null,
         maskStyle: null,
         maskClassName: null,
-        showIcon: 'pi pi-plus',
+        showIcon: null,
         hideIcon: null,
         rotateAnimation: true,
         onVisibleChange: null,
