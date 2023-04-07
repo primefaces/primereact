@@ -19602,6 +19602,13 @@
                             "description": "The filter."
                         },
                         {
+                            "name": "filterIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<ListBox>",
+                            "description": "Icon of the filter."
+                        },
+                        {
                             "name": "filterIconClassName",
                             "optional": false,
                             "readonly": false,
