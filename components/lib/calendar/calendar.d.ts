@@ -501,7 +501,7 @@ export interface CalendarProps {
      * @param {number[]} yearValues - The values of years
      * @return {React.ReactNode}
      */
-    decadeTempate?(yearValues: number[]): React.ReactNode;
+    decadeTemplate?(yearValues: number[]): React.ReactNode;
     /**
      * Custom footer template of overlay.
      * @return {React.ReactNode}

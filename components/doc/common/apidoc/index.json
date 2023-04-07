@@ -3927,7 +3927,7 @@
                             "description": "Function that gets a date information and returns the cell content in datepicker."
                         },
                         {
-                            "name": "decadeTempate",
+                            "name": "decadeTemplate",
                             "parameters": [
                                 {
                                     "name": "yearValues",
