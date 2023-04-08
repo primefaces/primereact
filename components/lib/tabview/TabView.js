@@ -31,7 +31,7 @@ export const TabView = React.forwardRef((inProps, ref) => {
     const getTabProp = (tab, name) => TabPanelBase.getCProp(tab, name);
 
     const shouldUseTab = (tab, index) => {
-        return ObjectUtils.isValidChild(tab, 'TabPanel') && hiddenTabsState.every((_i) => _i !== index);
+        return tab && ObjectUtils.isValidChild(tab, 'TabPanel') && hiddenTabsState.every((_i) => _i !== index);
     };
 
     const findVisibleActiveTab = (i) => {
