@@ -4869,9 +4869,9 @@
                             "name": "dropdownIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
-                            "default": "pi pi-chevron-down",
-                            "description": "Icon class of the dropdown icon."
+                            "type": "IconType<CascadeSelectProps>",
+                            "default": "",
+                            "description": "Icon of the dropdown icon."
                         },
                         {
                             "name": "id",
@@ -4920,6 +4920,14 @@
                             "type": "string[]",
                             "default": "",
                             "description": "Property name or getter function to retrieve the items of a group."
+                        },
+                        {
+                            "name": "optionGroupIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<CascadeSelectProps>",
+                            "default": "",
+                            "description": "Icon of the option group."
                         },
                         {
                             "name": "optionGroupLabel",
