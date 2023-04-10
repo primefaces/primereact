@@ -7,7 +7,7 @@ export const ChipBase = {
         icon: null,
         image: null,
         removable: false,
-        removeIcon: 'pi pi-times-circle',
+        removeIcon: null,
         className: null,
         style: null,
         template: null,

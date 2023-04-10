@@ -17,17 +17,14 @@ import { IconType, TemplateType } from '../utils';
 export interface ChipProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     /**
      * Defines the text to display.
-     *
      */
     label?: string;
     /**
      * Defines the icon to display.
-     *
      */
     icon?: IconType<ChipProps> | undefined;
     /**
      * Defines the image to display.
-     *
      */
     image?: string | undefined;
     /**
@@ -37,17 +34,14 @@ export interface ChipProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
     removable?: boolean | undefined;
     /**
      * Icon of the remove element.
-     * @defaultValue pi pi-times-circle
      */
     removeIcon?: string | undefined;
     /**
      * Template of an item.
-     *
      */
     template?: TemplateType<ChipProps> | undefined;
     /**
      * It specifies an alternate text for an image, if the image cannot be displayed.
-     *
      */
     imageAlt?: string | undefined;
     /**
