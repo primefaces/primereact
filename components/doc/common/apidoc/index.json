@@ -25350,8 +25350,8 @@
                             "optional": true,
                             "readonly": false,
                             "type": "IconType<ScrollTopProps>",
-                            "default": "pi pi-chevron-up",
-                            "description": "Icon to display."
+                            "default": "",
+                            "description": "Name of the icon or JSX.Element for icon."
                         },
                         {
                             "name": "style",
