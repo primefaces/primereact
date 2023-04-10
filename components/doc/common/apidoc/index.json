@@ -5329,8 +5329,8 @@
                             "optional": true,
                             "readonly": false,
                             "type": "IconType<CheckboxProps>",
-                            "default": "pi pi-check",
-                            "description": "Icon class of the checkbox icon."
+                            "default": "",
+                            "description": "Icon of the checkbox icon."
                         },
                         {
                             "name": "id",
