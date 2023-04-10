@@ -3451,6 +3451,14 @@
                             "description": "Format of the date."
                         },
                         {
+                            "name": "decrementIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<CalendarProps>",
+                            "default": "",
+                            "description": "Icon to show in each of the decrement buttons."
+                        },
+                        {
                             "name": "disabled",
                             "optional": true,
                             "readonly": false,
@@ -3495,7 +3503,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "IconType<CalendarProps>",
-                            "default": "pi pi-calendar",
+                            "default": "",
                             "description": "Icon of the calendar button."
                         },
                         {
@@ -3513,6 +3521,14 @@
                             "type": "string",
                             "default": "",
                             "description": "Unique identifier of the element."
+                        },
+                        {
+                            "name": "incrementIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<CalendarProps>",
+                            "default": "",
+                            "description": "Icon to show in each of the increment buttons."
                         },
                         {
                             "name": "inline",
@@ -3620,6 +3636,14 @@
                             "description": "Name of the input element."
                         },
                         {
+                            "name": "nextIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<CalendarProps>",
+                            "default": "",
+                            "description": "Icon to show in the next button."
+                        },
+                        {
                             "name": "numberOfMonths",
                             "optional": true,
                             "readonly": false,
@@ -3650,6 +3674,14 @@
                             "type": "string",
                             "default": "",
                             "description": "Placeholder text for the input."
+                        },
+                        {
+                            "name": "prevIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<CalendarProps>",
+                            "default": "",
+                            "description": "Icon to show in the previous button."
                         },
                         {
                             "name": "readOnlyInput",
