@@ -26683,7 +26683,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "IconType<SplitButtonProps>",
-                            "default": "pi pi-chevron-down",
+                            "default": "",
                             "description": "Icon class of the dropdown icon."
                         },
                         {
