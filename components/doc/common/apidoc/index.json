@@ -5584,7 +5584,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "string",
-                            "default": "pi pi-times-circle",
+                            "default": "",
                             "description": "Icon of the remove element."
                         },
                         {
