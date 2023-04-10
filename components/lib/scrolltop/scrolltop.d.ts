@@ -27,8 +27,7 @@ export interface ScrollTopProps {
      */
     threshold?: number;
     /**
-     * Icon to display.
-     * @defaultValue pi pi-chevron-up
+     * Name of the icon or JSX.Element for icon.
      */
     icon?: IconType<ScrollTopProps>;
     /**
