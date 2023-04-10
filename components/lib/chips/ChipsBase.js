@@ -13,6 +13,7 @@ export const ChipsBase = {
         disabled: null,
         readOnly: false,
         removable: true,
+        removeIcon: null,
         style: null,
         className: null,
         tooltip: null,

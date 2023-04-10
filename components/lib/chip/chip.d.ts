@@ -35,7 +35,7 @@ export interface ChipProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
     /**
      * Icon of the remove element.
      */
-    removeIcon?: string | undefined;
+    removeIcon?: IconType<ChipProps> | undefined;
     /**
      * Template of an item.
      */

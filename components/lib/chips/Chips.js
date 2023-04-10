@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { ChipsBase } from './ChipsBase';
+import { TimesCircleIcon } from '../icon/timescircle';
 
 export const Chips = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -199,8 +200,12 @@ export const Chips = React.memo(
         }, [inputRef, props.inputRef]);
 
         const createRemoveIcon = (value, index) => {
+            const iconProps = { className: 'p-chips-token-icon', onClick: (event) => removeItem(event, index) };
+            const icon = props.removeIcon || <TimesCircleIcon {...iconProps} />;
+            const removeIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
+
             if (!props.disabled && !props.readOnly && isRemovable(value, index)) {
-                return <span className="p-chips-token-icon pi pi-times-circle" onClick={(event) => removeItem(event, index)}></span>;
+                return removeIcon;
             }
 
             return null;
