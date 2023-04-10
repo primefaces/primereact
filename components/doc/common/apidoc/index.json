@@ -20477,6 +20477,14 @@
                             "description": "Specifies where to open the linked document."
                         },
                         {
+                            "name": "template",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "Template of the menuitem."
+                        },
+                        {
                             "name": "url",
                             "optional": true,
                             "readonly": false,
@@ -20516,6 +20524,67 @@
                             "readonly": false,
                             "type": "SyntheticEvent<Element, Event>",
                             "description": "Browser event"
+                        }
+                    ]
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "MenuItemOptions": {
+                    "description": "Menu item options",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "className",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Style class of the component."
+                        },
+                        {
+                            "name": "element",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ReactNode",
+                            "description": "Default element created by the component."
+                        },
+                        {
+                            "name": "iconClassName",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Class name of the options icon."
+                        },
+                        {
+                            "name": "labelClassName",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Style class of the label element."
+                        },
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any",
+                            "description": "All component props"
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "onClick",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke on click."
                         }
                     ]
                 }
