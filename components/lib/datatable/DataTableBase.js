@@ -20,7 +20,7 @@ export const DataTableBase = {
         dataKey: null,
         defaultSortOrder: 1,
         dragSelection: false,
-        editMode: 'cell',
+        editMode: null,
         editingRows: null,
         emptyMessage: null,
         expandableRowGroups: false,
