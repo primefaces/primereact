@@ -26684,7 +26684,7 @@
                             "readonly": false,
                             "type": "IconType<SplitButtonProps>",
                             "default": "",
-                            "description": "Icon class of the dropdown icon."
+                            "description": "Name of the dropdown icon or JSX.Element for dropdown icon."
                         },
                         {
                             "name": "icon",
