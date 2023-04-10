@@ -10,6 +10,7 @@
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 import { MenuItem } from '../menuitem';
+import { IconType } from '../utils/utils';
 
 /**
  * Defines valid properties in ContextMenu component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -53,6 +54,10 @@ export interface ContextMenuProps extends Omit<React.DetailedHTMLProps<React.HTM
      * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
      */
     transitionOptions?: CSSTransitionProps | undefined;
+    /**
+     * Icon of the submenu.
+     */
+    submenuIcon?: IconType<ContextMenuProps> | undefined;
     /**
      * Callback to invoke when a popup menu is shown.
      * @param {React.SyntheticEvent} event - Browser event.

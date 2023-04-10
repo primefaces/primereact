@@ -16,6 +16,7 @@ export const ContextMenuBase = {
         transitionOptions: null,
         onShow: null,
         onHide: null,
+        submenuIcon: null,
         children: undefined
     },
     getProps: (props) => ObjectUtils.getMergedProps(props, ContextMenuBase.defaultProps),
