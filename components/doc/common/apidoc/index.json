@@ -5583,7 +5583,7 @@
                             "name": "removeIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
+                            "type": "IconType<ChipProps>",
                             "default": "",
                             "description": "Icon of the remove element."
                         },
@@ -5765,6 +5765,14 @@
                             "type": "boolean | Function",
                             "default": "true",
                             "description": "Whether an item is removable."
+                        },
+                        {
+                            "name": "removeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<ChipsProps>",
+                            "default": "",
+                            "description": "Icon of the remove element."
                         },
                         {
                             "name": "separator",
