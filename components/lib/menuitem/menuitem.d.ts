@@ -26,6 +26,38 @@ interface MenuItemCommandEvent {
 }
 
 /**
+ * Menu item options
+ * @deprecated
+ */
+interface MenuItemOptions {
+    /**
+     * Callback to invoke on click.
+     * @param {React.SyntheticEvent} event - Browser event.
+     */
+    onClick(event: React.SyntheticEvent): void;
+    /**
+     * Style class of the component.
+     */
+    className: string;
+    /**
+     * Style class of the label element.
+     */
+    labelClassName: string;
+    /**
+     * Class name of the options icon.
+     */
+    iconClassName: string;
+    /**
+     * Default element created by the component.
+     */
+    element: React.ReactNode;
+    /**
+     * All component props
+     */
+    props: any;
+}
+
+/**
  * Defines model of MenuItem API.
  * @group Model
  */
@@ -87,6 +119,11 @@ export interface MenuItem {
      * @param {MenuItemCommandEvent} event - Custom command event.
      */
     command?(event: MenuItemCommandEvent): void;
+    /**
+     * Template of the menuitem.
+     * @deprecated
+     */
+    template?: React.ReactNode | ((item: MenuItem, options: MenuItemOptions) => React.ReactNode);
     /**
      * The data of the menuitem.
      */
