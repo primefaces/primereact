@@ -10,6 +10,7 @@
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 import { SelectItemOptionsType } from '../selectitem/selectitem';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom change event
@@ -77,6 +78,10 @@ export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.I
      */
     optionValue?: string | undefined;
     /**
+     * Icon of the option group.
+     */
+    optionGroupIcon?: IconType<CascadeSelectProps> | undefined;
+    /**
      * Property name or getter function to use as the label of an option group.
      */
     optionGroupLabel?: string | undefined;
@@ -128,10 +133,9 @@ export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.I
      */
     transitionOptions?: CSSTransitionProps | undefined;
     /**
-     * Icon class of the dropdown icon.
-     * @defaultValue pi pi-chevron-down
+     * Icon of the dropdown icon.
      */
-    dropdownIcon?: string | undefined;
+    dropdownIcon?: IconType<CascadeSelectProps> | undefined;
     /**
      * Maximum height of the options panel on responsive mode.
      * @defaultValue 400px
