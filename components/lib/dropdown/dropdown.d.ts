@@ -84,7 +84,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     className?: string | undefined;
     /**
-     * Icon class of the dropdown icon.
+     * Icon of the dropdown.
      */
     clearIcon?: IconType<DropdownProps> | undefined;
     /**

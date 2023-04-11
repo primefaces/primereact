@@ -9,6 +9,7 @@
  */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
+import { IconType } from '../utils/utils';
 
 /**
  * Dialog break options
@@ -119,6 +120,10 @@ export interface DialogProps {
      * Style class of the header section.
      */
     headerClassName?: string | undefined;
+    /**
+     * Icon to display in the dialog close button.
+     */
+    closeIcon?: IconType<DialogProps> | undefined;
     /**
      * Style of the header section.
      */

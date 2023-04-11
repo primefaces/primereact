@@ -4,8 +4,9 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
 import { DialogBase } from './DialogBase';
+import { TimesIcon } from '../icon/times';
 
 export const Dialog = React.forwardRef((inProps, ref) => {
     const props = DialogBase.getProps(inProps);
@@ -412,10 +413,13 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     const createCloseIcon = () => {
         if (props.closable) {
             const ariaLabel = props.ariaCloseIconLabel || localeOption('close');
+            const iconProps = { className: 'p-dialog-header-close-icon', 'aria-hidden': true };
+            const icon = props.closeIcon || <TimesIcon {...iconProps} />;
+            const headerCloseIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
 
             return (
                 <button ref={closeRef} type="button" className="p-dialog-header-icon p-dialog-header-close p-link" aria-label={ariaLabel} onClick={onClose}>
-                    <span className="p-dialog-header-close-icon pi pi-times" aria-hidden="true"></span>
+                    {headerCloseIcon}
                     <Ripple />
                 </button>
             );
