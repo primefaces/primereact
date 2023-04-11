@@ -439,7 +439,34 @@
                             "type": "ZIndexOptions"
                         }
                     ],
-                    "callbacks": []
+                    "callbacks": [
+                        {
+                            "name": "changeTheme",
+                            "parameters": [
+                                {
+                                    "name": "theme",
+                                    "optional": true,
+                                    "type": "string"
+                                },
+                                {
+                                    "name": "newTheme",
+                                    "optional": true,
+                                    "type": "string"
+                                },
+                                {
+                                    "name": "linkElementId",
+                                    "optional": true,
+                                    "type": "string"
+                                },
+                                {
+                                    "name": "callback",
+                                    "optional": true,
+                                    "type": "Function"
+                                }
+                            ],
+                            "returnType": "void"
+                        }
+                    ]
                 },
                 "FilterMatchModeOptions": {
                     "relatedProp": "",
