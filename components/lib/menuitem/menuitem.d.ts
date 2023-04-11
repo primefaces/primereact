@@ -27,7 +27,7 @@ interface MenuItemCommandEvent {
 
 /**
  * Menu item options
- * @deprecated
+ * @deprecated Since v9.3.0
  */
 interface MenuItemOptions {
     /**
@@ -121,7 +121,7 @@ export interface MenuItem {
     command?(event: MenuItemCommandEvent): void;
     /**
      * Template of the menuitem.
-     * @deprecated
+     * @deprecated Since v9.3.0
      */
     template?: React.ReactNode | ((item: MenuItem, options: MenuItemOptions) => React.ReactNode);
     /**

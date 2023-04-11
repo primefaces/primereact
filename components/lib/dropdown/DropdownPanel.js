@@ -133,6 +133,21 @@ export const DropdownPanel = React.memo(
                     </div>
                 );
 
+                if (props.filterTemplate) {
+                    const defaultContentOptions = {
+                        className: containerClassName,
+                        element: content,
+                        filterOptions: filterOptions,
+                        filterInputKeyDown: props.onFilterInputKeyDown,
+                        filterInputChange: onFilterInputChange,
+                        filterIconClassName: 'p-dropdown-filter-icon pi pi-search',
+                        clearIcon: clearIcon,
+                        props
+                    };
+
+                    content = ObjectUtils.getJSXElement(props.filterTemplate, defaultContentOptions);
+                }
+
                 return <div className="p-dropdown-header">{content}</div>;
             }
 

@@ -42,7 +42,7 @@ interface DropdownFilterEvent {
 /**
  * Custom filter options
  * @see {@link DropdownProps.filterTemplate}
- * @deprecated
+ * @deprecated Since v9.3.0
  */
 interface DropdownFilterOptions {
     /**
@@ -153,7 +153,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
     filterPlaceholder?: string | undefined;
     /**
      * The template of filter element.
-     * @deprecated
+     * @deprecated Since v9.3.0
      */
     filterTemplate?: React.ReactNode | ((options: DropdownFilterOptions) => React.ReactNode) | undefined;
     /**
