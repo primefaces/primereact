@@ -8,6 +8,8 @@ export const ToastBase = {
         style: null,
         baseZIndex: 0,
         position: 'top-right',
+        closeIcon: null,
+        icon: null,
         transitionOptions: null,
         appendTo: 'self',
         onClick: null,
