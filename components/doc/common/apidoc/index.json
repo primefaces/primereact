@@ -8014,6 +8014,14 @@
                             "description": "Adds a close icon to the header to hide the dialog."
                         },
                         {
+                            "name": "closeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DialogProps>",
+                            "default": "",
+                            "description": "Icon to display in the dialog close button."
+                        },
+                        {
                             "name": "closeOnEscape",
                             "optional": true,
                             "readonly": false,
@@ -12266,6 +12274,14 @@
                             "description": "Adds a close icon to the header to hide the dialog."
                         },
                         {
+                            "name": "closeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DialogProps>",
+                            "default": "",
+                            "description": "Icon to display in the dialog close button."
+                        },
+                        {
                             "name": "closeOnEscape",
                             "optional": true,
                             "readonly": false,
@@ -12930,8 +12946,8 @@
                             "optional": true,
                             "readonly": false,
                             "type": "IconType<DropdownProps>",
-                            "default": "pi pi-times",
-                            "description": "Icon class of the dropdown icon."
+                            "default": "",
+                            "description": "Icon of the dropdown."
                         },
                         {
                             "name": "dataKey",
@@ -12954,8 +12970,8 @@
                             "optional": true,
                             "readonly": false,
                             "type": "IconType<DropdownProps>",
-                            "default": "pi pi-chevron-down",
-                            "description": "Icon class of the dropdown icon."
+                            "default": "",
+                            "description": "Icon of the dropdown."
                         },
                         {
                             "name": "editable",
@@ -12998,6 +13014,22 @@
                             "description": "When filtering is enabled, filterBy decides which field or fields (comma separated) to search against."
                         },
                         {
+                            "name": "filterClearIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DropdownProps>",
+                            "default": "",
+                            "description": "Icon of the filter to clear."
+                        },
+                        {
+                            "name": "filterIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DropdownProps>",
+                            "default": "",
+                            "description": "Icon of the filter to search."
+                        },
+                        {
                             "name": "filterInputAutoFocus",
                             "optional": true,
                             "readonly": false,
@@ -13035,7 +13067,8 @@
                             "readonly": false,
                             "type": "ReactNode | Function",
                             "default": "",
-                            "description": "The template of filter element."
+                            "description": "The template of filter element.",
+                            "deprecated": "Since v9.3.0"
                         },
                         {
                             "name": "focusInputRef",
@@ -16390,6 +16423,47 @@
             }
         }
     },
+    "icon/download": {
+        "components": {
+            "DownloadIcon": {
+                "description": "**PrimeReact - DownloadIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in DownloadIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
     "icon/exclamationtriangle": {
         "components": {
             "ExclamationTriangleIcon": {
@@ -17524,7 +17598,7 @@
                         }
                     ],
                     "callbacks": [],
-                    "extendedBy": "AngleDoubleDownIconProps,AngleDoubleLeftIconProps,AngleDoubleRightIconProps,AngleDoubleUpIconProps,AngleDownIconProps,AngleLeftIconProps,AngleRightIconProps,AngleUpIconProps,ArrowDownIconProps,ArrowUpIconProps,BanIconProps,BarsIconProps,CalendarIconProps,CheckIconProps,ChevronDownIconProps,ChevronLeftIconProps,ChevronRightIconProps,ChevronUpIconProps,ExclamationTriangleIconProps,EyeIconProps,EyeSlashIconProps,FilterIconProps,FilterSlashIconProps,InfoCircleIconProps,MinusIconProps,PencilIconProps,PlusIconProps,RefreshIconProps,SearchIconProps,SearchMinusIconProps,SearchPlusIconProps,SortAltIconProps,SortAmountDownIconProps,SortAmountUpAltIconProps,SpinnerIconProps,StarIconProps,StarFillIconProps,ThLargeIconProps,TimesIconProps,TimesCircleIconProps,TrashIconProps,UndoIconProps,UploadIconProps,WindowMaximizeIconProps,WindowMinimizeIconProps",
+                    "extendedBy": "AngleDoubleDownIconProps,AngleDoubleLeftIconProps,AngleDoubleRightIconProps,AngleDoubleUpIconProps,AngleDownIconProps,AngleLeftIconProps,AngleRightIconProps,AngleUpIconProps,ArrowDownIconProps,ArrowUpIconProps,BanIconProps,BarsIconProps,CalendarIconProps,CheckIconProps,ChevronDownIconProps,ChevronLeftIconProps,ChevronRightIconProps,ChevronUpIconProps,DownloadIconProps,ExclamationTriangleIconProps,EyeIconProps,EyeSlashIconProps,FilterIconProps,FilterSlashIconProps,InfoCircleIconProps,MinusIconProps,PencilIconProps,PlusIconProps,RefreshIconProps,SearchIconProps,SearchMinusIconProps,SearchPlusIconProps,SortAltIconProps,SortAmountDownIconProps,SortAmountUpAltIconProps,SpinnerIconProps,StarIconProps,StarFillIconProps,ThLargeIconProps,TimesIconProps,TimesCircleIconProps,TrashIconProps,UndoIconProps,UploadIconProps,WindowMaximizeIconProps,WindowMinimizeIconProps",
                     "extendedTypes": "Omit<React.SVGProps<SVGSVGElement>, \"ref\">"
                 }
             }
@@ -17584,6 +17658,22 @@
                             "description": "Used to get the child elements of the component."
                         },
                         {
+                            "name": "closeIcon",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "IconType<ImageProps>",
+                            "default": "",
+                            "description": "Icon of the close button."
+                        },
+                        {
+                            "name": "downloadIcon",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "IconType<ImageProps>",
+                            "default": "",
+                            "description": "Icon of the download button."
+                        },
+                        {
                             "name": "downloadable",
                             "optional": true,
                             "readonly": false,
@@ -17616,12 +17706,36 @@
                             "description": "Inline style of the image element."
                         },
                         {
+                            "name": "indicatorIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<ImageProps>",
+                            "default": "",
+                            "description": "Changing the default icon when the image is hovered in preview mode."
+                        },
+                        {
                             "name": "preview",
                             "optional": true,
                             "readonly": false,
                             "type": "boolean",
                             "default": "",
                             "description": "Controls the preview functionality."
+                        },
+                        {
+                            "name": "rotateLeftIcon",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "IconType<ImageProps>",
+                            "default": "",
+                            "description": "Icon of the rotate left button."
+                        },
+                        {
+                            "name": "rotateRightIcon",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "IconType<ImageProps>",
+                            "default": "",
+                            "description": "Icon of the rotate right button."
                         },
                         {
                             "name": "src",
@@ -17637,7 +17751,8 @@
                             "readonly": false,
                             "type": "any",
                             "default": "",
-                            "description": "Changing the default icon when the image is hovered in preview mode."
+                            "description": "Changing the default icon when the image is hovered in preview mode.",
+                            "deprecated": "Since v9, use "
                         },
                         {
                             "name": "width",
@@ -17646,6 +17761,22 @@
                             "type": "string",
                             "default": "",
                             "description": "Width of the image element."
+                        },
+                        {
+                            "name": "zoomInIcon",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "IconType<ImageProps>",
+                            "default": "",
+                            "description": "Icon of the zoom in button."
+                        },
+                        {
+                            "name": "zoomOutIcon",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "IconType<ImageProps>",
+                            "default": "",
+                            "description": "Icon of the zoom out button."
                         },
                         {
                             "name": "zoomSrc",
@@ -17727,6 +17858,14 @@
                             "type": "boolean",
                             "default": "false",
                             "description": "Displays a button to switch back to display mode."
+                        },
+                        {
+                            "name": "closeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<InplaceProps>",
+                            "default": "",
+                            "description": "Icon of the close button."
                         },
                         {
                             "name": "disabled",
@@ -28369,6 +28508,13 @@
                             "description": "Whether the message can be closed manually using the close icon."
                         },
                         {
+                            "name": "closeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<ToastProps>",
+                            "description": "Icon of the close button."
+                        },
+                        {
                             "name": "content",
                             "optional": true,
                             "readonly": false,
@@ -28395,6 +28541,13 @@
                             "readonly": false,
                             "type": "ReactNode",
                             "description": "Detail content of the message."
+                        },
+                        {
+                            "name": "icon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<ToastProps>",
+                            "description": "Icon of the message."
                         },
                         {
                             "name": "life",
