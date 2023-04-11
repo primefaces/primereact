@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { localeOption } from '../api/Api';
 import { Button } from '../button/Button';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 import { InplaceBase, InplaceContentBase, InplaceDisplayBase } from './InplaceBase';
+import { TimesIcon } from '../icon/times';
 
 export const InplaceDisplay = (props) => props.children;
 export const InplaceContent = (props) => props.children;
@@ -65,8 +66,12 @@ export const Inplace = React.forwardRef((inProps, ref) => {
     };
 
     const createCloseButton = () => {
+        const icon = props.closeIcon || <TimesIcon />;
+        const closeIcon = IconUtils.getJSXIcon(icon, undefined, { props });
+        const ariaLabel = localeOption('close');
+
         if (props.closable) {
-            return <Button type="button" className="p-inplace-content-close" icon="pi pi-times" onClick={close} aria-label={localeOption('close')} />;
+            return <Button type="button" className="p-inplace-content-close" icon={closeIcon} onClick={close} aria-label={ariaLabel}></Button>;
         }
 
         return null;
