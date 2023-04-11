@@ -1,5 +1,13 @@
 # Changelog
 
+## [9.2.3](https://github.com/primefaces/primereact/tree/9.2.3) (2023-04-11)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.2.2...9.2.3)
+
+**Fixed bugs:**
+
+- Type missing for PrimeReact.changeTheme [\#4240](https://github.com/primefaces/primereact/issues/4240)
+
 ## [9.2.2](https://github.com/primefaces/primereact/tree/9.2.2) (2023-03-28)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/9.2.1...9.2.2)
