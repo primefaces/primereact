@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 import { BreadCrumbBase } from './BreadCrumbBase';
+import { ChevronRightIcon } from '../icon/chevronright';
 
 export const BreadCrumb = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -68,7 +69,11 @@ export const BreadCrumb = React.memo(
         };
 
         const createSeparator = () => {
-            return <li className="p-breadcrumb-chevron pi pi-chevron-right"></li>;
+            const iconClassName = "p-breadcrumb-chevron";
+            const icon = props.separatorIcon || <ChevronRightIcon className={iconClassName} />;
+            const separatorIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+
+            return separatorIcon;
         };
 
         const createMenuitem = (item) => {

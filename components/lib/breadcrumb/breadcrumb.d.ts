@@ -9,6 +9,7 @@
  */
 import * as React from 'react';
 import { MenuItem } from '../menuitem';
+import { IconType } from '../utils/utils';
 
 /**
  * Defines valid properties in BreadCrumb component. In addition to these, all properties of HTMLElement can be used in this component.
@@ -23,6 +24,10 @@ export interface BreadCrumbProps extends Omit<React.DetailedHTMLProps<React.HTML
      * MenuItem configuration for the home icon.
      */
     home?: MenuItem | undefined;
+    /**
+     * Icon of the separator.
+     */
+    separatorIcon?: IconType<BreadCrumbProps> | undefined;
     /**
      * Used to get the child elements of the component.
      * @readonly
