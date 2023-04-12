@@ -132,8 +132,7 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.HT
      */
     dropdownAutoFocus?: boolean | undefined;
     /**
-     * Icon class of the dropdown icon.
-     * @defaultValue pi pi-chevron-down
+     * Icon of the dropdown.
      */
     dropdownIcon?: IconType<AutoCompleteProps> | undefined;
     /**
@@ -171,6 +170,10 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.HT
      * Inline style of the input field.
      */
     inputStyle?: React.CSSProperties | undefined;
+    /**
+     * Icon of the loader.
+     */
+    loadingIcon?: IconType<AutoCompleteProps> | undefined;
     /**
      * Template of a list item.
      */
@@ -228,7 +231,6 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.HT
     readOnly?: boolean | undefined;
     /**
      * Icon of the remove chip element in multiple mode.
-     * @defaultValue pi pi-times-circle
      */
     removeIcon?: IconType<AutoCompleteProps> | undefined;
     /**

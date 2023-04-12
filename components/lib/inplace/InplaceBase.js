@@ -23,6 +23,7 @@ export const InplaceBase = {
         className: null,
         active: false,
         closable: false,
+        closeIcon: null,
         disabled: false,
         tabIndex: 0,
         ariaLabel: null,

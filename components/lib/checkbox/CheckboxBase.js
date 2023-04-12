@@ -17,7 +17,7 @@ export const CheckboxBase = {
         required: false,
         readOnly: false,
         tabIndex: null,
-        icon: 'pi pi-check',
+        icon: null,
         tooltip: null,
         tooltipOptions: null,
         onChange: null,

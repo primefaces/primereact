@@ -42,6 +42,7 @@ interface DropdownFilterEvent {
 /**
  * Custom filter options
  * @see {@link DropdownProps.filterTemplate}
+ * @deprecated Since v9.3.0
  */
 interface DropdownFilterOptions {
     /**
@@ -83,8 +84,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     className?: string | undefined;
     /**
-     * Icon class of the dropdown icon.
-     * @defaultValue pi pi-times
+     * Icon of the dropdown.
      */
     clearIcon?: IconType<DropdownProps> | undefined;
     /**
@@ -97,8 +97,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     disabled?: boolean | undefined;
     /**
-     * Icon class of the dropdown icon.
-     * @defaultValue pi pi-chevron-down
+     * Icon of the dropdown.
      */
     dropdownIcon?: IconType<DropdownProps> | undefined;
     /**
@@ -122,10 +121,18 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     filter?: boolean | undefined;
     /**
+     * Icon of the filter to search.
+     */
+    filterIcon?: IconType<DropdownProps> | undefined;
+    /**
      * When filtering is enabled, filterBy decides which field or fields (comma separated) to search against.
      * @defaultValue label
      */
     filterBy?: 'label' | string | undefined;
+    /**
+     * Icon of the filter to clear.
+     */
+    filterClearIcon?: IconType<DropdownProps> | undefined;
     /**
      * When the panel is opened, it specifies that the filter input should focus automatically.
      * @defaultValue true
@@ -146,6 +153,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
     filterPlaceholder?: string | undefined;
     /**
      * The template of filter element.
+     * @deprecated Since v9.3.0
      */
     filterTemplate?: React.ReactNode | ((options: DropdownFilterOptions) => React.ReactNode) | undefined;
     /**

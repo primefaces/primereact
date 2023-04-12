@@ -55,7 +55,7 @@ import { Calendar, CalendarChangeEvent } from 'primereact/calendar';
 import { addLocale } from 'primereact/api';
 
 export default function LocaleDemo() {
-    const [date, setDate] = useState<Date | null>(null);
+    const [date, setDate] = useState<string | Date | Date[] | null>(null);
 
     addLocale('es', {
         firstDayOfWeek: 1,

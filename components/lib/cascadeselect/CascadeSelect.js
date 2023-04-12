@@ -4,10 +4,10 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
 import { CascadeSelectBase } from './CascadeSelectBase';
 import { CascadeSelectSub } from './CascadeSelectSub';
-
+import { ChevronDownIcon } from '../icon/chevrondown';
 export const CascadeSelect = React.memo(
     React.forwardRef((inProps, ref) => {
         const props = CascadeSelectBase.getProps(inProps);
@@ -305,11 +305,13 @@ export const CascadeSelect = React.memo(
         };
 
         const createDropdownIcon = () => {
-            const iconClassName = classNames('p-cascadeselect-trigger-icon', props.dropdownIcon);
+            const iconClassName = 'p-cascadeselect-trigger-icon';
+            const icon = props.dropdownIcon || <ChevronDownIcon className={iconClassName} />;
+            const dropdownIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
             return (
                 <div className="p-cascadeselect-trigger" role="button" aria-haspopup="listbox" aria-expanded={overlayVisibleState}>
-                    <span className={iconClassName}></span>
+                    {dropdownIcon}
                 </div>
             );
         };
@@ -334,6 +336,7 @@ export const CascadeSelect = React.memo(
                                 options={props.options}
                                 selectionPath={selectionPath.current}
                                 className={'p-cascadeselect-items'}
+                                optionGroupIcon={props.optionGroupIcon}
                                 optionLabel={props.optionLabel}
                                 optionValue={props.optionValue}
                                 level={0}

@@ -73,7 +73,7 @@ export default function MinMaxDemo() {
     let nextMonth = month === 11 ? 0 : month + 1;
     let nextYear = nextMonth === 0 ? year + 1 : year;
 
-    const [date, setDate] = useState<Date | null>(null);
+    const [date, setDate] = useState<string | Date | Date[] | null>(null);
 
     let minDate = new Date();
 

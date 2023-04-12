@@ -1,5 +1,24 @@
 # Changelog
 
+## [9.2.2](https://github.com/primefaces/primereact/tree/9.2.2) (2023-03-28)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.2.1...9.2.2)
+
+**Implemented New Features and Enhancements:**
+
+- Slider: Change positioning of handles in range mode [\#4184](https://github.com/primefaces/primereact/issues/4184)
+
+**Fixed bugs:**
+
+- OverlayEventOptions type inccorrect [\#4189](https://github.com/primefaces/primereact/issues/4189)
+- Mention: selected result to replace the search query [\#4188](https://github.com/primefaces/primereact/issues/4188)
+- Tree: Missing property `dropNode` in type signature of `TreeDragDropEvent` [\#4179](https://github.com/primefaces/primereact/issues/4179)
+- CodeSandbox demos are broken [\#4172](https://github.com/primefaces/primereact/issues/4172)
+- Sidebar:  Unexpected component hide [\#4170](https://github.com/primefaces/primereact/issues/4170)
+- Calendar: `view` typescript missing `year` [\#4163](https://github.com/primefaces/primereact/issues/4163)
+- Ripple: first click on component has incorrect location [\#4160](https://github.com/primefaces/primereact/issues/4160)
+- primereact.min.css Error at background:transparent URL\(\) with base64 image [\#4097](https://github.com/primefaces/primereact/issues/4097)
+
 ## [9.2.1](https://github.com/primefaces/primereact/tree/9.2.1) (2023-03-15)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/9.2.0...9.2.1)

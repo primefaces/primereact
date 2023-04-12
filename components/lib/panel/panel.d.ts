@@ -108,12 +108,10 @@ export interface PanelProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
     collapsed?: boolean | undefined;
     /**
      * Icon of a expanded tab.
-     * @defaultValue pi pi-plus
      */
     expandIcon?: IconType<PanelProps> | undefined;
     /**
      * Icon of a collapsed tab.
-     * @defaultValue pi pi-minus
      */
     collapseIcon?: IconType<PanelProps> | undefined;
     /**

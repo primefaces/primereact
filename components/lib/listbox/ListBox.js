@@ -271,6 +271,7 @@ export const ListBox = React.memo(
             return props.filter ? (
                 <ListBoxHeader
                     filter={filteredValue}
+                    filterIcon={props.filterIcon}
                     onFilter={onFilter}
                     resetFilter={resetFilter}
                     filterTemplate={props.filterTemplate}

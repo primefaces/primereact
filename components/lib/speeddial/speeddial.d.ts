@@ -112,13 +112,12 @@ export interface SpeedDialProps extends Omit<React.DetailedHTMLProps<React.HTMLA
     maskClassName?: string | undefined;
     /**
      * Show icon of the button element.
-     * @defaultValue pi pi-plus
      */
-    showIcon?: IconType<SpeedDialProps>;
+    showIcon?: IconType<SpeedDialProps> | undefined;
     /**
      * Hide icon of the button element.
      */
-    hideIcon?: IconType<SpeedDialProps>;
+    hideIcon?: IconType<SpeedDialProps> | undefined;
     /**
      * Defined to rotate showIcon when hideIcon is not present.
      * @defaultValue true

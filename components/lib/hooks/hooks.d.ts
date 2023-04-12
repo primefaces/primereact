@@ -73,6 +73,20 @@ interface EventOptions {
 }
 
 /**
+ * The options of event listener in OverlayEventOptions
+ */
+interface OverlayListenerOptions {
+    /**
+     * Type of listener.
+     */
+    type: 'scroll' | 'outside' | 'resize' | 'orientationChange';
+    /**
+     * Whether it is valid.
+     */
+    valid: boolean;
+}
+
+/**
  * Custom overlay event options.
  */
 interface OverlayEventOptions {
@@ -87,7 +101,7 @@ interface OverlayEventOptions {
     /**
      * The event listener.
      */
-    listener?(event: Event, type?: string): void;
+    listener?(event: Event, options?: OverlayListenerOptions): void;
     /**
      * Whether to listen to the event or not.
      * @defaultValue true

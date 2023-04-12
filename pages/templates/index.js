@@ -2,7 +2,7 @@ import React from 'react';
 
 const TemplatesPage = () => {
     return (
-        <div className="content-section">
+        <div>
             <div className="doc-intro">
                 <h1>Templates</h1>
                 <p>Highly customizable application templates to get started in no time with style. Designed and implemented by PrimeTek.</p>
@@ -26,11 +26,11 @@ const TemplatesPage = () => {
                 </div>
                 <div className="col-12 lg:col-6 xl:col-4">
                     <div className="card mb-0">
-                        <a href="https://www.primefaces.org/sakai-react" rel="noopener noreferrer" target="_blank">
+                        <a href="https://sakai.primereact.org" rel="noopener noreferrer" target="_blank">
                             <img alt="Sakai" src="https://primefaces.org/cdn/primereact/images/layouts/sakai-react.jpg" className="w-full" />
                         </a>
                         <div className="flex gap-3 mt-3">
-                            <a href="https://www.primefaces.org/sakai-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
+                            <a href="https://sakai.primereact.org" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Preview</span>
                             </a>
                             <a href="https://github.com/primefaces/sakai-react" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">

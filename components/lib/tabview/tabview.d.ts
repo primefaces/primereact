@@ -12,6 +12,7 @@
  *
  */
 import * as React from 'react';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom Tabpanel header template options
@@ -85,11 +86,23 @@ export interface TabPanelProps {
     /**
      * Icons can be placed at left of a header.
      */
-    leftIcon?: string | undefined;
+    leftIcon?: IconType<TabPanel> | undefined;
     /**
      * Icons can be placed at right of a header.
      */
-    rightIcon?: string | undefined;
+    rightIcon?: IconType<TabPanel> | undefined;
+    /**
+     * Previous button of the tab header.
+     */
+    prevButton: IconType<TabPanel> | undefined;
+    /**
+     * Next button of the tab header.
+     */
+    nextButton: IconType<TabPanel> | undefined;
+    /**
+     * Close button of the tab header.
+     */
+    closeIcon: IconType<TabPanel> | undefined;
     /**
      * Whether the tab is disabled.
      * @defaultValue false

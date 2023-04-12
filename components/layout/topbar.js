@@ -38,6 +38,27 @@ export default function Topbar(props) {
         }
     ];
 
+    {
+        /* doc https://docsearch.algolia.com/docs/api/#transformitems */
+    }
+
+    function handleDocSearchTransformItems(items) {
+        const isLocalhost = process.env.NODE_ENV !== 'production';
+
+        return items.map((item) => {
+            if (isLocalhost) {
+                const url = new URL(item.url);
+
+                url.protocol = window.location.protocol;
+                url.hostname = window.location.hostname;
+                url.port = window.location.port;
+                item.url = url.toString();
+            }
+
+            return item;
+        });
+    }
+
     const onMenuButtonClick = () => {
         props.onMenuButtonClick();
     };
@@ -81,7 +102,7 @@ export default function Topbar(props) {
                 <button type="button" className="p-link menu-button" onClick={onMenuButtonClick} aria-haspopup aria-label="Menu">
                     <i className="pi pi-bars"></i>
                 </button>
-                <DocSearch appId="SCRI13XXZO" apiKey="ea9e6c8a983c5646d6b9079921d4aed7" indexName="primereact" container="" debug={false} />
+                <DocSearch appId="SCRI13XXZO" apiKey="ea9e6c8a983c5646d6b9079921d4aed7" indexName="primereact" container="" debug={false} transformItems={handleDocSearchTransformItems} />
 
                 <ul className="flex list-none m-0 p-0 gap-2 align-items-center">
                     <li></li>

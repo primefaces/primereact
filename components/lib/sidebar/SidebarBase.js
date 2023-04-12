@@ -15,6 +15,7 @@ export const SidebarBase = {
         baseZIndex: 0,
         dismissable: true,
         showCloseIcon: true,
+        closeIcon: null,
         ariaCloseLabel: null,
         closeOnEscape: true,
         icons: null,

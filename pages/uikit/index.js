@@ -17,7 +17,7 @@ const UIKitPage = (props) => {
                     <title>UI Kit - PrimeReact</title>
                     <meta name="description" content="Design files for PrimeReact Components." />
                 </Head>
-                <div className="content-section">
+                <div>
                     <div style={{ borderRadius: '50px', maxHeight: '500px' }} className="overflow-hidden mb-5 flex align-items-center">
                         <img alt="PrimeReact Designer" src={`https://primefaces.org/cdn/primereact/images/uikit/primeone-cover-${props.dark ? 'dark' : 'light'}.jpg`} className="w-full" />
                     </div>

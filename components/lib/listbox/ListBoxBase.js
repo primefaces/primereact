@@ -9,6 +9,7 @@ export const ListBoxBase = {
         emptyFilterMessage: null,
         emptyMessage: null,
         filter: false,
+        filterIcon: null,
         filterBy: null,
         filterInputProps: null,
         filterLocale: undefined,

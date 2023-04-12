@@ -123,8 +123,7 @@ export interface SplitButtonProps extends Omit<React.DetailedHTMLProps<React.HTM
      */
     transitionOptions?: CSSTransitionProps | undefined;
     /**
-     * Icon class of the dropdown icon.
-     * @defaultValue pi pi-chevron-down
+     * Name of the dropdown icon or JSX.Element for dropdown icon.
      */
     dropdownIcon?: IconType<SplitButtonProps> | undefined;
     /**

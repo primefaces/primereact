@@ -10,6 +10,7 @@ export const DialogBase = {
         breakpoints: null,
         className: null,
         closable: true,
+        closeIcon: null,
         closeOnEscape: true,
         contentClassName: null,
         contentStyle: null,
