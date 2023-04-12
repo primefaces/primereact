@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { useMountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames } from '../utils/Utils';
+import { IconUtils, classNames } from '../utils/Utils';
+import { ChevronLeftIcon } from '../icon/chevronleft';
+import { ChevronRightIcon } from '../icon/chevronright';
 
 export const GalleriaItem = React.memo(
     React.forwardRef((props, ref) => {
@@ -85,9 +87,13 @@ export const GalleriaItem = React.memo(
                     'p-disabled': isDisabled
                 });
 
+                const iconClassName = "p-galleria-item-prev-icon";
+                const icon = props.itemPrevIcon || <ChevronLeftIcon className={iconClassName} />;
+                const itemPrevIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+
                 return (
                     <button type="button" className={buttonClassName} onClick={navBackward} disabled={isDisabled}>
-                        <span className="p-galleria-item-prev-icon pi pi-chevron-left"></span>
+                        {itemPrevIcon}
                         <Ripple />
                     </button>
                 );
@@ -103,9 +109,14 @@ export const GalleriaItem = React.memo(
                     'p-disabled': isDisabled
                 });
 
+                const iconClassName = "p-galleria-item-next-icon";
+                const icon = props.itemNextIcon || <ChevronRightIcon className={iconClassName} />;
+                const itemNextIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+
+
                 return (
                     <button type="button" className={buttonClassName} onClick={navForward} disabled={isDisabled}>
-                        <span className="p-galleria-item-next-icon pi pi-chevron-right"></span>
+                        {itemNextIcon}
                         <Ripple />
                     </button>
                 );
