@@ -13761,12 +13761,28 @@
                             "description": "Used to get the child elements of the component."
                         },
                         {
+                            "name": "collapseIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<FieldsetProps>",
+                            "default": "",
+                            "description": "Icon of an expanded tab."
+                        },
+                        {
                             "name": "collapsed",
                             "optional": true,
                             "readonly": false,
                             "type": "boolean",
                             "default": "false",
                             "description": "Defines the default visibility state of the content."
+                        },
+                        {
+                            "name": "expandIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<FieldsetProps>",
+                            "default": "",
+                            "description": "Icon of an collapsed tab."
                         },
                         {
                             "name": "legend",
