@@ -14870,6 +14870,14 @@
                             "description": "Defines if scrolling would be infinite."
                         },
                         {
+                            "name": "closeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<GalleriaProps>",
+                            "default": "",
+                            "description": "Icon to display in the galleria close button."
+                        },
+                        {
                             "name": "footer",
                             "optional": true,
                             "readonly": false,
@@ -14902,12 +14910,44 @@
                             "description": "Position of indicators. Valid values are \"bottom\", \"top\", \"left\" and \"right\"."
                         },
                         {
+                            "name": "itemNextIcon",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "IconType<GalleriaProps>",
+                            "default": "",
+                            "description": "Icon to show in the next item button."
+                        },
+                        {
+                            "name": "itemPrevIcon",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "IconType<GalleriaProps>",
+                            "default": "",
+                            "description": "Icon to show in the previous item button."
+                        },
+                        {
+                            "name": "nextThumbnailIcon",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "IconType<GalleriaProps>",
+                            "default": "",
+                            "description": "Icon to show in the next thumbnail button."
+                        },
+                        {
                             "name": "numVisible",
                             "optional": true,
                             "readonly": false,
                             "type": "number",
                             "default": "3",
                             "description": "Number of items per page."
+                        },
+                        {
+                            "name": "prevThumbnailIcon",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "IconType<GalleriaProps>",
+                            "default": "",
+                            "description": "Icon to show in the previous thumbnail button."
                         },
                         {
                             "name": "responsiveOptions",
