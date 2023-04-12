@@ -22196,8 +22196,8 @@
                             "optional": true,
                             "readonly": false,
                             "type": "boolean",
-                            "default": "false",
-                            "description": "When specified, displays an input field to filter the items on keyup."
+                            "default": "label",
+                            "description": "When filtering is enabled, filterBy decides which field or fields (comma separated) to search against."
                         },
                         {
                             "name": "filterBy",
@@ -22206,6 +22206,14 @@
                             "type": "string",
                             "default": "label",
                             "description": "When filtering is enabled, filterBy decides which field or fields (comma separated) to search against."
+                        },
+                        {
+                            "name": "filterIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<OrderListProps>",
+                            "default": "",
+                            "description": "Icon of the filter."
                         },
                         {
                             "name": "filterLocale",
@@ -22254,6 +22262,38 @@
                             "type": "CSSProperties",
                             "default": "",
                             "description": "Inline style of the list element."
+                        },
+                        {
+                            "name": "moveBottomIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<OrderListProps>",
+                            "default": "",
+                            "description": "Icon of the move bottom icon."
+                        },
+                        {
+                            "name": "moveDownIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<OrderListProps>",
+                            "default": "",
+                            "description": "Icon of the move down icon."
+                        },
+                        {
+                            "name": "moveTopIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<OrderListProps>",
+                            "default": "",
+                            "description": "Icon of the move top icon."
+                        },
+                        {
+                            "name": "moveUpIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<OrderListProps>",
+                            "default": "",
+                            "description": "Icon of the move up icon."
                         },
                         {
                             "name": "value",
