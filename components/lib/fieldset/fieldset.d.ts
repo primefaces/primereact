@@ -9,6 +9,7 @@
  */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom toggle event.
@@ -46,10 +47,18 @@ export interface FieldsetProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      */
     collapsed?: boolean | undefined;
     /**
+     * Icon of an expanded tab.
+     */
+    collapseIcon?: IconType<FieldsetProps> | undefined;
+    /**
      * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
      * @type {CSSTransitionProps}
      */
     transitionOptions?: CSSTransitionProps | undefined;
+    /**
+     * Icon of an collapsed tab.
+     */
+    expandIcon?: IconType<FieldsetProps> | undefined;
     /**
      * Callback to invoke when a tab gets expanded.
      * @param {React.MouseEvent<HTMLElement>} event - Browser event.
