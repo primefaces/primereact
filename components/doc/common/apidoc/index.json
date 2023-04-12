@@ -3125,6 +3125,14 @@
                             "type": "MenuItem[]",
                             "default": "",
                             "description": "An array of menuitems."
+                        },
+                        {
+                            "name": "separatorIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<BreadCrumbProps>",
+                            "default": "",
+                            "description": "Icon of the separator."
                         }
                     ]
                 },
