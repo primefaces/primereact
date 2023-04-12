@@ -1,8 +1,32 @@
 import * as React from 'react';
 import { Button } from '../button/Button';
-import { ObjectUtils } from '../utils/Utils';
+import { IconUtils, ObjectUtils } from '../utils/Utils';
+import { AngleDownIcon } from '../icon/angledown';
+import { AngleDoubleUpIcon } from '../icon/angledoubleup';
+import { AngleUpIcon } from '../icon/angleup';
+import { AngleDoubleDownIcon } from '../icon/angledoubledown';
 
 export const OrderListControls = React.memo((props) => {
+    function getIconComponent(iconType) {
+        switch (iconType) {
+            case 'moveUpIcon':
+                return props.moveUpIcon || <AngleUpIcon />;
+            case 'moveTopIcon':
+                return props.moveTopIcon || <AngleDoubleUpIcon />;
+            case 'moveDownIcon':
+                return props.moveDownIcon || <AngleDownIcon />;
+            case 'moveBottomIcon':
+                return props.moveBottomIcon || <AngleDoubleDownIcon />;
+            default:
+                return null;
+        }
+    }
+
+    const moveUpIcon = IconUtils.getJSXIcon(getIconComponent('moveUpIcon'), undefined, { props });
+    const moveTopIcon = IconUtils.getJSXIcon(getIconComponent('moveTopIcon'), undefined, { props });
+    const moveDownIcon = IconUtils.getJSXIcon(getIconComponent('moveDownIcon'), undefined, { props });
+    const moveBottomIcon = IconUtils.getJSXIcon(getIconComponent('moveBottomIcon'), undefined, { props });
+
     const moveUp = (event) => {
         if (props.selection) {
             let value = [...props.value];
@@ -117,10 +141,10 @@ export const OrderListControls = React.memo((props) => {
 
     return (
         <div className="p-orderlist-controls">
-            <Button type="button" icon="pi pi-angle-up" onClick={moveUp}></Button>
-            <Button type="button" icon="pi pi-angle-double-up" onClick={moveTop}></Button>
-            <Button type="button" icon="pi pi-angle-down" onClick={moveDown}></Button>
-            <Button type="button" icon="pi pi-angle-double-down" onClick={moveBottom}></Button>
+            <Button type="button" icon={moveUpIcon} onClick={moveUp}></Button>
+            <Button type="button" icon={moveTopIcon} onClick={moveTop}></Button>
+            <Button type="button" icon={moveDownIcon} onClick={moveDown}></Button>
+            <Button type="button" icon={moveBottomIcon} onClick={moveBottom}></Button>
         </div>
     );
 });

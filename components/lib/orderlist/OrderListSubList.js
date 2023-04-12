@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { SearchIcon } from '../icon/search';
 
 export const OrderListSubList = React.memo((props) => {
     const dragging = React.useRef(null);
@@ -151,11 +152,16 @@ export const OrderListSubList = React.memo((props) => {
     };
 
     const createFilter = () => {
+        const iconClassName = 'p-orderlist-filter';
+        const icon = props.filterIcon || <SearchIcon className={iconClassName} />;
+        const filterIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+
+
         if (props.filter) {
             let content = (
                 <div className="p-orderlist-filter">
                     <input type="text" value={props.filterValue} onChange={props.onFilter} onKeyDown={onFilterInputKeyDown} placeholder={props.placeholder} className="p-orderlist-filter-input p-inputtext p-component" />
-                    <span className="p-orderlist-filter-icon pi pi-search"></span>
+                    <span className="p-orderlist-filter-icon">{filterIcon}</span>
                 </div>
             );
 
@@ -168,7 +174,7 @@ export const OrderListSubList = React.memo((props) => {
                         onKeyDown: onFilterInputKeyDown
                     },
                     filterOptions: filterOptions,
-                    iconClassName: 'p-orderlist-filter-icon pi pi-search',
+                    iconClassName: 'p-orderlist-filter-icon',
                     element: content,
                     props
                 };
