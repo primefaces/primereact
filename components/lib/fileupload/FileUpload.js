@@ -7,6 +7,9 @@ import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { FileUploadBase } from './FileUploadBase';
 import { Badge } from '../badge/Badge';
+import { PlusIcon } from '../icon/plus';
+import { UploadIcon } from '../icon/upload';
+import { TimesIcon } from '../icon/times';
 
 export const FileUpload = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -369,14 +372,16 @@ export const FileUpload = React.memo(
                 className
             );
             const labelClassName = 'p-button-label p-clickable';
+            const iconClassName = classNames('p-button-icon p-clickable', { "p-button-icon-left": !iconOnly });
             const label = iconOnly ? <span className={labelClassName} dangerouslySetInnerHTML={{ __html: '&nbsp;' }} /> : <span className={labelClassName}>{chooseButtonLabel}</span>;
             const input = <input ref={fileInputRef} type="file" onChange={onFileSelect} multiple={props.multiple} accept={props.accept} disabled={chooseDisabled} />;
-            const icon = IconUtils.getJSXIcon(_icon || 'pi pi-fw pi-plus', { className: 'p-button-icon p-button-icon-left p-clickable' }, { props });
+            const icon = _icon || <PlusIcon className={iconClassName} />;
+            const chooseIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
             return (
                 <span className={chooseClassName} style={style} onClick={choose} onKeyDown={onKeyDown} onFocus={onFocus} onBlur={onBlur} tabIndex={0}>
                     {input}
-                    {icon}
+                    {chooseIcon}
                     {label}
                     <Ripple />
                 </span>
@@ -403,7 +408,7 @@ export const FileUpload = React.memo(
             );
             const removeButton = (
                 <div>
-                    <Button type="button" icon="pi pi-times" className="p-button-danger p-button-text p-button-rounded" onClick={(e) => onRemoveClick(e, badgeOptions, index)} disabled={disabled} />
+                    <Button type="button" icon={props.removeIcon || <TimesIcon />} text rounded className="p-button-danger" onClick={(e) => onRemoveClick(e, badgeOptions, index)} disabled={disabled} />
                 </div>
             );
             let content = (
@@ -483,9 +488,13 @@ export const FileUpload = React.memo(
                 const cancelOptions = props.cancelOptions;
                 const uploadLabel = !uploadOptions.iconOnly ? uploadButtonLabel : '';
                 const cancelLabel = !cancelOptions.iconOnly ? cancelButtonLabel : '';
+                const uploadIconClassName = classNames('p-button-icon p-c', { "p-button-icon-left": !uploadOptions.iconOnly })
+                const uploadIcon = IconUtils.getJSXIcon(uploadOptions.icon || <UploadIcon className={uploadIconClassName} />, { className: uploadIconClassName }, { props });
+                const cancelIconClassName = classNames('p-button-icon p-c', { "p-button-icon-left": !cancelOptions.iconOnly })
+                const cancelIcon = IconUtils.getJSXIcon(cancelOptions.icon || <TimesIcon className={cancelIconClassName} />, { className: cancelIconClassName }, { props });
 
-                uploadButton = <Button type="button" label={uploadLabel} icon={uploadOptions.icon || 'pi pi-upload'} onClick={upload} disabled={uploadDisabled} style={uploadOptions.style} className={uploadOptions.className} />;
-                cancelButton = <Button type="button" label={cancelLabel} icon={cancelOptions.icon || 'pi pi-times'} onClick={clear} disabled={cancelDisabled} style={cancelOptions.style} className={cancelOptions.className} />;
+                uploadButton = <Button type="button" label={uploadLabel} icon={uploadIcon} onClick={upload} disabled={uploadDisabled} style={uploadOptions.style} className={uploadOptions.className} />;
+                cancelButton = <Button type="button" label={cancelLabel} icon={cancelIcon} onClick={clear} disabled={cancelDisabled} style={cancelOptions.style} className={cancelOptions.className} />;
             }
 
             if (hasFiles) {
@@ -537,18 +546,19 @@ export const FileUpload = React.memo(
             const otherProps = FileUploadBase.getOtherProps(props);
             const className = classNames('p-fileupload p-fileupload-basic p-component', props.className);
             const buttonClassName = classNames('p-button p-component p-fileupload-choose', { 'p-fileupload-choose-selected': hasFiles, 'p-disabled': disabled, 'p-focus': focusedState }, chooseOptions.className);
-            const chooseIcon = chooseOptions.icon || classNames({ 'pi pi-plus': !chooseOptions.icon && (!hasFiles || props.auto), 'pi pi-upload': !chooseOptions.icon && hasFiles && !props.auto });
+            const iconClassName = classNames('p-button-icon', { "p-button-icon-left": !chooseOptions.iconOnly });
+            const icon = chooseOptions.icon ? chooseOptions.icon : (!chooseOptions.icon && (!hasFiles || props.auto)) ? <PlusIcon className={iconClassName} /> : !chooseOptions.icon && hasFiles && !props.auto && <UploadIcon className={iconClassName} />;
             const labelClassName = 'p-button-label p-clickable';
             const chooseLabel = chooseOptions.iconOnly ? <span className={labelClassName} dangerouslySetInnerHTML={{ __html: '&nbsp;' }} /> : <span className={labelClassName}>{chooseButtonLabel}</span>;
             const label = props.auto ? chooseLabel : <span className={labelClassName}>{hasFiles ? filesState[0].name : chooseLabel}</span>;
-            const icon = IconUtils.getJSXIcon(chooseIcon, { className: 'p-button-icon p-button-icon-left' }, { props, hasFiles });
+            const chooseIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props, hasFiles });
             const input = !hasFiles && <input ref={fileInputRef} type="file" accept={props.accept} multiple={props.multiple} disabled={disabled} onChange={onFileSelect} />;
 
             return (
                 <div className={className} style={props.style} {...otherProps}>
                     <Messages ref={messagesRef} />
                     <span className={buttonClassName} style={chooseOptions.style} onMouseUp={onSimpleUploaderClick} onKeyDown={onKeyDown} onFocus={onFocus} onBlur={onBlur} tabIndex={0}>
-                        {icon}
+                        {chooseIcon}
                         {label}
                         {input}
                         <Ripple />

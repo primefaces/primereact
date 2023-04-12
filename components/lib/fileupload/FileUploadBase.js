@@ -9,6 +9,7 @@ export const FileUploadBase = {
         mode: 'advanced',
         multiple: false,
         accept: null,
+        removeIcon: null,
         disabled: false,
         auto: false,
         maxFileSize: null,
