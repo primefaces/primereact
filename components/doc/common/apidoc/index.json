@@ -14191,6 +14191,14 @@
                             "description": "Custom template of progressBar content in the container."
                         },
                         {
+                            "name": "removeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<FileUploadProps>",
+                            "default": "",
+                            "description": "Icon of the remove element."
+                        },
+                        {
                             "name": "style",
                             "optional": true,
                             "readonly": false,
