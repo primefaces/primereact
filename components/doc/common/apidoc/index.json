@@ -2306,7 +2306,7 @@
                             "description": "When present, it specifies that the input cannot be typed."
                         },
                         {
-                            "name": "removeIcon",
+                            "name": "removeTokenIcon",
                             "optional": true,
                             "readonly": false,
                             "type": "IconType<AutoCompleteProps>",
