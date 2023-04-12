@@ -31,7 +31,7 @@ const TemplateSection = (props) => {
                                   }
                         }
                     >
-                        <a className="templates-btn" target="_blank" rel="noopener noreferrer" href="https://www.primefaces.org/diamond-react/">
+                        <a className="templates-btn" target="_blank" rel="noopener noreferrer" href="https://diamond.primereact.org">
                             Diamond Preview
                         </a>
                     </div>
@@ -89,7 +89,7 @@ const TemplateSection = (props) => {
                                   }
                         }
                     >
-                        <a className="templates-btn" target="_blank" rel="noopener noreferrer" href="https://www.primefaces.org/apollo-react/">
+                        <a className="templates-btn" target="_blank" rel="noopener noreferrer" href="https://apollo.primereact.org">
                             Apollo Preview
                         </a>
                     </div>
