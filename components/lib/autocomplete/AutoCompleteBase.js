@@ -51,7 +51,7 @@ export const AutoCompleteBase = {
         panelStyle: null,
         placeholder: null,
         readOnly: false,
-        removeIcon: null,
+        removeTokenIcon: null,
         scrollHeight: '200px',
         selectedItemTemplate: null,
         selectionLimit: null,

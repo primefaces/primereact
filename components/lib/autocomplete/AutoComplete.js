@@ -129,8 +129,8 @@ export const AutoComplete = React.memo(
                 props.onChange({
                     originalEvent: event,
                     value,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => { },
+                    preventDefault: () => { },
                     target: {
                         name: props.name,
                         id: idState,
@@ -537,13 +537,13 @@ export const AutoComplete = React.memo(
                 return props.value.map((val, index) => {
                     const key = index + 'multi-item';
                     const iconProps = { className: 'p-autocomplete-token-icon', onClick: (e) => removeItem(e, index) };
-                    const icon = props.removeIcon || <TimesCircleIcon {...iconProps} />;
-                    const removeIcon = !props.disabled && IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
+                    const icon = props.removeTokenIcon || <TimesCircleIcon {...iconProps} />;
+                    const removeTokenIcon = !props.disabled && IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
 
                     return (
                         <li key={key} className="p-autocomplete-token p-highlight">
                             <span className="p-autocomplete-token-label">{formatValue(val)}</span>
-                            {removeIcon}
+                            {removeTokenIcon}
                         </li>
                     );
                 });
