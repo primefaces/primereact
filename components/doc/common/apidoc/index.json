@@ -22733,6 +22733,14 @@
                             "description": "Used to get the child elements of the component."
                         },
                         {
+                            "name": "closeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<OverlayPanelProps>",
+                            "default": "",
+                            "description": "Icon to display as close icon."
+                        },
+                        {
                             "name": "dismissable",
                             "optional": true,
                             "readonly": false,
