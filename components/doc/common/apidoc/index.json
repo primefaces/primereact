@@ -32430,6 +32430,14 @@
                     "description": "Defines valid properties in TriStateCheckbox component. In addition to these, all properties of HTMLDivElement can be used in this component.",
                     "values": [
                         {
+                            "name": "checkIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<TriStateCheckboxProps>",
+                            "default": "",
+                            "description": "Icon of the checkbox when checked."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
@@ -32468,6 +32476,14 @@
                             "type": "TooltipOptions",
                             "default": "",
                             "description": "Configuration of the tooltip, refer to the tooltip documentation for more information."
+                        },
+                        {
+                            "name": "uncheckIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<TriStateCheckboxProps>",
+                            "default": "",
+                            "description": "Icon of the checkbox when unchecked."
                         },
                         {
                             "name": "value",
