@@ -9,6 +9,7 @@
  */
 
 import * as React from 'react';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom virtual scroller options type.
@@ -196,6 +197,10 @@ interface VirtualScrollerContentTemplateOptions {
      * Template of loading item.
      */
     loadingTemplate: React.ReactNode | ((options: VirtualScrollerLoadingTemplateOptions) => React.ReactNode);
+    /**
+     * Icon of the loading icon.
+     */
+    loadingIcon: IconType<VirtualScrollerProps> | number[];
     /**
      * The height/width of item according to orientation.
      */

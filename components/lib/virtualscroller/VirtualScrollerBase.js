@@ -21,6 +21,7 @@ export const VirtualScrollerBase = {
         lazy: false,
         disabled: false,
         loaderDisabled: false,
+        loadingIcon: null,
         columns: null,
         loading: undefined,
         autoSize: false,
