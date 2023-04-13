@@ -288,7 +288,19 @@ export const PickList = React.memo(
 
         return (
             <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
-                {props.showSourceControls && <PickListControls list={props.source} selection={sourceSelection} onReorder={onSourceReorder} className="p-picklist-source-controls" dataKey={props.dataKey} />}
+                {props.showSourceControls && (
+                    <PickListControls
+                        list={props.source}
+                        selection={sourceSelection}
+                        onReorder={onSourceReorder}
+                        className="p-picklist-source-controls"
+                        dataKey={props.dataKey}
+                        moveUpIcon={props.moveUpIcon}
+                        moveTopIcon={props.moveTopIcon}
+                        moveDownIcon={props.moveDownIcon}
+                        moveBottomIcon={props.moveBottomIcon}
+                    />
+                )}
 
                 <PickListSubList
                     ref={sourceListElementRef}
@@ -309,6 +321,7 @@ export const PickList = React.memo(
                     showFilter={showSourceFilter}
                     placeholder={props.sourceFilterPlaceholder}
                     template={props.sourceFilterTemplate}
+                    sourceFilterIcon={props.sourceFilterIcon}
                 />
 
                 <PickListTransferControls
@@ -320,6 +333,10 @@ export const PickList = React.memo(
                     sourceSelection={sourceSelection}
                     targetSelection={targetSelection}
                     dataKey={props.dataKey}
+                    moveToTargetIcon={props.moveToTargetIcon}
+                    moveAllToTargetIcon={props.moveAllToTargetIcon}
+                    moveToSourceIcon={props.moveToSourceIcon}
+                    moveAllToSourceIcon={props.moveAllToSourceIcon}
                 />
 
                 <PickListSubList
@@ -341,9 +358,22 @@ export const PickList = React.memo(
                     showFilter={showTargetFilter}
                     placeholder={props.targetFilterPlaceholder}
                     template={props.targetFilterTemplate}
+                    targetFilterIcon={props.targetFilterIcon}
                 />
 
-                {props.showTargetControls && <PickListControls list={props.target} selection={targetSelection} onReorder={onTargetReorder} className="p-picklist-target-controls" dataKey={props.dataKey} />}
+                {props.showTargetControls && (
+                    <PickListControls
+                        list={props.target}
+                        selection={targetSelection}
+                        onReorder={onTargetReorder}
+                        className="p-picklist-target-controls"
+                        dataKey={props.dataKey}
+                        moveUpIcon={props.moveUpIcon}
+                        moveTopIcon={props.moveTopIcon}
+                        moveDownIcon={props.moveDownIcon}
+                        moveBottomIcon={props.moveBottomIcon}
+                    />
+                )}
             </div>
         );
     })

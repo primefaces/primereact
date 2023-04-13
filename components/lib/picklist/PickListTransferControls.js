@@ -1,8 +1,32 @@
 import * as React from 'react';
 import { Button } from '../button/Button';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, ObjectUtils, IconUtils } from '../utils/Utils';
+import { AngleLeftIcon } from '../icon/angleleft';
+import { AngleDoubleLeftIcon } from '../icon/angledoubleleft';
+import { AngleDoubleRightIcon } from '../icon/angledoubleright';
+import { AngleRightIcon } from '../icon/angleright';
 
 export const PickListTransferControls = React.memo((props) => {
+    function getIconComponent(iconType) {
+        switch (iconType) {
+            case 'moveToTargetIcon':
+                return props.moveToTargetIcon || <AngleRightIcon />;
+            case 'moveAllToTargetIcon':
+                return props.moveAllToTargetIcon || <AngleDoubleRightIcon />;
+            case 'moveToSourceIcon':
+                return props.moveToSourceIcon || <AngleLeftIcon />;
+            case 'moveAllToSourceIcon':
+                return props.moveAllToSourceIcon || <AngleDoubleLeftIcon />;
+            default:
+                return null;
+        }
+    }
+
+    const moveToTargetIcon = IconUtils.getJSXIcon(getIconComponent('moveToTargetIcon'), undefined, { props });
+    const moveAllToTargetIcon = IconUtils.getJSXIcon(getIconComponent('moveAllToTargetIcon'), undefined, { props });
+    const moveToSourceIcon = IconUtils.getJSXIcon(getIconComponent('moveToSourceIcon'), undefined, { props });
+    const moveAllToSourceIcon = IconUtils.getJSXIcon(getIconComponent('moveAllToSourceIcon'), undefined, { props });
+
     const moveRightDisabled = ObjectUtils.isEmpty(props.sourceSelection) || ObjectUtils.isEmpty(props.visibleSourceList);
     const moveLeftDisabled = ObjectUtils.isEmpty(props.targetSelection) || ObjectUtils.isEmpty(props.visibleTargetList);
     const moveAllRightDisabled = ObjectUtils.isEmpty(props.visibleSourceList);
@@ -96,10 +120,10 @@ export const PickListTransferControls = React.memo((props) => {
 
     return (
         <div className={className}>
-            <Button disabled={moveRightDisabled} type="button" icon="pi pi-angle-right" onClick={moveRight}></Button>
-            <Button disabled={moveAllRightDisabled} type="button" icon="pi pi-angle-double-right" onClick={moveAllRight}></Button>
-            <Button disabled={moveLeftDisabled} type="button" icon="pi pi-angle-left" onClick={moveLeft}></Button>
-            <Button disabled={moveAllLeftDisabled} type="button" icon="pi pi-angle-double-left" onClick={moveAllLeft}></Button>
+            <Button disabled={moveRightDisabled} type="button" icon={moveToTargetIcon} onClick={moveRight}></Button>
+            <Button disabled={moveAllRightDisabled} type="button" icon={moveAllToTargetIcon} onClick={moveAllRight}></Button>
+            <Button disabled={moveLeftDisabled} type="button" icon={moveToSourceIcon} onClick={moveLeft}></Button>
+            <Button disabled={moveAllLeftDisabled} type="button" icon={moveAllToSourceIcon} onClick={moveAllLeft}></Button>
         </div>
     );
 });
