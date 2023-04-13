@@ -33199,6 +33199,13 @@
                             "description": "Whether the data is loaded."
                         },
                         {
+                            "name": "loadingIcon",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number[] | IconType<VirtualScrollerProps>",
+                            "description": "Icon of the loading icon."
+                        },
+                        {
                             "name": "loadingTemplate",
                             "optional": false,
                             "readonly": false,
