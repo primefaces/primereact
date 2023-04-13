@@ -331,7 +331,7 @@ export const GalleriaThumbnails = React.memo(
                     'p-disabled': isDisabled
                 });
 
-                const iconClassName = "p-galleria-thumbnail-prev-icon"
+                const iconClassName = 'p-galleria-thumbnail-prev-icon';
                 const icon = props.isVertical ? props.prevThumbnailIcon || <ChevronUpIcon className={iconClassName} /> : props.prevThumbnailIcon || <ChevronLeftIcon className={iconClassName} />;
                 const prevThumbnailIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
@@ -353,7 +353,7 @@ export const GalleriaThumbnails = React.memo(
                     'p-disabled': isDisabled
                 });
 
-                const iconClassName = "p-galleria-thumbnail-next-icon"
+                const iconClassName = 'p-galleria-thumbnail-next-icon';
                 const icon = props.isVertical ? props.nextThumbnailIcon || <ChevronDownIcon className={iconClassName} /> : props.nextThumbnailIcon || <ChevronRightIcon className={iconClassName} />;
                 const nextThumbnailIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 

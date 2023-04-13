@@ -12,7 +12,7 @@ import { CheckIcon } from '../icon/check';
 export const ToastMessage = React.memo(
     React.forwardRef((props, ref) => {
         const messageInfo = props.messageInfo;
-        const { severity, content, summary, detail, closable, life, sticky, className: _className, style, contentClassName: _contentClassName, contentStyle, icon} = messageInfo.message;
+        const { severity, content, summary, detail, closable, life, sticky, className: _className, style, contentClassName: _contentClassName, contentStyle, icon } = messageInfo.message;
 
         const [focused, setFocused] = React.useState(false);
         const [clearTimer] = useTimeout(
@@ -107,7 +107,7 @@ export const ToastMessage = React.memo(
                 }
 
                 if (icon) {
-                    messageIcon = icon
+                    messageIcon = icon;
                 }
 
                 return (

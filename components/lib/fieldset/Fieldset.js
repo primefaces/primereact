@@ -67,7 +67,7 @@ export const Fieldset = React.forwardRef((inProps, ref) => {
 
     const createToggleIcon = () => {
         if (props.toggleable) {
-            const iconClassName = "p-fieldset-toggler";
+            const iconClassName = 'p-fieldset-toggler';
 
             const icon = collapsed ? props.expandIcon || <PlusIcon className={iconClassName} /> : props.collapseIcon || <MinusIcon className={iconClassName} />;
             const toggleIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });

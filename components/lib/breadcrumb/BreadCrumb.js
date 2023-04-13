@@ -69,7 +69,7 @@ export const BreadCrumb = React.memo(
         };
 
         const createSeparator = () => {
-            const iconClassName = "p-breadcrumb-chevron";
+            const iconClassName = 'p-breadcrumb-chevron';
             const icon = props.separatorIcon || <ChevronRightIcon className={iconClassName} />;
             const separatorIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 

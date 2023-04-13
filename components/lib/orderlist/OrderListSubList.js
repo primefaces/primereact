@@ -156,7 +156,6 @@ export const OrderListSubList = React.memo((props) => {
         const icon = props.filterIcon || <SearchIcon className={iconClassName} />;
         const filterIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
-
         if (props.filter) {
             let content = (
                 <div className="p-orderlist-filter">

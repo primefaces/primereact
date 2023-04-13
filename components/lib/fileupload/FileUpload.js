@@ -372,7 +372,7 @@ export const FileUpload = React.memo(
                 className
             );
             const labelClassName = 'p-button-label p-clickable';
-            const iconClassName = classNames('p-button-icon p-clickable', { "p-button-icon-left": !iconOnly });
+            const iconClassName = classNames('p-button-icon p-clickable', { 'p-button-icon-left': !iconOnly });
             const label = iconOnly ? <span className={labelClassName} dangerouslySetInnerHTML={{ __html: '&nbsp;' }} /> : <span className={labelClassName}>{chooseButtonLabel}</span>;
             const input = <input ref={fileInputRef} type="file" onChange={onFileSelect} multiple={props.multiple} accept={props.accept} disabled={chooseDisabled} />;
             const icon = _icon || <PlusIcon className={iconClassName} />;
@@ -488,9 +488,9 @@ export const FileUpload = React.memo(
                 const cancelOptions = props.cancelOptions;
                 const uploadLabel = !uploadOptions.iconOnly ? uploadButtonLabel : '';
                 const cancelLabel = !cancelOptions.iconOnly ? cancelButtonLabel : '';
-                const uploadIconClassName = classNames('p-button-icon p-c', { "p-button-icon-left": !uploadOptions.iconOnly })
+                const uploadIconClassName = classNames('p-button-icon p-c', { 'p-button-icon-left': !uploadOptions.iconOnly });
                 const uploadIcon = IconUtils.getJSXIcon(uploadOptions.icon || <UploadIcon className={uploadIconClassName} />, { className: uploadIconClassName }, { props });
-                const cancelIconClassName = classNames('p-button-icon p-c', { "p-button-icon-left": !cancelOptions.iconOnly })
+                const cancelIconClassName = classNames('p-button-icon p-c', { 'p-button-icon-left': !cancelOptions.iconOnly });
                 const cancelIcon = IconUtils.getJSXIcon(cancelOptions.icon || <TimesIcon className={cancelIconClassName} />, { className: cancelIconClassName }, { props });
 
                 uploadButton = <Button type="button" label={uploadLabel} icon={uploadIcon} onClick={upload} disabled={uploadDisabled} style={uploadOptions.style} className={uploadOptions.className} />;
@@ -546,8 +546,8 @@ export const FileUpload = React.memo(
             const otherProps = FileUploadBase.getOtherProps(props);
             const className = classNames('p-fileupload p-fileupload-basic p-component', props.className);
             const buttonClassName = classNames('p-button p-component p-fileupload-choose', { 'p-fileupload-choose-selected': hasFiles, 'p-disabled': disabled, 'p-focus': focusedState }, chooseOptions.className);
-            const iconClassName = classNames('p-button-icon', { "p-button-icon-left": !chooseOptions.iconOnly });
-            const icon = chooseOptions.icon ? chooseOptions.icon : (!chooseOptions.icon && (!hasFiles || props.auto)) ? <PlusIcon className={iconClassName} /> : !chooseOptions.icon && hasFiles && !props.auto && <UploadIcon className={iconClassName} />;
+            const iconClassName = classNames('p-button-icon', { 'p-button-icon-left': !chooseOptions.iconOnly });
+            const icon = chooseOptions.icon ? chooseOptions.icon : !chooseOptions.icon && (!hasFiles || props.auto) ? <PlusIcon className={iconClassName} /> : !chooseOptions.icon && hasFiles && !props.auto && <UploadIcon className={iconClassName} />;
             const labelClassName = 'p-button-label p-clickable';
             const chooseLabel = chooseOptions.iconOnly ? <span className={labelClassName} dangerouslySetInnerHTML={{ __html: '&nbsp;' }} /> : <span className={labelClassName}>{chooseButtonLabel}</span>;
             const label = props.auto ? chooseLabel : <span className={labelClassName}>{hasFiles ? filesState[0].name : chooseLabel}</span>;

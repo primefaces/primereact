@@ -87,7 +87,7 @@ export const GalleriaItem = React.memo(
                     'p-disabled': isDisabled
                 });
 
-                const iconClassName = "p-galleria-item-prev-icon";
+                const iconClassName = 'p-galleria-item-prev-icon';
                 const icon = props.itemPrevIcon || <ChevronLeftIcon className={iconClassName} />;
                 const itemPrevIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
@@ -109,10 +109,9 @@ export const GalleriaItem = React.memo(
                     'p-disabled': isDisabled
                 });
 
-                const iconClassName = "p-galleria-item-next-icon";
+                const iconClassName = 'p-galleria-item-next-icon';
                 const icon = props.itemNextIcon || <ChevronRightIcon className={iconClassName} />;
                 const itemNextIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
-
 
                 return (
                     <button type="button" className={buttonClassName} onClick={navForward} disabled={isDisabled}>

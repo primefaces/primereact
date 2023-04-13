@@ -154,7 +154,7 @@ export const Galleria = React.memo(
                 indicatorPosClassName
             );
 
-            const iconProps = { className: "p-galleria-close-icon", "aria-hidden": true };
+            const iconProps = { className: 'p-galleria-close-icon', 'aria-hidden': true };
             const icon = props.closeIcon || <TimesIcon {...iconProps} />;
             const closeIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
 

@@ -129,8 +129,8 @@ export const AutoComplete = React.memo(
                 props.onChange({
                     originalEvent: event,
                     value,
-                    stopPropagation: () => { },
-                    preventDefault: () => { },
+                    stopPropagation: () => {},
+                    preventDefault: () => {},
                     target: {
                         name: props.name,
                         id: idState,
