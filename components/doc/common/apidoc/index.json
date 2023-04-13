@@ -24480,6 +24480,70 @@
                             "description": "Defines how multiple items can be selected, when true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically."
                         },
                         {
+                            "name": "moveAllToSourceIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PickListProps>",
+                            "default": "",
+                            "description": "Icon for moving all items to the source list."
+                        },
+                        {
+                            "name": "moveAllToTargetIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PickListProps>",
+                            "default": "",
+                            "description": "Icon for moving all items to the target list."
+                        },
+                        {
+                            "name": "moveBottomIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PickListProps>",
+                            "default": "",
+                            "description": "Icon of the move bottom icon."
+                        },
+                        {
+                            "name": "moveDownIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PickListProps>",
+                            "default": "",
+                            "description": "Icon of the move down icon."
+                        },
+                        {
+                            "name": "moveToSourceIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PickListProps>",
+                            "default": "",
+                            "description": "Icon for moving an item to the source list."
+                        },
+                        {
+                            "name": "moveToTargetIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PickListProps>",
+                            "default": "",
+                            "description": "Icon for moving an item to the target list."
+                        },
+                        {
+                            "name": "moveTopIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PickListProps>",
+                            "default": "",
+                            "description": "Icon of the move top icon."
+                        },
+                        {
+                            "name": "moveUpIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PickListProps>",
+                            "default": "",
+                            "description": "Icon of the move up icon."
+                        },
+                        {
                             "name": "showSourceControls",
                             "optional": true,
                             "readonly": false,
@@ -24518,6 +24582,14 @@
                             "type": "any[]",
                             "default": "",
                             "description": "An array of objects for the source list."
+                        },
+                        {
+                            "name": "sourceFilterIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PickListProps>",
+                            "default": "",
+                            "description": "Icon of the source list filter."
                         },
                         {
                             "name": "sourceFilterPlaceholder",
@@ -24598,6 +24670,14 @@
                             "type": "any[]",
                             "default": "",
                             "description": "An array of objects for the target list."
+                        },
+                        {
+                            "name": "targetFilterIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PickListProps>",
+                            "default": "",
+                            "description": "Icon of the target list filter."
                         },
                         {
                             "name": "targetFilterPlaceholder",
