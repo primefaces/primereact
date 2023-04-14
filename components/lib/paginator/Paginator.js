@@ -115,19 +115,19 @@ export const Paginator = React.memo(
 
             switch (key) {
                 case 'FirstPageLink':
-                    element = <FirstPageLink key={key} onClick={changePageToFirst} disabled={isFirstPage || isEmpty} template={template} />;
+                    element = <FirstPageLink key={key} onClick={changePageToFirst} disabled={isFirstPage || isEmpty} template={template} firstPageLinkIcon={props.firstPageLinkIcon} />;
                     break;
 
                 case 'PrevPageLink':
-                    element = <PrevPageLink key={key} onClick={changePageToPrev} disabled={isFirstPage || isEmpty} template={template} />;
+                    element = <PrevPageLink key={key} onClick={changePageToPrev} disabled={isFirstPage || isEmpty} template={template} prevPageLinkIcon={props.prevPageLinkIcon} />;
                     break;
 
                 case 'NextPageLink':
-                    element = <NextPageLink key={key} onClick={changePageToNext} disabled={isLastPage || isEmpty} template={template} />;
+                    element = <NextPageLink key={key} onClick={changePageToNext} disabled={isLastPage || isEmpty} template={template} nextPageLinkIcon={props.nextPageLinkIcon} />;
                     break;
 
                 case 'LastPageLink':
-                    element = <LastPageLink key={key} onClick={changePageToLast} disabled={isLastPage || isEmpty} template={template} />;
+                    element = <LastPageLink key={key} onClick={changePageToLast} disabled={isLastPage || isEmpty} template={template} lastPageLinkIcon={props.lastPageLinkIcon} />;
                     break;
 
                 case 'PageLinks':
