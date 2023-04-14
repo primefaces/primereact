@@ -59,6 +59,9 @@ export const MultiSelectPanel = React.memo(
                     onSelectAll={props.onSelectAll}
                     template={props.panelHeaderTemplate}
                     resetFilter={props.resetFilter}
+                    closeIcon={props.closeIcon}
+                    filterIcon={props.filterIcon}
+                    itemCheckboxIcon={props.itemCheckboxIcon}
                 />
             );
         };
@@ -96,6 +99,7 @@ export const MultiSelectPanel = React.memo(
                         tabIndex={tabIndex}
                         disabled={disabled}
                         className={props.itemClassName}
+                        checkboxIcon={props.checkboxIcon}
                     />
                 );
             });
@@ -143,6 +147,7 @@ export const MultiSelectPanel = React.memo(
                         tabIndex={tabIndex}
                         disabled={disabled}
                         className={props.itemClassName}
+                        checkboxIcon={props.checkboxIcon}
                     />
                 );
             }
