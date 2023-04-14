@@ -28547,6 +28547,14 @@
                             "description": "Maximum height of the options panel on responsive mode."
                         },
                         {
+                            "name": "submenuIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<TieredMenuProps>",
+                            "default": "",
+                            "description": "Icon of the submenu."
+                        },
+                        {
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
