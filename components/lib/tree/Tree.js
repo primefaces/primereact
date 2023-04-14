@@ -369,7 +369,7 @@ export const Tree = React.memo(
         const createLoader = () => {
             if (props.loading) {
                 const iconClassName = 'p-tree-loading-icon';
-                const icon = props.loadingIcon || <SpinnerIcon width={'2rem'} height={'2rem'} className={iconClassName} spin />;
+                const icon = props.loadingIcon || <SpinnerIcon className={iconClassName} spin />;
                 const loadingIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
                 return <div className="p-tree-loading-overlay p-component-overlay">{loadingIcon}</div>;
