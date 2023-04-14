@@ -244,7 +244,7 @@ export const TieredMenuSub = React.memo((props) => {
         }
 
         return (
-            <li key={key} id={item} className={className} style={style} onMouseEnter={(event) => onItemMouseEnter(event, item)} role="none">
+            <li key={key} id={item.id} className={className} style={style} onMouseEnter={(event) => onItemMouseEnter(event, item)} role="none">
                 {content}
                 {submenu}
             </li>
