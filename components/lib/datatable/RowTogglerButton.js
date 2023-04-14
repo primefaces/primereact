@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { Ripple } from '../ripple/Ripple';
-import { classNames } from '../utils/Utils';
+import { IconUtils } from '../utils/Utils';
+import { ChevronDownIcon } from '../icon/chevrondown';
+import { ChevronRightIcon } from '../icon/chevronright';
 
 export const RowTogglerButton = React.memo((props) => {
     const onClick = (event) => {
@@ -11,12 +13,14 @@ export const RowTogglerButton = React.memo((props) => {
         });
     };
 
-    const iconClassName = classNames('p-row-toggler-icon', props.expanded ? props.expandedRowIcon : props.collapsedRowIcon);
+    const iconProps = { className: 'p-row-toggler-icon', "aria-hidden": true };
+    const icon = props.expanded ? props.expandedRowIcon || <ChevronDownIcon {...iconProps} /> : props.collapsedRowIcon || <ChevronRightIcon {...iconProps} />;
+    const togglerIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
     const label = props.expanded ? ariaLabel('collapseLabel') : ariaLabel('expandLabel');
 
     return (
         <button type="button" onClick={onClick} className="p-row-toggler p-link" tabIndex={props.tabIndex} aria-label={label}>
-            <span className={iconClassName} aria-hidden="true"></span>
+            {togglerIcon}
             <Ripple />
         </button>
     );

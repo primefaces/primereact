@@ -11,6 +11,7 @@ import * as React from 'react';
 import { Column, ColumnProps } from '../column';
 import { PaginatorTemplate } from '../paginator';
 import { VirtualScroller, VirtualScrollerProps } from '../virtualscroller/virtualscroller';
+import { IconType } from '../utils/utils';
 
 type DataTableHeaderTemplateType<TValue extends DataTableValueArray> = React.ReactNode | ((options: DataTableHeaderTemplateOptions<TValue>) => React.ReactNode);
 
@@ -707,6 +708,10 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      */
     breakpoint?: string | undefined;
     /**
+     * Icon to display in the checkbox.
+     */
+    checkIcon?: IconType<DataTableProps<TValue>> | undefined;
+    /**
      * Whether to cell selection is enabled or not.
      * @defaultValue false
      */
@@ -717,9 +722,8 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     className?: string | undefined;
     /**
      * Icon of the row toggler to display the row as collapsed.
-     * @defaultValue pi pi-chevron-up
      */
-    collapsedRowIcon?: string | undefined;
+    collapsedRowIcon?: IconType<DataTableProps<TValue>> | undefined;
     /**
      * Used to define the resize mode of the columns, valid values are "fit" and "expand".
      * @defaultValue fit
@@ -779,9 +783,8 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     expandableRowGroups?: boolean | undefined;
     /**
      * Icon of the row toggler to display the row as expanded.
-     * @defaultValue pi pi-chevron-down
      */
-    expandedRowIcon?: string | undefined;
+    expandedRowIcon?: IconType<DataTableProps<TValue>> | undefined;
     /**
      * A collection of rows or a map object row data keys that are expanded.
      */
@@ -868,9 +871,8 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     loading?: boolean | undefined;
     /**
      * The icon to show while indicating data load is in progress.
-     * @defaultValue pi pi-spinner
      */
-    loadingIcon?: string | undefined;
+    loadingIcon?: IconType<DataTableProps<TValue>> | undefined;
     /**
      * Defines whether metaKey is requred or not for the selection. When true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.
      * @defaultValue true
@@ -933,6 +935,14 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      */
     reorderableRows?: boolean | undefined;
     /**
+     * Defines the reorder indicator down icon.
+     */
+    reorderIndicatorDownIcon?: IconType<DataTableProps<TValue>> | undefined;
+    /**
+     * Defines the reorder indicator up icon.
+     */
+    reorderIndicatorUpIcon?: IconType<DataTableProps<TValue>> | undefined;
+    /**
      * When enabled, columns can be resized using drag and drop.
      * @defaultValue false
      */
@@ -943,6 +953,18 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      * @deprecated since version 9.2.0
      */
     responsiveLayout?: 'scroll' | 'stack' | undefined;
+    /**
+     * Icon to display in the row editor cancel button.
+     */
+    rowEditorCancelIcon?: IconType<DataTableProps<TValue>> | undefined;
+    /**
+     * Icon to display in the row editor init button.
+     */
+    rowEditorInitIcon?: IconType<DataTableProps<TValue>> | undefined;
+    /**
+     * Icon to display in the row editor save button.
+     */
+    rowEditorSaveIcon?: IconType<DataTableProps<TValue>> | undefined;
     /**
      * Function to provide the content of row group footer.
      */

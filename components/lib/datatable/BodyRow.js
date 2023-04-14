@@ -342,6 +342,7 @@ export const BodyRow = React.memo((props) => {
                         expanded={props.expanded}
                         expandedRowIcon={props.expandedRowIcon}
                         collapsedRowIcon={props.collapsedRowIcon}
+                        checkIcon={props.checkIcon}
                         virtualScrollerOptions={props.virtualScrollerOptions}
                     />
                 );

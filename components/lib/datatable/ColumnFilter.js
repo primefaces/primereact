@@ -9,7 +9,11 @@ import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { FilterIcon } from '../icon/filter';
+import { FilterSlashIcon } from '../icon/filterslash';
+import { TrashIcon } from '../icon/trash';
+import { PlusIcon } from '../icon/plus';
 
 export const ColumnFilter = React.memo((props) => {
     const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
@@ -479,6 +483,10 @@ export const ColumnFilter = React.memo((props) => {
     };
 
     const createMenuButton = () => {
+        const iconProps = { "aria-hidden": true };
+        const icon = props.columnFilterIcon || <FilterIcon {...iconProps} />;
+        const columnFilterIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
+
         if (showMenuButton()) {
             const className = classNames('p-column-filter-menu-button p-link', {
                 'p-column-filter-menu-button-open': overlayVisibleState,
@@ -488,7 +496,7 @@ export const ColumnFilter = React.memo((props) => {
 
             return (
                 <button ref={iconRef} type="button" className={className} aria-haspopup aria-expanded={overlayVisibleState} onClick={toggleMenu} onKeyDown={onToggleButtonKeyDown} aria-label={label}>
-                    <span className="pi pi-filter-icon pi-filter" aria-hidden="true"></span>
+                    {columnFilterIcon}
                     <Ripple />
                 </button>
             );
@@ -498,6 +506,10 @@ export const ColumnFilter = React.memo((props) => {
     };
 
     const createClearButton = () => {
+        const iconProps = { "aria-hidden": true }
+        const icon = props.filterClearIcon || <FilterSlashIcon {...iconProps} />;
+        const filterClearIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
+
         if (getColumnProp('showClearButton') && props.display === 'row') {
             const className = classNames('p-column-filter-clear-button p-link', {
                 'p-hidden-space': !hasRowFilter()
@@ -506,7 +518,7 @@ export const ColumnFilter = React.memo((props) => {
 
             return (
                 <button className={className} type="button" onClick={clearFilter} aria-label={clearLabel}>
-                    <span className="pi pi-filter-slash" aria-hidden="true"></span>
+                    {filterClearIcon}
                     <Ripple />
                 </button>
             );
@@ -573,7 +585,7 @@ export const ColumnFilter = React.memo((props) => {
         if (showRemoveIcon()) {
             const removeRuleLabel = removeRuleButtonLabel();
 
-            return <Button type="button" icon="pi pi-trash" className="p-column-filter-remove-button p-button-text p-button-danger p-button-sm" onClick={() => removeConstraint(index)} label={removeRuleLabel} />;
+            return <Button type="button" icon={props.filterRemoveIcon || <TrashIcon />} className="p-column-filter-remove-button p-button-text p-button-danger p-button-sm" onClick={() => removeConstraint(index)} label={removeRuleLabel} />;
         }
 
         return null;
@@ -607,7 +619,7 @@ export const ColumnFilter = React.memo((props) => {
 
             return (
                 <div className="p-column-filter-add-rule">
-                    <Button type="button" label={addRuleLabel} icon="pi pi-plus" className="p-column-filter-add-button p-button-text p-button-sm" onClick={addConstraint} />
+                    <Button type="button" label={addRuleLabel} icon={props.filterAddIcon || <PlusIcon />} className="p-column-filter-add-button p-button-text p-button-sm" onClick={addConstraint} />
                 </div>
             );
         }
