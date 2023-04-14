@@ -5338,7 +5338,7 @@
                             "readonly": false,
                             "type": "IconType<CheckboxProps>",
                             "default": "",
-                            "description": "Icon of the checkbox icon."
+                            "description": "Icon to display in checkbox."
                         },
                         {
                             "name": "id",
@@ -29920,6 +29920,14 @@
                     "description": "Defines valid properties in TreeProps component.",
                     "values": [
                         {
+                            "name": "checkboxIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<TreeProps>",
+                            "default": "",
+                            "description": "Icon to display in the checkbox."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
@@ -29934,6 +29942,14 @@
                             "type": "string",
                             "default": "",
                             "description": "Style class of the component."
+                        },
+                        {
+                            "name": "collapseIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<TreeProps>",
+                            "default": "",
+                            "description": "Icon of an expanded tab."
                         },
                         {
                             "name": "contentClassName",
@@ -29976,6 +29992,14 @@
                             "description": "Unique key to enable dragdrop functionality."
                         },
                         {
+                            "name": "expandIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<TreeProps>",
+                            "default": "",
+                            "description": "Icon of an collapsed tab."
+                        },
+                        {
                             "name": "expandedKeys",
                             "optional": true,
                             "readonly": false,
@@ -29998,6 +30022,14 @@
                             "type": "string",
                             "default": "label",
                             "description": "When filtering is enabled, filterBy decides which field or fields (comma separated) to search against."
+                        },
+                        {
+                            "name": "filterIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<TreeProps>",
+                            "default": "",
+                            "description": "Icon of the filter."
                         },
                         {
                             "name": "filterLocale",
@@ -30075,8 +30107,8 @@
                             "name": "loadingIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
-                            "default": "pi pi-spin",
+                            "type": "IconType<TreeProps>",
+                            "default": "",
                             "description": "Icon to display when tree is loading."
                         },
                         {
