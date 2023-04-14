@@ -21111,6 +21111,14 @@
                             "description": "Establishes relationships between the component and label(s) where its value should be one or more element IDs."
                         },
                         {
+                            "name": "checkboxIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<MultiSelectProps>",
+                            "default": "",
+                            "description": "Icon of the checkbox when checked."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
@@ -21125,6 +21133,14 @@
                             "type": "string",
                             "default": "",
                             "description": "Style class of the element."
+                        },
+                        {
+                            "name": "closeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<MultiSelectProps>",
+                            "default": "",
+                            "description": "Close icon of the multiselect panel header."
                         },
                         {
                             "name": "dataKey",
@@ -21155,7 +21171,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "IconType<MultiSelectProps>",
-                            "default": "pi pi-chevron-down",
+                            "default": "",
                             "description": "Icon class of the dropdown icon."
                         },
                         {
@@ -21181,6 +21197,14 @@
                             "type": "string",
                             "default": "label",
                             "description": "When filtering is enabled, filterBy decides which field or fields (comma separated) to search against."
+                        },
+                        {
+                            "name": "filterIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<MultiSelect>",
+                            "default": "",
+                            "description": "Icon of the filter icon."
                         },
                         {
                             "name": "filterLocale",
@@ -21261,6 +21285,14 @@
                             "type": "Ref<HTMLSelectElement>",
                             "default": "",
                             "description": "Reference of the input element."
+                        },
+                        {
+                            "name": "itemCheckboxIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<MultiSelect>",
+                            "default": "",
+                            "description": "The icon displayed in the header when all checkboxes are checked."
                         },
                         {
                             "name": "itemClassName",
@@ -21403,7 +21435,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "IconType<MultiSelectProps>",
-                            "default": "pi pi-times-circle",
+                            "default": "",
                             "description": "Icon of the remove chip element."
                         },
                         {
