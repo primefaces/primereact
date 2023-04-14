@@ -72,15 +72,7 @@ export const OrganizationChart = React.memo(
 
         return (
             <div id={props.id} ref={elementRef} style={props.style} className={className} {...otherProps}>
-                <OrganizationChartNode
-                    node={root}
-                    nodeTemplate={props.nodeTemplate}
-                    selectionMode={props.selectionMode}
-                    onNodeClick={onNodeClick}
-                    isSelected={isSelected}
-                    toggleCollapseIcon={props.toggleCollapseIcon}
-                    toggleExpandIcon={props.toggleExpandIcon}
-                />
+                <OrganizationChartNode node={root} nodeTemplate={props.nodeTemplate} selectionMode={props.selectionMode} onNodeClick={onNodeClick} isSelected={isSelected} collapseIcon={props.collapseIcon} expandIcon={props.expandIcon} />
             </div>
         );
     })

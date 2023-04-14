@@ -76,20 +76,20 @@ export const OrganizationChartNode = React.memo((props) => {
 
     const createToggler = () => {
         if (!leaf) {
-            const toggleIconClassName = 'p-node-toggler-icon';
+            const iconClassName = 'p-node-toggler-icon';
 
             let icon;
 
             if (expandedState) {
-                icon = props.toggleExpandIcon || <ChevronDownIcon className={toggleIconClassName} />;
+                icon = props.expandIcon || <ChevronDownIcon className={iconClassName} />;
             } else {
-                icon = props.toggleCollapseIcon || <ChevronUpIcon className={toggleIconClassName} />;
+                icon = props.collapseIcon || <ChevronUpIcon className={iconClassName} />;
             }
 
-            const toggleExpandIcon = IconUtils.getJSXIcon(icon, { className: toggleIconClassName }, { props });
-            const toggleCollapseIcon = IconUtils.getJSXIcon(icon, { className: toggleIconClassName }, { props });
+            const expandIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+            const collapseIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
-            const toggleIcon = toggleExpandIcon || toggleCollapseIcon;
+            const toggleIcon = expandIcon || collapseIcon;
 
             return (
                 /* eslint-disable */
