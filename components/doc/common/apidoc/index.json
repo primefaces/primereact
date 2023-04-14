@@ -30983,6 +30983,14 @@
                             "description": "Used to get the child elements of the component."
                         },
                         {
+                            "name": "closeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<TreeSelectProps>",
+                            "default": "",
+                            "description": "Icon of the close button."
+                        },
+                        {
                             "name": "disabled",
                             "optional": true,
                             "readonly": false,
@@ -31002,9 +31010,9 @@
                             "name": "dropdownIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
-                            "default": "pi pi-chevron-down",
-                            "description": "Icon class of the dropdown icon."
+                            "type": "IconType<TreeSelectProps>",
+                            "default": "",
+                            "description": "Icon of the dropdown."
                         },
                         {
                             "name": "emptyMessage",
@@ -31037,6 +31045,14 @@
                             "type": "string",
                             "default": "label",
                             "description": "When filtering is enabled, filterBy decides which field or fields (comma separated) to search against."
+                        },
+                        {
+                            "name": "filterIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<TreeSelectProps>",
+                            "default": "",
+                            "description": "Icon of the filter."
                         },
                         {
                             "name": "filterInputAutoFocus",
