@@ -22496,6 +22496,22 @@
                             "description": "Used to get the child elements of the component."
                         },
                         {
+                            "name": "collapseIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<OrganizationChartProps>",
+                            "default": "",
+                            "description": "Icon of the node when it is collapsed."
+                        },
+                        {
+                            "name": "expandIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<OrganizationChartProps>",
+                            "default": "",
+                            "description": "Icon of the node when it is expanded."
+                        },
+                        {
                             "name": "selection",
                             "optional": true,
                             "readonly": false,
@@ -22510,22 +22526,6 @@
                             "type": "\"multiple\" | \"single\"",
                             "default": "",
                             "description": "Defines the selection mode, valid values \"single\" and \"multiple\"."
-                        },
-                        {
-                            "name": "toggleCollapseIcon",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "IconType<OrganizationChartProps>",
-                            "default": "",
-                            "description": "Icon of the node when it is collapsed."
-                        },
-                        {
-                            "name": "toggleExpandIcon",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "IconType<OrganizationChartProps>",
-                            "default": "",
-                            "description": "Icon of the node when it is expanded."
                         },
                         {
                             "name": "value",
