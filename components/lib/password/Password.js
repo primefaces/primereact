@@ -5,8 +5,10 @@ import { useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { PasswordBase } from './PasswordBase';
+import { EyeIcon } from '../icon/eye';
+import { EyeSlashIcon } from '../icon/eyeslash';
 
 export const Password = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -240,14 +242,26 @@ export const Password = React.memo(
         });
 
         const createIcon = () => {
+            let icon;
+
+            if (unmaskedState) {
+                icon = props.hideIcon || <EyeSlashIcon />;
+            } else {
+                icon = props.showIcon || <EyeIcon />;
+            }
+
+            const hideIcon = IconUtils.getJSXIcon(icon, undefined, { props });
+            const showIcon = IconUtils.getJSXIcon(icon, undefined, { props });
+
+            const eyeIcons = hideIcon || showIcon;
+
             if (props.toggleMask) {
-                const iconClassName = unmaskedState ? 'pi pi-eye-slash' : 'pi pi-eye';
-                let content = <i className={iconClassName} onClick={onMaskToggle} />;
+                let content = <i onClick={onMaskToggle}> {eyeIcons} </i>;
 
                 if (props.icon) {
                     const defaultIconOptions = {
                         onClick: onMaskToggle,
-                        className: iconClassName,
+                        className,
                         element: content,
                         props
                     };
@@ -333,6 +347,8 @@ export const Password = React.memo(
                     onInput={onInput}
                     tooltip={props.tooltip}
                     tooltipOptions={props.tooltipOptions}
+                    hideIcon={props.hideIcon}
+                    showIcon={props.showIcon}
                 />
                 {icon}
                 {panel}

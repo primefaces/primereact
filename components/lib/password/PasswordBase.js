@@ -18,6 +18,8 @@ export const PasswordBase = {
         header: null,
         content: null,
         footer: null,
+        showIcon: null,
+        hideIcon: null,
         icon: null,
         tooltip: null,
         tooltipOptions: null,

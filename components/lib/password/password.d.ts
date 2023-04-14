@@ -12,6 +12,7 @@ import { CSSTransitionProps } from '../csstransition';
 import { InputText } from '../inputtext';
 import { KeyFilterType } from '../keyfilter/keyfilteroptions';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom icon event
@@ -58,6 +59,14 @@ export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputH
      * Style class of the input field.
      */
     inputClassName?: string | undefined;
+    /**
+     * Hide icon template.
+     */
+    hideIcon?: IconType<PasswordProps> | undefined;
+    /**
+     * Show icon template.
+     */
+    showIcon?: IconType<PasswordProps> | undefined;
     /**
      * Text to prompt password entry.
      * @defaultValue Please enter a password
