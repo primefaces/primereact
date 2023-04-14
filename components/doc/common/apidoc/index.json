@@ -9388,6 +9388,14 @@
                             "description": "Whether to cell selection is enabled or not."
                         },
                         {
+                            "name": "checkIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DataTableProps<TValue>>",
+                            "default": "",
+                            "description": "Icon to display in the checkbox."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
@@ -9407,8 +9415,8 @@
                             "name": "collapsedRowIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
-                            "default": "pi pi-chevron-up",
+                            "type": "IconType<DataTableProps<TValue>>",
+                            "default": "",
                             "description": "Icon of the row toggler to display the row as collapsed."
                         },
                         {
@@ -9511,8 +9519,8 @@
                             "name": "expandedRowIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
-                            "default": "pi pi-chevron-down",
+                            "type": "IconType<DataTableProps<TValue>>",
+                            "default": "",
                             "description": "Icon of the row toggler to display the row as expanded."
                         },
                         {
@@ -9679,8 +9687,8 @@
                             "name": "loadingIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
-                            "default": "pi pi-spinner",
+                            "type": "IconType<DataTableProps<TValue>>",
+                            "default": "",
                             "description": "The icon to show while indicating data load is in progress."
                         },
                         {
@@ -9772,6 +9780,22 @@
                             "description": "When enabled, columns can have an un-sorted state."
                         },
                         {
+                            "name": "reorderIndicatorDownIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DataTableProps<TValue>>",
+                            "default": "",
+                            "description": "Defines the reorder indicator down icon."
+                        },
+                        {
+                            "name": "reorderIndicatorUpIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DataTableProps<TValue>>",
+                            "default": "",
+                            "description": "Defines the reorder indicator up icon."
+                        },
+                        {
                             "name": "reorderableColumns",
                             "optional": true,
                             "readonly": false,
@@ -9803,6 +9827,30 @@
                             "default": "scroll",
                             "description": "Defines the responsive mode, valid options are \"stack\" and \"scroll\".",
                             "deprecated": "since version 9.2.0"
+                        },
+                        {
+                            "name": "rowEditorCancelIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DataTableProps<TValue>>",
+                            "default": "",
+                            "description": "Icon to display in the row editor cancel button."
+                        },
+                        {
+                            "name": "rowEditorInitIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DataTableProps<TValue>>",
+                            "default": "",
+                            "description": "Icon to display in the row editor init button."
+                        },
+                        {
+                            "name": "rowEditorSaveIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DataTableProps<TValue>>",
+                            "default": "",
+                            "description": "Icon to display in the row editor save button."
                         },
                         {
                             "name": "rowGroupFooterTemplate",
