@@ -23053,6 +23053,22 @@
                             "description": "Zero-relative number of the first row to be displayed."
                         },
                         {
+                            "name": "firstPageLinkIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PaginatorProps>",
+                            "default": "",
+                            "description": "Icon of the first page link icon template."
+                        },
+                        {
+                            "name": "lastPageLinkIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PaginatorProps>",
+                            "default": "",
+                            "description": "Icon of the last page link icon template."
+                        },
+                        {
                             "name": "leftContent",
                             "optional": true,
                             "readonly": false,
@@ -23061,12 +23077,28 @@
                             "description": "Content to inject into the left side of the paginator."
                         },
                         {
+                            "name": "nextPageLinkIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PaginatorProps>",
+                            "default": "",
+                            "description": "Icon of the next page link icon template."
+                        },
+                        {
                             "name": "pageLinkSize",
                             "optional": true,
                             "readonly": false,
                             "type": "number",
                             "default": "5",
                             "description": "Number of page links to display."
+                        },
+                        {
+                            "name": "prevPageLinkIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PaginatorProps>",
+                            "default": "",
+                            "description": "Icon of the prev page link icon template."
                         },
                         {
                             "name": "rightContent",
