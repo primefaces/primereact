@@ -557,7 +557,7 @@ export const BodyCell = React.memo((props) => {
 
             content = showReorder && <i className={classNames('p-datatable-reorderablerow-handle', getColumnProp('rowReorderIcon'))}></i>;
         } else if (expander) {
-            const iconProps = { className: 'p-row-toggler-icon', "aria-hidden": true };
+            const iconProps = { className: 'p-row-toggler-icon', 'aria-hidden': true };
             const icon = props.expanded ? props.expandedRowIcon || <ChevronDownIcon {...iconProps} /> : props.collapsedRowIcon || <ChevronRightIcon {...iconProps} />;
             const togglerIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
             const ariaControls = `${props.tableSelector}_content_${props.rowIndex}_expanded`;
@@ -595,7 +595,7 @@ export const BodyCell = React.memo((props) => {
                     onSaveClick: onRowEditSave,
                     saveClassName: 'p-row-editor-save p-link',
                     onCancelClick: onRowEditCancel,
-                    cancelClassName: 'p-row-editor-cancel p-link',
+                    cancelClassName: 'p-row-editor-cancel p-link'
                 };
 
                 content = (
@@ -614,7 +614,7 @@ export const BodyCell = React.memo((props) => {
                 rowEditorProps = {
                     editing: false,
                     onInitClick: onRowEditInit,
-                    initClassName: 'p-row-editor-init p-link',
+                    initClassName: 'p-row-editor-init p-link'
                 };
 
                 content = (

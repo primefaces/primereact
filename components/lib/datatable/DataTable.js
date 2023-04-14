@@ -13,7 +13,6 @@ import { SpinnerIcon } from '../icon/spinner';
 import { ArrowDownIcon } from '../icon/arrowdown';
 import { ArrowUpIcon } from '../icon/arrowup';
 
-
 export const DataTable = React.forwardRef((inProps, ref) => {
     const props = DataTableBase.getProps(inProps);
 
@@ -1108,11 +1107,11 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             Object.entries(filters).forEach(([prop, value]) => {
                 cloned[prop] = value.operator
                     ? {
-                        operator: value.operator,
-                        constraints: value.constraints.map((constraint) => {
-                            return { ...constraint };
-                        })
-                    }
+                          operator: value.operator,
+                          constraints: value.constraints.map((constraint) => {
+                              return { ...constraint };
+                          })
+                      }
                     : { ...value };
             });
         } else {
@@ -1404,14 +1403,10 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const createLoader = () => {
         if (props.loading) {
             const iconClassName = 'p-datatable-loading-icon';
-            const icon = props.loadingIcon || <SpinnerIcon className={iconClassName} spin />
+            const icon = props.loadingIcon || <SpinnerIcon className={iconClassName} spin />;
             const loadingIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
-            return (
-                <div className="p-datatable-loading-overlay p-component-overlay">
-                    {loadingIcon}
-                </div>
-            );
+            return <div className="p-datatable-loading-overlay p-component-overlay">{loadingIcon}</div>;
         }
 
         return null;
@@ -1759,10 +1754,10 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const createReorderIndicators = () => {
         if (props.reorderableColumns) {
             const style = { position: 'absolute', display: 'none' };
-            const reorderIndicatorUpProps = { ref: reorderIndicatorUpRef, className: "p-datatable-reorder-indicator-up", style: { ...style } }
+            const reorderIndicatorUpProps = { ref: reorderIndicatorUpRef, className: 'p-datatable-reorder-indicator-up', style: { ...style } };
             const reorderIndicatorUpIcon = IconUtils.getJSXIcon(props.reorderIndicatorUpIcon || <ArrowUpIcon {...reorderIndicatorUpProps} />, { ...reorderIndicatorUpProps }, { props });
-            const reorderIndicatorDownProps = { ref: reorderIndicatorDownRef, className: "p-datatable-reorder-indicator-down", style: { ...style } }
-            const reorderIndicatorDownIcon = IconUtils.getJSXIcon(props.reorderIndicatorDownIcon || <ArrowDownIcon {...reorderIndicatorDownProps} />, { ...reorderIndicatorDownProps }, { props })
+            const reorderIndicatorDownProps = { ref: reorderIndicatorDownRef, className: 'p-datatable-reorder-indicator-down', style: { ...style } };
+            const reorderIndicatorDownIcon = IconUtils.getJSXIcon(props.reorderIndicatorDownIcon || <ArrowDownIcon {...reorderIndicatorDownProps} />, { ...reorderIndicatorDownProps }, { props });
 
             return (
                 <>

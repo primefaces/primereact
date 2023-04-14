@@ -13,7 +13,7 @@ export const RowTogglerButton = React.memo((props) => {
         });
     };
 
-    const iconProps = { className: 'p-row-toggler-icon', "aria-hidden": true };
+    const iconProps = { className: 'p-row-toggler-icon', 'aria-hidden': true };
     const icon = props.expanded ? props.expandedRowIcon || <ChevronDownIcon {...iconProps} /> : props.collapsedRowIcon || <ChevronRightIcon {...iconProps} />;
     const togglerIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
     const label = props.expanded ? ariaLabel('collapseLabel') : ariaLabel('expandLabel');

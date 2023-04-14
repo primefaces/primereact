@@ -483,7 +483,7 @@ export const ColumnFilter = React.memo((props) => {
     };
 
     const createMenuButton = () => {
-        const iconProps = { "aria-hidden": true };
+        const iconProps = { 'aria-hidden': true };
         const icon = props.columnFilterIcon || <FilterIcon {...iconProps} />;
         const columnFilterIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
 
@@ -506,7 +506,7 @@ export const ColumnFilter = React.memo((props) => {
     };
 
     const createClearButton = () => {
-        const iconProps = { "aria-hidden": true }
+        const iconProps = { 'aria-hidden': true };
         const icon = props.filterClearIcon || <FilterSlashIcon {...iconProps} />;
         const filterClearIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
 
