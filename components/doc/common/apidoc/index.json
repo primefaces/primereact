@@ -24292,6 +24292,14 @@
                             "description": "Template of panel header if \"feedback\" is enabled."
                         },
                         {
+                            "name": "hideIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PasswordProps>",
+                            "default": "",
+                            "description": "Hide icon template."
+                        },
+                        {
                             "name": "icon",
                             "optional": true,
                             "readonly": false,
@@ -24378,6 +24386,14 @@
                             "type": "string",
                             "default": "Please enter a password",
                             "description": "Text to prompt password entry."
+                        },
+                        {
+                            "name": "showIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PasswordProps>",
+                            "default": "",
+                            "description": "Show icon template."
                         },
                         {
                             "name": "strongLabel",
