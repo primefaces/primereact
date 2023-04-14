@@ -10,6 +10,7 @@
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 import { MenuItem } from '../menuitem';
+import { IconType } from '../utils/utils';
 
 /**
  * Defines valid properties in TieredMenu component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -54,6 +55,10 @@ export interface TieredMenuProps extends Omit<React.DetailedHTMLProps<React.HTML
      * @type {CSSTransitionProps}
      */
     transitionOptions?: CSSTransitionProps | undefined;
+    /**
+     * Icon of the submenu.
+     */
+    submenuIcon?: IconType<TieredMenuProps> | undefined;
     /**
      * Callback to invoke when a popup menu is shown.
      * @param {React.SyntheticEvent} event - Browser event.

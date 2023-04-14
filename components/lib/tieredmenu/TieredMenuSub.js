@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useEventListener, useMountEffect, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { AngleRightIcon } from '../icon/angleright';
 
 export const TieredMenuSub = React.memo((props) => {
     const [activeItemState, setActiveItemState] = React.useState(null);
@@ -194,6 +195,7 @@ export const TieredMenuSub = React.memo((props) => {
                     parentActive={item === activeItemState}
                     isMobileMode={props.isMobileMode}
                     onItemToggle={props.onItemToggle}
+                    submenuIcon={props.submenuIcon}
                 />
             );
         }
@@ -212,10 +214,10 @@ export const TieredMenuSub = React.memo((props) => {
         const className = classNames('p-menuitem', { 'p-menuitem-active': active }, _className);
         const linkClassName = classNames('p-menuitem-link', { 'p-disabled': disabled });
         const iconClassName = classNames('p-menuitem-icon', _icon);
-        const submenuIconClassName = 'p-submenu-icon pi pi-angle-right';
         const icon = IconUtils.getJSXIcon(_icon, { className: 'p-menuitem-icon' }, { props: props.menuProps });
         const label = _label && <span className="p-menuitem-text">{_label}</span>;
-        const submenuIcon = items && <span className={submenuIconClassName}></span>;
+        const submenuIconClassName = 'p-submenu-icon';
+        const submenuIcon = item.items && IconUtils.getJSXIcon(props.submenuIcon || <AngleRightIcon className={submenuIconClassName} />, { className: submenuIconClassName }, { props: props.menuProps });
         const submenu = createSubmenu(item);
         let content = (
             <a href={url || '#'} className={linkClassName} target={target} role="menuitem" aria-haspopup={items != null} onClick={(event) => onItemClick(event, item)} onKeyDown={(event) => onItemKeyDown(event, item)} aria-disabled={disabled}>

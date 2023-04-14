@@ -188,7 +188,7 @@ export const TieredMenu = React.memo(
                     onExited={onExited}
                 >
                     <div ref={menuRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onPanelClick}>
-                        <TieredMenuSub menuProps={props} model={props.model} root popup={props.popup} onHide={hide} isMobileMode={isMobileMode} onItemToggle={onItemToggle} />
+                        <TieredMenuSub menuProps={props} model={props.model} root popup={props.popup} onHide={hide} isMobileMode={isMobileMode} onItemToggle={onItemToggle} submenuIcon={props.submenuIcon} />
                     </div>
                 </CSSTransition>
             );
