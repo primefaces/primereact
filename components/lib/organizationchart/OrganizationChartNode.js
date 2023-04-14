@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, ObjectUtils, IconUtils } from '../utils/Utils';
+import { ChevronDownIcon } from '../icon/chevrondown';
+import { ChevronUpIcon } from '../icon/chevronup';
 
 export const OrganizationChartNode = React.memo((props) => {
     const node = props.node;
@@ -74,15 +76,25 @@ export const OrganizationChartNode = React.memo((props) => {
 
     const createToggler = () => {
         if (!leaf) {
-            const toggleIconClassName = classNames('p-node-toggler-icon', {
-                'pi pi-chevron-down': expandedState,
-                'pi pi-chevron-up': !expandedState
-            });
+            const toggleIconClassName = 'p-node-toggler-icon';
+
+            let icon;
+
+            if (expandedState) {
+                icon = props.toggleExpandIcon || <ChevronDownIcon className={toggleIconClassName} />;
+            } else {
+                icon = props.toggleCollapseIcon || <ChevronUpIcon className={toggleIconClassName} />;
+            }
+
+            const toggleExpandIcon = IconUtils.getJSXIcon(icon, { className: toggleIconClassName }, { props });
+            const toggleCollapseIcon = IconUtils.getJSXIcon(icon, { className: toggleIconClassName }, { props });
+
+            const toggleIcon = toggleExpandIcon || toggleCollapseIcon;
 
             return (
                 /* eslint-disable */
                 <a href="#" className="p-node-toggler" onClick={(e) => toggleNode(e, node)}>
-                    <i className={toggleIconClassName}></i>
+                    <i> {toggleIcon} </i>
                 </a>
                 /* eslint-enable */
             );
