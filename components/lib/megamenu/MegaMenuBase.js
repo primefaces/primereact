@@ -11,6 +11,8 @@ export const MegaMenuBase = {
         breakpoint: undefined,
         scrollHeight: '400px',
         start: null,
+        submenuIcon: null,
+        menuIcon: null,
         end: null,
         children: undefined
     },
