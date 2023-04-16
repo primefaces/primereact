@@ -25516,8 +25516,8 @@
                             "optional": true,
                             "readonly": false,
                             "type": "IconType<RatingProps>",
-                            "default": "pi pi-ban",
-                            "description": "ClassName of the cancel icon component."
+                            "default": "",
+                            "description": "Icon for the cancelable state."
                         },
                         {
                             "name": "cancelIconProps",
@@ -25548,8 +25548,8 @@
                             "optional": true,
                             "readonly": false,
                             "type": "IconType<RatingProps>",
-                            "default": "pi pi-star",
-                            "description": "ClassName of the off icon component."
+                            "default": "",
+                            "description": "Icon for the off state."
                         },
                         {
                             "name": "offIconProps",
@@ -25564,8 +25564,8 @@
                             "optional": true,
                             "readonly": false,
                             "type": "IconType<RatingProps>",
-                            "default": "pi pi-star-fill",
-                            "description": "ClassName of the on icon component."
+                            "default": "",
+                            "description": "Icon for the on state."
                         },
                         {
                             "name": "onIconProps",
