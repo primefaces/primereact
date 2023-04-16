@@ -1,6 +1,10 @@
 import * as React from 'react';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 import { MessageBase } from './MessageBase';
+import { ExclamationTriangleIcon } from '../icon/exclamationtriangle';
+import { InfoCircleIcon } from '../icon/infocircle';
+import { TimesCircleIcon } from '../icon/timescircle';
+import { CheckIcon } from '../icon/check';
 
 export const Message = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -14,22 +18,33 @@ export const Message = React.memo(
             }
 
             const text = ObjectUtils.getJSXElement(props.text, props);
-            let iconValue = props.icon;
+            let iconClassName = 'p-inline-message-icon';
+            let icon = props.icon;
 
-            if (!iconValue) {
-                iconValue = classNames('pi', {
-                    'pi-info-circle': props.severity === 'info',
-                    'pi-exclamation-triangle': props.severity === 'warn',
-                    'pi-times-circle': props.severity === 'error',
-                    'pi-check': props.severity === 'success'
-                });
+            if (!icon) {
+                switch (props.severity) {
+                    case 'info':
+                        icon = <InfoCircleIcon className={iconClassName} />;
+                        break;
+                    case 'warn':
+                        icon = <ExclamationTriangleIcon className={iconClassName} />;
+                        break;
+                    case 'error':
+                        icon = <TimesCircleIcon className={iconClassName} />;
+                        break;
+                    case 'success':
+                        icon = <CheckIcon className={iconClassName} />;
+                        break;
+                    default:
+                        break;
+                }
             }
 
-            const icon = IconUtils.getJSXIcon(iconValue, { className: 'p-inline-message-icon' }, { props });
+            const messageIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
             return (
                 <>
-                    {icon}
+                    {messageIcon}
                     <span className="p-inline-message-text">{text}</span>
                 </>
             );
