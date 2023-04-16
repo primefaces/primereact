@@ -20015,6 +20015,14 @@
                             "description": "The template of trailing element"
                         },
                         {
+                            "name": "menuIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<MegaMenuProps>",
+                            "default": "",
+                            "description": "Icon to display in the horizontal menu."
+                        },
+                        {
                             "name": "model",
                             "optional": true,
                             "readonly": false,
@@ -20045,6 +20053,14 @@
                             "type": "ReactNode | Function",
                             "default": "",
                             "description": "The template of starting element."
+                        },
+                        {
+                            "name": "submenuIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<MegaMenuProps>",
+                            "default": "",
+                            "description": "Icon of the submenu."
                         }
                     ]
                 },
