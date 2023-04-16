@@ -24222,6 +24222,14 @@
                             "description": "Whether multiple tabs can be activated at the same time or not."
                         },
                         {
+                            "name": "submenuIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PanelMenuProps>",
+                            "default": "",
+                            "description": "Icon of the submenu."
+                        },
+                        {
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
