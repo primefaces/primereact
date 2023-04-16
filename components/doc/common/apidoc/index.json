@@ -20631,6 +20631,14 @@
                             "description": "The template of trailing element."
                         },
                         {
+                            "name": "menuIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<MenubarProps>",
+                            "default": "",
+                            "description": "Icon of the menu."
+                        },
+                        {
                             "name": "model",
                             "optional": true,
                             "readonly": false,
@@ -20645,6 +20653,14 @@
                             "type": "ReactNode | Function",
                             "default": "",
                             "description": "The template of starting element."
+                        },
+                        {
+                            "name": "submenuIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<MenubarProps>",
+                            "default": "",
+                            "description": "Icon of the submenu."
                         }
                     ]
                 },
