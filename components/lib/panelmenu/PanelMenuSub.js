@@ -2,6 +2,8 @@ import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { ChevronRightIcon } from '../icon/chevronright';
+import { ChevronDownIcon } from '../icon/chevrondown';
 
 export const PanelMenuSub = React.memo((props) => {
     const [activeItemState, setActiveItemState] = React.useState(null);
@@ -85,7 +87,7 @@ export const PanelMenuSub = React.memo((props) => {
             return (
                 <CSSTransition nodeRef={submenuRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={active} unmountOnExit>
                     <div ref={submenuRef} className={className}>
-                        <PanelMenuSub menuProps={props.menuProps} model={item.items} multiple={props.multiple} />
+                        <PanelMenuSub menuProps={props.menuProps} model={item.items} multiple={props.multiple} submenuIcon={props.submenuIcon} />
                     </div>
                 </CSSTransition>
             );
@@ -104,10 +106,10 @@ export const PanelMenuSub = React.memo((props) => {
         const className = classNames('p-menuitem', item.className);
         const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
         const iconClassName = classNames('p-menuitem-icon', item.icon);
-        const submenuIconClassName = classNames('p-panelmenu-icon pi pi-fw', { 'pi-angle-right': !active, 'pi-angle-down': active });
         const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props: props.menuProps });
         const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
-        const submenuIcon = item.items && <span className={submenuIconClassName}></span>;
+        const submenuIconClassName = 'p-panelmenu-icon';
+        const submenuIcon = item.items && IconUtils.getJSXIcon(active ? props.submenuIcon || <ChevronDownIcon className={submenuIconClassName} /> : props.submenuIcon || <ChevronRightIcon className={submenuIconClassName} />)
         const submenu = createSubmenu(item, active);
         let content = (
             <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => onItemClick(event, item, index)} role="menuitem" aria-disabled={item.disabled}>
