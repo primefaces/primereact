@@ -2,6 +2,8 @@ import * as React from 'react';
 import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { AngleRightIcon } from '../icon/angleright';
+import { AngleDownIcon } from '../icon/angledown';
 
 export const MenubarSub = React.memo(
     React.forwardRef((props, ref) => {
@@ -170,7 +172,7 @@ export const MenubarSub = React.memo(
 
         const createSubmenu = (item) => {
             if (item.items) {
-                return <MenubarSub menuProps={props.menuProps} model={item.items} mobileActive={props.mobileActive} onLeafClick={onLeafClick} onKeyDown={onChildItemKeyDown} parentActive={item === activeItemState} />;
+                return <MenubarSub menuProps={props.menuProps} model={item.items} mobileActive={props.mobileActive} onLeafClick={onLeafClick} onKeyDown={onChildItemKeyDown} parentActive={item === activeItemState} submenuIcon={props.submenuIcon} />;
             }
 
             return null;
@@ -185,10 +187,10 @@ export const MenubarSub = React.memo(
             const className = classNames('p-menuitem', { 'p-menuitem-active': activeItemState === item }, item.className);
             const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
             const iconClassName = classNames('p-menuitem-icon', item.icon);
-            const submenuIconClassName = classNames('p-submenu-icon pi', { 'pi-angle-down': props.root, 'pi-angle-right': !props.root });
             const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props: props.menuProps });
             const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
-            const submenuIcon = item.items && <span className={submenuIconClassName}></span>;
+            const submenuIconClassName = 'p-submenu-icon';
+            const submenuIcon = item.items && IconUtils.getJSXIcon(!props.root ? props.submenuIcon || <AngleRightIcon className={submenuIconClassName} /> : props.submenuIcon || <AngleDownIcon className={submenuIconClassName} />, { className: submenuIconClassName }, { props: { menuProps: props.menuProps, ...props } });
             const submenu = createSubmenu(item);
             let content = (
                 <a href={item.url || '#'} role="menuitem" className={linkClassName} target={item.target} aria-haspopup={item.items != null} onClick={(event) => onItemClick(event, item)} onKeyDown={(event) => onItemKeyDown(event, item)}>

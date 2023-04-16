@@ -1,9 +1,10 @@
 import * as React from 'react';
 import PrimeReact from '../api/Api';
 import { useEventListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { classNames, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { classNames, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { MenubarBase } from './MenubarBase';
 import { MenubarSub } from './MenubarSub';
+import { BarsIcon } from '../icon/bars';
 
 export const Menubar = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -84,10 +85,13 @@ export const Menubar = React.memo(
             if (props.model && props.model.length < 1) {
                 return null;
             }
+
+            const icon = props.menuIcon || <BarsIcon />;
+            const menuIcon = IconUtils.getJSXIcon(icon, undefined, { props });
             /* eslint-disable */
             const button = (
                 <a ref={menuButtonRef} href={'#'} role="button" tabIndex={0} className="p-menubar-button" onClick={toggle}>
-                    <i className="pi pi-bars" />
+                    {menuIcon}
                 </a>
             );
             /* eslint-enable */
@@ -106,7 +110,7 @@ export const Menubar = React.memo(
         const start = createStartContent();
         const end = createEndContent();
         const menuButton = createMenuButton();
-        const submenu = <MenubarSub ref={rootMenuRef} menuProps={props} model={props.model} root mobileActive={mobileActiveState} onLeafClick={onLeafClick} />;
+        const submenu = <MenubarSub ref={rootMenuRef} menuProps={props} model={props.model} root mobileActive={mobileActiveState} onLeafClick={onLeafClick} submenuIcon={props.submenuIcon} />;
 
         return (
             <div id={props.id} className={className} style={props.style} {...otherProps}>
