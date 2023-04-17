@@ -8166,6 +8166,14 @@
                             "description": "Whether the dialog can be displayed full screen."
                         },
                         {
+                            "name": "maximizeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DialogProps>",
+                            "default": "",
+                            "description": "Icon to display in the dialog maximize button when dialog is not maximized."
+                        },
+                        {
                             "name": "maximized",
                             "optional": true,
                             "readonly": false,
@@ -8196,6 +8204,14 @@
                             "type": "number",
                             "default": "0",
                             "description": "Minimum value for the top coordinate of dialog in dragging."
+                        },
+                        {
+                            "name": "minimizeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DialogProps>",
+                            "default": "",
+                            "description": "Icon to display in the dialog maximize button when dialog is maximized."
                         },
                         {
                             "name": "modal",
@@ -12480,6 +12496,14 @@
                             "description": "Whether the dialog can be displayed full screen."
                         },
                         {
+                            "name": "maximizeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DialogProps>",
+                            "default": "",
+                            "description": "Icon to display in the dialog maximize button when dialog is not maximized."
+                        },
+                        {
                             "name": "maximized",
                             "optional": true,
                             "readonly": false,
@@ -12502,6 +12526,14 @@
                             "type": "number",
                             "default": "0",
                             "description": "Minimum value for the top coordinate of dialog in dragging."
+                        },
+                        {
+                            "name": "minimizeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DialogProps>",
+                            "default": "",
+                            "description": "Icon to display in the dialog maximize button when dialog is maximized."
                         },
                         {
                             "name": "modal",
