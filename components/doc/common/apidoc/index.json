@@ -31942,8 +31942,8 @@
                             "name": "loadingIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
-                            "default": "pi pi-spinner",
+                            "type": "IconType<TreeTableProps>",
+                            "default": "",
                             "description": "The icon to show while indicating data load is in progress."
                         },
                         {
@@ -32145,6 +32145,14 @@
                             "type": "string",
                             "default": "",
                             "description": "Name of the field to sort data by default."
+                        },
+                        {
+                            "name": "sortIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<TreeTableProps>",
+                            "default": "",
+                            "description": "Icon to display the current sorting status."
                         },
                         {
                             "name": "sortMode",
