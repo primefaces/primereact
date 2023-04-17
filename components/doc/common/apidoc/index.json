@@ -6688,8 +6688,8 @@
                             "name": "rowReorderIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
-                            "default": "pi pi-bars",
+                            "type": "IconType<ColumnProps>",
+                            "default": "",
                             "description": "Icon of the drag handle to reorder rows."
                         },
                         {
