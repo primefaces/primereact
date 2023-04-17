@@ -11,6 +11,7 @@ import * as React from 'react';
 import { ColumnProps } from '../column';
 import { PaginatorTemplate } from '../paginator';
 import TreeNode from '../treenode';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom selection keys type.
@@ -344,9 +345,8 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
     loading?: boolean | undefined;
     /**
      * The icon to show while indicating data load is in progress.
-     * @defaultValue pi pi-spinner
      */
-    loadingIcon?: string | undefined;
+    loadingIcon?: IconType<TreeTableProps> | undefined;
     /**
      * Defines whether metaKey is requred or not for the selection. When true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.
      * @defaultValue true
@@ -462,6 +462,10 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
      * Name of the field to sort data by default.
      */
     sortField?: string | undefined;
+    /**
+     * Icon to display the current sorting status.
+     */
+    sortIcon?: IconType<TreeTableProps> | undefined;
     /**
      * Defines whether sorting works on single column or on multiple columns.
      * @defaultValue single

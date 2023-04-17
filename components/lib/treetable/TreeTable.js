@@ -3,12 +3,13 @@ import PrimeReact, { FilterService } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
 import { useEventListener } from '../hooks/Hooks';
 import { Paginator } from '../paginator/Paginator';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { TreeTableBase } from './TreeTableBase';
 import { TreeTableBody } from './TreeTableBody';
 import { TreeTableFooter } from './TreeTableFooter';
 import { TreeTableHeader } from './TreeTableHeader';
 import { TreeTableScrollableView } from './TreeTableScrollableView';
+import { SpinnerIcon } from '../icon/spinner';
 
 export const TreeTable = React.forwardRef((inProps, ref) => {
     const props = TreeTableBase.getProps(inProps);
@@ -828,6 +829,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
                 tabIndex={props.tabIndex}
                 onSort={onSort}
                 sortField={sortField}
+                sortIcon={props.sortIcon}
                 sortOrder={sortOrder}
                 multiSortMeta={multiSortMeta}
                 resizableColumns={props.resizableColumns}
@@ -963,13 +965,13 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
 
     const createLoader = () => {
         if (props.loading) {
-            const iconClassName = classNames('p-treetable-loading-icon pi-spin', props.loadingIcon);
+            const iconClassName = 'p-treetable-loading-icon';
+            const icon = props.loadingIcon || <SpinnerIcon className={iconClassName} spin />;
+            const loadingIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
             return (
                 <div className="p-treetable-loading">
-                    <div className="p-treetable-loading-overlay p-component-overlay">
-                        <i className={iconClassName}></i>
-                    </div>
+                    <div className="p-treetable-loading-overlay p-component-overlay">{loadingIcon}</div>
                 </div>
             );
         }
