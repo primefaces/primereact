@@ -49,6 +49,8 @@ export const DialogBase = {
         style: null,
         transitionOptions: null,
         visible: false,
+        maximizeIcon: null,
+        minimizeIcon: null,
         children: undefined
     },
     getProps: (props) => ObjectUtils.getMergedProps(props, DialogBase.defaultProps),

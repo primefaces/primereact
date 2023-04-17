@@ -7,6 +7,8 @@ import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
 import { DialogBase } from './DialogBase';
 import { TimesIcon } from '../icon/times';
+import { WindowMaximizeIcon } from '../icon/windowmaximize';
+import { WindowMinimizeIcon } from '../icon/windowminimize';
 
 export const Dialog = React.forwardRef((inProps, ref) => {
     const props = DialogBase.getProps(inProps);
@@ -429,15 +431,21 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     };
 
     const createMaximizeIcon = () => {
-        const iconClassName = classNames('p-dialog-header-maximize-icon pi', {
-            'pi-window-maximize': !maximized,
-            'pi-window-minimize': maximized
-        });
+        let icon;
+        const iconClassName = 'p-dialog-header-maximize-icon';
+
+        if (!maximized) {
+            icon = props.maximizeIcon || <WindowMaximizeIcon className={iconClassName} />;
+        } else {
+            icon = props.minimizeIcon || <WindowMinimizeIcon className={iconClassName} />;
+        }
+
+        const toggleIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
         if (props.maximizable) {
             return (
                 <button type="button" className="p-dialog-header-icon p-dialog-header-maximize p-link" onClick={toggleMaximize}>
-                    <span className={iconClassName}></span>
+                    {toggleIcon}
                     <Ripple />
                 </button>
             );

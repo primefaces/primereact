@@ -195,6 +195,14 @@ export interface DialogProps {
      */
     showHeader?: boolean | undefined;
     /**
+     * Icon to display in the dialog maximize button when dialog is not maximized.
+     */
+    maximizeIcon?: IconType<DialogProps> | undefined;
+    /**
+     * Icon to display in the dialog maximize button when dialog is maximized.
+     */
+    minimizeIcon?: IconType<DialogProps> | undefined;
+    /**
      * Inline style of the component.
      */
     style?: React.CSSProperties | undefined;
