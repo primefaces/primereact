@@ -12,7 +12,7 @@ import { CheckIcon } from '../icon/check';
 export const ToastMessage = React.memo(
     React.forwardRef((props, ref) => {
         const messageInfo = props.messageInfo;
-        const { severity, content, summary, detail, closable, life, sticky, className: _className, style, contentClassName: _contentClassName, contentStyle, icon: _icon } = messageInfo.message;
+        const { severity, content, summary, detail, closable, life, sticky, className: _className, style, contentClassName: _contentClassName, contentStyle, icon: _icon, closeIcon: _closeIcon } = messageInfo.message;
 
         const [focused, setFocused] = React.useState(false);
         const [clearTimer] = useTimeout(
@@ -65,7 +65,7 @@ export const ToastMessage = React.memo(
 
         const createCloseIcon = () => {
             const iconClassName = 'p-toast-icon-close-icon';
-            const icon = props.closeIcon || <TimesIcon className={iconClassName} />;
+            const icon = _closeIcon || <TimesIcon className={iconClassName} />;
             const closeIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
             const ariaLabel = props.ariaCloseLabel || localeOption('close');
 
