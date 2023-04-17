@@ -22650,7 +22650,7 @@
                             "readonly": false,
                             "type": "IconType<OrganizationChartProps>",
                             "default": "",
-                            "description": "Toggle icon of a expanded and collapsed node."
+                            "description": "Toggle icon of an expanded and collapsed node."
                         },
                         {
                             "name": "value",
