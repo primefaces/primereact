@@ -26535,6 +26535,14 @@
                             "description": "Whether to automatically manage layering."
                         },
                         {
+                            "name": "backIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<SlideMenuProps>",
+                            "default": "",
+                            "description": "Defines the backward icon."
+                        },
+                        {
                             "name": "backLabel",
                             "optional": true,
                             "readonly": false,
@@ -26597,6 +26605,14 @@
                             "type": "boolean",
                             "default": "false",
                             "description": "Defines if menu would displayed as a popup."
+                        },
+                        {
+                            "name": "submenuIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<SlideMenuProps>",
+                            "default": "",
+                            "description": "Icon of the submenu."
                         },
                         {
                             "name": "transitionOptions",
