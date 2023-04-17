@@ -33185,7 +33185,8 @@
                             "readonly": false,
                             "type": "ReactNode | Function",
                             "default": "",
-                            "description": "The template of loader's icon."
+                            "description": "The template of loader's icon.",
+                            "deprecated": "Since v9.2.3, use "
                         },
                         {
                             "name": "loading",
@@ -33194,6 +33195,14 @@
                             "type": "boolean",
                             "default": "false",
                             "description": "Whether the data is loaded."
+                        },
+                        {
+                            "name": "loadingIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<VirtualScrollerProps>",
+                            "default": "",
+                            "description": "The icon to show while indicating data load is in progress."
                         },
                         {
                             "name": "loadingTemplate",
@@ -33453,13 +33462,6 @@
                             "readonly": false,
                             "type": "boolean",
                             "description": "Whether the data is loaded."
-                        },
-                        {
-                            "name": "loadingIcon",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "number[] | IconType<VirtualScrollerProps>",
-                            "description": "Icon of the loading icon."
                         },
                         {
                             "name": "loadingTemplate",
