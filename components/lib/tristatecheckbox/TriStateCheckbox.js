@@ -30,8 +30,8 @@ export const TriStateCheckbox = React.memo(
                 props.onChange({
                     originalEvent: event,
                     value: newValue,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => { },
+                    preventDefault: () => { },
                     target: {
                         name: props.name,
                         id: props.id,
@@ -80,7 +80,7 @@ export const TriStateCheckbox = React.memo(
             icon = props.checkIcon || <CheckIcon className={iconClassName} />;
         }
 
-        const checkIcons = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+        const checkIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
         const ariaValueLabel = props.value ? ariaLabel('trueLabel') : props.value === false ? ariaLabel('falseLabel') : ariaLabel('nullLabel');
         const ariaChecked = props.value ? 'true' : 'false';
@@ -89,7 +89,7 @@ export const TriStateCheckbox = React.memo(
             <>
                 <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick}>
                     <div className={boxClassName} tabIndex={props.tabIndex} onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown} role="checkbox" aria-checked={ariaChecked} {...ariaProps}>
-                        {checkIcons}
+                        {checkIcon}
                     </div>
                     {focusedState && (
                         <span className="p-sr-only" aria-live="polite">
