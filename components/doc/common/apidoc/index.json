@@ -10021,6 +10021,14 @@
                             "description": "Property of a row data used for sorting, defaults to field."
                         },
                         {
+                            "name": "sortIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DataTable<TValue>>",
+                            "default": "",
+                            "description": "Icon to display the current sorting status."
+                        },
+                        {
                             "name": "sortMode",
                             "optional": true,
                             "readonly": false,
