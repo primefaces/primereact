@@ -30,7 +30,7 @@ export const DataViewBase = {
         className: null,
         lazy: false,
         loading: false,
-        loadingIcon: 'pi pi-spinner',
+        loadingIcon: null,
         gutter: false,
         itemTemplate: null,
         onPage: null,
@@ -47,6 +47,8 @@ export const DataViewLayoutOptionsBase = {
         style: null,
         className: null,
         layout: null,
+        listIcon: null,
+        gridIcon: null,
         onChange: null,
         children: undefined
     },

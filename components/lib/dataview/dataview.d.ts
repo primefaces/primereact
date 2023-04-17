@@ -9,6 +9,7 @@
  */
 import * as React from 'react';
 import { PaginatorTemplate } from '../paginator';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom page event.
@@ -60,6 +61,14 @@ export interface DataViewLayoutOptionsProps {
      * Orientation of the panels, valid values are "list" and "grid".
      */
     layout?: 'list' | 'grid' | (string & Record<string, unknown>);
+    /**
+     * Defines the display mode list icon.
+     */
+    listIcon?: IconType<DataViewProps> | undefined;
+    /**
+     * Defines the display mode grid icon.
+     */
+    gridIcon?: IconType<DataViewProps> | undefined;
     /**
      * Inline style of the element.
      */
@@ -201,7 +210,7 @@ export interface DataViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
     /**
      * Name of the loading icon or JSX.Element for loading icon.
      */
-    loadingIcon?: string | undefined;
+    loadingIcon?: IconType<DataViewProps> | undefined;
     /**
      * Whether the grid structure in the container has gutter. Default value is false.
      * @defaultValue false
