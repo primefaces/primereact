@@ -7,25 +7,10 @@ import { AngleUpIcon } from '../icon/angleup';
 import { AngleDoubleDownIcon } from '../icon/angledoubledown';
 
 export const OrderListControls = React.memo((props) => {
-    function getIconComponent(iconType) {
-        switch (iconType) {
-            case 'moveUpIcon':
-                return props.moveUpIcon || <AngleUpIcon />;
-            case 'moveTopIcon':
-                return props.moveTopIcon || <AngleDoubleUpIcon />;
-            case 'moveDownIcon':
-                return props.moveDownIcon || <AngleDownIcon />;
-            case 'moveBottomIcon':
-                return props.moveBottomIcon || <AngleDoubleDownIcon />;
-            default:
-                return null;
-        }
-    }
-
-    const moveUpIcon = IconUtils.getJSXIcon(getIconComponent('moveUpIcon'), undefined, { props });
-    const moveTopIcon = IconUtils.getJSXIcon(getIconComponent('moveTopIcon'), undefined, { props });
-    const moveDownIcon = IconUtils.getJSXIcon(getIconComponent('moveDownIcon'), undefined, { props });
-    const moveBottomIcon = IconUtils.getJSXIcon(getIconComponent('moveBottomIcon'), undefined, { props });
+    const moveUpIcon = props.moveUpIcon || <AngleUpIcon />;
+    const moveTopIcon = props.moveTopIcon || <AngleDoubleUpIcon />;
+    const moveDownIcon = props.moveDownIcon || <AngleDownIcon />;
+    const moveBottomIcon = props.moveBottomIcon || <AngleDoubleDownIcon />;
 
     const moveUp = (event) => {
         if (props.selection) {
