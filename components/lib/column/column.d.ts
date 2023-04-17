@@ -10,6 +10,7 @@
  */
 import * as React from 'react';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
+import { IconType } from '../utils/utils';
 
 interface ColumnHeaderOptions {
     /**
@@ -682,9 +683,8 @@ export interface ColumnProps {
     rowReorder?: boolean | undefined;
     /**
      * Icon of the drag handle to reorder rows.
-     * @defaultValue pi pi-bars
      */
-    rowReorderIcon?: string | undefined;
+    rowReorderIcon?: IconType<ColumnProps> | undefined;
     /**
      * Number of rows to span for grouping.
      */

@@ -12,6 +12,7 @@ import { TimesIcon } from '../icon/times';
 import { PencilIcon } from '../icon/pencil';
 import { ChevronDownIcon } from '../icon/chevrondown';
 import { ChevronRightIcon } from '../icon/chevronright';
+import { BarsIcon } from '../icon/bars';
 
 export const BodyCell = React.memo((props) => {
     const [editingState, setEditingState] = React.useState(props.editing);
@@ -554,8 +555,10 @@ export const BodyCell = React.memo((props) => {
             );
         } else if (rowReorder) {
             const showReorder = props.showRowReorderElement ? props.showRowReorderElement(props.rowData, { rowIndex: props.rowIndex, props: props.tableProps }) : true;
+            const rowReorderIconClassName = "p-datatable-reorderablerow-handle";
+            const rowReorderIcon = getColumnProp('rowReorderIcon') || <BarsIcon className={rowReorderIconClassName} />;
 
-            content = showReorder && <i className={classNames('p-datatable-reorderablerow-handle', getColumnProp('rowReorderIcon'))}></i>;
+            content = showReorder && IconUtils.getJSXIcon(rowReorderIcon, { className: rowReorderIconClassName }, { props });
         } else if (expander) {
             const iconProps = { className: 'p-row-toggler-icon', 'aria-hidden': true };
             const icon = props.expanded ? props.expandedRowIcon || <ChevronDownIcon {...iconProps} /> : props.collapsedRowIcon || <ChevronRightIcon {...iconProps} />;
