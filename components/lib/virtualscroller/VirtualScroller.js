@@ -584,7 +584,7 @@ export const VirtualScroller = React.memo(
 
         const createLoader = () => {
             const iconClassName = 'p-virtualscroller-loading-icon';
-            const icon = props.loaderIcon || <SpinnerIcon className={iconClassName} spin />;
+            const icon = props.loadingIcon || <SpinnerIcon className={iconClassName} spin />;
             const loadingIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
             if (!props.loaderDisabled && props.showLoader && loadingState) {
@@ -592,7 +592,7 @@ export const VirtualScroller = React.memo(
                     'p-component-overlay': !props.loadingTemplate
                 });
 
-                let content = <i> {loadingIcon} </i>;
+                let content = loadingIcon;
 
                 if (props.loadingTemplate) {
                     content = loaderArrState.map((_, index) => {
