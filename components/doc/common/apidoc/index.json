@@ -11881,7 +11881,7 @@
                             "name": "loadingIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
+                            "type": "IconType<DataViewProps>",
                             "default": "",
                             "description": "Name of the loading icon or JSX.Element for loading icon."
                         },
@@ -12120,6 +12120,13 @@
                             "description": "Style class of the element."
                         },
                         {
+                            "name": "gridIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DataViewProps>",
+                            "description": "Defines the display mode grid icon."
+                        },
+                        {
                             "name": "id",
                             "optional": true,
                             "readonly": false,
@@ -12132,6 +12139,13 @@
                             "readonly": false,
                             "type": "\"grid\" | \"list\" | string & Record<string, unknown>",
                             "description": "Orientation of the panels, valid values are \"list\" and \"grid\"."
+                        },
+                        {
+                            "name": "listIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DataViewProps>",
+                            "description": "Defines the display mode list icon."
                         },
                         {
                             "name": "style",
