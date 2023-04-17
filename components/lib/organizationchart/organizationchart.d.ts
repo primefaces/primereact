@@ -79,13 +79,9 @@ export interface OrganizationChartProps extends Omit<React.DetailedHTMLProps<Rea
      */
     value?: OrganizationChartNodeData[] | undefined;
     /**
-     * Icon of the node when it is expanded.
+     * Toggle icon of a expanded and collapsed node.
      */
-    expandIcon?: IconType<OrganizationChartProps> | undefined;
-    /**
-     * Icon of the node when it is collapsed.
-     */
-    collapseIcon?: IconType<OrganizationChartProps> | undefined;
+    togglerIcon?: IconType<OrganizationChartProps> | undefined;
     /**
      * Defines the selection mode, valid values "single" and "multiple".
      */

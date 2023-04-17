@@ -13,8 +13,7 @@ export const OrganizationChartBase = {
         onSelectionChange: null,
         onNodeSelect: null,
         onNodeUnselect: null,
-        collapseIcon: null,
-        expandIcon: null,
+        togglerIcon: null,
         children: undefined
     },
     getProps: (props) => ObjectUtils.getMergedProps(props, OrganizationChartBase.defaultProps),

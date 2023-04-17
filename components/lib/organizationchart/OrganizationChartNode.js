@@ -27,7 +27,7 @@ export const OrganizationChartNode = React.memo((props) => {
                     node.children.map((child, index) => {
                         return (
                             <td key={index} colSpan="2">
-                                <OrganizationChartNode node={child} nodeTemplate={props.nodeTemplate} selectionMode={props.selectionMode} onNodeClick={props.onNodeClick} isSelected={props.isSelected} />
+                                <OrganizationChartNode node={child} nodeTemplate={props.nodeTemplate} selectionMode={props.selectionMode} onNodeClick={props.onNodeClick} isSelected={props.isSelected} togglerIcon={props.togglerIcon} />
                             </td>
                         );
                     })}
@@ -81,20 +81,17 @@ export const OrganizationChartNode = React.memo((props) => {
             let icon;
 
             if (expandedState) {
-                icon = props.expandIcon || <ChevronDownIcon className={iconClassName} />;
+                icon = props.togglerIcon || <ChevronDownIcon className={iconClassName} />;
             } else {
-                icon = props.collapseIcon || <ChevronUpIcon className={iconClassName} />;
+                icon = props.togglerIcon || <ChevronUpIcon className={iconClassName} />;
             }
 
-            const expandIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
-            const collapseIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
-
-            const toggleIcon = expandIcon || collapseIcon;
+            const togglerIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
             return (
                 /* eslint-disable */
                 <a href="#" className="p-node-toggler" onClick={(e) => toggleNode(e, node)}>
-                    <i> {toggleIcon} </i>
+                    <i> {togglerIcon} </i>
                 </a>
                 /* eslint-enable */
             );
