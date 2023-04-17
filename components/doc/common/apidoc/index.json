@@ -21064,6 +21064,13 @@
                             "description": "Whether the message can be closed manually using the close icon."
                         },
                         {
+                            "name": "closeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<MessagesProps>",
+                            "description": "Icon of the close button."
+                        },
+                        {
                             "name": "content",
                             "optional": true,
                             "readonly": false,
