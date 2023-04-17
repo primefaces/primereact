@@ -3,10 +3,15 @@ import { localeOption } from '../api/Api';
 import { useTimeout } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils } from '../utils/Utils';
+import { InfoCircleIcon } from '../icon/infocircle';
+import { ExclamationTriangleIcon } from '../icon/exclamationtriangle';
+import { TimesCircleIcon } from '../icon/timescircle';
+import { CheckIcon } from '../icon/check';
+import { TimesIcon } from '../icon/times';
 
 export const UIMessage = React.memo(
     React.forwardRef((props, ref) => {
-        const { severity, content, summary, detail, closable, life, sticky, icon } = props.message;
+        const { severity, content, summary, detail, closable, life, sticky, icon: _icon, closeIcon: _closeIcon } = props.message;
 
         const [clearTimer] = useTimeout(
             () => {
@@ -33,10 +38,13 @@ export const UIMessage = React.memo(
         const createCloseIcon = () => {
             if (closable !== false) {
                 const ariaLabel = localeOption('close');
+                const iconProps = { className: "p-message-close-icon", "aria-hidden": true };
+                const icon = _closeIcon || <TimesIcon {...iconProps} />;
+                const closeIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
 
                 return (
                     <button type="button" className="p-message-close p-link" aria-label={ariaLabel} onClick={onClose}>
-                        <i className="p-message-close-icon pi pi-times" aria-hidden="true"></i>
+                        {closeIcon}
                         <Ripple />
                     </button>
                 );
@@ -47,18 +55,29 @@ export const UIMessage = React.memo(
 
         const createMessage = () => {
             if (props.message) {
-                let iconValue = icon;
+                const iconClassName = "p-message-icon";
+                let icon = _icon;
 
-                if (!iconValue) {
-                    iconValue = classNames('pi', {
-                        'pi-info-circle': severity === 'info',
-                        'pi-exclamation-triangle': severity === 'warn',
-                        'pi-times-circle': severity === 'error',
-                        'pi-check': severity === 'success'
-                    });
+                if (!_icon) {
+                    switch (severity) {
+                        case 'info':
+                            icon = <InfoCircleIcon className={iconClassName} />;
+                            break;
+                        case 'warn':
+                            icon = <ExclamationTriangleIcon className={iconClassName} />;
+                            break;
+                        case 'error':
+                            icon = <TimesCircleIcon className={iconClassName} />;
+                            break;
+                        case 'success':
+                            icon = <CheckIcon className={iconClassName} />;
+                            break;
+                        default:
+                            break;
+                    }
                 }
 
-                const iconContent = IconUtils.getJSXIcon(iconValue, { className: 'p-message-icon' }, { props });
+                const iconContent = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
                 return (
                     content || (
