@@ -140,7 +140,7 @@ export const DropdownPanel = React.memo(
                         filterOptions: filterOptions,
                         filterInputKeyDown: props.onFilterInputKeyDown,
                         filterInputChange: onFilterInputChange,
-                        filterIconClassName: 'p-dropdown-filter-icon pi pi-search',
+                        filterIconClassName: 'p-dropdown-filter-icon',
                         clearIcon: clearIcon,
                         props
                     };
