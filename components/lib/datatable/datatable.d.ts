@@ -1055,6 +1055,10 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      */
     sortMode?: 'single' | 'multiple' | undefined;
     /**
+     * Icon to display the current sorting status.
+     */
+    sortIcon?: IconType<DataTable<TValue>> | undefined;
+    /**
      * Order to sort the data by default.
      */
     sortOrder?: 1 | 0 | -1 | null | undefined;

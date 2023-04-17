@@ -127,6 +127,7 @@ export const DataTableBase = {
         showSelectionElement: null,
         size: 'normal',
         sortField: null,
+        sortIcon: null,
         sortMode: 'single',
         sortOrder: null,
         stateKey: null,

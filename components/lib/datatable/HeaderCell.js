@@ -59,10 +59,8 @@ export const HeaderCell = React.memo((props) => {
 
     const getAriaSort = ({ sorted, sortOrder }) => {
         if (getColumnProp('sortable')) {
-            const sortIcon = sorted ? (sortOrder < 0 ? 'sort-amount-down' : 'sort-amount-up-alt') : 'sort-alt';
-
-            if (sortIcon === 'sort-amount-down') return 'descending';
-            else if (sortIcon === 'sort-amount-up-alt') return 'ascending';
+            if (sorted && sortOrder < 0) return 'descending';
+            else if (sorted && sortOrder > 0) return 'ascending';
             else return 'none';
         }
 
@@ -218,8 +216,8 @@ export const HeaderCell = React.memo((props) => {
     const createSortIcon = ({ sorted, sortOrder }) => {
         if (getColumnProp('sortable')) {
             let iconClassName = 'p-sortable-column-icon';
-            let icon = sorted ? (sortOrder < 0 ? props.sortIcon || <SortAmountDownIcon className={iconClassName} /> : props.sortIcon || <SortAmountUpAltIcon className={iconClassName} />) : props.sortIcon || <SortAltIcon className={iconClassName} />;
-            let sortIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props, sorted, sortOrder });
+            let icon = sorted ? (sortOrder < 0 ? <SortAmountDownIcon className={iconClassName} /> : <SortAmountUpAltIcon className={iconClassName} />) : <SortAltIcon className={iconClassName} />;
+            let sortIcon = IconUtils.getJSXIcon(props.sortIcon || icon, { className: iconClassName }, { props, sorted, sortOrder });
 
             return sortIcon;
         }

@@ -743,9 +743,9 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 }
             }
 
-            // reorderIndicatorUpRef.current.style.display = 'none';
-            // reorderIndicatorDownRef.current.style.display = 'none';
-            // draggedColumnElement.current.draggable = false;
+            reorderIndicatorUpRef.current.style.display = 'none';
+            reorderIndicatorDownRef.current.style.display = 'none';
+            draggedColumnElement.current.draggable = false;
             draggedColumnElement.current = null;
             draggedColumn.current = null;
             dropPosition.current = null;
@@ -1107,11 +1107,11 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             Object.entries(filters).forEach(([prop, value]) => {
                 cloned[prop] = value.operator
                     ? {
-                          operator: value.operator,
-                          constraints: value.constraints.map((constraint) => {
-                              return { ...constraint };
-                          })
-                      }
+                        operator: value.operator,
+                        constraints: value.constraints.map((constraint) => {
+                            return { ...constraint };
+                        })
+                    }
                     : { ...value };
             });
         } else {
@@ -1446,6 +1446,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 onColumnResizerDoubleClick={props.onColumnResizerDoubleClick}
                 sortMode={props.sortMode}
                 sortField={sortField}
+                sortIcon={props.sortIcon}
                 sortOrder={sortOrder}
                 multiSortMeta={multiSortMeta}
                 groupRowsBy={props.groupRowsBy}
@@ -1750,19 +1751,22 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         return null;
     };
 
-    //@todo Refactor the method.
     const createReorderIndicators = () => {
         if (props.reorderableColumns) {
             const style = { position: 'absolute', display: 'none' };
-            const reorderIndicatorUpProps = { ref: reorderIndicatorUpRef, className: 'p-datatable-reorder-indicator-up', style: { ...style } };
-            const reorderIndicatorUpIcon = IconUtils.getJSXIcon(props.reorderIndicatorUpIcon || <ArrowUpIcon {...reorderIndicatorUpProps} />, { ...reorderIndicatorUpProps }, { props });
-            const reorderIndicatorDownProps = { ref: reorderIndicatorDownRef, className: 'p-datatable-reorder-indicator-down', style: { ...style } };
-            const reorderIndicatorDownIcon = IconUtils.getJSXIcon(props.reorderIndicatorDownIcon || <ArrowDownIcon {...reorderIndicatorDownProps} />, { ...reorderIndicatorDownProps }, { props });
+            const reorderIndicatorUpProps = { className: 'p-datatable-reorder-indicator-up', style: { ...style } };
+            const reorderIndicatorUpIcon = IconUtils.getJSXIcon(props.reorderIndicatorUpIcon || <ArrowDownIcon />, undefined, { props });
+            const reorderIndicatorDownProps = { className: 'p-datatable-reorder-indicator-down', style: { ...style } };
+            const reorderIndicatorDownIcon = IconUtils.getJSXIcon(props.reorderIndicatorDownIcon || <ArrowUpIcon />, undefined, { props });
 
             return (
                 <>
-                    {reorderIndicatorUpIcon}
-                    {reorderIndicatorDownIcon}
+                    <span ref={reorderIndicatorUpRef} {...reorderIndicatorUpProps}>
+                        {reorderIndicatorUpIcon}
+                    </span>
+                    <span ref={reorderIndicatorDownRef} {...reorderIndicatorDownProps}>
+                        {reorderIndicatorDownIcon}
+                    </span>
                 </>
             );
         }
