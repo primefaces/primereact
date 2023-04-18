@@ -10,6 +10,8 @@ import { TreeTableFooter } from './TreeTableFooter';
 import { TreeTableHeader } from './TreeTableHeader';
 import { TreeTableScrollableView } from './TreeTableScrollableView';
 import { SpinnerIcon } from '../icon/spinner';
+import { ArrowDownIcon } from '../icon/arrowdown';
+import { ArrowUpIcon } from '../icon/arrowup';
 
 export const TreeTable = React.forwardRef((inProps, ref) => {
     const props = TreeTableBase.getProps(inProps);
@@ -460,6 +462,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
                     dropPosition.current = -1;
                 }
 
+
                 reorderIndicatorUpRef.current.style.display = 'block';
                 reorderIndicatorDownRef.current.style.display = 'block';
             }
@@ -854,6 +857,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         return (
             <TreeTableBody
                 value={value}
+                checkboxIcon={props.checkboxIcon}
                 columns={columns}
                 expandedKeys={getExpandedKeys()}
                 selectOnEdit={props.selectOnEdit}
@@ -1002,8 +1006,17 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
     const paginatorBottom = props.paginator && props.paginatorPosition !== 'top' && createPaginator('bottom', totalRecords);
     const loader = createLoader();
     const resizeHelper = props.resizableColumns && <div ref={resizerHelperRef} className="p-column-resizer-helper" style={{ display: 'none' }}></div>;
-    const reorderIndicatorUp = props.reorderableColumns && <span ref={reorderIndicatorUpRef} className="pi pi-arrow-down p-datatable-reorder-indicator-up" style={{ position: 'absolute', display: 'none' }} />;
-    const reorderIndicatorDown = props.reorderableColumns && <span ref={reorderIndicatorDownRef} className="pi pi-arrow-up p-datatable-reorder-indicator-down" style={{ position: 'absolute', display: 'none' }} />;
+    const style = { position: 'absolute', display: 'none' };
+    const reorderIndicatorUpProps = { className: 'p-datatable-reorder-indicator-up', style: { ...style } };
+    const reorderIndicatorUpIcon = props.reorderableColumns && IconUtils.getJSXIcon(props.reorderIndicatorUpIcon || <ArrowDownIcon />, undefined, { props });
+    const reorderIndicatorUp = props.reorderableColumns && <span ref={reorderIndicatorUpRef} {...reorderIndicatorUpProps}>
+        {reorderIndicatorUpIcon}
+    </span>
+    const reorderIndicatorDownProps = { className: 'p-datatable-reorder-indicator-down', style: { ...style } };
+    const reorderIndicatorDownIcon = IconUtils.getJSXIcon(props.reorderIndicatorDownIcon || <ArrowUpIcon />, undefined, { props });
+    const reorderIndicatorDown = props.reorderableColumns && <span ref={reorderIndicatorDownRef} {...reorderIndicatorDownProps}>
+        {reorderIndicatorDownIcon}
+    </span>
 
     return (
         <div ref={elementRef} id={props.id} className={className} style={props.style} data-scrollselectors=".p-treetable-wrapper" {...otherProps}>

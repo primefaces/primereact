@@ -5,6 +5,7 @@ export const TreeTableBase = {
     defaultProps: {
         __TYPE: 'TreeTable',
         alwaysShowPaginator: true,
+        checkboxIcon: null,
         className: null,
         columnResizeMode: 'fit',
         contextMenuSelectionKey: null,
@@ -58,6 +59,8 @@ export const TreeTableBase = {
         propagateSelectionUp: true,
         removableSort: false,
         reorderableColumns: false,
+        reorderIndicatorDownIcon: null,
+        reorderIndicatorUpIcon: null,
         resizableColumns: false,
         rowClassName: null,
         rowHover: false,

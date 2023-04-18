@@ -232,6 +232,10 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
      */
     alwaysShowPaginator?: boolean | undefined;
     /**
+     * Icon of the checkbox when checked.
+     */
+    checkboxIcon?: IconType<TreeTableProps> | undefined;
+    /**
      * Used to get the child elements of the component.
      * @readonly
      */
@@ -413,6 +417,14 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
      * @defaultValue false
      */
     reorderableColumns?: boolean | undefined;
+    /**
+     * Defines the reorder indicator down icon.
+     */
+    reorderIndicatorDownIcon?: IconType<TreeTableProps> | undefined;
+    /**
+     * Defines the reorder indicator up icon.
+     */
+    reorderIndicatorUpIcon?: IconType<TreeTableProps> | undefined;
     /**
      * When enabled, columns can be resized using drag and drop.
      * @defaultValue false
