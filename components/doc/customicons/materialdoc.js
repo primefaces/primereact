@@ -1,23 +1,18 @@
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function DownloadDoc(props) {
+export function MaterialDoc(props) {
+
     const code = {
         basic: `
-// with npm
-npm install primereact
-
-// with yarn
-yarn add primereact
+<Dropdown dropdownIcon={<img alt="dropdown icon" src="/icons/arrow_down.png" />} />
         `
     };
 
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    PrimeReact is available for download at <a href="https://www.npmjs.com/package/primereact">npm</a>.
-                </p>
+                <p><a href="https://fonts.google.com/icons">Material icons</a> is the official icon library based on Google Material Design.</p>
             </DocSectionText>
             <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
         </>
