@@ -12,27 +12,27 @@ import { AngleUpIcon } from '../icon/angleup';
 import { AngleDoubleUpIcon } from '../icon/angledoubleup';
 
 export const PickListTransferControls = React.memo((props) => {
-    const matches = useMatchMedia(`(max-width: ${props.breakpoint})`, props.breakpoint);
+    const viewChanged = useMatchMedia(`(max-width: ${props.breakpoint})`, props.breakpoint);
 
     function getIconComponent(iconType) {
         switch (iconType) {
             case 'moveToTargetIcon':
-                return props.moveToTargetIcon || matches ? <AngleDownIcon /> : <AngleRightIcon />;
+                return props.moveToTargetIcon || viewChanged ? <AngleDownIcon /> : <AngleRightIcon />;
             case 'moveAllToTargetIcon':
-                return props.moveAllToTargetIcon || matches ? <AngleDoubleDownIcon /> : <AngleDoubleRightIcon />;
+                return props.moveAllToTargetIcon || viewChanged ? <AngleDoubleDownIcon /> : <AngleDoubleRightIcon />;
             case 'moveToSourceIcon':
-                return props.moveToSourceIcon || matches ? <AngleUpIcon /> : <AngleLeftIcon />;
+                return props.moveToSourceIcon || viewChanged ? <AngleUpIcon /> : <AngleLeftIcon />;
             case 'moveAllToSourceIcon':
-                return props.moveAllToSourceIcon || matches ? <AngleDoubleUpIcon /> : <AngleDoubleLeftIcon />;
+                return props.moveAllToSourceIcon || viewChanged ? <AngleDoubleUpIcon /> : <AngleDoubleLeftIcon />;
             default:
                 return null;
         }
     }
 
-    const moveToTargetIcon = IconUtils.getJSXIcon(getIconComponent('moveToTargetIcon'), undefined, { props });
-    const moveAllToTargetIcon = IconUtils.getJSXIcon(getIconComponent('moveAllToTargetIcon'), undefined, { props });
-    const moveToSourceIcon = IconUtils.getJSXIcon(getIconComponent('moveToSourceIcon'), undefined, { props });
-    const moveAllToSourceIcon = IconUtils.getJSXIcon(getIconComponent('moveAllToSourceIcon'), undefined, { props });
+    const moveToTargetIcon = IconUtils.getJSXIcon(getIconComponent('moveToTargetIcon'), undefined, { props, viewChanged });
+    const moveAllToTargetIcon = IconUtils.getJSXIcon(getIconComponent('moveAllToTargetIcon'), undefined, { props, viewChanged });
+    const moveToSourceIcon = IconUtils.getJSXIcon(getIconComponent('moveToSourceIcon'), undefined, { props, viewChanged });
+    const moveAllToSourceIcon = IconUtils.getJSXIcon(getIconComponent('moveAllToSourceIcon'), undefined, { props, viewChanged });
 
     const moveRightDisabled = ObjectUtils.isEmpty(props.sourceSelection) || ObjectUtils.isEmpty(props.visibleSourceList);
     const moveLeftDisabled = ObjectUtils.isEmpty(props.targetSelection) || ObjectUtils.isEmpty(props.visibleTargetList);
