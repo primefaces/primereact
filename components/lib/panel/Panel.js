@@ -110,7 +110,6 @@ export const Panel = React.forwardRef((inProps, ref) => {
                 titleClassName: 'p-panel-title',
                 iconsClassName: 'p-panel-icons',
                 togglerClassName: 'p-panel-header-icon p-panel-toggler p-link',
-                togglerIconClassName: collapsed ? props.expandIcon : props.collapseIcon,
                 onTogglerClick: toggle,
                 titleElement,
                 iconsElement,
