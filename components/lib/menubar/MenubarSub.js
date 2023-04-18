@@ -190,7 +190,13 @@ export const MenubarSub = React.memo(
             const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props: props.menuProps });
             const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
             const submenuIconClassName = 'p-submenu-icon';
-            const submenuIcon = item.items && IconUtils.getJSXIcon(!props.root ? props.submenuIcon || <AngleRightIcon className={submenuIconClassName} /> : props.submenuIcon || <AngleDownIcon className={submenuIconClassName} />, { className: submenuIconClassName }, { props: { menuProps: props.menuProps, ...props } });
+            const submenuIcon =
+                item.items &&
+                IconUtils.getJSXIcon(
+                    !props.root ? props.submenuIcon || <AngleRightIcon className={submenuIconClassName} /> : props.submenuIcon || <AngleDownIcon className={submenuIconClassName} />,
+                    { className: submenuIconClassName },
+                    { props: { menuProps: props.menuProps, ...props } }
+                );
             const submenu = createSubmenu(item);
             let content = (
                 <a href={item.url || '#'} role="menuitem" className={linkClassName} target={item.target} aria-haspopup={item.items != null} onClick={(event) => onItemClick(event, item)} onKeyDown={(event) => onItemKeyDown(event, item)}>

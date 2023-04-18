@@ -114,7 +114,7 @@ export const SlideMenu = React.memo(
                 'p-hidden': levelState === 0
             });
 
-            const iconClassName = "p-slidemenu-backward-icon";
+            const iconClassName = 'p-slidemenu-backward-icon';
             const icon = props.backIcon || <ChevronLeftIcon className={iconClassName} />;
             const backIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
@@ -154,7 +154,18 @@ export const SlideMenu = React.memo(
                     <div ref={menuRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onPanelClick}>
                         <div className="p-slidemenu-wrapper" style={wrapperStyle}>
                             <div className="p-slidemenu-content" ref={slideMenuContent}>
-                                <SlideMenuSub menuProps={props} model={props.model} root index={0} menuWidth={props.menuWidth} effectDuration={props.effectDuration} level={levelState} parentActive={levelState === 0} onForward={navigateForward} submenuIcon={props.submenuIcon} />
+                                <SlideMenuSub
+                                    menuProps={props}
+                                    model={props.model}
+                                    root
+                                    index={0}
+                                    menuWidth={props.menuWidth}
+                                    effectDuration={props.effectDuration}
+                                    level={levelState}
+                                    parentActive={levelState === 0}
+                                    onForward={navigateForward}
+                                    submenuIcon={props.submenuIcon}
+                                />
                             </div>
                             {backward}
                         </div>

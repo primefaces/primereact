@@ -388,8 +388,9 @@ export const MegaMenu = React.memo(
         flex-wrap: wrap;
     }
 
-    ${horizontal
-                        ? `
+    ${
+        horizontal
+            ? `
 .p-megamenu[${selector}] .p-megamenu-button {
     display: flex;
 }
@@ -418,11 +419,12 @@ export const MegaMenu = React.memo(
     z-index: 1;
 }
         `
-                        : ''
-                    }
+            : ''
+    }
 
-    ${vertical
-                        ? `
+    ${
+        vertical
+            ? `
 .p-megamenu-vertical[${selector}] {
     width: 100%;
 }
@@ -448,8 +450,8 @@ export const MegaMenu = React.memo(
     content: "\\e930";
 }
         `
-                        : ''
-                    }
+            : ''
+    }
 }
 `;
 

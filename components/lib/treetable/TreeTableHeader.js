@@ -154,7 +154,7 @@ export const TreeTableHeader = React.memo((props) => {
     const createSortIcon = (column, sorted, sortOrder) => {
         if (getColumnProp(column, 'sortable')) {
             let iconClassName = 'p-sortable-column-icon';
-            let icon = sorted ? (sortOrder < 0 ? <SortAmountDownIcon className={iconClassName} /> : <SortAmountUpAltIcon className={iconClassName} />) : <SortAltIcon className={iconClassName} />;
+            let icon = sorted ? sortOrder < 0 ? <SortAmountDownIcon className={iconClassName} /> : <SortAmountUpAltIcon className={iconClassName} /> : <SortAltIcon className={iconClassName} />;
             let sortIcon = IconUtils.getJSXIcon(props.sortIcon || icon, { className: iconClassName }, { props, sorted, sortOrder });
 
             return sortIcon;

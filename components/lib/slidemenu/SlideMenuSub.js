@@ -43,7 +43,18 @@ export const SlideMenuSub = React.memo((props) => {
         const shouldRender = renderSubMenu[createKey(item, index)];
 
         if (item.items && shouldRender) {
-            return <SlideMenuSub menuProps={props.menuProps} model={item.items} index={props.index + 1} menuWidth={props.menuWidth} effectDuration={props.effectDuration} onForward={props.onForward} parentActive={item === activeItemState} submenuIcon={props.submenuIcon} />;
+            return (
+                <SlideMenuSub
+                    menuProps={props.menuProps}
+                    model={item.items}
+                    index={props.index + 1}
+                    menuWidth={props.menuWidth}
+                    effectDuration={props.effectDuration}
+                    onForward={props.onForward}
+                    parentActive={item === activeItemState}
+                    submenuIcon={props.submenuIcon}
+                />
+            );
         }
 
         return null;

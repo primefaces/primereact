@@ -26,7 +26,6 @@ export const DataViewLayoutOptions = React.memo((inProps) => {
     const listIcon = IconUtils.getJSXIcon(props.listIcon || <BarsIcon />, undefined, { props });
     const gridIcon = IconUtils.getJSXIcon(props.gridIcon || <ThLargeIcon />, undefined, { props });
 
-
     return (
         <div id={props.id} style={props.style} className={className} {...otherProps}>
             <button type="button" className={buttonListClass} onClick={(event) => changeLayout(event, 'list')}>
@@ -114,15 +113,11 @@ export const DataView = React.memo(
 
         const createLoader = () => {
             if (props.loading) {
-                let iconClassName = "p-dataview-loading-icon";
+                let iconClassName = 'p-dataview-loading-icon';
                 let icon = props.loadingIcon || <SpinnerIcon className={iconClassName} spin />;
                 const loadingIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
-                return (
-                    <div className="p-dataview-loading-overlay p-component-overlay">
-                        {loadingIcon}
-                    </div>
-                );
+                return <div className="p-dataview-loading-overlay p-component-overlay">{loadingIcon}</div>;
             }
 
             return null;

@@ -109,7 +109,7 @@ export const PanelMenuSub = React.memo((props) => {
         const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props: props.menuProps });
         const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
         const submenuIconClassName = 'p-panelmenu-icon';
-        const submenuIcon = item.items && IconUtils.getJSXIcon(active ? props.submenuIcon || <ChevronDownIcon className={submenuIconClassName} /> : props.submenuIcon || <ChevronRightIcon className={submenuIconClassName} />)
+        const submenuIcon = item.items && IconUtils.getJSXIcon(active ? props.submenuIcon || <ChevronDownIcon className={submenuIconClassName} /> : props.submenuIcon || <ChevronRightIcon className={submenuIconClassName} />);
         const submenu = createSubmenu(item, active);
         let content = (
             <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => onItemClick(event, item, index)} role="menuitem" aria-disabled={item.disabled}>

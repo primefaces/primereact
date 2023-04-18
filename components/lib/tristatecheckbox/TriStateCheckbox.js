@@ -30,8 +30,8 @@ export const TriStateCheckbox = React.memo(
                 props.onChange({
                     originalEvent: event,
                     value: newValue,
-                    stopPropagation: () => { },
-                    preventDefault: () => { },
+                    stopPropagation: () => {},
+                    preventDefault: () => {},
                     target: {
                         name: props.name,
                         id: props.id,

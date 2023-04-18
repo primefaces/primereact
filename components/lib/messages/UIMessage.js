@@ -38,7 +38,7 @@ export const UIMessage = React.memo(
         const createCloseIcon = () => {
             if (closable !== false) {
                 const ariaLabel = localeOption('close');
-                const iconProps = { className: "p-message-close-icon", "aria-hidden": true };
+                const iconProps = { className: 'p-message-close-icon', 'aria-hidden': true };
                 const icon = _closeIcon || <TimesIcon {...iconProps} />;
                 const closeIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
 
@@ -55,7 +55,7 @@ export const UIMessage = React.memo(
 
         const createMessage = () => {
             if (props.message) {
-                const iconClassName = "p-message-icon";
+                const iconClassName = 'p-message-icon';
                 let icon = _icon;
 
                 if (!_icon) {

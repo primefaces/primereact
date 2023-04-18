@@ -86,7 +86,7 @@ export const ToastMessage = React.memo(
         const createMessage = () => {
             if (messageInfo) {
                 const contentEl = ObjectUtils.getJSXElement(content, { message: messageInfo.message, onClick, onClose });
-                const iconClassName = "p-toast-message-icon";
+                const iconClassName = 'p-toast-message-icon';
                 let icon = _icon;
 
                 if (!_icon) {

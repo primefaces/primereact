@@ -216,7 +216,7 @@ export const HeaderCell = React.memo((props) => {
     const createSortIcon = ({ sorted, sortOrder }) => {
         if (getColumnProp('sortable')) {
             let iconClassName = 'p-sortable-column-icon';
-            let icon = sorted ? (sortOrder < 0 ? <SortAmountDownIcon className={iconClassName} /> : <SortAmountUpAltIcon className={iconClassName} />) : <SortAltIcon className={iconClassName} />;
+            let icon = sorted ? sortOrder < 0 ? <SortAmountDownIcon className={iconClassName} /> : <SortAmountUpAltIcon className={iconClassName} /> : <SortAltIcon className={iconClassName} />;
             let sortIcon = IconUtils.getJSXIcon(props.sortIcon || icon, { className: iconClassName }, { props, sorted, sortOrder });
 
             return sortIcon;

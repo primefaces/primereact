@@ -111,7 +111,7 @@ export const PanelMenu = React.memo(
             const iconClassName = classNames('p-menuitem-icon', item.icon);
             const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props });
             const submenuIconClassName = 'p-panelmenu-icon';
-            const submenuIcon = item.items && IconUtils.getJSXIcon(active ? props.submenuIcon || <ChevronDownIcon className={submenuIconClassName} /> : props.submenuIcon || <ChevronRightIcon className={submenuIconClassName} />)
+            const submenuIcon = item.items && IconUtils.getJSXIcon(active ? props.submenuIcon || <ChevronDownIcon className={submenuIconClassName} /> : props.submenuIcon || <ChevronRightIcon className={submenuIconClassName} />);
             const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
             const contentWrapperClassName = classNames('p-toggleable-content', { 'p-toggleable-content-collapsed': !active });
             const menuContentRef = React.createRef();
