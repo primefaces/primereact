@@ -224,22 +224,6 @@ export const PickList = React.memo(
     .p-picklist[${attributeSelectorState}] .p-picklist-buttons .p-button:last-child {
         margin-right: 0;
     }
-
-    .p-picklist[${attributeSelectorState}] .pi-angle-right:before {
-        content: "\\e930"
-    }
-
-    .p-picklist[${attributeSelectorState}] .pi-angle-double-right:before {
-        content: "\\e92c"
-    }
-
-    .p-picklist[${attributeSelectorState}] .pi-angle-left:before {
-        content: "\\e933"
-    }
-
-    .p-picklist[${attributeSelectorState}] .pi-angle-double-left:before {
-        content: "\\e92f"
-    }
 }
 `;
 
