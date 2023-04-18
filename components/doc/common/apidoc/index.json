@@ -15859,7 +15859,40 @@
             }
         }
     },
-    "icon/angledoubledown": {
+    "iconbase/iconbase": {
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "IconBaseProps": {
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string"
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string"
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean"
+                        }
+                    ],
+                    "callbacks": [],
+                    "extendedBy": "AngleDoubleDownIconProps,AngleDoubleLeftIconProps,AngleDoubleRightIconProps,AngleDoubleUpIconProps,AngleDownIconProps,AngleLeftIconProps,AngleRightIconProps,AngleUpIconProps,ArrowDownIconProps,ArrowUpIconProps,BanIconProps,BarsIconProps,CalendarIconProps,CheckIconProps,ChevronDownIconProps,ChevronLeftIconProps,ChevronRightIconProps,ChevronUpIconProps,DownloadIconProps,ExclamationTriangleIconProps,EyeIconProps,EyeSlashIconProps,FilterIconProps,FilterSlashIconProps,InfoCircleIconProps,MinusIconProps,PencilIconProps,PlusIconProps,RefreshIconProps,SearchIconProps,SearchMinusIconProps,SearchPlusIconProps,SortAltIconProps,SortAmountDownIconProps,SortAmountUpAltIconProps,SpinnerIconProps,StarIconProps,StarFillIconProps,ThLargeIconProps,TimesIconProps,TimesCircleIconProps,TrashIconProps,UndoIconProps,UploadIconProps,WindowMaximizeIconProps,WindowMinimizeIconProps",
+                    "extendedTypes": "Omit<React.SVGProps<SVGSVGElement>, \"ref\">"
+                }
+            }
+        }
+    },
+    "icons/angledoubledown": {
         "components": {
             "AngleDoubleDownIcon": {
                 "description": "**PrimeReact - AngleDoubleDownIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -15900,7 +15933,7 @@
             }
         }
     },
-    "icon/angledoubleleft": {
+    "icons/angledoubleleft": {
         "components": {
             "AngleDoubleLeftIcon": {
                 "description": "**PrimeReact - AngleDoubleLeftIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -15941,7 +15974,7 @@
             }
         }
     },
-    "icon/angledoubleright": {
+    "icons/angledoubleright": {
         "components": {
             "AngleDoubleRightIcon": {
                 "description": "**PrimeReact - AngleDoubleRightIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -15982,7 +16015,7 @@
             }
         }
     },
-    "icon/angledoubleup": {
+    "icons/angledoubleup": {
         "components": {
             "AngleDoubleUpIcon": {
                 "description": "**PrimeReact - AngleDoubleUpIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16023,7 +16056,7 @@
             }
         }
     },
-    "icon/angledown": {
+    "icons/angledown": {
         "components": {
             "AngleDownIcon": {
                 "description": "**PrimeReact - AngleDownIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16064,7 +16097,7 @@
             }
         }
     },
-    "icon/angleleft": {
+    "icons/angleleft": {
         "components": {
             "AngleLeftIcon": {
                 "description": "**PrimeReact - AngleLeftIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16105,7 +16138,7 @@
             }
         }
     },
-    "icon/angleright": {
+    "icons/angleright": {
         "components": {
             "AngleRightIcon": {
                 "description": "**PrimeReact - AngleRightIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16146,7 +16179,7 @@
             }
         }
     },
-    "icon/angleup": {
+    "icons/angleup": {
         "components": {
             "AngleUpIcon": {
                 "description": "**PrimeReact - AngleUpIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16187,7 +16220,7 @@
             }
         }
     },
-    "icon/arrowdown": {
+    "icons/arrowdown": {
         "components": {
             "ArrowDownIcon": {
                 "description": "**PrimeReact - ArrowDownIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16228,7 +16261,7 @@
             }
         }
     },
-    "icon/arrowup": {
+    "icons/arrowup": {
         "components": {
             "ArrowUpIcon": {
                 "description": "**PrimeReact - ArrowUpIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16269,7 +16302,7 @@
             }
         }
     },
-    "icon/ban": {
+    "icons/ban": {
         "components": {
             "BanIcon": {
                 "description": "**PrimeReact - BanIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16310,7 +16343,7 @@
             }
         }
     },
-    "icon/bars": {
+    "icons/bars": {
         "components": {
             "BarsIcon": {
                 "description": "**PrimeReact - BarsIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16351,7 +16384,7 @@
             }
         }
     },
-    "icon/calendar": {
+    "icons/calendar": {
         "components": {
             "CalendarIcon": {
                 "description": "**PrimeReact - CalendarIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16392,7 +16425,7 @@
             }
         }
     },
-    "icon/check": {
+    "icons/check": {
         "components": {
             "CheckIcon": {
                 "description": "**PrimeReact - CheckIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16433,7 +16466,7 @@
             }
         }
     },
-    "icon/chevrondown": {
+    "icons/chevrondown": {
         "components": {
             "ChevronDownIcon": {
                 "description": "**PrimeReact - ChevronDownIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16474,7 +16507,7 @@
             }
         }
     },
-    "icon/chevronleft": {
+    "icons/chevronleft": {
         "components": {
             "ChevronLeftIcon": {
                 "description": "**PrimeReact - ChevronLeftIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16515,7 +16548,7 @@
             }
         }
     },
-    "icon/chevronright": {
+    "icons/chevronright": {
         "components": {
             "ChevronRightIcon": {
                 "description": "**PrimeReact - ChevronRightIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16556,7 +16589,7 @@
             }
         }
     },
-    "icon/chevronup": {
+    "icons/chevronup": {
         "components": {
             "ChevronUpIcon": {
                 "description": "**PrimeReact - ChevronUpIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16597,7 +16630,7 @@
             }
         }
     },
-    "icon/download": {
+    "icons/download": {
         "components": {
             "DownloadIcon": {
                 "description": "**PrimeReact - DownloadIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16638,7 +16671,7 @@
             }
         }
     },
-    "icon/exclamationtriangle": {
+    "icons/exclamationtriangle": {
         "components": {
             "ExclamationTriangleIcon": {
                 "description": "**PrimeReact - ExclamationTriangleIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16679,7 +16712,7 @@
             }
         }
     },
-    "icon/eye": {
+    "icons/eye": {
         "components": {
             "EyeIcon": {
                 "description": "**PrimeReact - EyeIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16720,7 +16753,7 @@
             }
         }
     },
-    "icon/eyeslash": {
+    "icons/eyeslash": {
         "components": {
             "EyeSlashIcon": {
                 "description": "**PrimeReact - EyeSlashIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16761,7 +16794,7 @@
             }
         }
     },
-    "icon/filter": {
+    "icons/filter": {
         "components": {
             "FilterIcon": {
                 "description": "**PrimeReact - FilterIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16802,7 +16835,7 @@
             }
         }
     },
-    "icon/filterslash": {
+    "icons/filterslash": {
         "components": {
             "FilterSlashIcon": {
                 "description": "**PrimeReact - FilterSlashIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16843,7 +16876,7 @@
             }
         }
     },
-    "icon/infocircle": {
+    "icons/infocircle": {
         "components": {
             "InfoCircleIcon": {
                 "description": "**PrimeReact - InfoCircleIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16884,7 +16917,7 @@
             }
         }
     },
-    "icon/minus": {
+    "icons/minus": {
         "components": {
             "MinusIcon": {
                 "description": "**PrimeReact - MinusIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16925,7 +16958,7 @@
             }
         }
     },
-    "icon/pencil": {
+    "icons/pencil": {
         "components": {
             "PencilIcon": {
                 "description": "**PrimeReact - PencilIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16966,7 +16999,7 @@
             }
         }
     },
-    "icon/plus": {
+    "icons/plus": {
         "components": {
             "PlusIcon": {
                 "description": "**PrimeReact - PlusIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17007,7 +17040,7 @@
             }
         }
     },
-    "icon/refresh": {
+    "icons/refresh": {
         "components": {
             "RefreshIcon": {
                 "description": "**PrimeReact - RefreshIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17048,7 +17081,7 @@
             }
         }
     },
-    "icon/search": {
+    "icons/search": {
         "components": {
             "SearchIcon": {
                 "description": "**PrimeReact - SearchIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17089,7 +17122,7 @@
             }
         }
     },
-    "icon/searchminus": {
+    "icons/searchminus": {
         "components": {
             "SearchMinusIcon": {
                 "description": "**PrimeReact - SearchMinusIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17130,7 +17163,7 @@
             }
         }
     },
-    "icon/searchplus": {
+    "icons/searchplus": {
         "components": {
             "SearchPlusIcon": {
                 "description": "**PrimeReact - SearchPlusIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17171,7 +17204,7 @@
             }
         }
     },
-    "icon/sortalt": {
+    "icons/sortalt": {
         "components": {
             "SortAltIcon": {
                 "description": "**PrimeReact - SortAltIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17212,7 +17245,7 @@
             }
         }
     },
-    "icon/sortamountdown": {
+    "icons/sortamountdown": {
         "components": {
             "SortAmountDownIcon": {
                 "description": "**PrimeReact - SortAmountDownIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17253,7 +17286,7 @@
             }
         }
     },
-    "icon/sortamountupalt": {
+    "icons/sortamountupalt": {
         "components": {
             "SortAmountUpAltIcon": {
                 "description": "**PrimeReact - SortAmountUpAltIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17294,7 +17327,7 @@
             }
         }
     },
-    "icon/spinner": {
+    "icons/spinner": {
         "components": {
             "SpinnerIcon": {
                 "description": "**PrimeReact - SpinnerIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17335,7 +17368,7 @@
             }
         }
     },
-    "icon/star": {
+    "icons/star": {
         "components": {
             "StarIcon": {
                 "description": "**PrimeReact - StarIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17376,7 +17409,7 @@
             }
         }
     },
-    "icon/starfill": {
+    "icons/starfill": {
         "components": {
             "StarFillIcon": {
                 "description": "**PrimeReact - StarFillIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17417,7 +17450,7 @@
             }
         }
     },
-    "icon/thlarge": {
+    "icons/thlarge": {
         "components": {
             "ThLargeIcon": {
                 "description": "**PrimeReact - ThLargeIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17458,7 +17491,7 @@
             }
         }
     },
-    "icon/times": {
+    "icons/times": {
         "components": {
             "TimesIcon": {
                 "description": "**PrimeReact - TimesIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17499,7 +17532,7 @@
             }
         }
     },
-    "icon/timescircle": {
+    "icons/timescircle": {
         "components": {
             "TimesCircleIcon": {
                 "description": "**PrimeReact - TimesCircleIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17540,7 +17573,7 @@
             }
         }
     },
-    "icon/trash": {
+    "icons/trash": {
         "components": {
             "TrashIcon": {
                 "description": "**PrimeReact - TrashIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17581,7 +17614,7 @@
             }
         }
     },
-    "icon/undo": {
+    "icons/undo": {
         "components": {
             "UndoIcon": {
                 "description": "**PrimeReact - UndoIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17622,7 +17655,7 @@
             }
         }
     },
-    "icon/upload": {
+    "icons/upload": {
         "components": {
             "UploadIcon": {
                 "description": "**PrimeReact - UploadIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17663,7 +17696,7 @@
             }
         }
     },
-    "icon/windowmaximize": {
+    "icons/windowmaximize": {
         "components": {
             "WindowMaximizeIcon": {
                 "description": "**PrimeReact - WindowMaximizeIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17704,7 +17737,7 @@
             }
         }
     },
-    "icon/windowminimize": {
+    "icons/windowminimize": {
         "components": {
             "WindowMinimizeIcon": {
                 "description": "**PrimeReact - WindowMinimizeIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17741,39 +17774,6 @@
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": []
-                }
-            }
-        }
-    },
-    "iconbase/iconbase": {
-        "interfaces": {
-            "description": "Defines the custom interfaces used by the module.",
-            "values": {
-                "IconBaseProps": {
-                    "relatedProp": "",
-                    "props": [
-                        {
-                            "name": "className",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string"
-                        },
-                        {
-                            "name": "label",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string"
-                        },
-                        {
-                            "name": "spin",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean"
-                        }
-                    ],
-                    "callbacks": [],
-                    "extendedBy": "AngleDoubleDownIconProps,AngleDoubleLeftIconProps,AngleDoubleRightIconProps,AngleDoubleUpIconProps,AngleDownIconProps,AngleLeftIconProps,AngleRightIconProps,AngleUpIconProps,ArrowDownIconProps,ArrowUpIconProps,BanIconProps,BarsIconProps,CalendarIconProps,CheckIconProps,ChevronDownIconProps,ChevronLeftIconProps,ChevronRightIconProps,ChevronUpIconProps,DownloadIconProps,ExclamationTriangleIconProps,EyeIconProps,EyeSlashIconProps,FilterIconProps,FilterSlashIconProps,InfoCircleIconProps,MinusIconProps,PencilIconProps,PlusIconProps,RefreshIconProps,SearchIconProps,SearchMinusIconProps,SearchPlusIconProps,SortAltIconProps,SortAmountDownIconProps,SortAmountUpAltIconProps,SpinnerIconProps,StarIconProps,StarFillIconProps,ThLargeIconProps,TimesIconProps,TimesCircleIconProps,TrashIconProps,UndoIconProps,UploadIconProps,WindowMaximizeIconProps,WindowMinimizeIconProps",
-                    "extendedTypes": "Omit<React.SVGProps<SVGSVGElement>, \"ref\">"
                 }
             }
         }
