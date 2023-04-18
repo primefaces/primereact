@@ -9,9 +9,9 @@ import { DataTableBase } from './DataTableBase';
 import { TableBody } from './TableBody';
 import { TableFooter } from './TableFooter';
 import { TableHeader } from './TableHeader';
-import { SpinnerIcon } from '../icon/spinner';
-import { ArrowDownIcon } from '../icon/arrowdown';
-import { ArrowUpIcon } from '../icon/arrowup';
+import { SpinnerIcon } from '../icons/spinner';
+import { ArrowDownIcon } from '../icons/arrowdown';
+import { ArrowUpIcon } from '../icons/arrowup';
 
 export const DataTable = React.forwardRef((inProps, ref) => {
     const props = DataTableBase.getProps(inProps);

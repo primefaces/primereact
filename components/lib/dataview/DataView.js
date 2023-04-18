@@ -4,9 +4,9 @@ import { Paginator } from '../paginator/Paginator';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 import { DataViewBase, DataViewLayoutOptionsBase } from './DataViewBase';
-import { BarsIcon } from '../icon/bars';
-import { ThLargeIcon } from '../icon/thlarge';
-import { SpinnerIcon } from '../icon/spinner';
+import { BarsIcon } from '../icons/bars';
+import { ThLargeIcon } from '../icons/thlarge';
+import { SpinnerIcon } from '../icons/spinner';
 
 export const DataViewLayoutOptions = React.memo((inProps) => {
     const props = DataViewLayoutOptionsBase.getProps(inProps);

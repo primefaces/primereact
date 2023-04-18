@@ -3,7 +3,7 @@ import { ariaLabel } from '../api/Api';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 import { NextPageLinkBase } from './PaginatorBase';
-import { AngleRightIcon } from '../icon/angleright';
+import { AngleRightIcon } from '../icons/angleright';
 
 export const NextPageLink = React.memo((inProps) => {
     const props = NextPageLinkBase.getProps(inProps);

@@ -3,10 +3,10 @@ import PrimeReact from '../api/Api';
 import { useMountEffect, usePrevious, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
-import { ChevronLeftIcon } from '../icon/chevronleft';
-import { ChevronUpIcon } from '../icon/chevronup';
-import { ChevronRightIcon } from '../icon/chevronright';
-import { ChevronDownIcon } from '../icon/chevrondown';
+import { ChevronLeftIcon } from '../icons/chevronleft';
+import { ChevronUpIcon } from '../icons/chevronup';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { ChevronDownIcon } from '../icons/chevrondown';
 
 const GalleriaThumbnailItem = React.memo((props) => {
     const onItemClick = (event) => {

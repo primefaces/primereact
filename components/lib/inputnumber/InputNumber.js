@@ -5,8 +5,8 @@ import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, ObjectUtils, IconUtils } from '../utils/Utils';
 import { InputNumberBase } from './InputNumberBase';
-import { AngleUpIcon } from '../icon/angleup';
-import { AngleDownIcon } from '../icon/angledown';
+import { AngleUpIcon } from '../icons/angleup';
+import { AngleDownIcon } from '../icons/angledown';
 
 export const InputNumber = React.memo(
     React.forwardRef((inProps, ref) => {

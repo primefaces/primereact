@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { Button } from '../button/Button';
 import { classNames, ObjectUtils, IconUtils } from '../utils/Utils';
-import { AngleLeftIcon } from '../icon/angleleft';
-import { AngleDoubleLeftIcon } from '../icon/angledoubleleft';
-import { AngleDoubleRightIcon } from '../icon/angledoubleright';
-import { AngleRightIcon } from '../icon/angleright';
+import { AngleLeftIcon } from '../icons/angleleft';
+import { AngleDoubleLeftIcon } from '../icons/angledoubleleft';
+import { AngleDoubleRightIcon } from '../icons/angledoubleright';
+import { AngleRightIcon } from '../icons/angleright';
 import { useMatchMedia } from '../hooks/Hooks';
-import { AngleDownIcon } from '../icon/angledown';
-import { AngleDoubleDownIcon } from '../icon/angledoubledown';
-import { AngleUpIcon } from '../icon/angleup';
-import { AngleDoubleUpIcon } from '../icon/angledoubleup';
+import { AngleDownIcon } from '../icons/angledown';
+import { AngleDoubleDownIcon } from '../icons/angledoubledown';
+import { AngleUpIcon } from '../icons/angleup';
+import { AngleDoubleUpIcon } from '../icons/angledoubleup';
 
 export const PickListTransferControls = React.memo((props) => {
     const viewChanged = useMatchMedia(`(max-width: ${props.breakpoint})`, props.breakpoint);

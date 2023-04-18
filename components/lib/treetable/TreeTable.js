@@ -9,9 +9,9 @@ import { TreeTableBody } from './TreeTableBody';
 import { TreeTableFooter } from './TreeTableFooter';
 import { TreeTableHeader } from './TreeTableHeader';
 import { TreeTableScrollableView } from './TreeTableScrollableView';
-import { SpinnerIcon } from '../icon/spinner';
-import { ArrowDownIcon } from '../icon/arrowdown';
-import { ArrowUpIcon } from '../icon/arrowup';
+import { SpinnerIcon } from '../icons/spinner';
+import { ArrowDownIcon } from '../icons/arrowdown';
+import { ArrowUpIcon } from '../icons/arrowup';
 
 export const TreeTable = React.forwardRef((inProps, ref) => {
     const props = TreeTableBase.getProps(inProps);

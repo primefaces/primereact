@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { classNames, DomHandler, ObjectUtils, IconUtils } from '../utils/Utils';
 import { PickListItem } from './PickListItem';
-import { SearchIcon } from '../icon/search';
+import { SearchIcon } from '../icons/search';
 
 export const PickListSubList = React.memo(
     React.forwardRef((props, ref) => {

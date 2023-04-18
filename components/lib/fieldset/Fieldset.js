@@ -4,8 +4,8 @@ import { useMountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils, UniqueComponentId } from '../utils/Utils';
 import { FieldsetBase } from './FieldsetBase';
-import { PlusIcon } from '../icon/plus';
-import { MinusIcon } from '../icon/minus';
+import { PlusIcon } from '../icons/plus';
+import { MinusIcon } from '../icons/minus';
 
 export const Fieldset = React.forwardRef((inProps, ref) => {
     const props = FieldsetBase.getProps(inProps);

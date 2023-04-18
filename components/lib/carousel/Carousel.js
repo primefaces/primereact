@@ -4,10 +4,10 @@ import { useMountEffect, usePrevious, useResizeListener, useUnmountEffect, useUp
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { CarouselBase } from './CarouselBase';
-import { ChevronUpIcon } from '../icon/chevronup';
-import { ChevronRightIcon } from '../icon/chevronright';
-import { ChevronDownIcon } from '../icon/chevrondown';
-import { ChevronLeftIcon } from '../icon/chevronleft';
+import { ChevronUpIcon } from '../icons/chevronup';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { ChevronLeftIcon } from '../icons/chevronleft';
 
 const CarouselItem = React.memo((props) => {
     const content = props.template(props.item);

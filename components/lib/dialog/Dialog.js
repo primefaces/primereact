@@ -6,9 +6,9 @@ import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
 import { DialogBase } from './DialogBase';
-import { TimesIcon } from '../icon/times';
-import { WindowMaximizeIcon } from '../icon/windowmaximize';
-import { WindowMinimizeIcon } from '../icon/windowminimize';
+import { TimesIcon } from '../icons/times';
+import { WindowMaximizeIcon } from '../icons/windowmaximize';
+import { WindowMinimizeIcon } from '../icons/windowminimize';
 
 export const Dialog = React.forwardRef((inProps, ref) => {
     const props = DialogBase.getProps(inProps);

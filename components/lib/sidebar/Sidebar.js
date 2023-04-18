@@ -6,7 +6,7 @@ import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils, IconUtils } from '../utils/Utils';
 import { SidebarBase } from './SidebarBase';
-import { TimesIcon } from '../icon/times';
+import { TimesIcon } from '../icons/times';
 
 export const Sidebar = React.forwardRef((inProps, ref) => {
     const props = SidebarBase.getProps(inProps);

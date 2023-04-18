@@ -4,9 +4,9 @@ import { Checkbox } from '../checkbox/Checkbox';
 import { InputText } from '../inputtext/InputText';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
-import { TimesIcon } from '../icon/times';
-import { SearchIcon } from '../icon/search';
-import { CheckIcon } from '../icon/check';
+import { TimesIcon } from '../icons/times';
+import { SearchIcon } from '../icons/search';
+import { CheckIcon } from '../icons/check';
 
 export const MultiSelectHeader = React.memo((props) => {
     const filterOptions = {

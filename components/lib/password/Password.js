@@ -7,8 +7,8 @@ import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { PasswordBase } from './PasswordBase';
-import { EyeIcon } from '../icon/eye';
-import { EyeSlashIcon } from '../icon/eyeslash';
+import { EyeIcon } from '../icons/eye';
+import { EyeSlashIcon } from '../icons/eyeslash';
 
 export const Password = React.memo(
     React.forwardRef((inProps, ref) => {

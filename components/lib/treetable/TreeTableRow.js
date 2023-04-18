@@ -4,10 +4,10 @@ import { ColumnBase } from '../column/ColumnBase';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils } from '../utils/Utils';
 import { TreeTableBodyCell } from './TreeTableBodyCell';
-import { ChevronDownIcon } from '../icon/chevrondown';
-import { ChevronRightIcon } from '../icon/chevronright';
-import { CheckIcon } from '../icon/check';
-import { MinusIcon } from '../icon/minus';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { CheckIcon } from '../icons/check';
+import { MinusIcon } from '../icons/minus';
 
 export const TreeTableRow = React.memo((props) => {
     const elementRef = React.useRef(null);

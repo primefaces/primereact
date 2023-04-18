@@ -7,7 +7,7 @@ import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
 import { OverlayPanelBase } from './OverlayPanelBase';
-import { TimesIcon } from '../icon/times';
+import { TimesIcon } from '../icons/times';
 
 export const OverlayPanel = React.forwardRef((inProps, ref) => {
     const props = OverlayPanelBase.getProps(inProps);

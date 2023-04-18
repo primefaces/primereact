@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 import { BreadCrumbBase } from './BreadCrumbBase';
-import { ChevronRightIcon } from '../icon/chevronright';
+import { ChevronRightIcon } from '../icons/chevronright';
 
 export const BreadCrumb = React.memo(
     React.forwardRef((inProps, ref) => {

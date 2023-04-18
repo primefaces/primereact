@@ -8,7 +8,7 @@ import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZInd
 import { SplitButtonBase } from './SplitButtonBase';
 import { SplitButtonItem } from './SplitButtonItem';
 import { SplitButtonPanel } from './SplitButtonPanel';
-import { ChevronDownIcon } from '../icon/chevrondown';
+import { ChevronDownIcon } from '../icons/chevrondown';
 
 export const SplitButton = React.memo(
     React.forwardRef((inProps, ref) => {

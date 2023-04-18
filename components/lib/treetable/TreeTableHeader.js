@@ -5,9 +5,9 @@ import { InputText } from '../inputtext/InputText';
 import { RowBase } from '../row/RowBase';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
-import { SortAltIcon } from '../icon/sortalt';
-import { SortAmountDownIcon } from '../icon/sortamountdown';
-import { SortAmountUpAltIcon } from '../icon/sortamountupalt';
+import { SortAltIcon } from '../icons/sortalt';
+import { SortAmountDownIcon } from '../icons/sortamountdown';
+import { SortAmountUpAltIcon } from '../icons/sortamountupalt';
 
 export const TreeTableHeader = React.memo((props) => {
     const filterTimeout = React.useRef(null);

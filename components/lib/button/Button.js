@@ -3,7 +3,7 @@ import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 import { ButtonBase } from './ButtonBase';
-import { SpinnerIcon } from '../icon/spinner';
+import { SpinnerIcon } from '../icons/spinner';
 
 export const Button = React.memo(
     React.forwardRef((inProps, ref) => {

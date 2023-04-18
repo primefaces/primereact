@@ -8,7 +8,7 @@ import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../
 import { GalleriaBase } from './GalleriaBase';
 import { GalleriaItem } from './GalleriaItem';
 import { GalleriaThumbnails } from './GalleriaThumbnails';
-import { TimesIcon } from '../icon/times';
+import { TimesIcon } from '../icons/times';
 
 export const Galleria = React.memo(
     React.forwardRef((inProps, ref) => {

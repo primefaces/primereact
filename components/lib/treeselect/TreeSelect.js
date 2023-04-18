@@ -7,9 +7,9 @@ import { Tree } from '../tree/Tree';
 import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { TreeSelectBase } from './TreeSelectBase';
 import { TreeSelectPanel } from './TreeSelectPanel';
-import { ChevronDownIcon } from '../icon/chevrondown';
-import { SearchIcon } from '../icon/search';
-import { TimesIcon } from '../icon/times';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { SearchIcon } from '../icons/search';
+import { TimesIcon } from '../icons/times';
 
 export const TreeSelect = React.memo(
     React.forwardRef((inProps, ref) => {

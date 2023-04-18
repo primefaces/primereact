@@ -7,12 +7,12 @@ import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { RowCheckbox } from './RowCheckbox';
 import { RowRadioButton } from './RowRadioButton';
-import { CheckIcon } from '../icon/check';
-import { TimesIcon } from '../icon/times';
-import { PencilIcon } from '../icon/pencil';
-import { ChevronDownIcon } from '../icon/chevrondown';
-import { ChevronRightIcon } from '../icon/chevronright';
-import { BarsIcon } from '../icon/bars';
+import { CheckIcon } from '../icons/check';
+import { TimesIcon } from '../icons/times';
+import { PencilIcon } from '../icons/pencil';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { BarsIcon } from '../icons/bars';
 
 export const BodyCell = React.memo((props) => {
     const [editingState, setEditingState] = React.useState(props.editing);

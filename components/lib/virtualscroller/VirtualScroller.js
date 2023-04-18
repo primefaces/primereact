@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useEventListener, useMountEffect, usePrevious, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
 import { classNames, DomHandler, ObjectUtils, IconUtils } from '../utils/Utils';
 import { VirtualScrollerBase } from './VirtualScrollerBase';
-import { SpinnerIcon } from '../icon/spinner';
+import { SpinnerIcon } from '../icons/spinner';
 
 export const VirtualScroller = React.memo(
     React.forwardRef((inProps, ref) => {

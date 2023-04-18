@@ -2,8 +2,8 @@ import * as React from 'react';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { TreeBase } from './TreeBase';
 import { UITreeNode } from './UITreeNode';
-import { SearchIcon } from '../icon/search';
-import { SpinnerIcon } from '../icon/spinner';
+import { SearchIcon } from '../icons/search';
+import { SpinnerIcon } from '../icons/spinner';
 
 export const Tree = React.memo(
     React.forwardRef((inProps, ref) => {

@@ -7,7 +7,7 @@ import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, IconUtils, ZIndexUtils } from '../utils/Utils';
 import { SlideMenuBase } from './SlideMenuBase';
 import { SlideMenuSub } from './SlideMenuSub';
-import { ChevronLeftIcon } from '../icon/chevronleft';
+import { ChevronLeftIcon } from '../icons/chevronleft';
 
 export const SlideMenu = React.memo(
     React.forwardRef((inProps, ref) => {

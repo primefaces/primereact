@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { classNames, ObjectUtils, IconUtils } from '../utils/Utils';
-import { ChevronDownIcon } from '../icon/chevrondown';
-import { ChevronUpIcon } from '../icon/chevronup';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { ChevronUpIcon } from '../icons/chevronup';
 
 export const OrganizationChartNode = React.memo((props) => {
     const node = props.node;

@@ -18,51 +18,51 @@ let core = {};
 // alias entries
 const ALIAS_ICON_COMPONENT_ENTRIES = [
     { find: '../../iconbase/IconBase', replacement: 'primereact/iconbase' },
-    { find: '../icon/angledoubledown', replacement: 'primereact/icon/angledoubledown' },
-    { find: '../icon/angledoubleleft', replacement: 'primereact/icon/angledoubleleft' },
-    { find: '../icon/angledoubleright', replacement: 'primereact/icon/angledoubleright' },
-    { find: '../icon/angledoubleup', replacement: 'primereact/icon/angledoubleup' },
-    { find: '../icon/angledown', replacement: 'primereact/icon/angledown' },
-    { find: '../icon/angleleft', replacement: 'primereact/icon/angleleft' },
-    { find: '../icon/angleright', replacement: 'primereact/icon/angleright' },
-    { find: '../icon/angleup', replacement: 'primereact/icon/angleup' },
-    { find: '../icon/arrowdown', replacement: 'primereact/icon/arrowdown' },
-    { find: '../icon/arrowup', replacement: 'primereact/icon/arrowup' },
-    { find: '../icon/ban', replacement: 'primereact/icon/ban' },
-    { find: '../icon/bars', replacement: 'primereact/icon/bars' },
-    { find: '../icon/calendar', replacement: 'primereact/icon/calendar' },
-    { find: '../icon/check', replacement: 'primereact/icon/check' },
-    { find: '../icon/chevrondown', replacement: 'primereact/icon/chevrondown' },
-    { find: '../icon/chevronleft', replacement: 'primereact/icon/chevronleft' },
-    { find: '../icon/chevronright', replacement: 'primereact/icon/chevronright' },
-    { find: '../icon/chevronup', replacement: 'primereact/icon/chevronup' },
-    { find: '../icon/exclamationtriangle', replacement: 'primereact/icon/exclamationtriangle' },
-    { find: '../icon/eye', replacement: 'primereact/icon/eye' },
-    { find: '../icon/eyeslash', replacement: 'primereact/icon/eyeslash' },
-    { find: '../icon/filter', replacement: 'primereact/icon/filter' },
-    { find: '../icon/filterslash', replacement: 'primereact/icon/filterslash' },
-    { find: '../icon/infocircle', replacement: 'primereact/icon/infocircle' },
-    { find: '../icon/minus', replacement: 'primereact/icon/minus' },
-    { find: '../icon/pencil', replacement: 'primereact/icon/pencil' },
-    { find: '../icon/plus', replacement: 'primereact/icon/plus' },
-    { find: '../icon/refresh', replacement: 'primereact/icon/refresh' },
-    { find: '../icon/search', replacement: 'primereact/icon/search' },
-    { find: '../icon/searchminus', replacement: 'primereact/icon/searchminus' },
-    { find: '../icon/searchplus', replacement: 'primereact/icon/searchplus' },
-    { find: '../icon/sortalt', replacement: 'primereact/icon/sortalt' },
-    { find: '../icon/sortamountdown', replacement: 'primereact/icon/sortamountdown' },
-    { find: '../icon/sortamountupalt', replacement: 'primereact/icon/sortamountupalt' },
-    { find: '../icon/spinner', replacement: 'primereact/icon/spinner' },
-    { find: '../icon/star', replacement: 'primereact/icon/star' },
-    { find: '../icon/starfill', replacement: 'primereact/icon/starfill' },
-    { find: '../icon/thlarge', replacement: 'primereact/icon/thlarge' },
-    { find: '../icon/times', replacement: 'primereact/icon/times' },
-    { find: '../icon/timescircle', replacement: 'primereact/icon/timescircle' },
-    { find: '../icon/trash', replacement: 'primereact/icon/trash' },
-    { find: '../icon/undo', replacement: 'primereact/icon/undo' },
-    { find: '../icon/upload', replacement: 'primereact/icon/upload' },
-    { find: '../icon/windowmaximize', replacement: 'primereact/icon/windowmaximize' },
-    { find: '../icon/windowminimize', replacement: 'primereact/icon/windowminimize' }
+    { find: '../icons/angledoubledown', replacement: 'primereact/icons/angledoubledown' },
+    { find: '../icons/angledoubleleft', replacement: 'primereact/icons/angledoubleleft' },
+    { find: '../icons/angledoubleright', replacement: 'primereact/icons/angledoubleright' },
+    { find: '../icons/angledoubleup', replacement: 'primereact/icons/angledoubleup' },
+    { find: '../icons/angledown', replacement: 'primereact/icons/angledown' },
+    { find: '../icons/angleleft', replacement: 'primereact/icons/angleleft' },
+    { find: '../icons/angleright', replacement: 'primereact/icons/angleright' },
+    { find: '../icons/angleup', replacement: 'primereact/icons/angleup' },
+    { find: '../icons/arrowdown', replacement: 'primereact/icons/arrowdown' },
+    { find: '../icons/arrowup', replacement: 'primereact/icons/arrowup' },
+    { find: '../icons/ban', replacement: 'primereact/icons/ban' },
+    { find: '../icons/bars', replacement: 'primereact/icons/bars' },
+    { find: '../icons/calendar', replacement: 'primereact/icons/calendar' },
+    { find: '../icons/check', replacement: 'primereact/icons/check' },
+    { find: '../icons/chevrondown', replacement: 'primereact/icons/chevrondown' },
+    { find: '../icons/chevronleft', replacement: 'primereact/icons/chevronleft' },
+    { find: '../icons/chevronright', replacement: 'primereact/icons/chevronright' },
+    { find: '../icons/chevronup', replacement: 'primereact/icons/chevronup' },
+    { find: '../icons/exclamationtriangle', replacement: 'primereact/icons/exclamationtriangle' },
+    { find: '../icons/eye', replacement: 'primereact/icons/eye' },
+    { find: '../icons/eyeslash', replacement: 'primereact/icons/eyeslash' },
+    { find: '../icons/filter', replacement: 'primereact/icons/filter' },
+    { find: '../icons/filterslash', replacement: 'primereact/icons/filterslash' },
+    { find: '../icons/infocircle', replacement: 'primereact/icons/infocircle' },
+    { find: '../icons/minus', replacement: 'primereact/icons/minus' },
+    { find: '../icons/pencil', replacement: 'primereact/icons/pencil' },
+    { find: '../icons/plus', replacement: 'primereact/icons/plus' },
+    { find: '../icons/refresh', replacement: 'primereact/icons/refresh' },
+    { find: '../icons/search', replacement: 'primereact/icons/search' },
+    { find: '../icons/searchminus', replacement: 'primereact/icons/searchminus' },
+    { find: '../icons/searchplus', replacement: 'primereact/icons/searchplus' },
+    { find: '../icons/sortalt', replacement: 'primereact/icons/sortalt' },
+    { find: '../icons/sortamountdown', replacement: 'primereact/icons/sortamountdown' },
+    { find: '../icons/sortamountupalt', replacement: 'primereact/icons/sortamountupalt' },
+    { find: '../icons/spinner', replacement: 'primereact/icons/spinner' },
+    { find: '../icons/star', replacement: 'primereact/icons/star' },
+    { find: '../icons/starfill', replacement: 'primereact/icons/starfill' },
+    { find: '../icons/thlarge', replacement: 'primereact/icons/thlarge' },
+    { find: '../icons/times', replacement: 'primereact/icons/times' },
+    { find: '../icons/timescircle', replacement: 'primereact/icons/timescircle' },
+    { find: '../icons/trash', replacement: 'primereact/icons/trash' },
+    { find: '../icons/undo', replacement: 'primereact/icons/undo' },
+    { find: '../icons/upload', replacement: 'primereact/icons/upload' },
+    { find: '../icons/windowmaximize', replacement: 'primereact/icons/windowmaximize' },
+    { find: '../icons/windowminimize', replacement: 'primereact/icons/windowminimize' }
 ];
 
 const ALIAS_COMPONENT_ENTRIES = [
@@ -274,7 +274,7 @@ function addComponent() {
 }
 
 function addIcon() {
-    const iconDir = path.resolve(__dirname, process.env.INPUT_DIR + 'icon');
+    const iconDir = path.resolve(__dirname, process.env.INPUT_DIR + 'icons');
 
     fs.readdirSync(path.resolve(__dirname, iconDir), { withFileTypes: true })
         .filter((dir) => dir.isDirectory())
@@ -282,10 +282,10 @@ function addIcon() {
             fs.readdirSync(path.resolve(__dirname, iconDir + '/' + folderName)).forEach((file) => {
                 if (/\.js$/.test(file)) {
                     const name = file.split(/(.js)$/)[0].toLowerCase();
-                    const input = process.env.INPUT_DIR + 'icon/' + folderName + '/' + file;
-                    const output = process.env.OUTPUT_DIR + 'icon/' + folderName + '/' + name;
+                    const input = process.env.INPUT_DIR + 'icons/' + folderName + '/' + file;
+                    const output = process.env.OUTPUT_DIR + 'icons/' + folderName + '/' + name;
 
-                    addEntry('primereact.icon.' + folderName, input, output, true);
+                    addEntry('primereact.icons.' + folderName, input, output, true);
                 }
             });
         });
@@ -340,8 +340,7 @@ function addPackageJson() {
     "peerDependencies": {
         "@types/react": "^17.0.0 || ^18.0.0",
         "react": "^17.0.0 || ^18.0.0",
-        "react-dom": "^17.0.0 || ^18.0.0",
-        "primeicons": "^5.0.0 || ^6.0.0"
+        "react-dom": "^17.0.0 || ^18.0.0"
     },
     "peerDependenciesMeta": {
         "@types/react": {

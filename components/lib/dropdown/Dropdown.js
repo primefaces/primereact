@@ -6,8 +6,8 @@ import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { DropdownBase } from './DropdownBase';
 import { DropdownPanel } from './DropdownPanel';
-import { ChevronDownIcon } from '../icon/chevrondown';
-import { TimesIcon } from '../icon/times';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { TimesIcon } from '../icons/times';
 
 export const Dropdown = React.memo(
     React.forwardRef((inProps, ref) => {

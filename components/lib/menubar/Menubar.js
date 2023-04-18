@@ -4,7 +4,7 @@ import { useEventListener, useUnmountEffect, useUpdateEffect } from '../hooks/Ho
 import { classNames, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { MenubarBase } from './MenubarBase';
 import { MenubarSub } from './MenubarSub';
-import { BarsIcon } from '../icon/bars';
+import { BarsIcon } from '../icons/bars';
 
 export const Menubar = React.memo(
     React.forwardRef((inProps, ref) => {

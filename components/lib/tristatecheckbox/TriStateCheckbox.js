@@ -3,8 +3,8 @@ import { ariaLabel } from '../api/Api';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { TriStateCheckboxBase } from './TriStateCheckboxBase';
-import { TimesIcon } from '../icon/times';
-import { CheckIcon } from '../icon/check';
+import { TimesIcon } from '../icons/times';
+import { CheckIcon } from '../icons/check';
 
 export const TriStateCheckbox = React.memo(
     React.forwardRef((inProps, ref) => {

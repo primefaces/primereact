@@ -2,8 +2,8 @@ import * as React from 'react';
 import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
-import { AngleRightIcon } from '../icon/angleright';
-import { AngleDownIcon } from '../icon/angledown';
+import { AngleRightIcon } from '../icons/angleright';
+import { AngleDownIcon } from '../icons/angledown';
 
 export const MenubarSub = React.memo(
     React.forwardRef((props, ref) => {

@@ -2,8 +2,8 @@ import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
-import { ChevronRightIcon } from '../icon/chevronright';
-import { ChevronDownIcon } from '../icon/chevrondown';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { ChevronDownIcon } from '../icons/chevrondown';
 
 export const PanelMenuSub = React.memo((props) => {
     const [activeItemState, setActiveItemState] = React.useState(null);

@@ -3,7 +3,7 @@ import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { ChipsBase } from './ChipsBase';
-import { TimesCircleIcon } from '../icon/timescircle';
+import { TimesCircleIcon } from '../icons/timescircle';
 
 export const Chips = React.memo(
     React.forwardRef((inProps, ref) => {

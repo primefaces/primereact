@@ -2,8 +2,8 @@ import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { Ripple } from '../ripple/Ripple';
 import { IconUtils } from '../utils/Utils';
-import { ChevronDownIcon } from '../icon/chevrondown';
-import { ChevronRightIcon } from '../icon/chevronright';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { ChevronRightIcon } from '../icons/chevronright';
 
 export const RowTogglerButton = React.memo((props) => {
     const onClick = (event) => {

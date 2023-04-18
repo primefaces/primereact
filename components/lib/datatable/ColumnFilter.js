@@ -10,10 +10,10 @@ import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { FilterIcon } from '../icon/filter';
-import { FilterSlashIcon } from '../icon/filterslash';
-import { TrashIcon } from '../icon/trash';
-import { PlusIcon } from '../icon/plus';
+import { FilterIcon } from '../icons/filter';
+import { FilterSlashIcon } from '../icons/filterslash';
+import { TrashIcon } from '../icons/trash';
+import { PlusIcon } from '../icons/plus';
 
 export const ColumnFilter = React.memo((props) => {
     const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);

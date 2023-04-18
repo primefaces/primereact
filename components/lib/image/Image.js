@@ -5,13 +5,13 @@ import { useUnmountEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { ImageBase } from './ImageBase';
-import { DownloadIcon } from '../icon/download';
-import { RefreshIcon } from '../icon/refresh';
-import { EyeIcon } from '../icon/eye';
-import { UndoIcon } from '../icon/undo';
-import { SearchMinusIcon } from '../icon/searchminus';
-import { SearchPlusIcon } from '../icon/searchplus';
-import { TimesIcon } from '../icon/times';
+import { DownloadIcon } from '../icons/download';
+import { RefreshIcon } from '../icons/refresh';
+import { EyeIcon } from '../icons/eye';
+import { UndoIcon } from '../icons/undo';
+import { SearchMinusIcon } from '../icons/searchminus';
+import { SearchPlusIcon } from '../icons/searchplus';
+import { TimesIcon } from '../icons/times';
 
 export const Image = React.memo(
     React.forwardRef((inProps, ref) => {

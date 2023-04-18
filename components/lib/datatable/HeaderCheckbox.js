@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { IconUtils, classNames } from '../utils/Utils';
-import { CheckIcon } from '../icon/check';
+import { CheckIcon } from '../icons/check';
 
 export const HeaderCheckbox = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);

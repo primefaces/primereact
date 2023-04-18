@@ -2,10 +2,10 @@ import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
-import { CheckIcon } from '../icon/check';
-import { ChevronDownIcon } from '../icon/chevrondown';
-import { ChevronRightIcon } from '../icon/chevronright';
-import { MinusIcon } from '../icon/minus';
+import { CheckIcon } from '../icons/check';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { MinusIcon } from '../icons/minus';
 
 export const UITreeNode = React.memo((props) => {
     const contentRef = React.useRef(null);

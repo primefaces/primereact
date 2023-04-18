@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { InputText } from '../inputtext/InputText';
 import { IconUtils, ObjectUtils } from '../utils/Utils';
-import { SearchIcon } from '../icon/search';
+import { SearchIcon } from '../icons/search';
 
 export const ListBoxHeader = React.memo((props) => {
     const filterOptions = {

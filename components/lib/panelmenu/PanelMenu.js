@@ -4,8 +4,8 @@ import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { classNames, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { PanelMenuBase } from './PanelMenuBase';
 import { PanelMenuSub } from './PanelMenuSub';
-import { ChevronRightIcon } from '../icon/chevronright';
-import { ChevronDownIcon } from '../icon/chevrondown';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { ChevronDownIcon } from '../icons/chevrondown';
 
 export const PanelMenu = React.memo(
     React.forwardRef((inProps, ref) => {

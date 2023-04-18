@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 import { MessageBase } from './MessageBase';
-import { ExclamationTriangleIcon } from '../icon/exclamationtriangle';
-import { InfoCircleIcon } from '../icon/infocircle';
-import { TimesCircleIcon } from '../icon/timescircle';
-import { CheckIcon } from '../icon/check';
+import { ExclamationTriangleIcon } from '../icons/exclamationtriangle';
+import { InfoCircleIcon } from '../icons/infocircle';
+import { TimesCircleIcon } from '../icons/timescircle';
+import { CheckIcon } from '../icons/check';
 
 export const Message = React.memo(
     React.forwardRef((inProps, ref) => {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
-import { AngleRightIcon } from '../icon/angleright';
+import { AngleRightIcon } from '../icons/angleright';
 
 export const SlideMenuSub = React.memo((props) => {
     const [activeItemState, setActiveItemState] = React.useState(null);

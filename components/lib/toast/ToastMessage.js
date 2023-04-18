@@ -3,11 +3,11 @@ import { localeOption } from '../api/Locale';
 import { useTimeout } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
-import { TimesIcon } from '../icon/times';
-import { ExclamationTriangleIcon } from '../icon/exclamationtriangle';
-import { InfoCircleIcon } from '../icon/infocircle';
-import { TimesCircleIcon } from '../icon/timescircle';
-import { CheckIcon } from '../icon/check';
+import { TimesIcon } from '../icons/times';
+import { ExclamationTriangleIcon } from '../icons/exclamationtriangle';
+import { InfoCircleIcon } from '../icons/infocircle';
+import { TimesCircleIcon } from '../icons/timescircle';
+import { CheckIcon } from '../icons/check';
 
 export const ToastMessage = React.memo(
     React.forwardRef((props, ref) => {

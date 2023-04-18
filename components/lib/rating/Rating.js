@@ -2,9 +2,9 @@ import * as React from 'react';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 import { RatingBase } from './RatingBase';
-import { StarIcon } from '../icon/star';
-import { StarFillIcon } from '../icon/starfill';
-import { BanIcon } from '../icon/ban';
+import { StarIcon } from '../icons/star';
+import { StarFillIcon } from '../icons/starfill';
+import { BanIcon } from '../icons/ban';
 
 export const Rating = React.memo(
     React.forwardRef((inProps, ref) => {

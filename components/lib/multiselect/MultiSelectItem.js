@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
-import { CheckIcon } from '../icon/check';
+import { CheckIcon } from '../icons/check';
 
 export const MultiSelectItem = React.memo((props) => {
     const onClick = (event) => {

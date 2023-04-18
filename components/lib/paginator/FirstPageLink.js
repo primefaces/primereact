@@ -3,7 +3,7 @@ import { ariaLabel } from '../api/Api';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 import { FirstPageLinkBase } from './PaginatorBase';
-import { AngleDoubleLeftIcon } from '../icon/angledoubleleft';
+import { AngleDoubleLeftIcon } from '../icons/angledoubleleft';
 
 export const FirstPageLink = React.memo((inProps) => {
     const props = FirstPageLinkBase.getProps(inProps);

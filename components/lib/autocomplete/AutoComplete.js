@@ -8,9 +8,9 @@ import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
 import { AutoCompleteBase } from './AutoCompleteBase';
 import { AutoCompletePanel } from './AutoCompletePanel';
-import { ChevronDownIcon } from '../icon/chevrondown';
-import { TimesCircleIcon } from '../icon/timescircle';
-import { SpinnerIcon } from '../icon/spinner';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { TimesCircleIcon } from '../icons/timescircle';
+import { SpinnerIcon } from '../icons/spinner';
 
 export const AutoComplete = React.memo(
     React.forwardRef((inProps, ref) => {

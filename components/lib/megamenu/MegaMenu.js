@@ -4,9 +4,9 @@ import { useEventListener, useMatchMedia, useMountEffect, useResizeListener, use
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
 import { MegaMenuBase } from './MegaMenuBase';
-import { AngleRightIcon } from '../icon/angleright';
-import { AngleDownIcon } from '../icon/angledown';
-import { BarsIcon } from '../icon/bars';
+import { AngleRightIcon } from '../icons/angleright';
+import { AngleDownIcon } from '../icons/angledown';
+import { BarsIcon } from '../icons/bars';
 
 export const MegaMenu = React.memo(
     React.forwardRef((inProps, ref) => {

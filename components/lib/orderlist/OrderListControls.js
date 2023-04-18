@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Button } from '../button/Button';
 import { IconUtils, ObjectUtils } from '../utils/Utils';
-import { AngleDownIcon } from '../icon/angledown';
-import { AngleDoubleUpIcon } from '../icon/angledoubleup';
-import { AngleUpIcon } from '../icon/angleup';
-import { AngleDoubleDownIcon } from '../icon/angledoubledown';
+import { AngleDownIcon } from '../icons/angledown';
+import { AngleDoubleUpIcon } from '../icons/angledoubleup';
+import { AngleUpIcon } from '../icons/angleup';
+import { AngleDoubleDownIcon } from '../icons/angledoubledown';
 
 export const OrderListControls = React.memo((props) => {
     const moveUpIcon = props.moveUpIcon || <AngleUpIcon />;

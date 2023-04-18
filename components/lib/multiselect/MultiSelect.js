@@ -6,9 +6,9 @@ import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { MultiSelectBase } from './MultiSelectBase';
 import { MultiSelectPanel } from './MultiSelectPanel';
-import { TimesCircleIcon } from '../icon/timescircle';
-import { TimesIcon } from '../icon/times';
-import { ChevronDownIcon } from '../icon/chevrondown';
+import { TimesCircleIcon } from '../icons/timescircle';
+import { TimesIcon } from '../icons/times';
+import { ChevronDownIcon } from '../icons/chevrondown';
 
 export const MultiSelect = React.memo(
     React.forwardRef((inProps, ref) => {

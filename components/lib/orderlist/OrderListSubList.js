@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
-import { SearchIcon } from '../icon/search';
+import { SearchIcon } from '../icons/search';
 
 export const OrderListSubList = React.memo((props) => {
     const dragging = React.useRef(null);

@@ -7,9 +7,9 @@ import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { FileUploadBase } from './FileUploadBase';
 import { Badge } from '../badge/Badge';
-import { PlusIcon } from '../icon/plus';
-import { UploadIcon } from '../icon/upload';
-import { TimesIcon } from '../icon/times';
+import { PlusIcon } from '../icons/plus';
+import { UploadIcon } from '../icons/upload';
+import { TimesIcon } from '../icons/times';
 
 export const FileUpload = React.memo(
     React.forwardRef((inProps, ref) => {

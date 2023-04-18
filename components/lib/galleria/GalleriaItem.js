@@ -2,8 +2,8 @@ import * as React from 'react';
 import { useMountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { IconUtils, classNames } from '../utils/Utils';
-import { ChevronLeftIcon } from '../icon/chevronleft';
-import { ChevronRightIcon } from '../icon/chevronright';
+import { ChevronLeftIcon } from '../icons/chevronleft';
+import { ChevronRightIcon } from '../icons/chevronright';
 
 export const GalleriaItem = React.memo(
     React.forwardRef((props, ref) => {

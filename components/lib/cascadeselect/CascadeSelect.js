@@ -7,7 +7,7 @@ import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
 import { CascadeSelectBase } from './CascadeSelectBase';
 import { CascadeSelectSub } from './CascadeSelectSub';
-import { ChevronDownIcon } from '../icon/chevrondown';
+import { ChevronDownIcon } from '../icons/chevrondown';
 export const CascadeSelect = React.memo(
     React.forwardRef((inProps, ref) => {
         const props = CascadeSelectBase.getProps(inProps);

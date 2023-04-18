@@ -5,7 +5,7 @@ import { useEventListener, useMountEffect, useUnmountEffect } from '../hooks/Hoo
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ZIndexUtils } from '../utils/Utils';
 import { ScrollTopBase } from './ScrollTopBase';
-import { ChevronUpIcon } from '../icon/chevronup';
+import { ChevronUpIcon } from '../icons/chevronup';
 
 export const ScrollTop = React.memo(
     React.forwardRef((inProps, ref) => {

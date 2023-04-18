@@ -5,8 +5,8 @@ import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { DropdownItem } from './DropdownItem';
-import { TimesIcon } from '../icon/times';
-import { SearchIcon } from '../icon/search';
+import { TimesIcon } from '../icons/times';
+import { SearchIcon } from '../icons/search';
 
 export const DropdownPanel = React.memo(
     React.forwardRef((props, ref) => {
