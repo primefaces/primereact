@@ -329,6 +329,7 @@ export const PickList = React.memo(
                     source={props.source}
                     visibleSourceList={sourceList}
                     target={props.target}
+                    breakpoint={props.breakpoint}
                     visibleTargetList={targetList}
                     sourceSelection={sourceSelection}
                     targetSelection={targetSelection}

@@ -5,18 +5,25 @@ import { AngleLeftIcon } from '../icon/angleleft';
 import { AngleDoubleLeftIcon } from '../icon/angledoubleleft';
 import { AngleDoubleRightIcon } from '../icon/angledoubleright';
 import { AngleRightIcon } from '../icon/angleright';
+import { useMatchMedia } from '../hooks/Hooks';
+import { AngleDownIcon } from '../icon/angledown';
+import { AngleDoubleDownIcon } from '../icon/angledoubledown';
+import { AngleUpIcon } from '../icon/angleup';
+import { AngleDoubleUpIcon } from '../icon/angledoubleup';
 
 export const PickListTransferControls = React.memo((props) => {
+    const matches = useMatchMedia(`(max-width: ${props.breakpoint})`, props.breakpoint);
+
     function getIconComponent(iconType) {
         switch (iconType) {
             case 'moveToTargetIcon':
-                return props.moveToTargetIcon || <AngleRightIcon />;
+                return props.moveToTargetIcon || matches ? <AngleDownIcon /> : <AngleRightIcon />;
             case 'moveAllToTargetIcon':
-                return props.moveAllToTargetIcon || <AngleDoubleRightIcon />;
+                return props.moveAllToTargetIcon || matches ? <AngleDoubleDownIcon /> : <AngleDoubleRightIcon />;
             case 'moveToSourceIcon':
-                return props.moveToSourceIcon || <AngleLeftIcon />;
+                return props.moveToSourceIcon || matches ? <AngleUpIcon /> : <AngleLeftIcon />;
             case 'moveAllToSourceIcon':
-                return props.moveAllToSourceIcon || <AngleDoubleLeftIcon />;
+                return props.moveAllToSourceIcon || matches ? <AngleDoubleUpIcon /> : <AngleDoubleLeftIcon />;
             default:
                 return null;
         }
