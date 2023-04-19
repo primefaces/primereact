@@ -26,19 +26,21 @@ export function DocComponent(props) {
                 <title>{props.title}</title>
                 <meta name="description" content={props.description} />
             </Head>
-            {!props.hideTabMenu ? (<ul className="doc-tabmenu">
-                <li className={classNames({ 'doc-tabmenu-active': tab === 0 })}>
-                    <button type="button" onClick={() => activateTab(0)}>
-                        {props.header.startsWith('use') ? 'HOOK' : 'FEATURES'}
-                    </button>
-                </li>
+            {!props.hideTabMenu ? (
+                <ul className="doc-tabmenu">
+                    <li className={classNames({ 'doc-tabmenu-active': tab === 0 })}>
+                        <button type="button" onClick={() => activateTab(0)}>
+                            {props.header.startsWith('use') ? 'HOOK' : 'FEATURES'}
+                        </button>
+                    </li>
 
-                <li className={classNames({ 'doc-tabmenu-active': tab === 1 })}>
-                    <button type="button" onClick={() => activateTab(1)}>
-                        API
-                    </button>
-                </li>
-            </ul>) : null}
+                    <li className={classNames({ 'doc-tabmenu-active': tab === 1 })}>
+                        <button type="button" onClick={() => activateTab(1)}>
+                            API
+                        </button>
+                    </li>
+                </ul>
+            ) : null}
             <div className="doc-tabpanels">
                 {tab === 0 ? (
                     <div className="doc-tabpanel">

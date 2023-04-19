@@ -2,7 +2,6 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function ImageDoc(props) {
-
     const code = {
         basic: `
 <Dropdown dropdownIcon={<img alt="dropdown icon" src="/icons/arrow_down.png" />} />
