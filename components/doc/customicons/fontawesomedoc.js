@@ -1,14 +1,10 @@
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function DownloadDoc(props) {
+export function FontAwesomeDoc(props) {
     const code = {
         basic: `
-// with npm
-npm install primereact
-
-// with yarn
-yarn add primereact
+<Dropdown dropdownIcon={<i class="fa-light fa-chevron-down"></i>} />
         `
     };
 
@@ -16,7 +12,7 @@ yarn add primereact
         <>
             <DocSectionText {...props}>
                 <p>
-                    PrimeReact is available for download at <a href="https://www.npmjs.com/package/primereact">npm</a>.
+                    <a href="https://fontawesome.com/">Font Awesome</a> is a popular icon library with a wide range of icons.
                 </p>
             </DocSectionText>
             <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
