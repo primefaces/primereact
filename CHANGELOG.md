@@ -1,5 +1,23 @@
 # Changelog
 
+## [9.3.0](https://github.com/primefaces/primereact/tree/9.3.0) (2023-04-19)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.2.3...9.3.0)
+
+**Implemented New Features and Enhancements:**
+
+- Improve icon implementation in core [\#4220](https://github.com/primefaces/primereact/issues/4220)
+- Add icon templating support to components [\#4226](https://github.com/primefaces/primereact/issues/4226)
+- Add new Icon components [\#4227](https://github.com/primefaces/primereact/issues/4227)
+
+## [9.2.3](https://github.com/primefaces/primereact/tree/9.2.3) (2023-04-11)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.2.2...9.2.3)
+
+**Fixed bugs:**
+
+- Type missing for PrimeReact.changeTheme [\#4240](https://github.com/primefaces/primereact/issues/4240)
+
 ## [9.2.2](https://github.com/primefaces/primereact/tree/9.2.2) (2023-03-28)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/9.2.1...9.2.2)
