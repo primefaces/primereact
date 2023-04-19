@@ -2821,9 +2821,10 @@ export const Calendar = React.memo(
 
             const dateViewGrid = createDateViewGrid(monthMetaData, weekDays, index);
             const header = props.headerTemplate ? props.headerTemplate() : null;
+            const monthKey = monthMetaData.month + "-" + monthMetaData.year;
 
             return (
-                <div key={monthMetaData.month} className="p-datepicker-group">
+                <div key={monthKey} className="p-datepicker-group">
                     <div className="p-datepicker-header">
                         {header}
                         {backwardNavigator}
