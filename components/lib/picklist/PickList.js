@@ -304,7 +304,7 @@ export const PickList = React.memo(
                     onFilter={onFilter}
                     showFilter={showSourceFilter}
                     placeholder={props.sourceFilterPlaceholder}
-                    template={props.sourceFilterTemplate}
+                    filterTemplate={props.sourceFilterTemplate}
                     sourceFilterIcon={props.sourceFilterIcon}
                 />
 
@@ -342,7 +342,7 @@ export const PickList = React.memo(
                     onFilter={onFilter}
                     showFilter={showTargetFilter}
                     placeholder={props.targetFilterPlaceholder}
-                    template={props.targetFilterTemplate}
+                    filterTemplate={props.targetFilterTemplate}
                     targetFilterIcon={props.targetFilterIcon}
                 />
 
