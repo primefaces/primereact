@@ -94,15 +94,15 @@ export interface TabPanelProps {
     /**
      * Previous button of the tab header.
      */
-    prevButton: IconType<TabPanel> | undefined;
+    prevButton?: IconType<TabPanel> | undefined;
     /**
      * Next button of the tab header.
      */
-    nextButton: IconType<TabPanel> | undefined;
+    nextButton?: IconType<TabPanel> | undefined;
     /**
      * Close button of the tab header.
      */
-    closeIcon: IconType<TabPanel> | undefined;
+    closeIcon?: IconType<TabPanel> | undefined;
     /**
      * Whether the tab is disabled.
      * @defaultValue false
