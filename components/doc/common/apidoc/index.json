@@ -28008,7 +28008,7 @@
                         },
                         {
                             "name": "closeIcon",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "IconType<TabPanel>",
                             "default": "",
@@ -28080,7 +28080,7 @@
                         },
                         {
                             "name": "nextButton",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "IconType<TabPanel>",
                             "default": "",
@@ -28088,7 +28088,7 @@
                         },
                         {
                             "name": "prevButton",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "IconType<TabPanel>",
                             "default": "",
