@@ -38,6 +38,10 @@ export interface MessagesMessage {
      */
     closable?: boolean;
     /**
+     * Icon of the close button.
+     */
+    closeIcon?: IconType<MessagesProps> | undefined;
+    /**
      * When enabled, message is not removed automatically.
      */
     sticky?: boolean;
@@ -50,7 +54,7 @@ export interface MessagesMessage {
      * Defines the icon to display.
      * @defaultValue Defaults to severity icon
      */
-    icon?: IconType<MessagesProps>;
+    icon?: IconType<MessagesProps> | undefined;
 }
 
 /**

@@ -4,9 +4,9 @@ import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { TabPanelBase, TabViewBase } from './TabViewBase';
-import { ChevronRightIcon } from '../icon/chevronright';
-import { ChevronLeftIcon } from '../icon/chevronleft';
-import { TimesIcon } from '../icon/times';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { ChevronLeftIcon } from '../icons/chevronleft';
+import { TimesIcon } from '../icons/times';
 
 export const TabPanel = () => {};
 
@@ -31,7 +31,7 @@ export const TabView = React.forwardRef((inProps, ref) => {
     const getTabProp = (tab, name) => TabPanelBase.getCProp(tab, name);
 
     const shouldUseTab = (tab, index) => {
-        return ObjectUtils.isValidChild(tab, 'TabPanel') && hiddenTabsState.every((_i) => _i !== index);
+        return tab && ObjectUtils.isValidChild(tab, 'TabPanel') && hiddenTabsState.every((_i) => _i !== index);
     };
 
     const findVisibleActiveTab = (i) => {

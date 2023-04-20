@@ -298,7 +298,7 @@ export const BodyRow = React.memo((props) => {
     const createContent = () => {
         return props.columns.map((col, i) => {
             if (shouldRenderBodyCell(props.value, col, props.index)) {
-                const key = `${getColumnProp(col, 'columnKey') || getColumnProp(col, 'field')}_${i}`;
+                const key = `${props.rowIndex}_${getColumnProp(col, 'columnKey') || getColumnProp(col, 'field')}_${i}`;
                 const rowSpan = props.rowGroupMode === 'rowspan' ? calculateRowGroupSize(props.value, col, props.index) : null;
 
                 return (
@@ -342,6 +342,7 @@ export const BodyRow = React.memo((props) => {
                         expanded={props.expanded}
                         expandedRowIcon={props.expandedRowIcon}
                         collapsedRowIcon={props.collapsedRowIcon}
+                        checkIcon={props.checkIcon}
                         virtualScrollerOptions={props.virtualScrollerOptions}
                     />
                 );

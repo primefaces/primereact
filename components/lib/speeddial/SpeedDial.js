@@ -4,8 +4,8 @@ import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hook
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { SpeedDialBase } from './SpeedDialBase';
-import { PlusIcon } from '../icon/plus';
-import { MinusIcon } from '../icon/minus';
+import { PlusIcon } from '../icons/plus';
+import { MinusIcon } from '../icons/minus';
 
 export const SpeedDial = React.memo(
     React.forwardRef((inProps, ref) => {

@@ -3,12 +3,15 @@ import PrimeReact, { FilterMatchMode, FilterOperator, FilterService } from '../a
 import { ColumnBase } from '../column/ColumnBase';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Paginator } from '../paginator/Paginator';
-import { classNames, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { DataTableBase } from './DataTableBase';
 import { TableBody } from './TableBody';
 import { TableFooter } from './TableFooter';
 import { TableHeader } from './TableHeader';
+import { SpinnerIcon } from '../icons/spinner';
+import { ArrowDownIcon } from '../icons/arrowdown';
+import { ArrowUpIcon } from '../icons/arrowup';
 
 export const DataTable = React.forwardRef((inProps, ref) => {
     const props = DataTableBase.getProps(inProps);
@@ -1399,13 +1402,11 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
     const createLoader = () => {
         if (props.loading) {
-            const iconClassName = classNames('p-datatable-loading-icon pi-spin', props.loadingIcon);
+            const iconClassName = 'p-datatable-loading-icon';
+            const icon = props.loadingIcon || <SpinnerIcon className={iconClassName} spin />;
+            const loadingIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
-            return (
-                <div className="p-datatable-loading-overlay p-component-overlay">
-                    <i className={iconClassName} />
-                </div>
-            );
+            return <div className="p-datatable-loading-overlay p-component-overlay">{loadingIcon}</div>;
         }
 
         return null;
@@ -1445,6 +1446,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 onColumnResizerDoubleClick={props.onColumnResizerDoubleClick}
                 sortMode={props.sortMode}
                 sortField={sortField}
+                sortIcon={props.sortIcon}
                 sortOrder={sortOrder}
                 multiSortMeta={multiSortMeta}
                 groupRowsBy={props.groupRowsBy}
@@ -1541,6 +1543,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 showRowReorderElement={props.showRowReorderElement}
                 expandedRowIcon={props.expandedRowIcon}
                 collapsedRowIcon={props.collapsedRowIcon}
+                checkIcon={props.checkIcon}
                 rowClassName={props.rowClassName}
                 virtualScrollerOptions={options}
                 isVirtualScrollerDisabled={true}
@@ -1616,6 +1619,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 showRowReorderElement={props.showRowReorderElement}
                 expandedRowIcon={props.expandedRowIcon}
                 collapsedRowIcon={props.collapsedRowIcon}
+                checkIcon={props.checkIcon}
                 rowClassName={props.rowClassName}
                 virtualScrollerContentRef={contentRef}
                 virtualScrollerOptions={options}
@@ -1750,11 +1754,19 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const createReorderIndicators = () => {
         if (props.reorderableColumns) {
             const style = { position: 'absolute', display: 'none' };
+            const reorderIndicatorUpProps = { className: 'p-datatable-reorder-indicator-up', style: { ...style } };
+            const reorderIndicatorUpIcon = IconUtils.getJSXIcon(props.reorderIndicatorUpIcon || <ArrowDownIcon />, undefined, { props });
+            const reorderIndicatorDownProps = { className: 'p-datatable-reorder-indicator-down', style: { ...style } };
+            const reorderIndicatorDownIcon = IconUtils.getJSXIcon(props.reorderIndicatorDownIcon || <ArrowUpIcon />, undefined, { props });
 
             return (
                 <>
-                    <span ref={reorderIndicatorUpRef} className="pi pi-arrow-down p-datatable-reorder-indicator-up" style={style}></span>
-                    <span ref={reorderIndicatorDownRef} className="pi pi-arrow-up p-datatable-reorder-indicator-down" style={style}></span>
+                    <span ref={reorderIndicatorUpRef} {...reorderIndicatorUpProps}>
+                        {reorderIndicatorUpIcon}
+                    </span>
+                    <span ref={reorderIndicatorDownRef} {...reorderIndicatorDownProps}>
+                        {reorderIndicatorDownIcon}
+                    </span>
                 </>
             );
         }

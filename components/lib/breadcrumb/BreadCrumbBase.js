@@ -6,6 +6,7 @@ export const BreadCrumbBase = {
         id: null,
         model: null,
         home: null,
+        separatorIcon: null,
         style: null,
         className: null,
         children: undefined

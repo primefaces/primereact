@@ -8,9 +8,9 @@ import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
 import { AutoCompleteBase } from './AutoCompleteBase';
 import { AutoCompletePanel } from './AutoCompletePanel';
-import { ChevronDownIcon } from '../icon/chevrondown';
-import { TimesCircleIcon } from '../icon/timescircle';
-import { SpinnerIcon } from '../icon/spinner';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { TimesCircleIcon } from '../icons/timescircle';
+import { SpinnerIcon } from '../icons/spinner';
 
 export const AutoComplete = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -537,13 +537,13 @@ export const AutoComplete = React.memo(
                 return props.value.map((val, index) => {
                     const key = index + 'multi-item';
                     const iconProps = { className: 'p-autocomplete-token-icon', onClick: (e) => removeItem(e, index) };
-                    const icon = props.removeIcon || <TimesCircleIcon {...iconProps} />;
-                    const removeIcon = !props.disabled && IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
+                    const icon = props.removeTokenIcon || <TimesCircleIcon {...iconProps} />;
+                    const removeTokenIcon = !props.disabled && IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
 
                     return (
                         <li key={key} className="p-autocomplete-token p-highlight">
                             <span className="p-autocomplete-token-label">{formatValue(val)}</span>
-                            {removeIcon}
+                            {removeTokenIcon}
                         </li>
                     );
                 });

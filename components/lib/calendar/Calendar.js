@@ -8,11 +8,11 @@ import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mask } from '../utils/Utils';
 import { CalendarBase } from './CalendarBase';
 import { CalendarPanel } from './CalendarPanel';
-import { CalendarIcon } from '../icon/calendar';
-import { ChevronLeftIcon } from '../icon/chevronleft';
-import { ChevronRightIcon } from '../icon/chevronright';
-import { ChevronUpIcon } from '../icon/chevronup';
-import { ChevronDownIcon } from '../icon/chevrondown';
+import { CalendarIcon } from '../icons/calendar';
+import { ChevronLeftIcon } from '../icons/chevronleft';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { ChevronUpIcon } from '../icons/chevronup';
+import { ChevronDownIcon } from '../icons/chevrondown';
 export const Calendar = React.memo(
     React.forwardRef((inProps, ref) => {
         const props = CalendarBase.getProps(inProps);
@@ -2821,9 +2821,10 @@ export const Calendar = React.memo(
 
             const dateViewGrid = createDateViewGrid(monthMetaData, weekDays, index);
             const header = props.headerTemplate ? props.headerTemplate() : null;
+            const monthKey = monthMetaData.month + '-' + monthMetaData.year;
 
             return (
-                <div key={monthMetaData.month} className="p-datepicker-group">
+                <div key={monthKey} className="p-datepicker-group">
                     <div className="p-datepicker-header">
                         {header}
                         {backwardNavigator}

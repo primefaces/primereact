@@ -11,6 +11,8 @@ export const TriStateCheckboxBase = {
         readOnly: false,
         tabIndex: '0',
         tooltip: null,
+        checkIcon: null,
+        uncheckIcon: null,
         tooltipOptions: null,
         onChange: null,
         children: undefined

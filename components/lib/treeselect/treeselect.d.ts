@@ -11,6 +11,7 @@ import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 import TreeNode from '../treenode';
 import { FormEvent } from '../ts-helpers';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom panel header template options.
@@ -179,6 +180,10 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      */
     children?: React.ReactNode | undefined;
     /**
+     * Icon of the close button.
+     */
+    closeIcon?: IconType<TreeSelectProps> | undefined;
+    /**
      * When present, it specifies that the component should be disabled.
      * @defaultValue false
      */
@@ -189,10 +194,9 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      */
     display?: 'comma' | 'chip' | undefined;
     /**
-     * Icon class of the dropdown icon.
-     * @defaultValue pi pi-chevron-down
+     * Icon of the dropdown.
      */
-    dropdownIcon?: string | undefined;
+    dropdownIcon?: IconType<TreeSelectProps> | undefined;
     /**
      * Text to display when there is no data.
      */
@@ -211,6 +215,10 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      * @defaultValue label
      */
     filterBy?: string | undefined;
+    /**
+     * Icon of the filter.
+     */
+    filterIcon?: IconType<TreeSelectProps> | undefined;
     /**
      * When the panel is opened, it specifies that the filter input should focus automatically.
      * @defaultValue true

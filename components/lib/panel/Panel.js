@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
-import { MinusIcon } from '../icon/minus';
-import { PlusIcon } from '../icon/plus';
+import { MinusIcon } from '../icons/minus';
+import { PlusIcon } from '../icons/plus';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { PanelBase } from './PanelBase';
@@ -110,7 +110,6 @@ export const Panel = React.forwardRef((inProps, ref) => {
                 titleClassName: 'p-panel-title',
                 iconsClassName: 'p-panel-icons',
                 togglerClassName: 'p-panel-header-icon p-panel-toggler p-link',
-                togglerIconClassName: collapsed ? props.expandIcon : props.collapseIcon,
                 onTogglerClick: toggle,
                 titleElement,
                 iconsElement,

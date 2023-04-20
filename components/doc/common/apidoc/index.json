@@ -2306,7 +2306,7 @@
                             "description": "When present, it specifies that the input cannot be typed."
                         },
                         {
-                            "name": "removeIcon",
+                            "name": "removeTokenIcon",
                             "optional": true,
                             "readonly": false,
                             "type": "IconType<AutoCompleteProps>",
@@ -3125,6 +3125,14 @@
                             "type": "MenuItem[]",
                             "default": "",
                             "description": "An array of menuitems."
+                        },
+                        {
+                            "name": "separatorIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<BreadCrumbProps>",
+                            "default": "",
+                            "description": "Icon of the separator."
                         }
                     ]
                 },
@@ -3959,7 +3967,7 @@
                             "description": "Function that gets a date information and returns the cell content in datepicker."
                         },
                         {
-                            "name": "decadeTempate",
+                            "name": "decadeTemplate",
                             "parameters": [
                                 {
                                     "name": "yearValues",
@@ -5330,7 +5338,7 @@
                             "readonly": false,
                             "type": "IconType<CheckboxProps>",
                             "default": "",
-                            "description": "Icon of the checkbox icon."
+                            "description": "Icon to display in checkbox."
                         },
                         {
                             "name": "id",
@@ -6680,8 +6688,8 @@
                             "name": "rowReorderIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
-                            "default": "pi pi-bars",
+                            "type": "IconType<ColumnProps>",
+                            "default": "",
                             "description": "Icon of the drag handle to reorder rows."
                         },
                         {
@@ -8158,6 +8166,14 @@
                             "description": "Whether the dialog can be displayed full screen."
                         },
                         {
+                            "name": "maximizeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DialogProps>",
+                            "default": "",
+                            "description": "Icon to display in the dialog maximize button when dialog is not maximized."
+                        },
+                        {
                             "name": "maximized",
                             "optional": true,
                             "readonly": false,
@@ -8188,6 +8204,14 @@
                             "type": "number",
                             "default": "0",
                             "description": "Minimum value for the top coordinate of dialog in dragging."
+                        },
+                        {
+                            "name": "minimizeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DialogProps>",
+                            "default": "",
+                            "description": "Icon to display in the dialog maximize button when dialog is maximized."
                         },
                         {
                             "name": "modal",
@@ -9380,6 +9404,14 @@
                             "description": "Whether to cell selection is enabled or not."
                         },
                         {
+                            "name": "checkIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DataTableProps<TValue>>",
+                            "default": "",
+                            "description": "Icon to display in the checkbox."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
@@ -9399,8 +9431,8 @@
                             "name": "collapsedRowIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
-                            "default": "pi pi-chevron-up",
+                            "type": "IconType<DataTableProps<TValue>>",
+                            "default": "",
                             "description": "Icon of the row toggler to display the row as collapsed."
                         },
                         {
@@ -9448,7 +9480,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "string",
-                            "default": "({currentPage} of {totalPages})",
+                            "default": "",
                             "description": "Name of the field that uniquely identifies a record in the data. Should be a unique business key to prevent re-rendering."
                         },
                         {
@@ -9456,7 +9488,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "null | 0 | 1 | -1",
-                            "default": "({currentPage} of {totalPages})",
+                            "default": "1",
                             "description": "Default sort order of an unsorted column."
                         },
                         {
@@ -9472,7 +9504,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "string",
-                            "default": "cell",
+                            "default": "",
                             "description": "Defines editing mode, options are \"cell\" and \"row\"."
                         },
                         {
@@ -9503,8 +9535,8 @@
                             "name": "expandedRowIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
-                            "default": "pi pi-chevron-down",
+                            "type": "IconType<DataTableProps<TValue>>",
+                            "default": "",
                             "description": "Icon of the row toggler to display the row as expanded."
                         },
                         {
@@ -9671,8 +9703,8 @@
                             "name": "loadingIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
-                            "default": "pi pi-spinner",
+                            "type": "IconType<DataTableProps<TValue>>",
+                            "default": "",
                             "description": "The icon to show while indicating data load is in progress."
                         },
                         {
@@ -9764,6 +9796,22 @@
                             "description": "When enabled, columns can have an un-sorted state."
                         },
                         {
+                            "name": "reorderIndicatorDownIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DataTableProps<TValue>>",
+                            "default": "",
+                            "description": "Defines the reorder indicator down icon."
+                        },
+                        {
+                            "name": "reorderIndicatorUpIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DataTableProps<TValue>>",
+                            "default": "",
+                            "description": "Defines the reorder indicator up icon."
+                        },
+                        {
                             "name": "reorderableColumns",
                             "optional": true,
                             "readonly": false,
@@ -9795,6 +9843,30 @@
                             "default": "scroll",
                             "description": "Defines the responsive mode, valid options are \"stack\" and \"scroll\".",
                             "deprecated": "since version 9.2.0"
+                        },
+                        {
+                            "name": "rowEditorCancelIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DataTableProps<TValue>>",
+                            "default": "",
+                            "description": "Icon to display in the row editor cancel button."
+                        },
+                        {
+                            "name": "rowEditorInitIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DataTableProps<TValue>>",
+                            "default": "",
+                            "description": "Icon to display in the row editor init button."
+                        },
+                        {
+                            "name": "rowEditorSaveIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DataTableProps<TValue>>",
+                            "default": "",
+                            "description": "Icon to display in the row editor save button."
                         },
                         {
                             "name": "rowGroupFooterTemplate",
@@ -9947,6 +10019,14 @@
                             "type": "string",
                             "default": "",
                             "description": "Property of a row data used for sorting, defaults to field."
+                        },
+                        {
+                            "name": "sortIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DataTable<TValue>>",
+                            "default": "",
+                            "description": "Icon to display the current sorting status."
                         },
                         {
                             "name": "sortMode",
@@ -11825,7 +11905,7 @@
                             "name": "loadingIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
+                            "type": "IconType<DataViewProps>",
                             "default": "",
                             "description": "Name of the loading icon or JSX.Element for loading icon."
                         },
@@ -12064,6 +12144,13 @@
                             "description": "Style class of the element."
                         },
                         {
+                            "name": "gridIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DataViewProps>",
+                            "description": "Defines the display mode grid icon."
+                        },
+                        {
                             "name": "id",
                             "optional": true,
                             "readonly": false,
@@ -12076,6 +12163,13 @@
                             "readonly": false,
                             "type": "\"grid\" | \"list\" | string & Record<string, unknown>",
                             "description": "Orientation of the panels, valid values are \"list\" and \"grid\"."
+                        },
+                        {
+                            "name": "listIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DataViewProps>",
+                            "description": "Defines the display mode list icon."
                         },
                         {
                             "name": "style",
@@ -12410,6 +12504,14 @@
                             "description": "Whether the dialog can be displayed full screen."
                         },
                         {
+                            "name": "maximizeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DialogProps>",
+                            "default": "",
+                            "description": "Icon to display in the dialog maximize button when dialog is not maximized."
+                        },
+                        {
                             "name": "maximized",
                             "optional": true,
                             "readonly": false,
@@ -12432,6 +12534,14 @@
                             "type": "number",
                             "default": "0",
                             "description": "Minimum value for the top coordinate of dialog in dragging."
+                        },
+                        {
+                            "name": "minimizeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DialogProps>",
+                            "default": "",
+                            "description": "Icon to display in the dialog maximize button when dialog is maximized."
                         },
                         {
                             "name": "modal",
@@ -13761,12 +13871,28 @@
                             "description": "Used to get the child elements of the component."
                         },
                         {
+                            "name": "collapseIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<FieldsetProps>",
+                            "default": "",
+                            "description": "Icon of an expanded tab."
+                        },
+                        {
                             "name": "collapsed",
                             "optional": true,
                             "readonly": false,
                             "type": "boolean",
                             "default": "false",
                             "description": "Defines the default visibility state of the content."
+                        },
+                        {
+                            "name": "expandIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<FieldsetProps>",
+                            "default": "",
+                            "description": "Icon of an collapsed tab."
                         },
                         {
                             "name": "legend",
@@ -14165,6 +14291,14 @@
                             "type": "ReactNode | Function",
                             "default": "",
                             "description": "Custom template of progressBar content in the container."
+                        },
+                        {
+                            "name": "removeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<FileUploadProps>",
+                            "default": "",
+                            "description": "Icon of the remove element."
                         },
                         {
                             "name": "style",
@@ -14846,6 +14980,14 @@
                             "description": "Defines if scrolling would be infinite."
                         },
                         {
+                            "name": "closeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<GalleriaProps>",
+                            "default": "",
+                            "description": "Icon to display in the galleria close button."
+                        },
+                        {
                             "name": "footer",
                             "optional": true,
                             "readonly": false,
@@ -14878,12 +15020,44 @@
                             "description": "Position of indicators. Valid values are \"bottom\", \"top\", \"left\" and \"right\"."
                         },
                         {
+                            "name": "itemNextIcon",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "IconType<GalleriaProps>",
+                            "default": "",
+                            "description": "Icon to show in the next item button."
+                        },
+                        {
+                            "name": "itemPrevIcon",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "IconType<GalleriaProps>",
+                            "default": "",
+                            "description": "Icon to show in the previous item button."
+                        },
+                        {
+                            "name": "nextThumbnailIcon",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "IconType<GalleriaProps>",
+                            "default": "",
+                            "description": "Icon to show in the next thumbnail button."
+                        },
+                        {
                             "name": "numVisible",
                             "optional": true,
                             "readonly": false,
                             "type": "number",
                             "default": "3",
                             "description": "Number of items per page."
+                        },
+                        {
+                            "name": "prevThumbnailIcon",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "IconType<GalleriaProps>",
+                            "default": "",
+                            "description": "Icon to show in the previous thumbnail button."
                         },
                         {
                             "name": "responsiveOptions",
@@ -15685,7 +15859,40 @@
             }
         }
     },
-    "icon/angledoubledown": {
+    "iconbase/iconbase": {
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "IconBaseProps": {
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string"
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string"
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean"
+                        }
+                    ],
+                    "callbacks": [],
+                    "extendedBy": "AngleDoubleDownIconProps,AngleDoubleLeftIconProps,AngleDoubleRightIconProps,AngleDoubleUpIconProps,AngleDownIconProps,AngleLeftIconProps,AngleRightIconProps,AngleUpIconProps,ArrowDownIconProps,ArrowUpIconProps,BanIconProps,BarsIconProps,CalendarIconProps,CheckIconProps,ChevronDownIconProps,ChevronLeftIconProps,ChevronRightIconProps,ChevronUpIconProps,DownloadIconProps,ExclamationTriangleIconProps,EyeIconProps,EyeSlashIconProps,FilterIconProps,FilterSlashIconProps,InfoCircleIconProps,MinusIconProps,PencilIconProps,PlusIconProps,RefreshIconProps,SearchIconProps,SearchMinusIconProps,SearchPlusIconProps,SortAltIconProps,SortAmountDownIconProps,SortAmountUpAltIconProps,SpinnerIconProps,StarIconProps,StarFillIconProps,ThLargeIconProps,TimesIconProps,TimesCircleIconProps,TrashIconProps,UndoIconProps,UploadIconProps,WindowMaximizeIconProps,WindowMinimizeIconProps",
+                    "extendedTypes": "Omit<React.SVGProps<SVGSVGElement>, \"ref\">"
+                }
+            }
+        }
+    },
+    "icons/angledoubledown": {
         "components": {
             "AngleDoubleDownIcon": {
                 "description": "**PrimeReact - AngleDoubleDownIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -15726,7 +15933,7 @@
             }
         }
     },
-    "icon/angledoubleleft": {
+    "icons/angledoubleleft": {
         "components": {
             "AngleDoubleLeftIcon": {
                 "description": "**PrimeReact - AngleDoubleLeftIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -15767,7 +15974,7 @@
             }
         }
     },
-    "icon/angledoubleright": {
+    "icons/angledoubleright": {
         "components": {
             "AngleDoubleRightIcon": {
                 "description": "**PrimeReact - AngleDoubleRightIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -15808,7 +16015,7 @@
             }
         }
     },
-    "icon/angledoubleup": {
+    "icons/angledoubleup": {
         "components": {
             "AngleDoubleUpIcon": {
                 "description": "**PrimeReact - AngleDoubleUpIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -15849,7 +16056,7 @@
             }
         }
     },
-    "icon/angledown": {
+    "icons/angledown": {
         "components": {
             "AngleDownIcon": {
                 "description": "**PrimeReact - AngleDownIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -15890,7 +16097,7 @@
             }
         }
     },
-    "icon/angleleft": {
+    "icons/angleleft": {
         "components": {
             "AngleLeftIcon": {
                 "description": "**PrimeReact - AngleLeftIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -15931,7 +16138,7 @@
             }
         }
     },
-    "icon/angleright": {
+    "icons/angleright": {
         "components": {
             "AngleRightIcon": {
                 "description": "**PrimeReact - AngleRightIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -15972,7 +16179,7 @@
             }
         }
     },
-    "icon/angleup": {
+    "icons/angleup": {
         "components": {
             "AngleUpIcon": {
                 "description": "**PrimeReact - AngleUpIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16013,7 +16220,7 @@
             }
         }
     },
-    "icon/arrowdown": {
+    "icons/arrowdown": {
         "components": {
             "ArrowDownIcon": {
                 "description": "**PrimeReact - ArrowDownIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16054,7 +16261,7 @@
             }
         }
     },
-    "icon/arrowup": {
+    "icons/arrowup": {
         "components": {
             "ArrowUpIcon": {
                 "description": "**PrimeReact - ArrowUpIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16095,7 +16302,7 @@
             }
         }
     },
-    "icon/ban": {
+    "icons/ban": {
         "components": {
             "BanIcon": {
                 "description": "**PrimeReact - BanIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16136,7 +16343,7 @@
             }
         }
     },
-    "icon/bars": {
+    "icons/bars": {
         "components": {
             "BarsIcon": {
                 "description": "**PrimeReact - BarsIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16177,7 +16384,7 @@
             }
         }
     },
-    "icon/calendar": {
+    "icons/calendar": {
         "components": {
             "CalendarIcon": {
                 "description": "**PrimeReact - CalendarIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16218,7 +16425,7 @@
             }
         }
     },
-    "icon/check": {
+    "icons/check": {
         "components": {
             "CheckIcon": {
                 "description": "**PrimeReact - CheckIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16259,7 +16466,7 @@
             }
         }
     },
-    "icon/chevrondown": {
+    "icons/chevrondown": {
         "components": {
             "ChevronDownIcon": {
                 "description": "**PrimeReact - ChevronDownIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16300,7 +16507,7 @@
             }
         }
     },
-    "icon/chevronleft": {
+    "icons/chevronleft": {
         "components": {
             "ChevronLeftIcon": {
                 "description": "**PrimeReact - ChevronLeftIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16341,7 +16548,7 @@
             }
         }
     },
-    "icon/chevronright": {
+    "icons/chevronright": {
         "components": {
             "ChevronRightIcon": {
                 "description": "**PrimeReact - ChevronRightIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16382,7 +16589,7 @@
             }
         }
     },
-    "icon/chevronup": {
+    "icons/chevronup": {
         "components": {
             "ChevronUpIcon": {
                 "description": "**PrimeReact - ChevronUpIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16423,7 +16630,7 @@
             }
         }
     },
-    "icon/download": {
+    "icons/download": {
         "components": {
             "DownloadIcon": {
                 "description": "**PrimeReact - DownloadIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16464,7 +16671,7 @@
             }
         }
     },
-    "icon/exclamationtriangle": {
+    "icons/exclamationtriangle": {
         "components": {
             "ExclamationTriangleIcon": {
                 "description": "**PrimeReact - ExclamationTriangleIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16505,7 +16712,7 @@
             }
         }
     },
-    "icon/eye": {
+    "icons/eye": {
         "components": {
             "EyeIcon": {
                 "description": "**PrimeReact - EyeIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16546,7 +16753,7 @@
             }
         }
     },
-    "icon/eyeslash": {
+    "icons/eyeslash": {
         "components": {
             "EyeSlashIcon": {
                 "description": "**PrimeReact - EyeSlashIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16587,7 +16794,7 @@
             }
         }
     },
-    "icon/filter": {
+    "icons/filter": {
         "components": {
             "FilterIcon": {
                 "description": "**PrimeReact - FilterIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16628,7 +16835,7 @@
             }
         }
     },
-    "icon/filterslash": {
+    "icons/filterslash": {
         "components": {
             "FilterSlashIcon": {
                 "description": "**PrimeReact - FilterSlashIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16669,7 +16876,7 @@
             }
         }
     },
-    "icon/infocircle": {
+    "icons/infocircle": {
         "components": {
             "InfoCircleIcon": {
                 "description": "**PrimeReact - InfoCircleIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16710,7 +16917,7 @@
             }
         }
     },
-    "icon/minus": {
+    "icons/minus": {
         "components": {
             "MinusIcon": {
                 "description": "**PrimeReact - MinusIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16751,7 +16958,7 @@
             }
         }
     },
-    "icon/pencil": {
+    "icons/pencil": {
         "components": {
             "PencilIcon": {
                 "description": "**PrimeReact - PencilIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16792,7 +16999,7 @@
             }
         }
     },
-    "icon/plus": {
+    "icons/plus": {
         "components": {
             "PlusIcon": {
                 "description": "**PrimeReact - PlusIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16833,7 +17040,7 @@
             }
         }
     },
-    "icon/refresh": {
+    "icons/refresh": {
         "components": {
             "RefreshIcon": {
                 "description": "**PrimeReact - RefreshIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16874,7 +17081,7 @@
             }
         }
     },
-    "icon/search": {
+    "icons/search": {
         "components": {
             "SearchIcon": {
                 "description": "**PrimeReact - SearchIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16915,7 +17122,7 @@
             }
         }
     },
-    "icon/searchminus": {
+    "icons/searchminus": {
         "components": {
             "SearchMinusIcon": {
                 "description": "**PrimeReact - SearchMinusIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16956,7 +17163,7 @@
             }
         }
     },
-    "icon/searchplus": {
+    "icons/searchplus": {
         "components": {
             "SearchPlusIcon": {
                 "description": "**PrimeReact - SearchPlusIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -16997,7 +17204,7 @@
             }
         }
     },
-    "icon/sortalt": {
+    "icons/sortalt": {
         "components": {
             "SortAltIcon": {
                 "description": "**PrimeReact - SortAltIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17038,7 +17245,7 @@
             }
         }
     },
-    "icon/sortamountdown": {
+    "icons/sortamountdown": {
         "components": {
             "SortAmountDownIcon": {
                 "description": "**PrimeReact - SortAmountDownIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17079,7 +17286,7 @@
             }
         }
     },
-    "icon/sortamountupalt": {
+    "icons/sortamountupalt": {
         "components": {
             "SortAmountUpAltIcon": {
                 "description": "**PrimeReact - SortAmountUpAltIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17120,7 +17327,7 @@
             }
         }
     },
-    "icon/spinner": {
+    "icons/spinner": {
         "components": {
             "SpinnerIcon": {
                 "description": "**PrimeReact - SpinnerIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17161,7 +17368,7 @@
             }
         }
     },
-    "icon/star": {
+    "icons/star": {
         "components": {
             "StarIcon": {
                 "description": "**PrimeReact - StarIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17202,7 +17409,7 @@
             }
         }
     },
-    "icon/starfill": {
+    "icons/starfill": {
         "components": {
             "StarFillIcon": {
                 "description": "**PrimeReact - StarFillIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17243,7 +17450,7 @@
             }
         }
     },
-    "icon/thlarge": {
+    "icons/thlarge": {
         "components": {
             "ThLargeIcon": {
                 "description": "**PrimeReact - ThLargeIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17284,7 +17491,7 @@
             }
         }
     },
-    "icon/times": {
+    "icons/times": {
         "components": {
             "TimesIcon": {
                 "description": "**PrimeReact - TimesIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17325,7 +17532,7 @@
             }
         }
     },
-    "icon/timescircle": {
+    "icons/timescircle": {
         "components": {
             "TimesCircleIcon": {
                 "description": "**PrimeReact - TimesCircleIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17366,7 +17573,7 @@
             }
         }
     },
-    "icon/trash": {
+    "icons/trash": {
         "components": {
             "TrashIcon": {
                 "description": "**PrimeReact - TrashIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17407,7 +17614,7 @@
             }
         }
     },
-    "icon/undo": {
+    "icons/undo": {
         "components": {
             "UndoIcon": {
                 "description": "**PrimeReact - UndoIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17448,7 +17655,7 @@
             }
         }
     },
-    "icon/upload": {
+    "icons/upload": {
         "components": {
             "UploadIcon": {
                 "description": "**PrimeReact - UploadIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17489,7 +17696,7 @@
             }
         }
     },
-    "icon/windowmaximize": {
+    "icons/windowmaximize": {
         "components": {
             "WindowMaximizeIcon": {
                 "description": "**PrimeReact - WindowMaximizeIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17530,7 +17737,7 @@
             }
         }
     },
-    "icon/windowminimize": {
+    "icons/windowminimize": {
         "components": {
             "WindowMinimizeIcon": {
                 "description": "**PrimeReact - WindowMinimizeIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
@@ -17567,39 +17774,6 @@
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": []
-                }
-            }
-        }
-    },
-    "iconbase/iconbase": {
-        "interfaces": {
-            "description": "Defines the custom interfaces used by the module.",
-            "values": {
-                "IconBaseProps": {
-                    "relatedProp": "",
-                    "props": [
-                        {
-                            "name": "className",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string"
-                        },
-                        {
-                            "name": "label",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string"
-                        },
-                        {
-                            "name": "spin",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean"
-                        }
-                    ],
-                    "callbacks": [],
-                    "extendedBy": "AngleDoubleDownIconProps,AngleDoubleLeftIconProps,AngleDoubleRightIconProps,AngleDoubleUpIconProps,AngleDownIconProps,AngleLeftIconProps,AngleRightIconProps,AngleUpIconProps,ArrowDownIconProps,ArrowUpIconProps,BanIconProps,BarsIconProps,CalendarIconProps,CheckIconProps,ChevronDownIconProps,ChevronLeftIconProps,ChevronRightIconProps,ChevronUpIconProps,DownloadIconProps,ExclamationTriangleIconProps,EyeIconProps,EyeSlashIconProps,FilterIconProps,FilterSlashIconProps,InfoCircleIconProps,MinusIconProps,PencilIconProps,PlusIconProps,RefreshIconProps,SearchIconProps,SearchMinusIconProps,SearchPlusIconProps,SortAltIconProps,SortAmountDownIconProps,SortAmountUpAltIconProps,SpinnerIconProps,StarIconProps,StarFillIconProps,ThLargeIconProps,TimesIconProps,TimesCircleIconProps,TrashIconProps,UndoIconProps,UploadIconProps,WindowMaximizeIconProps,WindowMinimizeIconProps",
-                    "extendedTypes": "Omit<React.SVGProps<SVGSVGElement>, \"ref\">"
                 }
             }
         }
@@ -19895,6 +20069,14 @@
                             "description": "The template of trailing element"
                         },
                         {
+                            "name": "menuIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<MegaMenuProps>",
+                            "default": "",
+                            "description": "Icon to display in the horizontal menu."
+                        },
+                        {
                             "name": "model",
                             "optional": true,
                             "readonly": false,
@@ -19925,6 +20107,14 @@
                             "type": "ReactNode | Function",
                             "default": "",
                             "description": "The template of starting element."
+                        },
+                        {
+                            "name": "submenuIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<MegaMenuProps>",
+                            "default": "",
+                            "description": "Icon of the submenu."
                         }
                     ]
                 },
@@ -20083,6 +20273,14 @@
                             "type": "CSSProperties",
                             "default": "",
                             "description": "Inline style of the overlay panel element."
+                        },
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<HTMLDivElement>",
+                            "default": "",
+                            "description": "Reference to the main wrapper element."
                         },
                         {
                             "name": "scrollHeight",
@@ -20495,6 +20693,14 @@
                             "description": "The template of trailing element."
                         },
                         {
+                            "name": "menuIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<MenubarProps>",
+                            "default": "",
+                            "description": "Icon of the menu."
+                        },
+                        {
                             "name": "model",
                             "optional": true,
                             "readonly": false,
@@ -20509,6 +20715,14 @@
                             "type": "ReactNode | Function",
                             "default": "",
                             "description": "The template of starting element."
+                        },
+                        {
+                            "name": "submenuIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<MenubarProps>",
+                            "default": "",
+                            "description": "Icon of the submenu."
                         }
                     ]
                 },
@@ -20912,6 +21126,13 @@
                             "description": "Whether the message can be closed manually using the close icon."
                         },
                         {
+                            "name": "closeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<MessagesProps>",
+                            "description": "Icon of the close button."
+                        },
+                        {
                             "name": "content",
                             "optional": true,
                             "readonly": false,
@@ -21039,6 +21260,14 @@
                             "description": "Establishes relationships between the component and label(s) where its value should be one or more element IDs."
                         },
                         {
+                            "name": "checkboxIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<MultiSelectProps>",
+                            "default": "",
+                            "description": "Icon of the checkbox when checked."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
@@ -21053,6 +21282,14 @@
                             "type": "string",
                             "default": "",
                             "description": "Style class of the element."
+                        },
+                        {
+                            "name": "closeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<MultiSelectProps>",
+                            "default": "",
+                            "description": "Close icon of the multiselect panel header."
                         },
                         {
                             "name": "dataKey",
@@ -21083,7 +21320,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "IconType<MultiSelectProps>",
-                            "default": "pi pi-chevron-down",
+                            "default": "",
                             "description": "Icon class of the dropdown icon."
                         },
                         {
@@ -21109,6 +21346,14 @@
                             "type": "string",
                             "default": "label",
                             "description": "When filtering is enabled, filterBy decides which field or fields (comma separated) to search against."
+                        },
+                        {
+                            "name": "filterIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<MultiSelect>",
+                            "default": "",
+                            "description": "Icon of the filter icon."
                         },
                         {
                             "name": "filterLocale",
@@ -21189,6 +21434,14 @@
                             "type": "Ref<HTMLSelectElement>",
                             "default": "",
                             "description": "Reference of the input element."
+                        },
+                        {
+                            "name": "itemCheckboxIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<MultiSelect>",
+                            "default": "",
+                            "description": "The icon displayed in the header when all checkboxes are checked."
                         },
                         {
                             "name": "itemClassName",
@@ -21331,7 +21584,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "IconType<MultiSelectProps>",
-                            "default": "pi pi-times-circle",
+                            "default": "",
                             "description": "Icon of the remove chip element."
                         },
                         {
@@ -22172,8 +22425,8 @@
                             "optional": true,
                             "readonly": false,
                             "type": "boolean",
-                            "default": "false",
-                            "description": "When specified, displays an input field to filter the items on keyup."
+                            "default": "label",
+                            "description": "When filtering is enabled, filterBy decides which field or fields (comma separated) to search against."
                         },
                         {
                             "name": "filterBy",
@@ -22182,6 +22435,14 @@
                             "type": "string",
                             "default": "label",
                             "description": "When filtering is enabled, filterBy decides which field or fields (comma separated) to search against."
+                        },
+                        {
+                            "name": "filterIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<OrderListProps>",
+                            "default": "",
+                            "description": "Icon of the filter."
                         },
                         {
                             "name": "filterLocale",
@@ -22230,6 +22491,38 @@
                             "type": "CSSProperties",
                             "default": "",
                             "description": "Inline style of the list element."
+                        },
+                        {
+                            "name": "moveBottomIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<OrderListProps>",
+                            "default": "",
+                            "description": "Icon of the move bottom icon."
+                        },
+                        {
+                            "name": "moveDownIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<OrderListProps>",
+                            "default": "",
+                            "description": "Icon of the move down icon."
+                        },
+                        {
+                            "name": "moveTopIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<OrderListProps>",
+                            "default": "",
+                            "description": "Icon of the move top icon."
+                        },
+                        {
+                            "name": "moveUpIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<OrderListProps>",
+                            "default": "",
+                            "description": "Icon of the move up icon."
                         },
                         {
                             "name": "value",
@@ -22366,6 +22659,14 @@
                             "type": "\"multiple\" | \"single\"",
                             "default": "",
                             "description": "Defines the selection mode, valid values \"single\" and \"multiple\"."
+                        },
+                        {
+                            "name": "togglerIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<OrganizationChartProps>",
+                            "default": "",
+                            "description": "Toggle icon of an expanded and collapsed node."
                         },
                         {
                             "name": "value",
@@ -22621,6 +22922,14 @@
                             "description": "Used to get the child elements of the component."
                         },
                         {
+                            "name": "closeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<OverlayPanelProps>",
+                            "default": "",
+                            "description": "Icon to display as close icon."
+                        },
+                        {
                             "name": "dismissable",
                             "optional": true,
                             "readonly": false,
@@ -22837,6 +23146,22 @@
                             "description": "Zero-relative number of the first row to be displayed."
                         },
                         {
+                            "name": "firstPageLinkIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PaginatorProps>",
+                            "default": "",
+                            "description": "Icon of the first page link icon template."
+                        },
+                        {
+                            "name": "lastPageLinkIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PaginatorProps>",
+                            "default": "",
+                            "description": "Icon of the last page link icon template."
+                        },
+                        {
                             "name": "leftContent",
                             "optional": true,
                             "readonly": false,
@@ -22845,12 +23170,28 @@
                             "description": "Content to inject into the left side of the paginator."
                         },
                         {
+                            "name": "nextPageLinkIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PaginatorProps>",
+                            "default": "",
+                            "description": "Icon of the next page link icon template."
+                        },
+                        {
                             "name": "pageLinkSize",
                             "optional": true,
                             "readonly": false,
                             "type": "number",
                             "default": "5",
                             "description": "Number of page links to display."
+                        },
+                        {
+                            "name": "prevPageLinkIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PaginatorProps>",
+                            "default": "",
+                            "description": "Icon of the prev page link icon template."
                         },
                         {
                             "name": "rightContent",
@@ -23942,6 +24283,14 @@
                             "description": "Whether multiple tabs can be activated at the same time or not."
                         },
                         {
+                            "name": "submenuIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PanelMenuProps>",
+                            "default": "",
+                            "description": "Icon of the submenu."
+                        },
+                        {
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
@@ -24044,6 +24393,14 @@
                             "description": "Template of panel header if \"feedback\" is enabled."
                         },
                         {
+                            "name": "hideIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PasswordProps>",
+                            "default": "",
+                            "description": "Hide icon template."
+                        },
+                        {
                             "name": "icon",
                             "optional": true,
                             "readonly": false,
@@ -24130,6 +24487,14 @@
                             "type": "string",
                             "default": "Please enter a password",
                             "description": "Text to prompt password entry."
+                        },
+                        {
+                            "name": "showIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PasswordProps>",
+                            "default": "",
+                            "description": "Show icon template."
                         },
                         {
                             "name": "strongLabel",
@@ -24368,6 +24733,70 @@
                             "description": "Defines how multiple items can be selected, when true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically."
                         },
                         {
+                            "name": "moveAllToSourceIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PickListProps>",
+                            "default": "",
+                            "description": "Icon for moving all items to the source list."
+                        },
+                        {
+                            "name": "moveAllToTargetIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PickListProps>",
+                            "default": "",
+                            "description": "Icon for moving all items to the target list."
+                        },
+                        {
+                            "name": "moveBottomIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PickListProps>",
+                            "default": "",
+                            "description": "Icon of the move bottom icon."
+                        },
+                        {
+                            "name": "moveDownIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PickListProps>",
+                            "default": "",
+                            "description": "Icon of the move down icon."
+                        },
+                        {
+                            "name": "moveToSourceIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PickListProps>",
+                            "default": "",
+                            "description": "Icon for moving an item to the source list."
+                        },
+                        {
+                            "name": "moveToTargetIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PickListProps>",
+                            "default": "",
+                            "description": "Icon for moving an item to the target list."
+                        },
+                        {
+                            "name": "moveTopIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PickListProps>",
+                            "default": "",
+                            "description": "Icon of the move top icon."
+                        },
+                        {
+                            "name": "moveUpIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PickListProps>",
+                            "default": "",
+                            "description": "Icon of the move up icon."
+                        },
+                        {
                             "name": "showSourceControls",
                             "optional": true,
                             "readonly": false,
@@ -24406,6 +24835,14 @@
                             "type": "any[]",
                             "default": "",
                             "description": "An array of objects for the source list."
+                        },
+                        {
+                            "name": "sourceFilterIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PickListProps>",
+                            "default": "",
+                            "description": "Icon of the source list filter."
                         },
                         {
                             "name": "sourceFilterPlaceholder",
@@ -24486,6 +24923,14 @@
                             "type": "any[]",
                             "default": "",
                             "description": "An array of objects for the target list."
+                        },
+                        {
+                            "name": "targetFilterIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PickListProps>",
+                            "default": "",
+                            "description": "Icon of the target list filter."
                         },
                         {
                             "name": "targetFilterPlaceholder",
@@ -25172,8 +25617,8 @@
                             "optional": true,
                             "readonly": false,
                             "type": "IconType<RatingProps>",
-                            "default": "pi pi-ban",
-                            "description": "ClassName of the cancel icon component."
+                            "default": "",
+                            "description": "Icon for the cancelable state."
                         },
                         {
                             "name": "cancelIconProps",
@@ -25204,8 +25649,8 @@
                             "optional": true,
                             "readonly": false,
                             "type": "IconType<RatingProps>",
-                            "default": "pi pi-star",
-                            "description": "ClassName of the off icon component."
+                            "default": "",
+                            "description": "Icon for the off state."
                         },
                         {
                             "name": "offIconProps",
@@ -25220,8 +25665,8 @@
                             "optional": true,
                             "readonly": false,
                             "type": "IconType<RatingProps>",
-                            "default": "pi pi-star-fill",
-                            "description": "ClassName of the on icon component."
+                            "default": "",
+                            "description": "Icon for the on state."
                         },
                         {
                             "name": "onIconProps",
@@ -26151,6 +26596,14 @@
                             "description": "Whether to automatically manage layering."
                         },
                         {
+                            "name": "backIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<SlideMenuProps>",
+                            "default": "",
+                            "description": "Defines the backward icon."
+                        },
+                        {
                             "name": "backLabel",
                             "optional": true,
                             "readonly": false,
@@ -26213,6 +26666,14 @@
                             "type": "boolean",
                             "default": "false",
                             "description": "Defines if menu would displayed as a popup."
+                        },
+                        {
+                            "name": "submenuIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<SlideMenuProps>",
+                            "default": "",
+                            "description": "Icon of the submenu."
                         },
                         {
                             "name": "transitionOptions",
@@ -27555,7 +28016,7 @@
                         },
                         {
                             "name": "closeIcon",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "IconType<TabPanel>",
                             "default": "",
@@ -27627,7 +28088,7 @@
                         },
                         {
                             "name": "nextButton",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "IconType<TabPanel>",
                             "default": "",
@@ -27635,7 +28096,7 @@
                         },
                         {
                             "name": "prevButton",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "IconType<TabPanel>",
                             "default": "",
@@ -28201,6 +28662,14 @@
                             "type": "string",
                             "default": "400px",
                             "description": "Maximum height of the options panel on responsive mode."
+                        },
+                        {
+                            "name": "submenuIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<TieredMenuProps>",
+                            "default": "",
+                            "description": "Icon of the submenu."
                         },
                         {
                             "name": "transitionOptions",
@@ -29592,6 +30061,14 @@
                     "description": "Defines valid properties in TreeProps component.",
                     "values": [
                         {
+                            "name": "checkboxIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<TreeProps>",
+                            "default": "",
+                            "description": "Icon to display in the checkbox."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
@@ -29606,6 +30083,14 @@
                             "type": "string",
                             "default": "",
                             "description": "Style class of the component."
+                        },
+                        {
+                            "name": "collapseIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<TreeProps>",
+                            "default": "",
+                            "description": "Icon of an expanded tab."
                         },
                         {
                             "name": "contentClassName",
@@ -29648,6 +30133,14 @@
                             "description": "Unique key to enable dragdrop functionality."
                         },
                         {
+                            "name": "expandIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<TreeProps>",
+                            "default": "",
+                            "description": "Icon of an collapsed tab."
+                        },
+                        {
                             "name": "expandedKeys",
                             "optional": true,
                             "readonly": false,
@@ -29670,6 +30163,14 @@
                             "type": "string",
                             "default": "label",
                             "description": "When filtering is enabled, filterBy decides which field or fields (comma separated) to search against."
+                        },
+                        {
+                            "name": "filterIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<TreeProps>",
+                            "default": "",
+                            "description": "Icon of the filter."
                         },
                         {
                             "name": "filterLocale",
@@ -29747,8 +30248,8 @@
                             "name": "loadingIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
-                            "default": "pi pi-spin",
+                            "type": "IconType<TreeProps>",
+                            "default": "",
                             "description": "Icon to display when tree is loading."
                         },
                         {
@@ -30607,6 +31108,14 @@
                             "description": "Used to get the child elements of the component."
                         },
                         {
+                            "name": "closeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<TreeSelectProps>",
+                            "default": "",
+                            "description": "Icon of the close button."
+                        },
+                        {
                             "name": "disabled",
                             "optional": true,
                             "readonly": false,
@@ -30626,9 +31135,9 @@
                             "name": "dropdownIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
-                            "default": "pi pi-chevron-down",
-                            "description": "Icon class of the dropdown icon."
+                            "type": "IconType<TreeSelectProps>",
+                            "default": "",
+                            "description": "Icon of the dropdown."
                         },
                         {
                             "name": "emptyMessage",
@@ -30661,6 +31170,14 @@
                             "type": "string",
                             "default": "label",
                             "description": "When filtering is enabled, filterBy decides which field or fields (comma separated) to search against."
+                        },
+                        {
+                            "name": "filterIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<TreeSelectProps>",
+                            "default": "",
+                            "description": "Icon of the filter."
                         },
                         {
                             "name": "filterInputAutoFocus",
@@ -31230,6 +31747,14 @@
                             "description": "Whether to show it even there is only one page."
                         },
                         {
+                            "name": "checkboxIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<TreeTableProps>",
+                            "default": "",
+                            "description": "Icon of the checkbox when checked."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
@@ -31433,8 +31958,8 @@
                             "name": "loadingIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
-                            "default": "pi pi-spinner",
+                            "type": "IconType<TreeTableProps>",
+                            "default": "",
                             "description": "The icon to show while indicating data load is in progress."
                         },
                         {
@@ -31542,6 +32067,22 @@
                             "description": "When enabled, columns can have an un-sorted state."
                         },
                         {
+                            "name": "reorderIndicatorDownIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<TreeTableProps>",
+                            "default": "",
+                            "description": "Defines the reorder indicator down icon."
+                        },
+                        {
+                            "name": "reorderIndicatorUpIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<TreeTableProps>",
+                            "default": "",
+                            "description": "Defines the reorder indicator up icon."
+                        },
+                        {
                             "name": "reorderableColumns",
                             "optional": true,
                             "readonly": false,
@@ -31636,6 +32177,14 @@
                             "type": "string",
                             "default": "",
                             "description": "Name of the field to sort data by default."
+                        },
+                        {
+                            "name": "sortIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<TreeTableProps>",
+                            "default": "",
+                            "description": "Icon to display the current sorting status."
                         },
                         {
                             "name": "sortMode",
@@ -32230,6 +32779,14 @@
                     "description": "Defines valid properties in TriStateCheckbox component. In addition to these, all properties of HTMLDivElement can be used in this component.",
                     "values": [
                         {
+                            "name": "checkIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<TriStateCheckboxProps>",
+                            "default": "",
+                            "description": "Icon of the checkbox when checked."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
@@ -32268,6 +32825,14 @@
                             "type": "TooltipOptions",
                             "default": "",
                             "description": "Configuration of the tooltip, refer to the tooltip documentation for more information."
+                        },
+                        {
+                            "name": "uncheckIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<TriStateCheckboxProps>",
+                            "default": "",
+                            "description": "Icon of the checkbox when unchecked."
                         },
                         {
                             "name": "value",
@@ -32729,7 +33294,8 @@
                             "readonly": false,
                             "type": "ReactNode | Function",
                             "default": "",
-                            "description": "The template of loader's icon."
+                            "description": "The template of loader's icon.",
+                            "deprecated": "Since v9.2.3, use "
                         },
                         {
                             "name": "loading",
@@ -32738,6 +33304,14 @@
                             "type": "boolean",
                             "default": "false",
                             "description": "Whether the data is loaded."
+                        },
+                        {
+                            "name": "loadingIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<VirtualScrollerProps>",
+                            "default": "",
+                            "description": "The icon to show while indicating data load is in progress."
                         },
                         {
                             "name": "loadingTemplate",

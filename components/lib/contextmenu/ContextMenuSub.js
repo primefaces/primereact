@@ -3,7 +3,7 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils } from '../utils/Utils';
-import { AngleRightIcon } from '../icon/angleright';
+import { AngleRightIcon } from '../icons/angleright';
 
 export const ContextMenuSub = React.memo((props) => {
     const [activeItemState, setActiveItemState] = React.useState(null);

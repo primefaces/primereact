@@ -4,8 +4,8 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
 import { classNames, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { AccordionBase, AccordionTabBase } from './AccordionBase';
-import { ChevronRightIcon } from '../icon/chevronright';
-import { ChevronDownIcon } from '../icon/chevrondown';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { ChevronDownIcon } from '../icons/chevrondown';
 
 export const AccordionTab = () => {};
 

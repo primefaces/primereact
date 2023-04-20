@@ -167,6 +167,7 @@ export const TreeTableBody = React.memo((props) => {
                 rowIndex={index}
                 selectOnEdit={props.selectOnEdit}
                 node={node}
+                checkboxIcon={props.checkboxIcon}
                 columns={props.columns}
                 expandedKeys={props.expandedKeys}
                 onToggle={props.onToggle}

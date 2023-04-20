@@ -8,6 +8,7 @@
  *
  */
 import * as React from 'react';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom node select event.
@@ -77,6 +78,10 @@ export interface OrganizationChartProps extends Omit<React.DetailedHTMLProps<Rea
      * An array of nested TreeNodes.
      */
     value?: OrganizationChartNodeData[] | undefined;
+    /**
+     * Toggle icon of an expanded and collapsed node.
+     */
+    togglerIcon?: IconType<OrganizationChartProps> | undefined;
     /**
      * Defines the selection mode, valid values "single" and "multiple".
      */

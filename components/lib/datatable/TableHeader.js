@@ -79,6 +79,7 @@ export const TableHeader = React.memo((props) => {
                         groupRowsBy={props.groupRowsBy}
                         groupRowSortField={props.groupRowSortField}
                         sortMode={props.sortMode}
+                        sortIcon={props.sortIcon}
                         sortField={props.sortField}
                         sortOrder={props.sortOrder}
                         multiSortMeta={props.multiSortMeta}

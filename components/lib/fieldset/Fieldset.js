@@ -2,8 +2,10 @@ import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, UniqueComponentId } from '../utils/Utils';
+import { classNames, IconUtils, UniqueComponentId } from '../utils/Utils';
 import { FieldsetBase } from './FieldsetBase';
+import { PlusIcon } from '../icons/plus';
+import { MinusIcon } from '../icons/minus';
 
 export const Fieldset = React.forwardRef((inProps, ref) => {
     const props = FieldsetBase.getProps(inProps);
@@ -65,12 +67,12 @@ export const Fieldset = React.forwardRef((inProps, ref) => {
 
     const createToggleIcon = () => {
         if (props.toggleable) {
-            const className = classNames('p-fieldset-toggler pi', {
-                'pi-plus': collapsed,
-                'pi-minus': !collapsed
-            });
+            const iconClassName = 'p-fieldset-toggler';
 
-            return <span className={className}></span>;
+            const icon = collapsed ? props.expandIcon || <PlusIcon className={iconClassName} /> : props.collapseIcon || <MinusIcon className={iconClassName} />;
+            const toggleIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+
+            return toggleIcon;
         }
 
         return null;

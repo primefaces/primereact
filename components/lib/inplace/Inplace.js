@@ -3,7 +3,7 @@ import { localeOption } from '../api/Api';
 import { Button } from '../button/Button';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 import { InplaceBase, InplaceContentBase, InplaceDisplayBase } from './InplaceBase';
-import { TimesIcon } from '../icon/times';
+import { TimesIcon } from '../icons/times';
 
 export const InplaceDisplay = (props) => props.children;
 export const InplaceContent = (props) => props.children;

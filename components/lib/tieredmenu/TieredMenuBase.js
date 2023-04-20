@@ -16,6 +16,7 @@ export const TieredMenuBase = {
         transitionOptions: null,
         onShow: null,
         onHide: null,
+        submenuIcon: null,
         children: undefined
     },
     getProps: (props) => ObjectUtils.getMergedProps(props, TieredMenuBase.defaultProps),

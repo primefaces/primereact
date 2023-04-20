@@ -4,7 +4,7 @@ import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const items = [{ label: 'Computer' }, { label: 'Notebook' }, { label: 'Accessories' }, { label: 'Backpacks' }, { label: 'Item' }];
-    const home = { icon: 'pi pi-home', url: 'https:///primereact' };
+    const home = { icon: 'pi pi-home', url: 'https://primereact.org' };
 
     const code = {
         basic: `
@@ -16,7 +16,7 @@ import { BreadCrumb } from 'primereact/breadcrumb';
 
 export default function BasicDemo() {
     const items = [{ label: 'Computer' }, { label: 'Notebook' }, { label: 'Accessories' }, { label: 'Backpacks' }, { label: 'Item' }];
-    const home = { icon: 'pi pi-home', url: 'https:///primereact' }
+    const home = { icon: 'pi pi-home', url: 'https://primereact.org' }
 
     return (
         <BreadCrumb model={items} home={home} />
@@ -30,7 +30,7 @@ import { MenuItem } from 'primereact/menuitem';
 
 export default function BasicDemo() {
     const items: MenuItem[] = [{ label: 'Computer' }, { label: 'Notebook' }, { label: 'Accessories' }, { label: 'Backpacks' }, { label: 'Item' }];
-    const home: MenuItem = { icon: 'pi pi-home', url: 'https:///primereact' }
+    const home: MenuItem = { icon: 'pi pi-home', url: 'https://primereact.org' }
 
     return (
         <BreadCrumb model={items} home={home} />

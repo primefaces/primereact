@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 import { ChipBase } from './ChipBase';
-import { TimesCircleIcon } from '../icon/timescircle';
+import { TimesCircleIcon } from '../icons/timescircle';
 export const Chip = React.memo(
     React.forwardRef((inProps, ref) => {
         const props = ChipBase.getProps(inProps);

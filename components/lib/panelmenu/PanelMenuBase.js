@@ -6,6 +6,7 @@ export const PanelMenuBase = {
         id: null,
         model: null,
         style: null,
+        submenuIcon: null,
         className: null,
         multiple: false,
         transitionOptions: null,

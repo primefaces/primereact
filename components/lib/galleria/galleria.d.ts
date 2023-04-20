@@ -9,6 +9,7 @@
  */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom galleria responsive options
@@ -71,6 +72,10 @@ export interface GalleriaProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      */
     indicator?(index: number): React.ReactNode | undefined;
     /**
+     * Icon to display in the galleria close button.
+     */
+    closeIcon?: IconType<GalleriaProps> | undefined;
+    /**
      * Custom header template.
      */
     header?: React.ReactNode | undefined;
@@ -132,6 +137,22 @@ export interface GalleriaProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @defaultValue true
      */
     showThumbnails?: boolean | undefined;
+    /**
+     * Icon to show in the next item button.
+     */
+    itemNextIcon: IconType<GalleriaProps> | undefined;
+    /**
+     * Icon to show in the previous item button.
+     */
+    itemPrevIcon: IconType<GalleriaProps> | undefined;
+    /**
+     * Icon to show in the next thumbnail button.
+     */
+    nextThumbnailIcon: IconType<GalleriaProps> | undefined;
+    /**
+     * Icon to show in the previous thumbnail button.
+     */
+    prevThumbnailIcon: IconType<GalleriaProps> | undefined;
     /**
      * Position of thumbnails. Valid values are "bottom", "top", "left" and "right".
      * @defaultValue bottom

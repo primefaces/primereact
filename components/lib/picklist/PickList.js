@@ -224,22 +224,6 @@ export const PickList = React.memo(
     .p-picklist[${attributeSelectorState}] .p-picklist-buttons .p-button:last-child {
         margin-right: 0;
     }
-
-    .p-picklist[${attributeSelectorState}] .pi-angle-right:before {
-        content: "\\e930"
-    }
-
-    .p-picklist[${attributeSelectorState}] .pi-angle-double-right:before {
-        content: "\\e92c"
-    }
-
-    .p-picklist[${attributeSelectorState}] .pi-angle-left:before {
-        content: "\\e933"
-    }
-
-    .p-picklist[${attributeSelectorState}] .pi-angle-double-left:before {
-        content: "\\e92f"
-    }
 }
 `;
 
@@ -288,7 +272,19 @@ export const PickList = React.memo(
 
         return (
             <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
-                {props.showSourceControls && <PickListControls list={props.source} selection={sourceSelection} onReorder={onSourceReorder} className="p-picklist-source-controls" dataKey={props.dataKey} />}
+                {props.showSourceControls && (
+                    <PickListControls
+                        list={props.source}
+                        selection={sourceSelection}
+                        onReorder={onSourceReorder}
+                        className="p-picklist-source-controls"
+                        dataKey={props.dataKey}
+                        moveUpIcon={props.moveUpIcon}
+                        moveTopIcon={props.moveTopIcon}
+                        moveDownIcon={props.moveDownIcon}
+                        moveBottomIcon={props.moveBottomIcon}
+                    />
+                )}
 
                 <PickListSubList
                     ref={sourceListElementRef}
@@ -308,7 +304,8 @@ export const PickList = React.memo(
                     onFilter={onFilter}
                     showFilter={showSourceFilter}
                     placeholder={props.sourceFilterPlaceholder}
-                    template={props.sourceFilterTemplate}
+                    filterTemplate={props.sourceFilterTemplate}
+                    sourceFilterIcon={props.sourceFilterIcon}
                 />
 
                 <PickListTransferControls
@@ -316,10 +313,15 @@ export const PickList = React.memo(
                     source={props.source}
                     visibleSourceList={sourceList}
                     target={props.target}
+                    breakpoint={props.breakpoint}
                     visibleTargetList={targetList}
                     sourceSelection={sourceSelection}
                     targetSelection={targetSelection}
                     dataKey={props.dataKey}
+                    moveToTargetIcon={props.moveToTargetIcon}
+                    moveAllToTargetIcon={props.moveAllToTargetIcon}
+                    moveToSourceIcon={props.moveToSourceIcon}
+                    moveAllToSourceIcon={props.moveAllToSourceIcon}
                 />
 
                 <PickListSubList
@@ -340,10 +342,23 @@ export const PickList = React.memo(
                     onFilter={onFilter}
                     showFilter={showTargetFilter}
                     placeholder={props.targetFilterPlaceholder}
-                    template={props.targetFilterTemplate}
+                    filterTemplate={props.targetFilterTemplate}
+                    targetFilterIcon={props.targetFilterIcon}
                 />
 
-                {props.showTargetControls && <PickListControls list={props.target} selection={targetSelection} onReorder={onTargetReorder} className="p-picklist-target-controls" dataKey={props.dataKey} />}
+                {props.showTargetControls && (
+                    <PickListControls
+                        list={props.target}
+                        selection={targetSelection}
+                        onReorder={onTargetReorder}
+                        className="p-picklist-target-controls"
+                        dataKey={props.dataKey}
+                        moveUpIcon={props.moveUpIcon}
+                        moveTopIcon={props.moveTopIcon}
+                        moveDownIcon={props.moveDownIcon}
+                        moveBottomIcon={props.moveBottomIcon}
+                    />
+                )}
             </div>
         );
     })

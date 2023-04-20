@@ -899,6 +899,7 @@ export const TableBody = React.memo(
                         expanded={expanded}
                         expandedRowIcon={props.expandedRowIcon}
                         collapsedRowIcon={props.collapsedRowIcon}
+                        checkIcon={props.checkIcon}
                         rowClassName={props.rowClassName}
                         virtualScrollerOptions={props.virtualScrollerOptions}
                     />

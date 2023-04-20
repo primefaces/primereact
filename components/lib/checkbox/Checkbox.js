@@ -3,7 +3,7 @@ import { useUpdateEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { CheckboxBase } from './CheckboxBase';
-import { CheckIcon } from '../icon/check';
+import { CheckIcon } from '../icons/check';
 export const Checkbox = React.memo(
     React.forwardRef((inProps, ref) => {
         const props = CheckboxBase.getProps(inProps);

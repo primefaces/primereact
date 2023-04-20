@@ -3,12 +3,15 @@ import PrimeReact, { FilterService } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
 import { useEventListener } from '../hooks/Hooks';
 import { Paginator } from '../paginator/Paginator';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { TreeTableBase } from './TreeTableBase';
 import { TreeTableBody } from './TreeTableBody';
 import { TreeTableFooter } from './TreeTableFooter';
 import { TreeTableHeader } from './TreeTableHeader';
 import { TreeTableScrollableView } from './TreeTableScrollableView';
+import { SpinnerIcon } from '../icons/spinner';
+import { ArrowDownIcon } from '../icons/arrowdown';
+import { ArrowUpIcon } from '../icons/arrowup';
 
 export const TreeTable = React.forwardRef((inProps, ref) => {
     const props = TreeTableBase.getProps(inProps);
@@ -828,6 +831,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
                 tabIndex={props.tabIndex}
                 onSort={onSort}
                 sortField={sortField}
+                sortIcon={props.sortIcon}
                 sortOrder={sortOrder}
                 multiSortMeta={multiSortMeta}
                 resizableColumns={props.resizableColumns}
@@ -852,6 +856,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         return (
             <TreeTableBody
                 value={value}
+                checkboxIcon={props.checkboxIcon}
                 columns={columns}
                 expandedKeys={getExpandedKeys()}
                 selectOnEdit={props.selectOnEdit}
@@ -963,13 +968,13 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
 
     const createLoader = () => {
         if (props.loading) {
-            const iconClassName = classNames('p-treetable-loading-icon pi-spin', props.loadingIcon);
+            const iconClassName = 'p-treetable-loading-icon';
+            const icon = props.loadingIcon || <SpinnerIcon className={iconClassName} spin />;
+            const loadingIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
             return (
                 <div className="p-treetable-loading">
-                    <div className="p-treetable-loading-overlay p-component-overlay">
-                        <i className={iconClassName}></i>
-                    </div>
+                    <div className="p-treetable-loading-overlay p-component-overlay">{loadingIcon}</div>
                 </div>
             );
         }
@@ -1000,8 +1005,21 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
     const paginatorBottom = props.paginator && props.paginatorPosition !== 'top' && createPaginator('bottom', totalRecords);
     const loader = createLoader();
     const resizeHelper = props.resizableColumns && <div ref={resizerHelperRef} className="p-column-resizer-helper" style={{ display: 'none' }}></div>;
-    const reorderIndicatorUp = props.reorderableColumns && <span ref={reorderIndicatorUpRef} className="pi pi-arrow-down p-datatable-reorder-indicator-up" style={{ position: 'absolute', display: 'none' }} />;
-    const reorderIndicatorDown = props.reorderableColumns && <span ref={reorderIndicatorDownRef} className="pi pi-arrow-up p-datatable-reorder-indicator-down" style={{ position: 'absolute', display: 'none' }} />;
+    const style = { position: 'absolute', display: 'none' };
+    const reorderIndicatorUpProps = { className: 'p-datatable-reorder-indicator-up', style: { ...style } };
+    const reorderIndicatorUpIcon = props.reorderableColumns && IconUtils.getJSXIcon(props.reorderIndicatorUpIcon || <ArrowDownIcon />, undefined, { props });
+    const reorderIndicatorUp = props.reorderableColumns && (
+        <span ref={reorderIndicatorUpRef} {...reorderIndicatorUpProps}>
+            {reorderIndicatorUpIcon}
+        </span>
+    );
+    const reorderIndicatorDownProps = { className: 'p-datatable-reorder-indicator-down', style: { ...style } };
+    const reorderIndicatorDownIcon = IconUtils.getJSXIcon(props.reorderIndicatorDownIcon || <ArrowUpIcon />, undefined, { props });
+    const reorderIndicatorDown = props.reorderableColumns && (
+        <span ref={reorderIndicatorDownRef} {...reorderIndicatorDownProps}>
+            {reorderIndicatorDownIcon}
+        </span>
+    );
 
     return (
         <div ref={elementRef} id={props.id} className={className} style={props.style} data-scrollselectors=".p-treetable-wrapper" {...otherProps}>

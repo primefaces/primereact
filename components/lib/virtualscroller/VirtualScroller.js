@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { useEventListener, useMountEffect, usePrevious, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils, IconUtils } from '../utils/Utils';
 import { VirtualScrollerBase } from './VirtualScrollerBase';
+import { SpinnerIcon } from '../icons/spinner';
+
 export const VirtualScroller = React.memo(
     React.forwardRef((inProps, ref) => {
         const props = VirtualScrollerBase.getProps(inProps);
@@ -581,12 +583,16 @@ export const VirtualScroller = React.memo(
         };
 
         const createLoader = () => {
+            const iconClassName = 'p-virtualscroller-loading-icon';
+            const icon = props.loadingIcon || <SpinnerIcon className={iconClassName} spin />;
+            const loadingIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+
             if (!props.loaderDisabled && props.showLoader && loadingState) {
                 const className = classNames('p-virtualscroller-loader', {
                     'p-component-overlay': !props.loadingTemplate
                 });
 
-                let content = <i className="p-virtualscroller-loading-icon pi pi-spinner pi-spin"></i>;
+                let content = loadingIcon;
 
                 if (props.loadingTemplate) {
                     content = loaderArrState.map((_, index) => {
@@ -594,7 +600,7 @@ export const VirtualScroller = React.memo(
                     });
                 } else if (props.loaderIconTemplate) {
                     const defaultContentOptions = {
-                        className: 'p-virtualscroller-loading-icon',
+                        iconClassName,
                         element: content,
                         props
                     };

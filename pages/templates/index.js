@@ -11,11 +11,11 @@ const TemplatesPage = () => {
             <div className="grid">
                 <div className="col-12 lg:col-6 xl:col-4">
                     <div className="card mb-0">
-                        <a href="https://www.primefaces.org/apollo-react" rel="noopener noreferrer" target="_blank">
+                        <a href="https://apollo.primereact.org" rel="noopener noreferrer" target="_blank">
                             <img alt="Apollo" src="https://primefaces.org/cdn/primereact/images/layouts/apollo-nextjs.jpg" className="w-full" />
                         </a>
                         <div className="flex gap-3 mt-3">
-                            <a href="https://www.primefaces.org/apollo-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
+                            <a href="https://apollo.primereact.org" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Preview</span>
                             </a>
                             <a href="https://www.primefaces.org/layouts/apollo-react" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
@@ -35,6 +35,21 @@ const TemplatesPage = () => {
                             </a>
                             <a href="https://github.com/primefaces/sakai-react" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Download</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-12 lg:col-6 xl:col-4">
+                    <div className="card mb-0">
+                        <a href="https://diamond.primereact.org" rel="noopener noreferrer" target="_blank">
+                            <img alt="Diamond" src="https://primefaces.org/cdn/primereact/images/layouts/diamond-react.jpg" className="w-full" />
+                        </a>
+                        <div className="flex gap-3 mt-3">
+                            <a href="https://diamond.primereact.org" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
+                                <span className="p-button-label white-space-nowrap">Preview</span>
+                            </a>
+                            <a href="https://www.primefaces.org/layouts/diamond-react" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
+                                <span className="p-button-label white-space-nowrap">Learn More</span>
                             </a>
                         </div>
                     </div>
@@ -79,21 +94,6 @@ const TemplatesPage = () => {
                                 <span className="p-button-label white-space-nowrap">Preview</span>
                             </a>
                             <a href="https://www.primefaces.org/layouts/ultima-react" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
-                                <span className="p-button-label white-space-nowrap">Learn More</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-12 lg:col-6 xl:col-4">
-                    <div className="card mb-0">
-                        <a href="https://www.primefaces.org/diamond-react" rel="noopener noreferrer" target="_blank">
-                            <img alt="Diamond" src="https://primefaces.org/cdn/primereact/images/layouts/diamond-react.jpg" className="w-full" />
-                        </a>
-                        <div className="flex gap-3 mt-3">
-                            <a href="https://www.primefaces.org/diamond-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
-                                <span className="p-button-label white-space-nowrap">Preview</span>
-                            </a>
-                            <a href="https://www.primefaces.org/layouts/diamond-react" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Learn More</span>
                             </a>
                         </div>

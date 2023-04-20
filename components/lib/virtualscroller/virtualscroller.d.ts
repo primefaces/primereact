@@ -9,6 +9,7 @@
  */
 
 import * as React from 'react';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom virtual scroller options type.
@@ -358,11 +359,16 @@ export interface VirtualScrollerProps {
      */
     showLoader?: boolean | undefined;
     /**
+     * The icon to show while indicating data load is in progress.
+     */
+    loadingIcon?: IconType<VirtualScrollerProps> | undefined;
+    /**
      * The template of loader.
      */
     loadingTemplate?: React.ReactNode | ((options: VirtualScrollerLoadingTemplateOptions) => React.ReactNode);
     /**
      * The template of loader's icon.
+     * @deprecated Since v9.2.3, use `loadingIcon` instead.
      */
     loaderIconTemplate?: React.ReactNode | ((options: VirtualScrollerLoaderIconTemplateOptions) => React.ReactNode);
     /**

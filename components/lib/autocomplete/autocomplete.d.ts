@@ -232,7 +232,7 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.HT
     /**
      * Icon of the remove chip element in multiple mode.
      */
-    removeIcon?: IconType<AutoCompleteProps> | undefined;
+    removeTokenIcon?: IconType<AutoCompleteProps> | undefined;
     /**
      * Maximum height of the suggestions panel.
      * @defaultValue 200px

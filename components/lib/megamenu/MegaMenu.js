@@ -4,6 +4,9 @@ import { useEventListener, useMatchMedia, useMountEffect, useResizeListener, use
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
 import { MegaMenuBase } from './MegaMenuBase';
+import { AngleRightIcon } from '../icons/angleright';
+import { AngleDownIcon } from '../icons/angledown';
+import { BarsIcon } from '../icons/bars';
 
 export const MegaMenu = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -242,12 +245,11 @@ export const MegaMenu = React.memo(
 
         const createSubmenuIcon = (item) => {
             if (item.items) {
-                const className = classNames('p-submenu-icon pi', {
-                    'pi-angle-down': horizontal,
-                    'pi-angle-right': vertical
-                });
+                const iconClassName = 'p-submenu-icon';
+                const icon = vertical ? props.submenuIcon || <AngleRightIcon className={iconClassName} /> : props.submenuIcon || <AngleDownIcon className={iconClassName} />;
+                const submenuIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
-                return <span className={className}></span>;
+                return submenuIcon;
             }
 
             return null;
@@ -541,10 +543,13 @@ export const MegaMenu = React.memo(
             if (props.orientation === 'vertical' || (props.model && props.model.length < 1)) {
                 return null;
             }
+
+            const icon = props.menuIcon || <BarsIcon />;
+            const menuIcon = IconUtils.getJSXIcon(icon, undefined, { props });
             /* eslint-disable */
             const button = (
                 <a ref={menuButtonRef} href={'#'} role="button" tabIndex={0} className="p-megamenu-button" onClick={toggle}>
-                    <i className="pi pi-bars" />
+                    {menuIcon}
                 </a>
             );
             /* eslint-enable */
