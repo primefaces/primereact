@@ -32,27 +32,27 @@ export interface ImageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
     /**
      * Icon of the download button.
      */
-    downloadIcon: IconType<ImageProps> | undefined;
+    downloadIcon?: IconType<ImageProps> | undefined;
     /**
      * Icon of the rotate right button.
      */
-    rotateRightIcon: IconType<ImageProps> | undefined;
+    rotateRightIcon?: IconType<ImageProps> | undefined;
     /**
      * Icon of the rotate left button.
      */
-    rotateLeftIcon: IconType<ImageProps> | undefined;
+    rotateLeftIcon?: IconType<ImageProps> | undefined;
     /**
      * Icon of the zoom out button.
      */
-    zoomOutIcon: IconType<ImageProps> | undefined;
+    zoomOutIcon?: IconType<ImageProps> | undefined;
     /**
      * Icon of the zoom in button.
      */
-    zoomInIcon: IconType<ImageProps> | undefined;
+    zoomInIcon?: IconType<ImageProps> | undefined;
     /**
      * Icon of the close button.
      */
-    closeIcon: IconType<ImageProps> | undefined;
+    closeIcon?: IconType<ImageProps> | undefined;
     /**
      * Height of the image element.
      */

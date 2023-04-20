@@ -140,19 +140,19 @@ export interface GalleriaProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
     /**
      * Icon to show in the next item button.
      */
-    itemNextIcon: IconType<GalleriaProps> | undefined;
+    itemNextIcon?: IconType<GalleriaProps> | undefined;
     /**
      * Icon to show in the previous item button.
      */
-    itemPrevIcon: IconType<GalleriaProps> | undefined;
+    itemPrevIcon?: IconType<GalleriaProps> | undefined;
     /**
      * Icon to show in the next thumbnail button.
      */
-    nextThumbnailIcon: IconType<GalleriaProps> | undefined;
+    nextThumbnailIcon?: IconType<GalleriaProps> | undefined;
     /**
      * Icon to show in the previous thumbnail button.
      */
-    prevThumbnailIcon: IconType<GalleriaProps> | undefined;
+    prevThumbnailIcon?: IconType<GalleriaProps> | undefined;
     /**
      * Position of thumbnails. Valid values are "bottom", "top", "left" and "right".
      * @defaultValue bottom

@@ -99,11 +99,11 @@ export interface CarouselProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
     /**
      * Icon for the previous button by orientation.
      */
-    prevIcon: IconType<CarouselProps> | undefined;
+    prevIcon?: IconType<CarouselProps> | undefined;
     /**
      * Icon for the next button by orientation.
      */
-    nextIcon: IconType<CarouselProps> | undefined;
+    nextIcon?: IconType<CarouselProps> | undefined;
     /**
      * An array of options for responsive design.
      * @type {CarouselResponsiveOption}
