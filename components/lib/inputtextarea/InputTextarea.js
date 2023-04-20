@@ -52,13 +52,13 @@ export const InputTextarea = React.memo(
         };
 
         const onInput = (event) => {
+            const target = event.target;
+
             if (props.autoResize) {
-                resize();
+                resize(ObjectUtils.isEmpty(target.value));
             }
 
             props.onInput && props.onInput(event);
-
-            const target = event.target;
 
             ObjectUtils.isNotEmpty(target.value) ? DomHandler.addClass(target, 'p-filled') : DomHandler.removeClass(target, 'p-filled');
         };
