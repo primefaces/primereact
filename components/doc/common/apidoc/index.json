@@ -4601,7 +4601,7 @@
                         },
                         {
                             "name": "nextIcon",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "IconType<CarouselProps>",
                             "default": "",
@@ -4641,7 +4641,7 @@
                         },
                         {
                             "name": "prevIcon",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "IconType<CarouselProps>",
                             "default": "",
@@ -9480,7 +9480,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "string",
-                            "default": "",
+                            "default": "({currentPage} of {totalPages})",
                             "description": "Name of the field that uniquely identifies a record in the data. Should be a unique business key to prevent re-rendering."
                         },
                         {
@@ -9488,7 +9488,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "null | 0 | 1 | -1",
-                            "default": "1",
+                            "default": "({currentPage} of {totalPages})",
                             "description": "Default sort order of an unsorted column."
                         },
                         {
@@ -9504,7 +9504,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "string",
-                            "default": "",
+                            "default": "cell",
                             "description": "Defines editing mode, options are \"cell\" and \"row\"."
                         },
                         {
@@ -15021,7 +15021,7 @@
                         },
                         {
                             "name": "itemNextIcon",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "IconType<GalleriaProps>",
                             "default": "",
@@ -15029,7 +15029,7 @@
                         },
                         {
                             "name": "itemPrevIcon",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "IconType<GalleriaProps>",
                             "default": "",
@@ -15037,7 +15037,7 @@
                         },
                         {
                             "name": "nextThumbnailIcon",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "IconType<GalleriaProps>",
                             "default": "",
@@ -15053,7 +15053,7 @@
                         },
                         {
                             "name": "prevThumbnailIcon",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "IconType<GalleriaProps>",
                             "default": "",
@@ -17833,7 +17833,7 @@
                         },
                         {
                             "name": "closeIcon",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "IconType<ImageProps>",
                             "default": "",
@@ -17841,7 +17841,7 @@
                         },
                         {
                             "name": "downloadIcon",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "IconType<ImageProps>",
                             "default": "",
@@ -17897,7 +17897,7 @@
                         },
                         {
                             "name": "rotateLeftIcon",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "IconType<ImageProps>",
                             "default": "",
@@ -17905,7 +17905,7 @@
                         },
                         {
                             "name": "rotateRightIcon",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "IconType<ImageProps>",
                             "default": "",
@@ -17938,7 +17938,7 @@
                         },
                         {
                             "name": "zoomInIcon",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "IconType<ImageProps>",
                             "default": "",
@@ -17946,7 +17946,7 @@
                         },
                         {
                             "name": "zoomOutIcon",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "IconType<ImageProps>",
                             "default": "",
@@ -20273,14 +20273,6 @@
                             "type": "CSSProperties",
                             "default": "",
                             "description": "Inline style of the overlay panel element."
-                        },
-                        {
-                            "name": "ref",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "Ref<HTMLDivElement>",
-                            "default": "",
-                            "description": "Reference to the main wrapper element."
                         },
                         {
                             "name": "scrollHeight",
