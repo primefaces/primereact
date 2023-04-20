@@ -182,6 +182,7 @@ export const Mention = React.memo(
                 const nextText = value.substring(triggerState.index + currentText.length);
 
                 inputRef.current.value = `${prevText}${selectedText} ${nextText}`;
+                event.target = inputRef.current;
                 props.onChange && props.onChange(event);
             }
 
