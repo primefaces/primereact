@@ -2821,7 +2821,7 @@ export const Calendar = React.memo(
 
             const dateViewGrid = createDateViewGrid(monthMetaData, weekDays, index);
             const header = props.headerTemplate ? props.headerTemplate() : null;
-            const monthKey = monthMetaData.month + "-" + monthMetaData.year;
+            const monthKey = monthMetaData.month + '-' + monthMetaData.year;
 
             return (
                 <div key={monthKey} className="p-datepicker-group">
