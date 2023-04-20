@@ -190,7 +190,7 @@ export const Paginator = React.memo(
             return null;
         };
 
-        if (!props.alwaysShow && pageCount === 1) {
+        if (!props.alwaysShow && pageCount <= 1) {
             return null;
         } else {
             const otherProps = PaginatorBase.getOtherProps(props);
