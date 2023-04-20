@@ -50,16 +50,16 @@ export function HookFormDoc(props) {
     control={control}
     rules={{ required: 'City is required.' }}
     render={({ field, fieldState }) => (
-        <Dropdown
-            value={field.value}
-            optionLabel="name"
-            placeholder="Select a City"
-            name="city"
-            options={cities}
-            control={control}
-            onChange={(e) => field.onChange(e.value)}
-            className={classNames({ 'p-invalid': fieldState.error })}
-        />
+            <Dropdown
+                id={field.name}
+                value={field.value}
+                optionLabel="name"
+                placeholder="Select a City"
+                options={cities}
+                focusInputRef={field.ref}
+                onChange={(e) => field.onChange(e.value)}
+                className={classNames({ 'p-invalid': fieldState.error })}
+            />
     )}
 />
 {getFormErrorMessage('city')}
@@ -117,16 +117,16 @@ export default function HookFormDoc() {
                     control={control}
                     rules={{ required: 'City is required.' }}
                     render={({ field, fieldState }) => (
-                        <Dropdown
-                            value={field.value}
-                            optionLabel="name"
-                            placeholder="Select a City"
-                            name="city"
-                            options={cities}
-                            control={control}
-                            onChange={(e) => field.onChange(e.value)}
-                            className={classNames({ 'p-invalid': fieldState.error })}
-                        />
+                            <Dropdown
+                                id={field.name}
+                                value={field.value}
+                                optionLabel="name"
+                                placeholder="Select a City"
+                                options={cities}
+                                focusInputRef={field.ref}
+                                onChange={(e) => field.onChange(e.value)}
+                                className={classNames({ 'p-invalid': fieldState.error })}
+                            />
                     )}
                 />
                 {getFormErrorMessage('city')}
@@ -193,16 +193,16 @@ export default function HookFormDoc() {
                     control={control}
                     rules={{ required: 'City is required.' }}
                     render={({ field, fieldState }) => (
-                        <Dropdown
-                            value={field.value}
-                            optionLabel="name"
-                            placeholder="Select a City"
-                            name="city"
-                            options={cities}
-                            control={control}
-                            onChange={(e) => field.onChange(e.value)}
-                            className={classNames({ 'p-invalid': fieldState.error })}
-                        />
+                            <Dropdown
+                                id={field.name}
+                                value={field.value}
+                                optionLabel="name"
+                                placeholder="Select a City"
+                                options={cities}
+                                focusInputRef={field.ref}
+                                onChange={(e) => field.onChange(e.value)}
+                                className={classNames({ 'p-invalid': fieldState.error })}
+                            />
                     )}
                 />
                 {getFormErrorMessage('city')}
@@ -230,12 +230,12 @@ export default function HookFormDoc() {
                         rules={{ required: 'City is required.' }}
                         render={({ field, fieldState }) => (
                             <Dropdown
+                                id={field.name}
                                 value={field.value}
                                 optionLabel="name"
                                 placeholder="Select a City"
-                                name="city"
                                 options={cities}
-                                control={control}
+                                focusInputRef={field.ref}
                                 onChange={(e) => field.onChange(e.value)}
                                 className={classNames({ 'p-invalid': fieldState.error })}
                             />
