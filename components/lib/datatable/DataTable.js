@@ -971,6 +971,10 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     };
 
     const multisortField = (data1, data2, multiSortMeta, index) => {
+        if (!multiSortMeta || !multiSortMeta[index]) {
+            return;
+        }
+
         const value1 = ObjectUtils.resolveFieldData(data1, multiSortMeta[index].field);
         const value2 = ObjectUtils.resolveFieldData(data2, multiSortMeta[index].field);
 
