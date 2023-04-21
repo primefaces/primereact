@@ -475,7 +475,7 @@ export const BodyCell = React.memo((props) => {
     }, [props.editingMeta]);
 
     React.useEffect(() => {
-        if (props.editMode === 'cell' || props.editMode === 'row') {
+        if (props.editMode === 'row') {
             const callbackParams = getCellCallbackParams();
             const params = { ...callbackParams, editing: editingState, editingKey };
 
