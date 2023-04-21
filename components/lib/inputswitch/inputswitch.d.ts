@@ -2,13 +2,13 @@
  *
  * InputSwitch is used to select a boolean value.
  *
- * [Live Demo](https://www.primefaces.org/primereact/inputswitch/)
+ * [Live Demo](https://www.primereact.org/inputswitch/)
  *
  * @module inputswitch
  *
  */
 import * as React from 'react';
-import TooltipOptions from '../tooltip/tooltipoptions';
+import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
 
 /**
@@ -20,7 +20,7 @@ import { FormEvent } from '../ts-helpers';
 interface InputSwitchChangeEvent extends FormEvent<boolean> {}
 
 /**
- * Defines valid properties in InputMask component. In addition to these, all properties of {@link InputTextProps} can be used in this component.
+ * Defines valid properties in InputMask component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
 export interface InputSwitchProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
@@ -56,7 +56,7 @@ export interface InputSwitchProps extends Omit<React.DetailedHTMLProps<React.Inp
      * Specifies whether a inputswitch should be checked or not.
      * @defaultValue false
      */
-    checked?: boolean | undefined;
+    checked: boolean;
     /**
      * Value in checked state.
      * @defaultValue true
@@ -104,6 +104,14 @@ export interface InputSwitchProps extends Omit<React.DetailedHTMLProps<React.Inp
 }
 
 /**
+ * **PrimeReact - InputSwitch**
+ *
+ * _InputSwitch is used to select a boolean value._
+ *
+ * [Live Demo](https://www.primereact.org/inputswitch/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class InputSwitch extends React.Component<InputSwitchProps, any> {

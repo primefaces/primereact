@@ -3,10 +3,15 @@ import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputText } from '../inputtext/InputText';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils, IconUtils } from '../utils/Utils';
+import { InputNumberBase } from './InputNumberBase';
+import { AngleUpIcon } from '../icons/angleup';
+import { AngleDownIcon } from '../icons/angledown';
 
 export const InputNumber = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = InputNumberBase.getProps(inProps);
+
         const [focusedState, setFocusedState] = React.useState(false);
         const elementRef = React.useRef(null);
         const inputRef = React.useRef(null);
@@ -211,23 +216,11 @@ export const InputNumber = React.memo(
             }
         };
 
-        const onUpButtonTouchStart = (event) => {
-            if (!props.disabled && !props.readOnly) {
-                repeat(event, null, 1);
-            }
-        };
-
         const onUpButtonMouseDown = (event) => {
             if (!props.disabled && !props.readOnly) {
                 props.autoFocus && DomHandler.focus(inputRef.current, props.autoFocus);
                 repeat(event, null, 1);
                 event.preventDefault();
-            }
-        };
-
-        const onUpButtonTouchEnd = () => {
-            if (!props.disabled && !props.readOnly) {
-                clearTimer();
             }
         };
 
@@ -252,18 +245,6 @@ export const InputNumber = React.memo(
         const onUpButtonKeyDown = (event) => {
             if (!props.disabled && !props.readOnly && (event.keyCode === 32 || event.keyCode === 13)) {
                 repeat(event, null, 1);
-            }
-        };
-
-        const onDownButtonTouchStart = (event) => {
-            if (!props.disabled && !props.readOnly) {
-                repeat(event, null, -1);
-            }
-        };
-
-        const onDownButtonTouchEnd = () => {
-            if (!props.disabled && !props.readOnly) {
-                clearTimer();
             }
         };
 
@@ -1053,23 +1034,23 @@ export const InputNumber = React.memo(
                 },
                 props.incrementButtonClassName
             );
-            const icon = classNames('p-button-icon', props.incrementButtonIcon);
+            const iconsClassName = 'p-button-icon';
+            const icon = props.incrementButtonIcon || <AngleUpIcon className={iconsClassName} />;
+            const upButton = IconUtils.getJSXIcon(icon, { className: iconsClassName }, { props });
 
             return (
                 <button
                     type="button"
                     className={className}
-                    onMouseLeave={onUpButtonMouseLeave}
-                    onMouseDown={onUpButtonMouseDown}
-                    onMouseUp={onUpButtonMouseUp}
+                    onPointerLeave={onUpButtonMouseLeave}
+                    onPointerDown={onUpButtonMouseDown}
+                    onPointerUp={onUpButtonMouseUp}
                     onKeyDown={onUpButtonKeyDown}
                     onKeyUp={onUpButtonKeyUp}
-                    onTouchStart={onUpButtonTouchStart}
-                    onTouchEnd={onUpButtonTouchEnd}
                     disabled={props.disabled}
                     tabIndex={-1}
                 >
-                    <span className={icon}></span>
+                    {upButton}
                     <Ripple />
                 </button>
             );
@@ -1083,23 +1064,23 @@ export const InputNumber = React.memo(
                 },
                 props.decrementButtonClassName
             );
-            const icon = classNames('p-button-icon', props.decrementButtonIcon);
+            const iconsClassName = 'p-button-icon';
+            const icon = props.decrementButtonIcon || <AngleDownIcon className={iconsClassName} />;
+            const downButton = IconUtils.getJSXIcon(icon, { className: iconsClassName }, { props });
 
             return (
                 <button
                     type="button"
                     className={className}
-                    onMouseLeave={onDownButtonMouseLeave}
-                    onMouseDown={onDownButtonMouseDown}
-                    onMouseUp={onDownButtonMouseUp}
+                    onPointerLeave={onDownButtonMouseLeave}
+                    onPointerDown={onDownButtonMouseDown}
+                    onPointerUp={onDownButtonMouseUp}
                     onKeyDown={onDownButtonKeyDown}
                     onKeyUp={onDownButtonKeyUp}
-                    onTouchStart={onDownButtonTouchStart}
-                    onTouchEnd={onDownButtonTouchEnd}
                     disabled={props.disabled}
                     tabIndex={-1}
                 >
-                    <span className={icon}></span>
+                    {downButton}
                     <Ripple />
                 </button>
             );
@@ -1127,7 +1108,7 @@ export const InputNumber = React.memo(
         };
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, InputNumber.defaultProps);
+        const otherProps = InputNumberBase.getOtherProps(props);
         const dataProps = ObjectUtils.reduceKeys(otherProps, DomHandler.DATA_PROPS);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
@@ -1157,55 +1138,3 @@ export const InputNumber = React.memo(
 );
 
 InputNumber.displayName = 'InputNumber';
-InputNumber.defaultProps = {
-    __TYPE: 'InputNumber',
-    allowEmpty: true,
-    ariaLabelledBy: null,
-    autoFocus: false,
-    buttonLayout: 'stacked',
-    className: null,
-    currency: undefined,
-    currencyDisplay: undefined,
-    decrementButtonClassName: null,
-    decrementButtonIcon: 'pi pi-angle-down',
-    disabled: false,
-    format: true,
-    id: null,
-    incrementButtonClassName: null,
-    incrementButtonIcon: 'pi pi-angle-up',
-    inputClassName: null,
-    inputId: null,
-    inputMode: null,
-    inputRef: null,
-    inputStyle: null,
-    locale: undefined,
-    localeMatcher: undefined,
-    max: null,
-    maxFractionDigits: undefined,
-    maxLength: null,
-    min: null,
-    minFractionDigits: undefined,
-    mode: 'decimal',
-    name: null,
-    onBlur: null,
-    onChange: null,
-    onFocus: null,
-    onKeyDown: null,
-    onValueChange: null,
-    pattern: null,
-    placeholder: null,
-    prefix: null,
-    readOnly: false,
-    required: false,
-    showButtons: false,
-    size: null,
-    step: 1,
-    style: null,
-    suffix: null,
-    tabIndex: null,
-    tooltip: null,
-    tooltipOptions: null,
-    type: 'text',
-    useGrouping: true,
-    value: null
-};

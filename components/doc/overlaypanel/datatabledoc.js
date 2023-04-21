@@ -1,4 +1,3 @@
-import getConfig from 'next/config';
 import { useEffect, useRef, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
 import { Button } from '../../lib/button/Button';
@@ -12,12 +11,11 @@ import { DocSectionText } from '../common/docsectiontext';
 export function DataTableDoc(props) {
     const [products, setProducts] = useState(null);
     const [selectedProduct, setSelectedProduct] = useState(null);
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
-    const product = selectedProduct && (
-        <div className="p-2">
+    const selectedProductContent = selectedProduct && (
+        <div className="p-5 surface-card shadow-2 border-round">
             <div className="relative">
-                <img src={contextPath + 'images/product/' + selectedProduct.image} alt={selectedProduct.name}></img>
+                <img src={'https://primefaces.org/cdn/primereact/images/product/' + selectedProduct.image} alt={selectedProduct.name}></img>
             </div>
             <div className="flex align-items-center justify-content-between mt-3 mb-2">
                 <span className="text-900 font-medium text-xl">{selectedProduct.name}</span>
@@ -50,12 +48,8 @@ export function DataTableDoc(props) {
         return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
     };
 
-    const onProductSelect = (e) => {
-        setSelectedProduct(e.value);
-    };
-
     const imageBody = (rowData) => {
-        return <img src={`images/product/${rowData.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={rowData.image} className="w-4rem shadow-1" />;
+        return <img src={`https://primefaces.org/cdn/primereact/images/product/${rowData.image}`} alt={rowData.image} className="w-4rem shadow-1" />;
     };
 
     const priceBody = (rowData) => {
@@ -65,13 +59,13 @@ export function DataTableDoc(props) {
     const code = {
         basic: `
 <Toast ref={toast} />
-<Button style={{ minWidth: '15rem' }} type="button" icon="pi pi-search" label={selectedProduct ? selectedProduct.name : 'Select a Product'} onClick={(e) => op.current.toggle(e)} aria-haspopup aria-controls="overlay_panel" />
-{selectedProduct && product}
-<OverlayPanel ref={op} showCloseIcon id="overlay_panel" style={{ width: '450px' }} >
-    <DataTable value={products} selectionMode="single" paginator rows={5} selection={selectedProduct} onSelectionChange={onProductSelect}>
-        <Column field="name" header="Name" sortable />
+<Button type="button" icon="pi pi-search" label="Search" onClick={(e) => op.current.toggle(e)} />
+{selectedProductContent}
+<OverlayPanel ref={op} showCloseIcon>
+    <DataTable value={products} selectionMode="single" paginator rows={5} selection={selectedProduct} onSelectionChange={(e) => setSelectedProduct(e.value)}>
+        <Column field="name" header="Name" sortable style={{minWidth: '12rem'}} />
         <Column header="Image" body={imageBody} />
-        <Column field="price" header="Price" sortable body={priceBody} />
+        <Column field="price" header="Price" sortable body={priceBody} style={{minWidth: '8rem'}} />
     </DataTable>
 </OverlayPanel>
         `,
@@ -84,14 +78,14 @@ import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
 import { ProductService } from './service/ProductService';
 
-export default function DataTableDoc() {
+export default function DataTableDemo() {
     const [products, setProducts] = useState(null);
     const [selectedProduct, setSelectedProduct] = useState(null);
 
-    const product = selectedProduct && (
-        <div className="p-2">
+    const selectedProductContent = selectedProduct && (
+        <div className="p-5 surface-card shadow-2 border-round">
             <div className="relative">
-                <img src={'images/product/' + selectedProduct.image} alt={selectedProduct.name} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'}></img>
+                <img src={'https://primefaces.org/cdn/primereact/images/product/' + selectedProduct.image} alt={selectedProduct.name}></img>
             </div>
             <div className="flex align-items-center justify-content-between mt-3 mb-2">
                 <span className="text-900 font-medium text-xl">{selectedProduct.name}</span>
@@ -100,7 +94,7 @@ export default function DataTableDoc() {
             <span className="text-600">{selectedProduct.category}</span>
         </div>
     );
-    
+
     const op = useRef(null);
     const toast = useRef(null);
     const isMounted = useRef(false);
@@ -110,12 +104,12 @@ export default function DataTableDoc() {
             op.current.hide();
             toast.current.show({ severity: 'info', summary: 'Product Selected', detail: selectedProduct.name, life: 3000 });
         }
-    }, [selectedProduct]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [selectedProduct]);
 
     useEffect(() => {
         isMounted.current = true;
         ProductService.getProductsSmall().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     const formatCurrency = (value) => {
         return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
@@ -126,7 +120,7 @@ export default function DataTableDoc() {
     };
 
     const imageBody = (rowData) => {
-        return <img src={\`images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="w-4rem shadow-1" />
+        return <img src={\`https://primefaces.org/cdn/primereact/images/product/\${rowData.image}\`} alt={rowData.image} className="w-4rem shadow-1" />
     };
 
     const priceBody = (rowData) => {
@@ -134,19 +128,18 @@ export default function DataTableDoc() {
     };
 
     return (
-        <div>
+        <div className="card flex flex-column align-items-center gap-3">
             <Toast ref={toast} />
-            <Button style={{ minWidth: '15rem' }} type="button" icon="pi pi-search" label={selectedProduct ? selectedProduct.name : 'Select a Product'} onClick={(e) => op.current.toggle(e)} aria-haspopup aria-controls="overlay_panel" />
-            {selectedProduct && product}
-            <OverlayPanel ref={op} showCloseIcon id="overlay_panel" style={{ width: '450px' }}>
-                <DataTable value={products} selectionMode="single" paginator rows={5} selection={selectedProduct} onSelectionChange={onProductSelect}>
-                    <Column field="name" header="Name" sortable />
+            <Button type="button" icon="pi pi-search" label="Search" onClick={(e) => op.current.toggle(e)} />
+            {selectedProductContent}
+            <OverlayPanel ref={op} showCloseIcon>
+                <DataTable value={products} selectionMode="single" paginator rows={5} selection={selectedProduct} onSelectionChange={(e) => setSelectedProduct(e.value)}>
+                    <Column field="name" header="Name" sortable style={{minWidth: '12rem'}} />
                     <Column header="Image" body={imageBody} />
-                    <Column field="price" header="Price" sortable body={priceBody} />
+                    <Column field="price" header="Price" sortable body={priceBody} style={{minWidth: '8rem'}} />
                 </DataTable>
             </OverlayPanel>
         </div>
-
     );
 }
         `,
@@ -156,21 +149,21 @@ import { OverlayPanel } from 'primereact/overlaypanel';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 import { Column } from 'primereact/column';
-import { DataTable, DataTableSelectionChangeParams } from 'primereact/datatable';
+import { DataTable, DataTableSelectionChangeEvent } from 'primereact/datatable';
 import { ProductService } from './service/ProductService';
 
-export default function DataTableDoc() {
+export default function DataTableDemo() {
     const [products, setProducts] = useState<Product[]>(null);
     const [selectedProduct, setSelectedProduct] = useState<Product>(null);
-    
+
     const op = useRef<OverlayPanel>(null);
     const toast = useRef<Toast>(null);
     const isMounted = useRef(false);
 
-    const product = selectedProduct && (
-        <div className="p-2">
+    const selectedProductContent = selectedProduct && (
+        <div className="p-5 surface-card shadow-2 border-round">
             <div className="relative">
-                <img src={'images/product/' + selectedProduct.image} alt={selectedProduct.name} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'}></img>
+                <img src={'https://primefaces.org/cdn/primereact/images/product/' + selectedProduct.image} alt={selectedProduct.name}></img>
             </div>
             <div className="flex align-items-center justify-content-between mt-3 mb-2">
                 <span className="text-900 font-medium text-xl">{selectedProduct.name}</span>
@@ -196,12 +189,12 @@ export default function DataTableDoc() {
         return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
     };
 
-    const onProductSelect = (e: DataTableSelectionChangeParams) => {
+    const onProductSelect = (e: DataTableSelectionChangeEvent) => {
         setSelectedProduct(e.value);
     };
 
     const imageBody = (rowData: Product) => {
-        return <img src={\`images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="w-4rem shadow-1" />
+        return <img src={\`https://primefaces.org/cdn/primereact/images/product/\${rowData.image}\`} alt={rowData.image} className="w-4rem shadow-1" />
     };
 
     const priceBody = (rowData: Product) => {
@@ -209,30 +202,29 @@ export default function DataTableDoc() {
     };
 
     return (
-        <div>
+        <div className="card flex flex-column align-items-center gap-3">
             <Toast ref={toast} />
-            <Button style={{ minWidth: '15rem' }} type="button" icon="pi pi-search" label={selectedProduct ? selectedProduct.name : 'Select a Product'} onClick={(e) => op.current.toggle(e)} aria-haspopup aria-controls="overlay_panel" />
-            {selectedProduct && product}
-            <OverlayPanel ref={op} showCloseIcon id="overlay_panel" style={{ width: '450px' }}>
-                <DataTable value={products} selectionMode="single" paginator rows={5} selection={selectedProduct} onSelectionChange={onProductSelect}>
-                    <Column field="name" header="Name" sortable />
+            <Button type="button" icon="pi pi-search" label="Search" onClick={(e) => op.current.toggle(e)} />
+            {selectedProductContent}
+            <OverlayPanel ref={op} showCloseIcon>
+                <DataTable value={products} selectionMode="single" paginator rows={5} selection={selectedProduct} onSelectionChange={(e) => setSelectedProduct(e.value)}>
+                    <Column field="name" header="Name" sortable style={{minWidth: '12rem'}} />
                     <Column header="Image" body={imageBody} />
-                    <Column field="price" header="Price" sortable body={priceBody} />
+                    <Column field="price" header="Price" sortable body={priceBody} style={{minWidth: '8rem'}} />
                 </DataTable>
             </OverlayPanel>
         </div>
-
     );
 }
         `,
         data: `
-/* ProductService */        
+/* ProductService */
 {
     id: '1000',
     code: 'f230fh0g3',
     name: 'Bamboo Watch',
     description: 'Product Description',
-    image: 'bamboo-watch.jpg',
+    image: '/bamboo-watch.jpg',
     price: 65,
     category: 'Accessories',
     quantity: 24,
@@ -246,18 +238,17 @@ export default function DataTableDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                {/* TO DO: Add demo content. */}
-                <p></p>
+                <p>An example that displays a DataTable inside a popup to select an item.</p>
             </DocSectionText>
-            <div className="card flex flex-column align-items-center gap-2">
+            <div className="card flex flex-column align-items-center gap-3">
                 <Toast ref={toast} />
-                <Button style={{ minWidth: '10rem' }} type="button" icon="pi pi-search" label="Search" onClick={(e) => op.current.toggle(e)} aria-haspopup aria-controls="overlay_panel" />
-                {selectedProduct && product}
-                <OverlayPanel ref={op} showCloseIcon id="overlay_panel" style={{ width: '450px' }}>
-                    <DataTable value={products} selectionMode="single" paginator rows={5} selection={selectedProduct} onSelectionChange={onProductSelect}>
-                        <Column field="name" header="Name" sortable />
-                        <Column header="Image" body={imageBody} style={{ width: 'px' }} />
-                        <Column field="price" header="Price" sortable body={priceBody} />
+                <Button type="button" icon="pi pi-search" label="Search" onClick={(e) => op.current.toggle(e)} />
+                {selectedProductContent}
+                <OverlayPanel ref={op} showCloseIcon>
+                    <DataTable value={products} selectionMode="single" paginator rows={5} selection={selectedProduct} onSelectionChange={(e) => setSelectedProduct(e.value)}>
+                        <Column field="name" header="Name" sortable style={{ minWidth: '12rem' }} />
+                        <Column header="Image" body={imageBody} />
+                        <Column field="price" header="Price" sortable body={priceBody} style={{ minWidth: '8rem' }} />
                     </DataTable>
                 </OverlayPanel>
             </div>

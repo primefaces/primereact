@@ -110,7 +110,7 @@ export function BasicDoc(props) {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -132,13 +132,13 @@ export function BasicDoc(props) {
 
     const code = {
         basic: `
-<TieredMenu model={items} />
+<TieredMenu model={items} breakpoint="767px" />
         `,
         javascript: `
-import React from 'react'; 
+import React from 'react';
 import { TieredMenu } from 'primereact/tieredmenu';
 
-export default function BasicDoc() {
+export default function BasicDemo() {
     const items = [
         {
             label: 'File',
@@ -246,7 +246,7 @@ export default function BasicDoc() {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -267,16 +267,17 @@ export default function BasicDoc() {
     ];
 
     return (
-        <TieredMenu model={items} />
+        <TieredMenu model={items} breakpoint="767px" />
     )
 }
         `,
         typescript: `
-import React from 'react'; 
+import React from 'react';
 import { TieredMenu } from 'primereact/tieredmenu';
+import { MenuItem } from 'primereact/menuitem';
 
-export default function BasicDoc() {
-const items = [
+export default function BasicDemo() {
+    const items: MenuItem[] = [
         {
             label: 'File',
             icon: 'pi pi-fw pi-file',
@@ -383,7 +384,7 @@ const items = [
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -402,9 +403,9 @@ const items = [
             icon: 'pi pi-fw pi-power-off'
         }
     ];
-    
+
     return (
-        <TieredMenu model={items} />
+        <TieredMenu model={items} breakpoint="767px" />
     )
 }
         `
@@ -413,10 +414,12 @@ const items = [
     return (
         <>
             <DocSectionText {...props}>
-                <p>Menu requires a collection of menuitems as its model.</p>
+                <p>
+                    TieredMenu requires a collection of menuitems as its <i>model</i>.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <TieredMenu model={items} />
+                <TieredMenu model={items} breakpoint="767px" />
             </div>
             <DocSectionCode code={code} />
         </>

@@ -2,7 +2,7 @@
  *
  * DataScroller displays data with on demand loading using scroll.
  *
- * [Live Demo](https://www.primefaces.org/primereact/datascroller/)
+ * [Live Demo](https://www.primereact.org/datascroller/)
  *
  * @module datascroller
  *
@@ -59,7 +59,8 @@ export interface DataScrollerProps extends Omit<React.DetailedHTMLProps<React.HT
      */
     inline?: boolean | undefined;
     /**
-     * @todo Write the documentation.
+     * Defines if data is loaded and interacted with in lazy manner.
+     * @defaultValue false
      */
     lazy?: boolean | undefined;
     /**
@@ -80,7 +81,7 @@ export interface DataScrollerProps extends Omit<React.DetailedHTMLProps<React.HT
     value?: any[] | undefined;
     /**
      * Function that gets an item in the value and returns the content for it.
-     * @param {any} item - @todo Write the documentation.
+     * @param {*} item - Current item
      */
     itemTemplate?(item: any): React.ReactNode | undefined;
     /**
@@ -91,11 +92,19 @@ export interface DataScrollerProps extends Omit<React.DetailedHTMLProps<React.HT
 }
 
 /**
+ * **PrimeReact - DataScroller**
+ *
+ * _DataScroller displays data with on demand loading using scroll._
+ *
+ * [Live Demo](https://www.primereact.org/datascroller/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class DataScroller extends React.Component<DataScrollerProps, any> {
     /**
-     * @todo Write the documentation.
+     * Used to load data manually
      */
     public load(): void;
     /**

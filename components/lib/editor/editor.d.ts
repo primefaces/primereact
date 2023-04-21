@@ -2,7 +2,7 @@
  *
  * Editor is rich text editor component based on Quill.
  *
- * [Live Demo](https://www.primefaces.org/primereact/editor/)
+ * [Live Demo](https://www.primereact.org/editor/)
  *
  * @module editor
  *
@@ -115,6 +115,14 @@ export interface EditorProps extends Omit<React.DetailedHTMLProps<React.InputHTM
 }
 
 /**
+ * **PrimeReact - Editor**
+ *
+ * _Editor is rich text editor component based on Quill._
+ *
+ * [Live Demo](https://www.primereact.org/editor/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class Editor extends React.Component<EditorProps, any> {

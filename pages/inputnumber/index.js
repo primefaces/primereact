@@ -1,22 +1,17 @@
-import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/inputnumber/apidoc';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/inputnumber/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/inputnumber/styledoc';
 import { ButtonsDoc } from '../../components/doc/inputnumber/buttonsdoc';
 import { CurrencyDoc } from '../../components/doc/inputnumber/currencydoc';
 import { DisabledDoc } from '../../components/doc/inputnumber/disableddoc';
 import { FloatLabelDoc } from '../../components/doc/inputnumber/floatlabeldoc';
+import { FormikDoc } from '../../components/doc/inputnumber/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/inputnumber/form/hookformdoc';
 import { ImportDoc } from '../../components/doc/inputnumber/importdoc';
 import { InvalidDoc } from '../../components/doc/inputnumber/invaliddoc';
 import { LocaleDoc } from '../../components/doc/inputnumber/localedoc';
 import { NumeralsDoc } from '../../components/doc/inputnumber/numberalsdoc';
-import { PrefixDoc } from '../../components/doc/inputnumber/prefixdoc';
-import { FormikDoc } from '../../components/doc/inputnumber/validation/formikdoc';
-import { HookFormDoc } from '../../components/doc/inputnumber/validation/hookformdoc';
-import { ValidationDoc } from '../../components/doc/inputnumber/validationdoc';
+import { PrefixSuffixDoc } from '../../components/doc/inputnumber/prefixsuffixdoc';
+import { StyleDoc } from '../../components/doc/inputnumber/styledoc';
 import { VerticalDoc } from '../../components/doc/inputnumber/verticaldoc';
 
 const InputNumberDemo = () => {
@@ -25,21 +20,6 @@ const InputNumberDemo = () => {
             id: 'import',
             label: 'Import',
             component: ImportDoc
-        },
-        {
-            id: 'floatlabel',
-            label: 'Float Label',
-            component: FloatLabelDoc
-        },
-        {
-            id: 'invalid',
-            label: 'Invalid',
-            component: InvalidDoc
-        },
-        {
-            id: 'disabled',
-            label: 'Disabled',
-            component: DisabledDoc
         },
         {
             id: 'numerals',
@@ -57,9 +37,9 @@ const InputNumberDemo = () => {
             component: CurrencyDoc
         },
         {
-            id: 'prefix',
-            label: 'Prefix and Suffix',
-            component: PrefixDoc
+            id: 'prefixsuffix',
+            label: 'Prefix & Suffix',
+            component: PrefixSuffixDoc
         },
         {
             id: 'buttons',
@@ -72,9 +52,24 @@ const InputNumberDemo = () => {
             component: VerticalDoc
         },
         {
-            id: 'validation',
-            label: 'Validation',
-            description: 'Validate using popular React validation libraries.',
+            id: 'floatlabel',
+            label: 'Float Label',
+            component: FloatLabelDoc
+        },
+        {
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
+        },
+        {
+            id: 'form',
+            label: 'Form',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
                     id: 'formik',
@@ -97,45 +92,10 @@ const InputNumberDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                }
-            ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React InputNumber Component</title>
-                <meta name="description" content="InputNumber is an input component to provide numerical input." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>InputNumber</h1>
-                    <p>InputNumber is an input component to provide numerical input.</p>
-                </div>
-
-                <DocActions github="inputnumber/index.js" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React InputNumber Component" header="InputNumber" description="InputNumber is an input component to provide numerical input." componentDocs={docs} apiDocs={['InputNumber']} />;
 };
 
 export default InputNumberDemo;

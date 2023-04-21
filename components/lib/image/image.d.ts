@@ -2,12 +2,13 @@
  *
  * Displays a single image with preview and tranformation options.
  *
- * [Live Demo](https://www.primefaces.org/primereact/image/)
+ * [Live Demo](https://www.primereact.org/image/)
  *
  * @module image
  *
  */
 import * as React from 'react';
+import { IconType } from '../utils/utils';
 
 /**
  * Defines valid properties in Image component. In addition to these, all properties of HTMLSpanElement can be used in this component.
@@ -15,7 +16,7 @@ import * as React from 'react';
  */
 export interface ImageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'ref'> {
     /**
-     * @todo Write the documentation.
+     * Specifies an alternate text for an area, if the image cannot be displayed.
      */
     alt?: string | undefined;
     /**
@@ -29,7 +30,31 @@ export interface ImageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      */
     downloadable?: boolean | undefined;
     /**
-     * @todo Write the documentation.
+     * Icon of the download button.
+     */
+    downloadIcon?: IconType<ImageProps> | undefined;
+    /**
+     * Icon of the rotate right button.
+     */
+    rotateRightIcon?: IconType<ImageProps> | undefined;
+    /**
+     * Icon of the rotate left button.
+     */
+    rotateLeftIcon?: IconType<ImageProps> | undefined;
+    /**
+     * Icon of the zoom out button.
+     */
+    zoomOutIcon?: IconType<ImageProps> | undefined;
+    /**
+     * Icon of the zoom in button.
+     */
+    zoomInIcon?: IconType<ImageProps> | undefined;
+    /**
+     * Icon of the close button.
+     */
+    closeIcon?: IconType<ImageProps> | undefined;
+    /**
+     * Height of the image element.
      */
     height?: string | undefined;
     /**
@@ -46,15 +71,20 @@ export interface ImageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      */
     preview?: boolean | undefined;
     /**
+     * Changing the default icon when the image is hovered in preview mode.
+     */
+    indicatorIcon?: IconType<ImageProps> | undefined;
+    /**
      * Specifies the path to the image.
      */
     src?: string | undefined;
     /**
      * Changing the default icon when the image is hovered in preview mode.
+     * @deprecated Since v9, use `indicatorIcon` instead.
      */
     template?: any | undefined;
     /**
-     * @todo Write the documentation.
+     * Width of the image element.
      */
     width?: string | undefined;
     /**
@@ -72,6 +102,14 @@ export interface ImageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
 }
 
 /**
+ * **PrimeReact - Image**
+ *
+ * _Displays a single image with preview and tranformation options._
+ *
+ * [Live Demo](https://www.primereact.org/image/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class Image extends React.Component<ImageProps, any> {
@@ -89,7 +127,8 @@ export declare class Image extends React.Component<ImageProps, any> {
      */
     public getElement(): HTMLSpanElement;
     /**
-     * @todo Write the documentation.
+     * Used to get image element
+     * @return {HTMLImageElement} Image element
      */
     public getImage(): HTMLImageElement;
 }

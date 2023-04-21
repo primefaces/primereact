@@ -2,59 +2,23 @@
  *
  * TriStateCheckbox is used to select either "true", "false" or "null" as the value.
  *
- * [Live Demo](https://www.primefaces.org/primereact/tristatecheckbox/)
+ * [Live Demo](https://www.primereact.org/tristatecheckbox/)
  *
  * @module tristatecheckbox
  *
  */
 import * as React from 'react';
-import TooltipOptions from '../tooltip/tooltipoptions';
-
-/**
- * @todo Write the documentation.
- */
-interface TriStateCheckboxChangeTargetOptions {
-    /**
-     * @todo Write the documentation.
-     */
-    name: string;
-    /**
-     * @todo Write the documentation.
-     */
-    id: string;
-    /**
-     * @todo Write the documentation.
-     */
-    value: boolean | undefined | null;
-}
+import { TooltipOptions } from '../tooltip/tooltipoptions';
+import { FormEvent } from '../ts-helpers';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom change event.
  * @see {@link TriStateCheckboxProps.onChange}
+ * @extends {FormEvent}
  * @event
  */
-interface TriStateCheckboxChangeEvents {
-    /**
-     * Browser event
-     */
-    originalEvent: React.SyntheticEvent;
-    /**
-     * Current Value
-     */
-    value: boolean | undefined | null;
-    /**
-     * @todo Write the documentation.
-     */
-    stopPropagation(): void;
-    /**
-     * @todo Write the documentation.
-     */
-    preventDefault(): void;
-    /**
-     * @todo Write the documentation.
-     */
-    target: TriStateCheckboxChangeTargetOptions;
-}
+interface TriStateCheckboxChangeEvent extends FormEvent<boolean> {}
 
 /**
  * Defines valid properties in TriStateCheckbox component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -76,6 +40,14 @@ export interface TriStateCheckboxProps extends Omit<React.DetailedHTMLProps<Reac
      */
     readOnly?: boolean | undefined;
     /**
+     * Icon of the checkbox when checked.
+     */
+    checkIcon?: IconType<TriStateCheckboxProps> | undefined;
+    /**
+     * Icon of the checkbox when unchecked.
+     */
+    uncheckIcon?: IconType<TriStateCheckboxProps> | undefined;
+    /**
      * Content of the tooltip.
      */
     tooltip?: string | undefined;
@@ -85,9 +57,9 @@ export interface TriStateCheckboxProps extends Omit<React.DetailedHTMLProps<Reac
     tooltipOptions?: TooltipOptions | undefined;
     /**
      * Callback to invoke on value change
-     * @param {TriStateCheckboxChangeEvents} event - Browser event.
+     * @param {TriStateCheckboxChangeEvent} event - Browser event.
      */
-    onChange?(event: TriStateCheckboxChangeEvents): void;
+    onChange?(event: TriStateCheckboxChangeEvent): void;
     /**
      * Used to get the child elements of the component.
      * @readonly
@@ -96,6 +68,14 @@ export interface TriStateCheckboxProps extends Omit<React.DetailedHTMLProps<Reac
 }
 
 /**
+ * **PrimeReact - TriStateCheckbox**
+ *
+ * _TriStateCheckbox is used to select either "true", "false" or "null" as the value._
+ *
+ * [Live Demo](https://www.primereact.org/tristatecheckbox/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class TriStateCheckbox extends React.Component<TriStateCheckboxProps, any> {

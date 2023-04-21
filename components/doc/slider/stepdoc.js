@@ -8,7 +8,7 @@ export function StepDoc(props) {
 
     const code = {
         basic: `
-<Slider value={value} onChange={(e) => setValue(e.value)} className="w-14rem" step={20} />
+<Slider value={value} onChange={(e) => setValue(e.value)} step={20} />
         `,
         javascript: `
 import React, { useState } from "react";
@@ -18,19 +18,23 @@ export default function StepDemo() {
     const [value, setValue] = useState(20);
 
     return (
-        <Slider value={value} onChange={(e) => setValue(e.value)} className="w-14rem" step={20} />
+        <div className="card flex justify-content-center">
+            <Slider value={value} onChange={(e) => setValue(e.value)} className="w-14rem" step={20} />
+        </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { Slider, SliderChangeParams } from "primereact/slider";
+import { Slider, SliderChangeEvent } from "primereact/slider";
 
 export default function StepDemo() {
     const [value, setValue] = useState<number>(20);
 
     return (
-        <Slider value={value} onChange={(e: SliderChangeParams) => setValue(e.value)} className="w-14rem" step={20} />
+        <div className="card flex justify-content-center">
+            <Slider value={value} onChange={(e: SliderChangeEvent) => setValue(e.value)} className="w-14rem" step={20} />
+        </div>
     )
 }
         `

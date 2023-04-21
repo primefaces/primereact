@@ -107,7 +107,7 @@ export function BasicDoc(props) {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -121,13 +121,13 @@ export function BasicDoc(props) {
     ];
     const code = {
         basic: `
-<PanelMenu model={items} style={{ width: '22rem' }}/>        
+<PanelMenu model={items} className="w-full md:w-25rem" />   
 `,
         javascript: `
 import React from 'react'; 
 import { PanelMenu } from 'primereact/panelmenu';
 
-export default function BasicDoc() {
+export default function BasicDemo() {
     const items = [
         {
             label:'File',
@@ -232,7 +232,7 @@ export default function BasicDoc() {
                     ]
                 },
                 {
-                    label:'Archieve',
+                    label:'Archive',
                     icon:'pi pi-fw pi-calendar-times',
                     items:[
                     {
@@ -246,16 +246,19 @@ export default function BasicDoc() {
     ];
 
     return (
-        <PanelMenu model={items} style={{ width: '22rem' }}/>
+        <div className="card flex justify-content-center">
+            <PanelMenu model={items} className="w-full md:w-25rem" />
+        </div>
     )
 }
         `,
         typescript: `
 import React from 'react'; 
 import { PanelMenu } from 'primereact/panelmenu';
+import { MenuItem } from 'primereact/menuitem';
 
-export default function BasicDoc() {
-    const items = [
+export default function BasicDemo() {
+    const items: MenuItem[] = [
         {
             label:'File',
             icon:'pi pi-fw pi-file',
@@ -359,7 +362,7 @@ export default function BasicDoc() {
                     ]
                 },
                 {
-                    label:'Archieve',
+                    label:'Archive',
                     icon:'pi pi-fw pi-calendar-times',
                     items:[
                     {
@@ -372,7 +375,9 @@ export default function BasicDoc() {
         }
     ];
     return (
-        <PanelMenu model={items} style={{ width: '22rem' }}/>
+        <div className="card flex justify-content-center">
+            <PanelMenu model={items} className="w-full md:w-25rem" />
+        </div>
     )
 }
         `
@@ -381,10 +386,12 @@ export default function BasicDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>PanelMenu requires a collection of menuitems as its model.</p>
+                <p>
+                    PanelMenu requires a collection of menuitems as its <i>model</i>.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <PanelMenu model={items} style={{ width: '22rem' }} />
+                <PanelMenu model={items} className="w-full md:w-25rem" />
             </div>
             <DocSectionCode code={code} />
         </>

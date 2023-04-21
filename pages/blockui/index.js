@@ -1,15 +1,11 @@
-import Head from 'next/head';
 import React from 'react';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/blockui/apidoc';
 import { AccessibilityDoc } from '../../components/doc/blockui/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/blockui/styledoc';
-import { ImportDoc } from '../../components/doc/blockui/importdoc';
 import { BasicDoc } from '../../components/doc/blockui/basicdoc';
-import { TemplateDoc } from '../../components/doc/blockui/templatedoc';
 import { DocumentDoc } from '../../components/doc/blockui/documentdoc';
-import { DocActions } from '../../components/doc/common/docactions';
+import { ImportDoc } from '../../components/doc/blockui/importdoc';
+import { StyleDoc } from '../../components/doc/blockui/styledoc';
+import { TemplateDoc } from '../../components/doc/blockui/templatedoc';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 
 const BlockUIDemo = () => {
     const docs = [
@@ -42,45 +38,10 @@ const BlockUIDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                }
-            ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React BlockUI Component</title>
-                <meta name="description" content="BlockUI can block certain elements or the whole page." />
-            </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>BlockUI</h1>
-                    <p>BlockUI can block certain elements or the whole page.</p>
-                </div>
-                <DocActions github="blockui/index.js" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React BlockUI Component" header="BlockUI" description="BlockUI can block certain elements or the whole page." componentDocs={docs} apiDocs={['BlockUI']} />;
 };
 
 export default BlockUIDemo;

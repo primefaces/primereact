@@ -1,9 +1,13 @@
 import * as React from 'react';
+import { ColumnBase } from '../column/ColumnBase';
 import { usePrevious } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { ColumnFilter } from './ColumnFilter';
 import { HeaderCheckbox } from './HeaderCheckbox';
+import { SortAltIcon } from '../icons/sortalt';
+import { SortAmountDownIcon } from '../icons/sortamountdown';
+import { SortAmountUpAltIcon } from '../icons/sortamountupalt';
 
 export const HeaderCell = React.memo((props) => {
     const [styleObjectState, setStyleObjectState] = React.useState({});
@@ -19,7 +23,7 @@ export const HeaderCell = React.memo((props) => {
     };
 
     const getColumnProp = (...args) => {
-        return props.column ? (typeof args[0] === 'string' ? props.column.props[args[0]] : (args[0] || props.column).props[args[1]]) : null;
+        return props.column ? (typeof args[0] === 'string' ? ColumnBase.getCProp(props.column, args[0]) : ColumnBase.getCProp(args[0] || props.column, args[1])) : null;
     };
 
     const getStyle = () => {
@@ -55,10 +59,8 @@ export const HeaderCell = React.memo((props) => {
 
     const getAriaSort = ({ sorted, sortOrder }) => {
         if (getColumnProp('sortable')) {
-            const sortIcon = sorted ? (sortOrder < 0 ? 'pi-sort-amount-down' : 'pi-sort-amount-up-alt') : 'pi-sort-alt';
-
-            if (sortIcon === 'pi-sort-amount-down') return 'descending';
-            else if (sortIcon === 'pi-sort-amount-up-alt') return 'ascending';
+            if (sorted && sortOrder < 0) return 'descending';
+            else if (sorted && sortOrder > 0) return 'ascending';
             else return 'none';
         }
 
@@ -213,10 +215,11 @@ export const HeaderCell = React.memo((props) => {
 
     const createSortIcon = ({ sorted, sortOrder }) => {
         if (getColumnProp('sortable')) {
-            let sortIcon = sorted ? (sortOrder < 0 ? 'pi-sort-amount-down' : 'pi-sort-amount-up-alt') : 'pi-sort-alt';
-            let className = classNames('p-sortable-column-icon pi pi-fw', sortIcon);
+            let iconClassName = 'p-sortable-column-icon';
+            let icon = sorted ? sortOrder < 0 ? <SortAmountDownIcon className={iconClassName} /> : <SortAmountUpAltIcon className={iconClassName} /> : <SortAltIcon className={iconClassName} />;
+            let sortIcon = IconUtils.getJSXIcon(props.sortIcon || icon, { className: iconClassName }, { props, sorted, sortOrder });
 
-            return <span className={className}></span>;
+            return sortIcon;
         }
 
         return null;

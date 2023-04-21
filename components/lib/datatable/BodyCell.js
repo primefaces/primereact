@@ -1,11 +1,18 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
+import { ColumnBase } from '../column/ColumnBase';
 import { useEventListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { RowCheckbox } from './RowCheckbox';
 import { RowRadioButton } from './RowRadioButton';
+import { CheckIcon } from '../icons/check';
+import { TimesIcon } from '../icons/times';
+import { PencilIcon } from '../icons/pencil';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { BarsIcon } from '../icons/bars';
 
 export const BodyCell = React.memo((props) => {
     const [editingState, setEditingState] = React.useState(props.editing);
@@ -18,7 +25,7 @@ export const BodyCell = React.memo((props) => {
     const tabindexTimeout = React.useRef(null);
     const initFocusTimeout = React.useRef(null);
 
-    const getColumnProp = (prop) => (props.column ? props.column.props[prop] : null);
+    const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
     const field = getColumnProp('field') || `field_${props.index}`;
     const editingKey = props.dataKey ? (props.rowData && props.rowData[props.dataKey]) || props.rowIndex : props.rowIndex;
 
@@ -468,7 +475,7 @@ export const BodyCell = React.memo((props) => {
     }, [props.editingMeta]);
 
     React.useEffect(() => {
-        if (props.editMode === 'cell' || props.editMode === 'row') {
+        if (props.editMode === 'row') {
             const callbackParams = getCellCallbackParams();
             const params = { ...callbackParams, editing: editingState, editingKey };
 
@@ -543,28 +550,31 @@ export const BodyCell = React.memo((props) => {
             content = showSelection && (
                 <>
                     {selectionMode === 'single' && <RowRadioButton checked={props.selected} onChange={onRadioChange} tabIndex={props.tabIndex} tableSelector={props.tableSelector} ariaLabel={label} />}
-                    {selectionMode === 'multiple' && <RowCheckbox checked={props.selected} onChange={onCheckboxChange} tabIndex={props.tabIndex} ariaLabel={label} />}
+                    {selectionMode === 'multiple' && <RowCheckbox checked={props.selected} onChange={onCheckboxChange} tabIndex={props.tabIndex} ariaLabel={label} checkIcon={props.checkIcon} />}
                 </>
             );
         } else if (rowReorder) {
             const showReorder = props.showRowReorderElement ? props.showRowReorderElement(props.rowData, { rowIndex: props.rowIndex, props: props.tableProps }) : true;
+            const rowReorderIconClassName = 'p-datatable-reorderablerow-handle';
+            const rowReorderIcon = getColumnProp('rowReorderIcon') || <BarsIcon className={rowReorderIconClassName} />;
 
-            content = showReorder && <i className={classNames('p-datatable-reorderablerow-handle', getColumnProp('rowReorderIcon'))}></i>;
+            content = showReorder && IconUtils.getJSXIcon(rowReorderIcon, { className: rowReorderIconClassName }, { props });
         } else if (expander) {
-            const iconClassName = classNames('p-row-toggler-icon', props.expanded ? props.expandedRowIcon : props.collapsedRowIcon);
+            const iconProps = { className: 'p-row-toggler-icon', 'aria-hidden': true };
+            const icon = props.expanded ? props.expandedRowIcon || <ChevronDownIcon {...iconProps} /> : props.collapsedRowIcon || <ChevronRightIcon {...iconProps} />;
+            const togglerIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
             const ariaControls = `${props.tableSelector}_content_${props.rowIndex}_expanded`;
             const ariaLabelField = props.selectionAriaLabel || props.tableProps.dataKey;
             const ariaLabelText = ObjectUtils.resolveFieldData(props.rowData, ariaLabelField);
             const label = `${props.expanded ? ariaLabel('collapseLabel') : ariaLabel('expandLabel')} ${ariaLabelText}`;
             const expanderProps = {
                 onClick: onRowToggle,
-                className: 'p-row-toggler p-link',
-                iconClassName
+                className: 'p-row-toggler p-link'
             };
 
             content = (
-                <button className={expanderProps.className} onClick={expanderProps.onClick} type="button" aria-expanded={props.expanded} aria-controls={ariaControls} tabIndex={props.tabIndex} aria-label={label}>
-                    <span className={expanderProps.iconClassName} aria-hidden="true"></span>
+                <button {...expanderProps} type="button" aria-expanded={props.expanded} aria-controls={ariaControls} tabIndex={props.tabIndex} aria-label={label}>
+                    {togglerIcon}
                     <Ripple />
                 </button>
             );
@@ -575,26 +585,30 @@ export const BodyCell = React.memo((props) => {
             }
         } else if (isRowEditor && rowEditor) {
             let rowEditorProps = {};
+            let rowEditorSaveIconClassName = 'p-row-editor-save-icon',
+                rowEditorCancelIconClassName = 'p-row-editor-cancel-icon',
+                rowEditorInitIconClassName = 'p-row-editor-init-icon';
+            const rowEditorSaveIcon = IconUtils.getJSXIcon(props.rowEditorSaveIcon || <CheckIcon className={rowEditorSaveIconClassName} />, { className: rowEditorSaveIconClassName }, { props });
+            const rowEditorCancelIcon = IconUtils.getJSXIcon(props.rowEditorCancelIcon || <TimesIcon className={rowEditorCancelIconClassName} />, { className: rowEditorCancelIconClassName }, { props });
+            const rowEditorInitIcon = IconUtils.getJSXIcon(props.rowEditorInitIcon || <PencilIcon className={rowEditorInitIconClassName} />, { className: rowEditorInitIconClassName }, { props });
 
             if (editingState) {
                 rowEditorProps = {
                     editing: true,
                     onSaveClick: onRowEditSave,
                     saveClassName: 'p-row-editor-save p-link',
-                    saveIconClassName: 'p-row-editor-save-icon pi pi-fw pi-check',
                     onCancelClick: onRowEditCancel,
-                    cancelClassName: 'p-row-editor-cancel p-link',
-                    cancelIconClassName: 'p-row-editor-cancel-icon pi pi-fw pi-times'
+                    cancelClassName: 'p-row-editor-cancel p-link'
                 };
 
                 content = (
                     <>
                         <button type="button" name="row-save" onClick={rowEditorProps.onSaveClick} className={rowEditorProps.saveClassName} tabIndex={props.tabIndex}>
-                            <span className={rowEditorProps.saveIconClassName}></span>
+                            {rowEditorSaveIcon}
                             <Ripple />
                         </button>
                         <button type="button" name="row-cancel" onClick={rowEditorProps.onCancelClick} className={rowEditorProps.cancelClassName} tabIndex={props.tabIndex}>
-                            <span className={rowEditorProps.cancelIconClassName}></span>
+                            {rowEditorCancelIcon}
                             <Ripple />
                         </button>
                     </>
@@ -603,13 +617,12 @@ export const BodyCell = React.memo((props) => {
                 rowEditorProps = {
                     editing: false,
                     onInitClick: onRowEditInit,
-                    initClassName: 'p-row-editor-init p-link',
-                    initIconClassName: 'p-row-editor-init-icon pi pi-fw pi-pencil'
+                    initClassName: 'p-row-editor-init p-link'
                 };
 
                 content = (
                     <button type="button" name="row-edit" onClick={rowEditorProps.onInitClick} className={rowEditorProps.initClassName} tabIndex={props.tabIndex}>
-                        <span className={rowEditorProps.initIconClassName}></span>
+                        {rowEditorInitIcon}
                         <Ripple />
                     </button>
                 );

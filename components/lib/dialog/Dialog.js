@@ -4,9 +4,15 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DialogBase } from './DialogBase';
+import { TimesIcon } from '../icons/times';
+import { WindowMaximizeIcon } from '../icons/windowmaximize';
+import { WindowMinimizeIcon } from '../icons/windowminimize';
 
-export const Dialog = React.forwardRef((props, ref) => {
+export const Dialog = React.forwardRef((inProps, ref) => {
+    const props = DialogBase.getProps(inProps);
+
     const uniqueId = props.id ? props.id : UniqueComponentId();
     const [idState, setIdState] = React.useState(uniqueId);
     const [maskVisibleState, setMaskVisibleState] = React.useState(false);
@@ -416,10 +422,13 @@ export const Dialog = React.forwardRef((props, ref) => {
     const createCloseIcon = () => {
         if (props.closable) {
             const ariaLabel = props.ariaCloseIconLabel || localeOption('close');
+            const iconProps = { className: 'p-dialog-header-close-icon', 'aria-hidden': true };
+            const icon = props.closeIcon || <TimesIcon {...iconProps} />;
+            const headerCloseIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
 
             return (
                 <button ref={closeRef} type="button" className="p-dialog-header-icon p-dialog-header-close p-link" aria-label={ariaLabel} onClick={onClose}>
-                    <span className="p-dialog-header-close-icon pi pi-times" aria-hidden="true"></span>
+                    {headerCloseIcon}
                     <Ripple />
                 </button>
             );
@@ -429,15 +438,21 @@ export const Dialog = React.forwardRef((props, ref) => {
     };
 
     const createMaximizeIcon = () => {
-        const iconClassName = classNames('p-dialog-header-maximize-icon pi', {
-            'pi-window-maximize': !maximized,
-            'pi-window-minimize': maximized
-        });
+        let icon;
+        const iconClassName = 'p-dialog-header-maximize-icon';
+
+        if (!maximized) {
+            icon = props.maximizeIcon || <WindowMaximizeIcon className={iconClassName} />;
+        } else {
+            icon = props.minimizeIcon || <WindowMinimizeIcon className={iconClassName} />;
+        }
+
+        const toggleIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
         if (props.maximizable) {
             return (
                 <button type="button" className="p-dialog-header-icon p-dialog-header-maximize p-link" onClick={toggleMaximize}>
-                    <span className={iconClassName}></span>
+                    {toggleIcon}
                     <Ripple />
                 </button>
             );
@@ -504,7 +519,7 @@ export const Dialog = React.forwardRef((props, ref) => {
     };
 
     const createElement = () => {
-        const otherProps = ObjectUtils.findDiffKeys(props, Dialog.defaultProps);
+        const otherProps = DialogBase.getOtherProps(props);
         const className = classNames('p-dialog p-component', props.className, {
             'p-dialog-rtl': props.rtl,
             'p-dialog-maximized': maximized,
@@ -571,52 +586,3 @@ export const Dialog = React.forwardRef((props, ref) => {
 });
 
 Dialog.displayName = 'Dialog';
-Dialog.defaultProps = {
-    __TYPE: 'Dialog',
-    appendTo: null,
-    ariaCloseIconLabel: null,
-    baseZIndex: 0,
-    blockScroll: false,
-    breakpoints: null,
-    className: null,
-    closable: true,
-    closeOnEscape: true,
-    contentClassName: null,
-    contentStyle: null,
-    dismissableMask: false,
-    draggable: true,
-    focusOnShow: true,
-    footer: null,
-    header: null,
-    headerClassName: null,
-    headerStyle: null,
-    icons: null,
-    id: null,
-    keepInViewport: true,
-    maskClassName: null,
-    maskStyle: null,
-    maximizable: false,
-    maximized: false,
-    minX: 0,
-    minY: 0,
-    modal: true,
-    onClick: null,
-    onPointerDown: null,
-    onDrag: null,
-    onDragEnd: null,
-    onDragStart: null,
-    onHide: null,
-    onMaskClick: null,
-    onMaximize: null,
-    onResize: null,
-    onResizeEnd: null,
-    onResizeStart: null,
-    onShow: null,
-    position: 'center',
-    resizable: true,
-    rtl: false,
-    showHeader: true,
-    style: null,
-    transitionOptions: null,
-    visible: false
-};

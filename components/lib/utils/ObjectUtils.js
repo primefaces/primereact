@@ -152,6 +152,20 @@ export default class ObjectUtils {
         return this.isFunction(obj) ? obj(...params) : obj;
     }
 
+    static getProp(props, prop = '', defaultProps = {}) {
+        const value = props ? props[prop] : undefined;
+
+        return value === undefined ? defaultProps[prop] : value;
+    }
+
+    static getMergedProps(props, defaultProps) {
+        return Object.assign({}, defaultProps, props);
+    }
+
+    static getDiffProps(props, defaultProps) {
+        return this.findDiffKeys(props, defaultProps);
+    }
+
     static getPropValue(obj, ...params) {
         let methodParams = params;
 
@@ -160,6 +174,49 @@ export default class ObjectUtils {
         }
 
         return this.isFunction(obj) ? obj(...methodParams) : obj;
+    }
+
+    static getComponentProp(component, prop = '', defaultProps = {}) {
+        return this.isNotEmpty(component) ? this.getProp(component.props, prop, defaultProps) : undefined;
+    }
+
+    static getComponentProps(component, defaultProps) {
+        return this.isNotEmpty(component) ? this.getMergedProps(component.props, defaultProps) : undefined;
+    }
+
+    static getComponentDiffProps(component, defaultProps) {
+        return this.isNotEmpty(component) ? this.getDiffProps(component.props, defaultProps) : undefined;
+    }
+
+    static isValidChild(child, type, validTypes) {
+        /* eslint-disable */
+        if (child) {
+            const childType = this.getComponentProp(child, '__TYPE') || (child.type ? child.type.displayName : undefined);
+            const isValid = childType === type;
+
+            try {
+                if (process.env.NODE_ENV !== 'production' && !isValid) {
+                    if (validTypes && validTypes.includes(childType)) {
+                        return false;
+                    }
+                    const messageTypes = validTypes ? validTypes : [type];
+
+                    console.error(
+                        `PrimeReact: Unexpected type; '${childType}'. Parent component expects a ${messageTypes.map((t) => `${t}`).join(' or ')} component or a component with the ${messageTypes
+                            .map((t) => `__TYPE="${t}"`)
+                            .join(' or ')} property as a child component.`
+                    );
+                    return false;
+                }
+            } catch (error) {
+                // NOOP
+            }
+
+            return isValid;
+        }
+
+        return false;
+        /* eslint-enable */
     }
 
     static getRefElement(ref) {

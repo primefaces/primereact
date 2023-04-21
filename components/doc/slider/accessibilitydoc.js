@@ -1,8 +1,17 @@
-import { DocSectionText } from '../common/docsectiontext';
 import { DevelopmentSection } from '../common/developmentsection';
-import { CodeHighlight } from '../common/codehighlight';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function AccessibilityDoc() {
+    const code = {
+        basic: `
+<span id="label_number">Number</span>
+<Slider aria-labelledby="label_number" />
+
+<Slider aria-label="Number" />
+    `
+    };
+
     return (
         <DevelopmentSection>
             <DocSectionText id="accessibility" label="Accessibility">
@@ -12,14 +21,8 @@ export function AccessibilityDoc() {
                     defined using
                     <i>aria-labelledby</i> and <i>aria-label</i> props.
                 </p>
-                <CodeHighlight>
-                    {`
-<span id="label_number">Number</span>
-<Slider aria-labelledby="label_number" />
 
-<Slider aria-label="Number" />
-`}
-                </CodeHighlight>
+                <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
 
                 <h3>Keyboard Support</h3>
                 <div className="doc-tablewrapper">

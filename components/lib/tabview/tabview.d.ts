@@ -2,7 +2,7 @@
  *
  * TabView is a container component to group content with tabs.
  *
- * [Live Demo](https://www.primefaces.org/primereact/tabview/)
+ * [Live Demo](https://www.primereact.org/tabview/)
  *
  * Helper Components:
  *
@@ -12,57 +12,60 @@
  *
  */
 import * as React from 'react';
+import { IconType } from '../utils/utils';
 
 /**
- * @todo Write the documantation
+ * Custom Tabpanel header template options
  */
 interface TabPanelHeaderTemplateOptions {
     /**
-     * @todo Write the documantation
+     * Style class of the header element.
      */
     className: string;
     /**
-     * @todo Write the documantation
+     * Style class of the header title element.
      */
     titleClassName: string;
     /**
-     * @todo Write the documantation
+     * Callback to invoke on click.
+     * @param {React.MouseEvent<HTMLElement>} event - Browser event.
      */
     onClick(event: React.MouseEvent<HTMLElement>): void;
     /**
-     * @todo Write the documantation
+     * Callback to invoke when the key pressed.
+     * @param {React.KeyboardEvent<HTMLElement>} event - Browser event.
      */
     onKeyDown(event: React.KeyboardEvent<HTMLElement>): void;
     /**
-     * @todo Write the documantation
+     * Left icon of the tab header.
      */
     leftIconElement: JSX.Element;
     /**
-     * @todo Write the documantation
+     * The title element of the tab header.
      */
     titleElement: JSX.Element;
     /**
-     * @todo Write the documantation
+     * Right icon of the tab header.
      */
     rightIconElement: JSX.Element;
     /**
-     * @todo Write the documantation
+     * The JSX element of the tab header.
      */
     element: JSX.Element;
     /**
-     * @todo Write the documantation
+     * The props of the tab panel component.
      */
     props: TabPanelProps;
     /**
-     * @todo Write the documantation
+     * The index of the tab header.
      */
     index: number;
     /**
-     * @todo Write the documantation
+     * Whether the tab header is selected or not.
      */
     selected: boolean;
     /**
-     * @todo Write the documantation
+     * The aria-controls attribute of the tab header.
      */
     ariaControls: string;
 }
@@ -83,11 +86,23 @@ export interface TabPanelProps {
     /**
      * Icons can be placed at left of a header.
      */
-    leftIcon?: string | undefined;
+    leftIcon?: IconType<TabPanel> | undefined;
     /**
      * Icons can be placed at right of a header.
      */
-    rightIcon?: string | undefined;
+    rightIcon?: IconType<TabPanel> | undefined;
+    /**
+     * Previous button of the tab header.
+     */
+    prevButton?: IconType<TabPanel> | undefined;
+    /**
+     * Next button of the tab header.
+     */
+    nextButton?: IconType<TabPanel> | undefined;
+    /**
+     * Close button of the tab header.
+     */
+    closeIcon?: IconType<TabPanel> | undefined;
     /**
      * Whether the tab is disabled.
      * @defaultValue false
@@ -223,7 +238,16 @@ export interface TabViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
 }
 
 /**
+ * **PrimeReact - TabPanel**
+ *
+ * _TabView is a container component to group content with tabs._
+ *
+ * [Live Demo](https://www.primereact.org/tabview/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
+ *
  */
 // tslint:disable-next-line:max-classes-per-file
 export declare class TabView extends React.Component<TabViewProps, any> {

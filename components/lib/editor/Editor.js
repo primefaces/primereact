@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler } from '../utils/Utils';
+import { EditorBase } from './EditorBase';
 
 const QuillJS = (function () {
     try {
@@ -11,7 +12,9 @@ const QuillJS = (function () {
 })();
 
 export const Editor = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = EditorBase.getProps(inProps);
+
         const elementRef = React.useRef(null);
         const contentRef = React.useRef(null);
         const toolbarRef = React.useRef(null);
@@ -191,7 +194,7 @@ export const Editor = React.memo(
             }
         };
 
-        const otherProps = ObjectUtils.findDiffKeys(props, Editor.defaultProps);
+        const otherProps = EditorBase.getOtherProps(props);
         const className = classNames('p-component p-editor-container', props.className);
         const header = createToolbarHeader();
         const content = <div ref={contentRef} className="p-editor-content" style={props.style}></div>;
@@ -206,21 +209,3 @@ export const Editor = React.memo(
 );
 
 Editor.displayName = 'Editor';
-Editor.defaultProps = {
-    __TYPE: 'Editor',
-    id: null,
-    value: null,
-    style: null,
-    className: null,
-    placeholder: null,
-    readOnly: false,
-    modules: null,
-    formats: null,
-    theme: 'snow',
-    showHeader: true,
-    headerTemplate: null,
-    onTextChange: null,
-    onSelectionChange: null,
-    onLoad: null,
-    maxLength: null
-};

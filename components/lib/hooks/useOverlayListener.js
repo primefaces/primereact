@@ -27,8 +27,15 @@ export const useOverlayListener = ({ target, overlay, listener, when = true }) =
             listener && listener(event, { type: 'resize', valid: !DomHandler.isTouchDevice() });
         }
     });
+    const [bindWindowOrientationChangeListener, unbindWindowOrientationChangeListener] = useEventListener({
+        target: 'window',
+        type: 'orientationchange',
+        listener: (event) => {
+            listener && listener(event, { type: 'orientationchange', valid: true });
+        }
+    });
     const [bindOverlayScrollListener, unbindOverlayScrollListener] = useOverlayScrollListener({
-        target: target,
+        target,
         listener: (event) => {
             listener && listener(event, { type: 'scroll', valid: true });
         }
@@ -41,12 +48,14 @@ export const useOverlayListener = ({ target, overlay, listener, when = true }) =
     const bind = () => {
         bindDocumentClickListener();
         bindWindowResizeListener();
+        bindWindowOrientationChangeListener();
         bindOverlayScrollListener();
     };
 
     const unbind = () => {
         unbindDocumentClickListener();
         unbindWindowResizeListener();
+        unbindWindowOrientationChangeListener();
         unbindOverlayScrollListener();
     };
 

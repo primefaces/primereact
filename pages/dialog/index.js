@@ -1,18 +1,14 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/dialog/importdoc';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '../../components/doc/dialog/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/dialog/basicdoc';
 import { FooterDoc } from '../../components/doc/dialog/footerdoc';
-import { WithoutModalDoc } from '../../components/doc/dialog/withoutmodaldoc';
-import { ResponsiveDoc } from '../../components/doc/dialog/responsivedoc';
+import { ImportDoc } from '../../components/doc/dialog/importdoc';
+import { LongContentDoc } from '../../components/doc/dialog/longcontentdoc';
 import { MaximizableDoc } from '../../components/doc/dialog/maximizabledoc';
 import { PositionDoc } from '../../components/doc/dialog/positiondoc';
-import { ApiDoc } from '../../components/doc/dialog/apidoc';
-import { AccessibilityDoc } from '../../components/doc/dialog/accessibilitydoc';
+import { ResponsiveDoc } from '../../components/doc/dialog/responsivedoc';
 import { StyleDoc } from '../../components/doc/dialog/styledoc';
-import { LengthyContentDoc } from '../../components/doc/dialog/lengthycontentdoc';
+import { WithoutModalDoc } from '../../components/doc/dialog/withoutmodaldoc';
 
 const DialogDemo = () => {
     const docs = [
@@ -32,9 +28,9 @@ const DialogDemo = () => {
             component: FooterDoc
         },
         {
-            id: 'lengthycontent',
-            label: 'Lengthy Content',
-            component: LengthyContentDoc
+            id: 'longcontent',
+            label: 'Long Content',
+            component: LongContentDoc
         },
         {
             id: 'modal',
@@ -65,44 +61,10 @@ const DialogDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                }
-            ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Dialog Component</title>
-                <meta name="description" content="Dialog is a container to display content in an overlay window." />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Dialog</h1>
-                    <p>Dialog is a container to display content in an overlay window.</p>
-                </div>
-                <DocActions github="dialog/index.js" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Dialog Component" header="Dialog" description="Dialog is a container to display content in an overlay window" componentDocs={docs} apiDocs={['Dialog']} />;
 };
 
 export default DialogDemo;

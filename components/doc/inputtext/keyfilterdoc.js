@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { InputText } from '../../lib/inputtext/InputText';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function KeyFilterDoc(props) {
     const code = {
@@ -14,7 +14,9 @@ import { InputText } from "primereact/inputtext";
 
 export default function KeyFilterDemo() {
     return (
-        <InputText keyfilter="int" placeholder="Integers" />
+        <div className="card flex justify-content-center">
+            <InputText keyfilter="int" placeholder="Integers" />
+        </div>
     )
 }
         `,
@@ -24,7 +26,9 @@ import { InputText } from "primereact/inputtext";
 
 export default function KeyFilterDemo() {
     return (
-        <InputText keyfilter="int" placeholder="Integers" />
+        <div className="card flex justify-content-center">
+            <InputText keyfilter="int" placeholder="Integers" />
+        </div>
     )
 }
         `

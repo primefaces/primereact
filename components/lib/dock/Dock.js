@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { DockBase } from './DockBase';
 
 export const Dock = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = DockBase.getProps(inProps);
+
         const [currentIndexState, setCurrentIndexState] = React.useState(-3);
         const elementRef = React.useRef(null);
 
@@ -106,7 +109,7 @@ export const Dock = React.memo(
             getElement: () => elementRef.current
         }));
 
-        const otherProps = ObjectUtils.findDiffKeys(props, Dock.defaultProps);
+        const otherProps = DockBase.getOtherProps(props);
         const className = classNames(
             `p-dock p-component p-dock-${props.position}`,
             {
@@ -131,14 +134,3 @@ export const Dock = React.memo(
 );
 
 Dock.displayName = 'Dock';
-Dock.defaultProps = {
-    __TYPE: 'Dock',
-    id: null,
-    style: null,
-    className: null,
-    model: null,
-    position: 'bottom',
-    magnification: true,
-    header: null,
-    footer: null
-};

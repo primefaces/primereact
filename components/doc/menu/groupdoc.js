@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useRef } from 'react';
 import { Menu } from '../../lib/menu/Menu';
 import { Toast } from '../../lib/toast/Toast';
@@ -6,6 +7,7 @@ import { DocSectionText } from '../common/docsectiontext';
 
 export function GroupDoc(props) {
     const toast = useRef(null);
+    const router = useRouter();
     const items = [
         {
             label: 'Options',
@@ -27,7 +29,7 @@ export function GroupDoc(props) {
             ]
         },
         {
-            label: 'Navigate',
+            label: 'Links',
             items: [
                 {
                     label: 'React Website',
@@ -35,10 +37,10 @@ export function GroupDoc(props) {
                     url: 'https://reactjs.org/'
                 },
                 {
-                    label: 'Router',
+                    label: 'Upload',
                     icon: 'pi pi-upload',
-                    command: (e) => {
-                        window.location.hash = '/fileupload';
+                    command: () => {
+                        router.push('/fileupload');
                     }
                 }
             ]
@@ -46,16 +48,18 @@ export function GroupDoc(props) {
     ];
     const code = {
         basic: `
-<Toast ref={toast}></Toast>
+<Toast ref={toast} />
 <Menu model={items} />
 `,
         javascript: `
 import React, { useRef } from 'react';
+//import { useRouter } from 'next/router';
 import { Menu } from 'primereact/menu';
 import { Toast } from 'primereact/toast';
 
-export default function GroupDoc() {
+export default function GroupDemo() {
     const toast = useRef(null);
+    //const router = useRouter();
     const items = [
         {
             label: 'Options',
@@ -87,8 +91,8 @@ export default function GroupDoc() {
                 {
                     label: 'Router',
                     icon: 'pi pi-upload',
-                    command:(e) => {
-                        window.location.hash = "/fileupload"
+                    command () => {
+                        //router.push('/fileupload');
                     }
                 }
             ]
@@ -96,8 +100,8 @@ export default function GroupDoc() {
     ];
 
     return (
-        <div>
-            <Toast ref={toast}></Toast>
+        <div className="card flex justify-content-center">
+            <Toast ref={toast} />
             <Menu model={items} />
         </div>
     )
@@ -105,12 +109,14 @@ export default function GroupDoc() {
         `,
         typescript: `
 import React, { useRef } from 'react';
+//import { useRouter } from 'next/router';
 import { Menu } from 'primereact/menu';
 import { MenuItem } from 'primereact/menuitem';
 import { Toast } from 'primereact/toast';
 
-export default function GroupDoc() {
+export default function GroupDemo() {
     const toast = useRef<Toast>(null);
+    //const router = useRouter();
     const items: MenuItem[] = [
         {
             label: 'Options',
@@ -142,8 +148,8 @@ export default function GroupDoc() {
                 {
                     label: 'Router',
                     icon: 'pi pi-upload',
-                    command:(e) => {
-                        window.location.hash = "/fileupload"
+                    command: () => {
+                        //router.push('/fileupload');
                     }
                 }
             ]
@@ -151,8 +157,8 @@ export default function GroupDoc() {
     ];
 
     return (
-        <div>
-            <Toast ref={toast}></Toast>
+        <div className="card flex justify-content-center">
+            <Toast ref={toast} />
             <Menu model={items} />
         </div>
     )
@@ -163,10 +169,12 @@ export default function GroupDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Menu supports one level of nesting via subitems of an item.</p>
+                <p>
+                    Menu supports one level of nesting by defining children with <i>items</i> property.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Toast ref={toast}></Toast>
+                <Toast ref={toast} />
                 <Menu model={items} />
             </div>
             <DocSectionCode code={code} />

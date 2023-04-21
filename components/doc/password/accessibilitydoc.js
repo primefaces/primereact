@@ -1,8 +1,20 @@
-import { DocSectionText } from '../common/docsectiontext';
 import { DevelopmentSection } from '../common/developmentsection';
-import { CodeHighlight } from '../common/codehighlight';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function AccessibilityDoc() {
+    const code = {
+        basic: `
+<label htmlFor="pwd1">Password</label>
+<Password id="pwd1" />
+
+<span id="pwd2">Password</span>
+<Password aria-labelledby="pwd2" />
+
+<Password aria-label="Password"/>
+    `
+    };
+
     return (
         <DevelopmentSection>
             <DocSectionText id="accessibility" label="Accessibility">
@@ -11,17 +23,8 @@ export function AccessibilityDoc() {
                     Value to describe the component can either be provided via <i>label</i> tag combined with <i>id</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props. Screen reader is notified about the changes to the strength of the
                     password using a section that has <i>aria-live</i> while typing.
                 </p>
-                <CodeHighlight>
-                    {`
-<label htmlFor="pwd1">Password</label>
-<Password id="pwd1" />
 
-<span id="pwd2">Password</span>
-<Password aria-labelledby="pwd2" />
-
-<Password aria-label="Password"/>
-`}
-                </CodeHighlight>
+                <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
 
                 <h3>Keyboard Support</h3>
                 <div className="doc-tablewrapper">

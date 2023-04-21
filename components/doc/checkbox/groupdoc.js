@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Checkbox } from '../../lib/checkbox/Checkbox';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function GroupDoc(props) {
     const [ingredients, setIngredients] = useState([]);
@@ -17,7 +17,7 @@ export function GroupDoc(props) {
 
     const code = {
         basic: `
-<div className="flex flex-wrap gap-3">
+<div className="flex flex-wrap justify-content-center gap-3">
     <div className="flex align-items-center">
         <Checkbox inputId="ingredient1" name="pizza" value="Cheese" onChange={onIngredientsChange} checked={ingredients.includes('Cheese')} />
         <label htmlFor="ingredient1" className="ml-2">Cheese</label>
@@ -55,24 +55,22 @@ export default function GroupDemo() {
     }
 
     return (
-        <div "card flex justify-content-center">
-            <div className="flex flex-wrap gap-3">
-                <div className="flex align-items-center">
-                    <Checkbox inputId="ingredient1" name="pizza" value="Cheese" onChange={onIngredientsChange} checked={ingredients.includes('Cheese')} />
-                    <label htmlFor="ingredient1" className="ml-2">Cheese</label>
-                </div>
-                <div className="flex align-items-center">
-                    <Checkbox inputId="ingredient2" name="pizza" value="Mushroom" onChange={onIngredientsChange} checked={ingredients.includes('Mushroom')} />
-                    <label htmlFor="ingredient2" className="ml-2">Mushroom</label>
-                </div>
-                <div className="flex align-items-center">
-                    <Checkbox inputId="ingredient3" name="pizza" value="Pepper" onChange={onIngredientsChange} checked={ingredients.includes('Pepper')} />
-                    <label htmlFor="ingredient3" className="ml-2">Pepper</label>
-                </div>
-                <div className="flex align-items-center">
-                    <Checkbox inputId="ingredient4" name="pizza" value="Onion" onChange={onIngredientsChange} checked={ingredients.includes('Onion')} />
-                    <label htmlFor="ingredient4" className="ml-2">Onion</label>
-                </div>
+        <div className="card flex flex-wrap justify-content-center gap-3">
+            <div className="flex align-items-center">
+                <Checkbox inputId="ingredient1" name="pizza" value="Cheese" onChange={onIngredientsChange} checked={ingredients.includes('Cheese')} />
+                <label htmlFor="ingredient1" className="ml-2">Cheese</label>
+            </div>
+            <div className="flex align-items-center">
+                <Checkbox inputId="ingredient2" name="pizza" value="Mushroom" onChange={onIngredientsChange} checked={ingredients.includes('Mushroom')} />
+                <label htmlFor="ingredient2" className="ml-2">Mushroom</label>
+            </div>
+            <div className="flex align-items-center">
+                <Checkbox inputId="ingredient3" name="pizza" value="Pepper" onChange={onIngredientsChange} checked={ingredients.includes('Pepper')} />
+                <label htmlFor="ingredient3" className="ml-2">Pepper</label>
+            </div>
+            <div className="flex align-items-center">
+                <Checkbox inputId="ingredient4" name="pizza" value="Onion" onChange={onIngredientsChange} checked={ingredients.includes('Onion')} />
+                <label htmlFor="ingredient4" className="ml-2">Onion</label>
             </div>
         </div>
     )
@@ -85,7 +83,7 @@ import { Checkbox } from "primereact/checkbox";
 export default function GroupDemo() {
     const [ingredients, setIngredients] = useState<string[]>([]);
 
-    const onIngredientsChange = (e: CheckboxChangeParams) => {
+    const onIngredientsChange = (e: CheckboxChangeEvent) => {
         let _ingredients = [...ingredients];
 
         if (e.checked)
@@ -97,24 +95,24 @@ export default function GroupDemo() {
     }
 
     return (
-            <div className="flex flex-wrap gap-3">
-                <div className="flex align-items-center">
-                    <Checkbox inputId="ingredient1" name="pizza" value="Cheese" onChange={onIngredientsChange} checked={ingredients.includes('Cheese')} />
-                    <label htmlFor="ingredient1" className="ml-2">Cheese</label>
-                </div>
-                <div className="flex align-items-center">
-                    <Checkbox inputId="ingredient2" name="pizza" value="Mushroom" onChange={onIngredientsChange} checked={ingredients.includes('Mushroom')} />
-                    <label htmlFor="ingredient2" className="ml-2">Mushroom</label>
-                </div>
-                <div className="flex align-items-center">
-                    <Checkbox inputId="ingredient3" name="pizza" value="Pepper" onChange={onIngredientsChange} checked={ingredients.includes('Pepper')} />
-                    <label htmlFor="ingredient3" className="ml-2">Pepper</label>
-                </div>
-                <div className="flex align-items-center">
-                    <Checkbox inputId="ingredient4" name="pizza" value="Onion" onChange={onIngredientsChange} checked={ingredients.includes('Onion')} />
-                    <label htmlFor="ingredient4" className="ml-2">Onion</label>
-                </div>
+        <div className="card flex flex-wrap justify-content-center gap-3">
+            <div className="flex align-items-center">
+                <Checkbox inputId="ingredient1" name="pizza" value="Cheese" onChange={onIngredientsChange} checked={ingredients.includes('Cheese')} />
+                <label htmlFor="ingredient1" className="ml-2">Cheese</label>
             </div>
+            <div className="flex align-items-center">
+                <Checkbox inputId="ingredient2" name="pizza" value="Mushroom" onChange={onIngredientsChange} checked={ingredients.includes('Mushroom')} />
+                <label htmlFor="ingredient2" className="ml-2">Mushroom</label>
+            </div>
+            <div className="flex align-items-center">
+                <Checkbox inputId="ingredient3" name="pizza" value="Pepper" onChange={onIngredientsChange} checked={ingredients.includes('Pepper')} />
+                <label htmlFor="ingredient3" className="ml-2">Pepper</label>
+            </div>
+            <div className="flex align-items-center">
+                <Checkbox inputId="ingredient4" name="pizza" value="Onion" onChange={onIngredientsChange} checked={ingredients.includes('Onion')} />
+                <label htmlFor="ingredient4" className="ml-2">Onion</label>
+            </div>
+        </div>
     )
 }
         `
@@ -125,32 +123,30 @@ export default function GroupDemo() {
             <DocSectionText {...props}>
                 <p>Multiple checkboxes can be grouped together.</p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <div className="flex flex-wrap gap-3">
-                    <div className="flex align-items-center">
-                        <Checkbox inputId="ingredient1" name="pizza" value="Cheese" onChange={onIngredientsChange} checked={ingredients.includes('Cheese')} />
-                        <label htmlFor="ingredient1" className="ml-2">
-                            Cheese
-                        </label>
-                    </div>
-                    <div className="flex align-items-center">
-                        <Checkbox inputId="ingredient2" name="pizza" value="Mushroom" onChange={onIngredientsChange} checked={ingredients.includes('Mushroom')} />
-                        <label htmlFor="ingredient2" className="ml-2">
-                            Mushroom
-                        </label>
-                    </div>
-                    <div className="flex align-items-center">
-                        <Checkbox inputId="ingredient3" name="pizza" value="Pepper" onChange={onIngredientsChange} checked={ingredients.includes('Pepper')} />
-                        <label htmlFor="ingredient3" className="ml-2">
-                            Pepper
-                        </label>
-                    </div>
-                    <div className="flex align-items-center">
-                        <Checkbox inputId="ingredient4" name="pizza" value="Onion" onChange={onIngredientsChange} checked={ingredients.includes('Onion')} />
-                        <label htmlFor="ingredient4" className="ml-2">
-                            Onion
-                        </label>
-                    </div>
+            <div className="card flex flex-wrap justify-content-center gap-3">
+                <div className="flex align-items-center">
+                    <Checkbox inputId="ingredient1" name="pizza" value="Cheese" onChange={onIngredientsChange} checked={ingredients.includes('Cheese')} />
+                    <label htmlFor="ingredient1" className="ml-2">
+                        Cheese
+                    </label>
+                </div>
+                <div className="flex align-items-center">
+                    <Checkbox inputId="ingredient2" name="pizza" value="Mushroom" onChange={onIngredientsChange} checked={ingredients.includes('Mushroom')} />
+                    <label htmlFor="ingredient2" className="ml-2">
+                        Mushroom
+                    </label>
+                </div>
+                <div className="flex align-items-center">
+                    <Checkbox inputId="ingredient3" name="pizza" value="Pepper" onChange={onIngredientsChange} checked={ingredients.includes('Pepper')} />
+                    <label htmlFor="ingredient3" className="ml-2">
+                        Pepper
+                    </label>
+                </div>
+                <div className="flex align-items-center">
+                    <Checkbox inputId="ingredient4" name="pizza" value="Onion" onChange={onIngredientsChange} checked={ingredients.includes('Onion')} />
+                    <label htmlFor="ingredient4" className="ml-2">
+                        Onion
+                    </label>
                 </div>
             </div>
             <DocSectionCode code={code} />

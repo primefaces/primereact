@@ -1,17 +1,13 @@
-import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ImportDoc } from '../../components/doc/toast/importdoc';
-import { ApiDoc } from '../../components/doc/toast/apidoc';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/toast/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/toast/styledoc';
-import { SeverityDoc } from '../../components/doc/toast/severitydoc';
-import { PositionDoc } from '../../components/doc/toast/positiondoc';
-import { TemplateDoc } from '../../components/doc/toast/templatedoc';
-import { StickyDoc } from '../../components/doc/toast/stickydoc';
-import { MultipleDoc } from '../../components/doc/toast/multipledoc';
 import { BasicDoc } from '../../components/doc/toast/basicdoc';
+import { ImportDoc } from '../../components/doc/toast/importdoc';
+import { MultipleDoc } from '../../components/doc/toast/multipledoc';
+import { PositionDoc } from '../../components/doc/toast/positiondoc';
+import { SeverityDoc } from '../../components/doc/toast/severitydoc';
+import { StickyDoc } from '../../components/doc/toast/stickydoc';
+import { StyleDoc } from '../../components/doc/toast/styledoc';
+import { TemplateDoc } from '../../components/doc/toast/templatedoc';
 
 const ToastDemo = () => {
     const docs = [
@@ -59,44 +55,10 @@ const ToastDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'event',
-                    label: 'Events'
-                }
-            ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Toast Component</title>
-                <meta name="description" content="Toast is used to display messages in an overlay." />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Toast</h1>
-                    <p>Toast is used to display messages in an overlay.</p>
-                </div>
-                <DocActions github="toast/index.js" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Toast Component" header="Toast" description="Toast is used to display messages in an overlay." componentDocs={docs} apiDocs={['Toast']} />;
 };
 
 export default ToastDemo;

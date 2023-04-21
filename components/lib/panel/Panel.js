@@ -1,10 +1,15 @@
 import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
+import { MinusIcon } from '../icons/minus';
+import { PlusIcon } from '../icons/plus';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { PanelBase } from './PanelBase';
 
-export const Panel = React.forwardRef((props, ref) => {
+export const Panel = React.forwardRef((inProps, ref) => {
+    const props = PanelBase.getProps(inProps);
+
     const [idState, setIdState] = React.useState(props.id);
     const [collapsedState, setCollapsedState] = React.useState(props.collapsed);
     const elementRef = React.useRef(ref);
@@ -63,11 +68,12 @@ export const Panel = React.forwardRef((props, ref) => {
     const createToggleIcon = () => {
         if (props.toggleable) {
             const buttonId = idState + '_label';
-            const toggleIcon = collapsed ? props.expandIcon : props.collapseIcon;
+            const icon = collapsed ? props.expandIcon || <PlusIcon /> : props.collapseIcon || <MinusIcon />;
+            const toggleIcon = IconUtils.getJSXIcon(icon, undefined, { props, collapsed });
 
             return (
                 <button className="p-panel-header-icon p-panel-toggler p-link" onClick={toggle} id={buttonId} aria-controls={contentId} aria-expanded={!collapsed} role="tab">
-                    {IconUtils.getJSXIcon(toggleIcon, undefined, { props, collapsed })}
+                    {toggleIcon}
                     <Ripple />
                 </button>
             );
@@ -104,7 +110,6 @@ export const Panel = React.forwardRef((props, ref) => {
                 titleClassName: 'p-panel-title',
                 iconsClassName: 'p-panel-icons',
                 togglerClassName: 'p-panel-header-icon p-panel-toggler p-link',
-                togglerIconClassName: collapsed ? props.expandIcon : props.collapseIcon,
                 onTogglerClick: toggle,
                 titleElement,
                 iconsElement,
@@ -132,7 +137,7 @@ export const Panel = React.forwardRef((props, ref) => {
         );
     };
 
-    const otherProps = ObjectUtils.findDiffKeys(props, Panel.defaultProps);
+    const otherProps = PanelBase.getOtherProps(props);
     const className = classNames(
         'p-panel p-component',
         {
@@ -152,20 +157,3 @@ export const Panel = React.forwardRef((props, ref) => {
 });
 
 Panel.displayName = 'Panel';
-Panel.defaultProps = {
-    __TYPE: 'Panel',
-    id: null,
-    header: null,
-    headerTemplate: null,
-    toggleable: null,
-    style: null,
-    className: null,
-    collapsed: null,
-    expandIcon: 'pi pi-plus',
-    collapseIcon: 'pi pi-minus',
-    icons: null,
-    transitionOptions: null,
-    onExpand: null,
-    onCollapse: null,
-    onToggle: null
-};

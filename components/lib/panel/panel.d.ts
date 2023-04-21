@@ -2,7 +2,7 @@
  *
  * Panel is a grouping component providing with content toggle feature.
  *
- * [Live Demo](https://www.primefaces.org/primereact/panel/)
+ * [Live Demo](https://www.primereact.org/panel/)
  *
  * @module panel
  *
@@ -12,55 +12,56 @@ import { CSSTransitionProps } from '../csstransition';
 import { IconType } from '../utils';
 
 /**
- * @todo Write the documantation
+ * Custom panel header template options.
  */
 interface PanelHeaderTemplateOptions {
     /**
-     * @todo Write the documantation
+     * Style class of the panel.
      */
     className: string;
     /**
-     * @todo Write the documantation
+     * Style class of the panel title.
      */
-    titleClssName: string;
+    titleClassName: string;
     /**
-     * @todo Write the documantation
+     * Style class of the panel icons.
      */
     iconsClassName: string;
     /**
-     * @todo Write the documantation
+     * Style class of the panel toggler.
      */
     togglerClassName: string;
     /**
-     * @todo Write the documantation
+     * Style class of the panel toggler icon.
      */
     togglerIconClassName: string;
     /**
-     * @todo Write the documantation
+     * Callback to invoke when the toggler button is clicked.
+     * @param {React.MouseEvent<HTMLElement>} event Browser event.
      */
     onTogglerClick(event: React.MouseEvent<HTMLElement>): void;
     /**
-     * @todo Write the documantation
+     * The JSX element that represents the title of the panel.
      */
     titleElement: JSX.Element;
     /**
-     * @todo Write the documantation
+     * The JSX element that represents the icons of the panel.
      */
     iconsElement: JSX.Element;
     /**
-     * @todo Write the documantation
+     * The JSX element that represents the toggler of the panel.
      */
     togglerElement: JSX.Element;
     /**
-     * @todo Write the documantation
+     * The JSX element that represents the panel.
      */
     element: JSX.Element;
     /**
-     * @todo Write the documantation
+     * The props of the Panel component.
      */
     props: PanelProps;
     /**
-     * @todo Write the documantation
+     * Whether the panel header is collapsed or not.
      */
     collapsed: boolean;
 }
@@ -106,11 +107,11 @@ export interface PanelProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      */
     collapsed?: boolean | undefined;
     /**
-     * @todo Write the documentation
+     * Icon of a expanded tab.
      */
     expandIcon?: IconType<PanelProps> | undefined;
     /**
-     * @todo Write the documentation
+     * Icon of a collapsed tab.
      */
     collapseIcon?: IconType<PanelProps> | undefined;
     /**
@@ -118,7 +119,8 @@ export interface PanelProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      */
     icons?: React.ReactNode | ((props: PanelProps) => React.ReactNode);
     /**
-     * The properties of {@link CSSTransitionProps} can be customized, except for "nodeRef" and "in" properties.
+     * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
+     * @type {CSSTransitionProps}
      */
     transitionOptions?: CSSTransitionProps | undefined;
     /**
@@ -144,6 +146,14 @@ export interface PanelProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
 }
 
 /**
+ * **PrimeReact - Panel**
+ *
+ * _Panel is a grouping component providing with content toggle feature._
+ *
+ * [Live Demo](https://www.primereact.org/panel/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class Panel extends React.Component<PanelProps, any> {

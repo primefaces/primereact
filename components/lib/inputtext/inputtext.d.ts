@@ -2,14 +2,14 @@
  *
  * InputText is an extension to standard input element with theming and keyfiltering.
  *
- * [Live Demo](https://www.primefaces.org/primereact/inputtext/)
+ * [Live Demo](https://www.primereact.org/inputtext/)
  *
  * @module inputtext
  *
  */
 import * as React from 'react';
 import { KeyFilterType } from '../keyfilter';
-import TooltipOptions from '../tooltip/tooltipoptions';
+import { TooltipOptions } from '../tooltip/tooltipoptions';
 
 /**
  * Defines valid properties in InputText component. In addition to these, all properties of HTMLInputElement can be used in this component.
@@ -52,6 +52,14 @@ export interface InputTextProps extends Omit<React.DetailedHTMLProps<React.Input
 }
 
 /**
+ * **PrimeReact - InputText**
+ *
+ * _InputText is an extension to standard input element with theming and keyfiltering._
+ *
+ * [Live Demo](https://www.primereact.org/inputtext/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare const InputText: React.ForwardRefExoticComponent<InputTextProps & React.RefAttributes<HTMLInputElement>>;

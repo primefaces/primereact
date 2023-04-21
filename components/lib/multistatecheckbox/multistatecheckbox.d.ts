@@ -2,75 +2,75 @@
  *
  * MultiStateCheckbox is used to select a state from given multiple states.
  *
- * [Live Demo](https://www.primefaces.org/primereact/multistatecheckbox/)
+ * [Live Demo](https://www.primereact.org/multistatecheckbox/)
  *
  * @module multistatecheckbox
  *
  */
 import * as React from 'react';
-import TooltipOptions from '../tooltip/tooltipoptions';
+import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { IconType } from '../utils';
 
 /**
- * @todo Write the documentation
+ * Custom MultiStateCheckbox option.
  */
 interface MultiStateCheckboxOption {
     /**
-     * @todo Write the documentation
+     * The icon of the option.
      */
     icon: IconType<MultiStateCheckboxProps>;
     /**
-     * @todo Write the documentation
+     * Inline style of the element.
      */
     style: React.CSSProperties;
     /**
-     * @todo Write the documentation
+     * Style class of the element.
      */
     className: string;
     /**
-     * @todo Write the documentation
+     * Extra options.
      */
     [key: string]: any;
 }
 
 /**
- * @todo Write the documentation
+ * Custom icon template options.
  */
 interface MultiStateCheckboxIconTemplateEvent {
     /**
-     * @todo Write the documentation
+     * Option of the element.
      */
-    option: MultiStateCheckboxOption | undefined | null;
+    option: MultiStateCheckboxOption | null | undefined;
     /**
-     * @todo Write the documentation
+     * Style class of the element.
      */
     className: string;
     /**
-     * @todo Write the documentation
+     * The default element created by the component.
      */
     element: JSX.Element;
     /**
-     * @todo Write the documentation
+     * The props passed to the component.
      */
     props: MultiStateCheckboxProps;
 }
 
 /**
- * @todo Write the documentation
+ * Custom change target options.
  */
 interface MultiStateCheckboxChangeTargetOptions {
     /**
-     * @todo Write the documentation
+     * The name of the element.
      */
     name: string;
     /**
-     * @todo Write the documentation
+     * Unique identifier of the element.
      */
     id: string;
     /**
-     * @todo Write the documentation
+     * Value of the MultiStateCheckbox.
      */
-    value: boolean | undefined | null;
+    value: boolean | null | undefined;
 }
 
 /**
@@ -88,15 +88,15 @@ interface MultiStateCheckboxChangeEvent {
      */
     value: any;
     /**
-     * @todo Write the documentation
+     * Stops the event from propagating.
      */
     stopPropagation(): void;
     /**
-     * @todo Write the documentation
+     * Prevents the default action of the event.
      */
     preventDefault(): void;
     /**
-     * @todo Write the documentation
+     * Target options.
      */
     target: MultiStateCheckboxChangeTargetOptions;
 }
@@ -123,11 +123,15 @@ export interface MultiStateCheckboxProps extends Omit<React.DetailedHTMLProps<Re
      */
     optionLabel?: string | undefined;
     /**
+     * Property name to use as the icon of an option, defaults to the icon property.
+     */
+    optionIcon?: string | undefined;
+    /**
      * Template of icon for the selected option.
      */
     iconTemplate?: React.ReactNode | ((options: MultiStateCheckboxIconTemplateEvent) => React.ReactNode);
     /**
-     * @todo Write the documentation
+     * A property to uniquely identify an option.
      */
     dataKey?: string | undefined;
     /**
@@ -166,6 +170,14 @@ export interface MultiStateCheckboxProps extends Omit<React.DetailedHTMLProps<Re
 }
 
 /**
+ * **PrimeReact - MultiStateCheckbox**
+ *
+ * _MultiStateCheckbox is used to select a state from given multiple states._
+ *
+ * [Live Demo](https://www.primereact.org/multistatecheckbox/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class MultiStateCheckbox extends React.Component<MultiStateCheckboxProps, any> {

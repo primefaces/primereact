@@ -2,13 +2,14 @@
  *
  * DataView displays data in grid or list layout with pagination and sorting features.
  *
- * [Live Demo](https://www.primefaces.org/primereact/dataview/)
+ * [Live Demo](https://www.primereact.org/dataview/)
  *
  * @module dataview
  *
  */
 import * as React from 'react';
 import { PaginatorTemplate } from '../paginator';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom page event.
@@ -25,61 +26,72 @@ interface DataViewPageEvent {
      */
     rows: number;
     /**
-     * @todo Write the documentation
+     * Value of the new page.
      */
     page: number;
     /**
-     * @todo Write the documentation
+     * Total number of pages.
      */
     pageCount: number;
 }
 
 /**
- * @todo Write the documentation
+ * Custom data view layout options event.
  */
 interface DataViewLayoutOptionsChangeEvent {
     /**
-     * @todo Write the documentation
+     * Browser event.
      */
     originalEvent: React.MouseEvent<HTMLButtonElement>;
     /**
-     * @todo Write the documentation
+     * New value.
      */
     value: 'list' | 'grid' | (string & Record<string, unknown>);
 }
 
 /**
- * @todo Write the documentation
+ * Custom data view layout options props
  */
 export interface DataViewLayoutOptionsProps {
     /**
-     * @todo Write the documentation
+     * Unique identifier of the element.
      */
     id?: string;
     /**
-     * @todo Write the documentation
+     * Orientation of the panels, valid values are "list" and "grid".
      */
     layout?: 'list' | 'grid' | (string & Record<string, unknown>);
     /**
-     * @todo Write the documentation
+     * Defines the display mode list icon.
+     */
+    listIcon?: IconType<DataViewProps> | undefined;
+    /**
+     * Defines the display mode grid icon.
+     */
+    gridIcon?: IconType<DataViewProps> | undefined;
+    /**
+     * Inline style of the element.
      */
     style?: React.CSSProperties;
     /**
-     * @todo Write the documentation
+     * Style class of the element.
      */
     className?: string;
     /**
-     * @todo Write the documentation
+     * Layout options change callback
+     * @param {DataViewLayoutOptionsChangeEvent} event - Custom event.
      */
     onChange(event: DataViewLayoutOptionsChangeEvent): void;
     /**
-     * @todo Write the documentation
+     * Used to get the child elements of the component.
+     * @readonly
      */
-    children?: React.ReactNode;
+    children?: React.ReactNode | undefined;
 }
 
 /**
- * @todo Write the documentation
+ * Custom data view layout options
+ * @extends {React.Component<DataViewLayoutOptionsProps, any>}
  */
 export declare class DataViewLayoutOptions extends React.Component<DataViewLayoutOptionsProps, any> {}
 
@@ -170,7 +182,7 @@ export interface DataViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
     rowsPerPageOptions?: number[] | undefined;
     /**
      * Template of the current page report element.
-     * @defaultValue (&123;currentPage&125; of &123;totalPages&125;)
+     * @defaultValue (&#123;currentPage&#125; of &#123;totalPages&#125;)
      */
     currentPageReportTemplate?: string | undefined;
     /**
@@ -192,13 +204,13 @@ export interface DataViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      */
     lazy?: boolean | undefined;
     /**
-     * @todo Write the documentation.
+     * Display loading icon of the button.
      */
     loading?: boolean | undefined;
     /**
-     * @todo Write the documentation.
+     * Name of the loading icon or JSX.Element for loading icon.
      */
-    loadingIcon?: string | undefined;
+    loadingIcon?: IconType<DataViewProps> | undefined;
     /**
      * Whether the grid structure in the container has gutter. Default value is false.
      * @defaultValue false
@@ -210,9 +222,9 @@ export interface DataViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      */
     onPage?(event: DataViewPageEvent): void;
     /**
-     * Function that gets the option along with the layout mdoe and returns the content.
-     * @param {any} item - @todo Write the documentation.
-     * @param {string} layout - @todo Write the documentation.
+     * Function that gets the option along with the layout mode and returns the content.
+     * @param {*} item - Current item.
+     * @param {'list' | 'grid' | (string & Record<string, unknown>)} layout - Current layout.
      */
     itemTemplate?(item: any, layout: 'list' | 'grid' | (string & Record<string, unknown>)): React.ReactNode;
     /**
@@ -223,7 +235,16 @@ export interface DataViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
 }
 
 /**
+ * **PrimeReact - DataViewLayoutOptions**
+ *
+ * _DataView displays data in grid or list layout with pagination and sorting features._
+ *
+ * [Live Demo](https://www.primereact.org/dataview/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
+ *
  */
 // tslint:disable-next-line:max-classes-per-file
 export declare class DataView extends React.Component<DataViewProps, any> {

@@ -1,14 +1,12 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { PhotoService } from '../../../../service/PhotoService';
 import { Button } from '../../../lib/button/Button';
 import { Galleria } from '../../../lib/galleria/Galleria';
-import { DocSectionText } from '../../common/docsectiontext';
 import { DocSectionCode } from '../../common/docsectioncode';
-import { PhotoService } from '../../../../service/PhotoService';
-import getConfig from 'next/config';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function WithoutThumbnailsDoc(props) {
     const [images, setImages] = useState(null);
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const galleria = useRef(null);
 
     useEffect(() => {
@@ -16,11 +14,11 @@ export function WithoutThumbnailsDoc(props) {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
-        return <img src={`${contextPath}/${item.itemImageSrc}`} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+        return <img src={item.itemImageSrc} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
     };
 
     const thumbnailTemplate = (item) => {
-        return <img src={`${contextPath}/${item.thumbnailImageSrc}`} alt={item.alt} style={{ display: 'block' }} />;
+        return <img src={item.thumbnailImageSrc} alt={item.alt} style={{ display: 'block' }} />;
     };
 
     const code = {
@@ -45,11 +43,11 @@ export default function WithoutThumbnailsDemo() {
     }, []);
 
     const itemTemplate = (item) => {
-        return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+        return <img src={item.itemImageSrc} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
     }
 
     const thumbnailTemplate = (item) => {
-        return <img src={item.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} alt={item.alt} style={{ display: 'block' }} />;
+        return <img src={item.thumbnailImageSrc} alt={item.alt} style={{ display: 'block' }} />;
     }
 
     return (
@@ -77,11 +75,11 @@ export default function WithoutThumbnailsDemo() {
     }, []);
 
     const itemTemplate = (item) => {
-        return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+        return <img src={item.itemImageSrc} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
     }
 
     const thumbnailTemplate = (item) => {
-        return <img src={item.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} alt={item.alt} style={{ display: 'block' }} />;
+        return <img src={item.thumbnailImageSrc} alt={item.alt} style={{ display: 'block' }} />;
     }
     
     return (
@@ -97,8 +95,8 @@ export default function WithoutThumbnailsDemo() {
         data: `
 /* PhotoService */
 {
-    itemImageSrc: 'images/galleria/galleria1.jpg',
-    thumbnailImageSrc: 'images/galleria/galleria1s.jpg',
+    itemImageSrc: 'https://primefaces.org/cdn/primereact/images/galleria/galleria1.jpg',
+    thumbnailImageSrc: 'https://primefaces.org/cdn/primereact/images/galleria/galleria1s.jpg',
     alt: 'Description for Image 1',
     title: 'Title 1'
 },

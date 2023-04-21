@@ -1,8 +1,20 @@
-import { DocSectionText } from '../common/docsectiontext';
 import { DevelopmentSection } from '../common/developmentsection';
-import { CodeHighlight } from '../common/codehighlight';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function AccessibilityDoc() {
+    const code = {
+        basic: `
+<label htmlFor="switch1">Remember Me</label>
+<InputSwitch inputId="switch1" />
+
+<span id="switch2">Remember Me</span>
+<InputSwitch aria-labelledby="switch2" />
+
+<InputSwitch aria-label="Remember Me" />
+    `
+    };
+
     return (
         <DevelopmentSection>
             <DocSectionText id="accessibility" label="Accessibility">
@@ -11,17 +23,8 @@ export function AccessibilityDoc() {
                     InputSwitch component uses a hidden native checkbox element with <i>switch</i> role internally that is only visible to screen readers. Value to describe the component can either be provided via <i>label</i> tag combined with{' '}
                     <i>inputId</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props.
                 </p>
-                <CodeHighlight>
-                    {`
-<label htmlFor="switch1">Remember Me</label>
-<InputSwitch inputId="switch1" />
 
-<span id="switch2">Remember Me</span>
-<InputSwitch aria-labelledby="switch2" />
-
-<InputSwitch aria-label="Remember Me" />
-`}
-                </CodeHighlight>
+                <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
 
                 <h3>Keyboard Support</h3>
                 <div className="doc-tablewrapper">

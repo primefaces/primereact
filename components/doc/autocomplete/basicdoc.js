@@ -28,24 +28,28 @@ export default function BasicDemo() {
     }
 
     return (
-        <AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e) => setValue(e.value)}  />
+        <div className="card flex justify-content-center">
+            <AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e) => setValue(e.value)} />
+        </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
+import { AutoComplete, AutoCompleteCompleteEvent } from "primereact/autocomplete";
 
 export default function BasicDemo() {
     const [value, setValue] = useState<string>('');
     const [items, setItems] = useState<string[]>([]);
 
-    const search = (event: AutoCompleteCompleteMethodParams) => {
+    const search = (event: AutoCompleteCompleteEvent) => {
         setItems([...Array(10).keys()].map(item => event.query + '-' + item));
     }
 
     return (
-        <AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e: AutoCompleteChangeParams) => setValue(e.value)}  />
+        <div className="card flex justify-content-center">
+            <AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e) => setValue(e.value)} />
+        </div>
     )
 }
         `

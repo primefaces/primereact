@@ -1,22 +1,18 @@
-import Head from 'next/head';
 import React from 'react';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ApiDoc } from '../../components/doc/inputtext/apidoc';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/inputtext/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/inputtext/styledoc';
 import { BasicDoc } from '../../components/doc/inputtext/basicdoc';
 import { DisabledDoc } from '../../components/doc/inputtext/disableddoc';
 import { FloatLabelDoc } from '../../components/doc/inputtext/floatlabeldoc';
+import { FormikDoc } from '../../components/doc/inputtext/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/inputtext/form/hookformdoc';
 import { HelpTextDoc } from '../../components/doc/inputtext/helptextdoc';
 import { IconsDoc } from '../../components/doc/inputtext/iconsdoc';
 import { ImportDoc } from '../../components/doc/inputtext/importdoc';
 import { InvalidDoc } from '../../components/doc/inputtext/invaliddoc';
 import { KeyFilterDoc } from '../../components/doc/inputtext/keyfilterdoc';
 import { SizesDoc } from '../../components/doc/inputtext/sizesdoc';
-import { FormikDoc } from '../../components/doc/inputtext/validation/formikdoc';
-import { HookFormDoc } from '../../components/doc/inputtext/validation/hookformdoc';
+import { StyleDoc } from '../../components/doc/inputtext/styledoc';
 
 const InputTextDemo = () => {
     const docs = [
@@ -29,11 +25,6 @@ const InputTextDemo = () => {
             id: 'basic',
             label: 'Basic',
             component: BasicDoc
-        },
-        {
-            id: 'floatlabel',
-            label: 'Float Label',
-            component: FloatLabelDoc
         },
         {
             id: 'icons',
@@ -56,6 +47,11 @@ const InputTextDemo = () => {
             component: HelpTextDoc
         },
         {
+            id: 'floatlabel',
+            label: 'Float Label',
+            component: FloatLabelDoc
+        },
+        {
             id: 'invalid',
             label: 'Invalid',
             component: InvalidDoc
@@ -66,9 +62,9 @@ const InputTextDemo = () => {
             component: DisabledDoc
         },
         {
-            id: 'validation',
-            label: 'Validation',
-            description: 'Validate using popular React validation libraries.',
+            id: 'form',
+            label: 'Form',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
                     id: 'formik',
@@ -91,41 +87,10 @@ const InputTextDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                }
-            ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React InputText Component</title>
-                <meta name="description" content="InputText is an extension to standard input element with theming and keyfiltering." />
-            </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>InputText</h1>
-                    <p>InputText is an extension to standard input element with theming and keyfiltering.</p>
-                </div>
-                <DocActions github="inputtext/index.js" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Input Component" header="InputText" description="InputText is an extension to standard input element with theming and keyfiltering." componentDocs={docs} apiDocs={['InputText']} />;
 };
 
 export default InputTextDemo;

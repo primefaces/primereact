@@ -11,7 +11,7 @@ export function CodeHighlight(props) {
 
     return (
         <pre style={props.style}>
-            <code ref={codeElement} className={classNames(languageClassName, { 'pt-5': !props.import })}>
+            <code ref={codeElement} className={classNames(languageClassName, { 'pt-5': props.code && !props.import })}>
                 {props.children}&nbsp;
             </code>
         </pre>

@@ -1,7 +1,20 @@
-import { DocSectionText } from '../common/docsectiontext';
 import { DevelopmentSection } from '../common/developmentsection';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function AccessibilityDoc() {
+    const code = {
+        basic: `
+<label htmlFor="chkbox1">Remember Me</label>
+<Checkbox inputId="chkbox1" />
+
+<span id="chkbox2">Remember Me</span>
+<Checkbox aria-labelledby="chkbox2" />
+
+<Checkbox aria-label="Remember Me" />
+        `
+    };
+
     return (
         <DevelopmentSection>
             <DocSectionText id="accessibility" label="Accessibility">
@@ -11,15 +24,7 @@ export function AccessibilityDoc() {
                     <i>aria-labelledby</i>, <i>aria-label</i> props.
                 </p>
 
-                {`
-<label htmlFor="chkbox1">Remember Me</label>
-<Checkbox inputId="chkbox1" />
-
-<span id="chkbox2">Remember Me</span>
-<Checkbox aria-labelledby="chkbox2" />
-
-<Checkbox aria-label="Remember Me" />
-`}
+                <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
 
                 <h3>Keyboard Support</h3>
                 <div className="doc-tablewrapper">

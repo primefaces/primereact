@@ -2,7 +2,7 @@
  *
  * Dropdown also known as Select, is used to choose an item from a collection of options.
  *
- * [Live Demo](https://www.primefaces.org/primereact/dropdown/)
+ * [Live Demo](https://www.primereact.org/dropdown/)
  *
  * @module dropdown
  *
@@ -10,8 +10,9 @@
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 import { SelectItemOptionsType } from '../selectitem/selectitem';
-import TooltipOptions from '../tooltip/tooltipoptions';
+import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
+import { IconType } from '../utils';
 import { VirtualScrollerProps } from '../virtualscroller';
 
 /**
@@ -39,10 +40,19 @@ interface DropdownFilterEvent {
 }
 
 /**
- * @todo
+ * Custom filter options
+ * @see {@link DropdownProps.filterTemplate}
+ * @deprecated Since v9.3.0
  */
 interface DropdownFilterOptions {
-    filter?: (event?: KeyboardEvent) => void;
+    /**
+     * Used to filter options
+     * @param {React.KeyboardEvent<HTMLElement>} event - Browser event
+     */
+    filter?: (event?: React.KeyboardEvent<HTMLElement>) => void;
+    /**
+     * Used to reset the filtered options
+     */
     reset?: () => void;
 }
 
@@ -61,7 +71,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     ariaLabel?: string | undefined;
     /**
-     * Contains the element IDs of labels.
+     * Establishes relationships between the component and label(s) where its value should be one or more element IDs.
      */
     ariaLabelledBy?: string | undefined;
     /**
@@ -74,6 +84,10 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     className?: string | undefined;
     /**
+     * Icon of the dropdown.
+     */
+    clearIcon?: IconType<DropdownProps> | undefined;
+    /**
      * A property to uniquely match the value in options for better performance.
      */
     dataKey?: string | undefined;
@@ -83,10 +97,9 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     disabled?: boolean | undefined;
     /**
-     * Icon class of the dropdown icon.
-     * @defaultValue pi pi-chevron-down
+     * Icon of the dropdown.
      */
-    dropdownIcon?: string | undefined;
+    dropdownIcon?: IconType<DropdownProps> | undefined;
     /**
      * When present, custom value instead of predefined options can be entered using the editable input field.
      * @defaultValue false
@@ -108,10 +121,18 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     filter?: boolean | undefined;
     /**
+     * Icon of the filter to search.
+     */
+    filterIcon?: IconType<DropdownProps> | undefined;
+    /**
      * When filtering is enabled, filterBy decides which field or fields (comma separated) to search against.
      * @defaultValue label
      */
     filterBy?: 'label' | string | undefined;
+    /**
+     * Icon of the filter to clear.
+     */
+    filterClearIcon?: IconType<DropdownProps> | undefined;
     /**
      * When the panel is opened, it specifies that the filter input should focus automatically.
      * @defaultValue true
@@ -132,6 +153,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
     filterPlaceholder?: string | undefined;
     /**
      * The template of filter element.
+     * @deprecated Since v9.3.0
      */
     filterTemplate?: React.ReactNode | ((options: DropdownFilterOptions) => React.ReactNode) | undefined;
     /**
@@ -314,6 +336,14 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
 }
 
 /**
+ * **PrimeReact - Dropdown**
+ *
+ * _Dropdown also known as Select, is used to choose an item from a collection of options._
+ *
+ * [Live Demo](https://www.primereact.org/dropdown/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class Dropdown extends React.Component<DropdownProps, any> {

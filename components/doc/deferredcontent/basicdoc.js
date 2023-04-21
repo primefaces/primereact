@@ -14,7 +14,7 @@ export function BasicDoc(props) {
     const code = {
         basic: `
 <DeferredContent onLoad={onImageLoad}>
-    <img className="w-full md:w-30rem md:block md:mx-auto" src="images/galleria/galleria3.jpg" alt="Prime" />
+    <img className="w-full md:w-30rem md:block md:mx-auto" src="/images/galleria/galleria3.jpg" alt="Prime" />
 </DeferredContent>
         `,
         javascript: `
@@ -34,7 +34,7 @@ export default function BasicDemo() {
             <p style={{marginBottom: '70rem', textAlign: 'center'}}>Scroll down to lazy load an image.</p>
             <Toast ref={toast} />
             <DeferredContent onLoad={onImageLoad}>
-                <img className="w-full md:w-30rem md:block md:mx-auto" src="images/galleria/galleria3.jpg" onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} alt="Prime" />
+                <img className="w-full md:w-30rem md:block md:mx-auto" src="https://primefaces.org/cdn/primereact/images/galleria/galleria3.jpg" alt="Prime" />
             </DeferredContent>
         </div>
     )
@@ -57,7 +57,7 @@ export default function BasicDemo() {
             <p style={{marginBottom: '70rem', textAlign: 'center'}}>Scroll down to lazy load an image.</p>
             <Toast ref={toast} />
             <DeferredContent onLoad={onImageLoad}>
-                <img className="w-full md:w-30rem md:block md:mx-auto" src="images/galleria/galleria3.jpg" onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} alt="Prime" />
+                <img className="w-full md:w-30rem md:block md:mx-auto" src="https://primefaces.org/cdn/primereact/images/galleria/galleria3.jpg" alt="Prime" />
             </DeferredContent>
         </div>
     )
@@ -74,7 +74,7 @@ export default function BasicDemo() {
                 <p style={{ marginBottom: '70rem', textAlign: 'center' }}>Scroll down to lazy load an image.</p>
                 <Toast ref={toast} />
                 <DeferredContent onLoad={onImageLoad}>
-                    <img className="w-full md:w-30rem md:block md:mx-auto" src="images/galleria/galleria3.jpg" alt="Prime" />
+                    <img className="w-full md:w-30rem md:block md:mx-auto" src="https://primefaces.org/cdn/primereact/images/galleria/galleria3.jpg" alt="Prime" />
                 </DeferredContent>
             </div>
             <DocSectionCode code={code} />

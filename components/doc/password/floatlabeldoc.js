@@ -8,14 +8,16 @@ export function FloatLabelDoc(props) {
 
     const code = {
         basic: `
-<Password inputId="password" value={value} onChange={(e) => setValue(e.target.value)} />
-<label htmlFor="password">Password</label>
+<span className="p-float-label">
+    <Password inputId="password" value={value} onChange={(e) => setValue(e.target.value)} />
+    <label htmlFor="password">Password</label>
+</span>
         `,
         javascript: `
 import React, { useState } from "react";
 import { Password } from 'primereact/password';
 
-export default function FloatLabelDoc() {
+export default function FloatLabelDemo() {
     const [value, setValue] = useState('');
 
     return (
@@ -32,13 +34,13 @@ export default function FloatLabelDoc() {
 import React, { useState } from "react";
 import { Password } from 'primereact/password';
 
-export default function FloatLabelDoc() {
+export default function FloatLabelDemo() {
     const [value, setValue] = useState<string>('');
 
     return (
         <div className="card flex justify-content-center">
             <span className="p-float-label">
-                <Password inputId="password" value={value} onChange={(e) => setValue(e.target.value)} />
+                <Password inputId="password" value={value} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)} />
                 <label htmlFor="password">Password</label>
             </span>
         </div>
@@ -50,8 +52,7 @@ export default function FloatLabelDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                {/* TO DO: Add demo content. IT'S WRITTEN WITH INPUTCLASSNAME  */}
-                <p></p>
+                <p>A floating label appears on top of the input field when focused.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <span className="p-float-label">

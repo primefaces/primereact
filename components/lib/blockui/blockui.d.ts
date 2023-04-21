@@ -2,7 +2,7 @@
  *
  * BlockUI represents people using icons, labels and images.
  *
- * [Live Demo](https://www.primefaces.org/primereact/blockui)
+ * [Live Demo](https://www.primereact.org/blockui)
  *
  * @module blockui
  *
@@ -35,12 +35,11 @@ export interface BlockUIProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      */
     children?: React.ReactNode | undefined;
     /**
-     * @todo Write the documentation.
-     *
+     * Style class of the container element.
      */
     containerClassName?: string | undefined;
     /**
-     * @todo Write the documentation.
+     * Inline style of the container element.
      */
     containerStyle?: React.CSSProperties | undefined;
     /**
@@ -50,22 +49,27 @@ export interface BlockUIProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
     fullScreen?: boolean | undefined;
     /**
      * Template of mask.
-     *
      */
     template?: React.ReactNode | ((props: BlockUIProps) => React.ReactNode) | null | undefined;
     /**
      * Fired when the element gets blocked.
-     *
      */
     onBlocked?(): void;
     /**
      * Fired when the element gets unblocked.
-     *
      */
     onUnblocked?(): void;
 }
 
 /**
+ * **PrimeReact - BlockUI**
+ *
+ * _BlockUI represents people using icons, labels and images._
+ *
+ * [Live Demo](https://www.primereact.org/blockui/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class BlockUI extends React.Component<BlockUIProps, any> {

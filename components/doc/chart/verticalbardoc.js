@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Chart } from '../../lib/chart/Chart';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function VerticalBarDoc(props) {
     const [chartData, setChartData] = useState({});
@@ -12,7 +12,6 @@ export function VerticalBarDoc(props) {
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
         const data = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [
@@ -24,15 +23,12 @@ export function VerticalBarDoc(props) {
                 },
                 {
                     label: 'My Second dataset',
-                    backgroundColor: documentStyle.getPropertyValue('--orange-200'),
-                    borderColor: documentStyle.getPropertyValue('--orange-200'),
+                    backgroundColor: documentStyle.getPropertyValue('--pink-500'),
+                    borderColor: documentStyle.getPropertyValue('--pink-500'),
                     data: [28, 48, 40, 19, 86, 27, 90]
                 }
             ]
         };
-
-        setChartData(data);
-
         const options = {
             maintainAspectRatio: false,
             aspectRatio: 0.8,
@@ -68,6 +64,7 @@ export function VerticalBarDoc(props) {
             }
         };
 
+        setChartData(data);
         setChartOptions(options);
     }, []);
 
@@ -79,7 +76,7 @@ export function VerticalBarDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
-export default function VerticalBarDoc() {
+export default function VerticalBarDemo() {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
@@ -88,7 +85,6 @@ export default function VerticalBarDoc() {
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
         const data = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [
@@ -100,15 +96,12 @@ export default function VerticalBarDoc() {
                 },
                 {
                     label: 'My Second dataset',
-                    backgroundColor: documentStyle.getPropertyValue('--orange-200'),
-                    borderColor: documentStyle.getPropertyValue('--orange-200'),
+                    backgroundColor: documentStyle.getPropertyValue('--pink-500'),
+                    borderColor: documentStyle.getPropertyValue('--pink-500'),
                     data: [28, 48, 40, 19, 86, 27, 90]
                 }
             ]
         };
-
-        setChartData(data);
-
         const options = {
             maintainAspectRatio: false,
             aspectRatio: 0.8,
@@ -144,6 +137,7 @@ export default function VerticalBarDoc() {
             }
         };
 
+        setChartData(data);
         setChartOptions(options);
     }, []);
 
@@ -158,7 +152,7 @@ export default function VerticalBarDoc() {
 import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
-export default function VerticalBarDoc() {
+export default function VerticalBarDemo() {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
@@ -167,7 +161,6 @@ export default function VerticalBarDoc() {
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
         const data = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [
@@ -179,15 +172,12 @@ export default function VerticalBarDoc() {
                 },
                 {
                     label: 'My Second dataset',
-                    backgroundColor: documentStyle.getPropertyValue('--orange-200'),
-                    borderColor: documentStyle.getPropertyValue('--orange-200'),
+                    backgroundColor: documentStyle.getPropertyValue('--pink-500'),
+                    borderColor: documentStyle.getPropertyValue('--pink-500'),
                     data: [28, 48, 40, 19, 86, 27, 90]
                 }
             ]
         };
-
-        setChartData(data);
-
         const options = {
             maintainAspectRatio: false,
             aspectRatio: 0.8,
@@ -223,6 +213,7 @@ export default function VerticalBarDoc() {
             }
         };
 
+        setChartData(data);
         setChartOptions(options);
     }, []);
     

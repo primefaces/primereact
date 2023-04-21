@@ -2,14 +2,14 @@
  *
  * Menu is a navigation/command component that supports dynamic and static positioning.
  *
- * [Live Demo](https://www.primefaces.org/primereact/menu/)
+ * [Live Demo](https://www.primereact.org/menu/)
  *
  * @module menu
  *
  */
 import * as React from 'react';
-import { MenuItem } from '../menuitem';
 import { CSSTransitionProps } from '../csstransition';
+import { MenuItem } from '../menuitem';
 
 /**
  * Defines valid properties in Menu component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -41,7 +41,8 @@ export interface MenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
      */
     appendTo?: 'self' | HTMLElement | null | undefined;
     /**
-     * The properties of {@link CSSTransitionProps} can be customized, except for "nodeRef" and "in" properties.
+     * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
+     * @type {CSSTransitionProps}
      */
     transitionOptions?: CSSTransitionProps | undefined;
     /**
@@ -62,6 +63,14 @@ export interface MenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
 }
 
 /**
+ * **PrimeReact - Menu**
+ *
+ * _Menu is a navigation/command component that supports dynamic and static positioning._
+ *
+ * [Live Demo](https://www.primereact.org/menu/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class Menu extends React.Component<MenuProps, any> {

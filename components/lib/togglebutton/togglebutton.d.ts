@@ -2,29 +2,29 @@
  *
  * ToggleButton is used to select a boolean value using a button.
  *
- * [Live Demo](https://www.primefaces.org/primereact/togglebutton/)
+ * [Live Demo](https://www.primereact.org/togglebutton/)
  *
  * @module togglebutton
  *
  */
 import * as React from 'react';
-import TooltipOptions from '../tooltip/tooltipoptions';
+import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { IconType } from '../utils';
 
 /**
- * @todo Write the documentation
+ * Custom toggle button change target options
  */
 interface ToggleButtonChangeTargetOptions {
     /**
-     * @todo Write the documentation
+     * The name of the element.
      */
     name: string;
     /**
-     * @todo Write the documentation
+     * Unique identifier of the element.
      */
     id: string;
     /**
-     * @todo Write the documentation
+     * Collapsed state as a boolean.
      */
     value: boolean;
 }
@@ -44,16 +44,15 @@ interface ToggleButtonChangeEvent {
      */
     value: boolean;
     /**
-     * @todo Write the documentation
-     *
+     * Stops the event from propagating.
      */
     stopPropagation(): void;
     /**
-     * @todo Write the documentation
+     * Prevents the default action of the event.
      */
     preventDefault(): void;
     /**
-     * @todo Write the documentation
+     * Target element.
      */
     target: ToggleButtonChangeTargetOptions;
 }
@@ -122,6 +121,14 @@ export interface ToggleButtonProps extends Omit<React.DetailedHTMLProps<React.In
 }
 
 /**
+ * **PrimeReact - ToggleButton**
+ *
+ * _ToggleButton is used to select a boolean value using a button._
+ *
+ * [Live Demo](https://www.primereact.org/togglebutton/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class ToggleButton extends React.Component<ToggleButtonProps, any> {

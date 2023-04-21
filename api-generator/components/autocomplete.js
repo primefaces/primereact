@@ -476,7 +476,7 @@ const AutoCompleteStyles = [
 module.exports = {
     autocomplete: {
         name: 'AutoComplete',
-        description: 'AutoComplete is an input component that provides real-time suggestions when being typed.',
+        description: 'AutoComplete is an input component that provides real-time suggestions while being typed.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/autocomplete',
         props: AutoCompleteProps,
         events: AutoCompleteEvents,

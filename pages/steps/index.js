@@ -1,12 +1,8 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/steps/importdoc';
-import { BasicDoc } from '../../components/doc/steps/basicdoc';
-import { InteractiveDoc } from '../../components/doc/steps/interactivedoc';
-import { ApiDoc } from '../../components/doc/steps/apidoc';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/steps/accessibilitydoc';
+import { BasicDoc } from '../../components/doc/steps/basicdoc';
+import { ImportDoc } from '../../components/doc/steps/importdoc';
+import { InteractiveDoc } from '../../components/doc/steps/interactivedoc';
 import { StyleDoc } from '../../components/doc/steps/styledoc';
 
 const StepsDemo = () => {
@@ -35,43 +31,18 @@ const StepsDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                }
-            ]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React Stepper Component</title>
-                <meta name="description" content="Steps also known as Stepper, is an indicator for the steps in a workflow. Layout of steps component is optimized for responsive design." />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Steps</h1>
-                    <p>Steps also known as Stepper, is an indicator for the steps in a workflow. Layout of steps component is optimized for responsive design.</p>
-                </div>
-                <DocActions github="steps/index.js" />
-            </div>
-
-            <div className="content-section doc steps-demo">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React Stepper Component"
+            header="Steps"
+            description="Steps also known as Stepper, is an indicator for the steps in a workflow. Layout of steps component is optimized for responsive design."
+            componentDocs={docs}
+            apiDocs={['Steps', 'MenuItem']}
+            className="steps-demo"
+        />
     );
 };
 

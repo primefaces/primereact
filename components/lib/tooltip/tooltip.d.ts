@@ -2,13 +2,13 @@
  *
  * Tooltip functionality is integrated within various PrimeReact components.
  *
- * [Live Demo](https://www.primefaces.org/primereact/tooltip/)
+ * [Live Demo](https://www.primereact.org/tooltip/)
  *
  * @module tooltip
  *
  */
 import * as React from 'react';
-import TooltipOptions, { TooltipEvent } from './tooltipoptions';
+import { TooltipEvent, TooltipOptions } from './tooltipoptions';
 
 /**
  * Defines valid properties in Tooltip component. In addition to these, all properties of TooltipOptions can be used in this component.
@@ -25,7 +25,7 @@ export interface TooltipProps extends TooltipOptions {
      */
     target?: string | string[] | HTMLElement | undefined;
     /**
-     * @todo Write the documantation
+     * Content to be displayed in tooltip.
      */
     content?: string | undefined;
     /**
@@ -36,6 +36,14 @@ export interface TooltipProps extends TooltipOptions {
 }
 
 /**
+ * **PrimeReact - Tooltip**
+ *
+ * _Tooltip functionality is integrated within various PrimeReact components._
+ *
+ * [Live Demo](https://www.primereact.org/tooltip/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class Tooltip extends React.Component<TooltipProps, any> {

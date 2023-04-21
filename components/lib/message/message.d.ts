@@ -2,7 +2,7 @@
  *
  * Message is used to display inline message with various severities.
  *
- * [Live Demo](https://www.primefaces.org/primereact/message)
+ * [Live Demo](https://www.primereact.org/message)
  *
  * @module message
  *
@@ -14,7 +14,7 @@ import { IconType } from '../utils/utils';
  * Defines valid properties in Message component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface MessageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface MessageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref' | 'content'> {
     /**
      * Text of the message.
      */
@@ -40,6 +40,14 @@ export interface MessageProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
 }
 
 /**
+ * **PrimeReact - Message**
+ *
+ * _Message is used to display inline message with various severities._
+ *
+ * [Live Demo](https://www.primereact.org/message/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class Message extends React.Component<MessageProps, any> {

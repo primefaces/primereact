@@ -1,17 +1,17 @@
 /**
- * @todo Write the documentation.
+ *
  * PrimeReact menus components share a common api to specify the menuitems and submenus.
  *
- * [Live Demo](https://www.primefaces.org/primereact/menumodel/)
+ * [Live Demo](https://www.primereact.org/menumodel/)
  *
  * @module menuitem
  *
  */
-import React from 'react';
+import * as React from 'react';
 
 /**
  * Custom command event.
- * @see {@link MenuItemProps.onCommand}
+ * @see {@link MenuItem.command}
  * @event
  */
 interface MenuItemCommandEvent {
@@ -20,44 +20,46 @@ interface MenuItemCommandEvent {
      */
     originalEvent: React.SyntheticEvent;
     /**
-     * @todo Write the documentation.
+     * Selected item instance.
      */
     item: MenuItem;
 }
 
 /**
- * @todo Write the documentation.
+ * Menu item options
+ * @deprecated Since v9.3.0
  */
 interface MenuItemOptions {
     /**
-     * @todo Write the documentation.
+     * Callback to invoke on click.
+     * @param {React.SyntheticEvent} event - Browser event.
      */
     onClick(event: React.SyntheticEvent): void;
     /**
-     * @todo Write the documentation.
+     * Style class of the component.
      */
     className: string;
     /**
-     * @todo Write the documentation.
+     * Style class of the label element.
      */
     labelClassName: string;
     /**
-     * @todo Write the documentation.
+     * Class name of the options icon.
      */
     iconClassName: string;
     /**
-     * @todo Write the documentation.
+     * Default element created by the component.
      */
     element: React.ReactNode;
     /**
-     * @todo Write the documentation.
+     * All component props
      */
     props: any;
 }
 
 /**
- * Defines valid properties in MenuItem API.
- * @group Properties
+ * Defines model of MenuItem API.
+ * @group Model
  */
 export interface MenuItem {
     /**
@@ -119,6 +121,7 @@ export interface MenuItem {
     command?(event: MenuItemCommandEvent): void;
     /**
      * Template of the menuitem.
+     * @deprecated Since v9.3.0
      */
     template?: React.ReactNode | ((item: MenuItem, options: MenuItemOptions) => React.ReactNode);
     /**

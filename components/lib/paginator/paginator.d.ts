@@ -2,19 +2,20 @@
  *
  * Paginator is a generic widget to display content in paged format.
  *
- * [Live Demo](https://www.primefaces.org/primereact/paginator/)
+ * [Live Demo](https://www.primereact.org/paginator/)
  *
  * @module paginator
  *
  */
 import * as React from 'react';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom page change event.
  * @see {@link PaginatorProps.onPageChange}
  * @event
  */
-interface PaginatorPageStateEvent {
+interface PaginatorPageChangeEvent {
     /**
      * New page number
      */
@@ -34,191 +35,196 @@ interface PaginatorPageStateEvent {
 }
 
 /**
- * @todo Write the documentation
+ * Custom paginator first page link options
  */
 interface PaginatorFirstPageLinkOptions {
     /**
-     * @todo Write the documentation
+     * Callback to invoke on click.
+     * @param {React.SyntheticEvent} event - Browser event.v
      */
     onClick(event: React.SyntheticEvent): void;
     /**
-     * @todo Write the documentation
+     * Style class of the first page link.
      */
     className: string;
     /**
-     * @todo Write the documentation
+     * Icon classname of the first page link.
      */
     iconClassName: string;
     /**
-     * @todo Write the documentation
+     * Whether the link is disabled.
      */
     disabled: boolean;
     /**
-     * @todo Write the documentation
+     * JSX element to be used as the first page link.
      */
     element: JSX.Element;
     /**
-     * @todo Write the documentation
+     * The props of Paginator component
      */
     props: PaginatorProps;
 }
 
 /**
- * @todo Write the documentation
+ * Custom paginator prev page link options
  */
 interface PaginatorPrevPageLinkOptions {
     /**
-     * @todo Write the documentation
+     * Callback to invoke on click.
+     * @param {React.SyntheticEvent} event - Browser event.
      */
     onClick(event: React.SyntheticEvent): void;
     /**
-     * @todo Write the documentation
+     * Style class of the prev page link.
      */
     className: string;
     /**
-     * @todo Write the documentation
+     * Icon classname of the prev page link.
      */
     iconClassName: string;
     /**
-     * @todo Write the documentation
+     * Whether the link is disabled.
      */
     disabled: boolean;
     /**
-     * @todo Write the documentation
+     * JSX element to be used as the prev page link.
      */
     element: JSX.Element;
     /**
-     * @todo Write the documentation
+     * The props of Paginator component
      */
     props: PaginatorProps;
 }
 
 /**
- * @todo Write the documentation
+ * Custom paginator view options
  */
 interface PaginatorViewOptions {
     /**
-     * @todo Write the documentation
+     * Starting page number for the paginator view.
      */
     startPage: number;
     /**
-     * @todo Write the documentation
+     * Ending page number for the paginator view.
      */
     endPage: number;
 }
 
 /**
- * @todo Write the documentation
+ * Custom paginator page links options
  */
 interface PaginatorPageLinksOptions {
     /**
-     * @todo Write the documentation
+     * Callback to invoke on click.
+     * @param {React.SyntheticEvent} event - Browser event.
      */
     onClick(event: React.SyntheticEvent): void;
     /**
-     * @todo Write the documentation
+     * Style class of the page links.
      */
     className: string;
     /**
-     * @todo Write the documentation
+     * Paginator view options.
      */
     view: PaginatorViewOptions;
     /**
-     * @todo Write the documentation
+     * The page number.
      */
     page: number;
     /**
-     * @todo Write the documentation
+     * The current page number.
      */
     currentPage: number;
     /**
-     * @todo Write the documentation
+     * The total number of pages.
      */
     totalPages: number;
     /**
-     * @todo Write the documentation
+     * JSX element to be used as the page links.
      */
     element: JSX.Element;
     /**
-     * @todo Write the documentation
+     * The props of Paginator component
      */
     props: PaginatorProps;
 }
 
 /**
- * @todo Write the documentation
+ * Custom paginator next page link options
  */
 interface PaginatorNextPageLinkOptions {
     /**
-     * @todo Write the documentation
+     * Callback to invoke on click.
+     * @param {React.SyntheticEvent} event - Browser event.
      */
     onClick(event: React.SyntheticEvent): void;
     /**
-     * @todo Write the documentation
+     * Style class of the next page link.
      */
     className: string;
     /**
-     * @todo Write the documentation
+     * Icon classname of the next page link.
      */
     iconClassName: string;
     /**
-     * @todo Write the documentation
+     * Whether the link is disabled.
      */
     disabled: boolean;
     /**
-     * @todo Write the documentation
+     * JSX element to be used as the next page link.
      */
     element: JSX.Element;
     /**
-     * @todo Write the documentation
+     * The props of Paginator component
      */
     props: PaginatorProps;
 }
 
 /**
- * @todo Write the documentation
+ * Custom paginator last page link options
  */
 interface PaginatorLastPageLinkOptions {
     /**
-     * @todo Write the documentation
+     * Callback to invoke on click.
+     * @param {React.SyntheticEvent} event - Browser event.
      */
     onClick(event: React.SyntheticEvent): void;
     /**
-     * @todo Write the documentation
+     * Style class of the last page link.
      */
     className: string;
     /**
-     * @todo Write the documentation
+     * Icon classname of the last page link.
      */
     iconClassName: string;
     /**
-     * @todo Write the documentation
+     * Whether the link is disabled.
      */
     disabled: boolean;
     /**
-     * @todo Write the documentation
+     * JSX element to be used as the last page link.
      */
     element: JSX.Element;
     /**
-     * @todo Write the documentation
+     * The props of Paginator component
      */
     props: PaginatorProps;
 }
 
 /**
- * @todo Write the documentation
+ * Custom paginator change target options
  */
 interface PaginatorChangeTargetOptions {
     /**
-     * @todo Write the documentation
+     * The name attribute of the target options.
      */
     name: string;
     /**
-     * @todo Write the documentation
+     * The id attribute of the target options.
      */
     id: string;
     /**
-     * @todo Write the documentation
+     * The value attribute of the target options.
      */
     value: string | undefined | null;
 }
@@ -230,192 +236,197 @@ interface PaginatorChangeTargetOptions {
  */
 interface PaginatorChangeEvent {
     /**
-     * @todo Write the documentation
+     * Browser event.
      */
     originalEvent: React.SyntheticEvent;
     /**
-     * @todo Write the documentation
+     * New value of the element.
      */
     value: string | undefined | null;
     /**
-     * @todo Write the documentation
+     * Stops the event from propagating.
      */
     stopPropagation(): void;
     /**
-     * @todo Write the documentation
+     * Prevents the default action of the event.
      */
     preventDefault(): void;
     /**
-     * @todo Write the documentation
+     * Target options.
      */
     target: PaginatorChangeTargetOptions;
 }
 
 /**
- * @todo Write the documentation
+ * Custom rows per page dropdown options
  */
 interface PaginatorRowsPerPageDropdownOptions {
     /**
-     * @todo Write the documentation
+     * New value of the element.
      */
     value: any;
     /**
-     * @todo Write the documentation
+     * The options available in the rows per page dropdown.
      */
     options: any[];
     /**
-     * @todo Write the documentation
+     * Paginator options change callback
      * @param {PaginatorChangeEvent} event - Custom change event.
      */
     onChange(event: PaginatorChangeEvent): void;
     /**
-     * @todo Write the documentation
+     * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and "self". The "self" value is used to render a component where it is located.
      */
     appendTo: 'self' | HTMLElement | null | undefined;
     /**
-     * @todo Write the documentation
+     * The current page number.
      */
     currentPage: number;
     /**
-     * @todo Write the documentation
+     * The total number of pages.
      */
     totalPages: number;
     /**
-     * @todo Write the documentation
+     * The total number of records.
      */
     totalRecords: number;
     /**
-     * @todo Write the documentation
+     * JSX element to be used as the rows per page dropdown.
      */
     element: JSX.Element;
     /**
-     * @todo Write the documentation
+     * The props of Paginator component.
      */
     props: PaginatorProps;
     /**
-     * @todo Write the documentation
+     * Whether the dropdown is disabled.
      */
     disabled: boolean;
 }
 
 /**
- * @todo Write the documentation
+ * Custom paginator current page report options
  */
 interface PaginatorCurrentPageReportOptions {
     /**
-     * @todo Write the documentation
+     * The current page number.
      */
     currentPage: number;
     /**
-     * @todo Write the documentation
+     * The total number of pages.
      */
     totalPages: number;
     /**
-     * @todo Write the documentation
+     * The first number of the current page.
      */
     first: number;
     /**
-     * @todo Write the documentation
+     * The last number of the current page.
      */
     last: number;
     /**
-     * @todo Write the documentation
+     * The number of rows per page.
      */
     rows: number;
     /**
-     * @todo Write the documentation
+     * The total number of records.
      */
     totalRecords: number;
     /**
-     * @todo Write the documentation
+     * Style class of the element.
      */
     className: string;
     /**
-     * @todo Write the documentation
+     * JSX element to be used as the current page report element.
      */
     element: JSX.Element;
     /**
-     * @todo Write the documentation
+     * The props of Paginator component.
      */
     props: PaginatorProps;
 }
 
 /**
- * @todo Write the documentation
+ * Custom paginator jump to page input options
  */
 interface PaginatorJumpToPageInputOptions {
     /**
-     * @todo Write the documentation
+     * The current value.
      */
     value: number;
     /**
-     * @todo Write the documentation
+     * Callback to invoke when the input value changes.
+     * @param {number} first - Custom change event.
+     * @param {number} rows - Custom change event.
      */
     onChange(first: number, rows: number): void;
     /**
-     * @todo Write the documentation
+     * Whether the input is disabled.
      */
     disabled: boolean;
     /**
-     * @todo Write the documentation
+     * Style class of the element.
      */
     className: string;
     /**
-     * @todo Write the documentation
+     * JSX element to be used as the jump to page input element.
      */
     element: JSX.Element;
     /**
-     * @todo Write the documentation
+     * The props of Paginator component.
      */
     props: PaginatorProps;
 }
 
 /**
- * @todo Write the documentation
+ * Custom paginator template options
  */
 interface PaginatorTemplateOptions {
     /**
-     * @todo Write the documentation
+     * The layout of the paginator.
      */
     layout?: string;
     /**
-     * @todo Write the documentation
+     * The first page link component.
      */
     FirstPageLink?: React.ReactNode | ((options: PaginatorFirstPageLinkOptions) => React.ReactNode);
     /**
-     * @todo Write the documentation
+     * The prev page link component.
      */
     PrevPageLink?: React.ReactNode | ((options: PaginatorPrevPageLinkOptions) => React.ReactNode);
     /**
-     * @todo Write the documentation
+     * The page links component.
      */
     PageLinks?: React.ReactNode | ((options: PaginatorPageLinksOptions) => React.ReactNode);
     /**
-     * @todo Write the documentation
+     * The next page link component.
      */
     NextPageLink?: React.ReactNode | ((options: PaginatorNextPageLinkOptions) => React.ReactNode);
     /**
-     * @todo Write the documentation
+     * The last page link component.
      */
     LastPageLink?: React.ReactNode | ((options: PaginatorLastPageLinkOptions) => React.ReactNode);
     /**
-     * @todo Write the documentation
+     * The rows per page dropdown component.
      */
     RowsPerPageDropdown?: React.ReactNode | ((options: PaginatorRowsPerPageDropdownOptions) => React.ReactNode);
     /**
-     * @todo Write the documentation
+     * The current page report component.
      */
     CurrentPageReport?: React.ReactNode | ((options: PaginatorCurrentPageReportOptions) => React.ReactNode);
     /**
-     * @todo Write the documentation
+     * The jump to page input component.
      */
     JumpToPageInput?: React.ReactNode | ((options: PaginatorJumpToPageInputOptions) => React.ReactNode);
 }
 
-export type PaginatorTemplate = PaginatorTemplateOptions | string;
+/**
+ * Custom template for the paginator.
+ */
+export type PaginatorTemplate = PaginatorTemplateOptions | string | undefined;
 
 /**
- * Defines valid properties in Paginator component. In addition to these, all properties of HTMLSpanElement can be used in this component.
+ * Defines valid properties in Paginator component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
 export interface PaginatorProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
@@ -444,14 +455,14 @@ export interface PaginatorProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      */
     rowsPerPageOptions?: number[] | undefined;
     /**
-     * @todo Write the documentation
+     * Whether to show it even there is only one page.
      */
     alwaysShow?: boolean | undefined;
     /**
      * Custom template of the paginator.
      * @defaultValue FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown
      */
-    template?: PaginatorTemplate | undefined;
+    template?: PaginatorTemplateOptions | string | undefined;
     /**
      * Content to inject into the left side of the paginator.
      */
@@ -461,8 +472,24 @@ export interface PaginatorProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      */
     rightContent?: React.ReactNode | undefined;
     /**
-     * Template of the current page report element. Available placeholders are {currentPage},{totalPages},{rows},{first},{last} and {totalRecords}
-     * @defaultValue ({currentPage} of {totalPages})
+     * Icon of the first page link icon template.
+     */
+    firstPageLinkIcon?: IconType<PaginatorProps> | undefined;
+    /**
+     * Icon of the prev page link icon template.
+     */
+    prevPageLinkIcon?: IconType<PaginatorProps> | undefined;
+    /**
+     * Icon of the next page link icon template.
+     */
+    nextPageLinkIcon?: IconType<PaginatorProps> | undefined;
+    /**
+     * Icon of the last page link icon template.
+     */
+    lastPageLinkIcon?: IconType<PaginatorProps> | undefined;
+    /**
+     * Template of the current page report element. Available placeholders are &#123;currentPage&#125;, &#123;totalPages&#125;, &#123;rows&#125;, &#123;first&#125;, &#123;last&#125; and &#123;totalRecords&#125;
+     * @defaultValue (&#123;currentPage&#125; of &#123;totalPages&#125;)
      */
     currentPageReportTemplate?: string | undefined;
     /**
@@ -472,9 +499,9 @@ export interface PaginatorProps extends Omit<React.DetailedHTMLProps<React.HTMLA
     dropdownAppendTo?: 'self' | HTMLElement | null | undefined;
     /**
      * Callback to invoke when page changes, the event object contains information about the new state.
-     * @param {PaginatorPageStateEvent} event - Custom page change event.
+     * @param {PaginatorPageChangeEvent} event - Custom page change event.
      */
-    onPageChange?(event: PaginatorPageStateEvent): void;
+    onPageChange?(event: PaginatorPageChangeEvent): void;
     /**
      * Used to get the child elements of the component.
      * @readonly
@@ -483,6 +510,14 @@ export interface PaginatorProps extends Omit<React.DetailedHTMLProps<React.HTMLA
 }
 
 /**
+ * **PrimeReact - Paginator**
+ *
+ * _Paginator is a generic widget to display content in paged format._
+ *
+ * [Live Demo](https://www.primereact.org/paginator/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class Paginator extends React.Component<PaginatorProps, any> {

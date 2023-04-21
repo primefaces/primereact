@@ -1,8 +1,20 @@
-import { DocSectionText } from '../common/docsectiontext';
 import { DevelopmentSection } from '../common/developmentsection';
-import { CodeHighlight } from '../common/codehighlight';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function AccessibilityDoc() {
+    const code = {
+        basic: `
+<label htmlFor="firstname">Firstname</label>
+<InputText id="firstname" />
+
+<span id="lastname">Lastname</span>
+<InputText aria-labelledby="lastname" />
+
+<InputText aria-label="Age"/>
+    `
+    };
+
     return (
         <DevelopmentSection>
             <DocSectionText id="accessibility" label="Accessibility">
@@ -11,17 +23,8 @@ export function AccessibilityDoc() {
                     InputText component renders a native input element that implicitly includes any passed prop. Value to describe the component can either be provided via <i>label</i> tag combined with <i>id</i> prop or using <i>aria-labelledby</i>,{' '}
                     <i>aria-label</i> props.
                 </p>
-                <CodeHighlight>
-                    {`
-    <label htmlFor="firstname">Firstname</label>
-    <InputText id="firstname" />
-    
-    <span id="lastname">Lastname</span>
-    <InputText aria-labelledby="lastname" />
-    
-    <InputText aria-label="Age"/>
-    `}
-                </CodeHighlight>
+
+                <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
 
                 <h3>Keyboard Support</h3>
                 <div className="doc-tablewrapper">

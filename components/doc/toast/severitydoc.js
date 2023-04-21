@@ -58,7 +58,7 @@ export default function SeverityDemo() {
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast} />
-            <div class="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2">
                 <Button label="Success" className="p-button-success" onClick={showSuccess} />
                 <Button label="Info" className="p-button-info" onClick={showInfo} />
                 <Button label="Warn" className="p-button-warning" onClick={showWarn} />
@@ -95,7 +95,7 @@ export default function SeverityDemo() {
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast} />
-            <div class="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2">
                 <Button label="Success" className="p-button-success" onClick={showSuccess} />
                 <Button label="Info" className="p-button-info" onClick={showInfo} />
                 <Button label="Warn" className="p-button-warning" onClick={showWarn} />
@@ -116,7 +116,7 @@ export default function SeverityDemo() {
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Toast ref={toast} />
-                <div class="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2">
                     <Button label="Success" className="p-button-success" onClick={showSuccess} />
                     <Button label="Info" className="p-button-info" onClick={showInfo} />
                     <Button label="Warn" className="p-button-warning" onClick={showWarn} />

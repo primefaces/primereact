@@ -2,27 +2,29 @@
  *
  * Carousel is a content slider featuring various customization options.
  *
- * [Live Demo](https://www.primefaces.org/primereact/carousel)
+ * [Live Demo](https://www.primereact.org/carousel)
  *
  * @module carousel
  *
  */
 import * as React from 'react';
+import { IconType } from '../utils/utils';
 
 /**
- * @todo Write the documantation
+ * Custom responsive option
+ * @see {@link CarouselProps.responsiveOptions}
  */
-interface CarouselResponsiveOptions {
+interface CarouselResponsiveOption {
     /**
-     * @todo Write the documantation
+     * The breakpoint to define the maximum width boundary.
      */
     breakpoint: string;
     /**
-     * @todo Write the documantation
+     * Number of items per page.
      */
     numVisible: number;
     /**
-     * @todo Write the documantation
+     * Number of items to scroll.
      */
     numScroll: number;
 }
@@ -62,8 +64,7 @@ export interface CarouselProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
     footer?: React.ReactNode | undefined;
     /**
      * Function that gets an item in the value and returns the content for it.
-     * @param {any} item
-     * @todo Write documentation to item param
+     * @param {*} item - Current item
      */
     itemTemplate?(item: any): React.ReactNode | undefined;
     /**
@@ -96,10 +97,18 @@ export interface CarouselProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      */
     numScroll?: number | undefined;
     /**
-     * An array of options for responsive design.
-     * @type {CarouselResponsiveOptions}
+     * Icon for the previous button by orientation.
      */
-    responsiveOptions?: CarouselResponsiveOptions[] | undefined;
+    prevIcon?: IconType<CarouselProps> | undefined;
+    /**
+     * Icon for the next button by orientation.
+     */
+    nextIcon?: IconType<CarouselProps> | undefined;
+    /**
+     * An array of options for responsive design.
+     * @type {CarouselResponsiveOption}
+     */
+    responsiveOptions?: CarouselResponsiveOption[] | undefined;
     /**
      * Specifies the layout of the component, valid values are "horizontal" and "vertical".
      * @defaultValue horizontal
@@ -135,6 +144,14 @@ export interface CarouselProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
 }
 
 /**
+ * **PrimeReact - Carousel**
+ *
+ * _Carousel is a content slider featuring various customization options._
+ *
+ * [Live Demo](https://www.primereact.org/carousel/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class Carousel extends React.Component<CarouselProps, any> {

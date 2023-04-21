@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { useUpdateEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
-
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { CheckboxBase } from './CheckboxBase';
+import { CheckIcon } from '../icons/check';
 export const Checkbox = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = CheckboxBase.getProps(inProps);
+
         const [focusedState, setFocusedState] = React.useState(false);
         const elementRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
@@ -12,7 +15,7 @@ export const Checkbox = React.memo(
         const onClick = (event) => {
             if (!props.disabled && !props.readOnly && props.onChange) {
                 const checked = isChecked();
-                const checkboxClicked = event.target instanceof HTMLDivElement || event.target instanceof HTMLSpanElement;
+                const checkboxClicked = event.target instanceof HTMLDivElement || event.target instanceof HTMLSpanElement || event.target instanceof Object;
                 const isInputToggled = event.target === inputRef.current;
                 const isCheckboxToggled = checkboxClicked && event.target.checked !== checked;
 
@@ -76,7 +79,7 @@ export const Checkbox = React.memo(
 
         const checked = isChecked();
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, Checkbox.defaultProps);
+        const otherProps = CheckboxBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-checkbox p-component',
@@ -92,7 +95,9 @@ export const Checkbox = React.memo(
             'p-disabled': props.disabled,
             'p-focus': focusedState
         });
-        const icon = IconUtils.getJSXIcon(checked ? props.icon : '', { className: 'p-checkbox-icon p-c' }, { props, checked });
+        const iconClassName = 'p-checkbox-icon p-c';
+        const icon = checked ? props.icon || <CheckIcon className={iconClassName} /> : null;
+        const checkboxIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props, checked });
 
         return (
             <>
@@ -114,7 +119,7 @@ export const Checkbox = React.memo(
                             {...ariaProps}
                         />
                     </div>
-                    <div className={boxClass}>{icon}</div>
+                    <div className={boxClass}>{checkboxIcon}</div>
                 </div>
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
             </>
@@ -123,26 +128,3 @@ export const Checkbox = React.memo(
 );
 
 Checkbox.displayName = 'Checkbox';
-Checkbox.defaultProps = {
-    __TYPE: 'Checkbox',
-    id: null,
-    inputRef: null,
-    inputId: null,
-    value: null,
-    name: null,
-    checked: false,
-    trueValue: true,
-    falseValue: false,
-    style: null,
-    className: null,
-    disabled: false,
-    required: false,
-    readOnly: false,
-    tabIndex: null,
-    icon: 'pi pi-check',
-    tooltip: null,
-    tooltipOptions: null,
-    onChange: null,
-    onMouseDown: null,
-    onContextMenu: null
-};

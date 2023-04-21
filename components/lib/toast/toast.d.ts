@@ -2,16 +2,17 @@
  *
  * Toast is used to display messages in an overlay.
  *
- * [Live Demo](https://www.primefaces.org/primereact/toast/)
+ * [Live Demo](https://www.primereact.org/toast/)
  *
  * @module toast
  *
  */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
+import { IconType } from '../utils/utils';
 
 /**
- * @todo Write the documantation
+ * Message options for toast component
  */
 export interface ToastMessage {
     /**
@@ -35,6 +36,14 @@ export interface ToastMessage {
      * @defaultValue true
      */
     closable?: boolean | undefined;
+    /**
+     * Icon of the message.
+     */
+    icon?: IconType<ToastProps> | undefined;
+    /**
+     * Icon of the close button.
+     */
+    closeIcon?: IconType<ToastProps> | undefined;
     /**
      * When enabled, message is not removed automatically.
      */
@@ -112,6 +121,14 @@ export interface ToastProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
 }
 
 /**
+ * **PrimeReact - Toast**
+ *
+ * _Toast is used to display messages in an overlay._
+ *
+ * [Live Demo](https://www.primereact.org/toast/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class Toast extends React.Component<ToastProps, any> {

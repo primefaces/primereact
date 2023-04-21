@@ -19,17 +19,7 @@ gulp.task('build-css', function () {
 gulp.task('build-themes', function () {
     return (
         gulp
-            .src([
-                'public/themes/**/*',
-                '!public/themes/soho-*',
-                '!public/themes/soho-*/**/*',
-                '!public/themes/viva-*',
-                '!public/themes/viva-*/**/*',
-                '!public/themes/mira',
-                '!public/themes/mira/**/*',
-                '!public/themes/nano',
-                '!public/themes/nano/**/*'
-            ])
+            .src(['public/themes/**/*'])
             //.pipe(uglifycss({"uglyComments": true}))
             .pipe(gulp.dest(process.env.OUTPUT_DIR + 'resources/themes'))
     );
@@ -47,16 +37,7 @@ gulp.task('build-exports', function () {
 });
 
 gulp.task('build-meta', function () {
-    return gulp
-        .src(['README.md', 'LICENSE.md', 'package-build.json'])
-        .pipe(
-            rename(function (path) {
-                if (path.basename === 'package-build') {
-                    path.basename = path.basename.replace('package-build', 'package');
-                }
-            })
-        )
-        .pipe(gulp.dest(process.env.OUTPUT_DIR));
+    return gulp.src(['README.md', 'LICENSE.md']).pipe(gulp.dest(process.env.OUTPUT_DIR));
 });
 
 gulp.task('copy-css', function () {

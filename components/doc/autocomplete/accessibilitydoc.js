@@ -1,7 +1,20 @@
 import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '../common/docsectioncode';
 import { DevelopmentSection } from '../common/developmentsection';
 
 export function AccessibilityDoc() {
+    const code = {
+        basic: `
+<label htmlFor="ac1">Username</label>
+<AutoComplete inputId="ac1" />
+
+<span id="ac2">Email</span>
+<AutoComplete aria-labelledby="ac2" />
+
+<AutoComplete aria-label="City" />
+        `
+    };
+
     return (
         <DevelopmentSection>
             <DocSectionText id="accessibility" label="Accessibility">
@@ -19,15 +32,7 @@ export function AccessibilityDoc() {
                     input element.
                 </p>
 
-                {`
-<label htmlFor="ac1">Username</label>
-<AutoComplete inputId="ac1" />
-
-<span id="ac2">Email</span>
-<AutoComplete aria-labelledby="ac2" />
-
-<AutoComplete aria-label="City" />
-`}
+                <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
 
                 <h3>Keyboard Support</h3>
                 <div className="doc-tablewrapper">

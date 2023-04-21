@@ -1,5 +1,5 @@
-import { MegaMenu } from '../../lib/megamenu/MegaMenu';
 import { InputText } from '../../lib/inputtext/InputText';
+import { MegaMenu } from '../../lib/megamenu/MegaMenu';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
@@ -120,19 +120,19 @@ export function TemplateDoc(props) {
             ]
         }
     ];
-    const start = <img alt="logo" src="images/logo.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} height="40" className="mr-2"></img>;
-    const end = <InputText placeholder="Search" type="text" style={{ width: '12rem' }} />;
+    const start = <img alt="logo" src="https://primefaces.org/cdn/primereact/images/logo.png" height="40" className="mr-2"></img>;
+    const end = <InputText placeholder="Search" type="text" />;
 
     const code = {
         basic: `
-<MegaMenu model={items} orientation="horizontal" start={start} end={end} />        
+<MegaMenu model={items} orientation="horizontal" start={start} end={end} breakpoint="960px" />
 `,
         javascript: `
-import React from 'react'; 
+import React from 'react';
 import { MegaMenu } from 'primereact/megamenu';
 import { InputText } from 'primereact/inputtext';
 
-export default function TemplateDoc() {
+export default function TemplateDemo() {
     const items = [
         {
             label: 'Videos', icon: 'pi pi-fw pi-video',
@@ -245,21 +245,25 @@ export default function TemplateDoc() {
             ]
         }
     ];
-    const start = <img alt="logo" src="images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="mr-2"></img>;
-    const end = <InputText placeholder="Search" type="text" style={{width: '12rem'}} />;
+
+    const start = <img alt="logo" src="https://primefaces.org/cdn/primereact/images/logo.png" height="40" className="mr-2"></img>;
+    const end = <InputText placeholder="Search" type="text" />;
 
     return (
-        <MegaMenu model={items} orientation="horizontal" start={start} end={end} />
+        <div className="card">
+            <MegaMenu model={items} orientation="horizontal" start={start} end={end} breakpoint="960px" />
+        </div>
     )
 }
         `,
         typescript: `
-import React from 'react'; 
+import React from 'react';
 import { MegaMenu } from 'primereact/megamenu';
 import { InputText } from 'primereact/inputtext';
+import { MenuItem } from 'primereact/menuitem';
 
-export default function TemplateDoc() {
-    const items = [
+export default function TemplateDemo() {
+    const items: MenuItem[] = [
         {
             label: 'Videos', icon: 'pi pi-fw pi-video',
             items: [
@@ -371,11 +375,14 @@ export default function TemplateDoc() {
             ]
         }
     ];
-    const start = <img alt="logo" src="images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="mr-2"></img>;
-    const end = <InputText placeholder="Search" type="text" style={{width: '12rem'}} />;
+
+    const start = <img alt="logo" src="https://primefaces.org/cdn/primereact/images/logo.png" height="40" className="mr-2"></img>;
+    const end = <InputText placeholder="Search" type="text" />;
 
     return (
-        <MegaMenu model={items} orientation="horizontal" start={start} end={end} />
+        <div className="card">
+            <MegaMenu model={items} orientation="horizontal" start={start} end={end} breakpoint="960px" />
+        </div>
     )
 }
         `
@@ -384,10 +391,12 @@ export default function TemplateDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>The megamenu can display custom content by using the "start" and "end" properties.</p>
+                <p>
+                    Custom content can be placed inside the megamenu using the <i>start</i> and <i>end</i> properties.
+                </p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <MegaMenu model={items} orientation="horizontal" start={start} end={end} />
+            <div className="card">
+                <MegaMenu model={items} orientation="horizontal" start={start} end={end} breakpoint="960px" />
             </div>
             <DocSectionCode code={code} />
         </>
