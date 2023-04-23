@@ -25,6 +25,10 @@ export interface ImageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      */
     children?: React.ReactNode | undefined;
     /**
+     * The crossorigin content attribute on media elements is a CORS settings attribute.
+     */
+    crossOrigin?: 'anonymous' | 'use-credentials' | '' | undefined;
+    /**
      * Adds a download button to the preview control menu.
      * @default false
      */
@@ -34,6 +38,10 @@ export interface ImageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      */
     downloadIcon?: IconType<ImageProps> | undefined;
     /**
+     * Specifies whether a browser should load an image immediately or to defer loading of off-screen images until for example the user scrolls near them.
+     */
+    loading?: 'eager' | 'lazy' | undefined;
+    /**
      * Icon of the rotate right button.
      */
     rotateRightIcon?: IconType<ImageProps> | undefined;
@@ -41,6 +49,14 @@ export interface ImageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      * Icon of the rotate left button.
      */
     rotateLeftIcon?: IconType<ImageProps> | undefined;
+    /**
+     *  HTTP header controls how much referrer information (sent with the Referer header) should be included with requests.
+     */
+    referrerPolicy?: React.HTMLAttributeReferrerPolicy | undefined;
+    /**
+     * Specifies an image as a client-side image map (an image map is an image with clickable areas)
+     */
+    useMap?: string | undefined;
     /**
      * Icon of the zoom out button.
      */
