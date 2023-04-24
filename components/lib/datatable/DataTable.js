@@ -1320,7 +1320,6 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     useMountEffect(() => {
         !attributeSelectorState && setAttributeSelectorState(UniqueComponentId());
 
-        setFiltersState(cloneFilters(props.filters));
         setD_filtersState(cloneFilters(props.filters));
 
         if (isStateful()) {
