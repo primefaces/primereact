@@ -1,17 +1,18 @@
 import * as React from 'react';
 import { localeOption } from '../api/Api';
 import { useTimeout } from '../hooks/Hooks';
+import { CheckIcon } from '../icons/check';
+import { ExclamationTriangleIcon } from '../icons/exclamationtriangle';
+import { InfoCircleIcon } from '../icons/infocircle';
+import { TimesIcon } from '../icons/times';
+import { TimesCircleIcon } from '../icons/timescircle';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils } from '../utils/Utils';
-import { InfoCircleIcon } from '../icons/infocircle';
-import { ExclamationTriangleIcon } from '../icons/exclamationtriangle';
-import { TimesCircleIcon } from '../icons/timescircle';
-import { CheckIcon } from '../icons/check';
-import { TimesIcon } from '../icons/times';
 
 export const UIMessage = React.memo(
     React.forwardRef((props, ref) => {
-        const { severity, content, summary, detail, closable, life, sticky, icon: _icon, closeIcon: _closeIcon } = props.message;
+        const messageInfo = props.message;
+        const { severity, content, summary, detail, closable, life, sticky, className: _className, style, contentClassName: _contentClassName, contentStyle, icon: _icon, closeIcon: _closeIcon } = messageInfo.message;
 
         const [clearTimer] = useTimeout(
             () => {
@@ -93,13 +94,20 @@ export const UIMessage = React.memo(
             return null;
         };
 
-        const className = classNames('p-message p-component p-message-' + severity);
+        const className = classNames(
+            'p-message p-component',
+            {
+                [`p-message-${severity}`]: severity
+            },
+            _className
+        );
+        const contentClassName = classNames('p-message-wrapper', _contentClassName);
         const closeIcon = createCloseIcon();
         const message = createMessage();
 
         return (
-            <div ref={ref} className={className} onClick={onClick}>
-                <div className="p-message-wrapper">
+            <div ref={ref} className={className} style={style} onClick={onClick}>
+                <div className={contentClassName} style={contentStyle}>
                     {message}
                     {closeIcon}
                 </div>
