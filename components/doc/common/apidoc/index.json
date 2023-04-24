@@ -17832,6 +17832,14 @@
                             "description": "Used to get the child elements of the component."
                         },
                         {
+                            "name": "crossOrigin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "he crossorigin content attribute on media elements is a CORS settings attribute."
+                        },
+                        {
                             "name": "closeIcon",
                             "optional": true,
                             "readonly": false,
@@ -17888,6 +17896,14 @@
                             "description": "Changing the default icon when the image is hovered in preview mode."
                         },
                         {
+                            "name": "loading",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Specifies whether a browser should load an image immediately or to defer loading of off-screen images until for example the user scrolls near them."
+                        },
+                        {
                             "name": "preview",
                             "optional": true,
                             "readonly": false,
@@ -17910,6 +17926,22 @@
                             "type": "IconType<ImageProps>",
                             "default": "",
                             "description": "Icon of the rotate right button."
+                        },
+                        {
+                            "name": "referrerPolicy",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "HTTP header controls how much referrer information (sent with the Referer header) should be included with requests."
+                        },
+                        {
+                            "name": "useMap",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Specifies an image as a client-side image map (an image map is an image with clickable areas)."
                         },
                         {
                             "name": "src",
