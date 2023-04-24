@@ -17832,20 +17832,20 @@
                             "description": "Used to get the child elements of the component."
                         },
                         {
-                            "name": "crossOrigin",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string",
-                            "default": "",
-                            "description": "he crossorigin content attribute on media elements is a CORS settings attribute."
-                        },
-                        {
                             "name": "closeIcon",
                             "optional": true,
                             "readonly": false,
                             "type": "IconType<ImageProps>",
                             "default": "",
                             "description": "Icon of the close button."
+                        },
+                        {
+                            "name": "crossOrigin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"\" | \"anonymous\" | \"use-credentials\"",
+                            "default": "",
+                            "description": "The crossorigin content attribute on media elements is a CORS settings attribute."
                         },
                         {
                             "name": "downloadIcon",
@@ -17899,7 +17899,7 @@
                             "name": "loading",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
+                            "type": "\"eager\" | \"lazy\"",
                             "default": "",
                             "description": "Specifies whether a browser should load an image immediately or to defer loading of off-screen images until for example the user scrolls near them."
                         },
@@ -17910,6 +17910,14 @@
                             "type": "boolean",
                             "default": "",
                             "description": "Controls the preview functionality."
+                        },
+                        {
+                            "name": "referrerPolicy",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "HTMLAttributeReferrerPolicy",
+                            "default": "",
+                            "description": "HTTP header controls how much referrer information (sent with the Referer header) should be included with requests."
                         },
                         {
                             "name": "rotateLeftIcon",
@@ -17928,22 +17936,6 @@
                             "description": "Icon of the rotate right button."
                         },
                         {
-                            "name": "referrerPolicy",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string",
-                            "default": "",
-                            "description": "HTTP header controls how much referrer information (sent with the Referer header) should be included with requests."
-                        },
-                        {
-                            "name": "useMap",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string",
-                            "default": "",
-                            "description": "Specifies an image as a client-side image map (an image map is an image with clickable areas)."
-                        },
-                        {
                             "name": "src",
                             "optional": true,
                             "readonly": false,
@@ -17959,6 +17951,14 @@
                             "default": "",
                             "description": "Changing the default icon when the image is hovered in preview mode.",
                             "deprecated": "Since v9, use "
+                        },
+                        {
+                            "name": "useMap",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Specifies an image as a client-side image map (an image map is an image with clickable areas)"
                         },
                         {
                             "name": "width",
