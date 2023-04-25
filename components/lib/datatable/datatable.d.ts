@@ -278,16 +278,19 @@ interface DataTableDataSelectableEvent<TValue extends DataTableValueArray> {
 }
 
 /**
- * Custom selection change event.
+ * Custom selection change event for context menu.
  * @see {@link DataTableProps.onContextMenuSelectionChange}
  * @event
  */
-interface DataTableContextMenuSelectionChangeEvent {
+interface DataTableContextMenuSelectionChangeEvent<TValue extends DataTableValueArray> {
+    /**
+     * Browser event.
+     */
     originalEvent: React.SyntheticEvent;
     /**
-     * Selected rows data.
+     * Selection object.
      */
-    value: DataTableValue;
+    value: DataTableSelection<TValue>;
 }
 
 /**
@@ -1194,9 +1197,9 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     onContextMenu?(event: DataTableRowEvent): void;
     /**
      * Callback to invoke when a row selected with right click.
-     * @param {DataTableContextMenuSelectionChangeEvent} event - Custom row event.
+     * @param {DataTableRowEvent} event - Custom row event.
      */
-    onContextMenuSelectionChange?(event: DataTableContextMenuSelectionChangeEvent): void;
+    onContextMenuSelectionChange?(event: DataTableContextMenuSelectionChangeEvent<TValue>): void;
     /**
      * Callback to invoke on filtering.
      * @param {DataTableStateEvent} event - Custom state event.
