@@ -2,16 +2,16 @@ import * as React from 'react';
 import PrimeReact, { FilterMatchMode, FilterOperator, FilterService } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { ArrowDownIcon } from '../icons/arrowdown';
+import { ArrowUpIcon } from '../icons/arrowup';
+import { SpinnerIcon } from '../icons/spinner';
 import { Paginator } from '../paginator/Paginator';
-import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { DataTableBase } from './DataTableBase';
 import { TableBody } from './TableBody';
 import { TableFooter } from './TableFooter';
 import { TableHeader } from './TableHeader';
-import { SpinnerIcon } from '../icons/spinner';
-import { ArrowDownIcon } from '../icons/arrowdown';
-import { ArrowUpIcon } from '../icons/arrowup';
 
 export const DataTable = React.forwardRef((inProps, ref) => {
     const props = DataTableBase.getProps(inProps);
@@ -1320,6 +1320,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     useMountEffect(() => {
         !attributeSelectorState && setAttributeSelectorState(UniqueComponentId());
 
+        //setFiltersState(cloneFilters(props.filters)); // Github #4248
         setD_filtersState(cloneFilters(props.filters));
 
         if (isStateful()) {
