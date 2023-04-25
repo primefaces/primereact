@@ -10329,7 +10329,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "DataTableSelectionChangeEvent<TValue>",
+                                    "type": "DataTableContextMenuSelectionChangeEvent<TValue>",
                                     "description": "Custom row event."
                                 }
                             ],
@@ -10823,6 +10823,26 @@
                         }
                     ]
                 },
+                "DataTableContextMenuSelectionChangeEvent": {
+                    "description": "Custom selection change event for context menu.",
+                    "relatedProp": "onContextMenuSelectionChange",
+                    "props": [
+                        {
+                            "name": "originalEvent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "SyntheticEvent<Element, Event>",
+                            "description": "Browser event."
+                        },
+                        {
+                            "name": "value",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "DataTableSelection<TValue>",
+                            "description": "Selection object."
+                        }
+                    ]
+                },
                 "DataTableDataSelectableEvent": {
                     "description": "Custom data selectable event.",
                     "relatedProp": "isDataSelectable",
@@ -11120,7 +11140,7 @@
                 },
                 "DataTableSelectionChangeEvent": {
                     "description": "Custom selection change event.",
-                    "relatedProp": "onContextMenuSelectionChange",
+                    "relatedProp": "onSelectionChange",
                     "props": [
                         {
                             "name": "originalEvent",

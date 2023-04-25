@@ -10,8 +10,8 @@
 import * as React from 'react';
 import { Column, ColumnProps } from '../column';
 import { PaginatorTemplate } from '../paginator';
-import { VirtualScroller, VirtualScrollerProps } from '../virtualscroller/virtualscroller';
 import { IconType } from '../utils/utils';
+import { VirtualScroller, VirtualScrollerProps } from '../virtualscroller/virtualscroller';
 
 type DataTableHeaderTemplateType<TValue extends DataTableValueArray> = React.ReactNode | ((options: DataTableHeaderTemplateOptions<TValue>) => React.ReactNode);
 
@@ -278,8 +278,24 @@ interface DataTableDataSelectableEvent<TValue extends DataTableValueArray> {
 }
 
 /**
+ * Custom selection change event for context menu.
+ * @see {@link DataTableProps.onContextMenuSelectionChange}
+ * @event
+ */
+interface DataTableContextMenuSelectionChangeEvent<TValue extends DataTableValueArray> {
+    /**
+     * Browser event.
+     */
+    originalEvent: React.SyntheticEvent;
+    /**
+     * Selection object.
+     */
+    value: DataTableSelection<TValue>;
+}
+
+/**
  * Custom selection change event.
- * @see {@link DataTableProps.onContextMenuSelectionChange}, {@link DataTableProps.onSelectionChange}
+ * @see {@link DataTableProps.onSelectionChange}
  * @event
  */
 interface DataTableSelectionChangeEvent<TValue extends DataTableValueArray> {
@@ -1183,7 +1199,7 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      * Callback to invoke when a row selected with right click.
      * @param {DataTableRowEvent} event - Custom row event.
      */
-    onContextMenuSelectionChange?(event: DataTableSelectionChangeEvent<TValue>): void;
+    onContextMenuSelectionChange?(event: DataTableContextMenuSelectionChangeEvent<TValue>): void;
     /**
      * Callback to invoke on filtering.
      * @param {DataTableStateEvent} event - Custom state event.
