@@ -3,40 +3,32 @@ import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
 import { useEffect, useRef, useState } from 'react';
 import Layout from '../components/layout/layout';
-import fetchNews from '../service/NewsService';
 import '../styles/layout/layout.scss';
 // prettier-ignore
 import '../styles/primereact.css';
 // prettier-ignore
 import PrimeReact from '../components/lib/api/PrimeReact';
 import '../styles/demo/demo.scss';
+import AnnouncementData from '../data/news.json';
 
 export default function MyApp({ Component }) {
     const [dark, setDark] = useState(false);
     const [theme, setTheme] = useState('lara-light-indigo');
     const [newsActive, setNewsActive] = useState(false);
     const storageKey = 'primereact-news';
-    const announcement = useRef(null);
+    const announcement = useRef(AnnouncementData);
 
     useEffect(() => {
-        if (process.env.NODE_ENV === 'production') {
-            fetchNews().then((data) => {
-                if (data) {
-                    announcement.current = data;
+        const itemString = localStorage.getItem(storageKey);
 
-                    const itemString = localStorage.getItem(storageKey);
+        if (itemString) {
+            const item = JSON.parse(itemString);
 
-                    if (itemString) {
-                        const item = JSON.parse(itemString);
-
-                        if (item.hiddenNews && item.hiddenNews !== data.id) {
-                            setNewsActive(true);
-                        }
-                    } else {
-                        setNewsActive(true);
-                    }
-                }
-            });
+            if (item.hiddenNews && item.hiddenNews !== announcement.current.id) {
+                setNewsActive(true);
+            }
+        } else {
+            setNewsActive(true);
         }
     }, []);
 
