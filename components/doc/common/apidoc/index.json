@@ -21077,6 +21077,18 @@
                             "description": "Used to get container element."
                         },
                         {
+                            "name": "remove",
+                            "parameters": [
+                                {
+                                    "name": "message",
+                                    "type": "MessagesMessage | MessagesMessage[]",
+                                    "description": "Message to remove"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Used to remove messages."
+                        },
+                        {
                             "name": "replace",
                             "parameters": [
                                 {
