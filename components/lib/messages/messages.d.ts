@@ -110,6 +110,11 @@ export declare class Messages extends React.Component<MessagesProps, any> {
      */
     public replace(message: MessagesMessage | MessagesMessage[]): void;
     /**
+     * Used to remove messages.
+     * @param {MessagesMessage | MessagesMessage[]} message - Message to remove
+     */
+    public remove(message: MessagesMessage | MessagesMessage[]): void;
+    /**
      * Used to get container element.
      * @return {HTMLDivElement} Container element
      */
