@@ -18253,7 +18253,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "boolean",
-                            "default": "false",
+                            "default": "true",
                             "description": "Clears the incomplete value on blur."
                         },
                         {
