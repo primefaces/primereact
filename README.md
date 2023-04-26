@@ -17,10 +17,10 @@ PrimeReact is available at npm, if you have an existing application run the foll
 
 ```
 // with npm
-npm install primereact primeicons
+npm install primereact
 
 // with yarn
-yarn add primereact primeicons
+yarn add primereact
 ```
 Please note that react >= 17.0.0 and react-dom >= 17.0.0 are peer dependencies and some components have optional dependencies.
 
@@ -33,9 +33,6 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";
     
 //core
 import "primereact/resources/primereact.min.css";
-
-//icons
-import "primeicons/primeicons.css";
 ```
 
 If you are using a bundler such as webpack with a css loader you may also import them to your main application component, an example from create-react-app would be.
@@ -43,7 +40,6 @@ If you are using a bundler such as webpack with a css loader you may also import
 ```javascript
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.min.css';
-import 'primeicons/primeicons.css';
 ```
 
 ## Import
