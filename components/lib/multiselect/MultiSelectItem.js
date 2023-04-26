@@ -39,7 +39,7 @@ export const MultiSelectItem = React.memo((props) => {
 
     const checkboxIconClassName = 'p-checkbox-icon p-c';
     const icon = props.checkboxIcon || <CheckIcon className={checkboxIconClassName} />;
-    const checkboxIcon = IconUtils.getJSXIcon(icon, { className: checkboxIconClassName }, { selected: props.selected });
+    const checkboxIcon = props.selected ? IconUtils.getJSXIcon(icon, { className: checkboxIconClassName }, { selected: props.selected }) : null;
 
     const content = props.template ? ObjectUtils.getJSXElement(props.template, props.option) : props.label;
     const tabIndex = props.disabled ? null : props.tabIndex || 0;
