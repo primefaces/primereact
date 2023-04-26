@@ -52,7 +52,7 @@ export interface InputMaskProps extends Omit<InputTextProps, 'onChange'> {
     slotChar?: string | undefined;
     /**
      * Clears the incomplete value on blur.
-     * @defaultValue false
+     * @defaultValue true
      */
     autoClear?: boolean | undefined;
     /**
