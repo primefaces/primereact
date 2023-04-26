@@ -25,9 +25,9 @@ yarn add primereact
 Please note that react >= 17.0.0 and react-dom >= 17.0.0 are peer dependencies and some components have optional dependencies.
 
 ## Styles
-Theme, core and icons are the necessary css files of the components, visit the Themes section for the complete list of available themes to choose from. In upcoming version 10, a css-in-js approach will be implemented along with migration to SVG icons to remove the requirement to install css files.
+Theme and core are the necessary css files of the components, visit the Themes section for the complete list of available themes to choose from.
 
-```
+```javascript
 //theme
 import "primereact/resources/themes/lara-light-indigo/theme.css";     
     
@@ -35,7 +35,7 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 ```
 
-If you are using a bundler such as webpack with a css loader you may also import them to your main application component, an example from create-react-app would be.
+If you are using a bundler such as webpack with a css loader you may also import them to your main application component.
 
 ```javascript
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
